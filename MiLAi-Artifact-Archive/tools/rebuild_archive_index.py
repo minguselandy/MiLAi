@@ -37,7 +37,10 @@ def main() -> int:
     previous = json.loads((archive / "manifests/archive-index.json").read_text(encoding="utf-8"))
     files = []
     for path in sorted(archive.rglob("*")):
-        if not path.is_file() or ".git" in path.parts:
+        if not path.is_file() or any(
+            part in {".git", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
+            for part in path.parts
+        ):
             continue
         relative = path.relative_to(archive).as_posix()
         if relative == "manifests/archive-index.json":
