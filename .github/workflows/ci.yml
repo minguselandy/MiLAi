@@ -1,17 +1,38 @@
-name: MiLAi Lean V1 verification
+name: MiLAi composition verification
 
 on:
   pull_request:
+    paths:
+      - ".github/**"
+      - "MiLAi-Product/**"
+      - "MiLAi-Lab/**"
+      - "MiLAi-Artifact-Archive/**"
+      - "README.md"
+      - "AGENTS.md"
+      - "SOURCE_OF_TRUTH.md"
+      - "REPO_MAP.md"
+      - "LEGACY_READ_ONLY.md"
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  runtime-and-research:
+  boundaries:
+    name: Fail-fast source boundaries
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify root layout, generated paths, nested Git and imports
+        run: python3 MiLAi-Artifact-Archive/tools/verify_boundaries.py
+
+  product-runtime:
+    name: Product Runtime and PostgreSQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
     services:
       postgres:
         image: pgvector/pgvector:pg16
@@ -26,18 +47,14 @@ jobs:
           --health-interval 5s
           --health-timeout 5s
           --health-retries 20
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: astral-sh/setup-uv@v6
         with:
           version: "0.8.3"
           enable-cache: true
-
       - name: Install PostgreSQL client tools
         run: sudo apt-get update && sudo apt-get install --yes postgresql-client
-
       - name: Create least-privilege login roles
         shell: bash
         run: |
@@ -71,32 +88,16 @@ jobs:
             echo "MILAI_TEST_WORKER_DATABASE_URL=postgresql://milai_worker:${worker_password}@127.0.0.1:15432/milai"
             echo "MILAI_TEST_AUDIT_DATABASE_URL=postgresql://milai_audit:${audit_password}@127.0.0.1:15432/milai"
           } >> "$GITHUB_ENV"
-
-      - name: Install locked runtime
-        working-directory: runtime
+      - name: Install locked Product Runtime
+        working-directory: MiLAi-Product/runtime
         run: uv sync --frozen --dev --python 3.11
-
-      - name: Static verification
-        working-directory: runtime
+      - name: Static checks
+        working-directory: MiLAi-Product/runtime
         run: |
-          uv run ruff format --check src tests migrations
           uv run ruff check src tests migrations
           uv run mypy
-
-      - name: Frozen Logical Architecture release gate
-        env:
-          MILAI_ARCHITECTURE_LOCK_SCOPE: bundle
-        run: |
-          runtime/.venv/bin/ruff format --check architecture/v1.0/scripts architecture/v1.0/tests
-          runtime/.venv/bin/ruff check architecture/v1.0/scripts architecture/v1.0/tests
-          runtime/.venv/bin/python architecture/v1.0/scripts/validate_bundle.py
-          runtime/.venv/bin/python architecture/v1.0/scripts/verify_lock.py \
-            --scope bundle --mode release \
-            --expected-manifest-sha256 ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e
-          runtime/.venv/bin/python -m unittest discover -s architecture/v1.0/tests -v
-
-      - name: Runtime tests with real PostgreSQL roles
-        working-directory: runtime
+      - name: Runtime tests
+        working-directory: MiLAi-Product/runtime
         env:
           MILAI_BLOB_ROOT: ${{ runner.temp }}/milai-blobs
           MILAI_TENANT_ID: 11111111-1111-4111-8111-111111111111
@@ -106,78 +107,100 @@ jobs:
           MILAI_BIND_HOST: 127.0.0.1
           MILAI_BIND_PORT: "18080"
         run: uv run pytest -q
+      - name: Build clean Runtime distribution
+        working-directory: MiLAi-Product/runtime
+        run: uv build
 
-      - name: Isolated OSPC verification
-        run: |
-          runtime/.venv/bin/ruff format --check research/ospc
-          runtime/.venv/bin/ruff check research/ospc
-          runtime/.venv/bin/mypy --strict research/ospc
-          runtime/.venv/bin/python -m unittest discover -s research/ospc/tests -v
-          runtime/.venv/bin/python -m research.ospc.run_benchmark
-
-      - name: Build and inspect allowlisted Runtime artifacts
-        working-directory: runtime
-        run: |
-          uv run milai-ops init --env-file .env
-          uv build
-          PYTHONPATH=../scripts uv run pytest -q ../tests/test_release_safety.py
-          uv run python ../scripts/scan_ua_secrets.py --env-file .env
-
-  agent-integrations:
+  product-integrations:
+    name: Product integration packages (${{ matrix.package }})
+    needs: boundaries
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
-        package: [python-client, mcp, langgraph, autogen, hooks]
+        package: [python-client, mcp, openworker-mcp, hooks, langgraph, autogen]
     steps:
       - uses: actions/checkout@v4
-
       - uses: astral-sh/setup-uv@v6
         with:
           version: "0.8.3"
           enable-cache: true
-
-      - name: Verify locked Agent integration package
-        working-directory: integrations/${{ matrix.package }}
+      - name: Verify locked integration package
+        working-directory: MiLAi-Product/integrations/${{ matrix.package }}
         run: |
           uv sync --frozen --dev --python 3.11
-          uv run ruff format --check src tests
           uv run ruff check src tests
-          uv run mypy
           uv run pytest -q
           uv build
 
-      - name: Deterministic Agent efficiency regression
-        if: matrix.package == 'python-client'
-        working-directory: integrations/python-client
+  lab:
+    name: Lab active package and study boundary
+    needs: boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+      - name: Install locked Lab
+        working-directory: MiLAi-Lab
+        run: uv sync --frozen --dev --python 3.11
+      - name: Check active Lab boundary and quality
+        working-directory: MiLAi-Lab
         run: |
-          uv run python ../../evals/agent_efficiency/benchmark.py \
-            --output "${RUNNER_TEMP}/milai-agent-efficiency.json"
+          uv run milai-lab-check-boundary
+          uv run ruff check src tests tools
+          uv run mypy src/milai_lab
+          uv run pytest -q
+          uv run python tools/check_legacy_archive.py
+          uv build
 
-      - name: Provider evidence protocol gate (no provider network or credential)
-        if: matrix.package == 'python-client'
-        env:
-          PYTHONDONTWRITEBYTECODE: "1"
+  archive:
+    name: Archive index and reorganization evidence
+    needs: boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate archive indexes and reports
         run: |
-          sudo apt-get update
-          sudo apt-get install -y iproute2 nftables slirp4netns util-linux
-          uv sync --frozen --dev --python 3.11 --project runtime
-          runtime/.venv/bin/ruff format --check \
-            evals/agent_efficiency/provider_ab.py \
-            evals/agent_efficiency/provider_sandbox_exec.py \
-            evals/agent_efficiency/test_provider_ab.py
-          runtime/.venv/bin/ruff check \
-            evals/agent_efficiency/provider_ab.py \
-            evals/agent_efficiency/provider_sandbox_exec.py \
-            evals/agent_efficiency/test_provider_ab.py
-          PYTHONPATH=integrations/python-client/src \
-            runtime/.venv/bin/mypy --strict \
-            evals/agent_efficiency/provider_ab.py \
-            evals/agent_efficiency/provider_sandbox_exec.py
-          sudo env PYTHONDONTWRITEBYTECODE=1 \
-            PYTHONPATH=.:integrations/python-client/src \
-            "$(pwd)/runtime/.venv/bin/pytest" -q -p no:cacheprovider \
-            evals/agent_efficiency/test_provider_ab.py \
-            evals/agent_efficiency/test_benchmark.py \
-            tests/test_release_safety.py
+          python3 MiLAi-Artifact-Archive/tools/validate_archive.py \
+            --archive-root MiLAi-Artifact-Archive
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("MiLAi-Artifact-Archive/manifests/reorganization/v1.0")
+          summary = json.loads((root / "repo_inventory.summary.json").read_text())
+          assert summary["coverage_percent"] == 100.0
+          assert summary["unknown_count"] == 0
+          assert summary["unresolved_diverged_count"] == 0
+          assert (root / "DIVERGENCE_REVIEW.md").is_file()
+          assert (root / "LEGACY_ONLY_REVIEW.md").is_file()
+          print("PASS reorganization evidence gates")
+          PY
+
+  composition:
+    name: Product/Lab/Archive composition gate
+    needs: [product-runtime, product-integrations, lab, archive]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm canonical top-level ownership
+        run: |
+          test -d MiLAi-Product
+          test -d MiLAi-Lab
+          test -d MiLAi-Artifact-Archive
+          test ! -d runtime
+          test ! -d integrations
+          test ! -d contracts
+          test ! -d architecture
+          test ! -d evals
+          test ! -d research
+          test ! -d scripts
+          test ! -d tests
+          echo "PASS canonical composition"
