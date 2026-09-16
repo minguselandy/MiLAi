@@ -1,2 +1,0 @@
-MILAI-AEAD-V1
-{"algorithm":"AES-256-GCM","ciphertext":"pBdBJwCSVZBEH6Mhru121GtKEzkmpvcw8+wQRsOfKuBReiOtyfqWQWlpJWxx3iqwKFy1HLTZTWa7nJRQpPeGGmiQLsIhh/0yUqeerJ+hcV0=","content_hash":"12ae12d3cd0bf6b7c6b74f0007cc0df36bd1d95b58af00482fe174873d79a8cf","content_nonce":"k3AwOKJdC9O1D2EG","key_reference":"local-kek-v1","media_type":"text/plain","plaintext_length":64,"tenant_id":"6308f532-4c79-41c6-bebb-1b1e3457125f","version":1,"wrap_nonce":"W6w65mqYMWpwLVmo","wrapped_dek":"DI9U0jnD/Hl/WYD1FuM/hs3K2Ef6oTlO1Ce6lZnzBn8lo9fP79sWGeXGA3RxStzL"}

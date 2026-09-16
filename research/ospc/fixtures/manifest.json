@@ -1,8 +1,0 @@
-{
-  "annotation_version": "ospc.annotation.v1",
-  "fixture_count": 40,
-  "generator": "research.ospc.generate_fixtures",
-  "pilot_sha256": "8fd9482aacf58d8802a16dbc86a9e8043ffc28123d904f72b7b87a052eaa718a",
-  "schema": "ospc.pilot.v1",
-  "synthetic_only": true
-}

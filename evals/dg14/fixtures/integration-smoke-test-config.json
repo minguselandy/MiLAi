@@ -1,9 +1,0 @@
-{
-  "command": [
-    "jq",
-    "-c",
-    ".",
-    "var/dg14/runs/dg14-integration-001-20260826/integration-smoke.json"
-  ],
-  "cwd": "/cra/memory/mx_memory/MiLAi"
-}

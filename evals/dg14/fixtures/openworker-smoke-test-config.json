@@ -1,9 +1,0 @@
-{
-  "command": [
-    "jq",
-    "-c",
-    ".",
-    "var/dg14/runs/dg14-openworker-uds-009-20260826/openworker-smoke.json"
-  ],
-  "cwd": "/cra/memory/mx_memory/MiLAi"
-}
