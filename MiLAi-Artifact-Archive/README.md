@@ -4,10 +4,10 @@ This repository is the index and preservation companion for the legacy
 MiLAi workspace at `/cra/memory/mx_memory/MiLAi`.
 
 It deliberately does **not** duplicate the multi-gigabyte `var/` tree. The
-archive is initially index-backed: catalogs bind authoritative control
-artifacts to their immutable legacy paths with sizes and SHA-256 identities.
-The original workspace remains the byte store until a separately authorized
-offline migration copies those bytes to durable object storage.
+archive is index-backed: catalogs bind authoritative control artifacts to
+their legacy paths with sizes and SHA-256 identities. The
+`pre-codebase-reorg-v1` tag and Git history preserve the pre-retirement source;
+an offline migration to durable object storage requires separate authorization.
 
 ## What is stored here
 
@@ -23,6 +23,8 @@ offline migration copies those bytes to durable object storage.
 - `preserved-user-work/`: exact current and `HEAD` snapshots plus a binary-safe
   Git patch for the two pre-existing user modifications.
 - `reports/SPLIT_AUDIT.md`: human-readable split findings and totals.
+- `manifests/reorganization/v1.0/`: deterministic reorganization inventory,
+  divergence decisions, and completion evidence.
 - `tools/`: deterministic build and validation utilities.
 
 ## Trust boundary
@@ -31,9 +33,9 @@ This repository is an index, not a claim that every legacy experiment is
 valid. `status` records are extracted from legacy artifacts where possible;
 they are not re-adjudicated. A SHA-256 match establishes byte identity only.
 
-The legacy workspace is read-only input to these tools. Generation writes
-only inside this archive repository. No source, database, run artifact, Git
-state, or user file in the legacy tree is modified.
+Legacy snapshots and artifacts are read-only evidence. Generation writes only
+inside this archive repository. Archive tools must not import, execute, or
+modify Product/Lab runtime code, database state, Git state, or user files.
 
 ## Rebuild and validate
 
@@ -51,4 +53,3 @@ python3 tools/validate_archive.py \
 Rebuilding intentionally refreshes the snapshot metadata and archive index.
 Do not rebuild an already cited catalog in place; create a versioned snapshot
 or commit it first.
-

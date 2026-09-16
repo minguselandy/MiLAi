@@ -13,10 +13,11 @@ adapters, product examples, and product-facing operations documentation in one s
 > Deployment boundary: local, single-user, single configured tenant  
 > Release claim: not production-ready
 
-This repository was created by copying usable product assets from the legacy mixed MiLAi workspace.
-The legacy workspace was not edited, moved, or deleted. Research harnesses, benchmark data,
-experiment runners, Goal history, run artifacts, virtual environments, model files, logs, and build
-outputs are intentionally absent.
+This product tree is the deployable Source of Truth for product behavior. It was initially populated
+from the legacy mixed workspace; the legacy root is now read-only migration input and is retired from
+the active repository surface after the `pre-codebase-reorg-v1` rollback point. Research harnesses,
+benchmark data, experiment runners, Goal history, run artifacts, virtual environments, model files,
+logs, and build outputs are intentionally absent.
 
 ## What is included
 
@@ -268,9 +269,9 @@ uv run pytest -q
 uv build
 ```
 
-The product repository must never import from a sibling `evals`, `research`, or root `scripts`
-package. Benchmark and experimental work belongs in `MiLAi-Lab` and consumes the product only
-through published interfaces or an explicit source identity.
+The product repository must never import from `MiLAi-Lab`, `MiLAi-Artifact-Archive`, a root legacy
+package, or a research/evaluation `scripts` package. Benchmark and experimental work belongs in
+`MiLAi-Lab` and consumes the product only through published interfaces or an explicit source identity.
 
 ## Documentation
 

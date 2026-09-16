@@ -105,8 +105,9 @@ artifacts/            ignored local run output
 docs/                 current goals, status, architecture, and result index
 ```
 
-The legacy MiLAi repository remains untouched. Its experimental code and documents are
-copied into `studies/archive/lifecycle/legacy_snapshot` for historical inspection. Those
+The pre-reorganization legacy MiLAi tree is preserved by the
+`pre-codebase-reorg-v1` Git tag and inventory manifests. Its experimental code and documents are
+also copied into `studies/archive/lifecycle/legacy_snapshot` for historical inspection. Those
 files are not part of the `milai_lab` package and are not evidence that a current product
 path is enabled.
 
@@ -127,8 +128,8 @@ experiment. If the product changes, update the lock deliberately before running 
 study; never silently accept a nearby checkout.
 
 The repository CI validates the active Lab package and filtered legacy snapshot. Cross-repository
-Product pin verification remains an explicit local/release gate until the first Product commit and
-remote repository identity are established.
+Product pin verification is an explicit local/release gate and must resolve to the Product identity
+recorded by the study manifest.
 
 The [HC-4 A1 guided-adoption study](studies/active/MILA_HOST_COGNITIVE_AFFORDANCE_HC4_A1.md)
 completed a third four-session chain with bounded affordance guidance and still observed zero

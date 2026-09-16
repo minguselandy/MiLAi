@@ -1,60 +1,35 @@
 # MiLAi
 
-MiLAi is an experimental, governed memory system for agent applications. The
-current repository contains the Lean V1 architecture, contracts, runtime,
-agent integrations, evaluation harnesses, research utilities, tests, and the
-development records that define their boundaries.
+MiLAi 是一个受治理的个人记忆系统单仓库。当前仓库已经收敛为三个有明确职责的
+first-party bundle；根目录只提供跨仓库导航、边界规则和 CI 入口。
 
-## Repository layout
+## Source of Truth
 
-- `architecture/` — frozen architecture bundles and validators.
-- `contracts/` — agent, MCP, OpenWorker, and API contracts.
-- `runtime/` — experimental Flask/PostgreSQL runtime, migrations, and runtime tests.
-- `integrations/` — Python client, MCP, OpenWorker, LangGraph, AutoGen, and hooks integrations.
-- `evals/` — evaluation protocols, fixtures, scorers, and benchmark adapters.
-- `research/` — isolated research implementations and harnesses.
-- `examples/` — integration examples.
-- `scripts/` — experiment, validation, packaging, and audit utilities.
-- `tests/` — cross-component and experiment-level tests.
-- `docs/` — ADRs, runbooks, reports, reviews, contracts, and release records.
+- [`MiLAi-Product/`](MiLAi-Product/)：可部署产品唯一实现，包括 Runtime、PostgreSQL 迁移、
+  公开契约、Python client、MCP、OpenWorker/Host 适配器、产品测试和发布文档。
+- [`MiLAi-Lab/`](MiLAi-Lab/)：研究、评测、benchmark、scorer、prototype 和 simulation 唯一实现。
+- [`MiLAi-Artifact-Archive/`](MiLAi-Artifact-Archive/)：历史文件、运行产物和 legacy 的索引、
+  SHA-256 身份与恢复证据；不是可导入运行时。
 
-## Included first-party bundles
+详细规则见 [`SOURCE_OF_TRUTH.md`](SOURCE_OF_TRUTH.md) 和 [`REPO_MAP.md`](REPO_MAP.md)。
+根目录 legacy 仅按 [`LEGACY_READ_ONLY.md`](LEGACY_READ_ONLY.md) 取证，并将在清单、差异审查和
+回滚 tag 固定后退出活动面。
 
-- `MiLAi-Product/` — deployable product tree, product contracts, runtime, and integrations.
-- `MiLAi-Lab/` — independent research, evaluation, and benchmarking tree.
-- `MiLAi-Artifact-Archive/` — index-backed archive catalog and preservation tools for legacy artifacts.
+## 开发入口
 
-These bundles are included as ordinary directories in this monorepo. Their original
-`.git` metadata is intentionally omitted; the surrounding `mx_memory` workspace and
-all unrelated repository checkouts remain outside this repository.
-
-## Local setup
-
-This project uses `uv` for dependency management. The repository intentionally
-tracks each component's `pyproject.toml` and `uv.lock`, but does not track local
-virtual environments, uv caches, downloaded models, wheelhouses, logs, runtime
-state, or generated experiment output.
-
-For the runtime:
-
-```bash
-cd runtime
-cp .env.example .env
-# Edit .env with local PostgreSQL credentials.
-uv sync --frozen --dev --python 3.11
-uv run pytest -q
+```text
+Product  → MiLAi-Product/README.md
+Lab      → MiLAi-Lab/README.md
+Archive  → MiLAi-Artifact-Archive/README.md
 ```
 
-For an integration package, run the same commands from its directory, for
-example `integrations/python-client` or `integrations/mcp`.
+各 bundle 保留自己的 `pyproject.toml`、`uv.lock`、测试和运行说明。根仓库不提交第三方 clone、
+虚拟环境、uv cache、模型/数据下载、日志、运行时状态、wheelhouse 或生成性大文件。
 
-## Scope and provenance
+## 重组证据
 
-The parent `mx_memory` directory is a working area containing multiple
-independent repositories and local experiment environments. This repository
-publishes the MiLAi core together with the three first-party bundles listed
-above. Third-party checkouts and unrelated sibling working copies are
-deliberately kept outside this Git history.
+重组的机器清单和 divergence review 归档在
+`MiLAi-Artifact-Archive/manifests/reorganization/v1.0/`；完成报告为
+`MILA_CODEBASE_REORGANIZATION_RESULTS_v1.0.md`。恢复点为 Git tag `pre-codebase-reorg-v1`。
 
-See `AGENTS.md`, `MANIFEST.md`, and the Lean V1 design/implementation documents
-for the current execution boundaries and evidence policy.
+当前产品仍是 `0.1.x CANDIDATE`，Schema 仍为 `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`。
