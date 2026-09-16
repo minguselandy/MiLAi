@@ -77,10 +77,9 @@ Create two independent sibling repositories:
 2. `MiLAi-Lab`: evaluation, benchmark, research, historical Goal material and
    experiment harnesses, pinned to exact Product wheel/contract identities.
 
-Keep the old `MiLAi` directory untouched until both repositories pass parity
-checks. Product must never import Lab. Lab's temporary private-runtime access
-must be concentrated in an explicitly unstable compatibility adapter and then
-removed incrementally.
+The legacy root is now frozen by `pre-codebase-reorg-v1` and retired from the
+active tree after inventory and boundary checks. Product must never import Lab.
+The Archive preserves historical identities and is not an executable fallback.
 
 ## Known boundary facts
 

@@ -524,10 +524,9 @@ Create two independent sibling repositories:
 2. `MiLAi-Lab`: evaluation, benchmark, research, historical Goal material and
    experiment harnesses, pinned to exact Product wheel/contract identities.
 
-Keep the old `MiLAi` directory untouched until both repositories pass parity
-checks. Product must never import Lab. Lab's temporary private-runtime access
-must be concentrated in an explicitly unstable compatibility adapter and then
-removed incrementally.
+Freeze the legacy input with an explicit tag before retirement. Product must
+never import Lab. Archive output is an index/preservation boundary, not an
+executable fallback or a replacement Product/Lab source tree.
 
 ## Known boundary facts
 
