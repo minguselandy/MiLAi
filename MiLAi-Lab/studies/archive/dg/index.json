@@ -1,0 +1,3417 @@
+{
+  "schema_version": 1,
+  "category": "dg",
+  "snapshot_manifest": "../lifecycle/legacy_snapshot/manifest.json",
+  "files": [
+    {
+      "source": "MiLAi_DG-10实验结果整改与复验_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-10实验结果整改与复验_GOALS.md",
+      "sha256": "4fc93737aa3b267dde2b4886e5ab45c5e0539510de12a06068692d496a43c52e"
+    },
+    {
+      "source": "MiLAi_DG-11记忆质量与Agent效率优化_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-11记忆质量与Agent效率优化_GOALS.md",
+      "sha256": "329cb8f6ceb73a2d28cb4232573a258435efba725a7b92cb92377ff3da214e7a"
+    },
+    {
+      "source": "MiLAi_DG-12高效Benchmark与论文实验_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-12高效Benchmark与论文实验_GOALS.md",
+      "sha256": "50c371692dac180ee2cb977661b075d27055c07c7613270d31a9c6c7f8873979"
+    },
+    {
+      "source": "MiLAi_DG-13U_OpenWorker_MCP可用性开发_GOAL.md",
+      "destination": "MiLAi/MiLAi_DG-13U_OpenWorker_MCP可用性开发_GOAL.md",
+      "sha256": "6f5eebbbbf1f30dcd84b8dbe42841cf1f9ccce638f937877723d188537f6f525"
+    },
+    {
+      "source": "MiLAi_DG-13_Formal_Evaluation_Integrity.md",
+      "destination": "MiLAi/MiLAi_DG-13_Formal_Evaluation_Integrity.md",
+      "sha256": "5858806062291086ee006283f494a2e22e0cac9a1fc12e3df7163b72490d58d1"
+    },
+    {
+      "source": "MiLAi_DG-13_MCP原生受治理记忆服务_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-13_MCP原生受治理记忆服务_GOALS.md",
+      "sha256": "d0b2b99d4ceaf81071658b6bb0e8b32890ec1f3967b6bf7a4795373ae723a6e4"
+    },
+    {
+      "source": "MiLAi_DG-13_MemoryAccessPlan与渐进检索_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-13_MemoryAccessPlan与渐进检索_GOALS.md",
+      "sha256": "947d83d2fa040267997dbfb65c8f4def67084a4d191587d877584e98a4d4d67b"
+    },
+    {
+      "source": "MiLAi_DG-13_Research_and_Benchmark_Plan.md",
+      "destination": "MiLAi/MiLAi_DG-13_Research_and_Benchmark_Plan.md",
+      "sha256": "eb4ca41d41f3cbeb4e2ce015d9b580e623e908ee25dbacc6dbb11ec566beda39"
+    },
+    {
+      "source": "MiLAi_DG-14_LongMemEval_MCP适配与对比实验_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-14_LongMemEval_MCP适配与对比实验_GOALS.md",
+      "sha256": "f30376e1a7ea3f351cf1be2c63a7aa5834db484c7e46f825c8bc9e6f28054824"
+    },
+    {
+      "source": "MiLAi_DG-15_受治理记忆流水线与投影效率优化_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-15_受治理记忆流水线与投影效率优化_GOALS.md",
+      "sha256": "075ffe21cfb3e3ebc172cf1c2912b001ec3bbf429ac5f3226841d92797fb1cd5"
+    },
+    {
+      "source": "MiLAi_DG-16_双通道语义记忆与证据组合质量优化_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-16_双通道语义记忆与证据组合质量优化_GOALS.md",
+      "sha256": "5af7a6ad4af23ee9d4604b00632ec4724aa47ea8a9fe6ba6568acc029a6eda95"
+    },
+    {
+      "source": "MiLAi_DG-17_语义记忆读取与证据集执行_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-17_语义记忆读取与证据集执行_GOALS.md",
+      "sha256": "8adaf2d24cd85331b832b10e99f81dcc83eef3ece89ec8eee4fcb36d2dbcea9a"
+    },
+    {
+      "source": "MiLAi_DG-18_受限残差再查找与证据可达性优化_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-18_受限残差再查找与证据可达性优化_GOALS.md",
+      "sha256": "a992247d15d1fa7f0ecf6dd907c1e3c4b46b56822b755fbdde2d3acfcb74e44b"
+    },
+    {
+      "source": "MiLAi_DG-19_残差检索Treatment交付与Synthetic_Shadow验证_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-19_残差检索Treatment交付与Synthetic_Shadow验证_GOALS.md",
+      "sha256": "42c0809c34628d5b06043f9350798d1178c8ba81882432d055826689d70e4241"
+    },
+    {
+      "source": "MiLAi_DG-20_RequirementState对齐与Capability约束证据再查找_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-20_RequirementState对齐与Capability约束证据再查找_GOALS.md",
+      "sha256": "9b361a478500d777f5b68ea115640703bf323a5d5ee3d5fdcff54e25025cd6b0"
+    },
+    {
+      "source": "MiLAi_DG-21_类型定向证据获取效率与时间完备性修复_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-21_类型定向证据获取效率与时间完备性修复_GOALS.md",
+      "sha256": "1d1e259fdea633cd4d51b09565683feb37ccbdc38967c7d8bddf132c7905e7d7"
+    },
+    {
+      "source": "MiLAi_DG-22_证据召回准确性与答案正确性闭环_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-22_证据召回准确性与答案正确性闭环_GOALS.md",
+      "sha256": "7ee8b2c74cfaa1d40cd24c5f38bd0fd2c105c3888109ad3a4f7992305cdf9d69"
+    },
+    {
+      "source": "MiLAi_DG-23_预算稳定上下文编译与答案回归闭环_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-23_预算稳定上下文编译与答案回归闭环_GOALS.md",
+      "sha256": "c36fca58068feeb6cc1aaa3561dbaf1970271bcc287e1776e5dafd01dc9b97f5"
+    },
+    {
+      "source": "MiLAi_DG-24_检索首损点审计与候选生命周期归因_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-24_检索首损点审计与候选生命周期归因_GOALS.md",
+      "sha256": "ba3b136c3e510f7829d50af7d50c7aef5de86b04c31e82507c6f647db5347d27"
+    },
+    {
+      "source": "MiLAi_DG-25_Requirement定向检索与时间答案正确性闭环_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-25_Requirement定向检索与时间答案正确性闭环_GOALS.md",
+      "sha256": "bd117cb9328791c47c4b2b1d4b8c1665c6717f4c37f31985f36d9ea35593683c"
+    },
+    {
+      "source": "MiLAi_DG-26-DG-30_自适应检索与集中验证_总_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-26-DG-30_自适应检索与集中验证_总_GOALS.md",
+      "sha256": "3cccd5495cf4a5200b4f698d5a03eccffa521adb0a9cf4f5587658219f6d246a"
+    },
+    {
+      "source": "MiLAi_DG-26-DG-30_自适应检索与集中验证_总_GOALS_20260830_133116.md",
+      "destination": "MiLAi/MiLAi_DG-26-DG-30_自适应检索与集中验证_总_GOALS_20260830_133116.md",
+      "sha256": "6c047a68677d03ac55852189faf3995f5d910a0acba9fc1702fc48af6c2bbed9"
+    },
+    {
+      "source": "MiLAi_DG-26-DG-30_自适应检索与集中验证_总_GOALS_20260830_133353.md",
+      "destination": "MiLAi/MiLAi_DG-26-DG-30_自适应检索与集中验证_总_GOALS_20260830_133353.md",
+      "sha256": "3cccd5495cf4a5200b4f698d5a03eccffa521adb0a9cf4f5587658219f6d246a"
+    },
+    {
+      "source": "MiLAi_DG-26-DG-30_轻量执行与审查基线.md",
+      "destination": "MiLAi/MiLAi_DG-26-DG-30_轻量执行与审查基线.md",
+      "sha256": "c88d9e09806a9b18faaba4067ecf251d48725564d5a67732d8fdb6ab8493245b"
+    },
+    {
+      "source": "MiLAi_DG-26_StateView固定候选池语义重排_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-26_StateView固定候选池语义重排_GOALS.md",
+      "sha256": "d8e85afa69c01018e898e797066287dc7b03b74faa56cad1e2fb38caa373fcbb"
+    },
+    {
+      "source": "MiLAi_DG-27_Grounded证据解释与Binding验证_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-27_Grounded证据解释与Binding验证_GOALS.md",
+      "sha256": "48dc1e290fc07ba781f840f85b0ae85574734dbf01f5a11dac1530872d607e75"
+    },
+    {
+      "source": "MiLAi_DG-27_Grounded证据解释与Binding验证_GOALS_20260830_133116.md",
+      "destination": "MiLAi/MiLAi_DG-27_Grounded证据解释与Binding验证_GOALS_20260830_133116.md",
+      "sha256": "c35388a7f147cd2b0f4c63a9eabff1c05c2a92856c05e90aa492d8f848075da1"
+    },
+    {
+      "source": "MiLAi_DG-27_Grounded证据解释与Binding验证_GOALS_20260830_144542.md",
+      "destination": "MiLAi/MiLAi_DG-27_Grounded证据解释与Binding验证_GOALS_20260830_144542.md",
+      "sha256": "3f008f0ff8bebea28390a8da368e4c93cf4eaf1e840b7b9decdd1660968a3739"
+    },
+    {
+      "source": "MiLAi_DG-28_可行动作排序与一次主动检索_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-28_可行动作排序与一次主动检索_GOALS.md",
+      "sha256": "692bdf7052ca630963846956c954faf39fc55c6ec6974362b478c2af3ad14767"
+    },
+    {
+      "source": "MiLAi_DG-28_可行动作排序与一次主动检索_GOALS_20260830_133116.md",
+      "destination": "MiLAi/MiLAi_DG-28_可行动作排序与一次主动检索_GOALS_20260830_133116.md",
+      "sha256": "eaa4ce77bbbd23c6b1311f121190253d15f416983c71d7aaabcae419c8fadba9"
+    },
+    {
+      "source": "MiLAi_DG-28_可行动作排序与一次主动检索_GOALS_20260830_144542.md",
+      "destination": "MiLAi/MiLAi_DG-28_可行动作排序与一次主动检索_GOALS_20260830_144542.md",
+      "sha256": "e33a5bd73e32d11d5bae2e71bb194acd7215b5a560167ac232c1f6e59315c4f9"
+    },
+    {
+      "source": "MiLAi_DG-29_Observation条件Residual表达与有界Refinding_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-29_Observation条件Residual表达与有界Refinding_GOALS.md",
+      "sha256": "204f2598c55f3751ba41628a6bfcb2effd73948c24c8eeff51a5fce576a81beb"
+    },
+    {
+      "source": "MiLAi_DG-29_Observation条件Residual表达与有界Refinding_GOALS_20260830_133116.md",
+      "destination": "MiLAi/MiLAi_DG-29_Observation条件Residual表达与有界Refinding_GOALS_20260830_133116.md",
+      "sha256": "aca842e6f3f94c6e84e709a24efe230eeb349e5b35e51077ce2499bad31490e5"
+    },
+    {
+      "source": "MiLAi_DG-30_Model-understood_Runtime-governed集成与Holdout就绪_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-30_Model-understood_Runtime-governed集成与Holdout就绪_GOALS.md",
+      "sha256": "756b542c975224ff5896f0562584016bf140893031d55a94ccc7be45b1288a37"
+    },
+    {
+      "source": "MiLAi_DG-30_Model-understood_Runtime-governed集成与Holdout就绪_GOALS_20260830_133116.md",
+      "destination": "MiLAi/MiLAi_DG-30_Model-understood_Runtime-governed集成与Holdout就绪_GOALS_20260830_133116.md",
+      "sha256": "a9f0c89dea300d1ac230d0dafb7e77c7835f9a7511ef3c9f55f8067717d65e52"
+    },
+    {
+      "source": "MiLAi_DG-31_简单记忆形成与单次读取闭环_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-31_简单记忆形成与单次读取闭环_GOALS.md",
+      "sha256": "3c5d2679d1f60cc57c6a4bfb34cf49fbae1ef5707e52d7e583aef37486aa0656"
+    },
+    {
+      "source": "docs/MiLAi_DG13-DG19_架构与方法迁移Prompt_2026-08-28.md",
+      "destination": "MiLAi/docs/MiLAi_DG13-DG19_架构与方法迁移Prompt_2026-08-28.md",
+      "sha256": "25d771f28a5a54115642c5bfdece85910f1550ab289b42d0abb7854469d6bc1f"
+    },
+    {
+      "source": "docs/reports/MiLAi_DG-13_v0.3.0_pre_usability_rebase.md",
+      "destination": "MiLAi/docs/reports/MiLAi_DG-13_v0.3.0_pre_usability_rebase.md",
+      "sha256": "f50f1ee6191b0407c2e4c6c07916c30e0996bf4fe0bacda8cee9c98c79c5c427"
+    },
+    {
+      "source": "docs/reports/MiLAi_DG13-DG23_讨论总结_当前方法流程与本地项目对比_2026-08-29.md",
+      "destination": "MiLAi/docs/reports/MiLAi_DG13-DG23_讨论总结_当前方法流程与本地项目对比_2026-08-29.md",
+      "sha256": "7573424f948abb8ce26882582bdfc828507401e305da445f2405145bb017a044"
+    },
+    {
+      "source": "evals/dg10/.python-version",
+      "destination": "MiLAi/evals/dg10/.python-version",
+      "sha256": "49a506dd32096b010d75205acf3430c9ae6c40351888129499e5a5e487126c93"
+    },
+    {
+      "source": "evals/dg10/pyproject.toml",
+      "destination": "MiLAi/evals/dg10/pyproject.toml",
+      "sha256": "f57918367c3f809a510c2047bd30ee5faf5f551e7f4f2b61ef0f6e23abaa3f66"
+    },
+    {
+      "source": "evals/dg10/uv.lock",
+      "destination": "MiLAi/evals/dg10/uv.lock",
+      "sha256": "b84ecc434bee367221313d980ec97be0d24bd7d56f12e38c59d8328823744bd1"
+    },
+    {
+      "source": "evals/dg12/__init__.py",
+      "destination": "MiLAi/evals/dg12/__init__.py",
+      "sha256": "6de05a44cc3074fed4d645dca984554ad9f6985724264bcc600a44762e2314f7"
+    },
+    {
+      "source": "evals/dg12/eh04_reconfirmation.py",
+      "destination": "MiLAi/evals/dg12/eh04_reconfirmation.py",
+      "sha256": "a2907dc3b50b34dc0f0ea1626378266a6c8c8bd74b563fca6568405d79d0611a"
+    },
+    {
+      "source": "evals/dg12/materialization_profile.py",
+      "destination": "MiLAi/evals/dg12/materialization_profile.py",
+      "sha256": "e8d1911f2533a71bb608c019ad6b018328645fafd6183734360d5cb24b26103a"
+    },
+    {
+      "source": "evals/dg12/runtime_slot.py",
+      "destination": "MiLAi/evals/dg12/runtime_slot.py",
+      "sha256": "db07d25e4d5c49e1067aebc1ec118071bdef16036b8361542649ea288d6adf92"
+    },
+    {
+      "source": "evals/dg12/slot_smoke.py",
+      "destination": "MiLAi/evals/dg12/slot_smoke.py",
+      "sha256": "c1a81e5471a32a0c1bc0ba0bd993d8e68d3521bf52516d897c17653877f66c26"
+    },
+    {
+      "source": "evals/dg12/stage_profile.py",
+      "destination": "MiLAi/evals/dg12/stage_profile.py",
+      "sha256": "da8b2d8c79d17f1a81dfe52f1642b7247bf510c8a218c5bfa645a7a860660e12"
+    },
+    {
+      "source": "evals/dg14/__init__.py",
+      "destination": "MiLAi/evals/dg14/__init__.py",
+      "sha256": "515e2a54f2395f21280e97255ff566454ec3b8bd3f6e1e496fdaa3b9b089f909"
+    },
+    {
+      "source": "evals/dg14/benchmark.py",
+      "destination": "MiLAi/evals/dg14/benchmark.py",
+      "sha256": "efa888f40484d49356f1e674f80ad011af0ec6123d05292a1bf430ff84789820"
+    },
+    {
+      "source": "evals/dg14/contracts.py",
+      "destination": "MiLAi/evals/dg14/contracts.py",
+      "sha256": "335922446c4cafe37537c7bbc64e9d15421575028af5e2dae0f04d465589d221"
+    },
+    {
+      "source": "evals/dg14/dev_split.py",
+      "destination": "MiLAi/evals/dg14/dev_split.py",
+      "sha256": "d7a9a69cd2ef73f89a6b5e23d32a67850c17aadbfab19f35d307c4de29ab5a3f"
+    },
+    {
+      "source": "evals/dg14/fixtures/integration-smoke-test-config.json",
+      "destination": "MiLAi/evals/dg14/fixtures/integration-smoke-test-config.json",
+      "sha256": "7466a4e56155bc27601132977337529a6dd4bf6225fecdd8aa208c73661215c7"
+    },
+    {
+      "source": "evals/dg14/fixtures/opened-dev-scoring-fixture.json",
+      "destination": "MiLAi/evals/dg14/fixtures/opened-dev-scoring-fixture.json",
+      "sha256": "b135926285b22c85c1ddb658afbd2b4ae5f7c063f372cfefccde14b0bfd341d0"
+    },
+    {
+      "source": "evals/dg14/fixtures/openworker-smoke-test-config.json",
+      "destination": "MiLAi/evals/dg14/fixtures/openworker-smoke-test-config.json",
+      "sha256": "31030726292c3099b643ee60f664edf8f97d45167c1b8c6011267fdbd07424ad"
+    },
+    {
+      "source": "evals/dg14/integration_smoke.py",
+      "destination": "MiLAi/evals/dg14/integration_smoke.py",
+      "sha256": "625102c8c52f299f328eb443dfab2b6dd4d770e9d9bf63048a1fb1ffa1497112"
+    },
+    {
+      "source": "evals/dg14/ledger.py",
+      "destination": "MiLAi/evals/dg14/ledger.py",
+      "sha256": "577971ef168dc573acf10a0954f9865716897d6e5d3e52d8895a1bddb5babe15"
+    },
+    {
+      "source": "evals/dg14/mcp_stdio.py",
+      "destination": "MiLAi/evals/dg14/mcp_stdio.py",
+      "sha256": "799c348f36559146c7b4abae9f11ec906151fecaf9068e9da3a8a5429881af6e"
+    },
+    {
+      "source": "evals/dg14/milai_mcp_adapter.py",
+      "destination": "MiLAi/evals/dg14/milai_mcp_adapter.py",
+      "sha256": "0e554263dda214f0dd66d2c1ec1f88c17cd0dcf5e3135fecf4c4d4f632aea94b"
+    },
+    {
+      "source": "evals/dg14/openworker_smoke.py",
+      "destination": "MiLAi/evals/dg14/openworker_smoke.py",
+      "sha256": "42d1bea53e2a75859c89ac90b190bee8e214f709330f104949343a35a1aeadcf"
+    },
+    {
+      "source": "evals/dg14/provider.py",
+      "destination": "MiLAi/evals/dg14/provider.py",
+      "sha256": "30cf526a624120b83a5f1dce75ed4a5a4abab9c926b0309d78626f334dff3f48"
+    },
+    {
+      "source": "evals/dg14/reader_token_accounting.py",
+      "destination": "MiLAi/evals/dg14/reader_token_accounting.py",
+      "sha256": "23814bfbe1f424a5565c229239f537ae46b14e76565599b4e65ecec0d37d050c"
+    },
+    {
+      "source": "evals/dg15/__init__.py",
+      "destination": "MiLAi/evals/dg15/__init__.py",
+      "sha256": "ba041ba9788ff013f4c424962b5d6ccc8f73c4ceb66ff61252453192a630aafa"
+    },
+    {
+      "source": "evals/dg15/contracts.py",
+      "destination": "MiLAi/evals/dg15/contracts.py",
+      "sha256": "ecb000fb42b466b3a267f9a0f4d02f4655c2e76c84f51509a57d443051b177c3"
+    },
+    {
+      "source": "evals/dg15/mcp_stdio.py",
+      "destination": "MiLAi/evals/dg15/mcp_stdio.py",
+      "sha256": "6d1c3cf34acefcbdaf2cc80ce9c2176929a83094593e9ff6dd3e474d59cc5708"
+    },
+    {
+      "source": "evals/dg15/milai_mcp_adapter.py",
+      "destination": "MiLAi/evals/dg15/milai_mcp_adapter.py",
+      "sha256": "68b57ed626dc8f8460513402da04e2d73daf284a4af514e84a5a0ff9cefecee0"
+    },
+    {
+      "source": "evals/dg15/runtime_session.py",
+      "destination": "MiLAi/evals/dg15/runtime_session.py",
+      "sha256": "934bdec6c136f96ffade0be3c3d12d39635a699fef44e862e39559a755e83f74"
+    },
+    {
+      "source": "evals/dg16/__init__.py",
+      "destination": "MiLAi/evals/dg16/__init__.py",
+      "sha256": "a0b7aa120322b388860063ec7bc6bafb0f444da5e65b9452798f6e9382b316df"
+    },
+    {
+      "source": "evals/dg16/external_lme10.py",
+      "destination": "MiLAi/evals/dg16/external_lme10.py",
+      "sha256": "c68d3a80c22e3b1ff695e791b2b5b08065678b55424d78b6d6b206c3539fae43"
+    },
+    {
+      "source": "evals/dg16/fixtures/opened-dev-evidence-atoms.v1.json",
+      "destination": "MiLAi/evals/dg16/fixtures/opened-dev-evidence-atoms.v1.json",
+      "sha256": "3a3e5746f24187aff7b8194ce34281f3d4c8f3296c94fe68a3b57e0d8a299628"
+    },
+    {
+      "source": "evals/dg16/lme10.py",
+      "destination": "MiLAi/evals/dg16/lme10.py",
+      "sha256": "e9355989399f157a0d586617d5af04a5c640f28e8826f4fd4cbe1ece50209e9c"
+    },
+    {
+      "source": "evals/dg16/q0.py",
+      "destination": "MiLAi/evals/dg16/q0.py",
+      "sha256": "40c8ad794812e0599b9e0fa549e452e04f5daeb4e90a1cda71a57c92358e5cb6"
+    },
+    {
+      "source": "evals/dg16/q4.py",
+      "destination": "MiLAi/evals/dg16/q4.py",
+      "sha256": "77df1ff98bea03d90683e33e53918215d5e57616b2a9e1222408a96c3afdf1df"
+    },
+    {
+      "source": "evals/dg16/q5.py",
+      "destination": "MiLAi/evals/dg16/q5.py",
+      "sha256": "37aab572fcc71cdb1a9961a0d543f1903ef3e58a52d8dbb4e70373d460a79b78"
+    },
+    {
+      "source": "evals/dg16/q6.py",
+      "destination": "MiLAi/evals/dg16/q6.py",
+      "sha256": "2375bd5e712b80b258fad70f2ce114e81e665c8bee9adac3af43dbfa3804e038"
+    },
+    {
+      "source": "evals/dg16/reader_stability.py",
+      "destination": "MiLAi/evals/dg16/reader_stability.py",
+      "sha256": "458c6cb05cda1b082d74c17255fa9a547462161bbc093cc73882bd4f0343e551"
+    },
+    {
+      "source": "evals/dg17/__init__.py",
+      "destination": "MiLAi/evals/dg17/__init__.py",
+      "sha256": "b6a6e6be9465af4b2030d0ddb8b5b4f4117b44ff227d12af1398a37b14ba14cc"
+    },
+    {
+      "source": "evals/dg17/a1_acquisition.py",
+      "destination": "MiLAi/evals/dg17/a1_acquisition.py",
+      "sha256": "fc8205095a0c2807037c5e187d5003161d26e22e15ff766708c8701af9d55174"
+    },
+    {
+      "source": "evals/dg17/a3_source_calibration.py",
+      "destination": "MiLAi/evals/dg17/a3_source_calibration.py",
+      "sha256": "eed35692e4c9686c4a31e2f02ad8c8a817fdcea58bef51938ee4dba9fb067309"
+    },
+    {
+      "source": "evals/dg17/a4_lexical_evaluation.py",
+      "destination": "MiLAi/evals/dg17/a4_lexical_evaluation.py",
+      "sha256": "b31857e71664a033895144138124e1002327c82d2a239c377e69144b236fb753"
+    },
+    {
+      "source": "evals/dg17/a5_temporal_acquisition.py",
+      "destination": "MiLAi/evals/dg17/a5_temporal_acquisition.py",
+      "sha256": "34a1f8796272d701dbdb808d2c2851f4f8b1615c92513431bd77eef6140db35a"
+    },
+    {
+      "source": "evals/dg17/a6_dense_productization.py",
+      "destination": "MiLAi/evals/dg17/a6_dense_productization.py",
+      "sha256": "62d19b53f21256061608abef221aa46cd8963e435fab5984573a4c70c8f800df"
+    },
+    {
+      "source": "evals/dg17/acquisition_loss.py",
+      "destination": "MiLAi/evals/dg17/acquisition_loss.py",
+      "sha256": "14d36835480dce25213dc5326a740bfc35894308d8e7e6ea6454c03f7e3c8dd5"
+    },
+    {
+      "source": "evals/dg17/fixtures/a4-lexical-generalization.v0.1.json",
+      "destination": "MiLAi/evals/dg17/fixtures/a4-lexical-generalization.v0.1.json",
+      "sha256": "114caf5a7bbc5d34fc264c490b3e16e9d27de5abe41917ae4a6bbc9c60fc1735"
+    },
+    {
+      "source": "evals/dg17/fixtures/lme10-answer-bearing-labels.v0.1.json",
+      "destination": "MiLAi/evals/dg17/fixtures/lme10-answer-bearing-labels.v0.1.json",
+      "sha256": "4a88cb030e67cce456b1dfe159fce177a5ace4b972f11af2a6674639c52dc876"
+    },
+    {
+      "source": "evals/dg17/measurement.py",
+      "destination": "MiLAi/evals/dg17/measurement.py",
+      "sha256": "51336f03b3c7a112d546cae1b7c7a8da395790ee7fb3c97d3bc32d8d538fee6e"
+    },
+    {
+      "source": "evals/dg17/product_verticals.py",
+      "destination": "MiLAi/evals/dg17/product_verticals.py",
+      "sha256": "8487471d37199e9b02f161ed11a514eb89a9fc517bf93e70fa12dd6e21be81fc"
+    },
+    {
+      "source": "evals/dg17/q0_multiseed.py",
+      "destination": "MiLAi/evals/dg17/q0_multiseed.py",
+      "sha256": "63e9ad16f28db3288b6bb8168febfc26447b30fb34e35b476d836848fac810e1"
+    },
+    {
+      "source": "evals/dg17/q1r_causality.py",
+      "destination": "MiLAi/evals/dg17/q1r_causality.py",
+      "sha256": "31369297e49d062647c0b9e3db731e9ff9d872723bb3aa9c8a1510b7ec290aff"
+    },
+    {
+      "source": "evals/dg17/q1r_context_archive.py",
+      "destination": "MiLAi/evals/dg17/q1r_context_archive.py",
+      "sha256": "d6019fe95ea00e54ccc7de9d09950a76065df13892c14ab02fbb14a3a234972c"
+    },
+    {
+      "source": "evals/dg17/q6_matched.py",
+      "destination": "MiLAi/evals/dg17/q6_matched.py",
+      "sha256": "ab3bc59b6c82f8b5af37da404f69bbca80d39a770b1b5a411b699fa62e41c278"
+    },
+    {
+      "source": "evals/dg17/q6_preflight.py",
+      "destination": "MiLAi/evals/dg17/q6_preflight.py",
+      "sha256": "59927806780da877b851930d2afe35e9bb6e7a4e956e3c82f3472330a36de388"
+    },
+    {
+      "source": "evals/dg17/q8_retrieval_ablation.py",
+      "destination": "MiLAi/evals/dg17/q8_retrieval_ablation.py",
+      "sha256": "62c01925d7cc01b389b98cddbd648ca7efded1153f387d2924e5ef5294256694"
+    },
+    {
+      "source": "evals/dg17/semantic_crosswalk.py",
+      "destination": "MiLAi/evals/dg17/semantic_crosswalk.py",
+      "sha256": "d705ebcd7f77bb1ee9fe931751fb942fcf76f039fe7de1de7c9e816f08eb532b"
+    },
+    {
+      "source": "evals/dg17/semantic_shadow.py",
+      "destination": "MiLAi/evals/dg17/semantic_shadow.py",
+      "sha256": "885c75da2c4c813ce98c5cde3251c07b005f48bc8b7f3a78d1de6ca889e4e8c0"
+    },
+    {
+      "source": "evals/dg18/__init__.py",
+      "destination": "MiLAi/evals/dg18/__init__.py",
+      "sha256": "3defe4c8d86a50049b56a0bca679044e7d519f5af35475056a75284a68a815ce"
+    },
+    {
+      "source": "evals/dg18/residual_shadow.py",
+      "destination": "MiLAi/evals/dg18/residual_shadow.py",
+      "sha256": "135b94370662bf48a57d159b29f1dfa635fdf9a31c53c18fc844f86278fa39fe"
+    },
+    {
+      "source": "evals/dg19/__init__.py",
+      "destination": "MiLAi/evals/dg19/__init__.py",
+      "sha256": "cba404985545b573ac1095de5125013587d6ba463548b6585d267bae9574cdfd"
+    },
+    {
+      "source": "evals/dg19/fixtures/synthetic-treatment-cases.v0.1.json",
+      "destination": "MiLAi/evals/dg19/fixtures/synthetic-treatment-cases.v0.1.json",
+      "sha256": "980f29ac4a806cfdedbe899344779f73a83a2f90fdce148406f666d10a413c50"
+    },
+    {
+      "source": "evals/dg19/fixtures/synthetic-treatment-scorer.v0.1.json",
+      "destination": "MiLAi/evals/dg19/fixtures/synthetic-treatment-scorer.v0.1.json",
+      "sha256": "dccb854f168702e2673a997f438340a4c1f38f764f46430b662a7474ed03a51a"
+    },
+    {
+      "source": "evals/dg19/synthetic_treatment_delivery.py",
+      "destination": "MiLAi/evals/dg19/synthetic_treatment_delivery.py",
+      "sha256": "fe5153b15d0c1d94527366b09ec3813ac3f2381b0af1e78a21db99aedaf78b5b"
+    },
+    {
+      "source": "evals/dg20/__init__.py",
+      "destination": "MiLAi/evals/dg20/__init__.py",
+      "sha256": "8702876510c8a8e0ddaa2e92fa9f520d601b6cf18d2ec45d0cce9ca1d989c055"
+    },
+    {
+      "source": "evals/dg20/deterministic_policy_eval.py",
+      "destination": "MiLAi/evals/dg20/deterministic_policy_eval.py",
+      "sha256": "dfb258e01601f5eaefd2170058e7bfde6e7ba1033ecf90641cc7a820e1ea9cbc"
+    },
+    {
+      "source": "evals/dg20/fresh_state_audit.py",
+      "destination": "MiLAi/evals/dg20/fresh_state_audit.py",
+      "sha256": "8d2c9d04b01a4bac6b538bfe46cc594ba90e9e3785b51a717613ac436959ee60"
+    },
+    {
+      "source": "evals/dg20/matched_q6_eval.py",
+      "destination": "MiLAi/evals/dg20/matched_q6_eval.py",
+      "sha256": "25d85417277942a85d6e88f0b91c429c781878f7219cd54076368527fffd9e49"
+    },
+    {
+      "source": "evals/dg20/official_channel_oracle.py",
+      "destination": "MiLAi/evals/dg20/official_channel_oracle.py",
+      "sha256": "8de32a7ba9f06671e96a3a61d0492934c589e7d07947d5cb7b3deade6aaddfef"
+    },
+    {
+      "source": "evals/dg20/product_faithful_eval.py",
+      "destination": "MiLAi/evals/dg20/product_faithful_eval.py",
+      "sha256": "1c6e22f3ebb366ebb118081fbee12661a7311823ab43728619d5e9fbba90b7b0"
+    },
+    {
+      "source": "evals/dg21/__init__.py",
+      "destination": "MiLAi/evals/dg21/__init__.py",
+      "sha256": "da06ecbdc8d9ecef114803e1ab24e329674abe12685ddcec6e88576504797f34"
+    },
+    {
+      "source": "evals/dg21/baseline_freeze.py",
+      "destination": "MiLAi/evals/dg21/baseline_freeze.py",
+      "sha256": "c698ad6cc9be36340571e88db287963ba7cd7010ce4709d9f2c8463a531552d1"
+    },
+    {
+      "source": "evals/dg21/matched_eval.py",
+      "destination": "MiLAi/evals/dg21/matched_eval.py",
+      "sha256": "079bb33b62ecd62ec125948a1c87147883f03e991c71c60d9f70612a47cad4e9"
+    },
+    {
+      "source": "evals/dg21/preference_expressivity.py",
+      "destination": "MiLAi/evals/dg21/preference_expressivity.py",
+      "sha256": "9fc098df193dad9e7a56c753849a83cc5bd3de5eb8b698c33c595d361f7b4cd3"
+    },
+    {
+      "source": "evals/dg21/synthetic_matrix.py",
+      "destination": "MiLAi/evals/dg21/synthetic_matrix.py",
+      "sha256": "811afc04aef74d31f5f568953ad76ea5f64cba9af2f70638ba443b2d542b5a68"
+    },
+    {
+      "source": "evals/dg21/targeted_acquisition.py",
+      "destination": "MiLAi/evals/dg21/targeted_acquisition.py",
+      "sha256": "aa4bb418119c31fb835420a636056bd8fa4198bb0288eca16e9f73a779e95be6"
+    },
+    {
+      "source": "evals/dg21/temporal_channel_oracle.py",
+      "destination": "MiLAi/evals/dg21/temporal_channel_oracle.py",
+      "sha256": "caaf43d9f88bb0195cc917616170ebb178922b6bb22145027b295657be08143c"
+    },
+    {
+      "source": "evals/dg21/type_directed_replay.py",
+      "destination": "MiLAi/evals/dg21/type_directed_replay.py",
+      "sha256": "3d0ea3846d43b07eee56321f6dc45a3e2a43101ea745f0515050b4f8dfa6efa3"
+    },
+    {
+      "source": "evals/dg22/__init__.py",
+      "destination": "MiLAi/evals/dg22/__init__.py",
+      "sha256": "43c39d8ee6de17d563189860def39ecd4585987841c74e473ef3bfa1ab3c06a6"
+    },
+    {
+      "source": "evals/dg22/accuracy_oracle.py",
+      "destination": "MiLAi/evals/dg22/accuracy_oracle.py",
+      "sha256": "e2a4dcb5cc97eaab254686cae30f18e4f8cb07476cbe1e85011a22bf80949ddf"
+    },
+    {
+      "source": "evals/dg22/acquisition_correctness.py",
+      "destination": "MiLAi/evals/dg22/acquisition_correctness.py",
+      "sha256": "15123a7a892ed51805682e0244d22294072a78a66c6bffa3333c87ebed19e07b"
+    },
+    {
+      "source": "evals/dg22/answer_correctness.py",
+      "destination": "MiLAi/evals/dg22/answer_correctness.py",
+      "sha256": "788968ab69976e0e1acb3382dae9813c66293749832024417939e68f466dad6f"
+    },
+    {
+      "source": "evals/dg22/baseline_freeze.py",
+      "destination": "MiLAi/evals/dg22/baseline_freeze.py",
+      "sha256": "bf6ae084aa44c84008c1fb9e287c39fac828984c9ee46b397e81c788cd645648"
+    },
+    {
+      "source": "evals/dg22/binding_correctness.py",
+      "destination": "MiLAi/evals/dg22/binding_correctness.py",
+      "sha256": "ab11f5f43b7cdec299531ee3968f854c94c8c60635e5ee3dc9b6a894fdd85238"
+    },
+    {
+      "source": "evals/dg22/mediator.py",
+      "destination": "MiLAi/evals/dg22/mediator.py",
+      "sha256": "76eab1fd55ce3595caf676327460f779c40f541f9c68fbe6259e77e2a3508fcb"
+    },
+    {
+      "source": "evals/dg22/query_correctness.py",
+      "destination": "MiLAi/evals/dg22/query_correctness.py",
+      "sha256": "a3a10e98da49b81c36b5d4508b5e928932601d0888d654280a1e016530b7ebe3"
+    },
+    {
+      "source": "evals/dg22/reader_conformance.py",
+      "destination": "MiLAi/evals/dg22/reader_conformance.py",
+      "sha256": "a8d251e85f294f330f5838580ad0a524d8c58e9133c11a45cfc688537315a1b9"
+    },
+    {
+      "source": "evals/dg22/temporal_correctness.py",
+      "destination": "MiLAi/evals/dg22/temporal_correctness.py",
+      "sha256": "5407a0c94600c98eb56d88fdb7d988ae6ed329718362d2eee6e8569883eb9a2f"
+    },
+    {
+      "source": "evals/dg23/__init__.py",
+      "destination": "MiLAi/evals/dg23/__init__.py",
+      "sha256": "50822e8d925bf2ee24d4fc91be59b822d321bec990dadd3d971a20304cf76305"
+    },
+    {
+      "source": "evals/dg23/baseline_freeze.py",
+      "destination": "MiLAi/evals/dg23/baseline_freeze.py",
+      "sha256": "4bbe330ea664d651b268396753eb67c0ba0f873a32028a9f9575284036d586f1"
+    },
+    {
+      "source": "evals/dg23/budget_causality.py",
+      "destination": "MiLAi/evals/dg23/budget_causality.py",
+      "sha256": "cf87b836958f6850fde208e22054d43484d1e63320b5bd9e8b17d7d7cbdfd1b6"
+    },
+    {
+      "source": "evals/dg23/context_compiler_contract.py",
+      "destination": "MiLAi/evals/dg23/context_compiler_contract.py",
+      "sha256": "b8ffc005b0702bda34218ab62171dbc29780416db539ed52b236b17d4e581b69"
+    },
+    {
+      "source": "evals/dg23/decision_separation.py",
+      "destination": "MiLAi/evals/dg23/decision_separation.py",
+      "sha256": "3237c92b08e8785049c186ed3457295d056c7cca0297d35b26fe52005b821326"
+    },
+    {
+      "source": "evals/dg23/matched_reader.py",
+      "destination": "MiLAi/evals/dg23/matched_reader.py",
+      "sha256": "28eb34c8608974b091031ea4a4e833259bced7cd1e6a624a039f761c36900573"
+    },
+    {
+      "source": "evals/dg23/opened_dev_context.py",
+      "destination": "MiLAi/evals/dg23/opened_dev_context.py",
+      "sha256": "ddf612bb183bfed33fa8cd7f621f80134c99184fed7c1901d6a72bf635e77437"
+    },
+    {
+      "source": "evals/dg23/reader_boundary.py",
+      "destination": "MiLAi/evals/dg23/reader_boundary.py",
+      "sha256": "9bcb373f5a407a57e2b344e80c7909253cb2f75887a9ef6643dd1dfb6a00da1e"
+    },
+    {
+      "source": "evals/dg23/reader_boundary_contract.py",
+      "destination": "MiLAi/evals/dg23/reader_boundary_contract.py",
+      "sha256": "66cfb4be2597ce0a5edb21b9252ee384087512b25a8785e148110af67969304c"
+    },
+    {
+      "source": "evals/dg23/reader_token_accounting.py",
+      "destination": "MiLAi/evals/dg23/reader_token_accounting.py",
+      "sha256": "381fb579031f350337ffa46d073c2d95b61e90dea51e58db1d86a5cb42e5d3c1"
+    },
+    {
+      "source": "evals/dg23/synthetic_matrix.py",
+      "destination": "MiLAi/evals/dg23/synthetic_matrix.py",
+      "sha256": "10be3963d4f406c982f8cf51ee56a9e4fa9d1af87963673326be7ead317caf95"
+    },
+    {
+      "source": "evals/dg24/__init__.py",
+      "destination": "MiLAi/evals/dg24/__init__.py",
+      "sha256": "cf4602c0348f44c13f36dafe55eb94f47035f0e343a9360e3584bf91a0ef0ec5"
+    },
+    {
+      "source": "evals/dg24/contracts.py",
+      "destination": "MiLAi/evals/dg24/contracts.py",
+      "sha256": "e2f06f515d088f0ec18f9811ee9fccedd4c1a7c6073d8d6af5da378574cbd9d9"
+    },
+    {
+      "source": "evals/dg24/freeze.py",
+      "destination": "MiLAi/evals/dg24/freeze.py",
+      "sha256": "57d31951612b7300a860aa3ce335a8676e302fadcec963905e355d960479b560"
+    },
+    {
+      "source": "evals/dg24/gold_registry.py",
+      "destination": "MiLAi/evals/dg24/gold_registry.py",
+      "sha256": "7def005f800e0f68294e972cda29f8dc0a8a8d4c6a299a54e3d33ba076776471"
+    },
+    {
+      "source": "evals/dg24/product.py",
+      "destination": "MiLAi/evals/dg24/product.py",
+      "sha256": "55937a13809173c6da5ce44f380f1ff9629c4a24ab313fcf1ffaa5c6bd9b3a48"
+    },
+    {
+      "source": "evals/dg24/proof_registry.py",
+      "destination": "MiLAi/evals/dg24/proof_registry.py",
+      "sha256": "8e4ca278c7e4ef6321879d054e94f00148103e97e3650590e0d3c993894cd714"
+    },
+    {
+      "source": "evals/dg24/scorer.py",
+      "destination": "MiLAi/evals/dg24/scorer.py",
+      "sha256": "3c51f057499c5e30777c6c8fc4977a9ccf6e35da2cd4e91e85743d3686bfac31"
+    },
+    {
+      "source": "evals/dg25/__init__.py",
+      "destination": "MiLAi/evals/dg25/__init__.py",
+      "sha256": "3b9523ceaab674578454ae35b1e5b8f1a81ecf7abf91804838dc5bb0863348bc"
+    },
+    {
+      "source": "evals/dg25/arm_sealing.py",
+      "destination": "MiLAi/evals/dg25/arm_sealing.py",
+      "sha256": "c49223eddf22bc77b6e051de881da62c3eb118db45fc57b023759771dc326734"
+    },
+    {
+      "source": "evals/dg25/artifacts.py",
+      "destination": "MiLAi/evals/dg25/artifacts.py",
+      "sha256": "291e6acdb36e92c93db7e7ae6f8463ba4177f52cc7747cf03a7eb7818baf3485"
+    },
+    {
+      "source": "evals/dg25/baseline_freeze.py",
+      "destination": "MiLAi/evals/dg25/baseline_freeze.py",
+      "sha256": "1b065b66bf923dd0e133ee163b5d718fd3c313fbe61cddcd0d8414398920d196"
+    },
+    {
+      "source": "evals/dg25/effect_scorer.py",
+      "destination": "MiLAi/evals/dg25/effect_scorer.py",
+      "sha256": "4b429b4fa1b20a2720acb03bd3bda56d21689744539581815a5a32c8d8d3dae4"
+    },
+    {
+      "source": "evals/dg25/plan_execution.py",
+      "destination": "MiLAi/evals/dg25/plan_execution.py",
+      "sha256": "fd77d472e1d9495c1095b3d15bf488d63e1543d6d761a7a9bf38a65e4c223471"
+    },
+    {
+      "source": "evals/dg25/review_gate.py",
+      "destination": "MiLAi/evals/dg25/review_gate.py",
+      "sha256": "7be1bd6b9d0141a5265bdbcd6b1c4d4483a1f299f269f65996f59f737c9fff32"
+    },
+    {
+      "source": "evals/dg25/routing_ablation.py",
+      "destination": "MiLAi/evals/dg25/routing_ablation.py",
+      "sha256": "89f89d0f9bfd8f4cb66534bb4aec9fd9b0485455d1139a536454dc38938ff8bc"
+    },
+    {
+      "source": "evals/dg25/s3_readiness.py",
+      "destination": "MiLAi/evals/dg25/s3_readiness.py",
+      "sha256": "edc9fcfd5159b7d164eab94464ca795af69b60e354a5a75b45c0506f6830cf91"
+    },
+    {
+      "source": "evals/dg25/s3a_generator.py",
+      "destination": "MiLAi/evals/dg25/s3a_generator.py",
+      "sha256": "59bbc30225df3fcea8d68aca02b5eebf6ea5a2c4b69dccba43b949699519bee9"
+    },
+    {
+      "source": "evals/dg25/s4a_generator.py",
+      "destination": "MiLAi/evals/dg25/s4a_generator.py",
+      "sha256": "6a23c82f936f5d2dcd814dc5b9f30279bbdcab3b0405ec6430537e1169665153"
+    },
+    {
+      "source": "evals/dg25/s4a_readiness.py",
+      "destination": "MiLAi/evals/dg25/s4a_readiness.py",
+      "sha256": "eebbc6f6ed55b0d4280cbcaaa8ac826fbf82114876777691a2453ce083f70d96"
+    },
+    {
+      "source": "evals/dg25/s4b_readiness.py",
+      "destination": "MiLAi/evals/dg25/s4b_readiness.py",
+      "sha256": "42a0b5df04ae37f15996f1cd95baec5c845136f3e750b960cf92c70b28536e0b"
+    },
+    {
+      "source": "evals/dg25/s4b_scoring.py",
+      "destination": "MiLAi/evals/dg25/s4b_scoring.py",
+      "sha256": "08a0a2ff3de960403e7a73168acb3f49c897177427d12ac0c19dd850abd6bb63"
+    },
+    {
+      "source": "evals/dg25/stop_gate.py",
+      "destination": "MiLAi/evals/dg25/stop_gate.py",
+      "sha256": "e3b8f7c6c258ffb863bc595770eabdd0004675a3543c4ad87764da851c7d22e4"
+    },
+    {
+      "source": "evals/dg25/synthetic_matrix.py",
+      "destination": "MiLAi/evals/dg25/synthetic_matrix.py",
+      "sha256": "a58b6c41c7d6a0435c3cc95bb3455188b5867f628b2a60f55a2b0e006f93e96c"
+    },
+    {
+      "source": "evals/dg26/__init__.py",
+      "destination": "MiLAi/evals/dg26/__init__.py",
+      "sha256": "033d5999083a50a5d519b603fa231830ee331258a0b4653ebde2fa74ff0c1ddc"
+    },
+    {
+      "source": "evals/dg26/stateview_reranking.py",
+      "destination": "MiLAi/evals/dg26/stateview_reranking.py",
+      "sha256": "7083b5db78dec3c1d18a06d9b442bc109af4c670661763b8265e707172222a15"
+    },
+    {
+      "source": "evals/dg27/__init__.py",
+      "destination": "MiLAi/evals/dg27/__init__.py",
+      "sha256": "d0a8f7772c4aa5c6ebf1e7a93c6b256a324cb090d23dfd7ddb783f3dac36f8b2"
+    },
+    {
+      "source": "evals/dg27/decision_boundary.py",
+      "destination": "MiLAi/evals/dg27/decision_boundary.py",
+      "sha256": "30a6b55c84863f57f5775da1775b06641f79f0ee11f84746df2090431182f371"
+    },
+    {
+      "source": "evals/dg27/decision_boundary_v03.py",
+      "destination": "MiLAi/evals/dg27/decision_boundary_v03.py",
+      "sha256": "9101654c8afc1316267a913b793e865a8b00e3a7b9882413b765705bcf2205a1"
+    },
+    {
+      "source": "evals/dg28/__init__.py",
+      "destination": "MiLAi/evals/dg28/__init__.py",
+      "sha256": "cb27fa97442ae8d28362a05a2b1ac1bcc780119a67a2d6f8682b707cc831cb51"
+    },
+    {
+      "source": "evals/dg28/acquisition_shadow.py",
+      "destination": "MiLAi/evals/dg28/acquisition_shadow.py",
+      "sha256": "e17f683574cf64b22d994490a426e44d98f078e2e7e39ad169f72862494fd690"
+    },
+    {
+      "source": "evals/dg28/formation_consumption.py",
+      "destination": "MiLAi/evals/dg28/formation_consumption.py",
+      "sha256": "89a2f07aafcaabc39ad99232bd6853097bf73dd96501f658b80aa295f29bb7d0"
+    },
+    {
+      "source": "evals/dg28/lite_effect.py",
+      "destination": "MiLAi/evals/dg28/lite_effect.py",
+      "sha256": "0e54b46273a4a01c0df50917a367b57ec66e8631675c8d997ea74704f23008ae"
+    },
+    {
+      "source": "evals/dg30/read_path_integration.py",
+      "destination": "MiLAi/evals/dg30/read_path_integration.py",
+      "sha256": "839501417d250355b2d740405ed1d9d18ab8f0a689b5aa38fe9bc8890710792f"
+    },
+    {
+      "source": "scripts/aggregate_dg15_sweeps.py",
+      "destination": "MiLAi/scripts/aggregate_dg15_sweeps.py",
+      "sha256": "d7d38e7bab3cd4c020e0b2be0231664cacab74f26c58ae3123a80f0d49e068b4"
+    },
+    {
+      "source": "scripts/build_dg10_acceptance_amendment_candidate410.py",
+      "destination": "MiLAi/scripts/build_dg10_acceptance_amendment_candidate410.py",
+      "sha256": "6a8f37cb820abffea99b5d48833194785bedfdda97ac68e8d79d567b0371309a"
+    },
+    {
+      "source": "scripts/build_dg10_acceptance_amendment_candidate411.py",
+      "destination": "MiLAi/scripts/build_dg10_acceptance_amendment_candidate411.py",
+      "sha256": "acdd1e322cc0b0d5b2ae99ff4bd95a4b5d8c154fc7faa9db0f431ff5f07a34de"
+    },
+    {
+      "source": "scripts/build_dg10_acceptance_amendment_candidate412.py",
+      "destination": "MiLAi/scripts/build_dg10_acceptance_amendment_candidate412.py",
+      "sha256": "a26a460cac873007b5dbe8b7ddec4cb37ec6a8a356adbf8feb10b5f10c9377f3"
+    },
+    {
+      "source": "scripts/build_dg10_acceptance_amendment_candidate413.py",
+      "destination": "MiLAi/scripts/build_dg10_acceptance_amendment_candidate413.py",
+      "sha256": "26d86b7d45873c8ffd07ef228ae007a9c9467205b14df38d17a5b47320b37eee"
+    },
+    {
+      "source": "scripts/build_dg10_acceptance_amendment_candidate414.py",
+      "destination": "MiLAi/scripts/build_dg10_acceptance_amendment_candidate414.py",
+      "sha256": "4d7d4c0ca822c8382a2e22e0c8ebd8ecb2ed32ad24e22fbe07686d9fee2f3693"
+    },
+    {
+      "source": "scripts/build_dg10_acceptance_amendment_candidate418.py",
+      "destination": "MiLAi/scripts/build_dg10_acceptance_amendment_candidate418.py",
+      "sha256": "e81e065c9bcf8dc534ba8e927169ec32ca87ef1a0ba5b1ac0aac4f018959404f"
+    },
+    {
+      "source": "scripts/build_dg10_acceptance_amendment_candidate49.py",
+      "destination": "MiLAi/scripts/build_dg10_acceptance_amendment_candidate49.py",
+      "sha256": "81762b7619a03928cbac6d25f2f34f32e3e802c7cf05aae23b4ee958f09448f4"
+    },
+    {
+      "source": "scripts/build_dg10_ai_audit_execution_failure_candidate411.py",
+      "destination": "MiLAi/scripts/build_dg10_ai_audit_execution_failure_candidate411.py",
+      "sha256": "753105c959d2e83b0b9824227eaab3db206948cccd1155a14112a578b1e646dd"
+    },
+    {
+      "source": "scripts/build_dg10_ai_audit_execution_failure_candidate412.py",
+      "destination": "MiLAi/scripts/build_dg10_ai_audit_execution_failure_candidate412.py",
+      "sha256": "3aea30e9bbd3f7a47a6f6b2a14adc7e4aee515f3429a6da0f0f20b56cb017aca"
+    },
+    {
+      "source": "scripts/build_dg10_ai_audit_execution_failure_candidate413.py",
+      "destination": "MiLAi/scripts/build_dg10_ai_audit_execution_failure_candidate413.py",
+      "sha256": "5c894263dabffbce9e031758564fb8aeb86a09632e44b6c995c33366310601b8"
+    },
+    {
+      "source": "scripts/build_dg10_ai_audit_revise_candidate417.py",
+      "destination": "MiLAi/scripts/build_dg10_ai_audit_revise_candidate417.py",
+      "sha256": "dcef27ed0f006daf2eea98296d112b486e932719c0df355e3e9df864b97f1fec"
+    },
+    {
+      "source": "scripts/build_dg10_ai_audit_revise_candidate418.py",
+      "destination": "MiLAi/scripts/build_dg10_ai_audit_revise_candidate418.py",
+      "sha256": "bce5c73f689ae8383c43995d6cc0609dd66ea0f08e2b424820cae7f4b6803faf"
+    },
+    {
+      "source": "scripts/build_dg10_ai_execution_provenance_candidate413.py",
+      "destination": "MiLAi/scripts/build_dg10_ai_execution_provenance_candidate413.py",
+      "sha256": "aec4d936eb4488b07835f6ff7d4fa590f9a1915113b3086403341e2cc95f0963"
+    },
+    {
+      "source": "scripts/build_dg10_ai_execution_provenance_candidate414.py",
+      "destination": "MiLAi/scripts/build_dg10_ai_execution_provenance_candidate414.py",
+      "sha256": "7d4c9aabc9fb9c4dccedba1d24215787fb5ee523b3837ff608607c72be32eb08"
+    },
+    {
+      "source": "scripts/build_dg10_ai_execution_provenance_candidate418.py",
+      "destination": "MiLAi/scripts/build_dg10_ai_execution_provenance_candidate418.py",
+      "sha256": "4aa1157c2441be727a6999f9a5baa91de0f2340e8e4eb618417b6188de8fb4ca"
+    },
+    {
+      "source": "scripts/build_dg10_benchmark_worker_closure.py",
+      "destination": "MiLAi/scripts/build_dg10_benchmark_worker_closure.py",
+      "sha256": "28d9da563b75daedfbb75aa7bdb35e8a4cafd5f44a8939ad015cc72e769585f4"
+    },
+    {
+      "source": "scripts/build_dg10_bfcl_case_manifest.py",
+      "destination": "MiLAi/scripts/build_dg10_bfcl_case_manifest.py",
+      "sha256": "24cfee2af8c9a214780e151bf9c89f0abe0bd1ceb293761c11ef25d86d8af264"
+    },
+    {
+      "source": "scripts/build_dg10_bfcl_execution_identity.py",
+      "destination": "MiLAi/scripts/build_dg10_bfcl_execution_identity.py",
+      "sha256": "c07cac4e680583d8f46dec424ec993d11dac62fcfedca02b05041950ae010bd1"
+    },
+    {
+      "source": "scripts/build_dg10_bfcl_worker_closure.py",
+      "destination": "MiLAi/scripts/build_dg10_bfcl_worker_closure.py",
+      "sha256": "45342e6cf8589dfe5c8ae3959ae1f956504157c3355e2f25310d24c1d33cb5ce"
+    },
+    {
+      "source": "scripts/build_dg10_bootstrap_review_bundle.py",
+      "destination": "MiLAi/scripts/build_dg10_bootstrap_review_bundle.py",
+      "sha256": "b192ed24f5accefc85cba4dcccf4b889396f89237784be9b34aedab3e68b6835"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_ai_review_bundle.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_ai_review_bundle.py",
+      "sha256": "3fd7baa4bbb597f8f438d9938d967190b6c92773697553f50b56e24d9414698b"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register.py",
+      "sha256": "e674d3ad4b423787397facdae72dfe428842764a7a03003d72c22984a2c881cd"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register_candidate410.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register_candidate410.py",
+      "sha256": "4bec19eacaf5e20ecd420c31f49d859b8d38253e5f6d18725dca92d4f7f2134c"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register_candidate417.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register_candidate417.py",
+      "sha256": "f6768a8b0e77610de83506c6e4890bbb7f8aa74cf35a1a4320fa9b578d0f67a5"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register_candidate418.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register_candidate418.py",
+      "sha256": "a30c804052d70eb340afef46ef4f7c8188c1c76f994019a9143b42fe9c3851cb"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register_candidate44.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register_candidate44.py",
+      "sha256": "6094b62be5478acae555c20400b66dde1b65632263be5853f68111cdb5a8e271"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register_candidate45.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register_candidate45.py",
+      "sha256": "4bbde568eb09739513dd92b48c0419ca26bcb83fbe3825d9e1247c438ab819a1"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register_candidate46.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register_candidate46.py",
+      "sha256": "1ff09488cc493d3ec4a1afebf7ec00c6126e836c58b6ad76e649ae8cf24ba113"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register_candidate47.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register_candidate47.py",
+      "sha256": "eec6431b57b508405bec3aacc9348b1a7f6dcbac43523a4aec406a9b7f6f438a"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register_candidate48.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register_candidate48.py",
+      "sha256": "12b9cbc5345da55125c857036e707d9862380090b9106c5f59534e02c16dc092"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_finding_register_candidate49.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_finding_register_candidate49.py",
+      "sha256": "88bdc07168d936f72ab8ab6c0d3546439a6d6f02098528c51958c963ab45702b"
+    },
+    {
+      "source": "scripts/build_dg10_candidate4_identities.py",
+      "destination": "MiLAi/scripts/build_dg10_candidate4_identities.py",
+      "sha256": "b9b074bc7aec88a46886b35a5d56884e193c379586657eec68c8fbf707769288"
+    },
+    {
+      "source": "scripts/build_dg10_engineering_status.py",
+      "destination": "MiLAi/scripts/build_dg10_engineering_status.py",
+      "sha256": "6cdae67126befdf4ee49276973189855d782d203d0e857af375eb3ed27ead37e"
+    },
+    {
+      "source": "scripts/build_dg10_failed_ai_audit_receipt.py",
+      "destination": "MiLAi/scripts/build_dg10_failed_ai_audit_receipt.py",
+      "sha256": "83a10be11614d94f069857d35e6ae6f85e2bbf844cded376ca249511a78ac541"
+    },
+    {
+      "source": "scripts/build_dg10_failed_ai_audit_receipt_candidate410.py",
+      "destination": "MiLAi/scripts/build_dg10_failed_ai_audit_receipt_candidate410.py",
+      "sha256": "24836700b4b0c6c1c581f73d2a98f29372e84ff15b2802f98abdc985269c1c67"
+    },
+    {
+      "source": "scripts/build_dg10_failed_ai_audit_receipt_candidate43.py",
+      "destination": "MiLAi/scripts/build_dg10_failed_ai_audit_receipt_candidate43.py",
+      "sha256": "633fa74bea5a5c6a75ed651939100f30bf21468b6610beb6270754219bcda426"
+    },
+    {
+      "source": "scripts/build_dg10_failed_ai_audit_receipt_candidate44.py",
+      "destination": "MiLAi/scripts/build_dg10_failed_ai_audit_receipt_candidate44.py",
+      "sha256": "c84682930e0e3a634853283ea873b87f03d271ce4ca02dac3adbd7f36370897c"
+    },
+    {
+      "source": "scripts/build_dg10_failed_ai_audit_receipt_candidate45.py",
+      "destination": "MiLAi/scripts/build_dg10_failed_ai_audit_receipt_candidate45.py",
+      "sha256": "4330c3150046c95a25ac60c972400533a50798858197192c5ea34aa2bb4a40f0"
+    },
+    {
+      "source": "scripts/build_dg10_failed_ai_audit_receipt_candidate46.py",
+      "destination": "MiLAi/scripts/build_dg10_failed_ai_audit_receipt_candidate46.py",
+      "sha256": "c9cbdc9f6b3373ce276aca2d0bd685c0c8517fa58bdcc413a02eb6a1aeb5eb63"
+    },
+    {
+      "source": "scripts/build_dg10_failed_ai_audit_receipt_candidate47.py",
+      "destination": "MiLAi/scripts/build_dg10_failed_ai_audit_receipt_candidate47.py",
+      "sha256": "09021a0bbdd79972d9ab9f843b42a12b35b25c3f1f5152354c8c15e0cbd9c954"
+    },
+    {
+      "source": "scripts/build_dg10_failed_ai_audit_receipt_candidate48.py",
+      "destination": "MiLAi/scripts/build_dg10_failed_ai_audit_receipt_candidate48.py",
+      "sha256": "92d8f48bddae176abc060c0aedcb92d54690aff9f9ff06b0eaac22195a3ff4ec"
+    },
+    {
+      "source": "scripts/build_dg10_failed_ai_audit_receipt_candidate49.py",
+      "destination": "MiLAi/scripts/build_dg10_failed_ai_audit_receipt_candidate49.py",
+      "sha256": "9b4c4efbddd087e97acb3bf75d2425b77a02f8285c32c5bfe5066c775768b008"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate410.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate410.py",
+      "sha256": "f748ffb4b3639f0e8471fa173400beae03a7e517e143d3779cf7319356816eec"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate411.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate411.py",
+      "sha256": "f298ded5cc500dbcedbad4e8ebfd3054c6eddab08524640d2a6b982c91ba77b0"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate412.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate412.py",
+      "sha256": "aa603c856d1f59798879ee4a484957bf91eabd959ba185f1e1423edf23362ef2"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate413.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate413.py",
+      "sha256": "15cfdacb4a1c8fafbf2202f51a76ff327d77ddd5de948e843da88a774a3edc75"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate414.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate414.py",
+      "sha256": "dc541800b3d2e3a7c9f71f0b78b3b0f9e4df2ff9f314af65ef3639294ecaff98"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate419.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate419.py",
+      "sha256": "5b19944faafcea27d094be59e5d9414eacfe67799a822291bde837984fc8fcac"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate420.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate420.py",
+      "sha256": "4c342967b2a015a87bc6858a3ee220e25d05868d600dbae66dfdfee04581a70d"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate421.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate421.py",
+      "sha256": "05e050b93c72354e5ee9e2dca6ec8ffcea6a1d73cb079ce330cb603612bb7f98"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate44.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate44.py",
+      "sha256": "bdc4e17171056e215ce83fe31a80ad38c29911db13e7e931ff2faa93b6c41a02"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate46.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate46.py",
+      "sha256": "18b5a75168b5ff0f1f92d109817bb0822287579983bfedbbabc0523002ef6f73"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate47.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate47.py",
+      "sha256": "05b3ac8b15d215bd2932edc4647388bcc3478a2ee49b46b7626f483804872468"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate48.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate48.py",
+      "sha256": "3a6aeb23bbb04604385210b0ebfdf70297d52613bfb1f04b965beaa8fcc20b5e"
+    },
+    {
+      "source": "scripts/build_dg10_identity_supersession_candidate49.py",
+      "destination": "MiLAi/scripts/build_dg10_identity_supersession_candidate49.py",
+      "sha256": "a978472dc11738649302343ff8ba4c1ca9e6ed71a5b9cd6198c58c936d25d644"
+    },
+    {
+      "source": "scripts/build_dg10_inventory.py",
+      "destination": "MiLAi/scripts/build_dg10_inventory.py",
+      "sha256": "b1b599dbc21a3b6a82f527a212a99b70543cb5e1fbec644215f7c31872e5a9d6"
+    },
+    {
+      "source": "scripts/build_dg10_model_probe.py",
+      "destination": "MiLAi/scripts/build_dg10_model_probe.py",
+      "sha256": "1e15293f8eb4a063595e51906873c4b83a6990899df3b470f2cb57a7bb413d2f"
+    },
+    {
+      "source": "scripts/build_dg10_musl_wheelhouse.py",
+      "destination": "MiLAi/scripts/build_dg10_musl_wheelhouse.py",
+      "sha256": "de3a30b3ec10c9c9994a518d74059543bbcf5deeedfa476c1551cd6fc52e450e"
+    },
+    {
+      "source": "scripts/build_dg10_parent_ai_finding_register.py",
+      "destination": "MiLAi/scripts/build_dg10_parent_ai_finding_register.py",
+      "sha256": "2a35804963628ed118f676eafe849675851da766ea0f8219e96f3e4824b9aa5b"
+    },
+    {
+      "source": "scripts/build_dg10_r0_archive_replay.py",
+      "destination": "MiLAi/scripts/build_dg10_r0_archive_replay.py",
+      "sha256": "42a22fcd34ae3587eb1a78565a3db72007f1c21840a04d0571716c68c41e888d"
+    },
+    {
+      "source": "scripts/build_dg10_r1_validation_supersession_candidate417.py",
+      "destination": "MiLAi/scripts/build_dg10_r1_validation_supersession_candidate417.py",
+      "sha256": "d76f2ee02d4168f6c24ff8a8285c462cd05af6fa26d986e88adfec0cbe4edadd"
+    },
+    {
+      "source": "scripts/build_dg10_review_bundle.py",
+      "destination": "MiLAi/scripts/build_dg10_review_bundle.py",
+      "sha256": "430797f480421f6061752f74ee2a28d65cbdaa3269092283858058ea8ece6518"
+    },
+    {
+      "source": "scripts/build_dg10_tier2_blind_package.py",
+      "destination": "MiLAi/scripts/build_dg10_tier2_blind_package.py",
+      "sha256": "4c6986482d356b483787b43abeab562035423f95a4d441dda7f6399b0c6f0c97"
+    },
+    {
+      "source": "scripts/build_dg16_release_review.py",
+      "destination": "MiLAi/scripts/build_dg16_release_review.py",
+      "sha256": "d9c37c4b561f2c80ba3fa52d68b9aa8ec003ac3b5bd3d417f19ad92afeee0c61"
+    },
+    {
+      "source": "scripts/build_dg18_provider_rca_calibration.py",
+      "destination": "MiLAi/scripts/build_dg18_provider_rca_calibration.py",
+      "sha256": "814b1bb7c687a223eaf719e8fd54b92fe5599ff1169fd73d8f9476cdb9416f5e"
+    },
+    {
+      "source": "scripts/build_dg18_r0_baseline.py",
+      "destination": "MiLAi/scripts/build_dg18_r0_baseline.py",
+      "sha256": "48011688e582e10488244646ee5e85db0beb8f746d9ff09c29d4f9533d67b152"
+    },
+    {
+      "source": "scripts/build_dg20_terminal_receipt.py",
+      "destination": "MiLAi/scripts/build_dg20_terminal_receipt.py",
+      "sha256": "833ed51502c665bed0c2ccd3d3c3501c34d64df4c97b3b42f8f8059fa67f9b62"
+    },
+    {
+      "source": "scripts/build_dg21_s9_terminal.py",
+      "destination": "MiLAi/scripts/build_dg21_s9_terminal.py",
+      "sha256": "c2cdb0ce4627c653abfd7033817ce51dd55779f449a2139a7b66cbd8d9def91c"
+    },
+    {
+      "source": "scripts/build_dg22_s10_terminal.py",
+      "destination": "MiLAi/scripts/build_dg22_s10_terminal.py",
+      "sha256": "f3f6258db1c137e583067d4f62df2cf8fcd2750dbfb3f2591f30d58a161e4495"
+    },
+    {
+      "source": "scripts/build_dg23_s9_terminal.py",
+      "destination": "MiLAi/scripts/build_dg23_s9_terminal.py",
+      "sha256": "ca805b9578028975afd6422fd01583df6ea1514609b12c6683982d8f92755114"
+    },
+    {
+      "source": "scripts/build_dg24_s8_terminal.py",
+      "destination": "MiLAi/scripts/build_dg24_s8_terminal.py",
+      "sha256": "a7ec2178588b105dedbccddbe93c9c35e64f2c4252e99773b297aa39c6c61dd8"
+    },
+    {
+      "source": "scripts/build_dg25_s10_terminal.py",
+      "destination": "MiLAi/scripts/build_dg25_s10_terminal.py",
+      "sha256": "8827051205be738f4999aee346d1bd39c9f293ae9ee46754a296f94b43e862ab"
+    },
+    {
+      "source": "scripts/complete_dg11_retrieval.py",
+      "destination": "MiLAi/scripts/complete_dg11_retrieval.py",
+      "sha256": "8d1e699525cdc9e8e4c2fc4330c66edccdde34156f08636ea03236a808bdc74d"
+    },
+    {
+      "source": "scripts/dg10_agent_terminal.py",
+      "destination": "MiLAi/scripts/dg10_agent_terminal.py",
+      "sha256": "228e1a90ce70fc8d8afd9a7867170e8e77721063b693597fd2956e4a55d94225"
+    },
+    {
+      "source": "scripts/dg10_ai_provenance.py",
+      "destination": "MiLAi/scripts/dg10_ai_provenance.py",
+      "sha256": "95b705e16e34c1a879ed71ae4e05a9cd1373564ddc4849335a79e21a179c925d"
+    },
+    {
+      "source": "scripts/dg10_authorization.py",
+      "destination": "MiLAi/scripts/dg10_authorization.py",
+      "sha256": "e7e720d3abdd12ff2f861d9167c4dfddf36d2df14cce459dfc1af373c0a4db9a"
+    },
+    {
+      "source": "scripts/dg10_bfcl_loop.py",
+      "destination": "MiLAi/scripts/dg10_bfcl_loop.py",
+      "sha256": "fb412ff573b84990946545b19a0eae942be5c21bd023a60c350823edf2f343cc"
+    },
+    {
+      "source": "scripts/dg10_bfcl_multiturn_safety.py",
+      "destination": "MiLAi/scripts/dg10_bfcl_multiturn_safety.py",
+      "sha256": "914bab84fc9cbca1ea9259adba8335fd1d0cc64d792a739c276a9e419c367b88"
+    },
+    {
+      "source": "scripts/dg10_bfcl_scoring.py",
+      "destination": "MiLAi/scripts/dg10_bfcl_scoring.py",
+      "sha256": "616254b2669b1be42a3c357fd9a8018f730e5543149c1514a47e48445b4e87fc"
+    },
+    {
+      "source": "scripts/dg10_bootstrap_executor.py",
+      "destination": "MiLAi/scripts/dg10_bootstrap_executor.py",
+      "sha256": "8cd1560b86b0d0e85b29a2b5eb0d45217a3d04d49988c8835f129d4997cde207"
+    },
+    {
+      "source": "scripts/dg10_full_test_executor.py",
+      "destination": "MiLAi/scripts/dg10_full_test_executor.py",
+      "sha256": "b856c120602e712a7cfe6f88da2d3e92fd9fd071aa19be4b2f6ff5c295989328"
+    },
+    {
+      "source": "scripts/dg10_independent_gates.py",
+      "destination": "MiLAi/scripts/dg10_independent_gates.py",
+      "sha256": "fb94928075758dfd26d31dec90a4c9d1684cc9a32b1904df0f5d97b87e244967"
+    },
+    {
+      "source": "scripts/dg10_memory_fixture.py",
+      "destination": "MiLAi/scripts/dg10_memory_fixture.py",
+      "sha256": "b219b94d521866ffa6b38d1324a03bfd7e0c0a08fdfad4917739a40233e52f9a"
+    },
+    {
+      "source": "scripts/dg10_memory_quality.py",
+      "destination": "MiLAi/scripts/dg10_memory_quality.py",
+      "sha256": "7f23d40bda8933ad224c7d77b35981cc98567c9b94ed8d574d02953f92fc9f07"
+    },
+    {
+      "source": "scripts/dg10_post_r3_provider_gate.py",
+      "destination": "MiLAi/scripts/dg10_post_r3_provider_gate.py",
+      "sha256": "8e4271b97927d96469b485754a6c1f5a46a1fdc5460f8f822a2470126db33b11"
+    },
+    {
+      "source": "scripts/dg10_prefetch.py",
+      "destination": "MiLAi/scripts/dg10_prefetch.py",
+      "sha256": "bc7d37d9e63c3eff7b76c5e08442fd44257bd9077fd223e9c178a11b569b47b2"
+    },
+    {
+      "source": "scripts/dg10_quality_stats.py",
+      "destination": "MiLAi/scripts/dg10_quality_stats.py",
+      "sha256": "6a3c8456761e545402be0faa0305acb3ecb89371228fc1dcbeb75f8bf9a93478"
+    },
+    {
+      "source": "scripts/dg10_remediation.py",
+      "destination": "MiLAi/scripts/dg10_remediation.py",
+      "sha256": "8835ef777c67dafed49aea1b120691674d43d105cedf2d7cbc607c303e59d2d3"
+    },
+    {
+      "source": "scripts/dg10_runtime_fixture.py",
+      "destination": "MiLAi/scripts/dg10_runtime_fixture.py",
+      "sha256": "4c86161402060c1136af5597eb05788ebe7cb83c8e678534f17d20c2f288a9b3"
+    },
+    {
+      "source": "scripts/dg10_serving_metrics.py",
+      "destination": "MiLAi/scripts/dg10_serving_metrics.py",
+      "sha256": "d575a1e5b81329a97cf724717735ca0650067e003b86bf43c1eef6f57aa0a495"
+    },
+    {
+      "source": "scripts/dg10_stage_ledger.py",
+      "destination": "MiLAi/scripts/dg10_stage_ledger.py",
+      "sha256": "ba34327bc727b049916de112c46cb82e862ffc55fd43e3aab55fc03025a8155d"
+    },
+    {
+      "source": "scripts/dg10_t2_provider_adapter.py",
+      "destination": "MiLAi/scripts/dg10_t2_provider_adapter.py",
+      "sha256": "74a4cb08cad94c8a2963470fea8672323ca322388f98f45e4dea80e96e53d831"
+    },
+    {
+      "source": "scripts/dg10_workflow.py",
+      "destination": "MiLAi/scripts/dg10_workflow.py",
+      "sha256": "0e390485480aff988861187b4bbb8352097a575fc9ba1f4383716e44b5e9a244"
+    },
+    {
+      "source": "scripts/dg10_workflow_status.json",
+      "destination": "MiLAi/scripts/dg10_workflow_status.json",
+      "sha256": "c347ebfd1101b58716ab3f294a62b7be86c11c21eec35e95edda6d7d9c3fe5be"
+    },
+    {
+      "source": "scripts/dg11_state.py",
+      "destination": "MiLAi/scripts/dg11_state.py",
+      "sha256": "7854f762f8101a3d8b70b3afacfce9a2e2bbd5048b48337b9da85b4c9aac0e4c"
+    },
+    {
+      "source": "scripts/dg13u_u1_aggregate.py",
+      "destination": "MiLAi/scripts/dg13u_u1_aggregate.py",
+      "sha256": "761ebfbdc203829374c11ceb16757bfa207a20f457c6def0300a85e63cb811cc"
+    },
+    {
+      "source": "scripts/dg13u_u1_bundle.py",
+      "destination": "MiLAi/scripts/dg13u_u1_bundle.py",
+      "sha256": "45611143b7122427ea72dcfc099d25d0b7a854aff3832fc1e8c3a933e1608525"
+    },
+    {
+      "source": "scripts/dg13u_u1_cache_governance_scenarios.py",
+      "destination": "MiLAi/scripts/dg13u_u1_cache_governance_scenarios.py",
+      "sha256": "f4f1d2875d216fc1413d950c602aa0a67eaff1bad9443803e469b111459fb7ba"
+    },
+    {
+      "source": "scripts/dg13u_u1_cleanup.py",
+      "destination": "MiLAi/scripts/dg13u_u1_cleanup.py",
+      "sha256": "c851f6e375848b1470ba865afc70910c4d7e5dff184c439e7da2609c5dc62b33"
+    },
+    {
+      "source": "scripts/dg13u_u1_evidence_artifacts.py",
+      "destination": "MiLAi/scripts/dg13u_u1_evidence_artifacts.py",
+      "sha256": "805c4bfb4d7e359e0eb3a5753127f872f99c36e9ddb5654400c62e392146cf71"
+    },
+    {
+      "source": "scripts/dg13u_u1_fault_execution.py",
+      "destination": "MiLAi/scripts/dg13u_u1_fault_execution.py",
+      "sha256": "9f182a19956434cd4d911cc078142dc1cb06684dd44bedd9316c2fc20c017a36"
+    },
+    {
+      "source": "scripts/dg13u_u1_fault_scenarios.py",
+      "destination": "MiLAi/scripts/dg13u_u1_fault_scenarios.py",
+      "sha256": "bf9b26588011502900e712cae2b0a39e5487eeaa49b7c794a8cc5426d194cc3a"
+    },
+    {
+      "source": "scripts/dg13u_u1_fixture.py",
+      "destination": "MiLAi/scripts/dg13u_u1_fixture.py",
+      "sha256": "ebc541079b4e012bcb50b497bdfe2614b56fa77e811ddf56f0051d966435814c"
+    },
+    {
+      "source": "scripts/dg13u_u1_headers_probe.py",
+      "destination": "MiLAi/scripts/dg13u_u1_headers_probe.py",
+      "sha256": "536d23e0b712bb5eda8604ff9d21d1df848afb645baa40ef0810fc638e861b3f"
+    },
+    {
+      "source": "scripts/dg13u_u1_interaction_scenarios.py",
+      "destination": "MiLAi/scripts/dg13u_u1_interaction_scenarios.py",
+      "sha256": "50c1949e889cf6a61c6f582ac1b67fd89971f6fb667856299ea8728f8d2263b8"
+    },
+    {
+      "source": "scripts/dg13u_u1_lifecycle_scenarios.py",
+      "destination": "MiLAi/scripts/dg13u_u1_lifecycle_scenarios.py",
+      "sha256": "2c52643c3354b1490723d850eb65a0e71b1e0d2867ac4088317f2c601ea9f1d3"
+    },
+    {
+      "source": "scripts/dg13u_u1_matrix.py",
+      "destination": "MiLAi/scripts/dg13u_u1_matrix.py",
+      "sha256": "8b0566dd130f8258ad31ab5154ad8848df5f152eced7bf8f620e867e6823848b"
+    },
+    {
+      "source": "scripts/dg13u_u1_mcp_child_fault.py",
+      "destination": "MiLAi/scripts/dg13u_u1_mcp_child_fault.py",
+      "sha256": "0d0b1a1522577e13de521ee985641de9f6863b10381ac271c3994b79d50bb9a6"
+    },
+    {
+      "source": "scripts/dg13u_u1_mcp_fault.py",
+      "destination": "MiLAi/scripts/dg13u_u1_mcp_fault.py",
+      "sha256": "03fffd0acae9210e08de8bec062df4ab061578f706d38dc3fe9ce604e3518f76"
+    },
+    {
+      "source": "scripts/dg13u_u1_openworker.py",
+      "destination": "MiLAi/scripts/dg13u_u1_openworker.py",
+      "sha256": "e4791eb25a7c5a8566751aaa9512e44bc94afeedc816f49bb14ac2fadedead71"
+    },
+    {
+      "source": "scripts/dg13u_u1_provider_fault.py",
+      "destination": "MiLAi/scripts/dg13u_u1_provider_fault.py",
+      "sha256": "124eee5b07b8746f878ce9923682ceb670b52a90301849941fba43aecc3c404e"
+    },
+    {
+      "source": "scripts/dg13u_u1_resource_registry.py",
+      "destination": "MiLAi/scripts/dg13u_u1_resource_registry.py",
+      "sha256": "593bed22b20f083dd43f28e1d81122fcfdaff4356d42f98d0589f2c6a4327297"
+    },
+    {
+      "source": "scripts/dg13u_u1_review.py",
+      "destination": "MiLAi/scripts/dg13u_u1_review.py",
+      "sha256": "5b297e995a87240b0bb9161a031aa34170bd0db97c10d954c77a4b9ca8b95bad"
+    },
+    {
+      "source": "scripts/dg13u_u1_runtime_fault.py",
+      "destination": "MiLAi/scripts/dg13u_u1_runtime_fault.py",
+      "sha256": "d5a337efca6e06906635cd6f0c8ff90cc04d5cd75ad3062f0f0e45d2b4fc5c36"
+    },
+    {
+      "source": "scripts/dg13u_u1_runtime_writer.py",
+      "destination": "MiLAi/scripts/dg13u_u1_runtime_writer.py",
+      "sha256": "15781eaaffd927488a59f967c2ed81255f8811124f53e45befa82e7a038cc7b6"
+    },
+    {
+      "source": "scripts/dg13u_u1_task_scenarios.py",
+      "destination": "MiLAi/scripts/dg13u_u1_task_scenarios.py",
+      "sha256": "c6c8cc1aec4b1a486f5cd067ed4ee1ab08be965763374cc42619fe9464218b2c"
+    },
+    {
+      "source": "scripts/dg13u_u1_test_gate.py",
+      "destination": "MiLAi/scripts/dg13u_u1_test_gate.py",
+      "sha256": "e2b6d9a833894c05036de80cd7b263cfcc8b65e2450a4b98658ef6100e598c38"
+    },
+    {
+      "source": "scripts/freeze_dg11_holdout.py",
+      "destination": "MiLAi/scripts/freeze_dg11_holdout.py",
+      "sha256": "3e1782412974efb187f380b20d9a78fd4ead05b49441ac2638ca94cf18843edf"
+    },
+    {
+      "source": "scripts/freeze_dg11_recovery.py",
+      "destination": "MiLAi/scripts/freeze_dg11_recovery.py",
+      "sha256": "8e84c4cece26ce8264b3687a58f59346cf5a098c1ab4196cc406089142c307db"
+    },
+    {
+      "source": "scripts/freeze_dg11_v2.py",
+      "destination": "MiLAi/scripts/freeze_dg11_v2.py",
+      "sha256": "7dd2147faceec6907512ba5ba8c111f5f92abe1e865ec692315c1816d89a23b5"
+    },
+    {
+      "source": "scripts/import_dg10_ai_test_access.py",
+      "destination": "MiLAi/scripts/import_dg10_ai_test_access.py",
+      "sha256": "b9fe0e278fc543e04f3a6eda4f5718f41809f6466b158e0f3dec37a004b81d17"
+    },
+    {
+      "source": "scripts/import_dg10_bootstrap_review.py",
+      "destination": "MiLAi/scripts/import_dg10_bootstrap_review.py",
+      "sha256": "72d2b2937062d6bdde777c70f158fad73bb96a5e9e8bb77900b230c48b4d4ac9"
+    },
+    {
+      "source": "scripts/import_dg10_candidate4_ai_audits.py",
+      "destination": "MiLAi/scripts/import_dg10_candidate4_ai_audits.py",
+      "sha256": "4aac868fae28f9e6b7f91c11ca1c719d096e20fe65efc1c3d5963828c7da5690"
+    },
+    {
+      "source": "scripts/import_dg10_r3_ai_review.py",
+      "destination": "MiLAi/scripts/import_dg10_r3_ai_review.py",
+      "sha256": "f83977f1d8d7e79bb9f9d02ee7088d9789b4abeb2e7b1d4c5e41477c6e68a106"
+    },
+    {
+      "source": "scripts/import_dg10_sol_review.py",
+      "destination": "MiLAi/scripts/import_dg10_sol_review.py",
+      "sha256": "ab331ef3c32146da6f22f041773aa80ad9d2071c73cb3deb842fdd6ac37c4d47"
+    },
+    {
+      "source": "scripts/package_dg10_results.py",
+      "destination": "MiLAi/scripts/package_dg10_results.py",
+      "sha256": "14d9c8558c99df0da33cdc1deaaade257bcfa910c1fe42b4dfab9d7b009b95ee"
+    },
+    {
+      "source": "scripts/probe_dg13u_openworker_headers.py",
+      "destination": "MiLAi/scripts/probe_dg13u_openworker_headers.py",
+      "sha256": "7efb3a195219f7033dcc6a59caae5a5d1d6388ef379b20dcad4b9c5fb9e0ab7d"
+    },
+    {
+      "source": "scripts/project_dg20_stage_artifacts.py",
+      "destination": "MiLAi/scripts/project_dg20_stage_artifacts.py",
+      "sha256": "8abc3a8448edcb0c6314e741c03b7d6a55c764cc9e17651897afc6db05d209c9"
+    },
+    {
+      "source": "scripts/provision_dg10_ai_execution_authority.py",
+      "destination": "MiLAi/scripts/provision_dg10_ai_execution_authority.py",
+      "sha256": "4ffaa99cd311b4dcc7114865584848e530bdcc9fadfca02078c28e8de3ff13d8"
+    },
+    {
+      "source": "scripts/rebuild_dg17_a6_evidence_dense.py",
+      "destination": "MiLAi/scripts/rebuild_dg17_a6_evidence_dense.py",
+      "sha256": "9a5a4d08ba0bf795bf6af5f0dae16089cb787e7beeba9170526cd6308d018153"
+    },
+    {
+      "source": "scripts/record_dg27_protocol_failure.py",
+      "destination": "MiLAi/scripts/record_dg27_protocol_failure.py",
+      "sha256": "8065540fc3354ef81b310932527293df90494834b49f44cac2dab65930cae2a6"
+    },
+    {
+      "source": "scripts/rescore_dg16_lme10.py",
+      "destination": "MiLAi/scripts/rescore_dg16_lme10.py",
+      "sha256": "0ff15387c0147d0bdfde3993bca3095078bf7fefbc8254971289a25481e124e5"
+    },
+    {
+      "source": "scripts/rescore_dg17_a6_dense_productization.py",
+      "destination": "MiLAi/scripts/rescore_dg17_a6_dense_productization.py",
+      "sha256": "85c0005b1cab1e0e4326469c261e261e03318d1caeb3c45ebeeb11b01a67af7b"
+    },
+    {
+      "source": "scripts/run_dg10_benchmark_adapter_contract.py",
+      "destination": "MiLAi/scripts/run_dg10_benchmark_adapter_contract.py",
+      "sha256": "6051e0df254fff8a160772d6402d890046d9e72c23ac6f078e0d068fa9d6ed2d"
+    },
+    {
+      "source": "scripts/run_dg10_benchmark_contract.py",
+      "destination": "MiLAi/scripts/run_dg10_benchmark_contract.py",
+      "sha256": "7d2b7172b86f8bea16ca237c0faa27a7abaeb52ec39d4440352bccc4e4470c81"
+    },
+    {
+      "source": "scripts/run_dg10_benchmark_dev_smoke.py",
+      "destination": "MiLAi/scripts/run_dg10_benchmark_dev_smoke.py",
+      "sha256": "bc15d22d7d5b573ced2258366a42c4b341ae213c817ac4368dad39866f05e8f1"
+    },
+    {
+      "source": "scripts/run_dg10_benchmark_lme_v2_dev_smoke.py",
+      "destination": "MiLAi/scripts/run_dg10_benchmark_lme_v2_dev_smoke.py",
+      "sha256": "83a91dfaceb80e64d326b5bd61b3676acf71a96c44488a559b089ca32c3cbd0d"
+    },
+    {
+      "source": "scripts/run_dg10_benchmark_milai_mcp_smoke.py",
+      "destination": "MiLAi/scripts/run_dg10_benchmark_milai_mcp_smoke.py",
+      "sha256": "623e112e49501c37fda64bb00a0f8278acfdddd3852f37aaaf3c76623f7aef31"
+    },
+    {
+      "source": "scripts/run_dg10_benchmark_three_arm_dev.py",
+      "destination": "MiLAi/scripts/run_dg10_benchmark_three_arm_dev.py",
+      "sha256": "05ecbf6164f795f7fecd796c3c941bf015e3ea8fc578a3c78a0ff3f39f83caef"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_calibration_contract.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_calibration_contract.py",
+      "sha256": "fe728f71357bec24eef11d388f400f6af0755abd3fea2ac02ac2b8cdb218ce18"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_dev_aggregate.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_dev_aggregate.py",
+      "sha256": "d470b0c1f2c98216cd500a20e9c08d51f3f50a8226eb50303f994bbaeb45c811"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_language_dev.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_language_dev.py",
+      "sha256": "8a81982716ab0d05b65d523c22dae2d02338931ca126baedf41a85fda34ffd84"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_language_dev_scoring_v2.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_language_dev_scoring_v2.py",
+      "sha256": "052acb99747a969d2f75c579ac2fe09b15bc0be868b66edb0b45a6f94a3d3b05"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_contract.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_contract.py",
+      "sha256": "a5c999f7c9cdd1f3946907c0f41c74b0c2a7dc7639032ffd624cede4043ff0e2"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_generation.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_generation.py",
+      "sha256": "196b20795f516ea1c28b28767d417f509fc1ea4ebacaf7813350d87cf62cb197"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_generation_worker.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_generation_worker.py",
+      "sha256": "abd0512754c3c73acbeee24492c3855cd42669141e750c905358a3974f57daad"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_local_probe.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_local_probe.py",
+      "sha256": "c208173043858631b3e0bb72952128e1187baa854ab46306d9b6c709197aab93"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_safety_probe.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_safety_probe.py",
+      "sha256": "e318defd46e287427a8165d4fb33d04f003405828d0de81ba56622d3a9117bbc"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring.py",
+      "sha256": "45846eb84c4131894efbd967df482398b123f7156cb3e5bb2b513e9765aecafb"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_contract.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_contract.py",
+      "sha256": "e0034c85180d34ed4dcb95d25a6a84e0b9043b982385af5a0496e29d7694f19b"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_remediation.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_remediation.py",
+      "sha256": "ab08365eaa68c6597af290fe1f50e9f599338ce741f70b5f021901485a7f4281"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_remediation_contract.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_remediation_contract.py",
+      "sha256": "c36b001cd7188cf3dff79a019bd7859cee34723105e469dcb8658f47e6bd3527"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_remediation_contract_v2.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_remediation_contract_v2.py",
+      "sha256": "b8b1e32b393c9c0ec1906ab4a77eb18867170ddd8026094ddcab2871e6b52c21"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_remediation_contract_v3.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_remediation_contract_v3.py",
+      "sha256": "f9e22c3094fc10096cf1dbce97136ada0d5e63e04e0c893a4eca5c0ae3da571c"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_remediation_v2.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_remediation_v2.py",
+      "sha256": "39b5af44ed24b2cb27ff3eaa5ca3d8328396044036d70f5cedf57848cf1df92a"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_remediation_v3.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_remediation_v3.py",
+      "sha256": "1c3648782fab3e03640a8f01befd778e08c6ad8b174fe910a8d97f61b6c0d91b"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_worker.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_worker.py",
+      "sha256": "ff54ab87c7c4e8e24ec5bd568b0ae1b89fae5ca68b39e8b41c82eba8111ff186"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_worker_v2.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_worker_v2.py",
+      "sha256": "18a3991986c66203f64fc13c5eb58969f528f1005ed056f35dbffa9dba19d390"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_worker_v3.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_worker_v3.py",
+      "sha256": "8563e33cc5c879c5e0d4b7ccee79b4bb6fcf541c8b7c623f90538e2deba97703"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_multiturn_scoring_worker_v4.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_multiturn_scoring_worker_v4.py",
+      "sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_prompt_capability_probe.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_prompt_capability_probe.py",
+      "sha256": "c49c362312159fe7fb0a0849242949447a0779ed5c903e292fdf8844933d4ab3"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_prompt_single_turn_dev_calibration.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_prompt_single_turn_dev_calibration.py",
+      "sha256": "90fdee4c619052882ecabd9e52199288af70ab2b63e9b4f4188473e523007b45"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_prompt_single_turn_dev_smoke.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_prompt_single_turn_dev_smoke.py",
+      "sha256": "c4a035913aac392aaa92e68e3075e669bae3327e39316a65697c5a000a0d7858"
+    },
+    {
+      "source": "scripts/run_dg10_bfcl_single_turn_dev_smoke.py",
+      "destination": "MiLAi/scripts/run_dg10_bfcl_single_turn_dev_smoke.py",
+      "sha256": "92f692d4be8a0f9d385d536fcc167280a7ce0f251bc76b9b4a84b57d5d39398c"
+    },
+    {
+      "source": "scripts/run_dg10_candidate4_ai_audit.py",
+      "destination": "MiLAi/scripts/run_dg10_candidate4_ai_audit.py",
+      "sha256": "20e0627918fa53276db449d1384953248d2255a39b3d6593ea15529ad7b29e1a"
+    },
+    {
+      "source": "scripts/run_dg10_f0.py",
+      "destination": "MiLAi/scripts/run_dg10_f0.py",
+      "sha256": "5d6808153d43b74a8dad4d25338718f0d5a54e6e647b6d6c8b6f076c63dd4fd8"
+    },
+    {
+      "source": "scripts/run_dg10_f0_native.py",
+      "destination": "MiLAi/scripts/run_dg10_f0_native.py",
+      "sha256": "0d15ce9cf7f680def60a4ffc33734b02dcc830562f5de4d235a9b00a9d3361b0"
+    },
+    {
+      "source": "scripts/run_dg10_f1.py",
+      "destination": "MiLAi/scripts/run_dg10_f1.py",
+      "sha256": "4b613ef8de33bd0faef5eb3db10854ce8a90c99af17f66d802c257c665c0617c"
+    },
+    {
+      "source": "scripts/run_dg10_f1_openworker.py",
+      "destination": "MiLAi/scripts/run_dg10_f1_openworker.py",
+      "sha256": "6480cf6e7c954dc806d38f1bde5666c7433cebd9a8ca0927a4a9e2738b074ee1"
+    },
+    {
+      "source": "scripts/run_dg10_final_completion_audit.py",
+      "destination": "MiLAi/scripts/run_dg10_final_completion_audit.py",
+      "sha256": "51c837a77e0b4073aceac6c557a17a81dcf77944ad38ce60d70ce023d771311d"
+    },
+    {
+      "source": "scripts/run_dg10_final_quality_state.py",
+      "destination": "MiLAi/scripts/run_dg10_final_quality_state.py",
+      "sha256": "da07086418911a287f56a44503b695ee3d3fe8444abc81ffcadf7707ed77b096"
+    },
+    {
+      "source": "scripts/run_dg10_finalize_candidate.py",
+      "destination": "MiLAi/scripts/run_dg10_finalize_candidate.py",
+      "sha256": "060dbfbdbc7177696d4abac7611e4fa7ee709ff14429246148d6f424056bfc51"
+    },
+    {
+      "source": "scripts/run_dg10_freeze_preflight.py",
+      "destination": "MiLAi/scripts/run_dg10_freeze_preflight.py",
+      "sha256": "f377314013b3a7947a0ab566ef459a4baa8059e3a864fac207fd827e54f84036"
+    },
+    {
+      "source": "scripts/run_dg10_hardened_openworker.py",
+      "destination": "MiLAi/scripts/run_dg10_hardened_openworker.py",
+      "sha256": "a178a407aaeefb25a7e518b972b23d177580bb61942c18edf93aeb47f43c259f"
+    },
+    {
+      "source": "scripts/run_dg10_lme_product_confirmation.py",
+      "destination": "MiLAi/scripts/run_dg10_lme_product_confirmation.py",
+      "sha256": "14ac999f3a5222de3de297f12f3366d13e815dfd3df97f1668059968d83c8e95"
+    },
+    {
+      "source": "scripts/run_dg10_lme_product_dev.py",
+      "destination": "MiLAi/scripts/run_dg10_lme_product_dev.py",
+      "sha256": "d9afd328af08ab8be1fcc6cd550b6c92fee0e788b7af64f25887a492c2c680f9"
+    },
+    {
+      "source": "scripts/run_dg10_lme_product_smoke.py",
+      "destination": "MiLAi/scripts/run_dg10_lme_product_smoke.py",
+      "sha256": "fbbee3225b0d2de15453a9b38601797a48f61f4ba3c8e499a3dc0d19d9aea4d0"
+    },
+    {
+      "source": "scripts/run_dg10_mcp_package_gate.py",
+      "destination": "MiLAi/scripts/run_dg10_mcp_package_gate.py",
+      "sha256": "3f010d42ecd7e52890a3b92a2214dcb6cbc1bfe572edaab4c210ab65673c51fa"
+    },
+    {
+      "source": "scripts/run_dg10_memory_fixture_smoke.py",
+      "destination": "MiLAi/scripts/run_dg10_memory_fixture_smoke.py",
+      "sha256": "116f4dc54df9396fa46b4d092b7e8b5b2d46936e2f915aeeaace69494b8e16e9"
+    },
+    {
+      "source": "scripts/run_dg10_minimal_serving.py",
+      "destination": "MiLAi/scripts/run_dg10_minimal_serving.py",
+      "sha256": "9c07283fc03182c0e0e1ea5fa812c6633683547ed50424cf1bcf30147bbc5fd9"
+    },
+    {
+      "source": "scripts/run_dg10_openworker_host_gate.py",
+      "destination": "MiLAi/scripts/run_dg10_openworker_host_gate.py",
+      "sha256": "673daf2a002331dd7617e22ba74acbfcc8e5b88cfe54462302b1713cefe9301f"
+    },
+    {
+      "source": "scripts/run_dg10_quality_calibration_assessment.py",
+      "destination": "MiLAi/scripts/run_dg10_quality_calibration_assessment.py",
+      "sha256": "acfb72dbdd80c075a7a1766692875d90da396dbbc11fc64024eae8999b785820"
+    },
+    {
+      "source": "scripts/run_dg10_remediation.py",
+      "destination": "MiLAi/scripts/run_dg10_remediation.py",
+      "sha256": "324fe80e855b98cf7ebd6255265efd84a97ba94a7c9b817ba68b2fc0bce8cd12"
+    },
+    {
+      "source": "scripts/run_dg10_serving_assessment.py",
+      "destination": "MiLAi/scripts/run_dg10_serving_assessment.py",
+      "sha256": "4548be3c28186457bdcdc124328506be3bf119ef31588a8830dac11a87734007"
+    },
+    {
+      "source": "scripts/run_dg10_serving_characterization.py",
+      "destination": "MiLAi/scripts/run_dg10_serving_characterization.py",
+      "sha256": "d32318a5e7498248603b7d5781ffd23eeb699d6fb602e7b6b7798c07f28b4a6c"
+    },
+    {
+      "source": "scripts/run_dg10_t2_functional.py",
+      "destination": "MiLAi/scripts/run_dg10_t2_functional.py",
+      "sha256": "8901b367b9d0bfcb1fb2112017dce0b823ee0b87bf611493e8087b1df7494b4b"
+    },
+    {
+      "source": "scripts/run_dg10_t2_openworker.py",
+      "destination": "MiLAi/scripts/run_dg10_t2_openworker.py",
+      "sha256": "ba292aa4fba66e0a4de0ed0c9e9012223d8bedec6c9a3ed9018b0e0cfb607c65"
+    },
+    {
+      "source": "scripts/run_dg10_tier3_same_vllm_judge.py",
+      "destination": "MiLAi/scripts/run_dg10_tier3_same_vllm_judge.py",
+      "sha256": "d51b21569948c94fb10d4676e8c652f701c89b2086de2db5dbba086fe4d4ea30"
+    },
+    {
+      "source": "scripts/run_dg10_vllm_openworker_e2e.py",
+      "destination": "MiLAi/scripts/run_dg10_vllm_openworker_e2e.py",
+      "sha256": "62ac7137a030a6c6114a64c967b75f3153c4ff65837f652b12456f3cf99f0c80"
+    },
+    {
+      "source": "scripts/run_dg11_agentic_workload.py",
+      "destination": "MiLAi/scripts/run_dg11_agentic_workload.py",
+      "sha256": "6b419be5303d2e8deb0d158876183e919e9ceb10781a1761b78262ae0f5f7a2e"
+    },
+    {
+      "source": "scripts/run_dg11_combined_dev.py",
+      "destination": "MiLAi/scripts/run_dg11_combined_dev.py",
+      "sha256": "8de1a6cbbb30a1d77a5b36e08c2ec161b9f27d6ec14476dd72cea22ecb82fb6a"
+    },
+    {
+      "source": "scripts/run_dg11_compiler_offline_ab.py",
+      "destination": "MiLAi/scripts/run_dg11_compiler_offline_ab.py",
+      "sha256": "d08effbc9dafa97b9ff5877206b7e78abf2758b94a388651d4fbe490aa83d50a"
+    },
+    {
+      "source": "scripts/run_dg11_efficiency.py",
+      "destination": "MiLAi/scripts/run_dg11_efficiency.py",
+      "sha256": "736d0289fd20d9593eaba65eb13b2546e9f73a6f86386b1fce5813d1bcd4a566"
+    },
+    {
+      "source": "scripts/run_dg11_functional_regression.py",
+      "destination": "MiLAi/scripts/run_dg11_functional_regression.py",
+      "sha256": "7c2f52bbb0775b9a247ae37409069593743b9118e12cf833fbfa1a60e6561424"
+    },
+    {
+      "source": "scripts/run_dg11_holdout.py",
+      "destination": "MiLAi/scripts/run_dg11_holdout.py",
+      "sha256": "dd1af0cb574c70c999d8dcac0f4d30d51ece3bf6cc5b5f610de738628b9e9b3f"
+    },
+    {
+      "source": "scripts/run_dg11_holdout_failure_dev.py",
+      "destination": "MiLAi/scripts/run_dg11_holdout_failure_dev.py",
+      "sha256": "4a85d2e4e7f3c4dc39b041c6bd67848593589a8bc685d0d0f1bd046b9714942f"
+    },
+    {
+      "source": "scripts/run_dg11_offline_baseline.py",
+      "destination": "MiLAi/scripts/run_dg11_offline_baseline.py",
+      "sha256": "9192f72b9debf86fd80117d9986cd6203711ba643248ace27ca25a1270c12b61"
+    },
+    {
+      "source": "scripts/run_dg11_r02_candidate_pool.py",
+      "destination": "MiLAi/scripts/run_dg11_r02_candidate_pool.py",
+      "sha256": "56067786b4581b7fc24dfce8a30fe953b4dfa0e3a6eb2544e8444bb3b4f19726"
+    },
+    {
+      "source": "scripts/run_dg11_r02_crossencoder_ab.py",
+      "destination": "MiLAi/scripts/run_dg11_r02_crossencoder_ab.py",
+      "sha256": "f3ab3dbdecfec6a3b24a1093e5db79ebcdf9120ff2b143129bb989b34793a564"
+    },
+    {
+      "source": "scripts/run_dg11_r02_offline_ab.py",
+      "destination": "MiLAi/scripts/run_dg11_r02_offline_ab.py",
+      "sha256": "947b28d43dd42943eb54fef4af80db2bd260e5353ce40d0fd08eb20a2cc94fc2"
+    },
+    {
+      "source": "scripts/run_dg11_r02_production_gate.py",
+      "destination": "MiLAi/scripts/run_dg11_r02_production_gate.py",
+      "sha256": "9de11f053ff88d48a84c1f3e4793872a17419792b0dd5b41c4aae572b8dc6ecc"
+    },
+    {
+      "source": "scripts/run_dg11_r03_operator_gate.py",
+      "destination": "MiLAi/scripts/run_dg11_r03_operator_gate.py",
+      "sha256": "658fd73b0211a4095357d69eb07c01e3bb5252ad756bc1ae832fc7fa413e093b"
+    },
+    {
+      "source": "scripts/run_dg11_r04_combined_dev2.py",
+      "destination": "MiLAi/scripts/run_dg11_r04_combined_dev2.py",
+      "sha256": "4c2cb5c76ad9eebc924816fd7d43a1ec5092c5feaf1be961d7ef9ed5a8e65d7c"
+    },
+    {
+      "source": "scripts/run_dg11_r04_incremental_recovery.py",
+      "destination": "MiLAi/scripts/run_dg11_r04_incremental_recovery.py",
+      "sha256": "ed575a7ac2645a5cd8b66c77b015c22affbeb16199676c69e448f179da2f214f"
+    },
+    {
+      "source": "scripts/run_dg11_r04_targeted_recheck.py",
+      "destination": "MiLAi/scripts/run_dg11_r04_targeted_recheck.py",
+      "sha256": "7194d3703b15ac921bbf1ab5dd3decce633657c7aa6421a005830c96d2608da6"
+    },
+    {
+      "source": "scripts/run_dg11_r06_freeze.py",
+      "destination": "MiLAi/scripts/run_dg11_r06_freeze.py",
+      "sha256": "4a85cd2016676e28b0547986e47cc25409d449dc3e5ea9e4dc4ebb5e530ddbbe"
+    },
+    {
+      "source": "scripts/run_dg11_recovery_compiler.py",
+      "destination": "MiLAi/scripts/run_dg11_recovery_compiler.py",
+      "sha256": "46ae61cd0773d336e74b3b7872b2367b975128168f06692288aec58990fcc543"
+    },
+    {
+      "source": "scripts/run_dg11_retrieval_matrix.py",
+      "destination": "MiLAi/scripts/run_dg11_retrieval_matrix.py",
+      "sha256": "c32995afb64fe5b55c5ee16d478ca0e031545895c05bc7881506ca44e01d26d6"
+    },
+    {
+      "source": "scripts/run_dg11_temporal_dev.py",
+      "destination": "MiLAi/scripts/run_dg11_temporal_dev.py",
+      "sha256": "0dfc83114cd6373273cf0f2a3e5afc60f010dff275c38bd1dc936762f20b491e"
+    },
+    {
+      "source": "scripts/run_dg11_v2.py",
+      "destination": "MiLAi/scripts/run_dg11_v2.py",
+      "sha256": "4004663853a4d3f125abe98f384cc88b4f906bab8f25c8a9a586e75293e4b390"
+    },
+    {
+      "source": "scripts/run_dg13_m0_baseline.py",
+      "destination": "MiLAi/scripts/run_dg13_m0_baseline.py",
+      "sha256": "591bc78815a3b5fae28e6ace814f6e0ad40fb4a67cfc148258682543b9b04dcb"
+    },
+    {
+      "source": "scripts/run_dg13_m1_generic_smoke.py",
+      "destination": "MiLAi/scripts/run_dg13_m1_generic_smoke.py",
+      "sha256": "4825252e18226dbf21fb6649c97ee16e1f2860e7a099a6dc6f12f85c34f6ff59"
+    },
+    {
+      "source": "scripts/run_dg13_m2_generic_smoke.py",
+      "destination": "MiLAi/scripts/run_dg13_m2_generic_smoke.py",
+      "sha256": "4c8da72851f1f847e907c428fe2a322753d9fd2a39259b6fdf6ef3e3486b8bcb"
+    },
+    {
+      "source": "scripts/run_dg13_m3_generic_smoke.py",
+      "destination": "MiLAi/scripts/run_dg13_m3_generic_smoke.py",
+      "sha256": "f3ae74ba801f9945d8e4c3c33253ea973513de6599123aae921ccf8f3704977b"
+    },
+    {
+      "source": "scripts/run_dg13_m4_bounded_search.py",
+      "destination": "MiLAi/scripts/run_dg13_m4_bounded_search.py",
+      "sha256": "69322b88a3fc07202c0edee5510da35db003fb8c6d50d199d29e419b7638dd95"
+    },
+    {
+      "source": "scripts/run_dg13_m5_governed_lifecycle.py",
+      "destination": "MiLAi/scripts/run_dg13_m5_governed_lifecycle.py",
+      "sha256": "f0cc6eb798bda070043ef12d4b7f96b9fd2093b6b9c7ba08dcb083f0517a761d"
+    },
+    {
+      "source": "scripts/run_dg13_m6_task_enhancement.py",
+      "destination": "MiLAi/scripts/run_dg13_m6_task_enhancement.py",
+      "sha256": "c99aa549d3474305f1dfe61ed85e0489eadaa44790eb7440368196dc8c4b316d"
+    },
+    {
+      "source": "scripts/run_dg13u_openworker.py",
+      "destination": "MiLAi/scripts/run_dg13u_openworker.py",
+      "sha256": "e1647c504abe69538546492d21d71775557a423055a3b8da70751ce7a3f9b8a6"
+    },
+    {
+      "source": "scripts/run_dg14_longmemeval_dev.py",
+      "destination": "MiLAi/scripts/run_dg14_longmemeval_dev.py",
+      "sha256": "0eccf1fbb0ef3330c490fb4316d283db3e728277182f2527a07086c58bb30e86"
+    },
+    {
+      "source": "scripts/run_dg15_single_case.py",
+      "destination": "MiLAi/scripts/run_dg15_single_case.py",
+      "sha256": "ef78ce31a9b9c58abba9691870f7199aa302491c1d11af66ce4503083602179b"
+    },
+    {
+      "source": "scripts/run_dg16_external_lme10_answers.py",
+      "destination": "MiLAi/scripts/run_dg16_external_lme10_answers.py",
+      "sha256": "b7bd192b0ffe4d5d39bbf33f23b8f983bcfdc5c3f0b624bd738eef3becd8331b"
+    },
+    {
+      "source": "scripts/run_dg16_graphiti_lme10.py",
+      "destination": "MiLAi/scripts/run_dg16_graphiti_lme10.py",
+      "sha256": "bb7fdffa98ff72165a28d308b1487d6cbe2bff7e0d09c07e1066ceb5ef95625b"
+    },
+    {
+      "source": "scripts/run_dg16_lme10_compare.py",
+      "destination": "MiLAi/scripts/run_dg16_lme10_compare.py",
+      "sha256": "8cfc0354030331850352822fc4d6406ebf326b8235247ee0c5046c88343ecd27"
+    },
+    {
+      "source": "scripts/run_dg16_openviking_lme10.py",
+      "destination": "MiLAi/scripts/run_dg16_openviking_lme10.py",
+      "sha256": "6ed5f297019d800d02036c6743f9757b94e5e45713bcef525cff55badd7e6e63"
+    },
+    {
+      "source": "scripts/run_dg16_operability.py",
+      "destination": "MiLAi/scripts/run_dg16_operability.py",
+      "sha256": "936806d20087c351586c8b6a92ea61673c281d2d6079d4e9f5c82d9d81a0439e"
+    },
+    {
+      "source": "scripts/run_dg16_q0.py",
+      "destination": "MiLAi/scripts/run_dg16_q0.py",
+      "sha256": "d29d9b4ff80a2be714e08d6fd7bf1f075065d589220141424f917c6a7bf905be"
+    },
+    {
+      "source": "scripts/run_dg16_q4.py",
+      "destination": "MiLAi/scripts/run_dg16_q4.py",
+      "sha256": "8c025034f2fc62ba84f46d7fc6a4de879affefdb9be6a5c13e5f3ca063de5b1f"
+    },
+    {
+      "source": "scripts/run_dg16_q5.py",
+      "destination": "MiLAi/scripts/run_dg16_q5.py",
+      "sha256": "e863d466930722e1478cedbc7b58c783573bc00f0b20b1e4a00212ea905ab498"
+    },
+    {
+      "source": "scripts/run_dg16_q6.py",
+      "destination": "MiLAi/scripts/run_dg16_q6.py",
+      "sha256": "d173a4a4051e9ec8387238f41d1aed236a37529583493f2144d9edb156e66f28"
+    },
+    {
+      "source": "scripts/run_dg16_reader_stability.py",
+      "destination": "MiLAi/scripts/run_dg16_reader_stability.py",
+      "sha256": "c3057395d0e20028d66e6a0129ba3fa7f6bfeb946c0b061d69639144ddd710ea"
+    },
+    {
+      "source": "scripts/run_dg17_a0_acquisition_loss.py",
+      "destination": "MiLAi/scripts/run_dg17_a0_acquisition_loss.py",
+      "sha256": "5b25cb862020ecdbf5737dd33e83061e561fe0b93aab87ab5cd43f6915e106ca"
+    },
+    {
+      "source": "scripts/run_dg17_a1_postgres_gate.py",
+      "destination": "MiLAi/scripts/run_dg17_a1_postgres_gate.py",
+      "sha256": "2202a10203a06d15c1f6c30bd024352d733b4fdf7e699ae418128095bdeae269"
+    },
+    {
+      "source": "scripts/run_dg17_a3_source_calibration.py",
+      "destination": "MiLAi/scripts/run_dg17_a3_source_calibration.py",
+      "sha256": "fe32a1fc2ccb2f7035fbdda790fe0445fcefabacece2499bd88177f9a26bd449"
+    },
+    {
+      "source": "scripts/run_dg17_a4_lexical_evaluation.py",
+      "destination": "MiLAi/scripts/run_dg17_a4_lexical_evaluation.py",
+      "sha256": "1e9a1bbd05379c0003e0a2eed10d8015cf1518dff05bf84a9f180e04edbde6e5"
+    },
+    {
+      "source": "scripts/run_dg17_a5_temporal_acquisition.py",
+      "destination": "MiLAi/scripts/run_dg17_a5_temporal_acquisition.py",
+      "sha256": "6ddcf51d92f86317627c1b977b7de0bcda59478d8256b364142945219613fdd9"
+    },
+    {
+      "source": "scripts/run_dg17_a6_dense_productization.py",
+      "destination": "MiLAi/scripts/run_dg17_a6_dense_productization.py",
+      "sha256": "55352d44ccd3fd32197d37a15dc4b82235d159017842be9be2c3d637b704e7da"
+    },
+    {
+      "source": "scripts/run_dg17_local_gate.py",
+      "destination": "MiLAi/scripts/run_dg17_local_gate.py",
+      "sha256": "8dd12f5a8e8dc8adfb8aef8955bfe3179281d0b92cb9647ddd414de89713e21d"
+    },
+    {
+      "source": "scripts/run_dg17_q0.py",
+      "destination": "MiLAi/scripts/run_dg17_q0.py",
+      "sha256": "25007b242521f5328c0c555e225add436e9d70392a38eb1a08620dd9d1d18c10"
+    },
+    {
+      "source": "scripts/run_dg17_q0_multiseed.py",
+      "destination": "MiLAi/scripts/run_dg17_q0_multiseed.py",
+      "sha256": "fcaace5c3ad97981b2d9435c38206cee9bd9427afce991f87a08718a01aa5e04"
+    },
+    {
+      "source": "scripts/run_dg17_q1_p0_focused.py",
+      "destination": "MiLAi/scripts/run_dg17_q1_p0_focused.py",
+      "sha256": "e8c466f55e8221b81c61a296f6819cc9ae3409dfdcfdfbda04f4c7cbe0379e87"
+    },
+    {
+      "source": "scripts/run_dg17_q1_p0_matched.py",
+      "destination": "MiLAi/scripts/run_dg17_q1_p0_matched.py",
+      "sha256": "131d49638b8b62004dd647aa05fc9afc7bc6c266c68a8b6582b6821e7995d7d3"
+    },
+    {
+      "source": "scripts/run_dg17_q1r_contexts.py",
+      "destination": "MiLAi/scripts/run_dg17_q1r_contexts.py",
+      "sha256": "d3eedcf674bcebcb2499e03b5c82ae627df76ce913b8515436b7801d576ecdef"
+    },
+    {
+      "source": "scripts/run_dg17_q1r_matched.py",
+      "destination": "MiLAi/scripts/run_dg17_q1r_matched.py",
+      "sha256": "fea12c3918abb676366cadc3fb2c1bc9df211174ceb95474ae0bec701c5c2ce7"
+    },
+    {
+      "source": "scripts/run_dg17_q3a_crosswalk.py",
+      "destination": "MiLAi/scripts/run_dg17_q3a_crosswalk.py",
+      "sha256": "ecbfa70d39455e358cc7f5d09e19c6c206334d5d4ed85a44cc6de2fe1dca8ca7"
+    },
+    {
+      "source": "scripts/run_dg17_q3c_shadow.py",
+      "destination": "MiLAi/scripts/run_dg17_q3c_shadow.py",
+      "sha256": "877c2224561fdce7d7cbdaa83c4db69dbb41d15310d9fa51673107b6bed29745"
+    },
+    {
+      "source": "scripts/run_dg17_q4_q5_product_verticals.py",
+      "destination": "MiLAi/scripts/run_dg17_q4_q5_product_verticals.py",
+      "sha256": "a0b849dbd1a71eecb83774fd1a9547653f714f3111151d864ac5125d481fed7b"
+    },
+    {
+      "source": "scripts/run_dg17_q6_matched.py",
+      "destination": "MiLAi/scripts/run_dg17_q6_matched.py",
+      "sha256": "b72cb46d92bfb2cfaf535eeb9cf75f67b1215c5cbbcce95ecae03899b054a85c"
+    },
+    {
+      "source": "scripts/run_dg17_q6_preflight.py",
+      "destination": "MiLAi/scripts/run_dg17_q6_preflight.py",
+      "sha256": "ba02464a9ff87eba44382c94148910a687638c9071a5517222eecd7eb42bc44a"
+    },
+    {
+      "source": "scripts/run_dg17_q6_sealed.py",
+      "destination": "MiLAi/scripts/run_dg17_q6_sealed.py",
+      "sha256": "995ca57bd21c7da2369e8480acc53ceda7562f1d94438d8ad6454b6edf03577e"
+    },
+    {
+      "source": "scripts/run_dg17_q8_retrieval_ablation.py",
+      "destination": "MiLAi/scripts/run_dg17_q8_retrieval_ablation.py",
+      "sha256": "8a8ead2f5b6da406b3e88773d9d2786858dea719d5993d528d7715cd017e694a"
+    },
+    {
+      "source": "scripts/run_dg18_provider_conformance.py",
+      "destination": "MiLAi/scripts/run_dg18_provider_conformance.py",
+      "sha256": "1969bbe529d8a86f3e65ddd149c916e6e26c45e36148a4d57d6f1b06bcd7346b"
+    },
+    {
+      "source": "scripts/run_dg18_r3_shadow.py",
+      "destination": "MiLAi/scripts/run_dg18_r3_shadow.py",
+      "sha256": "c5465fc859a7f4c3b8aa1003c4b6c7557eabd46ae5bf847decf934615f64d1a5"
+    },
+    {
+      "source": "scripts/run_dg19_synthetic_treatment_shadow.py",
+      "destination": "MiLAi/scripts/run_dg19_synthetic_treatment_shadow.py",
+      "sha256": "57c414219a53774403c652cc0887e9d98c084bdd46b5e33a37c7ea50aa6c16ea"
+    },
+    {
+      "source": "scripts/run_dg20_quality_gates.py",
+      "destination": "MiLAi/scripts/run_dg20_quality_gates.py",
+      "sha256": "9b455deefb3defb66d1e4f112eeb22baabb3bdaa935969c10599fd0c65ddb650"
+    },
+    {
+      "source": "scripts/run_dg20_s0_fresh_state_audit.py",
+      "destination": "MiLAi/scripts/run_dg20_s0_fresh_state_audit.py",
+      "sha256": "aeb672f75888905fd89147e29f81f75418c4f1b2f5eb7fb033054ccf1a894f47"
+    },
+    {
+      "source": "scripts/run_dg20_s1_official_channel_oracle.py",
+      "destination": "MiLAi/scripts/run_dg20_s1_official_channel_oracle.py",
+      "sha256": "a568968406ceeca9ae3ebf0a913a5fa50c75e1aa92962489b526431b766cadfa"
+    },
+    {
+      "source": "scripts/run_dg20_s2_deterministic_policy.py",
+      "destination": "MiLAi/scripts/run_dg20_s2_deterministic_policy.py",
+      "sha256": "fd43d1a9b6016257bd8c360726f52d3924ccd314e997fb7d61edccd725f46e27"
+    },
+    {
+      "source": "scripts/run_dg20_s3_disposition.py",
+      "destination": "MiLAi/scripts/run_dg20_s3_disposition.py",
+      "sha256": "506b4a7d878a652524852e8ce636ad25c9bed6a7b55478012a5196db0a675148"
+    },
+    {
+      "source": "scripts/run_dg20_s4_product_faithful.py",
+      "destination": "MiLAi/scripts/run_dg20_s4_product_faithful.py",
+      "sha256": "bc45ef54fe0f82c77efc2ca54199957902948133c18c95eff2d4914cf023798b"
+    },
+    {
+      "source": "scripts/run_dg20_s5_matched_q6.py",
+      "destination": "MiLAi/scripts/run_dg20_s5_matched_q6.py",
+      "sha256": "872b8629c622147c4c9ce35e9a80b61ba3cbf46d347d5dead22cb482128f54f3"
+    },
+    {
+      "source": "scripts/run_dg21_s0_baseline_freeze.py",
+      "destination": "MiLAi/scripts/run_dg21_s0_baseline_freeze.py",
+      "sha256": "1e3d5e1d3fad97797b00def56169c4fc2d13090f06dca8b91609060c22aaff3f"
+    },
+    {
+      "source": "scripts/run_dg21_s1_policy_matrix.py",
+      "destination": "MiLAi/scripts/run_dg21_s1_policy_matrix.py",
+      "sha256": "64c73d68269d6a1b283fcc95481c5b86ca05f44c345ef017f0c51a1851275f87"
+    },
+    {
+      "source": "scripts/run_dg21_s2_type_directed_replay.py",
+      "destination": "MiLAi/scripts/run_dg21_s2_type_directed_replay.py",
+      "sha256": "b839c22ee448c102811c37f45db62716a6f48dc1ba7b52a1d3f21d460a1d1868"
+    },
+    {
+      "source": "scripts/run_dg21_s3_targeted_acquisition.py",
+      "destination": "MiLAi/scripts/run_dg21_s3_targeted_acquisition.py",
+      "sha256": "56d800f0a6ad258eb15f827c0ed49295e12aeeed23a5fc6d1bc47f02431c4f4e"
+    },
+    {
+      "source": "scripts/run_dg21_s4_preference_expressivity.py",
+      "destination": "MiLAi/scripts/run_dg21_s4_preference_expressivity.py",
+      "sha256": "3b7505afff1aec36c5761b0f3d3720b2c82c7b673bfc9631f33685f2903092f8"
+    },
+    {
+      "source": "scripts/run_dg21_s5_temporal_oracle.py",
+      "destination": "MiLAi/scripts/run_dg21_s5_temporal_oracle.py",
+      "sha256": "9bd12bed65b0c193372a30066442848047cc3bd7cc377e4af724766f473aa6e7"
+    },
+    {
+      "source": "scripts/run_dg21_s6_schema_gate.py",
+      "destination": "MiLAi/scripts/run_dg21_s6_schema_gate.py",
+      "sha256": "cbd6abc8acb5ae196c84e6eb9f46e710ca49f865b2c187fc91be6d5843122b0d"
+    },
+    {
+      "source": "scripts/run_dg21_s7_matched.py",
+      "destination": "MiLAi/scripts/run_dg21_s7_matched.py",
+      "sha256": "c19c5dfc047cea3c50018d25a5fbf3cde9c6d7abd8e9e00eb7863967e9d482a4"
+    },
+    {
+      "source": "scripts/run_dg21_s8_quality.py",
+      "destination": "MiLAi/scripts/run_dg21_s8_quality.py",
+      "sha256": "81888fa46c3c24870df92df5372b7b814bd86d49c70cf11be37f558df2034be1"
+    },
+    {
+      "source": "scripts/run_dg22_s0_baseline_freeze.py",
+      "destination": "MiLAi/scripts/run_dg22_s0_baseline_freeze.py",
+      "sha256": "c149b2531b9a5368108bad412647021bd6aaf366978453ae844f6b27e66a8dba"
+    },
+    {
+      "source": "scripts/run_dg22_s1_accuracy_oracle.py",
+      "destination": "MiLAi/scripts/run_dg22_s1_accuracy_oracle.py",
+      "sha256": "eeeb4df5bdc4de5000874f739faf257ad49dd3e9d1ddf365765e97c9e8c663ed"
+    },
+    {
+      "source": "scripts/run_dg22_s2_reader_conformance.py",
+      "destination": "MiLAi/scripts/run_dg22_s2_reader_conformance.py",
+      "sha256": "a492707fb759a0f9949252456e674102f8aa027a2957af67982a394aef45cd77"
+    },
+    {
+      "source": "scripts/run_dg22_s3_query_correctness.py",
+      "destination": "MiLAi/scripts/run_dg22_s3_query_correctness.py",
+      "sha256": "6dcc1fa43ef97e4cb7c7cebd3eb97c3784b74bd774a2c4a8291aac77c305f275"
+    },
+    {
+      "source": "scripts/run_dg22_s4_binding_correctness.py",
+      "destination": "MiLAi/scripts/run_dg22_s4_binding_correctness.py",
+      "sha256": "213c93f5e3326822c5b22a2e73e98717ca06e7b14647d8f11bebdf20bb41e411"
+    },
+    {
+      "source": "scripts/run_dg22_s5_acquisition_correctness.py",
+      "destination": "MiLAi/scripts/run_dg22_s5_acquisition_correctness.py",
+      "sha256": "25fa89eb1eb9b793ffe021ba8f9e3c19426e4ac0f40dd0395c6d778899306833"
+    },
+    {
+      "source": "scripts/run_dg22_s6_temporal_correctness.py",
+      "destination": "MiLAi/scripts/run_dg22_s6_temporal_correctness.py",
+      "sha256": "3702dd9e3f668186ed5e269092fc0fc743e46fa99606b2330c7d70f299f51c12"
+    },
+    {
+      "source": "scripts/run_dg22_s7_mediator.py",
+      "destination": "MiLAi/scripts/run_dg22_s7_mediator.py",
+      "sha256": "62139e13d48c9e0fd959a9c1ebfcedabd25407440e68161585c73cd86187a2e6"
+    },
+    {
+      "source": "scripts/run_dg22_s8_answer_correctness.py",
+      "destination": "MiLAi/scripts/run_dg22_s8_answer_correctness.py",
+      "sha256": "0f338828d4ebe89b840e7f447ad9d4cbbeb0434013c6de822648de2e60730018"
+    },
+    {
+      "source": "scripts/run_dg22_s9_quality.py",
+      "destination": "MiLAi/scripts/run_dg22_s9_quality.py",
+      "sha256": "bbe580ac3898bc54c193215b018fdf0ed39d2bb4bec5e426716f4fe6f75cb9b0"
+    },
+    {
+      "source": "scripts/run_dg23_s0_baseline_freeze.py",
+      "destination": "MiLAi/scripts/run_dg23_s0_baseline_freeze.py",
+      "sha256": "a2e6cf85502a91c73b7e3706d89b7f183206c01df5cdf48e2b92f0e2b4cbb131"
+    },
+    {
+      "source": "scripts/run_dg23_s1_budget_causality.py",
+      "destination": "MiLAi/scripts/run_dg23_s1_budget_causality.py",
+      "sha256": "ef10c4e8a7003dc8cabcc7241bf5283766ae85ef83e9fb5665afe45435e5a219"
+    },
+    {
+      "source": "scripts/run_dg23_s2_decision_separation.py",
+      "destination": "MiLAi/scripts/run_dg23_s2_decision_separation.py",
+      "sha256": "7cdbb3bb428080a0ec9bcd835607a385cee5a72c4f70c6f23eb527702f171a34"
+    },
+    {
+      "source": "scripts/run_dg23_s3_context_compiler.py",
+      "destination": "MiLAi/scripts/run_dg23_s3_context_compiler.py",
+      "sha256": "1f5a06177f5fc89a738fa6c8b895d1d00b03032cc55d0c2ff01ce1f037097ce4"
+    },
+    {
+      "source": "scripts/run_dg23_s4_reader_boundary.py",
+      "destination": "MiLAi/scripts/run_dg23_s4_reader_boundary.py",
+      "sha256": "7053c5d895d3e42bf4ff7eff7924266740b54a5143ab3089a38689287a9f2cb5"
+    },
+    {
+      "source": "scripts/run_dg23_s5_synthetic_matrix.py",
+      "destination": "MiLAi/scripts/run_dg23_s5_synthetic_matrix.py",
+      "sha256": "e669bb2c94d90d958d351ca2e027000e6621e8dba93c229a0e205f94a1a567ee"
+    },
+    {
+      "source": "scripts/run_dg23_s6_opened_dev_context.py",
+      "destination": "MiLAi/scripts/run_dg23_s6_opened_dev_context.py",
+      "sha256": "3dc9265ef206f63b03b4f2a5e60a29447fce992c60a2e489381fa4d5b9d2ff07"
+    },
+    {
+      "source": "scripts/run_dg23_s7_matched_reader.py",
+      "destination": "MiLAi/scripts/run_dg23_s7_matched_reader.py",
+      "sha256": "33a3d05da640946f8bb7e2b3f20c10137159d67fb8f205616e3baa99ac84b781"
+    },
+    {
+      "source": "scripts/run_dg23_s8_quality.py",
+      "destination": "MiLAi/scripts/run_dg23_s8_quality.py",
+      "sha256": "fd2c46cb78dc9fbd0068a165674672dc654e0744a8b2c74aeaceb23a5e2b87f2"
+    },
+    {
+      "source": "scripts/run_dg24_s0_freeze.py",
+      "destination": "MiLAi/scripts/run_dg24_s0_freeze.py",
+      "sha256": "d7d9ffa149bffcd01a468bac8bcdfaa2f23309627e86f4314d1204404aa1b5ef"
+    },
+    {
+      "source": "scripts/run_dg24_s1_contracts.py",
+      "destination": "MiLAi/scripts/run_dg24_s1_contracts.py",
+      "sha256": "fc5e63ebbef6f93931639dfeec48c04d958fea30955b6e6e12e7204fda4df353"
+    },
+    {
+      "source": "scripts/run_dg24_s2_behavior_equivalence.py",
+      "destination": "MiLAi/scripts/run_dg24_s2_behavior_equivalence.py",
+      "sha256": "f2a2d01e87cdefcaaa76f8de8c63e4c468b3e4f9889aa0c16b4c021bd3313632"
+    },
+    {
+      "source": "scripts/run_dg24_s3_product_trace.py",
+      "destination": "MiLAi/scripts/run_dg24_s3_product_trace.py",
+      "sha256": "470165b70c4ef04dfcd450f86f55a2ca018270836385af94ba85e5d927b7a8be"
+    },
+    {
+      "source": "scripts/run_dg24_s4_official_probes.py",
+      "destination": "MiLAi/scripts/run_dg24_s4_official_probes.py",
+      "sha256": "a36d1657c4babba012d2a0a24a58e2c09bf2be9230daccec9c9c01c4f4f565f8"
+    },
+    {
+      "source": "scripts/run_dg24_s5_registry.py",
+      "destination": "MiLAi/scripts/run_dg24_s5_registry.py",
+      "sha256": "73e3701fa2529060c2ab99f01d28e87ac8471154258307c18314be46f21c9b6d"
+    },
+    {
+      "source": "scripts/run_dg24_s6_scoring.py",
+      "destination": "MiLAi/scripts/run_dg24_s6_scoring.py",
+      "sha256": "9355bd0a0810e69a74b29b569c01222fa764c06a463127282558e61c4b803e7f"
+    },
+    {
+      "source": "scripts/run_dg24_s7_quality.py",
+      "destination": "MiLAi/scripts/run_dg24_s7_quality.py",
+      "sha256": "ec8c901615ac00e4bb37025b7cc3337e38ce1c3fc03e9dada43d5dd49c1d2707"
+    },
+    {
+      "source": "scripts/run_dg25_readiness_quality.py",
+      "destination": "MiLAi/scripts/run_dg25_readiness_quality.py",
+      "sha256": "29bd5a0cedc1a9dea0000e8c3a8ae02faac0bfceb02883634630256a4b12a177"
+    },
+    {
+      "source": "scripts/run_dg25_review_gate.py",
+      "destination": "MiLAi/scripts/run_dg25_review_gate.py",
+      "sha256": "70b02462ecd41af843287e3fb6a12120bd1368fd6ed3c76a4dc3406186c5ee63"
+    },
+    {
+      "source": "scripts/run_dg25_s0_baseline_freeze.py",
+      "destination": "MiLAi/scripts/run_dg25_s0_baseline_freeze.py",
+      "sha256": "4d7a24c9d37d18cc6d210e09144ea37e55ea860e98ee6071b1b6616926df5b23"
+    },
+    {
+      "source": "scripts/run_dg25_s1_contracts.py",
+      "destination": "MiLAi/scripts/run_dg25_s1_contracts.py",
+      "sha256": "e18ac8e6eb7fdccaa1308be3d1a0005eb4e179f75aade403d9f4ed03c56a8e38"
+    },
+    {
+      "source": "scripts/run_dg25_s2_plan_execution.py",
+      "destination": "MiLAi/scripts/run_dg25_s2_plan_execution.py",
+      "sha256": "ef4e2c0a769cd1b874d68066a3c21610abcdbf9ad43ffe05773ef1aba04445fc"
+    },
+    {
+      "source": "scripts/run_dg25_s3_readiness.py",
+      "destination": "MiLAi/scripts/run_dg25_s3_readiness.py",
+      "sha256": "831ac08cc1b2d9d453bdc5a50fc92ca37cae17a25b5a90d7bc7fe5869f5536a9"
+    },
+    {
+      "source": "scripts/run_dg25_s3a.py",
+      "destination": "MiLAi/scripts/run_dg25_s3a.py",
+      "sha256": "6d4c00bb795d5771155a4cebd5fd466b6e4a7de53bf9107484cf4c23d958cf9a"
+    },
+    {
+      "source": "scripts/run_dg25_s4a.py",
+      "destination": "MiLAi/scripts/run_dg25_s4a.py",
+      "sha256": "a629bf11f869ee00e06c5e5e59a140bf90c9ee48e93134c5a61fc2a03405b590"
+    },
+    {
+      "source": "scripts/run_dg25_s4a_quality.py",
+      "destination": "MiLAi/scripts/run_dg25_s4a_quality.py",
+      "sha256": "2729b1956a35062974125110ab0466807c54b466ade9b29e0af48aa6ea9fe6ae"
+    },
+    {
+      "source": "scripts/run_dg25_s4a_readiness.py",
+      "destination": "MiLAi/scripts/run_dg25_s4a_readiness.py",
+      "sha256": "7feb8d331b912303e154e6d30ebd66749a3f8890ef23dc5b1f0f5e83e093c7d8"
+    },
+    {
+      "source": "scripts/run_dg25_s4b.py",
+      "destination": "MiLAi/scripts/run_dg25_s4b.py",
+      "sha256": "3d1d0902a840e9a1532f7db2abae2a020f87ba021897b546397b3371e402e812"
+    },
+    {
+      "source": "scripts/run_dg25_s4b_quality.py",
+      "destination": "MiLAi/scripts/run_dg25_s4b_quality.py",
+      "sha256": "1351e0649bedd58ae523946bfffaee1e6bb8df9e4ca9156fbb6d81467c305e9d"
+    },
+    {
+      "source": "scripts/run_dg25_s4b_readiness.py",
+      "destination": "MiLAi/scripts/run_dg25_s4b_readiness.py",
+      "sha256": "45ca101df7a126feaa508d6221a3df28c84fbf5b7b65be7bbd895ae74686efda"
+    },
+    {
+      "source": "scripts/run_dg26.py",
+      "destination": "MiLAi/scripts/run_dg26.py",
+      "sha256": "47ec80a4354e17fd1562367f6bf6182e144f6a349826fd98cbf5afd21908f0e1"
+    },
+    {
+      "source": "scripts/run_dg27.py",
+      "destination": "MiLAi/scripts/run_dg27.py",
+      "sha256": "7c767e5eaa5195b947a2889ec4c80e4f83b941fd3ae38503b529a830780ca516"
+    },
+    {
+      "source": "scripts/run_dg27_v03.py",
+      "destination": "MiLAi/scripts/run_dg27_v03.py",
+      "sha256": "5eb555d37d69f881c12da50f17fc03b6cf6f2b1f5c45f84b23afc105a3e96d8b"
+    },
+    {
+      "source": "scripts/run_dg27_v04_repair.py",
+      "destination": "MiLAi/scripts/run_dg27_v04_repair.py",
+      "sha256": "7aa8db5f6b5f32b7330d0654c5b2019cc63603c10222b74433caeac93e83c5b7"
+    },
+    {
+      "source": "scripts/run_dg28_formation_consumption.py",
+      "destination": "MiLAi/scripts/run_dg28_formation_consumption.py",
+      "sha256": "8ce66063c74acb445825ddb5ac6b647c5d2a5e6f13262ac597da638362e47972"
+    },
+    {
+      "source": "scripts/run_dg28_lite_effect.py",
+      "destination": "MiLAi/scripts/run_dg28_lite_effect.py",
+      "sha256": "9812ad09ed10daff88e50b326f49b04f44f202ba66b3916815ebde0c16850550"
+    },
+    {
+      "source": "scripts/run_dg28_preparation.py",
+      "destination": "MiLAi/scripts/run_dg28_preparation.py",
+      "sha256": "6d6b3c0e08f854778227a2e9d77181cb23f2dfee4efb441b6a29efe73f1e9040"
+    },
+    {
+      "source": "scripts/run_dg30.py",
+      "destination": "MiLAi/scripts/run_dg30.py",
+      "sha256": "f0206675a1b5b16ee05b4f799baa770366bedfbbc051c1f676b9187a2602fd30"
+    },
+    {
+      "source": "scripts/run_ev01_evolution_bridge.py",
+      "destination": "MiLAi/scripts/run_ev01_evolution_bridge.py",
+      "sha256": "ec6f931a66e4644c5f8ec5265fa9b8d33e6334ff679da4a5f2fe50beacca8e27"
+    },
+    {
+      "source": "scripts/score_dg17_a1_acquisition.py",
+      "destination": "MiLAi/scripts/score_dg17_a1_acquisition.py",
+      "sha256": "fffa8b1012c601f200d308e7e6492ef286ce3330a2e63556690bf27753da0f53"
+    },
+    {
+      "source": "scripts/score_dg17_a2_acquisition.py",
+      "destination": "MiLAi/scripts/score_dg17_a2_acquisition.py",
+      "sha256": "2c760d09c05fd77aaaea162b3e0055c5ae9ae1eaa83ac819be282a4aae1ff6fd"
+    },
+    {
+      "source": "scripts/seed_dg10_stage_ledger.py",
+      "destination": "MiLAi/scripts/seed_dg10_stage_ledger.py",
+      "sha256": "595b4401c945976a46108d9272cc6ec740237bf6bd4f8c7fc1928465be144156"
+    },
+    {
+      "source": "scripts/validate_dg10_contracts.py",
+      "destination": "MiLAi/scripts/validate_dg10_contracts.py",
+      "sha256": "dfbb369193cfa72e4673c6f182932fb2df076897df8f8d3a36b4c0bde699751c"
+    },
+    {
+      "source": "scripts/validate_dg10_remediation.py",
+      "destination": "MiLAi/scripts/validate_dg10_remediation.py",
+      "sha256": "5f40afc5d253be72f58d06f5732fed0a7b97a486f8941512a9a77275ca6bddbc"
+    },
+    {
+      "source": "tests/test_dg10_agent_terminal.py",
+      "destination": "MiLAi/tests/test_dg10_agent_terminal.py",
+      "sha256": "1ff5ee42151e928374eefbfafba901025c6a4121c6b8f77115bb09835f858e02"
+    },
+    {
+      "source": "tests/test_dg10_ai_provenance.py",
+      "destination": "MiLAi/tests/test_dg10_ai_provenance.py",
+      "sha256": "2932fc167f2c704bc76f53311711c429ff7f04c7e0b8940aa4d36591387193b1"
+    },
+    {
+      "source": "tests/test_dg10_ai_stderr_boundaries.py",
+      "destination": "MiLAi/tests/test_dg10_ai_stderr_boundaries.py",
+      "sha256": "3652997176f8379bebaea2fb52db2c52175f832d2611b67402d2bf9dc004f25e"
+    },
+    {
+      "source": "tests/test_dg10_authorization.py",
+      "destination": "MiLAi/tests/test_dg10_authorization.py",
+      "sha256": "a124f59b922bae5933ec2fb798f6f2d4e8bd8ead3c1ab38689de2305c79ec5c6"
+    },
+    {
+      "source": "tests/test_dg10_benchmark_adapter_contract.py",
+      "destination": "MiLAi/tests/test_dg10_benchmark_adapter_contract.py",
+      "sha256": "493c8694bf31ee1828ae671c1903a5650c0abbc9d2eaf3784a1127238b548c62"
+    },
+    {
+      "source": "tests/test_dg10_benchmark_contract.py",
+      "destination": "MiLAi/tests/test_dg10_benchmark_contract.py",
+      "sha256": "dbae411ce7d803d7a3c89550b2ac281786eecef3acb81827adf192b2d2f6d70e"
+    },
+    {
+      "source": "tests/test_dg10_benchmark_dev_smoke.py",
+      "destination": "MiLAi/tests/test_dg10_benchmark_dev_smoke.py",
+      "sha256": "a7b6d1c9cb987c9e6f07dd017b156a3add36020297ff51e172c95ba8ae0913ae"
+    },
+    {
+      "source": "tests/test_dg10_benchmark_lme_v2_dev_smoke.py",
+      "destination": "MiLAi/tests/test_dg10_benchmark_lme_v2_dev_smoke.py",
+      "sha256": "c681f72a156c3503cd90c1982997f0318fef5d7c2aee762aaefa231007063a1f"
+    },
+    {
+      "source": "tests/test_dg10_benchmark_milai_mcp_smoke.py",
+      "destination": "MiLAi/tests/test_dg10_benchmark_milai_mcp_smoke.py",
+      "sha256": "ca06f173c4469939f468bfd02a032d6fca379ae4e7142ae55d92cdf67e629139"
+    },
+    {
+      "source": "tests/test_dg10_benchmark_three_arm_dev.py",
+      "destination": "MiLAi/tests/test_dg10_benchmark_three_arm_dev.py",
+      "sha256": "93899fef574a8234996d0b71bf55154db3ffc236aeb313b7cf7e2fa3c3761ece"
+    },
+    {
+      "source": "tests/test_dg10_benchmark_worker_closure.py",
+      "destination": "MiLAi/tests/test_dg10_benchmark_worker_closure.py",
+      "sha256": "3c85262bbc6fbeda72501742eb370f2f47f9432ef6f36789b524ab85ccbcafee"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_artifact_builders.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_artifact_builders.py",
+      "sha256": "e0855f60a86a0e2b7b3d1cf67e11f425d3e6a4925f348c966e8641acb6d64ac1"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_calibration_contract.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_calibration_contract.py",
+      "sha256": "8d48f59b213edb33009ddeb1c42e52fafc36b2a6456710839f6d8495ef164b61"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_dev_aggregate.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_dev_aggregate.py",
+      "sha256": "d1c5abdce8d0dc9efb83d1618cff8bd76bb3149efc8da3270fb3b0aecc3b74cf"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_language_dev.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_language_dev.py",
+      "sha256": "2c82d726999aeaf0541ef9117f85859bdbda72d8c5d28ef86a0eeda1ae2e4ff1"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_loop.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_loop.py",
+      "sha256": "fb9eb7f3c9b69394ee5c0be0ff1054d36d15737ab336d1b4a7bd661eb3820a64"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_multiturn_contract.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_multiturn_contract.py",
+      "sha256": "a78d98751da395d2f528fd86dcbf93e8ac41dceb9736c9a0070939db1033bde0"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_multiturn_generation_worker.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_multiturn_generation_worker.py",
+      "sha256": "5edca0769e45b9ba22b5262cdf2d9b320e1437aae8be8ae75d3d458f671d1ca9"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_multiturn_local_probe.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_multiturn_local_probe.py",
+      "sha256": "37b060310093dbdd39e2a04721b0f09304daa86b32d005113802a2c003c55c23"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_multiturn_safety.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_multiturn_safety.py",
+      "sha256": "d2c031233500b1ce411a5b8c84dae5d7f7dceccbe99372ce3b8a9d8b044cb926"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_multiturn_scoring.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_multiturn_scoring.py",
+      "sha256": "36a13fbc52e9c9e2c03623d1c547e615cee0857d8388888f21cf26ceb8890b8f"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_prompt_capability_probe.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_prompt_capability_probe.py",
+      "sha256": "19a54043cbbc55a50c4cd4d8eb97f3aed5bb9808faefb31304135daac4477eec"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_prompt_single_turn_dev_calibration.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_prompt_single_turn_dev_calibration.py",
+      "sha256": "e1917891f243db48520ae18e59d099e5180d580ea3cd1ae28ad9e0a20b689820"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_scoring.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_scoring.py",
+      "sha256": "fa6dc108e9dcc97b2ca79a5d56f7d588e9e218d43e997e26a656856f0014cb38"
+    },
+    {
+      "source": "tests/test_dg10_bfcl_single_turn_dev_smoke.py",
+      "destination": "MiLAi/tests/test_dg10_bfcl_single_turn_dev_smoke.py",
+      "sha256": "522fb8b3bac88d3f2fc64526bcee2cebccface33bebbc2f249f44ccce34c082e"
+    },
+    {
+      "source": "tests/test_dg10_bootstrap_executor.py",
+      "destination": "MiLAi/tests/test_dg10_bootstrap_executor.py",
+      "sha256": "62f50bc5bc9993305efc7a2960a2fef9537e9f81f72b36f5f23bcf866421bf24"
+    },
+    {
+      "source": "tests/test_dg10_bootstrap_review_import.py",
+      "destination": "MiLAi/tests/test_dg10_bootstrap_review_import.py",
+      "sha256": "624de45c842f421f69054dd5078bbd5b5c38558bdd9243bb250049fc76d65a30"
+    },
+    {
+      "source": "tests/test_dg10_candidate4_ai_audit_runner.py",
+      "destination": "MiLAi/tests/test_dg10_candidate4_ai_audit_runner.py",
+      "sha256": "c512570ce668584a7e1aef12fbc49f00d0c24d136c3ca1d91937f348585bf1d0"
+    },
+    {
+      "source": "tests/test_dg10_contracts.py",
+      "destination": "MiLAi/tests/test_dg10_contracts.py",
+      "sha256": "43e33ba7499455d73c5a2202882bf3a9386700daf454c7360c920443fd4b4707"
+    },
+    {
+      "source": "tests/test_dg10_engineering_status.py",
+      "destination": "MiLAi/tests/test_dg10_engineering_status.py",
+      "sha256": "6b56cef71d6a4676512845c781205fc4a1a8e9bacde6c688a4d528864441ab26"
+    },
+    {
+      "source": "tests/test_dg10_f0_runner.py",
+      "destination": "MiLAi/tests/test_dg10_f0_runner.py",
+      "sha256": "71e1a87d9a0086153d34e2cd25f5234b5e5a8f8d5118b2d7114f972cf273881f"
+    },
+    {
+      "source": "tests/test_dg10_final_completion_audit.py",
+      "destination": "MiLAi/tests/test_dg10_final_completion_audit.py",
+      "sha256": "4f6e2bcb80b80d1a343bf715fd966430ae2b600b95b93ccc09f396753192e61f"
+    },
+    {
+      "source": "tests/test_dg10_final_quality_state.py",
+      "destination": "MiLAi/tests/test_dg10_final_quality_state.py",
+      "sha256": "f3807351a1af2cac0df6aa8b4c9598df689e102a61a7c5890362efa25d99f0d0"
+    },
+    {
+      "source": "tests/test_dg10_full_test_executor.py",
+      "destination": "MiLAi/tests/test_dg10_full_test_executor.py",
+      "sha256": "01c96e30b1f68a4488bd9cb74a2e39c2fe78d6fb27c1d18dccda3794c3701450"
+    },
+    {
+      "source": "tests/test_dg10_independent_gates.py",
+      "destination": "MiLAi/tests/test_dg10_independent_gates.py",
+      "sha256": "4b0e99289e96de6c5f5d3891f543d7dd699ee9e64aaf1a012bbe0d5bf7e7d1a9"
+    },
+    {
+      "source": "tests/test_dg10_inventory.py",
+      "destination": "MiLAi/tests/test_dg10_inventory.py",
+      "sha256": "7d90c29fec662dc1c7197a25f23693be6135adfb9ab409ecfc47d526589ad83e"
+    },
+    {
+      "source": "tests/test_dg10_lme_product_smoke.py",
+      "destination": "MiLAi/tests/test_dg10_lme_product_smoke.py",
+      "sha256": "cf61a8c75b0ad59a64a5d3911e71872fede7c552967f208e36089faeb152e1d9"
+    },
+    {
+      "source": "tests/test_dg10_memory_fixture.py",
+      "destination": "MiLAi/tests/test_dg10_memory_fixture.py",
+      "sha256": "78f9f9cf86f7dd610efea1b10c71f25084d4b6e20b416dfc429125dbf8c36782"
+    },
+    {
+      "source": "tests/test_dg10_memory_quality.py",
+      "destination": "MiLAi/tests/test_dg10_memory_quality.py",
+      "sha256": "f9f973918743db55a93660ad889641cf12ae8ca71390a9b35971d0626e141840"
+    },
+    {
+      "source": "tests/test_dg10_minimal_serving.py",
+      "destination": "MiLAi/tests/test_dg10_minimal_serving.py",
+      "sha256": "c935ea49b3ee569205b553f9b315968053a1512d958c942517cbb60605e239cd"
+    },
+    {
+      "source": "tests/test_dg10_openworker_f1_adapter.py",
+      "destination": "MiLAi/tests/test_dg10_openworker_f1_adapter.py",
+      "sha256": "9a49e2be3d9086a820d75bdf2fca9a40001016696ea1a44e82ad35fb950938f3"
+    },
+    {
+      "source": "tests/test_dg10_openworker_mcp.py",
+      "destination": "MiLAi/tests/test_dg10_openworker_mcp.py",
+      "sha256": "47728836e1d748fdcc0cb8301ffda4baae1fada53b76e5adc938ba317bdb2e13"
+    },
+    {
+      "source": "tests/test_dg10_prefetch.py",
+      "destination": "MiLAi/tests/test_dg10_prefetch.py",
+      "sha256": "95a93f397d8878250768dadc5b1129ec49683aa16a4c283b971f5b0bd93b2b96"
+    },
+    {
+      "source": "tests/test_dg10_provider_authorization_boundary.py",
+      "destination": "MiLAi/tests/test_dg10_provider_authorization_boundary.py",
+      "sha256": "0302dfee23b6a963928c04b87bc71fb12f1a528303fd808d9c0945ebd17c01c2"
+    },
+    {
+      "source": "tests/test_dg10_quality_stats.py",
+      "destination": "MiLAi/tests/test_dg10_quality_stats.py",
+      "sha256": "8611b8d99b25fc9ece0e4f829a5a27f168f4450697d5815cb31bbcb8e5048ef1"
+    },
+    {
+      "source": "tests/test_dg10_remediation.py",
+      "destination": "MiLAi/tests/test_dg10_remediation.py",
+      "sha256": "ed40a6a3a4657e0aa4b307880709000cf44d89fcf04ea82b403aa13dfa814b72"
+    },
+    {
+      "source": "tests/test_dg10_review_bundle.py",
+      "destination": "MiLAi/tests/test_dg10_review_bundle.py",
+      "sha256": "8f8a835a8f332d2008326c00d9cf2615c3671664b4238651f8a59410edba9c17"
+    },
+    {
+      "source": "tests/test_dg10_runtime_fixture.py",
+      "destination": "MiLAi/tests/test_dg10_runtime_fixture.py",
+      "sha256": "37165015213f4f3c04270dcec70da0a1375c7720fb5aa31d7d6155c6b2ad803d"
+    },
+    {
+      "source": "tests/test_dg10_serving_assessment.py",
+      "destination": "MiLAi/tests/test_dg10_serving_assessment.py",
+      "sha256": "6020040bdf164f4bdd4545614656fce225ee7298172dfb612e4496152562e3f7"
+    },
+    {
+      "source": "tests/test_dg10_serving_characterization.py",
+      "destination": "MiLAi/tests/test_dg10_serving_characterization.py",
+      "sha256": "c14baf4df79166960be76ccd556ef84a70bf2ca2ce2bf8578420cec5bd43e75a"
+    },
+    {
+      "source": "tests/test_dg10_serving_metrics.py",
+      "destination": "MiLAi/tests/test_dg10_serving_metrics.py",
+      "sha256": "87cc222392751606a08063ca4e368eb77538bb0409016b9a81e4a522482e6aa2"
+    },
+    {
+      "source": "tests/test_dg10_sol_final_disposition.py",
+      "destination": "MiLAi/tests/test_dg10_sol_final_disposition.py",
+      "sha256": "24a1eb148d6c20c73b441bd6b741c6ef6d20488cdb3bb5631dbfe0671102420a"
+    },
+    {
+      "source": "tests/test_dg10_sol_review_import.py",
+      "destination": "MiLAi/tests/test_dg10_sol_review_import.py",
+      "sha256": "ed71a1c63eb3038fc14103b654ed81d2418bbb7d8b594b690dee2d3e493124e2"
+    },
+    {
+      "source": "tests/test_dg10_stage_ledger.py",
+      "destination": "MiLAi/tests/test_dg10_stage_ledger.py",
+      "sha256": "1ed3a1237ce5cbd54fa7048fb6fa412632eec5f27f20f3424c7fdf2d77c74e46"
+    },
+    {
+      "source": "tests/test_dg10_tier2_blind_package.py",
+      "destination": "MiLAi/tests/test_dg10_tier2_blind_package.py",
+      "sha256": "0dd604aaba504ec5efe176ef47d03e899891691c5e7d7f43acf4713014ac111c"
+    },
+    {
+      "source": "tests/test_dg10_tier3_same_vllm_judge.py",
+      "destination": "MiLAi/tests/test_dg10_tier3_same_vllm_judge.py",
+      "sha256": "8ff0def1979388a216f50284bf9d36cb1e813d5a89280199d222faf372541156"
+    },
+    {
+      "source": "tests/test_dg10_vllm_openworker_e2e.py",
+      "destination": "MiLAi/tests/test_dg10_vllm_openworker_e2e.py",
+      "sha256": "bd3e003d854da429ba0d4ffdafc7ec621dd4f1763c16ed7a11d88e0b1313dab8"
+    },
+    {
+      "source": "tests/test_dg10_workflow.py",
+      "destination": "MiLAi/tests/test_dg10_workflow.py",
+      "sha256": "9448ce616306a0a64b31d0cd404534bf71f357f6dec05c071e508ee91847aca7"
+    },
+    {
+      "source": "tests/test_dg11_holdout.py",
+      "destination": "MiLAi/tests/test_dg11_holdout.py",
+      "sha256": "27039dc4004ece3f50763540cb464867cc8a1e31b09ec22a6094a6a908c24c2d"
+    },
+    {
+      "source": "tests/test_dg11_r06_freeze.py",
+      "destination": "MiLAi/tests/test_dg11_r06_freeze.py",
+      "sha256": "f9aa9f8ea1ee64144d8de5998f95b4088872e6653c4796ba04dcab85b416975b"
+    },
+    {
+      "source": "tests/test_dg11_v2.py",
+      "destination": "MiLAi/tests/test_dg11_v2.py",
+      "sha256": "1c3e636aff8b609c640139a1b98ae860a0fad8653e383a68e2bd79b4837ca968"
+    },
+    {
+      "source": "tests/test_dg12_paper_v3.py",
+      "destination": "MiLAi/tests/test_dg12_paper_v3.py",
+      "sha256": "a34dd087768e9a271b0068fda06f2aa0ab84d088a7d6fb069e71a566da8da123"
+    },
+    {
+      "source": "tests/test_dg12_runtime_slot.py",
+      "destination": "MiLAi/tests/test_dg12_runtime_slot.py",
+      "sha256": "1d8abae403123919111c43052770be37565a23bff4c78b535bdd88e77590e5d2"
+    },
+    {
+      "source": "tests/test_dg12_stage_profile.py",
+      "destination": "MiLAi/tests/test_dg12_stage_profile.py",
+      "sha256": "566eeaec1dd48547b93d072be99de014802a65263489b0d396c8e249f2b4ccdd"
+    },
+    {
+      "source": "tests/test_dg13_m0_baseline.py",
+      "destination": "MiLAi/tests/test_dg13_m0_baseline.py",
+      "sha256": "e215bfd2be0b0a7e439bbd86398ac4cd570d2bba712270e783ae179ead360edc"
+    },
+    {
+      "source": "tests/test_dg13u_openworker_headers_probe.py",
+      "destination": "MiLAi/tests/test_dg13u_openworker_headers_probe.py",
+      "sha256": "628cbd5780918efb8274b1bf3541b8f44e81542400a8c770b047aa9a1fc014c9"
+    },
+    {
+      "source": "tests/test_dg13u_openworker_runner.py",
+      "destination": "MiLAi/tests/test_dg13u_openworker_runner.py",
+      "sha256": "3865e1a7ec002b6061718a3f68eb9167eea2cdc78a1fa84c8410badc11007a69"
+    },
+    {
+      "source": "tests/test_dg13u_u1_aggregate.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_aggregate.py",
+      "sha256": "f80dbac369cac74e859af398bf527480b1c0a0671abb9426fc134362bf94f8da"
+    },
+    {
+      "source": "tests/test_dg13u_u1_bundle.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_bundle.py",
+      "sha256": "5ae2612f2c1cbd3b11e52fd41b7a2a579c51a82ae58f9b90295b680c9c99eecb"
+    },
+    {
+      "source": "tests/test_dg13u_u1_cache_governance_scenarios.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_cache_governance_scenarios.py",
+      "sha256": "207a098f169afde7234ea315037f4ec0d301791ceb3e96a2a1118ba0946974a8"
+    },
+    {
+      "source": "tests/test_dg13u_u1_cleanup.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_cleanup.py",
+      "sha256": "1ccf86c365de2e05530a887d11b64e84715e097683f74d206ddf7292bc89738d"
+    },
+    {
+      "source": "tests/test_dg13u_u1_contract_freeze.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_contract_freeze.py",
+      "sha256": "f4603f67c1c4bea91ef40c540fda642e3bab7bb78848c9c42219010a14474b14"
+    },
+    {
+      "source": "tests/test_dg13u_u1_evidence_artifacts.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_evidence_artifacts.py",
+      "sha256": "ebbc135df8059ccb1b1e5867696f1a57b85651987e8d45cee29186204e5bdc46"
+    },
+    {
+      "source": "tests/test_dg13u_u1_fault_execution.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_fault_execution.py",
+      "sha256": "0c91ff4bb57e854de204a322bf9c13afc6dec93c4d6485b025b3f082182063c3"
+    },
+    {
+      "source": "tests/test_dg13u_u1_fault_scenarios.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_fault_scenarios.py",
+      "sha256": "17c28552bf939e125b17bd954b3edbe24f5098997372825c661e2be850b555fb"
+    },
+    {
+      "source": "tests/test_dg13u_u1_fixture.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_fixture.py",
+      "sha256": "aa292ed51f082ebd371780ba00bb79d400fabdb93e4589c36de322950aa5b1a7"
+    },
+    {
+      "source": "tests/test_dg13u_u1_headers_probe.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_headers_probe.py",
+      "sha256": "73584000c67612979de9a32e15b1d530258a5cf00099683425322014cc263edd"
+    },
+    {
+      "source": "tests/test_dg13u_u1_image_contract.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_image_contract.py",
+      "sha256": "4970049b2ddd5f38d3c3ab43d4ef41c05fe4c4d5f6f64254047789073f3b2f73"
+    },
+    {
+      "source": "tests/test_dg13u_u1_interaction_scenarios.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_interaction_scenarios.py",
+      "sha256": "bf401e5664de892a8c022915907358b0d456a9422336f2c7a9d601963f25c6ae"
+    },
+    {
+      "source": "tests/test_dg13u_u1_lifecycle_runner.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_lifecycle_runner.py",
+      "sha256": "7f732912ad83dd79779544568552981358a3adc89c93b797c45ff1c0e627d90d"
+    },
+    {
+      "source": "tests/test_dg13u_u1_lifecycle_scenarios.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_lifecycle_scenarios.py",
+      "sha256": "706139f1f9cbffbb6791bafba512db4ef3591ca6efbb3a7b338e7ab9a69ebfc1"
+    },
+    {
+      "source": "tests/test_dg13u_u1_matrix.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_matrix.py",
+      "sha256": "9b697fd14d81db53e0b5266529fc0517de544b23f53a4173d392281abaacdde5"
+    },
+    {
+      "source": "tests/test_dg13u_u1_mcp_child_fault.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_mcp_child_fault.py",
+      "sha256": "1b8f17d38f8905ee8b1355cfb70fa6d4a6785561a6a1438f51ea7413bfeb982b"
+    },
+    {
+      "source": "tests/test_dg13u_u1_mcp_fault.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_mcp_fault.py",
+      "sha256": "e00f1ab4601350abcd37a582d01179fc63860baae5e4632faa05780d3caa84e3"
+    },
+    {
+      "source": "tests/test_dg13u_u1_openworker.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_openworker.py",
+      "sha256": "8cc08045323bacb410b32d14da86a80fd5605d0684461cbbe1a94e7dd9d05a95"
+    },
+    {
+      "source": "tests/test_dg13u_u1_operator_runbook.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_operator_runbook.py",
+      "sha256": "53351b5052177eddee491a8212ebc3fcf00bcaa3a233be4b991d80a19c51ac5d"
+    },
+    {
+      "source": "tests/test_dg13u_u1_provider_fault.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_provider_fault.py",
+      "sha256": "8345208f26a734e45189217b5ff27ffdc5cec066222a274aec614f63a2aa4983"
+    },
+    {
+      "source": "tests/test_dg13u_u1_resource_registry.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_resource_registry.py",
+      "sha256": "07ba8a22f383259270a4d4c272913036db24df012aeaeb4727b92ce2f0a39630"
+    },
+    {
+      "source": "tests/test_dg13u_u1_review.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_review.py",
+      "sha256": "3404142e970ea68aa6b418a1d38d8408f46f2e8053cf3463afa8e5950fe0fa25"
+    },
+    {
+      "source": "tests/test_dg13u_u1_runtime_fault.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_runtime_fault.py",
+      "sha256": "34f2c1bf8471475b146ed55a5ef76bb8dd50946efa80db8d3eaf22894c27d63c"
+    },
+    {
+      "source": "tests/test_dg13u_u1_runtime_writer.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_runtime_writer.py",
+      "sha256": "4343749bd84f4d8aa87ca6f2587797507aad36e3dcb70adb4825da12c58ed772"
+    },
+    {
+      "source": "tests/test_dg13u_u1_task_scenarios.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_task_scenarios.py",
+      "sha256": "96ccad230405ad1451fc8a0786fb1384cf9a61f90420ad2472643019b414b64a"
+    },
+    {
+      "source": "tests/test_dg13u_u1_test_gate.py",
+      "destination": "MiLAi/tests/test_dg13u_u1_test_gate.py",
+      "sha256": "d69d7dc68cb3db74186bd215bee221f6f381f397459a13595bb941e3002e41d0"
+    },
+    {
+      "source": "tests/test_dg14_lme_adapter.py",
+      "destination": "MiLAi/tests/test_dg14_lme_adapter.py",
+      "sha256": "0d7de1e083ab58725bdee7c0f9f430b62099a5af25175ecb76af67f57c9416fa"
+    },
+    {
+      "source": "tests/test_dg14_lme_boundaries.py",
+      "destination": "MiLAi/tests/test_dg14_lme_boundaries.py",
+      "sha256": "bf6dd3a7729cf3ca934bc855b3ea1d430957ce1137e64fe5eb0ce7cca3670468"
+    },
+    {
+      "source": "tests/test_dg14_lme_integration.py",
+      "destination": "MiLAi/tests/test_dg14_lme_integration.py",
+      "sha256": "3672f180475e50a41d7f5d4d07c163dc00e60c2921cd786639721bc7acba9540"
+    },
+    {
+      "source": "tests/test_dg14_lme_mcp_contract.py",
+      "destination": "MiLAi/tests/test_dg14_lme_mcp_contract.py",
+      "sha256": "7d3acf7ddc72ed5640f3dadc97c430a9c34ce4ec1d8da2d03b2167c11383fd48"
+    },
+    {
+      "source": "tests/test_dg14_lme_runner.py",
+      "destination": "MiLAi/tests/test_dg14_lme_runner.py",
+      "sha256": "13b8cc6736de008ef27115dd61d5ae93efdf5dec30f7956a49bc4fb370528452"
+    },
+    {
+      "source": "tests/test_dg14_openworker_composition.py",
+      "destination": "MiLAi/tests/test_dg14_openworker_composition.py",
+      "sha256": "9d2152c74a49ecf9e4b59c83b6a8f95adc3807ae238ea478a0e0331a99478205"
+    },
+    {
+      "source": "tests/test_dg15_lme_mcp_adapter.py",
+      "destination": "MiLAi/tests/test_dg15_lme_mcp_adapter.py",
+      "sha256": "e2d6a55024c9932858d39a5baedb07815b81b5564aa7c2e83d80c5cb420cd528"
+    },
+    {
+      "source": "tests/test_dg15_mcp_transport.py",
+      "destination": "MiLAi/tests/test_dg15_mcp_transport.py",
+      "sha256": "d3e15d0e9e716d066f8836be8392f102acbfb2f0daab2e82b52ce74e7966fe47"
+    },
+    {
+      "source": "tests/test_dg16_external_lme10.py",
+      "destination": "MiLAi/tests/test_dg16_external_lme10.py",
+      "sha256": "348f47992355ae392de252a784cdf9a46f73a2e06144db58843d126d42b513ce"
+    },
+    {
+      "source": "tests/test_dg16_lme10.py",
+      "destination": "MiLAi/tests/test_dg16_lme10.py",
+      "sha256": "1d4390d66ce77d559d00da788302cf311fd9c3369fc92ace9556790266e4296f"
+    },
+    {
+      "source": "tests/test_dg16_q0.py",
+      "destination": "MiLAi/tests/test_dg16_q0.py",
+      "sha256": "e0ce3e57c4cc725fead2104dd3bc46d685f1749421fe40fd42db473cfcf9dd65"
+    },
+    {
+      "source": "tests/test_dg16_q4.py",
+      "destination": "MiLAi/tests/test_dg16_q4.py",
+      "sha256": "7f8ffe13e0e80eb1290e0071a3addd1f10deba15062b6449e9a9160b2a6c8d7c"
+    },
+    {
+      "source": "tests/test_dg16_q5.py",
+      "destination": "MiLAi/tests/test_dg16_q5.py",
+      "sha256": "44b5462a3e020394b66ea55173eba09ad6b3a475e70eede60056eafc61f63c9b"
+    },
+    {
+      "source": "tests/test_dg16_q6.py",
+      "destination": "MiLAi/tests/test_dg16_q6.py",
+      "sha256": "201fb8f47f32c2a1859ac0b3167e74f56e78ce0007ea68a41ba5b38157f057c1"
+    },
+    {
+      "source": "tests/test_dg16_reader_stability.py",
+      "destination": "MiLAi/tests/test_dg16_reader_stability.py",
+      "sha256": "4e2401c73cd41c6f210cbc981740eec32e6abe77d4ec44855bce08f7618550ad"
+    },
+    {
+      "source": "tests/test_dg17_a1_acquisition.py",
+      "destination": "MiLAi/tests/test_dg17_a1_acquisition.py",
+      "sha256": "a01d0db64547e9ec5c0c11c77760ac4d85bbf5030409e87bbfd4aefe01bb6d1f"
+    },
+    {
+      "source": "tests/test_dg17_a3_source_calibration.py",
+      "destination": "MiLAi/tests/test_dg17_a3_source_calibration.py",
+      "sha256": "81200921fe22f3830f62acc057287eef31d4baddfd4c1508c14c7ac91a7efb8d"
+    },
+    {
+      "source": "tests/test_dg17_a4_lexical_evaluation.py",
+      "destination": "MiLAi/tests/test_dg17_a4_lexical_evaluation.py",
+      "sha256": "8901604a44a42e256459284372441e8c016007094737894509c78cad7ccb3665"
+    },
+    {
+      "source": "tests/test_dg17_a5_temporal_acquisition.py",
+      "destination": "MiLAi/tests/test_dg17_a5_temporal_acquisition.py",
+      "sha256": "19dc5c00507caba9af109922b8f777d4cc676cb27605b9f46ed7a85815b61d02"
+    },
+    {
+      "source": "tests/test_dg17_a6_dense_productization.py",
+      "destination": "MiLAi/tests/test_dg17_a6_dense_productization.py",
+      "sha256": "0694d1cd1beb78700491bd9009f9c54727b57c2ad8389948cfce494fee177ca4"
+    },
+    {
+      "source": "tests/test_dg17_acquisition_loss.py",
+      "destination": "MiLAi/tests/test_dg17_acquisition_loss.py",
+      "sha256": "7c59380afc312efd576e4af8c02256d20a04ec256bcf2f5727fb4acc64592047"
+    },
+    {
+      "source": "tests/test_dg17_local_gate.py",
+      "destination": "MiLAi/tests/test_dg17_local_gate.py",
+      "sha256": "b991908283c56c67e1f5802060fc9c2505101bfc7cfdebde84f02921c4e4c26d"
+    },
+    {
+      "source": "tests/test_dg17_measurement.py",
+      "destination": "MiLAi/tests/test_dg17_measurement.py",
+      "sha256": "1eb0dfa67a9e5b99ece733d2d08517f22de2be16677a85739cdad07e491fc243"
+    },
+    {
+      "source": "tests/test_dg17_product_verticals.py",
+      "destination": "MiLAi/tests/test_dg17_product_verticals.py",
+      "sha256": "e1936f4202a9a684a9c559c5a3859d5447b34ac4a7ae03c23cb28f13b547fe47"
+    },
+    {
+      "source": "tests/test_dg17_q0_multiseed.py",
+      "destination": "MiLAi/tests/test_dg17_q0_multiseed.py",
+      "sha256": "10c9d9e7c35d7afcc40c6b37d3c51cfc6b18345cf14b785ab5a0554547362f0d"
+    },
+    {
+      "source": "tests/test_dg17_q1r_causality.py",
+      "destination": "MiLAi/tests/test_dg17_q1r_causality.py",
+      "sha256": "f64c3eea75e60dabcadea53ba563d439124561f85a64178b25ffbb0aa109ffb0"
+    },
+    {
+      "source": "tests/test_dg17_q1r_context_archive.py",
+      "destination": "MiLAi/tests/test_dg17_q1r_context_archive.py",
+      "sha256": "d7d9aa2b9b076773a5353d07c542d54136df664d82e8e1fbb45a9d500aa0be25"
+    },
+    {
+      "source": "tests/test_dg17_q6_matched.py",
+      "destination": "MiLAi/tests/test_dg17_q6_matched.py",
+      "sha256": "61039565f7b968ecf592fc14a7daa9024ee7cf3d81d2dd38c21cb7e337dbce2b"
+    },
+    {
+      "source": "tests/test_dg17_q6_preflight.py",
+      "destination": "MiLAi/tests/test_dg17_q6_preflight.py",
+      "sha256": "085055409719d40f7cd5f459e7427cd1161ab35b0a2ffaf17c9c9fad950fec25"
+    },
+    {
+      "source": "tests/test_dg17_q6_sealed.py",
+      "destination": "MiLAi/tests/test_dg17_q6_sealed.py",
+      "sha256": "a0b78327d67349280f3ee3194538c3c4f48fdaf135a90125947bae421beaf121"
+    },
+    {
+      "source": "tests/test_dg17_q8_retrieval_ablation.py",
+      "destination": "MiLAi/tests/test_dg17_q8_retrieval_ablation.py",
+      "sha256": "4ef57955ec31cb9d1089d2d146dfc1cc491274d5f251d5158b256a82bcbcc85d"
+    },
+    {
+      "source": "tests/test_dg17_runbook.py",
+      "destination": "MiLAi/tests/test_dg17_runbook.py",
+      "sha256": "9e392eb45de5333bfd09f449c30d5d1f616721baea3c508c5b2c93e7d5326b0c"
+    },
+    {
+      "source": "tests/test_dg17_semantic_crosswalk.py",
+      "destination": "MiLAi/tests/test_dg17_semantic_crosswalk.py",
+      "sha256": "5f0a71cc2ed468601b8bd937048110950abfedc2891de442eb975479fd345715"
+    },
+    {
+      "source": "tests/test_dg17_semantic_shadow.py",
+      "destination": "MiLAi/tests/test_dg17_semantic_shadow.py",
+      "sha256": "288cc694e4a76a2b072f229d7acb7920d9442fddcf8764a5568b9f5469c01c67"
+    },
+    {
+      "source": "tests/test_dg18_r0_baseline.py",
+      "destination": "MiLAi/tests/test_dg18_r0_baseline.py",
+      "sha256": "828863120664d39c1e0b3e36363c7fcb5a49b6b6eea2d2f3f012f043cf8088e6"
+    },
+    {
+      "source": "tests/test_dg18_residual_shadow.py",
+      "destination": "MiLAi/tests/test_dg18_residual_shadow.py",
+      "sha256": "89f42b9483cb667f27054bf34405c8defd48b49552a3ebf15452f7c4befb78f2"
+    },
+    {
+      "source": "tests/test_dg19_synthetic_treatment_delivery.py",
+      "destination": "MiLAi/tests/test_dg19_synthetic_treatment_delivery.py",
+      "sha256": "44e81759340b0f902c1ed5e081fb323f074daf58fdaaba790a3db39af32fb131"
+    },
+    {
+      "source": "tests/test_dg20_quality_gates.py",
+      "destination": "MiLAi/tests/test_dg20_quality_gates.py",
+      "sha256": "7e2357a91293a2bde2b7531d9b8a9c6f636763ed60c83832f2cf1a175cd0d3b6"
+    },
+    {
+      "source": "tests/test_dg20_s0_fresh_state_audit.py",
+      "destination": "MiLAi/tests/test_dg20_s0_fresh_state_audit.py",
+      "sha256": "80ea1f474e359fd107d12aad9e80c202a831bcd0aa2cfbb839edb88993d9a304"
+    },
+    {
+      "source": "tests/test_dg20_s1_official_channel_oracle.py",
+      "destination": "MiLAi/tests/test_dg20_s1_official_channel_oracle.py",
+      "sha256": "84ff0e54dcb22c569e50834e4c2bebed6c8f3c38118bd48f2f0cfa382002dc26"
+    },
+    {
+      "source": "tests/test_dg20_s2_deterministic_policy.py",
+      "destination": "MiLAi/tests/test_dg20_s2_deterministic_policy.py",
+      "sha256": "dc87c4b3d8c946745b8a831be2c811e1c7e3b925e0083f18696b46dacfb81d38"
+    },
+    {
+      "source": "tests/test_dg20_s3_disposition.py",
+      "destination": "MiLAi/tests/test_dg20_s3_disposition.py",
+      "sha256": "bd6accb08202c1a7e3ef7d014695a670393793fc4c93bb353aee729d25de79f2"
+    },
+    {
+      "source": "tests/test_dg20_s4_product_faithful.py",
+      "destination": "MiLAi/tests/test_dg20_s4_product_faithful.py",
+      "sha256": "390133c0c8cc2217b20f3bacea73515cd9689ac16cc0d6bb4b73b7e29d221027"
+    },
+    {
+      "source": "tests/test_dg20_s5_matched_q6.py",
+      "destination": "MiLAi/tests/test_dg20_s5_matched_q6.py",
+      "sha256": "b08b5a37a9afe0b99e5071971f3ad704cb0fe53446c21f5279f436cba4cc5e45"
+    },
+    {
+      "source": "tests/test_dg20_stage_artifact_projection.py",
+      "destination": "MiLAi/tests/test_dg20_stage_artifact_projection.py",
+      "sha256": "30214282b18230ccd112255c3d0c72a0d06c54c490d8f0273c9161606ac7ff03"
+    },
+    {
+      "source": "tests/test_dg20_terminal_receipt.py",
+      "destination": "MiLAi/tests/test_dg20_terminal_receipt.py",
+      "sha256": "08e08746b3a23ea05dd2d435b6f19135fd3e6d9cd04262224b0da019db7b7089"
+    },
+    {
+      "source": "tests/test_dg21_s0_baseline_freeze.py",
+      "destination": "MiLAi/tests/test_dg21_s0_baseline_freeze.py",
+      "sha256": "36431e403edef76e8d290e239d59e5749bb8fc9f79e3abff1fa4ed7c3a5c5310"
+    },
+    {
+      "source": "tests/test_dg21_s1_synthetic_matrix.py",
+      "destination": "MiLAi/tests/test_dg21_s1_synthetic_matrix.py",
+      "sha256": "9a856607d03b705aa19d6f16881c8ae7e8034cba1f73d794e27265290f9c51a0"
+    },
+    {
+      "source": "tests/test_dg21_s2_type_directed_replay.py",
+      "destination": "MiLAi/tests/test_dg21_s2_type_directed_replay.py",
+      "sha256": "58929bb0fddc027b29c777e2815e23725a45fb4f32f1af4e9c9e4950b07f958a"
+    },
+    {
+      "source": "tests/test_dg21_s3_targeted_acquisition.py",
+      "destination": "MiLAi/tests/test_dg21_s3_targeted_acquisition.py",
+      "sha256": "b0d79006fc6c48c3b8ca7dcdeb9dd445decc9e25b79e5e7d4b9c2b187dd5ae27"
+    },
+    {
+      "source": "tests/test_dg21_s4_preference_expressivity.py",
+      "destination": "MiLAi/tests/test_dg21_s4_preference_expressivity.py",
+      "sha256": "4c8bbdea41f3fd23d3bbd0eca4da9da141770f51fce91277dd08372a45e3c96f"
+    },
+    {
+      "source": "tests/test_dg21_s5_temporal_oracle.py",
+      "destination": "MiLAi/tests/test_dg21_s5_temporal_oracle.py",
+      "sha256": "2804a5dd2a25a1da5bfb225e7060510a5a02d83e2abf3a5324fe405d4190851a"
+    },
+    {
+      "source": "tests/test_dg21_s6_schema_gate.py",
+      "destination": "MiLAi/tests/test_dg21_s6_schema_gate.py",
+      "sha256": "0695addfdfc48789150d66dfff47977bb7d90d25e03fef79b372e1fff8ef15af"
+    },
+    {
+      "source": "tests/test_dg21_s7_matched.py",
+      "destination": "MiLAi/tests/test_dg21_s7_matched.py",
+      "sha256": "470d20160e9bdec3795445332495360ebdb9f26b0fd51bad883b94e5dfcf998a"
+    },
+    {
+      "source": "tests/test_dg21_s8_quality.py",
+      "destination": "MiLAi/tests/test_dg21_s8_quality.py",
+      "sha256": "bc7ca7fdf9b9a31c4c7e657c31fe56043acbaf2974ab2069ff49904a50271601"
+    },
+    {
+      "source": "tests/test_dg21_s9_terminal.py",
+      "destination": "MiLAi/tests/test_dg21_s9_terminal.py",
+      "sha256": "8e2ac28ff623ac6759befa9fa345fcb2d9956e268ec3a09f72505eb3c001460e"
+    },
+    {
+      "source": "tests/test_dg22_s0_baseline_freeze.py",
+      "destination": "MiLAi/tests/test_dg22_s0_baseline_freeze.py",
+      "sha256": "8e250fa06a248e3730c9f779186470285512f3af048b148b7fbd1b6d65b1a10b"
+    },
+    {
+      "source": "tests/test_dg22_s10_terminal.py",
+      "destination": "MiLAi/tests/test_dg22_s10_terminal.py",
+      "sha256": "ef6cff59209217d8bb6315bee50bd6856353101e81b9622fc022062849f716ea"
+    },
+    {
+      "source": "tests/test_dg22_s1_accuracy_oracle.py",
+      "destination": "MiLAi/tests/test_dg22_s1_accuracy_oracle.py",
+      "sha256": "bc4957c90091bb0361a314eaa92d605960365be3d9d9ed3cb73427ed1f7729b7"
+    },
+    {
+      "source": "tests/test_dg22_s2_reader_conformance.py",
+      "destination": "MiLAi/tests/test_dg22_s2_reader_conformance.py",
+      "sha256": "446d80024c3f2ab643396028f14e793b26a450c62513a079f66fcc8b9ce4dd88"
+    },
+    {
+      "source": "tests/test_dg22_s3_query_correctness.py",
+      "destination": "MiLAi/tests/test_dg22_s3_query_correctness.py",
+      "sha256": "d73d62e25e5dd706d263e6cf89d5dc2af43069687f924aaced132f3407ac7c87"
+    },
+    {
+      "source": "tests/test_dg22_s4_binding_correctness.py",
+      "destination": "MiLAi/tests/test_dg22_s4_binding_correctness.py",
+      "sha256": "9759c36858dbabf2eb2309f4ab584b326555f2630b43dc887f68eda8f5ec2958"
+    },
+    {
+      "source": "tests/test_dg22_s5_acquisition_correctness.py",
+      "destination": "MiLAi/tests/test_dg22_s5_acquisition_correctness.py",
+      "sha256": "2639d6b8aaa750cb0f338374c3284eb34f222dda094c41e43480a777bb68ac9e"
+    },
+    {
+      "source": "tests/test_dg22_s6_temporal_correctness.py",
+      "destination": "MiLAi/tests/test_dg22_s6_temporal_correctness.py",
+      "sha256": "55ffa39b0d81866fd687173aefb005f8e3163365be0479027e211c778d753610"
+    },
+    {
+      "source": "tests/test_dg22_s7_mediator.py",
+      "destination": "MiLAi/tests/test_dg22_s7_mediator.py",
+      "sha256": "2ae9fcea02399e67a60ee6379cc9e48ab8dea28454896beed91986de91302c66"
+    },
+    {
+      "source": "tests/test_dg22_s8_answer_correctness.py",
+      "destination": "MiLAi/tests/test_dg22_s8_answer_correctness.py",
+      "sha256": "fbdbbaf6b4f65daa6e7b99bbe773a717e2bc2d086a459087f8b539298253fc16"
+    },
+    {
+      "source": "tests/test_dg23_s0_baseline_freeze.py",
+      "destination": "MiLAi/tests/test_dg23_s0_baseline_freeze.py",
+      "sha256": "ec7d380e41daf8afd0db7a624330c37bca2d7f726f227ae7d40ee05d9d90f427"
+    },
+    {
+      "source": "tests/test_dg23_s1_budget_causality.py",
+      "destination": "MiLAi/tests/test_dg23_s1_budget_causality.py",
+      "sha256": "8d68b5ece872506a7511874cc57130555cb22e559ec0c371f9758b5f84cce525"
+    },
+    {
+      "source": "tests/test_dg23_s2_decision_separation.py",
+      "destination": "MiLAi/tests/test_dg23_s2_decision_separation.py",
+      "sha256": "1dfd9beab3dd16b0484ca59fb4917957aeb2cfc7bf9b7d22c4a614281332ff74"
+    },
+    {
+      "source": "tests/test_dg23_s3_context_compiler.py",
+      "destination": "MiLAi/tests/test_dg23_s3_context_compiler.py",
+      "sha256": "fba04ce6c469683365c0ef12f386d6c6bcf6e9bfafdaae9a889066b1207a5c7b"
+    },
+    {
+      "source": "tests/test_dg23_s4_reader_boundary.py",
+      "destination": "MiLAi/tests/test_dg23_s4_reader_boundary.py",
+      "sha256": "2510696efbc2f3c579d1db0f042de47df4e8707cba001c575f85aedc97947d63"
+    },
+    {
+      "source": "tests/test_dg23_s5_synthetic_matrix.py",
+      "destination": "MiLAi/tests/test_dg23_s5_synthetic_matrix.py",
+      "sha256": "fce2586fc5e126ae0c78f8d8cc2340b21af9d4ef0077aecdc431a95da7bdfde2"
+    },
+    {
+      "source": "tests/test_dg23_s6_opened_dev_context.py",
+      "destination": "MiLAi/tests/test_dg23_s6_opened_dev_context.py",
+      "sha256": "461fea76984bd27dc4b4a169b330695a069770be017753bac04ebf046b7a711a"
+    },
+    {
+      "source": "tests/test_dg23_s7_matched_reader.py",
+      "destination": "MiLAi/tests/test_dg23_s7_matched_reader.py",
+      "sha256": "ec55ad1ba4fe9a6ca62b72329b427430414989e8c5d5a97bc753f23aabb8705f"
+    },
+    {
+      "source": "tests/test_dg23_s8_quality.py",
+      "destination": "MiLAi/tests/test_dg23_s8_quality.py",
+      "sha256": "8f621728736efb59dd50622ce333bf1f5853e154dde547abf7ffb950dbabf787"
+    },
+    {
+      "source": "tests/test_dg23_s9_terminal.py",
+      "destination": "MiLAi/tests/test_dg23_s9_terminal.py",
+      "sha256": "828b065f7289cbf4fcc69378a221d71e2dc6e25a978f35994eb0395c42656475"
+    },
+    {
+      "source": "tests/test_dg24_contracts.py",
+      "destination": "MiLAi/tests/test_dg24_contracts.py",
+      "sha256": "79e923ab848f32ba0f0e5272504748012020e598d81364ca9993c651d06f1c35"
+    },
+    {
+      "source": "tests/test_dg24_s7_quality.py",
+      "destination": "MiLAi/tests/test_dg24_s7_quality.py",
+      "sha256": "4c05c6f92bc81bded0574283484fd5c839988a78891bd151737c9809ca02f2da"
+    },
+    {
+      "source": "tests/test_dg24_s8_terminal.py",
+      "destination": "MiLAi/tests/test_dg24_s8_terminal.py",
+      "sha256": "f5fbb4b32b0d26b6cb92701d5f58df5ab215cc25be7c60fd8e183ca2d7f52523"
+    },
+    {
+      "source": "tests/test_dg24_scorer.py",
+      "destination": "MiLAi/tests/test_dg24_scorer.py",
+      "sha256": "fec71b74f3b6354454161d4ce99e83a29538bd342e2ecbd798a7f4249e68c7b0"
+    },
+    {
+      "source": "tests/test_dg25_review_gate.py",
+      "destination": "MiLAi/tests/test_dg25_review_gate.py",
+      "sha256": "38fca2f2e825185f9b3fc126ba6dbfb7ecf8f21091c743c87d41812fd6d33076"
+    },
+    {
+      "source": "tests/test_dg25_s0_baseline_freeze.py",
+      "destination": "MiLAi/tests/test_dg25_s0_baseline_freeze.py",
+      "sha256": "220b329f6a90793ea2afbc6064b93a7018d9028da42788e52aa6feabd7c1da6a"
+    },
+    {
+      "source": "tests/test_dg25_s10_terminal.py",
+      "destination": "MiLAi/tests/test_dg25_s10_terminal.py",
+      "sha256": "3dcc4bce1c9e398539c10fa067e82a2ae378e5b926efa39979afe764b88c0aef"
+    },
+    {
+      "source": "tests/test_dg25_s1_contracts.py",
+      "destination": "MiLAi/tests/test_dg25_s1_contracts.py",
+      "sha256": "9f8b9db43b1e88921a3263ccf904035fb19a92801dc9971b72aed93da47ca10c"
+    },
+    {
+      "source": "tests/test_dg25_s2_plan_execution.py",
+      "destination": "MiLAi/tests/test_dg25_s2_plan_execution.py",
+      "sha256": "13a4c094dfecc73efa832de3d6ce80f67e72c88c54333d5f81fe2f00a7d76de8"
+    },
+    {
+      "source": "tests/test_dg25_s3_readiness.py",
+      "destination": "MiLAi/tests/test_dg25_s3_readiness.py",
+      "sha256": "bdab3126ee3e4f99d624bf8a2e2952b5bfa66fea5cd1b766aaf26fcf3f24fc9e"
+    },
+    {
+      "source": "tests/test_dg25_s4a.py",
+      "destination": "MiLAi/tests/test_dg25_s4a.py",
+      "sha256": "93308ca87e13bfb8859c2f34736a236d00075dc54903fb13a9ad06cafc295e55"
+    },
+    {
+      "source": "tests/test_dg25_s4b.py",
+      "destination": "MiLAi/tests/test_dg25_s4b.py",
+      "sha256": "e5b9e8bcb949f19027f7183ffa1eed2644b3ba4fd20b889edce3af7d27ef1999"
+    },
+    {
+      "source": "tests/test_dg26_stateview_reranking.py",
+      "destination": "MiLAi/tests/test_dg26_stateview_reranking.py",
+      "sha256": "22afd0c863a38f401bf9ac9e2f03a2676ad0c94b0dfe7d3fc72c1e72056a1a90"
+    },
+    {
+      "source": "tests/test_dg27_v02_effect.py",
+      "destination": "MiLAi/tests/test_dg27_v02_effect.py",
+      "sha256": "bfcdd5b9a04a40aa290dcba556090ad0917829cb1d6c426b728f99d66d641eaa"
+    },
+    {
+      "source": "tests/test_dg28_acquisition_preparation.py",
+      "destination": "MiLAi/tests/test_dg28_acquisition_preparation.py",
+      "sha256": "5dec20212950f3e01403a6c6197e11c82448b664af8aafc4bff783403f47be79"
+    },
+    {
+      "source": "tests/test_dg28_formation_consumption.py",
+      "destination": "MiLAi/tests/test_dg28_formation_consumption.py",
+      "sha256": "50c865e5653c149c1e2f57b5b93b934c191cf0900ee96489bc950241a55c9014"
+    },
+    {
+      "source": "tests/test_dg28_lite_effect.py",
+      "destination": "MiLAi/tests/test_dg28_lite_effect.py",
+      "sha256": "867042b7f0ccbd51d2f86ef3088840423251dd2005d10873d56064cef56b5d3f"
+    },
+    {
+      "source": "tests/test_dg30_read_path_integration.py",
+      "destination": "MiLAi/tests/test_dg30_read_path_integration.py",
+      "sha256": "6ce3bc85fa068058359f442ba880c4147819442482cfbaf6836cad1e1e615dc9"
+    },
+    {
+      "source": "tests/test_ev01_evolution_bridge_effect.py",
+      "destination": "MiLAi/tests/test_ev01_evolution_bridge_effect.py",
+      "sha256": "baf83f9d12a7afe8ef55393858a401802ba5d9d433ddd574b077420410705353"
+    },
+    {
+      "source": "tests/test_package_dg10_results.py",
+      "destination": "MiLAi/tests/test_package_dg10_results.py",
+      "sha256": "a02c6673a2b7b6bc88aecce2031fae0995c742f8135b91db96132d7773aebccb"
+    }
+  ]
+}

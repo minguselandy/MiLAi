@@ -1,0 +1,26 @@
+{
+  "revision": "V0217_B0_B4_ADMISSION_V1",
+  "authority": "User explicitly requests execution of current Benchmark Discovery Goal v0.2; superseded synthetic paired plan is not executed.",
+  "purpose": "Bounded public-artifact admission and behavioral-ground-truth fixtures, not model ability or mechanism evaluation",
+  "candidates": ["Compliance Trap arXiv 2607.10608", "WorldMemArena", "Supersede", "ClawMark"],
+  "artifact_bytes_bound": 24000000,
+  "single_download_bytes_bound": 4000000,
+  "download_parallelism_bound": 4,
+  "clawmark_screen_limit": 12,
+  "clawmark_fixture_family_target": 2,
+  "large_dataset_or_container_download": false,
+  "external_accounts_or_business_writes": false,
+  "model_generation_allocation": 0,
+  "judge_allocation": 0,
+  "paid_requests": 0,
+  "raw_token_cap": null,
+  "evaluation_contract": {
+    "fixtures": ["positive", "negative", "partial", "clarification", "current_and_stale", "negated_current", "quoted_then_corrected_stale", "reset_and_version", "gold_or_future_leak", "bad_provider_configuration"],
+    "native_scorer_results": "Preserve exact output, even when it contradicts intended semantic criteria",
+    "semantic_dispute": "Nonblind researcher review or UNSCORABLE, never relabel substring hit as executed-action success",
+    "levels": ["PAPER_DESCRIBED", "CODE_INSPECTED", "FIXTURE_CHECKED", "RUNTIME_VERIFIED"],
+    "agent_behavior_denominators": "All zero until actual model traces; no mock presented/used-memory claims",
+    "lane_p_gate": "Every link required; no assembled chain across unrelated benchmarks"
+  },
+  "stop": "B0-B4 evidence and lane-specific gaps recorded for audited scope; HOLD permitted for unresolved artifacts/data/native runtime; no fabricated benchmark"
+}

@@ -1,0 +1,12 @@
+{
+  "case_id": "g2-software-expand", "domain": "software", "initial_type": "expand_once",
+  "development_status": "constructed-pilot-unrun",
+  "task": "这次临时评审需要交易校验器对三个输入的结果表：日期2026-02-30且币种CNY；有效日期但币种ZZZ；有效日期且币种USD。只交付这张表，本事项到此结束，无需安排后续工作。资料在 sources/，也可查询项目记忆。",
+  "followup": null,
+  "initial_payload": {"note": "交易校验器按合同拒绝非法输入，不自动修正日期或币种；平常无需在记忆中保留整张错误码表。", "sources": ["sources/validation.txt"]},
+  "sources": {
+    "validation.txt": "交易校验合同：非法日历日期返回BAD_DATE；币种只允许CNY、USD、EUR，其他返回BAD_CURRENCY；两者均有效返回ACCEPT。禁止自动改写输入。",
+    "legacy.txt": "归档中的旧系统曾把未知币种改为USD。该系统已经停用，此规则不是交易校验器当前合同。"
+  },
+  "evaluation": {"required": ["BAD_DATE", "BAD_CURRENCY", "ACCEPT", "no automatic normalization"], "correct_initial_facts": ["no input rewriting"], "key_source": "validation.txt", "save_value": "One-time expansion; no planned future value"}
+}

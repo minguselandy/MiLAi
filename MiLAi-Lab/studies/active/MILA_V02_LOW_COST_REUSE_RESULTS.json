@@ -1,0 +1,263 @@
+{
+  "status": "COMPLETED_KEEP_BASELINE",
+  "study": "MILA-V02-03",
+  "pin": {
+    "valid": true,
+    "product_root": "/cra/memory/mx_memory/MiLAi-Product",
+    "lock_digest": "850170c1322b785ca4eafc3cdfdee087292f347eb2b9eec4edb5785592e42c6a",
+    "observed_tree_sha256": "8350e95565cc37c588c1e9b6d9a212b48ede7385d50fe2c5d83dc75912946dd3",
+    "errors": []
+  },
+  "config_sha256": "dc7f51bf822bb50591eea1b726c54b87ef8f2e1aee1bee90490a8d16e605b068",
+  "stages": {
+    "N0": "READY",
+    "N1": "NEUTRAL_TRACE_READY",
+    "N2": "AUDIT_COMPLETE_COUNT_AMBIGUOUS_CONTROLS_SCORABLE",
+    "N3": "CONDITIONAL_CHECKPOINT_READY_WITH_PUBLIC_STRING_BOUNDARY_REJECTION",
+    "N4": "NOT_EVALUABLE_NO_ELIGIBLE_EXACT_COPY",
+    "N5": "NOT_ENTERED_NO_N4_PASS_OR_RELIABLE_QA_DEFECT"
+  },
+  "model_allocations": 3,
+  "actual_model_sessions": 2,
+  "phase_allocations": {
+    "N0_N2": 0,
+    "N3_N4": 3,
+    "N5": 0
+  },
+  "limits": {
+    "N0_N2": 4,
+    "N3_N4": 12,
+    "N5": 12,
+    "total": 28
+  },
+  "known_token_launch_gate": 2400000,
+  "known_input_tokens": 477959,
+  "known_output_tokens": 4835,
+  "known_total_tokens": 482794,
+  "cached_input_tokens_subset": 405760,
+  "all_allocations_terminal": true,
+  "unknown_started_usage": false,
+  "raw_online_seconds_all_allocations": 328.25125844497234,
+  "completed_G_operational_seconds": 279.59917478100397,
+  "candidate_rejection_seconds": 0.19317803182639182,
+  "candidate_rejection_api_calls": 2,
+  "G_notes": 2,
+  "eligible_notes": 0,
+  "natural_state_saves": 0,
+  "successful_candidate_saves": 0,
+  "future_allocations": 0,
+  "F_S_token_ratio": null,
+  "F_S_wall_net_gain": null,
+  "full_G_plus_F_or_S_path_cost": null,
+  "effect_claim": "NOT_EVALUABLE; neither cost superiority nor inferiority established",
+  "allocations": [
+    {
+      "allocation_id": "r-27016adc-G",
+      "phase": "N3_N4",
+      "batch_id": "r-generators",
+      "case_id": "27016adc",
+      "arm": "G",
+      "kind": "COMMON_TASK",
+      "status": "PRE_MODEL_INSTRUMENTATION_TIMEOUT",
+      "model_started": false,
+      "tokens": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cached_input_tokens": 0,
+      "raw_online_seconds": 48.65208366396837,
+      "operational_online_seconds": null,
+      "instrumentation_seconds": null,
+      "tool_actions": 0,
+      "source_sha256": "ad52feb8f9c4df3ea10b22176848b06aee3a0b1eb913abd7335b4a8dd6fbdcd3",
+      "config_sha256": "5ee5f2d5a1acd8963708dec531f41fe1be97aa990803cd247d03e783221b164b",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/sessions/r-27016adc-G"
+    },
+    {
+      "allocation_id": "r-27016adc-G-r2",
+      "phase": "N3_N4",
+      "batch_id": "r-generators-v2",
+      "case_id": "27016adc",
+      "arm": "G",
+      "kind": "COMMON_TASK",
+      "status": "COMPLETED",
+      "model_started": true,
+      "tokens": 221349,
+      "input_tokens": 219356,
+      "output_tokens": 1993,
+      "cached_input_tokens": 178816,
+      "raw_online_seconds": 116.25783105194569,
+      "operational_online_seconds": 116.25783105194569,
+      "instrumentation_seconds": 0.05740573210641742,
+      "tool_actions": 10,
+      "source_sha256": "ad52feb8f9c4df3ea10b22176848b06aee3a0b1eb913abd7335b4a8dd6fbdcd3",
+      "config_sha256": "dc7f51bf822bb50591eea1b726c54b87ef8f2e1aee1bee90490a8d16e605b068",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/sessions/r-27016adc-G-r2",
+      "qualification": {
+        "status": "INELIGIBLE",
+        "reason": "NOTE_PUBLIC_STRING_NORMALIZATION_UNSUPPORTED",
+        "note_bytes": 1718,
+        "note_sha256": "c7ed047b321201d91aa5abd091d4bcfd976c5e3990863399c9097affb3ce3e03",
+        "note_terminal_newline": true,
+        "actual_state_version": 0,
+        "candidate_write_calls": 0,
+        "source_support_review": "Root offline: stated property amounts, scopes and prospective/uncertain timing match user sources; not independent review. Format precondition fails before candidate write.",
+        "model_allocations_for_checkpoint": 0,
+        "future_allocations": 0,
+        "original_file_modified": false
+      },
+      "checkpoint": {
+        "status": "REJECTED",
+        "reason": "NOTE_PUBLIC_STRING_NORMALIZATION_UNSUPPORTED",
+        "model_tokens": 0,
+        "model_dispatches": 0,
+        "delta_save_seconds": 0.0980822779238224,
+        "delta_save_cpu_seconds": 0.07692221499999996,
+        "api_calls": 1
+      }
+    },
+    {
+      "allocation_id": "r-852ce960-G",
+      "phase": "N3_N4",
+      "batch_id": "r-generators-v2",
+      "case_id": "852ce960",
+      "arm": "G",
+      "kind": "COMMON_TASK",
+      "status": "COMPLETED",
+      "model_started": true,
+      "tokens": 261445,
+      "input_tokens": 258603,
+      "output_tokens": 2842,
+      "cached_input_tokens": 226944,
+      "raw_online_seconds": 163.34134372905828,
+      "operational_online_seconds": 163.34134372905828,
+      "instrumentation_seconds": 0.08101611793972552,
+      "tool_actions": 11,
+      "source_sha256": "ff6da2fa5ca2fdaa6ec5ef84193afe43fed30499bc2e1d4e065991525fac9722",
+      "config_sha256": "dc7f51bf822bb50591eea1b726c54b87ef8f2e1aee1bee90490a8d16e605b068",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/sessions/r-852ce960-G",
+      "qualification": {
+        "status": "INELIGIBLE",
+        "reason": "NOTE_PUBLIC_STRING_NORMALIZATION_UNSUPPORTED",
+        "note_bytes": 1673,
+        "note_sha256": "67d03c0aa4d4d1041232841db7a606c758a0cb1ab06d3ba8c8409a38756e0c50",
+        "note_terminal_newline": true,
+        "actual_state_version": 0,
+        "candidate_write_calls": 0,
+        "source_support_review": "Root offline source review; note separates dated user facts and explicitly attributed assistant assumptions. Format precondition fails before candidate write. No F/S outcome scored.",
+        "model_allocations_for_checkpoint": 0,
+        "future_allocations": 0,
+        "original_file_modified": false
+      },
+      "checkpoint": {
+        "status": "REJECTED",
+        "reason": "NOTE_PUBLIC_STRING_NORMALIZATION_UNSUPPORTED",
+        "model_tokens": 0,
+        "model_dispatches": 0,
+        "delta_save_seconds": 0.09509575390256941,
+        "delta_save_cpu_seconds": 0.07924034800000002,
+        "api_calls": 1
+      }
+    }
+  ],
+  "testkit_calls": [
+    {
+      "batch": 1,
+      "case": "0a995998",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/testkit/batch-1/t1-count-d1-off",
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_seconds": 3.4201216290239245
+    },
+    {
+      "batch": 1,
+      "case": "0a995998",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/testkit/batch-1/t2-count-d1",
+      "status": "REJECTED",
+      "returncode": 1,
+      "elapsed_seconds": 4.722294402075931
+    },
+    {
+      "batch": 2,
+      "case": "8550ddae",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/testkit/batch-2/ordinary-v2",
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_seconds": 3.3697687129024416
+    },
+    {
+      "batch": 2,
+      "case": "0a995998",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/testkit/batch-2/t2-count-v2",
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_seconds": 3.621301495935768
+    },
+    {
+      "batch": 2,
+      "case": "0a995998",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/testkit/batch-2/t3-empty-v2",
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_seconds": 1.2664026329293847
+    },
+    {
+      "batch": 2,
+      "case": "852ce960",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/testkit/batch-2/updated-v2",
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_seconds": 3.8205057641025633
+    }
+  ],
+  "testkit_calls_total": 6,
+  "testkit_official_resolve_reads": 18,
+  "checks": {
+    "runtime_pg_pytest": {
+      "passed": 962,
+      "skipped": 1,
+      "skip_reason": "Runtime venv lacks milai_client; one context-chat test"
+    },
+    "runtime_static_build": "PASS",
+    "lab_pytest_passed": 159,
+    "lab_ruff_mypy_boundary_build": "PASS",
+    "directed_pg_continuation_passed": 7,
+    "exact_note_unit_passed": 23,
+    "exact_note_public_pg": "PASS_RESTRICTED_INPUT",
+    "full_A0_tool_count": 13
+  },
+  "research_cost_limitations": [
+    "No F/S paths executed; their complete costs and ratios are unobserved, not zero.",
+    "First pre-model prompt-input timeout has known raw duration but unknown exact operational/instrumentation partition; counts one allocation, zero model exec.",
+    "First N3 diagnostic wall time was not retained; kept unknown, not zero.",
+    "Capture/READY, setup, diagnostics, tests and observer costs are research overhead; available phase receipts preserved; root engineering total not fully observed."
+  ],
+  "later_model_inputs": "UNOBSERVED",
+  "independent_judge_model_allocations": 0,
+  "root_offline_review_is_not_independent_human_gold": true,
+  "formal_500_scoring": false,
+  "public_deployment": false,
+  "automatic_maintenance": false,
+  "D2": "SHADOW",
+  "default": "FULL_A0",
+  "cleanup": {
+    "status": "COMPLETE",
+    "stopped_service_pids": {
+      "api": 3129564,
+      "worker": 3129565
+    },
+    "postgres_status": "exited",
+    "stopped_only_run_owned_services": true,
+    "host_containers_absent": [
+      "v02-host-06bf28af40693142",
+      "v02-host-e15c1ad11e6fe716",
+      "v02-host-f188a9ffe63c2203"
+    ],
+    "auth_copies_remaining": 0,
+    "database_volume_retained": true,
+    "test_database_retained": "milai_v0203_checks",
+    "network_retained": "n0n1-20260906a-pg_default",
+    "failed_artifacts_retained": true,
+    "old_services_or_volumes_changed": false,
+    "public_deployment": false
+  }
+}

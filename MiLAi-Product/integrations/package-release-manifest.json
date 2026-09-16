@@ -1,0 +1,1532 @@
+{
+  "distribution_policy": "LOCAL_ONLY_PROJECT_LICENSE_UNDECLARED",
+  "format": "milai-local-package-release-manifest-v1",
+  "license_inventory_method": "Locked names/versions joined to installed wheel metadata on this Linux build host; platform-conditional packages not installed here are explicitly marked unavailable.",
+  "packages": [
+    {
+      "artifacts": [
+        {
+          "path": "runtime/dist/milai_runtime-0.1.0-py3-none-any.whl",
+          "sha256": "882b2f9d13fb16a2a756c21e73d3758789c1f5084129cdef3ae349ca4c8cb773",
+          "size": 123757
+        },
+        {
+          "path": "runtime/dist/milai_runtime-0.1.0.tar.gz",
+          "sha256": "d2d98a962dcd3f0419a21938e40788a096c17198a7327f0bd77ac722f108cc96",
+          "size": 255827
+        }
+      ],
+      "lock": {
+        "path": "runtime/uv.lock",
+        "sha256": "5efdeb48cbea7fa51650c1b6d16d0f6ea3af0321304369046e550c1b063b2c20"
+      },
+      "locked_dependency_license_inventory": [
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "alembic",
+          "version": "1.19.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "annotated-types",
+          "version": "0.8.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "anyio",
+          "version": "4.14.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "blinker",
+          "version": "1.9.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "certifi",
+          "version": "2026.7.22"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT-0",
+          "name": "cffi",
+          "version": "2.1.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "click",
+          "version": "8.4.2"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "colorama",
+          "version": "0.4.6"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0",
+          "name": "coverage",
+          "version": "7.15.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0 OR BSD-3-Clause",
+          "name": "cryptography",
+          "version": "50.0.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "filelock",
+          "version": "3.32.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "flask",
+          "version": "3.1.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Apache Software License",
+          "name": "flatbuffers",
+          "version": "25.12.19"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "fsspec",
+          "version": "2026.7.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT AND PSF-2.0",
+          "name": "greenlet",
+          "version": "3.5.5"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "h11",
+          "version": "0.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0",
+          "name": "hf-xet",
+          "version": "1.6.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "httpcore",
+          "version": "1.0.9"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "httpx",
+          "version": "0.28.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Apache Software License",
+          "name": "huggingface-hub",
+          "version": "1.27.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "idna",
+          "version": "3.18"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "iniconfig",
+          "version": "2.3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "itsdangerous",
+          "version": "2.2.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "jinja2",
+          "version": "3.1.6"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "librt",
+          "version": "0.15.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mako",
+          "version": "1.4.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "markupsafe",
+          "version": "3.0.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-runtime",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy",
+          "version": "1.20.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy-extensions",
+          "version": "1.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+          "name": "numpy",
+          "version": "2.4.6"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+          "name": "numpy",
+          "version": "2.5.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "onnxruntime",
+          "version": "1.28.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0 OR BSD-2-Clause",
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "pathspec",
+          "version": "1.1.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pluggy",
+          "version": "1.6.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "3-Clause BSD License",
+          "name": "protobuf",
+          "version": "7.35.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "LGPL-3.0-only",
+          "name": "psycopg",
+          "version": "3.3.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "LGPL-3.0-only",
+          "name": "psycopg-binary",
+          "version": "3.3.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "LGPL-3.0-only",
+          "name": "psycopg-pool",
+          "version": "3.3.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "pycparser",
+          "version": "3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic",
+          "version": "2.13.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic-core",
+          "version": "2.46.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic-settings",
+          "version": "2.15.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-2-Clause",
+          "name": "pygments",
+          "version": "2.20.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pytest",
+          "version": "8.4.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pytest-cov",
+          "version": "6.3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "python-dotenv",
+          "version": "1.2.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pyyaml",
+          "version": "6.0.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "ruff",
+          "version": "0.16.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "sqlalchemy",
+          "version": "2.0.52"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Apache Software License",
+          "name": "tokenizers",
+          "version": "0.23.1"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "tomli",
+          "version": "2.4.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MPL-2.0 AND MIT",
+          "name": "tqdm",
+          "version": "4.70.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Apache Software License",
+          "name": "types-waitress",
+          "version": "0.1.9"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "PSF-2.0",
+          "name": "typing-extensions",
+          "version": "4.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "typing-inspection",
+          "version": "0.4.4"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "tzdata",
+          "version": "2026.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Zope Public License",
+          "name": "waitress",
+          "version": "3.0.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "werkzeug",
+          "version": "3.1.8"
+        }
+      ],
+      "name": "milai-runtime",
+      "project_license": "UNDECLARED",
+      "requires_python": ">=3.11,<3.13",
+      "root": "runtime",
+      "version": "0.1.0"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "integrations/python-client/dist/milai_client-0.1.0-py3-none-any.whl",
+          "sha256": "70b96a89209ba0c3ddab90a8dfa19711b23911a41796c6ab65d45588be95e2cb",
+          "size": 38907
+        },
+        {
+          "path": "integrations/python-client/dist/milai_client-0.1.0.tar.gz",
+          "sha256": "ca7a5da379ff2a6434b2a2c0f31d4497b3b73939f68a5dd92e688aafd5ec5100",
+          "size": 67029
+        }
+      ],
+      "lock": {
+        "path": "integrations/python-client/uv.lock",
+        "sha256": "141b2f6096171bccfc72fdfa498e0f456c331e6cb87936ad2a0379f900377ad9"
+      },
+      "locked_dependency_license_inventory": [
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "annotated-types",
+          "version": "0.8.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "anyio",
+          "version": "4.14.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "certifi",
+          "version": "2026.7.22"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "colorama",
+          "version": "0.4.6"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "h11",
+          "version": "0.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "httpcore",
+          "version": "1.0.9"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "httpx",
+          "version": "0.28.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "idna",
+          "version": "3.19"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "iniconfig",
+          "version": "2.3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "librt",
+          "version": "0.15.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-client",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy",
+          "version": "1.20.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy-extensions",
+          "version": "1.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0 OR BSD-2-Clause",
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "pathspec",
+          "version": "1.1.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pluggy",
+          "version": "1.6.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic",
+          "version": "2.13.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic-core",
+          "version": "2.46.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-2-Clause",
+          "name": "pygments",
+          "version": "2.20.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pytest",
+          "version": "8.4.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "ruff",
+          "version": "0.16.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "PSF-2.0",
+          "name": "typing-extensions",
+          "version": "4.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "typing-inspection",
+          "version": "0.4.4"
+        }
+      ],
+      "name": "milai-client",
+      "project_license": "UNDECLARED",
+      "requires_python": ">=3.11,<3.14",
+      "root": "integrations/python-client",
+      "version": "0.1.0"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "integrations/mcp/dist/milai_mcp-0.1.0-py3-none-any.whl",
+          "sha256": "7ec0d30272ff4c2fe919bc04b0d5bba2b6b4cc40efc49a203947c80653c923a9",
+          "size": 5357
+        },
+        {
+          "path": "integrations/mcp/dist/milai_mcp-0.1.0.tar.gz",
+          "sha256": "999c610d073d9312acbd258567f8c45bae24e47cc39e06dd4f38008e154ba5aa",
+          "size": 46439
+        }
+      ],
+      "lock": {
+        "path": "integrations/mcp/uv.lock",
+        "sha256": "c857a1fe8d1d4a53a82ecc63d974c5a840d86174a3b5ebee207076ecba3b2b6a"
+      },
+      "locked_dependency_license_inventory": [
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "annotated-types",
+          "version": "0.8.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "anyio",
+          "version": "4.14.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "attrs",
+          "version": "26.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "certifi",
+          "version": "2026.7.22"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT-0",
+          "name": "cffi",
+          "version": "2.1.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "click",
+          "version": "8.4.2"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "colorama",
+          "version": "0.4.6"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0 OR BSD-3-Clause",
+          "name": "cryptography",
+          "version": "50.0.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "h11",
+          "version": "0.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "httpcore",
+          "version": "1.0.9"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "httpcore2",
+          "version": "2.10.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "httpx",
+          "version": "0.28.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "httpx2",
+          "version": "2.10.0"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "httpx2-jsfetch",
+          "version": "1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "idna",
+          "version": "3.18"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "iniconfig",
+          "version": "2.3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "jsonschema",
+          "version": "4.26.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "jsonschema-specifications",
+          "version": "2025.9.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "librt",
+          "version": "0.15.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "mcp",
+          "version": "2.0.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "mcp-types",
+          "version": "2.0.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-client",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-mcp",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy",
+          "version": "1.20.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy-extensions",
+          "version": "1.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0",
+          "name": "opentelemetry-api",
+          "version": "1.44.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0 OR BSD-2-Clause",
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "pathspec",
+          "version": "1.1.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pluggy",
+          "version": "1.6.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "pycparser",
+          "version": "3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic",
+          "version": "2.13.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic-core",
+          "version": "2.46.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-2-Clause",
+          "name": "pygments",
+          "version": "2.21.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pyjwt",
+          "version": "2.13.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pytest",
+          "version": "8.4.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0",
+          "name": "python-multipart",
+          "version": "0.0.32"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "pywin32",
+          "version": "312"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "referencing",
+          "version": "0.37.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "rpds-py",
+          "version": "2026.6.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "ruff",
+          "version": "0.16.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "sse-starlette",
+          "version": "3.4.8"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "starlette",
+          "version": "1.6.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "truststore",
+          "version": "0.10.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "PSF-2.0",
+          "name": "typing-extensions",
+          "version": "4.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "typing-inspection",
+          "version": "0.4.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "uvicorn",
+          "version": "0.52.3"
+        }
+      ],
+      "name": "milai-mcp",
+      "project_license": "UNDECLARED",
+      "requires_python": ">=3.11,<3.14",
+      "root": "integrations/mcp",
+      "version": "0.1.0"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "integrations/langgraph/dist/milai_langgraph-0.1.0-py3-none-any.whl",
+          "sha256": "20df2a338a911e7b6d9adcf1fad79ebecbe5fda1e03971e70afc00d28f810a58",
+          "size": 3635
+        },
+        {
+          "path": "integrations/langgraph/dist/milai_langgraph-0.1.0.tar.gz",
+          "sha256": "0e4cb7ae51c9feeee34184c731296ae8f4d85bdd6c6e9748f7708af5ef48d63c",
+          "size": 65705
+        }
+      ],
+      "lock": {
+        "path": "integrations/langgraph/uv.lock",
+        "sha256": "69be55f0f60e997cd97bc13cbdfe40324e7b838fe44ce9e3a6f24d21a932673b"
+      },
+      "locked_dependency_license_inventory": [
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "annotated-types",
+          "version": "0.8.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "anyio",
+          "version": "4.14.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "certifi",
+          "version": "2026.7.22"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "charset-normalizer",
+          "version": "3.5.1"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "colorama",
+          "version": "0.4.6"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Apache Software License",
+          "name": "distro",
+          "version": "1.9.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "h11",
+          "version": "0.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "httpcore",
+          "version": "1.0.9"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "httpx",
+          "version": "0.28.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "idna",
+          "version": "3.18"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "iniconfig",
+          "version": "2.3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "jsonpatch",
+          "version": "1.33"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "jsonpointer",
+          "version": "3.1.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "langchain-core",
+          "version": "1.5.5"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "langchain-protocol",
+          "version": "0.0.18"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "langgraph",
+          "version": "1.2.9"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "langgraph-checkpoint",
+          "version": "4.2.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "langgraph-prebuilt",
+          "version": "1.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "langgraph-sdk",
+          "version": "0.4.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "langsmith",
+          "version": "0.11.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "librt",
+          "version": "0.15.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-client",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-langgraph",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy",
+          "version": "1.20.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy-extensions",
+          "version": "1.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MPL-2.0 AND (Apache-2.0 OR MIT)",
+          "name": "orjson",
+          "version": "3.12.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0 OR MIT",
+          "name": "ormsgpack",
+          "version": "1.12.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0 OR BSD-2-Clause",
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "pathspec",
+          "version": "1.1.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pluggy",
+          "version": "1.6.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic",
+          "version": "2.13.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic-core",
+          "version": "2.46.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-2-Clause",
+          "name": "pygments",
+          "version": "2.21.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pytest",
+          "version": "8.4.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pyyaml",
+          "version": "6.0.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Apache Software License",
+          "name": "requests",
+          "version": "2.34.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Apache Software License",
+          "name": "requests-toolbelt",
+          "version": "1.0.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "ruff",
+          "version": "0.16.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Apache Software License | OSI Approved :: MIT License",
+          "name": "sniffio",
+          "version": "1.3.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Apache Software License",
+          "name": "tenacity",
+          "version": "9.1.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "PSF-2.0",
+          "name": "typing-extensions",
+          "version": "4.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "typing-inspection",
+          "version": "0.4.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "urllib3",
+          "version": "2.7.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "uuid-utils",
+          "version": "0.17.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "websockets",
+          "version": "15.0.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-2-Clause",
+          "name": "xxhash",
+          "version": "4.0.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "zstandard",
+          "version": "0.25.0"
+        }
+      ],
+      "name": "milai-langgraph",
+      "project_license": "UNDECLARED",
+      "requires_python": ">=3.11,<3.14",
+      "root": "integrations/langgraph",
+      "version": "0.1.0"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "integrations/autogen/dist/milai_autogen-0.1.0-py3-none-any.whl",
+          "sha256": "d044fcb559bd4994f48689cc22bd8379ab99c750cc7125672731f3e3e3c25fae",
+          "size": 5211
+        },
+        {
+          "path": "integrations/autogen/dist/milai_autogen-0.1.0.tar.gz",
+          "sha256": "67de7c2ed38efbfdf2d60736dcc28632cf79bb1260e85160592ab85157d298d0",
+          "size": 31879
+        }
+      ],
+      "lock": {
+        "path": "integrations/autogen/uv.lock",
+        "sha256": "b1aa7e13164c50a1ee29f6fcf628cc3c2de309c1c9c2fe9ac87240d7aaa0cec9"
+      },
+      "locked_dependency_license_inventory": [
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "annotated-types",
+          "version": "0.8.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "anyio",
+          "version": "4.14.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "autogen-core",
+          "version": "0.7.5"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "certifi",
+          "version": "2026.7.22"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "colorama",
+          "version": "0.4.6"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "h11",
+          "version": "0.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "httpcore",
+          "version": "1.0.9"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "httpx",
+          "version": "0.28.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "idna",
+          "version": "3.19"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "iniconfig",
+          "version": "2.3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "jsonref",
+          "version": "1.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "librt",
+          "version": "0.15.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-autogen",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-client",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy",
+          "version": "1.20.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy-extensions",
+          "version": "1.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0",
+          "name": "opentelemetry-api",
+          "version": "1.44.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0 OR BSD-2-Clause",
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "pathspec",
+          "version": "1.1.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT-CMU",
+          "name": "pillow",
+          "version": "12.3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pluggy",
+          "version": "1.6.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "3-Clause BSD License",
+          "name": "protobuf",
+          "version": "5.29.6"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic",
+          "version": "2.13.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic-core",
+          "version": "2.46.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-2-Clause",
+          "name": "pygments",
+          "version": "2.21.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pytest",
+          "version": "8.4.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "ruff",
+          "version": "0.16.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "PSF-2.0",
+          "name": "typing-extensions",
+          "version": "4.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "typing-inspection",
+          "version": "0.4.4"
+        }
+      ],
+      "name": "milai-autogen",
+      "project_license": "UNDECLARED",
+      "requires_python": ">=3.11,<3.14",
+      "root": "integrations/autogen",
+      "version": "0.1.0"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "integrations/hooks/dist/milai_hooks-0.1.0-py3-none-any.whl",
+          "sha256": "48ea2114c1896d77296a10008698ae85be1f1a73d5cfd220428204df243e123a",
+          "size": 5404
+        },
+        {
+          "path": "integrations/hooks/dist/milai_hooks-0.1.0.tar.gz",
+          "sha256": "0d658ccbf6982df820fe3c61adfb912132d81c037ad65e1f6a0ea52c900d7f3f",
+          "size": 25682
+        }
+      ],
+      "lock": {
+        "path": "integrations/hooks/uv.lock",
+        "sha256": "cc4f14f1a93c5e3e6937a45d095d5c1cc0762e959eba3501943cea039370dc32"
+      },
+      "locked_dependency_license_inventory": [
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "annotated-types",
+          "version": "0.8.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "anyio",
+          "version": "4.14.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "certifi",
+          "version": "2026.7.22"
+        },
+        {
+          "installed_on_build_platform": false,
+          "license_metadata": "NOT_AVAILABLE_ON_BUILD_PLATFORM",
+          "name": "colorama",
+          "version": "0.4.6"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "h11",
+          "version": "0.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "httpcore",
+          "version": "1.0.9"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: BSD License",
+          "name": "httpx",
+          "version": "0.28.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-3-Clause",
+          "name": "idna",
+          "version": "3.19"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "iniconfig",
+          "version": "2.3.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "librt",
+          "version": "0.15.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-client",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "UNDECLARED",
+          "name": "milai-hooks",
+          "version": "0.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy",
+          "version": "1.20.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "mypy-extensions",
+          "version": "1.1.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "Apache-2.0 OR BSD-2-Clause",
+          "name": "packaging",
+          "version": "26.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+          "name": "pathspec",
+          "version": "1.1.1"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pluggy",
+          "version": "1.6.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic",
+          "version": "2.13.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "pydantic-core",
+          "version": "2.46.4"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "BSD-2-Clause",
+          "name": "pygments",
+          "version": "2.21.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "OSI Approved :: MIT License",
+          "name": "pytest",
+          "version": "8.4.2"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "ruff",
+          "version": "0.16.3"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "PSF-2.0",
+          "name": "typing-extensions",
+          "version": "4.16.0"
+        },
+        {
+          "installed_on_build_platform": true,
+          "license_metadata": "MIT",
+          "name": "typing-inspection",
+          "version": "0.4.4"
+        }
+      ],
+      "name": "milai-hooks",
+      "project_license": "UNDECLARED",
+      "requires_python": ">=3.11,<3.14",
+      "root": "integrations/hooks",
+      "version": "0.1.0"
+    }
+  ],
+  "snapshot_date": "2026-08-20"
+}

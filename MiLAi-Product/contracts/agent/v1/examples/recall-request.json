@@ -1,0 +1,8 @@
+{
+  "route": "L1",
+  "consistency": "CANONICAL_REQUIRED",
+  "query": "用户偏好的编辑器主题",
+  "requested_scope": {"workspace": "local"},
+  "required_authority": "INFORMATIONAL",
+  "limit": 5
+}

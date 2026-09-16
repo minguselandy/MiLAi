@@ -1,0 +1,473 @@
+{
+  "document_kind": "READ_ONLY_GOAL_EVIDENCE_SNAPSHOT",
+  "captured_at": "2026-09-16T09:36:06+08:00",
+  "execution_authorization": "NONE_DOCUMENT_ONLY",
+  "new_model_requests": 0,
+  "new_embedding_requests": 0,
+  "new_rerank_requests": 0,
+  "evidence_root": "/cra/memory/mx_memory/evidence/experience-optimization-20260916",
+  "sources": [
+    {
+      "path": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/analysis-db_bench/test-results.json",
+      "sha256": "f3e4af5262992dab74546d604b9f54eaab0b8e39fb863a8d8483f4441d5371ac"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/analysis-db_bench/study-results.json",
+      "sha256": "e4557923311f95b6cdf6c762e5310e07d1ac11a0bd5170e62d6ab9350f491e58"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/analysis-os_interaction/test-results.json",
+      "sha256": "bcd057bf22ad21c279684220684fd70be3bf19b3bfb3cd925b39fead47cdfcc9"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/analysis-os_interaction/study-results.json",
+      "sha256": "8bd25028ab6c4053741c5c28d7c37ac9ac2e28f3c25b444ddad7660f8dd68cd1"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/native/batch-status.json",
+      "sha256": "74dffdd384ad42321c1c27a9da22221e8073adfe2f957f5df52a23a8648043d0"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/rb/batch-status.json",
+      "sha256": "1fd91b9d78346381f7f27786f8c4413c3d01df03de23acb3c1882a098c561e45"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/milai/batch-status.json",
+      "sha256": "c867e798de1e7a5a2a3e7ee200cdb9c2c86c51eaa79978bb633ce50f6fa34997"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/om/batch-status.json",
+      "sha256": "25bbdedfe67fdd874020efb2a206001d6bdd8d4d9185cbf5de621247af50f51d"
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-Lab/docs/archive/MILA_EVIDENCE_AND_UTILITY_DRIVEN_OPTIMIZATION_v2.0_20260916.md",
+      "sha256": "a7553af8c5b8c27e958f9455e255a56be6a24b7b6dbd80bb17f9c05375b94e05"
+    }
+  ],
+  "terminal_arms": [
+    {
+      "domain": "db_bench",
+      "protocol": "F",
+      "method": "NATIVE_AGENT_OR_HISTORY",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 85.0
+      },
+      "settled_requests": 260,
+      "settled_tokens": 360839,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "method": "NATIVE_AGENT_OR_HISTORY",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 79.0
+      },
+      "settled_requests": 261,
+      "settled_tokens": 364749,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "F",
+      "method": "OM_SYNC_PORT",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 89.0
+      },
+      "settled_requests": 213,
+      "settled_tokens": 1288180,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "method": "OM_SYNC_PORT",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 87.0
+      },
+      "settled_requests": 240,
+      "settled_tokens": 1768757,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "F",
+      "method": "REASONINGBANK_BASE_PORT",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 79.0
+      },
+      "settled_requests": 469,
+      "settled_tokens": 813270,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "method": "REASONINGBANK_BASE_PORT",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 81.0
+      },
+      "settled_requests": 469,
+      "settled_tokens": 809141,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "F",
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 80.0
+      },
+      "settled_requests": 559,
+      "settled_tokens": 1011366,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 80.0
+      },
+      "settled_requests": 571,
+      "settled_tokens": 1036651,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "os_interaction",
+      "protocol": "F",
+      "method": "NATIVE_AGENT_OR_HISTORY",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 68.0
+      },
+      "settled_requests": 384,
+      "settled_tokens": 548416,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "os_interaction",
+      "protocol": "O",
+      "method": "NATIVE_AGENT_OR_HISTORY",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 74.0
+      },
+      "settled_requests": 379,
+      "settled_tokens": 547232,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "os_interaction",
+      "protocol": "F",
+      "method": "OM_SYNC_PORT",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 76.0
+      },
+      "settled_requests": 313,
+      "settled_tokens": 3780697,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "os_interaction",
+      "protocol": "O",
+      "method": "OM_SYNC_PORT",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 70.0
+      },
+      "settled_requests": 300,
+      "settled_tokens": 2168449,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "os_interaction",
+      "protocol": "F",
+      "method": "REASONINGBANK_BASE_PORT",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 71.0
+      },
+      "settled_requests": 595,
+      "settled_tokens": 1082309,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "os_interaction",
+      "protocol": "O",
+      "method": "REASONINGBANK_BASE_PORT",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 71.0
+      },
+      "settled_requests": 603,
+      "settled_tokens": 1090913,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "os_interaction",
+      "protocol": "F",
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 71.0
+      },
+      "settled_requests": 684,
+      "settled_tokens": 1448353,
+      "unknown_requests": 0
+    },
+    {
+      "domain": "os_interaction",
+      "protocol": "O",
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 66.0
+      },
+      "settled_requests": 701,
+      "settled_tokens": 1425784,
+      "unknown_requests": 0
+    }
+  ],
+  "support_formation": [
+    {
+      "domain": "db_bench",
+      "method": "OM_SYNC_PORT",
+      "settled_requests": 89,
+      "settled_tokens": 703076
+    },
+    {
+      "domain": "db_bench",
+      "method": "REASONINGBANK_BASE_PORT",
+      "settled_requests": 183,
+      "settled_tokens": 313565
+    },
+    {
+      "domain": "db_bench",
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "settled_requests": 217,
+      "settled_tokens": 386346
+    },
+    {
+      "domain": "os_interaction",
+      "method": "OM_SYNC_PORT",
+      "settled_requests": 111,
+      "settled_tokens": 849811
+    },
+    {
+      "domain": "os_interaction",
+      "method": "REASONINGBANK_BASE_PORT",
+      "settled_requests": 249,
+      "settled_tokens": 436294
+    },
+    {
+      "domain": "os_interaction",
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "settled_requests": 280,
+      "settled_tokens": 524704
+    }
+  ],
+  "travel_status": {
+    "native": {
+      "planned_groups": 30,
+      "terminal_jobs": 30,
+      "exit_code_counts": {
+        "0": 30
+      },
+      "scoring_exit_code_counts": {
+        "0": 30
+      },
+      "failure_reasons": {},
+      "running_jobs": [],
+      "pending_jobs": 0,
+      "note": "Job exit is not native task quality; per-file read-only snapshot, not a transaction across running workers."
+    },
+    "rb": {
+      "planned_groups": 30,
+      "terminal_jobs": 30,
+      "exit_code_counts": {
+        "0": 30
+      },
+      "scoring_exit_code_counts": {
+        "0": 30
+      },
+      "failure_reasons": {},
+      "running_jobs": [],
+      "pending_jobs": 0,
+      "note": "Job exit is not native task quality; per-file read-only snapshot, not a transaction across running workers."
+    },
+    "milai": {
+      "planned_groups": 30,
+      "terminal_jobs": 18,
+      "exit_code_counts": {
+        "0": 18
+      },
+      "scoring_exit_code_counts": {
+        "0": 18
+      },
+      "failure_reasons": {},
+      "running_jobs": [
+        "test-travel-milai-184"
+      ],
+      "pending_jobs": 11,
+      "note": "Job exit is not native task quality; per-file read-only snapshot, not a transaction across running workers."
+    },
+    "om": {
+      "planned_groups": 30,
+      "terminal_jobs": 14,
+      "exit_code_counts": {
+        "1": 13,
+        "0": 1
+      },
+      "scoring_exit_code_counts": {
+        "0": 14
+      },
+      "failure_reasons": {
+        "OM_NATIVE_CONTEXT_CAPACITY": 13
+      },
+      "running_jobs": [
+        "test-travel-om-135"
+      ],
+      "pending_jobs": 15,
+      "note": "Job exit is not native task quality; per-file read-only snapshot, not a transaction across running workers."
+    }
+  },
+  "natural_revision_events": [
+    {
+      "job": "test-db_bench-milai-O-1",
+      "task": "265",
+      "role": "post_task",
+      "card": "card:4",
+      "before": 1,
+      "after": 2,
+      "later_tasks_with_exposure_event": [],
+      "evidence_file": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/milai/test-db_bench-milai-O-1/task-265/memory-events.jsonl",
+      "before_text_sha256": "45cea8623bdbb874a17ac8c08e5876191e350d2def21b27c1e879107aabc7d6c",
+      "final_card_text_sha256": "19b801c4bd8e337a23ee4c4782a302714dc5dd4e414d092f26a1d70f596e8769",
+      "scope_entailment_and_behavior_audit": "PENDING_NOT_INFERRED_FROM_PATCH_OR_EXPOSURE"
+    },
+    {
+      "job": "test-db_bench-milai-O-4",
+      "task": "235",
+      "role": "post_task",
+      "card": "card:1",
+      "before": 1,
+      "after": 2,
+      "later_tasks_with_exposure_event": [
+        "492"
+      ],
+      "evidence_file": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/milai/test-db_bench-milai-O-4/task-235/memory-events.jsonl",
+      "before_text_sha256": "55222dfb7a25fcb46f3a65488c5a191c27a99c776f8c63a7dd9f4f5aedddead9",
+      "final_card_text_sha256": "0adc468e6bbd14f6eb58095fb7e7add2df0c76a4ac8a0d9ae78ef61e39df3c49",
+      "scope_entailment_and_behavior_audit": "PENDING_NOT_INFERRED_FROM_PATCH_OR_EXPOSURE"
+    },
+    {
+      "job": "test-db_bench-milai-O-4",
+      "task": "324",
+      "role": "post_task",
+      "card": "card:8",
+      "before": 1,
+      "after": 2,
+      "later_tasks_with_exposure_event": [],
+      "evidence_file": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/milai/test-db_bench-milai-O-4/task-324/memory-events.jsonl",
+      "before_text_sha256": "0dadd12717a9cad899f2b6b407d8b031378651f09d2fc006bda0b0904d130ce2",
+      "final_card_text_sha256": "3b854554c38ffb94f55ff0150da6de47244142cbb8d325180c6be621df6884de",
+      "scope_entailment_and_behavior_audit": "PENDING_NOT_INFERRED_FROM_PATCH_OR_EXPOSURE"
+    },
+    {
+      "job": "test-db_bench-milai-O-4",
+      "task": "482",
+      "role": "post_task",
+      "card": "card:15",
+      "before": 1,
+      "after": 2,
+      "later_tasks_with_exposure_event": [],
+      "evidence_file": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/milai/test-db_bench-milai-O-4/task-482/memory-events.jsonl",
+      "before_text_sha256": "0dadd12717a9cad899f2b6b407d8b031378651f09d2fc006bda0b0904d130ce2",
+      "final_card_text_sha256": "3df76c4a6b4301985d8872e26edc1345c35f364c7d3d8313716e0c038a96f817",
+      "scope_entailment_and_behavior_audit": "PENDING_NOT_INFERRED_FROM_PATCH_OR_EXPOSURE"
+    },
+    {
+      "job": "test-os_interaction-milai-O-2",
+      "task": "162",
+      "role": "post_task",
+      "card": "card:1",
+      "before": 1,
+      "after": 2,
+      "later_tasks_with_exposure_event": [],
+      "evidence_file": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/milai/test-os_interaction-milai-O-2/task-162/memory-events.jsonl",
+      "before_text_sha256": "8b3149fb8de7ed5ce1a85ba1f9dc7f659e4b2c84cc6ee956f884bff161c2ada0",
+      "final_card_text_sha256": "9a9102d28fa3a01e5421e1b28e9eecab0bf83c2436bc04c0dba53bdce946f730",
+      "scope_entailment_and_behavior_audit": "PENDING_NOT_INFERRED_FROM_PATCH_OR_EXPOSURE"
+    },
+    {
+      "job": "test-os_interaction-milai-O-3",
+      "task": "328",
+      "role": "post_task",
+      "card": "card:11",
+      "before": 1,
+      "after": 2,
+      "later_tasks_with_exposure_event": [
+        "460"
+      ],
+      "evidence_file": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/milai/test-os_interaction-milai-O-3/task-328/memory-events.jsonl",
+      "before_text_sha256": "0bc27d61ee0ab0a6a6c93d1c227101496590a95e0c3b5625c6c9ca9ba99f8f7c",
+      "final_card_text_sha256": "ce625722c57b280fd624917070f6143b4b5dfda832d62846c5d48577d98263d6",
+      "scope_entailment_and_behavior_audit": "PENDING_NOT_INFERRED_FROM_PATCH_OR_EXPOSURE"
+    },
+    {
+      "job": "test-os_interaction-milai-O-4",
+      "task": "333",
+      "role": "post_task",
+      "card": "card:16",
+      "before": 1,
+      "after": 2,
+      "later_tasks_with_exposure_event": [],
+      "evidence_file": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/formal-study/milai/test-os_interaction-milai-O-4/task-333/memory-events.jsonl",
+      "before_text_sha256": "a5d7fc283b204bb3532118effef79296dbd70d88d749b249121efe83a4ed0e26",
+      "final_card_text_sha256": "25bfceaed5cce177e11df0751bfef44e747a5b8323e26a29c69d0a98aa0eb368",
+      "scope_entailment_and_behavior_audit": "PENDING_NOT_INFERRED_FROM_PATCH_OR_EXPOSURE"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "case_id": "g1-research",
+  "domain": "research_brief",
+  "initial_type": "correct",
+  "development_status": "constructed-development",
+  "task": "继续整理检索方法研究简报，给出一段面向团队的结果摘要和限制说明，保持简洁。下次我们会把它用于会议议程。项目资料在 sources/，也可查询项目记忆。",
+  "followup": "继续准备检索方法简报的会议议程，列出可以陈述的发现、仍需验证的事项和一个讨论问题。项目资料仍在 sources/。",
+  "initial_payload": {
+    "note": "松树方法的论文作者报告：在40个构造查询上检索时间降低18%；这只是作者报告，本团队尚未复现。不得推广为生产效果。简报需同时写结果归属、样本量和限制。后续用于团队会议议程。",
+    "sources": ["sources/pine-paper.txt", "sources/team-log.txt"]
+  },
+  "sources": {
+    "pine-paper.txt": "构造论文摘要：松树方法。作者在40个构造查询上报告检索时间降低18%。未报告真实生产部署；样本小，不证明其他场景同样改善。",
+    "team-log.txt": "团队实验日志：尚未执行松树方法复现，当前只做文献简报。会议需要区分作者报告和团队独立验证。",
+    "other-study.txt": "另一项无关研究：白桦方法在20个图像任务上的准确率提高5个百分点。它不评估松树方法，也不评估检索时间。"
+  },
+  "evaluation": {
+    "required": ["18% latency decrease attributed to paper authors", "40 constructed queries", "team has not replicated", "no production generalization"],
+    "correct_initial_facts": ["18%", "40 constructed queries", "author provenance", "no team replication", "production limitation"],
+    "save_value": "Equivalent memory already exists; no update is acceptable unless useful new task progress is saved",
+    "key_source": null
+  }
+}

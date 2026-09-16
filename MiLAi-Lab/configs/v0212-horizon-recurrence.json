@@ -1,0 +1,22 @@
+{
+  "goal_id": "MILA-V02-12",
+  "allocation_id": "v0212-20260909-horizon-wave2",
+  "authorization_basis": "User explicitly requested execution of V02-12; Goal section 4 prescribes one same-size fixed-prefix wave after a reviewed presented-but-wrong observation. This separately allocates that conditional P3 wave; it does not inherit the first-wave remainder.",
+  "trigger_query": "q001-1",
+  "trigger_review_sha256": "bb1d54e4f7a43e3e0d7e0cfcf7ec56859512bf45f61fcba79fb6e7e9493c7d9f",
+  "trigger_scope": "Broad presented-support preference-use error; not yet a relation/applicability mechanism failure",
+  "accepted_cluster_slice": [2, 4],
+  "query_ids": ["q003-1", "q003-2", "q004-1", "q004-2"],
+  "max_generations": 12,
+  "max_raw_tokens": 80000,
+  "max_seconds": 1200,
+  "max_query_generations": 3,
+  "max_query_raw_tokens": 20000,
+  "max_query_tools": 6,
+  "paid_requests": 0,
+  "benchmark_judge_requests": 0,
+  "further_wave_allocation": 0,
+  "confirmation_opening": false,
+  "source_and_host_profile": "EXACT_SAME_SEAL_A_PROFILE_AND_COLD_HOST_AS_FIRST_WAVE",
+  "after_wave": "Report recurrence or stop; no automatic further wave, S1/S2 or confirmation"
+}

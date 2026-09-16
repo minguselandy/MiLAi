@@ -1,0 +1,114 @@
+{
+  "schema": "milai.dg13.scoped-release-disposition.v1",
+  "goal_id": "DG-13",
+  "date": "2026-08-26",
+  "timezone": "Asia/Shanghai",
+  "status": "PASS",
+  "release_label": "LOCAL_MCP_GOVERNED_MEMORY_SERVICE_USABLE",
+  "release_label_earned": true,
+  "scope": {
+    "included": [
+      "local loopback Runtime",
+      "local stdio MCP",
+      "OpenWorker client",
+      "synthetic, public development, or independently de-identified data"
+    ],
+    "runtime_status": "CANDIDATE",
+    "schema_status": "EXPERIMENTAL_NO_GO_FOR_FREEZE",
+    "excluded": [
+      "production readiness",
+      "remote MCP",
+      "real personal data",
+      "schema freeze",
+      "general SOTA retrieval",
+      "paper or novelty claim"
+    ]
+  },
+  "migration_head": "0032_reviewer_actor_separation",
+  "milestone_reports": {
+    "m4": {
+      "path": "var/dg13/m4/dg13-m4-bounded-20260826e/report.json",
+      "sha256": "5918653fb9bf9cf4cb3f6fae5baa2412e9bef29189659fe967ac265f2c64957f",
+      "source_aggregate_sha256": "04646af427fabd5e92464f22fbb77234d2e2df615b564725090c9d1e4fbaa352",
+      "status": "PASS"
+    },
+    "m5": {
+      "path": "var/dg13/m5/dg13-m5-lifecycle-20260826c/report.json",
+      "sha256": "5d4c1ad50c6525a901a5dfaf13d0dfe546ba3d3ac1a182f7e35ac7805151f546",
+      "source_aggregate_sha256": "02517025251ede919380bed50d33879cdfa1a6ee13aa5048ee314dd6655cd7cc",
+      "status": "PASS",
+      "qualified_projection_claim": "Invalid provider configuration causes worker startup failure while exact canonical state remains available; this does not prove in-flight provider failure or lease recovery. Incremental and rebuild replay are proven separately."
+    },
+    "m6": {
+      "path": "var/dg13/m6/dg13-m6-task-20260826c/report.json",
+      "sha256": "1e76c3494917dc86a9bab9abb99a6dbbeb025462b31d3343aa970319471a24e4",
+      "source_aggregate_sha256": "29b97b471f7f29759b63596f9e4a6c5f47e79022395b066073639f7ccc0fdddd",
+      "status": "PASS"
+    }
+  },
+  "operator_closure": {
+    "path": "runtime/var/reports/smoke-fe33d8ae7f28467b8f3c3553111a262d.json",
+    "sha256": "83b9c2a6293c421decad279db4f32b2ceea296c497fd3ae0ce909ea5c0355284",
+    "status": "PASS",
+    "database_cleanup": "PASS",
+    "blob_cleanup": "PASS"
+  },
+  "r2_verification_receipt": {
+    "path": "docs/reports/DG-13-R2-verification-receipt-2026-08-26.json",
+    "sha256": "5f7972656c79c77e7bc30f511281b41d5b30badafbed98ce418a2657e7613bbc",
+    "status": "PASS"
+  },
+  "regression": {
+    "runtime": {
+      "path": "var/dg13/test-gates/dg13-release-runtime-20260826e/report.json",
+      "sha256": "ea3eec499c8bdce3d201983f7cbc15c792a4a59182ee418eb7c16afc34e1b650",
+      "passed": 299,
+      "environment_skipped": 1,
+      "cleanup": "PASS",
+      "status": "PASS"
+    },
+    "python_client": {"passed": 162, "status": "PASS"},
+    "mcp": {"passed": 33, "status": "PASS"},
+    "openworker": {"passed": 101, "status": "PASS"}
+  },
+  "static_checks": {
+    "runtime_ruff": "PASS",
+    "runtime_strict_mypy_files": 82,
+    "runtime_strict_mypy": "PASS",
+    "python_client_ruff_and_strict_mypy": "PASS",
+    "mcp_ruff_and_strict_mypy": "PASS",
+    "openworker_ruff": "PASS"
+  },
+  "contracts": {
+    "pytest_path": "runtime/tests/contract/test_agent_contract_files.py",
+    "pytest_passed": 2,
+    "parsed_json_yaml_files": 5,
+    "status": "PASS"
+  },
+  "secret_scan": {
+    "schema": "milai.archive-aware-secret-scan.v1",
+    "file_count": 1405,
+    "archive_member_count": 2471,
+    "scanned_bytes": 229070288,
+    "known_secret_value_count": 17,
+    "matching_paths": [],
+    "matching_archive_members": [],
+    "unsafe_archives": [],
+    "status": "PASS"
+  },
+  "governance_remediation": {
+    "canonical_same_actor_review": "HTTP 403 SELF_REVIEW_FORBIDDEN; proposal remains PENDING_REVIEW and no decision is inserted",
+    "proposal_inspection": "requires proposal:review; reader, submitter, and operator are denied",
+    "product_agent_config": "dedicated reviewer profile and --max-retries 0",
+    "status": "PASS"
+  },
+  "independent_review": {
+    "reviewer": "dg13_release_review",
+    "review_count": 1,
+    "verdict": "ACCEPT",
+    "reviewed_candidate_disposition_sha256": "f2eedd91ff67f20440d2cdb9bc9615f16331c0a5ea54f43fa353f11cc8a1fc07",
+    "unresolved_findings": {"P0": 0, "P1": 0, "P2": 0},
+    "status": "PASS"
+  },
+  "author_disposition": "R1, R2, and the single independent release review pass. Issue only the scoped LOCAL_MCP_GOVERNED_MEMORY_SERVICE_USABLE label within the stated boundaries."
+}

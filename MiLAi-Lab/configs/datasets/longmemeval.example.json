@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "dataset_id": "longmemeval",
+  "version": "PIN_BEFORE_USE",
+  "external_root": "SET_WITH_LOCAL_OVERRIDE",
+  "split_files": {},
+  "file_sha256": {}
+}
+

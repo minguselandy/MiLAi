@@ -1,0 +1,22 @@
+{
+  "goal_version": "0.5",
+  "stage": "E0_P1",
+  "case_label": "NEW_SYNTHETIC_STATIC_REFERENCE_NOT_SIM12_REPLAY",
+  "scope": "synthetic-v0210-v05/static-handoff",
+  "task": "根据完整交接材料，给出明天交付前的最小检查清单，区分已确认、仍待确认和目前不能执行的操作。不要实际修改系统。",
+  "history": ["这是合成练习。当前任务是核对交接条件，不是执行发布。"],
+  "observations": ["材料所列记录均为当前版本，没有新增签收或授权记录。"],
+  "sources": [
+    {"id": "handoff-rule", "version": "v1", "text": "交付前须核对文件摘要与对应交付编号一致，取得接收方签收，并确认负责人批准。文件存在不代替签收；签收不代替负责人批准。未获批准时只能列检查项，不得执行交付。\n"},
+    {"id": "handoff-log", "version": "v1", "text": "目标交付编号 H12。文件摘要已核对且匹配 H12。接收方签收尚未返回。负责人表示先做检查，未批准实际交付。旧编号 H11 的签收仍归档保留。\n"},
+    {"id": "calendar", "version": "v1", "text": "明天例会为 09:30；下午有例行文档排版工作。例会和排版安排不改变交付规则。\n"}
+  ],
+  "oracle": null,
+  "seed": 260908,
+  "max_input_tokens": 8192,
+  "max_output_tokens": 1024,
+  "batch_raw_limit": 64000,
+  "batch_request_limit": 7,
+  "new_generations_authorized": 0,
+  "e1_execution_decision": "ENGINEERING_READY_FIRST; do not retroactively add R0 to v0.4. Any v0.5 semantic run is a distinct seven-call allocation."
+}

@@ -1,0 +1,6 @@
+STRICT OUTPUT FORMAT (LLB-DB, do not violate):
+1) After your reasoning, include exactly ONE action line:
+   - Action: Operation
+   - Action: Answer
+2) If Action: Operation, put exactly ONE SQL statement in the FIRST fenced code block using ```sql, on a single line. Do not add any extra text after that block.
+3) If Action: Answer, include `Final Answer: ...` on the next line and do not add extra text after that.

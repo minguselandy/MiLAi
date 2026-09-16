@@ -1,0 +1,13 @@
+{
+  "source_repository": "https://github.com/google-research/reasoning-bank",
+  "source_commit": "ed80611788292ea739f1effd31f16c53823b8a0d",
+  "copyright": "Copyright 2026 Google LLC",
+  "license": "Apache-2.0",
+  "source_files": {
+    "third_party/src/minisweagent/memory/instruction.py": "08e11fbeac1ba9e20d1dafb20728be24194b56bdfea33f05f6a1220ae2cc9bae",
+    "third_party/src/minisweagent/memory/memory_management.py": "fe71285a878920d501013ab86b58ef12c9c08071ee0e690061774d5ff5588955",
+    "third_party/src/minisweagent/run/extra/swebench.py": "8365112cd2dd2f3dbd74eff611b5d166530c6ddac4b09b674ae384da96531951",
+    "third_party/src/minisweagent/agents/default.py": "428a78335cbfb365ba8e6622effc8959104f08e8f32068727625bcb296da756c"
+  },
+  "adaptation": "Extraction opening/task nouns and retrieval domain nouns generalized from software engineering to interactive tasks. Success/failure procedures, <=3 items, format, judge and consumption wording retained. Qwen solver and bge-m3 are explicitly local substitutions. No MaTTS."
+}

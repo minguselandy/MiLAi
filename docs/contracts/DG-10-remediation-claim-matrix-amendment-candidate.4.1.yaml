@@ -1,0 +1,15 @@
+schema_version: "1"
+candidate_id: "candidate.4"
+status: "FROZEN_ACTIVE_POLICY_BINDING_AMENDMENT"
+effective_at: "2026-08-22T10:11:33+08:00"
+parent_claim_matrix:
+  path: "docs/contracts/DG-10-remediation-claim-matrix-candidate.4.yaml"
+  sha256: "2dcb2c0bb51de8d685e8d5082f2262320da336d47b4b68b11721d3d376adf781"
+superseded_field: "boundaries.ai_policy_override_sha256"
+active_ai_policy:
+  path: "docs/contracts/DG-10-ai-audit-reasoning-amendment-candidate.4.2.json"
+  sha256: "55b9359b26ba45dbc8357587fe7febbb315e130ec0de604bf98d5c5515b8a598"
+  model: "gpt-5.6-sol"
+  reasoning_effort: "xhigh"
+all_other_parent_claim_matrix_fields_unchanged: true
+amendment_does_not_accept_any_claim_or_stage: true

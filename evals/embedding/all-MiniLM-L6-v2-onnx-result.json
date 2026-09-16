@@ -1,0 +1,19 @@
+{
+  "baseline": {
+    "cases": 13,
+    "elapsed_ms": 0.915,
+    "provider_identity": "5b479a7b70c0aefb5fcdf20b256621ff8c663626f30b586c25b25f7bccce1598",
+    "top1_accuracy": 0.5384615384615384
+  },
+  "gate": "PASS",
+  "observed_gain": 0.3076923076923077,
+  "real_provider": {
+    "cases": 13,
+    "elapsed_ms": 1417.532,
+    "provider_identity": "cacae4531cfdf7d7df3f69793f3ddcc35f8629b65bd844c49a686c71c2164bc7",
+    "top1_accuracy": 0.8461538461538461
+  },
+  "required_gain": {
+    "top1_accuracy_absolute": 0.1
+  }
+}

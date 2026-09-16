@@ -1,0 +1,50 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python environments and caches
+.venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+**/.pytest_cache/
+.mypy_cache/
+**/.mypy_cache/
+.ruff_cache/
+**/.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Build and packaging outputs
+build/
+**/build/
+dist/
+**/dist/
+*.egg-info/
+**/*.egg-info/
+wheelhouse/
+**/wheelhouse/
+
+# Runtime state and recoverable local data
+var/
+**/var/
+logs/
+**/logs/
+backups/
+**/backups/
+*.log
+*.pid
+*.sock
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
+

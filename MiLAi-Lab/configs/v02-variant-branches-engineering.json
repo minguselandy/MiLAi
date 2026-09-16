@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MILA-V02-05-VARIANT-BRANCH-ENGINEERING",
+  "product_lock": "data/locks/v02-http-transport-timing-product.lock.json",
+  "data_mode": "DEIDENTIFIED_ALLOWED",
+  "model_transport_enabled": false,
+  "new_model_allocations_authorized": 0,
+  "new_model_tokens_authorized": 0,
+  "transport_kind": "MOCK_ONLY",
+  "source_mode": "PUBLIC_SOURCE_SNAPSHOT",
+  "purpose": "FOUR_SCRIPTED_FIVE_BRANCH_CHAINS_PUBLIC_STORAGE_MOCK_INPUT_NO_MODEL_EFFECT"
+}

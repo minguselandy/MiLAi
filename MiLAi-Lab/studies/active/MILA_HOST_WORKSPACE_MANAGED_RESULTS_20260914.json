@@ -1,0 +1,1026 @@
+{
+  "status": "DEVELOPMENT_COMPLETE_NO_STABLE_POLICY_SIGNAL",
+  "kind": "RESEARCH_PROTOTYPE",
+  "independent_lineages": 1,
+  "second_source_compared": false,
+  "generation_ceiling": 76,
+  "debug_generations": 0,
+  "runs": {
+    "a-managed-v3": {
+      "version": "workspace-task-a-v3",
+      "mode": "MANAGED_WORKSET",
+      "order": [
+        "NOTE",
+        "REVIEW",
+        "REGULATED"
+      ],
+      "limits": {
+        "work_tokens": 512,
+        "focus_refs": 4,
+        "recent_exchanges": 1,
+        "input_tokens": 8192,
+        "output_tokens": 2048,
+        "action_reserve": 1024,
+        "envelope_reserve": 128,
+        "catalog_entries": 32
+      },
+      "phase_cap": 4,
+      "attempts": 12,
+      "raw_tokens": 45402,
+      "wall_seconds": 26.919748440850526,
+      "arms": {
+        "NOTE": {
+          "status": "NO_FINAL_DELIVERY",
+          "decisions": 4,
+          "tokens": {
+            "requests": 4,
+            "raw_tokens": 14519,
+            "input_tokens": 13656,
+            "output_tokens": 863
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E2",
+                "G2"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 3,
+              "bodies": [
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 6.874999999784137e-05,
+          "tool_wall_seconds": 7.572909817099571e-05
+        },
+        "REVIEW": {
+          "status": "NO_FINAL_DELIVERY",
+          "decisions": 4,
+          "tokens": {
+            "requests": 4,
+            "raw_tokens": 15029,
+            "input_tokens": 13867,
+            "output_tokens": 1162
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E2",
+                "G2"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 3,
+              "bodies": [
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 7.142900000012276e-05,
+          "tool_wall_seconds": 7.756147533655167e-05
+        },
+        "REGULATED": {
+          "status": "NO_FINAL_DELIVERY",
+          "decisions": 4,
+          "tokens": {
+            "requests": 4,
+            "raw_tokens": 15854,
+            "input_tokens": 14626,
+            "output_tokens": 1228
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E2",
+                "G2"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 3,
+              "bodies": [
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 6.415900000078523e-05,
+          "tool_wall_seconds": 7.065990939736366e-05
+        }
+      },
+      "legacy_runner_label": "THREE_ARMS_FINISHED",
+      "actual_arm_count": 3
+    },
+    "a-managed-v4": {
+      "version": "workspace-task-a-v4",
+      "mode": "MANAGED_WORKSET",
+      "order": [
+        "NOTE",
+        "REVIEW",
+        "REGULATED"
+      ],
+      "limits": {
+        "work_tokens": 512,
+        "focus_refs": 4,
+        "recent_exchanges": 1,
+        "input_tokens": 8192,
+        "output_tokens": 2048,
+        "action_reserve": 1024,
+        "envelope_reserve": 128,
+        "catalog_entries": 32
+      },
+      "phase_cap": [
+        2,
+        2,
+        4
+      ],
+      "attempts": 17,
+      "raw_tokens": 62220,
+      "wall_seconds": 46.54395901784301,
+      "arms": {
+        "NOTE": {
+          "status": "COMPLETE",
+          "decisions": 6,
+          "tokens": {
+            "requests": 6,
+            "raw_tokens": 21393,
+            "input_tokens": 19028,
+            "output_tokens": 2365
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E2",
+                "G2"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 3,
+              "bodies": [
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 4,
+              "phase": 3,
+              "bodies": [
+                "E3",
+                "G3"
+              ],
+              "absent": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 5,
+              "phase": 3,
+              "bodies": [],
+              "absent": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "action": "final",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 0.00010853700000090782,
+          "tool_wall_seconds": 0.00012107007205486298
+        },
+        "REVIEW": {
+          "status": "COMPLETE",
+          "decisions": 5,
+          "tokens": {
+            "requests": 5,
+            "raw_tokens": 18957,
+            "input_tokens": 17222,
+            "output_tokens": 1735
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E2",
+                "G2"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 3,
+              "bodies": [
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 4,
+              "phase": 3,
+              "bodies": [
+                "E3",
+                "G3"
+              ],
+              "absent": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "action": "final",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 0.00010562800000002426,
+          "tool_wall_seconds": 0.00011730799451470375
+        },
+        "REGULATED": {
+          "status": "COMPLETE",
+          "decisions": 6,
+          "tokens": {
+            "requests": 6,
+            "raw_tokens": 21870,
+            "input_tokens": 19859,
+            "output_tokens": 2011
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E2",
+                "G2"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 3,
+              "bodies": [
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 4,
+              "phase": 3,
+              "bodies": [
+                "E3",
+                "G3"
+              ],
+              "absent": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 5,
+              "phase": 3,
+              "bodies": [],
+              "absent": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "action": "final",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 0.0001191920000005453,
+          "tool_wall_seconds": 0.0001325514167547226
+        }
+      },
+      "legacy_runner_label": "THREE_ARMS_FINISHED",
+      "actual_arm_count": 3
+    },
+    "note-common-v4": {
+      "version": "workspace-task-a-v4",
+      "mode": "COMMON_CONTEXT",
+      "order": [
+        "NOTE"
+      ],
+      "limits": {
+        "work_tokens": 512,
+        "focus_refs": 4,
+        "recent_exchanges": 1,
+        "input_tokens": 8192,
+        "output_tokens": 2048,
+        "action_reserve": 1024,
+        "envelope_reserve": 128,
+        "catalog_entries": 32
+      },
+      "phase_cap": [
+        2,
+        2,
+        4
+      ],
+      "attempts": 4,
+      "raw_tokens": 19349,
+      "wall_seconds": 7.938609364908189,
+      "arms": {
+        "NOTE": {
+          "status": "INCOMPLETE",
+          "decisions": 4,
+          "tokens": {
+            "requests": 4,
+            "raw_tokens": 19349,
+            "input_tokens": 18557,
+            "output_tokens": 792
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 2,
+              "bodies": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 7.766099999884091e-05,
+          "tool_wall_seconds": 8.487189188599586e-05
+        }
+      },
+      "legacy_runner_label": "STOPPED_NO_RETRY",
+      "actual_arm_count": 1
+    },
+    "note-managed-v4": {
+      "version": "workspace-task-a-v4",
+      "mode": "MANAGED_WORKSET",
+      "order": [
+        "NOTE"
+      ],
+      "limits": {
+        "work_tokens": 512,
+        "focus_refs": 4,
+        "recent_exchanges": 1,
+        "input_tokens": 8192,
+        "output_tokens": 2048,
+        "action_reserve": 1024,
+        "envelope_reserve": 128,
+        "catalog_entries": 32
+      },
+      "phase_cap": [
+        2,
+        2,
+        4
+      ],
+      "attempts": 5,
+      "raw_tokens": 19530,
+      "wall_seconds": 14.776210785843432,
+      "arms": {
+        "NOTE": {
+          "status": "COMPLETE",
+          "decisions": 5,
+          "tokens": {
+            "requests": 5,
+            "raw_tokens": 19530,
+            "input_tokens": 17585,
+            "output_tokens": 1945
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E2",
+                "G2"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 3,
+              "bodies": [
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 4,
+              "phase": 3,
+              "bodies": [
+                "E3",
+                "G3"
+              ],
+              "absent": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "action": "final",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 9.888699999827111e-05,
+          "tool_wall_seconds": 0.00010868487879633904
+        }
+      },
+      "legacy_runner_label": "THREE_ARMS_FINISHED",
+      "actual_arm_count": 1
+    },
+    "note-common-v4-input16k": {
+      "version": "workspace-task-a-v4",
+      "mode": "COMMON_CONTEXT",
+      "order": [
+        "NOTE"
+      ],
+      "limits": {
+        "work_tokens": 512,
+        "focus_refs": 4,
+        "recent_exchanges": 1,
+        "input_tokens": 16384,
+        "output_tokens": 2048,
+        "action_reserve": 1024,
+        "envelope_reserve": 128,
+        "catalog_entries": 32
+      },
+      "phase_cap": [
+        2,
+        2,
+        4
+      ],
+      "attempts": 8,
+      "raw_tokens": 66518,
+      "wall_seconds": 23.47557687200606,
+      "arms": {
+        "NOTE": {
+          "status": "COMPLETE",
+          "decisions": 8,
+          "tokens": {
+            "requests": 8,
+            "raw_tokens": 66518,
+            "input_tokens": 64266,
+            "output_tokens": 2252
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 2,
+              "bodies": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 4,
+              "phase": 3,
+              "bodies": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 5,
+              "phase": 3,
+              "bodies": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 6,
+              "phase": 3,
+              "bodies": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 7,
+              "phase": 3,
+              "bodies": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [],
+              "action": "final",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 0.00014416799999938945,
+          "tool_wall_seconds": 0.0001618592068552971
+        }
+      },
+      "legacy_runner_label": "THREE_ARMS_FINISHED",
+      "actual_arm_count": 1
+    },
+    "note-managed-v4-input16k": {
+      "version": "workspace-task-a-v4",
+      "mode": "MANAGED_WORKSET",
+      "order": [
+        "NOTE"
+      ],
+      "limits": {
+        "work_tokens": 512,
+        "focus_refs": 4,
+        "recent_exchanges": 1,
+        "input_tokens": 16384,
+        "output_tokens": 2048,
+        "action_reserve": 1024,
+        "envelope_reserve": 128,
+        "catalog_entries": 32
+      },
+      "phase_cap": [
+        2,
+        2,
+        4
+      ],
+      "attempts": 5,
+      "raw_tokens": 21115,
+      "wall_seconds": 20.319042588118464,
+      "arms": {
+        "NOTE": {
+          "status": "COMPLETE",
+          "decisions": 5,
+          "tokens": {
+            "requests": 5,
+            "raw_tokens": 21115,
+            "input_tokens": 18288,
+            "output_tokens": 2827
+          },
+          "workspace_updates": 0,
+          "observations": [
+            {
+              "step": 0,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "read",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 1,
+              "phase": 1,
+              "bodies": [
+                "E1"
+              ],
+              "absent": [],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 2,
+              "phase": 2,
+              "bodies": [
+                "E2",
+                "G2"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 3,
+              "phase": 3,
+              "bodies": [
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "absent": [
+                "E1"
+              ],
+              "action": "stage_answer",
+              "work_status": "UNCHANGED"
+            },
+            {
+              "step": 4,
+              "phase": 3,
+              "bodies": [
+                "E3",
+                "G3"
+              ],
+              "absent": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "action": "final",
+              "work_status": "UNCHANGED"
+            }
+          ],
+          "tool_cpu_seconds": 9.242899999950538e-05,
+          "tool_wall_seconds": 0.00010969070717692375
+        }
+      },
+      "legacy_runner_label": "THREE_ARMS_FINISHED",
+      "actual_arm_count": 1
+    }
+  },
+  "model_generations": 51,
+  "known_raw_tokens": 234134,
+  "input_tokens": 216954,
+  "output_tokens": 17180,
+  "unknown_usage": 0,
+  "http_identity_gets": 6,
+  "tokenize_posts": 51,
+  "generation_posts": 51,
+  "source_body_observations_verified": 51,
+  "money_cost": null,
+  "developer_agent_cost": "separate platform accounting; not added",
+  "engineering": {
+    "frozen_test": "1 passed in 227.83s",
+    "neighbors": "60 passed in 1.73s",
+    "full_pytest": {
+      "status": "PASS_WITH_ONE_OPTIONAL_SKIP",
+      "inventory_count": 4424,
+      "missing": [],
+      "duplicates": [],
+      "unexpected": [],
+      "shards": {
+        "scoped-integration": {
+          "exit_code": 0,
+          "seconds": 2832.756101767998,
+          "selected_count": 3,
+          "passed": 3,
+          "junit": "/cra/memory/mx_memory/evidence/workspace-host/followup-20260914/scoped-integration.xml",
+          "junit_sha256": "83e184fc2fc6daac6267c56b9cc36672a505782a2efcededd9d5149787c40c01"
+        },
+        "remaining-suite": {
+          "exit_code": 0,
+          "seconds": 1670.5170237291604,
+          "selected_count": 4421,
+          "passed": 4420,
+          "skipped": 1,
+          "junit": "/cra/memory/mx_memory/evidence/workspace-host/followup-20260914/remaining-suite.xml",
+          "junit_sha256": "d3f7bb87ee6bce704a9842c1a8747686b1a8d8590c77bdab40e8181e05cd1992"
+        }
+      },
+      "original_unsharded_exit": 139,
+      "original_failure_preserved": true,
+      "original_crash_root_cause": "unproven; occurred during diagnostic stack dump",
+      "diagnostic_timeout_disabled_for_shards": true,
+      "passed": 4423,
+      "skipped": 1,
+      "failed": 0,
+      "errors": 0,
+      "skip_reason": "optional Host SDK wheel",
+      "all_collected_tests_accounted_for": true
+    },
+    "boundary": "PASS",
+    "ruff_src_tests_tools": "PASS",
+    "mypy_src_milai_lab": "PASS (40 source files)",
+    "build": "PASS (sdist and wheel)"
+  },
+  "comparison_1_generations": 29,
+  "comparison_2_generations": 22,
+  "remaining_unspent": 25,
+  "pre_generation_capacity_failures": 1,
+  "decision": "Keep simple NOTE and opt-in managed capability; no stable policy/short-workspace benefit demonstrated. No third comparison or independent/cold-recovery trigger.",
+  "conditional_followups": "NOT_TRIGGERED"
+}

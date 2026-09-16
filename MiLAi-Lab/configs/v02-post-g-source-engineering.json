@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MILA-V02-05-POST-G-SOURCE-ENGINEERING",
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "product_lock": "data/locks/v02-http-transport-timing-product.lock.json",
+  "model_transport_enabled": false,
+  "new_model_allocations_authorized": 0,
+  "new_model_tokens_authorized": 0,
+  "data_mode": "DEIDENTIFIED_ALLOWED",
+  "source_mode": "PUBLIC_SOURCE_SNAPSHOT",
+  "l1_path": "handoff.md",
+  "l2_path": "details.md",
+  "purpose": "SCRIPTED_G_EXIT_POST_G_PUBLIC_CAPTURE_COLD_READ_NOT_MODEL_EFFECT"
+}

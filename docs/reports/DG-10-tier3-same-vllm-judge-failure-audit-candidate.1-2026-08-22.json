@@ -1,0 +1,52 @@
+{
+  "schema": "milai.dg10.tier3-same-vllm-judge-failure-audit.v1",
+  "date": "2026-08-22",
+  "candidate": "candidate.1",
+  "status": "FAILED_ATTEMPT_RETAINED_EVIDENCE_GAP_DISCLOSED",
+  "quality_outcome": "NOT_EVALUABLE",
+  "release_input": false,
+  "test_access_authorized": false,
+  "test_labels_or_outputs_opened": false,
+  "provider_requests": 0,
+  "provider_cost": 0,
+  "external_provider_requests": 0,
+  "external_provider_cost": 0,
+  "bound_failed_report": {
+    "path": "docs/reports/DG-10-tier3-same-vllm-judge-candidate.1-2026-08-22.json",
+    "sha256": "689814983279d04435fdb0ac1769d4992b41bfb48a1142ad9d38ec748db2436d",
+    "mode": "0600"
+  },
+  "bound_runner_at_failure": {
+    "path": "scripts/run_dg10_tier3_same_vllm_judge.py",
+    "sha256": "076e24dc836062a03162ca487300e5110e8ef2b98425e2033525a3199b5d5276"
+  },
+  "failure_reconstruction": {
+    "completed_native_model_calls": 1,
+    "call_count_basis": "AUTHOR_CODE_PATH_INFERENCE: failure occurred in _parse_judgment immediately after the first completion in ordinal-zero loop iteration",
+    "unattempted_planned_calls": 35,
+    "retry_calls": 0,
+    "raw_output_preserved": false,
+    "native_request_id_preserved": false,
+    "native_usage_preserved": false,
+    "failure_label": "judge correctness label drift",
+    "failure_reason_sha256": "530676235a7da16bc8e8e062a71e6bd0c2583978b94e6bdf28f60fbc0cefec45",
+    "independently_recomputable_native_receipt": false
+  },
+  "finding": {
+    "severity": "P1_EVIDENCE_INTEGRITY_FOR_THIS_OPTIONAL_LANE_ONLY",
+    "criterion": "FAILED_MODEL_CALLS_MUST_RETAIN_NATIVE_AND_RAW_RECEIPTS",
+    "decision": "REVISE_NEW_CANDIDATE_REQUIRED",
+    "scope": "Tier-3 optional characterization only; Tier-1, Tier-2 package, L1-L3 integration, and frozen test denial are unaffected"
+  },
+  "required_remediation": [
+    "Write a mode-0600 repo-external progress journal before parsing each model output.",
+    "Bind partial reports to the journal and account for native IDs, usage, and call count.",
+    "Use a predeclared local vLLM JSON-schema response format for the new judge contract."
+  ],
+  "release_effect": {
+    "tier3_candidate_1_usable": false,
+    "may_authorize_test": false,
+    "may_override_tier1_below_target": false,
+    "may_support_local_candidate_claim": false
+  }
+}

@@ -1,0 +1,13 @@
+
+Task: {task_description}
+
+Failed trajectory:
+{trajectory}
+
+This task failed. Analyze what went wrong and suggest improvements for future similar tasks.
+Focus on:
+1. Incorrect assumptions
+2. Steps to improve
+3. What to avoid next time
+
+Provide a brief reflection:

@@ -1,0 +1,1 @@
+Complete the filehash milestone described in REQUEST.md. Implement and test it, and report the result.

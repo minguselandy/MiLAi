@@ -1,0 +1,122 @@
+{
+  "CREATE": {
+    "operation_id": "proposal-example-001",
+    "proposal": {
+      "operation": "CREATE",
+      "supporting_evidence_refs": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "proposed_patch": {
+        "subject_id": "example-subject",
+        "predicate": "runtime.port",
+        "claim_type": "FACT",
+        "payload": {
+          "port": 6432
+        },
+        "confidence": 0.99
+      }
+    },
+    "confirmation": "SUBMIT"
+  },
+  "SUPPORT": {
+    "operation_id": "proposal-example-support",
+    "proposal": {
+      "operation": "SUPPORT",
+      "target_claim_id": "00000000-0000-4000-8000-000000000002",
+      "expected_version_id": "00000000-0000-4000-8000-000000000003",
+      "proposed_patch": {},
+      "supporting_evidence_refs": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "confirmation": "SUBMIT"
+  },
+  "WEAKEN": {
+    "operation_id": "proposal-example-weaken",
+    "proposal": {
+      "operation": "WEAKEN",
+      "target_claim_id": "00000000-0000-4000-8000-000000000002",
+      "expected_version_id": "00000000-0000-4000-8000-000000000003",
+      "proposed_patch": {},
+      "supporting_evidence_refs": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "confirmation": "SUBMIT"
+  },
+  "REVALIDATE": {
+    "operation_id": "proposal-example-revalidate",
+    "proposal": {
+      "operation": "REVALIDATE",
+      "target_claim_id": "00000000-0000-4000-8000-000000000002",
+      "expected_version_id": "00000000-0000-4000-8000-000000000003",
+      "proposed_patch": {},
+      "supporting_evidence_refs": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "confirmation": "SUBMIT"
+  },
+  "REGROUND": {
+    "operation_id": "proposal-example-reground",
+    "proposal": {
+      "operation": "REGROUND",
+      "target_claim_id": "00000000-0000-4000-8000-000000000002",
+      "expected_version_id": "00000000-0000-4000-8000-000000000003",
+      "proposed_patch": {},
+      "supporting_evidence_refs": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "confirmation": "SUBMIT"
+  },
+  "SUPERSEDE": {
+    "operation_id": "proposal-example-supersede",
+    "proposal": {
+      "operation": "SUPERSEDE",
+      "target_claim_id": "00000000-0000-4000-8000-000000000002",
+      "expected_version_id": "00000000-0000-4000-8000-000000000003",
+      "proposed_patch": {},
+      "supporting_evidence_refs": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "confirmation": "SUBMIT"
+  },
+  "CONTEXTUALIZE": {
+    "operation_id": "proposal-example-contextualize",
+    "proposal": {
+      "operation": "CONTEXTUALIZE",
+      "target_claim_id": "00000000-0000-4000-8000-000000000002",
+      "expected_version_id": "00000000-0000-4000-8000-000000000003",
+      "proposed_patch": {},
+      "supporting_evidence_refs": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "confirmation": "SUBMIT"
+  },
+  "CONTRADICT": {
+    "operation_id": "proposal-example-contradict",
+    "proposal": {
+      "operation": "CONTRADICT",
+      "target_claim_id": "00000000-0000-4000-8000-000000000002",
+      "expected_version_id": "00000000-0000-4000-8000-000000000003",
+      "proposed_patch": {},
+      "contradicting_evidence_refs": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "confirmation": "SUBMIT"
+  },
+  "NO_CHANGE": {
+    "operation_id": "proposal-example-no_change",
+    "proposal": {
+      "operation": "NO_CHANGE",
+      "target_claim_id": "00000000-0000-4000-8000-000000000002",
+      "expected_version_id": "00000000-0000-4000-8000-000000000003",
+      "proposed_patch": {}
+    },
+    "confirmation": "SUBMIT"
+  }
+}

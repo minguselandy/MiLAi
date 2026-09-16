@@ -1,0 +1,143 @@
+{
+  "kind": "RESEARCH_PROTOTYPE",
+  "goal": "MILA_HOST_MEMORY_CONTROL_USABILITY_AND_INNOVATION_GOAL_v1.0_20260914.md",
+  "evidence_root": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb",
+  "total_generation_cap": 64,
+  "allocations": [
+    {
+      "name": "rwc-live",
+      "cap": 6,
+      "arm": "MILAI_RWC",
+      "purpose": "early usability snippet",
+      "status": "CLOSED",
+      "used": 6
+    },
+    {
+      "name": "om-live",
+      "cap": 6,
+      "arm": "OM_SYNC_PORT",
+      "purpose": "directed real Observer -> replacement -> Actor snippet",
+      "observation_tokens": 1,
+      "threshold_label": "FUNCTIONAL_LOW_THRESHOLD_NOT_DEFAULT",
+      "recent_events": 2,
+      "status": "CLOSED_SETUP_FAILURE",
+      "used": 0,
+      "failure": "Host construction emitted before run evidence directory existed; no model/business action",
+      "unused_reallocated_to": "om-live-fixed"
+    },
+    {
+      "name": "om-live-fixed",
+      "cap": 6,
+      "arm": "OM_SYNC_PORT",
+      "purpose": "same allocated functional snippet after zero-generation setup repair",
+      "observation_tokens": 1,
+      "threshold_label": "FUNCTIONAL_LOW_THRESHOLD_NOT_DEFAULT",
+      "recent_events": 2,
+      "status": "CLOSED_KNOWN_FORMAT_FAILURE",
+      "used": 1,
+      "raw_tokens": 1580,
+      "failure": "Actor omitted arguments envelope; policy now includes exact existing action example",
+      "unused_reallocated_to": "om-live-envelope"
+    },
+    {
+      "name": "om-live-envelope",
+      "cap": 6,
+      "arm": "OM_SYNC_PORT",
+      "purpose": "functional Observer/Actor snippet after known format failure",
+      "funding": "5 unused prior OM slots + 1 unused repair slot",
+      "observation_tokens": 1,
+      "threshold_label": "FUNCTIONAL_LOW_THRESHOLD_NOT_DEFAULT",
+      "recent_events": 2,
+      "status": "CLOSED_KNOWN_FORMAT_FAILURE",
+      "used": 4,
+      "raw_tokens": 16301,
+      "failure": "Observer returned useful string list; final used flat text. Both now locally normalized without extra calls.",
+      "unused_reallocated_to": "om-live-normalized"
+    },
+    {
+      "name": "om-live-normalized",
+      "cap": 5,
+      "arm": "OM_SYNC_PORT",
+      "purpose": "functional source observation/Actor continuation",
+      "funding": "2 unused OM slots + 3 unused repair slots",
+      "observation_tokens": 1,
+      "recent_events": 1,
+      "threshold_label": "FUNCTIONAL_LOW_THRESHOLD_AND_RECENT_WINDOW_NOT_DEFAULT",
+      "status": "CLOSED_KNOWN_MAINTENANCE_FAILURE",
+      "used": 5,
+      "raw_tokens": 10912,
+      "result": "Goal observation accepted and consumed; source observation emitted echoed raw pages and exhausted output cap, retained original tail."
+    },
+    {
+      "name": "om-live-schema",
+      "cap": 6,
+      "arm": "OM_SYNC_PORT",
+      "purpose": "source observation acceptance/Actor consumption with native constrained JSON output",
+      "funding": "uniformly reduce all three unstarted native caps 16 -> 14; total still 64",
+      "observation_tokens": 1,
+      "recent_events": 1,
+      "threshold_label": "FUNCTIONAL_LOW_THRESHOLD_AND_RECENT_WINDOW_NOT_DEFAULT",
+      "status": "CLOSED",
+      "used": 5,
+      "raw_tokens": 16277,
+      "unused_closed": 1,
+      "result": "goal and real H001 page observations accepted; Actor call5 consumed and submitted final"
+    },
+    {
+      "name": "native-three-arms",
+      "cap": 42,
+      "per_arm_cap": 14,
+      "arms": [
+        "MILAI_RWC",
+        "WORKSPACE_SIMPLE",
+        "OM_SYNC_PORT"
+      ],
+      "purpose": "same frozen exposed development task, one RWC trajectory reused across two comparisons",
+      "om_config": {
+        "observation_tokens": 12000,
+        "reflection_tokens": 16000,
+        "recent_events": 2,
+        "page_chars": 4000,
+        "context_tokens": 65536
+      },
+      "status": "CLOSED",
+      "used": 35,
+      "unused_closed": 7
+    }
+  ],
+  "reserved_unstarted": {},
+  "prior_budgets": "CLOSED_NOT_REUSED",
+  "upstream_om_commit": "b611980c1a3fe3f74bd3c6538ce6a34f510954d0",
+  "used_before_comparison": 21,
+  "task": "multi-source-data-merger",
+  "task_role": "exposed_development_not_confirmation",
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "method_versions": {
+    "rwc": "milai-rwc-v0.3",
+    "om": "om-sync-port-v0.1",
+    "adapter": "hiagent-method-adapter-v0.5"
+  },
+  "frozen_implementation": {
+    "src/milai_lab/methods/controlled_workspace.py": "819e8a6d966a21705ee7d18c19724e01266b4211f50df221c5e2b036ef132763",
+    "src/milai_lab/methods/observational_memory.py": "8cfe2a1ab62f5171a2af9b99cb93b8e16a523909232f30015ffd1eb816b17f5e",
+    "src/milai_lab/methods/hiagent.py": "4f65c1bb908c1811088738bdcdb6d21e2a9b8907d296b1e87c92e6705a16f22e",
+    "tools/hiagent_terminal_session.py": "1a2183776d66428b2044fa394cd26cb8b7df6d7945137bce3e982b4651e37b25",
+    "tools/hiagent_harbor_agent.py": "c663084491346b479968d75eabe4d475b96cbe1b49420867d3153ec89b13044d",
+    "tools/run_workspace_native.py": "ef171a09564157b80fdcf57cc44f907cf6653bd4daf323a23bc42fa68f39e0f0",
+    "tools/workspace_checkpoint.py": "ee84d7706d9cf3d4caba2ff1cff68e1010854f339251a27e4fd7c23c5d22c100",
+    "tools/run_workspace_public_checkpoint.py": "32d68b2b543b45beeba09cda9e84633eaff407d4eb474bc4ed9c0a853b017c14",
+    "configs/policies/workspace_control/workspace_simple.txt": "a3a6f6e8fd611a1c3a481581182446960cf791e81d585ef7cc82c6b0846c1ede",
+    "configs/policies/workspace_control/common.txt": "abae2152bc876f41c116911fcf42a2f4892c122fcd4d9b80480a525b98821c25",
+    "configs/policies/workspace_control/actor.txt": "738285365b09224d2729cd55dd101d0046f50b66cb900a094b633eb86a5bdfed",
+    "configs/policies/workspace_control/milai_rwc.txt": "2b9cee2b8e5838a0adb2b5bb745c154e0bc2981d2199fa02c64c0d05f93edb08",
+    "configs/policies/om_sync/reflector.txt": "9618b628f058fbad69bd595ca5e2935d168773a601a52d7e1a3469b680b652ea",
+    "configs/policies/om_sync/observer.txt": "ad659808edaf679fd0b6a6093526758ba54fafe317999ff15b8a1d461c8ac376",
+    "configs/policies/om_sync/actor.txt": "61304a249214014b8fefec88a1fb6456eaaf7682d2e16e9895091e006e0af182"
+  },
+  "status": "COMPLETE",
+  "total_generations_used": 56,
+  "total_unused_closed": 8,
+  "unknown_usage": 0,
+  "completed_at": "2026-09-14T16:36:46.985136+00:00",
+  "final_checks": "ALL_PASS"
+}

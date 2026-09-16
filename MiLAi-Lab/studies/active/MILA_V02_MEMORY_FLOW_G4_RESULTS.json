@@ -1,0 +1,240 @@
+{
+  "status": "G4_COMPLETED_KEEP_BASELINE",
+  "selected_arm": "A0",
+  "initial_tasks": {
+    "pass": 4,
+    "allocated": 4
+  },
+  "prespecified_followups": {
+    "pass": 2,
+    "allocated": 2
+  },
+  "first_substantive_judgments_pass": 6,
+  "observed_collateral_damage": 0,
+  "modified_state_denominator": 0,
+  "once_tasks_saved": 0,
+  "once_task_denominator": 2,
+  "total_input_output_tokens": 275197,
+  "elapsed_seconds": 480.71929571940564,
+  "rows": [
+    {
+      "session": "g4-1-a0",
+      "total_input_output_tokens": 70932,
+      "elapsed_seconds": 143.07673494005576,
+      "completed_tool_calls": 5,
+      "tool_failure_count": 0,
+      "state_versions": [
+        1,
+        1
+      ],
+      "save_status": "NOT_ATTEMPTED",
+      "payload_changed": false,
+      "semantic_review": {
+        "reviewer": "root Codex semantic review; not independent human review",
+        "basis": "G4 preregistered source/task clauses; first substantive commentary, final response and full 工作坊现场协调方案.md",
+        "first_substantive_judgment": "PASS",
+        "task_completion": "PASS",
+        "required_clauses_passed": 4,
+        "required_clauses_total": 4,
+        "collateral_damage": false,
+        "evidence": [
+          "Exact setup, session and15minute turnover windows; all departure within11:00",
+          "5participants+2coordinators=7; 12cap explicitly includes staff",
+          "Groups never overlap; spare capacity not permission for companions",
+          "Coordinator-ready schedule and fillable count checklist; rehearsal explicitly not done"
+        ],
+        "save_assessment": "No State update; sufficient existing note plus real plan file retained for preregistered rehearsal continuation",
+        "later_request_input": "UNOBSERVED"
+      },
+      "fixture_identity_valid": true,
+      "product_pin_valid": true,
+      "bootstrap_exact_before_payload": true,
+      "bootstrap_exact_version": true,
+      "arm": "A0",
+      "followup": false
+    },
+    {
+      "session": "g4-1-resume",
+      "total_input_output_tokens": 37947,
+      "elapsed_seconds": 63.15376420295797,
+      "completed_tool_calls": 2,
+      "tool_failure_count": 0,
+      "state_versions": [
+        1,
+        1
+      ],
+      "save_status": "NOT_ATTEMPTED",
+      "payload_changed": false,
+      "semantic_review": {
+        "reviewer": "root Codex semantic review; not independent human review",
+        "basis": "Prespecified rehearsal followup and venue/roster clauses; first substantive final answer, unchanged plan hash and State",
+        "first_substantive_judgment": "PASS",
+        "task_completion": "PASS",
+        "collateral_damage": false,
+        "recurrence": false,
+        "negative_transfer": false,
+        "evidence": [
+          "Opening and turnover checklist preserves all timing windows",
+          "5+2=7 below staff-inclusive12cap; no companions or overlappinggroups",
+          "Plan file retained identically; no rehearsal falsely claimed performed"
+        ],
+        "save_assessment": "No new State update; current note and retained source/plan sufficient",
+        "later_request_input": "UNOBSERVED"
+      },
+      "fixture_identity_valid": true,
+      "product_pin_valid": true,
+      "bootstrap_exact_before_payload": true,
+      "bootstrap_exact_version": true,
+      "arm": "A0",
+      "followup": true
+    },
+    {
+      "session": "g4-2-a0",
+      "total_input_output_tokens": 53307,
+      "elapsed_seconds": 95.71337866201065,
+      "completed_tool_calls": 4,
+      "tool_failure_count": 0,
+      "state_versions": [
+        1,
+        1
+      ],
+      "save_status": "NOT_ATTEMPTED",
+      "payload_changed": false,
+      "semantic_review": {
+        "reviewer": "root Codex semantic review; not independent human review",
+        "basis": "G4 preregistered planning task and source clauses; first substantive commentary and complete 开幕筹备内部计划.md",
+        "first_substantive_judgment": "PASS",
+        "task_completion": "PASS",
+        "required_clauses_passed": 4,
+        "required_clauses_total": 4,
+        "collateral_damage": false,
+        "evidence": [
+          "September12 18:30 north hall is proposed and still awaiting written confirmation; old south hall arrangement superseded",
+          "Lin confirmation then Chen feasibility then Zhou formal notice; draft preparation can proceed",
+          "Owners preserved and unprovided deadlines/contingencies labeled open planning decisions"
+        ],
+        "save_assessment": "No State save despite obsolete note; correction exists in actual plan file. Do not claim memory was repaired. Prespecified fresh-context followup will retain file and original State.",
+        "later_request_input": "UNOBSERVED"
+      },
+      "fixture_identity_valid": true,
+      "product_pin_valid": true,
+      "bootstrap_exact_before_payload": true,
+      "bootstrap_exact_version": true,
+      "arm": "A0",
+      "followup": false
+    },
+    {
+      "session": "g4-2-resume",
+      "total_input_output_tokens": 38074,
+      "elapsed_seconds": 64.72874896717258,
+      "completed_tool_calls": 4,
+      "tool_failure_count": 0,
+      "state_versions": [
+        1,
+        1
+      ],
+      "save_status": "NOT_ATTEMPTED",
+      "payload_changed": false,
+      "semantic_review": {
+        "reviewer": "root Codex semantic review; not independent human review",
+        "basis": "Prespecified coordination followup, latest update and distractor source; external final answer, unchanged plan hash and State",
+        "first_substantive_judgment": "PASS",
+        "task_completion": "PASS",
+        "collateral_damage": false,
+        "recurrence": false,
+        "negative_transfer": false,
+        "evidence": [
+          "Correct proposed September12 18:30 north hall despite unchanged obsolete State",
+          "Lin confirmation -> Chen feasibility -> Zhou notice, with permitted parallel draft work",
+          "Internal notice accurately pending and other-event schedule excluded"
+        ],
+        "save_assessment": "No State repair; task succeeds with retained deliverable and fresh source checking. Does not prove autonomous stale-memory maintenance.",
+        "later_request_input": "UNOBSERVED"
+      },
+      "fixture_identity_valid": true,
+      "product_pin_valid": true,
+      "bootstrap_exact_before_payload": true,
+      "bootstrap_exact_version": true,
+      "arm": "A0",
+      "followup": true
+    },
+    {
+      "session": "g4-3-a0",
+      "total_input_output_tokens": 37835,
+      "elapsed_seconds": 66.33912780904211,
+      "completed_tool_calls": 2,
+      "tool_failure_count": 0,
+      "state_versions": [
+        1,
+        1
+      ],
+      "save_status": "NOT_ATTEMPTED",
+      "payload_changed": false,
+      "semantic_review": {
+        "reviewer": "root Codex semantic review; not independent human review",
+        "basis": "G4 preregistered writing task and supplied source clauses; first substantive delivered final answer",
+        "first_substantive_judgment": "PASS",
+        "task_completion": "PASS",
+        "required_clauses_passed": 4,
+        "required_clauses_total": 4,
+        "collateral_damage": false,
+        "evidence": [
+          "Approximately150-character welcoming intro for first-time visitors with explicit fact-check points",
+          "12 interviewees' excerpts not all residents; no invented mood/motivation/consensus",
+          "Exact Ahe quotation and correct photographs/audio/maps; opening-hour facts omitted without contradiction"
+        ],
+        "save_assessment": "Appropriate no update for completed one-time writing request; no future task registered",
+        "later_request_input": "UNOBSERVED"
+      },
+      "fixture_identity_valid": true,
+      "product_pin_valid": true,
+      "bootstrap_exact_before_payload": true,
+      "bootstrap_exact_version": true,
+      "arm": "A0",
+      "followup": false
+    },
+    {
+      "session": "g4-4-a0",
+      "total_input_output_tokens": 37102,
+      "elapsed_seconds": 47.70754113816656,
+      "completed_tool_calls": 2,
+      "tool_failure_count": 0,
+      "state_versions": [
+        1,
+        1
+      ],
+      "save_status": "NOT_ATTEMPTED",
+      "payload_changed": false,
+      "semantic_review": {
+        "reviewer": "root Codex semantic review; not independent human review",
+        "basis": "G4 preregistered writing task and supplied source clauses; first substantive delivered final answer",
+        "first_substantive_judgment": "PASS",
+        "task_completion": "PASS",
+        "required_clauses_passed": 4,
+        "required_clauses_total": 4,
+        "collateral_damage": false,
+        "evidence": [
+          "Three concise lines in entry/stairs/reading-area order",
+          "Free sticker pickup with no reservation, second floor closed but first floor open",
+          "Reading-area display photography allowed, flash off; no storeroom ban transfer"
+        ],
+        "save_assessment": "Appropriate no update for completed one-time writing request; no future task registered",
+        "later_request_input": "UNOBSERVED"
+      },
+      "fixture_identity_valid": true,
+      "product_pin_valid": true,
+      "bootstrap_exact_before_payload": true,
+      "bootstrap_exact_version": true,
+      "arm": "A0",
+      "followup": false
+    }
+  ],
+  "limits": [
+    "Two new constructed families after configuration freeze, same investigator and semantic reviewer; not statistically representative or independently blind",
+    "No State updates in these6sessions; outdated planning memory remained stale while output/file/source-based continuation was correct",
+    "Actual task files retained identically for both followups; no isolated saved-memory value claim",
+    "Same mixed JSON-note payload form; representation generalization not tested",
+    "Initial assembled payload/version observed; later request inputs UNOBSERVED",
+    "No dynamic revocation, production readiness, natural MCP invocation or Schema freeze claim"
+  ]
+}

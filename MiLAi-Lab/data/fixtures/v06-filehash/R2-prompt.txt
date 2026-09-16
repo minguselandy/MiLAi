@@ -1,0 +1,1 @@
+Change the filehash default algorithm to sha512. Keep sha256 available through --algorithm. Preserve the other established behavior, update the README and tests, run them, and carry forward this changed decision for future work.

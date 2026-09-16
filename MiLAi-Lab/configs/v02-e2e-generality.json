@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MILA-V02-05-ENGINEERING",
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "product_lock": "data/locks/v02-lazy-source-offsets-product.lock.json",
+  "data_mode": "DEIDENTIFIED_ALLOWED",
+  "model_transport_enabled": false,
+  "new_model_allocations_authorized": 0,
+  "new_model_tokens_authorized": 0,
+  "state_field": "milai_lab_layered_v2",
+  "l1_path": "handoff.md",
+  "l1_format": "text",
+  "l1_max_bytes": 4096,
+  "l2_path": "details.md",
+  "prefetch_max_bytes": 8192,
+  "bootstrap_max_bytes": 16384,
+  "provider_contract": null,
+  "currency_limit": null,
+  "formal_d4_d5_enabled": false,
+  "comparison": {
+    "A": "FLAT_PREFETCH",
+    "B": "STATE_FIRST",
+    "save_increment": "NOT_TESTED"
+  }
+}

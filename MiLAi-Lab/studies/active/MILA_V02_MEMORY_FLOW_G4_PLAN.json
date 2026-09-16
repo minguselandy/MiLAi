@@ -1,0 +1,47 @@
+{
+  "status": "PREREGISTERED_NOT_RUN",
+  "created_at": "2026-09-05T08:35:50.761730+00:00",
+  "selection_sha256": "7798621ad6601fc51949533b8b4a67ecf3b14b368536b710481c41ee139cf6b2",
+  "fixtures": {
+    "data/fixtures/v02-memory-flow/g4-planning-correct.json": "5fe79d916cecdcd2d7ec080d558378f8f823e4db2c9d62acae9d4439b2ae87bc",
+    "data/fixtures/v02-memory-flow/g4-planning-outdated.json": "ed7324ee80fc29f1e8ae07b2f252e2c7ef5c228d9d45c458aac4acd4099799d2",
+    "data/fixtures/v02-memory-flow/g4-writing-expand.json": "87776a086862fab30be23947c371b688cfdff5521cc563453c29f86cb85e65cb",
+    "data/fixtures/v02-memory-flow/g4-writing-omitted.json": "79bc6b63f1530963e376ca422778dc8d1154bfb8d443700ebf42185b585a55de"
+  },
+  "selected_arm": "A0",
+  "strategy_changes": "None; same full Host bootstrap/MCP/source access/config and budgets as frozen selection. No per-family trigger or answer template.",
+  "cases": [
+    {
+      "case": "data/fixtures/v02-memory-flow/g4-planning-correct.json",
+      "session": "g4-1-a0",
+      "followup": "g4-1-resume"
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g4-planning-outdated.json",
+      "session": "g4-2-a0",
+      "followup": "g4-2-resume"
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g4-writing-omitted.json",
+      "session": "g4-3-a0",
+      "followup": null
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g4-writing-expand.json",
+      "session": "g4-4-a0",
+      "followup": null
+    }
+  ],
+  "execution": "Serial after all G3b planned runs terminal; one batch g4-b1 six sessions, four initial runs then two prespecified same-task fresh-context followups with actual deliverables retained",
+  "evaluation": "Root Codex semantic review against task and source clauses. Report first substantive delivered judgment, final task, preserved original correct facts, actual saves and all future completion. Keep all failures and unknowns. New-family failure invokes diagnosis, not post-hoc arm selection or template tuning.",
+  "decision": "A0 remains usable if required planning/writing tasks and continuations deliver source-faithful outputs, no collateral damage, and real Host completes within declared wall/tool budgets. Any failure is retained and resolved or restricts completion/scope. No claim that4/4 proves general reliability.",
+  "future_denominator": 2,
+  "once_denominator": 2,
+  "limits": [
+    "Constructed by same investigator after strategy freeze, no independent blind review",
+    "No representation-generalization claim",
+    "No dynamic revocation test",
+    "Later request inputs unobserved",
+    "Raw total-token hard-cap enforcement unverified; actual cost recorded"
+  ]
+}

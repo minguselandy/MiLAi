@@ -1,0 +1,525 @@
+{
+  "kind": "RESEARCH_PROTOTYPE",
+  "status": "COMPLETE",
+  "method_versions": {
+    "rwc": "milai-rwc-v0.3",
+    "om": "om-sync-port-v0.1",
+    "adapter": "hiagent-method-adapter-v0.5"
+  },
+  "evidence_root": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb",
+  "goal_file": "MILA_HOST_MEMORY_CONTROL_USABILITY_AND_INNOVATION_GOAL_v1.0_20260914.md",
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "task": "multi-source-data-merger",
+  "task_role": "exposed_development_not_confirmation",
+  "total_generations": 56,
+  "generation_cap": 64,
+  "unused_closed": 8,
+  "total_raw_tokens": 216546,
+  "total_input_tokens": 193578,
+  "total_output_tokens": 22968,
+  "role_calls": {
+    "actor": 28,
+    "summary": 8,
+    "maintenance": 14,
+    "observer": 6,
+    "reflector": 0
+  },
+  "unknown_usage": 0,
+  "model_cost_currency": null,
+  "cache_discount_claim": false,
+  "attempts": [
+    {
+      "run": "rwc-live",
+      "arm": "MILAI_RWC",
+      "method": "milai-rwc-v0.3",
+      "calls": {
+        "actor": 2,
+        "summary": 1,
+        "maintenance": 3
+      },
+      "generations": 6,
+      "input_tokens": 16818,
+      "output_tokens": 2437,
+      "raw_tokens": 19255,
+      "stop_reason": "TOTAL_MODEL_CALL_LIMIT",
+      "final_submitted": false,
+      "reward": 1.0,
+      "trial_wall_seconds": 62.61,
+      "agent_wall_seconds": 20.888,
+      "tool_seconds": 2.6,
+      "evidence": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/rwc-live/host/multi-source-data-merger-0-milai_rwc",
+      "exception": null
+    },
+    {
+      "run": "om-live",
+      "arm": "OM_SYNC_PORT",
+      "method": null,
+      "calls": {},
+      "generations": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "raw_tokens": 0,
+      "stop_reason": "FileNotFoundError: [Errno 2] No such file or directory: '/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live/host/multi-source-data-merger-0-om_sync_port/method-events.jsonl'",
+      "final_submitted": false,
+      "reward": null,
+      "trial_wall_seconds": 16.659,
+      "agent_wall_seconds": 0.109,
+      "tool_seconds": 0,
+      "evidence": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live/host/multi-source-data-merger-0-om_sync_port",
+      "exception": "FileNotFoundError",
+      "reported_method_before_host_setup": "hiagent-terminal-v0.1"
+    },
+    {
+      "run": "om-live-fixed",
+      "arm": "OM_SYNC_PORT",
+      "method": "om-sync-port-v0.1",
+      "calls": {
+        "actor": 1,
+        "observer": 0,
+        "reflector": 0
+      },
+      "generations": 1,
+      "input_tokens": 1537,
+      "output_tokens": 43,
+      "raw_tokens": 1580,
+      "stop_reason": "INVALID_ACTION_ENVELOPE",
+      "final_submitted": false,
+      "reward": null,
+      "trial_wall_seconds": 16.704,
+      "agent_wall_seconds": 0.945,
+      "tool_seconds": 0.0,
+      "evidence": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live-fixed/host/multi-source-data-merger-0-om_sync_port",
+      "exception": "HiAgentError"
+    },
+    {
+      "run": "om-live-envelope",
+      "arm": "OM_SYNC_PORT",
+      "method": "om-sync-port-v0.1",
+      "calls": {
+        "actor": 3,
+        "observer": 1,
+        "reflector": 0
+      },
+      "generations": 4,
+      "input_tokens": 14021,
+      "output_tokens": 2280,
+      "raw_tokens": 16301,
+      "stop_reason": "INVALID_ACTION_ENVELOPE",
+      "final_submitted": false,
+      "reward": null,
+      "trial_wall_seconds": 34.248,
+      "agent_wall_seconds": 18.888,
+      "tool_seconds": 2.246,
+      "evidence": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live-envelope/host/multi-source-data-merger-0-om_sync_port",
+      "exception": "HiAgentError"
+    },
+    {
+      "run": "om-live-normalized",
+      "arm": "OM_SYNC_PORT",
+      "method": "om-sync-port-v0.1",
+      "calls": {
+        "actor": 3,
+        "observer": 2,
+        "reflector": 0
+      },
+      "generations": 5,
+      "input_tokens": 8497,
+      "output_tokens": 2415,
+      "raw_tokens": 10912,
+      "stop_reason": "TOTAL_MODEL_CALL_LIMIT",
+      "final_submitted": false,
+      "reward": null,
+      "trial_wall_seconds": 165.453,
+      "agent_wall_seconds": 18.108,
+      "tool_seconds": 0.544,
+      "evidence": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live-normalized/host/multi-source-data-merger-0-om_sync_port",
+      "exception": "RewardFileNotFoundError"
+    },
+    {
+      "run": "om-live-schema",
+      "arm": "OM_SYNC_PORT",
+      "method": "om-sync-port-v0.1",
+      "calls": {
+        "actor": 3,
+        "observer": 2,
+        "reflector": 0
+      },
+      "generations": 5,
+      "input_tokens": 14015,
+      "output_tokens": 2262,
+      "raw_tokens": 16277,
+      "stop_reason": "FINAL_SUBMITTED",
+      "final_submitted": true,
+      "reward": 1.0,
+      "trial_wall_seconds": 72.827,
+      "agent_wall_seconds": 20.318,
+      "tool_seconds": 2.052,
+      "evidence": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live-schema/host/multi-source-data-merger-0-om_sync_port",
+      "exception": null
+    },
+    {
+      "run": "native-three-arms",
+      "arm": "MILAI_RWC",
+      "method": "milai-rwc-v0.3",
+      "calls": {
+        "actor": 5,
+        "summary": 3,
+        "maintenance": 6
+      },
+      "generations": 14,
+      "input_tokens": 44638,
+      "output_tokens": 3579,
+      "raw_tokens": 48217,
+      "stop_reason": "TOTAL_MODEL_CALL_LIMIT",
+      "final_submitted": false,
+      "reward": 1.0,
+      "trial_wall_seconds": 73.165,
+      "agent_wall_seconds": 32.876,
+      "tool_seconds": 3.659,
+      "evidence": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/native-three-arms/host/multi-source-data-merger-0-milai_rwc",
+      "exception": null
+    },
+    {
+      "run": "native-three-arms",
+      "arm": "WORKSPACE_SIMPLE",
+      "method": "milai-rwc-v0.3",
+      "calls": {
+        "actor": 5,
+        "summary": 4,
+        "maintenance": 5
+      },
+      "generations": 14,
+      "input_tokens": 52943,
+      "output_tokens": 7391,
+      "raw_tokens": 60334,
+      "stop_reason": "TOTAL_MODEL_CALL_LIMIT",
+      "final_submitted": false,
+      "reward": 1.0,
+      "trial_wall_seconds": 103.719,
+      "agent_wall_seconds": 63.272,
+      "tool_seconds": 5.527,
+      "evidence": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/native-three-arms/host/multi-source-data-merger-1-workspace_simple",
+      "exception": null
+    },
+    {
+      "run": "native-three-arms",
+      "arm": "OM_SYNC_PORT",
+      "method": "om-sync-port-v0.1",
+      "calls": {
+        "actor": 6,
+        "observer": 1,
+        "reflector": 0
+      },
+      "generations": 7,
+      "input_tokens": 41109,
+      "output_tokens": 2561,
+      "raw_tokens": 43670,
+      "stop_reason": "FINAL_SUBMITTED",
+      "final_submitted": true,
+      "reward": 1.0,
+      "trial_wall_seconds": 64.466,
+      "agent_wall_seconds": 24.283,
+      "tool_seconds": 1.496,
+      "evidence": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/native-three-arms/host/multi-source-data-merger-2-om_sync_port",
+      "exception": null
+    }
+  ],
+  "public_om": {
+    "artifact_sha256": "58c9608820f5e3f1a6a2295d52def8a2c3fe0f9e9cc322a3c50aa12a068a6334",
+    "fresh_os_process": true,
+    "method": "OM_SYNC_PORT",
+    "model_http_calls": 0,
+    "product_pin_valid": true,
+    "status": "PASS",
+    "transport": "PUBLIC_SDK_HTTP",
+    "artifact_sha256_kind": "public_lifecycle_runner_source",
+    "checkpoint_sha256": "ac484af1108e39392765ea871a0a0246190ebcc4b6a12fd6396417fb72a18715"
+  },
+  "public_om_resume": {
+    "different_process": true,
+    "final": "Restored observations and original receipt.",
+    "local_checkpoint_used": false,
+    "method": "OM_SYNC_PORT",
+    "model_http_calls": 0,
+    "new_goal_clears_final_and_hints": true,
+    "observations_and_hints_preserved": true,
+    "original_source_range_read": true,
+    "pid": 3739762,
+    "restore_model_calls": 0,
+    "scripted_callbacks_total": 9,
+    "terminal_executions": 1
+  },
+  "historical_replay": {
+    "source_sha256": "b0d52f58894d63dd31d39edde4e35a81dcf217f7225c0bdf6554c62f70be5ebe",
+    "total": 16,
+    "original": {
+      "CONTROL_REJECTED": 9,
+      "WORKSPACE_ACCEPTED": 7
+    },
+    "replay": {
+      "NORMALIZED": 4,
+      "REJECTED": 5,
+      "DIRECT": 7
+    },
+    "newly_usable": 4,
+    "remaining_reasons": {
+      "UNKNOWN_CARD_HANDLE": 2,
+      "DELIVER_REQUIRES_FINAL_PROPOSAL": 2,
+      "UNPUBLISHED_WORKSPACE_REFERENCE": 1
+    },
+    "scopes": {
+      "references_route_and_format": 16
+    },
+    "by_trial": {
+      "cancel-async-tasks-0-milai_rwc": {
+        "n": 6,
+        "original_accepted": 4,
+        "replay": {
+          "NORMALIZED": 1,
+          "REJECTED": 1,
+          "DIRECT": 4
+        }
+      },
+      "multi-source-data-merger-0-milai_rwc": {
+        "n": 5,
+        "original_accepted": 2,
+        "replay": {
+          "NORMALIZED": 1,
+          "REJECTED": 2,
+          "DIRECT": 2
+        }
+      },
+      "multi-source-data-merger-1-workspace_simple": {
+        "n": 5,
+        "original_accepted": 1,
+        "replay": {
+          "REJECTED": 2,
+          "DIRECT": 1,
+          "NORMALIZED": 2
+        }
+      }
+    },
+    "limitations": [
+      "Each output is replayed independently at its historical request state; accepted new proposals are not propagated to later historical calls.",
+      "Checks format, published references and route prerequisites, not semantic correctness, actual model learning or new native success.",
+      "State reconstructed from original request catalogs/cards/draft and prior full WORKSPACE_ACCEPTED events; capacities retain 64 cards/64 catalog/16000 characters.",
+      "No Provider, environment execution, source body read or new model request."
+    ]
+  },
+  "frozen_implementation_unchanged": true,
+  "ledger_counts": [
+    {
+      "path": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/rwc-live/provider/provider-ledger.jsonl",
+      "events": {
+        "RESERVED": 6,
+        "SETTLED": 6
+      }
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/native-three-arms/provider/provider-ledger.jsonl",
+      "events": {
+        "RESERVED": 35,
+        "SETTLED": 35
+      }
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live-fixed/provider/provider-ledger.jsonl",
+      "events": {
+        "RESERVED": 1,
+        "SETTLED": 1
+      }
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live-schema/provider/provider-ledger.jsonl",
+      "events": {
+        "RESERVED": 5,
+        "SETTLED": 5
+      }
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live-envelope/provider/provider-ledger.jsonl",
+      "events": {
+        "RESERVED": 4,
+        "SETTLED": 4
+      }
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/om-live-normalized/provider/provider-ledger.jsonl",
+      "events": {
+        "RESERVED": 5,
+        "SETTLED": 5
+      }
+    }
+  ],
+  "comparisons": {
+    "shared_rwc_sample": true,
+    "independent_tasks": 1,
+    "role_costs": {
+      "MILAI_RWC": {
+        "maintenance": {
+          "attempts": 6,
+          "settled": 6,
+          "input_tokens": 22521,
+          "output_tokens": 813,
+          "provider_seconds": 8.080258
+        },
+        "actor": {
+          "attempts": 5,
+          "settled": 5,
+          "input_tokens": 16718,
+          "output_tokens": 2566,
+          "provider_seconds": 18.11568
+        },
+        "summary": {
+          "attempts": 3,
+          "settled": 3,
+          "input_tokens": 5399,
+          "output_tokens": 200,
+          "provider_seconds": 1.998221
+        }
+      },
+      "WORKSPACE_SIMPLE": {
+        "maintenance": {
+          "attempts": 5,
+          "settled": 5,
+          "input_tokens": 20655,
+          "output_tokens": 2168,
+          "provider_seconds": 16.311249
+        },
+        "actor": {
+          "attempts": 5,
+          "settled": 5,
+          "input_tokens": 20770,
+          "output_tokens": 4968,
+          "provider_seconds": 36.821406
+        },
+        "summary": {
+          "attempts": 4,
+          "settled": 4,
+          "input_tokens": 11518,
+          "output_tokens": 255,
+          "provider_seconds": 3.256286
+        }
+      },
+      "OM_SYNC_PORT": {
+        "actor": {
+          "attempts": 6,
+          "settled": 6,
+          "input_tokens": 38692,
+          "output_tokens": 2344,
+          "provider_seconds": 19.824529
+        },
+        "observer": {
+          "attempts": 1,
+          "settled": 1,
+          "input_tokens": 2417,
+          "output_tokens": 217,
+          "provider_seconds": 1.695585
+        }
+      }
+    },
+    "controller": {
+      "MILAI_RWC": {
+        "DIRECT": 0,
+        "NORMALIZED": 4,
+        "REJECTED": 2,
+        "content_changed": 2,
+        "noop": 2,
+        "created_cards": 0,
+        "rejections": [
+          {
+            "reason": "initial",
+            "detail": "UNPUBLISHED_WORKSPACE_REFERENCE"
+          },
+          {
+            "reason": "feedback",
+            "detail": "DELIVER_REQUIRES_FINAL_PROPOSAL"
+          }
+        ]
+      },
+      "WORKSPACE_SIMPLE": {
+        "DIRECT": 0,
+        "NORMALIZED": 4,
+        "REJECTED": 1,
+        "content_changed": 4,
+        "noop": 0,
+        "created_cards": 1,
+        "rejections": [
+          {
+            "reason": "feedback",
+            "detail": "DELIVER_REQUIRES_FINAL_PROPOSAL"
+          }
+        ]
+      }
+    },
+    "claim": "All native rewards 1; OM delivered in 7 calls, workspace arms used 14 without final. No established N1-N4 incremental benefit; RWC used fewer tokens than SIMPLE.",
+    "H_ONCE": "Retained, no contemporaneous run; no superiority claim"
+  },
+  "completed_at": "2026-09-14T16:36:46.985136+00:00",
+  "completed_at_Asia_Shanghai": "2026-09-15T00:36:46.985136+08:00",
+  "verification": {
+    "commands": {
+      "boundary": {
+        "command": [
+          "uv",
+          "run",
+          "milai-lab-check-boundary"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "seconds": 0.18266775785014033
+      },
+      "pytest": {
+        "command": [
+          "uv",
+          "run",
+          "pytest"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "seconds": 4069.1074828468263
+      },
+      "ruff": {
+        "command": [
+          "uv",
+          "run",
+          "ruff",
+          "check",
+          "src",
+          "tests",
+          "tools"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "seconds": 0.5957463681697845
+      },
+      "mypy": {
+        "command": [
+          "uv",
+          "run",
+          "mypy",
+          "src/milai_lab"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "seconds": 0.31348127126693726
+      },
+      "build": {
+        "command": [
+          "uv",
+          "build"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "seconds": 12.453364737331867
+      }
+    },
+    "pytest_passed": 4578,
+    "pytest_skipped": 1,
+    "skip_reason": "optional Host SDK wheel",
+    "log_root": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/verification",
+    "frozen_implementation_unchanged": true
+  },
+  "development_wall_seconds_including_tests": 6170.985,
+  "verification_wall_seconds": 4082.653
+}

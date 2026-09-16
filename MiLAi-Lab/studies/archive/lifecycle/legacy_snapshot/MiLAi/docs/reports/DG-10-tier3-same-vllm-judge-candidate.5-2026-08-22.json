@@ -1,0 +1,1331 @@
+{
+  "aggregates": {
+    "by_arm": {
+      "MILAI_MCP": {
+        "ambiguous_reference_count": 0,
+        "case_count": 12,
+        "correctness_distribution": {
+          "CORRECT": 8,
+          "INCORRECT": 3,
+          "PARTIALLY_CORRECT": 1
+        },
+        "ordinal_correctness_mean_excluding_ambiguous_reference": 0.708333,
+        "support_distribution": {
+          "CONFLICTING": 1,
+          "NOT_ASSESSABLE": 4,
+          "SUPPORTED": 7
+        },
+        "uncertainty_distribution": {
+          "APPROPRIATE": 2,
+          "OVERCONFIDENT": 4,
+          "UNNECESSARILY_ABSTAINED": 6
+        }
+      },
+      "NAIVE_RAG": {
+        "ambiguous_reference_count": 0,
+        "case_count": 12,
+        "correctness_distribution": {
+          "CORRECT": 9,
+          "INCORRECT": 3
+        },
+        "ordinal_correctness_mean_excluding_ambiguous_reference": 0.75,
+        "support_distribution": {
+          "NOT_ASSESSABLE": 2,
+          "SUPPORTED": 8,
+          "UNSUPPORTED": 2
+        },
+        "uncertainty_distribution": {
+          "OVERCONFIDENT": 3,
+          "UNNECESSARILY_ABSTAINED": 9
+        }
+      },
+      "NO_MEMORY": {
+        "ambiguous_reference_count": 1,
+        "case_count": 12,
+        "correctness_distribution": {
+          "AMBIGUOUS_REFERENCE": 1,
+          "CORRECT": 8,
+          "INCORRECT": 3
+        },
+        "ordinal_correctness_mean_excluding_ambiguous_reference": 0.727273,
+        "support_distribution": {
+          "CONFLICTING": 1,
+          "NOT_ASSESSABLE": 3,
+          "SUPPORTED": 7,
+          "UNSUPPORTED": 1
+        },
+        "uncertainty_distribution": {
+          "APPROPRIATE": 4,
+          "OVERCONFIDENT": 4,
+          "UNNECESSARILY_ABSTAINED": 4
+        }
+      }
+    },
+    "input_tokens": 19001,
+    "latency_ms": {
+      "mean": 942.527,
+      "p50": 889.207,
+      "p95": 1258.887,
+      "p99": 1511.758
+    },
+    "logical_judgments": 36,
+    "native_model_calls": 36,
+    "native_request_ids_sha256": "2f943822dd3970f4c8344a06c41ac9f3111bd0717d96e541b5d62d761eb83928",
+    "output_tokens": 4880,
+    "tokenizer_requests": 36,
+    "unique_native_request_ids": 36
+  },
+  "candidate": "candidate.5",
+  "date": "2026-08-22",
+  "ended_at": "2026-08-21T18:41:27.885645+00:00",
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "gate_results": {
+    "dev_only_test_boundary": "PASS_CLOSED",
+    "hidden_or_retry_calls": "PASS_ZERO",
+    "one_judge_call_per_answer": "PASS",
+    "release_authority": "DENIED_BY_CONTRACT",
+    "same_frozen_vllm_identity": "PASS",
+    "tier3_characterization": "COMPLETE"
+  },
+  "identity": {
+    "base_url_class": "LOOPBACK_LOCAL_VLLM",
+    "binding_sha256": "951564832a9bd75c927b42583a0ee66a688b78aea8a247bd72835cef1db84500",
+    "identity_report_sha256": "0463fff90754f54c887ed79e54b5db5593b1860cf593c4a89a66c1828eaa3f0e",
+    "max_model_len": 65536,
+    "served_model_id": "Qwen3.6-35B-A3B-FP8",
+    "vllm_lifecycle_mutated": false,
+    "vllm_version": "0.27.1"
+  },
+  "inputs": {
+    "answer_count": 36,
+    "case_count": 12,
+    "case_ids": [
+      "longmemeval:118b2229",
+      "longmemeval:18bc8abd",
+      "longmemeval:19b5f2b3",
+      "longmemeval:75832dbd",
+      "longmemeval:88432d0a_abs",
+      "longmemeval:ac031881",
+      "longmemeval:b0479f84",
+      "longmemeval:b759caee",
+      "longmemeval:e61a7584",
+      "longmemeval:ef66a6e5",
+      "longmemeval:gpt4_ec93e27f",
+      "longmemeval:gpt4_f49edff3"
+    ],
+    "case_ids_sha256": "286fcfb4fad5bc3eb6a909cc31eb33eba00b4414a5a5db499789398fcaa3628b",
+    "execution_order": "SHA256_DG10_TIER3_V1_CASE_ARM_INTERLEAVE",
+    "execution_order_sha256": "4d5ba0d55ac59946372fb52ba46043a124baf17ec4b0df93266c75662fd90688",
+    "judge_contract": {
+      "include_reasoning": false,
+      "max_output_tokens": 256,
+      "model_id": "Qwen3.6-35B-A3B-FP8",
+      "normalization_contract": {
+        "all_other_fields": "no normalization",
+        "explanation": "raw text is retained externally; word count and advisory-overrun flag are recorded, but text is not truncated or scored",
+        "reason_codes": "ordered-set semantics; duplicate enum values are removed after raw output capture because the local grammar backend rejects JSON-Schema uniqueItems"
+      },
+      "output_schema": {
+        "correctness": [
+          "CORRECT",
+          "PARTIALLY_CORRECT",
+          "INCORRECT",
+          "AMBIGUOUS_REFERENCE"
+        ],
+        "explanation": "non-empty string; 80 words is advisory and never a score",
+        "reason_codes": {
+          "allowed_values": [
+            "LATEST_STATE",
+            "TEMPORAL_ORDER",
+            "ENTITY_MISMATCH",
+            "MISSING_DETAIL",
+            "EXTRA_UNSUPPORTED_DETAIL",
+            "REFERENCE_AMBIGUITY",
+            "OTHER_REDACTED_NOTE"
+          ],
+          "cardinality": "zero or more; empty means no specific rubric code"
+        },
+        "support_status": [
+          "SUPPORTED",
+          "UNSUPPORTED",
+          "CONFLICTING",
+          "NOT_ASSESSABLE"
+        ],
+        "uncertainty_calibration": [
+          "APPROPRIATE",
+          "OVERCONFIDENT",
+          "UNNECESSARILY_ABSTAINED"
+        ]
+      },
+      "release_input": false,
+      "response_format": "LOCAL_VLLM_STRICT_JSON_SCHEMA",
+      "seed": 20260821,
+      "system_prompt": "You are a characterization-only answer auditor. Compare one candidate answer with the question, public reference answer, and the bounded evidence actually available to that answer. Do not reward unsupported detail. Return exactly one JSON object and no markdown or extra text.",
+      "temperature": 0,
+      "tool_choice": "none",
+      "user_template": "Question:\n{question}\n\nPublic reference answer(s):\n{reference}\n\nBounded evidence available to the candidate:\n{evidence}\n\nCandidate answer:\n{answer}\n\nReturn exactly: {{\"correctness\":\"...\",\"support_status\":\"...\",\"uncertainty_calibration\":\"...\",\"reason_codes\":[\"...\"],\"explanation\":\"...\"}}",
+      "version": "DG10_TIER3_SAME_VLLM_JUDGE_V1"
+    },
+    "judge_contract_sha256": "be65a539c3dda50e7e5ea205f0446157a168ff195ae50513a4a92a9ae5389297",
+    "quality_contract_sha256": "50599ac26f478370f85655df8acaa4b278d7ea3e94aba4938110474b1fcf9f51",
+    "quality_report_sha256": "4df3da78254f356d77f687c2acfa66d6dd7a9a8fdeffc880903253057e6d31a9",
+    "three_arm_raw_sidecar_sha256": "6d564fd8c1272f37799bd0c9f282512342a72d0cbcc7f2d21534ec8b19a85fcd",
+    "three_arm_report_sha256": "6c7b2261e82bbbbc417f371983fbdea921e1f7f123f394c705cfd7091f5ee10e"
+  },
+  "known_limits": [
+    "The judge is the same model family and endpoint that produced the candidate answers, so self-evaluation bias is expected.",
+    "The 12 cases are a pre-frozen public dev audit subset, not test and not an official LongMemEval judge score.",
+    "Tier-3 cannot vote over Tier-1 deterministic, safety, or hidden-call failures."
+  ],
+  "may_override_tier1_or_safety": false,
+  "model_id": "Qwen3.6-35B-A3B-FP8",
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "LOCAL_VLLM_PROTOCOL_CHARACTERIZATION_ONLY",
+  "records": [
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:18bc8abd",
+      "category": "knowledge-update",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "bbe18218b0d7d385a79c0fbd3bfc5ae3f69fd4cb01bb43c4f01b7da6fb51d511",
+        "normalization": {
+          "duplicate_reason_codes_removed": 1,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 40
+        },
+        "reason_codes": [
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 910.609,
+      "native_receipt_sha256": "fd53402d1a62b24d91f7cfc5b77f2ccd97002dab68004891d616e10f0be902fe",
+      "native_request_id": "chatcmpl-a232da164584702a",
+      "ordinal": 0,
+      "prompt_sha256": "3455c2bbf64f5e1101d6e9a75d0edd9c5b026ec44379c049fae94b29b0ea4352",
+      "raw_output_sha256": "bff49c8a18b3af03bd394a50be250d8bb13dd33120afee2707eabb1b09dd82c9",
+      "usage": {
+        "input_tokens": 661,
+        "output_tokens": 118
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:gpt4_ec93e27f",
+      "category": "temporal-reasoning",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "0c9f4b81d923bba550fb634fbd2168d436923cf4fdcb46c06241ecf7fb155ca3",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 39
+        },
+        "reason_codes": [
+          "MISSING_DETAIL",
+          "REFERENCE_AMBIGUITY"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 788.342,
+      "native_receipt_sha256": "55337e4836ae30cbf545035c7f27836f2af8b21749895c09efb2a362218215d0",
+      "native_request_id": "chatcmpl-978d8416eccaa270",
+      "ordinal": 1,
+      "prompt_sha256": "ad535b5666ecd316c6c6bad9af0be28b0a1fbf5025d751d61887cc1b434d07b9",
+      "raw_output_sha256": "31169b156ec541a953d1a6964ef457e23a1222ff1da0a38b3321add53f9cff94",
+      "usage": {
+        "input_tokens": 162,
+        "output_tokens": 120
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:19b5f2b3",
+      "category": "single-session-user",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "f41fa421227b592fcf38dce6c99e8226e8875c8fceee2f96f13c47225dbddcfa",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 46
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "NOT_ASSESSABLE",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 946.797,
+      "native_receipt_sha256": "9ef447459c523fbfb677ca30d6052a5c935ac8d54ee931f085b53b1a3c57ea52",
+      "native_request_id": "chatcmpl-83b0bed7f34885bb",
+      "ordinal": 2,
+      "prompt_sha256": "3ae9680cff91dd7a871b74553fadd11b4195e335451ffd2fd478c50ab525f0c7",
+      "raw_output_sha256": "c28f3eab2856bfa431053a147dd566b1c1a8005949b327d981dd53a9b971c1cd",
+      "usage": {
+        "input_tokens": 671,
+        "output_tokens": 133
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:b759caee",
+      "category": "single-session-assistant",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "AMBIGUOUS_REFERENCE",
+        "explanation_sha256": "a876311037ad23601b1ceabf9573858b99394a5bb6e92c030a7eb109209a5fe6",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": true,
+          "explanation_word_count": 129
+        },
+        "reason_codes": [
+          "MISSING_DETAIL",
+          "REFERENCE_AMBIGUITY"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 1258.887,
+      "native_receipt_sha256": "dbcc550267f94f4f48059e96305e2ca58bec3e3218c93f7ef8fc5847b774b5fc",
+      "native_request_id": "chatcmpl-8e36d492f342244c",
+      "ordinal": 3,
+      "prompt_sha256": "cc6d431c21c41808f2b699a4228110df94293addb348e35f530a85c0663d07d6",
+      "raw_output_sha256": "2c4160ee5dd69914434f1c13868698215361e435f9906086055dd914d02d6cf5",
+      "usage": {
+        "input_tokens": 196,
+        "output_tokens": 196
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:88432d0a_abs",
+      "category": "multi-session",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "ccfe1454589cd336d43545591a1980db4f0e09920b7f4f346e32ba6bbe96d2d9",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 37
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 839.91,
+      "native_receipt_sha256": "497b2c767d711b5f9bfcc5768d9008fa0bd4421bcfb348016e37e5a01df96bcf",
+      "native_request_id": "chatcmpl-8bb456f8c6c1f8ba",
+      "ordinal": 4,
+      "prompt_sha256": "cd99eec0f038e9f06b71deaa3dbe8b9347444a86d7ca255d82f51be468d9c8a7",
+      "raw_output_sha256": "190973060de05e9236b5c66fad90f3cdf3f750a9b0224b63c7a7ea3fa094f9ca",
+      "usage": {
+        "input_tokens": 715,
+        "output_tokens": 116
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:75832dbd",
+      "category": "single-session-preference",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "INCORRECT",
+        "explanation_sha256": "7620c67d73992e88d9b28f59c8f70cd369985c34ae656386edcf50cec4033944",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": true,
+          "explanation_word_count": 123
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "NOT_ASSESSABLE",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 1511.758,
+      "native_receipt_sha256": "519a8eabacd7ee065c5f1b3d46621f58c9d803dbbc9f05a6af8eb5e49fce3852",
+      "native_request_id": "chatcmpl-aab313612e70ab88",
+      "ordinal": 5,
+      "prompt_sha256": "4d19ff9c9a5769c8fcfce156cd190795a3affdb3b43cb00eab100b429eda6db6",
+      "raw_output_sha256": "6fe8399b4974984a9cdc618cb76694f730c2935fc455f89ff43f7e5ee2ffdb22",
+      "usage": {
+        "input_tokens": 744,
+        "output_tokens": 223
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:75832dbd",
+      "category": "single-session-preference",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "44071da4bc83608d7375aadebbdcedd69c7ebabd5bba6c4838bbf9d7aa0f40bc",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 51
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 1011.721,
+      "native_receipt_sha256": "a133eae9451c039f01f8deeeb4e9c871e99da0197f2b4ff022bb74b944eab7bb",
+      "native_request_id": "chatcmpl-bb998510b14d367a",
+      "ordinal": 6,
+      "prompt_sha256": "9f0c3d5d3ebbc83a8d1c99e0fc185c97c46feda14cd1ed41cba40de64a6b3600",
+      "raw_output_sha256": "a28b5dd7a738a98dbdd1aba24ecb66e5377346e308667491b1a06dab2c14c9e4",
+      "usage": {
+        "input_tokens": 747,
+        "output_tokens": 138
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:118b2229",
+      "category": "single-session-user",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "013bdaa7fd1fa4887211f0422836f127a18c90b44eabf49bdf275ecee17b62af",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 43
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "MISSING_DETAIL"
+        ],
+        "support_status": "NOT_ASSESSABLE",
+        "uncertainty_calibration": "APPROPRIATE"
+      },
+      "latency_ms": 780.624,
+      "native_receipt_sha256": "e4cfbeb7e058ba63576285ea38d61bdebf357c3157630b37b5e5cdab1852a99f",
+      "native_request_id": "chatcmpl-be79c4043a1d36ff",
+      "ordinal": 7,
+      "prompt_sha256": "89ab6d623b9b588156213add442fd22dffb13d829562d39925634cc1d8730298",
+      "raw_output_sha256": "e5eb2cfaed64cdfcbf90841d46c1777754223caa41f73fc7310a235c9b44d534",
+      "usage": {
+        "input_tokens": 151,
+        "output_tokens": 118
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:88432d0a_abs",
+      "category": "multi-session",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "96c812ad22239c6d834ef0c99816f05d50c4b968933b84707e8914ad891aabd9",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 38
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 846.247,
+      "native_receipt_sha256": "b992696261d49bf26f6e2cfebe71e47264ad7f2c5e9a2bde577cb3f8775f068a",
+      "native_request_id": "chatcmpl-87f7db1841a275ae",
+      "ordinal": 8,
+      "prompt_sha256": "054ab9598bf7eb2ea18a23b8b36bc16f175a577edb9fcc1e6f67e8527ceec4fe",
+      "raw_output_sha256": "7dbaaae5d23a6bc61ef5edf382d0ed029c80b455c2789389ecb97c2a323cb4a5",
+      "usage": {
+        "input_tokens": 710,
+        "output_tokens": 117
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:gpt4_ec93e27f",
+      "category": "temporal-reasoning",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "dea57f10a270dbbe88743724b1e99aca75d8cb37dea8e8a4c8bc32ce566a30cf",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 34
+        },
+        "reason_codes": [
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 777.925,
+      "native_receipt_sha256": "e970123b964f97e4fee1fea92f2deac29628dec34cf505ac430852a5d00d8562",
+      "native_request_id": "chatcmpl-866d230034c42b6c",
+      "ordinal": 9,
+      "prompt_sha256": "19e06f2e0f6b790bf972b0e976739b1eb9acb29e9e9bac0668dc5535d515c428",
+      "raw_output_sha256": "053bc64325596056aac8c60785dac2c398a753a15d0ca83a4e5e7330de513227",
+      "usage": {
+        "input_tokens": 657,
+        "output_tokens": 106
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:ef66a6e5",
+      "category": "multi-session",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "INCORRECT",
+        "explanation_sha256": "cf38138086ab180fd13b75a128fb3881c6885959a5ed012c952649289e11cefd",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 76
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "MISSING_DETAIL"
+        ],
+        "support_status": "UNSUPPORTED",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 1067.553,
+      "native_receipt_sha256": "5b63270d2f033f0cff9ce4576b47d132bbf0d5409080ee09fdbffd59d8b6aa77",
+      "native_request_id": "chatcmpl-a7b46781b457b8d3",
+      "ordinal": 10,
+      "prompt_sha256": "35987850783693cbf7f9b1879a5df5ef4e6d717f26678b7045b6712025ab4ebe",
+      "raw_output_sha256": "d97e4eb7b363d390c23fcd60a27001c9c44188e739a8196c376e864d06cc2837",
+      "usage": {
+        "input_tokens": 697,
+        "output_tokens": 153
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:b759caee",
+      "category": "single-session-assistant",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "de62ee043aa8ce211f544773c46238426a22f7fc5267e217cb79608b8cb0859a",
+        "normalization": {
+          "duplicate_reason_codes_removed": 1,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 31
+        },
+        "reason_codes": [
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 849.705,
+      "native_receipt_sha256": "4cc6b281e1ee4f3d8303ceb2fc41b9b0e8b9e4f151496674d9b2ef7ba6b961fd",
+      "native_request_id": "chatcmpl-a8f38db91166d397",
+      "ordinal": 11,
+      "prompt_sha256": "c89c4acf1e304f560c2d46e5b00d74ee6ed774629f85e554fe63218b710e4fbf",
+      "raw_output_sha256": "445eb4f31ff264b1bc42d94966278aa9cd3f1c2b6e7afa2bdd2df2d26d48753f",
+      "usage": {
+        "input_tokens": 693,
+        "output_tokens": 117
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:gpt4_f49edff3",
+      "category": "temporal-reasoning",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "INCORRECT",
+        "explanation_sha256": "545ec37273d1eeed36979ff05543b3c1b496f7c0d0c99a9dda6b66264588f514",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": true,
+          "explanation_word_count": 83
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "MISSING_DETAIL"
+        ],
+        "support_status": "UNSUPPORTED",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 1109.185,
+      "native_receipt_sha256": "8bb306dcf7c71f1a16b243d01b660b20a078387be49a95efc413f0597e0a7432",
+      "native_request_id": "chatcmpl-9313c49ff05e9e13",
+      "ordinal": 12,
+      "prompt_sha256": "5269c918f6a2c520cd477d210d3ee1b925a03403fd6da1bfaa7fd777140a8917",
+      "raw_output_sha256": "315bfc79913125ef64b8ff005878329068029c70359b68092cd02e6430d72516",
+      "usage": {
+        "input_tokens": 785,
+        "output_tokens": 159
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:ef66a6e5",
+      "category": "multi-session",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "3981f37a3f55030324ec9c37a1eb523212965f947895c23b66c67c083a6aa286",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 32
+        },
+        "reason_codes": [
+          "MISSING_DETAIL",
+          "REFERENCE_AMBIGUITY"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 722.588,
+      "native_receipt_sha256": "be1783bdfc80a9b690f0bd86f8736c0da0712d45cfa9c5103680cf2865de24c1",
+      "native_request_id": "chatcmpl-806aa3132123557e",
+      "ordinal": 13,
+      "prompt_sha256": "7fc772a9b920293fe3b16539495c067fd5bd58227336275eb7fc5966650b04eb",
+      "raw_output_sha256": "54b6a5ea0e0018dd574d9f4d53359456d5544472a8e0a883e4debfe0f6adf76a",
+      "usage": {
+        "input_tokens": 152,
+        "output_tokens": 109
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:e61a7584",
+      "category": "knowledge-update",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "828db8a0d17c4d1b67732700f7fb61fb224481c8d9eb34b6262046f91d22543b",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 45
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 889.207,
+      "native_receipt_sha256": "14f26520940a7936234fc466be55376cba72baf9e9afbd60423c45e6311e7652",
+      "native_request_id": "chatcmpl-9e83dcb90f0cfce7",
+      "ordinal": 14,
+      "prompt_sha256": "80b2ae1671907ac89de9ce3c9ea9165d1c2f8badd9fb5ef822b4a944e44aee52",
+      "raw_output_sha256": "2406bf5a6a54cdfe5933547331f66f431d436e64ea29b003614d162760f73fc5",
+      "usage": {
+        "input_tokens": 678,
+        "output_tokens": 124
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:118b2229",
+      "category": "single-session-user",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "f8483a9066bf7a5a1a2397b573a2ce629c7a23d7690e98db5c7d843111444adb",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 36
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "MISSING_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "APPROPRIATE"
+      },
+      "latency_ms": 792.186,
+      "native_receipt_sha256": "e1c63e516528bffab6f421ca683da490c609cadb26b9830af8ed5ab8253b5ddd",
+      "native_request_id": "chatcmpl-8725b7b35261eb9b",
+      "ordinal": 15,
+      "prompt_sha256": "694711a677c34a8d696a2f75a0a934f572fa43591740486bffbebeaa108572fe",
+      "raw_output_sha256": "e2307b60662f10e54d5ab0f5ca24b8335a795a33f1e935dc7423480d81e42577",
+      "usage": {
+        "input_tokens": 679,
+        "output_tokens": 108
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:18bc8abd",
+      "category": "knowledge-update",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "4bcae2656929e2912fad9905966cb85b96f8a8e8c63a196358ab832a977023f7",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 38
+        },
+        "reason_codes": [
+          "EXTRA_UNSUPPORTED_DETAIL",
+          "MISSING_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 863.501,
+      "native_receipt_sha256": "650b2e029f0a86274f2dcc6ba6edb0398044507ff72cdfba61d3f84cedf63c5e",
+      "native_request_id": "chatcmpl-8c5097b7a9914dfd",
+      "ordinal": 16,
+      "prompt_sha256": "cec8803dd5ee5a0caaaa225db0fc7ba1aa402219a4e0cd01fab50f196203d822",
+      "raw_output_sha256": "c7b0ac0638f6211d1194d5b117a1809d554133680c21a6a30c27759740a8fb72",
+      "usage": {
+        "input_tokens": 147,
+        "output_tokens": 132
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:b0479f84",
+      "category": "single-session-preference",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "INCORRECT",
+        "explanation_sha256": "bdbfbebaecbc29ea2b0cacf1857518e4c7c0c8b11feb9f4dfd9356e1776cac9e",
+        "normalization": {
+          "duplicate_reason_codes_removed": 1,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 76
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "MISSING_DETAIL"
+        ],
+        "support_status": "NOT_ASSESSABLE",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 1182.177,
+      "native_receipt_sha256": "a5a138904fc5ead91a3ebdaeec689f7f0f60f2da002e71284eba84d5b87e252d",
+      "native_request_id": "chatcmpl-84ccfa0938d24b56",
+      "ordinal": 17,
+      "prompt_sha256": "97c9d7d1224645b3adbaf2cbed0d817ef01d2c36b1d4ce4c7f84fc0c9bef3ec9",
+      "raw_output_sha256": "13df02c4338eed7396934159708c6c4a613502bffd794ec00b25d00a482605c9",
+      "usage": {
+        "input_tokens": 736,
+        "output_tokens": 171
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:gpt4_f49edff3",
+      "category": "temporal-reasoning",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "INCORRECT",
+        "explanation_sha256": "fe3d752a7a4c9d76fc17bea9b125d41dcf714a9072e07b5ddffcfe7c1754035f",
+        "normalization": {
+          "duplicate_reason_codes_removed": 1,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 58
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY"
+        ],
+        "support_status": "CONFLICTING",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 938.264,
+      "native_receipt_sha256": "c5500ab8e5304d4e84c1580b692ba6032530129e2521355912a7626bcd26589f",
+      "native_request_id": "chatcmpl-a9270b4ddfd81341",
+      "ordinal": 18,
+      "prompt_sha256": "dc99838798a315ac644c7fe9273cb19d06745ece44633ce75ad2ba9b3e07e08d",
+      "raw_output_sha256": "2797602ec32829ae511e2e2120ad3e2d042d4e50a2252b790865f467c557d54e",
+      "usage": {
+        "input_tokens": 771,
+        "output_tokens": 132
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:88432d0a_abs",
+      "category": "multi-session",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "896dfdd9487a58899b2ad9f46b958b10077b8df06ce51e3d5cae6f577149c9fd",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 56
+        },
+        "reason_codes": [
+          "ENTITY_MISMATCH",
+          "MISSING_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "APPROPRIATE"
+      },
+      "latency_ms": 828.461,
+      "native_receipt_sha256": "65b8039332e2074441b7f77acc1b3fe6442292d666b6aae5515d2998754f0722",
+      "native_request_id": "chatcmpl-9d4779428e1042a4",
+      "ordinal": 19,
+      "prompt_sha256": "c41f58cab157e588a3d57bff0fe10bd9fbb206ee4061d9bdf2fc7cdae17542dc",
+      "raw_output_sha256": "d990db5b66cf814420c88620c439db2498a50ab7d0a40d98f6e95954c029bdf2",
+      "usage": {
+        "input_tokens": 180,
+        "output_tokens": 126
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:ef66a6e5",
+      "category": "multi-session",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "INCORRECT",
+        "explanation_sha256": "dbf95fbc46918f301682456c64d3861c43b9dc7231f6af4a56f2701b7fc57d1b",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": true,
+          "explanation_word_count": 137
+        },
+        "reason_codes": [
+          "MISSING_DETAIL",
+          "REFERENCE_AMBIGUITY"
+        ],
+        "support_status": "NOT_ASSESSABLE",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 1632.635,
+      "native_receipt_sha256": "e6df590031b0c7e4bce887d69aa7a24168768a3b548ad757cae00cd38ae50955",
+      "native_request_id": "chatcmpl-bd7b0c82b265a7c2",
+      "ordinal": 20,
+      "prompt_sha256": "f22ee2443951c4ac4d4739f04374bc9defc423c41351aed32a5321b2791dea33",
+      "raw_output_sha256": "99498946770945e72accb26c3c45b855d44760ef0edbba451fc91dd595b4d63e",
+      "usage": {
+        "input_tokens": 674,
+        "output_tokens": 244
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:118b2229",
+      "category": "single-session-user",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "eb2b7a67db5e7070312ca59566eafda98afdc33c656dba0f74030c44c874bba9",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 34
+        },
+        "reason_codes": [
+          "MISSING_DETAIL",
+          "REFERENCE_AMBIGUITY"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 869.115,
+      "native_receipt_sha256": "4ce9184a04690630eeee2c8a2d9d0470f41e36b93d6efbf8c9f3e3312f993650",
+      "native_request_id": "chatcmpl-a1c0199005225390",
+      "ordinal": 21,
+      "prompt_sha256": "69671269063156270bd3ccbc54451666d7779e724cb9249b8eccf5466421cbb3",
+      "raw_output_sha256": "cecf373817ebd0ffcb0b0e01417c568937ba2f775532ac29239780925b469c0f",
+      "usage": {
+        "input_tokens": 671,
+        "output_tokens": 113
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:b759caee",
+      "category": "single-session-assistant",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "de62ee043aa8ce211f544773c46238426a22f7fc5267e217cb79608b8cb0859a",
+        "normalization": {
+          "duplicate_reason_codes_removed": 1,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 31
+        },
+        "reason_codes": [
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 856.142,
+      "native_receipt_sha256": "e346300ff337c471472337ed9422fbd3ed3a0ed2674f8a0c9553339db9b85544",
+      "native_request_id": "chatcmpl-82dba4c7a3dbfde4",
+      "ordinal": 22,
+      "prompt_sha256": "c89c4acf1e304f560c2d46e5b00d74ee6ed774629f85e554fe63218b710e4fbf",
+      "raw_output_sha256": "445eb4f31ff264b1bc42d94966278aa9cd3f1c2b6e7afa2bdd2df2d26d48753f",
+      "usage": {
+        "input_tokens": 693,
+        "output_tokens": 118
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:ac031881",
+      "category": "single-session-assistant",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "29e49af865398474436b7ff7e1bbd61f19000af87c3079c860e025b1b2d29767",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 37
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 841.03,
+      "native_receipt_sha256": "abec007c4046d3add9990c4c0f0b2be297b7816ff61f6f73d92c6e4c87347659",
+      "native_request_id": "chatcmpl-aa5ab5097436606c",
+      "ordinal": 23,
+      "prompt_sha256": "317b6ddc10c32b1f1447bd41c232209faa001fc4c2ace625fc042919ab67d23a",
+      "raw_output_sha256": "85fc4e6b4eaf072fade4176dcac2c9fd26fde7db9012abea2233abf82c66588c",
+      "usage": {
+        "input_tokens": 175,
+        "output_tokens": 120
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:ac031881",
+      "category": "single-session-assistant",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "35252db19fbe450037d0e5b6629774a7cf79b7c6007985cee1870a6f0c06d7ac",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 45
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "APPROPRIATE"
+      },
+      "latency_ms": 900.7,
+      "native_receipt_sha256": "d704ec77bafde09cbd2a9757a549ffec82fe405e29ed325b7927cbbd0e98fd32",
+      "native_request_id": "chatcmpl-ae05260d462012a6",
+      "ordinal": 24,
+      "prompt_sha256": "25f3c6b592f6c351fbfa79fbad9178c6215ec9368ec2e0d0d48612959606ac57",
+      "raw_output_sha256": "ce06267192f93bbb0be9c1f78a510866e1fc1c0ab17a7bf968177f9c1c98a2f2",
+      "usage": {
+        "input_tokens": 717,
+        "output_tokens": 125
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:e61a7584",
+      "category": "knowledge-update",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "95bff2b75cbfd8618fc076a8ae54f61bbc2e7d2f29800e04d369795cfd364f4d",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 64
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 1057.33,
+      "native_receipt_sha256": "5c8440e6383a5dca1a89ea7c8c9da72c8316aaf5fad506f658b16168abd342ec",
+      "native_request_id": "chatcmpl-b366de26f2c96174",
+      "ordinal": 25,
+      "prompt_sha256": "33f50c119a78b8412a873a7d43733ecb0dd5e73cda278e257bf786934d83a136",
+      "raw_output_sha256": "9ef063efab1e7afed987687ac4e6febeb3a8f443ddd51729625cab0924399ee4",
+      "usage": {
+        "input_tokens": 671,
+        "output_tokens": 151
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:ac031881",
+      "category": "single-session-assistant",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "7bdc2802d77b71953a62cbedfd99e7a5ed03dd64a57fb90a018a456d51fff8d4",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 38
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 893.657,
+      "native_receipt_sha256": "f7f4bbee99303c0c20a65c1944548a65dd4877693a9e975eee3b25089bcc234e",
+      "native_request_id": "chatcmpl-91e5e46bfc89290b",
+      "ordinal": 26,
+      "prompt_sha256": "7427b8af1050431d4d48f4060aef3cc34fd4814e10e721701c8c80b6b7d10e47",
+      "raw_output_sha256": "0606b61cc7b962d2da37fb1f180ba434a6b2e24c75d5fe64fa9a71e4fa927e15",
+      "usage": {
+        "input_tokens": 686,
+        "output_tokens": 125
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:b0479f84",
+      "category": "single-session-preference",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "PARTIALLY_CORRECT",
+        "explanation_sha256": "3cbe4e56a7a6be270a9f36ce508c1c8bf078a3e62521f4f873e8f792622e9555",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": true,
+          "explanation_word_count": 85
+        },
+        "reason_codes": [
+          "MISSING_DETAIL",
+          "REFERENCE_AMBIGUITY"
+        ],
+        "support_status": "NOT_ASSESSABLE",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 1217.305,
+      "native_receipt_sha256": "4a40aa13b14bd40b7e7d14e79b62cef71eb1ba87cfe09cf5e7d8f4fb6d592c31",
+      "native_request_id": "chatcmpl-87a29ad53a3427a6",
+      "ordinal": 27,
+      "prompt_sha256": "49a1ab53ee5b720b72eae9ba43042dad51fbef99a5df23474d9cd87d9711361d",
+      "raw_output_sha256": "befe84c5e05f1b2a773eb93797233cecdafcecb3c07c69190608dbc65261678e",
+      "usage": {
+        "input_tokens": 786,
+        "output_tokens": 177
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:18bc8abd",
+      "category": "knowledge-update",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "a963c0e46199ddf21a687cffe95a28472b8d1be1dc4aee0e6c2d313acb3f7972",
+        "normalization": {
+          "duplicate_reason_codes_removed": 1,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 46
+        },
+        "reason_codes": [
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 898.991,
+      "native_receipt_sha256": "516387b411e351c821f3a863a23572844f2f36d6bedf54ea8a2d8de221832f51",
+      "native_request_id": "chatcmpl-88835a0e8a1d2b47",
+      "ordinal": 28,
+      "prompt_sha256": "f57dd4f580e7bc38a4920ae19c8a443f8c4ef213874f41fb0b5b274151616427",
+      "raw_output_sha256": "24ceefa3235d4a9bcd36e85939e59d30b9c3e56f00b014595dc04d79b095689b",
+      "usage": {
+        "input_tokens": 660,
+        "output_tokens": 126
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:19b5f2b3",
+      "category": "single-session-user",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "ba3b1745cd825f29f647ff4f377bd221b96c18b8c6b49c54fd72f4bcc4d30b8c",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 26
+        },
+        "reason_codes": [
+          "MISSING_DETAIL",
+          "REFERENCE_AMBIGUITY"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "APPROPRIATE"
+      },
+      "latency_ms": 629.371,
+      "native_receipt_sha256": "d8be8aa79f8b475618ee3e5b43f14a5c7168380f1ab286c7605223d582bf8e0f",
+      "native_request_id": "chatcmpl-bfdc5249cecbef95",
+      "ordinal": 29,
+      "prompt_sha256": "cb4009a3d3d7b0d7349421876b1fa9e64b72c2a7f3c4e18f24e7672d294c18ad",
+      "raw_output_sha256": "d3203f84c4b3f0f8ba0cdac0dec743be8b3342052da29890132621285c5931b7",
+      "usage": {
+        "input_tokens": 148,
+        "output_tokens": 94
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:b0479f84",
+      "category": "single-session-preference",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "INCORRECT",
+        "explanation_sha256": "9ed06c351f7248a8d2f787614f6f1e817cbb42138139c578f05fba07a35c78f7",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 55
+        },
+        "reason_codes": [
+          "MISSING_DETAIL",
+          "REFERENCE_AMBIGUITY"
+        ],
+        "support_status": "NOT_ASSESSABLE",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 923.511,
+      "native_receipt_sha256": "a7f0bf8d7bb5d421b00c67bdee8bf579c4d1a9fab2662222cf62d24e1f549633",
+      "native_request_id": "chatcmpl-aa8577f473dd008f",
+      "ordinal": 30,
+      "prompt_sha256": "614f89b30ac72f6442f2148f21128dc3bfaa3331a2ec085bba788e792c202331",
+      "raw_output_sha256": "da439fbc48cb7265a8a6e733a0d26e30594930ee17242742fbeb2fd993a57e2f",
+      "usage": {
+        "input_tokens": 226,
+        "output_tokens": 141
+      }
+    },
+    {
+      "arm": "MILAI_MCP",
+      "case_id": "longmemeval:gpt4_ec93e27f",
+      "category": "temporal-reasoning",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "fa5684abf284a58a872b2dd0f3602d63a6f32b698a173149f9ec3d850cfc5d21",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 41
+        },
+        "reason_codes": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_ORDER"
+        ],
+        "support_status": "SUPPORTED",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 851.459,
+      "native_receipt_sha256": "fcb80f4e6ca2c7c3fcc00cbd7680c0bb26d63824f22162fa5895be09538dffdf",
+      "native_request_id": "chatcmpl-bf07f4ed532ba8ca",
+      "ordinal": 31,
+      "prompt_sha256": "1a97c0930e8489fbe675bafab24d2267dc1251424b3fff0a4af69eafd3c68e2b",
+      "raw_output_sha256": "06ed3b4535894112500a698faf4f8fd7f77590aee811b442a280d5175f07733d",
+      "usage": {
+        "input_tokens": 664,
+        "output_tokens": 118
+      }
+    },
+    {
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:19b5f2b3",
+      "category": "single-session-user",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "7a9e162b34084c17aac348b0fb2273de78ee8825ea3d597b1ea0d8b9c6245ffe",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 48
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "EXTRA_UNSUPPORTED_DETAIL"
+        ],
+        "support_status": "NOT_ASSESSABLE",
+        "uncertainty_calibration": "UNNECESSARILY_ABSTAINED"
+      },
+      "latency_ms": 962.881,
+      "native_receipt_sha256": "1e86f3bf39fdd5b993c9267242ca428a5f98a91a349cca178a089d5fbb1c1205",
+      "native_request_id": "chatcmpl-b8b162c7719a9c3b",
+      "ordinal": 32,
+      "prompt_sha256": "3a1232b363b6f51afc6da3ebfea896b78372b793d39cfbf89af6d385c4237be8",
+      "raw_output_sha256": "72a6bb4d5cfb12a001025eddfbc0dea307246d500e5459981bcffa2b671ce51c",
+      "usage": {
+        "input_tokens": 679,
+        "output_tokens": 136
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:75832dbd",
+      "category": "single-session-preference",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "INCORRECT",
+        "explanation_sha256": "f21c82f1a8d8c436062c0d2218cef22da33c01bd41470857e0ae8e9bdea0fd39",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 61
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "MISSING_DETAIL"
+        ],
+        "support_status": "UNSUPPORTED",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 892.958,
+      "native_receipt_sha256": "e625850da94d1dc79111bd2121d9e82ceeff7e717e0f99a8f12a5bff7332ec29",
+      "native_request_id": "chatcmpl-b188e7a97b34a595",
+      "ordinal": 33,
+      "prompt_sha256": "445ec4c40c2c9d76750a9c39c15bf858efdb6524d845e614054655f5fedef9c5",
+      "raw_output_sha256": "63a5a63ef33c904d4ebe5812dccf027bdf983553ea9a3def8c450f46bc2b2cff",
+      "usage": {
+        "input_tokens": 211,
+        "output_tokens": 136
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:e61a7584",
+      "category": "knowledge-update",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "CORRECT",
+        "explanation_sha256": "07cb6418d88f5be882c43d93ea8c4bb5df805c166c7e0e87b94d5a5f0399a7cb",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 36
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "ENTITY_MISMATCH"
+        ],
+        "support_status": "NOT_ASSESSABLE",
+        "uncertainty_calibration": "APPROPRIATE"
+      },
+      "latency_ms": 724.286,
+      "native_receipt_sha256": "7e4a70273de2f1c1f2d75a2c623c819749315c71c688d2d10dbf0b6b4f8ebf0f",
+      "native_request_id": "chatcmpl-97e352257a69e6fc",
+      "ordinal": 34,
+      "prompt_sha256": "faecbe70ea13c20b71385e6d4c51821f6d4b7b7427bd2dc994ee792836ae42c8",
+      "raw_output_sha256": "f4b85f8e2fcc9895c7b6bccc697a971b3a31916148e019a948efe71b5125ff1c",
+      "usage": {
+        "input_tokens": 155,
+        "output_tokens": 109
+      }
+    },
+    {
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:gpt4_f49edff3",
+      "category": "temporal-reasoning",
+      "finish_reason": "stop",
+      "judgment": {
+        "correctness": "INCORRECT",
+        "explanation_sha256": "b4fdc45a83df6d1f1f08862d8ac3d3413fc30eda6a9f512a836938ee781f8731",
+        "normalization": {
+          "duplicate_reason_codes_removed": 0,
+          "explanation_exceeds_advisory_80_words": false,
+          "explanation_word_count": 41
+        },
+        "reason_codes": [
+          "REFERENCE_AMBIGUITY",
+          "MISSING_DETAIL"
+        ],
+        "support_status": "CONFLICTING",
+        "uncertainty_calibration": "OVERCONFIDENT"
+      },
+      "latency_ms": 863.937,
+      "native_receipt_sha256": "6f8fd5c35b34fe1332abb5db9471c521bd225027f7bc151a5c306db0302939b5",
+      "native_request_id": "chatcmpl-a677acf3ae6980a7",
+      "ordinal": 35,
+      "prompt_sha256": "da9bca4ea5e7f9e4025028849b142845c09222b09e1b9696c0e133f23948823b",
+      "raw_output_sha256": "05017aaec452ed483430dc69b73e7e442c1ba25e88afaeaa99889b752ea4a4c9",
+      "usage": {
+        "input_tokens": 253,
+        "output_tokens": 131
+      }
+    }
+  ],
+  "release_effect": {
+    "may_authorize_test": false,
+    "may_support_local_candidate_claim": false,
+    "tier1_below_target": "UNCHANGED"
+  },
+  "release_input": false,
+  "repo_external_progress_journal": {
+    "completed_native_model_calls": 36,
+    "input_tokens": 19001,
+    "last_ordinal": 35,
+    "mode": "0600",
+    "native_request_ids_sha256": "2f943822dd3970f4c8344a06c41ac9f3111bd0717d96e541b5d62d761eb83928",
+    "output_tokens": 4880,
+    "path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+    "sha256": "de5fd575b23442296fe0bb257ade00685e16907475e038fac756fc1f82d8f25f",
+    "size": 190715,
+    "status": "WRITTEN_HASH_BOUND",
+    "unique_native_request_ids": 36
+  },
+  "repo_external_sidecar": {
+    "mode": "0600",
+    "path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+    "sha256": "a3d2569432c37da2aed95a6461276cc0f2159b7ab20c76667baf2c2a7ad0a5dc",
+    "size": 230785,
+    "status": "WRITTEN_HASH_BOUND"
+  },
+  "run_id": "dg10-tier3-judge-2026-08-22-404f20b79a14",
+  "schema": "milai.dg10.tier3-same-vllm-judge.v1",
+  "sole_release_authority": false,
+  "started_at": "2026-08-21T18:40:53.008295+00:00",
+  "status": "TIER3_SAME_VLLM_DEV_CHARACTERIZATION_COMPLETE",
+  "test_access_authorized": false,
+  "test_labels_or_outputs_opened": false
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "milai.dg10.bfcl-multiturn-generation-prefix-diagnostic.v1",
+  "candidate": "candidate.2",
+  "date": "2026-08-21",
+  "status": "PREFIX_EVIDENCE_COMPLETE_EXCEPT_FROZEN_SCHEDULE_SERIALIZATION_BUG_NEW_CANDIDATE_REQUIRED",
+  "quality_outcome": "NOT_SCORED_LABELS_UNOPENED",
+  "provider_requests": 0,
+  "provider_cost": 0,
+  "external_provider_requests": 0,
+  "external_provider_cost": 0,
+  "diagnostic_local_tokenizer_requests": 0,
+  "diagnostic_local_model_requests": 0,
+  "test_access_authorized": false,
+  "quality_thresholds_frozen": false,
+  "bfcl_dev_answer_labels_opened": false,
+  "bfcl_test_labels_or_outputs_opened": false,
+  "inputs": {
+    "candidate_10_contract_sha256": "3c66d5f521a307538000a4b988052769bf144822f80c326f143bac54b731c55e",
+    "candidate_10_label_free_bundle_sha256": "caab6f243187ba0e205d2850d75454c2ea5bbd24b2bd3b7c8ea8e8a93a2f3763",
+    "failed_prefix_report_sha256": "47d0e9441cd4281762794048e865c76b0b84035303448c3a4dabe55efdce733b"
+  },
+  "failed_attempt": {
+    "phase": "operational-prefix",
+    "case_count": 4,
+    "local_model_requests": 62,
+    "validated_native_receipts": 62,
+    "unique_native_request_ids": 62,
+    "local_tokenizer_requests": 63,
+    "retry_model_calls": 0,
+    "worker_process_retries": 0,
+    "evidence_complete_case_count": 3,
+    "evidence_incomplete_case_count": 1,
+    "development_scoring_performed": false,
+    "eligible_for_quality_denominator": false,
+    "eligible_to_resume_remaining_76": false
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "bfcl_v4:multi_turn_base_121",
+      "validated_native_model_requests": 38,
+      "outcome": "STEP_LIMIT_BOUNDARY_FORCE_QUIT",
+      "native_step_journal_sha256": "f96e97787c2e1228c4b52e8c9da3746c3567dbef8f699c5dcb0d9c1700fd06fc",
+      "native_step_journal_size": 1237567,
+      "evidence_complete": true
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_miss_func_100",
+      "validated_native_model_requests": 0,
+      "outcome": "FROZEN_SCHEDULE_SERIALIZATION_ORDER_MISMATCH_BEFORE_FIRST_TOKENIZER",
+      "native_step_journal_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native_step_journal_size": 0,
+      "stderr_sha256": "d44af758eb44095decaebb8731cf7df9a7d04ec60dea50f0ee6e70fad5393663",
+      "stderr_size": 567,
+      "stderr_mode": "0600",
+      "root_cause": "SORT_KEYS_CHANGED_RELOADED_FUNCTION_DOC_DICT_ORDER_AND_THEREFORE_REPR_TEXT",
+      "evidence_complete": false
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_miss_param_102",
+      "validated_native_model_requests": 21,
+      "outcome": "STEP_LIMIT_BOUNDARY_FORCE_QUIT",
+      "native_step_journal_sha256": "6d07fa3e3fde872f2ba9005e612153bb2f6a6719115070802b4fdcdb28702db6",
+      "native_step_journal_size": 875764,
+      "evidence_complete": true
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_long_context_104",
+      "validated_native_model_requests": 3,
+      "local_tokenizer_requests": 4,
+      "outcome": "PROMPT_CONTEXT_LIMIT_PRE_REQUEST",
+      "model_request_sent_for_failure_step": false,
+      "native_step_journal_sha256": "5111faa9588a3304fc04ca3b024a6d1a0557e62da23396b0ac6bceaba29b3aa9",
+      "native_step_journal_size": 266406,
+      "evidence_complete": true
+    }
+  ],
+  "repo_external_failed_ledger_snapshot": {
+    "status": "HASH_BOUND_MODE_0600",
+    "sha256": "61d2e3893bbd557c24881b03871762070859f58b4bfa5409da21457e3b0996da",
+    "size": 52586,
+    "record_count": 4,
+    "mode": "0600"
+  },
+  "required_changes": [
+    "Treat the hash-bound frozen schedule's dynamic reveal text as authoritative after the bundle is verified.",
+    "Independently validate turn index, revealed names, cumulative exposure, exact content hash, fixed suffix, and literal function-doc names.",
+    "Continue using a new contract, bundle, run directory, and ledger and count all cross-attempt calls."
+  ],
+  "gate_results": {
+    "operational_prefix": "FAIL_NEW_CANDIDATE_REQUIRED",
+    "remaining_76": "NOT_AUTHORIZED",
+    "development_scoring": "NOT_RUN_LABELS_UNOPENED",
+    "BMG-03": "NO_GO",
+    "BMG-05": "NO_GO_QUALITY_THRESHOLDS_NOT_FROZEN"
+  }
+}

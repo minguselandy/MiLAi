@@ -1,0 +1,196 @@
+{
+  "kind": "RESEARCH_PROTOTYPE",
+  "total": {
+    "calls": 57,
+    "prompt_tokens": 45219,
+    "completion_tokens": 4934,
+    "total_tokens": 50153,
+    "seconds": 38.525291895028204
+  },
+  "original_call_cap": 64,
+  "unused_calls_closed": 7,
+  "score_scope": "One previously exposed task; first attempt unscored, repaired attempt native reward 0. No paired efficacy claim.",
+  "status": "LIVE_MECHANISM_OBSERVED_NATIVE_TASK_FAILED",
+  "engineering_status": "ENGINEERING_COMPLETE",
+  "report": "studies/active/MILA_HIAGENT_BASELINE_EXECUTION_20260914.md",
+  "evidence_root": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3",
+  "native_tests": {
+    "passed": 5,
+    "failed": 1,
+    "failed_name": "test_tasks_cancel_above_max_concurrent"
+  },
+  "engineering": {
+    "targeted_passed": 86,
+    "checks": {
+      "boundary": {
+        "command": [
+          "uv",
+          "run",
+          "milai-lab-check-boundary"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.17881341464817524,
+        "log": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/boundary-final.log"
+      },
+      "ruff": {
+        "command": [
+          "uv",
+          "run",
+          "ruff",
+          "check",
+          "src",
+          "tests",
+          "tools"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.07192486710846424,
+        "log": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/ruff-final.log"
+      },
+      "mypy": {
+        "command": [
+          "uv",
+          "run",
+          "mypy",
+          "src/milai_lab"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.18659082893282175,
+        "log": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/mypy-final.log"
+      },
+      "build": {
+        "command": [
+          "uv",
+          "build"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 11.18771942332387,
+        "log": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/build-final.log"
+      }
+    }
+  },
+  "attempts": [
+    {
+      "name": "live",
+      "root": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/live",
+      "method": "hiagent-terminal-v0.1",
+      "terminal_adapter": "initial-v0.1",
+      "max_calls": 64,
+      "by_kind": {
+        "actor": {
+          "calls": 1,
+          "prompt_tokens": 659,
+          "completion_tokens": 222,
+          "total_tokens": 881,
+          "seconds": 1.921322600916028
+        },
+        "summary": {
+          "calls": 0,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "total_tokens": 0,
+          "seconds": 0
+        }
+      },
+      "segments": 0,
+      "summary_calls_per_segment": {},
+      "actor_calls_with_summaries": 0,
+      "retrieval_decisions": 0,
+      "summary_fallbacks": 0,
+      "exec_calls": 0,
+      "identical_command_repetitions": 0,
+      "stop_reason": "WorkspaceError: UNSUPPORTED_ACTION_OR_ARGUMENTS",
+      "native_verifier_result": null,
+      "wall_seconds": 18.477906520012766,
+      "agent_wall_seconds": 2.1772206239402294,
+      "tool_seconds": 0.0,
+      "artifact_sha256": {
+        "trials/cancel-async-tasks-0-hiagent/artifacts/manifest.json": "0e470a3b6c92f8ccbdd467e9441241450ab0367a5397b9658f620b4f352f46b8"
+      },
+      "pending_usage": [],
+      "accounting_violations": [],
+      "mechanical_input_and_receipt_audit": "PASS",
+      "exception_type": "WorkspaceError"
+    },
+    {
+      "name": "live-repair",
+      "root": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/live-repair",
+      "method": "hiagent-terminal-v0.1",
+      "terminal_adapter": "hiagent-terminal-adapter-v0.1.1",
+      "max_calls": 63,
+      "by_kind": {
+        "actor": {
+          "calls": 11,
+          "prompt_tokens": 17500,
+          "completion_tokens": 2141,
+          "total_tokens": 19641,
+          "seconds": 15.814381019677967
+        },
+        "summary": {
+          "calls": 45,
+          "prompt_tokens": 27060,
+          "completion_tokens": 2571,
+          "total_tokens": 29631,
+          "seconds": 20.78958827443421
+        }
+      },
+      "segments": 10,
+      "summary_calls_per_segment": {
+        "1": 9,
+        "2": 8,
+        "3": 7,
+        "4": 6,
+        "5": 5,
+        "6": 4,
+        "7": 3,
+        "8": 2,
+        "9": 1
+      },
+      "actor_calls_with_summaries": 9,
+      "retrieval_decisions": 0,
+      "summary_fallbacks": 0,
+      "exec_calls": 10,
+      "identical_command_repetitions": 3,
+      "stop_reason": "FINAL_SUBMITTED",
+      "native_verifier_result": {
+        "rewards": {
+          "reward": 0.0
+        }
+      },
+      "wall_seconds": 84.24894530838355,
+      "agent_wall_seconds": 43.71510600624606,
+      "tool_seconds": 3.342689950019121,
+      "artifact_sha256": {
+        "trials/cancel-async-tasks-0-hiagent/artifacts/manifest.json": "37e48660df3be9823d389100432c580f74b7a87675cb04772c7f74c5d2cc8be3",
+        "trials/cancel-async-tasks-0-hiagent/artifacts/app/run.py": "955dd28773714c555c73a09487a590313fa1520f2e390bd22cfe454b1936cedc"
+      },
+      "pending_usage": [],
+      "accounting_violations": [],
+      "mechanical_input_and_receipt_audit": "PASS",
+      "exception_type": null
+    }
+  ],
+  "engineering_completion": {
+    "status": "COMPLETE",
+    "full_regression": {
+      "tests": 4474,
+      "passed": 4473,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 1,
+      "exit_code": 0,
+      "elapsed_seconds": 4040.54,
+      "warnings": 44
+    },
+    "current_unique_cases": 4479,
+    "current_passed": 4478,
+    "optional_skipped": 1,
+    "missing": 0,
+    "overlapping_cases_not_double_counted": 81,
+    "coverage_receipt": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/regression-coverage.json",
+    "coverage_sha256": "8b4f9d3848eb1de4d081dd81a329ceedc56b24b23246cd04ee08caff6c690dca",
+    "targeted_passed": 86,
+    "source_delta": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/source-delta.json",
+    "delivery_build_receipt": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/delivery-build.json"
+  },
+  "engineering_completed_at": "2026-09-14T07:27:11.690849+00:00"
+}

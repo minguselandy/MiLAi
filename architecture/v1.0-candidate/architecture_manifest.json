@@ -1,0 +1,935 @@
+{
+  "format_version": "milai-architecture-manifest-v1",
+  "architecture_version": "1.0.0-candidate.5",
+  "bundle_version": "1.0.0-candidate.5",
+  "status": "CANDIDATE",
+  "schema_status": "0.1.x EXPERIMENTAL",
+  "freeze_status": "NO-GO",
+  "captured_at": "2026-08-17T00:00:00+08:00",
+  "hash_algorithm": "sha256",
+  "manifest_self_lock": false,
+  "required_files": [
+    "AF09_REMEDIATION.md",
+    "AUTHOR_PREFLIGHT.md",
+    "BASELINE.md",
+    "CROSSWALK.md",
+    "DELETION_RECOVERY.md",
+    "FREEZE_REVIEW.md",
+    "INVARIANTS.md",
+    "OBJECTS.md",
+    "PERMISSIONS.md",
+    "README.md",
+    "RETRIEVAL_CONTEXT.md",
+    "THREAT_MODEL.md",
+    "TRANSACTIONS.md",
+    "architecture_manifest.json",
+    "crosswalk.json",
+    "scripts/refresh_manifest.py",
+    "scripts/validate_bundle.py",
+    "scripts/verify_lock.py",
+    "tests/test_bundle.py"
+  ],
+  "locked_files": [
+    {
+      "path": "AF09_REMEDIATION.md",
+      "sha256": "e4efae56840b125baed5d170b7e63b391af62f264ae74e00f8eee09c94749c31"
+    },
+    {
+      "path": "AUTHOR_PREFLIGHT.md",
+      "sha256": "6420830f176857fc61de0956c30ffe1bac2f474c805dee53d4533d3f8aaf58ee"
+    },
+    {
+      "path": "BASELINE.md",
+      "sha256": "08864ea23a1b5b5dd79c274b0fec80391414393966a91fdce20792c472946e21"
+    },
+    {
+      "path": "CROSSWALK.md",
+      "sha256": "9a58bf9622828b472df59c9972e40570bfba51e74d979021db7f6a86b835df42"
+    },
+    {
+      "path": "DELETION_RECOVERY.md",
+      "sha256": "651e87a2b3b800722e7db87bb65e42551d4b3912b8d7110372a2c5c66adfa2ce"
+    },
+    {
+      "path": "FREEZE_REVIEW.md",
+      "sha256": "7e235595f1df9ecd38179a986cd718814018e6edac1ea1e8e62c8e28155535d6"
+    },
+    {
+      "path": "INVARIANTS.md",
+      "sha256": "afb0514c04ad0902821c0dacf54e46aff0ee685dd92e0329d739b6d85d4c2bc4"
+    },
+    {
+      "path": "OBJECTS.md",
+      "sha256": "e84efdd8eb8b8c7b6d4ef2144b21c4e1d4dabd26e060aaa28eb3e4bc76ef2b39"
+    },
+    {
+      "path": "PERMISSIONS.md",
+      "sha256": "207f1dfd5a9166cf87a96b72a46dca3da27e842c5c950bad47f8bd0f881a5444"
+    },
+    {
+      "path": "README.md",
+      "sha256": "630a09ba7f8355c7286e202d952ce4982cbfcc78833cead47e0ef8d382e4d9f6"
+    },
+    {
+      "path": "RETRIEVAL_CONTEXT.md",
+      "sha256": "48e1c1b853f7cba6c394014154aae3486619b3a787b2e57ddb1b966e2b647346"
+    },
+    {
+      "path": "THREAT_MODEL.md",
+      "sha256": "c43b4457c7c4df05c4f9c96bcb1491e63fe8b93b7f1ced8c4c82af4add14edf4"
+    },
+    {
+      "path": "TRANSACTIONS.md",
+      "sha256": "8cfa3dbd2b7a7ee4d65136755d2923721ca63ef8b2fa6f1c86f56bf91d8d0160"
+    },
+    {
+      "path": "crosswalk.json",
+      "sha256": "7ed8386a003ec5ee640de74025ee04e8790cdc24e291ba25a9f39855cb2e744d"
+    },
+    {
+      "path": "scripts/refresh_manifest.py",
+      "sha256": "e97e112b81c6c9a9735111f7fbede4e6b32b917b08261ae66462ead35373a545"
+    },
+    {
+      "path": "scripts/validate_bundle.py",
+      "sha256": "a9e0ce510e83903174ae0a8a26fcb774fa3963e3e08815e50a5cd094910de32b"
+    },
+    {
+      "path": "scripts/verify_lock.py",
+      "sha256": "1abe92b397328cb6c407963cbea9da7c7ebcf378857b6cd57494ff41b4f60fd1"
+    },
+    {
+      "path": "tests/test_bundle.py",
+      "sha256": "8b052b3b2a6a7bf155dc7711a5a529c0e0d7ff6d17a609be809b81e2fb405f3d"
+    }
+  ],
+  "source_locks": [
+    {
+      "base": "project",
+      "path": ".github/workflows/ci.yml",
+      "sha256": "15b7748728e16c1b501869807520f79d9a8e586607dbc17ec1609687483f172e"
+    },
+    {
+      "base": "project",
+      "path": "AGENTS.md",
+      "sha256": "a583b5b3adb1d9c29a74b0d44119a4e203c6dda84d9e2d6424fac5ba6641b382"
+    },
+    {
+      "base": "project",
+      "path": "MiLAi_Lean_V1_实施合同.md",
+      "sha256": "fbb87578e6b3a47584fc8e92e069c12b2735c8e13b27de0c0e6ac8ea9fcab925"
+    },
+    {
+      "base": "project",
+      "path": "MiLAi_Lean_V1_设计开发_GOALS.md",
+      "sha256": "39563beff63d0f8b166a6dc08f0512f4287c31ad6824cf1078e5ad2f65dedcd7"
+    },
+    {
+      "base": "project",
+      "path": "MiLAi_Logical_Architecture_v1_设计文档.md",
+      "sha256": "3e96d9870826f727ff4d68e3d787855a979813b37ee8d5d3bb03fb8f207b0e88"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-001-runtime-technology-baseline.md",
+      "sha256": "dc01d4a243205b3d3047c8682222aec828c29ca2201f23e307bb125da5c0341f"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-002-self-owned-logical-architecture.md",
+      "sha256": "844c6be210866711e04f072db2071efc8c07b07374c7bd8d41813f3ef685f026"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-003-identifiers-idempotency-and-time.md",
+      "sha256": "adf49502cff5ba2fc853b1f4f7a61f8f2324089454d1bff7cbe9d7fd46e7ee4b"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-004-grounding-physical-model.md",
+      "sha256": "73f27ac60e96f640273441523423bf8a0f3bfeebd837b95a7f211b5eda01a599"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-005-effective-claim-state.md",
+      "sha256": "7d3d63055a0559eee2ad07cad31098f679cb75d62c94c55e54c4eb118194776a"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-006-open-issue-versioning.md",
+      "sha256": "80a4b950a9a1fa8a7034b63cebaa34a78876e2e2b9c00811b41a804226ce9aae"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-007-evidence-revocation-and-deletion-states.md",
+      "sha256": "6dd4fdedb0f28b9f2329f206eee22c745e51175df13cfd2c3d5d785c33b7e57a"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-008-authority-matching.md",
+      "sha256": "75f8a83158bf4210b94a5467ed64ebdc3168c2229ca2bca584b3aadd190245ab"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-009-canonical-sequence-model.md",
+      "sha256": "85bdb756898543e16c712bd0d195878624fe51bef19b7a9d81e770186a084ff2"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-010-l2-and-external-adapter-gate.md",
+      "sha256": "3d0b8edb79201fe013dc33c830e0f0c6128e689b184d9fe711814e712e626487"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-011-architecture-bundle-lock.md",
+      "sha256": "60cedcae741a9b3de63269139be83779bb6a1a3b146227ad34ad3f0aa1e0adaa"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-012-blob-encryption-key-and-real-data-gate.md",
+      "sha256": "2bd215db0b26ef87a2fb7c446e195ccc33b51ae9da5656ad0cc0376f8a63c202"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-013-model-embedding-and-device-baseline.md",
+      "sha256": "e11e609926f98243a2eda59784858782310486698a98be9d0cbf14923b7f5984"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-014-legacy-and-real-data-migration.md",
+      "sha256": "56b08b2b10daad357720718937d4bad0983bf757b2cfdf891f5ac54480893bf2"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-015-af09-governance-history-and-gate-remediation.md",
+      "sha256": "0d0a0b69492ea6e6fbb60e80833f40d50935c5c405786002836ebcdd52edd8a7"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-016-af09-causality-erasure-role-and-lock-remediation.md",
+      "sha256": "d69e2f03fdb16a11d77d68f6603397496331c80a986c9711ab84ae7d48dfce7a"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-017-populated-governance-history-reconciliation.md",
+      "sha256": "2646160e9cd8084efd61906098dfb0fb54db6d044c00f8292f09ed962dcf17d5"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-018-rejected-grounding-and-tx05-provenance-guard.md",
+      "sha256": "b3f3804d3dcae04aa27f5d452b622d7cc2e18e66158f288b3accb4ee0b3308a1"
+    },
+    {
+      "base": "project",
+      "path": "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md",
+      "sha256": "3adcea9420abbbc0402fcda5dc39da9c5d307149a1dd06d077383ff3100a25f7"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-00-architecture-candidate-2026-08-16.md",
+      "sha256": "cba28fdd5a86005182bc43c6dda413a0551574adda0cfa3952cb88c69456cb54"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-00-architecture-candidate.2-2026-08-17.md",
+      "sha256": "fd82f571b4005c780b195377fcef76116ced4a172a6b74c6586cb3243bf61175"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-00-architecture-candidate.3-2026-08-17.md",
+      "sha256": "30de75fffb33e4cb94b0cebc4b473be3b38971f4a7dfc33639a04ca7dc951118"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-00-architecture-candidate.4-2026-08-17.md",
+      "sha256": "ea06d3bf7143b1ce027e5eec400aba5275a47ed09465dfedd0a905e8bbcdc23a"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-00-architecture-candidate.5-2026-08-17.md",
+      "sha256": "5f46395e952eaf1c4ab5f653188763359361fb63d315370a18d7a8474ba47cf1"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-01-LG-01-evidence-2026-08-15.md",
+      "sha256": "d4fe4e32e7659f284929d1194028eb892e60efb495952376e4bde06f81df995d"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-02-LC-003-security-2026-08-15.md",
+      "sha256": "0ae5c4c382e76fdf1ec6cf9b27db974b0280fa9c79fb383db26d43840bf16ece"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-03-LC-004-evidence-2026-08-15.md",
+      "sha256": "a8251c7005782137a3e9d0cb84e683ed93a5634a3b84d28d2d07b570232bebc4"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-04-LC-005-008-canonical-2026-08-15.md",
+      "sha256": "1dc0987b4f8252f7977f8ebf54318911e640995cafd2768e326efe2c54a6dd41"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-05-LC-009-open-issue-2026-08-15.md",
+      "sha256": "18f412355151e6f42e890694190abb0697df2a3536d4ea6b9f9dc7e7b8f2b1af"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-06-LC-010-progress-2026-08-15.md",
+      "sha256": "8daef24ba78679a45918441eeb66c3a079168ead98eda8638ac6d8c5d5a60d9d"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-07-LC-011-014-retrieval-2026-08-15.md",
+      "sha256": "8fa040ff09e16b3aefefe622bd516cbf6592b87258766e19464e97d8dad08906"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-08-LC-015-017-context-chat-2026-08-15.md",
+      "sha256": "b14c68109c980266794ebf63cc05a7603c5b959725326bd42bef2dd25be33240"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-09-LC-018-local-beta-2026-08-15.md",
+      "sha256": "de7ab667dcc7ad0e5e94c374f42e1410f88a0fc1c4ce8cf4f55f89197e639f81"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/DG-R01-RC-001-008-ospc-2026-08-15.md",
+      "sha256": "152095ecb72eb6aa9111c829b9ffd5e5453f01aafa667e8f74c00d59e0830567"
+    },
+    {
+      "base": "project",
+      "path": "docs/reports/GOALS-completion-audit-2026-08-16.md",
+      "sha256": "a8e403fe90a8a5a46b441622adda20fa73489e76f4a48ed1ea3ab7b49051ee68"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/AF-09-independent-rereview-candidate.2-2026-08-17.md",
+      "sha256": "50f341f2d460fbca59e12b3a1841894a49dbbeb13405804e007bbb1d53557515"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/AF-09-independent-rereview-candidate.3-2026-08-17.md",
+      "sha256": "321883a7b9b695f4727aee99375fbeb3daf9919314c7562f6854d2a826012e9c"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/AF-09-independent-rereview-candidate.4-2026-08-17.md",
+      "sha256": "ed7f4ff514f8b7c41eb345fe4c2d568b34f6df4260d74c1eaaa33341fe25ec21"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/AF-09-independent-review-2026-08-16.md",
+      "sha256": "b12c64be6aea41cfb62ba9d8501a4cfc31f73dda0a50146de7d2367ae98f4707"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/AF-09-remediation-candidate.2-2026-08-17.md",
+      "sha256": "096bdc1ad4de4ca8a320583f307d138e2072ce2922b8b283c46a19a4fbcaf6a9"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/AF-09-remediation-candidate.3-2026-08-17.md",
+      "sha256": "f660bd7ed2f102d8b13c68d53359c106aa2504c413dd906171282614e62fc386"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/AF-09-remediation-candidate.4-2026-08-17.md",
+      "sha256": "34a8212556ee696b6d70c1d67f62b6b68958c3d2326230343d27541d7436cd16"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/AF-09-remediation-candidate.5-2026-08-17.md",
+      "sha256": "892564557708cc4170294319af85c25ce9b6a828078076bd5fe57e118bdb8e96"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/submissions/AF-09-candidate.1-e7f12a5f-submission.tar.gz",
+      "sha256": "3febbb21cb7aa61def4bc3b554af6884dfd6cc4edd14e05bdda221472782ecdd"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/submissions/AF-09-candidate.1-submission-receipt.md",
+      "sha256": "8dda1dc84b8b041d4a8dca4f4d5a13b5544e50b7a391593bc140a513d33291a9"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/submissions/AF-09-candidate.2-17561675-submission.tar.gz",
+      "sha256": "03bf746775beb60a0910f0bbec2539a62a4aa656e3d3de7cb82d667eca0c9544"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/submissions/AF-09-candidate.2-submission-receipt.md",
+      "sha256": "5474b8c05d2a8abd938523a85d241a7baa7f93452692151b1fc099c3765c10a6"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/submissions/AF-09-candidate.3-6a2f1574-submission.tar.gz",
+      "sha256": "1c57041803db46ff90e74e9fcb305c72fe72aa85ac1f3946a747a65f2fb8a8bd"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/submissions/AF-09-candidate.3-submission-receipt.md",
+      "sha256": "0c3ddfc9b86c66df296b1c2b43554b7af713ac9884e0c431be5837007c4e520a"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/submissions/AF-09-candidate.4-13d0a948-submission.tar.gz",
+      "sha256": "03ca6b686f21afacccb0a31ca9892ca2854a8a395d402adc26fb6374e36ec341"
+    },
+    {
+      "base": "project",
+      "path": "docs/reviews/submissions/AF-09-candidate.4-submission-receipt.md",
+      "sha256": "7edc99c4ab4ddd682cd50cc5b49cefe9edb34700c60c7d52bc5474887100dd5f"
+    },
+    {
+      "base": "project",
+      "path": "docs/runbooks/backup-restore.md",
+      "sha256": "63fb60f913d731b5e3a3b96352c5d609c2cefd45f85a452d3df982f49f38eec4"
+    },
+    {
+      "base": "project",
+      "path": "docs/runbooks/local-runtime.md",
+      "sha256": "9ca762cf168fa763678b40993502df49e627408a387926594817b95c5c59719f"
+    },
+    {
+      "base": "project",
+      "path": "docs/runbooks/projection-and-purge-recovery.md",
+      "sha256": "5807c54e61ad1f90586a1d00afc5bb683015ada7e6769518132744c443735df6"
+    },
+    {
+      "base": "project",
+      "path": "research/ospc/isolation_manifest.json",
+      "sha256": "bfda7a3deec35140cc49342e4f64e499167685b96ef848a27f9678b0ed8e40f0"
+    },
+    {
+      "base": "project",
+      "path": "research/ospc/prior_art_snapshot.json",
+      "sha256": "b06bb60269c2183f63e9366ad4baa03789f3a764cc8047d5ba7ac4712d3a571e"
+    },
+    {
+      "base": "project",
+      "path": "runtime/.env.example",
+      "sha256": "e74d3dd256c6813fd960ca87ed0035a20da91461327462ed3c8ab69141a2e250"
+    },
+    {
+      "base": "project",
+      "path": "runtime/README.md",
+      "sha256": "0d0bc3616f1771f50b5e924a0ff429e375c61ca500a910e9951898c5fe271dad"
+    },
+    {
+      "base": "project",
+      "path": "runtime/compose.yaml",
+      "sha256": "2d9a46b53912d961f1ef975895de035c6774e705b510b03ed23534ea3de6cb3b"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0001_runtime_foundation.py",
+      "sha256": "7b227cfc567616194008fd0e38467d7ad9f9d0728dc7e31ddac74b1f530da6b5"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+      "sha256": "af088d901b637487789c9b56c0881511b5d74675005d965e6140dbb29d24b71a"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0003_evidence_plane.py",
+      "sha256": "89da2aeee8aab20dcfa1f917eae18457f786d86492a288573a6e47aa12250ae3"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0004_canonical_state_schema.py",
+      "sha256": "21a3c7236a2c6d750730bf50a1d52e683f05976aa9f38e9649d75ba78bf2b4c5"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+      "sha256": "3e13d34c241c2616790216debd7b21b8a3b5b64bd11f4a8f22c6c26c42c041f2"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0006_evidence_revocation.py",
+      "sha256": "74366153fe51e4b7a7a3f16edd3a7fc63aa1010016462e75ac7e6a74eafd6cda"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0007_projection_outbox.py",
+      "sha256": "0feed82ee32083560a487f7cd756f08c2a138d1fa12d0879b472bd0d91906070"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0008_retrieval_gate.py",
+      "sha256": "27b0b2a0ae5bf1aee5f21406435fc7839bf7e8adb5f0286fd8723be8f0c44aaa"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0009_context_chat.py",
+      "sha256": "06b074858aed3e0b3506bfa37c41561fdabed8b896213e8c00d8a27561cc6981"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0010_backup_operations.py",
+      "sha256": "765244287b86be14c5432f6b399437081fcd2e2f3cf08e68f0b4ffcf7ed00b08"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0011_episode_settlement.py",
+      "sha256": "8c7e68f9de4b9f28229c93d5deb8d50cf7118ae7d4f3c75b8fa5407a8a454114"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0012_query_plan_trace.py",
+      "sha256": "4b02d9c25cdceaa8310faf38abed84c64f187b4f84eb907ef225469921b9a6b6"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0013_live_confirmation_gate.py",
+      "sha256": "5f1c827d99825ef5889e0c6a6254d196da7154c99dd4214ebcf941c2c16bf452"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0014_query_plan_outbox_sequence.py",
+      "sha256": "a5ed271f01f0f1b82beb410b0b884141767aff0a7535eba278aaea4b6d19c190"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+      "sha256": "6a71059f289dc8a464e55c57cab9b536747586183f8a523640edd31d171750e1"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+      "sha256": "89ad804f4e80b74feacb5e890065b03d310bf3215e4f576671d75fb993f33c1b"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+      "sha256": "51eb998a66896163821989fe9c069b67a254c4568251e44223f005072b81c23c"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0018_causal_retrieval_trace.py",
+      "sha256": "776772e61af40dd6f20df9efd619cfb77b0d6602096a30f94cca25d10d1f412d"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+      "sha256": "2d6ba35d72e2e24d7d8ce0f9bf282a80dc774b3eee715aa45bc20925b43a7671"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0020_causal_position_api.py",
+      "sha256": "855e9cca4fb7895fdd18690944b031905b77d9ab1681169fcf426005236e6b89"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+      "sha256": "a93587eee69963b292ef9314519082c68505dc3cdbf8cb13d9ce4b86e1c84dd7"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+      "sha256": "b92dc151547075575fee8389926428f39a0005790daf115ecbb69169d70dc206"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+      "sha256": "9f0d4e6639a18a941f2ee44b849b48b1fabf1cf064563d0d95a6eb7f073bf8ba"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+      "sha256": "fb339a79f5866f19ca55817a740559d47eb36d9dfa28fd6e51c991bf3a9709c8"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+      "sha256": "cd89ce8734a2dd96f89a575b6ac34f40b16606d1662d08a81715856679d4cec2"
+    },
+    {
+      "base": "project",
+      "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+      "sha256": "5a501f6dfb093059b2054c8fc7c5663c9604fdf11be467cd89763e7caa8c16cb"
+    },
+    {
+      "base": "project",
+      "path": "runtime/pyproject.toml",
+      "sha256": "0d23d7ee822ac3f95ae41f13abd8c7243ea66165ea0669b505d7b576b2630ce1"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/adapters/__init__.py",
+      "sha256": "055f67e319a7fd6d407ba9e12b8d4d9d3256c836a5a2d4619a359af6a02ba917"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/adapters/blob_store.py",
+      "sha256": "34420215a79efe4c8396c17127a96cb01ffb9100de0d512c0d656e4d04cabbbf"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/api/app.py",
+      "sha256": "56db73c01d4e615bd6dab89bed2b3225a567a809118ac9a27d445d7df7308d49"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/api/cli.py",
+      "sha256": "1ac2efaf1365fc35642257be5b26ccc34d266b0632b810ee8dc387ff4a8b09d6"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/api/retrieval_routes.py",
+      "sha256": "f53ba27373b55bbcb61460ee98385dbd3c71be220fb878d93f1f2c2209341099"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/__init__.py",
+      "sha256": "8cc45f070bef391a999c66a28032399db68c346ad61464e70ba63111335c3cf6"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/causality.py",
+      "sha256": "67764021ea8a05f35f2284261032485e4c3015128fb6f3c1bba507058dc3cefb"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/chat.py",
+      "sha256": "49800f3ad1b5dd4b0fc9beac67bb25585c24c6f33aa2d37d07445ca6f2f2e1b1"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/context.py",
+      "sha256": "4f253731916806da870ab18f9f5bfeb297e2a927a6c65746dd8e54d363fd6f17"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/deletion.py",
+      "sha256": "c870e5bdc5b8c10cc84c65d937ff8327cf43f9827c9660e105326487f28bc80f"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/episodes.py",
+      "sha256": "e22a2b921905104ac0dd89a1ba4df296fb7a4e9fd724efa554e9b9834067f5bd"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/errors.py",
+      "sha256": "bc1f3ca9d3c4afb2143b83183aa55ac6ff4d5087afdd0b27061973b0c792cf42"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/evidence.py",
+      "sha256": "daff3de3bb2af40fd8eea8483871a2005e7a0e0c49939cc9b9f252f6064282c4"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/query_planner.py",
+      "sha256": "0ee12e7b666de39b2773af650d31fcaf7b8b9133699cf33e50d4c94df88140e5"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/application/retrieval.py",
+      "sha256": "b8ce83fa8536169ceeac6726172065390dda59af033a8e708d7d87c1fa7cbfa7"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/config/settings.py",
+      "sha256": "6244456c02fa9550a5ce898f09ea02420fc7dad149ed6173d2f0fa782c3233b2"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/domain/__init__.py",
+      "sha256": "55de3d0ed7deb45fea35108acf9563939d469be72bec33c3e840f7c93756d2ec"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/domain/causality.py",
+      "sha256": "0b58e9c8d9e931b44529e9a3bb09be9cb5d455c0009e70d6d5dc7fa7e499dc69"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/domain/chat.py",
+      "sha256": "c57db3eab005b082ae345d55d7577f94cd36de02f8317486bc27d7b075033b58"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/domain/retrieval.py",
+      "sha256": "8a9e13de03ab4446d9562cf62ffb0804490b60af0680a939425dd487ff276d80"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/observability/logging.py",
+      "sha256": "4e5c10b27a30c0b1e54e1c977000555ad73aef4f60a918209ee00c1ea6350423"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/operations/backup.py",
+      "sha256": "10fba7735c30f96a895fcdeaf22ac7d4e158b9f6ca81dc64bd110446a1a2379d"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/__init__.py",
+      "sha256": "3643559f8ccd24f58adff1f11a45e88eed482db63ba5aceb9f901e4b28da9c42"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/canonical_repository.py",
+      "sha256": "cc09bcf3565ba2bedd0b741ada22c22f9a7752f1ce358adb40efc16a38c8aac3"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/cli.py",
+      "sha256": "e8bfca96cbecacfa37e7b91cd81021c1443f47f8cbf58232f4eb3b27ddbb3c4d"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/context_repository.py",
+      "sha256": "c4a0e76a5dea30832a8b296f144ea789f5ae2a61dc5cbfddd6ac5e743cee0e63"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/database.py",
+      "sha256": "c5efb5becb78395f2227ed70cccd6234e97ee893d36ee5825c0b834261ab9405"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/deletion_repository.py",
+      "sha256": "0871f9869758e3c68b9e8a76013c53ae61e4eee8a670d296de1069caf668974c"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/episode_repository.py",
+      "sha256": "f268ef08139ffa99c7ec0a2e7f6a84d7309bc39221dfd062df615f136244bb7e"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/evidence_repository.py",
+      "sha256": "b83096225b5a4ba38ae21436dca7e30697b2fb5351f94efd0e71327fbba7044f"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/projection_repository.py",
+      "sha256": "46241192990ba69fb7117f5bb9f5a91469916a150b1fd1c2062d9b8ed58b0107"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/persistence/retrieval_repository.py",
+      "sha256": "7dfd77349f3a31f35814e9ae97df10a20be935c47b22edcc02d85ef98834394d"
+    },
+    {
+      "base": "project",
+      "path": "runtime/src/milai/workers/main.py",
+      "sha256": "29a30edfa3ffb2887932dd0cf8bd5f076369a67d44e48eda6e813b075c906acc"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+      "sha256": "e30cf83af32fc6add6cd01233e36af010100d5fc6d4640862f271b80825751c6"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/contract/test_evidence_auth.py",
+      "sha256": "1dd4c17add3270666187d395eac038aac4cc61ab32ef8f424efb355c3e4b9851"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/contract/test_health.py",
+      "sha256": "4d5ee7a671c2cb58542faf3a757563fdeff2a0e0c88a2ec57e557b90062c9497"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/integration/test_backup_restore.py",
+      "sha256": "86ce2fbd1225326cec8f9c2e20fd27d06f40c6f4fc61a2bf46b9e5ffed5d2971"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/integration/test_canonical_api.py",
+      "sha256": "9bf713acc6fbdce097a7ea48d548959773a15c1bd01725f67f4edad18c047c7c"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/integration/test_context_chat_api.py",
+      "sha256": "3a87a0b1c8ed74a9cef61136c54eefcb4138e9e1c4513aa89bcca88ac5be97b1"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/integration/test_episode_settlement.py",
+      "sha256": "6fa07d2014131596f9e6142e08fe2a9c408acdcd98e4890fe5bdcfb1ce682c9f"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/integration/test_evidence_api.py",
+      "sha256": "b47ddcc4eb6db7011ad451946cad6691f4b543882a3f0e005c84adff520f1846"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/integration/test_projection_worker.py",
+      "sha256": "bdd6a21e1e57d198c042ed9ea2100d6d4a94939945dcadffbb218810a0d83d83"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/integration/test_retrieval_api.py",
+      "sha256": "98fff983da391c5d58a4827dbad3a6c0b1daf18077b68dfe6293e9b3a56efa7f"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/integration/test_runtime_foundation.py",
+      "sha256": "2963e87a43f78d94d670e186d6a676af59c038dead78ba68b5a5069a9bf5be89"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/security/test_tenant_roles.py",
+      "sha256": "c5f24c766d4ad71e2b87eaf7412a1aa9ccbe0df103fcb1b9bd3135934f83285e"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/unit/test_blob_store.py",
+      "sha256": "5f498b55d46e92a4bcf172c33853c9963290b6652decd2014d8ddf83ec1aa4ee"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/unit/test_causality.py",
+      "sha256": "e453835e70e0f59fb6b7398606ce635e07a128d807fa819b763c0e31f74002ca"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/unit/test_external_dependency_boundary.py",
+      "sha256": "ccebd02a43b71473a9b68709a0f075f3551273241f3682bac0ac7fcddbab4a3d"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/unit/test_logging_redaction.py",
+      "sha256": "d3c26eff05dee78428507641aeb23edb35831fa195951f6d5c6d155851dc3b06"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/unit/test_query_planner.py",
+      "sha256": "3c72ac8eac11f61c97bc539dd742d40e5d5d99202c8f3a61815c670a221f9a68"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/unit/test_settings.py",
+      "sha256": "2387d38174894aac592290870cfe12e1bbe968a226f41c30c4199f3eee2a2139"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/unit/test_worker.py",
+      "sha256": "838c56354df2ecf59570951b5fca1b5da567e18bb7ff14d0234faeb44f23d423"
+    },
+    {
+      "base": "project",
+      "path": "runtime/tests/unit/test_worker_settings.py",
+      "sha256": "a762767a481d65083b92dadd310638a6e14768d5dfcaa87ed09d18423db18015"
+    },
+    {
+      "base": "project",
+      "path": "runtime/uv.lock",
+      "sha256": "4f12bca74846302e734cc2d03f3f3f0573ad2f209c4332fa1d850eeae85d3f4b"
+    },
+    {
+      "base": "workspace",
+      "path": "ReMe/LICENSE",
+      "sha256": "cc54d679aaced751c096f120b666355c106d9394d28f93f6df353973f6cd7dbe"
+    },
+    {
+      "base": "workspace",
+      "path": "ReMe/pyproject.toml",
+      "sha256": "b7cc9af7e1f9e93737ab728771631f9e96aeade36139c561686a84ed1de49e91"
+    },
+    {
+      "base": "workspace",
+      "path": "ReMe/reme/__init__.py",
+      "sha256": "492b5fa70baa992c8b41668bddbfe5af322fd51cf69e7cf93e4ac39e52434f7c"
+    },
+    {
+      "base": "workspace",
+      "path": "graphiti/LICENSE",
+      "sha256": "2825300b20d7b951209835a4a331f29e24725a39d65168e4b831df53aa372650"
+    },
+    {
+      "base": "workspace",
+      "path": "graphiti/pyproject.toml",
+      "sha256": "ebc4891414a5e2a3677b602551715a5fa307519739f7da1bd686c603b472d624"
+    },
+    {
+      "base": "workspace",
+      "path": "hindsight/LICENSE",
+      "sha256": "01fde0bedf83bdc185065d7af524a61690efe576a67f922eaff3a1280c17b63a"
+    },
+    {
+      "base": "workspace",
+      "path": "hindsight/README.md",
+      "sha256": "be5f249cff4ab6ac4cb60961cf2ac0eb831625a89f2b54830f2df1a578219dcb"
+    },
+    {
+      "base": "workspace",
+      "path": "hindsight/package-lock.json",
+      "sha256": "ea53979d82bcd7ed3d24779b3beda0c6c5d71dc7830912ae5941b4f9569614f1"
+    },
+    {
+      "base": "workspace",
+      "path": "hindsight/pyproject.toml",
+      "sha256": "4310866acf638e7e4917bf1a98a5593b3a3e60de30b0ca0bd23ff7174e25c71c"
+    },
+    {
+      "base": "workspace",
+      "path": "mem0/LICENSE",
+      "sha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219"
+    },
+    {
+      "base": "workspace",
+      "path": "mem0/pyproject.toml",
+      "sha256": "a84cfcecb349663aebb15d9b27a85caf81352fc6489c33bc265060a1319c557e"
+    }
+  ],
+  "git_locks": [
+    {
+      "path": "graphiti",
+      "commit": "401c59a65bdeb22a44136901ff30231e6998a7fe",
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "mem0",
+      "commit": "001c235229be8795e3834520467bd0d661ed8f34",
+      "status_sha256": "400b1a03352ac7d76f0ffeaa2c4174869f653119bcfcfd0db1232ef83526ca36",
+      "diff_sha256": "3f13efb5a52a840b519649788c1fdc9b7bb0beaefec1a44f6f642dc89679c8f4"
+    },
+    {
+      "path": "benchmarks/BEAM",
+      "commit": "3e12035532eb85768f1a7cd779832b650c4b2ef9"
+    },
+    {
+      "path": "benchmarks/CUPID",
+      "commit": "a8560cab293ae98be4fe260689d58bddf96b51ef"
+    },
+    {
+      "path": "benchmarks/HorizonBench",
+      "commit": "4b5076b147c952499b7921f20f811dd5aca7ef0b"
+    },
+    {
+      "path": "benchmarks/LongMemEval",
+      "commit": "9e0b455f4ef0e2ab8f2e582289761153549043fc"
+    },
+    {
+      "path": "benchmarks/LongMemEval-V2",
+      "commit": "2cc8c540bdb87fe6761629b585e727e1c4704520"
+    },
+    {
+      "path": "benchmarks/Memora",
+      "commit": "a6493188efc836d6511ed5e4163fe3ba87da30ff"
+    },
+    {
+      "path": "benchmarks/PAHF",
+      "commit": "7a11213360a82d5f437a035e3a31c92d6307f8cf"
+    }
+  ],
+  "review": {
+    "gate": "AF-09",
+    "status": "PENDING_INDEPENDENT_REVIEW",
+    "independent_reviewer": null,
+    "decision": null
+  }
+}

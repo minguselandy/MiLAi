@@ -1,0 +1,13 @@
+Travel task execution:
+The final-plan formatting rules apply to delivery. They do not prohibit intermediate
+calls to the available native search tools. Use the advertised tool format for a
+search; use the required itinerary format when delivering the plan.
+
+The given base plan is fixed. Previous plans show this group's itinerary choices,
+but a named hotel or restaurant does not by itself establish its price, rating,
+cuisine, capacity, or other catalog attributes. Reuse facts already supplied or
+observed. If a current constraint needs a missing attribute, obtain it through
+the relevant native tool before deciding. Resolve relative constraints against
+the actual referenced choice and available facts. Formatting examples and memory
+from other tasks are not evidence about the current catalog. No minimum number
+of tool calls is required when the necessary facts are already available.

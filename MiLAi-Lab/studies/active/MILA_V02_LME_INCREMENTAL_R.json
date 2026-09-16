@@ -1,0 +1,48 @@
+{
+  "status": "PRESPECIFIED_BEFORE_UPDATE_GENERATION",
+  "kind": "LME_DERIVED_CONTINUATION",
+  "update_condition": "CONDITIONAL_UPDATE",
+  "source_bundle": "artifacts/v02-lme-incremental/data-20260905b",
+  "selection_basis": "Two prespecified complex D histories: multi-operand property planning and mortgage knowledge update. Source-only review; no R outcome selection.",
+  "generator_sees": "Only its current_task, complete case source-only history, normal full A0 capabilities, and absent State. No followup questions or offline criteria mounted.",
+  "future_source_policy": "No post-question-date sources or synthetic factual changes. Each followup starts independently with the same complete history and actual generator task files.",
+  "cost_policy": "Charge entire generator session input+output and online wall time; no attempt to subtract shared task work. U absent snapshot; V actual successfully saved snapshot with branch-specific public Evidence remapping.",
+  "clusters": [
+    {
+      "case_id": "27016adc",
+      "cut_point": "2023/05/30 (Tue) 18:29",
+      "current_task": "Prepare a concise handoff of my property plans from the conversation history, distinguishing the countryside purchase from work on my current house. Preserve the stated amounts, scope, dates and unresolved questions. This is an explicit checkpoint: if you can ground a useful recovery note in the sources, save it in task Working State through the public memory tools. You may keep ordinary task files as useful. Do not invent financial advice or missing facts.",
+      "followups": [
+        {
+          "id": "combined_budget",
+          "question": "Using the plans recorded so far, what is the combined stated amount for the countryside property and my planned current-house renovations? Break out the two amounts and state what this total does not establish.",
+          "criteria": "200000 rural asking price + approximately 20000 renovation estimate = approximately 220000; distinguish different properties and estimates, not all-in costs or affordability. User source session 11 turn 0 and session 31 turns 2/10."
+        },
+        {
+          "id": "contractor_brief",
+          "question": "Draft a brief factual note for a contractor identifying the work I said I wanted on my current house and when I planned to start. Also separate the land purchase details so the contractor does not mistake them for the renovation site or scope.",
+          "criteria": "Deck and patio on current house; planned spring start without resolving calendar ambiguity; separate 5-acre countryside property listed at 200000. Do not claim buying/renovating rural property is completed. User source session 31 turns 2/10 and session 11 turn 0."
+        }
+      ],
+      "order": [["combined_budget", "U"], ["combined_budget", "V"], ["contractor_brief", "V"], ["contractor_brief", "U"]]
+    },
+    {
+      "case_id": "852ce960",
+      "cut_point": "2023/12/18 (Mon) 04:17",
+      "current_task": "Prepare a concise factual handoff of my home purchase and mortgage information from the conversation history. Distinguish dated earlier and later statements, preserve source support, and identify unknowns rather than treating recollection as a live lender confirmation. This is an explicit checkpoint: if you can ground a useful recovery note in the sources, save it in task Working State through the public memory tools. You may keep ordinary task files as useful. Do not invent financial advice or missing facts.",
+      "followups": [
+        {
+          "id": "approval_timeline",
+          "question": "Reconstruct the dated history of the Wells Fargo pre-approval amounts I mentioned and calculate the change between the earlier and later amounts. Explain which statement is latest in this history.",
+          "criteria": "Aug 11 2023 350000; Nov 30 2023 recollection of 400000; latest mentioned amount 400000, increase 50000; no live lender verification claim. User source session 2 turn 2 and session 36 turn 0."
+        },
+        {
+          "id": "purchase_note",
+          "question": "Write a factual purchase note listing the house price I mentioned and its numerical difference from the latest pre-approval amount in the history. Keep the price and approval concepts separate, and identify whether an actual loan amount or current lender confirmation is available.",
+          "criteria": "House price 325000 stated Aug 11; latest mentioned approval 400000 gives 75000 difference; not down payment, equity, loan principal or current approval confirmation. User source session 2 turn 2 and session 36 turn 0."
+        }
+      ],
+      "order": [["approval_timeline", "V"], ["approval_timeline", "U"], ["purchase_note", "U"], ["purchase_note", "V"]]
+    }
+  ]
+}

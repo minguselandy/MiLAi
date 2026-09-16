@@ -1,0 +1,66 @@
+name: MiLAi Lab verification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  active-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+
+      - name: Install locked Lab
+        run: uv sync --frozen --dev --python 3.11
+
+      - name: Verify active source boundary
+        run: uv run milai-lab-check-boundary
+
+      - name: Static checks and tests
+        run: |
+          uv run ruff check src tests tools
+          uv run mypy src/milai_lab
+          uv run pytest -q
+
+      - name: Replay filtered legacy snapshot
+        run: uv run python tools/check_legacy_archive.py
+
+      - name: Build clean distributions
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          uv build
+          if unzip -l dist/*.whl | grep -E '(^|/)(studies|artifacts|\.venv|__pycache__)(/|$)'; then
+            echo 'Archive or generated content leaked into Lab wheel' >&2
+            exit 1
+          fi
+          if tar -tf dist/*.tar.gz | grep -E '(^|/)(studies/archive|artifacts|\.venv|__pycache__)(/|$)'; then
+            echo 'Archive or generated content leaked into Lab sdist' >&2
+            exit 1
+          fi
+
+      - name: Reject generated or private tracked paths
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          forbidden="$(
+            git ls-files | grep -E \
+              '(^|/)(\.venv|__pycache__|\.pytest_cache|\.mypy_cache|\.ruff_cache|models|logs|dist|build)(/|$)|(^|/)\.env$' \
+              || true
+          )"
+          if [[ -n "$forbidden" ]]; then
+            printf 'Forbidden generated/private paths:\n%s\n' "$forbidden" >&2
+            exit 1
+          fi

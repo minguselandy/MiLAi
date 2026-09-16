@@ -1,0 +1,234 @@
+{
+  "archives": [
+    {
+      "members": 13,
+      "path": "integrations/python-client/dist/milai_client-0.1.0-py3-none-any.whl",
+      "sha256": "70b96a89209ba0c3ddab90a8dfa19711b23911a41796c6ab65d45588be95e2cb",
+      "size": 38907,
+      "status": "PASS",
+      "uncompressed_bytes": 158045
+    },
+    {
+      "members": 20,
+      "path": "integrations/python-client/dist/milai_client-0.1.0.tar.gz",
+      "sha256": "ca7a5da379ff2a6434b2a2c0f31d4497b3b73939f68a5dd92e688aafd5ec5100",
+      "size": 67029,
+      "status": "PASS",
+      "uncompressed_bytes": 296813
+    },
+    {
+      "members": 7,
+      "path": "integrations/mcp/dist/milai_mcp-0.1.0-py3-none-any.whl",
+      "sha256": "7ec0d30272ff4c2fe919bc04b0d5bba2b6b4cc40efc49a203947c80653c923a9",
+      "size": 5357,
+      "status": "PASS",
+      "uncompressed_bytes": 14328
+    },
+    {
+      "members": 9,
+      "path": "integrations/mcp/dist/milai_mcp-0.1.0.tar.gz",
+      "sha256": "999c610d073d9312acbd258567f8c45bae24e47cc39e06dd4f38008e154ba5aa",
+      "size": 46439,
+      "status": "PASS",
+      "uncompressed_bytes": 150224
+    }
+  ],
+  "data_boundary": "SYNTHETIC_ONLY",
+  "date": "2026-08-20",
+  "fresh_installs": {
+    "sdist": {
+      "client_sdist_sha256": "ca7a5da379ff2a6434b2a2c0f31d4497b3b73939f68a5dd92e688aafd5ec5100",
+      "mcp_sdist_sha256": "999c610d073d9312acbd258567f8c45bae24e47cc39e06dd4f38008e154ba5aa",
+      "network": "offline",
+      "status": "PASS"
+    },
+    "wheel": {
+      "diagnostic": [
+        " + uvicorn==0.52.3"
+      ],
+      "lock_sha256": "5000565d2dd1bb01704fec436a80804cbd725fb8adece5f9a436ce9ac57e71ff",
+      "network": "offline",
+      "status": "PASS"
+    }
+  },
+  "gate_results": {
+    "MCG-00": "PASS_LOCAL_CANDIDATE",
+    "MCG-01": "PASS_LOCAL_CANDIDATE",
+    "MCG-02": "PASS_LOCAL_CANDIDATE",
+    "OG-03": "DEFERRED_TO_BOUND_PVLOCAL_TARGET_TOKENIZER_REPORT"
+  },
+  "host_interoperability": [
+    {
+      "call": "ABSTAINED_TRACE_OPENISSUE_DEGRADED_PRESERVED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "official",
+      "protocol": "2026-07-28",
+      "reconnect_index": 0,
+      "status": "PASS"
+    },
+    {
+      "call": "MODEL_POLICY_ARGUMENTS_REJECTED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "official",
+      "protocol": "2026-07-28",
+      "status": "PASS"
+    },
+    {
+      "call": "ABSTAINED_TRACE_OPENISSUE_DEGRADED_PRESERVED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "official",
+      "protocol": "2026-07-28",
+      "reconnect_index": 1,
+      "status": "PASS"
+    },
+    {
+      "call": "ABSTAINED_TRACE_OPENISSUE_DEGRADED_PRESERVED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "official",
+      "protocol": "2025-11-25",
+      "reconnect_index": 0,
+      "status": "PASS"
+    },
+    {
+      "call": "MODEL_POLICY_ARGUMENTS_REJECTED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "official",
+      "protocol": "2025-11-25",
+      "status": "PASS"
+    },
+    {
+      "call": "ABSTAINED_TRACE_OPENISSUE_DEGRADED_PRESERVED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "official",
+      "protocol": "2025-11-25",
+      "reconnect_index": 1,
+      "status": "PASS"
+    },
+    {
+      "call": "ABSTAINED_TRACE_OPENISSUE_DEGRADED_PRESERVED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "independent-wire",
+      "protocol": "2026-07-28",
+      "reconnect_index": 0,
+      "status": "PASS"
+    },
+    {
+      "call": "MODEL_POLICY_ARGUMENTS_REJECTED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "independent-wire",
+      "protocol": "2026-07-28",
+      "status": "PASS"
+    },
+    {
+      "call": "ABSTAINED_TRACE_OPENISSUE_DEGRADED_PRESERVED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "independent-wire",
+      "protocol": "2026-07-28",
+      "reconnect_index": 1,
+      "status": "PASS"
+    },
+    {
+      "call": "ABSTAINED_TRACE_OPENISSUE_DEGRADED_PRESERVED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "independent-wire",
+      "protocol": "2025-11-25",
+      "reconnect_index": 0,
+      "status": "PASS"
+    },
+    {
+      "call": "MODEL_POLICY_ARGUMENTS_REJECTED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "independent-wire",
+      "protocol": "2025-11-25",
+      "status": "PASS"
+    },
+    {
+      "call": "ABSTAINED_TRACE_OPENISSUE_DEGRADED_PRESERVED",
+      "catalog": [
+        "milai_recall"
+      ],
+      "host": "independent-wire",
+      "protocol": "2025-11-25",
+      "reconnect_index": 1,
+      "status": "PASS"
+    }
+  ],
+  "known_limits": [
+    "This package gate does not invoke a model tokenizer; candidate.2 PV-LOCAL A/B is the authoritative local OG-03 evidence.",
+    "This is author-generated local evidence and requires independent re-verification.",
+    "No real Provider request, bill, credential, Prompt, memory body, or raw model output was used."
+  ],
+  "profile_tests": {
+    "all_schemas_additional_properties_false": true,
+    "dangerous_tools_absent": true,
+    "reader_lite_exact_catalog": [
+      "milai_recall"
+    ],
+    "status": "PASS",
+    "summary": "10 passed in 1.02s"
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "runtime_banner": "0.1.x CANDIDATE",
+  "runtime_request_policy": {
+    "authority": "ACTION_SAFE",
+    "consistency": "CANONICAL_REQUIRED",
+    "max_limit": 3,
+    "request_count": 8,
+    "scope": {
+      "project_ids": [
+        "milai"
+      ]
+    },
+    "status": "PASS"
+  },
+  "schema": "milai.dg10.mcp-package-gate.v1",
+  "schema_banner": "0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE",
+  "status": "LOCAL_CANDIDATE_REVIEW_REQUIRED",
+  "wheelhouse": {
+    "archive_scan": "PASS",
+    "canonical_entries_sha256": "62504f8fc82dba0ec0d0d144e2350500d926181ee508cc934be91adc5dd11734",
+    "entry_count": 34,
+    "manifest_sha256": "9a969faa0ef7135d2484e4e5e4987a015ef99a007bf2a3ccbdb979ccc4d3e2c5",
+    "offline_clean_install": {
+      "cwd": "/tmp outside repository",
+      "filesystem": "read-only root plus bounded tmpfs",
+      "network": "none",
+      "pip_check_tail": [
+        "No broken requirements found."
+      ],
+      "status": "PASS"
+    },
+    "target": {
+      "image_id": "sha256:afa555cfccdb05c0e8a4a0b1ad84f364496d8721d45c9dbd796a7afbe5e7f05d",
+      "libc": "musl",
+      "os": "Alpine Linux 3.22.4",
+      "platform": "linux/amd64",
+      "python": "3.12.13",
+      "uv": "0.11.9"
+    },
+    "wheel_count": 33
+  }
+}

@@ -1,0 +1,49 @@
+[Unit]
+# Preparation example only: install after a gateway owns trusted public HTTPS.
+Description=MiLAi codex-full OAuth backend for a trusted HTTPS gateway
+After=network-online.target milai-product-api-mcp.service
+Wants=network-online.target
+Requires=milai-product-api-mcp.service
+
+[Service]
+Type=simple
+User=milai-mcp
+Group=milai-mcp
+WorkingDirectory=/var/lib/milai-mcp
+# This dedicated file contains only the four MILAI_AGENT_*_TOKEN Runtime API
+# credentials. Never load runtime/.env: it also contains PostgreSQL role URLs.
+EnvironmentFile=/etc/milai/codex-full-mcp.env
+LoadCredential=mcp-inbound-token:/etc/milai/codex-full-public.token
+Environment=MILAI_BASE_URL=http://127.0.0.1:28180
+Environment="MILAI_AGENT_SCOPE_JSON={\"project_ids\":[\"milai\"]}"
+Environment=MILAI_AGENT_REQUIRED_AUTHORITY=INFORMATIONAL
+Environment=MILAI_AGENT_CONSISTENCY_FLOOR=CANONICAL_REQUIRED
+Environment=MILAI_CODEX_DATA_CLASSIFICATION=SYNTHETIC
+Environment=MILAI_CODEX_PRINCIPAL_ID=codex-public-milai
+Environment=MILAI_CODEX_TASK_REF=milai-product
+# A literal public IP is valid only when the trusted certificate contains that IP SAN.
+# A controlled DNS origin can be used instead without changing the backend route contract.
+Environment=MILAI_MCP_HTTP_PUBLIC_BASE_URL=https://your-milai-host.example
+Environment=MILAI_OAUTH_DB=/var/lib/milai-mcp/oauth.sqlite3
+# Install the built wheel and its locked dependencies into this root-owned,
+# world-readable (not world-writable) deployment virtualenv before installing the unit.
+ExecStart=/bin/bash -c 'export MILAI_BASE_URL=http://127.0.0.1:28180; export MILAI_CODEX_TOKEN="$(tr -d "\n" < "${CREDENTIALS_DIRECTORY}/mcp-inbound-token")"; exec /opt/milai/mcp-venv/bin/milai-codex-full-mcp --host 127.0.0.1 --port 7968 --resolve-budget-profile MCP_INTERACTIVE_STANDARD_V01'
+Restart=on-failure
+RestartSec=2s
+UMask=0077
+StateDirectory=milai-mcp
+StateDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,44 @@
+{
+  "goal": "MILA-V02-06",
+  "allocation_identity": "V06-U2-01-HOST-BOOTSTRAP",
+  "authorization_basis": "User requested completing normal E2E without overly strict limits. Both ordinary and developer-instruction R paths failed to activate memory; retain their costs/results. Test the smallest existing-Host prefetch integration through the published Product API against the same G State/files, no new G or source changes.",
+  "product_lock": "data/locks/v06-http-bootstrap-product.lock.json",
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "provider_base_url": "http://127.0.0.1:7860",
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "model_transport_enabled": true,
+  "paid_model_allocations_authorized": 0,
+  "new_model_allocations_authorized": 4,
+  "new_model_tokens_authorized": 768000,
+  "local_sessions": [
+    "R_host"
+  ],
+  "max_requests_per_session": 16,
+  "session_token_limit": 256000,
+  "batch_token_limit": 768000,
+  "request_input_token_limit": 48000,
+  "max_output_tokens": 8192,
+  "request_timeout_seconds": 90,
+  "session_deadline_seconds": 180,
+  "output_codec": "qwen_xml",
+  "run_root": "artifacts/v02-mcp-usability/filehash-20260908a",
+  "task_fixture": "data/fixtures/v06-filehash",
+  "reuse_service": true,
+  "source_directory": "G-continued3",
+  "verify_source_head": true,
+  "execution_prefix": "R-host",
+  "session_directories": {
+    "R_host": "R-host"
+  },
+  "phase_roles": {
+    "R_host": "R"
+  },
+  "workflow_profile": "../MiLAi-Product/examples/codex-mcp/milai-private-workflow.toml.example",
+  "activation": "HOST_LIFECYCLE_PUBLIC_MCP_PREFETCH_MODEL_WRITES_REMAIN_SELECTIVE",
+  "developer_visibility": "OPEN_DEVELOPMENT_NOT_BLIND",
+  "public_memory_writes_authorized": false,
+  "U3_authorized": false,
+  "new_G_authorized": false,
+  "implicit_retry_authorized": false,
+  "host_bootstrap": true
+}

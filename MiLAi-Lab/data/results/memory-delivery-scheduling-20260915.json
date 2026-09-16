@@ -1,0 +1,95 @@
+{
+  "kind": "RESEARCH_PROTOTYPE_OFFLINE_DEVELOPMENT",
+  "date": "2026-09-15",
+  "stage": "ARCHITECTURE_COMPLETE_METHOD_IMPROVEMENT",
+  "method": "milai-rwc-v0.4",
+  "adapter": "hiagent-method-adapter-v0.6",
+  "om_method": "om-sync-port-v0.1",
+  "new_live_model_generations": 0,
+  "new_live_business_executions": 0,
+  "prior_model_allocation": "CLOSED_56_OF_64",
+  "default_feedback_batch_size": 1,
+  "batching_tested_at": [
+    3,
+    4,
+    99
+  ],
+  "verification": {
+    "targeted_pytest": {
+      "passed": 72,
+      "failed": 0,
+      "seconds": 6.11,
+      "paths": [
+        "tests/unit/test_controlled_workspace.py",
+        "tests/unit/test_hiagent_provider.py",
+        "tests/unit/test_workspace_native_wave.py"
+      ]
+    },
+    "boundary": "PASS",
+    "ruff_src_tests_tools": "PASS",
+    "mypy_src_45_files": "PASS",
+    "sdist_and_wheel_build": "PASS",
+    "full_regression": "NOT_RERUN_TARGETED_SCOPE",
+    "public_service_recovery": "NOT_RERUN",
+    "live_native_comparison": "NOT_RUN"
+  },
+  "replay": {
+    "raw_root": "/cra/memory/mx_memory/evidence/memory-delivery-scheduling-20260915-mq55akck",
+    "script": "/cra/memory/mx_memory/evidence/memory-delivery-scheduling-20260915-mq55akck/replay.py",
+    "script_sha256": "ee270d93b70a70596a70db80cd0213b1e95d4acf3d929ea516525dee3c421888",
+    "feedback_batch_size": 1,
+    "arms": [
+      {
+        "arm": "MILAI_RWC",
+        "historical_events": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/native-three-arms/host/multi-source-data-merger-0-milai_rwc/method-events.jsonl",
+        "historical_events_sha256": "6106e180c8a9c638af8ecf32b6589759dbb1cd8a23f28037972de23adf879b0a",
+        "replayed_response_counts": {
+          "maintenance": 5,
+          "actor": 5,
+          "summary": 3
+        },
+        "replayed_tool_results": 4,
+        "offline_finished": true,
+        "delivery_status": "UNREVIEWED",
+        "submitted_original_draft": true,
+        "divergence": null
+      },
+      {
+        "arm": "WORKSPACE_SIMPLE",
+        "historical_events": "/cra/memory/mx_memory/evidence/memory-usability-20260914-2vnovnhb/native-three-arms/host/multi-source-data-merger-1-workspace_simple/method-events.jsonl",
+        "historical_events_sha256": "ecb179d2211292d5028e8a8904307ddc910e41d04280e1fa83b7a3868189573a",
+        "replayed_response_counts": {
+          "maintenance": 5,
+          "actor": 5,
+          "summary": 3
+        },
+        "replayed_tool_results": 5,
+        "offline_finished": false,
+        "delivery_status": null,
+        "submitted_original_draft": false,
+        "divergence": {
+          "call": 14,
+          "historical_kind": "summary",
+          "new_requested_kind": "actor",
+          "new_call_budget": {
+            "remaining": 1,
+            "closing": true
+          }
+        }
+      }
+    ],
+    "limitation": "Fixed historical outputs prove control flow only; SIMPLE has no historical ending Actor response."
+  },
+  "implementation_sha256": {
+    "src/milai_lab/methods/controlled_workspace.py": "5b0996fee639871f1230bd69b8e3f5cfc9a9aec06676688cf179e4665e67a9fe",
+    "configs/policies/workspace_control/actor.txt": "be2fdf3a4fe00bfb9af9c77e698d2b2f9d9014c9ffef641ac443185d956a141d",
+    "configs/policies/workspace_control/common.txt": "78b5a146c52a95c10ef3ef71ef8f17fb535ba6415aac2f91bc984e622d6ea2fe",
+    "configs/policies/workspace_control/milai_rwc.txt": "2b9cee2b8e5838a0adb2b5bb745c154e0bc2981d2199fa02c64c0d05f93edb08",
+    "configs/policies/workspace_control/workspace_simple.txt": "a3a6f6e8fd611a1c3a481581182446960cf791e81d585ef7cc82c6b0846c1ede",
+    "tools/hiagent_terminal_session.py": "6040ffed5d05ff04f045c80e093e1026704abca97bee248d7033930e099682bc",
+    "tools/hiagent_harbor_agent.py": "33dfe7ffa37a067a8c6c44a99129eebbb3beae81edb3201b5c2d18b77664f129",
+    "tools/run_workspace_native.py": "cec3b20682987dbce15a2fed006150055fbfadf190df8491ab1d460f0c7024e6"
+  },
+  "live_efficiency_gain": "NOT_ESTABLISHED",
+  "N1_N4_incremental_benefit": "NOT_ESTABLISHED"
+}

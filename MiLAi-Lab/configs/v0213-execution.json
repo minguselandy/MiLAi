@@ -1,0 +1,45 @@
+{
+  "goal": "MILA-V02-13",
+  "execution_revision": 2,
+  "authorization": "Current user instruction to execute the Goal; approval review delegated to scope_review subagent.",
+  "scope": "LAB_P0_P1_AND_FIRST_P2_WAVE",
+  "p0": {
+    "input": "V0212_EXECUTED_EIGHT_ONLY",
+    "max_wall_seconds": 1200,
+    "max_artifact_bytes": 33554432,
+    "max_tokenize_http_requests": 24,
+    "new_generations": 0,
+    "tokenizer_directory": "/cra/qwen36-35B"
+  },
+  "p1": {
+    "max_metadata_download_bytes": 16777216,
+    "max_dataset_download_bytes": 536870912,
+    "max_disk_bytes": 1073741824,
+    "max_preparation_seconds": 3600,
+    "max_screened_clusters": 30,
+    "max_accepted_clusters": 4,
+    "confirmation_fraction": "1/3",
+    "new_generations": 0
+  },
+  "p2": {
+    "clusters": 2,
+    "max_generations": 10,
+    "max_raw_tokens": null,
+    "input_limit": "ACTUAL_MODEL_CONTEXT_MINUS_OUTPUT_RESERVATION",
+    "output_reservation": 4096,
+    "a0_generations_per_task": 3,
+    "a0_raw_per_task": null,
+    "reader_generations_per_task": 1,
+    "reader_raw_per_task": null,
+    "max_seconds": 1200,
+    "model_transport_enabled_until_seal_b": false
+  },
+  "token_policy_revision": "User explicitly removed cumulative token limits: functionality first, token optimization last. Historical P0 retains original 20000/1024 accounting; new runs report actual usage without a cumulative raw-token stop.",
+  "p3_allocated": false,
+  "new_judge_calls": 0,
+  "new_dataset_generation_calls": 0,
+  "public_deployment": false,
+  "external_business_actions": false,
+  "product_changes": false,
+  "horizon_confirmation_opening": false
+}

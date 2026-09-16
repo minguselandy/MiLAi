@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Experiment outputs and large external inputs never belong in Git.
+artifacts/*
+!artifacts/.gitkeep
+data/external/
+data/cache/
+models/
+logs/
+*.log
+
+# Local configuration may contain endpoints or credentials.
+.env
+.env.*
+!.env.example
+

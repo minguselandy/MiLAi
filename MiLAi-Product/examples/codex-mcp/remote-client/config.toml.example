@@ -1,0 +1,7 @@
+[mcp_servers.milai]
+url = "https://<your-milai-host>/mcp"
+bearer_token_env_var = "MILAI_CODEX_TOKEN"
+enabled = true
+required = true
+startup_timeout_sec = 10
+tool_timeout_sec = 60

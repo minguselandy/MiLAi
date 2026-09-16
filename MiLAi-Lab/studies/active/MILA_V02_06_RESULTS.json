@@ -1,0 +1,43 @@
+{
+  "goal": "MILA-V02-06",
+  "goal_version": "0.2",
+  "status": "U0_PARTIAL_NATIVE_OFFLINE_ROUNDTRIP_VERIFIED",
+  "goal_complete": false,
+  "report": "studies/active/MILA_V02_06_NATIVE_PROTOCOL_20260908.md",
+  "native_client": "codex-cli 0.153.0",
+  "native_binary_sha256": "fce635028842bfe9257140e8b7d53162732945e2f356fc35225be0702b4974be",
+  "successful_offline_root": "artifacts/v02-mcp-usability/native-protocol-20260908c",
+  "prior_control_roots": [
+    "artifacts/v02-mcp-usability/native-protocol-20260908a",
+    "artifacts/v02-mcp-usability/native-protocol-20260908b"
+  ],
+  "successful_native_exit": 0,
+  "fixed_provider_responses": 2,
+  "tool_result_in_next_actual_request": true,
+  "real_model_generations": 0,
+  "real_mcp_calls_this_goal": 0,
+  "real_tokenize_calls": 2,
+  "observed_input_tokens": [5713, 5798],
+  "failed_public_render_calls": 2,
+  "paid_calls": 0,
+  "public_memory_writes": 0,
+  "compatibility_issue": "VLLM_AUTO_TOOL_CHOICE_AND_TOOL_CALL_PARSER_NOT_CONFIGURED",
+  "other_failure": "CONTAINER_PYTHON_RENDER_HELPER_TIMEOUT_45S_REMOVED_FROM_ACTIVE_TOOLS",
+  "budget_core": "MOCK_VERIFIED_NOT_YET_IN_NATIVE_FORWARDING_PATH",
+  "actual_generation_usage_matching": "NOT_VERIFIED",
+  "checks": {
+    "new_tests": 11,
+    "full_lab_passed": 543,
+    "full_lab_seconds": 6.8,
+    "boundary": "PASS",
+    "ruff": "PASS",
+    "mypy_source_files": 30,
+    "build": "PASS",
+    "both_repos_diff_check": "PASS"
+  },
+  "cleanup": "THREE_OWNED_CLIENT_CONTAINERS_GONE_NO_RENDER_HELPER_PROCESS",
+  "shared_services_changed": false,
+  "product_code_changed": false,
+  "M01_M14_completion": "NOT_ACHIEVED_PARTIAL_PROTOCOL_AND_BUDGET_CONTROLS_ONLY",
+  "next": "MINIMAL_TOOL_OUTPUT_PROTOCOL_ADAPTATION_AND_NATIVE_BUDGET_DEADLINE_INTEGRATION_BEFORE_TWO_LOCAL_COMPATIBILITY_PROBES"
+}

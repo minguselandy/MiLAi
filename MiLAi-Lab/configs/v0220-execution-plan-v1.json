@@ -1,0 +1,31 @@
+{
+  "goal": "MILA-V02-20",
+  "status": "V0_V1_ZERO_GENERATION_IMPLEMENTATION_AUTHORIZED_BY_USER",
+  "arm_kind": "RESEARCH_PROTOTYPE_LAB_ACTION_ADAPTER",
+  "old_batch": "/cra/memory/mx_memory/evidence/v0219/f2-wave1-v1",
+  "ordered_roots": [
+    "A-1db36ca3de1602c36e98",
+    "A-1816ef11f35c3921798c",
+    "A-e5324eaf97ba5a9b16dd",
+    "A-4d36e6825968f3ce3862"
+  ],
+  "root_naming_note": "The fourth frozen root is native hr_task3, not Goal prose hr_task5. Keep the exact four V0219 root IDs, do not open another task.",
+  "adapter_candidates_max": 2,
+  "new_generation_allocation": 0,
+  "new_judge_allocation": 0,
+  "raw_token_cap": null,
+  "version_domain": "WORLD",
+  "operation_identity_owner": "TRUSTED_HOST",
+  "new_public_product_behavior": false,
+  "protected_reserve_access": false,
+  "candidate57_access": false,
+  "later_stage_limits_not_allocations": {
+    "compatibility": 2,
+    "V2": {"chains": 24, "generation_cap": 4, "required_pass": 24},
+    "V3": {"chains": 16, "generation_cap": 5, "required_pass": 16},
+    "V4": {"episodes": 16, "generation_cap": 16, "waves": [2, 2]},
+    "V5": {"first_episodes": 14, "conditional_repeat_B": 12, "generation_cap": 16}
+  },
+  "stop_policy": "V2/V3 first unexpected contract rejection pauses candidate; unknown usage/commit/scope/leak stops affected requests. V4 repeated same-category protocol error pauses adapter. At most two protocol candidates; no outcome-based root replacement.",
+  "scope": "Versioned new Lab modules only; old schema/Host/World/Provider/checker and V0219 scores remain immutable. All raw data outside Git. Every real-model stage requires its own frozen manifest before allocation."
+}

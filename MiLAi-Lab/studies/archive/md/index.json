@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "category": "md",
+  "snapshot_manifest": "../lifecycle/legacy_snapshot/manifest.json",
+  "files": [
+    {
+      "source": "MiLAi_MD-01_统一MemoryFormationBundle与SemanticEpisode_GOALS.md",
+      "destination": "MiLAi/MiLAi_MD-01_统一MemoryFormationBundle与SemanticEpisode_GOALS.md",
+      "sha256": "024d7e9ec466be7c71c32a118a3efd4ade444bd0fe8d9702cc4d5a27978d7b3d"
+    },
+    {
+      "source": "MiLAi_MD-01_统一MemoryFormationBundle与SemanticEpisode_GOALS_20260830_174957.md",
+      "destination": "MiLAi/MiLAi_MD-01_统一MemoryFormationBundle与SemanticEpisode_GOALS_20260830_174957.md",
+      "sha256": "324df513363d9b890d5844263cd6f3a5f11f84450a5faa92512f6d8ad7ea321c"
+    },
+    {
+      "source": "MiLAi_MD-02_SemanticEpisode边界鲁棒性与ProductShadow_GOALS.md",
+      "destination": "MiLAi/MiLAi_MD-02_SemanticEpisode边界鲁棒性与ProductShadow_GOALS.md",
+      "sha256": "6aa6efabd5eef7d09df47a4c9c308c8f9a7b140d68ba853f2ab9d65c831ba7f9"
+    },
+    {
+      "source": "MiLAi_MD-02_SemanticEpisode边界鲁棒性与ProductShadow_GOALS_20260830_210940.md",
+      "destination": "MiLAi/MiLAi_MD-02_SemanticEpisode边界鲁棒性与ProductShadow_GOALS_20260830_210940.md",
+      "sha256": "c7b4702d6367096c18ea3100aab85341a0200b2621dca3c345a60177f3edfb23"
+    },
+    {
+      "source": "MiLAi_MD-03_IdentityEventTime与StateChange泛化_GOALS.md",
+      "destination": "MiLAi/MiLAi_MD-03_IdentityEventTime与StateChange泛化_GOALS.md",
+      "sha256": "c93d63b6139fc04acbbf0d7d493623384eef828fa4122bd826e125ac45c0d5c5"
+    },
+    {
+      "source": "MiLAi_MD-03_IdentityEventTime与StateChange泛化_GOALS_20260830_215853.md",
+      "destination": "MiLAi/MiLAi_MD-03_IdentityEventTime与StateChange泛化_GOALS_20260830_215853.md",
+      "sha256": "c93d63b6139fc04acbbf0d7d493623384eef828fa4122bd826e125ac45c0d5c5"
+    },
+    {
+      "source": "evals/md01/__init__.py",
+      "destination": "MiLAi/evals/md01/__init__.py",
+      "sha256": "d507e3c0787af5129497aa0bb174859fb548e5de75b9ff23e5a1e694fd7d2f59"
+    },
+    {
+      "source": "evals/md01/fixtures/contrasting-episodes.v0.1.json",
+      "destination": "MiLAi/evals/md01/fixtures/contrasting-episodes.v0.1.json",
+      "sha256": "4877637b0954f59a618ea64dd73996f8b35b558fca49c0b9c048728d90623c97"
+    },
+    {
+      "source": "evals/md01/formation_bundle_effect.py",
+      "destination": "MiLAi/evals/md01/formation_bundle_effect.py",
+      "sha256": "62698cea898af4814a473fbdab97b45c9c4509034dcaccd00ea5de5da0336bcf"
+    },
+    {
+      "source": "evals/md02/__init__.py",
+      "destination": "MiLAi/evals/md02/__init__.py",
+      "sha256": "7ad9904c2614bde6262917ff5850777366fd2f47578433b586841c8a0433234f"
+    },
+    {
+      "source": "evals/md02/boundary_shadow_effect.py",
+      "destination": "MiLAi/evals/md02/boundary_shadow_effect.py",
+      "sha256": "2ac2986131f3abb44507027ee90e194bdfafe6166c3528059744cb46b825b459"
+    },
+    {
+      "source": "evals/md02/fixtures/boundary-repair-dev.v0.1.json",
+      "destination": "MiLAi/evals/md02/fixtures/boundary-repair-dev.v0.1.json",
+      "sha256": "ef5b64965d129631e9ccea2565440da032267a1f01e95eab1b90e4d5a5ef24b5"
+    },
+    {
+      "source": "evals/md02/fixtures/freshness-contract.v0.1.json",
+      "destination": "MiLAi/evals/md02/fixtures/freshness-contract.v0.1.json",
+      "sha256": "d0e34c03ebea87143ed7b8f01cf354421a11abf4e77e9d44db0783466f68e5b8"
+    },
+    {
+      "source": "evals/md02/fixtures/shadow-validation.v0.1.json",
+      "destination": "MiLAi/evals/md02/fixtures/shadow-validation.v0.1.json",
+      "sha256": "b92e2082e6f25602926ab10e9cdd763b603b85341382d8411227fb7634452c2c"
+    },
+    {
+      "source": "scripts/run_md01_memory_formation.py",
+      "destination": "MiLAi/scripts/run_md01_memory_formation.py",
+      "sha256": "6e93d08b3641a6798fcdccd631bb997cd886a7c8cd722ec9c3dd9b939607f2a7"
+    },
+    {
+      "source": "scripts/run_md02_semantic_episode_shadow.py",
+      "destination": "MiLAi/scripts/run_md02_semantic_episode_shadow.py",
+      "sha256": "1aea2d1decb51bd15815002bdd3c741a24384413cbc08a968cac2faa9ef85e1e"
+    },
+    {
+      "source": "scripts/seal_md01_labels.py",
+      "destination": "MiLAi/scripts/seal_md01_labels.py",
+      "sha256": "435c0182a30587331884406efe6c5026d80c9c154311486ef604481ff3830e6e"
+    },
+    {
+      "source": "scripts/seal_md02_labels.py",
+      "destination": "MiLAi/scripts/seal_md02_labels.py",
+      "sha256": "b9a32eb60b2f1d033395e32488c2e7da0c117f27672b0ab151c194c9fa7842eb"
+    },
+    {
+      "source": "tests/test_md01_artifacts.py",
+      "destination": "MiLAi/tests/test_md01_artifacts.py",
+      "sha256": "25a4037d4941a6476fbcfc6f2439c6aa6a74d4d22e076d68bbca270b47731852"
+    },
+    {
+      "source": "tests/test_md01_formation_bundle_effect.py",
+      "destination": "MiLAi/tests/test_md01_formation_bundle_effect.py",
+      "sha256": "ae7b941e888a2b245df7a35495d229d90f9785a6d094fca2c3e0fde21769b47a"
+    },
+    {
+      "source": "tests/test_md02_artifacts.py",
+      "destination": "MiLAi/tests/test_md02_artifacts.py",
+      "sha256": "1ac6d1682f50484d348e611f51ee8d7cb75b724870f59a80eda2836b8c390da4"
+    },
+    {
+      "source": "tests/test_md02_boundary_shadow_effect.py",
+      "destination": "MiLAi/tests/test_md02_boundary_shadow_effect.py",
+      "sha256": "9a8195de330e527561c579e201faf0e7f1fc73d2f1f3669014c8d4cecb57bee6"
+    }
+  ]
+}

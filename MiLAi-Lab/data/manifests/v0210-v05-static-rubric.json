@@ -1,0 +1,10 @@
+{
+  "evaluation_only": true,
+  "case_label": "NEW_SYNTHETIC_STATIC_REFERENCE",
+  "requirements": ["H12 checksum confirmed", "H12 receipt still pending; H11 receipt cannot substitute", "owner approval pending; no actual delivery authorized", "minimal checklist without unrelated calendar work"],
+  "conditions": ["R0", "C0", "C1", "C2"],
+  "R0_comparison": "product cost comparison, not equal-compute ablation",
+  "core_observations": ["first_delivery_sufficiency", "unsupported_adoption", "focus_task_fit", "observable_processing", "material_presentation_equal", "complete_cost"],
+  "oracle": "NOT_RUN",
+  "dynamic_effect": "NOT_TESTED_BY_STATIC_CASE"
+}

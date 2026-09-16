@@ -1,0 +1,387 @@
+{
+  "ab_report_sha256": "087557c420e9ebab08062b5305563a2461cae687e874ee40eee0eebb52dbb9d7",
+  "adapter_sha256": "64ff5284e878ba847aa9dbdffe879ffee30a8e2475bfa968a2c326f5f27b65e6",
+  "backend_fixture": {
+    "hard_failures": [],
+    "mcp_hosts": [
+      {
+        "host": "official-python-client-stdio",
+        "protocol": "2026-07-28"
+      },
+      {
+        "host": "independent-jsonrpc-wire",
+        "protocol": "2026-07-28"
+      }
+    ],
+    "phases": [
+      {
+        "adapter_traces": {
+          "generic": "f639b708-b822-461e-b139-42928bd159c2",
+          "langgraph": "5cf8752b-26d4-442e-8b15-ed672c844017",
+          "mcp": "0bfd46f5-5143-4b85-ac9e-f60097944faa"
+        },
+        "causal_minimum_sequence": 3,
+        "claim_id": "16c3c185-fb64-4f9f-b421-14f55092cf48",
+        "claim_version_id": "2fdaae55-3403-4d24-ac55-61e352a9dcc4",
+        "pre_review": "ABSTAINED",
+        "session": 1,
+        "status": "PASS"
+      },
+      {
+        "adapter_traces": {
+          "autogen": "24cfefda-6009-41a1-b96d-f13070de619a",
+          "generic": "8291d3a8-0521-48b5-9fc7-9ba1c1592d14",
+          "independent_mcp_wire": "131d0444-7c84-4b73-8283-919428d5fb35",
+          "langgraph": "58829765-3364-4e01-80ee-de182b4123b6",
+          "mcp": "a2a23d9f-36fb-4c8c-91c2-f4414df6d344"
+        },
+        "branches": [
+          "CONTRADICT_BRANCH",
+          "SUPPORT_BRANCH"
+        ],
+        "discharge_rule_preserved": true,
+        "head_unchanged": true,
+        "issue_status": "OPEN",
+        "open_issue_id": "9150202a-fb48-4ff9-bbd0-5cc3f10b3dde",
+        "session": 2,
+        "status": "PASS"
+      },
+      {
+        "adapter_traces": {
+          "generic": "904df257-ec17-4287-be0e-d77520bc0376",
+          "langgraph": "aff0be9f-5416-4af8-97bb-3228f7bfc360",
+          "mcp": "7874949f-7432-4604-bbac-7b2f20d93c29"
+        },
+        "claim_version_id": "9174fac1-20dc-4dc9-8073-12b2b7ef9a79",
+        "deletion_request_id": "500a2b68-046c-4736-9986-e05385748dea",
+        "issue_status_after_revoke": "WAITING_EVIDENCE",
+        "physical_reconciliation": {
+          "derived_purge_status": "COMPLETED",
+          "primary_bytes_status": "ERASED"
+        },
+        "revoked_evidence_id": "6e19dc70-2182-4dce-ad88-82ed5f02d4f8",
+        "session": 3,
+        "stale_projection_reject_reason": "GROUNDING_BLOCKED",
+        "status": "PASS"
+      }
+    ],
+    "schema": "milai.agent-integration-three-session-e2e.v1"
+  },
+  "broker_sha256": "c880c8fc331e67281bb8194cdf696e3dc7611cf849d96eb3152bdc3d05c32142",
+  "cleanup": {
+    "model_and_worker_plane": {
+      "broker_events": {
+        "READY": 1,
+        "SESSION_CLOSED": 12,
+        "STOPPED": 1
+      },
+      "broker_log_secret_scan": "PASS",
+      "containers_removed": 4,
+      "networks_removed": 3
+    },
+    "runtime_database": {
+      "connections_before_drop": 0,
+      "owner": "milai_owner",
+      "status": "PASS"
+    }
+  },
+  "data_boundary": "SYNTHETIC_ONLY",
+  "date": "2026-08-20",
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "finished_at": "2026-08-20T10:06:03.736973+00:00",
+  "gates": {
+    "OE-F06_external_billing": false,
+    "PVL-04_agent_mcp_e2e": true,
+    "PVL-05_independent_review": false,
+    "S1_through_S10_complete": true,
+    "external_provider_cost_zero": true,
+    "external_provider_requests_zero": true,
+    "same_exact_vllm_model": true,
+    "vllm_lifecycle_unchanged": true,
+    "worker_milai_credentials_absent": true,
+    "worker_runtime_direct_route_absent": true
+  },
+  "identity": {
+    "gateway_image_id": "sha256:535bb8b7e3b735cc24b04950449f2a70c9905273eafa7d1b322526ecdc5d3860",
+    "model_id": "Qwen3.6-35B-A3B-FP8",
+    "postgres_image_id": "sha256:c0eb29927f0e8590eac49c9d5bf9c5ebf87f4e6e7273e0a9270218e6b73795ee",
+    "worker_image_id": "sha256:4f90c07d8a1eecdc1bad0f43ecdcb97ef5f0c388f23eca00dce58b120575f410"
+  },
+  "identity_report_sha256": "0463fff90754f54c887ed79e54b5db5593b1860cf593c4a89a66c1828eaa3f0e",
+  "known_limits": [
+    "The exact 1,000-call A/B report is FAIL_COMPLETE because the optimized tool schema is 353 target-model tokens versus the frozen 250-token gate.",
+    "OpenWorker restart restored the exact MCP template and wire catalog, but the complete runtime opencode.json byte digest changed; the non-MCP byte drift requires review.",
+    "The local adapter is required because the existing vLLM startup does not enable automatic tool choice; the vLLM startup was not changed.",
+    "This author-generated PV-LOCAL evidence is not an independent review and cannot close PVL-05 or OE-F06."
+  ],
+  "model_execution": {
+    "external_provider_cost": 0,
+    "external_provider_requests": 0,
+    "request_id_hashes_sha256": "47a9ccd301698556d1d25ee219a9dfe4978b2e13062f37c8ce33d4e011a78473",
+    "routes": {
+      "answer": 8,
+      "tool": 4
+    },
+    "validated_vllm_calls": 12,
+    "vllm_lifecycle_mutated": false
+  },
+  "oe_f06": "OPEN_EXTERNAL_BILLING_EVIDENCE_ABSENT",
+  "privacy": {
+    "milai_token_in_worker": false,
+    "raw_memory_retained": false,
+    "raw_model_output_retained": false,
+    "raw_prompt_retained": false,
+    "runtime_dsn_in_worker": false
+  },
+  "scenarios": {
+    "S1": {
+      "protocol": "2026-07-28",
+      "rendered_config_sha256": "3b0f9888fbb0a3acf69841261f930e637b267fd2ac84dd3118ace27e875a7a84",
+      "schemas_strict": true,
+      "status": "PASS_LOCAL_CANDIDATE",
+      "tools": [
+        "milai_recall"
+      ]
+    },
+    "S10": {
+      "bind_mounts": [
+        {
+          "destination": "/run/milai-mcp/reader-lite.sock",
+          "read_only": true
+        }
+      ],
+      "docker_socket_mounted": false,
+      "environment_config_log_secret_scan": "PASS",
+      "model_induced_scan": {
+        "event_types": [
+          "step_finish",
+          "step_start",
+          "text"
+        ],
+        "model_calls": 1,
+        "output_sha256": "38a756f3fe907067ef62717c907ae9ac076c95f995e20b4b899ed80e85cc573b",
+        "session_id_sha256": "4f75cb56a42b9ffc461495d8a9c0fbfde73755d9c8c168fc324bee0405a2fa84",
+        "tokens": {
+          "cache_read": 0,
+          "input": 12389,
+          "output": 267,
+          "reasoning": 0
+        },
+        "tool_names": [],
+        "wall_ms": 6587.469
+      },
+      "network_has_gateway": false,
+      "network_mode": "milai-pvl-agent-ae1932c0fd",
+      "proc_secret_scan": "PASS",
+      "runtime_bridge_direct": "BLOCKED",
+      "runtime_loopback_direct": "BLOCKED",
+      "status": "PASS_LOCAL_CANDIDATE"
+    },
+    "S2": {
+      "agent": {
+        "event_types": [
+          "step_finish",
+          "step_start",
+          "text"
+        ],
+        "model_calls": 1,
+        "output_sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049",
+        "session_id_sha256": "0fb877a41b7477dbb29f65f6b83ffb3e3ea874debd13a3d5dbbf0e3df849886b",
+        "tokens": {
+          "cache_read": 0,
+          "input": 12375,
+          "output": 92,
+          "reasoning": 0
+        },
+        "tool_names": [],
+        "wall_ms": 5481.853
+      },
+      "memory_tool_calls": 0,
+      "router": "NONE",
+      "status": "PASS_LOCAL_CANDIDATE"
+    },
+    "S3": {
+      "agent": {
+        "event_types": [
+          "step_finish",
+          "step_start",
+          "text",
+          "tool_use"
+        ],
+        "model_calls": 2,
+        "output_sha256": "2fc502c04c757c7d9fbbf492f39a83bc0c629e96955c51d7b8e66fadbdf7239d",
+        "session_id_sha256": "d649b57b31e666d2856507c69c8405a5660b2f9e703b32a7cf012ce2c04be200",
+        "tokens": {
+          "cache_read": 0,
+          "input": 25558,
+          "output": 250,
+          "reasoning": 0
+        },
+        "tool_names": [
+          "milai_recall"
+        ],
+        "wall_ms": 8147.78
+      },
+      "canonical_answer_preserved": true,
+      "expected_backend_trace_sha256": "02efe31d6292247c83273a85b7ed17fb9c56df7432dbd67a4b25b5f19417576d",
+      "status": "PASS_LOCAL_CANDIDATE"
+    },
+    "S4": {
+      "additional_context_injection": false,
+      "additional_memory_tool_calls": 0,
+      "agent": {
+        "event_types": [
+          "step_finish",
+          "step_start",
+          "text"
+        ],
+        "model_calls": 1,
+        "output_sha256": "6cc22f8a6d99b852fe101708cec5152ad83db1d099736e282e4218ff05493468",
+        "session_id_sha256": "d649b57b31e666d2856507c69c8405a5660b2f9e703b32a7cf012ce2c04be200",
+        "tokens": {
+          "cache_read": 0,
+          "input": 13264,
+          "output": 81,
+          "reasoning": 0
+        },
+        "tool_names": [],
+        "wall_ms": 5527.966
+      },
+      "same_session": true,
+      "status": "PASS_LOCAL_CANDIDATE"
+    },
+    "S5": {
+      "abstained": true,
+      "agent": {
+        "event_types": [
+          "step_finish",
+          "step_start",
+          "text",
+          "tool_use"
+        ],
+        "model_calls": 2,
+        "output_sha256": "c0f74379b7700d6ded0f9d587e26d2435d6500f49ea18ef88cc61deb3b5519d3",
+        "session_id_sha256": "55ccee753200c185f5ba5ee2306bfb88896d0db870826606d2cd78a7c3e950f8",
+        "tokens": {
+          "cache_read": 0,
+          "input": 25109,
+          "output": 273,
+          "reasoning": 0
+        },
+        "tool_names": [
+          "milai_recall"
+        ],
+        "wall_ms": 8207.032
+      },
+      "open_issue_id_sha256": "dedc9e166a63a7cfe97f694cb268711f9aa8ced603f617d5f4c20c6d948bfe96",
+      "status": "PASS_LOCAL_CANDIDATE"
+    },
+    "S6": {
+      "abstained": true,
+      "agent": {
+        "event_types": [
+          "step_finish",
+          "step_start",
+          "text",
+          "tool_use"
+        ],
+        "model_calls": 2,
+        "output_sha256": "60898b665870572e1a6e2be422cbdbf936b6b750a019bc384729d610e8e74baf",
+        "session_id_sha256": "5f3fd18d5b84eedb5f19d492ec2fd70cfd0b01d97ad3f84a7414a8ea2d8d51d8",
+        "tokens": {
+          "cache_read": 0,
+          "input": 25121,
+          "output": 222,
+          "reasoning": 0
+        },
+        "tool_names": [
+          "milai_recall"
+        ],
+        "wall_ms": 7950.133
+      },
+      "open_issue_id_sha256": "dedc9e166a63a7cfe97f694cb268711f9aa8ced603f617d5f4c20c6d948bfe96",
+      "stale_projection_rejected": true,
+      "status": "PASS_LOCAL_CANDIDATE"
+    },
+    "S7": {
+      "abstained": true,
+      "agent": {
+        "event_types": [
+          "step_finish",
+          "step_start",
+          "text",
+          "tool_use"
+        ],
+        "model_calls": 2,
+        "output_sha256": "050525773572ba7db5b7ec53f1563a0e654f9a65cdd7bc9672c92bbb7b80f130",
+        "session_id_sha256": "ce156d9f32e18e89e3f3bf13f766410d1d37026267428697f583927f7feed4eb",
+        "tokens": {
+          "cache_read": 0,
+          "input": 24917,
+          "output": 225,
+          "reasoning": 0
+        },
+        "tool_names": [
+          "milai_recall"
+        ],
+        "wall_ms": 8202.8
+      },
+      "canonical_store_unavailable": true,
+      "status": "PASS_LOCAL_CANDIDATE"
+    },
+    "S8": {
+      "agent": {
+        "event_types": [
+          "step_finish",
+          "step_start",
+          "text"
+        ],
+        "model_calls": 1,
+        "output_sha256": "fd6b46072ab786c25533409243a6792f8f0224af7e81fdc0fe3ed1b0d86db221",
+        "session_id_sha256": "64ce1de643a511d23bf558a6c1c86064cc4166353274d94195ec9ec2e59b4ab3",
+        "tokens": {
+          "cache_read": 0,
+          "input": 12388,
+          "output": 148,
+          "reasoning": 0
+        },
+        "tool_names": [],
+        "wall_ms": 5773.98
+      },
+      "external_submitter_and_reviewer_only": true,
+      "ordinary_worker_tools": [
+        "milai_recall"
+      ],
+      "status": "PASS_LOCAL_CANDIDATE",
+      "write_or_review_tool_calls": 0
+    },
+    "S9": {
+      "full_rendered_config_digest_unchanged": false,
+      "mcp_catalog_unchanged": true,
+      "mcp_config_unchanged": true,
+      "restart_observed": true,
+      "status": "PASS_LOCAL_CANDIDATE"
+    }
+  },
+  "schema": "milai.pvlocal.vllm-openworker-mcp-e2e.v1",
+  "started_at": "2026-08-20T10:04:04.440914+00:00",
+  "status": "LOCAL_CANDIDATE_REVIEW_REQUIRED",
+  "topology": {
+    "adapter_networks": [
+      "internal-upstream",
+      "docker-bridge-to-vllm"
+    ],
+    "gateway_direct_vllm_route": false,
+    "gateway_networks": [
+      "internal-agent",
+      "internal-gateway-db",
+      "internal-upstream"
+    ],
+    "worker_direct_runtime_route": false,
+    "worker_direct_vllm_route": false,
+    "worker_network": "internal-agent-only"
+  },
+  "vllm_lifecycle_mutated": false,
+  "worker_config_sha256": "9f5789ab13e20c5f26eb926fae5540aa9a42f25f1c6401d20a8a21325c19f46e"
+}

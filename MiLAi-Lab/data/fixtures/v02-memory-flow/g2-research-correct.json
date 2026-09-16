@@ -1,0 +1,12 @@
+{
+  "case_id": "g2-research-correct", "domain": "research_brief", "initial_type": "correct",
+  "development_status": "constructed-pilot-unrun",
+  "task": "继续本地检索优化简报，给出可以向团队陈述的发现及限制，下次用于评审讨论。资料在 sources/，也可查询项目记忆。",
+  "followup": "继续简报评审准备，列出结果与外推边界。资料在 sources/。",
+  "initial_payload": {"note": "团队确实在24个内部构造任务上独立复现青石方法，测得中位延迟下降8%；仅为该样本结果，尚无真实生产评估。不要把它误写成仅作者报告。", "sources": ["sources/replication.txt"]},
+  "sources": {
+    "replication.txt": "团队独立复现记录：青石方法，24个内部构造检索任务，中位延迟相对本地基线下降8%。实验由团队执行，结果不是从论文抄录。尚未评估真实生产查询。",
+    "paper.txt": "青石方法论文作者在另一数据集报告12%延迟下降。数据集与本地复现不同，不能替换团队的8%结果。"
+  },
+  "evaluation": {"required": ["team independent replication", "24 constructed tasks", "8% median latency decrease", "no production evaluation"], "correct_initial_facts": ["team provenance", "24", "8%", "scope"], "key_source": null, "save_value": "Equivalent sufficient memory exists"}
+}

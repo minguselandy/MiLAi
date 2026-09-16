@@ -1,0 +1,761 @@
+{
+  "format_version": "milai-goals-completion-inventory-v1",
+  "captured_at": "2026-08-17T16:00:37+08:00",
+  "hash_algorithm": "sha256",
+  "entry_root_algorithm": "SHA256(path_utf8 + NUL + file_sha256_hex + LF, sorted by path)",
+  "inventory_root_algorithm": "SHA256(group_name_utf8 + NUL + group_root_sha256_hex + LF, sorted by group)",
+  "inventory_root_sha256": "03c79a1f5945185bb6e4fe5924909f5a62dc26fd4ca40c8d842a93deba25f8fb",
+  "scope_notes": [
+    "Runtime includes .env.example/.python-version, CI, package/lock/Compose/Alembic config, docker init, every migration source, every runtime source/resource/UI asset, and every Python test.",
+    "Research includes every non-cache regular file under research/ospc, including frozen fixtures and reproduced results.",
+    "Distribution includes the two retained fixed-SOURCE_DATE_EPOCH artifacts. The generated .coverage database was removed before the final double build; the retained sdist contains no .coverage member. Generated caches, virtual environments, local .env/var state, coverage output, and temporary build directories are excluded.",
+    "Release trust chain is external to the frozen bundle and includes the exact manifest/archive/receipt, candidate.5 ACCEPT review, and independent release PASS record."
+  ],
+  "boundary": {
+    "logical_architecture": "1.0.0 FROZEN",
+    "schema": "0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE",
+    "implementation": "CANDIDATE",
+    "data": "synthetic-only; real personal data denied"
+  },
+  "groups": {
+    "runtime_current_source_test_ui_config": {
+      "entry_count": 118,
+      "root_sha256": "6e3dec956d17e15d754f61945c1432df239cc2414eb1b4a2e64fd5beb868d6e4",
+      "entries": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "sha256": "15b7748728e16c1b501869807520f79d9a8e586607dbc17ec1609687483f172e",
+          "bytes": 5417
+        },
+        {
+          "path": "runtime/.env.example",
+          "sha256": "e74d3dd256c6813fd960ca87ed0035a20da91461327462ed3c8ab69141a2e250",
+          "bytes": 1571
+        },
+        {
+          "path": "runtime/.python-version",
+          "sha256": "589191117772bbb86645d171d153b6d166a9ce50cb7abcc206af90de1284cf7d",
+          "bytes": 6
+        },
+        {
+          "path": "runtime/README.md",
+          "sha256": "0d0bc3616f1771f50b5e924a0ff429e375c61ca500a910e9951898c5fe271dad",
+          "bytes": 2514
+        },
+        {
+          "path": "runtime/alembic.ini",
+          "sha256": "16ae40669677b32dfc4672fdbd13832e21aea491a18bea6f5b88e98e15092b70",
+          "bytes": 561
+        },
+        {
+          "path": "runtime/compose.yaml",
+          "sha256": "2d9a46b53912d961f1ef975895de035c6774e705b510b03ed23534ea3de6cb3b",
+          "bytes": 1179
+        },
+        {
+          "path": "runtime/docker/initdb/010_roles.sh",
+          "sha256": "38094279bef383a8d7adfabe46b417962380aab91e157a7c6087f176d5ab2593",
+          "bytes": 1923
+        },
+        {
+          "path": "runtime/migrations/env.py",
+          "sha256": "0f1d43e6f273f334ca855921d7388fcc82a3ba156dea735e19f77f5d0b9a1f26",
+          "bytes": 1613
+        },
+        {
+          "path": "runtime/migrations/script.py.mako",
+          "sha256": "d3244c86d221281de16e369b51c24857af6569d93d7dd65564591c618da8498a",
+          "bytes": 594
+        },
+        {
+          "path": "runtime/migrations/versions/0001_runtime_foundation.py",
+          "sha256": "7b227cfc567616194008fd0e38467d7ad9f9d0728dc7e31ddac74b1f530da6b5",
+          "bytes": 1676
+        },
+        {
+          "path": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+          "sha256": "af088d901b637487789c9b56c0881511b5d74675005d965e6140dbb29d24b71a",
+          "bytes": 3638
+        },
+        {
+          "path": "runtime/migrations/versions/0003_evidence_plane.py",
+          "sha256": "89da2aeee8aab20dcfa1f917eae18457f786d86492a288573a6e47aa12250ae3",
+          "bytes": 17576
+        },
+        {
+          "path": "runtime/migrations/versions/0004_canonical_state_schema.py",
+          "sha256": "21a3c7236a2c6d750730bf50a1d52e683f05976aa9f38e9649d75ba78bf2b4c5",
+          "bytes": 32303
+        },
+        {
+          "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+          "sha256": "3e13d34c241c2616790216debd7b21b8a3b5b64bd11f4a8f22c6c26c42c041f2",
+          "bytes": 52046
+        },
+        {
+          "path": "runtime/migrations/versions/0006_evidence_revocation.py",
+          "sha256": "74366153fe51e4b7a7a3f16edd3a7fc63aa1010016462e75ac7e6a74eafd6cda",
+          "bytes": 25696
+        },
+        {
+          "path": "runtime/migrations/versions/0007_projection_outbox.py",
+          "sha256": "0feed82ee32083560a487f7cd756f08c2a138d1fa12d0879b472bd0d91906070",
+          "bytes": 38671
+        },
+        {
+          "path": "runtime/migrations/versions/0008_retrieval_gate.py",
+          "sha256": "27b0b2a0ae5bf1aee5f21406435fc7839bf7e8adb5f0286fd8723be8f0c44aaa",
+          "bytes": 17357
+        },
+        {
+          "path": "runtime/migrations/versions/0009_context_chat.py",
+          "sha256": "06b074858aed3e0b3506bfa37c41561fdabed8b896213e8c00d8a27561cc6981",
+          "bytes": 22238
+        },
+        {
+          "path": "runtime/migrations/versions/0010_backup_operations.py",
+          "sha256": "765244287b86be14c5432f6b399437081fcd2e2f3cf08e68f0b4ffcf7ed00b08",
+          "bytes": 16048
+        },
+        {
+          "path": "runtime/migrations/versions/0011_episode_settlement.py",
+          "sha256": "8c7e68f9de4b9f28229c93d5deb8d50cf7118ae7d4f3c75b8fa5407a8a454114",
+          "bytes": 23999
+        },
+        {
+          "path": "runtime/migrations/versions/0012_query_plan_trace.py",
+          "sha256": "4b02d9c25cdceaa8310faf38abed84c64f187b4f84eb907ef225469921b9a6b6",
+          "bytes": 9206
+        },
+        {
+          "path": "runtime/migrations/versions/0013_live_confirmation_gate.py",
+          "sha256": "5f1c827d99825ef5889e0c6a6254d196da7154c99dd4214ebcf941c2c16bf452",
+          "bytes": 9200
+        },
+        {
+          "path": "runtime/migrations/versions/0014_query_plan_outbox_sequence.py",
+          "sha256": "a5ed271f01f0f1b82beb410b0b884141767aff0a7535eba278aaea4b6d19c190",
+          "bytes": 2505
+        },
+        {
+          "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+          "sha256": "6a71059f289dc8a464e55c57cab9b536747586183f8a523640edd31d171750e1",
+          "bytes": 38361
+        },
+        {
+          "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+          "sha256": "89ad804f4e80b74feacb5e890065b03d310bf3215e4f576671d75fb993f33c1b",
+          "bytes": 11799
+        },
+        {
+          "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+          "sha256": "51eb998a66896163821989fe9c069b67a254c4568251e44223f005072b81c23c",
+          "bytes": 15785
+        },
+        {
+          "path": "runtime/migrations/versions/0018_causal_retrieval_trace.py",
+          "sha256": "776772e61af40dd6f20df9efd619cfb77b0d6602096a30f94cca25d10d1f412d",
+          "bytes": 7316
+        },
+        {
+          "path": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+          "sha256": "2d6ba35d72e2e24d7d8ce0f9bf282a80dc774b3eee715aa45bc20925b43a7671",
+          "bytes": 8515
+        },
+        {
+          "path": "runtime/migrations/versions/0020_causal_position_api.py",
+          "sha256": "855e9cca4fb7895fdd18690944b031905b77d9ab1681169fcf426005236e6b89",
+          "bytes": 3767
+        },
+        {
+          "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+          "sha256": "a93587eee69963b292ef9314519082c68505dc3cdbf8cb13d9ce4b86e1c84dd7",
+          "bytes": 5905
+        },
+        {
+          "path": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+          "sha256": "b92dc151547075575fee8389926428f39a0005790daf115ecbb69169d70dc206",
+          "bytes": 1689
+        },
+        {
+          "path": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+          "sha256": "9f0d4e6639a18a941f2ee44b849b48b1fabf1cf064563d0d95a6eb7f073bf8ba",
+          "bytes": 1031
+        },
+        {
+          "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+          "sha256": "fb339a79f5866f19ca55817a740559d47eb36d9dfa28fd6e51c991bf3a9709c8",
+          "bytes": 78501
+        },
+        {
+          "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+          "sha256": "cd89ce8734a2dd96f89a575b6ac34f40b16606d1662d08a81715856679d4cec2",
+          "bytes": 27769
+        },
+        {
+          "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+          "sha256": "5a501f6dfb093059b2054c8fc7c5663c9604fdf11be467cd89763e7caa8c16cb",
+          "bytes": 8677
+        },
+        {
+          "path": "runtime/pyproject.toml",
+          "sha256": "0d23d7ee822ac3f95ae41f13abd8c7243ea66165ea0669b505d7b576b2630ce1",
+          "bytes": 1518
+        },
+        {
+          "path": "runtime/src/milai/__init__.py",
+          "sha256": "0ea5ec7f809627d83bef5ffac1689aa8dba5c039fafb468a7272316f882dfce8",
+          "bytes": 188
+        },
+        {
+          "path": "runtime/src/milai/adapters/__init__.py",
+          "sha256": "055f67e319a7fd6d407ba9e12b8d4d9d3256c836a5a2d4619a359af6a02ba917",
+          "bytes": 239
+        },
+        {
+          "path": "runtime/src/milai/adapters/blob_store.py",
+          "sha256": "34420215a79efe4c8396c17127a96cb01ffb9100de0d512c0d656e4d04cabbbf",
+          "bytes": 6060
+        },
+        {
+          "path": "runtime/src/milai/adapters/embedding.py",
+          "sha256": "ba45e3f3bae5dac1745b733789e4d3e57fdc53dbd632c0d83e80471d8a437bb8",
+          "bytes": 935
+        },
+        {
+          "path": "runtime/src/milai/api/__init__.py",
+          "sha256": "ad7d8881d3764ff0ab12127d259fe186cc40dc014c83c5fa6674a2a97732e9c4",
+          "bytes": 63
+        },
+        {
+          "path": "runtime/src/milai/api/app.py",
+          "sha256": "56db73c01d4e615bd6dab89bed2b3225a567a809118ac9a27d445d7df7308d49",
+          "bytes": 7419
+        },
+        {
+          "path": "runtime/src/milai/api/auth.py",
+          "sha256": "9227de935c571f7649a935c3d39aca61be73ee6cdb145468d3b7738415b322b5",
+          "bytes": 994
+        },
+        {
+          "path": "runtime/src/milai/api/canonical_routes.py",
+          "sha256": "928bdd67ae31c4f130df1c88dbe206d4d6b3fb79cea815d47d75ddf079b81a1c",
+          "bytes": 6105
+        },
+        {
+          "path": "runtime/src/milai/api/cli.py",
+          "sha256": "1ac2efaf1365fc35642257be5b26ccc34d266b0632b810ee8dc387ff4a8b09d6",
+          "bytes": 979
+        },
+        {
+          "path": "runtime/src/milai/api/context_routes.py",
+          "sha256": "e2e754f045c77745f4f0aebba41fd2c38654e986a768a5712ea3bd707d675abf",
+          "bytes": 4957
+        },
+        {
+          "path": "runtime/src/milai/api/deletion_routes.py",
+          "sha256": "907fe768ce1d683e0254d8d0f312c6100916df2f6f9bb9b42bfef5752b7a9293",
+          "bytes": 3939
+        },
+        {
+          "path": "runtime/src/milai/api/episode_routes.py",
+          "sha256": "db273aa462923cd83b2112b8e5d0391ee59541965f0734f306ad7c8c47b19f33",
+          "bytes": 4256
+        },
+        {
+          "path": "runtime/src/milai/api/errors.py",
+          "sha256": "3e9c82421d3a2228bc21910629e9833765441e02ff0962da7b532eac496ea89c",
+          "bytes": 267
+        },
+        {
+          "path": "runtime/src/milai/api/evidence_routes.py",
+          "sha256": "f015dd0cd9203259a5cacbffcefd81103ded12a7adc26c7f0a219b85475426bc",
+          "bytes": 5771
+        },
+        {
+          "path": "runtime/src/milai/api/retrieval_routes.py",
+          "sha256": "f53ba27373b55bbcb61460ee98385dbd3c71be220fb878d93f1f2c2209341099",
+          "bytes": 5494
+        },
+        {
+          "path": "runtime/src/milai/api/ui_routes.py",
+          "sha256": "0d7c3d1c2e8337736588c23d5a19bf3992039431238b5fa4ff6283f69dec0b18",
+          "bytes": 605
+        },
+        {
+          "path": "runtime/src/milai/application/__init__.py",
+          "sha256": "8cc45f070bef391a999c66a28032399db68c346ad61464e70ba63111335c3cf6",
+          "bytes": 935
+        },
+        {
+          "path": "runtime/src/milai/application/causality.py",
+          "sha256": "67764021ea8a05f35f2284261032485e4c3015128fb6f3c1bba507058dc3cefb",
+          "bytes": 716
+        },
+        {
+          "path": "runtime/src/milai/application/chat.py",
+          "sha256": "49800f3ad1b5dd4b0fc9beac67bb25585c24c6f33aa2d37d07445ca6f2f2e1b1",
+          "bytes": 12322
+        },
+        {
+          "path": "runtime/src/milai/application/context.py",
+          "sha256": "4f253731916806da870ab18f9f5bfeb297e2a927a6c65746dd8e54d363fd6f17",
+          "bytes": 6044
+        },
+        {
+          "path": "runtime/src/milai/application/deletion.py",
+          "sha256": "c870e5bdc5b8c10cc84c65d937ff8327cf43f9827c9660e105326487f28bc80f",
+          "bytes": 1872
+        },
+        {
+          "path": "runtime/src/milai/application/derivation.py",
+          "sha256": "d7e63e8b7cdbd6d50cd4f671cf2bc89ece8d849e088cc35800ebc61a35beadf9",
+          "bytes": 4523
+        },
+        {
+          "path": "runtime/src/milai/application/episodes.py",
+          "sha256": "e22a2b921905104ac0dd89a1ba4df296fb7a4e9fd724efa554e9b9834067f5bd",
+          "bytes": 2813
+        },
+        {
+          "path": "runtime/src/milai/application/errors.py",
+          "sha256": "bc1f3ca9d3c4afb2143b83183aa55ac6ff4d5087afdd0b27061973b0c792cf42",
+          "bytes": 933
+        },
+        {
+          "path": "runtime/src/milai/application/evidence.py",
+          "sha256": "daff3de3bb2af40fd8eea8483871a2005e7a0e0c49939cc9b9f252f6064282c4",
+          "bytes": 4490
+        },
+        {
+          "path": "runtime/src/milai/application/proposals.py",
+          "sha256": "b03dbb86cc062389ea5e7057316eba40d5bcf47026371580e5d7976d29d84c7e",
+          "bytes": 5861
+        },
+        {
+          "path": "runtime/src/milai/application/query_planner.py",
+          "sha256": "0ee12e7b666de39b2773af650d31fcaf7b8b9133699cf33e50d4c94df88140e5",
+          "bytes": 1972
+        },
+        {
+          "path": "runtime/src/milai/application/retrieval.py",
+          "sha256": "b8ce83fa8536169ceeac6726172065390dda59af033a8e708d7d87c1fa7cbfa7",
+          "bytes": 19670
+        },
+        {
+          "path": "runtime/src/milai/config/__init__.py",
+          "sha256": "ad4c811982c151a58c5c86bd41d2899c1e53a16ba1751d2b906bab1168aa128a",
+          "bytes": 145
+        },
+        {
+          "path": "runtime/src/milai/config/settings.py",
+          "sha256": "6244456c02fa9550a5ce898f09ea02420fc7dad149ed6173d2f0fa782c3233b2",
+          "bytes": 7219
+        },
+        {
+          "path": "runtime/src/milai/domain/__init__.py",
+          "sha256": "55de3d0ed7deb45fea35108acf9563939d469be72bec33c3e840f7c93756d2ec",
+          "bytes": 833
+        },
+        {
+          "path": "runtime/src/milai/domain/causality.py",
+          "sha256": "0b58e9c8d9e931b44529e9a3bb09be9cb5d455c0009e70d6d5dc7fa7e499dc69",
+          "bytes": 3112
+        },
+        {
+          "path": "runtime/src/milai/domain/chat.py",
+          "sha256": "c57db3eab005b082ae345d55d7577f94cd36de02f8317486bc27d7b075033b58",
+          "bytes": 3201
+        },
+        {
+          "path": "runtime/src/milai/domain/deletion.py",
+          "sha256": "accccd41e0c959c802d1512e3790aa6b22c76db19f40a28671d7e3970a403871",
+          "bytes": 495
+        },
+        {
+          "path": "runtime/src/milai/domain/episodes.py",
+          "sha256": "f41789f880315044a64263b56896690972d81fdcb83ac16a137524ba70911448",
+          "bytes": 1825
+        },
+        {
+          "path": "runtime/src/milai/domain/evidence.py",
+          "sha256": "a683fb2f5eafa6b40e34498ac742e21408ab5cba4d996f85d30d84f45b712301",
+          "bytes": 1010
+        },
+        {
+          "path": "runtime/src/milai/domain/proposals.py",
+          "sha256": "ef7e39d7de9c0eb2395a5ca9f8ef5e1c6140a0c01fab40047dbc0a8a6cf1ba00",
+          "bytes": 5169
+        },
+        {
+          "path": "runtime/src/milai/domain/retrieval.py",
+          "sha256": "8a9e13de03ab4446d9562cf62ffb0804490b60af0680a939425dd487ff276d80",
+          "bytes": 4302
+        },
+        {
+          "path": "runtime/src/milai/observability/__init__.py",
+          "sha256": "e37f8d5a421ee61124c59424328c8d0e9e78756caf161989f65585c62a04a629",
+          "bytes": 91
+        },
+        {
+          "path": "runtime/src/milai/observability/logging.py",
+          "sha256": "4e5c10b27a30c0b1e54e1c977000555ad73aef4f60a918209ee00c1ea6350423",
+          "bytes": 2603
+        },
+        {
+          "path": "runtime/src/milai/operations/__init__.py",
+          "sha256": "12ba7724521ac691b3abb56c6a83ba093f96cd21ab02082df1b1b2c527005292",
+          "bytes": 253
+        },
+        {
+          "path": "runtime/src/milai/operations/backup.py",
+          "sha256": "10fba7735c30f96a895fcdeaf22ac7d4e158b9f6ca81dc64bd110446a1a2379d",
+          "bytes": 20701
+        },
+        {
+          "path": "runtime/src/milai/operations/cli.py",
+          "sha256": "c37c9551288cb63be81d0b4056df85c764de0502ea70ccbdca5d73dc850c02a5",
+          "bytes": 4348
+        },
+        {
+          "path": "runtime/src/milai/persistence/__init__.py",
+          "sha256": "3643559f8ccd24f58adff1f11a45e88eed482db63ba5aceb9f901e4b28da9c42",
+          "bytes": 211
+        },
+        {
+          "path": "runtime/src/milai/persistence/canonical_repository.py",
+          "sha256": "cc09bcf3565ba2bedd0b741ada22c22f9a7752f1ce358adb40efc16a38c8aac3",
+          "bytes": 13417
+        },
+        {
+          "path": "runtime/src/milai/persistence/cli.py",
+          "sha256": "e8bfca96cbecacfa37e7b91cd81021c1443f47f8cbf58232f4eb3b27ddbb3c4d",
+          "bytes": 360
+        },
+        {
+          "path": "runtime/src/milai/persistence/context_repository.py",
+          "sha256": "c4a0e76a5dea30832a8b296f144ea789f5ae2a61dc5cbfddd6ac5e743cee0e63",
+          "bytes": 13857
+        },
+        {
+          "path": "runtime/src/milai/persistence/database.py",
+          "sha256": "c5efb5becb78395f2227ed70cccd6234e97ee893d36ee5825c0b834261ab9405",
+          "bytes": 6699
+        },
+        {
+          "path": "runtime/src/milai/persistence/deletion_repository.py",
+          "sha256": "0871f9869758e3c68b9e8a76013c53ae61e4eee8a670d296de1069caf668974c",
+          "bytes": 4900
+        },
+        {
+          "path": "runtime/src/milai/persistence/episode_repository.py",
+          "sha256": "f268ef08139ffa99c7ec0a2e7f6a84d7309bc39221dfd062df615f136244bb7e",
+          "bytes": 6868
+        },
+        {
+          "path": "runtime/src/milai/persistence/evidence_repository.py",
+          "sha256": "b83096225b5a4ba38ae21436dca7e30697b2fb5351f94efd0e71327fbba7044f",
+          "bytes": 5652
+        },
+        {
+          "path": "runtime/src/milai/persistence/projection_repository.py",
+          "sha256": "46241192990ba69fb7117f5bb9f5a91469916a150b1fd1c2062d9b8ed58b0107",
+          "bytes": 8551
+        },
+        {
+          "path": "runtime/src/milai/persistence/retrieval_repository.py",
+          "sha256": "7dfd77349f3a31f35814e9ae97df10a20be935c47b22edcc02d85ef98834394d",
+          "bytes": 21262
+        },
+        {
+          "path": "runtime/src/milai/py.typed",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "bytes": 1
+        },
+        {
+          "path": "runtime/src/milai/static/milai.css",
+          "sha256": "09061fcf5e0efc063c8a80309ffa58acca0f20a24b490bfa341dc3baa9f3bd6a",
+          "bytes": 935
+        },
+        {
+          "path": "runtime/src/milai/static/milai.js",
+          "sha256": "8782a5388132102268af60dda85f0e803d3612b5bf619a05a722ecaa0fad075d",
+          "bytes": 5090
+        },
+        {
+          "path": "runtime/src/milai/templates/index.html",
+          "sha256": "7cb88e8a45c9f5114a0a3eabc0bc37bea3cd2dff9ba07be02cb1285d2104537b",
+          "bytes": 3572
+        },
+        {
+          "path": "runtime/src/milai/workers/__init__.py",
+          "sha256": "38ed2229b2b611b1e1e22149d7d4ab57072d56bc83409ce072d15b46fb51535f",
+          "bytes": 80
+        },
+        {
+          "path": "runtime/src/milai/workers/main.py",
+          "sha256": "29a30edfa3ffb2887932dd0cf8bd5f076369a67d44e48eda6e813b075c906acc",
+          "bytes": 7624
+        },
+        {
+          "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+          "sha256": "e30cf83af32fc6add6cd01233e36af010100d5fc6d4640862f271b80825751c6",
+          "bytes": 34607
+        },
+        {
+          "path": "runtime/tests/contract/test_evidence_auth.py",
+          "sha256": "1dd4c17add3270666187d395eac038aac4cc61ab32ef8f424efb355c3e4b9851",
+          "bytes": 1729
+        },
+        {
+          "path": "runtime/tests/contract/test_health.py",
+          "sha256": "4d5ee7a671c2cb58542faf3a757563fdeff2a0e0c88a2ec57e557b90062c9497",
+          "bytes": 3109
+        },
+        {
+          "path": "runtime/tests/integration/test_backup_restore.py",
+          "sha256": "86ce2fbd1225326cec8f9c2e20fd27d06f40c6f4fc61a2bf46b9e5ffed5d2971",
+          "bytes": 12555
+        },
+        {
+          "path": "runtime/tests/integration/test_canonical_api.py",
+          "sha256": "9bf713acc6fbdce097a7ea48d548959773a15c1bd01725f67f4edad18c047c7c",
+          "bytes": 20189
+        },
+        {
+          "path": "runtime/tests/integration/test_context_chat_api.py",
+          "sha256": "3a87a0b1c8ed74a9cef61136c54eefcb4138e9e1c4513aa89bcca88ac5be97b1",
+          "bytes": 17490
+        },
+        {
+          "path": "runtime/tests/integration/test_episode_settlement.py",
+          "sha256": "6fa07d2014131596f9e6142e08fe2a9c408acdcd98e4890fe5bdcfb1ce682c9f",
+          "bytes": 11210
+        },
+        {
+          "path": "runtime/tests/integration/test_evidence_api.py",
+          "sha256": "b47ddcc4eb6db7011ad451946cad6691f4b543882a3f0e005c84adff520f1846",
+          "bytes": 12075
+        },
+        {
+          "path": "runtime/tests/integration/test_projection_worker.py",
+          "sha256": "bdd6a21e1e57d198c042ed9ea2100d6d4a94939945dcadffbb218810a0d83d83",
+          "bytes": 23325
+        },
+        {
+          "path": "runtime/tests/integration/test_retrieval_api.py",
+          "sha256": "98fff983da391c5d58a4827dbad3a6c0b1daf18077b68dfe6293e9b3a56efa7f",
+          "bytes": 28126
+        },
+        {
+          "path": "runtime/tests/integration/test_runtime_foundation.py",
+          "sha256": "2963e87a43f78d94d670e186d6a676af59c038dead78ba68b5a5069a9bf5be89",
+          "bytes": 104489
+        },
+        {
+          "path": "runtime/tests/security/test_tenant_roles.py",
+          "sha256": "c5f24c766d4ad71e2b87eaf7412a1aa9ccbe0df103fcb1b9bd3135934f83285e",
+          "bytes": 6647
+        },
+        {
+          "path": "runtime/tests/unit/test_blob_store.py",
+          "sha256": "5f498b55d46e92a4bcf172c33853c9963290b6652decd2014d8ddf83ec1aa4ee",
+          "bytes": 4029
+        },
+        {
+          "path": "runtime/tests/unit/test_causality.py",
+          "sha256": "e453835e70e0f59fb6b7398606ce635e07a128d807fa819b763c0e31f74002ca",
+          "bytes": 1418
+        },
+        {
+          "path": "runtime/tests/unit/test_derivation_policy.py",
+          "sha256": "2c153d898a96b9d72c7b9abc07fb947dc7b3b937cb8fe60005badebd7172bb61",
+          "bytes": 1722
+        },
+        {
+          "path": "runtime/tests/unit/test_embedding.py",
+          "sha256": "54979d00dd6aaf7c5d464efe4e04665e915643eaa22191a67784c8309921e56b",
+          "bytes": 615
+        },
+        {
+          "path": "runtime/tests/unit/test_external_dependency_boundary.py",
+          "sha256": "ccebd02a43b71473a9b68709a0f075f3551273241f3682bac0ac7fcddbab4a3d",
+          "bytes": 1014
+        },
+        {
+          "path": "runtime/tests/unit/test_logging_redaction.py",
+          "sha256": "d3c26eff05dee78428507641aeb23edb35831fa195951f6d5c6d155851dc3b06",
+          "bytes": 1120
+        },
+        {
+          "path": "runtime/tests/unit/test_query_planner.py",
+          "sha256": "3c72ac8eac11f61c97bc539dd742d40e5d5d99202c8f3a61815c670a221f9a68",
+          "bytes": 1132
+        },
+        {
+          "path": "runtime/tests/unit/test_settings.py",
+          "sha256": "2387d38174894aac592290870cfe12e1bbe968a226f41c30c4199f3eee2a2139",
+          "bytes": 3553
+        },
+        {
+          "path": "runtime/tests/unit/test_worker.py",
+          "sha256": "838c56354df2ecf59570951b5fca1b5da567e18bb7ff14d0234faeb44f23d423",
+          "bytes": 1156
+        },
+        {
+          "path": "runtime/tests/unit/test_worker_settings.py",
+          "sha256": "a762767a481d65083b92dadd310638a6e14768d5dfcaa87ed09d18423db18015",
+          "bytes": 2963
+        },
+        {
+          "path": "runtime/uv.lock",
+          "sha256": "4f12bca74846302e734cc2d03f3f3f0573ad2f209c4332fa1d850eeae85d3f4b",
+          "bytes": 103627
+        }
+      ]
+    },
+    "research_current_source_fixture_result": {
+      "entry_count": 18,
+      "root_sha256": "142bc77cd9d82be465717ca59b35fccfd8da7eaaf231db08fa98d9efeea7920d",
+      "entries": [
+        {
+          "path": "research/ospc/README.md",
+          "sha256": "8a3b703e47113b63ffe826b8a0c3a7b12f6fce70fc85c402962cd10740dbc69d",
+          "bytes": 2084
+        },
+        {
+          "path": "research/ospc/__init__.py",
+          "sha256": "c4078f88e276b73b5019f9c762ce7bae1b753f58c8bf72f9efc91df3caf3ac41",
+          "bytes": 92
+        },
+        {
+          "path": "research/ospc/annotation_protocol.md",
+          "sha256": "be72bd19ac050b93599f816d174d20ef0b59b150438348af0deb84ce6fd7e076",
+          "bytes": 2739
+        },
+        {
+          "path": "research/ospc/compressors.py",
+          "sha256": "f0e5bc717b01d017ef3e54d03189aec1da70fce01829bb5ad981c733615458fe",
+          "bytes": 11898
+        },
+        {
+          "path": "research/ospc/fixtures/fixture_schema.json",
+          "sha256": "eb45a41f77e339d75db666a629fe52f9199c777880b10270d4f5082257289c6e",
+          "bytes": 2796
+        },
+        {
+          "path": "research/ospc/fixtures/manifest.json",
+          "sha256": "645660cf734515b873c591634e820abf145a0d9a701960a0a46051f619c39fdd",
+          "bytes": 263
+        },
+        {
+          "path": "research/ospc/fixtures/output_schema.json",
+          "sha256": "7a0cff37925c843a6e7a80569f7873d44ff2821d6f8dcad928fbf9374a40b1aa",
+          "bytes": 963
+        },
+        {
+          "path": "research/ospc/fixtures/pilot.jsonl",
+          "sha256": "8fd9482aacf58d8802a16dbc86a9e8043ffc28123d904f72b7b87a052eaa718a",
+          "bytes": 52535
+        },
+        {
+          "path": "research/ospc/generate_fixtures.py",
+          "sha256": "e07d245e194693e71f83cb6614e6e0db7bb606469b0a81f97de1cd47938c0353",
+          "bytes": 4649
+        },
+        {
+          "path": "research/ospc/isolation_manifest.json",
+          "sha256": "bfda7a3deec35140cc49342e4f64e499167685b96ef848a27f9678b0ed8e40f0",
+          "bytes": 690
+        },
+        {
+          "path": "research/ospc/models.py",
+          "sha256": "237555703c696c47ffcdb78aa372f948b6edfee5166d3c7ad86da91d99923705",
+          "bytes": 5978
+        },
+        {
+          "path": "research/ospc/prior_art_absorber_audit.md",
+          "sha256": "3c5c2ed328b070443389684fcf969b147295f54a22b6ddfe6b8f3f634cee5bc9",
+          "bytes": 3998
+        },
+        {
+          "path": "research/ospc/prior_art_snapshot.json",
+          "sha256": "b06bb60269c2183f63e9366ad4baa03789f3a764cc8047d5ba7ac4712d3a571e",
+          "bytes": 2148
+        },
+        {
+          "path": "research/ospc/results/pilot_metrics.json",
+          "sha256": "1ee73817c4c1bd071f19aea452617183cf777ba654dbb858d7eb0fc2f8e93c8b",
+          "bytes": 580537
+        },
+        {
+          "path": "research/ospc/results/pilot_report.md",
+          "sha256": "78a899a05d65e9cf7cde77e721481c78d3e1fdbad1054e31920c95260ecb3a9f",
+          "bytes": 4486
+        },
+        {
+          "path": "research/ospc/run_benchmark.py",
+          "sha256": "281d2c07c6c2a58e266522026f4a6c82f0046538da4e4ff620790391927d927b",
+          "bytes": 7831
+        },
+        {
+          "path": "research/ospc/scorer.py",
+          "sha256": "9bdf27b1e231280bd614e2857ec303928147efba16da4bd07b79fe0a3efdfdcb",
+          "bytes": 9263
+        },
+        {
+          "path": "research/ospc/tests/test_harness.py",
+          "sha256": "643ac2b109565764e3e9b3fa82cec75b5d15f688cb0c13be63944b9ad6e487ae",
+          "bytes": 6463
+        }
+      ]
+    },
+    "retained_runtime_distribution": {
+      "entry_count": 2,
+      "root_sha256": "fd264e369c9085a1790d2bfa4022d80d13d46aae92ccf005152037572db22ae0",
+      "entries": [
+        {
+          "path": "runtime/dist/milai_runtime-0.1.0-py3-none-any.whl",
+          "sha256": "149eb1ec203cb3c9751e351a2a4c18be1609c9e53598bdc55c05e25965d9a8ff",
+          "bytes": 84282
+        },
+        {
+          "path": "runtime/dist/milai_runtime-0.1.0.tar.gz",
+          "sha256": "bc98801cfaefbb7103ca31f7c53437ab51c14437a3a4eab0dea717be0e912452",
+          "bytes": 196115
+        }
+      ]
+    },
+    "release_trust_chain": {
+      "entry_count": 5,
+      "root_sha256": "0496ad227dd8c59c01db543055245dc5d2184e470446c96aa196806dc894cd57",
+      "entries": [
+        {
+          "path": "architecture/v1.0/architecture_manifest.json",
+          "sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+          "bytes": 35162
+        },
+        {
+          "path": "docs/releases/MiLAi-Logical-Architecture-1.0.0-ac16f3b7-release.tar.gz",
+          "sha256": "dc43e4a5facb6037e14a98ca4f50e26a8bb599c3bd38440e8bcbd3869a3e4ff1",
+          "bytes": 19138126
+        },
+        {
+          "path": "docs/releases/MiLAi-Logical-Architecture-1.0.0-release-receipt.md",
+          "sha256": "15c98d883e5048719898f91cb0f4f4aaa994f422311141d6d77ac4d6a79febc4",
+          "bytes": 6226
+        },
+        {
+          "path": "docs/reviews/AF-09-independent-rereview-candidate.5-2026-08-17.md",
+          "sha256": "8ddf9e8a302b46404319ef2b27d99403f73b4d71127b4483c3b333d27230d1f3",
+          "bytes": 29552
+        },
+        {
+          "path": "docs/reviews/MiLAi-Logical-Architecture-1.0.0-independent-release-verification-2026-08-17.md",
+          "sha256": "5643c3bac6a114b48170dd1b6ddb5e035c8aa1cd579393e29c3b8ec50768f10d",
+          "bytes": 17456
+        }
+      ]
+    }
+  }
+}

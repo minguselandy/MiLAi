@@ -1,0 +1,426 @@
+{
+  "kind": "RESEARCH_PROTOTYPE",
+  "goal": "studies/active/MILA_ADAPTIVE_MEMORY_DEVELOPMENT_AND_CONTRIBUTION_GOAL_v1.0_20260915.md",
+  "master": "docs/MILA_ADAPTIVE_MEMORY_MASTER_DESIGN_AND_ROADMAP_v1.0_20260915.md",
+  "status": "ENGINEERING_COMPLETE_RESEARCH_CLOSED",
+  "started_at": "2026-09-15T04:09:50.850776+00:00",
+  "evidence_root": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj",
+  "authorization": "User explicitly requested execution of the master design, including its linked complete development goal. M0-M3 functionality first; E1 bounded first use; E2/E3/M4 conditional.",
+  "target_method": "milai-adaptive-memory-v0.1",
+  "target_adapter": "hiagent-method-adapter-v0.7",
+  "profiles": [
+    "ADAPTIVE_MEMORY_SIMPLE",
+    "ADAPTIVE_MEMORY_CANDIDATE"
+  ],
+  "inherited_source_sha256": {
+    "src/milai_lab/methods/controlled_workspace.py": "5b0996fee639871f1230bd69b8e3f5cfc9a9aec06676688cf179e4665e67a9fe",
+    "src/milai_lab/methods/observational_memory.py": "8cfe2a1ab62f5171a2af9b99cb93b8e16a523909232f30015ffd1eb816b17f5e",
+    "tools/hiagent_terminal_session.py": "6040ffed5d05ff04f045c80e093e1026704abca97bee248d7033930e099682bc",
+    "tools/hiagent_harbor_agent.py": "33dfe7ffa37a067a8c6c44a99129eebbb3beae81edb3201b5c2d18b77664f129",
+    "tools/run_workspace_native.py": "cec3b20682987dbce15a2fed006150055fbfadf190df8491ab1d460f0c7024e6",
+    "tools/workspace_checkpoint.py": "ee84d7706d9cf3d4caba2ff1cff68e1010854f339251a27e4fd7c23c5d22c100",
+    "tools/run_workspace_public_checkpoint.py": "32d68b2b543b45beeba09cda9e84633eaff407d4eb474bc4ed9c0a853b017c14"
+  },
+  "m0": {
+    "status": "COMPLETE",
+    "baseline_results": "/cra/memory/mx_memory/evidence/rwc-v04-development-20260915-wji4c5jj/final-accounting.json",
+    "raw_trace_checked": {
+      "rwc_control_deferred": 1,
+      "rwc_segment_summaries": 9,
+      "rwc_summary_and_controller_generations": 20
+    },
+    "shared_parts": "OM event/page/range mechanics and RWC sparse workspace patch; independent new scheduler, projection and checkpoint contract"
+  },
+  "milestones": {
+    "M1": "COMPLETE",
+    "M2": "COMPLETE",
+    "M3": "COMPLETE",
+    "E1": "COMPLETE",
+    "M4": "CONDITIONAL_NOT_ALLOCATED",
+    "M5": "NOT_STARTED_NO_FORMAL_INNOVATION_CLAIM",
+    "M6": "OUT_OF_SCOPE",
+    "E2": "ONE_PAIR_CLOSED_NO_PROMOTION",
+    "E3": "NOT_STARTED_NO_GENERALIZABLE_REVISION"
+  },
+  "first_use": {
+    "task": "multi-source-data-merger",
+    "role": "exposed_development",
+    "order": [
+      "OM_SYNC_PORT",
+      "ADAPTIVE_MEMORY_SIMPLE",
+      "ADAPTIVE_MEMORY_CANDIDATE"
+    ],
+    "per_arm_generation_cap": 32,
+    "cap": 96,
+    "status": "COMPLETE_ALL_THREE_NATIVE_REWARD_1",
+    "root": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/e1-native",
+    "actual_generations": 11,
+    "raw_tokens": 81133,
+    "results": [
+      {
+        "arm": "OM_SYNC_PORT",
+        "trial": "multi-source-data-merger-0-om_sync_port",
+        "method": "om-sync-port-v0.1",
+        "reward": 1.0,
+        "exception": null,
+        "native_checks": {
+          "tests": 3,
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "pending": 0,
+          "other": 0,
+          "start": 1789447045.4777834,
+          "stop": 1789447047.5557117
+        },
+        "calls": {
+          "actor": 3,
+          "observer": 0,
+          "reflector": 0
+        },
+        "mode_calls": null,
+        "usage": {
+          "prompt_tokens": 13200,
+          "completion_tokens": 2221,
+          "total_tokens": 15421
+        },
+        "provider_seconds": 15.976357055362314,
+        "tool_seconds": 2.814334958791733,
+        "wall_seconds": 59.356096419040114,
+        "phase_seconds": {
+          "environment_setup": 2.199477,
+          "agent_setup": 1.588634,
+          "agent_execution": 19.439956,
+          "verifier": 23.112843
+        },
+        "delivery_status": null,
+        "maintenance_rejections": [],
+        "observation_groups": 0,
+        "covered_pages": 0,
+        "original_pages": 5,
+        "business_execs": 2,
+        "artifacts": {
+          "artifacts/manifest.json": "af403f4456761a518f12b692443521bfc81ca76bd6aca07c92ab67ea9c5570a8",
+          "artifacts/app/conflicts.json": "bce88c8209de60948edbca4c34caea4c8544e2f6f486aa30506d27ed2672a40a",
+          "artifacts/app/merged_users.parquet": "39c8e4f447c9e56fa2a37cc30adb9f88ac193d7a56ee8faf96906a82fb921e0b"
+        }
+      },
+      {
+        "arm": "ADAPTIVE_MEMORY_SIMPLE",
+        "trial": "multi-source-data-merger-1-adaptive_memory_simple",
+        "method": "milai-adaptive-memory-v0.1",
+        "reward": 1.0,
+        "exception": null,
+        "native_checks": {
+          "tests": 3,
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "pending": 0,
+          "other": 0,
+          "start": 1789447107.8963158,
+          "stop": 1789447110.042471
+        },
+        "calls": {
+          "actor": 3,
+          "maintenance": 1
+        },
+        "mode_calls": {
+          "OBSERVE": 0,
+          "COMPACT": 0,
+          "REVISE": 0,
+          "REVIEW": 1
+        },
+        "usage": {
+          "prompt_tokens": 33087,
+          "completion_tokens": 2542,
+          "total_tokens": 35629
+        },
+        "provider_seconds": 20.330280686728656,
+        "tool_seconds": 1.8569526867941022,
+        "wall_seconds": 62.71908779302612,
+        "phase_seconds": {
+          "environment_setup": 2.127644,
+          "agent_setup": 1.620104,
+          "agent_execution": 23.759624,
+          "verifier": 22.404748
+        },
+        "delivery_status": "UNREVIEWED",
+        "maintenance_rejections": [
+          {
+            "event": "ADAPTIVE_PATCH_REJECTED",
+            "mode": "REVIEW",
+            "reason": "OBSERVATIONS_REQUIRE_DECLARED_BATCH",
+            "pages": []
+          }
+        ],
+        "observation_groups": 0,
+        "covered_pages": 0,
+        "original_pages": 5,
+        "business_execs": 2,
+        "artifacts": {
+          "artifacts/manifest.json": "af403f4456761a518f12b692443521bfc81ca76bd6aca07c92ab67ea9c5570a8",
+          "artifacts/app/conflicts.json": "9b692d6d52de34375c3fced35e4caddbd948c42ac2715d73b33bcc67429f0b3c",
+          "artifacts/app/merged_users.parquet": "4983803c517c0f477898eb4904978941817a3c67ac750277dc89f2666c5a7227"
+        }
+      },
+      {
+        "arm": "ADAPTIVE_MEMORY_CANDIDATE",
+        "trial": "multi-source-data-merger-2-adaptive_memory_candidate",
+        "method": "milai-adaptive-memory-v0.1",
+        "reward": 1.0,
+        "exception": null,
+        "native_checks": {
+          "tests": 3,
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "pending": 0,
+          "other": 0,
+          "start": 1789447168.5285168,
+          "stop": 1789447170.644156
+        },
+        "calls": {
+          "actor": 3,
+          "maintenance": 1
+        },
+        "mode_calls": {
+          "OBSERVE": 0,
+          "COMPACT": 0,
+          "REVISE": 0,
+          "REVIEW": 1
+        },
+        "usage": {
+          "prompt_tokens": 27768,
+          "completion_tokens": 2315,
+          "total_tokens": 30083
+        },
+        "provider_seconds": 18.108265799470246,
+        "tool_seconds": 1.8236769610084593,
+        "wall_seconds": 60.326556083746254,
+        "phase_seconds": {
+          "environment_setup": 1.786587,
+          "agent_setup": 1.674433,
+          "agent_execution": 20.824592,
+          "verifier": 23.579154
+        },
+        "delivery_status": "UNREVIEWED",
+        "maintenance_rejections": [
+          {
+            "event": "ADAPTIVE_PATCH_REJECTED",
+            "mode": "REVIEW",
+            "reason": "OBSERVATIONS_REQUIRE_DECLARED_BATCH",
+            "pages": []
+          }
+        ],
+        "observation_groups": 0,
+        "covered_pages": 0,
+        "original_pages": 4,
+        "business_execs": 2,
+        "artifacts": {
+          "artifacts/manifest.json": "af403f4456761a518f12b692443521bfc81ca76bd6aca07c92ab67ea9c5570a8",
+          "artifacts/app/conflicts.json": "9b692d6d52de34375c3fced35e4caddbd948c42ac2715d73b33bcc67429f0b3c",
+          "artifacts/app/merged_users.parquet": "4983803c517c0f477898eb4904978941817a3c67ac750277dc89f2666c5a7227"
+        }
+      }
+    ]
+  },
+  "development_cap": 192,
+  "conditional_transfer_cap": 192,
+  "transfer_tasks_selected_before_new_results": [
+    "git-multibranch",
+    "constraints-scheduling"
+  ],
+  "new_model_allocation": 98,
+  "new_experiment_generations": 13,
+  "prior_budgets": "CLOSED_NOT_REUSED",
+  "product_default": "A0_UNCHANGED",
+  "public_schema": "UNCHANGED",
+  "engineering": {
+    "adjacent_tests": {
+      "passed": 147,
+      "log": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/adjacent-tests-final.log",
+      "status": "PASS",
+      "seconds": 8.98,
+      "command": "uv run pytest -q tests/unit/test_adaptive_memory.py tests/unit/test_controlled_workspace.py tests/unit/test_observational_memory.py tests/unit/test_hiagent.py tests/unit/test_hiagent_provider.py tests/unit/test_workspace_checkpoint.py",
+      "counts_not_added_to_full_regression": true
+    },
+    "public_checkpoint": {
+      "status": "PASS",
+      "result": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/public-checkpoint-stable/result.json",
+      "fresh_process": true,
+      "model_http_calls": 0,
+      "preserved_initial_failure": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/public-checkpoint/failure.json",
+      "repair": "Stable adaptive wire serialization and numeric catalog ordering across canonical public transport",
+      "earlier_passes": [
+        "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/public-checkpoint-repaired/result.json",
+        "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/public-checkpoint-final/result.json"
+      ],
+      "final_source_pass": true
+    },
+    "full_regression": {
+      "status": "PASS",
+      "log": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/full-pytest-stable.log",
+      "collected_expected": 4629,
+      "interrupted_prior_attempts": [
+        {
+          "log": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/full-pytest.log",
+          "passed": 2389,
+          "skipped": 1,
+          "seconds": 1007.66,
+          "reason": "Stopped to fix closing read-body execution during validation",
+          "exit_code": 2
+        },
+        {
+          "log": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/full-pytest-final.log",
+          "passed": 1681,
+          "skipped": 1,
+          "seconds": 121.73,
+          "reason": "Stopped for related empty-range dependency repair",
+          "exit_code": 2
+        }
+      ],
+      "prior_counts_not_added": true,
+      "session_id": 54433,
+      "process_id": 2602268,
+      "command": "uv run pytest --junitxml=/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/full-pytest-stable.xml",
+      "junit": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/full-pytest-stable.xml",
+      "acceptance": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/full-regression-acceptance.json",
+      "exit_code": 0,
+      "tests": 4629,
+      "passed": 4628,
+      "skipped": 1,
+      "failed": 0,
+      "errors": 0,
+      "warnings": 44,
+      "seconds": 4004.95,
+      "junit_seconds": 4004.846,
+      "unique_test_identities": 4629,
+      "all_collected_tests_have_terminal_result": true,
+      "skip_reason": "optional Host SDK wheel",
+      "log_sha256": "3b16a8e8fae7c815d2be19423a816a861103c4179a4b499c0838aa5f3568907a",
+      "junit_sha256": "477c35dcebaaf9164e7d7eeaeb2aa221ef3c494a91f56ec81c3315d47d1928f4"
+    },
+    "static_checks": "boundary/ruff/mypy/build PASS",
+    "build": {
+      "status": "PASS",
+      "log": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/build-stable.log",
+      "wheel_sha256": "49301947a28b20d7c37701cdf126edc85223dd303d8da002e48e0bfc821a6f76",
+      "wheel_adaptive_source_matches": true,
+      "command": "uv build",
+      "exit_code": 0
+    },
+    "static_check_results": {
+      "boundary": {
+        "status": "PASS",
+        "exit_code": 0,
+        "command": "uv run milai-lab-check-boundary",
+        "log": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/boundary-stable.log",
+        "log_sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3"
+      },
+      "ruff": {
+        "status": "PASS",
+        "exit_code": 0,
+        "command": "uv run ruff check src tests tools",
+        "log": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/ruff-stable.log",
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      "mypy": {
+        "status": "PASS",
+        "exit_code": 0,
+        "command": "uv run mypy src/milai_lab",
+        "log": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/mypy-stable.log",
+        "log_sha256": "a97cee1ee1bdb5e2d1ca7098f7b33a6c6a21263225643192fdeb78654687ed89"
+      }
+    },
+    "source_acceptance": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/final-source-acceptance.json"
+  },
+  "implementation_sha256": {
+    "src/milai_lab/methods/adaptive_memory.py": "dd6d77e377c80811a1e4aae208813c9526d041d4f5b81e108d58886ab2fb581e",
+    "src/milai_lab/methods/controlled_workspace.py": "4d62f79faa15f7b442862bc7702cb9f2532e49c6051782544d973f96d3ea95a3",
+    "tools/hiagent_terminal_session.py": "40228ca72e17bf7b1926d0d334ade8d8aa3f2c20dbf59fe9657672a84cdd7afc",
+    "tools/hiagent_harbor_agent.py": "16201ae6303c2c81f226d7e31a2a2e88848860f2e17f8a17caf92d011647a703",
+    "tools/run_workspace_native.py": "bf4316dd9dab0958bbfa1fe743cc9aaa9af775a82e8c0d5fa52f2d794cbf5937",
+    "tools/run_workspace_public_checkpoint.py": "e5aa6cee3abc55dfa76558cb54477f4af0f55c06b4b4c28d28598162b92a48e3",
+    "tests/unit/test_adaptive_memory.py": "6a2821ed8da12a3293ed842479c1c9f9a277e16b21028acd65faca3a245eaed4",
+    "tests/unit/test_hiagent_provider.py": "561352371807a551c62d24a69a0c33cf26c45b42530b2aff92d5e76bc73186e3",
+    "configs/policies/adaptive_memory/common.txt": "871261f1ad9d7a40620069dee8f54a3ec1dcf75ce430e55afcc3f6052be6d238",
+    "configs/policies/adaptive_memory/actor.txt": "c11bd82585900a41e2a8af61bd2a2a1602fbecdbccfc0f73eb2db8459acda645",
+    "configs/policies/adaptive_memory/adaptive_memory_candidate.txt": "1000d5dea91db5ce9b8e9041c5d5d8b1f1b87ff457e2863ba6960f1906db8abc",
+    "configs/policies/adaptive_memory/adaptive_memory_simple.txt": "82ce8a1312ccc6449f4828f6dfc9e926833f96b887779fa273dd54d8f8391a74"
+  },
+  "diagnostics": [
+    {
+      "id": "E2-D1",
+      "source_arm": "ADAPTIVE_MEMORY_CANDIDATE",
+      "status": "CLOSED_NO_DISTINGUISHING_EFFECT",
+      "generation_cap": 2,
+      "branches": [
+        "FROZEN_BASELINE",
+        "MODE_FIRST_REMINDER"
+      ],
+      "intervention": "Append one task-independent reminder to interpret mode before writing fields; no Actor, tool, source, verifier, schema or receiver changes.",
+      "observation": "Both real REVIEW outputs used nonempty observations despite no declared coverage batch; both patches rejected.",
+      "prediction": "Reminder produces a legal sparse review/route instead of an observation summary.",
+      "counterexample": "Still rejected or introduces no valid review behavior.",
+      "endpoint": "One real maintenance response per branch against same full captured input and actual receiver; no new business actions or native score.",
+      "actual_generations": 2,
+      "raw_tokens": 21970,
+      "result": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/e2-d1/results.json",
+      "baseline_wire_bytes_equal": true,
+      "decision": "Both branches legally DELIVER; baseline does not reproduce the original rejection. No reminder promotion or further diagnostic."
+    }
+  ],
+  "raw_tokens": 103103,
+  "input_tokens": 95981,
+  "output_tokens": 7122,
+  "closure": {
+    "allocated": 98,
+    "used": 13,
+    "allocated_unused_closed": 85,
+    "proposed_development_positions_never_allocated_closed": 94,
+    "second_diagnostic": "NOT_STARTED",
+    "E3": "NOT_STARTED_NO_GENERALIZABLE_REVISION",
+    "M4": "NOT_ALLOCATED_OR_STARTED",
+    "M5": "NO_FORMAL_INNOVATION_CLAIM_OR_NEW_NEAR_WORK_REVIEW",
+    "M6": "OUT_OF_SCOPE",
+    "further_model_sends": false
+  },
+  "decision": "KEEP_OM_AT_THIS_WORKPOINT; ADAPTIVE_FUNCTIONAL_BASELINE_AVAILABLE; SPECIAL_POLICY_BENEFIT_NOT_ESTABLISHED",
+  "accounting": "/cra/memory/mx_memory/evidence/adaptive-memory-development-20260915-wknrheoj/final-accounting.json",
+  "pending_usage": [],
+  "accounting_violations": [],
+  "e1_implementation_sha256": {
+    "src/milai_lab/methods/adaptive_memory.py": "99d3af971394843fc5045f5b0a92356cf9e1ba2a49924e4124b136be37e6fc8b",
+    "src/milai_lab/methods/controlled_workspace.py": "4d62f79faa15f7b442862bc7702cb9f2532e49c6051782544d973f96d3ea95a3",
+    "tools/hiagent_terminal_session.py": "40228ca72e17bf7b1926d0d334ade8d8aa3f2c20dbf59fe9657672a84cdd7afc",
+    "tools/hiagent_harbor_agent.py": "16201ae6303c2c81f226d7e31a2a2e88848860f2e17f8a17caf92d011647a703",
+    "tools/run_workspace_native.py": "bf4316dd9dab0958bbfa1fe743cc9aaa9af775a82e8c0d5fa52f2d794cbf5937",
+    "tools/run_workspace_public_checkpoint.py": "e5aa6cee3abc55dfa76558cb54477f4af0f55c06b4b4c28d28598162b92a48e3",
+    "tests/unit/test_adaptive_memory.py": "af07860af8d03304cc2163eabfd164db41d4ec53828dd3c7c4029d89bc149233",
+    "tests/unit/test_hiagent_provider.py": "561352371807a551c62d24a69a0c33cf26c45b42530b2aff92d5e76bc73186e3",
+    "configs/policies/adaptive_memory/common.txt": "871261f1ad9d7a40620069dee8f54a3ec1dcf75ce430e55afcc3f6052be6d238",
+    "configs/policies/adaptive_memory/actor.txt": "c11bd82585900a41e2a8af61bd2a2a1602fbecdbccfc0f73eb2db8459acda645",
+    "configs/policies/adaptive_memory/adaptive_memory_candidate.txt": "1000d5dea91db5ce9b8e9041c5d5d8b1f1b87ff457e2863ba6960f1906db8abc",
+    "configs/policies/adaptive_memory/adaptive_memory_simple.txt": "82ce8a1312ccc6449f4828f6dfc9e926833f96b887779fa273dd54d8f8391a74"
+  },
+  "final_code_changes_after_e1": [
+    {
+      "file": "src/milai_lab/methods/adaptive_memory.py",
+      "change": "Separate read-intent validation from body reads; empty EOF results add no disclosed body range.",
+      "impact": "Closing read/retrieve cannot perform a body read; revision after past-EOF recall remains restorable. E1 had only exec/final and no observations or recall, so neither changed behavior occurred in its recorded paths. E1 remains attributed to its own frozen source."
+    },
+    {
+      "file": "tests/unit/test_adaptive_memory.py",
+      "change": "Three related behavioral cases added, total adjacent suite147."
+    }
+  ],
+  "completed_at": "2026-09-15T06:08:17.392734+00:00",
+  "acceptance": {
+    "core_items_completed": 11,
+    "research_items_completed": 6,
+    "goal_checklist": "section 19",
+    "result_mapping": "studies/active/MILA_ADAPTIVE_MEMORY_DEVELOPMENT_RESULTS_20260915.md#最终代码检查与验收",
+    "scope": "M0-M3 complete functional first release plus E1 and one bounded E2 pair; conditional transfer, formal innovation and future work not claimed complete."
+  }
+}

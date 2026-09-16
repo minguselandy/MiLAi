@@ -1,0 +1,42 @@
+{
+  "formal_holdout": false,
+  "scenarios": [
+    {
+      "expected_disposition": "OBSERVED",
+      "expected_freshness_status": "CURRENT",
+      "raw_fallback_expected": false,
+      "scenario": "UNCHANGED_SNAPSHOT"
+    },
+    {
+      "expected_disposition": "STALE_REJECTED",
+      "expected_freshness_status": "STALE",
+      "raw_fallback_expected": true,
+      "scenario": "APPENDED_EVIDENCE"
+    },
+    {
+      "expected_disposition": "PERMISSION_REJECTED",
+      "expected_freshness_status": "INELIGIBLE",
+      "raw_fallback_expected": true,
+      "scenario": "REVOKED_EVIDENCE"
+    },
+    {
+      "expected_disposition": "PERMISSION_REJECTED",
+      "expected_freshness_status": "INELIGIBLE",
+      "raw_fallback_expected": true,
+      "scenario": "PERMISSION_REMOVED"
+    },
+    {
+      "expected_disposition": "PERMISSION_REJECTED",
+      "expected_freshness_status": "INELIGIBLE",
+      "raw_fallback_expected": true,
+      "scenario": "RETENTION_UNREADABLE"
+    },
+    {
+      "expected_disposition": "RAW_FALLBACK",
+      "expected_freshness_status": "INELIGIBLE",
+      "raw_fallback_expected": true,
+      "scenario": "FORMATION_FAILURE_RAW_FALLBACK"
+    }
+  ],
+  "schema": "milai.md02.freshness-contract.v0.1"
+}

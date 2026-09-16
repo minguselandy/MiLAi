@@ -1,0 +1,99 @@
+{
+  "status": "PREREGISTERED_NOT_RUN",
+  "created_at": "2026-09-05T07:49:39.265242+00:00",
+  "product_tree": "7fdf4f12d8c9ef63a9662145f6a1abb2e053fce2860e60ddcde8eeabcaf1fc0c",
+  "config": "configs/v02-memory-flow.json",
+  "config_sha256": "db60695d58b1b76fdd44ac615471f9d761d1edc1fa2c125c173555437ab33171",
+  "pairs": [
+    {
+      "case": "data/fixtures/v02-memory-flow/g2-software-omitted.json",
+      "fixture_sha256": "9276a218c95837d6b3d13a94acdcac420ac78b26092fde7772e6c58200e94880",
+      "order": [
+        "A1",
+        "A0"
+      ],
+      "batch_id": "g2-b1",
+      "pair_id": "g2-p1"
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g2-research-correct.json",
+      "fixture_sha256": "44f8611740c4b51e09e4cc9d43a15f3e444335d6599cec3108f78cf74b541d29",
+      "order": [
+        "A1",
+        "A0"
+      ],
+      "batch_id": "g2-b1",
+      "pair_id": "g2-p2"
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g2-software-correct.json",
+      "fixture_sha256": "04554f5db42d651a20a3dbc18cd8c96d1ef1511f2b99625952196c63db419842",
+      "order": [
+        "A0",
+        "A1"
+      ],
+      "batch_id": "g2-b2",
+      "pair_id": "g2-p3"
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g2-software-outdated.json",
+      "fixture_sha256": "f999a31e188bc36c9f497ce739f45247fafbd2f28872cd64b0fda96a1f148079",
+      "order": [
+        "A0",
+        "A1"
+      ],
+      "batch_id": "g2-b2",
+      "pair_id": "g2-p4"
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g2-research-omitted.json",
+      "fixture_sha256": "98dfa37d2fc0a89ec1f2b87740f9f3f4a455ae929d32d99b0dc369cf52a02b71",
+      "order": [
+        "A0",
+        "A1"
+      ],
+      "batch_id": "g2-b3",
+      "pair_id": "g2-p5"
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g2-research-outdated.json",
+      "fixture_sha256": "c6ef3935a9b1396f01893f9fd25a64c0968a38349fe9fcae05db497df57a21bd",
+      "order": [
+        "A1",
+        "A0"
+      ],
+      "batch_id": "g2-b3",
+      "pair_id": "g2-p6"
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g2-software-expand.json",
+      "fixture_sha256": "0bba8ae2b5c018b94d6369d94097c19ef88316b57daadf604f541f4c5e43fccf",
+      "order": [
+        "A0",
+        "A1"
+      ],
+      "batch_id": "g2-b4",
+      "pair_id": "g2-p7"
+    },
+    {
+      "case": "data/fixtures/v02-memory-flow/g2-research-expand.json",
+      "fixture_sha256": "6445d9aad675f95d79869b7c3cd6c96e2b0ae2380dc3173b2debf294a7774104",
+      "order": [
+        "A0",
+        "A1"
+      ],
+      "batch_id": "g2-b4",
+      "pair_id": "g2-p8"
+    }
+  ],
+  "selection_rule": {
+    "min_net_first_judgment_or_task_wins": 1,
+    "max_collateral_damage": 0,
+    "max_median_total_token_ratio_A1_to_A0": 1.5,
+    "max_sufficient_case_median_cost_ratio": 1.5,
+    "tie_or_no_gain": "KEEP_A0",
+    "scope": "descriptive 8-pair pilot; no significance or population claim"
+  },
+  "failure_rule": "Keep every allocation and all costs. If infrastructure/config changes within a pair, preserve both as deviations and preregister only the affected replacement pair. No case-specific strategies or seed changes.",
+  "followups": "Six of eight cases preregister future tasks; include all six in subsequent selection/save reporting, not only successful updates."
+}

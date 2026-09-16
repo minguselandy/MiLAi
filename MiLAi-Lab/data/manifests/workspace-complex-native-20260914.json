@@ -1,0 +1,176 @@
+{
+  "goal_id": "MILA-HOST-COMPLEX-TASK-DISCOVERY-01",
+  "status": "COMPLETED_BOUNDED_DISCOVERY",
+  "kind": "RESEARCH_PROTOTYPE",
+  "upstream_commit": "2fd12b88aafdd04a52c298e3940bcb189f9766d6",
+  "harbor_version": "0.23.0",
+  "python": "3.12.11",
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "context": 65536,
+  "output_reserve": 4096,
+  "temperature": 0,
+  "top_p": 1,
+  "seed": 213,
+  "thinking": false,
+  "generation_ceiling": 3840,
+  "trajectory_ceiling": 54,
+  "allocated_trajectories": 16,
+  "allocation_note": "9 first-wave slots and 7 reserve slots (3 interface repairs, 2 policy source revisions, 2 native-reference attempts); 16 actual model trajectories",
+  "spent_before_db_transfer": {
+    "generations": 109,
+    "raw_tokens": 1871047,
+    "unknown_usage": 0
+  },
+  "evidence_root": "/cra/memory/mx_memory/evidence/workspace-host/complex-native-20260914",
+  "environment_root": "/cra/memory/mx_memory/benchmarks/complex-native-20260914",
+  "environment_adjustments": [
+    "original Dockerfiles rebuilt from digest-recorded locally cached mirror bases",
+    "explicit non-overlapping task-owned Docker subnet; no shared network deletion"
+  ],
+  "method_versions": {
+    "REGULATED_0": {
+      "revision_sources": [],
+      "status": "superseded_after_cancel_trace"
+    },
+    "REGULATED_1": {
+      "revision_sources": [
+        "cancel-async-tasks"
+      ],
+      "first_transfer_task": "db-wal-recovery",
+      "first_transfer_status": "FAILED_INPUT_LOSS_AND_FORMAT_TRUNCATION_NO_NATIVE_SCORE",
+      "policy_sha256": "359a530133ff059d3e9a352c8d8bc76953ec19b7461ade92993d100181ad137b"
+    },
+    "REGULATED_2": {
+      "revision_sources": [
+        "cancel-async-tasks",
+        "db-wal-recovery"
+      ],
+      "new_operation": "Preserve recoverability before uncertain stateful inspection; investigate missing essential inputs before redundant analysis",
+      "policy_sha256": "11987d47653e6f5b4647378658f6256ae523c0b3b753c859618b60e06be76207",
+      "revision_round": 2,
+      "first_transfer_task": "multi-source-data-merger",
+      "first_transfer_status": "NATIVE_PASS_TIED_WITH_BOTH_BASELINES_NO_WORKSPACE_USE"
+    }
+  },
+  "first_wave_pool": {
+    "implementation": [
+      "cancel-async-tasks",
+      "build-cython-ext"
+    ],
+    "state_service": [
+      "db-wal-recovery",
+      "git-multibranch"
+    ],
+    "data_constraints": [
+      "multi-source-data-merger",
+      "query-optimize"
+    ]
+  },
+  "expansion_pool": [
+    "custom-memory-heap-crash",
+    "fix-ocaml-gc",
+    "configure-git-webserver",
+    "kv-store-grpc",
+    "financial-document-processor",
+    "constraints-scheduling"
+  ],
+  "clawmark": {
+    "selected_for_runtime_audit": [
+      "eda_task1",
+      "journalist_task5"
+    ],
+    "status": "NOT_EXECUTED",
+    "reason": "native runner invokes installed OpenClaw; Harbor Host is not yet connected to stage callbacks; multimodal extraction must be real, not assumed"
+  },
+  "spent_before_regulated2_source": {
+    "generations": 188,
+    "raw_tokens": 3091500,
+    "unknown_usage": 0
+  },
+  "spent_before_merger_transfer": {
+    "generations": 226,
+    "raw_tokens": 4153760,
+    "unknown_usage": 0
+  },
+  "merger_wave_estimate": {
+    "generation_allocation": 192,
+    "expected_generations": 60,
+    "expected_raw_tokens": 1080000,
+    "estimate_is_not_a_cap": true
+  },
+  "spent_before_native_reference": {
+    "generations": 250,
+    "raw_tokens": 4286994,
+    "unknown_usage": 0
+  },
+  "reference_allocation": {
+    "task": "db-wal-recovery",
+    "max_generations_including_summaries": 64,
+    "expected_generations": 20,
+    "expected_raw_tokens": 360000,
+    "system_comparison_not_pure_policy": true
+  },
+  "spent_before_reference_transport_repair": {
+    "generations": 273,
+    "raw_tokens": 4962346,
+    "unknown_usage": 0
+  },
+  "reference_transport_repair": {
+    "generation_allocation": 64,
+    "estimated_raw_tokens": 800000,
+    "reason": "Map verified context/output limits to native recovery exceptions, permit native text responses, count all settled usage including truncated calls",
+    "first_attempt_preserved": "reserve-db-terminus",
+    "new_attempt": "reserve-db-terminus-v2",
+    "result": {
+      "status": "AGENT_TERMINATED_VERIFIER_BOOTSTRAP_FAILED",
+      "raw_native_reward": 0.0,
+      "valid_native_score": null,
+      "main_calls": 28,
+      "short_summary_fallback_calls": 36,
+      "total_calls": 64,
+      "raw_tokens": 791722,
+      "artifact_recovered_json_exists": false,
+      "reason": "Native verifier Python download timed out before pytest; raw reward 0 is not a semantic score."
+    }
+  },
+  "decision": "KEEP_SIMPLE",
+  "final_experimental_usage": {
+    "requests": 337,
+    "settled": 337,
+    "input_tokens": 5584983,
+    "output_tokens": 169085,
+    "provider_seconds": 1852.0976804746315,
+    "raw_tokens": 5754068,
+    "unknown_usage": 0
+  },
+  "unused_allocation_closed": true,
+  "unused_trajectory_slots": 38,
+  "remaining_planning_generations_not_authorized_for_automatic_use": 3503,
+  "policy_revisions_used": 2,
+  "policy_revisions_limit": 2,
+  "compact_results": "data/results/workspace-complex-native-20260914.json",
+  "http_accounting": {
+    "generation_requests": 337,
+    "generation_requests_settled": 337,
+    "auxiliary_http_requests": null,
+    "auxiliary_count_status": "NOT_FULLY_RETAINED; existing Provider reuses tokenizer receipt keys for rejected pre-generation attempts; not billed model generations"
+  },
+  "completed_at": "2026-09-14T04:37:58.827390+00:00",
+  "engineering": {
+    "status": "COMPLETE_WITH_PRESERVED_TIMING_FAILURE_AND_PASSING_RECHECK",
+    "inventory": 4445,
+    "initial_passed": 4443,
+    "initial_failed": 1,
+    "skipped": 1,
+    "unchanged_module_recheck_passed": 10,
+    "first_failure_preserved": true,
+    "core_and_tests_unchanged": true,
+    "boundary": "PASS",
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "build": "PASS",
+    "coverage_receipt": "/cra/memory/mx_memory/evidence/workspace-host/complex-native-20260914/regression/regression-coverage.json",
+    "coverage_sha256": "104ff42ff9969380fd1d660144c02385ac95105db33c974e2a1f301dec634f1a"
+  },
+  "engineering_status": "COMPLETE_WITH_PRESERVED_TIMING_FAILURE_AND_PASSING_RECHECK"
+}

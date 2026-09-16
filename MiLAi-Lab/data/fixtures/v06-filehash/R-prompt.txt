@@ -1,0 +1,1 @@
+Continue the filehash project. Add --algorithm with choices sha256 and sha512. Keep sha256 as the default. A successful record should contain path and the selected algorithm's name as its digest key. Preserve the existing behavior in other respects. Update the tests and README and run the tests.

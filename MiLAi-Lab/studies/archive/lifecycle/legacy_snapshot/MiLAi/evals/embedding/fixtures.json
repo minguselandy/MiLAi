@@ -1,0 +1,67 @@
+[
+  {
+    "query": "preferred dark editor appearance",
+    "candidates": ["user prefers a dark IDE theme", "database backup completed", "meeting at noon"],
+    "relevant_index": 0
+  },
+  {
+    "query": "where are project snapshots stored",
+    "candidates": ["coffee preference", "backups live on encrypted local disk", "Python version"],
+    "relevant_index": 1
+  },
+  {
+    "query": "用户喜欢哪种编辑器外观",
+    "candidates": ["用户偏好深色编辑器主题", "明天有会议", "备份已经完成"],
+    "relevant_index": 0
+  },
+  {
+    "query": "canine animal companion",
+    "candidates": ["a dog is the family pet", "database index size", "flight departure gate"],
+    "relevant_index": 0
+  },
+  {
+    "query": "automobile maintenance history",
+    "candidates": ["garden watering plan", "car service records", "music playlist"],
+    "relevant_index": 1
+  },
+  {
+    "query": "physician consultation",
+    "candidates": ["appointment with the doctor", "source code branch", "grocery receipt"],
+    "relevant_index": 0
+  },
+  {
+    "query": "purchase groceries after work",
+    "candidates": ["deploy the server", "buy food at the supermarket", "read a novel"],
+    "relevant_index": 1
+  },
+  {
+    "query": "child enjoys soccer",
+    "candidates": ["the kid likes playing football", "printer toner is low", "invoice was paid"],
+    "relevant_index": 0
+  },
+  {
+    "query": "laptop battery is exhausted",
+    "candidates": ["notebook computer needs charging", "team lunch menu", "train ticket"],
+    "relevant_index": 0
+  },
+  {
+    "query": "schedule an appointment",
+    "candidates": ["archive old files", "book a meeting", "compile the project"],
+    "relevant_index": 1
+  },
+  {
+    "query": "repair the broken faucet",
+    "candidates": ["fix the leaking tap", "update email password", "reserve a hotel"],
+    "relevant_index": 0
+  },
+  {
+    "query": "weather precipitation forecast",
+    "candidates": ["rain is expected tomorrow", "CPU usage report", "birthday reminder"],
+    "relevant_index": 0
+  },
+  {
+    "query": "delete an old account",
+    "candidates": ["create a photo album", "remove the obsolete profile", "order a keyboard"],
+    "relevant_index": 1
+  }
+]

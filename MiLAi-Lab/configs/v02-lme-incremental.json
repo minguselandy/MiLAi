@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "product_lock": "data/locks/v02-lme-incremental-product.lock.json",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "high",
+  "service_tier": "default",
+  "session_timeout_seconds": 300,
+  "tool_call_watchdog": 24,
+  "rollout_token_budget": 120000,
+  "rollout_reminders_remaining": [
+    60000,
+    10000
+  ],
+  "token_budget_enforcement": "Soft rollout reminder only; raw input+output hard cap NOT_VERIFIED",
+  "batch_session_limit": 4,
+  "batch_wall_seconds": 1200,
+  "batch_budget_semantics": "Sum of online session seconds; next session allowance bounded by remaining batch budget",
+  "capture_readiness_timeout_seconds": 300,
+  "capture_workers": 1,
+  "capture_mode": "PUBLIC_HOOK_PERSISTENT_CLIENT",
+  "data_mode": "DEIDENTIFIED_ALLOWED",
+  "model_phase_limits": {
+    "L0_L2": 16,
+    "L3": 12,
+    "L4": 12,
+    "total": 40
+  },
+  "baseline": "Full A0 with identical permitted history files and full MCP, default absent State",
+  "candidate": null,
+  "persisted_frontier_continuation_enabled": true,
+  "intra_source_acquisition_mode": "SHADOW",
+  "later_request_inputs": "UNOBSERVED",
+  "source_delivery": "Complete source-only case history, including distractors; references and labels outside Host",
+  "evaluation": "Root Codex semantic review using offline official answer/source clauses; no separate model Judge",
+  "formal_500_scoring": false,
+  "public_deployment": false
+}

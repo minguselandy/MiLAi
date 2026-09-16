@@ -1,0 +1,7 @@
+# Merge into the client's existing table; do not duplicate the table header.
+[mcp_servers.milai]
+url = "https://milai.aigcit.com:7960/mcp"
+# Resource is discovered from MCP metadata; do not add oauth_resource a second time.
+# compact-memory-v1: 8 tools, 9 branch-specific scopes. Not the legacy 8-scope grant.
+scopes = ["milai.memory.read", "milai.state.read", "milai.state.write", "milai.evidence.capture", "milai.evidence.revoke", "milai.note.read", "milai.note.write", "milai.note.delete", "milai.evidence.read"]
+# Then run: codex mcp login milai --oauth-client-registration dcr

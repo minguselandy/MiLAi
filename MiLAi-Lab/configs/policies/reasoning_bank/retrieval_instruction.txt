@@ -1,0 +1,1 @@
+Given the prior interactive task queries, your task is to analyze a current query's intent and select relevant prior queries that could help resolve it.

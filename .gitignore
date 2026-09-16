@@ -1,0 +1,89 @@
+# MiLAi repository ignore policy
+# Keep source, tests, contracts, architecture, documentation, pyproject.toml and
+# uv.lock files. Ignore local credentials, environments and generated output.
+
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+**/credentials.json
+secrets.json
+**/secrets.json
+
+# Python bytecode and test/type-checker caches
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+**/.pytest_cache/
+.mypy_cache/
+**/.mypy_cache/
+.ruff_cache/
+**/.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+.tox/
+.nox/
+
+# uv and virtual environments (lock files remain tracked)
+.venv/
+**/.venv/
+venv/
+**/venv/
+env/
+**/env/
+ENV/
+**/ENV/
+.uv-cache/
+**/.uv-cache/
+
+# Python/package build output
+build/
+**/build/
+dist/
+**/dist/
+*.egg-info/
+**/*.egg-info/
+*.whl
+wheelhouse/
+**/wheelhouse/
+wheels/
+**/wheels/
+
+# Runtime state, experiment output and local logs
+.aris/
+**/.aris/
+var/
+**/var/
+logs/
+**/logs/
+refine-logs/
+**/refine-logs/
+profile_output/
+**/profile_output/
+artifacts/
+**/artifacts/
+test-results/
+**/test-results/
+*.log
+
+# Generated release bundles and local archives
+*.zip
+*.tar
+*.tar.gz

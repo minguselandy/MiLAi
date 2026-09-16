@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "review_kind",
+    "decision",
+    "model",
+    "reasoning_effort",
+    "cli_version",
+    "bundle_entries_sha256",
+    "manifest_sha256",
+    "prompt_sha256",
+    "response_schema_sha256",
+    "acceptance_authorized",
+    "quality_outcome",
+    "summary",
+    "open_p0_p1_count",
+    "findings",
+    "coverage",
+    "unverified"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "enum": ["1"]},
+    "review_kind": {
+      "type": "string",
+      "enum": ["AI_ADVERSARIAL_EVIDENCE_AUDIT_NOT_HUMAN_APPROVAL"]
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "NO_GO_EVIDENCE_SUPPORTED",
+        "REVISE_NO_GO_EVIDENCE",
+        "REJECT_EVIDENCE_BUNDLE"
+      ]
+    },
+    "model": {"type": "string", "enum": ["gpt-5.6-sol"]},
+    "reasoning_effort": {"type": "string", "enum": ["max"]},
+    "cli_version": {"type": "string", "enum": ["codex-cli 0.147.0"]},
+    "bundle_entries_sha256": {"$ref": "#/$defs/sha256"},
+    "manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "prompt_sha256": {"$ref": "#/$defs/sha256"},
+    "response_schema_sha256": {"$ref": "#/$defs/sha256"},
+    "acceptance_authorized": {"type": "boolean", "const": false},
+    "quality_outcome": {
+      "type": "string",
+      "enum": ["BELOW_TARGET", "NOT_EVALUABLE"]
+    },
+    "summary": {"type": "string", "minLength": 1},
+    "open_p0_p1_count": {"type": "integer", "minimum": 0},
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "severity",
+          "criterion",
+          "statement",
+          "evidence",
+          "reproduction",
+          "release_effect",
+          "recommendation"
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^DG10-SOL-[0-9]{3}$"},
+          "severity": {"type": "string", "enum": ["P0", "P1", "P2", "P3"]},
+          "criterion": {"type": "string", "minLength": 1},
+          "statement": {"type": "string", "minLength": 1},
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["file", "line", "sha256"],
+              "properties": {
+                "file": {"type": "string", "minLength": 1},
+                "line": {"type": "integer", "minimum": 1},
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            }
+          },
+          "reproduction": {"type": "string", "minLength": 1},
+          "release_effect": {"type": "string", "minLength": 1},
+          "recommendation": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_traceability",
+        "benchmark_boundaries",
+        "same_model_call_accounting",
+        "memory_quality_tiers",
+        "bfcl_semantics",
+        "serving_accounting",
+        "mcp_security_governance",
+        "package_rollback_privacy",
+        "status_inflation"
+      ],
+      "properties": {
+        "claim_traceability": {"$ref": "#/$defs/coverageState"},
+        "benchmark_boundaries": {"$ref": "#/$defs/coverageState"},
+        "same_model_call_accounting": {"$ref": "#/$defs/coverageState"},
+        "memory_quality_tiers": {"$ref": "#/$defs/coverageState"},
+        "bfcl_semantics": {"$ref": "#/$defs/coverageState"},
+        "serving_accounting": {"$ref": "#/$defs/coverageState"},
+        "mcp_security_governance": {"$ref": "#/$defs/coverageState"},
+        "package_rollback_privacy": {"$ref": "#/$defs/coverageState"},
+        "status_inflation": {"$ref": "#/$defs/coverageState"}
+      }
+    },
+    "unverified": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion", "reason", "release_effect"],
+        "properties": {
+          "criterion": {"type": "string", "minLength": 1},
+          "reason": {"type": "string", "minLength": 1},
+          "release_effect": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "coverageState": {
+      "type": "string",
+      "enum": ["VERIFIED", "PARTIAL", "UNVERIFIED"]
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "milai.dg10.benchmark-feasibility.v1",
+  "date": "2026-08-21",
+  "candidate": "candidate.1",
+  "status": "FEASIBILITY_CANDIDATE_REVIEW_REQUIRED",
+  "data_boundary": "PUBLIC_BENCHMARK_METADATA_ONLY",
+  "provider_requests": 0,
+  "provider_cost": 0,
+  "test_access_authorized": false,
+  "quality_thresholds_frozen": false,
+  "vllm_model_capability": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "adapter_modality": "TEXT_ONLY_OPENAI_COMPATIBLE_CHAT_COMPLETIONS",
+    "vision_or_ocr_provider": "NOT_AUTHORIZED",
+    "external_judge_provider": "NOT_AUTHORIZED"
+  },
+  "datasets": {
+    "longmemeval": {
+      "decision": "OFFICIAL_TEXT_INPUT_COMPATIBLE_FOR_CLEANED_500",
+      "required_modalities": [
+        "text chat history",
+        "text question",
+        "text reference answer"
+      ],
+      "required_tools": [],
+      "official_input_contract": {
+        "case_count": 500,
+        "fields": [
+          "question_id",
+          "question_type",
+          "question",
+          "question_date",
+          "answer",
+          "answer_session_ids",
+          "haystack_dates",
+          "haystack_session_ids",
+          "haystack_sessions"
+        ]
+      },
+      "compatible_case_count": 500,
+      "compatible_case_ids_sha256": "cb86ceffd101201672cb678968d0742d970e08472acc01690018b999d2856ecb",
+      "lossiness": "NONE_FOR_TEXT_CLEANED_500",
+      "scoring_lane": "LOCAL_VLLM_PROTOCOL_TIER_1_DETERMINISTIC_REQUIRED",
+      "blocked_items": [
+        "Official or repository evaluator paths that call an external model judge remain prohibited in this vLLM-only goal."
+      ]
+    },
+    "longmemeval_v2": {
+      "decision": "ADAPTED_PROTOCOL_CANDIDATE",
+      "official_full_small_state": "NOT_APPLICABLE_WITH_RATIONALE",
+      "rationale": "The released input contract contains optional question screenshots and trajectory state screenshot paths; this DG-10 lane has only a text vLLM adapter and does not authorize VLM, OCR, manual image transcription, or external judge calls.",
+      "required_modalities": [
+        "text question",
+        "optional question image",
+        "trajectory goal/action/thought/accessibility-tree text",
+        "trajectory screenshot paths",
+        "text reference answer"
+      ],
+      "required_tools": [
+        "memory_module.insert(trajectory)",
+        "memory_module.query(query, query_image=None)",
+        "local evaluator function from eval_function"
+      ],
+      "case_counts": {
+        "official_total": 451,
+        "text_only_adapted_candidate": 422,
+        "excluded_question_image_cases": 29,
+        "all_case_ids_sha256": "28de62f7ce1ce26c59fcec26958a52e00ba084a4aaa83bdb07007c740e50a96d",
+        "included_text_only_case_ids_sha256": "dd8b41c8bbd205fa5ac5bdf8d3229eba1913c298992fb7e951a7c2d85ddeb87d",
+        "excluded_image_case_ids_sha256": "d69db0e6418149be33b00f4b979f590537786f0bc945c160d04fc7bccac2b689"
+      },
+      "artifact_counts": {
+        "question_screenshots_png": 29,
+        "trajectory_screenshots_png": 49708,
+        "small_haystack_questions": 451,
+        "small_haystack_min": 100,
+        "small_haystack_max": 100,
+        "medium_haystack_questions": 451,
+        "medium_haystack_min": 387,
+        "medium_haystack_max": 500
+      },
+      "adapter_transformation": {
+        "text_only_candidate": "Use question text plus trajectory textual fields only; omit question screenshots and trajectory screenshots.",
+        "information_loss": "LOSSY_RELATIVE_TO_OFFICIAL_FULL_SMALL",
+        "claim_label": "ADAPTED_PROTOCOL_ONLY_NOT_LEADERBOARD"
+      },
+      "scoring_lane": "LOCAL_VLLM_PROTOCOL_TIER_1_DETERMINISTIC_WHERE_EVAL_FUNCTION_IS_LOCAL",
+      "blocked_items": [
+        "No full-small or leaderboard-compatible claim may be made without an authorized multimodal lane.",
+        "No external OpenAI/Codex judge may be used for release-blocking scoring in the current vLLM-only scope."
+      ]
+    },
+    "bfcl_v4_local_non_live": {
+      "decision": "NOT_STARTED_NO_LOCAL_DATASET",
+      "rationale": "No local BFCL V4 non-live dataset or harness was present under the current benchmark workspace; BMG-03 remains NO-GO.",
+      "required_modalities": [
+        "text prompts",
+        "function/tool schemas",
+        "expected tool selection and arguments"
+      ],
+      "claim_scope_if_later_added": "AGENT_TOOL_SELECTION_SEMANTICS_ONLY_NOT_MCP_TRANSPORT"
+    }
+  },
+  "gate_results": {
+    "BMG-00A": "PARTIAL_CANDIDATE_REVIEW_REQUIRED",
+    "BMG-02": "NO_GO_NOT_RUN",
+    "BMG-03": "NO_GO_MISSING_BFCL_LOCAL_NON_LIVE_LOCK",
+    "BMG-05": "NO_GO_QUALITY_THRESHOLDS_NOT_FROZEN"
+  },
+  "known_limits": [
+    "This feasibility report is pre-calibration and pre-test.",
+    "It does not freeze prompts, answer parsers, retrieval k, budgets, Latin-square schedule, or quality thresholds.",
+    "It explicitly separates LongMemEval-V2 adapted protocol from official full-small/leaderboard compatibility."
+  ]
+}

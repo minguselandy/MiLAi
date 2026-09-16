@@ -1,0 +1,21 @@
+:root {
+  color-scheme: light dark;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+body { margin: 0; background: #111827; color: #e5e7eb; }
+main { width: min(900px, calc(100% - 2rem)); margin: 2rem auto 5rem; }
+header, section { background: #1f2937; border: 1px solid #374151; border-radius: 12px; padding: 1rem 1.25rem; margin: 1rem 0; }
+h1, h2 { margin-top: 0; }
+.status { color: #fbbf24; font-weight: 700; }
+.badges, .actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.badges span { border: 1px solid #4b5563; border-radius: 999px; padding: .25rem .65rem; background: #111827; }
+label { display: block; margin: .7rem 0; }
+input, textarea, select, button { box-sizing: border-box; font: inherit; }
+input:not([type="checkbox"]), textarea, select { width: 100%; margin-top: .3rem; padding: .55rem; border-radius: 6px; border: 1px solid #4b5563; }
+button { border: 0; border-radius: 6px; padding: .65rem .9rem; background: #2563eb; color: white; cursor: pointer; }
+button.danger { background: #b91c1c; }
+button.secondary { background: #4b5563; }
+button:disabled { cursor: not-allowed; opacity: .55; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; min-height: 5rem; }

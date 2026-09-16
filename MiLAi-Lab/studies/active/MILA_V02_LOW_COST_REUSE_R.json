@@ -1,0 +1,31 @@
+{
+  "status": "SEALED_BEFORE_G",
+  "kind": "LME_DERIVED_CONTINUATION",
+  "source_bundle": "artifacts/v02-lme-incremental/data-20260905b",
+  "history_projection": "sessions only through cutoff; native question/question_date removed",
+  "future_policy": "Different usage tasks, no invented t1 updates; each F/S future independently branches from G",
+  "clusters": [
+    {
+      "case_id": "27016adc",
+      "cutoff": "2023-05-30T18:29:00+00:00",
+      "note_path": "property-notes.md",
+      "current_task": "Prepare a short factual note in property-notes.md about my two property plans: the countryside property I was considering and the work I planned on my current house. Keep it to about 250 words, preserve the stated amounts, scope, dates and unresolved questions, and cite the conversation session and turn for each key fact. Do not invent financial advice or missing facts.",
+      "followups": [
+        {"id": "contractor", "question": "Draft a brief factual message for a contractor about the work I planned on my current house and the planned start timing. Include the renovation estimate and keep the countryside purchase separate so it is not mistaken for the job site.", "criteria": "Current house deck and patio, estimate about 20000, planned spring without invented year. Separate prospective 5-acre countryside land listed 200000; not completed purchase. s31 t2/t10, s11 t0."},
+        {"id": "planning_table", "question": "Make a small planning table separating my countryside property purchase and current-house renovation: stated amount, what that amount means, and what remains uncertain. Calculate their combined stated amount, without treating it as a complete budget or affordability assessment.", "criteria": "200000 asking price + approximately 20000 renovation estimate = about 220000; different properties, purchase not completed, final prices/all-in costs/affordability not established. s11 t0, s31 t2/t10."}
+      ],
+      "order": [["contractor", "F"], ["contractor", "S"], ["planning_table", "S"], ["planning_table", "F"]]
+    },
+    {
+      "case_id": "852ce960",
+      "cutoff": "2023-12-18T04:17:00+00:00",
+      "note_path": "home-purchase-notes.md",
+      "current_task": "Prepare a short factual note in home-purchase-notes.md about the home purchase and mortgage details I have discussed. Keep it to about 250 words. Preserve dated changes, the house price and seller-credit negotiation status, and identify unknowns. Cite the conversation session and turn for key facts. Treat recollections as historical statements, not live lender confirmation; do not invent financial advice.",
+      "followups": [
+        {"id": "lender_email", "question": "Draft a concise factual email to my lender asking for confirmation of my current pre-approval. Mention the dated earlier and later amounts in my history and their numerical change. Make clear which is the latest recorded statement and what the email is asking to verify.", "criteria": "Aug 11 350000, Nov 30 recollection 400000, increase 50000, latest recorded 400000; request verification, no assertion of live confirmed approval. s2 t2, s36 t0."},
+        {"id": "seller_credit", "question": "Prepare a factual negotiation note about the seller credit in my history: distinguish what the seller had already agreed to from the additional amount I intended to request. Calculate that additional amount from the stated house price, without claiming the request was accepted or the purchase closed.", "criteria": "Price 325000, seller already agreed 2000, intended additional 1% = 3250 for minor roof/plumbing work; only hypothetical combined 5250 if explicitly conditional, no acceptance/closing assertion. s2 t2/t6/t8."}
+      ],
+      "order": [["lender_email", "S"], ["lender_email", "F"], ["seller_credit", "F"], ["seller_credit", "S"]]
+    }
+  ]
+}

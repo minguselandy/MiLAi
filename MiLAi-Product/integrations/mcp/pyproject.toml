@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "milai-mcp"
+version = "0.1.15"
+description = "Streamable HTTP MCP memory facade for MiLAi"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "httpx2>=2,<3",
+  "mcp>=2,<3",
+  "milai-client>=0.1.3,<0.2",
+  "pyjwt[crypto]>=2.13,<3",
+  "starlette>=0.40,<2",
+]
+
+[project.scripts]
+milai-mcp = "milai_mcp.server:main"
+milai-agent-memory-mcp = "milai_mcp.agent_memory:main"
+milai-codex-full-mcp = "milai_mcp.codex_full:main"
+milai-codex-user = "milai_mcp.remote_registration:main"
+milai-oauth-user = "milai_mcp.oauth_admin:main"
+milai-oauth-readiness = "milai_mcp.deployment_readiness:main"
+milai = "milai_mcp.launcher:main"
+
+[dependency-groups]
+dev = ["mypy>=1.14,<2", "pytest>=8.3,<9", "ruff>=0.9,<1"]
+
+[tool.uv.sources]
+milai-client = {path = "../python-client", editable = true}
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/milai_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "RUF", "S"]
+ignore = ["S101"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["milai_mcp"]

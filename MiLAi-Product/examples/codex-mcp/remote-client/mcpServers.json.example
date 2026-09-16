@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "milai": {
+      "type": "http",
+      "url": "https://<your-milai-host>/mcp",
+      "headers": {
+        "Authorization": "Bearer <separately-transferred-token>"
+      }
+    }
+  }
+}

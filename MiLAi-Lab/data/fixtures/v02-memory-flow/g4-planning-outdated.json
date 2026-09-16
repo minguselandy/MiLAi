@@ -1,0 +1,35 @@
+{
+  "case_id": "g4-planning-outdated",
+  "domain": "project_planning",
+  "initial_type": "outdated",
+  "development_status": "constructed-new-family-after-strategy-freeze",
+  "task": "继续展览开幕筹备，整理从今天到活动开始的依赖顺序、待办负责人和当前阻塞项，形成一页内部计划。下一步要据此开协调会。资料在 sources/。",
+  "followup": "继续开幕协调会准备，列出现在可以推进的事项、必须等确认的事项，以及通知草稿应采用的安排。资料在 sources/。",
+  "initial_payload": {
+    "note": "旧版开幕计划：9月10日18:00在南厅举行，场地已口头确认，可开始正式通知。联络人林负责场地、周负责通知；活动内容由陈负责。",
+    "sources": [
+      "sources/old-plan.txt",
+      "sources/update.txt"
+    ]
+  },
+  "sources": {
+    "old-plan.txt": "8月25日旧计划：9月10日18:00南厅，场地口头确认。林负责场地，周负责通知，陈负责活动内容。",
+    "update.txt": "9月5日协调更新：南厅停用，拟改9月12日18:30北厅。北厅预约仍待书面确认，林须先取得确认；陈可同步完成流程草稿。林确认场地后，陈核对流程可行性，最后由周发正式通知。当前只可准备通知草稿，不能把拟定安排写成已确认。负责人分工不变。",
+    "other.txt": "摄影分享会已确认9月10日18:00南楼教室；与本展开幕无关。"
+  },
+  "evaluation": {
+    "required": [
+      "proposed September12 18:30 north hall clearly pending",
+      "old September10 south hall superseded",
+      "Lin written venue confirmation before Chen feasibility check before Zhou formal notice",
+      "Chen draft and Zhou notice draft can prepare now; owners preserved"
+    ],
+    "correct_initial_facts": [
+      "Lin venue",
+      "Zhou notice",
+      "Chen content"
+    ],
+    "key_source": "update.txt",
+    "save_value": "Superseded arrangement and dependency gates needed at coordination meeting"
+  }
+}

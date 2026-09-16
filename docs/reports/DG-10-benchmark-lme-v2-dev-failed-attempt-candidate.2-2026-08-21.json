@@ -1,0 +1,102 @@
+{
+  "schema": "milai.dg10.benchmark-lme-v2-failed-attempt-receipt.v1",
+  "date": "2026-08-21",
+  "candidate": "candidate.2",
+  "generated_at": "2026-08-21T14:27:13Z",
+  "status": "INVALIDATED_FAILED_ATTEMPT_EXCLUDED_FROM_CALIBRATION",
+  "quality_outcome": "NO_RESULT",
+  "data_boundary": "PUBLIC_DEV_LABELS_OPENED_RAW_CONTENT_REPO_EXTERNAL_HASHED_ONLY",
+  "calibration_dev_labels_opened": true,
+  "test_labels_or_outputs_opened": false,
+  "test_access_authorized": false,
+  "quality_thresholds_frozen": false,
+  "provider_requests": 0,
+  "provider_cost": 0,
+  "external_provider_requests": 0,
+  "external_provider_cost": 0,
+  "model_id": "Qwen3.6-35B-A3B-FP8",
+  "attempt_window_from_local_vllm_access_log": {
+    "started_at_first_tokenizer_http_200": "2026-08-21T14:23:56.349190529Z",
+    "ended_at_completion_http_200": "2026-08-21T14:23:58.089847762Z",
+    "isolating_window_start": "2026-08-21T14:23:50Z",
+    "isolating_window_end": "2026-08-21T14:24:10Z",
+    "access_log_slice_sha256": "accb996daf3cf5c04dee77b2cbe2b51600cca8fdb1630a4d4510ac904394b0d9",
+    "raw_access_log_retained_in_repository": false
+  },
+  "execution": {
+    "requested_dev_case_count": 42,
+    "requested_dev_case_ids_sha256": "548789afda6ebc2e559959a6137824375bb7b108dea6cdfb32c4e9c279c93816",
+    "requested_arms": [
+      "NO_MEMORY",
+      "NAIVE_RAG"
+    ],
+    "planned_records": 84,
+    "public_dev_case_labels_opened_before_failure": 42,
+    "local_tokenizer_http_200_requests": 1,
+    "local_vllm_completion_http_200_requests": 1,
+    "validated_records": 0,
+    "first_attempted_case_id": "longmemeval_v2:0382ed92",
+    "first_attempted_arm": "NO_MEMORY",
+    "first_case_full_latin_square_order": [
+      "MILAI_MCP",
+      "NO_MEMORY",
+      "NAIVE_RAG"
+    ],
+    "native_request_id": null,
+    "native_usage": null,
+    "native_receipt_sha256": null,
+    "native_fields_unavailable_reason": "THE_STRICT_STOP_ONLY_VALIDATOR_RAISED_BEFORE_THE_RUNNER_PERSISTED_THE_HTTP_200_RESPONSE",
+    "hidden_or_extra_model_calls": 0
+  },
+  "failure": {
+    "exception_type": "scripts.run_dg10_benchmark_dev_smoke.DevSmokeError",
+    "wrapped_cause_type": "evals.agent_efficiency.vllm_local_ab.LocalVllmCaptureError",
+    "cause_message_sha256": "4778470b7c6e7d73aca4b860a752640af5f24db19c3490d67480b42f799e5b3c",
+    "cause_classification": "NON_STOP_FINISH_REASON_REJECTED_BY_STOP_ONLY_VALIDATOR",
+    "actual_finish_reason": null,
+    "actual_finish_reason_status": "UNKNOWN_RESPONSE_DISCARDED_NOT_INFERRED",
+    "http_status": 200,
+    "runner_exit_status": "NONZERO_EXCEPTION",
+    "repository_result_report_written": false,
+    "repo_external_raw_sidecar_written": false
+  },
+  "inputs": {
+    "runner_source_sha256_at_attempt": "dadfe0d0d0d743735257ea13b087eb713e2750bed12479d75916775d28809acc",
+    "dataset_lock_report_sha256": "889e99fa19e695db5b10d1ff72964aee5fbfc4426f4c67504ed4340742ffa62e",
+    "adapter_report_sha256": "0e943694ccf536bc4036c0276c832eb4fdec59dc9314b5707040f5a7ebc83d1b",
+    "calibration_plan_sha256": "bba09bf54166e43780fee936c7b1a0b037f3f268a2739793a12b6ad4e0732354",
+    "qa_evaluator_sha256": "f8ba659e237c4282a07a92538090ea500ce8483820b390b1d19af187c01417ac",
+    "vllm_identity_report_sha256": "0463fff90754f54c887ed79e54b5db5593b1860cf593c4a89a66c1828eaa3f0e"
+  },
+  "command_contract": {
+    "execute_local_vllm": true,
+    "data_boundary_ack": "dev-benchmark-labels-hashed-only",
+    "case_limit": 42,
+    "arms": [
+      "NO_MEMORY",
+      "NAIVE_RAG"
+    ],
+    "max_output_tokens": 256,
+    "temperature": 0,
+    "seed": 20260821
+  },
+  "supersession_and_retry_accounting": {
+    "excluded_from_quality_denominators": true,
+    "excluded_from_candidate_3_native_id_and_usage_denominators": true,
+    "candidate_3_permitted_to_restart_the_full_fixed_denominator": true,
+    "cross_attempt_repeated_case_arm_requests_expected": 1,
+    "candidate_3_internal_retry_budget": 0,
+    "candidate_3_must_retain_terminal_length_outputs_as_truncated_quality_results": true
+  },
+  "gate_results": {
+    "BMG-02": "NO_GO_FAILED_ATTEMPT_NO_CALIBRATION_RESULT",
+    "BMG-03": "NO_GO_FAILED_ATTEMPT_NO_CALIBRATION_RESULT",
+    "BMG-05": "NO_GO_THRESHOLDS_NOT_FROZEN"
+  },
+  "known_limits": [
+    "The access log proves one tokenizer request and one HTTP 200 completion request in the isolated attempt window, but it does not expose the native response ID, usage, content, or finish reason.",
+    "The finish reason is intentionally not reconstructed from latency or output-cap circumstantial evidence.",
+    "All 42 selected public dev question labels were loaded before the first model request; no public test label or output was opened.",
+    "This receipt is an invalidated-attempt ledger only and is not a benchmark score report."
+  ]
+}

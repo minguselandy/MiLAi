@@ -1,0 +1,183 @@
+name: MiLAi Lean V1 verification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  runtime-and-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: milai_owner
+          POSTGRES_PASSWORD: ci-${{ github.run_id }}-${{ github.run_attempt }}
+          POSTGRES_DB: milai
+        ports:
+          - 15432:5432
+        options: >-
+          --health-cmd "pg_isready -U milai_owner -d milai"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+
+      - name: Install PostgreSQL client tools
+        run: sudo apt-get update && sudo apt-get install --yes postgresql-client
+
+      - name: Create least-privilege login roles
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          api_password="$(openssl rand -hex 24)"
+          steward_password="$(openssl rand -hex 24)"
+          worker_password="$(openssl rand -hex 24)"
+          audit_password="$(openssl rand -hex 24)"
+          docker exec -i "${{ job.services.postgres.id }}" \
+            psql --set=ON_ERROR_STOP=1 --username milai_owner --dbname milai \
+            --set=api_password="$api_password" \
+            --set=steward_password="$steward_password" \
+            --set=worker_password="$worker_password" \
+            --set=audit_password="$audit_password" <<'SQL'
+          SELECT format('CREATE ROLE milai_api LOGIN PASSWORD %L NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS', :'api_password') \gexec
+          SELECT format('CREATE ROLE milai_steward LOGIN PASSWORD %L NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS', :'steward_password') \gexec
+          SELECT format('CREATE ROLE milai_worker LOGIN PASSWORD %L NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS', :'worker_password') \gexec
+          SELECT format('CREATE ROLE milai_audit LOGIN PASSWORD %L NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS', :'audit_password') \gexec
+          REVOKE ALL ON DATABASE milai FROM PUBLIC;
+          GRANT CONNECT ON DATABASE milai TO milai_api, milai_steward, milai_worker, milai_audit;
+          REVOKE CREATE ON SCHEMA public FROM PUBLIC;
+          SQL
+          {
+            echo "MILAI_MIGRATION_DATABASE_URL=postgresql://milai_owner:ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}@127.0.0.1:15432/milai"
+            echo "MILAI_DATABASE_URL=postgresql://milai_api:${api_password}@127.0.0.1:15432/milai"
+            echo "MILAI_STEWARD_DATABASE_URL=postgresql://milai_steward:${steward_password}@127.0.0.1:15432/milai"
+            echo "MILAI_WORKER_DATABASE_URL=postgresql://milai_worker:${worker_password}@127.0.0.1:15432/milai"
+            echo "MILAI_AUDIT_DATABASE_URL=postgresql://milai_audit:${audit_password}@127.0.0.1:15432/milai"
+            echo "MILAI_TEST_API_DATABASE_URL=postgresql://milai_api:${api_password}@127.0.0.1:15432/milai"
+            echo "MILAI_TEST_STEWARD_DATABASE_URL=postgresql://milai_steward:${steward_password}@127.0.0.1:15432/milai"
+            echo "MILAI_TEST_WORKER_DATABASE_URL=postgresql://milai_worker:${worker_password}@127.0.0.1:15432/milai"
+            echo "MILAI_TEST_AUDIT_DATABASE_URL=postgresql://milai_audit:${audit_password}@127.0.0.1:15432/milai"
+          } >> "$GITHUB_ENV"
+
+      - name: Install locked runtime
+        working-directory: runtime
+        run: uv sync --frozen --dev --python 3.11
+
+      - name: Static verification
+        working-directory: runtime
+        run: |
+          uv run ruff format --check src tests migrations
+          uv run ruff check src tests migrations
+          uv run mypy
+
+      - name: Frozen Logical Architecture release gate
+        env:
+          MILAI_ARCHITECTURE_LOCK_SCOPE: bundle
+        run: |
+          runtime/.venv/bin/ruff format --check architecture/v1.0/scripts architecture/v1.0/tests
+          runtime/.venv/bin/ruff check architecture/v1.0/scripts architecture/v1.0/tests
+          runtime/.venv/bin/python architecture/v1.0/scripts/validate_bundle.py
+          runtime/.venv/bin/python architecture/v1.0/scripts/verify_lock.py \
+            --scope bundle --mode release \
+            --expected-manifest-sha256 ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e
+          runtime/.venv/bin/python -m unittest discover -s architecture/v1.0/tests -v
+
+      - name: Runtime tests with real PostgreSQL roles
+        working-directory: runtime
+        env:
+          MILAI_BLOB_ROOT: ${{ runner.temp }}/milai-blobs
+          MILAI_TENANT_ID: 11111111-1111-4111-8111-111111111111
+          MILAI_LOCAL_ACTOR_ID: aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa
+          MILAI_API_TOKEN: ci-runtime-token-derived-for-this-run-only
+          MILAI_CAUSAL_TOKEN_SECRET: ci-causal-token-secret-is-distinct-per-run
+          MILAI_BIND_HOST: 127.0.0.1
+          MILAI_BIND_PORT: "18080"
+        run: uv run pytest -q
+
+      - name: Isolated OSPC verification
+        run: |
+          runtime/.venv/bin/ruff format --check research/ospc
+          runtime/.venv/bin/ruff check research/ospc
+          runtime/.venv/bin/mypy --strict research/ospc
+          runtime/.venv/bin/python -m unittest discover -s research/ospc/tests -v
+          runtime/.venv/bin/python -m research.ospc.run_benchmark
+
+      - name: Build and inspect allowlisted Runtime artifacts
+        working-directory: runtime
+        run: |
+          uv run milai-ops init --env-file .env
+          uv build
+          PYTHONPATH=../scripts uv run pytest -q ../tests/test_release_safety.py
+          uv run python ../scripts/scan_ua_secrets.py --env-file .env
+
+  agent-integrations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [python-client, mcp, langgraph, autogen, hooks]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+
+      - name: Verify locked Agent integration package
+        working-directory: integrations/${{ matrix.package }}
+        run: |
+          uv sync --frozen --dev --python 3.11
+          uv run ruff format --check src tests
+          uv run ruff check src tests
+          uv run mypy
+          uv run pytest -q
+          uv build
+
+      - name: Deterministic Agent efficiency regression
+        if: matrix.package == 'python-client'
+        working-directory: integrations/python-client
+        run: |
+          uv run python ../../evals/agent_efficiency/benchmark.py \
+            --output "${RUNNER_TEMP}/milai-agent-efficiency.json"
+
+      - name: Provider evidence protocol gate (no provider network or credential)
+        if: matrix.package == 'python-client'
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y iproute2 nftables slirp4netns util-linux
+          uv sync --frozen --dev --python 3.11 --project runtime
+          runtime/.venv/bin/ruff format --check \
+            evals/agent_efficiency/provider_ab.py \
+            evals/agent_efficiency/provider_sandbox_exec.py \
+            evals/agent_efficiency/test_provider_ab.py
+          runtime/.venv/bin/ruff check \
+            evals/agent_efficiency/provider_ab.py \
+            evals/agent_efficiency/provider_sandbox_exec.py \
+            evals/agent_efficiency/test_provider_ab.py
+          PYTHONPATH=integrations/python-client/src \
+            runtime/.venv/bin/mypy --strict \
+            evals/agent_efficiency/provider_ab.py \
+            evals/agent_efficiency/provider_sandbox_exec.py
+          sudo env PYTHONDONTWRITEBYTECODE=1 \
+            PYTHONPATH=.:integrations/python-client/src \
+            "$(pwd)/runtime/.venv/bin/pytest" -q -p no:cacheprovider \
+            evals/agent_efficiency/test_provider_ab.py \
+            evals/agent_efficiency/test_benchmark.py \
+            tests/test_release_safety.py

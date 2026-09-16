@@ -1,0 +1,381 @@
+{
+  "status": "G3B_COMPLETED_NO_NET_SAVED_VALUE_DEMONSTRATED",
+  "reviewer": "root Codex semantic review; not independent human review",
+  "original_followup_denominator": 12,
+  "prior_saved": 8,
+  "prior_not_saved": 4,
+  "prior_failed_or_unknown_saves": 0,
+  "followup_pass": 12,
+  "observed_recurrence": 0,
+  "observed_negative_transfer": 0,
+  "followup_updates": 2,
+  "rows": [
+    {
+      "origin": "g2-p1-a0",
+      "origin_arm": "A0",
+      "origin_save_status": "NOT_ATTEMPTED",
+      "followup_session": "g3a-g2-p1-a0",
+      "mode": "isolated content/artifact copy",
+      "origin_versions": [
+        1,
+        1
+      ],
+      "followup_versions": [
+        1,
+        1
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 37536,
+      "elapsed_seconds": 58.51623925101012,
+      "tool_calls": 2,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 75043
+    },
+    {
+      "origin": "g2-p1-a1",
+      "origin_arm": "A1",
+      "origin_save_status": "COMMITTED_OBSERVED_HEAD",
+      "followup_session": "g3b-g2-p1-a1",
+      "mode": "same original task_ref",
+      "origin_versions": [
+        1,
+        2
+      ],
+      "followup_versions": [
+        2,
+        2
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 40247,
+      "elapsed_seconds": 68.26498183608055,
+      "tool_calls": 3,
+      "tool_failures": 1,
+      "origin_plus_followup_tokens": 123302
+    },
+    {
+      "origin": "g2-p2-a0",
+      "origin_arm": "A0",
+      "origin_save_status": "NOT_ATTEMPTED",
+      "followup_session": "g3a-g2-p2-a0",
+      "mode": "isolated content/artifact copy",
+      "origin_versions": [
+        1,
+        1
+      ],
+      "followup_versions": [
+        1,
+        1
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 38589,
+      "elapsed_seconds": 63.148208612110466,
+      "tool_calls": 2,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 120988
+    },
+    {
+      "origin": "g2-p2-a1",
+      "origin_arm": "A1",
+      "origin_save_status": "COMMITTED_OBSERVED_HEAD",
+      "followup_session": "g3b-g2-p2-a1",
+      "mode": "same original task_ref",
+      "origin_versions": [
+        1,
+        2
+      ],
+      "followup_versions": [
+        2,
+        3
+      ],
+      "followup_save_status": "COMMITTED_OBSERVED_HEAD",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 203189,
+      "elapsed_seconds": 129.6317737570498,
+      "tool_calls": 11,
+      "tool_failures": 2,
+      "origin_plus_followup_tokens": 346260
+    },
+    {
+      "origin": "g2-p3-a0",
+      "origin_arm": "A0",
+      "origin_save_status": "NOT_ATTEMPTED",
+      "followup_session": "g3b-g2-p3-a0",
+      "mode": "same original task_ref",
+      "origin_versions": [
+        1,
+        1
+      ],
+      "followup_versions": [
+        1,
+        1
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 38184,
+      "elapsed_seconds": 96.83558277902193,
+      "tool_calls": 3,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 75901
+    },
+    {
+      "origin": "g2-p3-a1",
+      "origin_arm": "A1",
+      "origin_save_status": "COMMITTED_OBSERVED_HEAD",
+      "followup_session": "g3b-g2-p3-a1",
+      "mode": "same original task_ref",
+      "origin_versions": [
+        1,
+        2
+      ],
+      "followup_versions": [
+        2,
+        3
+      ],
+      "followup_save_status": "COMMITTED_OBSERVED_HEAD",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 100155,
+      "elapsed_seconds": 122.28733780793846,
+      "tool_calls": 5,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 187912
+    },
+    {
+      "origin": "g2-p4-a0",
+      "origin_arm": "A0",
+      "origin_save_status": "NOT_ATTEMPTED",
+      "followup_session": "g3b-g2-p4-a0",
+      "mode": "same original task_ref",
+      "origin_versions": [
+        1,
+        1
+      ],
+      "followup_versions": [
+        1,
+        1
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 38739,
+      "elapsed_seconds": 95.79908770602196,
+      "tool_calls": 3,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 79685
+    },
+    {
+      "origin": "g2-p4-a1",
+      "origin_arm": "A1",
+      "origin_save_status": "COMMITTED_OBSERVED_HEAD",
+      "followup_session": "g3b-g2-p4-a1",
+      "mode": "same original task_ref",
+      "origin_versions": [
+        1,
+        2
+      ],
+      "followup_versions": [
+        2,
+        2
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 83230,
+      "elapsed_seconds": 179.67445605108514,
+      "tool_calls": 5,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 168094
+    },
+    {
+      "origin": "g2-p5-a0",
+      "origin_arm": "A0",
+      "origin_save_status": "COMMITTED_OBSERVED_HEAD",
+      "followup_session": "g3b-g2-p5-a0",
+      "mode": "same original task_ref",
+      "origin_versions": [
+        1,
+        2
+      ],
+      "followup_versions": [
+        2,
+        2
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 41627,
+      "elapsed_seconds": 59.32266411790624,
+      "tool_calls": 3,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 120328
+    },
+    {
+      "origin": "g2-p5-a1",
+      "origin_arm": "A1",
+      "origin_save_status": "COMMITTED_OBSERVED_HEAD",
+      "followup_session": "g3b-g2-p5-a1",
+      "mode": "same original task_ref",
+      "origin_versions": [
+        1,
+        2
+      ],
+      "followup_versions": [
+        2,
+        2
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 43549,
+      "elapsed_seconds": 69.94292692211457,
+      "tool_calls": 3,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 231872
+    },
+    {
+      "origin": "g2-p6-a0",
+      "origin_arm": "A0",
+      "origin_save_status": "COMMITTED_OBSERVED_HEAD",
+      "followup_session": "g3a-g2-p6-a0",
+      "mode": "isolated content/artifact copy",
+      "origin_versions": [
+        1,
+        2
+      ],
+      "followup_versions": [
+        1,
+        1
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 41760,
+      "elapsed_seconds": 50.310474899131805,
+      "tool_calls": 3,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 150935
+    },
+    {
+      "origin": "g2-p6-a1",
+      "origin_arm": "A1",
+      "origin_save_status": "COMMITTED_OBSERVED_HEAD",
+      "followup_session": "g3b-g2-p6-a1",
+      "mode": "same original task_ref",
+      "origin_versions": [
+        1,
+        2
+      ],
+      "followup_versions": [
+        2,
+        2
+      ],
+      "followup_save_status": "NOT_ATTEMPTED",
+      "first_judgment": "PASS",
+      "task_completion": "PASS",
+      "recurrence": false,
+      "negative_transfer": false,
+      "collateral_damage": false,
+      "total_input_output_tokens": 44016,
+      "elapsed_seconds": 74.362131183967,
+      "tool_calls": 3,
+      "tool_failures": 0,
+      "origin_plus_followup_tokens": 207734
+    }
+  ],
+  "descriptive_origin_arm_totals": {
+    "A0": {
+      "chains": 6,
+      "prior_saved": 2,
+      "followup_pass": 6,
+      "followup_tokens": 236435,
+      "followup_seconds": 423.93225736520253,
+      "origin_plus_followup_tokens": 622880
+    },
+    "A1": {
+      "chains": 6,
+      "prior_saved": 6,
+      "followup_pass": 6,
+      "followup_tokens": 514386,
+      "followup_seconds": 644.1636075582355,
+      "origin_plus_followup_tokens": 1265174
+    }
+  },
+  "uv_actual_update_subset": {
+    "denominator": 1,
+    "branches": [
+      {
+        "session": "g3b-software-u",
+        "total_input_output_tokens": 38713,
+        "elapsed_seconds": 92.04191642813385,
+        "completed_tool_calls": 4,
+        "save_status": "NOT_ATTEMPTED",
+        "state_versions": [
+          1,
+          1
+        ]
+      },
+      {
+        "session": "g3b-software-v",
+        "total_input_output_tokens": 43457,
+        "elapsed_seconds": 96.34188113897108,
+        "completed_tool_calls": 3,
+        "save_status": "NOT_ATTEMPTED",
+        "state_versions": [
+          1,
+          1
+        ]
+      }
+    ],
+    "task_pass_both": true,
+    "net_benefit_observed": false,
+    "interpretation": "V one fewer tool action but higher raw tokens and wall time; both can reread original permitted sources. Same actual empty task-artifact set, temporary conversation/cache removed; real branch versions1 reference old1/new2 content. Applies only to one actual saved update, not all8G2updates."
+  },
+  "limitations": [
+    "Origin-arm chain totals include differing saved content and task artifacts, three A0 continuations use isolated copies; descriptive strategy histories, not isolated causal effect of saving",
+    "Two freshA0 continuations of A1 origins saved again: retrieval-status maintenance and boundary-test expansion; no demonstrated correctness gain",
+    "Shell no-match exit1 and missing python/python3 retained as three failed actions across two sessions; models recovered using available tools",
+    "Initial input only; later actual request inputs UNOBSERVED",
+    "G1two original future tasks also completed as reported separately; extra H1three branches excluded from this12-origin denominator"
+  ]
+}

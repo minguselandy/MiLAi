@@ -1,0 +1,249 @@
+schema_version: "1"
+goal_id: "DG-10"
+goal_contract_version: "0.3.1"
+contract_status: "CURRENT_STATE_RELEASE_STOPPED_OPEN_P1_BELOW_TARGET"
+as_of: "2026-08-22"
+
+current_state_evidence:
+  path: "docs/reports/DG-10-final-quality-state-candidate.1-2026-08-22.json"
+  sha256: "a05cbc6f192968dea19003f01ff6dce690eb8a1988e76266d39103d2caa5d6af"
+  quality_outcome: "BELOW_TARGET"
+  full_test_execution: "DENIED_NOT_RUN"
+  test_labels_or_outputs_opened: false
+
+controlled_review_evidence:
+  path: "docs/reviews/DG-10-sol-final-audit-disposition-candidate.1-2026-08-22.json"
+  sha256: "d73147e8df49ca27056a878a3ac9bcf0bdcb49668018146abb4ce2a065dc523f"
+  review_candidate_decision: "REVISE_NO_GO_EVIDENCE"
+  open_p0_count: 0
+  open_p1_count: 2
+  crg_02: "NO_GO"
+  acceptance_authorized: false
+
+boundaries:
+  provider_under_test: "self-hosted-vllm-only"
+  external_provider_gate: "OE-F06_OPEN_PARKED"
+  codex_role: "ADVERSARIAL_EVIDENCE_AUDITOR_ONLY"
+  runtime_status: "0.1.x_CANDIDATE"
+  schema_status: "0.1.x_EXPERIMENTAL_NO_GO_FOR_FREEZE"
+
+allowed_stage_states:
+  - "NOT_STARTED"
+  - "AUTHOR_CANDIDATE"
+  - "REVIEW_REQUIRED"
+  - "ACCEPTED"
+  - "REVISE"
+  - "NOT_APPLICABLE_WITH_RATIONALE"
+
+quality_outcomes:
+  - "TARGET_MET"
+  - "BELOW_TARGET"
+  - "CHARACTERIZED_ONLY"
+  - "NOT_APPLICABLE"
+
+gate_catalog:
+  package:
+    - "MCG-00"
+    - "MCG-01"
+    - "MCG-02"
+  host:
+    - "OWG-00"
+    - "OWG-01"
+    - "OWG-02"
+    - "OWG-03"
+  local_provider:
+    - "PVL-00"
+    - "PVL-01"
+    - "PVL-02"
+    - "PVL-03"
+    - "PVL-04"
+    - "PVL-05"
+  benchmark:
+    - "BMG-00"
+    - "BMG-00A"
+    - "BMG-01"
+    - "BMG-02"
+    - "BMG-03"
+    - "BMG-04"
+    - "BMG-05"
+  controlled_review:
+    - "CRG-00"
+    - "CRG-01"
+    - "CRG-02"
+  external_provider_parked:
+    - "PVG-00"
+    - "PVG-01"
+    - "PVG-02"
+    - "PVG-03"
+    - "PVG-04"
+
+stages:
+  DG10-L1:
+    name: "PACKAGE_VERIFIED"
+    requires_all_gates:
+      - "MCG-00"
+      - "MCG-01"
+      - "MCG-02"
+    current_state: "AUTHOR_CANDIDATE"
+
+  DG10-L2:
+    name: "HOST_ISOLATED"
+    depends_on_stages:
+      - "DG10-L1"
+    requires_all_gates:
+      - "OWG-00"
+      - "OWG-01"
+      - "OWG-02"
+      - "OWG-03"
+    current_state: "REVIEW_REQUIRED"
+
+  DG10-L3:
+    name: "LOCAL_PROVIDER_VERIFIED"
+    depends_on_stages:
+      - "DG10-L1"
+      - "DG10-L2"
+    requires_all_gates:
+      - "PVL-00"
+      - "PVL-01"
+      - "PVL-02"
+      - "PVL-03"
+      - "PVL-04"
+      - "BMG-01"
+    produces_gate_on_acceptance: "PVL-05"
+    current_state: "REVIEW_REQUIRED"
+
+  DG10-L4:
+    name: "QUALITY_CHARACTERIZED"
+    depends_on_stages:
+      - "DG10-L3"
+    required_gate_states:
+      BMG-00:
+        - "ACCEPTED"
+      BMG-00A:
+        - "ACCEPTED"
+      BMG-02:
+        - "ACCEPTED"
+        - "NOT_APPLICABLE_WITH_RATIONALE"
+      BMG-03:
+        - "ACCEPTED"
+      BMG-04:
+        - "ACCEPTED"
+      BMG-05:
+        - "ACCEPTED"
+    requires_quality_outcome: true
+    current_state: "REVISE"
+    current_quality_outcome: "BELOW_TARGET"
+
+  DG10-L5:
+    name: "INDEPENDENTLY_ACCEPTED"
+    depends_on_stages:
+      - "DG10-L1"
+      - "DG10-L2"
+      - "DG10-L3"
+      - "DG10-L4"
+    requires_all_gates:
+      - "CRG-00"
+      - "CRG-01"
+      - "CRG-02"
+    current_state: "REVISE"
+    current_review_outcome: "OPEN_P1_NOT_INDEPENDENTLY_ACCEPTED"
+
+claims:
+  MCP_PACKAGE_VERIFIED:
+    requires_accepted_stages:
+      - "DG10-L1"
+
+  OPENWORKER_HOST_ISOLATED:
+    requires_accepted_stages:
+      - "DG10-L1"
+      - "DG10-L2"
+
+  LOCAL_SAME_MODEL_AB:
+    requires_accepted_stages:
+      - "DG10-L3"
+    requires_all_gates:
+      - "PVL-00"
+      - "PVL-01"
+      - "PVL-02"
+      - "PVL-03"
+
+  MCP_INTEGRATION_PASS:
+    requires_accepted_stages:
+      - "DG10-L1"
+    requires_all_gates:
+      - "BMG-01"
+
+  LOCAL_PROVIDER_VERIFIED:
+    requires_accepted_stages:
+      - "DG10-L1"
+      - "DG10-L2"
+      - "DG10-L3"
+
+  QUALITY_CHARACTERIZED:
+    requires_accepted_stages:
+      - "DG10-L4"
+    permits_quality_outcomes:
+      - "TARGET_MET"
+      - "BELOW_TARGET"
+      - "CHARACTERIZED_ONLY"
+      - "NOT_APPLICABLE"
+
+  MODEL_QUALITY_BELOW_TARGET:
+    requires_accepted_stages:
+      - "DG10-L4"
+    requires_quality_outcome: "BELOW_TARGET"
+    does_not_invalidate_stages:
+      - "DG10-L1"
+      - "DG10-L2"
+      - "DG10-L3"
+
+  LOCAL_VLLM_MCP_AGENT_CANDIDATE:
+    requires_accepted_stages:
+      - "DG10-L1"
+      - "DG10-L2"
+      - "DG10-L3"
+      - "DG10-L4"
+      - "DG10-L5"
+    requires_quality_outcome: "TARGET_MET"
+    requires_external_provider_gate: false
+
+  EXTERNAL_PROVIDER_BETA:
+    requires_all_gates:
+      - "PVG-00"
+      - "PVG-01"
+      - "PVG-02"
+      - "PVG-03"
+      - "PVG-04"
+    requires_oe_f06_state: "CLOSED"
+    current_status: "IMPOSSIBLE_WHILE_OE_F06_OPEN"
+
+claim_policy:
+  unknown_claim: "DENY"
+  missing_gate: "DENY"
+  author_candidate_as_accepted: "DENY"
+  review_required_as_accepted: "DENY"
+  codex_review_candidate_as_acceptance: "DENY"
+  benchmark_not_applicable_without_rationale: "DENY"
+  downstream_failure_erases_unaffected_accepted_stage: "DENY"
+  frozen_quality_contract_preserve_claims_interpretation: "PRESERVE_UNAFFECTED_AUTHOR_EVIDENCE_AND_STAGE_STATE_ONLY"
+  preserved_unaccepted_stage_as_claim: "DENY"
+  candidate_byte_drift:
+    action: "INVALIDATE_DEPENDENT_STAGE_AND_DOWNSTREAM"
+    preserve_unaffected_historical_acceptance: true
+
+aggregate_current_status:
+  claim: "LOCAL_VLLM_MCP_AGENT_CANDIDATE"
+  allowed: false
+  reasons:
+    - "DG10-L1_NOT_INDEPENDENTLY_ACCEPTED"
+    - "DG10-L2_REQUIRES_CONTRACT_REVERIFY"
+    - "DG10-L3_REQUIRES_CONTRACT_REVERIFY"
+    - "DG10-L4_REVISE_BELOW_TARGET"
+    - "BMG-02_LONG_MEMORY_BELOW_TARGET"
+    - "BMG-03_BFCL_BELOW_TARGET"
+    - "BMG-04_SERVING_NOT_ACCEPTED"
+    - "TIER2_HUMAN_AUDIT_NOT_COMPLETED"
+    - "FULL_TEST_DENIED_NOT_RUN"
+    - "DG10-L5_REVISE_OPEN_P1"
+    - "CRG-02_NO_GO"
+    - "SOL_REVIEW_TWO_OPEN_P1"

@@ -1,0 +1,49 @@
+{
+  "schema": "milai.dg10.identity-supersession.v2",
+  "candidate_id": "candidate.4",
+  "date": "2026-08-22",
+  "status": "SUPERSEDED_AFTER_XHIGH_REVISE_BEFORE_TARGET_MODEL_CALL",
+  "superseded_identity_set": {
+    "source_inventory_path": "docs/reports/DG-10-candidate-source-inventory-candidate.4.2-2026-08-22.json",
+    "source_inventory_file_sha256": "2a7b700f53ca0aed1e26a08e7b4743d9b98d634f21c8b28692d9227fef705c18",
+    "source_inventory_root_sha256": "d6ad187df25dbe7924b3bb96dbec68a8496c8d29d9ede48b710132ca635e373d",
+    "environment_identity_file_sha256": "db4a26e5f9aaa8ae717b25eb0d5e5d073f6c09dd977d0c70f231d711fcefe65c",
+    "model_identity_file_sha256": "7886265e4b27001d84ffb24611a452279d76189c5b322abfbcbee68fa96e3c9d",
+    "authorization_identities_file_sha256": "2f1cd5783462761b5ca495531bd8733b10c059d03d7060e43177018e40180b87",
+    "review_bundle_receipt_sha256": "786dd6d5263633ad78b5a70d8bee9e7b01df114ee5581716ca493457381262a7",
+    "ai_revise_receipt_sha256": "96144d4bafe21808a3ea1127b259819f8f0a3711c12df67439a6889f9d48263b"
+  },
+  "active_identity_set": {
+    "source_inventory_path": "docs/reports/DG-10-candidate-source-inventory-candidate.4.3-2026-08-22.json",
+    "source_inventory_file_sha256": "263e6ac3e49caa81968d25445c39c29559222c9e4aa04cd2f39e97a30de08381",
+    "source_inventory_root_sha256": "788a5ec48dc6b70582695aa8943c30ee07b812e06f4b4e9246804495ac9b06a9",
+    "environment_identity_file_sha256": "a896d951ca4b368cd9fd197b88da33e3a917d27bcf14c945772f9ec2fb7391ac",
+    "model_identity_file_sha256": "7886265e4b27001d84ffb24611a452279d76189c5b322abfbcbee68fa96e3c9d",
+    "authorization_identities_file_sha256": "319d079b5fbd87894c56f28eaa0092b69d4b720bab78378ed6016f68d8d6916c",
+    "active_policy_sha256": "55b9359b26ba45dbc8357587fe7febbb315e130ec0de604bf98d5c5515b8a598",
+    "reasoning_effort": "xhigh"
+  },
+  "closed_revise_finding_targets": [
+    "DG10-C4-AI-013",
+    "DG10-C4-AI-014",
+    "DG10-C4-AI-015",
+    "DG10-C4-AI-016",
+    "DG10-C4-AI-017",
+    "DG10-C4-AI-018"
+  ],
+  "reason_codes": [
+    "FIXED_R0_R2_IMPORTER_AGGREGATE_AND_RAW_EVENT_REPLAY_ADDED",
+    "DEDICATED_TWO_THREAD_XHIGH_TEST_ACCESS_IMPORTER_ADDED",
+    "EXACT_24_CALL_SLOT_PREALLOCATION_AND_ATOMIC_CONSUMPTION_ADDED",
+    "MISSING_ALEMBIC_TEMPLATE_ADDED_TO_SOURCE_IDENTITY",
+    "SUCCESSOR_XHIGH_ACCEPTANCE_AND_CLAIM_POLICY_AMENDMENTS_FROZEN",
+    "REBUILT_RUNTIME_WHEEL_BYTES_RETAINED_IN_R2_CAPTURE",
+    "CANDIDATE3_FINDING_SEMANTICS_MATERIALIZED_BYTE_EXACTLY"
+  ],
+  "historical_artifacts_overwritten": false,
+  "accepted_ai_audits_from_superseded_identity": 0,
+  "target_model_completion_calls_before_supersession": 0,
+  "test_access_before_supersession": false,
+  "release_authorized_before_supersession": false,
+  "active_identity_suffix": "candidate.4.3"
+}

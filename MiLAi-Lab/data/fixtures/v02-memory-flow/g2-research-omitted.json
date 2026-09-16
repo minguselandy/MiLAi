@@ -1,0 +1,12 @@
+{
+  "case_id": "g2-research-omitted", "domain": "research_brief", "initial_type": "omitted",
+  "development_status": "constructed-pilot-unrun",
+  "task": "继续琥珀方案简报，说明观察到的提升能归因到什么，并提出后续验证。下次据此讨论实验安排。资料在 sources/，也可查询项目记忆。",
+  "followup": "继续琥珀方案实验安排，列出为了识别各组件作用还缺少的对照。资料在 sources/。",
+  "initial_payload": {"note": "琥珀方案在60个构造查询上观察到响应时间降低15%；样本小，不证明生产效果。后续讨论验证安排。", "sources": ["sources/experiment.txt"]},
+  "sources": {
+    "experiment.txt": "琥珀方案实验：在60个构造查询上同时启用缓存与新的排序器，响应时间降低15%。没有仅缓存或仅排序器的对照；因此结果只支持组合方案的观察，不单独识别任一组件的贡献。",
+    "background.txt": "排序算法通常会影响速度和质量；一般背景不能替代本实验缺失的组件对照。"
+  },
+  "evaluation": {"required": ["15% on 60 constructed queries", "cache plus ranker combined", "cannot isolate individual component contribution", "component controls proposed"], "correct_initial_facts": ["60", "15%", "production limitation"], "key_source": "experiment.txt", "save_value": "Attribution boundary useful for next experiment planning"}
+}

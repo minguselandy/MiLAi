@@ -1,0 +1,139 @@
+{
+  "status": "G3A_COMPLETED_KEEP_A0",
+  "reviewer": "root Codex semantic review",
+  "pairs": [
+    {
+      "pair": 1,
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      },
+      "arms": {
+        "a0": {
+          "session": "g3a-g2-p1-a0",
+          "total_input_output_tokens": 37536,
+          "elapsed_seconds": 58.51623925101012,
+          "completed_tool_calls": 2,
+          "save_status": "NOT_ATTEMPTED",
+          "state_versions": [
+            1,
+            1
+          ],
+          "host_opportunity_count": 0
+        },
+        "h1": {
+          "session": "g3a-g2-p1-h1",
+          "total_input_output_tokens": 37574,
+          "elapsed_seconds": 59.07016860391013,
+          "completed_tool_calls": 2,
+          "save_status": "NOT_ATTEMPTED",
+          "state_versions": [
+            1,
+            1
+          ],
+          "host_opportunity_count": 1
+        }
+      }
+    },
+    {
+      "pair": 2,
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      },
+      "arms": {
+        "a0": {
+          "session": "g3a-g2-p2-a0",
+          "total_input_output_tokens": 38589,
+          "elapsed_seconds": 63.148208612110466,
+          "completed_tool_calls": 2,
+          "save_status": "NOT_ATTEMPTED",
+          "state_versions": [
+            1,
+            1
+          ],
+          "host_opportunity_count": 0
+        },
+        "h1": {
+          "session": "g3a-g2-p2-h1",
+          "total_input_output_tokens": 38622,
+          "elapsed_seconds": 58.52813942381181,
+          "completed_tool_calls": 2,
+          "save_status": "NOT_ATTEMPTED",
+          "state_versions": [
+            1,
+            1
+          ],
+          "host_opportunity_count": 1
+        }
+      }
+    },
+    {
+      "pair": 6,
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      },
+      "arms": {
+        "a0": {
+          "session": "g3a-g2-p6-a0",
+          "total_input_output_tokens": 41760,
+          "elapsed_seconds": 50.310474899131805,
+          "completed_tool_calls": 3,
+          "save_status": "NOT_ATTEMPTED",
+          "state_versions": [
+            1,
+            1
+          ],
+          "host_opportunity_count": 0
+        },
+        "h1": {
+          "session": "g3a-g2-p6-h1",
+          "total_input_output_tokens": 42060,
+          "elapsed_seconds": 58.138557410100475,
+          "completed_tool_calls": 3,
+          "save_status": "NOT_ATTEMPTED",
+          "state_versions": [
+            1,
+            1
+          ],
+          "host_opportunity_count": 1
+        }
+      }
+    }
+  ],
+  "task_pass": {
+    "A0": 3,
+    "H1": 3,
+    "denominator_per_arm": 3
+  },
+  "first_judgment_net_wins": 0,
+  "collateral_damage": {
+    "all": 0,
+    "denominator": 6,
+    "modified": 0
+  },
+  "median_paired_raw_input_output_token_ratio": 1.0010123614663256,
+  "controls_additional": "Identical normal user followup and copied artifact hashes in all3pairs; H1 present exactly once in initial assembled input, absent A0 and user prompt. Original bootstrap retained.",
+  "selection": "No net win; reject H1 per preregistered rule. G2 also rejected A1. Freeze A0 for new-family validation.",
+  "limits": [
+    "Constructed developmental representative cases; not blind new-family confirmation",
+    "Initial assembled input observed; later actual request input unobserved",
+    "Token tracking not proven raw-token hard cap"
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "status": "G2_COMPLETED_KEEP_A0",
+  "rows": [
+    {
+      "pair": 1,
+      "case": "g2-software-omitted",
+      "A0_tokens": 37507,
+      "A1_tokens": 83055,
+      "A0_seconds": 63.545,
+      "A1_seconds": 86.389,
+      "A0_tools": 2,
+      "A1_tools": 4,
+      "A0_updated": false,
+      "A1_updated": true,
+      "first_judgment_correct": [
+        true,
+        true
+      ],
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      }
+    },
+    {
+      "pair": 2,
+      "case": "g2-research-correct",
+      "A0_tokens": 82399,
+      "A1_tokens": 143071,
+      "A0_seconds": 104.025,
+      "A1_seconds": 159.046,
+      "A0_tools": 5,
+      "A1_tools": 6,
+      "A0_updated": false,
+      "A1_updated": true,
+      "first_judgment_correct": [
+        true,
+        true
+      ],
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      }
+    },
+    {
+      "pair": 3,
+      "case": "g2-software-correct",
+      "A0_tokens": 37717,
+      "A1_tokens": 87757,
+      "A0_seconds": 62.919,
+      "A1_seconds": 96.815,
+      "A0_tools": 2,
+      "A1_tools": 4,
+      "A0_updated": false,
+      "A1_updated": true,
+      "first_judgment_correct": [
+        true,
+        true
+      ],
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      }
+    },
+    {
+      "pair": 4,
+      "case": "g2-software-outdated",
+      "A0_tokens": 40946,
+      "A1_tokens": 84864,
+      "A0_seconds": 78.341,
+      "A1_seconds": 118.472,
+      "A0_tools": 2,
+      "A1_tools": 4,
+      "A0_updated": false,
+      "A1_updated": true,
+      "first_judgment_correct": [
+        true,
+        true
+      ],
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      }
+    },
+    {
+      "pair": 5,
+      "case": "g2-research-omitted",
+      "A0_tokens": 78701,
+      "A1_tokens": 188323,
+      "A0_seconds": 131.872,
+      "A1_seconds": 152.577,
+      "A0_tools": 6,
+      "A1_tools": 9,
+      "A0_updated": true,
+      "A1_updated": true,
+      "first_judgment_correct": [
+        true,
+        true
+      ],
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      }
+    },
+    {
+      "pair": 6,
+      "case": "g2-research-outdated",
+      "A0_tokens": 109175,
+      "A1_tokens": 163718,
+      "A0_seconds": 158.322,
+      "A1_seconds": 156.17,
+      "A0_tools": 6,
+      "A1_tools": 9,
+      "A0_updated": true,
+      "A1_updated": true,
+      "first_judgment_correct": [
+        true,
+        true
+      ],
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      }
+    },
+    {
+      "pair": 7,
+      "case": "g2-software-expand",
+      "A0_tokens": 37136,
+      "A1_tokens": 39331,
+      "A0_seconds": 40.696,
+      "A1_seconds": 60.12,
+      "A0_tools": 2,
+      "A1_tools": 2,
+      "A0_updated": false,
+      "A1_updated": false,
+      "first_judgment_correct": [
+        true,
+        true
+      ],
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      }
+    },
+    {
+      "pair": 8,
+      "case": "g2-research-expand",
+      "A0_tokens": 37387,
+      "A1_tokens": 56557,
+      "A0_seconds": 49.514,
+      "A1_seconds": 60.926,
+      "A0_tools": 2,
+      "A1_tools": 4,
+      "A0_updated": false,
+      "A1_updated": false,
+      "first_judgment_correct": [
+        true,
+        true
+      ],
+      "controls": {
+        "same_fixture": true,
+        "same_code": true,
+        "same_product_pin": true,
+        "same_initial_payload": true,
+        "separate_state": true,
+        "separate_project": true,
+        "same_model_metadata": true
+      }
+    }
+  ],
+  "median_pair_token_ratio": 1.904451509029738,
+  "correct_memory_median_ratio": 2.0315211567584797,
+  "A0_total_tokens": 460968,
+  "A1_total_tokens": 846676,
+  "A0_total_seconds": 689.234,
+  "A1_total_seconds": 890.515,
+  "net_first_judgment_wins": 0,
+  "collateral_damage_observed": 0,
+  "raw_total_tokens_over_nominal_tracking_120k": [
+    "g2-p2-a1",
+    "g2-p5-a1",
+    "g2-p6-a1"
+  ],
+  "token_limit_caveat": "The configured tracker is not a proven hard cap on raw input+output usage; weighted/cache and response-boundary accounting not observed. Wall and tool watchdog remained below thresholds.",
+  "source_input_recovery_rate": null,
+  "review_source": "Root Codex semantic review, no independent human validation; see per-session evaluation.json"
+}

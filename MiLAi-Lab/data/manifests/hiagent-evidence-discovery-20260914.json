@@ -1,0 +1,583 @@
+{
+  "goal_id": "MILA-HIAGENT-EVIDENCE-DISCOVERY-01",
+  "kind": "RESEARCH_PROTOTYPE",
+  "status": "COMPLETED_BOUNDED_DISCOVERY",
+  "evidence_root": "/cra/memory/mx_memory/evidence/hiagent-evidence-discovery-20260914-jAPC0Z",
+  "trial_ceiling": 12,
+  "generation_ceiling": 768,
+  "revision_ceiling": 2,
+  "allocated_trials": 9,
+  "allocated_generations": 512,
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "output_cap": 4096,
+  "first_wave": {
+    "task": "cancel-async-tasks",
+    "order": [
+      "EVIDENCE_0",
+      "H_ONCE",
+      "REVIEW"
+    ],
+    "max_calls_per_trial": 64,
+    "timeout_multiplier": 1,
+    "root": "/cra/memory/mx_memory/evidence/hiagent-evidence-discovery-20260914-jAPC0Z/cancel-v0",
+    "method_versions": {
+      "H_ONCE": "hiagent-once-v0.1",
+      "EVIDENCE_0": "evidence-maintenance-v0.1",
+      "REVIEW": "review-v0.1"
+    },
+    "input_strategies": {
+      "REVIEW": "Existing optional note and same-call review; common fitting history and existing explicit workset controls",
+      "H_ONCE": "Current segment details; cached old summaries by source/policy identity; explicit historical expansion",
+      "EVIDENCE_0": "Current evidence record plus current segment details; old segments indexed, only expanded on request; new raw visible observations retained"
+    },
+    "policy_sha256": {
+      "configs/policies/evidence/actor.txt": "797b78cb8d5369c11b8277f0c20ed19e1b2cfeb32ab860d6beb3525f00408cfe",
+      "configs/policies/evidence/evidence_0.txt": "f78e853982a043f6a410ff2ca0846a4ae46b40c986859f4bcd55f63e72b4fbf1",
+      "configs/policies/hiagent/summary.txt": "f2a876a5903407c725ca4f371fbb65681be2b66728c4fb086d74cfa76b8e4c10",
+      "configs/policies/hiagent/actor.txt": "95169600ab85ad9038d3505f49f2d37691d1373eac8dfa5acec6d7b57dc15ee6"
+    }
+  },
+  "trials": [
+    {
+      "wave": "cancel-review-rescore",
+      "arm": "REVIEW_ARTIFACT",
+      "trial": "cancel-review-artifact-rescore",
+      "task": "terminal-bench/cancel-async-tasks",
+      "raw_reward": {
+        "reward": 0.0
+      },
+      "scoring_valid": true,
+      "native_tests": "2 failed, 4 passed in 10.87s",
+      "exception": null,
+      "stop": null,
+      "costs": {},
+      "pending": [],
+      "total_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_seconds": null,
+      "wall_seconds": 171.70204279804602,
+      "phases": {
+        "environment_setup": 1.80191,
+        "agent_setup": 5.846182,
+        "agent_execution": 0.103898,
+        "verifier": 151.982006
+      },
+      "method_events": {},
+      "record_delivered_actor_calls": 0,
+      "artifacts": {
+        "trials/cancel-review-artifact-rescore/artifacts/app/run.py": "7f45fb524ef2b0e5106c39e7be5fea20a9319a0f77fe2cebd01f3f7b16dfd82e"
+      }
+    },
+    {
+      "wave": "cancel-revision-control",
+      "arm": "INCREMENTAL",
+      "trial": "cancel-async-tasks-0-incremental",
+      "task": "terminal-bench/cancel-async-tasks",
+      "raw_reward": {
+        "reward": 0.0
+      },
+      "scoring_valid": true,
+      "native_tests": "1 failed, 5 passed in 12.79s",
+      "exception": null,
+      "stop": "FINAL_SUBMITTED",
+      "costs": {
+        "actor": {
+          "calls": 3,
+          "input_tokens": 3881,
+          "output_tokens": 605,
+          "provider_seconds": 4.394550340715796
+        },
+        "maintenance": {
+          "calls": 2,
+          "input_tokens": 2165,
+          "output_tokens": 342,
+          "provider_seconds": 2.442006027791649
+        }
+      },
+      "pending": [],
+      "total_calls": 5,
+      "input_tokens": 6046,
+      "output_tokens": 947,
+      "tool_seconds": 0.7464017067104578,
+      "wall_seconds": 48.80321626132354,
+      "phases": {
+        "environment_setup": 1.793138,
+        "agent_setup": 1.518275,
+        "agent_execution": 7.947635,
+        "verifier": 25.642731
+      },
+      "method_events": {
+        "SUBGOAL_STARTED": 2,
+        "EVIDENCE_REPLACED": 2
+      },
+      "record_delivered_actor_calls": 2,
+      "artifacts": {
+        "trials/cancel-async-tasks-0-incremental/artifacts/app/run.py": "0afcc5eec50007a79f3931c5cd088ad8a6913462ac80ab5569e8a5eaa9af619d"
+      }
+    },
+    {
+      "wave": "cancel-revision-control",
+      "arm": "EVIDENCE_1",
+      "trial": "cancel-async-tasks-1-evidence_1",
+      "task": "terminal-bench/cancel-async-tasks",
+      "raw_reward": {
+        "reward": 0.0
+      },
+      "scoring_valid": true,
+      "native_tests": "1 failed, 5 passed in 12.80s",
+      "exception": null,
+      "stop": "FINAL_SUBMITTED",
+      "costs": {
+        "actor": {
+          "calls": 3,
+          "input_tokens": 3854,
+          "output_tokens": 529,
+          "provider_seconds": 7.915427491534501
+        },
+        "maintenance": {
+          "calls": 2,
+          "input_tokens": 2370,
+          "output_tokens": 455,
+          "provider_seconds": 6.156874472275376
+        }
+      },
+      "pending": [],
+      "total_calls": 5,
+      "input_tokens": 6224,
+      "output_tokens": 984,
+      "tool_seconds": 0.7555596558377147,
+      "wall_seconds": 183.64308115513995,
+      "phases": {
+        "environment_setup": 1.812386,
+        "agent_setup": 1.561426,
+        "agent_execution": 15.115198,
+        "verifier": 153.242066
+      },
+      "method_events": {
+        "SUBGOAL_STARTED": 2,
+        "EVIDENCE_REPLACED": 2
+      },
+      "record_delivered_actor_calls": 2,
+      "artifacts": {
+        "trials/cancel-async-tasks-1-evidence_1/artifacts/app/run.py": "74a8a308e16745ed476046e8446f0c368b94c86235f09a12ed46df367bfb1d24"
+      }
+    },
+    {
+      "wave": "cancel-v0",
+      "arm": "EVIDENCE_0",
+      "trial": "cancel-async-tasks-0-evidence_0",
+      "task": "terminal-bench/cancel-async-tasks",
+      "raw_reward": {
+        "reward": 0.0
+      },
+      "scoring_valid": true,
+      "native_tests": "1 failed, 5 passed in 12.83s",
+      "exception": null,
+      "stop": "FINAL_SUBMITTED",
+      "costs": {
+        "actor": {
+          "calls": 3,
+          "input_tokens": 3824,
+          "output_tokens": 590,
+          "provider_seconds": 4.823783827479929
+        },
+        "maintenance": {
+          "calls": 2,
+          "input_tokens": 2370,
+          "output_tokens": 330,
+          "provider_seconds": 2.3896522191353142
+        }
+      },
+      "pending": [],
+      "total_calls": 5,
+      "input_tokens": 6194,
+      "output_tokens": 920,
+      "tool_seconds": 1.0806758925318718,
+      "wall_seconds": 50.39218940306455,
+      "phases": {
+        "environment_setup": 3.333032,
+        "agent_setup": 1.472772,
+        "agent_execution": 8.76561,
+        "verifier": 24.463731
+      },
+      "method_events": {
+        "SUBGOAL_STARTED": 2,
+        "EVIDENCE_REPLACED": 2
+      },
+      "record_delivered_actor_calls": 2,
+      "artifacts": {
+        "trials/cancel-async-tasks-0-evidence_0/artifacts/app/run.py": "e60f683da2dc5e86d238677b7fad3cc888fa99f3842e9f08df960b04e6cf3b30"
+      }
+    },
+    {
+      "wave": "cancel-v0",
+      "arm": "H_ONCE",
+      "trial": "cancel-async-tasks-1-h_once",
+      "task": "terminal-bench/cancel-async-tasks",
+      "raw_reward": {
+        "reward": 0.0
+      },
+      "scoring_valid": true,
+      "native_tests": "1 failed, 5 passed in 12.85s",
+      "exception": null,
+      "stop": "FINAL_SUBMITTED",
+      "costs": {
+        "actor": {
+          "calls": 8,
+          "input_tokens": 12903,
+          "output_tokens": 1747,
+          "provider_seconds": 12.868288351688534
+        },
+        "summary": {
+          "calls": 6,
+          "input_tokens": 5055,
+          "output_tokens": 332,
+          "provider_seconds": 3.0194812966510653
+        }
+      },
+      "pending": [],
+      "total_calls": 14,
+      "input_tokens": 17958,
+      "output_tokens": 2079,
+      "tool_seconds": 2.249201296828687,
+      "wall_seconds": 59.01038124412298,
+      "phases": {
+        "environment_setup": 1.781615,
+        "agent_setup": 1.467674,
+        "agent_execution": 19.451144,
+        "verifier": 24.466294
+      },
+      "method_events": {
+        "SUBGOAL_STARTED": 7,
+        "SUMMARY_REPLACED": 6,
+        "SUMMARY_REUSED": 15
+      },
+      "record_delivered_actor_calls": 0,
+      "artifacts": {
+        "trials/cancel-async-tasks-1-h_once/artifacts/app/run.py": "d15b5196d3a548d2f6aa79cdef8d31f87d9bbecf1d4bb0a9f85e2b150f47145b"
+      }
+    },
+    {
+      "wave": "cancel-v0",
+      "arm": "REVIEW",
+      "trial": "cancel-async-tasks-2-review",
+      "task": "terminal-bench/cancel-async-tasks",
+      "raw_reward": {
+        "reward": 0.0
+      },
+      "scoring_valid": false,
+      "native_tests": "NO_NATIVE_TEST_TERMINAL",
+      "exception": null,
+      "stop": "FINAL_SUBMITTED",
+      "costs": {
+        "actor": {
+          "calls": 29,
+          "input_tokens": 382487,
+          "output_tokens": 8465,
+          "provider_seconds": 105.08507626224309
+        }
+      },
+      "pending": [],
+      "total_calls": 29,
+      "input_tokens": 382487,
+      "output_tokens": 8465,
+      "tool_seconds": 10.905442510731518,
+      "wall_seconds": 243.54633276211098,
+      "phases": {
+        "environment_setup": 2.185477,
+        "agent_setup": 1.576656,
+        "agent_execution": 129.193225,
+        "verifier": 97.9542
+      },
+      "method_events": {},
+      "record_delivered_actor_calls": 0,
+      "artifacts": {
+        "trials/cancel-async-tasks-2-review/artifacts/app/run.py": "7f45fb524ef2b0e5106c39e7be5fea20a9319a0f77fe2cebd01f3f7b16dfd82e"
+      }
+    },
+    {
+      "wave": "cython-v0",
+      "arm": "H_ONCE",
+      "trial": "build-cython-ext-0-h_once",
+      "task": "terminal-bench/build-cython-ext",
+      "raw_reward": null,
+      "scoring_valid": false,
+      "native_tests": "NO_NATIVE_TEST_TERMINAL",
+      "exception": {
+        "exception_type": "RuntimeError",
+        "exception_message": "Command timed out after 60 seconds",
+        "occurred_at": "2026-09-14T08:56:12.644636Z"
+      },
+      "stop": "RuntimeError: Command timed out after 60 seconds",
+      "costs": {
+        "actor": {
+          "calls": 1,
+          "input_tokens": 989,
+          "output_tokens": 60,
+          "provider_seconds": 0.8144639981910586
+        }
+      },
+      "pending": [],
+      "total_calls": 1,
+      "input_tokens": 989,
+      "output_tokens": 60,
+      "tool_seconds": 0.0,
+      "wall_seconds": 77.06079364567995,
+      "phases": {
+        "environment_setup": 1.962985,
+        "agent_setup": 1.608338,
+        "agent_execution": 61.602792,
+        "verifier": null
+      },
+      "method_events": {
+        "SUBGOAL_STARTED": 1
+      },
+      "record_delivered_actor_calls": 0,
+      "artifacts": {
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/config": "cef5b3e67073fbcdf7a159dc08125f3839ed59ca9e47cb3ed2b9ad2ce7727142",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/description": "85ab6c163d43a17ea9cf7788308bca1466f1b0a8d1cc92e26e9bf63da4062aee",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/HEAD": "f6f2b945f6c411b02ba3da9c7ace88dcf71b6af65ba2e0d89aa82900042b5a10",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/push-to-checkout.sample": "a53d0741798b287c6dd7afa64aee473f305e65d3f49463bb9d7408ec3b12bf5f",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/pre-rebase.sample": "4febce867790052338076f4e66cc47efb14879d18097d1d61c8261859eaaa7b3",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/pre-merge-commit.sample": "d3825a70337940ebbd0a5c072984e13245920cdf8898bd225c8d27a6dfc9cb53",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/pre-commit.sample": "f9af7d95eb1231ecf2eba9770fedfa8d4797a12b02d7240e98d568201251244a",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/applypatch-msg.sample": "0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/prepare-commit-msg.sample": "e9ddcaa4189fddd25ed97fc8c789eca7b6ca16390b2392ae3276f0c8e1aa4619",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/update.sample": "8d5f2fa83e103cf08b57eaa67521df9194f45cbdbcb37da52ad586097a14d106",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/pre-push.sample": "ecce9c7e04d3f5dd9d8ada81753dd1d549a9634b26770042b58dda00217d086a",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/pre-applypatch.sample": "e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/fsmonitor-watchman.sample": "e0549964e93897b519bd8e333c037e51fff0f88ba13e086a331592bf801fa1d0",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/commit-msg.sample": "1f74d5e9292979b573ebd59741d46cb93ff391acdd083d340b94370753d92437",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/post-update.sample": "81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/hooks/pre-receive.sample": "a4c3d2b9c7bb3fd8d1441c31bd4ee71a595d66b44fcf49ddb310252320169989",
+        "trials/build-cython-ext-0-h_once/artifacts/app/pyknotid/.git/info/exclude": "6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1"
+      },
+      "native_result_path": "/cra/memory/mx_memory/evidence/hiagent-evidence-discovery-20260914-jAPC0Z/cython-v0/trials/build-cython-ext-0-h_once/result.json"
+    },
+    {
+      "wave": "cython-v0",
+      "arm": "REVIEW",
+      "trial": "build-cython-ext-1-review",
+      "task": "terminal-bench/build-cython-ext",
+      "raw_reward": null,
+      "scoring_valid": false,
+      "native_tests": "NO_NATIVE_TEST_TERMINAL",
+      "exception": {
+        "exception_type": "CancelledError",
+        "exception_message": "",
+        "occurred_at": "2026-09-14T08:56:43.317512Z"
+      },
+      "stop": "NATIVE_TIME_LIMIT",
+      "costs": {
+        "actor": {
+          "calls": 1,
+          "input_tokens": 1185,
+          "output_tokens": 73,
+          "provider_seconds": 0.7223267848603427
+        }
+      },
+      "pending": [],
+      "total_calls": 1,
+      "input_tokens": 1185,
+      "output_tokens": 73,
+      "tool_seconds": 14.590279586147517,
+      "wall_seconds": 30.734114,
+      "phases": {
+        "environment_setup": 2.013795,
+        "agent_setup": 1.500874,
+        "agent_execution": 15.415171,
+        "verifier": null
+      },
+      "method_events": {},
+      "record_delivered_actor_calls": 0,
+      "artifacts": {},
+      "native_result_path": "/cra/memory/mx_memory/evidence/hiagent-evidence-discovery-20260914-jAPC0Z/cython-v0/trials/build-cython-ext-1-review/result.json"
+    }
+  ],
+  "revisions": [
+    {
+      "version": "EVIDENCE_1",
+      "source_tasks": [
+        "cancel-async-tasks"
+      ],
+      "observed_difficulty": "EVIDENCE_0 carried an implementation description as confirmation of behavior; only normal concurrency was exercised before final.",
+      "general_change": "Keep claim basis as code description, observed execution, or scoped check; retain consequential requirements lacking a relevant observation.",
+      "next_check": "Same maintenance schedule, Actor, history and input with INCREMENTAL ordinary summary on cancel-async-tasks; original transfer attempted before revision and unavailable.",
+      "frozen_at": "2026-09-14T09:01:46.465388+00:00"
+    }
+  ],
+  "old_allocations_reused": false,
+  "product_default_change": false,
+  "new_model_generations": 60,
+  "new_provider_http": 127,
+  "started_at": "2026-09-14T08:46:29.422695+00:00",
+  "initial_targeted_tests": 109,
+  "waves": [
+    {
+      "task": "cancel-async-tasks",
+      "order": [
+        "EVIDENCE_0",
+        "H_ONCE",
+        "REVIEW"
+      ],
+      "max_calls_per_trial": 64,
+      "timeout_multiplier": 1,
+      "root": "/cra/memory/mx_memory/evidence/hiagent-evidence-discovery-20260914-jAPC0Z/cancel-v0",
+      "method_versions": {
+        "H_ONCE": "hiagent-once-v0.1",
+        "EVIDENCE_0": "evidence-maintenance-v0.1",
+        "REVIEW": "review-v0.1"
+      },
+      "input_strategies": {
+        "REVIEW": "Existing optional note and same-call review; common fitting history and existing explicit workset controls",
+        "H_ONCE": "Current segment details; cached old summaries by source/policy identity; explicit historical expansion",
+        "EVIDENCE_0": "Current evidence record plus current segment details; old segments indexed, only expanded on request; new raw visible observations retained"
+      },
+      "policy_sha256": {
+        "configs/policies/evidence/actor.txt": "797b78cb8d5369c11b8277f0c20ed19e1b2cfeb32ab860d6beb3525f00408cfe",
+        "configs/policies/evidence/evidence_0.txt": "f78e853982a043f6a410ff2ca0846a4ae46b40c986859f4bcd55f63e72b4fbf1",
+        "configs/policies/hiagent/summary.txt": "f2a876a5903407c725ca4f371fbb65681be2b66728c4fb086d74cfa76b8e4c10",
+        "configs/policies/hiagent/actor.txt": "95169600ab85ad9038d3505f49f2d37691d1373eac8dfa5acec6d7b57dc15ee6"
+      }
+    },
+    {
+      "task": "build-cython-ext",
+      "order": [
+        "H_ONCE",
+        "REVIEW",
+        "EVIDENCE_0"
+      ],
+      "max_calls_per_trial": 64,
+      "root": "/cra/memory/mx_memory/evidence/hiagent-evidence-discovery-20260914-jAPC0Z/cython-v0",
+      "role": "transfer_only",
+      "method_versions": {
+        "H_ONCE": "hiagent-once-v0.1",
+        "EVIDENCE_0": "evidence-maintenance-v0.1",
+        "REVIEW": "review-v0.1"
+      },
+      "policy_sha256": {
+        "configs/policies/evidence/actor.txt": "797b78cb8d5369c11b8277f0c20ed19e1b2cfeb32ab860d6beb3525f00408cfe",
+        "configs/policies/evidence/evidence_0.txt": "f78e853982a043f6a410ff2ca0846a4ae46b40c986859f4bcd55f63e72b4fbf1",
+        "configs/policies/hiagent/summary.txt": "f2a876a5903407c725ca4f371fbb65681be2b66728c4fb086d74cfa76b8e4c10",
+        "configs/policies/hiagent/actor.txt": "95169600ab85ad9038d3505f49f2d37691d1373eac8dfa5acec6d7b57dc15ee6"
+      },
+      "frozen_at": "2026-09-14T08:55:05.357873+00:00"
+    },
+    {
+      "task": "cancel-async-tasks",
+      "order": [
+        "REVIEW_ARTIFACT"
+      ],
+      "max_calls_per_trial": 0,
+      "root": "/cra/memory/mx_memory/evidence/hiagent-evidence-discovery-20260914-jAPC0Z/cancel-review-rescore",
+      "purpose": "Complete native scoring on retained identical artifact; no model resumption."
+    },
+    {
+      "task": "cancel-async-tasks",
+      "order": [
+        "INCREMENTAL",
+        "EVIDENCE_1"
+      ],
+      "max_calls_per_trial": 64,
+      "root": "/cra/memory/mx_memory/evidence/hiagent-evidence-discovery-20260914-jAPC0Z/cancel-revision-control",
+      "reason": "Does evidence-scope policy add value over the same host incremental maintenance flow?",
+      "policy_sha256": {
+        "configs/policies/evidence/actor.txt": "797b78cb8d5369c11b8277f0c20ed19e1b2cfeb32ab860d6beb3525f00408cfe",
+        "configs/policies/evidence/evidence_0.txt": "f78e853982a043f6a410ff2ca0846a4ae46b40c986859f4bcd55f63e72b4fbf1",
+        "configs/policies/evidence/incremental.txt": "8a3538e94c6eec4ab970b488cd123b0971b429ea32ca592be002233908a73f13",
+        "configs/policies/evidence/evidence_1.txt": "b754accc1274b9ff72b81201e09d44dde2bf8bc37ce59000ff4046a2f6ab2678"
+      },
+      "environment_override": "/cra/memory/mx_memory/evidence/hiagent-evidence-discovery-20260914-jAPC0Z/cancel-verifier-ready.json",
+      "allocated_at": "2026-09-14T09:02:39.589384+00:00"
+    }
+  ],
+  "environment_attempts": [
+    {
+      "task": "query-optimize",
+      "model_calls": 0,
+      "status": "BUILD_FAILED",
+      "reason": "Original pinned database download: curl exit 28 after 129886 ms; host source redirected but target handshake did not complete; mirror handshake did not complete. No dataset/task modification. Predeclared build-cython-ext fallback selected.",
+      "evidence": [
+        "query-build.log",
+        "query-source-head.txt",
+        "query-mirror-head.txt"
+      ]
+    },
+    {
+      "task": "build-cython-ext",
+      "model_calls": 0,
+      "status": "BUILD_SUCCEEDED",
+      "evidence": [
+        "cython-build.log"
+      ]
+    },
+    {
+      "task": "cancel-async-tasks",
+      "purpose": "VERIFIER_BOOTSTRAP",
+      "status": "BUILD_SUCCEEDED",
+      "model_calls": 0,
+      "evidence": [
+        "cancel-verifier-ready-build.log",
+        "cancel-verifier-ready.Dockerfile",
+        "cancel-verifier-ready.json"
+      ],
+      "dockerfile_sha256": "c24030003a58b94a3be456d2a6589cdcbaed2c39a757591d69e5a9c7c96b9c6c"
+    }
+  ],
+  "interface_repairs": [
+    {
+      "issue": "Harbor wraps terminal timeout as RuntimeError; wave advanced to REVIEW. Observed and interrupted after REVIEW first call; both ledgers settled and trial containers deleted.",
+      "fix": "Stop any execution exception_info before next arm; native low rewards remain comparable and do not stop a wave.",
+      "tests": "16 passed: tests/unit/test_workspace_native_wave.py + test_hiagent_provider.py",
+      "method_policy_changed": false
+    },
+    {
+      "issue": "Thrown terminal command did not add elapsed time to tool_sec; the native Agent phase still preserved the wait.",
+      "fix": "Count elapsed failed exec time while propagating the exception and publishing no completion receipt.",
+      "tests": "24 passed in final-adapter-tests.log; final full regression includes the new timing check.",
+      "method_policy_changed": false
+    }
+  ],
+  "total_input_tokens": 421083,
+  "total_output_tokens": 13528,
+  "actual_trials": 8,
+  "model_trials": 7,
+  "artifact_only_trials": 1,
+  "provider_pending": [],
+  "provider_violations": [],
+  "research_decision": "KEEP_SIMPLE_SPECIAL_POLICY_NOT_SUPPORTED",
+  "migration_result": "UNAVAILABLE_NO_TRANSFER_CONCLUSION",
+  "unused_allocated_trials_closed": 1,
+  "unallocated_trial_slots_closed": 3,
+  "unused_allocated_generations_closed": 452,
+  "unallocated_generations_closed": 256,
+  "model_allocation_closed": true,
+  "engineering": {
+    "full_regression": "PASS",
+    "boundary": "PASS",
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "build": "PASS",
+    "collected_tests": 4498,
+    "source_freeze_unchanged": true,
+    "passed": 4497,
+    "skipped": 1,
+    "failed": 0,
+    "errors": 0,
+    "full_regression_seconds": 4021.24,
+    "full_regression_runs": 1,
+    "exact_collection_matches_junit": true,
+    "pytest_process_exited": true
+  },
+  "environment_preparation_builds": 3,
+  "completed_at": "2026-09-14T10:14:20.441379+00:00",
+  "development_goal_counters_before_handoff": {
+    "read_at": "2026-09-14T10:14:20Z",
+    "tokensUsed": 472492,
+    "timeUsedSeconds": 5978,
+    "token_budget": null,
+    "interpretation": "Goal tool counters before final handoff, not a per-request Provider bill; do not add to experiment token totals."
+  },
+  "result_report": "studies/active/MILA_HIAGENT_EVIDENCE_MAINTENANCE_DISCOVERY_RESULTS_20260914.md"
+}

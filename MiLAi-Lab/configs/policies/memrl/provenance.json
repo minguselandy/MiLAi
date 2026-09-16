@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/MemTensor/MemRL",
+  "commit": "c1b322ca43de36ddf64c6712f89d0095bfc35ce0",
+  "license": "MIT",
+  "prompts": "Exact evaluated upstream literals; trajectory/task placeholders retained",
+  "sha256": {
+    "os_constraint.txt": "522d1eb382268f326407722ce092e1c088e9e1e89c7ee17a8e19e6af3cdfb0db",
+    "actor_base.txt": "ab35ee09681e495df35f2c817f7e20eabe4599221715b7db68cf29309093d2ea",
+    "db_constraint.txt": "7a2ce4cef0ddccbefe3bc35c53d87388f38f445bdfe75aaa10520131960b5ed2",
+    "failure.txt": "1d692321c277ee258c4c81a1f0b713d30418afe0d4edda0f534261a608c33184",
+    "success.txt": "3a7d6861c89a5da22002b6d2de15d28218aa188c5635cc20ae63bc0d4394667b"
+  }
+}

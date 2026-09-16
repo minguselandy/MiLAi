@@ -1,0 +1,216 @@
+{
+  "calibration_dev_labels_opened": true,
+  "candidate": "candidate.2",
+  "cleanup": {
+    "model_and_worker_plane": {
+      "broker_events": {
+        "READY": 1,
+        "SESSION_CLOSED": 2,
+        "STOPPED": 1
+      },
+      "broker_log_secret_scan": "PASS",
+      "containers_removed": 4,
+      "networks_removed": 3
+    },
+    "runtime_database": {
+      "connections_before_drop": 0,
+      "owner": "milai_owner",
+      "status": "PASS"
+    }
+  },
+  "data_boundary": "PUBLIC_DEIDENTIFIED_DEV_RAW_CONTENT_REPO_EXTERNAL_HASHED_ONLY",
+  "date": "2026-08-21",
+  "ended_at": "2026-08-21T13:09:52.402367+00:00",
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "fixture_ingestion": {
+    "canonical_authority": "ACTION_SAFE_BENCHMARK_FIXTURE_ONLY",
+    "canonical_claim_count": 1,
+    "database_and_tenant": "FRESH_ISOLATED_DROPPED_AFTER_RUN",
+    "memory_character_ceiling": 1800,
+    "policy": "DG10_PUBLIC_DEIDENTIFIED_DEV_FIXTURE_V1",
+    "production_or_real_world_authority_claim": false,
+    "runtime_data_mode": "DEIDENTIFIED_ALLOWED",
+    "scope": {
+      "project_ids": [
+        "milai"
+      ]
+    },
+    "selection": "QUESTION_ONLY_FROZEN_LOCAL_LEXICAL_TOP_1_THEN_BOUNDED",
+    "selection_uses_gold_answer": false,
+    "source_evidence_count": 1
+  },
+  "gate_results": {
+    "BMG-02": "NO_GO_SINGLE_CASE_TOPOLOGY_SMOKE_NOT_THREE_ARM_CALIBRATION",
+    "BMG-05": "NO_GO_THRESHOLDS_NOT_FROZEN",
+    "MILAI_MCP_topology_smoke": "COMPLETE_VISIBLE_2_MODEL_ROUNDS_1_MCP_CALL",
+    "adapter_output_schema_conformance": "PASS_LOCAL_SMOKE",
+    "per_native_usage_recount": "PASS_LOCAL_SMOKE"
+  },
+  "identity": {
+    "benchmark_adapter": {
+      "base_adapter_sha256": "d0ab1e6285bc00d0ed1d390372998e09b3e00c5f871bb3a5c82eef580d527da7",
+      "generated_adapter_path_class": "EPHEMERAL_REPO_EXTERNAL_WORKSPACE",
+      "generated_adapter_sha256": "d92cfe53780608261c714e2df0d8b995230caecd880922724637b0276f6a1c4d",
+      "integration_adapter_bytes_changed": false,
+      "telemetry_patch_sha256": "5df2f84b90d1135ef999ab3aa381ddeb23e0d6d40671cd224339d8b2b1197068"
+    },
+    "broker_policy_sha256": "9cd8bac618971478b2d80bd045cae8f5d73ac4794a60ee5d9f688f15b606306d",
+    "catalog_protocol": "2026-07-28",
+    "catalog_tools": [
+      "milai_recall"
+    ],
+    "external_provider_cost": 0,
+    "external_provider_requests": 0,
+    "gateway_image_id": "sha256:535bb8b7e3b735cc24b04950449f2a70c9905273eafa7d1b322526ecdc5d3860",
+    "identity_report_sha256": "0463fff90754f54c887ed79e54b5db5593b1860cf593c4a89a66c1828eaa3f0e",
+    "model_id": "Qwen3.6-35B-A3B-FP8",
+    "postgres_image_id": "sha256:c0eb29927f0e8590eac49c9d5bf9c5ebf87f4e6e7273e0a9270218e6b73795ee",
+    "rendered_config_sha256": "3b9b5bd477e64ffb1b5051d4549f705d7eca5ae74dbb01b1ca9cac8345e309b8",
+    "vllm_lifecycle_mutated": false,
+    "worker_image_id": "sha256:4f90c07d8a1eecdc1bad0f43ecdcb97ef5f0c388f23eca00dce58b120575f410"
+  },
+  "inputs": {
+    "adapter_report_sha256": "0e943694ccf536bc4036c0276c832eb4fdec59dc9314b5707040f5a7ebc83d1b",
+    "calibration_plan_sha256": "bba09bf54166e43780fee936c7b1a0b037f3f268a2739793a12b6ad4e0732354",
+    "dataset": {
+      "path_class": "REPO_EXTERNAL_PUBLIC_BENCHMARK_INPUT",
+      "selected_dev_case_count": 1,
+      "sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+      "size": 277383467,
+      "total_case_count": 500
+    },
+    "dev_semantic_audit_receipt_sha256": "e6fdd0440d9c4e3b1a3068749d3053eec62714b6e07d938003e2bb1ac4000784",
+    "openworker_e2e_report_sha256": "074de379177514b17a05dfde525c7861940f51e6a322e6df9d49a331d0305144",
+    "openworker_host_gate_report_sha256": "97ea8bdf7c8ccadc29918a95483a236b62372bf13ef882b4ef8ca0cc1ac722d0"
+  },
+  "known_limits": [
+    "This is one already-opened LongMemEval dev case, not the <=10% three-arm calibration or test run.",
+    "The fixture memory is question-only lexical top-1 preselection; this validates topology and two-round semantics, not MiLAi retrieval quality.",
+    "Per-native telemetry comes from an ephemeral benchmark-only generated adapter whose base bytes are hash-verified; it does not alter the frozen integration adapter.",
+    "The deterministic EM/F1 score is local characterization, not the official LongMemEval LLM-judge or leaderboard score.",
+    "No threshold, aggregate token ceiling, fixture policy, BMG-02, or BMG-05 gate is frozen or accepted."
+  ],
+  "model_id": "Qwen3.6-35B-A3B-FP8",
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "CHARACTERIZED_ONLY",
+  "quality_thresholds_frozen": false,
+  "record": {
+    "answer_record": {
+      "exact_match": 0,
+      "gold_answers_sha256": "46b30a7c92d3d94c0b2d2acdd8bc9bec1b51a119de12fb3caac2c0a920e74efc",
+      "normalized_f1": 0.551724,
+      "parsed_answer_sha256": "a899837be666d45821e425607432693ccfb52caacd22cf2f6b4a33c73ec9521a",
+      "raw_fixture_memory_in_report": false,
+      "raw_gold_answer_in_report": false,
+      "raw_model_output_in_report": false,
+      "raw_model_output_sha256": "a899837be666d45821e425607432693ccfb52caacd22cf2f6b4a33c73ec9521a",
+      "raw_question_in_report": false,
+      "scorer": "DG10_LOCAL_DEV_SMOKE_NORMALIZED_EM_F1_V1_NOT_OFFICIAL_SCORE"
+    },
+    "arm": "MILAI_MCP",
+    "case_id": "longmemeval:031748ae",
+    "category": "knowledge-update",
+    "dataset": "LONGMEMEVAL_CLEANED_500",
+    "latency_ms": 8050.667,
+    "model_id": "Qwen3.6-35B-A3B-FP8",
+    "native_calls": [
+      {
+        "finish_reason": "tool_calls",
+        "latency_ms": 2135.019,
+        "model_id": "Qwen3.6-35B-A3B-FP8",
+        "native_receipt_sha256": "8d8ffb3eedc2f8ce450b9394e99aff114ffaf5fb13cc9c78f4c43c088a1e367d",
+        "native_request_id": "chatcmpl-905cff2e61960b4d",
+        "planned_role": "TOOL_DECISION",
+        "terminal": true,
+        "usage": {
+          "input_tokens": 12442,
+          "output_tokens": 72
+        }
+      },
+      {
+        "finish_reason": "stop",
+        "latency_ms": 2408.656,
+        "model_id": "Qwen3.6-35B-A3B-FP8",
+        "native_receipt_sha256": "5e79388367745c2ca7fad1a0eea80ef50988b1d57492062713dd504a156675f7",
+        "native_request_id": "chatcmpl-980acf436cb3be63",
+        "planned_role": "ANSWER_AFTER_MCP_RESULT",
+        "terminal": true,
+        "usage": {
+          "input_tokens": 13617,
+          "output_tokens": 105
+        }
+      }
+    ],
+    "planned_mcp_calls": 1,
+    "planned_model_rounds": 2,
+    "prompt_sha256": "74f1aac222b6839f394472371754e2f71196df3d1c21c15587aa62b8517e962d",
+    "run_id": "dg10-milai-mcp-smoke-2026-08-21-4876b794139f",
+    "source_case_id": "031748ae",
+    "status": "TERMINAL_LOCAL_VLLM_MILAI_MCP_SMOKE",
+    "trace": {
+      "aggregate_tokens_from_opencode": {
+        "cache_read": 0,
+        "input": 26059,
+        "output": 177,
+        "reasoning": 0
+      },
+      "fixture_ids_sha256": {
+        "claim_id": "71c569b81dd1ff0b297dc11eb15af2bb3f35869b94b7c4b6a506825cc10d3fd4",
+        "claim_version_id": "3b76e0ce514a60ccb5a2ca7f190a20db6f7ab0a8e54d9d154be31216f245c0b7",
+        "evidence_id": "885d444fad0500dd5b7902d4269c783a00e92d1adff47b3030923db9b70afb7e",
+        "proposal_id": "f88ab56ca109d128c622016b9f2d1721ae268a5637dc32bf8ac1ac395a3a9f51"
+      },
+      "fixture_memory_sha256": "3be188cca6c7525e85e42c806e41d1fcf3b01679091efbf3040a6f0cf64a00b8",
+      "fixture_source_evidence_ids": [
+        "answer_8748f791_1"
+      ],
+      "fixture_source_evidence_ids_sha256": "1aea69cc39c3f6be79f4f19404396767b4f30a6b3f838e4821acf18ccbca2145",
+      "native_call_ids_available": "RAW_AND_HASH_BOUND",
+      "native_call_route_records": [
+        {
+          "request_id_sha256": "01bb505a90b76372e2bf2868d3b485f0be441fdecc26bc173e1e5e909ee6a82a",
+          "route": "tool"
+        },
+        {
+          "request_id_sha256": "4b12f09b19b014cf91689b3964367f001d65ad418f2ad9daed779a770cf3fd96",
+          "route": "answer"
+        }
+      ],
+      "per_native_usage_latency_receipt_available": true,
+      "runtime_recall_payload_sha256": "2aa0df500e2a2984f7c27cd22eb644e7f72d7fe3bc927d7bbd00fd201055e6d5",
+      "runtime_recall_trace_id_sha256": "79712a807cc8587b85508a858a667d7ab8491129d4e84b6be90abd14afb2392e",
+      "tokenizer_recount_matches_native_usage": true
+    },
+    "usage": {
+      "hidden_or_extra_model_calls": 0,
+      "input_tokens": 26059,
+      "mcp_rounds": 1,
+      "model_rounds": 2,
+      "output_tokens": 177
+    }
+  },
+  "repo_external_sidecar": {
+    "mode": "0600",
+    "path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+    "sha256": "60e96dfe7fde2234a50466101d96020c2e2a7f88fed42bcd69493af3da0d6f65",
+    "size": 9945,
+    "status": "WRITTEN_HASH_BOUND"
+  },
+  "run_id": "dg10-milai-mcp-smoke-2026-08-21-4876b794139f",
+  "schema": "milai.dg10.benchmark-milai-mcp-dev-smoke.v1",
+  "security": {
+    "docker_socket_mounted": false,
+    "environment_config_log_secret_scan": "PASS",
+    "model_induced_security_scan": "NOT_REPEATED_BOUND_TO_PRIOR_S1_S10_REPORT",
+    "runtime_bridge_direct": "BLOCKED",
+    "runtime_loopback_direct": "BLOCKED",
+    "socket_bind_read_only": true,
+    "worker_network_count": 1
+  },
+  "started_at": "2026-08-21T13:09:19.422794+00:00",
+  "status": "MILAI_MCP_TELEMETRY_DEV_SMOKE_COMPLETE_NOT_CALIBRATION",
+  "test_access_authorized": false,
+  "test_labels_or_outputs_opened": false
+}

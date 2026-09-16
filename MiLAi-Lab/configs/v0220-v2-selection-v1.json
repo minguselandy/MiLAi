@@ -1,0 +1,27 @@
+{
+  "profile": "INTENT_ORACLE",
+  "candidate": 1,
+  "selection_before_any_V2_generation": true,
+  "root_order": ["A-1db36ca3de1602c36e98", "A-1816ef11f35c3921798c", "A-e5324eaf97ba5a9b16dd", "A-4d36e6825968f3ce3862"],
+  "roots": {
+    "A-1db36ca3de1602c36e98": {"family": "real_estate", "single": "S01", "sequence": ["S01", "S06"], "complex": "S08", "text_path": ["risk_and_negotiation_actions"]},
+    "A-1816ef11f35c3921798c": {"family": "investment_analyst", "single": "facts", "sequence": ["facts", "guide_comparison"], "complex": "watchlist", "text_path": ["pricing_answer"]},
+    "A-e5324eaf97ba5a9b16dd": {"family": "hr", "single": "placement_plan", "sequence": ["placement_plan", "ATS_E01"], "complex": "placement_plan", "text_path": ["placements", "E01", "rationale"]},
+    "A-4d36e6825968f3ce3862": {"family": "hr", "single": "triage", "sequence": ["triage", "scores"], "complex": "triage", "text_path": ["interviews", "A", "finding_and_evidence"]}
+  },
+  "chain_order": ["single_create", "two_object_sequence", "complex_complete_record"],
+  "cold_repeats": [1, 2],
+  "generation_cap": 4,
+  "smoke_positions_included": [1, 2],
+  "review": {
+    "reviewer": "Same nonblind developer, using previously source-reviewed initial references and reviewing selected complete records; not independent human review.",
+    "source_basis": "Original V0219 public-initial and independent-reference files, source locations and hashes retained verbatim in evaluator review. No changed-reference or private postcondition values exported.",
+    "single_chain": "One complete create, public records readback, finish: minimum 3 generations. The fourth opportunity is not required to succeed.",
+    "sequence_chain": "Two explicit complete writes in order, public records readback, finish: minimum 4 generations.",
+    "complex_chain": "One complete source-supported record plus an explicitly synthetic non-business encoding annotation in an existing free-text field; public readback and finish: minimum 3 generations.",
+    "complex_self_containment": "Use independently meaningful analysis records. The HR coordination outbox contains claims that other objects were already corrected/delivered, so it is not a correct standalone write in an empty World.",
+    "disputes": "Initial records only. HR placement and risk wording are legitimate authorized advisory instances, not a unique source-gold ranking or proof that other risk labels fail. Original nine V0219 disputes remain unchanged. Exact copying tests this supplied intent, not unique natural business truth.",
+    "annotation": "Explicitly labeled synthetic formatting text, not a new source event or business fact; preserved only in the complex Intent Oracle fixture, never V4/V5.",
+    "schema": "Full public legal target/value universe remains unchanged; no expected action is compiled into a narrower response schema."
+  }
+}

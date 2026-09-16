@@ -1,0 +1,18 @@
+{
+  "status": "FROZEN_BEFORE_NEW_FAMILY_FIXTURES",
+  "frozen_at": "2026-09-05T08:33:44.124086+00:00",
+  "selected_arm": "A0",
+  "basis": "G2 A1 net wins 0/8 and median raw token ratio 1.904; G3a H1 net wins 0/3. Both fail their preregistered retention rules.",
+  "remaining_work": "Finish all preregistered G3b followups; validate this unchanged A0 in four newly authored project-planning/content-writing cases; report failures without retuning these cases.",
+  "product_tree": "7fdf4f12d8c9ef63a9662145f6a1abb2e053fce2860e60ddcde8eeabcaf1fc0c",
+  "sha256": {
+    "configs/v02-memory-flow.json": "db60695d58b1b76fdd44ac615471f9d761d1edc1fa2c125c173555437ab33171",
+    "tools/run_v02_memory_flow.py": "abefbcdea027999189e15e0b2e7a4e6543cb636952f8262aeb798ee822ecbe82",
+    "tools/v02_codex_container.py": "722a891b7c44d11d1eb29474e1660fa18a0be381fbf6d7526b04a32f68a388fd",
+    "tools/v02_task_artifacts.py": "791ac57b50443d6602e89a09200b0d4f680d0781425ddfc3e72ba3b38dc136c4",
+    "data/locks/v02-memory-flow-product.lock.json": "918901ed55a1257b2ed0c3d118736806c716a05e0ce7d0a6490002c088f82957"
+  },
+  "budget_interpretation": "240s and 24 tool actions watchdog; 6 sessions/1440s per batch. 120000 rollout tracking is not proven to cap raw input+output; actual usage remains recorded, unknown is null.",
+  "representation_claim": false,
+  "generalization_scope": "New constructed task families after strategy freeze; same author/evaluator and runtime, not independent blind confirmation or production reliability."
+}

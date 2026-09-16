@@ -1,0 +1,257 @@
+{
+  "status": "FAILURE_MAP_RECORDED_KEEP_SIMPLE_NO_MEMORY_CAUSAL_CLAIM",
+  "totals": {
+    "input_tokens": 557415,
+    "output_tokens": 24538,
+    "source_reads": 200,
+    "searches": 4,
+    "source_bytes_received": 127308,
+    "search_bytes_scanned": 37800,
+    "state_writes": 0,
+    "public_calls": 154,
+    "seconds": 344.62035657884553,
+    "host_cpu_seconds": 54.06642820100001,
+    "requests": 118,
+    "raw_tokens": 581953,
+    "attempted": 36,
+    "delivered": 36,
+    "scorable": 36,
+    "supported_correct": 28,
+    "earliest_layers": {
+      "NO_TASK_SUPPORT_FAILURE": 28,
+      "RETRIEVAL_OR_REPRESENTATION_FAILURE": 7,
+      "ACQUISITION_NOT_ATTEMPTED": 1
+    },
+    "independent_roots": 2,
+    "owned_preflight_public_calls": 15,
+    "pending_requests": 0,
+    "raw_cap": null,
+    "model_selected_notes": 0
+  },
+  "batches": [
+    {
+      "name": "low",
+      "arms": {
+        "NOTES": {
+          "allocated": 6,
+          "attempted": 6,
+          "delivered": 6,
+          "decision_correct": 6,
+          "source_reads": 30,
+          "searches": 0,
+          "state_writes": 0,
+          "initial_seed_writes": 0,
+          "public_calls": 18,
+          "reread_unchanged_source_versions": 14,
+          "requests": 12,
+          "raw_tokens": 40576
+        },
+        "REMINDER": {
+          "allocated": 6,
+          "attempted": 6,
+          "delivered": 6,
+          "decision_correct": 6,
+          "source_reads": 30,
+          "searches": 0,
+          "state_writes": 0,
+          "initial_seed_writes": 0,
+          "public_calls": 18,
+          "reread_unchanged_source_versions": 14,
+          "requests": 12,
+          "raw_tokens": 40966
+        }
+      },
+      "requests": 24,
+      "raw_tokens": 81542,
+      "seconds": 124.3511508309748,
+      "pressure": {
+        "other_object_records": 0,
+        "axes": [
+          "P3",
+          "P4"
+        ],
+        "synthetic": true
+      },
+      "manifest_sha256": "70da0e0e606e98f07c5d127dadc50c39155d50ae62c3a7786549d30283c1ecfe",
+      "map_sha256": "d4066c3f26f6b77c3c5b60c204c95d77ef6df8a319a894007773f870c36453e6",
+      "root": "/cra/memory/mx_memory/evidence/v0216/low-v1-20260910",
+      "pids": [
+        3333847,
+        3334593,
+        3335163,
+        3335732,
+        3336393,
+        3336950,
+        3337535,
+        3338222,
+        3338881,
+        3339546,
+        3340109,
+        3340791
+      ]
+    },
+    {
+      "name": "high32",
+      "arms": {
+        "NOTES": {
+          "allocated": 6,
+          "attempted": 6,
+          "delivered": 6,
+          "decision_correct": 3,
+          "source_reads": 41,
+          "searches": 1,
+          "state_writes": 0,
+          "initial_seed_writes": 0,
+          "public_calls": 36,
+          "reread_unchanged_source_versions": 17,
+          "requests": 30,
+          "raw_tokens": 167676
+        },
+        "REMINDER": {
+          "allocated": 6,
+          "attempted": 6,
+          "delivered": 6,
+          "decision_correct": 2,
+          "source_reads": 43,
+          "searches": 3,
+          "state_writes": 0,
+          "initial_seed_writes": 0,
+          "public_calls": 40,
+          "reread_unchanged_source_versions": 19,
+          "requests": 34,
+          "raw_tokens": 216773
+        }
+      },
+      "requests": 64,
+      "raw_tokens": 384449,
+      "seconds": 211.25158484722488,
+      "pressure": {
+        "other_object_records": 32,
+        "axes": [
+          "P3",
+          "P4"
+        ],
+        "synthetic": true
+      },
+      "manifest_sha256": "c128caea75a14c3a2d95ab946cfc49e042d97ffdec088f2635e6a5e704913d3f",
+      "map_sha256": "f4a5c836c1a825a998632db14e0dfe7a359b74919c0c3a0e3eeb3e6cc0d8e0ee",
+      "root": "/cra/memory/mx_memory/evidence/v0216/high32-v1-20260910",
+      "pids": [
+        3347566,
+        3348501,
+        3349980,
+        3350808,
+        3351569,
+        3352867,
+        3353471,
+        3354618,
+        3355606,
+        3356785,
+        3358503,
+        3359708
+      ]
+    },
+    {
+      "name": "fallback8",
+      "arms": {
+        "NOTES": {
+          "allocated": 6,
+          "attempted": 6,
+          "delivered": 6,
+          "decision_correct": 5,
+          "source_reads": 26,
+          "searches": 0,
+          "state_writes": 0,
+          "initial_seed_writes": 0,
+          "public_calls": 21,
+          "reread_unchanged_source_versions": 11,
+          "requests": 15,
+          "raw_tokens": 57049
+        },
+        "REMINDER": {
+          "allocated": 6,
+          "attempted": 6,
+          "delivered": 6,
+          "decision_correct": 6,
+          "source_reads": 30,
+          "searches": 0,
+          "state_writes": 0,
+          "initial_seed_writes": 0,
+          "public_calls": 21,
+          "reread_unchanged_source_versions": 14,
+          "requests": 15,
+          "raw_tokens": 58913
+        }
+      },
+      "requests": 30,
+      "raw_tokens": 115962,
+      "seconds": 140.46343250386417,
+      "pressure": {
+        "other_object_records": 8,
+        "axes": [
+          "P3",
+          "P4"
+        ],
+        "synthetic": true
+      },
+      "manifest_sha256": "2c4df866c424835bdc0d909a670b3c0a099746b225d2c16cd7f6b5b9e7d5605a",
+      "map_sha256": "9eafa3cba2dce3d65968367ec0cb684413b31f66d8b0ea1e078d96a79a535336",
+      "root": "/cra/memory/mx_memory/evidence/v0216/fallback8-v1-20260910",
+      "pids": [
+        3364234,
+        3364888,
+        3365552,
+        3366258,
+        3366902,
+        3367461,
+        3368147,
+        3368945,
+        3369820,
+        3370588,
+        3371357,
+        3372070
+      ]
+    }
+  ],
+  "baseline_identity": {
+    "implementation": {
+      "tools/run_v0215.py": "3b6c47f37e99f4c87ff407ac3750cbfc5c44cfeb132bf8b2643b4ee18b4c64b1",
+      "tools/prepare_v0215.py": "53e92153fd2e3a8cfb5b896769f7757489d1e8007e7aa90576a300b8c802297d",
+      "tools/v0213_provider.py": "05601e67f19754cc0bc7ac80bb281e3d6b435e93ec1ce85fe5ece90b42c6d92c",
+      "tools/v0214_budget.py": "38552efe96fe703a3d41b60a464383e998bca3585262198dbe84c9141f19359d",
+      "tools/v0214_source_binding.py": "6d28fbd7190bfd2d75829f8d95acc446a4e3ed5176923fdd293f3b1dbaa9cb82",
+      "tools/v0214_host_runtime.py": "0ef09f3dfbf57b543848b813509ce9909a14be2312e325a1d7079c6a39a9e5f4",
+      "tools/run_v0214_e2e.py": "31f987d2b60403b8012239c8d2ae1857373bcb2d0fecbe51d0cc02d6b7b84232",
+      "tools/run_v0212_horizon.py": "c091edd9688a4a13daf6165853fdc12d40ea7af41f330f3902fbe53f04922895",
+      "tools/v0210_v05_product.py": "9ad72a9f548d455e1f504a9ecc27a6f8e5788e7f3e69c73d6816f0b1756c4722",
+      "tools/check_v0211_backend.py": "502488668a130e49195648cc5659a732fe455389df604cc3556c22ddc16ff1c1",
+      "tools/v02_local_provider.py": "e1cf92f60fb3344eca0026638af954b93b46a52904fd4a9f76b1a9c922797ef8",
+      "tools/prepare_v0216.py": "bfe08ce86b5bb891f5bbfbb961885079c951bfe6368b79809774776223ddde35",
+      "tools/v0216_support.py": "3f94f07c6425fd217d3cab51c8e1c02fa509652265ab7104d8599cd8c572040d"
+    },
+    "baseline_system_sha256": {
+      "NOTES": "8295f3b752ac1296d45d595641b4cbe87a215d11c462b5f760bd2fc825a5b151",
+      "REMINDER": "69ed158c2ada2e84c1d634cb009011ad9f5a01cc01ed7e9680bd85a2a038786f"
+    },
+    "model_assets": {
+      "/cra/memory/mx_memory/evidence/v0213/p0-20260909/effective-tokenizer.json": "ffb7a28b27dabcc333662fd3e0b0005d9e79a1c22e31453ab5a3017fbd5f25c0",
+      "/cra/memory/mx_memory/evidence/v0213/p0-20260909/chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "host_acquisition": {
+      "implementation": "CLIENT_SDK",
+      "version": "0.1.4",
+      "wheel_sha256": "58e5d82a1e82ccff1111bea28184ac2958ea62028cf2698e8ef1fb273cab38d4",
+      "matching_python_files": 15,
+      "module": "milai_client.host_acquisition",
+      "module_sha256": "3689b1fe94e36344ab8a8011181c342acbf6b476d10fdadf7445a10d64a391a1",
+      "event_loop": "ONE_PER_COLD_HOST"
+    },
+    "goal_sha256": "f2831b3b125aa48051bfe3fd82ae5342b520c296ff515166210c99ed56d2fb20"
+  },
+  "review_sha256": "7fc29bf145ed66330299f7ed94cb4cbfa95cc41d700cd6ce70bf7db698a4b676",
+  "reviewed_rows_sha256": "c14eb2c304b0e2785131cfa938fe3697fdf0eb2dd2d59fcbc04fa3634a141685",
+  "mechanism_development": false,
+  "paid_requests": 0,
+  "judge_requests": 0,
+  "attribution_limit": "Earliest layers concern required task support; misreading coverage metadata is a secondary reasoning symptom, not presented target-support use failure. Old-premise persistence and memory-induced causality have no eligible persistent-note opportunity. Not an unbiased failure rate."
+}

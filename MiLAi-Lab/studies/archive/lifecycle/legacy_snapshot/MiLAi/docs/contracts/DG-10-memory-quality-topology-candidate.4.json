@@ -1,0 +1,42 @@
+{
+  "schema": "milai.dg10.memory-quality-topology.v1",
+  "candidate_id": "candidate.4",
+  "date": "2026-08-22",
+  "status": "FROZEN_PRE_MODEL_AUTHOR_CANDIDATE",
+  "host_runner": "DG10Candidate3TrackAHarness",
+  "arms": ["NO_MEMORY", "NAIVE_RAG", "MILAI_RETRIEVAL"],
+  "answer_model_calls_per_case": {
+    "NO_MEMORY": 1,
+    "NAIVE_RAG": 1,
+    "MILAI_RETRIEVAL": 1
+  },
+  "retrieval_before_answer_call": true,
+  "generation": {
+    "temperature": 0,
+    "seed": 20260822,
+    "max_output_tokens": 256,
+    "structured_answer_field": "answer"
+  },
+  "memory_target_tokenizer_tokens_max": 512,
+  "same_system_prompt": true,
+  "same_answer_prompt_renderer": true,
+  "same_chat_template": true,
+  "same_model_and_tokenizer": true,
+  "milai_retrieval": {
+    "full_session_corpus_required": true,
+    "governed_evidence_proposal_decision_required": true,
+    "query_must_equal_original_question": true,
+    "canonical_gate_required": true,
+    "artificial_marker_allowed": false,
+    "shared_naive_ranking_allowed": false,
+    "direct_table_access_allowed": false
+  },
+  "reporting": {
+    "score_only_structured_answer": true,
+    "provenance_in_separate_sidecar": true,
+    "native_id_one_to_one_mapping_required": true,
+    "hidden_model_calls_max": 0
+  },
+  "test_access_authorized": false,
+  "full_test_execution": "DENIED_NOT_RUN"
+}

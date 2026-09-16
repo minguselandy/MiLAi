@@ -1,0 +1,43 @@
+{
+  "experiment_id": "MILA-V02-10-E1",
+  "goal_version": "0.4",
+  "arm_kind": "RESEARCH_PROTOTYPE",
+  "host": "LOCAL_SINGLE_HOST_CONTROL_TEXT",
+  "case_label": "DERIVED_OPEN_DEVELOPMENT_CASE",
+  "case_id": "sim12-derived-write-boundaries-v1",
+  "scope": "synthetic-v0210/derived-write-boundaries-v1",
+  "source_package": "artifacts/v02-e2e-generality/file-snapshot-engineering-20260907a/file-source-package.json",
+  "source_package_sha256": "ffa48ae9d783680c0cdeca2e845d44592a38d14ac6ac8c92d36e0a93dbc02b49",
+  "base_history": ["当前工作是根据项目文档检查发布前演练，尚未执行处置操作。"],
+  "task": "请基于完整项目文档，交付两项写入异常的简短处置说明：分别说明已知事实、未知结果、可执行的下一步和目前不能成立的发布结论。注明支持判断的来源，不实际重试写入、删除文件或修改服务。",
+  "observations": [
+    "一次 Working State 写入请求超时，没有取得该操作的回执；新会话 GET 看到了更高的 State 版本。",
+    "另一次 Evidence 采集遇到目录同步错误，磁盘上仍可读到原文。"
+  ],
+  "order": ["C0.prepare", "C1.prepare", "C2.prepare", "C0.deliver", "C1.deliver", "C2.deliver"],
+  "seed": 260908,
+  "max_input_tokens": 8192,
+  "max_output_tokens": 1024,
+  "batch_request_limit": 6,
+  "batch_raw_token_limit": 64000,
+  "batch_timeout_seconds": 600,
+  "request_timeout_seconds": 60,
+  "compatibility_probes": 0,
+  "oracle": "NOT_RUN",
+  "model_transport_enabled": false,
+  "new_local_model_requests_authorized": 0,
+  "new_paid_model_requests_authorized": 0,
+  "new_raw_tokens_authorized": 0,
+  "tool_state": "MODEL_TOOLS_DISABLED_SERVER_CATALOG_UNCHANGED",
+  "context_projection_enabled": false,
+  "product_access": "NOT_USED_IN_E1",
+  "product_baseline": {
+    "mcp_version": "0.1.15",
+    "runtime_version": "0.1.4",
+    "client_version": "0.1.3",
+    "catalog": "compact-memory-v1",
+    "registered_tools": 8,
+    "delivery_sha256": "18344e991596de27c8033b8a5ebb69de235ea98bfee0f0008061900d5fd49b41",
+    "mcp_wheel_sha256": "ee24607e0f365468a7ace818bb66718cc397bfaba33f8d6db22dd7ef2f61ae7b"
+  }
+}

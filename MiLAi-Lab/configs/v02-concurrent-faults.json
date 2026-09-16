@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MILA-V02-05-CONCURRENT-FAULTS",
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "product_lock": "data/locks/v02-sim04-ref-capacity-product.lock.json",
+  "model_transport_enabled": false,
+  "new_model_allocations_authorized": 0,
+  "new_model_tokens_authorized": 0,
+  "data_mode": "SYNTHETIC_ONLY",
+  "readers": 2,
+  "reads_during_mutation_each": 16,
+  "reads_after_revoke_each": 4,
+  "runtime_cpu_affinity_count": 2,
+  "api_threads": 8,
+  "database_pool_max_size": 8,
+  "database_pool_max_waiting": 32,
+  "model_calls": 0,
+  "faults": ["worker_sigkill_before_save", "revoke_during_reads", "api_sigkill_after_commits", "cold_mcp_restart"],
+  "measurement": "PUBLIC_MCP_MECHANISM_CHECK_NOT_LOAD_SLO",
+  "not_tested": ["tenant_fairness", "power_loss", "model_effect", "inflight_api_kill", "high_load_slo"]
+}

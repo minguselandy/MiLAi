@@ -1,0 +1,13 @@
+{
+  "case_count": 24,
+  "case_order_sha256": "9c25990f212911e25a05fcd9156f4b877b40db13374f3c636288d99e73e83f9b",
+  "classification": "OPENED_DEVELOPMENT_ONLY",
+  "files": {
+    "product11-opened-dev24.v0.2.json": "9d0fb4086d816d7fc3066138894bc8621026b56f39acfc29cbb3f51267f49a3d"
+  },
+  "formal_source": false,
+  "schema_version": "milai-product11-dataset-manifest-v0.3",
+  "selection_basis": "TREATMENT_BLIND_A0",
+  "source_fixture_semantic_sha256": "582a01cda3711e18619c932d3ff4418ef31453d387bd6eb501e5070a7cb32fd3",
+  "superseded_a0_trace_sha256": "6a1b5f5b3ed7e820502363d4d0ddb2700c8355d4b027b1dc46e4b36f5887e473"
+}

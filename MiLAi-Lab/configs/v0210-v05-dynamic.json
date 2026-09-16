@@ -1,0 +1,32 @@
+{
+  "goal_version": "0.5",
+  "batch": "B3",
+  "case_label": "CONTROLLED_MECHANISM_INDEPENDENT_OF_V04",
+  "entry": "data/manifests/v0210-v05-dynamic-entry.json",
+  "contrast": ["A", "B"],
+  "limits": {"sessions": {"A": 4, "B": 4}, "max_generations": 8, "max_raw_tokens": 64000, "seed": 260909},
+  "max_batch_seconds": 600,
+  "max_tools_per_arm": 6,
+  "task": "合成诊断：交付 B7 尚无接收签收。继续已有调查，给出有依据的当前结论、未决条件及最小下一步。只读诊断；不得实际重启、交付、删除或修改任何系统。没有提供的根因不要当事实。",
+  "initial_note": "发布分支：此前看到成功回执，已关闭。回执身份核对曾暂存，等待当前交付编号确认后回来核对。当前调查 exporter；旧下一步草案为重启 exporter。控制笔记可能有误，未执行任何重启。",
+  "initial_material": "当前编号是 B7，接收方尚无 B7 签收。调查只允许读取合成资料，所有旧计划都需依据当前证据判断。来源目录列出全部可读文档，不存在隐藏可用源。",
+  "normal_policy": "使用完整历史、已读来源和可用工具正常自主调查。可以留普通简短笔记或不留；有充分依据就交付，否则选择有用的只读查证。不必走固定来源顺序。",
+  "exploration_policy": "允许先记录未验证的想法而不立刻采信或切换。下一步行动先与当前证据核对；新观察使旧关闭理由不再成立时，可重新检查相关问题和暂存返回点；无关或不冲突的新观察不需要重启已成立调查。根据任务需要选择路线，取得足够证据后收敛。不要求固定格式的控制记录。",
+  "initial_visible": ["task", "initial_note", "initial_material", "all_source_ids_and_versions", "normal_policy"],
+  "observation_schedule": [
+    {"before_generation": 2, "text": "新的关联日志：旧笔记所引用的成功回执编号是 B6，不是本次的 B7。日志只更正回执归属，没有报告 exporter 故障。"},
+    {"before_generation": 3, "text": "新的例行通知：排版工作的例会提前十分钟；通知明确不改变 B7 文件、审批、发布或签收状态。"}
+  ],
+  "timeline_rule": "The injected t2 failure in the entry manifest supplies only the initial fallible note. After execution starts the Host's outputs are never reset or patched. Scheduled observations append verbatim before generations 2 and 3 if the arm is still active. An early answer is retained and missing dynamic events are NOT_COVERED.",
+  "round_four": "Final allowed generation; model may answer with remaining unknowns. A further tool request may execute within the tool cap but receives no extra generation; unfinished delivery remains incomplete.",
+  "sources": [
+    {"id": "procedure", "version": "v1", "text": "合成交付流程：exporter 生成按交付编号关联的文件和摘要；负责人批准后 publisher 才能发布；接收方签收才结束交付。不同编号的记录不可互代。文件导出、批准、发布、签收是不同条件。诊断可读取记录，但无权重启、修改审批、执行发布或删除文件。\n"},
+    {"id": "export-records", "version": "v1", "text": "B7 export 记录：文件已生成，摘要核验通过。没有 exporter 错误记录。B6 的导出和 B7 独立。\n"},
+    {"id": "receipt-records", "version": "v1", "text": "可读回执：B6 接收签收成功。未找到 B7 接收签收。此列表是当前冻结范围内的全部回执记录；缺少 B7 签收不能单独定位 exporter、审批或 publisher 原因。\n"},
+    {"id": "publication-records", "version": "v1", "text": "B7 发布记录：负责人批准仍为 pending，publisher 尚未执行发布。待确认批准后才能按正常流程请求发布；诊断会话没有代批或发布权限。B6 已完成发布。\n"},
+    {"id": "calendar", "version": "v1", "text": "排版例会计划为十点，可能调整十分钟。日程与交付状态无关，不要求重跑导出或发布调查。\n"}
+  ],
+  "preparation_outputs": "No extra preparation generations; optional plain note in each normal action is not a mandatory Control State.",
+  "new_generations_authorized": 0,
+  "authorization_note": "Runnable B3 activation is recorded separately after zero-model assembly checks, under the user's direct execution instruction."
+}

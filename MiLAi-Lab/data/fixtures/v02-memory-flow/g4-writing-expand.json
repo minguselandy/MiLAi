@@ -1,0 +1,32 @@
+{
+  "case_id": "g4-writing-expand",
+  "domain": "content_writing",
+  "initial_type": "one_time_expansion",
+  "development_status": "constructed-new-family-after-strategy-freeze",
+  "task": "完成这一次展厅指示牌文案：把 sources/ 中三个位置的要求分别写成一条简短中文提示，按入口、楼梯口、阅览区的顺序给出。不需设计后续工作。",
+  "followup": null,
+  "initial_payload": {
+    "note": "展厅提示牌使用礼貌、直接的短句，不夸张，不捏造禁止事项；根据各位置的实际要求写。",
+    "sources": [
+      "sources/signs.txt"
+    ]
+  },
+  "sources": {
+    "signs.txt": "入口：请先在服务台领取参观贴纸；免费，不需要预约。楼梯口：二层展区临时关闭，但一层展区正常开放；不要写成全馆关闭。阅览区：可以拍摄展板，拍摄时关闭闪光灯；不要写成禁止拍照。",
+    "other.txt": "库房为员工专用，访客禁止拍照；该要求仅适用库房，不是阅览区。"
+  },
+  "evaluation": {
+    "required": [
+      "entry collect free sticker no invented booking requirement",
+      "stairs second floor temporarily closed first floor open",
+      "reading area photography allowed flash off",
+      "three concise polite lines correct order no unrelated ban"
+    ],
+    "correct_initial_facts": [
+      "polite direct tone",
+      "no invented prohibitions"
+    ],
+    "key_source": "signs.txt",
+    "save_value": "One-time display copy; no followup"
+  }
+}

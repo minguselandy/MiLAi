@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "study_id": "replace-me",
+  "dataset_manifest": "configs/datasets/replace-me.json",
+  "arms": [],
+  "primary_metric": "replace-me",
+  "max_product_calls_per_case": 1,
+  "max_model_calls_per_case": 1
+}
+

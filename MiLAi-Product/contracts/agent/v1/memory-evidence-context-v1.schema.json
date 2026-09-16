@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://milai.local/contracts/agent/v1/memory-evidence-context-v1.schema.json",
+  "title": "MiLAi Memory Evidence Context v1",
+  "description": "A governed evidence view for reasoning-capable MCP hosts. It does not assert answer sufficiency.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "retrieval_status",
+    "context_id",
+    "snapshot",
+    "continuation",
+    "evidence",
+    "warnings",
+    "profile"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "memory-evidence-context-v1"
+    },
+    "retrieval_status": {
+      "enum": ["HIT", "MISS", "DEGRADED", "ERROR"]
+    },
+    "context_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "snapshot": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "as_of": {"type": "string", "format": "date-time"},
+            "canonical_position": {"type": "integer", "minimum": 0}
+          }
+        }
+      ]
+    },
+    "continuation": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["available", "reason"],
+          "properties": {
+            "available": {"type": "boolean"},
+            "reason": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidenceUnit"}
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/warning"}
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "resolved"],
+      "properties": {
+        "requested": {"type": ["string", "null"]},
+        "resolved": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "$defs": {
+    "evidenceUnit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "alias", "kind", "text", "evidence_ids", "source"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "alias": {"type": "string", "pattern": "^E[1-9][0-9]*$"},
+        "kind": {"enum": ["EVIDENCE", "EVIDENCE_CONTEXT", "CANONICAL_STATE"]},
+        "text": {"type": "string", "minLength": 1},
+        "evidence_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "id", "turn_refs"],
+          "properties": {
+            "type": {"type": "string", "minLength": 1},
+            "id": {"type": "string", "minLength": 1},
+            "turn_refs": {
+              "type": "array",
+              "items": {"type": "string", "minLength": 1},
+              "uniqueItems": true
+            }
+          }
+        },
+        "observed_at": {"type": "string", "format": "date-time"},
+        "validity": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "valid_from": {"type": "string", "format": "date-time"},
+            "valid_to": {"type": "string", "format": "date-time"}
+          }
+        }
+      }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+        "message": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

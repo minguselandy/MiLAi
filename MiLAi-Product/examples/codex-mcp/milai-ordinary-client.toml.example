@@ -1,0 +1,13 @@
+# Historical ordinary 22-tool / 12-scope migration example, not the current public profile.
+# OAuth 7960 now uses compact: use milai-aigcit-client.toml.example for that endpoint.
+# Use this profile only with a separately authorized ordinary deployment and its actual URL.
+# New name for the documented independent-client migration path.
+# Add this table once to the user's Codex configuration; retain the old entry until verified.
+# No oauth_client_id or static Bearer override: request a fresh DCR registration.
+[mcp_servers.milai-ordinary]
+url = "https://milai.aigcit.com:7960/mcp"
+# Resource is discovered from MCP metadata; do not add oauth_resource a second time.
+scopes = ["milai.memory.read", "milai.state.read", "milai.state.write", "milai.evidence.capture", "milai.proposal.create", "milai.proposal.review", "milai.evidence.revoke", "milai.operations.admin", "milai.note.read", "milai.note.write", "milai.note.delete", "milai.evidence.read"]
+# Login from the user's own machine:
+# codex mcp login milai-ordinary --oauth-client-registration dcr --scopes milai.memory.read,milai.state.read,milai.state.write,milai.evidence.capture,milai.proposal.create,milai.proposal.review,milai.evidence.revoke,milai.operations.admin,milai.note.read,milai.note.write,milai.note.delete,milai.evidence.read
+# Restart the test process and select milai-ordinary, not the old milai connection.

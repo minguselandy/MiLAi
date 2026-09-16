@@ -1,0 +1,5 @@
+# Local simulation only: reuse Docker's existing bridge; do not allocate/prune networks.
+# The public Product base compose retains its loopback-only, random host port binding.
+services:
+  postgres:
+    network_mode: bridge

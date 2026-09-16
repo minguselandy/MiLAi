@@ -1,0 +1,64 @@
+{
+  "schema": "milai.dg10.ai-audit-policy-override.v1",
+  "candidate_id": "candidate.4",
+  "parent_candidate_id": "candidate.3",
+  "effective_at": "2026-08-22T09:06:03+08:00",
+  "status": "USER_AUTHORIZED_POLICY_OVERRIDE_FROZEN",
+  "authorization_source": {
+    "kind": "INTERACTIVE_USER_DIRECTIVE",
+    "exact_text": "使用ai审计代替人类审计即可",
+    "exact_text_sha256": "33507ea06b71737c236e192a89641d78ea06847757e36399e8e60ac8909bc47c",
+    "codex_execution_instruction_path": "codex_sol_max.md",
+    "codex_execution_instruction_sha256": "2989909f6433f17cafa92f0cfa76a54ad5d8c5286daa209db6cc07e4523d6ad2"
+  },
+  "superseded_requirements_for_candidate_4_only": [
+    "TIER2_TWO_HUMAN_ANNOTATORS_AND_HUMAN_ADJUDICATOR",
+    "HUMAN_TEST_ACCESS_APPROVAL_RECEIPT",
+    "CODEX_TEXT_CANNOT_CLOSE_ANY_REVIEW_GATE"
+  ],
+  "replacement_ai_gate": {
+    "evidence_class": "AI_INDEPENDENT",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "max",
+    "ephemeral_required": true,
+    "ignore_user_config_required": true,
+    "ignore_rules_required": true,
+    "sandbox": "read-only",
+    "closed_repo_external_bundle_required": true,
+    "network_forbidden": true,
+    "runtime_socket_forbidden": true,
+    "raw_labels_or_outputs_forbidden_before_authorization": true,
+    "process_exit_code_required": 0,
+    "provider_thread_count_required": 1,
+    "output_schema_validation_required": true,
+    "raw_events_stderr_and_hashes_required": true,
+    "minimum_primary_ai_audits_for_tier2_replacement": 2,
+    "conflicting_primary_audits_require_third_ai_adjudication": true,
+    "open_p0_max_for_acceptance": 0,
+    "open_p1_max_for_acceptance": 0,
+    "must_not_be_labeled_human": true,
+    "may_not_override_tier1_deterministic_scores": true
+  },
+  "control_path_bootstrap_rule": {
+    "applies_only_to_candidate_id": "candidate.4",
+    "requires_r0_r2_ai_accepted": true,
+    "requires_source_environment_model_identities_frozen": true,
+    "permitted_phase": "T2_CONTROL_PATH_SMOKE",
+    "permitted_model_call_count": 24,
+    "test_access_permitted": false,
+    "all_attempts_must_be_preallocated_and_ledgered": true,
+    "r3_acceptance_required_before_any_other_model_call": true,
+    "failure_or_identity_drift_action": "DENY_REMAINING_CALLS_AND_CREATE_NEW_CANDIDATE"
+  },
+  "unchanged_boundaries": {
+    "candidate_3_artifacts_immutable": true,
+    "canonical_authority_unchanged": true,
+    "runtime_status": "CANDIDATE",
+    "schema_status": "EXPERIMENTAL_NO_GO_FOR_FREEZE",
+    "external_provider_gate": "OE-F06_OPEN_PARKED",
+    "production_ready_claim_allowed": false,
+    "schema_frozen_claim_allowed": false
+  },
+  "policy_authorizes_evidence_class_change_only": true,
+  "policy_does_not_accept_any_stage_or_result": true
+}

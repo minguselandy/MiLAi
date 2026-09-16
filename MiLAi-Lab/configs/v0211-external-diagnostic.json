@@ -1,0 +1,15 @@
+{
+  "goal": "MILA-V02-11@0.2",
+  "execution_authorization": "User explicitly requested execution, direct permission passage, subagent review instead of human review. Execute X0 and first-stage sequential A0 diagnostics within these bounds; no S1/S2, protected Formal unsealing, paid dependencies or Product changes.",
+  "seed": "v0211-20260909-v1",
+  "V1": {"target": 24, "per_stratum": 6, "strata": ["knowledge-update", "temporal-reasoning", "multi-session", "abstention"], "wave_size": 4, "max_generations": 24, "max_raw_tokens": 240000, "per_question_raw": 10000, "wave_seconds": 600, "profile": "A0_ORACLE_USE"},
+  "V2": {"target": 45, "strata": ["dynamic", "workflow", "gotcha", "premise", "static"], "quotas": [10, 10, 10, 10, 5], "wave_size": 5, "max_generations": 135, "max_raw_tokens": 900000, "per_question_raw": 20000, "wave_seconds": 900, "profile": "A0_MCP_BOUNDED_WITH_NORMAL_SOURCE_FILES", "tier": "small"},
+  "limits": {"max_input_tokens": 8192, "output_reservation": 1024, "max_request_seconds": 60, "max_tool_seconds": 40, "max_generations_in_flight": 1, "max_tools_per_question": 6, "max_generations_per_v2_question": 3},
+  "resources": {"metadata_download_bytes": 67108864, "new_trajectory_download_bytes": 0, "new_model_weight_download_bytes": 0, "max_source_text_bytes": 2147483648, "max_extracted_image_bytes": 42949672960, "max_ingest_seconds": 900, "max_disk_bytes": 53687091200, "existing_snapshot_reuse": true},
+  "evaluation": {"name": "MiLAi local diagnostic correctness on frozen subset", "profile": "NONSTANDARD_LOCAL_DIAGNOSTIC", "mode": "HUMAN_SEMANTIC_REPLACED_BY_USER_AUTHORIZED_SUBAGENT_REVIEW", "benchmark_judge_requests": 0, "subagent_review_cost": "ORCHESTRATOR_MODEL_ASSISTED_LAB_REVIEW_SEPARATE_FROM_BENCHMARK_PROVIDER_NOT_HUMAN_OR_FREE", "contract_before_first_generation": true, "disputed_counts_as_signal": false},
+  "branch_rule": "Use Goal 6.1 unchanged: block affected leakage/permission/unknown-cost/backend/modality first; expand only confirmed support-presented use-failure queues; V1/V2 alternate, V2 abilities in declared order; stop after two expansion waves with no new independent recurrence or after candidate gate of >=3 clusters and >=2 abilities; remaining frozen positions NOT_RUN, never substitute questions.",
+  "candidate_gate": {"minimum_independent_clusters": 3, "minimum_abilities": 2, "support_presented": true, "v2_required_for_environment_generalization": true},
+  "intervention_authorized": false,
+  "paid_generations": 0,
+  "automatic_maintenance": false
+}

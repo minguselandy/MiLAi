@@ -1,0 +1,136 @@
+{
+  "schema": "milai.dg13.r2-verification-receipt.v1",
+  "goal_id": "DG-13",
+  "working_directory": "/cra/memory/mx_memory/MiLAi",
+  "started_at": "2026-08-26T08:21:48Z",
+  "finished_at": "2026-08-26T08:30:09Z",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "python_client_pytest",
+      "cwd": "integrations/python-client",
+      "command": ".venv/bin/pytest -q",
+      "exit_code": 0,
+      "summary": "162 passed in 0.70s",
+      "status": "PASS"
+    },
+    {
+      "name": "mcp_pytest",
+      "cwd": "integrations/mcp",
+      "command": ".venv/bin/pytest -q",
+      "exit_code": 0,
+      "summary": "33 passed in 3.84s",
+      "status": "PASS"
+    },
+    {
+      "name": "openworker_pytest",
+      "cwd": "integrations/openworker-mcp",
+      "command": ".venv/bin/pytest -q",
+      "exit_code": 0,
+      "summary": "101 passed in 5.74s",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_ruff",
+      "cwd": "runtime",
+      "command": ".venv/bin/ruff check src tests migrations",
+      "exit_code": 0,
+      "summary": "All checks passed!",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_strict_mypy",
+      "cwd": "runtime",
+      "command": ".venv/bin/mypy",
+      "exit_code": 0,
+      "summary": "Success: no issues found in 82 source files",
+      "status": "PASS"
+    },
+    {
+      "name": "python_client_ruff",
+      "cwd": "integrations/python-client",
+      "command": ".venv/bin/ruff check src tests",
+      "exit_code": 0,
+      "summary": "All checks passed!",
+      "status": "PASS"
+    },
+    {
+      "name": "python_client_strict_mypy",
+      "cwd": "integrations/python-client",
+      "command": ".venv/bin/mypy",
+      "exit_code": 0,
+      "summary": "Success: no issues found in 14 source files",
+      "status": "PASS"
+    },
+    {
+      "name": "mcp_ruff",
+      "cwd": "integrations/mcp",
+      "command": ".venv/bin/ruff check src tests",
+      "exit_code": 0,
+      "summary": "All checks passed!",
+      "status": "PASS"
+    },
+    {
+      "name": "mcp_strict_mypy",
+      "cwd": "integrations/mcp",
+      "command": ".venv/bin/mypy",
+      "exit_code": 0,
+      "summary": "Success: no issues found in 2 source files",
+      "status": "PASS"
+    },
+    {
+      "name": "openworker_ruff",
+      "cwd": "integrations/openworker-mcp",
+      "command": ".venv/bin/ruff check src tests",
+      "exit_code": 0,
+      "summary": "All checks passed!",
+      "status": "PASS"
+    },
+    {
+      "name": "agent_contract_pytest",
+      "cwd": ".",
+      "command": "runtime/.venv/bin/pytest -q runtime/tests/contract/test_agent_contract_files.py",
+      "exit_code": 0,
+      "summary": "2 passed in 0.06s",
+      "status": "PASS"
+    },
+    {
+      "name": "agent_contract_parse",
+      "cwd": ".",
+      "command": "runtime/.venv/bin/python -c <inline_code>",
+      "inline_code": "import json; from pathlib import Path; import yaml; p=Path('contracts/agent/v1'); docs=sorted([*p.rglob('*.json'),*p.rglob('*.yaml'),*p.rglob('*.yml')]); [(json.loads(x.read_text()) if x.suffix=='.json' else yaml.safe_load(x.read_text())) for x in docs]; print('PASS parsed',len(docs),'contract files'); print('\\n'.join(str(x) for x in docs))",
+      "exit_code": 0,
+      "parsed_files": [
+        "contracts/agent/v1/dg13u-u1-candidate-fixture.json",
+        "contracts/agent/v1/dg13u-u1-review-response.schema.json",
+        "contracts/agent/v1/examples/recall-request.json",
+        "contracts/agent/v1/openapi.yaml",
+        "contracts/agent/v1/tool-contract.json"
+      ],
+      "summary": "PASS parsed 5 contract files",
+      "status": "PASS"
+    },
+    {
+      "name": "archive_aware_secret_scan",
+      "cwd": ".",
+      "command": "PYTHONPATH=runtime/src runtime/.venv/bin/python scripts/scan_ua_secrets.py --env-file runtime/.env",
+      "executed_at": "2026-08-26T08:30:06Z",
+      "exit_code": 0,
+      "result": {
+        "schema": "milai.archive-aware-secret-scan.v1",
+        "file_count": "1405",
+        "archive_member_count": "2471",
+        "archive_uncompressed_bytes": "67661637",
+        "scanned_bytes": "229070288",
+        "secret_value_count": "17",
+        "matching_paths": [],
+        "matching_archive_members": [],
+        "forbidden_archive_members": [],
+        "unsafe_archives": [],
+        "status": "PASS"
+      },
+      "status": "PASS"
+    }
+  ],
+  "replay_note": "Commands are relative to working_directory and use the existing project-locked virtual environments. Exit codes and summaries are the direct outputs captured during this closure run."
+}

@@ -1,0 +1,540 @@
+{
+  "bfcl_dev_answer_labels_opened": true,
+  "bfcl_dev_case_count_semantically_opened": 80,
+  "bfcl_test_labels_or_outputs_opened": false,
+  "byte_closure": {
+    "function_source_GorillaFileSystem": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/gorilla_file_system.py",
+      "sha256": "84173750930b09aaa31b90547c9bd79ce75714682608b35e78a9c1ea259faf2b",
+      "size": 32759
+    },
+    "function_source_MathAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/math_api.py",
+      "sha256": "abde32cc25e71b2ff3acf4d028a3c005b98409c174aba4abddbfe1c018afb9a8",
+      "size": 12252
+    },
+    "function_source_MessageAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/message_api.py",
+      "sha256": "cf72af1635654147af17df1891a7fb354549e78a61930139f741a31f4be21121",
+      "size": 12534
+    },
+    "function_source_TicketAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/ticket_api.py",
+      "sha256": "6a9375aa6425410c07a151aef27f3e44e9ed1023bb5cc5c25f14f4a9b3c99116",
+      "size": 9677
+    },
+    "function_source_TradingBot": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/trading_bot.py",
+      "sha256": "cc2e3949035b561e9d07418b081561aa07b211672200e2e511aec074bf79fcb2",
+      "size": 23795
+    },
+    "function_source_TravelAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/travel_booking.py",
+      "sha256": "e698e22adccf0d6d41b297f2d5e44faebd828cef4752df6a4ffb1570c0c35296",
+      "size": 36647
+    },
+    "function_source_TwitterAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/posting_api.py",
+      "sha256": "32b887aaa37c7167ad9c84ddfa7bbb855c75d3c1edab19ba868aba29acc4cfa1",
+      "size": 12537
+    },
+    "function_source_VehicleControlAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/vehicle_control.py",
+      "sha256": "f5f7a2f28968728927a98ae12ec68a32d70781cfb74c2d7b14801772362b12d1",
+      "size": 29559
+    },
+    "function_source__shared_long_context": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/long_context.py",
+      "sha256": "5c9a5710115609c779e5b2ccb43f6ad58271ed96f2ea7a797edb0d65c385aa38",
+      "size": 190330
+    },
+    "official_executable_backend_config": {
+      "path": "bfcl_eval/constants/executable_backend_config.py",
+      "sha256": "1214b960de5d86840e379007c70bc9570203e0b5a926ea740ff00c605a531e57",
+      "size": 1939
+    },
+    "official_multi_turn_checker": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/multi_turn_checker.py",
+      "sha256": "b3b787515eda3bf0e365e39634a8fc7f831763f010f716d35d86f96fd5aab1b5",
+      "size": 13592
+    },
+    "official_multi_turn_utils": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/multi_turn_utils.py",
+      "sha256": "9fdbd779ec715959c310445b54b431e91abaa8b45a302abb6fd8db8d61b62ba2",
+      "size": 5234
+    },
+    "remediation_contract_builder": {
+      "path": "scripts/run_dg10_bfcl_multiturn_scoring_remediation_contract_v3.py",
+      "sha256": "d16c1248ae63154b881170769644502367e4c85aea97c2008631a600b4573db6",
+      "size": 29060
+    },
+    "scoring_orchestrator": {
+      "path": "scripts/run_dg10_bfcl_multiturn_scoring_remediation_v3.py",
+      "sha256": "1c3648782fab3e03640a8f01befd778e08c6ad8b174fe910a8d97f61b6c0d91b",
+      "size": 21625
+    },
+    "scoring_worker": {
+      "path": "scripts/run_dg10_bfcl_multiturn_scoring_worker_v4.py",
+      "sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7",
+      "size": 9969
+    }
+  },
+  "candidate": "candidate.16",
+  "candidate15_failure_diagnostics": [
+    {
+      "case_id": "bfcl_v4:multi_turn_base_121",
+      "failure_stage": "PRE_LABEL_FROZEN_SCHEDULE_LOOKUP",
+      "label_selected": false,
+      "official_checker_invocations": 0,
+      "stderr_sha256": "4b774e2886539a90359d7d47864e4468b6df3877fd3ffb31ca33b118e5798b3e"
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_miss_func_102",
+      "failure_stage": "PRE_LABEL_FROZEN_SCHEDULE_LOOKUP",
+      "label_selected": false,
+      "official_checker_invocations": 0,
+      "stderr_sha256": "4b774e2886539a90359d7d47864e4468b6df3877fd3ffb31ca33b118e5798b3e"
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_miss_param_122",
+      "failure_stage": "PRE_LABEL_FROZEN_SCHEDULE_LOOKUP",
+      "label_selected": false,
+      "official_checker_invocations": 0,
+      "stderr_sha256": "4b774e2886539a90359d7d47864e4468b6df3877fd3ffb31ca33b118e5798b3e"
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_base_137",
+      "failure_stage": "PRE_LABEL_FROZEN_SCHEDULE_LOOKUP",
+      "label_selected": false,
+      "official_checker_invocations": 0,
+      "stderr_sha256": "4b774e2886539a90359d7d47864e4468b6df3877fd3ffb31ca33b118e5798b3e"
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_miss_param_146",
+      "failure_stage": "PRE_LABEL_FROZEN_SCHEDULE_LOOKUP",
+      "label_selected": false,
+      "official_checker_invocations": 0,
+      "stderr_sha256": "4b774e2886539a90359d7d47864e4468b6df3877fd3ffb31ca33b118e5798b3e"
+    }
+  ],
+  "change_control": {
+    "candidate14_hash_fix_superseded_by_typed_versioned_canonicalizer": true,
+    "candidate15_project_root_fix_retained": true,
+    "candidate16_allowed_change": "ADD_EXACT_FIVE_SCORING_SCHEDULE_ALIAS_AND_SOL_REQUIRED_GATES",
+    "checker_input_change": false,
+    "final_valid_formula_change": false,
+    "official_checker_change": false,
+    "prompt_or_generation_change": false,
+    "test_access_change": false,
+    "turn_adapter_change": false
+  },
+  "date": "2026-08-21",
+  "full_scoring_schedule": {
+    "candidate13_complete_case_count": 75,
+    "candidate13_failed_case_count": 5,
+    "case_count": 80,
+    "ordered_case_ids": [
+      "bfcl_v4:multi_turn_base_121",
+      "bfcl_v4:multi_turn_miss_func_100",
+      "bfcl_v4:multi_turn_miss_param_102",
+      "bfcl_v4:multi_turn_long_context_104",
+      "bfcl_v4:multi_turn_base_128",
+      "bfcl_v4:multi_turn_miss_func_102",
+      "bfcl_v4:multi_turn_miss_param_122",
+      "bfcl_v4:multi_turn_long_context_108",
+      "bfcl_v4:multi_turn_base_137",
+      "bfcl_v4:multi_turn_miss_func_11",
+      "bfcl_v4:multi_turn_miss_param_125",
+      "bfcl_v4:multi_turn_long_context_110",
+      "bfcl_v4:multi_turn_base_141",
+      "bfcl_v4:multi_turn_miss_func_114",
+      "bfcl_v4:multi_turn_miss_param_145",
+      "bfcl_v4:multi_turn_long_context_126",
+      "bfcl_v4:multi_turn_base_150",
+      "bfcl_v4:multi_turn_miss_func_134",
+      "bfcl_v4:multi_turn_miss_param_146",
+      "bfcl_v4:multi_turn_long_context_141",
+      "bfcl_v4:multi_turn_base_151",
+      "bfcl_v4:multi_turn_miss_func_147",
+      "bfcl_v4:multi_turn_miss_param_151",
+      "bfcl_v4:multi_turn_long_context_146",
+      "bfcl_v4:multi_turn_base_156",
+      "bfcl_v4:multi_turn_miss_func_154",
+      "bfcl_v4:multi_turn_miss_param_152",
+      "bfcl_v4:multi_turn_long_context_153",
+      "bfcl_v4:multi_turn_base_158",
+      "bfcl_v4:multi_turn_miss_func_157",
+      "bfcl_v4:multi_turn_miss_param_155",
+      "bfcl_v4:multi_turn_long_context_167",
+      "bfcl_v4:multi_turn_base_166",
+      "bfcl_v4:multi_turn_miss_func_16",
+      "bfcl_v4:multi_turn_miss_param_165",
+      "bfcl_v4:multi_turn_long_context_190",
+      "bfcl_v4:multi_turn_base_199",
+      "bfcl_v4:multi_turn_miss_func_165",
+      "bfcl_v4:multi_turn_miss_param_171",
+      "bfcl_v4:multi_turn_long_context_30",
+      "bfcl_v4:multi_turn_base_23",
+      "bfcl_v4:multi_turn_miss_func_170",
+      "bfcl_v4:multi_turn_miss_param_177",
+      "bfcl_v4:multi_turn_long_context_38",
+      "bfcl_v4:multi_turn_base_31",
+      "bfcl_v4:multi_turn_miss_func_172",
+      "bfcl_v4:multi_turn_miss_param_19",
+      "bfcl_v4:multi_turn_long_context_42",
+      "bfcl_v4:multi_turn_base_40",
+      "bfcl_v4:multi_turn_miss_func_45",
+      "bfcl_v4:multi_turn_miss_param_21",
+      "bfcl_v4:multi_turn_long_context_44",
+      "bfcl_v4:multi_turn_base_49",
+      "bfcl_v4:multi_turn_miss_func_48",
+      "bfcl_v4:multi_turn_miss_param_29",
+      "bfcl_v4:multi_turn_long_context_46",
+      "bfcl_v4:multi_turn_base_62",
+      "bfcl_v4:multi_turn_miss_func_74",
+      "bfcl_v4:multi_turn_miss_param_44",
+      "bfcl_v4:multi_turn_long_context_6",
+      "bfcl_v4:multi_turn_base_65",
+      "bfcl_v4:multi_turn_miss_func_75",
+      "bfcl_v4:multi_turn_miss_param_53",
+      "bfcl_v4:multi_turn_long_context_60",
+      "bfcl_v4:multi_turn_base_69",
+      "bfcl_v4:multi_turn_miss_func_86",
+      "bfcl_v4:multi_turn_miss_param_54",
+      "bfcl_v4:multi_turn_long_context_61",
+      "bfcl_v4:multi_turn_base_73",
+      "bfcl_v4:multi_turn_miss_func_93",
+      "bfcl_v4:multi_turn_miss_param_60",
+      "bfcl_v4:multi_turn_long_context_62",
+      "bfcl_v4:multi_turn_base_75",
+      "bfcl_v4:multi_turn_miss_func_94",
+      "bfcl_v4:multi_turn_miss_param_67",
+      "bfcl_v4:multi_turn_long_context_73",
+      "bfcl_v4:multi_turn_base_79",
+      "bfcl_v4:multi_turn_miss_func_96",
+      "bfcl_v4:multi_turn_miss_param_70",
+      "bfcl_v4:multi_turn_long_context_81"
+    ],
+    "ordered_case_ids_sha256": "29c36df2681e61b4835ef06200d07de8029c36e74e11ccce4dab88fb78e7f396",
+    "partition_disjoint_and_complete": true
+  },
+  "gate_results": {
+    "BMG-03": "NO_GO_REMEDIATION_NOT_RUN",
+    "BMG-05": "NO_GO_QUALITY_THRESHOLDS_NOT_FROZEN",
+    "candidate13_scoring": "INCOMPLETE_FIVE_POST_CHECKER_HASH_FAILURES_BOUND",
+    "candidate14_remediation": "INCOMPLETE_FIVE_PRE_LABEL_IMPORT_FAILURES_BOUND",
+    "candidate15_remediation": "INCOMPLETE_FIVE_PRE_LABEL_SCHEDULE_FAILURES_BOUND",
+    "candidate16_execution": "AUTHORIZED_BY_EXACT_ACK_NOT_RUN",
+    "candidate16_pre_freeze_probes": "PASS_BOUND",
+    "test_execution": "NOT_AUTHORIZED"
+  },
+  "hash_contract": {
+    "algorithm": "DG10_TYPED_CANONICAL_CHECKER_RESULT_SHA256_V1",
+    "canonical_form": "RECURSIVE_TYPED_JSON_TAGGED_VALUES_V1",
+    "legacy_complete_row_algorithm": "DG10_JSON_SORT_KEYS_DEFAULT_REPR_SHA256_V1",
+    "nonfinite_float_policy": "FAIL_CLOSED",
+    "per_row_algorithm_required_in_composite": true,
+    "unsupported_type_policy": "FAIL_CLOSED"
+  },
+  "inputs": {
+    "bfcl_git_head": "6ea57973c7a6097fd7c5915698c54c17c5b1b6c8",
+    "candidate13_contract_sha256": "2d97c7557196867ec3329871c2bd96a63e7f96a7bcdc50c9252561cd1eedff37",
+    "candidate13_scoring_ledger_sha256": "e0f1b4a1eb3ec674c7de69db6d9e0c2fa9b07f73cc9774d6b2b536c9a0c9e27a",
+    "candidate13_scoring_report_sha256": "e8f5cea5f37de051e0ad81939cda0882a6b4fa99f6903c910e1777d9558665e1",
+    "candidate14_contract_sha256": "7b401dca18a6587c43e1750d959dfbf9e9c9f8279707d3bc3f69bffcaa7ff94e",
+    "candidate14_remediation_ledger_sha256": "bf85a52395a740b33f29a0541cdf67aa070f67b1ee12606044ca6bfabd005b40",
+    "candidate15_contract_sha256": "49ef07890f2d6dec9b209d02f480d0cfabbfc80de9af09513b63805b4620bb1b",
+    "candidate15_remediation_ledger_sha256": "9b1df08964ee69fd43a922e3940a8b892d1ae8d8735d0918ee8b2fd7af0e7d8c",
+    "label_free_bundle_sha256": "e401c59e9118e86d1c82eeaafafc7661467eb43983b89cdacbf18920e60a564c",
+    "sealed_generation_ledger_sha256": "910d4e13e616046331d0e724aee82e5d1e9cd7e68c8ddb1b3166d163331cd097",
+    "sol_advisory_events_sha256": "bd3df0a8477aeea0a8da2fce13b59217de4a4100762c019e489135593293176e",
+    "sol_advisory_output_sha256": "98dc69c0a190d7192a8220f4affa1a4f96df899d5b52e39cc8d229cb8c208a54",
+    "sol_advisory_thread_id": "01a02542-48d6-77d0-b7c0-f01a05257b3b"
+  },
+  "known_limits": [
+    "Candidate.13 through candidate.15 remain immutable and hash-bound.",
+    "Candidate.16 may execute exactly five development workers and compose only after all five evidence rows complete.",
+    "The contract digest is externally pinned and must be supplied exactly to the execution command.",
+    "This is adapted prompt-mode development characterization, not an official leaderboard score or test authorization."
+  ],
+  "label_sources": {
+    "multi_turn_base": {
+      "contract_builder_reads_label_bytes": false,
+      "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_base.json",
+      "selected_dev_case_count": 20,
+      "semantic_access_before_this_contract": false,
+      "sha256": "1fee67823b317571649177dd89d63969feaae4e810cc7448ee55ba797fb7c8fc"
+    },
+    "multi_turn_long_context": {
+      "contract_builder_reads_label_bytes": false,
+      "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_long_context.json",
+      "selected_dev_case_count": 20,
+      "semantic_access_before_this_contract": false,
+      "sha256": "e82aa0e839c39d23c64a05834f7ae024d7c9738ec21738ecee78dc876e3d0d18"
+    },
+    "multi_turn_miss_func": {
+      "contract_builder_reads_label_bytes": false,
+      "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_miss_func.json",
+      "selected_dev_case_count": 20,
+      "semantic_access_before_this_contract": false,
+      "sha256": "69e679b806d1c871b05393a4b95583bb973248e5b8d96c2d7f4ca05e29fc32e6"
+    },
+    "multi_turn_miss_param": {
+      "contract_builder_reads_label_bytes": false,
+      "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_miss_param.json",
+      "selected_dev_case_count": 20,
+      "semantic_access_before_this_contract": false,
+      "sha256": "59c442901779e2c31c33abcd566d032e03736e5ad8069de2fe05489873046ecf"
+    }
+  },
+  "launch_manifest": {
+    "assignment_count": 5,
+    "assignments": [
+      {
+        "assignment_index": 0,
+        "case_id": "bfcl_v4:multi_turn_base_121",
+        "fresh_process_required": true,
+        "output_basename": "bfcl_v4__multi_turn_base_121.score.json",
+        "retry_allowance": 0,
+        "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+      },
+      {
+        "assignment_index": 1,
+        "case_id": "bfcl_v4:multi_turn_miss_func_102",
+        "fresh_process_required": true,
+        "output_basename": "bfcl_v4__multi_turn_miss_func_102.score.json",
+        "retry_allowance": 0,
+        "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+      },
+      {
+        "assignment_index": 2,
+        "case_id": "bfcl_v4:multi_turn_miss_param_122",
+        "fresh_process_required": true,
+        "output_basename": "bfcl_v4__multi_turn_miss_param_122.score.json",
+        "retry_allowance": 0,
+        "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+      },
+      {
+        "assignment_index": 3,
+        "case_id": "bfcl_v4:multi_turn_base_137",
+        "fresh_process_required": true,
+        "output_basename": "bfcl_v4__multi_turn_base_137.score.json",
+        "retry_allowance": 0,
+        "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+      },
+      {
+        "assignment_index": 4,
+        "case_id": "bfcl_v4:multi_turn_miss_param_146",
+        "fresh_process_required": true,
+        "output_basename": "bfcl_v4__multi_turn_miss_param_146.score.json",
+        "retry_allowance": 0,
+        "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+      }
+    ],
+    "contract_binding": "EXTERNAL_EXACT_SHA256_REQUIRED_AT_EXECUTION",
+    "sixth_launch_authorized": false,
+    "stale_output_policy": "REJECT",
+    "status": "FROZEN_EXACT_FIVE_ZERO_RETRY"
+  },
+  "pre_freeze_probes": {
+    "composite_rejection_matrix": {
+      "label_access": false,
+      "model_or_provider_calls": 0,
+      "negative_case_count": 8,
+      "negative_case_names": [
+        "duplicate",
+        "incomplete",
+        "invocation_mismatch",
+        "missing",
+        "mixed_hash_provenance",
+        "reordered",
+        "stale_partial_parent_selected",
+        "wrong_source"
+      ],
+      "negative_cases_rejected": 8,
+      "positive_case_count": 1,
+      "status": "PASS"
+    },
+    "exact_entrypoint_schedule": {
+      "in_scope_label_boundary_count": 5,
+      "model_or_provider_calls": 0,
+      "official_checker_loads": 0,
+      "out_of_scope_pre_label_rejection_count": 2,
+      "probe_count": 7,
+      "real_label_access": false,
+      "results": [
+        {
+          "case_id": "bfcl_v4:multi_turn_base_121",
+          "exit_code": 0,
+          "status": "WOULD_ENTER_LABEL_BOUNDARY",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "c9cdf4a772985a37a9ff91431b3db087b45cd3062eec2365724e19b7c58bd9f9",
+          "v1_worker_sha256": "f8f79da977be3a3f92e31fe4490ab94cee2766dd52ca4ec84c12ed5957ffc456",
+          "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+        },
+        {
+          "case_id": "bfcl_v4:multi_turn_miss_func_102",
+          "exit_code": 0,
+          "status": "WOULD_ENTER_LABEL_BOUNDARY",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "382db14a57e4efe7372bb30da3f18447e4e327c99a7167a9429ca850c3111e7a",
+          "v1_worker_sha256": "f8f79da977be3a3f92e31fe4490ab94cee2766dd52ca4ec84c12ed5957ffc456",
+          "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+        },
+        {
+          "case_id": "bfcl_v4:multi_turn_miss_param_122",
+          "exit_code": 0,
+          "status": "WOULD_ENTER_LABEL_BOUNDARY",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "bb9229d21a211126354113eed63b84884650849729895fbb8fa45724f15c85f4",
+          "v1_worker_sha256": "f8f79da977be3a3f92e31fe4490ab94cee2766dd52ca4ec84c12ed5957ffc456",
+          "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+        },
+        {
+          "case_id": "bfcl_v4:multi_turn_base_137",
+          "exit_code": 0,
+          "status": "WOULD_ENTER_LABEL_BOUNDARY",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "aeecd8cd8746b33896979d6229a22ba20baaa253b8bb54036ac44407ea062a1b",
+          "v1_worker_sha256": "f8f79da977be3a3f92e31fe4490ab94cee2766dd52ca4ec84c12ed5957ffc456",
+          "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+        },
+        {
+          "case_id": "bfcl_v4:multi_turn_miss_param_146",
+          "exit_code": 0,
+          "status": "WOULD_ENTER_LABEL_BOUNDARY",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "1b02a960df1871cb46b07781804f75c6fc4b1095264a94dacbecae14f1750762",
+          "v1_worker_sha256": "f8f79da977be3a3f92e31fe4490ab94cee2766dd52ca4ec84c12ed5957ffc456",
+          "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+        },
+        {
+          "case_id": "bfcl_v4:unknown_candidate16_probe",
+          "exit_code": 3,
+          "status": "REJECTED_AT_FROZEN_SCHEDULE",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "2b71f31547c6f6caa89357c57639628361d9a47d6cd34f4ce196722a627977a2",
+          "v1_worker_sha256": "f8f79da977be3a3f92e31fe4490ab94cee2766dd52ca4ec84c12ed5957ffc456",
+          "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+        },
+        {
+          "case_id": "bfcl_v4:multi_turn_miss_func_100",
+          "exit_code": 3,
+          "status": "REJECTED_AT_FROZEN_SCHEDULE",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "f657ab9eab751fb91d0a7e67d5e0976bbf41874c8c97c61d50416d4433a1763e",
+          "v1_worker_sha256": "f8f79da977be3a3f92e31fe4490ab94cee2766dd52ca4ec84c12ed5957ffc456",
+          "worker_sha256": "20a8a911891c416302a9f81c8973c0f5b616851632ec202e4e15b01fa46acae7"
+        }
+      ],
+      "status": "PASS_BOUND"
+    },
+    "runtime_and_canonicalizer": {
+      "canonicalizer_cross_process": {
+        "algorithm": "DG10_TYPED_CANONICAL_CHECKER_RESULT_SHA256_V1",
+        "golden_hash": "c7005a4c0a75ea54ce0318b8513efeeb17adea95baf2c5de4cbbc2f98409c0c5",
+        "identical_output_count": 3,
+        "input_not_mutated": true,
+        "insertion_order_independent": true,
+        "label_access": false,
+        "model_or_provider_calls": 0,
+        "nested_mixed_keys_supported": true,
+        "python_hash_seed_runs": [
+          "1",
+          "2",
+          "random"
+        ],
+        "schema": "milai.dg10.bfcl-checker-result-hash-probe.v1",
+        "set_order_independent": true,
+        "status": "PASS",
+        "synthetic_row_canonical_sha256": "e18c71fe7cd428327d9431f6be29a9195116a0e5da4237e2da83467aafd4a2e6",
+        "typed_keys_distinct": true,
+        "unsupported_types_fail_closed": true
+      },
+      "help_probe": {
+        "exit_code": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "87472062a456aac92c861ca51ec5e0ebba73b2f2c2de711947713ba5978922c8"
+      },
+      "label_access": false,
+      "model_or_provider_calls": 0,
+      "status": "PASS_BOUND"
+    },
+    "schedule_contract_matrix": {
+      "case_count": 10,
+      "label_access": false,
+      "model_or_provider_calls": 0,
+      "results": {
+        "changed_order_rejected": true,
+        "duplicate_rejected": true,
+        "extra_authorization_rejected": true,
+        "missing_alias_rejected": true,
+        "mutated_full_schedule_rejected": true,
+        "non_list_rejected": true,
+        "old_candidate_rejected": true,
+        "positive": true,
+        "unequal_alias_rejected": true,
+        "wrong_id_rejected": true
+      },
+      "status": "PASS"
+    }
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "PARENT_SCORING_EVIDENCE_INCOMPLETE",
+  "quality_thresholds_frozen": false,
+  "remediation_schedule": {
+    "case_count": 5,
+    "fresh_process_per_case": true,
+    "merge_policy": "EXPLICIT_REPLACE_EXACT_FIVE_FAILED_ROWS_KEEP_75_IMMUTABLE",
+    "ordered_case_ids": [
+      "bfcl_v4:multi_turn_base_121",
+      "bfcl_v4:multi_turn_miss_func_102",
+      "bfcl_v4:multi_turn_miss_param_122",
+      "bfcl_v4:multi_turn_base_137",
+      "bfcl_v4:multi_turn_miss_param_146"
+    ],
+    "ordered_case_ids_sha256": "eb1699c0b5ffa42583b0b25f3ff67daa371b7815bcb23ae33a6336673059e8c6",
+    "worker_process_retries": 0
+  },
+  "schema": "milai.dg10.bfcl-multiturn-dev-scoring-remediation-contract.v3",
+  "scoring_policy": {
+    "checker_exception_policy": "INVALID_FAIL_CLOSED_INVOKE_OTHER_CHECKER",
+    "decoder_or_gate_failure_can_count_as_no_call": false,
+    "extra_turn_policy": "RETAIN_AND_FAIL_EXACT_TURN_COUNT",
+    "final_valid": "generation_success AND evidence_complete AND exact_turn_count AND multi_turn_checker.valid AND multi_turn_irrelevance_checker.valid",
+    "final_valid_formula_id": "DG10_BFCL_MULTITURN_FINAL_VALID_V1",
+    "generation_failure_latch_dominates": true,
+    "missing_turn_adapter": "APPEND_EXPLICIT_EMPTY_TURNS_ONLY_NEVER_TRUNCATE_OR_REWRITE",
+    "model_or_provider_calls_during_scoring": 0,
+    "official_checker_invocations_per_case": {
+      "multi_turn_checker": 1,
+      "multi_turn_irrelevance_checker": 1
+    },
+    "raw_checker_details_repo_retention": "PROHIBITED",
+    "raw_ground_truth_repo_retention": "PROHIBITED"
+  },
+  "scoring_schedule": {
+    "authorization_expansion": false,
+    "case_count": 5,
+    "ordered_case_ids": [
+      "bfcl_v4:multi_turn_base_121",
+      "bfcl_v4:multi_turn_miss_func_102",
+      "bfcl_v4:multi_turn_miss_param_122",
+      "bfcl_v4:multi_turn_base_137",
+      "bfcl_v4:multi_turn_miss_param_146"
+    ],
+    "ordered_case_ids_sha256": "eb1699c0b5ffa42583b0b25f3ff67daa371b7815bcb23ae33a6336673059e8c6",
+    "purpose": "FROZEN_V1_SCORE_ONE_CASE_COMPATIBILITY_ALIAS_ONLY"
+  },
+  "sol_advisory": {
+    "compatibility_alias_sufficient": true,
+    "human_approval_claim": false,
+    "required_changes_implemented": 6,
+    "review_type": "AI_ADVISORY_NOT_HUMAN_APPROVAL",
+    "risk": "MEDIUM",
+    "verdict": "PROCEED_WITH_REQUIRED_CHANGES"
+  },
+  "status": "BFCL_MULTITURN_SCORING_REMEDIATION_V3_FROZEN_DEV_LABELS_ALREADY_OPENED",
+  "test_access_authorized": false
+}

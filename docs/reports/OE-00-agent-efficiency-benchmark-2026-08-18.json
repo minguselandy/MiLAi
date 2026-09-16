@@ -1,0 +1,197 @@
+{
+  "dataset_manifests": [
+    {
+      "bytes": 363,
+      "claims": 1,
+      "sha256": "95bdc089c483c1f0e1e85ebbc6ddb80415dbb70cf5feaf6a408677377a2991d6"
+    },
+    {
+      "bytes": 364893,
+      "claims": 1000,
+      "sha256": "1b91041dcf41eaa9d356a0418112500e1346e42a2133dad51f52b746e09b3f73"
+    },
+    {
+      "bytes": 3658894,
+      "claims": 10000,
+      "sha256": "3847a3c7c6d7a08e2c9249c4b6c94a089b66d3682a582d7d49f398e7c245bb11"
+    },
+    {
+      "bytes": 36688895,
+      "claims": 100000,
+      "sha256": "ea3ab3c721c0a53cb0ff85ae7d42b4cd1624a9e074343c97b6c35998dcff9732"
+    }
+  ],
+  "evaluation_model": {
+    "model_id": "no-llm-called",
+    "pricing_snapshot": {
+      "cached_input_per_million": null,
+      "currency": null,
+      "input_per_million": null,
+      "output_per_million": null,
+      "reason": "No provider request is made by this deterministic regression benchmark."
+    },
+    "provider": "offline-synthetic",
+    "provider_usage_verified": false
+  },
+  "fixture_path": "evals/agent_efficiency/fixtures.json",
+  "fixture_sha256": "a208db677f76f7af38e664e772f537d84dbea47d956becc0faa85e76a06939fc",
+  "format": "milai-agent-efficiency-benchmark-v1",
+  "framework_policy_mapping": {
+    "autogen": "single replaceable data message and validated cache",
+    "generic_direct": "router+compiler+dynamic tool catalog",
+    "hook": "cross-process MemorySlot checkpoint; no model-visible recall tool",
+    "langgraph": "single replaceable prompt slot and reference-only checkpoint",
+    "mcp": "reader-lite versus static reader-detail"
+  },
+  "gates": {
+    "hundred_turn_total_under_30000": true,
+    "no_provider_usage_fabricated": true,
+    "route_quality_complete": true,
+    "standard_memory_budget_le_512": true
+  },
+  "generated_at": "2026-08-18T07:36:22.225473+00:00",
+  "limitations": [
+    "No LLM provider was called; token totals use ospc.regex.v1 and are not billing data.",
+    "Latency here covers local router/compiler only, not HTTP, PostgreSQL, model inference, or network.",
+    "Dataset manifests prove deterministic generation; database scale latency is a separate gate."
+  ],
+  "machine": {
+    "logical_cpus": 32,
+    "platform": "Linux-5.15.0-86-generic-x86_64-with-glibc2.35",
+    "processor": "x86_64",
+    "python": "3.11.13"
+  },
+  "router_compiler_latency": {
+    "cold_ms": 0.884,
+    "warm": {
+      "1": {
+        "p50_ms": 0.016,
+        "p95_ms": 0.834,
+        "p99_ms": 0.925,
+        "samples": 160,
+        "throughput_ops_per_second": 4908.28
+      },
+      "16": {
+        "p50_ms": 0.018,
+        "p95_ms": 0.867,
+        "p99_ms": 1.165,
+        "samples": 160,
+        "throughput_ops_per_second": 4165.96
+      },
+      "4": {
+        "p50_ms": 0.016,
+        "p95_ms": 0.898,
+        "p99_ms": 6.905,
+        "samples": 160,
+        "throughput_ops_per_second": 4738.92
+      }
+    }
+  },
+  "status": "PASS",
+  "tokenizer": {
+    "id": "ospc.regex.v1",
+    "pattern": "[A-Za-z0-9_]+|[^\\w\\s]",
+    "provider_exact": false
+  },
+  "workloads": [
+    {
+      "baseline": {
+        "memory_context_tokens": 5980,
+        "tool_schema_tokens": 8180,
+        "total_milai_input_tokens": 14160
+      },
+      "estimated_token_reduction": 0.8548022598870056,
+      "execution": {
+        "baseline_logical_recall_operations": 20,
+        "end_to_end_agent_wall_ms": null,
+        "extra_model_round_trips": null,
+        "local_router_compiler_wall_ms": 6.232,
+        "network_or_service_round_trips_executed": 0,
+        "optimized_logical_recall_operations": 4,
+        "provider_model_calls_executed": 0,
+        "provider_round_trip_evidence_verified": false
+      },
+      "expected_recall_rate": 0.2,
+      "optimized": {
+        "memory_context_tokens": 1556,
+        "tool_schema_tokens": 500,
+        "total_milai_input_tokens": 2056
+      },
+      "provider_usage_verified": false,
+      "quality_route_accuracy": 1.0,
+      "routes": {
+        "CACHE": 0,
+        "L0": 0,
+        "L1": 4,
+        "NONE": 16
+      },
+      "turns": 20
+    },
+    {
+      "baseline": {
+        "memory_context_tokens": 29900,
+        "tool_schema_tokens": 40900,
+        "total_milai_input_tokens": 70800
+      },
+      "estimated_token_reduction": 0.8548022598870056,
+      "execution": {
+        "baseline_logical_recall_operations": 100,
+        "end_to_end_agent_wall_ms": null,
+        "extra_model_round_trips": null,
+        "local_router_compiler_wall_ms": 28.989,
+        "network_or_service_round_trips_executed": 0,
+        "optimized_logical_recall_operations": 20,
+        "provider_model_calls_executed": 0,
+        "provider_round_trip_evidence_verified": false
+      },
+      "expected_recall_rate": 0.2,
+      "optimized": {
+        "memory_context_tokens": 7780,
+        "tool_schema_tokens": 2500,
+        "total_milai_input_tokens": 10280
+      },
+      "provider_usage_verified": false,
+      "quality_route_accuracy": 1.0,
+      "routes": {
+        "CACHE": 0,
+        "L0": 0,
+        "L1": 20,
+        "NONE": 80
+      },
+      "turns": 100
+    },
+    {
+      "baseline": {
+        "memory_context_tokens": 149500,
+        "tool_schema_tokens": 204500,
+        "total_milai_input_tokens": 354000
+      },
+      "estimated_token_reduction": 0.8548022598870056,
+      "execution": {
+        "baseline_logical_recall_operations": 500,
+        "end_to_end_agent_wall_ms": null,
+        "extra_model_round_trips": null,
+        "local_router_compiler_wall_ms": 135.494,
+        "network_or_service_round_trips_executed": 0,
+        "optimized_logical_recall_operations": 100,
+        "provider_model_calls_executed": 0,
+        "provider_round_trip_evidence_verified": false
+      },
+      "expected_recall_rate": 0.2,
+      "optimized": {
+        "memory_context_tokens": 38900,
+        "tool_schema_tokens": 12500,
+        "total_milai_input_tokens": 51400
+      },
+      "provider_usage_verified": false,
+      "quality_route_accuracy": 1.0,
+      "routes": {
+        "CACHE": 0,
+        "L0": 0,
+        "L1": 100,
+        "NONE": 400
+      },
+      "turns": 500
+    }
+  ]
+}

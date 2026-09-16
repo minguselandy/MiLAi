@@ -1,0 +1,25 @@
+{
+  "revision": "E1_OPEN_DISCOVERY_V1",
+  "stage": "E1_OPEN_DISCOVERY_V1",
+  "selection": "configs/v0218-s-star.json",
+  "roots": [
+    {"root": "executive_assistant_task2", "batch": "/cra/memory/mx_memory/evidence/v0218/20260911/e0-baseline-wave1-v2", "motivation": "N1 update has unnecessary clarification and stale scheduling after actual old/current presentation; Stable is a guardrail."},
+    {"root": "journalist_task1", "batch": "/cra/memory/mx_memory/evidence/v0218/20260911/e0-baseline-wave3-v2", "motivation": "N1 already succeeds on standard worlds but repeats valid records; probes also show real unresolved delivery gaps. This is an efficiency and stability counterexample to an update-only intervention."}
+  ],
+  "arms": ["N1", "C1", "C2"],
+  "variants": ["stable", "superseded"],
+  "generation_cap": 16,
+  "seconds_per_episode": 900,
+  "batch_seconds": 14400,
+  "episodes": 14,
+  "max_requests": 224,
+  "raw_token_cap": null,
+  "new_compatibility_requests": 0,
+  "new_Judge_requests": 0,
+  "shared_A": "Generate one new natural A per root using unchanged common Host; share its exact Note, including NO_WRITE, and world across all B arms. No best-of selection or reuse of old A results as new attempts.",
+  "estimand": "Conditional consumption-policy comparison, not changed A writing or autonomous retrieval. Same initial information, legal source access and 16 generation opportunities; realized reads and generated checkpoints may differ and are charged.",
+  "C1_prediction": "An evidence/action audit may reduce unsupported suspension or completion and redundant work without damaging Stable. No quality gain, stable damage, or quality-equivalent added cost refutes its useful-complexity claim.",
+  "C2_prediction": "A public free-text checkpoint may add value over C1; if deleting the checkpoint preserves performance, eliminate that component. A more detailed Note alone is not a successful business outcome.",
+  "followup": "Finish all arms. Only explainable signals warrant one additional cold discovery repeat. E2 must test matched-information/generic-review and relevant component/nearest-prior controls before promotion; no automatic E3 or C access.",
+  "scope": "RESEARCH_PROTOTYPE policy on MILAI_ADAPTED_BEHAVIORAL_TESTBED; memory transport PRODUCT_BLACK_BOX; A0 unchanged"
+}

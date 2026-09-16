@@ -1,0 +1,48 @@
+{
+  "schema": "milai.dg17.answer-bearing-annotation-manifest.v0.1",
+  "classification": "OPENED_DEVELOPMENT_ONLY / MANUAL_DIAGNOSTIC_PROXY",
+  "label_artifact": "data/labels/product02-opened-dev-answer-bearing-labels.v0.1.json",
+  "label_artifact_sha256": "4a88cb030e67cce456b1dfe159fce177a5ace4b972f11af2a6674639c52dc876",
+  "source_dataset": "LongMemEval public de-identified development split",
+  "source_receipt": "var/dg16/lme10/dg16-lme10-compare-20260827-002/receipt-rescored.json",
+  "annotation": {
+    "units": [
+      "answer_bearing_span",
+      "required_slot",
+      "join_relation",
+      "gold_ir"
+    ],
+    "historical_annotator_identity": "UNRECORDED",
+    "historical_annotation_date": "UNRECORDED",
+    "written_procedure_at_creation": "UNRECORDED",
+    "source_basis": "exact opened-development source turns plus task question",
+    "model_outputs_used_as_ground_truth": false,
+    "independent_reviewer_identity": null,
+    "independent_review_status": "PENDING",
+    "adjudication_status": "PENDING",
+    "disagreement_handling": "NOT_YET_DEFINED"
+  },
+  "validation_completed": {
+    "source_dataset_identity_hash_pinned": true,
+    "source_turn_offsets_replay": true,
+    "exact_span_text_replay": true,
+    "semantic_operator_independently_validated": false,
+    "required_slots_independently_validated": false,
+    "join_relations_independently_validated": false
+  },
+  "known_identity_boundaries": {
+    "atom_count": 23,
+    "unique_source_turn_plus_span_count": 22,
+    "duplicate_span_reason": "Ava and Lily are distinct atom identities projected from one shared source span",
+    "coverage_reporting_required": [
+      "atom_identity_coverage",
+      "unique_source_turn_plus_span_coverage",
+      "source_turn_coverage"
+    ]
+  },
+  "claim_ceiling": "retrospective opened-development diagnostic only; not benchmark GT, held-out evidence, or independently accepted semantic truth",
+  "product02_use": "first 8 manifest-ordered cases only; acquisition/EvidenceSet micro-gate; no release claim",
+  "copied_from_historical_artifact_without_label_changes": true,
+  "release_use_authorized": false,
+  "next_required_action": "independent line-by-line review with recorded disagreements and adjudication"
+}

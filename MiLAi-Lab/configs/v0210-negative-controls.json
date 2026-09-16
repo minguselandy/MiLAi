@@ -1,0 +1,42 @@
+{
+  "experiment_id": "MILA-V02-10-B2",
+  "case_label": "CONTROLLED_SYNTHETIC_NEGATIVES_NOT_NATURAL_ERROR_RATE",
+  "source_config": "configs/v0210-control-e1.json",
+  "batch_request_limit": 4,
+  "batch_raw_token_limit": 32000,
+  "batch_timeout_seconds": 300,
+  "request_timeout_seconds": 60,
+  "seed": 260908,
+  "arms": ["C0", "C2"],
+  "order": ["reopen.C0", "reopen.C2", "sufficient.C0", "sufficient.C2"],
+  "oracle": "NOT_RUN",
+  "new_G": false,
+  "cases": [
+    {
+      "id": "reopen",
+      "scope": "synthetic-v0210/negative-reopen",
+      "task": "这是合成发布演练。请根据完整项目文档和本轮新观察，复核此次 Evidence 采集，说明当前可确定的结果、仍未知之处和必要下一步。不要实际写入、重试、清理文件或修改服务。",
+      "history": ["上一轮留下了一份已解决的工作记录，本轮收到新的演练日志。旧记录允许被新观察纠正。"],
+      "observations": ["合成演练日志确认：此次 blob 目录同步报错后，保存函数向上传播错误，此次尚未进入 TX-01；原文件仍可读。没有更多现场观察。"],
+      "old_record": {
+        "current_question": "已解决：目录同步失败后本次 TX-01 仍可能已提交。",
+        "unresolved": ["无需再查提交边界。"],
+        "next_action": "可以清理残留文件。"
+      },
+      "ordinary_note": "已解决：目录同步失败后本次 TX-01 仍可能已提交。\n未决记录：无需再查提交边界。\n下一步：可以清理残留文件。"
+    },
+    {
+      "id": "sufficient",
+      "scope": "synthetic-v0210/negative-sufficient",
+      "task": "只根据已呈现的完整项目文档回答：关闭可选的 MILAI_DATABASE_POOL_MAX_PER_TENANT 设置是否需要数据迁移？当前只需要这项规则说明，不要求执行配置变更或发布评估。",
+      "history": ["正在查阅现有项目文档，尚未执行配置变更。"],
+      "observations": ["四份项目文档均已完整呈现，当前没有其他现场故障或新任务。"],
+      "old_record": {
+        "current_question": "关闭可选设置是否需要数据迁移？",
+        "unresolved": ["当前问题尚未回答。"],
+        "next_action": "根据已呈现的项目文档回答当前问题。"
+      },
+      "ordinary_note": "当前问题：关闭可选设置是否需要数据迁移？\n未决记录：当前问题尚未回答。\n下一步：根据已呈现的项目文档回答当前问题。"
+    }
+  ]
+}

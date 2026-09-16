@@ -1,0 +1,11 @@
+{
+  "format": "milai-provider-pricing-snapshot-v1",
+  "provider": "REPLACE_WITH_APPROVED_PROVIDER",
+  "model_id": "REPLACE_WITH_EXACT_MODEL_VERSION",
+  "currency": "USD",
+  "effective_at": "REPLACE_WITH_RFC3339_TIMESTAMP",
+  "source_url": "REPLACE_WITH_OFFICIAL_PRICING_SOURCE",
+  "input_per_million": "REPLACE_WITH_DECIMAL",
+  "cached_input_per_million": "REPLACE_WITH_DECIMAL",
+  "output_per_million": "REPLACE_WITH_DECIMAL"
+}

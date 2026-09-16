@@ -1,0 +1,22 @@
+[mcp_servers.milai]
+url = "http://127.0.0.1:7337/mcp"
+bearer_token_env_var = "MILAI_CODEX_TOKEN"
+enabled = true
+required = true
+startup_timeout_sec = 10
+tool_timeout_sec = 60
+enabled_tools = [
+  "milai_memory_resolve",
+  "milai_memory_get",
+  "milai_working_state_get",
+  "milai_working_state_update",
+  "milai_evidence_capture",
+  "milai_proposal_create",
+  "milai_proposals_list",
+  "milai_proposal_get",
+  "milai_memory_review",
+  "milai_evidence_revoke",
+  "milai_deletion_status_get",
+  "milai_namespace_cleanup_submit",
+  "milai_namespace_cleanup_status",
+]

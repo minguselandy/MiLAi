@@ -1,0 +1,68 @@
+# STAGED EXAMPLE ONLY: not installed or enabled by adding this file.
+# Include inside nginx's http context after obtaining a trusted domain certificate.
+# Backend must use MILAI_MCP_HTTP_PUBLIC_BASE_URL=https://milai.aigcit.com:7960,
+# MILAI_OAUTH_DB, the exact-origin transport fix, and loopback binding on 7968.
+# No public port 80 or 443 listener is needed. DNS-01 can provision the certificate.
+
+limit_req_zone $binary_remote_addr zone=milai_oauth_7960:10m rate=5r/s;
+
+# Do not log queries, headers, request bodies or OAuth redirect Location values.
+log_format milai_oauth_safe '$remote_addr [$time_local] "$request_method $uri" '
+                           '$status $body_bytes_sent $request_time';
+
+server {
+    listen 7960 ssl;
+    server_name milai.aigcit.com;
+
+    ssl_certificate /etc/letsencrypt/live/milai.aigcit.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/milai.aigcit.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_session_cache shared:MILAI_TLS_7960:10m;
+    ssl_session_timeout 10m;
+    ssl_session_tickets off;
+
+    access_log /var/log/nginx/milai-oauth-7960.access.log milai_oauth_safe;
+    # Error logs may contain query strings: restrict file access/retention and
+    # export only sanitized diagnostics, never raw OAuth request logs.
+    error_log /var/log/nginx/milai-oauth-7960.error.log warn;
+
+    if ($host != milai.aigcit.com) { return 421; }
+    # Do not redirect a mistakenly sent plaintext credential-bearing request.
+    error_page 497 =400 @plaintext_rejected;
+    location @plaintext_rejected { return 400; }
+
+    client_max_body_size 4m;
+    client_header_timeout 15s;
+    client_body_timeout 30s;
+    keepalive_timeout 65s;
+    send_timeout 300s;
+
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host milai.aigcit.com:7960;
+    proxy_set_header X-Forwarded-Host milai.aigcit.com:7960;
+    proxy_set_header X-Forwarded-Proto https;
+    proxy_set_header X-Forwarded-Port 7960;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header Forwarded "";
+    proxy_connect_timeout 5s;
+    proxy_read_timeout 300s;
+    proxy_send_timeout 30s;
+    proxy_buffering off;
+    proxy_cache off;
+    proxy_redirect off;
+    proxy_next_upstream off;
+    # Authorization, Origin, MCP headers and WWW-Authenticate pass through unchanged.
+
+    location ~ ^/(register|authorize|token|revoke|oauth/consent)$ {
+        limit_req zone=milai_oauth_7960 burst=20 nodelay;
+        limit_req_status 429;
+        proxy_pass http://127.0.0.1:7968;
+    }
+
+    location ~ ^/(mcp|healthz|readyz|\.well-known/oauth-protected-resource/mcp|\.well-known/oauth-authorization-server)$ {
+        proxy_pass http://127.0.0.1:7968;
+    }
+
+    location / { return 404; }
+}

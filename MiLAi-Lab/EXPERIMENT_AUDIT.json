@@ -1,0 +1,101 @@
+{
+  "schema_version": "milai-experiment-audit-v0.1",
+  "audit_id": "product09-integrity-for-product10-20260903-01",
+  "reviewed_at": "2026-09-03T21:13:00+08:00",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "overall_verdict": "FAIL",
+  "integrity_status": "HISTORICAL_PRODUCT09_NOT_AUDIT_GRADE_PRODUCT10_UNSTARTED",
+  "reason_code": "CLAIM_EVIDENCE_MISMATCH_AND_UNSEALED_EVALUATION",
+  "summary": "Product-09 result arithmetic is internally consistent, but claim fidelity, tool isolation, label provenance, cleanup evidence, and run-to-code/input binding are insufficient for an audit-grade Product-10 control.",
+  "checks": {
+    "A_ground_truth_provenance": {
+      "status": "FAIL",
+      "reason": "Answer GT is dataset-backed, but turn labels are a Qwen non-human-adjudicated proxy and memory-only execution is not enforced."
+    },
+    "B_score_normalization": {
+      "status": "WARN",
+      "reason": "No self-normalization; exact is normalized EM and all_answer_turn_recall is case completion rather than micro recall."
+    },
+    "C_result_and_claim_fidelity": {
+      "status": "FAIL",
+      "reason": "Results exist and recompute, but restart/formal-access/cleanup claims and run provenance do not match the evidence."
+    },
+    "D_dead_code_and_output_reachability": {
+      "status": "WARN",
+      "reason": "Metrics execute, but full traces, non-memory events, failures, stderr/stdout tails, and scorer identity are omitted."
+    },
+    "E_scope": {
+      "status": "WARN",
+      "reason": "Two synthetic lifecycle successes and four opened-development cases do not support broad, causal, robust, or production claims."
+    },
+    "F_evaluation_type": {
+      "status": "WARN",
+      "reason": "The package mixes real dataset answer GT, model-assisted turn proxy, and synthetic integration smoke."
+    }
+  },
+  "evaluation_families": [
+    {
+      "name": "product09_lifecycle",
+      "classification": "simulation_only",
+      "cases": 4,
+      "successful_runs": 2,
+      "configurations": 1,
+      "live_codex": true,
+      "claim_ceiling": "bounded local synthetic integration smoke with prompt-forced tool use"
+    },
+    {
+      "name": "product09_lme_baseline",
+      "classification": "real_gt",
+      "proxy_component": "answer-turn visibility is synthetic_proxy",
+      "cases": 4,
+      "primary_runs": 1,
+      "live_codex": true,
+      "claim_ceiling": "opened-development normalized EM/F1 documentary observation"
+    },
+    {
+      "name": "product09_count_localization",
+      "classification": "real_gt",
+      "proxy_component": "answer-turn visibility is synthetic_proxy",
+      "cases": 1,
+      "primary_runs": 1,
+      "live_codex": true,
+      "claim_ceiling": "mechanism localization only"
+    },
+    {
+      "name": "product09_host_guidance",
+      "classification": "real_gt",
+      "proxy_component": "answer-turn visibility is synthetic_proxy",
+      "cases": 4,
+      "primary_runs": 1,
+      "live_codex": true,
+      "claim_ceiling": "single recorded regression, no causal claim"
+    },
+    {
+      "name": "product10",
+      "classification": "not_run",
+      "cases": 0,
+      "primary_runs": 0,
+      "live_codex": false,
+      "claim_ceiling": "design and read-only preparation only"
+    }
+  ],
+  "claims": [
+    {"claim": "product09_normalized_em_f1", "value": "3/4 / 0.75", "status": "SUPPORTED_DOCUMENTARY_ONLY"},
+    {"claim": "postgresql_restart_durability", "status": "UNSUPPORTED"},
+    {"claim": "two_of_two_post_restart_recall", "status": "UNSUPPORTED"},
+    {"claim": "formal_500_untouched", "status": "CONTRADICTED_FILES_ACCESSED_NOT_SCORED"},
+    {"claim": "answer_turn_recall_0_75", "status": "MISNAMED_CASE_COMPLETION_PROXY_MICRO_6_OF_7"},
+    {"claim": "host_guidance_causal_regression", "status": "UNSUPPORTED_CAUSALITY"},
+    {"claim": "product10_h1_h2", "status": "NOT_RUN"}
+  ],
+  "action_items": [
+    "Rerun sealed A0 before any Product-10 quantitative comparison.",
+    "Bind Product tree/lock, Lab runner, all inputs, command, timestamp, exact Codex identity/config, full redacted trace, and checked cleanup receipt.",
+    "Enforce memory-only tool and filesystem isolation and retain failed, incomplete, and extra tool events.",
+    "Report normalized EM, case-completion, and micro turn coverage separately; label Qwen turn annotations as proxy.",
+    "Separate formal file access from formal case scoring.",
+    "Keep Product-10 X0-X4 unstarted until effect authorization."
+  ],
+  "trace_path": ".aris/traces/experiment-audit/2026-09-03_run01/"
+}

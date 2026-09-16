@@ -1,0 +1,21 @@
+{
+  "schema": "ospc.isolation.v1",
+  "canonical_credentials": [],
+  "database_roles": [],
+  "environment_secrets_read": [],
+  "network_access": false,
+  "product_runtime_imports": false,
+  "external_framework_imports": false,
+  "allowed_inputs": [
+    "research/ospc/fixtures/pilot.jsonl",
+    "research/ospc/fixtures/manifest.json",
+    "research/ospc/fixtures/fixture_schema.json",
+    "research/ospc/fixtures/output_schema.json",
+    "research/ospc/prior_art_snapshot.json"
+  ],
+  "allowed_outputs": [
+    "research/ospc/results/pilot_metrics.json",
+    "research/ospc/results/pilot_report.md"
+  ],
+  "policy_effect": "none; research results cannot update product or canonical policy"
+}

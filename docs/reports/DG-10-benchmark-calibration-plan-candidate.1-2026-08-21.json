@@ -1,0 +1,238 @@
+{
+  "calibration_inputs_to_freeze_after_run": {
+    "answer_parser_contract": {
+      "name": "dg10-local-deterministic-answer-parser-v1",
+      "raw_model_output_retained_in_repo": false,
+      "rules": [
+        "If a final answer is enclosed in \\boxed{...}, use the innermost boxed span.",
+        "Otherwise use the final non-empty answer text emitted by the model.",
+        "Normalize Unicode whitespace, lowercase where scorer requires it, strip surrounding punctuation where scorer requires it.",
+        "Do not call an external LLM or Codex judge."
+      ]
+    },
+    "answer_parser_contract_sha256": "1628cea47b77b949c2f69ee27895989b08ed742436540f2ed62dc067dec3ad62",
+    "budget_contract": {
+      "memory_context_tokens": {
+        "hard_ceiling": 1600,
+        "high_max": 1024,
+        "standard_max": 512
+      },
+      "retrieval_k_candidates": [
+        1,
+        3,
+        5
+      ],
+      "selected_after_dev_calibration": true,
+      "selected_retrieval_k": null,
+      "session_extra_input_tokens_per_100_turns_max": 30000
+    },
+    "budget_contract_sha256": "827e5c10bedaf4c980f4ba6b74e9c3a24768999eb9a1ebfdd04f0eac15ad5088",
+    "prompt_templates_sha256": "a4fc05ec907f2497a352e8343ef2ed5b15ce8bbbb96071c32f3bb90b49f0424e",
+    "retrieval_k_candidates": [
+      1,
+      3,
+      5
+    ],
+    "scorer_contract": {
+      "longmemeval": {
+        "by_ability": true,
+        "external_judge": false,
+        "primary": [
+          "exact_match",
+          "normalized_f1"
+        ]
+      },
+      "longmemeval_v2_adapted_text_only": {
+        "external_judge": false,
+        "fallback": [
+          "normalized_phrase_match",
+          "normalized_f1"
+        ],
+        "leaderboard_claim": false,
+        "primary": "local_eval_function_where_deterministic"
+      },
+      "safety": {
+        "authority_escalations_max": 0,
+        "canonical_unavailable_false_certainty_max": 0,
+        "cross_tenant_returns_max": 0,
+        "live_open_issue_false_closures_max": 0,
+        "revoked_or_stale_returns_max": 0,
+        "unsupported_action_safe_answers_max": 0
+      },
+      "tier": "TIER_1_DETERMINISTIC_RELEASE_INPUT_CANDIDATE"
+    },
+    "scorer_contract_sha256": "63ea09089e6818c5bf8acd089ea902af31570acecf9e464b5323408238614ff9",
+    "selected_retrieval_k": null
+  },
+  "candidate": "candidate.1",
+  "data_boundary": "PUBLIC_BENCHMARK_METADATA_ONLY_NO_RAW_PROMPT_OR_ANSWER",
+  "date": "2026-08-21",
+  "dev_split": {
+    "all_case_count": 922,
+    "all_case_ids_sha256": "78addc415d7a3c2b066899bb655157161566dc75d6242b500c9c8b4038718b37",
+    "dev_case_count": 92,
+    "dev_case_ids": [
+      "longmemeval:031748ae",
+      "longmemeval:0862e8bf",
+      "longmemeval:0977f2af",
+      "longmemeval:118b2229",
+      "longmemeval:18bc8abd",
+      "longmemeval:195a1a1b",
+      "longmemeval:19b5f2b3",
+      "longmemeval:1a1907b4",
+      "longmemeval:1a8a66a6",
+      "longmemeval:2e6d26dc",
+      "longmemeval:4b24c848",
+      "longmemeval:545bd2b5",
+      "longmemeval:561fabcd",
+      "longmemeval:6456829e_abs",
+      "longmemeval:67e0d0f2",
+      "longmemeval:6ae235be",
+      "longmemeval:7024f17c",
+      "longmemeval:75832dbd",
+      "longmemeval:7a87bd0c",
+      "longmemeval:8752c811",
+      "longmemeval:87f22b4a",
+      "longmemeval:88432d0a_abs",
+      "longmemeval:8fb83627",
+      "longmemeval:9a707b81",
+      "longmemeval:ac031881",
+      "longmemeval:af082822",
+      "longmemeval:b0479f84",
+      "longmemeval:b46e15ee",
+      "longmemeval:b759caee",
+      "longmemeval:b9cfe692",
+      "longmemeval:bcbe585f",
+      "longmemeval:c4f10528",
+      "longmemeval:c7dc5443",
+      "longmemeval:ceb54acb",
+      "longmemeval:d682f1a2",
+      "longmemeval:dc439ea3",
+      "longmemeval:e61a7584",
+      "longmemeval:ef66a6e5",
+      "longmemeval:efc3f7c2",
+      "longmemeval:gpt4_2487a7cb",
+      "longmemeval:gpt4_2d58bcd6",
+      "longmemeval:gpt4_2f584639",
+      "longmemeval:gpt4_2f8be40d",
+      "longmemeval:gpt4_483dd43c",
+      "longmemeval:gpt4_5438fa52",
+      "longmemeval:gpt4_74aed68e",
+      "longmemeval:gpt4_8e165409",
+      "longmemeval:gpt4_cd90e484",
+      "longmemeval:gpt4_ec93e27f",
+      "longmemeval:gpt4_f49edff3",
+      "longmemeval_v2:0382ed92",
+      "longmemeval_v2:0cd6dc43",
+      "longmemeval_v2:106c321b",
+      "longmemeval_v2:18f9d965",
+      "longmemeval_v2:233f9f09",
+      "longmemeval_v2:25853d7f",
+      "longmemeval_v2:289aea4a",
+      "longmemeval_v2:2b96f402",
+      "longmemeval_v2:2ca2d443",
+      "longmemeval_v2:3f366e15",
+      "longmemeval_v2:3fd81278",
+      "longmemeval_v2:4f92aa38",
+      "longmemeval_v2:597645be",
+      "longmemeval_v2:5aaf0f61",
+      "longmemeval_v2:5c826b28",
+      "longmemeval_v2:5cb7289b",
+      "longmemeval_v2:6a23675f",
+      "longmemeval_v2:6d975a08",
+      "longmemeval_v2:6fc8c511",
+      "longmemeval_v2:6feb33d4",
+      "longmemeval_v2:7c8efee5",
+      "longmemeval_v2:7df9e2ff",
+      "longmemeval_v2:823d133a",
+      "longmemeval_v2:83a77f9d",
+      "longmemeval_v2:90dc7e66",
+      "longmemeval_v2:98e6d369",
+      "longmemeval_v2:a667402d",
+      "longmemeval_v2:b05cf470",
+      "longmemeval_v2:c4c0e117",
+      "longmemeval_v2:c9c6a06a",
+      "longmemeval_v2:d0d61088",
+      "longmemeval_v2:d5b9fda4",
+      "longmemeval_v2:d7c94023",
+      "longmemeval_v2:dd53ab77",
+      "longmemeval_v2:de0abc47",
+      "longmemeval_v2:e334d5c6",
+      "longmemeval_v2:e83245c5",
+      "longmemeval_v2:ee75b921",
+      "longmemeval_v2:f3496ca5",
+      "longmemeval_v2:f35bac4a",
+      "longmemeval_v2:f9f9cd61",
+      "longmemeval_v2:fe41b553"
+    ],
+    "dev_case_ids_sha256": "727149d08fe81ebd6135e774f5929b36a645aee8d674daa8a76a60987f9af9cb",
+    "dev_fraction": 0.099783,
+    "per_dataset": {
+      "LONGMEMEVAL_CLEANED_500": {
+        "dev": 50,
+        "dev_case_ids_sha256": "af168f29521ccc70433febf81edee21b3ff5963abf99b606198f957418aa8b2e",
+        "total": 500
+      },
+      "LONGMEMEVAL_V2_ADAPTED_TEXT_ONLY": {
+        "dev": 42,
+        "dev_case_ids_sha256": "548789afda6ebc2e559959a6137824375bb7b108dea6cdfb32c4e9c279c93816",
+        "total": 422
+      }
+    },
+    "test_case_count": 830,
+    "test_case_ids_sha256": "18cf72ab1888db3c90d078a447fe12ad2a1612cfe30b2905b79f433f7187e4f1"
+  },
+  "dev_split_policy": {
+    "max_fraction": 0.1,
+    "salt_version": "dg10-dev-2026-08-21-v1",
+    "selection": "deterministic_sha256_lowest_per_dataset"
+  },
+  "gate_results": {
+    "BMG-02": "NO_GO_NOT_RUN",
+    "BMG-05": "NO_GO_CALIBRATION_NOT_RUN_THRESHOLDS_NOT_FROZEN"
+  },
+  "inputs": {
+    "adapter_contract_sha256": "87613dc5ea38b1c033127b4532f38ec5263be1bcf3e2e4dc1858a33432b8e96a",
+    "dataset_lock_report_sha256": "acf18d12e83b27d7552744f01f86b8741f53c585c2d87b4f2e1adb8b58b5dd96",
+    "feasibility_report_sha256": "577c7743e45c3d50f82254bd59bc753f346d8d543da6ac20069cdcf890c03a48"
+  },
+  "known_limits": [
+    "This is a calibration plan, not a calibration result.",
+    "It does not compute or freeze quality thresholds.",
+    "The full test split remains unopened and unexecuted by this report."
+  ],
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_acceptance_update_state": {
+    "current_status": "CALIBRATION_REQUIRED_NOT_FROZEN",
+    "may_open_test_before_update": false,
+    "may_update_after_dev_run": true,
+    "target_file": "docs/contracts/DG-10-quality-acceptance.yaml",
+    "test_labels_or_outputs_opened_by_this_report": false
+  },
+  "quality_thresholds_frozen": false,
+  "schedule": {
+    "all_case_arm_schedule_sha256": "46524b207615efacc3973db31795b6affc1976d031bac7e2e0c641ba3b28a346",
+    "dev_case_arm_schedule_sha256": "6456bf3a25bb89bd63b724e12ecf2d0e56889aaf3e0e3ec1117d7c87cd480a90",
+    "latin_square": [
+      [
+        "NO_MEMORY",
+        "NAIVE_RAG",
+        "MILAI_MCP"
+      ],
+      [
+        "NAIVE_RAG",
+        "MILAI_MCP",
+        "NO_MEMORY"
+      ],
+      [
+        "MILAI_MCP",
+        "NO_MEMORY",
+        "NAIVE_RAG"
+      ]
+    ]
+  },
+  "schema": "milai.dg10.benchmark-calibration-plan.v1",
+  "status": "CALIBRATION_PLAN_CANDIDATE_NOT_RUN",
+  "test_access_authorized": false
+}

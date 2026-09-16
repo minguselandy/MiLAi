@@ -1,0 +1,84 @@
+{
+  "adapters": [
+    "generic-sdk",
+    "mcp-stdio",
+    "langgraph",
+    "autogen-read"
+  ],
+  "cleanup": {
+    "connections_before_drop": 0,
+    "owner": "milai_owner",
+    "status": "PASS"
+  },
+  "data_mode": "SYNTHETIC_ONLY",
+  "database": "milai_smoke_7429558e058c40deabaa",
+  "finished_at": "2026-08-17T14:44:32.979279+00:00",
+  "hard_failures": [],
+  "marker": "milaie2e7429558e058c",
+  "mcp_hosts": [
+    {
+      "host": "official-python-client-stdio",
+      "protocol": "2026-07-28"
+    },
+    {
+      "host": "independent-jsonrpc-wire",
+      "protocol": "2025-11-25"
+    }
+  ],
+  "phases": [
+    {
+      "adapter_traces": {
+        "generic": "d5e9b0d1-6a1e-4671-bb44-6e3c6eb3a170",
+        "langgraph": "8c225676-d334-4a33-be78-85d0b4b203e1",
+        "mcp": "5994fc96-45b4-4ce8-ba18-aded7ca9ce38"
+      },
+      "causal_minimum_sequence": 3,
+      "claim_id": "41055db2-f574-4218-8f48-5686c8dbac84",
+      "claim_version_id": "1abe1b41-be91-4011-9bea-e99d172fc878",
+      "pre_review": "ABSTAINED",
+      "session": 1,
+      "status": "PASS"
+    },
+    {
+      "adapter_traces": {
+        "autogen": "99f135d6-e84a-4bbc-a452-884e79ce09a1",
+        "generic": "aa0e5a09-9c98-4cc7-ac0d-62af9f0e201e",
+        "independent_mcp_wire": "add78b63-3664-431f-90a7-d08e55276d75",
+        "langgraph": "3b1749c0-0eeb-4910-87c8-82924783cb25",
+        "mcp": "afc01cf0-3fc2-40e8-870a-35fc0ada5627"
+      },
+      "branches": [
+        "CONTRADICT_BRANCH",
+        "SUPPORT_BRANCH"
+      ],
+      "discharge_rule_preserved": true,
+      "head_unchanged": true,
+      "issue_status": "OPEN",
+      "open_issue_id": "ec314a5b-c170-45df-8df2-0d6e6d395b78",
+      "session": 2,
+      "status": "PASS"
+    },
+    {
+      "adapter_traces": {
+        "generic": "6f6ec340-741a-4c50-acba-698c599aa026",
+        "langgraph": "0f01d1fa-727f-4c46-84da-e95264c7a368",
+        "mcp": "16d617c5-fe2e-4d72-b0b1-753982298c4a"
+      },
+      "claim_version_id": "97e1a340-2a95-49f6-b46e-d68747de8510",
+      "deletion_request_id": "29a5c209-6ebd-467e-9fba-3492fc09a24d",
+      "issue_status_after_revoke": "WAITING_EVIDENCE",
+      "physical_reconciliation": {
+        "derived_purge_status": "COMPLETED",
+        "primary_bytes_status": "ERASED"
+      },
+      "revoked_evidence_id": "69fddab3-2530-4435-9218-bba0194311e2",
+      "session": 3,
+      "stale_projection_reject_reason": "GROUNDING_BLOCKED",
+      "status": "PASS"
+    }
+  ],
+  "run_id": "7429558e058c40deabaaa4bb24b1690c",
+  "schema": "milai.agent-integration-three-session-e2e.v1",
+  "started_at": "2026-08-17T14:44:06.781795+00:00",
+  "status": "PASS"
+}

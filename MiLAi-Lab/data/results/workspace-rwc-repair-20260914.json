@@ -1,0 +1,389 @@
+{
+  "status": "DEVELOPMENT_COMPLETE_BENEFIT_NOT_ESTABLISHED",
+  "generation_limit": 256,
+  "trajectory_limit": 4,
+  "actual_trajectories": 4,
+  "generations": 41,
+  "tokens": 135952,
+  "closed_unused_generations": 215,
+  "unrun_first_wave_candidate_slot": "released after first wave failed; candidate ran once in native-cancel-rwc-v02",
+  "scored_pairs": 1,
+  "cross_version_cancel_pair_valid": false,
+  "benefit": "NOT_ESTABLISHED",
+  "public_checkpoint": {
+    "artifact_sha256": "fc681726619937303bfc242e1aa185ebb3019ccf9610772697f2ad560e6ebc32",
+    "fresh_os_process": true,
+    "model_http_calls": 0,
+    "product_pin_valid": true,
+    "status": "PASS",
+    "transport": "PUBLIC_SDK_HTTP"
+  },
+  "trials": [
+    {
+      "task": "cancel-async-tasks",
+      "arm": "WORKSPACE_SIMPLE",
+      "method": "milai-rwc-v0.1",
+      "calls": {
+        "actor": 1,
+        "summary": 0,
+        "maintenance": 1
+      },
+      "generations": 2,
+      "tokens": 2383,
+      "prompt_tokens": 1840,
+      "completion_tokens": 543,
+      "native_reward": null,
+      "native_summary": null,
+      "stop_reason": "INITIAL_SUBGOAL_REQUIRED",
+      "exception": {
+        "type": "HiAgentError",
+        "message": "INITIAL_SUBGOAL_REQUIRED"
+      },
+      "controller_accepted": 0,
+      "controller_rejected": 1,
+      "controller_rejection_reasons": [
+        "NON_DELIVERY_WITH_TEXT"
+      ],
+      "cards_created": 0,
+      "cards_final": 0,
+      "frame_selections": 0,
+      "controller_dispatches": {},
+      "natural_recall_events": 0,
+      "delivery_proposals": 0,
+      "actor_inputs": 1,
+      "duplicate_material_inputs": 0,
+      "pending_model_requests": [],
+      "accounting_violations": [],
+      "evidence": "/cra/memory/mx_memory/evidence/workspace-rwc-repair-20260914-ZlQDKW/native-cancel"
+    },
+    {
+      "task": "cancel-async-tasks",
+      "arm": "MILAI_RWC",
+      "method": "milai-rwc-v0.2",
+      "calls": {
+        "actor": 6,
+        "summary": 4,
+        "maintenance": 6
+      },
+      "generations": 16,
+      "tokens": 36614,
+      "prompt_tokens": 32060,
+      "completion_tokens": 4554,
+      "native_reward": null,
+      "native_summary": null,
+      "stop_reason": "RuntimeError: Command timed out after 10 seconds",
+      "exception": {
+        "type": "RuntimeError",
+        "message": "Command timed out after 10 seconds"
+      },
+      "controller_accepted": 4,
+      "controller_rejected": 2,
+      "controller_rejection_reasons": [
+        "NON_DELIVERY_WITH_TEXT",
+        "UNKNOWN_CARD_HANDLE"
+      ],
+      "cards_created": 2,
+      "cards_final": 2,
+      "frame_selections": 2,
+      "controller_dispatches": {
+        "ACT": 4
+      },
+      "natural_recall_events": 0,
+      "delivery_proposals": 0,
+      "actor_inputs": 6,
+      "duplicate_material_inputs": 0,
+      "pending_model_requests": [],
+      "accounting_violations": [],
+      "evidence": "/cra/memory/mx_memory/evidence/workspace-rwc-repair-20260914-ZlQDKW/native-cancel-rwc-v02"
+    },
+    {
+      "task": "multi-source-data-merger",
+      "arm": "MILAI_RWC",
+      "method": "milai-rwc-v0.2",
+      "calls": {
+        "actor": 4,
+        "summary": 2,
+        "maintenance": 5
+      },
+      "generations": 11,
+      "tokens": 47691,
+      "prompt_tokens": 43617,
+      "completion_tokens": 4074,
+      "native_reward": 1.0,
+      "native_summary": {
+        "tests": 3,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "pending": 0,
+        "other": 0,
+        "start": 1789388514.3846736,
+        "stop": 1789388516.6512322
+      },
+      "stop_reason": "FINAL_SUBMITTED",
+      "exception": null,
+      "controller_accepted": 2,
+      "controller_rejected": 3,
+      "controller_rejection_reasons": [
+        "INVALID_WORKSPACE_PROPOSAL",
+        "UNKNOWN_CARD_HANDLE",
+        "DELIVER_REQUIRES_FINAL_PROPOSAL"
+      ],
+      "cards_created": 1,
+      "cards_final": 1,
+      "frame_selections": 2,
+      "controller_dispatches": {
+        "ACT": 1,
+        "DELIVER": 1
+      },
+      "natural_recall_events": 0,
+      "delivery_proposals": 1,
+      "actor_inputs": 4,
+      "duplicate_material_inputs": 0,
+      "pending_model_requests": [],
+      "accounting_violations": [],
+      "evidence": "/cra/memory/mx_memory/evidence/workspace-rwc-repair-20260914-ZlQDKW/native-merger"
+    },
+    {
+      "task": "multi-source-data-merger",
+      "arm": "WORKSPACE_SIMPLE",
+      "method": "milai-rwc-v0.2",
+      "calls": {
+        "actor": 5,
+        "summary": 2,
+        "maintenance": 5
+      },
+      "generations": 12,
+      "tokens": 49264,
+      "prompt_tokens": 43345,
+      "completion_tokens": 5919,
+      "native_reward": 1.0,
+      "native_summary": {
+        "tests": 3,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "pending": 0,
+        "other": 0,
+        "start": 1789388600.757411,
+        "stop": 1789388602.7151291
+      },
+      "stop_reason": "FINAL_SUBMITTED",
+      "exception": null,
+      "controller_accepted": 1,
+      "controller_rejected": 4,
+      "controller_rejection_reasons": [
+        "UNPUBLISHED_WORKSPACE_REFERENCE",
+        "INVALID_WORKSPACE_UPDATE",
+        "DELIVER_REQUIRES_FINAL_PROPOSAL",
+        "INVALID_WORKSPACE_UPDATE"
+      ],
+      "cards_created": 1,
+      "cards_final": 1,
+      "frame_selections": 1,
+      "controller_dispatches": {
+        "ACT": 1
+      },
+      "natural_recall_events": 0,
+      "delivery_proposals": 1,
+      "actor_inputs": 5,
+      "duplicate_material_inputs": 0,
+      "pending_model_requests": [],
+      "accounting_violations": [],
+      "evidence": "/cra/memory/mx_memory/evidence/workspace-rwc-repair-20260914-ZlQDKW/native-merger"
+    }
+  ],
+  "goal_id": "MILA-HOST-MEMORY-CONTROL-REPAIR-01",
+  "method": "milai-rwc-v0.2",
+  "engineering": {
+    "status": "ALL_FINAL_TEST_IDENTITIES_VERIFIED",
+    "collected": 4574,
+    "passed": 4573,
+    "skipped": [
+      {
+        "test": "tests/unit/test_v0214_sdk_host.py::test_installed_sdk_repeated_contention_and_transport_receipts",
+        "reason": "optional Host SDK wheel"
+      }
+    ],
+    "failures": [],
+    "omitted": 0,
+    "duplicates": 0,
+    "source_files_unchanged": 915,
+    "retained_slow_test_unchanged_dependencies": 62,
+    "shards": [
+      {
+        "file": "handoff-regression-0.xml",
+        "tests": 1,
+        "passed": 1,
+        "skipped": 0,
+        "failures": 0,
+        "seconds": 615.696
+      },
+      {
+        "file": "handoff-regression-1.xml",
+        "tests": 1990,
+        "passed": 1989,
+        "skipped": 1,
+        "failures": 0,
+        "seconds": 660.745
+      },
+      {
+        "file": "handoff-regression-2.xml",
+        "tests": 2582,
+        "passed": 2582,
+        "skipped": 0,
+        "failures": 0,
+        "seconds": 684.91
+      },
+      {
+        "file": "final-regression-3.xml",
+        "tests": 1,
+        "passed": 1,
+        "skipped": 0,
+        "failures": 0,
+        "seconds": 2537.227
+      }
+    ],
+    "prior_failures_and_interruptions_retained": true,
+    "boundary": "PASS",
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "build": "PASS",
+    "targeted_passed": 128,
+    "targeted_overlaps_full_inventory": true,
+    "full_evidence_root": "/cra/memory/mx_memory/evidence/workspace-rwc-repair-20260914-ZlQDKW",
+    "package_verification": {
+      "status": "PASS",
+      "wheel_sha256": "b7accf4b9beeaf0319297ac478a883a013bf8b85bc4cd0ff036a43b24c279bf1",
+      "sdist_sha256": "a86de4670f4b1694e57539cadc4f31540387a9aa63d282f49d2e9abf08a3a8e5",
+      "core_and_adapter_bytes_match_final_source": true,
+      "public_tool_run_requires_full_checkout_and_external_product": true
+    }
+  },
+  "evidence_root": "/cra/memory/mx_memory/evidence/workspace-rwc-repair-20260914-ZlQDKW",
+  "projection_audit": {
+    "kind": "OFFLINE_REAL_OLD_EVENT_ASSEMBLY_REPLAY",
+    "model_calls": 0,
+    "world_actions": 0,
+    "old_actor_inputs": 13,
+    "old_inputs_with_duplicated_views": 12,
+    "new_inputs_with_duplicated_source_pages": 0,
+    "same_model_behavior_or_reward_claim": false
+  },
+  "public_contract_checks": {
+    "completed_checkpoint_new_goal_reopened": true,
+    "foreign_scope": "PUBLIC_CHECKPOINT_ABSENT",
+    "new_goal_scripted_callbacks": 2,
+    "real_cas": "STALE_WORKING_STATE",
+    "real_commit_controlled_ack_loss": "COMMITTED_VISIBLE_HEAD",
+    "revoked_load": "CHECKPOINT_PAYLOAD_WITHHELD",
+    "revoked_save": "CHECKPOINT_PAYLOAD_WITHHELD",
+    "unknown_write_blocks_new_send": "UNKNOWN_CHECKPOINT_WRITE_REQUIRES_RECONCILIATION"
+  },
+  "public_recovery": {
+    "card_preserved": true,
+    "different_process": true,
+    "external_feedback_preserved": true,
+    "final": "Restored and read.",
+    "local_checkpoint_used": false,
+    "model_http_calls": 0,
+    "original_feedback_preserved": true,
+    "paginated_source_read": true,
+    "pid": 3197842,
+    "scripted_callbacks_total": 8,
+    "terminal_executions": 1
+  },
+  "public_cleanup": {
+    "compose_down_returncode": 0,
+    "owned_processes_stopped": true,
+    "owned_volume_retained": true
+  },
+  "terminal_adapter": "hiagent-method-adapter-v0.4.2",
+  "public_attempts": [
+    {
+      "root": "public",
+      "events": {},
+      "methods": {},
+      "remaining_containers": [],
+      "world_executions": 0
+    },
+    {
+      "root": "public-v2",
+      "events": {
+        "SDK_ATTEMPT": 13,
+        "SDK_RETURN": 12,
+        "SDK_ERROR": 1
+      },
+      "methods": {
+        "get_working_state": 7,
+        "update_working_state": 5,
+        "capture_evidence": 1
+      },
+      "remaining_containers": [],
+      "world_executions": 1
+    },
+    {
+      "root": "public-v3",
+      "events": {
+        "SDK_ATTEMPT": 22,
+        "SDK_RETURN": 21,
+        "SDK_ERROR": 1
+      },
+      "methods": {
+        "get_working_state": 14,
+        "update_working_state": 6,
+        "capture_evidence": 1,
+        "revoke_evidence": 1
+      },
+      "remaining_containers": [],
+      "world_executions": 1
+    },
+    {
+      "root": "public-v4",
+      "events": {
+        "SDK_ATTEMPT": 9,
+        "SDK_RETURN": 9
+      },
+      "methods": {
+        "get_working_state": 5,
+        "update_working_state": 3,
+        "capture_evidence": 1
+      },
+      "remaining_containers": [],
+      "world_executions": 1
+    },
+    {
+      "root": "public-v5",
+      "events": {
+        "SDK_ATTEMPT": 22,
+        "SDK_RETURN": 21,
+        "SDK_ERROR": 1
+      },
+      "methods": {
+        "get_working_state": 14,
+        "update_working_state": 6,
+        "capture_evidence": 1,
+        "revoke_evidence": 1
+      },
+      "remaining_containers": [],
+      "world_executions": 1
+    }
+  ],
+  "post_native_repairs": {
+    "same_version_native_pair_implementation_identical": true,
+    "final_changed_files": [
+      "tools/hiagent_terminal_session.py",
+      "src/milai_lab/methods/controlled_workspace.py"
+    ],
+    "changes": [
+      "detach checkpoint snapshots and restored receipt registry",
+      "reopen terminal loop and clear old final for a newly authoritative goal"
+    ],
+    "final_adapter": "hiagent-method-adapter-v0.4.2",
+    "final_core_method": "milai-rwc-v0.2",
+    "post_change_targeted_tests": 128,
+    "post_change_public_lifecycle": "public-v5"
+  },
+  "model_allocation": "CLOSED",
+  "completed_at": "2026-09-14T13:25:42.424919+00:00"
+}

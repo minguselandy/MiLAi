@@ -1,0 +1,373 @@
+{
+  "schema": "milai.md01.contrasting-episode-fixture.v0.1",
+  "formal_holdout": false,
+  "label_visibility": "SCORER_ONLY",
+  "conversations": [
+    {
+      "conversation_id": "same-topic-continuation",
+      "turns": [
+        {
+          "evidence_id": "md01-same-topic-0",
+          "source_ref": "memory://md01/same-topic/s1/turn/0",
+          "session_id": "same-topic-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-01T09:00:00+08:00",
+          "content": "I moved from Shanghai to Hangzhou last month for a new role."
+        },
+        {
+          "evidence_id": "md01-same-topic-1",
+          "source_ref": "memory://md01/same-topic/s1/turn/1",
+          "session_id": "same-topic-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-01T09:01:00+08:00",
+          "content": "What prompted the move?"
+        },
+        {
+          "evidence_id": "md01-same-topic-2",
+          "source_ref": "memory://md01/same-topic/s1/turn/2",
+          "session_id": "same-topic-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-01T09:02:00+08:00",
+          "content": "The new role near West Lake made the move worthwhile."
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1, 2], "boundary_reason": "CONVERSATION_START"}
+      ]
+    },
+    {
+      "conversation_id": "explicit-topic-shift",
+      "turns": [
+        {
+          "evidence_id": "md01-explicit-shift-0",
+          "source_ref": "memory://md01/explicit-shift/s1/turn/0",
+          "session_id": "explicit-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-02T10:00:00+08:00",
+          "content": "I prefer aisle seats to window seats when flying."
+        },
+        {
+          "evidence_id": "md01-explicit-shift-1",
+          "source_ref": "memory://md01/explicit-shift/s1/turn/1",
+          "session_id": "explicit-shift-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-02T10:01:00+08:00",
+          "content": "I will keep that seating preference in mind."
+        },
+        {
+          "evidence_id": "md01-explicit-shift-2",
+          "source_ref": "memory://md01/explicit-shift/s1/turn/2",
+          "session_id": "explicit-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-02T10:02:00+08:00",
+          "content": "By the way, I started pottery classes on Tuesdays."
+        },
+        {
+          "evidence_id": "md01-explicit-shift-3",
+          "source_ref": "memory://md01/explicit-shift/s1/turn/3",
+          "session_id": "explicit-shift-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-02T10:03:00+08:00",
+          "content": "Pottery sounds like a relaxing weekly routine."
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1], "boundary_reason": "CONVERSATION_START"},
+        {"turn_indexes": [2, 3], "boundary_reason": "EXPLICIT_TOPIC_SHIFT"}
+      ]
+    },
+    {
+      "conversation_id": "session-change",
+      "turns": [
+        {
+          "evidence_id": "md01-session-change-0",
+          "source_ref": "memory://md01/session-change/s1/turn/0",
+          "session_id": "session-change-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-03T07:00:00+08:00",
+          "content": "I run five kilometers before breakfast on weekdays."
+        },
+        {
+          "evidence_id": "md01-session-change-1",
+          "source_ref": "memory://md01/session-change/s1/turn/1",
+          "session_id": "session-change-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-03T07:01:00+08:00",
+          "content": "That is a consistent morning routine."
+        },
+        {
+          "evidence_id": "md01-session-change-2",
+          "source_ref": "memory://md01/session-change/s2/turn/0",
+          "session_id": "session-change-s2",
+          "speaker": "user",
+          "observed_at": "2026-08-03T08:00:00+08:00",
+          "content": "I adopted a cat named Miso yesterday."
+        },
+        {
+          "evidence_id": "md01-session-change-3",
+          "source_ref": "memory://md01/session-change/s2/turn/1",
+          "session_id": "session-change-s2",
+          "speaker": "assistant",
+          "observed_at": "2026-08-03T08:01:00+08:00",
+          "content": "Miso is a lovely name for a cat."
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1], "boundary_reason": "CONVERSATION_START"},
+        {"turn_indexes": [2, 3], "boundary_reason": "SESSION_CHANGE"}
+      ]
+    },
+    {
+      "conversation_id": "time-gap",
+      "turns": [
+        {
+          "evidence_id": "md01-time-gap-0",
+          "source_ref": "memory://md01/time-gap/s1/turn/0",
+          "session_id": "time-gap-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-04T09:00:00+08:00",
+          "content": "My dentist appointment is on Friday morning."
+        },
+        {
+          "evidence_id": "md01-time-gap-1",
+          "source_ref": "memory://md01/time-gap/s1/turn/1",
+          "session_id": "time-gap-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-04T09:01:00+08:00",
+          "content": "Friday morning is noted."
+        },
+        {
+          "evidence_id": "md01-time-gap-2",
+          "source_ref": "memory://md01/time-gap/s1/turn/2",
+          "session_id": "time-gap-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-06T09:30:00+08:00",
+          "content": "I booked a trip to Kyoto for October."
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1], "boundary_reason": "CONVERSATION_START"},
+        {"turn_indexes": [2], "boundary_reason": "TIME_GAP"}
+      ]
+    },
+    {
+      "conversation_id": "pronoun-continuation",
+      "turns": [
+        {
+          "evidence_id": "md01-pronoun-0",
+          "source_ref": "memory://md01/pronoun/s1/turn/0",
+          "session_id": "pronoun-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-07T11:00:00+08:00",
+          "content": "My sister Lina started a bakery in Suzhou."
+        },
+        {
+          "evidence_id": "md01-pronoun-1",
+          "source_ref": "memory://md01/pronoun/s1/turn/1",
+          "session_id": "pronoun-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-07T11:01:00+08:00",
+          "content": "How is the bakery doing?"
+        },
+        {
+          "evidence_id": "md01-pronoun-2",
+          "source_ref": "memory://md01/pronoun/s1/turn/2",
+          "session_id": "pronoun-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-07T11:02:00+08:00",
+          "content": "She opens it every morning at six and already has regular customers."
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1, 2], "boundary_reason": "CONVERSATION_START"}
+      ]
+    },
+    {
+      "conversation_id": "correction-continuation",
+      "turns": [
+        {
+          "evidence_id": "md01-correction-0",
+          "source_ref": "memory://md01/correction/s1/turn/0",
+          "session_id": "correction-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-08T12:00:00+08:00",
+          "content": "On August 12, 2026, I moved from Shanghai to Hangzhou for my new job."
+        },
+        {
+          "evidence_id": "md01-correction-1",
+          "source_ref": "memory://md01/correction/s1/turn/1",
+          "session_id": "correction-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-08T12:01:00+08:00",
+          "content": "I moved from Paris to Lyon last year, so moving can feel disruptive."
+        },
+        {
+          "evidence_id": "md01-correction-2",
+          "source_ref": "memory://md01/correction/s1/turn/2",
+          "session_id": "correction-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-08T12:02:00+08:00",
+          "content": "Correction: I did not move to Hangzhou; I still live in Shanghai."
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1, 2], "boundary_reason": "CONVERSATION_START"}
+      ]
+    },
+    {
+      "conversation_id": "implicit-topic-shift",
+      "turns": [
+        {
+          "evidence_id": "md01-implicit-shift-0",
+          "source_ref": "memory://md01/implicit-shift/s1/turn/0",
+          "session_id": "implicit-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-09T13:00:00+08:00",
+          "content": "I prefer aisle seats to window seats when flying."
+        },
+        {
+          "evidence_id": "md01-implicit-shift-1",
+          "source_ref": "memory://md01/implicit-shift/s1/turn/1",
+          "session_id": "implicit-shift-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-09T13:01:00+08:00",
+          "content": "That preference can make long flights more comfortable."
+        },
+        {
+          "evidence_id": "md01-implicit-shift-2",
+          "source_ref": "memory://md01/implicit-shift/s1/turn/2",
+          "session_id": "implicit-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-09T13:02:00+08:00",
+          "content": "My brother Noah finished medical school yesterday."
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1], "boundary_reason": "CONVERSATION_START"},
+        {"turn_indexes": [2], "boundary_reason": "SEMANTIC_TOPIC_SHIFT"}
+      ]
+    },
+    {
+      "conversation_id": "assistant-clarification",
+      "turns": [
+        {
+          "evidence_id": "md01-clarification-0",
+          "source_ref": "memory://md01/clarification/s1/turn/0",
+          "session_id": "clarification-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-10T14:00:00+08:00",
+          "content": "I'm thinking of visiting Lisbon in October."
+        },
+        {
+          "evidence_id": "md01-clarification-1",
+          "source_ref": "memory://md01/clarification/s1/turn/1",
+          "session_id": "clarification-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-10T14:01:00+08:00",
+          "content": "Are you planning to go for work or vacation?"
+        },
+        {
+          "evidence_id": "md01-clarification-2",
+          "source_ref": "memory://md01/clarification/s1/turn/2",
+          "session_id": "clarification-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-10T14:02:00+08:00",
+          "content": "For vacation, mainly to see the old neighborhoods."
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1, 2], "boundary_reason": "CONVERSATION_START"}
+      ]
+    },
+    {
+      "conversation_id": "multilingual-explicit-shift",
+      "turns": [
+        {
+          "evidence_id": "md01-zh-shift-0",
+          "source_ref": "memory://md01/zh-shift/s1/turn/0",
+          "session_id": "zh-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-11T15:00:00+08:00",
+          "content": "我最近搬到杭州工作。"
+        },
+        {
+          "evidence_id": "md01-zh-shift-1",
+          "source_ref": "memory://md01/zh-shift/s1/turn/1",
+          "session_id": "zh-shift-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-11T15:01:00+08:00",
+          "content": "新工作适应得怎么样？"
+        },
+        {
+          "evidence_id": "md01-zh-shift-2",
+          "source_ref": "memory://md01/zh-shift/s1/turn/2",
+          "session_id": "zh-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-11T15:02:00+08:00",
+          "content": "挺顺利的，西湖附近通勤很方便。"
+        },
+        {
+          "evidence_id": "md01-zh-shift-3",
+          "source_ref": "memory://md01/zh-shift/s1/turn/3",
+          "session_id": "zh-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-11T15:03:00+08:00",
+          "content": "换个话题，我更喜欢靠过道的座位。"
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1, 2], "boundary_reason": "CONVERSATION_START"},
+        {"turn_indexes": [3], "boundary_reason": "EXPLICIT_TOPIC_SHIFT"}
+      ]
+    },
+    {
+      "conversation_id": "pronoun-then-shift",
+      "turns": [
+        {
+          "evidence_id": "md01-pronoun-shift-0",
+          "source_ref": "memory://md01/pronoun-shift/s1/turn/0",
+          "session_id": "pronoun-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-12T16:00:00+08:00",
+          "content": "My cousin Maya had twins in April."
+        },
+        {
+          "evidence_id": "md01-pronoun-shift-1",
+          "source_ref": "memory://md01/pronoun-shift/s1/turn/1",
+          "session_id": "pronoun-shift-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-12T16:01:00+08:00",
+          "content": "What are the twins called?"
+        },
+        {
+          "evidence_id": "md01-pronoun-shift-2",
+          "source_ref": "memory://md01/pronoun-shift/s1/turn/2",
+          "session_id": "pronoun-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-12T16:02:00+08:00",
+          "content": "They are named Ava and Lily."
+        },
+        {
+          "evidence_id": "md01-pronoun-shift-3",
+          "source_ref": "memory://md01/pronoun-shift/s1/turn/3",
+          "session_id": "pronoun-shift-s1",
+          "speaker": "user",
+          "observed_at": "2026-08-12T16:03:00+08:00",
+          "content": "Changing topic, I enrolled in a weekend ceramics course."
+        },
+        {
+          "evidence_id": "md01-pronoun-shift-4",
+          "source_ref": "memory://md01/pronoun-shift/s1/turn/4",
+          "session_id": "pronoun-shift-s1",
+          "speaker": "assistant",
+          "observed_at": "2026-08-12T16:04:00+08:00",
+          "content": "A weekend course should provide steady practice."
+        }
+      ],
+      "expected_episodes": [
+        {"turn_indexes": [0, 1, 2], "boundary_reason": "CONVERSATION_START"},
+        {"turn_indexes": [3, 4], "boundary_reason": "EXPLICIT_TOPIC_SHIFT"}
+      ]
+    }
+  ]
+}

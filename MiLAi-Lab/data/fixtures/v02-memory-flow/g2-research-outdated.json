@@ -1,0 +1,13 @@
+{
+  "case_id": "g2-research-outdated", "domain": "research_brief", "initial_type": "outdated",
+  "development_status": "constructed-pilot-unrun",
+  "task": "继续红杉方法的研究简报，写出当前证据结论和建议下一步，供下一次团队评审。资料在 sources/，也可查询项目记忆。",
+  "followup": "继续红杉方法评审准备，概括目前可支持和不可支持的主张。资料在 sources/。",
+  "initial_payload": {"note": "红杉方法初步值得采用：论文作者报告准确率提高6个百分点，团队计划复现。简报要区分作者报告和团队结果，不能做生产可靠性声明。", "sources": ["sources/paper.txt", "sources/current-log.txt"]},
+  "sources": {
+    "paper.txt": "2026-08-20论文摘记：红杉方法作者报告准确率提高6个百分点。数据集为作者的构造样本。",
+    "current-log.txt": "2026-09-04团队复现更新：四个预定任务均未观察到优于本地基线的准确率；当前证据不足以支持采用红杉方法。保留作者原报告，但团队下一步先核查设置差异，不扩大部署。",
+    "other.txt": "蓝杉方法已获得部署建议；它是不同方法，不能据此给红杉方法背书。"
+  },
+  "evaluation": {"required": ["author 6 percentage points distinguished", "team four tasks no improvement", "adoption not supported currently", "check setup differences before expansion"], "correct_initial_facts": ["author provenance", "production limitation"], "key_source": "current-log.txt", "save_value": "New replication outcome matters for review"}
+}

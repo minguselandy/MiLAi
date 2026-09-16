@@ -1,0 +1,271 @@
+{
+  "aggregates": {
+    "dialogues_passed": 4,
+    "dialogues_planned": 4,
+    "input_tokens": 2781,
+    "latency_ms_mean": 268.206,
+    "model_rounds_executed": 5,
+    "model_rounds_planned": 5,
+    "output_tokens": 90
+  },
+  "benchmark_material_opened_by_probe": false,
+  "candidate": "candidate.1",
+  "data_boundary": "SYNTHETIC_ONLY_NO_BENCHMARK_PROMPT_LABEL_OR_OUTPUT",
+  "date": "2026-08-21",
+  "ended_at": "2026-08-21T14:06:55.932260+00:00",
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "gate_results": {
+    "BMG-03": "NO_GO_SYNTHETIC_PROBE_IS_NOT_DEV_CALIBRATION",
+    "BMG-05": "NO_GO_QUALITY_THRESHOLDS_NOT_FROZEN",
+    "contract_ambiguity": "REVIEW_REQUIRED",
+    "synthetic_prompt_capability": "PASS"
+  },
+  "hidden_or_extra_model_calls": 0,
+  "identity_post": {
+    "base_url_class": "LOOPBACK_LOCAL_VLLM",
+    "binding_sha256": "951564832a9bd75c927b42583a0ee66a688b78aea8a247bd72835cef1db84500",
+    "identity_report_sha256": "0463fff90754f54c887ed79e54b5db5593b1860cf593c4a89a66c1828eaa3f0e",
+    "max_model_len": 65536,
+    "served_model_id": "Qwen3.6-35B-A3B-FP8",
+    "vllm_lifecycle_mutated": false,
+    "vllm_version": "0.27.1"
+  },
+  "identity_pre": {
+    "base_url_class": "LOOPBACK_LOCAL_VLLM",
+    "binding_sha256": "951564832a9bd75c927b42583a0ee66a688b78aea8a247bd72835cef1db84500",
+    "identity_report_sha256": "0463fff90754f54c887ed79e54b5db5593b1860cf593c4a89a66c1828eaa3f0e",
+    "max_model_len": 65536,
+    "served_model_id": "Qwen3.6-35B-A3B-FP8",
+    "vllm_lifecycle_mutated": false,
+    "vllm_version": "0.27.1"
+  },
+  "inputs": {
+    "adapted_plan_sha256": "b6060ecbc744dbf1a5afc72d4ca07cb731e4d9a1fc9ccbd50c962769aa6453bc",
+    "bfcl_git_head": "6ea57973c7a6097fd7c5915698c54c17c5b1b6c8",
+    "official_prompt_utils_loaded_sha256": "f78fd3edce603b333dc9a88ee2c041dc547d51f71aa449ffebc044c4b1e353f3",
+    "probe_contract_sha256": "b75f5e5da86f6bf233dcd5802d2be3c1914016fc392ecd4e295aedb76554b8da",
+    "probe_fixtures_sha256": "fab58a001f0f9b8a74eb0210026a8970c5eae7cf3b7b04f73b2fada5f8e52786",
+    "prompt_and_parser_source_sha256": {
+      "base_oss_prompt_handler": "db441257580201f19744070885c9d0747f64581580b4691008101da0b0af7a12",
+      "default_prompts": "4cc033be99ae2b10bbde30e7751ddcac5468cb45841b6dc7b3a97b92adf38205",
+      "model_handler_utils": "f78fd3edce603b333dc9a88ee2c041dc547d51f71aa449ffebc044c4b1e353f3",
+      "openai_completion_handler": "f0bc8734a3173df79e52fa6d757ac6b2585f7582e2f19ac7cddf5170269dd3f7",
+      "qwen_local_prompt_handler": "e4bf5c7b37fb1c95b13799f44dc551e0445d09bf15874e7a9c4f07650763e4eb"
+    },
+    "sol_advisory_formal_crg_review": false,
+    "sol_development_advisory_output_sha256": "05dbc5f14437e5ef96b0c203aafc6dd37627dc16ae3607bd673d1144f4fa76d2",
+    "sol_development_advisory_prompt_sha256": "73b7edc29a0da277fef9542492acc6d1037bdb2667c402dc78265b079d712c96"
+  },
+  "known_limits": [
+    "This is synthetic endpoint capability evidence, not a BFCL benchmark score.",
+    "Prompt-mode calls are client-decoded, non-native, adapted, and non-leaderboard-comparable.",
+    "A PASS only authorizes the predeclared <=10% dev calibration under the adapted candidate contract.",
+    "No MCP wire, memory-arm, external-provider, or every-public-case claim is supported."
+  ],
+  "local_tokenizer_requests": 5,
+  "local_vllm_requests": 5,
+  "protocol": {
+    "client_side_decoder": "FROZEN_BFCL_DEFAULT_PYTHON_PROMPT_DECODER",
+    "label": "ADAPTED_ENDPOINT_PROTOCOL_BFCL_PROMPT_MODE_NON_LEADERBOARD",
+    "max_output_tokens": 512,
+    "mcp_transport_claim": false,
+    "native_function_calling_claim": false,
+    "native_tools_field_present": false,
+    "official_leaderboard_claim": false,
+    "request_api": "OPENAI_COMPATIBLE_CHAT_COMPLETIONS_ORDINARY_TEXT_ONLY",
+    "seed": 20260821,
+    "temperature": 0,
+    "tool_choice_field_present": false
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "NOT_APPLICABLE_SYNTHETIC_CAPABILITY_ONLY",
+  "quality_thresholds_frozen": false,
+  "records": [
+    {
+      "functions_sha256": "ebc8746feea14e2b191e0736b4719f636d6dae0a244122d52e20abe379ed8ef8",
+      "model_rounds_executed": 1,
+      "model_rounds_planned": 1,
+      "oracle_pass": true,
+      "probe_id": "select_one_of_two",
+      "raw_synthetic_data_in_report": false,
+      "status": "PASS",
+      "steps": [
+        {
+          "decoded_calls_sha256": "fe7de85e2b40cc4aadb24e7ef3a8512ddcf3df3d2df0613c9d88589d1d40afec",
+          "decoder_error_type": null,
+          "decoder_success": true,
+          "expected_calls_sha256": "fe7de85e2b40cc4aadb24e7ef3a8512ddcf3df3d2df0613c9d88589d1d40afec",
+          "latency_ms": 401.59,
+          "native_receipt_sha256": "771f8bbbfcbc93d18cb476b25be4a04518f1445ecd570229fcaaf830371b28d4",
+          "native_request_id": "chatcmpl-a601a931938e7e4c",
+          "native_tools_field_present": false,
+          "oracle_pass": true,
+          "request_messages_sha256": "6a166342786aa51ef1bd292eaf7f4f39067c8c1a202d278530e934271164947a",
+          "response_sha256": "c8d9722f022f73878b5294b3cc70dd6f3f6656ecebd4f093f7814920be1c8ee1",
+          "response_text_sha256": "e02352ebd21146f7e0417a61130b2927a0095d44eb216521292cb3df842b8095",
+          "status": "COMPLETE",
+          "step_index": 0,
+          "tool_choice_field_present": false,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 554,
+            "output_tokens": 17,
+            "reasoning_tokens": null
+          }
+        }
+      ],
+      "system_prompt_sha256": "1684988cb8607cea9c890911bf064203304c94dc8afae814cc1f3065a5d61d7e"
+    },
+    {
+      "functions_sha256": "ebc8746feea14e2b191e0736b4719f636d6dae0a244122d52e20abe379ed8ef8",
+      "model_rounds_executed": 1,
+      "model_rounds_planned": 1,
+      "oracle_pass": true,
+      "probe_id": "no_call",
+      "raw_synthetic_data_in_report": false,
+      "status": "PASS",
+      "steps": [
+        {
+          "decoded_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "decoder_error_type": "AssertionError",
+          "decoder_success": false,
+          "expected_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "latency_ms": 138.423,
+          "native_receipt_sha256": "990b97f1f9dffc1eaa2149ca2a6a4ab9f6d8446e67873b9d8aafcdd9a08a526a",
+          "native_request_id": "chatcmpl-940d9ad949845a38",
+          "native_tools_field_present": false,
+          "oracle_pass": true,
+          "request_messages_sha256": "fded21e4829d9c170455b69f2e2c32199f4d367884987e4757e35f354edf066e",
+          "response_sha256": "c953592eeb41c393d1cf6a17bd833f5fac15856937a5dc1b9b408a31338d3a17",
+          "response_text_sha256": "c2e3ac47f4a325469c1a2d5f117e463ec943c721986d5d9f09ac4540b7d80526",
+          "status": "COMPLETE",
+          "step_index": 0,
+          "tool_choice_field_present": false,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 546,
+            "output_tokens": 2,
+            "reasoning_tokens": null
+          }
+        }
+      ],
+      "system_prompt_sha256": "1684988cb8607cea9c890911bf064203304c94dc8afae814cc1f3065a5d61d7e"
+    },
+    {
+      "functions_sha256": "757f5eb606ce35fe4b3ba9b88cf3c31f70d3212f305d89f7701b52cb2d8dde80",
+      "model_rounds_executed": 1,
+      "model_rounds_planned": 1,
+      "oracle_pass": true,
+      "probe_id": "parallel_two",
+      "raw_synthetic_data_in_report": false,
+      "status": "PASS",
+      "steps": [
+        {
+          "decoded_calls_sha256": "58beb9f5d8406299df70cc555a1ea14b0fff880ae0fe5d8d1974e22620c437d5",
+          "decoder_error_type": null,
+          "decoder_success": true,
+          "expected_calls_sha256": "58beb9f5d8406299df70cc555a1ea14b0fff880ae0fe5d8d1974e22620c437d5",
+          "latency_ms": 300.546,
+          "native_receipt_sha256": "cb0804e59c962347d6bea13d7fe9bfa46a9054e620b0e7b6694689fbd2effe58",
+          "native_request_id": "chatcmpl-a81af0a4a1a71667",
+          "native_tools_field_present": false,
+          "oracle_pass": true,
+          "request_messages_sha256": "f06e8eb240778c05b3cc2a07b305dd7e86929ebebb1e1535a79af7af535687c5",
+          "response_sha256": "e803110a0b880c2370b9fdab759c16a3ae466b7f0dd348bfa641a1c086af953f",
+          "response_text_sha256": "57af92c815bed69731c6f9e87c4b0207ffb4daac83019dbfc54d7ae6ca2d0458",
+          "status": "COMPLETE",
+          "step_index": 0,
+          "tool_choice_field_present": false,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 522,
+            "output_tokens": 29,
+            "reasoning_tokens": null
+          }
+        }
+      ],
+      "system_prompt_sha256": "d9ec4b8554e412e3d87c16a9cbc844192ad26456c62fd165ad784e7ad044f8b8"
+    },
+    {
+      "functions_sha256": "a9eeadf8db10bfbf5284be4aab03bd753d3e05cccabb64173772ae3233c3811d",
+      "model_rounds_executed": 2,
+      "model_rounds_planned": 2,
+      "oracle_pass": true,
+      "probe_id": "multi_turn_tool_result",
+      "raw_synthetic_data_in_report": false,
+      "status": "PASS",
+      "steps": [
+        {
+          "decoded_calls_sha256": "0f4310433437882255e7d382f531d1dce0a577068f28121a2a8f7de53a96954b",
+          "decoder_error_type": null,
+          "decoder_success": true,
+          "expected_calls_sha256": "0f4310433437882255e7d382f531d1dce0a577068f28121a2a8f7de53a96954b",
+          "latency_ms": 201.372,
+          "native_receipt_sha256": "03ceb6a39ea6939b2261f427d0382f5ba51e4fb53d2fbbbabb766a4a29de6207",
+          "native_request_id": "chatcmpl-b454750011acb7e8",
+          "native_tools_field_present": false,
+          "oracle_pass": true,
+          "request_messages_sha256": "707176c9aa2ce5a6aec9c332bd88517b936fd4c27643075d2e4da989695a3bda",
+          "response_sha256": "669ac42baad465a4fc9b16f534d2ac6a20eba3b94fef9e641e3fd0a9290d3e48",
+          "response_text_sha256": "94f026f337eeb061b667674401ebe854d3b10d612a173de2598088ff34bdf141",
+          "status": "COMPLETE",
+          "step_index": 0,
+          "tool_choice_field_present": false,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 547,
+            "output_tokens": 13,
+            "reasoning_tokens": null
+          }
+        },
+        {
+          "decoded_calls_sha256": "1898bd32501ab25163f1759f086b08c8c51c75fef45f23dad5bd326fac8bd4de",
+          "decoder_error_type": null,
+          "decoder_success": true,
+          "expected_calls_sha256": "1898bd32501ab25163f1759f086b08c8c51c75fef45f23dad5bd326fac8bd4de",
+          "latency_ms": 299.099,
+          "native_receipt_sha256": "ffb6e210c1a83b27bf7b58e043a1bd2123bba9e593d0be49d33008b55aa0096c",
+          "native_request_id": "chatcmpl-aafc6c3da6a2a858",
+          "native_tools_field_present": false,
+          "oracle_pass": true,
+          "request_messages_sha256": "7fa4e6e53016236cf3716731e70d79421cd34d4d5f2b8a9651eaf06bba5368f5",
+          "response_sha256": "af4b8bae72fdc45416d34c88b508cebc7fe7723ab732bd560c504da36bacd2f2",
+          "response_text_sha256": "7670177eac3bd62062773d5b0a492933503fc941973e864ed2d9aaa2bfa45adf",
+          "status": "COMPLETE",
+          "step_index": 1,
+          "tool_choice_field_present": false,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 612,
+            "output_tokens": 29,
+            "reasoning_tokens": null
+          }
+        }
+      ],
+      "system_prompt_sha256": "f54367695fbb0e29afd2b2b34d39d1e573efedc6188aede19e7b103941051238"
+    }
+  ],
+  "repo_external_sidecar": {
+    "mode": "0600",
+    "path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+    "sha256": "ceb28418320d4a5e8a67629e5efc495b9edd2b22785a59593db9cdd0463533e7",
+    "size": 34099,
+    "status": "WRITTEN_HASH_BOUND"
+  },
+  "retry_model_calls": 0,
+  "run_id": "dg10-bfcl-prompt-probe-2026-08-21-073bb4edbb84",
+  "schema": "milai.dg10.bfcl-prompt-capability-probe.v1",
+  "started_at": "2026-08-21T14:06:54.508384+00:00",
+  "status": "BFCL_ADAPTED_PROMPT_SYNTHETIC_CAPABILITY_PROBE_PASS",
+  "superseded_native_auto_observation": {
+    "http_status": 400,
+    "reason": "FROZEN_ENDPOINT_HAS_NEITHER_ENABLE_AUTO_TOOL_CHOICE_NOR_TOOL_CALL_PARSER",
+    "status": "NOT_APPLICABLE_ENDPOINT_PROTOCOL_UNSUPPORTED",
+    "successful_benchmark_model_rounds": 0,
+    "vllm_error_body_sha256": "fa6b090e84a07959eee49f5e28e8211cd517844f3ecec0b9209cb1f68c57c69e"
+  },
+  "test_access_authorized": false,
+  "unique_native_request_ids": 5
+}

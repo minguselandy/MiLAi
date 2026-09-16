@@ -1,0 +1,27 @@
+{
+  "status": "METADATA_SELECTION_BEFORE_THIS_GOAL_SOURCE_EXPORT",
+  "opened_development_selection": "data/labels/product05-openworker-lme-selection.v0.1.json",
+  "D": [
+    "0a995998",
+    "27016adc",
+    "gpt4_e072b769",
+    "852ce960",
+    "8550ddae",
+    "71a3fd6b"
+  ],
+  "V": [
+    "d851d5ba",
+    "ba358f49",
+    "gpt4_d6585ce9",
+    "cf22b7bf",
+    "29f2956b",
+    "70b3e69b"
+  ],
+  "smoke": [
+    "0a995998",
+    "8550ddae"
+  ],
+  "basis": "D covers known COUNT gap, multi-operand comparison, temporal reasoning, knowledge update, ordinary user and assistant lookup. V metadata-matched disjoint six; bodies/results not used in this goal's tuning. All already opened historically; V not blind.",
+  "R": "Choose two eligible complex D histories and freeze distinct followups before update generation; L4 budget independent",
+  "phase_entry": "Start L0-L2 only; no B1 selected without L1 evidence; L3 requires D thresholds; L4 needs separately frozen plan."
+}

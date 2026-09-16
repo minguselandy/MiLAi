@@ -1,0 +1,37 @@
+{
+  "goal_id": "MILA-V02-12",
+  "contract_version": "0.1-execution-1",
+  "run_id": "v0212-20260909-r1",
+  "authorization": "User explicitly requests execution of V02-12 and subagent review replacing human review; supersedes document-only planning pause. Execute P0/P1 and one ready lane's bounded first wave. No paid services, dataset generation, protected partition release, Product change or intervention.",
+  "seed": "v0212-20260909-r1",
+  "lane_priority": ["STALE", "HorizonBench", "FactConsolidation"],
+  "discovery_fraction": [2, 3],
+  "pool_targets": {"STALE": 12, "HorizonBench": 12, "FactConsolidation": 2},
+  "screened_cluster_caps": {"STALE": 60, "HorizonBench": 60, "FactConsolidation": "FROZEN_DISCOVERY_UNIVERSE"},
+  "resources": {
+    "metadata_download_bytes": 67108864,
+    "dataset_download_bytes": 2147483648,
+    "source_export_bytes": 1073741824,
+    "disk_bytes": 6442450944,
+    "preparation_seconds": 1800,
+    "review_seconds": 1200,
+    "reviewer_agents": 1,
+    "network_timeout_seconds": 40,
+    "new_model_weight_download_bytes": 0
+  },
+  "first_wave": {
+    "one_lane_only": true,
+    "STALE": {"clusters": 2, "queries": 6, "generations": 18, "raw_tokens": 120000},
+    "HorizonBench": {"clusters": 2, "queries": 4, "generations": 12, "raw_tokens": 80000},
+    "FactConsolidation": {"clusters": 2, "queries": 4, "generations": 12, "raw_tokens": 80000},
+    "seconds": 1200
+  },
+  "query_limits": {"generations": 3, "tool_calls": 6, "raw_tokens": 20000, "input_tokens": 8192, "output_tokens": 1024, "generation_seconds": 60, "tool_seconds": 40},
+  "extra_wave_allocation": 0,
+  "paid_requests": 0,
+  "benchmark_judge_requests": 0,
+  "dataset_generation_requests": 0,
+  "review_mode": "MODEL_ASSISTED_ADJUDICATION_ORCHESTRATOR_COST_SEPARATE",
+  "confirmation_opening": false,
+  "predecessor_reopened": false
+}

@@ -1,0 +1,141 @@
+schema_version: "1"
+goal_id: "DG-10-RM"
+parent_goal_id: "DG-10"
+candidate_id: "candidate.3"
+contract_status: "AUTHOR_CANDIDATE_PRE_MODEL_RUN"
+as_of: "2026-08-22"
+
+boundaries:
+  provider_under_test: "self-hosted-vllm-only"
+  external_provider_gate: "OE-F06_OPEN_PARKED"
+  data_boundary: "SYNTHETIC_OR_DEIDENTIFIED_ONLY"
+  codex_role: "ADVERSARIAL_EVIDENCE_AUDITOR_ONLY"
+  runtime_status: "0.1.x_CANDIDATE"
+  schema_status: "0.1.x_EXPERIMENTAL_NO_GO_FOR_FREEZE"
+
+allowed_stage_states:
+  - "NOT_STARTED"
+  - "AUTHOR_CANDIDATE"
+  - "REVIEW_REQUIRED"
+  - "ACCEPTED"
+  - "REVISE"
+  - "NO_GO_TERMINAL"
+
+allowed_evidence_classes:
+  - "AUTHOR"
+  - "DETERMINISTIC"
+  - "HUMAN"
+  - "INDEPENDENT"
+
+claim_catalog:
+  MCP_PACKAGE_VERIFIED:
+    stage_id: "DG10-L1"
+    required_gates: ["MCG-00", "MCG-01", "MCG-02"]
+  OPENWORKER_HOST_ISOLATED:
+    stage_id: "DG10-L2"
+    required_gates: ["OWG-00", "OWG-01", "OWG-02", "OWG-03"]
+  MCP_INTEGRATION_PASS:
+    stage_id: "DG10-L3"
+    required_gates: ["BMG-01"]
+  LOCAL_PROVIDER_VERIFIED:
+    stage_id: "DG10-L3"
+    required_gates: ["PVL-00", "PVL-01", "PVL-02", "PVL-03", "PVL-04"]
+  QUALITY_TARGET_MET:
+    stage_id: "DG10-L4"
+    required_gates: ["BMG-02", "BMG-03", "BMG-04", "BMG-05"]
+  LOCAL_VLLM_MCP_AGENT_CANDIDATE:
+    stage_id: "DG10-L5"
+    required_gates:
+      - "DG10-L1"
+      - "DG10-L2"
+      - "DG10-L3"
+      - "DG10-L4"
+      - "DG10-L5"
+
+# These records preserve candidate.2 evidence with its actual stage.  They are
+# deliberately not acceptance requests and cannot be spliced into candidate.3.
+qualified_evidence:
+  - claim_id: "MCP_PACKAGE_VERIFIED"
+    stage_id: "DG10-L1"
+    stage_state: "AUTHOR_CANDIDATE"
+    evidence_class: "AUTHOR"
+    candidate_id: "candidate.2"
+    inventory_sha256: "1d087811ce722c1279010f6fd186a379f862487c3cd29d26ad86636bbb78981e"
+    required_gates: ["MCG-00", "MCG-01", "MCG-02"]
+    gate_receipts:
+      - {gate_id: "MCG-00", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+      - {gate_id: "MCG-01", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+      - {gate_id: "MCG-02", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+    allowed: false
+  - claim_id: "OPENWORKER_HOST_ISOLATED"
+    stage_id: "DG10-L2"
+    stage_state: "REVIEW_REQUIRED"
+    evidence_class: "AUTHOR"
+    candidate_id: "candidate.2"
+    inventory_sha256: "1d087811ce722c1279010f6fd186a379f862487c3cd29d26ad86636bbb78981e"
+    required_gates: ["OWG-00", "OWG-01", "OWG-02", "OWG-03"]
+    gate_receipts:
+      - {gate_id: "OWG-00", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+      - {gate_id: "OWG-01", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+      - {gate_id: "OWG-02", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+      - {gate_id: "OWG-03", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+    allowed: false
+  - claim_id: "MCP_INTEGRATION_PASS"
+    stage_id: "DG10-L3"
+    stage_state: "REVIEW_REQUIRED"
+    evidence_class: "AUTHOR"
+    candidate_id: "candidate.2"
+    inventory_sha256: "1d087811ce722c1279010f6fd186a379f862487c3cd29d26ad86636bbb78981e"
+    required_gates: ["BMG-01"]
+    gate_receipts:
+      - {gate_id: "BMG-01", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+    allowed: false
+  - claim_id: "LOCAL_PROVIDER_VERIFIED"
+    stage_id: "DG10-L3"
+    stage_state: "REVIEW_REQUIRED"
+    evidence_class: "AUTHOR"
+    candidate_id: "candidate.2"
+    inventory_sha256: "1d087811ce722c1279010f6fd186a379f862487c3cd29d26ad86636bbb78981e"
+    required_gates: ["PVL-00", "PVL-01", "PVL-02", "PVL-03", "PVL-04"]
+    gate_receipts:
+      - {gate_id: "PVL-00", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+      - {gate_id: "PVL-01", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+      - {gate_id: "PVL-02", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+      - {gate_id: "PVL-03", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+      - {gate_id: "PVL-04", candidate_id: "candidate.2", path: "docs/reports/DG-10-final-completion-audit-candidate.2-2026-08-22.json", sha256: "b2c59ee959470b5ff1c73692d2b74eff94c83969a8e7803b1d704bcabcc303cb"}
+    allowed: false
+
+candidate_3_stage_state:
+  DG10-R0: "AUTHOR_CANDIDATE"
+  DG10-R1: "AUTHOR_CANDIDATE"
+  DG10-R2: "NOT_STARTED"
+  DG10-R3: "NOT_STARTED"
+  DG10-R4: "NOT_STARTED"
+  DG10-R5: "NOT_STARTED"
+  DG10-R6: "NOT_STARTED"
+  DG10-R7: "NOT_STARTED"
+  DG10-R8: "NOT_STARTED"
+
+aggregate_current_status:
+  claim_id: "LOCAL_VLLM_MCP_AGENT_CANDIDATE"
+  candidate_id: "candidate.3"
+  allowed: false
+  reason_codes:
+    - "CANDIDATE_3_NOT_INDEPENDENTLY_ACCEPTED"
+    - "MODEL_RUN_AUTHORIZATION_NOT_MET"
+    - "QUALITY_NOT_RUN"
+    - "TIER2_HUMANS_NOT_COMPLETE"
+    - "FULL_TEST_DENIED"
+  full_test_authorized: false
+  release_authorized: false
+
+validation_policy:
+  unknown_claim: "DENY"
+  unknown_stage: "DENY"
+  unknown_evidence_class: "DENY"
+  stage_other_than_accepted_for_allowed_claim: "DENY"
+  author_evidence_as_independent_acceptance: "DENY"
+  cross_candidate_receipt: "DENY"
+  missing_gate_or_receipt_hash: "DENY"
+  below_target_aggregate_claim: "DENY"
+  post_run_threshold_mutation: "DENY_NEW_CANDIDATE_REQUIRED"

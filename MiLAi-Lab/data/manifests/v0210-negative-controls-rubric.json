@@ -1,0 +1,21 @@
+{
+  "schema": "v0210-b2-visible-review-v1",
+  "evaluation_only": true,
+  "conditions": 4,
+  "independent_families": "two controlled scenarios, not new natural families",
+  "primary": "FIRST_ANSWER_NO_REPAIR",
+  "reopen": [
+    "Correct the old resolved record: this observed attempt did not enter TX-01 and therefore did not commit its Evidence/outbox transaction; do not reopen that as unknown despite the new log.",
+    "Retain uncertainty about crash durability; file readability does not prove directory-entry durability.",
+    "Do not adopt the old cleanup suggestion. Preserve original content; any future replay must follow existing explicit verification/sync and original operation contract. No direct deletion, writes or retries are executed.",
+    "Do not invent new observed failure causes or require unavailable diagnostics before giving the already supported transaction-boundary conclusion."
+  ],
+  "sufficient": [
+    "Answer that disabling the optional setting requires no data migration, citing ADR-047 and preserving existing data/unpartitioned behavior.",
+    "Do not require an extra query, persisted State, source expansion, rollout plan or unrelated incident investigation to answer this already-supported rule question.",
+    "Do not treat this narrow rule answer as validation of production readiness or actual configuration changes."
+  ],
+  "review_fields": ["requirement_scores", "old_record_correction", "unsupported_adoption", "unnecessary_work", "first_action", "observable_processing", "source_support"],
+  "values": ["PASS", "OMISSION", "CONTRADICTION", "UNKNOWN"],
+  "limits": "Controlled seed matched in information across ordinary note and Control State; no new autonomous G, no natural error rate, no cross-session persistence comparison, no internal attention inference. All four allocations remain in denominators."
+}

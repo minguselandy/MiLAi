@@ -1,0 +1,211 @@
+{
+  "status": "FULL_STAGE_NOT_MET_TERMINAL_REVIEW_PASS_OFFLINE_ENGINEERING_FOLLOWUP",
+  "recorded_local_date": "2026-09-12",
+  "product_behavior_claim": false,
+  "root": "/cra/memory/mx_memory/evidence/v0222-presentation/20260912-http-r1",
+  "binding_sha256": "bcc255fcbf4ab390f295b601cc353f98c23fb6800d8bfe54349bdb2325b197e1",
+  "revision": "INTENT_BOUNDARY_RUNTIME_V1",
+  "selected_presentation": "B1",
+  "selected_decoder": "D11",
+  "execution": {
+    "session": 35358,
+    "terminal_chunk": "0e90c9",
+    "process_exit_code": 0,
+    "exit_zero_does_not_mean_gate_pass": true,
+    "status": "FULL_STAGE_NOT_MET",
+    "permanent_stop": "EPISODE_DEADLINE",
+    "P3": {
+      "required": 16,
+      "passed": 12,
+      "full_passed": 6,
+      "finish_passed": 6,
+      "failed": "presentation-p3-13",
+      "unrun": 3,
+      "gate": "NOT_MET",
+      "phase_wall_limit_seconds": 1800,
+      "phase_deadline_unix": 1789152334.5098734
+    },
+    "P4": {
+      "status": "NOT_TRIGGERED",
+      "chains_unrun": 24
+    },
+    "new_cold_workers": 13,
+    "central_events": 52
+  },
+  "failed_position": {
+    "id": "presentation-p3-13",
+    "kind": "full",
+    "HTTP_status": 200,
+    "HTTP_seconds": 9.869397912872955,
+    "raw": 26739,
+    "usage": "KNOWN_BEFORE_DEADLINE",
+    "failure_location": "v0222_presentation_provider.py:311 batch.admit after compiled.validate_output; before original CAS/intent acceptance and release",
+    "worker_PID": 1959987,
+    "worker_exit_code": -9,
+    "parent_timeout": true,
+    "posthoc_semantics": "STRICT_JSON_FULL_SCHEMA_STRICT_CAS_COMPLETE_INTENT_PASS_POSTHOC_ONLY_NO_RETROACTIVE_PASS",
+    "original_validation_artifact": "NOT_CREATED",
+    "business_dispatch": false
+  },
+  "http": {
+    "generation": 13,
+    "tokenize": 45,
+    "identity_get": 30,
+    "total": 88,
+    "all_http_200": true,
+    "max_generation_seconds": 9.869397912872955,
+    "max_tokenize_seconds": 0.2180915290955454,
+    "max_identity_seconds": 0.046452071983367205
+  },
+  "cost_accounts": {
+    "prior_history": {
+      "ledgers": 44,
+      "requests": 45,
+      "known_raw": 631670,
+      "old_unknown_reserved_upper_bound": 28284,
+      "actual_total_raw": null
+    },
+    "current": {
+      "requests": 13,
+      "input_tokens": 445675,
+      "output_tokens": 4084,
+      "known_raw": 449759,
+      "new_unknown": 0,
+      "violations": 0
+    },
+    "cross_history": {
+      "requests": 58,
+      "known_raw": 1081429,
+      "old_unknown_reserved_upper_bound": 28284,
+      "actual_total_raw": null,
+      "reservation_is_actual_usage": false
+    },
+    "agent": {
+      "scope": "SEPARATE_CUMULATIVE_PLATFORM_USAGE_NOT_VLLM_COST",
+      "latest_snapshot_record": "MILA_V0222_PRESENTATION_OFFLINE_RESULTS_20260912.json"
+    }
+  },
+  "unrun": [
+    "presentation-p3-14",
+    "presentation-p3-15",
+    "presentation-p3-16",
+    "presentation-p4-01",
+    "presentation-p4-02",
+    "presentation-p4-03",
+    "presentation-p4-04",
+    "presentation-p4-05",
+    "presentation-p4-06",
+    "presentation-p4-07",
+    "presentation-p4-08",
+    "presentation-p4-09",
+    "presentation-p4-10",
+    "presentation-p4-11",
+    "presentation-p4-12",
+    "presentation-p4-13",
+    "presentation-p4-14",
+    "presentation-p4-15",
+    "presentation-p4-16",
+    "presentation-p4-17",
+    "presentation-p4-18",
+    "presentation-p4-19",
+    "presentation-p4-20",
+    "presentation-p4-21",
+    "presentation-p4-22",
+    "presentation-p4-23",
+    "presentation-p4-24"
+  ],
+  "gates": {
+    "P3": "NOT_MET",
+    "P4": "NOT_TRIGGERED",
+    "E1": "NOT_TRIGGERED",
+    "E2": "NOT_TRIGGERED",
+    "M0": "NOT_TRIGGERED",
+    "M1": "NOT_TRIGGERED",
+    "Memory": "NOT_ADMITTED"
+  },
+  "independent_terminal_review": {
+    "status": "P3_RESULT_REVIEW_PASS",
+    "reviewer": "/root/p0_audit",
+    "sha256": "8b8e81caa0c094a5574e9c7bffd045d771e2e198854c08c499be5f64523164ec",
+    "stable_files": 5784,
+    "main_hash_revalidation": "PASS_TOOL_CHUNK_8ef8b1",
+    "central_SQLite_WAL_SHM_bound": false,
+    "stage_gate_pass": false
+  },
+  "boundaries": {
+    "only_existing_vllm_HTTP": true,
+    "direct_device_calls": 0,
+    "service_changes": 0,
+    "credentials_read": false,
+    "protected_pool_opened": false,
+    "new_real_business_Worlds": 0,
+    "Notes_written": 0,
+    "old_evidence_preserved": true,
+    "stopped_instance_may_restart": false
+  },
+  "engineering": {
+    "frozen_source_closure": 60,
+    "pytest": "2388 passed / 1 optional Host SDK skip on frozen revision; historical engineering evidence",
+    "other_frozen_revision_checks": "boundary/Ruff/Mypy/build/diff PASS",
+    "new_offline_helper": "46_LOCAL_TESTS_AND_INDEPENDENT_REVIEW_PASS_NOT_CONNECTED_TO_THIS_INSTANCE",
+    "new_helper_full_regression": {"status": "COMPONENT_BASELINE_PASS", "session": 6214, "collected": 2435, "passed": 2434, "optional_sdk_skipped": 1, "seconds": 1210.20, "exit_code": 0, "helper_46_in_full_suite": "PASS", "terminal_chunk": "a59979", "later_scoped_evidence_adapter_covered": false},
+    "new_helper_other_checks": {"boundary": "PASS", "ruff": "PASS", "mypy": "PASS_39_SOURCES", "build": "PASS"},
+    "new_helper_limit": "TWO_CONTENT_OBSERVATIONS_NOT_CONTINUOUS_IMMUTABILITY_OR_BATCH_ADMISSION",
+    "new_helper_scale": {
+      "status": "OFFLINE_SCALE_AND_JSON_COMPATIBILITY_REVIEW_PASS",
+      "unique_files": 5784,
+      "unique_bytes": 331047898,
+      "references": 15787,
+      "independent_json_files_parsed": 5267,
+      "observation_sha256": "1bd83199f3ca7b2301632c9058ade3d8c0627726e3962527967441a2987db47a",
+      "review_sha256": "32575c9bfce7519723450299033035bee8c92a4aa15b272b387d15567d719ce9",
+      "full_batch_or_stage_time_proof": false
+    },
+    "new_helper_is_real_execution_authorization": false,
+    "subsequent_scoped_evidence_adapter": {
+      "status": "R2_64_LOCAL_TESTS_INDEPENDENT_REVIEW_COMPONENT_PROBES_AND_EXACT_CLOSURE_PASS_NOT_BATCH_ADMISSION",
+      "module_sha256": "d32a3eedd5776185b021eb0835e2c055a6a60b494f15d86145aa53ff6d110ccf",
+      "test_sha256": "3da48f1e0a76efe163bf79efa5e307bdd6384cebd9a48b9d9e1a9fe8a0a55dbb",
+      "local_independent_combined_tests": 110,
+      "full_regression": {"status": "PASS", "session": 89818, "collected": 2499, "passed": 2498, "skipped": 1, "seconds": 1209.05, "exit_code": 0, "terminal_chunk": "09c40c", "later_scoped_history_covered": false},
+      "other_checks": "boundary_Ruff_Mypy39_build_PASS",
+      "closure_files": 5865,
+      "original_and_new_first_and_close_exact_maps_equal": true,
+      "speedup_or_complete_phase_time_claim": false,
+      "record": "docs/V0222_SCOPED_EVIDENCE_IMPLEMENTATION_20260912.md"
+    },
+    "subsequent_scoped_history": {
+      "status": "76_LOCAL_TESTS_INDEPENDENT_REVIEW_AND_FULL_REGRESSION_PASS_NOT_BATCH_ADMISSION",
+      "module_sha256": "8fa5b47fe55d4a8a8b1999cf1f26f27f045aa53da2280a8edf8ecf7b9a039942",
+      "test_sha256": "98933c8b13c96a5adb97790dde0380fc06166f199ebe6057f49bc660c1bb5ab4",
+      "review_sha256": "d709fc39f971ee3074b3eecfa996bc2f8ace60c9ab2c1ba57f456a849a17a967",
+      "full_regression": {"status": "PASS", "session": 50243, "collected": 2575, "passed": 2574, "skipped": 1, "seconds": 1217.35, "exit_code": 0, "terminal_chunk": "501e90", "later_lineage_and_batch_core_covered": false},
+      "other_checks": "boundary_Ruff_Mypy39_build_PASS",
+      "record": "docs/V0222_SCOPED_HISTORY_IMPLEMENTATION_20260912.md"
+    },
+    "subsequent_partial_batch_core": {
+      "status": "59_BATCH_CORE_AND_74_LINEAGE_LOCAL_INDEPENDENT_TESTS_PASS_COMPLETE_BATCH_NOT_READY",
+      "batch_core_review_sha256": "f02bd8bf5803dcd3530a9acf2eab2d5ede9fdc96dab1cd765498c958a26b6a0a",
+      "lineage_review_sha256": "659d8fd92ff1f8356cf9a1e29bbfdfc5794111722c138a73c0e3e60495d8616f",
+      "full_regression": {"status": "PASS", "session": 67000, "collected": 2708, "passed": 2707, "optional_sdk_skipped": 1, "seconds": 1233.87, "exit_code": 0, "terminal_chunk": "f1c501", "later_claim_revision_and_gates_covered": false},
+      "formal_root_created": false,
+      "full_stage_time_proven": false,
+      "record": "docs/V0222_SCOPED_BATCH_IMPLEMENTATION_20260912.md"
+    }
+  },
+  "next_steps": [
+    "Independent terminal raw/usage/lineage/PID/deadline/complete-unrun review passed; preserve all frozen evidence.",
+    "Preserve this stopped instance; do not retry its remaining positions or run P4.",
+    "Read-scope baseline session6214 completed2434PASS/1skip; retain its evidence separately from later adapter changes.",
+    "Design and prove prospective explicit per-admission integration, complete safety coverage and actual-scale offline timing; the helper alone is not a complete fix.",
+    "Any future real execution requires separately frozen scope and authority; no generation allocation is created here.",
+    "E1 public-event draft still lacks a sufficient original 16-chain contract; preserve UNKNOWN and prerequisites."
+  ],
+  "files": {
+    "/cra/memory/mx_memory/evidence/v0222-presentation/20260912-http-r1/P3-independent-review.json": "8b8e81caa0c094a5574e9c7bffd045d771e2e198854c08c499be5f64523164ec",
+    "/cra/memory/mx_memory/evidence/v0222-presentation/20260912-http-r1/P3-result.json": "4ff2258fd19babc3dafbc74a94a1cc14b737700c132d583d33bb6fbe79a080ed",
+    "/cra/memory/mx_memory/evidence/v0222-presentation/20260912-http-r1/execution-binding.json": "bcc255fcbf4ab390f295b601cc353f98c23fb6800d8bfe54349bdb2325b197e1",
+    "/cra/memory/mx_memory/evidence/v0222-presentation/20260912-http-r1/scope-review.json": "4813e370efb2618094d50abb93c99e106006ab12018b06181b8c069e0e23c33b",
+    "/cra/memory/mx_memory/evidence/v0222-presentation/20260912-http-r1/P3-preflight/result.json": "dd13e634b465e204d7dd34fa707471f2f326c7b864308ebbd5b26569e3c42660"
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "candidate": "candidate.2.5-contracts-0.3.1",
+  "contract_cleanup_only": true,
+  "data_boundary": "SYNTHETIC_ONLY_REDACTED_SUMMARY",
+  "date": "2026-08-21",
+  "external_provider_gate": "OE-F06_OPEN_PARKED",
+  "gates": {
+    "L1_package_reverify": "PASS_LOCAL_REVERIFY",
+    "L2_host_reverify": "PASS_LOCAL_CANDIDATE_REVIEW_REQUIRED",
+    "L3_e2e_reverify": "PASS_LOCAL_CANDIDATE_REVIEW_REQUIRED",
+    "L4_quality_characterized": "NOT_STARTED",
+    "L5_independent_acceptance": "NOT_STARTED",
+    "LOCAL_VLLM_MCP_AGENT_CANDIDATE": "DENIED_BY_CLAIM_MATRIX",
+    "PVL-05_independent_review": "NO_GO"
+  },
+  "integration_candidate": "candidate.2.4",
+  "known_limits": [
+    "These are author/local reverify results, not independent acceptance.",
+    "The source scripts still embed 2026-08-20 report dates; this summary records the 2026-08-21 execution wrapper and source report SHA-256 values.",
+    "No raw prompt, raw memory, raw model output, token, DSN, broker secret, or external provider credential is included.",
+    "L4 benchmark quality and L5 Codex/controlled independent acceptance remain not started."
+  ],
+  "mcp_package_gate": {
+    "archive_statuses": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+    ],
+    "fresh_installs": {
+      "sdist": {
+        "client_sdist_sha256": "ca7a5da379ff2a6434b2a2c0f31d4497b3b73939f68a5dd92e688aafd5ec5100",
+        "mcp_sdist_sha256": "999c610d073d9312acbd258567f8c45bae24e47cc39e06dd4f38008e154ba5aa",
+        "network": "offline",
+        "status": "PASS"
+      },
+      "wheel": {
+        "diagnostic": [
+          " + uvicorn==0.52.3"
+        ],
+        "lock_sha256": "5000565d2dd1bb01704fec436a80804cbd725fb8adece5f9a436ce9ac57e71ff",
+        "network": "offline",
+        "status": "PASS"
+      }
+    },
+    "gate_results": {
+      "MCG-00": "PASS_LOCAL_CANDIDATE",
+      "MCG-01": "PASS_LOCAL_CANDIDATE",
+      "MCG-02": "PASS_LOCAL_CANDIDATE",
+      "OG-03": "DEFERRED_TO_BOUND_PVLOCAL_TARGET_TOKENIZER_REPORT"
+    },
+    "host_interoperability_count": 12,
+    "profile_tests": {
+      "all_schemas_additional_properties_false": true,
+      "dangerous_tools_absent": true,
+      "reader_lite_exact_catalog": [
+        "milai_recall"
+      ],
+      "status": "PASS",
+      "summary": "10 passed in 1.04s"
+    },
+    "wheelhouse_archive_scan": "PASS"
+  },
+  "openworker_host_gate": {
+    "broker_log_summary": {
+      "secret_scan": "PASS",
+      "segments": [
+        {
+          "events": {
+            "READY": 1,
+            "SESSION_CLOSED": 5,
+            "STOPPED": 1
+          },
+          "secret_scan": "PASS"
+        },
+        {
+          "events": {
+            "READY": 1,
+            "SESSION_CLOSED": 1,
+            "STOPPED": 1
+          },
+          "secret_scan": "PASS"
+        }
+      ]
+    },
+    "credential_and_network_adversary": {
+      "cap_drop": [
+        "ALL"
+      ],
+      "config_secret_names": "ABSENT",
+      "crash_dumps": "DISABLED_CORE_ULIMIT_ZERO_AND_ABSENT",
+      "debug_api_secret_names": "ABSENT",
+      "docker_socket_mounted": false,
+      "environment_secret_names": "ABSENT",
+      "host_secret_directory_mounted": false,
+      "log_secret_names": "ABSENT",
+      "mounts": [
+        {
+          "destination": "/run/milai-mcp/reader-lite.sock",
+          "rw": false,
+          "type": "bind"
+        }
+      ],
+      "network_mode": "none",
+      "postgres_socket_mounted": false,
+      "privileged": false,
+      "proc_secret_names": "ABSENT",
+      "runtime_bridge_direct": "BLOCKED",
+      "runtime_loopback_direct": "BLOCKED",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "skill_workspace_secret_names": "ABSENT",
+      "ulimits": [
+        {
+          "Hard": 0,
+          "Name": "core",
+          "Soft": 0
+        }
+      ]
+    },
+    "gate_results": {
+      "AIG-00": "NO_GO_REAL_PROVIDER_NOT_AUTHORIZED",
+      "AIG-01": "NO_GO_INDEPENDENT_REVIEW_ABSENT",
+      "MCG-00": "PASS_LOCAL_REVERIFY",
+      "MCG-01": "PASS_LOCAL_REVERIFY",
+      "MCG-02": "PASS_LOCAL_REVERIFY",
+      "OWG-00": "PASS_LOCAL_CANDIDATE",
+      "OWG-01": "PASS_LOCAL_CANDIDATE",
+      "OWG-02": "PASS_LOCAL_CANDIDATE"
+    },
+    "identity": {
+      "base_image_id": "sha256:afa555cfccdb05c0e8a4a0b1ad84f364496d8721d45c9dbd796a7afbe5e7f05d",
+      "base_layer_count": 26,
+      "broker_sha256": "c880c8fc331e67281bb8194cdf696e3dc7611cf849d96eb3152bdc3d05c32142",
+      "config_template_sha256": "9f5789ab13e20c5f26eb926fae5540aa9a42f25f1c6401d20a8a21325c19f46e",
+      "contract_sha256": "e43f8d91c9dbf341b776d4da3f12133a8877a3154787a8bb6e3cd5410809eb21",
+      "derived_image_id": "sha256:4f90c07d8a1eecdc1bad0f43ecdcb97ef5f0c388f23eca00dce58b120575f410",
+      "derived_layer_count": 29,
+      "opencode_sha256": "c4847b3da969507d5cadf3321883c7b477e5ab75763014d688116a6795b63dce",
+      "opencode_version": "1.14.28",
+      "platform": "linux/amd64",
+      "python": "3.12.13",
+      "relay_sha256": "b8658b438f8c2ed728fa7245334c7802e911f64b6c6c1129da4ebe9200975934",
+      "uv": "0.11.9 (x86_64-unknown-linux-musl)",
+      "wheelhouse_manifest_sha256": "9a969faa0ef7135d2484e4e5e4987a015ef99a007bf2a3ccbdb979ccc4d3e2c5",
+      "wheelhouse_root_sha256": "62504f8fc82dba0ec0d0d144e2350500d926181ee508cc934be91adc5dd11734"
+    },
+    "openworker_discovery": {
+      "all_connected": true,
+      "initial_list_sha256": "ec07b3103dd1e29b7191e876877c3d586d5753abb5f2efa5c52195f55b66b94a",
+      "reader_lite_tools": [
+        "milai_recall"
+      ],
+      "recovered_list_sha256": "ec07b3103dd1e29b7191e876877c3d586d5753abb5f2efa5c52195f55b66b94a",
+      "recreate_list_sha256": "ec07b3103dd1e29b7191e876877c3d586d5753abb5f2efa5c52195f55b66b94a",
+      "restart_list_sha256": "ec07b3103dd1e29b7191e876877c3d586d5753abb5f2efa5c52195f55b66b94a"
+    },
+    "release_boundary": "LOCAL_ONLY; upstream Worker source/redistribution license not established",
+    "restart_recreate": {
+      "broker_stop_failed_closed": true,
+      "new_socket_required_worker_recreate": true,
+      "recovery_after_broker_restart_and_remount": true,
+      "recreate_config_unchanged": true,
+      "restart_config_unchanged": true,
+      "restart_observed": true
+    },
+    "rollback": {
+      "base_image_id": "sha256:afa555cfccdb05c0e8a4a0b1ad84f364496d8721d45c9dbd796a7afbe5e7f05d",
+      "list_sha256": "8365690d35ea7ae11000983997218a995d56e32b41e6c58d6a1b651d241d65a1",
+      "mcp_absent": true
+    }
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "runtime_architecture_vllm_candidate_bytes_changed": false,
+  "schema": "milai.dg10.l1-l3-reverify-summary.v1",
+  "source_reports": {
+    "mcp_package_gate": {
+      "basename": "DG-10-mcp-package-gate-reverify-2026-08-21.json",
+      "embedded_report_date": "2026-08-20",
+      "path_class": "repo-external-tmp-redacted-json",
+      "schema": "milai.dg10.mcp-package-gate.v1",
+      "sha256": "fbc5de67d680cded083295e86636a04d8226d70bc4ebdbe5a8dcb6b2cb73c953",
+      "status": "LOCAL_CANDIDATE_REVIEW_REQUIRED"
+    },
+    "openworker_host_gate": {
+      "basename": "DG-10-openworker-host-gate-reverify-2026-08-21.json",
+      "embedded_report_date": "2026-08-20",
+      "path_class": "repo-external-tmp-redacted-json",
+      "schema": "milai.dg10.openworker-mcp-host-gate.v1",
+      "sha256": "3984b0a98908139a99ace58d7c05cc7bd50c3c8e4042a23b41719ea93df47284",
+      "status": "LOCAL_CANDIDATE_REVIEW_REQUIRED"
+    },
+    "vllm_openworker_mcp_e2e": {
+      "basename": "DG-10-vllm-openworker-mcp-e2e-reverify-2026-08-21.json",
+      "embedded_report_date": "2026-08-20",
+      "path_class": "repo-external-tmp-redacted-json",
+      "schema": "milai.pvlocal.vllm-openworker-mcp-e2e.v1",
+      "sha256": "2c1a3cce3cb3d2896579a0e7425c923334d9e9a1eabfcd3f097bd85d72d9a835",
+      "status": "LOCAL_CANDIDATE_REVIEW_REQUIRED"
+    }
+  },
+  "status": "LOCAL_REVERIFY_COMPLETE_REVIEW_REQUIRED",
+  "vllm_openworker_mcp_e2e": {
+    "cleanup": {
+      "model_and_worker_plane": {
+        "broker_events": {
+          "READY": 1,
+          "SESSION_CLOSED": 12,
+          "STOPPED": 1
+        },
+        "broker_log_secret_scan": "PASS",
+        "containers_removed": 4,
+        "networks_removed": 3
+      },
+      "runtime_database": {
+        "connections_before_drop": 0,
+        "owner": "milai_owner",
+        "status": "PASS"
+      }
+    },
+    "gates": {
+      "OE-F06_external_billing": false,
+      "PVL-04_agent_mcp_e2e": true,
+      "PVL-05_independent_review": false,
+      "S1_through_S10_complete": true,
+      "external_provider_cost_zero": true,
+      "external_provider_requests_zero": true,
+      "same_exact_vllm_model": true,
+      "vllm_lifecycle_unchanged": true,
+      "worker_milai_credentials_absent": true,
+      "worker_runtime_direct_route_absent": true
+    },
+    "privacy": {
+      "milai_token_in_worker": false,
+      "raw_memory_retained": false,
+      "raw_model_output_retained": false,
+      "raw_prompt_retained": false,
+      "runtime_dsn_in_worker": false
+    },
+    "routes": {
+      "answer": 8,
+      "tool": 4
+    },
+    "scenarios": {
+      "S1": "PASS_LOCAL_CANDIDATE",
+      "S10": "PASS_LOCAL_CANDIDATE",
+      "S2": "PASS_LOCAL_CANDIDATE",
+      "S3": "PASS_LOCAL_CANDIDATE",
+      "S4": "PASS_LOCAL_CANDIDATE",
+      "S5": "PASS_LOCAL_CANDIDATE",
+      "S6": "PASS_LOCAL_CANDIDATE",
+      "S7": "PASS_LOCAL_CANDIDATE",
+      "S8": "PASS_LOCAL_CANDIDATE",
+      "S9": "PASS_LOCAL_CANDIDATE"
+    },
+    "validated_vllm_calls": 12
+  }
+}

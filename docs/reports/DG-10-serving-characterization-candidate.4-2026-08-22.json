@@ -1,0 +1,32 @@
+{
+  "candidate": "candidate.4",
+  "date": "2026-08-22",
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "failure": {
+    "completed_measured_cells": 0,
+    "failed_stage": "T2_ROUTER_NONE_WARMUP",
+    "reason": "ROUTER_SELECTED_MILAI_RECALL_FOR_MEMORY_BENCHMARK_QUESTION",
+    "reason_sha256": "eeba85e2877cb148dd9a2ebf4c640a593d2819760f17c68c52a9cd7ab2bf2c67"
+  },
+  "gate_results": {
+    "BMG-04": "NO_GO_PARTIAL_FAILURE"
+  },
+  "known_limits": [
+    "T0 and T1 warmups completed but are excluded from any metric denominator.",
+    "No measured serving cell ran and no candidate.4 result may be composed into candidate.5.",
+    "Candidate.5 uses actual dev text as opaque prompt-length padding for the Router-NONE control request; T3 retains the semantic memory question."
+  ],
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "NOT_EVALUABLE",
+  "quality_thresholds_frozen": true,
+  "repo_external_sidecar": {
+    "status": "NOT_WRITTEN_FOR_PREMEASUREMENT_FAILURE"
+  },
+  "schema": "milai.dg10.serving-characterization.v1",
+  "serving_window": "NOT_ESTABLISHED",
+  "status": "FAIL_PARTIAL_PREMEASUREMENT_NOT_CHARACTERIZATION",
+  "test_access_authorized": false,
+  "test_labels_or_outputs_opened": false
+}

@@ -1,0 +1,193 @@
+{
+  "kind": "RESEARCH_PROTOTYPE",
+  "scope": "DEV_VALID_SELECTION_ONLY",
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "v03": [
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "method": "NATIVE_AGENT_OR_HISTORY",
+      "condition": "main",
+      "resource_point": "main",
+      "planned_units": 12,
+      "terminal_units": 12,
+      "planned_sessions": 12,
+      "terminal_sessions": 12,
+      "score_available_units": 12,
+      "coverage_corrected_quality": {
+        "correct": 91.66666666666666
+      },
+      "settled_requests": 31,
+      "settled_tokens": 34938,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "method": "OM_SYNC_PORT",
+      "condition": "main",
+      "resource_point": "main",
+      "planned_units": 12,
+      "terminal_units": 12,
+      "planned_sessions": 12,
+      "terminal_sessions": 12,
+      "score_available_units": 12,
+      "coverage_corrected_quality": {
+        "correct": 83.33333333333334
+      },
+      "settled_requests": 29,
+      "settled_tokens": 206386,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "method": "REASONINGBANK_BASE_PORT",
+      "condition": "main",
+      "resource_point": "main",
+      "planned_units": 12,
+      "terminal_units": 12,
+      "planned_sessions": 12,
+      "terminal_sessions": 12,
+      "score_available_units": 12,
+      "coverage_corrected_quality": {
+        "correct": 58.333333333333336
+      },
+      "settled_requests": 61,
+      "settled_tokens": 96937,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "condition": "main",
+      "resource_point": "main",
+      "planned_units": 12,
+      "terminal_units": 12,
+      "planned_sessions": 12,
+      "terminal_sessions": 12,
+      "score_available_units": 12,
+      "coverage_corrected_quality": {
+        "correct": 75.0
+      },
+      "settled_requests": 70,
+      "settled_tokens": 125661,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0
+    },
+    {
+      "domain": "travel",
+      "protocol": "G",
+      "method": "NATIVE_AGENT_OR_HISTORY",
+      "condition": "main",
+      "resource_point": "main",
+      "planned_units": 8,
+      "terminal_units": 7,
+      "planned_sessions": 58,
+      "terminal_sessions": 53,
+      "score_available_units": 7,
+      "coverage_corrected_quality": {
+        "ps": 0.0,
+        "sps": 12.818402455679243,
+        "sr": 0.0
+      },
+      "settled_requests": 212,
+      "settled_tokens": 3502812,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0
+    },
+    {
+      "domain": "travel",
+      "protocol": "G",
+      "method": "OM_SYNC_PORT",
+      "condition": "main",
+      "resource_point": "main",
+      "planned_units": 8,
+      "terminal_units": 6,
+      "planned_sessions": 58,
+      "terminal_sessions": 52,
+      "score_available_units": 6,
+      "coverage_corrected_quality": {
+        "ps": 0.0,
+        "sps": 1.8880208333333333,
+        "sr": 0.0
+      },
+      "settled_requests": 255,
+      "settled_tokens": 5317706,
+      "unknown_requests": 1,
+      "unknown_token_upper_bound": 27382
+    },
+    {
+      "domain": "travel",
+      "protocol": "G",
+      "method": "REASONINGBANK_BASE_PORT",
+      "condition": "main",
+      "resource_point": "main",
+      "planned_units": 8,
+      "terminal_units": 7,
+      "planned_sessions": 58,
+      "terminal_sessions": 51,
+      "score_available_units": 7,
+      "coverage_corrected_quality": {
+        "ps": 0.0,
+        "sps": 0.0,
+        "sr": 0.0
+      },
+      "settled_requests": 1403,
+      "settled_tokens": 12246130,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0
+    },
+    {
+      "domain": "travel",
+      "protocol": "G",
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "condition": "main",
+      "resource_point": "main",
+      "planned_units": 8,
+      "terminal_units": 0,
+      "planned_sessions": 58,
+      "terminal_sessions": 13,
+      "score_available_units": 0,
+      "coverage_corrected_quality": {
+        "ps": 0.0,
+        "sps": 0.0,
+        "sr": 0.0
+      },
+      "settled_requests": 850,
+      "settled_tokens": 16372379,
+      "unknown_requests": 3,
+      "unknown_token_upper_bound": 39920
+    }
+  ],
+  "v04": {
+    "domain": "travel",
+    "protocol": "G",
+    "method": "MILAI_EXPERIENCE_REVISION",
+    "condition": "validation-v04",
+    "resource_point": "main",
+    "planned_units": 8,
+    "terminal_units": 7,
+    "planned_sessions": 58,
+    "terminal_sessions": 55,
+    "score_available_units": 7,
+    "coverage_corrected_quality": {
+      "ps": 1.7241379310344827,
+      "sps": 21.99829931972789,
+      "sr": 0.0
+    },
+    "settled_requests": 997,
+    "settled_tokens": 18989059,
+    "unknown_requests": 0,
+    "unknown_token_upper_bound": 0
+  },
+  "v04_nonempty_final_plans": 50,
+  "selected_candidate": "milai-experience-revision-v0.4",
+  "decision": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/selected-policy-and-resources.json",
+  "decision_sha256": "d15115d94ee644eba048ef62aad1e824c26bb568ca9f21cc88151691f0eabb56",
+  "test_started_at_selection": false
+}

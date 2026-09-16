@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MILA-V02-05-LOCAL-SIM-01",
+  "arm_kind": "SIMULATION",
+  "host": "LOCAL_JSON_ACTION_HOST",
+  "product_lock": "data/locks/v02-state-payload-fidelity-product.lock.json",
+  "provider_base_url": "http://127.0.0.1:7860",
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "paid_model_allocations_authorized": 0,
+  "local_sessions": ["G", "A", "B"],
+  "session_token_limit": 20000,
+  "batch_token_limit": 60000,
+  "max_requests_per_session": 10,
+  "max_output_tokens": 1200,
+  "session_timeout_seconds": 180,
+  "request_timeout_seconds": 30,
+  "seed": 260906,
+  "l1_path": "handoff.md",
+  "l2_path": "release-plan.md",
+  "prefetch_max_bytes": 8192,
+  "fixture": "data/fixtures/v02-local-vllm-simulation/release.json",
+  "claims_excluded": ["PAID_PROVIDER_COST_CONTROL", "NATIVE_HOST_EQUIVALENCE", "D3_COMPLETE", "D4_PASS", "D5_PASS", "PRODUCT_NET_BENEFIT", "AUTOMATIC_MAINTENANCE", "REVOCATION_SAFETY", "LME_EFFECT"]
+}

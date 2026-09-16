@@ -1,0 +1,23 @@
+{
+  "manifest_sha256": "7e884ae847e44acbfe7101aa7f331b0b257d1171a15100633caf8742f3748b8a",
+  "status": "CONDITIONAL_BINDINGS_NOT_ACTUAL_G_OPPORTUNITIES",
+  "interpretation": "All structure variants inspect actual L2 as JSON. Existing G prompts stay unchanged; Markdown or absent declared keys means NOT_APPLICABLE. Do not create wrappers, change output instructions, or rerun G to obtain opportunities. These declarations do not establish full D5 readiness.",
+  "bindings": {
+    "research-comparison": {
+      "B_representation": {"layer": "L1", "kind": "MARKDOWN_JSON_TEXT_WRAPPING_ONLY", "source_format": "text"},
+      "B_structure": {"layer": "L2", "kind": "BODY_FIRST", "source_format": "json", "body_key": "body"}
+    },
+    "research-benchmark": {
+      "B_representation": {"layer": "L2", "kind": "MARKDOWN_JSON_TEXT_WRAPPING_ONLY", "source_format": "text"},
+      "B_structure": {"layer": "L2", "kind": "BODY_LAST", "source_format": "json", "body_key": "body"}
+    },
+    "writing-event": {
+      "B_representation": {"layer": "L1", "kind": "MARKDOWN_JSON_TEXT_WRAPPING_ONLY", "source_format": "text"},
+      "B_structure": {"layer": "L2", "kind": "NON_RESERVED_KEY_REORDER", "source_format": "json"}
+    },
+    "writing-maintenance": {
+      "B_representation": {"layer": "L2", "kind": "MARKDOWN_JSON_TEXT_WRAPPING_ONLY", "source_format": "text"},
+      "B_structure": {"layer": "L2", "kind": "DROP_EMPTY_EDGE_WRAPPERS", "source_format": "json", "empty_wrapper_keys": ["header", "footer"]}
+    }
+  }
+}

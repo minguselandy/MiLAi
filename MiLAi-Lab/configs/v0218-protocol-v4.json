@@ -1,0 +1,22 @@
+{
+  "revision": "COMMON_HOST_V4_SETTLED_ENCODING_ERROR_FEEDBACK",
+  "failed_batch": "/cra/memory/mx_memory/evidence/v0218/20260911/e0-baseline-wave3-v1",
+  "failed_episode": "journalist_task5-superseded-N0",
+  "failed_request": "journalist_task5-superseded-N0-04",
+  "expected_diagnosis": {
+    "http_status": 200,
+    "finish_reason": "stop",
+    "completion_tokens": 1814,
+    "output_cap": 4096,
+    "outer_json": "VALID",
+    "inner_arguments_json": "JSONDecodeError"
+  },
+  "change": "Catch settled Agent decode ValueError/TypeError before execution, preserve raw output and request, append generic ACTION_REJECTED encoding feedback, and use the next already-allocated turn. No automatic argument repair or free retry.",
+  "unchanged": ["system prompt", "action schema", "optional Note policy", "current evidence and all normal history", "world", "checker", "provider", "public Note CRUD", "16-generation cap", "4096 output reservation", "900s episode limit", "N0/N1/N2 reminder policy"],
+  "safety": "Unknown usage, HTTP/transport failure and forbidden private data remain fail-closed. No shared service/model changes.",
+  "rebaseline": "All three two-root standard waves are repeated under this common Host version; v1 waves remain separately reported and are not pooled as same-protocol scores. Probe waves use v4 only.",
+  "compatibility_requests": 0,
+  "new_model_requests_allocated_by_this_file": 0,
+  "mechanism_candidate": false,
+  "raw_token_cap": null
+}

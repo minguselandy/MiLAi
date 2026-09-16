@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MILA-V02-05-D5-TASK-PREPARATION",
+  "status": "PREPARED_NOT_EXECUTABLE",
+  "product_lock": "data/locks/v02-http-transport-timing-product.lock.json",
+  "manifest_path": "artifacts/v02-e2e-generality/d5-task-pack-20260907a/manifest.json",
+  "manifest_sha256": "7e884ae847e44acbfe7101aa7f331b0b257d1171a15100633caf8742f3748b8a",
+  "families": [
+    "research_brief",
+    "content_writing"
+  ],
+  "chains_per_family": 2,
+  "candidate_d5_sessions": 20,
+  "model_transport_enabled": false,
+  "new_model_allocations_authorized": 0,
+  "new_model_tokens_authorized": 0,
+  "formal_d4_d5_enabled": false,
+  "developer_visibility": "OPEN_REVIEWED_NOT_BLIND_NOT_USED_FOR_TUNING",
+  "required_before_run": [
+    "generic post-G public source delta delivery equally to branches",
+    "public save/cold restore representation and structural orchestration",
+    "actual-G L1 sufficiency/opportunity check without forced schema or extra G",
+    "full D1-D3 and formal D4 exits",
+    "Host/model/config/cost authorization freeze"
+  ],
+  "not_claimed": [
+    "full D0 completion",
+    "formal heldout execution",
+    "semantic correctness",
+    "generalization"
+  ]
+}

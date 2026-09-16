@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "category": "lifecycle",
+  "snapshot_manifest": "legacy_snapshot/manifest.json",
+  "files": [
+    {
+      "source": "MiLAi_ML-R01_ProjectionWorker租约与Formation送达Binding闭环修复_GOALS.md",
+      "destination": "MiLAi/MiLAi_ML-R01_ProjectionWorker租约与Formation送达Binding闭环修复_GOALS.md",
+      "sha256": "68dbfcc22524a8b8ce7b7e64fbdd3734799b32bc15eb5f253e99d48b9db3f5d4"
+    },
+    {
+      "source": "MiLAi_ML-R01_ProjectionWorker租约与Formation送达Binding闭环修复_GOALS_20260831_083550.md",
+      "destination": "MiLAi/MiLAi_ML-R01_ProjectionWorker租约与Formation送达Binding闭环修复_GOALS_20260831_083550.md",
+      "sha256": "61db973c46fa33269328928b33d99e253dcd92a9dcf211d401a98953c3c85526"
+    },
+    {
+      "source": "MiLAi_ML-R01_ProjectionWorker租约与Formation送达Binding闭环修复_GOALS_20260831_090008.md",
+      "destination": "MiLAi/MiLAi_ML-R01_ProjectionWorker租约与Formation送达Binding闭环修复_GOALS_20260831_090008.md",
+      "sha256": "6e621a9927f27b81ab92004e370a26a3495c463cf6b6dc1eb435514788dd7e3c"
+    },
+    {
+      "source": "MiLAi_ML-R01_ProjectionWorker租约与Formation送达Binding闭环修复_GOALS_20260831_114641.md",
+      "destination": "MiLAi/MiLAi_ML-R01_ProjectionWorker租约与Formation送达Binding闭环修复_GOALS_20260831_114641.md",
+      "sha256": "68dbfcc22524a8b8ce7b7e64fbdd3734799b32bc15eb5f253e99d48b9db3f5d4"
+    },
+    {
+      "source": "MiLAi_ML-R02_统一MemoryLifecycle架构收敛与LongMemEval验证_GOALS.md",
+      "destination": "MiLAi/MiLAi_ML-R02_统一MemoryLifecycle架构收敛与LongMemEval验证_GOALS.md",
+      "sha256": "7b1c9bcdd6221c8fdfa52b12323f54fce93ee5ff203fe53a76b1510502aca1c3"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_全任务闭环_GOALS.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_全任务闭环_GOALS.md",
+      "sha256": "021f7316f8cd1f7cc9d1dd4a61da8910d2a7ffd7bc0a753a2f3d340a885d74f0"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_全任务闭环_GOALS_20260830_222051.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_全任务闭环_GOALS_20260830_222051.md",
+      "sha256": "9cd2e611dfd9767fb951d697a25d840e5d823ee107d33b423aea742c39f22be6"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_全任务闭环_GOALS_20260830_223923.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_全任务闭环_GOALS_20260830_223923.md",
+      "sha256": "41f75ee34e54fb9273cf2fe46c9c70c1e45c2afe15badb36baeeaf5b746ec2d8"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_全任务闭环_GOALS_20260831_114641.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_全任务闭环_GOALS_20260831_114641.md",
+      "sha256": "021f7316f8cd1f7cc9d1dd4a61da8910d2a7ffd7bc0a753a2f3d340a885d74f0"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_总_GOALS.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_总_GOALS.md",
+      "sha256": "6ebb71b1002357f97e3ddd25a910e394506a46582ea10ac67a3953f8665868f4"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_总_GOALS_20260830_133116.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_总_GOALS_20260830_133116.md",
+      "sha256": "a836ec9bf3c1231c9d6f5391a7e921fe938f9dc14c657f89d85b7bcc09a3fcb0"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_总_GOALS_20260830_133258.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_总_GOALS_20260830_133258.md",
+      "sha256": "07363e8aa985b2b0fa2e97cdd7ee093e3489c962721fe19224beba67284e37a0"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_总_GOALS_20260830_133525.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_总_GOALS_20260830_133525.md",
+      "sha256": "d84335abddd26a9db6be8ef7a8abe7e5d4339214c9701ed92849eaa79bca9f39"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_总_GOALS_20260830_144542.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_总_GOALS_20260830_144542.md",
+      "sha256": "b02bb271950ef5c8cf0b6bb4c7e20ecc2bad90a2e2a469fbedda557401954cd8"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_总_GOALS_20260831_114641.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_总_GOALS_20260831_114641.md",
+      "sha256": "7b0668c878f9b177efc43d2f622b8d34a9ba455536745e01553714110fbfb9aa"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_架构与代码执行报告_20260830.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_架构与代码执行报告_20260830.md",
+      "sha256": "51fcf47e5a6d91ba1584230c6793c9c33d47dc00b5a3567fe6f0d37f7bebb90a"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_项目级架构与主程序_MASTER.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_项目级架构与主程序_MASTER.md",
+      "sha256": "495803fce01a0caf76b041c7960b4ae2530354b36fad4a3f4c3d378b0a577d22"
+    },
+    {
+      "source": "MiLAi_Memory_Lifecycle_项目级架构与主程序_MASTER_20260830_133116.md",
+      "destination": "MiLAi/MiLAi_Memory_Lifecycle_项目级架构与主程序_MASTER_20260830_133116.md",
+      "sha256": "495803fce01a0caf76b041c7960b4ae2530354b36fad4a3f4c3d378b0a577d22"
+    },
+    {
+      "source": "evals/datasets/ml_closure/repair-dev.labels.json",
+      "destination": "MiLAi/evals/datasets/ml_closure/repair-dev.labels.json",
+      "sha256": "669b2b14b99f03868096478b381b6a8cb9a377d9a74ebb869acff488fb70d183"
+    },
+    {
+      "source": "evals/datasets/ml_closure/repair-dev.raw.json",
+      "destination": "MiLAi/evals/datasets/ml_closure/repair-dev.raw.json",
+      "sha256": "5a297b9c1306dbc093cc593500af565bf75870ee07c022bdd6c040573f37db42"
+    },
+    {
+      "source": "evals/datasets/ml_closure/seal.json",
+      "destination": "MiLAi/evals/datasets/ml_closure/seal.json",
+      "sha256": "1ad68567710146e5dfc182aa938e8d25082a3ed0fdc46ccc6419a4d2c3376409"
+    },
+    {
+      "source": "evals/datasets/ml_closure/sealed-validation.labels.json",
+      "destination": "MiLAi/evals/datasets/ml_closure/sealed-validation.labels.json",
+      "sha256": "61726c26dcb22e84273983bb84cda52528891b07d5499724b1f0de7f279385fb"
+    },
+    {
+      "source": "evals/datasets/ml_closure/sealed-validation.raw.json",
+      "destination": "MiLAi/evals/datasets/ml_closure/sealed-validation.raw.json",
+      "sha256": "abd009669465e8adb03813cbf78936645daab9aee4d52141b2c35ad012cd46fc"
+    },
+    {
+      "source": "evals/ml_closure/__init__.py",
+      "destination": "MiLAi/evals/ml_closure/__init__.py",
+      "sha256": "ed24123b44ff56375be9a812d3007b9d32ec706ea678f8652d7eff8e38d7662a"
+    },
+    {
+      "source": "evals/ml_closure/c3_product_acquisition.py",
+      "destination": "MiLAi/evals/ml_closure/c3_product_acquisition.py",
+      "sha256": "fafc2dc34cd0f9c181d73f290a6069f03620776aa394ec4220b8d3581cbbf166"
+    },
+    {
+      "source": "evals/ml_closure/c4_lifecycle_validation.py",
+      "destination": "MiLAi/evals/ml_closure/c4_lifecycle_validation.py",
+      "sha256": "06871e6cdebb3bb05b47af7c6481cb186f3c030989fc8b3c89a0e84f65babd7d"
+    },
+    {
+      "source": "evals/ml_closure/candidate_r_acquisition.py",
+      "destination": "MiLAi/evals/ml_closure/candidate_r_acquisition.py",
+      "sha256": "3a0a2c4d0019cd2405d2fd32a91f2ad820540ff0b9abc2cbd0bcc4bfa961ed56"
+    },
+    {
+      "source": "evals/ml_closure/compare_formation.py",
+      "destination": "MiLAi/evals/ml_closure/compare_formation.py",
+      "sha256": "63d81e821fac068df38e121fa2257cb57b3934cc4805ad705fb59740ac3b7467"
+    },
+    {
+      "source": "evals/ml_closure/evolution_replay.py",
+      "destination": "MiLAi/evals/ml_closure/evolution_replay.py",
+      "sha256": "798058f54f2bf61d2544254a6449b33265a179a1e35d1ca20bf6f604a8ef2a54"
+    },
+    {
+      "source": "evals/ml_closure/finalize_c3.py",
+      "destination": "MiLAi/evals/ml_closure/finalize_c3.py",
+      "sha256": "eb10cd723815ac4c10d3818839d4f99115fb63bd1642b61682866ec6454b7a9a"
+    },
+    {
+      "source": "evals/ml_closure/freeze_data.py",
+      "destination": "MiLAi/evals/ml_closure/freeze_data.py",
+      "sha256": "e89d88dbb7ba3ccbbb7cb13e1e178317d499cbc06433b12dc66ab0a02df0798b"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_contexts.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_contexts.py",
+      "sha256": "cdf69563d4b615731f1fcb15a0866a766d187714a4ea3ae5c85215a9ee1fd4db"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_contract.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_contract.py",
+      "sha256": "627cf51794fb361b5e0870167ae209947df321807feb10c1acaab8ea9f6525f0"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_freeze.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_freeze.py",
+      "sha256": "e76283b57d1164feeced8b315badbf29fd174465140e592d3c6574d06c1947ec"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_providers.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_providers.py",
+      "sha256": "82f304ebed415528bc428ca2afa981560efae820eeaa1fa647ce841c292bf5be"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_score.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_score.py",
+      "sha256": "3f058c5267e1ebc521018de5e311219ac792d2f19286272912c087998face10d"
+    },
+    {
+      "source": "evals/ml_closure/run_c3_product.py",
+      "destination": "MiLAi/evals/ml_closure/run_c3_product.py",
+      "sha256": "07be85c8b8efa465296c5ecd49512048d0820f956362ee1317c74333e107bb62"
+    },
+    {
+      "source": "evals/ml_closure/run_c4_lifecycle.py",
+      "destination": "MiLAi/evals/ml_closure/run_c4_lifecycle.py",
+      "sha256": "697dac31ddcb06276de13cc2d7d34b54fbb1c108b8e0932791920e7549f1cdec"
+    },
+    {
+      "source": "evals/ml_closure/run_candidate_r.py",
+      "destination": "MiLAi/evals/ml_closure/run_candidate_r.py",
+      "sha256": "342f70f9785f04e4f5cf322887482ab695a4c3b8b2b7585ec2d1c7ccac2df15c"
+    },
+    {
+      "source": "evals/ml_closure/run_evolution.py",
+      "destination": "MiLAi/evals/ml_closure/run_evolution.py",
+      "sha256": "b87c7155fd662830e2eda3372f87006c40c223cb88b67e46187cb92dcd19568e"
+    },
+    {
+      "source": "evals/ml_closure/run_formation.py",
+      "destination": "MiLAi/evals/ml_closure/run_formation.py",
+      "sha256": "572532762a400fd9a7da7d23b43e44f0b4f3fb36c5c12418c9dfd9817c35cf18"
+    },
+    {
+      "source": "evals/ml_closure/run_longmemeval.py",
+      "destination": "MiLAi/evals/ml_closure/run_longmemeval.py",
+      "sha256": "7aa00c4b0a9397924cc8a547fb6fe680afe2e38f3ecfc1d2a67d5ed5c11e90e5"
+    },
+    {
+      "source": "evals/ml_closure/run_representation_arms.py",
+      "destination": "MiLAi/evals/ml_closure/run_representation_arms.py",
+      "sha256": "96e4b30cf67f4ed105eca7e9c9839c2cdba371220672e79f1276ec5640114280"
+    },
+    {
+      "source": "evals/ml_closure/score.py",
+      "destination": "MiLAi/evals/ml_closure/score.py",
+      "sha256": "ac433ec0d3d1e866c03803e684d49a9d64e082dfe2ef91bd7ce99b5098b65c86"
+    },
+    {
+      "source": "evals/ml_closure/score_c3_product.py",
+      "destination": "MiLAi/evals/ml_closure/score_c3_product.py",
+      "sha256": "006bf72bafecde63c095b6ce52935bba085270861fcc63d88081402902af8531"
+    },
+    {
+      "source": "evals/ml_closure/score_representation_arms.py",
+      "destination": "MiLAi/evals/ml_closure/score_representation_arms.py",
+      "sha256": "58f839bc01072035d93f93a28ecb47aca3d52aa4bb0f5c2e9c45422fa037638f"
+    },
+    {
+      "source": "evals/ml_r02/__init__.py",
+      "destination": "MiLAi/evals/ml_r02/__init__.py",
+      "sha256": "cfb947b08823b78534172196b5e371535450c2c4c5c6f6c94fb0a7b461389976"
+    },
+    {
+      "source": "evals/ml_r02/characterization.py",
+      "destination": "MiLAi/evals/ml_r02/characterization.py",
+      "sha256": "49c4dcbb6a9175794264b4a137505d0b67717de7285b8c3cd14f3841945a63dc"
+    },
+    {
+      "source": "evals/ml_r02/run_pilot.py",
+      "destination": "MiLAi/evals/ml_r02/run_pilot.py",
+      "sha256": "0286f72c938882d1730be22ab14637d5d46b93545ec0fa2db3e4a008ca4771df"
+    },
+    {
+      "source": "evals/ml_repair/__init__.py",
+      "destination": "MiLAi/evals/ml_repair/__init__.py",
+      "sha256": "c6cfeed9b7eed4b9001438d6f28a645b5447c4e6a28eb2532504c0e8325f2b61"
+    },
+    {
+      "source": "evals/ml_repair/mlr01_delivery.py",
+      "destination": "MiLAi/evals/ml_repair/mlr01_delivery.py",
+      "sha256": "f765f57edb73b363119bc268ad3c7a67482b62275c46975b321ac56880e6874e"
+    },
+    {
+      "source": "evals/ml_repair/mlr01_r3.py",
+      "destination": "MiLAi/evals/ml_repair/mlr01_r3.py",
+      "sha256": "3e0fc86b01d8d7de5264be9692391759153a9937cb6097ba20f68c8a3f945d06"
+    },
+    {
+      "source": "evals/ml_repair/mlr01_r4_contexts.py",
+      "destination": "MiLAi/evals/ml_repair/mlr01_r4_contexts.py",
+      "sha256": "c1c6dd22ebbff2bac95f35822f30d2b1104c93b120926afc70e6dd874bf18347"
+    },
+    {
+      "source": "evals/ml_repair/mlr01_r4_contract.py",
+      "destination": "MiLAi/evals/ml_repair/mlr01_r4_contract.py",
+      "sha256": "5044ba45063f132946051a28616c2442f3388d951ae64aae61eac9c5d2d896b2"
+    },
+    {
+      "source": "evals/ml_repair/mlr01_r4_dense.py",
+      "destination": "MiLAi/evals/ml_repair/mlr01_r4_dense.py",
+      "sha256": "01db893d85c3628836a0c55b5b071fc6d23174801a62c26ae2327d8797aa21cd"
+    },
+    {
+      "source": "evals/ml_repair/mlr01_r4_freeze.py",
+      "destination": "MiLAi/evals/ml_repair/mlr01_r4_freeze.py",
+      "sha256": "06b26b73fea6b04259872928a24e861aedb85e1752c716ecceb1b9c679da875d"
+    },
+    {
+      "source": "evals/ml_repair/mlr01_r4_providers.py",
+      "destination": "MiLAi/evals/ml_repair/mlr01_r4_providers.py",
+      "sha256": "abb8344021c00a75c45bd2ae5c2c8e35d0f48c5a5a30d959ec2cd0cf14ad4170"
+    },
+    {
+      "source": "evals/ml_repair/mlr01_r4_score.py",
+      "destination": "MiLAi/evals/ml_repair/mlr01_r4_score.py",
+      "sha256": "133dfce20633e83ae44d4f21a7777f56aaecac51dd2dce364fab5958a4d30016"
+    },
+    {
+      "source": "evals/ml_repair/mlr01_v03.py",
+      "destination": "MiLAi/evals/ml_repair/mlr01_v03.py",
+      "sha256": "50809755fc5df09438634d6f098c678bb46b90cb86961daf616840fc0696537f"
+    },
+    {
+      "source": "evals/ml_repair/run_mlr01_r4.py",
+      "destination": "MiLAi/evals/ml_repair/run_mlr01_r4.py",
+      "sha256": "b2052247d41a1ded8176a3856de92e10e2b3c318e9c83699c49206e1d9616c75"
+    },
+    {
+      "source": "evals/mvp01/__init__.py",
+      "destination": "MiLAi/evals/mvp01/__init__.py",
+      "sha256": "1b3de4ffe39d4826b5d8d47009d1ff6e9137694c2722c78e9b6e85d406d9f52d"
+    },
+    {
+      "source": "evals/mvp01/u0_canary_contract.py",
+      "destination": "MiLAi/evals/mvp01/u0_canary_contract.py",
+      "sha256": "385f9330bf57a09cbd14c72de515132919dd1e04acdee87a4461ef3c1dd0ce10"
+    },
+    {
+      "source": "evals/mvp01/u0_warm.py",
+      "destination": "MiLAi/evals/mvp01/u0_warm.py",
+      "sha256": "9762befff98687e4757a01b72559b62350a021e5b9965ad6180fa3f7d21cf328"
+    },
+    {
+      "source": "evals/mvp01/u0_warm_contract.py",
+      "destination": "MiLAi/evals/mvp01/u0_warm_contract.py",
+      "sha256": "a5cd727a081f25c019a9ed3824963312bde6a01bdff06052bec5d30285ad9208"
+    },
+    {
+      "source": "evals/mvp01/u0_warm_repair_contract.py",
+      "destination": "MiLAi/evals/mvp01/u0_warm_repair_contract.py",
+      "sha256": "f41827ed7aa0f8b759757ed005fc068dfc6df3b5de3dff99215d542a9ac69da8"
+    },
+    {
+      "source": "scripts/recover_mvp01_u0_warm_orphan.py",
+      "destination": "MiLAi/scripts/recover_mvp01_u0_warm_orphan.py",
+      "sha256": "ab5f86686909dd2b751e3bf2fe7e72c0cefc6198dc8fecc074825c88db373d4d"
+    },
+    {
+      "source": "scripts/run_mvp01_u0_canary.py",
+      "destination": "MiLAi/scripts/run_mvp01_u0_canary.py",
+      "sha256": "84b1985ba300435a0da0336b8204958e0e5f460fda74f2eab4e296b9518fa0de"
+    },
+    {
+      "source": "scripts/run_mvp01_u0_warm_repair_probe.py",
+      "destination": "MiLAi/scripts/run_mvp01_u0_warm_repair_probe.py",
+      "sha256": "8b27d0de96ca80710d63e3d71d63d239a6e97f85c586eb108397d8df3039cee4"
+    },
+    {
+      "source": "scripts/run_mvp01_u0_warm_soak.py",
+      "destination": "MiLAi/scripts/run_mvp01_u0_warm_soak.py",
+      "sha256": "d5ff590733ee60751bd101d6ca45927387d976b36e3e21f0b2f2ea2fd6f2caec"
+    },
+    {
+      "source": "tests/test_ml_closure_longmemeval.py",
+      "destination": "MiLAi/tests/test_ml_closure_longmemeval.py",
+      "sha256": "4ec0279e5b736f3d20ebf34d6cb489657e7c041b963749eccf819ecde34df076"
+    },
+    {
+      "source": "tests/test_ml_r02_characterization.py",
+      "destination": "MiLAi/tests/test_ml_r02_characterization.py",
+      "sha256": "49be0cfa0045b80f0cea3e6d7687a65560076a1b650673daca1271b00381f7e9"
+    },
+    {
+      "source": "tests/test_mvp01_u0_canary_contract.py",
+      "destination": "MiLAi/tests/test_mvp01_u0_canary_contract.py",
+      "sha256": "ae0ac80d4ab870a0960fb40c217e5820421336061f52f2c40f37ac9caa84bf0f"
+    },
+    {
+      "source": "tests/test_mvp01_u0_warm.py",
+      "destination": "MiLAi/tests/test_mvp01_u0_warm.py",
+      "sha256": "edd3ba7951d55268b6bbcc60f05f98058fdfc61fc18d7ae8cf951615792d35b9"
+    },
+    {
+      "source": "tests/test_mvp01_u0_warm_contract.py",
+      "destination": "MiLAi/tests/test_mvp01_u0_warm_contract.py",
+      "sha256": "84733fa9606efc1137569e08b8fc9bc3c4fce56c176f996c1b1cfd4c0965035f"
+    },
+    {
+      "source": "tests/test_mvp01_u0_warm_repair_contract.py",
+      "destination": "MiLAi/tests/test_mvp01_u0_warm_repair_contract.py",
+      "sha256": "ffe5cc71315ddba6e37467ea09faca093cf7b8a567eadcb182620b2558651d5f"
+    }
+  ]
+}

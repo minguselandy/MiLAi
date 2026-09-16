@@ -1,0 +1,693 @@
+{
+  "candidate": "candidate.3",
+  "data_boundary": "PUBLIC_BENCHMARK_METADATA_ONLY",
+  "datasets": {
+    "bfcl_v4_local_non_live": {
+      "all_category_count": 19,
+      "blocking_notes": [
+        "BFCL local/non-live case IDs and possible_answer coverage are byte-locked, but no model run or scorer execution has been performed.",
+        "Live, web-search, agentic memory, and non-scoring format-sensitivity categories are explicitly excluded from this local/non-live gate."
+      ],
+      "candidate_matches": [
+        "gorilla-bfcl",
+        "gorilla-bfcl/berkeley-function-call-leaderboard",
+        "gorilla-bfcl/berkeley-function-call-leaderboard/bfcl_eval",
+        "gorilla-bfcl/gorilla"
+      ],
+      "categories": {
+        "irrelevance": {
+          "case_count": 240,
+          "case_ids_sha256": "196d378d133954598afb46e2ffa72b9a45485219e11d512112d977b27ecdcda4",
+          "category": "irrelevance",
+          "path": "bfcl_eval/data/BFCL_v4_irrelevance.json",
+          "possible_answer": {
+            "path": null,
+            "status": "NOT_PRESENT_EXPECTED_FOR_RELEVANCE_OR_IRRELEVANCE_CATEGORY"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "2b6ed4c2e992cdcf5f1678a701851f944bef7550ee026ed1ddb89efed5be01a6",
+          "size": 159940
+        },
+        "live_irrelevance": {
+          "case_count": 884,
+          "case_ids_sha256": "f186ac8a4d31d8f224e2d3aa7ef33b80c126acbd8d2cd7348e2d4ffa8faa3497",
+          "category": "live_irrelevance",
+          "path": "bfcl_eval/data/BFCL_v4_live_irrelevance.json",
+          "possible_answer": {
+            "path": null,
+            "status": "NOT_PRESENT_EXPECTED_FOR_RELEVANCE_OR_IRRELEVANCE_CATEGORY"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "6559fda2beaceb609a2cd2e504c65b4a56cb448e1ef88fddfd199e163d163349",
+          "size": 2209534
+        },
+        "live_multiple": {
+          "case_count": 1053,
+          "case_ids_sha256": "8b6745098a34706e14ea9c60736d8b1382d78756ed2167bbec1dd54492c7e091",
+          "category": "live_multiple",
+          "path": "bfcl_eval/data/BFCL_v4_live_multiple.json",
+          "possible_answer": {
+            "answer_count": 1053,
+            "answer_ids_sha256": "8b6745098a34706e14ea9c60736d8b1382d78756ed2167bbec1dd54492c7e091",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_live_multiple.json",
+            "sha256": "97e90d59c5bd76c55a2920ce93e5566e9046307d3f558578f085f9d3a56c3084",
+            "size": 199668,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "fd8ccfad4d911420d0e3341dbe2fff77d1d341da934248b9bb2bda24ab3a10c8",
+          "size": 3891277
+        },
+        "live_parallel": {
+          "case_count": 16,
+          "case_ids_sha256": "13e32e9b2c7b83ae44e952fd845c77df8e226851f6444002bda7e5bee2e19f9f",
+          "category": "live_parallel",
+          "path": "bfcl_eval/data/BFCL_v4_live_parallel.json",
+          "possible_answer": {
+            "answer_count": 16,
+            "answer_ids_sha256": "13e32e9b2c7b83ae44e952fd845c77df8e226851f6444002bda7e5bee2e19f9f",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_live_parallel.json",
+            "sha256": "8a9f189ff0e832ebbbbdade1fd95a7dbcc67406e9177df3f0aad76f59ab00350",
+            "size": 4972,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "6c26e9fdc3350cf596e6d1ea9c179cbff834761bccf562f4141ed29a839ca421",
+          "size": 15649
+        },
+        "live_parallel_multiple": {
+          "case_count": 24,
+          "case_ids_sha256": "9300a26e2344c2173fec0c708a597ee6e676be1da0642dbe206dcba04415ff92",
+          "category": "live_parallel_multiple",
+          "path": "bfcl_eval/data/BFCL_v4_live_parallel_multiple.json",
+          "possible_answer": {
+            "answer_count": 24,
+            "answer_ids_sha256": "9300a26e2344c2173fec0c708a597ee6e676be1da0642dbe206dcba04415ff92",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_live_parallel_multiple.json",
+            "sha256": "f5b5f360556c5feb51db46fb9f56ee4b304f4b45b161599bbb14161c98a2873f",
+            "size": 7420,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "21d4b9319c1faac431e22757b367ea28917fe467364c3a4b17f16ec06d4f6e79",
+          "size": 82332
+        },
+        "live_relevance": {
+          "case_count": 16,
+          "case_ids_sha256": "73e6f7152bb914a2a9e751db4603ea65900de46c81735e6f2ceab98165ddb2e2",
+          "category": "live_relevance",
+          "path": "bfcl_eval/data/BFCL_v4_live_relevance.json",
+          "possible_answer": {
+            "path": null,
+            "status": "NOT_PRESENT_EXPECTED_FOR_RELEVANCE_OR_IRRELEVANCE_CATEGORY"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "e03f9e241657a137cba48a89ee12f47bf3fcb7e4f6274263e9c699a0c974203a",
+          "size": 47327
+        },
+        "live_simple": {
+          "case_count": 258,
+          "case_ids_sha256": "0930a0cb07e0a760dde1d6d4df38b57083db635840d5a047f22f9ab518eb1b22",
+          "category": "live_simple",
+          "path": "bfcl_eval/data/BFCL_v4_live_simple.json",
+          "possible_answer": {
+            "answer_count": 258,
+            "answer_ids_sha256": "0930a0cb07e0a760dde1d6d4df38b57083db635840d5a047f22f9ab518eb1b22",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_live_simple.json",
+            "sha256": "fec9cfa9744a936f9126981e85a2023da1e63e273eafebc81923a1162fad70ce",
+            "size": 46972,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "1af2ac87dca47556db7b7e37e51e28b459a38b594e3c7b3c792b4903598ca0c4",
+          "size": 260140
+        },
+        "memory": {
+          "case_count": 155,
+          "case_ids_sha256": "cd27f7ae80a62cc0019605a8944d6eba9eb9190a82ab3d450be2d7f303a2655f",
+          "category": "memory",
+          "path": "bfcl_eval/data/BFCL_v4_memory.json",
+          "possible_answer": {
+            "answer_count": 155,
+            "answer_ids_sha256": "cd27f7ae80a62cc0019605a8944d6eba9eb9190a82ab3d450be2d7f303a2655f",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_memory.json",
+            "sha256": "2355cf8d842f94af6bcb7bfa6ad2f9e472bc6d825d6ecd45702cfc41e27d7e5d",
+            "size": 28325,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "id",
+            "involved_classes",
+            "question",
+            "scenario"
+          ],
+          "sha256": "40fc21d4528af53c6b44204def89e81515d0101654229e2c2e82bbf5f047b14f",
+          "size": 33237
+        },
+        "multi_turn_base": {
+          "case_count": 200,
+          "case_ids_sha256": "e429ecbb3d59f5d6481f911222cccdf06d937fad6fd54c3f36cade7d7ccd8982",
+          "category": "multi_turn_base",
+          "path": "bfcl_eval/data/BFCL_v4_multi_turn_base.json",
+          "possible_answer": {
+            "answer_count": 200,
+            "answer_ids_sha256": "e429ecbb3d59f5d6481f911222cccdf06d937fad6fd54c3f36cade7d7ccd8982",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_base.json",
+            "sha256": "1fee67823b317571649177dd89d63969feaae4e810cc7448ee55ba797fb7c8fc",
+            "size": 78931,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "excluded_function",
+            "id",
+            "initial_config",
+            "involved_classes",
+            "path",
+            "question"
+          ],
+          "sha256": "1a21a995d06fd6f20ba55de7bced30ef953ec35e998f502ec2ecf4d66ef1c43a",
+          "size": 390425
+        },
+        "multi_turn_long_context": {
+          "case_count": 200,
+          "case_ids_sha256": "cf2d18b02b840fa11d655cd5e815b34290d9e7a39334f506d2ea5273444d0066",
+          "category": "multi_turn_long_context",
+          "path": "bfcl_eval/data/BFCL_v4_multi_turn_long_context.json",
+          "possible_answer": {
+            "answer_count": 200,
+            "answer_ids_sha256": "cf2d18b02b840fa11d655cd5e815b34290d9e7a39334f506d2ea5273444d0066",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_long_context.json",
+            "sha256": "e82aa0e839c39d23c64a05834f7ae024d7c9738ec21738ecee78dc876e3d0d18",
+            "size": 114439,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "excluded_function",
+            "id",
+            "initial_config",
+            "involved_classes",
+            "path",
+            "question"
+          ],
+          "sha256": "78c3268c5cc8e97c0f4ec6c811b3b9a2bba14323b1830b7a874b06d822749324",
+          "size": 392016
+        },
+        "multi_turn_miss_func": {
+          "case_count": 200,
+          "case_ids_sha256": "99aaa5581002c17518d3d14862a4e1ff514e82a8db392c232c34b0c229054415",
+          "category": "multi_turn_miss_func",
+          "path": "bfcl_eval/data/BFCL_v4_multi_turn_miss_func.json",
+          "possible_answer": {
+            "answer_count": 200,
+            "answer_ids_sha256": "99aaa5581002c17518d3d14862a4e1ff514e82a8db392c232c34b0c229054415",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_miss_func.json",
+            "sha256": "69e679b806d1c871b05393a4b95583bb973248e5b8d96c2d7f4ca05e29fc32e6",
+            "size": 80589,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "excluded_function",
+            "id",
+            "initial_config",
+            "involved_classes",
+            "missed_function",
+            "path",
+            "question"
+          ],
+          "sha256": "87d28ce10e37d864b72de85d5732eef2a867b241d6c1c99b4ae682c9e3ea921c",
+          "size": 401159
+        },
+        "multi_turn_miss_param": {
+          "case_count": 200,
+          "case_ids_sha256": "5e75e49b2da4a40db8a8b5e76578892eea3a3b8a8f37e7b4309659c56a81440a",
+          "category": "multi_turn_miss_param",
+          "path": "bfcl_eval/data/BFCL_v4_multi_turn_miss_param.json",
+          "possible_answer": {
+            "answer_count": 200,
+            "answer_ids_sha256": "5e75e49b2da4a40db8a8b5e76578892eea3a3b8a8f37e7b4309659c56a81440a",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_miss_param.json",
+            "sha256": "59c442901779e2c31c33abcd566d032e03736e5ad8069de2fe05489873046ecf",
+            "size": 80816,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "excluded_function",
+            "id",
+            "initial_config",
+            "involved_classes",
+            "path",
+            "question"
+          ],
+          "sha256": "f0c66dda3795f5f53e3e1c0cc8ba0246b6761c8f58bdba8317203bf451ab8838",
+          "size": 402974
+        },
+        "multiple": {
+          "case_count": 200,
+          "case_ids_sha256": "b7858a7022ba6f8f6cf999d676b252fe35fbd436208ad7e8fac3d570c44c527e",
+          "category": "multiple",
+          "path": "bfcl_eval/data/BFCL_v4_multiple.json",
+          "possible_answer": {
+            "answer_count": 200,
+            "answer_ids_sha256": "b7858a7022ba6f8f6cf999d676b252fe35fbd436208ad7e8fac3d570c44c527e",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_multiple.json",
+            "sha256": "244e00ce9395df948bcafc7bee64e8f9c87ef70887587d83cae45b13699f3047",
+            "size": 32254,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "aef168155ebd74b7ac2401198b201343bc7d16d7a3d7e0d4e6d8ee82c6969b2a",
+          "size": 316583
+        },
+        "parallel": {
+          "case_count": 200,
+          "case_ids_sha256": "c3aa145bdf258e627119601af948c93b2f385e540c92801832ce1517729acafc",
+          "category": "parallel",
+          "path": "bfcl_eval/data/BFCL_v4_parallel.json",
+          "possible_answer": {
+            "answer_count": 200,
+            "answer_ids_sha256": "c3aa145bdf258e627119601af948c93b2f385e540c92801832ce1517729acafc",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_parallel.json",
+            "sha256": "8a6aa19c1adddc6a5a2f7e40f9dbf30cc7e95815e7b830c90589ab318229e0f0",
+            "size": 66005,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "19f51a82eff42e5d62541aa500115a056eb78f437c2ba1f10415fd7c8e5dda84",
+          "size": 171896
+        },
+        "parallel_multiple": {
+          "case_count": 200,
+          "case_ids_sha256": "8bf603cd74927e071664bcd4594c0738616480c9da7c0e86999d112a9646da59",
+          "category": "parallel_multiple",
+          "path": "bfcl_eval/data/BFCL_v4_parallel_multiple.json",
+          "possible_answer": {
+            "answer_count": 200,
+            "answer_ids_sha256": "8bf603cd74927e071664bcd4594c0738616480c9da7c0e86999d112a9646da59",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_parallel_multiple.json",
+            "sha256": "5ebf24f458c1f16300c05505d83d6f0a1b68b79be273a033febd0d4f840507e3",
+            "size": 74602,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "8863ea8433239f55c5f016154cf0830853c89f693c6ea270396a2fa121960579",
+          "size": 347080
+        },
+        "simple_java": {
+          "case_count": 100,
+          "case_ids_sha256": "abadafd58946229a058a67fd23d4e5c5be60fe66bf86d05c763e48df43f53896",
+          "category": "simple_java",
+          "path": "bfcl_eval/data/BFCL_v4_simple_java.json",
+          "possible_answer": {
+            "answer_count": 100,
+            "answer_ids_sha256": "abadafd58946229a058a67fd23d4e5c5be60fe66bf86d05c763e48df43f53896",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_simple_java.json",
+            "sha256": "78f25616084044fa05bbfcee68e03f6ececb222bdd5cb3b7783a675fb3366e35",
+            "size": 16407,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "13d2303a125b08754f0e41995b9273b5005fa8ed8ebfaa24ef53b4d83c4b5c6e",
+          "size": 86619
+        },
+        "simple_javascript": {
+          "case_count": 50,
+          "case_ids_sha256": "4442819d20cce543e2c4f16989a837a0e06c590d673efb59337d2585d9a3d060",
+          "category": "simple_javascript",
+          "path": "bfcl_eval/data/BFCL_v4_simple_javascript.json",
+          "possible_answer": {
+            "answer_count": 50,
+            "answer_ids_sha256": "4442819d20cce543e2c4f16989a837a0e06c590d673efb59337d2585d9a3d060",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_simple_javascript.json",
+            "sha256": "e2f9f2e51d88e0c8056ffbf1a3dd3d02eb032532d2b5d98c9cc9003385bdd56b",
+            "size": 7881,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "329e67fedf79a6243d93dbda4b388d12bd2d31f1f2163d92cb6ef676d1764f44",
+          "size": 47063
+        },
+        "simple_python": {
+          "case_count": 400,
+          "case_ids_sha256": "284fd37e027916e261462b977d9ff61dd129fcade6566a94c709c3430ac1e836",
+          "category": "simple_python",
+          "path": "bfcl_eval/data/BFCL_v4_simple_python.json",
+          "possible_answer": {
+            "answer_count": 400,
+            "answer_ids_sha256": "284fd37e027916e261462b977d9ff61dd129fcade6566a94c709c3430ac1e836",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_simple_python.json",
+            "sha256": "90cd5bc653690ee8e459b5b3f3fc9458606f7f3fcbf795bb51b7dc581f8c86dc",
+            "size": 63627,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "function",
+            "id",
+            "question"
+          ],
+          "sha256": "82dd63ba502eb2520c6b5d1d9a5c4b590e03ff261565175561f6228a367d1991",
+          "size": 283274
+        },
+        "web_search": {
+          "case_count": 100,
+          "case_ids_sha256": "248413182b882842173a76b1e69e76ed848a86290729a245a17b9b59707dd4d8",
+          "category": "web_search",
+          "path": "bfcl_eval/data/BFCL_v4_web_search.json",
+          "possible_answer": {
+            "answer_count": 100,
+            "answer_ids_sha256": "248413182b882842173a76b1e69e76ed848a86290729a245a17b9b59707dd4d8",
+            "path": "bfcl_eval/data/possible_answer/BFCL_v4_web_search.json",
+            "sha256": "771cab45fdad5744563456801d4623a42c5a358f10514b9b9105d2f6052b4999",
+            "size": 75962,
+            "status": "COVERAGE_MATCHES_CASE_IDS"
+          },
+          "sample_keys": [
+            "id",
+            "involved_classes",
+            "question"
+          ],
+          "sha256": "6fc41d96d003dc849028966a782923560d2fc127ed2088aa967f06daaafa4268",
+          "size": 36984
+        }
+      },
+      "category_mapping": {
+        "path": "bfcl_eval/constants/category_mapping.py",
+        "sha256": "ef31291f17c1ac0504b246345bd56e6bac44fec4239741e158f9fcf2c819cb35",
+        "size": 2049
+      },
+      "eval_runner": {
+        "path": "bfcl_eval/eval_checker/eval_runner.py",
+        "sha256": "b1033684908819ccb312d4d0e2c563359d69247412f00206013b2292b0e3ce81",
+        "size": 32756
+      },
+      "excluded_from_local_non_live_gate": {
+        "agentic_memory": {
+          "case_count": 155,
+          "categories": [
+            "memory"
+          ],
+          "official_backend_expansion": [
+            "memory_kv",
+            "memory_vector",
+            "memory_rec_sum"
+          ],
+          "reason": "BFCL agentic memory expands into BFCL-owned memory backends; vector mode depends on sentence-transformers/faiss and is not the MiLAi MCP memory path. It needs a separate harness lock before use."
+        },
+        "agentic_web_search": {
+          "case_count": 100,
+          "categories": [
+            "web_search"
+          ],
+          "reason": "Web-search categories require live web/SerpAPI-style external access."
+        },
+        "format_sensitivity": {
+          "group_count": 8,
+          "group_counts": {
+            "live_multiple": 86,
+            "live_parallel": 6,
+            "live_parallel_multiple": 9,
+            "live_simple": 24,
+            "multiple": 15,
+            "parallel": 15,
+            "parallel_multiple": 15,
+            "simple_python": 30
+          },
+          "path": "bfcl_eval/data/BFCL_v4_format_sensitivity.json",
+          "sha256": "1e7ebd0ec441198d3f7d3b60be73d0c9eba54094d2c3731b830f5da7a2c63c19",
+          "size": 4963,
+          "status": "NON_SCORING_EXCLUDED_FROM_LOCAL_NON_LIVE_GATE",
+          "variant_id_count": 200
+        },
+        "live": {
+          "case_count": 2251,
+          "categories": [
+            "live_simple",
+            "live_multiple",
+            "live_parallel",
+            "live_parallel_multiple",
+            "live_irrelevance",
+            "live_relevance"
+          ],
+          "reason": "User-contributed live categories are outside the local/non-live release gate."
+        }
+      },
+      "git_head": "6ea57973c7a6097fd7c5915698c54c17c5b1b6c8",
+      "license": {
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size": 11357
+      },
+      "local_non_live": {
+        "case_count": 2190,
+        "case_count_by_category": {
+          "irrelevance": 240,
+          "multi_turn_base": 200,
+          "multi_turn_long_context": 200,
+          "multi_turn_miss_func": 200,
+          "multi_turn_miss_param": 200,
+          "multiple": 200,
+          "parallel": 200,
+          "parallel_multiple": 200,
+          "simple_java": 100,
+          "simple_javascript": 50,
+          "simple_python": 400
+        },
+        "case_ids_sha256": "0bb76127790e23332cf822716d35b999b6ba875d489646dbd2442759f4b923f1",
+        "categories": [
+          "simple_python",
+          "simple_java",
+          "simple_javascript",
+          "multiple",
+          "parallel",
+          "parallel_multiple",
+          "irrelevance",
+          "multi_turn_base",
+          "multi_turn_miss_func",
+          "multi_turn_miss_param",
+          "multi_turn_long_context"
+        ]
+      },
+      "local_path_class": "repo-external-benchmark-workspace",
+      "lock_state": "PARTIAL_LOCK_REVIEW_REQUIRED",
+      "path": "/cra/memory/mx_memory/benchmarks/gorilla-bfcl/berkeley-function-call-leaderboard",
+      "pyproject": {
+        "path": "pyproject.toml",
+        "sha256": "21233eb88f9d5ba195ff935766e9e13106043dfb0ef6a1a5637b6a4246abdfc4",
+        "size": 2013
+      },
+      "readme_sha256": "c6c95683cce9653788c8b3f3f5002d2f5c27b95a1288544fe82c2a2faf5e12d0",
+      "remote_origin": "https://github.com/ShishirPatil/gorilla.git",
+      "status": "LOCAL_NON_LIVE_CASE_LIST_CANDIDATE_REVIEW_REQUIRED",
+      "test_categories": {
+        "path": "TEST_CATEGORIES.md",
+        "sha256": "dfdf449b1500a6452eab142433bf641bb8e5b7208d0631ce7c009ea09bef32a6",
+        "size": 3551
+      },
+      "working_tree_status": {
+        "clean": true,
+        "modified": [],
+        "other": [],
+        "untracked": []
+      }
+    },
+    "longmemeval": {
+      "blocking_notes": [
+        "The benchmark repository working tree is dirty and contains untracked downloaded data.",
+        "Only longmemeval_s_cleaned.json case count and IDs are fully verified here; medium/oracle are byte-locked but not case-count scanned."
+      ],
+      "files": {
+        "data/longmemeval_m_cleaned.json": {
+          "sha256": "9d79e5524794a2e6900a3aa9cb7d9152c5a3e8319c9a87c25494ba1eacee495f",
+          "size": 2737100077
+        },
+        "data/longmemeval_oracle.json": {
+          "sha256": "821a2034d219ab45846873dd14c14f12cfe7776e73527a483f9dac095d38620c",
+          "size": 15388478
+        },
+        "data/longmemeval_s_cleaned.json": {
+          "case_count_verified": 500,
+          "case_ids_sha256": "cb86ceffd101201672cb678968d0742d970e08472acc01690018b999d2856ecb",
+          "question_type_counts": {
+            "knowledge-update": 78,
+            "multi-session": 133,
+            "single-session-assistant": 56,
+            "single-session-preference": 30,
+            "single-session-user": 70,
+            "temporal-reasoning": 133
+          },
+          "sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+          "size": 277383467
+        }
+      },
+      "git_head": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+      "license": {
+        "path": "LICENSE",
+        "sha256": "d3c4b9aa54759df6ded337978a6f3b55b75615e5e4525c3b82d7e2627d4b9732"
+      },
+      "local_path_class": "repo-external-benchmark-workspace",
+      "lock_state": "PARTIAL_LOCK_REVIEW_REQUIRED",
+      "path": "/cra/memory/mx_memory/benchmarks/LongMemEval",
+      "readme_sha256": "c4ff45676683d9e2f7cf7d9099d26426f14635ec110dbb1da818d1019a142573",
+      "remote_origin": "https://github.com/xiaowu0162/LongMemEval.git",
+      "working_tree_status": {
+        "clean": false,
+        "modified": [
+          "src/evaluation/evaluate_qa.py",
+          "src/generation/run_generation.py"
+        ],
+        "other": [],
+        "untracked": [
+          "data/longmemeval_m_cleaned.json",
+          "data/longmemeval_oracle.json",
+          "data/longmemeval_s_cleaned.json",
+          "generation_logs/"
+        ]
+      }
+    },
+    "longmemeval_v2": {
+      "artifact_counts": {
+        "question_screenshots_png": 29,
+        "trajectory_screenshots_png": 49708
+      },
+      "blocking_notes": [
+        "The benchmark repository has local changes or untracked helpers.",
+        "Screenshot-dependent artifacts are present and large; only metadata and root file hashes are stored in this MiLAi report."
+      ],
+      "checksums_sha256": "b17a18daa52873f915808502217c3c5fab39d20638544f986401155c9e8d67a6",
+      "files": {
+        "data/longmemeval-v2/haystacks/lme_v2_medium.json": {
+          "case_ids_sha256": "28de62f7ce1ce26c59fcec26958a52e00ba084a4aaa83bdb07007c740e50a96d",
+          "max_haystack": 500,
+          "min_haystack": 387,
+          "question_count": 451,
+          "sha256": "4756d5126347f0d18f045bb6c47b08cb3b23e9db24386cc48a9b2879e7969b59",
+          "size": 4054244
+        },
+        "data/longmemeval-v2/haystacks/lme_v2_small.json": {
+          "case_ids_sha256": "28de62f7ce1ce26c59fcec26958a52e00ba084a4aaa83bdb07007c740e50a96d",
+          "max_haystack": 100,
+          "min_haystack": 100,
+          "question_count": 451,
+          "sha256": "9b5301defb23a088a5f06e45ff8d5f35e569d78305a66d492046a9fff9b46593",
+          "size": 822632
+        },
+        "data/longmemeval-v2/questions.jsonl": {
+          "case_count": 451,
+          "case_ids_sha256": "28de62f7ce1ce26c59fcec26958a52e00ba084a4aaa83bdb07007c740e50a96d",
+          "sha256": "0a3ae5ebea938c24d7800e1e0b0828e08ae1646f939a53853b2b8cdc08e292b7",
+          "size": 286186
+        },
+        "data/longmemeval-v2/trajectories.jsonl": {
+          "sha256": "363cec9a8e87aa8d9101ce4e600aadbf7031d674056ebe4f969e8424abc5f3c6",
+          "size": 1195604539,
+          "trajectory_count_from_data_card": 1870
+        }
+      },
+      "git_head": "2cc8c540bdb87fe6761629b585e727e1c4704520",
+      "license": {
+        "path": "data/longmemeval-v2/LICENSE",
+        "sha256": "d547f7673579465fcecc8f257fcdb410f51c82fd784a10b1587e83036f9c29e1"
+      },
+      "local_path_class": "repo-external-benchmark-workspace",
+      "lock_state": "PARTIAL_LOCK_REVIEW_REQUIRED",
+      "path": "/cra/memory/mx_memory/benchmarks/LongMemEval-V2",
+      "question_counts": {
+        "all_case_ids_sha256": "28de62f7ce1ce26c59fcec26958a52e00ba084a4aaa83bdb07007c740e50a96d",
+        "by_category": {
+          "domain:enterprise": 211,
+          "domain:web": 240,
+          "environment:webarena-cms": 83,
+          "environment:webarena-onestopshop": 66,
+          "environment:webarena-reddit": 91,
+          "environment:workarena": 211,
+          "type:dynamic-environment": 86,
+          "type:dynamic-environment-abs": 41,
+          "type:errors-gotchas": 29,
+          "type:procedure": 74,
+          "type:procedure-abs": 32,
+          "type:static-environment": 134,
+          "type:static-environment-abs": 55
+        },
+        "image_required_case_ids_sha256": "d69db0e6418149be33b00f4b979f590537786f0bc945c160d04fc7bccac2b689",
+        "question_image_required": 29,
+        "text_only": 422,
+        "text_only_case_ids_sha256": "dd8b41c8bbd205fa5ac5bdf8d3229eba1913c298992fb7e951a7c2d85ddeb87d",
+        "total": 451
+      },
+      "readme_sha256": "399cc61c9540e587017fccdde28b29b62ed66326425f16f08b5fe0457a593abd",
+      "remote_origin": "https://github.com/xiaowu0162/LongMemEval-V2.git",
+      "working_tree_status": {
+        "clean": false,
+        "modified": [],
+        "other": [],
+        "untracked": [
+          "data/download_snapshot_parallel.py"
+        ]
+      }
+    }
+  },
+  "date": "2026-08-21",
+  "gate_results": {
+    "BMG-00": "PARTIAL_CANDIDATE_REVIEW_REQUIRED",
+    "BMG-00A": "PARTIAL_CANDIDATE_REVIEW_REQUIRED",
+    "BMG-03": "CANDIDATE_LOCK_REVIEW_REQUIRED",
+    "BMG-05": "NO_GO_QUALITY_THRESHOLDS_NOT_FROZEN"
+  },
+  "known_limits": [
+    "This report does not authorize opening benchmark test labels/outputs.",
+    "No adapter, grader, Latin-square schedule, calibration threshold, public benchmark run, or quality outcome is frozen here.",
+    "Repository-external raw benchmark data is referenced only by path class, size, SHA-256, and case-ID digest."
+  ],
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_thresholds_frozen": false,
+  "schema": "milai.dg10.benchmark-dataset-lock.v1",
+  "status": "DATASET_LOCK_CANDIDATE_REVIEW_REQUIRED",
+  "test_access_authorized": false
+}

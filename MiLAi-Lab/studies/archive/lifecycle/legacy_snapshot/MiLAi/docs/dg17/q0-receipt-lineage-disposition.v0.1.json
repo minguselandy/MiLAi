@@ -1,0 +1,53 @@
+{
+  "schema": "milai.dg17.q0-receipt-lineage-disposition.v0.1",
+  "status": "Q0_HISTORICAL_RECEIPTS_RETAINED_NON_AUTHORITATIVE",
+  "date": "2026-08-27",
+  "receipts": [
+    {
+      "path": "var/dg17/q0/dg17-q0-measurement-20260827-001/receipt.json",
+      "sha256": "d4dada38b69a26681f2f8898dccd573823deef4af8b288da3f91b5bac1783132",
+      "original_status": "Q0_MEASUREMENT_COMPLETE",
+      "disposition": "RETAINED_HISTORICAL_OPERATOR_SUBMETRIC_NOT_EXECUTED"
+    },
+    {
+      "path": "var/dg17/q0/dg17-q0-oracle-20260827-001/receipt.json",
+      "sha256": "823d157263c29b6abdcf7a4181ed974c027e6f131845eb213c0a5ec1b840a583",
+      "original_status": "Q0_COMPLETE",
+      "disposition": "RETAINED_HISTORICAL_NON_AUTHORITATIVE"
+    },
+    {
+      "path": "var/dg17/q0/dg17-q0-oracle-20260827-002/receipt.json",
+      "sha256": "14d13998539f554f5b60ff1e1ab6a8b573b17acbe53b72e87ce81d18a935b4b6",
+      "original_status": "Q0_COMPLETE",
+      "disposition": "RETAINED_HISTORICAL_NON_AUTHORITATIVE"
+    }
+  ],
+  "authoritative_q0_oracle_receipt": null,
+  "supersedes": [],
+  "superseded_by": null,
+  "reason_codes": [
+    "PREDICTED_IR_WAS_NULL_PLACEHOLDER",
+    "OPERATOR_METRIC_NOT_EXECUTED",
+    "ORACLE_RUNS_DISAGREE_WITHOUT_MULTI_SEED_AGGREGATE",
+    "DIAGNOSTIC_SUCCESS_USED_NON_PREDECLARED_F1_SHORTCUT"
+  ],
+  "corrected_code_paths": [
+    "evals/dg17/measurement.py",
+    "tests/test_dg17_measurement.py"
+  ],
+  "required_successor": {
+    "status": "PENDING_EXTERNAL_EXECUTION_RESUMPTION",
+    "predicted_ir_source": "actual sealed MemoryQueryCompiler v0.2 output",
+    "diagnostic_success_policy": "strict exact match with raw F1 retained",
+    "seed_schedule": "PREDECLARE_MULTI_SEED",
+    "receipt_lineage_fields": [
+      "code_sha256",
+      "prompt_contract_sha256",
+      "seed_schedule",
+      "supersedes"
+    ]
+  },
+  "causal_claim_authorized": false,
+  "release_use_authorized": false
+}
+

@@ -1,0 +1,184 @@
+{
+  "experiment_kind": "RESEARCH_PROTOTYPE",
+  "status": "THREE_ARMS_FINISHED",
+  "run_root": "/cra/memory/mx_memory/evidence/workspace-host/a-common-v2-20260913",
+  "version": "workspace-task-a-v2",
+  "order": [
+    "NOTE",
+    "REVIEW",
+    "REGULATED"
+  ],
+  "lineages_compared": 1,
+  "second_source_compared": false,
+  "limits": {
+    "work_tokens": 512,
+    "focus_refs": 4,
+    "recent_exchanges": 2,
+    "input_tokens": 8192,
+    "output_tokens": 2048,
+    "action_reserve": 1024,
+    "envelope_reserve": 128,
+    "catalog_entries": 32
+  },
+  "provider": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "profile": "v0213 loopback HTTP single-writer; pending usage stops entire batch",
+    "decoding": {
+      "temperature": 0,
+      "top_p": 1,
+      "seed": 213,
+      "response_format": "json_object"
+    },
+    "thinking": false
+  },
+  "allocation": {
+    "initial_planning": 114,
+    "a_allocated": 36,
+    "a_used": 10,
+    "a_unused": 26,
+    "b_allocated": 0,
+    "debug_generation_used": 0,
+    "additional_comparison_used": 0
+  },
+  "accounting": {
+    "sessions": {
+      "NOTE": {
+        "requests": 3,
+        "raw_tokens": 13532,
+        "input_tokens": 12619,
+        "output_tokens": 913
+      },
+      "REVIEW": {
+        "requests": 3,
+        "raw_tokens": 13588,
+        "input_tokens": 12656,
+        "output_tokens": 932
+      },
+      "REGULATED": {
+        "requests": 4,
+        "raw_tokens": 17089,
+        "input_tokens": 15871,
+        "output_tokens": 1218
+      }
+    },
+    "raw_tokens": 44209,
+    "requests": 10,
+    "pending": [],
+    "violations": []
+  },
+  "wall_seconds": 26.331116487737745,
+  "money_cost": null,
+  "developer_agent_usage": "separate platform accounting; unavailable per subtask, not included",
+  "arms": {
+    "NOTE": {
+      "status": "COMPLETE",
+      "decisions": 3,
+      "actions": [
+        "stage_answer",
+        "stage_answer",
+        "final"
+      ],
+      "workspace_updates": 0,
+      "wall_seconds": 8.12319716438651,
+      "tool_cpu_seconds": 4.745800000005573e-05,
+      "tool_wall_seconds": 5.3836964070796967e-05,
+      "tokens": {
+        "requests": 3,
+        "raw_tokens": 13532,
+        "input_tokens": 12619,
+        "output_tokens": 913
+      }
+    },
+    "REVIEW": {
+      "status": "COMPLETE",
+      "decisions": 3,
+      "actions": [
+        "stage_answer",
+        "stage_answer",
+        "final"
+      ],
+      "workspace_updates": 0,
+      "wall_seconds": 7.679623280186206,
+      "tool_cpu_seconds": 4.795399999935057e-05,
+      "tool_wall_seconds": 5.3480733186006546e-05,
+      "tokens": {
+        "requests": 3,
+        "raw_tokens": 13588,
+        "input_tokens": 12656,
+        "output_tokens": 932
+      }
+    },
+    "REGULATED": {
+      "status": "COMPLETE",
+      "decisions": 4,
+      "actions": [
+        "read",
+        "stage_answer",
+        "stage_answer",
+        "final"
+      ],
+      "workspace_updates": 0,
+      "wall_seconds": 10.487368379253894,
+      "tool_cpu_seconds": 7.126100000043323e-05,
+      "tool_wall_seconds": 7.985252887010574e-05,
+      "tokens": {
+        "requests": 4,
+        "raw_tokens": 17089,
+        "input_tokens": 15871,
+        "output_tokens": 1218
+      }
+    }
+  },
+  "http": {
+    "model_identity_get": 1,
+    "tokenize_post": 10,
+    "generation_post": 10,
+    "all_response_usage_known": true,
+    "failed_generation_attempts": 0,
+    "native_tool_protocol": false
+  },
+  "persistence": {
+    "raw_artifact_files": 61,
+    "raw_artifact_bytes": 859998,
+    "write_seconds": "not separately instrumented; included in wall time",
+    "durable_event_method": "existing append_event fsync per event"
+  },
+  "final_implementation": {
+    "source_sha256": {
+      "tools/run_workspace_task_a.py": "0f97bd5c12e3a27bd10244e6ad36bece4ef6e28e486d147b9351d8701ff76fe3",
+      "tools/workspace_task_provider.py": "8c86da96d8f8becaf7262e431cbc79928606512bf04f956e5cbb52aa31b7058e",
+      "tools/v0213_provider.py": "05601e67f19754cc0bc7ac80bb281e3d6b435e93ec1ce85fe5ece90b42c6d92c",
+      "tools/workspace_policy_host.py": "50e925da54c954bd1f3ad89aed2e43e647c962d52c5323d23e1f61803fb05b57",
+      "src/milai_lab/methods/workspace_policy.py": "654c5e34d2ac0bc0a63ad1d6dc3d460c86193012a1ffab96635c9f08cfa87807"
+    },
+    "postrun_change": "Provider extension moved into task-specific subclass; original frozen Provider restored",
+    "cpu_replay": "/cra/memory/mx_memory/evidence/workspace-host/provider-isolation-cpu-replay/result.json",
+    "new_model_generations_after_move": 0
+  },
+  "checks": {
+    "neighbor_pytest": "55 passed in 1.49s after adapter isolation",
+    "boundary": "PASS",
+    "ruff": "PASS src tests tools",
+    "mypy": "PASS src/milai_lab, 40 files",
+    "build": "PASS sdist and wheel",
+    "full_pytest": {
+      "status": "INCOMPLETE",
+      "passed": 1822,
+      "failed": 1,
+      "skipped": 1,
+      "seconds": 179.93,
+      "outer_exit": 124,
+      "failure": "test_v0222_boundary_preparation: IMPLEMENTATION_DRIFT",
+      "remediation": "Original Provider byte hash restored; all frozen dependencies match. Neighbor tests and CPU HTTP replay pass; old full test remains incomplete."
+    },
+    "frozen_failure_file_rerun": {
+      "status": "INCOMPLETE",
+      "seconds": 179.99,
+      "outer_exit": 124,
+      "completed_test_items": 0,
+      "pytest_output": "no tests ran; interrupted inside first test",
+      "full_pass_claim": false
+    }
+  },
+  "completion_scope": "Normal Goal delivery: executable opt-in prototype, actual Provider/task wiring, one complete real-task three-arm comparison, bounded B disposition, full attempt ledger and evidence-based stop/retain decision. Two-source validation and real workspace consumption not claimed."
+}

@@ -1,0 +1,375 @@
+{
+  "status": "DEVELOPMENT_COMPLETE_LOCAL_HYPOTHESIS_ONLY",
+  "goal_version": "1.1",
+  "kind": "RESEARCH_PROTOTYPE",
+  "independent_lineages": 1,
+  "cross_source_validated": false,
+  "fresh_ceiling": 52,
+  "debug_generations": 0,
+  "runs": {
+    "comparison-1-v3": {
+      "version": "workspace-continuation-a-v3-natural",
+      "status": "THREE_ARMS_FINISHED",
+      "requests": 6,
+      "raw_tokens": 33593,
+      "input_tokens": 31177,
+      "output_tokens": 2416,
+      "sessions": {
+        "N-formation": {
+          "requests": 1,
+          "raw_tokens": 4424,
+          "input_tokens": 3976,
+          "output_tokens": 448
+        },
+        "N-consumption": {
+          "requests": 1,
+          "raw_tokens": 7149,
+          "input_tokens": 6507,
+          "output_tokens": 642
+        },
+        "R-formation": {
+          "requests": 1,
+          "raw_tokens": 4293,
+          "input_tokens": 3983,
+          "output_tokens": 310
+        },
+        "R-consumption": {
+          "requests": 1,
+          "raw_tokens": 6705,
+          "input_tokens": 6369,
+          "output_tokens": 336
+        },
+        "S-formation": {
+          "requests": 1,
+          "raw_tokens": 4283,
+          "input_tokens": 4016,
+          "output_tokens": 267
+        },
+        "S-consumption": {
+          "requests": 1,
+          "raw_tokens": 6739,
+          "input_tokens": 6326,
+          "output_tokens": 413
+        }
+      },
+      "wall_seconds": 21.179349465761334,
+      "tokenizer_initialization_seconds": 1.2981072440743446,
+      "verified_context": {
+        "effective": 65536,
+        "source": "GET /v1/models max_model_len",
+        "verified_unix": 1789344260.6265848,
+        "output_reserve": 4096,
+        "guard": 0,
+        "exact_template_counted": true
+      },
+      "arms": {
+        "N": {
+          "handoff_tokens": 415,
+          "handoff_sha256": "8f1d10bc7d4695bead3560e0e32008bfe4ee145d47d7442cf657eff076d23372",
+          "status": "COMPLETE",
+          "actions": [
+            "stage_answer",
+            "final"
+          ],
+          "tool_cpu_seconds": 4.2638000000039256e-05,
+          "tool_wall_seconds": 4.7600362449884415e-05,
+          "inputs": [
+            {
+              "segment": "formation",
+              "tokens": 3976,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "handoff_occurrences": 0,
+              "input_sha256": "0450a86bfd4bb4738a45cef950fcc36f28986d3aea7bad5d94ea695b944a1738"
+            },
+            {
+              "segment": "consumption",
+              "tokens": 6507,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "handoff_occurrences": 1,
+              "input_sha256": "00336e743ee0d0c0156d4dfc22bcdbde5d517983219874d0bd3d018d32cf09b3"
+            }
+          ]
+        },
+        "R": {
+          "handoff_tokens": 279,
+          "handoff_sha256": "8f9a5cb27874638363b3b0c58fecec6a0867a093228e46b5391747fa13b3dc94",
+          "status": "COMPLETE",
+          "actions": [
+            "stage_answer",
+            "final"
+          ],
+          "tool_cpu_seconds": 3.274800000063749e-05,
+          "tool_wall_seconds": 3.695394843816757e-05,
+          "inputs": [
+            {
+              "segment": "formation",
+              "tokens": 3983,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "handoff_occurrences": 0,
+              "input_sha256": "1ba281a1e61c0b271aa7725dac3a0e2684c2d9b119e1d051c063df08769b2a57"
+            },
+            {
+              "segment": "consumption",
+              "tokens": 6369,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "handoff_occurrences": 1,
+              "input_sha256": "c7a563775129cc4e31a7d21eb6bedc7127844a1f35634f0ba3a42a669c32ae18"
+            }
+          ]
+        },
+        "S": {
+          "handoff_tokens": 236,
+          "handoff_sha256": "3446df57419feb0982cde2928962c7222c9703f6410cf23c156c6b65c8ae87e2",
+          "status": "COMPLETE",
+          "actions": [
+            "stage_answer",
+            "final"
+          ],
+          "tool_cpu_seconds": 3.2213999999974874e-05,
+          "tool_wall_seconds": 3.55057418346405e-05,
+          "inputs": [
+            {
+              "segment": "formation",
+              "tokens": 4016,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "handoff_occurrences": 0,
+              "input_sha256": "100642d992812706400ff348fed7dec941b75d62ff526e70aba0b4bfe439e320"
+            },
+            {
+              "segment": "consumption",
+              "tokens": 6326,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "handoff_occurrences": 1,
+              "input_sha256": "528510cac3dcd86a8ab05979db7b2428a8a69f7d209c1d5966aa90fa35fd960f"
+            }
+          ]
+        }
+      }
+    },
+    "comparison-2-v4": {
+      "version": "workspace-continuation-a-v4-natural",
+      "status": "COMPARISON_FINISHED",
+      "requests": 4,
+      "raw_tokens": 22954,
+      "input_tokens": 21037,
+      "output_tokens": 1917,
+      "sessions": {
+        "R-formation": {
+          "requests": 1,
+          "raw_tokens": 4375,
+          "input_tokens": 3983,
+          "output_tokens": 392
+        },
+        "R-consumption": {
+          "requests": 1,
+          "raw_tokens": 6954,
+          "input_tokens": 6451,
+          "output_tokens": 503
+        },
+        "EXPLAIN-formation": {
+          "requests": 1,
+          "raw_tokens": 4544,
+          "input_tokens": 4068,
+          "output_tokens": 476
+        },
+        "EXPLAIN-consumption": {
+          "requests": 1,
+          "raw_tokens": 7081,
+          "input_tokens": 6535,
+          "output_tokens": 546
+        }
+      },
+      "wall_seconds": 16.442847479134798,
+      "tokenizer_initialization_seconds": 1.3157977289520204,
+      "verified_context": {
+        "effective": 65536,
+        "source": "GET /v1/models max_model_len",
+        "verified_unix": 1789344417.2594512,
+        "output_reserve": 4096,
+        "guard": 0,
+        "exact_template_counted": true
+      },
+      "arms": {
+        "R": {
+          "handoff_tokens": 359,
+          "handoff_sha256": "8c38bbfd6a28ed853ac0289b6557687db0dcd6314da696de72cb70c047c1d005",
+          "status": "COMPLETE",
+          "actions": [
+            "stage_answer",
+            "final"
+          ],
+          "tool_cpu_seconds": 3.625599999956819e-05,
+          "tool_wall_seconds": 4.0475744754076004e-05,
+          "inputs": [
+            {
+              "segment": "formation",
+              "tokens": 3983,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "handoff_occurrences": 0,
+              "input_sha256": "1ba281a1e61c0b271aa7725dac3a0e2684c2d9b119e1d051c063df08769b2a57"
+            },
+            {
+              "segment": "consumption",
+              "tokens": 6451,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "handoff_occurrences": 1,
+              "input_sha256": "5c8022a48445d33dbd23ad2eb34c850739cf0231c7b5af79a2620cd233a829df"
+            }
+          ]
+        },
+        "EXPLAIN": {
+          "handoff_tokens": 444,
+          "handoff_sha256": "907b185041ca4faab1b10e9e64271da30e0d33bc38080365ec069fee7c396a33",
+          "status": "COMPLETE",
+          "actions": [
+            "stage_answer",
+            "final"
+          ],
+          "tool_cpu_seconds": 3.0436999999494674e-05,
+          "tool_wall_seconds": 3.4457072615623474e-05,
+          "inputs": [
+            {
+              "segment": "formation",
+              "tokens": 4068,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "G2"
+              ],
+              "handoff_occurrences": 0,
+              "input_sha256": "c7fd02f5a05463ef2679f53e7dd74e10bf707d153c3d2016a0f60cfedffd9456"
+            },
+            {
+              "segment": "consumption",
+              "tokens": 6535,
+              "source_bodies": [
+                "E1",
+                "E2",
+                "E3",
+                "G2",
+                "G3"
+              ],
+              "handoff_occurrences": 1,
+              "input_sha256": "95ec2be389b69f06de582455c938b509758ad76e5d035e2e0be4c0d055f7ca70"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "same_R_formation_request_bytes": true,
+  "model_generations": 10,
+  "known_raw_tokens": 56547,
+  "input_tokens": 52214,
+  "output_tokens": 4333,
+  "unknown_usage": 0,
+  "identity_gets": 3,
+  "tokenize_posts": 10,
+  "generation_posts": 10,
+  "all_actual_source_bodies_verified": true,
+  "all_handoffs_presented_once": true,
+  "workspace_updates": 0,
+  "actual_read_calculate_suggest_calls": 0,
+  "prior_v1_restricted": {
+    "requests": 6,
+    "raw_tokens": 24196,
+    "path": "/cra/memory/mx_memory/evidence/workspace-host/continuation-20260914/comparison-1-v1",
+    "mixed_into_natural_result": false
+  },
+  "all_continuation_work_observed_total": {
+    "generations": 16,
+    "known_raw_tokens": 80743,
+    "warning": "separate conditions, not a combined quality denominator"
+  },
+  "money_cost": null,
+  "developer_agent_usage": "separate platform accounting; no delegate/Judge",
+  "engineering": {
+    "neighbors": "70 passed in 4.66s",
+    "boundary": "PASS",
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "full_regression": {
+      "status": "PASS_WITH_ONE_OPTIONAL_SKIP",
+      "inventory_count": 4434,
+      "missing": [],
+      "duplicates": [],
+      "unexpected": [],
+      "shards": {
+        "scoped-integration": {
+          "exit_code": 0,
+          "seconds": 2822.227056397125,
+          "selected_count": 3,
+          "passed": 3,
+          "junit": "/cra/memory/mx_memory/evidence/workspace-host/continuation-natural-20260914/scoped-integration.xml",
+          "junit_sha256": "c51db866e7ab3b8e21a1b0acf13103ddda60abdc614952bd7e69970b5f99e69d"
+        },
+        "remaining-suite": {
+          "exit_code": 0,
+          "seconds": 1673.4064413090236,
+          "selected_count": 4431,
+          "passed": 4430,
+          "skipped": 1,
+          "junit": "/cra/memory/mx_memory/evidence/workspace-host/continuation-natural-20260914/remaining-suite.xml",
+          "junit_sha256": "9d29d97e57c71f38b16f9a4c8c2a82196be27c709d99f8cdb9513337183fd895"
+        }
+      },
+      "prior_goal_unsharded_exit": 139,
+      "prior_goal_failure_preserved": true,
+      "prior_goal_crash_root_cause": "unproven; occurred during diagnostic stack dump",
+      "diagnostic_timeout_disabled_for_shards": true,
+      "passed": 4433,
+      "skipped": 1,
+      "failed": 0,
+      "errors": 0,
+      "skip_reason": "optional Host SDK wheel",
+      "all_collected_tests_accounted_for": true,
+      "source_unchanged_during_regression": true
+    },
+    "build": "PASS: sdist and wheel"
+  },
+  "decision": "Keep ordinary NOTE/REVIEW reference; no established S advantage. Retain generic interpretation reminder only as a replaceable local hypothesis, not stable net benefit or independent handoff effect.",
+  "conditional_followups": "Independent source/literature, persistence and product work not executed; outside required bounded delivery.",
+  "source_arithmetic": "/cra/memory/mx_memory/evidence/workspace-host/continuation-natural-20260914/source-arithmetic.json",
+  "hidden_reasoning_output": false,
+  "remaining_unspent_generations": 42
+}

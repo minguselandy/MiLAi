@@ -1,0 +1,628 @@
+{
+  "study": "MILA-V02-03-CORRECTION",
+  "status": "COMPLETED_KEEP_BASELINE",
+  "pin": {
+    "valid": true,
+    "product_root": "/cra/memory/mx_memory/MiLAi-Product",
+    "lock_digest": "d1cfd517a7c4e53bdfcd5d280065c26fad055f3af605bc4c927dddb850523c97",
+    "observed_tree_sha256": "c5561412b0440f84e628d69a7c271c96d66bae7f89d4e3f1db46ede97a1608bf",
+    "errors": []
+  },
+  "N4": "PASS_FOR_CONFIRMATION",
+  "N4_histories": [
+    {
+      "case_id": "27016adc",
+      "F_future": {
+        "tokens": 274171,
+        "seconds": 130.79292381508276
+      },
+      "S_future": {
+        "tokens": 192211,
+        "seconds": 110.96176741924137
+      },
+      "delta_save_tokens": 0,
+      "delta_save_seconds": 0.23763913894072175,
+      "S_over_F_tokens": 0.7010624756082883,
+      "token_reduction_fraction": 0.29893752439171173,
+      "net_saved_seconds": 19.593517256900668,
+      "prespecified_quality_pass": true,
+      "cost_gate_pass": true,
+      "N4_history_pass": true,
+      "common_G_tokens": 221349,
+      "common_G_seconds": 116.25783105194569,
+      "counterfactual_paths": {
+        "F": {
+          "tokens": 495520,
+          "seconds": 247.05075486702845
+        },
+        "S": {
+          "tokens": 413560,
+          "seconds": 227.45723761012778
+        }
+      }
+    },
+    {
+      "case_id": "852ce960",
+      "F_future": {
+        "tokens": 257281,
+        "seconds": 110.9401554421056
+      },
+      "S_future": {
+        "tokens": 216660,
+        "seconds": 105.3011472967919
+      },
+      "delta_save_tokens": 0,
+      "delta_save_seconds": 0.1641334539745003,
+      "S_over_F_tokens": 0.8421142641703041,
+      "token_reduction_fraction": 0.1578857358296959,
+      "net_saved_seconds": 5.47487469133921,
+      "prespecified_quality_pass": true,
+      "cost_gate_pass": true,
+      "N4_history_pass": true,
+      "common_G_tokens": 261445,
+      "common_G_seconds": 163.34134372905828,
+      "counterfactual_paths": {
+        "F": {
+          "tokens": 518726,
+          "seconds": 274.2814991711639
+        },
+        "S": {
+          "tokens": 478105,
+          "seconds": 268.8066244798247
+        }
+      }
+    }
+  ],
+  "N5": "INCOMPLETE_BUDGET_GATE",
+  "N5_histories": [
+    {
+      "case_id": "ba358f49",
+      "complete": true,
+      "quality_on_observed_tasks": true,
+      "future_totals": {
+        "F": {
+          "tokens": 262913,
+          "seconds": 123.80621334630996,
+          "completed": 2
+        },
+        "S": {
+          "tokens": 216197,
+          "seconds": 118.01656231889501,
+          "completed": 2
+        }
+      },
+      "S_over_F_tokens": 0.8223138452644031,
+      "net_saved_seconds": 5.703496361384168,
+      "confirmation_history_pass": true,
+      "delta_save_seconds": 0.08615466603077948,
+      "delta_save_tokens": 0,
+      "common_G_tokens": 241400,
+      "common_G_seconds": 100.30077538499609,
+      "note_bytes": 1737,
+      "note_sha256": "5a05ed815200b72910258e8702a51c0341388049406c99383a77cdfb176e8b2f",
+      "pairs": [
+        {
+          "future": "advisor_email",
+          "arms": {
+            "F": {
+              "status": "COMPLETED",
+              "tokens": 125560,
+              "seconds": 65.18952957214788,
+              "quality": {
+                "task_correct": true,
+                "source_supported": true,
+                "answer_sha256": "95619bf268892dc9f1681989818d4c87ac2cf294fb9859df528f2145ca9ef84d",
+                "basis": "Five years marketing, tentative online/part-time/flexible masters while working; career/placement, alumni and lifelong-learning questions; no enrollment/application claim.",
+                "first_substantive_visible_judgment": "Final artifact; earlier messages only announce source checking"
+              },
+              "before_version": 0,
+              "after_version": 0,
+              "tool_actions": 7,
+              "branch_bootstrap_and_files_verified": true
+            },
+            "S": {
+              "status": "COMPLETED",
+              "tokens": 137938,
+              "seconds": 62.716045297915116,
+              "quality": {
+                "task_correct": true,
+                "source_supported": true,
+                "answer_sha256": "cc4ffde232b7200ee47ff9599a59ff067f122cfbcacc13d6b27ea68152bd5029",
+                "basis": "Five years marketing, tentative online/part-time/flexible masters while working; career/placement, alumni and lifelong-learning questions; no enrollment/application claim.",
+                "first_substantive_visible_judgment": "Final artifact; earlier messages only announce source checking"
+              },
+              "before_version": 1,
+              "after_version": 1,
+              "tool_actions": 7,
+              "branch_bootstrap_and_files_verified": true
+            }
+          },
+          "S_over_F_tokens": 1.0985823510672188
+        },
+        {
+          "future": "study_allocation",
+          "arms": {
+            "F": {
+              "status": "COMPLETED",
+              "tokens": 137353,
+              "seconds": 58.616683774162084,
+              "quality": {
+                "task_correct": true,
+                "source_supported": true,
+                "answer_sha256": "878df1693b8b3a868509329b6ac1b0728891cc7dc02f4d817117cf702f1769ee",
+                "basis": "1 weekday hour total + 2-3 weekend hours = 3-4 weekly; course and tools remain tentative; reflection duration and inclusion unknown; no completion claim.",
+                "first_substantive_visible_judgment": "Final artifact; earlier messages only announce source checking"
+              },
+              "before_version": 0,
+              "after_version": 0,
+              "tool_actions": 6,
+              "branch_bootstrap_and_files_verified": true
+            },
+            "S": {
+              "status": "COMPLETED",
+              "tokens": 78259,
+              "seconds": 55.300517020979896,
+              "quality": {
+                "task_correct": true,
+                "source_supported": true,
+                "answer_sha256": "786f770a281b83aa4db643fbdf30c7fa457adf76babf29bb19ea7238d59d4399",
+                "basis": "1 weekday hour total + 2-3 weekend hours = 3-4 weekly; course and tools remain tentative; reflection duration and inclusion unknown; no completion claim.",
+                "first_substantive_visible_judgment": "Final artifact; earlier messages only announce source checking"
+              },
+              "before_version": 1,
+              "after_version": 1,
+              "tool_actions": 4,
+              "branch_bootstrap_and_files_verified": true
+            }
+          },
+          "S_over_F_tokens": 0.5697654947471115
+        }
+      ],
+      "counterfactual_paths": {
+        "F": {
+          "tokens": 504313,
+          "seconds": 224.10698873130605
+        },
+        "S": {
+          "tokens": 457597,
+          "seconds": 218.40349236992188
+        }
+      }
+    },
+    {
+      "case_id": "cf22b7bf",
+      "complete": false,
+      "quality_on_observed_tasks": null,
+      "future_totals": {
+        "F": {
+          "tokens": null,
+          "seconds": null,
+          "completed": 0
+        },
+        "S": {
+          "tokens": null,
+          "seconds": null,
+          "completed": 0
+        }
+      },
+      "S_over_F_tokens": null,
+      "net_saved_seconds": null,
+      "confirmation_history_pass": null,
+      "delta_save_seconds": 0.08783045713789761,
+      "delta_save_tokens": 0,
+      "common_G_tokens": 258630,
+      "common_G_seconds": 114.41797426901758,
+      "note_bytes": 1885,
+      "note_sha256": "2ce7662baabbe768a8b629010a2d4121e4201b37d5dc7d37d4fd2780691ae9fd",
+      "pairs": [
+        {
+          "future": "coach_message",
+          "arms": {
+            "F": {
+              "status": "NOT_ALLOCATED_BUDGET_GATE"
+            },
+            "S": {
+              "status": "NOT_ALLOCATED_BUDGET_GATE"
+            }
+          }
+        },
+        {
+          "future": "progress_table",
+          "arms": {
+            "F": {
+              "status": "NOT_ALLOCATED_BUDGET_GATE"
+            },
+            "S": {
+              "status": "NOT_ALLOCATED_BUDGET_GATE"
+            }
+          }
+        }
+      ],
+      "counterfactual_paths": null
+    }
+  ],
+  "N5_not_allocated": [
+    "r-cf22b7bf-coach_message-F",
+    "r-cf22b7bf-coach_message-S",
+    "r-cf22b7bf-progress_table-F",
+    "r-cf22b7bf-progress_table-S"
+  ],
+  "observed_N5_history_failures": [],
+  "max_N4_pair_S_over_F_tokens": 0.9410037735246954,
+  "max_observed_N5_pair_S_over_F_tokens": 1.0985823510672188,
+  "model_allocations": 17,
+  "actual_model_sessions": 16,
+  "known_total_tokens": 2402257,
+  "known_input_tokens": 2382863,
+  "known_output_tokens": 19394,
+  "cached_input_tokens_subset": 1965056,
+  "phase_allocations": {
+    "N0_N2": 0,
+    "N3_N4": 11,
+    "N5": 6
+  },
+  "all_allocations_terminal": true,
+  "unknown_started_usage": false,
+  "all_launch_gates_replayed": true,
+  "allocations": [
+    {
+      "allocation_id": "r-27016adc-G",
+      "phase": "N3_N4",
+      "case_id": "27016adc",
+      "arm": "G",
+      "tokens": 0,
+      "model_started": false,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cached_input_tokens": 0,
+      "raw_online_seconds": 48.65208366396837,
+      "operational_online_seconds": null,
+      "instrumentation_seconds": null,
+      "returncode": 1,
+      "stop_reason": null,
+      "status": "PRE_MODEL_INSTRUMENTATION_TIMEOUT",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/sessions/r-27016adc-G"
+    },
+    {
+      "allocation_id": "r-27016adc-G-r2",
+      "phase": "N3_N4",
+      "case_id": "27016adc",
+      "arm": "G",
+      "tokens": 221349,
+      "model_started": true,
+      "input_tokens": 219356,
+      "output_tokens": 1993,
+      "cached_input_tokens": 178816,
+      "raw_online_seconds": 116.25783105194569,
+      "operational_online_seconds": 116.25783105194569,
+      "instrumentation_seconds": 0.05740573210641742,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/sessions/r-27016adc-G-r2"
+    },
+    {
+      "allocation_id": "r-852ce960-G",
+      "phase": "N3_N4",
+      "case_id": "852ce960",
+      "arm": "G",
+      "tokens": 261445,
+      "model_started": true,
+      "input_tokens": 258603,
+      "output_tokens": 2842,
+      "cached_input_tokens": 226944,
+      "raw_online_seconds": 163.34134372905828,
+      "operational_online_seconds": 163.34134372905828,
+      "instrumentation_seconds": 0.08101611793972552,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-low-cost-reuse/n0n1-20260906a/sessions/r-852ce960-G"
+    },
+    {
+      "allocation_id": "r-27016adc-contractor-F",
+      "phase": "N3_N4",
+      "case_id": "27016adc",
+      "arm": "F",
+      "tokens": 144834,
+      "model_started": true,
+      "input_tokens": 144040,
+      "output_tokens": 794,
+      "cached_input_tokens": 113664,
+      "raw_online_seconds": 73.59639798407443,
+      "operational_online_seconds": 73.59639798407443,
+      "instrumentation_seconds": 0.055864972062408924,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-27016adc-contractor-F"
+    },
+    {
+      "allocation_id": "r-27016adc-contractor-S",
+      "phase": "N3_N4",
+      "case_id": "27016adc",
+      "arm": "S",
+      "tokens": 92831,
+      "model_started": true,
+      "input_tokens": 92329,
+      "output_tokens": 502,
+      "cached_input_tokens": 79872,
+      "raw_online_seconds": 52.2803695271723,
+      "operational_online_seconds": 52.2803695271723,
+      "instrumentation_seconds": 0.04627241590060294,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-27016adc-contractor-S"
+    },
+    {
+      "allocation_id": "r-27016adc-planning_table-S",
+      "phase": "N3_N4",
+      "case_id": "27016adc",
+      "arm": "S",
+      "tokens": 99380,
+      "model_started": true,
+      "input_tokens": 98554,
+      "output_tokens": 826,
+      "cached_input_tokens": 79744,
+      "raw_online_seconds": 58.68139789206907,
+      "operational_online_seconds": 58.68139789206907,
+      "instrumentation_seconds": 0.062240036902949214,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-27016adc-planning_table-S"
+    },
+    {
+      "allocation_id": "r-27016adc-planning_table-F",
+      "phase": "N3_N4",
+      "case_id": "27016adc",
+      "arm": "F",
+      "tokens": 129337,
+      "model_started": true,
+      "input_tokens": 128313,
+      "output_tokens": 1024,
+      "cached_input_tokens": 92928,
+      "raw_online_seconds": 57.19652583100833,
+      "operational_online_seconds": 57.19652583100833,
+      "instrumentation_seconds": 0.045091025065630674,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-27016adc-planning_table-F"
+    },
+    {
+      "allocation_id": "r-852ce960-lender_email-S",
+      "phase": "N3_N4",
+      "case_id": "852ce960",
+      "arm": "S",
+      "tokens": 98708,
+      "model_started": true,
+      "input_tokens": 98040,
+      "output_tokens": 668,
+      "cached_input_tokens": 84608,
+      "raw_online_seconds": 46.107849035877734,
+      "operational_online_seconds": 46.107849035877734,
+      "instrumentation_seconds": 0.056259277975186706,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-852ce960-lender_email-S"
+    },
+    {
+      "allocation_id": "r-852ce960-lender_email-F",
+      "phase": "N3_N4",
+      "case_id": "852ce960",
+      "arm": "F",
+      "tokens": 131934,
+      "model_started": true,
+      "input_tokens": 131253,
+      "output_tokens": 681,
+      "cached_input_tokens": 105600,
+      "raw_online_seconds": 49.76013444410637,
+      "operational_online_seconds": 49.76013444410637,
+      "instrumentation_seconds": 0.04869553889147937,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-852ce960-lender_email-F"
+    },
+    {
+      "allocation_id": "r-852ce960-seller_credit-F",
+      "phase": "N3_N4",
+      "case_id": "852ce960",
+      "arm": "F",
+      "tokens": 125347,
+      "model_started": true,
+      "input_tokens": 124260,
+      "output_tokens": 1087,
+      "cached_input_tokens": 96000,
+      "raw_online_seconds": 61.180020997999236,
+      "operational_online_seconds": 61.180020997999236,
+      "instrumentation_seconds": 0.07296415721066296,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-852ce960-seller_credit-F"
+    },
+    {
+      "allocation_id": "r-852ce960-seller_credit-S",
+      "phase": "N3_N4",
+      "case_id": "852ce960",
+      "arm": "S",
+      "tokens": 117952,
+      "model_started": true,
+      "input_tokens": 117009,
+      "output_tokens": 943,
+      "cached_input_tokens": 99712,
+      "raw_online_seconds": 59.19329826091416,
+      "operational_online_seconds": 59.19329826091416,
+      "instrumentation_seconds": 0.06493029091507196,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-852ce960-seller_credit-S"
+    },
+    {
+      "allocation_id": "r-ba358f49-G",
+      "phase": "N5",
+      "case_id": "ba358f49",
+      "arm": "G",
+      "tokens": 241400,
+      "model_started": true,
+      "input_tokens": 239331,
+      "output_tokens": 2069,
+      "cached_input_tokens": 206208,
+      "raw_online_seconds": 100.30077538499609,
+      "operational_online_seconds": 100.30077538499609,
+      "instrumentation_seconds": 0.058150395983830094,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-ba358f49-G"
+    },
+    {
+      "allocation_id": "r-cf22b7bf-G",
+      "phase": "N5",
+      "case_id": "cf22b7bf",
+      "arm": "G",
+      "tokens": 258630,
+      "model_started": true,
+      "input_tokens": 256162,
+      "output_tokens": 2468,
+      "cached_input_tokens": 214784,
+      "raw_online_seconds": 114.41797426901758,
+      "operational_online_seconds": 114.41797426901758,
+      "instrumentation_seconds": 0.04873972595669329,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-cf22b7bf-G"
+    },
+    {
+      "allocation_id": "r-ba358f49-advisor_email-F",
+      "phase": "N5",
+      "case_id": "ba358f49",
+      "arm": "F",
+      "tokens": 125560,
+      "model_started": true,
+      "input_tokens": 124629,
+      "output_tokens": 931,
+      "cached_input_tokens": 100736,
+      "raw_online_seconds": 65.18952957214788,
+      "operational_online_seconds": 65.18952957214788,
+      "instrumentation_seconds": 0.0671720418613404,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-ba358f49-advisor_email-F"
+    },
+    {
+      "allocation_id": "r-ba358f49-advisor_email-S",
+      "phase": "N5",
+      "case_id": "ba358f49",
+      "arm": "S",
+      "tokens": 137938,
+      "model_started": true,
+      "input_tokens": 137154,
+      "output_tokens": 784,
+      "cached_input_tokens": 119936,
+      "raw_online_seconds": 62.716045297915116,
+      "operational_online_seconds": 62.716045297915116,
+      "instrumentation_seconds": 0.03844371507875621,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-ba358f49-advisor_email-S"
+    },
+    {
+      "allocation_id": "r-ba358f49-study_allocation-S",
+      "phase": "N5",
+      "case_id": "ba358f49",
+      "arm": "S",
+      "tokens": 78259,
+      "model_started": true,
+      "input_tokens": 77483,
+      "output_tokens": 776,
+      "cached_input_tokens": 54272,
+      "raw_online_seconds": 55.300517020979896,
+      "operational_online_seconds": 55.300517020979896,
+      "instrumentation_seconds": 0.04361610300838947,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-ba358f49-study_allocation-S"
+    },
+    {
+      "allocation_id": "r-ba358f49-study_allocation-F",
+      "phase": "N5",
+      "case_id": "ba358f49",
+      "arm": "F",
+      "tokens": 137353,
+      "model_started": true,
+      "input_tokens": 136347,
+      "output_tokens": 1006,
+      "cached_input_tokens": 111232,
+      "raw_online_seconds": 58.616683774162084,
+      "operational_online_seconds": 58.616683774162084,
+      "instrumentation_seconds": 0.07454686099663377,
+      "returncode": 0,
+      "stop_reason": null,
+      "status": "COMPLETED",
+      "artifact": "artifacts/v02-state-payload-fidelity/run-20260906a/sessions/r-ba358f49-study_allocation-F"
+    }
+  ],
+  "checks": {
+    "runtime_pg_passed": 971,
+    "runtime_pg_skipped": 1,
+    "lab_passed": 158,
+    "static_boundary_build": "PASS",
+    "unchanged_G_public_roundtrips": 2
+  },
+  "later_model_inputs": "UNOBSERVED; launcher bootstrap file verified",
+  "quality_review": "Root offline source review; not independent or human gold",
+  "raw_online_seconds_all_allocations": 1242.7887777374126,
+  "research_cost_limitations": [
+    "Prior pre-exec failure operational partition unknown",
+    "Root engineering and full research setup time not completely measured",
+    "Capture, branch seeding and instrumentation remain separate research overhead"
+  ],
+  "cleanup": {
+    "status": "COMPLETE",
+    "stopped_service_pids": {
+      "api": 110986,
+      "worker": 110987
+    },
+    "postgres_container": "run-20260906a-pg-postgres-1",
+    "postgres_status": "exited",
+    "stopped_only_run_owned_services": true,
+    "owned_mcp_processes_remaining": 0,
+    "host_containers_absent": [
+      "v02-host-9badb6e7fd4a7308",
+      "v02-host-8adb6d0f8753319a",
+      "v02-host-d055a392e96a421c",
+      "v02-host-0375d0f036092756",
+      "v02-host-f9317fe8a0e498a7",
+      "v02-host-2c7839ceb1b3a60f",
+      "v02-host-18507b57612122c9",
+      "v02-host-1d6e54f6865b5b03",
+      "v02-host-f6cc374f1f48adaa",
+      "v02-host-439bee2f1194ebda",
+      "v02-host-a65d1e4bccab34fd",
+      "v02-host-d28bbf1b1fda4d48",
+      "v02-host-f5d4c05d9becfb24",
+      "v02-host-a257ec3332f98337"
+    ],
+    "auth_copies_remaining": 0,
+    "database_volume_retained": true,
+    "test_database_retained": "milai_payload_checks",
+    "network_retained": "run-20260906a-pg_default",
+    "failed_artifacts_retained": true,
+    "old_services_or_volumes_changed": false,
+    "public_deployment": false
+  },
+  "public_deployment": false,
+  "automatic_maintenance": false,
+  "formal_500_scoring": false,
+  "schema_status": "EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE"
+}

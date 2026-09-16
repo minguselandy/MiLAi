@@ -1,0 +1,112 @@
+{
+  "schema_version": "v02-source-evaluation-v1",
+  "material_status": "OPEN_DEVELOPMENT_NOT_HOLDOUT",
+  "source_sha256": "9a9186bca9af27696878c06b3d65ec4f846fad7429e9e8aa5167a7d0c8def5ee",
+  "question": "How many items of clothing do I need to pick up or return from a store?",
+  "question_date": "2023/02/15 (Wed) 23:50",
+  "first_use_boundary": "First actual downstream use of the count, an external action relying on it, or final delivered answer. Undelivered drafts do not automatically count; no retrospective draft relabeling.",
+  "necessary_conditions": [
+    "Interpret the question at its supplied question_date, using reported outstanding actions; do not invent later completion.",
+    "Count distinct pending store-related items rather than mentions or the number of individual shoes in a pair.",
+    "The source-based expected count is two: one blazer and one pair of exchanged boots.",
+    "If explanations identify items/actions, do not double-count the boots, treat the planned blazer pickup as completed, or include the sweater loan or laundry as store errands."
+  ],
+  "expected_count": 2,
+  "scope_assumptions": [
+    "A pair of boots is one clothing item for this task.",
+    "Dry-cleaning collection is included in the question’s store-related pickup scope.",
+    "Absence of a completion report is not proof of real-world non-completion; conclusions are bounded to the supplied archive."
+  ],
+  "source_assertions": [
+    {
+      "statement": "The navy blue blazer was reported awaiting dry-cleaning pickup; a later intention to go is not confirmation of completion.",
+      "spans": [
+        {
+          "session_ordinal": 11,
+          "turn_ordinal": 0,
+          "role": "user",
+          "start": 0,
+          "end": 226,
+          "sha256": "6503b4986e3122b020548fb8abc16cafbc17f0cb3e17d697737ad7cfd32aef5c"
+        },
+        {
+          "session_ordinal": 11,
+          "turn_ordinal": 10,
+          "role": "user",
+          "start": 0,
+          "end": 228,
+          "sha256": "847fea90d27fbb1ea311b710bf84b3bdcc830a11ecd39a9b893fd0acd6000249"
+        }
+      ]
+    },
+    {
+      "statement": "The exchanged Zara boots are one outstanding pair to collect; the two mentions describe the same purchase/exchange rather than two separate outstanding items.",
+      "spans": [
+        {
+          "session_ordinal": 19,
+          "turn_ordinal": 6,
+          "role": "user",
+          "start": 0,
+          "end": 187,
+          "sha256": "7bc2dc01c6a57c8e5fd7ea721540a285731d2304fedb9dfc6233c48a89d3cfd7"
+        },
+        {
+          "session_ordinal": 30,
+          "turn_ordinal": 4,
+          "role": "user",
+          "start": 0,
+          "end": 261,
+          "sha256": "ef6d7d686f42d702c6ec934f7672c6aa71620cfaf3827e6444a05c415be61384"
+        }
+      ]
+    },
+    {
+      "statement": "The green sweater is with the sister, not a store pickup or return.",
+      "spans": [
+        {
+          "session_ordinal": 19,
+          "turn_ordinal": 2,
+          "role": "user",
+          "start": 0,
+          "end": 220,
+          "sha256": "7d2c2515fef9e52eff31bc56f0bad9a471be770f914aaa525cbf9d27c1d85afa"
+        }
+      ]
+    },
+    {
+      "statement": "The black jeans and white shirt are described as recent purchases, without an outstanding store action in these reports.",
+      "spans": [
+        {
+          "session_ordinal": 11,
+          "turn_ordinal": 8,
+          "role": "user",
+          "start": 0,
+          "end": 411,
+          "sha256": "e602d5dcc081340d9b7491d5a35af45f24ddd0753dce69c463d795910742565e"
+        }
+      ]
+    },
+    {
+      "statement": "Washing yoga pants is a laundry task, not a store pickup or return.",
+      "spans": [
+        {
+          "session_ordinal": 19,
+          "turn_ordinal": 10,
+          "role": "user",
+          "start": 0,
+          "end": 144,
+          "sha256": "118fed82956046a69e77d9b271a94b6f4b8a56f4caeafc2e4134ad6e97d49278"
+        }
+      ]
+    }
+  ],
+  "not_evaluated": [
+    "Overall quality of archive summarization",
+    "Arbitrary semantic quality of prose",
+    "Autonomous memory maintenance",
+    "Held-out generalization"
+  ],
+  "automated_semantic_scoring": false,
+  "semantic_result": "NOT_EVALUATED_UNTIL_RELIABLE_ASSESSMENT",
+  "judge_model_allocations": 0
+}

@@ -1,0 +1,33 @@
+{
+  "case_id": "g4-writing-omitted",
+  "domain": "content_writing",
+  "initial_type": "omitted",
+  "development_status": "constructed-new-family-after-strategy-freeze",
+  "task": "为社区口述史展写一版可供编辑审阅的导览开头，约150字，并在文末列出本稿涉及的事实核对点。这是本次独立文稿任务。资料在 sources/。",
+  "followup": null,
+  "initial_payload": {
+    "note": "口述史展主题为河岸街区的日常生活，导览应亲切、面向首次参观者，不替受访者添加情绪或动机。",
+    "sources": [
+      "sources/editorial.txt"
+    ]
+  },
+  "sources": {
+    "editorial.txt": "口述史展导览面向首次参观者，语气亲切。展览使用12位受访者的节选，不代表全体居民。受访者原话只可按提供版本引用，不添加情绪、动机或集体共识。展厅免费，周三至周日10:00–17:00开放，周一周二不开放。",
+    "excerpt.txt": "受访者阿禾原话：“傍晚我常到河边坐一会儿。”展品包括旧街道照片、声音片段与手绘地图。",
+    "other.txt": "城市工业展收录120人访谈，需购票；不是本次口述史展。"
+  },
+  "evaluation": {
+    "required": [
+      "12 interviewees not all residents",
+      "free admission Wednesday–Sunday10:00–17:00 if opening details included, no contradictory detail",
+      "quote exact if used; no invented emotion motive or consensus",
+      "welcoming intro around150Chinesecharacters and explicit fact-check points"
+    ],
+    "correct_initial_facts": [
+      "welcoming first-time audience",
+      "no invented emotion or motive"
+    ],
+    "key_source": "editorial.txt",
+    "save_value": "One-time supplied material expansion; no preplanned future"
+  }
+}

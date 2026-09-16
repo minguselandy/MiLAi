@@ -1,0 +1,140 @@
+{
+  "artifact_id": "MILA_V0224_PUBLIC_BASELINE_SOURCE_AUDIT_20260913",
+  "version": "0.1",
+  "status": "SOURCE_SNAPSHOT_ONLY_NOT_EFFECT_ADMITTED",
+  "checked_at_utc": "2026-09-13T00:46:11Z",
+  "purpose": "Read-only method/source audit supporting a proposed Goal revision; not an execution amendment or benchmark run.",
+  "active_execution_contract_changed": false,
+  "network": {
+    "public_reference_fetch": true,
+    "provider_http_requests": 0,
+    "model_requests": 0,
+    "judge_requests": 0
+  },
+  "raw_storage": {
+    "directory": "/cra/memory/milai-v0224-public-source-audit.S9bhWF",
+    "outside_lab_git": true,
+    "file_count": 6,
+    "total_bytes": 28081
+  },
+  "artifacts": [
+    {
+      "id": "adaptivem_policy",
+      "repo": "zjunlp/MemTrapBench",
+      "commit": "02fc32a2b5ffecce893e353b29fcd49242ea71cf",
+      "path": "AdaptiveMem/skill.txt",
+      "local_file": "adaptivem-skill.txt",
+      "bytes": 2209,
+      "sha256": "cc279ded25d30649c55ee2a62866bf41537d2aa58d2475748ddd6da27b60b4ad",
+      "git_blob_sha1": "d73d5a615105b3aec414606a146dccc14e1b6d88",
+      "tree_blob_verified": true,
+      "url": "https://raw.githubusercontent.com/zjunlp/MemTrapBench/02fc32a2b5ffecce893e353b29fcd49242ea71cf/AdaptiveMem/skill.txt",
+      "local_path": "/cra/memory/milai-v0224-public-source-audit.S9bhWF/adaptivem-skill.txt"
+    },
+    {
+      "id": "memtrapbench_readme",
+      "repo": "zjunlp/MemTrapBench",
+      "commit": "02fc32a2b5ffecce893e353b29fcd49242ea71cf",
+      "path": "README.md",
+      "local_file": "memtrapbench-readme.md",
+      "bytes": 15167,
+      "sha256": "c7c234973d162903722d704dd3d5c9afae0fecb5fa803cc0aa6254f2f36452f2",
+      "git_blob_sha1": "cf511e2c3875af7622d01bf43e5bf3b9e5026ce7",
+      "tree_blob_verified": true,
+      "url": "https://raw.githubusercontent.com/zjunlp/MemTrapBench/02fc32a2b5ffecce893e353b29fcd49242ea71cf/README.md",
+      "local_path": "/cra/memory/milai-v0224-public-source-audit.S9bhWF/memtrapbench-readme.md"
+    },
+    {
+      "id": "memtrapbench_retrieved_runner",
+      "repo": "zjunlp/MemTrapBench",
+      "commit": "02fc32a2b5ffecce893e353b29fcd49242ea71cf",
+      "path": "runners/eval/eval_retrieved_memory.py",
+      "local_file": "memtrapbench-eval-retrieved-memory.py",
+      "bytes": 4999,
+      "sha256": "b41ff711453b7879504c828fdc28755c81195a79ea85dc0b1bcf150db725fc59",
+      "git_blob_sha1": "42cf5371f33fb666887e570e2053fd7cde70ef80",
+      "tree_blob_verified": true,
+      "url": "https://raw.githubusercontent.com/zjunlp/MemTrapBench/02fc32a2b5ffecce893e353b29fcd49242ea71cf/runners/eval/eval_retrieved_memory.py",
+      "local_path": "/cra/memory/milai-v0224-public-source-audit.S9bhWF/memtrapbench-eval-retrieved-memory.py"
+    },
+    {
+      "id": "stale_readme",
+      "repo": "icedreamc/STALE",
+      "commit": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+      "path": "README.md",
+      "local_file": "stale-readme.md",
+      "bytes": 3131,
+      "sha256": "b8d519251030dca410b262eb9ba969ad92a2a029a1984df2470fa2bd984bbcce",
+      "git_blob_sha1": "72c0cb44a06b2083971e7159bee906b204016867",
+      "tree_blob_verified": true,
+      "url": "https://raw.githubusercontent.com/icedreamc/STALE/ea7d391103a151927cd29d2f01d87597a782bdcb/README.md",
+      "local_path": "/cra/memory/milai-v0224-public-source-audit.S9bhWF/stale-readme.md"
+    },
+    {
+      "id": "stale_license",
+      "repo": "icedreamc/STALE",
+      "commit": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+      "path": "LICENSE",
+      "local_file": "stale-license.txt",
+      "bytes": 1069,
+      "sha256": "0adcc27078a1b9a5f9905b7bba7b9b1a280d56828c2c00b6db17c872ee549bb6",
+      "git_blob_sha1": "c9c09b3babce77f093dad1b61aa6467861fa1155",
+      "tree_blob_verified": true,
+      "url": "https://raw.githubusercontent.com/icedreamc/STALE/ea7d391103a151927cd29d2f01d87597a782bdcb/LICENSE",
+      "local_path": "/cra/memory/milai-v0224-public-source-audit.S9bhWF/stale-license.txt"
+    },
+    {
+      "id": "cupmem_readme",
+      "repo": "icedreamc/STALE",
+      "commit": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+      "path": "cup_mem/README.md",
+      "local_file": "cup-mem-readme.md",
+      "bytes": 1506,
+      "sha256": "b9379429de16337a0eb71ecdc2037d3aa4fad420d3165ca7e3d6f65b9f6fa1ff",
+      "git_blob_sha1": "e8de10f6f009d52775759b9e5a92f2cdef3131ea",
+      "tree_blob_verified": false,
+      "url": "https://raw.githubusercontent.com/icedreamc/STALE/ea7d391103a151927cd29d2f01d87597a782bdcb/cup_mem/README.md",
+      "local_path": "/cra/memory/milai-v0224-public-source-audit.S9bhWF/cup-mem-readme.md"
+    }
+  ],
+  "source_identity": {
+    "compliance_trap": {
+      "paper": "https://arxiv.org/abs/2607.10608",
+      "title": "The Compliance Trap: Diagnosing How AI Agents Consume Conflicting Memory",
+      "historical_matching_artifact_status": "HOLD_NOT_REPLACED"
+    },
+    "zjunlp_memtrapbench": {
+      "paper": "https://arxiv.org/abs/2608.20202",
+      "title": "MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use",
+      "repository": "https://github.com/zjunlp/MemTrapBench",
+      "commit": "02fc32a2b5ffecce893e353b29fcd49242ea71cf",
+      "same_as_compliance_trap": false
+    }
+  },
+  "licenses": {
+    "adaptivem": {
+      "status": "NOT_DECLARED_IN_CHECKED_TREE",
+      "api_license": null,
+      "tree_complete": true,
+      "named_license_copying_notice_files": [],
+      "decision": "Resolve intended-use and redistribution permissions before integration/publication; no project license inferred."
+    },
+    "cupmem": {
+      "status": "MIT_TEXT_VERIFIED_AT_PIN",
+      "license_artifact": "stale_license",
+      "coverage_caveat": "Repository license does not establish rights for every dataset or dependency."
+    },
+    "tepa": {
+      "status": "PAPER_ONLY_EXECUTABLE_ARTIFACT_NOT_VERIFIED",
+      "paper": "https://arxiv.org/html/2608.07429v2"
+    }
+  },
+  "limitations": [
+    "Six individual artifacts are byte-pinned; this is not a full repository, dependency, dataset, runner, or benchmark reproduction.",
+    "External skill.txt is untrusted research material, not an installed Codex skill or an instruction for the current agent.",
+    "STALE top-level tree metadata was read; an additional cup_mem tree request returned HTTP 403. cup_mem/README.md was read at the immutable commit instead. Implementation internals were not audited.",
+    "No protected task body, per-item gold, or confirmation task was opened by this source audit.",
+    "No provider, experimental model, evaluator model, GPU, service, product, or business action was invoked.",
+    "Future policy transplant, full-system comparison and benchmark replication require different contracts and cannot share one causal claim."
+  ]
+}

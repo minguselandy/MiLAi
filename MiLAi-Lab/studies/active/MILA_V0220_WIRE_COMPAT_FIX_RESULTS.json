@@ -1,0 +1,65 @@
+{
+  "date": "2026-09-11",
+  "status": "WIRE_COMPATIBILITY_REPAIR_IMPLEMENTED_CPU_VERIFIED",
+  "revision": "UNIQUE_ITEMS_RUNTIME_V1",
+  "public_contract_unchanged": true,
+  "wire_schema_is_superset": true,
+  "full_validation_before_dispatch": true,
+  "auto_repair_or_retry": false,
+  "cpu_matrix": {
+    "original_roots": 4,
+    "business_targets": 25,
+    "original_full_rejected": 3,
+    "original_full_cpu_pass": 1,
+    "original_finish_cpu_pass": 4,
+    "wire_full_cpu_pass": 4,
+    "wire_finish_cpu_pass": 4,
+    "actual_parameter_checks": 16,
+    "engine_submissions": 0,
+    "live_generation_compatibility": "NOT_TESTED"
+  },
+  "mechanical_checks": {
+    "complete_reference_roundtrips": 25,
+    "idempotent_replays": 25,
+    "stale_version_rejections": 25,
+    "identity_mutant_rejections": 25,
+    "duplicate_mutant_rejections": 4,
+    "wire_accepts_duplicate_but_full_validator_rejects": 2,
+    "new_unit_tests": 40,
+    "mock_http_is_model_evidence": false
+  },
+  "history": {
+    "requests": 3,
+    "known_raw_tokens": 2221,
+    "unknown_requests": 1,
+    "unresolved_reservation_raw": 28284,
+    "actual_total_raw_tokens": null,
+    "ledger_modified": false,
+    "stop_verified": "UNSETTLED_USAGE_NO_RETRY"
+  },
+  "this_turn": {
+    "new_model_requests": 0,
+    "judge_requests": 0,
+    "shared_service_changes": false,
+    "V2_resumed": false,
+    "new_state": false,
+    "protected_pool_access": false,
+    "A0_changed": false,
+    "schema_freeze": "NO-GO"
+  },
+  "checks": {
+    "pytest_passed": 1545,
+    "pytest_skipped": 1,
+    "pytest_seconds": 50.56,
+    "boundary": "PASS",
+    "ruff": "PASS",
+    "mypy": "PASS_39_FILES",
+    "build": "PASS"
+  },
+  "evidence": {
+    "root": "/cra/memory/mx_memory/evidence/v0220-wire-fix",
+    "20260911-v1/manifest.json": "5064dbb5139f134cfc304e92266d81efd7857b56b5f85a4917ea5112bf6c6561",
+    "20260911-v1/result.json": "bde9f7e751fe4b716341984e1d6817c6d6c1aa65e33a739cd4b99b418b1ac196",
+    "20260911-audit-v2/result.json": "dd7782d1d9696ca26529fe9ffc089aeb697de6ae8ea98d328f374ca2649b1c06"
+  }
+}

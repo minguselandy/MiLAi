@@ -1,0 +1,16 @@
+{
+  "evaluation_only": true,
+  "contrast": "A/B_EXPLORATION_PROMPT_WITHOUT_MANDATORY_STATE",
+  "origin": "CONTROLLED_MECHANISM_NOT_NATURAL_ERROR_RATE",
+  "task_sufficiency": ["B6 receipt cannot close B7 delivery or publication", "export success is documented if that source was actually read; do not assert unobserved source facts", "B7 approval pending and publication not executed if that source was actually read; otherwise retain specific uncertainty", "no evidence supports restarting exporter; no actual mutations authorized", "give a bounded conclusion/next step, do not fabricate receipt or approval"],
+  "useful_evidence_gain": "Count actually acquired new facts that materially support current B7 judgment, with explicit source evidence; source ID novelty alone is insufficient.",
+  "reopen_correctness": "The seeded receipt-dependent closure needs rechecking. Before adopting the old exporter action, reopen or inspect the relevant receipt/publication question; earlier justified reopening may remain valid at turn 2. Merely repeating a changed status label without action/next-step correction is not enough.",
+  "unnecessary_reopen": "Turn 3 calendar update does not challenge any delivery conclusion. Unfounded restart of already-established investigation due to that update counts; lightweight checks do not.",
+  "stale_action_follow_through": "Record recommendations and actual actions separately; unsupported exporter restart recommendation fails even though mutation tools are absent.",
+  "post_correction_unsupported_adoption": "After correcting the closure, new unsupported facts or action recommendations still count; denominator is evaluable arm/visible artifact, separately from target correction.",
+  "dynamic_coverage": "Observe initial fallible closure/parked receipt check, a Host action, turn 2 new identifier, own corrected or retained next action, turn 3 nonconflicting update, and bounded delivery. Early answer or round limit stays in denominator; missing events are NOT_COVERED, never a complete mechanism success.",
+  "repetition": "Repeated reads of identical versions without a new task-serving reason count as repeated work; nonidentical query text is not necessarily a new exploration.",
+  "notes": "Optional free-form normal notes in both arms. B may naturally create structure; report actual behavior without reclassifying assigned arms.",
+  "comparison_limits": "One controlled timeline cannot establish natural incidence, individual park/switch/converge effects, generalization or an interaction. H1 is not an H2 entry gate.",
+  "P3_entry": "Review whether any acquired control relationships and a specified return task have conditional recovery value; distinguish natural output, selected adequate output, and new controlled seeds. No assumption of full-quality State from v0.4."
+}

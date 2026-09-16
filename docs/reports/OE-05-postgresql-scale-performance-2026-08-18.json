@@ -1,0 +1,257 @@
+{
+  "cleanup": {
+    "connections_before_drop": 0,
+    "owner": "milai_owner",
+    "status": "PASS"
+  },
+  "database": "milai_smoke_scale_1d52dbc7b388ce6d50e4",
+  "finished_at": "2026-08-18T07:37:20.746340+00:00",
+  "format": "milai-postgresql-scale-benchmark-v1",
+  "gates": {
+    "100k_measured": true,
+    "10k_l0_p95_under_30ms": false,
+    "10k_l1_p95_under_100ms": true
+  },
+  "implementation_status": "CANDIDATE",
+  "machine": {
+    "logical_cpus": 32,
+    "platform": "Linux-5.15.0-86-generic-x86_64-with-glibc2.35"
+  },
+  "schema_status": "0.1.x EXPERIMENTAL",
+  "sizes": [
+    {
+      "claims": 1,
+      "routes": {
+        "L0": {
+          "cold_ms": 82.683,
+          "warm": {
+            "1": {
+              "p50_ms": 43.438,
+              "p95_ms": 78.021,
+              "p99_ms": 82.187,
+              "samples": 64,
+              "throughput_qps": 21.79
+            },
+            "16": {
+              "p50_ms": 224.605,
+              "p95_ms": 264.361,
+              "p99_ms": 290.869,
+              "samples": 64,
+              "throughput_qps": 68.17
+            },
+            "4": {
+              "p50_ms": 74.842,
+              "p95_ms": 149.677,
+              "p99_ms": 170.63,
+              "samples": 64,
+              "throughput_qps": 50.66
+            }
+          }
+        },
+        "L1": {
+          "cold_ms": 54.607,
+          "warm": {
+            "1": {
+              "p50_ms": 59.133,
+              "p95_ms": 108.572,
+              "p99_ms": 113.949,
+              "samples": 64,
+              "throughput_qps": 16.54
+            },
+            "16": {
+              "p50_ms": 289.371,
+              "p95_ms": 339.249,
+              "p99_ms": 356.523,
+              "samples": 64,
+              "throughput_qps": 52.37
+            },
+            "4": {
+              "p50_ms": 107.911,
+              "p95_ms": 204.541,
+              "p99_ms": 218.193,
+              "samples": 64,
+              "throughput_qps": 33.47
+            }
+          }
+        }
+      },
+      "seed_seconds": 0.221
+    },
+    {
+      "claims": 1000,
+      "routes": {
+        "L0": {
+          "cold_ms": 85.948,
+          "warm": {
+            "1": {
+              "p50_ms": 44.051,
+              "p95_ms": 83.351,
+              "p99_ms": 85.276,
+              "samples": 64,
+              "throughput_qps": 21.24
+            },
+            "16": {
+              "p50_ms": 237.377,
+              "p95_ms": 283.73,
+              "p99_ms": 286.055,
+              "samples": 64,
+              "throughput_qps": 65.5
+            },
+            "4": {
+              "p50_ms": 71.207,
+              "p95_ms": 116.473,
+              "p99_ms": 125.439,
+              "samples": 64,
+              "throughput_qps": 53.88
+            }
+          }
+        },
+        "L1": {
+          "cold_ms": 37.247,
+          "warm": {
+            "1": {
+              "p50_ms": 31.75,
+              "p95_ms": 66.031,
+              "p99_ms": 80.361,
+              "samples": 64,
+              "throughput_qps": 26.15
+            },
+            "16": {
+              "p50_ms": 281.53,
+              "p95_ms": 1330.815,
+              "p99_ms": 1359.662,
+              "samples": 64,
+              "throughput_qps": 29.66
+            },
+            "4": {
+              "p50_ms": 95.135,
+              "p95_ms": 131.869,
+              "p99_ms": 136.398,
+              "samples": 64,
+              "throughput_qps": 41.25
+            }
+          }
+        }
+      },
+      "seed_seconds": 0.534
+    },
+    {
+      "claims": 10000,
+      "routes": {
+        "L0": {
+          "cold_ms": 41.123,
+          "warm": {
+            "1": {
+              "p50_ms": 49.879,
+              "p95_ms": 86.477,
+              "p99_ms": 103.977,
+              "samples": 64,
+              "throughput_qps": 18.82
+            },
+            "16": {
+              "p50_ms": 231.908,
+              "p95_ms": 330.046,
+              "p99_ms": 332.055,
+              "samples": 64,
+              "throughput_qps": 62.16
+            },
+            "4": {
+              "p50_ms": 77.804,
+              "p95_ms": 120.224,
+              "p99_ms": 123.485,
+              "samples": 64,
+              "throughput_qps": 48.99
+            }
+          }
+        },
+        "L1": {
+          "cold_ms": 30.616,
+          "warm": {
+            "1": {
+              "p50_ms": 53.326,
+              "p95_ms": 96.286,
+              "p99_ms": 106.782,
+              "samples": 64,
+              "throughput_qps": 17.35
+            },
+            "16": {
+              "p50_ms": 281.243,
+              "p95_ms": 323.448,
+              "p99_ms": 325.023,
+              "samples": 64,
+              "throughput_qps": 54.93
+            },
+            "4": {
+              "p50_ms": 81.259,
+              "p95_ms": 124.041,
+              "p99_ms": 128.519,
+              "samples": 64,
+              "throughput_qps": 45.12
+            }
+          }
+        }
+      },
+      "seed_seconds": 1.654
+    },
+    {
+      "claims": 100000,
+      "routes": {
+        "L0": {
+          "cold_ms": 29.279,
+          "warm": {
+            "1": {
+              "p50_ms": 17.087,
+              "p95_ms": 41.187,
+              "p99_ms": 58.541,
+              "samples": 64,
+              "throughput_qps": 43.92
+            },
+            "16": {
+              "p50_ms": 228.333,
+              "p95_ms": 276.39,
+              "p99_ms": 282.186,
+              "samples": 64,
+              "throughput_qps": 62.05
+            },
+            "4": {
+              "p50_ms": 54.529,
+              "p95_ms": 123.778,
+              "p99_ms": 168.047,
+              "samples": 64,
+              "throughput_qps": 65.7
+            }
+          }
+        },
+        "L1": {
+          "cold_ms": 57.841,
+          "warm": {
+            "1": {
+              "p50_ms": 66.752,
+              "p95_ms": 128.113,
+              "p99_ms": 148.632,
+              "samples": 64,
+              "throughput_qps": 14.15
+            },
+            "16": {
+              "p50_ms": 293.602,
+              "p95_ms": 335.759,
+              "p99_ms": 347.306,
+              "samples": 64,
+              "throughput_qps": 51.44
+            },
+            "4": {
+              "p50_ms": 74.18,
+              "p95_ms": 101.246,
+              "p99_ms": 106.764,
+              "samples": 64,
+              "throughput_qps": 52.7
+            }
+          }
+        }
+      },
+      "seed_seconds": 15.65
+    }
+  ],
+  "started_at": "2026-08-18T07:36:06.882238+00:00",
+  "status": "FAIL"
+}

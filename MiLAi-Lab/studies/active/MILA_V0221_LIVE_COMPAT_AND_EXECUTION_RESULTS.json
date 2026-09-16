@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-11",
+  "batch_id": "20260911-r1",
+  "status": "SERVICE_NOT_READY_BOUNDED_CHECK_COMPLETE",
+  "terminal_basis": "Goal section 10.2 bounded non-pass path",
+  "pass_path_complete": false,
+  "full_W1_implementation_complete": false,
+  "authorization": "User granted path B for W2 and conditional W3; old unknown retained",
+  "additional_user_constraint": "No further GPU/NVML/CUDA queries or inference without separate agreement",
+  "readiness": {
+    "backend_identity": "MATCH",
+    "selected_service_args": "MATCH",
+    "models": "MATCH_HTTP200",
+    "health": "HTTP200",
+    "host_gpu_query": "PASS",
+    "container_nvml_exit_code": 255,
+    "diagnostic_cuInit_code": 100,
+    "diagnostic_cuInit_error": "CUDA_ERROR_NO_DEVICE",
+    "existing_engine_kernel_failure_proven": false
+  },
+  "W2": {"attempted": 0, "passed": null, "unrun": 16, "status": "NOT_TRIGGERED"},
+  "W3": {"attempted_chains": 0, "passed": null, "unrun_chains": 24, "status": "NOT_TRIGGERED"},
+  "historical_usage": {
+    "requests": 3, "settled_requests": 2, "known_raw_tokens": 2221,
+    "unknown_requests": 1, "unresolved_raw_reservation": 28284,
+    "actual_total_raw_tokens": null, "historical_ledger_modified": false
+  },
+  "new_batch_usage": {
+    "model_requests": 0, "actual_raw_tokens": 0, "unknown_requests": 0,
+    "tokenize_requests": 0, "judge_requests": 0, "raw_token_cap": null
+  },
+  "agent_work_usage": "Reported separately by thread Goal accounting; not experiment model raw",
+  "checks": {
+    "new_authorization_scope_tests": 26,
+    "pytest_passed": 1571, "pytest_skipped": 1,
+    "skip_reason": "optional Host SDK wheel", "pytest_seconds": 50.62,
+    "boundary": "PASS", "ruff_src_tests_tools": "PASS",
+    "mypy": "PASS_39_SOURCE_FILES", "uv_build": "PASS", "git_diff_check": "PASS"
+  },
+  "unimplemented_or_unexercised": [
+    "Full cross-process batch authorization/unknown-usage coordinator",
+    "Authorized WireProvider transport integration",
+    "Actual full wire request/reference-trajectory capacity verification",
+    "New-batch full CPU/reference/Mock HTTP admission",
+    "W2 cold live worker and conditional W3 live runner"
+  ],
+  "scope": {
+    "shared_service_changed": false, "GPU_permissions_changed": false,
+    "new_business_tasks": false, "new_State": false, "Product_A0_changed": false,
+    "protected_pool_opened": false, "Memory_admitted": false,
+    "old_V2_worlds_unchanged": 24
+  },
+  "external_evidence_root": "/cra/memory/mx_memory/evidence/v0221/20260911-r1",
+  "evidence_sha256": {
+    "authorization.json": "baf04e29453cec6a48d2f958d87eedbf53963eaa98d9458719c2d0b6fb44e50c",
+    "manifest.json": "92ccbb5e711412ce2d666d64fa568403f7be84e5c266780776bbaafe5552bf1e",
+    "result.json": "ca1d901a8f74c8fa18363a3f4f36608ebe9b249aed2645331ef2f4f4ce70a7b3",
+    "stop.json": "29ba82f92a8c8ad9891166534e66224c4140fba3089f4d5e01528108b97b1511",
+    "service-diagnostic-v1/result.json": "c0fc26821fad27aaf3e53f1e4a6a515105a8591ac0568b520cc6679558c5d5d0",
+    "w4-audit-v1/result.json": "ec994bd092b4e8e8db301c7f205e7b3f4070c2189ff1c860f0c573ee1fe86a91",
+    "w4-audit-v1/unrun-matrix.json": "65865a48416b188d34730a1ecc2cfa0a6934191d0cd896dce4f1f9968f9cd4b7"
+  }
+}

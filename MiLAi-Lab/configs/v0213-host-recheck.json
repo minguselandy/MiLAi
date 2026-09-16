@@ -1,0 +1,20 @@
+{
+  "revision": "H1_SOURCE_BOOTSTRAP_TYPED_DELIVERY_V1",
+  "authorization": "Active user goal: Host source entry use, valid intent delivery, cold-start recheck; keep A0, no State, no sample expansion",
+  "tasks": ["task-01", "task-02"],
+  "sample_class": "EXPOSED_DEVELOPMENT_REGRESSION_NOT_NEW_INDEPENDENT_EVIDENCE",
+  "conditions": ["A0_UNCHANGED_INPUT", "H1_SOURCE_BOOTSTRAP_TYPED_DELIVERY"],
+  "cold_repeats": 2,
+  "max_generations": 24,
+  "max_generations_per_arm": 3,
+  "max_acquisition_calls_per_arm_including_bootstrap": 6,
+  "max_seconds_per_arm": 300,
+  "cumulative_raw_cap": null,
+  "source_bootstrap": "One ordinary 4096-byte page from offset 0 per source; remainder via unchanged source tools; counted and model-presented",
+  "success": "H1 both fixed tasks in both cold repeats acquire source via actual interface and deliver full exact parameter intents; baseline remains A0. No retrieval or population benefit claim.",
+  "isolation": "Fresh Product instance per repeat; fresh Host process, principal/project/task per arm; no transcript, Note, State or evaluator reuse",
+  "post_output_policy_change": false,
+  "external_business_actions": false,
+  "public_deployment": false,
+  "state_addition": false
+}

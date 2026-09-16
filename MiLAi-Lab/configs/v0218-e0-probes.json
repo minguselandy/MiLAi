@@ -1,0 +1,32 @@
+{
+  "stage": "E0_HELPFUL_SCOPE_UNRESOLVED_PROBES",
+  "revision": "V2_COMMON_HOST_V4_ONLY_AFTER_PROTOCOL_REBASELINE",
+  "selection": "First two Helpful-capable profiles in the frozen source order; fixed before their E0 results, not selected for Agent Note content or failures.",
+  "roots": ["journalist_task5", "journalist_task1"],
+  "variants": ["helpful", "irrelevant", "unresolved"],
+  "arms": ["N0", "N1", "N2"],
+  "prior_waves": [
+    "/cra/memory/mx_memory/evidence/v0218/20260911/e0-baseline-wave1-v2",
+    "/cra/memory/mx_memory/evidence/v0218/20260911/e0-baseline-wave2-v2",
+    "/cra/memory/mx_memory/evidence/v0218/20260911/e0-baseline-wave3-v2"
+  ],
+  "A_policy": "One fresh natural A per root, then all nine B conditions from its same actual world and self-authored Note; no ideal seed and NO_WRITE does not trigger replacement.",
+  "new_A_cost": "Count once per root, separate from previous baseline A. This is a new exposed repeat, not an independent lineage.",
+  "episodes": 20,
+  "generation_cap": 16,
+  "max_requests": 320,
+  "seconds_per_episode": 900,
+  "batch_seconds": 19800,
+  "compatibility_requests": 0,
+  "raw_token_cap": null,
+  "model_generation_parallelism": 1,
+  "judge_requests": 0,
+  "mechanism_candidates": 0,
+  "limitations": [
+    "Both Helpful profiles are journalism; these controls do not establish cross-occupation generality.",
+    "Helpful hides a current source display, not ordinary history or existing business artifacts. N0 has the same authorized historical path as N1/N2.",
+    "Variants and current observations were frozen in original source contracts before any Agent Note for these roots; this config only schedules their evaluation.",
+    "Unresolved permits scoped clarification but requires all known facts to remain correct. Irrelevant must not erase applicable historical facts.",
+    "Prior standard waves must be terminal, settled, audited and cleaned up before this batch is frozen. New model calls require a separate immutable manifest."
+  ]
+}

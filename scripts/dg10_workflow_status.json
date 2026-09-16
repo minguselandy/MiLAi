@@ -1,0 +1,36 @@
+{
+  "schema": "milai.dg10.workflow-status.v1",
+  "goal_version": "0.4.0",
+  "development_ai_audits": 0,
+  "provider_authority": "DETERMINISTIC_DEV_RUN_CAPABILITY_ONLY",
+  "active_entrypoints": [
+    "scripts/run_dg10_f0.py",
+    "scripts/run_dg10_f0_native.py",
+    "scripts/run_dg10_t2_functional.py",
+    "scripts/run_dg10_t2_openworker.py",
+    "scripts/run_dg10_f1.py",
+    "scripts/run_dg10_f1_openworker.py",
+    "scripts/run_dg10_lme_product_smoke.py",
+    "scripts/run_dg10_lme_product_dev.py",
+    "scripts/run_dg10_minimal_serving.py",
+    "evals/agent_integration/f1.py",
+    "evals/agent_integration/f1_openworker.py",
+    "evals/agent_integration/openworker_adapter.py",
+    "runtime/src/milai/adapters/mcp_unix.py",
+    "evals/benchmark/lme_product_smoke.py",
+    "evals/serving/minimal_baseline.py"
+  ],
+  "legacy_frozen_patterns": [
+    "build_dg10_*audit*",
+    "*failed_ai_audit_receipt*",
+    "*supersession*",
+    "run_dg10_candidate*_ai_audit*",
+    "dg10_post_r3_provider_gate.py",
+    "run_dg10_vllm_openworker_e2e.py"
+  ],
+  "legacy_execution": "NOT_CALLED_BY_ACTIVE_DEVELOPMENT",
+  "final_review": {
+    "enabled_before_freeze": false,
+    "maximum_xhigh_calls_after_freeze": 2
+  }
+}

@@ -1,0 +1,320 @@
+{
+  "bfcl_dev_answer_labels_opened": true,
+  "bfcl_dev_case_count_semantically_opened": 80,
+  "bfcl_test_labels_or_outputs_opened": false,
+  "byte_closure": {
+    "function_source_GorillaFileSystem": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/gorilla_file_system.py",
+      "sha256": "84173750930b09aaa31b90547c9bd79ce75714682608b35e78a9c1ea259faf2b",
+      "size": 32759
+    },
+    "function_source_MathAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/math_api.py",
+      "sha256": "abde32cc25e71b2ff3acf4d028a3c005b98409c174aba4abddbfe1c018afb9a8",
+      "size": 12252
+    },
+    "function_source_MessageAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/message_api.py",
+      "sha256": "cf72af1635654147af17df1891a7fb354549e78a61930139f741a31f4be21121",
+      "size": 12534
+    },
+    "function_source_TicketAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/ticket_api.py",
+      "sha256": "6a9375aa6425410c07a151aef27f3e44e9ed1023bb5cc5c25f14f4a9b3c99116",
+      "size": 9677
+    },
+    "function_source_TradingBot": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/trading_bot.py",
+      "sha256": "cc2e3949035b561e9d07418b081561aa07b211672200e2e511aec074bf79fcb2",
+      "size": 23795
+    },
+    "function_source_TravelAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/travel_booking.py",
+      "sha256": "e698e22adccf0d6d41b297f2d5e44faebd828cef4752df6a4ffb1570c0c35296",
+      "size": 36647
+    },
+    "function_source_TwitterAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/posting_api.py",
+      "sha256": "32b887aaa37c7167ad9c84ddfa7bbb855c75d3c1edab19ba868aba29acc4cfa1",
+      "size": 12537
+    },
+    "function_source_VehicleControlAPI": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/vehicle_control.py",
+      "sha256": "f5f7a2f28968728927a98ae12ec68a32d70781cfb74c2d7b14801772362b12d1",
+      "size": 29559
+    },
+    "function_source__shared_long_context": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/func_source_code/long_context.py",
+      "sha256": "5c9a5710115609c779e5b2ccb43f6ad58271ed96f2ea7a797edb0d65c385aa38",
+      "size": 190330
+    },
+    "official_executable_backend_config": {
+      "path": "bfcl_eval/constants/executable_backend_config.py",
+      "sha256": "1214b960de5d86840e379007c70bc9570203e0b5a926ea740ff00c605a531e57",
+      "size": 1939
+    },
+    "official_multi_turn_checker": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/multi_turn_checker.py",
+      "sha256": "b3b787515eda3bf0e365e39634a8fc7f831763f010f716d35d86f96fd5aab1b5",
+      "size": 13592
+    },
+    "official_multi_turn_utils": {
+      "path": "bfcl_eval/eval_checker/multi_turn_eval/multi_turn_utils.py",
+      "sha256": "9fdbd779ec715959c310445b54b431e91abaa8b45a302abb6fd8db8d61b62ba2",
+      "size": 5234
+    },
+    "remediation_contract_builder": {
+      "path": "scripts/run_dg10_bfcl_multiturn_scoring_remediation_contract_v2.py",
+      "sha256": "b8b1e32b393c9c0ec1906ab4a77eb18867170ddd8026094ddcab2871e6b52c21",
+      "size": 13326
+    },
+    "scoring_orchestrator": {
+      "path": "scripts/run_dg10_bfcl_multiturn_scoring_remediation_v2.py",
+      "sha256": "39b5af44ed24b2cb27ff3eaa5ca3d8328396044036d70f5cedf57848cf1df92a",
+      "size": 15270
+    },
+    "scoring_worker": {
+      "path": "scripts/run_dg10_bfcl_multiturn_scoring_worker_v3.py",
+      "sha256": "8563e33cc5c879c5e0d4b7ccee79b4bb6fcf541c8b7c623f90538e2deba97703",
+      "size": 2132
+    }
+  },
+  "candidate": "candidate.15",
+  "candidate14_failure_diagnostics": [
+    {
+      "case_id": "bfcl_v4:multi_turn_base_121",
+      "failure_signature_sha256": "c2b8d62145257ac3ada3e6f8f976b7047590d5795786174374b613ea5c2f4e29",
+      "failure_stage": "PRE_LABEL_PRE_CHECKER_STANDALONE_IMPORT",
+      "label_selected_by_candidate14": false,
+      "official_checker_invocations_by_candidate14": 0,
+      "stderr_sha256": "4ab4be8bfcf049715a962e0365c261275059a14c7e6ab15b78f228bd17627e0a"
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_miss_func_102",
+      "failure_signature_sha256": "c2b8d62145257ac3ada3e6f8f976b7047590d5795786174374b613ea5c2f4e29",
+      "failure_stage": "PRE_LABEL_PRE_CHECKER_STANDALONE_IMPORT",
+      "label_selected_by_candidate14": false,
+      "official_checker_invocations_by_candidate14": 0,
+      "stderr_sha256": "4ab4be8bfcf049715a962e0365c261275059a14c7e6ab15b78f228bd17627e0a"
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_miss_param_122",
+      "failure_signature_sha256": "c2b8d62145257ac3ada3e6f8f976b7047590d5795786174374b613ea5c2f4e29",
+      "failure_stage": "PRE_LABEL_PRE_CHECKER_STANDALONE_IMPORT",
+      "label_selected_by_candidate14": false,
+      "official_checker_invocations_by_candidate14": 0,
+      "stderr_sha256": "4ab4be8bfcf049715a962e0365c261275059a14c7e6ab15b78f228bd17627e0a"
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_base_137",
+      "failure_signature_sha256": "c2b8d62145257ac3ada3e6f8f976b7047590d5795786174374b613ea5c2f4e29",
+      "failure_stage": "PRE_LABEL_PRE_CHECKER_STANDALONE_IMPORT",
+      "label_selected_by_candidate14": false,
+      "official_checker_invocations_by_candidate14": 0,
+      "stderr_sha256": "4ab4be8bfcf049715a962e0365c261275059a14c7e6ab15b78f228bd17627e0a"
+    },
+    {
+      "case_id": "bfcl_v4:multi_turn_miss_param_146",
+      "failure_signature_sha256": "c2b8d62145257ac3ada3e6f8f976b7047590d5795786174374b613ea5c2f4e29",
+      "failure_stage": "PRE_LABEL_PRE_CHECKER_STANDALONE_IMPORT",
+      "label_selected_by_candidate14": false,
+      "official_checker_invocations_by_candidate14": 0,
+      "stderr_sha256": "4ab4be8bfcf049715a962e0365c261275059a14c7e6ab15b78f228bd17627e0a"
+    }
+  ],
+  "candidate15_subprocess_import_probe": {
+    "command_class": "CURRENT_PYTHON_SCORING_WORKER_V3_HELP",
+    "exit_code": 0,
+    "label_access": false,
+    "model_calls": 0,
+    "status": "PASS_BOUND",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "e61cd6e0a99341bfa8c75aa72154a107a049df62254faca4cf5ca1194bd957a8"
+  },
+  "change_control": {
+    "candidate14_hash_canonicalization_retained": true,
+    "candidate15_allowed_change": "ADD_PROJECT_ROOT_FOR_STANDALONE_SCRIPT_IMPORT",
+    "checker_input_change": false,
+    "generation_rerun": false,
+    "official_checker_change": false,
+    "scoring_policy_change": false,
+    "test_access_change": false
+  },
+  "date": "2026-08-21",
+  "full_scoring_schedule": {
+    "case_count": 80,
+    "ordered_case_ids": [
+      "bfcl_v4:multi_turn_base_121",
+      "bfcl_v4:multi_turn_miss_func_100",
+      "bfcl_v4:multi_turn_miss_param_102",
+      "bfcl_v4:multi_turn_long_context_104",
+      "bfcl_v4:multi_turn_base_128",
+      "bfcl_v4:multi_turn_miss_func_102",
+      "bfcl_v4:multi_turn_miss_param_122",
+      "bfcl_v4:multi_turn_long_context_108",
+      "bfcl_v4:multi_turn_base_137",
+      "bfcl_v4:multi_turn_miss_func_11",
+      "bfcl_v4:multi_turn_miss_param_125",
+      "bfcl_v4:multi_turn_long_context_110",
+      "bfcl_v4:multi_turn_base_141",
+      "bfcl_v4:multi_turn_miss_func_114",
+      "bfcl_v4:multi_turn_miss_param_145",
+      "bfcl_v4:multi_turn_long_context_126",
+      "bfcl_v4:multi_turn_base_150",
+      "bfcl_v4:multi_turn_miss_func_134",
+      "bfcl_v4:multi_turn_miss_param_146",
+      "bfcl_v4:multi_turn_long_context_141",
+      "bfcl_v4:multi_turn_base_151",
+      "bfcl_v4:multi_turn_miss_func_147",
+      "bfcl_v4:multi_turn_miss_param_151",
+      "bfcl_v4:multi_turn_long_context_146",
+      "bfcl_v4:multi_turn_base_156",
+      "bfcl_v4:multi_turn_miss_func_154",
+      "bfcl_v4:multi_turn_miss_param_152",
+      "bfcl_v4:multi_turn_long_context_153",
+      "bfcl_v4:multi_turn_base_158",
+      "bfcl_v4:multi_turn_miss_func_157",
+      "bfcl_v4:multi_turn_miss_param_155",
+      "bfcl_v4:multi_turn_long_context_167",
+      "bfcl_v4:multi_turn_base_166",
+      "bfcl_v4:multi_turn_miss_func_16",
+      "bfcl_v4:multi_turn_miss_param_165",
+      "bfcl_v4:multi_turn_long_context_190",
+      "bfcl_v4:multi_turn_base_199",
+      "bfcl_v4:multi_turn_miss_func_165",
+      "bfcl_v4:multi_turn_miss_param_171",
+      "bfcl_v4:multi_turn_long_context_30",
+      "bfcl_v4:multi_turn_base_23",
+      "bfcl_v4:multi_turn_miss_func_170",
+      "bfcl_v4:multi_turn_miss_param_177",
+      "bfcl_v4:multi_turn_long_context_38",
+      "bfcl_v4:multi_turn_base_31",
+      "bfcl_v4:multi_turn_miss_func_172",
+      "bfcl_v4:multi_turn_miss_param_19",
+      "bfcl_v4:multi_turn_long_context_42",
+      "bfcl_v4:multi_turn_base_40",
+      "bfcl_v4:multi_turn_miss_func_45",
+      "bfcl_v4:multi_turn_miss_param_21",
+      "bfcl_v4:multi_turn_long_context_44",
+      "bfcl_v4:multi_turn_base_49",
+      "bfcl_v4:multi_turn_miss_func_48",
+      "bfcl_v4:multi_turn_miss_param_29",
+      "bfcl_v4:multi_turn_long_context_46",
+      "bfcl_v4:multi_turn_base_62",
+      "bfcl_v4:multi_turn_miss_func_74",
+      "bfcl_v4:multi_turn_miss_param_44",
+      "bfcl_v4:multi_turn_long_context_6",
+      "bfcl_v4:multi_turn_base_65",
+      "bfcl_v4:multi_turn_miss_func_75",
+      "bfcl_v4:multi_turn_miss_param_53",
+      "bfcl_v4:multi_turn_long_context_60",
+      "bfcl_v4:multi_turn_base_69",
+      "bfcl_v4:multi_turn_miss_func_86",
+      "bfcl_v4:multi_turn_miss_param_54",
+      "bfcl_v4:multi_turn_long_context_61",
+      "bfcl_v4:multi_turn_base_73",
+      "bfcl_v4:multi_turn_miss_func_93",
+      "bfcl_v4:multi_turn_miss_param_60",
+      "bfcl_v4:multi_turn_long_context_62",
+      "bfcl_v4:multi_turn_base_75",
+      "bfcl_v4:multi_turn_miss_func_94",
+      "bfcl_v4:multi_turn_miss_param_67",
+      "bfcl_v4:multi_turn_long_context_73",
+      "bfcl_v4:multi_turn_base_79",
+      "bfcl_v4:multi_turn_miss_func_96",
+      "bfcl_v4:multi_turn_miss_param_70",
+      "bfcl_v4:multi_turn_long_context_81"
+    ],
+    "ordered_case_ids_sha256": "29c36df2681e61b4835ef06200d07de8029c36e74e11ccce4dab88fb78e7f396"
+  },
+  "gate_results": {
+    "BMG-03": "NO_GO_REMEDIATION_NOT_RUN",
+    "BMG-05": "NO_GO_QUALITY_THRESHOLDS_NOT_FROZEN",
+    "candidate13_scoring": "INCOMPLETE_FIVE_POST_CHECKER_HASH_FAILURES_BOUND",
+    "candidate14_remediation": "INCOMPLETE_FIVE_PRE_LABEL_IMPORT_FAILURES_BOUND",
+    "candidate15_execution": "AUTHORIZED_BY_EXACT_ACK_NOT_RUN",
+    "candidate15_subprocess_import_probe": "REQUIRED_PASS_BEFORE_FREEZE",
+    "test_execution": "NOT_AUTHORIZED"
+  },
+  "inputs": {
+    "bfcl_git_head": "6ea57973c7a6097fd7c5915698c54c17c5b1b6c8",
+    "candidate13_contract_sha256": "2d97c7557196867ec3329871c2bd96a63e7f96a7bcdc50c9252561cd1eedff37",
+    "candidate13_scoring_ledger_sha256": "e0f1b4a1eb3ec674c7de69db6d9e0c2fa9b07f73cc9774d6b2b536c9a0c9e27a",
+    "candidate13_scoring_report_sha256": "e8f5cea5f37de051e0ad81939cda0882a6b4fa99f6903c910e1777d9558665e1",
+    "candidate14_contract_sha256": "7b401dca18a6587c43e1750d959dfbf9e9c9f8279707d3bc3f69bffcaa7ff94e",
+    "candidate14_remediation_ledger_sha256": "bf85a52395a740b33f29a0541cdf67aa070f67b1ee12606044ca6bfabd005b40",
+    "label_free_bundle_sha256": "e401c59e9118e86d1c82eeaafafc7661467eb43983b89cdacbf18920e60a564c",
+    "sealed_generation_ledger_sha256": "910d4e13e616046331d0e724aee82e5d1e9cd7e68c8ddb1b3166d163331cd097"
+  },
+  "known_limits": [
+    "Candidate.13 and candidate.14 remain immutable and hash-bound.",
+    "Candidate.15 reruns exactly the same five development cases after a standalone import probe passes.",
+    "No prompt, generation, checker input, official checker, final-valid policy, or test access change is authorized."
+  ],
+  "label_sources": {
+    "multi_turn_base": {
+      "contract_builder_reads_label_bytes": false,
+      "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_base.json",
+      "selected_dev_case_count": 20,
+      "semantic_access_before_this_contract": false,
+      "sha256": "1fee67823b317571649177dd89d63969feaae4e810cc7448ee55ba797fb7c8fc"
+    },
+    "multi_turn_long_context": {
+      "contract_builder_reads_label_bytes": false,
+      "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_long_context.json",
+      "selected_dev_case_count": 20,
+      "semantic_access_before_this_contract": false,
+      "sha256": "e82aa0e839c39d23c64a05834f7ae024d7c9738ec21738ecee78dc876e3d0d18"
+    },
+    "multi_turn_miss_func": {
+      "contract_builder_reads_label_bytes": false,
+      "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_miss_func.json",
+      "selected_dev_case_count": 20,
+      "semantic_access_before_this_contract": false,
+      "sha256": "69e679b806d1c871b05393a4b95583bb973248e5b8d96c2d7f4ca05e29fc32e6"
+    },
+    "multi_turn_miss_param": {
+      "contract_builder_reads_label_bytes": false,
+      "path": "bfcl_eval/data/possible_answer/BFCL_v4_multi_turn_miss_param.json",
+      "selected_dev_case_count": 20,
+      "semantic_access_before_this_contract": false,
+      "sha256": "59c442901779e2c31c33abcd566d032e03736e5ad8069de2fe05489873046ecf"
+    }
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "PARENT_SCORING_EVIDENCE_INCOMPLETE",
+  "quality_thresholds_frozen": false,
+  "remediation_schedule": {
+    "case_count": 5,
+    "fresh_process_per_case": true,
+    "merge_policy": "EXPLICIT_REPLACE_EXACT_FIVE_FAILED_ROWS_KEEP_75_IMMUTABLE",
+    "ordered_case_ids": [
+      "bfcl_v4:multi_turn_base_121",
+      "bfcl_v4:multi_turn_miss_func_102",
+      "bfcl_v4:multi_turn_miss_param_122",
+      "bfcl_v4:multi_turn_base_137",
+      "bfcl_v4:multi_turn_miss_param_146"
+    ],
+    "ordered_case_ids_sha256": "eb1699c0b5ffa42583b0b25f3ff67daa371b7815bcb23ae33a6336673059e8c6",
+    "worker_process_retries": 0
+  },
+  "schema": "milai.dg10.bfcl-multiturn-dev-scoring-remediation-contract.v2",
+  "scoring_policy": {
+    "checker_exception_policy": "INVALID_FAIL_CLOSED_INVOKE_OTHER_CHECKER",
+    "decoder_or_gate_failure_can_count_as_no_call": false,
+    "extra_turn_policy": "RETAIN_AND_FAIL_EXACT_TURN_COUNT",
+    "final_valid": "generation_success AND evidence_complete AND exact_turn_count AND multi_turn_checker.valid AND multi_turn_irrelevance_checker.valid",
+    "generation_failure_latch_dominates": true,
+    "missing_turn_adapter": "APPEND_EXPLICIT_EMPTY_TURNS_ONLY_NEVER_TRUNCATE_OR_REWRITE",
+    "model_or_provider_calls_during_scoring": 0,
+    "official_checker_invocations_per_case": {
+      "multi_turn_checker": 1,
+      "multi_turn_irrelevance_checker": 1
+    },
+    "raw_checker_details_repo_retention": "PROHIBITED",
+    "raw_ground_truth_repo_retention": "PROHIBITED"
+  },
+  "status": "BFCL_MULTITURN_SCORING_REMEDIATION_V2_FROZEN_DEV_LABELS_ALREADY_OPENED",
+  "test_access_authorized": false
+}

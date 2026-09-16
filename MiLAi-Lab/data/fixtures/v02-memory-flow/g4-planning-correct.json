@@ -1,0 +1,36 @@
+{
+  "case_id": "g4-planning-correct",
+  "domain": "project_planning",
+  "initial_type": "correct",
+  "development_status": "constructed-new-family-after-strategy-freeze",
+  "task": "继续社区修补工作坊筹备，写一份可以交给现场协调员的时段安排与人数检查。本轮只准备方案，后续还要做彩排。资料在 sources/。",
+  "followup": "继续工作坊彩排准备，列出开场前和换场时必须检查的事项。资料在 sources/。",
+  "initial_payload": {
+    "note": "修补工作坊场地上限12人，包含10名参加者与2名协调员；09:00–09:15布置，09:15–10:00第一组5人，10:00–10:15换场，10:15–11:00第二组5人。两组不重叠，协调员全程在场。",
+    "sources": [
+      "sources/venue.txt",
+      "sources/roster.txt"
+    ]
+  },
+  "sources": {
+    "venue.txt": "社区修补工作坊：室内同时最多12人，包括工作人员。可用时间09:00至11:00；09:00–09:15布置，10:00–10:15必须留空用于清理换场。第一组09:15–10:00，第二组10:15–11:00，不能延时。",
+    "roster.txt": "报名10人，分为两组各5人；2名协调员全程在场。两组不得同时入场；当前不开放陪同人员参加。",
+    "other.txt": "隔壁朗读会允许20人同时入场；它使用另一个场地，与修补工作坊无关。"
+  },
+  "evaluation": {
+    "required": [
+      "exact two session windows and reserved setup/turnover",
+      "5 participants plus 2 coordinators =7 simultaneously",
+      "12-person cap includes staff",
+      "no group overlap or extra companions"
+    ],
+    "correct_initial_facts": [
+      "12 cap",
+      "staff counted",
+      "two groups of5",
+      "time windows"
+    ],
+    "key_source": null,
+    "save_value": "Equivalent sufficient memory exists; later rehearsal scheduled"
+  }
+}

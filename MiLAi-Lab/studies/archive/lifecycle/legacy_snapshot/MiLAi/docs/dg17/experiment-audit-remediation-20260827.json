@@ -1,0 +1,158 @@
+{
+  "schema": "milai.dg17.experiment-audit-remediation.v0.1",
+  "status": "PARTIAL_LOCAL_REMEDIATION_COMPLETE_EXTERNAL_BLOCKERS_REMAIN",
+  "date": "2026-08-27",
+  "source_audit": {
+    "markdown": {
+      "path": "EXPERIMENT_AUDIT.md",
+      "sha256": "6f89317829d801824835ec65e9b82bb3d3535dcfef7d49dbb7274c2809415f3a"
+    },
+    "json": {
+      "path": "EXPERIMENT_AUDIT.json",
+      "sha256": "de2d4f55b1fe8a599a1a38b17380df38e2e72b844d8af6917a8c2fe728da8f8e"
+    },
+    "verdict": "FAIL",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional"
+  },
+  "execution": {
+    "external_model_calls": 0,
+    "runtime_started": false,
+    "database_started": false,
+    "retrieval_calls": 0,
+    "reader_calls": 0,
+    "semantic_hint_calls": 0,
+    "automatic_retries": 0,
+    "external_experiments": "PAUSED_NOT_RUN"
+  },
+  "remediated_without_external_calls": [
+    {
+      "finding": "Q0 predicted-IR placeholder and unexecuted operator denominator",
+      "disposition": "FIXED_FOR_FUTURE_RUNS_HISTORICAL_RECEIPTS_UNCHANGED",
+      "evidence": [
+        "evals/dg17/measurement.py"
+      ],
+      "detail": "Future C/D contexts serialize actual MemoryQueryCompiler v0.2 output; diagnostic success is strict EM; unexecuted operator accuracy is null with denominator zero."
+    },
+    {
+      "finding": "Q3C deterministic teacher target leaked into model prompt",
+      "disposition": "FIXED_FOR_FUTURE_RUNS",
+      "evidence": [
+        "runtime/src/milai/application/semantic_hint.py",
+        "evals/dg17/semantic_shadow.py"
+      ],
+      "detail": "The prompt no longer accepts deterministic outcome fields; authored fixtures are explicitly not held-out."
+    },
+    {
+      "finding": "Q6 source-agnostic atom coverage and incomplete wrong-COMPLETE",
+      "disposition": "FIXED_AND_TESTED",
+      "evidence": [
+        "evals/dg17/q6_matched.py",
+        "tests/test_dg17_q6_matched.py"
+      ],
+      "detail": "Coverage binds source-turn plus span text and reports atom/unique-span/source-turn denominators; terminal COMPLETE with missing requirements is wrong COMPLETE."
+    },
+    {
+      "finding": "Q6 prediction-length-dependent nDCG exposure",
+      "disposition": "FIXED_IN_DG17_ONLY",
+      "evidence": [
+        "evals/dg17/q6_matched.py",
+        "tests/test_dg17_q6_matched.py"
+      ],
+      "detail": "DG17 uses a label-fixed ideal denominator. The frozen generic paper scorer remains unchanged pending DG12 change control."
+    },
+    {
+      "finding": "Q6 hardcoded contamination and label-leakage accepted counts",
+      "disposition": "FIXED_AND_TESTED",
+      "evidence": [
+        "scripts/run_dg17_q6_matched.py",
+        "tests/test_dg17_q6_matched.py"
+      ],
+      "detail": "Counters are derived from selected-source case prefixes and recursive forbidden evaluation-key scans."
+    },
+    {
+      "finding": "Q6 semantic shadow presented as a quality arm",
+      "disposition": "FIXED_FOR_FUTURE_RECEIPTS",
+      "evidence": [
+        "scripts/run_dg17_q6_matched.py",
+        "docs/runbooks/dg17-semantic-read.md"
+      ],
+      "detail": "The shadow is a counterfactual cost overlay with no measured quality effect and is outside executed arms."
+    },
+    {
+      "finding": "Q6 preflight omitted local gate and compatibility bindings",
+      "disposition": "FIXED_AND_RECEIPTED",
+      "evidence": [
+        "var/dg17/q6/dg17-q6-preflight-20260827-007/preflight.json"
+      ],
+      "detail": "Preflight hash-binds local gate 010, compatibility disposition, annotation manifest, and remains execution_authorized=false."
+    },
+    {
+      "finding": "DG17 local gate omitted Reader stability test",
+      "disposition": "FIXED_AND_RECEIPTED",
+      "evidence": [
+        "var/dg17/local-gate/dg17-local-gate-20260827-010/receipt.json"
+      ],
+      "detail": "The gate reports 332 passing tests and strict static checks with zero external calls."
+    },
+    {
+      "finding": "Q6 EvidenceSpan live scorer field mismatch",
+      "disposition": "FIXED_AND_TESTED",
+      "evidence": [
+        "evals/dg17/q6_matched.py",
+        "tests/test_dg17_q6_matched.py"
+      ],
+      "detail": "The scorer uses source_turn_ref; the previous source_ref access would have failed at live scoring."
+    }
+  ],
+  "deliberately_not_rewritten": [
+    "Historical Q0 receipts 001/002 and their compromised causal claims",
+    "Historical Q1 matched gate failure and current F1 values",
+    "Historical Q3C infrastructure receipt with zero model calls",
+    "Historical Q4/Q5 deterministic receipts",
+    "Original FAIL experiment audit and full reviewer trace"
+  ],
+  "remaining_blockers": [
+    {
+      "blocker": "ANSWER_BEARING_LABEL_INDEPENDENT_REVIEW_PENDING",
+      "requires_external_model_or_database": false,
+      "requires_new_independent_authority": true
+    },
+    {
+      "blocker": "GENERIC_PAPER_NDCG_CHANGE_REQUIRES_DG12_CHANGE_CONTROL",
+      "requires_external_model_or_database": false,
+      "requires_new_independent_authority": false
+    },
+    {
+      "blocker": "Q0 corrected multi-seed rerun",
+      "requires_external_model_or_database": true
+    },
+    {
+      "blocker": "Q3C unbiased live shadow",
+      "requires_external_model_or_database": true
+    },
+    {
+      "blocker": "Q6 deterministic matched and any executed semantic arm",
+      "requires_external_model_or_database": true
+    },
+    {
+      "blocker": "governance/cost/operability/Q7/final release review",
+      "requires_external_model_or_database": true
+    }
+  ],
+  "receipts": {
+    "local_gate": {
+      "path": "var/dg17/local-gate/dg17-local-gate-20260827-010/receipt.json",
+      "sha256": "ce38382d1fca9c26c4ccbfd5cf8172532e1f21a70ad9a7f2938a30af01c4b26a",
+      "status": "PASS",
+      "reported_passed_tests": 332
+    },
+    "q6_preflight": {
+      "path": "var/dg17/q6/dg17-q6-preflight-20260827-007/preflight.json",
+      "sha256": "fa4e59fbc9d4fc91e1623cd7e704a0f96612718fc50b3a6913c5b4088a07675b",
+      "status": "Q6_PREFLIGHT_COMPLETE_EXTERNAL_EXECUTION_PAUSED",
+      "execution_authorized": false
+    }
+  },
+  "release_claim_authorized": false
+}

@@ -1,0 +1,1618 @@
+{
+  "entries": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "c3c36deb5b19965d2bed73faea824ef56a6a832ab0360236808f6735c25054c7",
+      "size": 6527
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "ab4460db6e508319536941c0b4d821cc5ca06b9c2e7976f639e269d4d60ea8f8",
+      "size": 253
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "39416f699c5412ca6b3b5c213a72f58ab2ec3318bf2c2f49aef96d79d519a140",
+      "size": 17221
+    },
+    {
+      "path": "MiLAi_可用性与Agent接入设计开发文档_v1.md",
+      "sha256": "2742f921135780e0ef57cdea5c905a8df87f46f4629a8770ca7baa280db71a9e",
+      "size": 67066
+    },
+    {
+      "path": "architecture/v1.0/AF09_REMEDIATION.md",
+      "sha256": "46047c2add5315d5bd8c30df7fcff329a594484f55770fea787e62d0b770e2ff",
+      "size": 4914
+    },
+    {
+      "path": "architecture/v1.0/AUTHOR_PREFLIGHT.md",
+      "sha256": "b90c51d719729cb0f02f4fe3b34e5c34544df6c1ff0a745015450b454d47b063",
+      "size": 8945
+    },
+    {
+      "path": "architecture/v1.0/BASELINE.md",
+      "sha256": "2aa7a7fc24a193395a7bf4a484852549acb465ad62e3b56789ae4ce62f6b8125",
+      "size": 5319
+    },
+    {
+      "path": "architecture/v1.0/CROSSWALK.md",
+      "sha256": "537bd724aedf8ebc3aefe1d756499b31b2db0c7ac453fc660fdfb0f0b5d15d62",
+      "size": 5595
+    },
+    {
+      "path": "architecture/v1.0/DELETION_RECOVERY.md",
+      "sha256": "aa336e62f994f837b387426263ad8ca43a4ac3183ddc955c0f4253ecf4fd048e",
+      "size": 8685
+    },
+    {
+      "path": "architecture/v1.0/FREEZE_REVIEW.md",
+      "sha256": "346dc3854f4010a8d2a57f773e2373c1ced88ebb072b69aff9cfe9eef1d7670b",
+      "size": 5442
+    },
+    {
+      "path": "architecture/v1.0/INVARIANTS.md",
+      "sha256": "f4ea5a10ecd70ac37c4d011ee04221d1fc17f2634213eb03b30183e04a4dda6e",
+      "size": 6292
+    },
+    {
+      "path": "architecture/v1.0/OBJECTS.md",
+      "sha256": "a05a8b88348369297e966905109dbfce96a3ff6ed588b086d0c55bc9f26cdf99",
+      "size": 11641
+    },
+    {
+      "path": "architecture/v1.0/PERMISSIONS.md",
+      "sha256": "497d3ae6fbf8d5d69a46ccf3ce5ad5e1280109bf09277ca7c369d860382ad2ba",
+      "size": 7049
+    },
+    {
+      "path": "architecture/v1.0/README.md",
+      "sha256": "df7ef1e418f385b5a9982d48d5f4fee71e3a41f0834c16005b2839675b889f29",
+      "size": 5497
+    },
+    {
+      "path": "architecture/v1.0/RETRIEVAL_CONTEXT.md",
+      "sha256": "e744713baf4ba9049d50bab6d516162261cf801f756adbc55d6432be84c29bb3",
+      "size": 8893
+    },
+    {
+      "path": "architecture/v1.0/THREAT_MODEL.md",
+      "sha256": "365b985e490b04487d4936f31edc58c835dd403d52871d7af74dd544ddbaf2cd",
+      "size": 11494
+    },
+    {
+      "path": "architecture/v1.0/TRANSACTIONS.md",
+      "sha256": "11106c61626b27988503586f53c91848cc65d2c339865ad703d4cc9fe755f364",
+      "size": 11341
+    },
+    {
+      "path": "architecture/v1.0/architecture_manifest.json",
+      "sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+      "size": 35162
+    },
+    {
+      "path": "architecture/v1.0/crosswalk.json",
+      "sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
+      "size": 65722
+    },
+    {
+      "path": "architecture/v1.0/scripts/refresh_manifest.py",
+      "sha256": "e97e112b81c6c9a9735111f7fbede4e6b32b917b08261ae66462ead35373a545",
+      "size": 5925
+    },
+    {
+      "path": "architecture/v1.0/scripts/validate_bundle.py",
+      "sha256": "99d9621bb69dc537be7ce356e3fe548ad6d256f7a7dfede0af19aae68e881c4b",
+      "size": 16746
+    },
+    {
+      "path": "architecture/v1.0/scripts/verify_lock.py",
+      "sha256": "aba233795b38295be54a9a8b4febd7d35c14ec4ae312587201927a0aa7a1dd99",
+      "size": 11165
+    },
+    {
+      "path": "architecture/v1.0/tests/test_bundle.py",
+      "sha256": "7f9f5abb365f986853cbd716b01e1c3e25683fe58a320ec68ca80a3d0a97e9c0",
+      "size": 14211
+    },
+    {
+      "path": "contracts/agent/v1/compatibility-policy.md",
+      "sha256": "15bf811233cce8af395f08a4e4bebb7b76224f99dbfe97e3304b7a14e589794a",
+      "size": 1098
+    },
+    {
+      "path": "contracts/agent/v1/examples/recall-request.json",
+      "sha256": "d5898c3a6b5e0a735a5c6ae78f36a7db107e3dea11e55c07c00aae3bc67cf153",
+      "size": 204
+    },
+    {
+      "path": "contracts/agent/v1/openapi.yaml",
+      "sha256": "33f5cd31fb598d864d25781be931c9037e546003816329eb6715a39f49f1cc73",
+      "size": 9848
+    },
+    {
+      "path": "contracts/agent/v1/tool-contract.json",
+      "sha256": "682195d7d58f082131018446c28b3af59cdf1640dab81154f746e9a5ca62d388",
+      "size": 1122
+    },
+    {
+      "path": "docs/adr/ADR-001-runtime-technology-baseline.md",
+      "sha256": "dc01d4a243205b3d3047c8682222aec828c29ca2201f23e307bb125da5c0341f",
+      "size": 1894
+    },
+    {
+      "path": "docs/adr/ADR-002-self-owned-logical-architecture.md",
+      "sha256": "844c6be210866711e04f072db2071efc8c07b07374c7bd8d41813f3ef685f026",
+      "size": 1293
+    },
+    {
+      "path": "docs/adr/ADR-003-identifiers-idempotency-and-time.md",
+      "sha256": "adf49502cff5ba2fc853b1f4f7a61f8f2324089454d1bff7cbe9d7fd46e7ee4b",
+      "size": 1182
+    },
+    {
+      "path": "docs/adr/ADR-004-grounding-physical-model.md",
+      "sha256": "73f27ac60e96f640273441523423bf8a0f3bfeebd837b95a7f211b5eda01a599",
+      "size": 967
+    },
+    {
+      "path": "docs/adr/ADR-005-effective-claim-state.md",
+      "sha256": "7d3d63055a0559eee2ad07cad31098f679cb75d62c94c55e54c4eb118194776a",
+      "size": 1162
+    },
+    {
+      "path": "docs/adr/ADR-006-open-issue-versioning.md",
+      "sha256": "80a4b950a9a1fa8a7034b63cebaa34a78876e2e2b9c00811b41a804226ce9aae",
+      "size": 813
+    },
+    {
+      "path": "docs/adr/ADR-007-evidence-revocation-and-deletion-states.md",
+      "sha256": "6dd4fdedb0f28b9f2329f206eee22c745e51175df13cfd2c3d5d785c33b7e57a",
+      "size": 1990
+    },
+    {
+      "path": "docs/adr/ADR-008-authority-matching.md",
+      "sha256": "75f8a83158bf4210b94a5467ed64ebdc3168c2229ca2bca584b3aadd190245ab",
+      "size": 988
+    },
+    {
+      "path": "docs/adr/ADR-009-canonical-sequence-model.md",
+      "sha256": "85bdb756898543e16c712bd0d195878624fe51bef19b7a9d81e770186a084ff2",
+      "size": 2166
+    },
+    {
+      "path": "docs/adr/ADR-010-l2-and-external-adapter-gate.md",
+      "sha256": "3d0b8edb79201fe013dc33c830e0f0c6128e689b184d9fe711814e712e626487",
+      "size": 1094
+    },
+    {
+      "path": "docs/adr/ADR-011-architecture-bundle-lock.md",
+      "sha256": "60cedcae741a9b3de63269139be83779bb6a1a3b146227ad34ad3f0aa1e0adaa",
+      "size": 1528
+    },
+    {
+      "path": "docs/adr/ADR-012-blob-encryption-key-and-real-data-gate.md",
+      "sha256": "2bd215db0b26ef87a2fb7c446e195ccc33b51ae9da5656ad0cc0376f8a63c202",
+      "size": 1574
+    },
+    {
+      "path": "docs/adr/ADR-013-model-embedding-and-device-baseline.md",
+      "sha256": "e11e609926f98243a2eda59784858782310486698a98be9d0cbf14923b7f5984",
+      "size": 1137
+    },
+    {
+      "path": "docs/adr/ADR-014-legacy-and-real-data-migration.md",
+      "sha256": "56b08b2b10daad357720718937d4bad0983bf757b2cfdf891f5ac54480893bf2",
+      "size": 1217
+    },
+    {
+      "path": "docs/adr/ADR-015-af09-governance-history-and-gate-remediation.md",
+      "sha256": "0d0a0b69492ea6e6fbb60e80833f40d50935c5c405786002836ebcdd52edd8a7",
+      "size": 3012
+    },
+    {
+      "path": "docs/adr/ADR-016-af09-causality-erasure-role-and-lock-remediation.md",
+      "sha256": "d69e2f03fdb16a11d77d68f6603397496331c80a986c9711ab84ae7d48dfce7a",
+      "size": 2004
+    },
+    {
+      "path": "docs/adr/ADR-017-populated-governance-history-reconciliation.md",
+      "sha256": "2646160e9cd8084efd61906098dfb0fb54db6d044c00f8292f09ed962dcf17d5",
+      "size": 8427
+    },
+    {
+      "path": "docs/adr/ADR-018-rejected-grounding-and-tx05-provenance-guard.md",
+      "sha256": "b3f3804d3dcae04aa27f5d452b622d7cc2e18e66158f288b3accb4ee0b3308a1",
+      "size": 8101
+    },
+    {
+      "path": "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md",
+      "sha256": "3adcea9420abbbc0402fcda5dc39da9c5d307149a1dd06d077383ff3100a25f7",
+      "size": 6294
+    },
+    {
+      "path": "docs/adr/ADR-020-agent-integration-plane.md",
+      "sha256": "818703d120b144cfee9f9cdce69cebae75ba4159f8fe0835f3ec34827615ca8b",
+      "size": 1111
+    },
+    {
+      "path": "docs/adr/ADR-021-scoped-agent-capabilities.md",
+      "sha256": "effe16ec0bb1497a76e4313a981790134bd6ef2ff17bbf2fffec65ed41d26f6f",
+      "size": 925
+    },
+    {
+      "path": "docs/adr/ADR-022-embedding-provider-and-quality-gate.md",
+      "sha256": "f18a2670130025e0b8aa2c2cd9e040a26e0f7e4828d3c3c7bdf1110611115531",
+      "size": 795
+    },
+    {
+      "path": "docs/known-limitations-agent-integration-0.1.md",
+      "sha256": "eff4d16bd287d8513dc50c433c5abd2d38aa8e704c67fe709149ede17c73f538",
+      "size": 1377
+    },
+    {
+      "path": "docs/reports/DG-00-architecture-1.0.0-release-2026-08-17.md",
+      "sha256": "a90fec9b088a6c81026e62e97cd438353fb92da08823e3d2a92f6c31096466c7",
+      "size": 3640
+    },
+    {
+      "path": "docs/reports/DG-00-architecture-candidate-2026-08-16.md",
+      "sha256": "cba28fdd5a86005182bc43c6dda413a0551574adda0cfa3952cb88c69456cb54",
+      "size": 6782
+    },
+    {
+      "path": "docs/reports/DG-00-architecture-candidate.2-2026-08-17.md",
+      "sha256": "fd82f571b4005c780b195377fcef76116ced4a172a6b74c6586cb3243bf61175",
+      "size": 2446
+    },
+    {
+      "path": "docs/reports/DG-00-architecture-candidate.3-2026-08-17.md",
+      "sha256": "30de75fffb33e4cb94b0cebc4b473be3b38971f4a7dfc33639a04ca7dc951118",
+      "size": 3878
+    },
+    {
+      "path": "docs/reports/DG-00-architecture-candidate.4-2026-08-17.md",
+      "sha256": "ea06d3bf7143b1ce027e5eec400aba5275a47ed09465dfedd0a905e8bbcdc23a",
+      "size": 4507
+    },
+    {
+      "path": "docs/reports/DG-00-architecture-candidate.5-2026-08-17.md",
+      "sha256": "5f46395e952eaf1c4ab5f653188763359361fb63d315370a18d7a8474ba47cf1",
+      "size": 3803
+    },
+    {
+      "path": "docs/reports/DG-00-frozen-architecture-acquisition-2026-08-16.md",
+      "sha256": "5286f7ca5a45701a4f0fe39951666481cf601dffd0b44c1a8808942d950da5c8",
+      "size": 3829
+    },
+    {
+      "path": "docs/reports/DG-01-LG-01-evidence-2026-08-15.md",
+      "sha256": "d4fe4e32e7659f284929d1194028eb892e60efb495952376e4bde06f81df995d",
+      "size": 4876
+    },
+    {
+      "path": "docs/reports/DG-02-LC-003-security-2026-08-15.md",
+      "sha256": "0ae5c4c382e76fdf1ec6cf9b27db974b0280fa9c79fb383db26d43840bf16ece",
+      "size": 2752
+    },
+    {
+      "path": "docs/reports/DG-03-LC-004-evidence-2026-08-15.md",
+      "sha256": "a8251c7005782137a3e9d0cb84e683ed93a5634a3b84d28d2d07b570232bebc4",
+      "size": 2788
+    },
+    {
+      "path": "docs/reports/DG-04-LC-005-008-canonical-2026-08-15.md",
+      "sha256": "1dc0987b4f8252f7977f8ebf54318911e640995cafd2768e326efe2c54a6dd41",
+      "size": 4460
+    },
+    {
+      "path": "docs/reports/DG-05-LC-009-open-issue-2026-08-15.md",
+      "sha256": "18f412355151e6f42e890694190abb0697df2a3536d4ea6b9f9dc7e7b8f2b1af",
+      "size": 2574
+    },
+    {
+      "path": "docs/reports/DG-06-LC-010-progress-2026-08-15.md",
+      "sha256": "8daef24ba78679a45918441eeb66c3a079168ead98eda8638ac6d8c5d5a60d9d",
+      "size": 2209
+    },
+    {
+      "path": "docs/reports/DG-07-LC-011-014-retrieval-2026-08-15.md",
+      "sha256": "8fa040ff09e16b3aefefe622bd516cbf6592b87258766e19464e97d8dad08906",
+      "size": 4465
+    },
+    {
+      "path": "docs/reports/DG-08-LC-015-017-context-chat-2026-08-15.md",
+      "sha256": "b14c68109c980266794ebf63cc05a7603c5b959725326bd42bef2dd25be33240",
+      "size": 5172
+    },
+    {
+      "path": "docs/reports/DG-09-LC-018-local-beta-2026-08-15.md",
+      "sha256": "de7ab667dcc7ad0e5e94c374f42e1410f88a0fc1c4ce8cf4f55f89197e639f81",
+      "size": 6874
+    },
+    {
+      "path": "docs/reports/DG-R01-RC-001-008-ospc-2026-08-15.md",
+      "sha256": "152095ecb72eb6aa9111c829b9ffd5e5453f01aafa667e8f74c00d59e0830567",
+      "size": 6747
+    },
+    {
+      "path": "docs/reports/GOALS-completion-audit-2026-08-16.md",
+      "sha256": "a8e403fe90a8a5a46b441622adda20fa73489e76f4a48ed1ea3ab7b49051ee68",
+      "size": 14945
+    },
+    {
+      "path": "docs/reports/GOALS-completion-audit-2026-08-17.md",
+      "sha256": "d43549738082d273f1935a7d7b5ab7f0c4ec855674a2c5db2af60d9eaf485078",
+      "size": 27698
+    },
+    {
+      "path": "docs/reports/GOALS-completion-inventory-2026-08-17.json",
+      "sha256": "46f3fa34a3dfe67f7f3242855061db4988815ff4cba8c9a67cddb7dae194b66b",
+      "size": 30526
+    },
+    {
+      "path": "docs/reports/UA-00-agent-integration-current-state-2026-08-17.md",
+      "sha256": "16b983310b0c92916912bb8fd18540e9c29630fafe0ac1cb4b3fbf546cd30058",
+      "size": 2919
+    },
+    {
+      "path": "docs/reports/UA-01-bootstrap-doctor-evidence-2026-08-17.md",
+      "sha256": "918652c6a14d58f51dd37bf9efbcd7047338bfa8edf61c72b3ca69453aaf779e",
+      "size": 3940
+    },
+    {
+      "path": "docs/reports/UA-02-Agent-contract-SDK-evidence-2026-08-17.md",
+      "sha256": "a3026ea181653272dfb71873d2954b9c09ff545bc3f74f4e27e31432d28fcf7b",
+      "size": 2102
+    },
+    {
+      "path": "docs/reports/UA-03-lifecycle-governed-write-evidence-2026-08-17.md",
+      "sha256": "0c1844141cecab0b6a3c1bcff3a362f0cfebbc20a27e359814c1025e9260d995",
+      "size": 1365
+    },
+    {
+      "path": "docs/reports/UA-04-MCP-compatibility-2026-08-17.md",
+      "sha256": "21c63b2c09bbc8acbee50000ee09dd9b8bd99d0e5594d60a5d17c5a240d595b4",
+      "size": 2571
+    },
+    {
+      "path": "docs/reports/UA-05-framework-three-session-evidence-2026-08-17.md",
+      "sha256": "375c65c5bcfca7d74fa3089e3a39221638f0cbfa2399fa32c87c89ef4c78c382",
+      "size": 2305
+    },
+    {
+      "path": "docs/reports/UA-05-three-session-agent-e2e-2026-08-17.json",
+      "sha256": "4ca8bcde322569a7845912663114d61642eecde4e28865e91bfe9e6648448609",
+      "size": 2604
+    },
+    {
+      "path": "docs/reports/UA-06-retrieval-quality-performance-evidence-2026-08-17.md",
+      "sha256": "697bb8656f00ce820b862573a3053923ef9a35bcc24205cc8d69d06d98f3b61e",
+      "size": 1536
+    },
+    {
+      "path": "docs/reports/UA-07-local-private-gate-implementation-evidence-2026-08-17.md",
+      "sha256": "4d55a2725e4553bd0e122013204e14f32839e1eb8a7a4ae1e528b9f2ff565f3b",
+      "size": 1534
+    },
+    {
+      "path": "docs/reports/UA-08-agent-integration-preflight-2026-08-17.md",
+      "sha256": "1d55145309910ffe926bbc89510c8068a0b9078e36398daa15c5e67318dfa604",
+      "size": 2843
+    },
+    {
+      "path": "docs/reports/UA-08-agent-integration-release-candidate-2026-08-17.md",
+      "sha256": "e3fdbefda08f2752c1649b901e92046a8d117696e6e3e3722b6bd605df6759f6",
+      "size": 5334
+    },
+    {
+      "path": "docs/reports/UA-08-candidate.2-security-remediation-evidence-2026-08-17.md",
+      "sha256": "1cbaca0a8dcb200639a2edb01789a51e6fdabf3474c9ca903e3178673d12e523",
+      "size": 7588
+    },
+    {
+      "path": "docs/reports/UA-package-clean-install-gate-2026-08-17.json",
+      "sha256": "3f2bd3cecab9440e1b6dedc4e2933619bf1cf4200150523f368a876eb141ec7e",
+      "size": 2485
+    },
+    {
+      "path": "docs/reports/UA-requirements-evidence-matrix-2026-08-17.md",
+      "sha256": "3623bb9b68f741c8a575f3a9c679c7eb704b485c9f54065a8ef132f0dc220e33",
+      "size": 5212
+    },
+    {
+      "path": "docs/reports/UA-runtime-fresh-database-full-gate-2026-08-17.json",
+      "sha256": "0d9d5732bf34f5ff1e0c0601e8b1cefd3ae435172a5d278e84e2ee8a5f3efd2f",
+      "size": 461
+    },
+    {
+      "path": "docs/runbooks/agent-integration.md",
+      "sha256": "600431b4a1062b4ce4a4f7b84962dc0188cd2d53b2ff5460e088f61a9821495e",
+      "size": 6180
+    },
+    {
+      "path": "docs/runbooks/backup-restore.md",
+      "sha256": "63fb60f913d731b5e3a3b96352c5d609c2cefd45f85a452d3df982f49f38eec4",
+      "size": 3743
+    },
+    {
+      "path": "docs/runbooks/credential-rotation.md",
+      "sha256": "9cb0a6a9d3e037ade974cbfa714767fe9ca0713a80a43eed6ac573f7c1eca5e2",
+      "size": 3547
+    },
+    {
+      "path": "docs/runbooks/external-memory-import-dry-run.md",
+      "sha256": "d965bafa35b3d8f13b964ed3a5df456ba5fbfdf68e8895f0df5ec1376c8c71ca",
+      "size": 1205
+    },
+    {
+      "path": "docs/runbooks/first-run.md",
+      "sha256": "eaf1c496a5de7ec9039ae2e4aad3593c924155d4cfa95aad2ce30ce9414feb40",
+      "size": 3600
+    },
+    {
+      "path": "docs/runbooks/local-runtime.md",
+      "sha256": "340c751bd7d2c8777b1bf7c4851b960c6bdf1649a76c5a3d2fe1f56594dc3356",
+      "size": 5055
+    },
+    {
+      "path": "docs/runbooks/projection-and-purge-recovery.md",
+      "sha256": "5807c54e61ad1f90586a1d00afc5bb683015ada7e6769518132744c443735df6",
+      "size": 2659
+    },
+    {
+      "path": "docs/security/UA-07-local-data-privacy-threat-review.md",
+      "sha256": "241ce33e9c6ad7ed7ded7e04fb698564706a318b8fb28426386d4d225f080f74",
+      "size": 3214
+    },
+    {
+      "path": "docs/security/agent-tool-threat-model.md",
+      "sha256": "597b90a7b2d0bb6f16282a26236b72f322ff2b9d606aa71901ab2b645e17a5c3",
+      "size": 3012
+    },
+    {
+      "path": "docs/security/embedding-provider-privacy.md",
+      "sha256": "62f94d615a3b9eb46e9fb07414c97385e82394b2d227e2ade45e7802ebdfb177",
+      "size": 1444
+    },
+    {
+      "path": "evals/agent_integration/adapter_probe.py",
+      "sha256": "dd1f5207b4ba676e872d032c19e8f32688a22a898ecb6b7a648b4b7fdcbea795",
+      "size": 11231
+    },
+    {
+      "path": "evals/agent_integration/e2e.py",
+      "sha256": "bc8484fa4d2149251ab1ed3dc29547cd521ebca95f439968bd87643060464050",
+      "size": 30758
+    },
+    {
+      "path": "evals/agent_integration/mcp_host.py",
+      "sha256": "d42e627acb552688b84867f8faaeec27af5c7af37e0533324db3a0f5ad0da350",
+      "size": 2330
+    },
+    {
+      "path": "evals/agent_integration/mcp_wire_host.py",
+      "sha256": "8258afcf9d7bc3b8b8fc098fa1f8080f26e031b3552ab1837b30d474ce10945f",
+      "size": 5735
+    },
+    {
+      "path": "evals/embedding/all-MiniLM-L6-v2-onnx-result.json",
+      "sha256": "59260f4b50968d0bee236c07ee4e9ae94356260b33c255400439c0867aaa74f8",
+      "size": 520
+    },
+    {
+      "path": "evals/embedding/all-MiniLM-L6-v2-result.json",
+      "sha256": "be4cbdeeb645ca1c0637a4b007c0ab66bbc6753336449d19c911fc23c9352c02",
+      "size": 520
+    },
+    {
+      "path": "evals/embedding/all-MiniLM-L6-v2-target-device-result.json",
+      "sha256": "f4863156353247f05da06478b480c0656ac058ace55c6b36c204c18ad6e795c2",
+      "size": 1613
+    },
+    {
+      "path": "evals/embedding/baseline-result.json",
+      "sha256": "5f3359adbcc595823924ac086d47a8538841a0a90aa1e0ea72aaf85724411260",
+      "size": 313
+    },
+    {
+      "path": "evals/embedding/benchmark.py",
+      "sha256": "f27caf1359d7dacd688afe5b8d7063ffd329bba9a322fab258a6f2f01890be79",
+      "size": 4862
+    },
+    {
+      "path": "evals/embedding/fixtures.json",
+      "sha256": "0c5b4fd424769574f97a078043fdcc7aae82ea82056ea3596cb50d151d5bef2c",
+      "size": 2201
+    },
+    {
+      "path": "examples/autogen/README.md",
+      "sha256": "660fdb8d91a9074603fe2d26ea320164b823f9c09ea47403858750c096b9a00f",
+      "size": 412
+    },
+    {
+      "path": "examples/autogen/agent.py",
+      "sha256": "5fa380b807f0298df8b4f7599e59e76d3d6cb19f6efbc0f95c248e7a453bf3fb",
+      "size": 1244
+    },
+    {
+      "path": "examples/autogen/smoke.py",
+      "sha256": "17049ab190f7cc4abf733e7ff6781c5e0825f1f76357ed84734531e36662b92c",
+      "size": 1584
+    },
+    {
+      "path": "examples/generic-agent/README.md",
+      "sha256": "70b77272358c2a64c71d4db646de0c046559d6b34013d7438ffdd111c5387bb5",
+      "size": 490
+    },
+    {
+      "path": "examples/generic-agent/agent.py",
+      "sha256": "48e4e900ba2138eb510317962b3075131694c3cb6933a0c23aca759ff7456cd3",
+      "size": 842
+    },
+    {
+      "path": "examples/generic-agent/smoke.py",
+      "sha256": "f949c4779db787f4ab6f1cb5399d5a5bfd5aa2abaa66a516cbc5682bcc71e0ea",
+      "size": 1356
+    },
+    {
+      "path": "examples/langgraph/README.md",
+      "sha256": "154869884ba381a68f895f6f153c51c85c341560ad111bdbdf4e5a4ecb6bb60d",
+      "size": 387
+    },
+    {
+      "path": "examples/langgraph/agent.py",
+      "sha256": "2d43046e79c3f11c3cd5e62adc1310b9ab58010b883dc9746a703347c0f3c963",
+      "size": 1747
+    },
+    {
+      "path": "examples/langgraph/smoke.py",
+      "sha256": "c3da8cde1cba1c00b8470f24d1e1f9d40969f6ad7e1980883db9d30c2863ea3a",
+      "size": 2186
+    },
+    {
+      "path": "examples/mcp-client/README.md",
+      "sha256": "e46d30c4aef28880a494878a52b15496fd9e514bb9ecc03941f09292494dd8b7",
+      "size": 348
+    },
+    {
+      "path": "examples/mcp-client/client.py",
+      "sha256": "8617028352c204aab0b89d58b0a2b2b3d098115aa6497828f676b6ba86889d46",
+      "size": 1129
+    },
+    {
+      "path": "examples/mcp-client/smoke.py",
+      "sha256": "7e5dcdee198a074aced5e70fe8132da2aa4e6bb7b7dd1e775e4f755fbd8aca1d",
+      "size": 908
+    },
+    {
+      "path": "integrations/autogen/dist/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "size": 1
+    },
+    {
+      "path": "integrations/autogen/dist/milai_autogen-0.1.0-py3-none-any.whl",
+      "sha256": "4e02fd163b0a566a24ccf6143b89377d5b88a2ad2cc1cc875440b91ae8d4a2fc",
+      "size": 3135
+    },
+    {
+      "path": "integrations/autogen/dist/milai_autogen-0.1.0.tar.gz",
+      "sha256": "571d5eed49e84328f907863b555bb29669d6f821579570bde02d0328df0aa7e0",
+      "size": 27792
+    },
+    {
+      "path": "integrations/autogen/pyproject.toml",
+      "sha256": "d367b3416dc6d7200848ac8d8ddf45174b81e3155d6afa89624932d8bd4cc383",
+      "size": 821
+    },
+    {
+      "path": "integrations/autogen/src/milai_autogen/__init__.py",
+      "sha256": "fbb9e046ebf4b69be71a6fb46583bf305016072298e463fb2990d7edbc426906",
+      "size": 72
+    },
+    {
+      "path": "integrations/autogen/src/milai_autogen/memory.py",
+      "sha256": "0fba4be001c83ef36a7a3a9b5c8039b9600bbdd97da1f7ec66dc6a3ddc485237",
+      "size": 5258
+    },
+    {
+      "path": "integrations/autogen/src/milai_autogen/py.typed",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size": 1
+    },
+    {
+      "path": "integrations/autogen/tests/test_memory.py",
+      "sha256": "b7bf503db9cffef90ad03b94ea93b60b21ce642605d45c4f134f996049ff699d",
+      "size": 5192
+    },
+    {
+      "path": "integrations/autogen/uv.lock",
+      "sha256": "2e975ddc43b33fe8ca6a63ca907455d10aae1ecb456b35214e85652d4a224016",
+      "size": 75461
+    },
+    {
+      "path": "integrations/framework-manifest.json",
+      "sha256": "dc8a64523d0f4711b10fcd06fe86612fa00e45177be10cdaf0c66db314ddf39b",
+      "size": 1392
+    },
+    {
+      "path": "integrations/hooks/dist/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "size": 1
+    },
+    {
+      "path": "integrations/hooks/dist/milai_hooks-0.1.0-py3-none-any.whl",
+      "sha256": "c116c6cf4a4d1c6c118d97802b6287b18712fd00cb8f30b5f313cd7397cc6858",
+      "size": 4232
+    },
+    {
+      "path": "integrations/hooks/dist/milai_hooks-0.1.0.tar.gz",
+      "sha256": "eb5125afac416f9450c97f4ed075d2cf5787982dad6ff36f59806f9e7ed816be",
+      "size": 22375
+    },
+    {
+      "path": "integrations/hooks/pyproject.toml",
+      "sha256": "74617518f6be5df337c2466dceec2c4750c5d20587a3dec94fc9538603655c35",
+      "size": 888
+    },
+    {
+      "path": "integrations/hooks/src/milai_hooks/__init__.py",
+      "sha256": "d4e24aed132f5d79ca2cf8c6baa102c17d95f5066fedcf1484b9930e7913024e",
+      "size": 42
+    },
+    {
+      "path": "integrations/hooks/src/milai_hooks/cli.py",
+      "sha256": "751c3c2403317c9645bb59043ac1d517339b611ebf6f13c3fa3e0e0e3c0a58db",
+      "size": 2630
+    },
+    {
+      "path": "integrations/hooks/src/milai_hooks/config.py",
+      "sha256": "37447f92a3d583ad745e299ecdc97e43f3fef6c726f034b11fc81aba56f4af7c",
+      "size": 4422
+    },
+    {
+      "path": "integrations/hooks/src/milai_hooks/py.typed",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size": 1
+    },
+    {
+      "path": "integrations/hooks/tests/test_config.py",
+      "sha256": "56cd6205e61b74b9d52428c374cac315c2e20acd2c6b26ae731a0e7fe36776a2",
+      "size": 1793
+    },
+    {
+      "path": "integrations/hooks/uv.lock",
+      "sha256": "68756ab2b26f62d3bba3a331eec273f3666585a14d5c82b6f07e49ebbc86e1c4",
+      "size": 59216
+    },
+    {
+      "path": "integrations/langgraph/dist/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "size": 1
+    },
+    {
+      "path": "integrations/langgraph/dist/milai_langgraph-0.1.0-py3-none-any.whl",
+      "sha256": "a7bb3df57c9b6df5a9939bbd478b0c235aabe15ea7dd1bf93c1a895cb33b5623",
+      "size": 3078
+    },
+    {
+      "path": "integrations/langgraph/dist/milai_langgraph-0.1.0.tar.gz",
+      "sha256": "849e7da4c8a179d538093e472ce306f49e990bff6283a37466e27fe3d418000b",
+      "size": 64906
+    },
+    {
+      "path": "integrations/langgraph/pyproject.toml",
+      "sha256": "324b94751321b9f6ae2f37ce57cb71bfb259f6fc46dc694af6f213729ede6673",
+      "size": 822
+    },
+    {
+      "path": "integrations/langgraph/src/milai_langgraph/__init__.py",
+      "sha256": "c2c9d455a033b0a188f491c0bf35d61ec99498d62b66ca238e80a48764f82c62",
+      "size": 279
+    },
+    {
+      "path": "integrations/langgraph/src/milai_langgraph/nodes.py",
+      "sha256": "abb087dfeaa21cfbcb3b9745537b95aa1ca95a2533e5d0ca8e287d639bcc2683",
+      "size": 5536
+    },
+    {
+      "path": "integrations/langgraph/src/milai_langgraph/py.typed",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size": 1
+    },
+    {
+      "path": "integrations/langgraph/tests/test_nodes.py",
+      "sha256": "bdc20989dade09b9ef54412fc09b442f56614d8c4123faa786c82b3d69c208b0",
+      "size": 3922
+    },
+    {
+      "path": "integrations/langgraph/uv.lock",
+      "sha256": "7cf8a2952c1c2a1d62478dd99e62bb6cb74de596dbab5d375b0912c4d4a00456",
+      "size": 200412
+    },
+    {
+      "path": "integrations/mcp/README.md",
+      "sha256": "1e8709982fcaad3cbe76ce37ae0b9360cbf64f9ab8164b4f6f479e46b97ff294",
+      "size": 1255
+    },
+    {
+      "path": "integrations/mcp/dist/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "size": 1
+    },
+    {
+      "path": "integrations/mcp/dist/milai_mcp-0.1.0-py3-none-any.whl",
+      "sha256": "7f6de63fb9b78fa24c17c5e4b41f2100dcb56ea7dfa4b6b4988bdad5b75ac039",
+      "size": 5207
+    },
+    {
+      "path": "integrations/mcp/dist/milai_mcp-0.1.0.tar.gz",
+      "sha256": "ab6f6c1ef7d9bcd5d9549854e983329a303783c8c8c69b00673b260bcd5dc4dc",
+      "size": 45095
+    },
+    {
+      "path": "integrations/mcp/pyproject.toml",
+      "sha256": "513a863126a0d9e093b61c5b8b67d6c32da15a2cc62d1c2d62f2696cd68e3593",
+      "size": 847
+    },
+    {
+      "path": "integrations/mcp/src/milai_mcp/__init__.py",
+      "sha256": "d11e0a718592df4a41fbc41c057bca1d34d82c3470c32522fd0fde3fc5b1b15f",
+      "size": 93
+    },
+    {
+      "path": "integrations/mcp/src/milai_mcp/py.typed",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size": 1
+    },
+    {
+      "path": "integrations/mcp/src/milai_mcp/server.py",
+      "sha256": "bcbdde61f0f41baf0be9c69d2bc1d558a90e41603956bb3167df9beb91273951",
+      "size": 12577
+    },
+    {
+      "path": "integrations/mcp/tests/test_profiles.py",
+      "sha256": "d13fbcc6094e69a8ce041d5cda9eb33a07dee47eb67902618cbf473dd33aad67",
+      "size": 7420
+    },
+    {
+      "path": "integrations/mcp/uv.lock",
+      "sha256": "a1f9de6c727b48182e428bb8bc8619fef27b2b1b95cbe79be4d9e9e65197623d",
+      "size": 121980
+    },
+    {
+      "path": "integrations/package-release-manifest.json",
+      "sha256": "84c947394f3bcfb2132a9f8cc88dc724ffe69fc0b1dc11693a9fb69d97e3a4ef",
+      "size": 42513
+    },
+    {
+      "path": "integrations/python-client/dist/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "size": 1
+    },
+    {
+      "path": "integrations/python-client/dist/milai_client-0.1.0-py3-none-any.whl",
+      "sha256": "5610991dbbe713fa29c1d98f86d2c2226f4b83275b93e87b2a24bc17ddeb5e69",
+      "size": 20056
+    },
+    {
+      "path": "integrations/python-client/dist/milai_client-0.1.0.tar.gz",
+      "sha256": "32cc4852efb142ea5d5e3a2865eb94082b8362989e9bbe5cab8af0c2b81d2137",
+      "size": 40648
+    },
+    {
+      "path": "integrations/python-client/pyproject.toml",
+      "sha256": "f3cf4309686702e69e5c41211be12e0e10ddd8b1e339b1dc9bab7df04ef20675",
+      "size": 785
+    },
+    {
+      "path": "integrations/python-client/src/milai_client/__init__.py",
+      "sha256": "77aee20476a649b34f32640c4cfb2cd6664914fc23e539e9e9bcf75ad520e325",
+      "size": 1994
+    },
+    {
+      "path": "integrations/python-client/src/milai_client/agent_loop.py",
+      "sha256": "174b4913c12b4e856dfa8129a1aeec54d006bbc629b14cf43d8eb92d25091b7e",
+      "size": 1522
+    },
+    {
+      "path": "integrations/python-client/src/milai_client/client.py",
+      "sha256": "41b18722440243eb28f4e24de915b55bdaf43466b8675ccffd874f418cfa3777",
+      "size": 19248
+    },
+    {
+      "path": "integrations/python-client/src/milai_client/formatting.py",
+      "sha256": "cde1874c98ec4eac944953fc292d9456f18db8d85cee7ab378bdcf4129d8cda2",
+      "size": 3619
+    },
+    {
+      "path": "integrations/python-client/src/milai_client/lifecycle.py",
+      "sha256": "308a9297685cd96d1fe0de4ccda4523a8d91517131a4415656ae5c43da2d29a7",
+      "size": 12672
+    },
+    {
+      "path": "integrations/python-client/src/milai_client/models.py",
+      "sha256": "c9f8c64d4ab60be7acbef632fc0d789f6d94b14eb657ff4ec0d38a7721dc6d8b",
+      "size": 21955
+    },
+    {
+      "path": "integrations/python-client/src/milai_client/py.typed",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size": 1
+    },
+    {
+      "path": "integrations/python-client/src/milai_client/tools.py",
+      "sha256": "ff7316a18a528330b1d074f1c7cc5f50e34aa5fb2c03c56d75cf39bafede7969",
+      "size": 9831
+    },
+    {
+      "path": "integrations/python-client/tests/test_agent_loop.py",
+      "sha256": "6ae9f49151e85c8c8d837cd1eac507a36f26c2a0c72690752dd832f97a693952",
+      "size": 1954
+    },
+    {
+      "path": "integrations/python-client/tests/test_client_contract.py",
+      "sha256": "fea410c983f9bfac3858d0d48f4e9968a1e61d0e2b9881e3221f2eda3de0f3f4",
+      "size": 20203
+    },
+    {
+      "path": "integrations/python-client/tests/test_lifecycle.py",
+      "sha256": "d34dfcbbd321e6c47dea063b9d4744a98fcbe92d014a9b4730e9423e2e8aa207",
+      "size": 7105
+    },
+    {
+      "path": "integrations/python-client/uv.lock",
+      "sha256": "59007f7949ad080b037427265084d7b9fefc31387d45473d09885277d2c50530",
+      "size": 58789
+    },
+    {
+      "path": "runtime/.env.example",
+      "sha256": "177afc44f0707e86c2f34f8fac47680cbeffc98b62407bb9229157729ee4000c",
+      "size": 2434
+    },
+    {
+      "path": "runtime/.python-version",
+      "sha256": "589191117772bbb86645d171d153b6d166a9ce50cb7abcc206af90de1284cf7d",
+      "size": 6
+    },
+    {
+      "path": "runtime/README.md",
+      "sha256": "8c53e08d96395096a1531442ada85f6847e486fd6e4b6c96fe24000431c104b1",
+      "size": 3293
+    },
+    {
+      "path": "runtime/alembic.ini",
+      "sha256": "16ae40669677b32dfc4672fdbd13832e21aea491a18bea6f5b88e98e15092b70",
+      "size": 561
+    },
+    {
+      "path": "runtime/compose.yaml",
+      "sha256": "2d9a46b53912d961f1ef975895de035c6774e705b510b03ed23534ea3de6cb3b",
+      "size": 1179
+    },
+    {
+      "path": "runtime/dist/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "size": 1
+    },
+    {
+      "path": "runtime/dist/milai_runtime-0.1.0-py3-none-any.whl",
+      "sha256": "8c41e1b5333adf711bbf85dca81eedc43508d8d1dbf69e51ab31596129c02242",
+      "size": 121670
+    },
+    {
+      "path": "runtime/dist/milai_runtime-0.1.0.tar.gz",
+      "sha256": "8794145a8dc2808d69c838dce84f7f78bbdc0662daa686d4a2bf29d8be839e37",
+      "size": 252401
+    },
+    {
+      "path": "runtime/docker/initdb/010_roles.sh",
+      "sha256": "38094279bef383a8d7adfabe46b417962380aab91e157a7c6087f176d5ab2593",
+      "size": 1923
+    },
+    {
+      "path": "runtime/migrations/env.py",
+      "sha256": "0f1d43e6f273f334ca855921d7388fcc82a3ba156dea735e19f77f5d0b9a1f26",
+      "size": 1613
+    },
+    {
+      "path": "runtime/migrations/script.py.mako",
+      "sha256": "d3244c86d221281de16e369b51c24857af6569d93d7dd65564591c618da8498a",
+      "size": 594
+    },
+    {
+      "path": "runtime/migrations/versions/0001_runtime_foundation.py",
+      "sha256": "7b227cfc567616194008fd0e38467d7ad9f9d0728dc7e31ddac74b1f530da6b5",
+      "size": 1676
+    },
+    {
+      "path": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+      "sha256": "af088d901b637487789c9b56c0881511b5d74675005d965e6140dbb29d24b71a",
+      "size": 3638
+    },
+    {
+      "path": "runtime/migrations/versions/0003_evidence_plane.py",
+      "sha256": "89da2aeee8aab20dcfa1f917eae18457f786d86492a288573a6e47aa12250ae3",
+      "size": 17576
+    },
+    {
+      "path": "runtime/migrations/versions/0004_canonical_state_schema.py",
+      "sha256": "21a3c7236a2c6d750730bf50a1d52e683f05976aa9f38e9649d75ba78bf2b4c5",
+      "size": 32303
+    },
+    {
+      "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+      "sha256": "3e13d34c241c2616790216debd7b21b8a3b5b64bd11f4a8f22c6c26c42c041f2",
+      "size": 52046
+    },
+    {
+      "path": "runtime/migrations/versions/0006_evidence_revocation.py",
+      "sha256": "74366153fe51e4b7a7a3f16edd3a7fc63aa1010016462e75ac7e6a74eafd6cda",
+      "size": 25696
+    },
+    {
+      "path": "runtime/migrations/versions/0007_projection_outbox.py",
+      "sha256": "0feed82ee32083560a487f7cd756f08c2a138d1fa12d0879b472bd0d91906070",
+      "size": 38671
+    },
+    {
+      "path": "runtime/migrations/versions/0008_retrieval_gate.py",
+      "sha256": "27b0b2a0ae5bf1aee5f21406435fc7839bf7e8adb5f0286fd8723be8f0c44aaa",
+      "size": 17357
+    },
+    {
+      "path": "runtime/migrations/versions/0009_context_chat.py",
+      "sha256": "06b074858aed3e0b3506bfa37c41561fdabed8b896213e8c00d8a27561cc6981",
+      "size": 22238
+    },
+    {
+      "path": "runtime/migrations/versions/0010_backup_operations.py",
+      "sha256": "765244287b86be14c5432f6b399437081fcd2e2f3cf08e68f0b4ffcf7ed00b08",
+      "size": 16048
+    },
+    {
+      "path": "runtime/migrations/versions/0011_episode_settlement.py",
+      "sha256": "8c7e68f9de4b9f28229c93d5deb8d50cf7118ae7d4f3c75b8fa5407a8a454114",
+      "size": 23999
+    },
+    {
+      "path": "runtime/migrations/versions/0012_query_plan_trace.py",
+      "sha256": "4b02d9c25cdceaa8310faf38abed84c64f187b4f84eb907ef225469921b9a6b6",
+      "size": 9206
+    },
+    {
+      "path": "runtime/migrations/versions/0013_live_confirmation_gate.py",
+      "sha256": "5f1c827d99825ef5889e0c6a6254d196da7154c99dd4214ebcf941c2c16bf452",
+      "size": 9200
+    },
+    {
+      "path": "runtime/migrations/versions/0014_query_plan_outbox_sequence.py",
+      "sha256": "a5ed271f01f0f1b82beb410b0b884141767aff0a7535eba278aaea4b6d19c190",
+      "size": 2505
+    },
+    {
+      "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+      "sha256": "6a71059f289dc8a464e55c57cab9b536747586183f8a523640edd31d171750e1",
+      "size": 38361
+    },
+    {
+      "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+      "sha256": "89ad804f4e80b74feacb5e890065b03d310bf3215e4f576671d75fb993f33c1b",
+      "size": 11799
+    },
+    {
+      "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+      "sha256": "51eb998a66896163821989fe9c069b67a254c4568251e44223f005072b81c23c",
+      "size": 15785
+    },
+    {
+      "path": "runtime/migrations/versions/0018_causal_retrieval_trace.py",
+      "sha256": "776772e61af40dd6f20df9efd619cfb77b0d6602096a30f94cca25d10d1f412d",
+      "size": 7316
+    },
+    {
+      "path": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+      "sha256": "2d6ba35d72e2e24d7d8ce0f9bf282a80dc774b3eee715aa45bc20925b43a7671",
+      "size": 8515
+    },
+    {
+      "path": "runtime/migrations/versions/0020_causal_position_api.py",
+      "sha256": "855e9cca4fb7895fdd18690944b031905b77d9ab1681169fcf426005236e6b89",
+      "size": 3767
+    },
+    {
+      "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+      "sha256": "a93587eee69963b292ef9314519082c68505dc3cdbf8cb13d9ce4b86e1c84dd7",
+      "size": 5905
+    },
+    {
+      "path": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+      "sha256": "b92dc151547075575fee8389926428f39a0005790daf115ecbb69169d70dc206",
+      "size": 1689
+    },
+    {
+      "path": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+      "sha256": "9f0d4e6639a18a941f2ee44b849b48b1fabf1cf064563d0d95a6eb7f073bf8ba",
+      "size": 1031
+    },
+    {
+      "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+      "sha256": "fb339a79f5866f19ca55817a740559d47eb36d9dfa28fd6e51c991bf3a9709c8",
+      "size": 78501
+    },
+    {
+      "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+      "sha256": "cd89ce8734a2dd96f89a575b6ac34f40b16606d1662d08a81715856679d4cec2",
+      "size": 27769
+    },
+    {
+      "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+      "sha256": "5a501f6dfb093059b2054c8fc7c5663c9604fdf11be467cd89763e7caa8c16cb",
+      "size": 8677
+    },
+    {
+      "path": "runtime/migrations/versions/0027_embedding_projection_identity.py",
+      "sha256": "cdfdfb267acc81c22d8eca6c887dfc2305e7361e997659288bb42a814c3f7952",
+      "size": 1683
+    },
+    {
+      "path": "runtime/pyproject.toml",
+      "sha256": "1463978c15ddcfe8c14887bb8d9839c0e1a9d6fc9a037bf1f049c541213340d0",
+      "size": 2036
+    },
+    {
+      "path": "runtime/src/milai/__init__.py",
+      "sha256": "0ea5ec7f809627d83bef5ffac1689aa8dba5c039fafb468a7272316f882dfce8",
+      "size": 188
+    },
+    {
+      "path": "runtime/src/milai/adapters/__init__.py",
+      "sha256": "18af56fc3abac5c443b51066c91318b9fad16c791483ea12e4bfe3c0e00074a0",
+      "size": 563
+    },
+    {
+      "path": "runtime/src/milai/adapters/blob_store.py",
+      "sha256": "8636f69ae387703b3591734c591dcb29858ea7db34aec691746cd00e35656026",
+      "size": 13586
+    },
+    {
+      "path": "runtime/src/milai/adapters/embedding.py",
+      "sha256": "1421b5b30fda2677ed8f88ea7b762c16e7b383c2df94d91a93fa408f9db722ba",
+      "size": 8442
+    },
+    {
+      "path": "runtime/src/milai/api/__init__.py",
+      "sha256": "ad7d8881d3764ff0ab12127d259fe186cc40dc014c83c5fa6674a2a97732e9c4",
+      "size": 63
+    },
+    {
+      "path": "runtime/src/milai/api/app.py",
+      "sha256": "7f354a328abcdb24c55568a121d3c9e69ffcbb12d653d734549209260b0214bd",
+      "size": 8781
+    },
+    {
+      "path": "runtime/src/milai/api/auth.py",
+      "sha256": "e8d18ca30e68395764c5eecf841ab473c0d9d986cc923b39c50d8b7104377063",
+      "size": 3319
+    },
+    {
+      "path": "runtime/src/milai/api/canonical_routes.py",
+      "sha256": "9b3fd5b466e30cf36092a5425d03d9869db69ad9ded7e249f5ae7b7a76f330fb",
+      "size": 7074
+    },
+    {
+      "path": "runtime/src/milai/api/capability_routes.py",
+      "sha256": "ef6cf8ea1765d61535bb7ac8ec5b705374a71bad5e3a6568aea7fb159892d323",
+      "size": 2557
+    },
+    {
+      "path": "runtime/src/milai/api/cli.py",
+      "sha256": "1ac2efaf1365fc35642257be5b26ccc34d266b0632b810ee8dc387ff4a8b09d6",
+      "size": 979
+    },
+    {
+      "path": "runtime/src/milai/api/context_routes.py",
+      "sha256": "e2e754f045c77745f4f0aebba41fd2c38654e986a768a5712ea3bd707d675abf",
+      "size": 4957
+    },
+    {
+      "path": "runtime/src/milai/api/deletion_routes.py",
+      "sha256": "907fe768ce1d683e0254d8d0f312c6100916df2f6f9bb9b42bfef5752b7a9293",
+      "size": 3939
+    },
+    {
+      "path": "runtime/src/milai/api/episode_routes.py",
+      "sha256": "db273aa462923cd83b2112b8e5d0391ee59541965f0734f306ad7c8c47b19f33",
+      "size": 4256
+    },
+    {
+      "path": "runtime/src/milai/api/errors.py",
+      "sha256": "3e9c82421d3a2228bc21910629e9833765441e02ff0962da7b532eac496ea89c",
+      "size": 267
+    },
+    {
+      "path": "runtime/src/milai/api/evidence_routes.py",
+      "sha256": "be2cc28c14fd19e9d1ffc1444648b106d6e8ad5657f0b00e596caf83281776ce",
+      "size": 6040
+    },
+    {
+      "path": "runtime/src/milai/api/retrieval_routes.py",
+      "sha256": "f53ba27373b55bbcb61460ee98385dbd3c71be220fb878d93f1f2c2209341099",
+      "size": 5494
+    },
+    {
+      "path": "runtime/src/milai/api/ui_routes.py",
+      "sha256": "0d7c3d1c2e8337736588c23d5a19bf3992039431238b5fa4ff6283f69dec0b18",
+      "size": 605
+    },
+    {
+      "path": "runtime/src/milai/application/__init__.py",
+      "sha256": "8cc45f070bef391a999c66a28032399db68c346ad61464e70ba63111335c3cf6",
+      "size": 935
+    },
+    {
+      "path": "runtime/src/milai/application/causality.py",
+      "sha256": "67764021ea8a05f35f2284261032485e4c3015128fb6f3c1bba507058dc3cefb",
+      "size": 716
+    },
+    {
+      "path": "runtime/src/milai/application/chat.py",
+      "sha256": "49800f3ad1b5dd4b0fc9beac67bb25585c24c6f33aa2d37d07445ca6f2f2e1b1",
+      "size": 12322
+    },
+    {
+      "path": "runtime/src/milai/application/context.py",
+      "sha256": "4f253731916806da870ab18f9f5bfeb297e2a927a6c65746dd8e54d363fd6f17",
+      "size": 6044
+    },
+    {
+      "path": "runtime/src/milai/application/deletion.py",
+      "sha256": "c870e5bdc5b8c10cc84c65d937ff8327cf43f9827c9660e105326487f28bc80f",
+      "size": 1872
+    },
+    {
+      "path": "runtime/src/milai/application/derivation.py",
+      "sha256": "d7e63e8b7cdbd6d50cd4f671cf2bc89ece8d849e088cc35800ebc61a35beadf9",
+      "size": 4523
+    },
+    {
+      "path": "runtime/src/milai/application/episodes.py",
+      "sha256": "e22a2b921905104ac0dd89a1ba4df296fb7a4e9fd724efa554e9b9834067f5bd",
+      "size": 2813
+    },
+    {
+      "path": "runtime/src/milai/application/errors.py",
+      "sha256": "0919227633044fce93c7a905b5264855a890d1efa516e1285b2c191ea44ef735",
+      "size": 993
+    },
+    {
+      "path": "runtime/src/milai/application/evidence.py",
+      "sha256": "2005fa3ff82db636e5867315b9f003ee32777f0705f4ce8bf5e417b64497b88b",
+      "size": 5230
+    },
+    {
+      "path": "runtime/src/milai/application/proposals.py",
+      "sha256": "1ab2a4e11f92b95d1843a0db8eec0ef5727a3e1ea29423d44695c04857b18580",
+      "size": 6058
+    },
+    {
+      "path": "runtime/src/milai/application/query_planner.py",
+      "sha256": "0ee12e7b666de39b2773af650d31fcaf7b8b9133699cf33e50d4c94df88140e5",
+      "size": 1972
+    },
+    {
+      "path": "runtime/src/milai/application/retrieval.py",
+      "sha256": "6ec3935ce8b8423dc402bae5fa82713d480d019ab7e61c5f0c05fadc575a22b6",
+      "size": 20450
+    },
+    {
+      "path": "runtime/src/milai/config/__init__.py",
+      "sha256": "ad4c811982c151a58c5c86bd41d2899c1e53a16ba1751d2b906bab1168aa128a",
+      "size": 145
+    },
+    {
+      "path": "runtime/src/milai/config/settings.py",
+      "sha256": "96db5a5d23795d9426d903724e876f69b16ecde04fba205c49869a611c8c4d96",
+      "size": 11329
+    },
+    {
+      "path": "runtime/src/milai/domain/__init__.py",
+      "sha256": "55de3d0ed7deb45fea35108acf9563939d469be72bec33c3e840f7c93756d2ec",
+      "size": 833
+    },
+    {
+      "path": "runtime/src/milai/domain/causality.py",
+      "sha256": "0b58e9c8d9e931b44529e9a3bb09be9cb5d455c0009e70d6d5dc7fa7e499dc69",
+      "size": 3112
+    },
+    {
+      "path": "runtime/src/milai/domain/chat.py",
+      "sha256": "c57db3eab005b082ae345d55d7577f94cd36de02f8317486bc27d7b075033b58",
+      "size": 3201
+    },
+    {
+      "path": "runtime/src/milai/domain/deletion.py",
+      "sha256": "accccd41e0c959c802d1512e3790aa6b22c76db19f40a28671d7e3970a403871",
+      "size": 495
+    },
+    {
+      "path": "runtime/src/milai/domain/episodes.py",
+      "sha256": "f41789f880315044a64263b56896690972d81fdcb83ac16a137524ba70911448",
+      "size": 1825
+    },
+    {
+      "path": "runtime/src/milai/domain/evidence.py",
+      "sha256": "1cd07004b36f395c5ac66346c67e461d410a56178040c516efed0f4cc4c1e9ea",
+      "size": 1098
+    },
+    {
+      "path": "runtime/src/milai/domain/proposals.py",
+      "sha256": "ef7e39d7de9c0eb2395a5ca9f8ef5e1c6140a0c01fab40047dbc0a8a6cf1ba00",
+      "size": 5169
+    },
+    {
+      "path": "runtime/src/milai/domain/retrieval.py",
+      "sha256": "8a9e13de03ab4446d9562cf62ffb0804490b60af0680a939425dd487ff276d80",
+      "size": 4302
+    },
+    {
+      "path": "runtime/src/milai/observability/__init__.py",
+      "sha256": "e37f8d5a421ee61124c59424328c8d0e9e78756caf161989f65585c62a04a629",
+      "size": 91
+    },
+    {
+      "path": "runtime/src/milai/observability/logging.py",
+      "sha256": "4e5c10b27a30c0b1e54e1c977000555ad73aef4f60a918209ee00c1ea6350423",
+      "size": 2603
+    },
+    {
+      "path": "runtime/src/milai/operations/__init__.py",
+      "sha256": "12ba7724521ac691b3abb56c6a83ba093f96cd21ab02082df1b1b2c527005292",
+      "size": 253
+    },
+    {
+      "path": "runtime/src/milai/operations/backup.py",
+      "sha256": "c0d32083a961a3f8d09512e79872008d18f76fcadab9a6f35670a66f42996695",
+      "size": 21047
+    },
+    {
+      "path": "runtime/src/milai/operations/cli.py",
+      "sha256": "b24ea7e0def0cea6af5a8dfb6b80ca7a8b37b361297452742475307614bd9a63",
+      "size": 18386
+    },
+    {
+      "path": "runtime/src/milai/operations/credential_rotation.py",
+      "sha256": "cffdbb88501f9a466698c28ede2d48dcc9d2396c2508bdc25e8540941c69105e",
+      "size": 9983
+    },
+    {
+      "path": "runtime/src/milai/operations/doctor.py",
+      "sha256": "20568d6bcde29846f5b8f6f7f3054f73faa9a05f89630df3401037bef2d86e5c",
+      "size": 18821
+    },
+    {
+      "path": "runtime/src/milai/operations/import_dry_run.py",
+      "sha256": "864f0c64f1881d1eaf0ae8dc0cfd28411af906371a8353353071974bbd826eba",
+      "size": 6968
+    },
+    {
+      "path": "runtime/src/milai/operations/local_runtime.py",
+      "sha256": "d67f7a3e1384369cd69d9b78d8a8506b65b062b9f6d3dbd8e9842c70a2c3f2eb",
+      "size": 13747
+    },
+    {
+      "path": "runtime/src/milai/operations/smoke.py",
+      "sha256": "d6b333c8cebcd3ab051e21ac0266191f13aa4b06aee4bed08dd8301a86e9c519",
+      "size": 28019
+    },
+    {
+      "path": "runtime/src/milai/persistence/__init__.py",
+      "sha256": "3643559f8ccd24f58adff1f11a45e88eed482db63ba5aceb9f901e4b28da9c42",
+      "size": 211
+    },
+    {
+      "path": "runtime/src/milai/persistence/canonical_repository.py",
+      "sha256": "98639a93a98b552fdd78dcca599df120400cae73a6e2d3ef12652e3525bafff1",
+      "size": 15012
+    },
+    {
+      "path": "runtime/src/milai/persistence/cli.py",
+      "sha256": "e8bfca96cbecacfa37e7b91cd81021c1443f47f8cbf58232f4eb3b27ddbb3c4d",
+      "size": 360
+    },
+    {
+      "path": "runtime/src/milai/persistence/context_repository.py",
+      "sha256": "c4a0e76a5dea30832a8b296f144ea789f5ae2a61dc5cbfddd6ac5e743cee0e63",
+      "size": 13857
+    },
+    {
+      "path": "runtime/src/milai/persistence/database.py",
+      "sha256": "c54d25f84ec9f99418f5436ed99a65c3844b58c392eba1dfc2bbc74c085d3ee9",
+      "size": 6964
+    },
+    {
+      "path": "runtime/src/milai/persistence/deletion_repository.py",
+      "sha256": "0871f9869758e3c68b9e8a76013c53ae61e4eee8a670d296de1069caf668974c",
+      "size": 4900
+    },
+    {
+      "path": "runtime/src/milai/persistence/episode_repository.py",
+      "sha256": "f268ef08139ffa99c7ec0a2e7f6a84d7309bc39221dfd062df615f136244bb7e",
+      "size": 6868
+    },
+    {
+      "path": "runtime/src/milai/persistence/evidence_repository.py",
+      "sha256": "b83096225b5a4ba38ae21436dca7e30697b2fb5351f94efd0e71327fbba7044f",
+      "size": 5652
+    },
+    {
+      "path": "runtime/src/milai/persistence/projection_repository.py",
+      "sha256": "80399ad8fbbc2d6f64bb2747281cb5dc33482131f80f8ade50cdbe0c007a6557",
+      "size": 8957
+    },
+    {
+      "path": "runtime/src/milai/persistence/retrieval_repository.py",
+      "sha256": "b07e68565d3bd3ce26bd450aaa5c8ab314feee424f9a2bcaa92f2766150e5b85",
+      "size": 21549
+    },
+    {
+      "path": "runtime/src/milai/py.typed",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size": 1
+    },
+    {
+      "path": "runtime/src/milai/static/milai.css",
+      "sha256": "9a3f8a92f09a9b6d84dc8aa71cc78794b30bf9dc40013b8615171c990d06fcd9",
+      "size": 1209
+    },
+    {
+      "path": "runtime/src/milai/static/milai.js",
+      "sha256": "705c79ab3ea01a70b91effd7d9fa729cf1e0538d95da7665c9f988e63b21d36b",
+      "size": 10200
+    },
+    {
+      "path": "runtime/src/milai/templates/index.html",
+      "sha256": "4a2797354289fb8fa4280431c04beaf2d42a5101966761c91a061554ea286998",
+      "size": 6224
+    },
+    {
+      "path": "runtime/src/milai/workers/__init__.py",
+      "sha256": "38ed2229b2b611b1e1e22149d7d4ab57072d56bc83409ce072d15b46fb51535f",
+      "size": 80
+    },
+    {
+      "path": "runtime/src/milai/workers/main.py",
+      "sha256": "7f092b761a523fe6542e5e4fc5accd55840afe08c3889311cf4507949d0767f4",
+      "size": 9087
+    },
+    {
+      "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+      "sha256": "e30cf83af32fc6add6cd01233e36af010100d5fc6d4640862f271b80825751c6",
+      "size": 34607
+    },
+    {
+      "path": "runtime/tests/contract/test_agent_capabilities.py",
+      "sha256": "713f486b29af6a59d1598f4ae02423f4cbaeae796b11593c873f3230ff514fe7",
+      "size": 3385
+    },
+    {
+      "path": "runtime/tests/contract/test_agent_contract_files.py",
+      "sha256": "ee76a2316b67440dc1a194a1e18c088865f3fa846e3c68e5735f98b1f21747c1",
+      "size": 2273
+    },
+    {
+      "path": "runtime/tests/contract/test_evidence_auth.py",
+      "sha256": "1dd4c17add3270666187d395eac038aac4cc61ab32ef8f424efb355c3e4b9851",
+      "size": 1729
+    },
+    {
+      "path": "runtime/tests/contract/test_health.py",
+      "sha256": "4d5ee7a671c2cb58542faf3a757563fdeff2a0e0c88a2ec57e557b90062c9497",
+      "size": 3109
+    },
+    {
+      "path": "runtime/tests/contract/test_ui_agent_integration.py",
+      "sha256": "e6c0bfdb67af28c5985fa6f9afd3dd495b11606a9e8c40c5fe6af0163eb12a0c",
+      "size": 895
+    },
+    {
+      "path": "runtime/tests/integration/test_backup_restore.py",
+      "sha256": "86ce2fbd1225326cec8f9c2e20fd27d06f40c6f4fc61a2bf46b9e5ffed5d2971",
+      "size": 12555
+    },
+    {
+      "path": "runtime/tests/integration/test_canonical_api.py",
+      "sha256": "b7706522ccfad78db3eae2deb18a68d6c23bee9cfabc5a73ac34a7ac40cfef8e",
+      "size": 20547
+    },
+    {
+      "path": "runtime/tests/integration/test_context_chat_api.py",
+      "sha256": "3a87a0b1c8ed74a9cef61136c54eefcb4138e9e1c4513aa89bcca88ac5be97b1",
+      "size": 17490
+    },
+    {
+      "path": "runtime/tests/integration/test_episode_settlement.py",
+      "sha256": "6fa07d2014131596f9e6142e08fe2a9c408acdcd98e4890fe5bdcfb1ce682c9f",
+      "size": 11210
+    },
+    {
+      "path": "runtime/tests/integration/test_evidence_api.py",
+      "sha256": "fa316b86cd6c768121fbdc4d963582336d1e43beb460e43a4d3a9770d2c0e0a6",
+      "size": 12403
+    },
+    {
+      "path": "runtime/tests/integration/test_projection_worker.py",
+      "sha256": "bdd6a21e1e57d198c042ed9ea2100d6d4a94939945dcadffbb218810a0d83d83",
+      "size": 23325
+    },
+    {
+      "path": "runtime/tests/integration/test_retrieval_api.py",
+      "sha256": "98fff983da391c5d58a4827dbad3a6c0b1daf18077b68dfe6293e9b3a56efa7f",
+      "size": 28126
+    },
+    {
+      "path": "runtime/tests/integration/test_runtime_foundation.py",
+      "sha256": "b0c2e568928dc53758cd3a17a06f98a6adcb268db3765e17a96590eb09b5ce2e",
+      "size": 104469
+    },
+    {
+      "path": "runtime/tests/security/test_tenant_roles.py",
+      "sha256": "c5f24c766d4ad71e2b87eaf7412a1aa9ccbe0df103fcb1b9bd3135934f83285e",
+      "size": 6647
+    },
+    {
+      "path": "runtime/tests/unit/test_blob_store.py",
+      "sha256": "b4008f3d88977bfe6b1a4ea91af09a41f2f8eff6921e616d0345b7c9ea18e629",
+      "size": 6916
+    },
+    {
+      "path": "runtime/tests/unit/test_causality.py",
+      "sha256": "e453835e70e0f59fb6b7398606ce635e07a128d807fa819b763c0e31f74002ca",
+      "size": 1418
+    },
+    {
+      "path": "runtime/tests/unit/test_derivation_policy.py",
+      "sha256": "2c153d898a96b9d72c7b9abc07fb947dc7b3b937cb8fe60005badebd7172bb61",
+      "size": 1722
+    },
+    {
+      "path": "runtime/tests/unit/test_embedding.py",
+      "sha256": "a5a9f277e8ba6f6c8f2123d62a2e0dd039261204f50c0b644bd10ac1cab0f00d",
+      "size": 3290
+    },
+    {
+      "path": "runtime/tests/unit/test_external_dependency_boundary.py",
+      "sha256": "ccebd02a43b71473a9b68709a0f075f3551273241f3682bac0ac7fcddbab4a3d",
+      "size": 1014
+    },
+    {
+      "path": "runtime/tests/unit/test_import_dry_run.py",
+      "sha256": "e9b909be6397bcb4ce38401a4cf80ee8c506e72ac898d0da55dfb965bc071410",
+      "size": 2447
+    },
+    {
+      "path": "runtime/tests/unit/test_logging_redaction.py",
+      "sha256": "d3c26eff05dee78428507641aeb23edb35831fa195951f6d5c6d155851dc3b06",
+      "size": 1120
+    },
+    {
+      "path": "runtime/tests/unit/test_operations_cli.py",
+      "sha256": "b7d2499dfb8494377518dc18419f967f3e98ad5870905644f4cb2c69d90df8d3",
+      "size": 7990
+    },
+    {
+      "path": "runtime/tests/unit/test_query_planner.py",
+      "sha256": "3c72ac8eac11f61c97bc539dd742d40e5d5d99202c8f3a61815c670a221f9a68",
+      "size": 1132
+    },
+    {
+      "path": "runtime/tests/unit/test_settings.py",
+      "sha256": "55c01383ebd6e569e342c9df9e2733a71e00e0a316668fb987cc77538db68d34",
+      "size": 4662
+    },
+    {
+      "path": "runtime/tests/unit/test_worker.py",
+      "sha256": "838c56354df2ecf59570951b5fca1b5da567e18bb7ff14d0234faeb44f23d423",
+      "size": 1156
+    },
+    {
+      "path": "runtime/tests/unit/test_worker_settings.py",
+      "sha256": "a762767a481d65083b92dadd310638a6e14768d5dfcaa87ed09d18423db18015",
+      "size": 2963
+    },
+    {
+      "path": "runtime/uv.lock",
+      "sha256": "5efdeb48cbea7fa51650c1b6d16d0f6ea3af0321304369046e550c1b063b2c20",
+      "size": 167522
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/1_Pooling/config.json",
+      "sha256": "4fef0a7e8c8ee36e74c0fad89bab60ade72324442d43f559ea219bb7c2580710",
+      "size": 90
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/README.md",
+      "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0",
+      "size": 10502
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/config.json",
+      "sha256": "43d5db90da5312f0a1f79224bcfb862b7e44cac7eacff5f4957769e578991c08",
+      "size": 744
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/config_sentence_transformers.json",
+      "sha256": "65d544d2189652ecbc3c7926cbfa0039d71786510020ea8dfe615e28c097f96b",
+      "size": 282
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/model.safetensors",
+      "sha256": "1377e9af0ca0b016a9f2aa584d6fc71ab3ea6804fae21ef9fb1416e2944057ac",
+      "size": 90864192
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/modules.json",
+      "sha256": "fa7d796a215e1b2416773062891923b191fc5a4849bc44e322997433c90f459c",
+      "size": 429
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/onnx/model.onnx",
+      "sha256": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452",
+      "size": 90405214
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/sentence_bert_config.json",
+      "sha256": "3084164002c0bca01b0259c5327123803fce32e660a57feb93184ffead186fc8",
+      "size": 241
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/tokenizer.json",
+      "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0",
+      "size": 711661
+    },
+    {
+      "path": "runtime/var/models/all-MiniLM-L6-v2/tokenizer_config.json",
+      "sha256": "4817907ff3846ed899a62cccad0193c21d0792130c6139d8362187153eeff283",
+      "size": 594
+    },
+    {
+      "path": "scripts/build_package_release_manifest.py",
+      "sha256": "f323aa0a33b2c03a457092cc63a170a70b441b4c23b93e8fee88d502afdb584b",
+      "size": 5012
+    },
+    {
+      "path": "scripts/build_ua_inventory.py",
+      "sha256": "1ad162fba0aae9e3e2933c91baac86c16a5ace681b007b3efb09d4da39436f10",
+      "size": 3214
+    },
+    {
+      "path": "scripts/run_package_clean_install_gate.py",
+      "sha256": "2aa19ceb9bfb0251b501b511ce3f465174ac3d6be5bc33e943a4009c8a9122e2",
+      "size": 5355
+    },
+    {
+      "path": "scripts/run_runtime_full_gate.py",
+      "sha256": "8629a61395b237214f76963406e3f9998ac66ead2642cfd346bd4c5b31516006",
+      "size": 4598
+    },
+    {
+      "path": "scripts/scan_ua_secrets.py",
+      "sha256": "c2d488386a519dffc5db695183eebdbb65d5d47e55a45ef3262ca29f0f9761b8",
+      "size": 8377
+    },
+    {
+      "path": "tests/conftest.py",
+      "sha256": "9a5467c9d194f4eb6401865999209bdbdd80a6922e806955749cc9dc4bddee4a",
+      "size": 278
+    },
+    {
+      "path": "tests/test_release_safety.py",
+      "sha256": "3cc53a24c29c0b49d9854c8d36afe4bd7986c8dd7be7d3ba055266fd8e6551f6",
+      "size": 4144
+    }
+  ],
+  "entries_sha256": "d4f2cdcd52c2d702b8ee3d568c3b54ec39bc83a0e719e8cd79af6db1f669842f",
+  "entry_count": 322,
+  "excludes_secrets": true,
+  "format": "milai-ua-current-byte-inventory-v1"
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "milai.dg10.dev-semantic-audit-receipt.v1",
+  "date": "2026-08-21",
+  "candidate": "candidate.1",
+  "status": "AI_DEVELOPMENT_AUDIT_VALIDATED_NOT_FORMAL_ACCEPTANCE",
+  "formal_crg_01": false,
+  "human_approval": false,
+  "benchmark_judge": false,
+  "candidate_modification_authority": false,
+  "purpose": "Pre-freeze blind semantic audit of public-benchmark model-round and benchmark-fixture authority contracts.",
+  "invocation": {
+    "cli": "codex-cli 0.147.0",
+    "cli_sha256": "cb0a15567e9a60a5820d54b0f6ae86d504dc3805c1eab21a47f70e3eb7b73a40",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "max",
+    "approval": "never",
+    "ephemeral": true,
+    "ignore_user_config": true,
+    "ignore_rules": true,
+    "sandbox": "read-only",
+    "skip_git_repo_check": true,
+    "exit_code": 0
+  },
+  "closed_input_boundary": {
+    "path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0700",
+    "materials_only": true,
+    "benchmark_raw_content_included": false,
+    "secret_or_route_included": false,
+    "materials_sha256": "855372def4c545ef937b03a1a8a033946058f44a63ce9d5ac94975a82a777720",
+    "materials_size": 5191,
+    "prompt_sha256": "fc2d9d53adfe6574651e4ed724cde97a2ea577cd7f00d6b8afebb3506477b12d",
+    "prompt_size": 1243,
+    "schema_sha256": "3f8e92d06db79ee569afa182043b7e953c6912ca24f69d10814907ff5775acd9",
+    "schema_size": 2664
+  },
+  "raw_evidence": {
+    "retention": "REPO_EXTERNAL_ONLY",
+    "mode": "0600",
+    "events_jsonl_sha256": "c86311d2a0bfa1b286c27689ca755dd7c7df92c5c0bdbfaaaba5a16a4696c857",
+    "events_jsonl_size": 19738,
+    "output_json_sha256": "a024e80a0a62491b09aa0cd9e6b68eaaafa6512013e5b2abd59416f6bb0d060a",
+    "output_json_size": 12144,
+    "stderr_sha256": "a18e52344e21d444a616d22da2e605cf58faaa766985c2e30e0cd473924f15bc",
+    "stderr_size": 286
+  },
+  "acceptance_checks": {
+    "schema_validator": "jsonschema 4.26.0 Draft202012Validator from locked MCP venv",
+    "output_schema_valid": true,
+    "events_jsonl_all_rows_valid": true,
+    "event_count": 7,
+    "provider_thread_count": 1,
+    "provider_thread_id_sha256": "bc71a2e72aeb70303fadd48ffddb82d0178901a6d62e8d902c5b923505347784",
+    "stderr_empty": false,
+    "stderr_diagnostic": "Two model-catalog refresh child-process timeout messages were observed; final process exit, output Schema, and single-thread checks still passed."
+  },
+  "usage": {
+    "input_tokens": 31108,
+    "cached_input_tokens": 14080,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 10234,
+    "reasoning_output_tokens": 7543,
+    "cost": "UNAVAILABLE"
+  },
+  "result": {
+    "verdict": "CONTRACT_CHANGE_REQUIRED",
+    "summary": "The evidenced OpenWorker MILAI_MCP path needs two visible native vLLM calls: one tool decision and one terminal answer after the MCP result. Case-level denominator symmetry does not require equal native-call totals.",
+    "recommended_planned_model_rounds": {
+      "NO_MEMORY": 1,
+      "NAIVE_RAG": 1,
+      "MILAI_MCP": 2
+    },
+    "recommended_planned_mcp_calls": {
+      "NO_MEMORY": 0,
+      "NAIVE_RAG": 0,
+      "MILAI_MCP": 1
+    },
+    "hidden_or_extra_definition": "Any native model call outside the frozen arm-specific planned roles is hidden or extra; the two visible MILAI_MCP rounds are planned and hidden_or_extra remains zero.",
+    "denominator_policy": "One scheduled observation per frozen case per arm; native call totals and failures remain separately reported without exclusion or reweighting.",
+    "token_policy": "Freeze one aggregate per-case token ceiling and account cumulatively across all planned calls; do not multiply a per-call ceiling by model rounds.",
+    "authority_policy": "Use an explicit frozen benchmark-fixture ingestion policy in an isolated fresh benchmark database/tenant and scope. ACTION_SAFE canonicality is only a benchmark-fixture property and must not be represented as production authority.",
+    "one_call_alternative": "No one-call alternative is supported by the executed adapter semantics; prefetching MCP outside the OpenWorker agent would weaken the stated arm."
+  },
+  "finding_summaries": [
+    {"id": "DEV-AUDIT-01", "severity": "P1", "title": "All-arms one-call expectation contradicts the required MILAI_MCP path."},
+    {"id": "DEV-AUDIT-02", "severity": "P1", "title": "Two planned MILAI_MCP calls are visible rounds, not hidden/extra calls."},
+    {"id": "DEV-AUDIT-03", "severity": "P2", "title": "Case-level denominator symmetry does not imply native-call symmetry."},
+    {"id": "DEV-AUDIT-04", "severity": "P2", "title": "Same model identity/settings do not require equal arm architecture."},
+    {"id": "DEV-AUDIT-05", "severity": "P2", "title": "Equal per-call limits do not establish an equal total per-case budget."},
+    {"id": "DEV-AUDIT-06", "severity": "P2", "title": "Benchmark fixture authority must remain isolated from production authority."},
+    {"id": "DEV-AUDIT-07", "severity": "P2", "title": "This is pre-freeze development advice, not formal acceptance."}
+  ],
+  "boundary": "This receipt records an AI development audit only. It is not CRG-01, CRG-02, a human decision, a benchmark score, or permission to open test labels/outputs."
+}

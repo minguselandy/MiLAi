@@ -1,0 +1,239 @@
+{
+  "audit_skill": "experiment-audit",
+  "verdict": "FAIL",
+  "reason_code": "Q0_FAKE_PREDICTED_IR_Q3C_TEACHER_LEAKAGE_PREDICTION_DEPENDENT_NDCG_Q6_UNRUN",
+  "summary": "Real LongMemEval answer GT and several honest opened-dev artifacts exist, but Q0 causal arms are invalid, Q3C is teacher-assisted, nDCG has a prediction-dependent denominator, Q1 still has live premature COMPLETE decisions, and Q6 plus final gates are unrun. Release remains NO-GO.",
+  "audited_input_hashes": {
+    "MiLAi_DG-17_语义记忆读取与证据集执行_GOALS.md": "sha256:868e7c4743e633211881ac064dda972310117dd23ff8beee28cecda6befb1092",
+    "docs/runbooks/dg17-semantic-read.md": "sha256:0a6197d5c148b9a6a6a57b8a62fbf1cb73f65624cba23b80e95ae2b538090c5d",
+    "evals/dg17/q6_matched.py": "sha256:8b5a409f4eae215199467a47eeddd0589d4bcc87a984162207ec9ea3cb677413",
+    "evals/dg17/q6_preflight.py": "sha256:2bc2762917d81ba6df36b38c1c7fe21e746c44eaaf5402baddbb097a086b6387",
+    "evals/dg17/semantic_shadow.py": "sha256:5860a010e0fb60f7576a999778af6fe2aba406f45d64fe870014f9299156e126",
+    "evals/paper/scorers/longmemeval.py": "sha256:35f4ec190b7f65ed4a0735510d6fb3cdfbe00d6c6e8d7b0d377f67c6397172ce",
+    "var/dg17/q6/dg17-q6-preflight-20260827-003/preflight.json": "sha256:0e8894e0a1dd5ed45895b4c88a0c4f10c9adaebd6e2a37c6b1f6f3fc88847bfd",
+    "var/dg17/local-gate/dg17-local-gate-20260827-005/receipt.json": "sha256:a7441e74f283b06154cdb70edfbf8a804c7bb26dfaa085af3e9fa39ca7317977"
+  },
+  "trace_path": ".aris/traces/experiment-audit/2026-08-27_run01/",
+  "agent_id": "/root/dg17_experiment_audit",
+  "verdict_id": "/root/dg17_experiment_audit",
+  "executor_model": "codex-gpt-5",
+  "executor_family": "openai",
+  "reviewer_model": "gpt-5.6-sol",
+  "reviewer_family": "openai",
+  "reviewer_reasoning": "ultra",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "generated_at": "2026-08-27T14:37:57+08:00",
+  "date": "2026-08-27",
+  "auditor": "gpt-5.6-sol-ultra",
+  "overall_verdict": "fail",
+  "integrity_status": "fail",
+  "checks": {
+    "gt_provenance": {
+      "status": "fail",
+      "details": "Manual semantic labels lack independent provenance; Q0 falsely labels a null placeholder as predicted IR; Q3C places deterministic targets in the model prompt."
+    },
+    "score_normalization": {
+      "status": "fail",
+      "details": "Paper nDCG ideal denominator depends on returned prediction length; raw coverage is also reported and DG16 aggregate F1/coverage are unaffected."
+    },
+    "result_existence": {
+      "status": "fail",
+      "details": "Rescored/original DG16 versions differ, Q0 complete lineages conflict, focused Q1 conflicts with live matched behavior, preflight 003 drops its local-gate binding, and the 39-test claim is untraceable."
+    },
+    "dead_code": {
+      "status": "warn",
+      "details": "Live semantic scoring, Q3C, Q6, external LME10 final scoring, and current paper scoring are implemented but lack live result artifacts."
+    },
+    "scope": {
+      "status": "warn",
+      "details": "Most families use 10 or fewer cases and one seed; Q0 instability is large, Q4/Q5 are oracle/synthetic, and Q6/Q7 are absent."
+    },
+    "eval_type": {
+      "status": "warn",
+      "details": "Real-GT, manual-proxy, self-supervised, simulation, and infrastructure lanes require clearer labels."
+    },
+    "goal_gate_completeness": {
+      "status": "fail",
+      "details": "Q1 fails, Q3C and Q6 are unrun, Q4/Q5 are not matched product evidence, and correctness, governance, cost, operability, and release review remain incomplete."
+    }
+  },
+  "evaluation_families": [
+    {
+      "id": "dg16_lme10",
+      "classification": "real_gt",
+      "n": "10x2 methodsx2 budgets",
+      "runs": 1,
+      "live_model_calls": 40,
+      "claim_ceiling": "opened-dev paired characterization"
+    },
+    {
+      "id": "q0_measurement",
+      "classification": "real_gt_plus_manual_diagnostic_labels",
+      "n": 10,
+      "runs": 1,
+      "live_model_calls": 0,
+      "claim_ceiling": "retrospective failure localization"
+    },
+    {
+      "id": "q0_oracle",
+      "classification": "real_gt_oracle_diagnostic_compromised",
+      "n": "10x4 per run",
+      "runs": 2,
+      "live_model_calls": 80,
+      "claim_ceiling": "reader/evidence diagnostic; no compiler attribution"
+    },
+    {
+      "id": "q1_focused",
+      "classification": "simulation_only",
+      "n": 10,
+      "runs": 1,
+      "live_model_calls": 0,
+      "claim_ceiling": "unit stop-policy regression"
+    },
+    {
+      "id": "q1_matched",
+      "classification": "real_gt_plus_manual_proxy",
+      "n": "10x2 budgetsx2 represented policies",
+      "runs": 1,
+      "live_model_calls": "20 new plus 20 reused baseline records",
+      "claim_ceiling": "opened-dev characterization; gate failed"
+    },
+    {
+      "id": "q3a",
+      "classification": "infrastructure",
+      "n": "10 cases/23 bindings/22 spans",
+      "runs": 1,
+      "live_model_calls": 0,
+      "claim_ceiling": "measurement crosswalk"
+    },
+    {
+      "id": "q3c_infrastructure",
+      "classification": "simulation_only",
+      "n": "29 fixtures/25 supported",
+      "runs": 1,
+      "live_model_calls": 0,
+      "claim_ceiling": "deterministic parser smoke"
+    },
+    {
+      "id": "q3c_planned_live",
+      "classification": "self_supervised_proxy",
+      "n": 29,
+      "runs": 0,
+      "live_model_calls": 0,
+      "claim_ceiling": "none until teacher leakage is removed"
+    },
+    {
+      "id": "q4",
+      "classification": "simulation_only",
+      "n": 7,
+      "runs": 1,
+      "live_model_calls": 0,
+      "claim_ceiling": "oracle-evidence operator isolation"
+    },
+    {
+      "id": "q5",
+      "classification": "simulation_only",
+      "n": 4,
+      "runs": 1,
+      "live_model_calls": 0,
+      "claim_ceiling": "focused composition safety"
+    },
+    {
+      "id": "q6_preflight",
+      "classification": "infrastructure",
+      "n": "0 executed/20 prospective per arm",
+      "runs": 3,
+      "live_model_calls": 0,
+      "claim_ceiling": "readiness and blockers only"
+    },
+    {
+      "id": "reader_stability",
+      "classification": "real_gt_single_case_diagnostic",
+      "n": "1 case/11 attempts",
+      "runs": 1,
+      "live_model_calls": 11,
+      "claim_ceiling": "single-case variability signal"
+    }
+  ],
+  "claims": [
+    {
+      "id": "baseline_metrics",
+      "impact": "supported only by rescored artifact"
+    },
+    {
+      "id": "C1_sufficiency_gain",
+      "impact": "unsupported"
+    },
+    {
+      "id": "C2_generalization",
+      "impact": "needs qualifier: partial simulation only"
+    },
+    {
+      "id": "C3_semantic_assist_gain",
+      "impact": "unsupported; not run and design leaked"
+    },
+    {
+      "id": "q0_complete",
+      "impact": "unsupported as causal completion"
+    },
+    {
+      "id": "q1_wrong_complete_zero",
+      "impact": "unsupported on matched path"
+    },
+    {
+      "id": "q4_q5_complete",
+      "impact": "needs qualifier: deterministic vertical only"
+    },
+    {
+      "id": "q6_matched",
+      "impact": "unsupported; not run"
+    },
+    {
+      "id": "release",
+      "impact": "not authorized"
+    }
+  ],
+  "q_gates": {
+    "Q0": "COMPROMISED_CHARACTERIZATION",
+    "Q1": "CHARACTERIZED_GATE_FAIL",
+    "Q2": "IMPLEMENTED_NOT_MATCHED",
+    "Q3A": "INFRASTRUCTURE_COMPLETE",
+    "Q3B": "PARTIAL",
+    "Q3C": "NOT_RUN",
+    "Q3D": "NOT_AUTHORIZED",
+    "Q4": "ORACLE_ISOLATION_ONLY",
+    "Q5": "FOCUSED_SIMULATION_ONLY",
+    "Q6": "NOT_RUN",
+    "final_correctness": "INCOMPLETE",
+    "final_quality": "FAIL_OR_UNRUN",
+    "final_governance": "INCOMPLETE",
+    "final_cost": "INCOMPLETE",
+    "final_operability": "INCOMPLETE",
+    "release_review": "NOT_STARTED",
+    "release": "NO_GO"
+  },
+  "action_items": {
+    "without_external": [
+      "replace fake Q0 IR arms",
+      "fix nDCG denominator",
+      "document and independently review annotations",
+      "remove Q3C teacher target",
+      "fix source-aware coverage and wrong-COMPLETE",
+      "measure safety counters",
+      "restore Q6 bindings",
+      "version receipt lineage",
+      "update tracker and tests"
+    ],
+    "requires_external": [
+      "multi-seed corrected Q0 oracle",
+      "unbiased live Q3C",
+      "repaired Q6 deterministic matched run",
+      "executed semantic arm only after proven mediator gain",
+      "nonzero governance/cost/operability gates",
+      "Q7 if current10 passes",
+      "final independent release review"
+    ]
+  }
+}
+

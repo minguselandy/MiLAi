@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MILA-V02-05-DATABASE-CAPACITY-CONTROL",
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "product_lock": "data/locks/v02-database-capacity-product.lock.json",
+  "model_transport_enabled": false,
+  "new_model_allocations_authorized": 0,
+  "new_model_tokens_authorized": 0,
+  "data_mode": "SYNTHETIC_ONLY",
+  "verification_mode": "PRODUCT_OWNED_DIRECT_PG_TESTS_NOT_LAB_SQL",
+  "request_load_increase": false,
+  "held_api_connections_in_direct_test": 1,
+  "allowed_waiters_in_direct_test": 1,
+  "extra_rejected_requests_in_direct_test": 1,
+  "postgres_cpu_limit": 2,
+  "postgres_memory_limit": "1g",
+  "postgres_network_mode": "bridge",
+  "artifact_storage_limit_bytes": 1073741824,
+  "model_effect_and_gateway_slo": "NOT_TESTED"
+}

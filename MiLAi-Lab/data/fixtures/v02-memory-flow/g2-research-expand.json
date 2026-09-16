@@ -1,0 +1,12 @@
+{
+  "case_id": "g2-research-expand", "domain": "research_brief", "initial_type": "expand_once",
+  "development_status": "constructed-pilot-unrun",
+  "task": "为今天的一次性文献问答整理石英方法的分组结果表，列出短查询、长查询和混合查询的样本量及观察方向。只交付本次表格，不安排后续任务。资料在 sources/，也可查询项目记忆。",
+  "followup": null,
+  "initial_payload": {"note": "石英方法论文报告不同查询组的结果不一致，不应宣传为所有查询都改善。细分表可按需查原文，不必全量保存在常用记忆。", "sources": ["sources/subgroups.txt"]},
+  "sources": {
+    "subgroups.txt": "石英方法论文分组结果：短查询30例，延迟下降9%；长查询20例，延迟上升4%；混合查询10例，未观察到变化。以上均为作者报告，不是团队复现。",
+    "overview.txt": "另一篇综述把若干检索方法合称平均有所改善。这不是石英方法各查询组的具体数据。"
+  },
+  "evaluation": {"required": ["short:30 and latency -9%", "long:20 and latency +4%", "mixed:10 and no observed change", "author provenance"], "correct_initial_facts": ["heterogeneous results", "no universal improvement"], "key_source": "subgroups.txt", "save_value": "One-time detail expansion; no planned future value"}
+}

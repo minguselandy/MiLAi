@@ -1,0 +1,350 @@
+openapi: 3.1.0
+info:
+  title: MiLAi Agent Integration API
+  version: 1.0.0
+  description: >-
+    Experimental loopback-only contract. Memory results are data, not instructions;
+    empty canonical results are a valid abstention.
+servers:
+  - url: http://127.0.0.1:18080
+security:
+  - bearerAuth: []
+paths:
+  /health/live:
+    get:
+      operationId: healthLive
+      security: []
+      responses:
+        '200': {description: Process liveness and immutable safety status.}
+  /health/ready:
+    get:
+      operationId: healthReady
+      security: []
+      responses:
+        '200': {description: Canonical database and Blob readiness.}
+        '503': {description: Dependency unavailable; caller must fail closed.}
+  /v1/capabilities:
+    get:
+      operationId: capabilities
+      responses:
+        '200':
+          description: Effective caller capabilities and runtime safety state.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Object'}
+  /v1/memory/query:
+    post:
+      operationId: recall
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/RecallRequest'}
+      responses:
+        '200':
+          description: Canonical-gated result or normal abstention.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/RecallResponse'}
+        '503':
+          description: Fail-closed abstention while canonical storage is unavailable.
+  /v1/memory/resolve:
+    post:
+      operationId: resolveMemory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/MemoryResolveRequest'}
+      responses:
+        '200': {description: Typed governed AccessOutcome from task-free or optionally narrowed retrieval.}
+        '400': {description: Invalid, widening, or conflicting TaskContext/request hints.}
+        '503': {description: Typed UNAVAILABLE while canonical storage cannot be checked.}
+  /v1/memory/get:
+    post:
+      operationId: getMemoryState
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Object'}
+      responses:
+        '200': {description: Dynamic canonical MemoryStateView for one ClaimID or StateKey.}
+        '503': {description: Fail closed while canonical storage cannot be checked.}
+  /v1/evidence:
+    post:
+      operationId: captureEvidence
+      parameters:
+        - {$ref: '#/components/parameters/IdempotencyKey'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/EvidenceCapture'}
+      responses:
+        '201': {description: Captured as Evidence, not as a Claim.}
+        '200': {description: Idempotent replay.}
+  /v1/proposals:
+    get:
+      operationId: listProposals
+      parameters:
+        - {name: status, in: query, schema: {type: string, enum: [PENDING_REVIEW, DEFERRED, APPLIED, REJECTED]}}
+        - {name: limit, in: query, schema: {type: integer, minimum: 1, maximum: 100}}
+      responses:
+        '200': {description: Bounded Proposal inbox for the authenticated tenant.}
+    post:
+      operationId: createProposal
+      parameters:
+        - {$ref: '#/components/parameters/IdempotencyKey'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Object'}
+      responses:
+        '201': {description: Pending non-canonical Proposal.}
+        '409': {description: Conflict; client must not auto-retry.}
+  /v1/proposals/{proposal_id}:
+    get:
+      operationId: getProposal
+      parameters:
+        - {name: proposal_id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '200': {description: One non-canonical Proposal for authorized review.}
+        '404': {description: Proposal not found.}
+  /v1/proposals/{proposal_id}/review:
+    post:
+      operationId: reviewProposal
+      parameters:
+        - {$ref: '#/components/parameters/IdempotencyKey'}
+        - {name: proposal_id, in: path, required: true, schema: {type: string, format: uuid}}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ProposalReview'}
+      responses:
+        '200': {description: Immutable governed approve/reject decision and controlled result.}
+        '403': {description: Independent reviewer capability required.}
+        '409': {description: Already decided, stale version, or idempotency conflict.}
+  /v1/context-capsules:
+    post:
+      operationId: buildContext
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ContextRequest'}
+      responses:
+        '201': {description: Bounded context with protected uncertainty and trace lineage.}
+        '409': {description: Trace, issue, or pointer lineage conflict.}
+        '422': {description: Protected content cannot fit the requested budget.}
+  /v1/claims/{claim_id}:
+    get:
+      operationId: getClaim
+      parameters:
+        - {name: claim_id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '200': {description: Current effective Claim.}
+        '404': {description: Claim not found.}
+  /v1/open-issues:
+    get:
+      operationId: listOpenIssues
+      parameters:
+        - {name: status, in: query, required: false, schema: {type: string}}
+      responses:
+        '200': {description: OpenIssue records; uncertainty must be preserved.}
+  /v1/retrieval-traces/{trace_id}:
+    get:
+      operationId: getTrace
+      parameters:
+        - {name: trace_id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '200': {description: Persisted retrieval trace.}
+  /v1/evidence/{evidence_id}:
+    get:
+      operationId: getEvidenceMetadata
+      parameters:
+        - {$ref: '#/components/parameters/EvidenceId'}
+      responses:
+        '200': {description: Evidence metadata; Agent adapters remove content.}
+        '404': {description: Evidence not found.}
+  /v1/causal-tokens:
+    post:
+      operationId: issueCausalToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [outbox_ids]
+              properties:
+                outbox_ids:
+                  type: array
+                  minItems: 1
+                  maxItems: 16
+                  items: {type: string, format: uuid}
+      responses:
+        '201': {description: Tenant-bound signed causal position.}
+  /v1/evidence/{evidence_id}/revoke:
+    post:
+      operationId: revokeEvidence
+      parameters:
+        - {$ref: '#/components/parameters/IdempotencyKey'}
+        - {name: evidence_id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '200': {description: Governed revocation initiated or replayed.}
+        '409': {description: Revocation/idempotency conflict; do not mutate and retry.}
+  /v1/evidence/{evidence_id}/deletion-status:
+    get:
+      operationId: getDeletionStatus
+      parameters:
+        - {$ref: '#/components/parameters/EvidenceId'}
+      responses:
+        '200': {description: Logical block and physical purge reconciliation state.}
+        '404': {description: Evidence or deletion request not found.}
+  /v1/episodes:
+    post:
+      operationId: createEpisode
+      parameters:
+        - {$ref: '#/components/parameters/IdempotencyKey'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/EpisodeCreate'}
+      responses:
+        '201': {description: Replayable Episode references captured without Settlement.}
+        '200': {description: Idempotent replay.}
+        '409': {description: Invalid references or idempotency conflict.}
+components:
+  securitySchemes:
+    bearerAuth: {type: http, scheme: bearer}
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: {type: string, minLength: 1, maxLength: 128}
+    EvidenceId:
+      name: evidence_id
+      in: path
+      required: true
+      schema: {type: string, format: uuid}
+  schemas:
+    Object: {type: object, additionalProperties: true}
+    RecallRequest:
+      type: object
+      additionalProperties: false
+      required: [route]
+      properties:
+        route: {type: string, enum: [L0, L1]}
+        consistency: {type: string, enum: [EVENTUAL, READ_YOUR_WRITES, CANONICAL_REQUIRED]}
+        query: {type: string, maxLength: 2000}
+        claim_id: {type: string, format: uuid}
+        subject_id: {type: string}
+        predicate: {type: string}
+        claim_type: {type: string}
+        requested_scope: {type: object}
+        required_authority: {type: string, enum: [INFORMATIONAL, ACTION_SAFE, USER_CONFIRMED]}
+        causal_token: {type: string}
+        limit: {type: integer, minimum: 1, maximum: 50}
+    RecallResponse:
+      type: object
+      required: [results, open_issue_ids, abstained, degraded_components, fallback_used]
+      properties:
+        results: {type: array, items: {$ref: '#/components/schemas/Object'}}
+        open_issue_ids: {type: array, items: {type: string, format: uuid}}
+        abstained: {type: boolean}
+        abstention_reason: {type: [string, 'null']}
+        retrieval_trace_id: {type: [string, 'null']}
+        snapshot: {type: [object, 'null']}
+        degraded_components: {type: array, items: {type: string}}
+        fallback_used: {type: boolean}
+        fallback_reason: {type: [string, 'null']}
+    MemoryResolveRequest:
+      type: object
+      additionalProperties: false
+      required: [query]
+      properties:
+        query: {type: string, minLength: 1, maxLength: 2000}
+        invocation_mode: {type: string, enum: [EXPLICIT_READ, PREFETCH_AUTO]}
+        requested_scope: {type: object}
+        required_authority: {type: string, enum: [INFORMATIONAL, ACTION_SAFE, USER_CONFIRMED]}
+        required_freshness: {type: string, enum: [CURRENT, STALE]}
+        consistency_mode: {type: string, enum: [EVENTUAL, READ_YOUR_WRITES, CANONICAL_REQUIRED]}
+        causal_token: {type: string, minLength: 16, maxLength: 512}
+        budget: {$ref: '#/components/schemas/Object'}
+        entities: {type: array, maxItems: 32, items: {type: string, minLength: 1}}
+        memory_types: {type: array, maxItems: 16, items: {type: string, minLength: 1}}
+        temporal: {type: object}
+        state_keys: {type: array, maxItems: 8, items: {$ref: '#/components/schemas/Object'}}
+        claim_ids: {type: array, maxItems: 8, items: {type: string, format: uuid}}
+        valid_at: {type: string, format: date-time}
+        known_at: {type: string, format: date-time}
+        previous_context_id: {type: string, format: uuid}
+        task_context: {$ref: '#/components/schemas/TaskContextHint'}
+    TaskContextHint:
+      type: object
+      additionalProperties: false
+      description: Optional narrowing hints; never grants scope, consistency, write, review, or action authority.
+      properties:
+        project_ids: {type: array, maxItems: 16, items: {type: string, minLength: 1}}
+        entities: {type: array, maxItems: 32, items: {type: string, minLength: 1}}
+        memory_types: {type: array, maxItems: 16, items: {type: string, minLength: 1}}
+        action_risk: {type: [string, 'null'], enum: [LOW, MEDIUM, HIGH, null]}
+    EvidenceCapture:
+      type: object
+      additionalProperties: false
+      required: [source_type, source_ref, subject_id, observed_at, content, permission_snapshot]
+      properties:
+        source_type: {type: string, pattern: '^[A-Z][A-Z0-9_]*$'}
+        source_ref: {type: string}
+        subject_id: {type: string}
+        observed_at: {type: string, format: date-time}
+        content: {type: string}
+        data_classification: {type: string, enum: [SYNTHETIC, DEIDENTIFIED, PERSONAL], default: SYNTHETIC}
+        media_type: {type: string}
+        permission_snapshot: {type: object}
+        retention_state: {type: string, enum: [READABLE, UNREADABLE, EXPIRED, LEGAL_HOLD]}
+    ContextRequest:
+      type: object
+      additionalProperties: false
+      required: [retrieval_trace_id, active_goal]
+      properties:
+        retrieval_trace_id: {type: string, format: uuid}
+        active_goal: {type: string, minLength: 1, maxLength: 2000}
+        constraints: {type: array, maxItems: 64, items: {type: string}}
+        byte_budget: {type: integer, minimum: 64, maximum: 1000000, default: 16384}
+        ttl_seconds: {type: integer, minimum: 1, maximum: 86400, default: 900}
+    ProposalReview:
+      type: object
+      additionalProperties: false
+      required: [decision, policy_version, reason_code]
+      properties:
+        decision: {type: string, enum: [APPROVE, REJECT]}
+        policy_version: {type: string, minLength: 1, maxLength: 255}
+        reason_code: {type: string, minLength: 1, maxLength: 255}
+    EpisodeCreate:
+      type: object
+      additionalProperties: false
+      required: [subject_id]
+      properties:
+        subject_id: {type: string, minLength: 1, maxLength: 512}
+        evidence_refs: {type: array, maxItems: 256, items: {type: string, format: uuid}}
+        chat_turn_refs: {type: array, maxItems: 256, items: {type: string, format: uuid}}
+        context_capsule_refs: {type: array, maxItems: 256, items: {type: string, format: uuid}}
+    Error:
+      type: object
+      additionalProperties: false
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: {type: string}
+            message: {type: string}
+            retryable: {type: boolean}
+            details: {type: object}

@@ -1,0 +1,30 @@
+{
+  "schema": "v0210-control-visible-review-v1",
+  "case_id": "sim12-derived-write-boundaries-v1",
+  "evaluation_only": true,
+  "host_access": false,
+  "independent_families": 1,
+  "allocations": ["C0", "C1", "C2"],
+  "oracle": "NOT_RUN",
+  "primary": "FIRST_DELIVERY_NO_REPAIR",
+  "requirements": [
+    {"id": "operation_result", "sufficient": "Keep the timed-out State operation UNKNOWN; a higher current head does not identify or confirm that operation. Do not infer a pool acquisition failure from timeout alone."},
+    {"id": "safe_action", "sufficient": "Do not blind overwrite or automatically retry. Distinguish operation-associated explicit replay/recovery from current-head observation; any proposed write retains normal CAS and operation identity."},
+    {"id": "evidence_boundary", "sufficient": "Under ADR-042 the observed directory sync failure precedes this attempt's TX-01 Evidence/outbox commit. A readable file does not prove publication durability or Evidence commit. Do not conflate this observed failure with a lost HTTP response."},
+    {"id": "preserve_and_recover", "sufficient": "Retain original content; explicit replay can verify and sync the leftover blob before the original operation commits. Do not declare persistence/release readiness from file readability."}
+  ],
+  "per_requirement_values": ["PASS", "OMISSION", "CONTRADICTION", "UNKNOWN"],
+  "review_fields": ["material_presentation_equal", "focus_task_fit", "observable_processing", "required_condition_omission", "unsupported_adoption", "first_action", "source_support", "protocol_deviations"],
+  "review_rules": [
+    "Review each raw preparation artifact and first delivery separately. Record unsupported preparation suggestions even when never executed.",
+    "Accept any sufficient source-supported decomposition; field format and keyword matches are not semantic scoring.",
+    "Count missing/invalid/NO_CHANGE/failed/stopped allocations in the total three-arm denominator; report evaluable denominators separately.",
+    "Use visible text, source support and actions only; internal attention and private reasoning are UNKNOWN.",
+    "Compare C2-C0 and C2-C1 with actual preparation plus delivery cost; no statistical/generalization claim from this one opened family.",
+    "Human review is replaced by an explicitly identified subagent review, with cost separate from experimental generations. No model judge is added to the Host.",
+    "Wrong-old-State plus new evidence and no-intervention-needed are a separate B2 batch, NOT_RUN here; E1 alone cannot establish semantic safety.",
+    "If a simple baseline is sufficient and C2 adds no quality or full-cost value, retain the simple policy; E2/E3 are not automatically entered."
+  ],
+  "cost_fields": ["preparation_input_tokens", "preparation_output_tokens", "delivery_input_tokens", "delivery_output_tokens", "raw_tokens", "model_seconds", "tokenize_seconds", "setup_seconds", "review_cost", "gpu_cost", "storage_bytes"],
+  "unobservable_cost": "UNKNOWN"
+}

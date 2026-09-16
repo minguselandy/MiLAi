@@ -1,0 +1,14 @@
+
+        Analyze the following detailed task trajectory and create a concise, 
+        high-level script that captures the essential steps and decision points.
+        
+        The script should be:
+        1. Generic enough to apply to similar tasks
+        2. Specific enough to provide useful guidance
+        3. 3-5 high-level steps maximum
+        4. Focus on the strategy and key decisions, not detailed actions
+        
+        Trajectory:
+        {trajectory}
+        
+        High-level script:

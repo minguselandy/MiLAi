@@ -1,0 +1,338 @@
+{
+  "kind": "RESEARCH_PROTOTYPE",
+  "plan": "docs/MILA_RWC_v0.4_后续开发与创新验证规划_v1.0_20260915.md",
+  "status": "CLOSED_BOUNDED_DISCOVERY",
+  "authorization": "2026-09-15 user explicitly requested detailed reading and execution of this plan; new bounded allocation, prior budgets closed",
+  "evidence_root": "/cra/memory/mx_memory/evidence/rwc-v04-development-20260915-wji4c5jj",
+  "started_at": "2026-09-15T02:11:26.767333+00:00",
+  "total_generation_cap": 192,
+  "conditional_route_ceiling": 512,
+  "prior_budgets": "CLOSED_NOT_REUSED",
+  "method_versions": {
+    "rwc": "milai-rwc-v0.4",
+    "adapter": "hiagent-method-adapter-v0.6",
+    "om": "om-sync-port-v0.1"
+  },
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "decode": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 213,
+    "thinking": false
+  },
+  "common_context_tokens": 65536,
+  "allocations": [
+    {
+      "name": "w1-native-three-arms",
+      "cap": 96,
+      "per_arm_cap": 32,
+      "task": "multi-source-data-merger",
+      "task_role": "exposed_development_not_confirmation",
+      "order": [
+        "WORKSPACE_SIMPLE",
+        "MILAI_RWC",
+        "OM_SYNC_PORT"
+      ],
+      "status": "CLOSED",
+      "feedback_batch_size": 3,
+      "max_delivery_reviews": 1,
+      "output_caps": {
+        "actor": 4096,
+        "maintenance": 2048,
+        "summary": 1024,
+        "observer": 2048,
+        "reflector": 2048
+      },
+      "om": {
+        "observation_tokens": 12000,
+        "reflection_tokens": 16000,
+        "recent_events": 2
+      },
+      "used": 72,
+      "unused_closed": 24,
+      "result": "w1-native-three-arms/offline-summary.json"
+    },
+    {
+      "name": "local-diagnostic-1",
+      "cap": 16,
+      "per_branch_cap": 8,
+      "status": "CLOSED_PARTIAL_ACTION_CHANGE_NO_RECORD_REUSE",
+      "order": [
+        "original",
+        "source_preserving_r1"
+      ],
+      "prefix_trial": "w1-native-three-arms/host/multi-source-data-merger-1-milai_rwc",
+      "prefix_model_calls_reused": 28,
+      "first_intervened_request": 29,
+      "actual_branch_native_call_budget_retained": 4,
+      "diagnostic_kind": "fixed-input Controller formation + resulting common Actor next-action generation; no business tools or native score",
+      "new_difference": "When a derived-state failure occurs, preserve still-supported input properties and localize intervening transformations before broad reconstruction.",
+      "prediction": "Controller preserves earlier observed input contract, and Actor selects a targeted inspection/repair without dropping unrelated known mappings.",
+      "falsification": "No change in next action or same loss of known input mappings; merely longer notes are not positive evidence.",
+      "selection_time": "2026-09-15T02:19:27.404892+00:00",
+      "prefix_cpu_validation": "29 request inputs and 10 exact exec receipts matched, zero new generations",
+      "used": 4,
+      "unused_closed": 12,
+      "result": "local-diagnostic-1/*/result.json",
+      "decision": "Do not promote r1: it rereads source schemas, retains unsupported source-absence interpretation and does not select or recall existing schema card."
+    },
+    {
+      "name": "local-diagnostic-2",
+      "cap": 16,
+      "per_branch_cap": 8,
+      "status": "CLOSED_RECALL_FORMAT_REJECTED_NO_RECORD_REUSE",
+      "order": [
+        "original",
+        "record_lookup_r2"
+      ],
+      "prefix_trial": "w1-native-three-arms/host/multi-source-data-merger-1-milai_rwc",
+      "prefix_model_calls_reused": 28,
+      "first_intervened_request": 29,
+      "actual_branch_native_call_budget_retained": 4,
+      "diagnostic_kind": "fixed-input Controller formation + resulting common Actor next-action generation; no business tools or native score",
+      "new_difference": "If a new absence/changed-input interpretation would replace prior work, inspect the relevant already-recorded full observation/card before revising; a truncated directory preview cannot establish absence.",
+      "prediction": "Use existing full record/source to preserve known mappings; change next action toward checking the intervening transformation rather than guessing missing input.",
+      "falsification": "Only prose changes, repeats fresh source discovery with no record use, or retains unsupported input-absence interpretation. No third prompt iteration.",
+      "selection_time": "2026-09-15T02:33:13.077732+00:00",
+      "used": 4,
+      "unused_closed": 12,
+      "result": "local-diagnostic-2/*/result.json",
+      "decision": "No third iteration; malformed recall rejects candidate update. This is a protocol-limited diagnostic, not clean evidence against the semantic idea."
+    }
+  ],
+  "reserved_unstarted": {},
+  "conditional_packages": {
+    "transfer": {
+      "cap": 288,
+      "status": "CLOSED_NOT_ALLOCATED",
+      "tasks": [
+        "git-multibranch",
+        "constraints-scheduling"
+      ],
+      "selection_at": "2026-09-15T02:11:26.767333+00:00",
+      "selection_reason": "different task families: system administration and calendar constraints; existing pinned local task entries and CPU Dockerfiles available, not yet executed; selected before any v0.4 result",
+      "exposure": "historical shortlist and task metadata/instructions read; development transfer, not confirmation",
+      "reason": "No improved RWC policy selected after two diagnostics; complete RWC inferior at initial workpoint; do not spend transfer samples to seek a positive."
+    },
+    "mechanism_or_continuation": {
+      "cap": 32,
+      "status": "CLOSED_NOT_ALLOCATED",
+      "reason": "Most informative contribution question already examined by fixed-input record/action diagnostics; no return opportunity established."
+    }
+  },
+  "upstream_task_commit": "2fd12b88aafdd04a52c298e3940bcb189f9766d6",
+  "environment": "original Dockerfile rebuilt with existing local bases, independent native CPU containers, serial; not leaderboard reproduction",
+  "concurrency": 1,
+  "product_default_changed": false,
+  "unknown_usage": 0,
+  "w1_summary": [
+    {
+      "arm": "WORKSPACE_SIMPLE",
+      "native_score": {
+        "reward": 1.0
+      },
+      "verifier_summary": [
+        "============================== 3 passed in 2.16s ==============================="
+      ],
+      "total": {
+        "generations": 32,
+        "settled": 32,
+        "input_tokens": 102154,
+        "output_tokens": 7802,
+        "provider_seconds": 62.84050032775849,
+        "raw_tokens": 109956
+      },
+      "role_costs": {
+        "maintenance": {
+          "generations": 11,
+          "settled": 11,
+          "input_tokens": 43392,
+          "output_tokens": 2891,
+          "provider_seconds": 24.265484165400267
+        },
+        "actor": {
+          "generations": 12,
+          "settled": 12,
+          "input_tokens": 45395,
+          "output_tokens": 4380,
+          "provider_seconds": 33.3272021994926
+        },
+        "summary": {
+          "generations": 9,
+          "settled": 9,
+          "input_tokens": 13367,
+          "output_tokens": 531,
+          "provider_seconds": 5.247813962865621
+        }
+      },
+      "trial_wall_seconds": 114.9008904141374,
+      "stages_seconds": {
+        "environment_setup": 2.79417,
+        "agent_setup": 1.968998,
+        "agent_execution": 73.375837,
+        "verifier": 24.073041
+      }
+    },
+    {
+      "arm": "MILAI_RWC",
+      "native_score": {
+        "reward": 0.0
+      },
+      "verifier_summary": [
+        "========================= 1 failed, 2 passed in 2.58s =========================="
+      ],
+      "total": {
+        "generations": 32,
+        "settled": 32,
+        "input_tokens": 141672,
+        "output_tokens": 10594,
+        "provider_seconds": 84.7460594335571,
+        "raw_tokens": 152266
+      },
+      "role_costs": {
+        "maintenance": {
+          "generations": 11,
+          "settled": 11,
+          "input_tokens": 58284,
+          "output_tokens": 1446,
+          "provider_seconds": 16.740163527894765
+        },
+        "actor": {
+          "generations": 12,
+          "settled": 12,
+          "input_tokens": 58539,
+          "output_tokens": 8655,
+          "provider_seconds": 61.53567263344303
+        },
+        "summary": {
+          "generations": 9,
+          "settled": 9,
+          "input_tokens": 24849,
+          "output_tokens": 493,
+          "provider_seconds": 6.4702232722193
+        }
+      },
+      "trial_wall_seconds": 956.971463504713,
+      "stages_seconds": {
+        "environment_setup": 1.824781,
+        "agent_setup": 1.637027,
+        "agent_execution": 93.019498,
+        "verifier": 847.91856
+      }
+    },
+    {
+      "arm": "OM_SYNC_PORT",
+      "native_score": {
+        "reward": 1.0
+      },
+      "verifier_summary": [
+        "============================== 3 passed in 2.33s ==============================="
+      ],
+      "total": {
+        "generations": 8,
+        "settled": 8,
+        "input_tokens": 55795,
+        "output_tokens": 4083,
+        "provider_seconds": 32.98004833655432,
+        "raw_tokens": 59878
+      },
+      "role_costs": {
+        "actor": {
+          "generations": 6,
+          "settled": 6,
+          "input_tokens": 46523,
+          "output_tokens": 3445,
+          "provider_seconds": 27.761680278461426
+        },
+        "observer": {
+          "generations": 2,
+          "settled": 2,
+          "input_tokens": 9272,
+          "output_tokens": 638,
+          "provider_seconds": 5.218368058092892
+        }
+      },
+      "trial_wall_seconds": 76.72065058676526,
+      "stages_seconds": {
+        "environment_setup": 1.91662,
+        "agent_setup": 1.874355,
+        "agent_execution": 36.806661,
+        "verifier": 23.641018
+      }
+    }
+  ],
+  "closed_unstarted": {
+    "selected_version_full_pair": 64
+  },
+  "total_generations_used": 80,
+  "total_development_cap_unused_closed": 112,
+  "allocated_generation_positions": 128,
+  "allocated_unused_closed": 48,
+  "completed_at": "2026-09-15T02:35:23.062279+00:00",
+  "result": "studies/active/MILA_RWC_V04_DEVELOPMENT_RESULTS_20260915.md",
+  "final_accounting": {
+    "status": "CLOSED_BOUNDED_DISCOVERY",
+    "total": {
+      "generations": 80,
+      "settled": 80,
+      "input_tokens": 332197,
+      "output_tokens": 26532,
+      "provider_seconds": 221.27552550425753,
+      "raw_tokens": 358729
+    },
+    "roles": {
+      "maintenance": {
+        "generations": 26,
+        "settled": 26,
+        "input_tokens": 118136,
+        "output_tokens": 5240,
+        "provider_seconds": 51.271697606891394
+      },
+      "actor": {
+        "generations": 34,
+        "settled": 34,
+        "input_tokens": 166573,
+        "output_tokens": 19630,
+        "provider_seconds": 153.06742260418832
+      },
+      "summary": {
+        "generations": 18,
+        "settled": 18,
+        "input_tokens": 38216,
+        "output_tokens": 1024,
+        "provider_seconds": 11.718037235084921
+      },
+      "observer": {
+        "generations": 2,
+        "settled": 2,
+        "input_tokens": 9272,
+        "output_tokens": 638,
+        "provider_seconds": 5.218368058092892
+      }
+    },
+    "native_trials": 3,
+    "fixed_input_branches": 4,
+    "native_trial_wall_seconds": 1148.5930045056157,
+    "native_tool_seconds": 15.803179600276053,
+    "unknown_usage": 0,
+    "unknown_business_actions": 0,
+    "dollar_cost": null,
+    "development_agent_tokens": null,
+    "decision": "KEEP_OM_AT_THIS_WORKPOINT; NO_NEW_RWC_POLICY_PROMOTED",
+    "not_executed": [
+      "selected_version_full_pair",
+      "development_transfer",
+      "continuation"
+    ],
+    "completed_at": "2026-09-15T02:35:23.062279+00:00"
+  },
+  "implementation_changes": [],
+  "policy_promotions": [],
+  "engineering": {
+    "boundary": "PASS",
+    "ruff_src_tests_tools": "PASS",
+    "mypy": "PASS_45_SOURCE_FILES",
+    "pytest_adjacent": "72 passed in 5.54s",
+    "build": "PASS"
+  }
+}

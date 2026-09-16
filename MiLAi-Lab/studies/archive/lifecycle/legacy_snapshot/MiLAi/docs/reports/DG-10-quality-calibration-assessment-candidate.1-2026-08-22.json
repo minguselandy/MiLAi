@@ -1,0 +1,669 @@
+{
+  "bfcl": {
+    "aggregates": {
+      "adapted_official_checker_accuracy": 0.550926,
+      "case_count": 216,
+      "category_metrics": {
+        "irrelevance": {
+          "argument_correctness_accuracy": null,
+          "case_count": 24,
+          "input_tokens": 10904,
+          "invalid_tool_call_rate": 0.458333,
+          "latency_ms_mean": 266.821,
+          "no_call_accuracy": 0.541667,
+          "official_checker_accuracy": 0.541667,
+          "output_tokens": 721,
+          "tool_selection_accuracy": 0.541667
+        },
+        "multi_turn_base": {
+          "case_count": 20,
+          "final_accuracy": 0.0,
+          "final_valid_count": 0,
+          "generation_success_count": 2,
+          "missing_turns_totalized": 39,
+          "multi_turn_checker_valid_count": 0,
+          "multi_turn_irrelevance_checker_valid_count": 20
+        },
+        "multi_turn_long_context": {
+          "case_count": 20,
+          "final_accuracy": 0.05,
+          "final_valid_count": 1,
+          "generation_success_count": 3,
+          "missing_turns_totalized": 44,
+          "multi_turn_checker_valid_count": 1,
+          "multi_turn_irrelevance_checker_valid_count": 20
+        },
+        "multi_turn_miss_func": {
+          "case_count": 20,
+          "final_accuracy": 0.0,
+          "final_valid_count": 0,
+          "generation_success_count": 2,
+          "missing_turns_totalized": 49,
+          "multi_turn_checker_valid_count": 1,
+          "multi_turn_irrelevance_checker_valid_count": 11
+        },
+        "multi_turn_miss_param": {
+          "case_count": 20,
+          "final_accuracy": 0.0,
+          "final_valid_count": 0,
+          "generation_success_count": 3,
+          "missing_turns_totalized": 51,
+          "multi_turn_checker_valid_count": 0,
+          "multi_turn_irrelevance_checker_valid_count": 8
+        },
+        "multiple": {
+          "argument_correctness_accuracy": 0.894737,
+          "case_count": 19,
+          "input_tokens": 14658,
+          "invalid_tool_call_rate": 0.0,
+          "latency_ms_mean": 260.47,
+          "no_call_accuracy": null,
+          "official_checker_accuracy": 0.894737,
+          "output_tokens": 407,
+          "tool_selection_accuracy": 0.947368
+        },
+        "parallel": {
+          "argument_correctness_accuracy": 0.9,
+          "case_count": 20,
+          "input_tokens": 10079,
+          "invalid_tool_call_rate": 0.0,
+          "latency_ms_mean": 431.793,
+          "no_call_accuracy": null,
+          "official_checker_accuracy": 0.9,
+          "output_tokens": 1087,
+          "tool_selection_accuracy": 0.95
+        },
+        "parallel_multiple": {
+          "argument_correctness_accuracy": 0.95,
+          "case_count": 20,
+          "input_tokens": 16445,
+          "invalid_tool_call_rate": 0.0,
+          "latency_ms_mean": 529.462,
+          "no_call_accuracy": null,
+          "official_checker_accuracy": 0.95,
+          "output_tokens": 1300,
+          "tool_selection_accuracy": 0.95
+        },
+        "simple_java": {
+          "case_count": 9,
+          "decoder_failure_count": 0,
+          "official_checker_accuracy": 0.777778,
+          "official_checker_invocations": 9,
+          "official_checker_valid_count": 7,
+          "tool_selection_accuracy": 1.0
+        },
+        "simple_javascript": {
+          "case_count": 5,
+          "decoder_failure_count": 0,
+          "official_checker_accuracy": 1.0,
+          "official_checker_invocations": 5,
+          "official_checker_valid_count": 5,
+          "tool_selection_accuracy": 1.0
+        },
+        "simple_python": {
+          "argument_correctness_accuracy": 1.0,
+          "case_count": 39,
+          "input_tokens": 18334,
+          "invalid_tool_call_rate": 0.0,
+          "latency_ms_mean": 235.44,
+          "no_call_accuracy": null,
+          "official_checker_accuracy": 1.0,
+          "output_tokens": 937,
+          "tool_selection_accuracy": 1.0
+        }
+      },
+      "java_javascript": {
+        "accuracy": 0.857143,
+        "case_count": 14,
+        "valid_count": 12
+      },
+      "multi_turn": {
+        "accuracy": 0.0125,
+        "case_count": 80,
+        "valid_count": 1
+      },
+      "official_valid_count": 119,
+      "single_turn_supported": {
+        "accuracy": 0.868852,
+        "case_count": 122,
+        "valid_count": 106
+      }
+    },
+    "dev_case_count": 216,
+    "eligible_case_count": 2186,
+    "quarantined_case_count": 4,
+    "test_case_count": 1970
+  },
+  "candidate": "candidate.1",
+  "created_at": "2026-08-21T17:58:32.479377+00:00",
+  "date": "2026-08-22",
+  "decision_rationale": [
+    "Thresholds preserve non-regression against the strongest fixed memory baseline instead of lowering the bar after observing dev outputs.",
+    "The BFCL 0.80 overall/no-call floor is below the observed supported single-turn and Java/JavaScript dev accuracies but still requires useful cross-category behavior.",
+    "The BFCL multi-turn 0.50 floor requires majority task completion and is not met by the observed 0.0125 accuracy.",
+    "A BELOW_TARGET dev decision closes test access; test labels/outputs remain unopened and cannot be used to rescue the candidate."
+  ],
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "failed_thresholds": [
+    "bfcl_multi_turn",
+    "bfcl_no_call",
+    "bfcl_overall",
+    "longmemeval_overall_exact_match",
+    "longmemeval_overall_f1",
+    "temporal_reasoning"
+  ],
+  "feasibility": {
+    "bfcl_v4_local_non_live": {
+      "blocked_items": [
+        "No live/API/web-search BFCL case is in this local-only release gate.",
+        "BFCL agentic memory categories require a separate harness/dependency lock before use.",
+        "This report does not execute model calls, decode tool calls, or compute accuracy."
+      ],
+      "candidate_matches": [
+        "gorilla-bfcl",
+        "gorilla-bfcl/berkeley-function-call-leaderboard",
+        "gorilla-bfcl/berkeley-function-call-leaderboard/bfcl_eval",
+        "gorilla-bfcl/gorilla"
+      ],
+      "case_count_by_category": {
+        "irrelevance": 240,
+        "multi_turn_base": 200,
+        "multi_turn_long_context": 200,
+        "multi_turn_miss_func": 200,
+        "multi_turn_miss_param": 200,
+        "multiple": 200,
+        "parallel": 200,
+        "parallel_multiple": 200,
+        "simple_java": 100,
+        "simple_javascript": 50,
+        "simple_python": 400
+      },
+      "claim_scope": "AGENT_TOOL_SELECTION_ARGUMENTS_NO_CALL_AND_MULTI_TURN_SEMANTICS_ONLY_NOT_MCP_TRANSPORT",
+      "compatible_case_count": 2190,
+      "compatible_case_ids_sha256": "0bb76127790e23332cf822716d35b999b6ba875d489646dbd2442759f4b923f1",
+      "compatible_categories": [
+        "simple_python",
+        "simple_java",
+        "simple_javascript",
+        "multiple",
+        "parallel",
+        "parallel_multiple",
+        "irrelevance",
+        "multi_turn_base",
+        "multi_turn_miss_func",
+        "multi_turn_miss_param",
+        "multi_turn_long_context"
+      ],
+      "decision": "LOCAL_NON_LIVE_CASE_LIST_CANDIDATE_NOT_RUN",
+      "excluded_from_current_gate": {
+        "agentic_memory": {
+          "case_count": 155,
+          "categories": [
+            "memory"
+          ],
+          "official_backend_expansion": [
+            "memory_kv",
+            "memory_vector",
+            "memory_rec_sum"
+          ],
+          "reason": "BFCL agentic memory expands into BFCL-owned memory backends; vector mode depends on sentence-transformers/faiss and is not the MiLAi MCP memory path. It needs a separate harness lock before use."
+        },
+        "agentic_web_search": {
+          "case_count": 100,
+          "categories": [
+            "web_search"
+          ],
+          "reason": "Web-search categories require live web/SerpAPI-style external access."
+        },
+        "format_sensitivity": {
+          "group_count": 8,
+          "group_counts": {
+            "live_multiple": 86,
+            "live_parallel": 6,
+            "live_parallel_multiple": 9,
+            "live_simple": 24,
+            "multiple": 15,
+            "parallel": 15,
+            "parallel_multiple": 15,
+            "simple_python": 30
+          },
+          "path": "bfcl_eval/data/BFCL_v4_format_sensitivity.json",
+          "sha256": "1e7ebd0ec441198d3f7d3b60be73d0c9eba54094d2c3731b830f5da7a2c63c19",
+          "size": 4963,
+          "status": "NON_SCORING_EXCLUDED_FROM_LOCAL_NON_LIVE_GATE",
+          "variant_id_count": 200
+        },
+        "live": {
+          "case_count": 2251,
+          "categories": [
+            "live_simple",
+            "live_multiple",
+            "live_parallel",
+            "live_parallel_multiple",
+            "live_irrelevance",
+            "live_relevance"
+          ],
+          "reason": "User-contributed live categories are outside the local/non-live release gate."
+        }
+      },
+      "rationale": "Official BFCL V4 local/non-live and multi-turn categories are present and case-ID/possible-answer coverage is locked. This is not a BFCL quality result because no model generation or scorer run has occurred.",
+      "required_modalities": [
+        "text prompts",
+        "function/tool schemas",
+        "expected tool selection and arguments",
+        "multi-turn text conversations and local initial_config state"
+      ],
+      "required_tools": [
+        "official AST checker for single-turn function calls",
+        "official irrelevance/no-call checker",
+        "official multi-turn checker with local BFCL function-source backends"
+      ],
+      "scoring_lane": "BFCL_V4_LOCAL_NON_LIVE_OFFICIAL_CHECKERS_CANDIDATE"
+    },
+    "dataset_lock_status": "DATASET_LOCK_CANDIDATE_REVIEW_REQUIRED",
+    "longmemeval": {
+      "blocked_items": [
+        "Official or repository evaluator paths that call an external model judge remain prohibited in this vLLM-only goal."
+      ],
+      "compatible_case_count": 500,
+      "compatible_case_ids_sha256": "cb86ceffd101201672cb678968d0742d970e08472acc01690018b999d2856ecb",
+      "decision": "OFFICIAL_TEXT_INPUT_COMPATIBLE_FOR_CLEANED_500",
+      "lossiness": "NONE_FOR_TEXT_CLEANED_500",
+      "official_input_contract": {
+        "case_count": 500,
+        "fields": [
+          "question_id",
+          "question_type",
+          "question",
+          "question_date",
+          "answer",
+          "answer_session_ids",
+          "haystack_dates",
+          "haystack_session_ids",
+          "haystack_sessions"
+        ]
+      },
+      "required_modalities": [
+        "text chat history",
+        "text question",
+        "text reference answer"
+      ],
+      "required_tools": [],
+      "scoring_lane": "LOCAL_VLLM_PROTOCOL_TIER_1_DETERMINISTIC_REQUIRED"
+    },
+    "longmemeval_v2": {
+      "adapter_transformation": {
+        "claim_label": "ADAPTED_PROTOCOL_ONLY_NOT_LEADERBOARD",
+        "information_loss": "LOSSY_RELATIVE_TO_OFFICIAL_FULL_SMALL",
+        "text_only_candidate": "Use question text plus trajectory textual fields only; omit question screenshots and trajectory screenshots."
+      },
+      "artifact_counts": {
+        "medium_haystack_max": 500,
+        "medium_haystack_min": 387,
+        "medium_haystack_questions": 451,
+        "question_screenshots_png": 29,
+        "small_haystack_max": 100,
+        "small_haystack_min": 100,
+        "small_haystack_questions": 451,
+        "trajectory_screenshots_png": 49708
+      },
+      "blocked_items": [
+        "No full-small or leaderboard-compatible claim may be made without an authorized multimodal lane.",
+        "No external OpenAI/Codex judge may be used for release-blocking scoring in the current vLLM-only scope."
+      ],
+      "case_counts": {
+        "all_case_ids_sha256": "28de62f7ce1ce26c59fcec26958a52e00ba084a4aaa83bdb07007c740e50a96d",
+        "excluded_image_case_ids_sha256": "d69db0e6418149be33b00f4b979f590537786f0bc945c160d04fc7bccac2b689",
+        "excluded_question_image_cases": 29,
+        "included_text_only_case_ids_sha256": "dd8b41c8bbd205fa5ac5bdf8d3229eba1913c298992fb7e951a7c2d85ddeb87d",
+        "official_total": 451,
+        "text_only_adapted_candidate": 422
+      },
+      "decision": "ADAPTED_PROTOCOL_CANDIDATE",
+      "official_full_small_state": "NOT_APPLICABLE_WITH_RATIONALE",
+      "rationale": "The released input contract contains optional question screenshots and trajectory state screenshot paths; this DG-10 lane has only a text vLLM adapter and does not authorize VLM, OCR, manual image transcription, or external judge calls.",
+      "required_modalities": [
+        "text question",
+        "optional question image",
+        "trajectory goal/action/thought/accessibility-tree text",
+        "trajectory screenshot paths",
+        "text reference answer"
+      ],
+      "required_tools": [
+        "memory_module.insert(trajectory)",
+        "memory_module.query(query, query_image=None)",
+        "local evaluator function from eval_function"
+      ],
+      "scoring_lane": "LOCAL_VLLM_PROTOCOL_TIER_1_DETERMINISTIC_WHERE_EVAL_FUNCTION_IS_LOCAL"
+    }
+  },
+  "gate_results": {
+    "BMG-02": "NO_GO_DEV_MILAI_BELOW_STRONGEST_BASELINE_TEST_DENIED",
+    "BMG-03": "MODEL_QUALITY_BELOW_TARGET_DEV_CHARACTERIZATION_COMPLETE",
+    "BMG-05": "FREEZE_INPUT_COMPLETE_CONTRACT_UPDATE_REQUIRED"
+  },
+  "inputs": {
+    "bfcl_dev_report_sha256": "8bfce6d9bc957abe16404c419687050791375cbfb7951fd0e8f3119b8997cfc5",
+    "bfcl_plan_report_sha256": "f8ca77115d3f881ead6a0a0d5f12aa3e8f0b209662ace79c641ac90b5d834ce4",
+    "dataset_lock_report_sha256": "889e99fa19e695db5b10d1ff72964aee5fbfc4426f4c67504ed4340742ffa62e",
+    "feasibility_report_sha256": "c3e4796da2413acce778c338188e901c9300f918f39620ac89f535c8f391a79f",
+    "lme_v2_dev_report_sha256": "7caa9609a01883f89b696ad40b631940aaf2937cbd5377726da0d9e33ac3f0d9",
+    "longmemeval_dataset_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+    "three_arm_longmemeval_dev_report_sha256": "6c7b2261e82bbbbc417f371983fbdea921e1f7f123f394c705cfd7091f5ee10e"
+  },
+  "longmemeval": {
+    "ability_metrics": {
+      "knowledge-update": {
+        "arms": {
+          "MILAI_MCP": {
+            "case_count": 8,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.28125
+          },
+          "NAIVE_RAG": {
+            "case_count": 8,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.254464
+          },
+          "NO_MEMORY": {
+            "case_count": 8,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.0
+          }
+        },
+        "milai_minus_strongest_baseline": {
+          "exact_match_mean": 0,
+          "normalized_f1_mean": 0.026786
+        },
+        "strongest_fixed_baseline": "NAIVE_RAG"
+      },
+      "multi-session": {
+        "arms": {
+          "MILAI_MCP": {
+            "case_count": 11,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.071416
+          },
+          "NAIVE_RAG": {
+            "case_count": 11,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.070888
+          },
+          "NO_MEMORY": {
+            "case_count": 11,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.035522
+          }
+        },
+        "milai_minus_strongest_baseline": {
+          "exact_match_mean": 0,
+          "normalized_f1_mean": 0.000528
+        },
+        "strongest_fixed_baseline": "NAIVE_RAG"
+      },
+      "single-session-assistant": {
+        "arms": {
+          "MILAI_MCP": {
+            "case_count": 8,
+            "exact_match_mean": 0.125,
+            "normalized_f1_mean": 0.306884
+          },
+          "NAIVE_RAG": {
+            "case_count": 8,
+            "exact_match_mean": 0.25,
+            "normalized_f1_mean": 0.482857
+          },
+          "NO_MEMORY": {
+            "case_count": 8,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.036614
+          }
+        },
+        "milai_minus_strongest_baseline": {
+          "exact_match_mean": -0.125,
+          "normalized_f1_mean": -0.175973
+        },
+        "strongest_fixed_baseline": "NAIVE_RAG"
+      },
+      "single-session-preference": {
+        "arms": {
+          "MILAI_MCP": {
+            "case_count": 4,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.139457
+          },
+          "NAIVE_RAG": {
+            "case_count": 4,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.142552
+          },
+          "NO_MEMORY": {
+            "case_count": 4,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.109692
+          }
+        },
+        "milai_minus_strongest_baseline": {
+          "exact_match_mean": 0,
+          "normalized_f1_mean": -0.003095
+        },
+        "strongest_fixed_baseline": "NAIVE_RAG"
+      },
+      "single-session-user": {
+        "arms": {
+          "MILAI_MCP": {
+            "case_count": 4,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.0
+          },
+          "NAIVE_RAG": {
+            "case_count": 4,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.0
+          },
+          "NO_MEMORY": {
+            "case_count": 4,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.0
+          }
+        },
+        "milai_minus_strongest_baseline": {
+          "exact_match_mean": 0,
+          "normalized_f1_mean": 0.0
+        },
+        "strongest_fixed_baseline": "NO_MEMORY"
+      },
+      "temporal-reasoning": {
+        "arms": {
+          "MILAI_MCP": {
+            "case_count": 15,
+            "exact_match_mean": 0.066667,
+            "normalized_f1_mean": 0.199141
+          },
+          "NAIVE_RAG": {
+            "case_count": 15,
+            "exact_match_mean": 0.133333,
+            "normalized_f1_mean": 0.24649
+          },
+          "NO_MEMORY": {
+            "case_count": 15,
+            "exact_match_mean": 0,
+            "normalized_f1_mean": 0.073051
+          }
+        },
+        "milai_minus_strongest_baseline": {
+          "exact_match_mean": -0.066666,
+          "normalized_f1_mean": -0.047349
+        },
+        "strongest_fixed_baseline": "NAIVE_RAG"
+      }
+    },
+    "arms": {
+      "MILAI_MCP": {
+        "case_count": 50,
+        "exact_match_mean": 0.04,
+        "input_tokens": 1317541,
+        "normalized_f1_mean": 0.180712,
+        "output_tokens": 7679
+      },
+      "NAIVE_RAG": {
+        "case_count": 50,
+        "exact_match_mean": 0.08,
+        "input_tokens": 31503,
+        "normalized_f1_mean": 0.218918,
+        "output_tokens": 1801
+      },
+      "NO_MEMORY": {
+        "case_count": 50,
+        "exact_match_mean": 0,
+        "input_tokens": 5904,
+        "normalized_f1_mean": 0.044364,
+        "output_tokens": 819
+      }
+    },
+    "evidence_metrics": {
+      "MILAI_MCP": {
+        "case_count": 50,
+        "hit_count": 32,
+        "mrr_at_1": 0.64,
+        "precision_at_1": 0.64,
+        "recall_at_1": 0.64
+      },
+      "NAIVE_RAG": {
+        "case_count": 50,
+        "hit_count": 32,
+        "mrr_at_1": 0.64,
+        "precision_at_1": 0.64,
+        "recall_at_1": 0.64
+      },
+      "milai_minus_naive_rag_recall_at_1": 0.0
+    },
+    "milai_minus_strongest_baseline": {
+      "exact_match_mean": -0.04,
+      "normalized_f1_mean": -0.038206
+    },
+    "strongest_fixed_baseline": "NAIVE_RAG"
+  },
+  "longmemeval_v2": {
+    "protocol": "ADAPTED_PROTOCOL",
+    "release_interpretation": "CHARACTERIZED_ONLY_NOT_TEST_AUTHORITY",
+    "three_arm_calibration_complete": false,
+    "two_arm_aggregates": {
+      "LONGMEMEVAL_V2_ADAPTED_TEXT_ONLY/NAIVE_RAG": {
+        "adapted_fallback_denominator": 42,
+        "case_count": 42,
+        "fallback_normalized_f1_mean": 0.137552,
+        "fallback_normalized_phrase_match_mean": 0.095238,
+        "input_tokens": 28869,
+        "latency_ms": {
+          "mean": 425.258,
+          "p50_nearest_rank": 205.086,
+          "p95_nearest_rank": 1773.323
+        },
+        "official_local_deterministic_accuracy": 0.111111,
+        "official_local_deterministic_denominator": 27,
+        "output_tokens": 1745,
+        "truncated_output_count": 4,
+        "truncated_output_rate": 0.095238
+      },
+      "LONGMEMEVAL_V2_ADAPTED_TEXT_ONLY/NO_MEMORY": {
+        "adapted_fallback_denominator": 42,
+        "case_count": 42,
+        "fallback_normalized_f1_mean": 0.121887,
+        "fallback_normalized_phrase_match_mean": 0.095238,
+        "input_tokens": 7401,
+        "latency_ms": {
+          "mean": 256.996,
+          "p50_nearest_rank": 97.833,
+          "p95_nearest_rank": 1625.937
+        },
+        "official_local_deterministic_accuracy": 0.148148,
+        "official_local_deterministic_denominator": 27,
+        "output_tokens": 1362,
+        "truncated_output_count": 4,
+        "truncated_output_rate": 0.095238
+      }
+    }
+  },
+  "observed_values": {
+    "bfcl_multi_turn_accuracy": 0.0125,
+    "bfcl_no_call_accuracy": 0.541667,
+    "bfcl_overall_accuracy": 0.550926,
+    "evidence_recall_at_1_delta": 0.0,
+    "hidden_or_extra_model_calls": 0,
+    "knowledge_update_f1_delta": 0.026786,
+    "longmemeval_overall_exact_match_delta": -0.04,
+    "longmemeval_overall_f1_delta": -0.038206,
+    "max_aggregate_input_tokens_per_arm_case": 26427,
+    "max_memory_context_tokens": 512,
+    "temporal_reasoning_f1_delta": -0.047349
+  },
+  "proposed_frozen_thresholds": {
+    "aggregate_input_tokens_per_arm_case_max": 32768,
+    "bfcl_multi_turn_accuracy_min": 0.5,
+    "bfcl_no_call_accuracy_min": 0.8,
+    "bfcl_overall_accuracy_min": 0.8,
+    "evidence_recall_at_1_delta_min": 0.0,
+    "hidden_or_extra_model_calls_max": 0,
+    "knowledge_update_f1_delta_min": 0.0,
+    "longmemeval_overall_exact_match_delta_min": 0.0,
+    "longmemeval_overall_f1_delta_min": 0.0,
+    "memory_context_tokens_max": 512,
+    "temporal_reasoning_f1_delta_min": 0.0
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "BELOW_TARGET",
+  "schema": "milai.dg10.quality-calibration-assessment.v1",
+  "status": "PRETEST_QUALITY_CONTRACT_FREEZE_INPUT_COMPLETE",
+  "test_access_authorized": false,
+  "test_authorization_decision": "DENY_DEV_BELOW_TARGET",
+  "test_labels_or_outputs_opened": false,
+  "threshold_checks": {
+    "aggregate_input": true,
+    "bfcl_multi_turn": false,
+    "bfcl_no_call": false,
+    "bfcl_overall": false,
+    "evidence_recall": true,
+    "hidden_calls": true,
+    "knowledge_update": true,
+    "longmemeval_overall_exact_match": false,
+    "longmemeval_overall_f1": false,
+    "memory_context": true,
+    "temporal_reasoning": false
+  },
+  "tier_2_manifest": {
+    "arm_identity_blinded": true,
+    "case_count": 12,
+    "case_ids": [
+      "longmemeval:118b2229",
+      "longmemeval:18bc8abd",
+      "longmemeval:19b5f2b3",
+      "longmemeval:75832dbd",
+      "longmemeval:88432d0a_abs",
+      "longmemeval:ac031881",
+      "longmemeval:b0479f84",
+      "longmemeval:b759caee",
+      "longmemeval:e61a7584",
+      "longmemeval:ef66a6e5",
+      "longmemeval:gpt4_ec93e27f",
+      "longmemeval:gpt4_f49edff3"
+    ],
+    "case_ids_sha256": "286fcfb4fad5bc3eb6a909cc31eb33eba00b4414a5a5db499789398fcaa3628b",
+    "human_annotations_present": false,
+    "rubric_path": "docs/contracts/DG-10-tier2-blinded-audit-rubric.md",
+    "rubric_sha256": "209e246042e90110cfee9aca57ae647bd77b397984665de682b5a4d05d81361e",
+    "salt_version": "dg10-tier2-v1",
+    "selection": "TWO_SHA256_LOWEST_CASE_IDS_PER_LONGMEMEVAL_ABILITY",
+    "status": "PRE_FROZEN_AUDIT_NOT_STARTED",
+    "stratum_counts": {
+      "knowledge-update": 2,
+      "multi-session": 2,
+      "single-session-assistant": 2,
+      "single-session-preference": 2,
+      "single-session-user": 2,
+      "temporal-reasoning": 2
+    }
+  }
+}

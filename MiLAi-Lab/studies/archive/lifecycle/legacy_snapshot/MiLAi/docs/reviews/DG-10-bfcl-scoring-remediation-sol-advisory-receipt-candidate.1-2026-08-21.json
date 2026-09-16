@@ -1,0 +1,54 @@
+{
+  "schema": "milai.dg10.sol-advisory-receipt.v1",
+  "date": "2026-08-21",
+  "candidate": "candidate.1",
+  "status": "AI_ADVISORY_ACCEPTED_SCHEMA_VALID_SINGLE_THREAD",
+  "review_type": "AI_ADVISORY_NOT_HUMAN_APPROVAL",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "max",
+  "ephemeral": true,
+  "sandbox": "read-only",
+  "accepted_attempt": {
+    "attempt": 2,
+    "exit_code": 0,
+    "schema_valid": true,
+    "provider_thread_count": 1,
+    "provider_thread_id": "01a02542-48d6-77d0-b7c0-f01a05257b3b",
+    "verdict": "PROCEED_WITH_REQUIRED_CHANGES",
+    "risk": "MEDIUM",
+    "compatibility_alias_sufficient": true,
+    "repo_external_material": {
+      "path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+      "prompt_sha256": "6262322f2fd63bdad29a3b42d1062d68b5d46812d65ea180e51b1a08ad8b01c2",
+      "response_schema_sha256": "7a7e725a76f2f1f86345b85c3dafc4aa5cf4487d2a587e7687cf3f24f0bf17e9",
+      "output_sha256": "98dc69c0a190d7192a8220f4affa1a4f96df899d5b52e39cc8d229cb8c208a54",
+      "events_sha256": "bd3df0a8477aeea0a8da2fce13b59217de4a4100762c019e489135593293176e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "all_files_mode": "0600"
+    }
+  },
+  "rejected_attempt": {
+    "attempt": 1,
+    "exit_code": 1,
+    "accepted_as_advisory": false,
+    "provider_thread_count": 1,
+    "provider_thread_id": "01a02541-5764-7e12-bd64-b19ad76dc141",
+    "failure": "INVALID_RESPONSE_SCHEMA_BEFORE_REVIEW",
+    "events_sha256": "65382f1ae980fd8bd15ccc969109d5c0d1adeae5c976bfd65c5c3cfdee4ffcae",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "implementation_trace": {
+    "candidate16_contract_sha256": "9b0867a2daf334445c38ffd5c779ae2029430dfac3a1232fe8148464b57c321c",
+    "candidate16_scoring_report_sha256": "4376ea2b5845e679a2bcdba56aa1ea9b27f8d266dcd0034e1d72d56f4bc9460a",
+    "candidate16_remediation_ledger_sha256": "5af9e58455d01990f800983a17d4bff319b28b054e8f4c3a689c8b11285fa149",
+    "candidate16_composite_ledger_sha256": "3dab9ebce1c885157118ce1f583e9b44b14be0a1d2d3fcc890e28ab85f773104",
+    "required_changes_implemented": 6,
+    "test_access_authorized": false
+  },
+  "claims": {
+    "human_approval": false,
+    "official_bfcl_grader_replacement": false,
+    "crg_approval": false,
+    "test_authorization": false
+  }
+}

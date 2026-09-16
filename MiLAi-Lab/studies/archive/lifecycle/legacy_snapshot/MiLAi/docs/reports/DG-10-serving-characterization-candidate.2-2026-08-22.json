@@ -1,0 +1,33 @@
+{
+  "candidate": "candidate.2",
+  "date": "2026-08-22",
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "failure": {
+    "completed_measured_cells": 0,
+    "error_body_sha256": "cdccae79383769294684a999b0d8112a1b72d33b25de9a3a98286c790f824c55",
+    "failed_stage": "T1_GATEWAY_WARMUP",
+    "http_status": 400,
+    "reason": "BUFFERING_ADAPTER_FORCED_STREAM_FALSE_WHILE_T1_RETAINED_STREAM_OPTIONS"
+  },
+  "gate_results": {
+    "BMG-04": "NO_GO_PARTIAL_FAILURE"
+  },
+  "known_limits": [
+    "T0 warmup completed but is excluded from any metric denominator.",
+    "No measured serving cell ran and no candidate.2 result may be composed into candidate.3.",
+    "Candidate.3 removes stream_options only from T1 because that boundary buffers upstream with stream=false; T0 remains native streaming."
+  ],
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "NOT_EVALUABLE",
+  "quality_thresholds_frozen": true,
+  "repo_external_sidecar": {
+    "status": "NOT_WRITTEN_FOR_PREMEASUREMENT_FAILURE"
+  },
+  "schema": "milai.dg10.serving-characterization.v1",
+  "serving_window": "NOT_ESTABLISHED",
+  "status": "FAIL_PARTIAL_PREMEASUREMENT_NOT_CHARACTERIZATION",
+  "test_access_authorized": false,
+  "test_labels_or_outputs_opened": false
+}

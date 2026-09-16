@@ -1,0 +1,7 @@
+"""MiLAi Lean V1 experimental runtime."""
+
+__version__ = "0.1.0"
+
+SCHEMA_STATUS = "0.1.x EXPERIMENTAL"
+IMPLEMENTATION_STATUS = "CANDIDATE"
+SCHEMA_FREEZE_STATUS = "NO-GO FOR SCHEMA FREEZE"

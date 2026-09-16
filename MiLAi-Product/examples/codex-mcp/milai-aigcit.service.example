@@ -1,0 +1,32 @@
+# Staged example. Install a locked wheel environment first; no source checkout needed.
+[Unit]
+Description=MiLAi AIGCIT authenticated MCP resource
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=milai-mcp
+Group=milai-mcp
+WorkingDirectory=/var/lib/milai-aigcit
+EnvironmentFile=/etc/milai-aigcit/mcp.env
+ExecStart=/opt/milai-aigcit/venv/bin/milai-codex-full-mcp --host 127.0.0.1 --port 7969 --catalog compact-memory-v1
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StateDirectory=milai-aigcit
+ReadOnlyPaths=/opt/milai-aigcit /etc/milai-aigcit
+
+[Install]
+WantedBy=multi-user.target

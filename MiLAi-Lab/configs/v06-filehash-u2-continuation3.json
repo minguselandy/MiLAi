@@ -1,0 +1,41 @@
+{
+  "goal": "MILA-V02-06",
+  "allocation_identity": "V06-U2-01-EXTENSION",
+  "authorization_basis": "User explicitly requested earlier: do not restrict the allowance so strictly; first complete normal end-to-end use. User resumed this Goal. The 64k G failure remains recorded; this stated extension continues the same G thread and shared ledger, with no regenerated G or task substitution.",
+  "product_lock": "data/locks/v02-http-transport-timing-product.lock.json",
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "provider_base_url": "http://127.0.0.1:7860",
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "model_transport_enabled": true,
+  "paid_model_allocations_authorized": 0,
+  "new_model_allocations_authorized": 2,
+  "new_model_tokens_authorized": 256000,
+  "local_sessions": [
+    "G",
+    "R"
+  ],
+  "max_requests_per_session": 16,
+  "session_token_limit": 128000,
+  "batch_token_limit": 256000,
+  "request_input_token_limit": 16000,
+  "max_output_tokens": 8192,
+  "request_timeout_seconds": 90,
+  "session_deadline_seconds": 180,
+  "deadline_scope": "Each native execution segment; original G segment remains included in total lifecycle cost, not claimed as one uninterrupted 180-second session.",
+  "output_codec": "qwen_xml",
+  "run_root": "artifacts/v02-mcp-usability/filehash-20260908a",
+  "task_fixture": "data/fixtures/v06-filehash",
+  "session_directories": {
+    "G": "G-continued3",
+    "R": "R"
+  },
+  "resume_G_thread": "01a07e58-6926-7a40-9098-31447bb68997",
+  "resume_prompt": "Continue the interrupted milestone. Complete the remaining work and report the result.",
+  "developer_visibility": "OPEN_DEVELOPMENT_NOT_BLIND",
+  "public_memory_writes_authorized": false,
+  "U3_authorized": false,
+  "new_G_authorized": false,
+  "implicit_retry_authorized": false,
+  "startup_repair": "Prior segment generated four requests, ran unittest and saved State, then text-part MCP error was rejected by tokenize before the next generation. Preserve original failure; normalize text tool-output parts without changing text or IDs. Continue same G thread and cumulative ledger.",
+  "resume_source_directory": "G-continued2"
+}

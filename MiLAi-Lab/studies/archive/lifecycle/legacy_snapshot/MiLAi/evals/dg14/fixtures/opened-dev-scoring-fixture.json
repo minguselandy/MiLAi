@@ -1,0 +1,64 @@
+{
+  "classification": "OPENED_DEV_SMOKE / CHARACTERIZATION",
+  "input_sha256": "dd1c6fb5c137b16780965b5637562cdfdc8e69ef8d1f1e02e94ce92c754b5a5b",
+  "rows": [
+    {
+      "answer_session_ids": [
+        "session-5646319286155506268d5bc7"
+      ],
+      "answers": [
+        "over a year"
+      ],
+      "source_id": "001be529"
+    },
+    {
+      "answer_session_ids": [
+        "session-051ea639a35dfff4fab92cac",
+        "session-aa8bd15498f87fd189ab28f9",
+        "session-f548d4b6553c0e2c3febb91f"
+      ],
+      "answers": [
+        "2"
+      ],
+      "source_id": "00ca467f"
+    },
+    {
+      "answer_session_ids": [
+        "session-5503e78c794c66be3fa63285",
+        "session-bd05ccdc5d2d145c573de484"
+      ],
+      "answers": [
+        "$12"
+      ],
+      "source_id": "0100672e"
+    },
+    {
+      "answer_session_ids": [
+        "session-3330bf6bdba57dc76c0364ec",
+        "session-b5f6d966e63609e187c6c8a3"
+      ],
+      "answers": [
+        "25"
+      ],
+      "source_id": "01493427"
+    },
+    {
+      "answer_session_ids": [
+        "session-1ea1d848a054e65e4aeaf0fc",
+        "session-b9e8c33c750a75b5dc70d47b"
+      ],
+      "answers": [
+        "When you just started your new role as Senior Software Engineer, you led 4 engineers. Now, you lead 5 engineers"
+      ],
+      "source_id": "031748ae"
+    }
+  ],
+  "schema": "milai.dg14.opened-dev-scoring-fixture.v1",
+  "source_ids": [
+    "001be529",
+    "00ca467f",
+    "0100672e",
+    "01493427",
+    "031748ae"
+  ]
+}

@@ -1,0 +1,32 @@
+[Unit]
+Description=MiLAi Product projection and deletion worker for MCP
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/lib/milai-runtime
+EnvironmentFile=/etc/milai/runtime-worker.env
+# API and Worker must use this same absolute CAS root. Do not rely on a relative
+# MILAI_BLOB_ROOT when their WorkingDirectory values may differ.
+Environment=MILAI_BLOB_ROOT=/var/lib/milai-runtime/blobs
+StateDirectory=milai-runtime
+StateDirectoryMode=0700
+ExecStart=/opt/milai/runtime-venv/bin/milai-worker
+Restart=on-failure
+RestartSec=2s
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/milai-runtime
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+[Install]
+WantedBy=multi-user.target

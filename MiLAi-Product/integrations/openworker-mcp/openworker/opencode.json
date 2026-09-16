@@ -1,0 +1,123 @@
+{
+  "provider": {
+    "openworker": {
+      "options": {
+        "apiKey": "${OPENWORKER_KEY}",
+        "baseURL": "${OPENWORKER_URL}"
+      },
+      "models": {
+        "Qwen3.6-35B-A3B-FP8": {
+          "name": "Qwen3.6-35B-A3B-FP8 (local vLLM)",
+          "temperature": true,
+          "limit": { "context": 65536, "output": 2048 }
+        }
+      }
+    }
+  },
+  "model": "openworker/Qwen3.6-35B-A3B-FP8",
+  "plugin": [
+    "/openworker/image/plugins/openworker.js",
+    "/openworker/image/plugins/milai-task-metadata.js"
+  ],
+  "instructions": [
+    "/openworker/image/profiles/main/SOUL.md",
+    "/openworker/image/profiles/main/TOOLS.md",
+    "/openworker/image/profiles/main/AGENTS.md",
+    "${DATA}/workspace/SOUL.md",
+    "${DATA}/workspace/TOOLS.md",
+    "${DATA}/workspace/MEMORY.md"
+  ],
+  "skills": {
+    "paths": ["/openworker/image/skills", "${DATA}/skills"]
+  },
+  "mcp": {
+    "milai": {
+      "type": "local",
+      "command": [
+        "/usr/local/bin/milai-mcp-relay",
+        "/run/milai-mcp/reader-lite.sock"
+      ],
+      "enabled": true,
+      "timeout": 10000
+    }
+  },
+  "agent": {
+    "build": {
+      "steps": 30,
+      "temperature": 0,
+      "top_p": 1,
+      "tools": { "*": false, "milai_*": true },
+      "permission": {
+        "*": "deny",
+        "milai_*": "allow"
+      }
+    },
+    "general": {
+      "tools": { "*": false, "milai_*": true },
+      "permission": {
+        "*": "deny",
+        "milai_*": "allow"
+      }
+    },
+    "explore": {
+      "tools": { "*": false, "milai_*": true },
+      "permission": {
+        "*": "deny",
+        "milai_*": "allow"
+      }
+    },
+    "plan": {
+      "tools": { "*": false, "milai_*": true },
+      "permission": {
+        "*": "deny",
+        "milai_*": "allow"
+      }
+    },
+    "dg13u-ordinary-sync": {
+      "description": "DG13-U1 synthetic single synchronous read-tool compatibility case.",
+      "mode": "primary",
+      "steps": 4,
+      "tools": { "*": false, "read": true, "milai_*": true },
+      "permission": {
+        "*": "deny",
+        "read": "allow",
+        "milai_*": "allow"
+      }
+    },
+    "summary": {
+      "disabled": true,
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "webfetch": "allow",
+        "doom_loop": "allow",
+        "external_directory": "allow"
+      }
+    },
+    "title": {
+      "disabled": true,
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "webfetch": "allow",
+        "doom_loop": "allow",
+        "external_directory": "allow"
+      }
+    },
+    "compaction": {
+      "disabled": true,
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "webfetch": "allow",
+        "doom_loop": "allow",
+        "external_directory": "allow"
+      }
+    }
+  },
+  "tools": {
+    "*": false,
+    "milai_*": true
+  },
+  "lsp": false
+}

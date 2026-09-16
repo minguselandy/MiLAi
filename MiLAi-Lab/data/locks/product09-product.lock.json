@@ -1,0 +1,94 @@
+{
+  "product": {
+    "git_commit": null,
+    "name": "MiLAi-Product",
+    "repository": "../MiLAi-Product",
+    "tree_paths": [
+      "VERSION",
+      "architecture/v1.0",
+      "contracts/agent/v1",
+      "runtime/pyproject.toml",
+      "runtime/uv.lock",
+      "runtime/migrations",
+      "runtime/src",
+      "integrations/python-client/pyproject.toml",
+      "integrations/python-client/uv.lock",
+      "integrations/python-client/src",
+      "integrations/mcp/pyproject.toml",
+      "integrations/mcp/uv.lock",
+      "integrations/mcp/src",
+      "integrations/openworker-mcp/pyproject.toml",
+      "integrations/openworker-mcp/uv.lock",
+      "integrations/openworker-mcp/src",
+      "integrations/openworker-mcp/openworker",
+      "integrations/openworker-mcp/build_dg13u_u1_image.sh",
+      "integrations/hooks/pyproject.toml",
+      "integrations/hooks/uv.lock",
+      "integrations/hooks/src",
+      "integrations/langgraph/pyproject.toml",
+      "integrations/langgraph/uv.lock",
+      "integrations/langgraph/src",
+      "integrations/autogen/pyproject.toml",
+      "integrations/autogen/uv.lock",
+      "integrations/autogen/src"
+    ],
+    "tree_sha256": "557ad09059b50bb52b9b2b77e3f1f3c88a7d1a317f460cc95b9d2b5ea479171f",
+    "version": "0.1.0-candidate"
+  },
+  "public_interfaces": [
+    {
+      "file_count": 15,
+      "interface_id": "agent-contract-v1",
+      "path": "contracts/agent/v1",
+      "sha256": "31e885520d8eb452fb7c5f4c0507b05c7116189e05e4f4784dafe485fa60400f"
+    },
+    {
+      "file_count": 3,
+      "interface_id": "autogen-v0.1",
+      "path": "integrations/autogen/src",
+      "sha256": "daa48881e552c33a9afe8ecb2692bb35d60e752e360fca1676ce32b4d90dfcb2"
+    },
+    {
+      "file_count": 3,
+      "interface_id": "context-testkit-v0.1",
+      "path": "runtime/src/milai/testkit",
+      "sha256": "5fcd63b07b9a5851311bf129907a604f405709b3f52433bfbb4361c7d98ca4b1"
+    },
+    {
+      "file_count": 5,
+      "interface_id": "hooks-v0.1",
+      "path": "integrations/hooks/src",
+      "sha256": "277f5e3e4c25518e4a6078a81d4132d24bbb3ee2723febba7537590aafdbb294"
+    },
+    {
+      "file_count": 3,
+      "interface_id": "langgraph-v0.1",
+      "path": "integrations/langgraph/src",
+      "sha256": "a77a16cbd172a910c154ee386ff8ae3953a88a072a790ea4d545adc286296c11"
+    },
+    {
+      "file_count": 6,
+      "interface_id": "mcp-v0.1",
+      "path": "integrations/mcp/src",
+      "sha256": "2eff2a7092c86d37c754a5b299324476190255d5c3ab390c10a6d0d7735c71a1"
+    },
+    {
+      "file_count": 16,
+      "interface_id": "openworker-mcp-v0.1",
+      "path": "integrations/openworker-mcp/src",
+      "sha256": "f68861cd344091aa0c6a9727fc8fcb455ad02c560e3f593f15c769ba1f9d9ace"
+    },
+    {
+      "file_count": 15,
+      "interface_id": "python-client-v0.1",
+      "path": "integrations/python-client/src",
+      "sha256": "9deb6b638b1786e051035c765de0de604ff33ab5240aaf66aa79e336fa7b159f"
+    }
+  ],
+  "schema_version": 1,
+  "source_manifest": {
+    "path": "product.manifest.json",
+    "schema_version": "milai-product-manifest-v1",
+    "sha256": "ce158e189d06e933910309a0c66908cb5f9ba54b4a77b4dc1fbddbc86ab4edc9"
+  }
+}

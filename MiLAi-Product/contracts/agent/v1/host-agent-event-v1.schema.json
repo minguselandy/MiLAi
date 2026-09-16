@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://milai.local/contracts/agent/v1/host-agent-event-v1.schema.json",
+  "title": "MiLAi Host Agent Event v1",
+  "description": "A Host-created interaction event for Raw Evidence capture. It is never a canonical claim and is not a model-call argument.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "event_type",
+    "session_id",
+    "source_id",
+    "subject_id",
+    "observed_at",
+    "content"
+  ],
+  "properties": {
+    "schema_version": {"const": "host-agent-event-v1"},
+    "event_id": {"type": "string", "minLength": 1, "maxLength": 96},
+    "event_type": {
+      "enum": [
+        "USER_MESSAGE",
+        "ASSISTANT_MESSAGE",
+        "TOOL_RESULT",
+        "ARTIFACT_CHANGE",
+        "SESSION_MARKER"
+      ]
+    },
+    "session_id": {"type": "string", "minLength": 1},
+    "source_id": {"type": "string", "minLength": 1},
+    "subject_id": {"type": "string", "minLength": 1},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "content": {"type": "string", "minLength": 1},
+    "turn_id": {"type": "string", "minLength": 1},
+    "turn_ordinal": {"type": "integer", "minimum": 0},
+    "round_id": {"type": "string", "minLength": 1},
+    "round_ordinal": {"type": "integer", "minimum": 0},
+    "previous_turn_id": {"type": "string", "minLength": 1},
+    "next_turn_id": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"event_type": {"not": {"const": "SESSION_MARKER"}}}},
+      "then": {"required": ["turn_id", "turn_ordinal"]}
+    }
+  ]
+}

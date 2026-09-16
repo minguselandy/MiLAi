@@ -1,0 +1,2600 @@
+{
+  "annotation_policy": "SCORER_ONLY_AFTER_PREDICTION_SEAL",
+  "conversations": [
+    {
+      "conversation_id": "sealed-cedar-clinic-trail",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv01-t0"
+          ],
+          "probe_id": "sv01-p0",
+          "query_text": "Which hiking trail reopened after repairs?",
+          "required_support_evidence_ids": [
+            "sv01-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-02T08:00:01+00:00",
+          "content": "The Cedar clinic scheduled my eye exam for Monday.",
+          "content_hash": "5a2f8184fd226c522874f6e895ea23924b814eeebd4e68831f181ec94f39b84e",
+          "evidence_id": "sv01-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-02T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv01-s1",
+          "source_ref": "memory://md02/shadow-validation/sv01/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv01-s1"
+        },
+        {
+          "captured_at": "2026-08-02T08:01:01+00:00",
+          "content": "Did the Cedar clinic confirm the appointment time?",
+          "content_hash": "eca8d34a336bbb7510a16f415d1b573b2c8b725ee70ea439fce66f1a0aa80636",
+          "evidence_id": "sv01-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-02T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv01-s1",
+          "source_ref": "memory://md02/shadow-validation/sv01/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv01-s1"
+        },
+        {
+          "captured_at": "2026-08-02T08:02:01+00:00",
+          "content": "The Cedar hiking trail reopened after bridge repairs.",
+          "content_hash": "4fe82fb4e5a1919c07f52047a5d959eb15900a8138581ef756e364e652167094",
+          "evidence_id": "sv01-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-02T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv01-s1",
+          "source_ref": "memory://md02/shadow-validation/sv01/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv01-s1"
+        },
+        {
+          "captured_at": "2026-08-02T08:03:01+00:00",
+          "content": "That trail is now open from sunrise to dusk.",
+          "content_hash": "7fb801648d9079600710af26284557da58a994806b4b50f75cbc92160987d92a",
+          "evidence_id": "sv01-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-02T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv01-s1",
+          "source_ref": "memory://md02/shadow-validation/sv01/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv01-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-atlas-bicycle-budget",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv02-t0"
+          ],
+          "probe_id": "sv02-p0",
+          "query_text": "Which budget spreadsheet is ready for review?",
+          "required_support_evidence_ids": [
+            "sv02-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-03T08:00:01+00:00",
+          "content": "My Atlas bicycle received a new chain this week.",
+          "content_hash": "3bf9a0f5db6cfd89c365c85eac1638dccadc7f6a2bbe8d13111f8876a377c9f7",
+          "evidence_id": "sv02-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-03T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv02-s1",
+          "source_ref": "memory://md02/shadow-validation/sv02/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv02-s1"
+        },
+        {
+          "captured_at": "2026-08-03T08:01:01+00:00",
+          "content": "Does the Atlas bicycle ride smoothly now?",
+          "content_hash": "1d0a34d3b533f1dca4ae0cef309f7b8b9f770155c0a71e3c3201b211445bf26f",
+          "evidence_id": "sv02-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-03T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv02-s1",
+          "source_ref": "memory://md02/shadow-validation/sv02/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv02-s1"
+        },
+        {
+          "captured_at": "2026-08-03T08:02:01+00:00",
+          "content": "The Atlas budget spreadsheet is ready for review.",
+          "content_hash": "c90f2793ab6228b6628c9bcf43e982fdbe263993bdb04145163b7cd28c84489b",
+          "evidence_id": "sv02-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-03T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv02-s1",
+          "source_ref": "memory://md02/shadow-validation/sv02/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv02-s1"
+        },
+        {
+          "captured_at": "2026-08-03T08:03:01+00:00",
+          "content": "The finance team will review that sheet tomorrow.",
+          "content_hash": "c0ea13335f8f332a777414288a2cb534ebc6fc56a70a84e6fe2fa8103a12c618",
+          "evidence_id": "sv02-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-03T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv02-s1",
+          "source_ref": "memory://md02/shadow-validation/sv02/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv02-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-basil-garden-paint",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv03-t0"
+          ],
+          "probe_id": "sv03-p0",
+          "query_text": "What paint sample arrived for the kitchen?",
+          "required_support_evidence_ids": [
+            "sv03-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-04T08:00:01+00:00",
+          "content": "I planted basil in the balcony garden box.",
+          "content_hash": "36bb271c0fcc3064305f7b2a0d3deaeaf1bc22265c7f5d787e18cc46e0b89c69",
+          "evidence_id": "sv03-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-04T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv03-s1",
+          "source_ref": "memory://md02/shadow-validation/sv03/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv03-s1"
+        },
+        {
+          "captured_at": "2026-08-04T08:01:01+00:00",
+          "content": "Is the basil growing well in that garden box?",
+          "content_hash": "8f2526414ff8f69f09678eecf49090bf678957d6c1eb43e95f240f864799db29",
+          "evidence_id": "sv03-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-04T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv03-s1",
+          "source_ref": "memory://md02/shadow-validation/sv03/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv03-s1"
+        },
+        {
+          "captured_at": "2026-08-04T08:02:01+00:00",
+          "content": "The basil-colored paint sample arrived for the kitchen.",
+          "content_hash": "8a030cd39cf670deb1ba48324a23de104ed6b317ae1881cef00005e91c0de040",
+          "evidence_id": "sv03-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-04T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv03-s1",
+          "source_ref": "memory://md02/shadow-validation/sv03/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv03-s1"
+        },
+        {
+          "captured_at": "2026-08-04T08:03:01+00:00",
+          "content": "That sample looks too dark beside the cabinets.",
+          "content_hash": "192d66926a810a4a0a7b0bdcd67fa666224fc583bbb009aaf4776d097e5ab873",
+          "evidence_id": "sv03-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-04T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv03-s1",
+          "source_ref": "memory://md02/shadow-validation/sv03/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv03-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-mira-violin-server",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv04-t0"
+          ],
+          "probe_id": "sv04-p0",
+          "query_text": "What is the codename for the server migration?",
+          "required_support_evidence_ids": [
+            "sv04-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-05T08:00:01+00:00",
+          "content": "Mira teaches my violin lesson every Thursday.",
+          "content_hash": "d21f3da61b288d2ed42d5af5bf99cb74528d5213b50ff98c1fa4377d9e14d05b",
+          "evidence_id": "sv04-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-05T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv04-s1",
+          "source_ref": "memory://md02/shadow-validation/sv04/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv04-s1"
+        },
+        {
+          "captured_at": "2026-08-05T08:01:01+00:00",
+          "content": "Which piece did Mira assign for violin practice?",
+          "content_hash": "2641bcb734e1c74fcafb94d1c414a8c1539ae9a975f34328b4cf2b8edc5944ca",
+          "evidence_id": "sv04-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-05T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv04-s1",
+          "source_ref": "memory://md02/shadow-validation/sv04/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv04-s1"
+        },
+        {
+          "captured_at": "2026-08-05T08:02:01+00:00",
+          "content": "Mira is the codename for our server migration.",
+          "content_hash": "1ffdf60b98117e59026f275cb09c4e0a48bc371a69b1839ea0937f0e945e3672",
+          "evidence_id": "sv04-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-05T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv04-s1",
+          "source_ref": "memory://md02/shadow-validation/sv04/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv04-s1"
+        },
+        {
+          "captured_at": "2026-08-05T08:03:01+00:00",
+          "content": "That migration begins after the nightly backup.",
+          "content_hash": "566e756ae47124b513d4dfc5440e6d6bca5b55bbe12d9270ef6de7b196234e54",
+          "evidence_id": "sv04-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-05T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv04-s1",
+          "source_ref": "memory://md02/shadow-validation/sv04/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv04-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-orion-flight-projector",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv05-t0"
+          ],
+          "probe_id": "sv05-p0",
+          "query_text": "Which projector stopped working?",
+          "required_support_evidence_ids": [
+            "sv05-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-06T08:00:01+00:00",
+          "content": "The Orion flight departs at six tomorrow morning.",
+          "content_hash": "354ee5fcbe1a9c2b9d910b2dbc7d5a8daa3926d338f9d6c1827d5ae6bdee828b",
+          "evidence_id": "sv05-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-06T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv05-s1",
+          "source_ref": "memory://md02/shadow-validation/sv05/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv05-s1"
+        },
+        {
+          "captured_at": "2026-08-06T08:01:01+00:00",
+          "content": "Did Orion send a gate number for the flight?",
+          "content_hash": "fb12d7e9a4441174c39521538138acd74709e5efb549da3612ee878ec87e126e",
+          "evidence_id": "sv05-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-06T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv05-s1",
+          "source_ref": "memory://md02/shadow-validation/sv05/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv05-s1"
+        },
+        {
+          "captured_at": "2026-08-06T08:02:01+00:00",
+          "content": "The Orion projector in the conference room stopped working.",
+          "content_hash": "2bb1359e79098fd0ccd19f3fed04fb31be009e18512853fb88079548c043854a",
+          "evidence_id": "sv05-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-06T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv05-s1",
+          "source_ref": "memory://md02/shadow-validation/sv05/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv05-s1"
+        },
+        {
+          "captured_at": "2026-08-06T08:03:01+00:00",
+          "content": "Facilities will replace that projector next week.",
+          "content_hash": "d8756fe969c5f965327ee212d71bde4b89af3a639041b3491d6438bc9bd6a246",
+          "evidence_id": "sv05-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-06T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv05-s1",
+          "source_ref": "memory://md02/shadow-validation/sv05/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv05-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-amber-mug-dashboard",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv06-t0"
+          ],
+          "probe_id": "sv06-p0",
+          "query_text": "What does amber status mean on the dashboard?",
+          "required_support_evidence_ids": [
+            "sv06-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-07T08:00:01+00:00",
+          "content": "My amber mug cracked beside the handle.",
+          "content_hash": "89f444dc2a72da31bd082bbaf37f0d2823fd51c7d539b01aca9ca572affbc30a",
+          "evidence_id": "sv06-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-07T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv06-s1",
+          "source_ref": "memory://md02/shadow-validation/sv06/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv06-s1"
+        },
+        {
+          "captured_at": "2026-08-07T08:01:01+00:00",
+          "content": "Can the amber mug still hold hot tea safely?",
+          "content_hash": "06f0296370db796c77e9827383929c0a02a70096837a542f65377effa8705e69",
+          "evidence_id": "sv06-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-07T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv06-s1",
+          "source_ref": "memory://md02/shadow-validation/sv06/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv06-s1"
+        },
+        {
+          "captured_at": "2026-08-07T08:02:01+00:00",
+          "content": "Amber status on the build dashboard means a warning.",
+          "content_hash": "11cd275f78cbb68011377f0988516766b3e79333315147474b095e274fdd4239",
+          "evidence_id": "sv06-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-07T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv06-s1",
+          "source_ref": "memory://md02/shadow-validation/sv06/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv06-s1"
+        },
+        {
+          "captured_at": "2026-08-07T08:03:01+00:00",
+          "content": "That warning appears when coverage drops below target.",
+          "content_hash": "f17165dc0efc04240968ddf6a50fc0bab6eed740d3bb5e5405e65edfd4fefee2",
+          "evidence_id": "sv06-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-07T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv06-s1",
+          "source_ref": "memory://md02/shadow-validation/sv06/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv06-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-harbor-dentist-library",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv07-t0"
+          ],
+          "probe_id": "sv07-p0",
+          "query_text": "Which library branch extended weekend hours?",
+          "required_support_evidence_ids": [
+            "sv07-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-08T08:00:01+00:00",
+          "content": "The Harbor dentist moved my cleaning to Wednesday.",
+          "content_hash": "c4b866d6d23d2593edbf58da8e85fd2b59acb86a3447d890e8f49fbe6caf7ae9",
+          "evidence_id": "sv07-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-08T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv07-s1",
+          "source_ref": "memory://md02/shadow-validation/sv07/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv07-s1"
+        },
+        {
+          "captured_at": "2026-08-08T08:01:01+00:00",
+          "content": "Did the Harbor dentist explain the schedule change?",
+          "content_hash": "06dbb7e02dfd3937b14b29ad6ba6ce9f2f6a8cb70a9b8fa0714ccbec27a13e73",
+          "evidence_id": "sv07-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-08T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv07-s1",
+          "source_ref": "memory://md02/shadow-validation/sv07/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv07-s1"
+        },
+        {
+          "captured_at": "2026-08-08T08:02:01+00:00",
+          "content": "The Harbor branch of the library extended weekend hours.",
+          "content_hash": "2d78fb82e0965bf1e740ba4158a675910b45f8b051a2430c4c158fc58f0b5faa",
+          "evidence_id": "sv07-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-08T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv07-s1",
+          "source_ref": "memory://md02/shadow-validation/sv07/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv07-s1"
+        },
+        {
+          "captured_at": "2026-08-08T08:03:01+00:00",
+          "content": "That branch now closes at eight on Saturday.",
+          "content_hash": "328ccd657046b213d0214fbe7e0a7b87b3961d0e00e72fd08f7df5464ebede65",
+          "evidence_id": "sv07-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-08T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv07-s1",
+          "source_ref": "memory://md02/shadow-validation/sv07/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv07-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-nimbus-jacket-deploy",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv08-t0"
+          ],
+          "probe_id": "sv08-p0",
+          "query_text": "Which deployment passed the migration check?",
+          "required_support_evidence_ids": [
+            "sv08-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-09T08:00:01+00:00",
+          "content": "My Nimbus jacket is being repaired at the zipper.",
+          "content_hash": "0b61ff34d1aa086ae25230051c3c5367063a6fa6de5aa6412da1c4772dd990b8",
+          "evidence_id": "sv08-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-09T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv08-s1",
+          "source_ref": "memory://md02/shadow-validation/sv08/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv08-s1"
+        },
+        {
+          "captured_at": "2026-08-09T08:01:01+00:00",
+          "content": "When will the Nimbus jacket repair be finished?",
+          "content_hash": "1726e2f179c78a7bf85606faed3000998ea309f7e1e1c98d07afdcac2d36b7fe",
+          "evidence_id": "sv08-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-09T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv08-s1",
+          "source_ref": "memory://md02/shadow-validation/sv08/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv08-s1"
+        },
+        {
+          "captured_at": "2026-08-09T08:02:01+00:00",
+          "content": "The Nimbus deployment passed its database migration check.",
+          "content_hash": "1624f10d475374dceb00c8fde7844fa82b457904fa1c67e8fe06cb29b97ece3b",
+          "evidence_id": "sv08-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-09T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv08-s1",
+          "source_ref": "memory://md02/shadow-validation/sv08/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv08-s1"
+        },
+        {
+          "captured_at": "2026-08-09T08:03:01+00:00",
+          "content": "That deployment can proceed to staging tonight.",
+          "content_hash": "7f812b3972b8047a70b8d2c264615395385143443db7f5f1550fa64cb73f4e36",
+          "evidence_id": "sv08-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-09T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv08-s1",
+          "source_ref": "memory://md02/shadow-validation/sv08/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv08-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-maple-bakery-dataset",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv09-t0"
+          ],
+          "probe_id": "sv09-p0",
+          "query_text": "Which dataset completed its checksum audit?",
+          "required_support_evidence_ids": [
+            "sv09-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-10T08:00:01+00:00",
+          "content": "The Maple bakery made the cake for our picnic.",
+          "content_hash": "c6b40e0edd8faca0372a48f278acc06f1ce507f65725caba670f29307d964840",
+          "evidence_id": "sv09-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-10T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv09-s1",
+          "source_ref": "memory://md02/shadow-validation/sv09/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv09-s1"
+        },
+        {
+          "captured_at": "2026-08-10T08:01:01+00:00",
+          "content": "Did the Maple bakery include the lemon filling?",
+          "content_hash": "503cd9836e8c2f1d5672471d31ecc6e508a4939947c3acc3dfdf923397a925b6",
+          "evidence_id": "sv09-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-10T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv09-s1",
+          "source_ref": "memory://md02/shadow-validation/sv09/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv09-s1"
+        },
+        {
+          "captured_at": "2026-08-10T08:02:01+00:00",
+          "content": "The Maple dataset completed its checksum audit.",
+          "content_hash": "13642c2b2d9a22ef7267f68ddd90954428b5cef5bf3f5b0587d4178df9ef64ad",
+          "evidence_id": "sv09-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-10T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv09-s1",
+          "source_ref": "memory://md02/shadow-validation/sv09/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv09-s1"
+        },
+        {
+          "captured_at": "2026-08-10T08:03:01+00:00",
+          "content": "That dataset has no missing archive files.",
+          "content_hash": "73d83e00b0c4e281b4adfd2d36041ac12a786523cd99b8045e669d0d1afe252d",
+          "evidence_id": "sv09-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-10T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv09-s1",
+          "source_ref": "memory://md02/shadow-validation/sv09/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv09-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-phoenix-gym-ticket",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv10-t0"
+          ],
+          "probe_id": "sv10-p0",
+          "query_text": "Which incident ticket is waiting for an owner?",
+          "required_support_evidence_ids": [
+            "sv10-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-11T08:00:01+00:00",
+          "content": "I renewed my Phoenix gym membership for six months.",
+          "content_hash": "2ce9b85e0bf4de8ed0ca9d038381414ecb90adbde1cb512f86c41530c1ee83e1",
+          "evidence_id": "sv10-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-11T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv10-s1",
+          "source_ref": "memory://md02/shadow-validation/sv10/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv10-s1"
+        },
+        {
+          "captured_at": "2026-08-11T08:01:01+00:00",
+          "content": "Does the Phoenix gym membership include swimming classes?",
+          "content_hash": "104d00f0dc01fab50052336cfd448be764f7ae83390c012ff30017566eb8e855",
+          "evidence_id": "sv10-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-11T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv10-s1",
+          "source_ref": "memory://md02/shadow-validation/sv10/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv10-s1"
+        },
+        {
+          "captured_at": "2026-08-11T08:02:01+00:00",
+          "content": "The Phoenix incident ticket is waiting for an owner.",
+          "content_hash": "760bc87de5d3e6678743bb6f38d072fe9cc42a8b57695b3cbfd0e3aac6cd0989",
+          "evidence_id": "sv10-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-11T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv10-s1",
+          "source_ref": "memory://md02/shadow-validation/sv10/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv10-s1"
+        },
+        {
+          "captured_at": "2026-08-11T08:03:01+00:00",
+          "content": "That ticket concerns a failed cache purge.",
+          "content_hash": "d5dd645f3003d149dc4e11d779f4afe2251f0f042b087af5d1cb1fcc61dfefcb",
+          "evidence_id": "sv10-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-11T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv10-s1",
+          "source_ref": "memory://md02/shadow-validation/sv10/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv10-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-delta-train-report",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv11-t0"
+          ],
+          "probe_id": "sv11-p0",
+          "query_text": "Which table compares four methods?",
+          "required_support_evidence_ids": [
+            "sv11-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-12T08:00:01+00:00",
+          "content": "The Delta train arrives at the central station at nine.",
+          "content_hash": "5481b16749b1adddcbdd510e8491c050fef3cff13f0ab35088489c15e07757ea",
+          "evidence_id": "sv11-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-12T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv11-s1",
+          "source_ref": "memory://md02/shadow-validation/sv11/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv11-s1"
+        },
+        {
+          "captured_at": "2026-08-12T08:01:01+00:00",
+          "content": "Is the Delta train usually punctual at that station?",
+          "content_hash": "d7dbc7f6485307bebc54d8f83dae410edcb59d98b3406b91d241cd708e2fa5c7",
+          "evidence_id": "sv11-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-12T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv11-s1",
+          "source_ref": "memory://md02/shadow-validation/sv11/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv11-s1"
+        },
+        {
+          "captured_at": "2026-08-12T08:02:01+00:00",
+          "content": "The Delta table in my report compares four methods.",
+          "content_hash": "3e87197eda86595d03aa6c591a5ccf4085a93c534d7bc93c70bcf5d2e59b2090",
+          "evidence_id": "sv11-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-12T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv11-s1",
+          "source_ref": "memory://md02/shadow-validation/sv11/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv11-s1"
+        },
+        {
+          "captured_at": "2026-08-12T08:03:01+00:00",
+          "content": "That table belongs in the results appendix.",
+          "content_hash": "acb24832d7e0470f3608b0f83edfdde55766d5c5db69c9d2bc303041a7ca10d6",
+          "evidence_id": "sv11-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-12T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv11-s1",
+          "source_ref": "memory://md02/shadow-validation/sv11/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv11-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-echo-headphones-script",
+      "counterexample_families": [
+        "OVER_MERGE_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv12-t0"
+          ],
+          "probe_id": "sv12-p0",
+          "query_text": "What does the Echo command print?",
+          "required_support_evidence_ids": [
+            "sv12-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-13T08:00:01+00:00",
+          "content": "My Echo headphones now have fresh ear cushions.",
+          "content_hash": "3c6839edd0aa763340d61da0183741fed32e3e2c597c67b34f19ecce5e6abb90",
+          "evidence_id": "sv12-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-13T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv12-s1",
+          "source_ref": "memory://md02/shadow-validation/sv12/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv12-s1"
+        },
+        {
+          "captured_at": "2026-08-13T08:01:01+00:00",
+          "content": "Do the Echo headphones feel more comfortable now?",
+          "content_hash": "c9dc2ae51bb3a60743f73a211ef12561f902a10cb06a405defce375429d651cd",
+          "evidence_id": "sv12-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-13T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv12-s1",
+          "source_ref": "memory://md02/shadow-validation/sv12/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv12-s1"
+        },
+        {
+          "captured_at": "2026-08-13T08:02:01+00:00",
+          "content": "The Echo command in the maintenance script prints the run ID.",
+          "content_hash": "1fb138daa1235ecb761811cd621c58eee64c925c9aef3678ab3a423084301ece",
+          "evidence_id": "sv12-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-13T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv12-s1",
+          "source_ref": "memory://md02/shadow-validation/sv12/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv12-s1"
+        },
+        {
+          "captured_at": "2026-08-13T08:03:01+00:00",
+          "content": "That command executes before artifact validation.",
+          "content_hash": "37381f18946d431e27294efc37181e1e247deab4ca3080b32b04995b08617c84",
+          "evidence_id": "sv12-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-13T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv12-s1",
+          "source_ref": "memory://md02/shadow-validation/sv12/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv12-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-piano-register",
+      "counterexample_families": [
+        "CONTINUATION_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv13-t0"
+          ],
+          "probe_id": "sv13-p0",
+          "query_text": "How does the middle register sound now?",
+          "required_support_evidence_ids": [
+            "sv13-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-14T08:00:01+00:00",
+          "content": "A technician tuned my upright piano on Saturday.",
+          "content_hash": "bcc46cd24754614b6232546c00043bcd798c4e625d870153d5699780d49277c2",
+          "evidence_id": "sv13-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-14T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv13-s1",
+          "source_ref": "memory://md02/shadow-validation/sv13/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv13-s1"
+        },
+        {
+          "captured_at": "2026-08-14T08:01:01+00:00",
+          "content": "Did the middle register stop wavering during scales?",
+          "content_hash": "48bf48ec174e8d17fd7d01eae1e7070cb500912baeaddf23ea7bbf94e3b0ce28",
+          "evidence_id": "sv13-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-14T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv13-s1",
+          "source_ref": "memory://md02/shadow-validation/sv13/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv13-s1"
+        },
+        {
+          "captured_at": "2026-08-14T08:02:01+00:00",
+          "content": "The middle register sounds steady throughout every scale.",
+          "content_hash": "1b571a4e01e5bea0d6b88ea850550c08b122ce354fcba2f9ed9d2ecaa9055a08",
+          "evidence_id": "sv13-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-14T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv13-s1",
+          "source_ref": "memory://md02/shadow-validation/sv13/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv13-s1"
+        },
+        {
+          "captured_at": "2026-08-14T08:03:01+00:00",
+          "content": "My neighbor adopted a grey kitten yesterday.",
+          "content_hash": "01e77f0b1f5dcc671161d4d6534ddf5341a77513a375325e3f6c35d052910aa4",
+          "evidence_id": "sv13-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-14T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv13-s1",
+          "source_ref": "memory://md02/shadow-validation/sv13/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv13-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-cycle-rear-brake",
+      "counterexample_families": [
+        "CONTINUATION_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv14-t0"
+          ],
+          "probe_id": "sv14-p0",
+          "query_text": "What happened to the rear brake noise?",
+          "required_support_evidence_ids": [
+            "sv14-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-15T08:00:01+00:00",
+          "content": "My touring cycle returned from the repair shop.",
+          "content_hash": "6611049c98b442f0424c936763d9ac0512fa77c4698a116c6f05739bc33a2d40",
+          "evidence_id": "sv14-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-15T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv14-s1",
+          "source_ref": "memory://md02/shadow-validation/sv14/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv14-s1"
+        },
+        {
+          "captured_at": "2026-08-15T08:01:01+00:00",
+          "content": "Does the rear brake still squeal on steep descents?",
+          "content_hash": "0f683380e2694ba761d006f1e818c03a0d74ba4622a577d4bfa1e6711658f563",
+          "evidence_id": "sv14-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-15T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv14-s1",
+          "source_ref": "memory://md02/shadow-validation/sv14/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv14-s1"
+        },
+        {
+          "captured_at": "2026-08-15T08:02:01+00:00",
+          "content": "The rear brake stays silent even while going downhill.",
+          "content_hash": "0f04707499b58bd6428e9f5e3df4242d7423cdf363120e92b9162dd79b7967c0",
+          "evidence_id": "sv14-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-15T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv14-s1",
+          "source_ref": "memory://md02/shadow-validation/sv14/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv14-s1"
+        },
+        {
+          "captured_at": "2026-08-15T08:03:01+00:00",
+          "content": "I ordered new curtains for the study.",
+          "content_hash": "ae49422fa306457f8280a4ac98ae15164e6e54c94a848a37acb604792eb6a8c9",
+          "evidence_id": "sv14-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-15T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv14-s1",
+          "source_ref": "memory://md02/shadow-validation/sv14/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv14-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-soup-broth",
+      "counterexample_families": [
+        "CONTINUATION_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv15-t0"
+          ],
+          "probe_id": "sv15-p0",
+          "query_text": "How does the broth taste after the change?",
+          "required_support_evidence_ids": [
+            "sv15-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-16T08:00:01+00:00",
+          "content": "I changed the recipe for tonight's tomato soup.",
+          "content_hash": "0a6226617a6eb478e947939967b88caf349a07963c5cff6992b4da9f3a51bd34",
+          "evidence_id": "sv15-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-16T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv15-s1",
+          "source_ref": "memory://md02/shadow-validation/sv15/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv15-s1"
+        },
+        {
+          "captured_at": "2026-08-16T08:01:01+00:00",
+          "content": "Is the broth less salty after the recipe change?",
+          "content_hash": "72f1779a82397ec103181830284169f7339ccaf8053cca12830810a14efaf02f",
+          "evidence_id": "sv15-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-16T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv15-s1",
+          "source_ref": "memory://md02/shadow-validation/sv15/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv15-s1"
+        },
+        {
+          "captured_at": "2026-08-16T08:02:01+00:00",
+          "content": "The broth tastes balanced and mild this evening.",
+          "content_hash": "3bd456db6dae0e3ac27af59f7a0aaea8770c1a49005a279723a8c058f9f987c0",
+          "evidence_id": "sv15-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-16T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv15-s1",
+          "source_ref": "memory://md02/shadow-validation/sv15/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv15-s1"
+        },
+        {
+          "captured_at": "2026-08-16T08:03:01+00:00",
+          "content": "My bus pass expires at the end of September.",
+          "content_hash": "09c0d8e3eee416be43b10eb1a3f960568eb95b315eac35bf08ee4ae177e1c0fb",
+          "evidence_id": "sv15-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-16T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv15-s1",
+          "source_ref": "memory://md02/shadow-validation/sv15/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv15-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-language-exercises",
+      "counterexample_families": [
+        "CONTINUATION_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv16-t0"
+          ],
+          "probe_id": "sv16-p0",
+          "query_text": "How do the spoken exercises feel now?",
+          "required_support_evidence_ids": [
+            "sv16-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-17T08:00:01+00:00",
+          "content": "I completed another lesson in my language course.",
+          "content_hash": "dec194ec341339aa1d41b3e0fbdae39d4c23bef73d178ed18c6b2984aa459504",
+          "evidence_id": "sv16-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-17T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv16-s1",
+          "source_ref": "memory://md02/shadow-validation/sv16/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv16-s1"
+        },
+        {
+          "captured_at": "2026-08-17T08:01:01+00:00",
+          "content": "Can you follow the spoken exercises more easily now?",
+          "content_hash": "7729afa3a9c00eb1e413fd3502b37cbcdab707c8a4aa254aa4c15ac175355b83",
+          "evidence_id": "sv16-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-17T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv16-s1",
+          "source_ref": "memory://md02/shadow-validation/sv16/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv16-s1"
+        },
+        {
+          "captured_at": "2026-08-17T08:02:01+00:00",
+          "content": "The spoken exercises feel much clearer and slower.",
+          "content_hash": "10512f23618af8a571f27713c5c34d06359d77f1159b0707bc58b02195567f20",
+          "evidence_id": "sv16-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-17T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv16-s1",
+          "source_ref": "memory://md02/shadow-validation/sv16/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv16-s1"
+        },
+        {
+          "captured_at": "2026-08-17T08:03:01+00:00",
+          "content": "The hallway lamp needs a brighter bulb.",
+          "content_hash": "c00d8b888000a054250c842293fadb2f475919e5fc0dc23d670f61f2591d37df",
+          "evidence_id": "sv16-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-17T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv16-s1",
+          "source_ref": "memory://md02/shadow-validation/sv16/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv16-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-dog-night-cough",
+      "counterexample_families": [
+        "CONTINUATION_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv17-t0"
+          ],
+          "probe_id": "sv17-p0",
+          "query_text": "What happened to the nighttime coughing?",
+          "required_support_evidence_ids": [
+            "sv17-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-18T08:00:01+00:00",
+          "content": "The veterinarian changed my dog's medicine last week.",
+          "content_hash": "bb8d621d26d555b578fd5de5755b67f2227c5d8a0fe96c4e09659a2f52a575e3",
+          "evidence_id": "sv17-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-18T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv17-s1",
+          "source_ref": "memory://md02/shadow-validation/sv17/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv17-s1"
+        },
+        {
+          "captured_at": "2026-08-18T08:01:01+00:00",
+          "content": "Has the nighttime coughing stopped since the change?",
+          "content_hash": "8eb83d3e0c0c786c98a65378f7f0d914619755e3e272c6922a12b05dc1175c7e",
+          "evidence_id": "sv17-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-18T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv17-s1",
+          "source_ref": "memory://md02/shadow-validation/sv17/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv17-s1"
+        },
+        {
+          "captured_at": "2026-08-18T08:02:01+00:00",
+          "content": "The nighttime coughing has disappeared completely.",
+          "content_hash": "b74622d0e91e08139f5eef268e30ddc34588bb2ad038fefa98de718f726795e1",
+          "evidence_id": "sv17-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-18T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv17-s1",
+          "source_ref": "memory://md02/shadow-validation/sv17/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv17-s1"
+        },
+        {
+          "captured_at": "2026-08-18T08:03:01+00:00",
+          "content": "I reserved a table for my cousin's birthday.",
+          "content_hash": "0bfad147829ed77b07b2776fa04a7e535e16faa92b9f1ddb3e1c0b53c4303a0b",
+          "evidence_id": "sv17-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-18T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv17-s1",
+          "source_ref": "memory://md02/shadow-validation/sv17/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv17-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-plant-new-leaves",
+      "counterexample_families": [
+        "CONTINUATION_PRESSURE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv18-t0"
+          ],
+          "probe_id": "sv18-p0",
+          "query_text": "How are the new leaves doing?",
+          "required_support_evidence_ids": [
+            "sv18-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-19T08:00:01+00:00",
+          "content": "I moved the houseplant away from the cold window.",
+          "content_hash": "dd72c1a23eb98b453b9386b51a6831c42a28ab66eaa455353ed84db8a9ded3a5",
+          "evidence_id": "sv18-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-19T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv18-s1",
+          "source_ref": "memory://md02/shadow-validation/sv18/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv18-s1"
+        },
+        {
+          "captured_at": "2026-08-19T08:01:01+00:00",
+          "content": "Are the new leaves staying upright in that location?",
+          "content_hash": "3c475f1fb24edb96cd83ef05682651dd016aabf6adc831d022804fd4da2cccad",
+          "evidence_id": "sv18-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-19T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv18-s1",
+          "source_ref": "memory://md02/shadow-validation/sv18/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv18-s1"
+        },
+        {
+          "captured_at": "2026-08-19T08:02:01+00:00",
+          "content": "The new leaves remain firm and vertical all day.",
+          "content_hash": "fd32fcdd26b8ada02d13b436202dbb7977cf855321c39b3fe57a248855f508d3",
+          "evidence_id": "sv18-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-19T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv18-s1",
+          "source_ref": "memory://md02/shadow-validation/sv18/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv18-s1"
+        },
+        {
+          "captured_at": "2026-08-19T08:03:01+00:00",
+          "content": "My passport renewal appointment is next Tuesday.",
+          "content_hash": "49df124df6ad8b14985a00430902a2cbc3dab83236af07379ae0d8a2293765f8",
+          "evidence_id": "sv18-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-19T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv18-s1",
+          "source_ref": "memory://md02/shadow-validation/sv18/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv18-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-correction-portland",
+      "counterexample_families": [
+        "MIXED_CORRECTION"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv19-t0"
+          ],
+          "probe_id": "sv19-p0",
+          "query_text": "Which Portland hosts the conference?",
+          "required_support_evidence_ids": [
+            "sv19-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-20T08:00:01+00:00",
+          "content": "I said that my conference is in Portland, Maine.",
+          "content_hash": "a6853a96055bf6a590e712afb7d777136102f6d3c45e3cff57f1a5543432675c",
+          "evidence_id": "sv19-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-20T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv19-s1",
+          "source_ref": "memory://md02/shadow-validation/sv19/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv19-s1"
+        },
+        {
+          "captured_at": "2026-08-20T08:01:01+00:00",
+          "content": "Should I save Portland, Maine as the venue?",
+          "content_hash": "53772e4729344d328d6f3bf4eaa4acda4d1994240191dc6b87e86113dd224e80",
+          "evidence_id": "sv19-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-20T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv19-s1",
+          "source_ref": "memory://md02/shadow-validation/sv19/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv19-s1"
+        },
+        {
+          "captured_at": "2026-08-20T08:02:01+00:00",
+          "content": "Correction: I meant Portland, Oregon for the conference.",
+          "content_hash": "b241d7d5246c77e3ef4940a6b56c8130c6cad80139799133ef6cd85c7d9f425f",
+          "evidence_id": "sv19-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-20T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv19-s1",
+          "source_ref": "memory://md02/shadow-validation/sv19/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv19-s1"
+        },
+        {
+          "captured_at": "2026-08-20T08:03:01+00:00",
+          "content": "My desk chair delivery was delayed.",
+          "content_hash": "a65fed5979e4535c9e739b3aa32e4c0627109ab07de08b5b2393c5977d788ced",
+          "evidence_id": "sv19-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-20T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv19-s1",
+          "source_ref": "memory://md02/shadow-validation/sv19/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv19-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-correction-pickup",
+      "counterexample_families": [
+        "MIXED_CORRECTION"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv20-t0"
+          ],
+          "probe_id": "sv20-p0",
+          "query_text": "When will I collect the parcel?",
+          "required_support_evidence_ids": [
+            "sv20-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-21T08:00:01+00:00",
+          "content": "I planned to collect the parcel on Friday.",
+          "content_hash": "a664980ae71cc7fe1709db095d4709aafbf71a842c37130ce880783582f74ebc",
+          "evidence_id": "sv20-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-21T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv20-s1",
+          "source_ref": "memory://md02/shadow-validation/sv20/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv20-s1"
+        },
+        {
+          "captured_at": "2026-08-21T08:01:01+00:00",
+          "content": "Is Friday still the parcel pickup day?",
+          "content_hash": "2c8c140e7625a5651693e29832f5fa0acc3289681f43627b1cf8c2e9002d10ac",
+          "evidence_id": "sv20-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-21T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv20-s1",
+          "source_ref": "memory://md02/shadow-validation/sv20/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv20-s1"
+        },
+        {
+          "captured_at": "2026-08-21T08:02:01+00:00",
+          "content": "Actually, I meant Saturday for the parcel collection.",
+          "content_hash": "3de271856db8957ea72c644d67a6aecd88363b11644719836f0ac7cfe65eb14f",
+          "evidence_id": "sv20-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-21T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv20-s1",
+          "source_ref": "memory://md02/shadow-validation/sv20/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv20-s1"
+        },
+        {
+          "captured_at": "2026-08-21T08:03:01+00:00",
+          "content": "The freezer thermometer needs a new battery.",
+          "content_hash": "ac12007a00fe4bea0b7bd666f225c523b7d415d06cd3bbfdd0f4dd7cf3ca18e6",
+          "evidence_id": "sv20-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-21T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv20-s1",
+          "source_ref": "memory://md02/shadow-validation/sv20/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv20-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-assistant-bridge-humidity",
+      "counterexample_families": [
+        "MIXED_ASSISTANT_BRIDGE"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv21-t0"
+          ],
+          "probe_id": "sv21-p0",
+          "query_text": "How do the leaf tips look now?",
+          "required_support_evidence_ids": [
+            "sv21-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-22T08:00:01+00:00",
+          "content": "I moved the fern into the bathroom yesterday.",
+          "content_hash": "f46052f0367f98500a9ca3894ad483b6d0091d10dc9e2f7fa55eb2cb68b5002e",
+          "evidence_id": "sv21-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-22T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv21-s1",
+          "source_ref": "memory://md02/shadow-validation/sv21/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv21-s1"
+        },
+        {
+          "captured_at": "2026-08-22T08:01:01+00:00",
+          "content": "Are the leaf tips improving with the higher humidity?",
+          "content_hash": "2cbb6867554fee209d2343933fbbf8f74f3b85380394fce173fa655990299458",
+          "evidence_id": "sv21-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-22T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv21-s1",
+          "source_ref": "memory://md02/shadow-validation/sv21/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv21-s1"
+        },
+        {
+          "captured_at": "2026-08-22T08:02:01+00:00",
+          "content": "The leaf tips look green instead of dry now.",
+          "content_hash": "b5fb455b5d461d3458e31f5a7158b13ab8dfdadb02c24d229031e822c5e75033",
+          "evidence_id": "sv21-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-22T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv21-s1",
+          "source_ref": "memory://md02/shadow-validation/sv21/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv21-s1"
+        },
+        {
+          "captured_at": "2026-08-22T08:03:01+00:00",
+          "content": "My tax folder is stored in the blue cabinet.",
+          "content_hash": "83af5a757a32005a1ab5167d821d447d4763d2a68b8308effd76360c74d4fc5c",
+          "evidence_id": "sv21-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-22T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv21-s1",
+          "source_ref": "memory://md02/shadow-validation/sv21/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv21-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-long-gap-oven",
+      "counterexample_families": [
+        "MIXED_LONG_GAP_CONTINUATION"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "boundary_reason": "SEMANTIC_TOPIC_SHIFT",
+          "turn_indexes": [
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv22-t0"
+          ],
+          "probe_id": "sv22-p0",
+          "query_text": "Does the oven thermometer match the setting?",
+          "required_support_evidence_ids": [
+            "sv22-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-23T08:00:01+00:00",
+          "content": "A technician recalibrated my oven this morning.",
+          "content_hash": "c4ec7f8ae13659342e3162157ce6c50aefe4090f1f1a8d5a907dd535977c4786",
+          "evidence_id": "sv22-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-23T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv22-s1",
+          "source_ref": "memory://md02/shadow-validation/sv22/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv22-s1"
+        },
+        {
+          "captured_at": "2026-08-23T08:01:01+00:00",
+          "content": "Does the internal thermometer reach the selected temperature?",
+          "content_hash": "a33aa0f8add2446d9c68deae14e57056e44994ab26fcb0e267b0a976ea6f9782",
+          "evidence_id": "sv22-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-23T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv22-s1",
+          "source_ref": "memory://md02/shadow-validation/sv22/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv22-s1"
+        },
+        {
+          "captured_at": "2026-08-24T08:01:01+00:00",
+          "content": "The internal thermometer now matches the selected temperature.",
+          "content_hash": "58cf4b9e1510dcd3c7457c7889235a3a2edfd903a6490b0c1ea7a96e3bf46645",
+          "evidence_id": "sv22-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-24T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv22-s1",
+          "source_ref": "memory://md02/shadow-validation/sv22/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv22-s1"
+        },
+        {
+          "captured_at": "2026-08-24T08:02:01+00:00",
+          "content": "I joined a weekend drawing workshop.",
+          "content_hash": "4fdda009f9cdd7c2918365c63b37bbad3f26b8ad9f4bc66bbe26f21290449425",
+          "evidence_id": "sv22-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-24T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv22-s1",
+          "source_ref": "memory://md02/shadow-validation/sv22/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv22-s1"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-session-river",
+      "counterexample_families": [
+        "MIXED_SESSION_BOUNDARY"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "SESSION_CHANGE",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv23-t0"
+          ],
+          "probe_id": "sv23-p0",
+          "query_text": "What finished without warnings?",
+          "required_support_evidence_ids": [
+            "sv23-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-24T08:00:01+00:00",
+          "content": "The river path near my home reopened this morning.",
+          "content_hash": "9318e5aca22edacddc175482ae2f5ee8cc39d84421767fecda0c74cbfaffa2da",
+          "evidence_id": "sv23-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-24T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv23-s1",
+          "source_ref": "memory://md02/shadow-validation/sv23/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv23-s1"
+        },
+        {
+          "captured_at": "2026-08-24T08:01:01+00:00",
+          "content": "Is the river path open to bicycles again?",
+          "content_hash": "903da6d2e91a02d6e887cfe4fb6b2e08b3fa388444da347a12e6b9fb0cbe54e6",
+          "evidence_id": "sv23-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-24T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv23-s1",
+          "source_ref": "memory://md02/shadow-validation/sv23/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv23-s1"
+        },
+        {
+          "captured_at": "2026-08-24T08:02:01+00:00",
+          "content": "The payroll export finished without warnings.",
+          "content_hash": "1c2379d3b75e2ecf127420e28dab54f39cf179fd1db4c243e2ca043983cc5622",
+          "evidence_id": "sv23-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-24T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv23-s2",
+          "source_ref": "memory://md02/shadow-validation/sv23/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv23-s2"
+        },
+        {
+          "captured_at": "2026-08-24T08:03:01+00:00",
+          "content": "That export contains all twelve departments.",
+          "content_hash": "2dde99613c67066442dbc93a6228c22210467b4ab3dcc84abbb483aae181cb44",
+          "evidence_id": "sv23-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-24T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv23-s2",
+          "source_ref": "memory://md02/shadow-validation/sv23/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv23-s2"
+        }
+      ]
+    },
+    {
+      "conversation_id": "sealed-explicit-shift-pottery",
+      "counterexample_families": [
+        "MIXED_EXPLICIT_SHIFT"
+      ],
+      "expected_episodes": [
+        {
+          "boundary_reason": "CONVERSATION_START",
+          "turn_indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "boundary_reason": "EXPLICIT_TOPIC_SHIFT",
+          "turn_indexes": [
+            2,
+            3
+          ]
+        }
+      ],
+      "memory_probes": [
+        {
+          "distractor_evidence_ids": [
+            "sv24-t0"
+          ],
+          "probe_id": "sv24-p0",
+          "query_text": "What workshop did I enroll in?",
+          "required_support_evidence_ids": [
+            "sv24-t2"
+          ]
+        }
+      ],
+      "turns": [
+        {
+          "captured_at": "2026-08-25T08:00:01+00:00",
+          "content": "My reading group chose a history book for September.",
+          "content_hash": "6da09ce297657b4087d5c1889706d9caa5d52bdacdc30783b186d4683402b836",
+          "evidence_id": "sv24-t0",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-25T08:00:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv24-s1",
+          "source_ref": "memory://md02/shadow-validation/sv24/turn/0",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv24-s1"
+        },
+        {
+          "captured_at": "2026-08-25T08:01:01+00:00",
+          "content": "When will the reading group discuss that book?",
+          "content_hash": "64d21bfdef00ad86a75f3a5c206deb228e230ff8f2551a0a4ae4fb5272a12d36",
+          "evidence_id": "sv24-t1",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-25T08:01:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv24-s1",
+          "source_ref": "memory://md02/shadow-validation/sv24/turn/1",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv24-s1"
+        },
+        {
+          "captured_at": "2026-08-25T08:02:01+00:00",
+          "content": "Changing topic, I enrolled in a pottery workshop.",
+          "content_hash": "6fbd46260e156647bb10a5f806744db0c3ee837652822b763ac06cdd07f8b7ca",
+          "evidence_id": "sv24-t2",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-25T08:02:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv24-s1",
+          "source_ref": "memory://md02/shadow-validation/sv24/turn/2",
+          "speaker": "user",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv24-s1"
+        },
+        {
+          "captured_at": "2026-08-25T08:03:01+00:00",
+          "content": "That workshop begins on the first Sunday.",
+          "content_hash": "647f12dbbc008cc184f7cc1bede10d8c9c8e6e3dd35328236d8201151415a701",
+          "evidence_id": "sv24-t3",
+          "kind": "EVIDENCE_OBSERVATION",
+          "observed_at": "2026-08-25T08:03:00+00:00",
+          "permission_snapshot": {
+            "readable": true
+          },
+          "retention_state": "READABLE",
+          "revoked_at": null,
+          "session_id": "sv24-s1",
+          "source_ref": "memory://md02/shadow-validation/sv24/turn/3",
+          "speaker": "assistant",
+          "speaker_source": "STRUCTURED_TURN_METADATA",
+          "subject_id": "sv24-s1"
+        }
+      ]
+    }
+  ],
+  "formal_holdout": false,
+  "schema": "milai.md02.boundary-shadow-validation.v0.1",
+  "split": "shadow-validation"
+}

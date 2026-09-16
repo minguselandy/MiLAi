@@ -1,0 +1,31 @@
+{
+  "goal_version": "0.5",
+  "status": "CONTROLLED_ENTRY_REGISTERED_ENGINEERING_PENDING",
+  "failure_id": "v05-controlled-stale-close-dynamic-1",
+  "source_id": "v05-controlled-host-timeline-v1",
+  "origin": "CONTROLLED_MECHANISM",
+  "natural_error_rate": "NOT_CLAIMED",
+  "layer": "PRESENTED_NOT_USED",
+  "task": "Determine why synthetic delivery B7 is not acknowledged and provide only source-supported next steps; no production actions.",
+  "timeline": [
+    {"time": 0, "event": "CONTROLLED_PRIOR_NOTE", "content": "Publication branch marked closed after viewing a success receipt; receipt identity check parked pending the delivery identifier. Exporter branch active; intended next action is restart exporter."},
+    {"time": 1, "event": "NEW_OBSERVATION", "content": "The success receipt cited in the prior note is identified as B6, while the current delivery is B7."},
+    {"time": 2, "event": "CONTROLLED_FAILURE_STATE", "content": "Despite the new receipt identifier, the injected prior controller retains publication=closed and the exporter-restart next action, losing the parked receipt check as a next step."}
+  ],
+  "observed_failure": "Controlled sequence retains a closed publication branch and an unsupported exporter action after a new identifier invalidates the closure evidence; the parked identity check is not resumed.",
+  "v04_relationship": "Independent synthetic dynamic timeline, not reuse or rescoring of v0.4 static B1/B2; failure is an injected controller state, not a measured autonomous A failure.",
+  "minimum_intervention": "Generic exploratory policy: retain unverified ideas as candidates, verify pending actions against new observations, revisit a parked check when its return condition is met, stop when the current task is supported. No mandatory structured State or explicit FOCUS.",
+  "contrast": "A/B",
+  "A": "Normal autonomous exploration and optional ordinary notes",
+  "B": "Same capabilities and notes plus the generic exploratory policy",
+  "prediction": "Before recommending the stale exporter action, reopen or inspect the receipt-dependent question; gain relevant evidence without adopting speculative alternative causes or redoing unrelated completed work.",
+  "source_access": "Same immutable local synthetic source catalog, ordinary bounded search/read, maximum six tool operations per arm; future observations are delivered on a frozen schedule, never read from evaluation labels.",
+  "max_generations_per_arm": 4,
+  "max_search_read_per_arm": 6,
+  "max_raw_tokens": 64000,
+  "max_batch_seconds": 600,
+  "max_request_seconds": 60,
+  "execution_authorization": "User's v0.5 execute-Goal/direct-permission instruction; register concrete runnable B3 allocation after engineering preflight, no inherited v0.4 allowance.",
+  "stops": ["Unknown usage retains reservation and ends batch", "Scope/source/permission inconsistency stops before dispatch", "No case-specific correct-branch instruction", "Missing dynamic events means mechanism not covered, not success", "No outcome-dependent prompt repairs or extra generations"],
+  "P3_entry": "Separate decision after seeing whether useful control relationships and a concrete resume task exist; controlled seed origins remain explicit."
+}

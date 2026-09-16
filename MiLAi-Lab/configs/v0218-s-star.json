@@ -1,0 +1,20 @@
+{
+  "revision": "E0_COMMON_HOST_V4_S_STAR_SELECTION_V1",
+  "status": "SELECTED_ON_EXPOSED_D_NOT_CONFIRMATION",
+  "selected_arm": "N1",
+  "selection_unit": "One global baseline, never per-root selection",
+  "evidence": "/cra/memory/mx_memory/evidence/v0218/20260911/e0-v4-summary-v1.json",
+  "evidence_sha256": "1b469d4318ca993dca96ee2b59e7d3e2fed915caa7f3276fb5bb7e0a4d13f643",
+  "host_sha256": "9d4785479201087a0f19c7dfb5ee8888dcce0a9a5baf427138dfb83910c59c90",
+  "reason": "N1 wins two same-world standard pairs and loses none to N2; probes tie. N2 uses less compute with lower task quality. Functionality takes priority over token savings.",
+  "standard_B_passes": {"N1": 7, "N2": 5},
+  "standard_B_attempts_per_arm": 12,
+  "probe_B_passes": {"N1": 2, "N2": 2},
+  "probe_B_attempts_per_arm": 6,
+  "new_model_request_allocation": 0,
+  "candidate_experiments_executed": false,
+  "E1_E2_zero_candidate_baseline_sufficient_exit": false,
+  "reason_not_baseline_sufficient": "Unnecessary clarification, stale state retention, incomplete delivery and repeated work remain observable; bounded discovery is still required.",
+  "confirmation_roots": 0,
+  "whole_goal_complete": false
+}

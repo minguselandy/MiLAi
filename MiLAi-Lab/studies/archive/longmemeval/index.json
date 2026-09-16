@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "category": "longmemeval",
+  "snapshot_manifest": "../lifecycle/legacy_snapshot/manifest.json",
+  "files": [
+    {
+      "source": "MiLAi_DG-14_LongMemEval_MCP适配与对比实验_GOALS.md",
+      "destination": "MiLAi/MiLAi_DG-14_LongMemEval_MCP适配与对比实验_GOALS.md",
+      "sha256": "f30376e1a7ea3f351cf1be2c63a7aa5834db484c7e46f825c8bc9e6f28054824"
+    },
+    {
+      "source": "MiLAi_LongMemEval全切片审计与Memory架构重构设计_20260831.md",
+      "destination": "MiLAi/MiLAi_LongMemEval全切片审计与Memory架构重构设计_20260831.md",
+      "sha256": "3523b99743232b37be70edf23e56dc049067a42072d760edd60ea83fa3ba86cd"
+    },
+    {
+      "source": "MiLAi_ML-R02_统一MemoryLifecycle架构收敛与LongMemEval验证_GOALS.md",
+      "destination": "MiLAi/MiLAi_ML-R02_统一MemoryLifecycle架构收敛与LongMemEval验证_GOALS.md",
+      "sha256": "7b1c9bcdd6221c8fdfa52b12323f54fce93ee5ff203fe53a76b1510502aca1c3"
+    },
+    {
+      "source": "docs/reports/DG-10-benchmark-lme-v2-dev-failed-attempt-candidate.2-2026-08-21.json",
+      "destination": "MiLAi/docs/reports/DG-10-benchmark-lme-v2-dev-failed-attempt-candidate.2-2026-08-21.json",
+      "sha256": "a0a5d52f834e2abb46c08aeccd7484df0cbd883365eb9269dcbdbc742a692c2a"
+    },
+    {
+      "source": "docs/reports/DG-10-benchmark-lme-v2-dev-smoke-candidate.1-2026-08-21.json",
+      "destination": "MiLAi/docs/reports/DG-10-benchmark-lme-v2-dev-smoke-candidate.1-2026-08-21.json",
+      "sha256": "f0758a7231815ebcef810cbb22aa44e1f8b54848abc8c69be4b14958d7c4f026"
+    },
+    {
+      "source": "docs/reports/DG-10-benchmark-lme-v2-dev-smoke-candidate.3-2026-08-21.json",
+      "destination": "MiLAi/docs/reports/DG-10-benchmark-lme-v2-dev-smoke-candidate.3-2026-08-21.json",
+      "sha256": "7caa9609a01883f89b696ad40b631940aaf2937cbd5377726da0d9e33ac3f0d9"
+    },
+    {
+      "source": "evals/benchmark/lme_product_smoke.py",
+      "destination": "MiLAi/evals/benchmark/lme_product_smoke.py",
+      "sha256": "b69a65280cdeeb6c9ece91cf96c759632961b4e1506755e818090da2d8c04fa9"
+    },
+    {
+      "source": "evals/benchmark/lme_product_worker.py",
+      "destination": "MiLAi/evals/benchmark/lme_product_worker.py",
+      "sha256": "9c0b9ea548278bbc001f2d4fdecdcc69615185c0a5abeb45042f6f595ae81565"
+    },
+    {
+      "source": "evals/gdpm/b0_canary_longmemeval.py",
+      "destination": "MiLAi/evals/gdpm/b0_canary_longmemeval.py",
+      "sha256": "b522f6a971a78910a4124db8f042b9f10ccb311f0647a04b84059dbc281d3d13"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_contexts.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_contexts.py",
+      "sha256": "cdf69563d4b615731f1fcb15a0866a766d187714a4ea3ae5c85215a9ee1fd4db"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_contract.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_contract.py",
+      "sha256": "627cf51794fb361b5e0870167ae209947df321807feb10c1acaab8ea9f6525f0"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_freeze.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_freeze.py",
+      "sha256": "e76283b57d1164feeced8b315badbf29fd174465140e592d3c6574d06c1947ec"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_providers.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_providers.py",
+      "sha256": "82f304ebed415528bc428ca2afa981560efae820eeaa1fa647ce841c292bf5be"
+    },
+    {
+      "source": "evals/ml_closure/longmemeval_score.py",
+      "destination": "MiLAi/evals/ml_closure/longmemeval_score.py",
+      "sha256": "3f058c5267e1ebc521018de5e311219ac792d2f19286272912c087998face10d"
+    },
+    {
+      "source": "evals/ml_closure/run_longmemeval.py",
+      "destination": "MiLAi/evals/ml_closure/run_longmemeval.py",
+      "sha256": "7aa00c4b0a9397924cc8a547fb6fe680afe2e38f3ecfc1d2a67d5ed5c11e90e5"
+    },
+    {
+      "source": "evals/paper/datasets/longmemeval.py",
+      "destination": "MiLAi/evals/paper/datasets/longmemeval.py",
+      "sha256": "54ca277df91cf7e5b801c3a0a41f825a3e6a37b623a0c0172a4b9e996a6fd5d1"
+    },
+    {
+      "source": "evals/paper/lme_v2_adapter.py",
+      "destination": "MiLAi/evals/paper/lme_v2_adapter.py",
+      "sha256": "2036d656ce42f50fa53a24cb8ae4e9b3a5cc85417772677c8638dca4f1955012"
+    },
+    {
+      "source": "evals/paper/probes/lme_v2_controller_feasibility.py",
+      "destination": "MiLAi/evals/paper/probes/lme_v2_controller_feasibility.py",
+      "sha256": "0e6e18f5f055981c46e763dfe54d5bd4dfad4ccec6e730d50004ed11bcdcae7b"
+    },
+    {
+      "source": "evals/paper/probes/lme_v2_milai_adapter.py",
+      "destination": "MiLAi/evals/paper/probes/lme_v2_milai_adapter.py",
+      "sha256": "2abc2cfdef9340484474b650d05b0317461ee7ba666bc90fb11f83e240445830"
+    },
+    {
+      "source": "evals/paper/probes/lme_v2_modality.py",
+      "destination": "MiLAi/evals/paper/probes/lme_v2_modality.py",
+      "sha256": "ece0f076c556195b7f4f3df85d5f69ac358383f45221b46681c2d4ce93b835af"
+    },
+    {
+      "source": "evals/paper/probes/lme_v2_rag_feasibility.py",
+      "destination": "MiLAi/evals/paper/probes/lme_v2_rag_feasibility.py",
+      "sha256": "d660bb710f0f6bce2660f85bc6481624b00d06998cdc38c7282f7e28b3381677"
+    },
+    {
+      "source": "evals/paper/runners/lme_v2.py",
+      "destination": "MiLAi/evals/paper/runners/lme_v2.py",
+      "sha256": "5760ebc92e6f1fb1c83ba8e9418438c09a5b7450bd3677bc9b18c0717cefddac"
+    },
+    {
+      "source": "evals/paper/runners/lme_v2_native.py",
+      "destination": "MiLAi/evals/paper/runners/lme_v2_native.py",
+      "sha256": "ffa1b37b81d6024ef97eac9557f1689f95e2a05b26e4bb4fbd62e219d8ce6446"
+    },
+    {
+      "source": "evals/paper/runners/longmemeval.py",
+      "destination": "MiLAi/evals/paper/runners/longmemeval.py",
+      "sha256": "281f00662cefa2cf5ef78cbf6c5b8a9a9ba7c431fc19d1dc056b9d63ff59755d"
+    },
+    {
+      "source": "evals/paper/scorers/longmemeval.py",
+      "destination": "MiLAi/evals/paper/scorers/longmemeval.py",
+      "sha256": "35f4ec190b7f65ed4a0735510d6fb3cdfbe00d6c6e8d7b0d377f67c6397172ce"
+    },
+    {
+      "source": "scripts/run_dg10_benchmark_lme_v2_dev_smoke.py",
+      "destination": "MiLAi/scripts/run_dg10_benchmark_lme_v2_dev_smoke.py",
+      "sha256": "83a91dfaceb80e64d326b5bd61b3676acf71a96c44488a559b089ca32c3cbd0d"
+    },
+    {
+      "source": "scripts/run_dg10_lme_product_confirmation.py",
+      "destination": "MiLAi/scripts/run_dg10_lme_product_confirmation.py",
+      "sha256": "14ac999f3a5222de3de297f12f3366d13e815dfd3df97f1668059968d83c8e95"
+    },
+    {
+      "source": "scripts/run_dg10_lme_product_dev.py",
+      "destination": "MiLAi/scripts/run_dg10_lme_product_dev.py",
+      "sha256": "d9afd328af08ab8be1fcc6cd550b6c92fee0e788b7af64f25887a492c2c680f9"
+    },
+    {
+      "source": "scripts/run_dg10_lme_product_smoke.py",
+      "destination": "MiLAi/scripts/run_dg10_lme_product_smoke.py",
+      "sha256": "fbbee3225b0d2de15453a9b38601797a48f61f4ba3c8e499a3dc0d19d9aea4d0"
+    },
+    {
+      "source": "scripts/run_dg14_longmemeval_dev.py",
+      "destination": "MiLAi/scripts/run_dg14_longmemeval_dev.py",
+      "sha256": "0eccf1fbb0ef3330c490fb4316d283db3e728277182f2527a07086c58bb30e86"
+    },
+    {
+      "source": "tests/test_dg10_benchmark_lme_v2_dev_smoke.py",
+      "destination": "MiLAi/tests/test_dg10_benchmark_lme_v2_dev_smoke.py",
+      "sha256": "c681f72a156c3503cd90c1982997f0318fef5d7c2aee762aaefa231007063a1f"
+    },
+    {
+      "source": "tests/test_dg10_lme_product_smoke.py",
+      "destination": "MiLAi/tests/test_dg10_lme_product_smoke.py",
+      "sha256": "cf61a8c75b0ad59a64a5d3911e71872fede7c552967f208e36089faeb152e1d9"
+    },
+    {
+      "source": "tests/test_dg14_lme_adapter.py",
+      "destination": "MiLAi/tests/test_dg14_lme_adapter.py",
+      "sha256": "0d7de1e083ab58725bdee7c0f9f430b62099a5af25175ecb76af67f57c9416fa"
+    },
+    {
+      "source": "tests/test_dg14_lme_boundaries.py",
+      "destination": "MiLAi/tests/test_dg14_lme_boundaries.py",
+      "sha256": "bf6dd3a7729cf3ca934bc855b3ea1d430957ce1137e64fe5eb0ce7cca3670468"
+    },
+    {
+      "source": "tests/test_dg14_lme_integration.py",
+      "destination": "MiLAi/tests/test_dg14_lme_integration.py",
+      "sha256": "3672f180475e50a41d7f5d4d07c163dc00e60c2921cd786639721bc7acba9540"
+    },
+    {
+      "source": "tests/test_dg14_lme_mcp_contract.py",
+      "destination": "MiLAi/tests/test_dg14_lme_mcp_contract.py",
+      "sha256": "7d3acf7ddc72ed5640f3dadc97c430a9c34ce4ec1d8da2d03b2167c11383fd48"
+    },
+    {
+      "source": "tests/test_dg14_lme_runner.py",
+      "destination": "MiLAi/tests/test_dg14_lme_runner.py",
+      "sha256": "13b8cc6736de008ef27115dd61d5ae93efdf5dec30f7956a49bc4fb370528452"
+    },
+    {
+      "source": "tests/test_dg15_lme_mcp_adapter.py",
+      "destination": "MiLAi/tests/test_dg15_lme_mcp_adapter.py",
+      "sha256": "e2d6a55024c9932858d39a5baedb07815b81b5564aa7c2e83d80c5cb420cd528"
+    },
+    {
+      "source": "tests/test_gdpm_b0_canary_longmemeval.py",
+      "destination": "MiLAi/tests/test_gdpm_b0_canary_longmemeval.py",
+      "sha256": "e20f9423e5d4825e307813a416af23158b609da25603f81adcb56563554bcdf5"
+    },
+    {
+      "source": "tests/test_ml_closure_longmemeval.py",
+      "destination": "MiLAi/tests/test_ml_closure_longmemeval.py",
+      "sha256": "4ec0279e5b736f3d20ebf34d6cb489657e7c041b963749eccf819ecde34df076"
+    }
+  ]
+}

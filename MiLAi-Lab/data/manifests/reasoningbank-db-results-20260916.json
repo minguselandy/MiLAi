@@ -1,0 +1,888 @@
+{
+  "kind": "RESEARCH_PROTOTYPE",
+  "status": "DB_MAIN_AND_VERIFIED_TERMINAL_OVERALL_RESEARCH_RUNNING",
+  "created_at": "2026-09-15T16:05:04.055634+00:00",
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "second_solver": "DEFERRED_BY_USER",
+  "candidate_version": "milai-experience-revision-v0.4",
+  "base_version": "reasoningbank-base-port-v0.3",
+  "source_summary": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/final-analysis/db-terminal/summary.json",
+  "source_summary_sha256": "664cdbcb0a3fc181bf43177569072319aca0faef63f5fc4fa019b628b817dd27",
+  "split_sha256": "d514267a72380776faeeedd54a42c7d9199631574ffdcf01a6d6087de474091e",
+  "selected_decision_sha256": "d15115d94ee644eba048ef62aad1e824c26bb568ca9f21cc88151691f0eabb56",
+  "protocols": {
+    "F": "40 SUPPORT tasks form one bank per memory method; frozen for each of100TEST tasks",
+    "O": "Five independent20-task streams per method, each starting from an empty bank"
+  },
+  "arms": [
+    {
+      "method": "NATIVE_AGENT_OR_HISTORY",
+      "condition": "main",
+      "protocol": "F",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "planned_sessions": 100,
+      "terminal_sessions": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 90.0
+      },
+      "settled_requests": 236,
+      "settled_tokens": 243946,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0,
+      "embedding": {
+        "requests": 0,
+        "tokens": 0,
+        "seconds": 0.0,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "actor": {
+          "requests": 236,
+          "tokens": 243946,
+          "seconds": 1188.7843161523342
+        }
+      },
+      "memory_event_counts": {},
+      "native_status_counts": [
+        {
+          "status": "completed",
+          "outcome": "correct",
+          "count": 89
+        },
+        {
+          "status": "completed",
+          "outcome": "incorrect",
+          "count": 4
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "correct",
+          "count": 1
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "incorrect",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "method": "NATIVE_AGENT_OR_HISTORY",
+      "condition": "main",
+      "protocol": "O",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "planned_sessions": 100,
+      "terminal_sessions": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 88.0
+      },
+      "settled_requests": 241,
+      "settled_tokens": 249276,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0,
+      "embedding": {
+        "requests": 0,
+        "tokens": 0,
+        "seconds": 0.0,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "actor": {
+          "requests": 241,
+          "tokens": 249276,
+          "seconds": 1190.5059600132518
+        }
+      },
+      "memory_event_counts": {},
+      "native_status_counts": [
+        {
+          "status": "completed",
+          "outcome": "correct",
+          "count": 86
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "incorrect",
+          "count": 6
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "correct",
+          "count": 2
+        },
+        {
+          "status": "completed",
+          "outcome": "incorrect",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "method": "OM_SYNC_PORT",
+      "condition": "main",
+      "protocol": "F",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "planned_sessions": 100,
+      "terminal_sessions": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 93.0
+      },
+      "settled_requests": 210,
+      "settled_tokens": 5488092,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0,
+      "embedding": {
+        "requests": 0,
+        "tokens": 0,
+        "seconds": 0.0,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "actor": {
+          "requests": 210,
+          "tokens": 5488092,
+          "seconds": 1736.1445049867034
+        }
+      },
+      "memory_event_counts": {
+        "OM_EVENT_APPENDED": 620,
+        "CHECKPOINT_RESTORED": 100
+      },
+      "native_status_counts": [
+        {
+          "status": "completed",
+          "outcome": "correct",
+          "count": 93
+        },
+        {
+          "status": "completed",
+          "outcome": "incorrect",
+          "count": 5
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "incorrect",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "method": "OM_SYNC_PORT",
+      "condition": "main",
+      "protocol": "O",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "planned_sessions": 100,
+      "terminal_sessions": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 88.0
+      },
+      "settled_requests": 238,
+      "settled_tokens": 2384121,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0,
+      "embedding": {
+        "requests": 0,
+        "tokens": 0,
+        "seconds": 0.0,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "actor": {
+          "requests": 230,
+          "tokens": 2272005,
+          "seconds": 1466.3383851069957
+        },
+        "observer": {
+          "requests": 8,
+          "tokens": 112116,
+          "seconds": 77.1662060865201
+        }
+      },
+      "memory_event_counts": {
+        "OM_EVENT_APPENDED": 655,
+        "CHECKPOINT_RESTORED": 95,
+        "MODEL_CALL_ATTEMPT": 8,
+        "MODEL_RETURN": 8,
+        "OM_OBSERVATIONS_ACCEPTED": 8
+      },
+      "native_status_counts": [
+        {
+          "status": "completed",
+          "outcome": "correct",
+          "count": 86
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "incorrect",
+          "count": 5
+        },
+        {
+          "status": "completed",
+          "outcome": "incorrect",
+          "count": 7
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "correct",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "method": "REASONINGBANK_BASE_PORT",
+      "condition": "main",
+      "protocol": "F",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "planned_sessions": 100,
+      "terminal_sessions": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 76.0
+      },
+      "settled_requests": 488,
+      "settled_tokens": 813100,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0,
+      "embedding": {
+        "requests": 100,
+        "tokens": 22104,
+        "seconds": 18.223646216094494,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "actor": {
+          "requests": 288,
+          "tokens": 456389,
+          "seconds": 1319.8276407225057
+        },
+        "self_judge": {
+          "requests": 100,
+          "tokens": 152627,
+          "seconds": 69.03618148295209
+        },
+        "extract": {
+          "requests": 100,
+          "tokens": 204084,
+          "seconds": 868.784377890639
+        }
+      },
+      "memory_event_counts": {
+        "MEMORY_SOURCE_ADDED": 576,
+        "MEMORY_RETRIEVED": 100,
+        "MEMORY_PROJECTED": 288,
+        "MEMORY_TASK_FINISHED": 98,
+        "MEMORY_EXTRACTION_REJECTED": 2
+      },
+      "native_status_counts": [
+        {
+          "status": "completed",
+          "outcome": "correct",
+          "count": 71
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "correct",
+          "count": 4
+        },
+        {
+          "status": "completed",
+          "outcome": "incorrect",
+          "count": 5
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "incorrect",
+          "count": 19
+        },
+        {
+          "status": "agent_validation_failed",
+          "outcome": "correct",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "method": "REASONINGBANK_BASE_PORT",
+      "condition": "main",
+      "protocol": "O",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "planned_sessions": 100,
+      "terminal_sessions": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 77.0
+      },
+      "settled_requests": 472,
+      "settled_tokens": 771545,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0,
+      "embedding": {
+        "requests": 100,
+        "tokens": 21440,
+        "seconds": 18.545311552938074,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "actor": {
+          "requests": 272,
+          "tokens": 417499,
+          "seconds": 1496.1585620637052
+        },
+        "self_judge": {
+          "requests": 100,
+          "tokens": 151362,
+          "seconds": 62.31512037105858
+        },
+        "extract": {
+          "requests": 100,
+          "tokens": 202684,
+          "seconds": 831.8519776244648
+        }
+      },
+      "memory_event_counts": {
+        "MEMORY_SOURCE_ADDED": 544,
+        "MEMORY_RETRIEVED": 100,
+        "MEMORY_PROJECTED": 262,
+        "MEMORY_TASK_FINISHED": 99,
+        "MEMORY_EXTRACTION_REJECTED": 1
+      },
+      "native_status_counts": [
+        {
+          "status": "completed",
+          "outcome": "correct",
+          "count": 75
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "incorrect",
+          "count": 20
+        },
+        {
+          "status": "agent_validation_failed",
+          "outcome": "incorrect",
+          "count": 2
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "correct",
+          "count": 2
+        },
+        {
+          "status": "completed",
+          "outcome": "incorrect",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "condition": "main",
+      "protocol": "F",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "planned_sessions": 100,
+      "terminal_sessions": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 81.0
+      },
+      "settled_requests": 568,
+      "settled_tokens": 1005450,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0,
+      "embedding": {
+        "requests": 100,
+        "tokens": 22104,
+        "seconds": 16.852241883985698,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "adopt": {
+          "requests": 100,
+          "tokens": 130308,
+          "seconds": 409.6451333351433
+        },
+        "actor": {
+          "requests": 268,
+          "tokens": 528795,
+          "seconds": 1140.056638986338
+        },
+        "self_judge": {
+          "requests": 100,
+          "tokens": 148067,
+          "seconds": 43.46639987081289
+        },
+        "extract": {
+          "requests": 100,
+          "tokens": 198280,
+          "seconds": 564.5321603338234
+        }
+      },
+      "memory_event_counts": {
+        "MEMORY_SOURCE_ADDED": 536,
+        "MEMORY_RETRIEVED": 100,
+        "EXPERIENCE_PATCH_APPLIED": 99,
+        "ACCEPTED_PATCH_adopt": 99,
+        "MEMORY_PROJECTED": 268,
+        "MEMORY_TASK_FINISHED": 100,
+        "EXPERIENCE_PROPOSAL_REJECTED": 1
+      },
+      "native_status_counts": [
+        {
+          "status": "completed",
+          "outcome": "correct",
+          "count": 74
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "correct",
+          "count": 7
+        },
+        {
+          "status": "completed",
+          "outcome": "incorrect",
+          "count": 3
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "incorrect",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "condition": "main",
+      "protocol": "O",
+      "planned_units": 100,
+      "terminal_units": 100,
+      "planned_sessions": 100,
+      "terminal_sessions": 100,
+      "score_available_units": 100,
+      "coverage_corrected_quality": {
+        "correct": 82.0
+      },
+      "settled_requests": 552,
+      "settled_tokens": 968859,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0,
+      "embedding": {
+        "requests": 100,
+        "tokens": 21440,
+        "seconds": 19.987932816613466,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "actor": {
+          "requests": 257,
+          "tokens": 499327,
+          "seconds": 1113.5018026432954
+        },
+        "self_judge": {
+          "requests": 100,
+          "tokens": 149376,
+          "seconds": 54.42042392725125
+        },
+        "extract": {
+          "requests": 100,
+          "tokens": 199527,
+          "seconds": 589.6741997729987
+        },
+        "adopt": {
+          "requests": 95,
+          "tokens": 120629,
+          "seconds": 347.9000335340388
+        }
+      },
+      "memory_event_counts": {
+        "MEMORY_SOURCE_ADDED": 514,
+        "MEMORY_RETRIEVED": 100,
+        "EXPERIENCE_PATCH_APPLIED": 94,
+        "ACCEPTED_PATCH_adopt": 94,
+        "MEMORY_PROJECTED": 247,
+        "MEMORY_TASK_FINISHED": 100,
+        "EXPERIENCE_PROPOSAL_REJECTED": 1
+      },
+      "native_status_counts": [
+        {
+          "status": "completed",
+          "outcome": "correct",
+          "count": 79
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "incorrect",
+          "count": 15
+        },
+        {
+          "status": "completed",
+          "outcome": "incorrect",
+          "count": 3
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "correct",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "method": "NATIVE_VERIFIED_HISTORY_REFERENCE",
+      "condition": "verified-history",
+      "protocol": "O",
+      "planned_units": 20,
+      "terminal_units": 20,
+      "planned_sessions": 20,
+      "terminal_sessions": 20,
+      "score_available_units": 20,
+      "coverage_corrected_quality": {
+        "correct": 90.0
+      },
+      "settled_requests": 48,
+      "settled_tokens": 111998,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0,
+      "embedding": {
+        "requests": 0,
+        "tokens": 0,
+        "seconds": 0.0,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "actor": {
+          "requests": 48,
+          "tokens": 111998,
+          "seconds": 112.11940055480227
+        }
+      },
+      "memory_event_counts": {},
+      "native_status_counts": [
+        {
+          "status": "completed",
+          "outcome": "correct",
+          "count": 18
+        },
+        {
+          "status": "task_limit_reached",
+          "outcome": "incorrect",
+          "count": 1
+        },
+        {
+          "status": "completed",
+          "outcome": "incorrect",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "domain": "db_bench",
+      "protocol": "F",
+      "resource_point": "main",
+      "left": "MILAI_EXPERIENCE_REVISION/main",
+      "right": "NATIVE_AGENT_OR_HISTORY/main",
+      "paired_units": 100,
+      "left_paired_settled_tokens": 1005450,
+      "right_paired_settled_tokens": 243946,
+      "metrics": {
+        "correct": {
+          "difference_percentage_points": -8.999999999999996,
+          "ci95_percentage_points": [
+            -15.999999999999993,
+            -2.020202020202022
+          ],
+          "resampling_units": 99,
+          "unit": "source_cluster",
+          "bootstrap_replicates": 10000,
+          "seed": 20260915,
+          "small_cluster_warning": false,
+          "degenerate_interval": false,
+          "interval_limit": "An all-tie/degenerate empirical bootstrap is not proof of population equivalence; few independent streams also limit precision."
+        }
+      }
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "F",
+      "resource_point": "main",
+      "left": "MILAI_EXPERIENCE_REVISION/main",
+      "right": "OM_SYNC_PORT/main",
+      "paired_units": 100,
+      "left_paired_settled_tokens": 1005450,
+      "right_paired_settled_tokens": 5488092,
+      "metrics": {
+        "correct": {
+          "difference_percentage_points": -12.0,
+          "ci95_percentage_points": [
+            -19.191919191919194,
+            -5.050505050505061
+          ],
+          "resampling_units": 99,
+          "unit": "source_cluster",
+          "bootstrap_replicates": 10000,
+          "seed": 20260915,
+          "small_cluster_warning": false,
+          "degenerate_interval": false,
+          "interval_limit": "An all-tie/degenerate empirical bootstrap is not proof of population equivalence; few independent streams also limit precision."
+        }
+      }
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "F",
+      "resource_point": "main",
+      "left": "MILAI_EXPERIENCE_REVISION/main",
+      "right": "REASONINGBANK_BASE_PORT/main",
+      "paired_units": 100,
+      "left_paired_settled_tokens": 1005450,
+      "right_paired_settled_tokens": 813100,
+      "metrics": {
+        "correct": {
+          "difference_percentage_points": 5.000000000000004,
+          "ci95_percentage_points": [
+            -3.0000000000000027,
+            13.0
+          ],
+          "resampling_units": 99,
+          "unit": "source_cluster",
+          "bootstrap_replicates": 10000,
+          "seed": 20260915,
+          "small_cluster_warning": false,
+          "degenerate_interval": false,
+          "interval_limit": "An all-tie/degenerate empirical bootstrap is not proof of population equivalence; few independent streams also limit precision."
+        }
+      }
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "resource_point": "main",
+      "left": "MILAI_EXPERIENCE_REVISION/main",
+      "right": "NATIVE_AGENT_OR_HISTORY/main",
+      "paired_units": 100,
+      "left_paired_settled_tokens": 968859,
+      "right_paired_settled_tokens": 249276,
+      "metrics": {
+        "correct": {
+          "difference_percentage_points": -6.000000000000005,
+          "ci95_percentage_points": [
+            -11.00000000000001,
+            0.0
+          ],
+          "resampling_units": 5,
+          "unit": "stream",
+          "bootstrap_replicates": 10000,
+          "seed": 20260915,
+          "small_cluster_warning": true,
+          "degenerate_interval": false,
+          "interval_limit": "An all-tie/degenerate empirical bootstrap is not proof of population equivalence; few independent streams also limit precision."
+        }
+      }
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "resource_point": "main",
+      "left": "MILAI_EXPERIENCE_REVISION/main",
+      "right": "OM_SYNC_PORT/main",
+      "paired_units": 100,
+      "left_paired_settled_tokens": 968859,
+      "right_paired_settled_tokens": 2384121,
+      "metrics": {
+        "correct": {
+          "difference_percentage_points": -6.000000000000005,
+          "ci95_percentage_points": [
+            -14.000000000000002,
+            1.0000000000000009
+          ],
+          "resampling_units": 5,
+          "unit": "stream",
+          "bootstrap_replicates": 10000,
+          "seed": 20260915,
+          "small_cluster_warning": true,
+          "degenerate_interval": false,
+          "interval_limit": "An all-tie/degenerate empirical bootstrap is not proof of population equivalence; few independent streams also limit precision."
+        }
+      }
+    },
+    {
+      "domain": "db_bench",
+      "protocol": "O",
+      "resource_point": "main",
+      "left": "MILAI_EXPERIENCE_REVISION/main",
+      "right": "REASONINGBANK_BASE_PORT/main",
+      "paired_units": 100,
+      "left_paired_settled_tokens": 968859,
+      "right_paired_settled_tokens": 771545,
+      "metrics": {
+        "correct": {
+          "difference_percentage_points": 4.999999999999993,
+          "ci95_percentage_points": [
+            0.0,
+            9.000000000000007
+          ],
+          "resampling_units": 5,
+          "unit": "stream",
+          "bootstrap_replicates": 10000,
+          "seed": 20260915,
+          "small_cluster_warning": true,
+          "degenerate_interval": false,
+          "interval_limit": "An all-tie/degenerate empirical bootstrap is not proof of population equivalence; few independent streams also limit precision."
+        }
+      }
+    }
+  ],
+  "support_formation": [
+    {
+      "method": "OM_SYNC_PORT",
+      "planned_tasks": 40,
+      "run": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/support/support-db_bench-om-O-000",
+      "roles": {
+        "actor": {
+          "requests": 88,
+          "tokens": 1347548,
+          "seconds": 462.051948771812
+        },
+        "observer": {
+          "requests": 4,
+          "tokens": 75255,
+          "seconds": 24.23096405994147
+        }
+      },
+      "embedding": {
+        "requests": 0,
+        "tokens": 0,
+        "seconds": 0.0,
+        "unknown_requests": 0
+      },
+      "settled_requests": 92,
+      "settled_tokens": 1422803,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0
+    },
+    {
+      "method": "REASONINGBANK_BASE_PORT",
+      "planned_tasks": 40,
+      "run": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/support/support-db_bench-rb-O-001",
+      "roles": {
+        "actor": {
+          "requests": 110,
+          "tokens": 166505,
+          "seconds": 434.8935984475538
+        },
+        "self_judge": {
+          "requests": 40,
+          "tokens": 60412,
+          "seconds": 27.412439085077494
+        },
+        "extract": {
+          "requests": 40,
+          "tokens": 80643,
+          "seconds": 243.1322896364145
+        }
+      },
+      "embedding": {
+        "requests": 40,
+        "tokens": 8362,
+        "seconds": 7.014963076915592,
+        "unknown_requests": 0
+      },
+      "settled_requests": 190,
+      "settled_tokens": 307560,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0
+    },
+    {
+      "method": "MILAI_EXPERIENCE_REVISION",
+      "planned_tasks": 40,
+      "run": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/support/support-db_bench-milai-O-002",
+      "roles": {
+        "actor": {
+          "requests": 107,
+          "tokens": 200667,
+          "seconds": 405.0557224173099
+        },
+        "self_judge": {
+          "requests": 40,
+          "tokens": 59006,
+          "seconds": 26.081548732705414
+        },
+        "extract": {
+          "requests": 40,
+          "tokens": 79258,
+          "seconds": 238.40344835678115
+        },
+        "adopt": {
+          "requests": 39,
+          "tokens": 48301,
+          "seconds": 169.5797347794287
+        }
+      },
+      "embedding": {
+        "requests": 40,
+        "tokens": 8362,
+        "seconds": 7.6052560289390385,
+        "unknown_requests": 0
+      },
+      "settled_requests": 226,
+      "settled_tokens": 387232,
+      "unknown_requests": 0,
+      "unknown_token_upper_bound": 0
+    }
+  ],
+  "test_and_verified_text_totals": {
+    "requests": 3053,
+    "tokens": 12036387,
+    "unknown_requests": 0
+  },
+  "test_and_verified_embedding_totals": {
+    "requests": 400,
+    "tokens": 87088,
+    "seconds": 73.60913246963173,
+    "unknown_requests": 0
+  },
+  "f_test_plus_support_tokens": {
+    "NATIVE_AGENT_OR_HISTORY": 243946,
+    "OM_SYNC_PORT": 6910895,
+    "REASONINGBANK_BASE_PORT": 1120660,
+    "MILAI_EXPERIENCE_REVISION": 1392682
+  },
+  "f_test_plus_support_milai_rb_ratio": 1.2427337461852836,
+  "first_candidate_input_proof": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/final-analysis/first-formal-candidate-memory-input-proof.json",
+  "usefulness_criteria": {
+    "primary_quality": {
+      "db_bench": "native_correct_rate",
+      "os_interaction": "native_correct_rate",
+      "travel": "native_person_full_pass_PS_with_planned_denominator"
+    },
+    "minimum_useful_gain_pp": 5,
+    "quality_gain_max_token_ratio": 1.25,
+    "efficiency_noninferiority_margin_pp": 2,
+    "efficiency_max_token_ratio": 0.8,
+    "uncertainty": "Report paired cluster/bootstrap 95% intervals; crossing thresholds yields insufficient evidence. Five O streams provide limited precision. A degenerate all-tie empirical bootstrap does not establish population equivalence or an efficiency claim.",
+    "justification": "A five-point gain is a practical target, not a completed power calculation. At most 25% additional settled text tokens for that gain; at least 20% saving for a quality-preserving efficiency claim. Set before any TEST result.",
+    "coverage": "Keep every frozen planned unit. Unknown usage and infrastructure exclusions reported separately; no cheap-failure efficiency claim."
+  },
+  "uncertainty_scope": "Task/source-cluster or online-stream uncertainty conditional on one selected solver, one formation realization per support bank, and fixed decoding. No cross-model or support-formation-seed stability claim.",
+  "remaining": [
+    "OS formal coverage",
+    "travel support and formal coverage",
+    "append-only contribution",
+    "two resource points",
+    "ordinary-consumption diagnostic",
+    "whole-study accounting and report"
+  ],
+  "new_model_calls_for_analysis": 0,
+  "allocation_or_accounting_mutation": false
+}

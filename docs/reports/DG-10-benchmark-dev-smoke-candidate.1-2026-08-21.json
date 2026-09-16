@@ -1,0 +1,204 @@
+{
+  "aggregates": {
+    "LONGMEMEVAL_CLEANED_500/NAIVE_RAG": {
+      "case_count": 1,
+      "exact_match_mean": 0,
+      "input_tokens": 636,
+      "latency_ms": {
+        "mean": 351.89,
+        "p50_nearest_rank": 351.89,
+        "p95_nearest_rank": 351.89
+      },
+      "normalized_f1_mean": 0.285714,
+      "output_tokens": 28
+    },
+    "LONGMEMEVAL_CLEANED_500/NO_MEMORY": {
+      "case_count": 1,
+      "exact_match_mean": 0,
+      "input_tokens": 124,
+      "latency_ms": {
+        "mean": 308.663,
+        "p50_nearest_rank": 308.663,
+        "p95_nearest_rank": 308.663
+      },
+      "normalized_f1_mean": 0.0,
+      "output_tokens": 13
+    }
+  },
+  "calibration_dev_labels_opened": true,
+  "candidate": "candidate.1",
+  "data_boundary": "PUBLIC_DEV_LABELS_OPENED_RAW_CONTENT_REPO_EXTERNAL_HASHED_ONLY",
+  "date": "2026-08-21",
+  "ended_at": "2026-08-21T12:36:00.276138+00:00",
+  "execution": {
+    "arms_executed": [
+      "NO_MEMORY",
+      "NAIVE_RAG"
+    ],
+    "generation_contract_sha256": "371039b897951165fe54a7a366d89f2d1fb4d050066834acaedcf610c3403fe8",
+    "latin_square_dev_schedule_sha256": "6456bf3a25bb89bd63b724e12ecf2d0e56889aaf3e0e3ec1117d7c87cd480a90",
+    "memory_context_tokens_max": 512,
+    "prompt_templates_sha256": "a4fc05ec907f2497a352e8343ef2ed5b15ce8bbbb96071c32f3bb90b49f0424e",
+    "records": 2,
+    "records_per_case": 2,
+    "retrieval_k_smoke_candidate": 1,
+    "selected_dev_case_count": 1,
+    "selected_dev_case_ids": [
+      "longmemeval:031748ae"
+    ],
+    "selected_dev_case_ids_sha256": "a933587c060ce56d6a7aaeaddd37b15916f9524cb39502aa7fe70a8c4b3f640f"
+  },
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "gate_results": {
+    "BMG-02": "NO_GO_PARTIAL_DEV_SMOKE_NOT_THREE_ARM_CALIBRATION",
+    "BMG-03": "CANDIDATE_LOCKED_NOT_RUN",
+    "BMG-05": "NO_GO_THRESHOLDS_NOT_FROZEN",
+    "dev_smoke": "PARTIAL_TWO_ARM_LOCAL_VLLM_COMPLETE"
+  },
+  "hidden_or_extra_model_calls": 0,
+  "identity": {
+    "base_url_class": "LOOPBACK_LOCAL_VLLM",
+    "binding_sha256": "951564832a9bd75c927b42583a0ee66a688b78aea8a247bd72835cef1db84500",
+    "identity_report_sha256": "0463fff90754f54c887ed79e54b5db5593b1860cf593c4a89a66c1828eaa3f0e",
+    "max_model_len": 65536,
+    "served_model_id": "Qwen3.6-35B-A3B-FP8",
+    "vllm_lifecycle_mutated": false,
+    "vllm_version": "0.27.1"
+  },
+  "inputs": {
+    "adapter_contract_canonical_sha256": "774c031f56e7da7864abb5310f7c6cd8a20ed479e397e6d3325e1e3ad63a5698",
+    "adapter_report_sha256": "64a30ce660e3fe37c3a1b8d352124ae4a7b49634c289e98aee724e31f15cc609",
+    "calibration_plan_sha256": "79f0141dac184678fb257613f288fc9d83cff4c57286d487171117ab50e35f9d",
+    "dataset": {
+      "path_class": "REPO_EXTERNAL_PUBLIC_BENCHMARK_INPUT",
+      "selected_dev_case_count": 1,
+      "sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+      "size": 277383467,
+      "total_case_count": 500
+    }
+  },
+  "known_limits": [
+    "This is a two-arm, bounded LongMemEval dev smoke; it is not the <=10% three-arm calibration.",
+    "MILAI_MCP and LongMemEval-V2 execution are not implemented by this runner.",
+    "The local EM/F1 smoke scorer is not the official LongMemEval LLM judge and is not a leaderboard score.",
+    "No threshold, retrieval k, test authorization, BMG-02, or BMG-05 gate is frozen or accepted."
+  ],
+  "local_tokenizer_requests": 16,
+  "local_vllm_requests": 2,
+  "model_id": "Qwen3.6-35B-A3B-FP8",
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "CHARACTERIZED_ONLY",
+  "quality_thresholds_frozen": false,
+  "records": [
+    {
+      "answer_record": {
+        "exact_match": 0,
+        "gold_answers_sha256": "46b30a7c92d3d94c0b2d2acdd8bc9bec1b51a119de12fb3caac2c0a920e74efc",
+        "normalized_f1": 0.0,
+        "parsed_answer_sha256": "af76018a994f48a205aa800b0f37bcb1511cd3f9a256fee488de6a75af778428",
+        "raw_gold_answer_in_report": false,
+        "raw_model_output_in_report": false,
+        "raw_model_output_sha256": "af76018a994f48a205aa800b0f37bcb1511cd3f9a256fee488de6a75af778428",
+        "raw_question_in_report": false,
+        "scorer": "DG10_LOCAL_DEV_SMOKE_NORMALIZED_EM_F1_V1_NOT_OFFICIAL_SCORE"
+      },
+      "arm": "NO_MEMORY",
+      "case_id": "longmemeval:031748ae",
+      "category": "knowledge-update",
+      "dataset": "LONGMEMEVAL_CLEANED_500",
+      "latency_ms": 308.663,
+      "model_id": "Qwen3.6-35B-A3B-FP8",
+      "native_receipt_sha256": "84db0efc797e3ac33b77ff2dd18c76792ddafa008d08600131e535807fff46fc",
+      "native_request_id": "chatcmpl-a7e86e6ae0f3a76d",
+      "prompt_sha256": "453ad2f2b8fcb95d2cd5e0bb5214b37bd0b82bd363007db86e3790eac70077e0",
+      "run_id": "dg10-dev-smoke-2026-08-21-880b117b9dce",
+      "source_case_id": "031748ae",
+      "status": "TERMINAL_LOCAL_VLLM_SMOKE",
+      "trace": {
+        "hidden_or_extra_model_calls": 0,
+        "latin_square_order": [
+          "NO_MEMORY",
+          "NAIVE_RAG",
+          "MILAI_MCP"
+        ],
+        "mcp_called": false,
+        "memory_context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "memory_context_tokens_attribution": 0,
+        "retrieval": "NONE",
+        "retrieval_k": 0,
+        "retrieved_evidence_ids": [],
+        "retrieved_evidence_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "usage": {
+        "input_tokens": 124,
+        "mcp_rounds": 0,
+        "model_rounds": 1,
+        "output_tokens": 13
+      }
+    },
+    {
+      "answer_record": {
+        "exact_match": 0,
+        "gold_answers_sha256": "46b30a7c92d3d94c0b2d2acdd8bc9bec1b51a119de12fb3caac2c0a920e74efc",
+        "normalized_f1": 0.285714,
+        "parsed_answer_sha256": "4bdc55cabb42390afb2a94f7c18dcaffc45d832396133373844a1a206a6148ad",
+        "raw_gold_answer_in_report": false,
+        "raw_model_output_in_report": false,
+        "raw_model_output_sha256": "4bdc55cabb42390afb2a94f7c18dcaffc45d832396133373844a1a206a6148ad",
+        "raw_question_in_report": false,
+        "scorer": "DG10_LOCAL_DEV_SMOKE_NORMALIZED_EM_F1_V1_NOT_OFFICIAL_SCORE"
+      },
+      "arm": "NAIVE_RAG",
+      "case_id": "longmemeval:031748ae",
+      "category": "knowledge-update",
+      "dataset": "LONGMEMEVAL_CLEANED_500",
+      "latency_ms": 351.89,
+      "model_id": "Qwen3.6-35B-A3B-FP8",
+      "native_receipt_sha256": "59c46cb8a01d9708c2f242d839422cd77c04391a7a900dd92e703c349e9b31e1",
+      "native_request_id": "chatcmpl-bf75f1c9aaa44e38",
+      "prompt_sha256": "62bfdba92b03dcfa0f884d8f457f6ba8dd0f5e415de399ca5b9823329df903d7",
+      "run_id": "dg10-dev-smoke-2026-08-21-880b117b9dce",
+      "source_case_id": "031748ae",
+      "status": "TERMINAL_LOCAL_VLLM_SMOKE",
+      "trace": {
+        "hidden_or_extra_model_calls": 0,
+        "latin_square_order": [
+          "NO_MEMORY",
+          "NAIVE_RAG",
+          "MILAI_MCP"
+        ],
+        "mcp_called": false,
+        "memory_context_sha256": "fd0875c54d78dab225742e0bf854822ccadd7c9b67366f4f2f4ff52bac6694dc",
+        "memory_context_tokens_attribution": 512,
+        "retrieval": "LOCAL_LEXICAL_V1",
+        "retrieval_k": 1,
+        "retrieved_evidence_ids": [
+          "answer_8748f791_1"
+        ],
+        "retrieved_evidence_ids_sha256": "1aea69cc39c3f6be79f4f19404396767b4f30a6b3f838e4821acf18ccbca2145"
+      },
+      "usage": {
+        "input_tokens": 636,
+        "mcp_rounds": 0,
+        "model_rounds": 1,
+        "output_tokens": 28
+      }
+    }
+  ],
+  "repo_external_sidecar": {
+    "mode": "0600",
+    "path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+    "sha256": "711ddaa26c0c124cd20403bdc1adc75479bc1ed8c9a9a54cf806d437b1b9ae80",
+    "size": 7814,
+    "status": "WRITTEN_HASH_BOUND"
+  },
+  "run_id": "dg10-dev-smoke-2026-08-21-880b117b9dce",
+  "schema": "milai.dg10.benchmark-dev-smoke.v1",
+  "started_at": "2026-08-21T12:35:55.063973+00:00",
+  "status": "DEV_SMOKE_PARTIAL_NOT_CALIBRATION",
+  "test_access_authorized": false,
+  "test_labels_or_outputs_opened": false,
+  "unique_native_request_ids": 2
+}

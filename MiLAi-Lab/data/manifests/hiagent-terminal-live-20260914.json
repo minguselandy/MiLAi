@@ -1,0 +1,88 @@
+{
+  "method": "hiagent-terminal-v0.1",
+  "kind": "RESEARCH_PROTOTYPE",
+  "status": "LIVE_MECHANISM_OBSERVED_NATIVE_TASK_FAILED",
+  "authorization_source": "Current user instruction to read and execute MILA_HIAGENT_BASELINE_IMPLEMENTATION_20260914.md; section 7 single-task next step, bounded by section 4 existing trial contract",
+  "allocated_trajectories": 2,
+  "old_goal_quota_reused": false,
+  "task": "cancel-async-tasks",
+  "selection_reason": "First existing software implementation task in the prior pool; already exposed development task, not held-out validation",
+  "task_commit": "2fd12b88aafdd04a52c298e3940bcb189f9766d6",
+  "max_total_model_calls": 64,
+  "budget_counts": [
+    "actor",
+    "summary",
+    "retrieval_actor_decisions"
+  ],
+  "output_capacity_per_call": 4096,
+  "native_agent_timeout_sec": 900,
+  "timeout_multiplier": 1,
+  "concurrency": 1,
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "endpoint": "http://127.0.0.1:7860",
+  "new_service_or_gpu_operation": false,
+  "product_default_change": false,
+  "summary_refresh": "EVERY_ASSEMBLY_NO_CACHE",
+  "evidence_root": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3",
+  "live_root": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/live",
+  "allocated_at": "2026-09-14T06:20:07.318209+00:00",
+  "followup_batch_allocation": 0,
+  "terminal_adapter": "hiagent-terminal-adapter-v0.1.1",
+  "allocation_note": "One task, two preserved attempts: first rejected before any environment action; repair receives only the original unused 63 calls. No new generation allowance.",
+  "attempts": [
+    {
+      "root": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/live",
+      "cap": 64,
+      "generations": 1,
+      "raw_tokens": 881,
+      "status": "WorkspaceError: UNSUPPORTED_ACTION_OR_ARGUMENTS",
+      "native_score": null
+    },
+    {
+      "root": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/live-repair",
+      "cap": 63,
+      "status": "FINAL_SUBMITTED",
+      "generations": 56,
+      "raw_tokens": 49272,
+      "native_score": 0.0
+    }
+  ],
+  "repair_reason": "Clarify complete allowed action names and that file editing uses exec; mechanism and task instruction unchanged.",
+  "repair_allocated_at": "2026-09-14T06:23:14.785643+00:00",
+  "engineering_status": "ENGINEERING_COMPLETE",
+  "final_usage": {
+    "calls": 57,
+    "prompt_tokens": 45219,
+    "completion_tokens": 4934,
+    "total_tokens": 50153,
+    "seconds": 38.525291895028204
+  },
+  "unused_calls_closed": 7,
+  "allocation_closed": true,
+  "closed_at": "2026-09-14T06:29:52.952489+00:00",
+  "compact_results": "data/results/hiagent-terminal-live-20260914.json",
+  "engineering_completion": {
+    "status": "COMPLETE",
+    "full_regression": {
+      "tests": 4474,
+      "passed": 4473,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 1,
+      "exit_code": 0,
+      "elapsed_seconds": 4040.54,
+      "warnings": 44
+    },
+    "current_unique_cases": 4479,
+    "current_passed": 4478,
+    "optional_skipped": 1,
+    "missing": 0,
+    "overlapping_cases_not_double_counted": 81,
+    "coverage_receipt": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/regression-coverage.json",
+    "coverage_sha256": "8b4f9d3848eb1de4d081dd81a329ceedc56b24b23246cd04ee08caff6c690dca",
+    "targeted_passed": 86,
+    "source_delta": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/source-delta.json",
+    "delivery_build_receipt": "/cra/memory/mx_memory/evidence/hiagent-execution-20260914-8VRvQ3/delivery-build.json"
+  },
+  "engineering_completed_at": "2026-09-14T07:27:11.690182+00:00"
+}

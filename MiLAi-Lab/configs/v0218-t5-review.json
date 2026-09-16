@@ -1,0 +1,35 @@
+{
+  "decision": "APPROVED_LIMITED_DISCOVERY",
+  "review_kind": "DEVELOPER_SELF_REVIEW_NOT_INDEPENDENT_HUMAN",
+  "accepted": [
+    "source_lineage_license_adaptations",
+    "checker_semantic_counterexamples",
+    "reset_clone_public_private_isolation",
+    "public_note_cold_transport",
+    "two_self_authored_dual_presentation_lineages",
+    "mixed_note_claims_separated",
+    "all_failures_and_costs_retained",
+    "recovery_is_scripted_not_agent",
+    "exposure_and_confirmation_gap",
+    "remaining_E0_E5_required"
+  ],
+  "documents": [
+    "studies/active/MILA_V0218_T5_REVIEW_20260911.md",
+    "studies/active/MILA_V0218_T4_PROGRESS_20260911.md",
+    "studies/active/MILA_V0218_BENCHMARK_ACQUISITION_20260910.md"
+  ],
+  "unopened_C": 0,
+  "whole_goal_complete": false,
+  "limitations": [
+    "Twelve adapted source lineages, nine coarse occupational clusters; not native benchmark scores or fully independent conceptual families.",
+    "All source bodies exposed during manual development. There is no unopened confirmation C; old protected pools remain closed.",
+    "Four lineages have actual model attempts, two have autonomous self-written Note and actual cold old/current dual presentation. Remaining eight are only world/checker calibrated.",
+    "The financial Note has valid old source values and comparison but a false existing-record/completion inference; it is not wholly correct.",
+    "Two Helpful controls share the journalism coarse family and have not yet been model-exercised.",
+    "Source truth and exact arithmetic are independently specified literal fixtures with developer self-review, not independent blinded human review or Judge scoring.",
+    "The local model produced different actions for identical request bytes in a NO_WRITE pair; temperature and seed do not prove deterministic output or Note causality.",
+    "Recovery paths are actual reversible local SQLite writes verified by scripts, not demonstrated memory-induced Agent recovery.",
+    "Global Product working-tree pin drifts. Product-backed construction used separately verified immutable public release locks; no global pin repair or shared service changes.",
+    "This seal authorizes bounded E0 discovery under the existing Goal, not positive mechanism claims, E4 confirmation, deployment, schema freeze or whole-Goal completion."
+  ]
+}

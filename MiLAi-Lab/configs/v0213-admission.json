@@ -1,0 +1,43 @@
+{
+  "goal": "MILA-V02-13",
+  "repo": "Cantaloupe-M/Mem2ActBench",
+  "commit": "b00726940b5abbe9bd324bdd7a2cb272f5c62a29",
+  "files": {
+    "Mem2ActBench/qa_dataset.jsonl": {"bytes": 690277, "git_blob": "1c437b3bf09128184e200d0a8727812a0180363c"},
+    "Mem2ActBench/toolmem_conversation.jsonl": {"bytes": 33361325, "git_blob": "2bac5ada6969bc67c8d91831e3dbaf22de15b6d0"}
+  },
+  "license_declaration": "MIT_IN_PINNED_ROOT_README",
+  "usage_scope": "AUTHOR_DOCUMENTED_LOCAL_RESEARCH_NO_DATA_REDISTRIBUTION",
+  "metadata_only_first": true,
+  "cluster_rule": "Connected components of complete sessions, original conversation IDs and QA memory-chain/source lineage; unknown lineage quarantined",
+  "exposure_rule": "Exclude any connected component intersecting prior opened/protected source IDs; do not treat shared tool schemas as shared tasks",
+  "ordering": "SHA256(compact sorted UTF-8 JSON of goal, seed, neutral cluster ID); ascending hash",
+  "seed": 213,
+  "confirmation_rule": "Last ceil(cluster_count/3) in frozen hash order; never open bodies",
+  "task_per_cluster": "Minimum SHA256(goal, seed, neutral task ID); never choose by answer/tool/complexity",
+  "eligibility": [
+    "Fixed released QA and complete long-session history map unambiguously",
+    "Independent source lineage and no protected/exposed overlap",
+    "Query and normal supplied tool schema separable from evaluator fields",
+    "Action-intent output and complete parameter scoring contract can be frozen"
+  ],
+  "accepted_limit": 4,
+  "screening_limit": 30,
+  "first_wave_clusters": 2,
+  "accepted_failures_replaced": false,
+  "tools_mode": "KNOWN_TOOL_PARAMETER_GROUNDING_IF_TARGET_SCHEMA_ONLY",
+  "execution": "ACTION_INTENT_ONLY",
+  "scoring": "NONSTANDARD_LOCAL_ACTION_GROUNDING_DIAGNOSTIC",
+  "r1_policy": {
+    "chunk_tokens": 1024,
+    "overlap_tokens": 128,
+    "top_k": 4,
+    "k1": 1.2,
+    "b": 0.75,
+    "evidence_tokens": 49152,
+    "note": "Shared evidence envelope enlarged after user removed token-spending restriction. Full H first if it fits; no answer-driven truncation. Reader full context checked against actual model context."
+  },
+  "oracle": "Evaluator-selected exact original spans, no labels in online payload; validity fixed before generation",
+  "identical_input_alias": "Only complete identical payload bytes before generation; one correlated observation",
+  "new_generations_during_preparation": 0
+}

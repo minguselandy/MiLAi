@@ -1,0 +1,22 @@
+{
+  "case_id": "g1-software",
+  "domain": "software",
+  "initial_type": "outdated",
+  "development_status": "constructed-development",
+  "task": "继续支付客户端接入工作，交付本轮调用和异常处理的简洁伪代码及说明。当前阶段只做设计，不调用真实支付服务。后续我们还会据此编写测试。可用项目资料在 sources/，也可查询项目记忆。",
+  "followup": "继续支付客户端接入工作，列出超时和正常返回的验收测试及预期行为，供下一步实现。只交付测试设计，不调用真实服务。项目资料仍在 sources/。",
+  "initial_payload": {
+    "note": "支付客户端设计中：POST /charges 超时最多自动重试三次。请求超时设为10秒；日志必须隐藏卡号。接下来交付调用伪代码，再编写验收测试。",
+    "sources": ["sources/payment-contract.txt", "sources/catalog-client.txt"]
+  },
+  "sources": {
+    "payment-contract.txt": "支付接口接入合同，2026-09-04 修订。POST /charges 的幂等键尚未上线。发生超时时支付结果未知，客户端不得自动重复 POST；必须向调用方报告结果未知，并由人工按订单号核对后再决定。单次请求超时10秒；所有日志隐藏卡号。先完成调用设计，后续另做验收测试。本合同取代2026-08-20版本关于三次重试的规则。",
+    "catalog-client.txt": "商品查询客户端说明，2026-09-04。GET /catalog 是只读查询，可以在超时后自动重试三次；这里的重试规则仅适用于商品查询，不适用于支付创建。"
+  },
+  "evaluation": {
+    "required": ["POST timeout does not automatically resubmit", "timeout payment result is unknown; reconcile by order", "10 second timeout", "card number redaction"],
+    "correct_initial_facts": ["10 second timeout", "card number redaction", "followup acceptance tests"],
+    "save_value": "Persist corrected payment timeout semantics for the prespecified followup",
+    "key_source": "payment-contract.txt"
+  }
+}

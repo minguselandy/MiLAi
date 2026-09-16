@@ -1,0 +1,12 @@
+{
+  "case_id": "g2-software-omitted", "domain": "software", "initial_type": "omitted",
+  "development_status": "constructed-pilot-unrun",
+  "task": "继续库存上传器设计，给出450条记录的分批结果与拆分函数伪代码。本轮只做设计，下一步会实现。资料在 sources/，也可查询项目记忆。",
+  "followup": "继续库存上传器工作，列出分批函数的边界测试。资料在 sources/。",
+  "initial_payload": {"note": "库存上传要分批，并保持记录输入顺序，不能因重复SKU而丢弃记录。下一步实现拆分函数。", "sources": ["sources/inventory.txt"]},
+  "sources": {
+    "inventory.txt": "库存上传API合同：每批最多200条记录；按原输入顺序连续切分，重复SKU记录不得删除。空输入不提交任何批次。",
+    "image.txt": "图片上传API每批最多50张；只适用于图片，不适用于库存记录。"
+  },
+  "evaluation": {"required": ["200,200,50 split", "maximum 200", "stable input order", "duplicates retained"], "correct_initial_facts": ["order", "duplicates"], "key_source": "inventory.txt", "save_value": "Batch limit missing from memory and useful for implementation"}
+}

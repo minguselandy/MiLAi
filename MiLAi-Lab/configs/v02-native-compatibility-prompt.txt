@@ -1,0 +1,1 @@
+Use the available shell tool to determine the current working directory, then report it. This is a client and model protocol compatibility check.

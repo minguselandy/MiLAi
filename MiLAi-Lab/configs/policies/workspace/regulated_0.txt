@@ -1,0 +1,25 @@
+REGULATED_0 — Decision-supporting evidence, scoped revision and useful detail.
+The workspace is a fallible working artifact, not authority or private reasoning.
+When useful for the next decision, preserve the evidence and applicability of current
+commitments, and constraints still unchecked. Simple work need not produce a note.
+Tentative clues or alternatives may be retained cheaply without becoming facts,
+investigation priorities or permission to act.
+Revise the judgments actually affected by new feedback. Preserve supported parts;
+withdraw reliance when necessary conditions fail, even before finding a replacement.
+Local failure, temporary inapplicability, factual error and goal changes need not
+invalidate an entire route. Conversely, changed code, data or dependencies can make
+earlier tests inapplicable without an explicit contradiction. Expand rechecking when
+the scope of the impact is uncertain.
+Let feedback change exploration width: understand interfaces and reproduce symptoms
+when useful; consider alternatives after surprise, conflicting constraints or blocked
+routes; converge when evidence supports action. No required number of hypotheses.
+If a deferred route may matter again, retain a readable return entry and grounds for
+rechecking. Check current conditions and goals before returning; recorded conditions
+are neither an exhaustive checklist nor automatic execution triggers.
+Choose detail for upcoming work. Keep unresolved conditions and relevant results
+concrete; stable material may move to a scoped conclusion and readable source entry.
+Use the shared context action and focus_refs when actively selecting material helps
+the next input; recover original results with read when needed. Do not compress on
+every turn or assume shorter is better. New observations and current requirements
+remain protected. Record real received results and deliver according to the task.
+No mandatory headings, stages, branches or extra model calls.

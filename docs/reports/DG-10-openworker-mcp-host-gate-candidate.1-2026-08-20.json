@@ -1,0 +1,155 @@
+{
+  "actual_mcp_executable_sha256": "97321cdfa341e9bec9fc250a7323ddc1f679cb1e4bef8cceb716dfc648ff03e2",
+  "actual_policy_sha256": "d6ed9dc59db3c80d57eab825649015e1702218e5a1c5ec6baa1f2bb2f0448f41",
+  "broker_log_summary": {
+    "secret_scan": "PASS",
+    "segments": [
+      {
+        "events": {
+          "READY": 1,
+          "SESSION_CLOSED": 5,
+          "STOPPED": 1
+        },
+        "secret_scan": "PASS"
+      },
+      {
+        "events": {
+          "READY": 1,
+          "SESSION_CLOSED": 1,
+          "STOPPED": 1
+        },
+        "secret_scan": "PASS"
+      }
+    ]
+  },
+  "candidate": "candidate.1",
+  "credential_and_network_adversary": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "config_secret_names": "ABSENT",
+    "crash_dumps": "DISABLED_CORE_ULIMIT_ZERO_AND_ABSENT",
+    "debug_api_secret_names": "ABSENT",
+    "docker_socket_mounted": false,
+    "environment_secret_names": "ABSENT",
+    "host_secret_directory_mounted": false,
+    "log_secret_names": "ABSENT",
+    "mounts": [
+      {
+        "destination": "/run/milai-mcp/reader-lite.sock",
+        "rw": false,
+        "type": "bind"
+      }
+    ],
+    "network_mode": "none",
+    "postgres_socket_mounted": false,
+    "privileged": false,
+    "proc_secret_names": "ABSENT",
+    "runtime_bridge_direct": "BLOCKED",
+    "runtime_loopback_direct": "BLOCKED",
+    "security_opt": [
+      "no-new-privileges:true"
+    ],
+    "skill_workspace_secret_names": "ABSENT",
+    "ulimits": [
+      {
+        "Hard": 0,
+        "Name": "core",
+        "Soft": 0
+      }
+    ]
+  },
+  "data_boundary": "SYNTHETIC_ONLY",
+  "date": "2026-08-20",
+  "gate_results": {
+    "AIG-00": "NO_GO_REAL_PROVIDER_NOT_AUTHORIZED",
+    "AIG-01": "NO_GO_INDEPENDENT_REVIEW_ABSENT",
+    "MCG-00": "PASS_LOCAL_REVERIFY",
+    "MCG-01": "PASS_LOCAL_REVERIFY",
+    "MCG-02": "PASS_LOCAL_REVERIFY",
+    "OWG-00": "PASS_LOCAL_CANDIDATE",
+    "OWG-01": "PASS_LOCAL_CANDIDATE",
+    "OWG-02": "PASS_LOCAL_CANDIDATE"
+  },
+  "identity": {
+    "base_image_id": "sha256:afa555cfccdb05c0e8a4a0b1ad84f364496d8721d45c9dbd796a7afbe5e7f05d",
+    "base_layer_count": 26,
+    "broker_sha256": "c880c8fc331e67281bb8194cdf696e3dc7611cf849d96eb3152bdc3d05c32142",
+    "config_template_sha256": "9f5789ab13e20c5f26eb926fae5540aa9a42f25f1c6401d20a8a21325c19f46e",
+    "contract_sha256": "e43f8d91c9dbf341b776d4da3f12133a8877a3154787a8bb6e3cd5410809eb21",
+    "derived_image_id": "sha256:4f90c07d8a1eecdc1bad0f43ecdcb97ef5f0c388f23eca00dce58b120575f410",
+    "derived_layer_count": 29,
+    "opencode_sha256": "c4847b3da969507d5cadf3321883c7b477e5ab75763014d688116a6795b63dce",
+    "opencode_version": "1.14.28",
+    "platform": "linux/amd64",
+    "python": "3.12.13",
+    "relay_sha256": "b8658b438f8c2ed728fa7245334c7802e911f64b6c6c1129da4ebe9200975934",
+    "uv": "0.11.9 (x86_64-unknown-linux-musl)",
+    "wheelhouse_manifest_sha256": "eb8713fac5f82a91f3726544653d87c2a47e6f4f9ee43b55d7c75a7c3968f830",
+    "wheelhouse_root_sha256": "c7d83086b2384358d3d51f7fccd5d97a4bce3baf7bde7d80054c89aece4101f4"
+  },
+  "known_limits": [
+    "No real Provider/model, billing object, or charge-bearing request was used.",
+    "OpenWorker Worker source and redistribution permission remain unavailable.",
+    "Runtime-backed recall/OpenIssue/revocation scenarios await the real Agent E2E gate.",
+    "This author gate is not an independent review and cannot close OE-F06."
+  ],
+  "openworker_discovery": {
+    "all_connected": true,
+    "initial_list_sha256": "ec07b3103dd1e29b7191e876877c3d586d5753abb5f2efa5c52195f55b66b94a",
+    "reader_lite_tools": [
+      "milai_recall"
+    ],
+    "recovered_list_sha256": "ec07b3103dd1e29b7191e876877c3d586d5753abb5f2efa5c52195f55b66b94a",
+    "recreate_list_sha256": "ec07b3103dd1e29b7191e876877c3d586d5753abb5f2efa5c52195f55b66b94a",
+    "restart_list_sha256": "ec07b3103dd1e29b7191e876877c3d586d5753abb5f2efa5c52195f55b66b94a"
+  },
+  "protocol_catalogs": {
+    "2025-11-25": {
+      "protocol": "2025-11-25",
+      "schemas_strict": true,
+      "tools": [
+        "milai_recall"
+      ]
+    },
+    "2026-07-28": {
+      "protocol": "2026-07-28",
+      "schemas_strict": true,
+      "tools": [
+        "milai_recall"
+      ]
+    }
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "release_boundary": "LOCAL_ONLY; upstream Worker source/redistribution license not established",
+  "rendered_config_sha256": "bcffa7dbb4c5824871944ae9074157780b35c599ed0b0867c11879f11e1fefb5",
+  "rendered_mcp_config": {
+    "milai": {
+      "command": [
+        "/usr/local/bin/milai-mcp-relay",
+        "/run/milai-mcp/reader-lite.sock"
+      ],
+      "enabled": true,
+      "timeout": 10000,
+      "type": "local"
+    }
+  },
+  "restart_recreate": {
+    "broker_stop_failed_closed": true,
+    "new_socket_required_worker_recreate": true,
+    "recovery_after_broker_restart_and_remount": true,
+    "recreate_config_unchanged": true,
+    "restart_config_unchanged": true,
+    "restart_observed": true
+  },
+  "rollback": {
+    "base_image_id": "sha256:afa555cfccdb05c0e8a4a0b1ad84f364496d8721d45c9dbd796a7afbe5e7f05d",
+    "list_sha256": "8365690d35ea7ae11000983997218a995d56e32b41e6c58d6a1b651d241d65a1",
+    "mcp_absent": true
+  },
+  "runtime_banner": "0.1.x CANDIDATE",
+  "schema": "milai.dg10.openworker-mcp-host-gate.v1",
+  "schema_banner": "0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE",
+  "status": "LOCAL_CANDIDATE_REVIEW_REQUIRED"
+}

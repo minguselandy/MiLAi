@@ -1,0 +1,74 @@
+diff --git a/scripts/dg13u_u1_review.py b/scripts/dg13u_u1_review.py
+index 71da352..20e7571 100755
+--- a/scripts/dg13u_u1_review.py
++++ b/scripts/dg13u_u1_review.py
+@@ -99,6 +99,7 @@ _MANIFEST_KEYS = {
+     "gates",
+     "aggregate_sha256",
+     "counts",
++    "entries_sha256",
+     "files",
+     "secret_scan",
+ }
+@@ -299,6 +300,12 @@ def _validate_bundle(
+     _require(
+         isinstance(rows, list) and bool(rows), "bundle manifest file index is absent"
+     )
++    _require(
++        isinstance(manifest.get("entries_sha256"), str)
++        and _SHA256.fullmatch(manifest["entries_sha256"]) is not None
++        and manifest["entries_sha256"] == _digest(_canonical(rows)),
++        "bundle manifest entries SHA-256 binding mismatch",
++    )
+     expected_files: set[str] = {"manifest.json"}
+     closure: list[dict[str, object]] = [
+         {
+diff --git a/tests/test_dg13u_u1_review.py b/tests/test_dg13u_u1_review.py
+index 9a622a2..e26564f 100644
+--- a/tests/test_dg13u_u1_review.py
++++ b/tests/test_dg13u_u1_review.py
+@@ -92,6 +92,7 @@ def _bundle(tmp_path: Path) -> tuple[Path, str]:
+             * review.REQUIRED_RUN_ARTIFACTS_PER_CASE,
+             "supplemental_artifacts": 0,
+         },
++        "entries_sha256": hashlib.sha256(_canonical(files)).hexdigest(),
+         "files": files,
+         "secret_scan": {
+             "status": "PASS",
+@@ -340,6 +341,36 @@ def test_bundle_substitution_and_closure_drift_fail_before_model(
+     assert called is False
+ 
+ 
++def test_bundle_entries_sha256_drift_fails_before_model(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    bundle, _manifest_sha256 = _bundle(tmp_path)
++    manifest_path = bundle / "manifest.json"
++    manifest = json.loads(manifest_path.read_text())
++    manifest["entries_sha256"] = "0" * 64
++    manifest_raw = _canonical(manifest)
++    manifest_path.write_bytes(manifest_raw)
++    expected = hashlib.sha256(manifest_raw).hexdigest()
++    called = False
++
++    def forbidden(*_args: object, **_kwargs: object) -> review.ExecutionResult:
++        nonlocal called
++        called = True
++        raise AssertionError("model must not run")
++
++    monkeypatch.setattr(review, "_execute_once", forbidden)
++    with pytest.raises(review.ReviewRunError, match="entries SHA-256 binding mismatch"):
++        review.run_review(
++            bundle=bundle.resolve(),
++            expected_manifest_sha256=expected,
++            attempt_root=(tmp_path / "attempt-entries-drift").resolve(),
++            attempt_id="dg13u-u1-review-primary-008",
++            timeout_seconds=60,
++            codex=_codex(tmp_path),
++        )
++    assert called is False
++
++
+ def test_nonzero_model_process_is_one_attempt_with_zero_retry(
+     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+ ) -> None:

@@ -1,0 +1,39 @@
+{
+  "format": "milai-agent-efficiency-fixtures-v1",
+  "workload_turns": [20, 100, 500],
+  "memory_recall_period": 5,
+  "dataset_sizes": [1, 1000, 10000, 100000],
+  "evaluation_model": {
+    "provider": "offline-synthetic",
+    "model_id": "no-llm-called",
+    "provider_usage_verified": false,
+    "pricing_snapshot": {
+      "currency": null,
+      "input_per_million": null,
+      "cached_input_per_million": null,
+      "output_per_million": null,
+      "reason": "No provider request is made by this deterministic regression benchmark."
+    }
+  },
+  "tokenizer": {
+    "id": "ospc.regex.v1",
+    "pattern": "[A-Za-z0-9_]+|[^\\w\\s]",
+    "provider_exact": false
+  },
+  "query_templates": [
+    "请回忆之前的项目状态 {index}",
+    "你好",
+    "1 + 2 * 3",
+    "格式化文本：synthetic {index}",
+    "谢谢"
+  ],
+  "quality_labels": {
+    "memory_template_index": 0,
+    "expected_memory_route": "L1",
+    "expected_non_memory_route": "NONE"
+  },
+  "baseline_profile": "reader-detail-static-every-turn",
+  "optimized_profile": "reader-lite-recall-turn-only",
+  "concurrency": [1, 4, 16],
+  "warm_iterations_per_concurrency": 160
+}

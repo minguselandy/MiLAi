@@ -1,0 +1,12 @@
+{
+  "case_id": "g2-software-correct", "domain": "software", "initial_type": "correct",
+  "development_status": "constructed-pilot-unrun",
+  "task": "继续事件导出器设计，交付输出格式约定和三个验收点。今天只评审设计，下次再实现。项目资料在 sources/，也可查询项目记忆。",
+  "followup": "继续事件导出器工作，列出编码及排序边界测试。项目资料在 sources/。",
+  "initial_payload": {"note": "事件导出器输出UTF-8且不带BOM，使用LF换行；记录保持输入顺序，不排序、不去重。当前只评审设计，下次实现。", "sources": ["sources/export.txt"]},
+  "sources": {
+    "export.txt": "事件导出器当前合同：UTF-8无BOM，LF换行，保持输入记录顺序；重复记录也原样保留。不进行排序与去重。先设计，后续实现。",
+    "spreadsheet.txt": "电子表格人工导出建议使用UTF-8 BOM，方便旧版表格软件识别；这不是事件导出器的合同。"
+  },
+  "evaluation": {"required": ["UTF-8 without BOM", "LF", "input order preserved", "duplicates retained"], "correct_initial_facts": ["encoding", "newline", "order", "duplicates"], "key_source": null, "save_value": "Equivalent sufficient memory exists"}
+}

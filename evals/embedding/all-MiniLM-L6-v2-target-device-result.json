@@ -1,0 +1,57 @@
+{
+  "baseline": {
+    "cases": 13,
+    "cold_start_ms": 0.102,
+    "elapsed_ms": 1.659,
+    "embedding_calls": 52,
+    "external_model_cost_usd": 0,
+    "failure_rate": 0.0,
+    "provider_identity": "5b479a7b70c0aefb5fcdf20b256621ff8c663626f30b586c25b25f7bccce1598",
+    "throughput_calls_per_second": 31336.121,
+    "top1_accuracy": 0.5384615384615384,
+    "warm_latency_ms": {
+      "p50": 0.018,
+      "p95": 0.027,
+      "p99": 0.035
+    }
+  },
+  "benchmark_format": "milai-embedding-quality-v2",
+  "device": {
+    "accelerator": "CPU_ONLY",
+    "cpu_count": 32,
+    "machine": "x86_64",
+    "memory_bytes": 270455357440,
+    "platform": "Linux-5.15.0-86-generic-x86_64-with-glibc2.35",
+    "python": "3.11.13"
+  },
+  "fixture_sha256": "0c5b4fd424769574f97a078043fdcc7aae82ea82056ea3596cb50d151d5bef2c",
+  "gate": "PASS",
+  "measured_at": "2026-08-17T11:53:09Z",
+  "observed_gain": 0.3076923076923077,
+  "real_provider": {
+    "cases": 13,
+    "cold_start_ms": 1050.172,
+    "elapsed_ms": 1795.166,
+    "embedding_calls": 52,
+    "external_model_cost_usd": 0,
+    "failure_rate": 0.0,
+    "provider_identity": "cacae4531cfdf7d7df3f69793f3ddcc35f8629b65bd844c49a686c71c2164bc7",
+    "throughput_calls_per_second": 28.967,
+    "top1_accuracy": 0.8461538461538461,
+    "warm_latency_ms": {
+      "p50": 14.529,
+      "p95": 15.069,
+      "p99": 15.548
+    }
+  },
+  "required_gain": {
+    "top1_accuracy_absolute": 0.1
+  },
+  "workload": {
+    "concurrency": 1,
+    "database_rows": 0,
+    "index_bytes": 0,
+    "projection_lag": "NOT_APPLICABLE_ISOLATED_PROVIDER",
+    "state": "cold-first-call-then-warm"
+  }
+}

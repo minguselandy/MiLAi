@@ -1,0 +1,424 @@
+{
+  "revision": "V0222_RESIDUAL_INTENT_BOUNDARY_RESULTS_V1",
+  "date": "2026-09-12",
+  "experiment_kind": "RESEARCH_PROTOTYPE",
+  "profile": "INTENT_ORACLE",
+  "evidence_root": "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1",
+  "binding_sha256": "7b7d4659f7250af493470882e8c6c2f0009e1762ddd751c3a79c431e0a0b928a",
+  "status": "INTENT_BOUNDARY_SIGNAL",
+  "decision": {
+    "status": "INTENT_BOUNDARY_SIGNAL",
+    "selected_condition": "B1"
+  },
+  "unrun": [],
+  "business_dispatches": 0,
+  "Memory": "NOT_ADMITTED",
+  "independent_result_review": "BOUNDARY_RESULT_REVIEW_PASS",
+  "independent_result_review_sha256": "99a9c0caf97743ad0aaf6769f46e62b6f6b0ed12d13132ec6f9e3d69b39d40e3",
+  "conditions": {
+    "B0": {
+      "requests": 8,
+      "exact": 4,
+      "strict_json": 8,
+      "full_schema": 8,
+      "prompt_tokens": 279594,
+      "completion_tokens": 5092,
+      "raw_tokens": 284686
+    },
+    "B1": {
+      "requests": 8,
+      "exact": 8,
+      "strict_json": 8,
+      "full_schema": 8,
+      "prompt_tokens": 279634,
+      "completion_tokens": 4476,
+      "raw_tokens": 284110
+    }
+  },
+  "rows": [
+    {
+      "id": "r1-01",
+      "root": "A-1db36ca3de1602c36e98",
+      "cold": 1,
+      "condition": "B0",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": false,
+      "classification": "CONTENT_DIFFERENCE",
+      "pid": 1451085,
+      "actual_object_id": "S01",
+      "differences": 38,
+      "usage": {
+        "prompt_tokens": 27844,
+        "completion_tokens": 502,
+        "total_tokens": 28346
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-02",
+      "root": "A-1db36ca3de1602c36e98",
+      "cold": 1,
+      "condition": "B1",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1453482,
+      "actual_object_id": "manager_report",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 27849,
+        "completion_tokens": 321,
+        "total_tokens": 28170
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-03",
+      "root": "A-1816ef11f35c3921798c",
+      "cold": 1,
+      "condition": "B0",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": false,
+      "classification": "CONTENT_DIFFERENCE",
+      "pid": 1455716,
+      "actual_object_id": "facts",
+      "differences": 25,
+      "usage": {
+        "prompt_tokens": 54131,
+        "completion_tokens": 377,
+        "total_tokens": 54508
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-04",
+      "root": "A-1816ef11f35c3921798c",
+      "cold": 1,
+      "condition": "B1",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1458156,
+      "actual_object_id": "manager_report",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 54136,
+        "completion_tokens": 302,
+        "total_tokens": 54438
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-05",
+      "root": "A-e5324eaf97ba5a9b16dd",
+      "cold": 1,
+      "condition": "B0",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1460678,
+      "actual_object_id": "placement_plan",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 25741,
+        "completion_tokens": 993,
+        "total_tokens": 26734
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-06",
+      "root": "A-e5324eaf97ba5a9b16dd",
+      "cold": 1,
+      "condition": "B1",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1463124,
+      "actual_object_id": "placement_plan",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 25746,
+        "completion_tokens": 993,
+        "total_tokens": 26739
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-07",
+      "root": "A-4d36e6825968f3ce3862",
+      "cold": 1,
+      "condition": "B0",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1465609,
+      "actual_object_id": "triage",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 32081,
+        "completion_tokens": 666,
+        "total_tokens": 32747
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-08",
+      "root": "A-4d36e6825968f3ce3862",
+      "cold": 1,
+      "condition": "B1",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1467913,
+      "actual_object_id": "triage",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 32086,
+        "completion_tokens": 666,
+        "total_tokens": 32752
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-09",
+      "root": "A-1db36ca3de1602c36e98",
+      "cold": 2,
+      "condition": "B1",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1471170,
+      "actual_object_id": "manager_report",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 27849,
+        "completion_tokens": 321,
+        "total_tokens": 28170
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-10",
+      "root": "A-1db36ca3de1602c36e98",
+      "cold": 2,
+      "condition": "B0",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": false,
+      "classification": "CONTENT_DIFFERENCE",
+      "pid": 1473343,
+      "actual_object_id": "S01",
+      "differences": 38,
+      "usage": {
+        "prompt_tokens": 27844,
+        "completion_tokens": 476,
+        "total_tokens": 28320
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-11",
+      "root": "A-1816ef11f35c3921798c",
+      "cold": 2,
+      "condition": "B1",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1475680,
+      "actual_object_id": "manager_report",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 54136,
+        "completion_tokens": 302,
+        "total_tokens": 54438
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-12",
+      "root": "A-1816ef11f35c3921798c",
+      "cold": 2,
+      "condition": "B0",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": false,
+      "classification": "CONTENT_DIFFERENCE",
+      "pid": 1478077,
+      "actual_object_id": "facts",
+      "differences": 25,
+      "usage": {
+        "prompt_tokens": 54131,
+        "completion_tokens": 419,
+        "total_tokens": 54550
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-13",
+      "root": "A-e5324eaf97ba5a9b16dd",
+      "cold": 2,
+      "condition": "B1",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1480647,
+      "actual_object_id": "placement_plan",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 25746,
+        "completion_tokens": 993,
+        "total_tokens": 26739
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-14",
+      "root": "A-e5324eaf97ba5a9b16dd",
+      "cold": 2,
+      "condition": "B0",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1483052,
+      "actual_object_id": "placement_plan",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 25741,
+        "completion_tokens": 993,
+        "total_tokens": 26734
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-15",
+      "root": "A-4d36e6825968f3ce3862",
+      "cold": 2,
+      "condition": "B1",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1485565,
+      "actual_object_id": "triage",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 32086,
+        "completion_tokens": 578,
+        "total_tokens": 32664
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "r1-16",
+      "root": "A-4d36e6825968f3ce3862",
+      "cold": 2,
+      "condition": "B0",
+      "strict_json": true,
+      "full_schema": true,
+      "exact_fidelity": true,
+      "classification": "EXACT_COPY",
+      "pid": 1487888,
+      "actual_object_id": "triage",
+      "differences": 0,
+      "usage": {
+        "prompt_tokens": 32081,
+        "completion_tokens": 666,
+        "total_tokens": 32747
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "accounts": {
+    "historical": {
+      "requests": 29,
+      "ledger_files": 28,
+      "known_raw_tokens": 62874,
+      "old_unknown_reservation": 28284,
+      "actual_total_raw_tokens": null
+    },
+    "current": {
+      "requests": 16,
+      "prompt_tokens": 559228,
+      "completion_tokens": 9568,
+      "raw_tokens": 568796,
+      "new_unknown": 0,
+      "tokenize_requests": 48,
+      "identity_GETs": 36
+    },
+    "combined": {
+      "requests": 45,
+      "known_raw_tokens": 631670,
+      "actual_total_raw_tokens": null,
+      "unknown_reservation": 28284,
+      "reservation_is_actual": false
+    },
+    "agent": {
+      "source": "Platform goal accounting, separate from model HTTP usage",
+      "platform_goal_tokens_snapshot": 2655269,
+      "snapshot_unix": 1789145012,
+      "scope": "Whole ongoing Goal cumulative work, not this diagnostic alone; still increasing",
+      "value_not_copied_into_experiment_cost": true
+    }
+  },
+  "preflight": {
+    "references": 16,
+    "tokenize": 32,
+    "identity_GETs": 4,
+    "receipt_files": 104,
+    "max_input": 54136,
+    "max_reference_output": 814,
+    "B1_extra_input_tokens_per_pair": 5,
+    "status": "G_PREFLIGHT_PASS"
+  },
+  "engineering": {
+    "pytest_passed": 1959,
+    "pytest_skipped": 1,
+    "pytest_seconds": 366.97,
+    "boundary_ruff_mypy_build_diffcheck": "PASS"
+  },
+  "limits": [
+    "One bounded presentation contrast; no independent external confirmation or causal decomposition of boundary/template/distance/wrapper.",
+    "Same complete sources/intent/schema/D11/parameters; no repair, cropping, added instruction or answer duplication.",
+    "Actual full put_record diagnostic does not cover finish, multi-turn Session, execution/recovery/natural business or Memory."
+  ],
+  "next_step": "Only propose and independently review one new full/finish and conditional known-intent presentation gate; this diagnostic allocates none of its generations.",
+  "old_parent": {
+    "status": "FULL_FIDELITY_NOT_MET",
+    "stop": "FULL_INTENT_FIDELITY_FAILURE_BEFORE_DISPATCH",
+    "P3_unrun": 15,
+    "P4_unrun_chains": 24
+  },
+  "followup": {
+    "full_presentation_gate": "NOT_YET_ADMITTED",
+    "P4": "NOT_TRIGGERED",
+    "E1": "NOT_TRIGGERED",
+    "E2": "NOT_TRIGGERED",
+    "M0": "NOT_TRIGGERED",
+    "M1": "NOT_TRIGGERED",
+    "mechanism_exploration": "NOT_ADMITTED"
+  },
+  "files": {
+    "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1/independent-result-review.json": "99a9c0caf97743ad0aaf6769f46e62b6f6b0ed12d13132ec6f9e3d69b39d40e3",
+    "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1/execution-binding.json": "7b7d4659f7250af493470882e8c6c2f0009e1762ddd751c3a79c431e0a0b928a",
+    "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1/manifest.json": "4111eb762afd8b1fdfd380160445c25c35deb387a4f6806f30423477806c2521",
+    "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1/scope-review.json": "75f95d33c7017b4091325dcd6935bfa47e591fb3bfbe2c5b78e0498e805e7f1d",
+    "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1/engineering-checks.json": "51b6b5217edcf7b86bb31571c89ae6184f43dc4205e88661c0e1d8ab09afd64b",
+    "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1/preflight/result.json": "60bbce7b281772a310c1b7b47e1c1a4c5820cfe8f24edd83094276fea56d2235",
+    "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1/firstpass-decision.json": "37fdd62a56c3f2e66084af3204988856fccdbff05353ffbf20011d8815d2544e",
+    "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1/final-decision.json": "24e1906666f9499aa52d53c898601d08beb19461f7e1b3ae7058d48d6914b9b8",
+    "/cra/memory/mx_memory/evidence/v0222-boundary/20260911-http-r1/result.json": "7524f244daeca98378a428566b90d72025306d33bfadebc83be336312bd520c6"
+  }
+}

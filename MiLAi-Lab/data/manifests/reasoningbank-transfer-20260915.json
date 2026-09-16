@@ -1,0 +1,803 @@
+{
+  "kind": "RESEARCH_PROTOTYPE",
+  "goal": "studies/active/MILA_REASONINGBANK_TRANSFER_AND_MULTISESSION_RESEARCH_GOAL_v1.0_20260915.md",
+  "status": "PAUSED_BY_USER",
+  "started_at": "2026-09-15T07:15:31.878797+00:00",
+  "evidence_root": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854",
+  "benchmark_root": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854",
+  "required_work_packages": {
+    "W0": "SOURCES_SPLITS_NATIVE_ENVIRONMENTS_AND_USED_ENDPOINTS_READY_FORMAL_RESOURCE_SELECTION_PENDING",
+    "W1": "REAL_NATIVE_DB_BANK_AND_NEW_PROCESS_RECOVERY_PASS",
+    "W2": "FUNCTIONAL_PATH_PASS_NATURAL_REVISION_NOT_OBSERVED",
+    "W3": "FOUR_METHODS_AND_NATIVE_VERIFIED_REFERENCE_DEV_COMPLETED",
+    "W4": "FULL_TRAVEL_GROUP_ALL_FOUR_METHODS_COMPLETED",
+    "W5": "VALIDATION_RUNNING",
+    "W6": "NOT_STARTED",
+    "W7": "NOT_STARTED",
+    "W8": "NOT_STARTED"
+  },
+  "required_domains": [
+    "LifelongAgentBench_Database",
+    "LifelongAgentBench_OS",
+    "MemoryArena_Group_Travel"
+  ],
+  "required_protocols": [
+    "FROZEN_BANK_TRANSFER",
+    "ONLINE_STREAM",
+    "DEPENDENT_MULTISESSION"
+  ],
+  "required_model_profiles": 1,
+  "new_experiment_generations": 4764,
+  "new_model_allocation": 2935960000,
+  "prior_budgets": "CLOSED_NOT_REUSED",
+  "product_default": "A0_UNCHANGED",
+  "public_schema": "UNCHANGED",
+  "credential_handling": "HF credential read only from user provided hf.env; never included in evidence or manifests",
+  "sources": {
+    "reasoning-bank": {
+      "status": "DOWNLOADED",
+      "url": "https://github.com/google-research/reasoning-bank.git",
+      "requested_ref": "HEAD",
+      "path": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854/reasoning-bank",
+      "log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/reasoning-bank-download.log",
+      "error_type": "CalledProcessError",
+      "seconds": 4.834531977307051,
+      "commit": "ed80611788292ea739f1effd31f16c53823b8a0d",
+      "retry_log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/reasoning-bank-download-retry.log",
+      "retry_seconds": 3.0036048172041774,
+      "prior_failure": {
+        "status": "DOWNLOAD_FAILED",
+        "url": "https://github.com/google-research/reasoning-bank.git",
+        "requested_ref": "HEAD",
+        "path": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854/reasoning-bank",
+        "log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/reasoning-bank-download.log",
+        "error_type": "CalledProcessError",
+        "seconds": 4.834531977307051
+      },
+      "tree": "7cc5e6e08ee8035cde81f1fb9fd871d32423a3e3"
+    },
+    "LifelongAgentBench": {
+      "status": "DOWNLOADED",
+      "url": "https://github.com/caixd-220529/LifelongAgentBench.git",
+      "requested_ref": "d6f19b42eb358d9150379f0c68c2985c5a867520",
+      "path": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854/LifelongAgentBench",
+      "log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/LifelongAgentBench-download.log",
+      "error_type": "CalledProcessError",
+      "seconds": 3.8369125458411872,
+      "commit": "d6f19b42eb358d9150379f0c68c2985c5a867520",
+      "retry_log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/LifelongAgentBench-download-retry.log",
+      "retry_seconds": 2.0836400659754872,
+      "prior_failure": {
+        "status": "DOWNLOAD_FAILED",
+        "url": "https://github.com/caixd-220529/LifelongAgentBench.git",
+        "requested_ref": "d6f19b42eb358d9150379f0c68c2985c5a867520",
+        "path": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854/LifelongAgentBench",
+        "log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/LifelongAgentBench-download.log",
+        "error_type": "CalledProcessError",
+        "seconds": 3.8369125458411872
+      },
+      "tree": "20d7d7e0e5ae82068ac95ff83992ea84ff737a18"
+    },
+    "MemoryArena": {
+      "status": "DOWNLOADED",
+      "url": "https://github.com/ZexueHe/MemoryArena.git",
+      "requested_ref": "6cd9de14b71915e39ac742a20dc33785e14b6aab",
+      "commit": "6cd9de14b71915e39ac742a20dc33785e14b6aab",
+      "path": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854/MemoryArena",
+      "log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/MemoryArena-download.log",
+      "seconds": 10.965181469917297,
+      "tree": "e566a1c02e1f40bc94148848c7f8afee32ffc1a8"
+    }
+  },
+  "model_scope_override": {
+    "instruction": "只使用这一个模型即可，先不要使用别的",
+    "recorded_at": "2026-09-15T07:18:14.226221+00:00",
+    "active_solver": "Qwen3.6-35B-A3B-FP8",
+    "second_solver": "DEFERRED_BY_USER",
+    "scope": "DB F/O, OS F/O, Travel G, four methods and required contribution/resource comparisons remain in scope. No second solver download, deployment or run."
+  },
+  "model_profiles": {
+    "M1": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "base_url": "http://127.0.0.1:7860/v1",
+      "observed_max_model_len": 65536,
+      "availability": "GET_MODELS_VERIFIED",
+      "decoding": {
+        "actor_temperature": 0.0,
+        "self_judge_temperature": 0.0,
+        "extract_temperature": 1.0,
+        "adopt_revise_observer_reflector_temperature": 0.0,
+        "top_p": 1,
+        "seed": 213,
+        "enable_thinking": false,
+        "actor_output_cap": 4096,
+        "self_judge_output_cap": 64,
+        "other_memory_role_output_cap": 2048
+      }
+    }
+  },
+  "datasets": {
+    "MemoryArena_Group_Travel": {
+      "repo_id": "ZexueHe/memoryarena",
+      "revision": "da1a37c8b19280e18627ca01cf368195a5e1d92e",
+      "root": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854/datasets/memoryarena",
+      "files": {
+        "README.md": {
+          "size": 4762,
+          "sha256": "27573c423dbe8abee530dbf4f8fe0a757c3fbbdec57703db2ba3c8706e103935",
+          "git_blob_matches": true
+        },
+        ".gitattributes": {
+          "size": 2504,
+          "sha256": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb",
+          "git_blob_matches": true
+        },
+        "group_travel_planner/data.jsonl": {
+          "size": 6165901,
+          "sha256": "2f955d444f6f3ad3c5da2064359ab19f8fc1f90621ff9d00723a450a009c3732",
+          "git_blob_matches": true
+        }
+      },
+      "attempts": [],
+      "status": "DOWNLOADED"
+    },
+    "LifelongAgentBench": {
+      "repo_id": "csyq/LifelongAgentBench",
+      "revision": "75054b60177d4dcddb93b984413ff799b0a1fdbc",
+      "root": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854/datasets/lifelong",
+      "files": {
+        ".gitattributes": {
+          "size": 2461,
+          "sha256": "e7a120ab07b1bc5b486be249e9fc6c83d59448d0093e1dfebe95d1566d9cafc0",
+          "upstream_hash_matches": true
+        },
+        "os_interaction/train-00000-of-00001.parquet": {
+          "size": 201403,
+          "sha256": "61795fd6a0231fad9a509f8dbb8863bb0cdde1daa1db05e1b2e6dbb077946b13",
+          "upstream_hash_matches": true
+        },
+        "db_bench/train-00000-of-00001.parquet": {
+          "size": 466381,
+          "sha256": "9559d085c4747ae5afb28d45155040af0743e4dfdb5759a3f13da84501c52f51",
+          "upstream_hash_matches": true
+        }
+      },
+      "attempts": [
+        {
+          "path": "db_bench/train-00000-of-00001.parquet",
+          "attempt": 1,
+          "error_type": "SSLError",
+          "status": null
+        },
+        {
+          "path": "db_bench/train-00000-of-00001.parquet",
+          "attempt": 2,
+          "error_type": "SSLError",
+          "status": null
+        },
+        {
+          "path": "db_bench/train-00000-of-00001.parquet",
+          "attempt": 3,
+          "error_type": "SSLError",
+          "status": null
+        },
+        {
+          "path": "os_interaction/train-00000-of-00001.parquet",
+          "attempt": 1,
+          "error_type": "SSLError",
+          "status": null
+        },
+        {
+          "path": "os_interaction/train-00000-of-00001.parquet",
+          "attempt": 2,
+          "error_type": "SSLError",
+          "status": null
+        }
+      ],
+      "status": "DOWNLOADED",
+      "retry_record": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/lifelong-db-download-retry.json"
+    },
+    "Flights": {
+      "status": "DOWNLOADING",
+      "log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/flights-download.log"
+    }
+  },
+  "dataset_shape": {
+    "travel": {
+      "groups": 270,
+      "top_level_keys": [
+        "id",
+        "base_person",
+        "questions",
+        "answers"
+      ],
+      "sessions_histogram": {
+        "8": 100,
+        "7": 86,
+        "6": 47,
+        "5": 37
+      },
+      "all_ids_unique": true,
+      "question_item_type": "str",
+      "base_person_keys": [
+        "name",
+        "query",
+        "daily_plans"
+      ],
+      "metadata_only": true
+    }
+  },
+  "source_review": {
+    "ReasoningBank": "CORE_PATH_READ; SOURCE_DIFFERENCE_TABLE_IN_PROGRESS",
+    "reference_top_k_trajectories": 1,
+    "max_items_per_trajectory": 3,
+    "retrieval_key": "prior task query with instruction-aware current query",
+    "self_judgment": "visible non-system trajectory, no native reward",
+    "extraction": "separate success/failure Markdown prompts",
+    "embedding_override": "bge-m3 1024D cosine; deployment batch/capacity not yet verified",
+    "reranker_enabled": false
+  },
+  "splits": {
+    "status": "FROZEN_BEFORE_DEV",
+    "path": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/frozen-splits/splits.json",
+    "sha256": "d514267a72380776faeeedd54a42c7d9199631574ffdcf01a6d6087de474091e",
+    "preparation_source": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/frozen-splits/preparation.py",
+    "source_sha256": "a7e374cf1cbc487af4e0b0c200357823f05d9fc17b77b5247459fca6a7d2b100",
+    "seed": 213,
+    "counts": {
+      "db_bench": {
+        "DEV": 24,
+        "VALID": 12,
+        "SUPPORT": 40,
+        "TEST": 100,
+        "RESERVE": 324
+      },
+      "os_interaction": {
+        "DEV": 8,
+        "VALID": 0,
+        "SUPPORT": 40,
+        "TEST": 102,
+        "RESERVE": 350
+      },
+      "travel": {
+        "DEV": 8,
+        "VALID": 8,
+        "SUPPORT": 20,
+        "TEST": 50,
+        "RESERVE": 184
+      }
+    },
+    "grouping": {
+      "db_bench": "Connected components of upstream source hash, named column schema, normalized instruction",
+      "os_interaction": "Connected components of raw_entry_hash, exact initialization and normalized instruction",
+      "travel": "Whole groups joined when normalized given base-person query matches",
+      "normalization": "Identifiers (DB only), quoted literals, numbers, case and whitespace",
+      "limitations": "No full upstream generation lineage; unobserved semantic near-duplicates may remain. Skills alone do not define clusters.",
+      "answer_fields_used_for_grouping": false
+    },
+    "cross_split_cluster_overlap": false,
+    "source_instruction_answer_exposure": "Metadata-only outputs; no TEST task text or evaluator answers displayed or supplied for policy design."
+  },
+  "execution_size": {
+    "M1_DB_F_O": 800,
+    "M1_OS_F_O": 816,
+    "M1_TRAVEL_G_group_runs": 200,
+    "M1_main_task_or_group_method_units": 1816,
+    "M1_main_actor_sessions": 3060,
+    "verified_replay": 69,
+    "support_sessions_per_memory_method": 220,
+    "support_memory_methods": 3,
+    "second_solver": 0,
+    "generation_allocation": "FORMAL_RESOURCES_FROZEN_AND_ALL_REMAINING_PHASES_DECLARED",
+    "verified_replay_by_domain": {
+      "db_bench": 20,
+      "os_interaction": 49
+    },
+    "verified_replay_size_note": "Original source-cluster-preserving frozen subset expanded OS beyond the target20. Earlier description40total was an estimate error; split/IDs unchanged.",
+    "formal_phase_sizes": {
+      "main": {
+        "units": 1885,
+        "actor_sessions": 3129,
+        "worker_jobs": 250
+      },
+      "contribution": {
+        "units": 25,
+        "actor_sessions": 53,
+        "worker_jobs": 7
+      },
+      "resources": {
+        "units": 80,
+        "actor_sessions": 176,
+        "worker_jobs": 24
+      }
+    },
+    "all_formal_units": 1990,
+    "all_formal_actor_sessions": 3358
+  },
+  "environment_images": {
+    "ubuntu:24.04": {
+      "id": "sha256:b2b7ea366714195a1e1c5b2b578ece85c0b3920381a8654d038d9684f009613c",
+      "digests": [
+        "m.daocloud.io/docker.io/ubuntu@sha256:224a1869083a311ef3f13648a154ba79832fbef6364d31493642ca03082da254"
+      ]
+    },
+    "mysql:8.0": {
+      "id": "sha256:6cd09145362dfe6831b14545de3d5fd6cc75c37cfd6ef8561429c1fc73518b39",
+      "digests": [
+        "mysql@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b"
+      ]
+    }
+  },
+  "os_image_build": {
+    "tag": "milai-research/lifelong-os:rb-20260915-7fzz854",
+    "context": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854/os-image-build",
+    "base": "ubuntu:24.04",
+    "difference": "Pin base to locally available Ubuntu24.04 image ID; noninteractive package install. Original package set preserved.",
+    "log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/os-image-build-local.log",
+    "first_attempt": "FAILED_BUILDKIT_IMAGE_ID_REFERENCE",
+    "second_attempt": "FAILED_SAME_REFERENCE",
+    "active_log": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/os-image-build-local.log",
+    "active_session": 4203,
+    "builder": "Docker28 classic builder resolves pinned local image ID; no remote base substitution",
+    "note": "Repository has only mirror-qualified RepoDigest; failed attempts retained, no task model calls.",
+    "status": "BUILT",
+    "image_id": "sha256:5e15a2f08cc26aa936a131a39aadd0d1210049d6e23a11574b101b7873cd2ec7"
+  },
+  "endpoint_checks": {
+    "embedding_batch": {
+      "status": "PASS",
+      "requests": 1,
+      "kind": "EMBEDDING",
+      "text_generations": 0,
+      "model": "bge-m3",
+      "vectors": 2,
+      "dimension": 1024,
+      "usage": {
+        "prompt_tokens": 29,
+        "total_tokens": 29,
+        "completion_tokens": 0,
+        "prompt_tokens_details": null
+      },
+      "seconds": 0.28492884105071425,
+      "request_ids": [
+        0,
+        1
+      ]
+    },
+    "prior_document_samples": "2 requests /36 reported tokens, recorded before execution; not added again",
+    "new_text_generations": 0
+  },
+  "environment_checks": {
+    "native_container_smoke": {
+      "model_calls": 0,
+      "checks": {
+        "db": {
+          "status": "PASS",
+          "native_query_result": "[(5,)]",
+          "container_id": "11a581dd4f7e6bddcc7829c4a22eda33e7c8d8913db4875500c9eb71b46ae5ba",
+          "cleanup": "STOPPED"
+        },
+        "os": {
+          "status": "PASS",
+          "container_id": "59c0667d83f687d4e71853579c98fcb32864be85401a853b43fdf1ab09890759",
+          "output": "native_environment_ready",
+          "cleanup": "STOPPED"
+        }
+      },
+      "seconds": 26.45236273109913
+    },
+    "data_venv": "INSTALLED",
+    "lifelong_venv": "INSTALLED_UPSTREAM_REQUIREMENTS_CPU_TORCH",
+    "travel_venv": "INSTALLED_UPSTREAM_REQUIREMENTS_CPU_TORCH"
+  },
+  "implementation_progress": {
+    "reasoningbank_base": "QUERY_RETRIEVAL_JUDGE_SUCCESS_FAILURE_EXTRACTION_BANK_STATE_IMPLEMENTED; NATIVE_INTEGRATION_PENDING",
+    "candidate": "NOT_IMPLEMENTED",
+    "nearby_tests": {
+      "passed": 5,
+      "seconds": 0.08,
+      "scope": "tests/unit/test_reasoning_bank.py"
+    },
+    "static": "New baseline module ruff and mypy pass; full delivery checks not yet due or complete"
+  },
+  "flight_database": {
+    "exit_code": 0,
+    "bytes_before": 279969792,
+    "bytes_after": 304807007,
+    "seconds": 108.28734884271398,
+    "source": "official Google Drive file via public download endpoint",
+    "status": "DOWNLOADED",
+    "path": "/cra/memory/mx_memory/benchmarks/reasoningbank-transfer-20260915-_7fzz854/datasets/flights/clean_Flights_2022.csv",
+    "sha256": "8dafdb0e3f8b79ce599a1e612a772865295bc226b46e5fb278368f7255b11cee",
+    "columns": [
+      "Flight Number",
+      "Price",
+      "DepTime",
+      "ArrTime",
+      "ActualElapsedTime",
+      "FlightDate",
+      "OriginCityName",
+      "DestCityName",
+      "Distance"
+    ]
+  },
+  "development_allocations": [
+    {
+      "id": "DEV_DB_RB_CHECKPOINT_A_B",
+      "generations": 48,
+      "raw_token_limit": 300000,
+      "workers": 1,
+      "purpose": "Two native DB DEV tasks in separate processes, completed-memory persistence and later retrieval; outputs determine subsequent phase budgets",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-db-rb-a-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-db-rb-b-config.json"
+      ],
+      "status": "CLOSED_PARSER_FAILURE",
+      "used_generations": 4,
+      "used_raw_tokens": 7715,
+      "unstarted_b": "CLOSED_NO_SEND",
+      "failure": "Case-sensitive logical parser rejected complete lowercase headings; first native task correct, no experience committed"
+    },
+    {
+      "id": "DEV_DB_RB_V02_CHECKPOINT_A_B",
+      "generations": 48,
+      "raw_token_limit": 300000,
+      "workers": 1,
+      "status": "CLOSED_PARSER_FIDELITY_REPAIR",
+      "purpose": "General Markdown heading case tolerance; preserve original text and rerun DEV for real persisted bank",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-db-rb-v02-a-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-db-rb-v02-b-config.json"
+      ],
+      "used_generations": 4,
+      "used_raw_tokens": 7710,
+      "unstarted_b": "CLOSED_NO_SEND",
+      "failure": "Model used Action as title label; reference stores raw body. Removed unsupported semantic heading validation, preserving raw logical item bodies."
+    },
+    {
+      "id": "DEV_DB_RB_V03_CHECKPOINT_B_C",
+      "generations": 48,
+      "raw_token_limit": 300000,
+      "workers": 1,
+      "status": "COMPLETED",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-db-rb-v03-b-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-db-rb-v03-c-config.json"
+      ],
+      "used_generations": 9,
+      "used_raw_tokens": 13350
+    },
+    {
+      "id": "DEV_LIFELONG_FOUR_METHODS",
+      "generations": 448,
+      "raw_token_limit": 2100000,
+      "workers": 1,
+      "status": "COMPLETED",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-pair-db_bench-native-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-pair-db_bench-om-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-pair-db_bench-milai-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-pair-os_interaction-native-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-pair-os_interaction-om-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-pair-os_interaction-rb-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-pair-os_interaction-milai-config.json"
+      ],
+      "used_generations": 65,
+      "used_raw_tokens": 113447
+    },
+    {
+      "id": "DEV_TRAVEL_GROUP16_FOUR_METHODS",
+      "generations": 1280,
+      "raw_token_limit": 8000000,
+      "workers": 1,
+      "status": "CLOSED_TOOL_TRANSPORT_REJECTION",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-native-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-om-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-rb-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-milai-config.json"
+      ],
+      "coverage": "7 actual agent sessions per method; supplied base-person memory formation separately charged",
+      "attempted_requests": 1,
+      "known_settled_tokens": 0,
+      "unresolved_upper_bound": 6244,
+      "unstarted_methods": "OM/RB/MILAI CLOSED_NO_SEND",
+      "reason": "Existing solver server has no automatic tool parser. HTTP 400 preserved with unresolved reservation; no same-worker retry."
+    },
+    {
+      "id": "DEV_TRAVEL_NATIVE_TEMPLATE_COMPLETION",
+      "generations": 1280,
+      "raw_token_limit": 8000000,
+      "workers": 1,
+      "status": "CLOSED_OM_PREFLIGHT_FIX",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v02-native-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v02-om-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v02-rb-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v02-milai-config.json"
+      ],
+      "transport": "Deployed Qwen /tokenize chat template -> exact token IDs to /v1/completions -> local native XML tool decoding; same tools for all arms",
+      "used_generations": 70,
+      "used_raw_tokens": 957216,
+      "om_failure": "Tokenizer rejected duplicate system role in OM fit check; zero generation requests",
+      "unstarted_methods": "RB/MILAI CLOSED_NO_SEND"
+    },
+    {
+      "id": "DEV_TRAVEL_MEMORY_ARMS_PREFLIGHT_FIXED",
+      "generations": 960,
+      "raw_token_limit": 6000000,
+      "workers": 1,
+      "status": "CLOSED_CANDIDATE_RESOURCE_AND_HISTORY_LIMIT",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v03-om-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v03-rb-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v03-milai-config.json"
+      ],
+      "paired_native": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v02-native/result.json",
+      "used_generations": 368,
+      "used_raw_tokens": 2800480,
+      "reason": "Candidate source receipts were transient within one model invocation; reached group token limit, partial coverage preserved. Native history retention fixed for new development execution."
+    },
+    {
+      "id": "DEV_TRAVEL_CANDIDATE_PERSISTENT_READ_HISTORY",
+      "generations": 512,
+      "raw_token_limit": 4000000,
+      "workers": 1,
+      "status": "COMPLETED_HISTORY_PATH_ADOPTION_WRITES_DEVIATION",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v04-milai-config.json"
+      ],
+      "reason": "Complete-group development after retaining actual read receipts across native actions; increased safety ceiling based on observed maintenance cost, not a matched-resource TEST comparison",
+      "used_generations": 149,
+      "used_raw_tokens": 811451,
+      "limitation": "Read persistence is proven, but adoption also edited experience cards. This is a development variant, not the intended feedback-triggered revision method. v0.3 restricts adoption to temporary judgment."
+    },
+    {
+      "id": "DEV_CURRENT_CANDIDATE_AND_NATIVE_VERIFIED_REPLAY",
+      "generations": 704,
+      "raw_token_limit": 4900000,
+      "workers": 1,
+      "status": "COMPLETED",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-current-v03-db_bench-milai-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-current-v03-os_interaction-milai-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-db_bench-verified-reference-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-os_interaction-verified-reference-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v05-milai-config.json"
+      ],
+      "candidate_version": "milai-experience-revision-v0.3",
+      "purpose": "Validate temporary-only adoption, persistent actual memory exchanges, domain/version-bound banks, graceful unavailable post-task maintenance, and the original verified-history callback",
+      "used_generations": 187,
+      "used_raw_tokens": 1100642
+    },
+    {
+      "id": "VALID_V03_SINGLE_MODEL",
+      "workers": 4,
+      "status": "COMPLETED_WITH_FAILURES",
+      "generations": 19456,
+      "raw_token_limit": 142400000,
+      "batch": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/batch.json",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-db_bench-native-0-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-db_bench-om-0-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-db_bench-rb-0-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-db_bench-milai-0-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-native-0-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-native-1-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-native-2-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-native-3-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-native-4-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-native-5-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-native-6-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-native-7-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-om-0-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-om-1-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-om-2-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-om-3-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-om-4-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-om-5-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-om-6-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-om-7-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-rb-0-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-rb-1-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-rb-2-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-rb-3-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-rb-4-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-rb-5-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-rb-6-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-rb-7-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-milai-0-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-milai-1-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-milai-2-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-milai-3-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-milai-4-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-milai-5-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-milai-6-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-travel-milai-7-config.json"
+      ],
+      "declared_service_capacity": "One deployed TP2 Qwen service; at most 4 independent sequential requests/workers; at most 4 owned native containers. First real VALID jobs measure this capacity without synthetic generation.",
+      "closed_at": "2026-09-15T11:07:23.785741+00:00",
+      "used_generations": 2911,
+      "used_raw_tokens": 37902949,
+      "unknown_requests": 4,
+      "unresolved_upper_bound": 67302,
+      "embedding": {
+        "requests": 113,
+        "tokens": 52805,
+        "seconds": 21.8791212211363,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "actor": {
+          "requests": 2644,
+          "tokens": 35772752,
+          "seconds": 19445.307829603087
+        },
+        "observer": {
+          "requests": 27,
+          "tokens": 454782,
+          "seconds": 412.6242014840245
+        },
+        "self_judge": {
+          "requests": 104,
+          "tokens": 781147,
+          "seconds": 176.17804995225742
+        },
+        "extract": {
+          "requests": 104,
+          "tokens": 838824,
+          "seconds": 1239.11675759824
+        },
+        "adopt": {
+          "requests": 32,
+          "tokens": 55444,
+          "seconds": 230.91358821559697
+        }
+      },
+      "failed_jobs": [
+        "valid-travel-native-4",
+        "valid-travel-om-5",
+        "valid-travel-om-7",
+        "valid-travel-rb-0",
+        "valid-travel-milai-0",
+        "valid-travel-milai-1",
+        "valid-travel-milai-2",
+        "valid-travel-milai-3",
+        "valid-travel-milai-4",
+        "valid-travel-milai-5",
+        "valid-travel-milai-6",
+        "valid-travel-milai-7"
+      ]
+    },
+    {
+      "id": "VALID_V04_SINGLE_MODEL",
+      "workers": 4,
+      "status": "COMPLETED_WITH_FAILURES",
+      "generations": 4096,
+      "raw_token_limit": 32000000,
+      "batch": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v04/batch.json",
+      "configs": [
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v04/valid-v04-travel-milai-0-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v04/valid-v04-travel-milai-1-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v04/valid-v04-travel-milai-2-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v04/valid-v04-travel-milai-3-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v04/valid-v04-travel-milai-4-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v04/valid-v04-travel-milai-5-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v04/valid-v04-travel-milai-6-config.json",
+        "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v04/valid-v04-travel-milai-7-config.json"
+      ],
+      "started_at": "2026-09-15T11:09:24.401997+00:00",
+      "scope": "One bounded known-fact timing/projection adjustment; same8frozen travel VALID groups;600s transport wait. No policy text changes or TEST generations.",
+      "closed_at": "2026-09-15T12:05:13.481132+00:00",
+      "used_generations": 997,
+      "used_raw_tokens": 18989059,
+      "unknown_requests": 0,
+      "unresolved_upper_bound": 0,
+      "embedding": {
+        "requests": 64,
+        "tokens": 34290,
+        "seconds": 12.766140922904015,
+        "unknown_requests": 0
+      },
+      "roles": {
+        "self_judge": {
+          "requests": 63,
+          "tokens": 799883,
+          "seconds": 149.2976563628763
+        },
+        "extract": {
+          "requests": 63,
+          "tokens": 837095,
+          "seconds": 696.0674585681409
+        },
+        "adopt": {
+          "requests": 57,
+          "tokens": 635706,
+          "seconds": 599.3008094653487
+        },
+        "actor": {
+          "requests": 814,
+          "tokens": 16716375,
+          "seconds": 8831.4724875791
+        }
+      },
+      "failed_jobs": [
+        "valid-v04-travel-milai-5"
+      ]
+    }
+  ],
+  "new_settled_text_tokens": 62704019,
+  "unknown_text_requests": 5,
+  "native_recovery_proof": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/native-bank-recovery-proof.json",
+  "development_report": "studies/active/MILA_REASONINGBANK_DEVELOPMENT_RESULTS_20260915.md",
+  "allocation_semantics": "Gross ceilings across separately declared phases; unused closed-phase capacity is not reusable. Only RUNNING allocations authorize current sends.",
+  "public_native_bank_recovery": {
+    "status": "PASS",
+    "evidence": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/public-native-bank-repair-pin/result.json",
+    "pin": "data/locks/workspace-rwc-repair-product.lock.json",
+    "cards": 6,
+    "records": 2,
+    "model_generations": 0,
+    "initial_base_pin_mismatch_preserved": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/public-native-bank/product-pin.json"
+  },
+  "native_candidate_read_history_proof": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-travel-16-v05-milai/read-history-counted-proof.json",
+  "native_om_observation_reuse_proof": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/validation-v03/valid-db_bench-om-0/observation-reuse-proof.json",
+  "selected_decision": {
+    "path": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/selected-policy-and-resources.json",
+    "sha256": "d15115d94ee644eba048ef62aad1e824c26bb568ca9f21cc88151691f0eabb56",
+    "candidate": "milai-experience-revision-v0.4"
+  },
+  "evaluation_allocations": [
+    {
+      "id": "FORMAL_SUPPORT",
+      "status": "PAUSED_BY_USER",
+      "batch": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/support/batch.json",
+      "status_manifest": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/support/batch-status.json",
+      "workers": 4,
+      "generations": 46080,
+      "raw_token_limit": 552000000,
+      "planned_units": 300,
+      "started_at": "2026-09-15T12:07:14.541091+00:00",
+      "decision_sha256": "d15115d94ee644eba048ef62aad1e824c26bb568ca9f21cc88151691f0eabb56",
+      "status_before_pause": "RUNNING",
+      "paused_at": "2026-09-15T16:19:15.239194+00:00"
+    },
+    {
+      "id": "FORMAL_DB_OS_EARLY",
+      "status": "PAUSED_BY_USER",
+      "batch": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/early-db-os/batch.json",
+      "status_manifest": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/early-db-os/batch-status.json",
+      "workers": 2,
+      "generations": 110592,
+      "raw_token_limit": 515660000,
+      "planned_units": 1769,
+      "declared_at": "2026-09-15T13:39:49.434246+00:00",
+      "schedule_update": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/formal-schedule-update.json",
+      "status_before_pause": "RUNNING",
+      "paused_at": "2026-09-15T16:19:15.239194+00:00"
+    },
+    {
+      "id": "FORMAL_TRAVEL_REMAINING",
+      "status": "RESERVED_UNSTARTED",
+      "batch": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/formal-travel-batch.json",
+      "status_manifest": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/formal-travel-batch-status.json",
+      "workers": 4,
+      "generations": 108288,
+      "raw_token_limit": 1660000000,
+      "planned_units": 221,
+      "declared_at": "2026-09-15T13:39:49.434288+00:00",
+      "schedule_update": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/formal-schedule-update.json"
+    }
+  ],
+  "schedule_update": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/formal-schedule-update.json",
+  "early_support_bank_binding": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/early-db-os/support-bank-binding.json",
+  "status_before_user_pause": "FORMAL_SUPPORT_AND_DB_OS_RUNNING",
+  "paused_at": "2026-09-15T16:19:15.239194+00:00",
+  "pause_record": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/paused-by-user-20260916/pause-state.json",
+  "automatic_resume": false,
+  "resume_requires_explicit_user_instruction": true,
+  "runtime_amendment": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/runtime-amendment-empty-history/amendment.json",
+  "partial_db_report": "studies/active/MILA_REASONINGBANK_DB_RESULTS_20260916.md",
+  "pause_summary_report": "studies/active/MILA_EXPERIMENT_DEVELOPMENT_SUMMARY_PAUSED_20260916.md",
+  "pause_snapshot": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/paused-by-user-20260916/pause-summary.json"
+}

@@ -1,0 +1,17 @@
+Work on the user's task using subgoals: concrete milestones toward the final goal.
+Propose the first subgoal together with its first action. Continue with actions until
+observed results justify the next subgoal, then propose it with its first action.
+Keep subgoals on one line. You may finish the task when appropriate.
+
+The Host maintains a fallible record of the evidence currently available for action.
+Use it with the actual current observations; it is not a new instruction or a proof
+of completion. Current subgoal interactions remain in detail. Past segments are
+archived: retrieve their numbered segment IDs when their detail is needed. Expanded
+segments remain visible until a new subgoal. Read immutable receipts to inspect more
+of a previous output. Neither kind of historical reading repeats the original action.
+
+Return one JSON object with action and arguments. Add subgoal only for a new subgoal;
+otherwise omit it or use null. There is no optional work_update or record-writing tool.
+Example shape: {"subgoal":"Understand the project interface","action":"exec",
+"arguments":{"command":"pwd","timeout_sec":10}}
+retrieve uses {"segments":[1,2]}, only for past IDs in this task, without a new subgoal.

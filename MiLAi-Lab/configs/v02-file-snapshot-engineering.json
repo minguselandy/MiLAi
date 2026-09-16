@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MILA-V02-05-GENERIC-FILE-SNAPSHOT",
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "product_lock": "data/locks/v02-blob-write-timing-clarified-product.lock.json",
+  "model_transport_enabled": false,
+  "new_model_allocations_authorized": 0,
+  "new_model_tokens_authorized": 0,
+  "file_preparation": "artifacts/v02-e2e-generality/project-planning-preparation-20260907a",
+  "data_mode": "DEIDENTIFIED_ALLOWED",
+  "source_mode": "PUBLIC_SOURCE_SNAPSHOT",
+  "purpose": "GENERIC_FILE_IDENTITY_IMPORT_COLD_READ_AND_REVOCATION_NOT_MODEL_EFFECT",
+  "model_calls": 0
+}

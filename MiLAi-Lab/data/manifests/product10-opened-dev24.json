@@ -1,0 +1,450 @@
+{
+  "answer_material_present": false,
+  "case_count": 24,
+  "case_ids": [
+    "06878be2",
+    "06db6396",
+    "07741c45",
+    "195a1a1b",
+    "1c0ddc50",
+    "27016adc",
+    "29f2956b",
+    "37f165cf",
+    "51a45a95",
+    "54026fce",
+    "6222b6eb",
+    "6b168ec8",
+    "720133ac",
+    "ac031881",
+    "b6019101",
+    "c4f10528",
+    "c8c3f81d",
+    "cf22b7bf",
+    "d01c6aa8",
+    "eaca4986",
+    "gpt4_194be4b3",
+    "gpt4_6ed717ea",
+    "gpt4_93159ced",
+    "gpt4_fe651585"
+  ],
+  "case_order_sha256": "a4b7007e886ef4d93f0c3b7da1d8d5782c8afb2821379b65a22e4569d3dfb7b7",
+  "cases": [
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "REPEATED_MENTION"
+      ],
+      "case_id": "06878be2",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-preference",
+      "question_sha256": "19c656c1cb93d3eba8068b1ed4d26be250ac65339735f92f0a5ad8689d3d9d1a",
+      "reference_answer_sha256": "0958c7de3eb95265e10626ed0e9ae17962ade3437950453dd47bc543d4332978"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "REPEATED_MENTION",
+        "CROSS_SESSION_AGGREGATION",
+        "UPDATE_COLLECTION"
+      ],
+      "case_id": "06db6396",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "knowledge-update",
+      "question_sha256": "7c190c5b263d00b650b23ae0500325d013ef5d645c240cf7865eb6e232092ab8",
+      "reference_answer_sha256": "d10a4bc9e0c1fa4e8f3d7ce2512b8756e47ca5fa451f373c39a1431bb88db49f"
+    },
+    {
+      "capability_shapes": [
+        "REPEATED_MENTION",
+        "CROSS_SESSION_AGGREGATION",
+        "UPDATE_COLLECTION",
+        "CONTINUATION"
+      ],
+      "case_id": "07741c45",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "knowledge-update",
+      "question_sha256": "97c94223e6573a98ef9a9b0172e3ae7c05c4bed0dfb5ceb2ae99b61d9be544e3",
+      "reference_answer_sha256": "5263973feaccc8e1736def82f1ed35cdd4764ffb86e515a6fe1d75e3c9fd58ad"
+    },
+    {
+      "capability_shapes": [
+        "REPEATED_MENTION",
+        "CROSS_SESSION_AGGREGATION"
+      ],
+      "case_id": "195a1a1b",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-preference",
+      "question_sha256": "336f201bc10384033c4a89303c085873d7d33359200f10f4b24bfe19168c17cd",
+      "reference_answer_sha256": "9714cb365b811e8c1ca3da4002f56e1a9477bd8a6ba467bbcf5924140d967dd3"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "REPEATED_MENTION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "1c0ddc50",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "single-session-preference",
+      "question_sha256": "ff0b2086306874f915eab69edd8919c1e9ede25468f1a0996ecb2927ed347127",
+      "reference_answer_sha256": "40125f83359d0ce1a14fec46ab07fa949f7ed0a9f5fb7db45a811e3f033f706b"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "UPDATE_COLLECTION",
+        "CONTINUATION"
+      ],
+      "case_id": "27016adc",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "multi-session",
+      "question_sha256": "5250e6b465a9d447933d27d5e38cecac52f0291bee58a7387dc4534416598f1a",
+      "reference_answer_sha256": "fdab7ebff00ad0dd939f86573d7d3d46a4f2134cb6f00201c4c592fa39c7cec2"
+    },
+    {
+      "capability_shapes": [
+        "COUNTING",
+        "REPEATED_MENTION"
+      ],
+      "case_id": "29f2956b",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-user",
+      "question_sha256": "aab8e724b7b7c6ca6213cd6d044b28529219c0921f8adb6f22ba5fcff37358d7",
+      "reference_answer_sha256": "6840b60c54530aefbfe27fae9952f41a9d80b3b7984e7e148970093073ce2b56"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "REPEATED_MENTION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "37f165cf",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "multi-session",
+      "question_sha256": "32f6faf2662d34f72b451077abd37d0b51d5af71511151db674011f7c4b7fb0f",
+      "reference_answer_sha256": "d58ed30631c7001cac18717356a77d86c0bbf8809cfa2c94e2f4c208ee05466f"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CONTINUATION"
+      ],
+      "case_id": "51a45a95",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "single-session-user",
+      "question_sha256": "112b526dae1b7af41885d67b6389d375b1f7a3198058590cf1375c38b4d0303b",
+      "reference_answer_sha256": "4eabc67ba8776d2fd8b77311d7d28e650af79aa5f5e45ff5a34329244c3c072c"
+    },
+    {
+      "capability_shapes": [
+        "REPEATED_MENTION",
+        "CROSS_SESSION_AGGREGATION"
+      ],
+      "case_id": "54026fce",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-preference",
+      "question_sha256": "b6b44e1c50f6ecce16d7f72fd1fcf5f0168891e972223539b3bde4d272c43690",
+      "reference_answer_sha256": "b9ae8306a0b71fa9e45657d12657c5ff0d5e9f3d62c868d4191b1d8da4ee5679"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "REPEATED_MENTION"
+      ],
+      "case_id": "6222b6eb",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-assistant",
+      "question_sha256": "25540a6b0de5a19504246467cb112adf54fa90f22dddfa32c1095c82905466bb",
+      "reference_answer_sha256": "4891baaef441a87cccc28c7646af3b87f6e98b4ee44b1d122e66b0f1dd66f784"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING"
+      ],
+      "case_id": "6b168ec8",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-user",
+      "question_sha256": "ec50520a96e6064a722fac9c404bfcc7b1741003768ec2c54ab46cca18996196",
+      "reference_answer_sha256": "097a4dfb7f430ff3e44aa2399549a038c1f29465540d1e18701e8b5cd3fd2ccb"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "REPEATED_MENTION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "720133ac",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "multi-session",
+      "question_sha256": "3264dc8d39233b1d1fc5f60eb0423e2fea6ffde43c186895235f2a80538cd1e0",
+      "reference_answer_sha256": "8c275d4e17515fc8997080a033cbcfa73dca0265d0ac09fb7020845db59200b5"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "REPEATED_MENTION"
+      ],
+      "case_id": "ac031881",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-assistant",
+      "question_sha256": "4c50d6d5f64a39fa3a3c1d5c4a27a685230790ab0e6e10655fcc7334c6e49307",
+      "reference_answer_sha256": "b9ea9fe5f292db7dc8bf83570039349c72bc56eaa85cd882f1e170f03590e237"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "REPEATED_MENTION",
+        "CROSS_SESSION_AGGREGATION",
+        "UPDATE_COLLECTION"
+      ],
+      "case_id": "b6019101",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "knowledge-update",
+      "question_sha256": "e10417e3d2aeaf18c91d1fe57c4e83acab1bc7e217142e555f7ea3950822ddb4",
+      "reference_answer_sha256": "d10a4bc9e0c1fa4e8f3d7ce2512b8756e47ca5fa451f373c39a1431bb88db49f"
+    },
+    {
+      "capability_shapes": [
+        "REPEATED_MENTION",
+        "CROSS_SESSION_AGGREGATION"
+      ],
+      "case_id": "c4f10528",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-assistant",
+      "question_sha256": "461c2f59b743faa2f8cfb9dc8fb27c81b22f8c106ce877186a2e7d91e4be29fa",
+      "reference_answer_sha256": "5c4122f989ea2c432c9b43747997d078aea69ae11695036db3dde0f24b2501c7"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "REPEATED_MENTION"
+      ],
+      "case_id": "c8c3f81d",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-user",
+      "question_sha256": "df8a5bc967ba533ef01510e5be6288a78430c4eb9c162e84fc63936beab3a20e",
+      "reference_answer_sha256": "0bf096f9a2416fda1aabdf4c8ec83315cf6e33a07ad6078d952e377c90e98b0e"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "CROSS_SESSION_AGGREGATION",
+        "UPDATE_COLLECTION"
+      ],
+      "case_id": "cf22b7bf",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "knowledge-update",
+      "question_sha256": "808bcbb826963390ea2e8162cacdb0471be116bba9fe90b07240f072266f8362",
+      "reference_answer_sha256": "8ed85ba5dd6f782ad56e9fd93cdd75a79a621f64c819ede2d54ca7514bba58b2"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "REPEATED_MENTION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "d01c6aa8",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "temporal-reasoning",
+      "question_sha256": "1e57319e201c70a20b8b341e7b7ef5f65be9e4c95424c556dc0985ae61da7a60",
+      "reference_answer_sha256": "a04908f573e7a1c9b9f62563bb9a5188334fd250d76875e845de3f24c895eb4b"
+    },
+    {
+      "capability_shapes": [
+        "REPEATED_MENTION",
+        "CROSS_SESSION_AGGREGATION"
+      ],
+      "case_id": "eaca4986",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": false
+      },
+      "query_type": "single-session-assistant",
+      "question_sha256": "a4787755f7de4fc989c3b1004147e5498c9e7de38db58888d190a3c08b6260ec",
+      "reference_answer_sha256": "920b3339d4ac8ae72aac0269e85957cfa97e55ad550b61668acc67b4a2303367"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "REPEATED_MENTION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "UPDATE_COLLECTION",
+        "CONTINUATION"
+      ],
+      "case_id": "gpt4_194be4b3",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "multi-session",
+      "question_sha256": "d3f5236ad4768401073b095e726f71b1096a05a2e3b146bbe3f58a97cd65b0cf",
+      "reference_answer_sha256": "841a0ad7bf760dbc7fd20b011c7fb3b9931d4052b0ed136e4ba8bbe30cc03463"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "REPEATED_MENTION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "gpt4_6ed717ea",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "temporal-reasoning",
+      "question_sha256": "255ff3033a628dc0944f1855ca486fa934743567d2b629e6da4c55e20559b1da",
+      "reference_answer_sha256": "a91db3f6c1b1125d78dbbf4ea0053c30338b81731463ad1494bf30abcf912856"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "REPEATED_MENTION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "UPDATE_COLLECTION",
+        "CONTINUATION"
+      ],
+      "case_id": "gpt4_93159ced",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "temporal-reasoning",
+      "question_sha256": "9d9283ddb33d89bef4303ea8ba1b9dbe67ff97b07e0b885d422f215d8b8b774a",
+      "reference_answer_sha256": "6b68c5ea87fc12d7e2fb887ad27c20124a6380dda7f13d51b3a99a2b70448582"
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "REPEATED_MENTION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "gpt4_fe651585",
+      "opportunity": {
+        "official_frontier_required": true,
+        "residual_query": "Return another distinct historical instance relevant to the original question that has not already been shown.",
+        "structural": true
+      },
+      "query_type": "temporal-reasoning",
+      "question_sha256": "5cb7b75c1bb1f3af1f62769b8c6705412819a6a56f22ecfe46f9d56027e605e0",
+      "reference_answer_sha256": "4510a172d93e13e356d6e27f33ba9b8d96a4fc5a3ac4820eff2c801ef4d97abb"
+    }
+  ],
+  "classification": "OPENED_DEVELOPMENT_ONLY / LABEL_FREE_EXECUTION_MEMBERSHIP",
+  "dataset_manifest_sha256": "7a474d32091ef67be68750beb3737df2ffce647346e5ca0f64684bf95fed1d02",
+  "dataset_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+  "formal_cases_scored": 0,
+  "formal_files_accessed": true,
+  "instance_identity_fields_present": false,
+  "schema_version": "milai-product10-opened-dev24-membership-v0.1",
+  "selection_procedure": "fixed greedy seven-shape coverage over the pre-existing outcome-blind structural 128 development pool; answerability and pre-Product reference topology only; prior Context24 membership is a tie-break preference",
+  "source_label_seal_sha256": "629f89ee7db6a1967cf90f953de2f53302ac196737aecd3a7394a7a1f59fb266"
+}

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MiLAi Local Console</title>
+    <link rel="stylesheet" href="/static/milai.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="status">Schema 0.1.x EXPERIMENTAL · Implementation CANDIDATE</p>
+        <h1>MiLAi Local Console</h1>
+        <p>NO-GO FOR SCHEMA FREEZE · 所有记忆答案必须经过 Canonical Gate。</p>
+        <div class="badges" aria-label="runtime safety status">
+          <span id="data-mode-badge">Data mode: 未连接</span>
+          <span id="profile-badge">Agent profile: 未连接</span>
+          <span id="crypto-badge">Crypto gate: 未连接</span>
+          <span id="remote-badge">Remote: DISABLED</span>
+        </div>
+      </header>
+
+      <section>
+        <h2>连接</h2>
+        <label>本地 API Token <input id="token" type="password" autocomplete="off"></label>
+        <div class="actions">
+          <button id="connect">检查 Runtime / Agent 能力</button>
+          <button id="copy-mcp" class="secondary" disabled>复制无 secret 的 MCP stdio 配置</button>
+        </div>
+        <pre id="connection-status">尚未连接；token 只保留在当前浏览器页面，不写入配置。</pre>
+      </section>
+
+      <section>
+        <h2>受控 Evidence Capture</h2>
+        <p id="data-gate-message">连接后按 Runtime 的 server-side data mode 启用允许的数据类型。</p>
+        <label>数据分类
+          <select id="data-classification">
+            <option value="SYNTHETIC">SYNTHETIC</option>
+            <option value="DEIDENTIFIED">DEIDENTIFIED</option>
+            <option value="PERSONAL">PERSONAL（需 Local Private Beta gate）</option>
+          </select>
+        </label>
+        <label>Subject <input id="capture-subject" value="synthetic-local-fixture"></label>
+        <label>Source ref <input id="capture-source" value="local-ui://synthetic-observation"></label>
+        <label>Observation <textarea id="capture-content" rows="3"></textarea></label>
+        <label><input id="capture-confirmed" type="checkbox"> 我确认这是所选分类的真实 user/tool observation，不是模型输出或完整 Prompt</label>
+        <button id="capture-evidence" disabled>Capture 为非 canonical Evidence</button>
+      </section>
+
+      <section>
+        <h2>Traceable Chat</h2>
+        <label>Active Goal <input id="goal" value="安全回答当前问题"></label>
+        <label>Query <textarea id="query" rows="3"></textarea></label>
+        <label>Scope JSON <input id="scope" value='{"project_ids":["milai"]}'></label>
+        <label>Authority
+          <select id="authority">
+            <option>INFORMATIONAL</option>
+            <option>ACTION_SAFE</option>
+          </select>
+        </label>
+        <label><input id="action-sensitive" type="checkbox"> Action-sensitive</label>
+        <label><input id="live-confirmation" type="checkbox"> 本次实时确认 CONFIRM_ACTION</label>
+        <button id="chat">查询并生成受 Gate 约束的回答</button>
+      </section>
+
+      <section>
+        <h2>Trace</h2>
+        <label>RetrievalTrace ID <input id="trace-id"></label>
+        <button id="trace">查看 Trace</button>
+      </section>
+
+      <section>
+        <h2>Claim / Evidence / OpenIssue / Trace 联合查看</h2>
+        <label>Claim ID <input id="inspect-claim-id"></label>
+        <label>Evidence ID <input id="inspect-evidence-id"></label>
+        <label>OpenIssue ID <input id="inspect-issue-id"></label>
+        <label>RetrievalTrace ID <input id="inspect-trace-id"></label>
+        <button id="inspect" class="secondary">读取当前授权下的联合状态</button>
+      </section>
+
+      <section>
+        <h2>Correct → Proposal</h2>
+        <p>纠正不会直接写 Claim；这里只创建 OperationProposal。</p>
+        <label>Proposal JSON <textarea id="proposal" rows="8">{}</textarea></label>
+        <button id="correct">创建纠正 Proposal</button>
+        <h3>Pending Proposal Inbox</h3>
+        <button id="load-proposals" class="secondary">刷新 pending inbox</button>
+        <pre id="proposal-inbox">尚未加载。</pre>
+      </section>
+
+      <section>
+        <h2>Review</h2>
+        <p>Review 只应使用独立 reviewer token；普通 reader/submitter 会被 server 端拒绝。</p>
+        <label>Proposal ID <input id="proposal-id"></label>
+        <label>Decision
+          <select id="decision"><option>APPROVE</option><option>REJECT</option></select>
+        </label>
+        <button id="review">提交显式 Review</button>
+      </section>
+
+      <section>
+        <h2>Episode Capture / Settlement</h2>
+        <p>Episode 只保存可回放引用；Settlement 不会把残余 Proposal 自动写成 Claim。</p>
+        <label>Subject <input id="episode-subject" value="local-session"></label>
+        <label>Evidence IDs（逗号分隔） <input id="episode-evidence-ids"></label>
+        <label>ChatTurn IDs（逗号分隔） <input id="episode-chat-ids"></label>
+        <label>ContextCapsule IDs（逗号分隔） <input id="episode-context-ids"></label>
+        <button id="capture-episode">Capture Episode</button>
+        <label>Episode ID <input id="episode-id"></label>
+        <label>Expected revision <input id="episode-revision" type="number" min="1" value="1"></label>
+        <label>Residual Proposal IDs（最多 3 个） <input id="episode-proposal-ids"></label>
+        <label>OpenIssue IDs <input id="episode-issue-ids"></label>
+        <button id="settle-episode">确认并 Settlement</button>
+      </section>
+
+      <section>
+        <h2>Revoke Evidence</h2>
+        <p>状态分层：logical revoke → canonical block → derived purge → primary erase → backup expiry。前两项必须立即 fail closed；物理步骤异步对账。</p>
+        <label>Evidence ID <input id="evidence-id"></label>
+        <button id="revoke" class="danger">确认并撤销 Evidence</button>
+      </section>
+
+      <section>
+        <h2>Result</h2>
+        <pre id="result" aria-live="polite"></pre>
+      </section>
+    </main>
+    <script src="/static/milai.js" defer></script>
+  </body>
+</html>

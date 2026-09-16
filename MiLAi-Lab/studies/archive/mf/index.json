@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "category": "mf",
+  "snapshot_manifest": "../lifecycle/legacy_snapshot/manifest.json",
+  "files": [
+    {
+      "source": "MiLAi_MF-01-MF-06_Memory_Formation_and_Representation_MASTER.md",
+      "destination": "MiLAi/MiLAi_MF-01-MF-06_Memory_Formation_and_Representation_MASTER.md",
+      "sha256": "a765518c2d01c16dc08bf61f8748678da143508751518b817f891dbf3c0b6838"
+    },
+    {
+      "source": "MiLAi_MF-01-MF-06_Memory_Formation_and_Representation_MASTER_20260830_133116.md",
+      "destination": "MiLAi/MiLAi_MF-01-MF-06_Memory_Formation_and_Representation_MASTER_20260830_133116.md",
+      "sha256": "cb6e494bb0aaf82f48336ccfaa886a0873a17a31f14c9c0487c5e3f2d54d7496"
+    },
+    {
+      "source": "MiLAi_MF-01-MF-06_Memory_Formation_and_Representation_MASTER_20260830_144542.md",
+      "destination": "MiLAi/MiLAi_MF-01-MF-06_Memory_Formation_and_Representation_MASTER_20260830_144542.md",
+      "sha256": "e41891efc688ec14bf73ded74e92bfa094bab8d5a1af611b70e72980278728a8"
+    },
+    {
+      "source": "MiLAi_MF-01_Formation_First-Loss_Audit_GOALS.md",
+      "destination": "MiLAi/MiLAi_MF-01_Formation_First-Loss_Audit_GOALS.md",
+      "sha256": "e7055859131583cd6b2bab7b7f80299dd9fb7ac0a0ce47b18c71b2f5691e2b12"
+    },
+    {
+      "source": "MiLAi_MF-01_Formation_First-Loss_Audit_GOALS_20260830_133116.md",
+      "destination": "MiLAi/MiLAi_MF-01_Formation_First-Loss_Audit_GOALS_20260830_133116.md",
+      "sha256": "4d3808ed5cc02701e5e5ec3c44a8d7f6ca700411e3309cd176f9dde28ffe39af"
+    },
+    {
+      "source": "MiLAi_MF-01_Formation_First-Loss_Audit_GOALS_20260830_144542.md",
+      "destination": "MiLAi/MiLAi_MF-01_Formation_First-Loss_Audit_GOALS_20260830_144542.md",
+      "sha256": "e7055859131583cd6b2bab7b7f80299dd9fb7ac0a0ce47b18c71b2f5691e2b12"
+    },
+    {
+      "source": "MiLAi_MF-02_SemanticEpisode四臂表示比较与独立泛化_GOALS.md",
+      "destination": "MiLAi/MiLAi_MF-02_SemanticEpisode四臂表示比较与独立泛化_GOALS.md",
+      "sha256": "050e29123cad79c038413ea84fe8198a049e4688d94d71448503e800cbb34ab6"
+    },
+    {
+      "source": "MiLAi_MF-02_SemanticEpisode四臂表示比较与独立泛化_GOALS_20260830_200355.md",
+      "destination": "MiLAi/MiLAi_MF-02_SemanticEpisode四臂表示比较与独立泛化_GOALS_20260830_200355.md",
+      "sha256": "6c6fd96497333fd729e5539c83173293963584f0648288312ce1957edd2a62a1"
+    },
+    {
+      "source": "evals/mf01/__init__.py",
+      "destination": "MiLAi/evals/mf01/__init__.py",
+      "sha256": "6ae870e5c6cdb294078d317cc678c4dfeb7db797827b7002124305ac584fa6ae"
+    },
+    {
+      "source": "evals/mf01/first_loss.py",
+      "destination": "MiLAi/evals/mf01/first_loss.py",
+      "sha256": "0daeb055f1d780f5bd86e83c5b50e1f4e1272856d34b1805850b2d48577d5beb"
+    },
+    {
+      "source": "evals/mf01/fixtures/formation-first-loss-label-supplement.v0.1.json",
+      "destination": "MiLAi/evals/mf01/fixtures/formation-first-loss-label-supplement.v0.1.json",
+      "sha256": "5dcb34f5c06ddc351dc1fe9364f97670f076901e54f3d955b3f8db973d849c24"
+    },
+    {
+      "source": "evals/mf01/labels.py",
+      "destination": "MiLAi/evals/mf01/labels.py",
+      "sha256": "f535618686c92fcbd6e08ec41ae8ce4df63933cd7bc04e1e50182950f8731dec"
+    },
+    {
+      "source": "evals/mf02/__init__.py",
+      "destination": "MiLAi/evals/mf02/__init__.py",
+      "sha256": "9a91ca151aa9b81bfc9a66d6efcb9af06d557327653677adc51db69faacff087"
+    },
+    {
+      "source": "evals/mf02/fixtures/repair-dev.v0.1.json",
+      "destination": "MiLAi/evals/mf02/fixtures/repair-dev.v0.1.json",
+      "sha256": "164b8b0596724deb8e53ec8325020dcdbf19c98db22311bbf6cc14fca7d749b3"
+    },
+    {
+      "source": "evals/mf02/fixtures/sealed-validation.v0.1.json",
+      "destination": "MiLAi/evals/mf02/fixtures/sealed-validation.v0.1.json",
+      "sha256": "e5240e5f2c81e3b91bcc5aec124d07f51872825f1a0597b26570a4e010e90e1f"
+    },
+    {
+      "source": "evals/mf02/four_arm_effect.py",
+      "destination": "MiLAi/evals/mf02/four_arm_effect.py",
+      "sha256": "cfdeac156b55ca1bfa867d29f64ea9d314062229af26f3f5b52aa4ab550adbdc"
+    },
+    {
+      "source": "evals/mf03/formation_effect.py",
+      "destination": "MiLAi/evals/mf03/formation_effect.py",
+      "sha256": "9507fb650eb53f9d5ffe6db6d808333430f98b37068a5ca1ead8be58af127713"
+    },
+    {
+      "source": "evals/mf04/__init__.py",
+      "destination": "MiLAi/evals/mf04/__init__.py",
+      "sha256": "54d8d2b3205533025047823231170e90f95c5200d1b181447890756e2d8f4499"
+    },
+    {
+      "source": "evals/mf04/state_change_effect.py",
+      "destination": "MiLAi/evals/mf04/state_change_effect.py",
+      "sha256": "bcbc4631a96344978a47666c377db472c39db2dd6c2954c5657a259f18008710"
+    },
+    {
+      "source": "evals/mf06/__init__.py",
+      "destination": "MiLAi/evals/mf06/__init__.py",
+      "sha256": "0d061de9496cf4e9501657201a05b4c9f3d668a2229ce4a939305b4f6fc41318"
+    },
+    {
+      "source": "evals/mf06/factorial_diagnostic.py",
+      "destination": "MiLAi/evals/mf06/factorial_diagnostic.py",
+      "sha256": "95cb56d8eb54e7a65fb54ea730aeef01a7d9c7bced4450ced59db38a79ebb22e"
+    },
+    {
+      "source": "scripts/freeze_mf01_s0_s1.py",
+      "destination": "MiLAi/scripts/freeze_mf01_s0_s1.py",
+      "sha256": "7bf5ad730bf706350684dd7cd2c1d38234ac798d8a634dcec10163fd3e89dbe4"
+    },
+    {
+      "source": "scripts/run_mf01.py",
+      "destination": "MiLAi/scripts/run_mf01.py",
+      "sha256": "7d68b8d17353e2199a6782e7fe4a8f400587e82b4df12b61ff9ee757e5e10d1e"
+    },
+    {
+      "source": "scripts/run_mf02_semantic_episode.py",
+      "destination": "MiLAi/scripts/run_mf02_semantic_episode.py",
+      "sha256": "1190a5b02665595c432a882409b880dd4fefc9136b35017f76cba417d6ea5466"
+    },
+    {
+      "source": "scripts/run_mf03_formation_effect.py",
+      "destination": "MiLAi/scripts/run_mf03_formation_effect.py",
+      "sha256": "90eb6c8758c7f0e0f4dfcf56d115c7f935fc0059d8b625e42e00efc284f9b91d"
+    },
+    {
+      "source": "scripts/run_mf04_state_change_effect.py",
+      "destination": "MiLAi/scripts/run_mf04_state_change_effect.py",
+      "sha256": "87c4bc8c88b14d1856118707e9fdf7c9492bb185e5ac2868229281b7e25c2e87"
+    },
+    {
+      "source": "scripts/run_mf06_factorial_diagnostic.py",
+      "destination": "MiLAi/scripts/run_mf06_factorial_diagnostic.py",
+      "sha256": "51d11ca8caa55b4681a965d24250a5ca3bf3584347153f8a9fbb7eae4bc58c97"
+    },
+    {
+      "source": "scripts/seal_mf02_labels.py",
+      "destination": "MiLAi/scripts/seal_mf02_labels.py",
+      "sha256": "48be94a778089995aa1ec9ec8cb9c6a19cd92e4166e6b7c658a3911a7462231b"
+    },
+    {
+      "source": "tests/test_mf01_first_loss.py",
+      "destination": "MiLAi/tests/test_mf01_first_loss.py",
+      "sha256": "a747d80e4719849ad3ac9106e90555b06d6079a8b15671983bf8454c62fef29e"
+    },
+    {
+      "source": "tests/test_mf01_s0_s1_design.py",
+      "destination": "MiLAi/tests/test_mf01_s0_s1_design.py",
+      "sha256": "4e3d5bc382d223f411cce0230e1b9d527ee868d7fa4e280c7303e6d32e816023"
+    },
+    {
+      "source": "tests/test_mf02_artifacts.py",
+      "destination": "MiLAi/tests/test_mf02_artifacts.py",
+      "sha256": "5a4b3b88b1c0a4424045268f49f1c366297b00f8ff71eea61e1a0765f02b22d8"
+    },
+    {
+      "source": "tests/test_mf02_four_arm_effect.py",
+      "destination": "MiLAi/tests/test_mf02_four_arm_effect.py",
+      "sha256": "7588926b29eb84abeee5cb149635300b75b5b6a81baeae8038f98a26d3cdfe43"
+    },
+    {
+      "source": "tests/test_mf03_formation_effect.py",
+      "destination": "MiLAi/tests/test_mf03_formation_effect.py",
+      "sha256": "09557903e5234ff21403bf6657be3f71b34238e4cc6f8e2393376fd212357fcd"
+    },
+    {
+      "source": "tests/test_mf04_state_change_effect.py",
+      "destination": "MiLAi/tests/test_mf04_state_change_effect.py",
+      "sha256": "3fde8580a363ad1f0471bfb68b3ef3687932c662bab171779a4bf2c2dea23464"
+    },
+    {
+      "source": "tests/test_mf06_factorial_diagnostic.py",
+      "destination": "MiLAi/tests/test_mf06_factorial_diagnostic.py",
+      "sha256": "7368126bc950075918a7f84cdd7e630f646f4ffbe0721e98ca8282901c3ac2ae"
+    }
+  ]
+}

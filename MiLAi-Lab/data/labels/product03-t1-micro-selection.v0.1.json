@@ -1,0 +1,16 @@
+{
+  "schema_version": "milai-product03-t1-micro-selection-v0.1",
+  "source_run": "product02-longmemeval-128-20260901T235621Z",
+  "opened_development_only": true,
+  "formal_holdout_consumed": false,
+  "cases": [
+    {"case_id": "ad7109d1", "family": "F1_DISCOVERY", "query_type": "single-session-user"},
+    {"case_id": "95bcc1c8", "family": "F1_DISCOVERY", "query_type": "single-session-user"},
+    {"case_id": "195a1a1b", "family": "F1_DISCOVERY", "query_type": "single-session-preference"},
+    {"case_id": "0a995998", "family": "F1_DISCOVERY", "query_type": "multi-session"},
+    {"case_id": "gpt4_93159ced", "family": "F1_DISCOVERY", "query_type": "temporal-reasoning"},
+    {"case_id": "gpt4_e072b769", "family": "F1_DISCOVERY", "query_type": "temporal-reasoning"},
+    {"case_id": "c4ea545c", "family": "F1_DISCOVERY", "query_type": "knowledge-update"},
+    {"case_id": "71a3fd6b", "family": "F1_DISCOVERY", "query_type": "single-session-assistant"}
+  ]
+}

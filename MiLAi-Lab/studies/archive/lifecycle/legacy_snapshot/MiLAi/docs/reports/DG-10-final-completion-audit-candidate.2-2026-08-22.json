@@ -1,0 +1,188 @@
+{
+  "bound_inputs": {
+    "claim_matrix": {
+      "path": "docs/contracts/DG-10-claim-matrix.yaml",
+      "sha256": "77d3252b06dde83f85cdfa8a321e85dd7a96fbfa821a740dd377860c0cc89665"
+    },
+    "contract_validation": {
+      "path": "docs/reports/DG-10-contracts-current-state-candidate.3.3-2026-08-22.json",
+      "sha256": "3a836e2e19ac20e4a9f70c0c96486517d079a1843167798516c10f82b2b761ec"
+    },
+    "current_byte_inventory": {
+      "path": "docs/reports/DG-10-current-byte-inventory-candidate.2.13-2026-08-22.json",
+      "sha256": "e8e762bea39e217a71225e10a011b90f857de521dac3f2db2b4ef1c3d1def0ff"
+    },
+    "failed_verification_attempt": {
+      "path": "docs/reports/DG-10-final-verification-failed-attempt-candidate.1-2026-08-22.json",
+      "sha256": "b642a66ee43e78e192b810d8929e32ecb369d19351efe6a85800db050ea3c7ce"
+    },
+    "final_quality_state": {
+      "path": "docs/reports/DG-10-final-quality-state-candidate.1-2026-08-22.json",
+      "sha256": "a05cbc6f192968dea19003f01ff6dce690eb8a1988e76266d39103d2caa5d6af"
+    },
+    "frozen_bundle_receipt": {
+      "path": "docs/reports/DG-10-frozen-review-bundle-candidate.1-2026-08-22.json",
+      "sha256": "9434193edc61c01aacf6b0e50840f18fb9047b04e9e997c9dac73131111dc9ae"
+    },
+    "sandbox_sentinel": {
+      "path": "docs/reports/DG-10-sol-sandbox-sentinel-receipt-candidate.1-2026-08-22.json",
+      "sha256": "dff330892b2983873fec1166249dfb8aff20929df2380c6310d4611270b89de9"
+    },
+    "sol_disposition": {
+      "path": "docs/reviews/DG-10-sol-final-audit-disposition-candidate.1-2026-08-22.json",
+      "sha256": "d73147e8df49ca27056a878a3ac9bcf0bdcb49668018146abb4ce2a065dc523f"
+    },
+    "sol_import_receipt": {
+      "path": "docs/reviews/DG-10-sol-final-audit-receipt-candidate.1-2026-08-22.json",
+      "sha256": "52304ba0e3fe79a2e08f77db1269ab6e2759c4b6110b5d193d5182c2e1b87049"
+    },
+    "tier2_package": {
+      "path": "docs/reports/DG-10-tier2-blinded-audit-package-candidate.1-2026-08-22.json",
+      "sha256": "769a1bc87220ddf78de252aab61907e1d4f588b419e724c087700ed26860a014"
+    }
+  },
+  "candidate": "candidate.2",
+  "current_byte_inventory": {
+    "archive_member_count": 2155,
+    "canonical_entries_sha256": "1d087811ce722c1279010f6fd186a379f862487c3cd29d26ad86636bbb78981e",
+    "entry_count": 553,
+    "secret_matches": 0,
+    "secret_value_count": 17,
+    "unsafe_archives": 0
+  },
+  "date": "2026-08-22",
+  "decision": {
+    "aggregate_claim_allowed": false,
+    "controlled_acceptance_pass": false,
+    "execute_release_runbook": false,
+    "human_approval": false,
+    "promote_candidate": false,
+    "result": "NO_GO",
+    "run_full_benchmark_test": false
+  },
+  "external_or_new_candidate_requirements": [
+    "Two independent Tier-2 human annotators and a conflict adjudicator when needed.",
+    "A new candidate that remediates DG10-SOL-001 and DG10-SOL-002, followed by independent re-review.",
+    "A reproducible BFCL worker environment matching the frozen dependency closure or a newly frozen candidate.",
+    "Upstream Worker redistribution authorization and separately authorized OE-F06 external-provider work if those lanes resume."
+  ],
+  "gate_state": {
+    "BMG-02": "NO_GO_LONGMEMEVAL_MILAI_BELOW_NAIVE_RAG",
+    "BMG-03": "NO_GO_BFCL_BELOW_THRESHOLDS",
+    "BMG-04": "NO_GO_CHARACTERIZATION_ONLY",
+    "BMG-05": "FROZEN_CONTRACT_COMPLETE_OUTCOME_BELOW_TARGET",
+    "CRG-00": "PASS_FROZEN_BUNDLE_AND_SANDBOX_SENTINEL",
+    "CRG-01": "REVIEW_IMPORTED_AND_FINDINGS_REPLAYED",
+    "CRG-02": "NO_GO_TWO_OPEN_P1"
+  },
+  "provider_accounting": {
+    "codex_formal_review_cli_invocations": 1,
+    "codex_formal_review_cost": "UNAVAILABLE",
+    "external_billing_provider_cost": 0,
+    "external_billing_provider_requests": 0,
+    "self_hosted_compute_cost": "UNAVAILABLE_NOT_ZERO",
+    "tier3_early_diagnostic_calls": "UNKNOWN",
+    "tier3_known_completed_native_calls": 44
+  },
+  "quality": {
+    "full_benchmark_test": "DENIED_NOT_RUN",
+    "outcome": "BELOW_TARGET",
+    "test_access_authorized": false,
+    "test_labels_or_outputs_opened": false,
+    "tier2_humans_completed": 0,
+    "tier2_humans_required": 2
+  },
+  "resource_cleanup": {
+    "dg10_named_container_count": 0,
+    "dg10_named_containers": [],
+    "docker_check": "PASS_NO_DG10_NAMED_CONTAINERS",
+    "review_mount_count": 0,
+    "review_mount_targets": [],
+    "shared_containers_mutated": false,
+    "sol_review_process_count": 0,
+    "sol_review_process_ids": []
+  },
+  "review": {
+    "acceptance_authorized": false,
+    "billing_cost": "UNAVAILABLE",
+    "decision": "REVISE_NO_GO_EVIDENCE",
+    "finding_count": 14,
+    "model": "gpt-5.6-sol",
+    "open_p0_count": 0,
+    "open_p1_count": 2,
+    "provider_thread_count": 1,
+    "reasoning_effort": "max"
+  },
+  "schema": "milai.dg10.final-completion-audit.v1",
+  "stage_state": {
+    "DG10-L1": "AUTHOR_CANDIDATE_NOT_INDEPENDENTLY_ACCEPTED",
+    "DG10-L2": "REVIEW_REQUIRED",
+    "DG10-L3": "REVIEW_REQUIRED",
+    "DG10-L4": "REVISE_BELOW_TARGET",
+    "DG10-L5": "REVISE_TWO_OPEN_P1_NOT_INDEPENDENTLY_ACCEPTED"
+  },
+  "status": "GOAL_EXECUTION_COMPLETE_NO_GO_RELEASE_STOPPED",
+  "verification": {
+    "root_pytest_full": {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/runtime/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests"
+      ],
+      "exit_code": 1,
+      "failed": 3,
+      "failed_file": "tests/test_dg10_bfcl_multiturn_contract.py",
+      "failure_reason": "CURRENT_RUNTIME_VENV_FREEZE_DIFFERS_FROM_FROZEN_WORKER_CLOSURE",
+      "log_path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+      "log_sha256": "f55c86414496d84744edaa20efe4a9242dbb68591e6b5c1b02e6f773f3582733",
+      "log_size": 8081,
+      "passed": 125,
+      "total": 128
+    },
+    "root_pytest_unaffected": {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/runtime/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests",
+        "--ignore=tests/test_dg10_bfcl_multiturn_contract.py"
+      ],
+      "exit_code": 0,
+      "failed": 0,
+      "log_path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+      "log_sha256": "eae732a0bb0ed95dd2ccf7314b8bf1104c255a7cc7d9fababc9be9b3007619ea",
+      "log_size": 374,
+      "passed": 125,
+      "total": 125
+    },
+    "root_ruff": {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/runtime/.venv/bin/ruff",
+        "check",
+        "scripts",
+        "tests"
+      ],
+      "exit_code": 0,
+      "log_path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+      "log_sha256": "bf95c7db6cb9b9a018cc71b9d3fd113feab80221bffeb137ea1e835082f9b59a",
+      "log_size": 153,
+      "status": "PASS"
+    },
+    "status": "NO_GO_THREE_FROZEN_WORKER_CLOSURE_TESTS_FAIL"
+  },
+  "worker_dependency_closure": {
+    "current_environment_freeze_sha256": "a916676007e9c491acb48bb00073037d2fd73f29336ef85f5d9bf2e2bdb7c66d",
+    "environment_matches_historical": false,
+    "historical_tree_sha256": "376efeae63abdfd9378ce98ddb38509387ba0237c82e8e70429ddea11089079b",
+    "historical_worker_freeze_sha256": "e21b21a1df79293faa2dcf1bca352a82d44f5910767f22b5e34d0b847661ec39",
+    "package": "mpmath",
+    "status": "NO_GO_CURRENT_WORKER_ENVIRONMENT_CLOSURE_DRIFT",
+    "tree_file_count": 87,
+    "tree_matches_historical": true,
+    "tree_sha256": "376efeae63abdfd9378ce98ddb38509387ba0237c82e8e70429ddea11089079b",
+    "version": "1.3.0"
+  }
+}

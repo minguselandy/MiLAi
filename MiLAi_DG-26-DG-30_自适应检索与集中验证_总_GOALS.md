@@ -1,0 +1,380 @@
+---
+document_id: DG-26-30-MASTER
+version: "1.3"
+status: SUPERSEDED_AS_GLOBAL_EXECUTION_NAVIGATION
+retention_status: RETAINED_AS_PROGRAM_C_HISTORY
+execution_order_authority: MILA-ML-MASTER
+---
+
+# MiLAi DG-26～DG-30：自适应检索与集中验证（Program C 历史方法记录）
+
+> Goal ID：`DG-26-30-MASTER`
+> 文档版本：1.3 / SUPERSEDED AS GLOBAL NAVIGATION
+> 日期：2026-08-30（Asia/Shanghai）
+> 方法工作名：Adaptive Retrieval under Centralized Decision Boundary
+> 当前执行权威：[MiLAi Memory Lifecycle 总 Goal](./MiLAi_Memory_Lifecycle_总_GOALS.md)
+> 项目级导航：[MiLAi Memory Lifecycle Master](./MiLAi_Memory_Lifecycle_项目级架构与主程序_MASTER.md)
+> 规范处置：本文件只保留方法演化与机器事实；旧 adaptive sequencing 不再授权执行
+> 总原则：**宽检索、软解释、严提交**
+> Formal holdout：UNTOUCHED / NOT AUTHORIZED
+> ExperimentalFeatureFlagsDefault：OFF
+
+---
+
+# 1. 文档角色
+
+本文件只保留历史设计、机器事实和 DG-27～DG-30 局部设计来源，不再作为执行导航。DG-26～DG-30 已降格为 Program C 子计划；当前执行入口只由 `MILA-ML-MASTER` 决定。
+
+```text
+保留当时冻结的实验事实
+保留当时提出的方法假设
+保留 DG-27～DG-30 局部设计来源
+不再授权旧 sequencing、模型化 DG-28 或项目级 terminal
+```
+
+子 Goal 负责局部合同和实验细节：
+
+- [共享轻量基线](./MiLAi_DG-26-DG-30_轻量执行与审查基线.md)
+- [DG-26 固定池重排终态](./MiLAi_DG-26_StateView固定候选池语义重排_GOALS.md)
+- [DG-27 软解释与集中完成边界](./MiLAi_DG-27_Grounded证据解释与Binding验证_GOALS.md)
+- [DG-28 Capability Sandbox 宽检索](./MiLAi_DG-28_可行动作排序与一次主动检索_GOALS.md)
+- [DG-29 Observation 驱动 Refinding](./MiLAi_DG-29_Observation条件Residual表达与有界Refinding_GOALS.md)
+- [DG-30 集成与 Holdout 就绪](./MiLAi_DG-30_Model-understood_Runtime-governed集成与Holdout就绪_GOALS.md)
+
+规范优先级：
+
+```text
+architecture/v1.0 + Lean V1 实施合同
+→ MILA-ML-ARCH@1.0
+→ MILA-ML-MASTER@1.1
+→ Program C Master / active local Goal
+→ 本历史文档
+```
+
+历史 run-lock、results 和 terminal 均不得被本文件改写。
+
+---
+
+# 2. 当前机器事实
+
+| Goal | 机器状态 | 核心结果 | 总 Goal 处置 |
+| --- | --- | --- | --- |
+| DG-24 | `PASS_RETRIEVAL_FIRST_LOSS_LOCALIZED` | 23 groups：13 terminal survival、6 channel eligible 未调用、1 cutoff drop、3 未发现 | 作为 discovery 诊断基线 |
+| DG-25 | `FAIL_SAFETY_OR_REGRESSION` | 最低 Binding precision `2/3`；16 次 Wrong COMPLETE；扩大候选未改善 coverage | 策略不发布；拆分检索与最终决策 |
+| DG-26 | `FAIL / CORRECT_CASE_REGRESSION` | correct StateView 恢复 2 个 residual groups、丢失 1 个 baseline group，且与 shuffled arm 相同 | 永久保留负结果，不重开 |
+| DG-27 | 旧 lock frozen、effect 未执行 | 无 interpretation implementation、无模型 effect call、无 results/terminal | 旧 lock superseded；从 V02 进入 |
+| DG-28 | 未开始 | 无制品 | `DG27-H1` 通过后由 `MILA-ML-MASTER` 决定是否进入 |
+| DG-29 | 未开始 | 无制品 | 仅在 DG-28 存在 refinding opportunity 时进入 |
+| DG-30 | 未开始 | 无制品 | DG-27 与 DG-28 形成可集成终态后进入 |
+
+DG-25 的两个失败不能混为一体：
+
+```text
+Retrieval failure:
+  channel 未调用、cutoff、未发现、宽池无有效 coverage 转化
+
+Decision failure:
+  无 MATCH Binding 仍被 completion proxy 判为 COMPLETE
+```
+
+因此不能再通过增加早期过滤提高“安全”，也不能通过增加候选修补最终完成逻辑。
+
+---
+
+# 3. Method Thesis
+
+```text
+SemanticSearchWorkspace
+  提供 query-local、可变、可多假设的模型语义状态
+
+Capability Sandbox
+  提供真实可执行、权限和预算受界的动作空间
+
+Official Adaptive Acquisition
+  允许多通道、动作组合和 observation-conditioned refinding
+
+ProvisionalBinding
+  保存可修正、可歧义、无 authority 的语义解释
+
+DecisionBoundary
+  集中生成 AcceptedBinding、Sufficiency 和 OperatorResult
+```
+
+一句话：
+
+> 模型可以改变语义搜索策略，但只有 Runtime 能接受证据、证明完备并提交状态。
+
+---
+
+# 4. 历史研究假设（非执行 Gate）
+
+以下只记录旧方法假设，不再覆盖 `ML-H1/ML-H2` 或 Program C 当前假设。
+
+| Historical hypothesis | 当时设定的最小可信证据 |
+| --- | --- |
+| DG2630-H1 自适应宽检索改善 requirement-level evidence acquisition | 相对使用相同安全 DecisionBoundary 的 DG-25 baseline，提高 RequiredEvidenceCoverage 或 OperatorReady；至少恢复一个 DG-24 预注册首损 group，并改善或不恶化 cost per useful Binding |
+| DG2630-H2 集中验证在开放搜索下保持最终正确性 | KnownFalseAcceptedBinding、Wrong COMPLETE、authority violation、Canonical mutation 和最终正确病例回归均为 0；模型/多轮组件只有存在独立 mediator 时才 admission |
+
+必须排除的反主张：
+
+```text
+增益只来自扩大候选数量
+增益只来自更高 K
+模型只是装饰，deterministic multi-channel 已同样有效
+更多 lexical hit 等于 temporal completeness
+中间 candidate precision 等于最终正确性
+```
+
+DG-26 已经否定：
+
+```text
+在固定池和固定 K 内加入 correct StateView
+能够稳定提供独立 ranking gain
+```
+
+---
+
+# 5. Authority 分层
+
+| 层 | 模型可以参与 | Runtime 必须控制 |
+| --- | --- | --- |
+| Query/State | 意图、别名、缺失支持、时间和实体假设 | query identity、scope、epoch |
+| Retrieval | 在合法 action 中选择/组合、生成 cue、调整 anchor | capability、access、time bound、总预算、official execution |
+| Interpretation | N-best relation、grounded span、normalized hypothesis | evidence identity、最终类型/时间/来源验证 |
+| Binding | 产生 ProvisionalBinding | AcceptedBinding |
+| Completion | 提供搜索停止偏好 | proof、Sufficiency、COMPLETE |
+| Canonical | 提出 proposal | Canonical commit |
+
+检索前只 hard-check：
+
+```text
+tenant/access/revocation/retention
+capability 是否存在
+动作 scope/time upper bound
+global query budget
+```
+
+最终只在 DecisionBoundary hard-check：
+
+```text
+grounding/provenance
+requirement role/type/source/time/unit
+conflict/ambiguity/dedup
+required Binding coverage
+proof obligations
+```
+
+---
+
+# 6. 历史执行路线（已被 MILA-ML-MASTER supersede）
+
+本节不得用于创建新 run-lock；冲突时以当前总 Goal 为准。
+
+| Milestone | Goal | Must-run | Go/Stop |
+| --- | --- | --- | --- |
+| M0 | 冻结已知事实 | 保留 DG24–DG26 terminal；停止 DG26 reranker；supersede DG27 old lock | 已完成 |
+| M1 | DG-27 | completion boundary replay；ProvisionalBinding；deterministic/model interpretation | Wrong COMPLETE 或 known false accepted 未归零则 STOP |
+| M2 | DG-28 | 旧 model-guided one-shot 条款已废止；当前仅允许 deterministic official channel union | 是否进入由 `MILA-ML-MASTER` 控制 |
+| M3 | DG-29 | one-shot vs sequential deterministic vs fresh-observation model refinding | 无 fresh opportunity 则 NOT_ENTERED；无边际增益则保持一轮 |
+| M4 | DG-30 | 只集成获得证据支持的 Read Path 组件 | 最高只允许 `PASS_READ_PATH_INTEGRATION` |
+
+依赖：
+
+```text
+DG27-H1 PASS
+  ↓
+DG-28
+  ├─ COMPLETE / no residual → skip DG-29
+  └─ recoverable residual   → DG-29
+  ↓
+DG-30
+```
+
+---
+
+# 7. 历史实验块（非当前授权）
+
+## HIST-B1 — Decision Boundary Repair
+
+- 对象：DG-25 的 16 次 Wrong COMPLETE、已知 false MATCH、candidate-present binding miss。
+- 对比：旧 replay、集中 gate only、N-best provisional model、single-best model。
+- 成功：Wrong COMPLETE=0、KnownFalseAcceptedBinding=0、最终正确病例不回归。
+- 失败含义：不进入任何主动检索集成。
+
+## HIST-B2 — One-round Broad Retrieval
+
+- 对象：DG-24 的 6 个 channel opportunity、1 个 cutoff loss、3 个未发现。
+- 当前有效对比：DG-25 baseline 与 deterministic official multi-channel union。旧 `workspace-conditioned model action composition` 和 `query-only model` 条款已废止。
+- 成功：恢复至少一个预注册 evidence group，并提高 final coverage 或 OperatorReady。
+- 简化判定：deterministic multi-channel 等效且更便宜时删除模型 planner。
+
+## HIST-B3 — Observation-conditioned Refinding（CONDITIONAL）
+
+- Entry：一轮后仍 unresolved，且有新 observation 和未执行合法 action。
+- 对比：one-shot full budget、deterministic two-round、fresh-observation model、stale-observation model。
+- 成功：相同总预算下增加 Binding/coverage，或同 coverage 下显著减少重复/候选成本。
+- 失败含义：保持 one-shot；不增加轮数。
+
+## HIST-B4 — Integrated Closure
+
+- 对比：safe DG-25 baseline、admitted one-shot、可选 active loop、model-deleted control。
+- 评价：Core retrieval → temporal proof → Reader conformance 分层。
+- 成功：至少一个 final mediator gain，且全部最终安全门、效率和质量门通过。
+
+主动删除的实验：
+
+```text
+DG-26 fixed-pool reranker 补考
+Top-k sweep
+Prompt sweep
+结果后换 seed
+四轮默认 ReAct
+模型/backend 大全
+逐层 precision=1.0
+逐阶段独立审查和 receipt
+```
+
+---
+
+# 8. Metrics
+
+| 层 | 主要指标 |
+| --- | --- |
+| Search | TargetRequirementCandidateRecall、RequiredEvidenceRoleDiscovery、DG24LossGroupsRecovered、New/RepeatedRegionRate |
+| Provisional | GoldSpanOrSemanticCoverage、AmbiguityPreservationRate、ProvisionalBindingCoverage |
+| Final | RequiredEvidenceCoverage、AcceptedBindingPrecision、KnownFalseAcceptedBinding、Proof、OperatorReady、Wrong COMPLETE、FinalCorrectCaseRegression |
+| Efficiency | Model/ActionCalls、HydratedCandidates、LatencyP50/P95、CostPerUsefulBinding、MarginalGainPerRound |
+
+只有 Final decision 指标承担安全硬门。Search 和 Provisional 层允许噪声和歧义。
+
+---
+
+# 9. 资源和运行规则
+
+不按层或 channel 叠加固定 quota。每个 run-lock 只冻结一个 global budget：
+
+```yaml
+max_model_calls:
+max_official_actions:
+max_hydrated_candidates:
+max_total_latency_ms:
+max_rounds:
+```
+
+共同规则：
+
+```text
+official AcquisitionService only
+same global upper bound across matched arms
+automatic retry = 0
+no training / fine-tuning
+no result-driven budget expansion
+deterministic path：1 authoritative run + 1 fresh replay
+stochastic model path：预注册 seeds，默认最多 3
+```
+
+具体数值由每个 Goal 的 S0 根据现有服务能力和 baseline 成本冻结，本总 Goal 不写死跨阶段常数。
+
+---
+
+# 10. 轻量开发与制品
+
+DG-27～DG-29 每个只保留 `run-lock.json`、`results.json`、`terminal.json` 和 material-failure-only ledger。DG-30 可增加 admitted policy、quality 和 PASS-only holdout package。
+
+不要求逐阶段 receipt、deliverable index、transitive manifest、独立 runbook 或每轮 reviewer。
+
+开发循环只跑 touched tests、targeted mypy/Ruff 和一个 smoke；单 Goal 跑直接回归；full runtime/contract 及按变更触发的 DB/security/architecture 统一留到 DG-30。
+
+---
+
+# 11. Hard Gates
+
+共同硬门：
+
+```text
+KnownFalseAcceptedBinding = 0
+Wrong COMPLETE = 0
+FinalCorrectCaseRegression = 0
+AuthorityViolation = 0
+CanonicalMutation = 0
+AutomaticRetry = 0
+FormalHoldoutUsed = false
+ExperimentalFeatureFlagsFinalState = OFF
+```
+
+以下不是硬门：
+
+```text
+CandidatePrecision = 1.0
+ProvisionalBindingPrecision = 1.0
+每轮都不改变 baseline top-K
+模型必须优于 deterministic 路径
+DG-29 必须进入
+```
+
+---
+
+# 12. Temporal 与 Reader 分支
+
+Temporal COUNT：
+
+```text
+candidate discovery
+≠
+range completeness
+```
+
+COMPLETE 需要 occurrence-time interval、snapshot/partition closure、bounded scan、event identity、dedup 和 projection/raw fallback proof。模型只提供 hypothesis，不能生成 proof。
+
+Reader：
+
+```text
+Core retrieval/Binding sealed 后再运行
+不得覆盖 typed OperatorResult
+Reader regression 单独 PARK
+不得回头删 evidence 迎合 Reader
+```
+
+---
+
+# 13. 总终态
+
+| status | reason_code | 含义 |
+| --- | --- | --- |
+| ACTIVE | DG27_NEXT | 当前状态 |
+| PASS | READY_FOR_HOLDOUT_AUTHORIZATION | Core、temporal、Reader、效率和最终安全全部闭合 |
+| PARKED | NO_RETRIEVAL_MEDIATOR_GAIN | 宽检索/主动检索无 final gain |
+| PARKED | TEMPORAL_COMPLETENESS | Core retrieval PASS，COUNT proof 未闭合 |
+| PARKED | READER_CONFORMANCE | Core PASS，Reader 表达回归 |
+| PARKED | COST_WITHOUT_MEDIATOR | 额外成本没有有效 Binding gain |
+| FAIL | DECISION_BOUNDARY_UNSAFE | Wrong COMPLETE 或 false accepted remains |
+| FAIL | FINAL_CORRECT_CASE_REGRESSION | 最终正确病例退化 |
+| FAIL | ACTION_OR_AUTHORITY_VIOLATION | scope/budget/capability/authority 被越过 |
+
+PASS 只允许生成 holdout authorization request，不允许自动运行 formal holdout 或默认开启 Candidate。
+
+---
+
+# 14. Rollback
+
+```text
+all candidate/model/active-refinding flags OFF
+max_rounds = 1
+恢复使用 DecisionBoundaryV02 的 safe baseline
+保留所有历史 run-lock/results/terminal
+不删除失败证据
+不修改 Canonical State
+```
+
+---
+
+# 15. 立即执行清单
+
+1. 保留 `var/dg27/run-lock.json`，禁止旧 effect execution。
+2. 创建 `var/dg27/v02/run-lock.json`，声明 `PRE_EXECUTION_ARCHITECTURE_CORRECTION`。
+3. 实现 `SemanticInterpretationSetV02`、`ProvisionalBindingV01`、`DecisionBoundaryV02`。
+4. 首先重放 DG-25 的 16 次 Wrong COMPLETE；未归零则停止。
+5. DG-27 terminal 后才冻结 DG-28 global budget 和 official action set。
+6. 不预先实现 DG-29；由 DG-28 residual opportunity 决定是否进入。
+
+> 总目标不是让更多规则在更多层运行，而是让搜索过程保持可修正，让严格正确性只集中在实际产生 authority 的最终边界。

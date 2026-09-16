@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "purpose": "C1_NO_MODEL_VALIDATION",
+  "image_id": "sha256:822880bdaaa648ae9c1fa3c9bc20abfc88c7335030104b16038e46514b3362ad",
+  "base_image": "pgvector/pgvector@sha256:00ba258a66dac104fd5171074a0084462a64a1369d8513f3d0a634e2f24d15bc",
+  "model_execution_authorized": false,
+  "provider_cost_control_verified": false,
+  "new_model_allocations": 0,
+  "source_sha256": {
+    "tools/containers/v02-readable.Dockerfile": "c5587e6af4936609caf852f26458320d4f99ddaa7f773a79b8f85ff01939bc5d",
+    "tools/v02_read_file.py": "e3da727d8a3093993d832fde6551cb7e671f8463c3685bbed088d120fe90f9c3",
+    "tools/v02_readable_container.py": "00ea9d7250b9d73682d5d4992baa7a7e35333f41ca9f15851fea143042dc4446"
+  }
+}

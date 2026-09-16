@@ -1,0 +1,31 @@
+{
+  "schema": "milai.dg13u.u1-candidate-fixture.v1",
+  "status": "U1_CANDIDATE_OWNER_ACCEPTANCE_REQUIRED",
+  "data_boundary": "SYNTHETIC_OR_INDEPENDENTLY_DEIDENTIFIED",
+  "formal_evaluation_input": false,
+  "families": [
+    {
+      "project": "orchid-release",
+      "state_key": "release.target",
+      "claim_type": "PROJECT_STATE",
+      "aliases": ["current release target", "当前发布目标"]
+    },
+    {
+      "project": "orchid-release",
+      "state_key": "release.database",
+      "claim_type": "PROJECT_CONFIG",
+      "aliases": [
+        "current release database",
+        "current release config",
+        "当前发布数据库",
+        "当前发布配置"
+      ]
+    },
+    {
+      "project": "orchid-release",
+      "state_key": "release.decision",
+      "claim_type": "PROJECT_DECISION",
+      "aliases": ["current governed release decision", "当前受治理的发布决定"]
+    }
+  ]
+}

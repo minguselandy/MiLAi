@@ -1,0 +1,73 @@
+{
+  "isolation": "six fresh temporary virtual environments; import uses Python -I",
+  "results": [
+    {
+      "diagnostic_tail": "",
+      "elapsed_seconds": 0.233,
+      "import": "milai",
+      "name": "milai-runtime",
+      "pep561_type_marker": true,
+      "stage": "import",
+      "status": "PASS",
+      "wheel": "runtime/dist/milai_runtime-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "8c41e1b5333adf711bbf85dca81eedc43508d8d1dbf69e51ab31596129c02242"
+    },
+    {
+      "diagnostic_tail": "",
+      "elapsed_seconds": 0.475,
+      "import": "milai_client",
+      "name": "milai-client",
+      "pep561_type_marker": true,
+      "stage": "import",
+      "status": "PASS",
+      "wheel": "integrations/python-client/dist/milai_client-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "5610991dbbe713fa29c1d98f86d2c2226f4b83275b93e87b2a24bc17ddeb5e69"
+    },
+    {
+      "diagnostic_tail": "",
+      "elapsed_seconds": 1.651,
+      "import": "milai_mcp",
+      "name": "milai-mcp",
+      "pep561_type_marker": true,
+      "stage": "import",
+      "status": "PASS",
+      "wheel": "integrations/mcp/dist/milai_mcp-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "7f6de63fb9b78fa24c17c5e4b41f2100dcb56ea7dfa4b6b4988bdad5b75ac039"
+    },
+    {
+      "diagnostic_tail": "",
+      "elapsed_seconds": 0.494,
+      "import": "milai_langgraph",
+      "name": "milai-langgraph",
+      "pep561_type_marker": true,
+      "stage": "import",
+      "status": "PASS",
+      "wheel": "integrations/langgraph/dist/milai_langgraph-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "a7bb3df57c9b6df5a9939bbd478b0c235aabe15ea7dd1bf93c1a895cb33b5623"
+    },
+    {
+      "diagnostic_tail": "",
+      "elapsed_seconds": 0.733,
+      "import": "milai_autogen",
+      "name": "milai-autogen",
+      "pep561_type_marker": true,
+      "stage": "import",
+      "status": "PASS",
+      "wheel": "integrations/autogen/dist/milai_autogen-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "4e02fd163b0a566a24ccf6143b89377d5b88a2ad2cc1cc875440b91ae8d4a2fc"
+    },
+    {
+      "diagnostic_tail": "",
+      "elapsed_seconds": 0.136,
+      "import": "milai_hooks",
+      "name": "milai-hooks",
+      "pep561_type_marker": true,
+      "stage": "import",
+      "status": "PASS",
+      "wheel": "integrations/hooks/dist/milai_hooks-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "c116c6cf4a4d1c6c118d97802b6287b18712fd00cb8f30b5f313cd7397cc6858"
+    }
+  ],
+  "schema": "milai.ua.package-clean-install.v1",
+  "status": "PASS"
+}

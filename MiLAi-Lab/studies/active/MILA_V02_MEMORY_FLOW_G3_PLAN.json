@@ -1,0 +1,117 @@
+{
+  "status": "PREREGISTERED_NOT_RUN",
+  "created_at": "2026-09-05T07:58:47.207933+00:00",
+  "g3a": {
+    "difference": "One fixed generic opportunity in developer context merged at the existing Host bootstrap; user prompt identical normal followup in both arms; existing A0 bootstrap and MCP unchanged",
+    "opportunity": "继续当前任务时，可按需要核对记忆与来源；已有依据足够可直接继续，有后续用途时再保存变化。",
+    "claim": "Prompt emphasis at Host context assembly, not new retrieval capability or natural invocation without Host",
+    "pairs": [
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-software-omitted.json",
+        "source_session": "g2-p1-a0",
+        "snapshot": "after.json",
+        "order": [
+          "H1",
+          "A0"
+        ],
+        "pair_id": "g3a-g2-p1",
+        "original_followup_representative": "A0 branch",
+        "task_artifacts": "identical non-source task deliverables copied from source session; exclude CLI last-message transcript and caches"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-research-correct.json",
+        "source_session": "g2-p2-a0",
+        "snapshot": "after.json",
+        "order": [
+          "A0",
+          "H1"
+        ],
+        "pair_id": "g3a-g2-p2",
+        "original_followup_representative": "A0 branch",
+        "task_artifacts": "identical non-source task deliverables copied from source session; exclude CLI last-message transcript and caches"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-research-outdated.json",
+        "source_session": "g2-p6-a0",
+        "snapshot": "after.json",
+        "order": [
+          "A0",
+          "H1"
+        ],
+        "pair_id": "g3a-g2-p6",
+        "original_followup_representative": "A0 branch",
+        "task_artifacts": "identical non-source task deliverables copied from source session; exclude CLI last-message transcript and caches"
+      }
+    ],
+    "selection": "Retain H1 only with at least one net first-judgment/task win, no collateral damage, median total token ratio <=1.5; otherwise keep A0",
+    "development_history": "G2-p1 results and G2-p2-A1 opened before selecting representative conditions; selection covers omitted software, correct research, outdated research; descriptive development not blind confirmation"
+  },
+  "g3b_all_followups": {
+    "original_allocated_origins": 12,
+    "represented_by_g3a_A0_branches": 3,
+    "direct_revisits": [
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-software-omitted.json",
+        "source_session": "g2-p1-a1",
+        "arm": "A0",
+        "mode": "same original task-ref with fresh Host context and retained task deliverables"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-research-correct.json",
+        "source_session": "g2-p2-a1",
+        "arm": "A0",
+        "mode": "same original task-ref with fresh Host context and retained task deliverables"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-software-correct.json",
+        "source_session": "g2-p3-a0",
+        "arm": "A0",
+        "mode": "same original task-ref with fresh Host context and retained task deliverables"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-software-correct.json",
+        "source_session": "g2-p3-a1",
+        "arm": "A0",
+        "mode": "same original task-ref with fresh Host context and retained task deliverables"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-software-outdated.json",
+        "source_session": "g2-p4-a0",
+        "arm": "A0",
+        "mode": "same original task-ref with fresh Host context and retained task deliverables"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-software-outdated.json",
+        "source_session": "g2-p4-a1",
+        "arm": "A0",
+        "mode": "same original task-ref with fresh Host context and retained task deliverables"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-research-omitted.json",
+        "source_session": "g2-p5-a0",
+        "arm": "A0",
+        "mode": "same original task-ref with fresh Host context and retained task deliverables"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-research-omitted.json",
+        "source_session": "g2-p5-a1",
+        "arm": "A0",
+        "mode": "same original task-ref with fresh Host context and retained task deliverables"
+      },
+      {
+        "case": "data/fixtures/v02-memory-flow/g2-research-outdated.json",
+        "source_session": "g2-p6-a1",
+        "arm": "A0",
+        "mode": "same original task-ref with fresh Host context and retained task deliverables"
+      }
+    ],
+    "extra_H1_branches_report_separately": 3,
+    "rules": "Keep original save/no-save/failed/unknown states; all 12 origins remain denominator. The preplanned G1 U/V comparison covers one actual update; no claim for all updates."
+  },
+  "prerequisites": [
+    "Finish G2 without editing its active runner",
+    "Implement and test task-artifact carry and Host-opportunity placement before any G3 run",
+    "Preserve exact source and code/model/tool/budget identity inside each pair",
+    "Token tracking exceeded nominal value in G2-p2-A1; treat it as tracking only, retain wall/tool watchdog and all usage, no zero for unknown"
+  ]
+}

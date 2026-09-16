@@ -1,0 +1,43 @@
+{
+  "schema": "milai.dg10.r2-source-worker-binding.v1",
+  "candidate_id": "candidate.3",
+  "date": "2026-08-22",
+  "revision": "candidate.3.1-review-tooling-closure",
+  "stage_id": "DG10-R2",
+  "stage_state": "AUTHOR_CANDIDATE",
+  "status": "R2_SOURCE_AND_FRESH_INSTALL_HASH_BOUND_REVIEW_REQUIRED",
+  "independent_acceptance": false,
+  "source_inventory": {
+    "entry_count": 70,
+    "canonical_entries_sha256": "6a369cb230264680d7b8fea8da28c11ec12d780e66178823b768756958924683",
+    "engineering_status_sha256": "8113577b91991492404c5470da16df373f4516567993ff66d0ecca4a7e83d6b2"
+  },
+  "worker_closure": {
+    "report_sha256": "32af20c84fe7e9132422dec7e8f2971f74ef277dfa7b1055f03a2e9c5d495d1f",
+    "status": "R2_AUTHOR_CANDIDATE_DYNAMIC_PASS_REVIEW_REQUIRED",
+    "benchmark_lock_sha256": "4e99fba3a3ea7adaaa255ee11400fe8ed1dda7eab2a902d0ccfff8adc761fc62",
+    "fresh_install": "PASS_FRESH_INSTALL",
+    "pip_freeze_sha256": "a3d76f29dfd533118adb1665da08e5859a16f9e337809fe4e035e3753a6be578",
+    "runner_and_helper_closure_sha256": "5d44c5906457b8dd0169adb76015bc41b61a93758ea76f19370b5d53532d77b6",
+    "pytest_passed": 193,
+    "pytest_failed": 0,
+    "ruff_status": "PASS",
+    "runtime_venv_reused": false
+  },
+  "review_tooling_added_after_candidate_source_freeze": {
+    "candidate_source_inventory_changed": false,
+    "fresh_ruff_replayed_after_tooling_addition": true,
+    "fresh_pytest_replayed_after_tooling_addition": true
+  },
+  "bfcl_upstream": {
+    "commit": "6ea57973c7a6097fd7c5915698c54c17c5b1b6c8",
+    "dirty": false
+  },
+  "historical_candidate_2_worker_freeze": {
+    "sha256": "e21b21a1df79293faa2dcf1bca352a82d44f5910767f22b5e34d0b847661ec39",
+    "modified": false
+  },
+  "model_run_authorized": false,
+  "accepted_stages": [],
+  "next_required_action": "INDEPENDENT_REVIEWER_RECOMPUTES_SOURCE_INVENTORY_AND_FRESH_INSTALL_RECEIPT"
+}

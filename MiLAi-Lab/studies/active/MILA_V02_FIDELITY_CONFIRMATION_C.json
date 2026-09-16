@@ -1,0 +1,32 @@
+{
+  "status": "SEALED_BEFORE_C_G",
+  "kind": "LME_DERIVED_CONTINUATION",
+  "selection": "ba358f49 and cf22b7bf fixed before original R G in MILA_V02_LOW_COST_REUSE_EXECUTION.md; opened-development, not blind holdout",
+  "source_bundle": "artifacts/v02-lme-incremental/data-20260905b",
+  "history_projection": "sessions only through cutoff; native question/question_date removed",
+  "future_policy": "Same exact-note candidate; different usage tasks independently branch from actual G; no invented t1 updates",
+  "clusters": [
+    {
+      "case_id": "ba358f49",
+      "cutoff": "2022-09-01T23:52:00+00:00",
+      "note_path": "professional-development-notes.md",
+      "current_task": "Prepare a short factual note in professional-development-notes.md about my professional-development plans: marketing experience, further-study interests, preferred study formats, questions for programs, and the practical learning schedule I discussed. Keep it to about 250 words, preserve stated amounts and unresolved choices, and cite the conversation session and turn for key facts. Distinguish intentions from actions already completed; do not add program recommendations or new facts.",
+      "followups": [
+        {"id": "advisor_email", "question": "Draft a concise email to a graduate-program advisor based on my recorded marketing experience and study goals. Explain the study format I was considering and ask about the support and flexibility I wanted to investigate. Do not imply that I have applied, enrolled, or selected a particular university.", "criteria": "Five years marketing experience; considering marketing master's while continuing work, online/part-time/flexible options; asks about scheduling, career services/placement, alumni support and ongoing professional development. Intent only. s7t2,t4,t6,t8,t10."},
+        {"id": "study_allocation", "question": "Make a compact planning table from the learning commitments I stated: weekday time, weekend time, combined weekly time, intended first course, and other interests. Distinguish what I planned to try from confirmed enrollment or completion, and identify any reflection/application time that was not quantified.", "criteria": "1 hour during week + 2-3 hours weekends = 3-4 hours weekly; intended Coursera digital marketing specialization first, productivity/time-management interests possible Coursera/Udemy; reflect/apply intent with no additional quantified time; no enrollment/completion claim. s28t6,t8,t10."}
+      ],
+      "order": [["advisor_email", "F"], ["advisor_email", "S"], ["study_allocation", "S"], ["study_allocation", "F"]]
+    },
+    {
+      "case_id": "cf22b7bf",
+      "cutoff": "2023-06-23T03:15:00+00:00",
+      "note_path": "fitness-progress-notes.md",
+      "current_task": "Prepare a short factual note in fitness-progress-notes.md about my recorded fitness routine, progress and goals. Keep it to about 250 words. Preserve dates and time windows for reported weight changes, stated training availability and exercise intentions, and cite the conversation session and turn for key facts. Separate my statements from prior assistant recommendations, and plans from completed actions. Do not give health advice or invent body weights or outcomes.",
+      "followups": [
+        {"id": "coach_message", "question": "Draft a concise factual message to a prospective coach describing my recorded running experience, walking routine, available weekly training time, and the later change I was considering alongside Zumba. Preserve when these statements were made and avoid presenting a proposed routine as something I had already started. Do not prescribe a new training plan.", "criteria": "May21 running beginner/10K goal, 30-minute lunch walks three times weekly, 4-5 hours weekly training availability. June17 Zumba for three months, considering one spinning class weekly, wants core strength and salsa/Zumba improvement; spinning not confirmed started. s28t0,t2; s48t2,t4."},
+        {"id": "progress_table", "question": "Make a dated table of the weight-loss amounts I reported and the period each report covers. Calculate the numerical difference between the reported amounts, but distinguish that arithmetic from a proven loss between the two reporting dates. State whether my starting or current body weight is actually known from those reports.", "criteria": "May21 about5 pounds in past month (s28t2,t8 duplicate same report); June21 10 pounds since consistent gym three months ago (s53t2). Numerical difference5 pounds, different windows do not establish exact inter-date loss; no starting/current body weight inferred, no summing duplicate5 or5+10 to15."}
+      ],
+      "order": [["coach_message", "S"], ["coach_message", "F"], ["progress_table", "F"], ["progress_table", "S"]]
+    }
+  ]
+}

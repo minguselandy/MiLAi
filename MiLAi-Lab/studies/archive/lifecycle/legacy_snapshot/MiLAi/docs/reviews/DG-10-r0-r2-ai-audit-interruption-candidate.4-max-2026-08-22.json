@@ -1,0 +1,22 @@
+{
+  "schema": "milai.dg10.ai-audit-interruption-receipt.v1",
+  "candidate_id": "candidate.4",
+  "attempt_id": "candidate.4-primary-001",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "max",
+  "status": "INTERRUPTED_BY_USER_POLICY_CHANGE",
+  "process_exit_code": 130,
+  "interrupted_at": "2026-08-22T10:08:52+08:00",
+  "external_receipt": {
+    "path_class": "../evidence/dg10-candidate4-ai-r0-r2-audits/candidate.4-primary-001/interrupted.json",
+    "sha256": "d20fcb2e4ebcdb2468de5cafe1422951c839d86419a2f7fc24d64c5dc84e8da4"
+  },
+  "replacement_policy": {
+    "path": "docs/contracts/DG-10-ai-audit-reasoning-amendment-candidate.4.2.json",
+    "sha256": "55b9359b26ba45dbc8357587fe7febbb315e130ec0de604bf98d5c5515b8a598",
+    "reasoning_effort": "xhigh"
+  },
+  "accepted_as_review_evidence": false,
+  "stage_acceptance_effect": false,
+  "model_run_authorization_effect": false
+}

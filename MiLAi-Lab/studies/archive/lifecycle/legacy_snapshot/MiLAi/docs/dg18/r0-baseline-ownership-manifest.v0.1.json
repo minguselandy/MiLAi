@@ -1,0 +1,388 @@
+{
+  "schema": "milai.dg18.r0-baseline-ownership-manifest.v0.1",
+  "status": "FROZEN_INPUT",
+  "goal_id": "DG-18",
+  "classification": "LOCAL_READ_ONLY_BASELINE_FREEZE / OPENED_DEVELOPMENT_ONLY",
+  "artifact_policy": {
+    "historical_artifacts_are_read_only": true,
+    "receipt_byte_identity_is_authoritative": true,
+    "transitive_mutable_document_bindings_are_not_rewritten": true,
+    "formal_holdout_consumed": false,
+    "provider_calls": 0,
+    "database_started": false
+  },
+  "artifacts": [
+    {
+      "id": "dg15_goal",
+      "kind": "DOCUMENT",
+      "path": "MiLAi_DG-15_受治理记忆流水线与投影效率优化_GOALS.md",
+      "sha256": "075ffe21cfb3e3ebc172cf1c2912b001ec3bbf429ac5f3226841d92797fb1cd5"
+    },
+    {
+      "id": "dg17_goal",
+      "kind": "DOCUMENT",
+      "path": "MiLAi_DG-17_语义记忆读取与证据集执行_GOALS.md",
+      "sha256": "8adaf2d24cd85331b832b10e99f81dcc83eef3ece89ec8eee4fcb36d2dbcea9a"
+    },
+    {
+      "id": "dg18_goal",
+      "kind": "DOCUMENT",
+      "path": "MiLAi_DG-18_受限残差再查找与证据可达性优化_GOALS.md",
+      "sha256": "f5077d16f217901148823bc8bd6d0f3d7c7b202b5a051b971cd8b3b253c619ef"
+    },
+    {
+      "id": "a0_receipt",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a0/dg17-a0-acquisition-loss-20260827-002/receipt.json",
+      "sha256": "a090db7818c27cc779259191ff1ac5b7ce5d90bc890455a7b6c657e98aed4c83",
+      "expected_schema": "milai.dg17.a0-acquisition-loss-receipt.v0.1",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "a1_receipt",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a1/dg17-a1-turn-first-20260827-001/acquisition-receipt-003.json",
+      "sha256": "d3022c9c7acb8baf256442749bdc3a4f0f374eec46867c6f5aa7287f28b26d30",
+      "expected_schema": "milai.dg17.a1-turn-first-acquisition.v0.1",
+      "expected_status": "A1_FACTOR_PASS_CUMULATIVE_GATE_PARTIAL"
+    },
+    {
+      "id": "a1_runtime_full_gate",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a1/dg17-a1-turn-first-20260827-001/runtime-full-gate-003.json",
+      "sha256": "3640fb756a96cdc5aaeadd7aa0cfdb880fa564554c5d6df3174d534a1232048c",
+      "expected_schema": "milai.runtime-fresh-database-full-gate.v1",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "a2_receipt",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a2/dg17-a2-per-slot-fusion-20260827-004/acquisition-receipt-001.json",
+      "sha256": "b4dc67de488b61367ab99542cc70a80f820e379d0d9af53204229e5333c5adeb",
+      "expected_schema": "milai.dg17.a2-per-slot-acquisition.v0.1",
+      "expected_status": "A2_FACTOR_PASS_CUMULATIVE_GATE_PARTIAL"
+    },
+    {
+      "id": "a2_runtime_full_gate",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a2/dg17-a2-per-slot-fusion-20260827-004/runtime-full-gate-001.json",
+      "sha256": "d6b4826279434d22215da58a9fd20a767d889ff8fcf45813b4b834a3ad811dbb",
+      "expected_schema": "milai.runtime-fresh-database-full-gate.v1",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "a3_receipt",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a3/dg17-a3-source-calibration-20260827-002/receipt.json",
+      "sha256": "bee0b28824997846f6bc7645ae1a0ed4c6185e0f09fc5e2e3ad86c867f3199fe",
+      "expected_schema": "milai.dg17.a3-source-field-calibration.v0.1",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "a4_receipt",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a4/dg17-a4-lexical-evaluation-20260827-001/receipt.json",
+      "sha256": "2050ff07555a68d93d5360875dd0253d0a45e526c49eabb0d911abdf78272a87",
+      "expected_schema": "milai.dg17.a4-lexical-enrichment-evaluation.v0.1",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "a5_receipt",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a5/dg17-a5-temporal-acquisition-20260827-001/receipt.json",
+      "sha256": "a99a8631dc96e634f39286a9274c0e4bf731b9f8bbac838de6cb1bf2989d3b4e",
+      "expected_schema": "milai.dg17.a5-dual-axis-temporal-acquisition.v0.1",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "a6_focused_postgresql_gate",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a6/dg17-a6-evidence-dense-20260827-004/focused-postgres-001.json",
+      "sha256": "1799a251896281336b67f7475590953a5e26295dac625251a8fcbb97c51636a1",
+      "expected_schema": "milai.dg17.a1-focused-postgresql-gate.v0.1",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "a6_sealed_execution_plan",
+      "kind": "EXECUTION_PLAN",
+      "path": "var/dg17/a6/dg17-a6-productization-20260827-001/execution-plan.json",
+      "sha256": "7300050fb7f145d060f4ee5240e82b45902d2cc832df20c468524259018a07ab",
+      "expected_schema": "milai.dg17.a6-execution-plan.v0.1",
+      "expected_status": "SEALED_BEFORE_EMBEDDING_CALLS"
+    },
+    {
+      "id": "a6_terminal_receipt",
+      "kind": "RECEIPT",
+      "path": "var/dg17/a6/dg17-a6-productization-20260827-001/receipt.json",
+      "sha256": "8ddbc7895642f11b7cc7a943f75b737ea65b4e3729e780cc43bb517c4d115d9b",
+      "expected_schema": "milai.dg17.a6-dense-productization-decision.v0.1",
+      "expected_status": "CHARACTERIZED_PARTIAL"
+    },
+    {
+      "id": "q6_initial_negative_receipt",
+      "kind": "HISTORICAL_FAILURE_LINEAGE",
+      "path": "var/dg17/q6/dg17-q6-sealed-20260827-002/receipt.json",
+      "sha256": "f89bc33dccb10006938e2f847fc58f0484f8ec64af33550f84adaaf78db72127",
+      "expected_schema": "milai.dg17.q6-sealed-same-snapshot-confirmation.v0.2",
+      "expected_status": "CHARACTERIZED"
+    },
+    {
+      "id": "q6_authoritative_receipt",
+      "kind": "RECEIPT",
+      "path": "var/dg17/q6/dg17-q6-sealed-20260827-003/receipt.json",
+      "sha256": "c0c98a1afc654b9e734657fd57de19abddb4268de4829320e0bb4af1aa02b4df",
+      "expected_schema": "milai.dg17.q6-sealed-same-snapshot-confirmation.v0.2",
+      "expected_status": "CHARACTERIZED"
+    },
+    {
+      "id": "q8_failed_run_receipt",
+      "kind": "HISTORICAL_FAILURE_LINEAGE",
+      "path": "var/dg17/q8/dg17-q8-retrieval-ablation-20260827-001/failure-receipt.json",
+      "sha256": "a8ba78fe1a640364d5034bb41faf1f5a90c0dbea127ac8236a6fd0dfa7b0f931",
+      "expected_schema": "milai.dg17.q8-failure.v0.1",
+      "expected_status": "FAILED_NOT_SCOREABLE"
+    },
+    {
+      "id": "q8_authoritative_receipt",
+      "kind": "RECEIPT",
+      "path": "var/dg17/q8/dg17-q8-retrieval-ablation-20260827-002/receipt.json",
+      "sha256": "ca4c5dde4bd348f7fe860165c6b7ab4136ce776757864b355e8774dd6e8326ef",
+      "expected_schema": "milai.dg17.q8-strong-retrieval-ablation.v0.1",
+      "expected_status": "CHARACTERIZED"
+    },
+    {
+      "id": "local_gate_024",
+      "kind": "RECEIPT",
+      "path": "var/dg17/local-gate/dg17-local-gate-20260827-024/receipt.json",
+      "sha256": "bba52948cb900d59c2f0affa4be79e407ab793cc522f84024b341be83df75628",
+      "expected_schema": "milai.dg17.local-deterministic-gate.v0.1",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "opened_dev_full_label_free_inputs",
+      "kind": "DATASET_IDENTITY",
+      "path": "var/dg11/paper/freeze/longmemeval-full-inputs.json",
+      "sha256": "7c1c3a61cc81ddf523e8355a02ac2ba9ed4f517fc09cf9609cc7aeaa062fa412",
+      "expected_schema": "milai.dg11.paper-longmemeval-inputs.v1"
+    },
+    {
+      "id": "opened_dev_public_split",
+      "kind": "DATASET_IDENTITY",
+      "path": "var/dg14/splits/public-deidentified-dev-v1/source-ids.json",
+      "sha256": "91f502f79850b3dfb952c7094bc632615f6f69d8e40b8350ef292681b03913d2",
+      "expected_schema": "milai.dg14.public-deidentified-dev-split.v1",
+      "expected_status": "NOT_FORMALLY_EVALUATED"
+    },
+    {
+      "id": "opened_dev_answer_bearing_annotation",
+      "kind": "EVALUATION_ONLY_IDENTITY",
+      "path": "evals/dg17/fixtures/lme10-answer-bearing-labels.v0.1.json",
+      "sha256": "4a88cb030e67cce456b1dfe159fce177a5ace4b972f11af2a6674639c52dc876",
+      "expected_schema": "milai.dg17.answer-bearing-labels.v0.1"
+    },
+    {
+      "id": "formal_paper_test_source_ids",
+      "kind": "HOLDOUT_IDENTITY_ONLY",
+      "path": "var/dg11/splits/v1/paper-test-v1/source-ids.json",
+      "sha256": "73cbd2609a616301d8f06e709bcddd22832b1e30a35b9d5a6388565ff7cd3bd2"
+    },
+    {
+      "id": "formal_generalization_source_ids",
+      "kind": "HOLDOUT_IDENTITY_ONLY",
+      "path": "var/dg11/splits/v1/generalization-v2/source-ids.json",
+      "sha256": "0d3b69fc6ece6c6c1d07584cb5a4f7c3b532289cf2338912d3d285c7fbe76dfd"
+    },
+    {
+      "id": "provider_last_executed_contract_receipt",
+      "kind": "LAST_EXECUTED_PROVIDER_CONTRACT",
+      "path": "var/dg17/q1r/dg17-q1r-matched-20260827-003/receipt.json",
+      "sha256": "10a23068424379d0d42842223ce74b1ba98fe8e5a1537299a72e541f946ea2d1",
+      "expected_schema": "milai.dg17.q1r-matched-causality.v0.1",
+      "expected_status": "Q1R_CONTEXT_STABILITY_PASS"
+    },
+    {
+      "id": "runtime_pyproject",
+      "kind": "CURRENT_CODE_IDENTITY",
+      "path": "runtime/pyproject.toml",
+      "sha256": "fb6d5c01ffd8101a3792cd11b8e6d1d8c3ee00b0b91d3770e934613a481bf188"
+    },
+    {
+      "id": "runtime_lock",
+      "kind": "CURRENT_CODE_IDENTITY",
+      "path": "runtime/uv.lock",
+      "sha256": "5efdeb48cbea7fa51650c1b6d16d0f6ea3af0321304369046e550c1b063b2c20"
+    },
+    {
+      "id": "runtime_dense_default_settings",
+      "kind": "CURRENT_CODE_IDENTITY",
+      "path": "runtime/src/milai/config/settings.py",
+      "sha256": "12c3c9ff404034bd7cc34abfa24f9838ec811d2402d05a96afc6c7e9ed1227ce"
+    },
+    {
+      "id": "schema_head_migration",
+      "kind": "CURRENT_SCHEMA_CODE_IDENTITY",
+      "path": "runtime/migrations/versions/0044_dg17_evidence_dense_projection.py",
+      "sha256": "316124ddd7675f3b524c9c8a6e053034d3d80e4e4cb67ab9e816a0745bd83045"
+    },
+    {
+      "id": "mcp_pyproject",
+      "kind": "CURRENT_CODE_IDENTITY",
+      "path": "integrations/mcp/pyproject.toml",
+      "sha256": "513a863126a0d9e093b61c5b8b67d6c32da15a2cc62d1c2d62f2696cd68e3593"
+    },
+    {
+      "id": "mcp_lock",
+      "kind": "CURRENT_CODE_IDENTITY",
+      "path": "integrations/mcp/uv.lock",
+      "sha256": "c857a1fe8d1d4a53a82ecc63d974c5a840d86174a3b5ebee207076ecba3b2b6a"
+    },
+    {
+      "id": "mcp_server",
+      "kind": "CURRENT_CODE_IDENTITY",
+      "path": "integrations/mcp/src/milai_mcp/server.py",
+      "sha256": "4801823923bb0d3a3f93abd02f95392f2638abc4f56a489f39235cc74707b50e"
+    },
+    {
+      "id": "mcp_tool_contract",
+      "kind": "CURRENT_CONTRACT_IDENTITY",
+      "path": "contracts/agent/v1/tool-contract.json",
+      "sha256": "674036f53bcd317447e1ebaa48fc74d5663d32952ca91fecf3016c3b5194818b"
+    }
+  ],
+  "baseline_summary": {
+    "A0": "PASS: 10/10 cases, 23/23 required Evidence atoms, product label access 0",
+    "A1": "FACTOR_PASS_CUMULATIVE_PARTIAL: 10/23 atoms, 9/21 turns, OperatorReady 4/10, packing loss 1",
+    "A2": "FACTOR_PASS_CUMULATIVE_PARTIAL: 10/23 atoms, 9/21 turns, OperatorReady 4/10, packing loss 2",
+    "A3": "PASS: structured speaker lineage; neutral default; source-aware ranking parked",
+    "A4": "PASS_PRODUCT_DEFAULT_UNCHANGED: +1 atom, +1 turn, OperatorReady +0; not an open-domain semantic bridge",
+    "A5": "PASS_EVENT_PROJECTION_PARKED: source-observed scan executable; event occurrence fails closed without projection",
+    "A6": "CHARACTERIZED_PARTIAL_DEFAULT_PARKED: +1 atom, +1 turn, OperatorReady +1, candidate noise +49",
+    "Q6": "PARTIAL: 2048 EM 2/10, F1 0.227338130, coverage 7/23, wrong COMPLETE 0",
+    "Q8": "TERMINAL_DIAGNOSTIC: Strong Dense coverage 18/23, EM 2/10, F1 0.277685951; no product rollout",
+    "local_gate_024": "PASS: 367 tests, Runtime/DG17 Ruff and strict mypy, 0 external model calls"
+  },
+  "opened_dev_identity": {
+    "case_count": 10,
+    "ordered_case_ids": [
+      "gpt4_8279ba03",
+      "9a707b82",
+      "2a1811e2",
+      "0bb5a684",
+      "2e6d26dc",
+      "4dfccbf7",
+      "gpt4_88806d6e",
+      "a89d7624",
+      "a82c026e",
+      "88432d0a"
+    ],
+    "ordered_case_ids_digest": {
+      "algorithm": "sha256(json.dumps(ids, ensure_ascii=False, separators=(',', ':')))",
+      "sha256": "694e5584a791cfa42f4b2b7bbc59835bb4e2462cda333c2c69f2ea5124207c79"
+    },
+    "selection_rule": "first 10 ordered source_ids from the bound public dev split",
+    "formal_source_id_overlap": [],
+    "formal_holdout_consumed": false,
+    "annotation_use": "EVALUATION_ONLY_AFTER_PRODUCT_TRACE_SEAL"
+  },
+  "ownership": {
+    "DG15": [
+      "LIFECYCLE_EFFICIENCY",
+      "PERSISTENT_WORKER",
+      "BATCH_AND_MICROBATCH",
+      "PROJECTION_ROUTING",
+      "WATERMARK_READINESS",
+      "NAMESPACE_CLEANUP"
+    ],
+    "DG17": [
+      "TYPED_SEMANTIC_READ_FOUNDATION",
+      "HISTORICAL_A0_A6_EVIDENCE"
+    ],
+    "DG18": [
+      "BOUNDED_RESIDUAL_REFINDING",
+      "EVIDENCE_REACHABILITY"
+    ],
+    "double_owner_forbidden": true
+  },
+  "successor_mapping": [
+    {
+      "dg17": "A7_SLOT_AWARE_EXPANSION_AND_CONTEXT_PACKING",
+      "dg18": ["R1_RUNTIME_LOCAL_CONTEXT_AND_SLOT_AWARE_EXPANSION"]
+    },
+    {
+      "dg17": "NO_DIRECT_COUNTERPART",
+      "dg18": ["R2_ACQUISITION_STATE_AND_TYPED_EVIDENCE_NOTES"]
+    },
+    {
+      "dg17": "A8_RESIDUAL_LEXICAL_HINT_SHADOW",
+      "dg18": ["R3_RESIDUAL_SEARCH_HINT_SHADOW"]
+    },
+    {
+      "dg17": "A9_ONE_CALL_LIVE_RESIDUAL_ACQUISITION",
+      "dg18": ["R4_ONE_CALL_LIVE_RESIDUAL_REFINDING"]
+    },
+    {
+      "dg17": "A10_MATCHED_Q6_SUCCESSOR_CONFIRMATION",
+      "dg18": ["R4_MATCHED_MEDIATOR_AND_READER_CONFIRMATION"]
+    },
+    {
+      "dg17": "A11_STRATIFIED_OPENED_DEV",
+      "dg18": ["POST_R4_EXPANDED_OPENED_DEV_SECTION_9_6"]
+    },
+    {
+      "dg17": "NO_DIRECT_COUNTERPART",
+      "dg18": ["R5_OPTIONAL_TWO_ROUND_REFINDING_PARKED_NOT_NEEDED"]
+    }
+  ],
+  "current_identity": {
+    "repository": {
+      "observed_head": "651099ba8cffc2675961bb9250ba44c158efccb5",
+      "evidence_strength": "LIMITED",
+      "limitation": "The worktree is dirty and most MiLAi content is untracked; component content digests, not HEAD alone, are authoritative."
+    },
+    "runtime": {
+      "package": "milai-runtime",
+      "version": "0.1.0",
+      "status": "CANDIDATE",
+      "evidence_strength": "CURRENT_CONTENT_DIGESTS"
+    },
+    "schema": {
+      "status": "EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE",
+      "migration_code_head": "0044_dg17_evidence_dense",
+      "evidence_strength": "CODE_HEAD_PLUS_HISTORICAL_EPHEMERAL_POSTGRESQL_GATE",
+      "limitation": "R0 does not start a persistent database and does not claim a current live database revision."
+    },
+    "mcp": {
+      "package": "milai-mcp",
+      "version": "0.1.0",
+      "contract_version": "agent.v1",
+      "entrypoint": "milai_memory_resolve",
+      "default_transport": "stdio",
+      "remote": "disabled",
+      "evidence_strength": "CURRENT_CONTENT_DIGESTS"
+    },
+    "provider": {
+      "endpoint": "http://127.0.0.1:7860",
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "generation_contract_sha256": "25e40b1a978251ddd08df317e16d85f111fdb00a725b928a300979e6f071cd72",
+      "prompt_contract_sha256": "1eac3c3723c00f48f714c06aad00174337685e2c765d349553138435db43631d",
+      "evidence_strength": "LAST_EXECUTED_FROZEN_CONTRACT",
+      "current_live_verified": false,
+      "limitation": "R0 makes no provider call; current /models and process identity must be captured at R3 without restart or reconfiguration."
+    }
+  },
+  "holdout_boundary": {
+    "consumption_markers_required_absent": [
+      "var/dg11/splits/v1/paper-test-v1/consumption.json",
+      "var/dg11/splits/v1/generalization-v2/consumption.json"
+    ],
+    "formal_holdout_consumed": false,
+    "formal_source_id_overlap": []
+  },
+  "limitations": [
+    "The A0 receipt embeds an older mutable DG-17 Goal digest whose historical document bytes are not archived; the A0 receipt bytes remain immutable and the current DG-17 Goal is bound separately.",
+    "No current provider liveness or /models identity is claimed.",
+    "No persistent database revision is claimed.",
+    "A6 Raw Evidence dense and conditional reranker remain parked and disabled by default.",
+    "Formal holdout labels, contexts, answers, and scores remain unopened."
+  ]
+}

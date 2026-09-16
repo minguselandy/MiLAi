@@ -1,0 +1,12 @@
+{
+  "case_id": "g2-software-outdated", "domain": "software", "initial_type": "outdated",
+  "development_status": "constructed-pilot-unrun",
+  "task": "继续批量导入客户端接入，写出提交与完成判断的伪代码。本轮只设计，不调用服务；下一步将据此实现。资料在 sources/，也可查询项目记忆。",
+  "followup": "继续导入客户端，给出异步完成和失败的测试设计。资料在 sources/。",
+  "initial_payload": {"note": "导入客户端向POST /v1/import提交，收到HTTP 200视为完成；客户端日志保留请求关联ID，不记录导入正文。下一步实现。", "sources": ["sources/import.txt"]},
+  "sources": {
+    "import.txt": "2026-09-04导入接口迁移：原/v1/import同步入口已经关闭。当前POST /v2/jobs返回202和job_id，仅表示受理；随后GET /v2/jobs/{job_id}，只有status=SUCCEEDED才表示导入完成，FAILED表示导入失败。日志保留请求关联ID，不记录导入正文。",
+    "health.txt": "GET /health 返回200表示服务进程存活；这个状态不代表某一导入任务完成。"
+  },
+  "evaluation": {"required": ["POST /v2/jobs", "202 is acceptance only", "poll job_id until SUCCEEDED or FAILED", "correlation ID but no import body in logs"], "correct_initial_facts": ["correlation ID logging", "body privacy"], "key_source": "import.txt", "save_value": "Updated completion semantics matter to implementation"}
+}

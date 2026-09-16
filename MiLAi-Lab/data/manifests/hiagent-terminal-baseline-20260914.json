@@ -1,0 +1,57 @@
+{
+  "method": "hiagent-terminal-v0.1",
+  "kind": "RESEARCH_PROTOTYPE",
+  "implementation_claim": "INDEPENDENT_ALGORITHM_TRANSPLANT_NOT_PAPER_REPRODUCTION",
+  "upstream_repository": "https://github.com/HiAgent2024/HiAgent",
+  "upstream_commit": "cebdd8e4eacec1a532ce2c0041db8902217b90ba",
+  "paper": "https://arxiv.org/html/2408.09559v1",
+  "source_files": {
+    "agentboard/agents/cme_final.py": {
+      "sha256": "0813ab4b33b0666f89bba7d3fdb918af7727419dc99e9e6d5ad755b651b74500",
+      "git_blob": "dfb29c03eaaf6e4752070a38749e19da3d806475"
+    },
+    "agentboard/agents/summarize.py": {
+      "sha256": "8910148a3892e755ae47b208c188345520c373c7e17f88c37e2ad09b3e5baabc",
+      "git_blob": "ebca5a835c9758341121e813a62eb30899cc9479"
+    }
+  },
+  "additional_read_paths": [
+    "README.md",
+    "evaluate_model.sh",
+    "eval_configs/hiagent/barman.yaml"
+  ],
+  "license_observation": "Pinned tree has no root/core LICENSE; only vendored WebShop LICENSE found. No upstream source or prompt copied into this implementation.",
+  "summary_refresh": "EVERY_ASSEMBLY_NO_CACHE",
+  "retrieval_lifetime": "UNTIL_NEXT_MODEL_DECLARED_SUBGOAL",
+  "max_total_model_calls_per_trial": 64,
+  "budget_counts": [
+    "actor",
+    "summary",
+    "retrieval_actor_decisions"
+  ],
+  "default_product_change": false,
+  "new_live_experiment_allocation": 0,
+  "new_live_model_generations": 0,
+  "local_evidence_kind": "SIMULATION_AND_ENGINEERING_CHECKS",
+  "engineering_checks": {
+    "targeted_passed": 81,
+    "boundary": "PASS",
+    "ruff": "PASS",
+    "mypy": "PASS_41_SOURCE_FILES",
+    "build": "PASS",
+    "harbor_import_and_cli": "PASS_NO_TRIAL",
+    "full_regression": {
+      "status": "INCOMPLETE_OPERATOR_INTERRUPTED",
+      "collected": 4474,
+      "passed": 2279,
+      "optional_skipped": 1,
+      "without_terminal_result": 2194,
+      "elapsed_seconds": 589.5,
+      "exit_code": 2
+    }
+  },
+  "evidence_root": "/cra/memory/mx_memory/evidence/hiagent-baseline-20260914-nYqZki",
+  "fidelity_note": "studies/active/MILA_HIAGENT_BASELINE_IMPLEMENTATION_20260914.md",
+  "followup_execution_manifest": "data/manifests/hiagent-terminal-live-20260914.json",
+  "record_scope": "Historical initial implementation and mock-only handoff; subsequent execution is recorded separately."
+}

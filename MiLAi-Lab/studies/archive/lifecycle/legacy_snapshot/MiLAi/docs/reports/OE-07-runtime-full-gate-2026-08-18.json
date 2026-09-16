@@ -1,0 +1,16 @@
+{
+  "cleanup": {
+    "connections_before_drop": 0,
+    "owner": "milai_owner",
+    "status": "PASS"
+  },
+  "database": "milai_smoke_efffde80a78561535c19",
+  "finished_at": "2026-08-18T07:51:22.345412+00:00",
+  "pytest_elapsed_seconds": 139.04,
+  "pytest_exit_code": 0,
+  "pytest_passed": 152,
+  "run_id": "efffde80a78561535c19bd80",
+  "schema": "milai.runtime-fresh-database-full-gate.v1",
+  "started_at": "2026-08-18T07:49:01.845567+00:00",
+  "status": "PASS"
+}

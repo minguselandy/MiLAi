@@ -1,0 +1,6 @@
+Task: {query}
+
+Trajectory:
+{trajectory}
+
+Did the agent successfully complete the task? Answer with 'success' or 'fail' only.

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "product_lock": "data/locks/v02-state-payload-fidelity-product.lock.json",
+  "data_mode": "DEIDENTIFIED_ALLOWED",
+  "model_allocations": 0,
+  "scope": "Public State roundtrip correction; preserve original G artifacts and prior results"
+}

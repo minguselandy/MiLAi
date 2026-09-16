@@ -1,0 +1,32 @@
+{
+  "schema_version": "milai-product03-context24-selection-v0.1",
+  "source_selection": "OUTCOME_BLIND_STRUCTURAL_PREFLIGHT",
+  "opened_development_only": true,
+  "formal_holdout_consumed": false,
+  "cases": [
+    {"case_id": "852ce960", "family": "CONTEXT24", "query_type": "knowledge-update"},
+    {"case_id": "5a4f22c0", "family": "CONTEXT24", "query_type": "knowledge-update"},
+    {"case_id": "cf22b7bf", "family": "CONTEXT24", "query_type": "knowledge-update"},
+    {"case_id": "ba358f49", "family": "CONTEXT24", "query_type": "multi-session"},
+    {"case_id": "27016adc", "family": "CONTEXT24", "query_type": "multi-session"},
+    {"case_id": "37f165cf", "family": "CONTEXT24", "query_type": "multi-session"},
+    {"case_id": "5a7937c8", "family": "CONTEXT24", "query_type": "multi-session"},
+    {"case_id": "aae3761f", "family": "CONTEXT24", "query_type": "multi-session"},
+    {"case_id": "d851d5ba", "family": "CONTEXT24", "query_type": "multi-session"},
+    {"case_id": "71a3fd6b", "family": "CONTEXT24", "query_type": "single-session-assistant"},
+    {"case_id": "70b3e69b", "family": "CONTEXT24", "query_type": "single-session-assistant"},
+    {"case_id": "5809eb10", "family": "CONTEXT24", "query_type": "single-session-assistant"},
+    {"case_id": "d6233ab6", "family": "CONTEXT24", "query_type": "single-session-preference"},
+    {"case_id": "1c0ddc50", "family": "CONTEXT24", "query_type": "single-session-preference"},
+    {"case_id": "8550ddae", "family": "CONTEXT24", "query_type": "single-session-user"},
+    {"case_id": "29f2956b", "family": "CONTEXT24", "query_type": "single-session-user"},
+    {"case_id": "58bf7951", "family": "CONTEXT24", "query_type": "single-session-user"},
+    {"case_id": "gpt4_e072b769", "family": "CONTEXT24", "query_type": "temporal-reasoning"},
+    {"case_id": "71017276", "family": "CONTEXT24", "query_type": "temporal-reasoning"},
+    {"case_id": "d01c6aa8", "family": "CONTEXT24", "query_type": "temporal-reasoning"},
+    {"case_id": "gpt4_6ed717ea", "family": "CONTEXT24", "query_type": "temporal-reasoning"},
+    {"case_id": "gpt4_93159ced_abs", "family": "CONTEXT24", "query_type": "temporal-reasoning"},
+    {"case_id": "gpt4_d6585ce9", "family": "CONTEXT24", "query_type": "temporal-reasoning"},
+    {"case_id": "gpt4_e061b84g", "family": "CONTEXT24", "query_type": "temporal-reasoning"}
+  ]
+}

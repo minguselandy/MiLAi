@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "category": "gdpm",
+  "snapshot_manifest": "../lifecycle/legacy_snapshot/manifest.json",
+  "files": [
+    {
+      "source": "MiLAi_GDPM-01_受治理双过程Memory分阶段开发与验证_GOALS.md",
+      "destination": "MiLAi/MiLAi_GDPM-01_受治理双过程Memory分阶段开发与验证_GOALS.md",
+      "sha256": "085d339dd6313bf2bcd671f3a389782289ade43bc44f279605512e8e3bef9863"
+    },
+    {
+      "source": "MiLAi_GDPM-01_受治理双过程Memory分阶段开发与验证_GOALS_20260831_184700.md",
+      "destination": "MiLAi/MiLAi_GDPM-01_受治理双过程Memory分阶段开发与验证_GOALS_20260831_184700.md",
+      "sha256": "6ef723fc6ced657e726af85ec134447929cb67d2ac81be01a0758886bbf9fe6c"
+    },
+    {
+      "source": "MiLAi_GDPM-01_受治理双过程Memory分阶段开发与验证_GOALS_20260901_094130.md",
+      "destination": "MiLAi/MiLAi_GDPM-01_受治理双过程Memory分阶段开发与验证_GOALS_20260901_094130.md",
+      "sha256": "4e2e0120dde71c7946e7d8badd0994097a84820ebab28d5bb079dc87dc8ce988"
+    },
+    {
+      "source": "docs/reports/MiLAi_GDPM_CITATION_AUDIT_20260831.json",
+      "destination": "MiLAi/docs/reports/MiLAi_GDPM_CITATION_AUDIT_20260831.json",
+      "sha256": "3d3a282785f4ba2ad39de3c826af4422cb95738db8cb000a9af8d54b9dcd616e"
+    },
+    {
+      "source": "docs/reports/MiLAi_GDPM_CITATION_AUDIT_20260831.md",
+      "destination": "MiLAi/docs/reports/MiLAi_GDPM_CITATION_AUDIT_20260831.md",
+      "sha256": "9c9bbedad01f8654c07e6292a47eebee6fbef58e407fde49ffb4b36e2c29917a"
+    },
+    {
+      "source": "evals/gdpm/__init__.py",
+      "destination": "MiLAi/evals/gdpm/__init__.py",
+      "sha256": "9e57aaff34711d0f9ed6c45ad83dd2fe60a46daa383a51f9968e1f86347e7f85"
+    },
+    {
+      "source": "evals/gdpm/b0_canary_contract.py",
+      "destination": "MiLAi/evals/gdpm/b0_canary_contract.py",
+      "sha256": "8f52956e232fd91b67b5dd63a9c712f04ee194cb3756284670cad97290e6a73f"
+    },
+    {
+      "source": "evals/gdpm/b0_canary_longmemeval.py",
+      "destination": "MiLAi/evals/gdpm/b0_canary_longmemeval.py",
+      "sha256": "b522f6a971a78910a4124db8f042b9f10ccb311f0647a04b84059dbc281d3d13"
+    },
+    {
+      "source": "evals/gdpm/b0_canary_runner.py",
+      "destination": "MiLAi/evals/gdpm/b0_canary_runner.py",
+      "sha256": "576c18811a65b3eff77330b513d7e4d2932004562988f8acbeb3117b884aa51c"
+    },
+    {
+      "source": "evals/gdpm/b0_canary_runtime.py",
+      "destination": "MiLAi/evals/gdpm/b0_canary_runtime.py",
+      "sha256": "93ebab07c13f5a7638545346563fbc4dc3ceecbfc5b1e23577e9b2225ec13506"
+    },
+    {
+      "source": "evals/gdpm/b0_context_truth.py",
+      "destination": "MiLAi/evals/gdpm/b0_context_truth.py",
+      "sha256": "d303255340b72b7227c4690731144757d11a578a2a11f85ad84c657d01585288"
+    },
+    {
+      "source": "evals/gdpm/known_failure_fixture.py",
+      "destination": "MiLAi/evals/gdpm/known_failure_fixture.py",
+      "sha256": "fc71ea3487933143028c1f3824dccd032713f903ba1bdc470d15f12293499049"
+    },
+    {
+      "source": "scripts/run_gdpm_b0_canary.py",
+      "destination": "MiLAi/scripts/run_gdpm_b0_canary.py",
+      "sha256": "5adb759a1aeb14c709ca30961a5319e6670272f8af27df6a3f65e9ebc61bd1bc"
+    },
+    {
+      "source": "scripts/run_gdpm_b0_context_truth.py",
+      "destination": "MiLAi/scripts/run_gdpm_b0_context_truth.py",
+      "sha256": "a964a5f9e2cec49c641da02e8e96b002651b8f1297964bb57ddc19401b027a30"
+    },
+    {
+      "source": "tests/test_gdpm_b0_canary_contract.py",
+      "destination": "MiLAi/tests/test_gdpm_b0_canary_contract.py",
+      "sha256": "6309bada3c8cd57955778e7cd2e40e8415daf0657368ffa423b07174bfea87dc"
+    },
+    {
+      "source": "tests/test_gdpm_b0_canary_longmemeval.py",
+      "destination": "MiLAi/tests/test_gdpm_b0_canary_longmemeval.py",
+      "sha256": "e20f9423e5d4825e307813a416af23158b609da25603f81adcb56563554bcdf5"
+    },
+    {
+      "source": "tests/test_gdpm_b0_canary_runner.py",
+      "destination": "MiLAi/tests/test_gdpm_b0_canary_runner.py",
+      "sha256": "1458b935ed30b8b7b5e712a5f915f408f7964f81821034c6c840dab99501addc"
+    },
+    {
+      "source": "tests/test_gdpm_b0_context_truth.py",
+      "destination": "MiLAi/tests/test_gdpm_b0_context_truth.py",
+      "sha256": "08a74a7a2ecf5dfc9736bf319fa37fd336bea49c15081fcaedadaa2546e74e63"
+    },
+    {
+      "source": "tests/test_gdpm_b0_runner.py",
+      "destination": "MiLAi/tests/test_gdpm_b0_runner.py",
+      "sha256": "cb76a432c82b983eae7353a75c563066f73d5e0c2c668cb4299e6636bc3eeaf0"
+    }
+  ]
+}

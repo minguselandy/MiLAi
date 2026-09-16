@@ -1,0 +1,30 @@
+{
+  "calibration_dev_labels_opened": true,
+  "candidate": "candidate.1",
+  "date": "2026-08-22",
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "failure": {
+    "reason_sha256": "0e2aa5eb1e4ca43b5d387646c595b60ef8a5d28ff95cf1ec3b7b54d157650c42",
+    "type": "SmokeFailure"
+  },
+  "gate_results": {
+    "BMG-02": "NO_GO_PARTIAL_FAILURE",
+    "BMG-05": "NO_GO_THRESHOLDS_NOT_FROZEN"
+  },
+  "inputs": {
+    "adapter_report_sha256": "0e943694ccf536bc4036c0276c832eb4fdec59dc9314b5707040f5a7ebc83d1b",
+    "calibration_plan_sha256": "bba09bf54166e43780fee936c7b1a0b037f3f268a2739793a12b6ad4e0732354"
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "NOT_EVALUABLE",
+  "quality_thresholds_frozen": false,
+  "repo_external_sidecar": {
+    "status": "NOT_WRITTEN_FOR_PARTIAL_FAILURE"
+  },
+  "schema": "milai.dg10.benchmark-three-arm-dev.v1",
+  "status": "FAIL_PARTIAL_THREE_ARM_DEV_NOT_CALIBRATION",
+  "test_access_authorized": false,
+  "test_labels_or_outputs_opened": false
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "milai-product03-opportunity-selection-v0.1",
+  "source_run": "product02-longmemeval-128-20260901T235621Z",
+  "opened_development_only": true,
+  "formal_holdout_consumed": false,
+  "selection_policy": {
+    "F1_minimum": 6,
+    "F1_query_type_minimum": 4,
+    "F2_minimum": 2,
+    "F3_minimum": 2,
+    "F4_F5_negative_control_minimum": 2
+  },
+  "cases": [
+    {"case_id": "ad7109d1", "family": "F1_DISCOVERY", "query_type": "single-session-user"},
+    {"case_id": "95bcc1c8", "family": "F1_DISCOVERY", "query_type": "single-session-user"},
+    {"case_id": "195a1a1b", "family": "F1_DISCOVERY", "query_type": "single-session-preference"},
+    {"case_id": "0a995998", "family": "F1_DISCOVERY", "query_type": "multi-session"},
+    {"case_id": "gpt4_93159ced", "family": "F1_DISCOVERY", "query_type": "temporal-reasoning"},
+    {"case_id": "gpt4_e072b769", "family": "F1_DISCOVERY", "query_type": "temporal-reasoning"},
+    {"case_id": "c4ea545c", "family": "F1_DISCOVERY", "query_type": "knowledge-update"},
+    {"case_id": "71a3fd6b", "family": "F1_DISCOVERY", "query_type": "single-session-assistant"},
+    {"case_id": "58bf7951", "family": "F2_SESSION_HIT_TURN_MISS", "query_type": "single-session-user"},
+    {"case_id": "54026fce", "family": "F2_SESSION_HIT_TURN_MISS", "query_type": "single-session-preference"},
+    {"case_id": "c4f10528", "family": "F2_SESSION_HIT_TURN_MISS", "query_type": "single-session-assistant"},
+    {"case_id": "5a7937c8", "family": "F3_PARTIAL_ROLE", "query_type": "multi-session"},
+    {"case_id": "gpt4_fa19884c", "family": "F3_PARTIAL_ROLE", "query_type": "temporal-reasoning"},
+    {"case_id": "a2f3aa27", "family": "F3_PARTIAL_ROLE", "query_type": "knowledge-update"},
+    {"case_id": "gpt4_68e94288", "family": "F4_VISIBLE_WRONG_CONTROL", "query_type": "temporal-reasoning"},
+    {"case_id": "eaca4986", "family": "F4_VISIBLE_WRONG_CONTROL", "query_type": "single-session-assistant"}
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "RESEARCH_PROTOTYPE",
+  "method": "workspace-control-v0.1",
+  "policy": "CONTROL_0",
+  "purpose": "Integrated development check, not a paired benefit or confirmation experiment",
+  "authorization": "User explicitly approved one new native trajectory, up to 64 total generations, in this turn",
+  "scope": {
+    "native_trajectories": 1,
+    "generations_including_maintenance_review_and_failures": 64,
+    "model_transport": "existing vLLM HTTP only",
+    "concurrency": 1,
+    "task": "cancel-async-tasks",
+    "task_exposure": "already exposed development root; no transfer claim",
+    "handoff_after_receipts": 2,
+    "handoff": "fresh Host and registry in the same retained isolated environment; not process crash recovery",
+    "delivery_reviews_max": 2,
+    "new_baseline_runs": 0,
+    "automatic_retries_or_expansion": false,
+    "gpu_or_shared_service_changes": false
+  },
+  "task_root": "/cra/memory/mx_memory/benchmarks/complex-native-20260914/terminal-bench-2-2fd12b88aafdd04a52c298e3940bcb189f9766d6/cancel-async-tasks",
+  "environment": "Reuse the documented uv 0.9.5 verifier bootstrap supplement; task, instruction and native checks unchanged",
+  "source_commit": "2fd12b88aafdd04a52c298e3940bcb189f9766d6",
+  "evidence_root": "/cra/memory/mx_memory/evidence/workspace-control-development-20260914-S0i9Wr",
+  "historical_limits": "EVIDENCE_1 had no incremental benefit; this implementation does not retroactively alter that result",
+  "interpretation": "Natural selection, branch return and feedback revision are observed when they occur, not forced scripted benchmark stages. Unit callbacks are not counted as model behavior."
+}

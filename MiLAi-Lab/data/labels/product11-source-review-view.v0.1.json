@@ -1,0 +1,2674 @@
+{
+  "a0_trace_sha256_pin_only": "eef498d36c35b102ca6943469c7b203113237b1bf63c3cb17cd8c95f9dd27a95",
+  "authoritative_full_source_packets": [
+    "data/labels/product11-annotator.packet.v0.7.json",
+    "data/labels/product11-reviewer.packet.v0.7.json"
+  ],
+  "cases": [
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "p11-c01",
+      "question": "Which distinct clothing items did I buy this season?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c01-01",
+          "source_id": "p11-source-p11-c01-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category clothing items. I bought hiking boots in March.",
+              "turn_ref": "p11://p11-c01/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "They are waterproof.",
+              "turn_ref": "p11://p11-c01/s01/t01"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c01-02",
+          "source_id": "p11-source-p11-c01-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category clothing items. I bought a navy blazer in April.",
+              "turn_ref": "p11://p11-c01/s02/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c01-03",
+          "source_id": "p11-source-p11-c01-03",
+          "turns": [
+            {
+              "observed_at": "2026-01-03T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category clothing items. I bought grey trousers in May.",
+              "turn_ref": "p11://p11-c01/s03/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c01-04",
+          "source_id": "p11-source-p11-c01-04",
+          "turns": [
+            {
+              "observed_at": "2026-01-04T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-00 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "dad53b37182f1cac549ee4b5143ad1c4f23c6e250057cef7469f52349c1ef252",
+              "turn_ref": "p11://p11-c01/s04/t00"
+            },
+            {
+              "observed_at": "2026-01-04T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-01 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "dc2798c9cddadb3f9ec4cfa7e8f174f59f87c8615958a557bf52df1c265b2bd4",
+              "turn_ref": "p11://p11-c01/s04/t01"
+            },
+            {
+              "observed_at": "2026-01-04T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-02 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "4193386af1b87d459d83980ff87746bb826b4131d8db55f27765eee9fbbfcef5",
+              "turn_ref": "p11://p11-c01/s04/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c01-05",
+          "source_id": "p11-source-p11-c01-05",
+          "turns": [
+            {
+              "observed_at": "2026-01-05T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-00 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "03f4465e0371cd01b10e3b2c089e45bcd8db8fac3fb499728feac1a0ae547369",
+              "turn_ref": "p11://p11-c01/s05/t00"
+            },
+            {
+              "observed_at": "2026-01-05T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-01 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "ccd88ac2638323f85eff7b634627f24f08a81f63613be62bb3981144fc72a498",
+              "turn_ref": "p11://p11-c01/s05/t01"
+            },
+            {
+              "observed_at": "2026-01-05T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-02 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "723b0ec5a36607e1468586713891285b536dd98b4ed80e417de2271651d1e2a4",
+              "turn_ref": "p11://p11-c01/s05/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c01-06",
+          "source_id": "p11-source-p11-c01-06",
+          "turns": [
+            {
+              "observed_at": "2026-01-06T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-00 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "a412de268108ba305b197315f4000096d0620b0dee6e180d5a80ae19df9701f2",
+              "turn_ref": "p11://p11-c01/s06/t00"
+            },
+            {
+              "observed_at": "2026-01-06T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-01 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "f8c0f8507e1afd6f6a75a3f6255c26457de59b9e90c1c5ac1022065e4a43a08f",
+              "turn_ref": "p11://p11-c01/s06/t01"
+            },
+            {
+              "observed_at": "2026-01-06T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-02 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "93326ae5f8ff7a7fa1016aab8146f67cd409b3ebdac47f1fd72476189f121041",
+              "turn_ref": "p11://p11-c01/s06/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c01-07",
+          "source_id": "p11-source-p11-c01-07",
+          "turns": [
+            {
+              "observed_at": "2026-01-07T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-00 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "a4ab0e5151eb35370233458df505a6a1ea625d78d1f5eae42ba87bb4650ec341",
+              "turn_ref": "p11://p11-c01/s07/t00"
+            },
+            {
+              "observed_at": "2026-01-07T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-01 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "1815dd51cebebbbb76ecd6cbd492be338ce8389755f02b4ca5f6e225e4f35eb1",
+              "turn_ref": "p11://p11-c01/s07/t01"
+            },
+            {
+              "observed_at": "2026-01-07T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-02 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "e13458b81a0abf1d613a683af9739252193a406fdbc317c34f2cba521c276403",
+              "turn_ref": "p11://p11-c01/s07/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c01-08",
+          "source_id": "p11-source-p11-c01-08",
+          "turns": [
+            {
+              "observed_at": "2026-01-08T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-00 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "739201bb1a7d64baa79d0ea93b931e658d6a90dbfff5bcf653f02b0a3e5bc202",
+              "turn_ref": "p11://p11-c01/s08/t00"
+            },
+            {
+              "observed_at": "2026-01-08T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-01 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "97bf7485bc0bca1f4f6ba2e606c395d26749d1c800678eb3d6edf8a9c2be29ea",
+              "turn_ref": "p11://p11-c01/s08/t01"
+            },
+            {
+              "observed_at": "2026-01-08T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-02 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "7e816ca3f041f385fbc460f5dc2e97af1891b5df74e12989769f27a2994397a1",
+              "turn_ref": "p11://p11-c01/s08/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c01-09",
+          "source_id": "p11-source-p11-c01-09",
+          "turns": [
+            {
+              "observed_at": "2026-01-09T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-00 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "4336ef49416a1e6ad6bea2c8f837cfec4c92b7a49b323a781eafaa15ce4ac510",
+              "turn_ref": "p11://p11-c01/s09/t00"
+            },
+            {
+              "observed_at": "2026-01-09T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-01 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "3a824790d0d4bfae8ff7f0192f8f955da9b4031c91d2351f05848f5ee0a9d1ee",
+              "turn_ref": "p11://p11-c01/s09/t01"
+            },
+            {
+              "observed_at": "2026-01-09T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-02 for clothing items; query wording Which distinct clothing items did I buy this season?; neutralcontext neutralcontext neutralcontext",
+              "text_sha256": "aaeed72cf3b3f5ac08fa3eebfad38fa167c2dd2b50b99ff91f4cdb663f2bae78",
+              "turn_ref": "p11://p11-c01/s09/t02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "REPEATED_MENTION",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "p11-c02",
+      "question": "List the distinct supplements I started taking.",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c02-01",
+          "source_id": "p11-source-p11-c02-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category supplements. I started vitamin D.",
+              "turn_ref": "p11://p11-c02/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category supplements. Vitamin D has helped my routine.",
+              "turn_ref": "p11://p11-c02/s01/t01"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c02-02",
+          "source_id": "p11-source-p11-c02-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category supplements. I added magnesium at night.",
+              "turn_ref": "p11://p11-c02/s02/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c02-03",
+          "source_id": "p11-source-p11-c02-03",
+          "turns": [
+            {
+              "observed_at": "2026-01-03T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category supplements. I began taking iron after the blood test.",
+              "turn_ref": "p11://p11-c02/s03/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c02-04",
+          "source_id": "p11-source-p11-c02-04",
+          "turns": [
+            {
+              "observed_at": "2026-01-04T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-00 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "ad21054cf88b896cd3206707efdd2639facde886ae8fd3180d21fc6f4fbbdb8e",
+              "turn_ref": "p11://p11-c02/s04/t00"
+            },
+            {
+              "observed_at": "2026-01-04T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-01 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "35bada95eb7d1eb7e1d5359ef2c2d0262293641ffe9c36b04c53a2134e42b9ec",
+              "turn_ref": "p11://p11-c02/s04/t01"
+            },
+            {
+              "observed_at": "2026-01-04T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-02 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "8305d51b0942748a9fa6e81c9c4ccc8941fbaae4065027397e9be146ce7aa141",
+              "turn_ref": "p11://p11-c02/s04/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c02-05",
+          "source_id": "p11-source-p11-c02-05",
+          "turns": [
+            {
+              "observed_at": "2026-01-05T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-00 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "d17c9df2d583d1ec84cf753b184bcea6508339ec3d0a1feb8db6bba903f14f74",
+              "turn_ref": "p11://p11-c02/s05/t00"
+            },
+            {
+              "observed_at": "2026-01-05T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-01 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "aa133885f9896599cab08f3ed68f100ebfa32cf0c04256de46ac11314794f4b8",
+              "turn_ref": "p11://p11-c02/s05/t01"
+            },
+            {
+              "observed_at": "2026-01-05T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-02 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "6010ad21e94e9039230d36eb4fd6c8ffe2bf7e49904e725952e1eb573bb892cd",
+              "turn_ref": "p11://p11-c02/s05/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c02-06",
+          "source_id": "p11-source-p11-c02-06",
+          "turns": [
+            {
+              "observed_at": "2026-01-06T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-00 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "ef721af1bb305263d90455ae48cea8df7fad951e0471dd5e1d8c4449c0280bfb",
+              "turn_ref": "p11://p11-c02/s06/t00"
+            },
+            {
+              "observed_at": "2026-01-06T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-01 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "650e07be733be4d417ae02d29460853511910a59b237399177e337aa680c5330",
+              "turn_ref": "p11://p11-c02/s06/t01"
+            },
+            {
+              "observed_at": "2026-01-06T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-02 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "ec6d96001323f9d0fcc1ffe1eb1c1320b3a27db6a479dff920d91259cd27f7eb",
+              "turn_ref": "p11://p11-c02/s06/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c02-07",
+          "source_id": "p11-source-p11-c02-07",
+          "turns": [
+            {
+              "observed_at": "2026-01-07T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-00 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "074d921b062222b538c4926e903c44cb5d068bda0d462a2b0370f809b74cdb51",
+              "turn_ref": "p11://p11-c02/s07/t00"
+            },
+            {
+              "observed_at": "2026-01-07T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-01 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "cb3e46c17f89320dafa92c63b22f5871ea19d5715126cb1f088aa9b427f4181c",
+              "turn_ref": "p11://p11-c02/s07/t01"
+            },
+            {
+              "observed_at": "2026-01-07T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-02 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "938c681b0f1a8d167a7ca54c261c57a6ce676bf52d14996d3afc67fc9bbbadb1",
+              "turn_ref": "p11://p11-c02/s07/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c02-08",
+          "source_id": "p11-source-p11-c02-08",
+          "turns": [
+            {
+              "observed_at": "2026-01-08T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-00 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "574067607c06c5b3c485af8826528ecedaf9beff782709878a295d12538eccc8",
+              "turn_ref": "p11://p11-c02/s08/t00"
+            },
+            {
+              "observed_at": "2026-01-08T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-01 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "0b2ab5ad10d36ac1e7119df5f32f7891501782a84518bf3cee1a0aa2dc1b653c",
+              "turn_ref": "p11://p11-c02/s08/t01"
+            },
+            {
+              "observed_at": "2026-01-08T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-02 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "ac5137e7c635922c711641e3c9af813ff48405e103767dc3909b2fef88b07c2a",
+              "turn_ref": "p11://p11-c02/s08/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c02-09",
+          "source_id": "p11-source-p11-c02-09",
+          "turns": [
+            {
+              "observed_at": "2026-01-09T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-00 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "1efd232f21b6998e440dfabc6bd0a5a7f508ea93144e97e264062da05977487b",
+              "turn_ref": "p11://p11-c02/s09/t00"
+            },
+            {
+              "observed_at": "2026-01-09T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-01 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "1fe301d7df3f75f2a3ae1eac81384ea6c4c0d423f494de7f8ea6f7bb93cf8c48",
+              "turn_ref": "p11://p11-c02/s09/t01"
+            },
+            {
+              "observed_at": "2026-01-09T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-02 for supplements; query wording List the distinct supplements I started taking.; neutralcontext neutralcontext neutralcontext neutral",
+              "text_sha256": "ce1926ab9a5aebd348b5bc891f0cc0f13d7106d5a5904ccd739229d18a787849",
+              "turn_ref": "p11://p11-c02/s09/t02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "CROSS_SESSION_AGGREGATION",
+        "UPDATE_COLLECTION",
+        "CONTINUATION"
+      ],
+      "case_id": "p11-c03",
+      "question": "Which cities did I visit after changing my travel plan?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c03-01",
+          "source_id": "p11-source-p11-c03-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I first planned to visit Rome but cancelled it.",
+              "turn_ref": "p11://p11-c03/s01/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c03-02",
+          "source_id": "p11-source-p11-c03-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category cities. I visited Lisbon in June.",
+              "turn_ref": "p11://p11-c03/s02/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c03-03",
+          "source_id": "p11-source-p11-c03-03",
+          "turns": [
+            {
+              "observed_at": "2026-01-03T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category cities. I visited Porto after Lisbon.",
+              "turn_ref": "p11://p11-c03/s03/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c03-04",
+          "source_id": "p11-source-p11-c03-04",
+          "turns": [
+            {
+              "observed_at": "2026-01-04T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category cities. I later visited Madrid.",
+              "turn_ref": "p11://p11-c03/s04/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c03-05",
+          "source_id": "p11-source-p11-c03-05",
+          "turns": [
+            {
+              "observed_at": "2026-01-05T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-00 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "d3b30ecb95a6fd96a9d761d2fd994c01073fedce0eb425bda1513068c89391bc",
+              "turn_ref": "p11://p11-c03/s05/t00"
+            },
+            {
+              "observed_at": "2026-01-05T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-01 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "736a6f0eb04ba98bedc7be52d51c1300fdfb80bc459ed9b7e964c4240da75a31",
+              "turn_ref": "p11://p11-c03/s05/t01"
+            },
+            {
+              "observed_at": "2026-01-05T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-02 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "f25d0ddcb48b1634f8ac6553c063456580b1cb68d9db7bedcbe07f91bfe5b488",
+              "turn_ref": "p11://p11-c03/s05/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c03-06",
+          "source_id": "p11-source-p11-c03-06",
+          "turns": [
+            {
+              "observed_at": "2026-01-06T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-00 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "1161acdf83df2aad3be94e391c3938fd8d4a9b2a0c7599214b2751a88fd0f329",
+              "turn_ref": "p11://p11-c03/s06/t00"
+            },
+            {
+              "observed_at": "2026-01-06T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-01 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "e351b564cd1ce5d69c98398b52b81adef712cacb419ec126507bda727d477d61",
+              "turn_ref": "p11://p11-c03/s06/t01"
+            },
+            {
+              "observed_at": "2026-01-06T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-02 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "2cf565660258950a1a7559fdd91d55efb2748724f200deff845b71331555dd0b",
+              "turn_ref": "p11://p11-c03/s06/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c03-07",
+          "source_id": "p11-source-p11-c03-07",
+          "turns": [
+            {
+              "observed_at": "2026-01-07T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-00 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "81b3f97149ffdcb24aa68681266b8fc7d6a91af668a14e9ec9e9254dc5ee06fc",
+              "turn_ref": "p11://p11-c03/s07/t00"
+            },
+            {
+              "observed_at": "2026-01-07T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-01 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "a8ed2727bd20f424775025671e3384308d973ff60fd829cf76b844ff1a5e2d5d",
+              "turn_ref": "p11://p11-c03/s07/t01"
+            },
+            {
+              "observed_at": "2026-01-07T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-02 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "1c23c0cf4141d51cc1dca61e9f70dbe7dd1c47c792231b016f1074150071bb8a",
+              "turn_ref": "p11://p11-c03/s07/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c03-08",
+          "source_id": "p11-source-p11-c03-08",
+          "turns": [
+            {
+              "observed_at": "2026-01-08T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-00 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "557b4ee6a5759e458d069cd8818cbaee6db17bb7c84872188251f88ff156d3b6",
+              "turn_ref": "p11://p11-c03/s08/t00"
+            },
+            {
+              "observed_at": "2026-01-08T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-01 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "afdfca5acd24e9c4c3c4ee597f34b27270bf57f3fa66019efee48c9e8ec0bcc3",
+              "turn_ref": "p11://p11-c03/s08/t01"
+            },
+            {
+              "observed_at": "2026-01-08T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-02 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "3db7d370d059a49e6e7e6b7bc52b3d097147b8b434f67a279550c19172b3220f",
+              "turn_ref": "p11://p11-c03/s08/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c03-09",
+          "source_id": "p11-source-p11-c03-09",
+          "turns": [
+            {
+              "observed_at": "2026-01-09T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-00 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "0c9656b7866466138d9844805cb8977c38df86acd077abc10ef067548a926ff3",
+              "turn_ref": "p11://p11-c03/s09/t00"
+            },
+            {
+              "observed_at": "2026-01-09T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-01 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "a139aca9d8dcadebe39adc148adb23cfeacae9831feeb2a79c49e47ed4b07e39",
+              "turn_ref": "p11://p11-c03/s09/t01"
+            },
+            {
+              "observed_at": "2026-01-09T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-02 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "21d9b708fd679d73fa5cbfd138c2fd22bec8b2d79c65c31d234ec0cf4ea4a306",
+              "turn_ref": "p11://p11-c03/s09/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c03-10",
+          "source_id": "p11-source-p11-c03-10",
+          "turns": [
+            {
+              "observed_at": "2026-01-10T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-00 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "4b88a1a0a3881c6afb2980f660b2b210a2d17da59a0ba9ecedd589cee0884fd1",
+              "turn_ref": "p11://p11-c03/s10/t00"
+            },
+            {
+              "observed_at": "2026-01-10T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-01 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "b8d973efc9a0080a4d42fd6ed8255fe049705f56274ebfa6b7e037b5f08becf0",
+              "turn_ref": "p11://p11-c03/s10/t01"
+            },
+            {
+              "observed_at": "2026-01-10T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-02 for cities; query wording Which cities did I visit after changing my travel plan?; neutralcontext neutralcontext neutralcontext neut",
+              "text_sha256": "1ad86ce9bbdd7b12553dfee98e14b7beaab2bef085d6744909058df16b9d762a",
+              "turn_ref": "p11://p11-c03/s10/t02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "p11-c04",
+      "question": "How many different medical appointments did I attend in July?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c04-01",
+          "source_id": "p11-source-p11-c04-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category appointments. I attended a dental cleaning on July 3.",
+              "turn_ref": "p11://p11-c04/s01/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c04-02",
+          "source_id": "p11-source-p11-c04-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category appointments. I attended a vision exam on July 12.",
+              "turn_ref": "p11://p11-c04/s02/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c04-03",
+          "source_id": "p11-source-p11-c04-03",
+          "turns": [
+            {
+              "observed_at": "2026-01-03T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category appointments. I attended a physiotherapy visit on July 28.",
+              "turn_ref": "p11://p11-c04/s03/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c04-04",
+          "source_id": "p11-source-p11-c04-04",
+          "turns": [
+            {
+              "observed_at": "2026-01-04T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "An August checkup is only planned.",
+              "turn_ref": "p11://p11-c04/s04/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c04-05",
+          "source_id": "p11-source-p11-c04-05",
+          "turns": [
+            {
+              "observed_at": "2026-01-05T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-00 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "cb9d382f3e343872e2c6604a5f17b2e09586f8748b19e3817eb5fb8e46f6116f",
+              "turn_ref": "p11://p11-c04/s05/t00"
+            },
+            {
+              "observed_at": "2026-01-05T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-01 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "2f27d0a75c39fe5c27350096c219638f5cb0ff61696c0df73f86943f0b09a20e",
+              "turn_ref": "p11://p11-c04/s05/t01"
+            },
+            {
+              "observed_at": "2026-01-05T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-02 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "1ae1120e7bc53c0bb9a7e2e601361f99a2ddd257c51858eb3a9e82d4903b9e82",
+              "turn_ref": "p11://p11-c04/s05/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c04-06",
+          "source_id": "p11-source-p11-c04-06",
+          "turns": [
+            {
+              "observed_at": "2026-01-06T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-00 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "8e29d7f7afe61846ddb0117e43911f229ea9fe8fa11a1036eed560c8acce61cc",
+              "turn_ref": "p11://p11-c04/s06/t00"
+            },
+            {
+              "observed_at": "2026-01-06T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-01 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "248fe893ea06728fb5a0703628acc1e895d8b0e5543abcd2cdeba35fe4c2162c",
+              "turn_ref": "p11://p11-c04/s06/t01"
+            },
+            {
+              "observed_at": "2026-01-06T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-02 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "121a73c3ac27cdd267e56396226644d6fb062a27d1c3899101f21a1c5b61abea",
+              "turn_ref": "p11://p11-c04/s06/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c04-07",
+          "source_id": "p11-source-p11-c04-07",
+          "turns": [
+            {
+              "observed_at": "2026-01-07T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-00 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "f55398038bcff5b85db9ccc5d773596a83bdf3c33b2e41cfded68b49a72cddb8",
+              "turn_ref": "p11://p11-c04/s07/t00"
+            },
+            {
+              "observed_at": "2026-01-07T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-01 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "465fd0c60b1d07cf3a02376ac31621d1ff4b466a69a971852c7dd15fea73bd47",
+              "turn_ref": "p11://p11-c04/s07/t01"
+            },
+            {
+              "observed_at": "2026-01-07T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-02 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "1643eafb9f33e3432125f13c01a7816f67b7d72ab6bad2da0a97d3c79c3c426c",
+              "turn_ref": "p11://p11-c04/s07/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c04-08",
+          "source_id": "p11-source-p11-c04-08",
+          "turns": [
+            {
+              "observed_at": "2026-01-08T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-00 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "1e64a51d712067c818fca66f06e10e1d7f6d05d36b5c99bdb52740e473373d76",
+              "turn_ref": "p11://p11-c04/s08/t00"
+            },
+            {
+              "observed_at": "2026-01-08T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-01 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "00d7e66002313e3c1986e16d8c844920cce883f7edf0a1cec8b7a00ac9525865",
+              "turn_ref": "p11://p11-c04/s08/t01"
+            },
+            {
+              "observed_at": "2026-01-08T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-02 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "1c2a187b6bfb37413d1b8398419f9b8b6f04b2974d5f2e252fd1b66d7e56a235",
+              "turn_ref": "p11://p11-c04/s08/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c04-09",
+          "source_id": "p11-source-p11-c04-09",
+          "turns": [
+            {
+              "observed_at": "2026-01-09T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-00 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "3bfc9239288baa76a7acde69d9dd1beb53fe825934c23759aec898e3003ef9ed",
+              "turn_ref": "p11://p11-c04/s09/t00"
+            },
+            {
+              "observed_at": "2026-01-09T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-01 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "c2832a0b9abcea9a38d116c03985933730cfb1065672e67a78d066160ace3172",
+              "turn_ref": "p11://p11-c04/s09/t01"
+            },
+            {
+              "observed_at": "2026-01-09T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-02 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "74f4310aa161eaf0fd1ad42166babc5759a1931fcdbb8522d7540d408b795c13",
+              "turn_ref": "p11://p11-c04/s09/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c04-10",
+          "source_id": "p11-source-p11-c04-10",
+          "turns": [
+            {
+              "observed_at": "2026-01-10T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-00 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "7f174096fc08ff1c358ed2bc34af804d567c5c50050a3611b5cf7e409449209a",
+              "turn_ref": "p11://p11-c04/s10/t00"
+            },
+            {
+              "observed_at": "2026-01-10T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-01 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "43437fc25a5ef85cc228a50b5528ba978b69b089dc41e250f7c3b20a311fee89",
+              "turn_ref": "p11://p11-c04/s10/t01"
+            },
+            {
+              "observed_at": "2026-01-10T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-02 for appointments; query wording How many different medical appointments did I attend in July?; neutralcontext neutralcontext neutral",
+              "text_sha256": "66029006a5176e29d511f428a26285223e1945f61048262b91060decbab46c9f",
+              "turn_ref": "p11://p11-c04/s10/t02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "p11-c05",
+      "question": "What distinct gifts did I receive for my birthday?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c05-01",
+          "source_id": "p11-source-p11-c05-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category gifts. Mina gave me a fountain pen.",
+              "turn_ref": "p11://p11-c05/s01/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c05-02",
+          "source_id": "p11-source-p11-c05-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category gifts. Owen gave me a wool scarf.",
+              "turn_ref": "p11://p11-c05/s02/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c05-03",
+          "source_id": "p11-source-p11-c05-03",
+          "turns": [
+            {
+              "observed_at": "2026-01-03T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category gifts. Priya gave me a ceramic vase.",
+              "turn_ref": "p11://p11-c05/s03/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c05-04",
+          "source_id": "p11-source-p11-c05-04",
+          "turns": [
+            {
+              "observed_at": "2026-01-04T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I thanked everyone the next day.",
+              "turn_ref": "p11://p11-c05/s04/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c05-05",
+          "source_id": "p11-source-p11-c05-05",
+          "turns": [
+            {
+              "observed_at": "2026-01-05T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-00 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "ab86d3520131dbea191038116b1b00fa78b1325e6f2060f2072684afc74efe8e",
+              "turn_ref": "p11://p11-c05/s05/t00"
+            },
+            {
+              "observed_at": "2026-01-05T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-01 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "8f504675ba0b1e851d2b6494268cc41a57741e13962a0726c35e46274c278854",
+              "turn_ref": "p11://p11-c05/s05/t01"
+            },
+            {
+              "observed_at": "2026-01-05T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-02 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "290b48611326785d65027d55fc89e37756ba613525d9773cd1c63d366354a27a",
+              "turn_ref": "p11://p11-c05/s05/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c05-06",
+          "source_id": "p11-source-p11-c05-06",
+          "turns": [
+            {
+              "observed_at": "2026-01-06T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-00 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "e87c1bb6b4fe6d0e19af5ad9a17e4ee372b6f3eab3f1311d87e54f8799434d72",
+              "turn_ref": "p11://p11-c05/s06/t00"
+            },
+            {
+              "observed_at": "2026-01-06T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-01 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "145d0726e62e66ac5ded9a6e4cc2bf264bbc59edb9635d4af753ded4ce664f1c",
+              "turn_ref": "p11://p11-c05/s06/t01"
+            },
+            {
+              "observed_at": "2026-01-06T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-02 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "38971662b59612b728123f1e4fcef181a4f7e8480333fa696af4920f56d4acae",
+              "turn_ref": "p11://p11-c05/s06/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c05-07",
+          "source_id": "p11-source-p11-c05-07",
+          "turns": [
+            {
+              "observed_at": "2026-01-07T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-00 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "6697198e70dbdbe96d61e6f413994517fd4c27fd41a25c060b7906274f4fd4d6",
+              "turn_ref": "p11://p11-c05/s07/t00"
+            },
+            {
+              "observed_at": "2026-01-07T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-01 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "d04f1ee3cc861398c4d7bbfa8f79cce9a31a8eeee8c7450eacba87ebf6a5cfde",
+              "turn_ref": "p11://p11-c05/s07/t01"
+            },
+            {
+              "observed_at": "2026-01-07T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-02 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "ace653f857fc82a5c0c5665cfad9018e2cb9a335af738e47733a5326b2ce3e1a",
+              "turn_ref": "p11://p11-c05/s07/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c05-08",
+          "source_id": "p11-source-p11-c05-08",
+          "turns": [
+            {
+              "observed_at": "2026-01-08T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-00 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "6a4bd83c37def4291f579ef085655b87ecf11f17f4a33ef8154fc245471178a1",
+              "turn_ref": "p11://p11-c05/s08/t00"
+            },
+            {
+              "observed_at": "2026-01-08T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-01 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "209eaa68c924d64e9de12794af45bee5001f87a95563beb2b00df31c18d61689",
+              "turn_ref": "p11://p11-c05/s08/t01"
+            },
+            {
+              "observed_at": "2026-01-08T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-02 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "322247108f7331a883ee3804074e3a733867e850764e5ce9e8102fa447dae4eb",
+              "turn_ref": "p11://p11-c05/s08/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c05-09",
+          "source_id": "p11-source-p11-c05-09",
+          "turns": [
+            {
+              "observed_at": "2026-01-09T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-00 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "319115d9449a874ffb52fb29ad232a7490afb1b01fec5639f5e0f1a647305be6",
+              "turn_ref": "p11://p11-c05/s09/t00"
+            },
+            {
+              "observed_at": "2026-01-09T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-01 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "22617e78aa970b55b7e090a702adc5c69652de0757bce0c792aaa8e360149e20",
+              "turn_ref": "p11://p11-c05/s09/t01"
+            },
+            {
+              "observed_at": "2026-01-09T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-02 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "1bd8570c376fb59c3a2a40bec7dd78e54d8db2d898c0c0c5b05f0fc8f9a3a321",
+              "turn_ref": "p11://p11-c05/s09/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c05-10",
+          "source_id": "p11-source-p11-c05-10",
+          "turns": [
+            {
+              "observed_at": "2026-01-10T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-00 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "bb9f430701025ef2c586ca1d5910b5d6b1f3f55a6570876bb849f765485f53fd",
+              "turn_ref": "p11://p11-c05/s10/t00"
+            },
+            {
+              "observed_at": "2026-01-10T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-01 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "b408834681f68fcf2d15846fabf9aa30e42220d95930577e7bd97a5b52bc9f71",
+              "turn_ref": "p11://p11-c05/s10/t01"
+            },
+            {
+              "observed_at": "2026-01-10T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-02 for gifts; query wording What distinct gifts did I receive for my birthday?; neutralcontext neutralcontext neutralcontext neutralcon",
+              "text_sha256": "cb7ab6d1c621e6ce4a55f6e5258a522329233339cf07c24ed14bd92083b83dd1",
+              "turn_ref": "p11://p11-c05/s10/t02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "REPEATED_MENTION",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "p11-c06",
+      "question": "Which different novels did I finish during the break?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c06-01",
+          "source_id": "p11-source-p11-c06-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category novels. I finished The Left Hand of Darkness.",
+              "turn_ref": "p11://p11-c06/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category novels. That Le Guin novel was excellent.",
+              "turn_ref": "p11://p11-c06/s01/t01"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c06-02",
+          "source_id": "p11-source-p11-c06-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category novels. I finished Piranesi.",
+              "turn_ref": "p11://p11-c06/s02/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c06-03",
+          "source_id": "p11-source-p11-c06-03",
+          "turns": [
+            {
+              "observed_at": "2026-01-03T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category novels. I finished Klara and the Sun.",
+              "turn_ref": "p11://p11-c06/s03/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c06-04",
+          "source_id": "p11-source-p11-c06-04",
+          "turns": [
+            {
+              "observed_at": "2026-01-04T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-00 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "cfcd5d1f72f78e4bbb806bf202903010c43ae65a9f2b7b072825ef84233b5d26",
+              "turn_ref": "p11://p11-c06/s04/t00"
+            },
+            {
+              "observed_at": "2026-01-04T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-01 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "ba46067e5fd9219cdf598ba26a91942129cc270bb6ec8c72e8eaff3c4a8bd3e2",
+              "turn_ref": "p11://p11-c06/s04/t01"
+            },
+            {
+              "observed_at": "2026-01-04T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-02 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "d563a742bff50f4175e8c14c6b9142a99d2e437c82a9851d910300bbddd41e60",
+              "turn_ref": "p11://p11-c06/s04/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c06-05",
+          "source_id": "p11-source-p11-c06-05",
+          "turns": [
+            {
+              "observed_at": "2026-01-05T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-00 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "f2488c1bad8af4837884465611ce34b0ad3a83564ebb1c5c7ee2425504d07cbb",
+              "turn_ref": "p11://p11-c06/s05/t00"
+            },
+            {
+              "observed_at": "2026-01-05T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-01 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "e2c9417045263bfab413531808dfeae6e05395fc320681034fcdc2bdb5511b4e",
+              "turn_ref": "p11://p11-c06/s05/t01"
+            },
+            {
+              "observed_at": "2026-01-05T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-02 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "e433f05b080059b3812e1ebf53aa48b8c369f27259c68896818677b4effd4b76",
+              "turn_ref": "p11://p11-c06/s05/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c06-06",
+          "source_id": "p11-source-p11-c06-06",
+          "turns": [
+            {
+              "observed_at": "2026-01-06T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-00 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "911e8687963cf029858b31b5e3999a6bda9d6d10a9e2c03aed15bd011bf6892e",
+              "turn_ref": "p11://p11-c06/s06/t00"
+            },
+            {
+              "observed_at": "2026-01-06T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-01 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "db2fca95382843e1b6b3ac51468c63e3edb90e590f516de387c75559897f8fee",
+              "turn_ref": "p11://p11-c06/s06/t01"
+            },
+            {
+              "observed_at": "2026-01-06T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-02 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "443288a07009a258e5bbf6e64b3ca8ed4889dcdb3d366413a4c48a1301bbcea6",
+              "turn_ref": "p11://p11-c06/s06/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c06-07",
+          "source_id": "p11-source-p11-c06-07",
+          "turns": [
+            {
+              "observed_at": "2026-01-07T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-00 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "fae521743fd56b7e7b7a6c50fc6da186c97a552622b6e0a9e84855938dc0a1a6",
+              "turn_ref": "p11://p11-c06/s07/t00"
+            },
+            {
+              "observed_at": "2026-01-07T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-01 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "6bd6cbfcfc92ff3d57e9787b57ffb649bff851f57335c55d1232793a9ef1c374",
+              "turn_ref": "p11://p11-c06/s07/t01"
+            },
+            {
+              "observed_at": "2026-01-07T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-02 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "e24e6c8aeba03b020bc620ef4822409eedeebed5266927f67ae07278d3bf5371",
+              "turn_ref": "p11://p11-c06/s07/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c06-08",
+          "source_id": "p11-source-p11-c06-08",
+          "turns": [
+            {
+              "observed_at": "2026-01-08T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-00 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "d6add39167eb7f2e618daaaeb6dbee12964ffe68d4d456b5ed34b6593c62d3e0",
+              "turn_ref": "p11://p11-c06/s08/t00"
+            },
+            {
+              "observed_at": "2026-01-08T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-01 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "f6ee56189f1449b0b1af678a80be0868e62e5077ff0a0136b089aba84b088a92",
+              "turn_ref": "p11://p11-c06/s08/t01"
+            },
+            {
+              "observed_at": "2026-01-08T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-02 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "e7094ff2acba85bce96546ac884ab0649c7680726eb0c0d0e5cbab865104aa8b",
+              "turn_ref": "p11://p11-c06/s08/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c06-09",
+          "source_id": "p11-source-p11-c06-09",
+          "turns": [
+            {
+              "observed_at": "2026-01-09T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-00 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "c425f664f3a86a2baf87b98da990ddff97e09004773c789dab4cce9263cf2322",
+              "turn_ref": "p11://p11-c06/s09/t00"
+            },
+            {
+              "observed_at": "2026-01-09T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-01 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "b9463c563ee887931e6043d7cbddeb01e919ea30976fc5f90436bd150007f386",
+              "turn_ref": "p11://p11-c06/s09/t01"
+            },
+            {
+              "observed_at": "2026-01-09T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-02 for novels; query wording Which different novels did I finish during the break?; neutralcontext neutralcontext neutralcontext neutra",
+              "text_sha256": "1e5047426051cc31d935560b54045f742d14ccfc40b2ea097f325c26ea93a6b5",
+              "turn_ref": "p11://p11-c06/s09/t02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "UPDATE_COLLECTION",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "p11-c07",
+      "question": "What distinct responsibilities do I have after the role update?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c07-01",
+          "source_id": "p11-source-p11-c07-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "My old role only covered release notes.",
+              "turn_ref": "p11://p11-c07/s01/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c07-02",
+          "source_id": "p11-source-p11-c07-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category responsibilities. I now lead sprint planning.",
+              "turn_ref": "p11://p11-c07/s02/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c07-03",
+          "source_id": "p11-source-p11-c07-03",
+          "turns": [
+            {
+              "observed_at": "2026-01-03T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category responsibilities. I now mentor two engineers.",
+              "turn_ref": "p11://p11-c07/s03/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c07-04",
+          "source_id": "p11-source-p11-c07-04",
+          "turns": [
+            {
+              "observed_at": "2026-01-04T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category responsibilities. I also own incident reviews.",
+              "turn_ref": "p11://p11-c07/s04/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c07-05",
+          "source_id": "p11-source-p11-c07-05",
+          "turns": [
+            {
+              "observed_at": "2026-01-05T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-00 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "b9651857ab2073d2319a0964e70940550b78e74ce870ca5f431b67bac801220c",
+              "turn_ref": "p11://p11-c07/s05/t00"
+            },
+            {
+              "observed_at": "2026-01-05T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-01 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "d34154529b2c91720496559adb9b1905cb5dfc30e252d27c042525619eefa4e7",
+              "turn_ref": "p11://p11-c07/s05/t01"
+            },
+            {
+              "observed_at": "2026-01-05T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-02 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "aebefa129c1e13b24b83a35e535f62604eb40d24a09fe0ec14f4671570c1e5b0",
+              "turn_ref": "p11://p11-c07/s05/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c07-06",
+          "source_id": "p11-source-p11-c07-06",
+          "turns": [
+            {
+              "observed_at": "2026-01-06T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-00 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "292616478bd3da547f52091ab4465f19438458d9233e72d17641f68ccf8cbc37",
+              "turn_ref": "p11://p11-c07/s06/t00"
+            },
+            {
+              "observed_at": "2026-01-06T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-01 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "1633479aabb8fbeb9abc7fdef02927b4b5f66607839c513f0dfd0d1f046e0277",
+              "turn_ref": "p11://p11-c07/s06/t01"
+            },
+            {
+              "observed_at": "2026-01-06T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-02 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "f04d2fee72c9ae65339cbb07a65ff1428207847332a3fd50d7537a9ed4ca6795",
+              "turn_ref": "p11://p11-c07/s06/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c07-07",
+          "source_id": "p11-source-p11-c07-07",
+          "turns": [
+            {
+              "observed_at": "2026-01-07T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-00 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "85e3e39327a05ba1a8a19edf11a7811701060f3bc944d8d10e4bb614ac040234",
+              "turn_ref": "p11://p11-c07/s07/t00"
+            },
+            {
+              "observed_at": "2026-01-07T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-01 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "46a001246f64017cbae27888eb40ba4fbb81b72824b5ab8d44b103b1bca65e32",
+              "turn_ref": "p11://p11-c07/s07/t01"
+            },
+            {
+              "observed_at": "2026-01-07T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-02 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "e027defa2576e7485c634ad31cb547c73c455ed631fbfc3f58ea7bbae15d98fe",
+              "turn_ref": "p11://p11-c07/s07/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c07-08",
+          "source_id": "p11-source-p11-c07-08",
+          "turns": [
+            {
+              "observed_at": "2026-01-08T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-00 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "3e64289bfe184ef147a99daddb5fab2bdfc655094d114e679476682c117c38d1",
+              "turn_ref": "p11://p11-c07/s08/t00"
+            },
+            {
+              "observed_at": "2026-01-08T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-01 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "27b81bab24e71038de7126ca3f9b4bcc9d3b8d27eed163ea8657e31ba45f7f0e",
+              "turn_ref": "p11://p11-c07/s08/t01"
+            },
+            {
+              "observed_at": "2026-01-08T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-02 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "6fd51390fa8ae08bcc943bd4df7cda3fb37f6849da2ee29a948615c07c74842d",
+              "turn_ref": "p11://p11-c07/s08/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c07-09",
+          "source_id": "p11-source-p11-c07-09",
+          "turns": [
+            {
+              "observed_at": "2026-01-09T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-00 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "b2039e04e472714ce006fdddebfec140ac7ab8476595552cb26bcb4536f9ddea",
+              "turn_ref": "p11://p11-c07/s09/t00"
+            },
+            {
+              "observed_at": "2026-01-09T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-01 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "626a936a52aee506b9fc406de04c4fac7677fb80ac3fb1fb969cddd162e7abde",
+              "turn_ref": "p11://p11-c07/s09/t01"
+            },
+            {
+              "observed_at": "2026-01-09T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-02 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "71cc3591e61437822d5b1fc7dba95a24a19c85bf42b763e6057ac1d3b54663c4",
+              "turn_ref": "p11://p11-c07/s09/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c07-10",
+          "source_id": "p11-source-p11-c07-10",
+          "turns": [
+            {
+              "observed_at": "2026-01-10T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-00 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "eb7d60c8bf5eec2e791bc08d419b15fc399eb4ba23e3cc34fe8b1d6d3dcd9c9b",
+              "turn_ref": "p11://p11-c07/s10/t00"
+            },
+            {
+              "observed_at": "2026-01-10T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-01 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "48417757286ff246c63ab768ddc38fabc529a7f8a9a0adf3d0fd5f2df10c9161",
+              "turn_ref": "p11://p11-c07/s10/t01"
+            },
+            {
+              "observed_at": "2026-01-10T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-02 for responsibilities; query wording What distinct responsibilities do I have after the role update?; neutralcontext neutralcontext n",
+              "text_sha256": "bec97ec0868388ddf0371cfca97ced23655e5155f8794c29ceba8a16c3af36c6",
+              "turn_ref": "p11://p11-c07/s10/t02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "CROSS_SESSION_AGGREGATION",
+        "CONTINUATION"
+      ],
+      "case_id": "p11-c08",
+      "question": "How many different restaurants did I try on the trip?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c08-01",
+          "source_id": "p11-source-p11-c08-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category restaurants. I ate at Cedar Table.",
+              "turn_ref": "p11://p11-c08/s01/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c08-02",
+          "source_id": "p11-source-p11-c08-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category restaurants. I tried Blue Lantern the next evening.",
+              "turn_ref": "p11://p11-c08/s02/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c08-03",
+          "source_id": "p11-source-p11-c08-03",
+          "turns": [
+            {
+              "observed_at": "2026-01-03T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category restaurants. I had lunch at North Pier Cafe.",
+              "turn_ref": "p11://p11-c08/s03/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c08-04",
+          "source_id": "p11-source-p11-c08-04",
+          "turns": [
+            {
+              "observed_at": "2026-01-04T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Retrieval category restaurants. I returned to Cedar Table for dessert.",
+              "turn_ref": "p11://p11-c08/s04/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c08-05",
+          "source_id": "p11-source-p11-c08-05",
+          "turns": [
+            {
+              "observed_at": "2026-01-05T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-00 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "708cb736dab0b0e923eb7cea51fa7661901ffca9696943f39f8985e29e165b21",
+              "turn_ref": "p11://p11-c08/s05/t00"
+            },
+            {
+              "observed_at": "2026-01-05T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-01 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "9dd9f4e6c00ec6beb42845746b330035266aca38c9083d1e7e711f4b5306fe0d",
+              "turn_ref": "p11://p11-c08/s05/t01"
+            },
+            {
+              "observed_at": "2026-01-05T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 00-02 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "3670ed59ff0fb2fa03f3c4097c3d99cf9019a3c4b160899f07f36cf75b6d877c",
+              "turn_ref": "p11://p11-c08/s05/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c08-06",
+          "source_id": "p11-source-p11-c08-06",
+          "turns": [
+            {
+              "observed_at": "2026-01-06T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-00 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "bd1bfa07cd53ccf096d440acca96f92551c9835509c7dae01a8340b6833deaab",
+              "turn_ref": "p11://p11-c08/s06/t00"
+            },
+            {
+              "observed_at": "2026-01-06T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-01 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "f2727378d4928d69fed191cd88e7a2deb389a5482ec0ee9dfe4ff4c37794d8b4",
+              "turn_ref": "p11://p11-c08/s06/t01"
+            },
+            {
+              "observed_at": "2026-01-06T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 01-02 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "6353407786d6e462999c86844a3650ff32175414ca3041e8952d271e942dafd9",
+              "turn_ref": "p11://p11-c08/s06/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c08-07",
+          "source_id": "p11-source-p11-c08-07",
+          "turns": [
+            {
+              "observed_at": "2026-01-07T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-00 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "fb24d61738efb14d41b836c4197a6736f81600b95478912f35fe8cb7f7b9b1af",
+              "turn_ref": "p11://p11-c08/s07/t00"
+            },
+            {
+              "observed_at": "2026-01-07T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-01 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "908f67360319955ffb63cdcfb127288ef7d76f6d6725ed71a006559c2759eda3",
+              "turn_ref": "p11://p11-c08/s07/t01"
+            },
+            {
+              "observed_at": "2026-01-07T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 02-02 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "13d2153872867c72c904ccb35a2d82b1b7ffc42f903a535936bd9cac5c8e9e0b",
+              "turn_ref": "p11://p11-c08/s07/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c08-08",
+          "source_id": "p11-source-p11-c08-08",
+          "turns": [
+            {
+              "observed_at": "2026-01-08T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-00 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "452da626bf995429a08529e7b1da50d1dc819d9c97c441f75c96618f5fba7e84",
+              "turn_ref": "p11://p11-c08/s08/t00"
+            },
+            {
+              "observed_at": "2026-01-08T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-01 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "a0824efb26fbd3a776f3a62a4285cc66e7aa00196d0c7b1081626f5ebc5c8b0a",
+              "turn_ref": "p11://p11-c08/s08/t01"
+            },
+            {
+              "observed_at": "2026-01-08T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 03-02 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "26cacfdd4061a2e724f66c188cf8511005d0b7f65711e11fa85aeac60050972f",
+              "turn_ref": "p11://p11-c08/s08/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c08-09",
+          "source_id": "p11-source-p11-c08-09",
+          "turns": [
+            {
+              "observed_at": "2026-01-09T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-00 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "4ce1b75c53a2d6745bc5b2d6ecd80320f7a8ed9a7357273ef948b118541b7811",
+              "turn_ref": "p11://p11-c08/s09/t00"
+            },
+            {
+              "observed_at": "2026-01-09T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-01 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "03fbe385d7a4e4ac6819625f1421d11569bb14b0f7dc3de00d5a5e2c4d711ad7",
+              "turn_ref": "p11://p11-c08/s09/t01"
+            },
+            {
+              "observed_at": "2026-01-09T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 04-02 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "8d41bee17db4d3aa4fc524dbe8d0c8feffd1882156e7f8c37730a3c2d7786043",
+              "turn_ref": "p11://p11-c08/s09/t02"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c08-10",
+          "source_id": "p11-source-p11-c08-10",
+          "turns": [
+            {
+              "observed_at": "2026-01-10T00:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-00 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "b245b6ae25eec2c049cd6254b777421a53bf833c5c3c1f31b99fc180ae1bdcbf",
+              "turn_ref": "p11://p11-c08/s10/t00"
+            },
+            {
+              "observed_at": "2026-01-10T01:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-01 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "3a868960ac5dd2ef7559b0ecfded7996e601175c73c5e0c908c5a24795feb43a",
+              "turn_ref": "p11://p11-c08/s10/t01"
+            },
+            {
+              "observed_at": "2026-01-10T02:00:00Z",
+              "presentation": "DETERMINISTIC_INDEX_ONLY_DISTRACTOR_COMPACTED",
+              "speaker": "user",
+              "text_preview": "Index-only distractor 05-02 for restaurants; query wording How many different restaurants did I try on the trip?; neutralcontext neutralcontext neutralcontext n",
+              "text_sha256": "fa64ced6bb613ae54f076fa80ddf83f4bfd428a5076f67d01cd97bbf0a8227f6",
+              "turn_ref": "p11://p11-c08/s10/t02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE"
+      ],
+      "case_id": "p11-c09",
+      "question": "Which power tools did I purchase?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c09-01",
+          "source_id": "p11-source-p11-c09-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The power tools I purchased included a cordless drill.",
+              "turn_ref": "p11://p11-c09/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The receipt was emailed.",
+              "turn_ref": "p11://p11-c09/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The next one was a circular saw.",
+              "turn_ref": "p11://p11-c09/s01/t02"
+            },
+            {
+              "observed_at": "2026-01-01T03:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I compared safety glasses.",
+              "turn_ref": "p11://p11-c09/s01/t03"
+            },
+            {
+              "observed_at": "2026-01-01T04:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The final one was an orbital sander.",
+              "turn_ref": "p11://p11-c09/s01/t04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "REPEATED_MENTION"
+      ],
+      "case_id": "p11-c10",
+      "question": "List the distinct pantry staples I restocked.",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c10-01",
+          "source_id": "p11-source-p11-c10-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The pantry staples I restocked included rice.",
+              "turn_ref": "p11://p11-c10/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The rice went on the bottom shelf.",
+              "turn_ref": "p11://p11-c10/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I cleaned the jars.",
+              "turn_ref": "p11://p11-c10/s01/t02"
+            },
+            {
+              "observed_at": "2026-01-01T03:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Lentils came next.",
+              "turn_ref": "p11://p11-c10/s01/t03"
+            },
+            {
+              "observed_at": "2026-01-01T04:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I wrote a note for later.",
+              "turn_ref": "p11://p11-c10/s01/t04"
+            },
+            {
+              "observed_at": "2026-01-01T05:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Olive oil was the final one.",
+              "turn_ref": "p11://p11-c10/s01/t05"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE"
+      ],
+      "case_id": "p11-c11",
+      "question": "Which courses did I enroll in this term?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c11-01",
+          "source_id": "p11-source-p11-c11-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The courses I enrolled in included statistics.",
+              "turn_ref": "p11://p11-c11/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Classes begin Monday.",
+              "turn_ref": "p11://p11-c11/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Ceramics was the next one.",
+              "turn_ref": "p11://p11-c11/s01/t02"
+            },
+            {
+              "observed_at": "2026-01-01T03:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I bought notebooks.",
+              "turn_ref": "p11://p11-c11/s01/t03"
+            },
+            {
+              "observed_at": "2026-01-01T04:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Spanish conversation completed my schedule.",
+              "turn_ref": "p11://p11-c11/s01/t04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "SAME_TYPE_DIFFERENT_INSTANCE"
+      ],
+      "case_id": "p11-c12",
+      "question": "What different plants did I add to the balcony?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c12-01",
+          "source_id": "p11-source-p11-c12-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The plants I added to the balcony included basil.",
+              "turn_ref": "p11://p11-c12/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "It needs morning sun.",
+              "turn_ref": "p11://p11-c12/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Rosemary came next.",
+              "turn_ref": "p11://p11-c12/s01/t02"
+            },
+            {
+              "observed_at": "2026-01-01T03:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I changed the watering can.",
+              "turn_ref": "p11://p11-c12/s01/t03"
+            },
+            {
+              "observed_at": "2026-01-01T04:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "A dwarf lemon tree was the final one.",
+              "turn_ref": "p11://p11-c12/s01/t04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "UPDATE_COLLECTION"
+      ],
+      "case_id": "p11-c13",
+      "question": "Which repairs did I complete in the apartment?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c13-01",
+          "source_id": "p11-source-p11-c13-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The apartment repairs I completed included fixing the leaking kitchen tap.",
+              "turn_ref": "p11://p11-c13/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The plumber visit was cancelled.",
+              "turn_ref": "p11://p11-c13/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Next was replacement of the hallway light switch.",
+              "turn_ref": "p11://p11-c13/s01/t02"
+            },
+            {
+              "observed_at": "2026-01-01T03:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I measured the bedroom wall.",
+              "turn_ref": "p11://p11-c13/s01/t03"
+            },
+            {
+              "observed_at": "2026-01-01T04:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The balcony latch was the final fix.",
+              "turn_ref": "p11://p11-c13/s01/t04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "REPEATED_MENTION"
+      ],
+      "case_id": "p11-c14",
+      "question": "How many different workouts did I complete this week?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c14-01",
+          "source_id": "p11-source-p11-c14-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The workouts I completed this week included a five-kilometre run.",
+              "turn_ref": "p11://p11-c14/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The run felt easier than last week.",
+              "turn_ref": "p11://p11-c14/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I washed my shoes.",
+              "turn_ref": "p11://p11-c14/s01/t02"
+            },
+            {
+              "observed_at": "2026-01-01T03:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Next was a yoga class.",
+              "turn_ref": "p11://p11-c14/s01/t03"
+            },
+            {
+              "observed_at": "2026-01-01T04:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I made dinner.",
+              "turn_ref": "p11://p11-c14/s01/t04"
+            },
+            {
+              "observed_at": "2026-01-01T05:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "A swim session was the final one.",
+              "turn_ref": "p11://p11-c14/s01/t05"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "SAME_TYPE_DIFFERENT_INSTANCE",
+        "UPDATE_COLLECTION"
+      ],
+      "case_id": "p11-c15",
+      "question": "Which subscriptions did I renew?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c15-01",
+          "source_id": "p11-source-p11-c15-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The subscriptions I renewed included the city newspaper.",
+              "turn_ref": "p11://p11-c15/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The old music trial expired.",
+              "turn_ref": "p11://p11-c15/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The cloud backup plan was next.",
+              "turn_ref": "p11://p11-c15/s01/t02"
+            },
+            {
+              "observed_at": "2026-01-01T03:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I changed my password.",
+              "turn_ref": "p11://p11-c15/s01/t03"
+            },
+            {
+              "observed_at": "2026-01-01T04:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The museum membership was the final one.",
+              "turn_ref": "p11://p11-c15/s01/t04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE"
+      ],
+      "case_id": "p11-c16",
+      "question": "What different art supplies did I buy?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c16-01",
+          "source_id": "p11-source-p11-c16-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The art supplies I bought included watercolour paper.",
+              "turn_ref": "p11://p11-c16/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "The shop was crowded.",
+              "turn_ref": "p11://p11-c16/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "A sable brush came next.",
+              "turn_ref": "p11://p11-c16/s01/t02"
+            },
+            {
+              "observed_at": "2026-01-01T03:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I checked a frame size.",
+              "turn_ref": "p11://p11-c16/s01/t03"
+            },
+            {
+              "observed_at": "2026-01-01T04:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Masking fluid was the final one.",
+              "turn_ref": "p11://p11-c16/s01/t04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "REPEATED_MENTION"
+      ],
+      "case_id": "p11-c17",
+      "question": "Which bicycle did I say I purchased?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c17-01",
+          "source_id": "p11-source-p11-c17-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category bicycle purchased. I purchased a green touring bicycle.",
+              "turn_ref": "p11://p11-c17/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category bicycle purchased. The green touring bicycle arrived today.",
+              "turn_ref": "p11://p11-c17/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I adjusted its saddle.",
+              "turn_ref": "p11://p11-c17/s01/t02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "UPDATE_COLLECTION"
+      ],
+      "case_id": "p11-c18",
+      "question": "What document did I renew?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c18-01",
+          "source_id": "p11-source-p11-c18-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category document renewed. I renewed my passport last Tuesday.",
+              "turn_ref": "p11://p11-c18/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category document renewed. The new passport arrived by courier.",
+              "turn_ref": "p11://p11-c18/s01/t01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "UPDATE_COLLECTION",
+        "REPEATED_MENTION"
+      ],
+      "case_id": "p11-c19",
+      "question": "Which phone am I currently using?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c19-01",
+          "source_id": "p11-source-p11-c19-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I used to have a silver phone.",
+              "turn_ref": "p11://p11-c19/s01/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c19-02",
+          "source_id": "p11-source-p11-c19-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category phone currently using. I replaced it with a blue Pixel phone.",
+              "turn_ref": "p11://p11-c19/s02/t00"
+            },
+            {
+              "observed_at": "2026-01-02T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category phone currently using. The blue Pixel is now my daily phone.",
+              "turn_ref": "p11://p11-c19/s02/t01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE"
+      ],
+      "case_id": "p11-c20",
+      "question": "Which two mugs did I buy?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c20-01",
+          "source_id": "p11-source-p11-c20-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category mugs bought. I bought a red travel mug.",
+              "turn_ref": "p11://p11-c20/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category mugs bought. I also bought a white ceramic mug in the same order.",
+              "turn_ref": "p11://p11-c20/s01/t01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "REPEATED_MENTION",
+        "COUNTING"
+      ],
+      "case_id": "p11-c21",
+      "question": "Which appointment was mentioned twice?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c21-01",
+          "source_id": "p11-source-p11-c21-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category appointment mentioned twice. My dental cleaning is on September 9.",
+              "turn_ref": "p11://p11-c21/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category appointment mentioned twice. I confirmed the September 9 dental cleaning.",
+              "turn_ref": "p11://p11-c21/s01/t01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "REPEATED_MENTION"
+      ],
+      "case_id": "p11-c22",
+      "question": "Which pet did I adopt?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c22-01",
+          "source_id": "p11-source-p11-c22-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category pet adopted. I adopted a tabby cat named Juniper.",
+              "turn_ref": "p11://p11-c22/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category pet adopted. Juniper slept on the sofa.",
+              "turn_ref": "p11://p11-c22/s01/t01"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c22-02",
+          "source_id": "p11-source-p11-c22-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "I bought cat food.",
+              "turn_ref": "p11://p11-c22/s02/t00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "CROSS_SESSION_AGGREGATION"
+      ],
+      "case_id": "p11-c23",
+      "question": "Which travel bookings did I confirm?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c23-01",
+          "source_id": "p11-source-p11-c23-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category travel bookings confirmed. I confirmed the train to Kyoto.",
+              "turn_ref": "p11://p11-c23/s01/t00"
+            }
+          ]
+        },
+        {
+          "session_id": "p11-session-p11-c23-02",
+          "source_id": "p11-source-p11-c23-02",
+          "turns": [
+            {
+              "observed_at": "2026-01-02T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category travel bookings confirmed. I confirmed the Riverside Hotel booking.",
+              "turn_ref": "p11://p11-c23/s02/t00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "capability_shapes": [
+        "ENUMERATION",
+        "COUNTING",
+        "SAME_TYPE_DIFFERENT_INSTANCE"
+      ],
+      "case_id": "p11-c24",
+      "question": "Which shoes did I pack?",
+      "sessions": [
+        {
+          "session_id": "p11-session-p11-c24-01",
+          "source_id": "p11-source-p11-c24-01",
+          "turns": [
+            {
+              "observed_at": "2026-01-01T00:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category shoes packed. I packed running shoes.",
+              "turn_ref": "p11://p11-c24/s01/t00"
+            },
+            {
+              "observed_at": "2026-01-01T01:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category shoes packed. I packed brown boots.",
+              "turn_ref": "p11://p11-c24/s01/t01"
+            },
+            {
+              "observed_at": "2026-01-01T02:00:00Z",
+              "presentation": "FULL_SOURCE_TEXT",
+              "speaker": "user",
+              "text": "Category shoes packed. I packed canvas sandals.",
+              "turn_ref": "p11://p11-c24/s01/t02"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "classification": "OPENED_DEVELOPMENT_ONLY",
+  "compacted_distractor_turn_count": 144,
+  "contains_model_proposals": false,
+  "contains_product_output": false,
+  "formal_source": false,
+  "full_source_turn_count": 94,
+  "instructions": [
+    "Use this compact view for source review; it contains no Product retrieval output.",
+    "Consult an authoritative full-source packet if a compacted distractor needs inspection.",
+    "Write judgments only into your role-specific independent submission file."
+  ],
+  "schema_version": "milai-product11-source-review-view-v0.1",
+  "source_fixture_file_sha256": "c1fee1f4e9f68e7d9a0b082984c4ed5e4952e1e3f72ae009afd264640ba4c709",
+  "source_fixture_semantic_sha256": "6c9ab9560b87edf106c0524927043237c794cabd31c0d12050142befa7c65d66",
+  "source_only": true
+}

@@ -1,0 +1,63 @@
+{
+  "audit_skill": "citation-audit",
+  "verdict": "PASS",
+  "reason_code": "ALL_CURRENT_USES_SUPPORTED_AFTER_QUALIFICATION",
+  "summary": "Six external sources exist, have verified metadata, and support the architecture document's current qualified claims.",
+  "audited_input_hashes": {
+    "MiLAi_受治理双过程Memory架构设计_20260831.md": "f5975c57eb81a82ce89c025332de2146163a7970c9c4d7f497db5d75ed74ca5c"
+  },
+  "trace_path": "docs/reports/MiLAi_GDPM_CITATION_AUDIT_20260831.md",
+  "thread_id": "/root",
+  "reviewer_model": "gpt-5.6-sol",
+  "reviewer_reasoning": "xhigh",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "generated_at": "2026-08-31T18:29:15+08:00",
+  "details": {
+    "total_entries": 6,
+    "counts": {
+      "KEEP": 6,
+      "FIX": 0,
+      "REPLACE": 0,
+      "REMOVE": 0
+    },
+    "per_entry": [
+      {
+        "key": "sun2023gocls",
+        "verdict": "KEEP",
+        "axis_failures": [],
+        "uses": [{"file": "MiLAi_受治理双过程Memory架构设计_20260831.md", "verdict": "SUPPORTS_WITH_MODEL_CAVEAT"}]
+      },
+      {
+        "key": "yassa2011pattern",
+        "verdict": "KEEP",
+        "axis_failures": [],
+        "uses": [{"file": "MiLAi_受治理双过程Memory架构设计_20260831.md", "verdict": "SUPPORTS"}]
+      },
+      {
+        "key": "nimh2024adhd",
+        "verdict": "KEEP",
+        "axis_failures": [],
+        "uses": [{"file": "MiLAi_受治理双过程Memory架构设计_20260831.md", "verdict": "SUPPORTS_WITH_DESIGN_INFERENCE"}]
+      },
+      {
+        "key": "jonkman2017mindwandering",
+        "verdict": "KEEP",
+        "axis_failures": [],
+        "uses": [{"file": "MiLAi_受治理双过程Memory架构设计_20260831.md", "verdict": "SUPPORTS_AFTER_REWRITE"}]
+      },
+      {
+        "key": "hoogman2020creativity",
+        "verdict": "KEEP",
+        "axis_failures": [],
+        "uses": [{"file": "MiLAi_受治理双过程Memory架构设计_20260831.md", "verdict": "SUPPORTS_AFTER_REWRITE"}]
+      },
+      {
+        "key": "chen2025switching",
+        "verdict": "KEEP",
+        "axis_failures": [],
+        "uses": [{"file": "MiLAi_受治理双过程Memory架构设计_20260831.md", "verdict": "SUPPORTS_AFTER_REWRITE"}]
+      }
+    ]
+  }
+}

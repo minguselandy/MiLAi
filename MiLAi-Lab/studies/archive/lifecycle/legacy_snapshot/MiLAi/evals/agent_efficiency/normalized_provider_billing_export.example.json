@@ -1,0 +1,15 @@
+{
+  "format": "milai-normalized-provider-billing-export-v2",
+  "provider": "REPLACE_WITH_APPROVED_PROVIDER",
+  "model_id": "REPLACE_WITH_EXACT_MODEL_VERSION",
+  "currency": "USD",
+  "period_start": "REPLACE_WITH_RFC3339_TIMESTAMP",
+  "period_end": "REPLACE_WITH_RFC3339_TIMESTAMP",
+  "upstream_provider_artifact_sha256": "REPLACE_WITH_PROVIDER_EXPORT_OR_INVOICE_SHA256",
+  "records": [
+    {
+      "provider_request_id": "REPLACE_WITH_PROVIDER_REQUEST_ID",
+      "cost": "REPLACE_WITH_DECIMAL"
+    }
+  ]
+}

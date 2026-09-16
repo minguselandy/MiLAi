@@ -1,0 +1,11 @@
+{
+  "audit_id": "product09-integrity-for-product10-20260903-01",
+  "overall_verdict": "FAIL",
+  "reason_code": "CLAIM_EVIDENCE_MISMATCH_AND_UNSEALED_EVALUATION",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "product10_status": "X0_NOT_STARTED",
+  "product10_inheritance": "DOCUMENTARY_OBSERVATION_ONLY_RERUN_A0_REQUIRED",
+  "latest_report": "EXPERIMENT_AUDIT.md",
+  "trace_path": ".aris/traces/experiment-audit/2026-09-03_run01/"
+}

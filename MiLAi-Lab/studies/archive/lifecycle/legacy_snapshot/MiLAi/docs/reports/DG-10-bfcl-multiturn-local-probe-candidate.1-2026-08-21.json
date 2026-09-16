@@ -1,0 +1,313 @@
+{
+  "aggregates": {
+    "dialogues_passed": 4,
+    "dialogues_planned": 4,
+    "input_tokens": 4926,
+    "latency_ms_mean": 215.863,
+    "model_rounds_executed": 8,
+    "model_rounds_planned": 8,
+    "output_tokens": 98,
+    "safety_failure_dialogues": 0
+  },
+  "benchmark_material_opened_by_probe": false,
+  "bfcl_dev_answer_labels_opened": false,
+  "bfcl_test_labels_or_outputs_opened": false,
+  "candidate": "candidate.1",
+  "data_boundary": "SYNTHETIC_ONLY_NO_BENCHMARK_PROMPT_LABEL_OR_OUTPUT",
+  "date": "2026-08-21",
+  "ended_at": "2026-08-21T15:14:40.515290+00:00",
+  "external_provider_cost": 0,
+  "external_provider_requests": 0,
+  "gate_results": {
+    "BMG-03": "NO_GO_SYNTHETIC_PROBE_IS_NOT_DEV_CALIBRATION",
+    "BMG-05": "NO_GO_QUALITY_THRESHOLDS_NOT_FROZEN",
+    "offline_ast_corpus": "PASS_BOUND",
+    "revised_synthetic_local_vllm": "PASS",
+    "scripted_state_machine": "PASS_BOUND",
+    "static_no_label_closure": "PASS_BOUND"
+  },
+  "hidden_or_extra_model_calls": 0,
+  "identity_post": {
+    "base_url_class": "LOOPBACK_LOCAL_VLLM",
+    "binding_sha256": "951564832a9bd75c927b42583a0ee66a688b78aea8a247bd72835cef1db84500",
+    "identity_report_sha256": "0463fff90754f54c887ed79e54b5db5593b1860cf593c4a89a66c1828eaa3f0e",
+    "max_model_len": 65536,
+    "served_model_id": "Qwen3.6-35B-A3B-FP8",
+    "vllm_lifecycle_mutated": false,
+    "vllm_version": "0.27.1"
+  },
+  "identity_pre": {
+    "base_url_class": "LOOPBACK_LOCAL_VLLM",
+    "binding_sha256": "951564832a9bd75c927b42583a0ee66a688b78aea8a247bd72835cef1db84500",
+    "identity_report_sha256": "0463fff90754f54c887ed79e54b5db5593b1860cf593c4a89a66c1828eaa3f0e",
+    "max_model_len": 65536,
+    "served_model_id": "Qwen3.6-35B-A3B-FP8",
+    "vllm_lifecycle_mutated": false,
+    "vllm_version": "0.27.1"
+  },
+  "inputs": {
+    "local_probe_script_sha256": "c208173043858631b3e0bb72952128e1187baa854ab46306d9b6c709197aab93",
+    "official_prompt_decoder_sha256": "f78fd3edce603b333dc9a88ee2c041dc547d51f71aa449ffebc044c4b1e353f3",
+    "safety_contract_sha256": "5e0ce2b4e0a49704d1296bacc831b20473494317684ca88a06dfdba45e0fa792",
+    "strict_synthetic_contract_sha256": "ce9f86580a8b5aaa540195bfb1e7b59079909d3c6aa0018bf9eebf3f2b71cef3",
+    "strict_synthetic_fixtures_sha256": "7ec8001f37219ddc52da3f2017ccaa92366759b82ed82a1f8259762c9f6b7173"
+  },
+  "known_limits": [
+    "This is an eight-round synthetic endpoint probe, not a BFCL benchmark score.",
+    "Prompt-mode calls are dual-gated, client-decoded, non-native, adapted, and non-leaderboard-comparable.",
+    "A PASS authorizes only the separately predeclared development generation workflow; it does not authorize test access.",
+    "No MCP wire, memory-arm, external-provider, quality-threshold, or formal CRG claim is supported."
+  ],
+  "local_tokenizer_requests": 8,
+  "local_vllm_requests": 8,
+  "protocol": {
+    "client_side_dual_ast_gate": true,
+    "label": "ADAPTED_ENDPOINT_PROTOCOL_BFCL_PROMPT_MODE_NON_LEADERBOARD",
+    "max_output_tokens": 512,
+    "mcp_transport_claim": false,
+    "native_function_calling_claim": false,
+    "native_tools_field_present": false,
+    "official_leaderboard_claim": false,
+    "request_api": "OPENAI_COMPATIBLE_CHAT_COMPLETIONS_ORDINARY_TEXT_ONLY",
+    "seed": 20260821,
+    "strict_safety_prompt_suffix_sha256": "cb0b0af0fa7cb2fa0a7d2d8f4fad7e83819eb5ba124e4de59acd8257438a7dfd",
+    "temperature": 0,
+    "tool_choice_field_present": false
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_outcome": "NOT_APPLICABLE_SYNTHETIC_CAPABILITY_ONLY",
+  "quality_thresholds_frozen": false,
+  "records": [
+    {
+      "function_docs_sha256": "597e36bff3bcddaecb6e12356ae26b8ca79592f397e25859d993ff6d723bd607",
+      "model_rounds_executed": 2,
+      "model_rounds_planned": 2,
+      "oracle_pass": true,
+      "probe_id": "select_then_empty",
+      "raw_synthetic_data_in_report": false,
+      "status": "PASS",
+      "steps": [
+        {
+          "actual_canonical_calls_sha256": "9dbf87dac6293fa8f6b76cb78cdf81c0d8d271795a3d3bc29811cf5fae651333",
+          "execution_permitted": true,
+          "expected_canonical_calls_sha256": "9dbf87dac6293fa8f6b76cb78cdf81c0d8d271795a3d3bc29811cf5fae651333",
+          "latency_ms": 381.425,
+          "native_receipt_sha256": "91f68c20a35362317c11c02b509bf2383c74befb7bfc47da880f47c2159f7729",
+          "native_request_id": "chatcmpl-891fb9e202a18e5b",
+          "oracle_pass": true,
+          "request_messages_sha256": "063894cb37d1238161a8a5e110c185eb896670b4372b9bb9dc5d943e60461d4a",
+          "response_sha256": "4a71868c319df8399721b0553f36be065f2d33390a77322776cfa1a16a8fa880",
+          "response_text_sha256": "75a5ba1805aadea799827f054268c0b83e082d81b77860988377a54f93c2006b",
+          "status": "EXECUTED_ATTESTED_CALLS",
+          "step_index": 0,
+          "tool_results_emitted": true,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 567,
+            "output_tokens": 17,
+            "reasoning_tokens": null
+          }
+        },
+        {
+          "actual_canonical_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "execution_permitted": false,
+          "expected_canonical_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "latency_ms": 134.858,
+          "native_receipt_sha256": "ddfcccccfcf5d2771054b0b238bc69758911b0d7896f5f0b3972b18af68cf0db",
+          "native_request_id": "chatcmpl-8ce272f8e8cc8d82",
+          "oracle_pass": true,
+          "request_messages_sha256": "d83c8c44d80c3ac73d48dc738b986db46fe11170f6b42a7d3e19123b5de611c9",
+          "response_sha256": "bdb83bb920a30ad12b910f2de8fdace9f5017e37f54d7a6e99314dc51e8ccc03",
+          "response_text_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "status": "TURN_COMPLETE_EXPLICIT_EMPTY_LIST",
+          "step_index": 1,
+          "tool_results_emitted": false,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 636,
+            "output_tokens": 2,
+            "reasoning_tokens": null
+          }
+        }
+      ],
+      "system_prompt_sha256": "e8a5966a604e48432142a32862d1b091f86f97debd3fb3a74613c291f0dc2ac6"
+    },
+    {
+      "function_docs_sha256": "597e36bff3bcddaecb6e12356ae26b8ca79592f397e25859d993ff6d723bd607",
+      "model_rounds_executed": 1,
+      "model_rounds_planned": 1,
+      "oracle_pass": true,
+      "probe_id": "explicit_no_call",
+      "raw_synthetic_data_in_report": false,
+      "status": "PASS",
+      "steps": [
+        {
+          "actual_canonical_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "execution_permitted": false,
+          "expected_canonical_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "latency_ms": 133.855,
+          "native_receipt_sha256": "201ef3fc17b27323845acc2372b98f7b9ffa884ae8cae6d404fb93476ffc7cbb",
+          "native_request_id": "chatcmpl-b478a91190d7cfb4",
+          "oracle_pass": true,
+          "request_messages_sha256": "dbfed2c760dc7f56ebdfa3122aa00a4ffed45b1a4ee46aa23763247cdc832706",
+          "response_sha256": "51add4ac05edbcfaaf1beca1e8501206eb7b0d8498eb7d0477ee2d2908332e95",
+          "response_text_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "status": "TURN_COMPLETE_EXPLICIT_EMPTY_LIST",
+          "step_index": 0,
+          "tool_results_emitted": false,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 560,
+            "output_tokens": 2,
+            "reasoning_tokens": null
+          }
+        }
+      ],
+      "system_prompt_sha256": "e8a5966a604e48432142a32862d1b091f86f97debd3fb3a74613c291f0dc2ac6"
+    },
+    {
+      "function_docs_sha256": "3bf67898299874b8f7306821bbbd922b0f5acc900cb34760fde217b92bf8ec83",
+      "model_rounds_executed": 2,
+      "model_rounds_planned": 2,
+      "oracle_pass": true,
+      "probe_id": "parallel_then_empty",
+      "raw_synthetic_data_in_report": false,
+      "status": "PASS",
+      "steps": [
+        {
+          "actual_canonical_calls_sha256": "5e83db163ec26bcbb142a55118122b9988cbdb02f345618fb1c4c899d03354a2",
+          "execution_permitted": true,
+          "expected_canonical_calls_sha256": "5e83db163ec26bcbb142a55118122b9988cbdb02f345618fb1c4c899d03354a2",
+          "latency_ms": 297.421,
+          "native_receipt_sha256": "f7d797eb0c3c6ea7b91d3324e207af598fca7106fa4ce011c7aca9517c46f4ea",
+          "native_request_id": "chatcmpl-8b675753d41e2c5a",
+          "oracle_pass": true,
+          "request_messages_sha256": "ffa3ed6656bc1201eb13f9021200f66ae8edd5a9a8aafe260cd4f50ad8b1460b",
+          "response_sha256": "3e9a10ea2ba28e1b4da87df15fe685254c86fe250d17baabf02496875f0cefdf",
+          "response_text_sha256": "57af92c815bed69731c6f9e87c4b0207ffb4daac83019dbfc54d7ae6ca2d0458",
+          "status": "EXECUTED_ATTESTED_CALLS",
+          "step_index": 0,
+          "tool_results_emitted": true,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 561,
+            "output_tokens": 29,
+            "reasoning_tokens": null
+          }
+        },
+        {
+          "actual_canonical_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "execution_permitted": false,
+          "expected_canonical_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "latency_ms": 135.385,
+          "native_receipt_sha256": "16dfa5f7d7b32ceedaacd2450cb11a186bde126f9352af7c59d8e405a6922986",
+          "native_request_id": "chatcmpl-82e7294e9bd605a9",
+          "oracle_pass": true,
+          "request_messages_sha256": "9fecfc8d43858d85c0d348fcf08690ce2d5392afa8797fc9e0b243ad4604fb4e",
+          "response_sha256": "63ad924b0e54a300ec0dcaee14427ec71a49ae405f20643b0ae6b753fd626e38",
+          "response_text_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "status": "TURN_COMPLETE_EXPLICIT_EMPTY_LIST",
+          "step_index": 1,
+          "tool_results_emitted": false,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 664,
+            "output_tokens": 2,
+            "reasoning_tokens": null
+          }
+        }
+      ],
+      "system_prompt_sha256": "ea10e002835c0b8678745cb1cffbf0365bd596b584b4b65a36f2c2d5429600b7"
+    },
+    {
+      "function_docs_sha256": "7165c4c846ebd1e92a981e0cd3be8db22e06edf0a3c4a18681e958b86a89eb1a",
+      "model_rounds_executed": 3,
+      "model_rounds_planned": 3,
+      "oracle_pass": true,
+      "probe_id": "two_execution_steps_then_empty",
+      "raw_synthetic_data_in_report": false,
+      "status": "PASS",
+      "steps": [
+        {
+          "actual_canonical_calls_sha256": "d9cef2ba03d7918c538968bbee8d97a8815c1faeffc5fde0a53d37a40d32e603",
+          "execution_permitted": true,
+          "expected_canonical_calls_sha256": "d9cef2ba03d7918c538968bbee8d97a8815c1faeffc5fde0a53d37a40d32e603",
+          "latency_ms": 203.047,
+          "native_receipt_sha256": "7e4bfc537d0b74546d38bd2568ae94f168cfb42ff4cea45b34e4b89eb58bbb7c",
+          "native_request_id": "chatcmpl-8647cb27b66223bb",
+          "oracle_pass": true,
+          "request_messages_sha256": "e5057282398d8e6862a4f8d814a628c3cf370d27749fcc9e377deb30661e12f9",
+          "response_sha256": "a08de441eb0c83734386d3bbe15dc8e106c8ec3211154e504c0675a704dc9510",
+          "response_text_sha256": "45e052b7806da4010169d601da48b62463fdc7500815e8b5501c5a6b1be932db",
+          "status": "EXECUTED_ATTESTED_CALLS",
+          "step_index": 0,
+          "tool_results_emitted": true,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 572,
+            "output_tokens": 14,
+            "reasoning_tokens": null
+          }
+        },
+        {
+          "actual_canonical_calls_sha256": "e3bb87b95ad03ca9324977474bbd76356cd5baf9851dca731507ae8d01bac561",
+          "execution_permitted": true,
+          "expected_canonical_calls_sha256": "e3bb87b95ad03ca9324977474bbd76356cd5baf9851dca731507ae8d01bac561",
+          "latency_ms": 305.452,
+          "native_receipt_sha256": "2dfa917afd70ec4946d07a62ec937b7ebd6415a9e7624adb357812db17884334",
+          "native_request_id": "chatcmpl-ba9383c246908634",
+          "oracle_pass": true,
+          "request_messages_sha256": "08b5afb6412bd2c7a7ee8cde824744284c89d0d8b1dd81de8c4d5aac7c9c58c5",
+          "response_sha256": "1d1a5dd4a0bde3fbf66d8fb9b5b1880861d0c6671d784a3a9fc0f76f17a36c6f",
+          "response_text_sha256": "4a3b708ee0e9bee03cd24c4c16e29eb2a73f1564e58a5a99245a504789eefc54",
+          "status": "EXECUTED_ATTESTED_CALLS",
+          "step_index": 1,
+          "tool_results_emitted": true,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 639,
+            "output_tokens": 30,
+            "reasoning_tokens": null
+          }
+        },
+        {
+          "actual_canonical_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "execution_permitted": false,
+          "expected_canonical_calls_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "latency_ms": 135.459,
+          "native_receipt_sha256": "e1ed20a182881f1076f594d95178d6d79343c0914c1bbcae931f7015dab96b3c",
+          "native_request_id": "chatcmpl-9f2ce1837b684977",
+          "oracle_pass": true,
+          "request_messages_sha256": "7f9b213144b5cb473cf3f605d34c86ed113faac46f1dce7c211827d423ecb087",
+          "response_sha256": "2677e2e798bbee36a89776b89e239946f19fcf2c0d2cc968599f34ecd23e32d3",
+          "response_text_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "status": "TURN_COMPLETE_EXPLICIT_EMPTY_LIST",
+          "step_index": 2,
+          "tool_results_emitted": false,
+          "usage": {
+            "cached_input_tokens": 0,
+            "input_tokens": 727,
+            "output_tokens": 2,
+            "reasoning_tokens": null
+          }
+        }
+      ],
+      "system_prompt_sha256": "7e75662cf7f34e85e01682815c8306316d976f1434f83fb3aa15d60388b2cb65"
+    }
+  ],
+  "repo_external_sidecar": {
+    "mode": "0600",
+    "path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+    "sha256": "d5aaf81352151582dd50a8e07f97ecbb7c306ca22070a289a0aa940130f14d87",
+    "size": 55537,
+    "status": "WRITTEN_HASH_BOUND"
+  },
+  "retry_model_calls": 0,
+  "run_id": "dg10-bfcl-multiturn-local-probe-2026-08-21-6885568eee7c",
+  "schema": "milai.dg10.bfcl-multiturn-local-probe.v1",
+  "started_at": "2026-08-21T15:14:38.679173+00:00",
+  "status": "STRICT_SYNTHETIC_LOCAL_VLLM_PROBE_PASS",
+  "test_access_authorized": false,
+  "unique_native_request_ids": 8
+}

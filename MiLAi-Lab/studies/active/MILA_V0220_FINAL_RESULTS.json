@@ -1,0 +1,30 @@
+{
+  "goal": "MILA-V02-20",
+  "completion": "BOUNDED_VALIDITY_FAILURE_DELIVERED_WITH_UNKNOWN_USAGE_DISCLOSED",
+  "terminal_labels": ["CONTRACT_CALIBRATED_ONLY", "VALIDITY_BLOCKED", "INCONCLUSIVE"],
+  "roots": 4,
+  "families": 3,
+  "mechanical_tests": 75,
+  "v2_auditor_tests": 14,
+  "cold_fault_processes": 88,
+  "cold_scripted_host_processes": 16,
+  "independent_nonbusiness_negative_roots": 4,
+  "compatibility": {"attempted": 2, "passed": 2, "remaining_allocation": 0},
+  "V2": {"candidate": 1, "planned_chains": 24, "attempted": 1, "completed": 0, "unrun": 23, "HTTP_status": 500, "visible_model_actions": 0, "business_effects": 0, "G_KNOWN_INTENT": "NOT_MET"},
+  "V3": {"status": "NOT_TRIGGERED", "planned_chains": 16, "actual": 0},
+  "V4": {"status": "NOT_TRIGGERED", "planned_episodes": 16, "actual": 0, "admitted_roots": 0},
+  "V5": {"status": "NOT_TRIGGERED", "first_wave_planned": 14, "repeat_B_planned": 12, "actual": 0},
+  "second_protocol_candidate": "NOT_STARTED_UNKNOWN_USAGE_STOP",
+  "cost": {"requests": 3, "settled_requests": 2, "settled_input_tokens": 2081, "settled_output_tokens": 140, "settled_raw_tokens": 2221, "unknown_usage_requests": 1, "unknown_reservation_raw_upper": 28284, "actual_total_raw_tokens": null, "raw_cap": null, "judge_requests": 0},
+  "business_commit_unknown": 0,
+  "confirmed_provider_gap": "Full public schema uniqueItems rejected by vLLM XGrammar and Guidance validation; not covered by two synthetic compatibility examples",
+  "exact_HTTP500_cause": "UNRESOLVED_NOT_EQUATED_WITH_CPU_VALUE_ERROR",
+  "evidence_sha256": {
+    "V2_manifest": "4a6e1eaef9381bd0d20f705d789c4f2ce67f51fd34bd2b9ebe2da9cf45b5e079",
+    "V2_result": "4ea348cd3764c84bdddc8dc89be0a63846bb73d07ec6abe6ae60f2a3ef0745de",
+    "provider_diagnostic_result": "134deaff9a390f7e7f1577be7480c5038f60c7c831735a184741d19bd626f559",
+    "V2_final_audit": "3c079adc9d3343e446dd158f37f43f5df4680b3d014905a87b165898d91f0e02"
+  },
+  "safety": {"Product_A0_schema_permissions_changed": false, "candidate57_or_reserve_opened": false, "qualified_C": 0, "shared_vllm_changed": false, "new_services_started": false, "failed_reservation_preserved": true},
+  "checks": {"pytest": "1473 passed, 1 optional Host SDK skipped; final 49.45 seconds", "boundary": "PASS", "ruff": "PASS", "mypy": "PASS_39_FILES", "build": "PASS", "diff_check": "PASS", "final_revalidation": "PASS_ALL_8_FROZEN_BATCHES_24_UNCHANGED_WORLDS_EXACT_FAILED_HTTP_INPUT_OLD_V0219_AND_GOAL", "benchmark_corpus": "18760 files / 10800744184 bytes all upstream hashes matched; read-only verification", "report_links": "PASS_4_LOCAL_LINKS"}
+}

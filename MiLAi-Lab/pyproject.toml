@@ -1,0 +1,84 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "milai-lab"
+version = "0.1.0"
+description = "Independent experimentation and evaluation workspace for MiLAi"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "httpx>=0.27,<1",
+  "jinja2>=3.1,<4",
+  "jsonschema>=4.23,<5",
+  "mcp>=2,<3",
+  "transformers>=4.52,<5",
+  "tokenizers>=0.21,<0.23",
+]
+
+[project.scripts]
+milai-lab-verify-product = "milai_lab.product_adapter.manifest:main"
+milai-lab-check-boundary = "milai_lab.boundary:main"
+
+[dependency-groups]
+dev = [
+  "build>=1.2,<2",
+  "mypy>=1.14,<2",
+  "pytest>=8.3,<9",
+  "ruff>=0.9,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/milai_lab"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/AGENTS.md",
+  "/README.md",
+  "/configs",
+  "/data/fixtures",
+  "/data/manifests",
+  "/docs",
+  "/product.lock.json",
+  "/pyproject.toml",
+  "/src",
+  "/tests",
+  "/tools",
+  "/uv.lock",
+]
+exclude = [
+  "/artifacts",
+  "/studies/archive",
+  "**/.cache/**",
+  "**/.mypy_cache/**",
+  "**/.pytest_cache/**",
+  "**/.ruff_cache/**",
+  "**/.venv/**",
+  "**/__pycache__/**",
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+markers = [
+  "integration: requires a pinned MiLAi product instance",
+  "e2e: runs a bounded end-to-end experiment",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests", "tools"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "RUF", "S"]
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S105", "S106"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["milai_lab"]

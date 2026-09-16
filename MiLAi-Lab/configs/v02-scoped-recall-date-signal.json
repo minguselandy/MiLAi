@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MILA-V02-05-P1-DATE-SIGNAL",
+  "arm_kind": "PRODUCT_BLACK_BOX",
+  "product_lock": "data/locks/v02-date-signal-product.lock.json",
+  "scoped_recall": true,
+  "model_transport_enabled": false,
+  "new_model_allocations_authorized": 0,
+  "new_model_tokens_authorized": 0,
+  "source_count": 1000,
+  "payload_text_bytes": [
+    512,
+    2048,
+    8192
+  ],
+  "source_projects": [
+    "mixed-project",
+    "other-project"
+  ],
+  "mcp_bound_project": "mixed-project",
+  "seed_concurrency": 4,
+  "readiness_batch_size": 50,
+  "drain_timeout_ms": 5000,
+  "read_concurrency": [
+    1,
+    8
+  ],
+  "rounds": 3,
+  "reads_per_round": 24,
+  "read_p95_stop_ms": 300,
+  "max_retries": 0,
+  "request_timeout_seconds": 10,
+  "worker_timeout_seconds": 180,
+  "maximum_sdk_physical_calls": 1050,
+  "maximum_mcp_tool_calls": 150,
+  "api_threads": 8,
+  "database_pool_max_size": 8,
+  "postgres_memory_limit": "1g",
+  "postgres_cpu_limit": 2,
+  "runtime_cpu_affinity_count": 2,
+  "total_artifact_storage_stop_bytes": 1073741824,
+  "request_timing_enabled": true,
+  "resource_sample_interval_seconds": 0.5,
+  "mcp_protocol_mode": "2026-07-28",
+  "measurement": "CLOSED_LOOP_CLIENT_CALL_TO_RESPONSE_NOT_GATEWAY_OR_FIXED_ARRIVAL_SLO",
+  "cache": "FRESH_SERVICES_PUBLIC_SEEDS_READY_THEN_THREE_SCOPE_CONTROLS_WARM_CACHE",
+  "retrieval": "BASELINE_DENSE_OFF_RERANKER_NONE_DETERMINISTIC_HASH_16D_NO_GENERATION",
+  "stop_conditions": [
+    "scope_disclosure",
+    "unexpected_tool_outcome",
+    "empty_positive_recall",
+    "unknown_or_component_degradation",
+    "readiness_timeout",
+    "client_p95_miss",
+    "resource_limit"
+  ],
+  "not_claimed": [
+    "gateway_slo",
+    "tenant_fairness",
+    "fixed_arrival_capacity",
+    "whole_corpus_recall",
+    "causal_optimization",
+    "model_effect"
+  ],
+  "allow_budget_limited_view": true,
+  "previous_attempt": "p1-scoped-recall-20260906f",
+  "rule_revision_reason": "Lossy context budget warning is separately counted, with disclosed evidence eligibility checked. Other degradation remains a stop. No source, budget, concurrency or latency threshold change.",
+  "implementation_change": "NECESSARY_DATE_SIGNAL_NEGATIVE_FAST_PATH_ORIGINAL_DATE_RULES_UNCHANGED"
+}

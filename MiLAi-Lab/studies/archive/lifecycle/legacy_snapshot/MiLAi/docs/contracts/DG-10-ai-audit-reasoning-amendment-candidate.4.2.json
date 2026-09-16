@@ -1,0 +1,37 @@
+{
+  "schema": "milai.dg10.ai-audit-policy-amendment.v1",
+  "candidate_id": "candidate.4",
+  "effective_at": "2026-08-22T10:11:33+08:00",
+  "status": "USER_AUTHORIZED_POLICY_OVERRIDE_FROZEN",
+  "authorization_source": {
+    "kind": "INTERACTIVE_USER_DIRECTIVE",
+    "exact_text": "改选使用xhigh推理",
+    "exact_text_sha256": "2ed657391d550fa299e57c32d12c82328d5068b36ed896d454519a1c7443fb11"
+  },
+  "parent_policy": {
+    "path": "docs/contracts/DG-10-ai-audit-policy-override-candidate.4.json",
+    "sha256": "75107c0d39a328d7f62ff4279bec1eb980040930473610cfaca5089aab928025"
+  },
+  "amendment_scope": "AI_AUDIT_REASONING_EFFORT_ONLY",
+  "active_replacement_ai_gate": {
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh"
+  },
+  "superseded_for_future_candidate_4_ai_audits": {
+    "reasoning_effort": "max"
+  },
+  "interrupted_attempt": {
+    "attempt_id": "candidate.4-primary-001",
+    "reasoning_effort": "max",
+    "status": "INTERRUPTED_BY_USER_POLICY_CHANGE",
+    "process_exit_code": 130,
+    "external_receipt_path_class": "../evidence/dg10-candidate4-ai-r0-r2-audits/candidate.4-primary-001/interrupted.json",
+    "external_receipt_sha256": "d20fcb2e4ebcdb2468de5cafe1422951c839d86419a2f7fc24d64c5dc84e8da4",
+    "accepted_as_review_evidence": false,
+    "stage_acceptance_effect": false,
+    "model_run_authorization_effect": false
+  },
+  "inherited_parent_policy_fields_unchanged": true,
+  "precedence": "THIS_AMENDMENT_CONTROLS_REASONING_EFFORT_FOR_ALL_AUDITS_STARTED_AT_OR_AFTER_EFFECTIVE_AT",
+  "policy_does_not_accept_any_stage_or_result": true
+}

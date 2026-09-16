@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-11",
+  "status": "CHECK_AND_DECISION_COMPLETE_NOT_LIVE_COMPATIBILITY_PASS",
+  "decision": "DO_NOT_RESUME_V2",
+  "scope": "Provider validation, error localization and unknown usage only; no new tasks or State",
+  "full_schema_cpu_validation": {
+    "original_roots": 4,
+    "business_targets": 25,
+    "full_schema_pass": 1,
+    "full_schema_rejected": 3,
+    "finish_only_pass": 4,
+    "unchanged_public_contract": true,
+    "live_generation_pass_claimed": false
+  },
+  "error_localization": {
+    "status": "MATCHING_INSTALLED_VALIDATION_AND_ERROR_WRAPPER_REPRODUCED",
+    "path": "uniqueItems rejection -> Guidance ValueError -> empty EngineGenerateError -> HTTP500",
+    "historical_request_stack_recovered": false,
+    "historical_usage_inferred_from_reproduction": false,
+    "failed_initial_cpu_stub_probe_retained": true
+  },
+  "historical_usage": {
+    "requests": 3,
+    "settled_requests": 2,
+    "known_raw_tokens": 2221,
+    "unknown_requests": 1,
+    "unresolved_reserved_raw_upper_bound": 28284,
+    "actual_total_raw_tokens": null,
+    "old_ledger_modified": false
+  },
+  "this_followup": {
+    "new_model_requests": 0,
+    "model_raw_tokens": 0,
+    "cumulative_raw_token_cap": null,
+    "shared_service_changes": 0,
+    "new_state_implementations": 0,
+    "new_business_tasks": 0,
+    "frozen_V2_runner_changed": false
+  },
+  "checks": {
+    "new_offline_tests": 32,
+    "pytest_passed": 1505,
+    "pytest_skipped": 1,
+    "pytest_skip_reason": "optional Host SDK wheel",
+    "pytest_seconds": 49.73,
+    "boundary": "PASS",
+    "ruff_src_tests_tools": "PASS",
+    "mypy_src_milai_lab": "PASS_39_SOURCE_FILES",
+    "uv_build": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "external_evidence_root": "/cra/memory/mx_memory/evidence/v0220-provider-hardening",
+  "result_sha256": {
+    "error-localization-v2/result.json": "8a9474fc647db6e6f289beb99ee250cea65023e31785ae710f0a2ad7213d901c",
+    "full-schema-v1/result.json": "49c034da6fd82a68382e3f6f4645048a60554736b3283b46142ff925e083e12c",
+    "decision-v1/result.json": "38e3582363bf227c280957df520bc53d14d09ba2e013e5732d331f9a5f019631"
+  },
+  "future_admission_not_automatically_authorized": [
+    "Versioned compatible backend or reviewed wire grammar without weakening execution contract",
+    "All four full schemas pass followed by bounded authorized live compatibility verification",
+    "Authentic historical usage receipt or explicit independent diagnostic authority retaining unknown debt"
+  ]
+}

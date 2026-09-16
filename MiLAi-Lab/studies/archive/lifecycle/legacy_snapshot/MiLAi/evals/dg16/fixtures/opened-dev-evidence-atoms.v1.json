@@ -1,0 +1,250 @@
+{
+  "schema": "milai.dg16.opened-dev-evidence-atoms.v1",
+  "classification": "OPENED_DEVELOPMENT_ONLY / EVALUATION_PLANE",
+  "input_sha256": "dd1c6fb5c137b16780965b5637562cdfdc8e69ef8d1f1e02e94ce92c754b5a5b",
+  "case_ids": [
+    "001be529",
+    "00ca467f",
+    "0100672e",
+    "01493427",
+    "031748ae"
+  ],
+  "cases": [
+    {
+      "case_id": "001be529",
+      "answers": ["over a year"],
+      "lme_answer_session_ids": ["session-5646319286155506268d5bc7"],
+      "gold_query_spec": {
+        "schema_version": "evaluation-query-spec-v0.1",
+        "operator": "DIRECT_EVIDENCE_LOOKUP",
+        "required_slots": ["WAIT_DURATION"],
+        "completeness": "ALL_REQUIRED_SLOTS"
+      },
+      "required_atoms": [
+        {
+          "atom_id": "asylum-wait-duration",
+          "slot": "WAIT_DURATION",
+          "source_turn_ref": "001be529:s42:session-5646319286155506268d5bc7:t4",
+          "session_id": "session-5646319286155506268d5bc7",
+          "session_ordinal": 42,
+          "turn_ordinal": 4,
+          "span": {"start": 204, "end": 215, "text": "Over a year"}
+        }
+      ],
+      "temporal_events": []
+    },
+    {
+      "case_id": "00ca467f",
+      "answers": ["2"],
+      "lme_answer_session_ids": [
+        "session-051ea639a35dfff4fab92cac",
+        "session-aa8bd15498f87fd189ab28f9",
+        "session-f548d4b6553c0e2c3febb91f"
+      ],
+      "gold_query_spec": {
+        "schema_version": "evaluation-query-spec-v0.1",
+        "operator": "TEMPORAL_COUNT_DISTINCT",
+        "event_type": "DOCTOR_APPOINTMENT",
+        "attendance_status": "ATTENDED",
+        "temporal_range": {
+          "start": "2023-03-01T00:00:00Z",
+          "end": "2023-04-01T00:00:00Z",
+          "boundary": "CLOSED_OPEN"
+        },
+        "required_slots": ["MARCH_APPOINTMENTS"],
+        "completeness": "ALL_MATCHES_IN_RANGE"
+      },
+      "required_atoms": [
+        {
+          "atom_id": "orthopedic-followup-2023-03-20",
+          "slot": "MARCH_APPOINTMENTS",
+          "source_turn_ref": "00ca467f:s1:session-051ea639a35dfff4fab92cac:t0",
+          "session_id": "session-051ea639a35dfff4fab92cac",
+          "session_ordinal": 1,
+          "turn_ordinal": 0,
+          "span": {
+            "start": 195,
+            "end": 272,
+            "text": "follow-up appointment with my orthopedic surgeon, Dr. Thompson, on March 20th"
+          }
+        },
+        {
+          "atom_id": "primary-care-2023-03-03",
+          "slot": "MARCH_APPOINTMENTS",
+          "source_turn_ref": "00ca467f:s40:session-f548d4b6553c0e2c3febb91f:t0",
+          "session_id": "session-f548d4b6553c0e2c3febb91f",
+          "session_ordinal": 40,
+          "turn_ordinal": 0,
+          "span": {
+            "start": 171,
+            "end": 233,
+            "text": "went to see my primary care physician, Dr. Smith, on March 3rd"
+          }
+        }
+      ],
+      "temporal_events": [
+        {
+          "event_id": "orthopedic-followup-2023-03-20",
+          "source_turn_ref": "00ca467f:s1:session-051ea639a35dfff4fab92cac:t0",
+          "event_at": "2023-03-20",
+          "attendance_status": "ATTENDED",
+          "range_disposition": "INCLUDE",
+          "dedup_key": "2023-03-20|dr-thompson|orthopedic-followup|attended"
+        },
+        {
+          "event_id": "primary-care-2023-03-03",
+          "source_turn_ref": "00ca467f:s40:session-f548d4b6553c0e2c3febb91f:t0",
+          "event_at": "2023-03-03",
+          "attendance_status": "ATTENDED",
+          "range_disposition": "INCLUDE",
+          "dedup_key": "2023-03-03|dr-smith|primary-care|attended"
+        },
+        {
+          "event_id": "neurology-emg-2023-04-01",
+          "source_turn_ref": "00ca467f:s12:session-aa8bd15498f87fd189ab28f9:t0",
+          "event_at": "2023-04-01",
+          "attendance_status": "PLANNED",
+          "range_disposition": "EXCLUDE_OUT_OF_RANGE",
+          "dedup_key": "2023-04-01|dr-johnson|emg|planned",
+          "span": {
+            "start": 284,
+            "end": 349,
+            "text": "EMG test scheduled with my neurologist, Dr. Johnson, on April 1st"
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "0100672e",
+      "answers": ["$12"],
+      "lme_answer_session_ids": [
+        "session-5503e78c794c66be3fa63285",
+        "session-bd05ccdc5d2d145c573de484"
+      ],
+      "gold_query_spec": {
+        "schema_version": "evaluation-query-spec-v0.1",
+        "operator": "DIVIDE_EVIDENCE_VALUES",
+        "entities": ["coffee mug"],
+        "required_slots": ["TOTAL_PRICE", "ITEM_COUNT"],
+        "completeness": "ALL_REQUIRED_SLOTS"
+      },
+      "required_atoms": [
+        {
+          "atom_id": "coffee-mug-total-price",
+          "slot": "TOTAL_PRICE",
+          "source_turn_ref": "0100672e:s36:session-5503e78c794c66be3fa63285:t0",
+          "session_id": "session-5503e78c794c66be3fa63285",
+          "session_ordinal": 36,
+          "turn_ordinal": 0,
+          "span": {
+            "start": 293,
+            "end": 339,
+            "text": "spent $60 on some coffee mugs for my coworkers"
+          }
+        },
+        {
+          "atom_id": "coffee-mug-item-count",
+          "slot": "ITEM_COUNT",
+          "source_turn_ref": "0100672e:s45:session-bd05ccdc5d2d145c573de484:t0",
+          "session_id": "session-bd05ccdc5d2d145c573de484",
+          "session_ordinal": 45,
+          "turn_ordinal": 0,
+          "span": {
+            "start": 216,
+            "end": 283,
+            "text": "purchased 5 coffee mugs with funny quotes related to our profession"
+          }
+        }
+      ],
+      "temporal_events": []
+    },
+    {
+      "case_id": "01493427",
+      "answers": ["25"],
+      "lme_answer_session_ids": [
+        "session-3330bf6bdba57dc76c0364ec",
+        "session-b5f6d966e63609e187c6c8a3"
+      ],
+      "gold_query_spec": {
+        "schema_version": "evaluation-query-spec-v0.1",
+        "operator": "STATE_UPDATE_LOOKUP",
+        "required_slots": ["PRIOR_COUNT", "CURRENT_COUNT"],
+        "completeness": "ALL_REQUIRED_SLOTS"
+      },
+      "required_atoms": [
+        {
+          "atom_id": "postcard-prior-count",
+          "slot": "PRIOR_COUNT",
+          "source_turn_ref": "01493427:s0:session-3330bf6bdba57dc76c0364ec:t6",
+          "session_id": "session-3330bf6bdba57dc76c0364ec",
+          "session_ordinal": 0,
+          "turn_ordinal": 6,
+          "span": {
+            "start": 243,
+            "end": 298,
+            "text": "I've added 17 new ones since I started collecting again"
+          }
+        },
+        {
+          "atom_id": "postcard-current-count",
+          "slot": "CURRENT_COUNT",
+          "source_turn_ref": "01493427:s27:session-b5f6d966e63609e187c6c8a3:t6",
+          "session_id": "session-b5f6d966e63609e187c6c8a3",
+          "session_ordinal": 27,
+          "turn_ordinal": 6,
+          "span": {
+            "start": 140,
+            "end": 217,
+            "text": "I've added 25 new postcards to my collection since I started collecting again"
+          }
+        }
+      ],
+      "temporal_events": []
+    },
+    {
+      "case_id": "031748ae",
+      "answers": [
+        "When you just started your new role as Senior Software Engineer, you led 4 engineers. Now, you lead 5 engineers"
+      ],
+      "lme_answer_session_ids": [
+        "session-1ea1d848a054e65e4aeaf0fc",
+        "session-b9e8c33c750a75b5dc70d47b"
+      ],
+      "gold_query_spec": {
+        "schema_version": "evaluation-query-spec-v0.1",
+        "operator": "STATE_UPDATE_LOOKUP",
+        "required_slots": ["INITIAL_COUNT", "CURRENT_COUNT"],
+        "completeness": "ALL_REQUIRED_SLOTS"
+      },
+      "required_atoms": [
+        {
+          "atom_id": "engineer-initial-count",
+          "slot": "INITIAL_COUNT",
+          "source_turn_ref": "031748ae:s0:session-1ea1d848a054e65e4aeaf0fc:t10",
+          "session_id": "session-1ea1d848a054e65e4aeaf0fc",
+          "session_ordinal": 0,
+          "turn_ordinal": 10,
+          "span": {
+            "start": 31,
+            "end": 102,
+            "text": "I lead a team of 4 engineers in my new role as Senior Software Engineer"
+          }
+        },
+        {
+          "atom_id": "engineer-current-count",
+          "slot": "CURRENT_COUNT",
+          "source_turn_ref": "031748ae:s6:session-b9e8c33c750a75b5dc70d47b:t2",
+          "session_id": "session-b9e8c33c750a75b5dc70d47b",
+          "session_ordinal": 6,
+          "turn_ordinal": 2,
+          "span": {
+            "start": 276,
+            "end": 311,
+            "text": "I now lead a team of five engineers"
+          }
+        }
+      ],
+      "temporal_events": []
+    }
+  ]
+}

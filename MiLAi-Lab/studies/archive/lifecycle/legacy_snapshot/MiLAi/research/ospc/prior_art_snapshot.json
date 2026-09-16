@@ -1,0 +1,55 @@
+{
+  "audit_date": "2026-08-15",
+  "network_search_performed": false,
+  "scope": "locally downloaded source snapshots only",
+  "projects": [
+    {
+      "name": "ReMe",
+      "path": "../ReMe",
+      "vcs_revision": null,
+      "vcs_note": "git metadata unavailable",
+      "license": "Apache-2.0",
+      "license_sha256": "cc54d679aaced751c096f120b666355c106d9394d28f93f6df353973f6cd7dbe",
+      "mechanism_files": {
+        "docs/en/framework.md": "c133a3f7c53f8917686886596ef680bb405a7b0a859177b8eeb1e00f98a9f8c8",
+        "reme/steps/evolve/compressor.py": "0054d3913beaeed9f9b3ddaa002f64ddba390142739e82052c225802ba9f88a8"
+      }
+    },
+    {
+      "name": "Hindsight",
+      "path": "../hindsight",
+      "vcs_revision": null,
+      "vcs_note": "git metadata unavailable",
+      "license": "MIT",
+      "license_sha256": "01fde0bedf83bdc185065d7af524a61690efe576a67f922eaff3a1280c17b63a",
+      "mechanism_files": {
+        "README.md": "be5f249cff4ab6ac4cb60961cf2ac0eb831625a89f2b54830f2df1a578219dcb"
+      }
+    },
+    {
+      "name": "Graphiti",
+      "path": "../graphiti",
+      "vcs_revision": "401c59a65bdeb22a44136901ff30231e6998a7fe",
+      "vcs_note": "clean working tree at audit",
+      "license": "Apache-2.0",
+      "license_sha256": "2825300b20d7b951209835a4a331f29e24725a39d65168e4b831df53aa372650",
+      "mechanism_files": {
+        "README.md": "61c9883185ba134628b711d771531d26e8404bb2f6b63353aa6af7b3be17bc03",
+        "graphiti_core/prompts/summarize_sagas.py": "f015680b4405d2c06f8f1d14ca9b1f1b18e181ba91c4e59949db4e28325ccf3a"
+      }
+    },
+    {
+      "name": "Mem0",
+      "path": "../mem0",
+      "vcs_revision": "001c235229be8795e3834520467bd0d661ed8f34",
+      "vcs_note": "dirty at audit: pre-existing pyproject.toml modification; file not used",
+      "license": "Apache-2.0",
+      "license_sha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+      "mechanism_files": {
+        "README.md": "7509347d34a767a2ef37ceb6cf6c714de9e8d84fe66ad5eea92bbae824a8fbeb",
+        "mem0/configs/prompts.py": "10bc8a34b3b5f0ce24560a2a3190c9112b979a891b981f48393bbd168d915a5c"
+      }
+    }
+  ]
+}
+

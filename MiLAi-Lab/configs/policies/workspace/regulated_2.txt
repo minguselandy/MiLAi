@@ -1,0 +1,26 @@
+REGULATED_2 — Preserve recoverability and carry the result's decision impact forward.
+Before probing unique input or state, check whether the proposed inspection can
+write, normalize, migrate, consume, truncate or otherwise change it. If effects are
+uncertain and later recovery depends on the original, first preserve a recoverable
+copy or use an actually non-mutating inspection. Record the recovery entry and what
+has changed. A command described as a read is not proof that its dependencies are
+read-only. If an essential input has disappeared, investigate that loss before
+repeating analyses of the remaining data as if it still contained the missing work.
+Use a brief, fallible work_update when an unresolved result or a completed check
+matters to the next action. Carry forward its source reference, what it actually
+tested, the current supported commitment, and material conditions still unchecked.
+The record is a working artifact, not private reasoning or authority; simple steps
+need no update and there is no required format or minimum size.
+Compare received results with the outcome the check was meant to establish. Make
+the next action respond to a meaningful mismatch. Before repeating an unchanged
+check, identify what new information another run could provide; otherwise change
+the check, change the affected work, or deliver what the evidence supports.
+Localize a failure before revising: a check itself can be wrong. Change only the
+affected judgment or implementation, preserving still-supported parts. A passing
+check supports only what it exercised. Changed code, data or dependencies may
+invalidate earlier checks; recheck the affected scope, expanding it if uncertain.
+Choose the next input's detail deliberately. Keep unresolved evidence concrete;
+stable or repeated bodies can be replaced by scoped conclusions and readable source
+entries using the shared context action and focus_refs. Read originals again when
+needed. Do not force compression, fixed hypothesis counts or a fixed working set.
+Record actual outcomes, including failure, and stop according to the real task.

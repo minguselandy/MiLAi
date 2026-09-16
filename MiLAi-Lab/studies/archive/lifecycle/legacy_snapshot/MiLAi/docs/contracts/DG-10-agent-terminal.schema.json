@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "milai.dg10.agent-terminal.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "attempt_id", "candidate_id", "provider_status", "agent_status",
+    "parser_status", "native_request_count", "native_usage_all_attempts",
+    "public_result_status", "stable_reason_code"
+  ],
+  "properties": {
+    "schema": {"const": "milai.dg10.agent-terminal.v1"},
+    "attempt_id": {"type": "string", "minLength": 1},
+    "candidate_id": {"type": "string", "pattern": "^candidate\\.[0-9]+(?:\\.[0-9]+)*$"},
+    "provider_status": {"enum": ["NOT_STARTED", "REQUEST_FAILED", "ACCEPTED", "TERMINAL"]},
+    "agent_status": {"enum": ["NOT_STARTED", "RUNNING", "TERMINAL", "FAILED"]},
+    "parser_status": {"enum": ["NOT_STARTED", "TERMINAL", "FAILED"]},
+    "native_request_count": {"type": "integer", "minimum": 0},
+    "native_usage_all_attempts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["input_tokens", "output_tokens", "cached_input_tokens", "reasoning_tokens"],
+      "properties": {
+        "input_tokens": {"type": ["integer", "null"], "minimum": 0},
+        "output_tokens": {"type": ["integer", "null"], "minimum": 0},
+        "cached_input_tokens": {"type": ["integer", "null"], "minimum": 0},
+        "reasoning_tokens": {"type": ["integer", "null"], "minimum": 0}
+      }
+    },
+    "public_result_status": {"enum": ["SUCCESS", "FAILED", "PARTIAL"]},
+    "stable_reason_code": {"enum": ["PROVIDER_REQUEST_FAILED", "PROVIDER_TERMINAL_MISSING", "AGENT_EVENT_PARSE_FAILED", "AGENT_TERMINAL_EVENT_MISSING", "AGENT_POLICY_REJECTED", "OUTPUT_SCHEMA_INVALID", "DEADLINE_EXCEEDED", "SUCCESS"]}
+  }
+}

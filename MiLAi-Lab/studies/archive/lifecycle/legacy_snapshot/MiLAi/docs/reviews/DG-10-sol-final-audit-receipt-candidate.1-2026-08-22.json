@@ -1,0 +1,83 @@
+{
+  "bundle": {
+    "bundle_entries_sha256": "c0fc636513a423e3826c27e9029406a8c935e46ef65e40eda858f455a21301de",
+    "entry_count": 47,
+    "manifest_sha256": "cf2d4f7a9d3dff12f944fbe7464090c0e872524322e2dd7601b87e15441912d4",
+    "path_class": "REPO_EXTERNAL_READ_ONLY_MATERIALIZED_WORKSPACE"
+  },
+  "candidate": "candidate.1",
+  "cli_version": "codex-cli 0.147.0",
+  "created_at": "2026-08-21T19:28:55.603816+00:00",
+  "date": "2026-08-22",
+  "gate_results": {
+    "CRG-00": "BUNDLE_VALIDATED",
+    "CRG-01": "REVIEW_CANDIDATE_IMPORTED",
+    "CRG-02": "DENIED_L4_REVISE_BELOW_TARGET_AND_NOT_CONTROLLED_ACCEPTANCE"
+  },
+  "model": "gpt-5.6-sol",
+  "output_schema_validation": "PASS_ENFORCED_BY_CODEX_CLI_AND_IMPORTER_INVARIANTS",
+  "process_exit_code": 0,
+  "provider": {
+    "event_count": 214,
+    "provider_thread_count": 1,
+    "provider_thread_id": "01a025b3-aa50-7ee1-a7a7-3d44142bd5ae",
+    "terminal_turn_count": 1,
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 10650368,
+      "input_tokens": 11161268,
+      "output_tokens": 65383,
+      "reasoning_output_tokens": 30084
+    }
+  },
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "raw_evidence": {
+    "events_sha256": "d98aa590ad7f70d0d8a4dba978191cd9385c27e1deee37a78ba8da7ebcb72887",
+    "events_size": 1430846,
+    "output_sha256": "855494f67a006997fa6d19249cd6d1dc246f55e29a6287c7c2b9661b52b0e1ef",
+    "output_size": 44357,
+    "path_class": "REPO_EXTERNAL_OPERATOR_CONTROLLED_0600",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_size": 0
+  },
+  "reasoning_effort": "max",
+  "release_effect": {
+    "may_accept_candidate": false,
+    "may_authorize_test": false,
+    "may_override_tier1": false,
+    "may_promote_local_vllm_mcp_agent_candidate": false
+  },
+  "review_kind": "AI_ADVERSARIAL_EVIDENCE_AUDIT_NOT_HUMAN_APPROVAL",
+  "review_result": {
+    "acceptance_authorized": false,
+    "citation_count": 128,
+    "coverage": {
+      "benchmark_boundaries": "PARTIAL",
+      "bfcl_semantics": "PARTIAL",
+      "claim_traceability": "PARTIAL",
+      "mcp_security_governance": "PARTIAL",
+      "memory_quality_tiers": "VERIFIED",
+      "package_rollback_privacy": "PARTIAL",
+      "same_model_call_accounting": "PARTIAL",
+      "serving_accounting": "PARTIAL",
+      "status_inflation": "VERIFIED"
+    },
+    "decision": "REVISE_NO_GO_EVIDENCE",
+    "finding_count": 14,
+    "open_p0_p1_count": 2,
+    "quality_outcome": "BELOW_TARGET",
+    "severity_counts": {
+      "P0": 0,
+      "P1": 2,
+      "P2": 5,
+      "P3": 7
+    },
+    "summary_sha256": "ab625e97ca721db91b5bb4677d9010d6f7a56ccf6c10051ebc607a3267b6f9c6",
+    "unverified_count": 7
+  },
+  "schema": "milai.dg10.sol-final-audit-receipt.v1",
+  "status": "CRG01_SOL_REVIEW_CANDIDATE_IMPORTED_NOT_ACCEPTANCE",
+  "test_access_authorized": false,
+  "test_labels_or_outputs_opened": false
+}

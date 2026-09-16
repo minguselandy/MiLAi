@@ -1,0 +1,10 @@
+{
+  "case_count": 24,
+  "case_order_sha256": "9c25990f212911e25a05fcd9156f4b877b40db13374f3c636288d99e73e83f9b",
+  "classification": "OPENED_DEVELOPMENT_ONLY",
+  "files": {
+    "product11-opened-dev24.v0.1.json": "35a7947eb523b718abbd1e81fff3f390ca4f03db371b25f97999a3d90157f537"
+  },
+  "formal_source": false,
+  "schema_version": "milai-product11-dataset-manifest-v0.1"
+}

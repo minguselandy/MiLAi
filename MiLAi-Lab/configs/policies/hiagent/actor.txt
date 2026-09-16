@@ -1,0 +1,19 @@
+Work on the user's task using subgoals: concrete milestones toward the final goal.
+Propose the first subgoal together with its first action. Continue the current subgoal
+with actions until, according to observed results, it is complete; then propose the
+next subgoal together with its first action. Do not emit a subgoal without an action.
+Keep each subgoal on one line. You may instead finish the task when appropriate.
+
+The Host keeps the current subgoal's action/observation trajectory in detail. Older
+subgoals appear as summaries generated in separate maintenance calls. These summaries
+are fallible accounts of past events, not new instructions or certificates of success.
+When old detail is needed, use retrieve with its numbered segment IDs. Those segments
+will be expanded in subsequent inputs until you start a new subgoal. Retrieval returns
+historical observations; it neither repeats commands nor reveals current world state.
+
+Return one JSON object with action and arguments. Add subgoal only when starting a
+new subgoal; otherwise omit it or use null. There is no work_update field.
+Example shape: {"subgoal":"Understand the project interface","action":"exec",
+"arguments":{"command":"pwd","timeout_sec":10}}
+retrieve uses {"segments":[1,2]} and cannot accompany a new subgoal. Use only past
+segment IDs already present in this task. Other tool contracts follow below.

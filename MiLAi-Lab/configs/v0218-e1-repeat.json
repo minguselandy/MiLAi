@@ -1,0 +1,27 @@
+{
+  "revision": "E1_OPEN_DISCOVERY_V1_COLD_REPEAT_2",
+  "stage": "E1_OPEN_DISCOVERY_V1",
+  "selection": "configs/v0218-s-star.json",
+  "roots": [
+    {"root": "executive_assistant_task2", "batch": "/cra/memory/mx_memory/evidence/v0218/20260911/e0-baseline-wave1-v2", "motivation": "Same originally selected lineage, unchanged task/event/checker; repeat the observed C2 update signal, not a new independent root."},
+    {"root": "journalist_task1", "batch": "/cra/memory/mx_memory/evidence/v0218/20260911/e0-baseline-wave3-v2", "motivation": "Same originally selected lineage and Stable guardrail; repeat candidate delivery/cost comparison with all arms."}
+  ],
+  "arms": ["N1", "C1", "C2"],
+  "variants": ["stable", "superseded"],
+  "generation_cap": 16,
+  "seconds_per_episode": 900,
+  "batch_seconds": 14400,
+  "episodes": 14,
+  "max_requests": 224,
+  "raw_token_cap": null,
+  "new_compatibility_requests": 0,
+  "new_Judge_requests": 0,
+  "shared_A": "One new natural A per root, unchanged Host, no best-of selection; all arms inherit exactly that A's actual state and optional Note. Not an independent task sample.",
+  "estimand": "Second exposed cold replicate of the same consumption policies with a new common A. Every arm and both worlds repeated, no prompt/model/world/budget change.",
+  "repeat_index": 2,
+  "previous_run": "/cra/memory/mx_memory/evidence/v0218/20260911/e1-discovery-v1",
+  "previous_result_sha256": "2c656f30aec3f4663337ee634e11eb075a8ff2466e01b4e07e11371a2a2903e5",
+  "previous_audit_sha256": "e80dd76857d4a9d1601cc7dd5aca66a3504eb346f9a0cafb13ec9ee4766ceac7",
+  "trigger": "First batch audited and cleaned, all usage known. C2 passed schedule update where N1/C1 failed, all Stable pairs passed; news candidate calls also lower. This is one explainable signal, not causal or novelty proof.",
+  "stopping": "Exactly this one additional cold discovery replicate; preserve unfavorable second outcomes and do not repeat until success. E2 controls/selection still required."
+}

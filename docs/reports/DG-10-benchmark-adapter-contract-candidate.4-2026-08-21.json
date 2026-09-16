@@ -1,0 +1,329 @@
+{
+  "adapter_output_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "answer_record": {
+        "type": "object"
+      },
+      "arm": {
+        "enum": [
+          "NO_MEMORY",
+          "NAIVE_RAG",
+          "MILAI_MCP"
+        ],
+        "type": "string"
+      },
+      "case_id": {
+        "type": "string"
+      },
+      "category": {
+        "type": "string"
+      },
+      "dataset": {
+        "type": "string"
+      },
+      "latency_ms": {
+        "minimum": 0,
+        "type": "number"
+      },
+      "model_id": {
+        "const": "Qwen3.6-35B-A3B-FP8",
+        "type": "string"
+      },
+      "native_calls": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "finish_reason": {
+              "type": "string"
+            },
+            "latency_ms": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "model_id": {
+              "const": "Qwen3.6-35B-A3B-FP8",
+              "type": "string"
+            },
+            "native_receipt_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "native_request_id": {
+              "minLength": 8,
+              "type": "string"
+            },
+            "planned_role": {
+              "enum": [
+                "TOOL_DECISION",
+                "ANSWER",
+                "ANSWER_AFTER_MCP_RESULT"
+              ],
+              "type": "string"
+            },
+            "terminal": {
+              "type": "boolean"
+            },
+            "usage": {
+              "additionalProperties": false,
+              "properties": {
+                "input_tokens": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "output_tokens": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "input_tokens",
+                "output_tokens"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "native_request_id",
+            "model_id",
+            "planned_role",
+            "terminal",
+            "finish_reason",
+            "usage",
+            "latency_ms",
+            "native_receipt_sha256"
+          ],
+          "type": "object"
+        },
+        "maxItems": 2,
+        "minItems": 1,
+        "type": "array"
+      },
+      "planned_mcp_calls": {
+        "maximum": 1,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "planned_model_rounds": {
+        "maximum": 2,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt_sha256": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "run_id": {
+        "type": "string"
+      },
+      "source_case_id": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      },
+      "trace": {
+        "type": "object"
+      },
+      "usage": {
+        "additionalProperties": false,
+        "properties": {
+          "hidden_or_extra_model_calls": {
+            "const": 0,
+            "type": "integer"
+          },
+          "input_tokens": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "mcp_rounds": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "model_rounds": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "output_tokens": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "input_tokens",
+          "output_tokens",
+          "model_rounds",
+          "mcp_rounds",
+          "hidden_or_extra_model_calls"
+        ],
+        "type": "object"
+      }
+    },
+    "required": [
+      "run_id",
+      "case_id",
+      "source_case_id",
+      "dataset",
+      "category",
+      "arm",
+      "model_id",
+      "planned_model_rounds",
+      "planned_mcp_calls",
+      "native_calls",
+      "status",
+      "usage",
+      "latency_ms",
+      "prompt_sha256",
+      "trace",
+      "answer_record"
+    ],
+    "type": "object"
+  },
+  "adapter_output_schema_sha256": "8b05d09651357023e97e5533028beacaf8e129dc281b9000d8871b5139a4008f",
+  "answer_parser_contract_sha256": "1628cea47b77b949c2f69ee27895989b08ed742436540f2ed62dc067dec3ad62",
+  "arm_request_manifest": {
+    "manifest_sha256": "21bab990123125829da832b65d9bc883c010b33518ccb81afee5d79c6cea303b",
+    "record_count": 2766,
+    "records_per_case": 3
+  },
+  "arms": [
+    "NO_MEMORY",
+    "NAIVE_RAG",
+    "MILAI_MCP"
+  ],
+  "benchmark_fixture_authority_contract": {
+    "database_and_tenant": "FRESH_ISOLATED_BENCHMARK_ONLY",
+    "fixture_review_policy_must_be_frozen_before_three_arm_dev_run": true,
+    "integration_bytes_changed": false,
+    "production_or_real_world_authority_claim": false,
+    "reader_lite_authority": "ACTION_SAFE",
+    "reader_lite_consistency": "CANONICAL_REQUIRED",
+    "scope": {
+      "project_ids": [
+        "milai"
+      ]
+    }
+  },
+  "budget_contract_sha256": "32aa96b41c9c530d6ff6675fa900d74570242d39b91bff8f11edbb50a620c69f",
+  "candidate": "candidate.4",
+  "case_manifest": {
+    "by_dataset": {
+      "LONGMEMEVAL_CLEANED_500": 500,
+      "LONGMEMEVAL_V2_ADAPTED_TEXT_ONLY": 422
+    },
+    "by_modality": {
+      "TEXT_ONLY": 500,
+      "TEXT_ONLY_ADAPTED": 422
+    },
+    "case_count": 922,
+    "case_manifest_sha256": "9e93c8bcb3506deb0a2cb4489388e462eeb3cc44ffc8ac3c5fe7b91e6b7a5946"
+  },
+  "data_boundary": "PUBLIC_BENCHMARK_METADATA_ONLY_NO_RAW_PROMPT_OR_ANSWER",
+  "date": "2026-08-21",
+  "gate_results": {
+    "BMG-02": "NO_GO_NOT_RUN",
+    "BMG-03": "CANDIDATE_LOCKED_NOT_RUN",
+    "BMG-05": "NO_GO_QUALITY_THRESHOLDS_NOT_FROZEN",
+    "adapter_contract": "CANDIDATE_REVIEW_REQUIRED"
+  },
+  "generation_contract": {
+    "equal_native_call_count_across_arms_required": false,
+    "hidden_or_extra_calls_definition": "Any model invocation outside the arm-specific planned roles, including retry, fallback, repair, judge, or answer-influencing auxiliary calls.",
+    "hidden_or_extra_calls_max": 0,
+    "max_output_tokens": 256,
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "planned_mcp_calls_by_arm": {
+      "MILAI_MCP": 1,
+      "NAIVE_RAG": 0,
+      "NO_MEMORY": 0
+    },
+    "planned_native_model_calls_by_arm": {
+      "MILAI_MCP": 2,
+      "NAIVE_RAG": 1,
+      "NO_MEMORY": 1
+    },
+    "same_aggregate_per_case_token_ceiling_required": true,
+    "same_prompt_template_required": true,
+    "same_vllm_identity_required": true,
+    "seed": 20260821,
+    "temperature": 0,
+    "tool_choice": "none_except_MILAI_MCP_reader_lite"
+  },
+  "generation_contract_sha256": "4e4dbf5b6a25eb0c1d64c8f58998c8e1ac56dc290585397bf1ecb39f2235ddf8",
+  "inputs": {
+    "dataset_lock_report_sha256": "889e99fa19e695db5b10d1ff72964aee5fbfc4426f4c67504ed4340742ffa62e",
+    "feasibility_report_sha256": "c3e4796da2413acce778c338188e901c9300f918f39620ac89f535c8f391a79f"
+  },
+  "known_limits": [
+    "This report defines the three-arm adapter contract but does not execute model calls.",
+    "No raw benchmark question, answer, haystack text, prompt, memory, model output, or scorer output is stored here.",
+    "MILAI_MCP execution still requires the final benchmark runner against the frozen OpenWorker/MCP integration.",
+    "MILAI_MCP has two visible planned model rounds (tool decision and answer after MCP result); calls outside planned roles remain forbidden.",
+    "A common aggregate per-case token ceiling and benchmark-fixture ingestion policy remain to be selected and frozen by dev calibration.",
+    "The final harness must capture each native call ID, role, usage, latency, terminal state and receipt; aggregate-only OpenCode tokens are insufficient."
+  ],
+  "latin_square": [
+    [
+      "NO_MEMORY",
+      "NAIVE_RAG",
+      "MILAI_MCP"
+    ],
+    [
+      "NAIVE_RAG",
+      "MILAI_MCP",
+      "NO_MEMORY"
+    ],
+    [
+      "MILAI_MCP",
+      "NO_MEMORY",
+      "NAIVE_RAG"
+    ]
+  ],
+  "planned_round_contract": {
+    "case_level_denominator_symmetry": true,
+    "dev_audit_receipt": "docs/reviews/DG-10-dev-semantic-audit-receipt-candidate.1-2026-08-21.json",
+    "hidden_or_extra_model_calls_max": 0,
+    "mcp_calls_by_arm": {
+      "MILAI_MCP": 1,
+      "NAIVE_RAG": 0,
+      "NO_MEMORY": 0
+    },
+    "model_rounds_by_arm": {
+      "MILAI_MCP": 2,
+      "NAIVE_RAG": 1,
+      "NO_MEMORY": 1
+    },
+    "native_call_count_symmetry": false,
+    "source": "AI_DEV_AUDIT_REPLAYED_AUTHOR_CHANGE_NOT_FORMAL_ACCEPTANCE"
+  },
+  "prompt_templates_sha256": "a4fc05ec907f2497a352e8343ef2ed5b15ce8bbbb96071c32f3bb90b49f0424e",
+  "provider_cost": 0,
+  "provider_requests": 0,
+  "quality_thresholds_frozen": false,
+  "route_contracts": {
+    "MILAI_MCP": {
+      "mcp": "REQUIRED",
+      "memory_context": "MCP_RESULT_DATA_ONLY",
+      "retrieval": "OPENWORKER_TO_MCP_TO_RUNTIME_CANONICAL_GATE",
+      "tools": [
+        "milai_recall"
+      ]
+    },
+    "NAIVE_RAG": {
+      "mcp": "NOT_CALLED",
+      "memory_context": "FROZEN_SIMPLE_TEXT_RETRIEVAL_RESULT",
+      "retrieval": "LOCAL_LEXICAL_OR_OFFICIAL_SIMPLE_BASELINE_CANDIDATE",
+      "tools": "NONE"
+    },
+    "NO_MEMORY": {
+      "mcp": "NOT_CALLED",
+      "memory_context": "ABSENT",
+      "retrieval": "NONE",
+      "tools": "NONE"
+    }
+  },
+  "schema": "milai.dg10.benchmark-adapter-contract.v1",
+  "scorer_contract_sha256": "63ea09089e6818c5bf8acd089ea902af31570acecf9e464b5323408238614ff9",
+  "status": "ADAPTER_CONTRACT_CANDIDATE_REVIEW_REQUIRED",
+  "test_access_authorized": false
+}

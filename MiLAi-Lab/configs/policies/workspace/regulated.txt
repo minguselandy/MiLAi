@@ -1,0 +1,20 @@
+REGULATED v0.1 — Replaceable retain / suspend / recheck candidate.
+The workspace is a fallible continuation record, not factual or authorization authority.
+Work on uncertainty that could change the next decision. Use evidence already present;
+when investigating, prefer a check that distinguishes plausible explanations.
+Initial orientation, reading interfaces and reproducing a symptom are also legitimate;
+you do not need two explicit hypotheses before doing useful work.
+You may retain unverified clues that could change the understanding of the problem,
+even before their value is clear. Retention does not give a clue investigation
+priority, factual status or permission to act.
+Update the short record when the grounds, applicability, reason for deferral or useful
+return entry change. A necessary condition failing is reason to stop relying on a
+route; removal of a blocker is reason to recheck, not automatically adopt it.
+Adopt only when current evidence and the current goal support that decision; choosing
+not to return is legitimate. New evidence can expose risks not recorded previously.
+Correct false claims rather than treating every error as a branch to reactivate.
+Record received results, not imagined success. You may leave the workspace unchanged
+or empty. Select published references if helpful. Stop or deliver according to the
+real task, evidence and limits, never because the record contains a completion word.
+Produce a short working artifact, not private reasoning. No mandatory stages,
+headings, number of branches, or extra reasoning calls.

@@ -1,0 +1,383 @@
+{
+  "schema": "milai.dg19.synthetic-treatment-fixture.v0.1",
+  "classification": "SYNTHETIC_ONLY / NO_REAL_USER_DATA / NO_FORMAL_HOLDOUT",
+  "cases": [
+    {
+      "case_id": "syn-lexical-bridge-01",
+      "product": {
+        "query": "Which storage mode did the migration record select?",
+        "reference_time": "2026-08-28T00:00:00Z",
+        "tenant_id": "synthetic-tenant-dg19",
+        "principal_id": "synthetic-principal-dg19",
+        "scope": {"project_ids": ["synthetic-alpha"]},
+        "requirements": [
+          {
+            "slot_id": "TARGET_EVENT",
+            "interpretation_kind": "EVENT",
+            "entity_constraints": ["migration"],
+            "predicate_constraints": [],
+            "value_type": "ANY",
+            "required": true
+          }
+        ],
+        "plan": {
+          "channel": "FTS_RAW",
+          "lexical_terms": ["migration", "storage", "mode"],
+          "expansion_policy": "NONE",
+          "candidate_limit": 4
+        },
+        "initial_source_refs": ["synthetic://lexical/session-a/turn/1"],
+        "evidence_universe": [
+          {
+            "evidence_id": "syn-lexical-e1",
+            "source_ref": "synthetic://lexical/session-a/turn/1",
+            "session_id": "syn-lexical-session-a",
+            "turn_ordinal": 1,
+            "speaker": "USER",
+            "observed_at": "2026-08-10T10:00:00Z",
+            "content": "The migration detail is indexed under the phrase cobalt ledger.",
+            "project_ids": ["synthetic-alpha"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          },
+          {
+            "evidence_id": "syn-lexical-e2",
+            "source_ref": "synthetic://lexical/session-b/turn/4",
+            "session_id": "syn-lexical-session-b",
+            "turn_ordinal": 4,
+            "speaker": "USER",
+            "observed_at": "2026-08-11T09:30:00Z",
+            "content": "We used the cobalt ledger when the migration selected append-only storage.",
+            "project_ids": ["synthetic-alpha"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          },
+          {
+            "evidence_id": "syn-lexical-noise",
+            "source_ref": "synthetic://lexical/session-c/turn/2",
+            "session_id": "syn-lexical-session-c",
+            "turn_ordinal": 2,
+            "speaker": "ASSISTANT",
+            "observed_at": "2026-08-12T08:00:00Z",
+            "content": "A blue notebook contains unrelated interface sketches.",
+            "project_ids": ["synthetic-alpha"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "syn-observation-bridge-02",
+      "product": {
+        "query": "Which destination did the archive handoff use?",
+        "reference_time": "2026-08-28T00:00:00Z",
+        "tenant_id": "synthetic-tenant-dg19",
+        "principal_id": "synthetic-principal-dg19",
+        "scope": {"project_ids": ["synthetic-beta"]},
+        "requirements": [
+          {
+            "slot_id": "TARGET_EVENT",
+            "interpretation_kind": "EVENT",
+            "entity_constraints": ["archive"],
+            "predicate_constraints": [],
+            "value_type": "ANY",
+            "required": true
+          }
+        ],
+        "plan": {
+          "channel": "FTS_RAW",
+          "lexical_terms": ["archive", "handoff", "destination"],
+          "expansion_policy": "NONE",
+          "candidate_limit": 4
+        },
+        "initial_source_refs": ["synthetic://observation/session-a/turn/3"],
+        "evidence_universe": [
+          {
+            "evidence_id": "syn-observation-e1",
+            "source_ref": "synthetic://observation/session-a/turn/3",
+            "session_id": "syn-observation-session-a",
+            "turn_ordinal": 3,
+            "speaker": "ASSISTANT",
+            "observed_at": "2026-08-13T10:00:00Z",
+            "content": "For the archive handoff, the relevant clue is the ochre index.",
+            "project_ids": ["synthetic-beta"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          },
+          {
+            "evidence_id": "syn-observation-e2",
+            "source_ref": "synthetic://observation/session-b/turn/5",
+            "session_id": "syn-observation-session-b",
+            "turn_ordinal": 5,
+            "speaker": "USER",
+            "observed_at": "2026-08-14T11:00:00Z",
+            "content": "We used the ochre index when the archive handoff moved to bay seven.",
+            "project_ids": ["synthetic-beta"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "syn-temporal-bound-03",
+      "product": {
+        "query": "What maintenance event occurred during the approved April window?",
+        "reference_time": "2026-08-28T00:00:00Z",
+        "tenant_id": "synthetic-tenant-dg19",
+        "principal_id": "synthetic-principal-dg19",
+        "scope": {"project_ids": ["synthetic-gamma"]},
+        "requirements": [
+          {
+            "slot_id": "TARGET_EVENT",
+            "interpretation_kind": "EVENT",
+            "entity_constraints": ["maintenance"],
+            "predicate_constraints": [],
+            "temporal_constraints": {
+              "reference_time": "2026-08-28T00:00:00Z",
+              "start": "2026-04-01T00:00:00Z",
+              "end": "2026-04-30T23:59:59Z",
+              "boundary": "CLOSED_CLOSED",
+              "time_axis": "SOURCE_OBSERVED_TIME",
+              "normalized_from": []
+            },
+            "value_type": "ANY",
+            "required": true
+          }
+        ],
+        "plan": {
+          "channel": "FTS_RAW",
+          "lexical_terms": ["maintenance", "approved", "window"],
+          "expansion_policy": "NONE",
+          "candidate_limit": 4
+        },
+        "initial_source_refs": ["synthetic://temporal/session-a/turn/1"],
+        "evidence_universe": [
+          {
+            "evidence_id": "syn-temporal-e1",
+            "source_ref": "synthetic://temporal/session-a/turn/1",
+            "session_id": "syn-temporal-session-a",
+            "turn_ordinal": 1,
+            "speaker": "ASSISTANT",
+            "observed_at": "2026-04-03T08:00:00Z",
+            "content": "The maintenance summary has no event detail.",
+            "project_ids": ["synthetic-gamma"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          },
+          {
+            "evidence_id": "syn-temporal-e2",
+            "source_ref": "synthetic://temporal/session-b/turn/2",
+            "session_id": "syn-temporal-session-b",
+            "turn_ordinal": 2,
+            "speaker": "USER",
+            "observed_at": "2026-04-12T09:00:00Z",
+            "content": "We repaired the maintenance relay during the approved window.",
+            "project_ids": ["synthetic-gamma"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          },
+          {
+            "evidence_id": "syn-temporal-outside",
+            "source_ref": "synthetic://temporal/session-c/turn/7",
+            "session_id": "syn-temporal-session-c",
+            "turn_ordinal": 7,
+            "speaker": "USER",
+            "observed_at": "2026-05-18T09:00:00Z",
+            "content": "We repaired a maintenance relay after the approved window ended.",
+            "project_ids": ["synthetic-gamma"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "syn-neighbor-recovery-04",
+      "product": {
+        "query": "What action completed the quartz checklist?",
+        "reference_time": "2026-08-28T00:00:00Z",
+        "tenant_id": "synthetic-tenant-dg19",
+        "principal_id": "synthetic-principal-dg19",
+        "scope": {"project_ids": ["synthetic-delta"]},
+        "requirements": [
+          {
+            "slot_id": "TARGET_EVENT",
+            "interpretation_kind": "EVENT",
+            "entity_constraints": ["quartz", "checklist"],
+            "predicate_constraints": [],
+            "value_type": "ANY",
+            "required": true
+          }
+        ],
+        "plan": {
+          "channel": "FTS_RAW",
+          "lexical_terms": ["quartz", "checklist"],
+          "expansion_policy": "ADJACENT_TURNS",
+          "candidate_limit": 4
+        },
+        "initial_source_refs": ["synthetic://neighbor/session-a/turn/2"],
+        "evidence_universe": [
+          {
+            "evidence_id": "syn-neighbor-e1",
+            "source_ref": "synthetic://neighbor/session-a/turn/2",
+            "session_id": "syn-neighbor-session-a",
+            "turn_ordinal": 2,
+            "speaker": "ASSISTANT",
+            "observed_at": "2026-08-15T10:00:00Z",
+            "content": "The quartz checklist outcome is in the immediately following entry.",
+            "project_ids": ["synthetic-delta"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          },
+          {
+            "evidence_id": "syn-neighbor-e2",
+            "source_ref": "synthetic://neighbor/session-a/turn/3",
+            "session_id": "syn-neighbor-session-a",
+            "turn_ordinal": 3,
+            "speaker": "USER",
+            "observed_at": "2026-08-15T10:02:00Z",
+            "content": "We completed the quartz checklist by rotating the signing key.",
+            "project_ids": ["synthetic-delta"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          },
+          {
+            "evidence_id": "syn-neighbor-far",
+            "source_ref": "synthetic://neighbor/session-a/turn/8",
+            "session_id": "syn-neighbor-session-a",
+            "turn_ordinal": 8,
+            "speaker": "USER",
+            "observed_at": "2026-08-15T10:12:00Z",
+            "content": "We completed an unrelated checklist much later.",
+            "project_ids": ["synthetic-delta"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "syn-safe-noop-05",
+      "product": {
+        "query": "What event supplies the missing violet record?",
+        "reference_time": "2026-08-28T00:00:00Z",
+        "tenant_id": "synthetic-tenant-dg19",
+        "principal_id": "synthetic-principal-dg19",
+        "scope": {"project_ids": ["synthetic-epsilon"]},
+        "requirements": [
+          {
+            "slot_id": "TARGET_EVENT",
+            "interpretation_kind": "EVENT",
+            "entity_constraints": ["violet"],
+            "predicate_constraints": [],
+            "value_type": "ANY",
+            "required": true
+          }
+        ],
+        "plan": {
+          "channel": "FTS_RAW",
+          "lexical_terms": ["violet", "record"],
+          "expansion_policy": "NONE",
+          "candidate_limit": 3
+        },
+        "initial_source_refs": ["synthetic://noop/session-a/turn/1"],
+        "evidence_universe": [
+          {
+            "evidence_id": "syn-noop-e1",
+            "source_ref": "synthetic://noop/session-a/turn/1",
+            "session_id": "syn-noop-session-a",
+            "turn_ordinal": 1,
+            "speaker": "ASSISTANT",
+            "observed_at": "2026-08-16T08:00:00Z",
+            "content": "The violet record contains no additional acquisition clue.",
+            "project_ids": ["synthetic-epsilon"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "syn-negative-scope-06",
+      "product": {
+        "query": "Which backup mode did the vermilion register record?",
+        "reference_time": "2026-08-28T00:00:00Z",
+        "tenant_id": "synthetic-tenant-dg19",
+        "principal_id": "synthetic-principal-dg19",
+        "scope": {"project_ids": ["synthetic-zeta"]},
+        "requirements": [
+          {
+            "slot_id": "TARGET_EVENT",
+            "interpretation_kind": "EVENT",
+            "entity_constraints": ["backup"],
+            "predicate_constraints": [],
+            "value_type": "ANY",
+            "required": true
+          }
+        ],
+        "plan": {
+          "channel": "FTS_RAW",
+          "lexical_terms": ["backup", "mode", "register"],
+          "expansion_policy": "NONE",
+          "candidate_limit": 4
+        },
+        "initial_source_refs": ["synthetic://negative/session-a/turn/1"],
+        "evidence_universe": [
+          {
+            "evidence_id": "syn-negative-e1",
+            "source_ref": "synthetic://negative/session-a/turn/1",
+            "session_id": "syn-negative-session-a",
+            "turn_ordinal": 1,
+            "speaker": "ASSISTANT",
+            "observed_at": "2026-08-17T08:00:00Z",
+            "content": "The backup mode clue is filed under the vermilion register.",
+            "project_ids": ["synthetic-zeta"],
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          },
+          {
+            "evidence_id": "syn-negative-wrong-scope",
+            "source_ref": "synthetic://negative/other-scope/turn/4",
+            "session_id": "syn-negative-other-scope",
+            "turn_ordinal": 4,
+            "speaker": "USER",
+            "observed_at": "2026-08-18T08:00:00Z",
+            "content": "We used the vermilion register when the backup selected mirror mode.",
+            "project_ids": ["synthetic-other"] ,
+            "readable": true,
+            "revoked_at": null,
+            "authority_class": "EVIDENCE_ONLY"
+          },
+          {
+            "evidence_id": "syn-negative-revoked",
+            "source_ref": "synthetic://negative/revoked/turn/5",
+            "session_id": "syn-negative-revoked",
+            "turn_ordinal": 5,
+            "speaker": "USER",
+            "observed_at": "2026-08-18T09:00:00Z",
+            "content": "We used the vermilion register when the backup selected striped mode.",
+            "project_ids": ["synthetic-zeta"],
+            "readable": true,
+            "revoked_at": "2026-08-19T00:00:00Z",
+            "authority_class": "EVIDENCE_ONLY"
+          }
+        ]
+      }
+    }
+  ]
+}

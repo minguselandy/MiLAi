@@ -1,0 +1,31 @@
+{
+  "revision": "V0214_SUCCESSOR_OPT_IN_SDK_HOST_DEVELOPMENT_20260910",
+  "authorization": "User requested subsequent experiments, functionality first and cumulative tokens uncapped; local opt-in SDK Host regression only",
+  "model_transport_enabled": true,
+  "host_acquisition": {
+    "implementation": "CLIENT_SDK",
+    "version": "0.1.4",
+    "wheel": "/cra/memory/mx_memory/MiLAi-Product/integrations/python-client/dist/milai_client-0.1.4-py3-none-any.whl",
+    "wheel_sha256": "58e5d82a1e82ccff1111bea28184ac2958ea62028cf2698e8ef1fb273cab38d4"
+  },
+  "tasks": ["dev-01", "dev-02", "dev-03", "dev-04", "dev-05", "dev-06", "dev-07", "dev-08"],
+  "arms": ["H"],
+  "phases": [0, 1],
+  "seconds_per_phase": 300,
+  "max_batch_generations": 48,
+  "max_batch_model_seconds": 4800,
+  "source_parallelism": 4,
+  "complete_read_bytes": 32768,
+  "max_pages": 20,
+  "max_model_acquisition_calls": 6,
+  "final_delivery_reserve": 12288,
+  "tool_result_upper_tokens": 8192,
+  "tokenizer_snapshot": "/cra/memory/mx_memory/evidence/v0213/p0-20260909",
+  "cumulative_raw_cap": null,
+  "concurrent_model_requests": 2,
+  "concurrent_task_keys": ["dev-07", "dev-08"],
+  "public_deployment": false,
+  "external_business_actions": false,
+  "state_creation": false,
+  "confirmation_opening": false
+}

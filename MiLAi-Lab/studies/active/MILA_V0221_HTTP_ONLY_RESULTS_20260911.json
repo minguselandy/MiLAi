@@ -1,0 +1,159 @@
+{
+  "status": "BOUNDED_NON_PASS_AUDITED_NOT_GATE_PASS",
+  "batch_root": "/cra/memory/mx_memory/evidence/v0221/20260911-http-r1-v2",
+  "binding_sha256": "117100e25e6cf47a3d9db331b728ba77fb7790b1303b57117fb22691148b75b4",
+  "gates": {
+    "G_AUTH": "PASS",
+    "G_PREFLIGHT": "PASS",
+    "G_LIVE_COMPAT": "NOT_MET",
+    "G_KNOWN_INTENT_V0221": "NOT_TRIGGERED"
+  },
+  "failure": {
+    "code": "LEGAL_JSON_INTENT_FIDELITY_FAILURE",
+    "episode": "w2-01",
+    "request_id": "w2-01-84ee1e179ab04480bf9413d770286dd1",
+    "HTTP": 200,
+    "strict_JSON_full_schema": "PASS",
+    "changed_fields": [
+      "recipient",
+      "summary"
+    ],
+    "actual_recipient": "f",
+    "actual_summary": "S",
+    "automatic_repair": false,
+    "live_business_dispatches": 0
+  },
+  "preflight": {
+    "reference_requests": 96,
+    "tokenize_calls": 192,
+    "max_input_tokens": 56159,
+    "max_reference_output_tokens": 838,
+    "model_calls": 0
+  },
+  "W2": {
+    "planned": 16,
+    "attempted": 1,
+    "passed": 0,
+    "unrun": 15,
+    "full": {
+      "planned": 8,
+      "attempted": 1,
+      "passed": 0
+    },
+    "finish": {
+      "planned": 8,
+      "attempted": 0,
+      "passed": 0
+    }
+  },
+  "W3": {
+    "planned_chains": 24,
+    "attempted": 0,
+    "status": "NOT_TRIGGERED"
+  },
+  "unrun": [
+    "w2-02",
+    "w2-03",
+    "w2-04",
+    "w2-05",
+    "w2-06",
+    "w2-07",
+    "w2-08",
+    "w2-09",
+    "w2-10",
+    "w2-11",
+    "w2-12",
+    "w2-13",
+    "w2-14",
+    "w2-15",
+    "w2-16",
+    "v2r1-01",
+    "v2r1-02",
+    "v2r1-03",
+    "v2r1-04",
+    "v2r1-05",
+    "v2r1-06",
+    "v2r1-07",
+    "v2r1-08",
+    "v2r1-09",
+    "v2r1-10",
+    "v2r1-11",
+    "v2r1-12",
+    "v2r1-13",
+    "v2r1-14",
+    "v2r1-15",
+    "v2r1-16",
+    "v2r1-17",
+    "v2r1-18",
+    "v2r1-19",
+    "v2r1-20",
+    "v2r1-21",
+    "v2r1-22",
+    "v2r1-23",
+    "v2r1-24"
+  ],
+  "cost_accounts": {
+    "historical": {
+      "sources": [
+        {
+          "path": "/cra/memory/mx_memory/evidence/v0220/provider-compat-v1/provider-ledger.jsonl",
+          "sha256": "c18133ecfcc108fd93f1fe20a038d7b60ff48eee696e7f956f3197a8db7998c6"
+        },
+        {
+          "path": "/cra/memory/mx_memory/evidence/v0220/v2-candidate1-v1/episodes/v2c1-01/provider-ledger.jsonl",
+          "sha256": "b752622ac576c85d3a29a9cd58a6d0d50c5f866bc6b3b0d749c6d2e4c77562e7"
+        }
+      ],
+      "requests": 3,
+      "known_raw_tokens": 2221,
+      "actual_total_raw_tokens": null,
+      "unresolved_reservations": [
+        {
+          "ledger": "/cra/memory/mx_memory/evidence/v0220/v2-candidate1-v1/episodes/v2c1-01/provider-ledger.jsonl",
+          "event": "RESERVED",
+          "request_id": "v2c1-01-01",
+          "session": "v2c1-01",
+          "prompt_tokens": 24188,
+          "output_cap": 4096,
+          "raw_upper_bound": 28284,
+          "payload_sha256": "e138af7f25bf95bdea75a0e5890dae0c77276d4e0a949d72df33660e23af6a61",
+          "cumulative_raw_cap": null
+        }
+      ],
+      "reserved_raw_upper_bound": 28284,
+      "reservation_is_actual_usage": false,
+      "violations": [],
+      "new_generation_allowed": false,
+      "settlement_policy": "Only authentic per-request usage evidence; never CPU inference"
+    },
+    "current_model": {
+      "requests": 1,
+      "known_raw_tokens": 27864,
+      "actual_total_raw_tokens": 27864,
+      "unresolved_reservations": [],
+      "reserved_raw_upper_bound": 0,
+      "reservation_is_actual_usage": false,
+      "violations": [],
+      "new_generation_allowed": true
+    },
+    "agent_work_snapshot": {
+      "tokens": 187952,
+      "as_of_UTC": "2026-09-11 13:29:14",
+      "is_final_or_provider_billing": false
+    }
+  },
+  "stop_semantics": "Settled usage is not permission to resume; permanent batch stop applies",
+  "http_only": true,
+  "direct_device_or_container_calls": 0,
+  "Judge": 0,
+  "Memory": "NOT_ADMITTED",
+  "V3_V5": "NOT_TRIGGERED",
+  "evidence_sha256": {
+    "manifest.json": "0cc8848a52035e10c43b6c81db3c0473af8a66177849a154f865dfc0faef0005",
+    "execution-binding.json": "117100e25e6cf47a3d9db331b728ba77fb7790b1303b57117fb22691148b75b4",
+    "reference-requests.json": "099a064e33e8a840c9b15d6f74c8acc930d8b639cdbac667a9efc8c3032f44f6",
+    "preflight/result.json": "a86a523e15d8936c84cb00b152aea78220140eae75cca6cb6e4fe6bf3ade43b0",
+    "result.json": "0a6543b49b38fc1f7ca45cfcc4e014e8a1292e29e6e68c9a9d59f254644d4d41",
+    "exits/w2-01.json": "8730c4d3328e957a785053330a3e1ba22b28476615d7ab48b1926e4a82d30854"
+  }
+}
