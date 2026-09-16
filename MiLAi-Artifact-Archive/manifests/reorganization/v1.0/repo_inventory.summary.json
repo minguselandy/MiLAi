@@ -1,0 +1,25 @@
+{
+  "schema": "milai-reorganization-inventory-v1",
+  "repo_root": "/cra/memory/mx_memory/MiLAi",
+  "tracked_file_count": 6423,
+  "legacy_file_count": 2206,
+  "status_counts_legacy": {
+    "DIVERGED": 144,
+    "IDENTICAL": 2055,
+    "LEGACY_ONLY": 7
+  },
+  "classification_counts_all": {
+    "DOC_DUPLICATE": 642,
+    "GOVERNANCE": 25,
+    "HISTORICAL_ONLY": 168,
+    "LAB": 4158,
+    "PRODUCT": 1430
+  },
+  "unknown_count": 0,
+  "diverged_count": 144,
+  "unresolved_diverged_count": 0,
+  "coverage_percent": 100.0,
+  "git_head": "ba78b4bbba44573f1277f3484c19a4596c25e06a",
+  "rollback_tag": "pre-codebase-reorg-v1",
+  "generated_by": "MiLAi-Artifact-Archive/tools/repo_inventory.py"
+}
