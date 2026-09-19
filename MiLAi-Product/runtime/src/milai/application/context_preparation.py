@@ -1,14 +1,21 @@
 from __future__ import annotations
 
-import hashlib
-import json
-from dataclasses import dataclass, replace
+from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 from time import perf_counter
 from typing import Any, Literal
 from uuid import UUID
 
 from milai.application.context import ContextService
+from milai.application.context_prepare.binding import binding_digest as _binding_digest
+from milai.application.context_prepare.binding import policy_identity as _policy_identity
+from milai.application.context_prepare.contracts import PrepareContextExecution
+from milai.application.context_prepare.route_policy import (
+    typed_need_policy_rejection as _typed_need_policy_rejection,
+)
+from milai.application.context_prepare.route_policy import validated_route as _validated_route
+from milai.application.context_prepare.serialization import canonical_json as _canonical_json
+from milai.application.context_prepare.serialization import sha256 as _sha256
 from milai.application.errors import ContextOperationError, TenantMismatch
 from milai.application.recollection import RecollectionFacade
 from milai.domain import (
@@ -27,14 +34,6 @@ from milai.domain import (
 )
 from milai.persistence import DatabaseUnavailable, SessionContext
 from milai.persistence.context_repository import ContextRepository
-
-ExecutionRoute = Literal["NONE", "CACHE", "L0", "L1"]
-
-
-@dataclass(frozen=True, slots=True)
-class PrepareContextExecution:
-    body: dict[str, Any]
-    status_code: int = 200
 
 
 class PrepareContextService:
@@ -794,38 +793,6 @@ class PrepareContextService:
         )
 
 
-def _binding_digest(
-    context: SessionContext,
-    principal_profile: str,
-    request: PrepareContextRequest,
-) -> str:
-    return _sha256(
-        {
-            "tenant_id": str(context.tenant_id),
-            "principal_profile": principal_profile,
-            "session_id": request.session_id,
-            "agent_id": request.agent_id,
-            "profile_id": request.profile_id,
-            "task_epoch": request.task_epoch,
-            "active_goal": request.active_goal,
-            "requested_scope": request.requested_scope,
-            "required_authority": request.required_authority,
-            "consistency": request.consistency,
-            "limit": request.limit,
-            "constraints": request.constraints,
-            "byte_budget": request.byte_budget,
-            "memory_token_budget": request.memory_token_budget,
-            "slot_ttl_seconds": request.slot_ttl_seconds,
-            "compiler_digest": request.compiler_digest,
-            "router_digest": request.router_digest,
-            "tokenizer_digest": request.tokenizer_digest,
-            "policy_digest": request.policy_digest,
-            "budget": request.budget.model_dump(mode="json"),
-            "action_digest": request.action_digest,
-        }
-    )
-
-
 def _issue_revision_digest(issues: list[dict[str, Any]]) -> str:
     values = [
         {
@@ -993,60 +960,6 @@ def _execution_trace(
     return trace
 
 
-def _validated_route(request: PrepareContextRequest) -> tuple[ExecutionRoute, str | None]:
-    if (
-        request.event in {"MEMORY_AFFECTING_TOOL_RESULT", "CANONICAL_POSITION_CHANGED"}
-        and request.requested_route in {"NONE", "CACHE"}
-        and not (
-            request.requested_route == "CACHE"
-            and request.memory_need_signature is not None
-            and request.memory_need_signature.temporal_need == "CURRENT"
-            and bool(
-                request.memory_need_signature.claim_ids or request.memory_need_signature.state_keys
-            )
-        )
-    ):
-        return "L1", "CANONICAL_CHANGE_REQUIRES_REFRESH"
-    if request.event == "ACTION_PROPOSED" and request.requested_route != "L1":
-        return "L1", "ACTION_SAFE_REQUIRES_CANONICAL_RECALL"
-    if (
-        request.requested_route == "L0"
-        and request.known_claim_id is None
-        and request.state_key_ref is None
-    ):
-        return "L1", "L0_LOCATOR_UNAVAILABLE"
-    return request.requested_route, None
-
-
-def _typed_need_policy_rejection(request: PrepareContextRequest) -> str | None:
-    signature = request.memory_need_signature
-    if signature is not None:
-        if signature.scope != request.requested_scope:
-            return "NEED_SCOPE_MISMATCH"
-        if any(key.scope != request.requested_scope for key in signature.state_keys):
-            return "NEED_STATE_KEY_SCOPE_MISMATCH"
-        if signature.required_authority != request.required_authority:
-            return "NEED_AUTHORITY_MISMATCH"
-        if signature.consistency_floor != request.consistency:
-            return "NEED_CONSISTENCY_MISMATCH"
-    if request.state_key_ref is not None and request.state_key_ref.scope != request.requested_scope:
-        return "STATE_KEY_SCOPE_MISMATCH"
-    return None
-
-
-def _policy_identity(principal_profile: str, request: PrepareContextRequest) -> str:
-    return _sha256(
-        {
-            "principal_profile": principal_profile,
-            "profile_id": request.profile_id,
-            "scope": request.requested_scope,
-            "authority": request.required_authority,
-            "consistency": request.consistency,
-            "policy_digest": request.policy_digest,
-        }
-    )
-
-
 def _slot_coverage(
     *,
     request: PrepareContextRequest,
@@ -1171,10 +1084,6 @@ def _slot_coverage(
     )
 
 
-def _canonical_json(value: object) -> str:
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-
-
 def _current_state_envelope(
     *,
     route: str,
@@ -1216,8 +1125,3 @@ def _requested_detail_level(
     if signature.evidence_need == "NONE":
         return "ABSTRACT"
     return "EVIDENCE_DETAIL"
-
-
-def _sha256(value: object) -> str:
-    encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
-    return hashlib.sha256(encoded).hexdigest()
