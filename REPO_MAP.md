@@ -24,6 +24,8 @@ MiLAi/
 | benchmark、scorer、研究 adapter、prototype | `MiLAi-Lab/src`, `studies`, `configs`, `tests`, `docs` | Product-faithful arm 必须锁定公开 Product 身份 |
 | 历史运行结果、legacy 快照、SHA 清单 | `MiLAi-Artifact-Archive/catalogs`, `manifests`, `preserved-user-work` | 只读证据；不作为 import 包或运行依赖 |
 | 重组 inventory/diff/结果 | `MiLAi-Artifact-Archive/manifests/reorganization/v1.0` | 机器可读清单与人工差异决策的唯一归档位置 |
+| Product application seams | `MiLAi-Product/runtime/src/milai/application/recollection`, `context_prepare` | facade、route、binding、serialization 等稳定边界；兼容入口保留在旧模块路径 |
+| OpenWorker host seams | `MiLAi-Product/integrations/openworker-mcp/src/milai_openworker_mcp/host` | Host orchestrator 与 host 兼容层；memory/provider/tool 组件不得回流到根目录 |
 
 ## 运行与测试入口
 
@@ -44,3 +46,4 @@ inventory（100% coverage）
 ```
 
 重组前根目录内容可通过 `pre-codebase-reorg-v1` 和 inventory 中记录的 SHA 恢复。
+最终交付索引见 `MILA_CODEBASE_REORGANIZATION_RESULTS_v1.0.md`。
