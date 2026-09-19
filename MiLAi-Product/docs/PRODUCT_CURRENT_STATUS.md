@@ -1,9 +1,27 @@
 # MiLAi Product Current Status
 
-> As of: 2026-09-09
+> As of: 2026-09-19
 > Repository: `/cra/memory/mx_memory/MiLAi-Product`  
 > Product status: `0.1.0-candidate`  
 > Schema status: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
+
+## Current engineering baseline
+
+- Verified commit: `fa08da3bceebea3de9bab5d0db15605152d2dbbf`.
+- Product identity manifest: `product.manifest.json` is regenerated and enforced by
+  `tools/build_product_manifest.py --check` in the root authoritative CI.
+- Product Runtime and integration static baselines are locally green; all six integration packages
+  pass mypy. The Lab boundary, Ruff and mypy gates are green; the full Lab pytest gate includes a
+  long synthetic replay and is being verified separately after the relocation-compatibility fix.
+- Root CI is the monorepo authoritative workflow. Nested Product/Lab workflows remain extraction
+  templates and must not be read as a second Source of Truth for repository composition.
+- Current structural state: Product/Lab/Archive boundaries are stable; the next work is behavior
+  revalidation, current-implementation conformance evidence, and release identity closure—not
+  another top-level repository reorganization.
+
+The sections below are historical status and experiment records. Their dates, pinned commits and
+results are immutable evidence; they are not claims about the current HEAD unless explicitly stated
+in the current engineering baseline above.
 
 ## V02-14: optional Client 0.1.4 source helper, local candidate only
 
