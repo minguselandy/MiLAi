@@ -15,7 +15,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
-LAB = Path("/cra/memory/mx_memory/MiLAi-Lab")
+LAB = Path(__file__).resolve().parents[1]
 CASES = Path("/cra/memory/mx_memory/evidence/v0219/f2-wave1-v1/cases")
 
 

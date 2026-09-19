@@ -40,16 +40,16 @@
       "sha256": "4e99e13f7e460d1a2fe3c076fe18e12c12fe69004816e7af5dc9a108046c1657"
     },
     {
-      "file_count": 16,
+      "file_count": 18,
       "interface_id": "openworker-mcp-v0.1",
       "path": "integrations/openworker-mcp/src",
-      "sha256": "f68861cd344091aa0c6a9727fc8fcb455ad02c560e3f593f15c769ba1f9d9ace"
+      "sha256": "62ed4232cc2adb089d142faed300d1e93d6aba13a4df77418453dd477340773c"
     },
     {
-      "file_count": 15,
+      "file_count": 16,
       "interface_id": "python-client-v0.1",
       "path": "integrations/python-client/src",
-      "sha256": "32c3b7fe545e109fd2add7f19b947992ea42211b149061c6ea2cd2c1dfa89278"
+      "sha256": "6eb750cbdf45b406538efed2dc1386e539ea36a741dd06d30c326e66185f931f"
     },
     {
       "file_count": 5,
@@ -60,7 +60,7 @@
   ],
   "schema_version": "milai-product-manifest-v1",
   "source_legacy_head": "651099ba8cffc2675961bb9250ba44c158efccb5",
-  "tree_file_count": 377,
+  "tree_file_count": 386,
   "tree_paths": [
     "VERSION",
     "architecture/v1.0",
@@ -90,5 +90,5 @@
     "integrations/autogen/uv.lock",
     "integrations/autogen/src"
   ],
-  "tree_sha256": "d5844bc3c586fd12458b871d2839cb50d4e1508f7d46352f03f82b56316ca02e"
+  "tree_sha256": "77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443"
 }

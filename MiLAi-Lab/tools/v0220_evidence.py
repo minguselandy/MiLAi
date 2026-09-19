@@ -12,6 +12,29 @@ from pathlib import Path
 LAB = Path(__file__).resolve().parents[1]
 
 
+def _current_lab_path(path: Path) -> Path:
+    """Resolve an absolute dependency recorded before the Lab was relocated.
+
+    Historical evidence manifests contain absolute source paths.  The active
+    Lab now lives under the monorepo, so the old prefix must not be treated as
+    a second source tree during validation.  Only paths containing the exact
+    ``MiLAi-Lab`` component are remapped, and the mapped file must exist.
+    """
+
+    try:
+        path.relative_to(LAB)
+    except ValueError:
+        pass
+    else:
+        return path
+    try:
+        marker = path.parts.index("MiLAi-Lab")
+    except ValueError:
+        return path
+    candidate = LAB.joinpath(*path.parts[marker + 1 :])
+    return candidate if candidate.is_file() else path
+
+
 def read(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -79,9 +102,12 @@ def validate(root: Path, *, manifest_sha256: str | None = None) -> dict:
     manifest = read(root / "manifest.json")
     for name, expected in manifest["dependencies"].items():
         path = Path(name)
+        current_path = _current_lab_path(path)
+        if not current_path.is_file():
+            raise ValueError("IMPLEMENTATION_SOURCE_UNAVAILABLE")
         if (
-            sha(path) != expected
-            or sha(root / "executed-source" / path.relative_to(LAB)) != expected
+            sha(current_path) != expected
+            or sha(root / "executed-source" / current_path.relative_to(LAB)) != expected
         ):
             raise ValueError("IMPLEMENTATION_DRIFT")
     for name, expected in manifest["inputs"].items():

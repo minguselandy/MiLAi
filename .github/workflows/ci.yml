@@ -29,6 +29,17 @@ jobs:
       - name: Verify root layout, generated paths, nested Git and imports
         run: python3 MiLAi-Artifact-Archive/tools/verify_boundaries.py
 
+  product-identity:
+    name: Product identity manifest
+    needs: boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify checked-in Product manifest
+        working-directory: MiLAi-Product
+        run: python3 tools/build_product_manifest.py --check
+
   product-runtime:
     name: Product Runtime and PostgreSQL
     runs-on: ubuntu-latest
@@ -131,6 +142,7 @@ jobs:
         run: |
           uv sync --frozen --dev --python 3.11
           uv run ruff check src tests
+          uv run mypy
           uv run pytest -q
           uv build
 
@@ -138,7 +150,7 @@ jobs:
     name: Lab active package and study boundary
     needs: boundaries
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -185,7 +197,7 @@ jobs:
 
   composition:
     name: Product/Lab/Archive composition gate
-    needs: [product-runtime, product-integrations, lab, archive]
+    needs: [product-identity, product-runtime, product-integrations, lab, archive]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

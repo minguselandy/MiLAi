@@ -153,10 +153,26 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="verify the checked-in manifest instead of rewriting it",
+    )
     args = parser.parse_args()
     root = args.root.resolve()
     output = (args.output or root / "product.manifest.json").resolve()
     payload = build_manifest(root)
+    if args.check:
+        if not output.is_file():
+            print(f"manifest is missing: {output}")
+            return 1
+        checked_in = json.loads(output.read_text(encoding="utf-8"))
+        if checked_in != payload:
+            print("product.manifest.json is stale; regenerate it with build_product_manifest.py")
+            print(json.dumps({"checked_in": checked_in, "expected": payload}, indent=2, sort_keys=True))
+            return 1
+        print(json.dumps({key: payload[key] for key in ("tree_file_count", "tree_sha256")}))
+        return 0
     temporary = output.with_suffix(output.suffix + ".tmp")
     temporary.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",

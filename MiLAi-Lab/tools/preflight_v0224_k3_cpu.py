@@ -17,7 +17,6 @@ def preflight(root: Path, binding: str, stage: str, *, static_authority) -> dict
 
     require_cpu_network_guard()
     import httpx
-    from v0224_k3_cpu_batch import OfflineBatch as Batch
 
     from preflight_v0222_presentation import PREFLIGHT_SECONDS, RECEIPT_COUNTS, REFERENCE_COUNTS
     from preflight_v0222_presentation_v2 import admit_preflight
@@ -29,6 +28,7 @@ def preflight(root: Path, binding: str, stage: str, *, static_authority) -> dict
     from v0222_http import bounded_request, strict_http_json
     from v0222_presentation_audit import validate_reference
     from v0222_presentation_http_v2 import identity, owned_timeout
+    from v0224_k3_cpu_batch import OfflineBatch as Batch
 
     preflight_started = time.monotonic()
     batch = None

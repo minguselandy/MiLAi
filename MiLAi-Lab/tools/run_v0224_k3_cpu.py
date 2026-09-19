@@ -16,7 +16,7 @@ import sys
 import time
 from pathlib import Path
 
-LAB = Path("/cra/memory/mx_memory/MiLAi-Lab")
+LAB = Path(__file__).resolve().parents[1]
 CASES = Path("/cra/memory/mx_memory/evidence/v0219/f2-wave1-v1/cases")
 
 
@@ -27,11 +27,10 @@ def _batch(root, binding, authority):
 
 
 def stop_batch(root, binding, batch, exc):
-    from v0224_k3_cpu_batch import CPU_ROOT, OfflineBatch
-
     from v0220_evidence import sha
     from v0220_provider_hardened import ProviderStop
     from v0222_scoped_cpu_guard import require_cpu_network_guard
+    from v0224_k3_cpu_batch import CPU_ROOT, OfflineBatch
 
     try:
         require_cpu_network_guard()
@@ -64,12 +63,11 @@ def prepare_references(root, binding, authority):
 
 
 def make_mock_transport(batch, episode: str | None = None):
-    from v0224_k3_cpu_batch import OfflineBatch
-
     from v0220_provider_hardened import ProviderStop
     from v0222_http import strict_http_json
     from v0222_scoped_cpu_guard import CPU_MODE, require_cpu_network_guard
     from v0222_scoped_cpu_mock import _scripted_transport
+    from v0224_k3_cpu_batch import OfflineBatch
 
     require_cpu_network_guard()
     if (
@@ -336,9 +334,8 @@ LIMITS = {
 
 
 def validate_contract(value):
-    from v0224_k3_cpu_batch import CPU_ROOT
-
     from v0220_provider_hardened import ProviderStop
+    from v0224_k3_cpu_batch import CPU_ROOT
 
     def require(ok, reason):
         if not ok:
@@ -442,12 +439,11 @@ def validate_contract(value):
 
 def load_contract(contract_path, contract_sha256):
     """Full physical first/close external pins, no expected value discovery."""
-    from v0224_k3_cpu_batch import StaticAuthority
-
     from v0220_evidence import dependencies
     from v0220_provider_hardened import ProviderStop
     from v0222_admission_read_scope import AdmissionReadScope
     from v0222_scoped_cpu_guard import require_cpu_network_guard
+    from v0224_k3_cpu_batch import StaticAuthority
     from v0224_static_bundle import BundleLimits
 
     require_cpu_network_guard()
