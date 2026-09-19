@@ -1,0 +1,65 @@
+{
+  "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+  "architecture_version": "1.0.0",
+  "claim_policy": {
+    "architecture_conformant": false,
+    "blocked_by": [
+      "ARCHITECTURE_CONFORMANT",
+      "RELEASE_CANDIDATE",
+      "SCHEMA_FREEZE"
+    ],
+    "release_candidate": false,
+    "schema_freeze": false
+  },
+  "client_version": "0.1.4",
+  "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
+  "current_implementation": {
+    "categories": [
+      "goals",
+      "invariants",
+      "transactions",
+      "roles"
+    ],
+    "map": "docs/conformance/invariant-test-map.json",
+    "status": "UNVERIFIED"
+  },
+  "invariant_test_map_sha256": "1ec629497532fb4ac1f921ede8fad9eead93a2b5a8641f3de5b5646729c993e7",
+  "known_limitations": [
+    "Current G/I/TX/role items have reference coverage but no per-item behavioral execution receipt.",
+    "AF-09 historical tarballs are archive-owned and are represented by tracked classification metadata, not Product Git bytes.",
+    "architecture/v1.0 remains frozen; this receipt is a separate current-implementation evidence layer."
+  ],
+  "mcp_version": "0.1.15",
+  "migration_head": [
+    "0027_embedding_identity",
+    "0045_dg18_adjacency",
+    "0056_host_notes"
+  ],
+  "openworker_version": "0.1.0",
+  "product_commit": "7c38298182fd44a0198e1be309050632c2559c9e",
+  "product_manifest_sha256": "eb28065c57b2d518b4e4fa7ca47555ba3039502a20059e42ab17cec2321ad971",
+  "product_tree_sha256": "77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443",
+  "product_version": "0.1.0-candidate",
+  "runtime_version": "0.1.5",
+  "schema_version": "milai-architecture-conformance-v1",
+  "status": "UNVERIFIED",
+  "verification_commands": [
+    {
+      "command": "python3 tools/build_product_manifest.py --check",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "python3 architecture/v1.0/scripts/verify_lock.py --scope bundle --mode release --expected-manifest-sha256 <frozen-anchor>",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "python3 architecture/v1.0/scripts/validate_bundle.py",
+      "exit_code": 1,
+      "reason": "AF-09 historical submission tarballs are archive-owned and ignored by the Product Git tree; only their tracked archive classification records are available here.",
+      "status": "UNVERIFIED"
+    }
+  ],
+  "verified_at": "2026-09-19T15:07:53+00:00"
+}

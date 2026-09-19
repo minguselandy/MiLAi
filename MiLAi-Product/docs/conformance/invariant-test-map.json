@@ -1,0 +1,3836 @@
+{
+  "architecture_version": "1.0.0",
+  "categories": {
+    "freeze_gates": [
+      {
+        "declared_status": "PASS_FROZEN",
+        "evidence": [
+          {
+            "path": "architecture/v1.0/BASELINE.md",
+            "reference": "architecture/v1.0/BASELINE.md",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-00",
+        "name": "Baseline",
+        "reference_integrity": "PASS",
+        "status": "PASS",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      },
+      {
+        "declared_status": "PASS_FROZEN",
+        "evidence": [
+          {
+            "path": "architecture/v1.0/OBJECTS.md",
+            "reference": "architecture/v1.0/OBJECTS.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/adr/ADR-017-populated-governance-history-reconciliation.md",
+            "reference": "docs/adr/ADR-017-populated-governance-history-reconciliation.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/adr/ADR-018-rejected-grounding-and-tx05-provenance-guard.md",
+            "reference": "docs/adr/ADR-018-rejected-grounding-and-tx05-provenance-guard.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md",
+            "reference": "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-01",
+        "name": "Objects",
+        "reference_integrity": "PASS",
+        "status": "PASS",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      },
+      {
+        "declared_status": "PASS_FROZEN",
+        "evidence": [
+          {
+            "path": "architecture/v1.0/INVARIANTS.md",
+            "reference": "architecture/v1.0/INVARIANTS.md",
+            "status": "PASS"
+          },
+          {
+            "path": "architecture/v1.0/crosswalk.json",
+            "reference": "architecture/v1.0/crosswalk.json",
+            "status": "PASS"
+          },
+          {
+            "path": "architecture/v1.0/AF09_REMEDIATION.md",
+            "reference": "architecture/v1.0/AF09_REMEDIATION.md",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-02",
+        "name": "Invariants",
+        "reference_integrity": "PASS",
+        "status": "PASS",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      },
+      {
+        "declared_status": "PASS_FROZEN",
+        "evidence": [
+          {
+            "path": "architecture/v1.0/PERMISSIONS.md",
+            "reference": "architecture/v1.0/PERMISSIONS.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-02-LC-003-security-2026-08-15.md",
+            "reference": "docs/reports/DG-02-LC-003-security-2026-08-15.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.4-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.4-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.5-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-independent-rereview-candidate.5-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-independent-rereview-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-03",
+        "name": "Permissions",
+        "reference_integrity": "PASS",
+        "status": "PASS",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      },
+      {
+        "declared_status": "PASS_FROZEN",
+        "evidence": [
+          {
+            "path": "architecture/v1.0/TRANSACTIONS.md",
+            "reference": "architecture/v1.0/TRANSACTIONS.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md",
+            "reference": "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-04-LC-005-008-canonical-2026-08-15.md",
+            "reference": "docs/reports/DG-04-LC-005-008-canonical-2026-08-15.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.2-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.2-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.4-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.4-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.5-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-independent-rereview-candidate.5-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-independent-rereview-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-04",
+        "name": "Transactions",
+        "reference_integrity": "PASS",
+        "status": "PASS",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      },
+      {
+        "declared_status": "PASS_FROZEN",
+        "evidence": [
+          {
+            "path": "architecture/v1.0/RETRIEVAL_CONTEXT.md",
+            "reference": "architecture/v1.0/RETRIEVAL_CONTEXT.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-07-LC-011-014-retrieval-2026-08-15.md",
+            "reference": "docs/reports/DG-07-LC-011-014-retrieval-2026-08-15.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-08-LC-015-017-context-chat-2026-08-15.md",
+            "reference": "docs/reports/DG-08-LC-015-017-context-chat-2026-08-15.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.2-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.2-2026-08-17.md",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-05",
+        "name": "Retrieval and Context",
+        "reference_integrity": "PASS",
+        "status": "PASS",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      },
+      {
+        "declared_status": "PASS_FROZEN",
+        "evidence": [
+          {
+            "path": "architecture/v1.0/DELETION_RECOVERY.md",
+            "reference": "architecture/v1.0/DELETION_RECOVERY.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-09-LC-018-local-beta-2026-08-15.md",
+            "reference": "docs/reports/DG-09-LC-018-local-beta-2026-08-15.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.2-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.2-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.4-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.4-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.5-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-independent-rereview-candidate.5-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-independent-rereview-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-06",
+        "name": "Deletion and Recovery",
+        "reference_integrity": "PASS",
+        "status": "PASS",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      },
+      {
+        "declared_status": "PASS_FROZEN",
+        "evidence": [
+          {
+            "path": "architecture/v1.0/PERMISSIONS.md",
+            "reference": "architecture/v1.0/PERMISSIONS.md",
+            "status": "PASS"
+          },
+          {
+            "path": "architecture/v1.0/THREAT_MODEL.md",
+            "reference": "architecture/v1.0/THREAT_MODEL.md",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/tests/unit/test_external_dependency_boundary.py",
+            "reference": "runtime/tests/unit/test_external_dependency_boundary.py",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-07",
+        "name": "Isolation",
+        "reference_integrity": "PASS",
+        "status": "PASS",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      },
+      {
+        "declared_status": "PASS_FROZEN",
+        "evidence": [
+          {
+            "path": "docs/runbooks/backup-restore.md",
+            "reference": "docs/runbooks/backup-restore.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/runbooks/projection-and-purge-recovery.md",
+            "reference": "docs/runbooks/projection-and-purge-recovery.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-00-architecture-candidate.4-2026-08-17.md",
+            "reference": "docs/reports/DG-00-architecture-candidate.4-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-00-architecture-candidate.5-2026-08-17.md",
+            "reference": "docs/reports/DG-00-architecture-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-00-architecture-1.0.0-release-2026-08-17.md",
+            "reference": "docs/reports/DG-00-architecture-1.0.0-release-2026-08-17.md",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-08",
+        "name": "Operations",
+        "reference_integrity": "PASS",
+        "status": "PASS",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      },
+      {
+        "declared_status": "ACCEPTED_INDEPENDENT_REVIEW",
+        "evidence": [
+          {
+            "path": "architecture/v1.0/README.md",
+            "reference": "architecture/v1.0/README.md",
+            "status": "PASS"
+          },
+          {
+            "path": "architecture/v1.0/AUTHOR_PREFLIGHT.md",
+            "reference": "architecture/v1.0/AUTHOR_PREFLIGHT.md",
+            "status": "PASS"
+          },
+          {
+            "path": "architecture/v1.0/AF09_REMEDIATION.md",
+            "reference": "architecture/v1.0/AF09_REMEDIATION.md",
+            "status": "PASS"
+          },
+          {
+            "path": "architecture/v1.0/FREEZE_REVIEW.md",
+            "reference": "architecture/v1.0/FREEZE_REVIEW.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-independent-review-2026-08-16.md",
+            "reference": "docs/reviews/AF-09-independent-review-2026-08-16.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-independent-rereview-candidate.2-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-independent-rereview-candidate.2-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-independent-rereview-candidate.3-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-independent-rereview-candidate.3-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-independent-rereview-candidate.4-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-independent-rereview-candidate.4-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.2-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.2-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.3-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.3-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.4-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.4-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-remediation-candidate.5-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-remediation-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/AF-09-independent-rereview-candidate.5-2026-08-17.md",
+            "reference": "docs/reviews/AF-09-independent-rereview-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/submissions/AF-09-candidate.2-submission-receipt.md",
+            "reference": "docs/reviews/submissions/AF-09-candidate.2-submission-receipt.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/submissions/AF-09-candidate.3-submission-receipt.md",
+            "reference": "docs/reviews/submissions/AF-09-candidate.3-submission-receipt.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/submissions/AF-09-candidate.4-submission-receipt.md",
+            "reference": "docs/reviews/submissions/AF-09-candidate.4-submission-receipt.md",
+            "status": "PASS"
+          },
+          {
+            "archive_manifest": "MiLAi-Artifact-Archive/manifests/source-classification.jsonl",
+            "archive_owner": "MiLAi-Artifact-Archive",
+            "availability": "ARCHIVE_MANIFEST_ONLY",
+            "declared_sha256": "03ca6b686f21afacccb0a31ca9892ca2854a8a395d402adc26fb6374e36ec341",
+            "reference": "docs/reviews/submissions/AF-09-candidate.4-13d0a948-submission.tar.gz",
+            "status": "UNVERIFIED"
+          },
+          {
+            "path": "architecture/v1.0-candidate/architecture_manifest.json",
+            "reference": "architecture/v1.0-candidate/architecture_manifest.json",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reviews/submissions/AF-09-candidate.5-submission-receipt.md",
+            "reference": "docs/reviews/submissions/AF-09-candidate.5-submission-receipt.md",
+            "status": "PASS"
+          },
+          {
+            "archive_manifest": "MiLAi-Artifact-Archive/manifests/source-classification.jsonl",
+            "archive_owner": "MiLAi-Artifact-Archive",
+            "availability": "ARCHIVE_MANIFEST_ONLY",
+            "declared_sha256": "aa56033be8380eee9289baec11c7839cbaa9bde4d66f69c6757fd9fb651ff668",
+            "reference": "docs/reviews/submissions/AF-09-candidate.5-ece90366-submission.tar.gz",
+            "status": "UNVERIFIED"
+          },
+          {
+            "path": "docs/reports/DG-00-architecture-candidate.3-2026-08-17.md",
+            "reference": "docs/reports/DG-00-architecture-candidate.3-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-00-architecture-candidate.4-2026-08-17.md",
+            "reference": "docs/reports/DG-00-architecture-candidate.4-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-00-architecture-candidate.5-2026-08-17.md",
+            "reference": "docs/reports/DG-00-architecture-candidate.5-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/DG-00-architecture-1.0.0-release-2026-08-17.md",
+            "reference": "docs/reports/DG-00-architecture-1.0.0-release-2026-08-17.md",
+            "status": "PASS"
+          },
+          {
+            "path": "docs/reports/GOALS-completion-audit-2026-08-16.md",
+            "reference": "docs/reports/GOALS-completion-audit-2026-08-16.md",
+            "status": "PASS"
+          }
+        ],
+        "id": "AF-09",
+        "name": "Lock Review",
+        "reference_integrity": "UNVERIFIED",
+        "status": "UNVERIFIED",
+        "verification": {
+          "behavioral_execution": "NOT_APPLICABLE",
+          "method": "bundle lock plus evidence reference resolution",
+          "scope": "frozen architecture evidence"
+        }
+      }
+    ],
+    "goals": [
+      {
+        "design_refs": [
+          "MiLAi_Logical_Architecture_v1_设计文档.md#4-g1g9-架构目标",
+          "architecture/v1.0/OBJECTS.md#evidence-aggregate"
+        ],
+        "id": "G1",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0003_evidence_plane.py",
+            "reference": "runtime/migrations/versions/0003_evidence_plane.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/evidence.py",
+            "reference": "runtime/src/milai/application/evidence.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/evidence_repository.py",
+            "reference": "runtime/src/milai/persistence/evidence_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Source Fidelity",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "statement": "每个 belief 可回到 admissible Evidence；Evidence 身份与来源不被重写。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx01_api_replay_conflict_blob_dedup_and_lineage",
+            "path": "runtime/tests/integration/test_evidence_api.py",
+            "reference": "runtime/tests/integration/test_evidence_api.py::test_tx01_api_replay_conflict_blob_dedup_and_lineage",
+            "status": "PASS"
+          },
+          {
+            "node": "test_proposal_review_claim_conflict_and_lineage_api",
+            "path": "runtime/tests/integration/test_canonical_api.py",
+            "reference": "runtime/tests/integration/test_canonical_api.py::test_proposal_review_claim_conflict_and_lineage_api",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "MiLAi_Logical_Architecture_v1_设计文档.md#8-写入架构",
+          "architecture/v1.0/TRANSACTIONS.md",
+          "docs/adr/ADR-017-populated-governance-history-reconciliation.md",
+          "docs/adr/ADR-018-rejected-grounding-and-tx05-provenance-guard.md",
+          "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md"
+        ],
+        "id": "G2",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "reference": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "reference": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/canonical_repository.py",
+            "reference": "runtime/src/milai/persistence/canonical_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Governed Canonical Evolution",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "statement": "所有 Claim/OpenIssue 变化经 Proposal、Decision、procedure、CAS 和 immutable history。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx02_create_is_versioned_grounded_and_idempotent",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx02_create_is_versioned_grounded_and_idempotent",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx03_exact_head_cas_allows_only_one_revision",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx03_exact_head_cas_allows_only_one_revision",
+            "status": "PASS"
+          },
+          {
+            "node": "test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "status": "PASS"
+          },
+          {
+            "node": "test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "status": "PASS"
+          },
+          {
+            "node": "test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_grounding_is_forward_repaired_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_grounding_is_forward_repaired_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "MiLAi_Logical_Architecture_v1_设计文档.md#74-openissue-状态机",
+          "architecture/v1.0/OBJECTS.md#governance-and-openissue-aggregate"
+        ],
+        "id": "G3",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/canonical_repository.py",
+            "reference": "runtime/src/milai/persistence/canonical_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Open-State Preservation",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "statement": "冲突、缺证、Scope/authority 未决保持为有身份、有 branches、有 discharge rule 的 OpenIssue。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx04_conflict_preserves_head_and_structured_branches",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx04_conflict_preserves_head_and_structured_branches",
+            "status": "PASS"
+          },
+          {
+            "node": "test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "status": "PASS"
+          },
+          {
+            "node": "test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_grounding_is_forward_repaired_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_grounding_is_forward_repaired_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "MiLAi_Logical_Architecture_v1_设计文档.md#7-状态语义",
+          "architecture/v1.0/OBJECTS.md#5-正交状态轴"
+        ],
+        "id": "G4",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "reference": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "reference": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "reference": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/retrieval.py",
+            "reference": "runtime/src/milai/application/retrieval.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Applicability Separation",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "statement": "lifecycle、epistemic、freshness、authority、confidence、Scope、valid/system time 正交。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_claim_version_axes_accept_normative_values_and_map_legacy_values",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_claim_version_axes_accept_normative_values_and_map_legacy_values",
+            "status": "PASS"
+          },
+          {
+            "node": "test_claim_version_axes_reject_unknown_values_atomically",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_claim_version_axes_reject_unknown_values_atomically",
+            "status": "PASS"
+          },
+          {
+            "node": "test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "MiLAi_Logical_Architecture_v1_设计文档.md#9-读取与检索架构",
+          "architecture/v1.0/RETRIEVAL_CONTEXT.md"
+        ],
+        "id": "G5",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0007_projection_outbox.py",
+            "reference": "runtime/migrations/versions/0007_projection_outbox.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "reference": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0012_query_plan_trace.py",
+            "reference": "runtime/migrations/versions/0012_query_plan_trace.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0014_query_plan_outbox_sequence.py",
+            "reference": "runtime/migrations/versions/0014_query_plan_outbox_sequence.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "reference": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0018_causal_retrieval_trace.py",
+            "reference": "runtime/migrations/versions/0018_causal_retrieval_trace.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0020_causal_position_api.py",
+            "reference": "runtime/migrations/versions/0020_causal_position_api.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/domain/causality.py",
+            "reference": "runtime/src/milai/domain/causality.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/causality.py",
+            "reference": "runtime/src/milai/application/causality.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/retrieval.py",
+            "reference": "runtime/src/milai/application/retrieval.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/query_planner.py",
+            "reference": "runtime/src/milai/application/query_planner.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Candidate-Safe Retrieval",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "statement": "所有非 canonical 结果只是 candidate，必须经统一 ECS/Gate，故障只能降 recall。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_l1_merges_fts_vector_and_persists_payload_free_append_only_trace",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_l1_merges_fts_vector_and_persists_payload_free_append_only_trace",
+            "status": "PASS"
+          },
+          {
+            "node": "test_ryw_rejects_missing_forged_cross_tenant_and_future_positions",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_ryw_rejects_missing_forged_cross_tenant_and_future_positions",
+            "status": "PASS"
+          },
+          {
+            "node": "test_ryw_dead_letter_falls_back_and_records_precise_outcome",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_ryw_dead_letter_falls_back_and_records_precise_outcome",
+            "status": "PASS"
+          },
+          {
+            "node": "test_ryw_snapshot_advance_forces_canonical_merge",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_ryw_snapshot_advance_forces_canonical_merge",
+            "status": "PASS"
+          },
+          {
+            "node": "test_vector_outage_degrades_and_canonical_outage_abstains",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_vector_outage_degrades_and_canonical_outage_abstains",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "MiLAi_Logical_Architecture_v1_设计文档.md#12-删除备份与恢复",
+          "architecture/v1.0/DELETION_RECOVERY.md"
+        ],
+        "id": "G6",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0006_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0006_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0010_backup_operations.py",
+            "reference": "runtime/migrations/versions/0010_backup_operations.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "reference": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+            "reference": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+            "reference": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "reference": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/adapters/blob_store.py",
+            "reference": "runtime/src/milai/adapters/blob_store.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/deletion.py",
+            "reference": "runtime/src/milai/application/deletion.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/deletion_repository.py",
+            "reference": "runtime/src/milai/persistence/deletion_repository.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/operations/backup.py",
+            "reference": "runtime/src/milai/operations/backup.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Revocation Propagation",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "statement": "Evidence revoke 同步阻断 authority，异步清理 projection/blob/backup 可证明。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_purge_worker_erases_blob_and_derived_claim_projection",
+            "path": "runtime/tests/integration/test_projection_worker.py",
+            "reference": "runtime/tests/integration/test_projection_worker.py::test_purge_worker_erases_blob_and_derived_claim_projection",
+            "status": "PASS"
+          },
+          {
+            "node": "test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+            "path": "runtime/tests/integration/test_projection_worker.py",
+            "reference": "runtime/tests/integration/test_projection_worker.py::test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+            "status": "PASS"
+          },
+          {
+            "node": "test_consistency_backup_restore_and_deletion_expiry_reconciliation",
+            "path": "runtime/tests/integration/test_backup_restore.py",
+            "reference": "runtime/tests/integration/test_backup_restore.py::test_consistency_backup_restore_and_deletion_expiry_reconciliation",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "MiLAi_Logical_Architecture_v1_设计文档.md#10-contextchat-与确认",
+          "architecture/v1.0/RETRIEVAL_CONTEXT.md#7-contextcapsule"
+        ],
+        "id": "G7",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0009_context_chat.py",
+            "reference": "runtime/migrations/versions/0009_context_chat.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0013_live_confirmation_gate.py",
+            "reference": "runtime/migrations/versions/0013_live_confirmation_gate.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "reference": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/context.py",
+            "reference": "runtime/src/milai/application/context.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/chat.py",
+            "reference": "runtime/src/milai/application/chat.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Bounded Traceable Context",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "statement": "Context 保护 Goal/Constraint/ECS/OpenIssue；回答带 lineage 或 abstain。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_context_compresses_then_fails_when_protected_minimum_exceeds_budget",
+            "path": "runtime/tests/integration/test_context_chat_api.py",
+            "reference": "runtime/tests/integration/test_context_chat_api.py::test_context_compresses_then_fails_when_protected_minimum_exceeds_budget",
+            "status": "PASS"
+          },
+          {
+            "node": "test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_abstains",
+            "path": "runtime/tests/integration/test_context_chat_api.py",
+            "reference": "runtime/tests/integration/test_context_chat_api.py::test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_abstains",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "MiLAi_Logical_Architecture_v1_设计文档.md#13-安全与信任边界",
+          "architecture/v1.0/PERMISSIONS.md"
+        ],
+        "id": "G8",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "reference": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0020_causal_position_api.py",
+            "reference": "runtime/migrations/versions/0020_causal_position_api.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/config/settings.py",
+            "reference": "runtime/src/milai/config/settings.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/database.py",
+            "reference": "runtime/src/milai/persistence/database.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/observability/logging.py",
+            "reference": "runtime/src/milai/observability/logging.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Least-Privilege Local Security",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "statement": "tenant、RLS、角色、loopback、secret/log privacy 和 remote gate 明确。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_api_role_cannot_read_or_insert_another_tenant",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_api_role_cannot_read_or_insert_another_tenant",
+            "status": "PASS"
+          },
+          {
+            "node": "test_api_context_is_transaction_scoped_and_reset_on_pool_reuse",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_api_context_is_transaction_scoped_and_reset_on_pool_reuse",
+            "status": "PASS"
+          },
+          {
+            "node": "test_database_boundary_rejects_owner_and_misassigned_runtime_login",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_database_boundary_rejects_owner_and_misassigned_runtime_login",
+            "status": "PASS"
+          },
+          {
+            "node": "test_api_and_causal_secrets_must_be_independent",
+            "path": "runtime/tests/unit/test_settings.py",
+            "reference": "runtime/tests/unit/test_settings.py::test_api_and_causal_secrets_must_be_independent",
+            "status": "PASS"
+          },
+          {
+            "node": "test_runtime_settings_reject_owner_or_misassigned_login",
+            "path": "runtime/tests/unit/test_settings.py",
+            "reference": "runtime/tests/unit/test_settings.py::test_runtime_settings_reject_owner_or_misassigned_login",
+            "status": "PASS"
+          },
+          {
+            "node": "test_json_formatter_never_interpolates_payload_or_unsafe_metadata",
+            "path": "runtime/tests/unit/test_logging_redaction.py",
+            "reference": "runtime/tests/unit/test_logging_redaction.py::test_json_formatter_never_interpolates_payload_or_unsafe_metadata",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "MiLAi_Logical_Architecture_v1_设计文档.md#11-outboxprojection-与-worker",
+          "architecture/v1.0/DELETION_RECOVERY.md"
+        ],
+        "id": "G9",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0001_runtime_foundation.py",
+            "reference": "runtime/migrations/versions/0001_runtime_foundation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0007_projection_outbox.py",
+            "reference": "runtime/migrations/versions/0007_projection_outbox.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0010_backup_operations.py",
+            "reference": "runtime/migrations/versions/0010_backup_operations.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0014_query_plan_outbox_sequence.py",
+            "reference": "runtime/migrations/versions/0014_query_plan_outbox_sequence.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "reference": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0018_causal_retrieval_trace.py",
+            "reference": "runtime/migrations/versions/0018_causal_retrieval_trace.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "reference": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0020_causal_position_api.py",
+            "reference": "runtime/migrations/versions/0020_causal_position_api.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+            "reference": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+            "reference": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "reference": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/workers/main.py",
+            "reference": "runtime/src/milai/workers/main.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/operations/backup.py",
+            "reference": "runtime/src/milai/operations/backup.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Replaceable and Recoverable System",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "statement": "外部组件可移除；Migration、Outbox、projection、backup 和 audit 可重放。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_full_forward_migration_chain_on_empty_database",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_full_forward_migration_chain_on_empty_database",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_grounding_is_forward_repaired_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_grounding_is_forward_repaired_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          },
+          {
+            "node": "test_search_projection_rebuild_replays_outbox_without_canonical_mutation",
+            "path": "runtime/tests/integration/test_projection_worker.py",
+            "reference": "runtime/tests/integration/test_projection_worker.py::test_search_projection_rebuild_replays_outbox_without_canonical_mutation",
+            "status": "PASS"
+          },
+          {
+            "node": "test_runtime_has_no_external_memory_framework_imports",
+            "path": "runtime/tests/unit/test_external_dependency_boundary.py",
+            "reference": "runtime/tests/unit/test_external_dependency_boundary.py::test_runtime_has_no_external_memory_framework_imports",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      }
+    ],
+    "invariants": [
+      {
+        "design_refs": [
+          "architecture/v1.0/INVARIANTS.md#2-hard-invariants"
+        ],
+        "id": "I-01",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0003_evidence_plane.py",
+            "reference": "runtime/migrations/versions/0003_evidence_plane.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "reference": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_i01_evidence_cannot_be_collapsed_directly_into_claim_version",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_i01_evidence_cannot_be_collapsed_directly_into_claim_version",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Evidence/Canonical",
+        "positive_test_evidence": [
+          {
+            "node": "test_tx02_create_is_versioned_grounded_and_idempotent",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx02_create_is_versioned_grounded_and_idempotent",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "EvidenceRecord != ClaimVersion；观察不等于系统 belief。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx02_create_is_versioned_grounded_and_idempotent",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx02_create_is_versioned_grounded_and_idempotent",
+            "status": "PASS"
+          },
+          {
+            "node": "test_i01_evidence_cannot_be_collapsed_directly_into_claim_version",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_i01_evidence_cannot_be_collapsed_directly_into_claim_version",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/INVARIANTS.md#2-hard-invariants"
+        ],
+        "id": "I-02",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0003_evidence_plane.py",
+            "reference": "runtime/migrations/versions/0003_evidence_plane.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/evidence_repository.py",
+            "reference": "runtime/src/milai/persistence/evidence_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_evidence_capture_identity_is_immutable_even_for_owner",
+            "path": "runtime/tests/integration/test_evidence_api.py",
+            "reference": "runtime/tests/integration/test_evidence_api.py::test_evidence_capture_identity_is_immutable_even_for_owner",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Evidence",
+        "positive_test_evidence": [
+          {
+            "node": "test_tx01_api_replay_conflict_blob_dedup_and_lineage",
+            "path": "runtime/tests/integration/test_evidence_api.py",
+            "reference": "runtime/tests/integration/test_evidence_api.py::test_tx01_api_replay_conflict_blob_dedup_and_lineage",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "Evidence capture identity、source、observed time、content hash 不可覆盖；重试 key+fingerprint 幂等。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_evidence_capture_identity_is_immutable_even_for_owner",
+            "path": "runtime/tests/integration/test_evidence_api.py",
+            "reference": "runtime/tests/integration/test_evidence_api.py::test_evidence_capture_identity_is_immutable_even_for_owner",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx01_api_replay_conflict_blob_dedup_and_lineage",
+            "path": "runtime/tests/integration/test_evidence_api.py",
+            "reference": "runtime/tests/integration/test_evidence_api.py::test_tx01_api_replay_conflict_blob_dedup_and_lineage",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/PERMISSIONS.md#5-procedure-boundary"
+        ],
+        "id": "I-03",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "reference": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Security/Governance",
+        "positive_test_evidence": [
+          {
+            "node": "test_proposal_review_claim_conflict_and_lineage_api",
+            "path": "runtime/tests/integration/test_canonical_api.py",
+            "reference": "runtime/tests/integration/test_canonical_api.py::test_proposal_review_claim_conflict_and_lineage_api",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "Claim/OpenIssue 正式变化只有 Steward procedure 可写；模型、adapter、API、worker 无 direct DML。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_proposal_review_claim_conflict_and_lineage_api",
+            "path": "runtime/tests/integration/test_canonical_api.py",
+            "reference": "runtime/tests/integration/test_canonical_api.py::test_proposal_review_claim_conflict_and_lineage_api",
+            "status": "PASS"
+          },
+          {
+            "node": "test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/OBJECTS.md#2-对象目录",
+          "docs/adr/ADR-017-populated-governance-history-reconciliation.md",
+          "docs/adr/ADR-018-rejected-grounding-and-tx05-provenance-guard.md"
+        ],
+        "id": "I-04",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "reference": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Canonical/Governance",
+        "positive_test_evidence": [
+          {
+            "node": "test_tx02_create_is_versioned_grounded_and_idempotent",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx02_create_is_versioned_grounded_and_idempotent",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "ClaimVersion、VersionTransition、StewardDecision、IssueTransition append-only；创建必须留下 source-linked sentinel；canonical Issue history 不得有 NULL governance；rejected legacy transition/grounding 只能 exact-hash 进入 immutable non-authoritative quarantine。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx02_create_is_versioned_grounded_and_idempotent",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx02_create_is_versioned_grounded_and_idempotent",
+            "status": "PASS"
+          },
+          {
+            "node": "test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_canonical_tables_deny_direct_dml_and_history_is_immutable",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#4-tx-03-claim-revision"
+        ],
+        "id": "I-05",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_tx03_exact_head_cas_allows_only_one_revision",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx03_exact_head_cas_allows_only_one_revision",
+            "status": "PASS"
+          },
+          {
+            "node": "test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Canonical/OpenIssue",
+        "positive_test_evidence": [
+          {
+            "node": "test_tx02_create_is_versioned_grounded_and_idempotent",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx02_create_is_versioned_grounded_and_idempotent",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "ClaimHead exact-head CAS，OpenIssue expected-revision CAS；并发只能一个胜者。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx02_create_is_versioned_grounded_and_idempotent",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx02_create_is_versioned_grounded_and_idempotent",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx03_exact_head_cas_allows_only_one_revision",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx03_exact_head_cas_allows_only_one_revision",
+            "status": "PASS"
+          },
+          {
+            "node": "test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#5-tx-04-no-change--conflict"
+        ],
+        "id": "I-06",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/canonical_repository.py",
+            "reference": "runtime/src/milai/persistence/canonical_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "OpenIssue",
+        "positive_test_evidence": [
+          {
+            "node": "test_tx04_conflict_preserves_head_and_structured_branches",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx04_conflict_preserves_head_and_structured_branches",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "CONTRADICT 默认不移动 Head；保留 issue identity、两侧 branch 和 discharge rule。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx04_conflict_preserves_head_and_structured_branches",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx04_conflict_preserves_head_and_structured_branches",
+            "status": "PASS"
+          },
+          {
+            "node": "test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/RETRIEVAL_CONTEXT.md#4-canonical-gate-checklist"
+        ],
+        "id": "I-07",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "reference": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "reference": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "reference": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/retrieval_repository.py",
+            "reference": "runtime/src/milai/persistence/retrieval_repository.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/context_repository.py",
+            "reference": "runtime/src/milai/persistence/context_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Retrieval/Canonical",
+        "positive_test_evidence": [
+          {
+            "node": "test_l0_uses_canonical_gate_without_vector_and_l2_is_disabled",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_l0_uses_canonical_gate_without_vector_and_l2_is_disabled",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "EffectiveClaimState 是全部状态轴、时间、current 与 authority decision facts 的唯一入口。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_l0_uses_canonical_gate_without_vector_and_l2_is_disabled",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_l0_uses_canonical_gate_without_vector_and_l2_is_disabled",
+            "status": "PASS"
+          },
+          {
+            "node": "test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/RETRIEVAL_CONTEXT.md#1-read-path-authority"
+        ],
+        "id": "I-08",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0007_projection_outbox.py",
+            "reference": "runtime/migrations/versions/0007_projection_outbox.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "reference": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "reference": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/retrieval.py",
+            "reference": "runtime/src/milai/application/retrieval.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_vector_outage_degrades_and_canonical_outage_abstains",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_vector_outage_degrades_and_canonical_outage_abstains",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Retrieval/Adapters",
+        "positive_test_evidence": [
+          {
+            "node": "test_l1_merges_fts_vector_and_persists_payload_free_append_only_trace",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_l1_merges_fts_vector_and_persists_payload_free_append_only_trace",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "FTS、vector、graph、cache、Context、Summary、LLM、外部 memory 不提升 truth/authority。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_l1_merges_fts_vector_and_persists_payload_free_append_only_trace",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_l1_merges_fts_vector_and_persists_payload_free_append_only_trace",
+            "status": "PASS"
+          },
+          {
+            "node": "test_vector_outage_degrades_and_canonical_outage_abstains",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_vector_outage_degrades_and_canonical_outage_abstains",
+            "status": "PASS"
+          },
+          {
+            "node": "test_runtime_has_no_external_memory_framework_imports",
+            "path": "runtime/tests/unit/test_external_dependency_boundary.py",
+            "reference": "runtime/tests/unit/test_external_dependency_boundary.py::test_runtime_has_no_external_memory_framework_imports",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/OBJECTS.md#5-正交状态轴"
+        ],
+        "id": "I-09",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "reference": "runtime/migrations/versions/0004_canonical_state_schema.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "reference": "runtime/migrations/versions/0008_retrieval_gate.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "reference": "runtime/migrations/versions/0017_authoritative_effective_claim_state.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/domain/retrieval.py",
+            "reference": "runtime/src/milai/domain/retrieval.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Domain/Gate",
+        "positive_test_evidence": [
+          {
+            "node": "test_claim_version_axes_accept_normative_values_and_map_legacy_values",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_claim_version_axes_accept_normative_values_and_map_legacy_values",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "authority、confidence、freshness、epistemic、Scope、valid/system time 不能互相推导。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_claim_version_axes_accept_normative_values_and_map_legacy_values",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_claim_version_axes_accept_normative_values_and_map_legacy_values",
+            "status": "PASS"
+          },
+          {
+            "node": "test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_gate_evaluates_all_state_axes_confidence_and_bitemporal_dimensions",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/DELETION_RECOVERY.md#3-synchronous-tx-05-boundary",
+          "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md"
+        ],
+        "id": "I-10",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0006_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0006_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0013_live_confirmation_gate.py",
+            "reference": "runtime/migrations/versions/0013_live_confirmation_gate.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "reference": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+            "reference": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+            "reference": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "reference": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/adapters/blob_store.py",
+            "reference": "runtime/src/milai/adapters/blob_store.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/deletion.py",
+            "reference": "runtime/src/milai/application/deletion.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/deletion_repository.py",
+            "reference": "runtime/src/milai/persistence/deletion_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+            "path": "runtime/tests/integration/test_projection_worker.py",
+            "reference": "runtime/tests/integration/test_projection_worker.py::test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Deletion/Context",
+        "positive_test_evidence": [
+          {
+            "node": "test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "revoke 提交即同步 governed Proposal/Decision、GroundingBlock/Context invalidation；ERASED 需要 durable absence proof。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_revoke_invalidates_pointer_and_stale_chat_abstains",
+            "path": "runtime/tests/integration/test_context_chat_api.py",
+            "reference": "runtime/tests/integration/test_context_chat_api.py::test_revoke_invalidates_pointer_and_stale_chat_abstains",
+            "status": "PASS"
+          },
+          {
+            "node": "test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+            "path": "runtime/tests/integration/test_projection_worker.py",
+            "reference": "runtime/tests/integration/test_projection_worker.py::test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/PERMISSIONS.md#4-tenantrls-contract"
+        ],
+        "id": "I-11",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "reference": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0020_causal_position_api.py",
+            "reference": "runtime/migrations/versions/0020_causal_position_api.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/config/settings.py",
+            "reference": "runtime/src/milai/config/settings.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/database.py",
+            "reference": "runtime/src/milai/persistence/database.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/workers/main.py",
+            "reference": "runtime/src/milai/workers/main.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_api_role_cannot_read_or_insert_another_tenant",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_api_role_cannot_read_or_insert_another_tenant",
+            "status": "PASS"
+          },
+          {
+            "node": "test_database_boundary_rejects_owner_and_misassigned_runtime_login",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_database_boundary_rejects_owner_and_misassigned_runtime_login",
+            "status": "PASS"
+          },
+          {
+            "node": "test_runtime_settings_reject_owner_or_misassigned_login",
+            "path": "runtime/tests/unit/test_settings.py",
+            "reference": "runtime/tests/unit/test_settings.py::test_runtime_settings_reject_owner_or_misassigned_login",
+            "status": "PASS"
+          },
+          {
+            "node": "test_worker_rejects_non_worker_login",
+            "path": "runtime/tests/unit/test_worker_settings.py",
+            "reference": "runtime/tests/unit/test_worker_settings.py::test_worker_rejects_non_worker_login",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Security",
+        "positive_test_evidence": [
+          {
+            "node": "test_runtime_role_can_ping_real_postgresql",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_runtime_role_can_ping_real_postgresql",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "tenant-owned row 带 tenant_id；精确 runtime login、真实角色、RLS、session reset 和最小凭据不可绕过。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_runtime_role_can_ping_real_postgresql",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_runtime_role_can_ping_real_postgresql",
+            "status": "PASS"
+          },
+          {
+            "node": "test_api_role_cannot_read_or_insert_another_tenant",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_api_role_cannot_read_or_insert_another_tenant",
+            "status": "PASS"
+          },
+          {
+            "node": "test_database_boundary_rejects_owner_and_misassigned_runtime_login",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_database_boundary_rejects_owner_and_misassigned_runtime_login",
+            "status": "PASS"
+          },
+          {
+            "node": "test_runtime_settings_reject_owner_or_misassigned_login",
+            "path": "runtime/tests/unit/test_settings.py",
+            "reference": "runtime/tests/unit/test_settings.py::test_runtime_settings_reject_owner_or_misassigned_login",
+            "status": "PASS"
+          },
+          {
+            "node": "test_worker_rejects_non_worker_login",
+            "path": "runtime/tests/unit/test_worker_settings.py",
+            "reference": "runtime/tests/unit/test_worker_settings.py::test_worker_rejects_non_worker_login",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#1-总合同",
+          "architecture/v1.0/RETRIEVAL_CONTEXT.md#6-retrievaltrace",
+          "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md"
+        ],
+        "id": "I-12",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0003_evidence_plane.py",
+            "reference": "runtime/migrations/versions/0003_evidence_plane.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0007_projection_outbox.py",
+            "reference": "runtime/migrations/versions/0007_projection_outbox.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0009_context_chat.py",
+            "reference": "runtime/migrations/versions/0009_context_chat.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0018_causal_retrieval_trace.py",
+            "reference": "runtime/migrations/versions/0018_causal_retrieval_trace.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0020_causal_position_api.py",
+            "reference": "runtime/migrations/versions/0020_causal_position_api.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "reference": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/domain/causality.py",
+            "reference": "runtime/src/milai/domain/causality.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/causality.py",
+            "reference": "runtime/src/milai/application/causality.py",
+            "status": "PASS"
+          }
+        ],
+        "negative_test_evidence": [
+          {
+            "node": "test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          },
+          {
+            "node": "test_ryw_rejects_missing_forged_cross_tenant_and_future_positions",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_ryw_rejects_missing_forged_cross_tenant_and_future_positions",
+            "status": "PASS"
+          }
+        ],
+        "owner_plane": "Transactions/Trace",
+        "positive_test_evidence": [
+          {
+            "node": "test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "status": "PASS"
+          },
+          {
+            "node": "test_chat_builds_fixed_capsule_trace_and_recoverable_pointer",
+            "path": "runtime/tests/integration/test_context_chat_api.py",
+            "reference": "runtime/tests/integration/test_context_chat_api.py::test_chat_builds_fixed_capsule_trace_and_recoverable_pointer",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "status": "PASS"
+          }
+        ],
+        "reference_integrity": "PASS",
+        "statement": "mutation、Decision、OperationalEvent、Outbox 原子；authority answer 与 RYW position 可回放。",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_chat_builds_fixed_capsule_trace_and_recoverable_pointer",
+            "path": "runtime/tests/integration/test_context_chat_api.py",
+            "reference": "runtime/tests/integration/test_context_chat_api.py::test_chat_builds_fixed_capsule_trace_and_recoverable_pointer",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          },
+          {
+            "node": "test_ryw_dead_letter_falls_back_and_records_precise_outcome",
+            "path": "runtime/tests/integration/test_retrieval_api.py",
+            "reference": "runtime/tests/integration/test_retrieval_api.py::test_ryw_dead_letter_falls_back_and_records_precise_outcome",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      }
+    ],
+    "roles": [
+      {
+        "design_refs": [
+          "architecture/v1.0/PERMISSIONS.md#2-角色"
+        ],
+        "id": "MIGRATION_OWNER",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "reference": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "reference": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/database.py",
+            "reference": "runtime/src/milai/persistence/database.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Migration Owner",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          },
+          {
+            "node": "test_runtime_roles_have_minimal_cluster_attributes",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_runtime_roles_have_minimal_cluster_attributes",
+            "status": "PASS"
+          },
+          {
+            "node": "test_database_boundary_rejects_owner_and_misassigned_runtime_login",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_database_boundary_rejects_owner_and_misassigned_runtime_login",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/PERMISSIONS.md#2-角色"
+        ],
+        "id": "API_RUNTIME",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "reference": "runtime/migrations/versions/0002_tenant_security_boundary.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0020_causal_position_api.py",
+            "reference": "runtime/migrations/versions/0020_causal_position_api.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/config/settings.py",
+            "reference": "runtime/src/milai/config/settings.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/database.py",
+            "reference": "runtime/src/milai/persistence/database.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "API Runtime",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_api_role_cannot_read_or_insert_another_tenant",
+            "path": "runtime/tests/security/test_tenant_roles.py",
+            "reference": "runtime/tests/security/test_tenant_roles.py::test_api_role_cannot_read_or_insert_another_tenant",
+            "status": "PASS"
+          },
+          {
+            "node": "test_runtime_settings_reject_owner_or_misassigned_login",
+            "path": "runtime/tests/unit/test_settings.py",
+            "reference": "runtime/tests/unit/test_settings.py::test_runtime_settings_reject_owner_or_misassigned_login",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/PERMISSIONS.md#5-procedure-boundary"
+        ],
+        "id": "STEWARD_EXECUTOR",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/database.py",
+            "reference": "runtime/src/milai/persistence/database.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Steward Executor",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "status": "PASS"
+          },
+          {
+            "node": "test_runtime_settings_reject_owner_or_misassigned_login",
+            "path": "runtime/tests/unit/test_settings.py",
+            "reference": "runtime/tests/unit/test_settings.py::test_runtime_settings_reject_owner_or_misassigned_login",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/PERMISSIONS.md#2-角色"
+        ],
+        "id": "PROJECTION_WORKER",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0007_projection_outbox.py",
+            "reference": "runtime/migrations/versions/0007_projection_outbox.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "reference": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/database.py",
+            "reference": "runtime/src/milai/persistence/database.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/workers/main.py",
+            "reference": "runtime/src/milai/workers/main.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Projection Worker",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_projection_worker_builds_fts_vector_and_contiguous_watermarks",
+            "path": "runtime/tests/integration/test_projection_worker.py",
+            "reference": "runtime/tests/integration/test_projection_worker.py::test_projection_worker_builds_fts_vector_and_contiguous_watermarks",
+            "status": "PASS"
+          },
+          {
+            "node": "test_worker_rejects_non_worker_login",
+            "path": "runtime/tests/unit/test_worker_settings.py",
+            "reference": "runtime/tests/unit/test_worker_settings.py::test_worker_rejects_non_worker_login",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/PERMISSIONS.md#2-角色"
+        ],
+        "id": "AUDIT_RUNNER",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0010_backup_operations.py",
+            "reference": "runtime/migrations/versions/0010_backup_operations.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/operations/backup.py",
+            "reference": "runtime/src/milai/operations/backup.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Audit Runner",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_consistency_backup_restore_and_deletion_expiry_reconciliation",
+            "path": "runtime/tests/integration/test_backup_restore.py",
+            "reference": "runtime/tests/integration/test_backup_restore.py::test_consistency_backup_restore_and_deletion_expiry_reconciliation",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      }
+    ],
+    "transactions": [
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#2-tx-01-evidence-ingest"
+        ],
+        "id": "TX-01",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0003_evidence_plane.py",
+            "reference": "runtime/migrations/versions/0003_evidence_plane.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/evidence.py",
+            "reference": "runtime/src/milai/application/evidence.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Evidence Ingest",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx01_concurrent_same_key_has_one_canonical_side_effect",
+            "path": "runtime/tests/integration/test_evidence_api.py",
+            "reference": "runtime/tests/integration/test_evidence_api.py::test_tx01_concurrent_same_key_has_one_canonical_side_effect",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#3-tx-02-claim-create"
+        ],
+        "id": "TX-02",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/canonical_repository.py",
+            "reference": "runtime/src/milai/persistence/canonical_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Claim Create",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx02_create_is_versioned_grounded_and_idempotent",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx02_create_is_versioned_grounded_and_idempotent",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx02_absence_cas_allows_only_one_identity",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx02_absence_cas_allows_only_one_identity",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#4-tx-03-claim-revision"
+        ],
+        "id": "TX-03",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/canonical_repository.py",
+            "reference": "runtime/src/milai/persistence/canonical_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Claim Revision",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx03_exact_head_cas_allows_only_one_revision",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx03_exact_head_cas_allows_only_one_revision",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#5-tx-04-no-change--conflict"
+        ],
+        "id": "TX-04",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "reference": "runtime/migrations/versions/0015_governed_proposals_and_complete_history.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/canonical_repository.py",
+            "reference": "runtime/src/milai/persistence/canonical_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "No Change or Conflict",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx04_no_change_creates_no_version_or_transition",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx04_no_change_creates_no_version_or_transition",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx04_conflict_preserves_head_and_structured_branches",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx04_conflict_preserves_head_and_structured_branches",
+            "status": "PASS"
+          },
+          {
+            "node": "test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_submission_is_noncanonical_and_rejection_preserves_issue",
+            "status": "PASS"
+          },
+          {
+            "node": "test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_resolution_review_revision_cas_allows_one_atomic_winner",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_populated_governance_state_is_reconciled_forward",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_populated_governance_state_is_reconciled_forward",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_resolution_grounding_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_decided_reject_quarantines_only_unauthorized_grounding",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_grounding_is_forward_repaired_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_grounding_is_forward_repaired_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_unprovable_creation_history_fails_upgrade_closed",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#6-tx-05-evidence-revoke",
+          "docs/adr/ADR-019-legacy-tx05-transaction-time-certification.md"
+        ],
+        "id": "TX-05",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0006_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0006_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "reference": "runtime/migrations/versions/0016_governed_evidence_revocation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "reference": "runtime/migrations/versions/0019_verified_blob_erasure.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "reference": "runtime/migrations/versions/0021_gate_consumers_and_erasure_digest.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+            "reference": "runtime/migrations/versions/0022_builtin_erasure_sha256.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+            "reference": "runtime/migrations/versions/0023_complete_erasure_sha256_repair.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "reference": "runtime/migrations/versions/0024_legacy_history_reconciliation.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "reference": "runtime/migrations/versions/0025_legacy_provenance_compatibility.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "reference": "runtime/migrations/versions/0026_legacy_tx05_time_guard.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/adapters/blob_store.py",
+            "reference": "runtime/src/milai/adapters/blob_store.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/deletion.py",
+            "reference": "runtime/src/milai/application/deletion.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/deletion_repository.py",
+            "reference": "runtime/src/milai/persistence/deletion_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Evidence Revoke",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_is_steward_only_and_runtime_roles_cannot_bypass_revocation",
+            "status": "PASS"
+          },
+          {
+            "node": "test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx05_failure_rolls_back_mutation_decision_event_and_outbox",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_history_is_reconciled_from_four_way_proof",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_legacy_tx05_corrupt_proof_leg_rolls_back_whole_migration",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_missing_deletion_request_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_idempotency_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_operational_event_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_revoke_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate1_tx05_purge_outbox_timestamp_conflict_rolls_back",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate3_applied_0024_timestamp_conflict_is_blocked_by_0025",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_valid_tx05_time_proof_advances_to_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "path": "runtime/tests/integration/test_runtime_foundation.py",
+            "reference": "runtime/tests/integration/test_runtime_foundation.py::test_candidate4_applied_0025_timestamp_conflict_is_blocked_by_0026",
+            "status": "PASS"
+          },
+          {
+            "node": "test_revoke_invalidates_pointer_and_stale_chat_abstains",
+            "path": "runtime/tests/integration/test_context_chat_api.py",
+            "reference": "runtime/tests/integration/test_context_chat_api.py::test_revoke_invalidates_pointer_and_stale_chat_abstains",
+            "status": "PASS"
+          },
+          {
+            "node": "test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+            "path": "runtime/tests/integration/test_projection_worker.py",
+            "reference": "runtime/tests/integration/test_projection_worker.py::test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#7-tx-06-grounding-restore"
+        ],
+        "id": "TX-06",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "reference": "runtime/migrations/versions/0005_canonical_procedures.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/canonical_repository.py",
+            "reference": "runtime/src/milai/persistence/canonical_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Grounding Restore",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_tx06_reground_requires_block_and_creates_new_version",
+            "path": "runtime/tests/concurrency/test_canonical_transactions.py",
+            "reference": "runtime/tests/concurrency/test_canonical_transactions.py::test_tx06_reground_requires_block_and_creates_new_version",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#8-ep-01-episode-capture"
+        ],
+        "id": "EP-01",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0011_episode_settlement.py",
+            "reference": "runtime/migrations/versions/0011_episode_settlement.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/application/episodes.py",
+            "reference": "runtime/src/milai/application/episodes.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Episode Capture",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_episode_capture_settlement_is_replayable_governed_and_expires_context",
+            "path": "runtime/tests/integration/test_episode_settlement.py",
+            "reference": "runtime/tests/integration/test_episode_settlement.py::test_episode_capture_settlement_is_replayable_governed_and_expires_context",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      },
+      {
+        "design_refs": [
+          "architecture/v1.0/TRANSACTIONS.md#9-ep-02-episode-settlement"
+        ],
+        "id": "EP-02",
+        "implementation_evidence": [
+          {
+            "path": "runtime/migrations/versions/0011_episode_settlement.py",
+            "reference": "runtime/migrations/versions/0011_episode_settlement.py",
+            "status": "PASS"
+          },
+          {
+            "path": "runtime/src/milai/persistence/episode_repository.py",
+            "reference": "runtime/src/milai/persistence/episode_repository.py",
+            "status": "PASS"
+          }
+        ],
+        "name": "Episode Settlement",
+        "negative_test_evidence": [],
+        "positive_test_evidence": [],
+        "reference_integrity": "PASS",
+        "status": "UNVERIFIED",
+        "test_evidence": [
+          {
+            "node": "test_episode_rejects_unknown_refs_tenant_switch_and_excess_residuals",
+            "path": "runtime/tests/integration/test_episode_settlement.py",
+            "reference": "runtime/tests/integration/test_episode_settlement.py::test_episode_rejects_unknown_refs_tenant_switch_and_excess_residuals",
+            "status": "PASS"
+          }
+        ],
+        "verification": {
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+        }
+      }
+    ]
+  },
+  "current_implementation_status": "UNVERIFIED",
+  "schema_version": "milai-invariant-test-map-v1",
+  "source": {
+    "crosswalk": "architecture/v1.0/crosswalk.json",
+    "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
+    "product_commit": "7c38298182fd44a0198e1be309050632c2559c9e",
+    "product_manifest_sha256": "eb28065c57b2d518b4e4fa7ca47555ba3039502a20059e42ab17cec2321ad971",
+    "product_tree_sha256": "77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443"
+  },
+  "status_semantics": {
+    "DEVIATION": "The current implementation or evidence mapping differs from the frozen claim.",
+    "NOT_APPLICABLE": "The invariant or gate does not apply; the reason must be recorded.",
+    "PASS": "Current evidence has been behaviorally verified by a recorded execution receipt.",
+    "UNVERIFIED": "The claim is applicable, but the current receipt lacks sufficient behavioral evidence."
+  },
+  "summary": {
+    "by_category": {
+      "freeze_gates": {
+        "DEVIATION": 0,
+        "NOT_APPLICABLE": 0,
+        "PASS": 9,
+        "UNVERIFIED": 1
+      },
+      "goals": {
+        "DEVIATION": 0,
+        "NOT_APPLICABLE": 0,
+        "PASS": 0,
+        "UNVERIFIED": 9
+      },
+      "invariants": {
+        "DEVIATION": 0,
+        "NOT_APPLICABLE": 0,
+        "PASS": 0,
+        "UNVERIFIED": 12
+      },
+      "roles": {
+        "DEVIATION": 0,
+        "NOT_APPLICABLE": 0,
+        "PASS": 0,
+        "UNVERIFIED": 5
+      },
+      "transactions": {
+        "DEVIATION": 0,
+        "NOT_APPLICABLE": 0,
+        "PASS": 0,
+        "UNVERIFIED": 8
+      }
+    },
+    "counts": {
+      "DEVIATION": 0,
+      "NOT_APPLICABLE": 0,
+      "PASS": 9,
+      "UNVERIFIED": 35
+    },
+    "total": 44
+  }
+}

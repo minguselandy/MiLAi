@@ -7,9 +7,14 @@
 
 ## Current engineering baseline
 
-- Verified commit: `fa08da3bceebea3de9bab5d0db15605152d2dbbf`.
+- Verified commit: `7c38298182fd44a0198e1be309050632c2559c9e`.
 - Product identity manifest: `product.manifest.json` is regenerated and enforced by
   `tools/build_product_manifest.py --check` in the root authoritative CI.
+- Frozen Architecture 1.0 has a separate current-implementation receipt at
+  [`docs/conformance/CURRENT_ARCHITECTURE_CONFORMANCE.md`](conformance/CURRENT_ARCHITECTURE_CONFORMANCE.md).
+  Its current status is `UNVERIFIED`: mapped G/I/TX/role references are present, but
+  per-item behavioral execution evidence has not yet been recorded; AF-09 archive-only
+  tarballs remain external evidence rather than Product Git bytes.
 - Product Runtime and integration static baselines are locally green; all six integration packages
   pass mypy. The Lab boundary, Ruff and mypy gates are green; the full Lab pytest gate includes a
   long synthetic replay and is being verified separately after the relocation-compatibility fix.

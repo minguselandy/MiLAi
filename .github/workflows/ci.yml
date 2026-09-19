@@ -40,6 +40,20 @@ jobs:
         working-directory: MiLAi-Product
         run: python3 tools/build_product_manifest.py --check
 
+  architecture-conformance:
+    name: Current implementation conformance receipt
+    needs: [boundaries, product-identity]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify frozen architecture lock and current receipt
+        working-directory: MiLAi-Product
+        run: python3 tools/verify_architecture_conformance.py --check
+
   product-runtime:
     name: Product Runtime and PostgreSQL
     runs-on: ubuntu-latest
@@ -197,7 +211,15 @@ jobs:
 
   composition:
     name: Product/Lab/Archive composition gate
-    needs: [product-identity, product-runtime, product-integrations, lab, archive]
+    needs:
+      [
+        product-identity,
+        architecture-conformance,
+        product-runtime,
+        product-integrations,
+        lab,
+        archive,
+      ]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
