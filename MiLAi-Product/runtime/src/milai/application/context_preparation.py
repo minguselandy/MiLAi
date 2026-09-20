@@ -33,7 +33,7 @@ from milai.domain import (
     need_covered,
 )
 from milai.persistence import DatabaseUnavailable, SessionContext
-from milai.persistence.context_repository import ContextRepository
+from milai.persistence.context_repository import ContextRepository, ContextValidationSnapshot
 
 
 class PrepareContextService:
@@ -349,11 +349,21 @@ class PrepareContextService:
         issue_ids = sorted(
             str(issue["issue_id"]) for issue in issues if isinstance(issue.get("issue_id"), str)
         )
+        capsule_id = str(built.capsule["capsule_id"])
+        context_hash = str(built.capsule["content_hash"])
         validation_started = perf_counter()
         snapshot = self._repository.validation_snapshot(
-            context, [UUID(issue_id) for issue_id in issue_ids]
+            context,
+            [UUID(issue_id) for issue_id in issue_ids],
+            UUID(capsule_id),
         )
         validation_snapshot_ms = _elapsed_ms(validation_started)
+        now = datetime.now(UTC)
+        if _capsule_cache_miss_reason(snapshot, context_hash, now) is not None:
+            raise ContextOperationError("INVALID_CONTEXT_CAPSULE")
+        capsule_expires_at = snapshot.capsule_expires_at
+        if capsule_expires_at is None:
+            raise ContextOperationError("INVALID_CONTEXT_CAPSULE")
         canonical_position = _canonical_position(retrieval.body)
         if snapshot.canonical_position != canonical_position:
             return _with_timing(
@@ -428,11 +438,11 @@ class PrepareContextService:
                 ),
             )
 
-        now = datetime.now(UTC)
         maximum_ttl = 30 if request.event == "ACTION_PROPOSED" else 86_400
-        expires_at = now + timedelta(seconds=min(request.slot_ttl_seconds, maximum_ttl))
-        capsule_id = str(built.capsule["capsule_id"])
-        context_hash = str(built.capsule["content_hash"])
+        expires_at = min(
+            now + timedelta(seconds=min(request.slot_ttl_seconds, maximum_ttl)),
+            capsule_expires_at,
+        )
         slot_coverage = _slot_coverage(
             request=request,
             principal_profile=principal_profile,
@@ -633,7 +643,9 @@ class PrepareContextService:
         validation_started = perf_counter()
         try:
             snapshot = self._repository.validation_snapshot(
-                context, [UUID(issue_id) for issue_id in previous.issue_ids]
+                context,
+                [UUID(issue_id) for issue_id in previous.issue_ids],
+                UUID(previous.capsule_id),
             )
         except DatabaseUnavailable:
             return (
@@ -650,6 +662,14 @@ class PrepareContextService:
                 1,
             )
         validation_snapshot_ms = _elapsed_ms(validation_started)
+        now = datetime.now(UTC)
+        capsule_miss_reason = _capsule_cache_miss_reason(
+            snapshot,
+            previous.context_hash,
+            now,
+        )
+        if capsule_miss_reason is not None:
+            return None, capsule_miss_reason, validation_snapshot_ms, 1
         current_digest = _issue_revision_digest(snapshot.open_issues)
         if snapshot.canonical_position != previous.canonical_position:
             return None, "CACHE_CANONICAL_POSITION_CHANGED", validation_snapshot_ms, 1
@@ -669,13 +689,18 @@ class PrepareContextService:
                 validation_snapshot_ms,
                 1,
             )
-        now = datetime.now(UTC)
+        capsule_expires_at = snapshot.capsule_expires_at
+        if capsule_expires_at is None:
+            return None, "CACHE_CAPSULE_EXPIRED", validation_snapshot_ms, 1
         state = replace(
             previous,
             prepare_calls=prepare_calls,
             validation_calls=validation_calls,
             issued_at=now,
-            expires_at=now + timedelta(seconds=request.slot_ttl_seconds),
+            expires_at=min(
+                now + timedelta(seconds=request.slot_ttl_seconds),
+                capsule_expires_at,
+            ),
         )
         return (
             PrepareContextExecution(
@@ -810,6 +835,23 @@ def _issue_revision_digest(issues: list[dict[str, Any]]) -> str:
     ]
     values.sort(key=lambda value: str(value["issue_id"]))
     return _sha256(values)
+
+
+def _capsule_cache_miss_reason(
+    snapshot: ContextValidationSnapshot,
+    expected_content_hash: str,
+    now: datetime,
+) -> str | None:
+    if snapshot.capsule_status is None:
+        return "CACHE_CAPSULE_NOT_FOUND"
+    if snapshot.capsule_status != "ACTIVE":
+        return "CACHE_CAPSULE_INVALIDATED"
+    expires_at = snapshot.capsule_expires_at
+    if expires_at is None or expires_at.tzinfo is None or expires_at <= now:
+        return "CACHE_CAPSULE_EXPIRED"
+    if snapshot.capsule_content_hash != expected_content_hash:
+        return "CACHE_CAPSULE_CONTENT_HASH_CHANGED"
+    return None
 
 
 def _canonical_position(body: dict[str, Any]) -> int:

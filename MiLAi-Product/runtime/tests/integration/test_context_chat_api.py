@@ -361,6 +361,85 @@ def test_composite_prepare_context_reuses_hit_then_falls_through_to_exact(
 
 
 @pytest.mark.integration
+def test_prepare_context_cache_revalidates_authoritative_capsule_lifecycle(
+    context_runtime,
+) -> None:  # type: ignore[no-untyped-def]
+    settings, app, worker_database = context_runtime
+    client = app.test_client()
+    token = f"capsulelifecycle{uuid4().hex}"
+    claim = _create_claim(client, token)
+    _run_worker(settings, worker_database)
+    typed_need = _typed_current_need(claim)
+    budget = {
+        "max_prepare_context_calls": 4,
+        "max_full_recall_calls": 4,
+        "memory_deadline_ms": 5_000,
+    }
+
+    current = client.post(
+        "/v1/memory/prepare-context",
+        headers=_headers(),
+        json=_prepare_payload(
+            token,
+            slot_ttl_seconds=300,
+            budget=budget,
+            **typed_need,
+        ),
+    )
+    assert current.status_code == 200
+    assert current.json["route"] == "L1"
+
+    mutations = [
+        (
+            """UPDATE milai.context_capsule
+               SET status = 'INVALIDATED',
+                   invalidated_at = CURRENT_TIMESTAMP,
+                   invalidation_reason = 'B2 lifecycle regression'
+               WHERE tenant_id = %s AND capsule_id = %s""",
+            "CACHE_CAPSULE_INVALIDATED",
+        ),
+        (
+            """UPDATE milai.context_capsule
+               SET content_hash = repeat('c', 64)
+               WHERE tenant_id = %s AND capsule_id = %s""",
+            "CACHE_CAPSULE_CONTENT_HASH_CHANGED",
+        ),
+        (
+            """UPDATE milai.context_capsule
+               SET expires_at = CURRENT_TIMESTAMP - interval '1 second'
+               WHERE tenant_id = %s AND capsule_id = %s""",
+            "CACHE_CAPSULE_EXPIRED",
+        ),
+    ]
+    for index, (statement, expected_reason) in enumerate(mutations, start=1):
+        previous_capsule_id = current.json["context_capsule"]["capsule_id"]
+        with psycopg.connect(_url("MILAI_MIGRATION_DATABASE_URL")) as owner:
+            owner.execute(
+                statement,
+                (settings.tenant_id, UUID(previous_capsule_id)),
+            )
+
+        current = client.post(
+            "/v1/memory/prepare-context",
+            headers=_headers(),
+            json=_prepare_payload(
+                f"lifecycle refresh {index}",
+                event="TOOL_RESULT",
+                requested_route="CACHE",
+                slot_ttl_seconds=300,
+                budget=budget,
+                previous_validation_token=current.json["validation_token"],
+                **typed_need,
+            ),
+        )
+        assert current.status_code == 200
+        assert current.json["status"] == "READY"
+        assert current.json["route"] == "L0"
+        assert current.json["context_capsule"]["capsule_id"] != previous_capsule_id
+        assert current.json["recall_execution_trace"]["fallback_reason"] == expected_reason
+
+
+@pytest.mark.integration
 def test_action_validate_is_action_bound_and_canonical_outage_abstains(
     context_runtime, monkeypatch: pytest.MonkeyPatch
 ) -> None:  # type: ignore[no-untyped-def]

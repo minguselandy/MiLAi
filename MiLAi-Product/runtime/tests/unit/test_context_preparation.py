@@ -9,6 +9,7 @@ import pytest
 from milai.application import context_preparation as context_preparation_module
 from milai.application.context import ContextCapsuleBuilt, _context_variants
 from milai.application.context_preparation import PrepareContextService
+from milai.application.context_prepare.binding import binding_digest
 from milai.application.errors import ContextOperationError
 from milai.application.retrieval import RetrievalExecution
 from milai.domain import (
@@ -70,10 +71,28 @@ class _Contexts:
         "branches": [],
     }
 
+    def __init__(self, repository: _Repository) -> None:
+        self._repository = repository
+        self._builds = 0
+
     def build(self, _context, _request) -> ContextCapsuleBuilt:  # type: ignore[no-untyped-def]
         self.last_request = _request
+        capsule_id = UUID(int=11 + self._builds)
+        self._builds += 1
+        expires_at = context_preparation_module.datetime.now(UTC) + timedelta(
+            seconds=_request.ttl_seconds
+        )
+        self._repository.capsules[capsule_id] = {
+            "status": "ACTIVE",
+            "expires_at": expires_at,
+            "content_hash": "b" * 64,
+        }
         return ContextCapsuleBuilt(
-            {"capsule_id": str(UUID(int=11)), "content_hash": "b" * 64},
+            {
+                "capsule_id": str(capsule_id),
+                "content_hash": "b" * 64,
+                "expires_at": expires_at.isoformat(),
+            },
             {
                 "ACTIVE GOAL": {"text": "finish"},
                 "ACTIVE STATE": [
@@ -107,14 +126,25 @@ class _Repository:
         self.calls = 0
         self.open_issues = [_Contexts.issue]
         self.unavailable = False
+        self.capsules: dict[UUID, dict[str, object]] = {}
 
-    def validation_snapshot(self, _context, _issue_ids) -> ContextValidationSnapshot:  # type: ignore[no-untyped-def]
+    def validation_snapshot(  # type: ignore[no-untyped-def]
+        self, _context, _issue_ids, capsule_id
+    ) -> ContextValidationSnapshot:
         self.calls += 1
         if self.unavailable:
             raise DatabaseUnavailable("synthetic canonical outage")
+        capsule = self.capsules.get(capsule_id)
         return ContextValidationSnapshot(
             self.canonical_position,
             self.open_issues,
+            str(capsule["status"]) if capsule is not None else None,
+            (
+                capsule["expires_at"]
+                if capsule is not None and isinstance(capsule["expires_at"], datetime)
+                else None
+            ),
+            str(capsule["content_hash"]) if capsule is not None else None,
         )
 
 
@@ -143,7 +173,7 @@ def _service() -> tuple[PrepareContextService, _Retrieval, _Repository]:
     repository = _Repository()
     service = PrepareContextService(  # type: ignore[arg-type]
         retrieval,
-        _Contexts(),
+        _Contexts(repository),
         repository,
         ContextValidationTokenCodec(SECRET),
     )
@@ -257,7 +287,7 @@ def test_one_refresh_then_tool_result_uses_validated_cache_without_recall() -> N
 def test_cache_validation_renews_past_original_capsule_expiry(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Reproduce the retained-slot lease outliving its original capsule."""
+    """Keep the diagnosis case as a regression for capsule-bounded renewal."""
 
     monkeypatch.setattr(context_preparation_module, "datetime", _ControlledDatetime)
     monkeypatch.setattr(context_validation_module, "datetime", _ControlledDatetime)
@@ -295,10 +325,26 @@ def test_cache_validation_renews_past_original_capsule_expiry(
     )
     assert renewed.body["route"] == "CACHE"
     assert renewed.body["reason"] == "VALIDATED_TASK_SLOT_REUSE"
+    renewed_request = _request(
+        event="TOOL_RESULT",
+        requested_route="CACHE",
+        slot_ttl_seconds=10,
+        previous_validation_token=initial.body["validation_token"],
+        need_signature_id=signature.signature_id,
+        memory_need_signature=signature,
+        state_key_ref=key,
+    )
+    renewed_state = ContextValidationTokenCodec(SECRET).decode(
+        renewed.body["validation_token"],
+        expected_tenant_id=context.tenant_id,
+        expected_profile="reader",
+        expected_binding_digest=binding_digest(context, "reader", renewed_request),
+        now=_ControlledDatetime.current,
+    )
+    assert renewed_state.expires_at == initial_time + timedelta(seconds=10)
 
-    # The original ContextCapsule expired at t0+10. The renewed token is
-    # nevertheless accepted at t0+11 because cache validation never checks
-    # the capsule row or carries its fixed expiry in the signed state.
+    # The renewed proof expires with the original immutable ContextCapsule.
+    # At t0+11 it cannot be reused and the same call performs an exact refresh.
     _ControlledDatetime.current = initial_time + timedelta(seconds=11)
     after_original_capsule_expiry = service.prepare(
         context,
@@ -314,9 +360,83 @@ def test_cache_validation_renews_past_original_capsule_expiry(
         ),
         "request-after-original-capsule-expiry",
     )
-    assert after_original_capsule_expiry.body["route"] == "CACHE"
-    assert after_original_capsule_expiry.body["reason"] == "VALIDATED_TASK_SLOT_REUSE"
-    assert retrieval.calls == 1
+    assert after_original_capsule_expiry.body["route"] == "L0"
+    assert after_original_capsule_expiry.body["status"] == "READY"
+    assert (
+        after_original_capsule_expiry.body["context_capsule"]["capsule_id"]
+        != (initial.body["context_capsule"]["capsule_id"])
+    )
+    assert (
+        after_original_capsule_expiry.body["recall_execution_trace"]["fallback_reason"]
+        == "BROKER_BOUND_VALIDATION_PROOF_INVALID"
+    )
+    assert retrieval.calls == 2
+    assert repository.calls == 3
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected_reason"),
+    [
+        ("MISSING", "CACHE_CAPSULE_NOT_FOUND"),
+        ("INVALIDATED", "CACHE_CAPSULE_INVALIDATED"),
+        ("EXPIRED", "CACHE_CAPSULE_EXPIRED"),
+        ("HASH_MISMATCH", "CACHE_CAPSULE_CONTENT_HASH_CHANGED"),
+    ],
+)
+def test_authoritative_capsule_lifecycle_miss_refreshes_exactly(
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+    expected_reason: str,
+) -> None:
+    monkeypatch.setattr(context_preparation_module, "datetime", _ControlledDatetime)
+    monkeypatch.setattr(context_validation_module, "datetime", _ControlledDatetime)
+    service, retrieval, repository = _service()
+    context = SessionContext(uuid4(), uuid4())
+    signature, key = _typed_need()
+    initial_time = datetime(2026, 9, 20, 9, 0, tzinfo=UTC)
+    _ControlledDatetime.current = initial_time
+    initial = service.prepare(
+        context,
+        "reader",
+        _request(
+            slot_ttl_seconds=300,
+            need_signature_id=signature.signature_id,
+            memory_need_signature=signature,
+            state_key_ref=key,
+        ),
+        f"request-capsule-{mutation.lower()}",
+    )
+    capsule_id = UUID(initial.body["context_capsule"]["capsule_id"])
+    if mutation == "MISSING":
+        del repository.capsules[capsule_id]
+    elif mutation == "INVALIDATED":
+        repository.capsules[capsule_id]["status"] = "INVALIDATED"
+    elif mutation == "EXPIRED":
+        repository.capsules[capsule_id]["expires_at"] = initial_time
+    else:
+        repository.capsules[capsule_id]["content_hash"] = "c" * 64
+
+    _ControlledDatetime.current = initial_time + timedelta(seconds=1)
+    refreshed = service.prepare(
+        context,
+        "reader",
+        _request(
+            event="TOOL_RESULT",
+            requested_route="CACHE",
+            slot_ttl_seconds=300,
+            previous_validation_token=initial.body["validation_token"],
+            need_signature_id=signature.signature_id,
+            memory_need_signature=signature,
+            state_key_ref=key,
+        ),
+        f"request-refresh-{mutation.lower()}",
+    )
+
+    assert refreshed.body["route"] == "L0"
+    assert refreshed.body["status"] == "READY"
+    assert refreshed.body["context_capsule"]["capsule_id"] != str(capsule_id)
+    assert refreshed.body["recall_execution_trace"]["fallback_reason"] == expected_reason
+    assert retrieval.calls == 2
     assert repository.calls == 3
 
 

@@ -39,6 +39,9 @@ class ContextMaterial:
 class ContextValidationSnapshot:
     canonical_position: int
     open_issues: list[dict[str, Any]]
+    capsule_status: str | None
+    capsule_expires_at: datetime | None
+    capsule_content_hash: str | None
 
 
 @dataclass(frozen=True, slots=True)
@@ -237,11 +240,21 @@ class ContextRepository:
         self,
         context: SessionContext,
         issue_ids: list[UUID],
+        capsule_id: UUID,
     ) -> ContextValidationSnapshot:
-        """Read canonical position and all relevant issue revisions in one snapshot."""
+        """Read capsule lifecycle and canonical dependencies in one snapshot."""
         with self._database.connection(
             context, read_only=True, isolation_level="REPEATABLE READ"
         ) as connection:
+            capsule_row = connection.execute(
+                """
+                SELECT status, expires_at, content_hash
+                FROM milai.context_capsule
+                WHERE tenant_id = %s AND capsule_id = %s
+                  AND created_by_actor_id = %s
+                """,
+                (context.tenant_id, capsule_id, context.actor_id),
+            ).fetchone()
             state_row = connection.execute(
                 "SELECT milai.retrieval_projection_state(%s, %s)",
                 (context.tenant_id, context.actor_id),
@@ -284,6 +297,13 @@ class ContextRepository:
         return ContextValidationSnapshot(
             canonical_position=int(state_row[0]["canonical_snapshot_outbox_sequence"]),
             open_issues=[_json_safe(dict(zip(issue_keys, row, strict=True))) for row in rows],
+            capsule_status=str(capsule_row[0]) if capsule_row is not None else None,
+            capsule_expires_at=(
+                capsule_row[1]
+                if capsule_row is not None and isinstance(capsule_row[1], datetime)
+                else None
+            ),
+            capsule_content_hash=(str(capsule_row[2]) if capsule_row is not None else None),
         )
 
     def create_capsule(
