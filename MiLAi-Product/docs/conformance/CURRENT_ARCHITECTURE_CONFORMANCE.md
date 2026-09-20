@@ -6,8 +6,8 @@
 ## Result
 
 - Current implementation status: `UNVERIFIED`
-- Product source commit: `7c38298182fd44a0198e1be309050632c2559c9e`
-- Verified at: `2026-09-19T15:07:53+00:00`
+- Product source commit: `2ce622b86ec4aa9b6df7dc79243159eca3ceb8a0`
+- Verified at: `2026-09-20T07:29:02+00:00`
 - Architecture: `1.0.0`
 - Migration heads: `0027_embedding_identity, 0045_dg18_adjacency, 0056_host_notes`
 
@@ -28,19 +28,28 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Category | PASS | NOT_APPLICABLE | DEVIATION | UNVERIFIED |
 | --- | ---: | ---: | ---: | ---: |
 | `goals` | 0 | 0 | 0 | 9 |
-| `invariants` | 0 | 0 | 0 | 12 |
+| `invariants` | 1 | 0 | 0 | 11 |
 | `transactions` | 0 | 0 | 0 | 8 |
 | `roles` | 0 | 0 | 0 | 5 |
 | `freeze_gates` | 9 | 0 | 0 | 1 |
-| **total** | **9** | **0** | **0** | **35** |
+| **total** | **10** | **0** | **0** | **34** |
 
 The detailed G/I/TX/role/gate mapping is in [`invariant-test-map.json`](invariant-test-map.json). Each current item contains implementation evidence, mapped tests, reference-integrity status, and the separate behavioral-verification status.
 
 ## Verification commands
 
+- `PASS` `python3 tools/verify_revalidation_receipts.py --check`
 - `PASS` `python3 tools/build_product_manifest.py --check`
 - `PASS` `python3 architecture/v1.0/scripts/verify_lock.py --scope bundle --mode release --expected-manifest-sha256 <frozen-anchor>`
 - `UNVERIFIED` `python3 architecture/v1.0/scripts/validate_bundle.py` — AF-09 historical submission tarballs are archive-owned and ignored by the Product Git tree; only their tracked archive classification records are available here.
+
+## Behavior revalidation
+
+Receipts are validated against the current Product tree and manifest. `SCOPED` claims are recorded as execution evidence but do not promote the broad frozen item; only `COMPLETE` claims can produce `PASS`.
+
+- Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)
+- Receipt count: `2`
+- Explicit claim count: `9`
 
 ## Status semantics
 

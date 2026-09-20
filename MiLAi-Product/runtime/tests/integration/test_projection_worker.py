@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import hashlib
 import os
+import sys
 import threading
 import time
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import cast
 from uuid import UUID, uuid4
 
 import psycopg
@@ -22,7 +25,7 @@ from milai.adapters import (
 )
 from milai.adapters.http_models import HTTPEmbedding
 from milai.api import create_app
-from milai.application import RetrievalService
+from milai.application import EvidenceService, RetrievalService
 from milai.application.appointment_composition import compose_evidence_range_count
 from milai.application.evidence_dense import evidence_turn_projection_version
 from milai.application.query_planner import QueryPlanner
@@ -34,6 +37,7 @@ from milai.persistence import Database, SessionContext
 from milai.persistence.projection_repository import ProjectionRepository
 from milai.persistence.retrieval_repository import RetrievalRepository
 from milai.workers.main import FoundationWorker
+from milai.workers.main import main as worker_main
 
 ACTOR_ID = UUID("aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa")
 API_TOKEN = "test-token-with-at-least-32-characters"
@@ -1862,6 +1866,209 @@ def test_search_projection_rebuild_replays_outbox_without_canonical_mutation(
         ).fetchone()
     assert (documents, embeddings) == (1, 1)
     assert fts_watermark == vector_watermark == max_sequence
+
+
+@pytest.mark.integration
+def test_rebuild_after_revoke_does_not_resurrect_revoked_material(
+    worker_runtime,
+) -> None:  # type: ignore[no-untyped-def]
+    """Rebuilding derived projections must remain closed over revoked evidence."""
+
+    settings, app, worker_database = worker_runtime
+    client = app.test_client()
+    evidence = _ingest(client, f"projection-revoke-rebuild-{uuid4()}")
+    claim = _create_claim(client, evidence["evidence_id"])
+    initial_worker = _worker(
+        settings,
+        worker_database,
+        embedding=DeterministicHashEmbedding(),
+        worker_id="projection-revoke-rebuild-initial",
+    )
+    assert initial_worker.run_once() > 0
+
+    revoke = client.post(
+        f"/v1/evidence/{evidence['evidence_id']}/revoke",
+        headers=_headers(f"revoke-rebuild-{uuid4()}"),
+        json={"reason_code": "USER_REQUEST", "confirmation": "REVOKE"},
+    )
+    assert revoke.status_code == 202
+
+    with psycopg.connect(_url("MILAI_TEST_STEWARD_DATABASE_URL")) as steward:
+        steward.execute(
+            "SELECT set_config('milai.tenant_id', %s, false)",
+            (str(settings.tenant_id),),
+        )
+        steward.execute("SELECT set_config('milai.actor_id', %s, false)", (str(ACTOR_ID),))
+        for projection in ("fts", "vector"):
+            result = steward.execute(
+                """
+                SELECT milai.rebuild_search_projection(
+                  %s, %s, %s, 'REBUILD_DERIVED_PROJECTION'
+                )
+                """,
+                (settings.tenant_id, ACTOR_ID, projection),
+            ).fetchone()[0]
+            assert result["watermark"] == 0
+
+    owner_url = _url("MILAI_MIGRATION_DATABASE_URL")
+    with psycopg.connect(owner_url) as owner:
+        rebuilt_documents, rebuilt_embeddings, canonical_count = owner.execute(
+            """
+            SELECT
+              (SELECT count(*) FROM milai.search_document
+               WHERE tenant_id = %s AND claim_version_id = %s),
+              (SELECT count(*) FROM milai.search_embedding
+               WHERE tenant_id = %s AND claim_version_id = %s),
+              (SELECT count(*) FROM milai.claim_version
+               WHERE tenant_id = %s AND claim_version_id = %s)
+            """,
+            (
+                settings.tenant_id,
+                claim["claim_version_id"],
+                settings.tenant_id,
+                claim["claim_version_id"],
+                settings.tenant_id,
+                claim["claim_version_id"],
+            ),
+        ).fetchone()
+    assert (rebuilt_documents, rebuilt_embeddings, canonical_count) == (0, 0, 1)
+
+    replay = _worker(
+        settings,
+        worker_database,
+        embedding=DeterministicHashEmbedding(),
+        worker_id="projection-revoke-rebuild-replay",
+    )
+    assert replay.run_once() > 0
+    with psycopg.connect(owner_url) as owner:
+        documents, embeddings, fts_watermark, vector_watermark, max_sequence = owner.execute(
+            """
+            SELECT
+              (SELECT count(*) FROM milai.search_document
+               WHERE tenant_id = %s AND claim_version_id = %s),
+              (SELECT count(*) FROM milai.search_embedding
+               WHERE tenant_id = %s AND claim_version_id = %s),
+              (SELECT last_contiguous_outbox_sequence FROM milai.index_watermark
+               WHERE tenant_id = %s AND projection_name = 'fts'),
+              (SELECT last_contiguous_outbox_sequence FROM milai.index_watermark
+               WHERE tenant_id = %s AND projection_name = 'vector'),
+              (SELECT max(outbox_sequence) FROM milai.outbox_event
+               WHERE tenant_id = %s)
+            """,
+            (
+                settings.tenant_id,
+                claim["claim_version_id"],
+                settings.tenant_id,
+                claim["claim_version_id"],
+                settings.tenant_id,
+                settings.tenant_id,
+                settings.tenant_id,
+            ),
+        ).fetchone()
+    assert (documents, embeddings) == (0, 0)
+    assert fts_watermark == vector_watermark == max_sequence
+
+
+@pytest.mark.integration
+def test_blob_orphan_reconciles_on_real_worker_startup_and_ingest_recovers(
+    worker_runtime,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:  # type: ignore[no-untyped-def]
+    """A blob-first DB failure is cleaned by worker startup, then TX-01 recovers."""
+
+    settings, app, _worker_database = worker_runtime
+    client = app.test_client()
+    content = f"blob-orphan-revalidation-{uuid4()}"
+    payload = {
+        "source_type": "RUNTIME_OBSERVATION",
+        "source_ref": f"blob-orphan-revalidation://{uuid4()}",
+        "subject_id": "blob-orphan-revalidation-subject",
+        "observed_at": "2026-08-15T10:00:00+08:00",
+        "content": content,
+        "media_type": "text/plain",
+        "permission_snapshot": {"readable": True},
+        "retention_state": "READABLE",
+    }
+    content_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
+    blob_path = (
+        settings.blob_root
+        / str(settings.tenant_id)
+        / content_hash[:2]
+        / content_hash
+    )
+
+    service = cast(EvidenceService, app.extensions["milai.evidence_service"])
+    repository = service._repository
+    original_ingest = repository.ingest
+
+    def fail_database_ingest(*_args: object, **_kwargs: object) -> object:
+        raise RuntimeError("forced TX-01 database failure for orphan revalidation")
+
+    monkeypatch.setattr(repository, "ingest", fail_database_ingest)
+    failed = client.post(
+        "/v1/evidence",
+        headers=_headers("blob-orphan-forced-failure"),
+        json=payload,
+    )
+    assert failed.status_code == 500
+    assert blob_path.is_file()
+
+    with psycopg.connect(_url("MILAI_MIGRATION_DATABASE_URL")) as owner:
+        evidence_count, blob_count, outbox_count = owner.execute(
+            """
+            SELECT
+              (SELECT count(*) FROM milai.evidence_record WHERE tenant_id = %s),
+              (SELECT count(*) FROM milai.content_blob WHERE tenant_id = %s),
+              (SELECT count(*) FROM milai.outbox_event WHERE tenant_id = %s)
+            """,
+            (settings.tenant_id, settings.tenant_id, settings.tenant_id),
+        ).fetchone()
+    assert (evidence_count, blob_count, outbox_count) == (0, 0, 0)
+
+    old = time.time() - 301
+    os.utime(blob_path, (old, old))
+
+    monkeypatch.setattr(repository, "ingest", original_ingest)
+    worker_environment = {
+        "MILAI_WORKER_DATABASE_URL": _url("MILAI_TEST_WORKER_DATABASE_URL"),
+        "MILAI_BLOB_ROOT": str(settings.blob_root),
+        "MILAI_TENANT_ID": str(settings.tenant_id),
+        "MILAI_LOCAL_ACTOR_ID": str(ACTOR_ID),
+        "MILAI_EMBEDDING_PREWARM": "false",
+    }
+    for name, value in worker_environment.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.setattr(sys, "argv", ["milai-worker", "--once"])
+    worker_main()
+    assert not blob_path.exists()
+
+    recovered = client.post(
+        "/v1/evidence",
+        headers=_headers("blob-orphan-recovered"),
+        json=payload,
+    )
+    assert recovered.status_code == 201
+    replayed = client.post(
+        "/v1/evidence",
+        headers=_headers("blob-orphan-recovered"),
+        json=payload,
+    )
+    assert replayed.status_code == 200
+    assert replayed.json["replayed"] is True
+    assert replayed.json["evidence_id"] == recovered.json["evidence_id"]
+    assert replayed.json["blob_id"] == recovered.json["blob_id"]
+
+    with psycopg.connect(_url("MILAI_MIGRATION_DATABASE_URL")) as owner:
+        evidence_count, blob_count, outbox_count = owner.execute(
+            """
+            SELECT
+              (SELECT count(*) FROM milai.evidence_record WHERE tenant_id = %s),
+              (SELECT count(*) FROM milai.content_blob WHERE tenant_id = %s),
+              (SELECT count(*) FROM milai.outbox_event WHERE tenant_id = %s)
+            """,
+            (settings.tenant_id, settings.tenant_id, settings.tenant_id),
+        ).fetchone()
+    assert (evidence_count, blob_count, outbox_count) == (1, 1, 1)
 
 
 @pytest.mark.integration
