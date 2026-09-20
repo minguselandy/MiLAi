@@ -190,6 +190,7 @@ def execute(batch, monkeypatch, spec, calls, *, outputs=None, finish=True):
     return batch.finish(spec["id"]) if finish else result
 
 
+@pytest.mark.regression
 def test_real_complete_16_gate_then_24_sessions(tmp_path, monkeypatch):
     batch, calls = setup(tmp_path, monkeypatch)
     with pytest.raises(ProviderStop):

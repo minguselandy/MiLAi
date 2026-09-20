@@ -64,6 +64,7 @@ testpaths = ["tests"]
 markers = [
   "integration: requires a pinned MiLAi product instance",
   "e2e: runs a bounded end-to-end experiment",
+  "regression: runs a heavy historical replay outside the PR-fast Lab gate",
 ]
 
 [tool.ruff]

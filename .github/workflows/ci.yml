@@ -189,7 +189,7 @@ jobs:
       - name: Run Lab pytest diagnostic
         working-directory: MiLAi-Lab
         run: >-
-          uv run pytest -q --maxfail=1 --tb=long --durations=50
+          uv run pytest -q --maxfail=1 --tb=long --durations=50 -m 'not regression'
           --junitxml="${{ github.workspace }}/lab-test-results/junit.xml"
       - name: Upload Lab pytest evidence
         if: always()
@@ -207,6 +207,43 @@ jobs:
         if: success()
         working-directory: MiLAi-Lab
         run: uv build
+
+  lab-regression:
+    name: Lab historical replay (${{ matrix.name }})
+    needs: boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: presentation-v1
+            test_file: tests/unit/test_v0222_presentation_integration.py
+          - name: presentation-v2
+            test_file: tests/unit/test_v0222_presentation_integration_v2.py
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+      - name: Install locked Lab
+        working-directory: MiLAi-Lab
+        run: uv sync --frozen --dev --python 3.11
+      - name: Run historical replay shard
+        working-directory: MiLAi-Lab
+        run: >-
+          uv run pytest -q --maxfail=1 --tb=long --durations=50 -m regression
+          "${{ matrix.test_file }}"
+          --junitxml="${{ github.workspace }}/lab-regression-${{ matrix.name }}.xml"
+      - name: Upload regression evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: milai-lab-regression-${{ matrix.name }}
+          path: lab-regression-${{ matrix.name }}.xml
+          if-no-files-found: warn
+          retention-days: 7
 
   archive:
     name: Archive index and reorganization evidence
@@ -242,6 +279,7 @@ jobs:
         product-runtime,
         product-integrations,
         lab,
+        lab-regression,
         archive,
       ]
     runs-on: ubuntu-latest

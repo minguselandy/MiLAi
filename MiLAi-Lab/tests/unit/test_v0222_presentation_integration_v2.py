@@ -429,6 +429,7 @@ def execute(batch, monkeypatch, spec, calls, scopes, *, outputs=None, finish=Tru
     return result
 
 
+@pytest.mark.regression
 def test_complete_real_scoped_stack_16_then_24(tmp_path, monkeypatch):
     batch, calls, scopes = setup(tmp_path, monkeypatch)
     capacity(batch, calls, scopes, "P3")
