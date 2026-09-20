@@ -86,15 +86,26 @@ jobs:
   regression:
     name: Lab historical replay (${{ matrix.name }})
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: ${{ matrix.timeout_minutes }}
     strategy:
       fail-fast: false
       matrix:
         include:
           - name: presentation-v1
-            test_file: tests/unit/test_v0222_presentation_integration.py
-          - name: presentation-v2
-            test_file: tests/unit/test_v0222_presentation_integration_v2.py
+            timeout_minutes: 20
+            pytest_target: tests/unit/test_v0222_presentation_integration.py
+          - name: presentation-v2-positive
+            timeout_minutes: 40
+            pytest_target: >-
+              tests/unit/test_v0222_presentation_integration_v2.py::test_complete_real_scoped_stack_16_then_24
+          - name: presentation-v2-wrong-intent
+            timeout_minutes: 20
+            pytest_target: >-
+              tests/unit/test_v0222_presentation_integration_v2.py::test_first_wrong_intent_stops_without_business_or_p4
+          - name: presentation-v2-corruption
+            timeout_minutes: 20
+            pytest_target: >-
+              tests/unit/test_v0222_presentation_integration_v2.py::test_actual_raw_and_visible_corruption_cannot_finish
 
     steps:
       - uses: actions/checkout@v4
@@ -110,7 +121,7 @@ jobs:
       - name: Run historical replay shard
         run: >-
           uv run pytest -q --maxfail=1 --tb=long --durations=50 -m regression
-          "${{ matrix.test_file }}"
+          "${{ matrix.pytest_target }}"
           --junitxml="${{ github.workspace }}/lab-regression-${{ matrix.name }}.xml"
 
       - name: Upload regression evidence
