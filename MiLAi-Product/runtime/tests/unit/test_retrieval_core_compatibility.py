@@ -1,5 +1,5 @@
 from milai.application import retrieval
-from milai.application.retrieval_core import candidates, policy, selection, temporal
+from milai.application.retrieval_core import acquisition, candidates, policy, selection, temporal
 
 
 def test_retrieval_facade_preserves_extracted_helper_imports() -> None:
@@ -43,3 +43,15 @@ def test_retrieval_facade_preserves_selection_helper_imports() -> None:
     assert retrieval._mmr_select is selection._mmr_select
     assert retrieval._mmr_tokens is selection._mmr_tokens
     assert retrieval._jaccard is selection._jaccard
+
+
+def test_retrieval_facade_preserves_acquisition_helper_imports() -> None:
+    assert retrieval._merge_evidence_results is acquisition._merge_evidence_results
+    assert retrieval._formation_candidate_results is acquisition._formation_candidate_results
+    assert retrieval._union_formation_and_raw is acquisition._union_formation_and_raw
+    assert (
+        retrieval._acquisition_candidate_envelopes
+        is acquisition._acquisition_candidate_envelopes
+    )
+    assert retrieval._acquisition_reference_material is acquisition._acquisition_reference_material
+    assert retrieval._use_acquisition_composition is acquisition._use_acquisition_composition
