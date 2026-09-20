@@ -6,8 +6,8 @@
 ## Result
 
 - Current implementation status: `UNVERIFIED`
-- Product source commit: `dc3267142fdc9c5bcd7061c55c1a0242e62663af`
-- Verified at: `2026-09-20T07:51:38+00:00`
+- Product source commit: `c1895e37defe5effbb5ce489613d0528dc8f3fd5`
+- Verified at: `2026-09-20T08:13:32+00:00`
 - Architecture: `1.0.0`
 - Migration heads: `0027_embedding_identity, 0045_dg18_adjacency, 0056_host_notes`
 
@@ -18,8 +18,8 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Field | Value |
 | --- | --- |
 | Product version | `0.1.0-candidate` |
-| Product manifest SHA-256 | `eb28065c57b2d518b4e4fa7ca47555ba3039502a20059e42ab17cec2321ad971` |
-| Product tree SHA-256 | `77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443` |
+| Product manifest SHA-256 | `c588ef3e5fca4744f23ba534b0a84f25970563b3270ee7380644631703a88595` |
+| Product tree SHA-256 | `f9d6f6ebf90712160441c3d57835131851ece12c945670cc607c225e22566344` |
 | Architecture manifest SHA-256 | `ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e` |
 | Runtime / Client / MCP / OpenWorker | `0.1.5` / `0.1.4` / `0.1.15` / `0.1.0` |
 
@@ -28,11 +28,11 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Category | PASS | NOT_APPLICABLE | DEVIATION | UNVERIFIED |
 | --- | ---: | ---: | ---: | ---: |
 | `goals` | 0 | 0 | 0 | 9 |
-| `invariants` | 1 | 0 | 0 | 11 |
+| `invariants` | 0 | 0 | 0 | 12 |
 | `transactions` | 0 | 0 | 0 | 8 |
 | `roles` | 0 | 0 | 0 | 5 |
 | `freeze_gates` | 9 | 0 | 0 | 1 |
-| **total** | **10** | **0** | **0** | **34** |
+| **total** | **9** | **0** | **0** | **35** |
 
 The detailed G/I/TX/role/gate mapping is in [`invariant-test-map.json`](invariant-test-map.json). Each current item contains implementation evidence, mapped tests, reference-integrity status, and the separate behavioral-verification status.
 
@@ -48,9 +48,12 @@ The detailed G/I/TX/role/gate mapping is in [`invariant-test-map.json`](invarian
 Receipts are validated against the current Product tree and manifest. `SCOPED` claims are recorded as execution evidence but do not promote the broad frozen item; only passing `COMPLETE` claims without a current failed receipt can produce `PASS`. Failed receipts remain valid diagnostic evidence without implying `DEVIATION`.
 
 - Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)
-- Receipt count: `4`
-- Explicit claim count: `11`
-- Failed diagnostic claim count: `2`
+- Validated receipt count: `5`
+- Current receipt count: `1`
+- Historical receipt count: `4`
+- Current explicit claim count: `1`
+- Failed diagnostic claim count: `0`
+- Preserved failed receipt count: `2`
 
 ## Status semantics
 

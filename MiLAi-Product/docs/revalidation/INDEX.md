@@ -5,14 +5,14 @@ evidence, not a second source of truth for the frozen architecture. Every
 receipt is bound to a Product tree digest and must distinguish a scoped
 behavioral result from full architecture-item coverage.
 
-## Baseline
+## Current Product identity
 
 | Field | Value |
 | --- | --- |
 | Goals | `MILA-PRODUCT-BEHAVIOR-REVALIDATION-01`, `MILA-PRODUCT-BEHAVIOR-REVALIDATION-02` |
-| Baseline commit | `2ce622b86ec4aa9b6df7dc79243159eca3ceb8a0` |
-| Product manifest SHA-256 | `eb28065c57b2d518b4e4fa7ca47555ba3039502a20059e42ab17cec2321ad971` |
-| Product tree SHA-256 | `77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443` |
+| Product source commit | `c1895e37defe5effbb5ce489613d0528dc8f3fd5` |
+| Product manifest SHA-256 | `c588ef3e5fca4744f23ba534b0a84f25970563b3270ee7380644631703a88595` |
+| Product tree SHA-256 | `f9d6f6ebf90712160441c3d57835131851ece12c945670cc607c225e22566344` |
 | Frozen architecture | `1.0.0` |
 
 ## Receipts
@@ -21,7 +21,7 @@ behavioral result from full architecture-item coverage.
 | --- | --- | --- |
 | projection purge/rebuild | `FIXED` | [`projection-purge-rebuild/REVALIDATION.md`](projection-purge-rebuild/REVALIDATION.md) |
 | CAS blob-first orphan possibility | `FIXED` | [`cas-blob-orphan/REVALIDATION.md`](cas-blob-orphan/REVALIDATION.md) |
-| confirmation binding to query/action | `OPEN` | [`confirmation-binding/REVALIDATION.md`](confirmation-binding/REVALIDATION.md) |
+| confirmation binding to query/action | `FIXED` | [`confirmation-binding/REVALIDATION.md`](confirmation-binding/REVALIDATION.md) |
 | validation-token TTL vs ContextCapsule lifecycle | `OPEN` | [`context-validation-lifecycle/REVALIDATION.md`](context-validation-lifecycle/REVALIDATION.md) |
 
 `FIXED` means the current mechanism, the positive path, the negative or
@@ -36,6 +36,12 @@ execution receipt is valid diagnostic evidence, but it cannot promote an
 architecture item to `PASS`. It leaves the architecture item `UNVERIFIED`
 unless a separate, explicit review concludes that the frozen statement itself
 is violated and records a `DEVIATION`.
+
+When Product behavior is repaired, the original diagnosis receipt remains
+immutable and a separate remediation receipt is added. Historical receipts
+are validated against the Product manifest at their baseline commit; only
+receipts matching the current Product manifest/tree contribute current
+Conformance claims.
 
 The next cross-boundary items remain outside this directory until their own
 revalidation is executed:

@@ -1,0 +1,115 @@
+{
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "c1895e37defe5effbb5ce489613d0528dc8f3fd5",
+    "product_manifest_sha256": "c588ef3e5fca4744f23ba534b0a84f25970563b3270ee7380644631703a88595",
+    "product_tree_sha256": "f9d6f6ebf90712160441c3d57835131851ece12c945670cc607c225e22566344"
+  },
+  "conformance_claims": [
+    {
+      "architecture_id": "G7",
+      "coverage": "SCOPED",
+      "covered_statement": "A live action confirmation is bound to the tenant, query, active goal, requested scope, required authority, and canonical action digest for which it was issued.",
+      "limits": [
+        "The receipt covers action confirmation identity and replay rejection only; it does not claim complete bounded-context, lineage, expiry, or invalidation coverage."
+      ],
+      "negative_case_ids": [
+        "CONFIRM-REPAIR-NEG-001",
+        "CONFIRM-REPAIR-NEG-002",
+        "CONFIRM-REPAIR-NEG-003",
+        "CONFIRM-REPAIR-NEG-004"
+      ],
+      "positive_case_ids": [
+        "CONFIRM-REPAIR-POS-001",
+        "CONFIRM-REPAIR-POS-002"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "debt_id": "confirmation-binding",
+  "decision": {
+    "rationale": "Chat and ACTION_PROPOSED now share canonical action identity semantics, and the v2 confirmation source reference rejects replay across request or action boundaries while retaining freshness and Evidence governance checks.",
+    "state": "FIXED"
+  },
+  "execution": {
+    "status": "PASS",
+    "verified_at": "2026-09-20T08:10:33Z"
+  },
+  "negative_cases": [
+    {
+      "case_id": "CONFIRM-REPAIR-NEG-001",
+      "description": "The same confirmation is rejected after query, active goal, or requested scope changes.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+      ]
+    },
+    {
+      "case_id": "CONFIRM-REPAIR-NEG-002",
+      "description": "The same confirmation is rejected after the canonical action digest changes.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+      ]
+    },
+    {
+      "case_id": "CONFIRM-REPAIR-NEG-003",
+      "description": "Nonce or confirmation-binding digest mismatch is rejected before retrieval.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+      ]
+    },
+    {
+      "case_id": "CONFIRM-REPAIR-NEG-004",
+      "description": "Expired, revoked, or unreadable confirmation Evidence is rejected.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+      ]
+    }
+  ],
+  "positive_cases": [
+    {
+      "case_id": "CONFIRM-REPAIR-POS-001",
+      "description": "A fresh v2 confirmation is accepted for the exact action-sensitive request for which it was issued.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+      ]
+    },
+    {
+      "case_id": "CONFIRM-REPAIR-POS-002",
+      "description": "Canonical action identity is scope-order stable and changes PrepareContext binding when query or action changes.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_action_identity.py::test_action_identity_is_canonical_and_shared_with_prepare_binding"
+      ]
+    }
+  ],
+  "reproduction": {
+    "commands": [
+      {
+        "command": "uv run pytest -q tests/unit/test_action_identity.py tests/integration/test_context_chat_api.py::test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_abstains tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope --tb=long",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": "uv run pytest -q",
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "tests": [
+      "runtime/tests/unit/test_action_identity.py::test_action_identity_is_canonical_and_shared_with_prepare_binding",
+      "runtime/tests/unit/test_action_identity.py::test_action_sensitive_chat_requires_action_identity_contract",
+      "runtime/tests/integration/test_context_chat_api.py::test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_abstains",
+      "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+    ],
+    "working_directory": "MiLAi-Product/runtime"
+  },
+  "schema_version": "milai-behavior-revalidation-v1",
+  "state": "FIXED"
+}

@@ -3,10 +3,12 @@
 历史报告中的问题不自动等于当前缺陷。下表是重组阶段的复核登记；状态只能使用
 `OPEN`、`FIXED`、`OBSOLETE`、`NEEDS_REVALIDATION`。状态改变必须附命令、测试和日期。
 
-Phase 2 baseline: Product tree `77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443`,
-baseline commit `2ce622b86ec4aa9b6df7dc79243159eca3ceb8a0`. Phase 2B diagnostics are
-anchored by auxiliary commit `dc3267142fdc9c5bcd7061c55c1a0242e62663af`; all results were verified on
-2026-09-20.
+Phase 2 diagnosis baseline: Product tree
+`77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443`, baseline commit
+`2ce622b86ec4aa9b6df7dc79243159eca3ceb8a0`, with Phase 2B diagnostics anchored by
+`dc3267142fdc9c5bcd7061c55c1a0242e62663af`. B1 remediation baseline: Product tree
+`f9d6f6ebf90712160441c3d57835131851ece12c945670cc607c225e22566344`, source commit
+`c1895e37defe5effbb5ce489613d0528dc8f3fd5`. Results were verified on 2026-09-20.
 
 | Item | State | 当前证据/下一步 |
 | --- | --- | --- |
@@ -14,7 +16,7 @@ anchored by auxiliary commit `dc3267142fdc9c5bcd7061c55c1a0242e62663af`; all res
 | cache-miss Host continuation | NEEDS_REVALIDATION | 复核 Host/MCP continuation contract；不得隐式扩大 retrieval |
 | validation-token TTL vs capsule lifecycle | OPEN | [`docs/revalidation/context-validation-lifecycle/REVALIDATION.md`](revalidation/context-validation-lifecycle/REVALIDATION.md); cache validation renews the token past the original capsule expiry without validating the capsule row |
 | projection purge/rebuild | FIXED | [`docs/revalidation/projection-purge-rebuild/REVALIDATION.md`](revalidation/projection-purge-rebuild/REVALIDATION.md); targeted PostgreSQL execution passed, including rebuild-after-revoke non-resurrection |
-| confirmation binding to query/action | OPEN | [`docs/revalidation/confirmation-binding/REVALIDATION.md`](revalidation/confirmation-binding/REVALIDATION.md); one confirmation Evidence is accepted across changed query/goal and scope, and `ChatRequest` has no action digest |
+| confirmation binding to query/action | FIXED | [`docs/revalidation/confirmation-binding/REVALIDATION.md`](revalidation/confirmation-binding/REVALIDATION.md); diagnosis FAIL is preserved, while current-tree remediation binds tenant/query/goal/scope/authority/action digest and passes replay, expiry, revoke, and readability regressions |
 | OpenWorker HTTP auth/exposure | NEEDS_REVALIDATION | 复核 bearer、loopback/TLS、scope、日志和 revocation |
 | resolver lexical-language assumptions | NEEDS_REVALIDATION | 只做诊断，不在重组 PR 调 lexical/ranking |
 | Runtime vs Host/provider trace ownership | NEEDS_REVALIDATION | 固定 trace owner、span 关联和 payload 脱敏边界 |
