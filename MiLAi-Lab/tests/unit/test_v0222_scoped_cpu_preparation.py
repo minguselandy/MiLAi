@@ -30,6 +30,10 @@ def no_network(monkeypatch):
     monkeypatch.setattr(socket, "create_connection", forbidden)
 
 
+@pytest.mark.skipif(
+    not (cpu.PRESENTATION_ROOT / "manifest.json").is_file(),
+    reason="external historical V0222 presentation evidence is not part of the Git checkout",
+)
 def test_real_complete_matrix_has_distinct_cpu_scopes_and_original_business_values():
     original = read(cpu.PRESENTATION_ROOT / "manifest.json")["contract"]
     with AdmissionReadScope() as scope:

@@ -32,6 +32,10 @@ def no_network(monkeypatch):
     monkeypatch.setattr(socket, "create_connection", forbidden)
 
 
+@pytest.mark.skipif(
+    not (module.PRESENTATION_ROOT / "manifest.json").is_file(),
+    reason="external historical V0222 presentation evidence is not part of the Git checkout",
+)
 def test_exact_pinned_previous_matrix_new_ids_scopes_and_derived_hashes():
     old = read(module.PRESENTATION_ROOT / "manifest.json")["contract"]
     with AdmissionReadScope() as scope:
