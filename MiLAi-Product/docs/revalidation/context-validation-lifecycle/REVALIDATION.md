@@ -1,6 +1,8 @@
 # Context validation lifecycle revalidation
 
-Decision: `OPEN`
+Current decision: `FIXED`
+
+## Diagnosis history
 
 The validation-token and retained-slot cache path was exercised with a
 controlled clock. An initial context was prepared with a ten-second capsule
@@ -20,12 +22,42 @@ accepted again as `VALIDATED_TASK_SLOT_REUSE` without retrieval.
   capsule expiry;
 - `_validate_cached()` does not validate the capsule row or its status/expiry.
 
-The result does not decide whether renewal should be forbidden or should be a
-formal new validation lease. Either contract requires an explicit upper bound
-and proof that expiry, revocation, canonical movement, issue revision, and
-context identity interrupt unsafe reuse. The current implicit behavior is
-therefore `OPEN`. No production lifecycle change is included here.
+The original failed execution remains unchanged in [`receipt.json`](receipt.json):
 
-The machine-readable failed execution record is [`receipt.json`](receipt.json).
-It attaches scoped failed evidence to G7 while leaving G7 `UNVERIFIED`; it does
-not assert an Architecture 1.0 `DEVIATION`.
+```text
+execution: FAIL
+decision: OPEN
+Product tree: 77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443
+```
+
+It is historical diagnosis evidence and does not contribute a current-tree
+Conformance claim.
+
+## Remediation
+
+Retained task-slot validation now reads the corresponding server-owned
+ContextCapsule in the same `REPEATABLE READ` snapshot as canonical position
+and OpenIssue revisions. CACHE reuse requires:
+
+- the capsule row exists and is owned by the authenticated actor;
+- `status == ACTIVE`;
+- `expires_at > now`;
+- the authoritative content hash equals the signed token's context hash;
+- canonical position and OpenIssue revisions remain unchanged.
+
+A renewed validation lease is capped at the authoritative capsule expiry. A
+capsule lifecycle or identity miss does not fail the memory request: it becomes
+a typed CACHE miss, then follows the existing exact L0 refresh path to create a
+new immutable capsule and validation lease. The capsule itself is never
+extended.
+
+The current passing evidence is in
+[`remediation.receipt.json`](remediation.receipt.json):
+
+```text
+execution: PASS
+decision: FIXED
+Product tree: a93268d94a73e5aee53150ca4be9bbc5f37f76d0173c5be72633cc54cf2ea382
+```
+
+The remediation contributes a `SCOPED PASS` for G7. G7 remains `UNVERIFIED`.
