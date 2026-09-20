@@ -34,7 +34,17 @@ def main() -> int:
     )
     receipt_count = len({claim["receipt"] for values in claims.values() for claim in values})
     claim_count = sum(len(values) for values in claims.values())
-    print(f"Behavior revalidation receipts: PASS ({receipt_count} receipts; {claim_count} claims)")
+    failed_receipts = {
+        claim["receipt"]
+        for values in claims.values()
+        for claim in values
+        if claim["execution_status"] == "FAIL"
+    }
+    print(
+        "Behavior revalidation receipts: PASS "
+        f"({receipt_count} receipts; {claim_count} claims; "
+        f"{len(failed_receipts)} valid diagnostic failures)"
+    )
     return 0
 
 

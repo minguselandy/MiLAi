@@ -1,0 +1,82 @@
+{
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "dc3267142fdc9c5bcd7061c55c1a0242e62663af",
+    "product_manifest_sha256": "eb28065c57b2d518b4e4fa7ca47555ba3039502a20059e42ab17cec2321ad971",
+    "product_tree_sha256": "77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443"
+  },
+  "conformance_claims": [
+    {
+      "architecture_id": "G7",
+      "coverage": "SCOPED",
+      "covered_statement": "A live action confirmation must be bound to the bounded request context for which it was issued.",
+      "limits": [
+        "The receipt diagnoses confirmation replay only; it does not assess all Context lineage or abstention paths.",
+        "OPEN technical debt is not, by itself, an Architecture 1.0 DEVIATION decision."
+      ],
+      "negative_case_ids": [
+        "CONFIRM-NEG-001",
+        "CONFIRM-NEG-002"
+      ],
+      "positive_case_ids": [
+        "CONFIRM-POS-001"
+      ],
+      "status": "FAIL"
+    }
+  ],
+  "debt_id": "confirmation-binding",
+  "decision": {
+    "rationale": "One fresh confirmation Evidence record was accepted after query, active goal, and requested scope changed; ChatRequest also exposes no action digest to bind.",
+    "state": "OPEN"
+  },
+  "execution": {
+    "status": "FAIL",
+    "verified_at": "2026-09-20T07:47:22Z"
+  },
+  "negative_cases": [
+    {
+      "case_id": "CONFIRM-NEG-001",
+      "description": "Changing query and active goal while replaying the same Evidence ID and nonce must require a new confirmation, but the replay is accepted.",
+      "status": "FAIL",
+      "tests": [
+        "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+      ]
+    },
+    {
+      "case_id": "CONFIRM-NEG-002",
+      "description": "Changing requested scope while replaying the same Evidence ID and nonce must require a new confirmation, but the replay is accepted.",
+      "status": "FAIL",
+      "tests": [
+        "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+      ]
+    }
+  ],
+  "positive_cases": [
+    {
+      "case_id": "CONFIRM-POS-001",
+      "description": "A fresh tenant-local USER_CONFIRMATION Evidence record is accepted for the original action-sensitive request.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+      ]
+    }
+  ],
+  "reproduction": {
+    "commands": [
+      {
+        "command": "uv run pytest -q tests/integration/test_context_chat_api.py::test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_abstains tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope --tb=long",
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "tests": [
+      "runtime/tests/integration/test_context_chat_api.py::test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_abstains",
+      "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope"
+    ],
+    "working_directory": "MiLAi-Product/runtime"
+  },
+  "schema_version": "milai-behavior-revalidation-v1",
+  "state": "OPEN"
+}

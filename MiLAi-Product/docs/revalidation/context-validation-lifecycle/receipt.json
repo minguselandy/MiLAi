@@ -1,0 +1,94 @@
+{
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "dc3267142fdc9c5bcd7061c55c1a0242e62663af",
+    "product_manifest_sha256": "eb28065c57b2d518b4e4fa7ca47555ba3039502a20059e42ab17cec2321ad971",
+    "product_tree_sha256": "77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443"
+  },
+  "conformance_claims": [
+    {
+      "architecture_id": "G7",
+      "coverage": "SCOPED",
+      "covered_statement": "Retained context reuse must remain bounded by an explicit, traceable validation lifecycle.",
+      "limits": [
+        "The receipt diagnoses the original capsule-expiry boundary; it does not claim complete G7 coverage.",
+        "Revocation, canonical-position, and OpenIssue revision mechanisms are not promoted to broad conformance by this failed lifecycle receipt.",
+        "OPEN technical debt is not, by itself, an Architecture 1.0 DEVIATION decision."
+      ],
+      "negative_case_ids": [
+        "LIFECYCLE-NEG-001"
+      ],
+      "positive_case_ids": [
+        "LIFECYCLE-POS-001",
+        "LIFECYCLE-POS-002",
+        "LIFECYCLE-POS-003"
+      ],
+      "status": "FAIL"
+    }
+  ],
+  "debt_id": "context-validation-lifecycle",
+  "decision": {
+    "rationale": "A cache hit slides the signed validation-token expiry, and the renewed token remains reusable after the original ContextCapsule expiry because cache validation does not check capsule status or expiry.",
+    "state": "OPEN"
+  },
+  "execution": {
+    "status": "FAIL",
+    "verified_at": "2026-09-20T07:47:22Z"
+  },
+  "negative_cases": [
+    {
+      "case_id": "LIFECYCLE-NEG-001",
+      "description": "A token renewed just before original capsule expiry is accepted after that capsule expiry without retrieval or capsule validation.",
+      "status": "FAIL",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_cache_validation_renews_past_original_capsule_expiry"
+      ]
+    }
+  ],
+  "positive_cases": [
+    {
+      "case_id": "LIFECYCLE-POS-001",
+      "description": "Validation tokens enforce signature, tenant, profile, binding, and token expiry.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_validation.py::test_context_validation_token_is_bound_and_expires"
+      ]
+    },
+    {
+      "case_id": "LIFECYCLE-POS-002",
+      "description": "Canonical position movement interrupts cache reuse and falls through to exact refresh.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_cache_position_change_falls_through_to_exact_l0_in_same_call"
+      ]
+    },
+    {
+      "case_id": "LIFECYCLE-POS-003",
+      "description": "OpenIssue revision movement interrupts cache reuse and falls through to exact refresh.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_cache_issue_revision_change_falls_through_to_one_exact_l0"
+      ]
+    }
+  ],
+  "reproduction": {
+    "commands": [
+      {
+        "command": "uv run pytest -q tests/unit/test_context_preparation.py::test_cache_validation_renews_past_original_capsule_expiry tests/unit/test_context_preparation.py::test_cache_position_change_falls_through_to_exact_l0_in_same_call tests/unit/test_context_preparation.py::test_cache_issue_revision_change_falls_through_to_one_exact_l0 --tb=long",
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "tests": [
+      "runtime/tests/unit/test_context_validation.py::test_context_validation_token_is_bound_and_expires",
+      "runtime/tests/unit/test_context_preparation.py::test_cache_validation_renews_past_original_capsule_expiry",
+      "runtime/tests/unit/test_context_preparation.py::test_cache_position_change_falls_through_to_exact_l0_in_same_call",
+      "runtime/tests/unit/test_context_preparation.py::test_cache_issue_revision_change_falls_through_to_one_exact_l0"
+    ],
+    "working_directory": "MiLAi-Product/runtime"
+  },
+  "schema_version": "milai-behavior-revalidation-v1",
+  "state": "OPEN"
+}

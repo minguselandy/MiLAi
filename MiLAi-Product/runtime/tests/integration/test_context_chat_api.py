@@ -680,6 +680,54 @@ def test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_a
 
 
 @pytest.mark.integration
+def test_live_confirmation_replays_across_query_goal_and_scope(
+    context_runtime,
+) -> None:  # type: ignore[no-untyped-def]
+    """Reproduce acceptance of one confirmation Evidence for other requests."""
+
+    settings, app, worker_database = context_runtime
+    client = app.test_client()
+    token = f"confirmationreplay{uuid4().hex}"
+    _create_claim(client, token)
+    _run_worker(settings, worker_database)
+    evidence_id, nonce = _live_confirmation(client)
+    confirmed = _chat_payload(
+        token,
+        action_sensitive=True,
+        live_confirmation="CONFIRM_ACTION",
+        confirmation_evidence_id=evidence_id,
+        confirmation_nonce=nonce,
+    )
+
+    original = client.post("/v1/chat", headers=_headers(), json=confirmed)
+    assert original.status_code == 200
+    assert original.json["live_confirmation"] is True
+    assert original.json["abstained"] is False
+
+    changed_query_and_goal = client.post(
+        "/v1/chat",
+        headers=_headers(),
+        json=confirmed
+        | {
+            "query": f"Use {token} for a different action request",
+            "active_goal": "执行另一个目标",
+        },
+    )
+    assert changed_query_and_goal.status_code == 200
+    assert changed_query_and_goal.json["live_confirmation"] is True
+    assert changed_query_and_goal.json["abstention_reason"] != "LIVE_CONFIRMATION_REQUIRED"
+
+    changed_scope = client.post(
+        "/v1/chat",
+        headers=_headers(),
+        json=confirmed | {"requested_scope": {"project_ids": ["different-project"]}},
+    )
+    assert changed_scope.status_code == 200
+    assert changed_scope.json["live_confirmation"] is True
+    assert changed_scope.json["abstention_reason"] != "LIVE_CONFIRMATION_REQUIRED"
+
+
+@pytest.mark.integration
 def test_local_ui_exposes_review_correct_confirm_trace_and_revoke(context_runtime) -> None:  # type: ignore[no-untyped-def]
     _settings, app, _worker_database = context_runtime
     response = app.test_client().get("/")

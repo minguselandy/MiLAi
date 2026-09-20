@@ -163,8 +163,7 @@ def _validate_revalidation_test_reference(
     node = _test_node(reference)
     if path is None or node is None or not path.is_file():
         raise ConformanceError(
-            "revalidation test reference is not a current Product test: "
-            f"{reference}"
+            f"revalidation test reference is not a current Product test: {reference}"
         )
     names = function_cache.setdefault(path, _function_names(path))
     if node not in names:
@@ -221,16 +220,19 @@ def _load_revalidation_receipts(
         }
         for field, expected in expected_identity.items():
             if baseline.get(field) != expected:
-                raise ConformanceError(
-                    f"revalidation {debt_id} is bound to a different {field}"
-                )
+                raise ConformanceError(f"revalidation {debt_id} is bound to a different {field}")
         baseline_commit = baseline.get("product_commit")
         if not isinstance(baseline_commit, str) or not _commit_exists(baseline_commit):
             raise ConformanceError(f"revalidation {debt_id} baseline commit is not in Git")
 
         execution = receipt.get("execution")
-        if not isinstance(execution, dict) or execution.get("status") != "PASS":
-            raise ConformanceError(f"revalidation {debt_id} has no passing execution result")
+        execution_status = execution.get("status") if isinstance(execution, dict) else None
+        if execution_status not in {"PASS", "FAIL"}:
+            raise ConformanceError(f"revalidation {debt_id} has no valid execution result")
+        if state == "FIXED" and execution_status != "PASS":
+            raise ConformanceError(f"revalidation {debt_id} marks FIXED without PASS")
+        if state == "OPEN" and execution_status != "FAIL":
+            raise ConformanceError(f"revalidation {debt_id} marks OPEN without FAIL")
         reproduction = receipt.get("reproduction")
         if not isinstance(reproduction, dict):
             raise ConformanceError(f"revalidation {debt_id} reproduction is missing")
@@ -249,6 +251,7 @@ def _load_revalidation_receipts(
             _validate_revalidation_test_reference(reference, function_cache=function_cache)
 
         case_ids: dict[str, set[str]] = {"positive_cases": set(), "negative_cases": set()}
+        case_statuses: dict[str, str] = {}
         for case_field in case_ids:
             cases = receipt.get(case_field)
             if not isinstance(cases, list) or not cases:
@@ -261,14 +264,24 @@ def _load_revalidation_receipts(
                 case_id = case.get("case_id")
                 if not isinstance(case_id, str) or not case_id or case_id in case_ids[case_field]:
                     raise ConformanceError(f"revalidation {debt_id} has a duplicate case id")
-                if case.get("status") != "PASS":
-                    raise ConformanceError(f"revalidation {debt_id} has a non-passing case")
+                case_status = case.get("status")
+                if case_status not in {"PASS", "FAIL"}:
+                    raise ConformanceError(f"revalidation {debt_id} has an invalid case status")
                 case_tests = case.get("tests")
                 if not isinstance(case_tests, list) or not case_tests:
                     raise ConformanceError(f"revalidation case {case_id} has no tests")
                 for reference in case_tests:
                     _validate_revalidation_test_reference(reference, function_cache=function_cache)
                 case_ids[case_field].add(case_id)
+                case_statuses[case_id] = case_status
+
+        failed_case_ids = {
+            case_id for case_id, case_status in case_statuses.items() if case_status == "FAIL"
+        }
+        if execution_status == "PASS" and failed_case_ids:
+            raise ConformanceError(f"revalidation {debt_id} passes despite failed behavior cases")
+        if execution_status == "FAIL" and not failed_case_ids:
+            raise ConformanceError(f"revalidation {debt_id} fails without a failed behavior case")
 
         claims = receipt.get("conformance_claims")
         if not isinstance(claims, list) or not claims:
@@ -279,11 +292,12 @@ def _load_revalidation_receipts(
                 raise ConformanceError(f"revalidation {debt_id} has an invalid conformance claim")
             architecture_id = claim.get("architecture_id")
             coverage = claim.get("coverage")
+            claim_status = claim.get("status")
             if architecture_id not in known_ids:
                 raise ConformanceError(
                     f"revalidation {debt_id} claims unknown architecture id: {architecture_id}"
                 )
-            if coverage not in REVALIDATION_COVERAGE or claim.get("status") != "PASS":
+            if coverage not in REVALIDATION_COVERAGE or claim_status not in {"PASS", "FAIL"}:
                 raise ConformanceError(f"revalidation {debt_id} has an invalid claim status")
             if (
                 not isinstance(claim.get("covered_statement"), str)
@@ -299,9 +313,18 @@ def _load_revalidation_receipts(
                     raise ConformanceError(
                         f"revalidation {debt_id} claim references an unknown {side}"
                     )
+            referenced_case_ids = set(claim["positive_case_ids"]) | set(claim["negative_case_ids"])
+            referenced_failures = referenced_case_ids & failed_case_ids
+            if claim_status == "PASS" and referenced_failures:
+                raise ConformanceError(
+                    f"revalidation {debt_id} PASS claim references a failed case"
+                )
+            if claim_status == "FAIL" and not referenced_failures:
+                raise ConformanceError(f"revalidation {debt_id} FAIL claim has no failed case")
             claim_record = dict(claim)
             claim_record["debt_id"] = debt_id
             claim_record["receipt"] = receipt_reference
+            claim_record["execution_status"] = execution_status
             claims_by_id.setdefault(str(architecture_id), []).append(claim_record)
     return claims_by_id
 
@@ -485,6 +508,7 @@ def _category_item(
             "debt_id": claim["debt_id"],
             "coverage": claim["coverage"],
             "status": claim["status"],
+            "execution_status": claim["execution_status"],
             "covered_statement": claim["covered_statement"],
             "positive_case_ids": claim["positive_case_ids"],
             "negative_case_ids": claim["negative_case_ids"],
@@ -495,9 +519,27 @@ def _category_item(
     complete_claims = [
         claim
         for claim in behavioral_claims
-        if claim["coverage"] == "COMPLETE" and claim["status"] == "PASS"
+        if claim["coverage"] == "COMPLETE"
+        and claim["status"] == "PASS"
+        and claim["execution_status"] == "PASS"
     ]
-    if status != "DEVIATION" and complete_claims:
+    failed_claims = [
+        claim
+        for claim in behavioral_claims
+        if claim["status"] == "FAIL" or claim["execution_status"] == "FAIL"
+    ]
+    if failed_claims:
+        verification = {
+            "behavioral_execution": "FAIL",
+            "method": "identity-bound behavior revalidation receipt",
+            "execution_receipts": execution_receipts,
+            "reason": (
+                "A current behavior gap was reproduced. The frozen item remains "
+                "UNVERIFIED because the receipt does not itself assert an "
+                "architecture DEVIATION."
+            ),
+        }
+    elif status != "DEVIATION" and complete_claims:
         status = "PASS"
         verification = {
             "behavioral_execution": "PASS",
@@ -829,6 +871,11 @@ def _build_receipt(
         for item in conformance_map["categories"][category]:
             behavioral_claims.extend(item.get("verification", {}).get("execution_receipts", []))
     revalidation_receipts = sorted({claim["receipt"] for claim in behavioral_claims})
+    failed_behavioral_claims = [
+        claim
+        for claim in behavioral_claims
+        if claim["status"] == "FAIL" or claim["execution_status"] == "FAIL"
+    ]
     return {
         "schema_version": SCHEMA,
         "status": current_status,
@@ -851,6 +898,7 @@ def _build_receipt(
             "index": "docs/revalidation/INDEX.md",
             "receipts": revalidation_receipts,
             "claims": behavioral_claims,
+            "failed_claim_count": len(failed_behavioral_claims),
         },
         "current_implementation": {
             "status": current_status,
@@ -962,11 +1010,15 @@ def _render_markdown(receipt: dict[str, Any], conformance_map: dict[str, Any]) -
             "",
             "Receipts are validated against the current Product tree and manifest. "
             "`SCOPED` claims are recorded as execution evidence but do not promote "
-            "the broad frozen item; only `COMPLETE` claims can produce `PASS`.",
+            "the broad frozen item; only passing `COMPLETE` claims without a current "
+            "failed receipt can produce `PASS`. Failed receipts remain valid "
+            "diagnostic evidence without implying `DEVIATION`.",
             "",
             "- Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)",
             f"- Receipt count: `{len(receipt['behavior_revalidation']['receipts'])}`",
             f"- Explicit claim count: `{len(receipt['behavior_revalidation']['claims'])}`",
+            f"- Failed diagnostic claim count: "
+            f"`{receipt['behavior_revalidation']['failed_claim_count']}`",
             "",
             "## Status semantics",
             "",

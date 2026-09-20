@@ -7,6 +7,7 @@
         "coverage": "SCOPED",
         "covered_statement": "The blob identity remains content-addressed and tenant-scoped across failed and recovered ingest.",
         "debt_id": "cas-blob-orphan",
+        "execution_status": "PASS",
         "limits": [
           "The full Evidence-to-belief source-fidelity chain is not claimed by this receipt."
         ],
@@ -25,6 +26,7 @@
         "coverage": "SCOPED",
         "covered_statement": "Revocation asynchronously removes derived projection and eligible blob material with verifiable absence.",
         "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
         "limits": [
           "Backup obligation replay is not covered by this receipt."
         ],
@@ -42,8 +44,49 @@
       },
       {
         "coverage": "SCOPED",
+        "covered_statement": "A live action confirmation must be bound to the bounded request context for which it was issued.",
+        "debt_id": "confirmation-binding",
+        "execution_status": "FAIL",
+        "limits": [
+          "The receipt diagnoses confirmation replay only; it does not assess all Context lineage or abstention paths.",
+          "OPEN technical debt is not, by itself, an Architecture 1.0 DEVIATION decision."
+        ],
+        "negative_case_ids": [
+          "CONFIRM-NEG-001",
+          "CONFIRM-NEG-002"
+        ],
+        "positive_case_ids": [
+          "CONFIRM-POS-001"
+        ],
+        "receipt": "docs/revalidation/confirmation-binding/receipt.json",
+        "status": "FAIL"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "Retained context reuse must remain bounded by an explicit, traceable validation lifecycle.",
+        "debt_id": "context-validation-lifecycle",
+        "execution_status": "FAIL",
+        "limits": [
+          "The receipt diagnoses the original capsule-expiry boundary; it does not claim complete G7 coverage.",
+          "Revocation, canonical-position, and OpenIssue revision mechanisms are not promoted to broad conformance by this failed lifecycle receipt.",
+          "OPEN technical debt is not, by itself, an Architecture 1.0 DEVIATION decision."
+        ],
+        "negative_case_ids": [
+          "LIFECYCLE-NEG-001"
+        ],
+        "positive_case_ids": [
+          "LIFECYCLE-POS-001",
+          "LIFECYCLE-POS-002",
+          "LIFECYCLE-POS-003"
+        ],
+        "receipt": "docs/revalidation/context-validation-lifecycle/receipt.json",
+        "status": "FAIL"
+      },
+      {
+        "coverage": "SCOPED",
         "covered_statement": "A failed canonical ingest can be recovered by worker orphan reconciliation without manual blob mutation.",
         "debt_id": "cas-blob-orphan",
+        "execution_status": "PASS",
         "limits": [
           "Migration, search projection, backup, and audit replay are outside this receipt."
         ],
@@ -61,6 +104,7 @@
         "coverage": "SCOPED",
         "covered_statement": "Derived search projections can be reset and replayed from durable outbox state without canonical mutation.",
         "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
         "limits": [
           "Migration and backup replay are outside this receipt."
         ],
@@ -78,6 +122,7 @@
         "coverage": "COMPLETE",
         "covered_statement": "Evidence capture identity, source, observed time, and content hash remain immutable, while retry key plus fingerprint is idempotent for the exercised TX-01 contract.",
         "debt_id": "cas-blob-orphan",
+        "execution_status": "PASS",
         "limits": [],
         "negative_case_ids": [
           "CAS-NEG-003"
@@ -93,6 +138,7 @@
         "coverage": "SCOPED",
         "covered_statement": "Revoked material cannot be used by or resurrected into derived projections, and physical erasure requires an absence proof.",
         "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
         "limits": [
           "Synchronous ContextCapsule invalidation and permission/retention unknown paths are not revalidated here."
         ],
@@ -111,6 +157,7 @@
         "coverage": "SCOPED",
         "covered_statement": "Blob-first failure leaves no canonical partial rows and normal retry restores one idempotent Evidence/Blob identity.",
         "debt_id": "cas-blob-orphan",
+        "execution_status": "PASS",
         "limits": [
           "Input validation and every TX-01 precondition are not claimed by this receipt."
         ],
@@ -129,6 +176,7 @@
         "coverage": "SCOPED",
         "covered_statement": "The revoke-to-purge delivery and verified-absence recovery path is fail-closed and replayable.",
         "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
         "limits": [
           "The complete synchronous governance transaction contract is not claimed by this receipt."
         ],
@@ -147,6 +195,7 @@
         "coverage": "SCOPED",
         "covered_statement": "The projection worker converges watermarks and recovers after purge proof failure.",
         "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
         "limits": [
           "Worker role and tenant security are outside this receipt."
         ],
@@ -162,9 +211,12 @@
         "status": "PASS"
       }
     ],
+    "failed_claim_count": 2,
     "index": "docs/revalidation/INDEX.md",
     "receipts": [
       "docs/revalidation/cas-blob-orphan/receipt.json",
+      "docs/revalidation/confirmation-binding/receipt.json",
+      "docs/revalidation/context-validation-lifecycle/receipt.json",
       "docs/revalidation/projection-purge-rebuild/receipt.json"
     ]
   },
@@ -190,7 +242,7 @@
     "map": "docs/conformance/invariant-test-map.json",
     "status": "UNVERIFIED"
   },
-  "invariant_test_map_sha256": "340fb74be45fbb6fc72310edb9c7f032a04b7e03429618563c28a0a107a2dc38",
+  "invariant_test_map_sha256": "58f22a565ee34cc8c947ddfa34800f719646ced6206d9cd613631a5b3f0af034",
   "known_limitations": [
     "Behavior revalidation receipts are identity-bound and may only promote an item when they explicitly declare COMPLETE coverage.",
     "AF-09 historical tarballs are archive-owned and are represented by tracked classification metadata, not Product Git bytes.",
@@ -203,7 +255,7 @@
     "0056_host_notes"
   ],
   "openworker_version": "0.1.0",
-  "product_commit": "2ce622b86ec4aa9b6df7dc79243159eca3ceb8a0",
+  "product_commit": "dc3267142fdc9c5bcd7061c55c1a0242e62663af",
   "product_manifest_sha256": "eb28065c57b2d518b4e4fa7ca47555ba3039502a20059e42ab17cec2321ad971",
   "product_tree_sha256": "77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443",
   "product_version": "0.1.0-candidate",
@@ -233,5 +285,5 @@
       "status": "UNVERIFIED"
     }
   ],
-  "verified_at": "2026-09-20T07:29:02+00:00"
+  "verified_at": "2026-09-20T07:51:38+00:00"
 }

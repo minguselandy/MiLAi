@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import UTC, datetime, timedelta
 from typing import ClassVar
 from uuid import UUID, uuid4
 
@@ -16,11 +17,21 @@ from milai.domain import (
     PrepareContextRequest,
     StateKeyRef,
 )
+from milai.domain import context_validation as context_validation_module
 from milai.persistence import DatabaseUnavailable, SessionContext
 from milai.persistence.context_repository import ContextMaterial, ContextValidationSnapshot
 
 DIGEST = "a" * 64
 SECRET = "context-preparation-test-secret-that-is-long-enough"
+
+
+class _ControlledDatetime(datetime):
+    current = datetime(2026, 9, 20, 8, 0, tzinfo=UTC)
+
+    @classmethod
+    def now(cls, tz=None):  # type: ignore[no-untyped-def]
+        value = cls.current
+        return value if tz is None else value.astimezone(tz)
 
 
 class _Retrieval:
@@ -241,6 +252,72 @@ def test_one_refresh_then_tool_result_uses_validated_cache_without_recall() -> N
     }
     assert retrieval.calls == 1
     assert repository.calls == 2
+
+
+def test_cache_validation_renews_past_original_capsule_expiry(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Reproduce the retained-slot lease outliving its original capsule."""
+
+    monkeypatch.setattr(context_preparation_module, "datetime", _ControlledDatetime)
+    monkeypatch.setattr(context_validation_module, "datetime", _ControlledDatetime)
+    service, retrieval, repository = _service()
+    context = SessionContext(uuid4(), uuid4())
+    signature, key = _typed_need()
+    initial_time = datetime(2026, 9, 20, 8, 0, tzinfo=UTC)
+    _ControlledDatetime.current = initial_time
+    initial = service.prepare(
+        context,
+        "reader",
+        _request(
+            slot_ttl_seconds=10,
+            need_signature_id=signature.signature_id,
+            memory_need_signature=signature,
+            state_key_ref=key,
+        ),
+        "request-original-capsule",
+    )
+
+    _ControlledDatetime.current = initial_time + timedelta(seconds=9)
+    renewed = service.prepare(
+        context,
+        "reader",
+        _request(
+            event="TOOL_RESULT",
+            requested_route="CACHE",
+            slot_ttl_seconds=10,
+            previous_validation_token=initial.body["validation_token"],
+            need_signature_id=signature.signature_id,
+            memory_need_signature=signature,
+            state_key_ref=key,
+        ),
+        "request-renew-lease",
+    )
+    assert renewed.body["route"] == "CACHE"
+    assert renewed.body["reason"] == "VALIDATED_TASK_SLOT_REUSE"
+
+    # The original ContextCapsule expired at t0+10. The renewed token is
+    # nevertheless accepted at t0+11 because cache validation never checks
+    # the capsule row or carries its fixed expiry in the signed state.
+    _ControlledDatetime.current = initial_time + timedelta(seconds=11)
+    after_original_capsule_expiry = service.prepare(
+        context,
+        "reader",
+        _request(
+            event="TOOL_RESULT",
+            requested_route="CACHE",
+            slot_ttl_seconds=10,
+            previous_validation_token=renewed.body["validation_token"],
+            need_signature_id=signature.signature_id,
+            memory_need_signature=signature,
+            state_key_ref=key,
+        ),
+        "request-after-original-capsule-expiry",
+    )
+    assert after_original_capsule_expiry.body["route"] == "CACHE"
+    assert after_original_capsule_expiry.body["reason"] == "VALIDATED_TASK_SLOT_REUSE"
+    assert retrieval.calls == 1
+    assert repository.calls == 3
 
 
 def test_cache_position_change_falls_through_to_exact_l0_in_same_call() -> None:
