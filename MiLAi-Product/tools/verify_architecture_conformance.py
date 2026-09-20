@@ -130,6 +130,19 @@ def _commit_exists(commit: str) -> bool:
     return result.returncode == 0
 
 
+def _git_file(commit: str, path: str) -> bytes | None:
+    git = shutil.which("git")
+    if git is None:
+        return None
+    result = subprocess.run(  # noqa: S603
+        [git, "show", f"{commit}:{path}"],
+        cwd=WORKSPACE_ROOT,
+        check=False,
+        capture_output=True,
+    )
+    return result.stdout if result.returncode == 0 else None
+
+
 def _path_part(reference: str) -> str:
     return reference.split("#", 1)[0].split("::", 1)[0]
 
@@ -171,6 +184,12 @@ def _validate_revalidation_test_reference(
     return reference
 
 
+def _revalidation_receipt_paths() -> list[Path]:
+    receipt_paths = set(REVALIDATION_ROOT.glob("*/receipt.json"))
+    receipt_paths.update(REVALIDATION_ROOT.glob("*/*.receipt.json"))
+    return sorted(receipt_paths)
+
+
 def _load_revalidation_receipts(
     *,
     crosswalk: dict[str, Any],
@@ -191,8 +210,8 @@ def _load_revalidation_receipts(
         return claims_by_id
 
     function_cache: dict[Path, set[str]] = {}
-    seen_debt_ids: set[str] = set()
-    for receipt_path in sorted(REVALIDATION_ROOT.glob("*/receipt.json")):
+    current_debt_ids: set[str] = set()
+    for receipt_path in _revalidation_receipt_paths():
         receipt = _read_json(receipt_path)
         if receipt.get("schema_version") != REVALIDATION_SCHEMA:
             raise ConformanceError(f"revalidation receipt schema mismatch: {receipt_path}")
@@ -200,9 +219,6 @@ def _load_revalidation_receipts(
         state = receipt.get("state")
         if not isinstance(debt_id, str) or not debt_id:
             raise ConformanceError(f"revalidation receipt has no debt_id: {receipt_path}")
-        if debt_id in seen_debt_ids:
-            raise ConformanceError(f"duplicate revalidation debt_id: {debt_id}")
-        seen_debt_ids.add(debt_id)
         if state not in {"OPEN", "FIXED", "OBSOLETE", "NEEDS_REVALIDATION"}:
             raise ConformanceError(f"invalid revalidation state for {debt_id}: {state!r}")
         decision = receipt.get("decision")
@@ -212,18 +228,49 @@ def _load_revalidation_receipts(
         baseline = receipt.get("baseline")
         if not isinstance(baseline, dict):
             raise ConformanceError(f"revalidation baseline is missing: {receipt_path}")
-        expected_identity = {
+        expected_architecture_identity = {
             "architecture_version": "1.0.0",
             "architecture_manifest_sha256": architecture_manifest_sha256,
-            "product_manifest_sha256": product_manifest_sha256,
-            "product_tree_sha256": product_tree_sha256,
         }
-        for field, expected in expected_identity.items():
+        for field, expected in expected_architecture_identity.items():
             if baseline.get(field) != expected:
                 raise ConformanceError(f"revalidation {debt_id} is bound to a different {field}")
         baseline_commit = baseline.get("product_commit")
         if not isinstance(baseline_commit, str) or not _commit_exists(baseline_commit):
             raise ConformanceError(f"revalidation {debt_id} baseline commit is not in Git")
+        baseline_manifest_sha256 = baseline.get("product_manifest_sha256")
+        baseline_tree_sha256 = baseline.get("product_tree_sha256")
+        if not all(
+            isinstance(value, str) and len(value) == 64
+            for value in (baseline_manifest_sha256, baseline_tree_sha256)
+        ):
+            raise ConformanceError(f"revalidation {debt_id} has invalid Product identity")
+        current_identity = (
+            baseline_manifest_sha256 == product_manifest_sha256
+            and baseline_tree_sha256 == product_tree_sha256
+        )
+        if not current_identity:
+            historical_manifest = _git_file(baseline_commit, "MiLAi-Product/product.manifest.json")
+            if historical_manifest is None:
+                raise ConformanceError(
+                    f"revalidation {debt_id} historical Product manifest is unavailable"
+                )
+            try:
+                historical_product = json.loads(historical_manifest)
+            except json.JSONDecodeError as exc:
+                raise ConformanceError(
+                    f"revalidation {debt_id} historical Product manifest is invalid"
+                ) from exc
+            if _sha256_bytes(historical_manifest) != baseline_manifest_sha256:
+                raise ConformanceError(
+                    f"revalidation {debt_id} historical manifest digest mismatch"
+                )
+            if historical_product.get("tree_sha256") != baseline_tree_sha256:
+                raise ConformanceError(f"revalidation {debt_id} historical Product tree mismatch")
+        elif debt_id in current_debt_ids:
+            raise ConformanceError(f"duplicate current revalidation debt_id: {debt_id}")
+        else:
+            current_debt_ids.add(debt_id)
 
         execution = receipt.get("execution")
         execution_status = execution.get("status") if isinstance(execution, dict) else None
@@ -325,7 +372,8 @@ def _load_revalidation_receipts(
             claim_record["debt_id"] = debt_id
             claim_record["receipt"] = receipt_reference
             claim_record["execution_status"] = execution_status
-            claims_by_id.setdefault(str(architecture_id), []).append(claim_record)
+            if current_identity:
+                claims_by_id.setdefault(str(architecture_id), []).append(claim_record)
     return claims_by_id
 
 
@@ -871,6 +919,11 @@ def _build_receipt(
         for item in conformance_map["categories"][category]:
             behavioral_claims.extend(item.get("verification", {}).get("execution_receipts", []))
     revalidation_receipts = sorted({claim["receipt"] for claim in behavioral_claims})
+    all_revalidation_receipts = _revalidation_receipt_paths()
+    preserved_failed_receipt_count = sum(
+        _read_json(path).get("execution", {}).get("status") == "FAIL"
+        for path in all_revalidation_receipts
+    )
     failed_behavioral_claims = [
         claim
         for claim in behavioral_claims
@@ -899,6 +952,11 @@ def _build_receipt(
             "receipts": revalidation_receipts,
             "claims": behavioral_claims,
             "failed_claim_count": len(failed_behavioral_claims),
+            "validated_receipt_count": len(all_revalidation_receipts),
+            "historical_receipt_count": (
+                len(all_revalidation_receipts) - len(revalidation_receipts)
+            ),
+            "preserved_failed_receipt_count": preserved_failed_receipt_count,
         },
         "current_implementation": {
             "status": current_status,
@@ -1015,10 +1073,16 @@ def _render_markdown(receipt: dict[str, Any], conformance_map: dict[str, Any]) -
             "diagnostic evidence without implying `DEVIATION`.",
             "",
             "- Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)",
-            f"- Receipt count: `{len(receipt['behavior_revalidation']['receipts'])}`",
-            f"- Explicit claim count: `{len(receipt['behavior_revalidation']['claims'])}`",
+            f"- Validated receipt count: "
+            f"`{receipt['behavior_revalidation']['validated_receipt_count']}`",
+            f"- Current receipt count: `{len(receipt['behavior_revalidation']['receipts'])}`",
+            f"- Historical receipt count: "
+            f"`{receipt['behavior_revalidation']['historical_receipt_count']}`",
+            f"- Current explicit claim count: `{len(receipt['behavior_revalidation']['claims'])}`",
             f"- Failed diagnostic claim count: "
             f"`{receipt['behavior_revalidation']['failed_claim_count']}`",
+            f"- Preserved failed receipt count: "
+            f"`{receipt['behavior_revalidation']['preserved_failed_receipt_count']}`",
             "",
             "## Status semantics",
             "",
