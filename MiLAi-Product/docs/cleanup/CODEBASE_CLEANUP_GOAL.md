@@ -36,9 +36,9 @@ Host Continuity 机制。
 
 | Phase | Scope | Status |
 | --- | --- | --- |
-| C0 | Baseline + inventory | IN PROGRESS |
-| C1 | Safe hygiene | PENDING |
-| C2 | Runtime Retrieval modularization | PENDING |
+| C0 | Baseline + inventory | COMPLETE |
+| C1 | Safe hygiene | COMPLETE — no deletion qualified |
+| C2 | Runtime Retrieval modularization | IN PROGRESS |
 | C3 | Runtime Memory Context modularization | PENDING |
 | C4 | MCP Server modularization | PENDING |
 | C5 | OpenWorker Host modularization | PENDING |
@@ -81,6 +81,30 @@ composition 全部 PASS 后才合并。
 - local `main` fast-forward 到 exact remote HEAD，clean worktree 后创建
   `cleanup/00-baseline-inventory`。
 - C0 只增加 identity/inventory，不进行 production refactor。
+
+### 2026-09-21 — C0 merged and post-merge green
+
+- C0 PR #5 Run #30：17 jobs success，composition 实际 PASS。
+- PR #5 rebase merged；post-merge `main` 为
+  `b59bffd646a9d3cb6092ed576bd1e2a43c14a9b6`。
+- post-merge Run #31：17 jobs success，composition 实际 PASS。
+- local `main == origin/main`，working tree clean 后创建
+  `cleanup/01-retrieval-policy-candidates`。
+
+### 2026-09-21 — C1 safe hygiene review
+
+- 复核 active production/test/import/receipt/CLI/Lab inventory。
+- 没有对象同时满足“无 production、test、contract、receipt、entrypoint、Lab 引用”的删除
+  门槛；本阶段不删除代码、不删除 compatibility facade，也不单独创建 hygiene PR。
+- 真实清理继续采用 need-driven extraction；C8 再做完整 compatibility/dead-code 分类审计。
+
+### 2026-09-21 — C2 Retrieval extraction started
+
+- 从 exact green `b59bffd646a9d3cb6092ed576bd1e2a43c14a9b6` 开始首个 Retrieval PR。
+- 首轮范围仅为 `retrieval_core/policy.py` 与 `retrieval_core/candidates.py`；
+  `RetrievalService`、acquisition、temporal、selection、assembly、trace 均未改动。
+- 九个移动 helper 的 AST 与原实现逐项一致；旧 `milai.application.retrieval` helper import
+  继续由 facade 暴露。
 
 ## Completion rule
 
