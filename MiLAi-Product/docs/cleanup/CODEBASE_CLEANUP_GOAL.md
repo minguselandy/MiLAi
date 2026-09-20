@@ -106,6 +106,22 @@ composition 全部 PASS 后才合并。
 - 九个移动 helper 的 AST 与原实现逐项一致；旧 `milai.application.retrieval` helper import
   继续由 facade 暴露。
 
+### 2026-09-21 — C2 policy/candidates merged
+
+- Retrieval policy/candidates PR #6 Run #32：17 jobs success，composition PASS。
+- PR #6 rebase merged；post-merge `main` 为
+  `d4907816f3635911eb8bd1c3e0e9a90031d6d153`。
+- post-merge Run #33：17 jobs success，composition PASS。
+- local `main == origin/main`，working tree clean 后创建 `cleanup/02-retrieval-temporal`。
+
+### 2026-09-21 — C2 temporal extraction started
+
+- 本轮只移动 temporal query/candidate ordering pure helpers，不同时抽 selection 或 trace。
+- 十六个移动 helper 的 AST 与 `d4907816f3635911eb8bd1c3e0e9a90031d6d153`
+  中的原实现逐项一致。
+- `milai.application.retrieval` 继续暴露原 temporal helper import；route、ranking、threshold、
+  weight、reference-time 语义均未改动。
+
 ## Completion rule
 
 只有总指令第 24 节全部条件有当前权威证据时，才把本 Goal 标记为 COMPLETE。

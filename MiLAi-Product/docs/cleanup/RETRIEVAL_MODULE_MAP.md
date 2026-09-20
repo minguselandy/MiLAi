@@ -18,10 +18,11 @@ module. `retrieval_core` is internal and is not a new public API.
 | --- | --- | --- |
 | `retrieval_core/policy.py` | Query policy, candidate-floor and deadline arithmetic | `_retrieval_policy`, `_candidate_pool_floor`, `_remaining_timeout_ms`, `_deadline_exhausted` |
 | `retrieval_core/candidates.py` | Candidate fusion, evidence deduplication/diversity, shared turn ranking and result identity | `_merge_candidates`, `_deduplicate_evidence`, `_diversify_evidence_by_subject`, `_rank_evidence_turns`, `_result_identity` |
+| `retrieval_core/temporal.py` | Binary-event coverage, relative-point resolution and temporal reranking | `_binary_event_anchor_terms`, `_binary_event_anchor_queries`, `_binary_anchor_cover`, `_relative_point_target`, `_relative_point_cover`, `_temporal_tokens`, `_temporal_text`, `_temporal_timestamp`, `_temporal_subject_indices`, `_relative_target`, `_rerank_by_reference`, `_relative_event_dates`, `_intent_tokens`, `_relative_event_intent_overlap`, `_relative_event_distance`, `_temporal_rerank` |
 
-The policy values, regexes, reciprocal-rank constant, sorting keys, deadline behavior and candidate
-limits were moved without modification. An AST comparison against the pre-extraction
-`retrieval.py` confirmed all nine function bodies are unchanged.
+The policy values, regexes, reciprocal-rank constant, sorting keys, deadline behavior, candidate
+limits and temporal ordering rules were moved without modification. AST comparisons against each
+pre-extraction `retrieval.py` baseline confirmed all 25 extracted function bodies are unchanged.
 
 ## Preserved boundaries
 
