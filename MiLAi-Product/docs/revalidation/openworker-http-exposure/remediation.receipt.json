@@ -1,0 +1,140 @@
+{
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "6fbb717ba2e9c77fd8be071725b2f25a0d771cb4",
+    "product_manifest_sha256": "28abb4b6b711ec49b5880825afd247d88526487ff87d47608b1f9e06c7e872f8",
+    "product_tree_sha256": "2dddd26130943834468e7944f3b422c2aa81e64611256cb7f497e7f96e32b0a1"
+  },
+  "conformance_claims": [
+    {
+      "architecture_id": "G8",
+      "coverage": "SCOPED",
+      "covered_statement": "OpenWorker Host plain-HTTP ingress rejects wildcard, ambiguous, multicast, and non-local bind targets, requires exact Bearer authentication, and treats the startup token as a process-lifetime capability.",
+      "limits": [
+        "The receipt covers the OpenWorker Host ingress listener, authentication ordering, process-lifetime token rotation, and trace redaction only; it does not claim complete G8 coverage.",
+        "Deployment must still prove that an explicit private address belongs to the run-owned isolated Docker bridge.",
+        "Plain HTTP is approved only for the explicitly bound, deployment-approved isolated local interface; remote, LAN, or shared-network transport is outside this contract.",
+        "The receipt makes no I-11 claim."
+      ],
+      "negative_case_ids": [
+        "HTTP-REPAIR-NEG-001",
+        "HTTP-REPAIR-NEG-002",
+        "HTTP-REPAIR-NEG-003",
+        "HTTP-REPAIR-NEG-004"
+      ],
+      "positive_case_ids": [
+        "HTTP-REPAIR-POS-001",
+        "HTTP-REPAIR-POS-002",
+        "HTTP-REPAIR-POS-003"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "debt_id": "openworker-http-auth-exposure",
+  "decision": {
+    "rationale": "The executable now validates the listen target before adapter initialization, accepts only explicit loopback, RFC1918, or IPv6 ULA literals, selects the matching IPv4/IPv6 server family, and rejects wildcard, hostname, multicast, and public targets. Exact Bearer auth remains fail-closed before parsing. The startup token is explicitly process-lifetime: file replacement does not mutate a live adapter, while controlled restart rejects the old capability and accepts the replacement.",
+    "state": "FIXED"
+  },
+  "execution": {
+    "status": "PASS",
+    "verified_at": "2026-09-20T14:49:48Z"
+  },
+  "negative_cases": [
+    {
+      "case_id": "HTTP-REPAIR-NEG-001",
+      "description": "Wildcard IPv4 and IPv6 listen targets fail closed before adapter initialization.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_executable_accepts_explicit_wildcard_listen_host",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_wildcard_ambiguous_multicast_and_public_hosts_are_rejected"
+      ]
+    },
+    {
+      "case_id": "HTTP-REPAIR-NEG-002",
+      "description": "Hostnames, multicast addresses, and public/routable literals are rejected rather than resolved or bound.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_wildcard_ambiguous_multicast_and_public_hosts_are_rejected"
+      ]
+    },
+    {
+      "case_id": "HTTP-REPAIR-NEG-003",
+      "description": "Missing, wrong, or duplicate bearer values remain rejected before request metadata or body parsing.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_authentication_precedes_body_parse_and_rejects_duplicate_bearer"
+      ]
+    },
+    {
+      "case_id": "HTTP-REPAIR-NEG-004",
+      "description": "After controlled adapter restart with a replacement token, the old capability is rejected and the new capability is accepted.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_adapter_restart_rotates_process_lifetime_capability"
+      ]
+    }
+  ],
+  "positive_cases": [
+    {
+      "case_id": "HTTP-REPAIR-POS-001",
+      "description": "Explicit loopback, RFC1918, and IPv6 ULA literals pass validation; exact loopback Bearer ingress succeeds.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_explicit_loopback_and_private_literals_are_accepted",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_loopback_ingress_accepts_exact_bearer"
+      ]
+    },
+    {
+      "case_id": "HTTP-REPAIR-POS-002",
+      "description": "An explicit private non-loopback interface serves authenticated plain HTTP without wildcard binding.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_plain_http_with_bearer_is_accepted_over_non_loopback_interface"
+      ]
+    },
+    {
+      "case_id": "HTTP-REPAIR-POS-003",
+      "description": "The loaded ingress capability remains intentionally immutable for the live adapter process lifetime, and terminal traces remain free of prompt, token, raw task ID, and private path content.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_token_file_replacement_does_not_revoke_process_token",
+        "integrations/openworker-mcp/tests/test_host_adapter.py::test_http_boundary_records_typed_terminal_before_a_replayed_operation"
+      ]
+    }
+  ],
+  "reproduction": {
+    "commands": [
+      {
+        "command": "uv run pytest -q tests/test_http_exposure_revalidation.py tests/test_host_adapter.py::test_http_boundary_records_typed_terminal_before_a_replayed_operation --tb=long",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": "uv run pytest -q --tb=short",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": "uv run ruff check src tests && uv run mypy && uv build",
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "tests": [
+      "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_loopback_ingress_accepts_exact_bearer",
+      "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_authentication_precedes_body_parse_and_rejects_duplicate_bearer",
+      "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_executable_accepts_explicit_wildcard_listen_host",
+      "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_plain_http_with_bearer_is_accepted_over_non_loopback_interface",
+      "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_explicit_loopback_and_private_literals_are_accepted",
+      "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_wildcard_ambiguous_multicast_and_public_hosts_are_rejected",
+      "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_token_file_replacement_does_not_revoke_process_token",
+      "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_adapter_restart_rotates_process_lifetime_capability",
+      "integrations/openworker-mcp/tests/test_host_adapter.py::test_http_boundary_records_typed_terminal_before_a_replayed_operation"
+    ],
+    "working_directory": "MiLAi-Product/integrations/openworker-mcp"
+  },
+  "schema_version": "milai-behavior-revalidation-v1",
+  "state": "FIXED"
+}

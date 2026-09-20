@@ -10,9 +10,9 @@ behavioral result from full architecture-item coverage.
 | Field | Value |
 | --- | --- |
 | Goals | `MILA-PRODUCT-BEHAVIOR-REVALIDATION-01`, `MILA-PRODUCT-BEHAVIOR-REVALIDATION-02`, `MILA-PRODUCT-BEHAVIOR-REVALIDATION-03` |
-| Product source commit | `fa16bb7c1b28b16b15c1800df86999804e729d3b` |
-| Product manifest SHA-256 | `0647966eed14887c6602b4a61c8fb5e8599978cbdcababb885bfd273f34e337e` |
-| Product tree SHA-256 | `a93268d94a73e5aee53150ca4be9bbc5f37f76d0173c5be72633cc54cf2ea382` |
+| Product source commit | `6fbb717ba2e9c77fd8be071725b2f25a0d771cb4` |
+| Product manifest SHA-256 | `28abb4b6b711ec49b5880825afd247d88526487ff87d47608b1f9e06c7e872f8` |
+| Product tree SHA-256 | `2dddd26130943834468e7944f3b422c2aa81e64611256cb7f497e7f96e32b0a1` |
 | Frozen architecture | `1.0.0` |
 
 ## Receipts
@@ -23,7 +23,7 @@ behavioral result from full architecture-item coverage.
 | CAS blob-first orphan possibility | `FIXED` | [`cas-blob-orphan/REVALIDATION.md`](cas-blob-orphan/REVALIDATION.md) |
 | confirmation binding to query/action | `FIXED` | [`confirmation-binding/REVALIDATION.md`](confirmation-binding/REVALIDATION.md) |
 | validation-token TTL vs ContextCapsule lifecycle | `FIXED` | [`context-validation-lifecycle/REVALIDATION.md`](context-validation-lifecycle/REVALIDATION.md) |
-| OpenWorker HTTP auth/exposure | `OPEN` | [`openworker-http-exposure/REVALIDATION.md`](openworker-http-exposure/REVALIDATION.md) |
+| OpenWorker HTTP auth/exposure | `FIXED` | [`openworker-http-exposure/REVALIDATION.md`](openworker-http-exposure/REVALIDATION.md) |
 
 `FIXED` means the current mechanism, the positive path, the negative or
 fail-closed path, and the recovery path were executed successfully for the

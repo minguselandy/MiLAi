@@ -1,6 +1,6 @@
 # OpenWorker HTTP ingress exposure revalidation
 
-Current decision: `OPEN`
+Current decision: `FIXED`
 
 ## Diagnosis
 
@@ -56,3 +56,20 @@ otherwise.
 
 Production source, token schema, network topology, and TLS behavior were not
 changed by this diagnosis.
+
+## Remediation
+
+The Host now validates `--listen-host` before adapter initialization. Only
+explicit loopback, RFC1918, and IPv6 ULA literals are accepted; wildcard,
+hostname, multicast, and public/routable targets fail closed. IPv4 and IPv6
+listeners use their matching address family. Deployment still owns proof that
+an accepted private address is the run-owned isolated bridge.
+
+The ingress Bearer contract is now explicit: the token is immutable for one
+adapter process. Rotation or revocation is stop, replace, restart. Execution
+proves that file replacement does not mutate the live capability and that a
+restarted adapter rejects the old token and accepts the replacement.
+
+[`remediation.receipt.json`](remediation.receipt.json) records the current-tree
+PASS and contributes a G8 `SCOPED PASS`. It does not claim complete G8 or I-11
+coverage.
