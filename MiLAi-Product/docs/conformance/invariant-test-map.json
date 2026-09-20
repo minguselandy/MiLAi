@@ -1227,23 +1227,25 @@
           "execution_receipts": [
             {
               "coverage": "SCOPED",
-              "covered_statement": "A live action confirmation is bound to the tenant, query, active goal, requested scope, required authority, and canonical action digest for which it was issued.",
-              "debt_id": "confirmation-binding",
+              "covered_statement": "Retained task-slot validation cannot outlive or reuse a missing, inactive, expired, or content-mismatched server-owned ContextCapsule.",
+              "debt_id": "context-validation-lifecycle",
               "execution_status": "PASS",
               "limits": [
-                "The receipt covers action confirmation identity and replay rejection only; it does not claim complete bounded-context, lineage, expiry, or invalidation coverage."
+                "The receipt covers retained task-slot capsule lifecycle and exact-refresh recovery only; it does not claim complete bounded-context, lineage, revocation, or abstention coverage."
               ],
               "negative_case_ids": [
-                "CONFIRM-REPAIR-NEG-001",
-                "CONFIRM-REPAIR-NEG-002",
-                "CONFIRM-REPAIR-NEG-003",
-                "CONFIRM-REPAIR-NEG-004"
+                "LIFECYCLE-REPAIR-NEG-001",
+                "LIFECYCLE-REPAIR-NEG-002",
+                "LIFECYCLE-REPAIR-NEG-003",
+                "LIFECYCLE-REPAIR-NEG-004",
+                "LIFECYCLE-REPAIR-NEG-005"
               ],
               "positive_case_ids": [
-                "CONFIRM-REPAIR-POS-001",
-                "CONFIRM-REPAIR-POS-002"
+                "LIFECYCLE-REPAIR-POS-001",
+                "LIFECYCLE-REPAIR-POS-002",
+                "LIFECYCLE-REPAIR-POS-003"
               ],
-              "receipt": "docs/revalidation/confirmation-binding/remediation.receipt.json",
+              "receipt": "docs/revalidation/context-validation-lifecycle/remediation.receipt.json",
               "status": "PASS"
             }
           ],
@@ -3805,9 +3807,9 @@
   "source": {
     "crosswalk": "architecture/v1.0/crosswalk.json",
     "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
-    "product_commit": "c1895e37defe5effbb5ce489613d0528dc8f3fd5",
-    "product_manifest_sha256": "c588ef3e5fca4744f23ba534b0a84f25970563b3270ee7380644631703a88595",
-    "product_tree_sha256": "f9d6f6ebf90712160441c3d57835131851ece12c945670cc607c225e22566344"
+    "product_commit": "28fa9211d54032243eac3aac6a3819aca41bff2b",
+    "product_manifest_sha256": "0647966eed14887c6602b4a61c8fb5e8599978cbdcababb885bfd273f34e337e",
+    "product_tree_sha256": "a93268d94a73e5aee53150ca4be9bbc5f37f76d0173c5be72633cc54cf2ea382"
   },
   "status_semantics": {
     "DEVIATION": "The current implementation or evidence mapping differs from the frozen claim.",

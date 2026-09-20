@@ -5,34 +5,36 @@
     "claims": [
       {
         "coverage": "SCOPED",
-        "covered_statement": "A live action confirmation is bound to the tenant, query, active goal, requested scope, required authority, and canonical action digest for which it was issued.",
-        "debt_id": "confirmation-binding",
+        "covered_statement": "Retained task-slot validation cannot outlive or reuse a missing, inactive, expired, or content-mismatched server-owned ContextCapsule.",
+        "debt_id": "context-validation-lifecycle",
         "execution_status": "PASS",
         "limits": [
-          "The receipt covers action confirmation identity and replay rejection only; it does not claim complete bounded-context, lineage, expiry, or invalidation coverage."
+          "The receipt covers retained task-slot capsule lifecycle and exact-refresh recovery only; it does not claim complete bounded-context, lineage, revocation, or abstention coverage."
         ],
         "negative_case_ids": [
-          "CONFIRM-REPAIR-NEG-001",
-          "CONFIRM-REPAIR-NEG-002",
-          "CONFIRM-REPAIR-NEG-003",
-          "CONFIRM-REPAIR-NEG-004"
+          "LIFECYCLE-REPAIR-NEG-001",
+          "LIFECYCLE-REPAIR-NEG-002",
+          "LIFECYCLE-REPAIR-NEG-003",
+          "LIFECYCLE-REPAIR-NEG-004",
+          "LIFECYCLE-REPAIR-NEG-005"
         ],
         "positive_case_ids": [
-          "CONFIRM-REPAIR-POS-001",
-          "CONFIRM-REPAIR-POS-002"
+          "LIFECYCLE-REPAIR-POS-001",
+          "LIFECYCLE-REPAIR-POS-002",
+          "LIFECYCLE-REPAIR-POS-003"
         ],
-        "receipt": "docs/revalidation/confirmation-binding/remediation.receipt.json",
+        "receipt": "docs/revalidation/context-validation-lifecycle/remediation.receipt.json",
         "status": "PASS"
       }
     ],
     "failed_claim_count": 0,
-    "historical_receipt_count": 4,
+    "historical_receipt_count": 5,
     "index": "docs/revalidation/INDEX.md",
     "preserved_failed_receipt_count": 2,
     "receipts": [
-      "docs/revalidation/confirmation-binding/remediation.receipt.json"
+      "docs/revalidation/context-validation-lifecycle/remediation.receipt.json"
     ],
-    "validated_receipt_count": 5
+    "validated_receipt_count": 6
   },
   "claim_policy": {
     "architecture_conformant": false,
@@ -56,7 +58,7 @@
     "map": "docs/conformance/invariant-test-map.json",
     "status": "UNVERIFIED"
   },
-  "invariant_test_map_sha256": "b757f47a6fe0fa1f3b9d3625507b66eb10a35471005587281e7b277b6edb86b6",
+  "invariant_test_map_sha256": "9b4734ec51e4b25f2a0028dff473a2040fe84502d2a21ce25db900ea9b16d022",
   "known_limitations": [
     "Behavior revalidation receipts are identity-bound and may only promote an item when they explicitly declare COMPLETE coverage.",
     "AF-09 historical tarballs are archive-owned and are represented by tracked classification metadata, not Product Git bytes.",
@@ -69,9 +71,9 @@
     "0056_host_notes"
   ],
   "openworker_version": "0.1.0",
-  "product_commit": "c1895e37defe5effbb5ce489613d0528dc8f3fd5",
-  "product_manifest_sha256": "c588ef3e5fca4744f23ba534b0a84f25970563b3270ee7380644631703a88595",
-  "product_tree_sha256": "f9d6f6ebf90712160441c3d57835131851ece12c945670cc607c225e22566344",
+  "product_commit": "28fa9211d54032243eac3aac6a3819aca41bff2b",
+  "product_manifest_sha256": "0647966eed14887c6602b4a61c8fb5e8599978cbdcababb885bfd273f34e337e",
+  "product_tree_sha256": "a93268d94a73e5aee53150ca4be9bbc5f37f76d0173c5be72633cc54cf2ea382",
   "product_version": "0.1.0-candidate",
   "runtime_version": "0.1.5",
   "schema_version": "milai-architecture-conformance-v1",
@@ -99,5 +101,5 @@
       "status": "UNVERIFIED"
     }
   ],
-  "verified_at": "2026-09-20T08:13:32+00:00"
+  "verified_at": "2026-09-20T09:29:04+00:00"
 }

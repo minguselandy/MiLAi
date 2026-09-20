@@ -1,0 +1,147 @@
+{
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "28fa9211d54032243eac3aac6a3819aca41bff2b",
+    "product_manifest_sha256": "0647966eed14887c6602b4a61c8fb5e8599978cbdcababb885bfd273f34e337e",
+    "product_tree_sha256": "a93268d94a73e5aee53150ca4be9bbc5f37f76d0173c5be72633cc54cf2ea382"
+  },
+  "conformance_claims": [
+    {
+      "architecture_id": "G7",
+      "coverage": "SCOPED",
+      "covered_statement": "Retained task-slot validation cannot outlive or reuse a missing, inactive, expired, or content-mismatched server-owned ContextCapsule.",
+      "limits": [
+        "The receipt covers retained task-slot capsule lifecycle and exact-refresh recovery only; it does not claim complete bounded-context, lineage, revocation, or abstention coverage."
+      ],
+      "negative_case_ids": [
+        "LIFECYCLE-REPAIR-NEG-001",
+        "LIFECYCLE-REPAIR-NEG-002",
+        "LIFECYCLE-REPAIR-NEG-003",
+        "LIFECYCLE-REPAIR-NEG-004",
+        "LIFECYCLE-REPAIR-NEG-005"
+      ],
+      "positive_case_ids": [
+        "LIFECYCLE-REPAIR-POS-001",
+        "LIFECYCLE-REPAIR-POS-002",
+        "LIFECYCLE-REPAIR-POS-003"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "debt_id": "context-validation-lifecycle",
+  "decision": {
+    "rationale": "Retained task-slot validation now reads the server-owned capsule lifecycle in the same REPEATABLE READ snapshot as canonical dependencies, clamps every validation lease to authoritative capsule expiry, and performs an exact refresh when capsule identity or lifecycle is invalid.",
+    "state": "FIXED"
+  },
+  "execution": {
+    "status": "PASS",
+    "verified_at": "2026-09-20T09:27:08Z"
+  },
+  "negative_cases": [
+    {
+      "case_id": "LIFECYCLE-REPAIR-NEG-001",
+      "description": "A renewed validation token expires no later than the original ContextCapsule and cannot reuse that capsule after expiry.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_cache_validation_renews_past_original_capsule_expiry"
+      ]
+    },
+    {
+      "case_id": "LIFECYCLE-REPAIR-NEG-002",
+      "description": "Missing, INVALIDATED, or expired capsule state rejects CACHE reuse and falls through to exact refresh.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_authoritative_capsule_lifecycle_miss_refreshes_exactly",
+        "runtime/tests/integration/test_context_chat_api.py::test_prepare_context_cache_revalidates_authoritative_capsule_lifecycle"
+      ]
+    },
+    {
+      "case_id": "LIFECYCLE-REPAIR-NEG-003",
+      "description": "A capsule content hash that differs from the signed validation state rejects CACHE reuse and falls through to exact refresh.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_authoritative_capsule_lifecycle_miss_refreshes_exactly",
+        "runtime/tests/integration/test_context_chat_api.py::test_prepare_context_cache_revalidates_authoritative_capsule_lifecycle"
+      ]
+    },
+    {
+      "case_id": "LIFECYCLE-REPAIR-NEG-004",
+      "description": "Canonical-position or OpenIssue revision movement continues to interrupt CACHE reuse and trigger exact refresh.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_cache_position_change_falls_through_to_exact_l0_in_same_call",
+        "runtime/tests/unit/test_context_preparation.py::test_cache_issue_revision_change_falls_through_to_one_exact_l0"
+      ]
+    },
+    {
+      "case_id": "LIFECYCLE-REPAIR-NEG-005",
+      "description": "Expired, forged, tenant-mismatched, profile-mismatched, or request-mismatched validation tokens remain invalid.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_validation.py::test_context_validation_token_is_bound_and_expires"
+      ]
+    }
+  ],
+  "positive_cases": [
+    {
+      "case_id": "LIFECYCLE-REPAIR-POS-001",
+      "description": "An ACTIVE unexpired capsule with unchanged content hash and canonical dependencies remains eligible for CACHE reuse.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_one_refresh_then_tool_result_uses_validated_cache_without_recall",
+        "runtime/tests/integration/test_context_chat_api.py::test_composite_prepare_context_reuses_hit_then_falls_through_to_exact"
+      ]
+    },
+    {
+      "case_id": "LIFECYCLE-REPAIR-POS-002",
+      "description": "A successful CACHE validation issues a lease whose expiry is no later than the authoritative ContextCapsule expiry.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_cache_validation_renews_past_original_capsule_expiry"
+      ]
+    },
+    {
+      "case_id": "LIFECYCLE-REPAIR-POS-003",
+      "description": "Lifecycle invalidation causes a typed CACHE miss followed by a successful exact refresh with a new capsule and validation lease.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_context_preparation.py::test_authoritative_capsule_lifecycle_miss_refreshes_exactly",
+        "runtime/tests/integration/test_context_chat_api.py::test_prepare_context_cache_revalidates_authoritative_capsule_lifecycle"
+      ]
+    }
+  ],
+  "reproduction": {
+    "commands": [
+      {
+        "command": "uv run pytest -q tests/unit/test_context_preparation.py --tb=short",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": "uv run pytest -q tests/integration/test_context_chat_api.py::test_composite_prepare_context_reuses_hit_then_falls_through_to_exact tests/integration/test_context_chat_api.py::test_prepare_context_cache_revalidates_authoritative_capsule_lifecycle --tb=long",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": "uv run pytest -q",
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "tests": [
+      "runtime/tests/unit/test_context_preparation.py::test_one_refresh_then_tool_result_uses_validated_cache_without_recall",
+      "runtime/tests/unit/test_context_preparation.py::test_cache_validation_renews_past_original_capsule_expiry",
+      "runtime/tests/unit/test_context_preparation.py::test_authoritative_capsule_lifecycle_miss_refreshes_exactly",
+      "runtime/tests/unit/test_context_preparation.py::test_cache_position_change_falls_through_to_exact_l0_in_same_call",
+      "runtime/tests/unit/test_context_preparation.py::test_cache_issue_revision_change_falls_through_to_one_exact_l0",
+      "runtime/tests/unit/test_context_validation.py::test_context_validation_token_is_bound_and_expires",
+      "runtime/tests/integration/test_context_chat_api.py::test_composite_prepare_context_reuses_hit_then_falls_through_to_exact",
+      "runtime/tests/integration/test_context_chat_api.py::test_prepare_context_cache_revalidates_authoritative_capsule_lifecycle"
+    ],
+    "working_directory": "MiLAi-Product/runtime"
+  },
+  "schema_version": "milai-behavior-revalidation-v1",
+  "state": "FIXED"
+}

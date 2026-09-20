@@ -8,13 +8,15 @@ Phase 2 diagnosis baseline: Product tree
 `2ce622b86ec4aa9b6df7dc79243159eca3ceb8a0`, with Phase 2B diagnostics anchored by
 `dc3267142fdc9c5bcd7061c55c1a0242e62663af`. B1 remediation baseline: Product tree
 `f9d6f6ebf90712160441c3d57835131851ece12c945670cc607c225e22566344`, source commit
-`c1895e37defe5effbb5ce489613d0528dc8f3fd5`. Results were verified on 2026-09-20.
+`c1895e37defe5effbb5ce489613d0528dc8f3fd5`. B2 remediation baseline: Product tree
+`a93268d94a73e5aee53150ca4be9bbc5f37f76d0173c5be72633cc54cf2ea382`, source commit
+`28fa9211d54032243eac3aac6a3819aca41bff2b`. Results were verified on 2026-09-20.
 
 | Item | State | 当前证据/下一步 |
 | --- | --- | --- |
 | process-local task continuity/state | NEEDS_REVALIDATION | 复核 OpenWorker restart、task identity 与持久化边界 |
 | cache-miss Host continuation | NEEDS_REVALIDATION | 复核 Host/MCP continuation contract；不得隐式扩大 retrieval |
-| validation-token TTL vs capsule lifecycle | OPEN | [`docs/revalidation/context-validation-lifecycle/REVALIDATION.md`](revalidation/context-validation-lifecycle/REVALIDATION.md); cache validation renews the token past the original capsule expiry without validating the capsule row |
+| validation-token TTL vs capsule lifecycle | FIXED | [`docs/revalidation/context-validation-lifecycle/REVALIDATION.md`](revalidation/context-validation-lifecycle/REVALIDATION.md); diagnosis FAIL is preserved, while current-tree validation reads authoritative capsule lifecycle, clamps lease expiry, and exact-refreshes lifecycle misses |
 | projection purge/rebuild | FIXED | [`docs/revalidation/projection-purge-rebuild/REVALIDATION.md`](revalidation/projection-purge-rebuild/REVALIDATION.md); targeted PostgreSQL execution passed, including rebuild-after-revoke non-resurrection |
 | confirmation binding to query/action | FIXED | [`docs/revalidation/confirmation-binding/REVALIDATION.md`](revalidation/confirmation-binding/REVALIDATION.md); diagnosis FAIL is preserved, while current-tree remediation binds tenant/query/goal/scope/authority/action digest and passes replay, expiry, revoke, and readability regressions |
 | OpenWorker HTTP auth/exposure | NEEDS_REVALIDATION | 复核 bearer、loopback/TLS、scope、日志和 revocation |

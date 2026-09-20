@@ -10,9 +10,9 @@ behavioral result from full architecture-item coverage.
 | Field | Value |
 | --- | --- |
 | Goals | `MILA-PRODUCT-BEHAVIOR-REVALIDATION-01`, `MILA-PRODUCT-BEHAVIOR-REVALIDATION-02` |
-| Product source commit | `c1895e37defe5effbb5ce489613d0528dc8f3fd5` |
-| Product manifest SHA-256 | `c588ef3e5fca4744f23ba534b0a84f25970563b3270ee7380644631703a88595` |
-| Product tree SHA-256 | `f9d6f6ebf90712160441c3d57835131851ece12c945670cc607c225e22566344` |
+| Product source commit | `28fa9211d54032243eac3aac6a3819aca41bff2b` |
+| Product manifest SHA-256 | `0647966eed14887c6602b4a61c8fb5e8599978cbdcababb885bfd273f34e337e` |
+| Product tree SHA-256 | `a93268d94a73e5aee53150ca4be9bbc5f37f76d0173c5be72633cc54cf2ea382` |
 | Frozen architecture | `1.0.0` |
 
 ## Receipts
@@ -22,7 +22,7 @@ behavioral result from full architecture-item coverage.
 | projection purge/rebuild | `FIXED` | [`projection-purge-rebuild/REVALIDATION.md`](projection-purge-rebuild/REVALIDATION.md) |
 | CAS blob-first orphan possibility | `FIXED` | [`cas-blob-orphan/REVALIDATION.md`](cas-blob-orphan/REVALIDATION.md) |
 | confirmation binding to query/action | `FIXED` | [`confirmation-binding/REVALIDATION.md`](confirmation-binding/REVALIDATION.md) |
-| validation-token TTL vs ContextCapsule lifecycle | `OPEN` | [`context-validation-lifecycle/REVALIDATION.md`](context-validation-lifecycle/REVALIDATION.md) |
+| validation-token TTL vs ContextCapsule lifecycle | `FIXED` | [`context-validation-lifecycle/REVALIDATION.md`](context-validation-lifecycle/REVALIDATION.md) |
 
 `FIXED` means the current mechanism, the positive path, the negative or
 fail-closed path, and the recovery path were executed successfully for the
