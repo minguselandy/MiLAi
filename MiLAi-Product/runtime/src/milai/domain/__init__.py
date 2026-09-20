@@ -48,6 +48,7 @@ from milai.domain.acquisition_observation import (
     AvailableAcquisitionActionV02,
     RequirementAcquisitionObservationV02,
 )
+from milai.domain.action_identity import action_identity_digest, canonical_sha256
 from milai.domain.causality import CausalPosition, CausalTokenCodec, CausalTokenError
 from milai.domain.chat import ChatRequest, ContextBuildRequest
 from milai.domain.context_preparation import (
@@ -399,6 +400,7 @@ __all__ = [
     "TypedAnswerContractV01",
     "TypedAnswerDecisionV01",
     "TypedAnswerLineageV01",
+    "action_identity_digest",
     "build_bounded_range_scan_proof_v02",
     "build_event_identity_v01",
     "build_event_time_interval_v02",
@@ -406,6 +408,7 @@ __all__ = [
     "build_requirement_acquisition_plan",
     "build_residual_cue_public_receipt",
     "build_typed_answer_decision_v01",
+    "canonical_sha256",
     "classify_range_membership",
     "deduplicate_event_identities",
     "default_requirement_complete_retrieval_policy",

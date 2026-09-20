@@ -5,6 +5,19 @@ const output = (value) => { byId("result").textContent = JSON.stringify(value, n
 const ids = (id) => byId(id).value.split(",").map((value) => value.trim()).filter(Boolean);
 let capabilities = null;
 
+function canonicalJson(value) {
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`;
+  if (value !== null && typeof value === "object") {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`).join(",")}}`;
+  }
+  return JSON.stringify(value);
+}
+
+async function sha256Hex(value) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
 async function api(path, options = {}) {
   const token = byId("token").value;
   const headers = {"Authorization": `Bearer ${token}`, "Content-Type": "application/json", ...(options.headers || {})};
@@ -124,16 +137,34 @@ byId("chat").addEventListener("click", async () => {
   try {
     const actionSensitive = byId("action-sensitive").checked;
     const confirmed = byId("live-confirmation").checked;
+    const query = byId("query").value;
+    const activeGoal = byId("goal").value;
+    const requestedScope = JSON.parse(byId("scope").value);
+    const requiredAuthority = byId("authority").value;
+    const actionDigest = actionSensitive
+      ? await sha256Hex(canonicalJson(JSON.parse(byId("action").value)))
+      : null;
+    if (actionSensitive && confirmed && !capabilities) {
+      capabilities = await api("/v1/capabilities");
+    }
     let confirmationEvidenceId = null;
     let confirmationNonce = null;
     if (actionSensitive && confirmed) {
       confirmationNonce = crypto.randomUUID();
+      const bindingDigest = await sha256Hex(canonicalJson({
+        tenant_id: capabilities.tenant_id,
+        query,
+        active_goal: activeGoal,
+        requested_scope: requestedScope,
+        required_authority: requiredAuthority,
+        action_digest: actionDigest
+      }));
       const confirmation = await api("/v1/evidence", {
         method: "POST",
         headers: {"Idempotency-Key": crypto.randomUUID()},
         body: JSON.stringify({
           source_type: "USER_CONFIRMATION",
-          source_ref: `chat-confirmation:${confirmationNonce}`,
+          source_ref: `chat-confirmation:v2:${confirmationNonce}:${bindingDigest}`,
           subject_id: "action-sensitive-chat",
           observed_at: new Date().toISOString(),
           content: "CONFIRM_ACTION",
@@ -145,11 +176,12 @@ byId("chat").addEventListener("click", async () => {
       confirmationEvidenceId = confirmation.evidence_id;
     }
     const body = {
-      query: byId("query").value,
-      active_goal: byId("goal").value,
-      requested_scope: JSON.parse(byId("scope").value),
-      required_authority: byId("authority").value,
+      query,
+      active_goal: activeGoal,
+      requested_scope: requestedScope,
+      required_authority: requiredAuthority,
       action_sensitive: actionSensitive,
+      action_digest: actionDigest,
       live_confirmation: actionSensitive && confirmed ? "CONFIRM_ACTION" : null,
       confirmation_evidence_id: confirmationEvidenceId,
       confirmation_nonce: confirmationNonce

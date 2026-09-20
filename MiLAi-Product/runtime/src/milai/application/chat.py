@@ -12,6 +12,7 @@ from milai.application.context import ContextService
 from milai.application.errors import EvidenceNotFound, TenantMismatch
 from milai.application.evidence import EvidenceService
 from milai.application.recollection import RecollectionFacade
+from milai.domain.action_identity import action_identity_digest
 from milai.domain.chat import ChatRequest, ContextBuildRequest
 from milai.domain.retrieval import RetrievalRequest
 from milai.persistence import SessionContext
@@ -223,9 +224,20 @@ class ChatService:
         record = view.record
         now = datetime.now(UTC)
         is_fresh = abs(now - record.observed_at) <= timedelta(minutes=5)
+        if request.action_digest is None:
+            return None
+        binding_digest = action_identity_digest(
+            tenant_id=context.tenant_id,
+            query=request.query,
+            active_goal=request.active_goal,
+            requested_scope=request.requested_scope,
+            required_authority=request.required_authority,
+            action_digest=request.action_digest,
+        )
         if (
             record.source_type != "USER_CONFIRMATION"
-            or record.source_ref != f"chat-confirmation:{request.confirmation_nonce}"
+            or record.source_ref
+            != f"chat-confirmation:v2:{request.confirmation_nonce}:{binding_digest}"
             or record.subject_id != "action-sensitive-chat"
             or not is_fresh
             or view.content != "CONFIRM_ACTION"

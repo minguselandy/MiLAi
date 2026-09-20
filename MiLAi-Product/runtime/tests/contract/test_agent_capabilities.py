@@ -56,6 +56,7 @@ def test_capabilities_return_only_effective_reader_scope(tmp_path: Path) -> None
     assert response.get_json()["data_mode"] == "SYNTHETIC_ONLY"
     assert response.get_json()["api_version"] == "1"
     assert response.get_json()["contract_version"] == "agent.v1"
+    assert response.get_json()["tenant_id"] == "11111111-1111-4111-8111-111111111111"
     assert response.get_json()["routes"] == ["L0", "L1"]
     assert response.get_json()["consistency_modes"] == [
         "EVENTUAL",
