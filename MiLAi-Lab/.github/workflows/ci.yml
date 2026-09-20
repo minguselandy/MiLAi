@@ -28,16 +28,34 @@ jobs:
       - name: Verify active source boundary
         run: uv run milai-lab-check-boundary
 
-      - name: Static checks and tests
+      - name: Prepare Lab test evidence directory
+        run: mkdir -p lab-test-results
+
+      - name: Static checks
         run: |
           uv run ruff check src tests tools
           uv run mypy src/milai_lab
-          uv run pytest -q
+
+      - name: Run Lab pytest diagnostic
+        run: >-
+          uv run pytest -q --maxfail=1 --tb=long --durations=50
+          --junitxml="${{ github.workspace }}/lab-test-results/junit.xml"
+
+      - name: Upload Lab pytest evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: milai-lab-pytest-evidence
+          path: lab-test-results/junit.xml
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Replay filtered legacy snapshot
+        if: success()
         run: uv run python tools/check_legacy_archive.py
 
       - name: Build clean distributions
+        if: success()
         shell: bash
         run: |
           set -Eeuo pipefail

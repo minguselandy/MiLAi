@@ -176,15 +176,37 @@ jobs:
       - name: Install locked Lab
         working-directory: MiLAi-Lab
         run: uv sync --frozen --dev --python 3.11
-      - name: Check active Lab boundary and quality
+      - name: Prepare Lab test evidence directory
+        run: mkdir -p lab-test-results
+      - name: Check active Lab boundary
+        working-directory: MiLAi-Lab
+        run: uv run milai-lab-check-boundary
+      - name: Run Lab static checks
         working-directory: MiLAi-Lab
         run: |
-          uv run milai-lab-check-boundary
           uv run ruff check src tests tools
           uv run mypy src/milai_lab
-          uv run pytest -q
-          uv run python tools/check_legacy_archive.py
-          uv build
+      - name: Run Lab pytest diagnostic
+        working-directory: MiLAi-Lab
+        run: >-
+          uv run pytest -q --maxfail=1 --tb=long --durations=50
+          --junitxml="${{ github.workspace }}/lab-test-results/junit.xml"
+      - name: Upload Lab pytest evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: milai-lab-pytest-evidence
+          path: lab-test-results/junit.xml
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Replay filtered legacy snapshot
+        if: success()
+        working-directory: MiLAi-Lab
+        run: uv run python tools/check_legacy_archive.py
+      - name: Build clean Lab distributions
+        if: success()
+        working-directory: MiLAi-Lab
+        run: uv build
 
   archive:
     name: Archive index and reorganization evidence
