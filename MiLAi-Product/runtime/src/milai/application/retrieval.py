@@ -112,8 +112,10 @@ from milai.application.retrieval_core.candidates import (
 from milai.application.retrieval_core.operators import (
     _execute_operator_with_accepted_inputs,
     _explicit_compound_subject_matches,
-    _operator_support_refs,
     _state_count_cover,
+)
+from milai.application.retrieval_core.operators import (
+    _operator_support_refs as _operator_support_refs,
 )
 from milai.application.retrieval_core.policy import (
     _candidate_pool_floor,
