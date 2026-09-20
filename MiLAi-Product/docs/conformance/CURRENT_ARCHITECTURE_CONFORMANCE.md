@@ -6,8 +6,8 @@
 ## Result
 
 - Current implementation status: `UNVERIFIED`
-- Product source commit: `6fbb717ba2e9c77fd8be071725b2f25a0d771cb4`
-- Verified at: `2026-09-20T14:51:04+00:00`
+- Product source commit: `50b8cf1cd21503bf21be3a982d00d5d0707b0f52`
+- Verified at: `2026-09-20T17:35:33+00:00`
 - Architecture: `1.0.0`
 - Migration heads: `0027_embedding_identity, 0045_dg18_adjacency, 0056_host_notes`
 
@@ -18,8 +18,8 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Field | Value |
 | --- | --- |
 | Product version | `0.1.0-candidate` |
-| Product manifest SHA-256 | `28abb4b6b711ec49b5880825afd247d88526487ff87d47608b1f9e06c7e872f8` |
-| Product tree SHA-256 | `2dddd26130943834468e7944f3b422c2aa81e64611256cb7f497e7f96e32b0a1` |
+| Product manifest SHA-256 | `7bf216c8c53c977ff675967fa173c20ef76c9c2e4a3c200c5155dea2b58faebc` |
+| Product tree SHA-256 | `7d796545b43f54766abed75c4b1af019ba8dc9b3d55d7ee40f982e01c64b81e7` |
 | Architecture manifest SHA-256 | `ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e` |
 | Runtime / Client / MCP / OpenWorker | `0.1.5` / `0.1.4` / `0.1.15` / `0.1.0` |
 
@@ -49,9 +49,9 @@ Receipts are validated against the current Product tree and manifest. `SCOPED` c
 
 - Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)
 - Validated receipt count: `8`
-- Current receipt count: `1`
-- Historical receipt count: `7`
-- Current explicit claim count: `1`
+- Current receipt count: `0`
+- Historical receipt count: `8`
+- Current explicit claim count: `0`
 - Failed diagnostic claim count: `0`
 - Preserved failed receipt count: `3`
 
