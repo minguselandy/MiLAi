@@ -1,0 +1,56 @@
+{
+  "architecture": {
+    "conformance_counts": {
+      "DEVIATION": 0,
+      "NOT_APPLICABLE": 0,
+      "PASS": 9,
+      "UNVERIFIED": 35
+    },
+    "current_implementation_status": "UNVERIFIED",
+    "version": "1.0.0"
+  },
+  "baseline_commit": "798b7cac21957873791afff6122d3f06a82214c5",
+  "baseline_workflow": {
+    "attempt": 2,
+    "composition": "PASS",
+    "job_count": 17,
+    "run_id": 35519772754,
+    "run_number": 29,
+    "status": "SUCCESS"
+  },
+  "immutable_tree_objects": {
+    "MiLAi-Artifact-Archive": "36ac04b4b0562265250bb15f01a4d40c4ac4f710",
+    "MiLAi-Lab/studies/archive": "b69ac4d6ebca0a52ae3ec6edff5dce914816f157",
+    "MiLAi-Product/architecture/v1.0": "fb9f953e07e9a06bd08695827dd91ccb0d21be38"
+  },
+  "lab": {
+    "fast": {
+      "deselected": 4,
+      "passed": 4541,
+      "skipped": 137
+    },
+    "historical_replay": {
+      "presentation-v1": "PASS",
+      "presentation-v2-corruption": "PASS",
+      "presentation-v2-positive": "PASS",
+      "presentation-v2-wrong-intent": "PASS"
+    }
+  },
+  "product": {
+    "manifest_sha256": "28abb4b6b711ec49b5880825afd247d88526487ff87d47608b1f9e06c7e872f8",
+    "repository_tree_object": "3bfca92ed5118404ea725f22a10496d50c9efa76",
+    "tree_sha256": "2dddd26130943834468e7944f3b422c2aa81e64611256cb7f497e7f96e32b0a1"
+  },
+  "runtime": {
+    "passed": 1234,
+    "skipped": 3
+  },
+  "schema_version": "milai-codebase-cleanup-baseline-v1",
+  "technical_debt": {
+    "FIXED": 5,
+    "NEEDS_REVALIDATION": 5,
+    "OBSOLETE": 0,
+    "OPEN": 0
+  },
+  "verified_date": "2026-09-21"
+}
