@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import os
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from uuid import UUID, uuid4
 
@@ -14,7 +14,12 @@ from alembic.config import Config
 from milai.adapters import DeterministicHashEmbedding, LocalContentAddressedBlobStore
 from milai.api import create_app
 from milai.config.settings import RuntimeSettings, prepare_runtime_directories
-from milai.domain import MemoryNeedSignature, StateKeyRef
+from milai.domain import (
+    MemoryNeedSignature,
+    StateKeyRef,
+    action_identity_digest,
+    canonical_sha256,
+)
 from milai.persistence import Database, DatabaseUnavailable
 from milai.persistence.projection_repository import ProjectionRepository
 from milai.persistence.retrieval_repository import RetrievalRepository
@@ -94,19 +99,38 @@ def _ingest(client, content: str) -> str:  # type: ignore[no-untyped-def]
     return str(response.json["evidence_id"])
 
 
-def _live_confirmation(client) -> tuple[str, str]:  # type: ignore[no-untyped-def]
-    nonce = str(uuid4())
+def _live_confirmation(
+    client,  # type: ignore[no-untyped-def]
+    tenant_id: UUID,
+    request: dict[str, object],
+    *,
+    nonce: str | None = None,
+    binding_digest: str | None = None,
+    observed_at: datetime | None = None,
+    readable: bool = True,
+) -> tuple[str, str]:
+    nonce = nonce or str(uuid4())
+    action_digest = request.get("action_digest")
+    assert isinstance(action_digest, str)
+    expected_binding = binding_digest or action_identity_digest(
+        tenant_id=tenant_id,
+        query=str(request["query"]),
+        active_goal=str(request["active_goal"]),
+        requested_scope=request["requested_scope"],  # type: ignore[arg-type]
+        required_authority=request["required_authority"],  # type: ignore[arg-type]
+        action_digest=action_digest,
+    )
     response = client.post(
         "/v1/evidence",
         headers=_headers(f"confirmation-{uuid4()}"),
         json={
             "source_type": "USER_CONFIRMATION",
-            "source_ref": f"chat-confirmation:{nonce}",
+            "source_ref": f"chat-confirmation:v2:{nonce}:{expected_binding}",
             "subject_id": "action-sensitive-chat",
-            "observed_at": datetime.now(UTC).isoformat(),
+            "observed_at": (observed_at or datetime.now(UTC)).isoformat(),
             "content": "CONFIRM_ACTION",
             "media_type": "text/plain",
-            "permission_snapshot": {"readable": True},
+            "permission_snapshot": {"readable": readable},
             "retention_state": "READABLE",
         },
     )
@@ -638,7 +662,11 @@ def test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_a
     token = f"actiontoken{uuid4().hex}"
     _create_claim(client, token)
     _run_worker(settings, worker_database)
-    action = _chat_payload(token, action_sensitive=True)
+    action = _chat_payload(
+        token,
+        action_sensitive=True,
+        action_digest=canonical_sha256({"tool": "deploy", "arguments": {"environment": "staging"}}),
+    )
 
     unconfirmed = client.post("/v1/chat", headers=_headers(), json=action)
     assert unconfirmed.status_code == 200
@@ -648,7 +676,9 @@ def test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_a
 
     confirmed = dict(action)
     confirmed["live_confirmation"] = "CONFIRM_ACTION"
-    confirmation_evidence_id, confirmation_nonce = _live_confirmation(client)
+    confirmation_evidence_id, confirmation_nonce = _live_confirmation(
+        client, settings.tenant_id, confirmed
+    )
     confirmed["confirmation_evidence_id"] = confirmation_evidence_id
     confirmed["confirmation_nonce"] = confirmation_nonce
     accepted = client.post("/v1/chat", headers=_headers(), json=confirmed)
@@ -669,7 +699,7 @@ def test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_a
         raise DatabaseUnavailable("synthetic outage")
 
     monkeypatch.setattr(RetrievalRepository, "gate_and_hydrate", unavailable_gate)
-    second_evidence_id, second_nonce = _live_confirmation(client)
+    second_evidence_id, second_nonce = _live_confirmation(client, settings.tenant_id, confirmed)
     confirmed["confirmation_evidence_id"] = second_evidence_id
     confirmed["confirmation_nonce"] = second_nonce
     unavailable = client.post("/v1/chat", headers=_headers(), json=confirmed)
@@ -690,41 +720,94 @@ def test_live_confirmation_replays_across_query_goal_and_scope(
     token = f"confirmationreplay{uuid4().hex}"
     _create_claim(client, token)
     _run_worker(settings, worker_database)
-    evidence_id, nonce = _live_confirmation(client)
     confirmed = _chat_payload(
         token,
         action_sensitive=True,
+        action_digest=canonical_sha256({"tool": "deploy", "arguments": {"environment": "staging"}}),
         live_confirmation="CONFIRM_ACTION",
-        confirmation_evidence_id=evidence_id,
-        confirmation_nonce=nonce,
     )
+    evidence_id, nonce = _live_confirmation(client, settings.tenant_id, confirmed)
+    confirmed["confirmation_evidence_id"] = evidence_id
+    confirmed["confirmation_nonce"] = nonce
 
     original = client.post("/v1/chat", headers=_headers(), json=confirmed)
     assert original.status_code == 200
     assert original.json["live_confirmation"] is True
     assert original.json["abstained"] is False
 
-    changed_query_and_goal = client.post(
-        "/v1/chat",
-        headers=_headers(),
-        json=confirmed
-        | {
-            "query": f"Use {token} for a different action request",
-            "active_goal": "执行另一个目标",
-        },
-    )
-    assert changed_query_and_goal.status_code == 200
-    assert changed_query_and_goal.json["live_confirmation"] is True
-    assert changed_query_and_goal.json["abstention_reason"] != "LIVE_CONFIRMATION_REQUIRED"
+    def assert_confirmation_rejected(payload: dict[str, object]) -> None:
+        response = client.post("/v1/chat", headers=_headers(), json=payload)
+        assert response.status_code == 200
+        assert response.json["live_confirmation"] is False
+        assert response.json["abstained"] is True
+        assert response.json["abstention_reason"] == "LIVE_CONFIRMATION_REQUIRED"
 
-    changed_scope = client.post(
-        "/v1/chat",
-        headers=_headers(),
-        json=confirmed | {"requested_scope": {"project_ids": ["different-project"]}},
+    assert_confirmation_rejected(
+        confirmed | {"query": f"Use {token} for a different action request"}
     )
-    assert changed_scope.status_code == 200
-    assert changed_scope.json["live_confirmation"] is True
-    assert changed_scope.json["abstention_reason"] != "LIVE_CONFIRMATION_REQUIRED"
+    assert_confirmation_rejected(confirmed | {"active_goal": "执行另一个目标"})
+    assert_confirmation_rejected(
+        confirmed | {"requested_scope": {"project_ids": ["different-project"]}}
+    )
+    assert_confirmation_rejected(confirmed | {"action_digest": "b" * 64})
+    assert_confirmation_rejected(confirmed | {"confirmation_nonce": str(uuid4())})
+
+    wrong_binding_id, wrong_binding_nonce = _live_confirmation(
+        client,
+        settings.tenant_id,
+        confirmed,
+        binding_digest="f" * 64,
+    )
+    assert_confirmation_rejected(
+        confirmed
+        | {
+            "confirmation_evidence_id": wrong_binding_id,
+            "confirmation_nonce": wrong_binding_nonce,
+        }
+    )
+
+    expired_id, expired_nonce = _live_confirmation(
+        client,
+        settings.tenant_id,
+        confirmed,
+        observed_at=datetime.now(UTC) - timedelta(minutes=6),
+    )
+    assert_confirmation_rejected(
+        confirmed
+        | {
+            "confirmation_evidence_id": expired_id,
+            "confirmation_nonce": expired_nonce,
+        }
+    )
+
+    revoked_id, revoked_nonce = _live_confirmation(client, settings.tenant_id, confirmed)
+    revoked = client.post(
+        f"/v1/evidence/{revoked_id}/revoke",
+        headers=_headers(f"revoke-confirmation-{uuid4()}"),
+        json={"reason_code": "USER_REQUEST", "confirmation": "REVOKE"},
+    )
+    assert revoked.status_code == 202
+    assert_confirmation_rejected(
+        confirmed
+        | {
+            "confirmation_evidence_id": revoked_id,
+            "confirmation_nonce": revoked_nonce,
+        }
+    )
+
+    unreadable_id, unreadable_nonce = _live_confirmation(
+        client,
+        settings.tenant_id,
+        confirmed,
+        readable=False,
+    )
+    assert_confirmation_rejected(
+        confirmed
+        | {
+            "confirmation_evidence_id": unreadable_id,
+            "confirmation_nonce": unreadable_nonce,
+        }
+    )
 
 
 @pytest.mark.integration
@@ -738,6 +821,7 @@ def test_local_ui_exposes_review_correct_confirm_trace_and_revoke(context_runtim
         "Correct",
         "Review",
         "CONFIRM_ACTION",
+        "Action JSON",
         "Trace",
         "Revoke Evidence",
         "Episode Capture",

@@ -1,17 +1,10 @@
-"""Deterministic serialization primitives for context bindings and traces."""
+"""Compatibility exports for deterministic domain serialization."""
 
 from __future__ import annotations
 
-import hashlib
-import json
+from milai.domain.action_identity import canonical_json, canonical_sha256
 
-
-def canonical_json(value: object) -> str:
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-
-
-def sha256(value: object) -> str:
-    return hashlib.sha256(canonical_json(value).encode()).hexdigest()
+sha256 = canonical_sha256
 
 
 __all__ = ["canonical_json", "sha256"]

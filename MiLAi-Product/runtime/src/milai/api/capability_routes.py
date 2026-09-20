@@ -34,6 +34,7 @@ def capabilities():  # type: ignore[no-untyped-def]
             "api_version": "1",
             "contract_version": "agent.v1",
             "runtime_version": __version__,
+            "tenant_id": str(settings.tenant_id),
             "profile": principal.profile,
             "capabilities": sorted(principal.capabilities),
             "agent_profiles": profiles,

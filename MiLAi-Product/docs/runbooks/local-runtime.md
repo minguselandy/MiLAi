@@ -40,8 +40,10 @@ curl --fail http://127.0.0.1:18080/health/ready
 本地控制台位于 `http://127.0.0.1:18080/`。备份/恢复与 projection/purge 恢复分别见
 `backup-restore.md`、`projection-and-purge-recovery.md`。
 
-控制台中的 action-sensitive Chat 会先摄取一条短时有效的 `USER_CONFIRMATION` Evidence，再把
-其 ID 与 nonce 交给 Chat；只输入 `CONFIRM_ACTION` 文本不会绕过确认门。Episode capture 只接受
+控制台中的 action-sensitive Chat 会把 action JSON 规范化为 `action_digest`，再摄取一条绑定
+tenant、query、active goal、scope、authority 与 action digest 的短时 `USER_CONFIRMATION`
+Evidence，并把其 ID 与 nonce 交给 Chat；只输入 `CONFIRM_ACTION` 文本或重放其他请求的
+confirmation 都不会绕过确认门。Episode capture 只接受
 当前 tenant 中真实存在的 Evidence/ChatTurn/ContextCapsule 引用，Settlement 只能走 Steward
 procedure，并且不会自动创建 ClaimVersion。
 

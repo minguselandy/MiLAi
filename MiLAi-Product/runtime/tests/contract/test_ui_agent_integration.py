@@ -13,11 +13,14 @@ def test_local_console_exposes_agent_status_inbox_joint_trace_and_data_gate() ->
         "inspect-issue-id",
         "copy-mcp",
         "data-classification",
+        "action",
     ):
         assert marker in html
     assert "/v1/capabilities" in javascript
     assert "/v1/proposals?status=PENDING_REVIEW&limit=50" in javascript
     assert "DATA_MODE_BLOCKED" in javascript
+    assert "chat-confirmation:v2:" in javascript
+    assert "action_digest: actionDigest" in javascript
     config_source = javascript[javascript.index("const config = {") :]
     assert "tokenPlaceholder" in config_source
     assert 'byId("token").value' not in config_source

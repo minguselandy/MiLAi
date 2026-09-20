@@ -36,6 +36,7 @@ class ChatRequest(BaseModel):
     byte_budget: int = Field(default=16_384, ge=64, le=1_000_000)
     ttl_seconds: int = Field(default=900, ge=1, le=86_400)
     action_sensitive: bool = False
+    action_digest: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
     live_confirmation: Literal["CONFIRM_ACTION"] | None = None
     confirmation_evidence_id: UUID | None = None
     confirmation_nonce: UUID | None = None
@@ -51,6 +52,8 @@ class ChatRequest(BaseModel):
                 raise ValueError("action-sensitive chat requires ACTION_SAFE authority")
             if not self.requested_scope:
                 raise ValueError("action-sensitive chat requires a non-empty scope")
+            if self.action_digest is None:
+                raise ValueError("action-sensitive chat requires an action_digest")
             confirmation_values = (
                 self.live_confirmation,
                 self.confirmation_evidence_id,
@@ -60,13 +63,16 @@ class ChatRequest(BaseModel):
                 value is not None for value in confirmation_values
             ):
                 raise ValueError("live confirmation requires Evidence ID and nonce")
-        elif any(
-            value is not None
-            for value in (
-                self.live_confirmation,
-                self.confirmation_evidence_id,
-                self.confirmation_nonce,
-            )
-        ):
-            raise ValueError("live confirmation is only valid for action-sensitive chat")
+        else:
+            if self.action_digest is not None:
+                raise ValueError("action_digest is only valid for action-sensitive chat")
+            if any(
+                value is not None
+                for value in (
+                    self.live_confirmation,
+                    self.confirmation_evidence_id,
+                    self.confirmation_nonce,
+                )
+            ):
+                raise ValueError("live confirmation is only valid for action-sensitive chat")
         return self

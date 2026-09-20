@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from milai.application.context_prepare.serialization import sha256
-from milai.domain import PrepareContextRequest
+from milai.domain import PrepareContextRequest, action_identity_digest
 from milai.persistence import SessionContext
 
 
@@ -34,7 +34,18 @@ def binding_digest(
             "tokenizer_digest": request.tokenizer_digest,
             "policy_digest": request.policy_digest,
             "budget": request.budget.model_dump(mode="json"),
-            "action_digest": request.action_digest,
+            "action_identity_digest": (
+                action_identity_digest(
+                    tenant_id=context.tenant_id,
+                    query=request.query,
+                    active_goal=request.active_goal,
+                    requested_scope=request.requested_scope,
+                    required_authority=request.required_authority,
+                    action_digest=request.action_digest,
+                )
+                if request.action_digest is not None
+                else None
+            ),
         }
     )
 
