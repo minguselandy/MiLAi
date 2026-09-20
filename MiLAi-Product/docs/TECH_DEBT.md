@@ -11,8 +11,9 @@ Phase 2 diagnosis baseline: Product tree
 `c1895e37defe5effbb5ce489613d0528dc8f3fd5`. B2 remediation baseline: Product tree
 `a93268d94a73e5aee53150ca4be9bbc5f37f76d0173c5be72633cc54cf2ea382`, source commit
 `28fa9211d54032243eac3aac6a3819aca41bff2b`. Phase 2C-1 diagnosis uses the same
-Product tree with source commit `fa16bb7c1b28b16b15c1800df86999804e729d3b`. Results were verified on
-2026-09-20.
+Product tree with source commit `fa16bb7c1b28b16b15c1800df86999804e729d3b`. Phase 2C-1 remediation
+baseline is Product tree `2dddd26130943834468e7944f3b422c2aa81e64611256cb7f497e7f96e32b0a1`,
+source commit `6fbb717ba2e9c77fd8be071725b2f25a0d771cb4`. Results were verified on 2026-09-20.
 
 | Item | State | 当前证据/下一步 |
 | --- | --- | --- |
@@ -21,7 +22,7 @@ Product tree with source commit `fa16bb7c1b28b16b15c1800df86999804e729d3b`. Resu
 | validation-token TTL vs capsule lifecycle | FIXED | [`docs/revalidation/context-validation-lifecycle/REVALIDATION.md`](revalidation/context-validation-lifecycle/REVALIDATION.md); diagnosis FAIL is preserved, while current-tree validation reads authoritative capsule lifecycle, clamps lease expiry, and exact-refreshes lifecycle misses |
 | projection purge/rebuild | FIXED | [`docs/revalidation/projection-purge-rebuild/REVALIDATION.md`](revalidation/projection-purge-rebuild/REVALIDATION.md); targeted PostgreSQL execution passed, including rebuild-after-revoke non-resurrection |
 | confirmation binding to query/action | FIXED | [`docs/revalidation/confirmation-binding/REVALIDATION.md`](revalidation/confirmation-binding/REVALIDATION.md); diagnosis FAIL is preserved, while current-tree remediation binds tenant/query/goal/scope/authority/action digest and passes replay, expiry, revoke, and readability regressions |
-| OpenWorker HTTP auth/exposure | OPEN | [`docs/revalidation/openworker-http-exposure/REVALIDATION.md`](revalidation/openworker-http-exposure/REVALIDATION.md); bearer 与 auth-before-parse 已闭合，但 executable 接受 wildcard bind，且 plain HTTP 可经非 loopback interface 到达；token 文件替换的在线 revocation 语义仍待 owner contract 明确 |
+| OpenWorker HTTP auth/exposure | FIXED | [`docs/revalidation/openworker-http-exposure/REVALIDATION.md`](revalidation/openworker-http-exposure/REVALIDATION.md); executable 仅接受显式 loopback/private literal，拒绝 wildcard/hostname/multicast/public bind；Bearer 为进程生命周期 capability，stop/replace/restart 完成 rotation |
 | resolver lexical-language assumptions | NEEDS_REVALIDATION | 只做诊断，不在重组 PR 调 lexical/ranking |
 | Runtime vs Host/provider trace ownership | NEEDS_REVALIDATION | 固定 trace owner、span 关联和 payload 脱敏边界 |
 | worker --once docs/behavior | NEEDS_REVALIDATION | 对照真实 CLI、lease、退出码与 runbook |

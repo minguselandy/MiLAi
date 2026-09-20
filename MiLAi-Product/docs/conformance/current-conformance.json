@@ -5,60 +5,38 @@
     "claims": [
       {
         "coverage": "SCOPED",
-        "covered_statement": "Retained task-slot validation cannot outlive or reuse a missing, inactive, expired, or content-mismatched server-owned ContextCapsule.",
-        "debt_id": "context-validation-lifecycle",
+        "covered_statement": "OpenWorker Host plain-HTTP ingress rejects wildcard, ambiguous, multicast, and non-local bind targets, requires exact Bearer authentication, and treats the startup token as a process-lifetime capability.",
+        "debt_id": "openworker-http-auth-exposure",
         "execution_status": "PASS",
         "limits": [
-          "The receipt covers retained task-slot capsule lifecycle and exact-refresh recovery only; it does not claim complete bounded-context, lineage, revocation, or abstention coverage."
+          "The receipt covers the OpenWorker Host ingress listener, authentication ordering, process-lifetime token rotation, and trace redaction only; it does not claim complete G8 coverage.",
+          "Deployment must still prove that an explicit private address belongs to the run-owned isolated Docker bridge.",
+          "Plain HTTP is approved only for the explicitly bound, deployment-approved isolated local interface; remote, LAN, or shared-network transport is outside this contract.",
+          "The receipt makes no I-11 claim."
         ],
         "negative_case_ids": [
-          "LIFECYCLE-REPAIR-NEG-001",
-          "LIFECYCLE-REPAIR-NEG-002",
-          "LIFECYCLE-REPAIR-NEG-003",
-          "LIFECYCLE-REPAIR-NEG-004",
-          "LIFECYCLE-REPAIR-NEG-005"
+          "HTTP-REPAIR-NEG-001",
+          "HTTP-REPAIR-NEG-002",
+          "HTTP-REPAIR-NEG-003",
+          "HTTP-REPAIR-NEG-004"
         ],
         "positive_case_ids": [
-          "LIFECYCLE-REPAIR-POS-001",
-          "LIFECYCLE-REPAIR-POS-002",
-          "LIFECYCLE-REPAIR-POS-003"
+          "HTTP-REPAIR-POS-001",
+          "HTTP-REPAIR-POS-002",
+          "HTTP-REPAIR-POS-003"
         ],
-        "receipt": "docs/revalidation/context-validation-lifecycle/remediation.receipt.json",
+        "receipt": "docs/revalidation/openworker-http-exposure/remediation.receipt.json",
         "status": "PASS"
-      },
-      {
-        "coverage": "SCOPED",
-        "covered_statement": "OpenWorker Host ingress must constrain plain HTTP to its explicitly approved local interface and reject unintended network exposure.",
-        "debt_id": "openworker-http-auth-exposure",
-        "execution_status": "FAIL",
-        "limits": [
-          "The receipt diagnoses the Host ingress listener and bearer boundary only; it does not claim complete G8 least-privilege coverage.",
-          "The process cannot attest that an explicit address belongs to a run-owned Docker bridge; that remains a deployment gate.",
-          "TLS is not required by this receipt for an isolated local bridge and is not treated as the diagnosed defect.",
-          "Token-file replacement behavior is recorded without deciding whether process-lifetime capability semantics or hot revocation is the final contract.",
-          "OPEN technical debt is not, by itself, an Architecture 1.0 DEVIATION decision."
-        ],
-        "negative_case_ids": [
-          "HTTP-NEG-001",
-          "HTTP-NEG-002",
-          "HTTP-NEG-003"
-        ],
-        "positive_case_ids": [
-          "HTTP-POS-001"
-        ],
-        "receipt": "docs/revalidation/openworker-http-exposure/receipt.json",
-        "status": "FAIL"
       }
     ],
-    "failed_claim_count": 1,
-    "historical_receipt_count": 5,
+    "failed_claim_count": 0,
+    "historical_receipt_count": 7,
     "index": "docs/revalidation/INDEX.md",
     "preserved_failed_receipt_count": 3,
     "receipts": [
-      "docs/revalidation/context-validation-lifecycle/remediation.receipt.json",
-      "docs/revalidation/openworker-http-exposure/receipt.json"
+      "docs/revalidation/openworker-http-exposure/remediation.receipt.json"
     ],
-    "validated_receipt_count": 7
+    "validated_receipt_count": 8
   },
   "claim_policy": {
     "architecture_conformant": false,
@@ -82,7 +60,7 @@
     "map": "docs/conformance/invariant-test-map.json",
     "status": "UNVERIFIED"
   },
-  "invariant_test_map_sha256": "a14a98624dffd3e7ed0f10e47b5728731599b838dab0d7e3da3d6741ce854cd6",
+  "invariant_test_map_sha256": "2576029adbb3ee71167fc90ff7047de6694eebc2c8a7e1e8455691935d4a95f1",
   "known_limitations": [
     "Behavior revalidation receipts are identity-bound and may only promote an item when they explicitly declare COMPLETE coverage.",
     "AF-09 historical tarballs are archive-owned and are represented by tracked classification metadata, not Product Git bytes.",
@@ -95,9 +73,9 @@
     "0056_host_notes"
   ],
   "openworker_version": "0.1.0",
-  "product_commit": "fa16bb7c1b28b16b15c1800df86999804e729d3b",
-  "product_manifest_sha256": "0647966eed14887c6602b4a61c8fb5e8599978cbdcababb885bfd273f34e337e",
-  "product_tree_sha256": "a93268d94a73e5aee53150ca4be9bbc5f37f76d0173c5be72633cc54cf2ea382",
+  "product_commit": "6fbb717ba2e9c77fd8be071725b2f25a0d771cb4",
+  "product_manifest_sha256": "28abb4b6b711ec49b5880825afd247d88526487ff87d47608b1f9e06c7e872f8",
+  "product_tree_sha256": "2dddd26130943834468e7944f3b422c2aa81e64611256cb7f497e7f96e32b0a1",
   "product_version": "0.1.0-candidate",
   "runtime_version": "0.1.5",
   "schema_version": "milai-architecture-conformance-v1",
@@ -125,5 +103,5 @@
       "status": "UNVERIFIED"
     }
   ],
-  "verified_at": "2026-09-20T13:28:22+00:00"
+  "verified_at": "2026-09-20T14:51:04+00:00"
 }
