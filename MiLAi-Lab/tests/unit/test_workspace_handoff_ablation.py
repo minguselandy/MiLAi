@@ -14,6 +14,11 @@ import run_workspace_handoff_ablation as entry
 from workspace_policy_host import Generation
 from workspace_task_provider import Provider
 
+REAL_TOKENIZER_AVAILABLE = all(
+    (entry.TOKENIZER / name).is_file()
+    for name in ("effective-tokenizer.json", "chat_template.jinja")
+)
+
 
 def formed():
     counts = MockCounts()
@@ -63,6 +68,10 @@ def test_forks_preserve_sources_workspace_receipts_and_isolate_actions():
 
 
 @pytest.mark.parametrize("failure", [None, "unknown", "malformed", "empty", "truncated"])
+@pytest.mark.skipif(
+    not REAL_TOKENIZER_AVAILABLE,
+    reason="external V0213 tokenizer evidence is not part of the Git checkout",
+)
 def test_real_entry_with_mock_http_preserves_accounting_and_full_schedule(
     tmp_path, monkeypatch, failure
 ):

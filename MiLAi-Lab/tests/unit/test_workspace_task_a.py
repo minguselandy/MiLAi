@@ -14,6 +14,11 @@ from v02_local_provider import accounting, read_events
 from v0213_provider import MODEL
 from workspace_task_provider import Provider
 
+REAL_TOKENIZER_AVAILABLE = all(
+    (entry.TOKENIZER / name).is_file()
+    for name in ("effective-tokenizer.json", "chat_template.jinja")
+)
+
 
 def package():
     return {
@@ -60,6 +65,10 @@ class MockCounts:
         return 100
 
 
+@pytest.mark.skipif(
+    not REAL_TOKENIZER_AVAILABLE,
+    reason="external V0213 tokenizer evidence is not part of the Git checkout",
+)
 @pytest.mark.parametrize("mode", ["COMMON_CONTEXT", "MANAGED_WORKSET"])
 @pytest.mark.parametrize("failure", [None, "unknown_usage", "truncated"])
 def test_full_run_logs_real_dispatch_and_stops_unknown_or_truncated(
