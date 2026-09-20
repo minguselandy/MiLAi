@@ -122,6 +122,18 @@ composition 全部 PASS 后才合并。
 - `milai.application.retrieval` 继续暴露原 temporal helper import；route、ranking、threshold、
   weight、reference-time 语义均未改动。
 
+### 2026-09-21 — C2 temporal merged and selection extraction started
+
+- Retrieval temporal PR #7 Run #34：17 jobs success，composition PASS。
+- PR #7 rebase merged；post-merge `main` 为
+  `a8c5b083c27c8581304216fc42adb58acca4e3fa`。
+- post-merge Run #35：17 jobs success，composition PASS。
+- 从该 exact green `main` 创建 `cleanup/03-retrieval-selection`；本轮只移动 Context budget、
+  weighted set-cover 与 lexical MMR helper，不同时抽 acquisition、operators、assembly 或 trace。
+- 九个移动 helper 的 AST 与 `a8c5b083c27c8581304216fc42adb58acca4e3fa`
+  中的原实现逐项一致；旧 facade helper import 继续指向同一函数对象。
+- Context budget、selection weights、sorting/tie-break 与 Reader semantic projection 均未改变。
+
 ## Completion rule
 
 只有总指令第 24 节全部条件有当前权威证据时，才把本 Goal 标记为 COMPLETE。
