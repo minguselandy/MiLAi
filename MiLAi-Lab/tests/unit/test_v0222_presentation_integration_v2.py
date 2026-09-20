@@ -482,6 +482,7 @@ def test_complete_real_scoped_stack_16_then_24(tmp_path, monkeypatch):
     assert all(scope.status == "CLOSED_VERIFIED_TWO_OBSERVATIONS" for scope in scopes)
 
 
+@pytest.mark.regression
 def test_first_wrong_intent_stops_without_business_or_p4(tmp_path, monkeypatch):
     batch, calls, scopes = setup(tmp_path, monkeypatch)
     capacity(batch, calls, scopes, "P3")
@@ -511,6 +512,7 @@ def test_first_wrong_intent_stops_without_business_or_p4(tmp_path, monkeypatch):
     assert batch.snapshot()["stop"] == snapshot["stop"]
 
 
+@pytest.mark.regression
 def test_actual_raw_and_visible_corruption_cannot_finish(tmp_path, monkeypatch):
     batch, calls, scopes = setup(tmp_path, monkeypatch)
     capacity(batch, calls, scopes, "P3")

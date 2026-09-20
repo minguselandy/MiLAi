@@ -28,6 +28,10 @@ def no_network(monkeypatch):
     monkeypatch.setattr(socket, "create_connection", forbidden)
 
 
+@pytest.mark.skipif(
+    not (prep.PARENT_ROOT / "manifest.json").is_file(),
+    reason="external historical V0222 preparation evidence is not part of the Git checkout",
+)
 def test_full_original_matrix_changes_only_id_scope_and_initial_hash():
     before = read(prep.PARENT_ROOT / "manifest.json")["contract"]
     plan = prep.episode_specs()
