@@ -3,9 +3,11 @@ from __future__ import annotations
 import argparse
 import hashlib
 import hmac
+import ipaddress
 import json
 import os
 import re
+import socket
 import stat
 import threading
 import time
@@ -687,6 +689,34 @@ def _load_ingress_token(path: Path) -> str:
     if not 16 <= len(token) <= 256 or _IDENTIFIER_SAFE.fullmatch(token) is None:
         raise OpenWorkerAdapterError("INGRESS_TOKEN_INVALID")
     return token
+
+
+_PRIVATE_IPV4_NETWORKS = tuple(
+    ipaddress.ip_network(cidr)
+    for cidr in ("10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16")
+)
+_PRIVATE_IPV6_NETWORK = ipaddress.ip_network("fc00::/7")
+
+
+def _validate_listen_host(value: str) -> str:
+    """Accept only an explicit loopback or private IP literal."""
+    if value != value.strip():
+        raise OpenWorkerAdapterError("LISTEN_HOST_INVALID")
+    try:
+        address = ipaddress.ip_address(value)
+    except ValueError as exc:
+        raise OpenWorkerAdapterError("LISTEN_HOST_INVALID") from exc
+    if address.is_unspecified or address.is_multicast:
+        raise OpenWorkerAdapterError("LISTEN_HOST_INVALID")
+    if isinstance(address, ipaddress.IPv4Address):
+        allowed = address.is_loopback or any(
+            address in network for network in _PRIVATE_IPV4_NETWORKS
+        )
+    else:
+        allowed = address.is_loopback or address in _PRIVATE_IPV6_NETWORK
+    if not allowed:
+        raise OpenWorkerAdapterError("LISTEN_HOST_INVALID")
+    return address.compressed
 
 
 def _load_startup_task_policy(
@@ -3609,6 +3639,19 @@ class Handler(BaseHTTPRequestHandler):
             self._write_error(502, str(exc))
 
 
+class _IPv6ThreadingHTTPServer(ThreadingHTTPServer):
+    address_family = socket.AF_INET6
+
+
+def _build_http_server(host: str, port: int) -> ThreadingHTTPServer:
+    server_type = (
+        _IPv6ThreadingHTTPServer
+        if ipaddress.ip_address(host).version == 6
+        else ThreadingHTTPServer
+    )
+    return server_type((host, port), Handler)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Serve OpenWorker through the U1 Host adapter")
     parser.add_argument("--manifest", type=Path, required=True)
@@ -3659,6 +3702,7 @@ def main() -> None:
     args = parser.parse_args()
     if not 1 <= args.listen_port <= 65535:
         raise SystemExit("listen port is invalid")
+    listen_host = _validate_listen_host(args.listen_host)
     adapter = OpenWorkerProviderAdapter(
         args.manifest,
         args.ledger,
@@ -3677,7 +3721,7 @@ def main() -> None:
         memory_data_classification=args.memory_data_classification,
         evidence_use_mode=args.evidence_use_mode,
     )
-    server = ThreadingHTTPServer((args.listen_host, args.listen_port), Handler)
+    server = _build_http_server(listen_host, args.listen_port)
     server.adapter = adapter  # type: ignore[attr-defined]
     server.ingress_token = _load_ingress_token(args.ingress_token_file)  # type: ignore[attr-defined]
     try:

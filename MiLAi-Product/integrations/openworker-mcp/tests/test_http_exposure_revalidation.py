@@ -12,7 +12,11 @@ from typing import Any
 import pytest
 
 from milai_openworker_mcp.host import orchestrator
-from milai_openworker_mcp.host.orchestrator import Handler, _load_ingress_token
+from milai_openworker_mcp.host.orchestrator import (
+    _build_http_server,
+    _load_ingress_token,
+    _validate_listen_host,
+)
 
 OLD_CAPABILITY = "synthetic-process-capability-old"
 NEW_CAPABILITY = "synthetic-process-capability-new"
@@ -20,7 +24,7 @@ WILDCARD_IPV4 = "0.0.0.0"  # noqa: S104 - the diagnosis intentionally exercises 
 
 
 def _start_server(host: str, token: str) -> tuple[ThreadingHTTPServer, threading.Thread]:
-    server = ThreadingHTTPServer((host, 0), Handler)
+    server = _build_http_server(_validate_listen_host(host), 0)
     server.ingress_token = token  # type: ignore[attr-defined]
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -133,22 +137,10 @@ def test_executable_accepts_explicit_wildcard_listen_host(
         def close(self) -> None:
             captured["adapter_closed"] = True
 
-    class FakeServer:
-        def __init__(self, address: tuple[str, int], handler: object) -> None:
-            captured["address"] = address
-            captured["handler"] = handler
-
-        def serve_forever(self) -> None:
-            captured["served"] = True
-
-        def server_close(self) -> None:
-            captured["server_closed"] = True
-
     token_file = tmp_path / "ingress-token"
     token_file.write_text(OLD_CAPABILITY, encoding="ascii")
     token_file.chmod(0o600)
     monkeypatch.setattr(orchestrator, "OpenWorkerProviderAdapter", FakeAdapter)
-    monkeypatch.setattr(orchestrator, "ThreadingHTTPServer", FakeServer)
     monkeypatch.setattr(
         sys,
         "argv",
@@ -171,26 +163,46 @@ def test_executable_accepts_explicit_wildcard_listen_host(
         ],
     )
 
-    orchestrator.main()
-
-    assert captured == {
-        "address": (WILDCARD_IPV4, 19090),
-        "handler": Handler,
-        "served": True,
-        "adapter_closed": True,
-        "server_closed": True,
-    }
+    with pytest.raises(orchestrator.OpenWorkerAdapterError, match="LISTEN_HOST_INVALID"):
+        orchestrator.main()
+    assert captured == {}
 
 
 def test_plain_http_with_bearer_is_accepted_over_non_loopback_interface() -> None:
     non_loopback = _non_loopback_ipv4()
-    server, thread = _start_server(WILDCARD_IPV4, OLD_CAPABILITY)
+    server, thread = _start_server(non_loopback, OLD_CAPABILITY)
     try:
         status, payload = _get_models(non_loopback, server.server_port, OLD_CAPABILITY)
         assert status == 200
         assert payload["data"][0]["owned_by"] == "milai-local"
     finally:
         _stop_server(server, thread)
+
+
+@pytest.mark.parametrize(
+    "host",
+    ["127.0.0.1", "::1", "10.23.0.1", "172.18.0.1", "192.168.50.1", "fd00::1"],
+)
+def test_explicit_loopback_and_private_literals_are_accepted(host: str) -> None:
+    assert _validate_listen_host(host)
+
+
+@pytest.mark.parametrize(
+    "host",
+    [
+        WILDCARD_IPV4,
+        "::",
+        "localhost",
+        "example.com",
+        "224.0.0.1",
+        "ff02::1",
+        "8.8.8.8",
+        "2001:4860:4860::8888",
+    ],
+)
+def test_wildcard_ambiguous_multicast_and_public_hosts_are_rejected(host: str) -> None:
+    with pytest.raises(orchestrator.OpenWorkerAdapterError, match="LISTEN_HOST_INVALID"):
+        _validate_listen_host(host)
 
 
 def test_token_file_replacement_does_not_revoke_process_token(tmp_path: Path) -> None:
@@ -210,3 +222,27 @@ def test_token_file_replacement_does_not_revoke_process_token(tmp_path: Path) ->
         assert payload["error"]["reason_code"] == "AUTHENTICATION_REQUIRED"
     finally:
         _stop_server(server, thread)
+
+
+def test_adapter_restart_rotates_process_lifetime_capability(tmp_path: Path) -> None:
+    token_file = tmp_path / "ingress-token"
+    token_file.write_text(OLD_CAPABILITY, encoding="ascii")
+    token_file.chmod(0o600)
+    old_server, old_thread = _start_server(
+        "127.0.0.1", _load_ingress_token(token_file)
+    )
+    try:
+        assert _get_models("127.0.0.1", old_server.server_port, OLD_CAPABILITY)[0] == 200
+    finally:
+        _stop_server(old_server, old_thread)
+
+    token_file.write_text(NEW_CAPABILITY, encoding="ascii")
+    token_file.chmod(0o600)
+    new_server, new_thread = _start_server(
+        "127.0.0.1", _load_ingress_token(token_file)
+    )
+    try:
+        assert _get_models("127.0.0.1", new_server.server_port, OLD_CAPABILITY)[0] == 401
+        assert _get_models("127.0.0.1", new_server.server_port, NEW_CAPABILITY)[0] == 200
+    finally:
+        _stop_server(new_server, new_thread)

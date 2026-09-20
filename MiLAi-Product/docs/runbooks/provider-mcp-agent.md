@@ -189,6 +189,16 @@ Memory tools from the provider payload. If the Memory result is `NO_MEMORY`, `UN
 unavailable or otherwise insufficient for a memory-required operation, return the typed Host outcome
 and prohibit provider execution.
 
+Bind the Host adapter to one explicit loopback or private IP literal. Wildcard addresses, hostnames,
+multicast addresses, and public/routable literals are rejected by the executable. For container
+ingress, deployment remains responsible for proving that the exact private address belongs to the
+run-owned isolated Docker bridge; do not use host networking. Plain HTTP is allowed only on that
+deployment-approved local interface.
+
+The ingress Bearer is immutable for the adapter process lifetime. To rotate or revoke it, stop the
+old adapter, replace the mode-`0400`/`0600` token file, and start a new adapter. File replacement while
+the old process remains live is not an online revocation operation.
+
 For Product-05 exchange persistence, start an additional trusted-host broker with the exact
 `submitter` profile and pass its socket to the Host as `--submitter-socket`, together with a
 Host-selected `--memory-subject-id` and explicit `--memory-data-classification`. The submitter socket

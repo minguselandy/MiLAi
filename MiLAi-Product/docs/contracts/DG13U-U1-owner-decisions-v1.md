@@ -63,8 +63,13 @@ behavior-changing U1 patch is authorized.
    directory, write/review/revoke capability, provider capability, or direct Runtime/vLLM route. It
    additionally receives one run-owned Host provider HTTP origin and a random ingress Bearer token.
    That token authenticates only the OpenWorker-to-Host HTTP boundary; it is not a MiLA read token or
-   an upstream provider capability. The Host binds only to the run-owned Docker bridge gateway and a
-   random port, compares the token in constant time, and accepts no request from another network.
+   an upstream provider capability. The Host executable accepts only an explicit loopback or private
+   IP literal, rejects wildcard, hostname, multicast, and public/routable bind targets, and compares
+   the token in constant time. Deployment must prove that a selected private address is the run-owned
+   Docker bridge gateway and accepts no request from another network. Plain HTTP is permitted only on
+   that explicitly bound, deployment-approved isolated local interface. The run-random ingress token
+   is an adapter-process-lifetime capability: it is read once at startup, and rotation or revocation
+   requires stopping the adapter, replacing the token, and starting a new adapter process.
 7. **First memory transport** — MCP over the existing profile-scoped UDS broker is the only U1
    memory transport. Direct and HTTP *memory* transports are not implemented or silently selected
    as fallback. The separate OpenWorker-to-Host provider HTTP origin in decision 6 is required by the
