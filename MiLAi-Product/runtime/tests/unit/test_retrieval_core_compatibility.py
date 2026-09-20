@@ -1,5 +1,12 @@
 from milai.application import retrieval
-from milai.application.retrieval_core import acquisition, candidates, policy, selection, temporal
+from milai.application.retrieval_core import (
+    acquisition,
+    candidates,
+    operators,
+    policy,
+    selection,
+    temporal,
+)
 
 
 def test_retrieval_facade_preserves_extracted_helper_imports() -> None:
@@ -55,3 +62,16 @@ def test_retrieval_facade_preserves_acquisition_helper_imports() -> None:
     )
     assert retrieval._acquisition_reference_material is acquisition._acquisition_reference_material
     assert retrieval._use_acquisition_composition is acquisition._use_acquisition_composition
+
+
+def test_retrieval_facade_preserves_operator_helper_imports() -> None:
+    assert (
+        retrieval._explicit_compound_subject_matches
+        is operators._explicit_compound_subject_matches
+    )
+    assert retrieval._state_count_cover is operators._state_count_cover
+    assert (
+        retrieval._execute_operator_with_accepted_inputs
+        is operators._execute_operator_with_accepted_inputs
+    )
+    assert retrieval._operator_support_refs is operators._operator_support_refs
