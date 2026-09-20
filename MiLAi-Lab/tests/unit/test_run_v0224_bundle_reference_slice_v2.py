@@ -499,6 +499,9 @@ def real_public_pins():
     from v0222_admission_read_scope import AdmissionReadScope
     from v0222_scoped_cpu_batch import CPU_ROOT, PRESENTATION_BINDING, PRESENTATION_ROOT
 
+    if not (CPU_ROOT / "manifest.json").is_file():
+        pytest.skip("external V0222 scoped CPU evidence is not part of the Git checkout")
+
     original = worker._read(CPU_ROOT / "manifest.json")["contract"]
     with AdmissionReadScope() as scope:
         mapping = fixture._public_inputs(scope, PRESENTATION_ROOT, PRESENTATION_BINDING)

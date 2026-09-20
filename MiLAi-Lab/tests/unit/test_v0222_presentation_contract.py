@@ -22,6 +22,9 @@ from v0222_presentation_contract import (
 )
 
 FROZEN = Path("/cra/memory/mx_memory/evidence/v0222/20260911-http-r1/full-reference")
+FROZEN_REFERENCE_AVAILABLE = all(
+    (FROZEN / f"{stage}-reference-index.json").is_file() for stage in ("P3", "P4")
+)
 
 
 @pytest.fixture(autouse=True)
@@ -238,6 +241,10 @@ def test_entire_p4_chain_survives_each_turn_and_finish_only(turn, writes):
         present(result)
 
 
+@pytest.mark.skipif(
+    not FROZEN_REFERENCE_AVAILABLE,
+    reason="external frozen V0222 presentation references are not part of the Git checkout",
+)
 @pytest.mark.parametrize(
     "stage,index",
     [

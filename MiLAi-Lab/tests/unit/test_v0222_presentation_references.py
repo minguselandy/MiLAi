@@ -28,6 +28,10 @@ from v0222_presentation_references import (
 )
 
 PARENT = Path("/cra/memory/mx_memory/evidence/v0222/20260911-http-r1")
+EXTERNAL_REFERENCE_AVAILABLE = all(
+    (PARENT / "full-reference" / f"{stage}-reference-index.json").is_file()
+    for stage in ("P3", "P4")
+)
 
 
 @pytest.fixture(autouse=True)
@@ -54,6 +58,10 @@ def materialize(tmp_path, source):
     return write_reference(tmp_path, spec, source["turn"], canonical, output)
 
 
+@pytest.mark.skipif(
+    not EXTERNAL_REFERENCE_AVAILABLE,
+    reason="external frozen V0222 presentation references are not part of the Git checkout",
+)
 def test_all_96_complete_original_reference_layers(tmp_path):
     sources = source_rows()
     assert len(sources) == 96
@@ -83,6 +91,10 @@ def test_all_96_complete_original_reference_layers(tmp_path):
     assert not list(tmp_path.rglob("provider-ledger*"))
 
 
+@pytest.mark.skipif(
+    not EXTERNAL_REFERENCE_AVAILABLE,
+    reason="external frozen V0222 presentation references are not part of the Git checkout",
+)
 @pytest.mark.parametrize("kind", KINDS)
 def test_each_layer_hash_is_required(tmp_path, kind):
     row = materialize(tmp_path, source_rows()[0])
@@ -92,6 +104,10 @@ def test_each_layer_hash_is_required(tmp_path, kind):
         validate_reference(bad)
 
 
+@pytest.mark.skipif(
+    not EXTERNAL_REFERENCE_AVAILABLE,
+    reason="external frozen V0222 presentation references are not part of the Git checkout",
+)
 @pytest.mark.parametrize("change", ("wire", "diff", "compiler", "missing_layer", "candidate"))
 def test_rehashed_or_metadata_tampering_cannot_pass(tmp_path, change):
     row = materialize(tmp_path, source_rows()[0])
@@ -117,6 +133,10 @@ def test_rehashed_or_metadata_tampering_cannot_pass(tmp_path, change):
         validate_reference(row)
 
 
+@pytest.mark.skipif(
+    not EXTERNAL_REFERENCE_AVAILABLE,
+    reason="external frozen V0222 presentation references are not part of the Git checkout",
+)
 def test_reference_is_append_only(tmp_path):
     source = source_rows()[0]
     materialize(tmp_path, source)
