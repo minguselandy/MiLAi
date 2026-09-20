@@ -16,9 +16,19 @@ from milai_lab.methods.workspace_policy import Exchange, Message
 from workspace_policy_host import Generation
 from workspace_task_provider import Provider
 
+REAL_TOKENIZER_AVAILABLE = all(
+    (entry.TOKENIZER / name).is_file()
+    for name in ("effective-tokenizer.json", "chat_template.jinja")
+)
+REAL_RENDERER_AVAILABLE = Path("/cra/qwen36-35B").is_dir()
+
 
 @pytest.mark.parametrize(
     "failure", [None, "empty", "overlong", "malformed", "truncated", "unknown"]
+)
+@pytest.mark.skipif(
+    not REAL_TOKENIZER_AVAILABLE,
+    reason="external V0213 tokenizer evidence is not part of the Git checkout",
 )
 def test_complete_transition_exact_data_and_failure_paths(tmp_path, monkeypatch, failure):
     sent = []
@@ -207,6 +217,10 @@ def test_natural_history_ignores_k_and_handoff_occurs_once():
     assert row["mode"] == "COMMON_CONTEXT"
 
 
+@pytest.mark.skipif(
+    not (REAL_TOKENIZER_AVAILABLE and REAL_RENDERER_AVAILABLE),
+    reason="external tokenizer/model materials are not part of the Git checkout",
+)
 def test_effective_capacity_configuration_and_real_tokenizer_above_old_gates():
     counts = entry.Counts()
     value = package()
