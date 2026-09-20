@@ -134,6 +134,19 @@ composition 全部 PASS 后才合并。
   中的原实现逐项一致；旧 facade helper import 继续指向同一函数对象。
 - Context budget、selection weights、sorting/tie-break 与 Reader semantic projection 均未改变。
 
+### 2026-09-21 — C2 selection merged and acquisition extraction started
+
+- Retrieval selection PR #8 Run #36：17 jobs success，composition PASS。
+- PR #8 rebase merged；post-merge `main` 为
+  `2cd1e655ebbc728a3f444c42776404d74bbb73b1`。
+- post-merge Run #37 首次 langgraph 在依赖安装阶段因 PyPI 下载超时失败；单 job 重跑后
+  最新 attempt 17 jobs success，composition PASS。该失败未进入项目测试执行。
+- 从该 exact green `main` 创建 `cleanup/04-retrieval-acquisition`；本轮只移动 formation/raw
+  result composition、acquisition envelopes 与 query-local evidence material helper。
+- 六个移动 helper 的 AST 与 `2cd1e655ebbc728a3f444c42776404d74bbb73b1`
+  中的原实现逐项一致；旧 facade import 继续指向同一函数对象。
+- acquisition planning、execution、strict-operator 判定与 Evidence identity 语义均未改变。
+
 ## Completion rule
 
 只有总指令第 24 节全部条件有当前权威证据时，才把本 Goal 标记为 COMPLETE。
