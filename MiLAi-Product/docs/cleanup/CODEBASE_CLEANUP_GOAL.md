@@ -147,6 +147,18 @@ composition 全部 PASS 后才合并。
   中的原实现逐项一致；旧 facade import 继续指向同一函数对象。
 - acquisition planning、execution、strict-operator 判定与 Evidence identity 语义均未改变。
 
+### 2026-09-21 — C2 acquisition merged and operators extraction started
+
+- Retrieval acquisition PR #9 Run #38：17 jobs success，composition PASS。
+- PR #9 rebase merged；post-merge `main` 为
+  `7a2e08cb7e83b543724ffc95d65d10fb3658f788`。
+- post-merge Run #39：17 jobs success，composition PASS。
+- 从该 exact green `main` 创建 `cleanup/05-retrieval-operators`；本轮只移动 compound-subject
+  matching、scalar-state cover、accepted-input execution 与 operator provenance helper。
+- 四个移动 helper 的 AST 与 `7a2e08cb7e83b543724ffc95d65d10fb3658f788`
+  中的原实现逐项一致；Runtime testkit 与旧 facade import 保持兼容。
+- operator family、operand authority、reranker/cover 规则与 provenance collection 均未改变。
+
 ## Completion rule
 
 只有总指令第 24 节全部条件有当前权威证据时，才把本 Goal 标记为 COMPLETE。
