@@ -1,5 +1,5 @@
 from milai.application import retrieval
-from milai.application.retrieval_core import candidates, policy, temporal
+from milai.application.retrieval_core import candidates, policy, selection, temporal
 
 
 def test_retrieval_facade_preserves_extracted_helper_imports() -> None:
@@ -31,3 +31,15 @@ def test_retrieval_facade_preserves_temporal_helper_imports() -> None:
     assert retrieval._relative_event_intent_overlap is temporal._relative_event_intent_overlap
     assert retrieval._relative_event_distance is temporal._relative_event_distance
     assert retrieval._temporal_rerank is temporal._temporal_rerank
+
+
+def test_retrieval_facade_preserves_selection_helper_imports() -> None:
+    assert retrieval._apply_context_budget is selection._apply_context_budget
+    assert retrieval._context_candidate_budget is selection._context_candidate_budget
+    assert retrieval._context_budget_view is selection._context_budget_view
+    assert retrieval._set_cover_text is selection._set_cover_text
+    assert retrieval._set_cover_tokens is selection._set_cover_tokens
+    assert retrieval._weighted_set_cover_select is selection._weighted_set_cover_select
+    assert retrieval._mmr_select is selection._mmr_select
+    assert retrieval._mmr_tokens is selection._mmr_tokens
+    assert retrieval._jaccard is selection._jaccard
