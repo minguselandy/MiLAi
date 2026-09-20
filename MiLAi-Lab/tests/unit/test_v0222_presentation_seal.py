@@ -113,6 +113,10 @@ def test_incomplete_engineering_or_proof_rejected_before_any_seal(tmp_path, monk
     assert not root.exists()
 
 
+@pytest.mark.skipif(
+    not (module.PARENT_ROOT / "manifest.json").is_file(),
+    reason="external historical V0222 presentation evidence is not part of the Git checkout",
+)
 def test_complete_synthetic_evidence_reaches_authorization_only_after_all_checks(
     tmp_path, monkeypatch
 ):
