@@ -950,6 +950,19 @@ Conformance
 composition
 ```
 
+### 17.1 2026-09-22 候选记录
+
+三个 C10 交付物已生成：`CODEBASE_CLEANUP_RESULTS_v1.md`、`final-module-map.json` 与
+`final-cleanup-baseline.json`。结果记录 baseline `798b7cac21957873791afff6122d3f06a82214c5`、
+最终 implementation main `432153a0065f6ccc6706d670ba7eafafc002c950`、C9 evidence commit、
+六个 hotspot 前后尺寸、内部 owner packages、29 个 receipt nodes、两条 Lab runner migration、
+5 份 current receipts、Product tree/manifest identity 和三项 immutable Git tree objects。
+
+当前状态仍是 `CANDIDATE_PENDING_FINAL_L4`。先固定包含这些交付物的 PR candidate，再执行一次
+17-job full composition；在 run PASS 前不得将本 Goal 标记 COMPLETE。最终 run ID 的回填属于
+metadata-only identity update，必须证明 Product manifest、Lab active source、Lab archive 与
+Artifact Archive tree identity 均未改变，不重复同一 executable tree 的 full composition。
+
 ---
 
 ## 18. PR 路线

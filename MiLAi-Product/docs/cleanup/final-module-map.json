@@ -1,0 +1,43 @@
+{
+  "schema_version": "milai-final-module-map-v1",
+  "baseline_commit": "798b7cac21957873791afff6122d3f06a82214c5",
+  "source_commit": "2803763f47eb846e7c7de68d96758cf23921dcd7",
+  "subsystems": [
+    {
+      "compatibility_entry": "runtime/src/milai/application/retrieval.py",
+      "implementation_root": "runtime/src/milai/application/retrieval_core",
+      "owners": ["acquisition", "assembly", "candidates", "operators", "policy", "selection", "temporal", "trace"]
+    },
+    {
+      "compatibility_entry": "runtime/src/milai/application/memory_context.py",
+      "implementation_root": "runtime/src/milai/application/memory_context_core",
+      "owners": ["activation", "common", "compiler", "contracts", "provenance", "receipts", "rendering", "semantics", "trace", "units", "windows"]
+    },
+    {
+      "compatibility_entry": "integrations/mcp/src/milai_mcp/server.py",
+      "implementation_root": "integrations/mcp/src/milai_mcp",
+      "owners": ["server_codex", "server_contracts", "server_factory", "server_governance", "server_middleware", "server_reader", "server_wire"]
+    },
+    {
+      "compatibility_entry": "integrations/openworker-mcp/src/milai_openworker_mcp/host_adapter.py",
+      "implementation_root": "integrations/openworker-mcp/src/milai_openworker_mcp/host",
+      "owners": ["ingress", "memory_flow", "orchestrator", "provider_bridge", "request_contract", "task_state", "tool_compat", "trace"]
+    },
+    {
+      "compatibility_entries": ["tools/run_product02_context_gate.py", "tools/run_product03_openworker_usability.py"],
+      "implementation_root": "MiLAi-Lab/src/milai_lab/runners",
+      "owners": ["product02_context_gate", "product03_openworker_usability"]
+    }
+  ],
+  "test_support_roots": [
+    "runtime/tests/integration/support",
+    "integrations/python-client/tests/support",
+    "integrations/mcp/tests/support"
+  ],
+  "compatibility": {
+    "categories": 5,
+    "entries": 6,
+    "receipt_node_ids": 29,
+    "c8_dispositions": {"DELETE": 0, "RETAIN": 6}
+  }
+}
