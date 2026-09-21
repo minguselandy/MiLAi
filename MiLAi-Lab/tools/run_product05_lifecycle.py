@@ -216,7 +216,7 @@ def _wait_http(url: str, process: subprocess.Popen[bytes] | None = None) -> None
     raise LifecycleError(f"timed out waiting for {url}")
 
 
-def _wait_port(port: int, process: subprocess.Popen[bytes]) -> None:
+def _wait_port(host: str, port: int, process: subprocess.Popen[bytes]) -> None:
     deadline = time.monotonic() + 60
     while time.monotonic() < deadline:
         if process.poll() is not None:
@@ -224,7 +224,7 @@ def _wait_port(port: int, process: subprocess.Popen[bytes]) -> None:
         probe = socket.socket()
         probe.settimeout(0.25)
         try:
-            probe.connect(("127.0.0.1", port))
+            probe.connect((host, port))
             return
         except OSError:
             time.sleep(0.1)
@@ -447,7 +447,45 @@ def _make_stack(
     )
 
 
-def _start_process_stack(stack: TenantStack) -> None:
+def _host_arguments(stack: TenantStack, listen_host: str) -> list[str]:
+    return [
+        str(HOST_EXE),
+        "--manifest",
+        str(stack.manifest),
+        "--ledger",
+        str(stack.ledger),
+        "--trace",
+        str(stack.trace),
+        "--listen-host",
+        listen_host,
+        "--listen-port",
+        str(stack.host_port),
+        "--memory-mode",
+        "query-first",
+        "--prefetch-socket",
+        str(stack.reader_socket),
+        "--submitter-socket",
+        str(stack.submitter_socket),
+        "--memory-subject-id",
+        SUBJECT,
+        "--memory-data-classification",
+        "SYNTHETIC",
+        "--evidence-use-mode",
+        "direct",
+        "--tokenizer-json",
+        str(TOKENIZER),
+        "--broker-policy",
+        str(stack.reader_policy),
+        "--task-fixture",
+        str(TASK_FIXTURE),
+        "--ingress-token-file",
+        str(stack.ingress_token_file),
+        "--provider-timeout-seconds",
+        "300",
+    ]
+
+
+def _start_process_stack(stack: TenantStack, listen_host: str) -> None:
     environment = _clean_environment(stack.environment)
     api = stack.processes.start(
         [str(API_EXE)], stack.root / "api.log", cwd=RUNTIME, env=environment
@@ -483,45 +521,11 @@ def _start_process_stack(stack: TenantStack) -> None:
     _wait_socket(stack.reader_socket, reader)
     _wait_socket(stack.submitter_socket, submitter)
     host = stack.processes.start(
-        [
-            str(HOST_EXE),
-            "--manifest",
-            str(stack.manifest),
-            "--ledger",
-            str(stack.ledger),
-            "--trace",
-            str(stack.trace),
-            "--listen-host",
-            "0.0.0.0",  # noqa: S104 - dedicated bridge plus bearer-authenticated ingress
-            "--listen-port",
-            str(stack.host_port),
-            "--memory-mode",
-            "query-first",
-            "--prefetch-socket",
-            str(stack.reader_socket),
-            "--submitter-socket",
-            str(stack.submitter_socket),
-            "--memory-subject-id",
-            SUBJECT,
-            "--memory-data-classification",
-            "SYNTHETIC",
-            "--evidence-use-mode",
-            "direct",
-            "--tokenizer-json",
-            str(TOKENIZER),
-            "--broker-policy",
-            str(stack.reader_policy),
-            "--task-fixture",
-            str(TASK_FIXTURE),
-            "--ingress-token-file",
-            str(stack.ingress_token_file),
-            "--provider-timeout-seconds",
-            "300",
-        ],
+        _host_arguments(stack, listen_host),
         stack.root / "host.log",
         cwd=OPENWORKER,
     )
-    _wait_port(stack.host_port, host)
+    _wait_port(listen_host, stack.host_port, host)
 
 
 def _container_health(container: str) -> None:
@@ -1117,7 +1121,7 @@ def _run(args: argparse.Namespace) -> dict[str, Any]:
         stack_b = _make_stack(output, socket_root, "B", env_b, host_b_port, run_id)
         stacks = [stack_a, stack_b]
         for stack in stacks:
-            _start_process_stack(stack)
+            _start_process_stack(stack, gateway)
             _start_container(stack, network, gateway)
             containers.append(stack.container)
 
@@ -1162,7 +1166,7 @@ def _run(args: argparse.Namespace) -> dict[str, Any]:
         for stack in stacks:
             stack.processes.stop_all()
         for stack in stacks:
-            _start_process_stack(stack)
+            _start_process_stack(stack, gateway)
         for stack in stacks:
             _restart_container(stack)
 

@@ -353,7 +353,7 @@ def _wait_http(url: str, process: subprocess.Popen[bytes]) -> None:
     raise Product05RunError(f"timed out waiting for {url}")
 
 
-def _wait_port(port: int, process: subprocess.Popen[bytes]) -> None:
+def _wait_port(host: str, port: int, process: subprocess.Popen[bytes]) -> None:
     deadline = time.monotonic() + 60
     while time.monotonic() < deadline:
         if process.poll() is not None:
@@ -361,7 +361,7 @@ def _wait_port(port: int, process: subprocess.Popen[bytes]) -> None:
         probe = socket.socket()
         probe.settimeout(0.25)
         try:
-            probe.connect(("127.0.0.1", port))
+            probe.connect((host, port))
             return
         except OSError:
             time.sleep(0.1)
@@ -742,41 +742,45 @@ def _start_case_services(stack: CaseStack) -> None:
     _wait_socket(stack.reader_socket, broker)
 
 
+def _host_arguments(stack: CaseStack, lane: HostLane, listen_host: str) -> list[str]:
+    return [
+        str(HOST_EXE),
+        "--manifest",
+        str(lane.manifest),
+        "--ledger",
+        str(lane.ledger),
+        "--trace",
+        str(lane.trace),
+        "--listen-host",
+        listen_host,
+        "--listen-port",
+        str(lane.port),
+        "--memory-mode",
+        "query-first",
+        "--prefetch-socket",
+        str(stack.reader_socket),
+        "--evidence-use-mode",
+        lane.mode,
+        "--tokenizer-json",
+        str(TOKENIZER),
+        "--broker-policy",
+        str(stack.reader_policy),
+        "--task-fixture",
+        str(TASK_FIXTURE),
+        "--ingress-token-file",
+        str(lane.ingress_token),
+        "--provider-timeout-seconds",
+        "300",
+    ]
+
+
 def _start_lane(stack: CaseStack, lane: HostLane, network: str, gateway: str) -> None:
     host = stack.processes.start(
-        [
-            str(HOST_EXE),
-            "--manifest",
-            str(lane.manifest),
-            "--ledger",
-            str(lane.ledger),
-            "--trace",
-            str(lane.trace),
-            "--listen-host",
-            "0.0.0.0",  # noqa: S104 - dedicated bridge plus bearer-authenticated ingress
-            "--listen-port",
-            str(lane.port),
-            "--memory-mode",
-            "query-first",
-            "--prefetch-socket",
-            str(stack.reader_socket),
-            "--evidence-use-mode",
-            lane.mode,
-            "--tokenizer-json",
-            str(TOKENIZER),
-            "--broker-policy",
-            str(stack.reader_policy),
-            "--task-fixture",
-            str(TASK_FIXTURE),
-            "--ingress-token-file",
-            str(lane.ingress_token),
-            "--provider-timeout-seconds",
-            "300",
-        ],
+        _host_arguments(stack, lane, gateway),
         lane.trace.with_name("host.log"),
         cwd=OPENWORKER,
     )
-    _wait_port(lane.port, host)
+    _wait_port(gateway, lane.port, host)
     token = lane.ingress_token.read_text(encoding="utf-8").strip()
     _command(
         [
