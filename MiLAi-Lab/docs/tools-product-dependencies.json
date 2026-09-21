@@ -1,0 +1,165 @@
+{
+  "schema": "milai.lab.tools-product-dependencies.v1",
+  "baseline_commit": "9d98cfe9ca28f9c86601efca9e75e72af3e1e126",
+  "scope": "MiLAi-Lab/tools/**/*.py",
+  "product_import_roots": [
+    "milai",
+    "milai_autogen",
+    "milai_client",
+    "milai_hooks",
+    "milai_langgraph",
+    "milai_mcp",
+    "milai_openworker_mcp"
+  ],
+  "public_modules": [
+    "milai_client",
+    "milai_client.host_acquisition",
+    "milai_hooks.agent_event",
+    "milai_mcp"
+  ],
+  "testkit_prefixes": [
+    "milai.testkit"
+  ],
+  "grandfathered_private_imports": [
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_mcp.aigcit_auth",
+      "reason": "Existing authenticated-private load harness; migrate to an explicit Product testkit or public bootstrap contract before removal."
+    },
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_mcp.auth_policy",
+      "reason": "Existing authenticated-private load harness; migrate to an explicit Product testkit or public bootstrap contract before removal."
+    },
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_mcp.http_transport",
+      "reason": "Existing authenticated-private load harness; migrate to an explicit Product testkit or public bootstrap contract before removal."
+    },
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_mcp.server",
+      "reason": "Existing authenticated-private load harness; migrate to an explicit Product testkit or public bootstrap contract before removal."
+    },
+    {
+      "path": "tools/run_product05_lifecycle.py",
+      "module": "milai_openworker_mcp.memory_facade",
+      "reason": "Existing Product-05 lifecycle harness; preserve until its Host-continuity contract is available through a public or testkit surface."
+    },
+    {
+      "path": "tools/run_product05_lifecycle.py",
+      "module": "milai_openworker_mcp.transport",
+      "reason": "Existing Product-05 lifecycle harness; preserve until its Host-continuity contract is available through a public or testkit surface."
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "tools/check_v02_mixed_load.py",
+      "module": "milai_client",
+      "classification": "PUBLIC",
+      "lines": [22]
+    },
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_client",
+      "classification": "PUBLIC",
+      "lines": [26, 104]
+    },
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_mcp",
+      "classification": "PUBLIC",
+      "lines": [27]
+    },
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_mcp.aigcit_auth",
+      "classification": "LEGACY_PRIVATE",
+      "lines": [28]
+    },
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_mcp.auth_policy",
+      "classification": "LEGACY_PRIVATE",
+      "lines": [29]
+    },
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_mcp.http_transport",
+      "classification": "LEGACY_PRIVATE",
+      "lines": [30]
+    },
+    {
+      "path": "tools/check_v02_private_http_load.py",
+      "module": "milai_mcp.server",
+      "classification": "LEGACY_PRIVATE",
+      "lines": [31]
+    },
+    {
+      "path": "tools/check_v02_scoped_recall.py",
+      "module": "milai_client",
+      "classification": "PUBLIC",
+      "lines": [106]
+    },
+    {
+      "path": "tools/check_v02_service_concurrency.py",
+      "module": "milai_client",
+      "classification": "PUBLIC",
+      "lines": [159]
+    },
+    {
+      "path": "tools/run_product05_lifecycle.py",
+      "module": "milai_client",
+      "classification": "PUBLIC",
+      "lines": [43]
+    },
+    {
+      "path": "tools/run_product05_lifecycle.py",
+      "module": "milai_openworker_mcp.memory_facade",
+      "classification": "LEGACY_PRIVATE",
+      "lines": [44]
+    },
+    {
+      "path": "tools/run_product05_lifecycle.py",
+      "module": "milai_openworker_mcp.transport",
+      "classification": "LEGACY_PRIVATE",
+      "lines": [48]
+    },
+    {
+      "path": "tools/run_reasoningbank_public_checkpoint.py",
+      "module": "milai_client",
+      "classification": "PUBLIC",
+      "lines": [23]
+    },
+    {
+      "path": "tools/run_workspace_public_checkpoint.py",
+      "module": "milai_client",
+      "classification": "PUBLIC",
+      "lines": [99, 400, 566]
+    },
+    {
+      "path": "tools/v0214_host_runtime.py",
+      "module": "milai_client.host_acquisition",
+      "classification": "PUBLIC",
+      "lines": [27]
+    },
+    {
+      "path": "tools/v02_lme_capture_worker.py",
+      "module": "milai_client",
+      "classification": "PUBLIC",
+      "lines": [13]
+    },
+    {
+      "path": "tools/v02_lme_capture_worker.py",
+      "module": "milai_hooks.agent_event",
+      "classification": "PUBLIC",
+      "lines": [14]
+    },
+    {
+      "path": "tools/v06_http_bootstrap.py",
+      "module": "milai_mcp",
+      "classification": "PUBLIC",
+      "lines": [13]
+    }
+  ]
+}

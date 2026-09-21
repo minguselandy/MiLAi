@@ -20,6 +20,7 @@ dependencies = [
 [project.scripts]
 milai-lab-verify-product = "milai_lab.product_adapter.manifest:main"
 milai-lab-check-boundary = "milai_lab.boundary:main"
+milai-lab-check-tools-boundary = "milai_lab.tools_boundary:main"
 
 [dependency-groups]
 dev = [
