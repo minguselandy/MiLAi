@@ -8,10 +8,10 @@ Goal 类型:                  behavior-preserving cleanup / bounded modularizati
 执行状态:                   ACTIVE — 用户已于 2026-09-21 明确恢复
 前置合同:                   MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 本版作用:                   优化执行节奏、验证分级、CI 触发与剩余 PR 边界
-当前阶段:                   C4 MCP Server final candidate
-当前候选分支:               cleanup/c4-mcp-server-final
+当前阶段:                   C5 OpenWorker Host final candidate
+当前候选分支:               cleanup/c5-openworker-host-final
 最近权威 full workflow:     Run #57 / 17 jobs success / composition PASS
-当前 base main:             43a2c6a031cbe79a5f34dd835de60c6e3fc9cec3
+当前 base main:             0bd5ed414bd11ef8841025b5177f7b79f6e92a00
 ```
 
 本 Goal 不推翻 v1.0 的行为保持、Source of Truth、Frozen Architecture、历史证据和完成定义。
@@ -134,8 +134,8 @@ STOP STRUCTURAL WORK
 | C1 | Safe hygiene | COMPLETE |
 | C2 | Runtime Retrieval modularization | COMPLETE |
 | C3 | Runtime Memory Context modularization | COMPLETE — PR #19 merged; fast PR and main identity PASS |
-| C4 | MCP Server modularization | IN PROGRESS — implementation complete; candidate validation |
-| C5 | OpenWorker Host modularization | PENDING |
+| C4 | MCP Server modularization | COMPLETE — PR #20 merged; fast PR and main identity PASS |
+| C5 | OpenWorker Host modularization | IN PROGRESS — request, ingress and tool compatibility extracted |
 | C6 | Test organization | PENDING |
 | C7 | Lab active code organization | PENDING |
 | C8 | Compatibility/dead-code audit | PENDING |
@@ -611,6 +611,12 @@ class/function 定义：102 个逐 AST 完全一致，0 个名称丢失；仅 `b
 该纯结构 PR 上执行约 35 分钟 historical/full composition。完整回放保留到 C9/C10 最终候选，
 或仅在出现真实 behavior-path 风险时升级。
 
+PR #20 的最终候选 `1af1fbb2d02795178a87ed8f81508af9ccc8746c` 已通过 fast run
+`35619186995` 并 squash merge 为 `0bd5ed414bd11ef8841025b5177f7b79f6e92a00`。候选 tree 与
+merge tree 均为 `b93e860726592fe2fb502bd2f48a536c5d731f66`；main push run
+`35619423565` 的 tested-tree identity、manifest、boundary、Conformance 与总 gate 全部 PASS。
+full-composition workflow 按范围正确 skipped。
+
 ---
 
 ## 12. C5 — OpenWorker Host modularization
@@ -641,6 +647,22 @@ class/function 定义：102 个逐 AST 完全一致，0 个名称丢失；仅 `b
 必须保持 PR #4 的 explicit-local-address ingress contract、Bearer auth、auth-before-parse、
 process-lifetime token、task lifecycle、cache reuse、memory-required barrier、provider ordering、
 settlement 与 trace privacy。L2 才运行完整 `openworker-mcp` package 一次；最终执行一次 L4。
+
+### 12.1 2026-09-21 执行记录
+
+`cleanup/c5-openworker-host-final` 已完成前三段本地 extraction checkpoint：
+
+```text
+b810284  request contract
+cafa1bb  ingress contracts
+06c2a4b  ordinary tool compatibility and SSE wire adaptation
+```
+
+当前 `host_adapter.py` 继续作为 27 行历史兼容门面；核心 `host/orchestrator.py` 已从 3,735 行
+降至 3,039 行。前三段共比对 19 个搬运 class/function 定义，逐 AST mismatch 为 0。request
+direct tests、HTTP exposure/auth-before-parse/startup policy 和 ordinary-tool/vLLM streaming 定向
+测试均 PASS；每段 Ruff 与 strict mypy PASS。后续按 task state、memory flow、provider bridge、
+trace、orchestrator facade 边界继续，本分支尚未 push。
 
 ---
 
@@ -805,8 +827,8 @@ composition
 PR #17  C3 foundation                         已验证并合并
 PR #18  CI/test cadence optimization          已验证并合并
 PR #19  C3 Memory Context final               已验证并合并
-PR #20  C4 MCP Server complete modularization 本地候选
-PR #21  C5 OpenWorker Host complete modularization
+PR #20  C4 MCP Server complete modularization 已验证并合并
+PR #21  C5 OpenWorker Host complete modularization 本地开发中
 PR #22  C6 test organization + compatibility registry
 PR #23  C7 Lab active runner organization
 PR #24  C8 dead-code / compatibility closure
