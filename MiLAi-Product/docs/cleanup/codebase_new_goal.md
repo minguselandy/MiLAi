@@ -8,10 +8,10 @@ Goal 类型:                  behavior-preserving cleanup / bounded modularizati
 执行状态:                   ACTIVE — 用户已于 2026-09-21 明确恢复
 前置合同:                   MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 本版作用:                   优化执行节奏、验证分级、CI 触发与剩余 PR 边界
-当前阶段:                   C5 OpenWorker Host final candidate
-当前候选分支:               cleanup/c5-openworker-host-final
+当前阶段:                   C6 Test organization final candidate
+当前候选分支:               cleanup/c6-test-organization
 最近权威 full workflow:     Run #57 / 17 jobs success / composition PASS
-当前 base main:             0bd5ed414bd11ef8841025b5177f7b79f6e92a00
+当前 base main:             fba2ace9cda45457970b74c48f3cd48393a542e2
 ```
 
 本 Goal 不推翻 v1.0 的行为保持、Source of Truth、Frozen Architecture、历史证据和完成定义。
@@ -135,8 +135,8 @@ STOP STRUCTURAL WORK
 | C2 | Runtime Retrieval modularization | COMPLETE |
 | C3 | Runtime Memory Context modularization | COMPLETE — PR #19 merged; fast PR and main identity PASS |
 | C4 | MCP Server modularization | COMPLETE — PR #20 merged; fast PR and main identity PASS |
-| C5 | OpenWorker Host modularization | IN PROGRESS — implementation complete; candidate validation |
-| C6 | Test organization | PENDING |
+| C5 | OpenWorker Host modularization | COMPLETE — PR #21 merged; fast PR and main identity PASS |
+| C6 | Test organization | IN PROGRESS — implementation complete; candidate validation |
 | C7 | Lab active code organization | PENDING |
 | C8 | Compatibility/dead-code audit | PENDING |
 | C9 | Current-tree evidence refresh | PENDING |
@@ -668,8 +668,15 @@ a83ef6f  provider bridge + thin HTTP/CLI orchestrator
 `HostTaskState`，所有原方法分别保持 AST-identical。request、HTTP exposure/auth-before-parse、
 startup policy、ordinary-tool/vLLM streaming、task binding/cache reuse、memory facade/controller、
 provider/completion 与 trace privacy 定向测试均 PASS；每段 Ruff 与 strict mypy PASS。详细责任与
-兼容边界见 `OPENWORKER_HOST_MODULE_MAP.md`。本分支尚未 push，下一步只执行一次 OpenWorker
-L2 pre-push 与远端 fast PR gate，不运行 historical/full composition。
+兼容边界见 `OPENWORKER_HOST_MODULE_MAP.md`。
+
+最终候选 `6bbb0e6ac7f33982d43d42f39eeb9d04c3bb4d81` 的 OpenWorker L2 为 Ruff、strict
+mypy、202 项 package tests、build、manifest、receipt、Conformance 与 boundary 全 PASS。
+PR #21 fast run `35621997698` 全 PASS，并 squash merge 为
+`fba2ace9cda45457970b74c48f3cd48393a542e2`。候选 tree 与 merge tree 均为
+`20ffadb97bcc4cf70a23b8e2f7437aae87857bb4`；main push run `35622320554` 的
+tested-tree identity、manifest、boundary、Conformance 与总 gate 全 PASS。按用户要求与本 Goal
+分级，未重复 historical/full composition。
 
 ---
 
@@ -699,6 +706,26 @@ TEST_COMPAT
 HISTORICAL_COMPAT
 INTERNAL_TEMPORARY
 ```
+
+### 13.1 2026-09-22 执行记录
+
+`cleanup/c6-test-organization` 已完成 test-only 结构候选：
+
+```text
+4d749fc  shared test imports routed through three tests/support seams
+d245dc3  five-category compatibility registry and structural validation profile
+```
+
+基线普通测试模块存在 45 条 sibling `test_*.py` 直接导入；当前普通测试模块为 0，只有已登记
+的 support compatibility seam 保留 11 条到历史 helper owner 的转发。Runtime、Python client、
+MCP 分别新增 identity test，锁定 fixture/helper 仍是原对象；未移动任何 receipt-referenced test
+body。`compatibility-registry.json` 明确登记 `PUBLIC_API`、`PUBLIC_COMPAT`、`TEST_COMPAT`、
+`HISTORICAL_COMPAT`、`INTERNAL_TEMPORARY` 五类，逐字冻结 29 个 receipt node ID。
+
+C6 dev gate 已 PASS：三包 Ruff、registry/receipt/node/import 静态门禁、Runtime 1,257 nodes、
+MCP 400 nodes、Python client 210 nodes 的 `pytest --collect-only`，以及 3 个 support identity
+tests。未连接 PostgreSQL，未运行 historical benchmark、package behavior suite 或 full
+composition；下一步只执行一次 L2 structural pre-push、远端 fast PR gate 与 merge-tree identity。
 
 ---
 
@@ -835,8 +862,8 @@ PR #17  C3 foundation                         已验证并合并
 PR #18  CI/test cadence optimization          已验证并合并
 PR #19  C3 Memory Context final               已验证并合并
 PR #20  C4 MCP Server complete modularization 已验证并合并
-PR #21  C5 OpenWorker Host complete modularization 本地开发中
-PR #22  C6 test organization + compatibility registry
+PR #21  C5 OpenWorker Host complete modularization 已验证并合并
+PR #22  C6 test organization + compatibility registry 本地候选
 PR #23  C7 Lab active runner organization
 PR #24  C8 dead-code / compatibility closure
 PR #25  C9 + C10 evidence refresh/final baseline

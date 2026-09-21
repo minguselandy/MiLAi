@@ -20,7 +20,7 @@ Lab, receipt and archive consumer checks before removing anything.
 
 ## C6 test support boundary
 
-Before C6, ordinary test modules contained 41 direct imports from sibling `test_*.py` modules.
+Before C6, ordinary test modules contained 45 direct imports from sibling `test_*.py` modules.
 Those imports made collection order and infrastructure ownership implicit. Tests now import shared
 fixtures and helpers through three dedicated seams:
 
