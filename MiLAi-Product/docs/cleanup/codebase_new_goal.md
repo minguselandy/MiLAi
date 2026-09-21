@@ -8,9 +8,9 @@ Goal 类型:                  behavior-preserving cleanup / bounded modularizati
 执行状态:                   ACTIVE — 用户已于 2026-09-21 明确恢复
 前置合同:                   MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 本版作用:                   优化执行节奏、验证分级、CI 触发与剩余 PR 边界
-当前阶段:                   C9 evidence refresh complete; C10 final baseline in progress
+当前阶段:                   C10 final L4 PASS; PR #25 merge identity pending
 当前候选分支:               cleanup/c9-c10-final-baseline
-最近权威 full workflow:     Run #57 / 17 jobs success / composition PASS
+最近权威 full workflow:     Run #60 / ID 35632657133 / 17 jobs success / composition PASS
 当前 base main:             432153a0065f6ccc6706d670ba7eafafc002c950
 ```
 
@@ -140,7 +140,7 @@ STOP STRUCTURAL WORK
 | C7 | Lab active code organization | COMPLETE — PR #23 merged; Lab fast PR and main identity PASS |
 | C8 | Compatibility/dead-code audit | COMPLETE — PR #24 merged; static fast PR and main identity PASS |
 | C9 | Current-tree evidence refresh | COMPLETE — five current-tree receipts verified |
-| C10 | Final cleanup baseline | IN PROGRESS — result/module-map/baseline generation and final L4 pending |
+| C10 | Final cleanup baseline | IN PROGRESS — final L4 PASS; merge identity pending |
 
 PR #17 已完成并合并 Memory Context foundation：
 
@@ -964,6 +964,13 @@ metadata-only identity update，必须证明 Product manifest、Lab active sourc
 Artifact Archive tree identity 均未改变，不重复同一 executable tree 的 full composition。
 三项交付物首次完整落盘的 content commit 为
 `8f179a76166a9506b4fd9d4688478dd498749dc1`。
+
+PR #25 candidate `803685557b60b2d381f367a59eb98ec24bf828a4` 的 fast run
+`35632511825` PASS。随后只触发一次权威 full composition：Run #60 / ID `35632657133` 的
+17 jobs 全部 SUCCESS，Runtime + PostgreSQL、六个 integrations、Lab fast、四个 historical replay
+shards、Archive、Product identity、Conformance 与 composition 均实际执行并 PASS。
+`full-composition` label 已在 metadata 回填前移除，避免对同一 executable identity 重跑 L4。
+当前仅剩 metadata fast gate、tested executable-tree identity、PR merge 与 main identity gate。
 
 ---
 

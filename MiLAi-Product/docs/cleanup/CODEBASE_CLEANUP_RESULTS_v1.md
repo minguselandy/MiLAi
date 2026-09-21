@@ -2,9 +2,8 @@
 
 ## Outcome
 
-The behavior-preserving cleanup program completed its structural implementation through C8 and
-refreshed all five current-tree behavior receipts in C9. This document is the C10 final-candidate
-record; the final 17-job composition fields remain `PENDING` until the exact PR candidate runs.
+The behavior-preserving cleanup program completed its structural implementation through C8,
+refreshed all five current-tree behavior receipts in C9, and passed the C10 final composition.
 
 Baseline commit: `798b7cac21957873791afff6122d3f06a82214c5`  
 Final implementation commit: `432153a0065f6ccc6706d670ba7eafafc002c950`  
@@ -56,8 +55,9 @@ The baseline and current Git tree objects are identical for all three immutable 
 
 ## Final verification
 
-The final candidate will run exactly one authoritative full composition covering Runtime with
-PostgreSQL, all integrations, Lab fast, four historical replay shards, Archive, Product identity,
-Conformance, and composition. Its run ID and final result will be recorded here after completion;
-the run will not be repeated for a metadata-only identity update when all executable tree identities
-remain unchanged.
+Final Run #60, ID `35632657133`, tested candidate
+`803685557b60b2d381f367a59eb98ec24bf828a4` with 17/17 successful jobs. Runtime with PostgreSQL,
+all six integrations, Lab fast, four historical replay shards, Archive, Product identity,
+Conformance, and the actually executed composition gate all passed. The run is not repeated for
+this metadata-only receipt update because Product manifest, Lab active source, Lab archive, and
+Artifact Archive executable identities are unchanged.

@@ -1,6 +1,6 @@
 {
   "schema_version": "milai-codebase-cleanup-final-v1",
-  "status": "CANDIDATE_PENDING_FINAL_L4",
+  "status": "FINAL_L4_PASS_PENDING_MERGE_IDENTITY",
   "baseline_commit": "798b7cac21957873791afff6122d3f06a82214c5",
   "final_implementation_commit": "432153a0065f6ccc6706d670ba7eafafc002c950",
   "current_evidence_commit": "2803763f47eb846e7c7de68d96758cf23921dcd7",
@@ -30,15 +30,17 @@
     "openworker_http_targeted": "21 passed"
   },
   "final_verification": {
-    "full_ci_run_id": null,
-    "composition": "PENDING",
+    "full_ci_run_id": 35632657133,
+    "full_ci_run_number": 60,
+    "tested_commit": "803685557b60b2d381f367a59eb98ec24bf828a4",
+    "composition": "PASS",
     "job_count": 17,
-    "runtime_full": "PENDING",
-    "all_integrations": "PENDING",
-    "lab_fast": "PENDING",
-    "historical_replay_shards": "PENDING",
-    "archive": "PENDING",
-    "product_identity": "PENDING",
-    "conformance": "PENDING"
+    "runtime_full": "PASS",
+    "all_integrations": "PASS",
+    "lab_fast": "PASS",
+    "historical_replay_shards": "4/4 PASS",
+    "archive": "PASS",
+    "product_identity": "PASS",
+    "conformance": "PASS"
   }
 }
