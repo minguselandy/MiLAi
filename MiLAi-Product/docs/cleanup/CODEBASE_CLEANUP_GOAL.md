@@ -172,6 +172,42 @@ composition 全部 PASS 后才合并。
   中的原实现逐项一致；旧 facade 与 Runtime testkit 私有兼容 import 保持同一函数对象。
 - route、reranking、Context budget、decision/evidence identity 与 response schema 均未改变。
 
+### 2026-09-21 — C2 assembly merged and baseline hardening completed
+
+- Retrieval assembly PR #11 merged；post-merge `main=e4d2d714f005bd0163584eb8634b55ddc09287b6`。
+- post-merge Run #43 的 Product、integrations、Archive 与四个 replay shard 均通过，但 Lab fast
+  暴露 40ms whole-request deadline 竞态，composition 因依赖失败而未建立。
+- PR #12 将 reservation 语义改为确定性注入 `DeadlineExpired` 的测试证据；PR Run #44 与
+  post-merge Run #45 最终均为 17 jobs success、composition PASS。
+- PR #13 修复两个 active Product-05 runner 对旧 wildcard listen contract 的依赖；PR Run #46
+  与 post-merge Run #47 均全绿。
+- PR #14 建立 active `tools/` Product dependency inventory 与 no-new-private-dependency gate；
+  PR Run #48 与 post-merge Run #49 均全绿。
+- C2 trace extraction 从 exact green
+  `d23c420f3054398b946eb1a51f5e6045f3c50632` 恢复。
+
+### 2026-09-21 — C2 trace extraction and bounded finalization implemented
+
+- 本轮只移动 matched replay、public acquisition trace、execution stage、latency/cost 与
+  access-trace serialization helper，并将 final decision、acquisition-state transition、
+  abstention、trace persistence 与 response/receipt assembly 抽成一个有界 finalization phase。
+- 十一个函数、`_LegacyReplayPrefix` 与 `_EXECUTION_STAGE_BY_OPERATION` 均与 `d23c420...`
+  基线 AST 一致；旧 `milai.application.retrieval` helper/type import 保持兼容。
+- `_finalize_execution()` 内的原执行语句与 extraction 前 AST 一致；`retrieve()` 继续作为唯一
+  public orchestration entry，search/acquisition/gate 顺序未改。
+- trace schema、stage mapping、stop/fallback reason、timing/cost arithmetic 与 response wire
+  均未改变。
+
+### 2026-09-21 — Cleanup execution cadence adjusted
+
+- 开发提交采用 targeted tests、Ruff、mypy 与 contract snapshot/compatibility checks。
+- 每个 subsystem PR 只在最终候选执行一次完整 17-job composition；历史 replay 保留在 PR
+  最终候选、merge queue 与 nightly，不再为每组 helper 单独重复运行。
+- 后续以中等规模 subsystem PR 推进：Memory Context、MCP、OpenWorker 各计划两轮；不再按
+  单组 helper 创建 PR。
+- 合并目标是由 merge queue 验证最终 merge tree；在 required check 与 merge queue 已覆盖
+  同一 merge tree 时，不再机械重复 post-merge 全套。
+
 ## Completion rule
 
 只有总指令第 24 节全部条件有当前权威证据时，才把本 Goal 标记为 COMPLETE。

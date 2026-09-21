@@ -7,6 +7,7 @@ from milai.application.retrieval_core import (
     policy,
     selection,
     temporal,
+    trace,
 )
 
 
@@ -96,3 +97,23 @@ def test_retrieval_facade_preserves_assembly_helper_imports() -> None:
         is assembly._binding_span_provenance_order
     )
     assert retrieval._result_evidence_ids is assembly._result_evidence_ids
+
+
+def test_retrieval_facade_preserves_trace_helper_imports() -> None:
+    assert retrieval._canonical_sha256 is trace._canonical_sha256
+    assert retrieval._build_matched_retrieval_replay is trace._build_matched_retrieval_replay
+    assert retrieval._stage_metrics is trace._stage_metrics
+    assert (
+        retrieval._public_acquisition_probe_disposition
+        is trace._public_acquisition_probe_disposition
+    )
+    assert (
+        retrieval._public_temporal_acquisition_trace
+        is trace._public_temporal_acquisition_trace
+    )
+    assert retrieval._abstract_stage_sequence is trace._abstract_stage_sequence
+    assert retrieval._execution_trace is trace._execution_trace
+    assert retrieval._latency_spans is trace._latency_spans
+    assert retrieval._structural_cost is trace._structural_cost
+    assert retrieval._access_trace_view is trace._access_trace_view
+    assert retrieval._unavailable_access_trace is trace._unavailable_access_trace
