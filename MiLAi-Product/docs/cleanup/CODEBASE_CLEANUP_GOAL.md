@@ -159,6 +159,19 @@ composition 全部 PASS 后才合并。
   中的原实现逐项一致；Runtime testkit 与旧 facade import 保持兼容。
 - operator family、operand authority、reranker/cover 规则与 provenance collection 均未改变。
 
+### 2026-09-21 — C2 operators merged and assembly extraction started
+
+- Retrieval operators PR #10 Run #40：17 jobs success，composition PASS。
+- PR #10 rebase merged；post-merge `main` 为
+  `a62a75fb2a526d9d654ab34851c5dfa5249b941a`。
+- post-merge Run #41 首次 Lab fast 因既有 40ms total-deadline timing test 在共享 runner 负载下
+  失败；仅重跑失败 job 后最新 attempt 17 jobs success，composition PASS。
+- 从该 exact green `main` 创建 `cleanup/06-retrieval-assembly`；本轮只移动 governed result
+  assembly、response payload、decision snapshot 与 accepted evidence/span projection helper。
+- 十一个移动 helper 的 AST 与 `a62a75fb2a526d9d654ab34851c5dfa5249b941a`
+  中的原实现逐项一致；旧 facade 与 Runtime testkit 私有兼容 import 保持同一函数对象。
+- route、reranking、Context budget、decision/evidence identity 与 response schema 均未改变。
+
 ## Completion rule
 
 只有总指令第 24 节全部条件有当前权威证据时，才把本 Goal 标记为 COMPLETE。
