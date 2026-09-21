@@ -9,6 +9,7 @@ record; the final 17-job composition fields remain `PENDING` until the exact PR 
 Baseline commit: `798b7cac21957873791afff6122d3f06a82214c5`  
 Final implementation commit: `432153a0065f6ccc6706d670ba7eafafc002c950`  
 Current evidence commit: `2803763f47eb846e7c7de68d96758cf23921dcd7`
+Final baseline content commit: `8f179a76166a9506b4fd9d4688478dd498749dc1`
 
 ## Hotspot changes
 

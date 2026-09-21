@@ -962,6 +962,8 @@ composition
 17-job full composition；在 run PASS 前不得将本 Goal 标记 COMPLETE。最终 run ID 的回填属于
 metadata-only identity update，必须证明 Product manifest、Lab active source、Lab archive 与
 Artifact Archive tree identity 均未改变，不重复同一 executable tree 的 full composition。
+三项交付物首次完整落盘的 content commit 为
+`8f179a76166a9506b4fd9d4688478dd498749dc1`。
 
 ---
 
