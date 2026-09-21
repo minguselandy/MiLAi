@@ -6,8 +6,8 @@
 ## Result
 
 - Current implementation status: `UNVERIFIED`
-- Product source commit: `893992e6af0147cf26ad25dc255a8a19aba9e8f3`
-- Verified at: `2026-09-21T16:17:51+00:00`
+- Product source commit: `432153a0065f6ccc6706d670ba7eafafc002c950`
+- Verified at: `2026-09-21T17:22:52+00:00`
 - Architecture: `1.0.0`
 - Migration heads: `0027_embedding_identity, 0045_dg18_adjacency, 0056_host_notes`
 
@@ -28,11 +28,11 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Category | PASS | NOT_APPLICABLE | DEVIATION | UNVERIFIED |
 | --- | ---: | ---: | ---: | ---: |
 | `goals` | 0 | 0 | 0 | 9 |
-| `invariants` | 0 | 0 | 0 | 12 |
+| `invariants` | 1 | 0 | 0 | 11 |
 | `transactions` | 0 | 0 | 0 | 8 |
 | `roles` | 0 | 0 | 0 | 5 |
 | `freeze_gates` | 9 | 0 | 0 | 1 |
-| **total** | **9** | **0** | **0** | **35** |
+| **total** | **10** | **0** | **0** | **34** |
 
 The detailed G/I/TX/role/gate mapping is in [`invariant-test-map.json`](invariant-test-map.json). Each current item contains implementation evidence, mapped tests, reference-integrity status, and the separate behavioral-verification status.
 
@@ -48,10 +48,10 @@ The detailed G/I/TX/role/gate mapping is in [`invariant-test-map.json`](invarian
 Receipts are validated against the current Product tree and manifest. `SCOPED` claims are recorded as execution evidence but do not promote the broad frozen item; only passing `COMPLETE` claims without a current failed receipt can produce `PASS`. Failed receipts remain valid diagnostic evidence without implying `DEVIATION`.
 
 - Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)
-- Validated receipt count: `8`
-- Current receipt count: `0`
+- Validated receipt count: `13`
+- Current receipt count: `5`
 - Historical receipt count: `8`
-- Current explicit claim count: `0`
+- Current explicit claim count: `12`
 - Failed diagnostic claim count: `0`
 - Preserved failed receipt count: `3`
 
