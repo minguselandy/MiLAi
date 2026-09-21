@@ -4,6 +4,7 @@ from milai.application.memory_context_core import (
     common,
     contracts,
     provenance,
+    rendering,
     semantics,
     units,
     windows,
@@ -93,6 +94,10 @@ def test_memory_context_facade_preserves_window_helpers() -> None:
     assert memory_context._linked_context_neighbor is windows._linked_context_neighbor
     assert memory_context._marginal_window_order is windows._marginal_window_order
     assert (
+        memory_context._instance_preserving_window_order
+        is windows._instance_preserving_window_order
+    )
+    assert (
         memory_context._marginal_conditional_unit_order is windows._marginal_conditional_unit_order
     )
     assert memory_context._workspace_candidate_provenance is windows._workspace_candidate_provenance
@@ -100,3 +105,19 @@ def test_memory_context_facade_preserves_window_helpers() -> None:
     assert memory_context._order_windows is windows._order_windows
     assert memory_context._speaker_neighbor is windows._speaker_neighbor
     assert memory_context._turn_sort is windows._turn_sort
+
+
+def test_memory_context_facade_preserves_rendering_helpers() -> None:
+    assert memory_context._render_context is rendering._render_context
+    assert memory_context._derived_context is rendering._derived_context
+    assert memory_context._reader_derived_value is rendering._reader_derived_value
+    assert memory_context._reader_derived_completeness is rendering._reader_derived_completeness
+    assert memory_context._fit_window is rendering._fit_window
+    assert memory_context._reserve_required_windows is rendering._reserve_required_windows
+    assert memory_context._fit_windows_together is rendering._fit_windows_together
+    assert memory_context._fit_derived_with_windows is rendering._fit_derived_with_windows
+    assert memory_context._fit_derived is rendering._fit_derived
+    assert memory_context._focused_excerpt is rendering._focused_excerpt
+    assert memory_context._excerpt_focus is rendering._excerpt_focus
+    assert memory_context._excerpt_at is rendering._excerpt_at
+    assert memory_context._open_issue_ids is rendering._open_issue_ids

@@ -12,6 +12,7 @@ from milai.application.memory_context_core.activation import (
     _structured_source_context,
 )
 from milai.application.memory_context_core.common import _estimated_tokens, _sha256
+from milai.application.memory_context_core.rendering import _render_context
 from milai.application.recall_workspace import RecallCandidate, marginal_evidence_order
 from milai.domain.memory_context import (
     ContextExpansion,
@@ -470,3 +471,63 @@ def _turn_sort(view: EvidenceView) -> tuple[int, int, int]:
         view.turn_ordinal if view.turn_ordinal is not None else 2**31,
         view.source_rank,
     )
+
+
+def _instance_preserving_window_order(
+    query: str,
+    query_terms: frozenset[str],
+    outcome: dict[str, Any],
+    derived: str | None,
+    baseline_windows: list[MemoryContextWindow],
+    candidate_windows: list[MemoryContextWindow],
+    items: list[dict[str, Any]],
+    context_token_budget: int,
+) -> tuple[list[MemoryContextWindow], dict[str, object]]:
+    """Protect the A0 high-rank prefix, then use a provenance-novel soft tail."""
+
+    prefix_budget = max(1, context_token_budget * 2 // 3)
+    candidate_by_id = {window.window_id: window for window in candidate_windows}
+    protected_ids: list[str] = []
+    protected_windows: list[MemoryContextWindow] = []
+    for baseline in baseline_windows:
+        candidate = candidate_by_id.get(baseline.window_id)
+        if candidate is None:
+            break
+        rendered = _render_context(
+            outcome,
+            [],
+            [*protected_windows, candidate],
+            derived,
+        )
+        if _estimated_tokens(rendered) > prefix_budget:
+            break
+        protected_ids.append(candidate.window_id)
+        protected_windows.append(candidate)
+
+    protected_set = set(protected_ids)
+    remaining = [window for window in candidate_windows if window.window_id not in protected_set]
+    ordered_tail, workspace = _marginal_window_order(
+        query,
+        query_terms,
+        remaining,
+        items,
+        max(1, context_token_budget - prefix_budget),
+    )
+    ordered = [*protected_windows, *ordered_tail]
+    if {window.window_id for window in ordered} != set(candidate_by_id):
+        raise AssertionError("INSTANCE_PRESERVING_ORDER_CHANGED_CANDIDATE_IDENTITY_SET")
+    prefix_tokens = _estimated_tokens(_render_context(outcome, [], protected_windows, derived))
+    return ordered, {
+        **workspace,
+        "policy": "A0_PREFIX_TWO_THIRDS_WITH_PROVENANCE_NOVEL_TAIL_V01",
+        "baseline_candidate_count": len(baseline_windows),
+        "candidate_count": len(candidate_windows),
+        "protected_baseline_prefix_window_ids": protected_ids,
+        "protected_baseline_prefix_count": len(protected_ids),
+        "protected_baseline_prefix_token_cap": prefix_budget,
+        "protected_baseline_prefix_estimated_tokens": prefix_tokens,
+        "baseline_prefix_identity_preserved": True,
+        "all_candidate_ids_retained": len(ordered) == len(candidate_by_id),
+        "hard_filter_applied": False,
+        "persistent_state_created": False,
+    }
