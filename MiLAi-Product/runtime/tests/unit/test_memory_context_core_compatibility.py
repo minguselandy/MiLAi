@@ -6,6 +6,7 @@ from milai.application.memory_context_core import (
     provenance,
     semantics,
     units,
+    windows,
 )
 
 
@@ -80,3 +81,22 @@ def test_memory_context_facade_preserves_unit_helpers() -> None:
     assert memory_context._status_unit_text is units._status_unit_text
     assert memory_context._render_reader_units is units._render_reader_units
     assert memory_context._render_infeasible_context is units._render_infeasible_context
+
+
+def test_memory_context_facade_preserves_window_helpers() -> None:
+    assert memory_context._WORKSPACE_WRAPPER_TERMS is windows._WORKSPACE_WRAPPER_TERMS
+    assert memory_context._SOFT_WINDOW_TOKEN_CAP == windows._SOFT_WINDOW_TOKEN_CAP
+    assert memory_context._SOFT_SESSION_DIVERSITY_PREFIX == windows._SOFT_SESSION_DIVERSITY_PREFIX
+    assert memory_context._build_windows is windows._build_windows
+    assert memory_context._bounded_window_members is windows._bounded_window_members
+    assert memory_context._session_landmark is windows._session_landmark
+    assert memory_context._linked_context_neighbor is windows._linked_context_neighbor
+    assert memory_context._marginal_window_order is windows._marginal_window_order
+    assert (
+        memory_context._marginal_conditional_unit_order is windows._marginal_conditional_unit_order
+    )
+    assert memory_context._workspace_candidate_provenance is windows._workspace_candidate_provenance
+    assert memory_context._workspace_target_hints is windows._workspace_target_hints
+    assert memory_context._order_windows is windows._order_windows
+    assert memory_context._speaker_neighbor is windows._speaker_neighbor
+    assert memory_context._turn_sort is windows._turn_sort
