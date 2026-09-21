@@ -15,6 +15,8 @@ from milai.config import RuntimeSettings
 from milai.persistence import Database, SessionContext
 from milai.persistence.database import DatabaseCapacityError
 
+pytestmark = pytest.mark.integration
+
 
 def _settings(tmp_path, **overrides) -> RuntimeSettings:
     return RuntimeSettings(

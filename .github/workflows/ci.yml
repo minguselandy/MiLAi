@@ -1,19 +1,8 @@
-name: MiLAi composition verification
+name: MiLAi full composition verification
 
 on:
   pull_request:
-    paths:
-      - ".github/**"
-      - "MiLAi-Product/**"
-      - "MiLAi-Lab/**"
-      - "MiLAi-Artifact-Archive/**"
-      - "README.md"
-      - "AGENTS.md"
-      - "SOURCE_OF_TRUTH.md"
-      - "REPO_MAP.md"
-      - "LEGACY_READ_ONLY.md"
-  push:
-    branches: [main]
+    types: [labeled, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
@@ -22,6 +11,9 @@ permissions:
 jobs:
   boundaries:
     name: Fail-fast source boundaries
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.pull_request.labels.*.name, 'full-composition')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -58,6 +50,7 @@ jobs:
 
   product-runtime:
     name: Product Runtime and PostgreSQL
+    needs: boundaries
     runs-on: ubuntu-latest
     timeout-minutes: 40
     services:

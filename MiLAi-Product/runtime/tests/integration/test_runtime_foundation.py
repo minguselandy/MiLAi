@@ -19,6 +19,8 @@ from milai.api import create_app
 from milai.config.settings import RuntimeSettings, prepare_runtime_directories
 from milai.persistence import Database
 
+pytestmark = pytest.mark.integration
+
 
 def _migration_url() -> str:
     value = os.environ.get("MILAI_MIGRATION_DATABASE_URL")

@@ -28,6 +28,8 @@ from milai.persistence.retrieval_continuation_repository import (
 from milai.persistence.retrieval_repository import RetrievalRepository
 from milai.workers.main import FoundationWorker
 
+pytestmark = pytest.mark.integration
+
 TENANT_ID = UUID("11111111-1111-4111-8111-111111111111")
 ACTOR_ID = UUID("aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa")
 OTHER_ACTOR_ID = UUID("bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb")

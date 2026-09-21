@@ -5,7 +5,7 @@
 ```text
 Contract: MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 Goal thread: 01a0aad3-4faf-7871-b825-8ddb3cf177be
-Status: ACTIVE
+Status: ACTIVE — RESUMED BY USER @ 2026-09-21
 Baseline: 798b7cac21957873791afff6122d3f06a82214c5
 Baseline workflow: Run #29 / 35519772754 / attempt 2
 ```
@@ -241,6 +241,29 @@ composition 全部 PASS 后才合并。
   Conformance 保持 `9 PASS / 35 UNVERIFIED / 0 DEVIATION`。
 - PostgreSQL Runtime 全套及 Lab/integrations/replay/composition 不在开发提交重复执行；只在本
   subsystem PR 最终候选触发一次远端 17-job composition。
+
+### 2026-09-21 — Execution paused during PR #17 candidate workflow
+
+- 用户要求暂停整理并生成当前进度报告；不继续 C3 第二轮，不合并 PR #17。
+- 暂停时 Run #55 已有 15 个前置 jobs success；`presentation-v2-positive` 仍在运行，最终
+  composition 尚未开始，因此 PR #17 仍不得合并。
+- branch candidate 保持 `5c0415b6c2a962fb4a67aad28a0b512041ad2b07`；暂停文档仅保留在
+  本地，不 push，以免改变已进入唯一 full-composition run 的候选树。
+- 完整暂停点与恢复协议记录于
+  `docs/cleanup/CODEBASE_CLEANUP_PROGRESS_2026-09-21.md`。
+
+### 2026-09-21 — Execution resumed; PR #17 merged by tested-tree identity
+
+- 用户明确要求读取并执行 `docs/cleanup/codebase_new_goal.md`，cleanup 恢复。
+- 只读 reconciliation 确认 PR #17 仍 open/mergeable，base 为 `77ef5be...`，HEAD 为
+  `5c0415b...`；Run #55 为 17/17 SUCCESS，composition 实际执行并 PASS。
+- candidate manifest、Conformance freshness、repository boundary 与 immutable-path diff 复核通过。
+- GitHub REST merge endpoint 不接受本机 API 凭据；使用 SSH 权限将已验证 HEAD 严格
+  fast-forward 到 `main`，GitHub 随后确认 PR #17 closed/merged。
+- merged `main=5c0415b6c2a962fb4a67aad28a0b512041ad2b07`，commit/tree 均与 Run #55
+  被测候选相同，因此未重复执行 post-merge full composition。
+- 从 exact merged main 创建 `cleanup/09-ci-test-cadence`，先交付 PR #18 的 marker、
+  classifier、fast/full workflow 与本地 validation profiles，再继续 C3 final。
 
 ## Completion rule
 

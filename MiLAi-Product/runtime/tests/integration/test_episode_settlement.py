@@ -14,6 +14,8 @@ from milai.api import create_app
 from milai.config.settings import RuntimeSettings, prepare_runtime_directories
 from milai.persistence import Database
 
+pytestmark = pytest.mark.integration
+
 ACTOR_ID = UUID("aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa")
 API_TOKEN = "test-token-with-at-least-32-characters"
 SCOPE = {"project_ids": ["milai"]}

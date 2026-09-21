@@ -19,6 +19,8 @@ from milai.observability.logging import JsonFormatter
 from milai.observability.metrics import OperationTimer, request_operation_timer
 from milai.persistence import Database, SessionContext
 
+pytestmark = pytest.mark.integration
+
 
 @pytest.mark.integration
 def test_real_pool_wait_timeout_and_request_context_are_measured_without_payload(

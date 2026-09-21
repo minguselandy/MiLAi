@@ -15,6 +15,8 @@ from milai.api import create_app
 from milai.config import RuntimeSettings
 from milai.persistence import Database, SessionContext
 
+pytestmark = pytest.mark.integration
+
 
 @pytest.mark.integration
 def test_bounded_waiters_reject_without_scope_leak_and_recover_after_release(tmp_path) -> None:

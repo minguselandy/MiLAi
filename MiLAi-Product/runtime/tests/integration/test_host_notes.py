@@ -10,6 +10,8 @@ from test_evidence_api import ACTOR_ID, TENANT_ID, _headers, evidence_app  # noq
 
 from milai.persistence import SessionContext
 
+pytestmark = pytest.mark.integration
+
 
 def test_note_crud_replay_private_pagination_and_cas(evidence_app) -> None:  # type: ignore[no-untyped-def]
     client = evidence_app.test_client()
