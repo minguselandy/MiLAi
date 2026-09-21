@@ -1,6 +1,7 @@
 from milai_mcp import server
 from milai_mcp import server_codex as codex
 from milai_mcp import server_contracts as contracts
+from milai_mcp import server_factory as factory
 from milai_mcp import server_governance as governance
 from milai_mcp import server_middleware as middleware
 from milai_mcp import server_reader as reader
@@ -16,6 +17,17 @@ def test_server_facade_preserves_contract_objects() -> None:
     assert server.TOOL_COMPATIBILITY_VNEXT is contracts.TOOL_COMPATIBILITY_VNEXT
     assert server.SERVER_DESCRIPTION is contracts.SERVER_DESCRIPTION
     assert server._tool_annotations is contracts._tool_annotations
+
+
+def test_server_facade_preserves_factory_and_cli_objects() -> None:
+    assert server.MilaiClient is factory.MilaiClient
+    assert server.build_server is factory.build_server
+    assert server.main is factory.main
+    assert server.resolve_budget_profile_by_name is factory.resolve_budget_profile_by_name
+    assert server._non_negative_int is factory._non_negative_int
+    assert (
+        server._codex_full_clients_from_environment is factory._codex_full_clients_from_environment
+    )
 
 
 def test_server_facade_preserves_middleware_objects() -> None:
