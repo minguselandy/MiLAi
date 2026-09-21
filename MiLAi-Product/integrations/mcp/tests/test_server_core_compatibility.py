@@ -1,5 +1,6 @@
 from milai_mcp import server
 from milai_mcp import server_contracts as contracts
+from milai_mcp import server_governance as governance
 from milai_mcp import server_middleware as middleware
 from milai_mcp import server_reader as reader
 from milai_mcp import server_wire as wire
@@ -50,3 +51,8 @@ def test_server_facade_preserves_reader_helpers() -> None:
     assert server.build_reader_toolset is reader.build_reader_toolset
     assert server._bind_effective_need_policy is reader._bind_effective_need_policy
     assert server._mcp_access_trace is reader._mcp_access_trace
+
+
+def test_server_facade_preserves_governance_builder() -> None:
+    assert server.GovernanceToolset is governance.GovernanceToolset
+    assert server.build_governance_toolset is governance.build_governance_toolset
