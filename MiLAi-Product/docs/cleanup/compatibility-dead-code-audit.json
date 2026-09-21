@@ -1,0 +1,58 @@
+{
+  "schema_version": "milai-compatibility-dead-code-audit-v1",
+  "source_commit": "ff51e47b8ae8b861002f3975c23c4ca88cc5106e",
+  "policy": "Only INTERNAL_TEMPORARY entries with no production, test, CLI/plugin, active Lab, receipt, or archive consumer may be deleted.",
+  "dispositions": [
+    {
+      "category": "PUBLIC_API",
+      "decision": "RETAIN",
+      "id": "supported-package-apis",
+      "reason": "Versioned public package surfaces are outside C8 deletion authority."
+    },
+    {
+      "category": "PUBLIC_COMPAT",
+      "decision": "RETAIN",
+      "id": "modularization-facades",
+      "reason": "Historical public import and executable targets remain supported compatibility contracts."
+    },
+    {
+      "category": "TEST_COMPAT",
+      "decision": "RETAIN",
+      "id": "dedicated-test-support-seams",
+      "reason": "Active tests consume the support seams and identity tests freeze their forwarding behavior."
+    },
+    {
+      "category": "HISTORICAL_COMPAT",
+      "decision": "RETAIN",
+      "id": "receipt-referenced-pytest-nodes",
+      "reason": "All 29 immutable receipt node IDs remain required for replay and audit."
+    },
+    {
+      "category": "HISTORICAL_COMPAT",
+      "decision": "RETAIN",
+      "id": "query-ir-v01-transition",
+      "reason": "Active Product execution, unit tests, and archived replay code still consume this module."
+    },
+    {
+      "category": "INTERNAL_TEMPORARY",
+      "checks": {
+        "archive_consumers": [
+          "MiLAi-Lab/studies/archive/lifecycle/legacy_snapshot/MiLAi/docs/runbooks/dg17-semantic-read.md",
+          "MiLAi-Lab/studies/archive/lifecycle/legacy_snapshot/MiLAi/docs/dg17/q3a-compatibility-disposition.md"
+        ],
+        "cli_plugin_entrypoints": [],
+        "lab_consumers": [],
+        "production_consumers": [
+          "runtime/src/milai/application/acquisition.py"
+        ],
+        "receipt_consumers": [],
+        "test_consumers": [
+          "runtime/tests/unit/test_dg17_evidence_atoms.py"
+        ]
+      },
+      "decision": "RETAIN",
+      "id": "evidence-atom-v01-alias",
+      "reason": "Deletion is forbidden because an active Product acquisition path, dedicated tests, and immutable archive material still consume or reference the alias."
+    }
+  ]
+}

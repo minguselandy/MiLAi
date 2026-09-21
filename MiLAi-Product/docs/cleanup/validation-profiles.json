@@ -1,5 +1,52 @@
 {
   "profiles": {
+    "compatibility-audit": {
+      "changed_paths": [
+        "MiLAi-Product/docs/cleanup/compatibility-*.json",
+        "MiLAi-Product/docs/cleanup/COMPATIBILITY_*.md",
+        "MiLAi-Product/tools/verify_compatibility_registry.py"
+      ],
+      "levels": {
+        "dev": {
+          "boundary": [],
+          "build": [],
+          "integration_requirement": "Static audit and collection only; no behavior suite, PostgreSQL, Lab fast, or historical replay.",
+          "manifest": [],
+          "mypy": [],
+          "ruff": [
+            {"argv": ["{runtime_python}", "-m", "ruff", "check", "tools/verify_compatibility_registry.py"], "cwd": "product"}
+          ],
+          "tests": [
+            {"argv": ["{python}", "tools/verify_compatibility_registry.py"], "cwd": "product"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "client"}
+          ]
+        },
+        "prepush": {
+          "boundary": [
+            {"argv": ["{runtime_python}", "MiLAi-Artifact-Archive/tools/verify_boundaries.py"], "cwd": "workspace"}
+          ],
+          "build": [],
+          "integration_requirement": "Static C8 closure only; behavior and historical suites remain reserved for C9/C10.",
+          "manifest": [
+            {"argv": ["{runtime_python}", "tools/build_product_manifest.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_revalidation_receipts.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_architecture_conformance.py", "--check"], "cwd": "product"}
+          ],
+          "mypy": [],
+          "ruff": [
+            {"argv": ["{runtime_python}", "-m", "ruff", "check", "tools/verify_compatibility_registry.py"], "cwd": "product"}
+          ],
+          "tests": [
+            {"argv": ["{python}", "tools/verify_compatibility_registry.py"], "cwd": "product"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "client"}
+          ]
+        }
+      }
+    },
     "lab": {
       "changed_paths": [
         "MiLAi-Lab/src/**",
