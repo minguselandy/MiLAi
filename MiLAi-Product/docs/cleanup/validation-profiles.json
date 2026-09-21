@@ -1,0 +1,135 @@
+{
+  "profiles": {
+    "lab": {
+      "changed_paths": [
+        "MiLAi-Lab/src/**",
+        "MiLAi-Lab/tests/**",
+        "MiLAi-Lab/tools/**"
+      ],
+      "levels": {
+        "dev": {
+          "boundary": [
+            {"argv": ["uv", "run", "milai-lab-check-boundary"], "cwd": "lab"},
+            {"argv": ["uv", "run", "milai-lab-check-tools-boundary"], "cwd": "lab"}
+          ],
+          "build": [],
+          "integration_requirement": "No historical replay during edit loops.",
+          "manifest": [],
+          "mypy": [{"argv": ["uv", "run", "mypy", "src/milai_lab"], "cwd": "lab"}],
+          "ruff": [{"argv": ["uv", "run", "ruff", "check", "src", "tests", "tools"], "cwd": "lab"}],
+          "tests": [{"argv": ["uv", "run", "pytest", "-q", "--maxfail=1", "-m", "not regression"], "cwd": "lab"}]
+        },
+        "prepush": {
+          "boundary": [
+            {"argv": ["uv", "run", "milai-lab-check-boundary"], "cwd": "lab"},
+            {"argv": ["uv", "run", "milai-lab-check-tools-boundary"], "cwd": "lab"},
+            {"argv": ["{runtime_python}", "MiLAi-Artifact-Archive/tools/verify_boundaries.py"], "cwd": "workspace"}
+          ],
+          "build": [{"argv": ["uv", "build"], "cwd": "lab"}],
+          "integration_requirement": "Lab fast only; historical replay is reserved for L4.",
+          "manifest": [
+            {"argv": ["{runtime_python}", "tools/build_product_manifest.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_architecture_conformance.py", "--check"], "cwd": "product"}
+          ],
+          "mypy": [{"argv": ["uv", "run", "mypy", "src/milai_lab"], "cwd": "lab"}],
+          "ruff": [{"argv": ["uv", "run", "ruff", "check", "src", "tests", "tools"], "cwd": "lab"}],
+          "tests": [
+            {"argv": ["uv", "run", "pytest", "-q", "--maxfail=1", "-m", "not regression"], "cwd": "lab"},
+            {"argv": ["uv", "run", "python", "tools/check_legacy_archive.py"], "cwd": "lab"}
+          ]
+        }
+      }
+    },
+    "mcp": {
+      "changed_paths": ["MiLAi-Product/integrations/mcp/**"],
+      "levels": {
+        "dev": {
+          "boundary": [],
+          "build": [],
+          "integration_requirement": "Package tests only; OAuth/HTTP nodes are selected when adjacent code changes.",
+          "manifest": [],
+          "mypy": [],
+          "ruff": [{"argv": ["uv", "run", "ruff", "check", "src", "tests"], "cwd": "mcp"}],
+          "tests": [{"argv": ["uv", "run", "pytest", "-q"], "cwd": "mcp"}]
+        },
+        "prepush": {
+          "boundary": [{"argv": ["{runtime_python}", "MiLAi-Artifact-Archive/tools/verify_boundaries.py"], "cwd": "workspace"}],
+          "build": [{"argv": ["uv", "build"], "cwd": "mcp"}],
+          "integration_requirement": "Complete MCP package; no unrelated integration packages.",
+          "manifest": [
+            {"argv": ["{runtime_python}", "tools/build_product_manifest.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_revalidation_receipts.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_architecture_conformance.py", "--check"], "cwd": "product"}
+          ],
+          "mypy": [{"argv": ["uv", "run", "mypy"], "cwd": "mcp"}],
+          "ruff": [{"argv": ["uv", "run", "ruff", "check", "src", "tests"], "cwd": "mcp"}],
+          "tests": [{"argv": ["uv", "run", "pytest", "-q"], "cwd": "mcp"}]
+        }
+      }
+    },
+    "memory-context": {
+      "changed_paths": [
+        "MiLAi-Product/runtime/src/milai/application/memory_context.py",
+        "MiLAi-Product/runtime/src/milai/application/memory_context_core/**",
+        "MiLAi-Product/runtime/tests/**memory_context**",
+        "MiLAi-Product/runtime/tests/unit/test_dg17_memory_context.py",
+        "MiLAi-Product/runtime/tests/unit/test_dg18_context_expansion.py",
+        "MiLAi-Product/runtime/tests/unit/test_dg18_context_packing.py",
+        "MiLAi-Product/runtime/tests/unit/test_context_excerpt_focus.py",
+        "MiLAi-Product/runtime/tests/unit/test_memory_resolve.py"
+      ],
+      "levels": {
+        "dev": {
+          "boundary": [],
+          "build": [],
+          "integration_requirement": "None unless an edited path directly crosses persistence.",
+          "manifest": [],
+          "mypy": [],
+          "ruff": [{"argv": ["uv", "run", "ruff", "check", "src/milai/application/memory_context.py", "src/milai/application/memory_context_core", "tests/unit/test_memory_context_core_compatibility.py"], "cwd": "runtime"}],
+          "tests": [{"argv": ["uv", "run", "pytest", "-q", "tests/unit/test_dg17_memory_context.py", "tests/unit/test_dg18_context_expansion.py", "tests/unit/test_dg18_context_packing.py", "tests/unit/test_context_excerpt_focus.py", "tests/unit/test_memory_resolve.py", "tests/unit/test_memory_context_core_compatibility.py"], "cwd": "runtime"}]
+        },
+        "prepush": {
+          "boundary": [{"argv": ["{runtime_python}", "MiLAi-Artifact-Archive/tools/verify_boundaries.py"], "cwd": "workspace"}],
+          "build": [{"argv": ["uv", "build"], "cwd": "runtime"}],
+          "integration_requirement": "Unit and contract directories only; add explicit PostgreSQL nodes only for direct DB risk.",
+          "manifest": [
+            {"argv": ["{runtime_python}", "tools/build_product_manifest.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_revalidation_receipts.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_architecture_conformance.py", "--check"], "cwd": "product"}
+          ],
+          "mypy": [{"argv": ["uv", "run", "mypy"], "cwd": "runtime"}],
+          "ruff": [{"argv": ["uv", "run", "ruff", "check", "src", "tests", "migrations"], "cwd": "runtime"}],
+          "tests": [{"argv": ["uv", "run", "pytest", "-q", "tests/unit", "tests/contract"], "cwd": "runtime"}]
+        }
+      }
+    },
+    "openworker": {
+      "changed_paths": ["MiLAi-Product/integrations/openworker-mcp/**"],
+      "levels": {
+        "dev": {
+          "boundary": [],
+          "build": [],
+          "integration_requirement": "Only adjacent Host tests; HTTP exposure nodes are mandatory for ingress edits.",
+          "manifest": [],
+          "mypy": [],
+          "ruff": [{"argv": ["uv", "run", "ruff", "check", "src", "tests"], "cwd": "openworker"}],
+          "tests": [{"argv": ["uv", "run", "pytest", "-q"], "cwd": "openworker"}]
+        },
+        "prepush": {
+          "boundary": [{"argv": ["{runtime_python}", "MiLAi-Artifact-Archive/tools/verify_boundaries.py"], "cwd": "workspace"}],
+          "build": [{"argv": ["uv", "build"], "cwd": "openworker"}],
+          "integration_requirement": "Complete openworker-mcp package including HTTP exposure contract.",
+          "manifest": [
+            {"argv": ["{runtime_python}", "tools/build_product_manifest.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_revalidation_receipts.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_architecture_conformance.py", "--check"], "cwd": "product"}
+          ],
+          "mypy": [{"argv": ["uv", "run", "mypy"], "cwd": "openworker"}],
+          "ruff": [{"argv": ["uv", "run", "ruff", "check", "src", "tests"], "cwd": "openworker"}],
+          "tests": [{"argv": ["uv", "run", "pytest", "-q"], "cwd": "openworker"}]
+        }
+      }
+    }
+  },
+  "schema_version": "milai-cleanup-validation-profiles-v1"
+}
