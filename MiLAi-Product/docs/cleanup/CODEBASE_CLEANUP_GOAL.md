@@ -208,6 +208,16 @@ composition 全部 PASS 后才合并。
 - 合并目标是由 merge queue 验证最终 merge tree；在 required check 与 merge queue 已覆盖
   同一 merge tree 时，不再机械重复 post-merge 全套。
 
+### 2026-09-21 — Retrieval subsystem merged; backup test determinism follow-up
+
+- Retrieval trace/finalization PR #15 的 Run #51 最新 attempt：17 jobs success，composition
+  实际 PASS；合并后的 `main=c96eb170776e9f29d575c2001fc77de15381af14`。
+- Run #51 首次 Runtime attempt 与此前 Run #45 相同，唯一失败为 backup test 在
+  `Database.close()` 返回后立即观察到尚未从 PostgreSQL 消失的 pool session；单 job 重跑
+  通过，远端其余 `1240 passed / 3 skipped` 未受影响。
+- 后续 test-only 修复只在测试 setup 中等待 API/Steward/Worker sessions 确认归零；不修改
+  `Database.close()`、backup quiescence gate 或任何 Product 行为，原 pytest node ID 保持不变。
+
 ## Completion rule
 
 只有总指令第 24 节全部条件有当前权威证据时，才把本 Goal 标记为 COMPLETE。
