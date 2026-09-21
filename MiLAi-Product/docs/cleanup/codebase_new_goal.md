@@ -8,10 +8,10 @@ Goal 类型:                  behavior-preserving cleanup / bounded modularizati
 执行状态:                   ACTIVE — 用户已于 2026-09-21 明确恢复
 前置合同:                   MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 本版作用:                   优化执行节奏、验证分级、CI 触发与剩余 PR 边界
-当前阶段:                   C6 Test organization final candidate
-当前候选分支:               cleanup/c6-test-organization
+当前阶段:                   C7 Lab active runner organization final candidate
+当前候选分支:               cleanup/c7-lab-runner-organization
 最近权威 full workflow:     Run #57 / 17 jobs success / composition PASS
-当前 base main:             fba2ace9cda45457970b74c48f3cd48393a542e2
+当前 base main:             9ff549e8a02ec2ed1a08d65edcbc91679177b144
 ```
 
 本 Goal 不推翻 v1.0 的行为保持、Source of Truth、Frozen Architecture、历史证据和完成定义。
@@ -136,8 +136,8 @@ STOP STRUCTURAL WORK
 | C3 | Runtime Memory Context modularization | COMPLETE — PR #19 merged; fast PR and main identity PASS |
 | C4 | MCP Server modularization | COMPLETE — PR #20 merged; fast PR and main identity PASS |
 | C5 | OpenWorker Host modularization | COMPLETE — PR #21 merged; fast PR and main identity PASS |
-| C6 | Test organization | IN PROGRESS — implementation complete; candidate validation |
-| C7 | Lab active code organization | PENDING |
+| C6 | Test organization | COMPLETE — PR #22 merged; fast PR and main identity PASS |
+| C7 | Lab active code organization | IN PROGRESS — initial thin-runner cohort implemented; candidate validation |
 | C8 | Compatibility/dead-code audit | PENDING |
 | C9 | Current-tree evidence refresh | PENDING |
 | C10 | Final cleanup baseline | PENDING |
@@ -728,7 +728,13 @@ C6 dev 与最终 L2 structural pre-push gate 均 PASS：三包 Ruff、registry/r
 422 files / `7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521`，
 8 份 behavior receipts、Conformance freshness 与 repository boundary（4,345 tracked paths，
 0 findings）全 PASS。未连接 PostgreSQL，未运行 historical benchmark、package behavior suite
-或 full composition；下一步只 push 最终候选并执行远端 fast PR gate 与 merge-tree identity。
+或 full composition；该候选随后只执行远端 fast PR gate 与 merge-tree identity。
+
+PR #22 的最终候选 `186ced0c731435fd84ee786d4d1edfa60ddc00fc` 已通过 fast run
+`35624733099`，并 squash merge 为 `9ff549e8a02ec2ed1a08d65edcbc91679177b144`。候选 tree 与
+merge tree 均为 `179bfbb152cf451be30835ea082f9c967dd588ca`；main push run
+`35624975969` 的 tested-tree identity、manifest、boundary、Conformance 与总 gate 全 PASS。
+full-composition run `35624733086` 按 test-only 范围正确 skipped，未运行 historical replay。
 
 ---
 
@@ -755,6 +761,44 @@ mypy new package
 
 禁止修改 seed、dataset ordering、arms、prompt、budget、provider、output schema、metrics、sealed
 fixtures 和 `studies/archive/**`。
+
+### 14.1 2026-09-22 执行记录
+
+`cleanup/c7-lab-runner-organization` 已完成首批两个 self-contained active runner 的实现抽取：
+
+```text
+a27fafe  extract active runner implementations and compatibility wrappers
+```
+
+```text
+tools/run_product02_context_gate.py
+    → src/milai_lab/runners/product02_context_gate.py
+tools/run_product03_openworker_usability.py
+    → src/milai_lab/runners/product03_openworker_usability.py
+```
+
+两个历史工具路径均保留为 16 行 compatibility CLI wrapper，并转发 implementation 的全部
+non-dunder 名称；已有 `run_product03_opportunity_probe.py` 对 Product-02 helper 的直接导入继续
+可用。对 base `9ff549e8a02ec2ed1a08d65edcbc91679177b144` 的递归 AST 比对覆盖 49 个
+class/function 定义，49 个逐 AST 完全一致，0 个名称丢失。唯一 path-sensitive 调整是
+Product-02 implementation 按新目录深度计算相同 Lab root，并删除 package 内不再需要且违反
+active-source boundary 的 `sys.path` mutation。
+
+定向验证为两个 compatibility tests、两个 `--help` CLI smoke、下游 helper import smoke、
+changed-scope Ruff、`milai_lab.runners` strict mypy、Lab boundary 与 tools boundary 全 PASS。未修改
+seed、dataset ordering、arms、prompt、budget、provider、output schema、metrics、sealed fixtures、
+`studies/archive/**` 或 Product tree。详细责任与兼容边界见
+`MiLAi-Lab/docs/ACTIVE_RUNNER_MODULE_MAP.md`。
+
+最终 L2 Lab pre-push 已一次性 PASS：Ruff、57 个 active source files 的 strict mypy、
+4,668 passed / 19 skipped / 4 deselected 的 non-regression Lab fast、1,728 archived files 的字节
+检查、sdist/wheel build、Product manifest（422 files / `7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521`）、
+Conformance freshness、Lab boundary、tools boundary，以及 repository boundary（4,349 tracked
+paths，0 findings）均通过。
+
+本阶段以“大型 active runner 开始 thin-runner 化”为边界，不将大量互相耦合或被历史证据引用
+的 runner 一次性重写。按用户对耗时测试的明确要求，本纯结构 PR 不运行 historical/full
+composition，最终权威回放保留到 C9/C10；也不再重复本地 Lab fast。
 
 ---
 
@@ -866,8 +910,8 @@ PR #18  CI/test cadence optimization          已验证并合并
 PR #19  C3 Memory Context final               已验证并合并
 PR #20  C4 MCP Server complete modularization 已验证并合并
 PR #21  C5 OpenWorker Host complete modularization 已验证并合并
-PR #22  C6 test organization + compatibility registry 本地候选
-PR #23  C7 Lab active runner organization
+PR #22  C6 test organization + compatibility registry 已验证并合并
+PR #23  C7 Lab active runner organization 本地候选
 PR #24  C8 dead-code / compatibility closure
 PR #25  C9 + C10 evidence refresh/final baseline
 ```
