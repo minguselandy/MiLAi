@@ -10,7 +10,71 @@ from datetime import UTC, datetime
 from typing import Any, Literal, cast
 from uuid import uuid4
 
-from milai.application.evidence_source import structured_evidence_speaker
+from milai.application.memory_context_core.activation import (
+    _LOCAL_CONTEXT as _LOCAL_CONTEXT,
+)
+from milai.application.memory_context_core.activation import (
+    _MULTI_SESSION as _MULTI_SESSION,
+)
+from milai.application.memory_context_core.activation import (
+    _QUERY_STOPWORDS as _QUERY_STOPWORDS,
+)
+from milai.application.memory_context_core.activation import _TERM as _TERM
+from milai.application.memory_context_core.activation import _VALUE as _VALUE
+from milai.application.memory_context_core.activation import (
+    _admissible_conditional_gain as _admissible_conditional_gain,
+)
+from milai.application.memory_context_core.activation import (
+    _answer_signal as _answer_signal,
+)
+from milai.application.memory_context_core.activation import (
+    _breadth_first_binding_spans as _breadth_first_binding_spans,
+)
+from milai.application.memory_context_core.activation import (
+    _candidate_item_sort_key as _candidate_item_sort_key,
+)
+from milai.application.memory_context_core.activation import (
+    _canonical_item_identity as _canonical_item_identity,
+)
+from milai.application.memory_context_core.activation import (
+    _canonical_item_sort_key as _canonical_item_sort_key,
+)
+from milai.application.memory_context_core.activation import (
+    _conditional_activation_thresholds as _conditional_activation_thresholds,
+)
+from milai.application.memory_context_core.activation import (
+    _derived_operand_views as _derived_operand_views,
+)
+from milai.application.memory_context_core.activation import (
+    _evidence_views as _evidence_views,
+)
+from milai.application.memory_context_core.activation import (
+    _fallback_decision_snapshot as _fallback_decision_snapshot,
+)
+from milai.application.memory_context_core.activation import (
+    _legacy_session_identity as _legacy_session_identity,
+)
+from milai.application.memory_context_core.activation import (
+    _local_context_activation as _local_context_activation,
+)
+from milai.application.memory_context_core.activation import (
+    _normalized_unit_semantics as _normalized_unit_semantics,
+)
+from milai.application.memory_context_core.activation import (
+    _query_terms as _query_terms,
+)
+from milai.application.memory_context_core.activation import (
+    _required_requirement_ids as _required_requirement_ids,
+)
+from milai.application.memory_context_core.activation import (
+    _stable_evidence_views as _stable_evidence_views,
+)
+from milai.application.memory_context_core.activation import (
+    _structured_source_context as _structured_source_context,
+)
+from milai.application.memory_context_core.activation import (
+    _without_presentation_budget as _without_presentation_budget,
+)
 from milai.application.memory_context_core.common import (
     _authority_class as _authority_class,
 )
@@ -91,7 +155,6 @@ from milai.application.memory_context_core.units import (
 )
 from milai.application.reader_evidence_plan import (
     DecisionSnapshotRef,
-    build_decision_snapshot,
     materialize_decision_snapshot,
 )
 from milai.application.recall_workspace import RecallCandidate, marginal_evidence_order
@@ -99,7 +162,6 @@ from milai.domain.memory_context import (
     ContextAuthorityClass,
     ContextExpansion,
     EvidenceContextReceipt,
-    EvidenceSourceContextLineage,
     EvidenceSpeaker,
     EvidenceView,
     IssueRevisionDependency,
@@ -109,7 +171,6 @@ from milai.domain.memory_context import (
 )
 from milai.domain.memory_resolve import MemoryResolveRequest
 from milai.domain.reader_evidence_plan import (
-    AcceptedBindingSpan,
     ContextBudgetEnvelope,
     DecisionSnapshot,
     OmittedReaderEvidenceUnit,
@@ -120,24 +181,6 @@ from milai.domain.reader_evidence_plan import (
 )
 from milai.persistence import SessionContext
 
-_TERM = re.compile(r"[^\W_]+", re.UNICODE)
-_VALUE = re.compile(
-    r"(?:[$€£]\s*\d)|(?:\b\d+(?:\.\d+)?\b)|"
-    r"(?:\b(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|"
-    r"eleven|twelve)\b)|(?:\b(?:day|week|month|year)s?\b)",
-    re.IGNORECASE,
-)
-_MULTI_SESSION = re.compile(
-    r"\b(?:both|each|across|between|compare|respectively|per\s+\w+|"
-    r"how\s+many\s+(?:times|appointments?|sessions?|events?))\b",
-    re.IGNORECASE,
-)
-_LOCAL_CONTEXT = re.compile(
-    r"\b(?:same\s+(?:session|conversation|round)|adjacent\s+(?:turn|round)|"
-    r"previous\s+turn|next\s+turn|conversation\s+context|"
-    r"what\s+did\s+(?:you|the\s+assistant)\s+(?:say|reply|respond))\b",
-    re.IGNORECASE,
-)
 _RECEIPT_WINDOW_HEADER = re.compile(
     r"(?m)^\[(?P<alias>E\d+) "
     r"(?:ACCEPTED BINDING SPAN|EVIDENCE WINDOW) / NON-CANONICAL"
@@ -152,74 +195,6 @@ _RECEIPT_ALIAS_HEADER = re.compile(
     r"EVIDENCE WINDOW / NON-CANONICAL(?: [^\]\n]+)?|"
     r"OPEN ISSUE / SAFETY"
     r")\]$"
-)
-_QUERY_STOPWORDS = frozenset(
-    {
-        "a",
-        "am",
-        "an",
-        "and",
-        "are",
-        "as",
-        "at",
-        "average",
-        "be",
-        "been",
-        "being",
-        "both",
-        "by",
-        "compared",
-        "did",
-        "do",
-        "does",
-        "each",
-        "evidence",
-        "for",
-        "from",
-        "had",
-        "has",
-        "history",
-        "how",
-        "i",
-        "in",
-        "into",
-        "is",
-        "it",
-        "its",
-        "many",
-        "me",
-        "memory",
-        "more",
-        "most",
-        "much",
-        "my",
-        "of",
-        "on",
-        "or",
-        "our",
-        "ours",
-        "per",
-        "previous",
-        "recall",
-        "that",
-        "the",
-        "their",
-        "them",
-        "they",
-        "this",
-        "those",
-        "through",
-        "to",
-        "us",
-        "was",
-        "were",
-        "what",
-        "when",
-        "which",
-        "with",
-        "you",
-        "your",
-    }
 )
 _WORKSPACE_WRAPPER_TERMS = frozenset(
     {
@@ -239,6 +214,8 @@ _WORKSPACE_WRAPPER_TERMS = frozenset(
 )
 _SOFT_WINDOW_TOKEN_CAP = 2_048
 _SOFT_SESSION_DIVERSITY_PREFIX = 4
+
+
 class MemoryContextCompiler:
     """Compile the minimum governed Context from Runtime-owned result views."""
 
@@ -266,9 +243,7 @@ class MemoryContextCompiler:
         self._exact_tokenizer_identity = exact_tokenizer_identity
         self._query_preserving_union_enabled = query_preserving_union_enabled
         self._evidence_set_selection_enabled = evidence_set_selection_enabled
-        self._instance_preserving_admission_enabled = (
-            instance_preserving_admission_enabled
-        )
+        self._instance_preserving_admission_enabled = instance_preserving_admission_enabled
 
     @property
     def requires_full_decision_snapshot(self) -> bool:
@@ -439,19 +414,16 @@ class MemoryContextCompiler:
             session_landmark_pairing=self._query_preserving_union_enabled,
             optional_member_token_cap=(
                 _SOFT_WINDOW_TOKEN_CAP
-                if governance_admitted_context
-                and self._query_preserving_union_enabled
+                if governance_admitted_context and self._query_preserving_union_enabled
                 else None
             ),
         )
-        multi_session_required = (
-            _requires_multiple_sessions(
-                request.query,
-                query_ir,
-                window_evidence_views,
-                window_required_evidence_ids,
-                window_required_source_refs,
-            )
+        multi_session_required = _requires_multiple_sessions(
+            request.query,
+            query_ir,
+            window_evidence_views,
+            window_required_evidence_ids,
+            window_required_source_refs,
         )
         ordered_windows = _order_windows(
             windows,
@@ -894,9 +866,7 @@ class MemoryContextCompiler:
             text,
             selected_units,
             exact_token_counter=(
-                admission_counter
-                if accounting_authority == "READER_EXACT_TOKENIZER"
-                else None
+                admission_counter if accounting_authority == "READER_EXACT_TOKENIZER" else None
             ),
             token_accounting_method=accounting_authority,
         )
@@ -958,15 +928,9 @@ class MemoryContextCompiler:
                     "_reader_evidence_boundary", "LEGACY_CONTEXT_BOUNDARY"
                 ),
                 "lean_recall_mode": planned.decision_snapshot.lean_recall_mode,
-                "lean_recall_plan_digest": (
-                    planned.decision_snapshot.lean_recall_plan_digest
-                ),
-                "evidence_set_digest": (
-                    planned.decision_snapshot.evidence_set.evidence_set_digest
-                ),
-                "evidence_set_item_count": len(
-                    planned.decision_snapshot.evidence_set.items
-                ),
+                "lean_recall_plan_digest": (planned.decision_snapshot.lean_recall_plan_digest),
+                "evidence_set_digest": (planned.decision_snapshot.evidence_set.evidence_set_digest),
+                "evidence_set_item_count": len(planned.decision_snapshot.evidence_set.items),
                 "evidence_set_covered_requirement_ids": list(
                     planned.decision_snapshot.evidence_set.covered_requirement_ids
                 ),
@@ -1010,12 +974,8 @@ class MemoryContextCompiler:
                 "expansion_trace": list(planned.expansion_trace),
                 "expansion_activation": planned.expansion_activation,
                 "multi_session_requirement": planned.multi_session_required,
-                "query_preserving_union_enabled": (
-                    self._query_preserving_union_enabled
-                ),
-                "evidence_set_selection_enabled": (
-                    self._evidence_set_selection_enabled
-                ),
+                "query_preserving_union_enabled": (self._query_preserving_union_enabled),
+                "evidence_set_selection_enabled": (self._evidence_set_selection_enabled),
                 "recall_workspace_trace": planned.recall_workspace_trace,
                 "required_evidence_packing_loss_count": (
                     len(planned.required_evidence_ids) - len(required_evidence_selected)
@@ -1072,21 +1032,16 @@ class MemoryContextCompiler:
         items = list(baseline_items)
         raw_instance_candidates = outcome.get("_instance_preserving_candidate_items")
         instance_candidate_items = (
-            raw_instance_candidates
-            if isinstance(raw_instance_candidates, list)
-            else []
+            raw_instance_candidates if isinstance(raw_instance_candidates, list) else []
         )
         instance_preserving_active = (
             self._instance_preserving_admission_enabled
-            and outcome.get("_reader_evidence_boundary")
-            == "GOVERNANCE_ADMITTED_SOFT_RANKED"
+            and outcome.get("_reader_evidence_boundary") == "GOVERNANCE_ADMITTED_SOFT_RANKED"
             and bool(instance_candidate_items)
         )
         if instance_preserving_active:
             canonical_items = [
-                item
-                for item in baseline_items
-                if item.get("kind") != "EVIDENCE_OBSERVATION"
+                item for item in baseline_items if item.get("kind") != "EVIDENCE_OBSERVATION"
             ]
             seen_evidence_ids: set[str] = set()
             candidate_items: list[dict[str, Any]] = []
@@ -1159,14 +1114,12 @@ class MemoryContextCompiler:
             required_source_refs=required_source_refs,
             session_landmark_pairing=self._query_preserving_union_enabled,
         )
-        multi_session_required = (
-            _requires_multiple_sessions(
-                request.query,
-                query_ir,
-                evidence_views,
-                required_evidence_ids,
-                required_source_refs,
-            )
+        multi_session_required = _requires_multiple_sessions(
+            request.query,
+            query_ir,
+            evidence_views,
+            required_evidence_ids,
+            required_source_refs,
         )
         ordered_windows = _order_windows(
             windows,
@@ -1193,17 +1146,15 @@ class MemoryContextCompiler:
                 baseline_multi_session_required,
                 token_efficient=self._query_preserving_union_enabled,
             )
-            ordered_windows, recall_workspace_trace = (
-                _instance_preserving_window_order(
-                    request.query,
-                    query_terms,
-                    outcome,
-                    derived,
-                    baseline_ordered_windows,
-                    ordered_windows,
-                    items,
-                    request.budget.max_context_tokens,
-                )
+            ordered_windows, recall_workspace_trace = _instance_preserving_window_order(
+                request.query,
+                query_terms,
+                outcome,
+                derived,
+                baseline_ordered_windows,
+                ordered_windows,
+                items,
+                request.budget.max_context_tokens,
             )
         required_windows = [window for window in ordered_windows if window.requirement_priority]
         optional_windows = [window for window in ordered_windows if not window.requirement_priority]
@@ -1241,9 +1192,7 @@ class MemoryContextCompiler:
                 derived,
             )
             activation_threshold = _estimated_tokens(rendered)
-            conditional_activation_thresholds[f"evidence:{window.window_id}"] = (
-                activation_threshold
-            )
+            conditional_activation_thresholds[f"evidence:{window.window_id}"] = activation_threshold
             if activation_threshold <= budget:
                 selected_windows.append(window)
                 continue
@@ -1325,12 +1274,8 @@ class MemoryContextCompiler:
         )
         reader_context_digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
         selected_window_ids = {window.window_id for window in selected_windows}
-        selected_unit_ids = [
-            f"evidence:{window.window_id}" for window in selected_windows
-        ]
-        conditional_unit_order = [
-            f"evidence:{window.window_id}" for window in optional_windows
-        ]
+        selected_unit_ids = [f"evidence:{window.window_id}" for window in selected_windows]
+        conditional_unit_order = [f"evidence:{window.window_id}" for window in optional_windows]
         selected_conditional_unit_ids = [
             unit_id for unit_id in conditional_unit_order if unit_id in selected_unit_ids
         ]
@@ -1395,9 +1340,7 @@ class MemoryContextCompiler:
                 "reader_evidence_boundary": outcome.get(
                     "_reader_evidence_boundary", "LEGACY_CONTEXT_BOUNDARY"
                 ),
-                "reader_readiness": (
-                    "BUDGET_INFEASIBLE" if required_omitted else "READY"
-                ),
+                "reader_readiness": ("BUDGET_INFEASIBLE" if required_omitted else "READY"),
                 "budget_envelope": {
                     "schema_version": "context-budget-envelope-v0.1",
                     "requested_cap": budget,
@@ -1429,12 +1372,9 @@ class MemoryContextCompiler:
                 ),
                 "long_turn_split_count": 0,
                 "rank_first_prefix_violation_count": int(
-                    selected_conditional_unit_ids
-                    != conditional_unit_order[:rank_prefix_length]
+                    selected_conditional_unit_ids != conditional_unit_order[:rank_prefix_length]
                 ),
-                "whole_unit_admission": not any(
-                    window.truncated for window in selected_windows
-                ),
+                "whole_unit_admission": not any(window.truncated for window in selected_windows),
                 "conditional_unit_order": conditional_unit_order,
                 "selected_conditional_unit_ids": selected_conditional_unit_ids,
                 "candidate_window_trace": candidate_window_trace,
@@ -1457,15 +1397,9 @@ class MemoryContextCompiler:
                 "hydrated_evidence_count": len(expansion_trace),
                 "multi_session_requirement": multi_session_required,
                 "session_diversity_objective_enabled": multi_session_required,
-                "query_preserving_union_enabled": (
-                    self._query_preserving_union_enabled
-                ),
-                "evidence_set_selection_enabled": (
-                    self._evidence_set_selection_enabled
-                ),
-                "instance_preserving_admission_enabled": (
-                    instance_preserving_active
-                ),
+                "query_preserving_union_enabled": (self._query_preserving_union_enabled),
+                "evidence_set_selection_enabled": (self._evidence_set_selection_enabled),
+                "instance_preserving_admission_enabled": (instance_preserving_active),
                 "recall_workspace_trace": recall_workspace_trace,
                 "requirement_evidence_count": len(required_evidence_ids),
                 "requirement_source_turn_count": len(required_source_refs),
@@ -1541,9 +1475,7 @@ class MemoryContextCompiler:
             max_items=min(
                 120,
                 max(1, len(anchors) * 5),
-                max(1, 160 - len(items))
-                if self._query_preserving_union_enabled
-                else 120,
+                max(1, 160 - len(items)) if self._query_preserving_union_enabled else 120,
             ),
         )
         evidence_ids = {
@@ -1606,14 +1538,6 @@ class MemoryContextCompiler:
                 }
             )
         return expanded, trace, activation
-
-
-
-
-
-
-
-
 
 
 def _acquired_candidate_trace(outcome: dict[str, Any]) -> dict[str, object]:
@@ -1702,8 +1626,7 @@ def _acquired_candidate_trace(outcome: dict[str, Any]) -> dict[str, object]:
         "trace_sha256": canonical_digest(material),
         "semantic_effect_eligible": bool(candidates)
         and all(
-            item["identity_source"]
-            in {"STRUCTURED_TURN_METADATA", "AUTHORITATIVE_BACKFILL"}
+            item["identity_source"] in {"STRUCTURED_TURN_METADATA", "AUTHORITATIVE_BACKFILL"}
             for item in candidates
         ),
     }
@@ -1723,20 +1646,22 @@ def _reader_boundary_trace(
         else []
     )
     post_items = outcome.get("items")
-    after_boundary_ids = _unique(
-        evidence_id
-        for item in post_items
-        if isinstance(item, dict) and item.get("kind") == "EVIDENCE_OBSERVATION"
-        for evidence_id in [
-            *_string_values(item.get("evidence_ids")),
-            *_string_values(item.get("evidence_id")),
-        ]
-    ) if isinstance(post_items, list) else []
+    after_boundary_ids = (
+        _unique(
+            evidence_id
+            for item in post_items
+            if isinstance(item, dict) and item.get("kind") == "EVIDENCE_OBSERVATION"
+            for evidence_id in [
+                *_string_values(item.get("evidence_ids")),
+                *_string_values(item.get("evidence_id")),
+            ]
+        )
+        if isinstance(post_items, list)
+        else []
+    )
     after_boundary_set = set(after_boundary_ids)
     accepted_ids = {item.evidence_id for item in snapshot.evidence_set.items}
-    boundary = str(
-        outcome.get("_reader_evidence_boundary", "LEGACY_CONTEXT_BOUNDARY")
-    )
+    boundary = str(outcome.get("_reader_evidence_boundary", "LEGACY_CONTEXT_BOUNDARY"))
     decisions: list[dict[str, object]] = []
     for candidate in candidates:
         evidence_id = candidate.get("evidence_id")
@@ -1752,8 +1677,7 @@ def _reader_boundary_trace(
                     "GOVERNANCE_ADMITTED_FOR_READER"
                     if kept
                     else "NOT_IN_ACCEPTED_EVIDENCE_SET"
-                    if boundary == "DECISION_ACCEPTED_ONLY"
-                    and evidence_id not in accepted_ids
+                    if boundary == "DECISION_ACCEPTED_ONLY" and evidence_id not in accepted_ids
                     else "REMOVED_BEFORE_CONTEXT_PLAN"
                 ),
             }
@@ -1762,9 +1686,7 @@ def _reader_boundary_trace(
         "schema_version": "reader-boundary-trace-v0.1",
         "boundary": boundary,
         "before_boundary_ids": [
-            item["evidence_id"]
-            for item in candidates
-            if isinstance(item.get("evidence_id"), str)
+            item["evidence_id"] for item in candidates if isinstance(item.get("evidence_id"), str)
         ],
         "after_boundary_ids": after_boundary_ids,
         "decisions": decisions,
@@ -1789,24 +1711,15 @@ def _bound_evidence_trace(snapshot: DecisionSnapshot) -> dict[str, object]:
             },
             "requirement_ids": list(item.requirement_ids),
             "requirement_roles": list(item.requirement_roles),
-            "occurrences": [
-                occurrence.model_dump(mode="json")
-                for occurrence in item.occurrences
-            ],
+            "occurrences": [occurrence.model_dump(mode="json") for occurrence in item.occurrences],
         }
         for ordinal, item in enumerate(snapshot.evidence_set.items)
     ]
     material = {
         "evidence_set_digest": snapshot.evidence_set.evidence_set_digest,
-        "required_requirement_ids": list(
-            snapshot.evidence_set.required_requirement_ids
-        ),
-        "covered_requirement_ids": list(
-            snapshot.evidence_set.covered_requirement_ids
-        ),
-        "missing_requirement_ids": list(
-            snapshot.evidence_set.missing_requirement_ids
-        ),
+        "required_requirement_ids": list(snapshot.evidence_set.required_requirement_ids),
+        "covered_requirement_ids": list(snapshot.evidence_set.covered_requirement_ids),
+        "missing_requirement_ids": list(snapshot.evidence_set.missing_requirement_ids),
         "item_count": len(items),
         "items": items,
     }
@@ -1900,9 +1813,7 @@ def _reader_visible_trace(
                         "start": len(text[:start].encode("utf-8")),
                         "end": len(text[:end].encode("utf-8")),
                     },
-                    "serialized_part_sha256": hashlib.sha256(
-                        part_text.encode("utf-8")
-                    ).hexdigest(),
+                    "serialized_part_sha256": hashlib.sha256(part_text.encode("utf-8")).hexdigest(),
                 }
             )
             cursor = end + (2 if ordinal < len(terminal_texts) - 1 else 0)
@@ -1937,9 +1848,7 @@ def _reader_visible_trace(
             "kind": kind,
             "serialized_char_offset": {"start": start, "end": end},
             "serialized_utf8_byte_offset": {"start": byte_start, "end": byte_end},
-            "serialized_part_sha256": hashlib.sha256(
-                part_text.encode("utf-8")
-            ).hexdigest(),
+            "serialized_part_sha256": hashlib.sha256(part_text.encode("utf-8")).hexdigest(),
         }
         serialization_parts.append(part)
         if unit is not None:
@@ -1952,18 +1861,12 @@ def _reader_visible_trace(
                     "evidence_ids": list(unit.evidence_ids),
                     "source_turn_refs": list(unit.source_turn_refs),
                     "requirement_ids": list(unit.requirement_ids),
-                    "serialized_unit_sha256": hashlib.sha256(
-                        part_text.encode("utf-8")
-                    ).hexdigest(),
+                    "serialized_unit_sha256": hashlib.sha256(part_text.encode("utf-8")).hexdigest(),
                     "memory_token_start": (
-                        exact_token_counter(prefix)
-                        if exact_token_counter is not None
-                        else None
+                        exact_token_counter(prefix) if exact_token_counter is not None else None
                     ),
                     "memory_token_end": (
-                        exact_token_counter(through)
-                        if exact_token_counter is not None
-                        else None
+                        exact_token_counter(through) if exact_token_counter is not None else None
                     ),
                 }
             )
@@ -2006,11 +1909,11 @@ def _evidence_lifecycle_trace(
         if isinstance(item.get("evidence_id"), str)
     }
     admitted_values = admitted_trace.get("selected_evidence_ids")
-    admitted_ids = {
-        str(value)
-        for value in admitted_values
-        if isinstance(value, str)
-    } if isinstance(admitted_values, list) else set()
+    admitted_ids = (
+        {str(value) for value in admitted_values if isinstance(value, str)}
+        if isinstance(admitted_values, list)
+        else set()
+    )
     rendered_units = visible_trace.get("rendered_units")
     visible_values = (
         [item for item in rendered_units if isinstance(item, dict)]
@@ -2032,19 +1935,13 @@ def _evidence_lifecycle_trace(
         raw = raw_by_id.get(evidence_id, {})
         evidence_items = evidence_set_by_id.get(evidence_id, [])
         visible_units = [
-            unit
-            for unit in visible_values
-            if evidence_id in unit.get("evidence_ids", [])
+            unit for unit in visible_values if evidence_id in unit.get("evidence_ids", [])
         ]
         bound = bool(evidence_items)
         admitted = evidence_id in admitted_ids
         visible = bool(visible_units)
         requirement_ids = sorted(
-            {
-                requirement_id
-                for item in evidence_items
-                for requirement_id in item.requirement_ids
-            }
+            {requirement_id for item in evidence_items for requirement_id in item.requirement_ids}
         )
         requirement_roles = sorted(
             {
@@ -2090,9 +1987,7 @@ def _evidence_lifecycle_trace(
                     {
                         "unit_id": unit.get("unit_id"),
                         "serialized_char_offset": unit.get("serialized_char_offset"),
-                        "serialized_utf8_byte_offset": unit.get(
-                            "serialized_utf8_byte_offset"
-                        ),
+                        "serialized_utf8_byte_offset": unit.get("serialized_utf8_byte_offset"),
                         "memory_token_start": unit.get("memory_token_start"),
                         "memory_token_end": unit.get("memory_token_end"),
                     }
@@ -2106,524 +2001,6 @@ def _evidence_lifecycle_trace(
         "items": lifecycle,
     }
     return {**material, "trace_sha256": canonical_digest(material)}
-
-
-def _conditional_activation_thresholds(
-    protected: list[ReaderEvidenceUnit],
-    conditional: list[ReaderEvidenceUnit],
-    *,
-    token_counter: Callable[[str], int] | None = None,
-    soft_ranked: bool = False,
-) -> dict[str, int]:
-    """Assign monotone admission thresholds while retaining stable render order."""
-
-    count = token_counter or _estimated_tokens
-    admitted: set[str] = set()
-    previous = count(_render_reader_units(protected))
-    thresholds: dict[str, int] = {}
-    ordered = (
-        conditional
-        if soft_ranked
-        else sorted(
-            conditional,
-            key=lambda value: (value.estimated_tokens, value.unit_id),
-        )
-    )
-    for unit in ordered:
-        admitted.add(unit.unit_id)
-        selected = [
-            *protected,
-            *(candidate for candidate in conditional if candidate.unit_id in admitted),
-        ]
-        threshold = max(previous, count(_render_reader_units(selected)))
-        thresholds[unit.unit_id] = threshold
-        previous = threshold
-    return dict(sorted(thresholds.items()))
-
-
-def _admissible_conditional_gain(
-    window: MemoryContextWindow,
-    query: str,
-    *,
-    governance_admitted: bool = False,
-) -> bool:
-    if governance_admitted:
-        return True
-    if window.answer_signal or any(expansion.coverage_delta > 0 for expansion in window.expansions):
-        return True
-    query_folded = query.casefold()
-    provenance_requested = any(
-        phrase in query_folded
-        for phrase in (
-            "source",
-            "provenance",
-            "who said",
-            "when did",
-            "speaker",
-            "conversation context",
-        )
-    )
-    return provenance_requested and window.query_overlap > 0
-
-
-def _stable_evidence_views(views: list[EvidenceView]) -> list[EvidenceView]:
-    """Replace repository ordinals with deterministic semantic/source ordinals."""
-
-    ordered = sorted(
-        views,
-        key=lambda view: (
-            view.source_turn_ref,
-            view.evidence_id,
-            view.observed_at or "",
-            view.speaker,
-        ),
-    )
-    return [
-        view.model_copy(update={"source_rank": ordinal})
-        for ordinal, view in enumerate(ordered, start=1)
-    ]
-
-
-def _normalized_unit_semantics(text: str) -> str:
-    return " ".join(_TERM.findall(text.casefold()))
-
-
-def _breadth_first_binding_spans(snapshot: DecisionSnapshot) -> list[AcceptedBindingSpan]:
-    """Order one atomic accepted span per role before same-role depth."""
-
-    remaining = list(snapshot.accepted_binding_spans)
-    selected: list[AcceptedBindingSpan] = []
-    selected_keys: set[tuple[str, int, int, str]] = set()
-    for requirement_id in snapshot.required_requirement_ids:
-        span = next(
-            (
-                item
-                for item in remaining
-                if requirement_id in item.requirement_ids
-                and (
-                    item.source_turn_ref,
-                    item.start,
-                    item.end,
-                    item.evidence_id,
-                )
-                not in selected_keys
-            ),
-            None,
-        )
-        if span is None:
-            continue
-        selected.append(span)
-        selected_keys.add(
-            (span.source_turn_ref, span.start, span.end, span.evidence_id)
-        )
-    selected.extend(
-        item
-        for item in remaining
-        if (item.source_turn_ref, item.start, item.end, item.evidence_id)
-        not in selected_keys
-    )
-    return selected
-
-
-def _canonical_item_identity(item: dict[str, Any]) -> object:
-    for key in ("claim_version_id", "claim_id", "state_key"):
-        value = item.get(key)
-        if value is not None:
-            return {"kind": item.get("kind"), key: str(value)}
-    return _reader_semantic_value(item)
-
-
-def _canonical_item_sort_key(item: dict[str, Any]) -> tuple[str, str]:
-    return str(item.get("kind", "CANONICAL_STATE")), _sha256(_canonical_item_identity(item))
-
-
-def _fallback_decision_snapshot(
-    request: MemoryResolveRequest,
-    outcome: dict[str, Any],
-    items: list[dict[str, Any]],
-) -> DecisionSnapshot:
-    """Build a budget-free compatibility snapshot when Retrieval has no typed one."""
-
-    ordered_items = sorted(items, key=_candidate_item_sort_key)
-    query_ir = outcome.get("memory_query_ir") or {
-        "query": request.query,
-        "interpretation": outcome.get("interpretation"),
-    }
-    search_trace = outcome.get("search_trace")
-    search_values = search_trace if isinstance(search_trace, dict) else {}
-    acquisition_plan = search_values.get("acquisition_plan") or {
-        "identity": "COMPATIBILITY_ACQUISITION_PLAN_ABSENT"
-    }
-    decision = outcome.get("sufficiency_decision")
-    decision_values = decision if isinstance(decision, dict) else {}
-    required = _required_requirement_ids(query_ir)
-    unresolved = [
-        value
-        for value in _string_values(decision_values.get("missing_slots"))
-        if value in set(required)
-    ]
-    accepted_evidence_ids = sorted(
-        {
-            str(item["evidence_id"])
-            for item in ordered_items
-            if item.get("kind") == "EVIDENCE_OBSERVATION"
-            and isinstance(item.get("evidence_id"), str)
-        }
-    )
-    return build_decision_snapshot(
-        source_snapshot_material={
-            "canonical_position": outcome.get("canonical_position"),
-            "sources": [
-                {
-                    "evidence_id": item.get("evidence_id"),
-                    "source_ref": item.get("source_ref"),
-                    "content_digest": _sha256(item.get("content")),
-                }
-                for item in ordered_items
-                if item.get("kind") == "EVIDENCE_OBSERVATION"
-            ],
-        },
-        query_ir_material=query_ir,
-        acquisition_plan_material=_without_presentation_budget(acquisition_plan),
-        candidate_snapshot_material=ordered_items,
-        gate_material=[
-            {
-                key: item.get(key)
-                for key in (
-                    "evidence_id",
-                    "claim_version_id",
-                    "permission_snapshot",
-                    "retention_state",
-                    "access_decision",
-                    "authority_class",
-                )
-                if key in item
-            }
-            for item in ordered_items
-        ],
-        binding_material={
-            "semantic_audit": search_values.get("semantic_audit"),
-            "derived_result": outcome.get("derived_result"),
-        },
-        requirement_state_material={
-            "acquisition_state": search_values.get("acquisition_state"),
-            "required": required,
-            "unresolved": unresolved,
-        },
-        sufficiency_material=decision_values,
-        operator_result_material=outcome.get("derived_result"),
-        accepted_evidence_ids=accepted_evidence_ids,
-        required_requirement_ids=required,
-        unresolved_requirement_ids=unresolved,
-    )
-
-
-def _candidate_item_sort_key(item: dict[str, Any]) -> tuple[str, str, str]:
-    return (
-        str(item.get("kind", "")),
-        str(item.get("source_ref", item.get("claim_version_id", ""))),
-        str(item.get("evidence_id", item.get("claim_id", ""))),
-    )
-
-
-def _required_requirement_ids(query_ir: object) -> list[str]:
-    if not isinstance(query_ir, dict):
-        return []
-    requirements = query_ir.get("requirements")
-    if not isinstance(requirements, list):
-        return []
-    return sorted(
-        {
-            str(item["slot_id"])
-            for item in requirements
-            if isinstance(item, dict)
-            and item.get("required", True) is True
-            and isinstance(item.get("slot_id"), str)
-        }
-    )
-
-
-def _without_presentation_budget(value: object) -> object:
-    presentation_keys = {
-        "available_memory_tokens",
-        "context_budget",
-        "context_token_budget",
-        "context_tokens",
-        "max_context_tokens",
-        "requested_cap",
-        "token_budget",
-    }
-    if isinstance(value, dict):
-        return {
-            str(key): _without_presentation_budget(item)
-            for key, item in value.items()
-            if str(key) not in presentation_keys
-        }
-    if isinstance(value, list):
-        return [_without_presentation_budget(item) for item in value]
-    return value
-
-
-
-
-def _local_context_activation(
-    request: MemoryResolveRequest,
-    outcome: dict[str, Any],
-    *,
-    has_reader: bool,
-    has_session_context: bool,
-    structured_anchor_count: int,
-    query_preserving_union: bool = False,
-) -> dict[str, object]:
-    decision_accepted_only = outcome.get("_reader_evidence_boundary") == "DECISION_ACCEPTED_ONLY"
-    decision = outcome.get("sufficiency_decision")
-    decision_values = decision if isinstance(decision, dict) else {}
-    missing_slots = _unique(
-        str(value)
-        for value in decision_values.get("missing_slots", [])
-        if isinstance(value, str) and value
-    )
-    query_ir = outcome.get("memory_query_ir")
-    operator_family = _query_ir_operator_family(query_ir)
-    signals: list[str] = []
-    if query_preserving_union:
-        signals.append("QUERY_PRESERVING_SESSION_LOCALITY")
-    if missing_slots:
-        signals.append("MISSING_REQUIREMENTS")
-    if request.temporal or _query_ir_has_temporal_constraint(query_ir):
-        signals.append("TEMPORAL_QUERY")
-    if operator_family is not None and operator_family != "LOOKUP":
-        signals.append("OPERATOR_QUERY")
-    if _MULTI_SESSION.search(request.query):
-        signals.append("MULTI_CONTEXT_QUERY")
-    if _LOCAL_CONTEXT.search(request.query):
-        signals.append("EXPLICIT_LOCAL_CONTEXT_QUERY")
-
-    eligible = (
-        has_reader
-        and has_session_context
-        and structured_anchor_count > 0
-        and not request.state_keys
-        and not request.claim_ids
-    )
-    if decision_accepted_only:
-        reason = "DECISION_ACCEPTED_ONLY"
-    elif not has_reader:
-        reason = "ADJACENCY_READER_UNAVAILABLE"
-    elif not has_session_context:
-        reason = "SESSION_CONTEXT_UNAVAILABLE"
-    elif request.state_keys or request.claim_ids:
-        reason = "EXACT_CURRENT_QUERY"
-    elif structured_anchor_count == 0:
-        reason = "NO_STRUCTURED_EVIDENCE_ANCHOR"
-    elif signals:
-        reason = signals[0]
-    elif decision_values.get("status") == "COMPLETE":
-        reason = "ALREADY_COMPLETE"
-    else:
-        reason = "NO_MISSING_OR_CONTEXT_REQUIREMENT"
-    return {
-        "eligible": eligible,
-        "activated": eligible and bool(signals) and not decision_accepted_only,
-        "reason": reason,
-        "signals": signals,
-        "missing_slots": missing_slots,
-        "structured_anchor_count": structured_anchor_count,
-    }
-
-
-
-
-
-
-
-
-def _evidence_views(
-    items: list[dict[str, Any]],
-    query: str,
-    query_terms: frozenset[str],
-    *,
-    member_enumeration: bool,
-) -> list[EvidenceView]:
-    views: list[EvidenceView] = []
-    for rank, item in enumerate(items, start=1):
-        if item.get("kind") != "EVIDENCE_OBSERVATION":
-            continue
-        evidence_id = item.get("evidence_id")
-        source_ref = item.get("source_ref")
-        content = item.get("content")
-        if not all(
-            isinstance(value, str) and value for value in (evidence_id, source_ref, content)
-        ):
-            continue
-        assert isinstance(evidence_id, str)
-        assert isinstance(source_ref, str)
-        assert isinstance(content, str)
-        raw_speaker, _speaker_source = structured_evidence_speaker(item)
-        speaker = cast(EvidenceSpeaker, raw_speaker.upper())
-        source_context = _structured_source_context(item)
-        session_id = (
-            str(source_context["session_id"])
-            if source_context is not None
-            else _legacy_session_identity(item, source_ref)
-        )
-        expansion = item.get("context_expansion")
-        expanded_from = (
-            str(expansion["source_evidence_id"])
-            if isinstance(expansion, dict) and isinstance(expansion.get("source_evidence_id"), str)
-            else None
-        )
-        expansion_trigger = (
-            cast(str, expansion.get("trigger"))
-            if isinstance(expansion, dict)
-            and expansion.get("trigger") in {"SAME_ROUND", "ADJACENT_ROUND"}
-            else None
-        )
-        body = content.strip()
-        raw_score = item.get("relevance_score")
-        score = (
-            float(raw_score)
-            if isinstance(raw_score, (int, float)) and not isinstance(raw_score, bool)
-            else None
-        )
-        content_terms = frozenset(_TERM.findall(body.casefold()))
-        views.append(
-            EvidenceView(
-                evidence_id=evidence_id,
-                source_turn_ref=source_ref,
-                session_id=session_id,
-                turn_id=(str(source_context["turn_id"]) if source_context is not None else None),
-                turn_ordinal=(
-                    int(source_context["turn_ordinal"]) if source_context is not None else None
-                ),
-                round_id=(str(source_context["round_id"]) if source_context is not None else None),
-                round_ordinal=(
-                    int(source_context["round_ordinal"]) if source_context is not None else None
-                ),
-                previous_turn_id=(
-                    cast(str | None, source_context.get("previous_turn_id"))
-                    if source_context is not None
-                    else None
-                ),
-                next_turn_id=(
-                    cast(str | None, source_context.get("next_turn_id"))
-                    if source_context is not None
-                    else None
-                ),
-                source_context_source=(
-                    cast(EvidenceSourceContextLineage, item["source_context_source"])
-                    if source_context is not None
-                    else "UNKNOWN"
-                ),
-                speaker=speaker,
-                content=body,
-                observed_at=(
-                    str(item["observed_at"]) if item.get("observed_at") is not None else None
-                ),
-                relevance_score=score,
-                source_rank=rank,
-                query_overlap=len(query_terms & content_terms),
-                answer_signal=_answer_signal(
-                    query,
-                    query_terms,
-                    body,
-                    member_enumeration=member_enumeration,
-                ),
-                anchor_match=item.get("anchor_match") is True,
-                expanded_from_evidence_id=expanded_from,
-                expansion_trigger=cast(
-                    Literal["SAME_ROUND", "ADJACENT_ROUND"] | None,
-                    expansion_trigger,
-                ),
-            )
-        )
-    return views
-
-
-def _derived_operand_views(
-    raw: object,
-    query: str,
-    query_terms: frozenset[str],
-    *,
-    existing_views: list[EvidenceView],
-    member_enumeration: bool,
-) -> list[EvidenceView]:
-    """Recover exact Runtime-derived operand spans omitted from the result list."""
-
-    if (
-        not isinstance(raw, dict)
-        or raw.get("canonical_mutation") is not False
-        or raw.get("status") in {"ABSTAINED", "ERROR", "UNSATISFIED"}
-    ):
-        return []
-    existing_evidence_ids = {view.evidence_id for view in existing_views}
-    existing_source_refs = {view.source_turn_ref for view in existing_views}
-    recovered: list[EvidenceView] = []
-
-    def visit(operand: object) -> None:
-        if not isinstance(operand, dict) or not _validated_operand(operand):
-            return
-        direct_evidence_ids = _provenance_values(
-            operand,
-            (
-                "evidence_id",
-                "evidence_ids",
-                "evidence_refs",
-                "source_evidence_id",
-                "source_evidence_ids",
-            ),
-        )
-        direct_source_refs = _provenance_values(
-            operand,
-            ("source_ref", "source_refs", "source_turn_ref", "source_turn_refs"),
-        )
-        source_span = operand.get("source_span")
-        source_timestamp = operand.get("source_timestamp")
-        if (
-            operand.get("authority_class") == "EVIDENCE_ONLY"
-            and len(direct_evidence_ids) == 1
-            and len(direct_source_refs) == 1
-            and isinstance(source_span, str)
-            and bool(source_span.strip())
-            and isinstance(source_timestamp, str)
-            and bool(source_timestamp)
-        ):
-            evidence_id = direct_evidence_ids[0]
-            source_ref = direct_source_refs[0]
-            if evidence_id not in existing_evidence_ids and source_ref not in existing_source_refs:
-                body = source_span.strip()
-                content_terms = frozenset(_TERM.findall(body.casefold()))
-                recovered.append(
-                    EvidenceView(
-                        evidence_id=evidence_id,
-                        source_turn_ref=source_ref,
-                        session_id=f"derived-operand-{_sha256(source_ref)[:20]}",
-                        speaker="UNKNOWN",
-                        content=body,
-                        observed_at=source_timestamp,
-                        source_rank=len(existing_views) + len(recovered) + 1,
-                        query_overlap=len(query_terms & content_terms),
-                        answer_signal=_answer_signal(
-                            query,
-                            query_terms,
-                            body,
-                            member_enumeration=member_enumeration,
-                        ),
-                        anchor_match=True,
-                    )
-                )
-                existing_evidence_ids.add(evidence_id)
-                existing_source_refs.add(source_ref)
-        nested = operand.get("operands")
-        if isinstance(nested, list):
-            for child in nested:
-                visit(child)
-
-    operands = raw.get("operands")
-    if isinstance(operands, list):
-        for operand in operands:
-            visit(operand)
-    return recovered
 
 
 def _build_windows(
@@ -2719,9 +2096,7 @@ def _build_windows(
                     [neighbor],
                     optional_member_token_cap,
                 )
-                if neighbor.evidence_id in {
-                    value.evidence_id for value in selected
-                }:
+                if neighbor.evidence_id in {value.evidence_id for value in selected}:
                     expansions.append(
                         ContextExpansion(
                             trigger=neighbor.expansion_trigger or "SAME_ROUND",
@@ -2773,9 +2148,7 @@ def _bounded_window_members(
         if value is None or value.evidence_id in selected_ids:
             continue
         candidate = [*selected, value]
-        candidate_text = "\n".join(
-            f"{item.speaker}: {item.content}" for item in candidate
-        )
+        candidate_text = "\n".join(f"{item.speaker}: {item.content}" for item in candidate)
         if token_cap is not None and _estimated_tokens(candidate_text) > token_cap:
             continue
         selected.append(value)
@@ -2789,11 +2162,7 @@ def _session_landmark(
 ) -> EvidenceView | None:
     """Return the earliest available real-session turn paired with a query anchor."""
 
-    candidates = [
-        view
-        for view in session_views
-        if view.source_context_source != "UNKNOWN"
-    ]
+    candidates = [view for view in session_views if view.source_context_source != "UNKNOWN"]
     return (
         min(candidates, key=lambda value: (_turn_sort(value), value.source_rank))
         if candidates
@@ -2857,9 +2226,7 @@ def _marginal_window_order(
                 session_id=window.session_id,
                 region_ids=tuple(dict.fromkeys(regions)) or (window.window_id,),
                 channel_ids=tuple(dict.fromkeys(channels)) or ("UNATTRIBUTED",),
-                target_hints=tuple(
-                    hint for hint in target_hints if hint in semantic_terms
-                ),
+                target_hints=tuple(hint for hint in target_hints if hint in semantic_terms),
                 semantic_terms=semantic_terms,
                 base_rank=base_rank,
                 query_overlap=window.query_overlap,
@@ -2941,9 +2308,7 @@ def _instance_preserving_window_order(
         protected_windows.append(candidate)
 
     protected_set = set(protected_ids)
-    remaining = [
-        window for window in candidate_windows if window.window_id not in protected_set
-    ]
+    remaining = [window for window in candidate_windows if window.window_id not in protected_set]
     ordered_tail, workspace = _marginal_window_order(
         query,
         query_terms,
@@ -2954,9 +2319,7 @@ def _instance_preserving_window_order(
     ordered = [*protected_windows, *ordered_tail]
     if {window.window_id for window in ordered} != set(candidate_by_id):
         raise AssertionError("INSTANCE_PRESERVING_ORDER_CHANGED_CANDIDATE_IDENTITY_SET")
-    prefix_tokens = _estimated_tokens(
-        _render_context(outcome, [], protected_windows, derived)
-    )
+    prefix_tokens = _estimated_tokens(_render_context(outcome, [], protected_windows, derived))
     return ordered, {
         **workspace,
         "policy": "A0_PREFIX_TWO_THIRDS_WITH_PROVENANCE_NOVEL_TAIL_V01",
@@ -2993,9 +2356,7 @@ def _marginal_conditional_unit_order(
         items,
         context_token_budget,
     )
-    unit_by_window = {
-        window_by_unit[unit.unit_id].window_id: unit for unit in selectable_units
-    }
+    unit_by_window = {window_by_unit[unit.unit_id].window_id: unit for unit in selectable_units}
     ordered_ids = {unit.unit_id for unit in selectable_units}
     untouched = [unit for unit in conditional if unit.unit_id not in ordered_ids]
     reordered = [unit_by_window[window.window_id] for window in ordered_windows]
@@ -3013,9 +2374,7 @@ def _workspace_candidate_provenance(
     result: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {}
     for item in items:
         evidence_id = item.get("evidence_id")
-        if item.get("kind") != "EVIDENCE_OBSERVATION" or not isinstance(
-            evidence_id, str
-        ):
+        if item.get("kind") != "EVIDENCE_OBSERVATION" or not isinstance(evidence_id, str):
             continue
         source_context = _structured_source_context(item)
         regions: list[str] = []
@@ -3031,9 +2390,7 @@ def _workspace_candidate_provenance(
         envelope_values = envelope if isinstance(envelope, dict) else {}
         channel_ranks = envelope_values.get("channel_ranks")
         channels = (
-            [str(value) for value in channel_ranks]
-            if isinstance(channel_ranks, dict)
-            else []
+            [str(value) for value in channel_ranks] if isinstance(channel_ranks, dict) else []
         )
         if isinstance(item.get("context_expansion"), dict):
             channels.append("ADJACENT_TURNS")
@@ -3073,11 +2430,7 @@ def _order_windows(
         windows,
         key=lambda value: (
             not value.requirement_priority,
-            (
-                _estimated_tokens(value.text) > _SOFT_WINDOW_TOKEN_CAP
-                if token_efficient
-                else False
-            ),
+            (_estimated_tokens(value.text) > _SOFT_WINDOW_TOKEN_CAP if token_efficient else False),
             not value.answer_signal,
             -value.query_overlap,
             _estimated_tokens(value.text) if token_efficient else 0,
@@ -3094,10 +2447,7 @@ def _order_windows(
         target = (
             first
             if window.session_id not in seen
-            and (
-                not token_efficient
-                or len(first) < _SOFT_SESSION_DIVERSITY_PREFIX
-            )
+            and (not token_efficient or len(first) < _SOFT_SESSION_DIVERSITY_PREFIX)
             else remaining
         )
         target.append(window)
@@ -3232,9 +2582,14 @@ def _fit_window(
 ) -> MemoryContextWindow | None:
     # During fitting only the last window's text changes. All other rendered
     # bytes, including headers, ordinal, canonical JSON and issue warning, stay fixed.
-    fixed_bytes = len(_render_context(
-        outcome, canonical_items, [*selected, window], derived,
-    ).encode("utf-8")) - len(window.text.encode("utf-8"))
+    fixed_bytes = len(
+        _render_context(
+            outcome,
+            canonical_items,
+            [*selected, window],
+            derived,
+        ).encode("utf-8")
+    ) - len(window.text.encode("utf-8"))
     if fixed_bytes >= 3 * budget:
         return None
     low, high = 1, len(window.text)
@@ -3567,20 +2922,6 @@ def _semantic_context_material(
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def _requires_multiple_sessions(
     query: str,
     query_ir: object,
@@ -3595,10 +2936,7 @@ def _requires_multiple_sessions(
         for view in views
         if view.evidence_id in required_ids or view.source_turn_ref in required_refs
     }
-    return (
-        len(required_sessions) > 1
-        or _MULTI_SESSION.search(query) is not None
-    )
+    return len(required_sessions) > 1 or _MULTI_SESSION.search(query) is not None
 
 
 def _speaker_neighbor(
@@ -3633,73 +2971,12 @@ def _speaker_neighbor(
     )
 
 
-def _query_terms(query: str) -> frozenset[str]:
-    return frozenset(_TERM.findall(query.casefold())) - _QUERY_STOPWORDS
-
-
-def _answer_signal(
-    query: str,
-    query_terms: frozenset[str],
-    content: str,
-    *,
-    member_enumeration: bool,
-) -> bool:
-    values = tuple(_VALUE.finditer(content))
-    if not values:
-        return False
-    if member_enumeration:
-        return False
-    for value in values:
-        neighborhood = content[max(0, value.start() - 72) : min(len(content), value.end() + 72)]
-        terms = frozenset(_TERM.findall(neighborhood.casefold()))
-        if query_terms & terms:
-            return True
-    return False
-
-
-def _legacy_session_identity(item: dict[str, Any], source_ref: str) -> str:
-    subject_id = item.get("subject_id")
-    if isinstance(subject_id, str) and subject_id:
-        return subject_id
-    return f"source-{_sha256(source_ref)[:20]}"
-
-
-def _structured_source_context(item: dict[str, Any]) -> dict[str, Any] | None:
-    if item.get("source_context_source") not in {
-        "STRUCTURED_TURN_METADATA",
-        "AUTHORITATIVE_BACKFILL",
-    }:
-        return None
-    value = item.get("source_context")
-    if not isinstance(value, dict):
-        return None
-    required_text = ("session_id", "turn_id", "round_id")
-    required_ordinals = ("turn_ordinal", "round_ordinal")
-    if any(not isinstance(value.get(key), str) or not value[key] for key in required_text):
-        return None
-    if any(
-        not isinstance(value.get(key), int) or isinstance(value[key], bool) or value[key] < 0
-        for key in required_ordinals
-    ):
-        return None
-    if any(
-        item_value is not None and not isinstance(item_value, str)
-        for item_value in (value.get("previous_turn_id"), value.get("next_turn_id"))
-    ):
-        return None
-    return value
-
-
 def _turn_sort(view: EvidenceView) -> tuple[int, int, int]:
     return (
         view.round_ordinal if view.round_ordinal is not None else 2**31,
         view.turn_ordinal if view.turn_ordinal is not None else 2**31,
         view.source_rank,
     )
-
-
-
-
 
 
 def _open_issue_ids(outcome: dict[str, Any], canonical_items: list[dict[str, Any]]) -> list[str]:

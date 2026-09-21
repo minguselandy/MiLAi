@@ -1,5 +1,6 @@
 from milai.application import memory_context
 from milai.application.memory_context_core import (
+    activation,
     common,
     contracts,
     provenance,
@@ -8,14 +9,40 @@ from milai.application.memory_context_core import (
 )
 
 
+def test_memory_context_facade_preserves_activation_helpers() -> None:
+    assert memory_context._TERM is activation._TERM
+    assert memory_context._VALUE is activation._VALUE
+    assert memory_context._MULTI_SESSION is activation._MULTI_SESSION
+    assert memory_context._LOCAL_CONTEXT is activation._LOCAL_CONTEXT
+    assert memory_context._QUERY_STOPWORDS is activation._QUERY_STOPWORDS
+    assert (
+        memory_context._conditional_activation_thresholds
+        is activation._conditional_activation_thresholds
+    )
+    assert memory_context._admissible_conditional_gain is activation._admissible_conditional_gain
+    assert memory_context._stable_evidence_views is activation._stable_evidence_views
+    assert memory_context._normalized_unit_semantics is activation._normalized_unit_semantics
+    assert memory_context._breadth_first_binding_spans is activation._breadth_first_binding_spans
+    assert memory_context._canonical_item_identity is activation._canonical_item_identity
+    assert memory_context._canonical_item_sort_key is activation._canonical_item_sort_key
+    assert memory_context._fallback_decision_snapshot is activation._fallback_decision_snapshot
+    assert memory_context._candidate_item_sort_key is activation._candidate_item_sort_key
+    assert memory_context._required_requirement_ids is activation._required_requirement_ids
+    assert memory_context._without_presentation_budget is activation._without_presentation_budget
+    assert memory_context._local_context_activation is activation._local_context_activation
+    assert memory_context._evidence_views is activation._evidence_views
+    assert memory_context._derived_operand_views is activation._derived_operand_views
+    assert memory_context._query_terms is activation._query_terms
+    assert memory_context._answer_signal is activation._answer_signal
+    assert memory_context._legacy_session_identity is activation._legacy_session_identity
+    assert memory_context._structured_source_context is activation._structured_source_context
+
+
 def test_memory_context_facade_preserves_compilation_contracts() -> None:
     assert memory_context.ContextCompilation is contracts.ContextCompilation
     assert memory_context.ContextPlanCompilation is contracts.ContextPlanCompilation
     assert memory_context.EvidenceAdjacencyReader is contracts.EvidenceAdjacencyReader
-    assert (
-        memory_context.ContextTokenAccountingError
-        is contracts.ContextTokenAccountingError
-    )
+    assert memory_context.ContextTokenAccountingError is contracts.ContextTokenAccountingError
 
 
 def test_memory_context_facade_preserves_common_helpers() -> None:
@@ -30,18 +57,12 @@ def test_memory_context_facade_preserves_common_helpers() -> None:
 
 def test_memory_context_facade_preserves_semantic_helpers() -> None:
     assert memory_context._OPAQUE_READER_KEYS is semantics._OPAQUE_READER_KEYS
-    assert (
-        memory_context._query_ir_operator_family
-        is semantics._query_ir_operator_family
-    )
+    assert memory_context._query_ir_operator_family is semantics._query_ir_operator_family
     assert (
         memory_context._query_ir_has_temporal_constraint
         is semantics._query_ir_has_temporal_constraint
     )
-    assert (
-        memory_context._query_ir_enumerates_members
-        is semantics._query_ir_enumerates_members
-    )
+    assert memory_context._query_ir_enumerates_members is semantics._query_ir_enumerates_members
     assert memory_context._reader_semantic_value is semantics._reader_semantic_value
     assert memory_context._validated_operand is semantics._validated_operand
 
