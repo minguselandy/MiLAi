@@ -172,6 +172,29 @@ composition 全部 PASS 后才合并。
   中的原实现逐项一致；旧 facade 与 Runtime testkit 私有兼容 import 保持同一函数对象。
 - route、reranking、Context budget、decision/evidence identity 与 response schema 均未改变。
 
+### 2026-09-21 — C2 assembly merged and baseline hardening completed
+
+- Retrieval assembly PR #11 merged；post-merge `main=e4d2d714f005bd0163584eb8634b55ddc09287b6`。
+- post-merge Run #43 的 Product、integrations、Archive 与四个 replay shard 均通过，但 Lab fast
+  暴露 40ms whole-request deadline 竞态，composition 因依赖失败而未建立。
+- PR #12 将 reservation 语义改为确定性注入 `DeadlineExpired` 的测试证据；PR Run #44 与
+  post-merge Run #45 最终均为 17 jobs success、composition PASS。
+- PR #13 修复两个 active Product-05 runner 对旧 wildcard listen contract 的依赖；PR Run #46
+  与 post-merge Run #47 均全绿。
+- PR #14 建立 active `tools/` Product dependency inventory 与 no-new-private-dependency gate；
+  PR Run #48 与 post-merge Run #49 均全绿。
+- C2 trace extraction 从 exact green
+  `d23c420f3054398b946eb1a51f5e6045f3c50632` 恢复。
+
+### 2026-09-21 — C2 trace extraction implemented
+
+- 本轮只移动 matched replay、public acquisition trace、execution stage、latency/cost 与
+  access-trace serialization helper；`RetrievalService` orchestration 未改写。
+- 十一个函数、`_LegacyReplayPrefix` 与 `_EXECUTION_STAGE_BY_OPERATION` 均与 `d23c420...`
+  基线 AST 一致；旧 `milai.application.retrieval` helper/type import 保持兼容。
+- trace schema、stage mapping、stop/fallback reason、timing/cost arithmetic 与 response wire
+  均未改变。
+
 ## Completion rule
 
 只有总指令第 24 节全部条件有当前权威证据时，才把本 Goal 标记为 COMPLETE。
