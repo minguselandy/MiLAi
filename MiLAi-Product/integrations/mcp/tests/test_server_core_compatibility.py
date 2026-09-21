@@ -1,4 +1,5 @@
 from milai_mcp import server
+from milai_mcp import server_codex as codex
 from milai_mcp import server_contracts as contracts
 from milai_mcp import server_governance as governance
 from milai_mcp import server_middleware as middleware
@@ -56,3 +57,7 @@ def test_server_facade_preserves_reader_helpers() -> None:
 def test_server_facade_preserves_governance_builder() -> None:
     assert server.GovernanceToolset is governance.GovernanceToolset
     assert server.build_governance_toolset is governance.build_governance_toolset
+
+
+def test_server_facade_preserves_codex_tool_builder() -> None:
+    assert server.extend_codex_governance_tools is codex.extend_codex_governance_tools
