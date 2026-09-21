@@ -25,8 +25,10 @@ jobs:
       - name: Install locked Lab
         run: uv sync --frozen --dev --python 3.11
 
-      - name: Verify active source boundary
-        run: uv run milai-lab-check-boundary
+      - name: Verify active source boundaries
+        run: |
+          uv run milai-lab-check-boundary
+          uv run milai-lab-check-tools-boundary
 
       - name: Prepare Lab test evidence directory
         run: mkdir -p lab-test-results
