@@ -1,6 +1,7 @@
 from milai.application import retrieval
 from milai.application.retrieval_core import (
     acquisition,
+    assembly,
     candidates,
     operators,
     policy,
@@ -75,3 +76,23 @@ def test_retrieval_facade_preserves_operator_helper_imports() -> None:
         is operators._execute_operator_with_accepted_inputs
     )
     assert retrieval._operator_support_refs is operators._operator_support_refs
+
+
+def test_retrieval_facade_preserves_assembly_helper_imports() -> None:
+    assert retrieval._assemble_results is assembly._assemble_results
+    assert retrieval._response_body is assembly._response_body
+    assert retrieval._contains_evidence_observation is assembly._contains_evidence_observation
+    assert retrieval._projection_state_payload is assembly._projection_state_payload
+    assert retrieval._decision_snapshot is assembly._decision_snapshot
+    assert retrieval._requirement_evidence_set is assembly._requirement_evidence_set
+    assert retrieval._decision_requirement_ids is assembly._decision_requirement_ids
+    assert (
+        retrieval._decision_accepted_evidence_ids
+        is assembly._decision_accepted_evidence_ids
+    )
+    assert retrieval._accepted_binding_spans is assembly._accepted_binding_spans
+    assert (
+        retrieval._binding_span_provenance_order
+        is assembly._binding_span_provenance_order
+    )
+    assert retrieval._result_evidence_ids is assembly._result_evidence_ids
