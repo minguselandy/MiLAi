@@ -6,7 +6,7 @@ from uuid import uuid4
 
 import psycopg
 import pytest
-from test_evidence_api import ACTOR_ID, TENANT_ID, _headers, evidence_app  # noqa: F401
+from support.evidence import ACTOR_ID, TENANT_ID, _headers, evidence_app  # noqa: F401
 
 from milai.persistence import SessionContext
 

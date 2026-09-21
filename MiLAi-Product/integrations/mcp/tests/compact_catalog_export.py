@@ -7,8 +7,8 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from milai_mcp.auth_policy import ALL_SCOPES, TOOL_SCOPE_ALTERNATIVES
-from test_aigcit_full import private_fixture
-from test_aigcit_http import edge, rpc
+from support.http import edge, rpc
+from support.private_catalog import private_fixture
 
 
 def encoded_bytes(value):

@@ -1,0 +1,102 @@
+{
+  "schema_version": "milai-compatibility-registry-v1",
+  "categories": {
+    "HISTORICAL_COMPAT": "Frozen evidence or historical artifact paths retained for replay and audit.",
+    "INTERNAL_TEMPORARY": "Internal transition surfaces that require evidence before removal.",
+    "PUBLIC_API": "Supported package imports and executable-facing API surfaces.",
+    "PUBLIC_COMPAT": "Supported legacy import locations retained over modular internals.",
+    "TEST_COMPAT": "Test-only fixture, helper, and node-identity compatibility seams."
+  },
+  "entries": [
+    {
+      "category": "PUBLIC_API",
+      "id": "supported-package-apis",
+      "paths": [
+        "runtime/src/milai/api/__init__.py",
+        "runtime/src/milai/application/__init__.py",
+        "runtime/src/milai/domain/__init__.py",
+        "runtime/src/milai/persistence/__init__.py",
+        "integrations/python-client/src/milai_client/__init__.py",
+        "integrations/mcp/src/milai_mcp/__init__.py",
+        "integrations/openworker-mcp/src/milai_openworker_mcp/__init__.py"
+      ],
+      "retention": "Public imports remain behavior compatible; removal requires a versioned API decision."
+    },
+    {
+      "category": "PUBLIC_COMPAT",
+      "id": "modularization-facades",
+      "paths": [
+        "runtime/src/milai/application/retrieval.py",
+        "runtime/src/milai/application/memory_context.py",
+        "integrations/mcp/src/milai_mcp/server.py",
+        "integrations/openworker-mcp/src/milai_openworker_mcp/host_adapter.py"
+      ],
+      "retention": "Keep historical imports and executable targets while internal owners remain modular."
+    },
+    {
+      "category": "TEST_COMPAT",
+      "id": "dedicated-test-support-seams",
+      "paths": [
+        "runtime/tests/integration/support",
+        "integrations/python-client/tests/support",
+        "integrations/mcp/tests/support"
+      ],
+      "retention": "Tests import shared infrastructure through these seams; sibling test-module imports are forbidden outside them."
+    },
+    {
+      "category": "HISTORICAL_COMPAT",
+      "id": "receipt-referenced-pytest-nodes",
+      "nodes": [
+        "integrations/openworker-mcp/tests/test_host_adapter.py::test_http_boundary_records_typed_terminal_before_a_replayed_operation",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_adapter_restart_rotates_process_lifetime_capability",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_authentication_precedes_body_parse_and_rejects_duplicate_bearer",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_executable_accepts_explicit_wildcard_listen_host",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_explicit_loopback_and_private_literals_are_accepted",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_loopback_ingress_accepts_exact_bearer",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_plain_http_with_bearer_is_accepted_over_non_loopback_interface",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_token_file_replacement_does_not_revoke_process_token",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_wildcard_ambiguous_multicast_and_public_hosts_are_rejected",
+        "runtime/tests/integration/test_context_chat_api.py::test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_abstains",
+        "runtime/tests/integration/test_context_chat_api.py::test_composite_prepare_context_reuses_hit_then_falls_through_to_exact",
+        "runtime/tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope",
+        "runtime/tests/integration/test_context_chat_api.py::test_prepare_context_cache_revalidates_authoritative_capsule_lifecycle",
+        "runtime/tests/integration/test_evidence_api.py::test_evidence_capture_identity_is_immutable_even_for_owner",
+        "runtime/tests/integration/test_evidence_api.py::test_tx01_api_replay_conflict_blob_dedup_and_lineage",
+        "runtime/tests/integration/test_evidence_api.py::test_tx01_concurrent_same_key_has_one_canonical_side_effect",
+        "runtime/tests/integration/test_projection_worker.py::test_blob_orphan_reconciles_on_real_worker_startup_and_ingest_recovers",
+        "runtime/tests/integration/test_projection_worker.py::test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+        "runtime/tests/integration/test_projection_worker.py::test_purge_worker_erases_blob_and_derived_claim_projection",
+        "runtime/tests/integration/test_projection_worker.py::test_rebuild_after_revoke_does_not_resurrect_revoked_material",
+        "runtime/tests/integration/test_projection_worker.py::test_search_projection_rebuild_replays_outbox_without_canonical_mutation",
+        "runtime/tests/unit/test_action_identity.py::test_action_identity_is_canonical_and_shared_with_prepare_binding",
+        "runtime/tests/unit/test_action_identity.py::test_action_sensitive_chat_requires_action_identity_contract",
+        "runtime/tests/unit/test_context_preparation.py::test_authoritative_capsule_lifecycle_miss_refreshes_exactly",
+        "runtime/tests/unit/test_context_preparation.py::test_cache_issue_revision_change_falls_through_to_one_exact_l0",
+        "runtime/tests/unit/test_context_preparation.py::test_cache_position_change_falls_through_to_exact_l0_in_same_call",
+        "runtime/tests/unit/test_context_preparation.py::test_cache_validation_renews_past_original_capsule_expiry",
+        "runtime/tests/unit/test_context_preparation.py::test_one_refresh_then_tool_result_uses_validated_cache_without_recall",
+        "runtime/tests/unit/test_context_validation.py::test_context_validation_token_is_bound_and_expires"
+      ],
+      "paths": [
+        "docs/revalidation"
+      ],
+      "retention": "Every receipt node remains a top-level function at the exact recorded path; historical receipts are immutable."
+    },
+    {
+      "category": "HISTORICAL_COMPAT",
+      "id": "query-ir-v01-transition",
+      "paths": [
+        "runtime/src/milai/application/query_ir_compat.py"
+      ],
+      "retention": "Retained for v0.1 artifact translation until the historical dependency audit proves removal safe."
+    },
+    {
+      "category": "INTERNAL_TEMPORARY",
+      "id": "evidence-atom-v01-alias",
+      "paths": [
+        "runtime/src/milai/application/evidence_atoms.py"
+      ],
+      "retention": "Explicit transitional alias; C8 may remove it only after production, test, Lab, entrypoint, and receipt consumers are absent."
+    }
+  ]
+}

@@ -8,7 +8,7 @@ from uuid import uuid4
 import pytest
 from alembic import command
 from alembic.config import Config
-from test_host_cognitive_state import ACTOR_ID, API_TOKEN, _binding, _headers, _url
+from support.working_state import ACTOR_ID, API_TOKEN, _binding, _headers, _url
 
 from milai.api import create_app
 from milai.config import RuntimeSettings

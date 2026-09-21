@@ -13,7 +13,7 @@ from milai_client import MilaiClientError
 from milai_mcp.input_contracts import CAPTURE_EXAMPLE, CREATE_EXAMPLE, PROPOSAL_EXAMPLES
 from milai_mcp.recovery import recovery_error
 from milai_mcp.server import CodexFullRuntimeClients, build_server
-from test_codex_full_profile import _as_client, _RoleClient
+from support.profile import _as_client, _RoleClient
 
 
 def test_public_capture_contract_examples_and_safe_errors() -> None:

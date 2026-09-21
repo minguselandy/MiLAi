@@ -4,7 +4,7 @@ import psycopg
 import pytest
 from alembic import command
 from alembic.config import Config
-from test_host_cognitive_state import ACTOR_ID, API_TOKEN, _url
+from support.working_state import ACTOR_ID, API_TOKEN, _url
 
 from milai.config import RuntimeSettings
 from milai.persistence import Database, DatabaseRoleError, SessionContext

@@ -9,9 +9,9 @@ from mcp import Client
 
 from milai_mcp.auth_policy import ALL_SCOPES
 from milai_mcp.server import SERVER_DESCRIPTION, CodexFullRuntimeClients, build_server
-from test_aigcit_full import private_fixture
-from test_aigcit_http import edge, rpc
-from test_codex_full_profile import _as_client, _RoleClient
+from support.http import edge, rpc
+from support.private_catalog import private_fixture
+from support.profile import _as_client, _RoleClient
 
 
 @asynccontextmanager

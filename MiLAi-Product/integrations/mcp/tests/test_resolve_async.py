@@ -13,8 +13,8 @@ from milai_client import AsyncMilaiClient, HttpxAsyncTransport
 
 from milai_mcp.http_transport import HttpPrincipalBinding
 from milai_mcp.server import CodexFullRuntimeClients, build_server
-from test_codex_full_profile import _as_client, _RoleClient
-from test_working_state_async import CAPABILITIES
+from support.profile import _as_client, _RoleClient
+from support.working_state import CAPABILITIES
 
 TOKEN = "async-resolve-reader-token-at-least-32-characters"  # noqa: S105
 

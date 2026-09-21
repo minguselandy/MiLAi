@@ -10,7 +10,7 @@ from mcp import Client
 from milai_client import AsyncMilaiClient, HttpxAsyncTransport
 
 from milai_mcp.server import CodexFullRuntimeClients, build_server
-from test_codex_full_profile import _as_client, _RoleClient
+from support.profile import _as_client, _RoleClient
 
 TOKEN = "async-state-test-token-at-least-32-characters"  # noqa: S105
 CAPABILITIES = {

@@ -9,7 +9,7 @@ import httpx
 import pytest
 
 from milai_client import AsyncMilaiClient, HttpxAsyncTransport, MilaiClient, UnavailableError
-from test_client_contract import TOKEN, _capabilities
+from support.contracts import TOKEN, _capabilities
 
 
 @pytest.mark.parametrize("failure", ["disconnect", "unavailable"])

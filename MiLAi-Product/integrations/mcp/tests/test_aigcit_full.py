@@ -11,9 +11,9 @@ import pytest
 from milai_client import MilaiClient
 
 from milai_mcp.auth_policy import FULL_SCOPES, TOOL_SCOPES, AdmissionPolicy
-from test_aigcit_auth import ISSUER, Fixture
-from test_aigcit_http import edge, rpc
-from test_codex_full_postgres_e2e import (
+from support.auth import ISSUER, Fixture
+from support.http import edge, rpc
+from support.postgres import (
     _RUNTIME_ROOT,
     _create_and_migrate_database,
     _drop_database,
