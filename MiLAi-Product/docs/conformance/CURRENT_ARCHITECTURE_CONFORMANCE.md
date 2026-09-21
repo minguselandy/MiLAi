@@ -6,8 +6,8 @@
 ## Result
 
 - Current implementation status: `UNVERIFIED`
-- Product source commit: `9c3a87b73c31c6e7e644dfb420fc97137d2f9427`
-- Verified at: `2026-09-21T00:11:14+00:00`
+- Product source commit: `a5b92dcacbfc19b1dc56e0214c94173dd5a8f0f1`
+- Verified at: `2026-09-21T08:11:40+00:00`
 - Architecture: `1.0.0`
 - Migration heads: `0027_embedding_identity, 0045_dg18_adjacency, 0056_host_notes`
 
@@ -18,8 +18,8 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Field | Value |
 | --- | --- |
 | Product version | `0.1.0-candidate` |
-| Product manifest SHA-256 | `a0d37e0c783a41eaae9711760ebd7d0bdf38620569f8b952ac06abb3ad1b6f2c` |
-| Product tree SHA-256 | `1eab68fde3cdecb2b40219c13ae9b645194f49fad39271bce253adadf6648ce7` |
+| Product manifest SHA-256 | `e65b3d04cb8cf1f98f8aaa7c390235653c7cadd702ecbb567d618914aaf4232a` |
+| Product tree SHA-256 | `b87b69c3e744f9f3d1968179c0dcc032face4377150d620acf42aca7864b043c` |
 | Architecture manifest SHA-256 | `ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e` |
 | Runtime / Client / MCP / OpenWorker | `0.1.5` / `0.1.4` / `0.1.15` / `0.1.0` |
 
