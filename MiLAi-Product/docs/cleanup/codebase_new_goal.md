@@ -8,10 +8,10 @@ Goal 类型:                  behavior-preserving cleanup / bounded modularizati
 执行状态:                   ACTIVE — 用户已于 2026-09-21 明确恢复
 前置合同:                   MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 本版作用:                   优化执行节奏、验证分级、CI 触发与剩余 PR 边界
-当前阶段:                   C8 Compatibility/dead-code audit final candidate
-当前候选分支:               cleanup/c8-compatibility-dead-code
-最近权威 full workflow:     Run #57 / 17 jobs success / composition PASS
-当前 base main:             ff51e47b8ae8b861002f3975c23c4ca88cc5106e
+当前阶段:                   C10 final L4 PASS; PR #25 merge identity pending
+当前候选分支:               cleanup/c9-c10-final-baseline
+最近权威 full workflow:     Run #60 / ID 35632657133 / 17 jobs success / composition PASS
+当前 base main:             432153a0065f6ccc6706d670ba7eafafc002c950
 ```
 
 本 Goal 不推翻 v1.0 的行为保持、Source of Truth、Frozen Architecture、历史证据和完成定义。
@@ -138,9 +138,9 @@ STOP STRUCTURAL WORK
 | C5 | OpenWorker Host modularization | COMPLETE — PR #21 merged; fast PR and main identity PASS |
 | C6 | Test organization | COMPLETE — PR #22 merged; fast PR and main identity PASS |
 | C7 | Lab active code organization | COMPLETE — PR #23 merged; Lab fast PR and main identity PASS |
-| C8 | Compatibility/dead-code audit | IN PROGRESS — audit implemented; static candidate validation |
-| C9 | Current-tree evidence refresh | PENDING |
-| C10 | Final cleanup baseline | PENDING |
+| C8 | Compatibility/dead-code audit | COMPLETE — PR #24 merged; static fast PR and main identity PASS |
+| C9 | Current-tree evidence refresh | COMPLETE — five current-tree receipts verified |
+| C10 | Final cleanup baseline | IN PROGRESS — final L4 PASS; merge identity pending |
 
 PR #17 已完成并合并 Memory Context foundation：
 
@@ -859,6 +859,12 @@ C8 L2 static pre-push 同时确认 changed-scope Ruff、Product manifest（422 f
 receipts、Conformance freshness 与 repository boundary（4,350 tracked paths，0 findings）全 PASS。
 后续只 push 最终候选并执行远端 fast PR gate 与 merge-tree identity，不重复 collection。
 
+PR #24 的最终候选 `135c2c625c2a3190713c4ff42e9bd44b177133b7` 已通过 fast run
+`35630518519`，并 squash merge 为 `432153a0065f6ccc6706d670ba7eafafc002c950`。候选 tree 与
+merge tree 均为 `f2147f19b7cc8ed118529ae9d3f918edeedc3530`；main push run
+`35630694574` 的轻量 identity gate PASS。Runtime、integrations、Lab 与 Archive jobs 均按静态
+范围正确 skipped，未触发 full composition。
+
 ---
 
 ## 16. C9 — Current-tree evidence refresh
@@ -885,6 +891,23 @@ post-cleanup.receipt.json
 SCOPED remains SCOPED
 COMPLETE remains COMPLETE only when the complete contract reruns
 ```
+
+### 16.1 2026-09-22 执行记录
+
+在 C8 merged main `432153a0065f6ccc6706d670ba7eafafc002c950` 固定 Product identity 后，
+五项 FIXED TECH_DEBT 已重新执行。隔离 PostgreSQL 下合并去重的 Runtime targeted gate 为
+23 passed；OpenWorker HTTP exposure/auth gate 为 21 passed。临时数据库容器在执行后已删除。
+
+五个目录均新增独立 `post-cleanup.receipt.json`；baseline 绑定 Product tree
+`7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521`、Product manifest
+SHA-256 `7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693` 与 Frozen
+Architecture manifest `ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e`。
+所有 claim、positive/negative cases 与 `SCOPED`/`COMPLETE` coverage 均继承对应 latest FIXED
+receipt，不扩大范围。
+
+receipt verifier 当前结果为 13 validated receipts、5 current receipts、12 current claims、3
+preserved diagnostic failures、0 current failures。Conformance current map 已由官方 generator 刷新并
+通过 freshness check；历史 diagnosis/remediation receipt 未修改。
 
 ---
 
@@ -927,6 +950,28 @@ Conformance
 composition
 ```
 
+### 17.1 2026-09-22 候选记录
+
+三个 C10 交付物已生成：`CODEBASE_CLEANUP_RESULTS_v1.md`、`final-module-map.json` 与
+`final-cleanup-baseline.json`。结果记录 baseline `798b7cac21957873791afff6122d3f06a82214c5`、
+最终 implementation main `432153a0065f6ccc6706d670ba7eafafc002c950`、C9 evidence commit、
+六个 hotspot 前后尺寸、内部 owner packages、29 个 receipt nodes、两条 Lab runner migration、
+5 份 current receipts、Product tree/manifest identity 和三项 immutable Git tree objects。
+
+当前状态仍是 `CANDIDATE_PENDING_FINAL_L4`。先固定包含这些交付物的 PR candidate，再执行一次
+17-job full composition；在 run PASS 前不得将本 Goal 标记 COMPLETE。最终 run ID 的回填属于
+metadata-only identity update，必须证明 Product manifest、Lab active source、Lab archive 与
+Artifact Archive tree identity 均未改变，不重复同一 executable tree 的 full composition。
+三项交付物首次完整落盘的 content commit 为
+`8f179a76166a9506b4fd9d4688478dd498749dc1`。
+
+PR #25 candidate `803685557b60b2d381f367a59eb98ec24bf828a4` 的 fast run
+`35632511825` PASS。随后只触发一次权威 full composition：Run #60 / ID `35632657133` 的
+17 jobs 全部 SUCCESS，Runtime + PostgreSQL、六个 integrations、Lab fast、四个 historical replay
+shards、Archive、Product identity、Conformance 与 composition 均实际执行并 PASS。
+`full-composition` label 已在 metadata 回填前移除，避免对同一 executable identity 重跑 L4。
+当前仅剩 metadata fast gate、tested executable-tree identity、PR merge 与 main identity gate。
+
 ---
 
 ## 18. PR 路线
@@ -941,8 +986,8 @@ PR #20  C4 MCP Server complete modularization 已验证并合并
 PR #21  C5 OpenWorker Host complete modularization 已验证并合并
 PR #22  C6 test organization + compatibility registry 已验证并合并
 PR #23  C7 Lab active runner organization 已验证并合并
-PR #24  C8 dead-code / compatibility closure 本地候选
-PR #25  C9 + C10 evidence refresh/final baseline
+PR #24  C8 dead-code / compatibility closure 已验证并合并
+PR #25  C9 + C10 evidence refresh/final baseline 本地候选
 ```
 
 编号是当前规划，不是硬编码依赖；若 GitHub 实际编号变化，以 scope 和 evidence identity 为准。

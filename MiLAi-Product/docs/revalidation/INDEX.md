@@ -10,9 +10,9 @@ behavioral result from full architecture-item coverage.
 | Field | Value |
 | --- | --- |
 | Goals | `MILA-PRODUCT-BEHAVIOR-REVALIDATION-01`, `MILA-PRODUCT-BEHAVIOR-REVALIDATION-02`, `MILA-PRODUCT-BEHAVIOR-REVALIDATION-03` |
-| Product source commit | `6fbb717ba2e9c77fd8be071725b2f25a0d771cb4` |
-| Product manifest SHA-256 | `28abb4b6b711ec49b5880825afd247d88526487ff87d47608b1f9e06c7e872f8` |
-| Product tree SHA-256 | `2dddd26130943834468e7944f3b422c2aa81e64611256cb7f497e7f96e32b0a1` |
+| Product source commit | `432153a0065f6ccc6706d670ba7eafafc002c950` |
+| Product manifest SHA-256 | `7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693` |
+| Product tree SHA-256 | `7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521` |
 | Frozen architecture | `1.0.0` |
 
 ## Receipts
@@ -24,6 +24,10 @@ behavioral result from full architecture-item coverage.
 | confirmation binding to query/action | `FIXED` | [`confirmation-binding/REVALIDATION.md`](confirmation-binding/REVALIDATION.md) |
 | validation-token TTL vs ContextCapsule lifecycle | `FIXED` | [`context-validation-lifecycle/REVALIDATION.md`](context-validation-lifecycle/REVALIDATION.md) |
 | OpenWorker HTTP auth/exposure | `FIXED` | [`openworker-http-exposure/REVALIDATION.md`](openworker-http-exposure/REVALIDATION.md) |
+
+Each row now also has a `post-cleanup.receipt.json` bound to the final cleanup Product identity.
+These receipts preserve the prior claim statements and coverage levels; they do not replace or
+rewrite the diagnosis/remediation evidence.
 
 `FIXED` means the current mechanism, the positive path, the negative or
 fail-closed path, and the recovery path were executed successfully for the

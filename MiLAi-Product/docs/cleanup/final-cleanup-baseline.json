@@ -1,0 +1,46 @@
+{
+  "schema_version": "milai-codebase-cleanup-final-v1",
+  "status": "FINAL_L4_PASS_PENDING_MERGE_IDENTITY",
+  "baseline_commit": "798b7cac21957873791afff6122d3f06a82214c5",
+  "final_implementation_commit": "432153a0065f6ccc6706d670ba7eafafc002c950",
+  "current_evidence_commit": "2803763f47eb846e7c7de68d96758cf23921dcd7",
+  "final_candidate_commit": "8f179a76166a9506b4fd9d4688478dd498749dc1",
+  "product": {
+    "manifest_file_count": 422,
+    "manifest_sha256": "7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693",
+    "tree_sha256": "7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521"
+  },
+  "immutable_tree_objects": {
+    "MiLAi-Product/architecture/v1.0": "fb9f953e07e9a06bd08695827dd91ccb0d21be38",
+    "MiLAi-Lab/studies/archive": "b69ac4d6ebca0a52ae3ec6edff5dce914816f157",
+    "MiLAi-Artifact-Archive": "36ac04b4b0562265250bb15f01a4d40c4ac4f710"
+  },
+  "compatibility": {
+    "categories": 5,
+    "entries": 6,
+    "receipt_node_ids": 29,
+    "deleted_entries": 0
+  },
+  "current_tree_evidence": {
+    "receipts": 5,
+    "claims": 12,
+    "failed_claims": 0,
+    "preserved_diagnostic_failures": 3,
+    "runtime_postgresql_targeted": "23 passed",
+    "openworker_http_targeted": "21 passed"
+  },
+  "final_verification": {
+    "full_ci_run_id": 35632657133,
+    "full_ci_run_number": 60,
+    "tested_commit": "803685557b60b2d381f367a59eb98ec24bf828a4",
+    "composition": "PASS",
+    "job_count": 17,
+    "runtime_full": "PASS",
+    "all_integrations": "PASS",
+    "lab_fast": "PASS",
+    "historical_replay_shards": "4/4 PASS",
+    "archive": "PASS",
+    "product_identity": "PASS",
+    "conformance": "PASS"
+  }
+}

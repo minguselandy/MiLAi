@@ -2,13 +2,256 @@
   "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
   "architecture_version": "1.0.0",
   "behavior_revalidation": {
-    "claims": [],
+    "claims": [
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "The blob identity remains content-addressed and tenant-scoped across failed and recovered ingest.",
+        "debt_id": "cas-blob-orphan",
+        "execution_status": "PASS",
+        "limits": [
+          "The full Evidence-to-belief source-fidelity chain is not claimed by this receipt."
+        ],
+        "negative_case_ids": [
+          "CAS-NEG-001",
+          "CAS-NEG-003"
+        ],
+        "positive_case_ids": [
+          "CAS-POS-001",
+          "CAS-POS-002"
+        ],
+        "receipt": "docs/revalidation/cas-blob-orphan/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "Revocation asynchronously removes derived projection and eligible blob material with verifiable absence.",
+        "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
+        "limits": [
+          "Backup obligation replay is not covered by this receipt."
+        ],
+        "negative_case_ids": [
+          "PURGE-NEG-001",
+          "PURGE-NEG-002"
+        ],
+        "positive_case_ids": [
+          "PURGE-POS-001",
+          "PURGE-POS-002",
+          "PURGE-POS-003"
+        ],
+        "receipt": "docs/revalidation/projection-purge-rebuild/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "A live action confirmation is bound to the tenant, query, active goal, requested scope, required authority, and canonical action digest for which it was issued.",
+        "debt_id": "confirmation-binding",
+        "execution_status": "PASS",
+        "limits": [
+          "The receipt covers action confirmation identity and replay rejection only; it does not claim complete bounded-context, lineage, expiry, or invalidation coverage."
+        ],
+        "negative_case_ids": [
+          "CONFIRM-REPAIR-NEG-001",
+          "CONFIRM-REPAIR-NEG-002",
+          "CONFIRM-REPAIR-NEG-003",
+          "CONFIRM-REPAIR-NEG-004"
+        ],
+        "positive_case_ids": [
+          "CONFIRM-REPAIR-POS-001",
+          "CONFIRM-REPAIR-POS-002"
+        ],
+        "receipt": "docs/revalidation/confirmation-binding/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "Retained task-slot validation cannot outlive or reuse a missing, inactive, expired, or content-mismatched server-owned ContextCapsule.",
+        "debt_id": "context-validation-lifecycle",
+        "execution_status": "PASS",
+        "limits": [
+          "The receipt covers retained task-slot capsule lifecycle and exact-refresh recovery only; it does not claim complete bounded-context, lineage, revocation, or abstention coverage."
+        ],
+        "negative_case_ids": [
+          "LIFECYCLE-REPAIR-NEG-001",
+          "LIFECYCLE-REPAIR-NEG-002",
+          "LIFECYCLE-REPAIR-NEG-003",
+          "LIFECYCLE-REPAIR-NEG-004",
+          "LIFECYCLE-REPAIR-NEG-005"
+        ],
+        "positive_case_ids": [
+          "LIFECYCLE-REPAIR-POS-001",
+          "LIFECYCLE-REPAIR-POS-002",
+          "LIFECYCLE-REPAIR-POS-003"
+        ],
+        "receipt": "docs/revalidation/context-validation-lifecycle/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "OpenWorker Host plain-HTTP ingress rejects wildcard, ambiguous, multicast, and non-local bind targets, requires exact Bearer authentication, and treats the startup token as a process-lifetime capability.",
+        "debt_id": "openworker-http-auth-exposure",
+        "execution_status": "PASS",
+        "limits": [
+          "The receipt covers the OpenWorker Host ingress listener, authentication ordering, process-lifetime token rotation, and trace redaction only; it does not claim complete G8 coverage.",
+          "Deployment must still prove that an explicit private address belongs to the run-owned isolated Docker bridge.",
+          "Plain HTTP is approved only for the explicitly bound, deployment-approved isolated local interface; remote, LAN, or shared-network transport is outside this contract.",
+          "The receipt makes no I-11 claim."
+        ],
+        "negative_case_ids": [
+          "HTTP-REPAIR-NEG-001",
+          "HTTP-REPAIR-NEG-002",
+          "HTTP-REPAIR-NEG-003",
+          "HTTP-REPAIR-NEG-004"
+        ],
+        "positive_case_ids": [
+          "HTTP-REPAIR-POS-001",
+          "HTTP-REPAIR-POS-002",
+          "HTTP-REPAIR-POS-003"
+        ],
+        "receipt": "docs/revalidation/openworker-http-exposure/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "A failed canonical ingest can be recovered by worker orphan reconciliation without manual blob mutation.",
+        "debt_id": "cas-blob-orphan",
+        "execution_status": "PASS",
+        "limits": [
+          "Migration, search projection, backup, and audit replay are outside this receipt."
+        ],
+        "negative_case_ids": [
+          "CAS-NEG-001",
+          "CAS-NEG-002"
+        ],
+        "positive_case_ids": [
+          "CAS-POS-001"
+        ],
+        "receipt": "docs/revalidation/cas-blob-orphan/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "Derived search projections can be reset and replayed from durable outbox state without canonical mutation.",
+        "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
+        "limits": [
+          "Migration and backup replay are outside this receipt."
+        ],
+        "negative_case_ids": [
+          "PURGE-NEG-002"
+        ],
+        "positive_case_ids": [
+          "PURGE-POS-002",
+          "PURGE-POS-003"
+        ],
+        "receipt": "docs/revalidation/projection-purge-rebuild/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "COMPLETE",
+        "covered_statement": "Evidence capture identity, source, observed time, and content hash remain immutable, while retry key plus fingerprint is idempotent for the exercised TX-01 contract.",
+        "debt_id": "cas-blob-orphan",
+        "execution_status": "PASS",
+        "limits": [],
+        "negative_case_ids": [
+          "CAS-NEG-003"
+        ],
+        "positive_case_ids": [
+          "CAS-POS-002",
+          "CAS-POS-003"
+        ],
+        "receipt": "docs/revalidation/cas-blob-orphan/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "Revoked material cannot be used by or resurrected into derived projections, and physical erasure requires an absence proof.",
+        "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
+        "limits": [
+          "Synchronous ContextCapsule invalidation and permission/retention unknown paths are not revalidated here."
+        ],
+        "negative_case_ids": [
+          "PURGE-NEG-001",
+          "PURGE-NEG-002"
+        ],
+        "positive_case_ids": [
+          "PURGE-POS-001",
+          "PURGE-POS-003"
+        ],
+        "receipt": "docs/revalidation/projection-purge-rebuild/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "Blob-first failure leaves no canonical partial rows and normal retry restores one idempotent Evidence/Blob identity.",
+        "debt_id": "cas-blob-orphan",
+        "execution_status": "PASS",
+        "limits": [
+          "Input validation and every TX-01 precondition are not claimed by this receipt."
+        ],
+        "negative_case_ids": [
+          "CAS-NEG-001"
+        ],
+        "positive_case_ids": [
+          "CAS-POS-001",
+          "CAS-POS-002",
+          "CAS-POS-003"
+        ],
+        "receipt": "docs/revalidation/cas-blob-orphan/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "The revoke-to-purge delivery and verified-absence recovery path is fail-closed and replayable.",
+        "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
+        "limits": [
+          "The complete synchronous governance transaction contract is not claimed by this receipt."
+        ],
+        "negative_case_ids": [
+          "PURGE-NEG-001",
+          "PURGE-NEG-002"
+        ],
+        "positive_case_ids": [
+          "PURGE-POS-001",
+          "PURGE-POS-003"
+        ],
+        "receipt": "docs/revalidation/projection-purge-rebuild/post-cleanup.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "The projection worker converges watermarks and recovers after purge proof failure.",
+        "debt_id": "projection-purge-rebuild",
+        "execution_status": "PASS",
+        "limits": [
+          "Worker role and tenant security are outside this receipt."
+        ],
+        "negative_case_ids": [
+          "PURGE-NEG-001"
+        ],
+        "positive_case_ids": [
+          "PURGE-POS-001",
+          "PURGE-POS-002",
+          "PURGE-POS-003"
+        ],
+        "receipt": "docs/revalidation/projection-purge-rebuild/post-cleanup.receipt.json",
+        "status": "PASS"
+      }
+    ],
     "failed_claim_count": 0,
     "historical_receipt_count": 8,
     "index": "docs/revalidation/INDEX.md",
     "preserved_failed_receipt_count": 3,
-    "receipts": [],
-    "validated_receipt_count": 8
+    "receipts": [
+      "docs/revalidation/cas-blob-orphan/post-cleanup.receipt.json",
+      "docs/revalidation/confirmation-binding/post-cleanup.receipt.json",
+      "docs/revalidation/context-validation-lifecycle/post-cleanup.receipt.json",
+      "docs/revalidation/openworker-http-exposure/post-cleanup.receipt.json",
+      "docs/revalidation/projection-purge-rebuild/post-cleanup.receipt.json"
+    ],
+    "validated_receipt_count": 13
   },
   "claim_policy": {
     "architecture_conformant": false,
@@ -32,7 +275,7 @@
     "map": "docs/conformance/invariant-test-map.json",
     "status": "UNVERIFIED"
   },
-  "invariant_test_map_sha256": "1b5a79c82fea5e46c5bf66578e11ac5a2e1e7cabc9c2b7eb796995f8602b63db",
+  "invariant_test_map_sha256": "731bfea6d21fd10de6f8a2eebfa70dfb07600ac556537a268e95ec369d3e19d6",
   "known_limitations": [
     "Behavior revalidation receipts are identity-bound and may only promote an item when they explicitly declare COMPLETE coverage.",
     "AF-09 historical tarballs are archive-owned and are represented by tracked classification metadata, not Product Git bytes.",
@@ -45,7 +288,7 @@
     "0056_host_notes"
   ],
   "openworker_version": "0.1.0",
-  "product_commit": "893992e6af0147cf26ad25dc255a8a19aba9e8f3",
+  "product_commit": "432153a0065f6ccc6706d670ba7eafafc002c950",
   "product_manifest_sha256": "7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693",
   "product_tree_sha256": "7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521",
   "product_version": "0.1.0-candidate",
@@ -75,5 +318,5 @@
       "status": "UNVERIFIED"
     }
   ],
-  "verified_at": "2026-09-21T16:17:51+00:00"
+  "verified_at": "2026-09-21T17:22:52+00:00"
 }

@@ -1,0 +1,169 @@
+{
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "architecture_version": "1.0.0",
+    "product_commit": "432153a0065f6ccc6706d670ba7eafafc002c950",
+    "product_manifest_sha256": "7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693",
+    "product_tree_sha256": "7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521"
+  },
+  "conformance_claims": [
+    {
+      "architecture_id": "G6",
+      "coverage": "SCOPED",
+      "covered_statement": "Revocation asynchronously removes derived projection and eligible blob material with verifiable absence.",
+      "limits": [
+        "Backup obligation replay is not covered by this receipt."
+      ],
+      "negative_case_ids": [
+        "PURGE-NEG-001",
+        "PURGE-NEG-002"
+      ],
+      "positive_case_ids": [
+        "PURGE-POS-001",
+        "PURGE-POS-002",
+        "PURGE-POS-003"
+      ],
+      "status": "PASS"
+    },
+    {
+      "architecture_id": "G9",
+      "coverage": "SCOPED",
+      "covered_statement": "Derived search projections can be reset and replayed from durable outbox state without canonical mutation.",
+      "limits": [
+        "Migration and backup replay are outside this receipt."
+      ],
+      "negative_case_ids": [
+        "PURGE-NEG-002"
+      ],
+      "positive_case_ids": [
+        "PURGE-POS-002",
+        "PURGE-POS-003"
+      ],
+      "status": "PASS"
+    },
+    {
+      "architecture_id": "I-10",
+      "coverage": "SCOPED",
+      "covered_statement": "Revoked material cannot be used by or resurrected into derived projections, and physical erasure requires an absence proof.",
+      "limits": [
+        "Synchronous ContextCapsule invalidation and permission/retention unknown paths are not revalidated here."
+      ],
+      "negative_case_ids": [
+        "PURGE-NEG-001",
+        "PURGE-NEG-002"
+      ],
+      "positive_case_ids": [
+        "PURGE-POS-001",
+        "PURGE-POS-003"
+      ],
+      "status": "PASS"
+    },
+    {
+      "architecture_id": "TX-05",
+      "coverage": "SCOPED",
+      "covered_statement": "The revoke-to-purge delivery and verified-absence recovery path is fail-closed and replayable.",
+      "limits": [
+        "The complete synchronous governance transaction contract is not claimed by this receipt."
+      ],
+      "negative_case_ids": [
+        "PURGE-NEG-001",
+        "PURGE-NEG-002"
+      ],
+      "positive_case_ids": [
+        "PURGE-POS-001",
+        "PURGE-POS-003"
+      ],
+      "status": "PASS"
+    },
+    {
+      "architecture_id": "PROJECTION_WORKER",
+      "coverage": "SCOPED",
+      "covered_statement": "The projection worker converges watermarks and recovers after purge proof failure.",
+      "limits": [
+        "Worker role and tenant security are outside this receipt."
+      ],
+      "negative_case_ids": [
+        "PURGE-NEG-001"
+      ],
+      "positive_case_ids": [
+        "PURGE-POS-001",
+        "PURGE-POS-002",
+        "PURGE-POS-003"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "debt_id": "projection-purge-rebuild",
+  "decision": {
+    "rationale": "Current purge, proof recovery, rebuild, watermark, and revoked-material negative paths all passed; no mechanism defect was reproduced.",
+    "state": "FIXED"
+  },
+  "evidence_phase": "post-cleanup-current-tree",
+  "execution": {
+    "status": "PASS",
+    "verified_at": "2026-09-21T17:21:28Z"
+  },
+  "negative_cases": [
+    {
+      "case_id": "PURGE-NEG-001",
+      "description": "A forged erasure proof is dead-lettered and cannot complete purge.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_projection_worker.py::test_forged_erasure_proof_dead_letters_then_verified_absence_recovers"
+      ]
+    },
+    {
+      "case_id": "PURGE-NEG-002",
+      "description": "A projection rebuild after revoke does not resurrect revoked material.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_projection_worker.py::test_rebuild_after_revoke_does_not_resurrect_revoked_material"
+      ]
+    }
+  ],
+  "positive_cases": [
+    {
+      "case_id": "PURGE-POS-001",
+      "description": "Purge removes the eligible blob and derived claim projection with verified absence.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_projection_worker.py::test_purge_worker_erases_blob_and_derived_claim_projection"
+      ]
+    },
+    {
+      "case_id": "PURGE-POS-002",
+      "description": "A live projection rebuild replays durable outbox events without canonical mutation.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_projection_worker.py::test_search_projection_rebuild_replays_outbox_without_canonical_mutation"
+      ]
+    },
+    {
+      "case_id": "PURGE-POS-003",
+      "description": "After explicit retry, verified absence recovery delivers the purge event and leaves projections empty.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_projection_worker.py::test_forged_erasure_proof_dead_letters_then_verified_absence_recovers"
+      ]
+    }
+  ],
+  "reproduction": {
+    "commands": [
+      {
+        "command": "uv run pytest -q --maxfail=1 --tb=short tests/integration/test_projection_worker.py::test_purge_worker_erases_blob_and_derived_claim_projection tests/integration/test_projection_worker.py::test_forged_erasure_proof_dead_letters_then_verified_absence_recovers tests/integration/test_projection_worker.py::test_search_projection_rebuild_replays_outbox_without_canonical_mutation tests/integration/test_projection_worker.py::test_rebuild_after_revoke_does_not_resurrect_revoked_material tests/integration/test_projection_worker.py::test_blob_orphan_reconciles_on_real_worker_startup_and_ingest_recovers tests/integration/test_evidence_api.py::test_tx01_api_replay_conflict_blob_dedup_and_lineage tests/integration/test_evidence_api.py::test_evidence_capture_identity_is_immutable_even_for_owner tests/integration/test_evidence_api.py::test_tx01_concurrent_same_key_has_one_canonical_side_effect tests/integration/test_context_chat_api.py::test_action_sensitive_chat_requires_live_confirmation_and_canonical_outage_abstains tests/integration/test_context_chat_api.py::test_live_confirmation_replays_across_query_goal_and_scope tests/integration/test_context_chat_api.py::test_composite_prepare_context_reuses_hit_then_falls_through_to_exact tests/integration/test_context_chat_api.py::test_prepare_context_cache_revalidates_authoritative_capsule_lifecycle tests/unit/test_action_identity.py::test_action_identity_is_canonical_and_shared_with_prepare_binding tests/unit/test_action_identity.py::test_action_sensitive_chat_requires_action_identity_contract tests/unit/test_context_preparation.py::test_one_refresh_then_tool_result_uses_validated_cache_without_recall tests/unit/test_context_preparation.py::test_cache_validation_renews_past_original_capsule_expiry tests/unit/test_context_preparation.py::test_authoritative_capsule_lifecycle_miss_refreshes_exactly tests/unit/test_context_preparation.py::test_cache_position_change_falls_through_to_exact_l0_in_same_call tests/unit/test_context_preparation.py::test_cache_issue_revision_change_falls_through_to_one_exact_l0 tests/unit/test_context_validation.py::test_context_validation_token_is_bound_and_expires",
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "tests": [
+      "runtime/tests/integration/test_projection_worker.py::test_purge_worker_erases_blob_and_derived_claim_projection",
+      "runtime/tests/integration/test_projection_worker.py::test_forged_erasure_proof_dead_letters_then_verified_absence_recovers",
+      "runtime/tests/integration/test_projection_worker.py::test_search_projection_rebuild_replays_outbox_without_canonical_mutation",
+      "runtime/tests/integration/test_projection_worker.py::test_rebuild_after_revoke_does_not_resurrect_revoked_material"
+    ],
+    "working_directory": "MiLAi-Product/runtime"
+  },
+  "schema_version": "milai-behavior-revalidation-v1",
+  "state": "FIXED"
+}
