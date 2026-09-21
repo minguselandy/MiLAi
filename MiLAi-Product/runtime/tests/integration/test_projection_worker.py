@@ -39,6 +39,8 @@ from milai.persistence.retrieval_repository import RetrievalRepository
 from milai.workers.main import FoundationWorker
 from milai.workers.main import main as worker_main
 
+pytestmark = pytest.mark.integration
+
 ACTOR_ID = UUID("aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa")
 API_TOKEN = "test-token-with-at-least-32-characters"
 REVIEWER_TOKEN = "reviewer-token-with-at-least-32-characters"

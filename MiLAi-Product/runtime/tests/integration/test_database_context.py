@@ -9,6 +9,8 @@ from test_host_cognitive_state import ACTOR_ID, API_TOKEN, _url
 from milai.config import RuntimeSettings
 from milai.persistence import Database, DatabaseRoleError, SessionContext
 
+pytestmark = pytest.mark.integration
+
 
 @pytest.fixture
 def context_database(tmp_path):

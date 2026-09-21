@@ -9,6 +9,8 @@ import pytest
 from test_projection_worker import _headers, _url
 from test_projection_worker import worker_runtime as worker_runtime
 
+pytestmark = pytest.mark.integration
+
 
 @pytest.mark.integration
 @pytest.mark.parametrize("worker_runtime", [False, True], indirect=True)

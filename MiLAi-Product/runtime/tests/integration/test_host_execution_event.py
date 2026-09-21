@@ -20,6 +20,8 @@ from milai.domain.host_execution_event import HostExecutionEventWindowRequest
 from milai.persistence import Database, SessionContext
 from milai.persistence.host_execution_event_repository import HostExecutionEventRepository
 
+pytestmark = pytest.mark.integration
+
 TENANT_ID = UUID("11111111-1111-4111-8111-111111111111")
 ACTOR_ID = UUID("aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa")
 API_TOKEN = "test-token-with-at-least-32-characters"
