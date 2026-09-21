@@ -10,34 +10,23 @@ import logging
 import os
 from collections.abc import AsyncIterator, Callable, Iterator
 from contextlib import AsyncExitStack, asynccontextmanager, contextmanager
-from contextvars import ContextVar
 from copy import deepcopy
-from dataclasses import dataclass
 from datetime import datetime
 from functools import partial
 from pathlib import Path
-from time import monotonic, perf_counter, time
-from typing import Annotated, Any, ClassVar, Literal, cast
-from urllib.parse import urlsplit
-from uuid import UUID, uuid4
+from time import monotonic, perf_counter
+from typing import Annotated, Any, Literal, cast
 
 from mcp.server import MCPServer
 from mcp.server.auth.middleware.auth_context import get_access_token
-from mcp.server.auth.provider import AccessToken, TokenVerifier
-from mcp.server.context import CallNext, HandlerResult, ServerRequestContext
-from mcp.server.extension import Extension
+from mcp.server.auth.provider import TokenVerifier
 from mcp.server.mcpserver.context import Context
 from mcp.server.mcpserver.exceptions import ToolError
 from mcp.server.mcpserver.tools import ToolManager
 from mcp.server.mcpserver.utilities.func_metadata import func_metadata
-from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import (
-    CallToolRequestParams,
     CallToolResult,
     InputRequiredResult,
-    TextContent,
-    Tool,
-    ToolAnnotations,
 )
 from milai_client import (
     AgentRecallPolicy,
@@ -54,26 +43,16 @@ from milai_client.models import Authority, Consistency
 from pydantic import (
     AwareDatetime,
     BaseModel,
-    ConfigDict,
     Field,
-    ValidationError,
-    ValidationInfo,
-    field_validator,
-    model_validator,
 )
-from starlette.applications import Starlette
 from starlette.concurrency import run_in_threadpool
 from starlette.requests import Request
 from starlette.responses import JSONResponse
-from starlette.routing import Route
 
 from milai_mcp import __version__
-from milai_mcp.aigcit_auth import AigcitErrorMiddleware, AigcitTokenVerifier, JwksCache
+from milai_mcp.aigcit_auth import AigcitTokenVerifier, JwksCache
 from milai_mcp.auth_policy import (
-    ALL_TOOL_SCOPES,
     READ_SCOPES,
-    Admission,
-    AdmissionDenied,
     AdmissionPolicy,
     AuthDependencyUnavailable,
     authentication_mode,
@@ -91,11 +70,8 @@ from milai_mcp.http_transport import (
 from milai_mcp.input_contracts import (
     CAPTURE_EXAMPLE,
     CREATE_EXAMPLE,
-    CreatePatchInput,
-    EvidenceCaptureInput,
     EvidenceContent,
     EvidenceSourceContextInput,
-    IssueResolutionPatchInput,
     RevocationReasonCode,
     SourceRef,
     SourceType,
@@ -105,9 +81,7 @@ from milai_mcp.input_contracts import (
 from milai_mcp.memory_search import memory_search_tool
 from milai_mcp.oauth_provider import (
     MilaiOAuthProvider,
-    OAuthPublicClientMetadataMiddleware,
     OAuthStore,
-    OAuthTokenResourceBindingMiddleware,
     install_oauth_consent_routes,
 )
 from milai_mcp.ordinary_memory import ordinary_note_tools
@@ -121,18 +95,50 @@ from milai_mcp.remote_registration import (
     RemoteRegistrationTokenVerifier,
     RemoteUserRegistry,
 )
-from milai_mcp.schema_export import inline_tool_schema
+from milai_mcp.server_contracts import (
+    _CODEX_FULL_GOVERNANCE_MODE as _CODEX_FULL_GOVERNANCE_MODE,
+)
+from milai_mcp.server_contracts import (
+    _CODEX_FULL_REQUIRED_CAPABILITIES as _CODEX_FULL_REQUIRED_CAPABILITIES,
+)
+from milai_mcp.server_contracts import (
+    _CODEX_WORKING_STATE_USAGE_CONTRACT as _CODEX_WORKING_STATE_USAGE_CONTRACT,
+)
+from milai_mcp.server_contracts import (
+    _DESTRUCTIVE_TOOL_NAMES as _DESTRUCTIVE_TOOL_NAMES,
+)
+from milai_mcp.server_contracts import (
+    _READ_ONLY_TOOL_NAMES as _READ_ONLY_TOOL_NAMES,
+)
+from milai_mcp.server_contracts import _TOOL_TITLES as _TOOL_TITLES
+from milai_mcp.server_contracts import SERVER_DESCRIPTION as SERVER_DESCRIPTION
+from milai_mcp.server_contracts import (
+    TOOL_COMPATIBILITY_VNEXT as TOOL_COMPATIBILITY_VNEXT,
+)
+from milai_mcp.server_contracts import (
+    CodexFullProposalInput as CodexFullProposalInput,
+)
+from milai_mcp.server_contracts import (
+    CodexFullRuntimeClients as CodexFullRuntimeClients,
+)
+from milai_mcp.server_contracts import Profile as Profile
+from milai_mcp.server_contracts import StateKeyInput as StateKeyInput
+from milai_mcp.server_contracts import TaskContextInput as TaskContextInput
+from milai_mcp.server_contracts import _tool_annotations as _tool_annotations
+from milai_mcp.server_middleware import (
+    _request_access_token as _request_access_token,
+)
+from milai_mcp.server_middleware import (
+    _RequestAccessTokenMiddleware as _RequestAccessTokenMiddleware,
+)
+from milai_mcp.server_middleware import (
+    _StrictArguments as _StrictArguments,
+)
+from milai_mcp.server_middleware import (
+    _StrictSchemaMCPServer as _StrictSchemaMCPServer,
+)
+from milai_mcp.server_wire import _wire_sha256 as _wire_sha256
 
-Profile = Literal[
-    "agent-memory",
-    "codex-full",
-    "reader-lite",
-    "reader-detail",
-    "reader",
-    "submitter",
-    "reviewer",
-    "operator",
-]
 _MAX_OUTPUT_BYTES = 65_536
 _WIDE_MAX_OUTPUT_BYTES = 262_144
 # The Runtime readiness endpoint permits an explicit 30-second bounded wait.
@@ -141,311 +147,6 @@ _WIDE_MAX_OUTPUT_BYTES = 262_144
 _RUNTIME_HTTP_TIMEOUT_SECONDS = 35.0
 _DEFAULT_MAX_RETRIES = 2
 _LOGGER = logging.getLogger(__name__)
-_request_access_token: ContextVar[AccessToken | None] = ContextVar(
-    "milai_mcp_request_access_token", default=None
-)
-
-_CODEX_FULL_GOVERNANCE_MODE = "SINGLE_HOST_FULL_CONTROL"
-SERVER_DESCRIPTION = (
-    "MiLAi provides host-submitted, governed memory for notes, evidence, task checkpoints, "
-    "and reviewed claims. It does not automatically ingest conversations. Notes, evidence, "
-    "proposals, and checkpoints are not approved claims. Checkpoints can expire; retention "
-    "and deletion policies apply. Available tools and data depend on the profile and permissions."
-)
-_READ_ONLY_TOOL_NAMES = frozenset(
-    {
-        "milai_status",
-        "milai_recall",
-        "milai_memory_resolve",
-        "milai_memory_search",
-        "milai_memory_get",
-        "milai_claim_get",
-        "milai_open_issues_list",
-        "milai_trace_get",
-        "milai_evidence_metadata_get",
-        "milai_prepare_context",
-        "milai_projection_readiness_wait",
-        "milai_proposals_list",
-        "milai_proposal_get",
-        "milai_deletion_status_get",
-        "milai_namespace_cleanup_status",
-        "milai_working_state_get",
-        "milai_note_get", "milai_note_list", "milai_note_search", "milai_note_operation_get",
-        "milai_evidence_get", "milai_evidence_list",
-        "milai_memory_read", "milai_memory_list", "milai_memory_status",
-    }
-)
-_DESTRUCTIVE_TOOL_NAMES = frozenset(
-    {
-        "milai_memory_review",
-        "milai_evidence_revoke",
-        "milai_namespace_cleanup_submit",
-        "milai_note_delete",
-        "milai_memory_delete",
-    }
-)
-_TOOL_TITLES = {
-    "milai_status": "Inspect MiLAi capabilities and limits",
-    "milai_recall": "Recall governed memory",
-    "milai_memory_resolve": "Search governed memory evidence",
-    "milai_memory_search": "Search notes and governed memory",
-    "milai_memory_get": "Read a governed Claim by ID or key",
-    "milai_claim_get": "Read one exact claim",
-    "milai_open_issues_list": "List memory open issues",
-    "milai_trace_get": "Read a retrieval trace",
-    "milai_evidence_metadata_get": "Read evidence metadata",
-    "milai_prepare_context": "Prepare memory context",
-    "milai_projection_readiness_wait": "Wait for projection readiness",
-    "milai_evidence_capture": "Capture immutable evidence",
-    "milai_proposal_create": "Propose a canonical memory change",
-    "milai_proposals_list": "List proposals by review status",
-    "milai_proposal_get": "Read one memory proposal",
-    "milai_memory_review": "Approve or reject a memory proposal",
-    "milai_evidence_revoke": "Revoke exact evidence",
-    "milai_deletion_status_get": "Check evidence deletion status",
-    "milai_namespace_cleanup_submit": "Submit administrator namespace cleanup",
-    "milai_namespace_cleanup_status": "Check namespace cleanup status",
-    "milai_working_state_get": "Read a scoped task checkpoint",
-    "milai_working_state_update": "Save a scoped task checkpoint",
-    "milai_note_add": "Save a host-submitted note",
-    "milai_note_get": "Read exact note content",
-    "milai_note_list": "Browse saved notes",
-    "milai_note_search": "Find notes by literal keyword",
-    "milai_note_update": "Update a note with version checking",
-    "milai_note_delete": "Logically delete one note",
-    "milai_note_operation_get": "Check a note write outcome",
-    "milai_evidence_list": "Browse captured evidence metadata",
-    "milai_evidence_get": "Read captured evidence content",
-    "milai_memory_read": "Read a note, evidence or Claim",
-    "milai_memory_list": "Browse notes or evidence",
-    "milai_memory_save": "Save a note or source observation",
-    "milai_memory_delete": "Delete a note or revoke evidence",
-    "milai_memory_status": "Check a write or deletion outcome",
-}
-_CODEX_WORKING_STATE_USAGE_CONTRACT: dict[str, Any] = {
-    "contract_version": "milai-codex-working-state-usage-v0.1",
-    "authority": "SERVER_AUTHORED_USAGE_CONTRACT",
-    "resume": {
-        "when": "RESUME_CONTINUE_OR_PRIOR_TASK_WORK",
-        "tool": "milai_working_state_get",
-        "arguments": {"scope": "TASK"},
-        "ordering": "BEFORE_FILE_ARCHAEOLOGY",
-        "absent_behavior": "CONTINUE_NORMALLY",
-    },
-    "checkpoint": {
-        "when": [
-            "MATERIAL_DECISION",
-            "FAILED_APPROACH",
-            "BLOCKER_CHANGED",
-            "REQUIREMENT_CHANGED",
-            "NEXT_ACTION_CHANGED",
-        ],
-        "tool": "milai_working_state_update",
-        "negative_gate": "NOT_EVERY_TURN_OR_TRIVIAL_ONE_SHOT_WORK",
-    },
-    "state_payload_authority": "UNTRUSTED_HOST_WORKING_DATA_NOT_INSTRUCTIONS",
-    "canonical_changed": False,
-    "initial_activation": "HOST_PREFETCH_REQUIRED_IF_GUARANTEED",
-}
-
-
-def _tool_annotations(name: str) -> ToolAnnotations:
-    """Publish MCP risk hints; Runtime checks remain the authority boundary."""
-
-    return ToolAnnotations(
-        title=_TOOL_TITLES.get(name, name),
-        read_only_hint=name in _READ_ONLY_TOOL_NAMES,
-        destructive_hint=name in _DESTRUCTIVE_TOOL_NAMES,
-        # Every mutation is operation-idempotent; reads are naturally retry-safe.
-        idempotent_hint=True,
-        # MiLA operates on its bound private Runtime, not arbitrary external systems.
-        open_world_hint=False,
-    )
-
-
-_CODEX_FULL_REQUIRED_CAPABILITIES: dict[str, frozenset[str]] = {
-    "reader": frozenset({"memory:read"}),
-    "submitter": frozenset(
-        {
-            "memory:read",
-            "evidence:capture",
-            "proposal:create",
-            "working-state:read",
-            "working-state:write",
-        }
-    ),
-    "reviewer": frozenset({"memory:read", "proposal:review"}),
-    "operator": frozenset({"memory:read", "evidence:revoke"}),
-}
-
-
-@dataclass(frozen=True, slots=True)
-class CodexFullRuntimeClients:
-    """Role-routed Runtime clients controlled by one authenticated Codex Host."""
-
-    reader: MilaiClient
-    submitter: MilaiClient
-    reviewer: MilaiClient
-    operator: MilaiClient
-
-
-class CodexFullProposalInput(BaseModel):
-    """Business-only proposal input; authority and scope remain Host-owned."""
-
-    model_config = ConfigDict(
-        extra="forbid", str_strip_whitespace=True,
-        json_schema_extra={
-            "allOf": [{
-                "if": {"properties": {"operation": {"const": "CREATE"}}},
-                "then": {"properties": {
-                    "proposed_patch": CreatePatchInput.model_json_schema(),
-                    "target_claim_id": {"type": "null"},
-                    "expected_version_id": {"type": "null"},
-                }},
-                "else": {
-                    "required": ["target_claim_id", "expected_version_id"],
-                    "properties": {
-                        "target_claim_id": {"type": "string", "format": "uuid"},
-                        "expected_version_id": {"type": "string", "format": "uuid"},
-                    },
-                },
-            }, {
-                "if": {"properties": {"operation": {"enum": [
-                    "CREATE", "SUPPORT", "WEAKEN", "REVALIDATE", "REGROUND",
-                    "SUPERSEDE", "CONTEXTUALIZE",
-                ]}}},
-                "then": {"required": ["supporting_evidence_refs"], "properties": {
-                    "supporting_evidence_refs": {"minItems": 1},
-                }},
-            }, {
-                "if": {"properties": {"operation": {"const": "CONTRADICT"}}},
-                "then": {"required": ["contradicting_evidence_refs"], "properties": {
-                    "contradicting_evidence_refs": {"minItems": 1},
-                }},
-            }, {
-                "if": {"properties": {"proposed_patch": {"anyOf": [
-                    {"required": [key]} for key in IssueResolutionPatchInput.model_fields
-                ]}}},
-                "then": {"properties": {
-                    "operation": {"const": "SUPERSEDE"},
-                    "proposed_patch": IssueResolutionPatchInput.model_json_schema(),
-                }},
-            }],
-        },
-    )
-
-    operation: Literal[
-        "CREATE",
-        "SUPPORT",
-        "WEAKEN",
-        "REVALIDATE",
-        "REGROUND",
-        "SUPERSEDE",
-        "CONTEXTUALIZE",
-        "CONTRADICT",
-        "NO_CHANGE",
-    ]
-    proposed_patch: dict[str, Any]
-    supporting_evidence_refs: list[UUID] = Field(
-        default_factory=list, max_length=256, validate_default=True,
-        json_schema_extra={"uniqueItems": True},
-    )
-    contradicting_evidence_refs: list[UUID] = Field(
-        default_factory=list, max_length=256, validate_default=True,
-        json_schema_extra={"uniqueItems": True},
-    )
-    target_claim_id: UUID | None = None
-    expected_version_id: UUID | None = None
-
-    @field_validator("supporting_evidence_refs", "contradicting_evidence_refs")
-    @classmethod
-    def validate_evidence_refs(cls, value: list[UUID], info: ValidationInfo) -> list[UUID]:
-        if len(set(value)) != len(value):
-            raise ValueError("Evidence references must be unique")
-        supporting = info.field_name == "supporting_evidence_refs"
-        operation = info.data.get("operation")
-        required = operation in {
-            "CREATE", "SUPPORT", "WEAKEN", "REVALIDATE", "REGROUND",
-            "SUPERSEDE", "CONTEXTUALIZE",
-        } if supporting else operation == "CONTRADICT"
-        if required and not value:
-            raise ValueError("this operation requires nonempty Evidence references")
-        if not supporting and set(value) & set(info.data.get("supporting_evidence_refs", [])):
-            raise ValueError("supporting and contradicting references must be disjoint")
-        return value
-
-    @field_validator("proposed_patch")
-    @classmethod
-    def validate_patch(cls, value: dict[str, Any], info: ValidationInfo) -> dict[str, Any]:
-        forbidden = {
-            "tenant_id",
-            "actor_id",
-            "principal_id",
-            "scope_predicate",
-            "requested_authority",
-            "authority",
-        }
-        present = sorted(forbidden & value.keys())
-        if present:
-            raise ValueError(
-                "proposed_patch contains Host-owned fields: " + ", ".join(present)
-            )
-        if info.data.get("operation") == "CREATE":
-            CreatePatchInput.model_validate(value)
-        if IssueResolutionPatchInput.model_fields.keys() & value.keys():
-            if info.data.get("operation") != "SUPERSEDE":
-                raise ValueError("OpenIssue resolution requires SUPERSEDE")
-            IssueResolutionPatchInput.model_validate(value)
-        return value
-
-    @model_validator(mode="after")
-    def validate_target(self) -> CodexFullProposalInput:
-        if self.operation == "CREATE":
-            if self.target_claim_id is not None or self.expected_version_id is not None:
-                raise ValueError("CREATE cannot target an existing ClaimVersion")
-        elif self.target_claim_id is None or self.expected_version_id is None:
-            raise ValueError(
-                "non-CREATE operations require target_claim_id and expected_version_id"
-            )
-        return self
-
-# DG-13 M0 compatibility freeze.  Values identify one semantic owner; they do
-# not register the TARGET tools or create parallel implementations.
-TOOL_COMPATIBILITY_VNEXT: dict[str, str] = {
-    "milai_recall": "milai_memory_resolve",
-    "milai_claim_get": "milai_memory_get",
-    "milai_status": "milai_memory_capabilities",
-    "milai_trace_get": "milai_memory_explain",
-    "milai_evidence_metadata_get": "milai_memory_explain",
-    "milai_evidence_capture": "milai_evidence_capture",
-    "milai_proposal_create": "milai_memory_propose",
-    "runtime:/v1/proposals/{proposal_id}/review": "milai_memory_review",
-    "milai_evidence_revoke": "milai_memory_delete",
-    "milai_deletion_status_get": "memory://deletion-requests/{id}",
-    "unimplemented:export": "milai_memory_export",
-    "milai_prepare_context": "openworker-extension:milai_memory_resolve",
-}
-
-
-class StateKeyInput(BaseModel):
-    """Canonical address accepted by the detail-profile exact read tool."""
-
-    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
-
-    subject: str = Field(min_length=1, max_length=512)
-    predicate: str = Field(min_length=1, max_length=255)
-    claim_type: str = Field(min_length=1, max_length=255)
-
-
-class TaskContextInput(BaseModel):
-    """Optional narrowing hints; deliberately contains no Task identity or policy fields."""
-
-    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
-
-    project_ids: list[str] = Field(default_factory=list, max_length=16)
-    entities: list[str] = Field(default_factory=list, max_length=32)
-    memory_types: list[str] = Field(default_factory=list, max_length=16)
-    action_risk: Literal["LOW", "MEDIUM", "HIGH"] | None = None
 
 
 def _non_negative_int(value: str) -> int:
@@ -458,358 +159,7 @@ def _non_negative_int(value: str) -> int:
     return parsed
 
 
-class _StrictArguments(Extension):
-    identifier = "io.milai/strict-tool-arguments"
-    _literal_confirmations: ClassVar[dict[str, str]] = {
-        "milai_evidence_capture": "CAPTURE",
-        "milai_proposal_create": "SUBMIT",
-        "milai_evidence_revoke": "REVOKE",
-        "milai_namespace_cleanup_submit": "CLEANUP_NAMESPACE",
-    }
-
-    def __init__(
-        self,
-        allowed: dict[str, frozenset[str]],
-        *,
-        required: dict[str, frozenset[str]] | None = None,
-        examples: dict[str, str] | None = None,
-        models: dict[str, type[BaseModel]] | None = None,
-    ) -> None:
-        self._allowed = allowed
-        self._required = required or {}
-        self._examples = examples or {}
-        self._models = models if models is not None else {}
-
-    def _error(
-        self,
-        *,
-        tool_name: str,
-        problem: str,
-        reason: str,
-        fix: str,
-    ) -> CallToolResult:
-        payload = {
-            "error": "INVALID_TOOL_ARGUMENTS",
-            "tool": tool_name,
-            "problem": problem,
-            "reason": reason,
-            "fix": fix,
-        }
-        example = self._examples.get(tool_name)
-        if example is not None:
-            payload["example"] = example
-        return CallToolResult(
-            content=[
-                TextContent(
-                    type="text",
-                    text=json.dumps(payload, ensure_ascii=False, sort_keys=True),
-                )
-            ],
-            is_error=True,
-        )
-
-    async def intercept_tool_call(
-        self,
-        params: CallToolRequestParams,
-        ctx: ServerRequestContext[Any, Any],
-        call_next: CallNext,
-    ) -> HandlerResult:
-        arguments = params.arguments or {}
-        unexpected = sorted(set(arguments) - self._allowed.get(params.name, frozenset()))
-        if unexpected:
-            allowed = sorted(self._allowed.get(params.name, frozenset()))
-            return self._error(
-                tool_name=params.name,
-                problem="unexpected arguments: " + ", ".join(unexpected),
-                reason="identity, authority and scope are server-owned",
-                fix="remove those arguments; allowed arguments are: " + ", ".join(allowed),
-            )
-        missing = sorted(self._required.get(params.name, frozenset()) - set(arguments))
-        if missing:
-            return self._error(
-                tool_name=params.name,
-                problem="missing required arguments: " + ", ".join(missing),
-                reason="the requested operation cannot be identified safely",
-                fix="add the missing arguments and retry the same intended operation",
-            )
-        expected_confirmation = self._literal_confirmations.get(params.name)
-        supplied_confirmation = arguments.get("confirmation")
-        if (
-            expected_confirmation is not None
-            and supplied_confirmation != expected_confirmation
-        ):
-            return self._error(
-                tool_name=params.name,
-                problem="confirmation literal is invalid",
-                reason="the guard prevents an accidental mutation",
-                fix=f"set confirmation exactly to {expected_confirmation} after authorization",
-            )
-        if (
-            params.name == "milai_memory_review"
-            and arguments.get("confirmation") != arguments.get("decision")
-        ):
-            return self._error(
-                tool_name=params.name,
-                problem="confirmation does not match the review decision",
-                reason="the guard prevents accidental approval or rejection",
-                fix="set confirmation to the same APPROVE or REJECT value as decision",
-            )
-        if params.name in self._models:
-            try:
-                self._models[params.name].model_validate(arguments)
-            except ValidationError as exc:
-                return CallToolResult(is_error=True, content=[TextContent(
-                    type="text", text=json.dumps({
-                        "code": "INVALID_ARGUMENT", "retryable": False,
-                        "fields": safe_validation_fields(
-                            exc.errors(include_input=False, include_url=False),
-                            working_state=params.name == "milai_working_state_update",
-                            compact=params.name in {
-                                "milai_memory_save", "milai_memory_read", "milai_memory_list",
-                                "milai_memory_delete", "milai_memory_status",
-                            },
-                        ),
-                    }),
-                )])
-        if (params.name == "milai_evidence_capture" and params.name in self._required
-                and "source_type" in arguments):
-            try:
-                EvidenceCaptureInput.model_validate(arguments)
-            except ValidationError as exc:
-                return CallToolResult(is_error=True, content=[TextContent(
-                    type="text", text=json.dumps({
-                        "code": "INVALID_ARGUMENT",
-                        "fields": safe_validation_fields(
-                            exc.errors(include_input=False, include_url=False)
-                        ),
-                        "retryable": False,
-                    }),
-                )])
-        if (params.name == "milai_proposal_create" and params.name in self._required
-                and "proposal" in arguments):
-            try:
-                CodexFullProposalInput.model_validate(arguments["proposal"])
-            except ValidationError as exc:
-                fields = safe_validation_fields(
-                    exc.errors(include_input=False, include_url=False)
-                )
-                for field in fields:
-                    if field["path"].split(".")[0] in (
-                        CreatePatchInput.model_fields.keys()
-                        | IssueResolutionPatchInput.model_fields.keys()
-                    ):
-                        field["path"] = "proposed_patch." + field["path"]
-                    field["path"] = "proposal" + (
-                        "." + field["path"] if field["path"] else ""
-                    )
-                    if field["type"] == "value_error" and field["path"] == "proposal":
-                        field["expected"] = (
-                            "CREATE requires a complete patch and no target; non-CREATE requires "
-                            "target_claim_id and expected_version_id; authority and scope are "
-                            "server-owned"
-                        )
-                return CallToolResult(is_error=True, content=[TextContent(
-                    type="text", text=json.dumps({
-                        "code": "INVALID_ARGUMENT", "fields": fields, "retryable": False,
-                    }),
-                )])
-        return await call_next(ctx)
-
-
-class _RequestAccessTokenMiddleware:
-    """Carry authenticated HTTP identity into the MCP handler task."""
-
-    async def __call__(
-        self,
-        ctx: ServerRequestContext[Any, Any],
-        call_next: CallNext,
-    ) -> HandlerResult:
-        request = ctx.request
-        request_scope = getattr(request, "scope", {})
-        user = request_scope.get("user") if isinstance(request_scope, dict) else None
-        access_token = getattr(user, "access_token", None)
-        context_token = _request_access_token.set(
-            access_token if isinstance(access_token, AccessToken) else None
-        )
-        try:
-            return await call_next(ctx)
-        finally:
-            _request_access_token.reset(context_token)
-
-
-class _StrictSchemaMCPServer(MCPServer):
-    hidden_tools: frozenset[str] = frozenset()
-    oauth_token_resource_url: str | None = None
-    external_binding: HttpResourceBinding | None = None
-    external_verifier: AigcitTokenVerifier | None = None
-    inline_proposal_schema: bool = False
-    inline_all_input_schemas: bool = False
-
-    def streamable_http_app(self, **kwargs: Any) -> Starlette:
-        public_resource = (
-            self.external_binding.resource_url if self.external_binding
-            else self.oauth_token_resource_url
-        )
-        if public_resource is not None:
-            # Binding the socket to loopback behind a TLS proxy must not make
-            # the SDK reject the server-owned public Host/Origin. Keep an exact
-            # allowlist (including a non-default TLS port), never proxy input.
-            resource = urlsplit(public_resource)
-            kwargs["transport_security"] = TransportSecuritySettings(
-                enable_dns_rebinding_protection=True,
-                allowed_hosts=[resource.netloc],
-                allowed_origins=[f"{resource.scheme}://{resource.netloc}"],
-            )
-        app = super().streamable_http_app(**kwargs)
-        if self.oauth_token_resource_url is not None:
-            app.add_middleware(
-                OAuthTokenResourceBindingMiddleware,
-                resource_url=self.oauth_token_resource_url,
-            )
-            app.add_middleware(OAuthPublicClientMetadataMiddleware)
-        if self.external_binding is not None:
-            binding = self.external_binding
-            metadata_path = (
-                "/.well-known/oauth-protected-resource" + urlsplit(binding.resource_url).path
-            )
-            # The SDK couples advertised scopes to endpoint-wide required scopes.
-            # Replace only this public route; per-tool intersection stays below.
-            app.router.routes[:] = [
-                route for route in app.router.routes
-                if getattr(route, "path", None) != metadata_path
-            ]
-            async def external_metadata(_request: Request) -> JSONResponse:
-                return JSONResponse({
-                    "resource": binding.resource_url,
-                    "authorization_servers": [binding.issuer_url],
-                    "scopes_supported": list(binding.scopes),
-                    "bearer_methods_supported": ["header"],
-                }, headers={"Cache-Control": "no-store"})
-
-            app.router.routes.append(Route(metadata_path, external_metadata, methods=["GET"]))
-            app.add_middleware(AigcitErrorMiddleware)
-        return app
-
-    async def _external_admission(self) -> Admission:
-        verifier = self.external_verifier
-        token = _request_access_token.get() or get_access_token()
-        if verifier is None or token is None:
-            raise AdmissionDenied("request_identity_required")
-        if token.expires_at is None or token.expires_at <= time():
-            raise AdmissionDenied("request_identity_expired")
-        claims = token.claims or {}
-        subject = claims.get("milai_external_sub")
-        granted = claims.get("milai_granted_scopes")
-        if (claims.get("milai_auth_mode") != "aigcit"
-                or claims.get("iss") != verifier.cache.issuer
-                or claims.get("milai_deployment_scope_sha256", claims.get("milai_scope_sha256"))
-                != verifier.scope_digest
-                or token.resource != verifier.resource_url
-                or not isinstance(subject, str) or not isinstance(granted, list)
-                or not all(isinstance(scope, str) for scope in granted)):
-            raise AdmissionDenied("request_identity_invalid")
-        admission = await asyncio.to_thread(verifier.policy.admit, subject, frozenset(granted))
-        if token.subject != admission.principal_id:
-            raise AdmissionDenied("request_identity_invalid")
-        expected_digest = (
-            project_scope_digest(admission.project_id)
-            if admission.project_id is not None else verifier.scope_digest
-        )
-        if (claims.get("milai_scope_sha256") != expected_digest
-                or claims.get("milai_project_id") != admission.project_id):
-            raise AdmissionDenied("request_scope_invalid")
-        return admission
-
-    def _audit_external_tool(
-        self, name: str, arguments: dict[str, Any], reason: str,
-        admission: Admission | None = None,
-    ) -> None:
-        token = _request_access_token.get() or get_access_token()
-        binding = self.external_binding
-        operation = arguments.get("operation_id")
-        runtime_operation = None
-        if (admission is not None and binding is not None and name in ALL_TOOL_SCOPES
-                and isinstance(operation, str)):
-            runtime_operation = _wire_sha256({
-                "host_principal_id": admission.principal_id,
-                "scope_sha256": (token.claims or {}).get("milai_scope_sha256") if token else None,
-                "tool": name, "operation_id": operation,
-            })
-        logging.getLogger("milai_mcp.auth").info(json.dumps({
-            "event": "tool_authorization", "request_id": uuid4().hex,
-            "principal": admission.principal_id if admission else None,
-            "client_id": token.client_id if token and admission else None,
-            "policy_version": admission.policy_version if admission else None,
-            "tool": name if name in ALL_TOOL_SCOPES else "unknown_tool",
-            "granted_scopes": sorted(admission.granted_scopes) if admission else [],
-            "effective_scopes": sorted(admission.effective_scopes) if admission else [],
-            "reason": reason, "runtime_operation_id": runtime_operation,
-        }, sort_keys=True))
-
-    async def authorize_tool(
-        self, name: str, arguments: dict[str, Any],
-    ) -> CallToolResult | None:
-        """Authorize both public entrypoints and each private facade operation."""
-        if self.external_verifier is not None:
-            admission = None
-            try:
-                admission = await self._external_admission()
-                if not AdmissionPolicy.allows_tool(name, set(admission.effective_scopes)):
-                    raise AdmissionDenied("insufficient_scope")
-            except (AdmissionDenied, AuthDependencyUnavailable) as exc:
-                code = (
-                    "auth_dependency_unavailable" if isinstance(exc, AuthDependencyUnavailable)
-                    else "insufficient_scope"
-                )
-                self._audit_external_tool(name, arguments, code, admission)
-                return CallToolResult(is_error=True, content=[TextContent(type="text", text=code)])
-            self._audit_external_tool(name, arguments, "allowed", admission)
-        return None
-
-    async def call_tool(
-        self, name: str, arguments: dict[str, Any], context: Context[Any, Any] | None = None,
-    ) -> CallToolResult | InputRequiredResult:
-        denied = await self.authorize_tool(name, arguments)
-        if denied is not None:
-            return denied
-        return await super().call_tool(name, arguments, context)
-
-    async def list_tools(self) -> list[Tool]:
-        tools = await super().list_tools()
-        if self.external_verifier is not None:
-            admission = await self._external_admission()
-            scopes = set(admission.effective_scopes)
-            registered = sorted(tool.name for tool in tools)
-            tools = [tool for tool in tools if AdmissionPolicy.allows_tool(tool.name, scopes)]
-            visible = sorted(tool.name for tool in tools if tool.name not in self.hidden_tools)
-            logging.getLogger("milai_mcp.auth").info(json.dumps({
-                "event": "tool_directory_authorization",
-                "request_id": uuid4().hex,
-                "granted_scopes": sorted(admission.granted_scopes),
-                "enabled_scopes": sorted(self.external_verifier.policy.enabled_scopes),
-                "effective_scopes": sorted(scopes),
-                "registered_tools": registered,
-                "visible_tools": visible,
-                "filtered_tools": sorted(set(registered) - set(visible)),
-            }, sort_keys=True))
-        return [
-            tool.model_copy(
-                update={"input_schema": {
-                    **(inline_tool_schema(tool.input_schema)
-                       if self.inline_all_input_schemas or (
-                           self.inline_proposal_schema and tool.name == "milai_proposal_create")
-                       else tool.input_schema),
-                    "additionalProperties": False,
-                }}
-            )
-            for tool in tools
-            if tool.name not in self.hidden_tools
-        ]
-
-
-def _bounded(
-    value: dict[str, Any], *, max_output_bytes: int = _MAX_OUTPUT_BYTES
-) -> dict[str, Any]:
+def _bounded(value: dict[str, Any], *, max_output_bytes: int = _MAX_OUTPUT_BYTES) -> dict[str, Any]:
     raw = json.dumps(value, ensure_ascii=False, sort_keys=True).encode()
     if len(raw) <= max_output_bytes:
         return value
@@ -839,8 +189,11 @@ def _with_mcp_guidance(
         guidance["next_tool"] = next_tool
         guidance["optional"] = True
         if next_tool in {
-            "milai_proposal_create", "milai_memory_review", "milai_evidence_revoke",
-            "milai_namespace_cleanup_submit", "milai_note_delete",
+            "milai_proposal_create",
+            "milai_memory_review",
+            "milai_evidence_revoke",
+            "milai_namespace_cleanup_submit",
+            "milai_note_delete",
         }:
             guidance["requires_user_authorization"] = True
     if when is not None:
@@ -853,17 +206,14 @@ def _with_mcp_guidance(
             next_tool is not None and next_tool not in _READ_ONLY_TOOL_NAMES
         )
         return {
-            **{key: item for key, item in value.items()
-               if key not in {"mcp_guidance", "suggested_next_step"}},
+            **{
+                key: item
+                for key, item in value.items()
+                if key not in {"mcp_guidance", "suggested_next_step"}
+            },
             "suggested_next_step": guidance,
         }
     return {**value, "mcp_guidance": guidance}
-
-
-def _wire_sha256(value: object) -> str:
-    return hashlib.sha256(
-        json.dumps(value, ensure_ascii=False, sort_keys=True).encode()
-    ).hexdigest()
 
 
 def _wire_operand_pointer(value: object, ordinal: int) -> dict[str, Any]:
@@ -916,9 +266,7 @@ def _deduplicate_resolve_proof_trace(value: dict[str, Any]) -> list[str]:
             slots = trace.get("slots")
             if isinstance(slots, list):
                 for slot in slots:
-                    if not isinstance(slot, dict) or not isinstance(
-                        slot.get("operands"), list
-                    ):
+                    if not isinstance(slot, dict) or not isinstance(slot.get("operands"), list):
                         continue
                     slot["operands"] = [
                         _wire_operand_pointer(operand, ordinal)
@@ -1004,8 +352,7 @@ def _compact_raw_evidence_items(value: dict[str, Any]) -> list[str]:
         or not raw_items
         or not isinstance(value.get("memory_context"), dict)
         or any(
-            not isinstance(item, dict)
-            or item.get("kind") != "EVIDENCE_OBSERVATION"
+            not isinstance(item, dict) or item.get("kind") != "EVIDENCE_OBSERVATION"
             for item in raw_items
         )
     ):
@@ -1076,8 +423,10 @@ def _compact_context_windows(value: dict[str, Any]) -> list[str]:
     if not isinstance(memory_context, dict):
         return []
     windows = memory_context.get("windows")
-    if not isinstance(windows, list) or not windows or any(
-        not isinstance(window, dict) for window in windows
+    if (
+        not isinstance(windows, list)
+        or not windows
+        or any(not isinstance(window, dict) for window in windows)
     ):
         return []
     retained_keys = (
@@ -1171,17 +520,13 @@ def _compact_top_level_resolve_proof(value: dict[str, Any]) -> list[str]:
     if isinstance(search_trace, dict):
         terminal = search_trace.get("terminal_sufficiency_decision")
         if isinstance(terminal, dict):
-            receipts["search_trace.terminal_sufficiency_decision"] = _wire_receipt(
-                terminal
-            )
+            receipts["search_trace.terminal_sufficiency_decision"] = _wire_receipt(terminal)
             search_trace["terminal_sufficiency_decision"] = _wire_proof_pointer(
                 terminal,
                 retained_keys=decision_keys,
                 representation="STRICT_TERMINAL_FACTS_AND_SHA256",
             )
-            compacted.append(
-                "search_trace.terminal_sufficiency_decision.replayable_proof"
-            )
+            compacted.append("search_trace.terminal_sufficiency_decision.replayable_proof")
 
     if receipts:
         raw_receipts = value.get("mcp_wire_receipts")
@@ -1240,9 +585,7 @@ def _compact_derived_operator_trace(value: dict[str, Any]) -> list[str]:
                         if key in slot
                     },
                     "operands": [],
-                    "wire_operand_count": (
-                        len(operands) if isinstance(operands, list) else None
-                    ),
+                    "wire_operand_count": (len(operands) if isinstance(operands, list) else None),
                     "wire_operands_sha256": _wire_sha256(operands),
                     "wire_slot_ordinal": ordinal,
                 }
@@ -1251,8 +594,7 @@ def _compact_derived_operator_trace(value: dict[str, Any]) -> list[str]:
     if isinstance(applicability, list):
         receipts["applicability"] = _wire_receipt(applicability)
         accepted = sum(
-            isinstance(item, dict) and item.get("accepted") is True
-            for item in applicability
+            isinstance(item, dict) and item.get("accepted") is True for item in applicability
         )
         reason_counts: dict[str, int] = {}
         for item in applicability:
@@ -1333,9 +675,7 @@ def _bounded_memory_resolve(
         "original_bytes": len(raw),
         "full_payload_sha256": hashlib.sha256(raw).hexdigest(),
         "operator_result_sha256": (
-            _wire_sha256(original_derived)
-            if isinstance(original_derived, dict)
-            else None
+            _wire_sha256(original_derived) if isinstance(original_derived, dict) else None
         ),
         "retrieval_trace_id": value.get("trace_id"),
         "compacted_fields": compacted_fields,
@@ -1523,9 +863,7 @@ def build_server(
     http_token_verifier: TokenVerifier | None = None,
     http_oauth_provider: MilaiOAuthProvider | None = None,
     codex_full_clients: CodexFullRuntimeClients | None = None,
-    codex_full_data_classification: Literal[
-        "SYNTHETIC", "DEIDENTIFIED", "PERSONAL"
-    ] = "SYNTHETIC",
+    codex_full_data_classification: Literal["SYNTHETIC", "DEIDENTIFIED", "PERSONAL"] = "SYNTHETIC",
     codex_working_state_scope_refs: dict[str, str] | None = None,
     working_state_client_factory: Callable[[], AsyncMilaiClient] | None = None,
     resolve_client_factory: Callable[[], AsyncMilaiClient] | None = None,
@@ -1536,9 +874,7 @@ def build_server(
     with_guidance = partial(_with_mcp_guidance, ordinary=ordinary_catalog)
     if catalog not in {"legacy", "ordinary-memory-v1", "compact-memory-v1"}:
         raise ValueError("unknown MCP tool catalog")
-    if ordinary_catalog and (
-        profile != "codex-full" or working_state_client_factory is None
-    ):
+    if ordinary_catalog and (profile != "codex-full" or working_state_client_factory is None):
         raise ValueError(f"{catalog} requires codex-full and an async Runtime client")
     if working_state_client_factory is not None and profile != "codex-full":
         raise ValueError("async Working State client requires codex-full")
@@ -1553,9 +889,7 @@ def build_server(
     requested_budget_profile = resolve_budget_profile
     effective_budget_profile: ResolveBudgetProfile | None = None
     if profile in {"agent-memory", "codex-full"} and resolve_budget_profile is None:
-        effective_budget_profile = resolve_budget_profile_by_name(
-            "MCP_INTERACTIVE_STANDARD_V01"
-        )
+        effective_budget_profile = resolve_budget_profile_by_name("MCP_INTERACTIVE_STANDARD_V01")
     elif resolve_budget_profile is not None:
         effective_budget_profile = resolve_budget_profile_by_name(resolve_budget_profile)
         if profile not in {"agent-memory", "codex-full", "reader-lite"}:
@@ -1565,9 +899,7 @@ def build_server(
         if profile == "reader-lite" and max_limit != 50:
             raise ValueError(f"{resolve_budget_profile} requires max_limit=50")
     fixed_resolve_budget = (
-        effective_budget_profile.runtime_budget()
-        if effective_budget_profile is not None
-        else None
+        effective_budget_profile.runtime_budget() if effective_budget_profile is not None else None
     )
     policy = AgentRecallPolicy(
         scope=dict(default_scope or {}),
@@ -1577,18 +909,22 @@ def build_server(
     )
 
     def _request_scope() -> dict[str, Any]:
-        if (isinstance(http_token_verifier, AigcitTokenVerifier)
-                and http_token_verifier.policy.mode == "authenticated_private"):
+        if (
+            isinstance(http_token_verifier, AigcitTokenVerifier)
+            and http_token_verifier.policy.mode == "authenticated_private"
+        ):
             token = _request_access_token.get() or get_access_token()
             claims = token.claims if token is not None else None
             if not claims or not isinstance(claims.get("milai_external_sub"), str):
                 raise PermissionError("authenticated private scope is required")
             project = private_project_for(
-                http_token_verifier.cache.issuer, claims["milai_external_sub"],
+                http_token_verifier.cache.issuer,
+                claims["milai_external_sub"],
                 http_token_verifier.policy.project_id,
             )
-            if (claims.get("milai_project_id") != project
-                    or claims.get("milai_scope_sha256") != project_scope_digest(project)):
+            if claims.get("milai_project_id") != project or claims.get(
+                "milai_scope_sha256"
+            ) != project_scope_digest(project):
                 raise PermissionError("authenticated private scope is invalid")
             return {"project_ids": [project]}
         return dict(policy.scope)
@@ -1598,6 +934,7 @@ def build_server(
         if not isinstance(projects, list) or len(projects) != 1 or not isinstance(projects[0], str):
             raise PermissionError("exactly one authenticated project is required")
         return projects[0]
+
     api = client or MilaiClient(
         timeout_seconds=_RUNTIME_HTTP_TIMEOUT_SECONDS,
         max_retries=max_retries,
@@ -1682,9 +1019,7 @@ def build_server(
     if profile == "codex-full":
         allowed_arguments.update(
             {
-                "milai_memory_get": frozenset(
-                    {"claim_id", "state_key", "valid_at", "known_at"}
-                ),
+                "milai_memory_get": frozenset({"claim_id", "state_key", "valid_at", "known_at"}),
                 "milai_evidence_capture": frozenset(
                     {
                         "operation_id",
@@ -1698,9 +1033,7 @@ def build_server(
                         "source_context",
                     }
                 ),
-                "milai_proposal_create": frozenset(
-                    {"operation_id", "proposal", "confirmation"}
-                ),
+                "milai_proposal_create": frozenset({"operation_id", "proposal", "confirmation"}),
                 "milai_proposals_list": frozenset({"status", "limit"}),
                 "milai_proposal_get": frozenset({"proposal_id"}),
                 "milai_memory_review": frozenset(
@@ -1720,9 +1053,7 @@ def build_server(
                 "milai_namespace_cleanup_submit": frozenset(
                     {"operation_id", "reason_code", "confirmation"}
                 ),
-                "milai_namespace_cleanup_status": frozenset(
-                    {"cleanup_job_id", "offset", "limit"}
-                ),
+                "milai_namespace_cleanup_status": frozenset({"cleanup_job_id", "offset", "limit"}),
                 "milai_working_state_get": frozenset({"scope"}),
                 "milai_working_state_update": frozenset(
                     {
@@ -1790,9 +1121,7 @@ def build_server(
             "milai_namespace_cleanup_submit": frozenset(
                 {"project_id", "operation_id", "reason_code", "confirmation"}
             ),
-            "milai_namespace_cleanup_status": frozenset(
-                {"cleanup_job_id", "offset", "limit"}
-            ),
+            "milai_namespace_cleanup_status": frozenset({"cleanup_job_id", "offset", "limit"}),
         }
     required_arguments: dict[str, frozenset[str]] = {}
     argument_examples: dict[str, str] = {}
@@ -1810,9 +1139,7 @@ def build_server(
                     "confirmation",
                 }
             ),
-            "milai_proposal_create": frozenset(
-                {"operation_id", "proposal", "confirmation"}
-            ),
+            "milai_proposal_create": frozenset({"operation_id", "proposal", "confirmation"}),
             "milai_proposal_get": frozenset({"proposal_id"}),
             "milai_memory_review": frozenset(
                 {
@@ -1936,6 +1263,7 @@ def build_server(
         )
     if catalog == "compact-memory-v1":
         server_instructions = COMPACT_INSTRUCTIONS
+
     @asynccontextmanager
     async def runtime_clients_lifespan(_server: MCPServer) -> AsyncIterator[dict[str, Any]]:
         # Construct, use and close the pooled client on the serving event loop.
@@ -1945,22 +1273,27 @@ def build_server(
                 stack.push_async_callback(http_token_verifier.cache.aclose)
             state_client = (
                 await stack.enter_async_context(working_state_client_factory())
-                if working_state_client_factory else None
+                if working_state_client_factory
+                else None
             )
             resolve_client = (
                 await stack.enter_async_context(resolve_client_factory())
-                if resolve_client_factory else None
+                if resolve_client_factory
+                else None
             )
             yield {"working_state_client": state_client, "resolve_client": resolve_client}
 
     if isinstance(http_principal_binding, HttpResourceBinding):
-        if (profile != "codex-full" or http_oauth_provider is not None
-                or not isinstance(http_token_verifier, AigcitTokenVerifier)
-                or http_principal_binding.issuer_url != http_token_verifier.cache.issuer
-                or http_principal_binding.resource_url != http_token_verifier.resource_url
-                or http_principal_binding.scope_digest != http_token_verifier.scope_digest
-                or set(http_principal_binding.scopes) != http_token_verifier.policy.enabled_scopes
-                or policy.scope.get("project_ids") != [http_token_verifier.policy.project_id]):
+        if (
+            profile != "codex-full"
+            or http_oauth_provider is not None
+            or not isinstance(http_token_verifier, AigcitTokenVerifier)
+            or http_principal_binding.issuer_url != http_token_verifier.cache.issuer
+            or http_principal_binding.resource_url != http_token_verifier.resource_url
+            or http_principal_binding.scope_digest != http_token_verifier.scope_digest
+            or set(http_principal_binding.scopes) != http_token_verifier.policy.enabled_scopes
+            or policy.scope.get("project_ids") != [http_token_verifier.policy.project_id]
+        ):
             raise ValueError("external resource requires matching codex-full verifier and project")
         external_instructions = (
             "MiLAi stores only host-submitted data; "
@@ -1975,7 +1308,8 @@ def build_server(
         # not erase it. Retain the legacy external instructions for old catalogs.
         server_instructions = (
             server_instructions + " Only tools and scopes granted to this request are available."
-            if ordinary_catalog else external_instructions
+            if ordinary_catalog
+            else external_instructions
         )
 
     argument_models: dict[str, type[BaseModel]] = {}
@@ -1995,9 +1329,7 @@ def build_server(
         ],
         instructions=server_instructions,
         auth=(
-            http_principal_binding.auth_settings(
-                oauth_enabled=http_oauth_provider is not None
-            )
+            http_principal_binding.auth_settings(oauth_enabled=http_oauth_provider is not None)
             if http_principal_binding is not None
             else None
         ),
@@ -2006,18 +1338,18 @@ def build_server(
             None
             if http_oauth_provider is not None
             else (
-                http_token_verifier or (
+                http_token_verifier
+                or (
                     StaticBearerTokenVerifier(http_principal_binding)
-                    if isinstance(http_principal_binding, HttpPrincipalBinding) else None
+                    if isinstance(http_principal_binding, HttpPrincipalBinding)
+                    else None
                 )
                 if http_principal_binding is not None
                 else None
             )
         ),
         middleware=(
-            [_RequestAccessTokenMiddleware()]
-            if http_principal_binding is not None
-            else None
+            [_RequestAccessTokenMiddleware()] if http_principal_binding is not None else None
         ),
     )
     if http_oauth_provider is not None and http_principal_binding is not None:
@@ -2032,6 +1364,7 @@ def build_server(
         install_oauth_consent_routes(server, http_oauth_provider)
 
     if http_principal_binding is not None:
+
         async def healthz(_request: Request) -> JSONResponse:
             return JSONResponse(
                 {
@@ -2067,12 +1400,8 @@ def build_server(
                 )
             return JSONResponse({"status": "ready", "service": "milai-mcp"})
 
-        server.custom_route(
-            "/healthz", methods=["GET"], include_in_schema=False
-        )(healthz)
-        server.custom_route(
-            "/readyz", methods=["GET"], include_in_schema=False
-        )(readyz)
+        server.custom_route("/healthz", methods=["GET"], include_in_schema=False)(healthz)
+        server.custom_route("/readyz", methods=["GET"], include_in_schema=False)(readyz)
 
     def milai_status() -> dict[str, Any]:
         """[READ] Inspect this connection's effective capabilities, limits and safety/data-mode
@@ -2151,9 +1480,7 @@ def build_server(
     recall_tool = milai_recall_lite if profile == "reader-lite" else milai_recall_configurable
     recall_tool.__name__ = "milai_recall"
 
-    def _target_failure(
-        status: str, reason: str, requirement: str
-    ) -> dict[str, Any]:
+    def _target_failure(status: str, reason: str, requirement: str) -> dict[str, Any]:
         return {
             "schema_version": "access-outcome-v0.1",
             "status": status,
@@ -2238,9 +1565,7 @@ def build_server(
         requirement = "EXACT" if claim_id is not None or state_key is not None else "SEARCH"
         try:
             if profile == "codex-full":
-                options["host_principal_binding_digest"] = (
-                    _codex_principal_binding_digest()
-                )
+                options["host_principal_binding_digest"] = _codex_principal_binding_digest()
             result = (
                 await resolve_client.resolve_memory(query, **options)
                 if resolve_client is not None
@@ -2333,7 +1658,8 @@ def build_server(
             previous_context_id=previous_context_id,
             resolve_client=(
                 ctx.request_context.lifespan_context["resolve_client"]
-                if resolve_client_factory is not None else None
+                if resolve_client_factory is not None
+                else None
             ),
         )
 
@@ -2757,9 +2083,7 @@ def build_server(
         scope_field: str,
     ) -> dict[str, Any]:
         if not _codex_record_is_in_bound_project(record, scope_field=scope_field):
-            raise PermissionError(
-                f"{object_type} is outside the server-bound project scope"
-            )
+            raise PermissionError(f"{object_type} is outside the server-bound project scope")
         return record
 
     def _codex_claim(claim_id: str) -> Any:
@@ -2802,7 +2126,8 @@ def build_server(
             "scope_sha256": scope_digest,
             "tool": tool_name,
             "operation_id": (
-                runtime_operation_id if isinstance(http_principal_binding, HttpResourceBinding)
+                runtime_operation_id
+                if isinstance(http_principal_binding, HttpResourceBinding)
                 else operation_id
             ),
         }
@@ -2810,13 +2135,13 @@ def build_server(
         try:
             yield runtime_operation_id, receipt
         except BaseException as exc:
-            event.update({
-                "outcome": "UNKNOWN" if isinstance(exc, asyncio.CancelledError) else "ERROR",
-                "error_type": type(exc).__name__,
-            })
-            _LOGGER.warning(
-                "MILAI_CODEX_FULL_AUDIT %s", json.dumps(event, sort_keys=True)
+            event.update(
+                {
+                    "outcome": "UNKNOWN" if isinstance(exc, asyncio.CancelledError) else "ERROR",
+                    "error_type": type(exc).__name__,
+                }
             )
+            _LOGGER.warning("MILAI_CODEX_FULL_AUDIT %s", json.dumps(event, sort_keys=True))
             raise
         identifiers = {
             key: receipt[key]
@@ -2837,9 +2162,7 @@ def build_server(
             if key in receipt
         }
         event.update({"outcome": "SUCCESS", "result": identifiers})
-        _LOGGER.warning(
-            "MILAI_CODEX_FULL_AUDIT %s", json.dumps(event, sort_keys=True)
-        )
+        _LOGGER.warning("MILAI_CODEX_FULL_AUDIT %s", json.dumps(event, sort_keys=True))
 
     def _codex_full_mutation(
         tool_name: str,
@@ -2852,13 +2175,18 @@ def build_server(
             except MilaiClientError as exc:
                 fields = exc.details.get("fields")
                 if exc.status_code == 400 and isinstance(fields, list):
-                    raise ToolError(json.dumps({
-                        "code": "INVALID_ARGUMENT",
-                        "fields": safe_validation_fields([
-                            field for field in fields if isinstance(field, dict)
-                        ], working_state=tool_name == "milai_working_state_update"),
-                        "retryable": False,
-                    })) from exc
+                    raise ToolError(
+                        json.dumps(
+                            {
+                                "code": "INVALID_ARGUMENT",
+                                "fields": safe_validation_fields(
+                                    [field for field in fields if isinstance(field, dict)],
+                                    working_state=tool_name == "milai_working_state_update",
+                                ),
+                                "retryable": False,
+                            }
+                        )
+                    ) from exc
                 raise
         return receipt
 
@@ -2896,23 +2224,34 @@ def build_server(
         }
 
     def _log_working_state_timing(
-        tool: str, started: float, call_started: float, call_finished: float,
+        tool: str,
+        started: float,
+        call_started: float,
+        call_finished: float,
         receipt: dict[str, Any],
     ) -> None:
         if request_timing_enabled:
             finished = monotonic()
             request_id = receipt.get("request_id")
-            _LOGGER.info("MILAI_WORKING_STATE_TIMING %s", json.dumps({
-                "schema_version": "mcp-working-state-timing-v1", "tool": tool,
-                "runtime_request_id_fingerprint": (
-                    hashlib.sha256(request_id.encode()).hexdigest()[:16]
-                    if isinstance(request_id, str) else None
+            _LOGGER.info(
+                "MILAI_WORKING_STATE_TIMING %s",
+                json.dumps(
+                    {
+                        "schema_version": "mcp-working-state-timing-v1",
+                        "tool": tool,
+                        "runtime_request_id_fingerprint": (
+                            hashlib.sha256(request_id.encode()).hexdigest()[:16]
+                            if isinstance(request_id, str)
+                            else None
+                        ),
+                        "runtime_client_ms": round((call_finished - call_started) * 1000, 3),
+                        "handler_ms": round((finished - started) * 1000, 3),
+                        "handler_start_monotonic_s": started,
+                        "handler_end_monotonic_s": finished,
+                    },
+                    sort_keys=True,
                 ),
-                "runtime_client_ms": round((call_finished - call_started) * 1000, 3),
-                "handler_ms": round((finished - started) * 1000, 3),
-                "handler_start_monotonic_s": started,
-                "handler_end_monotonic_s": finished,
-            }, sort_keys=True))
+            )
 
     async def milai_working_state_get(
         ctx: Context,
@@ -2930,20 +2269,29 @@ def build_server(
         binding = _working_state_binding(scope)
         state_client: AsyncMilaiClient | None = (
             ctx.request_context.lifespan_context["working_state_client"]
-            if working_state_client_factory is not None else None
+            if working_state_client_factory is not None
+            else None
         )
         call_started = monotonic()
         try:
             state = dict(
-                await state_client.get_working_state(binding) if state_client is not None
+                await state_client.get_working_state(binding)
+                if state_client is not None
                 else await run_in_threadpool(submitter_api.get_working_state, binding)
             )
         except MilaiClientError as exc:
             if not ordinary_catalog:
                 raise
-            raise ToolError(json.dumps(recovery_error(
-                exc, kind="WORKING_STATE", write=False, scope=scope,
-            ))) from exc
+            raise ToolError(
+                json.dumps(
+                    recovery_error(
+                        exc,
+                        kind="WORKING_STATE",
+                        write=False,
+                        scope=scope,
+                    )
+                )
+            ) from exc
         call_finished = monotonic()
         message = (
             f"No {scope} checkpoint exists; continue normally and checkpoint only material "
@@ -3003,28 +2351,40 @@ def build_server(
         try:
             state_client: AsyncMilaiClient | None = (
                 ctx.request_context.lifespan_context["working_state_client"]
-                if working_state_client_factory is not None else None
+                if working_state_client_factory is not None
+                else None
             )
-            with _codex_mutation_audit(
-                "milai_working_state_update", operation_id
-            ) as (runtime_operation_id, receipt):
+            with _codex_mutation_audit("milai_working_state_update", operation_id) as (
+                runtime_operation_id,
+                receipt,
+            ):
                 call_started = monotonic()
                 result = (
                     await state_client.update_working_state(
                         request_payload, operation_id=runtime_operation_id
-                    ) if state_client is not None else await run_in_threadpool(
+                    )
+                    if state_client is not None
+                    else await run_in_threadpool(
                         submitter_api.update_working_state,
-                        request_payload, operation_id=runtime_operation_id,
+                        request_payload,
+                        operation_id=runtime_operation_id,
                     )
                 )
                 call_finished = monotonic()
                 receipt.update(result)
         except UnavailableError as exc:
             if ordinary_catalog:
-                raise ToolError(json.dumps(recovery_error(
-                    exc, kind="WORKING_STATE", write=True, scope=scope,
-                    operation_id=operation_id,
-                ))) from exc
+                raise ToolError(
+                    json.dumps(
+                        recovery_error(
+                            exc,
+                            kind="WORKING_STATE",
+                            write=True,
+                            scope=scope,
+                            operation_id=operation_id,
+                        )
+                    )
+                ) from exc
             raise ToolError(
                 "WORKING_STATE_OUTCOME_UNKNOWN: The update result is unconfirmed. "
                 "Read current State before retrying; reuse the operation ID only with the "
@@ -3032,11 +2392,19 @@ def build_server(
             ) from exc
         except MilaiClientError as exc:
             if ordinary_catalog:
-                raise ToolError(json.dumps(recovery_error(
-                    exc, kind="WORKING_STATE", write=True, scope=scope,
-                    expected_version=expected_version, state_id=state_id,
-                    operation_id=operation_id,
-                ))) from exc
+                raise ToolError(
+                    json.dumps(
+                        recovery_error(
+                            exc,
+                            kind="WORKING_STATE",
+                            write=True,
+                            scope=scope,
+                            expected_version=expected_version,
+                            state_id=state_id,
+                            operation_id=operation_id,
+                        )
+                    )
+                ) from exc
             recovery = {
                 "STALE_WORKING_STATE": (
                     f"Reload with milai_working_state_get in {scope} scope and "
@@ -3244,14 +2612,13 @@ def build_server(
                 "milai_evidence_capture",
                 operation_id,
                 lambda runtime_operation_id: dict(
-                    submitter_api.capture_evidence(
-                        payload, operation_id=runtime_operation_id
-                    ).raw
+                    submitter_api.capture_evidence(payload, operation_id=runtime_operation_id).raw
                 ),
             )
             if ordinary_catalog:
                 receipt["reference"] = {
-                    "object_type": "EVIDENCE", "evidence_id": receipt["evidence_id"],
+                    "object_type": "EVIDENCE",
+                    "evidence_id": receipt["evidence_id"],
                     "read_tool": "milai_evidence_get",
                     "read_arguments": {"evidence_id": receipt["evidence_id"]},
                 }
@@ -3267,9 +2634,7 @@ def build_server(
                             "structured_source_context": source_context is not None,
                             "project_id": _request_project(),
                             "data_classification": codex_full_data_classification,
-                            "content_sha256": hashlib.sha256(
-                                content.encode()
-                            ).hexdigest(),
+                            "content_sha256": hashlib.sha256(content.encode()).hexdigest(),
                             "content_chars": len(content),
                             "canonical_changed": False,
                         },
@@ -3318,21 +2683,16 @@ def build_server(
                 }
             )
             for evidence_id in sorted(
-                set(draft.supporting_evidence_refs)
-                | set(draft.contradicting_evidence_refs)
+                set(draft.supporting_evidence_refs) | set(draft.contradicting_evidence_refs)
             ):
                 _codex_evidence_metadata(evidence_id)
             if draft.target_claim_id is not None:
-                draft.validate_current_head(
-                    _codex_claim(draft.target_claim_id).claim_version_id
-                )
+                draft.validate_current_head(_codex_claim(draft.target_claim_id).claim_version_id)
             receipt = _codex_full_mutation(
                 "milai_proposal_create",
                 operation_id,
                 lambda runtime_operation_id: dict(
-                    submitter_api.create_proposal(
-                        draft, operation_id=runtime_operation_id
-                    ).raw
+                    submitter_api.create_proposal(draft, operation_id=runtime_operation_id).raw
                 ),
             )
             return _bounded(
@@ -3345,12 +2705,8 @@ def build_server(
                             "target_claim_id": draft.target_claim_id,
                             "host_owned_authority": policy.authority,
                             "project_id": _request_project(),
-                            "supporting_evidence_refs": list(
-                                draft.supporting_evidence_refs
-                            ),
-                            "contradicting_evidence_refs": list(
-                                draft.contradicting_evidence_refs
-                            ),
+                            "supporting_evidence_refs": list(draft.supporting_evidence_refs),
+                            "contradicting_evidence_refs": list(draft.contradicting_evidence_refs),
                             "canonical_changed": False,
                         },
                     },
@@ -3396,9 +2752,7 @@ def build_server(
                 proposals = [
                     proposal
                     for proposal in proposals
-                    if _codex_record_is_in_bound_project(
-                        proposal, scope_field="scope_predicate"
-                    )
+                    if _codex_record_is_in_bound_project(proposal, scope_field="scope_predicate")
                 ][:limit]
             else:
                 proposals = proposals[:limit]
@@ -3489,11 +2843,7 @@ def build_server(
             result = {
                 **receipt,
                 "confirmation_summary": {
-                    **(
-                        _codex_confirmation_summary()
-                        if profile == "codex-full"
-                        else {}
-                    ),
+                    **(_codex_confirmation_summary() if profile == "codex-full" else {}),
                     "proposal_id": proposal_id,
                     "decision": decision,
                     "policy_version": policy_version,
@@ -3516,9 +2866,7 @@ def build_server(
                 )
             return _bounded(result)
 
-        registered_tools.extend(
-            [milai_proposals_list, milai_proposal_get, milai_memory_review]
-        )
+        registered_tools.extend([milai_proposals_list, milai_proposal_get, milai_memory_review])
 
     if profile in {"operator", "codex-full"}:
 
@@ -3569,11 +2917,7 @@ def build_server(
             result = {
                 **receipt,
                 "confirmation_summary": {
-                    **(
-                        _codex_confirmation_summary()
-                        if profile == "codex-full"
-                        else {}
-                    ),
+                    **(_codex_confirmation_summary() if profile == "codex-full" else {}),
                     "evidence_id": evidence_id,
                     "reason_code": reason_code,
                     "canonical_read": "FAIL_CLOSED_IMMEDIATELY",
@@ -3634,9 +2978,7 @@ def build_server(
                 )
             )
 
-        milai_namespace_cleanup_submit_operator.__name__ = (
-            "milai_namespace_cleanup_submit"
-        )
+        milai_namespace_cleanup_submit_operator.__name__ = "milai_namespace_cleanup_submit"
 
         def milai_namespace_cleanup_submit_codex_full(
             operation_id: str,
@@ -3689,9 +3031,7 @@ def build_server(
                 )
             )
 
-        milai_namespace_cleanup_submit_codex_full.__name__ = (
-            "milai_namespace_cleanup_submit"
-        )
+        milai_namespace_cleanup_submit_codex_full.__name__ = "milai_namespace_cleanup_submit"
 
         def milai_namespace_cleanup_status(
             cleanup_job_id: str,
@@ -3738,8 +3078,9 @@ def build_server(
         )
 
     if ordinary_catalog:
-        registered_tools = [tool for tool in registered_tools
-                            if tool.__name__ != "milai_namespace_cleanup_submit"]
+        registered_tools = [
+            tool for tool in registered_tools if tool.__name__ != "milai_namespace_cleanup_submit"
+        ]
         milai_working_state_get.__doc__ = (
             "[READ] Read a task checkpoint in SESSION, TASK (default), or PROJECT scope. "
             "Use to resume work or before updating that same scope; ABSENT is normal. "
@@ -3758,12 +3099,15 @@ def build_server(
         )
         for state_tool in (milai_working_state_get, milai_working_state_update):
             argument_models[state_tool.__name__] = func_metadata(
-                state_tool, skip_names=["ctx"],
+                state_tool,
+                skip_names=["ctx"],
             ).arg_model
-        extra_tools = ordinary_note_tools(lambda: {
-            "principal_binding_digest": _codex_principal_binding_digest(),
-            "project_id": _request_project(),
-        })
+        extra_tools = ordinary_note_tools(
+            lambda: {
+                "principal_binding_digest": _codex_principal_binding_digest(),
+                "project_id": _request_project(),
+            }
+        )
         if catalog == "compact-memory-v1":
             # Reuse the same handlers and request Context without registering legacy
             # names on the public SDK manager. Direct/cached legacy calls cannot dispatch.
@@ -3775,20 +3119,29 @@ def build_server(
                 raise ValueError("compact backend mapping is incomplete")
 
             async def invoke_compact_backend(
-                name: str, arguments: dict[str, Any], context: Context[Any, Any] | None,
+                name: str,
+                arguments: dict[str, Any],
+                context: Context[Any, Any] | None,
             ) -> CallToolResult | InputRequiredResult:
                 denied = await server.authorize_tool(name, arguments)
                 if denied is not None:
                     return denied
                 if context is None:
                     raise ToolError("compact request context required")
-                return cast(CallToolResult | InputRequiredResult, await backends.call_tool(
-                    name, arguments, context, convert_result=True,
-                ))
+                return cast(
+                    CallToolResult | InputRequiredResult,
+                    await backends.call_tool(
+                        name,
+                        arguments,
+                        context,
+                        convert_result=True,
+                    ),
+                )
 
             registered_tools = [milai_working_state_get, milai_working_state_update]
             milai_working_state_update.__doc__ = (milai_working_state_update.__doc__ or "").replace(
-                "use Note tools for reusable facts", "use milai_memory_save for reusable facts",
+                "use Note tools for reusable facts",
+                "use milai_memory_save for reusable facts",
             )
             extra_tools = compact_memory_tools(invoke_compact_backend)
             server.inline_all_input_schemas = True
@@ -3799,13 +3152,15 @@ def build_server(
             argument_models[tool.__name__] = func_metadata(tool, skip_names=["ctx"]).arg_model
             allowed_arguments[tool.__name__] = frozenset(set(parameters) - {"ctx"})
             required_arguments[tool.__name__] = frozenset(
-                name for name, parameter in parameters.items()
+                name
+                for name, parameter in parameters.items()
                 if name != "ctx" and parameter.default is inspect.Parameter.empty
             )
         registered_tools.extend(extra_tools)
     if isinstance(http_token_verifier, AigcitTokenVerifier):
         http_token_verifier.policy.validate_tools(
-            {tool.__name__ for tool in registered_tools}, catalog=catalog,
+            {tool.__name__ for tool in registered_tools},
+            catalog=catalog,
         )
 
     for tool in sorted(registered_tools, key=lambda item: item.__name__):
@@ -3838,9 +3193,7 @@ def _is_loopback_host(host: str) -> bool:
         return False
 
 
-def _codex_full_clients_from_environment(
-    *, max_retries: int
-) -> CodexFullRuntimeClients:
+def _codex_full_clients_from_environment(*, max_retries: int) -> CodexFullRuntimeClients:
     base_url = os.environ.get("MILAI_BASE_URL", "http://127.0.0.1:18080")
 
     def role_client(environment_name: str) -> MilaiClient:
@@ -3870,11 +3223,19 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=7337)
     parser.add_argument("--mcp-path", default="/mcp")
-    parser.add_argument("--catalog", choices=(
-        "legacy", "ordinary-memory-v1", "compact-memory-v1",
-    ), default="legacy")
     parser.add_argument(
-        "--working-state-transport", choices=("async", "sync"), default="async",
+        "--catalog",
+        choices=(
+            "legacy",
+            "ordinary-memory-v1",
+            "compact-memory-v1",
+        ),
+        default="legacy",
+    )
+    parser.add_argument(
+        "--working-state-transport",
+        choices=("async", "sync"),
+        default="async",
         help="codex-full Working State transport; sync retains the serialized compatibility path",
     )
     parser.add_argument(
@@ -3900,10 +3261,7 @@ def main(argv: list[str] | None = None) -> None:
         "--max-retries",
         type=_non_negative_int,
         default=None,
-        help=(
-            "maximum automatic Runtime HTTP retries; defaults to "
-            "MILAI_AGENT_MAX_RETRIES or 2"
-        ),
+        help=("maximum automatic Runtime HTTP retries; defaults to MILAI_AGENT_MAX_RETRIES or 2"),
     )
     parser.add_argument(
         "--resolve-budget-profile",
@@ -3914,15 +3272,11 @@ def main(argv: list[str] | None = None) -> None:
     args = parser.parse_args(argv)
     max_retries = args.max_retries
     if max_retries is None:
-        raw_max_retries = os.environ.get(
-            "MILAI_AGENT_MAX_RETRIES", str(_DEFAULT_MAX_RETRIES)
-        )
+        raw_max_retries = os.environ.get("MILAI_AGENT_MAX_RETRIES", str(_DEFAULT_MAX_RETRIES))
         try:
             max_retries = _non_negative_int(raw_max_retries)
         except argparse.ArgumentTypeError as exc:
-            raise SystemExit(
-                "MILAI_AGENT_MAX_RETRIES must be a non-negative integer"
-            ) from exc
+            raise SystemExit("MILAI_AGENT_MAX_RETRIES must be a non-negative integer") from exc
     raw_scope = os.environ.get("MILAI_AGENT_SCOPE_JSON", "{}")
     try:
         scope = json.loads(raw_scope)
@@ -3937,13 +3291,9 @@ def main(argv: list[str] | None = None) -> None:
     non_loopback = not _is_loopback_host(args.host)
     if args.transport == "streamable-http" and non_loopback:
         if not args.allow_non_loopback:
-            raise SystemExit(
-                "non-loopback Streamable HTTP requires --allow-non-loopback"
-            )
+            raise SystemExit("non-loopback Streamable HTTP requires --allow-non-loopback")
         if not os.environ.get("MILAI_MCP_HTTP_PUBLIC_BASE_URL", "").strip():
-            raise SystemExit(
-                "non-loopback Streamable HTTP requires MILAI_MCP_HTTP_PUBLIC_BASE_URL"
-            )
+            raise SystemExit("non-loopback Streamable HTTP requires MILAI_MCP_HTTP_PUBLIC_BASE_URL")
     if args.profile == "codex-full" and args.transport != "streamable-http":
         raise SystemExit("codex-full requires authenticated Streamable HTTP")
     raw_as_of = os.environ.get("MILAI_AGENT_AS_OF")
@@ -3967,7 +3317,8 @@ def main(argv: list[str] | None = None) -> None:
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
     if auth_mode == "aigcit" and (
-        args.transport != "streamable-http" or args.profile != "codex-full"
+        args.transport != "streamable-http"
+        or args.profile != "codex-full"
         or args.mcp_path != "/mcp"
     ):
         raise SystemExit("aigcit requires codex-full Streamable HTTP at /mcp")
@@ -3980,16 +3331,13 @@ def main(argv: list[str] | None = None) -> None:
         try:
             public_base_url = validate_public_base_url(
                 configured_public_base_url,
-                oauth_enabled=auth_mode == "aigcit" or (
-                    args.profile == "codex-full" and bool(raw_oauth_path)
-                ),
+                oauth_enabled=auth_mode == "aigcit"
+                or (args.profile == "codex-full" and bool(raw_oauth_path)),
                 allow_oauth_loopback_http=auth_mode != "aigcit",
             )
         except ValueError as exc:
             raise SystemExit(str(exc)) from exc
-    raw_data_classification = os.environ.get(
-        "MILAI_CODEX_DATA_CLASSIFICATION", "SYNTHETIC"
-    )
+    raw_data_classification = os.environ.get("MILAI_CODEX_DATA_CLASSIFICATION", "SYNTHETIC")
     if raw_data_classification not in {"SYNTHETIC", "DEIDENTIFIED", "PERSONAL"}:
         raise SystemExit(
             "MILAI_CODEX_DATA_CLASSIFICATION must be SYNTHETIC, DEIDENTIFIED or PERSONAL"
@@ -4004,31 +3352,44 @@ def main(argv: list[str] | None = None) -> None:
             issuer = os.environ.get("MILAI_AIGCIT_ISSUER", "")
             policy_path = os.environ.get("MILAI_AIGCIT_BINDINGS_FILE", "")
             projects = scope.get("project_ids")
-            if (not policy_path or not isinstance(projects, list) or len(projects) != 1
-                    or not isinstance(projects[0], str) or not projects[0]):
+            if (
+                not policy_path
+                or not isinstance(projects, list)
+                or len(projects) != 1
+                or not isinstance(projects[0], str)
+                or not projects[0]
+            ):
                 raise ValueError("aigcit requires a policy file and exactly one project")
-            enabled = frozenset(os.environ.get(
-                "MILAI_AIGCIT_ENABLED_SCOPES", " ".join(sorted(READ_SCOPES)),
-            ).split())
+            enabled = frozenset(
+                os.environ.get(
+                    "MILAI_AIGCIT_ENABLED_SCOPES",
+                    " ".join(sorted(READ_SCOPES)),
+                ).split()
+            )
             admission_policy = AdmissionPolicy(
-                Path(policy_path), issuer=issuer, project_id=projects[0], enabled_scopes=enabled,
+                Path(policy_path),
+                issuer=issuer,
+                project_id=projects[0],
+                enabled_scopes=enabled,
                 mode=os.environ.get("MILAI_AIGCIT_ACCESS_MODE", "explicit_owners"),
             )
             admission_policy.load()
             http_principal_binding = HttpResourceBinding.create(
-                issuer_url=issuer, resource_url=public_base_url + args.mcp_path,
-                scope=scope, scopes=tuple(sorted(enabled)),
+                issuer_url=issuer,
+                resource_url=public_base_url + args.mcp_path,
+                scope=scope,
+                scopes=tuple(sorted(enabled)),
             )
             http_token_verifier = AigcitTokenVerifier(
-                cache=JwksCache(issuer), resource_url=http_principal_binding.resource_url,
-                scope_digest=http_principal_binding.scope_digest, policy=admission_policy,
+                cache=JwksCache(issuer),
+                resource_url=http_principal_binding.resource_url,
+                scope_digest=http_principal_binding.scope_digest,
+                policy=admission_policy,
             )
         except (ValueError, AuthDependencyUnavailable) as exc:
             raise SystemExit("invalid AIGCIT deployment configuration") from exc
     if args.profile == "codex-full":
-        codex_full_clients = _codex_full_clients_from_environment(
-            max_retries=max_retries
-        )
+        codex_full_clients = _codex_full_clients_from_environment(max_retries=max_retries)
         primary_client = codex_full_clients.reader
     if args.transport == "streamable-http":
         if args.profile not in {"agent-memory", "codex-full"}:
@@ -4037,9 +3398,7 @@ def main(argv: list[str] | None = None) -> None:
             )
         assert public_base_url is not None
         inbound_token_name = (
-            "MILAI_CODEX_TOKEN"
-            if args.profile == "codex-full"
-            else "MILAI_MCP_HTTP_BEARER_TOKEN"
+            "MILAI_CODEX_TOKEN" if args.profile == "codex-full" else "MILAI_MCP_HTTP_BEARER_TOKEN"
         )
         principal_name = (
             "MILAI_CODEX_PRINCIPAL_ID"
@@ -4076,16 +3435,22 @@ def main(argv: list[str] | None = None) -> None:
             )
 
     timing_enabled = os.environ.get("MILAI_REQUEST_TIMING_ENABLED", "false").lower() in {
-        "1", "true", "yes", "on",
+        "1",
+        "true",
+        "yes",
+        "on",
     }
 
     def async_runtime_client(role: str) -> AsyncMilaiClient:
         base_url = os.environ.get("MILAI_BASE_URL", "http://127.0.0.1:18080")
         return AsyncMilaiClient(
-            base_url=base_url, token=_required_environment_secret(f"MILAI_AGENT_{role}_TOKEN"),
-            timeout_seconds=_RUNTIME_HTTP_TIMEOUT_SECONDS, max_retries=max_retries,
+            base_url=base_url,
+            token=_required_environment_secret(f"MILAI_AGENT_{role}_TOKEN"),
+            timeout_seconds=_RUNTIME_HTTP_TIMEOUT_SECONDS,
+            max_retries=max_retries,
             transport=HttpxAsyncTransport(
-                base_url, _RUNTIME_HTTP_TIMEOUT_SECONDS, timing_enabled=timing_enabled),
+                base_url, _RUNTIME_HTTP_TIMEOUT_SECONDS, timing_enabled=timing_enabled
+            ),
         )
 
     server = build_server(
@@ -4106,13 +3471,19 @@ def main(argv: list[str] | None = None) -> None:
         catalog=args.catalog,
         working_state_client_factory=(
             partial(
-                async_runtime_client, "SUBMITTER",
-            ) if args.profile == "codex-full" and args.working_state_transport == "async" else None
+                async_runtime_client,
+                "SUBMITTER",
+            )
+            if args.profile == "codex-full" and args.working_state_transport == "async"
+            else None
         ),
         resolve_client_factory=(
             partial(
-                async_runtime_client, "READER",
-            ) if args.profile == "codex-full" else None
+                async_runtime_client,
+                "READER",
+            )
+            if args.profile == "codex-full"
+            else None
         ),
         codex_full_data_classification=data_classification,
         codex_working_state_scope_refs=(
