@@ -228,6 +228,40 @@ class _FormationApplication:
     acquisition_plan: AcquisitionPlan
 
 
+@dataclass(frozen=True, slots=True)
+class _RetrievalFinalization:
+    context: SessionContext
+    request: RetrievalRequest
+    request_id: str
+    plan: QueryPlan
+    batch: GatedBatch
+    assembled: _AssembledResults
+    derived_result: dict[str, Any] | None
+    acquisition_plan: AcquisitionPlan | None
+    acquisition_state: AcquisitionState | None
+    acquisition_execution: EvidenceAcquisitionExecutionRef | None
+    evidence_results: list[dict[str, Any]]
+    search_budget_exhausted: bool
+    progressive_l1: dict[str, Any]
+    dimensions: dict[str, bool] | None
+    degraded: set[str]
+    started: float
+    stages: OperationTimer
+    fallback_used: bool
+    fallback_reason: str | None
+    fingerprint: str
+    scope: dict[str, object]
+    minimum_outbox_sequence: int | None
+    causal_wait_outcome: str | None
+    causal_waited_ms: int
+    access_plan: MemoryAccessPlan | None
+    capture_matched_replay: bool
+    initial_state: ProjectionState | None
+    legacy_replay_prefix: _LegacyReplayPrefix | None
+    defer_decision_snapshot: bool
+    ranked: list[RetrievalCandidate]
+
+
 class _ScopedAccuracyRepository:
     """Adapt the governed Evidence snapshot to the DG-22 accuracy executor."""
 
@@ -1785,317 +1819,39 @@ class RetrievalService:
                 degraded,
                 evidence_multiplier=True,
             )
-            accepted, rejected, results, open_issue_ids = assembled
-            if dimensions is not None:
-                dimensions["correctly_resolved"] = bool(results) or any(
-                    outcome.get("reject_reason") == "OPEN_ISSUE" for outcome in rejected
-                )
-            final_result = stages.call(
-                "sufficiency_decision_ms",
-                DEFAULT_DECISION_ENGINE.decide,
-                plan.memory_query_ir,
-                acquisition_execution.candidates if acquisition_execution is not None else (),
-                results,
-                acquisition_execution.spans if acquisition_execution is not None else (),
-                acquisition_execution.interpretations if acquisition_execution is not None else (),
-                acquisition_execution.bindings if acquisition_execution is not None else (),
-                derived_result,
-                (
-                    acquisition_execution.bounded_range_scan_proof
-                    if acquisition_execution is not None
-                    and getattr(
-                        acquisition_execution.bounded_range_scan_proof,
-                        "schema_version",
-                        None,
-                    )
-                    == "bounded-range-scan-proof-v0.2"
-                    else None
-                ),
-                request=request,
-                plan=plan,
-                open_issue_ids=open_issue_ids,
-                requirement_state=(
-                    acquisition_execution.requirement_state
-                    if acquisition_execution is not None
-                    else None
-                ),
-                stage="FINAL",
-                mode=lean_decision_mode(plan),
-            )
-            final_decision = final_result.sufficiency_decision
-            final_sufficiency_reason = final_result.reason_code
-            _record_sufficiency_decision(
-                progressive_l1,
-                stage="FINAL",
-                decision=final_decision,
-                reason=final_sufficiency_reason,
-                terminal=progressive_l1["stop_stage"] != "BUDGET",
-            )
-            if acquisition_plan is not None and acquisition_state is not None:
-                deterministic_action = build_acquisition_action(
-                    action_kind="DETERMINISTIC_PASS",
-                    pass_index=0,
-                    requirement_ids=acquisition_state.missing_requirement_ids,
-                    probe_ids=[probe.probe_id for probe in acquisition_plan.probes],
-                )
-                acquisition_candidates = _acquisition_candidate_envelopes(evidence_results)
-                acquisition_bindings, acquisition_notes = (
-                    _acquisition_reference_material(
-                        evidence_results,
-                        plan.memory_query_ir.requirements,
-                        execution=acquisition_execution,
-                    )
-                    if plan.memory_query_ir is not None
-                    else ([], [])
-                )
-                aligned_requirement_state = (
-                    resolve_requirement_state(
-                        plan=acquisition_plan,
-                        requirements=plan.memory_query_ir.requirements,
-                        acquisition_capability_digest=(
-                            acquisition_state.requirement_state.acquisition_capability_digest
-                        ),
-                        candidates=acquisition_candidates,
-                        spans=(
-                            acquisition_execution.spans if acquisition_execution is not None else ()
-                        ),
-                        interpretations=(
-                            acquisition_execution.interpretations
-                            if acquisition_execution is not None
-                            else ()
-                        ),
-                        bindings=acquisition_bindings,
-                        sufficiency_decision=final_decision,
-                        state_epoch=acquisition_state.requirement_state.state_epoch,
-                        memory_query_ir=plan.memory_query_ir,
-                        accepted_evidence_overrides={
-                            requirement_id: [
-                                note.evidence_id
-                                for note in acquisition_notes
-                                if note.requirement_id == requirement_id
-                            ]
-                            for requirement_id in acquisition_state.required_requirement_ids
-                        },
-                    )
-                    if plan.memory_query_ir is not None
-                    else acquisition_state.requirement_state
-                )
-                elapsed_acquisition_ms = (perf_counter() - started) * 1_000
-                transition = advance_acquisition_state(
-                    acquisition_state,
-                    deterministic_action,
-                    candidates=acquisition_candidates,
-                    bindings=acquisition_bindings,
-                    notes=acquisition_notes,
-                    sufficiency_decision=final_decision,
-                    requirement_state=aligned_requirement_state,
-                    budget_use=AcquisitionBudgetUse(
-                        candidate_count=len(acquisition_candidates),
-                        context_tokens=min(
-                            int(progressive_l1["context_token_upper_bound"]),
-                            acquisition_state.remaining_budget.context_tokens,
-                        ),
-                        latency_ms=min(
-                            elapsed_acquisition_ms,
-                            acquisition_state.remaining_budget.latency_ms,
-                        ),
-                    ),
-                )
-                acquisition_state = transition.state
-                progressive_l1["acquisition_state_transition"] = {
-                    "outcome": transition.outcome,
-                    "reason_code": transition.reason_code,
-                    "repeated_anchor_count": transition.repeated_anchor_count,
-                    "repeated_window_count": transition.repeated_window_count,
-                    "canonical_mutation": transition.canonical_mutation,
-                }
-                progressive_l1["acquisition_state"] = acquisition_state_trace_summary(
-                    acquisition_state
-                )
-            # A canonical state selector can remain semantically PARTIAL while
-            # still yielding governed lookup memory.  Preserve the existing
-            # abstention behavior for every other incomplete derived/strict
-            # operation.
-            canonical_lookup_ready = (
-                request.memory_intent == "CURRENT_STATE"
-                and lean_decision_mode(plan) == "ORDINARY_RECALL"
-                and plan.operator == "LATEST_VALID_STATE"
-                and any(item.get("claim_version_id") is not None for item in results)
-            )
-            operator_abstained = (
-                (
-                    plan.operator is not None
-                    or derived_result is not None
-                    or (
-                        plan.memory_query_ir is not None
-                        and infer_operator_family(plan.memory_query_ir) != "LOOKUP"
-                    )
-                )
-                and not final_decision.complete
-                and not canonical_lookup_ready
-            )
-            abstained = not results or operator_abstained
-            abstention_reason = None
-            if abstained:
-                if operator_abstained:
-                    abstention_reason = (
-                        f"OPERATOR_{derived_result.get('reason', 'INCOMPLETE')}"
-                        if derived_result is not None
-                        else (f"SUFFICIENCY_{final_decision.status}_{final_decision.stop_reason}")
-                    )
-                else:
-                    reject_reasons = {str(value.get("reject_reason")) for value in rejected}
-                    if request.route == "L0" and reject_reasons.intersection(
-                        {"PERMISSION_DENIED", "SCOPE_MISMATCH"}
-                    ):
-                        abstention_reason = "ACCESS_DENIED"
-                    elif search_budget_exhausted:
-                        abstention_reason = "SEARCH_BUDGET_EXHAUSTED"
-                    elif progressive_l1["context_budget_truncated"]:
-                        abstention_reason = "CONTEXT_TOKEN_BUDGET_EXCEEDED"
-                    else:
-                        abstention_reason = "CANONICAL_GATE_REJECTED" if ranked else "NO_CANDIDATE"
-            duration_ms = max(0, int((perf_counter() - started) * 1_000))
-            if access_plan is not None and progressive_l1["deadline_outcome"] == "PENDING":
-                progressive_l1["deadline_outcome"] = (
-                    "EXHAUSTED" if duration_ms > access_plan.deadline_ms else "MET"
-                )
-                if progressive_l1["deadline_outcome"] == "EXHAUSTED":
-                    degraded.add("search_budget")
-            progressive_l1["observed_runtime_ms"] = duration_ms
-            if capture_matched_replay and initial_state != batch.projection_state:
-                raise MatchedReplayInvariantError("projection state changed during matched replay")
-            persisted_stage_metrics = _stage_metrics(stages, started)
-            execution_trace = _execution_trace(
-                request=request,
-                plan=plan,
-                stage_sequence=stages.sequence(),
-                progressive_l1=progressive_l1,
-                fallback_reason=fallback_reason,
-                abstention_reason=abstention_reason,
-                result_count=len(results),
-                resolution_dimensions=dimensions,
-            )
-            trace_id = stages.call(
-                "trace_write_ms",
-                self._repository.record_trace,
-                context,
-                RetrievalTraceCommand(
+            return self._finalize_execution(
+                _RetrievalFinalization(
+                    context=context,
+                    request=request,
                     request_id=request_id,
-                    route=cast(Literal["L0", "L1"], plan.complexity),
-                    consistency=plan.consistency_mode,
-                    query_fingerprint=fingerprint,
-                    query_plan=payload_free_query_plan(plan),
-                    requested_scope=scope,
-                    as_of=request.as_of,
-                    required_authority=request.required_authority,
-                    canonical_snapshot=(batch.projection_state.canonical_snapshot_outbox_sequence),
-                    fts_watermark=batch.projection_state.fts_watermark,
-                    vector_watermark=batch.projection_state.vector_watermark,
-                    accepted=accepted,
-                    rejected=rejected,
+                    plan=plan,
+                    batch=batch,
+                    assembled=assembled,
+                    derived_result=derived_result,
+                    acquisition_plan=acquisition_plan,
+                    acquisition_state=acquisition_state,
+                    acquisition_execution=acquisition_execution,
+                    evidence_results=evidence_results,
+                    search_budget_exhausted=search_budget_exhausted,
+                    progressive_l1=progressive_l1,
+                    dimensions=dimensions,
+                    degraded=degraded,
+                    started=started,
+                    stages=stages,
                     fallback_used=fallback_used,
                     fallback_reason=fallback_reason,
-                    abstained=abstained,
-                    abstention_reason=abstention_reason,
-                    duration_ms=duration_ms,
+                    fingerprint=fingerprint,
+                    scope=scope,
                     minimum_outbox_sequence=minimum_outbox_sequence,
                     causal_wait_outcome=causal_wait_outcome,
                     causal_waited_ms=causal_waited_ms,
-                    execution_trace=execution_trace,
-                    stage_metrics=cast(dict[str, object], persisted_stage_metrics),
-                ),
-            )
-            access_trace = _access_trace_view(
-                trace_id=trace_id,
-                request_id=request_id,
-                canonical_position=batch.projection_state.canonical_snapshot_outbox_sequence,
-                execution_trace=execution_trace,
-                stage_metrics=persisted_stage_metrics,
-            )
-            response_body = _response_body(
-                plan=plan,
-                results=results,
-                open_issue_ids=open_issue_ids,
-                trace_id=trace_id,
-                state=batch.projection_state,
-                degraded=degraded,
-                fallback_used=fallback_used,
-                fallback_reason=fallback_reason,
-                abstained=abstained,
-                abstention_reason=abstention_reason,
-                minimum_outbox_sequence=minimum_outbox_sequence,
-                causal_wait_outcome=causal_wait_outcome,
-                causal_waited_ms=causal_waited_ms,
-                derived_result=derived_result,
-                stage_metrics=_stage_metrics(stages, started),
-                progressive_l1=progressive_l1,
-                access_trace=access_trace,
-            )
-            decision_snapshot = _decision_snapshot(
-                plan=plan,
-                projection_state=batch.projection_state,
-                acquisition_plan=acquisition_plan,
-                acquisition_execution=acquisition_execution,
-                acquisition_state=acquisition_state,
-                accepted=accepted,
-                rejected=rejected,
-                results=results,
-                final_decision=final_decision,
-                derived_result=derived_result,
-                defer_digests=(
-                    defer_decision_snapshot
-                    and self._retrieval_audit_observer is None
-                    and not capture_matched_replay
-                ),
-            )
-            if self._retrieval_audit_observer is not None:
-                self._retrieval_audit_observer.capture_product_execution(
-                    request=request,
-                    query_plan=plan,
-                    acquisition_plan=acquisition_plan,
-                    acquisition_execution=(
-                        materialize_acquisition_execution(acquisition_execution)
-                        if acquisition_execution is not None else None
-                    ),
-                    accepted=accepted,
-                    rejected=rejected,
-                    results=results,
-                    final_decision=final_decision,
-                    derived_result=derived_result,
-                    decision_snapshot=materialize_decision_snapshot(decision_snapshot),
-                    progressive_l1=progressive_l1,
-                    stage_sequence=stages.sequence(),
+                    access_plan=access_plan,
+                    capture_matched_replay=capture_matched_replay,
+                    initial_state=initial_state,
+                    legacy_replay_prefix=legacy_replay_prefix,
+                    defer_decision_snapshot=defer_decision_snapshot,
+                    ranked=ranked,
                 )
-            matched_replay = (
-                _build_matched_retrieval_replay(
-                    request=request,
-                    plan=plan,
-                    request_id=request_id,
-                    query_fingerprint=fingerprint,
-                    state=batch.projection_state,
-                    trace_id=trace_id,
-                    current_body=response_body,
-                    legacy_prefix=legacy_replay_prefix,
-                    minimum_outbox_sequence=minimum_outbox_sequence,
-                    causal_wait_outcome=causal_wait_outcome,
-                    causal_waited_ms=causal_waited_ms,
-                )
-                if capture_matched_replay
-                else None
-            )
-            return RetrievalExecution(
-                response_body,
-                matched_replay=matched_replay,
-                decision_snapshot=decision_snapshot,
-                context_candidate_items=tuple(
-                    deepcopy(item)
-                    for item in (
-                        acquisition_execution.results
-                        if acquisition_execution is not None
-                        else results
-                    )
-                ),
             )
         except DatabaseUnavailable:
             unavailable = unavailable_decision()
@@ -2136,6 +1892,354 @@ class RetrievalService:
                 ),
                 status_code=503,
             )
+
+    def _finalize_execution(
+        self,
+        finalization: _RetrievalFinalization,
+    ) -> RetrievalExecution:
+        context = finalization.context
+        request = finalization.request
+        request_id = finalization.request_id
+        plan = finalization.plan
+        batch = finalization.batch
+        assembled = finalization.assembled
+        accepted, rejected, results, open_issue_ids = assembled
+        derived_result = finalization.derived_result
+        acquisition_plan = finalization.acquisition_plan
+        acquisition_state = finalization.acquisition_state
+        acquisition_execution = finalization.acquisition_execution
+        evidence_results = finalization.evidence_results
+        search_budget_exhausted = finalization.search_budget_exhausted
+        progressive_l1 = finalization.progressive_l1
+        dimensions = finalization.dimensions
+        degraded = finalization.degraded
+        started = finalization.started
+        stages = finalization.stages
+        fallback_used = finalization.fallback_used
+        fallback_reason = finalization.fallback_reason
+        fingerprint = finalization.fingerprint
+        scope = finalization.scope
+        minimum_outbox_sequence = finalization.minimum_outbox_sequence
+        causal_wait_outcome = finalization.causal_wait_outcome
+        causal_waited_ms = finalization.causal_waited_ms
+        access_plan = finalization.access_plan
+        capture_matched_replay = finalization.capture_matched_replay
+        initial_state = finalization.initial_state
+        legacy_replay_prefix = finalization.legacy_replay_prefix
+        defer_decision_snapshot = finalization.defer_decision_snapshot
+        ranked = finalization.ranked
+
+        if dimensions is not None:
+            dimensions["correctly_resolved"] = bool(results) or any(
+                outcome.get("reject_reason") == "OPEN_ISSUE" for outcome in rejected
+            )
+        final_result = stages.call(
+            "sufficiency_decision_ms",
+            DEFAULT_DECISION_ENGINE.decide,
+            plan.memory_query_ir,
+            acquisition_execution.candidates if acquisition_execution is not None else (),
+            results,
+            acquisition_execution.spans if acquisition_execution is not None else (),
+            acquisition_execution.interpretations if acquisition_execution is not None else (),
+            acquisition_execution.bindings if acquisition_execution is not None else (),
+            derived_result,
+            (
+                acquisition_execution.bounded_range_scan_proof
+                if acquisition_execution is not None
+                and getattr(
+                    acquisition_execution.bounded_range_scan_proof,
+                    "schema_version",
+                    None,
+                )
+                == "bounded-range-scan-proof-v0.2"
+                else None
+            ),
+            request=request,
+            plan=plan,
+            open_issue_ids=open_issue_ids,
+            requirement_state=(
+                acquisition_execution.requirement_state
+                if acquisition_execution is not None
+                else None
+            ),
+            stage="FINAL",
+            mode=lean_decision_mode(plan),
+        )
+        final_decision = final_result.sufficiency_decision
+        final_sufficiency_reason = final_result.reason_code
+        _record_sufficiency_decision(
+            progressive_l1,
+            stage="FINAL",
+            decision=final_decision,
+            reason=final_sufficiency_reason,
+            terminal=progressive_l1["stop_stage"] != "BUDGET",
+        )
+        if acquisition_plan is not None and acquisition_state is not None:
+            deterministic_action = build_acquisition_action(
+                action_kind="DETERMINISTIC_PASS",
+                pass_index=0,
+                requirement_ids=acquisition_state.missing_requirement_ids,
+                probe_ids=[probe.probe_id for probe in acquisition_plan.probes],
+            )
+            acquisition_candidates = _acquisition_candidate_envelopes(evidence_results)
+            acquisition_bindings, acquisition_notes = (
+                _acquisition_reference_material(
+                    evidence_results,
+                    plan.memory_query_ir.requirements,
+                    execution=acquisition_execution,
+                )
+                if plan.memory_query_ir is not None
+                else ([], [])
+            )
+            aligned_requirement_state = (
+                resolve_requirement_state(
+                    plan=acquisition_plan,
+                    requirements=plan.memory_query_ir.requirements,
+                    acquisition_capability_digest=(
+                        acquisition_state.requirement_state.acquisition_capability_digest
+                    ),
+                    candidates=acquisition_candidates,
+                    spans=(
+                        acquisition_execution.spans if acquisition_execution is not None else ()
+                    ),
+                    interpretations=(
+                        acquisition_execution.interpretations
+                        if acquisition_execution is not None
+                        else ()
+                    ),
+                    bindings=acquisition_bindings,
+                    sufficiency_decision=final_decision,
+                    state_epoch=acquisition_state.requirement_state.state_epoch,
+                    memory_query_ir=plan.memory_query_ir,
+                    accepted_evidence_overrides={
+                        requirement_id: [
+                            note.evidence_id
+                            for note in acquisition_notes
+                            if note.requirement_id == requirement_id
+                        ]
+                        for requirement_id in acquisition_state.required_requirement_ids
+                    },
+                )
+                if plan.memory_query_ir is not None
+                else acquisition_state.requirement_state
+            )
+            elapsed_acquisition_ms = (perf_counter() - started) * 1_000
+            transition = advance_acquisition_state(
+                acquisition_state,
+                deterministic_action,
+                candidates=acquisition_candidates,
+                bindings=acquisition_bindings,
+                notes=acquisition_notes,
+                sufficiency_decision=final_decision,
+                requirement_state=aligned_requirement_state,
+                budget_use=AcquisitionBudgetUse(
+                    candidate_count=len(acquisition_candidates),
+                    context_tokens=min(
+                        int(progressive_l1["context_token_upper_bound"]),
+                        acquisition_state.remaining_budget.context_tokens,
+                    ),
+                    latency_ms=min(
+                        elapsed_acquisition_ms,
+                        acquisition_state.remaining_budget.latency_ms,
+                    ),
+                ),
+            )
+            acquisition_state = transition.state
+            progressive_l1["acquisition_state_transition"] = {
+                "outcome": transition.outcome,
+                "reason_code": transition.reason_code,
+                "repeated_anchor_count": transition.repeated_anchor_count,
+                "repeated_window_count": transition.repeated_window_count,
+                "canonical_mutation": transition.canonical_mutation,
+            }
+            progressive_l1["acquisition_state"] = acquisition_state_trace_summary(
+                acquisition_state
+            )
+        # A canonical state selector can remain semantically PARTIAL while
+        # still yielding governed lookup memory.  Preserve the existing
+        # abstention behavior for every other incomplete derived/strict
+        # operation.
+        canonical_lookup_ready = (
+            request.memory_intent == "CURRENT_STATE"
+            and lean_decision_mode(plan) == "ORDINARY_RECALL"
+            and plan.operator == "LATEST_VALID_STATE"
+            and any(item.get("claim_version_id") is not None for item in results)
+        )
+        operator_abstained = (
+            (
+                plan.operator is not None
+                or derived_result is not None
+                or (
+                    plan.memory_query_ir is not None
+                    and infer_operator_family(plan.memory_query_ir) != "LOOKUP"
+                )
+            )
+            and not final_decision.complete
+            and not canonical_lookup_ready
+        )
+        abstained = not results or operator_abstained
+        abstention_reason = None
+        if abstained:
+            if operator_abstained:
+                abstention_reason = (
+                    f"OPERATOR_{derived_result.get('reason', 'INCOMPLETE')}"
+                    if derived_result is not None
+                    else (f"SUFFICIENCY_{final_decision.status}_{final_decision.stop_reason}")
+                )
+            else:
+                reject_reasons = {str(value.get("reject_reason")) for value in rejected}
+                if request.route == "L0" and reject_reasons.intersection(
+                    {"PERMISSION_DENIED", "SCOPE_MISMATCH"}
+                ):
+                    abstention_reason = "ACCESS_DENIED"
+                elif search_budget_exhausted:
+                    abstention_reason = "SEARCH_BUDGET_EXHAUSTED"
+                elif progressive_l1["context_budget_truncated"]:
+                    abstention_reason = "CONTEXT_TOKEN_BUDGET_EXCEEDED"
+                else:
+                    abstention_reason = "CANONICAL_GATE_REJECTED" if ranked else "NO_CANDIDATE"
+        duration_ms = max(0, int((perf_counter() - started) * 1_000))
+        if access_plan is not None and progressive_l1["deadline_outcome"] == "PENDING":
+            progressive_l1["deadline_outcome"] = (
+                "EXHAUSTED" if duration_ms > access_plan.deadline_ms else "MET"
+            )
+            if progressive_l1["deadline_outcome"] == "EXHAUSTED":
+                degraded.add("search_budget")
+        progressive_l1["observed_runtime_ms"] = duration_ms
+        if capture_matched_replay and initial_state != batch.projection_state:
+            raise MatchedReplayInvariantError("projection state changed during matched replay")
+        persisted_stage_metrics = _stage_metrics(stages, started)
+        execution_trace = _execution_trace(
+            request=request,
+            plan=plan,
+            stage_sequence=stages.sequence(),
+            progressive_l1=progressive_l1,
+            fallback_reason=fallback_reason,
+            abstention_reason=abstention_reason,
+            result_count=len(results),
+            resolution_dimensions=dimensions,
+        )
+        trace_id = stages.call(
+            "trace_write_ms",
+            self._repository.record_trace,
+            context,
+            RetrievalTraceCommand(
+                request_id=request_id,
+                route=cast(Literal["L0", "L1"], plan.complexity),
+                consistency=plan.consistency_mode,
+                query_fingerprint=fingerprint,
+                query_plan=payload_free_query_plan(plan),
+                requested_scope=scope,
+                as_of=request.as_of,
+                required_authority=request.required_authority,
+                canonical_snapshot=(batch.projection_state.canonical_snapshot_outbox_sequence),
+                fts_watermark=batch.projection_state.fts_watermark,
+                vector_watermark=batch.projection_state.vector_watermark,
+                accepted=accepted,
+                rejected=rejected,
+                fallback_used=fallback_used,
+                fallback_reason=fallback_reason,
+                abstained=abstained,
+                abstention_reason=abstention_reason,
+                duration_ms=duration_ms,
+                minimum_outbox_sequence=minimum_outbox_sequence,
+                causal_wait_outcome=causal_wait_outcome,
+                causal_waited_ms=causal_waited_ms,
+                execution_trace=execution_trace,
+                stage_metrics=cast(dict[str, object], persisted_stage_metrics),
+            ),
+        )
+        access_trace = _access_trace_view(
+            trace_id=trace_id,
+            request_id=request_id,
+            canonical_position=batch.projection_state.canonical_snapshot_outbox_sequence,
+            execution_trace=execution_trace,
+            stage_metrics=persisted_stage_metrics,
+        )
+        response_body = _response_body(
+            plan=plan,
+            results=results,
+            open_issue_ids=open_issue_ids,
+            trace_id=trace_id,
+            state=batch.projection_state,
+            degraded=degraded,
+            fallback_used=fallback_used,
+            fallback_reason=fallback_reason,
+            abstained=abstained,
+            abstention_reason=abstention_reason,
+            minimum_outbox_sequence=minimum_outbox_sequence,
+            causal_wait_outcome=causal_wait_outcome,
+            causal_waited_ms=causal_waited_ms,
+            derived_result=derived_result,
+            stage_metrics=_stage_metrics(stages, started),
+            progressive_l1=progressive_l1,
+            access_trace=access_trace,
+        )
+        decision_snapshot = _decision_snapshot(
+            plan=plan,
+            projection_state=batch.projection_state,
+            acquisition_plan=acquisition_plan,
+            acquisition_execution=acquisition_execution,
+            acquisition_state=acquisition_state,
+            accepted=accepted,
+            rejected=rejected,
+            results=results,
+            final_decision=final_decision,
+            derived_result=derived_result,
+            defer_digests=(
+                defer_decision_snapshot
+                and self._retrieval_audit_observer is None
+                and not capture_matched_replay
+            ),
+        )
+        if self._retrieval_audit_observer is not None:
+            self._retrieval_audit_observer.capture_product_execution(
+                request=request,
+                query_plan=plan,
+                acquisition_plan=acquisition_plan,
+                acquisition_execution=(
+                    materialize_acquisition_execution(acquisition_execution)
+                    if acquisition_execution is not None else None
+                ),
+                accepted=accepted,
+                rejected=rejected,
+                results=results,
+                final_decision=final_decision,
+                derived_result=derived_result,
+                decision_snapshot=materialize_decision_snapshot(decision_snapshot),
+                progressive_l1=progressive_l1,
+                stage_sequence=stages.sequence(),
+            )
+        matched_replay = (
+            _build_matched_retrieval_replay(
+                request=request,
+                plan=plan,
+                request_id=request_id,
+                query_fingerprint=fingerprint,
+                state=batch.projection_state,
+                trace_id=trace_id,
+                current_body=response_body,
+                legacy_prefix=legacy_replay_prefix,
+                minimum_outbox_sequence=minimum_outbox_sequence,
+                causal_wait_outcome=causal_wait_outcome,
+                causal_waited_ms=causal_waited_ms,
+            )
+            if capture_matched_replay
+            else None
+        )
+        return RetrievalExecution(
+            response_body,
+            matched_replay=matched_replay,
+            decision_snapshot=decision_snapshot,
+            context_candidate_items=tuple(
+                deepcopy(item)
+                for item in (
+                    acquisition_execution.results
+                    if acquisition_execution is not None
+                    else results
+                )
+            ),
+        )
 
     def _decision_input_view(
         self,
