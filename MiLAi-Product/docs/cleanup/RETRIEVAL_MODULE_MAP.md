@@ -22,10 +22,11 @@ module. `retrieval_core` is internal and is not a new public API.
 | `retrieval_core/selection.py` | Context budgeting, weighted set cover and deterministic lexical MMR | `_apply_context_budget`, `_context_candidate_budget`, `_context_budget_view`, `_set_cover_text`, `_set_cover_tokens`, `_weighted_set_cover_select`, `_mmr_select`, `_mmr_tokens`, `_jaccard` |
 | `retrieval_core/acquisition.py` | Formation/raw result composition, acquisition envelopes and query-local evidence material | `_merge_evidence_results`, `_formation_candidate_results`, `_union_formation_and_raw`, `_acquisition_candidate_envelopes`, `_acquisition_reference_material`, `_use_acquisition_composition` |
 | `retrieval_core/operators.py` | Compound-subject matching, scalar-state coverage, accepted-input execution and operator provenance | `_explicit_compound_subject_matches`, `_state_count_cover`, `_execute_operator_with_accepted_inputs`, `_operator_support_refs` |
+| `retrieval_core/assembly.py` | Governed result assembly, response payloads, decision snapshots and accepted evidence/span projection | `_assemble_results`, `_response_body`, `_contains_evidence_observation`, `_projection_state_payload`, `_decision_snapshot`, `_requirement_evidence_set`, `_decision_requirement_ids`, `_decision_accepted_evidence_ids`, `_accepted_binding_spans`, `_binding_span_provenance_order`, `_result_evidence_ids` |
 
 The policy values, regexes, reciprocal-rank constant, sorting keys, deadline behavior, candidate
-limits, temporal ordering, Context budget, selection weights and acquisition composition were moved
-without modification. AST comparisons against each pre-extraction `retrieval.py` baseline confirmed all 44 extracted
+limits, temporal ordering, Context budget, selection weights, acquisition composition and assembly
+semantics were moved without modification. AST comparisons against each pre-extraction `retrieval.py` baseline confirmed all 55 extracted
 function bodies are unchanged.
 
 ## Preserved boundaries
@@ -38,6 +39,6 @@ function bodies are unchanged.
 
 ## Remaining planned seams
 
-Later Retrieval-only PRs may extract assembly and trace helpers. Each extraction remains
-independently gated; this map does not authorize behavior changes or a wholesale
+One later Retrieval-only PR may extract trace helpers. That extraction remains independently
+gated; this map does not authorize behavior changes or a wholesale
 `RetrievalService` rewrite.
