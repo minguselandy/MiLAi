@@ -60,7 +60,7 @@
   ],
   "schema_version": "milai-product-manifest-v1",
   "source_legacy_head": "651099ba8cffc2675961bb9250ba44c158efccb5",
-  "tree_file_count": 402,
+  "tree_file_count": 408,
   "tree_paths": [
     "VERSION",
     "architecture/v1.0",
@@ -90,5 +90,5 @@
     "integrations/autogen/uv.lock",
     "integrations/autogen/src"
   ],
-  "tree_sha256": "9213e11fccdea898d459d0f85a389388867eb0fc6b0652108b87e67730a75e0f"
+  "tree_sha256": "f7d60b53242f32761a3943a73e6eef287939d777c67a08d6cfbdba73f643753d"
 }
