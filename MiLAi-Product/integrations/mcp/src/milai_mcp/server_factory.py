@@ -1002,6 +1002,7 @@ def _codex_full_clients_from_environment(*, max_retries: int) -> CodexFullRuntim
 
 
 def main(argv: list[str] | None = None) -> None:
+    facade = sys.modules.get("milai_mcp.server")
     parser = argparse.ArgumentParser(description=SERVER_DESCRIPTION)
     parser.add_argument(
         "--transport",
@@ -1155,7 +1156,8 @@ def main(argv: list[str] | None = None) -> None:
                     " ".join(sorted(READ_SCOPES)),
                 ).split()
             )
-            admission_policy = AdmissionPolicy(
+            admission_policy_type = getattr(facade, "AdmissionPolicy", AdmissionPolicy)
+            admission_policy = admission_policy_type(
                 Path(policy_path),
                 issuer=issuer,
                 project_id=projects[0],
@@ -1178,7 +1180,12 @@ def main(argv: list[str] | None = None) -> None:
         except (ValueError, AuthDependencyUnavailable) as exc:
             raise SystemExit("invalid AIGCIT deployment configuration") from exc
     if args.profile == "codex-full":
-        codex_full_clients = _codex_full_clients_from_environment(max_retries=max_retries)
+        codex_clients_factory = getattr(
+            facade,
+            "_codex_full_clients_from_environment",
+            _codex_full_clients_from_environment,
+        )
+        codex_full_clients = codex_clients_factory(max_retries=max_retries)
         primary_client = codex_full_clients.reader
     if args.transport == "streamable-http":
         if args.profile not in {"agent-memory", "codex-full"}:
@@ -1242,7 +1249,6 @@ def main(argv: list[str] | None = None) -> None:
             ),
         )
 
-    facade = sys.modules.get("milai_mcp.server")
     server_builder = getattr(facade, "build_server", build_server)
     server = server_builder(
         args.profile,

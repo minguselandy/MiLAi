@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from milai_client import MilaiClient as MilaiClient
 
+from milai_mcp.auth_policy import AdmissionPolicy as AdmissionPolicy
 from milai_mcp.server_codex import (
     extend_codex_governance_tools as extend_codex_governance_tools,
 )

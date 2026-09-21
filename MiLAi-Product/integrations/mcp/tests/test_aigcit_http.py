@@ -372,18 +372,18 @@ def test_aigcit_cli_assembles_external_mode_without_static_credential(
         monkeypatch.setenv(key, value)
     for role in ["READER", "SUBMITTER", "REVIEWER", "OPERATOR"]:
         monkeypatch.setenv(f"MILAI_AGENT_{role}_TOKEN", "runtime-test-credential-" + role * 10)
-    if os.getuid() != 0:
-        # Only the file owner check is injected for an unprivileged CI temp file.
-        original = module.AdmissionPolicy
-        monkeypatch.setattr(
-            module,
-            "AdmissionPolicy",
-            lambda *a, **kw: original(
-                *a,
-                **kw,
-                trusted_owner_uid=os.getuid(),
-            ),
-        )
+    # Bind the policy-file owner to the test process while also fixing the historical
+    # ``milai_mcp.server.AdmissionPolicy`` monkeypatch observation point.
+    original = module.AdmissionPolicy
+    monkeypatch.setattr(
+        module,
+        "AdmissionPolicy",
+        lambda *a, **kw: original(
+            *a,
+            **kw,
+            trusted_owner_uid=os.getuid(),
+        ),
+    )
     captured: dict[str, Any] = {}
     role = object()
     monkeypatch.setattr(

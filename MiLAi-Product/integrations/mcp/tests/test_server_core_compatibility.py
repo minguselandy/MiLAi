@@ -21,6 +21,7 @@ def test_server_facade_preserves_contract_objects() -> None:
 
 def test_server_facade_preserves_factory_and_cli_objects() -> None:
     assert server.MilaiClient is factory.MilaiClient
+    assert server.AdmissionPolicy is factory.AdmissionPolicy
     assert server.build_server is factory.build_server
     assert server.main is factory.main
     assert server.resolve_budget_profile_by_name is factory.resolve_budget_profile_by_name
