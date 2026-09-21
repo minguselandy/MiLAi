@@ -585,6 +585,7 @@ aba4413  reader toolset
 222b3cd  governance + working-state toolsets
 191c5ca  codex-full governance toolsets
 425793d  factory + CLI + facade
+0457032  clean-environment CLI facade compatibility correction
 ```
 
 当前结构结果：

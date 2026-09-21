@@ -37,7 +37,7 @@
       "file_count": 29,
       "interface_id": "mcp-v0.1",
       "path": "integrations/mcp/src",
-      "sha256": "b145e42cf2e5727abb3ca10683305dacc0a93fd447a1477ca5f73f7b1c9acac4"
+      "sha256": "10f7c9ca4137bca71b0dbe28844baa07992d4987b8f05f3252c75df5562ef9ac"
     },
     {
       "file_count": 18,
@@ -90,5 +90,5 @@
     "integrations/autogen/uv.lock",
     "integrations/autogen/src"
   ],
-  "tree_sha256": "6fa354e9866da53eaf3cc7c4bb5173b63b718834f6ceddd2422dd5bd89744957"
+  "tree_sha256": "18c219c4dd3c1943cf278b6aa2c150b88c91f40edb0cbc1e4259dc14cd53ea92"
 }

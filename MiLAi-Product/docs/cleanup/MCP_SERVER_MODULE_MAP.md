@@ -14,14 +14,15 @@ existing server contracts, helpers, factory and CLI names available from `milai_
 same objects exported by their owning modules. The new `server_*` modules are internal seams and
 do not create a new public API.
 
-Two historical monkeypatch observation points are preserved deliberately:
+Four historical monkeypatch observation points are preserved deliberately:
 
 - `build_server()` resolves the default `MilaiClient` through the loaded `milai_mcp.server`
   facade at call time;
-- `main()` resolves `build_server` through that facade at call time.
+- `main()` resolves `AdmissionPolicy`, `_codex_full_clients_from_environment` and `build_server`
+  through that facade at call time.
 
-This keeps existing tests and private consumers that patch `server.MilaiClient` or
-`server.build_server` working after the implementation relocation.
+This keeps existing tests and private consumers that patch those server-module names working after
+the implementation relocation.
 
 ## Final responsibility map
 
