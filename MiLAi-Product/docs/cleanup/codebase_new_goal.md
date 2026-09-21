@@ -722,10 +722,13 @@ MCP 分别新增 identity test，锁定 fixture/helper 仍是原对象；未移�
 body。`compatibility-registry.json` 明确登记 `PUBLIC_API`、`PUBLIC_COMPAT`、`TEST_COMPAT`、
 `HISTORICAL_COMPAT`、`INTERNAL_TEMPORARY` 五类，逐字冻结 29 个 receipt node ID。
 
-C6 dev gate 已 PASS：三包 Ruff、registry/receipt/node/import 静态门禁、Runtime 1,257 nodes、
-MCP 400 nodes、Python client 210 nodes 的 `pytest --collect-only`，以及 3 个 support identity
-tests。未连接 PostgreSQL，未运行 historical benchmark、package behavior suite 或 full
-composition；下一步只执行一次 L2 structural pre-push、远端 fast PR gate 与 merge-tree identity。
+C6 dev 与最终 L2 structural pre-push gate 均 PASS：三包 Ruff、registry/receipt/node/import
+静态门禁、Runtime 1,257 nodes、MCP 400 nodes、Python client 210 nodes 的
+`pytest --collect-only`，以及 3 个 support identity tests。L2 同时确认 Product manifest 仍为
+422 files / `7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521`，
+8 份 behavior receipts、Conformance freshness 与 repository boundary（4,345 tracked paths，
+0 findings）全 PASS。未连接 PostgreSQL，未运行 historical benchmark、package behavior suite
+或 full composition；下一步只 push 最终候选并执行远端 fast PR gate 与 merge-tree identity。
 
 ---
 
