@@ -125,9 +125,9 @@
           ],
           "tests": [
             {"argv": ["{python}", "tools/verify_compatibility_registry.py"], "cwd": "product"},
-            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "runtime"},
-            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "mcp"},
-            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "client"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "client"},
             {"argv": ["uv", "run", "pytest", "-q", "tests/integration/test_support_compatibility.py"], "cwd": "runtime"},
             {"argv": ["uv", "run", "pytest", "-q", "tests/test_support_compatibility.py"], "cwd": "mcp"},
             {"argv": ["uv", "run", "pytest", "-q", "tests/test_support_compatibility.py"], "cwd": "client"}
@@ -153,9 +153,9 @@
           ],
           "tests": [
             {"argv": ["{python}", "tools/verify_compatibility_registry.py"], "cwd": "product"},
-            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "runtime"},
-            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "mcp"},
-            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "client"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-qq"], "cwd": "client"},
             {"argv": ["uv", "run", "pytest", "-q", "tests/integration/test_support_compatibility.py"], "cwd": "runtime"},
             {"argv": ["uv", "run", "pytest", "-q", "tests/test_support_compatibility.py"], "cwd": "mcp"},
             {"argv": ["uv", "run", "pytest", "-q", "tests/test_support_compatibility.py"], "cwd": "client"}
