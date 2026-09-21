@@ -135,7 +135,7 @@ STOP STRUCTURAL WORK
 | C2 | Runtime Retrieval modularization | COMPLETE |
 | C3 | Runtime Memory Context modularization | COMPLETE — PR #19 merged; fast PR and main identity PASS |
 | C4 | MCP Server modularization | COMPLETE — PR #20 merged; fast PR and main identity PASS |
-| C5 | OpenWorker Host modularization | IN PROGRESS — request, ingress and tool compatibility extracted |
+| C5 | OpenWorker Host modularization | IN PROGRESS — implementation complete; candidate validation |
 | C6 | Test organization | PENDING |
 | C7 | Lab active code organization | PENDING |
 | C8 | Compatibility/dead-code audit | PENDING |
@@ -650,19 +650,26 @@ settlement 与 trace privacy。L2 才运行完整 `openworker-mcp` package 一�
 
 ### 12.1 2026-09-21 执行记录
 
-`cleanup/c5-openworker-host-final` 已完成前三段本地 extraction checkpoint：
+`cleanup/c5-openworker-host-final` 已完成全部 implementation extraction checkpoint：
 
 ```text
 b810284  request contract
 cafa1bb  ingress contracts
 06c2a4b  ordinary tool compatibility and SSE wire adaptation
+d4a8df7  task state
+a4690e4  memory flow
+65c0a37  payload-free trace projections
+a83ef6f  provider bridge + thin HTTP/CLI orchestrator
 ```
 
 当前 `host_adapter.py` 继续作为 27 行历史兼容门面；核心 `host/orchestrator.py` 已从 3,735 行
-降至 3,039 行。前三段共比对 19 个搬运 class/function 定义，逐 AST mismatch 为 0。request
-direct tests、HTTP exposure/auth-before-parse/startup policy 和 ordinary-tool/vLLM streaming 定向
-测试均 PASS；每段 Ruff 与 strict mypy PASS。后续按 task state、memory flow、provider bridge、
-trace、orchestrator facade 边界继续，本分支尚未 push。
+降至 415 行。最终递归 AST 比对覆盖基线全部 81 个 class/function 定义：80 个逐 AST 完全
+一致，0 个名称丢失；唯一 class container 差异是 `OpenWorkerProviderAdapter` 继承内部
+`HostTaskState`，所有原方法分别保持 AST-identical。request、HTTP exposure/auth-before-parse、
+startup policy、ordinary-tool/vLLM streaming、task binding/cache reuse、memory facade/controller、
+provider/completion 与 trace privacy 定向测试均 PASS；每段 Ruff 与 strict mypy PASS。详细责任与
+兼容边界见 `OPENWORKER_HOST_MODULE_MAP.md`。本分支尚未 push，下一步只执行一次 OpenWorker
+L2 pre-push 与远端 fast PR gate，不运行 historical/full composition。
 
 ---
 
