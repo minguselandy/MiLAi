@@ -8,10 +8,10 @@ Goal 类型:                  behavior-preserving cleanup / bounded modularizati
 执行状态:                   ACTIVE — 用户已于 2026-09-21 明确恢复
 前置合同:                   MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 本版作用:                   优化执行节奏、验证分级、CI 触发与剩余 PR 边界
-当前阶段:                   C3 Memory Context final candidate
-当前候选分支:               cleanup/c3-memory-context-final
+当前阶段:                   C4 MCP Server final candidate
+当前候选分支:               cleanup/c4-mcp-server-final
 最近权威 full workflow:     Run #57 / 17 jobs success / composition PASS
-当前 base main:             f57cdcf043f81e945b35046913cc7a1df6455777
+当前 base main:             43a2c6a031cbe79a5f34dd835de60c6e3fc9cec3
 ```
 
 本 Goal 不推翻 v1.0 的行为保持、Source of Truth、Frozen Architecture、历史证据和完成定义。
@@ -133,8 +133,8 @@ STOP STRUCTURAL WORK
 | C0 | Baseline + inventory | COMPLETE |
 | C1 | Safe hygiene | COMPLETE |
 | C2 | Runtime Retrieval modularization | COMPLETE |
-| C3 | Runtime Memory Context modularization | IN PROGRESS — implementation complete; candidate validation |
-| C4 | MCP Server modularization | PENDING |
+| C3 | Runtime Memory Context modularization | COMPLETE — PR #19 merged; fast PR and main identity PASS |
+| C4 | MCP Server modularization | IN PROGRESS — implementation complete; candidate validation |
 | C5 | OpenWorker Host modularization | PENDING |
 | C6 | Test organization | PENDING |
 | C7 | Lab active code organization | PENDING |
@@ -537,6 +537,11 @@ memory_context_core/trace.py      lifecycle trace projections
 replay；只执行一次 memory-context L2 pre-push 与远端 fast PR gate。L4 是否升级留到最终
 候选或出现真实 behavior-path 风险时决定，不将约 35 分钟回放作为每次结构 PR 的默认门槛。
 
+PR #19 已经 fast PR gate PASS 后 squash merge 为
+`43a2c6a031cbe79a5f34dd835de60c6e3fc9cec3`。候选 tree 与 merge tree 均为
+`bc0141db4429e4467e5c9388a185274da5e62c98`；main push fast identity gate 亦 PASS，因此没有对
+同一 tree 重复运行 full composition。
+
 ---
 
 ## 11. C4 — MCP Server modularization
@@ -568,6 +573,42 @@ authorization behavior
 
 开发只运行相邻 tests；L2 才运行完整 MCP package 一次。HTTP/OAuth 测试仅在对应代码发生
 变化时加入 targeted gate。最终执行一次 L4 full composition。
+
+### 11.1 2026-09-21 执行记录
+
+`cleanup/c4-mcp-server-final` 已按六段本地实现边界完成：
+
+```text
+9df765f  models/contracts + middleware
+2249cad  wire + compact serialization
+aba4413  reader toolset
+222b3cd  governance + working-state toolsets
+191c5ca  codex-full governance toolsets
+425793d  factory + CLI + facade
+```
+
+当前结构结果：
+
+```text
+server.py              4145 → 122 lines (compatibility facade)
+server_contracts.py    profiles, catalogs, annotations and typed inputs
+server_middleware.py   strict arguments, token binding and request middleware
+server_wire.py         bounded wire serialization and resolve compaction
+server_reader.py       Reader tools and access policy projection
+server_governance.py   identity, mutation and Working State tools
+server_codex.py        Codex-full submitter/reviewer/operator tools
+server_factory.py      assembly, transport and CLI
+```
+
+六段 L1 均已通过对应定向用例、changed-scope Ruff 与 strict mypy。对 base
+`43a2c6a031cbe79a5f34dd835de60c6e3fc9cec3` 的递归 AST/constant 比对覆盖基线全部 104 个
+class/function 定义：102 个逐 AST 完全一致，0 个名称丢失；仅 `build_server` 与 `main` 因装配
+边界变化而结构不同。15 个共享顶层 assignment 中 14 个完全一致；`_LOGGER` 显式固定为原有
+运行时名称 `milai_mcp.server`。详细责任与兼容边界见 `MCP_SERVER_MODULE_MAP.md`。
+
+按用户对耗时验证的明确要求，本候选只执行一次 MCP L2 pre-push 与远端 fast PR gate；不在
+该纯结构 PR 上执行约 35 分钟 historical/full composition。完整回放保留到 C9/C10 最终候选，
+或仅在出现真实 behavior-path 风险时升级。
 
 ---
 
@@ -762,8 +803,8 @@ composition
 ```text
 PR #17  C3 foundation                         已验证并合并
 PR #18  CI/test cadence optimization          已验证并合并
-PR #19  C3 Memory Context final               本地候选
-PR #20  C4 MCP Server complete modularization
+PR #19  C3 Memory Context final               已验证并合并
+PR #20  C4 MCP Server complete modularization 本地候选
 PR #21  C5 OpenWorker Host complete modularization
 PR #22  C6 test organization + compatibility registry
 PR #23  C7 Lab active runner organization
