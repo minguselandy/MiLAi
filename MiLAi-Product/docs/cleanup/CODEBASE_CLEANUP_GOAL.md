@@ -186,14 +186,27 @@ composition 全部 PASS 后才合并。
 - C2 trace extraction 从 exact green
   `d23c420f3054398b946eb1a51f5e6045f3c50632` 恢复。
 
-### 2026-09-21 — C2 trace extraction implemented
+### 2026-09-21 — C2 trace extraction and bounded finalization implemented
 
 - 本轮只移动 matched replay、public acquisition trace、execution stage、latency/cost 与
-  access-trace serialization helper；`RetrievalService` orchestration 未改写。
+  access-trace serialization helper，并将 final decision、acquisition-state transition、
+  abstention、trace persistence 与 response/receipt assembly 抽成一个有界 finalization phase。
 - 十一个函数、`_LegacyReplayPrefix` 与 `_EXECUTION_STAGE_BY_OPERATION` 均与 `d23c420...`
   基线 AST 一致；旧 `milai.application.retrieval` helper/type import 保持兼容。
+- `_finalize_execution()` 内的原执行语句与 extraction 前 AST 一致；`retrieve()` 继续作为唯一
+  public orchestration entry，search/acquisition/gate 顺序未改。
 - trace schema、stage mapping、stop/fallback reason、timing/cost arithmetic 与 response wire
   均未改变。
+
+### 2026-09-21 — Cleanup execution cadence adjusted
+
+- 开发提交采用 targeted tests、Ruff、mypy 与 contract snapshot/compatibility checks。
+- 每个 subsystem PR 只在最终候选执行一次完整 17-job composition；历史 replay 保留在 PR
+  最终候选、merge queue 与 nightly，不再为每组 helper 单独重复运行。
+- 后续以中等规模 subsystem PR 推进：Memory Context、MCP、OpenWorker 各计划两轮；不再按
+  单组 helper 创建 PR。
+- 合并目标是由 merge queue 验证最终 merge tree；在 required check 与 merge queue 已覆盖
+  同一 merge tree 时，不再机械重复 post-merge 全套。
 
 ## Completion rule
 

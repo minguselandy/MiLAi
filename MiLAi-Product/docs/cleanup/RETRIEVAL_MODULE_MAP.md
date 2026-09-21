@@ -34,6 +34,9 @@ mapping and `_LegacyReplayPrefix` contract are also AST-identical to the pre-ext
 ## Preserved boundaries
 
 - `RetrievalService` stays in `retrieval.py`.
+- The final decision, acquisition-state transition, abstention, trace persistence and response
+  assembly phase is isolated behind `_finalize_execution()` with an explicit
+  `_RetrievalFinalization` input boundary.
 - Retrieval route, ranking, threshold, weight and timeout semantics are unchanged.
 - Public Runtime imports and existing private compatibility imports are unchanged.
 - No schema, migration, MCP, CLI, HTTP, Context budget or Lab code changed.
@@ -41,7 +44,7 @@ mapping and `_LegacyReplayPrefix` contract are also AST-identical to the pre-ext
 
 ## Remaining planned seams
 
-Trace extraction is complete. A later Retrieval-only assessment may extract `system_status()` and
-bounded execution phases from the still-large `retrieve()` orchestration. Any such work remains
-independently gated; this map does not authorize behavior changes or a wholesale
-`RetrievalService` rewrite.
+Trace extraction and one bounded orchestration segment are complete. `retrieve()` remains the
+high-level entry and still owns acquisition/search/gate sequencing; further segmentation requires
+a separately reviewable execution boundary rather than helper-by-helper extraction. This map does
+not authorize behavior changes or a wholesale `RetrievalService` rewrite.
