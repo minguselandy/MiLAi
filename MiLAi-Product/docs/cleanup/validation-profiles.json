@@ -103,6 +103,66 @@
         }
       }
     },
+    "test-organization": {
+      "changed_paths": [
+        "MiLAi-Product/**/tests/**",
+        "MiLAi-Product/docs/cleanup/compatibility-registry.json",
+        "MiLAi-Product/docs/cleanup/COMPATIBILITY_REGISTRY.md",
+        "MiLAi-Product/tools/verify_compatibility_registry.py"
+      ],
+      "levels": {
+        "dev": {
+          "boundary": [],
+          "build": [],
+          "integration_requirement": "Collection, wrapper identity, and static compatibility only; no PostgreSQL or historical replay.",
+          "manifest": [],
+          "mypy": [],
+          "ruff": [
+            {"argv": ["uv", "run", "ruff", "check", "tests"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "ruff", "check", "tests"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "ruff", "check", "tests"], "cwd": "client"},
+            {"argv": ["{runtime_python}", "-m", "ruff", "check", "tools/verify_compatibility_registry.py"], "cwd": "product"}
+          ],
+          "tests": [
+            {"argv": ["{python}", "tools/verify_compatibility_registry.py"], "cwd": "product"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "client"},
+            {"argv": ["uv", "run", "pytest", "-q", "tests/integration/test_support_compatibility.py"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "pytest", "-q", "tests/test_support_compatibility.py"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "pytest", "-q", "tests/test_support_compatibility.py"], "cwd": "client"}
+          ]
+        },
+        "prepush": {
+          "boundary": [
+            {"argv": ["{runtime_python}", "MiLAi-Artifact-Archive/tools/verify_boundaries.py"], "cwd": "workspace"}
+          ],
+          "build": [],
+          "integration_requirement": "Same structural gates as dev; historical behavior and full composition are reserved for C9/C10.",
+          "manifest": [
+            {"argv": ["{runtime_python}", "tools/build_product_manifest.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_revalidation_receipts.py", "--check"], "cwd": "product"},
+            {"argv": ["{runtime_python}", "tools/verify_architecture_conformance.py", "--check"], "cwd": "product"}
+          ],
+          "mypy": [],
+          "ruff": [
+            {"argv": ["uv", "run", "ruff", "check", "tests"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "ruff", "check", "tests"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "ruff", "check", "tests"], "cwd": "client"},
+            {"argv": ["{runtime_python}", "-m", "ruff", "check", "tools/verify_compatibility_registry.py"], "cwd": "product"}
+          ],
+          "tests": [
+            {"argv": ["{python}", "tools/verify_compatibility_registry.py"], "cwd": "product"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "pytest", "--collect-only", "-q"], "cwd": "client"},
+            {"argv": ["uv", "run", "pytest", "-q", "tests/integration/test_support_compatibility.py"], "cwd": "runtime"},
+            {"argv": ["uv", "run", "pytest", "-q", "tests/test_support_compatibility.py"], "cwd": "mcp"},
+            {"argv": ["uv", "run", "pytest", "-q", "tests/test_support_compatibility.py"], "cwd": "client"}
+          ]
+        }
+      }
+    },
     "openworker": {
       "changed_paths": ["MiLAi-Product/integrations/openworker-mcp/**"],
       "levels": {

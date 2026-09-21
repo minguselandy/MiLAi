@@ -64,6 +64,7 @@ def _roots() -> dict[str, Path]:
         "runtime": PRODUCT_ROOT / "runtime",
         "mcp": PRODUCT_ROOT / "integrations" / "mcp",
         "openworker": PRODUCT_ROOT / "integrations" / "openworker-mcp",
+        "client": PRODUCT_ROOT / "integrations" / "python-client",
         "lab": workspace / "MiLAi-Lab",
         "workspace": workspace,
     }
