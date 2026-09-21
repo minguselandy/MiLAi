@@ -1,6 +1,7 @@
 from milai_mcp import server
 from milai_mcp import server_contracts as contracts
 from milai_mcp import server_middleware as middleware
+from milai_mcp import server_reader as reader
 from milai_mcp import server_wire as wire
 
 
@@ -42,3 +43,10 @@ def test_server_facade_preserves_wire_digest() -> None:
     assert server._wire_field_sizes is wire._wire_field_sizes
     assert server._wire_size_diagnostics is wire._wire_size_diagnostics
     assert server._bounded_memory_resolve is wire._bounded_memory_resolve
+
+
+def test_server_facade_preserves_reader_helpers() -> None:
+    assert server.ReaderToolset is reader.ReaderToolset
+    assert server.build_reader_toolset is reader.build_reader_toolset
+    assert server._bind_effective_need_policy is reader._bind_effective_need_policy
+    assert server._mcp_access_trace is reader._mcp_access_trace
