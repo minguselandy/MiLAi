@@ -8,10 +8,10 @@ Goal 类型:                  behavior-preserving cleanup / bounded modularizati
 执行状态:                   ACTIVE — 用户已于 2026-09-21 明确恢复
 前置合同:                   MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 本版作用:                   优化执行节奏、验证分级、CI 触发与剩余 PR 边界
-当前阶段:                   C7 Lab active runner organization final candidate
-当前候选分支:               cleanup/c7-lab-runner-organization
+当前阶段:                   C8 Compatibility/dead-code audit final candidate
+当前候选分支:               cleanup/c8-compatibility-dead-code
 最近权威 full workflow:     Run #57 / 17 jobs success / composition PASS
-当前 base main:             9ff549e8a02ec2ed1a08d65edcbc91679177b144
+当前 base main:             ff51e47b8ae8b861002f3975c23c4ca88cc5106e
 ```
 
 本 Goal 不推翻 v1.0 的行为保持、Source of Truth、Frozen Architecture、历史证据和完成定义。
@@ -137,8 +137,8 @@ STOP STRUCTURAL WORK
 | C4 | MCP Server modularization | COMPLETE — PR #20 merged; fast PR and main identity PASS |
 | C5 | OpenWorker Host modularization | COMPLETE — PR #21 merged; fast PR and main identity PASS |
 | C6 | Test organization | COMPLETE — PR #22 merged; fast PR and main identity PASS |
-| C7 | Lab active code organization | IN PROGRESS — initial thin-runner cohort implemented; candidate validation |
-| C8 | Compatibility/dead-code audit | PENDING |
+| C7 | Lab active code organization | COMPLETE — PR #23 merged; Lab fast PR and main identity PASS |
+| C8 | Compatibility/dead-code audit | IN PROGRESS — audit implemented; static candidate validation |
 | C9 | Current-tree evidence refresh | PENDING |
 | C10 | Final cleanup baseline | PENDING |
 
@@ -800,6 +800,11 @@ paths，0 findings）均通过。
 的 runner 一次性重写。按用户对耗时测试的明确要求，本纯结构 PR 不运行 historical/full
 composition，最终权威回放保留到 C9/C10；也不再重复本地 Lab fast。
 
+PR #23 的最终候选 `12a465c56b5b8911b92c55fb5801fcc65ef89561` 已通过 fast run
+`35628243692`，并 squash merge 为 `ff51e47b8ae8b861002f3975c23c4ca88cc5106e`。候选 tree 与
+merge tree 均为 `8840cdc7474b33c23d4d8de87298e4b8bb3649ff`；main push run
+`35629394947` 的轻量 identity gate PASS。未触发 full composition。
+
 ---
 
 ## 15. C8 — Compatibility 与 dead-code closure
@@ -829,6 +834,30 @@ direct affected tests PASS
 ```
 
 本阶段不默认运行 Runtime PostgreSQL full suite、Lab full 或 historical replay。
+
+### 15.1 2026-09-22 执行记录
+
+`cleanup/c8-compatibility-dead-code` 对五类、六项 compatibility registry 完成逐项 disposition。
+审计结果为 6 项 `RETAIN`、0 项 `DELETE`：所有 public、test 与 historical contract 均超出 C8
+删除权限；唯一 `INTERNAL_TEMPORARY` 候选
+`runtime/src/milai/application/evidence_atoms.py` 仍被 Product acquisition、专门单测和 immutable
+archive material 使用，因此不满足六维 no-consumer 删除条件。
+
+新增 `compatibility-dead-code-audit.json` 与 `COMPATIBILITY_DEAD_CODE_AUDIT.md` 记录 production、
+test、CLI/plugin、active Lab、receipt、archive 六类证据；registry verifier 现在要求每个登记项恰有
+一个 disposition，拒绝删除非 `INTERNAL_TEMPORARY` 条目、仍有 consumer 的条目或没有 blocker
+证据却选择保留的 temporary 条目。新增 `compatibility-audit` validation profile 只编排 Ruff、
+registry audit、三包 collect-only、manifest、receipt、Conformance 与 repository boundary。
+
+当前静态验证确认：6 dispositions、29 receipt nodes、3 support roots、0 sibling-test imports；Runtime
+1,257 nodes、MCP 400 nodes、Python client 210 nodes 均可完整收集。C8 不改业务代码、测试 body、
+DB schema/migration、Lab、sealed fixture 或 historical receipt；不运行 PostgreSQL、行为套件、Lab
+fast、historical replay 或 full composition。
+
+C8 L2 static pre-push 同时确认 changed-scope Ruff、Product manifest（422 files /
+`7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521`）、8 份 behavior
+receipts、Conformance freshness 与 repository boundary（4,350 tracked paths，0 findings）全 PASS。
+后续只 push 最终候选并执行远端 fast PR gate 与 merge-tree identity，不重复 collection。
 
 ---
 
@@ -911,8 +940,8 @@ PR #19  C3 Memory Context final               已验证并合并
 PR #20  C4 MCP Server complete modularization 已验证并合并
 PR #21  C5 OpenWorker Host complete modularization 已验证并合并
 PR #22  C6 test organization + compatibility registry 已验证并合并
-PR #23  C7 Lab active runner organization 本地候选
-PR #24  C8 dead-code / compatibility closure
+PR #23  C7 Lab active runner organization 已验证并合并
+PR #24  C8 dead-code / compatibility closure 本地候选
 PR #25  C9 + C10 evidence refresh/final baseline
 ```
 

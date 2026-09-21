@@ -10,6 +10,7 @@ from typing import Any
 
 PRODUCT_ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = PRODUCT_ROOT / "docs" / "cleanup" / "compatibility-registry.json"
+AUDIT_PATH = PRODUCT_ROOT / "docs" / "cleanup" / "compatibility-dead-code-audit.json"
 REVALIDATION_ROOT = PRODUCT_ROOT / "docs" / "revalidation"
 CATEGORIES = {
     "PUBLIC_API",
@@ -37,6 +38,97 @@ def _read_registry() -> dict[str, Any]:
     if set(payload.get("categories", {})) != CATEGORIES:
         raise ValueError("compatibility registry categories are not the frozen five-category set")
     return payload
+
+
+def _read_audit() -> dict[str, Any]:
+    payload = json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
+    if payload.get("schema_version") != "milai-compatibility-dead-code-audit-v1":
+        raise ValueError("unsupported compatibility dead-code audit schema")
+    if not re.fullmatch(r"[0-9a-f]{40}", str(payload.get("source_commit", ""))):
+        raise ValueError("compatibility dead-code audit requires a full source commit")
+    return payload
+
+
+def _consumer_path(raw_path: str) -> Path:
+    if raw_path.startswith("MiLAi-Lab/"):
+        return PRODUCT_ROOT.parent / raw_path
+    if raw_path.startswith("MiLAi-Artifact-Archive/"):
+        return PRODUCT_ROOT.parent / raw_path
+    return PRODUCT_ROOT / raw_path
+
+
+def _verify_audit(entries: list[dict[str, Any]]) -> dict[str, int]:
+    audit = _read_audit()
+    dispositions = audit.get("dispositions")
+    if not isinstance(dispositions, list):
+        raise TypeError("compatibility dead-code audit dispositions must be a list")
+    by_id: dict[str, dict[str, Any]] = {}
+    for disposition in dispositions:
+        if not isinstance(disposition, dict):
+            raise TypeError("compatibility dead-code dispositions must be objects")
+        entry_id = disposition.get("id")
+        if not isinstance(entry_id, str) or not entry_id or entry_id in by_id:
+            raise ValueError(f"invalid or duplicate audit disposition id: {entry_id!r}")
+        if disposition.get("decision") not in {"RETAIN", "DELETE"}:
+            raise ValueError(f"{entry_id}: invalid audit decision")
+        if not isinstance(disposition.get("reason"), str) or not disposition["reason"]:
+            raise ValueError(f"{entry_id}: audit reason is required")
+        by_id[entry_id] = disposition
+
+    registry_by_id = {entry["id"]: entry for entry in entries}
+    if set(by_id) != set(registry_by_id):
+        raise ValueError(
+            "compatibility audit coverage drift: "
+            f"missing={sorted(set(registry_by_id) - set(by_id))}, "
+            f"extra={sorted(set(by_id) - set(registry_by_id))}"
+        )
+
+    retained_temporary = 0
+    deleted = 0
+    dimensions = {
+        "production_consumers",
+        "test_consumers",
+        "cli_plugin_entrypoints",
+        "lab_consumers",
+        "receipt_consumers",
+        "archive_consumers",
+    }
+    for entry_id, disposition in by_id.items():
+        registry_entry = registry_by_id[entry_id]
+        if disposition.get("category") != registry_entry["category"]:
+            raise ValueError(f"{entry_id}: audit category does not match registry")
+        decision = disposition["decision"]
+        if decision == "DELETE":
+            deleted += 1
+            if registry_entry["category"] != "INTERNAL_TEMPORARY":
+                raise ValueError(f"{entry_id}: only INTERNAL_TEMPORARY may be deleted")
+        if registry_entry["category"] != "INTERNAL_TEMPORARY":
+            continue
+        checks = disposition.get("checks")
+        if not isinstance(checks, dict) or set(checks) != dimensions:
+            raise ValueError(f"{entry_id}: all six consumer dimensions are required")
+        blockers = 0
+        for dimension in sorted(dimensions):
+            references = checks[dimension]
+            if not isinstance(references, list) or not all(
+                isinstance(reference, str) and reference for reference in references
+            ):
+                raise TypeError(f"{entry_id}: {dimension} must contain path strings")
+            blockers += len(references)
+            for reference in references:
+                if not _consumer_path(reference).exists():
+                    raise ValueError(f"{entry_id}: missing {dimension} path {reference!r}")
+        if decision == "DELETE" and blockers:
+            raise ValueError(f"{entry_id}: deletion candidate still has consumers")
+        if decision == "RETAIN":
+            retained_temporary += 1
+            if not blockers:
+                raise ValueError(f"{entry_id}: retained temporary entry lacks blocking evidence")
+    return {
+        "audit_dispositions": len(dispositions),
+        "deleted": deleted,
+        "retained_temporary": retained_temporary,
+    }
 
 
 def _receipt_nodes() -> set[str]:
@@ -144,9 +236,11 @@ def main() -> int:
     sibling_imports = _sibling_test_imports()
     if sibling_imports:
         raise ValueError(f"test modules import sibling tests directly: {sibling_imports}")
+    audit_counts = _verify_audit(entries)
     print(
         json.dumps(
             {
+                **audit_counts,
                 "categories": len(seen_categories),
                 "entries": len(entries),
                 "receipt_nodes": len(receipt_nodes),

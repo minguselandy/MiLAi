@@ -18,6 +18,12 @@ The registry is conservative: being importable does not automatically make a sym
 absence from the registry is not deletion evidence. C8 still requires production, test, CLI/plugin,
 Lab, receipt and archive consumer checks before removing anything.
 
+The completed C8 disposition inventory is
+[`compatibility-dead-code-audit.json`](compatibility-dead-code-audit.json), with rationale in
+[`COMPATIBILITY_DEAD_CODE_AUDIT.md`](COMPATIBILITY_DEAD_CODE_AUDIT.md). No registered entry met the
+six-dimensional deletion rule: the sole `INTERNAL_TEMPORARY` entry remains consumed by Product,
+tests, and immutable archive material.
+
 ## C6 test support boundary
 
 Before C6, ordinary test modules contained 45 direct imports from sibling `test_*.py` modules.
@@ -44,6 +50,7 @@ Run:
 
 ```text
 python3 tools/verify_compatibility_registry.py
+python3 tools/cleanup_validate.py compatibility-audit --level dev
 python3 tools/cleanup_validate.py test-organization --level dev
 ```
 

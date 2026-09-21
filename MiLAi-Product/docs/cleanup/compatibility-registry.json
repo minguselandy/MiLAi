@@ -96,7 +96,7 @@
       "paths": [
         "runtime/src/milai/application/evidence_atoms.py"
       ],
-      "retention": "Explicit transitional alias; C8 may remove it only after production, test, Lab, entrypoint, and receipt consumers are absent."
+      "retention": "C8 audited and retained: active Product acquisition, dedicated tests, and immutable archive references prohibit removal."
     }
   ]
 }
