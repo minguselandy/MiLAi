@@ -38,8 +38,8 @@ Host Continuity 机制。
 | --- | --- | --- |
 | C0 | Baseline + inventory | COMPLETE |
 | C1 | Safe hygiene | COMPLETE — no deletion qualified |
-| C2 | Runtime Retrieval modularization | IN PROGRESS |
-| C3 | Runtime Memory Context modularization | PENDING |
+| C2 | Runtime Retrieval modularization | COMPLETE |
+| C3 | Runtime Memory Context modularization | IN PROGRESS — foundation extraction |
 | C4 | MCP Server modularization | PENDING |
 | C5 | OpenWorker Host modularization | PENDING |
 | C6 | Test organization | PENDING |
@@ -217,6 +217,21 @@ composition 全部 PASS 后才合并。
   通过，远端其余 `1240 passed / 3 skipped` 未受影响。
 - 后续 test-only 修复只在测试 setup 中等待 API/Steward/Worker sessions 确认归零；不修改
   `Database.close()`、backup quiescence gate 或任何 Product 行为，原 pytest node ID 保持不变。
+
+### 2026-09-21 — Retrieval closed and Memory Context foundation started
+
+- backup quiescence test-only PR #16 Run #53 首次即通过 Runtime；17 jobs success，composition
+  实际 PASS；合并后的 `main=77ef5be43c05016d122a128144f635b130b8dc2d`。
+- C2 Retrieval 正式关闭；`retrieval.py` 保持唯一 public orchestration entry，已建立 policy、
+  candidates、temporal、selection、acquisition、operators、assembly、trace 与 bounded
+  finalization seam。
+- 从 exact green `77ef5be...` 创建 `cleanup/08-memory-context-foundation`；按依赖叶先行抽取
+  contracts、common primitives、Reader semantics、provenance 与 Reader unit rendering。
+- 二十五个移动 class/function definition 与 `_OPAQUE_READER_KEYS` 均和基线 AST/constant
+  expression 一致；`milai.application.memory_context` 继续显式 re-export 原 public contract 与
+  underscore compatibility symbols。
+- compiler、windows、ordering、activation、完整 rendering/receipt 路径仍留在原模块；本轮不改
+  Context budget、threshold、selection、serialization、receipt 或 token accounting 语义。
 
 ## Completion rule
 
