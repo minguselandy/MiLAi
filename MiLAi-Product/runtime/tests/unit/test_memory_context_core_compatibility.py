@@ -2,6 +2,7 @@ from milai.application import memory_context
 from milai.application.memory_context_core import (
     activation,
     common,
+    compiler,
     contracts,
     provenance,
     receipts,
@@ -11,6 +12,10 @@ from milai.application.memory_context_core import (
     units,
     windows,
 )
+
+
+def test_memory_context_facade_preserves_compiler() -> None:
+    assert memory_context.MemoryContextCompiler is compiler.MemoryContextCompiler
 
 
 def test_memory_context_facade_preserves_activation_helpers() -> None:
