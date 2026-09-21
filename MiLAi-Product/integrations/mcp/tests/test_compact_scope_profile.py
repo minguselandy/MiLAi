@@ -10,8 +10,8 @@ from milai_mcp.auth_policy import (
     TOOL_SCOPE_ALTERNATIVES,
 )
 from milai_mcp.compact_memory import COMPACT_BACKENDS
-from test_aigcit_http import rpc
-from test_compact_memory import NOTE_REF, compact_edge, tool_call
+from support.compact import NOTE_REF, compact_edge, tool_call
+from support.http import rpc
 
 REQUIRED = frozenset().union(
     *(TOOL_SCOPE_ALTERNATIVES.get(tool, {scope})

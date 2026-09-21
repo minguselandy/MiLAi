@@ -15,9 +15,9 @@ from milai_mcp.auth_policy import (
     AuthDependencyUnavailable,
     private_project_for,
 )
-from test_aigcit_auth import ISSUER, Fixture
-from test_aigcit_http import edge, rpc
-from test_working_state_async import CAPABILITIES, TOKEN
+from support.auth import ISSUER, Fixture
+from support.http import edge, rpc
+from support.working_state import CAPABILITIES, TOKEN
 
 
 @pytest.mark.parametrize("hot_status", [200, 503])

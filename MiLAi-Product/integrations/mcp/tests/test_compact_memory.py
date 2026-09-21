@@ -16,10 +16,10 @@ from milai_mcp.auth_policy import (
 )
 from milai_mcp.compact_memory import COMPACT_BACKENDS
 from milai_mcp.input_contracts import CAPTURE_EXAMPLE
-from test_aigcit_auth import ISSUER
-from test_aigcit_full import private_fixture
-from test_aigcit_http import edge, rpc
-from test_codex_full_profile import CLAIM_ID, EVIDENCE_ID
+from support.auth import ISSUER
+from support.http import edge, rpc
+from support.private_catalog import private_fixture
+from support.profile import CLAIM_ID, EVIDENCE_ID
 
 NOTE_ID = "00000000-0000-4000-8000-000000000099"
 NOTE_REF = {"target": {"kind": "NOTE", "id": NOTE_ID, "version": 1}}

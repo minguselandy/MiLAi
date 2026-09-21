@@ -6,8 +6,8 @@ from mcp.types import CallToolResult, TextContent
 
 from milai_mcp.auth_policy import ALL_SCOPES, AdmissionPolicy
 from milai_mcp.memory_search import memory_search_tool
-from test_aigcit_full import private_fixture
-from test_aigcit_http import edge, rpc
+from support.http import edge, rpc
+from support.private_catalog import private_fixture
 
 
 def result(body):

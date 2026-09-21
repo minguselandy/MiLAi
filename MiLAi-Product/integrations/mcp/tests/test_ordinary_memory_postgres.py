@@ -23,9 +23,8 @@ from milai_mcp.auth_policy import (
     TOOL_SCOPE_ALTERNATIVES,
 )
 from ordinary_memory_fault_proxy import FaultProxy
-from test_aigcit_full import private_fixture
-from test_aigcit_http import edge, rpc
-from test_codex_full_postgres_e2e import (
+from support.http import edge, rpc
+from support.postgres import (
     _RUNTIME_ROOT,
     _create_and_migrate_database,
     _drop_database,
@@ -36,6 +35,7 @@ from test_codex_full_postgres_e2e import (
     _stop_process,
     _wait_ready,
 )
+from support.private_catalog import private_fixture
 
 
 @pytest.mark.skipif(os.environ.get("MILAI_MCP_BASELINE_E2E") != "1", reason="requires owned PG")

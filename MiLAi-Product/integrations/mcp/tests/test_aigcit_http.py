@@ -20,9 +20,9 @@ from milai_mcp.server import (
     _RequestAccessTokenMiddleware,
     build_server,
 )
-from test_aigcit_auth import ISSUER, RESOURCE, Fixture
-from test_codex_full_postgres_e2e import _free_port
-from test_codex_full_profile import _RoleClient
+from support.auth import ISSUER, RESOURCE, Fixture
+from support.postgres import _free_port
+from support.profile import _RoleClient
 
 
 @contextmanager

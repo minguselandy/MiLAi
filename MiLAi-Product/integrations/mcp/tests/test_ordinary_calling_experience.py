@@ -4,8 +4,8 @@ from contextlib import asynccontextmanager
 
 from milai_mcp.auth_policy import ALL_SCOPES, ORDINARY_CATALOG_TOOL_SCOPES
 from milai_mcp.input_contracts import CAPTURE_EXAMPLE
-from test_aigcit_full import private_fixture
-from test_aigcit_http import edge, rpc
+from support.http import edge, rpc
+from support.private_catalog import private_fixture
 
 
 @asynccontextmanager

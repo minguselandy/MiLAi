@@ -23,9 +23,9 @@ from starlette.testclient import TestClient
 from milai_mcp.auth_policy import PILOT_SCOPES, AdmissionPolicy, principal_for
 from milai_mcp.http_transport import HttpResourceBinding
 from milai_mcp.server import CodexFullRuntimeClients, build_server
-from test_aigcit_auth import ISSUER, RESOURCE, Fixture
-from test_aigcit_http import rpc
-from test_codex_full_postgres_e2e import (
+from support.auth import ISSUER, RESOURCE, Fixture
+from support.http import rpc
+from support.postgres import (
     _ROOT,
     _RUNTIME_ROOT,
     _create_and_migrate_database,

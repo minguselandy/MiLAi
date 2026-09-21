@@ -6,8 +6,8 @@ from uuid import uuid4
 
 import psycopg
 import pytest
-from test_projection_worker import _headers, _url
-from test_projection_worker import worker_runtime as worker_runtime
+from support.projection import _headers, _url
+from support.projection import worker_runtime as worker_runtime
 
 pytestmark = pytest.mark.integration
 
