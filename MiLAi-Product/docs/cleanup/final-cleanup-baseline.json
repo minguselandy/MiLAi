@@ -1,10 +1,12 @@
 {
   "schema_version": "milai-codebase-cleanup-final-v1",
-  "status": "FINAL_L4_PASS_PENDING_MERGE_IDENTITY",
+  "status": "COMPLETE",
   "baseline_commit": "798b7cac21957873791afff6122d3f06a82214c5",
   "final_implementation_commit": "432153a0065f6ccc6706d670ba7eafafc002c950",
   "current_evidence_commit": "2803763f47eb846e7c7de68d96758cf23921dcd7",
   "final_candidate_commit": "8f179a76166a9506b4fd9d4688478dd498749dc1",
+  "final_result_merge_commit": "1484d40ef8bd49bcf4795f4d414058cc547765b5",
+  "final_result_merge_tree": "b71d972451612343f864d0ec6db19ad2502a665a",
   "product": {
     "manifest_file_count": 422,
     "manifest_sha256": "7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693",

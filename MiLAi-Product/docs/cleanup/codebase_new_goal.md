@@ -5,13 +5,13 @@
 ```text
 Goal ID:                    MILAI-CODEBASE-CLEANUP-V2
 Goal 类型:                  behavior-preserving cleanup / bounded modularization
-执行状态:                   ACTIVE — 用户已于 2026-09-21 明确恢复
+执行状态:                   COMPLETE — 2026-09-22
 前置合同:                   MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 本版作用:                   优化执行节奏、验证分级、CI 触发与剩余 PR 边界
-当前阶段:                   C10 final L4 PASS; PR #25 merge identity pending
-当前候选分支:               cleanup/c9-c10-final-baseline
+当前阶段:                   C10 COMPLETE — final closure metadata
+当前候选分支:               cleanup/final-closure
 最近权威 full workflow:     Run #60 / ID 35632657133 / 17 jobs success / composition PASS
-当前 base main:             432153a0065f6ccc6706d670ba7eafafc002c950
+当前 base main:             1484d40ef8bd49bcf4795f4d414058cc547765b5
 ```
 
 本 Goal 不推翻 v1.0 的行为保持、Source of Truth、Frozen Architecture、历史证据和完成定义。
@@ -140,7 +140,7 @@ STOP STRUCTURAL WORK
 | C7 | Lab active code organization | COMPLETE — PR #23 merged; Lab fast PR and main identity PASS |
 | C8 | Compatibility/dead-code audit | COMPLETE — PR #24 merged; static fast PR and main identity PASS |
 | C9 | Current-tree evidence refresh | COMPLETE — five current-tree receipts verified |
-| C10 | Final cleanup baseline | IN PROGRESS — final L4 PASS; merge identity pending |
+| C10 | Final cleanup baseline | COMPLETE — PR #25 merged with tested identity; Run #60 PASS |
 
 PR #17 已完成并合并 Memory Context foundation：
 
@@ -987,7 +987,7 @@ PR #21  C5 OpenWorker Host complete modularization 已验证并合并
 PR #22  C6 test organization + compatibility registry 已验证并合并
 PR #23  C7 Lab active runner organization 已验证并合并
 PR #24  C8 dead-code / compatibility closure 已验证并合并
-PR #25  C9 + C10 evidence refresh/final baseline 本地候选
+PR #25  C9 + C10 evidence refresh/final baseline 已验证并合并
 ```
 
 编号是当前规划，不是硬编码依赖；若 GitHub 实际编号变化，以 scope 和 evidence identity 为准。
@@ -1065,42 +1065,42 @@ HEAD 必须重新验证。
 只有以下全部成立，本 Goal 才可标记 `COMPLETE`：
 
 ```text
-[ ] PR #17 已按 tested-tree identity 安全合并
-[ ] fast/full CI 与 validation profiles 已落地并验证
-[ ] Runtime integration marker contract 已建立
+[x] PR #17 已按 tested-tree identity 安全合并
+[x] fast/full CI 与 validation profiles 已落地并验证
+[x] Runtime integration marker contract 已建立
 
-[ ] C3 Memory Context 完成
-[ ] C4 MCP Server 完成
-[ ] C5 OpenWorker Host 完成
-[ ] C6 test organization 完成
-[ ] C7 Lab active runner organization 完成
-[ ] C8 compatibility/dead-code audit 完成
+[x] C3 Memory Context 完成
+[x] C4 MCP Server 完成
+[x] C5 OpenWorker Host 完成
+[x] C6 test organization 完成
+[x] C7 Lab active runner organization 完成
+[x] C8 compatibility/dead-code audit 完成
 
-[ ] public Runtime imports 保持
-[ ] MCP tool/schema 保持
-[ ] CLI/HTTP contracts 保持
-[ ] DB schema/migrations 未改变
-[ ] receipt-referenced node IDs 保持
-[ ] Frozen Architecture 未修改
-[ ] Lab archive/sealed bytes 未修改
-[ ] historical receipts 未改写
+[x] public Runtime imports 保持
+[x] MCP tool/schema 保持
+[x] CLI/HTTP contracts 保持
+[x] DB schema/migrations 未改变
+[x] receipt-referenced node IDs 保持
+[x] Frozen Architecture 未修改
+[x] Lab archive/sealed bytes 未修改
+[x] historical receipts 未改写
 
-[ ] 五项 FIXED TECH_DEBT 已在最终 Product tree 重跑
-[ ] current-tree post-cleanup receipts 已生成
-[ ] Conformance claim 未人为扩大
+[x] 五项 FIXED TECH_DEBT 已在最终 Product tree 重跑
+[x] current-tree post-cleanup receipts 已生成
+[x] Conformance claim 未人为扩大
 
-[ ] Runtime full PASS
-[ ] all integrations PASS
-[ ] Lab fast PASS
-[ ] four historical replay shards PASS
-[ ] Archive PASS
-[ ] Product identity PASS
-[ ] Conformance verifier PASS
-[ ] final composition 实际执行并 PASS
+[x] Runtime full PASS
+[x] all integrations PASS
+[x] Lab fast PASS
+[x] four historical replay shards PASS
+[x] Archive PASS
+[x] Product identity PASS
+[x] Conformance verifier PASS
+[x] final composition 实际执行并 PASS
 
-[ ] cleanup result/module map/final baseline 已生成
-[ ] main == origin/main
-[ ] working tree clean
+[x] cleanup result/module map/final baseline 已生成
+[x] main == origin/main
+[x] working tree clean
 ```
 
 ---
