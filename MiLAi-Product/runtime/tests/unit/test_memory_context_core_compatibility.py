@@ -4,8 +4,10 @@ from milai.application.memory_context_core import (
     common,
     contracts,
     provenance,
+    receipts,
     rendering,
     semantics,
+    trace,
     units,
     windows,
 )
@@ -121,3 +123,21 @@ def test_memory_context_facade_preserves_rendering_helpers() -> None:
     assert memory_context._excerpt_focus is rendering._excerpt_focus
     assert memory_context._excerpt_at is rendering._excerpt_at
     assert memory_context._open_issue_ids is rendering._open_issue_ids
+
+
+def test_memory_context_facade_preserves_receipt_helpers() -> None:
+    assert memory_context._RECEIPT_WINDOW_HEADER is receipts._RECEIPT_WINDOW_HEADER
+    assert memory_context._RECEIPT_ALIAS_HEADER is receipts._RECEIPT_ALIAS_HEADER
+    assert memory_context._evidence_receipt is receipts._evidence_receipt
+    assert memory_context._receipt_mapping is receipts._receipt_mapping
+    assert memory_context._semantic_context_material is receipts._semantic_context_material
+    assert memory_context._requires_multiple_sessions is receipts._requires_multiple_sessions
+
+
+def test_memory_context_facade_preserves_trace_helpers() -> None:
+    assert memory_context._acquired_candidate_trace is trace._acquired_candidate_trace
+    assert memory_context._reader_boundary_trace is trace._reader_boundary_trace
+    assert memory_context._bound_evidence_trace is trace._bound_evidence_trace
+    assert memory_context._admitted_evidence_trace is trace._admitted_evidence_trace
+    assert memory_context._reader_visible_trace is trace._reader_visible_trace
+    assert memory_context._evidence_lifecycle_trace is trace._evidence_lifecycle_trace
