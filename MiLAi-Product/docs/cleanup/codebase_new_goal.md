@@ -8,10 +8,10 @@ Goal 类型:                  behavior-preserving cleanup / bounded modularizati
 执行状态:                   ACTIVE — 用户已于 2026-09-21 明确恢复
 前置合同:                   MiLAi 全仓代码整理与模块化重构执行总指令 v1.0
 本版作用:                   优化执行节奏、验证分级、CI 触发与剩余 PR 边界
-当前阶段:                   PR #18 CI/test cadence optimization
-当前候选 PR:                cleanup/09-ci-test-cadence（本地候选）
-最近权威 workflow:          Run #55 / 17 jobs success / composition PASS
-当前 main:                  5c0415b6c2a962fb4a67aad28a0b512041ad2b07
+当前阶段:                   C3 Memory Context final candidate
+当前候选分支:               cleanup/c3-memory-context-final
+最近权威 full workflow:     Run #57 / 17 jobs success / composition PASS
+当前 base main:             f57cdcf043f81e945b35046913cc7a1df6455777
 ```
 
 本 Goal 不推翻 v1.0 的行为保持、Source of Truth、Frozen Architecture、历史证据和完成定义。
@@ -133,7 +133,7 @@ STOP STRUCTURAL WORK
 | C0 | Baseline + inventory | COMPLETE |
 | C1 | Safe hygiene | COMPLETE |
 | C2 | Runtime Retrieval modularization | COMPLETE |
-| C3 | Runtime Memory Context modularization | IN PROGRESS |
+| C3 | Runtime Memory Context modularization | IN PROGRESS — implementation complete; candidate validation |
 | C4 | MCP Server modularization | PENDING |
 | C5 | OpenWorker Host modularization | PENDING |
 | C6 | Test organization | PENDING |
@@ -504,6 +504,39 @@ commit 6  docs + module map + Product identity
 - L3 fast PR PASS；
 - 一次 L4 full composition PASS。
 
+### 10.5 2026-09-21 执行记录
+
+`cleanup/c3-memory-context-final` 已按六段本地边界完成前五段实现：
+
+```text
+1d2a24d  activation + Evidence views
+8e53223  windows + ordering
+87171f4  rendering + fitting
+7471c3c  receipts + trace projection
+c6d56a1  compiler relocation + facade compatibility
+```
+
+当前结构结果：
+
+```text
+memory_context.py                 3716 → 268 lines
+memory_context_core/compiler.py   orchestration implementation
+memory_context_core/activation.py activation and Evidence views
+memory_context_core/windows.py    window construction and ordering
+memory_context_core/rendering.py  serialization and fitting
+memory_context_core/receipts.py   receipt projections
+memory_context_core/trace.py      lifecycle trace projections
+```
+
+五段 L1 均已通过对应定向用例、changed-scope Ruff 与 strict mypy。对 base
+`f57cdcf043f81e945b35046913cc7a1df6455777` 的本地 AST/constant 比对覆盖 54 个定义与
+10 个常量，兼容调用名归一化后 mismatch 均为 0。详细责任与兼容边界见
+`MEMORY_CONTEXT_MODULE_MAP.md`。
+
+按用户对耗时验证的明确要求，本候选不在本地编辑循环或纯结构提交上运行 historical
+replay；只执行一次 memory-context L2 pre-push 与远端 fast PR gate。L4 是否升级留到最终
+候选或出现真实 behavior-path 风险时决定，不将约 35 分钟回放作为每次结构 PR 的默认门槛。
+
 ---
 
 ## 11. C4 — MCP Server modularization
@@ -727,9 +760,9 @@ composition
 目标路线约八个剩余 PR：
 
 ```text
-PR #17  C3 foundation                         已验证，恢复后先复核并 merge
-PR #18  CI/test cadence optimization          marker + classifier + profiles + fast/full split
-PR #19  C3 Memory Context final
+PR #17  C3 foundation                         已验证并合并
+PR #18  CI/test cadence optimization          已验证并合并
+PR #19  C3 Memory Context final               本地候选
 PR #20  C4 MCP Server complete modularization
 PR #21  C5 OpenWorker Host complete modularization
 PR #22  C6 test organization + compatibility registry

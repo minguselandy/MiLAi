@@ -3782,9 +3782,9 @@
   "source": {
     "crosswalk": "architecture/v1.0/crosswalk.json",
     "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
-    "product_commit": "bc2f4d0586cdfaabffa6886e1ce381ef846e4200",
-    "product_manifest_sha256": "87485bde65b626cd4b8ff4cb033848e2002a43da4daf869992ae4241992b7917",
-    "product_tree_sha256": "9213e11fccdea898d459d0f85a389388867eb0fc6b0652108b87e67730a75e0f"
+    "product_commit": "c6d56a18956d1bd15206794bce7b89c2744f38b1",
+    "product_manifest_sha256": "37ef6f89f90a89204029260858ba65dcc5f11cb616739159a5bf05a67c0c9b5a",
+    "product_tree_sha256": "f7d60b53242f32761a3943a73e6eef287939d777c67a08d6cfbdba73f643753d"
   },
   "status_semantics": {
     "DEVIATION": "The current implementation or evidence mapping differs from the frozen claim.",
