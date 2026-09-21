@@ -1,0 +1,235 @@
+name: MiLAi fast verification
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled]
+    paths:
+      - ".github/**"
+      - "MiLAi-Product/**"
+      - "MiLAi-Lab/**"
+      - "MiLAi-Artifact-Archive/**"
+      - "README.md"
+      - "AGENTS.md"
+      - "SOURCE_OF_TRUTH.md"
+      - "REPO_MAP.md"
+      - "LEGACY_READ_ONLY.md"
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  classify:
+    name: Classify changed paths
+    runs-on: ubuntu-latest
+    outputs:
+      runtime: ${{ steps.changes.outputs.runtime }}
+      mcp: ${{ steps.changes.outputs.mcp }}
+      openworker: ${{ steps.changes.outputs.openworker }}
+      python_client: ${{ steps.changes.outputs.python_client }}
+      hooks: ${{ steps.changes.outputs.hooks }}
+      langgraph: ${{ steps.changes.outputs.langgraph }}
+      autogen: ${{ steps.changes.outputs.autogen }}
+      lab: ${{ steps.changes.outputs.lab }}
+      archive: ${{ steps.changes.outputs.archive }}
+      full_required: ${{ steps.changes.outputs.full_required }}
+      integration_matrix: ${{ steps.changes.outputs.integration_matrix }}
+      integration_count: ${{ steps.changes.outputs.integration_count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Classify the exact event diff
+        id: changes
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          changed_paths="$(mktemp)"
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > "$changed_paths"
+          python3 .github/scripts/classify_changes.py \
+            --paths-file "$changed_paths" \
+            --github-output "$GITHUB_OUTPUT"
+      - name: Test the classifier contract
+        run: python3 .github/scripts/test_classify_changes.py -q
+
+  boundaries:
+    name: Fail-fast source boundaries
+    needs: classify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify root layout, generated paths, nested Git and imports
+        run: python3 MiLAi-Artifact-Archive/tools/verify_boundaries.py
+
+  product-identity:
+    name: Product identity manifest
+    needs: boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify checked-in Product manifest
+        working-directory: MiLAi-Product
+        run: python3 tools/build_product_manifest.py --check
+
+  architecture-conformance:
+    name: Current implementation conformance receipt
+    needs: product-identity
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify frozen architecture lock and current receipt
+        working-directory: MiLAi-Product
+        run: python3 tools/verify_architecture_conformance.py --check
+
+  main-tree-identity:
+    name: Tested PR tree identity
+    if: github.event_name == 'push'
+    needs: boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Match main to its tested pull-request tree
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/verify_main_tree_identity.py
+
+  runtime-fast:
+    name: Product Runtime fast gate
+    if: github.event_name == 'pull_request' && needs.classify.outputs.runtime == 'true'
+    needs: [classify, boundaries]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+      - name: Verify Runtime without PostgreSQL integration collection
+        working-directory: MiLAi-Product/runtime
+        run: |
+          uv sync --frozen --dev --python 3.11
+          uv run ruff check src tests migrations
+          uv run mypy
+          uv run pytest -q tests/unit tests/contract
+          uv build
+
+  product-integrations-fast:
+    name: Product integration fast gate (${{ matrix.package }})
+    if: >-
+      github.event_name == 'pull_request' &&
+      needs.classify.outputs.integration_count != '0'
+    needs: [classify, boundaries]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.classify.outputs.integration_matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+      - name: Verify affected locked integration package
+        working-directory: MiLAi-Product/integrations/${{ matrix.package }}
+        run: |
+          uv sync --frozen --dev --python 3.11
+          uv run ruff check src tests
+          uv run mypy
+          uv run pytest -q
+          uv build
+
+  lab-fast:
+    name: Lab fast gate
+    if: github.event_name == 'pull_request' && needs.classify.outputs.lab == 'true'
+    needs: [classify, boundaries]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+      - name: Verify active Lab package and boundaries
+        working-directory: MiLAi-Lab
+        run: |
+          uv sync --frozen --dev --python 3.11
+          uv run milai-lab-check-boundary
+          uv run milai-lab-check-tools-boundary
+          uv run ruff check src tests tools
+          uv run mypy src/milai_lab
+          uv run pytest -q --maxfail=1 -m 'not regression'
+          uv run python tools/check_legacy_archive.py
+          uv build
+
+  archive-fast:
+    name: Archive validation
+    if: github.event_name == 'pull_request' && needs.classify.outputs.archive == 'true'
+    needs: [classify, boundaries]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Archive indexes
+        run: >-
+          python3 MiLAi-Artifact-Archive/tools/validate_archive.py
+          --archive-root MiLAi-Artifact-Archive
+
+  fast-gate:
+    name: Fast verification gate
+    if: always()
+    needs:
+      - classify
+      - boundaries
+      - product-identity
+      - architecture-conformance
+      - main-tree-identity
+      - runtime-fast
+      - product-integrations-fast
+      - lab-fast
+      - archive-fast
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every selected fast check
+        env:
+          CLASSIFY: ${{ needs.classify.result }}
+          BOUNDARIES: ${{ needs.boundaries.result }}
+          IDENTITY: ${{ needs.product-identity.result }}
+          CONFORMANCE: ${{ needs.architecture-conformance.result }}
+          TREE_IDENTITY: ${{ needs.main-tree-identity.result }}
+          RUNTIME: ${{ needs.runtime-fast.result }}
+          INTEGRATIONS: ${{ needs.product-integrations-fast.result }}
+          LAB: ${{ needs.lab-fast.result }}
+          ARCHIVE: ${{ needs.archive-fast.result }}
+          FULL_REQUIRED: ${{ needs.classify.outputs.full_required }}
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          for result in \
+            "$CLASSIFY" "$BOUNDARIES" "$IDENTITY" "$CONFORMANCE" \
+            "$TREE_IDENTITY" "$RUNTIME" "$INTEGRATIONS" "$LAB" "$ARCHIVE"; do
+            case "$result" in
+              success|skipped) ;;
+              *) echo "selected fast job did not pass: $result" >&2; exit 1 ;;
+            esac
+          done
+          echo "full_required=$FULL_REQUIRED"
