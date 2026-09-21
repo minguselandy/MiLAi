@@ -232,6 +232,15 @@ composition 全部 PASS 后才合并。
   underscore compatibility symbols。
 - compiler、windows、ordering、activation、完整 rendering/receipt 路径仍留在原模块；本轮不改
   Context budget、threshold、selection、serialization、receipt 或 token accounting 语义。
+- 开发候选验证：121 项 Memory Context/compatibility 定向回归通过，Runtime unit suite
+  `1053 passed / 1 skipped`，全包 Ruff 与 strict mypy（219 source files）通过，wheel/sdist
+  build 与 7 路径 distribution snapshot 通过。
+- 新 Product identity：tree SHA-256
+  `9213e11fccdea898d459d0f85a389388867eb0fc6b0652108b87e67730a75e0f`；manifest、
+  boundary、receipt、Frozen Architecture lock 与 current Conformance verifier 均通过，当前
+  Conformance 保持 `9 PASS / 35 UNVERIFIED / 0 DEVIATION`。
+- PostgreSQL Runtime 全套及 Lab/integrations/replay/composition 不在开发提交重复执行；只在本
+  subsystem PR 最终候选触发一次远端 17-job composition。
 
 ## Completion rule
 
