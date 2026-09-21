@@ -110,21 +110,23 @@ def test_budget_adaptation_settles_raw_usage_and_delivers_only_decoded_output(tm
 
 
 def test_total_request_deadline_retains_sent_reservation(tmp_path):
-    config = settings()
-    config["request_timeout_seconds"] = 0.04
+    calls = []
 
     def respond(request):
+        calls.append(request.url.path)
         if request.url.path == "/tokenize":
             return httpx.Response(200, json={"count": 100})
-        time.sleep(0.5)
-        pytest.fail("deadline must interrupt the in-flight response")
+        raise budget.DeadlineExpired("synthetic cancellation after dispatch")
 
-    runner = budget.ResponsesBudget(tmp_path, config, "probe",
+    runner = budget.ResponsesBudget(tmp_path, settings(), "probe",
                                    transport=httpx.MockTransport(respond))
     try:
-        with pytest.raises(budget.DeadlineExpired):
+        with pytest.raises(budget.DeadlineExpired, match="after dispatch"):
             runner.forward({"model": budget.MODEL, "input": "task"})
-        assert len(budget.accounting(budget.read_events(runner.ledger))["pending"]) == 1
+        events = budget.read_events(runner.ledger)
+        assert [event["event"] for event in events] == ["RESERVED", "DISPATCH_ATTEMPT"]
+        assert len(budget.accounting(events)["pending"]) == 1
+        assert calls == ["/tokenize", "/v1/responses"]
     finally:
         runner.close()
 
