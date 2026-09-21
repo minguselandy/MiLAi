@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import shutil
 from pathlib import Path
+from time import monotonic, sleep
 from urllib.parse import urlsplit, urlunsplit
 from uuid import UUID, uuid4
 
@@ -85,9 +86,31 @@ def _runtime(settings: RuntimeSettings, database: str):  # type: ignore[no-untyp
     return app, api_database, steward_database, worker_database
 
 
-def _close(*databases: Database) -> None:
+def _close_and_wait_for_quiescence(
+    owner_database_url: str,
+    *databases: Database,
+) -> None:
     for database in databases:
         database.close()
+    deadline = monotonic() + 5.0
+    while True:
+        with psycopg.connect(owner_database_url) as connection:
+            rows = connection.execute(
+                """
+                SELECT usename, count(*)
+                FROM pg_stat_activity
+                WHERE datname = current_database()
+                  AND usename = ANY(%s)
+                GROUP BY usename
+                ORDER BY usename
+                """,
+                (["milai_api", "milai_steward", "milai_worker"],),
+            ).fetchall()
+        if not rows:
+            return
+        if monotonic() >= deadline:
+            pytest.fail(f"runtime database sessions did not quiesce after close: {rows!r}")
+        sleep(0.01)
 
 
 def _headers(key: str | None = None) -> dict[str, str]:
@@ -218,7 +241,12 @@ def test_consistency_backup_restore_and_deletion_expiry_reconciliation(
         assert deleted.status_code == 200
         episode_id = _capture_and_settle_episode(client, evidence_id)
         _run_worker(settings, worker_database)
-        _close(api_database, steward_database, worker_database)
+        _close_and_wait_for_quiescence(
+            source_owner,
+            api_database,
+            steward_database,
+            worker_database,
+        )
 
         first = create_backup(
             settings,
@@ -252,7 +280,12 @@ def test_consistency_backup_restore_and_deletion_expiry_reconciliation(
         assert revoke.status_code == 202
         deletion_request_id = str(revoke.json["deletion_request_id"])
         _run_worker(settings, worker_database)
-        _close(api_database, steward_database, worker_database)
+        _close_and_wait_for_quiescence(
+            source_owner,
+            api_database,
+            steward_database,
+            worker_database,
+        )
 
         with psycopg.connect(source_owner) as owner:
             statuses = owner.execute(
