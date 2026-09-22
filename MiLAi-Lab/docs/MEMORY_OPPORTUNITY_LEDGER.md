@@ -1,6 +1,7 @@
 # Memory Opportunity Ledger v1
 
-Status: implementation and offline proof; real bounded-run proof pending.
+Status: implementation, offline matrix and real bounded-run proof PASS locally;
+exact-head CI and remote closure pending.
 Work package: `MILAI-POST-CLEANUP-DEVELOPMENT-01 / 3B-2`. Lab-only accounting,
 not Product routing, a research allocation or a mechanism-benefit claim.
 
@@ -121,4 +122,40 @@ The 107 targeted tests passed. The first added cache test had a test-module impo
 collection error; correcting the import required no production change. Changed
 Ruff/mypy and both boundaries pass. CLI `--help` passes in the pinned public-testkit
 environment. No Product suite, model request, historical replay or full composition
-is needed for this Lab-only increment. Actual run identity/results remain pending.
+is needed for this Lab-only increment.
+
+## Actual bounded execution, 2026-09-22
+
+[Compact proof manifest](../data/manifests/memory-opportunity-ledger-proof-20260922.json)
+binds source `7dbaeeca27f3515542f111bdb0ab699e0cbf7982`, the unchanged Product tree
+`847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311`, verified
+run-specific lock and all five method-source digests. Raw artifacts are outside Git
+at `/cra/memory/mx_memory/evidence/post-cleanup-3b2-20260922-PSUMpe/claim-cache`.
+
+The actual chain passed: 10 Host attempts, 9 fixture invocations, 5 fresh Runtime
+reads, 5 cache validations, 4.696 seconds. Ten snapshots were persisted before their
+outcomes; original owner facts and observation inputs deterministically regenerate
+the exact saved ledger. Governed Canonical supersession invalidates the original
+cache and yields a fresh exact version, followed by actual validated reuse.
+
+Funnel: 2 logical query tasks / 10 attempts; 7 with memory available; 0 multi-choice
+selection opportunities; 5 with known exposure. All task outcomes and observable
+use stay UNKNOWN. All 10 attempts remain in accounting despite the zero selection
+denominator. The controlled fixture reports 30 input / 18 output units, with 3
+failed/unknown requests retaining unknown usage. Embedding counters are not exported
+and remain null on every row; zero model requests/tokens is not used to fabricate
+zero embedding calls. There is no matched mechanism or quality-effect claim.
+
+This run proves real pre-outcome capture and fresh/cache accounting. The additional
+multiple-choice, supported-use and revision-effect cases remain **simulation-only**
+proof, explicitly separated in the manifest; no synthetic support is attached to the
+real rows. New model research requires the Phase 3C preflight and finite authority.
+
+Only the dedicated synthetic database container was started; migration
+`0056_host_notes` and role-separated connections were checked. It was stopped after
+execution with data retained. The newly generated capability file was removed;
+public/shared services and Product executable source were unchanged.
+
+Reproduction uses the existing trace-probe command with the exact source commit
+above plus `--canonical-cache --opportunity-ledger`, fresh output and isolated role
+URLs. Do not reuse a historical random port without inspecting the container.

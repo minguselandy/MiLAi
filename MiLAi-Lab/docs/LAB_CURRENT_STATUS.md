@@ -27,10 +27,13 @@ Separate [3A-3R partial repair](../../MiLAi-Product/docs/revalidation/resolver-l
 now has 28 PASS/2 FAIL on the unchanged corpus (client 20/2; Runtime 8/0), with
 113 adjacent/diagnostic tests PASS and 2 XFAIL. Debt stays OPEN; PR #38/full #64
 (17 jobs), identical-tree merge `8c0c526` and main fast `35713661491` passed.
-3B-2 independently enters from 3B-1 PASS, with real ledger proof still pending.
+3B-2 independently enters from 3B-1 PASS; real ledger proof passes locally,
+with exact-head CI and remote closure still pending.
 The [ledger contract](MEMORY_OPPORTUNITY_LEDGER.md) and pre-outcome recorder are implemented;
 107 targeted tests, changed static checks, both import boundaries and CLI smoke pass.
-These are offline engineering results, not real-run or mechanism-benefit evidence.
+The separate actual run has 10 Host attempts / 9 fixture calls / 4.696 s, with
+pre-outcome snapshots and reproducible accounting; 0 model requests. Task outcomes
+and use stay UNKNOWN, with 0 selection opportunities; no mechanism benefit is claimed.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.

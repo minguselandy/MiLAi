@@ -228,7 +228,7 @@ NEEDS_REVALIDATION
 | 3A-2R | Host Continuity remediation | Product | conditional | PASS — PR #36 / full #63 / main identity verified | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | FAIL_REMEDIATION_REQUIRED — PR #37 / main identity verified; 17 PASS / 13 FAIL retained | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | FAIL_REMEDIATION_REQUIRED — partial repair merged PR #38/full #64; C06/C21 remain OPEN, not full closure | 3A-3D FAIL |
-| 3B-2 | Memory Opportunity Ledger | Lab | no | IN_PROGRESS — independent entry gate 3B-1 PASS; real ledger proof pending | 3B-1 PASS |
+| 3B-2 | Memory Opportunity Ledger | Lab | no | IN_PROGRESS — offline matrix and real pre-outcome ledger proof PASS; exact-head CI/remote closure pending | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | PENDING | 3B-2 real-run proof |
 | 3C-2 | Evidence-grounded Revision | Lab | no | PENDING | 3B-2 + lineage |
 | 3C-3 | State-guided Attention | Lab | no | PENDING | 3B-2 + frozen state |
@@ -840,6 +840,25 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Opportunity Ledger local proof, real capture and explicit limits
+
+- [Lab contract](../../../MiLAi-Lab/docs/MEMORY_OPPORTUNITY_LEDGER.md) and
+  [compact proof](../../../MiLAi-Lab/data/manifests/memory-opportunity-ledger-proof-20260922.json)
+  bind source `7dbaeeca27f3515542f111bdb0ab699e0cbf7982`; Product executable tree
+  unchanged. Pure ledger, validated raw owner exports and opt-in pre-outcome capture
+  retain exact versions, cache origins, ordered exposures, failure costs and UNKNOWNs.
+- 107 targeted tests, changed Ruff/mypy, two Lab boundaries and CLI smoke PASS.
+  One real isolated MCP/HTTP/PG/Host run: 10 attempts, 9 fixture calls, 4.696 s;
+  all pre-outcome snapshots persisted, exact ledger recomputation PASS. Model calls,
+  model tokens and research allocations 0. Dedicated DB stopped with data retained.
+- Actual funnel has 7 available / 5 exposed attempts / 0 selection opportunities.
+  Task outcomes/use remain UNKNOWN; 3 requests have unknown fixture usage and all
+  embedding counters remain explicitly unobserved. Multiple-choice, supported-use
+  and revision-effect cases are simulation-only, not relabeled real model evidence.
+- 3B-2 remains IN_PROGRESS until fast CI, expected-head merge, candidate/merge tree
+  and main identity pass. No Product full or historical replay rerun is required.
+  Phase 3C needs separate finite inputs/budget/stop authority before model work.
 
 ## 2026-09-22 — Partial Resolver repair merged; independent Opportunity Ledger entered
 
