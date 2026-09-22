@@ -225,7 +225,7 @@ NEEDS_REVALIDATION
 | 3A-1 | Worker `--once` revalidation | Product evidence | expected no | PASS — PR #28 / main identity verified | 3A-0 |
 | 3B-1 | Trace Ownership v1/v2 | Product/testkit + Lab | small/contractual | PASS — scoped receipt / PR #34 / main identity verified | 3A-0 |
 | 3A-2D | Host Continuity diagnosis | Product evidence | no | DIAGNOSED_FAIL — PR #35 / main identity verified; native replay OPEN / cache-miss FIXED | 3B-1 vocabulary |
-| 3A-2R | Host Continuity remediation | Product | conditional | IN_PROGRESS — separate retired-instance replay repair | 3A-2D FAIL |
+| 3A-2R | Host Continuity remediation | Product | conditional | IN_PROGRESS — local 26-test proof PASS; final composition/remote pending | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | PENDING | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | NOT_ADMITTED | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PENDING | 3B-1 PASS |
@@ -840,6 +840,24 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Native retirement guard repaired; final-candidate gates pending
+
+- [ADR-057](../adr/ADR-057-retired-native-host-instance-rejection.md) and seven source
+  lines retain/reject retired native IDs under the existing lock, before graph mutation
+  and tool-continuation handling. Runtime memory/caching, permission, Canonical, schema,
+  migration and Provider budgets are unchanged. No Lab source changes.
+- Source `faf3922c2b1d037f0c3a019dd1bbaf6dc059be15`, Product tree
+  `08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2`:
+  24 native tests PASS / 0 XFAIL, plus 2 real MCP/HTTP/PG recovery cases PASS.
+  Four fresh Host processes / 10 attempts / 8 controlled fixture calls. Changed Ruff/mypy pass.
+- [Separate remediation receipt](../revalidation/host-continuity/REMEDIATION.md) gives
+  SCOPED G9/G7 evidence. Original diagnosis and cache-miss receipts retain their old
+  identities. Local debt is `9 FIXED / 1 NEEDS_REVALIDATION / 0 OPEN`, not a merged
+  work-package completion claim. New Product manifest does not rebind old receipts.
+- Owned processes/DB stopped with data retained; model requests/tokens/allocations 0.
+  L4 is required once on the final material behavior candidate. No local full-suite or
+  historical-replay duplicate; no intermediate L4 run. 3A-2R remains IN_PROGRESS.
 
 ## 2026-09-22 — Host diagnosis merged; separate native-instance remediation entered
 

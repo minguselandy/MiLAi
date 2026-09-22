@@ -36,7 +36,7 @@ remains the historical cleanup identity. Prior receipt bytes are unchanged.
 | OpenWorker HTTP auth/exposure | `FIXED` | [`openworker-http-exposure/REVALIDATION.md`](openworker-http-exposure/REVALIDATION.md) |
 | worker `--once` docs/behavior (Phase 3A-1) | `FIXED` | [`worker-once/REVALIDATION.md`](worker-once/REVALIDATION.md) |
 | Runtime / Host / Provider ownership (Phase 3B-1, serial query-first testkit) | `FIXED` | [`trace-ownership/REVALIDATION.md`](trace-ownership/REVALIDATION.md) |
-| process-local task continuity/state (Phase 3A-2D) | `OPEN` | [`host-continuity/REVALIDATION.md`](host-continuity/REVALIDATION.md), original native-instance replay failures retained |
+| process-local task continuity/state (Phase 3A-2D/R) | `FIXED` (local candidate) | [`host-continuity/REMEDIATION.md`](host-continuity/REMEDIATION.md); original [`FAIL diagnosis`](host-continuity/REVALIDATION.md) retained |
 | cache-miss Host continuation (Phase 3A-2D, scoped) | `FIXED` | [`host-continuity/cache-miss.receipt.json`](host-continuity/cache-miss.receipt.json) |
 
 The five Phase 2 rows also have a `post-cleanup.receipt.json` bound to the final cleanup Product identity.
@@ -67,5 +67,7 @@ receipts matching the current Product manifest/tree contribute current
 Conformance claims.
 
 Phase 3A-2D adds separate native-continuity FAIL and cache-miss PASS receipts without
-changing Product executable identity. Native repair requires its own remediation
-receipt; diagnosis and strict expected failures are not silently upgraded to PASS.
+changing Product executable identity. Phase 3A-2R changes the native guard and adds
+its own current-tree remediation receipt; the old receipts remain historical. Original
+failure assertions now pass without XFAIL, and real recovery was rerun on the repaired
+tree. Full composition/remote closure remain separate from local scoped proof.

@@ -1227,48 +1227,21 @@
           "execution_receipts": [
             {
               "coverage": "SCOPED",
-              "covered_statement": "Host cache loss or restart cannot authorize offline CURRENT Context: memory is reacquired or validated by Runtime, and unavailable Runtime blocks exposure.",
-              "debt_id": "cache-miss-host-continuation",
+              "covered_statement": "On the repaired Host tree, restart/cache miss reacquires Runtime-authorized exact persisted memory, and unavailable Runtime prevents offline Context exposure.",
+              "debt_id": "process-local-task-continuity",
               "execution_status": "PASS",
               "limits": [
-                "Does not fix or cover the retired-native-instance replay defect.",
-                "Serial query-first path plus compatibility retained-slot negative controls; not streaming/concurrent/production continuity.",
-                "Reuses unchanged-tree scope/canonical validation evidence from trace-ownership receipt rather than rerunning it.",
-                "No model use, efficacy or broad protected-Context conformance claim."
+                "Serial query-first plus compatibility missing-slot negatives, not complete protected Context/answer lineage conformance.",
+                "Controlled Provider fixture only; no observed model use, efficacy or concurrent streaming claim."
               ],
               "negative_case_ids": [
-                "CACHE-NEG-OFFLINE",
-                "CACHE-NEG-OLD"
+                "REPAIR-NEG-OFFLINE",
+                "REPAIR-NEG-IDENTITY"
               ],
               "positive_case_ids": [
-                "CACHE-POS-RESTART",
-                "CACHE-POS-VALIDATION"
+                "REPAIR-POS-RECOVERY"
               ],
-              "receipt": "docs/revalidation/host-continuity/cache-miss.receipt.json",
-              "status": "PASS"
-            },
-            {
-              "coverage": "SCOPED",
-              "covered_statement": "For opt-in serial query-first tracing, the exact governed Context/version selection and dispatched exposure bind to actual Runtime/MCP/Host requests; validated cache reuse retains its original retrieval and uses the current authorized invocation. Exposure never implies model use.",
-              "debt_id": "trace-ownership",
-              "execution_status": "PASS",
-              "limits": [
-                "Not full protected Context or answer-lineage conformance.",
-                "No stream/concurrent observation or cross-process Host continuity claim.",
-                "Controlled Provider fixtures establish dispatch/native/usage plumbing, not model semantics or benefit.",
-                "Evidence and canonical Claim versions only; State/Note exports and Opportunity Ledger are outside this receipt."
-              ],
-              "negative_case_ids": [
-                "TRACE-NEG-SCOPE",
-                "TRACE-NEG-IDENTITY",
-                "TRACE-NEG-DISPATCH"
-              ],
-              "positive_case_ids": [
-                "TRACE-POS-FRESH",
-                "TRACE-POS-CACHE",
-                "TRACE-POS-HOST"
-              ],
-              "receipt": "docs/revalidation/trace-ownership/receipt.json",
+              "receipt": "docs/revalidation/host-continuity/remediation.receipt.json",
               "status": "PASS"
             }
           ],
@@ -1568,31 +1541,32 @@
           }
         ],
         "verification": {
-          "behavioral_execution": "FAIL",
+          "behavioral_execution": "SCOPED",
           "execution_receipts": [
             {
               "coverage": "SCOPED",
-              "covered_statement": "Replacing a native Host instance must not reactivate the retired execution graph or replay its old operation.",
+              "covered_statement": "Replacing a native Host instance permanently retires the old graph for that Adapter lifetime; retired instance replay is rejected without damaging legitimate continuation/replacement.",
               "debt_id": "process-local-task-continuity",
-              "execution_status": "FAIL",
+              "execution_status": "PASS",
               "limits": [
-                "Scoped native Host replace/recovery behavior, not a broad Architecture DEVIATION decision.",
-                "Runtime reauthorization still occurs; no unauthorized canonical mutation or memory exposure is demonstrated.",
-                "A separate remediation branch and receipt are required."
+                "Process-local Host recovery/replay only, not full G9 or production readiness.",
+                "Retired identities remain in memory for the registry lifetime; not a persistence feature or a long-lived resource-pressure benchmark.",
+                "Original failed diagnosis receipt remains immutable."
               ],
               "negative_case_ids": [
-                "NATIVE-NEG-RETIRED"
+                "REPAIR-NEG-RETIRED",
+                "REPAIR-NEG-IDENTITY"
               ],
               "positive_case_ids": [
-                "NATIVE-POS-BOUND",
-                "NATIVE-POS-RESTART"
+                "REPAIR-POS-CURRENT",
+                "REPAIR-POS-RECOVERY"
               ],
-              "receipt": "docs/revalidation/host-continuity/receipt.json",
-              "status": "FAIL"
+              "receipt": "docs/revalidation/host-continuity/remediation.receipt.json",
+              "status": "PASS"
             }
           ],
           "method": "identity-bound behavior revalidation receipt",
-          "reason": "A current behavior gap was reproduced. The frozen item remains UNVERIFIED because the receipt does not itself assert an architecture DEVIATION."
+          "reason": "The receipts prove scoped subclaims; the frozen item remains UNVERIFIED until a COMPLETE claim covers it."
         }
       }
     ],
@@ -3852,9 +3826,9 @@
   "source": {
     "crosswalk": "architecture/v1.0/crosswalk.json",
     "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
-    "product_commit": "6712e800ef28189f191eb313108a6b8d86b3d795",
-    "product_manifest_sha256": "0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae",
-    "product_tree_sha256": "22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a"
+    "product_commit": "faf3922c2b1d037f0c3a019dd1bbaf6dc059be15",
+    "product_manifest_sha256": "44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352",
+    "product_tree_sha256": "08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2"
   },
   "status_semantics": {
     "DEVIATION": "The current implementation or evidence mapping differs from the frozen claim.",

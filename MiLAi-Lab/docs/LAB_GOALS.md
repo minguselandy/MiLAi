@@ -9,6 +9,8 @@ the Claim/cache follow-up closed in PR #34, main fast `35683815988` PASS.
 3A-2D Host diagnosis closed through PR #35/main fast `35685136321`: retired-instance
 replay OPEN, cache-miss continuation FIXED. Active work is the separate 3A-2R
 retired-instance repair; original diagnostic evidence is retained.
+Local repair proof now passes without XFAIL. Wait for the final-candidate composition,
+merge and main identity gates before closing 3A-2R; no research allocation follows.
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).

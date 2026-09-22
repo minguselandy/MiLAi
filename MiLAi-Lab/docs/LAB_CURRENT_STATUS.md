@@ -17,6 +17,9 @@ The [local Host result](../../MiLAi-Product/docs/revalidation/host-continuity/RE
 finds retired-instance replay OPEN, while real restart/cache-miss reacquisition passes.
 Diagnosis PR #35 is merged (`e760434`, main fast `35685136321` PASS). Separate
 retired-instance remediation is now active; no Lab experiment is resumed.
+The [local repaired tree](../../MiLAi-Product/docs/revalidation/host-continuity/REMEDIATION.md)
+passes 24 native tests and 2 real PG recovery cases; final composition and remote closure
+are pending. The Product identity changed; prior research pins remain historical.
 
 The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md)
 is now the cross-bundle coordination contract. Its immediate work is Product behavioral closure and

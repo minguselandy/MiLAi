@@ -9,26 +9,27 @@
 
 - Reconciled repository `main`: `e7604346471593127f09dbae321e95f018d2fa13`; Git tree
   `fe157cd172946f83b8d6fafc21c600fb967ad881`; main fast `35685136321` passed.
-- Final 3B-1 test source: `519ba02bbedc7507237bb78267679ef0cf62cf71`; PR #34 is closed.
+- Local 3A-2R candidate source: `faf3922c2b1d037f0c3a019dd1bbaf6dc059be15`;
+  final composition and remote closure pending.
   Product identity: 425 files; manifest SHA
-  `0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae`; Product tree
-  `22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a`.
-  [Scoped receipt](revalidation/trace-ownership/REVALIDATION.md): 47 Product tests (8 real PG),
-  76 Lab tests, and actual fresh Evidence / Claim-cache cross-layer proofs. Streaming,
-  concurrency, cross-process continuity and model use/benefit are not claimed.
+  `44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352`; Product tree
+  `08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2`.
+  [Scoped repair receipt](revalidation/host-continuity/REMEDIATION.md): 24 native tests
+  and 2 real PG recovery cases pass, without XFAIL; 4 fresh Host processes / 10 attempts.
+  Streaming/concurrent continuation and model use/benefit are not claimed.
 - Cleanup C0–C10 is complete. The authoritative final composition is Run #60 / ID
   `35632657133`: 17 jobs passed, including Runtime/PostgreSQL, all six integrations, Lab fast,
   four historical replay shards, Archive, Product identity and Conformance.
 - Frozen Architecture remains version 1.0.0 and immutable. The current implementation map is
   `9 PASS / 35 UNVERIFIED / 0 DEVIATION`; overall status remains honestly `UNVERIFIED`.
   The prior `10/34/0` map was bound to the cleanup Product identity. Adding the explicit
-  testkit changes the global manifest; its 14 earlier behavior receipts remain historical.
-  Trace ownership and the new Host diagnoses contribute three current SCOPED claims,
-  including one failed native-replay diagnostic. No old receipt was rewritten and
-  no new behavior failure is implied. Unrelated behavior suites were not rerun for this addition.
-- `docs/TECH_DEBT.md` currently records `8 FIXED / 1 NEEDS_REVALIDATION / 1 OPEN` after
-  [Host continuity diagnosis](revalidation/host-continuity/REVALIDATION.md).
-  Native retired-instance replay is OPEN; cache-miss continuation is FIXED for its scoped proof.
+  testkit and later native guard change the global manifest; 17 prior receipts are historical.
+  The new Host remediation receipt contributes two current SCOPED claims (G9/G7),
+  with zero current failures and four preserved historical diagnostics. No old receipt
+  was rewritten; full composition remains pending for this material behavior candidate.
+- `docs/TECH_DEBT.md` locally records `9 FIXED / 1 NEEDS_REVALIDATION / 0 OPEN` after
+  [Host continuity remediation](revalidation/host-continuity/REMEDIATION.md).
+  The repair is a tested local candidate, not yet a merged/final-composition closure.
   `NEEDS_REVALIDATION` is not a defect classification and must be resolved by executable diagnosis.
 - The current coordinating contract is the
   [post-cleanup development Goal](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
@@ -47,8 +48,8 @@
   [3A-2D Host continuity diagnosis](revalidation/host-continuity/REVALIDATION.md) closed in
   PR #35: 18 native controls PASS / 2 FAIL; 2 real PG chains PASS (4 Host processes,
   10 attempts). Exact-head fast `35685033957`, merge-tree and main identity passed.
-  Active work is separate 3A-2R retired-instance replay remediation; the debt remains
-  OPEN until a distinct repair receipt and remote closure prove it fixed.
+  Active work is separate 3A-2R retired-instance replay remediation; local scoped proof
+  passes and a distinct repair receipt exists. Final composition/remote closure remain.
   This is not real model use or a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior

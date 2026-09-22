@@ -1,0 +1,185 @@
+{
+  "schema_version": "milai-behavior-revalidation-v1",
+  "debt_id": "process-local-task-continuity",
+  "state": "FIXED",
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "faf3922c2b1d037f0c3a019dd1bbaf6dc059be15",
+    "git_tree": "778b9ef41f1e06ef1671d77b15b17d03b542668f",
+    "product_manifest_sha256": "44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352",
+    "product_tree_sha256": "08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2"
+  },
+  "decision": {
+    "state": "FIXED",
+    "rationale": "Retired native instance IDs are rejected under the existing lock before generation/session/operation state mutation, including tool continuation. Original failure assertions now pass; current/new instance and real restart/cache-miss recovery are preserved. Local scoped proof; final composition/remote closure still pending."
+  },
+  "remediates": "docs/revalidation/host-continuity/receipt.json",
+  "execution": {
+    "status": "PASS",
+    "verified_at": "2026-09-22T04:04:36Z",
+    "passed": 26,
+    "failed": 0,
+    "skipped": 0,
+    "xfailed": 0,
+    "duration_seconds": 12.48,
+    "real_chain_host_processes": 4,
+    "real_chain_host_attempts": 10,
+    "real_chain_fixture_invocations": 8,
+    "model_requests": 0,
+    "experiment_allocations": 0,
+    "full_composition": "PENDING",
+    "remote_closure": "PENDING"
+  },
+  "environment": {
+    "database": "milai_worker_once",
+    "postgresql_version": "16.14",
+    "migration_head": "0056_host_notes",
+    "container": "milai-3a1-worker-once-20260922",
+    "endpoint": "127.0.0.1:32797",
+    "provider": "CONTROLLED_FIXTURE",
+    "embedding": "deterministic_hash",
+    "data": "isolated synthetic tenants; API/Steward/worker roles",
+    "stopped_data_retained": true
+  },
+  "reproduction": {
+    "working_directory": "MiLAi-Product/integrations/openworker-mcp",
+    "required_environment": [
+      "MILAI_TEST_API_DATABASE_URL",
+      "MILAI_TEST_STEWARD_DATABASE_URL",
+      "MILAI_TEST_WORKER_DATABASE_URL"
+    ],
+    "commands": [
+      {
+        "command": ".venv/bin/pytest -q tests/test_host_continuity_diagnosis.py tests/test_task_binding.py tests/test_adapter.py::test_goal_scope_and_profile_switches_rebind_and_invalidate_task_key tests/test_host_adapter.py::test_unchanged_context_without_retained_host_slot_fails_closed tests/test_http_exposure_revalidation.py::test_adapter_restart_rotates_process_lifetime_capability --tb=short --junitxml=<new-private-native.xml>",
+        "status": "PASS",
+        "exit_code": 0,
+        "result": "24 PASS / 0 skips / 0 XFAIL, 1.41 seconds"
+      },
+      {
+        "command": "uv run --frozen --offline --project ../../../MiLAi-Lab --with-editable ../../runtime --with-editable ../python-client --with-editable . python -m pytest -q tests/test_host_continuity_pg.py --tb=short --basetemp=<new-private-pg-directory> --junitxml=<new-private-pg.xml>",
+        "status": "PASS",
+        "exit_code": 0,
+        "result": "2 PASS / 0 skips, 11.07 seconds"
+      }
+    ],
+    "tests": [
+      "integrations/openworker-mcp/tests/test_task_binding.py::test_native_session_registry_continues_only_within_one_plugin_process",
+      "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_retired_instance_rejection_preserves_current_graph_and_new_replacements",
+      "integrations/openworker-mcp/tests/test_host_continuity_pg.py::test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed",
+      "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_retired_host_instance_cannot_replay_an_old_operation",
+      "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_retired_host_replay_is_rejected_before_mcp_and_provider",
+      "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_cached_locator_never_authorizes_offline_provider_dispatch",
+      "integrations/openworker-mcp/tests/test_host_adapter.py::test_unchanged_context_without_retained_host_slot_fails_closed",
+      "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_actual_adapter_rejects_duplicate_before_mcp_and_provider",
+      "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_new_host_registry_does_not_bind_old_execution_token",
+      "integrations/openworker-mcp/tests/test_task_binding.py::test_delayed_result_binds_to_invocation_task_after_lane_switch",
+      "integrations/openworker-mcp/tests/test_task_binding.py::test_old_execution_token_is_orphaned_after_same_id_aba_rebind",
+      "integrations/openworker-mcp/tests/test_adapter.py::test_goal_scope_and_profile_switches_rebind_and_invalidate_task_key",
+      "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_adapter_restart_rotates_process_lifetime_capability"
+    ]
+  },
+  "positive_cases": [
+    {
+      "case_id": "REPAIR-POS-CURRENT",
+      "description": "Active instance continues; legitimate replacements start fresh generations.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_task_binding.py::test_native_session_registry_continues_only_within_one_plugin_process",
+        "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_retired_instance_rejection_preserves_current_graph_and_new_replacements"
+      ]
+    },
+    {
+      "case_id": "REPAIR-POS-RECOVERY",
+      "description": "Fresh Host processes reacquire exact persisted Claim through actual MCP/HTTP/PG, with receipt-hit and cache-miss controls.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_host_continuity_pg.py::test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed"
+      ]
+    }
+  ],
+  "negative_cases": [
+    {
+      "case_id": "REPAIR-NEG-RETIRED",
+      "description": "Retired instance is rejected before state mutation or MCP/Provider dispatch, including fresh operation/session and tool continuation.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_retired_host_instance_cannot_replay_an_old_operation",
+        "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_retired_host_replay_is_rejected_before_mcp_and_provider",
+        "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_retired_instance_rejection_preserves_current_graph_and_new_replacements"
+      ]
+    },
+    {
+      "case_id": "REPAIR-NEG-OFFLINE",
+      "description": "Stopped Runtime blocks Provider despite retained locator; compatibility absent or mismatched Context slot fails closed.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_host_continuity_pg.py::test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed",
+        "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_cached_locator_never_authorizes_offline_provider_dispatch",
+        "integrations/openworker-mcp/tests/test_host_adapter.py::test_unchanged_context_without_retained_host_slot_fails_closed"
+      ]
+    },
+    {
+      "case_id": "REPAIR-NEG-IDENTITY",
+      "description": "Ordinary duplicate, old token, delayed result, ABA, scope/profile and rotated HTTP capability controls remain safe.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_actual_adapter_rejects_duplicate_before_mcp_and_provider",
+        "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_new_host_registry_does_not_bind_old_execution_token",
+        "integrations/openworker-mcp/tests/test_task_binding.py::test_delayed_result_binds_to_invocation_task_after_lane_switch",
+        "integrations/openworker-mcp/tests/test_task_binding.py::test_old_execution_token_is_orphaned_after_same_id_aba_rebind",
+        "integrations/openworker-mcp/tests/test_adapter.py::test_goal_scope_and_profile_switches_rebind_and_invalidate_task_key",
+        "integrations/openworker-mcp/tests/test_http_exposure_revalidation.py::test_adapter_restart_rotates_process_lifetime_capability"
+      ]
+    }
+  ],
+  "conformance_claims": [
+    {
+      "architecture_id": "G9",
+      "coverage": "SCOPED",
+      "status": "PASS",
+      "covered_statement": "Replacing a native Host instance permanently retires the old graph for that Adapter lifetime; retired instance replay is rejected without damaging legitimate continuation/replacement.",
+      "positive_case_ids": [
+        "REPAIR-POS-CURRENT",
+        "REPAIR-POS-RECOVERY"
+      ],
+      "negative_case_ids": [
+        "REPAIR-NEG-RETIRED",
+        "REPAIR-NEG-IDENTITY"
+      ],
+      "limits": [
+        "Process-local Host recovery/replay only, not full G9 or production readiness.",
+        "Retired identities remain in memory for the registry lifetime; not a persistence feature or a long-lived resource-pressure benchmark.",
+        "Original failed diagnosis receipt remains immutable."
+      ]
+    },
+    {
+      "architecture_id": "G7",
+      "coverage": "SCOPED",
+      "status": "PASS",
+      "covered_statement": "On the repaired Host tree, restart/cache miss reacquires Runtime-authorized exact persisted memory, and unavailable Runtime prevents offline Context exposure.",
+      "positive_case_ids": [
+        "REPAIR-POS-RECOVERY"
+      ],
+      "negative_case_ids": [
+        "REPAIR-NEG-OFFLINE",
+        "REPAIR-NEG-IDENTITY"
+      ],
+      "limits": [
+        "Serial query-first plus compatibility missing-slot negatives, not complete protected Context/answer lineage conformance.",
+        "Controlled Provider fixture only; no observed model use, efficacy or concurrent streaming claim."
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3a2r-20260922-jwlwRm/native.xml",
+      "sha256": "c3207d894bd81f6fb9076e7043a27faa995d7ff6ab97f9bc9b03aaaa83c68d05"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3a2r-20260922-jwlwRm/pg.xml",
+      "sha256": "ad90dfd31f154bf35b4a9333b9ac173d12de821b03b2625ecfefe8de4dbd4e0d"
+    }
+  ]
+}

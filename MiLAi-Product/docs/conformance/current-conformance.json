@@ -5,81 +5,53 @@
     "claims": [
       {
         "coverage": "SCOPED",
-        "covered_statement": "Host cache loss or restart cannot authorize offline CURRENT Context: memory is reacquired or validated by Runtime, and unavailable Runtime blocks exposure.",
-        "debt_id": "cache-miss-host-continuation",
-        "execution_status": "PASS",
-        "limits": [
-          "Does not fix or cover the retired-native-instance replay defect.",
-          "Serial query-first path plus compatibility retained-slot negative controls; not streaming/concurrent/production continuity.",
-          "Reuses unchanged-tree scope/canonical validation evidence from trace-ownership receipt rather than rerunning it.",
-          "No model use, efficacy or broad protected-Context conformance claim."
-        ],
-        "negative_case_ids": [
-          "CACHE-NEG-OFFLINE",
-          "CACHE-NEG-OLD"
-        ],
-        "positive_case_ids": [
-          "CACHE-POS-RESTART",
-          "CACHE-POS-VALIDATION"
-        ],
-        "receipt": "docs/revalidation/host-continuity/cache-miss.receipt.json",
-        "status": "PASS"
-      },
-      {
-        "coverage": "SCOPED",
-        "covered_statement": "For opt-in serial query-first tracing, the exact governed Context/version selection and dispatched exposure bind to actual Runtime/MCP/Host requests; validated cache reuse retains its original retrieval and uses the current authorized invocation. Exposure never implies model use.",
-        "debt_id": "trace-ownership",
-        "execution_status": "PASS",
-        "limits": [
-          "Not full protected Context or answer-lineage conformance.",
-          "No stream/concurrent observation or cross-process Host continuity claim.",
-          "Controlled Provider fixtures establish dispatch/native/usage plumbing, not model semantics or benefit.",
-          "Evidence and canonical Claim versions only; State/Note exports and Opportunity Ledger are outside this receipt."
-        ],
-        "negative_case_ids": [
-          "TRACE-NEG-SCOPE",
-          "TRACE-NEG-IDENTITY",
-          "TRACE-NEG-DISPATCH"
-        ],
-        "positive_case_ids": [
-          "TRACE-POS-FRESH",
-          "TRACE-POS-CACHE",
-          "TRACE-POS-HOST"
-        ],
-        "receipt": "docs/revalidation/trace-ownership/receipt.json",
-        "status": "PASS"
-      },
-      {
-        "coverage": "SCOPED",
-        "covered_statement": "Replacing a native Host instance must not reactivate the retired execution graph or replay its old operation.",
+        "covered_statement": "On the repaired Host tree, restart/cache miss reacquires Runtime-authorized exact persisted memory, and unavailable Runtime prevents offline Context exposure.",
         "debt_id": "process-local-task-continuity",
-        "execution_status": "FAIL",
+        "execution_status": "PASS",
         "limits": [
-          "Scoped native Host replace/recovery behavior, not a broad Architecture DEVIATION decision.",
-          "Runtime reauthorization still occurs; no unauthorized canonical mutation or memory exposure is demonstrated.",
-          "A separate remediation branch and receipt are required."
+          "Serial query-first plus compatibility missing-slot negatives, not complete protected Context/answer lineage conformance.",
+          "Controlled Provider fixture only; no observed model use, efficacy or concurrent streaming claim."
         ],
         "negative_case_ids": [
-          "NATIVE-NEG-RETIRED"
+          "REPAIR-NEG-OFFLINE",
+          "REPAIR-NEG-IDENTITY"
         ],
         "positive_case_ids": [
-          "NATIVE-POS-BOUND",
-          "NATIVE-POS-RESTART"
+          "REPAIR-POS-RECOVERY"
         ],
-        "receipt": "docs/revalidation/host-continuity/receipt.json",
-        "status": "FAIL"
+        "receipt": "docs/revalidation/host-continuity/remediation.receipt.json",
+        "status": "PASS"
+      },
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "Replacing a native Host instance permanently retires the old graph for that Adapter lifetime; retired instance replay is rejected without damaging legitimate continuation/replacement.",
+        "debt_id": "process-local-task-continuity",
+        "execution_status": "PASS",
+        "limits": [
+          "Process-local Host recovery/replay only, not full G9 or production readiness.",
+          "Retired identities remain in memory for the registry lifetime; not a persistence feature or a long-lived resource-pressure benchmark.",
+          "Original failed diagnosis receipt remains immutable."
+        ],
+        "negative_case_ids": [
+          "REPAIR-NEG-RETIRED",
+          "REPAIR-NEG-IDENTITY"
+        ],
+        "positive_case_ids": [
+          "REPAIR-POS-CURRENT",
+          "REPAIR-POS-RECOVERY"
+        ],
+        "receipt": "docs/revalidation/host-continuity/remediation.receipt.json",
+        "status": "PASS"
       }
     ],
-    "failed_claim_count": 1,
-    "historical_receipt_count": 14,
+    "failed_claim_count": 0,
+    "historical_receipt_count": 17,
     "index": "docs/revalidation/INDEX.md",
     "preserved_failed_receipt_count": 4,
     "receipts": [
-      "docs/revalidation/host-continuity/cache-miss.receipt.json",
-      "docs/revalidation/host-continuity/receipt.json",
-      "docs/revalidation/trace-ownership/receipt.json"
+      "docs/revalidation/host-continuity/remediation.receipt.json"
     ],
-    "validated_receipt_count": 17
+    "validated_receipt_count": 18
   },
   "claim_policy": {
     "architecture_conformant": false,
@@ -103,7 +75,7 @@
     "map": "docs/conformance/invariant-test-map.json",
     "status": "UNVERIFIED"
   },
-  "invariant_test_map_sha256": "e437e25670ab3d4c60b16f675b22ade47d0d717560cfad95e3ea38c829319b97",
+  "invariant_test_map_sha256": "98348d8dc0882eb0b724e7ef7b05cfbb42dc07f40a5ed1905ddb6e503a86b6d6",
   "known_limitations": [
     "Behavior revalidation receipts are identity-bound and may only promote an item when they explicitly declare COMPLETE coverage.",
     "AF-09 historical tarballs are archive-owned and are represented by tracked classification metadata, not Product Git bytes.",
@@ -116,9 +88,9 @@
     "0056_host_notes"
   ],
   "openworker_version": "0.1.0",
-  "product_commit": "6712e800ef28189f191eb313108a6b8d86b3d795",
-  "product_manifest_sha256": "0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae",
-  "product_tree_sha256": "22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a",
+  "product_commit": "faf3922c2b1d037f0c3a019dd1bbaf6dc059be15",
+  "product_manifest_sha256": "44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352",
+  "product_tree_sha256": "08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2",
   "product_version": "0.1.0-candidate",
   "runtime_version": "0.1.5",
   "schema_version": "milai-architecture-conformance-v1",
@@ -146,5 +118,5 @@
       "status": "UNVERIFIED"
     }
   ],
-  "verified_at": "2026-09-22T03:55:22+00:00"
+  "verified_at": "2026-09-22T04:06:32+00:00"
 }
