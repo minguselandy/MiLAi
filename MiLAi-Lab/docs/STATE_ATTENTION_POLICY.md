@@ -1,7 +1,7 @@
 # State-guided Attention: zero-model policy seam
 
 Status: **RESEARCH_PROTOTYPE / engineering only / model execution NOT_ADMITTED**.
-Base/rollback: `b9b513084b4c966dd229107370f9d59ac69f4c5e` (PR #44 main).
+Capture base/rollback: `1367b2c8aeb7e330bf9f9046a384f1e2b989d92d` (PR #45 main).
 No new data scan, experiment allocation, Provider call or Product change.
 
 ## Implemented boundary
@@ -10,9 +10,9 @@ No new data scan, experiment allocation, Provider call or Product change.
 over an **already acquired** source pool and caller-reviewed visible state. It reuses
 `SourceUnit` / `SourceSnapshot` exact versions, bytes and scope; it does not call the
 old FULL/FOCUS request builder or change that builder's historical decoding profile.
-It does not implement a semantic state producer, retriever, Provider, persistent
-dispatcher or cost ledger. Those missing integrations are not silently counted as
-a complete live Attention system.
+It does not implement a semantic state producer, retriever, Provider or cost ledger.
+The separate capture below durably controls a caller-supplied retrieval callback;
+these pieces are not a complete live Attention system.
 
 `decide_attention` returns FOCUS, CONFLICT or EXPLORE, with a distinct action:
 `CONTEXT`, `RETRIEVE_ONCE` or `ABSTAIN_MEMORY`. The last action means no memory
@@ -83,6 +83,38 @@ The stateless API cannot prevent a caller resetting `expansion_attempts`; a dura
 runner journal is required before live use. A retrieval intent contains the question,
 so it is not a redaction API and raw decisions must not be published indiscriminately.
 
+## Durable expansion capture
+
+[attention_expansion.py](../src/milai_lab/methods/attention_expansion.py) supplies that
+one-attempt journal, without adding a model client or replacing the existing global
+finite-budget ledger. The caller pins one private SQLite path per frozen arm/task.
+Admission digest, execution/task identity, scope, question digest, policy and limits
+are immutable on reopen. A digest is an identity binding, not execution permission.
+
+`step` commits a singleton reservation with SQLite `synchronous=FULL` before its
+mandatory admission/deadline callback, then rechecks source eligibility and the
+decision before retrieval. Concurrent instances cannot both claim the attempt.
+Pre-dispatch cancellation, failed retrieval, invalid results and uncertain crash
+recovery all consume it. There is no reset/retry API; changing journal paths to
+evade this is prohibited. An unfinished RESERVED/DISPATCHING row means UNKNOWN,
+not proof that its process is still running or that usage was zero.
+
+The retriever must enforce the frozen allowed pool, unchanged query/scope and every
+external request's existing global budget guard. Returned source count, UTF-8 bytes,
+excluded IDs, exact versions, unique identities, scope and current eligibility are
+checked before capturing the merged pool. The backend receipt reference survives
+source-validation failure for cost joining. Exceptions without such a receipt remain
+UNKNOWN and must be reconciled through the execution-bound global ledger; this
+module never estimates them as zero or creates a second request/token allowance.
+
+Successful capture stores exact source bodies privately outside Git. Explicit
+`restored_snapshot()` restores bytes, not fresh authority or semantic review. `step`
+returns the original retrieval decision plus the new pool, **not Actor-ready context**;
+the caller must review the changed pool, call the policy again, and revalidate before
+Actor dispatch. Elapsed time covers this capture operation only, not total task cost.
+Semantic labels, genuine retrieval integration, full cost settlement and native
+quality comparison remain unimplemented here.
+
 ## Checks, effect gap and next gate
 
 Local changed-file Ruff/mypy and **74 targeted tests PASS** (new policy plus existing
@@ -91,6 +123,10 @@ reservation, missing/future/stale state, whole-pool and selected-set bindings, d
 sources, capacity exhaustion and the caller-counted one-expansion loop. Initial Ruff
 B008 was resolved with a module-level immutable default; no effect result was changed.
 Package-wide checks/build belong to classified Lab fast CI, not duplicated locally.
+The follow-up capture has **63 targeted tests PASS** together with the pure Attention
+policy. These add real local SQLite concurrency/reopen/process-exit tests, failed
+dispatch and returned-source admission cases; callbacks use synthetic local sources,
+not a live retriever or external model. Changed-file Ruff/mypy pass.
 
 The policy does not estimate unnecessary retrieval, irrelevant exposure or semantic
 coverage by itself. These require independent task-visible labels. Nor do these
@@ -99,8 +135,11 @@ use stays UNKNOWN; claim ceiling is `POLICY_DECISION_NOT_EFFECT`.
 
 Before an effect comparison: establish real state/coverage opportunities, predeclare
 labels and STATIC baseline, integrate the bounded runner/complete cost settlement,
-freeze IDs/order/arms/conditions and obtain a **new finite authorization**. Include
-initial retrieval, embedding, state formation, review/maintenance, failures, retries,
+freeze IDs/order/arms/conditions and finalize a **new finite authorization contract**.
+The user's subsequent “授权” authorizes a finite batch in principle; numerical bounds,
+joint mechanism allocation and permission to form new state/revisions from existing
+feedback still await explicit contract confirmation. No new allocation is opened.
+Include initial retrieval, embedding, state formation, review/maintenance, failures, retries,
 solver and latency costs. Utility's closed batch and unused quota remain closed.
 No TEST/main-confirmation/Travel/RESERVE access, transfer or promotion is authorized.
 3C-3 remains IN_PROGRESS with no cost/evidence comparison or KEEP_SIMPLE terminal;
