@@ -43,7 +43,7 @@
       "file_count": 26,
       "interface_id": "openworker-mcp-v0.1",
       "path": "integrations/openworker-mcp/src",
-      "sha256": "951c7febe9ecdf4b3120bece6bdfe2a5b1f4d619ebca5e4ed110af01ca52f525"
+      "sha256": "bb3a50490aeb1b2248cc1048d73952269f9642c847b24b86568d79ad838cb7c7"
     },
     {
       "file_count": 16,
@@ -90,5 +90,5 @@
     "integrations/autogen/uv.lock",
     "integrations/autogen/src"
   ],
-  "tree_sha256": "22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a"
+  "tree_sha256": "08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2"
 }

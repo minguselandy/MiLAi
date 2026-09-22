@@ -111,6 +111,7 @@ class SameProcessTaskRegistry:
     def __init__(self) -> None:
         self._lock = threading.Lock()
         self._host_instance: str | None = None
+        self._retired_host_instances: set[str] = set()
         self._process_generation = 0
         self._session_task_ids: dict[str, str] = {}
         self._seen_operations: set[tuple[str, str]] = set()
@@ -126,8 +127,14 @@ class SameProcessTaskRegistry:
         allow_operation_continuation: bool = False,
     ) -> NativeTaskBinding:
         with self._lock:
+            # A replacement ends the old native graph permanently for this
+            # adapter lifetime, including delayed tool continuations.
+            if metadata.host_instance in self._retired_host_instances:
+                raise TaskBindingConflict("retired native host instance")
             invalidated = 0
             if metadata.host_instance != self._host_instance:
+                if self._host_instance is not None:
+                    self._retired_host_instances.add(self._host_instance)
                 invalidated = len(self._session_task_ids)
                 self._host_instance = metadata.host_instance
                 self._process_generation += 1
