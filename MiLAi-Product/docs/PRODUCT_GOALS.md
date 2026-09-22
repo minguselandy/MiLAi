@@ -41,8 +41,10 @@ The [offline ownership candidate](reference/trace-ownership-v1.md) does not yet 
 producer provenance or the trace ownership debt.
 
 The follow-up [explicit Host owner testkit](reference/host-trace-testkit.md) merged in PR #31,
-including main fast `35677115118`. The Runtime owner export candidate has 40 targeted tests
-passed, including three real PostgreSQL cases, and awaits remote closure. Added testkit source changes Product identity;
+including main fast `35677115118`. Runtime owner export merged in PR #32, main fast
+`35677932965` PASS. The [same-execution candidate](reference/trace-ownership-chain.md)
+now joins eight real MCP/HTTP/PostgreSQL attempts with a controlled Provider fixture;
+cache-origin and final debt closure remain pending. Added testkit source changes Product identity;
 the fresh Conformance map is `9 PASS / 35 UNVERIFIED / 0 DEVIATION`, with prior receipts
 retained as historical evidence. No default Product behavior or research budget changes.
 

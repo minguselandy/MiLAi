@@ -56,6 +56,13 @@ cache-origin exact-version provenance, Lab wire assembly, and bounded end-to-end
 Missing Context/version observations on failed requests must remain explicit, not reconstructed
 from answer text or substituted with empty known lists. No observable-use claim is emitted.
 
+The [same-execution extension](trace-ownership-chain.md) observes actual query-first MCP
+calls and matches their exact framed Context to transport payloads. Snapshots distinguish
+`prepared_context_bindings` from `context_bindings` and include `exposure_status`.
+Request/response fixture types are explicitly re-exported by this public testkit for
+authorized engineering harnesses. The default CLI remains uninstrumented. Cache-origin
+and concurrency/stream coverage remain outside this extension.
+
 Development: initial new fixtures accidentally selected the existing no-Provider fallback;
 the unknown-exception assertion initially ignored existing gateway normalization; the partial
 Context fixture initially omitted its required governance boundary. These test-harness failures

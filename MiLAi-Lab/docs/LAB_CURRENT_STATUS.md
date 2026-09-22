@@ -21,9 +21,12 @@ starting with a content-free offline joiner. Synthetic contract tests are not re
 live owner exports and trace-debt closure remain pending. Historical research remains paused.
 PR #30's offline slice is merged (main fast `35676214359` PASS). An explicitly imported
 [Host producer testkit](../../MiLAi-Product/docs/reference/host-trace-testkit.md) merged in
-PR #31 (main fast `35677115118` PASS). The next Runtime producer candidate has real PostgreSQL
-trace/position/version checks, but neither producer alone establishes the same-execution
-cross-layer join or a Product-backed effect run.
+PR #31 (main fast `35677115118` PASS); the Runtime producer merged in PR #32 (main fast
+`35677932965` PASS). The new
+[same-execution candidate](../../MiLAi-Product/docs/reference/trace-ownership-chain.md)
+joins eight real MCP/HTTP/PostgreSQL attempts through a controlled in-process Provider
+fixture. Fresh exact-version/Context and failure dispatch facts are bound. Cache-origin
+and final debt closure remain pending; no model-backed effect run or actual use is claimed.
 
 Current interpretation of the active research record:
 

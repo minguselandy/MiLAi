@@ -7,12 +7,12 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `0971ef6c942bdb2267e70389db76849a5a561db8`; Git tree
-  `7433c0c5744f8edd186eed03faefbc5b5604ff35`; main fast `35677115118` passed.
-- Opt-in Runtime owner export candidate source: `63022a76a6bf1f9408d4c26c3ebc4f66540170a4`,
-  awaiting remote closure. Product identity: 424 manifest files; manifest SHA-256
-  `a34142239d557665933c3619f59b2d284bfc0e0449ac94ff95b67e9e1cf542e1`; Product tree
-  `223dad55d2c0f3f9a50686192a35d10a28127c989a9d45f3cbf1a6a77cc6b265`.
+- Reconciled repository `main`: `6f5ecf6132e81585509d5124cab55e51cc7754f7`; Git tree
+  `84c3bdf3ac9246c16de01450795b7d3da403f04b`; main fast `35677932965` passed.
+- Same-execution observer candidate source: `717da6e74aba02e296e30ac4f037c208b753ab18`,
+  awaiting remote closure. Product identity: 425 manifest files; manifest SHA-256
+  `668dc365f1fb4cf8c6961e6fb490e1a1a6b18f47592c2c096af34b88f350f729`; Product tree
+  `90a900fef01ccca5b54cc4a558e3c530cf7a8b421f859d764761a8d6c4f75511`.
 - Cleanup C0–C10 is complete. The authoritative final composition is Run #60 / ID
   `35632657133`: 17 jobs passed, including Runtime/PostgreSQL, all six integrations, Lab fast,
   four historical replay shards, Archive, Product identity and Conformance.
@@ -33,10 +33,12 @@
   worker `--once` revalidation completed through PR #28, with main fast `35674495200` passed.
   Active work is [Trace Ownership v1](reference/trace-ownership-v1.md): offline contract/join
   implementation merged in PR #30. The [Host producer testkit](reference/host-trace-testkit.md)
-  merged in PR #31. The opt-in Runtime producer candidate has 40 targeted tests passed,
-  including real PostgreSQL empty/visible/wrong-scope cases and exact trace/version identity.
-  Actual MCP binding, cache-origin provenance and end-to-end proof remain pending, so trace
-  debt is not closed.
+  merged in PR #31; the Runtime producer merged in PR #32. The new
+  [same-execution candidate](reference/trace-ownership-chain.md) joins eight actual
+  Host/MCP/HTTP/PostgreSQL attempts with a controlled in-process Provider fixture.
+  Exact fresh-retrieval/version/Context provenance and failure dispatch states are covered;
+  cache-origin, other supported version paths and final debt closure remain pending.
+  This is not real model use or a mechanism-effect claim; trace debt is not closed.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
   candidate; docs-only and Lab-only changes use the classified fast path.

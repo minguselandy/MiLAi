@@ -26,6 +26,7 @@ it must not reconstruct missing Runtime decisions from answers or hidden labels.
 | `reader_context_sha256`, `retrieval_trace_ids`, `exposed_versions` | Host; facts about the exact request it assembled and dispatched | Empty exposure is allowed; nonempty exposure requires a context digest and admitted, successfully transported selection |
 | `provider_native_request_id` | Provider; zero or one native ID per invocation | Null only with `NOT_ACCEPTED` or `RESPONSE_LOST`; successful response requires ID |
 | Provider `status`, `usage` | Provider terminal facts captured by Host transport | `SUCCESS`, `FAILURE`, `UNKNOWN`; missing token counts stay null, never zero-filled |
+| Provider `exposure_status` | Host transport; live assembly always supplies it | `DISPATCHED`, `NOT_STARTED`, `UNKNOWN`; unknown is not known empty exposure |
 | `lab.result_ref` | Lab; zero or one local result artifact per attempt | Null when no result has been recorded; no score or answer is exported back into Product |
 | `memory_ref`, `version_id`, `content_sha256` | The memory's authority; exact immutable identity | Required together; same identity cannot acquire different content within a pinned run |
 | `lab.observable_support[]` | Lab; verified post-execution observations | Zero or more exact request/version supports; empty means use `UNKNOWN` |
@@ -83,6 +84,11 @@ aliases for sensitive identifiers before export; allowed string syntax is not a 
 Source artifacts remain access-controlled outside Git. Hashes are not encryption and may still
 leak low-entropy values; they are not permission to publish private material.
 
+The candidate's optional `exposure_status` preserves compatibility with original offline
+fixtures, but actual producer assembly always includes it. `NOT_STARTED`/`UNKNOWN` cannot
+contain proven exposed versions. UNKNOWN adds an explicit gap; missing native identity uses
+`NOT_OBSERVED` when dispatch itself is unknown, instead of claiming a known lost response.
+
 Owner digests retain their owner's documented serialization/meaning and must not be rewritten
 to fit this join. `facts_sha256` alone hashes the complete submitted envelope using UTF-8 JSON,
 sorted object keys, unescaped Unicode and compact separators; array order remains significant.
@@ -121,5 +127,10 @@ actual Runtime/Host/Provider facts for the six terminal cases, prove observation
 cache-origin semantics, and close the Product debt with Product-owned executable evidence.
 Before 3B-2 PASS: produce the opportunity ledger from a real bounded run with its own verified
 Product lock and method/input identity. Neither gate is satisfied by the synthetic tests here.
+
+The [same-execution probe](trace-ownership-chain.md) now joins real MCP/HTTP/PostgreSQL
+owner facts through a controlled Provider fixture for eight attempts. Fresh execution,
+exact Evidence hashes, Context dispatch and three failure states are covered. Cache hits,
+Claim versions and actual model use remain unproven; 3B-1 stays IN_PROGRESS.
 
 Schema remains `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`.

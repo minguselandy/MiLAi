@@ -11,6 +11,11 @@ Lab joiner first, with live producer proof still required. The Goal closes Produ
 behavioral evidence and Trace Ownership before requiring a real Memory Opportunity Ledger; new
 Utility, Revision, Attention or policy-adaptation effect work is not yet admitted.
 
+The [same-execution probe](../../MiLAi-Product/docs/reference/trace-ownership-chain.md)
+now binds fresh Runtime/actual MCP/Host facts into the Lab joiner for eight attempts,
+including failure/unknown dispatch. Provider is a controlled fixture, not an actual
+model. Cache-origin and the remaining 3B-1 closure gates stay pending.
+
 This coordination update allocates zero model requests, does not resume any old worker or batch,
 does not reopen a protected/frozen pool, and does not replace historical Goal states. A future Lab
 work package must bind a run-specific Product lock, finite budget, opportunity denominator, arm
