@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3A-2R_HOST_CONTINUITY_RETIRED_INSTANCE
-next_work_package: 3A-3D_RESOLVER_DIAGNOSTIC
+current_work_package: 3A-3D_RESOLVER_DIAGNOSTIC
+next_work_package: 3A-3R_CONDITIONAL_ON_DIAGNOSIS
 new_experiment_allocations: 0
 new_model_requests: 0
 ---
@@ -225,8 +225,8 @@ NEEDS_REVALIDATION
 | 3A-1 | Worker `--once` revalidation | Product evidence | expected no | PASS — PR #28 / main identity verified | 3A-0 |
 | 3B-1 | Trace Ownership v1/v2 | Product/testkit + Lab | small/contractual | PASS — scoped receipt / PR #34 / main identity verified | 3A-0 |
 | 3A-2D | Host Continuity diagnosis | Product evidence | no | DIAGNOSED_FAIL — PR #35 / main identity verified; native replay OPEN / cache-miss FIXED | 3B-1 vocabulary |
-| 3A-2R | Host Continuity remediation | Product | conditional | IN_PROGRESS — local 26-test proof PASS; final composition/remote pending | 3A-2D FAIL |
-| 3A-3D | Resolver diagnostic | Product/Lab tests | no | PENDING | 3A-0 |
+| 3A-2R | Host Continuity remediation | Product | conditional | PASS — PR #36 / full #63 / main identity verified | 3A-2D FAIL |
+| 3A-3D | Resolver diagnostic | Product/Lab tests | no | IN_PROGRESS — corpus/method freeze, execution pending | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | NOT_ADMITTED | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PENDING | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | PENDING | 3B-2 real-run proof |
@@ -840,6 +840,24 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Host remediation closed; Resolver diagnosis entered
+
+- PR #36 exact head `ba4723e236aa6fd4949a688d9593059b459a6bd9`; fast runs
+  `35685753382` and `35685753972` PASS. One final-candidate full composition,
+  Run #63 / `35685753906`, PASS with all 17 jobs; no manual rerun.
+- Expected-head squash merge `3eab81c9e1c23b07e3aead351cc3adfe423470c0`;
+  candidate/merge tree `3874a68fa06892d4c3bf0a0fe354339d1bde8f9e` matched.
+  Local main equals origin/main and main fast `35688151840` PASS.
+- 3A-2R is now PASS for its declared scope. Original diagnosis and remediation
+  receipts retain their historical snapshots; this journal supplies remote closure.
+- `research/resolver-language-diagnostic` starts from exact merged main. The
+  [diagnosis plan](../revalidation/resolver-language/DIAGNOSIS_PLAN.md) freezes
+  30 synthetic cases and a pure recorder before execution. No resolver repair,
+  hidden retrieval, model call, database, ranking/budget or default-route change.
+  Client compatibility prefetch and current Runtime interpretation stay distinct.
+- 3A-3D is IN_PROGRESS, not a result claim. Research allocations/model requests 0;
+  3B-2 and research remain pending. Schema remains NO-GO FOR SCHEMA FREEZE.
 
 ## 2026-09-22 — Native retirement guard repaired; final-candidate gates pending
 

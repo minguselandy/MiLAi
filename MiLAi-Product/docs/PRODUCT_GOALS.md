@@ -1,7 +1,7 @@
 # MiLAi Product Goals
 
-> Document: `MILA-PRODUCT-GOALS@3.36`
-> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A2R_HOST_CONTINUITY`
+> Document: `MILA-PRODUCT-GOALS@3.37`
+> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A3D_RESOLVER_DIAGNOSTIC`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
@@ -14,11 +14,13 @@ now covers fresh Evidence and Claim/cache cross-layer joins: 47 Product tests, 7
 testkit scope; 3B-1 is PASS after exact-head CI and identical-tree merge.
 [3A-2D diagnosis](revalidation/host-continuity/REVALIDATION.md) closed through PR #35 at
 `e760434`, main fast `35685136321` PASS. Native retired-instance replay was diagnosed OPEN;
-scoped cache-miss continuation is FIXED. Active work is the separate 3A-2R repair on
-`fix/host-continuity-retired-instance`; original diagnostic failures remain immutable.
-The [local repair](revalidation/host-continuity/REMEDIATION.md) now passes 26 tests,
-including actual fresh-process recovery. Final-candidate composition and remote closure
-remain pending; the work package is not yet complete.
+scoped cache-miss continuation is FIXED. The separate
+[3A-2R repair](revalidation/host-continuity/REMEDIATION.md) passed 26 local tests and
+full composition #63 (`35685753906`, 17 jobs). PR #36 merged as `3eab81c`, with
+identical candidate/merge trees and main fast `35688151840` PASS; 3A-2R is PASS.
+Active work is [3A-3D diagnosis](revalidation/resolver-language/DIAGNOSIS_PLAN.md),
+freezing 30 synthetic cases before execution. Original failures remain immutable;
+no resolver fix or broad conformance claim is implied.
 Research stays unallocated.
 
 The current cross-bundle execution contract is

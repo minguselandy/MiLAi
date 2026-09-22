@@ -1,0 +1,824 @@
+{
+  "schema_version": "milai-resolver-language-corpus-v1",
+  "status": "FROZEN_BEFORE_EXECUTION",
+  "goal": "MILAI-POST-CLEANUP-DEVELOPMENT-01",
+  "phase": "3A-3D",
+  "notes": [
+    "Synthetic diagnostic inputs, not benchmark or formal pool.",
+    "Client typed resolver and Runtime interpreter are distinct owners; Runtime interpreter does not own route or StateKey binding.",
+    "Expected reasons are recorded for explanation; semantic classification uses intent/route/key, or Runtime intent/requirement/retrieval_intent. A reason-only difference is separately reported.",
+    "C06 expects recall but does not require synonym-based exact key selection.",
+    "C19 may fail closed with the existing typed ambiguity error instead of selecting a key.",
+    "Previous context must be evaluated in declared corpus order; an earlier failure is not silently replaced with the expected result.",
+    "Expectations and method are committed before first execution; later results never rewrite this corpus."
+  ],
+  "keysets": {
+    "neutral_en": [
+      {
+        "subject": "cedar-deploy",
+        "predicate": "deployment.target",
+        "claim_type": "PROJECT_STATE"
+      },
+      {
+        "subject": "cedar-deploy",
+        "predicate": "deployment.database",
+        "claim_type": "PROJECT_CONFIG"
+      },
+      {
+        "subject": "cedar-deploy",
+        "predicate": "deployment.decision",
+        "claim_type": "PROJECT_DECISION"
+      }
+    ],
+    "neutral_zh": [
+      {
+        "subject": "杉木发布",
+        "predicate": "发布.目标",
+        "claim_type": "PROJECT_STATE"
+      },
+      {
+        "subject": "杉木发布",
+        "predicate": "发布.数据库",
+        "claim_type": "PROJECT_CONFIG"
+      },
+      {
+        "subject": "杉木发布",
+        "predicate": "发布.决定",
+        "claim_type": "PROJECT_DECISION"
+      }
+    ],
+    "ambiguous": [
+      {
+        "subject": "north",
+        "predicate": "deployment.target",
+        "claim_type": "PROJECT_STATE"
+      },
+      {
+        "subject": "south",
+        "predicate": "deployment.target",
+        "claim_type": "PROJECT_STATE"
+      }
+    ],
+    "legacy": [
+      {
+        "subject": "orchid-release",
+        "predicate": "release.target",
+        "claim_type": "PROJECT_STATE"
+      },
+      {
+        "subject": "orchid-release",
+        "predicate": "release.database",
+        "claim_type": "PROJECT_CONFIG"
+      }
+    ],
+    "renamed_legacy": [
+      {
+        "subject": "cedar-release",
+        "predicate": "release.target",
+        "claim_type": "PROJECT_STATE"
+      },
+      {
+        "subject": "cedar-release",
+        "predicate": "release.database",
+        "claim_type": "PROJECT_CONFIG"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "C01",
+      "surface": "client_typed",
+      "categories": [
+        "english",
+        "exact-state"
+      ],
+      "query": "What is the current deployment target?",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "cedar-deploy",
+          "predicate": "deployment.target",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C02",
+      "surface": "client_typed",
+      "categories": [
+        "chinese",
+        "exact-state"
+      ],
+      "query": "杉木发布的当前目标是什么？",
+      "keyset": "neutral_zh",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "杉木发布",
+          "predicate": "发布.目标",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C03",
+      "surface": "client_typed",
+      "categories": [
+        "mixed-language",
+        "identifier-heavy"
+      ],
+      "query": "当前 cedar-deploy deployment.target 是什么？",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "cedar-deploy",
+          "predicate": "deployment.target",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C04",
+      "surface": "client_typed",
+      "categories": [
+        "english",
+        "unicode-normalization",
+        "identifier-heavy"
+      ],
+      "query": "Ｃｕｒｒｅｎｔ ｄｅｐｌｏｙｍｅｎｔ．ｔａｒｇｅｔ",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "cedar-deploy",
+          "predicate": "deployment.target",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C05",
+      "surface": "client_typed",
+      "categories": [
+        "english",
+        "paraphrase"
+      ],
+      "query": "Which database is configured for deployment?",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "cedar-deploy",
+          "predicate": "deployment.database",
+          "claim_type": "PROJECT_CONFIG"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C06",
+      "surface": "client_typed",
+      "categories": [
+        "english",
+        "synonym"
+      ],
+      "query": "Which datastore do we presently use for cedar-deploy?",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L1",
+        "key": null,
+        "reason_code": "PROGRESSIVE_RECALL_REQUIRED"
+      }
+    },
+    {
+      "id": "C07",
+      "surface": "client_typed",
+      "categories": [
+        "short-imperative",
+        "identifier-heavy"
+      ],
+      "query": "Show current deployment.target.",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "cedar-deploy",
+          "predicate": "deployment.target",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C08",
+      "surface": "client_typed",
+      "categories": [
+        "chinese",
+        "short-imperative",
+        "identifier-heavy"
+      ],
+      "query": "查看杉木发布的当前发布.数据库。",
+      "keyset": "neutral_zh",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "杉木发布",
+          "predicate": "发布.数据库",
+          "claim_type": "PROJECT_CONFIG"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C09",
+      "surface": "client_typed",
+      "categories": [
+        "english",
+        "history"
+      ],
+      "query": "Show deployment target history.",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "HISTORY",
+        "route": "L1",
+        "key": {
+          "subject": "cedar-deploy",
+          "predicate": "deployment.target",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "PROGRESSIVE_RECALL_REQUIRED"
+      }
+    },
+    {
+      "id": "C10",
+      "surface": "client_typed",
+      "categories": [
+        "chinese",
+        "history"
+      ],
+      "query": "查看杉木发布的目标历史。",
+      "keyset": "neutral_zh",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "HISTORY",
+        "route": "L1",
+        "key": {
+          "subject": "杉木发布",
+          "predicate": "发布.目标",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "PROGRESSIVE_RECALL_REQUIRED"
+      }
+    },
+    {
+      "id": "C11",
+      "surface": "client_typed",
+      "categories": [
+        "english",
+        "conflict"
+      ],
+      "query": "Review the conflict for deployment.decision.",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CONFLICT",
+        "route": "L0",
+        "key": {
+          "subject": "cedar-deploy",
+          "predicate": "deployment.decision",
+          "claim_type": "PROJECT_DECISION"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C12",
+      "surface": "client_typed",
+      "categories": [
+        "chinese",
+        "conflict"
+      ],
+      "query": "检查杉木发布的发布.决定冲突。",
+      "keyset": "neutral_zh",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CONFLICT",
+        "route": "L0",
+        "key": {
+          "subject": "杉木发布",
+          "predicate": "发布.决定",
+          "claim_type": "PROJECT_DECISION"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C13",
+      "surface": "client_typed",
+      "categories": [
+        "english",
+        "retry"
+      ],
+      "query": "Again.",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "previous_case": "C01",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "cedar-deploy",
+          "predicate": "deployment.target",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "REUSE_PREVIOUS_TYPED_NEED"
+      }
+    },
+    {
+      "id": "C14",
+      "surface": "client_typed",
+      "categories": [
+        "chinese",
+        "retry"
+      ],
+      "query": "再来一次。",
+      "keyset": "neutral_zh",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "previous_case": "C02",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "杉木发布",
+          "predicate": "发布.目标",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "REUSE_PREVIOUS_TYPED_NEED"
+      }
+    },
+    {
+      "id": "C15",
+      "surface": "client_typed",
+      "categories": [
+        "history",
+        "retry"
+      ],
+      "query": "Show deployment target history again.",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "previous_case": "C01",
+      "expected": {
+        "intent": "HISTORY",
+        "route": "L1",
+        "key": {
+          "subject": "cedar-deploy",
+          "predicate": "deployment.target",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "PROGRESSIVE_RECALL_REQUIRED"
+      }
+    },
+    {
+      "id": "C16",
+      "surface": "client_typed",
+      "categories": [
+        "english",
+        "no-memory"
+      ],
+      "query": "What is 17 plus 25?",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "NONE",
+        "route": "NONE",
+        "key": null,
+        "reason_code": "NO_MEMORY_DEPENDENCY"
+      }
+    },
+    {
+      "id": "C17",
+      "surface": "client_typed",
+      "categories": [
+        "chinese",
+        "no-memory"
+      ],
+      "query": "你好。",
+      "keyset": "neutral_zh",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "NONE",
+        "route": "NONE",
+        "key": null,
+        "reason_code": "NO_MEMORY_DEPENDENCY"
+      }
+    },
+    {
+      "id": "C18",
+      "surface": "client_typed",
+      "categories": [
+        "english",
+        "no-memory"
+      ],
+      "query": "Define the English word database; do not read personal memory.",
+      "keyset": "neutral_en",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "NONE",
+        "route": "NONE",
+        "key": null,
+        "reason_code": "NO_MEMORY_DEPENDENCY"
+      }
+    },
+    {
+      "id": "C19",
+      "surface": "client_typed",
+      "categories": [
+        "ambiguous-state-key"
+      ],
+      "query": "What is the current deployment target?",
+      "keyset": "ambiguous",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "accepted_error": "STATE_KEY_ALIAS_AMBIGUOUS",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L1",
+        "key": null,
+        "reason_code": "PROGRESSIVE_RECALL_REQUIRED"
+      }
+    },
+    {
+      "id": "C20",
+      "surface": "client_typed",
+      "categories": [
+        "chinese",
+        "alias-control"
+      ],
+      "query": "当前发布目标是什么？",
+      "keyset": "legacy",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "orchid-release",
+          "predicate": "release.target",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "EXACT_FROZEN_STATE_KEY_ALIAS"
+      }
+    },
+    {
+      "id": "C21",
+      "surface": "client_typed",
+      "categories": [
+        "chinese",
+        "alias-overfit-control"
+      ],
+      "query": "当前发布目标是什么？",
+      "keyset": "renamed_legacy",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": "CURRENT_STATE",
+        "route": "L0",
+        "key": {
+          "subject": "cedar-release",
+          "predicate": "release.target",
+          "claim_type": "PROJECT_STATE"
+        },
+        "reason_code": "EXACT_CANONICAL_STATE_KEY"
+      }
+    },
+    {
+      "id": "C22",
+      "surface": "client_typed",
+      "categories": [
+        "ambiguous-state-key",
+        "alias-control"
+      ],
+      "query": "current release target and current release database",
+      "keyset": "legacy",
+      "scope": {
+        "project_ids": [
+          "diagnostic-local"
+        ]
+      },
+      "required_authority": "INFORMATIONAL",
+      "consistency_floor": "CANONICAL_REQUIRED",
+      "expected": {
+        "intent": null,
+        "route": "ERROR",
+        "key": null,
+        "reason_code": "STATE_KEY_ALIAS_AMBIGUOUS"
+      }
+    },
+    {
+      "id": "R01",
+      "surface": "runtime_interpreter",
+      "categories": [
+        "english",
+        "no-memory",
+        "explicit-read"
+      ],
+      "query": "Hello.",
+      "invocation_mode": "EXPLICIT_READ",
+      "exact_target": false,
+      "expected": {
+        "intent": "REQUIRED",
+        "requirement": "SEARCH",
+        "retrieval_intent": null,
+        "route": "NOT_OWNED",
+        "key": null,
+        "reason_code": "EXPLICIT_READ_MEMORY_REQUIRED"
+      }
+    },
+    {
+      "id": "R02",
+      "surface": "runtime_interpreter",
+      "categories": [
+        "english",
+        "no-memory",
+        "automatic-prefetch"
+      ],
+      "query": "Hello.",
+      "invocation_mode": "PREFETCH_AUTO",
+      "exact_target": false,
+      "expected": {
+        "intent": "NOT_NEEDED",
+        "requirement": "NONE",
+        "retrieval_intent": null,
+        "route": "NOT_OWNED",
+        "key": null,
+        "reason_code": "QUERY_MEMORY_NOT_NEEDED"
+      }
+    },
+    {
+      "id": "R03",
+      "surface": "runtime_interpreter",
+      "categories": [
+        "chinese",
+        "no-memory",
+        "automatic-prefetch"
+      ],
+      "query": "你好。",
+      "invocation_mode": "PREFETCH_AUTO",
+      "exact_target": false,
+      "expected": {
+        "intent": "NOT_NEEDED",
+        "requirement": "NONE",
+        "retrieval_intent": null,
+        "route": "NOT_OWNED",
+        "key": null,
+        "reason_code": "QUERY_MEMORY_NOT_NEEDED"
+      }
+    },
+    {
+      "id": "R04",
+      "surface": "runtime_interpreter",
+      "categories": [
+        "chinese",
+        "no-memory",
+        "automatic-prefetch"
+      ],
+      "query": "计算17加25。",
+      "invocation_mode": "PREFETCH_AUTO",
+      "exact_target": false,
+      "expected": {
+        "intent": "NOT_NEEDED",
+        "requirement": "NONE",
+        "retrieval_intent": null,
+        "route": "NOT_OWNED",
+        "key": null,
+        "reason_code": "QUERY_MEMORY_NOT_NEEDED"
+      }
+    },
+    {
+      "id": "R05",
+      "surface": "runtime_interpreter",
+      "categories": [
+        "english",
+        "history",
+        "explicit-read"
+      ],
+      "query": "Recall deployment history.",
+      "invocation_mode": "EXPLICIT_READ",
+      "exact_target": false,
+      "expected": {
+        "intent": "REQUIRED",
+        "requirement": "SEARCH",
+        "retrieval_intent": "HISTORY",
+        "route": "NOT_OWNED",
+        "key": null,
+        "reason_code": "EXPLICIT_READ_MEMORY_REQUIRED"
+      }
+    },
+    {
+      "id": "R06",
+      "surface": "runtime_interpreter",
+      "categories": [
+        "chinese",
+        "history",
+        "explicit-read"
+      ],
+      "query": "查看发布历史。",
+      "invocation_mode": "EXPLICIT_READ",
+      "exact_target": false,
+      "expected": {
+        "intent": "REQUIRED",
+        "requirement": "SEARCH",
+        "retrieval_intent": "HISTORY",
+        "route": "NOT_OWNED",
+        "key": null,
+        "reason_code": "EXPLICIT_READ_MEMORY_REQUIRED"
+      }
+    },
+    {
+      "id": "R07",
+      "surface": "runtime_interpreter",
+      "categories": [
+        "mixed-language",
+        "conflict",
+        "identifier-heavy"
+      ],
+      "query": "查看当前 deployment.database 冲突。",
+      "invocation_mode": "EXPLICIT_READ",
+      "exact_target": false,
+      "expected": {
+        "intent": "REQUIRED",
+        "requirement": "EXACT",
+        "retrieval_intent": "CONFLICT",
+        "route": "NOT_OWNED",
+        "key": null,
+        "reason_code": "EXPLICIT_READ_MEMORY_REQUIRED"
+      }
+    },
+    {
+      "id": "R08",
+      "surface": "runtime_interpreter",
+      "categories": [
+        "exact-state",
+        "structured-signal",
+        "no-memory"
+      ],
+      "query": "What is 17 plus 25?",
+      "invocation_mode": "PREFETCH_AUTO",
+      "exact_target": true,
+      "expected": {
+        "intent": "REQUIRED",
+        "requirement": "EXACT",
+        "retrieval_intent": "CURRENT_STATE",
+        "route": "NOT_OWNED",
+        "key": null,
+        "reason_code": "CANONICAL_STATE_ADDRESS_REQUESTED"
+      }
+    }
+  ]
+}
