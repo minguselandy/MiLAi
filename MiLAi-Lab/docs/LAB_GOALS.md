@@ -7,10 +7,12 @@ are complete: v2 binds actual current cache invocations to observed origins with
 fresh retrievals or acquired Evidence bodies. PR #33's fresh-only slice is merged;
 the Claim/cache follow-up closed in PR #34, main fast `35683815988` PASS.
 3A-2D Host diagnosis closed through PR #35/main fast `35685136321`: retired-instance
-replay OPEN, cache-miss continuation FIXED. Active work is the separate 3A-2R
-retired-instance repair; original diagnostic evidence is retained.
-Local repair proof now passes without XFAIL. Wait for the final-candidate composition,
-merge and main identity gates before closing 3A-2R; no research allocation follows.
+replay OPEN, cache-miss continuation FIXED. Separate 3A-2R repair is now PASS:
+PR #36 merged at `3eab81c`, full #63 (`35685753906`) 17 jobs PASS, identical
+candidate/merge tree, main fast `35688151840` PASS. Original diagnostics remain.
+Active work is [3A-3D Resolver diagnosis](../../MiLAi-Product/docs/revalidation/resolver-language/REVALIDATION.md).
+Frozen primary collection is 17 PASS/13 FAIL; debt is OPEN with strict diagnostic
+assertions retained. Remote closure precedes a separate remedy; no research allocation follows.
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).

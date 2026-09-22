@@ -1223,7 +1223,7 @@
           }
         ],
         "verification": {
-          "behavioral_execution": "SCOPED",
+          "behavioral_execution": "FAIL",
           "execution_receipts": [
             {
               "coverage": "SCOPED",
@@ -1243,10 +1243,34 @@
               ],
               "receipt": "docs/revalidation/host-continuity/remediation.receipt.json",
               "status": "PASS"
+            },
+            {
+              "coverage": "SCOPED",
+              "covered_statement": "Upstream typed-need diagnostic: preserve requested history versus current state and avoid an arbitrary exact address for ambiguous keys, with explicit language/cost-probe limitations before Context acquisition.",
+              "debt_id": "resolver-lexical-language-assumptions",
+              "execution_status": "FAIL",
+              "limits": [
+                "Desired-behavior pure-function diagnosis, not proof of a frozen architecture violation or actual Context exposure.",
+                "Runtime interpreter owns intent/requirement, not StateKey selection or L0/L1 routing.",
+                "Frozen three-family aliases remain an explicit compatibility contract; renamed-alias failure does not authorize changing that contract.",
+                "C14 inherits actual C02 failure; this corpus alone does not isolate a second independent Chinese retry failure.",
+                "One C17 reason-only difference is informational, not an extra failure."
+              ],
+              "negative_case_ids": [
+                "RESOLVER-NEG-ALIAS",
+                "RESOLVER-NEG-CLIENT",
+                "RESOLVER-NEG-RUNTIME"
+              ],
+              "positive_case_ids": [
+                "RESOLVER-POS-CLIENT",
+                "RESOLVER-POS-RUNTIME"
+              ],
+              "receipt": "docs/revalidation/resolver-language/receipt.json",
+              "status": "FAIL"
             }
           ],
           "method": "identity-bound behavior revalidation receipt",
-          "reason": "The receipts prove scoped subclaims; the frozen item remains UNVERIFIED until a COMPLETE claim covers it."
+          "reason": "A current behavior gap was reproduced. The frozen item remains UNVERIFIED because the receipt does not itself assert an architecture DEVIATION."
         }
       },
       {
@@ -3826,7 +3850,7 @@
   "source": {
     "crosswalk": "architecture/v1.0/crosswalk.json",
     "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
-    "product_commit": "faf3922c2b1d037f0c3a019dd1bbaf6dc059be15",
+    "product_commit": "6f9e34efe6399792b44fc0d51438c742e6e5a1c0",
     "product_manifest_sha256": "44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352",
     "product_tree_sha256": "08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2"
   },

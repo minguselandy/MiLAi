@@ -24,6 +24,30 @@
       },
       {
         "coverage": "SCOPED",
+        "covered_statement": "Upstream typed-need diagnostic: preserve requested history versus current state and avoid an arbitrary exact address for ambiguous keys, with explicit language/cost-probe limitations before Context acquisition.",
+        "debt_id": "resolver-lexical-language-assumptions",
+        "execution_status": "FAIL",
+        "limits": [
+          "Desired-behavior pure-function diagnosis, not proof of a frozen architecture violation or actual Context exposure.",
+          "Runtime interpreter owns intent/requirement, not StateKey selection or L0/L1 routing.",
+          "Frozen three-family aliases remain an explicit compatibility contract; renamed-alias failure does not authorize changing that contract.",
+          "C14 inherits actual C02 failure; this corpus alone does not isolate a second independent Chinese retry failure.",
+          "One C17 reason-only difference is informational, not an extra failure."
+        ],
+        "negative_case_ids": [
+          "RESOLVER-NEG-ALIAS",
+          "RESOLVER-NEG-CLIENT",
+          "RESOLVER-NEG-RUNTIME"
+        ],
+        "positive_case_ids": [
+          "RESOLVER-POS-CLIENT",
+          "RESOLVER-POS-RUNTIME"
+        ],
+        "receipt": "docs/revalidation/resolver-language/receipt.json",
+        "status": "FAIL"
+      },
+      {
+        "coverage": "SCOPED",
         "covered_statement": "Replacing a native Host instance permanently retires the old graph for that Adapter lifetime; retired instance replay is rejected without damaging legitimate continuation/replacement.",
         "debt_id": "process-local-task-continuity",
         "execution_status": "PASS",
@@ -44,14 +68,15 @@
         "status": "PASS"
       }
     ],
-    "failed_claim_count": 0,
+    "failed_claim_count": 1,
     "historical_receipt_count": 17,
     "index": "docs/revalidation/INDEX.md",
-    "preserved_failed_receipt_count": 4,
+    "preserved_failed_receipt_count": 5,
     "receipts": [
-      "docs/revalidation/host-continuity/remediation.receipt.json"
+      "docs/revalidation/host-continuity/remediation.receipt.json",
+      "docs/revalidation/resolver-language/receipt.json"
     ],
-    "validated_receipt_count": 18
+    "validated_receipt_count": 19
   },
   "claim_policy": {
     "architecture_conformant": false,
@@ -75,7 +100,7 @@
     "map": "docs/conformance/invariant-test-map.json",
     "status": "UNVERIFIED"
   },
-  "invariant_test_map_sha256": "98348d8dc0882eb0b724e7ef7b05cfbb42dc07f40a5ed1905ddb6e503a86b6d6",
+  "invariant_test_map_sha256": "1253bdb2cf2ffd36160c4948c4a8f8b265d20affe43b8a6db71f56537bd5578b",
   "known_limitations": [
     "Behavior revalidation receipts are identity-bound and may only promote an item when they explicitly declare COMPLETE coverage.",
     "AF-09 historical tarballs are archive-owned and are represented by tracked classification metadata, not Product Git bytes.",
@@ -88,7 +113,7 @@
     "0056_host_notes"
   ],
   "openworker_version": "0.1.0",
-  "product_commit": "faf3922c2b1d037f0c3a019dd1bbaf6dc059be15",
+  "product_commit": "6f9e34efe6399792b44fc0d51438c742e6e5a1c0",
   "product_manifest_sha256": "44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352",
   "product_tree_sha256": "08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2",
   "product_version": "0.1.0-candidate",
@@ -118,5 +143,5 @@
       "status": "UNVERIFIED"
     }
   ],
-  "verified_at": "2026-09-22T04:06:32+00:00"
+  "verified_at": "2026-09-22T04:54:56+00:00"
 }

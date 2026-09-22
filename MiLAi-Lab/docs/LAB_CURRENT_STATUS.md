@@ -2,7 +2,7 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_PASS / 3B-1_PASS / 3A-2D_DIAGNOSED / 3A-2R_IN_PROGRESS`
+> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_PASS / 3B-1_PASS / 3A-2D_DIAGNOSED / 3A-2R_PASS / 3A-3D_IN_PROGRESS`
 > New experiment allocations: `0`
 > New model requests: `0`
 
@@ -12,14 +12,19 @@ PR #34 is merged (`9474c63`, main fast `35683815988` PASS), closing scoped 3B-1.
 The [trace receipt](../../MiLAi-Product/docs/revalidation/trace-ownership/REVALIDATION.md)
 covers v2 joins of current authorized cache invocations to observed fresh origins, with
 18 real Host attempts, 47 Product tests and 76 Lab tests passed. Trace debt is FIXED;
-active work is Product Host continuity remediation. No research budget opens.
+active work is Product Resolver diagnosis. No research budget opens.
 The [local Host result](../../MiLAi-Product/docs/revalidation/host-continuity/REVALIDATION.md)
 finds retired-instance replay OPEN, while real restart/cache-miss reacquisition passes.
 Diagnosis PR #35 is merged (`e760434`, main fast `35685136321` PASS). Separate
-retired-instance remediation is now active; no Lab experiment is resumed.
-The [local repaired tree](../../MiLAi-Product/docs/revalidation/host-continuity/REMEDIATION.md)
-passes 24 native tests and 2 real PG recovery cases; final composition and remote closure
-are pending. The Product identity changed; prior research pins remain historical.
+retired-instance remediation closed in PR #36 (`3eab81c`). The
+[repaired tree](../../MiLAi-Product/docs/revalidation/host-continuity/REMEDIATION.md)
+passes 24 native tests and 2 real PG recovery cases; full #63 (`35685753906`)
+passed all 17 jobs, candidate/merge tree matched, main fast `35688151840` PASS.
+[3A-3D](../../MiLAi-Product/docs/revalidation/resolver-language/REVALIDATION.md)
+records client 11 PASS/11 FAIL and Runtime 6 PASS/2 FAIL on a corpus frozen first.
+Resolver debt is OPEN; diagnostic remote closure remains pending. No Lab source,
+model, retrieval or database execution and no resolver behavior change.
+The Product identity changed; prior research pins remain historical.
 
 The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md)
 is now the cross-bundle coordination contract. Its immediate work is Product behavioral closure and
@@ -53,7 +58,8 @@ Current interpretation of the active research record:
   transfer remain unestablished. Its closed allocations stay closed.
 - The repository-level `product.lock.json` is a historical pin. Every new Product-backed effect run
   must create and verify a run-specific lock against the selected Product baseline.
-- Product behavior remains unchanged. Lab owns experimental Utility, Revision, Attention, policy
+- No Lab policy enters Product defaults. The bounded native replay repair above is separate.
+  Lab owns experimental Utility, Revision, Attention, policy
   adaptation and transfer until the explicit Product Promotion Gate is satisfied.
 
 The sections below retain dated execution snapshots and historical evidence. Terms such as

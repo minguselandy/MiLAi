@@ -7,29 +7,31 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `e7604346471593127f09dbae321e95f018d2fa13`; Git tree
-  `fe157cd172946f83b8d6fafc21c600fb967ad881`; main fast `35685136321` passed.
-- Local 3A-2R candidate source: `faf3922c2b1d037f0c3a019dd1bbaf6dc059be15`;
-  final composition and remote closure pending.
+- Reconciled repository `main`: `3eab81c9e1c23b07e3aead351cc3adfe423470c0`; Git tree
+  `3874a68fa06892d4c3bf0a0fe354339d1bde8f9e`; main fast `35688151840` passed.
+- 3A-2R source proof: `faf3922c2b1d037f0c3a019dd1bbaf6dc059be15`;
+  PR #36 merged after exact-head fast and final composition passed.
   Product identity: 425 files; manifest SHA
   `44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352`; Product tree
   `08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2`.
   [Scoped repair receipt](revalidation/host-continuity/REMEDIATION.md): 24 native tests
   and 2 real PG recovery cases pass, without XFAIL; 4 fresh Host processes / 10 attempts.
   Streaming/concurrent continuation and model use/benefit are not claimed.
-- Cleanup C0–C10 is complete. The authoritative final composition is Run #60 / ID
-  `35632657133`: 17 jobs passed, including Runtime/PostgreSQL, all six integrations, Lab fast,
+- Cleanup C0–C10 is complete. Its historical composition is Run #60 / ID `35632657133`.
+  The current Host-repair composition is Run #63 / ID `35685753906`: 17 jobs passed,
+  at PR head `ba4723e236aa6fd4949a688d9593059b459a6bd9`, including Runtime/PostgreSQL, all six integrations, Lab fast,
   four historical replay shards, Archive, Product identity and Conformance.
 - Frozen Architecture remains version 1.0.0 and immutable. The current implementation map is
   `9 PASS / 35 UNVERIFIED / 0 DEVIATION`; overall status remains honestly `UNVERIFIED`.
   The prior `10/34/0` map was bound to the cleanup Product identity. Adding the explicit
   testkit and later native guard change the global manifest; 17 prior receipts are historical.
   The new Host remediation receipt contributes two current SCOPED claims (G9/G7),
-  with zero current failures and four preserved historical diagnostics. No old receipt
-  was rewritten; full composition remains pending for this material behavior candidate.
-- `docs/TECH_DEBT.md` locally records `9 FIXED / 1 NEEDS_REVALIDATION / 0 OPEN` after
-  [Host continuity remediation](revalidation/host-continuity/REMEDIATION.md).
-  The repair is a tested local candidate, not yet a merged/final-composition closure.
+  plus a current scoped Resolver diagnostic FAIL: 19 receipts, 2 current, 3 current
+  claims, 5 preserved diagnostic failures and 1 current failure. No old receipt
+  was rewritten; full composition and identical-tree merge now passed.
+- `docs/TECH_DEBT.md` records `9 FIXED / 0 NEEDS_REVALIDATION / 1 OPEN` after
+  [Resolver diagnosis](revalidation/resolver-language/REVALIDATION.md).
+  The repair is merged with final-composition and main-identity closure.
   `NEEDS_REVALIDATION` is not a defect classification and must be resolved by executable diagnosis.
 - The current coordinating contract is the
   [post-cleanup development Goal](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
@@ -48,8 +50,11 @@
   [3A-2D Host continuity diagnosis](revalidation/host-continuity/REVALIDATION.md) closed in
   PR #35: 18 native controls PASS / 2 FAIL; 2 real PG chains PASS (4 Host processes,
   10 attempts). Exact-head fast `35685033957`, merge-tree and main identity passed.
-  Active work is separate 3A-2R retired-instance replay remediation; local scoped proof
-  passes and a distinct repair receipt exists. Final composition/remote closure remain.
+  3A-2R retired-instance repair closed through PR #36. Active work is
+  [3A-3D Resolver diagnosis](revalidation/resolver-language/REVALIDATION.md):
+  frozen 30 cases, client 11 PASS/11 FAIL and Runtime 6 PASS/2 FAIL; no Product
+  behavior change. Original failures and strict XFAIL assertions remain; diagnostic
+  remote closure is pending, separate remediation has not started.
   This is not real model use or a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
