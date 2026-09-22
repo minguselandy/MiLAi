@@ -2,17 +2,20 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_PASS / 3B-1_IN_PROGRESS`
+> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_PASS / 3B-1_PASS / 3A-2D_DIAGNOSED_REMOTE_PENDING`
 > New experiment allocations: `0`
 > New model requests: `0`
 
 ## Current coordinated mainline
 
-PR #33's fresh same-execution slice is merged (`489ea7c`, main fast `35680800370` PASS).
-The subsequent [scoped trace receipt](../../MiLAi-Product/docs/revalidation/trace-ownership/REVALIDATION.md)
-is local only: v2 joins current authorized cache invocations to observed fresh origins, with
-18 real Host attempts, 47 Product tests and 76 Lab tests passed. Trace debt is locally FIXED;
-3B-1 awaits exact-head CI/merge/main closure. No research budget opens.
+PR #34 is merged (`9474c63`, main fast `35683815988` PASS), closing scoped 3B-1.
+The [trace receipt](../../MiLAi-Product/docs/revalidation/trace-ownership/REVALIDATION.md)
+covers v2 joins of current authorized cache invocations to observed fresh origins, with
+18 real Host attempts, 47 Product tests and 76 Lab tests passed. Trace debt is FIXED;
+active work is Product Host continuity diagnosis. No research budget opens.
+The [local Host result](../../MiLAi-Product/docs/revalidation/host-continuity/REVALIDATION.md)
+finds retired-instance replay OPEN, while real restart/cache-miss reacquisition passes.
+Diagnosis merge and separate remediation remain; no Lab experiment is resumed.
 
 The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md)
 is now the cross-bundle coordination contract. Its immediate work is Product behavioral closure and
@@ -22,8 +25,8 @@ inputs or incomplete work exist.
 The user resumed this Goal. PR #27 is merged at `cf149939eea9f184159ebfb6aab1a3e791988250`;
 exact-head CI, candidate/merge tree identity and main fast run `35673403788` passed.
 Worker `--once` revalidation completed through PR #28; main fast `35674495200` passed.
-The active package is [Trace Ownership v1](../../MiLAi-Product/docs/reference/trace-ownership-v1.md),
-starting with a content-free offline joiner. Synthetic contract tests are not real-run evidence;
+The completed [Trace Ownership v1](../../MiLAi-Product/docs/reference/trace-ownership-v1.md) package began
+with a content-free offline joiner. Synthetic contract tests are not real-run evidence;
 the later scoped receipt adds actual owner exports and real-chain proof. Historical research remains paused.
 PR #30's offline slice is merged (main fast `35676214359` PASS). An explicitly imported
 [Host producer testkit](../../MiLAi-Product/docs/reference/host-trace-testkit.md) merged in
@@ -32,8 +35,8 @@ PR #31 (main fast `35677115118` PASS); the Runtime producer merged in PR #32 (ma
 [same-execution candidate](../../MiLAi-Product/docs/reference/trace-ownership-chain.md)
 joins eight real MCP/HTTP/PostgreSQL attempts through a controlled in-process Provider
 fixture. Fresh exact-version/Context and failure dispatch facts are bound. The later v2
-proof adds five genuine cache validations and governed Claim supersession; remote closure
-remains pending. No model-backed effect run or actual use is claimed.
+proof adds five genuine cache validations and governed Claim supersession; PR #34 completes
+remote closure. No model-backed effect run or actual use is claimed.
 
 Current interpretation of the active research record:
 

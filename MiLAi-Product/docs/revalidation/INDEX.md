@@ -36,6 +36,8 @@ remains the historical cleanup identity. Prior receipt bytes are unchanged.
 | OpenWorker HTTP auth/exposure | `FIXED` | [`openworker-http-exposure/REVALIDATION.md`](openworker-http-exposure/REVALIDATION.md) |
 | worker `--once` docs/behavior (Phase 3A-1) | `FIXED` | [`worker-once/REVALIDATION.md`](worker-once/REVALIDATION.md) |
 | Runtime / Host / Provider ownership (Phase 3B-1, serial query-first testkit) | `FIXED` | [`trace-ownership/REVALIDATION.md`](trace-ownership/REVALIDATION.md) |
+| process-local task continuity/state (Phase 3A-2D) | `OPEN` | [`host-continuity/REVALIDATION.md`](host-continuity/REVALIDATION.md), original native-instance replay failures retained |
+| cache-miss Host continuation (Phase 3A-2D, scoped) | `FIXED` | [`host-continuity/cache-miss.receipt.json`](host-continuity/cache-miss.receipt.json) |
 
 The five Phase 2 rows also have a `post-cleanup.receipt.json` bound to the final cleanup Product identity.
 These receipts preserve the prior claim statements and coverage levels; they do not replace or
@@ -64,10 +66,6 @@ are validated against the Product manifest at their baseline commit; only
 receipts matching the current Product manifest/tree contribute current
 Conformance claims.
 
-The next cross-boundary items remain outside this directory until their own
-revalidation is executed:
-
-```text
-process-local task continuity/state
-cache-miss Host continuation
-```
+Phase 3A-2D adds separate native-continuity FAIL and cache-miss PASS receipts without
+changing Product executable identity. Native repair requires its own remediation
+receipt; diagnosis and strict expected failures are not silently upgraded to PASS.

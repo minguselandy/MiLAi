@@ -1,17 +1,22 @@
 # MiLAi Product Goals
 
-> Document: `MILA-PRODUCT-GOALS@3.34`
-> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3B1_TRACE_OWNERSHIP`
+> Document: `MILA-PRODUCT-GOALS@3.35`
+> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A2D_HOST_CONTINUITY`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
 ## Current governing Goal: post-cleanup behavioral closure and measured research
 
-Latest closure: PR #33 merged as `489ea7ca8c3756630f32da0e2c52a0940c97d74e`, main fast
-`35680800370` PASS. Local [scoped trace receipt](revalidation/trace-ownership/REVALIDATION.md)
+Latest closure: PR #34 merged as `9474c63e56e5029c33e2dca5c19e772e4868b18d`, main fast
+`35683815988` PASS. The [scoped trace receipt](revalidation/trace-ownership/REVALIDATION.md)
 now covers fresh Evidence and Claim/cache cross-layer joins: 47 Product tests, 76 Lab tests,
 18 actual Host attempts, zero model calls. Trace debt is FIXED for this serial query-first
-testkit scope; 3B-1 remains IN_PROGRESS pending CI/merge/main closure. Research stays unallocated.
+testkit scope; 3B-1 is PASS after exact-head CI and identical-tree merge. Active work is
+[3A-2D Host continuity diagnosis](revalidation/host-continuity/DIAGNOSIS_PLAN.md), not remediation.
+Its [local result](revalidation/host-continuity/REVALIDATION.md) leaves native retired-instance
+replay OPEN and closes scoped cache-miss continuation. Diagnosis CI/merge is pending;
+the conditional next package is a separate retired-instance repair.
+Research stays unallocated.
 
 The current cross-bundle execution contract is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
@@ -41,7 +46,7 @@ The user resumed execution. 3A-0 is complete: PR #27 merged at `cf149939eea9f184
 with exact-head fast run `35672424053`, candidate/merge tree identity, and main fast run
 `35673403788` all verified. 3A-1 completed through PR #28 at main
 `81f2f12844674983973ae7dad99868211ba1a1bb`, with main fast `35674495200` passed.
-Current local debt is `7 FIXED / 3 NEEDS_REVALIDATION / 0 OPEN`. 3B-1 started from
+Current debt is `8 FIXED / 1 NEEDS_REVALIDATION / 1 OPEN`. 3B-1 started from
 main `755cdfc947f34efa03cc0bb1eed682233767b061` after PR #29's docs-only CI optimization.
 The [offline ownership candidate](reference/trace-ownership-v1.md) alone did not close live
 producer provenance; the subsequent scoped receipt above supplies that evidence.
@@ -51,7 +56,7 @@ including main fast `35677115118`. Runtime owner export merged in PR #32, main f
 `35677932965` PASS. The [same-execution candidate](reference/trace-ownership-chain.md)
 joined eight real MCP/HTTP/PostgreSQL attempts with a controlled Provider fixture;
 the later [v2 contract](reference/trace-ownership-v2.md) adds proven cache-origin joins.
-Remote work-package closure remains pending. Added testkit source changes Product identity;
+PR #34 completed remote work-package closure. Added testkit source changes Product identity;
 the fresh Conformance map is `9 PASS / 35 UNVERIFIED / 0 DEVIATION`, with prior receipts
 retained as historical evidence. No default Product behavior or research budget changes.
 

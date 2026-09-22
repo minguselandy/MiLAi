@@ -7,9 +7,9 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `489ea7ca8c3756630f32da0e2c52a0940c97d74e`; Git tree
-  `7affaf3ac122d939513bcf406ed09c72efa13a93`; main fast `35680800370` passed.
-- Local final 3B-1 source: `519ba02bbedc7507237bb78267679ef0cf62cf71`, remote closure pending.
+- Reconciled repository `main`: `9474c63e56e5029c33e2dca5c19e772e4868b18d`; Git tree
+  `1c070d6d9c62ea3ce71a68b22ca3ec4e87c2584e`; main fast `35683815988` passed.
+- Final 3B-1 test source: `519ba02bbedc7507237bb78267679ef0cf62cf71`; PR #34 is closed.
   Product identity: 425 files; manifest SHA
   `0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae`; Product tree
   `22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a`.
@@ -23,10 +23,12 @@
   `9 PASS / 35 UNVERIFIED / 0 DEVIATION`; overall status remains honestly `UNVERIFIED`.
   The prior `10/34/0` map was bound to the cleanup Product identity. Adding the explicit
   testkit changes the global manifest; its 14 earlier behavior receipts remain historical.
-  A new trace-ownership receipt contributes one current SCOPED G7 claim. No old receipt was rewritten and
+  Trace ownership and the new Host diagnoses contribute three current SCOPED claims,
+  including one failed native-replay diagnostic. No old receipt was rewritten and
   no new behavior failure is implied. Unrelated behavior suites were not rerun for this addition.
-- `docs/TECH_DEBT.md` currently records `7 FIXED / 3 NEEDS_REVALIDATION / 0 OPEN` after
-  [scoped trace-ownership revalidation](revalidation/trace-ownership/REVALIDATION.md).
+- `docs/TECH_DEBT.md` currently records `8 FIXED / 1 NEEDS_REVALIDATION / 1 OPEN` after
+  [Host continuity diagnosis](revalidation/host-continuity/REVALIDATION.md).
+  Native retired-instance replay is OPEN; cache-miss continuation is FIXED for its scoped proof.
   `NEEDS_REVALIDATION` is not a defect classification and must be resolved by executable diagnosis.
 - The current coordinating contract is the
   [post-cleanup development Goal](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
@@ -34,15 +36,19 @@
   Product/Lab status reconciliation completed through PR #27 at main `cf149939eea9f184159ebfb6aab1a3e791988250`;
   tested/merge tree identity and main fast run `35673403788` passed. The user resumed development;
   worker `--once` revalidation completed through PR #28, with main fast `35674495200` passed.
-  Active work is [Trace Ownership v1](reference/trace-ownership-v1.md): offline contract/join
+  [Trace Ownership v1](reference/trace-ownership-v1.md) is complete for its scoped testkit: offline contract/join
   implementation merged in PR #30. The [Host producer testkit](reference/host-trace-testkit.md)
   merged in PR #31; the Runtime producer merged in PR #32. The new
   [same-execution slice](reference/trace-ownership-chain.md), merged in PR #33, joins eight actual
   Host/MCP/HTTP/PostgreSQL attempts with a controlled in-process Provider fixture.
   Exact fresh-retrieval/version/Context provenance and failure dispatch states are covered;
-  the new v2 candidate additionally covers actual Claim/cache origins and has a scoped debt receipt.
-  The work package still awaits exact-head CI/merge/main identity; this is not real model use or
-  a mechanism-effect claim.
+  v2 additionally covers actual Claim/cache origins and has a scoped debt receipt.
+  PR #34 exact-head fast `35683142058`, merge-tree identity and main fast all passed.
+  Active work is [3A-2D Host continuity diagnosis](revalidation/host-continuity/DIAGNOSIS_PLAN.md).
+  Local diagnosis is terminal: 18 native controls PASS / 2 FAIL; 2 real PG chains PASS
+  (4 Host processes, 10 attempts). Remote diagnosis closure remains pending; the replay
+  defect requires a separate behavior PR, not a repair hidden in this diagnostic slice.
+  This is not real model use or a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
   candidate; docs-only and Lab-only changes use the classified fast path.

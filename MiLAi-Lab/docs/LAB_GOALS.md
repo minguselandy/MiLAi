@@ -2,16 +2,19 @@
 
 ## Current coordinating Goal
 
-3B-1 local implementation and [scoped proof](../../MiLAi-Product/docs/revalidation/trace-ownership/REVALIDATION.md)
+3B-1 implementation and [scoped proof](../../MiLAi-Product/docs/revalidation/trace-ownership/REVALIDATION.md)
 are complete: v2 binds actual current cache invocations to observed origins without inventing
 fresh retrievals or acquired Evidence bodies. PR #33's fresh-only slice is merged;
-the Claim/cache follow-up awaits exact-head CI, merge and main closure.
+the Claim/cache follow-up closed in PR #34, main fast `35683815988` PASS.
+Active work is 3A-2D Host continuity diagnosis, now locally terminal with retired-instance
+replay OPEN and cache-miss continuation FIXED. After diagnostic merge, a separate
+3A-2R repair is admitted by that failure; no fix is included in this branch.
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).
 `3A-0 Status Reconciliation` completed through PR #27, including exact-head CI, merge-tree identity
 and main fast run `35673403788`. `3A-1 Worker --once Revalidation` completed through PR #28
-and main fast `35674495200`. Active work is `3B-1 Trace Ownership v1`: offline contract and
+and main fast `35674495200`. `3B-1 Trace Ownership v1/v2` completed: offline contract and
 Lab joiner first, followed by the now-recorded scoped live producer proof. The Goal closes Product
 behavioral evidence and Trace Ownership before requiring a real Memory Opportunity Ledger; new
 Utility, Revision, Attention or policy-adaptation effect work is not yet admitted.
@@ -20,7 +23,7 @@ The [same-execution probe](../../MiLAi-Product/docs/reference/trace-ownership-ch
 now binds fresh Runtime/actual MCP/Host facts into the Lab joiner for eight attempts,
 including failure/unknown dispatch. Provider is a controlled fixture, not an actual
 model. The subsequent Claim/cache probe adds ten attempts and five actual reuse validations.
-Remote 3B-1 closure stays pending; the Opportunity Ledger is not yet implemented.
+Remote 3B-1 closure passed; the Opportunity Ledger is not yet implemented.
 
 This coordination update allocates zero model requests, does not resume any old worker or batch,
 does not reopen a protected/frozen pool, and does not replace historical Goal states. A future Lab

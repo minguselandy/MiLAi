@@ -1,0 +1,135 @@
+{
+  "schema_version": "milai-behavior-revalidation-v1",
+  "debt_id": "cache-miss-host-continuation",
+  "state": "FIXED",
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "6712e800ef28189f191eb313108a6b8d86b3d795",
+    "product_manifest_sha256": "0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae",
+    "product_tree_sha256": "22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a"
+  },
+  "decision": {
+    "state": "FIXED",
+    "rationale": "Query-first reacquires persistent memory through actual MCP/HTTP/PG after fresh Host process startup. Cache-hit and cache-miss controls both succeed; stopped Runtime blocks Provider. Compatibility retained-slot mismatch remains fail-closed."
+  },
+  "execution": {
+    "status": "PASS",
+    "verified_at": "2026-09-22T03:52:10Z",
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 10.59,
+    "host_processes": 4,
+    "host_attempts": 10,
+    "fixture_invocations": 8,
+    "remote_closure": "PENDING"
+  },
+  "environment": {
+    "model_requests": 0,
+    "experiment_allocations": 0,
+    "provider": "CONTROLLED_FIXTURE",
+    "database": "milai_worker_once",
+    "postgresql_version": "16.14",
+    "endpoint": "127.0.0.1:32796",
+    "container": "milai-3a1-worker-once-20260922",
+    "migration_head": "0056_host_notes",
+    "stopped_data_retained": true
+  },
+  "reproduction": {
+    "working_directory": "MiLAi-Product/integrations/openworker-mcp",
+    "required_environment": [
+      "MILAI_TEST_API_DATABASE_URL",
+      "MILAI_TEST_STEWARD_DATABASE_URL",
+      "MILAI_TEST_WORKER_DATABASE_URL"
+    ],
+    "commands": [
+      {
+        "command": "uv run --frozen --offline --project ../../../MiLAi-Lab --with-editable ../../runtime --with-editable ../python-client --with-editable . python -m pytest -q tests/test_host_continuity_pg.py --tb=short --basetemp=<new-private-pg-directory> --junitxml=<new-private-pg.xml>",
+        "status": "PASS",
+        "exit_code": 0
+      }
+    ],
+    "tests": [
+      "integrations/openworker-mcp/tests/test_host_continuity_pg.py::test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed",
+      "integrations/openworker-mcp/tests/test_adapter.py::test_retained_slot_only_requests_cache_as_a_runtime_validation_candidate",
+      "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_cached_locator_never_authorizes_offline_provider_dispatch",
+      "integrations/openworker-mcp/tests/test_host_adapter.py::test_unchanged_context_without_retained_host_slot_fails_closed",
+      "integrations/openworker-mcp/tests/test_adapter.py::test_goal_scope_and_profile_switches_rebind_and_invalidate_task_key",
+      "runtime/tests/integration/test_claim_owner_trace_pg.py::test_http_cache_owner_links_current_validation_to_original_claim_execution"
+    ]
+  },
+  "positive_cases": [
+    {
+      "case_id": "CACHE-POS-RESTART",
+      "description": "Four fresh Host processes perform current Runtime reads and reacquire the identical persisted Claim version; missing local cache never implies lost memory.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_host_continuity_pg.py::test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed"
+      ]
+    },
+    {
+      "case_id": "CACHE-POS-VALIDATION",
+      "description": "Query-first same-process receipt hits remain Runtime-validated; compatibility retained slot is only a candidate.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_host_continuity_pg.py::test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed",
+        "integrations/openworker-mcp/tests/test_adapter.py::test_retained_slot_only_requests_cache_as_a_runtime_validation_candidate"
+      ]
+    }
+  ],
+  "negative_cases": [
+    {
+      "case_id": "CACHE-NEG-OFFLINE",
+      "description": "Stopped real Runtime blocks MCP/Host delivery and Provider dispatch despite retained locator; no offline-current fallback.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_host_continuity_pg.py::test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed",
+        "integrations/openworker-mcp/tests/test_host_continuity_diagnosis.py::test_cached_locator_never_authorizes_offline_provider_dispatch"
+      ]
+    },
+    {
+      "case_id": "CACHE-NEG-OLD",
+      "description": "Absent/mismatched retained slot fails closed; scope/profile transition invalidates local binding; old scoped or canonically stale receipt falls through Runtime validation.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_host_adapter.py::test_unchanged_context_without_retained_host_slot_fails_closed",
+        "integrations/openworker-mcp/tests/test_adapter.py::test_goal_scope_and_profile_switches_rebind_and_invalidate_task_key",
+        "runtime/tests/integration/test_claim_owner_trace_pg.py::test_http_cache_owner_links_current_validation_to_original_claim_execution"
+      ]
+    }
+  ],
+  "conformance_claims": [
+    {
+      "architecture_id": "G7",
+      "coverage": "SCOPED",
+      "status": "PASS",
+      "covered_statement": "Host cache loss or restart cannot authorize offline CURRENT Context: memory is reacquired or validated by Runtime, and unavailable Runtime blocks exposure.",
+      "positive_case_ids": [
+        "CACHE-POS-RESTART",
+        "CACHE-POS-VALIDATION"
+      ],
+      "negative_case_ids": [
+        "CACHE-NEG-OFFLINE",
+        "CACHE-NEG-OLD"
+      ],
+      "limits": [
+        "Does not fix or cover the retired-native-instance replay defect.",
+        "Serial query-first path plus compatibility retained-slot negative controls; not streaming/concurrent/production continuity.",
+        "Reuses unchanged-tree scope/canonical validation evidence from trace-ownership receipt rather than rerunning it.",
+        "No model use, efficacy or broad protected-Context conformance claim."
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3a2d-20260922-mlGmSz/pg-r5.xml",
+      "sha256": "364c802e51f5ccf0481027eadcbe85d9260587e31c86a5c2f18ce0c5d38b3ec8"
+    }
+  ],
+  "reused_evidence": {
+    "receipt": "docs/revalidation/trace-ownership/receipt.json",
+    "reason": "Product executable/manifest unchanged; exact/scope/canonical controls already executed on this Product tree."
+  }
+}
