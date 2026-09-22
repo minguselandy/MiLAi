@@ -69,7 +69,9 @@
   followed by classified Lab fast, identical-tree merge and main identity PASS.
   It does not bypass or close the language gaps, or claim model use/mechanism benefit.
   The [next research preflight](../../MiLAi-Lab/docs/POST_CLEANUP_RESEARCH_PREFLIGHT.md)
-  remains unallocated and requires finite input/model/budget authority.
+  now has a separate user-authorized [finite first Utility batch](../../MiLAi-Lab/docs/UTILITY_FIRST_BATCH.md).
+  The 32-pair schedule is frozen, but method/evidence admission remains incomplete;
+  no new model request has started and no historical study is resumed.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
   candidate; docs-only and Lab-only changes use the classified fast path.

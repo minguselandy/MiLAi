@@ -2,8 +2,8 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `ACTIVE / 3B-2_PASS / 3A-3R_PARTIAL_REPAIR_OPEN / 3C_PREFLIGHT_UNALLOCATED`
-> New experiment allocations: `0`
+> Current execution: `ACTIVE / 3B-2_PASS / 3A-3R_PARTIAL_REPAIR_OPEN / 3C_FINITE_BATCH_PREPARATION`
+> New experiment allocations: `1 authorized / execution not yet admitted`
 > New model requests: `0`
 
 ## Current coordinated mainline
@@ -36,9 +36,13 @@ The [ledger contract](MEMORY_OPPORTUNITY_LEDGER.md) and pre-outcome recorder are
 The separate actual run has 10 Host attempts / 9 fixture calls / 4.696 s, with
 pre-outcome snapshots and reproducible accounting; 0 model requests. Task outcomes
 and use stay UNKNOWN, with 0 selection opportunities; no mechanism benefit is claimed.
-Next is the [zero-allocation 3C preflight](POST_CLEANUP_RESEARCH_PREFLIGHT.md).
-Input scope, model/profile and finite request/token/time ceilings still need explicit
-authorization and freezing; no effect experiment or old study is resumed.
+The user has authorized [one finite Utility batch](UTILITY_FIRST_BATCH.md):
+32 frozen DB/OS pairs (64 executions), existing M1 solver/profile, at most
+400 text + 128 embedding requests, 3,000,000 + 50,000 tokens and four hours.
+The schedule is frozen before any request; global budget accounting now gates the
+opt-in Provider transport. Utility-evidence definition, implemented selection method
+and a frozen/admitted experiment runner remain gaps. New requests are
+still zero; no effect experiment or old study has started.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.

@@ -1,7 +1,7 @@
 # MiLAi Product Goals
 
 > Document: `MILA-PRODUCT-GOALS@3.40`
-> Status: `POST_CLEANUP_DEVELOPMENT_3B2_PASS_3C_PREFLIGHT_UNALLOCATED`
+> Status: `POST_CLEANUP_DEVELOPMENT_3B2_PASS_3C_FINITE_BATCH_PREPARATION`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
@@ -30,8 +30,10 @@ Ledger closed through PR #39 at `53e13c4`, exact-head fast `35717333297`, identi
 candidate/merge trees and main fast `35718296416`. Its 10-attempt real fixture ledger
 and 107 targeted tests are engineering proof, not a false resolver or research closure.
 Debt remains OPEN, not FIXED; no case terms, translation dictionary or model controller added.
-The [3C preflight](../../MiLAi-Lab/docs/POST_CLEANUP_RESEARCH_PREFLIGHT.md) records
-the missing finite execution authority; research stays unallocated.
+The earlier [3C preflight](../../MiLAi-Lab/docs/POST_CLEANUP_RESEARCH_PREFLIGHT.md)
+has received separate user authority for [one finite Utility batch](../../MiLAi-Lab/docs/UTILITY_FIRST_BATCH.md).
+Its task/arm schedule is frozen; method/evidence admission and experiment-runner integration
+remain incomplete. No request or four-hour execution clock has started.
 
 The current cross-bundle execution contract is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),

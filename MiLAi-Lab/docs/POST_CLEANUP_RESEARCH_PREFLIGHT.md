@@ -1,5 +1,12 @@
 # Phase 3C research preflight — no model allocation
 
+Update, 2026-09-22: the user has now authorized one
+[finite first Utility batch](UTILITY_FIRST_BATCH.md). That separate allocation
+supersedes the missing-authority fields below; this original preparation record
+does not itself allocate additional requests. Task/arm schedule is frozen, but
+method/evidence admission and transport integration remain incomplete. No calls
+have started. Earlier PR closure and zero-allocation facts below remain historical.
+
 Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`. Status: `DRAFT_NOT_ADMITTED`.
 This is a preparation record, not an experiment manifest or permission to send a
 request. Model requests, generations and tokens allocated by this document: **0**.
