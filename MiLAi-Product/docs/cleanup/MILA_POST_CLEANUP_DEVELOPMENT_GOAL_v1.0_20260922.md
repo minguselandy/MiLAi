@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3C-2_RESEARCH_REVISION_ELIGIBILITY_BRIDGE
-next_work_package: 3C-3_DETERMINISTIC_ATTENTION_POLICY
+current_work_package: 3C-3_DETERMINISTIC_ATTENTION_POLICY
+next_work_package: 3C_RESEARCH_ADMISSION_DECISION
 new_experiment_allocations: 1
 new_model_requests: 199
 ---
@@ -231,7 +231,7 @@ NEEDS_REVALIDATION
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PASS — PR #39 / exact-head fast / identical-tree merge / main identity verified; scoped accounting, not mechanism benefit | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | KEEP_SIMPLE — PR #42 / main identity verified; benefit not established | 3B-2 real-run proof |
 | 3C-2 | Evidence-grounded Revision | Lab | no | IN_PROGRESS — zero-model eligibility bridge; no real correction denominator/effect terminal or new model allocation | 3B-2 + lineage |
-| 3C-3 | State-guided Attention | Lab | no | IN_PROGRESS — zero-model state/mode contract proposal; no effect execution | 3B-2 + frozen state |
+| 3C-3 | State-guided Attention | Lab | no | IN_PROGRESS — zero-model bounded three-mode decision seam; no live runner/cost-quality comparison or effect terminal | 3B-2 + frozen state |
 | 3C-4 | RL-like adaptation | Lab | no | NOT_ADMITTED | prior mechanism acts |
 | 3D-1 | Frozen-bank transfer | Lab | no | NOT_ADMITTED | repeatable DEV signal |
 | 3D-2 | Online stream | Lab | no | NOT_ADMITTED | frozen policy/order |
@@ -840,6 +840,30 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-23 — Deterministic Attention decisions; no model or effect execution
+
+- Base/rollback `b9b513084b4c966dd229107370f9d59ac69f4c5e`, verified remote main.
+  Revision PR #44 exact-head fast `35791556071` and main fast `35792307687` PASS;
+  candidate/merge tree `034f8c2984d3d8881c1c57795b91e74064edbaf8` matched.
+- [Lab policy seam](../../../MiLAi-Lab/docs/STATE_ATTENTION_POLICY.md) reuses exact
+  SourceUnit/Snapshot identities without changing the old request builder or M1.
+  Current reviewed conflict reserves all sides; reviewed gaps allow one bounded
+  expansion intent. Missing/stale state or coverage falls back to the declared
+  baseline with UNKNOWN, never inferred confidence. Pool changes invalidate old
+  state and no-conflict assertions; coverage binds actual bounded selection.
+- 73 targeted tests PASS, changed-file Ruff/mypy PASS. Initial default-argument Ruff
+  B008 resolved with an immutable module constant. Tests use synthetic sources and
+  caller-supplied reviews only; no actual retrieval, model, embedding or Judge call.
+  Package verification/build is delegated to classified Lab fast CI; no Product
+  full or historical replay. No extra real-data scan or new allocation.
+- This is not a live Attention system: runner persistence/dispatch, authentic semantic
+  state/coverage labels, common-condition quality and complete cost comparison remain
+  missing. The next package is explicit research admission, not automatic budget
+  reuse or another speculative mechanism. Utility stays closed; 3C-2/3C-3 effect
+  terminals and overall Goal remain incomplete; transfer/promotion NOT_ADMITTED.
+- Product executable/Schema/API/permission/Canonical behavior unchanged. C06/C21 OPEN,
+  Conformance UNVERIFIED, Schema EXPERIMENTAL / NO-GO remain unchanged.
 
 ## 2026-09-23 — Revision eligibility implementation; effect evidence still absent
 
