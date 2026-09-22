@@ -2,7 +2,7 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `3A-0_STATUS_RECONCILIATION_COMPLETE / NEXT_3A-1`
+> Current execution: `PAUSED_FOR_GPT6_HANDOFF / PR_27_PENDING / 3A-1_NOT_STARTED`
 > New experiment allocations: `0`
 > New model requests: `0`
 

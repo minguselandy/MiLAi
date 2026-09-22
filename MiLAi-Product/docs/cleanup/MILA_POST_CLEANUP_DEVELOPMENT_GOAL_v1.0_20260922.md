@@ -2,7 +2,7 @@
 goal_id: MILAI-POST-CLEANUP-DEVELOPMENT-01
 version: v1.0
 date: 2026-09-22
-status: ACTIVE
+status: PAUSED_FOR_GPT6_HANDOFF
 kind: PRODUCT_BEHAVIORAL_CLOSURE_AND_LAB_RESEARCH
 source_roadmap: docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_ROADMAP_v1.0_20260922.md
 source_roadmap_sha256: fcf2bb29da976f1db1ab2fb00a6a989b49346ef1a2466cdc553d1deed0b40e9e
@@ -11,8 +11,11 @@ baseline_git_tree: 8b08c84e8d13d82e513034d690be057dc159722b
 product_tree_sha256: 7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521
 frozen_architecture: 1.0.0
 schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
-current_work_package: 3A-0_STATUS_RECONCILIATION_COMPLETE
-next_work_package: 3A-1_WORKER_ONCE_REVALIDATION
+paused_at: 2026-09-22T08:24:12+08:00
+pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
+handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
+current_work_package: 3A-0_STATUS_RECONCILIATION_SUBMITTED_PENDING_REMOTE_CLOSURE
+next_work_package: VERIFY_AND_MERGE_PR_27_THEN_START_3A-1
 new_experiment_allocations: 0
 new_model_requests: 0
 ---
@@ -182,6 +185,7 @@ Product 可证明 acquisition、selection 和 exposure；仅因 Memory 进入 pr
 ```text
 READY_FOR_EXECUTION
   → ACTIVE
+  ↔ PAUSED_FOR_GPT6_HANDOFF
   → COMPLETE_PROMOTED
   → COMPLETE_NO_PROMOTION
 ```
@@ -189,7 +193,8 @@ READY_FOR_EXECUTION
 异常终态：`BLOCKED_EXTERNAL_AUTHORITY`、`BLOCKED_INVALID_EVIDENCE`、
 `STOPPED_SAFETY_REGRESSION`、`SUPERSEDED_BY_REVIEWED_GOAL`。
 
-本文件生成时为 `READY_FOR_EXECUTION`；3A-0 启动后已改为 `ACTIVE`。
+本文件生成时为 `READY_FOR_EXECUTION`；3A-0 启动后改为 `ACTIVE`。用户随后要求暂停并迁移
+到 GPT-6，当前状态为 `PAUSED_FOR_GPT6_HANDOFF`。该状态不是完成、失败或实验恢复授权。
 
 工作包只使用：
 
@@ -215,7 +220,7 @@ NEEDS_REVALIDATION
 | ID | Work package | Owner | Product behavior | Status | Entry gate |
 | --- | --- | --- | --- | --- | --- |
 | G0 | Goal registration | docs | no | COMPLETE | roadmap bound |
-| 3A-0 | Status reconciliation | Product/Lab docs | no | PASS | G0 |
+| 3A-0 | Status reconciliation | Product/Lab docs | no | IN_PROGRESS — PR #27 pending | G0 |
 | 3A-1 | Worker `--once` revalidation | Product evidence | expected no | PENDING | 3A-0 |
 | 3B-1 | Trace Ownership v1 | Product/testkit + Lab | small/contractual | PENDING | 3A-0 |
 | 3A-2D | Host Continuity diagnosis | Product evidence | no | PENDING | 3B-1 vocabulary |
@@ -818,7 +823,7 @@ B. NO_PROMOTION
 
 ---
 
-# 15. First executable slice — completed
+# 15. First executable slice — submitted, remote closure pending
 
 Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 
@@ -844,7 +849,7 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 - 新 experiment allocation 与 model request 均为 0；历史实验未恢复。
 - 初始状态：`READY_FOR_EXECUTION`；首个工作包：`3A-0_STATUS_RECONCILIATION`。
 
-## 2026-09-22 — 3A-0 Status Reconciliation complete
+## 2026-09-22 — 3A-0 Status Reconciliation submitted
 
 - Product current baseline 已更新到 cleanup 后 main、Product manifest/tree、Conformance `10/34/0`
   与 TECH_DEBT `5 FIXED / 5 NEEDS_REVALIDATION / 0 OPEN`。
@@ -853,4 +858,17 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
   Adaptive Memory 的工程完成/收益未证实边界。
 - Lab Goals 已解释旧 `PLANNED_NOT_STARTED` 与后续 `IMPLEMENTATION_IN_PROGRESS` 的时间关系；
   历史 Goal 未改写，旧实验未恢复。
-- 本阶段无 Product/Lab 行为改动、无模型请求、无新实验 allocation；下一工作包为 3A-1。
+- 本阶段无 Product/Lab 行为改动、无模型请求、无新实验 allocation。
+- 本地 L0 已通过，候选已提交为 PR #27；但 PR 尚未合并，3A-0 仍等待 fast CI、tested-head merge、
+  candidate/merge tree identity 和 post-merge main identity，因此尚未取得最终 `PASS`。
+
+## 2026-09-22 — User pause and GPT-6 handoff
+
+- 用户在 PR #27 fast workflow 执行期间明确要求暂停开发。
+- 暂停前最后一次观测：PR #27 head `e31baf3ff88151e6d7aa9692cba715d562991269`；fast Run
+  `35671618962` 状态为 `in_progress`。该状态只是暂停时快照，恢复时必须从 GitHub 重新读取。
+- 暂停后不再轮询、不合并 PR、不启动 3A-1，也不运行额外测试或实验。
+- GPT-6 接手说明见
+  `docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md`。
+- 恢复顺序固定为：核对 PR #27 live head/CI → 合并并证明 identity → 将 3A-0 标记 PASS →
+  从最新 main 创建 3A-1 分支。不得从未合并候选直接开始 3A-1。

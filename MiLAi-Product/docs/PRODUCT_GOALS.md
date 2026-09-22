@@ -1,7 +1,7 @@
 # MiLAi Product Goals
 
 > Document: `MILA-PRODUCT-GOALS@3.34`
-> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A0_COMPLETE_NEXT_3A1`
+> Status: `POST_CLEANUP_DEVELOPMENT_PAUSED_FOR_GPT6_HANDOFF_PR27_PENDING`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
@@ -30,6 +30,10 @@ Product remains the reliable substrate. No Lab policy enters the Product default
 matched mechanism signal, independent confirmation, architecture review, ADR and minimal behavior
 PR. No model or experiment allocation follows from this status update, and paused historical work
 does not automatically resume.
+
+Execution is currently paused by the user for GPT-6 handoff. The 3A-0 candidate is PR #27; it has
+local L0 evidence but is not complete until live CI, merge-tree identity and post-merge main identity
+are verified. 3A-1 has not started.
 
 ## Historical plan snapshot: V02-18 testbed and innovation judgment
 

@@ -4,9 +4,10 @@
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).
-`3A-0 Status Reconciliation` is complete; `3A-1 Worker --once Revalidation` is next. The Goal closes
-Product behavioral evidence and Trace Ownership before requiring a real Memory Opportunity Ledger;
-new Utility, Revision, Attention or policy-adaptation effect work is not yet admitted.
+`3A-0 Status Reconciliation` is submitted as PR #27 but still awaits remote closure. Development is
+paused for GPT-6 handoff; `3A-1 Worker --once Revalidation` has not started. The Goal closes Product
+behavioral evidence and Trace Ownership before requiring a real Memory Opportunity Ledger; new
+Utility, Revision, Attention or policy-adaptation effect work is not yet admitted.
 
 This coordination update allocates zero model requests, does not resume any old worker or batch,
 does not reopen a protected/frozen pool, and does not replace historical Goal states. A future Lab
