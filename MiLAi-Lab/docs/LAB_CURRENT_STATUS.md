@@ -70,8 +70,17 @@ The separate [deterministic Attention policy seam](STATE_ATTENTION_POLICY.md) no
 implements FOCUS/CONFLICT/EXPLORE decisions over an acquired pool, current reviewed
 state and exact-selection coverage, with conflict preservation and one bounded
 expansion intent. 74 targeted tests pass; no retriever/Provider is called. A live
-runner, authentic state/coverage labels, full cost/quality comparison and new finite
-authorization are still missing. Next work is the joint research admission decision,
+runner, authentic state/coverage labels and full cost/quality comparison remain gaps.
+Policy PR #45 closed at `1367b2c`: exact-head fast `35793963165`, identical
+candidate/merge tree and main fast `35794863363` PASS; Lab 4,766 PASS / 137 SKIP /
+4 DESELECTED. The subsequent durable expansion capture binds one private arm/task
+journal, commits an attempt before dispatch, preserves failures/uncertain recovery
+and prevents concurrent or recovered callers from repeating it. Its 63 targeted tests
+with the pure policy pass; no live retriever or model was used. This is not complete
+state production, live-run integration or benefit evidence.
+The user authorized a new finite Revision/Attention batch in principle, but did not
+yet confirm its proposed numerical/data contract. No new allocation has opened;
+Utility stays closed. Next work is that contract and joint research admission,
 not automatic execution or more unmeasured mechanism complexity.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.

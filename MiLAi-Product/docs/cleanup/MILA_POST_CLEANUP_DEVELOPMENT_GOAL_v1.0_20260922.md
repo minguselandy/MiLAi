@@ -14,7 +14,7 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3C-3_DETERMINISTIC_ATTENTION_POLICY
+current_work_package: 3C-3_ATTENTION_EXPANSION_CAPTURE
 next_work_package: 3C_RESEARCH_ADMISSION_DECISION
 new_experiment_allocations: 1
 new_model_requests: 199
@@ -231,7 +231,7 @@ NEEDS_REVALIDATION
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PASS — PR #39 / exact-head fast / identical-tree merge / main identity verified; scoped accounting, not mechanism benefit | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | KEEP_SIMPLE — PR #42 / main identity verified; benefit not established | 3B-2 real-run proof |
 | 3C-2 | Evidence-grounded Revision | Lab | no | IN_PROGRESS — zero-model eligibility bridge; no real correction denominator/effect terminal or new model allocation | 3B-2 + lineage |
-| 3C-3 | State-guided Attention | Lab | no | IN_PROGRESS — zero-model bounded three-mode decision seam; no live runner/cost-quality comparison or effect terminal | 3B-2 + frozen state |
+| 3C-3 | State-guided Attention | Lab | no | IN_PROGRESS — zero-model three-mode policy and durable expansion capture; live integration/cost-quality comparison/effect terminal absent | 3B-2 + frozen state |
 | 3C-4 | RL-like adaptation | Lab | no | NOT_ADMITTED | prior mechanism acts |
 | 3D-1 | Frozen-bank transfer | Lab | no | NOT_ADMITTED | repeatable DEV signal |
 | 3D-2 | Online stream | Lab | no | NOT_ADMITTED | frozen policy/order |
@@ -840,6 +840,30 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-23 — Durable Attention expansion capture; finite contract pending
+
+- PR #45 closed at `1367b2c8aeb7e330bf9f9046a384f1e2b989d92d`; exact-head fast
+  `35793963165` and main fast `35794863363` PASS. Candidate/merge tree
+  `e5a9cab502cbde567edd33abefc570fa91865655` matched; Lab 4,766 PASS / 137 SKIP /
+  4 DESELECTED. This is the capture change's rollback/base commit.
+- Lab-only `attention_expansion.py` wraps the existing policy with an execution-bound
+  private SQLite singleton reservation committed before retrieval. Failure, uncertain
+  crash recovery and concurrent callers cannot reset the one-expansion allowance.
+  It revalidates before dispatch and after returned sources; valid backend cost refs
+  survive source rejection. Unknown external usage stays UNKNOWN, not zero.
+- 63 targeted capture/policy tests PASS; changed-file Ruff/mypy PASS. Local synthetic
+  callbacks exercise actual SQLite reopen, concurrency and hard process exit. No
+  model/embedding/rerank calls, new allocation, real semantic labels or effect claim.
+  Global budget guarding and authentic state/retrieval integration remain caller
+  responsibilities; captured sources require fresh review before Actor dispatch.
+- The user's “授权” accepts a finite new Revision/Attention batch in principle.
+  It does not supply a new numerical/data contract; the proposed joint limits and
+  permission to form new revisions/state from visible feedback await confirmation.
+  Utility's closed allowance is not reopened. Current counters remain unchanged.
+- Next is joint research admission, not another speculative mechanism or automatic
+  model dispatch. 3C-2/3C-3 effect terminals, promotion decision and overall Goal remain
+  incomplete; Product behavior, architecture and Schema NO-GO status are unchanged.
 
 ## 2026-09-23 — Deterministic Attention decisions; no model or effect execution
 
