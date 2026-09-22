@@ -62,23 +62,35 @@ class _ObservedMcp:
             "invocation_id": "mcp-invocation:" + uuid4().hex,
             "host_attempt_trace_id": self.attempt["host_attempt_trace_id"],
             "retrieval_trace_ref": None, "status": "FAILURE", "receipt_reused": False,
+            "runtime_request_ref": None, "context_capsule_ref": None,
+            "previous_context_ref": _ref("context-capsule", previous_context_id),
         }
         self.attempt["mcp_invocations"].append(row)
         response = self.delegate.resolve_memory(query, previous_context_id=previous_context_id)
         row.update(
             status="SUCCESS", retrieval_trace_ref=_ref("retrieval", response.get("trace_id")),
             receipt_reused=response.get("receipt_reused") is True,
+            runtime_request_ref=_ref("runtime-request", response.get("request_id")),
         )
+        receipt = response.get("context_receipt")
+        if isinstance(receipt, Mapping):
+            row["context_capsule_ref"] = _ref("context-capsule", receipt.get("context_capsule_id"))
         context = response.get("memory_context")
         if isinstance(context, Mapping) and isinstance(context.get("text"), str):
             text = context["text"]
             ids = context.get("selected_evidence_ids")
+            claims = context.get("claim_versions")
             binding = {
                 "mcp_invocation_id": row["invocation_id"],
                 "retrieval_trace_ref": row["retrieval_trace_ref"],
+                "runtime_request_ref": row["runtime_request_ref"],
                 "reader_context_sha256": hashlib.sha256(text.encode()).hexdigest(),
                 "selected_evidence_refs": (
                     [_ref("evidence", value) for value in ids] if isinstance(ids, list) else None
+                ),
+                "selected_claim_version_refs": (
+                    [_ref("claim-version", value) for value in claims]
+                    if isinstance(claims, list) else None
                 ),
             }
             # Raw text is ephemeral and never placed in a published attempt.

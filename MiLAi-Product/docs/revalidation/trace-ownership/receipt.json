@@ -1,0 +1,201 @@
+{
+  "schema_version": "milai-behavior-revalidation-v1",
+  "debt_id": "trace-ownership",
+  "state": "FIXED",
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "519ba02bbedc7507237bb78267679ef0cf62cf71",
+    "git_tree": "555f9e4a7d5cbd3244072fc567bd5f90b10f10d0",
+    "product_manifest_sha256": "0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae",
+    "product_tree_sha256": "22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a"
+  },
+  "decision": {
+    "state": "FIXED",
+    "rationale": "Opt-in serial query-first public testkit now binds actual Runtime, MCP, Host and Provider facts through fresh Evidence and Claim/cache paths. Lab copies owner facts, preserves unknown usage/use, and rejects replay or unobserved cache origin. Scoped engineering proof, not default instrumentation, model-use or production-readiness claim."
+  },
+  "execution": {
+    "status": "PASS",
+    "verified_at": "2026-09-22T03:14:33Z",
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 4.65,
+    "lab_targeted_tests": 76,
+    "real_postgresql_cases": 8,
+    "real_chain_host_attempts": 18,
+    "fixture_invocations": 16,
+    "model_requests": 0,
+    "experiment_allocations": 0,
+    "remote_closure": "PENDING"
+  },
+  "environment": {
+    "database": "milai_worker_once",
+    "postgresql_version": "16.14",
+    "migration_head": "0056_host_notes",
+    "container": "milai-3a1-worker-once-20260922",
+    "endpoint": "127.0.0.1:32795",
+    "data": "isolated synthetic tenants; API/Steward/worker roles",
+    "provider": "CONTROLLED_IN_PROCESS_FIXTURE",
+    "embedding": "deterministic_hash",
+    "stopped_data_retained": true
+  },
+  "reproduction": {
+    "working_directory": "respective Product package root; probe from monorepo root",
+    "required_environment": [
+      "MILAI_MIGRATION_DATABASE_URL",
+      "MILAI_TEST_API_DATABASE_URL",
+      "MILAI_TEST_STEWARD_DATABASE_URL",
+      "MILAI_TEST_WORKER_DATABASE_URL"
+    ],
+    "commands": [
+      {
+        "command": ".venv/bin/pytest -q tests/integration/test_claim_owner_trace_pg.py tests/integration/test_runtime_owner_trace_pg.py tests/unit/test_runtime_owner_trace.py tests/unit/test_observed_runtime.py --tb=short --junitxml=/cra/memory/mx_memory/evidence/post-cleanup-3b1-close-20260922-qRgRZg/runtime.xml",
+        "working_directory": "MiLAi-Product/runtime",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "command": ".venv/bin/pytest -q tests/test_trace_testkit.py --tb=short --junitxml=/cra/memory/mx_memory/evidence/post-cleanup-3b1-close-20260922-qRgRZg/host.xml",
+        "working_directory": "MiLAi-Product/integrations/openworker-mcp",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "command": "uv run --frozen --offline --project MiLAi-Lab --with-editable MiLAi-Product/runtime --with-editable MiLAi-Product/integrations/python-client --with-editable MiLAi-Product/integrations/openworker-mcp python MiLAi-Lab/tools/run_trace_ownership_probe.py --product-root MiLAi-Product --product-commit 519ba02bbedc7507237bb78267679ef0cf62cf71 --output /cra/memory/mx_memory/evidence/post-cleanup-3b1-evidence-chain-20260922-r1",
+        "working_directory": "monorepo",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "command": "uv run --frozen --offline --project MiLAi-Lab --with-editable MiLAi-Product/runtime --with-editable MiLAi-Product/integrations/python-client --with-editable MiLAi-Product/integrations/openworker-mcp python MiLAi-Lab/tools/run_trace_ownership_probe.py --product-root MiLAi-Product --product-commit 83e69ed74a30a76f16bb6b039f4b7013b1cf2d77 --canonical-cache --output /cra/memory/mx_memory/evidence/post-cleanup-3b1-cache-chain-20260922-r1",
+        "working_directory": "monorepo",
+        "status": "PASS",
+        "exit_code": 0
+      }
+    ],
+    "tests": [
+      "runtime/tests/integration/test_runtime_owner_trace_pg.py::test_owner_export_binds_real_postgresql_execution_without_changing_retrieval",
+      "runtime/tests/integration/test_claim_owner_trace_pg.py::test_claim_owner_observes_exact_governed_version_without_changing_execution",
+      "runtime/tests/integration/test_claim_owner_trace_pg.py::test_http_cache_owner_links_current_validation_to_original_claim_execution",
+      "runtime/tests/unit/test_runtime_owner_trace.py::test_unobserved_or_wrong_execution_cannot_emit_owner_identity",
+      "runtime/tests/unit/test_observed_runtime.py::test_reuse_exports_current_validation_only_when_runtime_binding_is_complete",
+      "integrations/openworker-mcp/tests/test_trace_testkit.py::test_observation_is_neutral_to_payload_response_budget_and_request_count",
+      "integrations/openworker-mcp/tests/test_trace_testkit.py::test_query_first_owner_binding_keeps_fresh_attempts_and_runtime_validated_cache",
+      "integrations/openworker-mcp/tests/test_trace_testkit.py::test_prepared_context_is_not_exposure_without_known_dispatch",
+      "integrations/openworker-mcp/tests/test_trace_testkit.py::test_stream_and_unbound_retry_are_rejected_before_provider"
+    ]
+  },
+  "positive_cases": [
+    {
+      "case_id": "TRACE-POS-FRESH",
+      "description": "Exact Evidence and Claim versions bind actual governed Runtime execution; plain/baseline/owner observations retain semantics.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_runtime_owner_trace_pg.py::test_owner_export_binds_real_postgresql_execution_without_changing_retrieval",
+        "runtime/tests/integration/test_claim_owner_trace_pg.py::test_claim_owner_observes_exact_governed_version_without_changing_execution"
+      ]
+    },
+    {
+      "case_id": "TRACE-POS-CACHE",
+      "description": "Actual HTTP reuse retains original trace and exact version while binding a fresh current validation; governed supersession returns fresh version.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_claim_owner_trace_pg.py::test_http_cache_owner_links_current_validation_to_original_claim_execution"
+      ]
+    },
+    {
+      "case_id": "TRACE-POS-HOST",
+      "description": "Host observation binds MCP/Context/Provider facts and preserves payload, response, budget and invocation count for fresh and cached requests.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_trace_testkit.py::test_observation_is_neutral_to_payload_response_budget_and_request_count",
+        "integrations/openworker-mcp/tests/test_trace_testkit.py::test_query_first_owner_binding_keeps_fresh_attempts_and_runtime_validated_cache"
+      ]
+    }
+  ],
+  "negative_cases": [
+    {
+      "case_id": "TRACE-NEG-SCOPE",
+      "description": "Wrong-scope Evidence and Claims do not become exposed versions; scope/canonical change prevents old receipt reuse.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_runtime_owner_trace_pg.py::test_owner_export_binds_real_postgresql_execution_without_changing_retrieval",
+        "runtime/tests/integration/test_claim_owner_trace_pg.py::test_claim_owner_observes_exact_governed_version_without_changing_execution",
+        "runtime/tests/integration/test_claim_owner_trace_pg.py::test_http_cache_owner_links_current_validation_to_original_claim_execution"
+      ]
+    },
+    {
+      "case_id": "TRACE-NEG-IDENTITY",
+      "description": "Missing/wrong Runtime execution or malformed current cache validation is rejected without guessed owner facts.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_runtime_owner_trace.py::test_unobserved_or_wrong_execution_cannot_emit_owner_identity",
+        "runtime/tests/unit/test_observed_runtime.py::test_reuse_exports_current_validation_only_when_runtime_binding_is_complete"
+      ]
+    },
+    {
+      "case_id": "TRACE-NEG-DISPATCH",
+      "description": "Prepared Context is not exposure before dispatch; lost response and unknown transport state retain unknown usage; unsupported stream/retry fails.",
+      "status": "PASS",
+      "tests": [
+        "integrations/openworker-mcp/tests/test_trace_testkit.py::test_prepared_context_is_not_exposure_without_known_dispatch",
+        "integrations/openworker-mcp/tests/test_trace_testkit.py::test_stream_and_unbound_retry_are_rejected_before_provider"
+      ]
+    }
+  ],
+  "conformance_claims": [
+    {
+      "architecture_id": "G7",
+      "coverage": "SCOPED",
+      "status": "PASS",
+      "covered_statement": "For opt-in serial query-first tracing, the exact governed Context/version selection and dispatched exposure bind to actual Runtime/MCP/Host requests; validated cache reuse retains its original retrieval and uses the current authorized invocation. Exposure never implies model use.",
+      "positive_case_ids": [
+        "TRACE-POS-FRESH",
+        "TRACE-POS-CACHE",
+        "TRACE-POS-HOST"
+      ],
+      "negative_case_ids": [
+        "TRACE-NEG-SCOPE",
+        "TRACE-NEG-IDENTITY",
+        "TRACE-NEG-DISPATCH"
+      ],
+      "limits": [
+        "Not full protected Context or answer-lineage conformance.",
+        "No stream/concurrent observation or cross-process Host continuity claim.",
+        "Controlled Provider fixtures establish dispatch/native/usage plumbing, not model semantics or benefit.",
+        "Evidence and canonical Claim versions only; State/Note exports and Opportunity Ledger are outside this receipt."
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3b1-close-20260922-qRgRZg/runtime.xml",
+      "sha256": "c3ce77e86f36b03e94778b6f33a20f851247d7e382191caf7a0186323f6a6e8d",
+      "storage": "local external evidence"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3b1-close-20260922-qRgRZg/host.xml",
+      "sha256": "53739797bf45915ee79522f41dbe43d5a3d08a4aa92d559bfe08942025c3b034",
+      "storage": "local external evidence"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3b1-evidence-chain-20260922-r1/joined.json",
+      "sha256": "916bf65d943c6597fc69f36f21eb65e93d8204f72ccdad985caa1e64b8b770f8",
+      "storage": "local external evidence"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3b1-cache-chain-20260922-r1/joined.json",
+      "sha256": "255134404300cadf8e0575369589d6dc56e9c4007d045293a29c23a54629d1f5",
+      "storage": "local external evidence",
+      "source_commit": "83e69ed74a30a76f16bb6b039f4b7013b1cf2d77"
+    }
+  ],
+  "identity_note": "Claim/cache and Evidence probe commits differ only in two test files. Product executable tree/manifest and all Lab method source bytes are identical; each run retains its actual source commit. No previous artifact was relabeled.",
+  "development_failure": {
+    "classification": "TEST_HARNESS_AND_TOOL_SCOPE",
+    "cause": "Initial CURRENT-state comparison used varying read timestamps; source-only mypy gate was temporarily broadened to historical tests or a runner environment lacking public testkit packages.",
+    "resolution": "Fix the paired test clock, preserve CURRENT semantics, and use configured source gates plus actual pinned runner execution. Original failures remain documented; no Product permission/routing/time behavior changed."
+  }
+}

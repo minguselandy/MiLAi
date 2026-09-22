@@ -1,5 +1,11 @@
 # Host owner trace testkit v1
 
+The [v2 join](trace-ownership-v2.md) additionally binds current Runtime request,
+original retrieval, supplied/current capsule and selected Claim-version references.
+The observer copies these facts from the actual MCP response; it does not infer
+cache reuse from equal payloads. [Scoped real-chain evidence](../revalidation/trace-ownership/REVALIDATION.md)
+now covers fresh Evidence and Claim/cache execution with a controlled Provider fixture.
+
 `milai_openworker_mcp.trace_testkit.ObservedOpenWorkerProviderAdapter` is an explicit
 engineering-only subclass of the normal Adapter. The default Adapter/CLI never imports or
 enables it. It accepts the original constructor configuration and retains the existing

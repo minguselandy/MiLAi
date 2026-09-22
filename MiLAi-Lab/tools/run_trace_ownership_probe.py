@@ -33,7 +33,7 @@ from milai_openworker_mcp.trace_testkit import (
 )
 
 from milai_lab.analysis.owner_exports import assemble_owner_attempts
-from milai_lab.analysis.trace_join import join_attempts
+from milai_lab.analysis.trace_join import CACHE_SCHEMA_VERSION, SCHEMA_VERSION, join_attempts
 from milai_lab.product_adapter.manifest import (
     ProductLock,
     PublicInterfacePin,
@@ -128,16 +128,17 @@ class FixtureTransport:
 
     name = "json"
 
-    def __init__(self) -> None:
+    def __init__(self, limit: int = 8) -> None:
         self.mode = "success"
         self.calls = 0
+        self.limit = limit
 
     def invoke(
         self, request: ProviderRequest, capability: DevRunCapability,
     ) -> NativeProviderResponse:
         del request, capability
         self.calls += 1
-        if self.calls > 8:
+        if self.calls > self.limit:
             raise RuntimeError("PROBE_CALL_LIMIT")
         if self.mode in {"not-started", "response-lost"}:
             raise ProviderTransportError(
@@ -166,7 +167,9 @@ def _post(base: str, token: str, path: str, body: object) -> dict[str, Any]:
         return json.load(response)  # type: ignore[no-any-return]
 
 
-def _worker(product: Path, config: dict[str, Any], output: Path) -> None:
+def _worker(
+    product: Path, config: dict[str, Any], output: Path, *, name: str = "worker.json",
+) -> None:
     environment = {
         "PATH": os.environ.get("PATH", ""),
         "MILAI_WORKER_DATABASE_URL": os.environ["MILAI_TEST_WORKER_DATABASE_URL"],
@@ -179,7 +182,7 @@ def _worker(product: Path, config: dict[str, Any], output: Path) -> None:
         [str(product / "runtime/.venv/bin/milai-worker"), "--once"],
         env=environment, capture_output=True, timeout=20, check=False,
     )
-    _write(output / "worker.json", {
+    _write(output / name, {
         "returncode": result.returncode,
         "stdout_sha256": hashlib.sha256(result.stdout).hexdigest(),
         "stderr_sha256": hashlib.sha256(result.stderr).hexdigest(),
@@ -188,7 +191,44 @@ def _worker(product: Path, config: dict[str, Any], output: Path) -> None:
         raise RuntimeError("PROBE_WORKER_FAILED")
 
 
-def run(product: Path, commit: str, output: Path) -> dict[str, Any]:
+def _claim(
+    base: str, admin: str, reviewer: str, *, previous: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    evidence = _post(base, admin, "/v1/evidence", {
+        "source_type": "RUNTIME_OBSERVATION", "source_ref": "synthetic://claim-support",
+        "subject_id": "orchid-release", "observed_at": "2026-01-01T10:00:00Z",
+        "content": "Independent synthetic verification." if previous is None
+        else "Independent replacement verification.",
+        "media_type": "text/plain", "retention_state": "READABLE",
+        "permission_snapshot": {"readable": True, "project_ids": ["orchid-release"]},
+    })
+    patch = {
+        "payload": {"memory_text": CONTENT, "value": "initial" if previous is None else "revised"},
+        "authority": "ACTION_SAFE", "confidence": 0.99,
+    }
+    proposal: dict[str, Any] = {
+        "operation": "CREATE" if previous is None else "SUPERSEDE",
+        "proposed_patch": patch, "supporting_evidence_refs": [evidence["evidence_id"]],
+        "scope_predicate": {"project_ids": ["orchid-release"]},
+        "requested_authority": "ACTION_SAFE", "derivation_policy_id": "synthetic-owner-probe",
+        "derivation_snapshot": {"fixture": "trace-owner"},
+    }
+    if previous is None:
+        patch.update(subject_id="synthetic-purchase", predicate="synthetic.purchase",
+                     claim_type="FACT")
+    else:
+        proposal.update(target_claim_id=previous["claim_id"],
+                        expected_version_id=previous["claim_version_id"])
+    created = _post(base, admin, "/v1/proposals", proposal)
+    return _post(base, reviewer, f"/v1/proposals/{created['proposal_id']}/review", {
+        "decision": "APPROVE", "policy_version": "synthetic-owner-probe",
+        "reason_code": "SYNTHETIC_FIXTURE_VERIFIED",
+    })
+
+
+def run(
+    product: Path, commit: str, output: Path, *, canonical_cache: bool = False,
+) -> dict[str, Any]:
     output.mkdir(mode=0o700, parents=False, exist_ok=False)
     lock = _pin(product, commit, output)
     run_id = "trace-chain-" + uuid4().hex
@@ -197,17 +237,21 @@ def run(product: Path, commit: str, output: Path) -> dict[str, Any]:
     # Short UDS pathname; preserve only this run's private directory for diagnosis.
     socket_root = Path(tempfile.mkdtemp(prefix="milai-trace-", dir="/dev/shm"))
     admin, reader = "synthetic-admin-" + uuid4().hex, "synthetic-reader-" + uuid4().hex
+    reviewer = "synthetic-reviewer-" + uuid4().hex
+    attempts_limit = 10 if canonical_cache else 8
     config = {
         "environment": "test", "data_mode": "SYNTHETIC_ONLY",
         "database_url": os.environ["MILAI_TEST_API_DATABASE_URL"],
         "steward_database_url": os.environ["MILAI_TEST_STEWARD_DATABASE_URL"],
         "tenant_id": str(uuid4()), "local_actor_id": str(uuid4()),
         "blob_root": str(output / "blobs"), "api_token": admin, "agent_reader_token": reader,
+        "agent_reviewer_token": reviewer,
         "causal_token_secret": "synthetic-causal-" + uuid4().hex,
         "embedding_provider": "deterministic_hash", "embedding_prewarm": False,
     }
     _write(output / "manifest.json", {
-        "schema": "milai-trace-chain-probe-v1", "run_id": run_id,
+        "schema": "milai-trace-chain-probe-v2" if canonical_cache else "milai-trace-chain-probe-v1",
+        "run_id": run_id, "canonical_cache": canonical_cache,
         "arm_kind": "PRODUCT_TESTKIT", "monorepo_commit": commit,
         "product_lock_digest": lock.digest, "method_sha256": _sha(Path(__file__)),
         "method_sources_sha256": {
@@ -215,9 +259,13 @@ def run(product: Path, commit: str, output: Path) -> dict[str, Any]:
             "owner_exports": _sha(Path(inspect.getfile(assemble_owner_attempts))),
             "trace_join": _sha(Path(inspect.getfile(join_attempts))),
         },
-        "input_sha256": hashlib.sha256((CONTENT + "\n" + QUERY).encode()).hexdigest(),
+        "input_sha256": hashlib.sha256(json.dumps(
+            {"content": CONTENT, "query": QUERY, "canonical_cache": canonical_cache},
+            sort_keys=True,
+        ).encode()).hexdigest(),
         "provider": "CONTROLLED_IN_PROCESS_FIXTURE", "tokenizer": "SYNTHETIC_WORDLEVEL",
-        "max_host_attempts": 8, "max_fixture_invocations": 8, "max_wall_seconds": 120,
+        "max_host_attempts": attempts_limit, "max_fixture_invocations": attempts_limit,
+        "max_wall_seconds": 120,
         "model_requests": 0, "experiment_allocations": 0, "socket_root": str(socket_root),
         "tenant_id": config["tenant_id"], "default_runtime_settings": True,
         "claim_ceiling": "ENGINEERING_TRACE_PROVENANCE_NOT_MODEL_EFFECT",
@@ -227,7 +275,8 @@ def run(product: Path, commit: str, output: Path) -> dict[str, Any]:
         "provider": "local_vllm", "endpoint_identity": "http://127.0.0.1:1", "model_id": MODEL,
         "dataset_manifest_sha256": hashlib.sha256(CONTENT.encode()).hexdigest(),
         "prompt_template_sha256": hashlib.sha256(QUERY.encode()).hexdigest(),
-        "max_native_requests": 8, "max_prompt_tokens": 32000, "max_completion_tokens": 768,
+        "max_native_requests": attempts_limit,
+        "max_prompt_tokens": 32000, "max_completion_tokens": 768,
         "deadline": (now + timedelta(seconds=120)).isoformat(),
         "expires_at": (now + timedelta(seconds=120)).isoformat(),
         "synthetic_or_deidentified_only": True, "closed_test_access": False,
@@ -242,7 +291,7 @@ def run(product: Path, commit: str, output: Path) -> dict[str, Any]:
     with token_file.open("x") as stream:
         stream.write(reader)
     token_file.chmod(0o600)
-    fixture = FixtureTransport()
+    fixture = FixtureTransport(attempts_limit)
     cases: list[dict[str, Any]] = []
     adapter = None
     runtime = ObservedRuntime(config)
@@ -288,6 +337,8 @@ def run(product: Path, commit: str, output: Path) -> dict[str, Any]:
                 def attempt(
                     name: str, query: str, mode: str = "success", retry: str | None = None,
                 ) -> None:
+                    if len(cases) >= attempts_limit:
+                        raise RuntimeError("PROBE_ATTEMPT_LIMIT")
                     fixture.mode = mode
                     before = len(runtime.owner_traces())
                     error = None
@@ -311,19 +362,31 @@ def run(product: Path, commit: str, output: Path) -> dict[str, Any]:
                 attempt("no-memory-repeat", "What is two plus two?",
                         retry=cases[-1]["host"]["host_attempt_trace_id"])
                 attempt("abstain", QUERY)
-                _post(runtime.base_url, admin, "/v1/evidence", {
-                    "source_type": "RUNTIME_OBSERVATION", "source_ref": "synthetic://trace-probe",
-                    "subject_id": "orchid-release", "speaker": "user",
-                    "observed_at": "2026-01-01T10:00:00Z", "content": CONTENT,
-                    "media_type": "text/plain", "retention_state": "READABLE",
-                    "permission_snapshot": {"readable": True, "project_ids": ["orchid-release"]},
-                })
+                claim = None
+                if canonical_cache:
+                    claim = _claim(runtime.base_url, admin, reviewer)
+                else:
+                    _post(runtime.base_url, admin, "/v1/evidence", {
+                        "source_type": "RUNTIME_OBSERVATION", "source_ref": "synthetic://trace-probe",
+                        "subject_id": "orchid-release", "speaker": "user",
+                        "observed_at": "2026-01-01T10:00:00Z", "content": CONTENT,
+                        "media_type": "text/plain", "retention_state": "READABLE",
+                        "permission_snapshot": {
+                            "readable": True, "project_ids": ["orchid-release"],
+                        },
+                    })
                 _worker(product, config, output)
                 attempt("success-use-unknown", QUERY)
                 attempt("retry", QUERY, retry=cases[-1]["host"]["host_attempt_trace_id"])
                 attempt("failure-not-started", QUERY, "not-started")
                 attempt("failure-response-lost", QUERY, "response-lost")
                 attempt("failure-unknown-dispatch", QUERY, "unknown")
+                if canonical_cache:
+                    assert claim is not None
+                    _claim(runtime.base_url, admin, reviewer, previous=claim)
+                    _worker(product, config, output, name="worker-after-revision.json")
+                    attempt("canonical-change-fresh", QUERY)
+                    attempt("revised-cache-hit", QUERY)
     finally:
         if adapter is not None:
             adapter.close()
@@ -341,25 +404,42 @@ def run(product: Path, commit: str, output: Path) -> dict[str, Any]:
     joined = assemble_owner_attempts(
         cases, run_id=run_id, product_lock_digest=lock.digest,
         result_refs=[f"result:{_sha(output / 'owner-facts.json')}:{i}" for i in range(len(cases))],
+        schema_version=CACHE_SCHEMA_VERSION if canonical_cache else SCHEMA_VERSION,
     )
     _write(output / "joined.json", joined)
-    if [row["host"]["terminal"] for row in joined] != [
+    expected_terminals = [
         "NO_MEMORY", "NO_MEMORY", "ABSTAIN", "SUCCESS", "SUCCESS", "FAILURE", "FAILURE", "FAILURE",
-    ]:
+    ] + (["SUCCESS", "SUCCESS"] if canonical_cache else [])
+    if [row["host"]["terminal"] for row in joined] != expected_terminals:
         raise ValueError("PROBE_TERMINAL_COVERAGE_FAILED")
     requests = [r for row in joined for r in row["requests"]]
-    if fixture.calls != 7 or len(requests) != 7:
+    expected_calls = 9 if canonical_cache else 7
+    if fixture.calls != expected_calls or len(requests) != expected_calls:
         raise ValueError("PROBE_INVOCATION_COVERAGE_FAILED")
     expected_hash = hashlib.sha256(CONTENT.encode()).hexdigest()
-    if any(v["content_sha256"] != expected_hash for row in joined for trace in row["runtime"]
+    if not canonical_cache and any(
+           v["content_sha256"] != expected_hash for row in joined for trace in row["runtime"]
            for v in trace["selected_versions"]):
         raise ValueError("PROBE_EXACT_VERSION_FAILED")
     if any(r["observable_use"] != "UNKNOWN" for r in requests):
         raise ValueError("PROBE_UNSUPPORTED_USE_CLAIM")
-    if [len(r["exposed_versions"]) for r in requests] != [0, 0, 1, 1, 0, 1, 0]:
+    if [len(r["exposed_versions"]) for r in requests] != [0, 0, 1, 1, 0, 1, 0] + (
+        [1, 1] if canonical_cache else []
+    ):
         raise ValueError("PROBE_DISPATCH_COVERAGE_FAILED")
+    if canonical_cache:
+        traces = [row["runtime"][0] for row in joined]
+        if [row["execution_kind"] for row in traces] != [
+            "FRESH", "FRESH", "FRESH", "FRESH", "CACHE_REUSE", "CACHE_REUSE", "CACHE_REUSE",
+            "CACHE_REUSE", "FRESH", "CACHE_REUSE",
+        ]:
+            raise ValueError("PROBE_CACHE_COVERAGE_FAILED")
+        if (traces[3]["selected_versions"] == traces[8]["selected_versions"]
+                or traces[8]["selected_versions"] != traces[9]["selected_versions"]):
+            raise ValueError("PROBE_REVISION_VERSION_FAILED")
     summary = {
-        "status": "FRESH_CHAIN_PASS_CACHE_ORIGIN_NOT_PROVEN", "cases": len(cases),
+        "status": "CLAIM_CACHE_CHAIN_PASS" if canonical_cache
+        else "FRESH_CHAIN_PASS_CACHE_ORIGIN_NOT_PROVEN", "cases": len(cases),
         "fixture_invocations": fixture.calls, "model_requests": 0,
         "unknown_fixture_usage": sum(r["unknown_usage"] for r in requests),
         "fixture_known_input_units": sum(r["usage"]["input_tokens"] or 0 for r in requests),
@@ -378,6 +458,7 @@ def main() -> None:
     parser.add_argument("--product-root", type=Path, required=True)
     parser.add_argument("--product-commit", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--canonical-cache", action="store_true")
     args = parser.parse_args()
 
     def timeout(signum: int, frame: Any) -> None:
@@ -386,7 +467,8 @@ def main() -> None:
     signal.signal(signal.SIGALRM, timeout)
     signal.alarm(120)
     try:
-        result = run(args.product_root.resolve(), args.product_commit, args.output.resolve())
+        result = run(args.product_root.resolve(), args.product_commit, args.output.resolve(),
+                     canonical_cache=args.canonical_cache)
         print(json.dumps(result))
     except Exception as exc:
         if args.output.is_dir():

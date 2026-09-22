@@ -8,6 +8,12 @@
 
 ## Current coordinated mainline
 
+PR #33's fresh same-execution slice is merged (`489ea7c`, main fast `35680800370` PASS).
+The subsequent [scoped trace receipt](../../MiLAi-Product/docs/revalidation/trace-ownership/REVALIDATION.md)
+is local only: v2 joins current authorized cache invocations to observed fresh origins, with
+18 real Host attempts, 47 Product tests and 76 Lab tests passed. Trace debt is locally FIXED;
+3B-1 awaits exact-head CI/merge/main closure. No research budget opens.
+
 The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md)
 is now the cross-bundle coordination contract. Its immediate work is Product behavioral closure and
 measurement foundations; it does not resume a Lab experiment merely because historical code, frozen
@@ -18,15 +24,16 @@ exact-head CI, candidate/merge tree identity and main fast run `35673403788` pas
 Worker `--once` revalidation completed through PR #28; main fast `35674495200` passed.
 The active package is [Trace Ownership v1](../../MiLAi-Product/docs/reference/trace-ownership-v1.md),
 starting with a content-free offline joiner. Synthetic contract tests are not real-run evidence;
-live owner exports and trace-debt closure remain pending. Historical research remains paused.
+the later scoped receipt adds actual owner exports and real-chain proof. Historical research remains paused.
 PR #30's offline slice is merged (main fast `35676214359` PASS). An explicitly imported
 [Host producer testkit](../../MiLAi-Product/docs/reference/host-trace-testkit.md) merged in
 PR #31 (main fast `35677115118` PASS); the Runtime producer merged in PR #32 (main fast
 `35677932965` PASS). The new
 [same-execution candidate](../../MiLAi-Product/docs/reference/trace-ownership-chain.md)
 joins eight real MCP/HTTP/PostgreSQL attempts through a controlled in-process Provider
-fixture. Fresh exact-version/Context and failure dispatch facts are bound. Cache-origin
-and final debt closure remain pending; no model-backed effect run or actual use is claimed.
+fixture. Fresh exact-version/Context and failure dispatch facts are bound. The later v2
+proof adds five genuine cache validations and governed Claim supersession; remote closure
+remains pending. No model-backed effect run or actual use is claimed.
 
 Current interpretation of the active research record:
 

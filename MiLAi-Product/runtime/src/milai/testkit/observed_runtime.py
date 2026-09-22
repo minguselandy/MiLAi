@@ -46,7 +46,56 @@ def _reader_gate(body: Mapping[str, Any], http_status: int) -> str:
             and body.get("availability") in {"AVAILABLE", "DEGRADED"}
             and issues == [] and isinstance(selected, list) and selected):
         return "ADMITTED"
+    claims = context.get("claim_versions")
+    resolution = body.get("resolution")
+    canonical_release = (
+        body.get("reader_evidence_boundary") == "DECISION_ACCEPTED_ONLY"
+        or (body.get("state_view_schema_version") == "memory-state-view-v0.1"
+            and isinstance(resolution, Mapping) and resolution.get("correctly_resolved") is True)
+    )
+    if (canonical_release
+            and body.get("status") == "HIT" and body.get("availability") == "AVAILABLE"
+            and issues == []
+            and context.get("authority_class") in {"CANONICAL_STATE", "MIXED"}
+            and isinstance(claims, list) and claims):
+        return "ADMITTED"
     return "UNKNOWN"
+
+
+def _reuse_validation(body: Mapping[str, Any], request_ref: str) -> dict[str, Any] | None:
+    """Observe Runtime's successful online receipt validation, not a fresh retrieval.
+
+    Original versions/decision must be joined from the original execution. The
+    receipt's issuance position is not substituted for today's validation position.
+    """
+    if body.get("receipt_reused") is not True:
+        return None
+    receipt, trace = body.get("context_receipt"), body.get("access_trace")
+    if not isinstance(receipt, Mapping) or not isinstance(trace, Mapping):
+        raise RuntimeError("OWNER_TRACE_REUSE_VALIDATION_NOT_OBSERVED")
+    capsule_id, trace_id = receipt.get("context_capsule_id"), body.get("trace_id")
+    position = trace.get("canonical_position")
+    dependency = receipt.get("dependency_digest")
+    if (trace.get("terminal_stage") != "REUSE"
+            or trace.get("stop_reason") != "CONTEXT_RECEIPT_VALIDATED"
+            or trace.get("attempted_stages") != ["REUSE_VALIDATION"]
+            or trace.get("retrieval_trace_id") != trace_id
+            or "runtime-request:" + canonical_sha256(trace.get("runtime_request_id")) != request_ref
+            or receipt.get("schema_version") != "context-receipt-v0.1"
+            or not isinstance(receipt.get("requirement_coverage"), Mapping)
+            or not isinstance(dependency, str) or len(dependency) != 64
+            or any(char not in "0123456789abcdef" for char in dependency)
+            or not isinstance(capsule_id, str) or not isinstance(trace_id, str)
+            or isinstance(position, bool) or not isinstance(position, int) or position < 0):
+        raise RuntimeError("OWNER_TRACE_REUSE_VALIDATION_NOT_OBSERVED")
+    return {
+        "runtime_request_ref": request_ref,
+        "origin_retrieval_trace_ref": "retrieval:" + canonical_sha256(trace_id),
+        "context_capsule_ref": "context-capsule:" + canonical_sha256(capsule_id),
+        "validation_canonical_position": position,
+        "requirement_coverage_digest": canonical_sha256(receipt.get("requirement_coverage")),
+        "dependency_digest": dependency,
+    }
 
 
 class _RequestObserver:
@@ -116,6 +165,10 @@ class ObservedRuntime:
             context = context if isinstance(context, dict) else {}
             text = context.get("text")
             selected = context.get("selected_evidence_ids")
+            claim_versions = context.get("claim_versions")
+            receipt = body.get("context_receipt")
+            capsule_id = receipt.get("context_capsule_id") if isinstance(receipt, dict) else None
+            dependency = receipt.get("dependency_digest") if isinstance(receipt, dict) else None
             row: dict[str, Any] = {
                 "schema_version": "milai-runtime-http-owner-v1",
                 "request_ref": "runtime-request:" + canonical_sha256(g.request_id),
@@ -123,6 +176,20 @@ class ObservedRuntime:
                 "reader_gate": _reader_gate(body, response.status_code),
                 "receipt_reused": body.get("receipt_reused") is True,
                 "owner_trace": None,
+                "reuse_validation": None,
+                "context_capsule_ref": (
+                    "context-capsule:" + canonical_sha256(capsule_id)
+                    if isinstance(capsule_id, str) else None
+                ),
+                "requirement_coverage_digest": (
+                    canonical_sha256(receipt["requirement_coverage"])
+                    if isinstance(receipt, dict) and isinstance(capsule_id, str)
+                    and isinstance(receipt.get("requirement_coverage"), dict) else None
+                ),
+                "dependency_digest": dependency if (
+                    isinstance(dependency, str) and len(dependency) == 64
+                    and all(char in "0123456789abcdef" for char in dependency)
+                ) else None,
                 "observation_gap": None,
                 "reader_context_sha256": (
                     hashlib.sha256(text.encode()).hexdigest() if isinstance(text, str) else None
@@ -131,6 +198,11 @@ class ObservedRuntime:
                     ["evidence:" + canonical_sha256(value) for value in selected]
                     if isinstance(selected, list) and all(isinstance(x, str) for x in selected)
                     else None
+                ),
+                "selected_claim_version_refs": (
+                    ["claim-version:" + canonical_sha256(value) for value in claim_versions]
+                    if isinstance(claim_versions, list)
+                    and all(isinstance(value, str) for value in claim_versions) else None
                 ),
                 "outcome_status": body.get("status") if body.get("status") in {
                     "HIT", "ABSENT", "PARTIAL", "ABSTAINED", "DENIED", "UNAVAILABLE", "CONTESTED",
@@ -146,7 +218,9 @@ class ObservedRuntime:
                 if isinstance(body.get("open_issue_ids"), list) else None,
             }
             try:
-                row["owner_trace"] = current.owner_trace(body)
+                row["reuse_validation"] = _reuse_validation(body, row["request_ref"])
+                if row["reuse_validation"] is None:
+                    row["owner_trace"] = current.owner_trace(body)
             except Exception as exc:
                 # Observation failure cannot turn the original HTTP result into an
                 # error or generate invented facts. Fixed local codes only.
@@ -155,6 +229,7 @@ class ObservedRuntime:
                     "OWNER_TRACE_EXECUTION_NOT_OBSERVED", "OWNER_TRACE_RESPONSE_ID_MISMATCH",
                     "OWNER_TRACE_DECISION_NOT_OBSERVED", "OWNER_TRACE_CONTEXT_IDENTITY_INVALID",
                     "OWNER_TRACE_VERSION_CONTENT_CHANGED",
+                    "OWNER_TRACE_REUSE_VALIDATION_NOT_OBSERVED",
                 } else "OWNER_TRACE_EXPORT_FAILED"
             trace_id = body.get("trace_id")
             row["retrieval_trace_ref"] = (

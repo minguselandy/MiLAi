@@ -6,8 +6,8 @@
 ## Result
 
 - Current implementation status: `UNVERIFIED`
-- Product source commit: `717da6e74aba02e296e30ac4f037c208b753ab18`
-- Verified at: `2026-09-22T02:34:40+00:00`
+- Product source commit: `519ba02bbedc7507237bb78267679ef0cf62cf71`
+- Verified at: `2026-09-22T03:24:45+00:00`
 - Architecture: `1.0.0`
 - Migration heads: `0027_embedding_identity, 0045_dg18_adjacency, 0056_host_notes`
 
@@ -18,8 +18,8 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Field | Value |
 | --- | --- |
 | Product version | `0.1.0-candidate` |
-| Product manifest SHA-256 | `668dc365f1fb4cf8c6961e6fb490e1a1a6b18f47592c2c096af34b88f350f729` |
-| Product tree SHA-256 | `90a900fef01ccca5b54cc4a558e3c530cf7a8b421f859d764761a8d6c4f75511` |
+| Product manifest SHA-256 | `0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae` |
+| Product tree SHA-256 | `22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a` |
 | Architecture manifest SHA-256 | `ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e` |
 | Runtime / Client / MCP / OpenWorker | `0.1.5` / `0.1.4` / `0.1.15` / `0.1.0` |
 
@@ -48,10 +48,10 @@ The detailed G/I/TX/role/gate mapping is in [`invariant-test-map.json`](invarian
 Receipts are validated against the current Product tree and manifest. `SCOPED` claims are recorded as execution evidence but do not promote the broad frozen item; only passing `COMPLETE` claims without a current failed receipt can produce `PASS`. Failed receipts remain valid diagnostic evidence without implying `DEVIATION`.
 
 - Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)
-- Validated receipt count: `14`
-- Current receipt count: `0`
+- Validated receipt count: `15`
+- Current receipt count: `1`
 - Historical receipt count: `14`
-- Current explicit claim count: `0`
+- Current explicit claim count: `1`
 - Failed diagnostic claim count: `0`
 - Preserved failed receipt count: `3`
 

@@ -1,12 +1,57 @@
 from __future__ import annotations
 
+import copy
 import hashlib
 from typing import Any
 
 import pytest
 from flask import Flask, g
 
+from milai.domain.retrieval_audit import canonical_sha256
 from milai.testkit import observed_runtime
+
+
+@pytest.mark.parametrize("tamper", [None, "stage", "request", "position", "digest", "trace"])
+def test_reuse_exports_current_validation_only_when_runtime_binding_is_complete(
+    tamper: str | None,
+) -> None:
+    body: dict[str, Any] = {
+        "receipt_reused": True, "trace_id": "origin-trace",
+        "context_receipt": {
+            "schema_version": "context-receipt-v0.1", "context_capsule_id": "capsule",
+            "requirement_coverage": {"query_digest": "a" * 64},
+            "dependency_digest": "b" * 64,
+            "canonical_position": 1,
+        },
+        "access_trace": {
+            "terminal_stage": "REUSE", "stop_reason": "CONTEXT_RECEIPT_VALIDATED",
+            "attempted_stages": ["REUSE_VALIDATION"], "runtime_request_id": "current-request",
+            "retrieval_trace_id": "origin-trace", "canonical_position": 7,
+        },
+    }
+    if tamper == "stage":
+        body["access_trace"]["terminal_stage"] = "FRESH"
+    elif tamper == "request":
+        body["access_trace"]["runtime_request_id"] = "other-request"
+    elif tamper == "position":
+        body["access_trace"]["canonical_position"] = None
+    elif tamper == "digest":
+        body["context_receipt"]["dependency_digest"] = "private malformed value"
+    elif tamper == "trace":
+        body["access_trace"]["retrieval_trace_id"] = "other-trace"
+    request_ref = "runtime-request:" + canonical_sha256("current-request")
+    original = copy.deepcopy(body)
+    if tamper is not None:
+        with pytest.raises(RuntimeError, match="OWNER_TRACE_REUSE_VALIDATION_NOT_OBSERVED"):
+            observed_runtime._reuse_validation(body, request_ref)
+    else:
+        result = observed_runtime._reuse_validation(body, request_ref)
+        assert result is not None
+        assert result["validation_canonical_position"] == 7  # Not issuance position 1.
+        assert result["runtime_request_ref"] == request_ref
+        assert "origin-trace" not in str(result) and "current-request" not in str(result)
+    assert body == original
+    assert observed_runtime._reuse_validation({"receipt_reused": False}, request_ref) is None
 
 
 @pytest.mark.parametrize("status,availability,issues,selected,expected", [
@@ -30,6 +75,7 @@ def test_reader_gate_is_a_fail_closed_projection_not_typed_completion(
 
 @pytest.mark.parametrize("error", [
     RuntimeError("OWNER_TRACE_EXECUTION_NOT_OBSERVED"),
+    RuntimeError("OWNER_TRACE_REUSE_VALIDATION_NOT_OBSERVED"),
     RuntimeError("OWNER_TRACE_PRIVATE secret"), ValueError("private body"),
 ])
 def test_http_observation_failure_keeps_original_response_and_redacts_error(
@@ -68,10 +114,26 @@ def test_http_observation_failure_keeps_original_response_and_redacts_error(
     report, = harness.owner_traces()
     assert report["owner_trace"] is None
     assert report["observation_gap"] == (
-        str(error) if str(error) == "OWNER_TRACE_EXECUTION_NOT_OBSERVED"
+        str(error) if str(error) in {"OWNER_TRACE_EXECUTION_NOT_OBSERVED",
+                                  "OWNER_TRACE_REUSE_VALIDATION_NOT_OBSERVED"}
         else "OWNER_TRACE_EXPORT_FAILED"
     )
     assert report["reader_context_sha256"] == hashlib.sha256(b"private content").hexdigest()
     assert "private" not in str(report) and "raw-id" not in str(report)
     report["selected_evidence_refs"].clear()
     assert len(harness.owner_traces()[0]["selected_evidence_refs"]) == 1
+
+
+@pytest.mark.parametrize("boundary,expected", [
+    ("DECISION_ACCEPTED_ONLY", "ADMITTED"), ("UNKNOWN", "UNKNOWN"),
+])
+def test_canonical_search_release_is_observed_without_reinterpreting_gate(
+    boundary: str, expected: str,
+) -> None:
+    body = {
+        "status": "HIT", "availability": "AVAILABLE", "open_issue_ids": [],
+        "reader_evidence_boundary": boundary,
+        "memory_context": {"authority_class": "CANONICAL_STATE", "claim_versions": ["version"],
+                           "selected_evidence_ids": []},
+    }
+    assert observed_runtime._reader_gate(body, 200) == expected

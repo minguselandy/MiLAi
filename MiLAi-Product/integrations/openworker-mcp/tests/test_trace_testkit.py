@@ -83,10 +83,17 @@ def _adapter(
     )
 
 
+@pytest.mark.parametrize("mode", ["none", "query-first"])
 def test_observation_is_neutral_to_payload_response_budget_and_request_count(
-    tmp_path: Path,
+    tmp_path: Path, mode: str,
 ) -> None:
-    baseline, observed = _adapter(tmp_path / "baseline", observed=False), _adapter(tmp_path / "on")
+    baseline = _adapter(tmp_path / "baseline", observed=False, mode=mode)
+    observed = _adapter(tmp_path / "on", mode=mode)
+    if mode == "query-first":
+        for adapter in (baseline, observed):
+            assert adapter.host_mcp is not None
+            adapter.host_mcp.close()
+            adapter.host_mcp = _QueryFirstMcp()  # type: ignore[assignment]
     assert isinstance(observed, ObservedOpenWorkerProviderAdapter)
     plain_transport, observed_transport = _Transport(), _Transport()
     baseline.transport, observed.transport = plain_transport, observed_transport
@@ -108,7 +115,14 @@ def test_observation_is_neutral_to_payload_response_budget_and_request_count(
         assert answer["request_ref"] == request["request_ref"]
         assert answer["provider_payload_sha256"] == request["payload_sha256"]
         assert answer["host_attempt_trace_id"] == request["host_attempt_trace_id"]
-        assert not answer["context_in_prompt"]
+        assert answer["context_in_prompt"] is (mode == "query-first")
+        if mode == "query-first":
+            # The second actual call takes the Runtime-validated cached path.
+            assert baseline.complete(incoming, _metadata("op-2")) == observed.complete(
+                incoming, _metadata("op-2"),
+            )
+            assert plain_transport.requests == observed_transport.requests
+            assert observed.owner_traces()[1]["mcp_invocations"][0]["receipt_reused"]
         assert "Keep this system message" not in json.dumps(trace)
         assert "Earlier answer" not in json.dumps(trace)
         assert "session-1" not in json.dumps(trace)
@@ -213,7 +227,8 @@ class _QueryFirstMcp:
             "availability": "AVAILABLE", "items": [], "degraded_components": [],
             "open_issue_ids": ["issue-1"] if self.blocked else [],
             "abstention_reason": "OPEN_ISSUE" if self.blocked else "SUFFICIENCY_UNSATISFIED",
-            "canonical_position": 20, "trace_id": f"trace-{len(self.calls)}",
+            "canonical_position": 20, "trace_id": "trace-1",
+            "request_id": f"runtime-request-{len(self.calls)}",
             "receipt_reused": previous_context_id is not None,
             "context_receipt": {"context_capsule_id": "11111111-1111-4111-8111-111111111111"},
             "access_trace": {"planned_stage": "SEARCH", "terminal_stage": "SUFFICIENCY",
@@ -224,7 +239,7 @@ class _QueryFirstMcp:
             outcome["reader_evidence_boundary"] = "GOVERNANCE_ADMITTED_SOFT_RANKED"
             outcome["memory_context"] = {
                 "text": "MEMORY_CONTEXT_V0_2\nMEMORY_STATUS=PARTIAL\nprivate memory observation",
-                "selected_evidence_ids": ["evidence-1"], "claim_versions": [],
+                "selected_evidence_ids": ["evidence-1"], "claim_versions": ["claim-version-1"],
             }
         return outcome
 
@@ -257,7 +272,11 @@ def test_query_first_owner_binding_keeps_fresh_attempts_and_runtime_validated_ca
         assert prepares[0]["fresh_resolve"] is True
         assert prepares[1]["fresh_resolve"] is False
         assert prepares[1]["cache_reused"] is True
-        assert prepares[0]["retrieval_trace_ref"] != prepares[1]["retrieval_trace_ref"]
+        assert prepares[0]["retrieval_trace_ref"] == prepares[1]["retrieval_trace_ref"]
+        first_mcp, second_mcp = first["mcp_invocations"][0], second["mcp_invocations"][0]
+        assert first_mcp["runtime_request_ref"] != second_mcp["runtime_request_ref"]
+        assert first_mcp["previous_context_ref"] is None
+        assert second_mcp["previous_context_ref"] == first_mcp["context_capsule_ref"]
         for attempt in (first, second):
             answer = next(
                 row for row in attempt["host_events"] if row["event"] == "PROVIDER_ANSWER"
@@ -270,6 +289,8 @@ def test_query_first_owner_binding_keeps_fresh_attempts_and_runtime_validated_ca
             assert invocation["host_attempt_trace_id"] == attempt["host_attempt_trace_id"]
             assert binding["mcp_invocation_id"] == invocation["invocation_id"]
             assert binding["retrieval_trace_ref"] == invocation["retrieval_trace_ref"]
+            assert binding["runtime_request_ref"] == invocation["runtime_request_ref"]
+            assert len(binding["selected_claim_version_refs"]) == 1
             assert binding["reader_context_sha256"] == answer["context_sha256"]
             assert len(binding["selected_evidence_refs"]) == 1
             assert provider["exposure_status"] == "DISPATCHED"

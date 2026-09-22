@@ -1,5 +1,10 @@
 # Trace Ownership v1 — offline contract candidate
 
+Current extension: [v2 current-request/cache-origin contract](trace-ownership-v2.md)
+and [scoped 3B-1 execution receipt](../revalidation/trace-ownership/REVALIDATION.md).
+The original v1 fresh-only wire and its historical limitations below are retained;
+current local proof is complete for the declared testkit scope, remote closure pending.
+
 Status: `3B-1 IN_PROGRESS`; wire version `milai-trace-join-v1`. This document and the
 Lab joiner are an offline contract slice, **not** evidence that existing Product/Host
 producers emit a complete chain. The ownership debt remains `NEEDS_REVALIDATION`.

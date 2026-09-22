@@ -3,6 +3,11 @@
 Status: `FRESH_CHAIN_PASS_CACHE_ORIGIN_NOT_PROVEN`, 2026-09-22. This is a bounded
 engineering proof within 3B-1, not completion of that work package or a model-effect run.
 
+This fresh-chain slice merged through PR #33 (`489ea7c`), main identity fast
+`35680800370` PASS. The subsequent [scoped revalidation](../revalidation/trace-ownership/REVALIDATION.md)
+now proves serial cross-layer Claim/cache joins under the [v2 contract](trace-ownership-v2.md).
+The remainder of this page preserves the earlier fresh-only execution and its original limits.
+
 ## Executed path and result
 
 The explicit Host observer delegates to the actual query-first Adapter and gateway,
