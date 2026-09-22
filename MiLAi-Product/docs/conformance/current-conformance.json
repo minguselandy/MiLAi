@@ -2,13 +2,40 @@
   "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
   "architecture_version": "1.0.0",
   "behavior_revalidation": {
-    "claims": [],
+    "claims": [
+      {
+        "coverage": "SCOPED",
+        "covered_statement": "For opt-in serial query-first tracing, the exact governed Context/version selection and dispatched exposure bind to actual Runtime/MCP/Host requests; validated cache reuse retains its original retrieval and uses the current authorized invocation. Exposure never implies model use.",
+        "debt_id": "trace-ownership",
+        "execution_status": "PASS",
+        "limits": [
+          "Not full protected Context or answer-lineage conformance.",
+          "No stream/concurrent observation or cross-process Host continuity claim.",
+          "Controlled Provider fixtures establish dispatch/native/usage plumbing, not model semantics or benefit.",
+          "Evidence and canonical Claim versions only; State/Note exports and Opportunity Ledger are outside this receipt."
+        ],
+        "negative_case_ids": [
+          "TRACE-NEG-SCOPE",
+          "TRACE-NEG-IDENTITY",
+          "TRACE-NEG-DISPATCH"
+        ],
+        "positive_case_ids": [
+          "TRACE-POS-FRESH",
+          "TRACE-POS-CACHE",
+          "TRACE-POS-HOST"
+        ],
+        "receipt": "docs/revalidation/trace-ownership/receipt.json",
+        "status": "PASS"
+      }
+    ],
     "failed_claim_count": 0,
     "historical_receipt_count": 14,
     "index": "docs/revalidation/INDEX.md",
     "preserved_failed_receipt_count": 3,
-    "receipts": [],
-    "validated_receipt_count": 14
+    "receipts": [
+      "docs/revalidation/trace-ownership/receipt.json"
+    ],
+    "validated_receipt_count": 15
   },
   "claim_policy": {
     "architecture_conformant": false,
@@ -32,7 +59,7 @@
     "map": "docs/conformance/invariant-test-map.json",
     "status": "UNVERIFIED"
   },
-  "invariant_test_map_sha256": "7232e4516b169db9c4e528d4f8018645b577d4c9a849e94aee5adb803cdfff27",
+  "invariant_test_map_sha256": "f46150fc11d34700b38df5fcc2aa3c7e531d6721773754e4bf977d856ba0c565",
   "known_limitations": [
     "Behavior revalidation receipts are identity-bound and may only promote an item when they explicitly declare COMPLETE coverage.",
     "AF-09 historical tarballs are archive-owned and are represented by tracked classification metadata, not Product Git bytes.",
@@ -45,9 +72,9 @@
     "0056_host_notes"
   ],
   "openworker_version": "0.1.0",
-  "product_commit": "00ff8c3a1f4a524ddbc5f7e149f64128e88b7a12",
-  "product_manifest_sha256": "a69d35c60ebfae072a86ef418af4be170c91f365c30a75caf5b11ff70a3ebe23",
-  "product_tree_sha256": "fb1493ec85bada22c39fa90a83cb00e9839f1d76e188aead53dead5b07ab22f1",
+  "product_commit": "519ba02bbedc7507237bb78267679ef0cf62cf71",
+  "product_manifest_sha256": "0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae",
+  "product_tree_sha256": "22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a",
   "product_version": "0.1.0-candidate",
   "runtime_version": "0.1.5",
   "schema_version": "milai-architecture-conformance-v1",
@@ -75,5 +102,5 @@
       "status": "UNVERIFIED"
     }
   ],
-  "verified_at": "2026-09-22T02:59:32+00:00"
+  "verified_at": "2026-09-22T03:24:45+00:00"
 }

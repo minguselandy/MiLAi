@@ -31,6 +31,8 @@ Schema 保持 `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`。回退比较口�
 
 The later [Claim/cache owner extension](trace-cache-owner.md) adds separately typed
 Claim-record and actual receipt-validation facts to the Python/HTTP observer.
+The subsequent [v2 cross-layer contract](trace-ownership-v2.md) and
+[scoped receipt](../revalidation/trace-ownership/REVALIDATION.md) cover actual serial cache origins.
 The CLI restrictions below remain unchanged; the original execution receipt is
 historical Evidence-only proof, not retroactive Claim or cache coverage.
 

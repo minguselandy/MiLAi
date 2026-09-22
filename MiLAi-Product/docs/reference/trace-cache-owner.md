@@ -1,5 +1,9 @@
 # Runtime Claim and cache owner observations
 
+Subsequent [v2 cross-layer join](trace-ownership-v2.md) now has
+[scoped 3B-1 execution evidence](../revalidation/trace-ownership/REVALIDATION.md).
+This page preserves the earlier Runtime-only slice and its then-pending work.
+
 Status: local producer evidence, `3B-1 IN_PROGRESS`, 2026-09-22. This extends the
 public opt-in testkit; it does not yet complete the Host/MCP/Provider/Lab cache join.
 

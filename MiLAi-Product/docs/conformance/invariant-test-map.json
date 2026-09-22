@@ -1223,9 +1223,35 @@
           }
         ],
         "verification": {
-          "behavioral_execution": "UNVERIFIED",
-          "method": "crosswalk reference resolution only",
-          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+          "behavioral_execution": "SCOPED",
+          "execution_receipts": [
+            {
+              "coverage": "SCOPED",
+              "covered_statement": "For opt-in serial query-first tracing, the exact governed Context/version selection and dispatched exposure bind to actual Runtime/MCP/Host requests; validated cache reuse retains its original retrieval and uses the current authorized invocation. Exposure never implies model use.",
+              "debt_id": "trace-ownership",
+              "execution_status": "PASS",
+              "limits": [
+                "Not full protected Context or answer-lineage conformance.",
+                "No stream/concurrent observation or cross-process Host continuity claim.",
+                "Controlled Provider fixtures establish dispatch/native/usage plumbing, not model semantics or benefit.",
+                "Evidence and canonical Claim versions only; State/Note exports and Opportunity Ledger are outside this receipt."
+              ],
+              "negative_case_ids": [
+                "TRACE-NEG-SCOPE",
+                "TRACE-NEG-IDENTITY",
+                "TRACE-NEG-DISPATCH"
+              ],
+              "positive_case_ids": [
+                "TRACE-POS-FRESH",
+                "TRACE-POS-CACHE",
+                "TRACE-POS-HOST"
+              ],
+              "receipt": "docs/revalidation/trace-ownership/receipt.json",
+              "status": "PASS"
+            }
+          ],
+          "method": "identity-bound behavior revalidation receipt",
+          "reason": "The receipts prove scoped subclaims; the frozen item remains UNVERIFIED until a COMPLETE claim covers it."
         }
       },
       {
@@ -3782,9 +3808,9 @@
   "source": {
     "crosswalk": "architecture/v1.0/crosswalk.json",
     "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
-    "product_commit": "00ff8c3a1f4a524ddbc5f7e149f64128e88b7a12",
-    "product_manifest_sha256": "a69d35c60ebfae072a86ef418af4be170c91f365c30a75caf5b11ff70a3ebe23",
-    "product_tree_sha256": "fb1493ec85bada22c39fa90a83cb00e9839f1d76e188aead53dead5b07ab22f1"
+    "product_commit": "519ba02bbedc7507237bb78267679ef0cf62cf71",
+    "product_manifest_sha256": "0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae",
+    "product_tree_sha256": "22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a"
   },
   "status_semantics": {
     "DEVIATION": "The current implementation or evidence mapping differs from the frozen claim.",

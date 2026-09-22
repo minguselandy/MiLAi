@@ -23,6 +23,10 @@ Existing receipt bytes are retained as historical evidence, not silently rebound
 
 ## Receipts
 
+Phase 3B-1 adds a current-tree scoped trace-ownership receipt. Its exact baseline is
+recorded separately in [the report](trace-ownership/REVALIDATION.md); the table above
+remains the historical cleanup identity. Prior receipt bytes are unchanged.
+
 | Technical debt | Decision | Receipt |
 | --- | --- | --- |
 | projection purge/rebuild | `FIXED` | [`projection-purge-rebuild/REVALIDATION.md`](projection-purge-rebuild/REVALIDATION.md) |
@@ -31,6 +35,7 @@ Existing receipt bytes are retained as historical evidence, not silently rebound
 | validation-token TTL vs ContextCapsule lifecycle | `FIXED` | [`context-validation-lifecycle/REVALIDATION.md`](context-validation-lifecycle/REVALIDATION.md) |
 | OpenWorker HTTP auth/exposure | `FIXED` | [`openworker-http-exposure/REVALIDATION.md`](openworker-http-exposure/REVALIDATION.md) |
 | worker `--once` docs/behavior (Phase 3A-1) | `FIXED` | [`worker-once/REVALIDATION.md`](worker-once/REVALIDATION.md) |
+| Runtime / Host / Provider ownership (Phase 3B-1, serial query-first testkit) | `FIXED` | [`trace-ownership/REVALIDATION.md`](trace-ownership/REVALIDATION.md) |
 
 The five Phase 2 rows also have a `post-cleanup.receipt.json` bound to the final cleanup Product identity.
 These receipts preserve the prior claim statements and coverage levels; they do not replace or

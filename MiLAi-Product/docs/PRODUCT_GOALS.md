@@ -8,9 +8,10 @@
 ## Current governing Goal: post-cleanup behavioral closure and measured research
 
 Latest closure: PR #33 merged as `489ea7ca8c3756630f32da0e2c52a0940c97d74e`, main fast
-`35680800370` PASS. Local [Runtime Claim/cache owner observations](reference/trace-cache-owner.md)
-now pass exact/wrong-scope, receipt-hit and invalidation checks. The cross-layer cache join and
-trace debt closure are still pending; 3B-1 remains IN_PROGRESS, research remains unallocated.
+`35680800370` PASS. Local [scoped trace receipt](revalidation/trace-ownership/REVALIDATION.md)
+now covers fresh Evidence and Claim/cache cross-layer joins: 47 Product tests, 76 Lab tests,
+18 actual Host attempts, zero model calls. Trace debt is FIXED for this serial query-first
+testkit scope; 3B-1 remains IN_PROGRESS pending CI/merge/main closure. Research stays unallocated.
 
 The current cross-bundle execution contract is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
@@ -40,16 +41,17 @@ The user resumed execution. 3A-0 is complete: PR #27 merged at `cf149939eea9f184
 with exact-head fast run `35672424053`, candidate/merge tree identity, and main fast run
 `35673403788` all verified. 3A-1 completed through PR #28 at main
 `81f2f12844674983973ae7dad99868211ba1a1bb`, with main fast `35674495200` passed.
-Current debt is `6 FIXED / 4 NEEDS_REVALIDATION / 0 OPEN`. 3B-1 is in progress from
+Current local debt is `7 FIXED / 3 NEEDS_REVALIDATION / 0 OPEN`. 3B-1 started from
 main `755cdfc947f34efa03cc0bb1eed682233767b061` after PR #29's docs-only CI optimization.
-The [offline ownership candidate](reference/trace-ownership-v1.md) does not yet close live
-producer provenance or the trace ownership debt.
+The [offline ownership candidate](reference/trace-ownership-v1.md) alone did not close live
+producer provenance; the subsequent scoped receipt above supplies that evidence.
 
 The follow-up [explicit Host owner testkit](reference/host-trace-testkit.md) merged in PR #31,
 including main fast `35677115118`. Runtime owner export merged in PR #32, main fast
 `35677932965` PASS. The [same-execution candidate](reference/trace-ownership-chain.md)
-now joins eight real MCP/HTTP/PostgreSQL attempts with a controlled Provider fixture;
-cache-origin and final debt closure remain pending. Added testkit source changes Product identity;
+joined eight real MCP/HTTP/PostgreSQL attempts with a controlled Provider fixture;
+the later [v2 contract](reference/trace-ownership-v2.md) adds proven cache-origin joins.
+Remote work-package closure remains pending. Added testkit source changes Product identity;
 the fresh Conformance map is `9 PASS / 35 UNVERIFIED / 0 DEVIATION`, with prior receipts
 retained as historical evidence. No default Product behavior or research budget changes.
 

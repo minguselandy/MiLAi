@@ -9,23 +9,24 @@
 
 - Reconciled repository `main`: `489ea7ca8c3756630f32da0e2c52a0940c97d74e`; Git tree
   `7affaf3ac122d939513bcf406ed09c72efa13a93`; main fast `35680800370` passed.
-- Local Runtime Claim/cache observer source: `00ff8c3a1f4a524ddbc5f7e149f64128e88b7a12`,
-  awaiting cross-layer implementation and remote closure. Product identity: 425 manifest files;
-  manifest SHA `a69d35c60ebfae072a86ef418af4be170c91f365c30a75caf5b11ff70a3ebe23`;
-  Product tree `fb1493ec85bada22c39fa90a83cb00e9839f1d76e188aead53dead5b07ab22f1`.
-  [Local evidence](reference/trace-cache-owner.md): 29 narrow tests, including five real PG cases.
-  Actual Runtime receipt reuse and invalidation are observed; Host/MCP/Lab cache join is pending.
+- Local final 3B-1 source: `519ba02bbedc7507237bb78267679ef0cf62cf71`, remote closure pending.
+  Product identity: 425 files; manifest SHA
+  `0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae`; Product tree
+  `22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a`.
+  [Scoped receipt](revalidation/trace-ownership/REVALIDATION.md): 47 Product tests (8 real PG),
+  76 Lab tests, and actual fresh Evidence / Claim-cache cross-layer proofs. Streaming,
+  concurrency, cross-process continuity and model use/benefit are not claimed.
 - Cleanup C0–C10 is complete. The authoritative final composition is Run #60 / ID
   `35632657133`: 17 jobs passed, including Runtime/PostgreSQL, all six integrations, Lab fast,
   four historical replay shards, Archive, Product identity and Conformance.
 - Frozen Architecture remains version 1.0.0 and immutable. The current implementation map is
   `9 PASS / 35 UNVERIFIED / 0 DEVIATION`; overall status remains honestly `UNVERIFIED`.
   The prior `10/34/0` map was bound to the cleanup Product identity. Adding the explicit
-  testkit changes the global manifest; its 14 behavior receipts remain valid historical
-  evidence, with zero matching this new whole-tree identity. No receipt was rewritten and
+  testkit changes the global manifest; its 14 earlier behavior receipts remain historical.
+  A new trace-ownership receipt contributes one current SCOPED G7 claim. No old receipt was rewritten and
   no new behavior failure is implied. Unrelated behavior suites were not rerun for this addition.
-- `docs/TECH_DEBT.md` currently records `6 FIXED / 4 NEEDS_REVALIDATION / 0 OPEN` after
-  [worker once revalidation](revalidation/worker-once/REVALIDATION.md).
+- `docs/TECH_DEBT.md` currently records `7 FIXED / 3 NEEDS_REVALIDATION / 0 OPEN` after
+  [scoped trace-ownership revalidation](revalidation/trace-ownership/REVALIDATION.md).
   `NEEDS_REVALIDATION` is not a defect classification and must be resolved by executable diagnosis.
 - The current coordinating contract is the
   [post-cleanup development Goal](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
@@ -39,8 +40,9 @@
   [same-execution slice](reference/trace-ownership-chain.md), merged in PR #33, joins eight actual
   Host/MCP/HTTP/PostgreSQL attempts with a controlled in-process Provider fixture.
   Exact fresh-retrieval/version/Context provenance and failure dispatch states are covered;
-  cache-origin, other supported version paths and final debt closure remain pending.
-  This is not real model use or a mechanism-effect claim; trace debt is not closed.
+  the new v2 candidate additionally covers actual Claim/cache origins and has a scoped debt receipt.
+  The work package still awaits exact-head CI/merge/main identity; this is not real model use or
+  a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
   candidate; docs-only and Lab-only changes use the classified fast path.

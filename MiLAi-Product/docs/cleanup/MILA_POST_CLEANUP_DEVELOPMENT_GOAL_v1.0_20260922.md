@@ -223,7 +223,7 @@ NEEDS_REVALIDATION
 | G0 | Goal registration | docs | no | COMPLETE | roadmap bound |
 | 3A-0 | Status reconciliation | Product/Lab docs | no | PASS — PR #27 / main identity verified | G0 |
 | 3A-1 | Worker `--once` revalidation | Product evidence | expected no | PASS — PR #28 / main identity verified | 3A-0 |
-| 3B-1 | Trace Ownership v1 | Product/testkit + Lab | small/contractual | IN_PROGRESS — offline contract slice; producer proof pending | 3A-0 |
+| 3B-1 | Trace Ownership v1/v2 | Product/testkit + Lab | small/contractual | IN_PROGRESS — scoped local proof PASS; CI/merge/main pending | 3A-0 |
 | 3A-2D | Host Continuity diagnosis | Product evidence | no | PENDING | 3B-1 vocabulary |
 | 3A-2R | Host Continuity remediation | Product | conditional | NOT_ADMITTED | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | PENDING | 3A-0 |
@@ -840,6 +840,25 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Scoped fresh/Claim/cache ownership proof complete locally
+
+- [Receipt and limits](../revalidation/trace-ownership/REVALIDATION.md): final source
+  `519ba02bbedc7507237bb78267679ef0cf62cf71`, Product tree
+  `22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a`.
+  47 Product tests (8 real PostgreSQL), 76 targeted Lab tests pass.
+- Two actual chains total 18 Host attempts / 16 controlled Provider fixture calls.
+  Evidence bodies and Claim records retain distinct exact hashes. Five actual cache
+  validations bind new Runtime requests to observed origins; governed supersession
+  causes a fresh retrieval before the revised version can be reused.
+- Claim/cache run retains its actual source `83e69ed74a30a76f16bb6b039f4b7013b1cf2d77`;
+  only two test files changed before the final source. No old evidence is relabeled.
+- Trace debt is locally FIXED for the serial non-stream query-first public testkit;
+  TECH_DEBT is `7 FIXED / 3 NEEDS_REVALIDATION / 0 OPEN`. This is SCOPED G7, not
+  full architecture conformance, Host continuity or measured model benefit.
+- 3B-1 stays IN_PROGRESS until exact-head fast CI, expected-head merge and main identity
+  pass. Model requests/tokens and research allocations remain zero. Dedicated DB and
+  owned processes are stopped, data retained. No full-suite or historical replay rerun.
 
 ## 2026-09-22 — Fresh chain merged; Runtime Claim/cache observations locally verified
 
