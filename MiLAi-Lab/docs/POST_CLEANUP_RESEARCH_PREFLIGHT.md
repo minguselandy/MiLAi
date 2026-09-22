@@ -4,8 +4,11 @@ Update, 2026-09-22: the user has now authorized one
 [finite first Utility batch](UTILITY_FIRST_BATCH.md). That separate allocation
 supersedes the missing-authority fields below; this original preparation record
 does not itself allocate additional requests. Task/arm schedule is frozen, but
-method/evidence admission and transport integration remain incomplete. No calls
-have started. Earlier PR closure and zero-allocation facts below remain historical.
+method/evidence admission subsequently completed after explicit proxy permission.
+The [closed batch result](UTILITY_PROXY_RESULT.md) is KEEP_SIMPLE / benefit not
+established: 199 generation calls, 400 outbound requests including auxiliary HTTP,
+341,591 tokens, no new embedding/rerank; no makeup allocation. Earlier PR closure
+and zero-allocation facts below remain historical.
 
 Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`. Status: `DRAFT_NOT_ADMITTED`.
 This is a preparation record, not an experiment manifest or permission to send a

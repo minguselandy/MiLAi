@@ -1,4 +1,4 @@
-# First finite Utility batch — authorized, not yet execution-admitted
+# First finite Utility batch — authorization and frozen allocation
 
 User authority received on 2026-09-22 supersedes the earlier zero-allocation
 preflight **only for this one batch**. Historical allocations remain closed;
@@ -41,7 +41,7 @@ No TEST, main confirmation, Travel, RESERVE, SUPPORT or outcome-based replacemen
   even on the first auxiliary solver HTTP call. Stop new requests at the deadline;
   retain completed, failed and unfinished records, without extension or makeup.
 
-## Admission gap: what Utility means
+## Historical evidence and the authorized proxy
 
 The inspected allowed v0.6 VALID banks contain no `utility_state`. DB's recorded
 adoption decisions reject the retrieved bundles; OS has a partial adoption of
@@ -62,12 +62,14 @@ No new label is inferred from old H outcomes, no task success is distributed ove
 individual cards, and candidate provenance must exclude the current task and its
 source-group influence before any new model input is built.
 
-A historical bundle adoption/rejection proxy is a possible first selection rule,
-but would test **that proxy**, not an already measured task-benefit utility. This
-choice has been put to the user; neither interpretation is silently substituted.
-The allocation freezes tasks/arms, **not** an unfinished algorithm or candidate
-bank. Method, permissible utility evidence, native pins, primary quality/cost and
-safety rules, and pre-outcome opportunity accounting remain to be frozen.
+The user subsequently explicitly permitted the historical exact-bundle adoption/
+rejection proxy, still requiring paired quality and complete costs. The experiment
+tests **that proxy**, not an already measured task-benefit utility. The separate
+[pre-outcome protocol](UTILITY_PROXY_PROTOCOL.md) fixes the implemented rule,
+provenance exclusions, cached-only common retrieval, native conditions, quality/
+cost/safety criteria and denominator. Only one independent position has two
+established meaningful alternatives; it cannot support generalization or promotion.
+The original allocation is unchanged, including its historical preparation status.
 
 ## Implemented preparation and validation
 
@@ -88,20 +90,29 @@ conservatively consume text slots too, with **known zero inference tokens**; pur
 counts keep these auxiliary requests distinct from actual generations. This stricter
 accounting may stop below 400 generations and does not expand any authorized cap.
 
-The **experiment runner is not yet admitted or connected**. It must pin one ledger
-path for all arms, freeze/verify the selection implementation and input provenance,
-and prevent extra/replayed arm executions. For embedding, a verified token-upper-bound
-function is mandatory: without a bound grounded in the existing deployment/tokenizer
-contract, construction fails closed. No deployment bound is inferred from string
-length, and the fixture embedding bound used in tests is not a deployment claim.
+`tools/run_utility_proxy_batch.py` now binds one hard-coded batch root and ledger,
+verifies frozen source/selection/input/native identities and prevents replay with
+exclusive batch/arm markers. Admission SHA before the first external request:
+`a070feaa1b45046ad0369a4fbc65894c58e1aede3e62fbbf7679e1de3a2f8fcd`.
+The external evidence root is
+`/cra/memory/mx_memory/evidence/post-cleanup-utility-proxy-20260922/admitted`.
+No new embedding is needed: 21 existing instructed query vectors are verified;
+three missing caches abstain in both arms without task replacement. The opt-in
+embedding transport still requires a deployment-grounded token bound if used in
+a separately authorized run; fixture bounds are not deployment claims.
 
 Targeted validation: 11 budget, 11 transport, 3 allocation, 4 existing Provider and
 4 adjacent runtime-policy tests PASS (33 distinct tests across targeted invocations);
 changed-file Ruff, budget-module mypy and both Lab import boundaries PASS.
-No local full suite, Product tests, benchmark execution,
-embedding, generation or endpoint probe was run. Product executable/schema/API,
-permissions and Canonical behavior are unchanged. Existing resolver C06/C21 debt
-remains OPEN. Remote main identity was checked; preparation PR closure is pending.
+That preparation ran no local full suite, Product tests, benchmark, generation or
+endpoint probe. PR #41 closed at main `ae434539f6b99fd2da0c9ab6e208ff7ce34f9d88`:
+tested head `883cd7861a2d1b3044a032415ee47c3b9486ba19`, fast `35740683722` PASS,
+identical merge tree `bd173eb75f6df156223ada3d02050fcdff2b39cc`, main fast
+`35741790217` PASS. Classified Lab CI: 4,682 PASS / 137 SKIP / 4 DESELECTED;
+static/build/archive PASS. The remote main baseline was rechecked before this batch.
+Product executable/schema/API, permissions and Canonical behavior are unchanged;
+resolver C06/C21 remain OPEN.
 
-Current consumption: **0 text / 0 embedding / 0 rerank requests; clock not started**.
-No mechanism-effect, negative-effect or Product-promotion conclusion is available.
+Preparation ended at zero requests. The separately sealed execution and its actual
+consumption are reported in [the batch result](UTILITY_PROXY_RESULT.md), not inferred
+from historical authorization or the allocation's unchanged preparation fields.

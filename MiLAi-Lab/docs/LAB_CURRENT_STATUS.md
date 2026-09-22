@@ -2,9 +2,9 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `ACTIVE / 3B-2_PASS / 3A-3R_PARTIAL_REPAIR_OPEN / 3C_FINITE_BATCH_PREPARATION`
-> New experiment allocations: `1 authorized / execution not yet admitted`
-> New model requests: `0`
+> Current execution: `ACTIVE / 3B-2_PASS / 3A-3R_PARTIAL_REPAIR_OPEN / 3C-1_KEEP_SIMPLE`
+> New experiment allocations: `1 finite batch closed / no makeup or next allocation`
+> New model requests: `199 generation / 400 total including auxiliary HTTP / 0 embedding / 0 rerank`
 
 ## Current coordinated mainline
 
@@ -39,10 +39,16 @@ and use stay UNKNOWN, with 0 selection opportunities; no mechanism benefit is cl
 The user has authorized [one finite Utility batch](UTILITY_FIRST_BATCH.md):
 32 frozen DB/OS pairs (64 executions), existing M1 solver/profile, at most
 400 text + 128 embedding requests, 3,000,000 + 50,000 tokens and four hours.
-The schedule is frozen before any request; global budget accounting now gates the
-opt-in Provider transport. Utility-evidence definition, implemented selection method
-and a frozen/admitted experiment runner remain gaps. New requests are
-still zero; no effect experiment or old study has started.
+The user subsequently explicitly allowed exact-bundle adoption/rejection as a
+proxy, not observed use or causal reward. The [sealed protocol](UTILITY_PROXY_PROTOCOL.md)
+and [closed result](UTILITY_PROXY_RESULT.md) record 24 independent pairs, three
+complete repeats, one budget-interrupted arm and nine unstarted arms. New generation
+cost is 341,591 tokens over 909.961 seconds; the guard stopped at 400 total requests,
+conservatively including auxiliary HTTP. KEEP_SIMPLE / benefit not established:
+the sole eligible original pair used 36 more tokens and its repeat was incomplete;
+three unchanged-selection DB pairs also differed in quality. No repeatable benefit,
+Product promotion, historical resume or next allocation is claimed. PR #41 prep
+closed at `ae434539`, main fast `35741790217` PASS; this result's PR closure follows.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.
