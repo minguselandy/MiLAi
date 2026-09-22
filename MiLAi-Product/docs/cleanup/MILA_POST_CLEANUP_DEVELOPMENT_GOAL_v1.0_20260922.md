@@ -841,6 +841,29 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 
 # 16. Execution journal
 
+## 2026-09-22 — Host producer merged; Runtime owner export and real PG evidence
+
+- PR #31 tested head `7aeeb1477c67b9c7584ebbeb0c1dca5e1da0a798`, fast `35676964005`
+  PASS; protected squash merge `0971ef6c942bdb2267e70389db76849a5a561db8`.
+  Candidate/merge tree `7433c0c5744f8edd186eed03faefbc5b5604ff35` matched; main fast
+  `35677115118` PASS. Runtime follow-up branch starts from this exact main.
+- New `--owner-trace` option on the public retrieval testkit is off by default. It exports
+  the captured DecisionSnapshot digest, gate/binding digests, actual recorded trace/position,
+  and exact materialized EvidenceRecord hashes. Missing versions remain explicit gaps.
+- Runtime targeted tests: 40 PASS / 0 skips (2.79 s), including real PostgreSQL empty,
+  visible and wrong-scope cases. All three normal/baseline/traced neutrality checks pass.
+  Exact commands, external JUnit identity and limits are in the
+  [testkit runbook](../reference/retrieval-trace-testkit.md#opt-in-runtime-owner-export-v1).
+  Isolated PostgreSQL 16.14 container stopped after testing; data retained. No model calls.
+- Source commit `63022a76a6bf1f9408d4c26c3ebc4f66540170a4`, Git tree
+  `3311524648ab7c9608e550cfd65af8b2a86df2bc`; Product 424 files, tree
+  `223dad55d2c0f3f9a50686192a35d10a28127c989a9d45f3cbf1a6a77cc6b265`.
+  No default Runtime/MCP behavior, schema, permission or Canonical change; existing receipts
+  remain historical, Conformance stays `9 PASS / 35 UNVERIFIED / 0 DEVIATION`.
+- 3B-1 remains IN_PROGRESS: producer facts must still be assembled for the same actual
+  MCP/Host/Provider invocation, with cache-origin and exact-version provenance. No Phase 3C
+  or model-backed effect run is admitted by these engineering tests.
+
 ## 2026-09-22 — 3B-1 offline contract merged; opt-in Host producer observation in progress
 
 - PR #30 tested head `d7d4a49a76699a806ab3e968ce75520a22d69759`, exact fast run

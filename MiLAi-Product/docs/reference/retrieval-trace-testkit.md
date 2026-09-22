@@ -79,6 +79,22 @@ fresh synthetic tenants, deterministic-hash embedding and zero model calls, then
 Its data was retained; the temporary endpoint was `127.0.0.1:32790`, database `milai_worker_once`,
 migration head `0056_host_notes`.
 
+From `runtime/`, with the isolated `MILAI_MIGRATION_DATABASE_URL` and
+`MILAI_TEST_{API,STEWARD,WORKER}_DATABASE_URL` roles configured:
+
+```bash
+.venv/bin/pytest -q tests/unit/test_runtime_owner_trace.py \
+  tests/unit/test_product10_retrieval_trace_testkit.py tests/test_retrieval_audit.py \
+  tests/integration/test_runtime_owner_trace_pg.py --tb=short --maxfail=1 \
+  --junitxml=/cra/memory/mx_memory/evidence/post-cleanup-3b1-runtime-owner-20260922/runtime-owner.xml
+```
+
+Ruff checked those new tests and the three changed `src/milai/testkit/` modules;
+mypy checked `runtime_owner_trace.py`, `retrieval_trace.py` and `retrieval_trace_cli.py`.
+Affected Runtime package checks/build are left to classified fast CI; they are not duplicated
+locally. Normal resolve can write audit/continuation records as documented above; no claim of
+zero database writes is made.
+
 External JUnit: `/cra/memory/mx_memory/evidence/post-cleanup-3b1-runtime-owner-20260922/runtime-owner.xml`;
 SHA-256 `9216dfbaeddfdb4dfedfa46765a638a6b25fcb8a30fc219026d346bcfc753de9`.
 

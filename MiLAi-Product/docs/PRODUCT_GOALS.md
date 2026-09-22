@@ -40,8 +40,9 @@ main `755cdfc947f34efa03cc0bb1eed682233767b061` after PR #29's docs-only CI opti
 The [offline ownership candidate](reference/trace-ownership-v1.md) does not yet close live
 producer provenance or the trace ownership debt.
 
-The follow-up [explicit Host owner testkit](reference/host-trace-testkit.md) has 28 targeted
-Product tests passed and awaits remote closure. Its added source changes Product identity;
+The follow-up [explicit Host owner testkit](reference/host-trace-testkit.md) merged in PR #31,
+including main fast `35677115118`. The Runtime owner export candidate has 40 targeted tests
+passed, including three real PostgreSQL cases, and awaits remote closure. Added testkit source changes Product identity;
 the fresh Conformance map is `9 PASS / 35 UNVERIFIED / 0 DEVIATION`, with prior receipts
 retained as historical evidence. No default Product behavior or research budget changes.
 
