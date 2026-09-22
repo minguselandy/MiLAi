@@ -63,7 +63,7 @@ input finding, not exhaustive absence across the frozen pool, a negative mechani
 result, or a terminal for all of 3C-2. Historical Travel later-use claims were not
 imported into the DB/OS denominator.
 
-## 2. Revision: minimum seam still needed
+## 2. Revision: minimum seam identified (implemented in the follow-up)
 
 The current [revision engine](../src/milai_lab/methods/experience_revision.py)
 already supports `replace` / `append_only`, expected-version checks, original
@@ -106,8 +106,9 @@ to measure, not hide. Charge formation/revision/source reads and every failure e
 if no later exposure occurs. No-reuse proposals cannot claim answer effect.
 `REVISION_WITHOUT_SOURCE_CHECK` is not admitted by this document.
 
-Next safe implementation is the missing content-free eligibility bridge and a narrow
-synthetic contract test for type/support/independence/version/receipt rejection.
+The follow-up [research eligibility bridge](RESEARCH_REVISION_ELIGIBILITY.md) now
+implements this content-free seam, with narrow synthetic contract tests for
+type/support/independence/version/receipt rejection and the existing session join.
 Synthetic fixtures prove the join, not real correction or benefit. A real run still
 needs frozen evidence/feedback, independent later tasks, semantic review, IDs/order,
 paired baseline, success/stop criteria, source pins and a new finite authorization.
@@ -156,8 +157,9 @@ controller LLM. No adoption proxy is silently promoted to coverage or causal uti
 
 ## 4. Admission and remaining Goal scope
 
-The next safe work is zero-model contract implementation in separate scoped Revision
-and Attention work packages. Do not first re-run old suites or broaden the data scan.
+At the readiness checkpoint, the next safe work was zero-model contract implementation
+in separate scoped Revision and Attention work packages. Revision's engineering seam
+is now linked above; Attention remains next. Do not first re-run old suites or broaden the data scan.
 Before any real execution, ask for a separate finite data/model/request/token/time
 allocation and freeze missing protocol fields. Previously closed Utility/legacy
 allocations remain closed; no TEST/confirmation/Travel/RESERVE expansion is implied.
@@ -170,7 +172,9 @@ Revision and Attention have no effect terminal yet. RL-like adaptation, transfer
 second solver and promotion remain unadmitted; the limited Utility selection changes
 do not alone establish the matched repeatable signal required for transfer.
 
-This package changes documentation only. No Schema/API/permissions/Canonical or
+The original readiness package (PR #43) changed documentation only; the linked
+follow-up adds Lab-only eligibility code, not an effect run. No Schema/API/permissions/Canonical or
 Product executable change; C06/C21 remain explained OPEN debt, Conformance remains
-UNVERIFIED and Schema remains NO-GO. Validate links/diff, boundary, Product identity
-and Conformance freshness at L0; no package, benchmark or full-composition rerun.
+UNVERIFIED and Schema remains NO-GO. The original documentation-only validation
+was L0 links/diff, boundary, Product identity and Conformance freshness, without
+package, benchmark or full-composition reruns. Follow-up checks are in its own receipt.

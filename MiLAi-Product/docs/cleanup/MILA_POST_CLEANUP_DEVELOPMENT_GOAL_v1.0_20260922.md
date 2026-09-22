@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3C-2_AND_3C-3_ZERO_MODEL_READINESS
-next_work_package: 3C-2_RESEARCH_REVISION_ELIGIBILITY_BRIDGE
+current_work_package: 3C-2_RESEARCH_REVISION_ELIGIBILITY_BRIDGE
+next_work_package: 3C-3_DETERMINISTIC_ATTENTION_POLICY
 new_experiment_allocations: 1
 new_model_requests: 199
 ---
@@ -230,7 +230,7 @@ NEEDS_REVALIDATION
 | 3A-3R | Resolver remediation | Product | conditional | FAIL_REMEDIATION_REQUIRED — partial repair merged PR #38/full #64; C06/C21 remain OPEN, not full closure | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PASS — PR #39 / exact-head fast / identical-tree merge / main identity verified; scoped accounting, not mechanism benefit | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | KEEP_SIMPLE — PR #42 / main identity verified; benefit not established | 3B-2 real-run proof |
-| 3C-2 | Evidence-grounded Revision | Lab | no | IN_PROGRESS — zero-model readiness; inspected banks lack revised-version later exposure; no new model allocation | 3B-2 + lineage |
+| 3C-2 | Evidence-grounded Revision | Lab | no | IN_PROGRESS — zero-model eligibility bridge; no real correction denominator/effect terminal or new model allocation | 3B-2 + lineage |
 | 3C-3 | State-guided Attention | Lab | no | IN_PROGRESS — zero-model state/mode contract proposal; no effect execution | 3B-2 + frozen state |
 | 3C-4 | RL-like adaptation | Lab | no | NOT_ADMITTED | prior mechanism acts |
 | 3D-1 | Frozen-bank transfer | Lab | no | NOT_ADMITTED | repeatable DEV signal |
@@ -840,6 +840,28 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-23 — Revision eligibility implementation; effect evidence still absent
+
+- Base/rollback `ba88a572f956f9ef4e96ab04e4ad9d988e95d544`, verified remote main.
+  Readiness PR #43 exact-head fast `35789620049` and main fast `35789799253` PASS;
+  candidate/merge tree `aeecfcd70807d28a9bae2b0b17c5de04915a3dff` matched.
+- [Lab-only bridge](../../../MiLAi-Lab/docs/RESEARCH_REVISION_ELIGIBILITY.md) reuses
+  VersionUtility validation/confirmation and both replace/append revision lineages.
+  It binds exact source contents and semantic/provenance review declarations before
+  later reuse; missing support/independence stays UNKNOWN, same-cluster/hidden-H/
+  retired/non-correction versions receive no core correction credit. The caller
+  must authenticate review and timing; checksums alone do not prove semantic support.
+- 62 targeted tests PASS, changed-file Ruff/mypy PASS. A synthetic existing-session
+  revision → restore → later exposure join seals before the later task. This is
+  engineering coverage, not a real correction denominator or model benefit.
+  Package/static/build verification is delegated to classified Lab fast CI;
+  no repeated Product full, historical replay or broader data scan.
+- No Product executable, Schema/API/permission/Canonical, old bank or ledger contract
+  change. C06/C21 remain OPEN; Conformance remains UNVERIFIED; Schema stays NO-GO.
+  No new generation/embedding/endpoint probe or model allocation. Utility is closed;
+  3C-2/3C-3 effect terminals remain outstanding. Next safe work is the separate pure
+  deterministic Attention seam, not another experiment.
 
 ## 2026-09-23 — Revision/Attention readiness; no new model allocation
 
