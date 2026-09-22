@@ -59,6 +59,10 @@ def classify(paths: Iterable[str], *, full_requested: bool = False) -> dict[str,
             flags["langgraph"] = True
         elif _matches(path, "MiLAi-Product/integrations/autogen/"):
             flags["autogen"] = True
+        elif _matches(path, "MiLAi-Lab/docs/") and path.endswith(".md"):
+            # Narrative documentation cannot select the Lab package test/build gate.
+            # Keep source, tests, data, policies, tools and non-Markdown inputs conservative.
+            pass
         elif _matches(path, "MiLAi-Lab/"):
             flags["lab"] = True
         elif _matches(path, "MiLAi-Artifact-Archive/"):
