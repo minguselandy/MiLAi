@@ -15,7 +15,7 @@ paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
 current_work_package: 3C-2_AND_3C-3_ZERO_MODEL_READINESS
-next_work_package: 3C-2_REVISION_RECORD_AND_LATER_EXPOSURE_CONTRACT
+next_work_package: 3C-2_RESEARCH_REVISION_ELIGIBILITY_BRIDGE
 new_experiment_allocations: 1
 new_model_requests: 199
 ---
@@ -853,8 +853,10 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
   v0.7 Actor exposure receipts joined to settled requests and actual payload hashes;
   none establish revised-version later exposure. This is not a general Revision
   negative result or exhaustive pool search. No Travel/TEST/RESERVE/SUPPORT data added.
-- Reuse existing revision engine and version accounting; next minimal seam is typed
-  correction/support/independence eligibility, not another bank. Old state_focus is
+- Reuse existing revision engine, version accounting and Opportunity Ledger taxonomy/
+  exact-version later-exposure joins. The incremental seam is prototype admission,
+  correction support, feedback visibility and source-cluster independence, not another
+  bank or duplicate ledger. Old state_focus is
   FULL/FOCUS projection with a different request envelope, not three-mode Attention.
   Proposed field ownership/freshness/absence and bounded deterministic policy are
   now explicit; implementation and effect evidence remain outstanding.

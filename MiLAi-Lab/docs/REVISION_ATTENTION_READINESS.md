@@ -73,7 +73,17 @@ and feedback refs; [VersionUtility](../src/milai_lab/methods/experience_utility.
 keeps a new version uncalibrated and binds exposures to settled requests. Preserve
 those implementations and historical policies; do not build another bank engine.
 
-Missing for this Goal's comparison is an explicit **Lab-side revision record**:
+The existing [Opportunity Ledger](../src/milai_lab/analysis/opportunity_ledger.py)
+already declares the five revision types, predecessor/new exact versions, policy
+and evidence refs. `_bind_revisions` validates chronology and binds later retrieval,
+exposure and use; its tests include later exact-version reuse. Do not implement
+that accounting again. Its current admission accepts Product/testkit/simulation
+owner facts, not RESEARCH_PROTOTYPE facts; `independent_task` means different task
+IDs, not verified source-cluster independence. That is an accounting boundary,
+not this study's complete semantic-effect admission.
+
+The incremental requirement is an explicit **research eligibility bridge**, reusing
+the existing vocabulary and version accounting, with these supplied facts:
 
 - Exact old and new version identities/content hashes, predecessor, originating
   task and source cluster, policy version, original evidence and visible feedback
@@ -96,12 +106,14 @@ to measure, not hide. Charge formation/revision/source reads and every failure e
 if no later exposure occurs. No-reuse proposals cannot claim answer effect.
 `REVISION_WITHOUT_SOURCE_CHECK` is not admitted by this document.
 
-Next safe implementation is this content-free record/eligibility join and a narrow
+Next safe implementation is the missing content-free eligibility bridge and a narrow
 synthetic contract test for type/support/independence/version/receipt rejection.
 Synthetic fixtures prove the join, not real correction or benefit. A real run still
 needs frozen evidence/feedback, independent later tasks, semantic review, IDs/order,
 paired baseline, success/stop criteria, source pins and a new finite authorization.
-Do not synthesize benchmark corrections or tune branches for known case IDs.
+Do not synthesize benchmark corrections or tune branches for known case IDs. Do not
+forge Product owner facts to pass the current ledger, weaken its old contract, or
+rewrite the earlier accounting proof as if it established source-group independence.
 
 ## 3. Attention: reuse boundaries and proposed state contract
 
