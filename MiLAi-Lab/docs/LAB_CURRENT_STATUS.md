@@ -23,8 +23,11 @@ passed all 17 jobs, candidate/merge tree matched, main fast `35688151840` PASS.
 [3A-3D](../../MiLAi-Product/docs/revalidation/resolver-language/REVALIDATION.md)
 records client 11 PASS/11 FAIL and Runtime 6 PASS/2 FAIL on a corpus frozen first.
 Resolver debt is OPEN; diagnosis PR #37/main fast `35688919530` closed at `87aa53c`.
-Separate 3A-3R remediation starts with no repair proof yet. Diagnosis ran no Lab source,
-model, retrieval or database execution and made no resolver behavior change.
+Separate [3A-3R partial repair](../../MiLAi-Product/docs/revalidation/resolver-language/REMEDIATION.md)
+now has 28 PASS/2 FAIL on the unchanged corpus (client 20/2; Runtime 8/0), with
+113 adjacent/diagnostic tests PASS and 2 XFAIL. Debt stays OPEN; final candidate
+composition/remote closure pending. No Lab source, model, retrieval or DB execution.
+The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.
 
 The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md)

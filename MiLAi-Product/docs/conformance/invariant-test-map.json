@@ -1227,45 +1227,26 @@
           "execution_receipts": [
             {
               "coverage": "SCOPED",
-              "covered_statement": "On the repaired Host tree, restart/cache miss reacquires Runtime-authorized exact persisted memory, and unavailable Runtime prevents offline Context exposure.",
-              "debt_id": "process-local-task-continuity",
-              "execution_status": "PASS",
-              "limits": [
-                "Serial query-first plus compatibility missing-slot negatives, not complete protected Context/answer lineage conformance.",
-                "Controlled Provider fixture only; no observed model use, efficacy or concurrent streaming claim."
-              ],
-              "negative_case_ids": [
-                "REPAIR-NEG-OFFLINE",
-                "REPAIR-NEG-IDENTITY"
-              ],
-              "positive_case_ids": [
-                "REPAIR-POS-RECOVERY"
-              ],
-              "receipt": "docs/revalidation/host-continuity/remediation.receipt.json",
-              "status": "PASS"
-            },
-            {
-              "coverage": "SCOPED",
-              "covered_statement": "Upstream typed-need diagnostic: preserve requested history versus current state and avoid an arbitrary exact address for ambiguous keys, with explicit language/cost-probe limitations before Context acquisition.",
+              "covered_statement": "Upstream deterministic resolver expectations on the unchanged multilingual typed corpus; general intent/address/retry boundaries improve but two semantic capability expectations remain unmet.",
               "debt_id": "resolver-lexical-language-assumptions",
               "execution_status": "FAIL",
               "limits": [
-                "Desired-behavior pure-function diagnosis, not proof of a frozen architecture violation or actual Context exposure.",
-                "Runtime interpreter owns intent/requirement, not StateKey selection or L0/L1 routing.",
-                "Frozen three-family aliases remain an explicit compatibility contract; renamed-alias failure does not authorize changing that contract.",
-                "C14 inherits actual C02 failure; this corpus alone does not isolate a second independent Chinese retry failure.",
-                "One C17 reason-only difference is informational, not an extra failure."
+                "Partial remediation, not a completed resolver capability or broad architecture deviation.",
+                "Pure functions do not prove retrieval, Context exposure, use, efficacy or authority bypass.",
+                "Frozen aliases and explicit read/exact target precedence remain; lexical opt-out is not an authorization parser.",
+                "No fixture-specific synonym or translation dictionary was added to force remaining cases green.",
+                "No previous receipt is rebound to this changed Product identity."
               ],
               "negative_case_ids": [
-                "RESOLVER-NEG-ALIAS",
-                "RESOLVER-NEG-CLIENT",
-                "RESOLVER-NEG-RUNTIME"
+                "RESOLVER-REPAIR-AMBIGUITY",
+                "RESOLVER-REPAIR-NO-MEMORY",
+                "RESOLVER-REPAIR-REMAINING"
               ],
               "positive_case_ids": [
-                "RESOLVER-POS-CLIENT",
-                "RESOLVER-POS-RUNTIME"
+                "RESOLVER-REPAIR-TYPED",
+                "RESOLVER-REPAIR-STRUCTURED"
               ],
-              "receipt": "docs/revalidation/resolver-language/receipt.json",
+              "receipt": "docs/revalidation/resolver-language/remediation.receipt.json",
               "status": "FAIL"
             }
           ],
@@ -1565,32 +1546,9 @@
           }
         ],
         "verification": {
-          "behavioral_execution": "SCOPED",
-          "execution_receipts": [
-            {
-              "coverage": "SCOPED",
-              "covered_statement": "Replacing a native Host instance permanently retires the old graph for that Adapter lifetime; retired instance replay is rejected without damaging legitimate continuation/replacement.",
-              "debt_id": "process-local-task-continuity",
-              "execution_status": "PASS",
-              "limits": [
-                "Process-local Host recovery/replay only, not full G9 or production readiness.",
-                "Retired identities remain in memory for the registry lifetime; not a persistence feature or a long-lived resource-pressure benchmark.",
-                "Original failed diagnosis receipt remains immutable."
-              ],
-              "negative_case_ids": [
-                "REPAIR-NEG-RETIRED",
-                "REPAIR-NEG-IDENTITY"
-              ],
-              "positive_case_ids": [
-                "REPAIR-POS-CURRENT",
-                "REPAIR-POS-RECOVERY"
-              ],
-              "receipt": "docs/revalidation/host-continuity/remediation.receipt.json",
-              "status": "PASS"
-            }
-          ],
-          "method": "identity-bound behavior revalidation receipt",
-          "reason": "The receipts prove scoped subclaims; the frozen item remains UNVERIFIED until a COMPLETE claim covers it."
+          "behavioral_execution": "UNVERIFIED",
+          "method": "crosswalk reference resolution only",
+          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
         }
       }
     ],
@@ -3850,9 +3808,9 @@
   "source": {
     "crosswalk": "architecture/v1.0/crosswalk.json",
     "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
-    "product_commit": "6f9e34efe6399792b44fc0d51438c742e6e5a1c0",
-    "product_manifest_sha256": "44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352",
-    "product_tree_sha256": "08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2"
+    "product_commit": "9b4aa1670dc75dfc2149baeb75719f017267e92a",
+    "product_manifest_sha256": "016df6085fc29d9c201c3f22739397e4f82af128152020318bc2ce4647814096",
+    "product_tree_sha256": "847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311"
   },
   "status_semantics": {
     "DEVIATION": "The current implementation or evidence mapping differs from the frozen claim.",

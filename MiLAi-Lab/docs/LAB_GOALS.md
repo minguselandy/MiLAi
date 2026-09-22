@@ -13,8 +13,9 @@ candidate/merge tree, main fast `35688151840` PASS. Original diagnostics remain.
 The [3A-3D Resolver diagnosis](../../MiLAi-Product/docs/revalidation/resolver-language/REVALIDATION.md)
 closed through PR #37/main fast `35688919530` at main `87aa53c`.
 Frozen primary collection is 17 PASS/13 FAIL; debt is OPEN with strict diagnostic
-assertions retained. Active work is separate 3A-3R remediation; no repair proof or
-research allocation follows from entering that branch.
+assertions retained. Active separate 3A-3R has a [partial repair](../../MiLAi-Product/docs/revalidation/resolver-language/REMEDIATION.md):
+28/30 on the same corpus, two semantic gaps retained OPEN. Final composition/remote
+closure is pending; no full language-capability or research-allocation claim follows.
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).

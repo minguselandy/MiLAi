@@ -227,7 +227,7 @@ NEEDS_REVALIDATION
 | 3A-2D | Host Continuity diagnosis | Product evidence | no | DIAGNOSED_FAIL — PR #35 / main identity verified; native replay OPEN / cache-miss FIXED | 3B-1 vocabulary |
 | 3A-2R | Host Continuity remediation | Product | conditional | PASS — PR #36 / full #63 / main identity verified | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | FAIL_REMEDIATION_REQUIRED — PR #37 / main identity verified; 17 PASS / 13 FAIL retained | 3A-0 |
-| 3A-3R | Resolver remediation | Product | conditional | IN_PROGRESS — separate branch; no repair proof yet | 3A-3D FAIL |
+| 3A-3R | Resolver remediation | Product | conditional | IN_PROGRESS — partial repair 28/30; 2 failures retained OPEN; final gates pending | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PENDING | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | PENDING | 3B-2 real-run proof |
 | 3C-2 | Evidence-grounded Revision | Lab | no | PENDING | 3B-2 + lineage |
@@ -840,6 +840,25 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Deterministic resolver boundaries improved; debt remains OPEN
+
+- [ADR-058](../adr/ADR-058-deterministic-resolver-language-boundaries.md) and source
+  `9b4aa1670dc75dfc2149baeb75719f017267e92a` preserve frozen aliases/structured Runtime
+  signals, normalize typed Unicode, prefer known exact identifiers, retain ambiguity,
+  respect changed retry intent/key and keep prior routes. No scoring weight/budget,
+  schema/API, permission, Canonical or Lab policy change.
+- Same frozen corpus/method: client 20 PASS/2 FAIL, Runtime 8 PASS/0 FAIL. Original
+  17/13 diagnosis is untouched. [Separate partial result](../revalidation/resolver-language/REMEDIATION.md)
+  retains C06 synonym and C21 translation expectations as unsatisfied; no case terms
+  were added or expectations weakened. Debt stays OPEN, not FIXED.
+- Narrow tests: client 64 PASS/2 strict XFAIL; Runtime 49 PASS. Changed Ruff/mypy pass.
+  Product tree `847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311`;
+  manifest 425 files. Prior behavior receipts remain historical on the changed identity.
+- Models/embeddings/retrieval/DB/Provider calls/tokens/allocations 0. One L4 is required
+  on the final material candidate; none has been launched for intermediate edits.
+  3A-3R remains IN_PROGRESS pending candidate gates and explicit remaining-gap disposition;
+  no research or Opportunity Ledger work is claimed complete.
 
 ## 2026-09-22 — Resolver diagnosis closed; separate remediation entered
 

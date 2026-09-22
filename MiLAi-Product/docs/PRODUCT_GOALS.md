@@ -22,7 +22,10 @@ The [3A-3D diagnosis](revalidation/resolver-language/REVALIDATION.md) closed thr
 30 cases frozen before execution, 17 PASS/13 FAIL. Strict XFAIL preserves each gap;
 no resolver fix or broad conformance claim is implied. Main `87aa53c`, candidate/merge
 tree identity and main fast `35688919530` passed. Active work is separate 3A-3R on
-`fix/resolver-typed-language-boundaries`; debt stays OPEN until scoped repair proof.
+`fix/resolver-typed-language-boundaries`. The [partial repair](revalidation/resolver-language/REMEDIATION.md)
+now reaches 28/30 on the same corpus; two unmet semantic expectations and strict XFAIL
+remain. Client 64 PASS/2 XFAIL, Runtime 49 PASS; final composition/remote closure pending.
+Debt remains OPEN, not FIXED; no case terms, translation dictionary or model controller added.
 Research stays unallocated.
 
 The current cross-bundle execution contract is
