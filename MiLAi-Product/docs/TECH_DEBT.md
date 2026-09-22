@@ -25,7 +25,7 @@ source commit `6fbb717ba2e9c77fd8be071725b2f25a0d771cb4`. Results were verified 
 | OpenWorker HTTP auth/exposure | FIXED | [`docs/revalidation/openworker-http-exposure/REVALIDATION.md`](revalidation/openworker-http-exposure/REVALIDATION.md); executable 仅接受显式 loopback/private literal，拒绝 wildcard/hostname/multicast/public bind；Bearer 为进程生命周期 capability，stop/replace/restart 完成 rotation |
 | resolver lexical-language assumptions | NEEDS_REVALIDATION | 只做诊断，不在重组 PR 调 lexical/ranking |
 | Runtime vs Host/provider trace ownership | NEEDS_REVALIDATION | 固定 trace owner、span 关联和 payload 脱敏边界 |
-| worker --once docs/behavior | NEEDS_REVALIDATION | 对照真实 CLI、lease、退出码与 runbook |
+| worker --once docs/behavior | FIXED | [`worker-once/REVALIDATION.md`](revalidation/worker-once/REVALIDATION.md), 2026-09-22: real CLI/PostgreSQL bounded-cycle, failure, check, orphan and watermark evidence; 20 targeted tests PASS. Runbook clarifies exit 0 is not queue-success proof; no executable change. |
 | CAS blob-first orphan possibility | FIXED | [`docs/revalidation/cas-blob-orphan/REVALIDATION.md`](revalidation/cas-blob-orphan/REVALIDATION.md); forced DB failure, real worker startup cleanup, recovery ingest, and replay passed |
 
 重组完成报告必须逐项列出最终状态。任何需要行为修复的条目另开独立 Goal/PR，不能在

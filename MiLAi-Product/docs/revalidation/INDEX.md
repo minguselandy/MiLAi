@@ -24,10 +24,15 @@ behavioral result from full architecture-item coverage.
 | confirmation binding to query/action | `FIXED` | [`confirmation-binding/REVALIDATION.md`](confirmation-binding/REVALIDATION.md) |
 | validation-token TTL vs ContextCapsule lifecycle | `FIXED` | [`context-validation-lifecycle/REVALIDATION.md`](context-validation-lifecycle/REVALIDATION.md) |
 | OpenWorker HTTP auth/exposure | `FIXED` | [`openworker-http-exposure/REVALIDATION.md`](openworker-http-exposure/REVALIDATION.md) |
+| worker `--once` docs/behavior (Phase 3A-1) | `FIXED` | [`worker-once/REVALIDATION.md`](worker-once/REVALIDATION.md) |
 
-Each row now also has a `post-cleanup.receipt.json` bound to the final cleanup Product identity.
+The five Phase 2 rows also have a `post-cleanup.receipt.json` bound to the final cleanup Product identity.
 These receipts preserve the prior claim statements and coverage levels; they do not replace or
 rewrite the diagnosis/remediation evidence.
+
+Phase 3A-1 adds `worker-once/receipt.json` on the same executable Product identity, with source/tests
+commit `4b76405f3e3e73ed85713161eb9465e7bbf5cc82`. Its bounded-cycle evidence is SCOPED G9;
+the Product manifest does not change and no additional architecture item is promoted to PASS.
 
 `FIXED` means the current mechanism, the positive path, the negative or
 fail-closed path, and the recovery path were executed successfully for the

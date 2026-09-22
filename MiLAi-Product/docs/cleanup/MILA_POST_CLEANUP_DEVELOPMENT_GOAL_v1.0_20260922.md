@@ -841,6 +841,19 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 
 # 16. Execution journal
 
+## 2026-09-22 — 3A-1 local revalidation PASS; remote closure pending
+
+- Real child CLI/isolated PostgreSQL 16.14 matrix and adjacent tests: 20 PASS / 0 skips (12.02 s).
+- Source/tests commit `4b76405f3e3e73ed85713161eb9465e7bbf5cc82`; Product executable identity unchanged.
+- Empty/below/above limit, independent projections, orphan, no work, handled failure,
+  dependency-check, watermark and nonzero startup failure are covered.
+- Exit 0 is normal cycle return, not all-delivery success. Handled failure persists PENDING or
+  DEAD_LETTER and the affected watermark stays behind its gap. The runbook now states this contract.
+- TECH_DEBT becomes `6 FIXED / 4 NEEDS_REVALIDATION / 0 OPEN`; new scoped receipt in
+  `docs/revalidation/worker-once/receipt.json`. No Product behavior or new full-composition run.
+- Initial new-test metric-key failure is preserved in the report; final targeted execution passed.
+- 3A-1 remains IN_PROGRESS until tested-head merge and main identity close.
+
 ## 2026-09-22 — User resume; 3A-0 closed; 3A-1 entered
 
 - 用户明确要求执行本 Goal，并减少不必要的测试和审计；使用 L0–L4 最小充分验证。
