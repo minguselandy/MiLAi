@@ -38,7 +38,7 @@ remains the historical cleanup identity. Prior receipt bytes are unchanged.
 | Runtime / Host / Provider ownership (Phase 3B-1, serial query-first testkit) | `FIXED` | [`trace-ownership/REVALIDATION.md`](trace-ownership/REVALIDATION.md) |
 | process-local task continuity/state (Phase 3A-2D/R) | `FIXED` (PR #36/full #63) | [`host-continuity/REMEDIATION.md`](host-continuity/REMEDIATION.md); original [`FAIL diagnosis`](host-continuity/REVALIDATION.md) retained |
 | cache-miss Host continuation (Phase 3A-2D, scoped) | `FIXED` | [`host-continuity/cache-miss.receipt.json`](host-continuity/cache-miss.receipt.json) |
-| resolver lexical-language assumptions (Phase 3A-3D) | `OPEN` | [`resolver-language/REVALIDATION.md`](resolver-language/REVALIDATION.md), frozen 30-case pure-function diagnosis; 17 PASS/13 FAIL |
+| resolver lexical-language assumptions (Phase 3A-3D/R) | `OPEN` | [`diagnosis`](resolver-language/REVALIDATION.md) retains 17 PASS/13 FAIL; [`partial remediation`](resolver-language/REMEDIATION.md) on a new tree is 28 PASS/2 FAIL, not FIXED |
 
 The five Phase 2 rows also have a `post-cleanup.receipt.json` bound to the final cleanup Product identity.
 These receipts preserve the prior claim statements and coverage levels; they do not replace or
@@ -77,3 +77,8 @@ Phase 3A-3D keeps the Product executable identity unchanged and adds an OPEN sco
 resolver diagnosis: client compatibility and Runtime interpretation are separate owners.
 13 desired-behavior failures remain explicit, including strict XFAIL CI annotations;
 none is counted as a pass or proof of actual retrieval, exposure or model benefit.
+
+Phase 3A-3R changes deterministic matching/interpretation and records a separate
+current-tree partial-remediation receipt. The same corpus is now 28 PASS/2 FAIL;
+unmet semantic expectations remain strict XFAIL and debt OPEN. Old Host/trace/diagnosis
+receipts are historical on this new global identity, not automatically rebound.

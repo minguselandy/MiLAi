@@ -10,7 +10,7 @@ from typing import Any
 import pytest
 
 _PRODUCT = Path(__file__).resolve().parents[3]
-_FAILURES = {"C02", "C04", "C06", "C08", "C10", "C12", "C14", "C15", "C18", "C19", "C21"}
+_FAILURES = {"C06", "C21"}
 
 
 @pytest.fixture(scope="module")
@@ -36,7 +36,7 @@ def client_diagnosis() -> dict[str, Any]:
             marks=pytest.mark.xfail(
                 strict=True,
                 raises=AssertionError,
-                reason="3A-3D frozen desired-behavior gap; diagnosis only, not repaired",
+                reason="Unresolved semantic synonym/translation capability; corpus not rewritten",
             )
             if case_id in _FAILURES
             else (),

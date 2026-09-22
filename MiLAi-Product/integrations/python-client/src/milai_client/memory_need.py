@@ -53,21 +53,34 @@ class StateKeyAliasAmbiguousError(ValueError):
         super().__init__(self.code)
 
 
-_TOKEN = re.compile(r"[a-z0-9]+")
+_TOKEN = re.compile(r"[^\W_]+")
 _NO_MEMORY = re.compile(
-    r"^(?:hello|hi|good\s+(?:morning|afternoon|evening))\b|"
-    r"\b(?:compute|calculate|what is)\s+\d+\s*(?:plus|minus|times|[+*\-/])\s*\d+",
+    r"^(?:(?:hello|hi|good\s+(?:morning|afternoon|evening)|你好|您好|早上好|下午好|晚上好)"
+    r"|(?:(?:compute|calculate|what is|计算|算一下)\s*)?"
+    r"[+-]?\d+(?:\.\d+)?\s*(?:plus|minus|times|divided by|加|减|乘以?|除以?|[+*\-/])"
+    r"\s*[+-]?\d+(?:\.\d+)?)\s*[.!?。]*$|"
+    r"\b(?:do\s+not|don't|never)\s+(?:read|use|recall|retrieve|search|access)\s+"
+    r"(?:(?:any|my|personal|saved|stored)\s+)*(?:memory|memories)\b|"
+    r"(?:不要|勿|禁止)(?:读取|使用|检索|搜索|回忆)(?:任何|个人|我的|已保存的)?记忆",
     re.IGNORECASE,
 )
-_RETRY = re.compile(r"\b(?:retry|repeat|again|preceding|previous)\b", re.IGNORECASE)
-_EXPLANATION = re.compile(r"\b(?:why|explain|provenance|both branches|history)\b", re.IGNORECASE)
+_RETRY = re.compile(
+    r"\b(?:retry|repeat|again)\b|(?:重试|再来一次|再试一次|再读一次)", re.IGNORECASE
+)
+_EXPLANATION = re.compile(
+    r"\b(?:why|explain|provenance|both branches|history|historical|previous|earlier)\b|"
+    r"(?:为什么|解释|溯源|历史|之前|此前|以前|上次)",
+    re.IGNORECASE,
+)
 _CONFLICT = re.compile(
-    r"\b(?:conflict|open issue|blocked|contradict|both branches|governed decision)\b",
+    r"\b(?:conflict|open issue|blocked|contradict|both branches|governed decision)\b|"
+    r"(?:冲突|未决问题|矛盾|两个分支)",
     re.IGNORECASE,
 )
 _CURRENT = re.compile(
     r"\b(?:current|currently|latest|now|configured|owner|target|deadline|window|"
-    r"decision|database|queue|build|revoked|setting|state|proceed)\b",
+    r"decision|database|queue|build|revoked|setting|state|proceed)\b|"
+    r"(?:当前|现在|最新|配置|设置|状态|目标|负责人|截止|数据库|偏好)",
     re.IGNORECASE,
 )
 _ACTION = re.compile(r"\b(?:may|can|proceed|safe|allowed|authorize)\b", re.IGNORECASE)
@@ -250,7 +263,7 @@ class DeterministicMemoryNeedResolver:
         canonical_position_seen: int | None = None,
         previous: MemoryNeedResolution | None = None,
     ) -> MemoryNeedResolution:
-        text = query.strip()
+        text = unicodedata.normalize("NFKC", query).strip()
         exact_key = _exact_alias_state_key(text, known_state_keys)
         if exact_key is not None:
             exact_ref = StateKeyRef(
@@ -278,7 +291,21 @@ class DeterministicMemoryNeedResolver:
                 exact_ref,
                 "EXACT_FROZEN_STATE_KEY_ALIAS",
             )
-        if previous is not None and _RETRY.search(text):
+        if not text or _NO_MEMORY.search(text):
+            signature = self._signature(
+                scope, required_authority, consistency_floor, "NONE", "CURRENT", "NONE"
+            )
+            return MemoryNeedResolution(signature, "NONE", None, "NO_MEMORY_DEPENDENCY")
+
+        intent = _typed_intent(text)
+        selected = _select_state_key(
+            text, known_state_keys, prefer_decision=bool(_ACTION.search(text))
+        )
+        if (
+            previous is not None
+            and _RETRY.search(text)
+            and _same_retry_need(text, intent, selected, known_state_keys, previous)
+        ):
             prior = previous.signature
             signature = MemoryNeedSignature(
                 scope=scope,
@@ -305,35 +332,20 @@ class DeterministicMemoryNeedResolver:
             prior_ref = signature.state_keys[0] if signature.state_keys else None
             return MemoryNeedResolution(
                 signature,
-                "L0" if prior_ref is not None or signature.claim_ids else "L1",
+                previous.requested_route,
                 prior_ref,
                 "REUSE_PREVIOUS_TYPED_NEED",
             )
-        if not text or _NO_MEMORY.search(text):
-            signature = self._signature(
-                scope, required_authority, consistency_floor, "NONE", "CURRENT", "NONE"
-            )
-            return MemoryNeedResolution(signature, "NONE", None, "NO_MEMORY_DEPENDENCY")
-
-        intent: MemoryIntent
-        temporal: TemporalNeed = "CURRENT"
-        evidence: EvidenceNeed = "SUPPORT_POINTERS"
-        if _EXPLANATION.search(text):
-            intent = "EXPLANATION" if "explain" in text.lower() else "HISTORY"
-            temporal = "HISTORICAL"
-        elif _CONFLICT.search(text):
-            intent = "CONFLICT"
-        elif _CURRENT.search(text):
+        if intent is None and selected is not None and _identifier_occurs(text, selected.predicate):
             intent = "CURRENT_STATE"
-        else:
+        if intent is None:
             signature = self._signature(
                 scope, required_authority, consistency_floor, "NONE", "CURRENT", "NONE"
             )
             return MemoryNeedResolution(signature, "NONE", None, "NO_TYPED_MEMORY_INTENT")
 
-        selected = _select_state_key(
-            text, known_state_keys, prefer_decision=bool(_ACTION.search(text))
-        )
+        temporal: TemporalNeed = "HISTORICAL" if intent in {"HISTORY", "EXPLANATION"} else "CURRENT"
+        evidence: EvidenceNeed = "SUPPORT_POINTERS"
         ref = (
             StateKeyRef(
                 scope=scope,
@@ -346,7 +358,13 @@ class DeterministicMemoryNeedResolver:
             if selected is not None
             else None
         )
-        claims = known_claim_ids[:1] if ref is None and len(known_claim_ids) == 1 else ()
+        claims = (
+            known_claim_ids[:1]
+            if ref is None
+            and len(known_claim_ids) == 1
+            and not _mentions_predicate(text, known_state_keys)
+            else ()
+        )
         signature = MemoryNeedSignature(
             scope=scope,
             required_authority=required_authority,
@@ -388,26 +406,99 @@ class DeterministicMemoryNeedResolver:
         )
 
 
+def _typed_intent(text: str) -> MemoryIntent | None:
+    if _EXPLANATION.search(text):
+        return "EXPLANATION" if re.search(r"\bexplain\b|解释", text, re.IGNORECASE) else "HISTORY"
+    if _CONFLICT.search(text):
+        return "CONFLICT"
+    return "CURRENT_STATE" if _CURRENT.search(text) else None
+
+
+def _same_retry_need(
+    text: str,
+    intent: MemoryIntent | None,
+    selected: CanonicalStateKey | None,
+    keys: tuple[CanonicalStateKey, ...],
+    previous: MemoryNeedResolution,
+) -> bool:
+    if intent is not None and intent != previous.signature.intent_class:
+        return False
+    prior = previous.state_key_ref
+    if selected is not None:
+        return prior is not None and (
+            selected.subject,
+            selected.predicate,
+            selected.claim_type,
+        ) == (prior.subject, prior.predicate, prior.claim_type)
+    # No new address is a retry; a mentioned but ambiguous address is not.
+    return not _mentions_predicate(text, keys)
+
+
+def _mentions_predicate(text: str, keys: tuple[CanonicalStateKey, ...]) -> bool:
+    return any(_matched_terms(text, _terms(key.predicate)) for key in keys)
+
+
 def _select_state_key(
     query: str,
     keys: tuple[CanonicalStateKey, ...],
     *,
     prefer_decision: bool,
 ) -> CanonicalStateKey | None:
-    query_terms = _terms(query)
-    ranked: list[tuple[int, str, CanonicalStateKey]] = []
-    for key in keys:
+    # Exact typed identifiers precede lexical fallback. A non-unique address
+    # stays unresolved instead of being ordered into apparent certainty.
+    unique = tuple(dict.fromkeys(keys))
+    exact = [key for key in unique if _identifier_occurs(query, key.predicate)]
+    if exact:
+        qualified = [key for key in exact if _identifier_occurs(query, key.subject)]
+        matches = qualified or exact
+        return matches[0] if len(matches) == 1 else None
+    ranked: list[tuple[int, CanonicalStateKey]] = []
+    for key in unique:
         predicate_terms = _terms(key.predicate)
         subject_terms = _terms(key.subject)
         type_terms = _terms(key.claim_type)
-        score = 6 * len(query_terms & predicate_terms)
-        score += 2 * len(query_terms & subject_terms)
-        score += len(query_terms & type_terms)
+        score = 6 * len(_matched_terms(query, predicate_terms))
+        score += 2 * len(_matched_terms(query, subject_terms))
+        score += len(_matched_terms(query, type_terms))
         if prefer_decision and "decision" in predicate_terms:
             score += 8
-        ranked.append((score, json.dumps(key.canonical(), sort_keys=True), key))
-    ranked.sort(key=lambda item: (-item[0], item[1]))
-    return ranked[0][2] if ranked and ranked[0][0] > 0 else None
+        ranked.append((score, key))
+    ranked.sort(key=lambda item: -item[0])
+    if not ranked or ranked[0][0] <= 0 or (len(ranked) > 1 and ranked[0][0] == ranked[1][0]):
+        return None
+    return ranked[0][1]
+
+
+def _identifier_occurs(query: str, identifier: str) -> bool:
+    normalized = _normalize_alias(identifier)
+    if not normalized:
+        return False
+    text = _normalize_alias(query)
+    # Han text can directly surround an alphabetic identifier. Another
+    # alphabetic/digit/underscore character cannot silently extend that key.
+    for match in re.finditer(re.escape(normalized), text):
+        before = text[match.start() - 1] if match.start() else ""
+        after = text[match.end()] if match.end() < len(text) else ""
+        if _alphabetic_boundary(normalized[0]) and _word_continuation(before):
+            continue
+        if _alphabetic_boundary(normalized[-1]) and _word_continuation(after):
+            continue
+        return True
+    return False
+
+
+def _word_continuation(char: str) -> bool:
+    return bool(char) and (char == "_" or _alphabetic_boundary(char))
+
+
+def _alphabetic_boundary(char: str) -> bool:
+    return char.isalnum() and not unicodedata.name(char, "").startswith(
+        ("CJK UNIFIED IDEOGRAPH", "CJK COMPATIBILITY IDEOGRAPH")
+    )
+
+
+def _matched_terms(query: str, terms: set[str]) -> set[str]:
+    return {term for term in terms if _identifier_occurs(query.replace("_", "-"), term)}
 
 
 def _exact_alias_state_key(
@@ -446,9 +537,7 @@ def _normalize_alias(value: str) -> str:
 
 
 def _terms(value: str) -> set[str]:
-    return {
-        term for term in _TOKEN.findall(value.lower().replace("_", "-")) if term not in _STOPWORDS
-    }
+    return {term for term in _TOKEN.findall(_normalize_alias(value)) if term not in _STOPWORDS}
 
 
 def _canonical(value: object) -> bytes:

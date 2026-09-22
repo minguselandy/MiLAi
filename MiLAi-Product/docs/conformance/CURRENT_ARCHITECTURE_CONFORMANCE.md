@@ -6,8 +6,8 @@
 ## Result
 
 - Current implementation status: `UNVERIFIED`
-- Product source commit: `6f9e34efe6399792b44fc0d51438c742e6e5a1c0`
-- Verified at: `2026-09-22T04:54:56+00:00`
+- Product source commit: `9b4aa1670dc75dfc2149baeb75719f017267e92a`
+- Verified at: `2026-09-22T05:18:22+00:00`
 - Architecture: `1.0.0`
 - Migration heads: `0027_embedding_identity, 0045_dg18_adjacency, 0056_host_notes`
 
@@ -18,8 +18,8 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Field | Value |
 | --- | --- |
 | Product version | `0.1.0-candidate` |
-| Product manifest SHA-256 | `44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352` |
-| Product tree SHA-256 | `08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2` |
+| Product manifest SHA-256 | `016df6085fc29d9c201c3f22739397e4f82af128152020318bc2ce4647814096` |
+| Product tree SHA-256 | `847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311` |
 | Architecture manifest SHA-256 | `ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e` |
 | Runtime / Client / MCP / OpenWorker | `0.1.5` / `0.1.4` / `0.1.15` / `0.1.0` |
 
@@ -48,12 +48,12 @@ The detailed G/I/TX/role/gate mapping is in [`invariant-test-map.json`](invarian
 Receipts are validated against the current Product tree and manifest. `SCOPED` claims are recorded as execution evidence but do not promote the broad frozen item; only passing `COMPLETE` claims without a current failed receipt can produce `PASS`. Failed receipts remain valid diagnostic evidence without implying `DEVIATION`.
 
 - Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)
-- Validated receipt count: `19`
-- Current receipt count: `2`
-- Historical receipt count: `17`
-- Current explicit claim count: `3`
+- Validated receipt count: `20`
+- Current receipt count: `1`
+- Historical receipt count: `19`
+- Current explicit claim count: `1`
 - Failed diagnostic claim count: `1`
-- Preserved failed receipt count: `5`
+- Preserved failed receipt count: `6`
 
 ## Status semantics
 

@@ -1,0 +1,167 @@
+{
+  "schema_version": "milai-behavior-revalidation-v1",
+  "debt_id": "resolver-lexical-language-assumptions",
+  "state": "OPEN",
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "9b4aa1670dc75dfc2149baeb75719f017267e92a",
+    "product_manifest_sha256": "016df6085fc29d9c201c3f22739397e4f82af128152020318bc2ce4647814096",
+    "product_tree_sha256": "847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311"
+  },
+  "decision": {
+    "state": "OPEN",
+    "rationale": "General deterministic repair improves the unchanged corpus from 17/30 to 28/30. C06 undeclared synonym intent and C21 cross-language predicate translation remain unsatisfied, not weakened or removed. Debt stays OPEN; this is partial remediation, not full resolver closure."
+  },
+  "execution": {
+    "status": "FAIL",
+    "verified_at": "2026-09-22T05:16:26Z",
+    "passed": 28,
+    "failed": 2,
+    "skipped": 0,
+    "remote_closure": "PENDING",
+    "scope": "UNCHANGED_PURE_RESOLVER_CORPUS",
+    "diagnostic_collection_status": "COMPLETE"
+  },
+  "environment": {
+    "model_requests": 0,
+    "embedding_calls": 0,
+    "retrieval_calls": 0,
+    "experiment_allocations": 0,
+    "database": "NOT_USED",
+    "provider": "NOT_USED",
+    "runtime_environment": "Cached Python 3.11 Product-editable overlay; no Lab source execution"
+  },
+  "reproduction": {
+    "working_directory": "MiLAi-Product",
+    "commands": [
+      {
+        "command": "integrations/python-client/.venv/bin/pytest -q integrations/python-client/tests/test_memory_need.py integrations/python-client/tests/test_resolver_language_remediation.py integrations/python-client/tests/test_resolver_language_diagnosis.py --tb=short",
+        "status": "PASS",
+        "exit_code": 0,
+        "result": "64 PASS / 2 strict XFAIL; two unsatisfied expectations remain failures"
+      },
+      {
+        "command": "uv run --frozen --offline --project ../MiLAi-Lab --with-editable runtime --with-editable integrations/python-client python -m pytest -q runtime/tests/unit/test_resolver_language_remediation.py runtime/tests/unit/test_memory_resolve.py runtime/tests/unit/test_resolver_language_diagnosis.py --runxfail --tb=short",
+        "status": "PASS",
+        "exit_code": 0,
+        "result": "49 PASS; explicit reads/exact targets keep precedence"
+      }
+    ],
+    "tests": [
+      "integrations/python-client/tests/test_resolver_language_diagnosis.py::test_client_resolver_frozen_language_expectation",
+      "runtime/tests/unit/test_resolver_language_diagnosis.py::test_runtime_interpreter_frozen_language_expectation",
+      "integrations/python-client/tests/test_resolver_language_remediation.py::test_key_derived_matching_does_not_depend_on_diagnostic_identifiers",
+      "integrations/python-client/tests/test_resolver_language_remediation.py::test_ambiguity_is_order_independent_and_qualified_exact_key_wins",
+      "integrations/python-client/tests/test_resolver_language_remediation.py::test_retry_preserves_route_but_does_not_override_new_intent_or_key",
+      "runtime/tests/unit/test_resolver_language_remediation.py::test_automatic_no_memory_does_not_override_structured_read_signals"
+    ]
+  },
+  "diagnostic_commands": {
+    "source_commit": "9b4aa1670dc75dfc2149baeb75719f017267e92a",
+    "method": "tools/run_resolver_language_diagnostic.py",
+    "corpus": "docs/revalidation/resolver-language/corpus.json",
+    "results": "docs/revalidation/resolver-language/remediation.results.json",
+    "identity": {
+      "corpus_sha256": "38687d06bb94d25c66977c8c58013c4f6f2974f7826e5e2061eb653ae622d702",
+      "manifest_sha256": "016df6085fc29d9c201c3f22739397e4f82af128152020318bc2ce4647814096",
+      "method_sha256": "c7758d085f4a2630a67096f621997afd8cfb5f7e9c37a531468ccc47d300b81a",
+      "product_tree_sha256": "847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311",
+      "source_commit": "9b4aa1670dc75dfc2149baeb75719f017267e92a"
+    },
+    "note": "Run the same frozen recorder with this source commit and new outputs. Client collection exits zero with behavior FAIL 20/2; Runtime is PASS 8/0. Pytest XFAIL is not a semantic PASS."
+  },
+  "positive_cases": [
+    {
+      "case_id": "RESOLVER-REPAIR-TYPED",
+      "description": "Original C02/C04/C08/C10/C12/C14/C15 now pass; independent Unicode/identifier and retry-history/key/route controls also pass.",
+      "status": "PASS",
+      "tests": [
+        "integrations/python-client/tests/test_resolver_language_diagnosis.py::test_client_resolver_frozen_language_expectation",
+        "integrations/python-client/tests/test_resolver_language_remediation.py::test_key_derived_matching_does_not_depend_on_diagnostic_identifiers",
+        "integrations/python-client/tests/test_resolver_language_remediation.py::test_retry_preserves_route_but_does_not_override_new_intent_or_key"
+      ]
+    },
+    {
+      "case_id": "RESOLVER-REPAIR-STRUCTURED",
+      "description": "Runtime original 8 cases pass; structured explicit/exact signals remain above automatic no-memory heuristics.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/unit/test_resolver_language_diagnosis.py::test_runtime_interpreter_frozen_language_expectation",
+        "runtime/tests/unit/test_resolver_language_remediation.py::test_automatic_no_memory_does_not_override_structured_read_signals"
+      ]
+    }
+  ],
+  "negative_cases": [
+    {
+      "case_id": "RESOLVER-REPAIR-AMBIGUITY",
+      "description": "C19 no longer chooses an arbitrary exact key; independent key-order and unrelated-Claim controls reject ambiguity.",
+      "status": "PASS",
+      "tests": [
+        "integrations/python-client/tests/test_resolver_language_diagnosis.py::test_client_resolver_frozen_language_expectation",
+        "integrations/python-client/tests/test_resolver_language_remediation.py::test_ambiguity_is_order_independent_and_qualified_exact_key_wins",
+        "integrations/python-client/tests/test_resolver_language_remediation.py::test_an_unrelated_known_claim_does_not_resolve_an_ambiguous_key"
+      ]
+    },
+    {
+      "case_id": "RESOLVER-REPAIR-NO-MEMORY",
+      "description": "C18/R03/R04 now pass; standalone no-memory and query prefixes remain distinct.",
+      "status": "PASS",
+      "tests": [
+        "integrations/python-client/tests/test_resolver_language_diagnosis.py::test_client_resolver_frozen_language_expectation",
+        "runtime/tests/unit/test_resolver_language_diagnosis.py::test_runtime_interpreter_frozen_language_expectation",
+        "integrations/python-client/tests/test_resolver_language_remediation.py::test_standalone_no_memory_and_explicit_opt_out_precede_retry",
+        "runtime/tests/unit/test_resolver_language_remediation.py::test_a_greeting_or_arithmetic_prefix_does_not_hide_memory_need"
+      ]
+    },
+    {
+      "case_id": "RESOLVER-REPAIR-REMAINING",
+      "description": "C06 remains NONE instead of bounded recall; C21 improves to CURRENT_STATE/L1 but cannot translate to the demanded English exact predicate. Expectations remain unchanged.",
+      "status": "FAIL",
+      "tests": [
+        "integrations/python-client/tests/test_resolver_language_diagnosis.py::test_client_resolver_frozen_language_expectation"
+      ]
+    }
+  ],
+  "conformance_claims": [
+    {
+      "architecture_id": "G7",
+      "coverage": "SCOPED",
+      "status": "FAIL",
+      "covered_statement": "Upstream deterministic resolver expectations on the unchanged multilingual typed corpus; general intent/address/retry boundaries improve but two semantic capability expectations remain unmet.",
+      "positive_case_ids": [
+        "RESOLVER-REPAIR-TYPED",
+        "RESOLVER-REPAIR-STRUCTURED"
+      ],
+      "negative_case_ids": [
+        "RESOLVER-REPAIR-AMBIGUITY",
+        "RESOLVER-REPAIR-NO-MEMORY",
+        "RESOLVER-REPAIR-REMAINING"
+      ],
+      "limits": [
+        "Partial remediation, not a completed resolver capability or broad architecture deviation.",
+        "Pure functions do not prove retrieval, Context exposure, use, efficacy or authority bypass.",
+        "Frozen aliases and explicit read/exact target precedence remain; lexical opt-out is not an authorization parser.",
+        "No fixture-specific synonym or translation dictionary was added to force remaining cases green.",
+        "No previous receipt is rebound to this changed Product identity."
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3a3r-20260922-MaJeaL/client-final.json",
+      "sha256": "d2835a4dff6b41f854150b8c017d7d465e1615174112a733c365a94240d91dbe"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3a3r-20260922-MaJeaL/runtime-final.json",
+      "sha256": "65501cdec81988dea1d05e5d9588a920374b3b2958bc75ad38fc53ae6476d3fa"
+    }
+  ],
+  "follow_up": {
+    "owner": "Product deterministic resolver",
+    "branch": "fix/resolver-typed-language-boundaries",
+    "risk": "Undeclared synonyms may still miss compatibility prefetch; cross-language key translation cannot produce an exact address without a declared mapping. Runtime authorization is unchanged.",
+    "scope": "Finish current-candidate verification while preserving OPEN. Further general semantic capability requires separate bounded design consistent with the Goal, not case terms or automatic model/API authority."
+  }
+}

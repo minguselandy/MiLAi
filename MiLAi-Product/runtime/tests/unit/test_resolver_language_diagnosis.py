@@ -28,20 +28,7 @@ def runtime_diagnosis() -> dict[str, Any]:
 
 @pytest.mark.parametrize(
     "case_id",
-    [
-        pytest.param(
-            case_id,
-            id=case_id,
-            marks=pytest.mark.xfail(
-                strict=True,
-                raises=AssertionError,
-                reason="3A-3D Chinese automatic no-memory gap; no retrieval was measured",
-            )
-            if case_id in {"R03", "R04"}
-            else (),
-        )
-        for case_id in (f"R{i:02}" for i in range(1, 9))
-    ],
+    [f"R{i:02}" for i in range(1, 9)],
 )
 def test_runtime_interpreter_frozen_language_expectation(
     runtime_diagnosis: dict[str, Any], case_id: str

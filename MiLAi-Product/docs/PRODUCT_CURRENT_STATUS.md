@@ -7,11 +7,17 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `3eab81c9e1c23b07e3aead351cc3adfe423470c0`; Git tree
-  `3874a68fa06892d4c3bf0a0fe354339d1bde8f9e`; main fast `35688151840` passed.
+- Reconciled repository `main`: `87aa53c73ec0a67ff412923e2151c71def575130`; Git tree
+  `0cc79d8797f1cb1c4321839015eab9f3e1bd980a`; main fast `35688919530` passed.
+- Local 3A-3R candidate: `9b4aa1670dc75dfc2149baeb75719f017267e92a`, 425 files,
+  Product tree `847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311`,
+  manifest SHA `016df6085fc29d9c201c3f22739397e4f82af128152020318bc2ce4647814096`.
+  [Partial repair](revalidation/resolver-language/REMEDIATION.md): unchanged corpus
+  28 PASS/2 FAIL; client tests 64 PASS/2 XFAIL, Runtime 49 PASS. Final gates pending;
+  no full resolver closure, model use or FIXED claim.
 - 3A-2R source proof: `faf3922c2b1d037f0c3a019dd1bbaf6dc059be15`;
   PR #36 merged after exact-head fast and final composition passed.
-  Product identity: 425 files; manifest SHA
+  Merged Host-proof identity: 425 files; manifest SHA
   `44be5e2e93837dcc75b996140f06b10e6142dc34e6a5718a894f79574ddfd352`; Product tree
   `08cd98fea12383fd26cf3f10b39bc04ffea23da2271f45ebe55c772a57ecafe2`.
   [Scoped repair receipt](revalidation/host-continuity/REMEDIATION.md): 24 native tests
@@ -24,14 +30,14 @@
 - Frozen Architecture remains version 1.0.0 and immutable. The current implementation map is
   `9 PASS / 35 UNVERIFIED / 0 DEVIATION`; overall status remains honestly `UNVERIFIED`.
   The prior `10/34/0` map was bound to the cleanup Product identity. Adding the explicit
-  testkit and later native guard change the global manifest; 17 prior receipts are historical.
-  The new Host remediation receipt contributes two current SCOPED claims (G9/G7),
-  plus a current scoped Resolver diagnostic FAIL: 19 receipts, 2 current, 3 current
-  claims, 5 preserved diagnostic failures and 1 current failure. No old receipt
-  was rewritten; full composition and identical-tree merge now passed.
+  testkit, native guard and resolver changes update the global manifest; 19 prior receipts
+  are now historical. The separate partial Resolver receipt supplies one current SCOPED
+  FAIL: 20 receipts, 1 current, 1 current claim, 6 preserved failures and 1 current failure.
+  No old receipt was rewritten or silently rebound. Host full composition passed;
+  the new Resolver behavior candidate still requires its own final gate.
 - `docs/TECH_DEBT.md` records `9 FIXED / 0 NEEDS_REVALIDATION / 1 OPEN` after
   [Resolver diagnosis](revalidation/resolver-language/REVALIDATION.md).
-  The repair is merged with final-composition and main-identity closure.
+  Host repair is merged; Resolver partial repair keeps both semantic limitations OPEN.
   `NEEDS_REVALIDATION` is not a defect classification and must be resolved by executable diagnosis.
 - The current coordinating contract is the
   [post-cleanup development Goal](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
@@ -50,11 +56,14 @@
   [3A-2D Host continuity diagnosis](revalidation/host-continuity/REVALIDATION.md) closed in
   PR #35: 18 native controls PASS / 2 FAIL; 2 real PG chains PASS (4 Host processes,
   10 attempts). Exact-head fast `35685033957`, merge-tree and main identity passed.
-  3A-2R retired-instance repair closed through PR #36. Active work is
+  3A-2R retired-instance repair closed through PR #36. The
   [3A-3D Resolver diagnosis](revalidation/resolver-language/REVALIDATION.md):
   frozen 30 cases, client 11 PASS/11 FAIL and Runtime 6 PASS/2 FAIL; no Product
-  behavior change. Original failures and strict XFAIL assertions remain; diagnostic
-  remote closure is pending, separate remediation has not started.
+  behavior change. PR #37/main fast `35688919530` close the diagnosis with identical
+  candidate/merge trees. Original failures and strict XFAIL assertions remain.
+  Active work is separate 3A-3R on `fix/resolver-typed-language-boundaries`;
+  scoped improvement is proven locally, but two corpus expectations remain unsatisfied
+  and final composition/remote closure remain pending. No FIXED claim.
   This is not real model use or a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior

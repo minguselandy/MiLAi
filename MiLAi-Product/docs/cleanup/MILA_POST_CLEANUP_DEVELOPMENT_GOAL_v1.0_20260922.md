@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3A-3D_RESOLVER_DIAGNOSTIC
-next_work_package: 3A-3R_CONDITIONAL_ON_DIAGNOSIS
+current_work_package: 3A-3R_RESOLVER_TYPED_LANGUAGE_BOUNDARIES
+next_work_package: 3B-2_MEMORY_OPPORTUNITY_LEDGER
 new_experiment_allocations: 0
 new_model_requests: 0
 ---
@@ -226,8 +226,8 @@ NEEDS_REVALIDATION
 | 3B-1 | Trace Ownership v1/v2 | Product/testkit + Lab | small/contractual | PASS — scoped receipt / PR #34 / main identity verified | 3A-0 |
 | 3A-2D | Host Continuity diagnosis | Product evidence | no | DIAGNOSED_FAIL — PR #35 / main identity verified; native replay OPEN / cache-miss FIXED | 3B-1 vocabulary |
 | 3A-2R | Host Continuity remediation | Product | conditional | PASS — PR #36 / full #63 / main identity verified | 3A-2D FAIL |
-| 3A-3D | Resolver diagnostic | Product/Lab tests | no | IN_PROGRESS — 17 PASS / 13 FAIL frozen diagnosis; remote closure pending | 3A-0 |
-| 3A-3R | Resolver remediation | Product | conditional | NOT_ADMITTED | 3A-3D FAIL |
+| 3A-3D | Resolver diagnostic | Product/Lab tests | no | FAIL_REMEDIATION_REQUIRED — PR #37 / main identity verified; 17 PASS / 13 FAIL retained | 3A-0 |
+| 3A-3R | Resolver remediation | Product | conditional | IN_PROGRESS — partial repair 28/30; 2 failures retained OPEN; final gates pending | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PENDING | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | PENDING | 3B-2 real-run proof |
 | 3C-2 | Evidence-grounded Revision | Lab | no | PENDING | 3B-2 + lineage |
@@ -840,6 +840,45 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Deterministic resolver boundaries improved; debt remains OPEN
+
+- [ADR-058](../adr/ADR-058-deterministic-resolver-language-boundaries.md) and source
+  `9b4aa1670dc75dfc2149baeb75719f017267e92a` preserve frozen aliases/structured Runtime
+  signals, normalize typed Unicode, prefer known exact identifiers, retain ambiguity,
+  respect changed retry intent/key and keep prior routes. No scoring weight/budget,
+  schema/API, permission, Canonical or Lab policy change.
+- Same frozen corpus/method: client 20 PASS/2 FAIL, Runtime 8 PASS/0 FAIL. Original
+  17/13 diagnosis is untouched. [Separate partial result](../revalidation/resolver-language/REMEDIATION.md)
+  retains C06 synonym and C21 translation expectations as unsatisfied; no case terms
+  were added or expectations weakened. Debt stays OPEN, not FIXED.
+- Narrow tests: client 64 PASS/2 strict XFAIL; Runtime 49 PASS. Changed Ruff/mypy pass.
+  Product tree `847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311`;
+  manifest 425 files. Prior behavior receipts remain historical on the changed identity.
+- Models/embeddings/retrieval/DB/Provider calls/tokens/allocations 0. One L4 is required
+  on the final material candidate; none has been launched for intermediate edits.
+  3A-3R remains IN_PROGRESS pending candidate gates and explicit remaining-gap disposition;
+  no research or Opportunity Ledger work is claimed complete.
+
+## 2026-09-22 — Resolver diagnosis closed; separate remediation entered
+
+- PR #37 tested head `3eae5cad9136518365e90f93a85f7ca191bfaef7`, fast
+  `35688803848` PASS. Expected-head squash merge:
+  `87aa53c73ec0a67ff412923e2151c71def575130`; candidate/merge tree
+  `0cc79d8797f1cb1c4321839015eab9f3e1bd980a` matched.
+- Local main equals origin/main, clean; main fast `35688919530` PASS.
+  Only affected Runtime/client fast gates and boundary/identity/Conformance ran;
+  no Lab suite, PostgreSQL rerun or full historical composition for this diagnosis.
+- 3A-3D is closed as FAIL_REMEDIATION_REQUIRED, not a behavior PASS. Frozen corpus,
+  result and receipt remain at their diagnosis identities; this journal adds remote closure.
+- `fix/resolver-typed-language-boundaries` starts from exact main. Examine existing
+  Host signals/StateKeys first; preserve frozen aliases and explicit-read semantics.
+  Correct general typed matching/ambiguity/retry/language boundaries without fixture
+  synonyms, changed scoring weights, hidden retrieval, model controller or schema/API change.
+  Any capability outside a bounded general remedy remains explicitly explained, not relabeled PASS.
+- No repair proof yet; debt stays 9 FIXED/0 NEEDS_REVALIDATION/1 OPEN. L1 comes first;
+  material behavior requires one L4 on the final candidate, not intermediate full runs.
+  Research/model allocation remains zero; 3B-2 and subsequent research are pending.
 
 ## 2026-09-22 — Frozen resolver diagnosis records 13 desired-behavior gaps
 

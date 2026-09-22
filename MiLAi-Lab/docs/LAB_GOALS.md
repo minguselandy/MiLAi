@@ -10,9 +10,12 @@ the Claim/cache follow-up closed in PR #34, main fast `35683815988` PASS.
 replay OPEN, cache-miss continuation FIXED. Separate 3A-2R repair is now PASS:
 PR #36 merged at `3eab81c`, full #63 (`35685753906`) 17 jobs PASS, identical
 candidate/merge tree, main fast `35688151840` PASS. Original diagnostics remain.
-Active work is [3A-3D Resolver diagnosis](../../MiLAi-Product/docs/revalidation/resolver-language/REVALIDATION.md).
+The [3A-3D Resolver diagnosis](../../MiLAi-Product/docs/revalidation/resolver-language/REVALIDATION.md)
+closed through PR #37/main fast `35688919530` at main `87aa53c`.
 Frozen primary collection is 17 PASS/13 FAIL; debt is OPEN with strict diagnostic
-assertions retained. Remote closure precedes a separate remedy; no research allocation follows.
+assertions retained. Active separate 3A-3R has a [partial repair](../../MiLAi-Product/docs/revalidation/resolver-language/REMEDIATION.md):
+28/30 on the same corpus, two semantic gaps retained OPEN. Final composition/remote
+closure is pending; no full language-capability or research-allocation claim follows.
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).

@@ -1,7 +1,7 @@
 # MiLAi Product Goals
 
-> Document: `MILA-PRODUCT-GOALS@3.37`
-> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A3D_RESOLVER_DIAGNOSTIC`
+> Document: `MILA-PRODUCT-GOALS@3.38`
+> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A3R_RESOLVER_REMEDIATION`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
@@ -18,9 +18,14 @@ scoped cache-miss continuation is FIXED. The separate
 [3A-2R repair](revalidation/host-continuity/REMEDIATION.md) passed 26 local tests and
 full composition #63 (`35685753906`, 17 jobs). PR #36 merged as `3eab81c`, with
 identical candidate/merge trees and main fast `35688151840` PASS; 3A-2R is PASS.
-Active work is [3A-3D diagnosis](revalidation/resolver-language/REVALIDATION.md):
+The [3A-3D diagnosis](revalidation/resolver-language/REVALIDATION.md) closed through PR #37:
 30 cases frozen before execution, 17 PASS/13 FAIL. Strict XFAIL preserves each gap;
-no resolver fix or broad conformance claim is implied. Diagnostic remote closure pending.
+no resolver fix or broad conformance claim is implied. Main `87aa53c`, candidate/merge
+tree identity and main fast `35688919530` passed. Active work is separate 3A-3R on
+`fix/resolver-typed-language-boundaries`. The [partial repair](revalidation/resolver-language/REMEDIATION.md)
+now reaches 28/30 on the same corpus; two unmet semantic expectations and strict XFAIL
+remain. Client 64 PASS/2 XFAIL, Runtime 49 PASS; final composition/remote closure pending.
+Debt remains OPEN, not FIXED; no case terms, translation dictionary or model controller added.
 Research stays unallocated.
 
 The current cross-bundle execution contract is
