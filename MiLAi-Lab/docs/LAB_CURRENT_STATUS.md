@@ -2,7 +2,7 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_PASS / 3B-1_PASS / 3A-2D_DIAGNOSED / 3A-2R_PASS / 3A-3D_DIAGNOSED / 3A-3R_IN_PROGRESS`
+> Current execution: `ACTIVE / 3B-1_PASS / 3A-3R_PARTIAL_REPAIR_OPEN / 3B-2_IN_PROGRESS`
 > New experiment allocations: `0`
 > New model requests: `0`
 
@@ -12,7 +12,7 @@ PR #34 is merged (`9474c63`, main fast `35683815988` PASS), closing scoped 3B-1.
 The [trace receipt](../../MiLAi-Product/docs/revalidation/trace-ownership/REVALIDATION.md)
 covers v2 joins of current authorized cache invocations to observed fresh origins, with
 18 real Host attempts, 47 Product tests and 76 Lab tests passed. Trace debt is FIXED;
-active work is Product Resolver remediation. No research budget opens.
+active work is Lab Memory Opportunity Ledger. No model research budget opens.
 The [local Host result](../../MiLAi-Product/docs/revalidation/host-continuity/REVALIDATION.md)
 finds retired-instance replay OPEN, while real restart/cache-miss reacquisition passes.
 Diagnosis PR #35 is merged (`e760434`, main fast `35685136321` PASS). Separate
@@ -25,8 +25,16 @@ records client 11 PASS/11 FAIL and Runtime 6 PASS/2 FAIL on a corpus frozen firs
 Resolver debt is OPEN; diagnosis PR #37/main fast `35688919530` closed at `87aa53c`.
 Separate [3A-3R partial repair](../../MiLAi-Product/docs/revalidation/resolver-language/REMEDIATION.md)
 now has 28 PASS/2 FAIL on the unchanged corpus (client 20/2; Runtime 8/0), with
-113 adjacent/diagnostic tests PASS and 2 XFAIL. Debt stays OPEN; final candidate
-composition/remote closure pending. No Lab source, model, retrieval or DB execution.
+113 adjacent/diagnostic tests PASS and 2 XFAIL. Debt stays OPEN; PR #38/full #64
+(17 jobs), identical-tree merge `8c0c526` and main fast `35713661491` passed.
+3B-2 independently enters from 3B-1 PASS; real ledger proof passes locally,
+with exact-head CI and remote closure still pending.
+The [ledger contract](MEMORY_OPPORTUNITY_LEDGER.md) and pre-outcome recorder are implemented;
+107 targeted tests, changed static checks, both import boundaries and CLI smoke pass.
+The separate actual run has 10 Host attempts / 9 fixture calls / 4.696 s, with
+pre-outcome snapshots and reproducible accounting; 0 model requests. Task outcomes
+and use stay UNKNOWN, with 0 selection opportunities; no mechanism benefit is claimed.
+Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.
 

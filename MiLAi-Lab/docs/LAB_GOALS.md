@@ -13,9 +13,11 @@ candidate/merge tree, main fast `35688151840` PASS. Original diagnostics remain.
 The [3A-3D Resolver diagnosis](../../MiLAi-Product/docs/revalidation/resolver-language/REVALIDATION.md)
 closed through PR #37/main fast `35688919530` at main `87aa53c`.
 Frozen primary collection is 17 PASS/13 FAIL; debt is OPEN with strict diagnostic
-assertions retained. Active separate 3A-3R has a [partial repair](../../MiLAi-Product/docs/revalidation/resolver-language/REMEDIATION.md):
-28/30 on the same corpus, two semantic gaps retained OPEN. Final composition/remote
-closure is pending; no full language-capability or research-allocation claim follows.
+assertions retained. Separate 3A-3R has a [partial repair](../../MiLAi-Product/docs/revalidation/resolver-language/REMEDIATION.md):
+28/30 on the same corpus, two semantic gaps retained OPEN. PR #38/full #64 (17 jobs),
+identical-tree merge `8c0c526` and main fast `35713661491` close partial delivery, not
+full language capability. Active work is 3B-2 Opportunity Ledger, independently
+admitted by 3B-1 PASS; its real ledger run now passes locally, separate from offline proof.
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).
@@ -30,7 +32,10 @@ The [same-execution probe](../../MiLAi-Product/docs/reference/trace-ownership-ch
 now binds fresh Runtime/actual MCP/Host facts into the Lab joiner for eight attempts,
 including failure/unknown dispatch. Provider is a controlled fixture, not an actual
 model. The subsequent Claim/cache probe adds ten attempts and five actual reuse validations.
-Remote 3B-1 closure passed; the Opportunity Ledger is not yet implemented.
+Remote 3B-1 closure passed. The [Opportunity Ledger](MEMORY_OPPORTUNITY_LEDGER.md)
+now has a Lab-only implementation, 107 targeted tests and a pre-outcome capture path;
+one real bounded run now generates a reproducible ledger (10 attempts / 9 fixture
+calls, zero model use). Exact-head CI and 3B-2 remote closure remain pending.
 
 This coordination update allocates zero model requests, does not resume any old worker or batch,
 does not reopen a protected/frozen pool, and does not replace historical Goal states. A future Lab

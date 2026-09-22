@@ -1,0 +1,72 @@
+{
+  "schema_version": "milai-opportunity-ledger-proof-v1",
+  "goal_id": "MILAI-POST-CLEANUP-DEVELOPMENT-01",
+  "work_package": "3B-2",
+  "status": "LOCAL_PROOF_PASS_REMOTE_CLOSURE_PENDING",
+  "source_commit": "7dbaeeca27f3515542f111bdb0ab699e0cbf7982",
+  "source_git_tree": "7ca141036782fedf9494fb549e59ef1ae233839a",
+  "product_tree_sha256": "847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311",
+  "product_lock_digest": "9ac8ce89c06c2cf9c2c07647d61461e5f625d7f594a3f7b54be2726922ff55c8",
+  "method_sha256": "2cf41c33c3ee2d917e8e78f1e02756f4bb5ce491fd7e5942fab932fa9684debe",
+  "run_id": "trace-chain-edb875b633f5489c9185e18479376afa",
+  "arm_kind": "PRODUCT_TESTKIT",
+  "usage_kind": "CONTROLLED_FIXTURE",
+  "external_artifact_directory": "/cra/memory/mx_memory/evidence/post-cleanup-3b2-20260922-PSUMpe/claim-cache",
+  "artifacts_sha256": {
+    "manifest.json": "47e1204b7f53b55cb018aa9e9ee3c9ad891e98dc337cfc793b1f141214fb4cc0",
+    "owner-facts.json": "a896e8c890184cd982be01a264293bc8a0f20f913adbbe918c1cbb90923c902a",
+    "ledger-owner-facts.json": "37f34980e351d1f5acd7867d143b8166746ea861e1d968c71ab5a0b6ccb3317b",
+    "ledger-observations.json": "ed822c19f4271dc59b081d241f9afdff99672ee73978d9a2b95c4994ea8ae2a2",
+    "opportunity-ledger.json": "06d194b21a043b52bf1c51d1172d6f94f4ca280067120c7d1d9325e951c1ca44",
+    "summary.json": "b76f395bc44a359ca5c6048671bc97fd7802b9cc66f556eac34a8b398a9d0670"
+  },
+  "limits": {"host_attempts": 10, "fixture_invocations": 10, "wall_seconds": 120},
+  "actual": {
+    "host_attempts": 10,
+    "fixture_invocations": 9,
+    "wall_seconds": 4.696,
+    "fresh_runtime_reads": 5,
+    "cache_validations": 5,
+    "memory_available_attempts": 7,
+    "exposed_attempts": 5,
+    "selection_opportunities": 0,
+    "fixture_known_input_units": 30,
+    "fixture_known_output_units": 18,
+    "unknown_fixture_usage_requests": 3,
+    "embedding_calls": null,
+    "unknown_cost_reason": "EMBEDDING_COUNTER_NOT_EXPORTED",
+    "model_requests": 0,
+    "actual_model_tokens": 0,
+    "research_allocations": 0
+  },
+  "validation": {
+    "targeted_tests_passed": 107,
+    "changed_ruff": "PASS",
+    "changed_mypy": "PASS",
+    "package_import_boundary": "PASS",
+    "tools_import_boundary": "PASS",
+    "cli_smoke": "PASS",
+    "product_pin": "PASS",
+    "exact_ledger_recomputation": "PASS",
+    "full_composition": "NOT_REQUIRED_LAB_ONLY"
+  },
+  "proof_scope": {
+    "real": ["no-memory", "single-candidate", "cache-origin", "retry", "abstain",
+      "selected-not-exposed", "exposed-use-unknown", "failed-unknown-usage",
+      "canonical-change-fresh-retrieval", "pre-outcome-persisted-snapshots"],
+    "simulation_only": ["multiple-meaningful-alternatives", "matched-selection-change",
+      "explicit-adoption-rejection", "supported-observable-use", "known-usage-failure",
+      "revision-never-reused", "revision-later-independently-used"],
+    "task_outcomes": "UNKNOWN_NO_TASK_SCORER_OR_MODEL",
+    "observable_use": "UNKNOWN",
+    "causal_attribution": "NOT_ESTABLISHED"
+  },
+  "cleanup": {
+    "container": "milai-3a1-worker-once-20260922",
+    "state": "STOPPED_DATA_RETAINED",
+    "database": "milai_worker_once",
+    "migration": "0056_host_notes",
+    "observed_endpoint": "127.0.0.1:32798",
+    "public_services_changed": false
+  }
+}

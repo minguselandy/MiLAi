@@ -35,11 +35,12 @@ def _fresh_versions(
             [*claims, *evidence])
 
 
-def assemble_owner_attempts(
+def export_owner_attempts(
     cases: list[dict[str, Any]], *, run_id: str, product_lock_digest: str,
     result_refs: list[str],
     schema_version: str = SCHEMA_VERSION,
 ) -> list[dict[str, Any]]:
+    """Return validated join-input facts, preserving owner rather than derived fields."""
     if schema_version not in {SCHEMA_VERSION, CACHE_SCHEMA_VERSION}:
         raise ValueError("UNSUPPORTED_JOIN_VERSION")
     v2 = schema_version == CACHE_SCHEMA_VERSION
@@ -219,4 +220,17 @@ def assemble_owner_attempts(
             "runtime": runtime, "mcp": mcp, "provider": provider,
             "lab": {"result_ref": result_ref, "observable_support": []},
         })
-    return join_attempts(facts)
+    join_attempts(facts)
+    return facts
+
+
+def assemble_owner_attempts(
+    cases: list[dict[str, Any]], *, run_id: str, product_lock_digest: str,
+    result_refs: list[str],
+    schema_version: str = SCHEMA_VERSION,
+) -> list[dict[str, Any]]:
+    """Keep the existing joined-output API; ledger callers use the raw export above."""
+    return join_attempts(export_owner_attempts(
+        cases, run_id=run_id, product_lock_digest=product_lock_digest,
+        result_refs=result_refs, schema_version=schema_version,
+    ))

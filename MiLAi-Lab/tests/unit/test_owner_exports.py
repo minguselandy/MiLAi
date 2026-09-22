@@ -5,8 +5,8 @@ from typing import Any
 
 import pytest
 
-from milai_lab.analysis.owner_exports import assemble_owner_attempts
-from milai_lab.analysis.trace_join import CACHE_SCHEMA_VERSION
+from milai_lab.analysis.owner_exports import assemble_owner_attempts, export_owner_attempts
+from milai_lab.analysis.trace_join import CACHE_SCHEMA_VERSION, join_attempts
 
 
 def _case() -> dict[str, Any]:
@@ -59,6 +59,20 @@ def test_same_execution_join_keeps_exact_version_and_unknown_use() -> None:
     assert request["exposed_versions"] == case["runtime"][0]["owner_trace"]["selected_versions"]
     assert request["causal_attribution"] == "NOT_ESTABLISHED"
     assert case == original
+
+
+def test_raw_export_is_validated_and_round_trips_without_derived_fields() -> None:
+    case = _case()
+    facts = export_owner_attempts(
+        [case], run_id="run:one", product_lock_digest="f" * 64, result_refs=["result:one"],
+    )
+    assert "provider" in facts[0] and "requests" not in facts[0]
+    assert join_attempts(facts) == [_assemble(case)]
+    case["host"]["provider_requests"][0]["host_attempt_trace_id"] = "unbound"
+    with pytest.raises(ValueError):
+        export_owner_attempts(
+            [case], run_id="run:one", product_lock_digest="f" * 64, result_refs=["result:one"],
+        )
 
 
 @pytest.mark.parametrize("dispatch,started,reason", [
