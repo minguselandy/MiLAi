@@ -5,7 +5,13 @@ evidence, not a second source of truth for the frozen architecture. Every
 receipt is bound to a Product tree digest and must distinguish a scoped
 behavioral result from full architecture-item coverage.
 
-## Current Product identity
+## Last behavior-revalidated Product identity
+
+The table below is the cleanup identity to which the existing receipts are bound. The additive
+Host owner testkit changes the current Product manifest; consult
+[current status](../PRODUCT_CURRENT_STATUS.md) and the generated
+[conformance map](../conformance/CURRENT_ARCHITECTURE_CONFORMANCE.md) for the candidate identity.
+Existing receipt bytes are retained as historical evidence, not silently rebound to the new tree.
 
 | Field | Value |
 | --- | --- |

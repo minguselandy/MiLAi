@@ -3,6 +3,10 @@
 历史报告中的问题不自动等于当前缺陷。下表是重组阶段的复核登记；状态只能使用
 `OPEN`、`FIXED`、`OBSOLETE`、`NEEDS_REVALIDATION`。状态改变必须附命令、测试和日期。
 
+The explicit Host trace testkit addition changes the whole-Product identity. Existing FIXED
+decisions remain tied to their recorded behavior baselines; they are not new-tree revalidation
+claims. See the [current evidence map](conformance/CURRENT_ARCHITECTURE_CONFORMANCE.md).
+
 Phase 2 diagnosis baseline: Product tree
 `77b13141c2aed57802c4d89adbe9e4597defc430b77e5f9bc0d373c3a199a443`, baseline commit
 `2ce622b86ec4aa9b6df7dc79243159eca3ceb8a0`, with Phase 2B diagnostics anchored by

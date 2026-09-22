@@ -857,6 +857,13 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
   MCP/Provider are synthetic test transports; no external model requests or experiment allocations.
 - Runtime decision/version export, actual MCP binding, cache-origin provenance and assembled
   end-to-end proof remain pending. Trace debt stays NEEDS_REVALIDATION; 3B-1 stays IN_PROGRESS.
+- Producer source commit `652d2a2ef4637b11b4d0a4592a25712aa7a93b3a`, source Git tree
+  `75313f97cbbb23985a01337adf0dc94cc49fb18a`. Product now has 423 manifest files and tree
+  `5d7a5b4d0b79b9ef6555ad8eac8f1c9cecbdf1545e12ab2ef4c5bc455205e272`.
+  Fresh generated Conformance is `9 PASS / 35 UNVERIFIED / 0 DEVIATION`: the 14 existing
+  behavior receipts are preserved at their original identities and are historical for this
+  additive source tree. This is an evidence-freshness change, not a diagnosed regression;
+  unrelated behavior tests are not repeated to restore a PASS count.
 
 ## 2026-09-22 — 3A-1 closed; docs-only CI optimization closed; 3B-1 entered
 
