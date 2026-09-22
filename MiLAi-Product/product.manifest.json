@@ -16,10 +16,10 @@
       "sha256": "daa48881e552c33a9afe8ecb2692bb35d60e752e360fca1676ce32b4d90dfcb2"
     },
     {
-      "file_count": 6,
+      "file_count": 7,
       "interface_id": "context-testkit-v0.1",
       "path": "runtime/src/milai/testkit",
-      "sha256": "8401f27047c44674036d48cd42b09fd6ca7b3c0f531941a9961c312e9d0af88a"
+      "sha256": "82651e50a3bacf7f3b8587371c7708d3cd62047e25711ccd46f1d865555c4d8f"
     },
     {
       "file_count": 7,
@@ -43,7 +43,7 @@
       "file_count": 26,
       "interface_id": "openworker-mcp-v0.1",
       "path": "integrations/openworker-mcp/src",
-      "sha256": "a7cc63881ac88efe8bfb068257f6c23058fafd637c4db7c48e3a7ede9ed2b650"
+      "sha256": "f9000365b6d6039de97396338149ce26cb807bc10af480d80a033728052fbe38"
     },
     {
       "file_count": 16,
@@ -52,15 +52,15 @@
       "sha256": "6eb750cbdf45b406538efed2dc1386e539ea36a741dd06d30c326e66185f931f"
     },
     {
-      "file_count": 6,
+      "file_count": 7,
       "interface_id": "retrieval-trace-testkit-v0.1",
       "path": "runtime/src/milai/testkit",
-      "sha256": "8401f27047c44674036d48cd42b09fd6ca7b3c0f531941a9961c312e9d0af88a"
+      "sha256": "82651e50a3bacf7f3b8587371c7708d3cd62047e25711ccd46f1d865555c4d8f"
     }
   ],
   "schema_version": "milai-product-manifest-v1",
   "source_legacy_head": "651099ba8cffc2675961bb9250ba44c158efccb5",
-  "tree_file_count": 424,
+  "tree_file_count": 425,
   "tree_paths": [
     "VERSION",
     "architecture/v1.0",
@@ -90,5 +90,5 @@
     "integrations/autogen/uv.lock",
     "integrations/autogen/src"
   ],
-  "tree_sha256": "223dad55d2c0f3f9a50686192a35d10a28127c989a9d45f3cbf1a6a77cc6b265"
+  "tree_sha256": "4d7017ad63b323166da5f6dcd3b9a631e0772a456f1b46d39c27186baf17ab32"
 }

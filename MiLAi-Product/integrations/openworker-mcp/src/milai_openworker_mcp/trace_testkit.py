@@ -11,7 +11,7 @@ import hashlib
 import json
 import threading
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, cast
 from uuid import uuid4
 
 from milai_openworker_mcp.host.provider_bridge import OpenWorkerProviderAdapter
@@ -24,6 +24,13 @@ from milai_openworker_mcp.provider_execution import (
     ProviderTransportError,
 )
 from milai_openworker_mcp.task_binding import NativeTaskMetadata
+from milai_openworker_mcp.transport import McpUnixClient
+
+__all__ = [
+    "DevRunCapability", "NativeProviderResponse", "NativeTaskMetadata",
+    "ObservedOpenWorkerProviderAdapter", "OpenAIChatRequest", "ProviderRequest",
+    "ProviderTransportError",
+]
 
 _EVENTS = frozenset({
     "HOST_NATIVE_REQUEST_OBSERVED", "HOST_MCP_PREPARE_ATTEMPT", "HOST_MCP_PREPARE_CONTEXT",
@@ -41,15 +48,67 @@ def _ref(kind: str, value: object) -> str | None:
     return f"{kind}:{_digest(value)}" if isinstance(value, str) and value else None
 
 
+class _ObservedMcp:
+    def __init__(
+        self, delegate: McpUnixClient, attempt: dict[str, Any],
+        contexts: list[tuple[str, dict[str, Any]]],
+    ) -> None:
+        self.delegate, self.attempt, self.contexts = delegate, attempt, contexts
+
+    def resolve_memory(
+        self, query: str, *, previous_context_id: str | None = None,
+    ) -> dict[str, Any]:
+        row: dict[str, Any] = {
+            "invocation_id": "mcp-invocation:" + uuid4().hex,
+            "host_attempt_trace_id": self.attempt["host_attempt_trace_id"],
+            "retrieval_trace_ref": None, "status": "FAILURE", "receipt_reused": False,
+        }
+        self.attempt["mcp_invocations"].append(row)
+        response = self.delegate.resolve_memory(query, previous_context_id=previous_context_id)
+        row.update(
+            status="SUCCESS", retrieval_trace_ref=_ref("retrieval", response.get("trace_id")),
+            receipt_reused=response.get("receipt_reused") is True,
+        )
+        context = response.get("memory_context")
+        if isinstance(context, Mapping) and isinstance(context.get("text"), str):
+            text = context["text"]
+            ids = context.get("selected_evidence_ids")
+            binding = {
+                "mcp_invocation_id": row["invocation_id"],
+                "retrieval_trace_ref": row["retrieval_trace_ref"],
+                "reader_context_sha256": hashlib.sha256(text.encode()).hexdigest(),
+                "selected_evidence_refs": (
+                    [_ref("evidence", value) for value in ids] if isinstance(ids, list) else None
+                ),
+            }
+            # Raw text is ephemeral and never placed in a published attempt.
+            self.contexts.append((text, binding))
+        return response
+
+
 class _ObservedTransport:
-    def __init__(self, delegate: ProviderTransport, attempt: dict[str, Any]) -> None:
+    def __init__(
+        self, delegate: ProviderTransport, attempt: dict[str, Any],
+        contexts: list[tuple[str, dict[str, Any]]],
+    ) -> None:
         self.name = delegate.name
         self.delegate = delegate
         self.attempt = attempt
+        self.contexts = contexts
 
     def invoke(
         self, request: ProviderRequest, capability: DevRunCapability,
     ) -> NativeProviderResponse:
+        bindings = []
+        messages = request.payload.get("messages", [])
+        for text, binding in self.contexts:
+            framed = "MILAI_CONTEXT_BEGIN\n" + text + "\nMILAI_CONTEXT_END"
+            if any(
+                isinstance(message, Mapping) and message.get("role") == "system"
+                and isinstance(message.get("content"), str) and framed in message["content"]
+                for message in messages
+            ):
+                bindings.append(copy.deepcopy(binding))
         row: dict[str, Any] = {
             "request_ref": _ref("request", request.logical_request_id),
             "host_attempt_trace_id": self.attempt["host_attempt_trace_id"],
@@ -59,6 +118,9 @@ class _ObservedTransport:
             "request_started": None,
             "input_tokens": None,
             "output_tokens": None,
+            "prepared_context_bindings": bindings,
+            "context_bindings": [],
+            "exposure_status": "UNKNOWN",
         }
         self.attempt["provider_requests"].append(row)
         try:
@@ -67,6 +129,8 @@ class _ObservedTransport:
             row.update(
                 status="FAILURE", request_started=exc.request_started,
                 native_request_ref=_ref("native", exc.native_request_id),
+                context_bindings=copy.deepcopy(bindings) if exc.request_started else [],
+                exposure_status="DISPATCHED" if exc.request_started else "NOT_STARTED",
             )
             raise
         # Unknown exceptions intentionally preserve UNKNOWN and unknown usage.
@@ -74,6 +138,7 @@ class _ObservedTransport:
             status="SUCCESS", request_started=True,
             native_request_ref=_ref("native", response.native_request_id),
             input_tokens=response.prompt_tokens, output_tokens=response.completion_tokens,
+            context_bindings=copy.deepcopy(bindings), exposure_status="DISPATCHED",
         )
         return response
 
@@ -144,6 +209,7 @@ class ObservedOpenWorkerProviderAdapter(OpenWorkerProviderAdapter):
         if not self._observation_lock.acquire(blocking=False):
             raise RuntimeError("HOST_OWNER_TRACE_CONCURRENT_ATTEMPT")
         original_transport = self.transport
+        original_mcp = self.host_mcp
         try:
             task_digest = _digest([self.run_id, metadata.host_instance, metadata.task_session])
             if retry_of is not None and not any(
@@ -163,10 +229,16 @@ class ObservedOpenWorkerProviderAdapter(OpenWorkerProviderAdapter):
                 "route_ref": None,
                 "host_events": [],
                 "provider_requests": [],
+                "mcp_invocations": [],
             }
             self._owner_attempt = attempt
             self._owner_attempts.append(attempt)
-            self.transport = _ObservedTransport(original_transport, attempt)
+            contexts: list[tuple[str, dict[str, Any]]] = []
+            self.transport = _ObservedTransport(original_transport, attempt, contexts)
+            if original_mcp is not None and self.memory_mode == "query-first":
+                # Only resolve_memory is used by this serial query-first call;
+                # restore the original concrete client before close/other routes.
+                self.host_mcp = cast(McpUnixClient, _ObservedMcp(original_mcp, attempt, contexts))
             response, route = super().complete(
                 incoming, metadata, request_parse_ms=request_parse_ms,
             )
@@ -175,5 +247,6 @@ class ObservedOpenWorkerProviderAdapter(OpenWorkerProviderAdapter):
             return response, route
         finally:
             self.transport = original_transport
+            self.host_mcp = original_mcp
             self._owner_attempt = None
             self._observation_lock.release()

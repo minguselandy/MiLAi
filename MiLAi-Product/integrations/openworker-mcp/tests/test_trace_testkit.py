@@ -264,8 +264,49 @@ def test_query_first_owner_binding_keeps_fresh_attempts_and_runtime_validated_ca
             )
             assert answer["context_in_prompt"] is True
             assert answer["request_ref"] == attempt["provider_requests"][0]["request_ref"]
+            invocation, = attempt["mcp_invocations"]
+            provider, = attempt["provider_requests"]
+            binding, = provider["context_bindings"]
+            assert invocation["host_attempt_trace_id"] == attempt["host_attempt_trace_id"]
+            assert binding["mcp_invocation_id"] == invocation["invocation_id"]
+            assert binding["retrieval_trace_ref"] == invocation["retrieval_trace_ref"]
+            assert binding["reader_context_sha256"] == answer["context_sha256"]
+            assert len(binding["selected_evidence_refs"]) == 1
+            assert provider["exposure_status"] == "DISPATCHED"
+        assert first["mcp_invocations"][0]["invocation_id"] != (
+            second["mcp_invocations"][0]["invocation_id"]
+        )
         assert "private memory observation" not in json.dumps([first, second])
         assert "private memory observation" in json.dumps(transport.requests[0].payload)
+    finally:
+        adapter.close()
+
+
+@pytest.mark.parametrize("started", [False, True, None])
+def test_prepared_context_is_not_exposure_without_known_dispatch(
+    tmp_path: Path, started: bool | None,
+) -> None:
+    adapter = _adapter(tmp_path / "host", mode="query-first")
+    assert isinstance(adapter, ObservedOpenWorkerProviderAdapter)
+    assert adapter.host_mcp is not None
+    adapter.host_mcp.close()
+    mcp = _QueryFirstMcp()
+    adapter.host_mcp = mcp  # type: ignore[assignment]
+    error = RuntimeError("PRIVATE_ERROR") if started is None else ProviderTransportError(
+        "PRIVATE_ERROR", request_started=started,
+    )
+    adapter.transport = _Transport(error)
+    try:
+        with pytest.raises(ProviderCallError):
+            adapter.complete(_incoming(), _metadata())
+        row, = adapter.owner_traces()[0]["provider_requests"]
+        assert len(row["prepared_context_bindings"]) == 1
+        assert len(row["context_bindings"]) == (1 if started is True else 0)
+        assert row["exposure_status"] == {
+            True: "DISPATCHED", False: "NOT_STARTED", None: "UNKNOWN",
+        }[started]
+        assert row["input_tokens"] is None
+        assert adapter.host_mcp is mcp
     finally:
         adapter.close()
 
