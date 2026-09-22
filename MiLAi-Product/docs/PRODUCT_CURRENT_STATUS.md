@@ -7,8 +7,8 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `3eab81c9e1c23b07e3aead351cc3adfe423470c0`; Git tree
-  `3874a68fa06892d4c3bf0a0fe354339d1bde8f9e`; main fast `35688151840` passed.
+- Reconciled repository `main`: `87aa53c73ec0a67ff412923e2151c71def575130`; Git tree
+  `0cc79d8797f1cb1c4321839015eab9f3e1bd980a`; main fast `35688919530` passed.
 - 3A-2R source proof: `faf3922c2b1d037f0c3a019dd1bbaf6dc059be15`;
   PR #36 merged after exact-head fast and final composition passed.
   Product identity: 425 files; manifest SHA
@@ -50,11 +50,13 @@
   [3A-2D Host continuity diagnosis](revalidation/host-continuity/REVALIDATION.md) closed in
   PR #35: 18 native controls PASS / 2 FAIL; 2 real PG chains PASS (4 Host processes,
   10 attempts). Exact-head fast `35685033957`, merge-tree and main identity passed.
-  3A-2R retired-instance repair closed through PR #36. Active work is
+  3A-2R retired-instance repair closed through PR #36. The
   [3A-3D Resolver diagnosis](revalidation/resolver-language/REVALIDATION.md):
   frozen 30 cases, client 11 PASS/11 FAIL and Runtime 6 PASS/2 FAIL; no Product
-  behavior change. Original failures and strict XFAIL assertions remain; diagnostic
-  remote closure is pending, separate remediation has not started.
+  behavior change. PR #37/main fast `35688919530` close the diagnosis with identical
+  candidate/merge trees. Original failures and strict XFAIL assertions remain.
+  Active work is separate 3A-3R on `fix/resolver-typed-language-boundaries`;
+  no repair proof or FIXED claim yet.
   This is not real model use or a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
