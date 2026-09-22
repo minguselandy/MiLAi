@@ -127,7 +127,9 @@ likewise compares control text with full materials; it is not the requested boun
 state-guided retrieval policy. Representation/eligibility ideas can be reused;
 historical effect claims and model envelopes cannot.
 
-The first new seam should be a pure deterministic decision over explicitly supplied
+The follow-up [Attention policy seam](STATE_ATTENTION_POLICY.md) implements the
+pure deterministic decision described here; real retrieval integration, reviewed
+state opportunities and effect evidence remain outstanding. The intended seam is over explicitly supplied
 Lab state and eligible references, with **no Provider, model, storage or dispatch**.
 It must not infer semantic relevance or conflicts from hidden scores or test outcomes.
 
@@ -139,9 +141,9 @@ It must not infer semantic relevance or conflicts from hidden scores or test out
 | Uncertainty / open conflicts | Explicit fallible working assertions with supporting refs | Recheck exact versions/scope/availability now | Missing/stale is UNKNOWN, not confidence or resolved conflict |
 | Recent evidence | Exact-version source/observation references | Revalidate eligibility at preparation and dispatch | Denied excluded; unknown eligibility fails closed |
 
-Proposed policy priority: supported current conflict → CONFLICT; otherwise an
+Implemented candidate priority: supported current conflict → CONFLICT; otherwise an
 explicit current coverage gap → bounded EXPLORE; otherwise FOCUS. This is a design
-proposal, not a frozen live algorithm. Stale, absent or unsupported state falls back
+candidate, not a frozen live experiment protocol. Stale, absent or unsupported state falls back
 to the declared simple baseline without invented certainty. Unknown coverage does
 not authorize unbounded expansion. FOCUS selects current relevant references;
 CONFLICT preserves both eligible sides; EXPLORE can make at most one extra bounded
@@ -159,7 +161,9 @@ controller LLM. No adoption proxy is silently promoted to coverage or causal uti
 
 At the readiness checkpoint, the next safe work was zero-model contract implementation
 in separate scoped Revision and Attention work packages. Revision's engineering seam
-is now linked above; Attention remains next. Do not first re-run old suites or broaden the data scan.
+and Attention's pure decision seam are now linked above. The next gate is real-input
+and finite-run admission, not further scope-free implementation. Do not first re-run
+old suites or broaden the data scan.
 Before any real execution, ask for a separate finite data/model/request/token/time
 allocation and freeze missing protocol fields. Previously closed Utility/legacy
 allocations remain closed; no TEST/confirmation/Travel/RESERVE expansion is implied.

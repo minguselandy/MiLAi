@@ -63,7 +63,16 @@ exact old/new versions and confirmed later exposure over the existing v0.7 bank.
 62 targeted tests pass, including an existing-session mock revision/restore/reuse
 join. It is structural eligibility only: no semantic judge, real correction
 denominator, observed use or benefit. No new model allocation or overall completion.
-Next zero-model work is the separate deterministic Attention policy seam.
+Revision engineering PR #44 closed at `b9b5130`: exact-head fast `35791556071`,
+identical candidate/merge tree and main fast `35792307687` PASS; Lab 4,725 PASS /
+137 SKIP / 4 DESELECTED.
+The separate [deterministic Attention policy seam](STATE_ATTENTION_POLICY.md) now
+implements FOCUS/CONFLICT/EXPLORE decisions over an acquired pool, current reviewed
+state and exact-selection coverage, with conflict preservation and one bounded
+expansion intent. 74 targeted tests pass; no retriever/Provider is called. A live
+runner, authentic state/coverage labels, full cost/quality comparison and new finite
+authorization are still missing. Next work is the joint research admission decision,
+not automatic execution or more unmeasured mechanism complexity.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.
