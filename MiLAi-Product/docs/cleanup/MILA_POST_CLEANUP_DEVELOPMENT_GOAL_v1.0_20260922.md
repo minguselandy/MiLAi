@@ -14,10 +14,10 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3C-1_FINITE_UTILITY_BATCH_PREPARATION
-next_work_package: 3C-1_UTILITY_SELECTION_PENDING_METHOD_ADMISSION
+current_work_package: 3C-1_KEEP_SIMPLE_LOCAL_RESULT_PENDING_REMOTE_CLOSURE
+next_work_package: 3C-2_AND_3C-3_ZERO_MODEL_PREPARATION_ONLY
 new_experiment_allocations: 1
-new_model_requests: 0
+new_model_requests: 199
 ---
 
 # MiLAi Cleanup 后开发与研究执行 Goal v1.0
@@ -229,7 +229,7 @@ NEEDS_REVALIDATION
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | FAIL_REMEDIATION_REQUIRED — PR #37 / main identity verified; 17 PASS / 13 FAIL retained | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | FAIL_REMEDIATION_REQUIRED — partial repair merged PR #38/full #64; C06/C21 remain OPEN, not full closure | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PASS — PR #39 / exact-head fast / identical-tree merge / main identity verified; scoped accounting, not mechanism benefit | 3B-1 PASS |
-| 3C-1 | Utility Selection | Lab | no | IN_PROGRESS — finite authority received; schedule frozen, no calls, method admission pending | 3B-2 real-run proof |
+| 3C-1 | Utility Selection | Lab | no | KEEP_SIMPLE — finite proxy batch stopped by budget; benefit not established; remote closure pending | 3B-2 real-run proof |
 | 3C-2 | Evidence-grounded Revision | Lab | no | PENDING | 3B-2 + lineage |
 | 3C-3 | State-guided Attention | Lab | no | PENDING | 3B-2 + frozen state |
 | 3C-4 | RL-like adaptation | Lab | no | NOT_ADMITTED | prior mechanism acts |
@@ -840,6 +840,37 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Authorized proxy batch closed locally; KEEP_SIMPLE
+
+- The user explicitly permitted historical exact-bundle adoption/rejection as a
+  proxy, still requiring paired quality and full cost accounting. The frozen
+  allocation was unchanged; method/provenance/meaningfulness/native pins and
+  [protocol](../../../MiLAi-Lab/docs/UTILITY_PROXY_PROTOCOL.md) were sealed before
+  the first request. No TEST, confirmation, Travel, RESERVE or SUPPORT bank used.
+- [Result](../../../MiLAi-Lab/docs/UTILITY_PROXY_RESULT.md): all 24 independent
+  pairs and three fixed repeats complete; one budget-interrupted arm and nine
+  unstarted arms retained. 199 generations / 341,591 reported tokens, 200 tokenizer
+  calls and one model-info call; 400 outbound total, zero new embedding/rerank,
+  zero unknown outbound usage, 909.961 seconds. The conservative text-slot guard
+  includes auxiliary calls; no makeup or reuse of unused ceilings is authorized.
+- Only one independent opportunity met the pre-outcome meaningful-alternatives
+  rule. OS428 was correct in both arms but used 36 more total tokens; its repeat
+  is incomplete. DB selection never changed, yet three pairs differed in native
+  quality with identical initial payloads. These losses are retained as background
+  variability, not attributed as causal Utility harm. No repeatable benefit or
+  positive non-regression claim; 3C-1 KEEP_SIMPLE, no Product promotion.
+- All 696 sealed pins reverified after execution. Historical formation/cache costs
+  are separately disclosed; lifecycle attribution/use remain UNKNOWN. Product
+  executable/schema/API/permissions/Canonical behavior unchanged; C06/C21 OPEN.
+  33 distinct targeted tests and Lab static/boundary checks passed; no repeated
+  Product full. Result PR closure is pending, not silently assumed.
+- Preparation PR #41 closed: tested head `883cd7861a2d1b3044a032415ee47c3b9486ba19`,
+  fast `35740683722` PASS; squash `ae434539f6b99fd2da0c9ab6e208ff7ce34f9d88`,
+  identical tree `bd173eb75f6df156223ada3d02050fcdff2b39cc`, main fast `35741790217`
+  PASS. Lab CI 4,682 PASS / 137 SKIP / 4 DESELECTED. Remote base main rechecked.
+- 3C-2/3C-3 have no model-execution allocation; 3C-4, transfer, second solver and
+  promotion remain unadmitted. Overall Goal completion is not claimed.
 
 ## 2026-09-22 — User-authorized finite first Utility batch
 
