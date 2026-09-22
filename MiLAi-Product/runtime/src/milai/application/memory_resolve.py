@@ -67,8 +67,13 @@ _EXPLANATION = re.compile(
     re.IGNORECASE,
 )
 _NOT_NEEDED = re.compile(
-    r"^(?:hello|hi|good\s+(?:morning|afternoon|evening))\b|"
-    r"\b(?:compute|calculate|what is)\s+\d+\s*(?:plus|minus|times|[+*\-/])\s*\d+",
+    r"^(?:(?:hello|hi|good\s+(?:morning|afternoon|evening)|你好|您好|早上好|下午好|晚上好)"
+    r"|(?:(?:compute|calculate|what is|计算|算一下)\s*)?"
+    r"[+-]?\d+(?:\.\d+)?\s*(?:plus|minus|times|divided by|加|减|乘以?|除以?|[+*\-/])"
+    r"\s*[+-]?\d+(?:\.\d+)?)\s*[.!?。]*$|"
+    r"\b(?:do\s+not|don't|never)\s+(?:read|use|recall|retrieve|search|access)\s+"
+    r"(?:(?:any|my|personal|saved|stored)\s+)*(?:memory|memories)\b|"
+    r"(?:不要|勿|禁止)(?:读取|使用|检索|搜索|回忆)(?:任何|个人|我的|已保存的)?记忆",
     re.IGNORECASE,
 )
 
