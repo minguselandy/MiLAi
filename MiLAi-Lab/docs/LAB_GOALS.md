@@ -18,8 +18,11 @@ assertions retained. Separate 3A-3R has a [partial repair](../../MiLAi-Product/d
 identical-tree merge `8c0c526` and main fast `35713661491` close partial delivery, not
 full language capability. Independent 3B-2 Opportunity Ledger is now PASS through
 PR #39 at `53e13c4`, exact-head fast `35717333297`, identical-tree merge and main
-fast `35718296416`. The [next preflight](POST_CLEANUP_RESEARCH_PREFLIGHT.md) is
-unallocated; required input/model/budget decisions are not inferred from old studies.
+fast `35718296416`. The user subsequently authorized
+[one finite Utility batch](UTILITY_FIRST_BATCH.md). Its 32-pair task/arm schedule
+is frozen; no model call has started. Global budget accounting gates the opt-in
+Provider transport; Utility evidence, method admission and experiment-runner
+integration remain unfinished. Old studies remain paused.
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).
@@ -40,8 +43,9 @@ one real bounded run now generates a reproducible ledger (10 attempts / 9 fixtur
 calls, zero model use). Remote closure passed; this is accounting proof, not a
 Utility/Revision/Attention effect experiment. No model execution is admitted yet.
 
-This coordination update allocates zero model requests, does not resume any old worker or batch,
-does not reopen a protected/frozen pool, and does not replace historical Goal states. A future Lab
+The earlier coordination update allocated zero model requests; the new explicit
+user allocation above is separate. It does not resume any old worker or batch,
+reopen a protected pool, or replace historical Goal states. A future Lab
 work package must bind a run-specific Product lock, finite budget, opportunity denominator, arm
 difference, cost/safety metrics and stop condition before any model call.
 

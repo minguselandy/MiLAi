@@ -14,9 +14,9 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3C_FINITE_RESEARCH_PREFLIGHT_REQUIRES_AUTHORITY
-next_work_package: 3C-1_UTILITY_SELECTION_PENDING_FINITE_AUTHORITY
-new_experiment_allocations: 0
+current_work_package: 3C-1_FINITE_UTILITY_BATCH_PREPARATION
+next_work_package: 3C-1_UTILITY_SELECTION_PENDING_METHOD_ADMISSION
+new_experiment_allocations: 1
 new_model_requests: 0
 ---
 
@@ -229,7 +229,7 @@ NEEDS_REVALIDATION
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | FAIL_REMEDIATION_REQUIRED — PR #37 / main identity verified; 17 PASS / 13 FAIL retained | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | FAIL_REMEDIATION_REQUIRED — partial repair merged PR #38/full #64; C06/C21 remain OPEN, not full closure | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PASS — PR #39 / exact-head fast / identical-tree merge / main identity verified; scoped accounting, not mechanism benefit | 3B-1 PASS |
-| 3C-1 | Utility Selection | Lab | no | PENDING | 3B-2 real-run proof |
+| 3C-1 | Utility Selection | Lab | no | IN_PROGRESS — finite authority received; schedule frozen, no calls, method admission pending | 3B-2 real-run proof |
 | 3C-2 | Evidence-grounded Revision | Lab | no | PENDING | 3B-2 + lineage |
 | 3C-3 | State-guided Attention | Lab | no | PENDING | 3B-2 + frozen state |
 | 3C-4 | RL-like adaptation | Lab | no | NOT_ADMITTED | prior mechanism acts |
@@ -840,6 +840,24 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — User-authorized finite first Utility batch
+
+The user explicitly authorized one new DB/OS development batch, not a historical
+study resume. The [Lab admission record](../../../MiLAi-Lab/docs/UTILITY_FIRST_BATCH.md)
+binds the frozen 12 independent positions per domain, four preselected repeats per
+domain and all 32 STATIC/UTILITY pairs (64 executions). Only already exposed frozen
+DEV/VALID material is permitted; TEST, confirmation, Travel, RESERVE, SUPPORT and
+outcome-based replacement are excluded.
+
+Solver remains Qwen3.6-35B-A3B-FP8 on the existing loopback endpoint and M1 profile;
+only the existing bge-m3 retrieval contract is allowed, reranking off. Limits:
+400 text requests / 3,000,000 text tokens; 128 embedding requests / 50,000 tokens;
+528 total requests; four hours from first request. Failures/retries/maintenance
+count, unknown usage reserves its known upper bound, and the deadline cannot be
+extended. The task schedule was frozen with zero new requests. Method/utility
+provenance and transport admission are unfinished; no effect result is claimed.
+Product executable behavior and existing resolver debt remain unchanged.
 
 ## 2026-09-22 — Opportunity Ledger closed; research execution remains unallocated
 

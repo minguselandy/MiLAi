@@ -11,6 +11,7 @@ from pathlib import Path
 
 import httpx
 
+from finite_budget_transport import FiniteBudgetTransport
 from milai_lab.methods.evidence_utility_session import messages_digest
 from milai_lab.methods.reasoning_bank import MemoryCall, MemoryOutputError
 from reasoningbank_tool_transport import decode_tool_completion
@@ -28,8 +29,13 @@ class NativeProvider(ExistingProvider):
         max_tokens: int,
         tool_transport="native_auto",
         request_timeout_seconds=180,
+        batch_budget=None,
         **kwargs,
     ):
+        if batch_budget is not None:
+            kwargs["transport"] = FiniteBudgetTransport(
+                batch_budget, kind="text", inner=kwargs.get("transport"), failure_root=root
+            )
         super().__init__(root, output_cap=4096, allowed_output_caps=(64, 2048, 4096), **kwargs)
         self.max_total_tokens = max_tokens
         if tool_transport not in {"native_auto", "template_completion"}:
@@ -200,6 +206,12 @@ class NativeProvider(ExistingProvider):
             content=raw,
             headers={"Content-Type": "application/json"},
             timeout=self.timeout(self.request_timeout_seconds),
+            extensions={
+                "milai_batch_reservation": {
+                    "upper_tokens": count + output_tokens,
+                    "role": role,
+                }
+            },
         )
         save(
             self.root / f"{key}-http.json",
@@ -278,19 +290,37 @@ class NativeProvider(ExistingProvider):
 
 
 class EmbeddingProvider:
-    def __init__(self, root: Path, *, max_requests: int = 512):
+    def __init__(
+        self,
+        root: Path,
+        *,
+        max_requests: int = 512,
+        batch_budget=None,
+        token_upper_bound=None,
+        transport=None,
+    ):
         self.root = root
         root.mkdir(parents=True, exist_ok=True)
         self.max_requests = max_requests
         self.ledger = root / "embedding-ledger.jsonl"
+        self.batch_budget = batch_budget
+        self.token_upper_bound = token_upper_bound
+        if batch_budget is not None:
+            if token_upper_bound is None:
+                raise ValueError("VERIFIED_EMBEDDING_TOKEN_BOUND_REQUIRED")
+            transport = FiniteBudgetTransport(
+                batch_budget, kind="embedding", inner=transport, failure_root=root
+            )
         self.client = httpx.Client(
             base_url="http://36.140.33.19:7861",
             timeout=60,
             trust_env=False,
             follow_redirects=False,
+            transport=transport,
         )
 
     def embed(self, session: str, texts: list[str]) -> list[list[float]]:
+        upper = self.token_upper_bound(texts) if self.batch_budget is not None else None
         rows = read_events(self.ledger)
         reserved = {row["request_id"] for row in rows if row["event"] == "RESERVED"}
         settled = {row["request_id"] for row in rows if row["event"] == "SETTLED"}
@@ -313,7 +343,11 @@ class EmbeddingProvider:
             },
         )
         start = time.monotonic()
-        response = self.client.post("/v1/embeddings", json=body)
+        response = self.client.post(
+            "/v1/embeddings",
+            json=body,
+            extensions={"milai_batch_reservation": {"upper_tokens": upper}},
+        )
         save(
             self.root / f"{key}-http.json",
             {"status_code": response.status_code, "body": response.text},
