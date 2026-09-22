@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3A-2D_HOST_CONTINUITY_DIAGNOSIS
-next_work_package: 3A-2R_HOST_CONTINUITY_RETIRED_INSTANCE
+current_work_package: 3A-2R_HOST_CONTINUITY_RETIRED_INSTANCE
+next_work_package: 3A-3D_RESOLVER_DIAGNOSTIC
 new_experiment_allocations: 0
 new_model_requests: 0
 ---
@@ -224,8 +224,8 @@ NEEDS_REVALIDATION
 | 3A-0 | Status reconciliation | Product/Lab docs | no | PASS — PR #27 / main identity verified | G0 |
 | 3A-1 | Worker `--once` revalidation | Product evidence | expected no | PASS — PR #28 / main identity verified | 3A-0 |
 | 3B-1 | Trace Ownership v1/v2 | Product/testkit + Lab | small/contractual | PASS — scoped receipt / PR #34 / main identity verified | 3A-0 |
-| 3A-2D | Host Continuity diagnosis | Product evidence | no | DIAGNOSED_FAIL — native replay OPEN / cache-miss FIXED; remote closure pending | 3B-1 vocabulary |
-| 3A-2R | Host Continuity remediation | Product | conditional | ADMITTED_PENDING_DIAGNOSIS_MERGE — retired-instance replay only | 3A-2D FAIL |
+| 3A-2D | Host Continuity diagnosis | Product evidence | no | DIAGNOSED_FAIL — PR #35 / main identity verified; native replay OPEN / cache-miss FIXED | 3B-1 vocabulary |
+| 3A-2R | Host Continuity remediation | Product | conditional | IN_PROGRESS — separate retired-instance replay repair | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | PENDING | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | NOT_ADMITTED | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PENDING | 3B-1 PASS |
@@ -840,6 +840,22 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Host diagnosis merged; separate native-instance remediation entered
+
+- PR #35 exact head `99d28e02e5343ebedeffac41940de8808eb78acc`, fast `35685033957`
+  PASS. Expected-head squash merge `e7604346471593127f09dbae321e95f018d2fa13`;
+  candidate/merge tree `fe157cd172946f83b8d6fafc21c600fb967ad881` matched.
+- Local main equals origin/main; main fast `35685136321` PASS, including tree identity.
+  Only affected OpenWorker package plus boundaries/identity/Conformance ran; Runtime,
+  Lab, historical replay and full composition were not repeated for diagnosis.
+- `fix/host-continuity-retired-instance` starts from that exact main. 3A-2R is limited
+  to rejecting retired native instances before state mutation or dispatch; no change
+  to Runtime cache validation, persistent Memory identity, permissions or Canonical.
+  Original FAIL receipt/strict assertions stay until a separate repair is proved.
+- Debt remains `8 FIXED / 1 NEEDS_REVALIDATION / 1 OPEN`; no premature FIXED claim.
+  L1 precedes the final candidate's required L4; no intermediate full composition.
+  Models, experimental allocations and resumed historical experiments remain zero.
 
 ## 2026-09-22 — Host diagnosis: retired native replay OPEN, cache-miss proof PASS
 

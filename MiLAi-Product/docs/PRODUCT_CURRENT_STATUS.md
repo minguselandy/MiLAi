@@ -7,8 +7,8 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `9474c63e56e5029c33e2dca5c19e772e4868b18d`; Git tree
-  `1c070d6d9c62ea3ce71a68b22ca3ec4e87c2584e`; main fast `35683815988` passed.
+- Reconciled repository `main`: `e7604346471593127f09dbae321e95f018d2fa13`; Git tree
+  `fe157cd172946f83b8d6fafc21c600fb967ad881`; main fast `35685136321` passed.
 - Final 3B-1 test source: `519ba02bbedc7507237bb78267679ef0cf62cf71`; PR #34 is closed.
   Product identity: 425 files; manifest SHA
   `0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae`; Product tree
@@ -44,10 +44,11 @@
   Exact fresh-retrieval/version/Context provenance and failure dispatch states are covered;
   v2 additionally covers actual Claim/cache origins and has a scoped debt receipt.
   PR #34 exact-head fast `35683142058`, merge-tree identity and main fast all passed.
-  Active work is [3A-2D Host continuity diagnosis](revalidation/host-continuity/DIAGNOSIS_PLAN.md).
-  Local diagnosis is terminal: 18 native controls PASS / 2 FAIL; 2 real PG chains PASS
-  (4 Host processes, 10 attempts). Remote diagnosis closure remains pending; the replay
-  defect requires a separate behavior PR, not a repair hidden in this diagnostic slice.
+  [3A-2D Host continuity diagnosis](revalidation/host-continuity/REVALIDATION.md) closed in
+  PR #35: 18 native controls PASS / 2 FAIL; 2 real PG chains PASS (4 Host processes,
+  10 attempts). Exact-head fast `35685033957`, merge-tree and main identity passed.
+  Active work is separate 3A-2R retired-instance replay remediation; the debt remains
+  OPEN until a distinct repair receipt and remote closure prove it fixed.
   This is not real model use or a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
