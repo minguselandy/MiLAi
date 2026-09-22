@@ -6,8 +6,8 @@
 ## Result
 
 - Current implementation status: `UNVERIFIED`
-- Product source commit: `432153a0065f6ccc6706d670ba7eafafc002c950`
-- Verified at: `2026-09-21T17:22:52+00:00`
+- Product source commit: `4b76405f3e3e73ed85713161eb9465e7bbf5cc82`
+- Verified at: `2026-09-22T00:57:26+00:00`
 - Architecture: `1.0.0`
 - Migration heads: `0027_embedding_identity, 0045_dg18_adjacency, 0056_host_notes`
 
@@ -48,10 +48,10 @@ The detailed G/I/TX/role/gate mapping is in [`invariant-test-map.json`](invarian
 Receipts are validated against the current Product tree and manifest. `SCOPED` claims are recorded as execution evidence but do not promote the broad frozen item; only passing `COMPLETE` claims without a current failed receipt can produce `PASS`. Failed receipts remain valid diagnostic evidence without implying `DEVIATION`.
 
 - Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)
-- Validated receipt count: `13`
-- Current receipt count: `5`
+- Validated receipt count: `14`
+- Current receipt count: `6`
 - Historical receipt count: `8`
-- Current explicit claim count: `12`
+- Current explicit claim count: `13`
 - Failed diagnostic claim count: `0`
 - Preserved failed receipt count: `3`
 

@@ -1,0 +1,184 @@
+{
+  "schema_version": "milai-behavior-revalidation-v1",
+  "debt_id": "worker-once",
+  "state": "FIXED",
+  "architecture_version": "1.0.0",
+  "baseline": {
+    "architecture_version": "1.0.0",
+    "architecture_manifest_sha256": "ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e",
+    "product_commit": "4b76405f3e3e73ed85713161eb9465e7bbf5cc82",
+    "git_tree": "56c81a12365c97fd586d5e4900d463bf7f2a71d7",
+    "product_manifest_sha256": "7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693",
+    "product_tree_sha256": "7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521"
+  },
+  "decision": {
+    "state": "FIXED",
+    "rationale": "Real CLI/PostgreSQL bounded-cycle and failure evidence agrees with existing behavior; runbook now distinguishes cycle completion from delivery success. No Product executable change."
+  },
+  "execution": {
+    "status": "PASS",
+    "verified_at": "2026-09-22T00:54:37Z",
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 12.02
+  },
+  "environment": {
+    "database": "milai_worker_once",
+    "postgresql_version": "16.14",
+    "migration_head": "0056_host_notes",
+    "container": "milai-3a1-worker-once-20260922",
+    "container_id": "a8662393c1c8ef493c1f2014a6ac65c76ce6294e00343bea5c54b76850e4a4cb",
+    "endpoint": "127.0.0.1:32789",
+    "data": "synthetic only; isolated tenant per test",
+    "roles": [
+      "milai_owner",
+      "milai_api",
+      "milai_steward",
+      "milai_worker"
+    ],
+    "embedding": "deterministic_hash",
+    "model_requests": 0
+  },
+  "reproduction": {
+    "working_directory": "MiLAi-Product/runtime",
+    "required_environment": [
+      "MILAI_MIGRATION_DATABASE_URL",
+      "MILAI_TEST_API_DATABASE_URL",
+      "MILAI_TEST_STEWARD_DATABASE_URL",
+      "MILAI_TEST_WORKER_DATABASE_URL"
+    ],
+    "commands": [
+      {
+        "command": ".venv/bin/pytest -q tests/integration/test_worker_once.py tests/integration/test_projection_worker.py::test_projection_worker_builds_fts_vector_and_contiguous_watermarks tests/integration/test_projection_worker.py::test_blob_orphan_reconciles_on_real_worker_startup_and_ingest_recovers tests/unit/test_worker.py tests/unit/test_worker_settings.py --tb=short --junitxml=/cra/memory/mx_memory/evidence/post-cleanup-3a1-worker-once-20260922/worker-once.xml",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "command": ".venv/bin/ruff check tests/integration/test_worker_once.py",
+        "status": "PASS",
+        "exit_code": 0
+      }
+    ],
+    "tests": [
+      "runtime/tests/integration/test_worker_once.py::test_once_is_one_bounded_cycle_per_projection",
+      "runtime/tests/integration/test_worker_once.py::test_check_leaves_queue_watermarks_and_orphans_untouched",
+      "runtime/tests/integration/test_worker_once.py::test_once_processing_failure_is_durable_and_watermark_does_not_pass_gap",
+      "runtime/tests/integration/test_worker_once.py::test_once_unhandled_database_failure_exits_nonzero_without_leasing",
+      "runtime/tests/integration/test_projection_worker.py::test_projection_worker_builds_fts_vector_and_contiguous_watermarks",
+      "runtime/tests/integration/test_projection_worker.py::test_blob_orphan_reconciles_on_real_worker_startup_and_ingest_recovers"
+    ]
+  },
+  "positive_cases": [
+    {
+      "case_id": "ONCE-POS-001",
+      "description": "Empty queue and already-drained queue complete one cycle without polling sleep.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_worker_once.py::test_once_is_one_bounded_cycle_per_projection"
+      ]
+    },
+    {
+      "case_id": "ONCE-POS-002",
+      "description": "Below-limit and above-limit queues respect independent per-projection bounds; next process drains remaining work.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_worker_once.py::test_once_is_one_bounded_cycle_per_projection"
+      ]
+    },
+    {
+      "case_id": "ONCE-POS-003",
+      "description": "Real evidence, FTS and vector projections reach contiguous watermarks.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_worker_once.py::test_once_is_one_bounded_cycle_per_projection",
+        "runtime/tests/integration/test_projection_worker.py::test_projection_worker_builds_fts_vector_and_contiguous_watermarks"
+      ]
+    },
+    {
+      "case_id": "ONCE-POS-004",
+      "description": "Startup reconciles aged orphans before the cycle and normal ingest can recover.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_worker_once.py::test_check_leaves_queue_watermarks_and_orphans_untouched",
+        "runtime/tests/integration/test_projection_worker.py::test_blob_orphan_reconciles_on_real_worker_startup_and_ingest_recovers"
+      ]
+    }
+  ],
+  "negative_cases": [
+    {
+      "case_id": "ONCE-NEG-001",
+      "description": "Check leaves queue, watermarks, documents and aged orphan unchanged.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_worker_once.py::test_check_leaves_queue_watermarks_and_orphans_untouched"
+      ]
+    },
+    {
+      "case_id": "ONCE-NEG-002",
+      "description": "Missing Blob remains PENDING or DEAD_LETTER; no document or watermark across gap despite normal CLI return.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_worker_once.py::test_once_processing_failure_is_durable_and_watermark_does_not_pass_gap"
+      ]
+    },
+    {
+      "case_id": "ONCE-NEG-003",
+      "description": "Database startup failure exits nonzero without leasing original queue.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_worker_once.py::test_once_unhandled_database_failure_exits_nonzero_without_leasing"
+      ]
+    },
+    {
+      "case_id": "ONCE-NEG-004",
+      "description": "Above-limit tail is not leased in the first cycle.",
+      "status": "PASS",
+      "tests": [
+        "runtime/tests/integration/test_worker_once.py::test_once_is_one_bounded_cycle_per_projection"
+      ]
+    }
+  ],
+  "conformance_claims": [
+    {
+      "architecture_id": "G9",
+      "coverage": "SCOPED",
+      "status": "PASS",
+      "covered_statement": "The worker CLI bounds each projection cycle, preserves remaining work for a subsequent process, and records processing failures without advancing the affected contiguous watermark across a gap.",
+      "positive_case_ids": [
+        "ONCE-POS-001",
+        "ONCE-POS-002",
+        "ONCE-POS-003",
+        "ONCE-POS-004"
+      ],
+      "negative_case_ids": [
+        "ONCE-NEG-001",
+        "ONCE-NEG-002",
+        "ONCE-NEG-003",
+        "ONCE-NEG-004"
+      ],
+      "limits": [
+        "No full migration/backup/audit replay or concurrent-worker recovery claim.",
+        "Exit 0 means normal cycle return, not all deliveries succeeded.",
+        "Only deterministic embedding and isolated synthetic PostgreSQL are covered."
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "runtime/tests/integration/test_worker_once.py",
+      "sha256": "59999f54da9c008f8101262b697c9e791abf2b99c98d10345f84660b4fbe489e"
+    },
+    {
+      "path": "/cra/memory/mx_memory/evidence/post-cleanup-3a1-worker-once-20260922/worker-once.xml",
+      "sha256": "c8be8299d61e3020c62c4aa31c9dacac486e7fa11b39a156b468dbed4af06020",
+      "storage": "local external evidence"
+    }
+  ],
+  "development_failure": {
+    "result": "1 passed / 1 failed",
+    "cause": "New assertion used nonexistent projection_watermark_reconcile_ms_calls instead of projection_watermark_reconcile_ms.",
+    "classification": "TEST_HARNESS",
+    "resolution": "Corrected test key; final complete targeted matrix passes."
+  }
+}

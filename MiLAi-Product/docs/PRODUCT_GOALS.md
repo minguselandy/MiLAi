@@ -1,7 +1,7 @@
 # MiLAi Product Goals
 
 > Document: `MILA-PRODUCT-GOALS@3.34`
-> Status: `POST_CLEANUP_DEVELOPMENT_PAUSED_FOR_GPT6_HANDOFF_PR27_PENDING`
+> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A1_WORKER_ONCE_REVALIDATION`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
@@ -31,9 +31,9 @@ matched mechanism signal, independent confirmation, architecture review, ADR and
 PR. No model or experiment allocation follows from this status update, and paused historical work
 does not automatically resume.
 
-Execution is currently paused by the user for GPT-6 handoff. The 3A-0 candidate is PR #27; it has
-local L0 evidence but is not complete until live CI, merge-tree identity and post-merge main identity
-are verified. 3A-1 has not started.
+The user resumed execution. 3A-0 is complete: PR #27 merged at `cf149939eea9f184159ebfb6aab1a3e791988250`,
+with exact-head fast run `35672424053`, candidate/merge tree identity, and main fast run
+`35673403788` all verified. 3A-1 is in progress on a branch from that exact main.
 
 ## Historical plan snapshot: V02-18 testbed and innovation judgment
 

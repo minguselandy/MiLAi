@@ -1673,6 +1673,31 @@
               ],
               "receipt": "docs/revalidation/projection-purge-rebuild/post-cleanup.receipt.json",
               "status": "PASS"
+            },
+            {
+              "coverage": "SCOPED",
+              "covered_statement": "The worker CLI bounds each projection cycle, preserves remaining work for a subsequent process, and records processing failures without advancing the affected contiguous watermark across a gap.",
+              "debt_id": "worker-once",
+              "execution_status": "PASS",
+              "limits": [
+                "No full migration/backup/audit replay or concurrent-worker recovery claim.",
+                "Exit 0 means normal cycle return, not all deliveries succeeded.",
+                "Only deterministic embedding and isolated synthetic PostgreSQL are covered."
+              ],
+              "negative_case_ids": [
+                "ONCE-NEG-001",
+                "ONCE-NEG-002",
+                "ONCE-NEG-003",
+                "ONCE-NEG-004"
+              ],
+              "positive_case_ids": [
+                "ONCE-POS-001",
+                "ONCE-POS-002",
+                "ONCE-POS-003",
+                "ONCE-POS-004"
+              ],
+              "receipt": "docs/revalidation/worker-once/receipt.json",
+              "status": "PASS"
             }
           ],
           "method": "identity-bound behavior revalidation receipt",
@@ -4038,7 +4063,7 @@
   "source": {
     "crosswalk": "architecture/v1.0/crosswalk.json",
     "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
-    "product_commit": "432153a0065f6ccc6706d670ba7eafafc002c950",
+    "product_commit": "4b76405f3e3e73ed85713161eb9465e7bbf5cc82",
     "product_manifest_sha256": "7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693",
     "product_tree_sha256": "7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521"
   },
