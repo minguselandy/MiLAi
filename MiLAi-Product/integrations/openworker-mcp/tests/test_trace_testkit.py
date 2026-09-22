@@ -83,10 +83,17 @@ def _adapter(
     )
 
 
+@pytest.mark.parametrize("mode", ["none", "query-first"])
 def test_observation_is_neutral_to_payload_response_budget_and_request_count(
-    tmp_path: Path,
+    tmp_path: Path, mode: str,
 ) -> None:
-    baseline, observed = _adapter(tmp_path / "baseline", observed=False), _adapter(tmp_path / "on")
+    baseline = _adapter(tmp_path / "baseline", observed=False, mode=mode)
+    observed = _adapter(tmp_path / "on", mode=mode)
+    if mode == "query-first":
+        for adapter in (baseline, observed):
+            assert adapter.host_mcp is not None
+            adapter.host_mcp.close()
+            adapter.host_mcp = _QueryFirstMcp()  # type: ignore[assignment]
     assert isinstance(observed, ObservedOpenWorkerProviderAdapter)
     plain_transport, observed_transport = _Transport(), _Transport()
     baseline.transport, observed.transport = plain_transport, observed_transport
@@ -108,7 +115,14 @@ def test_observation_is_neutral_to_payload_response_budget_and_request_count(
         assert answer["request_ref"] == request["request_ref"]
         assert answer["provider_payload_sha256"] == request["payload_sha256"]
         assert answer["host_attempt_trace_id"] == request["host_attempt_trace_id"]
-        assert not answer["context_in_prompt"]
+        assert answer["context_in_prompt"] is (mode == "query-first")
+        if mode == "query-first":
+            # The second actual call takes the Runtime-validated cached path.
+            assert baseline.complete(incoming, _metadata("op-2")) == observed.complete(
+                incoming, _metadata("op-2"),
+            )
+            assert plain_transport.requests == observed_transport.requests
+            assert observed.owner_traces()[1]["mcp_invocations"][0]["receipt_reused"]
         assert "Keep this system message" not in json.dumps(trace)
         assert "Earlier answer" not in json.dumps(trace)
         assert "session-1" not in json.dumps(trace)

@@ -122,6 +122,8 @@ def test_http_observation_failure_keeps_original_response_and_redacts_error(
     assert "private" not in str(report) and "raw-id" not in str(report)
     report["selected_evidence_refs"].clear()
     assert len(harness.owner_traces()[0]["selected_evidence_refs"]) == 1
+
+
 @pytest.mark.parametrize("boundary,expected", [
     ("DECISION_ACCEPTED_ONLY", "ADMITTED"), ("UNKNOWN", "UNKNOWN"),
 ])
@@ -135,4 +137,3 @@ def test_canonical_search_release_is_observed_without_reinterpreting_gate(
                            "selected_evidence_ids": []},
     }
     assert observed_runtime._reader_gate(body, 200) == expected
-
