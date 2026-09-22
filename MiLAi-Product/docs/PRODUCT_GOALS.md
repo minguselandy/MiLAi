@@ -1,21 +1,24 @@
 # MiLAi Product Goals
 
-> Document: `MILA-PRODUCT-GOALS@3.35`
-> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A2D_HOST_CONTINUITY`
+> Document: `MILA-PRODUCT-GOALS@3.36`
+> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A2R_HOST_CONTINUITY`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
 ## Current governing Goal: post-cleanup behavioral closure and measured research
 
-Latest closure: PR #34 merged as `9474c63e56e5029c33e2dca5c19e772e4868b18d`, main fast
+Trace closure: PR #34 merged as `9474c63e56e5029c33e2dca5c19e772e4868b18d`, main fast
 `35683815988` PASS. The [scoped trace receipt](revalidation/trace-ownership/REVALIDATION.md)
 now covers fresh Evidence and Claim/cache cross-layer joins: 47 Product tests, 76 Lab tests,
 18 actual Host attempts, zero model calls. Trace debt is FIXED for this serial query-first
-testkit scope; 3B-1 is PASS after exact-head CI and identical-tree merge. Active work is
-[3A-2D Host continuity diagnosis](revalidation/host-continuity/DIAGNOSIS_PLAN.md), not remediation.
-Its [local result](revalidation/host-continuity/REVALIDATION.md) leaves native retired-instance
-replay OPEN and closes scoped cache-miss continuation. Diagnosis CI/merge is pending;
-the conditional next package is a separate retired-instance repair.
+testkit scope; 3B-1 is PASS after exact-head CI and identical-tree merge.
+[3A-2D diagnosis](revalidation/host-continuity/REVALIDATION.md) closed through PR #35 at
+`e760434`, main fast `35685136321` PASS. Native retired-instance replay was diagnosed OPEN;
+scoped cache-miss continuation is FIXED. Active work is the separate 3A-2R repair on
+`fix/host-continuity-retired-instance`; original diagnostic failures remain immutable.
+The [local repair](revalidation/host-continuity/REMEDIATION.md) now passes 26 tests,
+including actual fresh-process recovery. Final-candidate composition and remote closure
+remain pending; the work package is not yet complete.
 Research stays unallocated.
 
 The current cross-bundle execution contract is
@@ -46,7 +49,7 @@ The user resumed execution. 3A-0 is complete: PR #27 merged at `cf149939eea9f184
 with exact-head fast run `35672424053`, candidate/merge tree identity, and main fast run
 `35673403788` all verified. 3A-1 completed through PR #28 at main
 `81f2f12844674983973ae7dad99868211ba1a1bb`, with main fast `35674495200` passed.
-Current debt is `8 FIXED / 1 NEEDS_REVALIDATION / 1 OPEN`. 3B-1 started from
+Current local debt is `9 FIXED / 1 NEEDS_REVALIDATION / 0 OPEN`. 3B-1 started from
 main `755cdfc947f34efa03cc0bb1eed682233767b061` after PR #29's docs-only CI optimization.
 The [offline ownership candidate](reference/trace-ownership-v1.md) alone did not close live
 producer provenance; the subsequent scoped receipt above supplies that evidence.

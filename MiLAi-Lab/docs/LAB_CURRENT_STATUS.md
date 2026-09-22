@@ -2,7 +2,7 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_PASS / 3B-1_PASS / 3A-2D_DIAGNOSED_REMOTE_PENDING`
+> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_PASS / 3B-1_PASS / 3A-2D_DIAGNOSED / 3A-2R_IN_PROGRESS`
 > New experiment allocations: `0`
 > New model requests: `0`
 
@@ -12,10 +12,14 @@ PR #34 is merged (`9474c63`, main fast `35683815988` PASS), closing scoped 3B-1.
 The [trace receipt](../../MiLAi-Product/docs/revalidation/trace-ownership/REVALIDATION.md)
 covers v2 joins of current authorized cache invocations to observed fresh origins, with
 18 real Host attempts, 47 Product tests and 76 Lab tests passed. Trace debt is FIXED;
-active work is Product Host continuity diagnosis. No research budget opens.
+active work is Product Host continuity remediation. No research budget opens.
 The [local Host result](../../MiLAi-Product/docs/revalidation/host-continuity/REVALIDATION.md)
 finds retired-instance replay OPEN, while real restart/cache-miss reacquisition passes.
-Diagnosis merge and separate remediation remain; no Lab experiment is resumed.
+Diagnosis PR #35 is merged (`e760434`, main fast `35685136321` PASS). Separate
+retired-instance remediation is now active; no Lab experiment is resumed.
+The [local repaired tree](../../MiLAi-Product/docs/revalidation/host-continuity/REMEDIATION.md)
+passes 24 native tests and 2 real PG recovery cases; final composition and remote closure
+are pending. The Product identity changed; prior research pins remain historical.
 
 The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md)
 is now the cross-bundle coordination contract. Its immediate work is Product behavioral closure and
