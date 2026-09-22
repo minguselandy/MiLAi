@@ -1,6 +1,6 @@
 # MiLAi Lab current status
 
-> As of: 2026-09-22
+> As of: 2026-09-23
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
 > Current execution: `ACTIVE / 3B-2_PASS / 3A-3R_PARTIAL_REPAIR_OPEN / 3C-1_KEEP_SIMPLE`
 > New experiment allocations: `1 finite batch closed / no makeup or next allocation`
@@ -48,7 +48,15 @@ conservatively including auxiliary HTTP. KEEP_SIMPLE / benefit not established:
 the sole eligible original pair used 36 more tokens and its repeat was incomplete;
 three unchanged-selection DB pairs also differed in quality. No repeatable benefit,
 Product promotion, historical resume or next allocation is claimed. PR #41 prep
-closed at `ae434539`, main fast `35741790217` PASS; this result's PR closure follows.
+closed at `ae434539`, main fast `35741790217` PASS. Result PR #42 closed at
+`fcefea3`: exact-head fast `35748269576`, identical candidate/merge tree and main
+fast `35749519699` PASS; Lab CI 4,693 PASS / 137 SKIP / 4 DESELECTED.
+The [Revision/Attention zero-model readiness](REVISION_ATTENTION_READINESS.md)
+records the next concrete gaps: four inspected exposed DB/OS banks have 37 original
+revision-1 cards and no changed-version lineage; old FULL/FOCUS projection is not
+the new three-mode retrieval policy or M1 request envelope. Source/receipt inventory
+and proposed contracts are prepared, not effect evidence. Next work is scoped
+zero-model contract implementation; no new model allocation or overall completion.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.

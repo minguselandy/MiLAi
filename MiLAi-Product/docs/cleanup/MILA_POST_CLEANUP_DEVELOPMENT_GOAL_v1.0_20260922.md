@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3C-1_KEEP_SIMPLE_LOCAL_RESULT_PENDING_REMOTE_CLOSURE
-next_work_package: 3C-2_AND_3C-3_ZERO_MODEL_PREPARATION_ONLY
+current_work_package: 3C-2_AND_3C-3_ZERO_MODEL_READINESS
+next_work_package: 3C-2_REVISION_RECORD_AND_LATER_EXPOSURE_CONTRACT
 new_experiment_allocations: 1
 new_model_requests: 199
 ---
@@ -229,9 +229,9 @@ NEEDS_REVALIDATION
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | FAIL_REMEDIATION_REQUIRED — PR #37 / main identity verified; 17 PASS / 13 FAIL retained | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | FAIL_REMEDIATION_REQUIRED — partial repair merged PR #38/full #64; C06/C21 remain OPEN, not full closure | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PASS — PR #39 / exact-head fast / identical-tree merge / main identity verified; scoped accounting, not mechanism benefit | 3B-1 PASS |
-| 3C-1 | Utility Selection | Lab | no | KEEP_SIMPLE — finite proxy batch stopped by budget; benefit not established; remote closure pending | 3B-2 real-run proof |
-| 3C-2 | Evidence-grounded Revision | Lab | no | PENDING | 3B-2 + lineage |
-| 3C-3 | State-guided Attention | Lab | no | PENDING | 3B-2 + frozen state |
+| 3C-1 | Utility Selection | Lab | no | KEEP_SIMPLE — PR #42 / main identity verified; benefit not established | 3B-2 real-run proof |
+| 3C-2 | Evidence-grounded Revision | Lab | no | IN_PROGRESS — zero-model readiness; inspected banks lack revised-version later exposure; no new model allocation | 3B-2 + lineage |
+| 3C-3 | State-guided Attention | Lab | no | IN_PROGRESS — zero-model state/mode contract proposal; no effect execution | 3B-2 + frozen state |
 | 3C-4 | RL-like adaptation | Lab | no | NOT_ADMITTED | prior mechanism acts |
 | 3D-1 | Frozen-bank transfer | Lab | no | NOT_ADMITTED | repeatable DEV signal |
 | 3D-2 | Online stream | Lab | no | NOT_ADMITTED | frozen policy/order |
@@ -571,7 +571,7 @@ if learned value never changes a later action:
 ## 7.6 Phase 3C exit
 
 ```text
-[ ] Utility matched evidence or KEEP_SIMPLE terminal
+[x] Utility matched evidence or KEEP_SIMPLE terminal — PR #42 scoped KEEP_SIMPLE
 [ ] Revision real later-reuse denominator or STOP terminal
 [ ] Attention cost/evidence comparison or KEEP_SIMPLE terminal
 [ ] adaptation changes later action or remains validly NOT_ADMITTED/STOPPED
@@ -779,7 +779,7 @@ retrieval/ranking/threshold/budget 改变、second solver、formal holdout reope
 ## Phase 3C
 
 ```text
-[ ] Utility matched evidence or KEEP_SIMPLE
+[x] Utility matched evidence or KEEP_SIMPLE — PR #42 scoped KEEP_SIMPLE
 [ ] Revision later-reuse evidence or STOP
 [ ] Attention cost/evidence comparison or KEEP_SIMPLE
 [ ] adaptation changes later action or is validly not admitted/stopped
@@ -840,6 +840,27 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-23 — Revision/Attention readiness; no new model allocation
+
+- Current main `fcefea3f8944755b555f60817f6ba007290ae184` matched remote main,
+  worktree initially clean. PR #42 remote closure verified: exact-head fast
+  `35748269576`, candidate/merge tree `0831c6594385ab0fd0561ee4c3d80e2bc8e20f94`,
+  main fast `35749519699` PASS; Lab 4,693 PASS / 137 SKIP / 4 DESELECTED.
+- [Bounded readiness finding](../../../MiLAi-Lab/docs/REVISION_ATTENTION_READINESS.md):
+  four already inspected DB/OS DEV/VALID banks, 24 completed positions, 37 current
+  revision-1 cards, no historical versions/changed patches/predecessor links. Twelve
+  v0.7 Actor exposure receipts joined to settled requests and actual payload hashes;
+  none establish revised-version later exposure. This is not a general Revision
+  negative result or exhaustive pool search. No Travel/TEST/RESERVE/SUPPORT data added.
+- Reuse existing revision engine and version accounting; next minimal seam is typed
+  correction/support/independence eligibility, not another bank. Old state_focus is
+  FULL/FOCUS projection with a different request envelope, not three-mode Attention.
+  Proposed field ownership/freshness/absence and bounded deterministic policy are
+  now explicit; implementation and effect evidence remain outstanding.
+- No new generation/embedding/endpoint probe, model allocation or service change.
+  Documentation-only L0 scope; no repeated package/full tests. Utility is closed,
+  Revision/Attention effect terminals and overall Goal completion remain unproven.
 
 ## 2026-09-22 — Authorized proxy batch closed locally; KEEP_SIMPLE
 
