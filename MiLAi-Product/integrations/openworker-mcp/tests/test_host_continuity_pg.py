@@ -243,7 +243,7 @@ def test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed
                         {
                             "schema": "milai.openworker.mcp-broker-policy.v1",
                             "profile": "reader-lite",
-                            "socket_path": str(socket_root / "reader.sock"),
+                            "socket_path": str(socket_root / "reader-lite.sock"),
                             "socket_mode": "0600",
                             "allowed_peer_uids": [os.geteuid()],
                             "mcp_executable": str(mcp_cli),
@@ -276,7 +276,7 @@ def test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed
                 )
                 resources.callback(_stop, broker)
                 for _ in range(100):
-                    if (socket_root / "reader.sock").exists():
+                    if (socket_root / "reader-lite.sock").exists():
                         break
                     assert broker.poll() is None
                     time.sleep(0.05)
