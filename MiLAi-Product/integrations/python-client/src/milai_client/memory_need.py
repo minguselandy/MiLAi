@@ -471,13 +471,24 @@ def _select_state_key(
 
 def _identifier_occurs(query: str, identifier: str) -> bool:
     normalized = _normalize_alias(identifier)
-    # Han identifiers need no whitespace delimiter; alphabetic identifiers do.
-    left = r"(?<!\w)" if normalized and _alphabetic_boundary(normalized[0]) else ""
-    right = r"(?!\w)" if normalized and _alphabetic_boundary(normalized[-1]) else ""
-    return (
-        bool(normalized)
-        and re.search(left + re.escape(normalized) + right, _normalize_alias(query)) is not None
-    )
+    if not normalized:
+        return False
+    text = _normalize_alias(query)
+    # Han text can directly surround an alphabetic identifier. Another
+    # alphabetic/digit/underscore character cannot silently extend that key.
+    for match in re.finditer(re.escape(normalized), text):
+        before = text[match.start() - 1] if match.start() else ""
+        after = text[match.end()] if match.end() < len(text) else ""
+        if _alphabetic_boundary(normalized[0]) and _word_continuation(before):
+            continue
+        if _alphabetic_boundary(normalized[-1]) and _word_continuation(after):
+            continue
+        return True
+    return False
+
+
+def _word_continuation(char: str) -> bool:
+    return bool(char) and (char == "_" or _alphabetic_boundary(char))
 
 
 def _alphabetic_boundary(char: str) -> bool:

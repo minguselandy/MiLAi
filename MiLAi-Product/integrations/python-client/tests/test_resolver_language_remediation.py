@@ -31,6 +31,7 @@ def _resolve(
         ("équipe", "service.région", "Current équipe service.région"),
         ("проект", "сервис.регион", "сервис.регион"),
         ("maple", "deploy.region", "Current deploy_region"),
+        ("maple", "deploy.region", "当前deploy.region是什么"),
     ],
 )
 def test_key_derived_matching_does_not_depend_on_diagnostic_identifiers(
@@ -147,5 +148,17 @@ def test_unmentioned_predicate_translation_is_not_invented() -> None:
         ),
     )
     assert result.signature.intent_class == "CURRENT_STATE"
+    assert result.requested_route == "L1"
+    assert result.state_key_ref is None
+
+
+def test_identifier_substrings_do_not_create_an_exact_address() -> None:
+    result = _resolve(
+        "Current misleading.regionally",
+        (
+            CanonicalStateKey("maple", "leading.region", "PROJECT_STATE"),
+            CanonicalStateKey("maple", "different.field", "PROJECT_STATE"),
+        ),
+    )
     assert result.requested_route == "L1"
     assert result.state_key_ref is None

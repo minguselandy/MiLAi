@@ -49,7 +49,7 @@
       "file_count": 16,
       "interface_id": "python-client-v0.1",
       "path": "integrations/python-client/src",
-      "sha256": "4298bda97ef7d3c681b4014a74ee69715053a4510e4d5f4150d413a047240d9a"
+      "sha256": "cb30f806145064ed43c74b3681a14acd243a49b402c2498c1792e5d7c20d35fa"
     },
     {
       "file_count": 7,
@@ -90,5 +90,5 @@
     "integrations/autogen/uv.lock",
     "integrations/autogen/src"
   ],
-  "tree_sha256": "d6efcbc0f73703b6c704deff5acc9ac16068019bd6bc638a6ccefe902278bca9"
+  "tree_sha256": "847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311"
 }
