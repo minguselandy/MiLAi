@@ -62,7 +62,7 @@ _INPUT = _object(
         request_id=_ID,
         host_attempt_trace_id=_ID,
         provider_native_request_id=_nullable(_ID),
-        native_id_missing_reason={"enum": [None, "NOT_ACCEPTED", "RESPONSE_LOST"]},
+        native_id_missing_reason={"enum": [None, "NOT_ACCEPTED", "RESPONSE_LOST", "NOT_OBSERVED"]},
         status={"enum": ["SUCCESS", "FAILURE", "UNKNOWN"]},
         reader_context_sha256=_nullable(_DIGEST),
         retrieval_trace_ids=_array(_ID),
@@ -80,6 +80,10 @@ _INPUT = _object(
         )),
     ),
 )
+# Optional for the original offline candidate; live producer assembly always supplies it.
+_INPUT["properties"]["provider"]["items"]["properties"]["exposure_status"] = {
+    "enum": ["DISPATCHED", "NOT_STARTED", "UNKNOWN"],
+}
 _VALIDATOR = Draft202012Validator(_INPUT)
 
 
@@ -179,6 +183,13 @@ def join_trace(facts: dict[str, Any]) -> dict[str, Any]:
             if runtime[trace_id]["gate"] == "ADMITTED" and trace_id in delivered_retrievals:
                 admitted_selected.update(selected_by_trace[trace_id])
         exposed = _versions(row["exposed_versions"])
+        exposure_status = row.get("exposure_status")
+        if exposure_status in {"NOT_STARTED", "UNKNOWN"} and exposed:
+            raise ValueError("EXPOSURE_WITHOUT_KNOWN_DISPATCH")
+        if exposure_status == "NOT_STARTED" and row["status"] == "SUCCESS":
+            raise ValueError("SUCCESS_WITHOUT_DISPATCH")
+        if exposure_status == "UNKNOWN":
+            gaps.append({"request_id": request_id, "reason": "EXPOSURE_UNKNOWN"})
         if any(admitted_selected.get(key) != digest for key, digest in exposed.items()):
             raise ValueError("EXPOSURE_NOT_ADMITTED_AND_SELECTED")
         if exposed and row["reader_context_sha256"] is None:
