@@ -7,12 +7,12 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `5d77fa6ace30d8bc64eeef287d10bfffd4c44992`; Git tree
-  `f4d0e46bff01bfa4ed609095f3e9e2ae9f7e20a5`; main fast `35676214359` passed.
-- Opt-in Host testkit candidate source: `652d2a2ef4637b11b4d0a4592a25712aa7a93b3a`,
-  awaiting remote closure. Product identity: 423 manifest files; manifest SHA-256
-  `68a89e8fd3110cf545fa5d9c9f0e631f8b7195558868ec3aba2bb2eafed07f66`; Product tree
-  `5d7a5b4d0b79b9ef6555ad8eac8f1c9cecbdf1545e12ab2ef4c5bc455205e272`.
+- Reconciled repository `main`: `0971ef6c942bdb2267e70389db76849a5a561db8`; Git tree
+  `7433c0c5744f8edd186eed03faefbc5b5604ff35`; main fast `35677115118` passed.
+- Opt-in Runtime owner export candidate source: `63022a76a6bf1f9408d4c26c3ebc4f66540170a4`,
+  awaiting remote closure. Product identity: 424 manifest files; manifest SHA-256
+  `a34142239d557665933c3619f59b2d284bfc0e0449ac94ff95b67e9e1cf542e1`; Product tree
+  `223dad55d2c0f3f9a50686192a35d10a28127c989a9d45f3cbf1a6a77cc6b265`.
 - Cleanup C0–C10 is complete. The authoritative final composition is Run #60 / ID
   `35632657133`: 17 jobs passed, including Runtime/PostgreSQL, all six integrations, Lab fast,
   four historical replay shards, Archive, Product identity and Conformance.
@@ -33,8 +33,10 @@
   worker `--once` revalidation completed through PR #28, with main fast `35674495200` passed.
   Active work is [Trace Ownership v1](reference/trace-ownership-v1.md): offline contract/join
   implementation merged in PR #30. The [Host producer testkit](reference/host-trace-testkit.md)
-  is a local candidate with 28 targeted Product tests passed; Runtime/MCP/version provenance
-  and end-to-end proof remain pending, so trace debt is not closed.
+  merged in PR #31. The opt-in Runtime producer candidate has 40 targeted tests passed,
+  including real PostgreSQL empty/visible/wrong-scope cases and exact trace/version identity.
+  Actual MCP binding, cache-origin provenance and end-to-end proof remain pending, so trace
+  debt is not closed.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
   candidate; docs-only and Lab-only changes use the classified fast path.

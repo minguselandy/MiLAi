@@ -18,6 +18,7 @@ from milai.domain.memory_resolve import MemoryResolveRequest
 from milai.domain.retrieval_audit import canonical_sha256
 from milai.observability.retrieval_audit import ProductRetrievalAuditObserver
 from milai.persistence import SessionContext
+from milai.testkit.runtime_owner_trace import RuntimeOwnerTraceObserver
 
 _STAGE_REGISTRY = (
     "S12:OFFICIAL_REPOSITORY_RETURN",
@@ -64,6 +65,7 @@ def run_live_retrieval_trace(
     request: RetrievalTraceTestkitRequest,
     *,
     settings: RuntimeSettings | None = None,
+    include_owner_trace: bool = False,
 ) -> dict[str, Any]:
     """Run normal/baseline/traced reads and publish only an exactly neutral trace."""
 
@@ -98,7 +100,10 @@ def run_live_retrieval_trace(
         request_id=f"{request.run_identity}:baseline",
         verify_binding=request.comparison_semantics_version == "v0.2",
     )
-    traced_observer = ProductRetrievalAuditObserver(enabled=True)
+    traced_observer = (
+        RuntimeOwnerTraceObserver()
+        if include_owner_trace else ProductRetrievalAuditObserver(enabled=True)
+    )
     traced_body = _resolve_once(
         runtime_settings,
         memory_request,
@@ -160,7 +165,7 @@ def run_live_retrieval_trace(
     if product_trace.behavior_neutrality.get("exact_match") is not True:
         raise RuntimeError("TRACING_BEHAVIOR_CHANGED")
     join = _mcp_join_expectation(traced_body)
-    return {
+    report = {
         "schema_version": "milai-retrieval-trace-testkit-report-"
                           + request.comparison_semantics_version,
         "comparison_semantics_version": request.comparison_semantics_version,
@@ -199,6 +204,9 @@ def run_live_retrieval_trace(
             "automatic_retries": 0,
         },
     }
+    if isinstance(traced_observer, RuntimeOwnerTraceObserver):
+        report["runtime_owner_trace"] = traced_observer.owner_trace(traced_body)
+    return report
 
 
 def _resolve_once(
