@@ -20,8 +20,10 @@ retired-instance remediation closed in PR #36 (`3eab81c`). The
 [repaired tree](../../MiLAi-Product/docs/revalidation/host-continuity/REMEDIATION.md)
 passes 24 native tests and 2 real PG recovery cases; full #63 (`35685753906`)
 passed all 17 jobs, candidate/merge tree matched, main fast `35688151840` PASS.
-[3A-3D](../../MiLAi-Product/docs/revalidation/resolver-language/DIAGNOSIS_PLAN.md)
-now freezes a pure diagnostic corpus, with no Lab source or model execution.
+[3A-3D](../../MiLAi-Product/docs/revalidation/resolver-language/REVALIDATION.md)
+records client 11 PASS/11 FAIL and Runtime 6 PASS/2 FAIL on a corpus frozen first.
+Resolver debt is OPEN; diagnostic remote closure remains pending. No Lab source,
+model, retrieval or database execution and no resolver behavior change.
 The Product identity changed; prior research pins remain historical.
 
 The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md)

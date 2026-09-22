@@ -18,9 +18,9 @@ scoped cache-miss continuation is FIXED. The separate
 [3A-2R repair](revalidation/host-continuity/REMEDIATION.md) passed 26 local tests and
 full composition #63 (`35685753906`, 17 jobs). PR #36 merged as `3eab81c`, with
 identical candidate/merge trees and main fast `35688151840` PASS; 3A-2R is PASS.
-Active work is [3A-3D diagnosis](revalidation/resolver-language/DIAGNOSIS_PLAN.md),
-freezing 30 synthetic cases before execution. Original failures remain immutable;
-no resolver fix or broad conformance claim is implied.
+Active work is [3A-3D diagnosis](revalidation/resolver-language/REVALIDATION.md):
+30 cases frozen before execution, 17 PASS/13 FAIL. Strict XFAIL preserves each gap;
+no resolver fix or broad conformance claim is implied. Diagnostic remote closure pending.
 Research stays unallocated.
 
 The current cross-bundle execution contract is
@@ -51,7 +51,7 @@ The user resumed execution. 3A-0 is complete: PR #27 merged at `cf149939eea9f184
 with exact-head fast run `35672424053`, candidate/merge tree identity, and main fast run
 `35673403788` all verified. 3A-1 completed through PR #28 at main
 `81f2f12844674983973ae7dad99868211ba1a1bb`, with main fast `35674495200` passed.
-Current local debt is `9 FIXED / 1 NEEDS_REVALIDATION / 0 OPEN`. 3B-1 started from
+Current debt is `9 FIXED / 0 NEEDS_REVALIDATION / 1 OPEN`. 3B-1 started from
 main `755cdfc947f34efa03cc0bb1eed682233767b061` after PR #29's docs-only CI optimization.
 The [offline ownership candidate](reference/trace-ownership-v1.md) alone did not close live
 producer provenance; the subsequent scoped receipt above supplies that evidence.

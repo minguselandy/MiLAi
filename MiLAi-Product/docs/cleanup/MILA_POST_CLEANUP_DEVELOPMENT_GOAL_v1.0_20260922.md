@@ -226,7 +226,7 @@ NEEDS_REVALIDATION
 | 3B-1 | Trace Ownership v1/v2 | Product/testkit + Lab | small/contractual | PASS — scoped receipt / PR #34 / main identity verified | 3A-0 |
 | 3A-2D | Host Continuity diagnosis | Product evidence | no | DIAGNOSED_FAIL — PR #35 / main identity verified; native replay OPEN / cache-miss FIXED | 3B-1 vocabulary |
 | 3A-2R | Host Continuity remediation | Product | conditional | PASS — PR #36 / full #63 / main identity verified | 3A-2D FAIL |
-| 3A-3D | Resolver diagnostic | Product/Lab tests | no | IN_PROGRESS — corpus/method freeze, execution pending | 3A-0 |
+| 3A-3D | Resolver diagnostic | Product/Lab tests | no | IN_PROGRESS — 17 PASS / 13 FAIL frozen diagnosis; remote closure pending | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | NOT_ADMITTED | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PENDING | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | PENDING | 3B-2 real-run proof |
@@ -840,6 +840,23 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Frozen resolver diagnosis records 13 desired-behavior gaps
+
+- Corpus and recorder committed before execution at
+  `6f9e34efe6399792b44fc0d51438c742e6e5a1c0`; Product executable identity unchanged.
+  [Results and limits](../revalidation/resolver-language/REVALIDATION.md): client
+  11 PASS/11 FAIL; Runtime interpreter 6 PASS/2 FAIL. All expected/actual records remain.
+- Source explains English/ASCII dependence, changed-intent retry carry-over and lexical
+  tie selection. Chinese automatic no-memory inputs remain POSSIBLE/SEARCH. Frozen
+  alias compatibility and current query-first ownership are explicitly distinguished.
+  No actual retrieval, Context exposure, authority bypass or model effect was measured.
+- Product tests preserve 17 PASS/13 strict XFAIL after primary collection; no failure
+  is counted as a pass. Changed Ruff passes. Scoped FAIL receipt is valid; Conformance
+  stays 9 PASS/35 UNVERIFIED/0 DEVIATION. Debt: 9 FIXED/0 NEEDS_REVALIDATION/1 OPEN.
+- This PR is diagnosis only. 3A-3D waits for exact-head fast, identical-tree merge and
+  main identity. Separate remediation is conditional after closure; no full composition
+  rerun, database or model call. Research allocations/tokens remain zero.
 
 ## 2026-09-22 — Host remediation closed; Resolver diagnosis entered
 

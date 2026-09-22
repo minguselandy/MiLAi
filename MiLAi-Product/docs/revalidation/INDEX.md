@@ -36,8 +36,9 @@ remains the historical cleanup identity. Prior receipt bytes are unchanged.
 | OpenWorker HTTP auth/exposure | `FIXED` | [`openworker-http-exposure/REVALIDATION.md`](openworker-http-exposure/REVALIDATION.md) |
 | worker `--once` docs/behavior (Phase 3A-1) | `FIXED` | [`worker-once/REVALIDATION.md`](worker-once/REVALIDATION.md) |
 | Runtime / Host / Provider ownership (Phase 3B-1, serial query-first testkit) | `FIXED` | [`trace-ownership/REVALIDATION.md`](trace-ownership/REVALIDATION.md) |
-| process-local task continuity/state (Phase 3A-2D/R) | `FIXED` (local candidate) | [`host-continuity/REMEDIATION.md`](host-continuity/REMEDIATION.md); original [`FAIL diagnosis`](host-continuity/REVALIDATION.md) retained |
+| process-local task continuity/state (Phase 3A-2D/R) | `FIXED` (PR #36/full #63) | [`host-continuity/REMEDIATION.md`](host-continuity/REMEDIATION.md); original [`FAIL diagnosis`](host-continuity/REVALIDATION.md) retained |
 | cache-miss Host continuation (Phase 3A-2D, scoped) | `FIXED` | [`host-continuity/cache-miss.receipt.json`](host-continuity/cache-miss.receipt.json) |
+| resolver lexical-language assumptions (Phase 3A-3D) | `OPEN` | [`resolver-language/REVALIDATION.md`](resolver-language/REVALIDATION.md), frozen 30-case pure-function diagnosis; 17 PASS/13 FAIL |
 
 The five Phase 2 rows also have a `post-cleanup.receipt.json` bound to the final cleanup Product identity.
 These receipts preserve the prior claim statements and coverage levels; they do not replace or
@@ -70,4 +71,9 @@ Phase 3A-2D adds separate native-continuity FAIL and cache-miss PASS receipts wi
 changing Product executable identity. Phase 3A-2R changes the native guard and adds
 its own current-tree remediation receipt; the old receipts remain historical. Original
 failure assertions now pass without XFAIL, and real recovery was rerun on the repaired
-tree. Full composition/remote closure remain separate from local scoped proof.
+tree. PR #36/full #63/main fast `35688151840` now close that repair remotely.
+
+Phase 3A-3D keeps the Product executable identity unchanged and adds an OPEN scoped
+resolver diagnosis: client compatibility and Runtime interpretation are separate owners.
+13 desired-behavior failures remain explicit, including strict XFAIL CI annotations;
+none is counted as a pass or proof of actual retrieval, exposure or model benefit.

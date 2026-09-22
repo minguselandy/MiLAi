@@ -26,10 +26,11 @@
   The prior `10/34/0` map was bound to the cleanup Product identity. Adding the explicit
   testkit and later native guard change the global manifest; 17 prior receipts are historical.
   The new Host remediation receipt contributes two current SCOPED claims (G9/G7),
-  with zero current failures and four preserved historical diagnostics. No old receipt
+  plus a current scoped Resolver diagnostic FAIL: 19 receipts, 2 current, 3 current
+  claims, 5 preserved diagnostic failures and 1 current failure. No old receipt
   was rewritten; full composition and identical-tree merge now passed.
-- `docs/TECH_DEBT.md` records `9 FIXED / 1 NEEDS_REVALIDATION / 0 OPEN` after
-  [Host continuity remediation](revalidation/host-continuity/REMEDIATION.md).
+- `docs/TECH_DEBT.md` records `9 FIXED / 0 NEEDS_REVALIDATION / 1 OPEN` after
+  [Resolver diagnosis](revalidation/resolver-language/REVALIDATION.md).
   The repair is merged with final-composition and main-identity closure.
   `NEEDS_REVALIDATION` is not a defect classification and must be resolved by executable diagnosis.
 - The current coordinating contract is the
@@ -50,8 +51,10 @@
   PR #35: 18 native controls PASS / 2 FAIL; 2 real PG chains PASS (4 Host processes,
   10 attempts). Exact-head fast `35685033957`, merge-tree and main identity passed.
   3A-2R retired-instance repair closed through PR #36. Active work is
-  [3A-3D Resolver diagnosis](revalidation/resolver-language/DIAGNOSIS_PLAN.md):
-  freeze corpus/method first, preserve actual failures, no Product behavior change.
+  [3A-3D Resolver diagnosis](revalidation/resolver-language/REVALIDATION.md):
+  frozen 30 cases, client 11 PASS/11 FAIL and Runtime 6 PASS/2 FAIL; no Product
+  behavior change. Original failures and strict XFAIL assertions remain; diagnostic
+  remote closure is pending, separate remediation has not started.
   This is not real model use or a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
