@@ -155,6 +155,8 @@ def decide_attention(
         and state.scope == snapshot.scope
         and state.input_sha256 == question_digest(question)
         and state.snapshot_sha256 == snapshot.sha256
+        # A review of the whole pool depends on unselected sources too.
+        and len(eligible) == len(units)
     )
     if state is not None:
         for field in state.fields:

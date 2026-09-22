@@ -69,7 +69,7 @@ identical candidate/merge tree and main fast `35792307687` PASS; Lab 4,725 PASS 
 The separate [deterministic Attention policy seam](STATE_ATTENTION_POLICY.md) now
 implements FOCUS/CONFLICT/EXPLORE decisions over an acquired pool, current reviewed
 state and exact-selection coverage, with conflict preservation and one bounded
-expansion intent. 73 targeted tests pass; no retriever/Provider is called. A live
+expansion intent. 74 targeted tests pass; no retriever/Provider is called. A live
 runner, authentic state/coverage labels, full cost/quality comparison and new finite
 authorization are still missing. Next work is the joint research admission decision,
 not automatic execution or more unmeasured mechanism complexity.

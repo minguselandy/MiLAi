@@ -36,6 +36,9 @@ exact source dependencies; `observed < decision <= expiry` is required. Candidat
 change, task reset, changed question, missing provenance, stale/future fields or an
 ineligible dependency invalidate the affected control state. A changed pool also
 invalidates a previous declaration that no conflict exists.
+Because these reviews inspect the whole pool, denial/unknown eligibility of even
+an unselected member invalidates derived state/coverage. Only the independently
+declared baseline may remain, still excluding every ineligible source.
 
 The policy consumes `memory_intentions.sources` as explicitly reviewed relevance
 and `open_conflicts.sources` as **all sides of reviewed current conflicts**.
@@ -82,7 +85,7 @@ so it is not a redaction API and raw decisions must not be published indiscrimin
 
 ## Checks, effect gap and next gate
 
-Local changed-file Ruff/mypy and **73 targeted tests PASS** (new policy plus existing
+Local changed-file Ruff/mypy and **74 targeted tests PASS** (new policy plus existing
 state_focus). Synthetic tests cover exact bytes/order, mode priority, conflict
 reservation, missing/future/stale state, whole-pool and selected-set bindings, denied
 sources, capacity exhaustion and the caller-counted one-expansion loop. Initial Ruff

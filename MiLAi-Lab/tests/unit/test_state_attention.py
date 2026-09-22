@@ -322,3 +322,14 @@ def test_full_byte_capacity_does_not_request_unusable_expansion():
     result = decide_attention(**inputs)
     assert result["action"] == "ABSTAIN_MEMORY"
     assert result["retrieval"] is None
+
+
+def test_revoked_unselected_pool_member_invalidates_derived_state_and_coverage():
+    inputs = fixture()
+    assert ids(decide_attention(**inputs)) == ("a",)
+    inputs["check_source"] = lambda unit: "DENIED" if unit.source_id == "c" else "ELIGIBLE"
+    result = decide_attention(**inputs)
+    assert result["reason"] == "BASELINE_STATE_UNKNOWN"
+    assert result["field_status"]["memory_intentions"] == "UNKNOWN"
+    assert result["coverage"] == "UNKNOWN"
+    assert ids(result) == ("a", "b")

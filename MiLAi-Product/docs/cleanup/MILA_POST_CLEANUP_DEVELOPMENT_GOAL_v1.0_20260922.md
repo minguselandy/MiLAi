@@ -852,7 +852,8 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
   expansion intent. Missing/stale state or coverage falls back to the declared
   baseline with UNKNOWN, never inferred confidence. Pool changes invalidate old
   state and no-conflict assertions; coverage binds actual bounded selection.
-- 73 targeted tests PASS, changed-file Ruff/mypy PASS. Initial default-argument Ruff
+- 74 targeted tests PASS, changed-file Ruff/mypy PASS. Unselected-pool revocation
+  invalidates derived state/coverage, not just selected text. Initial default-argument Ruff
   B008 resolved with an immutable module constant. Tests use synthetic sources and
   caller-supplied reviews only; no actual retrieval, model, embedding or Judge call.
   Package verification/build is delegated to classified Lab fast CI; no Product
