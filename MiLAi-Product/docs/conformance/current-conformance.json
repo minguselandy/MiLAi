@@ -32,7 +32,7 @@
     "map": "docs/conformance/invariant-test-map.json",
     "status": "UNVERIFIED"
   },
-  "invariant_test_map_sha256": "8704ae93179f42779f51f1f5518a08c6e69738c0a10e12f48b4baf5baf4254f2",
+  "invariant_test_map_sha256": "be377d7c5591239f147f8c34cef38f6491fdf17738701e9fdecaa696cff00140",
   "known_limitations": [
     "Behavior revalidation receipts are identity-bound and may only promote an item when they explicitly declare COMPLETE coverage.",
     "AF-09 historical tarballs are archive-owned and are represented by tracked classification metadata, not Product Git bytes.",
@@ -45,9 +45,9 @@
     "0056_host_notes"
   ],
   "openworker_version": "0.1.0",
-  "product_commit": "63022a76a6bf1f9408d4c26c3ebc4f66540170a4",
-  "product_manifest_sha256": "a34142239d557665933c3619f59b2d284bfc0e0449ac94ff95b67e9e1cf542e1",
-  "product_tree_sha256": "223dad55d2c0f3f9a50686192a35d10a28127c989a9d45f3cbf1a6a77cc6b265",
+  "product_commit": "717da6e74aba02e296e30ac4f037c208b753ab18",
+  "product_manifest_sha256": "668dc365f1fb4cf8c6961e6fb490e1a1a6b18f47592c2c096af34b88f350f729",
+  "product_tree_sha256": "90a900fef01ccca5b54cc4a558e3c530cf7a8b421f859d764761a8d6c4f75511",
   "product_version": "0.1.0-candidate",
   "runtime_version": "0.1.5",
   "schema_version": "milai-architecture-conformance-v1",
@@ -75,5 +75,5 @@
       "status": "UNVERIFIED"
     }
   ],
-  "verified_at": "2026-09-22T01:57:25+00:00"
+  "verified_at": "2026-09-22T02:34:40+00:00"
 }

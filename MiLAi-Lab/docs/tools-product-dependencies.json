@@ -18,7 +18,8 @@
     "milai_mcp"
   ],
   "testkit_prefixes": [
-    "milai.testkit"
+    "milai.testkit",
+    "milai_openworker_mcp.trace_testkit"
   ],
   "grandfathered_private_imports": [
     {
@@ -53,6 +54,18 @@
     }
   ],
   "dependencies": [
+    {
+      "path": "tools/run_trace_ownership_probe.py",
+      "module": "milai.testkit.observed_runtime",
+      "classification": "TESTKIT",
+      "lines": [24]
+    },
+    {
+      "path": "tools/run_trace_ownership_probe.py",
+      "module": "milai_openworker_mcp.trace_testkit",
+      "classification": "TESTKIT",
+      "lines": [25]
+    },
     {
       "path": "tools/check_v02_mixed_load.py",
       "module": "milai_client",

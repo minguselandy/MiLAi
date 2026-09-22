@@ -44,8 +44,8 @@ def test_active_tools_match_the_classified_product_dependency_inventory() -> Non
     )
 
     assert findings == ()
-    assert len({dependency.path for dependency in dependencies}) == 10
-    assert len(dependencies) == 18
+    assert len({dependency.path for dependency in dependencies}) == 11
+    assert len(dependencies) == 20
     assert sum(
         dependency.classification == "LEGACY_PRIVATE" for dependency in dependencies
     ) == 6

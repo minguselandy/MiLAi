@@ -841,6 +841,26 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 
 # 16. Execution journal
 
+## 2026-09-22 — Runtime producer merged; actual fresh cross-layer join verified
+
+- PR #32 tested head `314338a05e9b6c9f448f7c570a9b23581c91dc09`, fast `35677817059`
+  PASS; protected merge `6f5ecf6132e81585509d5124cab55e51cc7754f7`, candidate/merge
+  tree `84c3bdf3ac9246c16de01450795b7d3da403f04b` matched. Main fast `35677932965` PASS.
+- Branch `behavior/trace-ownership-chain` adds the explicit loopback Runtime harness,
+  actual MCP/Context dispatch observation and Lab owner-export assembler. Final source
+  `717da6e74aba02e296e30ac4f037c208b753ab18`; Product 425 files, tree
+  `90a900fef01ccca5b54cc4a558e3c530cf7a8b421f859d764761a8d6c4f75511`.
+- [Bounded same-execution proof](../reference/trace-ownership-chain.md): 8 Host attempts,
+  real broker/MCP subprocess/HTTP/PG/worker, 7 in-process Provider fixture invocations,
+  3.195 s. Fresh success/retry/abstain/no-memory and three failure dispatch states join;
+  all use remains UNKNOWN and failure usage remains explicit. Models/allocations 0.
+- Runtime 10, OpenWorker 12, Lab join/assembly 47 and boundary contract 5 targeted tests
+  passed; changed static and both Lab boundaries passed. Package checks go to fast CI;
+  no repeated full composition or historical replay. Isolated DB stopped, data retained.
+- Repeats did not produce cache hits. Cache-origin, supported version paths and final
+  debt receipt remain pending; 3B-1 remains IN_PROGRESS, not PASS. Existing historical
+  receipts remain unchanged; Product default behavior and Schema NO-GO are unchanged.
+
 ## 2026-09-22 — Host producer merged; Runtime owner export and real PG evidence
 
 - PR #31 tested head `7aeeb1477c67b9c7584ebbeb0c1dca5e1da0a798`, fast `35676964005`
