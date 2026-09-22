@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3B-1_TRACE_OWNERSHIP_V1
-next_work_package: 3A-2D_HOST_CONTINUITY_DIAGNOSIS
+current_work_package: 3A-2D_HOST_CONTINUITY_DIAGNOSIS
+next_work_package: 3A-3D_RESOLVER_DIAGNOSTIC_OR_CONDITIONAL_3A2R
 new_experiment_allocations: 0
 new_model_requests: 0
 ---
@@ -223,8 +223,8 @@ NEEDS_REVALIDATION
 | G0 | Goal registration | docs | no | COMPLETE | roadmap bound |
 | 3A-0 | Status reconciliation | Product/Lab docs | no | PASS — PR #27 / main identity verified | G0 |
 | 3A-1 | Worker `--once` revalidation | Product evidence | expected no | PASS — PR #28 / main identity verified | 3A-0 |
-| 3B-1 | Trace Ownership v1/v2 | Product/testkit + Lab | small/contractual | IN_PROGRESS — scoped local proof PASS; CI/merge/main pending | 3A-0 |
-| 3A-2D | Host Continuity diagnosis | Product evidence | no | PENDING | 3B-1 vocabulary |
+| 3B-1 | Trace Ownership v1/v2 | Product/testkit + Lab | small/contractual | PASS — scoped receipt / PR #34 / main identity verified | 3A-0 |
+| 3A-2D | Host Continuity diagnosis | Product evidence | no | IN_PROGRESS — diagnosis only; no classification yet | 3B-1 vocabulary |
 | 3A-2R | Host Continuity remediation | Product | conditional | NOT_ADMITTED | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | PENDING | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | NOT_ADMITTED | 3A-3D FAIL |
@@ -840,6 +840,24 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — 3B-1 closed; Host continuity diagnosis entered
+
+- PR #34 tested head `bffaa845bea4cc82a5685131ef402e00cb793c18`, fast run
+  `35683142058` PASS. Expected-head squash merge:
+  `9474c63e56e5029c33e2dca5c19e772e4868b18d`.
+- Candidate and merge share Git tree `1c070d6d9c62ea3ce71a68b22ca3ec4e87c2584e`;
+  local main fast-forwarded to origin/main cleanly. Main fast `35683815988` PASS,
+  including tested-tree identity, boundaries, Product manifest and Conformance.
+- 3B-1 is PASS for the declared public serial testkit scope. Its immutable receipt
+  retains the pre-merge PENDING snapshot; this journal supplies later remote closure.
+  No full composition, old replay or extra local test rerun was needed for closure.
+- Enter `behavior/host-continuity-diagnosis` from exact merged main. The
+  [diagnosis plan](../revalidation/host-continuity/DIAGNOSIS_PLAN.md) covers both remaining
+  Host debts without authorizing fixes. Existing continuity tests are reusable evidence;
+  missing real restart/cache-miss cases still need executable diagnosis.
+- Debt remains `7 FIXED / 3 NEEDS_REVALIDATION / 0 OPEN`; no Host PASS/FAIL classification
+  is inferred from reading code. Model requests/tokens and research allocations stay zero.
 
 ## 2026-09-22 — Scoped fresh/Claim/cache ownership proof complete locally
 
