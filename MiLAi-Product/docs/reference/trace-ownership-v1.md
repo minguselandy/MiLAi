@@ -111,6 +111,11 @@ attempt identity and actual transport-call association without changing those le
 the default Adapter. Its Product-owned synthetic-transport tests do not yet prove Runtime
 decision/version provenance or complete the end-to-end Lab join.
 
+The [Runtime owner export](retrieval-trace-testkit.md#opt-in-runtime-owner-export-v1) adds
+actual DecisionSnapshot digests, recorded trace/position and exact materialized Evidence
+versions behind `--owner-trace`. Its empty/visible/wrong-scope PostgreSQL cases prove this
+producer slice, not that a separate Host attempt consumed that same Runtime execution.
+
 Before 3B-1 PASS: implement/verify narrowly scoped public read-only producer exports, bind
 actual Runtime/Host/Provider facts for the six terminal cases, prove observation neutrality and
 cache-origin semantics, and close the Product debt with Product-owned executable evidence.
