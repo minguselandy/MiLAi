@@ -2,7 +2,7 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_IN_PROGRESS`
+> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_PASS / 3B-1_IN_PROGRESS`
 > New experiment allocations: `0`
 > New model requests: `0`
 
@@ -15,7 +15,10 @@ inputs or incomplete work exist.
 
 The user resumed this Goal. PR #27 is merged at `cf149939eea9f184159ebfb6aab1a3e791988250`;
 exact-head CI, candidate/merge tree identity and main fast run `35673403788` passed.
-The active work package is Product worker `--once` revalidation; historical research remains paused.
+Worker `--once` revalidation completed through PR #28; main fast `35674495200` passed.
+The active package is [Trace Ownership v1](../../MiLAi-Product/docs/reference/trace-ownership-v1.md),
+starting with a content-free offline joiner. Synthetic contract tests are not real-run evidence;
+live owner exports and trace-debt closure remain pending. Historical research remains paused.
 
 Current interpretation of the active research record:
 

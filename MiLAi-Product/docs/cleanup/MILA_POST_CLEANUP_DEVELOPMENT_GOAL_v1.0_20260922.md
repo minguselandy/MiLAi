@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3A-1_WORKER_ONCE_REVALIDATION
-next_work_package: 3B-1_TRACE_OWNERSHIP_V1
+current_work_package: 3B-1_TRACE_OWNERSHIP_V1
+next_work_package: 3A-2D_HOST_CONTINUITY_DIAGNOSIS
 new_experiment_allocations: 0
 new_model_requests: 0
 ---
@@ -222,8 +222,8 @@ NEEDS_REVALIDATION
 | --- | --- | --- | --- | --- | --- |
 | G0 | Goal registration | docs | no | COMPLETE | roadmap bound |
 | 3A-0 | Status reconciliation | Product/Lab docs | no | PASS — PR #27 / main identity verified | G0 |
-| 3A-1 | Worker `--once` revalidation | Product evidence | expected no | IN_PROGRESS | 3A-0 |
-| 3B-1 | Trace Ownership v1 | Product/testkit + Lab | small/contractual | PENDING | 3A-0 |
+| 3A-1 | Worker `--once` revalidation | Product evidence | expected no | PASS — PR #28 / main identity verified | 3A-0 |
+| 3B-1 | Trace Ownership v1 | Product/testkit + Lab | small/contractual | IN_PROGRESS — offline contract slice; producer proof pending | 3A-0 |
 | 3A-2D | Host Continuity diagnosis | Product evidence | no | PENDING | 3B-1 vocabulary |
 | 3A-2R | Host Continuity remediation | Product | conditional | NOT_ADMITTED | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | PENDING | 3A-0 |
@@ -840,6 +840,29 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — 3A-1 closed; docs-only CI optimization closed; 3B-1 entered
+
+- PR #28 tested head `63f80ab5358c9f264274ee1904b590f0859b6fbd`, fast `35674072940` PASS;
+  protected squash merge `81f2f12844674983973ae7dad99868211ba1a1bb`.
+  Candidate/merge tree `15807bbaac1702adc0fcc7402524364ceda888ae` matched;
+  main fast `35674495200` PASS. 3A-1 is now PASS.
+- PR #29 limits Lab Markdown documentation changes to the docs-only path. Non-Markdown docs,
+  source, tests, tools, configuration and explicit full override remain conservative.
+  Classifier 8 tests PASS; exact-head fast `35674538585` PASS at
+  `e8ea5f1f2c2e809b2bdd53392a6ed837147db825`; protected squash merge
+  `755cdfc947f34efa03cc0bb1eed682233767b061`; tree
+  `44e9ff8b7fee6da005e5b8b20eb10a3396f17ac1` matched; main fast `35674644575` PASS.
+- Branch `behavior/trace-ownership-v1` starts from that exact main. Initial scope is the
+  [versioned ownership candidate](../reference/trace-ownership-v1.md) and Lab-only pure joiner.
+  Synthetic success/retry/abstain/failure/no-memory/unknown-use cases do not establish live
+  Product ownership. 3B-1 remains IN_PROGRESS; trace debt remains NEEDS_REVALIDATION.
+- Product executable tree unchanged; no Schema/API/permission/Canonical change. No model
+  requests, new experiment allocation, resumed historical experiment or full composition.
+- Offline joiner targeted tests: `37 passed` (0.17 s); changed-file Ruff/mypy and both Lab
+  boundary gates PASS. Product manifest, current conformance receipt and repository boundary
+  PASS. Package-wide verification is delegated to the classified Lab fast CI, not duplicated
+  locally; no packaging change, database test, historical replay or full-composition run.
 
 ## 2026-09-22 — 3A-1 local revalidation PASS; remote closure pending
 
