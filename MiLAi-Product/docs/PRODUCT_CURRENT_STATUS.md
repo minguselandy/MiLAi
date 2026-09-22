@@ -1,28 +1,33 @@
 # MiLAi Product Current Status
 
-> As of: 2026-09-19
-> Repository: `/cra/memory/mx_memory/MiLAi-Product`  
+> As of: 2026-09-22
+> Repository: `/cra/memory/mx_memory/MiLAi/MiLAi-Product`
 > Product status: `0.1.0-candidate`  
 > Schema status: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
 ## Current engineering baseline
 
-- Verified commit: `7c38298182fd44a0198e1be309050632c2559c9e`.
-- Product identity manifest: `product.manifest.json` is regenerated and enforced by
-  `tools/build_product_manifest.py --check` in the root authoritative CI.
-- Frozen Architecture 1.0 has a separate current-implementation receipt at
-  [`docs/conformance/CURRENT_ARCHITECTURE_CONFORMANCE.md`](conformance/CURRENT_ARCHITECTURE_CONFORMANCE.md).
-  Its current status is `UNVERIFIED`: mapped G/I/TX/role references are present, but
-  per-item behavioral execution evidence has not yet been recorded; AF-09 archive-only
-  tarballs remain external evidence rather than Product Git bytes.
-- Product Runtime and integration static baselines are locally green; all six integration packages
-  pass mypy. The Lab boundary, Ruff and mypy gates are green; the full Lab pytest gate includes a
-  long synthetic replay and is being verified separately after the relocation-compatibility fix.
-- Root CI is the monorepo authoritative workflow. Nested Product/Lab workflows remain extraction
-  templates and must not be read as a second Source of Truth for repository composition.
-- Current structural state: Product/Lab/Archive boundaries are stable; the next work is behavior
-  revalidation, current-implementation conformance evidence, and release identity closure—not
-  another top-level repository reorganization.
+- Repository `main`: `dfeb359d2301b99c0125d9e54e9c29a9025d7f59`; Git tree
+  `8b08c84e8d13d82e513034d690be057dc159722b`.
+- Product identity: 422 manifest files; manifest SHA-256
+  `7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693`; Product tree
+  `7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521`.
+- Cleanup C0–C10 is complete. The authoritative final composition is Run #60 / ID
+  `35632657133`: 17 jobs passed, including Runtime/PostgreSQL, all six integrations, Lab fast,
+  four historical replay shards, Archive, Product identity and Conformance.
+- Frozen Architecture remains version 1.0.0 and immutable. The current implementation map is
+  `10 PASS / 34 UNVERIFIED / 0 DEVIATION`; overall status remains honestly `UNVERIFIED`.
+- `docs/TECH_DEBT.md` currently records `5 FIXED / 5 NEEDS_REVALIDATION / 0 OPEN`.
+  `NEEDS_REVALIDATION` is not a defect classification and must be resolved by executable diagnosis.
+- The current coordinating contract is the
+  [post-cleanup development Goal](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
+  derived from the [post-cleanup roadmap](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_ROADMAP_v1.0_20260922.md).
+  Product/Lab status reconciliation is complete; the next work package is bounded worker `--once`
+  revalidation. No research experiment is automatically resumed.
+- Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
+  candidate; docs-only and Lab-only changes use the classified fast path.
+- Product/Lab/Archive boundaries are stable. The current work is behavioral closure and evidence,
+  not another repository reorganization or file-size-driven refactor.
 
 The sections below are historical status and experiment records. Their dates, pinned commits and
 results are immutable evidence; they are not claims about the current HEAD unless explicitly stated

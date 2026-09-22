@@ -1,11 +1,37 @@
 # MiLAi Product Goals
 
-> Document: `MILA-PRODUCT-GOALS@3.33`
-> Status: `V02_18_TESTBED_AND_INNOVATION_STUDY_PLANNED_A0_UNCHANGED`
+> Document: `MILA-PRODUCT-GOALS@3.34`
+> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A0_COMPLETE_NEXT_3A1`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
-## Next research plan: V02-18 testbed and innovation judgment; no Product change
+## Current governing Goal: post-cleanup behavioral closure and measured research
+
+The current cross-bundle execution contract is
+[`MILAI-POST-CLEANUP-DEVELOPMENT-01`](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
+based on the [post-cleanup roadmap](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_ROADMAP_v1.0_20260922.md).
+It starts from repository `main=dfeb359d2301b99c0125d9e54e9c29a9025d7f59`, Product tree
+`7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521`, cleanup C0–C10
+complete, Conformance `10 PASS / 34 UNVERIFIED / 0 DEVIATION`, and TECH_DEBT
+`5 FIXED / 5 NEEDS_REVALIDATION / 0 OPEN`.
+
+The execution order is diagnosis-first:
+
+```text
+status reconciliation
+→ worker --once / Host continuity / resolver revalidation
+→ Trace Ownership and Memory Opportunity Ledger
+→ Lab-only Utility / Revision / Attention research
+→ conditional transfer
+→ Product promotion or an equally valid no-promotion terminal
+```
+
+Product remains the reliable substrate. No Lab policy enters the Product default path without a
+matched mechanism signal, independent confirmation, architecture review, ADR and minimal behavior
+PR. No model or experiment allocation follows from this status update, and paused historical work
+does not automatically resume.
+
+## Historical plan snapshot: V02-18 testbed and innovation judgment
 
 [Lab-owned Goal v0.2](../../MiLAi-Lab/studies/active/MILA_V0218_行为真值测试床建设_GOAL_20260910.md)
 now includes T0–T5 construction and E0–E5 experiments within one Goal. World/observable-evidence
