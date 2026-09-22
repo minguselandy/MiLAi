@@ -24,6 +24,31 @@ from milai.domain.retrieval_audit import canonical_sha256
 from milai.testkit.runtime_owner_trace import RuntimeOwnerTraceObserver
 
 
+def _reader_gate(body: Mapping[str, Any], http_status: int) -> str:
+    """Project the Runtime's released informational Context, never typed authority.
+
+    Unsupported shapes stay UNKNOWN. This is an observation of the existing
+    response, not a new admission decision and never an input to execution.
+    """
+    if http_status >= 400 or body.get("availability") == "UNAVAILABLE":
+        return "ERROR"
+    issues = body.get("open_issue_ids")
+    if body.get("status") in {"DENIED", "CONTESTED"} or (isinstance(issues, list) and issues):
+        return "BLOCKED"
+    context = body.get("memory_context")
+    if not isinstance(context, Mapping):
+        return "UNKNOWN"
+    selected = context.get("selected_evidence_ids")
+    if selected == [] and body.get("status") in {"ABSENT", "ABSTAINED"}:
+        return "ABSTAIN"
+    if (body.get("reader_evidence_boundary") == "GOVERNANCE_ADMITTED_SOFT_RANKED"
+            and body.get("status") in {"HIT", "PARTIAL", "ABSTAINED"}
+            and body.get("availability") in {"AVAILABLE", "DEGRADED"}
+            and issues == [] and isinstance(selected, list) and selected):
+        return "ADMITTED"
+    return "UNKNOWN"
+
+
 class _RequestObserver:
     def __init__(self) -> None:
         self.current: ContextVar[RuntimeOwnerTraceObserver | None] = ContextVar(
@@ -95,6 +120,7 @@ class ObservedRuntime:
                 "schema_version": "milai-runtime-http-owner-v1",
                 "request_ref": "runtime-request:" + canonical_sha256(g.request_id),
                 "http_status": response.status_code,
+                "reader_gate": _reader_gate(body, response.status_code),
                 "receipt_reused": body.get("receipt_reused") is True,
                 "owner_trace": None,
                 "observation_gap": None,

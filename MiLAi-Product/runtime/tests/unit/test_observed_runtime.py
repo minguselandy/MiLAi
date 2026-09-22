@@ -9,6 +9,25 @@ from flask import Flask, g
 from milai.testkit import observed_runtime
 
 
+@pytest.mark.parametrize("status,availability,issues,selected,expected", [
+    ("HIT", "AVAILABLE", [], ["e1"], "ADMITTED"),
+    ("PARTIAL", "DEGRADED", [], ["e1"], "ADMITTED"),
+    ("ABSENT", "AVAILABLE", [], [], "ABSTAIN"),
+    ("DENIED", "AVAILABLE", [], ["e1"], "BLOCKED"),
+    ("HIT", "AVAILABLE", ["issue"], ["e1"], "BLOCKED"),
+    ("HIT", "UNAVAILABLE", [], ["e1"], "ERROR"),
+    ("OTHER", "AVAILABLE", [], ["e1"], "UNKNOWN"),
+])
+def test_reader_gate_is_a_fail_closed_projection_not_typed_completion(
+    status: str, availability: str, issues: list[str], selected: list[str], expected: str,
+) -> None:
+    body = {"status": status, "availability": availability, "open_issue_ids": issues,
+            "reader_evidence_boundary": "GOVERNANCE_ADMITTED_SOFT_RANKED",
+            "memory_context": {"selected_evidence_ids": selected}}
+    assert observed_runtime._reader_gate(body, 200) == expected
+    assert observed_runtime._reader_gate(body, 503) == "ERROR"
+
+
 @pytest.mark.parametrize("error", [
     RuntimeError("OWNER_TRACE_EXECUTION_NOT_OBSERVED"),
     RuntimeError("OWNER_TRACE_PRIVATE secret"), ValueError("private body"),
