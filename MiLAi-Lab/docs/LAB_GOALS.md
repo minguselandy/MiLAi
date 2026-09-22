@@ -1,5 +1,35 @@
 # MiLAi Lab goals
 
+## Current coordinating Goal
+
+The cross-bundle mainline is
+[`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).
+`3A-0 Status Reconciliation` is submitted as PR #27 but still awaits remote closure. Development is
+paused for GPT-6 handoff; `3A-1 Worker --once Revalidation` has not started. The Goal closes Product
+behavioral evidence and Trace Ownership before requiring a real Memory Opportunity Ledger; new
+Utility, Revision, Attention or policy-adaptation effect work is not yet admitted.
+
+This coordination update allocates zero model requests, does not resume any old worker or batch,
+does not reopen a protected/frozen pool, and does not replace historical Goal states. A future Lab
+work package must bind a run-specific Product lock, finite budget, opportunity denominator, arm
+difference, cost/safety metrics and stop condition before any model call.
+
+The current interpretation is:
+
+```text
+Evidence/Utility: implementation in progress at the last execution snapshot; benefit unproven
+ReasoningBank: historical/partially executed; no automatic resume
+Adaptive Memory v0.1: engineering complete; special-policy benefit unestablished
+Product promotion: not admitted
+Second solver: deferred and not allocated
+```
+
+## 2026-09-16 Evidence/Utility Goal snapshot
+
+The Goal document below declared `PLANNED_NOT_STARTED` when written. Subsequent execution evidence
+recorded in `LAB_CURRENT_STATUS.md` moved the implementation to `IMPLEMENTATION_IN_PROGRESS`; the
+original status remains a historical document state, not the current coordination state.
+
 Latest proposed improvement: [Evidence- and utility-driven selection, revision and transfer Goal](../studies/active/MILA_EVIDENCE_AND_UTILITY_DRIVEN_IMPROVEMENT_GOAL_v1.0_20260916.md).
 `MILA-EVIDENCE-UTILITY-IMPROVEMENT-01 / v1.1 / PLANNED_NOT_STARTED / SINGLE_SOLVER`.
 Complete the functional selection/revision/reuse chain and the MemRL reference before optimizing;

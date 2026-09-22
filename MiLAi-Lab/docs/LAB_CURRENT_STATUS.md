@@ -1,6 +1,38 @@
 # MiLAi Lab current status
 
-Current Goal: **EVIDENCE_UTILITY_IMPROVEMENT / IMPLEMENTATION_IN_PROGRESS / SINGLE_SOLVER**.
+> As of: 2026-09-22
+> Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
+> Current execution: `PAUSED_FOR_GPT6_HANDOFF / PR_27_PENDING / 3A-1_NOT_STARTED`
+> New experiment allocations: `0`
+> New model requests: `0`
+
+## Current coordinated mainline
+
+The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md)
+is now the cross-bundle coordination contract. Its immediate work is Product behavioral closure and
+measurement foundations; it does not resume a Lab experiment merely because historical code, frozen
+inputs or incomplete work exist.
+
+Current interpretation of the active research record:
+
+- Evidence/Utility is `IMPLEMENTATION_IN_PROGRESS / UNPROVEN` at its latest recorded execution
+  snapshot. Functional paths and DEV observations exist, but no matched benefit, independent
+  confirmation or Product-promotion claim is established.
+- ReasoningBank and the v0.6 optimization study are historical, partially executed records. Their
+  paused or unstarted jobs have no automatic resume authority under the new Goal.
+- Adaptive Memory v0.1 is engineering-complete for its recorded scope; special-policy benefit and
+  transfer remain unestablished. Its closed allocations stay closed.
+- The repository-level `product.lock.json` is a historical pin. Every new Product-backed effect run
+  must create and verify a run-specific lock against the selected Product baseline.
+- Product behavior remains unchanged. Lab owns experimental Utility, Revision, Attention, policy
+  adaptation and transfer until the explicit Product Promotion Gate is satisfied.
+
+The sections below retain dated execution snapshots and historical evidence. Terms such as
+“current” inside those snapshots describe their recorded date, not authorization to resume them.
+
+## 2026-09-16 Evidence/Utility execution snapshot
+
+Snapshot Goal: **EVIDENCE_UTILITY_IMPROVEMENT / IMPLEMENTATION_IN_PROGRESS / SINGLE_SOLVER**.
 [Goal](../studies/active/MILA_EVIDENCE_AND_UTILITY_DRIVEN_IMPROVEMENT_GOAL_v1.0_20260916.md),
 [problems/results](../studies/active/MILA_EVIDENCE_UTILITY_RESULTS_20260916.md),
 [stage report](../studies/active/MILA_EVIDENCE_UTILITY_EXPERIMENT_REPORT_20260916.md),
