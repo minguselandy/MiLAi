@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3B-2_MEMORY_OPPORTUNITY_LEDGER
-next_work_package: 3C_FINITE_RESEARCH_PREFLIGHT_REQUIRES_AUTHORITY
+current_work_package: 3C_FINITE_RESEARCH_PREFLIGHT_REQUIRES_AUTHORITY
+next_work_package: 3C-1_UTILITY_SELECTION_PENDING_FINITE_AUTHORITY
 new_experiment_allocations: 0
 new_model_requests: 0
 ---
@@ -228,7 +228,7 @@ NEEDS_REVALIDATION
 | 3A-2R | Host Continuity remediation | Product | conditional | PASS — PR #36 / full #63 / main identity verified | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | FAIL_REMEDIATION_REQUIRED — PR #37 / main identity verified; 17 PASS / 13 FAIL retained | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | FAIL_REMEDIATION_REQUIRED — partial repair merged PR #38/full #64; C06/C21 remain OPEN, not full closure | 3A-3D FAIL |
-| 3B-2 | Memory Opportunity Ledger | Lab | no | IN_PROGRESS — offline matrix and real pre-outcome ledger proof PASS; exact-head CI/remote closure pending | 3B-1 PASS |
+| 3B-2 | Memory Opportunity Ledger | Lab | no | PASS — PR #39 / exact-head fast / identical-tree merge / main identity verified; scoped accounting, not mechanism benefit | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | PENDING | 3B-2 real-run proof |
 | 3C-2 | Evidence-grounded Revision | Lab | no | PENDING | 3B-2 + lineage |
 | 3C-3 | State-guided Attention | Lab | no | PENDING | 3B-2 + frozen state |
@@ -840,6 +840,29 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Opportunity Ledger closed; research execution remains unallocated
+
+- PR #39 exact head `e72c2370d915ff3db2d2f483a479331b1eccca94`; classified fast
+  `35717333297` PASS. Lab package CI: 4,657 PASS / 137 SKIP / 4 DESELECTED,
+  with static/build and archive integrity PASS. Product Runtime/integration suites
+  and full composition were not repeated; no job restart or extra model request.
+- Expected-head squash merge `53e13c47c72a3f49f4cd66007320083babdc07be`; tested and
+  merged tree `897f16db73433f212a98ab4fc9e992c6477d0c13` match. Local main equals
+  origin/main; main fast `35718296416` PASS. Only the separately prepared, untracked
+  zero-model preflight draft existed during this sync; no unknown changes overwritten.
+- 3B-2 is PASS for its declared engineering scope: versioned ownership, validated
+  joins, the offline minimum matrix, actual pre-outcome capture, deterministic real
+  ledger replay and pinned method/Product identities. The real run's zero selection
+  opportunities and unknown task outcomes/use are not research negative results.
+- [3C preflight](../../../MiLAi-Lab/docs/POST_CLEANUP_RESEARCH_PREFLIGHT.md) records
+  the next question, matched-arm constraints, legacy integration gaps and missing
+  execution choices. Input scope, model/profile and finite request/token/time ceilings
+  are not authorized by old manifests or a generic continuation. User input requested;
+  no model/embedding/Provider/Judge call, shared-service change or historical resume.
+- No Phase 3C mechanism outcome or overall Goal completion is claimed. Existing
+  Resolver C06/C21 remain explained OPEN debt. Original proof snapshots are preserved;
+  this journal supplies later remote closure without rewriting historical receipts.
 
 ## 2026-09-22 — Opportunity Ledger local proof, real capture and explicit limits
 

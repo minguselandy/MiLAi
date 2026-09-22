@@ -1,7 +1,7 @@
 # Memory Opportunity Ledger v1
 
-Status: implementation, offline matrix and real bounded-run proof PASS locally;
-exact-head CI and remote closure pending.
+Status: 3B-2 PASS for the declared engineering/accounting scope; PR #39 merged,
+exact-head CI, candidate/merge tree and main identity verified.
 Work package: `MILAI-POST-CLEANUP-DEVELOPMENT-01 / 3B-2`. Lab-only accounting,
 not Product routing, a research allocation or a mechanism-benefit claim.
 
@@ -159,3 +159,18 @@ public/shared services and Product executable source were unchanged.
 Reproduction uses the existing trace-probe command with the exact source commit
 above plus `--canonical-cache --opportunity-ledger`, fresh output and isolated role
 URLs. Do not reuse a historical random port without inspecting the container.
+
+## Remote closure
+
+PR #39 tested head `e72c2370d915ff3db2d2f483a479331b1eccca94`; fast workflow
+`35717333297` PASS. Classified Lab verification: 4,657 PASS / 137 SKIP / 4 DESELECTED,
+461.49 seconds, plus package static/build and archive integrity checks. Skips concern
+optional SDK/external historical inputs, not the 107 targeted accounting tests.
+Product Runtime/integration suites and full composition were not run.
+
+Expected-head squash merge `53e13c47c72a3f49f4cd66007320083babdc07be` has the same
+tree `897f16db73433f212a98ab4fc9e992c6477d0c13` as the tested candidate. Local main
+was fast-forwarded to origin/main; main identity fast `35718296416` PASS. The compact
+proof manifest remains the immutable local-run snapshot; this section supplies the
+later delivery closure. Phase 3C is subject to the
+[unallocated research preflight](POST_CLEANUP_RESEARCH_PREFLIGHT.md), not automatically started.

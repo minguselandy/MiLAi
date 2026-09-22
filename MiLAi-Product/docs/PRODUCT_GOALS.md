@@ -1,7 +1,7 @@
 # MiLAi Product Goals
 
-> Document: `MILA-PRODUCT-GOALS@3.39`
-> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3B2_OPPORTUNITY_LEDGER`
+> Document: `MILA-PRODUCT-GOALS@3.40`
+> Status: `POST_CLEANUP_DEVELOPMENT_3B2_PASS_3C_PREFLIGHT_UNALLOCATED`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
@@ -25,10 +25,13 @@ tree identity and main fast `35688919530` passed. The separate
 [partial repair](revalidation/resolver-language/REMEDIATION.md)
 now reaches 28/30 on the same corpus; two unmet semantic expectations and strict XFAIL
 remain. Client 64 PASS/2 XFAIL, Runtime 49 PASS; PR #38/full #64 all 17 jobs, identical-tree
-merge `8c0c526` and main fast `35713661491` passed. Active work is independent Lab
-3B-2 Opportunity Ledger, whose entry gate is 3B-1 PASS, not a false resolver closure.
+merge `8c0c526` and main fast `35713661491` passed. Independent Lab 3B-2 Opportunity
+Ledger closed through PR #39 at `53e13c4`, exact-head fast `35717333297`, identical
+candidate/merge trees and main fast `35718296416`. Its 10-attempt real fixture ledger
+and 107 targeted tests are engineering proof, not a false resolver or research closure.
 Debt remains OPEN, not FIXED; no case terms, translation dictionary or model controller added.
-Research stays unallocated.
+The [3C preflight](../../MiLAi-Lab/docs/POST_CLEANUP_RESEARCH_PREFLIGHT.md) records
+the missing finite execution authority; research stays unallocated.
 
 The current cross-bundle execution contract is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),

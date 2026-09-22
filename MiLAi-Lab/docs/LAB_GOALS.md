@@ -16,8 +16,10 @@ Frozen primary collection is 17 PASS/13 FAIL; debt is OPEN with strict diagnosti
 assertions retained. Separate 3A-3R has a [partial repair](../../MiLAi-Product/docs/revalidation/resolver-language/REMEDIATION.md):
 28/30 on the same corpus, two semantic gaps retained OPEN. PR #38/full #64 (17 jobs),
 identical-tree merge `8c0c526` and main fast `35713661491` close partial delivery, not
-full language capability. Active work is 3B-2 Opportunity Ledger, independently
-admitted by 3B-1 PASS; its real ledger run now passes locally, separate from offline proof.
+full language capability. Independent 3B-2 Opportunity Ledger is now PASS through
+PR #39 at `53e13c4`, exact-head fast `35717333297`, identical-tree merge and main
+fast `35718296416`. The [next preflight](POST_CLEANUP_RESEARCH_PREFLIGHT.md) is
+unallocated; required input/model/budget decisions are not inferred from old studies.
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).
@@ -35,7 +37,8 @@ model. The subsequent Claim/cache probe adds ten attempts and five actual reuse 
 Remote 3B-1 closure passed. The [Opportunity Ledger](MEMORY_OPPORTUNITY_LEDGER.md)
 now has a Lab-only implementation, 107 targeted tests and a pre-outcome capture path;
 one real bounded run now generates a reproducible ledger (10 attempts / 9 fixture
-calls, zero model use). Exact-head CI and 3B-2 remote closure remain pending.
+calls, zero model use). Remote closure passed; this is accounting proof, not a
+Utility/Revision/Attention effect experiment. No model execution is admitted yet.
 
 This coordination update allocates zero model requests, does not resume any old worker or batch,
 does not reopen a protected/frozen pool, and does not replace historical Goal states. A future Lab
