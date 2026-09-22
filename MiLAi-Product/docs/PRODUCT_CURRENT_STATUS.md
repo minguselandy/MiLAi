@@ -22,9 +22,9 @@
 - The current coordinating contract is the
   [post-cleanup development Goal](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
   derived from the [post-cleanup roadmap](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_ROADMAP_v1.0_20260922.md).
-  Product/Lab status reconciliation is submitted as PR #27 and awaits remote closure. Development
-  is paused for GPT-6 handoff; worker `--once` revalidation has not started. No research experiment
-  is automatically resumed.
+  Product/Lab status reconciliation completed through PR #27 at main `cf149939eea9f184159ebfb6aab1a3e791988250`;
+  tested/merge tree identity and main fast run `35673403788` passed. The user resumed development;
+  worker `--once` revalidation is in progress. No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
   candidate; docs-only and Lab-only changes use the classified fast path.
 - Product/Lab/Archive boundaries are stable. The current work is behavioral closure and evidence,

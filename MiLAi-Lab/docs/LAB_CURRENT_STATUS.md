@@ -2,7 +2,7 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `PAUSED_FOR_GPT6_HANDOFF / PR_27_PENDING / 3A-1_NOT_STARTED`
+> Current execution: `ACTIVE / 3A-0_PASS / 3A-1_IN_PROGRESS`
 > New experiment allocations: `0`
 > New model requests: `0`
 
@@ -12,6 +12,10 @@ The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_C
 is now the cross-bundle coordination contract. Its immediate work is Product behavioral closure and
 measurement foundations; it does not resume a Lab experiment merely because historical code, frozen
 inputs or incomplete work exist.
+
+The user resumed this Goal. PR #27 is merged at `cf149939eea9f184159ebfb6aab1a3e791988250`;
+exact-head CI, candidate/merge tree identity and main fast run `35673403788` passed.
+The active work package is Product worker `--once` revalidation; historical research remains paused.
 
 Current interpretation of the active research record:
 
