@@ -106,6 +106,11 @@ In particular, the current Host query-first/prefetch attempt ID is payload-deriv
 provider trace base has a logical request ID but lacks an explicit attempt join field. Identical
 retry payloads therefore cannot be assumed to have fresh attempt identity from those bytes alone.
 
+The explicit [Host owner testkit](host-trace-testkit.md) now supplies fresh observational
+attempt identity and actual transport-call association without changing those legacy bytes or
+the default Adapter. Its Product-owned synthetic-transport tests do not yet prove Runtime
+decision/version provenance or complete the end-to-end Lab join.
+
 Before 3B-1 PASS: implement/verify narrowly scoped public read-only producer exports, bind
 actual Runtime/Host/Provider facts for the six terminal cases, prove observation neutrality and
 cache-origin semantics, and close the Product debt with Product-owned executable evidence.

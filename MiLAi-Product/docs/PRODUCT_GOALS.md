@@ -40,6 +40,11 @@ main `755cdfc947f34efa03cc0bb1eed682233767b061` after PR #29's docs-only CI opti
 The [offline ownership candidate](reference/trace-ownership-v1.md) does not yet close live
 producer provenance or the trace ownership debt.
 
+The follow-up [explicit Host owner testkit](reference/host-trace-testkit.md) has 28 targeted
+Product tests passed and awaits remote closure. Its added source changes Product identity;
+the fresh Conformance map is `9 PASS / 35 UNVERIFIED / 0 DEVIATION`, with prior receipts
+retained as historical evidence. No default Product behavior or research budget changes.
+
 ## Historical plan snapshot: V02-18 testbed and innovation judgment
 
 [Lab-owned Goal v0.2](../../MiLAi-Lab/studies/active/MILA_V0218_行为真值测试床建设_GOAL_20260910.md)

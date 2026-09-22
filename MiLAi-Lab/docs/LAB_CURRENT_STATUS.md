@@ -19,6 +19,9 @@ Worker `--once` revalidation completed through PR #28; main fast `35674495200` p
 The active package is [Trace Ownership v1](../../MiLAi-Product/docs/reference/trace-ownership-v1.md),
 starting with a content-free offline joiner. Synthetic contract tests are not real-run evidence;
 live owner exports and trace-debt closure remain pending. Historical research remains paused.
+PR #30's offline slice is merged (main fast `35676214359` PASS). An explicitly imported
+[Host producer testkit](../../MiLAi-Product/docs/reference/host-trace-testkit.md) is the next
+candidate; its synthetic-transport tests do not establish a live Product-backed effect run.
 
 Current interpretation of the active research record:
 

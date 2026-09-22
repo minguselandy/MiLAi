@@ -6,8 +6,8 @@
 ## Result
 
 - Current implementation status: `UNVERIFIED`
-- Product source commit: `4b76405f3e3e73ed85713161eb9465e7bbf5cc82`
-- Verified at: `2026-09-22T00:57:26+00:00`
+- Product source commit: `652d2a2ef4637b11b4d0a4592a25712aa7a93b3a`
+- Verified at: `2026-09-22T01:43:03+00:00`
 - Architecture: `1.0.0`
 - Migration heads: `0027_embedding_identity, 0045_dg18_adjacency, 0056_host_notes`
 
@@ -18,8 +18,8 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Field | Value |
 | --- | --- |
 | Product version | `0.1.0-candidate` |
-| Product manifest SHA-256 | `7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693` |
-| Product tree SHA-256 | `7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521` |
+| Product manifest SHA-256 | `68a89e8fd3110cf545fa5d9c9f0e631f8b7195558868ec3aba2bb2eafed07f66` |
+| Product tree SHA-256 | `5d7a5b4d0b79b9ef6555ad8eac8f1c9cecbdf1545e12ab2ef4c5bc455205e272` |
 | Architecture manifest SHA-256 | `ac16f3b7f9413a7b2d8373b6e7d306697df0bc7908572bb3b0344260d8a55d0e` |
 | Runtime / Client / MCP / OpenWorker | `0.1.5` / `0.1.4` / `0.1.15` / `0.1.0` |
 
@@ -28,11 +28,11 @@ The current receipt is not an `ARCHITECTURE_CONFORMANT`, `RELEASE_CANDIDATE`, or
 | Category | PASS | NOT_APPLICABLE | DEVIATION | UNVERIFIED |
 | --- | ---: | ---: | ---: | ---: |
 | `goals` | 0 | 0 | 0 | 9 |
-| `invariants` | 1 | 0 | 0 | 11 |
+| `invariants` | 0 | 0 | 0 | 12 |
 | `transactions` | 0 | 0 | 0 | 8 |
 | `roles` | 0 | 0 | 0 | 5 |
 | `freeze_gates` | 9 | 0 | 0 | 1 |
-| **total** | **10** | **0** | **0** | **34** |
+| **total** | **9** | **0** | **0** | **35** |
 
 The detailed G/I/TX/role/gate mapping is in [`invariant-test-map.json`](invariant-test-map.json). Each current item contains implementation evidence, mapped tests, reference-integrity status, and the separate behavioral-verification status.
 
@@ -49,9 +49,9 @@ Receipts are validated against the current Product tree and manifest. `SCOPED` c
 
 - Index: [`docs/revalidation/INDEX.md`](../revalidation/INDEX.md)
 - Validated receipt count: `14`
-- Current receipt count: `6`
-- Historical receipt count: `8`
-- Current explicit claim count: `13`
+- Current receipt count: `0`
+- Historical receipt count: `14`
+- Current explicit claim count: `0`
 - Failed diagnostic claim count: `0`
 - Preserved failed receipt count: `3`
 
