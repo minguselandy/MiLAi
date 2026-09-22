@@ -3,7 +3,7 @@
 > As of: 2026-09-23
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
 > Current execution: `ACTIVE / 3B-2_PASS / 3A-3R_PARTIAL_REPAIR_OPEN / 3C-1_KEEP_SIMPLE`
-> New experiment allocations: `1 finite batch closed / no makeup or next allocation`
+> New experiment allocations: `2 finite batches / Utility closed / joint Revision-Attention schedule frozen, execution not yet admitted`
 > New model requests: `199 generation / 400 total including auxiliary HTTP / 0 embedding / 0 rerank`
 
 ## Current coordinated mainline
@@ -78,10 +78,17 @@ journal, commits an attempt before dispatch, preserves failures/uncertain recove
 and prevents concurrent or recovered callers from repeating it. Its 63 targeted tests
 with the pure policy pass; no live retriever or model was used. This is not complete
 state production, live-run integration or benefit evidence.
-The user authorized a new finite Revision/Attention batch in principle, but did not
-yet confirm its proposed numerical/data contract. No new allocation has opened;
-Utility stays closed. Next work is that contract and joint research admission,
-not automatic execution or more unmeasured mechanism complexity.
+Capture PR #46 closed at `39dc657`: exact-head fast `35797293999`, identical
+candidate/merge tree and main fast `35798141392` PASS; Lab 4,788 PASS / 137 SKIP /
+4 DESELECTED. The user then explicitly confirmed the new numerical/data contract,
+including new revisions/state from existing visible feedback. The separate
+[joint finite allocation](REVISION_ATTENTION_FIRST_BATCH.md) now freezes all 32 pair
+positions/64 maximum arm executions, mechanism assignment and order. No new request
+has been sent. Offline review exports 39 structural windows and recovers all 24 exact
+cached query vectors, including OS 120/226/2, without model calls or own-task card/
+outcome reuse. Five preparation tests pass; semantic support, state labels and
+integrated execution admission remain pending. No further authorization confirmation
+is needed; Utility stays closed. Next is method admission and the bounded experiment.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.

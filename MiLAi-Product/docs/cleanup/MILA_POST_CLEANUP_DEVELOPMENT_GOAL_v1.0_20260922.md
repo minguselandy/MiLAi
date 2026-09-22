@@ -14,9 +14,9 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3C-3_ATTENTION_EXPANSION_CAPTURE
-next_work_package: 3C_RESEARCH_ADMISSION_DECISION
-new_experiment_allocations: 1
+current_work_package: 3C_JOINT_ALLOCATION_AND_INPUTS
+next_work_package: 3C_JOINT_METHOD_ADMISSION
+new_experiment_allocations: 2
 new_model_requests: 199
 ---
 
@@ -230,7 +230,7 @@ NEEDS_REVALIDATION
 | 3A-3R | Resolver remediation | Product | conditional | FAIL_REMEDIATION_REQUIRED — partial repair merged PR #38/full #64; C06/C21 remain OPEN, not full closure | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PASS — PR #39 / exact-head fast / identical-tree merge / main identity verified; scoped accounting, not mechanism benefit | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | KEEP_SIMPLE — PR #42 / main identity verified; benefit not established | 3B-2 real-run proof |
-| 3C-2 | Evidence-grounded Revision | Lab | no | IN_PROGRESS — zero-model eligibility bridge; no real correction denominator/effect terminal or new model allocation | 3B-2 + lineage |
+| 3C-2 | Evidence-grounded Revision | Lab | no | IN_PROGRESS — eligibility bridge; joint finite allocation confirmed/frozen, method admission pending; no real effect terminal | 3B-2 + lineage |
 | 3C-3 | State-guided Attention | Lab | no | IN_PROGRESS — zero-model three-mode policy and durable expansion capture; live integration/cost-quality comparison/effect terminal absent | 3B-2 + frozen state |
 | 3C-4 | RL-like adaptation | Lab | no | NOT_ADMITTED | prior mechanism acts |
 | 3D-1 | Frozen-bank transfer | Lab | no | NOT_ADMITTED | repeatable DEV signal |
@@ -840,6 +840,36 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-23 — Joint finite contract confirmed; schedule and review inputs frozen
+
+- PR #46 closed at `39dc657a5967c0586355b6bea23c56e9a1812ee3`; exact-head fast
+  `35797293999` and main fast `35798141392` PASS. Tested/merge tree
+  `a460a353c2987fb3963b38f7b6627b01ebf7de9b` matched. Lab 4,788 PASS / 137 SKIP /
+  4 DESELECTED; this is the new allocation preparation's base/rollback.
+- User explicitly confirmed the complete new finite contract and repeated the
+  data/formation/model confirmation. Authorization is no longer the blocker.
+  [Joint batch](../../../MiLAi-Lab/docs/REVISION_ATTENTION_FIRST_BATCH.md) records
+  existing exposed DB/OS DEV/VALID only, permission to form new revisions/state
+  from visible feedback, same Qwen/M1/bge-m3, no rerank, 400 text/128 embedding/
+  528 total requests, 3,000,000/50,000 tokens, four hours from first new request,
+  failures/retries/maintenance counted and unknown usage charged at its upper bound.
+- New allocation SHA `02d316916799358ca39e37559037400919b5abb5228f56e769dc3799b5117576`
+  freezes 24 independent + eight repeated pairs, 64 maximum arm executions shared
+  by both mechanisms. First six positions/domain go to Revision, remaining six to
+  Attention; interleaved mechanism order and reversed fixed repeats are explicit.
+  No result-based replacement, protected pool access or reopening Utility.
+- Private preparation pins 39 old-card/later-visible-feedback windows and all 24
+  cached query vectors across 76 source files. The three previously missing standalone
+  caches are recovered from exact query records under matching encoding/instruction
+  identity, without importing own-task cards/results or adding a candidate bank.
+  Structural windows are not supported corrections or independent sample counts.
+- Five narrow preparation tests and changed-file Ruff PASS. New external requests 0;
+  no new budget ledger or timer started. Counter 199 remains historical Utility
+  generations; allocation count becomes two, not another grant per mechanism.
+  Next is semantic review, complete method/input/stop-rule freeze and minimal runner
+  integration before the first new request. Overall effect/promotion/closure remain
+  incomplete; Product behavior and Schema NO-GO unchanged.
 
 ## 2026-09-23 — Durable Attention expansion capture; finite contract pending
 
