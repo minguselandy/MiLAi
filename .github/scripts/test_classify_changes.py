@@ -51,6 +51,43 @@ class ChangeClassifierTest(unittest.TestCase):
         self.assertTrue(all(result[name] is True for name in MODULE.CLASSIFICATIONS))
         self.assertEqual(result["integration_count"], 6)
 
+    def test_lab_status_docs_only_do_not_select_package_tests(self) -> None:
+        result = classify([
+            "MiLAi-Lab/docs/LAB_CURRENT_STATUS.md",
+            "MiLAi-Lab/docs/LAB_GOALS.md",
+            "MiLAi-Product/docs/PRODUCT_CURRENT_STATUS.md",
+        ])
+        self.assertFalse(any(result[name] for name in MODULE.CLASSIFICATIONS))
+        self.assertFalse(result["full_required"])
+        self.assertEqual(len(result["changed_paths"]), 3)
+
+    def test_lab_docs_do_not_suppress_any_behavior_bearing_path(self) -> None:
+        for path in (
+            "MiLAi-Lab/src/milai_lab/example.py",
+            "MiLAi-Lab/tests/test_example.py",
+            "MiLAi-Lab/tools/example.py",
+            "MiLAi-Lab/configs/prompt.md",
+            "MiLAi-Lab/docs/contract.json",
+            "MiLAi-Lab/docs/check.py",
+            "MiLAi-Lab/pyproject.toml",
+            "MiLAi-Lab/uv.lock",
+        ):
+            with self.subTest(path=path):
+                result = classify(["MiLAi-Lab/docs/LAB_GOALS.md", path])
+                self.assertTrue(result["lab"])
+
+    def test_lab_docs_do_not_expand_runtime_scope_or_disable_explicit_full(self) -> None:
+        paths = [
+            "MiLAi-Lab/docs/LAB_CURRENT_STATUS.md",
+            "MiLAi-Product/runtime/tests/integration/test_worker_once.py",
+        ]
+        result = classify(paths)
+        self.assertTrue(result["runtime"])
+        self.assertFalse(result["lab"])
+        self.assertFalse(result["full_required"])
+        full = classify(paths, full_requested=True)
+        self.assertTrue(all(full[name] for name in MODULE.CLASSIFICATIONS))
+
 
 if __name__ == "__main__":
     unittest.main()
