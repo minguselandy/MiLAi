@@ -7,6 +7,11 @@
 
 ## Current governing Goal: post-cleanup behavioral closure and measured research
 
+Latest closure: PR #33 merged as `489ea7ca8c3756630f32da0e2c52a0940c97d74e`, main fast
+`35680800370` PASS. Local [Runtime Claim/cache owner observations](reference/trace-cache-owner.md)
+now pass exact/wrong-scope, receipt-hit and invalidation checks. The cross-layer cache join and
+trace debt closure are still pending; 3B-1 remains IN_PROGRESS, research remains unallocated.
+
 The current cross-bundle execution contract is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
 based on the [post-cleanup roadmap](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_ROADMAP_v1.0_20260922.md).

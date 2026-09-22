@@ -8,6 +8,11 @@
 
 ## Current coordinated mainline
 
+PR #33's fresh same-execution slice is merged (`489ea7c`, main fast `35680800370` PASS).
+The subsequent [Runtime Claim/cache producer evidence](../../MiLAi-Product/docs/reference/trace-cache-owner.md)
+is local only. Lab still rejects cache reuse; current-authorized invocation to prior-origin joining
+and actual cross-layer cache proof remain the next implementation work. No research budget opens.
+
 The [post-cleanup development Goal](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md)
 is now the cross-bundle coordination contract. Its immediate work is Product behavioral closure and
 measurement foundations; it does not resume a Lab experiment merely because historical code, frozen

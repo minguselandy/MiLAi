@@ -2,6 +2,11 @@
 
 ## Current coordinating Goal
 
+Next 3B-1 implementation: consume the locally verified
+[Runtime Claim/cache observations](../../MiLAi-Product/docs/reference/trace-cache-owner.md)
+without inventing fresh retrievals or acquired Evidence bodies. PR #33's fresh-only slice has
+merged; cache-origin joins and same-execution cache proof remain unfinished.
+
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).
 `3A-0 Status Reconciliation` completed through PR #27, including exact-head CI, merge-tree identity

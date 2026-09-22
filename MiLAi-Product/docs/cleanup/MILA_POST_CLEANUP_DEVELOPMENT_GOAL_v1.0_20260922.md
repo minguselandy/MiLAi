@@ -841,6 +841,24 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 
 # 16. Execution journal
 
+## 2026-09-22 — Fresh chain merged; Runtime Claim/cache observations locally verified
+
+- PR #33 exact head `d4062203eed49bb7fffa7ca3472106c21a1278a9`, fast `35680232860`
+  PASS; expected-head squash merge `489ea7ca8c3756630f32da0e2c52a0940c97d74e`.
+  Candidate/merge tree `7affaf3ac122d939513bcf406ed09c72efa13a93` matched;
+  local main fast-forwarded cleanly; main identity fast `35680800370` PASS.
+- `behavior/trace-cache-provenance` starts from that exact main. Its Runtime-only
+  [Claim/cache owner slice](../reference/trace-cache-owner.md) observes immutable
+  governed Claim records and the current receipt revalidation separately from the
+  original retrieval; support Evidence refs are not claimed as acquired bodies.
+- Source `00ff8c3a1f4a524ddbc5f7e149f64128e88b7a12`: 29 narrow tests PASS, including
+  five real PostgreSQL cases for exact/wrong-scope neutrality, actual HTTP reuse,
+  scope invalidation and governed supersession. Changed static checks passed.
+  Isolated database stopped with data retained; models/allocations 0.
+- Lab cache/Claim join, actual cross-layer cache proof and final Product debt receipt
+  remain pending. This local producer slice is not remote closure or 3B-1 PASS.
+  No full composition, historical replay, default behavior or Schema change.
+
 ## 2026-09-22 — Runtime producer merged; actual fresh cross-layer join verified
 
 - PR #32 tested head `314338a05e9b6c9f448f7c570a9b23581c91dc09`, fast `35677817059`

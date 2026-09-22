@@ -7,12 +7,14 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `6f5ecf6132e81585509d5124cab55e51cc7754f7`; Git tree
-  `84c3bdf3ac9246c16de01450795b7d3da403f04b`; main fast `35677932965` passed.
-- Same-execution observer candidate source: `717da6e74aba02e296e30ac4f037c208b753ab18`,
-  awaiting remote closure. Product identity: 425 manifest files; manifest SHA-256
-  `668dc365f1fb4cf8c6961e6fb490e1a1a6b18f47592c2c096af34b88f350f729`; Product tree
-  `90a900fef01ccca5b54cc4a558e3c530cf7a8b421f859d764761a8d6c4f75511`.
+- Reconciled repository `main`: `489ea7ca8c3756630f32da0e2c52a0940c97d74e`; Git tree
+  `7affaf3ac122d939513bcf406ed09c72efa13a93`; main fast `35680800370` passed.
+- Local Runtime Claim/cache observer source: `00ff8c3a1f4a524ddbc5f7e149f64128e88b7a12`,
+  awaiting cross-layer implementation and remote closure. Product identity: 425 manifest files;
+  manifest SHA `a69d35c60ebfae072a86ef418af4be170c91f365c30a75caf5b11ff70a3ebe23`;
+  Product tree `fb1493ec85bada22c39fa90a83cb00e9839f1d76e188aead53dead5b07ab22f1`.
+  [Local evidence](reference/trace-cache-owner.md): 29 narrow tests, including five real PG cases.
+  Actual Runtime receipt reuse and invalidation are observed; Host/MCP/Lab cache join is pending.
 - Cleanup C0–C10 is complete. The authoritative final composition is Run #60 / ID
   `35632657133`: 17 jobs passed, including Runtime/PostgreSQL, all six integrations, Lab fast,
   four historical replay shards, Archive, Product identity and Conformance.
@@ -34,7 +36,7 @@
   Active work is [Trace Ownership v1](reference/trace-ownership-v1.md): offline contract/join
   implementation merged in PR #30. The [Host producer testkit](reference/host-trace-testkit.md)
   merged in PR #31; the Runtime producer merged in PR #32. The new
-  [same-execution candidate](reference/trace-ownership-chain.md) joins eight actual
+  [same-execution slice](reference/trace-ownership-chain.md), merged in PR #33, joins eight actual
   Host/MCP/HTTP/PostgreSQL attempts with a controlled in-process Provider fixture.
   Exact fresh-retrieval/version/Context provenance and failure dispatch states are covered;
   cache-origin, other supported version paths and final debt closure remain pending.
