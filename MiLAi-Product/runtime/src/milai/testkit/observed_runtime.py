@@ -107,7 +107,10 @@ class ObservedRuntime:
                     else None
                 ),
                 "outcome_status": body.get("status") if body.get("status") in {
-                    "COMPLETE", "PARTIAL", "ABSTAINED", "DENIED", "UNAVAILABLE",
+                    "HIT", "ABSENT", "PARTIAL", "ABSTAINED", "DENIED", "UNAVAILABLE", "CONTESTED",
+                } else None,
+                "availability": body.get("availability") if body.get("availability") in {
+                    "AVAILABLE", "DEGRADED", "UNAVAILABLE",
                 } else None,
                 "reader_evidence_boundary": body.get("reader_evidence_boundary")
                 if body.get("reader_evidence_boundary") in {

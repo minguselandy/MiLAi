@@ -19,7 +19,7 @@
       "file_count": 7,
       "interface_id": "context-testkit-v0.1",
       "path": "runtime/src/milai/testkit",
-      "sha256": "82651e50a3bacf7f3b8587371c7708d3cd62047e25711ccd46f1d865555c4d8f"
+      "sha256": "52dff8c14d1146b53700a30c3f2830f56149a23b14f97c4e13c563ebef5dca0c"
     },
     {
       "file_count": 7,
@@ -55,7 +55,7 @@
       "file_count": 7,
       "interface_id": "retrieval-trace-testkit-v0.1",
       "path": "runtime/src/milai/testkit",
-      "sha256": "82651e50a3bacf7f3b8587371c7708d3cd62047e25711ccd46f1d865555c4d8f"
+      "sha256": "52dff8c14d1146b53700a30c3f2830f56149a23b14f97c4e13c563ebef5dca0c"
     }
   ],
   "schema_version": "milai-product-manifest-v1",
@@ -90,5 +90,5 @@
     "integrations/autogen/uv.lock",
     "integrations/autogen/src"
   ],
-  "tree_sha256": "4d7017ad63b323166da5f6dcd3b9a631e0772a456f1b46d39c27186baf17ab32"
+  "tree_sha256": "8dadc9f2b46df9d5e2b3124e13d9f033bcf9cd2ec51c6913fe7cdd8e4d4794ce"
 }
