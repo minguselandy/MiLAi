@@ -7,8 +7,9 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `8c0c526487fda508560c3d340e95d59b1ec3db6e`; Git tree
-  `7be3a26554d61a56ad3824581caef88e67d40ad5`; main fast `35713661491` passed.
+- Reconciled feature-delivery `main`: `53e13c47c72a3f49f4cd66007320083babdc07be`; Git tree
+  `897f16db73433f212a98ab4fc9e992c6477d0c13`; main fast `35718296416` passed.
+  PR #39 adds Lab-only Opportunity Ledger accounting; Product executable identity is unchanged.
 - Merged 3A-3R source proof: `9b4aa1670dc75dfc2149baeb75719f017267e92a`, 425 files,
   Product tree `847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311`,
   manifest SHA `016df6085fc29d9c201c3f22739397e4f82af128152020318bc2ce4647814096`.
@@ -63,9 +64,12 @@
   behavior change. PR #37/main fast `35688919530` close the diagnosis with identical
   candidate/merge trees. Original failures and strict XFAIL assertions remain.
   Partial 3A-3R delivery closed in PR #38, while two corpus expectations remain
-  unsatisfied and debt stays OPEN. Active work is independent 3B-2 Memory Opportunity
-  Ledger in Lab, admitted by 3B-1 PASS; it does not bypass or close these language gaps.
-  This is not real model use or a mechanism-effect claim.
+  unsatisfied and debt stays OPEN. Independent 3B-2 Memory Opportunity Ledger closed
+  in PR #39: 107 targeted tests and one actual bounded 10-attempt fixture ledger,
+  followed by classified Lab fast, identical-tree merge and main identity PASS.
+  It does not bypass or close the language gaps, or claim model use/mechanism benefit.
+  The [next research preflight](../../MiLAi-Lab/docs/POST_CLEANUP_RESEARCH_PREFLIGHT.md)
+  remains unallocated and requires finite input/model/budget authority.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
   candidate; docs-only and Lab-only changes use the classified fast path.

@@ -2,7 +2,7 @@
 
 > As of: 2026-09-22
 > Coordinating Goal: `MILAI-POST-CLEANUP-DEVELOPMENT-01`
-> Current execution: `ACTIVE / 3B-1_PASS / 3A-3R_PARTIAL_REPAIR_OPEN / 3B-2_IN_PROGRESS`
+> Current execution: `ACTIVE / 3B-2_PASS / 3A-3R_PARTIAL_REPAIR_OPEN / 3C_PREFLIGHT_UNALLOCATED`
 > New experiment allocations: `0`
 > New model requests: `0`
 
@@ -12,7 +12,7 @@ PR #34 is merged (`9474c63`, main fast `35683815988` PASS), closing scoped 3B-1.
 The [trace receipt](../../MiLAi-Product/docs/revalidation/trace-ownership/REVALIDATION.md)
 covers v2 joins of current authorized cache invocations to observed fresh origins, with
 18 real Host attempts, 47 Product tests and 76 Lab tests passed. Trace debt is FIXED;
-active work is Lab Memory Opportunity Ledger. No model research budget opens.
+the subsequent Lab Memory Opportunity Ledger is also closed. No model research budget opens.
 The [local Host result](../../MiLAi-Product/docs/revalidation/host-continuity/REVALIDATION.md)
 finds retired-instance replay OPEN, while real restart/cache-miss reacquisition passes.
 Diagnosis PR #35 is merged (`e760434`, main fast `35685136321` PASS). Separate
@@ -27,13 +27,18 @@ Separate [3A-3R partial repair](../../MiLAi-Product/docs/revalidation/resolver-l
 now has 28 PASS/2 FAIL on the unchanged corpus (client 20/2; Runtime 8/0), with
 113 adjacent/diagnostic tests PASS and 2 XFAIL. Debt stays OPEN; PR #38/full #64
 (17 jobs), identical-tree merge `8c0c526` and main fast `35713661491` passed.
-3B-2 independently enters from 3B-1 PASS; real ledger proof passes locally,
-with exact-head CI and remote closure still pending.
+3B-2 independently entered from 3B-1 PASS and is now PASS: PR #39 merged at
+`53e13c4`, tested-head fast `35717333297`, identical-tree merge and main fast
+`35718296416` passed. Classified Lab CI has 4,657 PASS / 137 SKIP / 4 DESELECTED;
+Product suites/full composition were not repeated.
 The [ledger contract](MEMORY_OPPORTUNITY_LEDGER.md) and pre-outcome recorder are implemented;
 107 targeted tests, changed static checks, both import boundaries and CLI smoke pass.
 The separate actual run has 10 Host attempts / 9 fixture calls / 4.696 s, with
 pre-outcome snapshots and reproducible accounting; 0 model requests. Task outcomes
 and use stay UNKNOWN, with 0 selection opportunities; no mechanism benefit is claimed.
+Next is the [zero-allocation 3C preflight](POST_CLEANUP_RESEARCH_PREFLIGHT.md).
+Input scope, model/profile and finite request/token/time ceilings still need explicit
+authorization and freezing; no effect experiment or old study is resumed.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.
