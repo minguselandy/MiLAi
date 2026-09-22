@@ -841,6 +841,23 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 
 # 16. Execution journal
 
+## 2026-09-22 — 3B-1 offline contract merged; opt-in Host producer observation in progress
+
+- PR #30 tested head `d7d4a49a76699a806ab3e968ce75520a22d69759`, exact fast run
+  `35675543341` PASS. Protected squash merge `5d77fa6ace30d8bc64eeef287d10bfffd4c44992`;
+  candidate/merge tree `f4d0e46bff01bfa4ed609095f3e9e2ae9f7e20a5` matched. Main fast
+  `35676214359` PASS. This closes the offline slice, not 3B-1.
+- Follow-up branch `behavior/trace-owner-exports` preserves the tested PR candidate and adds
+  an explicitly imported [Host owner observation testkit](../reference/host-trace-testkit.md).
+  It delegates to the real Adapter/gateway, binds fresh attempt IDs to actual transport calls,
+  retains unknown usage, and exports only allowlisted metadata. The default Adapter is not
+  instrumented; its sole edit is a transport Protocol annotation.
+- Targeted Product-owned tests and adjacent regressions: 28 PASS (0.64 s), changed-module
+  Ruff/mypy PASS. Initial fixture/assertion failures and limitations are recorded in the runbook.
+  MCP/Provider are synthetic test transports; no external model requests or experiment allocations.
+- Runtime decision/version export, actual MCP binding, cache-origin provenance and assembled
+  end-to-end proof remain pending. Trace debt stays NEEDS_REVALIDATION; 3B-1 stays IN_PROGRESS.
+
 ## 2026-09-22 — 3A-1 closed; docs-only CI optimization closed; 3B-1 entered
 
 - PR #28 tested head `63f80ab5358c9f264274ee1904b590f0859b6fbd`, fast `35674072940` PASS;

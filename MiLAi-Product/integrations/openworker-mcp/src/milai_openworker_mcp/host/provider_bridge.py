@@ -181,6 +181,7 @@ from milai_openworker_mcp.provider_execution import (
     ProviderCallError,
     ProviderExecutionGateway,
     ProviderRequest,
+    ProviderTransport,
     StreamCompletionTransport,
 )
 from milai_openworker_mcp.provider_execution import (
@@ -331,7 +332,7 @@ class OpenWorkerProviderAdapter(HostTaskState):
         if memory_data_classification not in {"SYNTHETIC", "DEIDENTIFIED", "PERSONAL"}:
             raise ValueError("unknown memory data classification")
         self.gateway = ProviderExecutionGateway(manifest, ledger)
-        self.transport = JsonCompletionTransport()
+        self.transport: ProviderTransport = JsonCompletionTransport()
         self.stream_transport = StreamCompletionTransport()
         capability = DevRunCapability.load(manifest)
         next_logical_request_sequence = self.gateway.next_logical_request_sequence()
@@ -2106,4 +2107,3 @@ class OpenWorkerProviderAdapter(HostTaskState):
             }
         )
         return dict(result.value), f"PROVIDER_{context.status}"
-
