@@ -1,7 +1,7 @@
 # MiLAi Product Goals
 
-> Document: `MILA-PRODUCT-GOALS@3.38`
-> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A3R_RESOLVER_REMEDIATION`
+> Document: `MILA-PRODUCT-GOALS@3.39`
+> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3B2_OPPORTUNITY_LEDGER`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
@@ -21,10 +21,12 @@ identical candidate/merge trees and main fast `35688151840` PASS; 3A-2R is PASS.
 The [3A-3D diagnosis](revalidation/resolver-language/REVALIDATION.md) closed through PR #37:
 30 cases frozen before execution, 17 PASS/13 FAIL. Strict XFAIL preserves each gap;
 no resolver fix or broad conformance claim is implied. Main `87aa53c`, candidate/merge
-tree identity and main fast `35688919530` passed. Active work is separate 3A-3R on
-`fix/resolver-typed-language-boundaries`. The [partial repair](revalidation/resolver-language/REMEDIATION.md)
+tree identity and main fast `35688919530` passed. The separate
+[partial repair](revalidation/resolver-language/REMEDIATION.md)
 now reaches 28/30 on the same corpus; two unmet semantic expectations and strict XFAIL
-remain. Client 64 PASS/2 XFAIL, Runtime 49 PASS; final composition/remote closure pending.
+remain. Client 64 PASS/2 XFAIL, Runtime 49 PASS; PR #38/full #64 all 17 jobs, identical-tree
+merge `8c0c526` and main fast `35713661491` passed. Active work is independent Lab
+3B-2 Opportunity Ledger, whose entry gate is 3B-1 PASS, not a false resolver closure.
 Debt remains OPEN, not FIXED; no case terms, translation dictionary or model controller added.
 Research stays unallocated.
 

@@ -7,13 +7,13 @@
 
 ## Current engineering baseline
 
-- Reconciled repository `main`: `87aa53c73ec0a67ff412923e2151c71def575130`; Git tree
-  `0cc79d8797f1cb1c4321839015eab9f3e1bd980a`; main fast `35688919530` passed.
-- Local 3A-3R candidate: `9b4aa1670dc75dfc2149baeb75719f017267e92a`, 425 files,
+- Reconciled repository `main`: `8c0c526487fda508560c3d340e95d59b1ec3db6e`; Git tree
+  `7be3a26554d61a56ad3824581caef88e67d40ad5`; main fast `35713661491` passed.
+- Merged 3A-3R source proof: `9b4aa1670dc75dfc2149baeb75719f017267e92a`, 425 files,
   Product tree `847967d2e212b974d92b0b08d6e0f8b135a3c1080adf61790dcb771b9c832311`,
   manifest SHA `016df6085fc29d9c201c3f22739397e4f82af128152020318bc2ce4647814096`.
   [Partial repair](revalidation/resolver-language/REMEDIATION.md): unchanged corpus
-  28 PASS/2 FAIL; client tests 64 PASS/2 XFAIL, Runtime 49 PASS. Final gates pending;
+  28 PASS/2 FAIL; client tests 64 PASS/2 XFAIL, Runtime 49 PASS. PR #38/full #64 pass;
   no full resolver closure, model use or FIXED claim.
 - 3A-2R source proof: `faf3922c2b1d037f0c3a019dd1bbaf6dc059be15`;
   PR #36 merged after exact-head fast and final composition passed.
@@ -24,8 +24,9 @@
   and 2 real PG recovery cases pass, without XFAIL; 4 fresh Host processes / 10 attempts.
   Streaming/concurrent continuation and model use/benefit are not claimed.
 - Cleanup C0–C10 is complete. Its historical composition is Run #60 / ID `35632657133`.
-  The current Host-repair composition is Run #63 / ID `35685753906`: 17 jobs passed,
-  at PR head `ba4723e236aa6fd4949a688d9593059b459a6bd9`, including Runtime/PostgreSQL, all six integrations, Lab fast,
+  Host repair passed Run #63 / ID `35685753906`. Current Resolver candidate composition
+  is Run #64 / ID `35690275830`: all 17 jobs passed at head
+  `03877e019552715e59b9c19c301c01002b7cb054`, including Runtime/PostgreSQL, all six integrations, Lab fast,
   four historical replay shards, Archive, Product identity and Conformance.
 - Frozen Architecture remains version 1.0.0 and immutable. The current implementation map is
   `9 PASS / 35 UNVERIFIED / 0 DEVIATION`; overall status remains honestly `UNVERIFIED`.
@@ -33,8 +34,8 @@
   testkit, native guard and resolver changes update the global manifest; 19 prior receipts
   are now historical. The separate partial Resolver receipt supplies one current SCOPED
   FAIL: 20 receipts, 1 current, 1 current claim, 6 preserved failures and 1 current failure.
-  No old receipt was rewritten or silently rebound. Host full composition passed;
-  the new Resolver behavior candidate still requires its own final gate.
+  No old receipt was rewritten or silently rebound. Full #64, expected-head merge and
+  main identity close delivery of the partial repair, not the two unmet expectations.
 - `docs/TECH_DEBT.md` records `9 FIXED / 0 NEEDS_REVALIDATION / 1 OPEN` after
   [Resolver diagnosis](revalidation/resolver-language/REVALIDATION.md).
   Host repair is merged; Resolver partial repair keeps both semantic limitations OPEN.
@@ -61,9 +62,9 @@
   frozen 30 cases, client 11 PASS/11 FAIL and Runtime 6 PASS/2 FAIL; no Product
   behavior change. PR #37/main fast `35688919530` close the diagnosis with identical
   candidate/merge trees. Original failures and strict XFAIL assertions remain.
-  Active work is separate 3A-3R on `fix/resolver-typed-language-boundaries`;
-  scoped improvement is proven locally, but two corpus expectations remain unsatisfied
-  and final composition/remote closure remain pending. No FIXED claim.
+  Partial 3A-3R delivery closed in PR #38, while two corpus expectations remain
+  unsatisfied and debt stays OPEN. Active work is independent 3B-2 Memory Opportunity
+  Ledger in Lab, admitted by 3B-1 PASS; it does not bypass or close these language gaps.
   This is not real model use or a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior

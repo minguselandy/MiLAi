@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3A-3R_RESOLVER_TYPED_LANGUAGE_BOUNDARIES
-next_work_package: 3B-2_MEMORY_OPPORTUNITY_LEDGER
+current_work_package: 3B-2_MEMORY_OPPORTUNITY_LEDGER
+next_work_package: 3C_FINITE_RESEARCH_PREFLIGHT_REQUIRES_AUTHORITY
 new_experiment_allocations: 0
 new_model_requests: 0
 ---
@@ -227,8 +227,8 @@ NEEDS_REVALIDATION
 | 3A-2D | Host Continuity diagnosis | Product evidence | no | DIAGNOSED_FAIL — PR #35 / main identity verified; native replay OPEN / cache-miss FIXED | 3B-1 vocabulary |
 | 3A-2R | Host Continuity remediation | Product | conditional | PASS — PR #36 / full #63 / main identity verified | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | FAIL_REMEDIATION_REQUIRED — PR #37 / main identity verified; 17 PASS / 13 FAIL retained | 3A-0 |
-| 3A-3R | Resolver remediation | Product | conditional | IN_PROGRESS — partial repair 28/30; 2 failures retained OPEN; final gates pending | 3A-3D FAIL |
-| 3B-2 | Memory Opportunity Ledger | Lab | no | PENDING | 3B-1 PASS |
+| 3A-3R | Resolver remediation | Product | conditional | FAIL_REMEDIATION_REQUIRED — partial repair merged PR #38/full #64; C06/C21 remain OPEN, not full closure | 3A-3D FAIL |
+| 3B-2 | Memory Opportunity Ledger | Lab | no | IN_PROGRESS — independent entry gate 3B-1 PASS; real ledger proof pending | 3B-1 PASS |
 | 3C-1 | Utility Selection | Lab | no | PENDING | 3B-2 real-run proof |
 | 3C-2 | Evidence-grounded Revision | Lab | no | PENDING | 3B-2 + lineage |
 | 3C-3 | State-guided Attention | Lab | no | PENDING | 3B-2 + frozen state |
@@ -840,6 +840,27 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Partial Resolver repair merged; independent Opportunity Ledger entered
+
+- PR #38 exact head `03877e019552715e59b9c19c301c01002b7cb054`; automatic fast
+  `35690275412` and `35690275863` PASS. One final-candidate full composition,
+  Run #64 / `35690275830`, all 17 jobs PASS; no rerun after the waiting interruption.
+- Expected-head squash merge `8c0c526487fda508560c3d340e95d59b1ec3db6e`;
+  candidate/merge tree `7be3a26554d61a56ad3824581caef88e67d40ad5` matched.
+  Local main equals origin/main; main fast `35713661491` PASS.
+- C06 undeclared synonym and C21 cross-language exact predicate remain genuine
+  unsatisfied expectations with owner/risk/constraints in ADR-058 and the OPEN receipt.
+  CI PASS is delivery evidence, not a semantic PASS. 3A-3R is not marked complete;
+  no fixture dictionary, model controller or unreviewed API expansion is admitted.
+- `research/memory-opportunity-ledger` starts from exact main. Its entry gate is
+  3B-1 PASS, independent of the explained legacy-client capability gaps. It consumes
+  the current query-first public trace/testkit, not a replacement resolver pathway.
+  The original corpus and failing expectations remain active and unmodified.
+- 3B-2 must freeze opportunities before outcomes, bind exact ordered versions, retain
+  unknown/failure costs and validate later revision reuse. Offline fixtures alone
+  cannot close the required real bounded-run gate. No Product behavior/schema change,
+  research model allocation or historical experiment resume follows from this entry.
 
 ## 2026-09-22 — Deterministic resolver boundaries improved; debt remains OPEN
 

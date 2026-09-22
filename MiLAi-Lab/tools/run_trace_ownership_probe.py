@@ -32,6 +32,8 @@ from milai_openworker_mcp.trace_testkit import (
     ProviderTransportError,
 )
 
+from milai_lab.analysis.opportunity_capture import OpportunityCapture
+from milai_lab.analysis.opportunity_ledger import build_opportunity_ledger
 from milai_lab.analysis.owner_exports import assemble_owner_attempts
 from milai_lab.analysis.trace_join import CACHE_SCHEMA_VERSION, SCHEMA_VERSION, join_attempts
 from milai_lab.product_adapter.manifest import (
@@ -72,7 +74,8 @@ def _pin(product: Path, commit: str, output: Path) -> ProductLock:
     if _git(product, "status", "--porcelain", "--", *paths):
         raise ValueError("PROBE_PRODUCT_SOURCE_MUST_BE_COMMITTED")
     method_paths = [str(Path(__file__).resolve()), inspect.getfile(assemble_owner_attempts),
-                    inspect.getfile(join_attempts)]
+                    inspect.getfile(join_attempts), inspect.getfile(OpportunityCapture),
+                    inspect.getfile(build_opportunity_ledger)]
     if _git(product, "status", "--porcelain", "--", *method_paths):
         raise ValueError("PROBE_METHOD_SOURCE_MUST_BE_COMMITTED")
     # The verifier's Git field describes an independent Product repository. This
@@ -132,6 +135,9 @@ class FixtureTransport:
         self.mode = "success"
         self.calls = 0
         self.limit = limit
+        self.opportunity_capture: OpportunityCapture | None = None
+        self.runtime: ObservedRuntime | None = None
+        self.runtime_offset = 0
 
     def invoke(
         self, request: ProviderRequest, capability: DevRunCapability,
@@ -140,6 +146,11 @@ class FixtureTransport:
         self.calls += 1
         if self.calls > self.limit:
             raise RuntimeError("PROBE_CALL_LIMIT")
+        if self.opportunity_capture is not None:
+            assert self.runtime is not None
+            self.opportunity_capture.before_transport(
+                self.runtime.owner_traces()[self.runtime_offset:],
+            )
         if self.mode in {"not-started", "response-lost"}:
             raise ProviderTransportError(
                 "SYNTHETIC_TRANSPORT_FAILURE", request_started=self.mode == "response-lost",
@@ -228,6 +239,7 @@ def _claim(
 
 def run(
     product: Path, commit: str, output: Path, *, canonical_cache: bool = False,
+    opportunity_ledger: bool = False,
 ) -> dict[str, Any]:
     output.mkdir(mode=0o700, parents=False, exist_ok=False)
     lock = _pin(product, commit, output)
@@ -249,16 +261,21 @@ def run(
         "causal_token_secret": "synthetic-causal-" + uuid4().hex,
         "embedding_provider": "deterministic_hash", "embedding_prewarm": False,
     }
+    method_sources = {
+        "runner": _sha(Path(__file__)),
+        "owner_exports": _sha(Path(inspect.getfile(assemble_owner_attempts))),
+        "trace_join": _sha(Path(inspect.getfile(join_attempts))),
+        "opportunity_capture": _sha(Path(inspect.getfile(OpportunityCapture))),
+        "opportunity_ledger": _sha(Path(inspect.getfile(build_opportunity_ledger))),
+    }
+    method_digest = hashlib.sha256(json.dumps(method_sources, sort_keys=True).encode()).hexdigest()
     _write(output / "manifest.json", {
         "schema": "milai-trace-chain-probe-v2" if canonical_cache else "milai-trace-chain-probe-v1",
         "run_id": run_id, "canonical_cache": canonical_cache,
+        "opportunity_ledger": opportunity_ledger, "ledger_method_sha256": method_digest,
         "arm_kind": "PRODUCT_TESTKIT", "monorepo_commit": commit,
         "product_lock_digest": lock.digest, "method_sha256": _sha(Path(__file__)),
-        "method_sources_sha256": {
-            "runner": _sha(Path(__file__)),
-            "owner_exports": _sha(Path(inspect.getfile(assemble_owner_attempts))),
-            "trace_join": _sha(Path(inspect.getfile(join_attempts))),
-        },
+        "method_sources_sha256": method_sources,
         "input_sha256": hashlib.sha256(json.dumps(
             {"content": CONTENT, "query": QUERY, "canonical_cache": canonical_cache},
             sort_keys=True,
@@ -295,6 +312,9 @@ def run(
     cases: list[dict[str, Any]] = []
     adapter = None
     runtime = ObservedRuntime(config)
+    capture = OpportunityCapture(output, method_digest) if opportunity_ledger else None
+    fixture.opportunity_capture = capture
+    fixture.runtime = runtime
     broker = None
     try:
         with runtime:
@@ -336,11 +356,15 @@ def run(
 
                 def attempt(
                     name: str, query: str, mode: str = "success", retry: str | None = None,
+                    *, empty_pool_control: bool = False,
                 ) -> None:
                     if len(cases) >= attempts_limit:
                         raise RuntimeError("PROBE_ATTEMPT_LIMIT")
                     fixture.mode = mode
                     before = len(runtime.owner_traces())
+                    fixture.runtime_offset = before
+                    if capture is not None:
+                        capture.begin(query, empty_pool_control=empty_pool_control)
                     error = None
                     route = None
                     try:
@@ -357,11 +381,13 @@ def run(
                     cases.append({"case": name, "route": route, "error_type": error,
                                   "host": adapter.owner_traces()[-1],
                                   "runtime": runtime.owner_traces()[before:]})
+                    if capture is not None:
+                        capture.end(cases[-1])
 
-                attempt("no-memory", "What is two plus two?")
+                attempt("no-memory", "What is two plus two?", empty_pool_control=True)
                 attempt("no-memory-repeat", "What is two plus two?",
-                        retry=cases[-1]["host"]["host_attempt_trace_id"])
-                attempt("abstain", QUERY)
+                        retry=cases[-1]["host"]["host_attempt_trace_id"], empty_pool_control=True)
+                attempt("abstain", QUERY, empty_pool_control=True)
                 claim = None
                 if canonical_cache:
                     claim = _claim(runtime.base_url, admin, reviewer)
@@ -407,6 +433,9 @@ def run(
         schema_version=CACHE_SCHEMA_VERSION if canonical_cache else SCHEMA_VERSION,
     )
     _write(output / "joined.json", joined)
+    if capture is not None:
+        capture.finish(cases, run_id=run_id, product_lock_digest=lock.digest,
+                       owner_schema=CACHE_SCHEMA_VERSION if canonical_cache else SCHEMA_VERSION)
     expected_terminals = [
         "NO_MEMORY", "NO_MEMORY", "ABSTAIN", "SUCCESS", "SUCCESS", "FAILURE", "FAILURE", "FAILURE",
     ] + (["SUCCESS", "SUCCESS"] if canonical_cache else [])
@@ -449,6 +478,8 @@ def run(
         "owner_facts_sha256": _sha(output / "owner-facts.json"),
         "joined_sha256": _sha(output / "joined.json"),
     }
+    if capture is not None:
+        summary["opportunity_ledger_sha256"] = _sha(output / "opportunity-ledger.json")
     _write(output / "summary.json", summary)
     return summary
 
@@ -459,6 +490,7 @@ def main() -> None:
     parser.add_argument("--product-commit", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--canonical-cache", action="store_true")
+    parser.add_argument("--opportunity-ledger", action="store_true")
     args = parser.parse_args()
 
     def timeout(signum: int, frame: Any) -> None:
@@ -468,7 +500,8 @@ def main() -> None:
     signal.alarm(120)
     try:
         result = run(args.product_root.resolve(), args.product_commit, args.output.resolve(),
-                     canonical_cache=args.canonical_cache)
+                     canonical_cache=args.canonical_cache,
+                     opportunity_ledger=args.opportunity_ledger)
         print(json.dumps(result))
     except Exception as exc:
         if args.output.is_dir():
