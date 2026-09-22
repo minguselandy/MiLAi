@@ -88,6 +88,11 @@ def _host_process(connection: Any, root: Path, policy_path: Path, query: str) ->
                     "route": route,
                     "fixture_calls": len(transport.requests),
                     "trace": adapter.owner_traces()[-1],
+                    "native_binding": [
+                        row
+                        for line in adapter.trace.read_text().splitlines()
+                        if (row := json.loads(line)).get("event") == "HOST_NATIVE_TASK_BOUND"
+                    ][-1],
                 }
             )
     finally:
@@ -318,10 +323,7 @@ def test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed
     assert [row["previous_context_ref"] is None for row in invocations] == [
         not value for value in expected
     ]
-    bound = [
-        next(e for e in row["host_events"] if e["event"] == "HOST_NATIVE_TASK_BOUND")
-        for row in hosts
-    ]
+    bound = [observations[name]["native_binding"] for name in names]
     assert [row["task_relation"] for row in bound] == [
         "TASK_START",
         "CONTINUE",
