@@ -1,7 +1,7 @@
 # MiLAi Product Goals
 
 > Document: `MILA-PRODUCT-GOALS@3.34`
-> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3A1_WORKER_ONCE_REVALIDATION`
+> Status: `POST_CLEANUP_DEVELOPMENT_ACTIVE_3B1_TRACE_OWNERSHIP`
 > Product version: `0.1.0-candidate`  
 > Schema: `0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE`
 
@@ -33,7 +33,12 @@ does not automatically resume.
 
 The user resumed execution. 3A-0 is complete: PR #27 merged at `cf149939eea9f184159ebfb6aab1a3e791988250`,
 with exact-head fast run `35672424053`, candidate/merge tree identity, and main fast run
-`35673403788` all verified. 3A-1 is in progress on a branch from that exact main.
+`35673403788` all verified. 3A-1 completed through PR #28 at main
+`81f2f12844674983973ae7dad99868211ba1a1bb`, with main fast `35674495200` passed.
+Current debt is `6 FIXED / 4 NEEDS_REVALIDATION / 0 OPEN`. 3B-1 is in progress from
+main `755cdfc947f34efa03cc0bb1eed682233767b061` after PR #29's docs-only CI optimization.
+The [offline ownership candidate](reference/trace-ownership-v1.md) does not yet close live
+producer provenance or the trace ownership debt.
 
 ## Historical plan snapshot: V02-18 testbed and innovation judgment
 

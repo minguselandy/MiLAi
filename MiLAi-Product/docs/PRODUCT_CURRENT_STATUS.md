@@ -7,8 +7,8 @@
 
 ## Current engineering baseline
 
-- Repository `main`: `dfeb359d2301b99c0125d9e54e9c29a9025d7f59`; Git tree
-  `8b08c84e8d13d82e513034d690be057dc159722b`.
+- Reconciled repository `main`: `755cdfc947f34efa03cc0bb1eed682233767b061`; Git tree
+  `44e9ff8b7fee6da005e5b8b20eb10a3396f17ac1`; main fast `35674644575` passed.
 - Product identity: 422 manifest files; manifest SHA-256
   `7927bb6a0cad2ed139a7ce05f34f64cd47e3c0cd75bb77ff431a433b83c0c693`; Product tree
   `7135d3388f9360ab3acf7b160ad20451da1883a09d10bf7f51ac9a404942f521`.
@@ -25,7 +25,9 @@
   derived from the [post-cleanup roadmap](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_ROADMAP_v1.0_20260922.md).
   Product/Lab status reconciliation completed through PR #27 at main `cf149939eea9f184159ebfb6aab1a3e791988250`;
   tested/merge tree identity and main fast run `35673403788` passed. The user resumed development;
-  worker `--once` revalidation has passed locally and awaits PR remote closure.
+  worker `--once` revalidation completed through PR #28, with main fast `35674495200` passed.
+  Active work is [Trace Ownership v1](reference/trace-ownership-v1.md): offline contract/join
+  implementation first; live producer proof and trace-debt closure remain pending.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior
   candidate; docs-only and Lab-only changes use the classified fast path.
