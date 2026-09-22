@@ -30,8 +30,8 @@ from test_host_adapter import FIXTURE, _provider_manifest, _test_tokenizer_json
 from test_trace_testkit import _Transport
 
 PRODUCT = Path(__file__).resolve().parents[3]
-QUERY = "Recall synthetic ceramic cups purchase marker"
-CONTENT = "Synthetic ceramic cups purchase marker: ready for pickup."
+QUERY = "Recall purchase marker cups awaiting pickup"
+CONTENT = "Purchase marker: synthetic ceramic cups await pickup."
 SCOPE = {"project_ids": ["orchid-release"]}
 
 
@@ -49,7 +49,7 @@ def _post(base: str, token: str, path: str, body: object) -> dict[str, Any]:
         return json.load(response)  # type: ignore[no-any-return]
 
 
-def _host_process(connection: Any, root: Path, policy_path: Path) -> None:
+def _host_process(connection: Any, root: Path, policy_path: Path, query: str) -> None:
     """Fresh interpreter owns all native graph, Context locator and Provider state."""
     root.mkdir()
     policy = json.loads(policy_path.read_text())
@@ -78,7 +78,7 @@ def _host_process(connection: Any, root: Path, policy_path: Path) -> None:
                         "model": "Qwen3.6-35B-A3B-FP8",
                         "stream": False,
                         "max_tokens": 64,
-                        "messages": [{"role": "user", "content": QUERY}],
+                        "messages": [{"role": "user", "content": query}],
                     }
                 ),
                 NativeTaskMetadata(host_instance, "continuity-session", operation),
@@ -96,10 +96,10 @@ def _host_process(connection: Any, root: Path, policy_path: Path) -> None:
 
 
 @contextmanager
-def _host(root: Path, policy: Path):  # type: ignore[no-untyped-def]
+def _host(root: Path, policy: Path, query: str):  # type: ignore[no-untyped-def]
     context = multiprocessing.get_context("spawn")
     parent, child = context.Pipe()
-    process = context.Process(target=_host_process, args=(child, root, policy))
+    process = context.Process(target=_host_process, args=(child, root, policy, query))
     process.start()
     child.close()
 
@@ -135,8 +135,10 @@ def _stop(process: subprocess.Popen[bytes]) -> None:
         process.wait(timeout=5)
 
 
+@pytest.mark.parametrize("with_cache", [False, True])
 def test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed(
     tmp_path: Path,
+    with_cache: bool,
 ) -> None:
     required = [
         "MILAI_TEST_API_DATABASE_URL",
@@ -169,7 +171,10 @@ def test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed
         "embedding_provider": "deterministic_hash",
         "embedding_prewarm": False,
     }
-    observations: dict[str, Any] = {"model_requests": 0}
+    # The broad control also retrieves supporting Evidence and need not issue a
+    # reusable receipt. Keep that actual cache-miss case, not just the cache hit.
+    query = QUERY if with_cache else "Recall synthetic ceramic cups purchase marker"
+    observations: dict[str, Any] = {"model_requests": 0, "with_cache": with_cache}
     runtime = runtime_module.ObservedRuntime(config)
     try:
         with ExitStack() as resources:
@@ -282,12 +287,12 @@ def test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed
                     time.sleep(0.05)
                 else:
                     pytest.fail("broker startup timeout")
-                with _host(tmp_path / "host-before", policy_path) as (identity, call):
+                with _host(tmp_path / "host-before", policy_path, query) as (identity, call):
                     observations["before_identity"] = identity
                     observations["first"] = call("op-1")
                     observations["continue"] = call("op-2")
                 identity, call = resources.enter_context(
-                    _host(tmp_path / "host-after", policy_path)
+                    _host(tmp_path / "host-after", policy_path, query)
                 )
                 observations["after_identity"] = identity
                 observations["restart"] = call("op-1")
@@ -308,12 +313,10 @@ def test_fresh_host_reacquires_persisted_memory_and_offline_locator_fails_closed
         assert observations[name]["route"] == "PROVIDER_AVAILABLE"
     hosts = [observations[name]["trace"] for name in names]
     invocations = [row["mcp_invocations"][0] for row in hosts]
-    assert [row["receipt_reused"] for row in invocations] == [False, True, False, True]
+    expected = [False, with_cache, False, with_cache]
+    assert [row["receipt_reused"] for row in invocations] == expected
     assert [row["previous_context_ref"] is None for row in invocations] == [
-        True,
-        False,
-        True,
-        False,
+        not value for value in expected
     ]
     bound = [
         next(e for e in row["host_events"] if e["event"] == "HOST_NATIVE_TASK_BOUND")
