@@ -6,6 +6,7 @@ from typing import Any
 import pytest
 
 from milai_lab.analysis.owner_exports import assemble_owner_attempts
+from milai_lab.analysis.trace_join import CACHE_SCHEMA_VERSION
 
 
 def _case() -> dict[str, Any]:
@@ -113,3 +114,104 @@ def test_missing_or_mismatched_owner_facts_cannot_be_reconstructed(
         case["host"]["provider_requests"][0]["exposure_status"] = "NOT_STARTED"
     with pytest.raises(ValueError, match=reason):
         _assemble(case)
+
+
+def _cache_cases() -> list[dict[str, Any]]:
+    first = _case()
+    row = first["runtime"][0]
+    row.update(request_ref="runtime:one", context_capsule_ref="capsule:one",
+               requirement_coverage_digest="1" * 64, dependency_digest="2" * 64,
+               selected_claim_version_refs=["claim-version:one"], reuse_validation=None)
+    version = {"memory_ref": "claim:one", "version_id": "claim-version:one",
+               "content_sha256": "3" * 64}
+    row["owner_trace"].update(
+        canonical_position=7, materialized_claim_versions=[copy.deepcopy(version)],
+        selected_claim_versions=[copy.deepcopy(version)], selected_versions=[],
+        materialized_evidence_versions=[], selected_claim_version_refs=["claim-version:one"],
+        selected_support_evidence_refs=["evidence:one"],
+    )
+    first["host"]["mcp_invocations"][0].update(
+        runtime_request_ref="runtime:one", context_capsule_ref="capsule:one",
+        previous_context_ref=None,
+    )
+    for key in ("prepared_context_bindings", "context_bindings"):
+        first["host"]["provider_requests"][0][key][0].update(
+            runtime_request_ref="runtime:one", selected_claim_version_refs=["claim-version:one"],
+        )
+    second = copy.deepcopy(first)
+    host = second["host"]
+    host["host_attempt_trace_id"] = "attempt:two"
+    invocation = host["mcp_invocations"][0]
+    invocation.update(host_attempt_trace_id="attempt:two", invocation_id="mcp:two",
+                      runtime_request_ref="runtime:two", receipt_reused=True,
+                      previous_context_ref="capsule:one")
+    request = host["provider_requests"][0]
+    request.update(host_attempt_trace_id="attempt:two", request_ref="request:two",
+                   native_request_ref="native:two")
+    for key in ("prepared_context_bindings", "context_bindings"):
+        request[key][0].update(runtime_request_ref="runtime:two", mcp_invocation_id="mcp:two")
+    row = second["runtime"][0]
+    row.update(request_ref="runtime:two", receipt_reused=True, owner_trace=None,
+               reuse_validation={
+                   "runtime_request_ref": "runtime:two", "context_capsule_ref": "capsule:one",
+                   "origin_retrieval_trace_ref": "retrieval:one",
+                   "validation_canonical_position": 7,
+                   "dependency_digest": "2" * 64, "requirement_coverage_digest": "1" * 64,
+               })
+    return [first, second]
+
+
+def _assemble_cache(cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return assemble_owner_attempts(
+        cases, run_id="run:one", product_lock_digest="f" * 64,
+        result_refs=[f"result:{i}" for i in range(len(cases))], schema_version=CACHE_SCHEMA_VERSION,
+    )
+
+
+def test_claim_cache_joins_prior_exact_version_not_supporting_evidence_bodies() -> None:
+    cases = _cache_cases()
+    original = copy.deepcopy(cases)
+    result = _assemble_cache(cases)
+    assert cases == original
+    assert [r["join_status"] for r in result] == ["COMPLETE", "COMPLETE"]
+    assert result[0]["runtime"][0]["acquired_versions"][0]["memory_ref"] == "claim:one"
+    assert result[1]["runtime"][0]["acquired_versions"] == []
+    assert result[1]["runtime"][0]["origin_runtime_request_id"] == "runtime:one"
+    assert result[1]["requests"][0]["exposed_versions"] == (
+        result[0]["requests"][0]["exposed_versions"]
+    )
+
+
+@pytest.mark.parametrize("change,reason", [
+    ("missing-origin", "CACHE_ORIGIN_NOT_OBSERVED"),
+    ("claim", "CACHE_VALIDATION_OWNER_MISMATCH"),
+    ("decision", "CACHE_VALIDATION_OWNER_MISMATCH"),
+    ("request", "CACHE_VALIDATION_OWNER_MISMATCH"),
+    ("context", "CACHE_ORIGIN_BINDING_MISMATCH"),
+    ("host-claim", "CONTEXT_NOT_BOUND_TO_RUNTIME_AND_MCP"),
+    ("false-support", "RUNTIME_SELECTION_VERSION_MISMATCH"),
+])
+def test_cache_assembler_rejects_missing_and_mismatched_owner_bindings(
+    change: str, reason: str,
+) -> None:
+    cases = _cache_cases()
+    row = cases[1]["runtime"][0]
+    if change == "missing-origin":
+        cases = cases[1:]
+    elif change == "claim":
+        row["selected_claim_version_refs"] = []
+    elif change == "decision":
+        row["owner_trace"] = cases[0]["runtime"][0]["owner_trace"]
+    elif change == "request":
+        row["reuse_validation"]["runtime_request_ref"] = "other"
+    elif change == "context":
+        row["reader_context_sha256"] = "0" * 64
+        for key in ("prepared_context_bindings", "context_bindings"):
+            cases[1]["host"]["provider_requests"][0][key][0]["reader_context_sha256"] = "0" * 64
+    elif change == "host-claim":
+        for key in ("prepared_context_bindings", "context_bindings"):
+            cases[1]["host"]["provider_requests"][0][key][0]["selected_claim_version_refs"] = []
+    else:
+        cases[0]["runtime"][0]["owner_trace"]["selected_support_evidence_refs"] = ["other"]
+    with pytest.raises(ValueError, match=reason):
+        _assemble_cache(cases)

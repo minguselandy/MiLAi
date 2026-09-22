@@ -48,10 +48,14 @@ def _reader_gate(body: Mapping[str, Any], http_status: int) -> str:
         return "ADMITTED"
     claims = context.get("claim_versions")
     resolution = body.get("resolution")
-    if (body.get("state_view_schema_version") == "memory-state-view-v0.1"
+    canonical_release = (
+        body.get("reader_evidence_boundary") == "DECISION_ACCEPTED_ONLY"
+        or (body.get("state_view_schema_version") == "memory-state-view-v0.1"
+            and isinstance(resolution, Mapping) and resolution.get("correctly_resolved") is True)
+    )
+    if (canonical_release
             and body.get("status") == "HIT" and body.get("availability") == "AVAILABLE"
-            and issues == [] and isinstance(resolution, Mapping)
-            and resolution.get("correctly_resolved") is True
+            and issues == []
             and context.get("authority_class") in {"CANONICAL_STATE", "MIXED"}
             and isinstance(claims, list) and claims):
         return "ADMITTED"
@@ -164,6 +168,7 @@ class ObservedRuntime:
             claim_versions = context.get("claim_versions")
             receipt = body.get("context_receipt")
             capsule_id = receipt.get("context_capsule_id") if isinstance(receipt, dict) else None
+            dependency = receipt.get("dependency_digest") if isinstance(receipt, dict) else None
             row: dict[str, Any] = {
                 "schema_version": "milai-runtime-http-owner-v1",
                 "request_ref": "runtime-request:" + canonical_sha256(g.request_id),
@@ -176,6 +181,15 @@ class ObservedRuntime:
                     "context-capsule:" + canonical_sha256(capsule_id)
                     if isinstance(capsule_id, str) else None
                 ),
+                "requirement_coverage_digest": (
+                    canonical_sha256(receipt["requirement_coverage"])
+                    if isinstance(receipt, dict) and isinstance(capsule_id, str)
+                    and isinstance(receipt.get("requirement_coverage"), dict) else None
+                ),
+                "dependency_digest": dependency if (
+                    isinstance(dependency, str) and len(dependency) == 64
+                    and all(char in "0123456789abcdef" for char in dependency)
+                ) else None,
                 "observation_gap": None,
                 "reader_context_sha256": (
                     hashlib.sha256(text.encode()).hexdigest() if isinstance(text, str) else None

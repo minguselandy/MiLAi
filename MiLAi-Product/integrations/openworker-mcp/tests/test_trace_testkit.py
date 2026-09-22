@@ -213,7 +213,8 @@ class _QueryFirstMcp:
             "availability": "AVAILABLE", "items": [], "degraded_components": [],
             "open_issue_ids": ["issue-1"] if self.blocked else [],
             "abstention_reason": "OPEN_ISSUE" if self.blocked else "SUFFICIENCY_UNSATISFIED",
-            "canonical_position": 20, "trace_id": f"trace-{len(self.calls)}",
+            "canonical_position": 20, "trace_id": "trace-1",
+            "request_id": f"runtime-request-{len(self.calls)}",
             "receipt_reused": previous_context_id is not None,
             "context_receipt": {"context_capsule_id": "11111111-1111-4111-8111-111111111111"},
             "access_trace": {"planned_stage": "SEARCH", "terminal_stage": "SUFFICIENCY",
@@ -224,7 +225,7 @@ class _QueryFirstMcp:
             outcome["reader_evidence_boundary"] = "GOVERNANCE_ADMITTED_SOFT_RANKED"
             outcome["memory_context"] = {
                 "text": "MEMORY_CONTEXT_V0_2\nMEMORY_STATUS=PARTIAL\nprivate memory observation",
-                "selected_evidence_ids": ["evidence-1"], "claim_versions": [],
+                "selected_evidence_ids": ["evidence-1"], "claim_versions": ["claim-version-1"],
             }
         return outcome
 
@@ -257,7 +258,11 @@ def test_query_first_owner_binding_keeps_fresh_attempts_and_runtime_validated_ca
         assert prepares[0]["fresh_resolve"] is True
         assert prepares[1]["fresh_resolve"] is False
         assert prepares[1]["cache_reused"] is True
-        assert prepares[0]["retrieval_trace_ref"] != prepares[1]["retrieval_trace_ref"]
+        assert prepares[0]["retrieval_trace_ref"] == prepares[1]["retrieval_trace_ref"]
+        first_mcp, second_mcp = first["mcp_invocations"][0], second["mcp_invocations"][0]
+        assert first_mcp["runtime_request_ref"] != second_mcp["runtime_request_ref"]
+        assert first_mcp["previous_context_ref"] is None
+        assert second_mcp["previous_context_ref"] == first_mcp["context_capsule_ref"]
         for attempt in (first, second):
             answer = next(
                 row for row in attempt["host_events"] if row["event"] == "PROVIDER_ANSWER"
@@ -270,6 +275,8 @@ def test_query_first_owner_binding_keeps_fresh_attempts_and_runtime_validated_ca
             assert invocation["host_attempt_trace_id"] == attempt["host_attempt_trace_id"]
             assert binding["mcp_invocation_id"] == invocation["invocation_id"]
             assert binding["retrieval_trace_ref"] == invocation["retrieval_trace_ref"]
+            assert binding["runtime_request_ref"] == invocation["runtime_request_ref"]
+            assert len(binding["selected_claim_version_refs"]) == 1
             assert binding["reader_context_sha256"] == answer["context_sha256"]
             assert len(binding["selected_evidence_refs"]) == 1
             assert provider["exposure_status"] == "DISPATCHED"

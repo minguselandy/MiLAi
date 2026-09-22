@@ -14,6 +14,7 @@ from typing import Any
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 
 SCHEMA_VERSION = "milai-trace-join-v1"
+CACHE_SCHEMA_VERSION = "milai-trace-join-v2"
 _ID = {"type": "string", "pattern": r"^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,255}$"}
 _DIGEST = {"type": "string", "pattern": "^[a-f0-9]{64}$"}
 _COUNT = {"type": "integer", "minimum": 0}
@@ -86,6 +87,37 @@ _INPUT["properties"]["provider"]["items"]["properties"]["exposure_status"] = {
 }
 _VALIDATOR = Draft202012Validator(_INPUT)
 
+# v2 keys current executions by Runtime request, retaining the original retrieval
+# ID on reuse. v1 bytes and its fresh-only interpretation remain unchanged.
+_INPUT_V2 = copy.deepcopy(_INPUT)
+_INPUT_V2["properties"]["schema_version"] = {"const": CACHE_SCHEMA_VERSION}
+_runtime_v2 = _INPUT_V2["properties"]["runtime"]["items"]
+_runtime_v2["properties"].update({
+    "runtime_request_id": _ID,
+    "execution_kind": {"enum": ["FRESH", "CACHE_REUSE"]},
+    "origin_runtime_request_id": _nullable(_ID),
+    "origin_host_attempt_trace_id": _nullable(_ID),
+    "context_capsule_ref": _nullable(_ID),
+    "reader_context_sha256": _nullable(_DIGEST),
+    "canonical_position": _nullable(_COUNT),
+    "requirement_coverage_digest": _nullable(_DIGEST),
+    "dependency_digest": _nullable(_DIGEST),
+})
+_runtime_v2["properties"]["missing_reason"]["enum"].append("NO_NEW_RETRIEVAL")
+_runtime_v2["required"] = list(_runtime_v2["properties"])
+_mcp_v2 = _INPUT_V2["properties"]["mcp"]["items"]
+_mcp_v2["properties"].update({
+    "runtime_request_id": _nullable(_ID), "receipt_reused": {"type": "boolean"},
+    "context_capsule_ref": _nullable(_ID), "previous_context_ref": _nullable(_ID),
+})
+_mcp_v2["required"] = list(_mcp_v2["properties"])
+_provider_v2 = _INPUT_V2["properties"]["provider"]["items"]
+_provider_v2["properties"]["runtime_request_ids"] = _provider_v2["properties"].pop(
+    "retrieval_trace_ids"
+)
+_provider_v2["required"] = list(_provider_v2["properties"])
+_VALIDATOR_V2 = Draft202012Validator(_INPUT_V2)
+
 
 def _identity(version: dict[str, Any]) -> tuple[str, str]:
     return version["memory_ref"], version["version_id"]
@@ -115,14 +147,24 @@ def join_trace(facts: dict[str, Any]) -> dict[str, Any]:
     An input's provenance must be verified by its runner; structural validation is
     not authentication and cannot turn an invented record into Product evidence.
     """
-    if next(_VALIDATOR.iter_errors(facts), None) is not None:
+    return _join_trace(facts, {})
+
+
+def _join_trace(
+    facts: dict[str, Any], origins: dict[str, tuple[dict[str, Any], dict[str, Any]]],
+) -> dict[str, Any]:
+    v2 = facts.get("schema_version") == CACHE_SCHEMA_VERSION
+    validator = _VALIDATOR_V2 if v2 else _VALIDATOR
+    runtime_key = "runtime_request_id" if v2 else "retrieval_trace_id"
+    references_key = "runtime_request_ids" if v2 else "retrieval_trace_ids"
+    if next(validator.iter_errors(facts), None) is not None:
         # Do not echo rejected private payloads or hidden labels in diagnostics.
         raise ValueError("INVALID_TRACE_OWNER_FACTS")
     host = facts["host"]
     attempt = host["host_attempt_trace_id"]
     if host["retry_of"] == attempt:
         raise ValueError("RETRY_REQUIRES_NEW_ATTEMPT")
-    runtime = _unique(facts["runtime"], "retrieval_trace_id")
+    runtime = _unique(facts["runtime"], runtime_key)
     _unique(facts["mcp"], "invocation_id")
     provider = _unique(facts["provider"], "request_id")
     native_ids: set[str] = set()
@@ -132,14 +174,23 @@ def join_trace(facts: dict[str, Any]) -> dict[str, Any]:
     all_versions: dict[tuple[str, str], str] = {}
     gaps: list[dict[str, str]] = []
     for trace_id, row in runtime.items():
+        reused = v2 and row["execution_kind"] == "CACHE_REUSE"
+        origin = _cache_origin(row, host, origins) if reused else None
+        if v2 and not reused and (
+            row["origin_runtime_request_id"] is not None
+            or row["origin_host_attempt_trace_id"] is not None
+            or row["missing_reason"] == "NO_NEW_RETRIEVAL"
+        ):
+            raise ValueError("FRESH_EXECUTION_HAS_CACHE_ORIGIN")
         missing = row["decision_snapshot_digest"] is None or row["evidence_set_digest"] is None
         if missing != (row["missing_reason"] is not None):
             raise ValueError("MISSING_TRACE_REASON_MISMATCH")
-        if missing:
-            gaps.append({"retrieval_trace_id": trace_id, "reason": row["missing_reason"]})
+        if missing and not reused:
+            gaps.append({runtime_key: trace_id, "reason": row["missing_reason"]})
         acquired = _versions(row["acquired_versions"])
         selected = _versions(row["selected_versions"])
-        if any(acquired.get(key) != digest for key, digest in selected.items()):
+        available = _versions(origin["selected_versions"]) if origin is not None else acquired
+        if any(available.get(key) != digest for key, digest in selected.items()):
             raise ValueError("SELECTED_VERSION_NOT_ACQUIRED")
         for key, digest in acquired.items():
             if key in all_versions and all_versions[key] != digest:
@@ -149,11 +200,19 @@ def join_trace(facts: dict[str, Any]) -> dict[str, Any]:
     for row in facts["mcp"]:
         if row["host_attempt_trace_id"] != attempt:
             raise ValueError("CROSS_ATTEMPT_MCP_JOIN")
-        trace_id = row["retrieval_trace_id"]
+        trace_id = row[runtime_key]
         if trace_id is not None:
             if trace_id not in runtime or trace_id in linked_retrievals:
                 raise ValueError("AMBIGUOUS_OR_MISSING_RUNTIME_JOIN")
             linked_retrievals.add(trace_id)
+            if v2:
+                source = runtime[trace_id]
+                if (row["retrieval_trace_id"] != source["retrieval_trace_id"]
+                        or row["context_capsule_ref"] != source["context_capsule_ref"]
+                        or row["receipt_reused"] != (source["execution_kind"] == "CACHE_REUSE")
+                        or (row["receipt_reused"]
+                            and row["previous_context_ref"] != row["context_capsule_ref"])):
+                    raise ValueError("MCP_RUNTIME_ORIGIN_MISMATCH")
             if row["status"] == "SUCCESS":
                 delivered_retrievals.add(trace_id)
         elif row["status"] == "SUCCESS":
@@ -175,11 +234,13 @@ def join_trace(facts: dict[str, Any]) -> dict[str, Any]:
             raise ValueError("SUCCESSFUL_PROVIDER_REQUIRES_NATIVE_ID")
         else:
             gaps.append({"request_id": request_id, "reason": row["native_id_missing_reason"]})
-        traces = row["retrieval_trace_ids"]
+        traces = row[references_key]
         if len(set(traces)) != len(traces) or not set(traces) <= linked_retrievals:
             raise ValueError("UNBOUND_PROVIDER_RETRIEVAL")
         admitted_selected: dict[tuple[str, str], str] = {}
         for trace_id in traces:
+            if v2 and row["reader_context_sha256"] != runtime[trace_id]["reader_context_sha256"]:
+                raise ValueError("PROVIDER_RUNTIME_CONTEXT_MISMATCH")
             if runtime[trace_id]["gate"] == "ADMITTED" and trace_id in delivered_retrievals:
                 admitted_selected.update(selected_by_trace[trace_id])
         exposed = _versions(row["exposed_versions"])
@@ -235,7 +296,7 @@ def join_trace(facts: dict[str, Any]) -> dict[str, Any]:
         })
     canonical = json.dumps(facts, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
     return {
-        "schema_version": SCHEMA_VERSION,
+        "schema_version": facts["schema_version"],
         "run_id": facts["run_id"],
         "product_lock_digest": facts["product_lock_digest"],
         "host": copy.deepcopy(host),
@@ -249,19 +310,48 @@ def join_trace(facts: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _cache_origin(
+    row: dict[str, Any], host: dict[str, Any],
+    origins: dict[str, tuple[dict[str, Any], dict[str, Any]]],
+) -> dict[str, Any]:
+    previous = origins.get(row["origin_runtime_request_id"])
+    if previous is None:
+        raise ValueError("CACHE_ORIGIN_NOT_OBSERVED")
+    prior_host, origin = previous
+    if (origin["execution_kind"] != "FRESH"
+            or row["origin_host_attempt_trace_id"] != prior_host["host_attempt_trace_id"]
+            or host["host_attempt_trace_id"] == prior_host["host_attempt_trace_id"]
+            or host["task_identity_digest"] != prior_host["task_identity_digest"]):
+        raise ValueError("CACHE_ORIGIN_ATTEMPT_MISMATCH")
+    for key in ("retrieval_trace_id", "context_capsule_ref", "reader_context_sha256",
+                "canonical_position", "requirement_coverage_digest", "dependency_digest"):
+        if row[key] is None or row[key] != origin[key]:
+            raise ValueError("CACHE_ORIGIN_BINDING_MISMATCH")
+    if (row["gate"] != "ADMITTED" or origin["gate"] != "ADMITTED"
+            or origin["missing_reason"] is not None
+            or row["acquired_versions"] or row["decision_snapshot_digest"] is not None
+            or row["evidence_set_digest"] is not None
+            or row["missing_reason"] != "NO_NEW_RETRIEVAL"
+            or row["selected_versions"] != origin["selected_versions"]):
+        raise ValueError("CACHE_REUSE_IS_NOT_FRESH_ACQUISITION")
+    return origin
+
+
 def join_attempts(attempts: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Join chronological attempts in one pinned run, rejecting replay/retry drift."""
     seen: dict[str, dict[str, Any]] = {}
     requests: set[str] = set()
     natives: set[str] = set()
     retrievals: set[str] = set()
+    origins: dict[str, tuple[dict[str, Any], dict[str, Any]]] = {}
     invocations: set[str] = set()
     versions: dict[tuple[str, str], str] = {}
     joined: list[dict[str, Any]] = []
     for facts in attempts:
-        result = join_trace(facts)
+        result = _join_trace(facts, origins)
         if joined and any(
-            joined[0][key] != result[key] for key in ("run_id", "product_lock_digest")
+            joined[0][key] != result[key]
+            for key in ("run_id", "product_lock_digest", "schema_version")
         ):
             raise ValueError("MIXED_RUN_OR_PRODUCT_LOCK")
         host = result["host"]
@@ -276,9 +366,16 @@ def join_attempts(attempts: list[dict[str, Any]]) -> list[dict[str, Any]]:
         ):
             raise ValueError("UNBOUND_RETRY")
         for trace in result["runtime"]:
-            if trace["retrieval_trace_id"] in retrievals:
-                raise ValueError("RETRIEVAL_REPLAY")
-            retrievals.add(trace["retrieval_trace_id"])
+            v2 = result["schema_version"] == CACHE_SCHEMA_VERSION
+            if not v2 or trace["execution_kind"] == "FRESH":
+                if trace["retrieval_trace_id"] in retrievals:
+                    raise ValueError("RETRIEVAL_REPLAY")
+                retrievals.add(trace["retrieval_trace_id"])
+            if v2:
+                request_id = trace["runtime_request_id"]
+                if request_id in origins:
+                    raise ValueError("RUNTIME_REQUEST_REPLAY")
+                origins[request_id] = (host, trace)
             for version in trace["acquired_versions"]:
                 key = _identity(version)
                 if key in versions and versions[key] != version["content_sha256"]:
