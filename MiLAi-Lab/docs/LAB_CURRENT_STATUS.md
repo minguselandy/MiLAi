@@ -55,8 +55,15 @@ The [Revision/Attention zero-model readiness](REVISION_ATTENTION_READINESS.md)
 records the next concrete gaps: four inspected exposed DB/OS banks have 37 original
 revision-1 cards and no changed-version lineage; old FULL/FOCUS projection is not
 the new three-mode retrieval policy or M1 request envelope. Source/receipt inventory
-and proposed contracts are prepared, not effect evidence. Next work is scoped
-zero-model contract implementation; no new model allocation or overall completion.
+and proposed contracts are prepared, not effect evidence. Readiness PR #43 closed
+at `ba88a57`, exact-head fast `35789620049` / main fast `35789799253` PASS.
+The follow-up [Revision eligibility bridge](RESEARCH_REVISION_ELIGIBILITY.md) now
+checks frozen semantic-review declarations, complete source-cluster independence,
+exact old/new versions and confirmed later exposure over the existing v0.7 bank.
+62 targeted tests pass, including an existing-session mock revision/restore/reuse
+join. It is structural eligibility only: no semantic judge, real correction
+denominator, observed use or benefit. No new model allocation or overall completion.
+Next zero-model work is the separate deterministic Attention policy seam.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.
