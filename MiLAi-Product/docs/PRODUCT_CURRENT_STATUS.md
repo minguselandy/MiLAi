@@ -23,10 +23,12 @@
   `9 PASS / 35 UNVERIFIED / 0 DEVIATION`; overall status remains honestly `UNVERIFIED`.
   The prior `10/34/0` map was bound to the cleanup Product identity. Adding the explicit
   testkit changes the global manifest; its 14 earlier behavior receipts remain historical.
-  A new trace-ownership receipt contributes one current SCOPED G7 claim. No old receipt was rewritten and
+  Trace ownership and the new Host diagnoses contribute three current SCOPED claims,
+  including one failed native-replay diagnostic. No old receipt was rewritten and
   no new behavior failure is implied. Unrelated behavior suites were not rerun for this addition.
-- `docs/TECH_DEBT.md` currently records `7 FIXED / 3 NEEDS_REVALIDATION / 0 OPEN` after
-  [scoped trace-ownership revalidation](revalidation/trace-ownership/REVALIDATION.md).
+- `docs/TECH_DEBT.md` currently records `8 FIXED / 1 NEEDS_REVALIDATION / 1 OPEN` after
+  [Host continuity diagnosis](revalidation/host-continuity/REVALIDATION.md).
+  Native retired-instance replay is OPEN; cache-miss continuation is FIXED for its scoped proof.
   `NEEDS_REVALIDATION` is not a defect classification and must be resolved by executable diagnosis.
 - The current coordinating contract is the
   [post-cleanup development Goal](cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md),
@@ -43,6 +45,9 @@
   v2 additionally covers actual Claim/cache origins and has a scoped debt receipt.
   PR #34 exact-head fast `35683142058`, merge-tree identity and main fast all passed.
   Active work is [3A-2D Host continuity diagnosis](revalidation/host-continuity/DIAGNOSIS_PLAN.md).
+  Local diagnosis is terminal: 18 native controls PASS / 2 FAIL; 2 real PG chains PASS
+  (4 Host processes, 10 attempts). Remote diagnosis closure remains pending; the replay
+  defect requires a separate behavior PR, not a repair hidden in this diagnostic slice.
   This is not real model use or a mechanism-effect claim.
   No research experiment is automatically resumed.
 - Root CI is the monorepo authority. Full composition is reserved for a material Product behavior

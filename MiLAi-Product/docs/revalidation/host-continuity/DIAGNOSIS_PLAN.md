@@ -1,7 +1,9 @@
 # Host continuity diagnosis — Phase 3A-2D
 
-Status: IN_PROGRESS, 2026-09-22. Diagnosis only; no Product behavior change or
-remediation admitted. Both Host debts remain NEEDS_REVALIDATION.
+Status: DIAGNOSED, 2026-09-22; remote closure pending. The
+[execution report](REVALIDATION.md) classifies native continuity OPEN and cache-miss
+continuation FIXED for the tested scope. This page preserves the original plan;
+no Product behavior fix is included.
 
 Baseline: main `9474c63e56e5029c33e2dca5c19e772e4868b18d`, Git tree
 `1c070d6d9c62ea3ce71a68b22ca3ec4e87c2584e`, main fast `35683815988` PASS.

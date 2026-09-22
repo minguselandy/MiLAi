@@ -1227,6 +1227,28 @@
           "execution_receipts": [
             {
               "coverage": "SCOPED",
+              "covered_statement": "Host cache loss or restart cannot authorize offline CURRENT Context: memory is reacquired or validated by Runtime, and unavailable Runtime blocks exposure.",
+              "debt_id": "cache-miss-host-continuation",
+              "execution_status": "PASS",
+              "limits": [
+                "Does not fix or cover the retired-native-instance replay defect.",
+                "Serial query-first path plus compatibility retained-slot negative controls; not streaming/concurrent/production continuity.",
+                "Reuses unchanged-tree scope/canonical validation evidence from trace-ownership receipt rather than rerunning it.",
+                "No model use, efficacy or broad protected-Context conformance claim."
+              ],
+              "negative_case_ids": [
+                "CACHE-NEG-OFFLINE",
+                "CACHE-NEG-OLD"
+              ],
+              "positive_case_ids": [
+                "CACHE-POS-RESTART",
+                "CACHE-POS-VALIDATION"
+              ],
+              "receipt": "docs/revalidation/host-continuity/cache-miss.receipt.json",
+              "status": "PASS"
+            },
+            {
+              "coverage": "SCOPED",
               "covered_statement": "For opt-in serial query-first tracing, the exact governed Context/version selection and dispatched exposure bind to actual Runtime/MCP/Host requests; validated cache reuse retains its original retrieval and uses the current authorized invocation. Exposure never implies model use.",
               "debt_id": "trace-ownership",
               "execution_status": "PASS",
@@ -1546,9 +1568,31 @@
           }
         ],
         "verification": {
-          "behavioral_execution": "UNVERIFIED",
-          "method": "crosswalk reference resolution only",
-          "reason": "Mapped implementation and test references resolve, but this receipt does not treat test count or test presence as behavioral conformance proof."
+          "behavioral_execution": "FAIL",
+          "execution_receipts": [
+            {
+              "coverage": "SCOPED",
+              "covered_statement": "Replacing a native Host instance must not reactivate the retired execution graph or replay its old operation.",
+              "debt_id": "process-local-task-continuity",
+              "execution_status": "FAIL",
+              "limits": [
+                "Scoped native Host replace/recovery behavior, not a broad Architecture DEVIATION decision.",
+                "Runtime reauthorization still occurs; no unauthorized canonical mutation or memory exposure is demonstrated.",
+                "A separate remediation branch and receipt are required."
+              ],
+              "negative_case_ids": [
+                "NATIVE-NEG-RETIRED"
+              ],
+              "positive_case_ids": [
+                "NATIVE-POS-BOUND",
+                "NATIVE-POS-RESTART"
+              ],
+              "receipt": "docs/revalidation/host-continuity/receipt.json",
+              "status": "FAIL"
+            }
+          ],
+          "method": "identity-bound behavior revalidation receipt",
+          "reason": "A current behavior gap was reproduced. The frozen item remains UNVERIFIED because the receipt does not itself assert an architecture DEVIATION."
         }
       }
     ],
@@ -3808,7 +3852,7 @@
   "source": {
     "crosswalk": "architecture/v1.0/crosswalk.json",
     "crosswalk_sha256": "8b6d5bba92391abd890375f81853393977aa086acff7620851f68852e1f63ee0",
-    "product_commit": "519ba02bbedc7507237bb78267679ef0cf62cf71",
+    "product_commit": "6712e800ef28189f191eb313108a6b8d86b3d795",
     "product_manifest_sha256": "0a3f2b1ada1e00d98133acc287c24fe8837e9775aef1d9f5c73def90e2da17ae",
     "product_tree_sha256": "22c011d0d9dc267c2a82a71cd9a4c2b2fdbb199f65aa0084eaf25d6583487f8a"
   },

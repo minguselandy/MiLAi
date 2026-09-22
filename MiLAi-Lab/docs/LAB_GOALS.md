@@ -6,7 +6,9 @@
 are complete: v2 binds actual current cache invocations to observed origins without inventing
 fresh retrievals or acquired Evidence bodies. PR #33's fresh-only slice is merged;
 the Claim/cache follow-up closed in PR #34, main fast `35683815988` PASS.
-Active work is 3A-2D Host continuity diagnosis; no behavior repair is yet admitted.
+Active work is 3A-2D Host continuity diagnosis, now locally terminal with retired-instance
+replay OPEN and cache-miss continuation FIXED. After diagnostic merge, a separate
+3A-2R repair is admitted by that failure; no fix is included in this branch.
 
 The cross-bundle mainline is
 [`MILAI-POST-CLEANUP-DEVELOPMENT-01`](../../MiLAi-Product/docs/cleanup/MILA_POST_CLEANUP_DEVELOPMENT_GOAL_v1.0_20260922.md).

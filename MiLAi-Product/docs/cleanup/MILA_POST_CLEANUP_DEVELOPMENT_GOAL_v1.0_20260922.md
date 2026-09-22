@@ -15,7 +15,7 @@ paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
 current_work_package: 3A-2D_HOST_CONTINUITY_DIAGNOSIS
-next_work_package: 3A-3D_RESOLVER_DIAGNOSTIC_OR_CONDITIONAL_3A2R
+next_work_package: 3A-2R_HOST_CONTINUITY_RETIRED_INSTANCE
 new_experiment_allocations: 0
 new_model_requests: 0
 ---
@@ -224,8 +224,8 @@ NEEDS_REVALIDATION
 | 3A-0 | Status reconciliation | Product/Lab docs | no | PASS — PR #27 / main identity verified | G0 |
 | 3A-1 | Worker `--once` revalidation | Product evidence | expected no | PASS — PR #28 / main identity verified | 3A-0 |
 | 3B-1 | Trace Ownership v1/v2 | Product/testkit + Lab | small/contractual | PASS — scoped receipt / PR #34 / main identity verified | 3A-0 |
-| 3A-2D | Host Continuity diagnosis | Product evidence | no | IN_PROGRESS — diagnosis only; no classification yet | 3B-1 vocabulary |
-| 3A-2R | Host Continuity remediation | Product | conditional | NOT_ADMITTED | 3A-2D FAIL |
+| 3A-2D | Host Continuity diagnosis | Product evidence | no | DIAGNOSED_FAIL — native replay OPEN / cache-miss FIXED; remote closure pending | 3B-1 vocabulary |
+| 3A-2R | Host Continuity remediation | Product | conditional | ADMITTED_PENDING_DIAGNOSIS_MERGE — retired-instance replay only | 3A-2D FAIL |
 | 3A-3D | Resolver diagnostic | Product/Lab tests | no | PENDING | 3A-0 |
 | 3A-3R | Resolver remediation | Product | conditional | NOT_ADMITTED | 3A-3D FAIL |
 | 3B-2 | Memory Opportunity Ledger | Lab | no | PENDING | 3B-1 PASS |
@@ -840,6 +840,25 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-22 — Host diagnosis: retired native replay OPEN, cache-miss proof PASS
+
+- No Product executable change. [Diagnosis and separate receipts](../revalidation/host-continuity/REVALIDATION.md)
+  preserve **18 native PASS / 2 FAIL**, source `c70ceacb5bc2aeb19ad332b2ec04c8c700bf3145`.
+  A → B → retired A repeats an old operation and reaches a third actual Adapter MCP/Provider
+  fixture call. Ordinary duplicate, delayed result, ABA, scope/profile and token controls pass.
+- Final source `6712e800ef28189f191eb313108a6b8d86b3d795`: **2 real PG cases PASS**,
+  4 fresh Host processes / 10 attempts / 8 controlled Provider calls. Exact persistent
+  Claim reacquisition, validated receipt reuse and fresh cache-miss fallback work;
+  stopped actual Runtime blocks Provider. No model request/token or allocation.
+- Host test-harness failures remain recorded separately. The two Product behavior assertions
+  remain strict XFAIL for diagnostic CI; they are not repaired or counted as PASS.
+  Product manifest/executable identity is unchanged, so existing 3B-1 scope/canonical
+  evidence is reused rather than rerun. Owned processes/DB stopped, data retained.
+- TECH_DEBT is `8 FIXED / 1 NEEDS_REVALIDATION / 1 OPEN`. Receipts are scoped, not
+  broad Conformance or production claims. Diagnostic remote closure is pending.
+  The failure admits a separate `fix/host-continuity-retired-instance` after that merge;
+  resolver diagnosis and Opportunity Ledger remain pending, research stays unallocated.
 
 ## 2026-09-22 — 3B-1 closed; Host continuity diagnosis entered
 
