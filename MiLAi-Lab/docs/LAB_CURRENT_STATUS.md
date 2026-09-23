@@ -92,7 +92,15 @@ removed and those three positions now retain explicit gaps, not replacement IDs.
 The earlier 24-cache claim and ranking-dependent preflight are withdrawn; original
 artifacts are preserved. Six preparation tests pass; semantic support, state labels
 and integrated execution admission remain pending. No further authorization confirmation
-is needed; Utility stays closed. Next is method admission and the bounded experiment.
+is needed; Utility stays closed. Input repair PR #48 closed at `0299b58`: exact-head
+fast `35801675642`, identical-tree merge and main fast `35802430247` PASS; Lab
+4,794 PASS / 137 SKIP / 4 DESELECTED. The subsequent
+[native runtime candidate](JOINT_NATIVE_RUNTIME.md) integrates guarded Actor dispatch,
+source-only revision formation/existing patches/exact later exposure and one-turn
+Actor Attention state/durable expansion. 117 local targeted tests PASS using
+synthetic HTTP/native fixtures, zero external requests. The single sealed batch
+driver, actual source reviews/evaluation labels and method admission still precede
+the bounded experiment; no effect or overall Goal terminal is claimed.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.
