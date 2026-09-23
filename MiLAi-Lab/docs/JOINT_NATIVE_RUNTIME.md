@@ -1,10 +1,19 @@
 # Joint Revision / Attention native runtime candidate
 
-2026-09-23. **INTEGRATED_RUNTIME_CANDIDATE / NOT_EXECUTION_ADMISSION**.
+2026-09-23. **EXPERIMENT_PAUSED_BY_USER / INTEGRATED_RUNTIME_CANDIDATE / NOT_EXECUTION_ADMISSION**.
 Base/rollback: `0299b584730ea035f87c702d95382aaa4493fa38` (PR #48).
 The [confirmed joint allocation](REVISION_ATTENTION_FIRST_BATCH.md) remains the
-only authority: unchanged 32 pairs / 64 maximum arms and one finite budget.
+finite ceiling: unchanged 32 pairs / 64 maximum arms and one finite budget.
+The newer user instruction is to upload the code and **not start experiments**.
+Explicit user resumption and all remaining admission gates are required before
+any experimental dispatch. CI success or automatic Goal continuation is not resumption.
 No new external model/embedding/probe requests; real batch clock not started.
+
+Code PR #49 closed at `02d07947372d058a43c94ecb7cd815f19b39650f`, tested head
+`770f65699d791faaedada7369e7f66d8f3f90a73`. Exact-head fast `35804114833` and main
+fast `35804795526` PASS; candidate/merge tree
+`a2667836a320bfe90f16677b30767ee7cd3d7714` identical. Lab 4,816 PASS / 137 SKIP /
+4 DESELECTED; Ruff/mypy/boundaries/build PASS. No Product full rerun.
 
 ## What is implemented
 
@@ -119,6 +128,7 @@ historical experiments are not repeated.
 
 Still required before the first external request:
 
+0. Explicit user instruction to resume experiments. Keep this batch paused otherwise.
 1. Implement the single exclusive batch driver and durable formation → source
    review → native transition, all sharing one ledger/deadline; interrupted or
    unknown attempts may not become a new allocation.
@@ -131,6 +141,15 @@ Still required before the first external request:
 4. Authenticate actual proposals and pre-native source reviews; freeze independent
    Attention evaluation labels, retain unknowns and all rejected/no-reuse costs.
    A review seal or these synthetic tests cannot replace this work.
+
+Known native-environment gap: the read-only import smoke in the existing external
+`lifelong-venv` failed with `ModuleNotFoundError: No module named 'jsonschema'`.
+The failure occurred while importing `revision_eligibility`, before the subsequent
+native checkout/image verification function was reached. Thus that smoke proves
+neither a runnable native environment nor freshly checked image identities.
+The Lab/CI environment passes, but is not a substitute for this native environment.
+No dependency was installed, no task/model was run, and this gap is deferred during
+the user pause. The failed check and its correction remain recorded on PR #49.
 
 No Product default behavior, API, Schema, permission or Canonical change. Schema
 remains EXPERIMENTAL / NO-GO; overall Goal and mechanism-effect terminals are open.

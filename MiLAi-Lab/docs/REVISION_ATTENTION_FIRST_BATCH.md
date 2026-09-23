@@ -1,8 +1,11 @@
 # Revision / Attention: authorized joint finite batch
 
-2026-09-23. **SCHEDULE_FROZEN / METHOD_NOT_ADMITTED / zero new requests**.
+2026-09-23. **PAUSED_BY_USER / SCHEDULE_FROZEN / METHOD_NOT_ADMITTED / zero new requests**.
 The user explicitly confirmed the complete new finite contract, then repeated its
-data/formation/model confirmation. No further budget confirmation is required.
+data/formation/model confirmation. The user subsequently instructed:
+**“先不要开始实验，把整理好的代码上传到github上”**. That newer pause controls:
+upload/review/CI closure only, no experimental dispatch until explicit user resumption.
+The numerical/data contract remains a ceiling; it does not override the pause.
 This is a new joint allocation, not reopening Utility or any historical allocation.
 Allocation base: `39dc657a5967c0586355b6bea23c56e9a1812ee3` (PR #46 main).
 Input correction base/rollback: `0e4af327fa8ddeedd15cc12ff3738eeb0a36d29a` (PR #47).
@@ -100,7 +103,14 @@ used as verified results. `method-admission-design.json` remains an unadmitted
 draft; any ranking-dependent counts require corrected vectors. The earlier
 `input-review/` output also remains untouched. No historical evidence is rewritten.
 
-## Remaining execution admission (not another permission request)
+## Remaining execution admission (deferred until explicit experiment resumption)
+
+Code delivery is closed by PR #49 at `02d07947372d058a43c94ecb7cd815f19b39650f`;
+exact-head fast `35804114833` and main identity fast `35804795526` PASS. This is
+engineering evidence, not experiment admission. No generation, embedding,
+model-info/tokenizer probe, formation or native effect execution during the pause.
+Do not reopen the closed Utility ledger, install native-environment dependencies
+or treat automatic Goal continuation as a user instruction to resume experiments.
 
 The [native runtime candidate](JOINT_NATIVE_RUNTIME.md) now connects the real
 guarded Provider request path, existing revision engine/exposure bridge and
