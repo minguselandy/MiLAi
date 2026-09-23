@@ -84,10 +84,14 @@ candidate/merge tree and main fast `35798141392` PASS; Lab 4,788 PASS / 137 SKIP
 including new revisions/state from existing visible feedback. The separate
 [joint finite allocation](REVISION_ATTENTION_FIRST_BATCH.md) now freezes all 32 pair
 positions/64 maximum arm executions, mechanism assignment and order. No new request
-has been sent. Offline review exports 39 structural windows and recovers all 24 exact
-cached query vectors, including OS 120/226/2, without model calls or own-task card/
-outcome reuse. Five preparation tests pass; semantic support, state labels and
-integrated execution admission remain pending. No further authorization confirmation
+has been sent. PR #47 closed at `0e4af32`: exact-head fast `35800005509`, identical
+candidate/merge tree and main fast `35800671811` PASS. Input review correction:
+39 structural windows remain, but only **21/24 instructed-query caches** are valid.
+The bank fallback for OS 120/226/2 incorrectly used raw query vectors; it has been
+removed and those three positions now retain explicit gaps, not replacement IDs.
+The earlier 24-cache claim and ranking-dependent preflight are withdrawn; original
+artifacts are preserved. Six preparation tests pass; semantic support, state labels
+and integrated execution admission remain pending. No further authorization confirmation
 is needed; Utility stays closed. Next is method admission and the bounded experiment.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
