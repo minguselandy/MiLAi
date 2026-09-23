@@ -1,0 +1,677 @@
+{
+  "schema": "milai-revision-attention-allocation-v1",
+  "status": "SCHEDULE_FROZEN_METHOD_NOT_ADMITTED",
+  "goal": "MILAI-POST-CLEANUP-DEVELOPMENT-01/3C-2+3C-3",
+  "authority": "User explicitly confirmed the new finite contract on 2026-09-23, including formation from existing visible feedback. This is one new joint batch; Utility remains closed.",
+  "base_commit": "39dc657a5967c0586355b6bea23c56e9a1812ee3",
+  "arm_kind": "RESEARCH_PROTOTYPE",
+  "frozen_at": "2026-09-22 23:40:43 UTC",
+  "source_id_manifest": "utility-first-batch-allocation-20260922.json",
+  "source_id_manifest_sha256": "90877f1f6506974edb84b773ea356be687e59038136d0801a0b4d299ff392e26",
+  "selection_rule": "Reuse only prior frozen exposed ID/cluster metadata. First six positions per domain Revision, remaining six Attention. Interleave mechanisms by positions 0,6,1,7,2,8,3,9,4,10,5,11 to share finite quota; repeat each fixed position immediately after its original two-domain block. No result-based selection/replacement.",
+  "domains": {
+    "db_bench": [
+      {
+        "id": "33",
+        "source_partition": "DEV",
+        "cluster": "0327562ac0e86ecba365bd4a19df8d4fdc735811c34d8825f4b6c83f6d2fe2dd",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-33/task-33/native-session.json",
+        "exposure_receipt_sha256": "f98c0c5dda37c93e17f891c634a772d5b14dc67d505875f9ddade1b31445b391"
+      },
+      {
+        "id": "62",
+        "source_partition": "DEV",
+        "cluster": "b6bfffcc9ea0e97491a69b0d62eb9a9d2457df01744aba30449ff8c452050673",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-62/task-62/native-session.json",
+        "exposure_receipt_sha256": "9886d7f367c24a1c72c3b1b59f01692d47422a25ca37260b83050f4bff1b7f9e"
+      },
+      {
+        "id": "94",
+        "source_partition": "DEV",
+        "cluster": "94209fbcd94101d90ddfc712496b85fd2caa2b057d2b78e1a65af54060589c16",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-94/task-94/native-session.json",
+        "exposure_receipt_sha256": "a442f6a6bbe8f715185a65531c204631c8ca920bc3792f441aca7961e13e75da"
+      },
+      {
+        "id": "134",
+        "source_partition": "DEV",
+        "cluster": "f1643c3b7032016cc1cc7695a27bcb2b50d2942807e8917de904dae66ead27cd",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-134/task-134/native-session.json",
+        "exposure_receipt_sha256": "f06b71673e361514fff1a90ae99d639d33b709902a07b5b544d2656177939311"
+      },
+      {
+        "id": "159",
+        "source_partition": "DEV",
+        "cluster": "641b37f3caf5449d570a951c8dcac9600815dafd25ba747362c203895881ec76",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-159/task-159/native-session.json",
+        "exposure_receipt_sha256": "67706aad88dcb4e5ccbbfd9ab0b537c9386294c09413a635ba20ffd08a899097"
+      },
+      {
+        "id": "163",
+        "source_partition": "DEV",
+        "cluster": "d1d87de3e9721483679cdeb5e1386c08c3e435d205885538cc39cfb7e3bc0ea2",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-163/task-163/native-session.json",
+        "exposure_receipt_sha256": "c743c0c6d1264e82e5d174e9919cf1b968b4ac35ea2be3e1741bfbae274f878b"
+      },
+      {
+        "id": "175",
+        "source_partition": "DEV",
+        "cluster": "e19f09f1b76954dc9e45aeda3f9eb636d29e017ae6c289afcb924e36f343f4c1",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-175/task-175/native-session.json",
+        "exposure_receipt_sha256": "d960f3897368842153b232c51aea9b58b75b8b86312ee4e0b76a00e2be120bfd"
+      },
+      {
+        "id": "223",
+        "source_partition": "DEV",
+        "cluster": "c42246cfc4ba7e29ce1049dd4f2871e6ba321a3afeb05638be2929568bcada20",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-223/task-223/native-session.json",
+        "exposure_receipt_sha256": "2718fd3c77c7714f13258b72fb8fc877d236f5f10beb320dec4399711ce11930"
+      },
+      {
+        "id": "240",
+        "source_partition": "DEV",
+        "cluster": "759737008814a18d082321a87ea6810638fbb15211ce8ba40e5eb06b3d15dc69",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-240/task-240/native-session.json",
+        "exposure_receipt_sha256": "68156a311d0682dbf786bd9fd427683864f9d69065771285bab4f95cc149d24a"
+      },
+      {
+        "id": "246",
+        "source_partition": "DEV",
+        "cluster": "4338c8fbc53b41ce5b688e552163745e591d6ffd6dffc3ea91e2091c6281eff0",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-246/task-246/native-session.json",
+        "exposure_receipt_sha256": "4d5846a8b3a3c67df5724a313941a403bb63a4087c8528a7a84bf3899fbbc9a3"
+      },
+      {
+        "id": "248",
+        "source_partition": "DEV",
+        "cluster": "1d88b6f67f582e6e92eeabe8002ed3af18c35089fea6a6d5fc1b810706c8ae33",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-248/task-248/native-session.json",
+        "exposure_receipt_sha256": "618f136bef849b89a50445fbee7740bcf3155fcbb7013563054f92863801538d"
+      },
+      {
+        "id": "256",
+        "source_partition": "DEV",
+        "cluster": "44928603bf7fb1cfd4549dfcf76c562fb6561265cb8603954e52ffc5edd9f758",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/dev-projection-complete/p0-selected-db-256/task-256/native-session.json",
+        "exposure_receipt_sha256": "1d8ce39395e1580c17e5e8494540de5d323d2daef22547e725c14d94f9f073c0"
+      }
+    ],
+    "os_interaction": [
+      {
+        "id": "120",
+        "source_partition": "DEV",
+        "cluster": "25c31de92e6dcd20f991271f523e829c370ae76a745094350ab4af0d70429426",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-current-v03-os_interaction-milai/task-120/native-session.json",
+        "exposure_receipt_sha256": "85ce9dec16a33e81a778528ff2c66c286a9dba09443220f03aaf4ac285e65290"
+      },
+      {
+        "id": "194",
+        "source_partition": "DEV",
+        "cluster": "024e578205c8a0477a30c7936713c2f88613031edb4a27899fc6e5e67ae0d492",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/reasoningbank-transfer-20260915-_7fzz854/dev-current-v03-os_interaction-milai/task-194/native-session.json",
+        "exposure_receipt_sha256": "df6e12f7f4bf23804048a07ede1b53c6ec66ad2274609f3fa64a7db4a6c72dc5"
+      },
+      {
+        "id": "226",
+        "source_partition": "DEV",
+        "cluster": "6f6d15600bbea0facda1e20aeb00bdf3d951ab5f4a2736076b9ad631c3f633e9",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/evidence-utility-improvement-20260916/d1-native-smoke/d1-os_interaction/task-226/native-session.json",
+        "exposure_receipt_sha256": "0f2eaf0746ad96664900ef7d6d78a5d8cb0698995e5f1a8c78b84798ba957b7e"
+      },
+      {
+        "id": "428",
+        "source_partition": "DEV",
+        "cluster": "4bdce982434460c3cd878e096af025d2ce46903bf09c6bc34225485c2db80174",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/evidence-utility-improvement-20260916/d1-native-smoke/d1-os_interaction/task-428/native-session.json",
+        "exposure_receipt_sha256": "92686048b8f9a58e4dacf40093c2f9c679d7d675bf5c051ea726a7172a8a25d0"
+      },
+      {
+        "id": "2",
+        "source_partition": "VALID",
+        "cluster": "68a90152c04505f5f2f397b31c13447056085e8176be9daa43b182b9d731b2e4",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/native-validation-v06/valid-os_interaction-milai/task-2/native-session.json",
+        "exposure_receipt_sha256": "71fb659d13c296ada0f8f40cb5ec95c287f22ad33604cb8e06bf61cfa77dfac1"
+      },
+      {
+        "id": "16",
+        "source_partition": "VALID",
+        "cluster": "3d2f323697bf5f150cb2c41dd9deb48e49b793e1be62c52d2f12d116a18e6ffa",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/native-validation-v06/valid-os_interaction-milai/task-16/native-session.json",
+        "exposure_receipt_sha256": "14d6cb30ce57c9e20cfc4b1727114f54f4d54dca30297507ab50f66c2091e1aa"
+      },
+      {
+        "id": "47",
+        "source_partition": "VALID",
+        "cluster": "4ebd698b4a1c3c7f36b8b8d87cfea5bc4fe952045cc27bbf17a4077740b3ad67",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/native-validation-v06/valid-os_interaction-milai/task-47/native-session.json",
+        "exposure_receipt_sha256": "27719ac7311d580c21d1861f1f8eb02936614410da59d190278be948d6390f07"
+      },
+      {
+        "id": "211",
+        "source_partition": "VALID",
+        "cluster": "89977e52968135323bbe057a7eb0237f188978d665c5cef60072e064f1417707",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/native-validation-v06/valid-os_interaction-milai/task-211/native-session.json",
+        "exposure_receipt_sha256": "319cae167ed93eec06c3d67d2249c3b33060fbc670a26e9af378664b99bd0829"
+      },
+      {
+        "id": "242",
+        "source_partition": "VALID",
+        "cluster": "c1f39eba6498a36ac4dcfda3ef5523d9cba5bf393aa34635d25c929d9e90fc83",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/native-validation-v06/valid-os_interaction-milai/task-242/native-session.json",
+        "exposure_receipt_sha256": "9b88a324122a21551f6d39ef698395af41ee6d615f95dcdd6fd16024d77a0b67"
+      },
+      {
+        "id": "250",
+        "source_partition": "VALID",
+        "cluster": "cdc63ffb46088c873be8ca491fbe05a6f8edaf1a6e51c56d45e67c73e396e89a",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/native-validation-v06/valid-os_interaction-milai/task-250/native-session.json",
+        "exposure_receipt_sha256": "670c405fab1542cdb250ca55cd6c3c346160ecfdd41253c5f4655b7935324ae7"
+      },
+      {
+        "id": "355",
+        "source_partition": "VALID",
+        "cluster": "12ac5436cd24262f24ba2b8875e86d64f587deb7fdf7f836c70b02065e9900a0",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/native-validation-v06/valid-os_interaction-milai/task-355/native-session.json",
+        "exposure_receipt_sha256": "f869e5440d748b1637915fc1ba072b2f6c61da015885b8e07b6b2a75a6c8252a"
+      },
+      {
+        "id": "467",
+        "source_partition": "VALID",
+        "cluster": "0b3a57aad5349f8aa31e03e94058982f5829253530bb2f6cf83b8b638cc793c7",
+        "exposure_receipt": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/native-validation-v06/valid-os_interaction-milai/task-467/native-session.json",
+        "exposure_receipt_sha256": "b771b081652f17a639daedf23ae507fd1cce3ae7de6ba3f5bdf8e22e30cd1a42"
+      }
+    ]
+  },
+  "solver": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "base_url": "http://127.0.0.1:7860/v1",
+    "profile": "M1",
+    "actor_temperature": 0,
+    "self_judge_temperature": 0,
+    "extract_temperature": 1,
+    "other_memory_role_temperature": 0,
+    "top_p": 1,
+    "seed": 213,
+    "enable_thinking": false,
+    "actor_output_cap": 4096,
+    "self_judge_output_cap": 64,
+    "other_memory_role_output_cap": 2048,
+    "context_cap": 65536
+  },
+  "embedding": {
+    "model": "bge-m3",
+    "base_url": "http://36.140.33.19:7861/v1",
+    "contract": "existing bge-query-instruct-cosine-v1, dimension 1024",
+    "use": "existing retrieval only, no new endpoint or contract"
+  },
+  "limits": {
+    "text_generation_requests": 400,
+    "embedding_requests": 128,
+    "rerank_requests": 0,
+    "total_external_requests": 528,
+    "text_reported_tokens": 3000000,
+    "embedding_tokens": 50000,
+    "wall_seconds_from_first_request": 14400,
+    "failed_retry_maintenance_requests_count": true,
+    "unknown_usage": "retain known upper bound, never zero",
+    "deadline": "stop new requests; preserve complete/failed/unfinished; no extension or makeup"
+  },
+  "prohibitions": [
+    "TEST",
+    "main confirmation set",
+    "Travel new groups",
+    "RESERVE",
+    "SUPPORT",
+    "result-dependent replacement",
+    "second solver",
+    "reranker",
+    "changed common conditions"
+  ],
+  "split_manifest": "/cra/memory/mx_memory/evidence/experience-optimization-20260916/splits.json",
+  "split_sha256": "45d48b75bac9dff70cd858bb1ff3f76ee41aa464f7dc814ebf22e3495aa389f9",
+  "repeat_positions_zero_based": [
+    0,
+    3,
+    6,
+    9
+  ],
+  "schedule": [
+    {
+      "pair_index": 0,
+      "domain": "db_bench",
+      "task_id": "33",
+      "source_partition": "DEV",
+      "position": 0,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "APPEND_ONLY",
+        "REVISION"
+      ]
+    },
+    {
+      "pair_index": 1,
+      "domain": "os_interaction",
+      "task_id": "120",
+      "source_partition": "DEV",
+      "position": 0,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "REVISION",
+        "APPEND_ONLY"
+      ]
+    },
+    {
+      "pair_index": 2,
+      "domain": "db_bench",
+      "task_id": "33",
+      "source_partition": "DEV",
+      "position": 0,
+      "mechanism": "REVISION",
+      "repeat": true,
+      "arms": [
+        "REVISION",
+        "APPEND_ONLY"
+      ]
+    },
+    {
+      "pair_index": 3,
+      "domain": "os_interaction",
+      "task_id": "120",
+      "source_partition": "DEV",
+      "position": 0,
+      "mechanism": "REVISION",
+      "repeat": true,
+      "arms": [
+        "APPEND_ONLY",
+        "REVISION"
+      ]
+    },
+    {
+      "pair_index": 4,
+      "domain": "db_bench",
+      "task_id": "175",
+      "source_partition": "DEV",
+      "position": 6,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "STATIC",
+        "ATTENTION"
+      ]
+    },
+    {
+      "pair_index": 5,
+      "domain": "os_interaction",
+      "task_id": "47",
+      "source_partition": "VALID",
+      "position": 6,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "ATTENTION",
+        "STATIC"
+      ]
+    },
+    {
+      "pair_index": 6,
+      "domain": "db_bench",
+      "task_id": "175",
+      "source_partition": "DEV",
+      "position": 6,
+      "mechanism": "ATTENTION",
+      "repeat": true,
+      "arms": [
+        "ATTENTION",
+        "STATIC"
+      ]
+    },
+    {
+      "pair_index": 7,
+      "domain": "os_interaction",
+      "task_id": "47",
+      "source_partition": "VALID",
+      "position": 6,
+      "mechanism": "ATTENTION",
+      "repeat": true,
+      "arms": [
+        "STATIC",
+        "ATTENTION"
+      ]
+    },
+    {
+      "pair_index": 8,
+      "domain": "db_bench",
+      "task_id": "62",
+      "source_partition": "DEV",
+      "position": 1,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "REVISION",
+        "APPEND_ONLY"
+      ]
+    },
+    {
+      "pair_index": 9,
+      "domain": "os_interaction",
+      "task_id": "194",
+      "source_partition": "DEV",
+      "position": 1,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "APPEND_ONLY",
+        "REVISION"
+      ]
+    },
+    {
+      "pair_index": 10,
+      "domain": "db_bench",
+      "task_id": "223",
+      "source_partition": "DEV",
+      "position": 7,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "ATTENTION",
+        "STATIC"
+      ]
+    },
+    {
+      "pair_index": 11,
+      "domain": "os_interaction",
+      "task_id": "211",
+      "source_partition": "VALID",
+      "position": 7,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "STATIC",
+        "ATTENTION"
+      ]
+    },
+    {
+      "pair_index": 12,
+      "domain": "db_bench",
+      "task_id": "94",
+      "source_partition": "DEV",
+      "position": 2,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "APPEND_ONLY",
+        "REVISION"
+      ]
+    },
+    {
+      "pair_index": 13,
+      "domain": "os_interaction",
+      "task_id": "226",
+      "source_partition": "DEV",
+      "position": 2,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "REVISION",
+        "APPEND_ONLY"
+      ]
+    },
+    {
+      "pair_index": 14,
+      "domain": "db_bench",
+      "task_id": "240",
+      "source_partition": "DEV",
+      "position": 8,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "STATIC",
+        "ATTENTION"
+      ]
+    },
+    {
+      "pair_index": 15,
+      "domain": "os_interaction",
+      "task_id": "242",
+      "source_partition": "VALID",
+      "position": 8,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "ATTENTION",
+        "STATIC"
+      ]
+    },
+    {
+      "pair_index": 16,
+      "domain": "db_bench",
+      "task_id": "134",
+      "source_partition": "DEV",
+      "position": 3,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "REVISION",
+        "APPEND_ONLY"
+      ]
+    },
+    {
+      "pair_index": 17,
+      "domain": "os_interaction",
+      "task_id": "428",
+      "source_partition": "DEV",
+      "position": 3,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "APPEND_ONLY",
+        "REVISION"
+      ]
+    },
+    {
+      "pair_index": 18,
+      "domain": "db_bench",
+      "task_id": "134",
+      "source_partition": "DEV",
+      "position": 3,
+      "mechanism": "REVISION",
+      "repeat": true,
+      "arms": [
+        "APPEND_ONLY",
+        "REVISION"
+      ]
+    },
+    {
+      "pair_index": 19,
+      "domain": "os_interaction",
+      "task_id": "428",
+      "source_partition": "DEV",
+      "position": 3,
+      "mechanism": "REVISION",
+      "repeat": true,
+      "arms": [
+        "REVISION",
+        "APPEND_ONLY"
+      ]
+    },
+    {
+      "pair_index": 20,
+      "domain": "db_bench",
+      "task_id": "246",
+      "source_partition": "DEV",
+      "position": 9,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "ATTENTION",
+        "STATIC"
+      ]
+    },
+    {
+      "pair_index": 21,
+      "domain": "os_interaction",
+      "task_id": "250",
+      "source_partition": "VALID",
+      "position": 9,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "STATIC",
+        "ATTENTION"
+      ]
+    },
+    {
+      "pair_index": 22,
+      "domain": "db_bench",
+      "task_id": "246",
+      "source_partition": "DEV",
+      "position": 9,
+      "mechanism": "ATTENTION",
+      "repeat": true,
+      "arms": [
+        "STATIC",
+        "ATTENTION"
+      ]
+    },
+    {
+      "pair_index": 23,
+      "domain": "os_interaction",
+      "task_id": "250",
+      "source_partition": "VALID",
+      "position": 9,
+      "mechanism": "ATTENTION",
+      "repeat": true,
+      "arms": [
+        "ATTENTION",
+        "STATIC"
+      ]
+    },
+    {
+      "pair_index": 24,
+      "domain": "db_bench",
+      "task_id": "159",
+      "source_partition": "DEV",
+      "position": 4,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "APPEND_ONLY",
+        "REVISION"
+      ]
+    },
+    {
+      "pair_index": 25,
+      "domain": "os_interaction",
+      "task_id": "2",
+      "source_partition": "VALID",
+      "position": 4,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "REVISION",
+        "APPEND_ONLY"
+      ]
+    },
+    {
+      "pair_index": 26,
+      "domain": "db_bench",
+      "task_id": "248",
+      "source_partition": "DEV",
+      "position": 10,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "STATIC",
+        "ATTENTION"
+      ]
+    },
+    {
+      "pair_index": 27,
+      "domain": "os_interaction",
+      "task_id": "355",
+      "source_partition": "VALID",
+      "position": 10,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "ATTENTION",
+        "STATIC"
+      ]
+    },
+    {
+      "pair_index": 28,
+      "domain": "db_bench",
+      "task_id": "163",
+      "source_partition": "DEV",
+      "position": 5,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "REVISION",
+        "APPEND_ONLY"
+      ]
+    },
+    {
+      "pair_index": 29,
+      "domain": "os_interaction",
+      "task_id": "16",
+      "source_partition": "VALID",
+      "position": 5,
+      "mechanism": "REVISION",
+      "repeat": false,
+      "arms": [
+        "APPEND_ONLY",
+        "REVISION"
+      ]
+    },
+    {
+      "pair_index": 30,
+      "domain": "db_bench",
+      "task_id": "256",
+      "source_partition": "DEV",
+      "position": 11,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "ATTENTION",
+        "STATIC"
+      ]
+    },
+    {
+      "pair_index": 31,
+      "domain": "os_interaction",
+      "task_id": "467",
+      "source_partition": "VALID",
+      "position": 11,
+      "mechanism": "ATTENTION",
+      "repeat": false,
+      "arms": [
+        "STATIC",
+        "ATTENTION"
+      ]
+    }
+  ],
+  "paired_positions": 32,
+  "arm_executions": 64,
+  "per_mechanism": {
+    "independent_pairs": 12,
+    "repeat_pairs": 4,
+    "maximum_arm_executions": 32
+  },
+  "formation_authority": "New revisions and explicit working-state reviews may use only existing frozen and exposed task-visible evidence/feedback; no native hidden outcomes, outcome-derived routing or extra controller model.",
+  "admission_remaining": [
+    "Review exact evidence/feedback and full source-cluster ancestry",
+    "Freeze semantic state/revision support, independent labels, baselines and stop/success rules",
+    "Pin and verify executable/native environment and full dispatch/cost accounting before first request"
+  ],
+  "usage_at_schedule_freeze": {
+    "text_generation_requests": 0,
+    "embedding_requests": 0,
+    "rerank_requests": 0,
+    "endpoint_probes": 0,
+    "first_request_at": null
+  }
+}

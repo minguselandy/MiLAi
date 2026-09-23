@@ -136,9 +136,10 @@ use stays UNKNOWN; claim ceiling is `POLICY_DECISION_NOT_EFFECT`.
 Before an effect comparison: establish real state/coverage opportunities, predeclare
 labels and STATIC baseline, integrate the bounded runner/complete cost settlement,
 freeze IDs/order/arms/conditions and finalize a **new finite authorization contract**.
-The user's subsequent “授权” authorizes a finite batch in principle; numerical bounds,
-joint mechanism allocation and permission to form new state/revisions from existing
-feedback still await explicit contract confirmation. No new allocation is opened.
+The user has now explicitly confirmed the separate
+[joint finite contract](REVISION_ATTENTION_FIRST_BATCH.md), including formation from
+existing visible feedback. Its schedule is frozen; semantic/input/method execution
+admission remains pending. No new request has been sent.
 Include initial retrieval, embedding, state formation, review/maintenance, failures, retries,
 solver and latency costs. Utility's closed batch and unused quota remain closed.
 No TEST/main-confirmation/Travel/RESERVE access, transfer or promotion is authorized.
