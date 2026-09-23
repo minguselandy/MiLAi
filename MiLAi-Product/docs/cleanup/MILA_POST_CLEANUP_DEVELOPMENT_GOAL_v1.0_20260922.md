@@ -841,6 +841,32 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 
 # 16. Execution journal
 
+## 2026-09-23 — Joint native runtime integration; no external execution
+
+- PR #48 closed at `0299b584730ea035f87c702d95382aaa4493fa38`; exact-head fast
+  `35801675642` and main fast `35802430247` PASS. Candidate/merge tree
+  `fe2cd1b10449356988bf8c4ab6fad6ebee170eff` identical. Lab 4,794 PASS / 137 SKIP /
+  4 DESELECTED. This is the integrated runtime's base/rollback.
+- [Runtime candidate](../../../MiLAi-Lab/docs/JOINT_NATIVE_RUNTIME.md) connects the
+  native M1 Actor to the existing finite transport/budget, source-only Qwen revise
+  proposal, existing patch engine/VersionUtility/eligibility bridge, and deterministic
+  Attention with authentic Actor-response state and durable expansion. No closed
+  Utility execution/root/ledger is reopened and historical runner bytes are unchanged.
+- The Attention frame is treatment-only cost, one-turn lagged and invalid when whole
+  source bodies were not actually exposed. Expanded sources receive one explicitly
+  UNKNOWN review preview, counted as exposure/overhead before later fresh decisions.
+  Native tool grammar/round limits remain unchanged; outcome never enters the memory
+  producer. Revision source support is not inferred from a valid JSON envelope.
+- 117 narrow integration/adjacent tests PASS, changed-file Ruff and both Lab boundaries
+  PASS. Tests use real Provider serialization/finite SQLite accounting with local HTTP
+  fixtures and synthetic native task interfaces, not external models or native effect
+  results. Initial unused imports were removed; no broad Product regression repeated.
+- Full batch admission/phase driver, actual pre-native source reviews, independent
+  Attention labels, lifecycle cost/stop freeze and three budgeted instructed embeddings
+  remain outstanding. New real requests 0, batch ledger/timer not started. Confirmed
+  authority and fixed allocation unchanged; no new authorization request is needed.
+  Product behavior/API/Schema/permissions/Canonical unchanged; overall Goal incomplete.
+
 ## 2026-09-23 — Instructed-query cache correction before method admission
 
 - PR #47 closed at `0e4af327fa8ddeedd15cc12ff3738eeb0a36d29a`; exact-head fast

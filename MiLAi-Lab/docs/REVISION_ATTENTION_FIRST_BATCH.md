@@ -102,14 +102,19 @@ draft; any ranking-dependent counts require corrected vectors. The earlier
 
 ## Remaining execution admission (not another permission request)
 
+The [native runtime candidate](JOINT_NATIVE_RUNTIME.md) now connects the real
+guarded Provider request path, existing revision engine/exposure bridge and
+Attention state/expansion to the native Actor adapter. Its 117 local tests use
+synthetic HTTP/native fixtures, not external models or effect runs. A complete
+source-pinned batch driver and actual semantic admission are still required.
+
 1. Review exact sources/visible feedback; fix the revision proposal/source-check
    procedure and classify CORRECTION/SCOPE_NARROWING separately from refresh or
    unsupported changes. Preserve top-1 retrieval; do not enlarge it to force reuse.
 2. Freeze the explicit Attention state producer, independent relevance/conflict/
    coverage labels, baseline and expansion rule. Neither historical adoption nor
    a query-vector match is a semantic review.
-3. Complete and verify the minimal runner using the existing revision engine,
-   eligibility bridge, Attention policy/capture, native M1 adapter and global budget
+3. Complete the batch driver around the integrated native runtime and global budget
    guard. Pin native environment, method/policies, common conditions and exact inputs
    before first request. Preserve exact old/new exposures and all failed costs.
 4. Predeclare quality, cost, safety, opportunity and stop rules. An ineligible or
