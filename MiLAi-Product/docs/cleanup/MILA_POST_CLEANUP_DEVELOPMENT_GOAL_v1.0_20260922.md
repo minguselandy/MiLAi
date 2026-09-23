@@ -15,12 +15,20 @@ paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
 current_work_package: 3C_JOINT_METHOD_ADMISSION
-next_work_package: 3C_JOINT_BOUNDED_EXECUTION
+next_work_package: AWAIT_EXPLICIT_USER_EXPERIMENT_RESUME
+experiment_execution_status: PAUSED_BY_USER
+experiment_pause_date: 2026-09-23
+experiment_pause_reason: UPLOAD_CODE_WITHOUT_STARTING_EXPERIMENTS
 new_experiment_allocations: 2
 new_model_requests: 199
 ---
 
 # MiLAi Cleanup 后开发与研究执行 Goal v1.0
+
+当前用户边界（2026-09-23）：**先不要开始实验，把整理好的代码上传到 GitHub。**
+代码交付／CI 闭环不构成实验恢复；此前确认的有限合同仍是上限，不覆盖这条较新的暂停指令。
+禁止在自动 Goal continuation 下启动模型、embedding、tokenize/model-info 探测、修订形成或
+原生效果实验。等待用户明确恢复，且仍须完成方法准入；整体 Goal 尚未完成。
 
 ## 0. 本文件的作用
 
@@ -840,6 +848,24 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-23 — Code uploaded and merged; experiments explicitly paused by user
+
+- 用户指令：“先不要开始实验，把整理好的代码上传到github上”。仅完成代码交付及远端闭环，
+  不启动实验、不安装原生实验环境依赖、不把自动续跑当作恢复授权。
+- PR #49 tested head `770f65699d791faaedada7369e7f66d8f3f90a73`; exact fast
+  `35804114833` PASS，Lab 4,816 PASS / 137 SKIP / 4 DESELECTED，Ruff/mypy/build/
+  boundary PASS。Full `35804114867` SKIPPED，未重跑 Product 全量。
+- Protected squash merge `02d07947372d058a43c94ecb7cd815f19b39650f`；candidate/merge
+  tree `a2667836a320bfe90f16677b30767ee7cd3d7714` 一致；main fast `35804795526`
+  PASS，包括 Tested PR tree identity；本地 main 与 origin/main 一致且工作区干净。
+- 原生 external lifelong venv 的只读 import smoke 缺少 `jsonschema`，在导入
+  `revision_eligibility` 时失败，后续 benchmark checkout/image 核对没有执行到。此失败
+  与 PR 初始评论措辞更正均保留；没有安装依赖、访问模型或执行原生任务。
+- 新批次真实请求 0，ledger/timer 未启动；冻结 ID／顺序／arms／预算上限不变。暂停优先于
+  较早日志的“无需再确认授权”措辞，须明确用户恢复及完整准入后才可发出首个请求。
+- 后续 phase driver、来源审查、独立标签、完整成本／停止合同及三条 instructed embedding
+  仍未完成；不以代码合并代替机制结果。Product 行为及 Schema NO-GO 不变；整体 Goal 未完成。
 
 ## 2026-09-23 — Joint native runtime integration; no external execution
 

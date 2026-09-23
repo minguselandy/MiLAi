@@ -91,8 +91,9 @@ The bank fallback for OS 120/226/2 incorrectly used raw query vectors; it has be
 removed and those three positions now retain explicit gaps, not replacement IDs.
 The earlier 24-cache claim and ranking-dependent preflight are withdrawn; original
 artifacts are preserved. Six preparation tests pass; semantic support, state labels
-and integrated execution admission remain pending. No further authorization confirmation
-is needed; Utility stays closed. Input repair PR #48 closed at `0299b58`: exact-head
+and integrated execution admission remain pending. The finite contract was confirmed,
+but the newer user instruction pauses experiments pending explicit resumption;
+Utility stays closed. Input repair PR #48 closed at `0299b58`: exact-head
 fast `35801675642`, identical-tree merge and main fast `35802430247` PASS; Lab
 4,794 PASS / 137 SKIP / 4 DESELECTED. The subsequent
 [native runtime candidate](JOINT_NATIVE_RUNTIME.md) integrates guarded Actor dispatch,
@@ -101,6 +102,13 @@ Actor Attention state/durable expansion. 117 local targeted tests PASS using
 synthetic HTTP/native fixtures, zero external requests. The single sealed batch
 driver, actual source reviews/evaluation labels and method admission still precede
 the bounded experiment; no effect or overall Goal terminal is claimed.
+Runtime code PR #49 closed at `02d0794`: exact-head fast `35804114833`, identical-tree
+merge and main fast `35804795526` PASS; Lab 4,816 PASS / 137 SKIP / 4 DESELECTED.
+**Current instruction: upload code, do not start experiments.** New real requests
+remain zero; no ledger/timer started. Do not start formation, embedding, solver or
+endpoint probes until explicit user resumption plus method admission. Native venv
+import lacks `jsonschema`; the subsequent image/checkout checks were not reached.
+No dependency installation or experimental execution was performed to work around it.
 Resolver work ran no Lab source, model, retrieval or DB execution.
 The original diagnosis made no behavior change; this separate candidate does.
 The Product identity changed; prior research pins remain historical.
