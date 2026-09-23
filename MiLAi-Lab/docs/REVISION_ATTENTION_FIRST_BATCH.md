@@ -4,7 +4,8 @@
 The user explicitly confirmed the complete new finite contract, then repeated its
 data/formation/model confirmation. No further budget confirmation is required.
 This is a new joint allocation, not reopening Utility or any historical allocation.
-Base/rollback: `39dc657a5967c0586355b6bea23c56e9a1812ee3` (PR #46 main).
+Allocation base: `39dc657a5967c0586355b6bea23c56e9a1812ee3` (PR #46 main).
+Input correction base/rollback: `0e4af327fa8ddeedd15cc12ff3738eeb0a36d29a` (PR #47).
 
 ## Frozen allocation and authority
 
@@ -43,7 +44,7 @@ new solver, reranker, endpoint or changed common execution conditions.
   top_p 1, thinking off, Actor temperature 0/output cap 4096; existing memory-role
   caps/temperatures and 65,536 context cap are explicit in the allocation.
 - Existing bge-m3 endpoint/1024-dimensional query-instruction contract only;
-  rerank **0**. Cached vectors are available for all 24 queries (below).
+  rerank **0**. Exact instructed-query caches exist for 21 of 24 queries (below).
 - Text generation at most **400 requests / 3,000,000 reported tokens**; embedding
   at most **128 requests / 50,000 tokens**; all outbound model/embedding requests
   combined at most **528**. Failures, retries and maintenance count. Unknown usage
@@ -68,31 +69,36 @@ feedback windows**, not 39 independent examples or supported corrections. Origin
 formation trace refs and complete retrieved-source ancestry are carried separately;
 target clusters present in that ancestry cannot count as independent later reuse.
 
-All 24 exact query vectors are now reusable with **zero new embedding requests**.
-Twenty-one come from previously matched instructed-query request/response files.
-The three missing standalone caches (OS 120/226/2) are recovered from their own
-already exposed historical bank's exact query record, only after matching domain,
-DEV/VALID scope, query bytes, bge-m3 dimension/encoding and retrieval-instruction SHA.
-OS 120 uses its existing `dev-current-v03-os_interaction-milai` bank solely for that
-query-vector projection; it is not an additional candidate-memory bank. No own-task
-cards, extraction, self-judgment or native outcomes cross this boundary. The producer
-stores the original `start()` query vector in its record; it is not outcome-derived.
-This resolves cache availability, not revision/state semantic eligibility.
+**Correction to PR #47:** only 21 exact instructed-query vectors are reusable.
+The producer stores `vectors[0]` (raw query) in bank records, but calls retrieval
+with `vectors[1]` (`Instruct: ...\nQuery: ...`). Matching model, dimension and bank
+instruction metadata cannot make these distinct encodings interchangeable. The
+raw-only first requests for OS 120/226/2 do not establish an instructed cache.
+The bank fallback has been removed; these positions now explicitly carry
+`MISSING_INSTRUCTED_QUERY_CACHE`, a null vector and their exact required embedding
+input. No own-task bank/card/outcome is imported by query preparation.
+
+The frozen IDs, mechanism assignment, order and arms are unchanged. Missing caches
+are not zero-opportunity observations, grounds for replacement or permission to
+change retrieval encoding. Filling them may use only the authorized existing bge-m3
+contract, after full method admission, with a verified token upper bound and the
+single global request/token/time guard. No embedding call has been made yet.
 
 Private output outside Git:
-`/cra/memory/mx_memory/evidence/post-cleanup-revision-attention-20260923/input-review-complete/review-inputs.json`
-SHA-256: `7c8f7c2fcd51a4327123a28c5e43e88fdaef74bde656b9fd530d2d289c6e86bb`.
-It pins 76 source files, 24 queries/vectors and 39 windows; automated preparation
-took 0.069 s. This is **not** total review/formation cost. The earlier window-only
-preparation remains preserved under `input-review/`, not overwritten.
+`/cra/memory/mx_memory/evidence/post-cleanup-revision-attention-20260923/input-review-instructed-v2/review-inputs.json`
+SHA-256: `a1847b9d36bce3fdc8fc6668d57ea4da1dec37c8be76422b3805075041445edc`.
+It retains all 24 queries and 39 windows, with 21 exact instructed caches and three
+explicit gaps. Preparation cost is not total review/formation cost.
 
-A separate `candidate-preflight.json` beside that report evaluates the common
-four-bank pool (matching domain, whole-source-cluster exclusion, stable top-1 cosine).
-All 24 positions have eligible candidates. Seven of the 12 independent Revision
-positions have an independent visible-feedback window for a top-1 card; five do
-not. This is still **structural review eligibility, not seven supported corrections**.
-The common pool/routing must enter the final method seal; this preflight is not a
-live effect run or permission to alter fixed repeats to favor opportunities.
+The prior `input-review-complete/review-inputs.json` (SHA-256
+`7c8f7c2fcd51a4327123a28c5e43e88fdaef74bde656b9fd530d2d289c6e86bb`) is preserved
+but **SUPERSEDED_INVALID_QUERY_ENCODING**, not an admissible execution input.
+Its `candidate-preflight.json` (SHA-256
+`8834c2d160b026a883d1c1fc49fb803b693990699ba79616a081977840c3ce8a`) is also superseded:
+its top-1 rankings and seven-of-twelve structural-opportunity total must not be
+used as verified results. `method-admission-design.json` remains an unadmitted
+draft; any ranking-dependent counts require corrected vectors. The earlier
+`input-review/` output also remains untouched. No historical evidence is rewritten.
 
 ## Remaining execution admission (not another permission request)
 
@@ -112,9 +118,9 @@ live effect run or permission to alter fixed repeats to favor opportunities.
    clustered/repeated nature of the data. No holdout or promotion admission follows
    from DEV observations alone.
 
-Five narrow preparation tests and changed-file Ruff pass. Tests cover schedule/cap
+Six narrow preparation tests and changed-file Ruff pass. Tests cover schedule/cap
 preservation, reversed fixed repeats, exact frozen identity, transitive source-cluster
-exclusion, query-vector-only provenance, changed encoding/scope rejection and private
+exclusion, raw-versus-instructed request provenance, no own-bank fallback and private
 output boundary. Package checks/build belong to classified Lab fast CI, not repeated
 Product full suites. No Product API/Schema/permission/Canonical behavior changes;
 Schema remains EXPERIMENTAL / NO-GO, and the overall Goal remains incomplete.

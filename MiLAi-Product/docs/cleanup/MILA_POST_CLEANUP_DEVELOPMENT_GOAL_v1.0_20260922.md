@@ -14,8 +14,8 @@ schema_status: 0.1.x EXPERIMENTAL / NO-GO FOR SCHEMA FREEZE
 paused_at: 2026-09-22T08:24:12+08:00
 pause_reason: USER_REQUESTED_MIGRATION_TO_GPT6
 handoff_document: docs/cleanup/MILA_GPT6_PROJECT_HANDOFF_GUIDE_v1.0_20260922.md
-current_work_package: 3C_JOINT_ALLOCATION_AND_INPUTS
-next_work_package: 3C_JOINT_METHOD_ADMISSION
+current_work_package: 3C_JOINT_METHOD_ADMISSION
+next_work_package: 3C_JOINT_BOUNDED_EXECUTION
 new_experiment_allocations: 2
 new_model_requests: 199
 ---
@@ -840,6 +840,27 @@ Goal 激活后的唯一默认工作包是 `3A-0 Status Reconciliation`：
 ---
 
 # 16. Execution journal
+
+## 2026-09-23 — Instructed-query cache correction before method admission
+
+- PR #47 closed at `0e4af327fa8ddeedd15cc12ff3738eeb0a36d29a`; exact-head fast
+  `35800005509` and main fast `35800671811` PASS. Tested/merge tree
+  `e4a74f671ebd19ef1e1741b00e253d9864aa3b30` matched. Lab 4,793 PASS / 137 SKIP /
+  4 DESELECTED. This is the correction's base/rollback, not proof of input validity.
+- The preceding journal's all-24-cache claim is withdrawn: historical bank records
+  contain raw query embeddings, whereas retrieval uses instructed query embeddings.
+  OS 120/226/2 have no matching instructed request/response cache. Bank metadata does
+  not repair this mismatch. Removed the fallback and retained explicit missing vectors.
+- Corrected private input SHA
+  `a1847b9d36bce3fdc8fc6668d57ea4da1dec37c8be76422b3805075041445edc` pins all 24
+  queries, 21 valid caches and 39 structural windows. Prior input/preflight bytes are
+  preserved but superseded; ranking-dependent opportunity counts are not admitted.
+  All frozen IDs, arms, order and repeated positions remain unchanged.
+- Six targeted preparation tests and changed-file Ruff PASS. No new external request,
+  budget ledger or timer. Full method freeze, verified embedding token reservation,
+  authentic revision/state production and integrated runner remain pending. User
+  authorization is confirmed; this is a method-correctness repair, not another
+  permission request. Product behavior and Schema NO-GO remain unchanged.
 
 ## 2026-09-23 — Joint finite contract confirmed; schedule and review inputs frozen
 

@@ -159,26 +159,6 @@ def review_bank(
     return windows
 
 
-def cached_query(bank: dict, domain: str, task_id: str, query: str, instruction_sha: str) -> list:
-    """Only a pre-action query vector may cross from this task's own history."""
-    config = bank["contract"]["config"]
-    if (
-        bank["scope"]["domain"] != domain
-        or bank["scope"]["split"] not in {"DEV", "VALID"}
-        or config["embedding_model"] != "bge-m3"
-        or config["embedding_dimension"] != 1024
-        or config["encoding_version"] != "bge-query-instruct-cosine-v1"
-        or bank["contract"]["policy_sha256"]["retrieval_instruction"] != instruction_sha
-    ):
-        raise ValueError("HISTORICAL_QUERY_ENCODING_CHANGED")
-    rows = [
-        r for r in bank["records"] if r["task_id"] == f"{domain}:{task_id}" and r["query"] == query
-    ]
-    if len(rows) != 1:
-        raise ValueError("EXACT_HISTORICAL_QUERY_VECTOR_REQUIRED")
-    return normalized(rows[0]["embedding"], 1024)
-
-
 def prepare_queries(allocation: dict, sources: dict) -> list:
     if sha(OLD_INPUT) != OLD_INPUT_SHA:
         raise ValueError("FROZEN_QUERY_INPUT_CHANGED")
@@ -212,12 +192,8 @@ def prepare_queries(allocation: dict, sources: dict) -> list:
                 vector, origin = normalized(row["embedding"], 1024), str(path)
                 sources.update({str(path): sha(path), str(response_path): sha(response_path)})
                 break
-            if vector is None:
-                path = historical_root / "bank.json"
-                bank = json.loads(path.read_text())
-                vector = cached_query(bank, domain, task["id"], query, instruction_sha)
-                origin = str(path) + f"#query-vector:{domain}:{task['id']}"
-                sources[str(path)] = sha(path)
+            # Bank records store raw vectors[0], while retrieval uses instructed
+            # vectors[1]. Matching bank metadata cannot make those interchangeable.
             result.append(
                 {
                     "domain": domain,
@@ -226,8 +202,13 @@ def prepare_queries(allocation: dict, sources: dict) -> list:
                     "query": query,
                     "query_sha256": hashlib.sha256(query.encode()).hexdigest(),
                     "embedding": vector,
+                    "embedding_input": encoded,
                     "query_vector_origin": origin,
-                    "own_task_material_imported": "query vector only; no cards/results",
+                    "encoding_status": (
+                        "EXACT_INSTRUCTED_QUERY_CACHE"
+                        if vector is not None
+                        else "MISSING_INSTRUCTED_QUERY_CACHE"
+                    ),
                 }
             )
     return result
@@ -272,7 +253,7 @@ def prepare(root: Path) -> dict:
         )
     queries = prepare_queries(allocation, sources)
     result = {
-        "schema": "milai-revision-attention-review-inputs-v1",
+        "schema": "milai-revision-attention-review-inputs-v2",
         "status": "PRE_OUTCOME_SEMANTIC_REVIEW_REQUIRED",
         "allocation_sha256": sha(ALLOCATION),
         "source_sha256": sources,
@@ -297,6 +278,10 @@ if __name__ == "__main__":
         json.dumps(
             {
                 "windows": len(value["windows"]),
+                "cached_queries": sum(q["embedding"] is not None for q in value["queries"]),
+                "missing_queries": [
+                    [q["domain"], q["id"]] for q in value["queries"] if q["embedding"] is None
+                ],
                 "allocation_sha256": value["allocation_sha256"],
                 "new_external_requests": 0,
             }

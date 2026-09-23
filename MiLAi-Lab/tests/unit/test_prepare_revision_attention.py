@@ -94,33 +94,68 @@ def test_raw_review_output_cannot_be_created_in_repository(monkeypatch):
         prep.prepare(prep.LAB / "artifacts" / "forbidden-review-output")
 
 
-def test_only_exact_query_vector_crosses_from_own_history():
-    bank = {
-        "scope": {"domain": "fixture", "split": "DEV"},
-        "contract": {
-            "config": {
-                "embedding_model": "bge-m3",
-                "embedding_dimension": 1024,
-                "encoding_version": "bge-query-instruct-cosine-v1",
-            },
-            "policy_sha256": {"retrieval_instruction": "instruction"},
-        },
-        "records": [
-            {
-                "task_id": "fixture:1",
-                "query": "question",
-                "embedding": [1.0] + [0.0] * 1023,
-                "self_judgment": "must not cross the query-vector boundary",
-            }
-        ],
+@pytest.fixture
+def query_cache(tmp_path, monkeypatch):
+    old = tmp_path / "old.json"
+    old.write_text(json.dumps({"tasks": [{"domain": "fixture", "id": "1", "query": "question"}]}))
+    instruction = tmp_path / "configs/policies/reasoning_bank/retrieval_instruction.txt"
+    instruction.parent.mkdir(parents=True)
+    instruction.write_text("retrieve relevant memories\n")
+    monkeypatch.setattr(prep, "LAB", tmp_path)
+    monkeypatch.setattr(prep, "OLD_INPUT", old)
+    monkeypatch.setattr(prep, "OLD_INPUT_SHA", prep.sha(old))
+    root = tmp_path / "history"
+    embedding = root / "embedding"
+    embedding.mkdir(parents=True)
+    # Deliberately unreadable as JSON: own-task bank contents must never be a fallback.
+    (root / "bank.json").write_text("must not read own-task bank")
+    allocation = {
+        "domains": {
+            "fixture": [
+                {
+                    "id": "1",
+                    "cluster": "cluster:1",
+                    "exposure_receipt": str(root / "task-1/receipt.json"),
+                }
+            ]
+        }
     }
-    assert (
-        prep.cached_query(bank, "fixture", "1", "question", "instruction") == [1.0] + [0.0] * 1023
+    return allocation, embedding, "Instruct: retrieve relevant memories\nQuery: question"
+
+
+@pytest.mark.parametrize("instructed", [False, True])
+def test_query_cache_requires_exact_instructed_request(query_cache, instructed):
+    allocation, directory, encoded = query_cache
+    request = directory / "embedding-000001-request.json"
+    response = directory / "embedding-000001-http.json"
+    inputs = ["question", encoded] if instructed else ["question"]
+    request.write_text(json.dumps({"model": "bge-m3", "input": inputs}))
+    vectors = [[1.0] + [0.0] * 1023, [0.0, 1.0] + [0.0] * 1022]
+    response.write_text(
+        json.dumps(
+            {
+                "status_code": 200,
+                "body": json.dumps(
+                    {
+                        "model": "bge-m3",
+                        "data": [{"index": i, "embedding": vectors[i]} for i in range(len(inputs))],
+                    }
+                ),
+            }
+        )
     )
-    with pytest.raises(ValueError, match="EXACT_HISTORICAL_QUERY_VECTOR_REQUIRED"):
-        prep.cached_query(bank, "fixture", "1", "changed", "instruction")
-    with pytest.raises(ValueError, match="HISTORICAL_QUERY_ENCODING_CHANGED"):
-        prep.cached_query(bank, "fixture", "1", "question", "changed")
-    bank["scope"]["split"] = "TEST"
-    with pytest.raises(ValueError, match="HISTORICAL_QUERY_ENCODING_CHANGED"):
-        prep.cached_query(bank, "fixture", "1", "question", "instruction")
+    sources = {}
+    (row,) = prep.prepare_queries(allocation, sources)
+    assert row["embedding_input"] == encoded
+    if instructed:
+        assert row["embedding"] == vectors[1]
+        assert row["query_vector_origin"] == str(request)
+        assert row["encoding_status"] == "EXACT_INSTRUCTED_QUERY_CACHE"
+        assert sources[str(request)] == prep.sha(request)
+        assert sources[str(response)] == prep.sha(response)
+    else:
+        assert row["embedding"] is None
+        assert row["query_vector_origin"] is None
+        assert row["encoding_status"] == "MISSING_INSTRUCTED_QUERY_CACHE"
+        assert str(request) not in sources
+    assert not any(path.endswith("bank.json") for path in sources)
