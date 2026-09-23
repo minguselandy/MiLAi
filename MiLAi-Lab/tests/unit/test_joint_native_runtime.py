@@ -12,6 +12,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
 from joint_native_runtime import (
     CLOSE_TAG,
+    LAB,
     OPEN_TAG,
     JointMemory,
     Timeline,
@@ -179,6 +180,9 @@ def test_static_has_no_state_emission_cost_or_response_rewrite(tmp_path, harness
     assert step(value, harness) == raw
     assert "milai_attention" not in generation_bodies(harness)[0]["messages"][0]["content"]
     assert value.state is None
+    assert (
+        LAB / "configs/policies/reasoning_bank/consume.txt"
+    ).read_text().strip() in generation_bodies(harness)[0]["messages"][0]["content"]
 
 
 def test_empty_expansion_spends_attempt_and_abstains_instead_of_reusing_intent(tmp_path, harness):

@@ -324,7 +324,12 @@ class JointMemory:
         )
         self.projected = selected
         self.projection_ref = self.timeline.reference(event)
-        parts = [render_source(s) for s in selected]
+        parts = (
+            [(LAB / "configs/policies/reasoning_bank/consume.txt").read_text().strip()]
+            if selected
+            else []
+        )
+        parts.extend(render_source(s) for s in selected)
         if self.expansion is not None:
             parts.append(STATE_INSTRUCTION)
             parts.append(

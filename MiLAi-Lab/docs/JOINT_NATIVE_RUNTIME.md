@@ -17,8 +17,9 @@ root, ledger and historical execution are never invoked or reopened.
 
 The native tasks still own tools, interaction and terminal scoring. DB remains
 three rounds, OS five rounds / 20-second command timeout; Actor M1 remains unchanged.
-The runtime sends the full native history, native system prompt and existing action
-budget context, with only the explicitly declared memory-arm treatment added.
+The runtime sends the full native history, native system prompt, existing memory
+consume wording when sources are projected, and existing action-budget context,
+with only the explicitly declared memory-arm treatment added.
 Each arm claims a fresh exclusive directory before reset. Exceptions retain native
 and Provider costs; memory-accounting and release errors are recorded and cleanup
 is attempted independently. Elapsed arm time includes cleanup. Scorer outcomes do
