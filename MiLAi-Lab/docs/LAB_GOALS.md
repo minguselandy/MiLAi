@@ -14,8 +14,11 @@ Sparse Basis + Attention. The Basis arms share recheck behavior so their differe
 automatic gap routing. Status: `IMPLEMENTED_PENDING_SMALL_VALIDATION`: the B–D runtime,
 three-arm templates and frozen-selection preparation path are frozen after 94 narrow tests,
 static checks, 15 deployed decoder probes and three fixed projection comparisons. The
-exposed-arc A2 wiring regression is running; neither new arc nor the three-arm comparison
-has started. Ordinary stays default; cumulative caps remain null.
+exposed-arc failure, shared maintenance wording repair and original-suffix diagnostic are
+preserved in the [development record](CONTEXTUAL_USER_MEMORY_V11_DEVELOPMENT_20260925.md).
+Two new instances are frozen and their six-arm comparison is running serially. A confirmed
+cache over-invalidation issue still needs a separately identified repair and narrow checks;
+engineering acceptance and final analysis remain open. Ordinary stays default; cumulative caps remain null.
 
 ## Completed scoped decision-basis Goal v10.0 (2026-09-25)
 

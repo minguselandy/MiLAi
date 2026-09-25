@@ -10,9 +10,12 @@ and lets ordinary search consume actionable gaps while respecting explicit queri
 It includes a frozen-selection preparation path for unseen native MERIT instances and a
 small three-arm comparison after development. Status: `IMPLEMENTED_PENDING_SMALL_VALIDATION`;
 the B–D runtime is frozen after 94 narrow tests and static checks, 15 deployed decoder
-probes and three fixed projection comparisons. The exposed-arc A2 wiring regression is
-running; the two new arcs and their three-arm comparison have not started. Ordinary and
-the v10 evidence remain unchanged.
+probes and three fixed projection comparisons. The exposed-arc failure, shared maintenance
+wording repair and original-suffix diagnostic are preserved in the
+[development record](docs/CONTEXTUAL_USER_MEMORY_V11_DEVELOPMENT_20260925.md).
+Two newly selected instances are now undergoing the fixed serial three-arm comparison.
+A confirmed cache over-invalidation issue still needs repair under a separate source identity;
+engineering acceptance and final analysis remain open. Ordinary and the v10 evidence remain unchanged.
 
 Latest completed scoped research: [Decision-basis Goal v10.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V10_DECISION_BASIS_DESIGN_20260925.md).

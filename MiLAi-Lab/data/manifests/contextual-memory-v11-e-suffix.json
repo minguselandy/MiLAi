@@ -1,0 +1,397 @@
+{
+  "kind": "V11_E_CLEAN_ORIGINAL_SUFFIX",
+  "status": "HOST_MAINTENANCE_COMPLETE_NATIVE_SUFFIX_1_OF_2",
+  "manifest": {
+    "scope": "original episode-2 prefix R1; isolated episodes 3-4 suffix R2",
+    "not_single_source_five_episode_score": true,
+    "old_episode_2_sha256": "5c62ca566e1f1b95068156ea15db06b70e0bf0d8ce6b630a7c9b6a3b28761336",
+    "old_interruption_sha256": "078366a5f4022ab5ad659e1c9dad10b2d4fa5afbdcefcc18fa2d14f4dd2598a4",
+    "new_freeze_sha256": "6f949b6970f7b8caa7f270fe50ca38ac0141478dc86cc5b59b9ad515ef3693f2",
+    "new_source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+    "config_sha256": "0cd6134a11f17a9a7278316f9d47b8f672e6f4ae07da989aae0a8694bdc87c78",
+    "initial_world_sha256": "dff2a5057d15f36f45487e647474f0c8233bf0b69c991a76e4c9933e38e91f91",
+    "durable_checkpoint_sha256": "4f215bc98d4fd2f17b488c9248c784862e407e18fe25ad96ceec80df88307b21",
+    "seed_runtime_state_sha256": "7205ab6e0d9754fcc536ea405aeada9a69c7a124fd4acfdd0ea4cf544bf2b8b7",
+    "copied_embedding_cache_sha256": "5bb1ac9a28642d1f28640200eda7c57b3a0ce6d4b9a67f50ae2fefd1f25ab5f3",
+    "episodes": [
+      3,
+      4
+    ],
+    "max_calls_per_public_message": 12,
+    "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-budget.json"
+  },
+  "scope": "hybrid prefix R1 + isolated suffix R2; not a single-source arc score",
+  "episodes": [
+    {
+      "episode_index": 3,
+      "host_statuses": [
+        "complete"
+      ],
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      }
+    },
+    {
+      "episode_index": 4,
+      "host_statuses": [
+        "complete"
+      ],
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": true,
+        "success": true,
+        "memory_had_fact": true,
+        "argument_value_match": true,
+        "memory_utilized": true
+      }
+    }
+  ],
+  "generation": {
+    "requests": 20,
+    "prompt_tokens": 174301,
+    "completion_tokens": 52564,
+    "total_tokens": 226865,
+    "unknown_usage": 0
+  },
+  "embedding": {
+    "requests": 1,
+    "prompt_tokens": 36,
+    "completion_tokens": 0,
+    "total_tokens": 36,
+    "unknown_usage": 0
+  },
+  "truncated_generations": 9,
+  "provider_http_failures": 0,
+  "write_rejections": 1,
+  "finish_rejections": 0,
+  "control": {
+    "request_occupancy": {
+      "numerator": 8,
+      "denominator": 20,
+      "provider_requests": 20
+    },
+    "action_occupancy": {
+      "numerator": 4,
+      "denominator": 10
+    },
+    "activation_count": 1,
+    "transition_counts": {
+      "STATE_CHANGED": 4,
+      "GAP_RESOLVED": 1,
+      "NO_STATE_CHANGE": 5
+    },
+    "parsed_sidecar_counts": {
+      "state_delta_set": 10,
+      "state_delta_clear": 1
+    },
+    "lifetimes": {
+      "0893f5778e504340a4bf25c86cd7c335": {
+        "request_steps": 8,
+        "action_steps": 4,
+        "semantic_revisions": 3,
+        "review_acknowledgements": 0,
+        "churn": 0.75
+      }
+    },
+    "terminal_turns": [
+      {
+        "episode_index": 3,
+        "turn_index": 0,
+        "host_status": "complete",
+        "basis_remaining": false
+      },
+      {
+        "episode_index": 4,
+        "turn_index": 0,
+        "host_status": "complete",
+        "basis_remaining": false
+      }
+    ],
+    "truncated_requests_with_dispatch": [],
+    "notification_count": 0,
+    "notification_events": [],
+    "search_requested": 0,
+    "search_origins": {},
+    "gap_eligible_requests": 8,
+    "retrieval_executed": 0,
+    "gap_retrieval_executed": 0,
+    "search_cache_hits": 0,
+    "search_events": [],
+    "independently_labelled_recheck_need": "UNKNOWN_UNTIL_OFFLINE_EVENT_REVIEW",
+    "segment_token_estimates": {
+      "decision_projection_tokens": 1441,
+      "fixed_contract_tokens": 99770,
+      "historical_sidecar_tokens": 4071,
+      "state_fixed_instruction_tokens": 3000
+    },
+    "segment_unmeasured_requests": {
+      "decision_projection_tokens": 0,
+      "fixed_contract_tokens": 0,
+      "historical_sidecar_tokens": 0,
+      "state_fixed_instruction_tokens": 0
+    },
+    "sidecar_output_token_estimates": {
+      "state_delta": 878
+    },
+    "unparseable_output_sidecar_cost_unknown_requests": 9,
+    "tokenizer_identity": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "enable_thinking": true,
+      "tokenizer_path": "/cra/qwen36-35B",
+      "tokenizer_files_sha256": {
+        "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+        "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+      },
+      "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+    },
+    "interpretation": "Segment estimates are local tokenizer diagnostics; state instruction is a subset of the fixed contract. Segments need not sum to full request usage. Output fields are re-serialized for estimation. Shared reasoning, grammar overhead and counterfactual State-induced calls remain unassigned. Provider usage is the sole charged total.",
+    "truncation_positions": [
+      {
+        "generation": 2,
+        "session_id": "arc0-000:episode:3",
+        "turn_id": "message-0",
+        "request_index": 2,
+        "basis_present": true,
+        "decision_projection_tokens": 144,
+        "usage": {
+          "prompt_tokens": 8436,
+          "total_tokens": 12532,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 4,
+        "session_id": "arc0-000:episode:3",
+        "turn_id": "message-0",
+        "request_index": 4,
+        "basis_present": true,
+        "decision_projection_tokens": 200,
+        "usage": {
+          "prompt_tokens": 9122,
+          "total_tokens": 13218,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 5,
+        "session_id": "arc0-000:episode:3",
+        "turn_id": "message-0",
+        "request_index": 5,
+        "basis_present": true,
+        "decision_projection_tokens": 200,
+        "usage": {
+          "prompt_tokens": 9176,
+          "total_tokens": 13272,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 6,
+        "session_id": "arc0-000:episode:3",
+        "turn_id": "message-0",
+        "request_index": 6,
+        "basis_present": true,
+        "decision_projection_tokens": 200,
+        "usage": {
+          "prompt_tokens": 9230,
+          "total_tokens": 13326,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 12,
+        "session_id": "arc0-000:episode:4",
+        "turn_id": "message-0",
+        "request_index": 2,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 7907,
+          "total_tokens": 12003,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 13,
+        "session_id": "arc0-000:episode:4",
+        "turn_id": "message-0",
+        "request_index": 3,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 7961,
+          "total_tokens": 12057,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 15,
+        "session_id": "arc0-000:episode:4",
+        "turn_id": "message-0",
+        "request_index": 5,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 8938,
+          "total_tokens": 13034,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 16,
+        "session_id": "arc0-000:episode:4",
+        "turn_id": "message-0",
+        "request_index": 6,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 8992,
+          "total_tokens": 13088,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 18,
+        "session_id": "arc0-000:episode:4",
+        "turn_id": "message-0",
+        "request_index": 8,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 10198,
+          "total_tokens": 14294,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      }
+    ],
+    "consecutive_truncation_generations": [
+      [
+        2
+      ],
+      [
+        4,
+        5,
+        6
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        15,
+        16
+      ],
+      [
+        18
+      ]
+    ]
+  },
+  "judge_requests": 0,
+  "embedding_cache_hits": 4,
+  "cost_partition_note": "The suffix starts with the actual episode2 durable bank and world. It reuses the diagnostic embedding cache; it is not a fresh-arm cost comparison. Each F arm starts with a fresh cache.",
+  "artifacts": {
+    "artifacts/contextual-user-memory/v11-e-clean-suffix/manifest.json": {
+      "sha256": "09de23f80acfa5d0be0ca2968f0fff493852bd4ff3caf55a18d5dada55db171c",
+      "bytes": 1169
+    },
+    "artifacts/contextual-user-memory/v11-e-clean-suffix/result.json": {
+      "sha256": "cde3e3f9cbc588b5e17fff76cc60e15d24c0a2809526a9532127fea82d3570c8",
+      "bytes": 1848
+    },
+    "artifacts/contextual-user-memory/v11-e-clean-suffix/episode-3.json": {
+      "sha256": "35b18a88568846a0c5119ad29a79f1e9e663f4fb4aa09b8c5bfe7b733fee416f",
+      "bytes": 551383
+    },
+    "artifacts/contextual-user-memory/v11-e-clean-suffix/episode-4.json": {
+      "sha256": "55e22f4b3dd798936d300a08433686d423adc2ec6b543566266446708dd180e3",
+      "bytes": 519399
+    },
+    "artifacts/contextual-user-memory/v11-e-clean-suffix/runtime/trace.jsonl": {
+      "sha256": "9c7a15eb556476a172f94d72bd1fd2220225d2f24640f46db5075414893b92d9",
+      "bytes": 2452964
+    },
+    "artifacts/contextual-user-memory/v11-e-clean-suffix/runtime/accounting.json": {
+      "sha256": "f180c5f367e8798f5e636e8ea7586c64302b90d5b80a2a82ab432258c0eb714a",
+      "bytes": 22597
+    }
+  },
+  "pre_F_cumulative": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 54,
+    "generation": {
+      "charged_tokens": 579729,
+      "known_tokens": 579729,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 1950,
+      "known_tokens": 1950,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/contextual-user-memory/v10-budget.json",
+      "sha256": "7e0c2db25823e3d15f141c84ede59b934e38bf5dd3edd41ec5bfbc37b42b0507",
+      "generation_requests": 122,
+      "generation_tokens": 1216124,
+      "embedding_tokens": 8148,
+      "modified": false,
+      "earlier_history": {
+        "ledger": "artifacts/contextual-user-memory/v9-budget.json",
+        "sha256": "8f5021ff4b7cb7d04b3fae7954d488d90ef4a3e08716f0ea97db8cebc401aed6",
+        "generation_requests": 119,
+        "generation_tokens": 966332,
+        "embedding_tokens": 4358,
+        "modified": false
+      }
+    }
+  },
+  "limits": "One original full attempt interrupted; one exact-state finish continuation repeated pending; one clean suffix completed Host/maintenance. This is not a single-source five-episode score or matched method comparison."
+}

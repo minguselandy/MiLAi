@@ -10,7 +10,7 @@ baseline_source_mapping_sha256: 6528ff9c69a567d40afb096e7ecb1c4e81aeafb3bee0c23b
 
 **结论：采纳“更少、更明确、能改变取材的状态”这个方向。下一版应优先消除表达歧义和无效重复，随后检验普通 search 是否真正消费缺口；不增加记忆模块。**
 
-本文是[开发 Goal v11](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md)的实施设计。基线代码与 R2 证据已离线核对；下文保留设计时的“拟议”表述作为决策记录。B–D 运行接口、模板与准备入口已冻结；旧 arc A2 接线回归正在运行，两个新 arc 的三臂比较尚未开始。[开发清单](../data/manifests/contextual-memory-v11-development.json)记录冻结身份与窄检查。
+本文是[开发 Goal v11](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md)的实施设计。基线代码与 R2 证据已离线核对；下文保留设计时的“拟议”表述作为决策记录。B–D 运行接口、模板与准备入口已实现；旧 arc 失败、公共维护说明修复及后缀诊断均已保留。两个新实例的固定三臂比较正在串行运行；源码复核另发现缓存过度失效，待定向修复。[开发记录](CONTEXTUAL_USER_MEMORY_V11_DEVELOPMENT_20260925.md)区分检查、各次源码身份、实际证据和未完成项。
 
 ## 1. 当前代码事实、实验事实和推断
 
@@ -349,4 +349,4 @@ StateMemBench、其他数据集和第二模型不自动进入本版。未获得�
 
 工程验收与效果分开：机制接线正确但无真实机会，报告未覆盖；有真实机制但更贵或更差，报告负面／不确定；只有相同新冻结任务中的原生质量与全成本支持，才讨论优势。无论何种结果，不添加第四臂、更多候选或更多题来遮蔽当前解释。
 
-**当前状态为 `IMPLEMENTED_PENDING_SMALL_VALIDATION`：B–D 实现、窄检查及开发冻结完成；暴露题 A2 接线回归正在运行，新任务选择与三臂比较尚未开始。ordinary 默认及 v10 原始证据保持不变。**
+**当前状态为 `IMPLEMENTED_PENDING_SMALL_VALIDATION`：固定六臂比较仍在运行，缓存过度失效待修复，尚未完成工程验收或效果分析。ordinary 默认及 v10 原始证据保持不变。后续修复必须另记源码身份，不将当前冻结比较冒充修复后新版本的未见验证。**

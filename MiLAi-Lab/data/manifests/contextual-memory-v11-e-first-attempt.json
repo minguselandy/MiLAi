@@ -1,0 +1,483 @@
+{
+  "kind": "V11_E_ORIGINAL_A2_FIRST_ATTEMPT",
+  "status": "INTERRUPTED_MAINTENANCE_SEMANTIC_CONFUSION",
+  "source_commit": "27fddfc20535d87d76959247478f23823425c328",
+  "identity": {
+    "selection_sha256": "0481be0dbef8e405a52e95a73fdfa2decdb1c1634a5a92656c3344857423e153",
+    "config_sha256": "0cd6134a11f17a9a7278316f9d47b8f672e6f4ae07da989aae0a8694bdc87c78",
+    "selected_config_path": "artifacts/contextual-user-memory/v11-e-A2-prepared/config.json",
+    "selected_config_sha256": "0cd6134a11f17a9a7278316f9d47b8f672e6f4ae07da989aae0a8694bdc87c78",
+    "freeze_sha256": "8e612435c0341463c6d96add3e3090b81596e2fe4b857a7131735a89a962b7d8",
+    "freeze_source_mapping_sha256": "3cefb731f5379b2ea7ab1d5ce1725ca1a226c74228ab3f8709190a5257d913e9",
+    "selected_development_freeze_sha256": "3cefb731f5379b2ea7ab1d5ce1725ca1a226c74228ab3f8709190a5257d913e9",
+    "selected_execution_freeze_mapping_sha256": "3cefb731f5379b2ea7ab1d5ce1725ca1a226c74228ab3f8709190a5257d913e9",
+    "selection_template_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+    "adapter_sha256": "53ebc8a15d6b31e15cad8c11b2d852a9de83c1a8931284434db1af4158bb8620",
+    "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+    "external_source_sha256": {
+      "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+      "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+      "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+      "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+      "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+      "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+      "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+      "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+      "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+      "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+      "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+      "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+    },
+    "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+    "initial_world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29"
+  },
+  "artifacts": {
+    "artifacts/contextual-user-memory/v11-e-old-arc/manifest.json": {
+      "sha256": "bf20ca533ec889118a8d59ce44fa13c0f54ae3c47b6e51f0644d5a920530a493",
+      "bytes": 4016
+    },
+    "artifacts/contextual-user-memory/v11-e-old-arc/results.json": {
+      "sha256": "82e749426fbe63c7271128faee95f7cafa09a3a26a20810b23bcf69a39a3ad6f",
+      "bytes": 193
+    },
+    "artifacts/contextual-user-memory/v11-e-old-arc/A2/interruption.json": {
+      "sha256": "078366a5f4022ab5ad659e1c9dad10b2d4fa5afbdcefcc18fa2d14f4dd2598a4",
+      "bytes": 589314
+    },
+    "artifacts/contextual-user-memory/v11-e-old-arc/A2/runtime/trace.jsonl": {
+      "sha256": "fe335ae15f7a5bf190e5687f76060ae945195709fdc8eabcd56435794f9a8791",
+      "bytes": 4452880
+    },
+    "artifacts/contextual-user-memory/v11-e-old-arc/A2/runtime/accounting.json": {
+      "sha256": "8950d692dfea9bbf3af359c43557bab92729711a7a6c976d503973d7b9300a2a",
+      "bytes": 33891
+    }
+  },
+  "completed_episodes": [
+    {
+      "episode_index": 0,
+      "task_id": "arc0-000-e0-plant-refund",
+      "kind": "I_note",
+      "dependent": false,
+      "public_message_count": 1,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": true,
+        "success": true,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      }
+    },
+    {
+      "episode_index": 1,
+      "task_id": "arc0-000-e1-update-refund",
+      "kind": "I_note",
+      "dependent": false,
+      "public_message_count": 2,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": true,
+        "success": true,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      }
+    },
+    {
+      "episode_index": 2,
+      "task_id": "arc0-000-e2-probe-refund-upd",
+      "kind": "T_refund_upd",
+      "dependent": true,
+      "public_message_count": 2,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": true,
+        "success": true,
+        "memory_had_fact": true,
+        "argument_value_match": true,
+        "memory_utilized": true
+      }
+    }
+  ],
+  "whole_arc_native_score": "UNSCORED_INCOMPLETE",
+  "stopped_episode": 3,
+  "unattempted_episodes": [
+    4
+  ],
+  "host_complete": 5,
+  "host_attempted": 6,
+  "planned_public_turns": 7,
+  "generation": {
+    "requests": 33,
+    "prompt_tokens": 272449,
+    "completion_tokens": 71746,
+    "total_tokens": 344195,
+    "unknown_usage": 0
+  },
+  "embedding": {
+    "requests": 10,
+    "prompt_tokens": 1914,
+    "completion_tokens": 0,
+    "total_tokens": 1914,
+    "unknown_usage": 0
+  },
+  "truncated_generations": 11,
+  "control": {
+    "request_occupancy": {
+      "numerator": 9,
+      "denominator": 33,
+      "provider_requests": 33
+    },
+    "action_occupancy": {
+      "numerator": 5,
+      "denominator": 22
+    },
+    "activation_count": 2,
+    "transition_counts": {
+      "STATE_CHANGED": 4,
+      "GAP_RESOLVED": 1,
+      "NO_STATE_CHANGE": 15,
+      "REVIEW_ACKNOWLEDGED": 1,
+      "CLEARED": 1
+    },
+    "parsed_sidecar_counts": {
+      "state_delta_set": 12,
+      "state_delta_clear": 10
+    },
+    "lifetimes": {
+      "fd163f92642945fcadccba9986b08625": {
+        "request_steps": 1,
+        "action_steps": 1,
+        "semantic_revisions": 0,
+        "review_acknowledgements": 0,
+        "churn": 0.0
+      },
+      "bc6c6e23c541482ab2a4e7142b0c7d8e": {
+        "request_steps": 8,
+        "action_steps": 4,
+        "semantic_revisions": 2,
+        "review_acknowledgements": 1,
+        "churn": 0.5
+      }
+    },
+    "terminal_turns": [
+      {
+        "episode_index": 0,
+        "turn_index": 0,
+        "host_status": "complete",
+        "basis_remaining": false
+      },
+      {
+        "episode_index": 1,
+        "turn_index": 0,
+        "host_status": "complete",
+        "basis_remaining": false
+      },
+      {
+        "episode_index": 1,
+        "turn_index": 1,
+        "host_status": "complete",
+        "basis_remaining": false
+      },
+      {
+        "episode_index": 2,
+        "turn_index": 0,
+        "host_status": "complete",
+        "basis_remaining": false
+      },
+      {
+        "episode_index": 2,
+        "turn_index": 1,
+        "host_status": "complete",
+        "basis_remaining": false
+      },
+      {
+        "episode_index": 3,
+        "turn_index": 0,
+        "host_status": "maintenance_pending",
+        "basis_remaining": false,
+        "interrupted_episode": true
+      }
+    ],
+    "truncated_requests_with_dispatch": [],
+    "notification_count": 0,
+    "notification_events": [],
+    "search_requested": 0,
+    "search_origins": {},
+    "gap_eligible_requests": 9,
+    "retrieval_executed": 0,
+    "gap_retrieval_executed": 0,
+    "search_cache_hits": 0,
+    "search_events": [],
+    "independently_labelled_recheck_need": "UNKNOWN_UNTIL_OFFLINE_EVENT_REVIEW",
+    "segment_token_estimates": {
+      "decision_projection_tokens": 1325,
+      "fixed_contract_tokens": 160948,
+      "historical_sidecar_tokens": 5113,
+      "state_fixed_instruction_tokens": 4950
+    },
+    "segment_unmeasured_requests": {
+      "decision_projection_tokens": 0,
+      "fixed_contract_tokens": 0,
+      "historical_sidecar_tokens": 0,
+      "state_fixed_instruction_tokens": 0
+    },
+    "sidecar_output_token_estimates": {
+      "state_delta": 1173
+    },
+    "unparseable_output_sidecar_cost_unknown_requests": 11,
+    "tokenizer_identity": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "enable_thinking": true,
+      "tokenizer_path": "/cra/qwen36-35B",
+      "tokenizer_files_sha256": {
+        "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+        "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+      },
+      "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+    },
+    "interpretation": "Segment estimates are local tokenizer diagnostics; state instruction is a subset of the fixed contract. Segments need not sum to full request usage. Output fields are re-serialized for estimation. Shared reasoning, grammar overhead and counterfactual State-induced calls remain unassigned. Provider usage is the sole charged total.",
+    "truncation_positions": [
+      {
+        "generation": 2,
+        "session_id": "arc0-000:episode:0",
+        "turn_id": "message-0",
+        "request_index": 2,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 6555,
+          "total_tokens": 10651,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 3,
+        "session_id": "arc0-000:episode:0",
+        "turn_id": "message-0",
+        "request_index": 3,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 6609,
+          "total_tokens": 10705,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 7,
+        "session_id": "arc0-000:episode:1",
+        "turn_id": "message-0",
+        "request_index": 1,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 6771,
+          "total_tokens": 10867,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 14,
+        "session_id": "arc0-000:episode:2",
+        "turn_id": "message-0",
+        "request_index": 1,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 6697,
+          "total_tokens": 10793,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 15,
+        "session_id": "arc0-000:episode:2",
+        "turn_id": "message-0",
+        "request_index": 2,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 6752,
+          "total_tokens": 10848,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 19,
+        "session_id": "arc0-000:episode:2",
+        "turn_id": "message-1",
+        "request_index": 1,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 10247,
+          "total_tokens": 14343,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 25,
+        "session_id": "arc0-000:episode:3",
+        "turn_id": "message-0",
+        "request_index": 3,
+        "basis_present": true,
+        "decision_projection_tokens": 148,
+        "usage": {
+          "prompt_tokens": 8962,
+          "total_tokens": 13058,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 26,
+        "session_id": "arc0-000:episode:3",
+        "turn_id": "message-0",
+        "request_index": 4,
+        "basis_present": true,
+        "decision_projection_tokens": 148,
+        "usage": {
+          "prompt_tokens": 9016,
+          "total_tokens": 13112,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 27,
+        "session_id": "arc0-000:episode:3",
+        "turn_id": "message-0",
+        "request_index": 5,
+        "basis_present": true,
+        "decision_projection_tokens": 148,
+        "usage": {
+          "prompt_tokens": 9070,
+          "total_tokens": 13166,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 28,
+        "session_id": "arc0-000:episode:3",
+        "turn_id": "message-0",
+        "request_index": 6,
+        "basis_present": true,
+        "decision_projection_tokens": 148,
+        "usage": {
+          "prompt_tokens": 9124,
+          "total_tokens": 13220,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      },
+      {
+        "generation": 31,
+        "session_id": "arc0-000:episode:3",
+        "turn_id": "message-0",
+        "request_index": 9,
+        "basis_present": false,
+        "decision_projection_tokens": 0,
+        "usage": {
+          "prompt_tokens": 10697,
+          "total_tokens": 14793,
+          "completion_tokens": 4096,
+          "prompt_tokens_details": null
+        },
+        "output_limit": 4096,
+        "executable_json_present": false,
+        "intended_action": "UNKNOWN"
+      }
+    ],
+    "consecutive_truncation_generations": [
+      [
+        2,
+        3
+      ],
+      [
+        7
+      ],
+      [
+        14,
+        15
+      ],
+      [
+        19
+      ],
+      [
+        25,
+        26,
+        27,
+        28
+      ],
+      [
+        31
+      ]
+    ]
+  },
+  "provider_http_failures": 0,
+  "write_rejections": 0,
+  "finish_rejections": 0,
+  "judge_requests": 0,
+  "diagnosis": {
+    "fact": "The Host declared pending solely for awaiting a future customer reply, after a successful durable CREATE and send_message. Actual required review/persistence and unsettled operations were empty. The framework honored the accepted pending declaration.",
+    "inference": "The shared v3 pending wording conflated future business waiting with unfinished current memory maintenance.",
+    "unknown": "This attempt cannot establish a whole-arc score, overall cost benefit, or automatic gap/notification benefit. Truncations cannot all be attributed to State.",
+    "repair": "Clarify shared semantic maintenance wording; preserve this attempt and use a separate exact-identity recovery diagnostic without replaying settled business effects."
+  },
+  "historical_ledgers_unchanged": {
+    "ledger": "artifacts/contextual-user-memory/v10-budget.json",
+    "sha256": "7e0c2db25823e3d15f141c84ede59b934e38bf5dd3edd41ec5bfbc37b42b0507",
+    "generation_requests": 122,
+    "generation_tokens": 1216124,
+    "embedding_tokens": 8148,
+    "modified": false,
+    "earlier_history": {
+      "ledger": "artifacts/contextual-user-memory/v9-budget.json",
+      "sha256": "8f5021ff4b7cb7d04b3fae7954d488d90ef4a3e08716f0ea97db8cebc401aed6",
+      "generation_requests": 119,
+      "generation_tokens": 966332,
+      "embedding_tokens": 4358,
+      "modified": false
+    }
+  }
+}

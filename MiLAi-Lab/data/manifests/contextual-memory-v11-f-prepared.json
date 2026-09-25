@@ -1,0 +1,602 @@
+{
+  "status": "ALL_SIX_ARMS_PREPARED_BEFORE_F_MODEL_REQUESTS",
+  "prepared_utc": "2026-09-25T07:10:59.961955+00:00",
+  "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+  "selection_receipt_sha256": "a93180b18f6f7e846f6d7c02d4e893948aff885162f26305b3455f343865b246",
+  "run_order": [
+    {
+      "arc": "arc1-000",
+      "order": [
+        "A0",
+        "A1",
+        "A2"
+      ]
+    },
+    {
+      "arc": "arc2-000",
+      "order": [
+        "A2",
+        "A1",
+        "A0"
+      ]
+    }
+  ],
+  "capacity_match": "Both model weight inventories were freshly hashed during each arc anchor preparation. All six arms match v11 E model/thinking/context/output capacity. Derived arms retain the same verified model artifacts; adapter prepared_inputs validates all source, arc, world, selection, config and model manifest hashes.",
+  "differences": {
+    "A0_to_A1": [
+      "decision_policy",
+      "decision_feedback"
+    ],
+    "A1_to_A2": [
+      "decision_gap_focus"
+    ]
+  },
+  "concurrency": 1,
+  "fresh_world_memory_embedding_cache_each_arm_arc": true,
+  "arms": [
+    {
+      "arc": "arc1",
+      "arm": "A0",
+      "prepared_path": "artifacts/contextual-user-memory/v11-f-arc1-A0-prepared",
+      "config_path": "artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/config.json",
+      "config_sha256": "14c14221c98f83cb82d20244adbd532c07e0dc7bcd775d127553a9fdf5cecae5",
+      "selection_sha256": "813f99996b3407153b3922864c72251b4e03130e89383184a0981441c97c4274",
+      "freeze_sha256": "3ee214e8049fe308a3b66b6b83a51503bb0d69f1d7de9d22a505571b8910e349",
+      "model_identity": {
+        "artifacts": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/model-weights.json",
+            "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/model-metadata.json",
+            "sha256": "195cc9b2901da04bdcbd923458f4606a22c8b156c09df25620731171efefd594"
+          },
+          {
+            "path": "/data/models/embed/tokenizer.json",
+            "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+          }
+        ],
+        "host": {
+          "local_path": "/cra/qwen36-35B",
+          "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+          "metadata": {
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+            "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+            "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+            "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+            "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b"
+          },
+          "served_model": "Qwen3.6-35B-A3B-FP8",
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_model_len": 65536
+        },
+        "embedding": {
+          "local_path": "/data/models/embed",
+          "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+          "metadata": {
+            "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+            "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1",
+            "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+          },
+          "served_model": "bge-m3"
+        },
+        "verification": "Local weights and metadata hashed during v11 preparation; manifests checked on run."
+      },
+      "host": {
+        "base_url": "http://127.0.0.1:7860/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": true
+      },
+      "capacity": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tokenizer_path": "/cra/qwen36-35B",
+        "tokenizer_files_sha256": {
+          "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+          "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+          "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+        },
+        "context_tokens": 65536,
+        "output_tokens": 4096,
+        "batch_source_tokens": 6000,
+        "safety_tokens": 512,
+        "source_message_overhead_tokens": 32,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "enable_thinking": true
+      },
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "timeout": 180
+      },
+      "embedding_window": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+        "max_tokens": 8192,
+        "pooling": "original_token_count_weighted_mean_l2"
+      },
+      "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+      "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "world_sha256": "a88689a69adb70a390936412d536a6c73c7e7180728b702dfd7a4f968e47d0d8"
+    },
+    {
+      "arc": "arc1",
+      "arm": "A1",
+      "prepared_path": "artifacts/contextual-user-memory/v11-f-arc1-A1-prepared",
+      "config_path": "artifacts/contextual-user-memory/v11-f-arc1-A1-prepared/config.json",
+      "config_sha256": "9b4a37605890fc744fd70540619f6f8b082d05c6d99c43a19d4b12a0ad78cf02",
+      "selection_sha256": "c9003408fee64920bd15a48e83d9fdc229c57e84b42e56fb1be471f432715d89",
+      "freeze_sha256": "e2a1925f5158743ad364dd29b3789d1bee0e0d947234f04b3bf005f69f8f2ec1",
+      "model_identity": {
+        "artifacts": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/model-weights.json",
+            "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/model-metadata.json",
+            "sha256": "195cc9b2901da04bdcbd923458f4606a22c8b156c09df25620731171efefd594"
+          },
+          {
+            "path": "/data/models/embed/tokenizer.json",
+            "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+          }
+        ],
+        "host": {
+          "local_path": "/cra/qwen36-35B",
+          "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+          "metadata": {
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+            "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+            "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+            "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+            "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b"
+          },
+          "served_model": "Qwen3.6-35B-A3B-FP8",
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_model_len": 65536
+        },
+        "embedding": {
+          "local_path": "/data/models/embed",
+          "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+          "metadata": {
+            "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+            "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1",
+            "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+          },
+          "served_model": "bge-m3"
+        },
+        "verification": "Local weights and metadata hashed during v11 preparation; manifests checked on run."
+      },
+      "host": {
+        "base_url": "http://127.0.0.1:7860/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": true
+      },
+      "capacity": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tokenizer_path": "/cra/qwen36-35B",
+        "tokenizer_files_sha256": {
+          "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+          "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+          "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+        },
+        "context_tokens": 65536,
+        "output_tokens": 4096,
+        "batch_source_tokens": 6000,
+        "safety_tokens": 512,
+        "source_message_overhead_tokens": 32,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "enable_thinking": true
+      },
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "timeout": 180
+      },
+      "embedding_window": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+        "max_tokens": 8192,
+        "pooling": "original_token_count_weighted_mean_l2"
+      },
+      "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+      "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "world_sha256": "a88689a69adb70a390936412d536a6c73c7e7180728b702dfd7a4f968e47d0d8"
+    },
+    {
+      "arc": "arc1",
+      "arm": "A2",
+      "prepared_path": "artifacts/contextual-user-memory/v11-f-arc1-A2-prepared",
+      "config_path": "artifacts/contextual-user-memory/v11-f-arc1-A2-prepared/config.json",
+      "config_sha256": "0b5afa658247bc43c46d3aca6eba1118ed9be7e22342ee051274e544a2174a27",
+      "selection_sha256": "581187fc8e8a5475011b01390a3ffde75d7cc49871acdb0674b1f497af8b3ec9",
+      "freeze_sha256": "8c3ad076499c096b383490125ee94888b8914b28206d498a16b87b1f3579994c",
+      "model_identity": {
+        "artifacts": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/model-weights.json",
+            "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/model-metadata.json",
+            "sha256": "195cc9b2901da04bdcbd923458f4606a22c8b156c09df25620731171efefd594"
+          },
+          {
+            "path": "/data/models/embed/tokenizer.json",
+            "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+          }
+        ],
+        "host": {
+          "local_path": "/cra/qwen36-35B",
+          "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+          "metadata": {
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+            "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+            "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+            "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+            "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b"
+          },
+          "served_model": "Qwen3.6-35B-A3B-FP8",
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_model_len": 65536
+        },
+        "embedding": {
+          "local_path": "/data/models/embed",
+          "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+          "metadata": {
+            "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+            "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1",
+            "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+          },
+          "served_model": "bge-m3"
+        },
+        "verification": "Local weights and metadata hashed during v11 preparation; manifests checked on run."
+      },
+      "host": {
+        "base_url": "http://127.0.0.1:7860/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": true
+      },
+      "capacity": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tokenizer_path": "/cra/qwen36-35B",
+        "tokenizer_files_sha256": {
+          "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+          "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+          "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+        },
+        "context_tokens": 65536,
+        "output_tokens": 4096,
+        "batch_source_tokens": 6000,
+        "safety_tokens": 512,
+        "source_message_overhead_tokens": 32,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "enable_thinking": true
+      },
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "timeout": 180
+      },
+      "embedding_window": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+        "max_tokens": 8192,
+        "pooling": "original_token_count_weighted_mean_l2"
+      },
+      "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+      "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "world_sha256": "a88689a69adb70a390936412d536a6c73c7e7180728b702dfd7a4f968e47d0d8"
+    },
+    {
+      "arc": "arc2",
+      "arm": "A0",
+      "prepared_path": "artifacts/contextual-user-memory/v11-f-arc2-A0-prepared",
+      "config_path": "artifacts/contextual-user-memory/v11-f-arc2-A0-prepared/config.json",
+      "config_sha256": "6d7670716cfadad7b17287c71f832c4c80a1c29dee376f24fe7183a4777abf08",
+      "selection_sha256": "a101890722b6aab27e3a7351c353c3b0da75ef0dd944a56f90c288cab368f909",
+      "freeze_sha256": "84694be5d92af15df3fd38ff7e45902ff2c3baf7160c054260450eb184e81e1f",
+      "model_identity": {
+        "artifacts": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/model-weights.json",
+            "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/model-metadata.json",
+            "sha256": "195cc9b2901da04bdcbd923458f4606a22c8b156c09df25620731171efefd594"
+          },
+          {
+            "path": "/data/models/embed/tokenizer.json",
+            "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+          }
+        ],
+        "host": {
+          "local_path": "/cra/qwen36-35B",
+          "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+          "metadata": {
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+            "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+            "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+            "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+            "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b"
+          },
+          "served_model": "Qwen3.6-35B-A3B-FP8",
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_model_len": 65536
+        },
+        "embedding": {
+          "local_path": "/data/models/embed",
+          "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+          "metadata": {
+            "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+            "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1",
+            "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+          },
+          "served_model": "bge-m3"
+        },
+        "verification": "Local weights and metadata hashed during v11 preparation; manifests checked on run."
+      },
+      "host": {
+        "base_url": "http://127.0.0.1:7860/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": true
+      },
+      "capacity": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tokenizer_path": "/cra/qwen36-35B",
+        "tokenizer_files_sha256": {
+          "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+          "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+          "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+        },
+        "context_tokens": 65536,
+        "output_tokens": 4096,
+        "batch_source_tokens": 6000,
+        "safety_tokens": 512,
+        "source_message_overhead_tokens": 32,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "enable_thinking": true
+      },
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "timeout": 180
+      },
+      "embedding_window": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+        "max_tokens": 8192,
+        "pooling": "original_token_count_weighted_mean_l2"
+      },
+      "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+      "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "world_sha256": "21130ceaa1bc7cee64fe2ab037ec35203ebb42f71cb245829e7fe72d433b454a"
+    },
+    {
+      "arc": "arc2",
+      "arm": "A1",
+      "prepared_path": "artifacts/contextual-user-memory/v11-f-arc2-A1-prepared",
+      "config_path": "artifacts/contextual-user-memory/v11-f-arc2-A1-prepared/config.json",
+      "config_sha256": "eb754ac83ccf9731c1a2e61735156aed86b58d192683a4261b7807db371b0e9e",
+      "selection_sha256": "f5441b0081543db928846ccdc801b653851fa1a86034a878e40cd4d55f105fd9",
+      "freeze_sha256": "fbe33f239caa7a9f6761a0d7900f1cede84f8afcaa712678abd8050e472e4717",
+      "model_identity": {
+        "artifacts": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/model-weights.json",
+            "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/model-metadata.json",
+            "sha256": "195cc9b2901da04bdcbd923458f4606a22c8b156c09df25620731171efefd594"
+          },
+          {
+            "path": "/data/models/embed/tokenizer.json",
+            "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+          }
+        ],
+        "host": {
+          "local_path": "/cra/qwen36-35B",
+          "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+          "metadata": {
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+            "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+            "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+            "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+            "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b"
+          },
+          "served_model": "Qwen3.6-35B-A3B-FP8",
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_model_len": 65536
+        },
+        "embedding": {
+          "local_path": "/data/models/embed",
+          "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+          "metadata": {
+            "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+            "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1",
+            "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+          },
+          "served_model": "bge-m3"
+        },
+        "verification": "Local weights and metadata hashed during v11 preparation; manifests checked on run."
+      },
+      "host": {
+        "base_url": "http://127.0.0.1:7860/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": true
+      },
+      "capacity": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tokenizer_path": "/cra/qwen36-35B",
+        "tokenizer_files_sha256": {
+          "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+          "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+          "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+        },
+        "context_tokens": 65536,
+        "output_tokens": 4096,
+        "batch_source_tokens": 6000,
+        "safety_tokens": 512,
+        "source_message_overhead_tokens": 32,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "enable_thinking": true
+      },
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "timeout": 180
+      },
+      "embedding_window": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+        "max_tokens": 8192,
+        "pooling": "original_token_count_weighted_mean_l2"
+      },
+      "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+      "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "world_sha256": "21130ceaa1bc7cee64fe2ab037ec35203ebb42f71cb245829e7fe72d433b454a"
+    },
+    {
+      "arc": "arc2",
+      "arm": "A2",
+      "prepared_path": "artifacts/contextual-user-memory/v11-f-arc2-A2-prepared",
+      "config_path": "artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/config.json",
+      "config_sha256": "33c630ae9a1f17025c7bc29831f25122979338f9fdccc9a5537c44f424e6584b",
+      "selection_sha256": "53f5ba77bc94eb815f20913d2b337747612b23b8aaaa004293e7c0b0b5745048",
+      "freeze_sha256": "509d9513387722eaa2a3d7541948f031e688cadfd9e77a6e1d359569ca0a3c3f",
+      "model_identity": {
+        "artifacts": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/model-weights.json",
+            "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/model-metadata.json",
+            "sha256": "195cc9b2901da04bdcbd923458f4606a22c8b156c09df25620731171efefd594"
+          },
+          {
+            "path": "/data/models/embed/tokenizer.json",
+            "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+          }
+        ],
+        "host": {
+          "local_path": "/cra/qwen36-35B",
+          "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+          "metadata": {
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+            "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+            "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+            "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+            "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b"
+          },
+          "served_model": "Qwen3.6-35B-A3B-FP8",
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_model_len": 65536
+        },
+        "embedding": {
+          "local_path": "/data/models/embed",
+          "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+          "metadata": {
+            "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+            "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1",
+            "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+          },
+          "served_model": "bge-m3"
+        },
+        "verification": "Local weights and metadata hashed during v11 preparation; manifests checked on run."
+      },
+      "host": {
+        "base_url": "http://127.0.0.1:7860/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": true
+      },
+      "capacity": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tokenizer_path": "/cra/qwen36-35B",
+        "tokenizer_files_sha256": {
+          "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+          "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+          "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+        },
+        "context_tokens": 65536,
+        "output_tokens": 4096,
+        "batch_source_tokens": 6000,
+        "safety_tokens": 512,
+        "source_message_overhead_tokens": 32,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "enable_thinking": true
+      },
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "timeout": 180
+      },
+      "embedding_window": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+        "max_tokens": 8192,
+        "pooling": "original_token_count_weighted_mean_l2"
+      },
+      "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+      "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "world_sha256": "21130ceaa1bc7cee64fe2ab037ec35203ebb42f71cb245829e7fe72d433b454a"
+    }
+  ]
+}

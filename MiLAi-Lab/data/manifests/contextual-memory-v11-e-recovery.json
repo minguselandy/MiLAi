@@ -1,0 +1,143 @@
+{
+  "kind": "V11_TARGETED_FINISH_RECOVERY",
+  "status": "SEMANTIC_PENDING_REPEATED",
+  "manifest": {
+    "purpose": "single exposed turn finish continuation, not a complete native arc",
+    "old_interruption_sha256": "078366a5f4022ab5ad659e1c9dad10b2d4fa5afbdcefcc18fa2d14f4dd2598a4",
+    "old_runtime_state_sha256": "283973cc4d03b5d21f3cb3f919ad3e720ee1fa127e83c1f294a0c6b3e6f3294d",
+    "copied_embedding_cache_sha256": "5bb1ac9a28642d1f28640200eda7c57b3a0ce6d4b9a67f50ae2fefd1f25ab5f3",
+    "old_source_mapping_sha256": "3cefb731f5379b2ea7ab1d5ce1725ca1a226c74228ab3f8709190a5257d913e9",
+    "new_source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+    "new_freeze_sha256": "6f949b6970f7b8caa7f270fe50ca38ac0141478dc86cc5b59b9ad515ef3693f2",
+    "config_sha256": "0cd6134a11f17a9a7278316f9d47b8f672e6f4ae07da989aae0a8694bdc87c78",
+    "arc_id": "arc0-000",
+    "episode_index": 3,
+    "turn_id": "message-0",
+    "prior_model_responses": 11,
+    "allowed_additional_responses": 1,
+    "finish_recovery_only_tool": "finish_turn",
+    "remaining_episode": 4,
+    "remaining_episode_tools": "original native MERIT schemas and functions",
+    "business_actions_before": 10,
+    "world_before_sha256": "8bffa1c326102fd814189916761d3904135a8d0177d9a13ffde8a1e9edd97f85",
+    "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v11-budget.json"
+  },
+  "generation": {
+    "requests": 1,
+    "prompt_tokens": 7516,
+    "completion_tokens": 1153,
+    "total_tokens": 8669,
+    "unknown_usage": 0
+  },
+  "embedding": {
+    "requests": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "unknown_usage": 0
+  },
+  "truncated_generations": 0,
+  "provider_http_failures": 0,
+  "write_rejections": 0,
+  "finish_rejections": 0,
+  "control": {
+    "request_occupancy": {
+      "numerator": 0,
+      "denominator": 1,
+      "provider_requests": 1
+    },
+    "action_occupancy": {
+      "numerator": 0,
+      "denominator": 1
+    },
+    "activation_count": 0,
+    "transition_counts": {
+      "NO_STATE_CHANGE": 1
+    },
+    "parsed_sidecar_counts": {
+      "state_delta_clear": 1
+    },
+    "lifetimes": {},
+    "terminal_turns": [
+      {
+        "episode_index": 3,
+        "turn_index": 0,
+        "host_status": "maintenance_pending",
+        "basis_remaining": false,
+        "targeted_finish_recovery": true
+      }
+    ],
+    "truncated_requests_with_dispatch": [],
+    "notification_count": 0,
+    "notification_events": [],
+    "search_requested": 0,
+    "search_origins": {},
+    "gap_eligible_requests": 0,
+    "retrieval_executed": 0,
+    "gap_retrieval_executed": 0,
+    "search_cache_hits": 0,
+    "search_events": [],
+    "independently_labelled_recheck_need": "UNKNOWN_UNTIL_OFFLINE_EVENT_REVIEW",
+    "segment_token_estimates": {
+      "decision_projection_tokens": 0,
+      "fixed_contract_tokens": 1453,
+      "historical_sidecar_tokens": 315,
+      "state_fixed_instruction_tokens": 150
+    },
+    "segment_unmeasured_requests": {
+      "decision_projection_tokens": 0,
+      "fixed_contract_tokens": 0,
+      "historical_sidecar_tokens": 0,
+      "state_fixed_instruction_tokens": 0
+    },
+    "sidecar_output_token_estimates": {
+      "state_delta": 10
+    },
+    "unparseable_output_sidecar_cost_unknown_requests": 0,
+    "tokenizer_identity": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "enable_thinking": true,
+      "tokenizer_path": "/cra/qwen36-35B",
+      "tokenizer_files_sha256": {
+        "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+        "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+      },
+      "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+    },
+    "interpretation": "Segment estimates are local tokenizer diagnostics; state instruction is a subset of the fixed contract. Segments need not sum to full request usage. Output fields are re-serialized for estimation. Shared reasoning, grammar overhead and counterfactual State-induced calls remain unassigned. Provider usage is the sole charged total.",
+    "truncation_positions": [],
+    "consecutive_truncation_generations": []
+  },
+  "judge_requests": 0,
+  "native_score": "UNSCORED_NOT_A_WHOLE_ARC",
+  "host_status": "maintenance_pending",
+  "world_unchanged": true,
+  "new_business_actions": 0,
+  "remaining_episode_4": "NOT_RUN_AFTER_PENDING",
+  "facts": "The one allowed response repeated the previous complete pending declaration. The prior transcript ended in that same assistant finish; no new business observation was introduced.",
+  "inference": "Continuation of an already answered transcript may encourage repetition. A clean-session suffix is needed to assess the clarified contract without that answered-turn history.",
+  "planned_followup": "One clean original episode3/4 suffix from the actual episode2 durable checkpoint and after_world; keep native boundaries, original twelve-response per-message capacity, and all failures. No further outcome-driven prompt changes before the fixed F comparison.",
+  "artifacts": {
+    "artifacts/contextual-user-memory/v11-e-targeted-recheck/manifest.json": {
+      "sha256": "f000b124a3cdccbdb0c004349edb754e689c6f4c4fff9ad1b81f3ac941af2225",
+      "bytes": 1281
+    },
+    "artifacts/contextual-user-memory/v11-e-targeted-recheck/episode-3-recheck.json": {
+      "sha256": "55b46b7166594c0db7b156bb870d64af6ffb94a35c7b5366131bfb0ddddb4719",
+      "bytes": 543705
+    },
+    "artifacts/contextual-user-memory/v11-e-targeted-recheck/interruption.json": {
+      "sha256": "4fcee849f53ab7dc6c50481274b79648e95110115d1e049b4f418c4cd7a740ba",
+      "bytes": 5585
+    },
+    "artifacts/contextual-user-memory/v11-e-targeted-recheck/runtime/trace.jsonl": {
+      "sha256": "fc830224e85289203d52dcb1bedaa1f907579ca0d40349aeb0b85f756e25d62f",
+      "bytes": 141955
+    },
+    "artifacts/contextual-user-memory/v11-e-targeted-recheck/runtime/accounting.json": {
+      "sha256": "384589dc2466be9e92a90eeae3a9984c8f4eb2738b5bbece9e6fa349a2b6e415",
+      "bytes": 5528
+    }
+  }
+}

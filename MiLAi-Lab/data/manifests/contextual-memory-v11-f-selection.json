@@ -1,0 +1,47 @@
+{
+  "status": "FROZEN_BEFORE_F_MODEL_RUNS",
+  "selected_utc": "2026-09-25T07:06:59.381257+00:00",
+  "policy_path": "data/manifests/contextual-memory-v11-selection-policy.json",
+  "policy_sha256": "585ff2ae0455bed131fc519b97d2f63e5f2dfe0282d9b15f9b2c63e9766cc8c4",
+  "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+  "wiring_evidence_path": "artifacts/contextual-user-memory/v11-e-clean-suffix/result.json",
+  "wiring_evidence_sha256": "cde3e3f9cbc588b5e17fff76cc60e15d24c0a2809526a9532127fea82d3570c8",
+  "selected": [
+    {
+      "path": "data/manifests/contextual-memory-v11-f-arc1-selection.json",
+      "sha256": "0f2e216f2f361a73a937401e307b1baba56d5db23779291d8c31c2751817dccd",
+      "base_seed": 1,
+      "arc_seed": 10000,
+      "arc_id": "arc1-000",
+      "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "initial_world_sha256": "a88689a69adb70a390936412d536a6c73c7e7180728b702dfd7a4f968e47d0d8",
+      "episode_count": 5,
+      "dependent_episode_count": 2,
+      "user_message_count": 6,
+      "arm_order": [
+        "A0",
+        "A1",
+        "A2"
+      ]
+    },
+    {
+      "path": "data/manifests/contextual-memory-v11-f-arc2-selection.json",
+      "sha256": "2f74bda5f6140a2ba39d6cdad1ed8de98331713317927bd5843e3344a986eef8",
+      "base_seed": 2,
+      "arc_seed": 20000,
+      "arc_id": "arc2-000",
+      "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "initial_world_sha256": "21130ceaa1bc7cee64fe2ab037ec35203ebb42f71cb245829e7fe72d433b454a",
+      "episode_count": 5,
+      "dependent_episode_count": 2,
+      "user_message_count": 7,
+      "arm_order": [
+        "A2",
+        "A1",
+        "A0"
+      ]
+    }
+  ],
+  "skipped_duplicates": [],
+  "interpretation": "Previously unexposed instances of the same original generator templates; not new task types."
+}

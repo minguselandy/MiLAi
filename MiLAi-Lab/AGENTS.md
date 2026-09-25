@@ -41,8 +41,12 @@ and its [sparse-basis design](docs/MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_
 The B–D runtime, three-arm templates and frozen-selection preparation path are implemented
 with narrow checks; status is `IMPLEMENTED_PENDING_SMALL_VALIDATION`. Root controls the
 development freeze, decoder probe, exposed-arc wiring regression and two new native arcs.
-Do not generate unseen tasks or call a model before that freeze. Keep ordinary default,
-v10 evidence sealed, native scoring unchanged, and cumulative costs continuous.
+The exposed-arc failures and original-suffix diagnostic are preserved. The fixed six-arm
+comparison is running on source mapping `2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4`;
+keep that runtime unchanged until its trajectories terminate. A confirmed cache over-invalidation
+issue remains open and requires a separate repair identity and narrow checks. Do not restart
+completed arms, substitute seeds or represent this comparison as evidence for a later repair.
+Keep ordinary default, v10 evidence sealed, native scoring unchanged, and cumulative costs continuous.
 
 The user explicitly authorized execution of [Goal v10.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)
 and its detailed design. Planning-only wording is historical. Follow A → B–D implementation

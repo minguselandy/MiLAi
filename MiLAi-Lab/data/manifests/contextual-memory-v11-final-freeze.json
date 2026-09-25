@@ -1,0 +1,74 @@
+{
+  "status": "DEVELOPMENT_COMPLETE_READY_FOR_BENCHMARK_SELECTION",
+  "frozen_utc": "2026-09-25T06:52:10.454962+00:00",
+  "source_sha256": {
+    "src/milai_lab/datasets/contextual.py": "2d856518eb0ac3b5e0f5da03833563bcc4155663140f8c4a2f11519e465127bf",
+    "src/milai_lab/datasets/memsyco.py": "1547cf025cff2d3980a57afcdb710372ea8a42b4094918518fb9ac1b2a8b9110",
+    "src/milai_lab/datasets/stale.py": "132a00b9adaa77dcc9974e87041460fa9462a55a97a6f4f6ddd6cd580109d447",
+    "src/milai_lab/scorers/contextual.py": "d275c70d536b67702c9ef4e5ab0bb742a80301c1f5fe0b1da0e676d37f394558",
+    "src/milai_lab/scorers/memsyco.py": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+    "src/milai_lab/scorers/stale.py": "683ff4bb82dc7c0c4e4a18824504a44d865f04980158322757f39e8612b0f75f",
+    "src/milai_lab/methods/contextual_user_memory.py": "1d3735c13086464f65f67f292a17f5831263e527935b548c615f7c8cff7b6d4a",
+    "src/milai_lab/methods/controlled_workspace.py": "4d62f79faa15f7b442862bc7702cb9f2532e49c6051782544d973f96d3ea95a3",
+    "src/milai_lab/methods/reasoning_bank.py": "1ad2548cb22e0c9abba294157aeefd04a2a907888c7f256b71487b635549581f",
+    "src/milai_lab/methods/state_attention.py": "642b8eab8fbf4b34d48187c99b5d31960d32f5dbc98b7a0912073199382f4ebd",
+    "src/milai_lab/methods/state_focus.py": "bcdb8056944f7989cfed62361660ceb3be7a5a11db2ad8d7243fdacdb005b061",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_embeddings.py": "9500273aa839663b713d57b3d008c38dba1845e6645f38f8b779937e10e0b604",
+    "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+    "src/milai_lab/runners/contextual.py": "3ffde5762de5acf053abde1ed1c477077d910974d3584728cc55fc30dbb3665d",
+    "src/milai_lab/runners/contextual_agent_tasks.py": "c75f7eb2190b8dec679dea147206dc0479329665629812c4ccd98868c703098a",
+    "src/milai_lab/runners/contextual_delivery.py": "88aeb913e4d433d78c04fa2a85d5a756c5346cb293ede836573f6d7138b13be3",
+    "src/milai_lab/runners/contextual_host.py": "5d65ae824cb42d45d88a1326f66c68bb54108d51087843e1b34f54f7a7d98410",
+    "src/milai_lab/runners/contextual_ingestion.py": "71817b6e967c7258567af7ef58e2331233b76f7abda9bd781da321bc2e03d604",
+    "src/milai_lab/runners/contextual_maintenance.py": "fd3539a03e3adc1873780a43aa96f54aa9f15663dc3b6740d53e8e919bc321b4",
+    "src/milai_lab/runners/contextual_profiles.py": "ceece4d86a31b510e3d1c7e3c95fc396d0f0c78d99682b271f29f21b2b83c01f",
+    "src/milai_lab/runners/contextual_runtime_store.py": "9ae0fd792a4befe1bff2f2226b00bfbe96f14bf8d9e5f7df8da890d792eef490",
+    "src/milai_lab/runners/contextual_scoring.py": "4ac57a9f77f7ca5ccae7e3e5a04122500b3b41c9a39e8df246848fd08f7b4a12",
+    "src/milai_lab/runners/contextual_session.py": "c51ff93945b079df55f1e6c91f520a616fbe1518998f2efb8f0f9c234f31e395",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "tools/prepare_contextual_v9.py": "5cbe652c544e0df01a792266d392d90baf0f2ec62495182f1e321196909f3976",
+    "tools/run_contextual_merit.py": "53ebc8a15d6b31e15cad8c11b2d852a9de83c1a8931284434db1af4158bb8620",
+    "tools/run_contextual_user_memory.py": "c309706c62da1dc30ff7df59a77f1f727260f40bc41a8d45ba28fa3c22d84b13",
+    "examples/contextual_document.py": "fd2e27603d1918f97827bced49cf7d42e894dd44ccfede3938291ba402babd8f",
+    "configs/contextual-memory-v9-template.json": "8deead51f32ca00894ef0bb79b41e6ade013e60e4d3dc6177b094c02f540451f",
+    "data/manifests/contextual-memory-v9-document-sequence.json": "b6af859639f3475af2bc54840758a63f87b6877bdc0e4923f8a3365ce1fdba8c",
+    "pyproject.toml": "a1ca4c535526fd0c822373bfb97bb77dfd2daf9c2855c8db276e9fdbf245395e",
+    "uv.lock": "36050ba3e272b7904a3e47542b3daf53dd8677ae4de5a7bed3e499220beefb01",
+    "configs/contextual-memory-v11-notes-template.json": "ab320ef49ee9620479f9bacbc00428bedc1a5309dde3880463c22c1318bc8c0a",
+    "configs/contextual-memory-v11-sparse-template.json": "e7370096a0456f29b0cfd784a6cdcccf4b5c742bbb9abf5a9d59d7324b20a524",
+    "configs/contextual-memory-v11-attention-template.json": "2198334b41ac9569512df7747ef6d200478e6eaf3938aef13d109622d4b3bc81",
+    "src/milai_lab/methods/contextual_memory/__init__.py": "2cead58efc51f4927abffb680acfa3ab94205136a1aa39e593a97764c3eaa58d",
+    "src/milai_lab/methods/contextual_memory/decision_basis.py": "2931e479c41593bd30ff4a05aebb74bb60ef7dc38114f96f14336dee5ed0d2bf",
+    "src/milai_lab/methods/contextual_memory/deletion.py": "9e9f6b6176a0c0187c6d8d8470d53db2d6cab369640402914de87089f0b441d1",
+    "src/milai_lab/methods/contextual_memory/material_view.py": "0d35dca5aa400d35d5bc05fb63fd49faea78880058b6983ff3ecd6f784577357",
+    "src/milai_lab/methods/contextual_memory/materials.py": "5311cdd7973130680a1dfb0cd4f98790e133df29be547f26b06d75b47dd09fa7",
+    "src/milai_lab/methods/contextual_memory/models.py": "07b82268552fd2aa2c34576a02e1184fd7c2d58d93d67d81efbf5aa1d3d2286d",
+    "src/milai_lab/methods/contextual_memory/operations.py": "6daf5b369afec36bab9a9868f06f6cfb2788d8ca4c42892525c08fd67629bced",
+    "src/milai_lab/methods/contextual_memory/query_context.py": "f3db98be98f232b9eb7682740821c9ddae771104af9640b4fd7f8d6bc65191a7",
+    "src/milai_lab/methods/contextual_memory/retrieval.py": "7e6d26360305cfdf3d7d60d56f03afe281b81be67b7185b8f1ab5a58b2c5cea8",
+    "src/milai_lab/methods/contextual_memory/revision.py": "362b0d3c4dc99a40b9e6e14c2d5cfa434881d324277f69ca52719e6ffd6243d6",
+    "src/milai_lab/methods/contextual_memory/store.py": "df4a67b086b6bd48599bcd2e98c2a06d86188560cc71871e9ff6ced38abee670",
+    "src/milai_lab/methods/contextual_memory/write_contract.py": "dd6c62e046eeea0196f5228447afefd96755c51f733adb89c3486c192f864067"
+  },
+  "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+  "config_sha256": {
+    "artifacts/contextual-user-memory/v11-e-recovery-prepared/config.json": "0cd6134a11f17a9a7278316f9d47b8f672e6f4ae07da989aae0a8694bdc87c78"
+  },
+  "prior_source_mapping_sha256": "3cefb731f5379b2ea7ab1d5ce1725ca1a226c74228ab3f8709190a5257d913e9",
+  "reason": "Clarify current-turn semantic memory maintenance versus future external business waiting. Schema and checkpoint protocols are unchanged.",
+  "checks": [
+    {
+      "command": "uv run pytest -q --tb=short tests/unit/test_contextual_maintenance.py tests/unit/test_contextual_turn_maintenance.py tests/unit/test_contextual_host_adapter.py",
+      "result": "48 passed"
+    },
+    {
+      "command": "uv run ruff check src/milai_lab/runners/contextual_host.py src/milai_lab/runners/contextual_maintenance.py",
+      "result": "All checks passed"
+    },
+    {
+      "command": "uv run mypy src/milai_lab/runners/contextual_host.py src/milai_lab/runners/contextual_maintenance.py",
+      "result": "Success: no issues found in 2 source files"
+    }
+  ]
+}

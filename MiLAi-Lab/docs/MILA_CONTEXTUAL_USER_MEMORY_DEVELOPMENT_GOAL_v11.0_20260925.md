@@ -3,7 +3,7 @@ goal_id: MILAI-SPARSE-DECISION-BASIS-AND-ATTENTION
 version: v11.0
 date: 2026-09-25
 status: IMPLEMENTED_PENDING_SMALL_VALIDATION
-delivery: b_to_d_frozen_old_a2_wiring_running
+delivery: fixed_small_comparison_running_cache_repair_pending
 baseline_commit: 6722c5ea3363d33e366bfadad6ae4fcd941a6588
 baseline_source_mapping_sha256: 6528ff9c69a567d40afb096e7ecb1c4e81aeafb3bee0c23b4dba20c57f58e9f4
 experiment_arm_kind: RESEARCH_PROTOTYPE
@@ -17,7 +17,7 @@ verification_count_cap: null
 
 **目标：将 v10 的单决策依据收敛为只在存在行动分歧时启用的短期控制状态；减少重复声明、冗余投影和输出截断；让有意义的缺口在普通 search 调用中进入实际检索。完成开发后，用固定的小规模原生任务比较任务完成、机制使用与全部成本。**
 
-本 Goal 与[详细设计](MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md)先作为计划冻结；随后按用户授权完成 B–D 运行接口、三臂模板及准备入口，状态为 `IMPLEMENTED_PENDING_SMALL_VALIDATION`。48 文件源码／配置映射已冻结为 `3cefb731f5379b2ea7ab1d5ce1725ca1a226c74228ab3f8709190a5257d913e9`；94 项受影响窄测、静态检查、15 项部署 decoder 探针及三份固定投影比较完成，详见[开发清单](../data/manifests/contextual-memory-v11-development.json)。旧 arc A2 接线回归已启动、仍在运行；两个新 arc 的三臂比较尚未开始。Product 与 v10 原始结果未改，本 Goal 不重开 v10。
+本 Goal 与[详细设计](MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md)先作为计划冻结；随后按用户授权完成 B–D 运行接口、三臂模板及准备入口，状态为 `IMPLEMENTED_PENDING_SMALL_VALIDATION`。初次 48 文件映射、94 项受影响窄测、静态检查、15 项部署 decoder 探针及三份固定投影比较见[开发清单](../data/manifests/contextual-memory-v11-development.json)。旧 arc 首次回归及一次定向恢复均保留失败；公共维护说明修复后，原始后缀的两个 Host 回合完成，原生任务分别失败／通过。两个新实例已按预定规则冻结，六臂比较正以映射 `2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4` 串行运行。另已确认同值确认及显式查询路径存在缓存过度失效，待保持本次比较身份后定向修复，不能宣称工程验收完成。详见[开发与待办记录](CONTEXTUAL_USER_MEMORY_V11_DEVELOPMENT_20260925.md)。Product 与 v10 原始结果未改，本 Goal 不重开 v10。
 
 ## 1. 核对后的出发点
 
@@ -163,4 +163,4 @@ Sol xhigh 负责核心／Host／查询集成；明确窄任务可交 Luna max，
 
 v11 新账本引用已封存的 v10：122 次生成、1216124 generation tokens、8148 embedding tokens，unknown=0、Judge=0；旧 v9 费用单列。不得重置旧费用或将不同模型的 tokens 混成精确货币成本。
 
-状态按证据推进：`PLANNED_NOT_STARTED` → `IMPLEMENTED_PENDING_SMALL_VALIDATION` → 有范围的小验证结果；效果不足时用 `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`，适用机会不足时说明缺口。**B–D 的窄工程验证不等于原生任务效果；旧 arc A2 回归仍在运行，尚无终结评分或三臂比较结果。**
+状态按证据推进：`PLANNED_NOT_STARTED` → `IMPLEMENTED_PENDING_SMALL_VALIDATION` → 有范围的小验证结果；效果不足时用 `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`，适用机会不足时说明缺口。**当前固定六臂比较仍在运行，缓存过度失效待修复；已有窄测与旧 arc 诊断不构成最终工程验收或方法收益，Goal 尚未结项。**

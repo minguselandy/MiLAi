@@ -36,7 +36,10 @@ SEMANTIC_FINISH_TOOL: dict[str, Any] = {
         "name": "finish_turn",
         "description": "Finish with a concise semantic maintenance decision. processed means all "
         "required review and persistence are actually complete; not_selected means no "
-        "durable change was selected; pending lists unfinished matters by delivered ref. "
+        "durable change was selected; pending lists unfinished maintenance in this turn "
+        "or an unsettled operation by delivered ref. Waiting for a future customer reply "
+        "or external business decision can be stated in the answer after current-turn "
+        "maintenance is processed; it is not itself unfinished memory maintenance. "
         "Actual writes, read ranges and business outcomes are checked by the program.",
         "parameters": SEMANTIC_FINAL_SCHEMA,
     },
