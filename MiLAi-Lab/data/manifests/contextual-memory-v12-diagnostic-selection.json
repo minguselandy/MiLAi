@@ -1,0 +1,125 @@
+{
+  "kind": "V12_EXPOSED_FAILURE_SUFFIX_SELECTION",
+  "status": "SELECTED_PENDING_IMPLEMENTATION_FREEZE_AND_COMPATIBILITY_CHECK",
+  "original_problem_manifest": "data/manifests/contextual-memory-v12-planning-diagnosis.json",
+  "planned_new_public_messages": 5,
+  "method_comparison": false,
+  "new_samples": false,
+  "concurrency": 1,
+  "runs": [
+    {
+      "id": "amount_revision",
+      "old_episode": "artifacts/contextual-user-memory/v11-f-arc2/A1/episodes/episode-1.json",
+      "old_episode_sha256": "4f44e39da42501740d582a86bd00cd130af83a6f22e33681ed7c3e34a89c9c69",
+      "selection": "artifacts/contextual-user-memory/v11-f-arc2-A1-prepared/selection.json",
+      "selection_sha256": "f5441b0081543db928846ccdc801b653851fa1a86034a878e40cd4d55f105fd9",
+      "old_prepared": "artifacts/contextual-user-memory/v11-f-arc2-A1-prepared",
+      "episode_indices": [
+        2,
+        3
+      ],
+      "policy": "ordinary/notes/off",
+      "closed_checkpoint": true,
+      "import": "normal ContextualMemory.restore; exact owner, embedding and memory format checks; no active session import",
+      "checkpoint_original_decision_policy": "basis",
+      "controlled_interruption_after_successful_journaled_tool": null,
+      "native_messages_and_tools_and_scorer_unchanged": true,
+      "pre_freeze_compatibility": {
+        "case": "amount_revision",
+        "original_checkpoint_sha256": "f151deb5fb6f519603bcc7054f14de97fe46b9415b3eae65c6a9af4542d01906",
+        "notes_checkpoint_sha256": "be87f72ddad556eecaae85222ed2626c4569c95a2f491c45b2e7a136efa5e3a2",
+        "changed_fields": [
+          "decision_policy",
+          "decision_feedback"
+        ],
+        "original_card_count": 2,
+        "restored_card_count": 2,
+        "content_sources_versions_vectors_unchanged": true,
+        "model_calls": 0
+      },
+      "public_message_count": 3,
+      "offline_expectations_not_method_inputs": {
+        "after_episode_2": {
+          "card:1": "first current agreed amount updated",
+          "card:2": "second current agreed amount updated"
+        },
+        "after_episode_3": {
+          "card:1": "current agreed amount consumed in actual native refund; same card records execution"
+        }
+      }
+    },
+    {
+      "id": "refund_recovery",
+      "old_episode": "artifacts/contextual-user-memory/v11-f-arc1/A0/episodes/episode-3.json",
+      "old_episode_sha256": "52db2c789555284f3252fd021ad0fc1f2fe774d671a391dcf298b5d136ee4e38",
+      "selection": "artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/selection.json",
+      "selection_sha256": "813f99996b3407153b3922864c72251b4e03130e89383184a0981441c97c4274",
+      "old_prepared": "artifacts/contextual-user-memory/v11-f-arc1-A0-prepared",
+      "episode_indices": [
+        4
+      ],
+      "policy": "ordinary/notes/off",
+      "closed_checkpoint": true,
+      "import": "normal ContextualMemory.restore; exact owner, embedding and memory format checks; no active session import",
+      "checkpoint_original_decision_policy": "notes",
+      "controlled_interruption_after_successful_journaled_tool": "refund",
+      "native_messages_and_tools_and_scorer_unchanged": true,
+      "pre_freeze_compatibility": {
+        "case": "refund_recovery",
+        "original_checkpoint_sha256": "c48e7d135e40937872d60f1849e0936a15910a3f3d0b0609053b3867bbbfe5f5",
+        "notes_checkpoint_sha256": "c48e7d135e40937872d60f1849e0936a15910a3f3d0b0609053b3867bbbfe5f5",
+        "changed_fields": [],
+        "original_card_count": 2,
+        "restored_card_count": 2,
+        "content_sources_versions_vectors_unchanged": true,
+        "model_calls": 0
+      },
+      "public_message_count": 1,
+      "offline_expectations_not_method_inputs": {
+        "after_episode_4": {
+          "card:2": "same card records the actual completed refund; new refund execution count exactly one across interruption and recovery"
+        }
+      }
+    },
+    {
+      "id": "completion_maintenance",
+      "old_episode": "artifacts/contextual-user-memory/v11-f-arc1/A2/episodes/episode-1.json",
+      "old_episode_sha256": "69bdb5b299bfb11b9409a90eef21d578146b073ef9e477e5efb13d9fb92dbf59",
+      "selection": "artifacts/contextual-user-memory/v11-f-arc1-A2-prepared/selection.json",
+      "selection_sha256": "581187fc8e8a5475011b01390a3ffde75d7cc49871acdb0674b1f497af8b3ec9",
+      "old_prepared": "artifacts/contextual-user-memory/v11-f-arc1-A2-prepared",
+      "episode_indices": [
+        2
+      ],
+      "policy": "ordinary/notes/off",
+      "closed_checkpoint": true,
+      "import": "normal ContextualMemory.restore; exact owner, embedding and memory format checks; no active session import",
+      "checkpoint_original_decision_policy": "basis",
+      "controlled_interruption_after_successful_journaled_tool": null,
+      "native_messages_and_tools_and_scorer_unchanged": true,
+      "pre_freeze_compatibility": {
+        "case": "completion_maintenance",
+        "original_checkpoint_sha256": "3e11e25d443a1abae1ecd4fc85196cdc4351e979a075b353a86a69a22c399c96",
+        "notes_checkpoint_sha256": "3fa3b94e8ef09b875c5a9de7c8e9e2b6ea69448ba95108c0e38ac0a558b2a54b",
+        "changed_fields": [
+          "decision_policy",
+          "decision_feedback",
+          "decision_gap_focus"
+        ],
+        "original_card_count": 2,
+        "restored_card_count": 2,
+        "content_sources_versions_vectors_unchanged": true,
+        "model_calls": 0
+      },
+      "public_message_count": 1,
+      "offline_expectations_not_method_inputs": {
+        "after_episode_2": {
+          "card:1": "same card records the actual completed refund without a competing completion card"
+        }
+      }
+    }
+  ],
+  "scope": "Three exposed problem-driven suffixes, not full arcs or independent efficacy evidence. Controlled recovery pauses after a real successful result is journaled and resumes the same turn; it is reported separately from natural interruptions.",
+  "cost": "All v12 prefix, failed, recovery and diagnostic calls accumulate once in v12-budget; sealed v11 costs cited separately.",
+  "budget_path": "artifacts/contextual-user-memory/v12-budget.json"
+}

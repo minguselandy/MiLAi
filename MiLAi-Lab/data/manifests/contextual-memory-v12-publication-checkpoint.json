@@ -1,0 +1,145 @@
+{
+  "kind": "V12_DEVELOPMENT_PUBLICATION_CHECKPOINT",
+  "date": "2026-09-25",
+  "status": "IMPLEMENTED_PENDING_SMALL_VALIDATION",
+  "goal_complete": false,
+  "baseline_commit": "822efff48e92f03a493385646a5520a409f2123a",
+  "publication_scope": "All existing Lab development source, narrow tests, configuration, docs and compact manifests. Raw artifacts stay ignored.",
+  "current_source_mapping_sha256": "e8d101e07d46e7a0856d6159e20358d8da9522c1a597a76474185fcbb497280e",
+  "current_config_sha256": "163b8dd74c4cf34ab67e662e154072c47db89e414bb9a931650d52c3ae8efc60",
+  "historical_freezes": {
+    "data/manifests/contextual-memory-v12-development-freeze.json": "795a7761b65b5b865188800c692d51f8d2c149e608786d242495d94baef002bd",
+    "data/manifests/contextual-memory-v12-reasoning-freeze.json": "0aef86207609c4f9e689e93a1438aad28952f8e89027f1c2929bd5f5cb162d59"
+  },
+  "r1_amount_revision": {
+    "status": "INTERRUPTED_AFTER_SUCCESSFUL_BUSINESS_ACTION",
+    "episode_2_host_messages_complete": 2,
+    "committed_writes": 2,
+    "rejected_writes": 2,
+    "explicit_failed_to_committed_repair_chains": 1,
+    "both_original_card_amounts_updated": true,
+    "episode_3_refund_used_updated_amount": true,
+    "episode_3_maintenance_complete": false,
+    "unresolved_failed_attempts": 1,
+    "reason": "After a genuine unread-source rejection and a subsequent read, repeated truncated reasoning prevented completion within the twelve-response workflow.",
+    "scope": "Old closed v11 prefix plus R1 native suffix, not a final-source full arc."
+  },
+  "r2_amount_recovery": {
+    "status": "PREPARATION_FAILED_NOT_EXECUTED",
+    "single_setting_change": "enable_thinking true -> false in host and matching capacity configuration",
+    "exit_code": 1,
+    "error": "ValueError: RUNTIME_SESSION_BINDING_INVALID",
+    "stage": "New RuntimeStore.restore_session -> _restore_session -> _binding after normal persist and journal API calls.",
+    "successful_prepare_manifest_exists": false,
+    "new_generation_requests": 0,
+    "new_embedding_requests": 0,
+    "new_business_calls": 0,
+    "partial_target_state_retained": true,
+    "compatibility_verified": false,
+    "freeze_compatibility_text_is": "Planned import approach, not proof that actual preparation succeeded."
+  },
+  "remaining_selected_diagnostics": [
+    {
+      "case": "refund_recovery",
+      "status": "R1_PREPARED_NOT_RUN"
+    },
+    {
+      "case": "completion_maintenance",
+      "status": "R1_PREPARED_NOT_RUN"
+    }
+  ],
+  "continuous_v12_cost": {
+    "generation": {
+      "requests": 20,
+      "unknown_usage": 0,
+      "prompt_tokens": 147649,
+      "completion_tokens": 52478,
+      "total_tokens": 200127
+    },
+    "embedding": {
+      "requests": 6,
+      "unknown_usage": 0,
+      "prompt_tokens": 1313,
+      "completion_tokens": 0,
+      "total_tokens": 1313
+    },
+    "truncation_subset_included_in_generation": {
+      "requests": 9,
+      "unknown_usage": 0,
+      "prompt_tokens": 69482,
+      "completion_tokens": 36864,
+      "total_tokens": 106346
+    },
+    "judge_requests": 0,
+    "historical_v11_separate": {
+      "ledger": "artifacts/contextual-user-memory/v11-budget.json",
+      "sha256": "47e21d12d2eec9ce25f2cc155bdea22eb81a049ddc0249afb289f7a688066ceb",
+      "generation_requests": 238,
+      "generation_tokens": 2453097,
+      "embedding_tokens": 14274,
+      "unknown_usage": 0,
+      "judge_requests": 0,
+      "earlier_history": {
+        "ledger": "artifacts/contextual-user-memory/v10-budget.json",
+        "sha256": "7e0c2db25823e3d15f141c84ede59b934e38bf5dd3edd41ec5bfbc37b42b0507",
+        "generation_requests": 122,
+        "generation_tokens": 1216124,
+        "embedding_tokens": 8148,
+        "modified": false,
+        "earlier_history": {
+          "ledger": "artifacts/contextual-user-memory/v9-budget.json",
+          "sha256": "8f5021ff4b7cb7d04b3fae7954d488d90ef4a3e08716f0ea97db8cebc401aed6",
+          "generation_requests": 119,
+          "generation_tokens": 966332,
+          "embedding_tokens": 4358,
+          "modified": false
+        }
+      },
+      "sealed": true
+    },
+    "agent_cost_included": false
+  },
+  "validation": {
+    "core_implementation": {
+      "command": "uv run pytest -q --tb=short tests/unit/test_contextual_turn_maintenance.py tests/unit/test_contextual_runtime_recovery.py tests/unit/test_contextual_material_view.py tests/unit/test_contextual_host_adapter.py",
+      "result": "71 passed",
+      "stage": "before final error-message-only addition"
+    },
+    "final_wrong_kind": {
+      "command": "uv run pytest -q --tb=short tests/unit/test_contextual_host_adapter.py::test_wrong_reference_kind_names_field_alias_and_legal_destination",
+      "result": "1 passed",
+      "stage": "final source"
+    },
+    "ruff": "Five changed sources and four affected test files passed; final Host/adapter message addition checked again.",
+    "mypy": "Five changed sources passed; final Host checked again.",
+    "diff_check": "passed",
+    "decoder": "10 probes passed in deployed vLLM 0.27.1/xgrammar 0.2.3, any_order=False; regenerated schema equality checked after integration; 0 model calls",
+    "not_run": [
+      "full suite",
+      "build",
+      "Product migration",
+      "new method comparison"
+    ]
+  },
+  "source_and_test_hashes_match_current_r2_freeze": true,
+  "unresolved_work": [
+    "Diagnose and repair actual binding snapshot restore failure.",
+    "Verify maintenance-only continuation with preserved business receipts and no repeated business execution.",
+    "Run only the remaining selected small native diagnostics under the appropriate frozen identity."
+  ],
+  "no_new_model_calls_for_publication": true,
+  "product_api_schema_permissions_canonical_changed": false,
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/manifest.json": "f33a0a4dc47c320ec071e6e0c7c092f1d6b9f5b9a6d2213a97730535114506cb",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/episodes/episode-2.json": "2d818ca6b30168ea1f86ce6de275446341291a857366d763726c4048cd654a42",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/interruption.json": "d89c767286afad2e6fe4dd4bd63b4c7a391c2783fab12ff378ad8363da12cf0a",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/runtime/accounting.json": "79f9c280f4525aac0c205bae13c88a7736cacb2767aa8f409705e1f3f561d2b1",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/runtime/trace.jsonl": "85a78bc0201ed66e7ffc49882d7228de2775aa646339b536db9494d9b34bc31c",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/runtime/runtime-state/state.json": "6fda78e5ed46d05258b650042f404bb772847d214bedc374804d75a2119c43c8",
+    "artifacts/contextual-user-memory/v12-amount-recovery-r2/runtime/runtime-state/state.json": "dd1ae3e28bf62a8577cb824e5f56111e380d797a20ab5c1f706230539fa4f561",
+    "artifacts/contextual-user-memory/v12-refund-recovery-r1/manifest.json": "41c2a111098aa95d1602b0322e0629c7450b29b346a97d414d71fd3dae7fcad9",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r1/manifest.json": "b7f77fcda490536eaacca96056b8ac041e0b2cf5ee54fc3a3aed1ad0aa6d697a",
+    "artifacts/contextual-user-memory/v12-budget.json": "09ff64179f5bb7996f956e30ca5bd5a2e3a6d13666995cfa093d1c4990db33e7",
+    "artifacts/contextual-user-memory/v12-development/recover_maintenance.py": "a664427c17515bd0e3860cd12f677e8f90d0603ca133ae2667f3522e7d8889d0"
+  }
+}

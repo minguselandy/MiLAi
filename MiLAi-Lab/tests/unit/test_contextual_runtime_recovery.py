@@ -21,7 +21,12 @@ from milai_lab.runners.contextual_agent_tasks import (
     task_runtime,
 )
 from milai_lab.runners.contextual_host import ContextualHost
-from milai_lab.runners.contextual_maintenance import SEMANTIC_MAINTENANCE_PROTOCOL
+from milai_lab.runners.contextual_maintenance import (
+    REPAIR_MAINTENANCE_PROTOCOL,
+    SEMANTIC_MAINTENANCE_PROTOCOL,
+    failed_write,
+    semantic_finish,
+)
 from milai_lab.runners.contextual_runtime_store import RuntimeIdentity, RuntimeStore
 from milai_lab.runners.contextual_session import HostSession
 
@@ -285,7 +290,11 @@ def test_resume_rejects_same_settled_business_action_without_new_intent(
                    for call in results[0].calls)
 
 
-def test_v3_raw_business_result_recovers_in_new_process_and_finishes(tmp_path: Path) -> None:
+@pytest.mark.parametrize("protocol", [SEMANTIC_MAINTENANCE_PROTOCOL,
+                                     REPAIR_MAINTENANCE_PROTOCOL])
+def test_raw_business_result_recovers_in_new_process_and_finishes(
+    tmp_path: Path, protocol: str,
+) -> None:
     state = tmp_path / "state"
     counter = tmp_path / "executions.txt"
     first = tmp_path / "first.json"
@@ -294,7 +303,7 @@ def test_v3_raw_business_result_recovers_in_new_process_and_finishes(tmp_path: P
     for phase, output in (("first", first), ("resume", second)):
         process = subprocess.run(  # noqa: S603 - fixed interpreter and local test paths
             [sys.executable, str(Path(__file__).resolve()), phase, str(state), str(counter),
-             str(output), str(events)],
+             str(output), str(events), protocol],
             capture_output=True, text=True, check=False,
         )
         assert process.returncode == 0, process.stderr
@@ -303,7 +312,7 @@ def test_v3_raw_business_result_recovers_in_new_process_and_finishes(tmp_path: P
     resumed = json.loads(second.read_text())
     assert initial["journal_status"] == "succeeded"
     assert resumed["status"] == "complete"
-    assert resumed["maintenance"]["protocol"] == SEMANTIC_MAINTENANCE_PROTOCOL
+    assert resumed["maintenance"]["protocol"] == protocol
     assert resumed["maintenance"]["semantic_decision"] == "processed"
     assert resumed["maintenance"]["status"] == "complete"
     assert resumed["journal_count"] == 1
@@ -324,12 +333,35 @@ def test_v3_raw_business_result_recovers_in_new_process_and_finishes(tmp_path: P
                == resumed["record_ref"] for event in trace)
 
 
-def _v3_subprocess_stage(
+def test_v4_failed_attempt_survives_runtime_restore_and_blocks_false_finish(
+    tmp_path: Path,
+) -> None:
+    contract = identity(REPAIR_MAINTENANCE_PROTOCOL)
+    memory = bank(contract)
+    memory.start_task("session-1", "Revise value")
+    session = HostSession("session-1", memory)
+    session.turn_id = "turn-1"
+    session.maintenance["protocol"] = REPAIR_MAINTENANCE_PROTOCOL
+    failed_write(session, "write-1", {}, "ABOUT_SOURCE_NOT_CITED")
+    with RuntimeStore(tmp_path, contract) as store:
+        store.persist(memory, session)
+    with RuntimeStore(tmp_path, contract) as store:
+        restored = store.restore_memory(embed)
+        assert restored is not None
+        resumed = store.restore_session(restored)
+        assert resumed is not None
+        assert list(resumed.maintenance["failed_attempts"]) == ["write-1"]
+        with pytest.raises(ValueError, match="FAILED_WRITES_UNRESOLVED"):
+            semantic_finish(resumed, {"decision": "processed", "remaining": []})
+
+
+def _maintenance_subprocess_stage(
     phase: str, state_path: Path, counter_path: Path, output_path: Path, events_path: Path,
+    protocol: str,
 ) -> None:
     from milai_lab.runners.contextual import memory_tools
 
-    contract = identity(SEMANTIC_MAINTENANCE_PROTOCOL)
+    contract = identity(protocol)
     turn = TaskTurn("turn-1", "Do item A")
 
     def emit(event: dict[str, Any]) -> None:
@@ -382,7 +414,7 @@ def _v3_subprocess_stage(
                 client, memory.dispatch, memory_tools("ordinary"), "Work", memory=memory,
                 business_tools={"do_work": BusinessTool(SCHEMA, execute)},
                 runtime_store=store, maintenance_policy="required",
-                maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL, emit=emit,
+                maintenance_protocol=protocol, emit=emit,
             )
             if phase == "first":
                 def crash_after_raw_result(*_: Any) -> Observation:
@@ -553,4 +585,5 @@ def test_runtime_exit_keeps_primary_error_when_persistence_also_fails(
 
 
 if __name__ == "__main__":
-    _v3_subprocess_stage(sys.argv[1], *(Path(value) for value in sys.argv[2:6]))
+    _maintenance_subprocess_stage(sys.argv[1], *(Path(value) for value in sys.argv[2:6]),
+                                  sys.argv[6])

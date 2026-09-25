@@ -319,6 +319,7 @@ def test_source_speaker_catalogue_requires_delivered_body_and_about_is_readable(
     }
     related = view.project(interpretation)["materials"][0]
     assert related["about_ref"] == speaker
+    assert related["identity_anchor"] == related["source_refs"][0]
     assert related["about"] == {
         "kind": "source_speaker",
         "source_ref": related["source_refs"][0],

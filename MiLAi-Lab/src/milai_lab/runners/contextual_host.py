@@ -41,12 +41,17 @@ from milai_lab.runners.contextual_maintenance import (
     FINAL_SCHEMA,
     FINISH_TOOL,
     MAINTENANCE_PROTOCOL,
+    REPAIR_FINAL_SCHEMA,
+    REPAIR_FINISH_TOOL,
+    REPAIR_MAINTENANCE_PROTOCOL,
     SEMANTIC_FINAL_SCHEMA,
     SEMANTIC_FINISH_TOOL,
     SEMANTIC_MAINTENANCE_PROTOCOL,
     committed,
+    failed_write,
     finish_tool,
     pending_materials,
+    repaired_write,
     semantic_finish,
     semantic_finish_tool,
     semantic_frontier,
@@ -62,7 +67,7 @@ if TYPE_CHECKING:
 Dispatch = Callable[[str, dict[str, Any]], dict[str, Any]]
 READ_ONLY_TOOLS = frozenset({"memory_search", "memory_read"})
 NO_PROGRESS_LIMIT = 3
-ACTION_PROTOCOL = "contextual-json-action-v3"
+ACTION_PROTOCOL = "contextual-json-action-v4"
 FINAL_ANSWER_RESPONSE_FORMAT: dict[str, Any] = {
     "type": "json_schema",
     "json_schema": {
@@ -133,6 +138,54 @@ def _subject_tools(
                     properties["about_ref"] = {"type": "string", "enum": choices}
         selected.append(tool)
     return selected
+
+
+def _compact_tool_descriptions(tools: Sequence[dict[str, Any]]) -> str:
+    """Render a short system catalogue from the same schemas used for validation."""
+    def shape(schema: dict[str, Any]) -> Any:
+        if "oneOf" in schema:
+            return {"oneOf": [shape(item) for item in schema["oneOf"]]}
+        if "anyOf" in schema:
+            return {"anyOf": [shape(item) for item in schema["anyOf"]]}
+        if "const" in schema:
+            fixed = schema["const"]
+            return schema.get("type", "null" if fixed is None else
+                              "boolean" if isinstance(fixed, bool) else
+                              "number" if isinstance(fixed, (int, float)) else "string")
+        if "enum" in schema:
+            return schema["enum"]
+        if schema.get("type") == "array":
+            return [shape(schema.get("items", {}))]
+        if schema.get("type") == "object":
+            required = set(schema.get("required", []))
+            return {key + ("" if key in required else "?"): shape(value)
+                    for key, value in schema.get("properties", {}).items()}
+        return schema.get("type", "value")
+
+    catalogue = []
+    for tool in tools:
+        function = tool.get("function", tool)
+        schema = function["parameters"]
+        branches = schema.get("oneOf", [schema])
+        fields: dict[str, Any] = {}
+        variants = []
+        for branch in branches:
+            properties = branch.get("properties", {})
+            variants.append({
+                "fixed": {key: value["const"] for key, value in properties.items()
+                          if "const" in value},
+                "required": branch.get("required", []),
+                "optional": [key for key in properties
+                             if key not in branch.get("required", [])],
+            })
+            for key, value in properties.items():
+                fields.setdefault(key, {"shape": shape(value)})
+                if value.get("description"):
+                    fields[key]["meaning"] = value["description"]
+        catalogue.append({"name": function["name"],
+                          "purpose": function.get("description", ""),
+                          "variants": variants, "fields": fields})
+    return json.dumps(catalogue, ensure_ascii=False, separators=(",", ":"))
 
 
 def _focus_tools(tools: Sequence[dict[str, Any]], *, allow_gap: bool) -> list[dict[str, Any]]:
@@ -266,13 +319,16 @@ class ContextualHost:
         if self.decision_policy != "off" and (
             self.memory is None or self.memory.decision_policy != self.decision_policy
             or self.client.config.tool_mode != "json_action"
-            or self.maintenance_protocol != SEMANTIC_MAINTENANCE_PROTOCOL
+            or self.maintenance_protocol not in {
+                SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+            }
         ):
             raise ValueError("INCOMPATIBLE_DECISION_HOST_CONFIGURATION")
         if self.maintenance_policy not in {"off", "required"}:
             raise ValueError("UNKNOWN_MAINTENANCE_POLICY")
         if self.maintenance_protocol not in {MAINTENANCE_PROTOCOL,
-                                             SEMANTIC_MAINTENANCE_PROTOCOL}:
+                                             SEMANTIC_MAINTENANCE_PROTOCOL,
+                                             REPAIR_MAINTENANCE_PROTOCOL}:
             raise ValueError("UNKNOWN_MAINTENANCE_PROTOCOL")
         if self.maintenance_policy == "required" and self.memory is None:
             raise ValueError("MAINTENANCE_REQUIRES_MEMORY")
@@ -291,8 +347,20 @@ class ContextualHost:
             if tool.schema.get("function", tool.schema)["name"] != name:
                 raise ValueError("BUSINESS_TOOL_NAME_MISMATCH")
         self.tools = [*self.tools, *(tool.schema for tool in self.business_tools.values())]
+        if self.maintenance_protocol == REPAIR_MAINTENANCE_PROTOCOL:
+            self.tools = [copy.deepcopy(tool) for tool in self.tools]
+            for schema_tool in self.tools:
+                function = schema_tool.get("function", schema_tool)
+                if function["name"] == "memory_save":
+                    for branch in function["parameters"].get(
+                        "oneOf", [function["parameters"]]
+                    ):
+                        if branch["properties"].get("op", {}).get("const") != "NO_CHANGE":
+                            branch["properties"]["repair_of"] = {"type": "string"}
         if self.maintenance_policy == "required":
-            terminal = (SEMANTIC_FINISH_TOOL if self.maintenance_protocol ==
+            terminal = (REPAIR_FINISH_TOOL if self.maintenance_protocol ==
+                        REPAIR_MAINTENANCE_PROTOCOL else
+                        SEMANTIC_FINISH_TOOL if self.maintenance_protocol ==
                         SEMANTIC_MAINTENANCE_PROTOCOL else FINISH_TOOL)
             self.tools = [*self.tools, terminal]
 
@@ -381,8 +449,11 @@ class ContextualHost:
             )
         sidecar_instruction = protocol_prompt[sidecar_instruction_start:]
         maintenance_required = self.maintenance_policy == "required"
-        semantic_maintenance = (maintenance_required and self.maintenance_protocol ==
-                                SEMANTIC_MAINTENANCE_PROTOCOL)
+        semantic_maintenance = (maintenance_required and self.maintenance_protocol in {
+            SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+        })
+        repair_maintenance = self.maintenance_protocol == REPAIR_MAINTENANCE_PROTOCOL
+        semantic_schema = REPAIR_FINAL_SCHEMA if repair_maintenance else SEMANTIC_FINAL_SCHEMA
         if semantic_maintenance:
             protocol_prompt += (
                 "\nBefore finishing, use finish_turn with maintenance.decision and remaining. "
@@ -407,6 +478,15 @@ class ContextualHost:
                 "directly instead of repeatedly restating the decision or planned call. "
                 "Finish using finish_turn as the sole tool call in its response."
             )
+            if repair_maintenance:
+                protocol_prompt += (
+                    " A rejected memory_save remains an unresolved maintenance attempt. "
+                    "Repair the same proposal with repair_of=<operation_id> and a real "
+                    "committed write; if optional, name it in abandoned_attempts with "
+                    "a reason, or finish pending. A successful business result is not a "
+                    "memory update. After it, check the current matter before finishing; "
+                    "do not repeat the completed business action during recovery."
+                )
         elif maintenance_required:
             protocol_prompt += (
                 "\nBefore finishing, review every new observation listed in the maintenance "
@@ -450,9 +530,11 @@ class ContextualHost:
                 "\n\nJSON-action protocol: respond with exactly one JSON object: "
                 + action_instruction
                 + "Tool results will be returned as a user message. This is the configured "
-                "json_action mode. Available tools (names, descriptions, and JSON Schema "
-                "parameters):\n"
-                + _json(self.tools)
+                "json_action mode. Available tools (names, descriptions, and "
+                + ("schema-derived compact field guide" if repair_maintenance else
+                   "JSON Schema parameters") + "):\n"
+                + (_compact_tool_descriptions(self.tools) if repair_maintenance
+                   else _json(self.tools))
             )
         session = session or HostSession(uuid4().hex, self.memory)
         if session.memory is not self.memory:
@@ -636,7 +718,7 @@ class ContextualHost:
                 emit_action_consumed("finish_turn")
                 return make_result(action["answer"], "complete")
             try:
-                validate(action, SEMANTIC_FINAL_SCHEMA if semantic_maintenance else FINAL_SCHEMA)
+                validate(action, semantic_schema if semantic_maintenance else FINAL_SCHEMA)
                 reviewed = (semantic_finish(
                     session, action["maintenance"], business_outcomes=business_outcomes(),
                 ) if semantic_maintenance else
@@ -669,8 +751,13 @@ class ContextualHost:
                     raise InvalidToolCall("MATERIAL_REF_NOT_DELIVERED")
                 binding = material_view.binding(value)
                 if kind is not None and binding.kind != kind:
-                    raise InvalidToolCall("reference has the wrong material kind")
-                if body and not binding.spans:
+                    raise InvalidToolCall(
+                        f"{field}={value}: expected {kind}, got {binding.kind}. "
+                        "Source evidence belongs in source_refs/source_delta.add; "
+                        "record relations belong in dependencies/dependency_delta.add "
+                        "(or target_ref for the record being revised)."
+                    )
+                if body and not session.visible_body_spans(value):
                     raise InvalidToolCall(
                         f"{field}={value}: read the referenced body before using it to write"
                     )
@@ -680,6 +767,21 @@ class ContextualHost:
             if name == "memory_read":
                 resolved["ref"] = resolve_ref(arguments["ref"])
             elif name == "memory_save":
+                if repair_maintenance:
+                    repair_of = resolved.pop("repair_of", None)
+                    if repair_of is not None:
+                        prior = session.maintenance.get("failed_attempts", {}).get(repair_of)
+                        if prior is None:
+                            raise InvalidToolCall("UNKNOWN_REPAIR_ATTEMPT")
+                        target_alias = arguments.get("target_ref")
+                        if prior.get("target_ref"):
+                            if not isinstance(target_alias, str):
+                                raise InvalidToolCall("REPAIR_TARGET_REQUIRED")
+                            assert bound_memory is not None
+                            target_exact = resolve_ref(target_alias, kind="interpretation")
+                            if (bound_memory._handle(target_exact) !=
+                                    bound_memory._handle(prior["target_ref"])):
+                                raise InvalidToolCall("REPAIR_TARGET_MISMATCH")
                 if arguments.get("basis_mode") == "delta":
                     target_alias = arguments["target_ref"]
                     target_exact = resolve_ref(target_alias, body=True,
@@ -689,8 +791,11 @@ class ContextualHost:
                     def find_target(value: Any) -> None:
                         nonlocal target_row
                         if isinstance(value, dict):
+                            alias = value.get("ref")
                             if (value.get("kind") == "interpretation"
-                                    and value.get("ref") == target_alias):
+                                    and isinstance(alias, str)
+                                    and alias in session.visible_bindings
+                                    and session.visible_bindings[alias].exact_ref == target_exact):
                                 if (target_row is None or value.get("body_delivery") == "full"):
                                     target_row = value
                             for part in value.values():
@@ -701,7 +806,10 @@ class ContextualHost:
                                 find_target(part)
 
                     for message, content, bindings in reversed(session.deliveries):
-                        if target_alias not in bindings or message.get("content") != content:
+                        if (message.get("content") != content or not any(
+                            binding.exact_ref == target_exact and binding.spans
+                            for binding in bindings.values()
+                        )):
                             continue
                         from milai_lab.runners.contextual_runtime_store import _payload
 
@@ -720,6 +828,11 @@ class ContextualHost:
                                                    _visible=False)
                     if old_target.get("current_ref") != target_exact:
                         raise InvalidToolCall("DELTA_TARGET_VERSION_CHANGED")
+                    if not _covers_body(session.visible_body_spans(target_alias),
+                                        len(old_target["text"])):
+                        raise InvalidToolCall(
+                            "DELTA_TARGET_REQUIRES_DELIVERED_CURRENT_FULL_BODY"
+                        )
                     for field, kind, relation in (
                         ("source_delta", "source", "source_refs"),
                         ("dependency_delta", "interpretation", "dependency_refs"),
@@ -728,7 +841,11 @@ class ContextualHost:
                             continue
                         delta = arguments[field]
                         for alias in delta["remove"]:
-                            if alias not in target_row.get(relation, []):
+                            if (alias not in session.visible_bindings
+                                    or material_view.binding(alias).exact_ref not in {
+                                        material_view.binding(ref).exact_ref
+                                        for ref in target_row.get(relation, [])
+                                    }):
                                 raise InvalidToolCall(
                                     f"{field}.remove={alias}: not in delivered target {relation}"
                                 )
@@ -747,7 +864,7 @@ class ContextualHost:
                     old = bound_memory.read(target, include_sources=False, _visible=False)
                     apply_content_patch(
                         old["text"], arguments["content_patch"],
-                        visible_spans=material_view.binding(arguments["target_ref"]).spans,
+                        visible_spans=session.visible_body_spans(arguments["target_ref"]),
                     )
                 if "about_ref" in resolved:
                     resolved["about_ref"] = resolve_ref(resolved["about_ref"], kind="subject")
@@ -789,7 +906,7 @@ class ContextualHost:
             if name is not None:
                 arguments = action["arguments"]
                 if name == "finish_turn":
-                    validate(arguments, SEMANTIC_FINAL_SCHEMA)
+                    validate(arguments, semantic_schema)
                     semantic_finish(session, arguments["maintenance"],
                                     business_outcomes=business_outcomes(), commit=False)
                 else:
@@ -908,7 +1025,9 @@ class ContextualHost:
                                      material_view.visible_bindings(outcome["result"]).items()},
                     })
 
-        def rejected_tool_call(name: str, error: str) -> dict[str, Any]:
+        def rejected_tool_call(
+            name: str, error: str, arguments: dict[str, Any] | None = None,
+        ) -> dict[str, Any]:
             outcome: dict[str, Any] = {"ok": False, "error": error}
             if name == "memory_save":
                 result = {
@@ -917,6 +1036,9 @@ class ContextualHost:
                 }
                 outcome["result"] = result
                 outcome["operation_receipt"] = asdict(receipt_outcome(name, result))
+                if repair_maintenance:
+                    failed_write(session, result["operation_id"], arguments or {}, error)
+                    persist()
             return outcome
 
         def execute_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
@@ -946,7 +1068,7 @@ class ContextualHost:
                     raise InvalidToolCall("memory_state needs nonempty task understanding")
             except (ValueError, TypeError, ValidationError) as exc:
                 no_progress += 1
-                return rejected_tool_call(name, f"Invalid tool call: {exc}")
+                return rejected_tool_call(name, f"Invalid tool call: {exc}", arguments)
             if name in self.business_tools:
                 for prior in recovered_settled_actions:
                     prior_result = (prior.get("reconciliation") or {}).get(
@@ -1073,6 +1195,14 @@ class ContextualHost:
             internal_result = result
             if name == "memory_save":
                 committed(session, receipt, internal_result)
+                if repair_maintenance:
+                    if receipt.completion == "failed":
+                        failed_write(
+                            session, receipt.operation_id, arguments,
+                            str(internal_result.get("error", "MEMORY_WRITE_REJECTED")),
+                        )
+                    elif receipt.ok and receipt.decision == "COMMITTED":
+                        repaired_write(session, arguments.get("repair_of"))
                 persist()
             if active_stage == "state" and name == "memory_state" and receipt.ok:
                 active_stage = "search"
@@ -1156,6 +1286,35 @@ class ContextualHost:
                         })
             elif name == "memory_save" and material_view is not None:
                 result = material_view.project_write(internal_result)
+                if result.get("error") == "ABOUT_SOURCE_NOT_CITED":
+                    field = ("source_delta.remove" if arguments.get("basis_mode") == "delta"
+                             else "source_refs")
+                    about_alias = arguments.get("about_ref")
+                    anchor: str | None = None
+                    if isinstance(about_alias, str) and about_alias in session.visible_bindings:
+                        subject = session.visible_bindings[about_alias].exact_ref
+                        if subject.startswith("speaker:"):
+                            exact_source = subject.removeprefix("speaker:")
+                            anchor = next((alias for alias, binding in
+                                           session.visible_bindings.items()
+                                           if binding.kind == "source"
+                                           and binding.exact_ref == exact_source), None)
+                    if anchor is None and isinstance(arguments.get("target_ref"), str):
+                        target = session.visible_bindings.get(arguments["target_ref"])
+                        if target is not None and bound_memory is not None:
+                            about = bound_memory._view(target.exact_ref, False).get("about", {})
+                            anchor = next((alias for alias, binding in
+                                           session.visible_bindings.items()
+                                           if binding.kind == "source"
+                                           and binding.exact_ref == about.get("source_ref")), None)
+                    result["repair"] = {
+                        "field": field,
+                        "target_ref": arguments.get("target_ref"),
+                        "identity_anchor": anchor,
+                        "next": "Keep the delivered identity anchor in the source relation "
+                        "when preserving the subject; delta inherits it unless removed. "
+                        "To change subject, use a full revision with an explicit new anchor.",
+                    }
             operation_receipt = (
                 {
                     "completion": receipt.completion,
@@ -1310,7 +1469,8 @@ class ContextualHost:
                 if required_name is not None else None
             )
             request_tools = (
-                [SEMANTIC_FINISH_TOOL if semantic_maintenance else FINISH_TOOL]
+                [REPAIR_FINISH_TOOL if repair_maintenance else
+                 SEMANTIC_FINISH_TOOL if semantic_maintenance else FINISH_TOOL]
                 if native and final_request and maintenance_required else
                 [required_tool] if required_tool is not None
                 else _subject_tools(self.tools, material_view.subject_catalogue())
@@ -1569,6 +1729,8 @@ class ContextualHost:
                     outcome = rejected_tool_call(
                         str(action.get("tool", "")),
                         "Invalid action and state proposal: " + error_text,
+                        action.get("arguments") if isinstance(action.get("arguments"), dict)
+                        else None,
                     )
                     outcome["remaining_model_calls"] = budget - model_calls
                     calls.append({"name": action.get("tool", ""),
@@ -1599,6 +1761,8 @@ class ContextualHost:
             if final_request and isinstance(action, dict) and isinstance(action.get("tool"), str):
                 outcome = rejected_tool_call(
                     action["tool"], "Tool call rejected on the final model response.",
+                    action.get("arguments") if isinstance(action.get("arguments"), dict)
+                    else None,
                 )
                 outcome["remaining_model_calls"] = 0
                 calls.append(
@@ -1632,7 +1796,11 @@ class ContextualHost:
                 if action["tool"] not in READ_ONLY_TOOLS:
                     read_cache.clear()
                 no_progress += 1
-                outcome = rejected_tool_call(action["tool"], f"Invalid tool call: {exc}")
+                outcome = rejected_tool_call(
+                    action["tool"], f"Invalid tool call: {exc}",
+                    action.get("arguments") if isinstance(action.get("arguments"), dict)
+                    else None,
+                )
                 arguments = cast(dict[str, Any], action.get("arguments"))
             else:
                 outcome = execute_tool(action["tool"], arguments)
@@ -1871,6 +2039,15 @@ def _parse_arguments(raw: Any) -> dict[str, Any]:
     if not isinstance(arguments, dict):
         raise ValueError("tool arguments must decode to a JSON object")
     return arguments
+
+
+def _covers_body(spans: Sequence[tuple[int, int]], length: int) -> bool:
+    end = 0
+    for lower, upper in sorted(spans):
+        if lower > end:
+            return False
+        end = max(end, upper)
+    return end >= length
 
 
 def _json(value: Any, *, canonical: bool = False) -> str:

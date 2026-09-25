@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import copy
+import re
 from typing import Any
 
 from milai_lab.runners.contextual_session import HostSession
 
 MAINTENANCE_PROTOCOL = "turn-maintenance-v2"
 SEMANTIC_MAINTENANCE_PROTOCOL = "turn-maintenance-v3"
+REPAIR_MAINTENANCE_PROTOCOL = "turn-maintenance-v4"
 
 SEMANTIC_FINAL_SCHEMA: dict[str, Any] = {
     "type": "object",
@@ -31,6 +33,17 @@ SEMANTIC_FINAL_SCHEMA: dict[str, Any] = {
     "required": ["maintenance", "answer"], "additionalProperties": False,
 }
 
+REPAIR_FINAL_SCHEMA: dict[str, Any] = copy.deepcopy(SEMANTIC_FINAL_SCHEMA)
+REPAIR_FINAL_SCHEMA["properties"]["maintenance"]["properties"]["abandoned_attempts"] = {
+    "type": "array", "items": {
+        "type": "object", "properties": {
+            "operation_id": {"type": "string"},
+            "reason": {"type": "string", "minLength": 1},
+        },
+        "required": ["operation_id", "reason"], "additionalProperties": False,
+    },
+}
+
 SEMANTIC_FINISH_TOOL: dict[str, Any] = {
     "type": "function", "function": {
         "name": "finish_turn",
@@ -44,6 +57,13 @@ SEMANTIC_FINISH_TOOL: dict[str, Any] = {
         "parameters": SEMANTIC_FINAL_SCHEMA,
     },
 }
+
+REPAIR_FINISH_TOOL: dict[str, Any] = copy.deepcopy(SEMANTIC_FINISH_TOOL)
+REPAIR_FINISH_TOOL["function"]["parameters"] = REPAIR_FINAL_SCHEMA
+REPAIR_FINISH_TOOL["function"]["description"] += (
+    " Failed memory_save attempts must be repaired by a committed write using repair_of, "
+    "explicitly abandoned with a reason if optional, or left pending."
+)
 
 REVIEW_SCHEMA: dict[str, Any] = {
     "type": "array",
@@ -93,7 +113,9 @@ def observe(
     """Register an actual new event; repeated intake does not create another obligation."""
     known = session.maintenance.setdefault("observed", [])
     if ref in known:
-        if session.maintenance.get("protocol") == SEMANTIC_MAINTENANCE_PROTOCOL:
+        if session.maintenance.get("protocol") in {
+            SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+        }:
             item = session.maintenance.get("pending", {}).get(ref)
             if item is not None:
                 item["required_review_ranges"] = [list(span) for span in
@@ -108,7 +130,9 @@ def observe(
     # A truncated source may contain additional changes. Acknowledge it as pending
     # until it has actually been expanded, rather than claiming to review hidden text.
     pending_item: dict[str, Any] = {"ref": alias, "role": role}
-    if session.maintenance.get("protocol") == SEMANTIC_MAINTENANCE_PROTOCOL:
+    if session.maintenance.get("protocol") in {
+        SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+    }:
         pending_item.update(required_review_ranges=[list(span) for span in required_review_ranges],
                             persistence_required=persistence_required,
                             turn_id=session.turn_id)
@@ -130,11 +154,55 @@ def committed(session: HostSession, receipt: Any, internal: dict[str, Any]) -> N
     ref = record.get("ref")
     if ref and ref in receipt.memory_changes:
         writes = session.maintenance.setdefault("writes", [])
-        if session.maintenance.get("protocol") == SEMANTIC_MAINTENANCE_PROTOCOL:
+        if session.maintenance.get("protocol") in {
+            SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+        }:
             writes.append({"ref": ref, "turn_id": session.turn_id,
                            "operation_id": receipt.operation_id})
         else:
             writes.append(ref)
+
+
+def failed_write(
+    session: HostSession, operation_id: str, arguments: dict[str, Any], error: str,
+) -> None:
+    """Retain only the locator and public cause of one unresolved write attempt."""
+    if session.maintenance.get("protocol") != REPAIR_MAINTENANCE_PROTOCOL:
+        return
+    attempts = session.maintenance.setdefault("failed_attempts", {})
+    repair_of = arguments.get("repair_of")
+    if not isinstance(repair_of, str) or repair_of not in attempts:
+        repair_of = None
+    alias = arguments.get("target_ref")
+    binding = session.visible_bindings.get(alias) if isinstance(alias, str) else None
+    target = binding.exact_ref if binding is not None else None
+    prior = attempts.get(repair_of, {}) if repair_of is not None else {}
+    if (prior.get("target_ref") and target and session.memory is not None
+            and session.memory._handle(prior["target_ref"]) != session.memory._handle(target)):
+        repair_of = None
+        prior = {}
+    field = next((part for part in ("source_delta.remove", "source_refs", "target_ref",
+                                    "content_patch", "dependencies", "about_ref")
+                  if part in error), "write")
+    code = error if re.fullmatch(r"[A-Z][A-Z0-9_]{0,127}", error) else (
+        "INVALID_WRITE_PROPOSAL"
+    )
+    if code == "ABOUT_SOURCE_NOT_CITED":
+        field = "source_delta.remove" if arguments.get("basis_mode") == "delta" else "source_refs"
+    attempts[repair_of or operation_id] = {
+        "operation_id": repair_of or operation_id,
+        "last_operation_id": operation_id,
+        "target_ref": prior.get("target_ref") or target,
+        "field": field,
+        "error": code,
+        "turn_id": session.turn_id,
+    }
+
+
+def repaired_write(session: HostSession, repair_of: str | None) -> None:
+    if (session.maintenance.get("protocol") == REPAIR_MAINTENANCE_PROTOCOL
+            and repair_of is not None):
+        session.maintenance.setdefault("failed_attempts", {}).pop(repair_of, None)
 
 
 def pending_materials(session: HostSession) -> list[dict[str, Any]]:
@@ -326,7 +394,7 @@ def semantic_frontier(
             "delivery": "visible" if alias is not None else "not_delivered",
         })
     unsettled = session.maintenance.get("unsettled_operations", {})
-    return {
+    frontier = {
         "protocol": SEMANTIC_MAINTENANCE_PROTOCOL,
         "review_coverage": coverage,
         "committed_changes": committed_changes,
@@ -337,10 +405,21 @@ def semantic_frontier(
             for operation_id, item in unsettled.items()
         ],
     }
+    if session.maintenance.get("protocol") == REPAIR_MAINTENANCE_PROTOCOL:
+        frontier["protocol"] = REPAIR_MAINTENANCE_PROTOCOL
+        frontier["failed_attempts"] = [
+            {"operation_id": key, "target_ref": next((alias for alias, binding in
+              session.visible_bindings.items() if binding.kind == "interpretation"
+              and binding.exact_ref == item.get("target_ref")), "undelivered"),
+             "field": item["field"], "error": item["error"]}
+            for key, item in session.maintenance.get("failed_attempts", {}).items()
+        ]
+    return frontier
 
 
 def semantic_finish_tool(session: HostSession) -> dict[str, Any]:
-    tool = copy.deepcopy(SEMANTIC_FINISH_TOOL)
+    repair = session.maintenance.get("protocol") == REPAIR_MAINTENANCE_PROTOCOL
+    tool = copy.deepcopy(REPAIR_FINISH_TOOL if repair else SEMANTIC_FINISH_TOOL)
     refs = [item["ref"] for item in semantic_frontier(session)["review_coverage"]
             if item["ref"] != "undelivered"]
     refs += [alias for alias, binding in session.visible_bindings.items()
@@ -351,6 +430,14 @@ def semantic_finish_tool(session: HostSession) -> dict[str, Any]:
         remaining["items"]["properties"]["ref"] = {"enum": list(dict.fromkeys(refs))}
     else:
         remaining["maxItems"] = 0
+    if repair:
+        abandoned = tool["function"]["parameters"]["properties"]["maintenance"][
+            "properties"]["abandoned_attempts"]
+        ids = list(session.maintenance.get("failed_attempts", {}))
+        if ids:
+            abandoned["items"]["properties"]["operation_id"] = {"enum": ids}
+        else:
+            abandoned["maxItems"] = 0
     return tool
 
 
@@ -360,11 +447,21 @@ def semantic_finish(
     commit: bool = True,
 ) -> dict[str, Any]:
     """Accept semantic selection only when actual review, writes and outcomes permit it."""
-    if session.maintenance.get("protocol") != SEMANTIC_MAINTENANCE_PROTOCOL:
+    repair = session.maintenance.get("protocol") == REPAIR_MAINTENANCE_PROTOCOL
+    if session.maintenance.get("protocol") not in {
+        SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+    }:
         raise ValueError("MAINTENANCE_PROTOCOL_MISMATCH")
     frontier = semantic_frontier(session, business_outcomes=business_outcomes)
     choice = decision["decision"]
     remaining = decision["remaining"]
+    abandoned = decision.get("abandoned_attempts", []) if repair else []
+    attempts = session.maintenance.get("failed_attempts", {}) if repair else {}
+    abandon_ids = [item["operation_id"] for item in abandoned]
+    if (len(set(abandon_ids)) != len(abandon_ids)
+            or any(key not in attempts or not item["reason"].strip()
+                   for key, item in zip(abandon_ids, abandoned, strict=True))):
+        raise ValueError("MAINTENANCE_ABANDONED_ATTEMPT_INVALID")
     valid_refs = {alias for alias, binding in session.visible_bindings.items()
                   if binding.kind in {"source", "interpretation"}}
     if any(item["ref"] not in valid_refs or not item["reason"].strip()
@@ -386,8 +483,11 @@ def semantic_finish(
             raise ValueError("MAINTENANCE_REQUIRED_PERSISTENCE_MISSING: "
                              + ", ".join(missing_persistence))
     operations = frontier["unsettled_operations"]
+    unresolved = sorted(set(attempts) - set(abandon_ids))
+    if choice != "pending" and unresolved:
+        raise ValueError("MAINTENANCE_FAILED_WRITES_UNRESOLVED: " + ", ".join(unresolved))
     if choice == "pending" and not (remaining or missing_review or missing_persistence or
-                                    operations):
+                                    operations or unresolved):
         raise ValueError("MAINTENANCE_PENDING_WITHOUT_REMAINING")
     status = "pending" if choice == "pending" or operations else "complete"
     result = {
@@ -396,7 +496,18 @@ def semantic_finish(
         "missing_required_review": missing_review,
         "missing_required_persistence": missing_persistence,
     }
+    if repair:
+        result["failed_attempts"] = [item for item in frontier["failed_attempts"]
+                                     if item["operation_id"] in unresolved]
+        result["abandoned_attempts"] = copy.deepcopy(abandoned)
+        result["unresolved_failed_attempts"] = unresolved
     if commit:
+        for key in abandon_ids:
+            session.maintenance.setdefault("failed_attempts", {}).pop(key, None)
+        if abandoned:
+            session.maintenance.setdefault("abandoned_attempts", []).extend(
+                copy.deepcopy(abandoned)
+            )
         if status == "complete":
             session.maintenance["pending"] = {}
         session.maintenance["last_review"] = result

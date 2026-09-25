@@ -102,6 +102,9 @@ def test_delta_save_resolves_only_delivered_target_relations_and_new_body() -> N
     saved = memory.save(op="CREATE", content="Plan pending", about_ref="unresolved",
                         source_refs=[old_source], certainty="explicit")
     target = saved["record"]["ref"]
+    target_link = view.project_write({"record": {"ref": target, "status": "SAVED"}})
+    session.append_material(target_link)
+    target_alias = target_link["record"]["ref"]
     projected_target = view.project(memory.read(target, include_sources=False,
                                                 _visible=False), max_bytes=6000)
     session.append_material(projected_target)
@@ -111,11 +114,14 @@ def test_delta_save_resolves_only_delivered_target_relations_and_new_body() -> N
     old_alias = row["source_refs"][0]
     new_source = memory.publish(Observation("new", "Plan complete", "tool", "fixture"))
     memory.save(op="RETAIN_SOURCE", source_ref=new_source, persistence="durable")
+    source_link = view.project_write({"source": {"status": "RETAINED", "ref": new_source}})
+    session.append_material(source_link)
+    new_alias = source_link["source"]["ref"]
     projected_source = view.project(memory.read(new_source, include_sources=False,
                                                 _visible=False), max_bytes=6000)
     session.append_material(projected_source)
-    new_alias = projected_source["materials"][0]["ref"]
-    delta = {"op": "REVISE", "basis_mode": "delta", "target_ref": row["ref"],
+    assert new_alias != projected_source["materials"][0]["ref"]
+    delta = {"op": "REVISE", "basis_mode": "delta", "target_ref": target_alias,
              "content_patch": [{"old": "pending", "new": "complete"}],
              "source_delta": {"add": [new_alias], "remove": [old_alias]}}
     client, _ = _provider([
@@ -446,6 +452,37 @@ def test_read_explicit_sources_projects_only_their_delivered_body_ranges(
                     if binding.kind == "source" and binding.spans}
         assert result.calls[1]["ok"] is False
         assert f"source_refs[0]={source_alias}" in result.calls[1]["error"]
+    client.close()
+
+
+def test_wrong_reference_kind_names_field_alias_and_legal_destination() -> None:
+    memory = ContextualMemory(
+        "user", host_id="host", embed=lambda texts: [[1.0, 0.0] for _ in texts],
+        embedding_dimension=2, state_policy="off",
+    )
+    source = memory.publish(Observation("source", "Original statement", "user", "fixture"))
+    card = memory.save(content="Current statement", source_refs=[source])["record"]["ref"]
+    memory.start_task("answer", "Update memory")
+    session = HostSession("answer", memory)
+    assert session.material_view is not None
+    projected = session.material_view.project(memory.read(card, False, _visible=False))
+    session.append_material(projected)
+    card_alias = projected["materials"][0]["ref"]
+    responses = [
+        _receipt(_tool_call("wrong", "memory_save", json.dumps({
+            "op": "CREATE", "content": "Unsupported new statement", "certainty": "explicit",
+            "about_ref": "unknown", "source_refs": [card_alias],
+        }))),
+        _receipt({"role": "assistant", "content": "Done."}),
+    ]
+    client, _ = _provider(responses)
+    result = ContextualHost(client, memory.dispatch, MEMORY_TOOLS, "Use memory.",
+                            memory=memory).run([], session=session, max_calls=2)
+    error = result.calls[0]["error"]
+    assert result.calls[0]["ok"] is False
+    assert f"source_refs[0]={card_alias}: expected source, got interpretation" in error
+    assert "Source evidence belongs in source_refs/source_delta.add" in error
+    assert "record relations belong in dependencies/dependency_delta.add" in error
     client.close()
 
 

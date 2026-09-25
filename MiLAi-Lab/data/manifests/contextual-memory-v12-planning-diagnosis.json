@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "READ_ONLY_PLANNING_DIAGNOSIS",
+  "date": "2026-09-25",
+  "status": "DESIGN_ONLY_IMPLEMENTATION_NOT_STARTED",
+  "baseline_commit": "822efff48e92f03a493385646a5520a409f2123a",
+  "baseline_source_mapping_sha256": "666344907d0ef59f171431ebc7e572b92bf68fae2378f82fc32dc8df4fff7c12",
+  "baseline_files_verified": 48,
+  "historical_comparison_commit": "22e0f22d99a777e8fdb0c56edc222ee522402794",
+  "historical_comparison_source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+  "historical_unique_artifacts_verified": 47,
+  "historical_artifact_manifest": "contextual-memory-v11-f-results.json",
+  "historical_comparison_scope": {
+    "method_configurations": 3,
+    "native_instances": 2,
+    "trajectories": 6,
+    "generation_requests": 184,
+    "prompt_tokens": 1509625,
+    "completion_tokens": 363743,
+    "generation_tokens": 1873368,
+    "embedding_tokens": 12324,
+    "truncated_requests": 39,
+    "generation_tokens_in_truncated_requests": 484243
+  },
+  "local_token_segment_estimates": {
+    "fixed_contract_all": 909248,
+    "current_basis_projection": 4821,
+    "control_instruction_subset_of_fixed_contract": 23040,
+    "historical_sidecars": 21196,
+    "sidecar_outputs": 5846,
+    "caveat": "Local tokenizer segment estimates are not strictly additive. The control instruction is already included in fixed_contract_all. Shared reasoning and counterfactual extra calls are not attributable."
+  },
+  "write_attempts": [
+    {"operation": "CREATE", "basis_mode": "full", "committed": 14, "rejected": 1},
+    {"operation": "REVISE", "basis_mode": "delta", "committed": 10, "rejected": 1},
+    {"operation": "REVISE", "basis_mode": "full", "committed": 8, "rejected": 13}
+  ],
+  "write_rejection_classification": {
+    "referenced_body_not_visible_to_selected_alias": 8,
+    "content_patch_old_not_found": 1,
+    "memory_card_alias_in_source_field": 1,
+    "dispatched_error_reason_missing_from_historical_projection": 5,
+    "total": 15,
+    "caveat": "Attempt-level observational counts; full and delta paths did not receive matched tasks."
+  },
+  "canonical_visibility_failure": {
+    "instance": "arc1-000",
+    "arm": "A0",
+    "episode": 4,
+    "message_index": 0,
+    "tool_call_ordinals_in_trace": [20, 21, 23],
+    "link_alias": "m10",
+    "body_alias": "m19",
+    "exact_source_ref": "479db7b13db10b3d/source:df49e372c18a60f318acc422",
+    "link_alias_spans": [],
+    "body_alias_spans": [[0, 404]],
+    "body_sha256": "fb72a77b103c626c20bac4caac8c84d27ea35944ccc60ebee286087de9bb4427",
+    "finding": "The source body had been delivered under another alias before the repeated write rejection; current Host validation still checks the selected alias's spans.",
+    "scope": "Confirmed for one of the eight body-visibility rejections. The other seven are not reclassified as already read."
+  },
+  "subject_anchor_reconstruction": {
+    "instance": "arc2-000",
+    "arm": "A1",
+    "method": "Read-only reconstruction of delivered target about_ref and resolved source sets; call the current pure _about_view validator using traced source metadata.",
+    "results": [
+      {"episode": 2, "message_index": 0, "operation_id": "save:336307bb322749cda42e89db00a60ab4", "operation": "REVISE", "basis_mode": "delta", "error": "ABOUT_SOURCE_NOT_CITED"},
+      {"episode": 2, "message_index": 0, "operation_id": "save:0eff7373857d4213b81351f5c2c7ab2c", "operation": "REVISE", "basis_mode": "full", "error": "ABOUT_SOURCE_NOT_CITED"},
+      {"episode": 2, "message_index": 0, "operation_id": "save:8ab744a36e66434f96196e9dee75e543", "operation": "REVISE", "basis_mode": "full", "error": "ABOUT_SOURCE_NOT_CITED"},
+      {"episode": 4, "message_index": 0, "operation_id": "save:54698ff5747040929382905e6d3061fe", "operation": "CREATE", "basis_mode": "full", "error": "ABOUT_SOURCE_NOT_CITED"},
+      {"episode": 4, "message_index": 0, "operation_id": "save:3b504f53bc1a4ce1b9bbc7f3c52ad8db", "operation": "REVISE", "basis_mode": "full", "error": "ABOUT_SOURCE_NOT_CITED"}
+    ],
+    "caveat": "The historical core exception was not preserved in the R2 public receipt. These are current-validator results on reconstructed proposals, not a full historical replay or a claim that no other validation could fail."
+  },
+  "maintenance_failure_chain": {
+    "instance": "arc2-000",
+    "arm": "A1",
+    "correction_episode": 2,
+    "dependent_action_episode": 3,
+    "committed_correction_writes": 0,
+    "rejected_correction_writes": 3,
+    "finish_status": "complete",
+    "semantic_decision": "processed",
+    "unsettled_operations": [],
+    "previous_amount_cents": 6720,
+    "newly_confirmed_amount_cents": 8654,
+    "actual_refund_cents": 6720,
+    "finding": "Rejected write attempts were absent from the unresolved maintenance frontier; the corrected observation was absent from the following searchable memory snapshot."
+  },
+  "attention_scope": {
+    "host_memory_search_attempts": 1,
+    "successful_host_memory_searches": 0,
+    "automatic_gap_queries": 0,
+    "automatic_version_notices": 0,
+    "native_same_matter_changes": 8,
+    "native_same_matter_changes_cross_episode": 8,
+    "caveat": "Shared session prefetch already delivered relevant memory; cross-episode changes do not establish an active in-session adopted-card revision window."
+  },
+  "actions_in_this_planning_turn": {
+    "source_and_artifact_reads": true,
+    "pure_validator_reconstruction": true,
+    "source_changes": false,
+    "pytest_or_build": false,
+    "new_model_calls": 0,
+    "new_benchmark_runs": 0,
+    "remote_git_verification": false
+  }
+}

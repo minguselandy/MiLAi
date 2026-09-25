@@ -143,9 +143,13 @@ def run_task_session(
             session = host.last_session
         elif host.maintenance_policy == "required" and (
             host.last_session.maintenance.get("pending") or
-            host.last_session.maintenance.get("unsettled_operations")
+            host.last_session.maintenance.get("unsettled_operations") or
+            host.last_session.maintenance.get("failed_attempts")
         ):
             raise ValueError("PREVIOUS_SESSION_MAINTENANCE_PENDING")
+    if (session is not None and session.maintenance.get("failed_attempts")
+            and session.turn_id != first.turn_id):
+        raise ValueError("PREVIOUS_TURN_MAINTENANCE_PENDING")
     # Completed turn replay must not reset an unrelated active task or ingest twice.
     if store and len(turns) == 1 and store.completed_turn(session_id, first.turn_id) is not None:
         replay_session = session or HostSession(session_id, memory)

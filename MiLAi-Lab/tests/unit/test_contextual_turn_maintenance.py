@@ -17,12 +17,15 @@ from milai_lab.runners.contextual_agent_tasks import (
     accept_observation,
     run_task_session,
 )
-from milai_lab.runners.contextual_host import ContextualHost
+from milai_lab.runners.contextual_host import ContextualHost, _compact_tool_descriptions
 from milai_lab.runners.contextual_maintenance import (
+    REPAIR_MAINTENANCE_PROTOCOL,
     SEMANTIC_MAINTENANCE_PROTOCOL,
     committed,
+    failed_write,
     finish,
     pending_materials,
+    repaired_write,
     semantic_finish,
     semantic_frontier,
 )
@@ -419,6 +422,202 @@ def test_semantic_maintenance_optional_partial_is_reported_without_full_review_c
         [0, len("optional context")]]
     assert semantic_finish(optional, {"decision": "processed", "remaining": []})[
         "status"] == "complete"
+
+
+def test_repair_protocol_resolves_only_explicit_attempt_and_keeps_zero_write_legal() -> None:
+    session = HostSession("session", bank())
+    session.maintenance["protocol"] = REPAIR_MAINTENANCE_PROTOCOL
+    session.begin_turn("one")
+    assert semantic_finish(session, {"decision": "processed", "remaining": []})[
+        "status"] == "complete"
+    failed_write(session, "op1", {}, "ABOUT_SOURCE_NOT_CITED")
+    failed_write(session, "op2", {"repair_of": "op1"}, "ABOUT_SOURCE_NOT_CITED")
+    assert list(session.maintenance["failed_attempts"]) == ["op1"]
+    with pytest.raises(ValueError, match="FAILED_WRITES_UNRESOLVED"):
+        semantic_finish(session, {"decision": "processed", "remaining": []})
+    assert semantic_finish(session, {"decision": "pending", "remaining": []})[
+        "status"] == "pending"
+    repaired_write(session, "op1")
+    assert semantic_finish(session, {"decision": "processed", "remaining": []})[
+        "status"] == "complete"
+    failed_write(session, "op3", {}, "INVALID_WRITE_PROPOSAL")
+    selected = semantic_finish(session, {
+        "decision": "not_selected", "remaining": [],
+        "abandoned_attempts": [{"operation_id": "op3", "reason": "Optional idea withdrawn"}],
+    })
+    assert selected["status"] == "complete"
+    assert selected["failed_attempts"] == []
+    assert session.maintenance["abandoned_attempts"][0]["operation_id"] == "op3"
+
+
+def test_repair_attempt_tracks_same_card_across_exact_versions() -> None:
+    memory = bank()
+    session = HostSession("session", memory)
+    session.maintenance["protocol"] = REPAIR_MAINTENANCE_PROTOCOL
+    source = memory.publish(Observation("source", "Evidence", "user", "fixture"))
+    assert session.material_view is not None
+    session.append_material(session.material_view.project(memory.read(
+        source, False, _visible=False)))
+    first = memory.save(op="CREATE", content="Old value", about_ref="unresolved",
+                        source_refs=[source], certainty="explicit")
+    first_material = session.material_view.project_write(first)
+    session.append_material(first_material)
+    old_alias = first_material["record"]["ref"]
+    failed_write(session, "op1", {"target_ref": old_alias}, "ABOUT_SOURCE_NOT_CITED")
+    second = memory.save(op="REVISE", target_ref=first["record"]["ref"],
+                         content="New value", about_ref="unresolved",
+                         source_refs=[source], dependencies=[], certainty="explicit")
+    second_material = session.material_view.project_write(second)
+    session.append_material(second_material)
+    new_alias = second_material["record"]["ref"]
+    failed_write(session, "op2", {"target_ref": new_alias, "repair_of": "op1"},
+                 "ABOUT_SOURCE_NOT_CITED")
+    assert list(session.maintenance["failed_attempts"]) == ["op1"]
+    assert session.maintenance["failed_attempts"]["op1"]["target_ref"] == (
+        first["record"]["ref"])
+
+
+def test_repair_protocol_tracks_preflight_and_core_rejections_in_host() -> None:
+    memory = bank()
+    session = HostSession("session", memory)
+    first = memory.publish(Observation("first", "First speaker", "user", "fixture"))
+    second = memory.publish(Observation("second", "Other evidence", "tool", "fixture"))
+    assert session.material_view is not None
+    first_row = session.material_view.project(memory.read(first, False, _visible=False))
+    second_row = session.material_view.project(memory.read(second, False, _visible=False))
+    session.append_material(first_row)
+    session.append_material(second_row)
+    speaker = first_row["materials"][0]["speaker_ref"]
+    second_alias = second_row["materials"][0]["ref"]
+    actions = [
+        {"op": "CREATE", "content": "New statement", "about_ref": "unknown",
+         "source_refs": ["m999"], "certainty": "explicit"},
+        {"op": "CREATE", "content": "New statement", "about_ref": speaker,
+         "source_refs": [second_alias], "certainty": "explicit"},
+    ]
+    responses = [
+        {"choices": [{"message": {"role": "assistant", "tool_calls": [{
+            "id": f"save-{index}", "type": "function", "function": {
+                "name": "memory_save", "arguments": json.dumps(arguments),
+            },
+        }]}}]}
+        for index, arguments in enumerate(actions)
+    ]
+    responses.append({"choices": [{"message": {"role": "assistant", "tool_calls": [{
+        "id": "finish", "type": "function", "function": {
+            "name": "finish_turn", "arguments": json.dumps({
+                "maintenance": {"decision": "processed", "remaining": []}, "answer": "Done",
+            }),
+        },
+    }]}}]})
+
+    def respond(_: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=responses.pop(0))
+
+    with VLLMClient(VLLMConfig("http://fixture/v1", "host", max_calls=3,
+                               tool_mode="native"),
+                    transport=httpx.MockTransport(respond)) as client:
+        host = ContextualHost(
+            client, memory.dispatch, memory_tools("ordinary"), "Work", memory=memory,
+            maintenance_policy="required", maintenance_protocol=REPAIR_MAINTENANCE_PROTOCOL,
+        )
+        result = host.run([], session=session, max_calls=3)
+    assert result.status == "maintenance_pending"
+    assert result.calls[0]["result"]["decision"] == "REJECTED"
+    assert result.calls[1]["result"]["error"] == "ABOUT_SOURCE_NOT_CITED"
+    assert result.calls[1]["result"]["repair"] == {
+        "field": "source_refs", "target_ref": None,
+        "identity_anchor": first_row["materials"][0]["ref"],
+        "next": "Keep the delivered identity anchor in the source relation "
+        "when preserving the subject; delta inherits it unless removed. "
+        "To change subject, use a full revision with an explicit new anchor.",
+    }
+    assert len(result.maintenance["failed_attempts"]) == 2
+    assert {item["operation_id"] for item in result.maintenance["failed_attempts"]} == {
+        result.calls[0]["result"]["operation_id"],
+        result.calls[1]["result"]["operation_id"],
+    }
+    with pytest.raises(ValueError, match="PENDING_WRITE_REPAIR"):
+        session.close()
+    with pytest.raises(ValueError, match="PREVIOUS_SESSION_MAINTENANCE_PENDING"):
+        run_task_session([TaskTurn("next", "Next task")], memory=memory,
+                         host=host, session_id="next")
+    with pytest.raises(ValueError, match="PREVIOUS_TURN_MAINTENANCE_PENDING"):
+        run_task_session([TaskTurn("next", "Next turn")], memory=memory,
+                         host=host, session_id="session", session=session)
+
+
+def test_repair_protocol_committed_write_closes_original_attempt_and_finishes() -> None:
+    memory = bank()
+    session = HostSession("session", memory)
+    source = memory.publish(Observation("first", "Supported statement", "user", "fixture"))
+    assert session.material_view is not None
+    projected = session.material_view.project(memory.read(source, False, _visible=False))
+    session.append_material(projected)
+    source_alias = projected["materials"][0]["ref"]
+    actions = [
+        {"op": "CREATE", "content": "Supported statement", "about_ref": "unknown",
+         "source_refs": ["m999"], "certainty": "explicit"},
+        {"op": "CREATE", "content": "Supported statement", "about_ref": "unknown",
+         "source_refs": [source_alias], "certainty": "explicit"},
+    ]
+    count = 0
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        nonlocal count
+        if count == 1:
+            previous = next(message for message in reversed(json.loads(request.content)[
+                "messages"]) if message["role"] == "tool")
+            actions[1]["repair_of"] = json.loads(previous["content"])["result"]["operation_id"]
+        if count < 2:
+            name, arguments = "memory_save", actions[count]
+        else:
+            name, arguments = "finish_turn", {
+                "maintenance": {"decision": "processed", "remaining": []}, "answer": "Done",
+            }
+        count += 1
+        return httpx.Response(200, json={"choices": [{"message": {
+            "role": "assistant", "tool_calls": [{
+                "id": f"call-{count}", "type": "function", "function": {
+                    "name": name, "arguments": json.dumps(arguments),
+                },
+            }],
+        }}]})
+
+    with VLLMClient(VLLMConfig("http://fixture/v1", "host", max_calls=3,
+                               tool_mode="native"),
+                    transport=httpx.MockTransport(respond)) as client:
+        host = ContextualHost(
+            client, memory.dispatch, memory_tools("ordinary"), "Work", memory=memory,
+            maintenance_policy="required", maintenance_protocol=REPAIR_MAINTENANCE_PROTOCOL,
+        )
+        result = host.run([], session=session, max_calls=3)
+    assert result.status == "complete"
+    assert result.calls[1]["operation_receipt"]["decision"] == "COMMITTED"
+    assert result.maintenance["committed_changes"][0]["operation_id"] == (
+        result.calls[1]["result"]["operation_id"])
+    assert result.maintenance["failed_attempts"] == []
+    assert session.maintenance["failed_attempts"] == {}
+
+
+def test_compact_v4_tool_catalogue_keeps_schema_branches_and_repair_field() -> None:
+    memory = bank()
+    with VLLMClient(VLLMConfig("http://fixture/v1", "host"),
+                    transport=httpx.MockTransport(lambda _: httpx.Response(200))) as client:
+        host = ContextualHost(
+            client, memory.dispatch, memory_tools("ordinary"), "Work", memory=memory,
+            maintenance_policy="required", maintenance_protocol=REPAIR_MAINTENANCE_PROTOCOL,
+        )
+        catalogue = json.loads(_compact_tool_descriptions(host.tools))
+    saved = next(item for item in catalogue if item["name"] == "memory_save")
+    assert saved["fields"]["op"]["shape"] == "string"
+    assert {variant["fixed"].get("op") for variant in saved["variants"]} >= {
+        "CREATE", "REVISE",
+    }
+    assert "repair_of" in saved["fields"]
+    assert any("content_patch" in variant["required"] for variant in saved["variants"])
+    finish = next(item for item in catalogue if item["name"] == "finish_turn")
+    assert "abandoned_attempts?" in finish["fields"]["maintenance"]["shape"]
 
 
 def test_semantic_finish_tool_uses_short_receipt_and_program_frontier() -> None:

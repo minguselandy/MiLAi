@@ -36,6 +36,23 @@ canonical memory state.
 
 ## Required checks
 
+The user explicitly authorized full execution of [Goal v12.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md).
+Its implementation is in progress: exact resident visibility, actionable local revision,
+failed-write maintenance and recovery, schema-derived compact shared tools, then small
+exposed native diagnostics. One Sol xhigh owns core integration. One model controller,
+concurrency 1; no standing reviewer, extra arms, full suite or Product changes. Preserve
+all historical failures and v11 charges. Use a new continuous v12 ledger with null
+cumulative caps. New snapshot/schema fields require explicit compatibility identities;
+never rewrite old identities to load a checkpoint. Optional capacity/sidecar work needs
+remaining evidence. Keep ordinary default and report business, maintenance and semantic
+outcomes separately. Existing user authorization for Luna high publication persists.
+The current publication includes core implementation and narrow checks, not completed
+native acceptance. R1 amount changes and refund succeeded, but maintenance exhausted its
+workflow capacity. R2 changes only enable_thinking to false; its zero-model preparation
+failed with RUNTIME_SESSION_BINDING_INVALID while restoring the newly persisted session.
+Preserve the failed state and all 20 generations / 200127 generation tokens / 1313 embedding
+tokens. See the v12 development record and publication checkpoint before any recovery.
+
 The user explicitly authorized execution of [Goal v11.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md)
 and its [sparse-basis design](docs/MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md).
 The scoped Goal is `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`; preserve the

@@ -530,6 +530,11 @@ class MaterialView:
                     json.dumps(link, sort_keys=True) for link in [*existing, *links]
                 )]
         for index, source_ref in about_sources.items():
+            rows[index]["identity_anchor"] = link(source_ref)
+            rows[index]["identity_anchor_use"] = (
+                "retain this source relation when keeping the same subject; "
+                "it is lineage, not independent proof of the current value"
+            )
             if self.memory is not None and self.memory.source_subject(source_ref) == "current_user":
                 rows[index]["about_ref"] = "u0"
                 continue

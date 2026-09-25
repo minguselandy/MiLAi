@@ -1,5 +1,26 @@
 # MiLAi Lab goals
 
+## Active write and maintenance repair Goal v12.0 (2026-09-25)
+
+[Goal v12.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md) and
+[failure analysis and repair design](MILA_CONTEXTUAL_USER_MEMORY_V12_FAILURE_ANALYSIS_AND_REPAIR_DESIGN_20260925.md)
+start from submitted `822efff`. Status: `IMPLEMENTED_PENDING_SMALL_VALIDATION`; the
+[read-only diagnosis](../data/manifests/contextual-memory-v12-planning-diagnosis.json)
+is the starting evidence. See the [development record](CONTEXTUAL_USER_MEMORY_V12_DEVELOPMENT_20260925.md).
+Priorities are exact-object visibility across aliases, actionable subject/basis constraints
+for existing delta revisions, unresolved rejected-write handling, and maintenance-only
+recovery after successful business actions. Public tool-contract compression follows the
+correctness repairs; further capacity or sidecar changes depend on measured residual failures.
+Develop first, then validate small exposed native failure chains without changing data or
+scorers. No six-trajectory rerun or new Attention comparison is scheduled. Ordinary remains
+default; Lab only; cumulative request/token/verification caps remain null with full accounting.
+Planning made no source changes or model calls. Subsequent core implementation passed
+71 affected tests plus one targeted follow-up. The first native diagnostic committed both
+amount corrections and executed the current refund, but maintenance remained incomplete;
+R2 recovery preparation failed with `RUNTIME_SESSION_BINDING_INVALID` before any new model
+or business call. Current charges are 20 generations / 200127 generation tokens / 1313
+embedding tokens. Publication preserves this unfinished validation status.
+
 ## Completed scoped sparse decision-basis Goal v11.0 (2026-09-25)
 
 [Goal v11.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md) and

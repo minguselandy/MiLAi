@@ -3,6 +3,16 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
+Active development: [Write and maintenance repair Goal v12.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md)
+and [source-based failure analysis and repair design](docs/MILA_CONTEXTUAL_USER_MEMORY_V12_FAILURE_ANALYSIS_AND_REPAIR_DESIGN_20260925.md).
+Status: `IMPLEMENTED_PENDING_SMALL_VALIDATION`. Core changes and narrow checks cover
+exact-object visibility, existing delta updates, failed-write tracking, recovery and compact
+shared tool contracts. The first native diagnostic committed both corrected amounts and
+refunded the current amount, then stopped during maintenance. A subsequent recovery
+preparation failed with `RUNTIME_SESSION_BINDING_INVALID`; actual recovery remains unverified.
+It adds no memory candidate or broader benchmark. Implementation, costs and remaining work are tracked in the
+[v12 development record](docs/CONTEXTUAL_USER_MEMORY_V12_DEVELOPMENT_20260925.md).
+
 Latest completed scoped research: [Sparse decision-basis Goal v11.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md).
 The plan reduces state updates, separates change notifications from semantic revisions,

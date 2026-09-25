@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import dataclass, field
 from typing import Any
@@ -88,6 +89,26 @@ class HostSession:
                 ranges.setdefault(binding.exact_ref, set()).update(binding.spans)
         self.memory.visible_source_ranges = ranges
 
+    def visible_body_spans(self, alias: str) -> tuple[tuple[int, int], ...]:
+        """Current resident body ranges for the alias's exact immutable version."""
+        self.refresh_visibility()
+        locator = self.visible_bindings.get(alias)
+        if locator is None or self.memory is None:
+            return ()
+        try:
+            body = self.memory._view(locator.exact_ref, False)[
+                "content" if locator.kind == "source" else "text"
+            ]
+        except (KeyError, ValueError):
+            return ()
+        digest = hashlib.sha256(body.encode()).hexdigest()
+        return tuple(sorted({span
+                            for binding in self.visible_bindings.values()
+                            if binding.exact_ref == locator.exact_ref
+                            and binding.kind == locator.kind
+                            and binding.content_sha256 == digest
+                            for span in binding.spans}))
+
     def append_material(
         self, projected: dict[str, Any], *, label: str = "Acquired observation",
     ) -> dict[str, Any]:
@@ -99,5 +120,8 @@ class HostSession:
         return message
 
     def close(self) -> None:
+        if (self.maintenance.get("protocol") == "turn-maintenance-v4"
+                and self.maintenance.get("failed_attempts")):
+            raise ValueError("PENDING_WRITE_REPAIR")
         self.closed = True
         self.read_cache.clear()
