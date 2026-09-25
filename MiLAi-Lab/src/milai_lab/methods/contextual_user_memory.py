@@ -263,6 +263,13 @@ TOOLS = [
                 "items": {"type": "object", "properties": {
                     "old": {"type": "string", "minLength": 1}, "new": _STRING,
                 }, "required": ["old", "new"], "additionalProperties": False}},
+            "literal_uses": {"type": "array", "items": {"type": "object", "properties": {
+                "token": {"type": "string", "minLength": 1},
+                "source_ref": {"type": "string", "minLength": 1},
+            }, "required": ["token", "source_ref"], "additionalProperties": False},
+                "description": "Optional literal use of an issued material handle as actual "
+                "source text. source_ref must be delivered and support this write; the "
+                "new prose must use token literally, never to point at material."},
             "op": {"enum": ["CREATE", "REVISE", "RETAIN_SOURCE", "NO_CHANGE"]},
             "source_ref": {
                 "type": "string",

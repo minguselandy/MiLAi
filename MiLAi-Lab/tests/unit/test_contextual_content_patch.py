@@ -8,8 +8,10 @@ from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 from milai_lab.methods.contextual_memory.models import Observation
 from milai_lab.methods.contextual_memory.write_contract import (
     apply_content_patch,
+    issued_handles_in_text,
     normalize_basis_delta,
     ordinary_save_schema,
+    validate_persistent_prose,
 )
 from milai_lab.methods.contextual_user_memory import TOOLS, ContextualMemory
 
@@ -32,6 +34,22 @@ def test_patch_requires_unique_nonoverlapping_original_and_visible_ranges() -> N
         apply_content_patch(text, [{"old": "missing", "new": "X"}])
     with pytest.raises(ValueError, match="INVALID_CONTENT_PATCH"):
         apply_content_patch(text, [{"old": "", "new": "X"}])
+
+
+def test_only_issued_exact_handles_need_grounded_literal_use() -> None:
+    issued = ["m4", "p7a9", "c0"]
+    assert issued_handles_in_text("型号 m4; M4, m40, r3 未分配。中文p7a9", issued) == {
+        "m4", "p7a9",
+    }
+    with pytest.raises(ValueError, match="PERSISTENT_BODY_CONTAINS_EPHEMERAL_HANDLE: m4"):
+        validate_persistent_prose(["型号 m4"], issued, [], set())
+    assert validate_persistent_prose(
+        ["型号 m4, 另有 m4"], issued, [{"token": "m4", "source_ref": "m2"}],
+        {("m4", "m2")},
+    ) == {"m4"}
+    with pytest.raises(ValueError, match="LITERAL_USE_NOT_GROUNDED"):
+        validate_persistent_prose(["型号 m4"], issued,
+                                  [{"token": "m4", "source_ref": "m2"}], set())
 
 
 def test_revise_patch_keeps_unmodified_text_sources_and_exact_cas() -> None:

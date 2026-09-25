@@ -1,0 +1,291 @@
+{
+  "kind": "V14_NATIVE_EXPOSURE_AND_PROSPECTIVE_RULE",
+  "status": "METADATA_INVENTORIED_NO_NEW_ARCS_GENERATED",
+  "date": "2026-09-26",
+  "native_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "known_exposed_base_seeds": [
+    0,
+    1,
+    2
+  ],
+  "known_original_hashes": [
+    "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+    "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+    "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a"
+  ],
+  "records": [
+    {
+      "path": "artifacts/contextual-user-memory/v10-basis-prepared/selection.json",
+      "sha256": "739fcdad339e779473b6a9e89473b34b57cd8e4c0e0d71af91b45ac282249d84",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-notes-prepared/selection.json",
+      "sha256": "964397e8ae4214607528772aad5552a28a9c94b26f077ef5a9ae504bc5c35935",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-r2-basis-prepared/selection.json",
+      "sha256": "ad3034b1d80275a133d585a898867f86d4054b845a197698a0a549761fd70171",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-r2-notes-prepared/selection.json",
+      "sha256": "835e75bcab85272dd01430bf4c2b65eb683c6707d7cc937c5866e2a7a7eacaaa",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-e-A2-prepared/selection.json",
+      "sha256": "0481be0dbef8e405a52e95a73fdfa2decdb1c1634a5a92656c3344857423e153",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-e-recovery-prepared/selection.json",
+      "sha256": "0ac517da8ca5323225bc6b566b69ad81a0a6561e8b8377265f7fd9455718fc2c",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/selection.json",
+      "sha256": "813f99996b3407153b3922864c72251b4e03130e89383184a0981441c97c4274",
+      "base_seed": 1,
+      "arc_id": "arc1-000",
+      "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-f-arc1-A1-prepared/selection.json",
+      "sha256": "c9003408fee64920bd15a48e83d9fdc229c57e84b42e56fb1be471f432715d89",
+      "base_seed": 1,
+      "arc_id": "arc1-000",
+      "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-f-arc1-A2-prepared/selection.json",
+      "sha256": "581187fc8e8a5475011b01390a3ffde75d7cc49871acdb0674b1f497af8b3ec9",
+      "base_seed": 1,
+      "arc_id": "arc1-000",
+      "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-f-arc2-A0-prepared/selection.json",
+      "sha256": "a101890722b6aab27e3a7351c353c3b0da75ef0dd944a56f90c288cab368f909",
+      "base_seed": 2,
+      "arc_id": "arc2-000",
+      "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-f-arc2-A1-prepared/selection.json",
+      "sha256": "f5441b0081543db928846ccdc801b653851fa1a86034a878e40cd4d55f105fd9",
+      "base_seed": 2,
+      "arc_id": "arc2-000",
+      "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/selection.json",
+      "sha256": "53f5ba77bc94eb815f20913d2b337747612b23b8aaaa004293e7c0b0b5745048",
+      "base_seed": 2,
+      "arc_id": "arc2-000",
+      "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v13-final-r1/selection.json",
+      "sha256": "0376751a76bbb3cdc7b808fec46d07424d28beb87fe112c7bcebf302fa1b9209",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v13-final-r2/selection.json",
+      "sha256": "ca198bcedb010c8b9c1ce2aa305938f0e66e473e869658c06d1192233d2dee02",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v8-merit-final-episode/validation-selection.json",
+      "sha256": "b5b43b4ae0e7e2e087829c1851844654d1a23e64cfaeaeda58edb71dd4c6c1b4",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v9-final-prepared/selection.json",
+      "sha256": "8e4b9102eafc34050fcc7e83367b3dd7d02e42921f17882e80833f465db24f0c",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v9-final-prepared-r2/selection.json",
+      "sha256": "7e586ecd0b1c0cb765ca88080fcb5ba6b8c195c129de7623ac7eb92b9a153580",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "data/manifests/contextual-memory-v11-f-arc1-selection.json",
+      "sha256": "0f2e216f2f361a73a937401e307b1baba56d5db23779291d8c31c2751817dccd",
+      "base_seed": 1,
+      "arc_id": "arc1-000",
+      "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "data/manifests/contextual-memory-v11-f-arc2-selection.json",
+      "sha256": "2f74bda5f6140a2ba39d6cdad1ed8de98331713317927bd5843e3344a986eef8",
+      "base_seed": 2,
+      "arc_id": "arc2-000",
+      "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "data/manifests/contextual-memory-v7-e0-selection-final.json",
+      "sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "data/manifests/contextual-memory-v7-e0-selection-repair.json",
+      "sha256": "dfb1c5de495f2f5a16dd32c3027d4597792dbf03c73d3f37279657d9566b86d1",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "data/manifests/contextual-memory-v7-e0-selection.json",
+      "sha256": "0818363131c70ff4011a13fba588432caf029d49c23b01075b29c1ef031a9afa",
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "exposure_treatment": "Exclude; historical generation or execution manifest already exists."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-basis-prepared/merit-d1-hard-arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-notes-prepared/merit-d1-hard-arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-r2-basis-prepared/merit-d1-hard-arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-r2-notes-prepared/merit-d1-hard-arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-e-A2-prepared/arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/arc1-000.original.json",
+      "sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "arc_id": "arc1-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/arc2-000.original.json",
+      "sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "arc_id": "arc2-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-selection/arc1-000.original.json",
+      "sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+      "arc_id": "arc1-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v11-selection/arc2-000.original.json",
+      "sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+      "arc_id": "arc2-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v13-final-r1/arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v13-final-r2/arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v7-planning/merit-d1-hard-arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v9-final-prepared/merit-d1-hard-arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v9-final-prepared-r2/merit-d1-hard-arc0-000.original.json",
+      "sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+      "arc_id": "arc0-000",
+      "exposure_treatment": "Existing original artifact excluded; only identity fields read in this inventory."
+    }
+  ],
+  "rule": {
+    "activation": "Only after V1 and V2 meet G1-G4 within the frozen scope.",
+    "selection": "Two smallest nonnegative base_seed values not already exposed; use one hard five-episode arc per seed, dep_ratio0.5.",
+    "initial_prospective_candidates": [
+      3,
+      4
+    ],
+    "duplicate_handling": "Before model calls, exclude matching complete arc hashes and record the exclusion; choose next smallest unexposed seed. Never replace a run failure.",
+    "no_cherry_picking": "Do not inspect task messages or worlds to select seeds; generate identities after gate and freeze full arc/world hashes.",
+    "new_source_if_repaired": "Any new case used for repair becomes exposed development input, with its original result retained."
+  },
+  "new_model_calls": 0,
+  "new_native_arcs_generated": 0
+}

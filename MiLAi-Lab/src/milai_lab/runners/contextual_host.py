@@ -25,7 +25,11 @@ from milai_lab.methods.contextual_memory.decision_basis import (
 from milai_lab.methods.contextual_memory.models import Observation, receipt_outcome
 from milai_lab.methods.contextual_memory.operations import TaskEnvelope, new_save_operation_id
 from milai_lab.methods.contextual_memory.query_context import project_query
-from milai_lab.methods.contextual_memory.write_contract import apply_content_patch
+from milai_lab.methods.contextual_memory.write_contract import (
+    apply_content_patch,
+    issued_handles_in_text,
+    validate_persistent_prose,
+)
 from milai_lab.methods.contextual_user_memory import TOOLS as MEMORY_TOOLS
 from milai_lab.methods.contextual_user_memory import ContextualMemory
 from milai_lab.providers.contextual_capacity import HostCapacity
@@ -40,6 +44,9 @@ from milai_lab.runners.contextual_agent_tasks import (
 from milai_lab.runners.contextual_maintenance import (
     FINAL_SCHEMA,
     FINISH_TOOL,
+    FRONTIER_FINAL_SCHEMA,
+    FRONTIER_FINISH_TOOL,
+    FRONTIER_MAINTENANCE_PROTOCOL,
     MAINTENANCE_PROTOCOL,
     REPAIR_FINAL_SCHEMA,
     REPAIR_FINISH_TOOL,
@@ -284,6 +291,8 @@ class HostResult:
     maintenance: dict[str, Any] = field(default_factory=dict)
     active_decision: dict[str, Any] | None = None
     work_note: str = ""
+    completed_action_refs: list[str] = field(default_factory=list)
+    pending_actions: list[dict[str, str]] = field(default_factory=list)
 
 
 class InvalidToolCall(ValueError):
@@ -321,6 +330,7 @@ class ContextualHost:
             or self.client.config.tool_mode != "json_action"
             or self.maintenance_protocol not in {
                 SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+                FRONTIER_MAINTENANCE_PROTOCOL,
             }
         ):
             raise ValueError("INCOMPATIBLE_DECISION_HOST_CONFIGURATION")
@@ -328,7 +338,8 @@ class ContextualHost:
             raise ValueError("UNKNOWN_MAINTENANCE_POLICY")
         if self.maintenance_protocol not in {MAINTENANCE_PROTOCOL,
                                              SEMANTIC_MAINTENANCE_PROTOCOL,
-                                             REPAIR_MAINTENANCE_PROTOCOL}:
+                                             REPAIR_MAINTENANCE_PROTOCOL,
+                                             FRONTIER_MAINTENANCE_PROTOCOL}:
             raise ValueError("UNKNOWN_MAINTENANCE_PROTOCOL")
         if self.maintenance_policy == "required" and self.memory is None:
             raise ValueError("MAINTENANCE_REQUIRES_MEMORY")
@@ -347,7 +358,8 @@ class ContextualHost:
             if tool.schema.get("function", tool.schema)["name"] != name:
                 raise ValueError("BUSINESS_TOOL_NAME_MISMATCH")
         self.tools = [*self.tools, *(tool.schema for tool in self.business_tools.values())]
-        if self.maintenance_protocol == REPAIR_MAINTENANCE_PROTOCOL:
+        if self.maintenance_protocol in {REPAIR_MAINTENANCE_PROTOCOL,
+                                         FRONTIER_MAINTENANCE_PROTOCOL}:
             self.tools = [copy.deepcopy(tool) for tool in self.tools]
             for schema_tool in self.tools:
                 function = schema_tool.get("function", schema_tool)
@@ -358,7 +370,9 @@ class ContextualHost:
                         if branch["properties"].get("op", {}).get("const") != "NO_CHANGE":
                             branch["properties"]["repair_of"] = {"type": "string"}
         if self.maintenance_policy == "required":
-            terminal = (REPAIR_FINISH_TOOL if self.maintenance_protocol ==
+            terminal = (FRONTIER_FINISH_TOOL if self.maintenance_protocol ==
+                        FRONTIER_MAINTENANCE_PROTOCOL else
+                        REPAIR_FINISH_TOOL if self.maintenance_protocol ==
                         REPAIR_MAINTENANCE_PROTOCOL else
                         SEMANTIC_FINISH_TOOL if self.maintenance_protocol ==
                         SEMANTIC_MAINTENANCE_PROTOCOL else FINISH_TOOL)
@@ -451,11 +465,37 @@ class ContextualHost:
         maintenance_required = self.maintenance_policy == "required"
         semantic_maintenance = (maintenance_required and self.maintenance_protocol in {
             SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+            FRONTIER_MAINTENANCE_PROTOCOL,
         })
-        repair_maintenance = self.maintenance_protocol == REPAIR_MAINTENANCE_PROTOCOL
-        semantic_schema = REPAIR_FINAL_SCHEMA if repair_maintenance else SEMANTIC_FINAL_SCHEMA
+        frontier_maintenance = self.maintenance_protocol == FRONTIER_MAINTENANCE_PROTOCOL
+        repair_maintenance = self.maintenance_protocol in {
+            REPAIR_MAINTENANCE_PROTOCOL, FRONTIER_MAINTENANCE_PROTOCOL,
+        }
+        semantic_schema = (FRONTIER_FINAL_SCHEMA if frontier_maintenance else
+                           REPAIR_FINAL_SCHEMA if repair_maintenance else
+                           SEMANTIC_FINAL_SCHEMA)
         if semantic_maintenance:
-            protocol_prompt += (
+            if frontier_maintenance:
+                protocol_prompt += (
+                    "\nUse finish_turn once the current turn's memory maintenance is done. "
+                    "The frontier lists still-unhandled delivered observations, actual writes, "
+                    "execution receipts, failed writes, and trusted review requirements. "
+                    "For each unhandled candidate choose an accurate disposition or leave it "
+                    "in remaining with pending. A source cited by one write may contain another "
+                    "matter; a citation alone does not settle that meaning. task_local/none "
+                    "need a reason and cannot override trusted persistence. cross_turn/durable "
+                    "needs an actual current durable record or pending maintenance. "
+                    "A real completed action ref must cite its delivered successful receipt; "
+                    "pending_actions are your proposals, not program execution facts. "
+                    "A future customer reply may still be awaited after maintenance completes. "
+                    "Repair failed writes with repair_of, explicitly abandon an optional attempt, "
+                    "or leave maintenance pending. Compare an actual business result with the "
+                    "current record: a pending plan does not record completed execution. "
+                    "Once evidence suffices, perform the next operation directly. "
+                    "finish_turn must be the sole tool in its response."
+                )
+            else:
+                protocol_prompt += (
                 "\nBefore finishing, use finish_turn with maintenance.decision and remaining. "
                 "processed means the new material and actual business outcomes have been "
                 "handled; not_selected means no durable change was chosen; pending names "
@@ -477,8 +517,8 @@ class ContextualHost:
                 "current durable record. Once evidence suffices, issue the next operation "
                 "directly instead of repeatedly restating the decision or planned call. "
                 "Finish using finish_turn as the sole tool call in its response."
-            )
-            if repair_maintenance:
+                )
+            if repair_maintenance and not frontier_maintenance:
                 protocol_prompt += (
                     " A rejected memory_save remains an unresolved maintenance attempt. "
                     "Repair the same proposal with repair_of=<operation_id> and a real "
@@ -603,7 +643,7 @@ class ContextualHost:
                 auto_gap_enabled=(bound_memory.decision_policy == "basis"
                                   and bound_memory.decision_gap_focus),
             )
-        if material_view is not None:
+        if material_view is not None and not frontier_maintenance:
             transcript[0]["content"] += (
                 "\nSubject handles (identity, not topic): "
                 + _json(material_view.subject_catalogue())
@@ -652,16 +692,52 @@ class ContextualHost:
         no_progress = 0
 
         def business_outcomes() -> list[dict[str, Any]]:
+            session.refresh_visibility()
+            delivered: dict[str, str] = {}
+            source_actions = {source: call_id for call_id, source in
+                              session.maintenance.get("action_sources", {}).items()}
+            if bound_memory is not None:
+                for alias, binding in session.visible_bindings.items():
+                    if binding.kind == "source" and binding.spans:
+                        observation = bound_memory.sources.get(binding.exact_ref)
+                        if (observation is not None and observation.role == "tool"
+                                and observation.artifact in self.business_tools):
+                            delivered[source_actions.get(binding.exact_ref,
+                                                         observation.event_id)] = alias
+
+            def identity_arguments(arguments: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:
+                small = {key: value for key, value in arguments.items()
+                         if value is None or isinstance(value, (bool, int, float))
+                         or (isinstance(value, str) and len(value) <= 160)}
+                return small, [key for key in arguments if key not in small]
+
             if self.runtime_store is not None:
-                return [{"call_id": item["call_id"], "name": item["name"],
-                         "status": (item.get("reconciliation") or {}).get(
-                             "result", item.get("result") or {}).get("status", "unknown")}
-                        for item in self.runtime_store.actions_for_turn(
-                            session.session_id, session.turn_id)]
-            return [{"call_id": call.get("tool_call_id"), "name": call["name"],
-                     "status": call["execution_status"]}
-                    for call in calls if call.get("name") in self.business_tools
-                    and "execution_status" in call]
+                entries = self.runtime_store.actions_for_turn(
+                    session.session_id, session.turn_id)
+                current_ids = {item["call_id"] for item in entries}
+                for call_id in delivered:
+                    if call_id not in current_ids:
+                        prior = self.runtime_store.action(call_id)
+                        if prior is not None:
+                            entries.append(prior)
+                return [{
+                    "call_id": item["call_id"], "name": item["name"],
+                    "status": (item.get("reconciliation") or {}).get(
+                        "result", item.get("result") or {}).get("status", "unknown"),
+                    "identity_arguments": identity_arguments(item["arguments"])[0],
+                    "omitted_argument_keys": identity_arguments(item["arguments"])[1],
+                    "source_ref": delivered.get(item["call_id"]),
+                    "delivered": item["call_id"] in delivered,
+                } for item in entries]
+            return [{
+                "call_id": call.get("tool_call_id"), "name": call["name"],
+                "status": call["execution_status"],
+                "identity_arguments": identity_arguments(call.get("arguments", {}))[0],
+                "omitted_argument_keys": identity_arguments(call.get("arguments", {}))[1],
+                "source_ref": delivered.get(str(call.get("tool_call_id"))),
+                "delivered": call.get("tool_call_id") in delivered,
+            } for call in calls if call.get("name") in self.business_tools
+                and "execution_status" in call]
 
         def persist() -> None:
             if self.runtime_store is not None:
@@ -684,6 +760,12 @@ class ContextualHost:
                                                 business_outcomes=business_outcomes()),
                             "status": "pending", "last_review": reviewed,
                         }
+                    if frontier_maintenance:
+                        accepted = reviewed or {}
+                        result.completed_action_refs = copy.deepcopy(
+                            accepted.get("completed_action_refs", []))
+                        result.pending_actions = copy.deepcopy(
+                            accepted.get("pending_actions", []))
                 else:
                     result.maintenance = {
                         "protocol": MAINTENANCE_PROTOCOL,
@@ -721,6 +803,8 @@ class ContextualHost:
                 validate(action, semantic_schema if semantic_maintenance else FINAL_SCHEMA)
                 reviewed = (semantic_finish(
                     session, action["maintenance"], business_outcomes=business_outcomes(),
+                    completed_action_refs=action.get("completed_action_refs"),
+                    pending_actions=action.get("pending_actions"),
                 ) if semantic_maintenance else
                     finish_maintenance(session, action["memory_review"]))
             except (ValueError, TypeError, ValidationError) as error:
@@ -767,6 +851,7 @@ class ContextualHost:
             if name == "memory_read":
                 resolved["ref"] = resolve_ref(arguments["ref"])
             elif name == "memory_save":
+                literal_uses = resolved.pop("literal_uses", [])
                 if repair_maintenance:
                     repair_of = resolved.pop("repair_of", None)
                     if repair_of is not None:
@@ -879,6 +964,35 @@ class ContextualHost:
                         resolved[key] = [resolve_ref(ref, body=True, kind=kind,
                                                      field=f"{key}[{index}]")
                                          for index, ref in enumerate(resolved[key])]
+                if self.maintenance_protocol == FRONTIER_MAINTENANCE_PROTOCOL:
+                    assert bound_memory is not None
+                    fragments = ([arguments["content"]] if isinstance(
+                        arguments.get("content"), str) else [])
+                    fragments.extend(item["new"] for item in arguments.get(
+                        "content_patch", []) if isinstance(item.get("new"), str))
+                    issued = session.maintenance.get("issued_tokens", [])
+                    if fragments or literal_uses:
+                        basis = set(resolved.get("source_refs", []))
+                        if arguments.get("basis_mode") == "delta":
+                            old = bound_memory.read(resolved["target_ref"],
+                                                    include_sources=False, _visible=False)
+                            basis = (set(old["source_refs"])
+                                     | set(resolved["source_delta"]["add"]))
+                            basis -= set(resolved["source_delta"]["remove"])
+                        grounded: set[tuple[str, str]] = set()
+                        for use in literal_uses:
+                            token, alias = use["token"], use["source_ref"]
+                            exact = resolve_ref(alias, body=True, kind="source",
+                                                field="literal_uses.source_ref")
+                            if token not in issued or exact not in basis:
+                                raise InvalidToolCall("LITERAL_USE_NOT_GROUNDED")
+                            source = bound_memory.sources[exact].content
+                            if any(token in source[start:end] for start, end in
+                                   session.visible_body_spans(alias)):
+                                grounded.add((token, alias))
+                        validate_persistent_prose(
+                            fragments, issued, literal_uses, grounded,
+                        )
             elif name == "memory_state":
                 for key in ("intentions", "conflicts"):
                     if key in resolved:
@@ -908,7 +1022,10 @@ class ContextualHost:
                 if name == "finish_turn":
                     validate(arguments, semantic_schema)
                     semantic_finish(session, arguments["maintenance"],
-                                    business_outcomes=business_outcomes(), commit=False)
+                                    business_outcomes=business_outcomes(),
+                                    completed_action_refs=arguments.get("completed_action_refs"),
+                                    pending_actions=arguments.get("pending_actions"),
+                                    commit=False)
                 else:
                     required = {"state": "memory_state", "search": "memory_search"}.get(
                         active_stage
@@ -1104,6 +1221,17 @@ class ContextualHost:
             except (ValueError, TypeError, ValidationError) as exc:
                 no_progress += 1
                 return rejected_tool_call(name, f"Invalid tool call: {exc}", arguments)
+            inherited_handles: list[str] = []
+            if (frontier_maintenance and name == "memory_save"
+                    and "content_patch" in arguments and bound_memory is not None):
+                target = dispatched_arguments["target_ref"]
+                old_text = bound_memory.read(target, include_sources=False,
+                                             _visible=False)["text"]
+                retained_text = old_text
+                for patch in arguments["content_patch"]:
+                    retained_text = retained_text.replace(patch["old"], " ", 1)
+                inherited_handles = sorted(issued_handles_in_text(
+                    retained_text, session.maintenance.get("issued_tokens", [])))
             if name in self.business_tools:
                 for prior in recovered_settled_actions:
                     prior_result = (prior.get("reconciliation") or {}).get(
@@ -1202,6 +1330,8 @@ class ContextualHost:
                     projected_business = acquired.get("material", acquired)
                     if "source_ref" in acquired:
                         session.observations[acquired["source_ref"]] = projected_business
+                        session.maintenance.setdefault("action_sources", {})[
+                            call_id] = acquired["source_ref"]
                     session.maintenance.setdefault("delivered_actions", []).append(call_id)
                 if self.emit:
                     self.emit({
@@ -1366,6 +1496,11 @@ class ContextualHost:
                        "operation_receipt": operation_receipt,
                        "session_id": session.session_id, "turn_id": session.turn_id,
                        "tool_call_id": call_id}
+            if inherited_handles and name == "memory_save":
+                outcome["inherited_prose_issue"] = {
+                    "tokens": inherited_handles,
+                    "scope": "unchanged prior text; not newly authored by this patch",
+                }
             if name == "memory_save":
                 guidance = repair_guidance(
                     rejected_operation_id=receipt.operation_id
@@ -1477,10 +1612,18 @@ class ContextualHost:
                     bound_memory.state.work_note,
                 })
             if maintenance_required:
+                frontier_payload = (semantic_frontier(
+                    session, business_outcomes=business_outcomes())
+                    if semantic_maintenance else None)
+                if frontier_maintenance and material_view is not None:
+                    assert frontier_payload is not None
+                    frontier_payload = {
+                        "subject_handles": material_view.subject_catalogue(),
+                        **frontier_payload,
+                    }
                 request_transcript.append({"role": "user", "content":
                     ("Maintenance frontier (program evidence for this turn): "
-                     + _json(semantic_frontier(
-                         session, business_outcomes=business_outcomes()))
+                     + _json(frontier_payload)
                      if semantic_maintenance else
                      "Maintenance frontier (new observations to review before finishing): "
                      + _json(pending_materials(session)))})
@@ -1513,14 +1656,16 @@ class ContextualHost:
                 if required_name is not None else None
             )
             request_tools = (
-                [REPAIR_FINISH_TOOL if repair_maintenance else
+                [FRONTIER_FINISH_TOOL if frontier_maintenance else
+                 REPAIR_FINISH_TOOL if repair_maintenance else
                  SEMANTIC_FINISH_TOOL if semantic_maintenance else FINISH_TOOL]
                 if native and final_request and maintenance_required else
                 [required_tool] if required_tool is not None
                 else _subject_tools(self.tools, material_view.subject_catalogue())
                 if material_view is not None else list(self.tools)
             )
-            terminal_tool = (semantic_finish_tool(session) if semantic_maintenance else
+            terminal_tool = (semantic_finish_tool(
+                session, business_outcomes=business_outcomes()) if semantic_maintenance else
                              finish_tool(session)) if maintenance_required else FINISH_TOOL
             if maintenance_required:
                 request_tools = [terminal_tool if tool.get("function", tool)["name"] ==
@@ -1601,6 +1746,12 @@ class ContextualHost:
                 "none" if native and final_request else None,
                 response_format=response_format,
             )
+            if frontier_maintenance and material_view is not None:
+                issued = session.maintenance.setdefault("issued_tokens", [])
+                for item in material_view.subject_catalogue():
+                    alias = item["ref"]
+                    if alias != "unknown" and alias not in issued:
+                        issued.append(alias)
             model_calls += 1
             _add_usage(usage, receipt.get("usage"),
                        first_receipt=model_calls == 1 and not resume)
@@ -2002,6 +2153,8 @@ class ContextualHost:
                                   "execution_status": result.status,
                                   "tool_call_id": call_id, "result": acquired["material"]}
             session.observations[acquired["source_ref"]] = acquired["material"]
+            session.maintenance.setdefault("action_sources", {})[
+                call_id] = acquired["source_ref"]
             if raw is not None:
                 delivered.append(delivery_id)
         # Resolve native assistant/tool adjacency without inventing results for

@@ -3,13 +3,15 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Next planned work: [Semantic boundary Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
+Active development: [Semantic boundary Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md).
-Status: `PLANNED_NOT_STARTED`; the user selected documentation first. The design reuses the
-maintenance frontier and execution journal, separates future memory value from action timing,
-grounds completion references, and checks persistent prose without erasing literal identifiers.
-Readiness includes both required retention and avoiding unwanted retention. No v14 runtime
-code, model experiment, diagnostic dataset or new MERIT selection has been produced.
+Status: `IMPLEMENTATION_IN_PROGRESS`; the user explicitly authorized execution after planning.
+The work reuses the existing frontier and journal for future-use dispositions, grounded action
+references and persistent prose with legitimate literal identifiers. It keeps semantic review
+separate from structural checks and native scores. See the
+[development record](docs/CONTEXTUAL_USER_MEMORY_V14_DEVELOPMENT_20260926.md).
+Implementation and narrow checks precede frozen semantic diagnostics; unseen native cases
+remain conditional on the declared readiness gate. No State-Attention comparison is scheduled.
 
 Latest scoped delivery: [Continuous runtime Goal v13.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v13.0_20260925.md).
 The current v12 notes template now works through the official preparation and MERIT runner;

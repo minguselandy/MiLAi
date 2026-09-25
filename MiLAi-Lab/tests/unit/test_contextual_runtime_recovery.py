@@ -22,6 +22,7 @@ from milai_lab.runners.contextual_agent_tasks import (
 )
 from milai_lab.runners.contextual_host import ContextualHost
 from milai_lab.runners.contextual_maintenance import (
+    FRONTIER_MAINTENANCE_PROTOCOL,
     REPAIR_MAINTENANCE_PROTOCOL,
     SEMANTIC_MAINTENANCE_PROTOCOL,
     failed_write,
@@ -172,6 +173,60 @@ def test_reconciled_result_is_new_evidence_without_rewriting_unknown_source(tmp_
         if ref != unknown_ref
     )
     assert len(session.maintenance["pending"]) == 2
+
+
+def test_v5_prior_success_requires_current_explicit_source_delivery(tmp_path: Path) -> None:
+    contract = identity(FRONTIER_MAINTENANCE_PROTOCOL)
+    memory = bank(contract)
+    memory.start_task("task", "Check earlier action")
+    original = HostSession("earlier", memory)
+    original.begin_turn("old-turn")
+    call_id = RuntimeStore.call_id("earlier", "old-turn", 0)
+    action = {"tool": "finish_turn", "arguments": {
+        "maintenance": {"decision": "processed", "remaining": [], "dispositions": []},
+        "completed_action_refs": [call_id], "pending_actions": [], "answer": "Done",
+    }}
+
+    def client() -> VLLMClient:
+        return VLLMClient(
+            VLLMConfig("http://fixture/v1", "fixture", max_calls=1,
+                       tool_mode="json_action"),
+            transport=httpx.MockTransport(lambda _: httpx.Response(200, json=response({
+                "role": "assistant", "content": json.dumps(action),
+            }))),
+        )
+
+    with RuntimeStore(tmp_path, contract) as store:
+        store.begin_action(call_id, "do_work", {"item": "A"},
+                           memory=memory, session=original)
+        store.finish_action(call_id, BusinessToolResult(call_id, "succeeded", {"done": True}),
+                            memory=memory, session=original)
+        source = memory.publish(Observation(call_id, "Executed item A", "tool", "do_work"))
+        assert store.action(call_id) is not None
+        for delivered in (False, True):
+            current = HostSession("current-" + str(delivered), memory)
+            current.begin_turn("new-turn")
+            current.maintenance["protocol"] = FRONTIER_MAINTENANCE_PROTOCOL
+            if delivered:
+                assert current.material_view is not None
+                current.append_material(current.material_view.project(memory.read(
+                    source, include_sources=False, _visible=False), max_bytes=4000))
+            with client() as transport:
+                host = ContextualHost(
+                    transport, memory.dispatch, [], "Work", memory=memory,
+                    business_tools={"do_work": BusinessTool(
+                        SCHEMA, lambda args, call: BusinessToolResult(call, "unknown", args))},
+                    runtime_store=store,
+                    maintenance_policy="required",
+                    maintenance_protocol=FRONTIER_MAINTENANCE_PROTOCOL,
+                )
+                result = host.run([],
+                                  session=current, turn_id="new-turn", max_calls=1)
+            assert result.status == ("complete" if delivered else "maintenance_pending"), (
+                result.maintenance.get("last_review"), result.calls, result.transcript[-2:])
+            if delivered:
+                assert result.completed_action_refs == [call_id]
+                assert result.maintenance["execution_facts"][0]["source_ref"]
 
 
 def test_settled_business_result_recovers_after_intake_crash_without_reexecution(

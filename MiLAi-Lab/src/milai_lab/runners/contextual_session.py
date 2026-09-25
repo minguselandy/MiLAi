@@ -58,8 +58,13 @@ class HostSession:
             raise ValueError("MATERIAL_MESSAGE_NOT_IN_TRANSCRIPT")
         self.delivery.record(message, projected)
         if self.material_view is not None:
+            bindings = self.material_view.visible_bindings(projected)
+            issued = self.maintenance.setdefault("issued_tokens", [])
+            for alias in bindings:
+                if alias not in {"unknown"} and alias not in issued:
+                    issued.append(alias)
             self.deliveries.append((
-                message, message["content"], self.material_view.visible_bindings(projected),
+                message, message["content"], bindings,
             ))
             self.refresh_visibility()
 
@@ -120,7 +125,7 @@ class HostSession:
         return message
 
     def close(self) -> None:
-        if (self.maintenance.get("protocol") == "turn-maintenance-v4"
+        if (self.maintenance.get("protocol") in {"turn-maintenance-v4", "turn-maintenance-v5"}
                 and self.maintenance.get("failed_attempts")):
             raise ValueError("PENDING_WRITE_REPAIR")
         self.closed = True

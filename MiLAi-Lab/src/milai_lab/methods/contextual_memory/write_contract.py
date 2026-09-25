@@ -10,7 +10,7 @@ from datetime import date
 from itertools import pairwise
 from typing import Any
 
-WRITE_CONTRACT_VERSION = "contextual-write-contract-v13"
+WRITE_CONTRACT_VERSION = "contextual-write-contract-v14"
 
 WRITE_RULES = (
     "Memory can preserve personal information, ongoing work matters and observed lessons. "
@@ -30,6 +30,9 @@ WRITE_RULES = (
     "change to a fully delivered exact target, basis_mode=delta uses content_patch and "
     "source_delta/dependency_delta add/remove; old relationships are inherited without "
     "claiming their bodies were reread. Use full REVISE for metadata or global meaning changes. "
+    "Put temporary material handles only in structured evidence fields, not new durable prose. "
+    "If a real source literally uses the same token as an issued handle, declare literal_uses "
+    "with that delivered source; this states a literal use, not a reference to the material. "
     "Preserve operational names, labels, identifiers, units and "
     "required literal text in their original language. Enumerated requirements must remain "
     "complete: a replacement includes the stated new item and every unaffected item. "
@@ -40,6 +43,34 @@ WRITE_RULES = (
     "interpretation is inferred; unresolved meaning is uncertain. One tool result "
     "does not establish a universal rule."
 )
+
+
+def issued_handles_in_text(text: str, issued_tokens: Sequence[str]) -> set[str]:
+    """Find only handles this Host actually issued; preserve ordinary literal identifiers."""
+    return {token for token in issued_tokens if token and re.search(
+        rf"(?<![A-Za-z0-9_]){re.escape(token)}(?![A-Za-z0-9_])", text,
+    )}
+
+
+def validate_persistent_prose(
+    fragments: Sequence[str], issued_tokens: Sequence[str],
+    literal_uses: Sequence[Mapping[str, str]], grounded_uses: set[tuple[str, str]],
+) -> set[str]:
+    """Reject undeclared issued handles in newly authored prose before any write."""
+    present = set().union(*(issued_handles_in_text(text, issued_tokens)
+                            for text in fragments))
+    declared: set[str] = set()
+    for item in literal_uses:
+        token, source = item.get("token"), item.get("source_ref")
+        if (not isinstance(token, str) or not isinstance(source, str)
+                or token not in present or (token, source) not in grounded_uses):
+            raise ValueError("LITERAL_USE_NOT_GROUNDED")
+        declared.add(token)
+    unlicensed = present - declared
+    if unlicensed:
+        raise ValueError("PERSISTENT_BODY_CONTAINS_EPHEMERAL_HANDLE: " +
+                         ", ".join(sorted(unlicensed)))
+    return present
 
 
 def apply_content_patch(
@@ -167,6 +198,7 @@ def ordinary_save_schema(parameters: dict[str, Any]) -> dict[str, Any]:
         "content_patch": delta["properties"]["content_patch"],
         "source_delta": delta["properties"]["source_delta"],
         "dependency_delta": delta["properties"]["dependency_delta"],
+        "literal_uses": delta["properties"]["literal_uses"],
     }
     delta["required"] = ["op", "basis_mode", "target_ref", "content_patch", "source_delta"]
     branches.append(delta)

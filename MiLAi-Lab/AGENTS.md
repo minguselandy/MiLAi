@@ -36,18 +36,25 @@ canonical memory state.
 
 ## Required checks
 
-The [Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md) and
-[semantic boundary design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md)
-are `PLANNED_NOT_STARTED`. The latest user explicitly chose Goal/design documents first;
-their existence does not authorize implementation or experiments. Preserve main=488a429's
-v13 runtime and results. Future implementation, when explicitly requested, reuses the existing
-frontier/journal; a source citation is not proof of complete semantic handling, a valid action-ref
-subset is not proof of truthful prose, and issued handles can collide with genuine literal text.
-Do not restart runtime/repair development without a concrete new defect. Keep ordinary/notes/off,
-one Sol xhigh core owner, narrow checks, continuous accounting and unchanged native benchmarks.
-State–Attention comparisons wait for the declared semantic readiness gate. Documentation-only
-validation is links, identities and diffs, with no pytest/build/vLLM or diagnostic generation.
-Existing Luna high publication authorization remains; publication must not imply v14 was built.
+The user now explicitly authorizes execution of [Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
+and its [semantic boundary design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md).
+Historical planning-only wording is superseded; status is IMPLEMENTATION_IN_PROGRESS.
+Keep v13's runtime/results as the sealed baseline. One Sol xhigh owns core/Host integration;
+root owns freezes, diagnostic inputs, continuous costs and all real model requests (concurrency 1).
+Reuse existing pending/frontier/journal. A source citation is not complete semantic handling,
+a valid successful-action-ref subset is not truthful prose, and issued handles can collide
+with genuine literal text; keep these limits visible in tests and real diagnostic review.
+Implement A-D before freezing V1's nine matrix cases and at most three controls. Then V2
+uses the exposed original arc0 from empty memory. V3's two new original arcs are conditional
+on V1/V2 semantic gates; exclude actually exposed seeds/duplicate hashes prospectively,
+never read samples to cherry-pick them. No State-Attention comparison or broad test suite.
+Use independent v14 notes configuration/new maintenance identity, unchanged native data/scoring,
+no Product work, source cleanup, new database or semantic review agent. Keep G1-G4 separate
+from native score and Host complete. Preserve all v13 failures and 56 generations / 345375
+generation tokens / 2797 embedding tokens. V14 gets a continuous ledger with null cumulative
+caps; failures/repairs count and per-workflow capacity remains. Narrow affected tests/static
+checks; decoder probes for changed schema, no build/boundary suite without relevant changes.
+Existing user authorization for Luna high publication persists.
 
 The user-authorized [Goal v13.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v13.0_20260925.md)
 is `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`; preserve the

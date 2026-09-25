@@ -11,6 +11,7 @@ from milai_lab.runners.contextual_session import HostSession
 MAINTENANCE_PROTOCOL = "turn-maintenance-v2"
 SEMANTIC_MAINTENANCE_PROTOCOL = "turn-maintenance-v3"
 REPAIR_MAINTENANCE_PROTOCOL = "turn-maintenance-v4"
+FRONTIER_MAINTENANCE_PROTOCOL = "turn-maintenance-v5"
 
 SEMANTIC_FINAL_SCHEMA: dict[str, Any] = {
     "type": "object",
@@ -70,6 +71,46 @@ REPAIR_FINISH_TOOL["function"]["description"] += (
     "semantic comparison."
 )
 
+FRONTIER_FINAL_SCHEMA: dict[str, Any] = copy.deepcopy(REPAIR_FINAL_SCHEMA)
+_frontier_maintenance = FRONTIER_FINAL_SCHEMA["properties"]["maintenance"]
+_frontier_maintenance["properties"]["dispositions"] = {
+    "type": "array", "items": {
+        "type": "object", "properties": {
+            "refs": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+            "future_use": {"enum": ["task_local", "cross_turn", "durable", "none"]},
+            "reason": {"type": "string", "minLength": 1},
+            "represented_by": {"type": "string"},
+        },
+        "required": ["refs", "future_use", "reason"], "additionalProperties": False,
+    },
+}
+_frontier_maintenance["required"].append("dispositions")
+FRONTIER_FINAL_SCHEMA["properties"]["completed_action_refs"] = {
+    "type": "array", "items": {"type": "string"},
+}
+FRONTIER_FINAL_SCHEMA["properties"]["pending_actions"] = {
+    "type": "array", "items": {
+        "type": "object", "properties": {
+            "action": {"type": "string", "minLength": 1},
+            "reason": {"type": "string", "minLength": 1},
+        },
+        "required": ["action", "reason"], "additionalProperties": False,
+    },
+}
+FRONTIER_FINAL_SCHEMA["required"].extend(["completed_action_refs", "pending_actions"])
+FRONTIER_FINISH_TOOL: dict[str, Any] = copy.deepcopy(REPAIR_FINISH_TOOL)
+FRONTIER_FINISH_TOOL["function"]["parameters"] = FRONTIER_FINAL_SCHEMA
+FRONTIER_FINISH_TOOL["function"]["description"] = (
+    "Finish with dispositions for unhandled delivered observations, real completed action "
+    "refs, proposed pending business actions, and the answer. A saved source relation is a "
+    "write fact, not proof that every meaning in that source was handled. A future commitment "
+    "can need durable memory even when execution must wait; explicit task-only or do-not-save "
+    "limits take precedence. cross_turn/durable requires an actual current durable record "
+    "or pending maintenance. completed_action_refs must cite delivered succeeded receipts; "
+    "a query or message proves only that action, not another business completion. "
+    "Failed writes still need repair_of, reasoned abandonment, or pending."
+)
+
 REVIEW_SCHEMA: dict[str, Any] = {
     "type": "array",
     "items": {
@@ -120,6 +161,7 @@ def observe(
     if ref in known:
         if session.maintenance.get("protocol") in {
             SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+            FRONTIER_MAINTENANCE_PROTOCOL,
         }:
             item = session.maintenance.get("pending", {}).get(ref)
             if item is not None:
@@ -137,6 +179,7 @@ def observe(
     pending_item: dict[str, Any] = {"ref": alias, "role": role}
     if session.maintenance.get("protocol") in {
         SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+        FRONTIER_MAINTENANCE_PROTOCOL,
     }:
         pending_item.update(required_review_ranges=[list(span) for span in required_review_ranges],
                             persistence_required=persistence_required,
@@ -161,6 +204,7 @@ def committed(session: HostSession, receipt: Any, internal: dict[str, Any]) -> N
         writes = session.maintenance.setdefault("writes", [])
         if session.maintenance.get("protocol") in {
             SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+            FRONTIER_MAINTENANCE_PROTOCOL,
         }:
             writes.append({"ref": ref, "turn_id": session.turn_id,
                            "operation_id": receipt.operation_id})
@@ -172,7 +216,9 @@ def failed_write(
     session: HostSession, operation_id: str, arguments: dict[str, Any], error: str,
 ) -> None:
     """Retain only the locator and public cause of one unresolved write attempt."""
-    if session.maintenance.get("protocol") != REPAIR_MAINTENANCE_PROTOCOL:
+    if session.maintenance.get("protocol") not in {
+        REPAIR_MAINTENANCE_PROTOCOL, FRONTIER_MAINTENANCE_PROTOCOL,
+    }:
         return
     attempts = session.maintenance.setdefault("failed_attempts", {})
     repair_of = arguments.get("repair_of")
@@ -205,7 +251,9 @@ def failed_write(
 
 
 def repaired_write(session: HostSession, repair_of: str | None) -> None:
-    if (session.maintenance.get("protocol") == REPAIR_MAINTENANCE_PROTOCOL
+    if (session.maintenance.get("protocol") in {
+            REPAIR_MAINTENANCE_PROTOCOL, FRONTIER_MAINTENANCE_PROTOCOL,
+        }
             and repair_of is not None):
         session.maintenance.setdefault("failed_attempts", {}).pop(repair_of, None)
 
@@ -361,6 +409,36 @@ def _current_durable_support(session: HostSession) -> set[str]:
     return supported
 
 
+def _write_facts(
+    session: HostSession, writes: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], set[str], set[str]]:
+    """Project actual current writes, without treating a citation as full semantic coverage."""
+    memory = session.memory
+    assert memory is not None
+    facts: list[dict[str, Any]] = []
+    supported: set[str] = set()
+    durable_supported: set[str] = set()
+    aliases = {binding.exact_ref: alias for alias, binding in
+               session.visible_bindings.items() if binding.kind in {"source", "interpretation"}}
+    for item in writes:
+        ref = item["ref"]
+        record = memory.read(ref, include_sources=False, _visible=False)
+        card = memory.workspace.cards.get(memory._handle(ref))
+        if record.get("status") != "CURRENT" or card is None or card.retired:
+            continue
+        sources = record.get("source_refs", [])
+        supported.update(sources)
+        if record.get("persistence") == "durable":
+            durable_supported.update(sources)
+        facts.append({
+            "record_ref": aliases.get(ref), "operation_id": item["operation_id"],
+            "persistence": record.get("persistence"),
+            "source_refs": [aliases[source] for source in sources if source in aliases],
+            "source_count": len(sources),
+        })
+    return facts, supported, durable_supported
+
+
 def semantic_frontier(
     session: HostSession, *, business_outcomes: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
@@ -410,8 +488,9 @@ def semantic_frontier(
             for operation_id, item in unsettled.items()
         ],
     }
-    if session.maintenance.get("protocol") == REPAIR_MAINTENANCE_PROTOCOL:
-        frontier["protocol"] = REPAIR_MAINTENANCE_PROTOCOL
+    protocol = session.maintenance.get("protocol")
+    if protocol in {REPAIR_MAINTENANCE_PROTOCOL, FRONTIER_MAINTENANCE_PROTOCOL}:
+        frontier["protocol"] = protocol
         frontier["failed_attempts"] = [
             {"operation_id": key, "target_ref": next((alias for alias, binding in
               session.visible_bindings.items() if binding.kind == "interpretation"
@@ -419,13 +498,32 @@ def semantic_frontier(
              "field": item["field"], "error": item["error"]}
             for key, item in session.maintenance.get("failed_attempts", {}).items()
         ]
+    if protocol == FRONTIER_MAINTENANCE_PROTOCOL:
+        write_facts, written_sources, _ = _write_facts(session, writes)
+        dispositions = session.maintenance.get("dispositions", {})
+        frontier["write_facts"] = write_facts
+        frontier["unhandled_candidates"] = [
+            {"ref": row["ref"], "role": row["role"],
+             "unreviewed_ranges": row["unreviewed_ranges"]}
+            for exact, row in zip(session.maintenance.get("pending", {}), coverage,
+                                  strict=True)
+            if row["ref"] != "undelivered" and exact not in written_sources
+            and exact not in dispositions
+        ]
+        frontier["execution_facts"] = frontier.pop("business_outcomes")
     return frontier
 
 
-def semantic_finish_tool(session: HostSession) -> dict[str, Any]:
-    repair = session.maintenance.get("protocol") == REPAIR_MAINTENANCE_PROTOCOL
-    tool = copy.deepcopy(REPAIR_FINISH_TOOL if repair else SEMANTIC_FINISH_TOOL)
-    refs = [item["ref"] for item in semantic_frontier(session)["review_coverage"]
+def semantic_finish_tool(
+    session: HostSession, *, business_outcomes: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    protocol = session.maintenance.get("protocol")
+    frontier_mode = protocol == FRONTIER_MAINTENANCE_PROTOCOL
+    repair = protocol in {REPAIR_MAINTENANCE_PROTOCOL, FRONTIER_MAINTENANCE_PROTOCOL}
+    tool = copy.deepcopy(FRONTIER_FINISH_TOOL if frontier_mode else
+                         REPAIR_FINISH_TOOL if repair else SEMANTIC_FINISH_TOOL)
+    frontier = semantic_frontier(session, business_outcomes=business_outcomes)
+    refs = [item["ref"] for item in frontier["review_coverage"]
             if item["ref"] != "undelivered"]
     refs += [alias for alias, binding in session.visible_bindings.items()
              if binding.kind == "interpretation"]
@@ -443,18 +541,40 @@ def semantic_finish_tool(session: HostSession) -> dict[str, Any]:
             abandoned["items"]["properties"]["operation_id"] = {"enum": ids}
         else:
             abandoned["maxItems"] = 0
+    if frontier_mode:
+        dispositions = tool["function"]["parameters"]["properties"]["maintenance"][
+            "properties"]["dispositions"]
+        candidate_refs = [item["ref"] for item in frontier["unhandled_candidates"]]
+        if candidate_refs:
+            dispositions["items"]["properties"]["refs"]["items"] = {
+                "enum": candidate_refs,
+            }
+        else:
+            dispositions["maxItems"] = 0
+        completed = tool["function"]["parameters"]["properties"]["completed_action_refs"]
+        successful = [item["call_id"] for item in frontier["execution_facts"]
+                      if item["status"] == "succeeded" and item.get("delivered")]
+        if successful:
+            completed["items"] = {"enum": successful}
+        else:
+            completed["maxItems"] = 0
     return tool
 
 
 def semantic_finish(
     session: HostSession, decision: dict[str, Any], *,
     business_outcomes: list[dict[str, Any]] | None = None,
+    completed_action_refs: list[str] | None = None,
+    pending_actions: list[dict[str, str]] | None = None,
     commit: bool = True,
 ) -> dict[str, Any]:
     """Accept semantic selection only when actual review, writes and outcomes permit it."""
-    repair = session.maintenance.get("protocol") == REPAIR_MAINTENANCE_PROTOCOL
+    protocol = session.maintenance.get("protocol")
+    frontier_mode = protocol == FRONTIER_MAINTENANCE_PROTOCOL
+    repair = protocol in {REPAIR_MAINTENANCE_PROTOCOL, FRONTIER_MAINTENANCE_PROTOCOL}
     if session.maintenance.get("protocol") not in {
         SEMANTIC_MAINTENANCE_PROTOCOL, REPAIR_MAINTENANCE_PROTOCOL,
+        FRONTIER_MAINTENANCE_PROTOCOL,
     }:
         raise ValueError("MAINTENANCE_PROTOCOL_MISMATCH")
     frontier = semantic_frontier(session, business_outcomes=business_outcomes)
@@ -491,6 +611,71 @@ def semantic_finish(
     unresolved = sorted(set(attempts) - set(abandon_ids))
     if choice != "pending" and unresolved:
         raise ValueError("MAINTENANCE_FAILED_WRITES_UNRESOLVED: " + ", ".join(unresolved))
+    new_dispositions: dict[str, dict[str, Any]] = {}
+    if frontier_mode:
+        completed = completed_action_refs or []
+        pending_business = pending_actions or []
+        eligible = {item["call_id"] for item in frontier["execution_facts"]
+                    if item["status"] == "succeeded" and item.get("delivered")}
+        if len(completed) != len(set(completed)) or not set(completed) <= eligible:
+            raise ValueError("COMPLETED_ACTION_REF_NOT_DELIVERED_SUCCEEDED")
+        if any(not item.get("action", "").strip() or not item.get("reason", "").strip()
+               for item in pending_business):
+            raise ValueError("PENDING_ACTION_REASON_REQUIRED")
+        candidates = {item["ref"] for item in frontier["unhandled_candidates"]}
+        remaining_refs = {item["ref"] for item in remaining}
+        pending_by_alias = {row["ref"]: exact for exact, row in zip(
+            session.maintenance.get("pending", {}), frontier["review_coverage"], strict=True
+        )}
+        for item in decision["dispositions"]:
+            refs = item["refs"]
+            future_use = item["future_use"]
+            if (not refs or len(set(refs)) != len(refs) or not item["reason"].strip()
+                    or future_use not in {"task_local", "cross_turn", "durable", "none"}):
+                raise ValueError("FRONTIER_DISPOSITION_INVALID")
+            for alias in refs:
+                if alias not in candidates or alias in new_dispositions or alias in remaining_refs:
+                    raise ValueError("FRONTIER_DISPOSITION_REF_INVALID")
+                exact = pending_by_alias[alias]
+                if (future_use in {"task_local", "none"}
+                        and session.maintenance["pending"][exact].get("persistence_required")):
+                    raise ValueError("FRONTIER_REQUIRED_PERSISTENCE_CONFLICT")
+                represented = item.get("represented_by")
+                represented_exact = None
+                if represented is not None:
+                    binding = session.visible_bindings.get(represented)
+                    if binding is None or binding.kind != "interpretation":
+                        raise ValueError("FRONTIER_REPRESENTED_RECORD_NOT_DELIVERED")
+                    assert session.memory is not None
+                    record = session.memory.read(binding.exact_ref, include_sources=False,
+                                                 _visible=False)
+                    spans = session.visible_body_spans(represented)
+                    end = 0
+                    for lower, upper in sorted(spans):
+                        if lower <= end:
+                            end = max(end, upper)
+                    card = session.memory.workspace.cards.get(
+                        session.memory._handle(binding.exact_ref))
+                    if (record.get("status") != "CURRENT" or
+                            record.get("persistence") != "durable" or card is None
+                            or card.retired or end < len(record["text"])):
+                        raise ValueError("FRONTIER_REPRESENTED_RECORD_NOT_CURRENT_DURABLE")
+                    represented_exact = binding.exact_ref
+                if future_use in {"cross_turn", "durable"} and represented_exact is None:
+                    raise ValueError("FRONTIER_DURABLE_CHANGE_NOT_COMMITTED")
+                if future_use in {"task_local", "none"} and represented_exact is not None:
+                    raise ValueError("FRONTIER_DISPOSITION_INVALID")
+                new_dispositions[alias] = {
+                    "future_use": future_use, "reason": item["reason"],
+                    "represented_by": represented_exact,
+                }
+        left = candidates - set(new_dispositions) - (remaining_refs if choice == "pending"
+                                                      else set())
+        if left:
+            raise ValueError("FRONTIER_CANDIDATES_UNRESOLVED: " + ", ".join(sorted(left)))
+        if choice == "pending" and not remaining and not (missing_review or
+                    missing_persistence or operations or unresolved):
+            raise ValueError("MAINTENANCE_PENDING_WITHOUT_REMAINING")
     if choice == "pending" and not (remaining or missing_review or missing_persistence or
                                     operations or unresolved):
         raise ValueError("MAINTENANCE_PENDING_WITHOUT_REMAINING")
@@ -506,6 +691,12 @@ def semantic_finish(
                                      if item["operation_id"] in unresolved]
         result["abandoned_attempts"] = copy.deepcopy(abandoned)
         result["unresolved_failed_attempts"] = unresolved
+    if frontier_mode:
+        result["dispositions"] = copy.deepcopy(decision["dispositions"])
+        result["completed_action_refs"] = list(completed_action_refs or [])
+        result["pending_actions"] = copy.deepcopy(pending_actions or [])
+        result["unhandled_candidates"] = [item for item in frontier["unhandled_candidates"]
+                                          if item["ref"] not in new_dispositions]
     if commit:
         for key in abandon_ids:
             session.maintenance.setdefault("failed_attempts", {}).pop(key, None)
@@ -513,7 +704,16 @@ def semantic_finish(
             session.maintenance.setdefault("abandoned_attempts", []).extend(
                 copy.deepcopy(abandoned)
             )
+        if frontier_mode:
+            pending_by_alias = {row["ref"]: exact for exact, row in zip(
+                session.maintenance.get("pending", {}), frontier["review_coverage"], strict=True
+            )}
+            stored = session.maintenance.setdefault("dispositions", {})
+            for alias, item in new_dispositions.items():
+                stored[pending_by_alias[alias]] = item
         if status == "complete":
             session.maintenance["pending"] = {}
+            if frontier_mode:
+                session.maintenance["dispositions"] = {}
         session.maintenance["last_review"] = result
     return result

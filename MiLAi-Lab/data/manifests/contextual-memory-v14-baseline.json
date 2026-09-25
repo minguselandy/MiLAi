@@ -1,0 +1,48 @@
+{
+  "kind": "V14_IMPLEMENTATION_BASELINE",
+  "status": "IMPLEMENTATION_AUTHORIZED",
+  "date": "2026-09-26",
+  "baseline_runtime_commit": "488a4291925c607f6d0dc313a7dcbaf1906a6fad",
+  "planning_head": "a1154d8781fb3c25ffaa397cff2f5e688fa57cd1",
+  "user_authorization": "Latest explicit Goal execution supersedes historical planning-only wording; no additional approval required.",
+  "baseline_source_mapping_sha256": "5c92005f5e7f2b36c6716dcd8cf5ce1c05091f06fe47141c9f37474c6ff9a773",
+  "baseline_runtime_files_verified_from_git": 46,
+  "v13_evidence_files_verified_unchanged": 6,
+  "sealed_v13_ledger": {
+    "path": "artifacts/contextual-user-memory/v13-budget.json",
+    "sha256": "c9632ca413647fe70a881b7032063e953151ccb5fc6760d96aed49c410d744de",
+    "generation_requests": 56,
+    "generation_tokens": 345375,
+    "embedding_tokens": 2797,
+    "unknown_usage": 0
+  },
+  "fixed_failure_facts": {
+    "first_episode_card_count": 0,
+    "first_episode_retained_source_count": 0,
+    "first_episode_host_statuses": [
+      "complete"
+    ],
+    "approval_episode_actual_tools": [
+      "get_order",
+      "get_policy",
+      "get_policy",
+      "get_policy",
+      "get_policy",
+      "send_message"
+    ],
+    "approval_answer_semantic_review": "Final R1 answer claims escalation without corresponding execution receipt; messaging/querying are separate actions.",
+    "prose_issue": "Final R1 cards contain session-issued aliases; prior report and source receipts retained, no historical cleanup."
+  },
+  "planning_document_hashes": {
+    "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md": "0de5e65d261708244edec6309ded58866373024d310579bcb65cc0b42f8efbc9",
+    "docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md": "396fdad8637aaeecc18bf3d2770ea9bd20ed3e64678011b4d2c30aae7fd6e61d"
+  },
+  "new_model_calls": 0,
+  "state_attention_comparison": "NOT_AUTHORIZED_BY_V14",
+  "validation_order": [
+    "V0 affected contracts",
+    "V1 frozen independent semantic diagnostics after development",
+    "V2 exposed original arc0 complete from empty bank",
+    "V3 two prospective native arcs only after V1/V2 semantic readiness"
+  ]
+}

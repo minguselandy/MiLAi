@@ -216,8 +216,12 @@ def test_prepare_accepts_a_frozen_nondefault_arc_identity_without_new_generation
                                   Path(result["freeze"]))
 
 
+@pytest.mark.parametrize(("template", "arm", "protocol"), [
+    (preparer.V12_TEMPLATES[0], "react_notes_v12_off", "turn-maintenance-v4"),
+    (preparer.V14_TEMPLATES[0], "react_notes_v14_off", "turn-maintenance-v5"),
+])
 def test_prepare_current_notes_preserves_repair_protocol_and_rejects_other_controls(
-    tmp_path: Path,
+    tmp_path: Path, template: str, arm: str, protocol: str,
 ) -> None:
     host_dir, embedding_dir = tmp_path / "host", tmp_path / "embedding"
     host_dir.mkdir()
@@ -238,7 +242,7 @@ def test_prepare_current_notes_preserves_repair_protocol_and_rejects_other_contr
             host_dir=host_dir, embedding_dir=embedding_dir,
             host_url="http://host.test/v1/", embedding_url="http://embed.test/v1/",
             budget_path=budget,
-            template_path=preparer.LAB / preparer.V12_TEMPLATES[0],
+            template_path=preparer.LAB / template,
         )
         selection_path = Path(result["selection"])
         config_path = Path(result["config"])
@@ -246,8 +250,8 @@ def test_prepare_current_notes_preserves_repair_protocol_and_rejects_other_contr
         selected, config, identity, _, _, _, _, diagnostic, _ = merit.prepared_inputs(
             selection_path, config_path, freeze_path,
         )
-        assert selected["execution_plan"]["arms"] == ["react_notes_v12_off"]
-        assert config["maintenance_protocol"] == "turn-maintenance-v4"
+        assert selected["execution_plan"]["arms"] == [arm]
+        assert config["maintenance_protocol"] == protocol
         assert config["host"]["enable_thinking"] is False
         assert config["capacity"]["enable_thinking"] is False
         assert diagnostic["user_message_count"] == 7
@@ -255,7 +259,9 @@ def test_prepare_current_notes_preserves_repair_protocol_and_rejects_other_contr
         assert not budget.exists()
         assert not Path(result["run_output"]).exists()
         frozen = read_json(freeze_path)
-        assert preparer.V12_TEMPLATES[0] in frozen["source_sha256"]
+        assert template in frozen["source_sha256"]
+        if arm == "react_notes_v14_off":
+            assert "tools/run_contextual_semantic_v14.py" in frozen["source_sha256"]
 
         original = read_json(config_path)
         for field, value in (("decision_gap_focus", True),

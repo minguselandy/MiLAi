@@ -1,0 +1,436 @@
+{
+  "kind": "V14_V13_FROZEN_CONTRACT_BASELINE",
+  "status": "MEASURED_ZERO_MODELS",
+  "source_run": "artifacts/contextual-user-memory/v13-final-r1",
+  "provider_generation_requests": 29,
+  "provider_input_tokens": 176986,
+  "provider_output_tokens": 4069,
+  "text_segment_estimates": {
+    "system_tokens": 86868,
+    "other_history_and_material_text_tokens": 80685,
+    "frontier_tokens": 7755,
+    "frontier_messages": 29
+  },
+  "unique_systems": [
+    {
+      "requests": 3,
+      "system_tokens": 2879,
+      "shared_rules_prefix_tokens": 790,
+      "json_action_instruction_tokens": 79,
+      "compact_catalogue_tokens": 1915,
+      "dynamic_subject_catalogue_tokens": 95,
+      "tools": [
+        {
+          "name": "memory_search",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 177
+        },
+        {
+          "name": "memory_read",
+          "purpose_tokens": 12,
+          "full_catalogue_entry_tokens": 154
+        },
+        {
+          "name": "memory_save",
+          "purpose_tokens": 366,
+          "full_catalogue_entry_tokens": 1094
+        },
+        {
+          "name": "get_order",
+          "purpose_tokens": 14,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "refund",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 54
+        },
+        {
+          "name": "update_address",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 50
+        },
+        {
+          "name": "get_policy",
+          "purpose_tokens": 8,
+          "full_catalogue_entry_tokens": 39
+        },
+        {
+          "name": "send_message",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "finish_turn",
+          "purpose_tokens": 181,
+          "full_catalogue_entry_tokens": 255
+        }
+      ],
+      "frozen_request_system_sha256": "f4b9d874f114ec816fe7caba5f7b9a148dea78816276a25829dd43d4feaeec59"
+    },
+    {
+      "requests": 3,
+      "system_tokens": 2878,
+      "shared_rules_prefix_tokens": 790,
+      "json_action_instruction_tokens": 79,
+      "compact_catalogue_tokens": 1915,
+      "dynamic_subject_catalogue_tokens": 94,
+      "tools": [
+        {
+          "name": "memory_search",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 177
+        },
+        {
+          "name": "memory_read",
+          "purpose_tokens": 12,
+          "full_catalogue_entry_tokens": 154
+        },
+        {
+          "name": "memory_save",
+          "purpose_tokens": 366,
+          "full_catalogue_entry_tokens": 1094
+        },
+        {
+          "name": "get_order",
+          "purpose_tokens": 14,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "refund",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 54
+        },
+        {
+          "name": "update_address",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 50
+        },
+        {
+          "name": "get_policy",
+          "purpose_tokens": 8,
+          "full_catalogue_entry_tokens": 39
+        },
+        {
+          "name": "send_message",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "finish_turn",
+          "purpose_tokens": 181,
+          "full_catalogue_entry_tokens": 255
+        }
+      ],
+      "frozen_request_system_sha256": "2bb7b9ca5d18b3455a30d2f2f7eb46d5fd9415af95fea1745f61684d1050956b"
+    },
+    {
+      "requests": 3,
+      "system_tokens": 2967,
+      "shared_rules_prefix_tokens": 790,
+      "json_action_instruction_tokens": 79,
+      "compact_catalogue_tokens": 1915,
+      "dynamic_subject_catalogue_tokens": 183,
+      "tools": [
+        {
+          "name": "memory_search",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 177
+        },
+        {
+          "name": "memory_read",
+          "purpose_tokens": 12,
+          "full_catalogue_entry_tokens": 154
+        },
+        {
+          "name": "memory_save",
+          "purpose_tokens": 366,
+          "full_catalogue_entry_tokens": 1094
+        },
+        {
+          "name": "get_order",
+          "purpose_tokens": 14,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "refund",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 54
+        },
+        {
+          "name": "update_address",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 50
+        },
+        {
+          "name": "get_policy",
+          "purpose_tokens": 8,
+          "full_catalogue_entry_tokens": 39
+        },
+        {
+          "name": "send_message",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "finish_turn",
+          "purpose_tokens": 181,
+          "full_catalogue_entry_tokens": 255
+        }
+      ],
+      "frozen_request_system_sha256": "9edae29b0caea2ec8d85ac8f73d3f95f7fdd3dc1cdc612914c2d63d3e33de7ff"
+    },
+    {
+      "requests": 5,
+      "system_tokens": 2976,
+      "shared_rules_prefix_tokens": 790,
+      "json_action_instruction_tokens": 79,
+      "compact_catalogue_tokens": 1915,
+      "dynamic_subject_catalogue_tokens": 192,
+      "tools": [
+        {
+          "name": "memory_search",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 177
+        },
+        {
+          "name": "memory_read",
+          "purpose_tokens": 12,
+          "full_catalogue_entry_tokens": 154
+        },
+        {
+          "name": "memory_save",
+          "purpose_tokens": 366,
+          "full_catalogue_entry_tokens": 1094
+        },
+        {
+          "name": "get_order",
+          "purpose_tokens": 14,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "refund",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 54
+        },
+        {
+          "name": "update_address",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 50
+        },
+        {
+          "name": "get_policy",
+          "purpose_tokens": 8,
+          "full_catalogue_entry_tokens": 39
+        },
+        {
+          "name": "send_message",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "finish_turn",
+          "purpose_tokens": 181,
+          "full_catalogue_entry_tokens": 255
+        }
+      ],
+      "frozen_request_system_sha256": "a960ffafe5d22719de987aac8965314c344c32a7d00d0d3e67082609f4d2d218"
+    },
+    {
+      "requests": 3,
+      "system_tokens": 3152,
+      "shared_rules_prefix_tokens": 790,
+      "json_action_instruction_tokens": 79,
+      "compact_catalogue_tokens": 1915,
+      "dynamic_subject_catalogue_tokens": 368,
+      "tools": [
+        {
+          "name": "memory_search",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 177
+        },
+        {
+          "name": "memory_read",
+          "purpose_tokens": 12,
+          "full_catalogue_entry_tokens": 154
+        },
+        {
+          "name": "memory_save",
+          "purpose_tokens": 366,
+          "full_catalogue_entry_tokens": 1094
+        },
+        {
+          "name": "get_order",
+          "purpose_tokens": 14,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "refund",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 54
+        },
+        {
+          "name": "update_address",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 50
+        },
+        {
+          "name": "get_policy",
+          "purpose_tokens": 8,
+          "full_catalogue_entry_tokens": 39
+        },
+        {
+          "name": "send_message",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "finish_turn",
+          "purpose_tokens": 181,
+          "full_catalogue_entry_tokens": 255
+        }
+      ],
+      "frozen_request_system_sha256": "245ac22c21e8709a87066bf29acc76a6c6c3543e4dd9496ff0d53af491fe8bef"
+    },
+    {
+      "requests": 7,
+      "system_tokens": 3030,
+      "shared_rules_prefix_tokens": 790,
+      "json_action_instruction_tokens": 79,
+      "compact_catalogue_tokens": 1915,
+      "dynamic_subject_catalogue_tokens": 246,
+      "tools": [
+        {
+          "name": "memory_search",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 177
+        },
+        {
+          "name": "memory_read",
+          "purpose_tokens": 12,
+          "full_catalogue_entry_tokens": 154
+        },
+        {
+          "name": "memory_save",
+          "purpose_tokens": 366,
+          "full_catalogue_entry_tokens": 1094
+        },
+        {
+          "name": "get_order",
+          "purpose_tokens": 14,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "refund",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 54
+        },
+        {
+          "name": "update_address",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 50
+        },
+        {
+          "name": "get_policy",
+          "purpose_tokens": 8,
+          "full_catalogue_entry_tokens": 39
+        },
+        {
+          "name": "send_message",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "finish_turn",
+          "purpose_tokens": 181,
+          "full_catalogue_entry_tokens": 255
+        }
+      ],
+      "frozen_request_system_sha256": "77857ca8dc609770b81a8dc0199ad58ed84052504661bc965c590c1bac9360d4"
+    },
+    {
+      "requests": 5,
+      "system_tokens": 3030,
+      "shared_rules_prefix_tokens": 790,
+      "json_action_instruction_tokens": 79,
+      "compact_catalogue_tokens": 1915,
+      "dynamic_subject_catalogue_tokens": 246,
+      "tools": [
+        {
+          "name": "memory_search",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 177
+        },
+        {
+          "name": "memory_read",
+          "purpose_tokens": 12,
+          "full_catalogue_entry_tokens": 154
+        },
+        {
+          "name": "memory_save",
+          "purpose_tokens": 366,
+          "full_catalogue_entry_tokens": 1094
+        },
+        {
+          "name": "get_order",
+          "purpose_tokens": 14,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "refund",
+          "purpose_tokens": 10,
+          "full_catalogue_entry_tokens": 54
+        },
+        {
+          "name": "update_address",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 50
+        },
+        {
+          "name": "get_policy",
+          "purpose_tokens": 8,
+          "full_catalogue_entry_tokens": 39
+        },
+        {
+          "name": "send_message",
+          "purpose_tokens": 7,
+          "full_catalogue_entry_tokens": 48
+        },
+        {
+          "name": "finish_turn",
+          "purpose_tokens": 181,
+          "full_catalogue_entry_tokens": 255
+        }
+      ],
+      "frozen_request_system_sha256": "81130e8ae1d6549ca149f35de466e22be7c78ada1967029701a5dc529a988b7d"
+    }
+  ],
+  "response_format_transport_bytes_not_counted_as_prompt_tokens": 394439,
+  "counting_note": "Independent text-token estimates exclude chat wrappers and are not additive provider accounting. Per-tool purpose is a subset of its catalogue entry; catalogue segments are subsets of system. Response_format is decoder transport, not assumed to enter tokenizer prompt.",
+  "duplicate_rules_observed": [
+    {
+      "rule": "Future commitment preservation",
+      "locations": [
+        "contextual_host.py baseline session-retention paragraph",
+        "contextual_host.py baseline semantic-maintenance paragraph",
+        "finish_turn tool purpose"
+      ],
+      "decision": "Consolidate v5 future-use semantics in the disposition contract, without dropping retention or first-observation requirements."
+    },
+    {
+      "rule": "Business completion differs from memory persistence",
+      "locations": [
+        "contextual_host.py baseline shared business facts paragraph",
+        "contextual_host.py baseline semantic/repair paragraphs",
+        "finish_turn tool purpose"
+      ],
+      "decision": "One shared execution-facts contract plus dynamic frontier; do not repeat whole result in a new execution-state block."
+    }
+  ],
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v13-final-r1/run/runtime/trace.jsonl": "0a7f33249bf4b948f67a91bfc35d74c22bf85bdc2dfdd6f5cdde578fca318e40",
+    "artifacts/contextual-user-memory/v13-final-r1/config.json": "b3517b65a6251b1d84bb670e00184d75b99f49bbefffa4c8b2f9da1f7a802a82",
+    "artifacts/contextual-user-memory/v14-development/measure_baseline_contract.py": "5775bc3fcb11b1dd441f7789d7347b61196d964e32aa2a87fc25850dcb280895"
+  },
+  "model_calls": 0
+}

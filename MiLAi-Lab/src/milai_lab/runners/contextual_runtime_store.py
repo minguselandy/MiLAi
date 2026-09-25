@@ -578,6 +578,11 @@ class RuntimeStore:
             if item["session_id"] == session_id and item["turn_id"] == turn_id
         ]
 
+    def action(self, call_id: str) -> dict[str, Any] | None:
+        """Read one existing journal receipt for an explicitly delivered source."""
+        entry = self._current()["actions"].get(call_id)
+        return copy.deepcopy(entry) if entry is not None else None
+
     def pending_actions(self) -> list[dict[str, Any]]:
         """Only genuinely unknown effects require an application-level check."""
         return [

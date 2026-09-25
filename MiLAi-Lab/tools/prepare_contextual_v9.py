@@ -27,6 +27,7 @@ V11_TEMPLATES = (
     "configs/contextual-memory-v11-attention-template.json",
 )
 V12_TEMPLATES = ("configs/contextual-memory-v12-notes-template.json",)
+V14_TEMPLATES = ("configs/contextual-memory-v14-notes-template.json",)
 PINNED_SELECTION = LAB / "data/manifests/contextual-memory-v7-e0-selection-final.json"
 PINNED_MERIT_COMMIT = "293933d96b1d1849e1f20d1bb324def5de9ed33f"
 ARC_SHA256 = "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
@@ -97,10 +98,12 @@ def model_files(root: Path, *, weights: bool) -> dict[str, Any]:
 
 
 def source_mapping(
-    *, v10: bool = False, v11: bool = False, v12: bool = False,
+    *, v10: bool = False, v11: bool = False, v12: bool = False, v14: bool = False,
 ) -> dict[str, str]:
-    templates = V12_TEMPLATES if v12 else V11_TEMPLATES if v11 else V10_TEMPLATES if v10 else ()
-    paths = [*SOURCE_FILES, *templates, *(
+    templates = (V14_TEMPLATES if v14 else V12_TEMPLATES if v12 else
+                 V11_TEMPLATES if v11 else V10_TEMPLATES if v10 else ())
+    paths = [*SOURCE_FILES, *templates,
+             *(["tools/run_contextual_semantic_v14.py"] if v14 else []), *(
         str(path.relative_to(LAB))
         for path in sorted((LAB / "src/milai_lab/methods/contextual_memory").glob("*.py"))
     )]
@@ -138,9 +141,11 @@ def prepare(
         raise ValueError("MERIT_SOURCE_COMMIT_CHANGED")
     template = read_json(template_path)
     version = template.get("config_version")
-    if version in {"contextual-task-v10", "contextual-task-v11", "contextual-task-v12"}:
+    if version in {"contextual-task-v10", "contextual-task-v11", "contextual-task-v12",
+                   "contextual-task-v14"}:
         policy = template.get("decision_policy")
-        maintenance = ("turn-maintenance-v4" if version == "contextual-task-v12"
+        maintenance = ("turn-maintenance-v5" if version == "contextual-task-v14" else
+                       "turn-maintenance-v4" if version == "contextual-task-v12"
                        else "turn-maintenance-v3")
         if (policy not in {"notes", "basis"} or template.get("state_policy") != "off"
                 or template.get("maintenance_protocol") != maintenance
@@ -150,7 +155,13 @@ def prepare(
                 or (policy == "notes" and (template["decision_feedback"]
                                            or template["decision_gap_focus"]))):
             raise ValueError("TEMPLATE_DECISION_CONTRACT_MISMATCH")
-        if version == "contextual-task-v12":
+        if version == "contextual-task-v14":
+            if (_within_lab(template_path) not in V14_TEMPLATES or policy != "notes"
+                    or template.get("host", {}).get("enable_thinking") is not False
+                    or template.get("capacity", {}).get("enable_thinking") is not False):
+                raise ValueError("V14_TEMPLATE_ARM_MISMATCH")
+            arm, label = "react_notes_v14_off", "V14"
+        elif version == "contextual-task-v12":
             if (_within_lab(template_path) not in V12_TEMPLATES or policy != "notes"
                     or template.get("host", {}).get("enable_thinking") is not False
                     or template.get("capacity", {}).get("enable_thinking") is not False):
@@ -242,7 +253,8 @@ def prepare(
         raise ValueError("V10_TEMPLATE_PATH_NOT_PINNED")
     mapping = source_mapping(v10=version == "contextual-task-v10",
                              v11=version == "contextual-task-v11",
-                             v12=version == "contextual-task-v12")
+                             v12=version == "contextual-task-v12",
+                             v14=version == "contextual-task-v14")
     freeze = {
         "status": "DEVELOPMENT_COMPLETE_READY_FOR_BENCHMARK_SELECTION",
         "source_sha256": mapping, "source_mapping_sha256": digest(mapping),

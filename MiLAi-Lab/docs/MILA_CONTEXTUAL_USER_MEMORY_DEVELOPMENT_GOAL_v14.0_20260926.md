@@ -2,9 +2,9 @@
 goal_id: MILAI-SEMANTIC-BOUNDARY-HARDENING
 version: v14.0
 date: 2026-09-26
-status: PLANNED_NOT_STARTED
+status: IMPLEMENTATION_IN_PROGRESS
 planning_delivery: COMPLETE
-implementation_authorized_this_round: false
+implementation_authorized_this_round: true
 baseline_commit: 488a4291925c607f6d0dc313a7dcbaf1906a6fad
 baseline_source_mapping_sha256: 5c92005f5e7f2b36c6716dcd8cf5ce1c05091f06fe47141c9f37474c6ff9a773
 scope: MiLAi-Lab
@@ -18,7 +18,7 @@ verification_count_cap: null
 
 **开发目标：让同一 ordinary Host 区分“现在能否执行、以后是否需要记住、实际执行了什么、哪些只是本轮引用”，修复 v13 已观察到的语义缺口，再判断是否具备恢复 State–Attention 研究的条件。**
 
-用户本轮选择“先生成 Goal 与详细设计”。本文件是待实施计划，本轮未修改运行代码、生成诊断数据或调用实验模型；不能将规划交付标成 v14 开发完成。合同、字段与算法细节见 [详细设计](MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md)。
+此前“先生成 Goal 与详细设计”的规划交付已完成。2026-09-26 用户随后明确要求阅读并执行本 Goal，现进入 IMPLEMENTATION_IN_PROGRESS；最新执行授权优先于原仅规划措辞。[实施基线](../data/manifests/contextual-memory-v14-baseline.json)核对 v13 的 46 份运行文件和封存费用。合同、字段与算法细节见[详细设计](MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md)，实际进展见[开发记录](CONTEXTUAL_USER_MEMORY_V14_DEVELOPMENT_20260926.md)。
 
 ## 1. 基线与问题范围
 
@@ -112,7 +112,7 @@ prefix cache 只作为后续可测的服务优化：先检查实际部署能力�
 
 目录名称是对当前模块的指示，详细设计提供真实文件链接。小纯函数可抽出，但不按行数重构主类，不增加通用事件框架、调度器或数据库。
 
-Sol xhigh 作为唯一核心／Host owner；Luna max 可并行做窄的离线 token 清点、数据身份及冻结文档，文件不重叠。一个主控制器执行所有真实模型请求，并发为 1。Astra xhigh 只用于明确无法收敛的合同／语义难题，不设常驻 reviewer。发布沿用 Luna high；本轮仅规划不因此启动实现代理。
+Sol xhigh 作为唯一核心／Host owner；Luna max 可并行做窄的离线 token 清点、数据身份及冻结文档，文件不重叠。一个主控制器执行所有真实模型请求，并发为 1。Astra xhigh 只用于明确无法收敛的合同／语义难题，不设常驻 reviewer。发布沿用 Luna high；现已按用户明确执行授权启动唯一 Sol xhigh 核心负责人。
 
 ## 5. 小规模验证次序
 
@@ -148,4 +148,4 @@ G1—G4 在声明验证范围内通过且没有该范围中未关闭的已知反
 
 未来实施交付包括：必要源码和窄检查、独立 v14 模板与冻结、语义诊断规范及隔离标签、原生 exposure 清单、分阶段报告、失败分类、连续费用和最小复现入口。原始数据、模型、trace 和数据库继续 ignored，Product 不动。
 
-本轮仅交付本 Goal 与详细设计，并更新导航。运行代码与 v13 冻结保持原样；pytest、vLLM、Judge、benchmark 选择／生成均未执行。实施需要下一次明确的开发指令，不因文件名含 Goal 就自行开启。
+原规划交付只包含 Goal、详细设计及导航，未执行运行代码、pytest、vLLM、Judge 或新 benchmark 生成。其后明确执行指令已到达，当前开发、窄检查与分阶段验证按本 Goal 推进；尚未通过验证的内容不得提前标记完成。

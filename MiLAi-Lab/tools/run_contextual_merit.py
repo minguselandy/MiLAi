@@ -81,7 +81,8 @@ def prepared_inputs(
         or arms not in (["ordinary_v7_off"], ["ordinary_v8_off"], ["ordinary_v9_off"],
                         ["react_notes_v10_off"], ["decision_basis_v10_off"],
                         ["react_notes_v11_off"], ["sparse_basis_v11_off"],
-                        ["sparse_basis_attention_v11_off"], ["react_notes_v12_off"])
+                        ["sparse_basis_attention_v11_off"], ["react_notes_v12_off"],
+                        ["react_notes_v14_off"])
     ):
         raise ValueError("MERIT_SELECTION_CHANGED")
     declared_config = plan.get("config")
@@ -156,6 +157,18 @@ def prepared_inputs(
         or config.get("decision_feedback") is not False
         or config.get("decision_gap_focus") is not False
         or config.get("maintenance_protocol") != "turn-maintenance-v4"
+        or config.get("host", {}).get("tool_mode") != "json_action"
+        or config.get("host", {}).get("enable_thinking") is not False
+        or config.get("capacity", {}).get("enable_thinking") is not False
+    ):
+        raise ValueError("MERIT_ARM_CONFIG_MISMATCH")
+    if arms == ["react_notes_v14_off"] and (
+        not config_key.startswith("artifacts/contextual-user-memory/")
+        or config.get("config_version") != "contextual-task-v14"
+        or config.get("decision_policy") != "notes"
+        or config.get("decision_feedback") is not False
+        or config.get("decision_gap_focus") is not False
+        or config.get("maintenance_protocol") != "turn-maintenance-v5"
         or config.get("host", {}).get("tool_mode") != "json_action"
         or config.get("host", {}).get("enable_thinking") is not False
         or config.get("capacity", {}).get("enable_thinking") is not False

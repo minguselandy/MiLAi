@@ -19,6 +19,7 @@ from milai_lab.runners.contextual_agent_tasks import (
 )
 from milai_lab.runners.contextual_host import ContextualHost, _compact_tool_descriptions
 from milai_lab.runners.contextual_maintenance import (
+    FRONTIER_MAINTENANCE_PROTOCOL,
     REPAIR_MAINTENANCE_PROTOCOL,
     SEMANTIC_MAINTENANCE_PROTOCOL,
     committed,
@@ -423,6 +424,93 @@ def test_semantic_maintenance_optional_partial_is_reported_without_full_review_c
         [0, len("optional context")]]
     assert semantic_finish(optional, {"decision": "processed", "remaining": []})[
         "status"] == "complete"
+
+
+def test_frontier_requires_explicit_disposition_and_actual_action_receipt() -> None:
+    memory = bank()
+    session = HostSession("session", memory)
+    session.maintenance["protocol"] = FRONTIER_MAINTENANCE_PROTOCOL
+    session.begin_turn("one")
+    acquired = accept_observation(memory, session, Observation(
+        "new", "Use this only for the current answer", "user", "fixture"))
+    alias = acquired["material"]["materials"][0]["ref"]
+    finish_args = {"decision": "processed", "remaining": [], "dispositions": []}
+    with pytest.raises(ValueError, match="FRONTIER_CANDIDATES_UNRESOLVED"):
+        semantic_finish(session, finish_args, completed_action_refs=[], pending_actions=[])
+    selected = {**finish_args, "dispositions": [{
+        "refs": [alias], "future_use": "task_local", "reason": "Current reply only",
+    }]}
+    with pytest.raises(ValueError, match="COMPLETED_ACTION_REF_NOT_DELIVERED_SUCCEEDED"):
+        semantic_finish(session, selected, business_outcomes=[{
+            "call_id": "action-1", "status": "succeeded", "delivered": False,
+        }], completed_action_refs=["action-1"], pending_actions=[])
+    assert semantic_finish(session, selected, completed_action_refs=[], pending_actions=[],
+                           commit=False)["status"] == "complete"
+    assert session.maintenance["pending"]
+    completed = semantic_finish(session, selected, completed_action_refs=[],
+                                pending_actions=[])
+    assert completed["status"] == "complete"
+    assert completed["write_facts"] == []
+    assert session.maintenance["pending"] == {}
+
+
+def test_frontier_durable_candidate_needs_real_record_or_pending() -> None:
+    memory = bank()
+    session = HostSession("session", memory)
+    session.maintenance["protocol"] = FRONTIER_MAINTENANCE_PROTOCOL
+    session.begin_turn("one")
+    acquired = accept_observation(memory, session, Observation(
+        "promise", "We will review this next week", "user", "fixture"),
+        persistence_required=True)
+    alias = acquired["material"]["materials"][0]["ref"]
+    selected = {"decision": "processed", "remaining": [], "dispositions": [{
+        "refs": [alias], "future_use": "none", "reason": "No future value",
+    }]}
+    with pytest.raises(ValueError, match="REQUIRED_PERSISTENCE_MISSING"):
+        semantic_finish(session, selected, completed_action_refs=[], pending_actions=[])
+    pending = {"decision": "pending", "remaining": [{"ref": alias,
+               "reason": "Will save the commitment"}], "dispositions": []}
+    assert semantic_finish(session, pending, completed_action_refs=[],
+                           pending_actions=[])["status"] == "pending"
+    created = memory.save(op="CREATE", content="Review is planned next week",
+                          about_ref="unresolved", source_refs=[acquired["source_ref"]],
+                          certainty="explicit")
+    committed(session, receipt_outcome("memory_save", created), created)
+    frontier = semantic_frontier(session)
+    assert frontier["unhandled_candidates"] == []
+    assert frontier["write_facts"][0]["source_count"] == 1
+    assert semantic_finish(session, {"decision": "processed", "remaining": [],
+                                     "dispositions": []}, completed_action_refs=[],
+                           pending_actions=[])["status"] == "complete"
+
+
+def test_v5_host_finish_result_keeps_structured_actions_separate_from_answer() -> None:
+    memory = bank(decision_policy="notes")
+    response = {"work_note": None, "tool": "finish_turn", "arguments": {
+        "maintenance": {"decision": "processed", "remaining": [], "dispositions": [{
+            "refs": ["m0"], "future_use": "task_local", "reason": "Current question only",
+        }]},
+        "completed_action_refs": [], "pending_actions": [{
+            "action": "Await external decision", "reason": "No execution result yet",
+        }], "answer": "The decision is still pending",
+    }}
+    with VLLMClient(VLLMConfig("http://fixture/v1", "host", max_calls=1,
+                               tool_mode="json_action"), transport=httpx.MockTransport(
+        lambda _: httpx.Response(200, json={"choices": [{"message": {
+            "role": "assistant", "content": json.dumps(response),
+        }}]}))) as client:
+        host = ContextualHost(client, memory.dispatch, memory_tools("ordinary"), "Work",
+                              memory=memory, decision_policy="notes",
+                              maintenance_policy="required",
+                              maintenance_protocol=FRONTIER_MAINTENANCE_PROTOCOL)
+        _, results = run_task_session([TaskTurn("one", "What next?")], memory=memory,
+                                      host=host, session_id="session")
+    result = results[0]
+    assert result.status == "complete", (result.maintenance, result.transcript[-1])
+    assert result.completed_action_refs == []
+    assert result.pending_actions == [{"action": "Await external decision",
+                                       "reason": "No execution result yet"}]
+    assert result.maintenance["protocol"] == FRONTIER_MAINTENANCE_PROTOCOL
 
 
 def test_repair_protocol_resolves_only_explicit_attempt_and_keeps_zero_write_legal() -> None:

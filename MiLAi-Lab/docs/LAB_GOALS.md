@@ -1,17 +1,18 @@
 # MiLAi Lab goals
 
-## Planned semantic boundary Goal v14.0 (2026-09-26)
+## Active semantic boundary Goal v14.0 (2026-09-26)
 
 [Goal v14.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md) and
 [detailed design](MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md)
-are `PLANNED_NOT_STARTED`. This delivery is documentation only, based on main=488a429
-and the unchanged v13 runtime mapping. Planned changes cover future-use dispositions in the
-existing frontier, grounded action references, persistent prose with literal-collision handling,
-and measured shared-contract reduction. No new State controller or duplicate frontier is planned.
-Implementation precedes narrow checks and a separate 9–12-case semantic diagnostic; only after
-the readiness gate may frozen unseen native inputs be selected. Existing MERIT inputs/scoring
-stay unchanged, and arc0 is regression rather than a 5/5 tuning target. State–Attention effects
-remain a later study. No v14 implementation, model call or new dataset generation was performed.
+are now under explicit execution authorization, status `IMPLEMENTATION_IN_PROGRESS`.
+The [baseline](../data/manifests/contextual-memory-v14-baseline.json) preserves v13 identities
+and all historical costs. One Sol xhigh owns core implementation; root controls real model
+requests serially. Work covers future-use dispositions in the existing frontier, real action
+receipts, persistent prose and literal collisions, then measured shared-contract consolidation.
+See the [development record](CONTEXTUAL_USER_MEMORY_V14_DEVELOPMENT_20260926.md).
+V1 inputs are created and frozen after development and narrow checks. V2 uses the exposed
+original arc0 from empty memory; two prospective new arcs are conditional on V1/V2 semantic
+readiness. Existing inputs/scoring remain unchanged. No State-Attention study is included.
 
 ## Completed scoped continuous runtime Goal v13.0 (2026-09-25)
 

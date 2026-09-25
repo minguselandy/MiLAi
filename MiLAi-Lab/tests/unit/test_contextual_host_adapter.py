@@ -15,6 +15,7 @@ from milai_lab.methods.contextual_memory.material_view import VIEW_PROTOCOL
 from milai_lab.methods.contextual_memory.operations import TaskEnvelope
 from milai_lab.methods.contextual_user_memory import TOOLS as MEMORY_TOOLS
 from milai_lab.methods.contextual_user_memory import ContextualMemory, Observation
+from milai_lab.runners.contextual_maintenance import FRONTIER_MAINTENANCE_PROTOCOL
 from milai_lab.runners.contextual_session import HostSession
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
@@ -452,6 +453,42 @@ def test_read_explicit_sources_projects_only_their_delivered_body_ranges(
                     if binding.kind == "source" and binding.spans}
         assert result.calls[1]["ok"] is False
         assert f"source_refs[0]={source_alias}" in result.calls[1]["error"]
+    client.close()
+
+
+def test_v5_requires_grounded_literal_use_for_issued_handle_in_durable_prose() -> None:
+    memory = ContextualMemory(
+        "user", host_id="host", embed=lambda texts: [[1.0, 0.0] for _ in texts],
+        embedding_dimension=2,
+    )
+    source = memory.publish(Observation("source", "Model m0", "user", "fixture"))
+    session = HostSession("session", memory)
+    assert session.material_view is not None
+    projected = session.material_view.project(memory.read(
+        source, include_sources=False, _visible=False))
+    session.append_material(projected)
+    alias = projected["materials"][0]["ref"]
+    assert alias == "m0"
+    responses = [
+        _receipt(_tool_call("save", "memory_save", json.dumps({
+            "op": "CREATE", "content": f"Refer to {alias}", "about_ref": "unknown",
+            "source_refs": [alias], "certainty": "explicit",
+        }))),
+        _receipt(_tool_call("literal", "memory_save", json.dumps({
+            "op": "CREATE", "content": "Model m0", "about_ref": "unknown",
+            "source_refs": [alias], "certainty": "explicit",
+            "literal_uses": [{"token": "m0", "source_ref": alias}],
+        }))),
+        _receipt({"role": "assistant", "content": "Saved literal model."}),
+    ]
+    client, _ = _provider(responses)
+    result = ContextualHost(
+        client, memory.dispatch, MEMORY_TOOLS, "Work", memory=memory,
+        maintenance_protocol=FRONTIER_MAINTENANCE_PROTOCOL,
+    ).run([], session=session, max_calls=3)
+    assert "PERSISTENT_BODY_CONTAINS_EPHEMERAL_HANDLE" in result.calls[0]["error"]
+    assert result.calls[1]["ok"] is True
+    assert next(iter(memory.workspace.cards.values())).text == "Model m0"
     client.close()
 
 
