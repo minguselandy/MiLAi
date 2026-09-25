@@ -3,6 +3,14 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
+Next planned work: [Semantic boundary Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
+and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md).
+Status: `PLANNED_NOT_STARTED`; the user selected documentation first. The design reuses the
+maintenance frontier and execution journal, separates future memory value from action timing,
+grounds completion references, and checks persistent prose without erasing literal identifiers.
+Readiness includes both required retention and avoiding unwanted retention. No v14 runtime
+code, model experiment, diagnostic dataset or new MERIT selection has been produced.
+
 Latest scoped delivery: [Continuous runtime Goal v13.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v13.0_20260925.md).
 The current v12 notes template now works through the official preparation and MERIT runner;
 write receipts expose existing repair IDs and unresolved attempts before finish. Relevant

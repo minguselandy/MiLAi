@@ -36,6 +36,19 @@ canonical memory state.
 
 ## Required checks
 
+The [Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md) and
+[semantic boundary design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md)
+are `PLANNED_NOT_STARTED`. The latest user explicitly chose Goal/design documents first;
+their existence does not authorize implementation or experiments. Preserve main=488a429's
+v13 runtime and results. Future implementation, when explicitly requested, reuses the existing
+frontier/journal; a source citation is not proof of complete semantic handling, a valid action-ref
+subset is not proof of truthful prose, and issued handles can collide with genuine literal text.
+Do not restart runtime/repair development without a concrete new defect. Keep ordinary/notes/off,
+one Sol xhigh core owner, narrow checks, continuous accounting and unchanged native benchmarks.
+State–Attention comparisons wait for the declared semantic readiness gate. Documentation-only
+validation is links, identities and diffs, with no pytest/build/vLLM or diagnostic generation.
+Existing Luna high publication authorization remains; publication must not imply v14 was built.
+
 The user-authorized [Goal v13.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v13.0_20260925.md)
 is `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`; preserve the
 [results](docs/CONTEXTUAL_USER_MEMORY_V13_RESULTS_20260925.md). The current v12 notes template
