@@ -1,0 +1,66 @@
+{
+  "host": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 12,
+    "enable_thinking": true
+  },
+  "embedding": {
+    "base_url": "http://127.0.0.1:7861/v1/",
+    "model": "bge-m3",
+    "timeout": 180
+  },
+  "embedding_dimension": 1024,
+  "embedding_batch": 32,
+  "embedding_window": {
+    "tokenizer_path": "",
+    "tokenizer_sha256": "",
+    "max_tokens": 8192,
+    "pooling": "original_token_count_weighted_mean_l2"
+  },
+  "model_identity": null,
+  "config_version": "contextual-task-v11",
+  "profile": "ordinary",
+  "state_policy": "off",
+  "source_retention": "session",
+  "actor_protocol": "trusted_actor_v1_no_role_inference",
+  "source_protocol": "publish_retain_project_deliver_v2_execution_receipt",
+  "material_bytes": 16000,
+  "capacity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "tokenizer_path": "",
+    "tokenizer_files_sha256": {},
+    "context_tokens": 65536,
+    "output_tokens": 4096,
+    "batch_source_tokens": 6000,
+    "safety_tokens": 512,
+    "source_message_overhead_tokens": 32,
+    "related_reserve_tokens": 0,
+    "schema_reserve_tokens": 0,
+    "enable_thinking": true
+  },
+  "concurrency": 1,
+  "budget": {
+    "generation_requests": null,
+    "generation_tokens": null,
+    "embedding_tokens": null
+  },
+  "budget_path": "artifacts/contextual-user-memory/v11-budget.json",
+  "capabilities": [
+    "read",
+    "maintain"
+  ],
+  "business_tools": "supplied_by_trusted_application",
+  "maintenance_policy": "required",
+  "runtime_store": "runtime-state",
+  "initial_context_bytes": 6000,
+  "initial_context_limit": 4,
+  "maintenance_protocol": "turn-maintenance-v3",
+  "decision_policy": "notes",
+  "decision_feedback": false,
+  "decision_gap_focus": false
+}

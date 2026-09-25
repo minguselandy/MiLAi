@@ -1,0 +1,163 @@
+{
+  "kind": "V11_OFFLINE_FROZEN_PROJECTION_COMPARISON",
+  "model_calls": 0,
+  "objects": "Three fixed contract fixtures, not benchmark samples or model behavior.",
+  "source_sha256": "2931e479c41593bd30ff4a05aebb74bb60ef7dc38114f96f14336dee5ed0d2bf",
+  "tokenizer_identity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "enable_thinking": true,
+    "tokenizer_path": "/cra/qwen36-35B",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+  },
+  "empty_basis_message_omitted": true,
+  "results": [
+    {
+      "fixture": "current_user_source",
+      "old_tokens": 179,
+      "new_tokens": 150,
+      "old_chars": 690,
+      "new_chars": 549,
+      "semantic_projection_preserved": true,
+      "new_projection": {
+        "decision": "Apply the requirement to the intended audience",
+        "scope": {
+          "subject_ref": "u0",
+          "item": "document scope",
+          "context": "internal document"
+        },
+        "adopted_evidence": [
+          {
+            "ref": "c0",
+            "kind": "source",
+            "version": "source",
+            "spans": [
+              [
+                0,
+                50
+              ]
+            ],
+            "material_ref": "m3",
+            "version_status": "CURRENT",
+            "source_role": "user"
+          }
+        ],
+        "critical_gap": "Does the external audience requirement apply internally?",
+        "status": "active",
+        "host_intent": null,
+        "new_observations": [
+          "m8"
+        ],
+        "recheck_reasons": []
+      }
+    },
+    {
+      "fixture": "historical_partial_interpretation",
+      "old_tokens": 202,
+      "new_tokens": 170,
+      "old_chars": 766,
+      "new_chars": 609,
+      "semantic_projection_preserved": true,
+      "new_projection": {
+        "decision": "Apply the requirement to the intended audience",
+        "scope": {
+          "subject_ref": "u0",
+          "item": "document scope",
+          "context": "internal document"
+        },
+        "adopted_evidence": [
+          {
+            "ref": "c0",
+            "kind": "interpretation",
+            "version": "2",
+            "spans": [
+              [
+                5,
+                30
+              ]
+            ],
+            "material_ref": "m4",
+            "version_status": "HISTORICAL"
+          }
+        ],
+        "critical_gap": "Does the external audience requirement apply internally?",
+        "status": "needs_recheck",
+        "host_intent": "active",
+        "new_observations": [
+          "m8"
+        ],
+        "recheck_reasons": [
+          {
+            "ref": "c0",
+            "reason": "version_changed",
+            "current_version": "3"
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "replaced_user_source_and_current_tool_result",
+      "old_tokens": 245,
+      "new_tokens": 234,
+      "old_chars": 894,
+      "new_chars": 800,
+      "semantic_projection_preserved": true,
+      "new_projection": {
+        "decision": "Apply the requirement to the intended audience",
+        "scope": {
+          "subject_ref": "u0",
+          "item": "document scope",
+          "context": "internal document"
+        },
+        "adopted_evidence": [
+          {
+            "ref": "c0",
+            "kind": "source",
+            "version": "source",
+            "spans": [
+              [
+                0,
+                50
+              ]
+            ],
+            "material_ref": "m3",
+            "version_status": "HISTORICAL",
+            "source_role": "user"
+          },
+          {
+            "ref": "c1",
+            "kind": "source",
+            "version": "source",
+            "spans": [
+              [
+                10,
+                60
+              ]
+            ],
+            "material_ref": "m5",
+            "version_status": "CURRENT",
+            "source_role": "tool"
+          }
+        ],
+        "critical_gap": "Does the external audience requirement apply internally?",
+        "status": "needs_recheck",
+        "host_intent": "active",
+        "new_observations": [
+          "m8"
+        ],
+        "recheck_reasons": [
+          {
+            "ref": "c0",
+            "reason": "source_replaced",
+            "current_version": "replaced_or_unavailable"
+          }
+        ]
+      }
+    }
+  ],
+  "interpretation": "Local tokenizer representation sizes, not causal reasoning savings. Exact ranges and linked material identities remain; roles/currentness are explicitly labelled. Full binding data remain internal."
+}

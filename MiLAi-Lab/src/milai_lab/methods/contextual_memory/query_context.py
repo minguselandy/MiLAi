@@ -43,22 +43,31 @@ def project_query(
     query: str, *, task_context: dict[str, Any], state: Any,
     explicit_filters: dict[str, str], focus: str = "default", gap: str = "",
     anchor: dict[str, str] | None = None,
+    auto_gap_enabled: bool = False, host_intent: str = "active",
 ) -> dict[str, Any]:
     """Use the actual search request and declared filters, not State prose as a query."""
-    if focus == "critical_gap":
-        if query or not gap.strip():
-            raise ValueError("CRITICAL_GAP_REQUIRES_EMPTY_QUERY_AND_ACTIVE_GAP")
+    if focus not in {"default", "critical_gap"}:
+        raise ValueError("UNKNOWN_SEARCH_FOCUS")
+    if query.strip():
+        effective_query = query
+        origin = "explicit"
+    elif focus == "critical_gap" or (auto_gap_enabled and host_intent == "active"
+                                      and gap.strip()):
+        if not gap.strip():
+            raise ValueError("CRITICAL_GAP_REQUIRES_ACTIVE_GAP")
         scope = anchor or {}
         effective_query = " ".join(part for part in (
             gap.strip(), scope.get("item", "").strip(),
         ) if part)
-        origin = "critical_gap"
-    elif focus == "default":
-        effective_query = query or str(task_context.get("question", ""))
-        origin = "tool_argument" if query else "task_input"
+        origin = "gap"
     else:
-        raise ValueError("UNKNOWN_SEARCH_FOCUS")
-    sources: dict[str, Any] = {"query": origin, "focus_origin": focus}
+        effective_query = str(task_context.get("question", ""))
+        origin = "default"
+    sources: dict[str, Any] = {
+        "query": {"explicit": "tool_argument", "gap": "critical_gap",
+                  "default": "task_input"}[origin],
+        "focus_origin": focus,
+    }
     filters: dict[str, str] = {}
     for key in ("valid_at", "known_at", "date_from", "date_to", "session_id"):
         value = explicit_filters.get(key, "")
@@ -77,7 +86,8 @@ def project_query(
         sources["state_valid_at"] = "unverified_not_applied"
     if state.known_at and not filters["known_at"]:
         sources["state_known_at"] = "unverified_not_applied"
-    return {"effective_query": effective_query, "filters": filters, "sources": sources}
+    return {"effective_query": effective_query, "origin": origin,
+            "filters": filters, "sources": sources}
 
 
 def accept_evidence(

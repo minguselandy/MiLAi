@@ -1,5 +1,22 @@
 # MiLAi Lab goals
 
+## Sparse decision-basis Goal v11.0, implementation pending small validation (2026-09-25)
+
+[Goal v11.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md) and
+[detailed design](MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md)
+use `6722c5e` and the preserved v10 R2 evidence as the baseline. Planned work covers
+action-sensitive sparse activation, nullable gaps, program-owned recheck notifications,
+true no-ops, compact projection and explicit-query-first gap retrieval. Preparation must
+support frozen original arcs beyond the currently hard-coded arc0-000 without disabling
+identity or native scoring checks. Complete development first, then one exposed wiring
+regression and two previously unused original MERIT arcs across Notes, Sparse Basis and
+Sparse Basis + Attention. The Basis arms share recheck behavior so their difference isolates
+automatic gap routing. Status: `IMPLEMENTED_PENDING_SMALL_VALIDATION`: the B–D runtime,
+three-arm templates and frozen-selection preparation path are frozen after 94 narrow tests,
+static checks, 15 deployed decoder probes and three fixed projection comparisons. The
+exposed-arc A2 wiring regression is running; neither new arc nor the three-arm comparison
+has started. Ordinary stays default; cumulative caps remain null.
+
 ## Completed scoped decision-basis Goal v10.0 (2026-09-25)
 
 [Goal v10.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md) adds one

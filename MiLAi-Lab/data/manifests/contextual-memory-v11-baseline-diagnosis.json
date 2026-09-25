@@ -1,0 +1,689 @@
+{
+  "kind": "V11_A_OFFLINE_BASELINE_DIAGNOSIS",
+  "baseline_commit": "6722c5ea3363d33e366bfadad6ae4fcd941a6588",
+  "source_mapping_sha256": "6528ff9c69a567d40afb096e7ecb1c4e81aeafb3bee0c23b4dba20c57f58e9f4",
+  "verified_committed_source_files": 47,
+  "model_requests": 0,
+  "historical_artifacts_modified": false,
+  "arms": {
+    "basis": {
+      "generation": {
+        "requests": 45,
+        "prompt_tokens": 407174,
+        "completion_tokens": 121462,
+        "total_tokens": 528636,
+        "unknown_usage": 0
+      },
+      "truncations": [
+        {
+          "generation": 3,
+          "trace_row_zero_based": 20,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7859,
+            "total_tokens": 11955,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 922,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "memory_save",
+          "next_parseable_tool": "finish_turn",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 6,
+          "trace_row_zero_based": 38,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7381,
+            "total_tokens": 11477,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 678,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "send_message",
+          "next_parseable_tool": "memory_save",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 7,
+          "trace_row_zero_based": 40,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7436,
+            "total_tokens": 11532,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 678,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "send_message",
+          "next_parseable_tool": "memory_save",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 8,
+          "trace_row_zero_based": 42,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7490,
+            "total_tokens": 11586,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 678,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "send_message",
+          "next_parseable_tool": "memory_save",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 9,
+          "trace_row_zero_based": 44,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7544,
+            "total_tokens": 11640,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 678,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "send_message",
+          "next_parseable_tool": "memory_save",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 10,
+          "trace_row_zero_based": 46,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7598,
+            "total_tokens": 11694,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 678,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "send_message",
+          "next_parseable_tool": "memory_save",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 11,
+          "trace_row_zero_based": 48,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7652,
+            "total_tokens": 11748,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 678,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "send_message",
+          "next_parseable_tool": "memory_save",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 12,
+          "trace_row_zero_based": 50,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7706,
+            "total_tokens": 11802,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 678,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "send_message",
+          "next_parseable_tool": "memory_save",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 13,
+          "trace_row_zero_based": 52,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7760,
+            "total_tokens": 11856,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 678,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "send_message",
+          "next_parseable_tool": "memory_save",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 15,
+          "trace_row_zero_based": 59,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 8780,
+            "total_tokens": 12876,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 674,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "memory_save",
+          "next_parseable_tool": "finish_turn",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 22,
+          "trace_row_zero_based": 100,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 8027,
+            "total_tokens": 12123,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 692,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "memory_save",
+          "next_parseable_tool": "memory_read",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 28,
+          "trace_row_zero_based": 132,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 14390,
+            "total_tokens": 18486,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 651,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "memory_save",
+          "next_parseable_tool": "finish_turn",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 34,
+          "trace_row_zero_based": 170,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 10046,
+            "total_tokens": 14142,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 1022,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "get_policy",
+          "next_parseable_tool": "send_message",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 35,
+          "trace_row_zero_based": 172,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 10100,
+            "total_tokens": 14196,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 1022,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "get_policy",
+          "next_parseable_tool": "send_message",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 36,
+          "trace_row_zero_based": 174,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 10154,
+            "total_tokens": 14250,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 1022,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "get_policy",
+          "next_parseable_tool": "send_message",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 37,
+          "trace_row_zero_based": 176,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 10208,
+            "total_tokens": 14304,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 1022,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "get_policy",
+          "next_parseable_tool": "send_message",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 38,
+          "trace_row_zero_based": 178,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 10262,
+            "total_tokens": 14358,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 1022,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "get_policy",
+          "next_parseable_tool": "send_message",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        },
+        {
+          "generation": 39,
+          "trace_row_zero_based": 180,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 10316,
+            "total_tokens": 14412,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": true,
+          "basis_projection_chars": 1022,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "get_policy",
+          "next_parseable_tool": "send_message",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        }
+      ],
+      "consecutive_truncation_generations": [
+        [
+          3
+        ],
+        [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15
+        ],
+        [
+          22
+        ],
+        [
+          28
+        ],
+        [
+          34,
+          35,
+          36,
+          37,
+          38,
+          39
+        ]
+      ],
+      "request_occupancy": {
+        "numerator": 40,
+        "denominator": 45
+      },
+      "projection_characters": {
+        "min": 87,
+        "median": 678,
+        "max": 1022
+      },
+      "complete_set_proposals": 24,
+      "adjacent_literal_equal_set_pairs_including_rejected": 8,
+      "accepted_deltas": 23,
+      "equal_bound_semantics": 7,
+      "equal_with_delivered_change_to_acknowledge": 2,
+      "equal_without_presented_change": 5,
+      "accepted_sequence": [
+        {
+          "generation": 0,
+          "decision_id": "6b7360f4c3ab44c59142183c4caf1658",
+          "revision": 1,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 1,
+          "decision_id": "6b7360f4c3ab44c59142183c4caf1658",
+          "revision": 2,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m1"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 2,
+          "decision_id": "6b7360f4c3ab44c59142183c4caf1658",
+          "revision": 3,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m2"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 4,
+          "decision_id": "6b7360f4c3ab44c59142183c4caf1658",
+          "revision": 4,
+          "same_bound_semantics_as_prior_accepted": true,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 5,
+          "decision_id": "e3b55a5267e34d1584ff6355e5a08920",
+          "revision": 1,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 14,
+          "decision_id": "e3b55a5267e34d1584ff6355e5a08920",
+          "revision": 2,
+          "same_bound_semantics_as_prior_accepted": true,
+          "new_delivered_observations": [
+            "m7"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 16,
+          "decision_id": "e3b55a5267e34d1584ff6355e5a08920",
+          "revision": 3,
+          "same_bound_semantics_as_prior_accepted": true,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 17,
+          "decision_id": "e3b55a5267e34d1584ff6355e5a08920",
+          "revision": 4,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m24"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 18,
+          "decision_id": "e3b55a5267e34d1584ff6355e5a08920",
+          "revision": 5,
+          "same_bound_semantics_as_prior_accepted": true,
+          "new_delivered_observations": [
+            "m25"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 19,
+          "decision_id": "e3b55a5267e34d1584ff6355e5a08920",
+          "revision": 6,
+          "same_bound_semantics_as_prior_accepted": true,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 20,
+          "decision_id": "15b1cadb2b304223bf7a70cf0b8ddae5",
+          "revision": 1,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 23,
+          "decision_id": "15b1cadb2b304223bf7a70cf0b8ddae5",
+          "revision": 2,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m11"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 24,
+          "decision_id": "15b1cadb2b304223bf7a70cf0b8ddae5",
+          "revision": 3,
+          "same_bound_semantics_as_prior_accepted": true,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 26,
+          "decision_id": "15b1cadb2b304223bf7a70cf0b8ddae5",
+          "revision": 4,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m41"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 30,
+          "decision_id": "be452eae8e99433686f8b8a12850e675",
+          "revision": 1,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 31,
+          "decision_id": "be452eae8e99433686f8b8a12850e675",
+          "revision": 2,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m17"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 32,
+          "decision_id": "be452eae8e99433686f8b8a12850e675",
+          "revision": 3,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m18"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 33,
+          "decision_id": "be452eae8e99433686f8b8a12850e675",
+          "revision": 4,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m19"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 40,
+          "decision_id": "be452eae8e99433686f8b8a12850e675",
+          "revision": 5,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m20"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 41,
+          "decision_id": "be452eae8e99433686f8b8a12850e675",
+          "revision": 6,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m21"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 42,
+          "decision_id": "f9eab57485874c13afe4aa2db2233b23",
+          "revision": 1,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 43,
+          "decision_id": "f9eab57485874c13afe4aa2db2233b23",
+          "revision": 2,
+          "same_bound_semantics_as_prior_accepted": false,
+          "new_delivered_observations": [
+            "m14"
+          ],
+          "presented_version_notices": []
+        },
+        {
+          "generation": 44,
+          "decision_id": "f9eab57485874c13afe4aa2db2233b23",
+          "revision": 3,
+          "same_bound_semantics_as_prior_accepted": true,
+          "new_delivered_observations": [],
+          "presented_version_notices": []
+        }
+      ],
+      "artifact_sha256": {
+        "result.json": "cb65b1d3e45351a2b836352b3c259ba3760dce05454f4fa9f025a5e09f98b0d2",
+        "runtime/trace.jsonl": "bff689a4dd76ef91a47de01eeabdd0413b317cb26a107ebf39581e8e0ab997c7",
+        "runtime/accounting.json": "d9e90146fb17172b4760670ad18cbdd132cd7438c8f7cf612d9641ea6237226b"
+      }
+    },
+    "notes": {
+      "generation": {
+        "requests": 26,
+        "prompt_tokens": 203165,
+        "completion_tokens": 31667,
+        "total_tokens": 234832,
+        "unknown_usage": 0
+      },
+      "truncations": [
+        {
+          "generation": 15,
+          "trace_row_zero_based": 101,
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 10389,
+            "total_tokens": 14485,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null
+          },
+          "output_limit": 4096,
+          "basis_present": false,
+          "basis_projection_chars": 0,
+          "executable_json_present": false,
+          "reasoning_present": true,
+          "previous_parseable_tool": "send_message",
+          "next_parseable_tool": "memory_save",
+          "intended_action": "UNKNOWN_NO_EXECUTABLE_JSON"
+        }
+      ],
+      "consecutive_truncation_generations": [
+        [
+          15
+        ]
+      ],
+      "request_occupancy": {
+        "numerator": 0,
+        "denominator": 26
+      },
+      "projection_characters": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0
+      },
+      "complete_set_proposals": 0,
+      "adjacent_literal_equal_set_pairs_including_rejected": 0,
+      "accepted_deltas": 0,
+      "equal_bound_semantics": 0,
+      "equal_with_delivered_change_to_acknowledge": 0,
+      "equal_without_presented_change": 0,
+      "accepted_sequence": [],
+      "artifact_sha256": {
+        "result.json": "d53f2a0d9cdd717d9e97105d04fabece459db84f7741e7aab226be848a64fbd5",
+        "runtime/trace.jsonl": "f2e041c6fe97a42b8c10a9b99d729a4cecb4a71247a06dcf21642f7922e3adbe",
+        "runtime/accounting.json": "e7607fbcc16fe4da754dcca36c248b6c2278cb24f91bd5c5349844f90315b138"
+      }
+    }
+  },
+  "interpretation": {
+    "fact": "R2 truncations exhausted 4096 mixed output tokens before executable JSON; costs include all failures. Equal accepted semantics and new-observation acknowledgement opportunities are counted separately.",
+    "inference": "Sparse state, no-op handling and a compact projection are justified interventions, not established causes of the truncations.",
+    "unknown": "Missing JSON does not identify the intended action or State share of reasoning. A declaration acknowledging delivery is not proof of semantic review.",
+    "episode_3": "Decision was refund_requires_approval. get_order/get_policy/send_message had receipts; no approval-submission or refund receipt existed. Final claim of submitted approval was unsupported, not proof that the State caused it."
+  }
+}

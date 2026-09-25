@@ -54,16 +54,27 @@ def test_exact_adoption_continues_old_version_and_typed_checkpoint() -> None:
     memory.apply_decision(first)
     second = memory.publish(Observation("second", "Plan B", "tool", "fixture",
                                         supersedes=source))
-    assert first.status == "needs_recheck"
+    assert first.status == "active"
+    assert projected(first)["status"] == "needs_recheck"
     assert first.adopted[0].exact_ref == source
     assert first.recheck_reasons[0]["current_ref"] == second
+    third = memory.publish(Observation("third", "Plan C", "tool", "fixture",
+                                       supersedes=second))
+    assert [row["current_ref"] for row in first.recheck_reasons] == [second, third]
     assert source not in json.dumps(projected(first))
-    continued = bind_delta(proposal("c0", gap=""), current=first, task_id="task",
+    unpresented = bind_delta(proposal("c0"), current=first, task_id="task",
+                             visible={}, valid_subjects={"unknown": "unresolved"},
+                             unavailable=set(), current_ref=memory.resolve)
+    assert unpresented is first
+    continued = bind_delta(proposal("c0"), current=first, task_id="task",
                            visible={}, valid_subjects={"unknown": "unresolved"},
-                           unavailable=set(), current_ref=memory.resolve)
+                           unavailable=set(), current_ref=memory.resolve,
+                           presented_reasons=tuple(first.recheck_reasons))
     assert continued is not None and continued.adopted[0].exact_ref == source
-    assert continued.adopted[0].observed_ref == second
-    assert not mark_change(continued, exact_ref=source, current_ref=second,
+    assert continued.adopted[0].observed_ref == third
+    assert continued.revision == first.revision
+    assert not continued.recheck_reasons
+    assert not mark_change(continued, exact_ref=source, current_ref=third,
                            reason="adopted_version_changed")
     memory.apply_decision(continued)
     restored = ContextualMemory.restore(memory.checkpoint(), user_id="owner",
@@ -71,6 +82,11 @@ def test_exact_adoption_continues_old_version_and_typed_checkpoint() -> None:
     assert restored.state.active_decision is not None
     assert restored.state.active_decision.adopted[0].spans == ((0, 6),)
     assert restored.state.active_decision.adopted[0].exact_ref == source
+    old_format = memory.checkpoint()
+    old_format["format"] = "contextual-user-memory-v15"
+    with pytest.raises(ValueError, match="CHECKPOINT_USER_OR_VERSION_MISMATCH"):
+        ContextualMemory.restore(old_format, user_id="owner", embed=memory.embed,
+                                 decision_policy="basis")
     restored.start_task("other", "Another task")
     assert restored.state.active_decision is None
     with pytest.raises(ValueError, match="DECISION_EVIDENCE_BODY_NOT_DELIVERED"):
@@ -78,6 +94,47 @@ def test_exact_adoption_continues_old_version_and_typed_checkpoint() -> None:
                    visible={"m0": MaterialBinding(source, "source")},
                    valid_subjects={"unknown": "unresolved"}, unavailable=set(),
                    current_ref=memory.resolve)
+
+
+def test_nullable_gap_validates_before_clear_and_rejects_sentinels() -> None:
+    memory = bank()
+    current = bind_delta(proposal(), current=None, task_id="task", visible={},
+                         valid_subjects={"unknown": "unresolved"}, unavailable=set(),
+                         current_ref=memory.resolve)
+    assert current is not None
+    resolved = proposal()
+    resolved["critical_gap"] = None
+    assert bind_delta(resolved, current=current, task_id="task", visible={},
+                      valid_subjects={"unknown": "unresolved"}, unavailable=set(),
+                      current_ref=memory.resolve) is None
+    invalid = {**resolved, "adopted_evidence": ["unseen"]}
+    with pytest.raises(ValueError, match="DECISION_EVIDENCE_NOT_DELIVERED"):
+        bind_delta(invalid, current=current, task_id="task", visible={},
+                   valid_subjects={"unknown": "unresolved"}, unavailable=set(),
+                   current_ref=memory.resolve)
+    for sentinel in ("", "  ", "null", " None ", "unknown", "resolved"):
+        with pytest.raises(ValueError, match="DECISION_GAP_NOT_INFORMATION_NEED"):
+            bind_delta({**resolved, "critical_gap": sentinel}, current=current,
+                       task_id="task", visible={},
+                       valid_subjects={"unknown": "unresolved"}, unavailable=set(),
+                       current_ref=memory.resolve)
+
+
+def test_same_adopted_set_reordered_or_duplicated_is_noop() -> None:
+    memory = bank()
+    a = memory.publish(Observation("a", "Source A", "tool", "fixture"))
+    b = memory.publish(Observation("b", "Source B", "user", "fixture"))
+    visible = {"m0": MaterialBinding(a, "source", ((0, 8),), "a"),
+               "m1": MaterialBinding(b, "source", ((0, 8),), "b")}
+    current = bind_delta(proposal("m0", "m1"), current=None, task_id="task",
+                         visible=visible, valid_subjects={"unknown": "unresolved"},
+                         unavailable=set(), current_ref=memory.resolve)
+    assert current is not None
+    repeated = bind_delta(proposal("m1", "m0", "m1"), current=current, task_id="task",
+                          visible=visible, valid_subjects={"unknown": "unresolved"},
+                          unavailable=set(), current_ref=memory.resolve)
+    assert repeated is current
+    assert [row.exact_ref for row in repeated.adopted] == [a, b]
 
 
 def _business() -> tuple[BusinessTool, list[str]]:
@@ -144,12 +201,67 @@ def test_gap_focus_changes_actual_query_and_disabled_control_rejects() -> None:
     focused = memory.search(query="", focus="critical_gap", limit=1, max_bytes=1000)
     assert ordinary["query"] == "plan"
     assert focused["query"] == "latest terms? plan"
-    assert focused["query_projection"]["sources"]["focus_origin"] == "critical_gap"
-    with pytest.raises(ValueError, match="CRITICAL_GAP_REQUIRES"):
-        memory.search(query="other", focus="critical_gap")
+    assert focused["query_projection"]["origin"] == "gap"
+    assert memory.search(query="other", focus="critical_gap")["query"] == "other"
+    assert memory.search(query="")["query"] == "latest terms? plan"
     memory.decision_gap_focus = False
-    with pytest.raises(ValueError, match="CRITICAL_GAP_REQUIRES"):
-        memory.search(focus="critical_gap")
+    assert memory.search(query="")["query"] == "Check the plan"
+    assert memory.search(focus="critical_gap")["query"] == "latest terms? plan"
+    deferred = proposal(gap="wait for user?", item="approval")
+    deferred["status"] = "deferred"
+    memory.apply_decision(bind_delta(
+        deferred, current=current, task_id="task", visible={},
+        valid_subjects={"unknown": "unresolved"}, unavailable=set(),
+        current_ref=memory.resolve,
+    ))
+    memory.decision_gap_focus = True
+    assert memory.search(query="")["query"] == "Check the plan"
+    assert memory.search(query="precise terms")["query"] == "precise terms"
+    memory.advance_turn("New question for the same task")
+    assert memory.search(query="")["query"] == "New question for the same task"
+
+
+def test_null_delta_does_not_hide_new_notice_or_reuse_old_search() -> None:
+    memory = bank()
+    source = memory.publish(Observation("first", "Plan A", "tool", "fixture"))
+    current = bind_delta(
+        proposal("m0"), current=None, task_id="task",
+        visible={"m0": MaterialBinding(source, "source", ((0, 6),), "hash")},
+        valid_subjects={"unknown": "unresolved"}, unavailable=set(),
+        current_ref=memory.resolve,
+    )
+    memory.apply_decision(current)
+    searches = 0
+
+    def dispatch(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
+        nonlocal searches
+        result = memory.dispatch(name, arguments)
+        if name == "memory_search":
+            searches += 1
+            if searches == 1:
+                memory.publish(Observation("second", "Plan B", "tool", "fixture",
+                                           supersedes=source))
+        return result
+
+    events: list[dict[str, Any]] = []
+    actions = [
+        {"state_delta": None, "tool": "memory_search", "arguments": {"query": "plan"}},
+        {"state_delta": None, "tool": "memory_search", "arguments": {"query": "plan"}},
+        {"state_delta": None, "tool": "finish_turn", "arguments": {
+            "maintenance": {"decision": "processed", "remaining": []}, "answer": "Done",
+        }},
+    ]
+    with _client(actions, []) as client:
+        host = ContextualHost(client, dispatch, MEMORY_TOOLS, "Work", memory=memory,
+                              decision_policy="basis", emit=events.append,
+                              maintenance_policy="required",
+                              maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL)
+        result = host.run([], session=HostSession("task", memory), max_calls=3)
+    assert result.status == "complete" and searches == 2
+    assert not any(call.get("reused") for call in result.calls)
+    assert any(event.get("event") == "decision_change_notice" for event in events)
+    assert memory.state.active_decision is not None
+    assert memory.state.active_decision.recheck_reasons
 
 
 def test_notes_arm_keeps_same_generation_work_note_without_tool_argument() -> None:
@@ -196,14 +308,19 @@ def test_same_action_gap_delta_requeries_instead_of_reusing_old_cache() -> None:
         return result
 
     requests: list[dict[str, Any]] = []
+    events: list[dict[str, Any]] = []
     actions = [
         {"state_delta": proposal(gap="first terms?"), "tool": "memory_search",
-         "arguments": {"query": "", "focus": "critical_gap"}},
+         "arguments": {"query": ""}},
         {"state_delta": proposal(gap="second terms?"), "tool": "memory_search",
-         "arguments": {"query": "", "focus": "critical_gap"}},
+         "arguments": {"query": ""}},
         {"state_delta": proposal(gap="second terms?", item="revised plan"),
          "tool": "memory_search",
-         "arguments": {"query": "", "focus": "critical_gap"}},
+         "arguments": {"query": ""}},
+        {"state_delta": proposal(gap="second terms?", item="revised plan"),
+         "tool": "memory_search", "arguments": {"query": ""}},
+        {"state_delta": None, "tool": "memory_search",
+         "arguments": {"query": "manual override", "focus": "critical_gap"}},
         {"state_delta": None, "tool": "finish_turn", "arguments": {
             "maintenance": {"decision": "processed", "remaining": []}, "answer": "Done",
         }},
@@ -211,15 +328,26 @@ def test_same_action_gap_delta_requeries_instead_of_reusing_old_cache() -> None:
     with _client(actions, requests) as client:
         host = ContextualHost(
             client, dispatch, MEMORY_TOOLS, "Work", memory=memory,
-            decision_policy="basis",
+            decision_policy="basis", emit=events.append,
             maintenance_policy="required",
             maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL,
         )
-        result = host.run([], session=HostSession("task", memory), max_calls=4)
+        result = host.run([], session=HostSession("task", memory), max_calls=6)
     assert result.status == "complete"
     assert seen_queries == ["first terms? plan", "second terms? plan",
-                            "second terms? revised plan"]
+                            "second terms? revised plan", "manual override"]
     assert all(not call.get("reused", False) for call in result.calls[:3])
+    assert result.calls[3]["reused"] is True
+    assert result.active_decision["revision"] == 3
+    assert [event["origin"] for event in events
+            if event.get("event") == "search_query_resolved"] == [
+        "gap", "gap", "gap", "gap", "explicit",
+    ]
+    assert all("Current task decision" not in message["content"]
+               for message in requests[0]["messages"] if message["role"] == "user")
+    assert next(event for event in events
+                if event.get("event") == "generation_request_segments")[
+                    "basis_present"] is False
     assert result.active_decision is not None
     assert result.active_decision["critical_gap"] == "second terms?"
     assert memory.state.active_decision is not None

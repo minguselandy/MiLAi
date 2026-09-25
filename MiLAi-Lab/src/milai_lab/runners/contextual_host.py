@@ -17,12 +17,14 @@ from milai_lab.methods.contextual_memory.decision_basis import (
     STATE_DELTA_SCHEMA,
     WORK_NOTE_SCHEMA,
     bind_delta,
+    transition_kind,
 )
 from milai_lab.methods.contextual_memory.decision_basis import (
     projected as projected_decision,
 )
 from milai_lab.methods.contextual_memory.models import Observation, receipt_outcome
 from milai_lab.methods.contextual_memory.operations import TaskEnvelope, new_save_operation_id
+from milai_lab.methods.contextual_memory.query_context import project_query
 from milai_lab.methods.contextual_memory.write_contract import apply_content_patch
 from milai_lab.methods.contextual_user_memory import TOOLS as MEMORY_TOOLS
 from milai_lab.methods.contextual_user_memory import ContextualMemory
@@ -60,7 +62,7 @@ if TYPE_CHECKING:
 Dispatch = Callable[[str, dict[str, Any]], dict[str, Any]]
 READ_ONLY_TOOLS = frozenset({"memory_search", "memory_read"})
 NO_PROGRESS_LIMIT = 3
-ACTION_PROTOCOL = "contextual-json-action-v2"
+ACTION_PROTOCOL = "contextual-json-action-v3"
 FINAL_ANSWER_RESPONSE_FORMAT: dict[str, Any] = {
     "type": "json_schema",
     "json_schema": {
@@ -349,24 +351,25 @@ class ContextualHost:
                 "choosing CREATE or REVISE. Routine outputs, temporary instructions and "
                 "unchanged understanding need no write."
             )
+        protocol_prompt += (
+            "\nTreat business tool receipts as execution facts. A plan, message, working "
+            "decision or complete finish does not prove an unexecuted business action; "
+            "state clearly when a requested action was not performed."
+        )
+        sidecar_instruction_start = len(protocol_prompt)
         if self.decision_policy == "basis":
             protocol_prompt += (
-                "\nIn the same JSON action, choose state_delta independently from the tool. "
-                "Use {op:'set', decision, scope:{subject_ref,item,context}, "
-                "adopted_evidence, critical_gap, status} to create the first current decision "
-                "or replace an existing one. Use null only to leave it unchanged, or "
-                "{op:'clear'} to clear it. Maintain a decision when a current judgment, "
-                "adopted evidence, or a concrete gap can guide later actions; a simple "
-                "one-step action can use null. Update it only when useful; no fixed update "
-                "cadence or extra State call is required. Choose adopted_evidence from "
-                "delivered body refs or cN "
-                "continued exact versions; a link alone is not read evidence. For "
-                "scope.subject_ref choose a published subject catalogue handle; use "
-                "unknown when unresolved, not a guessed business ID. A decision "
-                "is a working judgment, not proof or a business receipt. A changed adopted "
-                "version needs review; a new observation may matter even with no old link. "
-                "Use memory_search focus=critical_gap only for a concrete information need, "
-                "with empty query."
+                "\nChoose state_delta in the same JSON action, without an extra State call. "
+                "Set a short decision only while an unresolved distinction could change "
+                "your next meaningful action. Null leaves the current decision unchanged; "
+                "clear ends it when resolved. A set with critical_gap:null also ends it "
+                "after validation. Use a concrete information need, not 'none' or 'null', "
+                "for an active gap; use deferred when waiting for user input. Host status "
+                "is active or deferred; actual version-change notices are program-owned. "
+                "Adopt only delivered body refs or cN continued exact versions. Choose "
+                "scope.subject_ref from published subject handles, or unknown. Ordinary "
+                "memory_search with no query can use an active gap when enabled; an "
+                "explicit query always wins. Keep the decision only when useful."
             )
         elif self.decision_policy == "notes":
             protocol_prompt += (
@@ -376,6 +379,7 @@ class ContextualHost:
                 "gap, and a better query to run; revise it when useful. Use the same memory "
                 "and business tools. This note is task-local."
             )
+        sidecar_instruction = protocol_prompt[sidecar_instruction_start:]
         maintenance_required = self.maintenance_policy == "required"
         semantic_maintenance = (maintenance_required and self.maintenance_protocol ==
                                 SEMANTIC_MAINTENANCE_PROTOCOL)
@@ -494,6 +498,25 @@ class ContextualHost:
         delivery = session.delivery
         bound_memory = self.memory
         material_view = session.material_view
+
+        def search_projection(arguments: dict[str, Any], decision: Any = None,
+                              *, proposed: bool = False) -> dict[str, Any]:
+            assert bound_memory is not None
+            active = decision if proposed else bound_memory.state.active_decision
+            return project_query(
+                arguments.get("query", ""),
+                task_context=bound_memory.state.query_context,
+                state=bound_memory.state,
+                explicit_filters={key: arguments.get(key, "") for key in (
+                    "valid_at", "known_at", "date_from", "date_to", "session_id"
+                )},
+                focus=arguments.get("focus", "default"),
+                gap=active.critical_gap if active is not None else "",
+                anchor=active.scope if active is not None else {},
+                host_intent=active.status if active is not None else "active",
+                auto_gap_enabled=(bound_memory.decision_policy == "basis"
+                                  and bound_memory.decision_gap_focus),
+            )
         if material_view is not None:
             transcript[0]["content"] += (
                 "\nSubject handles (identity, not topic): "
@@ -519,6 +542,7 @@ class ContextualHost:
             and bound_memory.execution_context.phase == "answer"
             else "free"
         )
+        presented_reasons: tuple[dict[str, str], ...] = ()
         if active_stage != "free":
             if budget < 3:
                 return HostResult("", "state_budget_insufficient", [], _empty_usage(), 0.0, [])
@@ -586,9 +610,26 @@ class ContextualHost:
                     result.status = "maintenance_pending"
             return result
 
+        def emit_action_consumed(name: str, *, cached: bool = False) -> None:
+            if self.emit:
+                decision = (bound_memory.state.active_decision
+                            if bound_memory is not None else None)
+                self.emit({
+                    "event": "decision_action_consumed",
+                    "session_id": session.session_id, "turn_id": session.turn_id,
+                    "request_index": model_calls - 1,
+                    "tool": name, "cached": cached,
+                    "basis_present": self.decision_policy == "basis" and decision is not None,
+                    "decision_id": decision.decision_id
+                    if self.decision_policy == "basis" and decision else None,
+                    "decision_revision": decision.revision
+                    if self.decision_policy == "basis" and decision else None,
+                })
+
         def finish_answer(action: dict[str, Any]) -> HostResult | None:
             nonlocal no_progress
             if not maintenance_required:
+                emit_action_consumed("finish_turn")
                 return make_result(action["answer"], "complete")
             try:
                 validate(action, SEMANTIC_FINAL_SCHEMA if semantic_maintenance else FINAL_SCHEMA)
@@ -610,6 +651,7 @@ class ContextualHost:
             if self.emit:
                 self.emit({"event": "maintenance_review", "session_id": session.session_id,
                            "turn_id": session.turn_id, **reviewed})
+            emit_action_consumed("finish_turn")
             return make_result(action["answer"], "complete" if reviewed["status"] == "complete"
                                else "maintenance_pending")
 
@@ -791,13 +833,10 @@ class ContextualHost:
                     for binding in session.visible_bindings.values()
                     if binding.kind == "source" and binding.spans
                 ), default=0),
+                presented_reasons=presented_reasons,
             )
-            if name == "memory_search" and action["arguments"].get("focus") == "critical_gap":
-                if not bound_memory.decision_gap_focus:
-                    raise InvalidToolCall("CRITICAL_GAP_FOCUS_DISABLED")
-                if (candidate is None or not candidate.critical_gap.strip()
-                        or action["arguments"].get("query", "")):
-                    raise InvalidToolCall("CRITICAL_GAP_REQUIRES_EMPTY_QUERY_AND_ACTIVE_GAP")
+            if name == "memory_search":
+                search_projection(action["arguments"], candidate, proposed=True)
             return candidate
 
         def apply_sidecar(action: dict[str, Any], candidate: Any) -> None:
@@ -810,22 +849,39 @@ class ContextualHost:
                         self.emit({"event": "work_note_saved", "task_id":
                                    bound_memory.state.task_id, "characters": len(candidate)})
                 return
+            if action["state_delta"] is None:
+                if self.emit:
+                    self.emit({"event": "decision_transition", "kind": "UNCHANGED_NULL",
+                               "task_id": bound_memory.state.task_id,
+                               "request_index": model_calls - 1})
+                return
             if action["state_delta"] is not None:
+                old = bound_memory.state.active_decision
+                transition = transition_kind(old, candidate, action["state_delta"])
+                if transition == "NO_STATE_CHANGE":
+                    if self.emit:
+                        self.emit({"event": "decision_transition", "kind": transition,
+                                   "task_id": bound_memory.state.task_id,
+                                   "request_index": model_calls - 1})
+                    return
                 old_focus = (
                     bound_memory.state.active_decision.critical_gap,
                     bound_memory.state.active_decision.scope.get("item", ""),
-                ) if bound_memory.state.active_decision else ("", "")
+                    bound_memory.state.active_decision.status,
+                ) if bound_memory.state.active_decision else ("", "", "")
                 bound_memory.apply_decision(candidate)
-                new_focus = (candidate.critical_gap, candidate.scope.get("item", "")) if (
-                    candidate is not None
-                ) else ("", "")
+                new_focus = (
+                    candidate.critical_gap, candidate.scope.get("item", ""), candidate.status,
+                ) if candidate is not None else ("", "", "")
                 if old_focus != new_focus:
                     read_cache.clear()
                 persist()
                 if self.emit:
                     self.emit({
-                        "event": "decision_delta_accepted",
+                        "event": "decision_transition",
+                        "kind": transition,
                         "task_id": bound_memory.state.task_id,
+                        "request_index": model_calls - 1,
                         "decision_id": candidate.decision_id if candidate else None,
                         "revision": candidate.revision if candidate else None,
                         "adopted": [
@@ -833,6 +889,10 @@ class ContextualHost:
                             for row in candidate.adopted
                         ] if candidate else [],
                         "focus_changed": old_focus != new_focus,
+                        "acknowledged_reasons": (
+                            len(old.recheck_reasons) - len(candidate.recheck_reasons)
+                            if old is not None and candidate is not None else 0
+                        ),
                     })
 
         def record_tool_message(outcome: dict[str, Any]) -> None:
@@ -905,9 +965,28 @@ class ContextualHost:
                     # QueryContext is task-local state changed by this read-only call.
                     read_cache.clear()
                     last_condition_evidence = evidence
-            key = _json([name, arguments], canonical=True) if name in READ_ONLY_TOOLS else None
+            projected_search = (
+                search_projection(dispatched_arguments)
+                if name == "memory_search" and bound_memory is not None else None
+            )
+            material_identity = (
+                [bound_memory.last_known_at, bound_memory.forget_generation,
+                 bound_memory.next_source_sequence,
+                 bound_memory.state.active_decision.recheck_reasons
+                 if bound_memory.state.active_decision is not None else []]
+                if projected_search is not None and bound_memory is not None else None
+            )
+            key = (_json([name, arguments, projected_search, material_identity], canonical=True)
+                   if name in READ_ONLY_TOOLS else None)
             if key is not None and key in read_cache:
                 previous = read_cache[key]
+                if self.emit and projected_search is not None:
+                    self.emit({"event": "search_query_resolved",
+                               "session_id": session.session_id, "turn_id": session.turn_id,
+                               "request_index": model_calls - 1,
+                               "effective_query": projected_search["effective_query"],
+                               "origin": projected_search["origin"],
+                               "cached": True, "retrieval_executed": False})
                 no_progress += 1
                 return {
                     "ok": calls[previous]["ok"],
@@ -975,6 +1054,14 @@ class ContextualHost:
                         "turn_id": session.turn_id, "result": projected_business}
             if not isinstance(result, dict):
                 raise TypeError("memory dispatch must return a dict")
+            if self.emit and projected_search is not None:
+                self.emit({"event": "search_query_resolved",
+                           "session_id": session.session_id, "turn_id": session.turn_id,
+                           "request_index": model_calls - 1,
+                           "effective_query": projected_search["effective_query"],
+                           "origin": projected_search["origin"],
+                           "cached": False, "retrieval_executed": True,
+                           "tool_call_id": call_id})
             receipt = receipt_outcome(name, result)
             internal_result = result
             if name == "memory_save":
@@ -1108,6 +1195,8 @@ class ContextualHost:
             if final_request and active_stage != "free":
                 return make_result("", "state_unconsumed")
             request_transcript = list(transcript)
+            decision_projection_text = ""
+            presented_reasons = ()
             if self.decision_policy == "basis" and bound_memory is not None:
                 current_decision = bound_memory.state.active_decision
                 subject_alias = "unknown"
@@ -1121,19 +1210,57 @@ class ContextualHost:
                             and material_view.binding(item["ref"]).exact_ref ==
                             current_decision.scope["subject_ref"])
                     ), "unknown")
-                request_transcript.append({
-                    "role": "user", "content": "Current task decision (cN keeps an already "
-                    "adopted exact version, not a new read): " +
-                    _json(projected_decision(current_decision,
-                                             subject_alias=subject_alias,
-                                             new_observations=tuple(
-                        alias for alias, binding in session.visible_bindings.items()
-                        if current_decision is not None and binding.kind == "source"
-                        and binding.spans and bound_memory.source_sequence.get(
-                            binding.exact_ref, 0
-                        ) > current_decision.last_delivered_source_sequence
-                    ))),
-                })
+                if current_decision is not None:
+                    presented_reasons = tuple(dict(row)
+                                              for row in current_decision.recheck_reasons)
+                    material_labels: dict[str, dict[str, str]] = {}
+                    for adopted in current_decision.adopted:
+                        label: dict[str, str] = {}
+                        visible_alias = next((
+                            alias for alias, binding in session.visible_bindings.items()
+                            if binding.exact_ref == adopted.exact_ref and binding.spans
+                        ), None)
+                        if visible_alias is not None:
+                            label["material_ref"] = visible_alias
+                        try:
+                            label["version_status"] = (
+                                "CURRENT" if bound_memory.resolve(adopted.exact_ref)
+                                == adopted.exact_ref else "HISTORICAL"
+                            )
+                        except (KeyError, ValueError):
+                            label["version_status"] = "UNAVAILABLE"
+                        if adopted.kind == "source" and adopted.exact_ref in bound_memory.sources:
+                            label["source_role"] = bound_memory.sources[adopted.exact_ref].role
+                        material_labels[adopted.exact_ref] = label
+                    decision_projection_text = (
+                        "Current task decision (cN keeps an adopted exact version): "
+                        + _json(projected_decision(
+                            current_decision, subject_alias=subject_alias,
+                            material_labels=material_labels,
+                            new_observations=tuple(
+                                alias for alias, binding in session.visible_bindings.items()
+                                if binding.kind == "source" and binding.spans
+                                and bound_memory.source_sequence.get(
+                                    binding.exact_ref, 0
+                                ) > current_decision.last_delivered_source_sequence
+                            ),
+                        ))
+                    )
+                    request_transcript.append({"role": "user",
+                                               "content": decision_projection_text})
+                    announced = session.maintenance.setdefault("decision_notice_ids", [])
+                    for reason in presented_reasons:
+                        notice_id = _json([current_decision.decision_id, reason],
+                                          canonical=True)
+                        if notice_id not in announced:
+                            announced.append(notice_id)
+                            if self.emit:
+                                self.emit({"event": "decision_change_notice",
+                                           "session_id": session.session_id,
+                                           "turn_id": session.turn_id,
+                                           "request_index": model_calls,
+                                           "decision_id": current_decision.decision_id,
+                                           **reason})
             elif self.decision_policy == "notes" and bound_memory is not None:
                 request_transcript.append({
                     "role": "user", "content": "Current task work note: " +
@@ -1190,8 +1317,7 @@ class ContextualHost:
             if self.decision_policy != "off":
                 request_tools = _focus_tools(
                     request_tools,
-                    allow_gap=(self.decision_policy == "basis" and bound_memory is not None
-                               and bound_memory.decision_gap_focus),
+                    allow_gap=self.decision_policy == "basis",
                 )
             response_format = (
                 (_required_tool_response_format(
@@ -1205,6 +1331,56 @@ class ContextualHost:
                      decision_policy=self.decision_policy))
                 if self.client.config.tool_mode == "json_action" else None
             )
+            if self.emit:
+                capacity = getattr(self.client, "capacity", None)
+
+                def segment_tokens(value: str, counter: HostCapacity | None = capacity
+                                   ) -> int | None:
+                    return counter.text_tokens(value) if counter is not None else None
+
+                sidecar_values: list[str] = []
+                unparsed_sidecars = 0
+                sidecar_key = "state_delta" if self.decision_policy == "basis" else "work_note"
+                for item in transcript:
+                    content = item.get("content")
+                    if (item.get("role") != "assistant" or not isinstance(content, str)
+                            or f'"{sidecar_key}"' not in content):
+                        continue
+                    try:
+                        historical = json.loads(content)
+                    except json.JSONDecodeError:
+                        unparsed_sidecars += 1
+                        continue
+                    if isinstance(historical, dict) and sidecar_key in historical:
+                        sidecar_values.append(_json(historical[sidecar_key]))
+                old_sidecars = "\n".join(sidecar_values)
+                current_for_trace = (bound_memory.state.active_decision
+                                     if bound_memory is not None else None)
+                self.emit({
+                    "event": "generation_request_segments",
+                    "session_id": session.session_id, "turn_id": session.turn_id,
+                    "request_index": model_calls,
+                    "basis_present": self.decision_policy == "basis"
+                    and current_for_trace is not None,
+                    "decision_id": current_for_trace.decision_id
+                    if self.decision_policy == "basis" and current_for_trace else None,
+                    "decision_revision": current_for_trace.revision
+                    if self.decision_policy == "basis" and current_for_trace else None,
+                    "basis_gap_eligible": bool(
+                        self.decision_policy == "basis" and current_for_trace is not None
+                        and current_for_trace.status == "active"
+                        and current_for_trace.critical_gap
+                    ),
+                    "auto_gap_enabled": bool(bound_memory is not None
+                                             and bound_memory.decision_gap_focus),
+                    "fixed_contract_tokens": segment_tokens(str(transcript[0]["content"])),
+                    "state_fixed_instruction_tokens": segment_tokens(sidecar_instruction),
+                    "decision_projection_tokens": segment_tokens(decision_projection_text),
+                    "historical_sidecar_tokens": segment_tokens(old_sidecars),
+                    "historical_sidecar_unparsed": unparsed_sidecars,
+                    "segment_note": "Local tokenizer estimates; fixed includes the state "
+                                    "instruction subset. Segments are not additive.",
+                })
             receipt = self.client.chat(
                 request_transcript,
                 request_tools if native else None,
@@ -1455,6 +1631,8 @@ class ContextualHost:
                 outcome = execute_tool(action["tool"], arguments)
             outcome["remaining_model_calls"] = budget - model_calls
             calls.append({"name": action["tool"], "arguments": arguments, **outcome})
+            if outcome.get("tool_call_id"):
+                emit_action_consumed(action["tool"])
             transcript.append(
                 {"role": "user", "content": f"json_action tool result: {_json(outcome)}"}
             )

@@ -1,4 +1,4 @@
-"""Prepare a pinned MERIT run from the v9 or v10 task template."""
+"""Prepare a pinned MERIT run from a task template and frozen selection."""
 
 from __future__ import annotations
 
@@ -20,6 +20,11 @@ TEMPLATE = LAB / "configs/contextual-memory-v9-template.json"
 V10_TEMPLATES = (
     "configs/contextual-memory-v10-notes-template.json",
     "configs/contextual-memory-v10-basis-template.json",
+)
+V11_TEMPLATES = (
+    "configs/contextual-memory-v11-notes-template.json",
+    "configs/contextual-memory-v11-sparse-template.json",
+    "configs/contextual-memory-v11-attention-template.json",
 )
 PINNED_SELECTION = LAB / "data/manifests/contextual-memory-v7-e0-selection-final.json"
 PINNED_MERIT_COMMIT = "293933d96b1d1849e1f20d1bb324def5de9ed33f"
@@ -90,8 +95,9 @@ def model_files(root: Path, *, weights: bool) -> dict[str, Any]:
     }
 
 
-def source_mapping(*, v10: bool = False) -> dict[str, str]:
-    paths = [*SOURCE_FILES, *(V10_TEMPLATES if v10 else ()), *(
+def source_mapping(*, v10: bool = False, v11: bool = False) -> dict[str, str]:
+    templates = V11_TEMPLATES if v11 else V10_TEMPLATES if v10 else ()
+    paths = [*SOURCE_FILES, *templates, *(
         str(path.relative_to(LAB))
         for path in sorted((LAB / "src/milai_lab/methods/contextual_memory").glob("*.py"))
     )]
@@ -110,6 +116,7 @@ def prepare(
     host_url: str, embedding_url: str, budget_path: Path,
     host_model: str | None = None, embedding_model: str | None = None,
     embedding_tokenizer: Path | None = None, template_path: Path = TEMPLATE,
+    selection_template_path: Path = PINNED_SELECTION,
 ) -> dict[str, str]:
     output_dir = output_dir.resolve()
     merit_root = merit_root.resolve()
@@ -128,7 +135,7 @@ def prepare(
         raise ValueError("MERIT_SOURCE_COMMIT_CHANGED")
     template = read_json(template_path)
     version = template.get("config_version")
-    if version == "contextual-task-v10":
+    if version in {"contextual-task-v10", "contextual-task-v11"}:
         policy = template.get("decision_policy")
         if (policy not in {"notes", "basis"} or template.get("state_policy") != "off"
                 or template.get("maintenance_protocol") != "turn-maintenance-v3"
@@ -137,9 +144,26 @@ def prepare(
                 or type(template.get("decision_gap_focus")) is not bool
                 or (policy == "notes" and (template["decision_feedback"]
                                            or template["decision_gap_focus"]))):
-            raise ValueError("V10_TEMPLATE_DECISION_CONTRACT_MISMATCH")
-        arm = "react_notes_v10_off" if policy == "notes" else "decision_basis_v10_off"
-        label = "V10"
+            raise ValueError("TEMPLATE_DECISION_CONTRACT_MISMATCH")
+        if version == "contextual-task-v11":
+            template_key = _within_lab(template_path)
+            arm = {
+                V11_TEMPLATES[0]: "react_notes_v11_off",
+                V11_TEMPLATES[1]: "sparse_basis_v11_off",
+                V11_TEMPLATES[2]: "sparse_basis_attention_v11_off",
+            }.get(template_key)
+            if arm is None or (policy == "notes") != (arm == "react_notes_v11_off") or (
+                policy == "basis" and (
+                    template["decision_feedback"] is not True or
+                    template["decision_gap_focus"] !=
+                    (arm == "sparse_basis_attention_v11_off")
+                )
+            ):
+                raise ValueError("V11_TEMPLATE_ARM_MISMATCH")
+            label = "V11"
+        else:
+            arm = "react_notes_v10_off" if policy == "notes" else "decision_basis_v10_off"
+            label = "V10"
     elif version == "contextual-task-v9":
         arm, label = "ordinary_v9_off", "V9"
     else:
@@ -203,7 +227,8 @@ def prepare(
     template_key = _within_lab(template_path)
     if version == "contextual-task-v10" and template_key not in V10_TEMPLATES:
         raise ValueError("V10_TEMPLATE_PATH_NOT_PINNED")
-    mapping = source_mapping(v10=version == "contextual-task-v10")
+    mapping = source_mapping(v10=version == "contextual-task-v10",
+                             v11=version == "contextual-task-v11")
     freeze = {
         "status": "DEVELOPMENT_COMPLETE_READY_FOR_BENCHMARK_SELECTION",
         "source_sha256": mapping, "source_mapping_sha256": digest(mapping),
@@ -211,11 +236,15 @@ def prepare(
     }
     freeze_path = output_dir / "freeze.json"
     write_json(freeze_path, freeze)
-    selection = copy.deepcopy(read_json(PINNED_SELECTION))
-    selection["status"] = f"{label}_PINNED_ORIGINAL_ARC"
-    selection["selection_role"] = (
-        "Previously exposed fixed arc for continuous validation; not a new independent sample."
-    )
+    selection = copy.deepcopy(read_json(selection_template_path))
+    selection["status"] = f"{label}_PINNED_ARC"
+    selection["selection_template_path"] = _within_lab(selection_template_path)
+    selection["selection_template_sha256"] = file_sha256(selection_template_path)
+    if selection_template_path.resolve() == PINNED_SELECTION.resolve():
+        selection["selection_role"] = (
+            "Previously exposed fixed arc for continuous validation; "
+            "not a new independent sample."
+        )
     selection["external_root"] = str(merit_root)
     selection["source_commit"] = PINNED_MERIT_COMMIT
     selection["execution_plan"]["arms"] = [arm]
@@ -234,22 +263,26 @@ def prepare(
     arc_bytes = json.dumps(
         asdict(arc), ensure_ascii=False, sort_keys=True, separators=(",", ":"),
     ).encode()
-    if arc.arc_id != "arc0-000" or hashlib.sha256(arc_bytes).hexdigest() != ARC_SHA256:
+    expected = selection["private_artifacts"]
+    arc_sha = hashlib.sha256(arc_bytes).hexdigest()
+    if (arc.arc_id != selection["arc_id"] or arc.seed != selection["arc_seed"]
+            or arc_sha != expected["arc_sha256"]):
         raise ValueError("MERIT_ARC_IDENTITY_MISMATCH")
-    arc_path = output_dir / "merit-d1-hard-arc0-000.original.json"
+    arc_path = output_dir / f"{arc.arc_id}.original.json"
     arc_path.write_bytes(arc_bytes)
     world = arc.make_world()
     try:
         world_bytes = world.dump_json().encode()
     finally:
         world.conn.close()
-    if hashlib.sha256(world_bytes).hexdigest() != WORLD_SHA256:
+    world_sha = hashlib.sha256(world_bytes).hexdigest()
+    if world_sha != expected["initial_world_sha256"]:
         raise ValueError("MERIT_INITIAL_WORLD_CHANGED")
-    world_path = output_dir / "merit-d1-hard-arc0-000.initial-world.json"
+    world_path = output_dir / f"{arc.arc_id}.initial-world.json"
     world_path.write_bytes(world_bytes)
     selection["private_artifacts"].update(
-        arc=str(arc_path), arc_sha256=ARC_SHA256,
-        initial_world=str(world_path), initial_world_sha256=WORLD_SHA256,
+        arc=str(arc_path), arc_sha256=arc_sha,
+        initial_world=str(world_path), initial_world_sha256=world_sha,
     )
     selection_path = output_dir / "selection.json"
     write_json(selection_path, selection)
@@ -257,8 +290,8 @@ def prepare(
     return {
         "selection": str(selection_path), "config": str(config_path),
         "freeze": str(freeze_path), "run_output": str(output_dir / "run"),
-        "budget_path": str(budget_path), "arc_sha256": ARC_SHA256,
-        "initial_world_sha256": WORLD_SHA256,
+        "budget_path": str(budget_path), "arc_sha256": arc_sha,
+        "initial_world_sha256": world_sha,
     }
 
 
@@ -275,6 +308,8 @@ def main() -> None:
     parser.add_argument("--embedding-model")
     parser.add_argument("--embedding-tokenizer", type=Path)
     parser.add_argument("--template", type=Path, default=TEMPLATE)
+    parser.add_argument("--selection-template", type=Path, default=PINNED_SELECTION,
+                        help="Frozen native arc identity and generator arguments")
     parser.add_argument("--budget-path", type=Path,
                         default=LAB / "artifacts/contextual-user-memory/v9-budget.json")
     parser.add_argument("--live", action="store_true",
@@ -288,6 +323,7 @@ def main() -> None:
         embedding_model=args.embedding_model,
         embedding_tokenizer=args.embedding_tokenizer,
         template_path=args.template,
+        selection_template_path=args.selection_template,
     )
     print(json.dumps({"status": "PREPARED_ZERO_MODEL", **result}, ensure_ascii=False))
     if args.live:

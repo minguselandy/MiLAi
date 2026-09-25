@@ -1,0 +1,308 @@
+{
+  "kind": "V11_PROSPECTIVE_SELECTION_POLICY",
+  "recorded_utc": "2026-09-25T06:11:41.338320+00:00",
+  "status": "BEFORE_DEVELOPMENT_FREEZE_NO_NEW_TASK_GENERATED",
+  "scope": "Two complete previously unexposed instances from pinned official MERIT generator, not new task types.",
+  "development_regression": {
+    "arc_id": "arc0-000",
+    "base_seed": 0,
+    "arm": "A2",
+    "complete_runs_planned": 1,
+    "purpose": "Wiring regression only; historical Notes are not a matched comparator"
+  },
+  "new_selection_rule": {
+    "algorithm": "After development freeze and old-arc wiring, choose the two smallest positive base_seed values absent from recorded exposure. For each call official generate_suite(n_arcs=1, episodes_per_arc=5, dep_ratio=0.5, difficulty=hard). Retain every episode/message/checker. Freeze generated hashes before any arm sees the task. If a generated hash matches known exposure, record duplicate and move to next unused seed before model execution.",
+    "exclusion": "No inspection of new task texts or performance before the implementation freeze; no score-based reselection or replacement after execution.",
+    "official_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+    "run_order_first_selected_arc": [
+      "A0",
+      "A1",
+      "A2"
+    ],
+    "run_order_second_selected_arc": [
+      "A2",
+      "A1",
+      "A0"
+    ],
+    "balance": "Reverse order balances each arm mean position across two arcs; two blocks cannot identify arbitrary order effects.",
+    "initial_conditions": "Independent original world, empty memory, fresh embedding cache for each arm x arc; same model/thinking/tokens/tool capacity and continuous v11 accounting.",
+    "after_exposure": "Method changes invalidate the unexposed interpretation for affected tasks; no automatic additional sample."
+  },
+  "exposure_records": [
+    {
+      "path": "artifacts/contextual-user-memory/v10-basis-prepared/selection.json",
+      "sha256": "739fcdad339e779473b6a9e89473b34b57cd8e4c0e0d71af91b45ac282249d84",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-notes-prepared/selection.json",
+      "sha256": "964397e8ae4214607528772aad5552a28a9c94b26f077ef5a9ae504bc5c35935",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-r2-basis-prepared/selection.json",
+      "sha256": "ad3034b1d80275a133d585a898867f86d4054b845a197698a0a549761fd70171",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v10-r2-notes-prepared/selection.json",
+      "sha256": "835e75bcab85272dd01430bf4c2b65eb683c6707d7cc937c5866e2a7a7eacaaa",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v7-merit-e1-prepare/manifest.json",
+      "sha256": "736be04153b422a4af9e39f278db66a5731c7df01eae7a7b1157adb114e34393",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v7-merit-e1-prepared/manifest.json",
+      "sha256": "76fc5d19fb34452cbd62e80b7758f53ffe0ae1339f96353481b7c702ec2d1886",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v7-merit-retention-repair/manifest.json",
+      "sha256": "8e622331a953f8bae264f9bf24f8137129b706b4b03d326f66b3737e13b54617",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v7-merit-scope-repair/manifest.json",
+      "sha256": "a9b7fd71c0dfea58ad5b236c59cb0428ec72f175a5aa20be2c72697e6cfce164",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v8-merit-final-episode/validation-selection.json",
+      "sha256": "b5b43b4ae0e7e2e087829c1851844654d1a23e64cfaeaeda58edb71dd4c6c1b4",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v8-merit-maintenance-repair/manifest.json",
+      "sha256": "2ebc2872abc3f73b662e54f98fd854ffb2e3d2e3c3ca7f71ea01927cbb834cb5",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v8-merit-regression/manifest.json",
+      "sha256": "f7947e09b78e5b658f227e29be74a84de8dc7ceb9acc6188c4d914a74efa21e1",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v9-final-prepared-r2/selection.json",
+      "sha256": "7e586ecd0b1c0cb765ca88080fcb5ba6b8c195c129de7623ac7eb92b9a153580",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "artifacts/contextual-user-memory/v9-final-prepared/selection.json",
+      "sha256": "8e4b9102eafc34050fcc7e83367b3dd7d02e42921f17882e80833f465db24f0c",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "data/manifests/contextual-memory-v7-e0-selection-final.json",
+      "sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "data/manifests/contextual-memory-v7-e0-selection-repair.json",
+      "sha256": "dfb1c5de495f2f5a16dd32c3027d4597792dbf03c73d3f37279657d9566b86d1",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "data/manifests/contextual-memory-v7-e0-selection.json",
+      "sha256": "0818363131c70ff4011a13fba588432caf029d49c23b01075b29c1ef031a9afa",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "data/manifests/contextual-memory-v7-merit-small.json",
+      "sha256": "ea9b34892dbb934bfb617f565af5b1cfb0a55c46472e161ba67a6ade6ad31a76",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "data/manifests/contextual-memory-v8-merit-maintenance-repair.json",
+      "sha256": "83f2ff8be5fb6e4bdbc0b629fe1272005d60860fb3e9a760efeb93be41244662",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    },
+    {
+      "path": "data/manifests/contextual-memory-v8-merit-regression.json",
+      "sha256": "3a2d0e2aac98d83eaed5ffe78f8faec98db7d7d6bb8c36f4b5d6f014bf0c59bf",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "arc_id": "arc0-000",
+      "arc_seed": 0,
+      "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
+    }
+  ],
+  "known_base_seeds": [
+    0
+  ],
+  "known_arc_seeds": [
+    0
+  ],
+  "search_scope": "Lab data/manifests and contextual-user-memory preparation/run manifests; repository docs/studies MERIT references found only this contextual lineage. Benchmark filename inventory found no separate MERIT run dataset.",
+  "actual_new_arc_selection": null,
+  "model_requests": 0
+}

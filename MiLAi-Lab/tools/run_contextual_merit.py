@@ -78,9 +78,10 @@ def prepared_inputs(
     arms = plan["arms"]
     if (
         selection["dataset"] != "MERIT"
-        or selection["arc_id"] != "arc0-000"
         or arms not in (["ordinary_v7_off"], ["ordinary_v8_off"], ["ordinary_v9_off"],
-                        ["react_notes_v10_off"], ["decision_basis_v10_off"])
+                        ["react_notes_v10_off"], ["decision_basis_v10_off"],
+                        ["react_notes_v11_off"], ["sparse_basis_v11_off"],
+                        ["sparse_basis_attention_v11_off"])
     ):
         raise ValueError("MERIT_SELECTION_CHANGED")
     declared_config = plan.get("config")
@@ -134,6 +135,20 @@ def prepared_inputs(
                 (config["decision_feedback"] or config["decision_gap_focus"]))
         ):
             raise ValueError("MERIT_ARM_CONFIG_MISMATCH")
+    if arms in (["react_notes_v11_off"], ["sparse_basis_v11_off"],
+                ["sparse_basis_attention_v11_off"]):
+        expected_policy = "notes" if arms == ["react_notes_v11_off"] else "basis"
+        expected_gap = arms == ["sparse_basis_attention_v11_off"]
+        if (
+            not config_key.startswith("artifacts/contextual-user-memory/")
+            or config.get("config_version") != "contextual-task-v11"
+            or config.get("decision_policy") != expected_policy
+            or config.get("decision_feedback") is not (expected_policy == "basis")
+            or config.get("decision_gap_focus") is not expected_gap
+            or config.get("maintenance_protocol") != "turn-maintenance-v3"
+            or config.get("host", {}).get("tool_mode") != "json_action"
+        ):
+            raise ValueError("MERIT_ARM_CONFIG_MISMATCH")
     if (
         config["profile"] != "ordinary"
         or config["state_policy"] != "off"
@@ -155,6 +170,13 @@ def prepared_inputs(
             "source_mapping_sha256"
         ) != selection.get("development_freeze_sha256"):
             raise ValueError("MERIT_REPAIR_LINEAGE_MISMATCH")
+    if "selection_template_path" in selection:
+        template_path = selection["selection_template_path"]
+        candidate_path = (LAB / template_path).resolve() if isinstance(template_path, str) else LAB
+        if (not isinstance(template_path, str)
+                or not candidate_path.is_relative_to(LAB)
+                or sha256(candidate_path) != selection.get("selection_template_sha256")):
+            raise ValueError("MERIT_SELECTION_TEMPLATE_CHANGED")
         previous_path = selection.get("previous_selection_path")
         if previous_path is None and arms == ["ordinary_v7_off"]:
             previous_path = "data/manifests/contextual-memory-v7-e0-selection.json"
@@ -240,6 +262,7 @@ def prepared_inputs(
         "freeze_source_mapping_sha256": freeze["source_mapping_sha256"],
         "selected_development_freeze_sha256": selection["development_freeze_sha256"],
         "selected_execution_freeze_mapping_sha256": selected_mapping,
+        "selection_template_sha256": selection.get("selection_template_sha256"),
         "adapter_sha256": sha256(Path(__file__)),
         "external_root": selection["external_root"],
         "external_source_sha256": selection["source_sha256"],

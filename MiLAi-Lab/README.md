@@ -3,7 +3,18 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Latest scoped research: [Decision-basis Goal v10.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)
+Current scoped work: [Sparse decision-basis Goal v11.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md)
+and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md).
+The plan reduces state updates, separates change notifications from semantic revisions,
+and lets ordinary search consume actionable gaps while respecting explicit queries.
+It includes a frozen-selection preparation path for unseen native MERIT instances and a
+small three-arm comparison after development. Status: `IMPLEMENTED_PENDING_SMALL_VALIDATION`;
+the B–D runtime is frozen after 94 narrow tests and static checks, 15 deployed decoder
+probes and three fixed projection comparisons. The exposed-arc A2 wiring regression is
+running; the two new arcs and their three-arm comparison have not started. Ordinary and
+the v10 evidence remain unchanged.
+
+Latest completed scoped research: [Decision-basis Goal v10.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V10_DECISION_BASIS_DESIGN_20260925.md).
 V0 keeps one current decision, pins its adopted evidence, and combines state updates
 with normal ReAct actions. [Development evidence](docs/CONTEXTUAL_USER_MEMORY_V10_DEVELOPMENT_20260925.md)
@@ -16,7 +27,7 @@ version-change feedback was not observed. The scoped Goal is
 `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`; no general benefit is claimed. E2/E3/E4 and
 StateMemBench remain NOT_RUN, the latter for lack of verified official data/license/scorer.
 
-Latest completed work: [Maintenance contract Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md),
+Completed work: [Maintenance contract Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md),
 [design](docs/MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md),
 [results](docs/CONTEXTUAL_USER_MEMORY_V9_RESULTS_20260925.md), and
 [local reproduction](docs/CONTEXTUAL_USER_MEMORY_V9_REPRODUCE.md).

@@ -85,7 +85,7 @@ from milai_lab.methods.state_attention import (
 )
 from milai_lab.methods.state_focus import SourceSnapshot, SourceUnit
 
-METHOD_VERSION = "contextual-user-memory-v15"
+METHOD_VERSION = "contextual-user-memory-v16"
 INDEX_POLICY = "source-range-2048-overlap256-bm25-vector-rrf60-v2"
 
 
@@ -671,12 +671,16 @@ class ContextualMemory:
         old_focus = (
             self.state.active_decision.critical_gap,
             self.state.active_decision.scope.get("item", ""),
-        ) if self.state.active_decision is not None else ("", "")
+            self.state.active_decision.status,
+        ) if self.state.active_decision is not None else ("", "", "")
         self.state.active_decision = value
-        new_focus = (value.critical_gap, value.scope.get("item", "")) if value else ("", "")
+        new_focus = (
+            value.critical_gap, value.scope.get("item", ""), value.status,
+        ) if value else ("", "", "")
         if old_focus != new_focus:
             self.expansion = {}
             self.latest_search = None
+        self._scan_decision_changes()
 
     def _scan_decision_changes(self) -> None:
         decision = self.state.active_decision
@@ -1495,9 +1499,12 @@ class ContextualMemory:
             focus=focus,
             gap=(self.state.active_decision.critical_gap
                  if self.state.active_decision is not None else "")
-                if self.decision_policy == "basis" and self.decision_gap_focus else "",
+                if self.decision_policy == "basis" else "",
             anchor=(self.state.active_decision.scope
                     if self.state.active_decision is not None else {}),
+            host_intent=(self.state.active_decision.status
+                         if self.state.active_decision is not None else "active"),
+            auto_gap_enabled=self.decision_policy == "basis" and self.decision_gap_focus,
             explicit_filters={
                 "valid_at": valid_at, "known_at": known_at,
                 "date_from": date_from, "date_to": date_to,

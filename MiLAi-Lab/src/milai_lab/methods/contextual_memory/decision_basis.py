@@ -9,7 +9,7 @@ from uuid import uuid4
 
 from milai_lab.methods.contextual_memory.material_view import MaterialBinding
 
-DECISION_PROTOCOL = "decision-basis-v1"
+DECISION_PROTOCOL = "decision-basis-v2"
 STATE_TEXT_LIMIT = 1200
 STATE_DELTA_SCHEMA: dict[str, Any] = {
     "oneOf": [
@@ -27,8 +27,11 @@ STATE_DELTA_SCHEMA: dict[str, Any] = {
                 "additionalProperties": False},
             "adopted_evidence": {"type": "array", "maxItems": 12,
                                  "items": {"type": "string"}},
-            "critical_gap": {"type": "string", "maxLength": 320},
-            "status": {"type": "string", "enum": ["active", "needs_recheck", "deferred"]},
+            "critical_gap": {"oneOf": [
+                {"type": "null"},
+                {"type": "string", "minLength": 1, "maxLength": 240},
+            ]},
+            "status": {"type": "string", "enum": ["active", "deferred"]},
         }, "required": ["op", "decision", "scope", "adopted_evidence",
                        "critical_gap", "status"], "additionalProperties": False},
     ],
@@ -84,25 +87,24 @@ def continuation_handles(current: DecisionBasis | None) -> dict[str, AdoptedEvid
 def projected(
     current: DecisionBasis | None, *, subject_alias: str = "unknown",
     new_observations: tuple[str, ...] = (),
+    material_labels: Mapping[str, dict[str, str]] | None = None,
 ) -> dict[str, Any] | None:
     if current is None:
         return None
     return {
-        "protocol": DECISION_PROTOCOL,
-        "decision_id": current.decision_id,
-        "revision": current.revision,
         "decision": current.decision,
         "scope": {**current.scope, "subject_ref": subject_alias},
         "adopted_evidence": [
             {"ref": short, "kind": row.kind,
              "version": row.exact_ref.rsplit("@", 1)[-1] if "@" in row.exact_ref else "source",
-             "spans": [list(span) for span in row.spans], "use": "continued_exact_version"}
+             "spans": [list(span) for span in row.spans],
+             **(material_labels or {}).get(row.exact_ref, {})}
             for short, row in continuation_handles(current).items()
         ],
         "critical_gap": current.critical_gap,
-        "status": current.status,
-        "new_delivered_observations_since_revision": list(new_observations),
-        "observation_notice": "Delivery is not proof of semantic review.",
+        "status": "needs_recheck" if current.recheck_reasons else current.status,
+        "host_intent": current.status if current.recheck_reasons else None,
+        "new_observations": list(new_observations),
         "recheck_reasons": [
             {"ref": short, "reason": reason["reason"],
              "current_version": (reason["current_ref"].rsplit("@", 1)[-1]
@@ -121,6 +123,7 @@ def bind_delta(
     valid_subjects: Mapping[str, str], unavailable: set[str],
     current_ref: Callable[[str], str],
     delivered_source_sequence: int = 0,
+    presented_reasons: tuple[dict[str, str], ...] = (),
 ) -> DecisionBasis | None:
     """Validate a whole replacement before mutating the task state."""
     if delta is None:
@@ -130,8 +133,14 @@ def bind_delta(
     scope = delta["scope"]
     if scope["subject_ref"] not in valid_subjects:
         raise ValueError("DECISION_SUBJECT_NOT_DELIVERED")
+    raw_gap = delta["critical_gap"]
+    gap = raw_gap.strip() if isinstance(raw_gap, str) else None
+    if gap is not None and (not gap or gap.casefold() in {
+        "null", "none", "unknown", "resolved",
+    }):
+        raise ValueError("DECISION_GAP_NOT_INFORMATION_NEED")
     text_length = sum(len(value) for value in (
-        delta["decision"], *scope.values(), delta["critical_gap"],
+        delta["decision"], *scope.values(), gap or "",
     ))
     if text_length > STATE_TEXT_LIMIT:
         raise ValueError("DECISION_TEXT_LIMIT_EXCEEDED")
@@ -152,22 +161,64 @@ def bind_delta(
             raise ValueError("DECISION_EVIDENCE_NOT_DELIVERED")
         if row.exact_ref in unavailable:
             raise ValueError("DECISION_EVIDENCE_UNAVAILABLE")
-        row = AdoptedEvidence(
-            row.exact_ref, row.kind, row.spans, row.content_sha256,
-            current_ref(row.exact_ref),
-        )
-        if row not in adopted:
+        # A continued old version stays old until its change was actually presented.
+        if short not in continued:
+            row = AdoptedEvidence(row.exact_ref, row.kind, row.spans,
+                                  row.content_sha256, row.exact_ref)
+        if not any((old.exact_ref, old.kind, old.spans, old.content_sha256) ==
+                   (row.exact_ref, row.kind, row.spans, row.content_sha256)
+                   for old in adopted):
             adopted.append(row)
     if current is not None and current.task_id != task_id:
         raise ValueError("DECISION_TASK_MISMATCH")
+    if gap is None:
+        return None
+    normalized_scope = {key: value.strip() for key, value in scope.items()}
+    normalized_scope["subject_ref"] = valid_subjects[scope["subject_ref"]]
+    acknowledged = [
+        reason for reason in current.recheck_reasons
+        if reason in presented_reasons
+    ] if current is not None else []
+    adopted = [
+        AdoptedEvidence(row.exact_ref, row.kind, row.spans, row.content_sha256,
+                        next((reason["current_ref"] for reason in reversed(acknowledged)
+                              if reason["adopted_ref"] == row.exact_ref), row.observed_ref))
+        for row in adopted
+    ]
+    def evidence_key(row: AdoptedEvidence) -> tuple[Any, ...]:
+        return row.exact_ref, row.kind, row.spans, row.content_sha256
+
+    same_evidence = current is not None and (
+        {evidence_key(row) for row in current.adopted}
+        == {evidence_key(row) for row in adopted}
+    )
+    if same_evidence and current is not None:
+        adopted = [next(row for row in adopted if evidence_key(row) == evidence_key(old))
+                   for old in current.adopted]
+    same = current is not None and (
+        current.decision == delta["decision"].strip()
+        and current.scope == normalized_scope
+        and current.critical_gap == gap
+        and current.status == delta["status"]
+        and same_evidence
+    )
+    new_sequence = max(current.last_delivered_source_sequence
+                       if current else 0, delivered_source_sequence)
+    if (same and current is not None and not acknowledged
+            and new_sequence == current.last_delivered_source_sequence):
+        return current
     return DecisionBasis(
         decision_id=current.decision_id if current else uuid4().hex,
-        revision=current.revision + 1 if current else 1,
-        task_id=task_id, decision=delta["decision"],
-        scope={**scope, "subject_ref": valid_subjects[scope["subject_ref"]]},
-        adopted=tuple(adopted), critical_gap=delta["critical_gap"],
+        revision=(current.revision if same else current.revision + 1) if current else 1,
+        task_id=task_id, decision=delta["decision"].strip(),
+        scope=normalized_scope,
+        adopted=tuple(adopted), critical_gap=gap,
         status=delta["status"],
-        last_delivered_source_sequence=delivered_source_sequence,
+        last_delivered_source_sequence=new_sequence,
+        recheck_reasons=[reason for reason in current.recheck_reasons
+                         if reason not in acknowledged and any(
+                             row.exact_ref == reason["adopted_ref"] for row in adopted
+                         )] if current else [],
     )
 
 
@@ -184,8 +235,23 @@ def mark_change(current: DecisionBasis | None, *, exact_ref: str,
     if event in current.recheck_reasons:
         return False
     current.recheck_reasons.append(event)
-    current.status = "needs_recheck"
     return True
+
+
+def transition_kind(
+    current: DecisionBasis | None, candidate: DecisionBasis | None,
+    delta: dict[str, Any] | None,
+) -> str:
+    if candidate is current:
+        return "NO_STATE_CHANGE"
+    if candidate is None:
+        return "NO_STATE_CHANGE" if current is None else (
+            "GAP_RESOLVED" if delta is not None and delta.get("op") == "set"
+            else "CLEARED"
+        )
+    if current is not None and candidate.revision == current.revision:
+        return "REVIEW_ACKNOWLEDGED"
+    return "STATE_CHANGED"
 
 
 def dump(current: DecisionBasis | None) -> dict[str, Any] | None:
