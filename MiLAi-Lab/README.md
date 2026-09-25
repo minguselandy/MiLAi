@@ -3,6 +3,17 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
+Current development: [Decision-basis Goal v10.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)
+and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V10_DECISION_BASIS_DESIGN_20260925.md).
+V0 keeps one current decision, pins its adopted evidence, and combines state updates
+with normal ReAct actions. [Development evidence](docs/CONTEXTUAL_USER_MEMORY_V10_DEVELOPMENT_20260925.md)
+records the current implementation and scoped validation status. Ordinary remains the default.
+Official StateMemBench data, license and scorer were not obtained; those experiments remain NOT_RUN.
+[The first scoped comparison](docs/CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md) completed:
+strong notes scored 5/5 and basis 3/5, with all 7 Host turns complete in each arm.
+Basis emitted only null state deltas; real adoption and recheck remain unestablished.
+B–D engineering is implemented; the full v10 research Goal remains active.
+
 Latest completed work: [Maintenance contract Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md),
 [design](docs/MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md),
 [results](docs/CONTEXTUAL_USER_MEMORY_V9_RESULTS_20260925.md), and

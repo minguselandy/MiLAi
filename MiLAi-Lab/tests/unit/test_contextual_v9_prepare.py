@@ -6,7 +6,9 @@ import sys
 import tempfile
 from pathlib import Path
 
-from milai_lab.harness.contextual_artifacts import digest, read_json
+import pytest
+
+from milai_lab.harness.contextual_artifacts import digest, read_json, write_json
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
 import prepare_contextual_v9 as preparer
@@ -60,3 +62,54 @@ def test_prepare_v9_from_local_files_rebuilds_exact_original_arc(tmp_path: Path)
         assert "data/manifests/contextual-memory-v9-document-sequence.json" in (
             freeze["source_sha256"]
         )
+
+
+def test_prepare_v10_notes_and_basis_reuse_same_pinned_arc(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    host_dir, embedding_dir = tmp_path / "host", tmp_path / "embedding"
+    host_dir.mkdir()
+    embedding_dir.mkdir()
+    for name in ("layers-0.safetensors", "config.json", "tokenizer.json",
+                 "tokenizer_config.json", "chat_template.jinja"):
+        (host_dir / name).write_text("{}")
+    for name in ("pytorch_model.bin", "config.json", "tokenizer.json",
+                 "tokenizer_config.json"):
+        (embedding_dir / name).write_text("{}")
+    pinned = read_json(preparer.PINNED_SELECTION)
+    managed = preparer.LAB / "artifacts/contextual-user-memory"
+    managed.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="v10-prepare-test-", dir=managed) as temporary:
+        local = Path(temporary)
+        template_paths = {policy: local / f"{policy}-template.json"
+                          for policy in ("notes", "basis")}
+        monkeypatch.setattr(preparer, "V10_TEMPLATES", tuple(
+            preparer._within_lab(path) for path in template_paths.values()
+        ))
+        for policy, path in template_paths.items():
+            template = read_json(preparer.TEMPLATE)
+            template.update(config_version="contextual-task-v10", decision_policy=policy,
+                            decision_feedback=policy == "basis",
+                            decision_gap_focus=policy == "basis")
+            write_json(path, template)
+        mappings = []
+        for policy, arm in (("notes", "react_notes_v10_off"),
+                            ("basis", "decision_basis_v10_off")):
+            template_path = template_paths[policy]
+            result = preparer.prepare(
+                output_dir=local / policy, merit_root=Path(pinned["external_root"]),
+                host_dir=host_dir, embedding_dir=embedding_dir,
+                host_url="http://host.test/v1/", embedding_url="http://embed.test/v1/",
+                budget_path=tmp_path / "shared-budget.json", template_path=template_path,
+            )
+            selection, config, _, _, _, _, _, diagnostic, _ = merit.prepared_inputs(
+                Path(result["selection"]), Path(result["config"]), Path(result["freeze"]),
+            )
+            assert selection["execution_plan"]["arms"] == [arm]
+            assert config["decision_policy"] == policy
+            assert diagnostic["episode_count"] == 5
+            mapping = read_json(Path(result["freeze"]))["source_sha256"]
+            mappings.append(mapping)
+            assert all(preparer._within_lab(path) in mapping
+                       for path in template_paths.values())
+        assert mappings[0] == mappings[1]

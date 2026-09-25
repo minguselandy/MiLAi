@@ -79,7 +79,8 @@ def prepared_inputs(
     if (
         selection["dataset"] != "MERIT"
         or selection["arc_id"] != "arc0-000"
-        or arms not in (["ordinary_v7_off"], ["ordinary_v8_off"], ["ordinary_v9_off"])
+        or arms not in (["ordinary_v7_off"], ["ordinary_v8_off"], ["ordinary_v9_off"],
+                        ["react_notes_v10_off"], ["decision_basis_v10_off"])
     ):
         raise ValueError("MERIT_SELECTION_CHANGED")
     declared_config = plan.get("config")
@@ -119,6 +120,20 @@ def prepared_inputs(
         or config.get("maintenance_protocol") != "turn-maintenance-v3"
     ):
         raise ValueError("MERIT_ARM_CONFIG_MISMATCH")
+    if arms in (["react_notes_v10_off"], ["decision_basis_v10_off"]):
+        expected_policy = ("notes" if arms == ["react_notes_v10_off"] else "basis")
+        if (
+            not config_key.startswith("artifacts/contextual-user-memory/")
+            or config.get("config_version") != "contextual-task-v10"
+            or config.get("decision_policy") != expected_policy
+            or config.get("maintenance_protocol") != "turn-maintenance-v3"
+            or config.get("host", {}).get("tool_mode") != "json_action"
+            or type(config.get("decision_feedback")) is not bool
+            or type(config.get("decision_gap_focus")) is not bool
+            or (expected_policy == "notes" and
+                (config["decision_feedback"] or config["decision_gap_focus"]))
+        ):
+            raise ValueError("MERIT_ARM_CONFIG_MISMATCH")
     if (
         config["profile"] != "ordinary"
         or config["state_policy"] != "off"

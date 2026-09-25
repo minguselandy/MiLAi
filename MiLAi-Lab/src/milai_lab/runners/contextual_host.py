@@ -13,6 +13,14 @@ from uuid import uuid4
 
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 
+from milai_lab.methods.contextual_memory.decision_basis import (
+    STATE_DELTA_SCHEMA,
+    WORK_NOTE_SCHEMA,
+    bind_delta,
+)
+from milai_lab.methods.contextual_memory.decision_basis import (
+    projected as projected_decision,
+)
 from milai_lab.methods.contextual_memory.models import Observation, receipt_outcome
 from milai_lab.methods.contextual_memory.operations import TaskEnvelope, new_save_operation_id
 from milai_lab.methods.contextual_memory.write_contract import apply_content_patch
@@ -52,6 +60,7 @@ if TYPE_CHECKING:
 Dispatch = Callable[[str, dict[str, Any]], dict[str, Any]]
 READ_ONLY_TOOLS = frozenset({"memory_search", "memory_read"})
 NO_PROGRESS_LIMIT = 3
+ACTION_PROTOCOL = "contextual-json-action-v2"
 FINAL_ANSWER_RESPONSE_FORMAT: dict[str, Any] = {
     "type": "json_schema",
     "json_schema": {
@@ -69,6 +78,7 @@ FINAL_ANSWER_RESPONSE_FORMAT: dict[str, Any] = {
 
 def _action_response_format(
     tools: Sequence[dict[str, Any]], *, maintenance: bool = False,
+    decision_policy: str = "off",
 ) -> dict[str, Any]:
     branches: list[dict[str, Any]] = (
         [] if maintenance else [FINAL_ANSWER_RESPONSE_FORMAT["json_schema"]["schema"]]
@@ -86,6 +96,14 @@ def _action_response_format(
                 "additionalProperties": False,
             }
         )
+    if decision_policy != "off":
+        key = "state_delta" if decision_policy == "basis" else "work_note"
+        sidecar = STATE_DELTA_SCHEMA if decision_policy == "basis" else WORK_NOTE_SCHEMA
+        branches = [
+            {**branch, "properties": {key: sidecar, **branch["properties"]},
+             "required": [key, *branch["required"]]}
+            for branch in branches
+        ]
     return {
         "type": "json_schema",
         "json_schema": {
@@ -115,8 +133,34 @@ def _subject_tools(
     return selected
 
 
-def _required_tool_response_format(tool: dict[str, Any]) -> dict[str, Any]:
+def _focus_tools(tools: Sequence[dict[str, Any]], *, allow_gap: bool) -> list[dict[str, Any]]:
+    if allow_gap:
+        return list(tools)
+    selected = []
+    for tool in tools:
+        function = tool.get("function", tool)
+        if function["name"] == "memory_search":
+            tool = copy.deepcopy(tool)
+            tool.get("function", tool)["parameters"]["properties"]["focus"] = {
+                "const": "default",
+            }
+        selected.append(tool)
+    return selected
+
+
+def _required_tool_response_format(tool: dict[str, Any], *,
+                                   decision_policy: str = "off") -> dict[str, Any]:
     function = tool.get("function", tool)
+    properties = {
+        "tool": {"const": function["name"]},
+        "arguments": function["parameters"],
+    }
+    required = ["tool", "arguments"]
+    if decision_policy != "off":
+        key = "state_delta" if decision_policy == "basis" else "work_note"
+        properties = {key: (STATE_DELTA_SCHEMA if decision_policy == "basis"
+                            else WORK_NOTE_SCHEMA), **properties}
+        required.insert(0, key)
     return {
         "type": "json_schema",
         "json_schema": {
@@ -124,15 +168,22 @@ def _required_tool_response_format(tool: dict[str, Any]) -> dict[str, Any]:
             "strict": True,
             "schema": {
                 "type": "object",
-                "properties": {
-                    "tool": {"const": function["name"]},
-                    "arguments": function["parameters"],
-                },
-                "required": ["tool", "arguments"],
+                "properties": properties,
+                "required": required,
                 "additionalProperties": False,
             },
         },
     }
+
+
+def _final_response_format(decision_policy: str) -> dict[str, Any]:
+    if decision_policy == "off":
+        return FINAL_ANSWER_RESPONSE_FORMAT
+    branch = _action_response_format([], decision_policy=decision_policy)[
+        "json_schema"]["schema"]["oneOf"][0]
+    return {"type": "json_schema", "json_schema": {
+        "name": "final_answer", "strict": True, "schema": branch,
+    }}
 
 
 def _initial_state_tool(tool: dict[str, Any]) -> dict[str, Any]:
@@ -201,10 +252,19 @@ class ContextualHost:
     initial_context_limit: int = field(default=4, kw_only=True)
     maintenance_policy: Literal["off", "required"] = field(default="off", kw_only=True)
     maintenance_protocol: str = field(default=MAINTENANCE_PROTOCOL, kw_only=True)
+    decision_policy: Literal["off", "notes", "basis"] = field(default="off", kw_only=True)
     runtime_store: RuntimeStore | None = field(default=None, kw_only=True)
     last_session: HostSession | None = field(default=None, init=False)
 
     def __post_init__(self) -> None:
+        if self.decision_policy not in {"off", "notes", "basis"}:
+            raise ValueError("UNKNOWN_DECISION_POLICY")
+        if self.decision_policy != "off" and (
+            self.memory is None or self.memory.decision_policy != self.decision_policy
+            or self.client.config.tool_mode != "json_action"
+            or self.maintenance_protocol != SEMANTIC_MAINTENANCE_PROTOCOL
+        ):
+            raise ValueError("INCOMPATIBLE_DECISION_HOST_CONFIGURATION")
         if self.maintenance_policy not in {"off", "required"}:
             raise ValueError("UNKNOWN_MAINTENANCE_POLICY")
         if self.maintenance_protocol not in {MAINTENANCE_PROTOCOL,
@@ -287,6 +347,25 @@ class ContextualHost:
                 "choosing CREATE or REVISE. Routine outputs, temporary instructions and "
                 "unchanged understanding need no write."
             )
+        if self.decision_policy == "basis":
+            protocol_prompt += (
+                "\nIn the same JSON action, include state_delta: null to keep the one current "
+                "decision, {op:'set', decision, scope:{subject_ref,item,context}, "
+                "adopted_evidence, critical_gap, status} to replace it, or {op:'clear'} "
+                "to clear it. Choose adopted_evidence from delivered body refs or cN "
+                "continued exact versions; a link alone is not read evidence. A decision "
+                "is a working judgment, not proof or a business receipt. A changed adopted "
+                "version needs review; a new observation may matter even with no old link. "
+                "Use memory_search focus=critical_gap only for a concrete information need, "
+                "with empty query. No extra State call is needed."
+            )
+        elif self.decision_policy == "notes":
+            protocol_prompt += (
+                "\nIn the same JSON action, include work_note: null to keep your current "
+                "work note or a short replacement string. It can record a judgment, "
+                "references, uncertainty, and what to query next; you may revise it each "
+                "step. Use the same memory and business tools. This note is task-local."
+            )
         maintenance_required = self.maintenance_policy == "required"
         semantic_maintenance = (maintenance_required and self.maintenance_protocol ==
                                 SEMANTIC_MAINTENANCE_PROTOCOL)
@@ -333,11 +412,17 @@ class ContextualHost:
                 "never proposed text. Include each frontier source once."
             )
         if self.client.config.tool_mode == "json_action":
+            sidecar_example = (
+                '"state_delta":null,' if self.decision_policy == "basis" else
+                '"work_note":null,' if self.decision_policy == "notes" else ""
+            )
             protocol_prompt += (
                 "\n\nJSON-action protocol: respond with exactly one JSON object: "
-                '{"tool":"TOOL_NAME","arguments":{...}} to call a tool, or '
-                + ('{"tool":"finish_turn","arguments":{...}}' if maintenance_required
-                   else '{"answer":"final answer"}')
+                + '{' + sidecar_example
+                + '"tool":"TOOL_NAME","arguments":{...}} to call a tool, or '
+                + ('{' + sidecar_example + '"tool":"finish_turn","arguments":{...}}'
+                   if maintenance_required else
+                   '{' + sidecar_example + '"answer":"final answer"}')
                 + ' to finish. Tool results will be returned '
                 "as a user message. This is the configured json_action mode. "
                 "Available tools (names, descriptions, and JSON Schema parameters):\n"
@@ -631,6 +716,107 @@ class ContextualHost:
                 resolved["condition_evidence"] = evidence
             return resolved
 
+        def preflight_sidecar(action: dict[str, Any], schema: dict[str, Any]) -> Any:
+            """Check both halves before either state or external action has an effect."""
+            session.refresh_visibility()
+            validate(action, schema)
+            assert bound_memory is not None and material_view is not None
+            name = action.get("tool")
+            if name is not None:
+                arguments = action["arguments"]
+                if name == "finish_turn":
+                    validate(arguments, SEMANTIC_FINAL_SCHEMA)
+                    semantic_finish(session, arguments["maintenance"],
+                                    business_outcomes=business_outcomes(), commit=False)
+                else:
+                    required = {"state": "memory_state", "search": "memory_search"}.get(
+                        active_stage
+                    )
+                    if required is not None and name != required:
+                        raise InvalidToolCall(f"{required} must complete before other actions")
+                    self._validate_tool(name, arguments)
+                    dispatched = resolved_arguments(name, arguments)
+                    if name in self.business_tools and any(
+                        prior["name"] == name and prior["arguments"] == dispatched
+                        for prior in recovered_settled_actions
+                    ):
+                        raise InvalidToolCall("RECOVERED_ACTION_ALREADY_SETTLED")
+            if self.decision_policy == "notes":
+                return action["work_note"]
+            current = bound_memory.state.active_decision
+            subjects = {"unknown": "unresolved"}
+            if any(item["ref"] == "u0" for item in material_view.subject_catalogue()):
+                subjects["u0"] = "current_user"
+            subjects.update({
+                item["ref"]: material_view.binding(item["ref"]).exact_ref
+                for item in material_view.subject_catalogue()
+                if item["ref"] not in {"u0", "unknown"}
+                and item["ref"] in session.visible_bindings
+            })
+
+            def current_ref(ref: str) -> str:
+                if ref in bound_memory.forgotten:
+                    raise ValueError("DECISION_EVIDENCE_UNAVAILABLE")
+                try:
+                    return bound_memory.resolve(ref)
+                except (KeyError, ValueError) as exc:
+                    raise ValueError("DECISION_EVIDENCE_UNAVAILABLE") from exc
+
+            candidate = bind_delta(
+                action["state_delta"], current=current,
+                task_id=bound_memory.state.task_id,
+                visible=session.visible_bindings,
+                valid_subjects=subjects, unavailable=bound_memory.forgotten,
+                current_ref=current_ref,
+                delivered_source_sequence=max((
+                    bound_memory.source_sequence.get(binding.exact_ref, 0)
+                    for binding in session.visible_bindings.values()
+                    if binding.kind == "source" and binding.spans
+                ), default=0),
+            )
+            if name == "memory_search" and action["arguments"].get("focus") == "critical_gap":
+                if not bound_memory.decision_gap_focus:
+                    raise InvalidToolCall("CRITICAL_GAP_FOCUS_DISABLED")
+                if (candidate is None or not candidate.critical_gap.strip()
+                        or action["arguments"].get("query", "")):
+                    raise InvalidToolCall("CRITICAL_GAP_REQUIRES_EMPTY_QUERY_AND_ACTIVE_GAP")
+            return candidate
+
+        def apply_sidecar(action: dict[str, Any], candidate: Any) -> None:
+            assert bound_memory is not None
+            if self.decision_policy == "notes":
+                if candidate is not None:
+                    bound_memory.state.work_note = candidate
+                    persist()
+                    if self.emit:
+                        self.emit({"event": "work_note_saved", "task_id":
+                                   bound_memory.state.task_id, "characters": len(candidate)})
+                return
+            if action["state_delta"] is not None:
+                old_focus = (
+                    bound_memory.state.active_decision.critical_gap,
+                    bound_memory.state.active_decision.scope.get("item", ""),
+                ) if bound_memory.state.active_decision else ("", "")
+                bound_memory.apply_decision(candidate)
+                new_focus = (candidate.critical_gap, candidate.scope.get("item", "")) if (
+                    candidate is not None
+                ) else ("", "")
+                if old_focus != new_focus:
+                    read_cache.clear()
+                persist()
+                if self.emit:
+                    self.emit({
+                        "event": "decision_delta_accepted",
+                        "task_id": bound_memory.state.task_id,
+                        "decision_id": candidate.decision_id if candidate else None,
+                        "revision": candidate.revision if candidate else None,
+                        "adopted": [
+                            {"exact_ref": row.exact_ref, "spans": row.spans}
+                            for row in candidate.adopted
+                        ] if candidate else [],
+                        "focus_changed": old_focus != new_focus,
+                    })
+
         def record_tool_message(outcome: dict[str, Any]) -> None:
             if isinstance(outcome.get("result"), dict):
                 session.record_delivery(transcript[-1], outcome["result"])
@@ -904,6 +1090,37 @@ class ContextualHost:
             if final_request and active_stage != "free":
                 return make_result("", "state_unconsumed")
             request_transcript = list(transcript)
+            if self.decision_policy == "basis" and bound_memory is not None:
+                current_decision = bound_memory.state.active_decision
+                subject_alias = "unknown"
+                if current_decision is not None and material_view is not None:
+                    subject_alias = next((
+                        item["ref"] for item in material_view.subject_catalogue()
+                        if (item["ref"] in {"u0", "unknown"} and
+                            {"u0": "current_user", "unknown": "unresolved"}[
+                                item["ref"]] == current_decision.scope["subject_ref"])
+                        or (item["ref"] not in {"u0", "unknown"}
+                            and material_view.binding(item["ref"]).exact_ref ==
+                            current_decision.scope["subject_ref"])
+                    ), "unknown")
+                request_transcript.append({
+                    "role": "user", "content": "Current task decision (cN keeps an already "
+                    "adopted exact version, not a new read): " +
+                    _json(projected_decision(current_decision,
+                                             subject_alias=subject_alias,
+                                             new_observations=tuple(
+                        alias for alias, binding in session.visible_bindings.items()
+                        if current_decision is not None and binding.kind == "source"
+                        and binding.spans and bound_memory.source_sequence.get(
+                            binding.exact_ref, 0
+                        ) > current_decision.last_delivered_source_sequence
+                    ))),
+                })
+            elif self.decision_policy == "notes" and bound_memory is not None:
+                request_transcript.append({
+                    "role": "user", "content": "Current task work note: " +
+                    bound_memory.state.work_note,
+                })
             if maintenance_required:
                 request_transcript.append({"role": "user", "content":
                     ("Maintenance frontier (program evidence for this turn): "
@@ -952,6 +1169,24 @@ class ContextualHost:
             if maintenance_required:
                 request_tools = [terminal_tool if tool.get("function", tool)["name"] ==
                                  "finish_turn" else tool for tool in request_tools]
+            if self.decision_policy != "off":
+                request_tools = _focus_tools(
+                    request_tools,
+                    allow_gap=(self.decision_policy == "basis" and bound_memory is not None
+                               and bound_memory.decision_gap_focus),
+                )
+            response_format = (
+                (_required_tool_response_format(
+                    terminal_tool, decision_policy=self.decision_policy)
+                 if final_request and maintenance_required else
+                 _final_response_format(self.decision_policy) if final_request else
+                 _required_tool_response_format(
+                     required_tool, decision_policy=self.decision_policy)
+                 if required_tool is not None else _action_response_format(
+                     request_tools, maintenance=maintenance_required,
+                     decision_policy=self.decision_policy))
+                if self.client.config.tool_mode == "json_action" else None
+            )
             receipt = self.client.chat(
                 request_transcript,
                 request_tools if native else None,
@@ -959,16 +1194,7 @@ class ContextualHost:
                 ("none" if final_request else "required")
                 if native and required_name is not None else
                 "none" if native and final_request else None,
-                response_format=(
-                    (_required_tool_response_format(terminal_tool)
-                     if final_request and maintenance_required else
-                     FINAL_ANSWER_RESPONSE_FORMAT if final_request else
-                     _required_tool_response_format(required_tool)
-                     if required_tool is not None else _action_response_format(
-                         request_tools, maintenance=maintenance_required))
-                    if not native
-                    else None
-                ),
+                response_format=response_format,
             )
             model_calls += 1
             _add_usage(usage, receipt.get("usage"),
@@ -1130,6 +1356,32 @@ class ContextualHost:
             except json.JSONDecodeError as exc:
                 action = None
                 invalid = f"Invalid JSON-action response: {exc.msg}"
+            if self.decision_policy != "off" and isinstance(action, dict):
+                try:
+                    assert response_format is not None
+                    candidate = preflight_sidecar(
+                        action, response_format["json_schema"]["schema"],
+                    )
+                except (ValueError, TypeError, ValidationError) as exc:
+                    no_progress += 1
+                    error_text = exc.message if isinstance(exc, ValidationError) else str(exc)
+                    outcome = rejected_tool_call(
+                        str(action.get("tool", "")),
+                        "Invalid action and state proposal: " + error_text,
+                    )
+                    outcome["remaining_model_calls"] = budget - model_calls
+                    calls.append({"name": action.get("tool", ""),
+                                  "arguments": action.get("arguments"), **outcome})
+                    transcript.append({"role": "user", "content":
+                                       f"json_action tool result: {_json(outcome)}"})
+                    self._emit_call(calls[-1])
+                    if final_request:
+                        return make_result("", "maintenance_pending" if maintenance_required
+                                           else "incomplete")
+                    if stopped := stalled():
+                        return stopped
+                    continue
+                apply_sidecar(action, candidate)
             if (active_stage == "free" and isinstance(action, dict)
                     and isinstance(action.get("answer"), str)):
                 if finished := finish_answer(action):

@@ -354,6 +354,7 @@ def semantic_finish_tool(session: HostSession) -> dict[str, Any]:
 def semantic_finish(
     session: HostSession, decision: dict[str, Any], *,
     business_outcomes: list[dict[str, Any]] | None = None,
+    commit: bool = True,
 ) -> dict[str, Any]:
     """Accept semantic selection only when actual review, writes and outcomes permit it."""
     if session.maintenance.get("protocol") != SEMANTIC_MAINTENANCE_PROTOCOL:
@@ -392,7 +393,8 @@ def semantic_finish(
         "missing_required_review": missing_review,
         "missing_required_persistence": missing_persistence,
     }
-    if status == "complete":
-        session.maintenance["pending"] = {}
-    session.maintenance["last_review"] = result
+    if commit:
+        if status == "complete":
+            session.maintenance["pending"] = {}
+        session.maintenance["last_review"] = result
     return result

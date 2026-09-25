@@ -1,0 +1,368 @@
+{
+  "status": "E1_COMPLETE_CANDIDATE_NOT_USED_EFFECT_UNESTABLISHED",
+  "goal_complete": false,
+  "engineering_status": "B_D_IMPLEMENTED_NARROW_CHECKS_PASSED",
+  "source_mapping_sha256": "57fef8a534cef57e2d44015f91bb6fb443066484ca1420f74c4216a655344f14",
+  "source_config_unchanged": true,
+  "concurrency": 1,
+  "arms": {
+    "notes": {
+      "native": {
+        "native_successes": 5,
+        "native_denominator": 5,
+        "dependent_successes": 2,
+        "dependent_denominator": 2,
+        "episodes": [
+          {
+            "episode_index": 0,
+            "task_id": "arc0-000-e0-plant-refund",
+            "dependent": false,
+            "success": true,
+            "memory_utilized": false,
+            "host_statuses": [
+              "complete"
+            ]
+          },
+          {
+            "episode_index": 1,
+            "task_id": "arc0-000-e1-update-refund",
+            "dependent": false,
+            "success": true,
+            "memory_utilized": false,
+            "host_statuses": [
+              "complete",
+              "complete"
+            ]
+          },
+          {
+            "episode_index": 2,
+            "task_id": "arc0-000-e2-probe-refund-upd",
+            "dependent": true,
+            "success": true,
+            "memory_utilized": true,
+            "host_statuses": [
+              "complete",
+              "complete"
+            ]
+          },
+          {
+            "episode_index": 3,
+            "task_id": "arc0-000-e3-indep-refund",
+            "dependent": false,
+            "success": true,
+            "memory_utilized": false,
+            "host_statuses": [
+              "complete"
+            ]
+          },
+          {
+            "episode_index": 4,
+            "task_id": "arc0-000-e4-probe-refund-upd",
+            "dependent": true,
+            "success": true,
+            "memory_utilized": true,
+            "host_statuses": [
+              "complete"
+            ]
+          }
+        ]
+      },
+      "host_turns": 7,
+      "host_complete": 7,
+      "maintenance_pending_episodes": 0,
+      "generation": {
+        "requests": 25,
+        "prompt_tokens": 191126,
+        "completion_tokens": 29058,
+        "total_tokens": 220184,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 11,
+        "prompt_tokens": 1789,
+        "completion_tokens": 0,
+        "total_tokens": 1789,
+        "unknown_usage": 0
+      },
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 11,
+          "prompt_tokens": 75980,
+          "completion_tokens": 6616,
+          "total_tokens": 82596,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 6,
+          "prompt_tokens": 47419,
+          "completion_tokens": 14235,
+          "total_tokens": 61654,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 7,
+          "prompt_tokens": 60600,
+          "completion_tokens": 4111,
+          "total_tokens": 64711,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 1,
+          "prompt_tokens": 7127,
+          "completion_tokens": 4096,
+          "total_tokens": 11223,
+          "unknown_usage": 0
+        }
+      },
+      "truncated_generations": 1,
+      "write_rejections": 0,
+      "finish_rejections": 0,
+      "provider_http_failures": 0,
+      "sidecar_outputs": {
+        "work_note_proposed": 15,
+        "work_note_null": 9
+      },
+      "accepted_decision_deltas": 0,
+      "accepted_work_note_changes": 15,
+      "gap_search_calls": 0,
+      "embedding_cache_hits": 0,
+      "embedding_cold_tokens": 1789,
+      "business_tool_failures": [],
+      "artifacts": {
+        "result.json": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-1/notes/result.json",
+          "sha256": "9c414023672db1f70b13940f8121840c402cb3dd2f4f21d4dc65a729defc4c03"
+        },
+        "runtime/trace.jsonl": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-1/notes/runtime/trace.jsonl",
+          "sha256": "7a56f02fb251d02e86f8853f10b6465c35748a181b80f2865b85ea8ba99e573a"
+        },
+        "runtime/accounting.json": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-1/notes/runtime/accounting.json",
+          "sha256": "64f32cc55cc1f8a13fab2a419dc240b315bb882ef31de54ab580c42a012fb65d"
+        }
+      },
+      "config_sha256": "188f8ef5ba31405e2f06fd21ded5c0d0ad8b7205f70c107733ca23711d724af0",
+      "cost_interpretation": "Every whole provider receipt is charged once. State/notes and action are generated together; their shared reasoning and repeated input cannot be exactly separated. Primary-action groups are descriptive, not marginal State costs or benefit. A proposed sidecar is not proof of adoption or accepted maintenance."
+    },
+    "basis": {
+      "native": {
+        "native_successes": 3,
+        "native_denominator": 5,
+        "dependent_successes": 1,
+        "dependent_denominator": 2,
+        "episodes": [
+          {
+            "episode_index": 0,
+            "task_id": "arc0-000-e0-plant-refund",
+            "dependent": false,
+            "success": true,
+            "memory_utilized": false,
+            "host_statuses": [
+              "complete"
+            ]
+          },
+          {
+            "episode_index": 1,
+            "task_id": "arc0-000-e1-update-refund",
+            "dependent": false,
+            "success": true,
+            "memory_utilized": false,
+            "host_statuses": [
+              "complete",
+              "complete"
+            ]
+          },
+          {
+            "episode_index": 2,
+            "task_id": "arc0-000-e2-probe-refund-upd",
+            "dependent": true,
+            "success": true,
+            "memory_utilized": true,
+            "host_statuses": [
+              "complete",
+              "complete"
+            ]
+          },
+          {
+            "episode_index": 3,
+            "task_id": "arc0-000-e3-indep-refund",
+            "dependent": false,
+            "success": false,
+            "memory_utilized": false,
+            "host_statuses": [
+              "complete"
+            ]
+          },
+          {
+            "episode_index": 4,
+            "task_id": "arc0-000-e4-probe-refund-upd",
+            "dependent": true,
+            "success": false,
+            "memory_utilized": false,
+            "host_statuses": [
+              "complete"
+            ]
+          }
+        ]
+      },
+      "host_turns": 7,
+      "host_complete": 7,
+      "maintenance_pending_episodes": 0,
+      "generation": {
+        "requests": 26,
+        "prompt_tokens": 205492,
+        "completion_tokens": 26980,
+        "total_tokens": 232472,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 11,
+        "prompt_tokens": 2166,
+        "completion_tokens": 0,
+        "total_tokens": 2166,
+        "unknown_usage": 0
+      },
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 13,
+          "prompt_tokens": 92529,
+          "completion_tokens": 9697,
+          "total_tokens": 102226,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 5,
+          "prompt_tokens": 42691,
+          "completion_tokens": 9043,
+          "total_tokens": 51734,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 7,
+          "prompt_tokens": 62327,
+          "completion_tokens": 4144,
+          "total_tokens": 66471,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 1,
+          "prompt_tokens": 7945,
+          "completion_tokens": 4096,
+          "total_tokens": 12041,
+          "unknown_usage": 0
+        }
+      },
+      "truncated_generations": 1,
+      "write_rejections": 0,
+      "finish_rejections": 0,
+      "provider_http_failures": 0,
+      "sidecar_outputs": {
+        "state_delta_null": 25
+      },
+      "accepted_decision_deltas": 0,
+      "accepted_work_note_changes": 0,
+      "gap_search_calls": 0,
+      "embedding_cache_hits": 0,
+      "embedding_cold_tokens": 2166,
+      "business_tool_failures": [
+        {
+          "name": "get_policy",
+          "execution_status": "failed"
+        }
+      ],
+      "artifacts": {
+        "result.json": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-1/basis/result.json",
+          "sha256": "f61f43a5f1c2ecf6e5ca74b954400b685583d378b54df92a02c3c1e9ad845b75"
+        },
+        "runtime/trace.jsonl": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-1/basis/runtime/trace.jsonl",
+          "sha256": "53351eac065e1534704abc6d70dedfbdfe828c226e0151ae988ff74c947f7c6a"
+        },
+        "runtime/accounting.json": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-1/basis/runtime/accounting.json",
+          "sha256": "7241935715da29f844f1fb4a23436f538b44cbaaad2e2bc3258b447d416469c2"
+        }
+      },
+      "config_sha256": "df8bf48b1302da7fe51ed6e8209e37c83bf17508e0d674b643de2a727bd31b69",
+      "cost_interpretation": "Every whole provider receipt is charged once. State/notes and action are generated together; their shared reasoning and repeated input cannot be exactly separated. Primary-action groups are descriptive, not marginal State costs or benefit. A proposed sidecar is not proof of adoption or accepted maintenance."
+    }
+  },
+  "continuous_ledger": {
+    "path": "artifacts/contextual-user-memory/v10-budget.json",
+    "sha256": "bee9d799d5b25b79686e41d5ed6e5e3ff9f7fb361ad020e2c92673a5f38eb486",
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 51,
+    "generation": {
+      "charged_tokens": 452656,
+      "known_tokens": 452656,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 3955,
+      "known_tokens": 3955,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/contextual-user-memory/v9-budget.json",
+      "sha256": "8f5021ff4b7cb7d04b3fae7954d488d90ef4a3e08716f0ea97db8cebc401aed6",
+      "generation_requests": 119,
+      "generation_tokens": 966332,
+      "embedding_tokens": 4358,
+      "modified": false
+    }
+  },
+  "judge_requests": 0,
+  "failures": [
+    {
+      "arm": "basis",
+      "episode": 3,
+      "kind": "native_task_miss",
+      "observed": "Host queried a nonexistent refund_policy, then real policy values; no refund was executed. It claimed manual review had been flagged without any corresponding tool result.",
+      "not_claimed": "The native checker outcome is not a general judgment about real-world refund policy."
+    },
+    {
+      "arm": "basis",
+      "episode": 4,
+      "kind": "wrong_business_amount",
+      "observed": "Delivered current memory contained 6595 cents. Host passed 659 to refund; tool executed that amount successfully. Current card remained pending at revision 2; no post-refund memory revision occurred."
+    },
+    {
+      "arm": "both",
+      "kind": "truncation",
+      "count": 2,
+      "observed": "One generation per arm truncated; no partial tool executed and all tokens remain charged."
+    }
+  ],
+  "mechanism": {
+    "basis_valid_action_sidecars": 25,
+    "basis_null_sidecars": 25,
+    "actual_adoptions": 0,
+    "automatic_recheck_opportunities_observed": 0,
+    "gap_requeries": 0,
+    "native_recall_is_not_decision_adoption": true,
+    "chain_status": "NOT_ESTABLISHED",
+    "diagnosis": [
+      "Schemas and prompts were delivered and null was valid; no state proposal was rejected.",
+      "The Host chose null for every complete response; non-use cannot be reported as method success.",
+      "Cross-episode updates reset task-local decision by the original session contract.",
+      "No forced state ritual, added questions, altered session boundaries or benchmark expansion."
+    ]
+  },
+  "not_run": {
+    "StateMemBench": "Official data/license/scorer not obtained",
+    "E2": "No actual adopted decision or gap-focused retrieval in E1; no usable comparison prefix",
+    "E3": "No actual adopted decision and automatic recheck in E1; no usable comparison prefix",
+    "E4": "Original task windows do not provide repeated use of the same decision",
+    "document_four_turns": "Not repeated to add passing counts; no v10 document result claimed",
+    "full_suite_and_benchmark": "Outside scope"
+  },
+  "generation_token_delta_basis_vs_notes_pct": 5.58078697816371
+}

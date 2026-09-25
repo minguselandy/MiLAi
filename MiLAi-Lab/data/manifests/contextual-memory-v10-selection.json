@@ -1,0 +1,126 @@
+{
+  "status": "FROZEN_AFTER_B_D_NARROW_CHECKS",
+  "role": "previously_exposed_original_MERIT_arc",
+  "arc_id": "arc0-000",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+  "initial_world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29",
+  "source_mapping_sha256": "57fef8a534cef57e2d44015f91bb6fb443066484ca1420f74c4216a655344f14",
+  "source_file_count": 47,
+  "episodes": [
+    {
+      "episode": 0,
+      "task_id": "arc0-000-e0-plant-refund",
+      "kind": "I_note",
+      "dependent": false,
+      "session": "arc0-000:episode:0",
+      "public_messages": [
+        {
+          "index": 0,
+          "sha256": "24a5c310219dd077ecde05966a0df533ee8b40c89235f900f0752c22c1d815a0"
+        }
+      ]
+    },
+    {
+      "episode": 1,
+      "task_id": "arc0-000-e1-update-refund",
+      "kind": "I_note",
+      "dependent": false,
+      "session": "arc0-000:episode:1",
+      "public_messages": [
+        {
+          "index": 0,
+          "sha256": "fd07acffab9490b51dfc5e3ee4957a20b0f3681dcd3e0beb34d69993359630bb"
+        },
+        {
+          "index": 1,
+          "sha256": "262aa8b38c828c309e22940ad39c4783067c1c248d74801367c284ba0fe7ec4a"
+        }
+      ]
+    },
+    {
+      "episode": 2,
+      "task_id": "arc0-000-e2-probe-refund-upd",
+      "kind": "T_refund_upd",
+      "dependent": true,
+      "session": "arc0-000:episode:2",
+      "public_messages": [
+        {
+          "index": 0,
+          "sha256": "22e39585949960244d611395c79550e3552195352ce4406940cc87ad9e0a51b2"
+        },
+        {
+          "index": 1,
+          "sha256": "054c6cf2b163079dc0246bc4a47b58e95fef6065c8000729658ec59faf57de71"
+        }
+      ]
+    },
+    {
+      "episode": 3,
+      "task_id": "arc0-000-e3-indep-refund",
+      "kind": "I_refund",
+      "dependent": false,
+      "session": "arc0-000:episode:3",
+      "public_messages": [
+        {
+          "index": 0,
+          "sha256": "54cbd21f06f1e92dc1751e94179a93cfb326cd930e0ff13935f3e92e814ff57e"
+        }
+      ]
+    },
+    {
+      "episode": 4,
+      "task_id": "arc0-000-e4-probe-refund-upd",
+      "kind": "T_refund_upd",
+      "dependent": true,
+      "session": "arc0-000:episode:4",
+      "public_messages": [
+        {
+          "index": 0,
+          "sha256": "ffd4e6c0bddcbc6c8e89bbcc6434d965795e6eccdf40f4e5ec22e751d15f98df"
+        }
+      ]
+    }
+  ],
+  "scoring_contract": {
+    "native_success": "not pre_satisfied and the unchanged checker on the post-episode world",
+    "native_denominator": 5,
+    "dependent_denominator": 2,
+    "merged_tasks": "Native _merge retains multiple user messages but scores only the first TaskSpec in that episode; retain that rule. Supplementary obligation checks are diagnostics, not rewritten native scores.",
+    "value_tracer": "Use merit.metrics.memory_utilized on actual executed business tool arguments; distinguish string matching from causal contribution.",
+    "llm_judge": "NOT_REQUIRED_FOR_NATIVE_MERIT_SCORING"
+  },
+  "interventions": {
+    "notes": {
+      "decision_policy": "notes",
+      "decision_feedback": false,
+      "decision_gap_focus": false
+    },
+    "basis": {
+      "decision_policy": "basis",
+      "decision_feedback": true,
+      "decision_gap_focus": true
+    }
+  },
+  "matched_conditions": [
+    "original arc/world/checker and arrival order",
+    "original per-episode sessions; no cross-episode active decision",
+    "same Host/embed/capacity/tools/logs/recovery",
+    "same initial empty memory per arm",
+    "state_policy off; no old State profile"
+  ],
+  "opportunity_audit": {
+    "cross_episode_amount_updates": "Present as durable-memory regression; task reset clears current decision. Not a natural pre-update active-decision adoption opportunity across those episodes.",
+    "within_turn_version_change": "Possible only if Host adopts an older delivered card then actually revises that card; declaration is not forced.",
+    "same_task_new_observations": "Episodes 1 and 2 have two original user messages; each second message concerns a different order. Current decision can be retargeted or retained by Host.",
+    "query_gap": "Only applicable if a genuine unresolved information need is expressed; ordinary arm may rewrite queries.",
+    "continuous_reuse": "Original episode windows contain at most two public messages and change order; do not merge sessions or manufacture N=4/8 prefixes."
+  },
+  "statemembench": "NOT_RUN_OFFICIAL_DATA_LICENSE_SCORER_UNAVAILABLE",
+  "E1": "COMPLETE_NATIVE_5_5_VS_3_5_BASIS_UNUSED",
+  "E2": "NOT_RUN_NO_ADOPTED_DECISION_OR_GAP_QUERY",
+  "E3": "NOT_RUN_NO_ADOPTED_DECISION_OR_RECHECK_PREFIX",
+  "E4": "NOT_RUN_NO_NATURAL_REPEATED_DECISION_WINDOW",
+  "gold_into_host": false,
+  "data_modified": false
+}

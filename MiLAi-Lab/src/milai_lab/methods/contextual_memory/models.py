@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Literal, cast
 
+from milai_lab.methods.contextual_memory.decision_basis import DecisionBasis
+
 
 @dataclass(frozen=True)
 class Observation:
@@ -52,6 +54,8 @@ class TaskState:
     valid_at: str = ""
     known_at: str = ""
     overrides: dict[str, dict[str, str]] = field(default_factory=dict)
+    active_decision: DecisionBasis | None = None
+    work_note: str = ""
 
 
 Completion = Literal["complete", "partial_failure", "failed", "pending"]

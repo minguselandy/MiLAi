@@ -18,6 +18,15 @@ from typing import Any
 
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 
+from milai_lab.methods.contextual_memory.decision_basis import (
+    DecisionBasis,
+)
+from milai_lab.methods.contextual_memory.decision_basis import (
+    mark_change as mark_decision_change,
+)
+from milai_lab.methods.contextual_memory.decision_basis import (
+    restored as restored_decision,
+)
 from milai_lab.methods.contextual_memory.deletion import DeletionLedger
 from milai_lab.methods.contextual_memory.material_view import MaterialView
 from milai_lab.methods.contextual_memory.materials import base_material, linked_packet
@@ -76,7 +85,7 @@ from milai_lab.methods.state_attention import (
 )
 from milai_lab.methods.state_focus import SourceSnapshot, SourceUnit
 
-METHOD_VERSION = "contextual-user-memory-v14"
+METHOD_VERSION = "contextual-user-memory-v15"
 INDEX_POLICY = "source-range-2048-overlap256-bm25-vector-rrf60-v2"
 
 
@@ -218,6 +227,7 @@ TOOLS = [
         "Discover current sources and interpretations; whole units only.",
         {
             "query": _STRING,
+            "focus": {"type": "string", "enum": ["default", "critical_gap"]},
             "limit": {"type": "integer", "minimum": 1, "maximum": 32},
             "max_bytes": {"type": "integer", "minimum": 1, "maximum": 65536},
             "valid_at": _STRING,
@@ -351,6 +361,9 @@ class ContextualMemory:
         embedding_dimension: int = 1024,
         embedding_identity: str | None = None,
         state_policy: str = "off",
+        decision_policy: str = "off",
+        decision_feedback: bool | None = None,
+        decision_gap_focus: bool | None = None,
         profile: str = "ordinary",
         material_mode: str = "plain",
         maintenance_mode: str = "eager",
@@ -363,6 +376,21 @@ class ContextualMemory:
         if state_policy not in {"off", "optional", "forced_legacy"}:
             raise ValueError("UNKNOWN_STATE_POLICY")
         self.state_policy = state_policy
+        if decision_policy not in {"off", "notes", "basis"} or (
+            decision_policy != "off" and state_policy != "off"
+        ):
+            raise ValueError("UNKNOWN_OR_INCOMPATIBLE_DECISION_POLICY")
+        decision_feedback = (decision_policy == "basis" if decision_feedback is None
+                             else decision_feedback)
+        decision_gap_focus = (decision_policy == "basis" if decision_gap_focus is None
+                              else decision_gap_focus)
+        if (type(decision_feedback) is not bool or type(decision_gap_focus) is not bool
+                or (decision_policy != "basis" and
+                    (decision_feedback or decision_gap_focus))):
+            raise ValueError("INVALID_DECISION_CONTROL")
+        self.decision_policy = decision_policy
+        self.decision_feedback = decision_feedback
+        self.decision_gap_focus = decision_gap_focus
         self.state_used = False
         if profile not in {"ordinary", "support"}:
             raise ValueError("UNKNOWN_MEMORY_PROFILE")
@@ -513,6 +541,7 @@ class ContextualMemory:
         self.next_source_sequence = max(self.next_source_sequence, self.source_sequence[ref] + 1)
         if observation.supersedes:
             mark_affected(self, {observation.supersedes}, reviewed=set())
+            self._scan_decision_changes()
         self._invalidate_coverage()
         return ref
 
@@ -594,6 +623,10 @@ class ContextualMemory:
                 transferred["known_at"] = ""
             for key in ("intentions", "conflicts", "recent_refs"):
                 transferred[key] = [self.resolve(ref) for ref in transferred[key]]
+            transferred["active_decision"] = restored_decision(
+                transferred.get("active_decision")
+            ) if same_task else None
+            transferred["work_note"] = transferred.get("work_note", "") if same_task else ""
             self.state = TaskState(**transferred)
             self.state_used = bool(handoff.get("state_used", False))
             self.workspace.working_note = self.state.context
@@ -606,6 +639,17 @@ class ContextualMemory:
     ) -> None:
         """Move the current request forward without dropping session sources or State."""
         fresh = task_context(self.state.task_id, question, conditions, valid_at)
+        previous_conditions = {
+            (item["key"], item["value"])
+            for item in self.state.query_context.get("condition_evidence", [])
+            if item.get("basis") == "task_input"
+        }
+        next_conditions = {
+            (item["key"], item["value"])
+            for item in fresh.get("condition_evidence", [])
+            if item.get("basis") == "task_input"
+        }
+        changed = self.state.valid_at != valid_at or previous_conditions != next_conditions
         self.state.query_context = fresh
         self.state.valid_at = valid_at
         self.state.conditions = {}
@@ -613,6 +657,39 @@ class ContextualMemory:
         self.workspace.frame.question = question
         self.expansion = {}
         self._invalidate_coverage()
+        if changed and self.decision_feedback and self.state.active_decision is not None:
+            for adopted in self.state.active_decision.adopted:
+                mark_decision_change(self.state.active_decision, exact_ref=adopted.exact_ref,
+                                     current_ref=adopted.observed_ref,
+                                     reason="task_scope_changed")
+
+    def apply_decision(self, value: DecisionBasis | None) -> None:
+        if self.decision_policy != "basis":
+            raise ValueError("DECISION_POLICY_NOT_BASIS")
+        if value is not None and value.task_id != self.state.task_id:
+            raise ValueError("DECISION_TASK_MISMATCH")
+        old_focus = (
+            self.state.active_decision.critical_gap,
+            self.state.active_decision.scope.get("item", ""),
+        ) if self.state.active_decision is not None else ("", "")
+        self.state.active_decision = value
+        new_focus = (value.critical_gap, value.scope.get("item", "")) if value else ("", "")
+        if old_focus != new_focus:
+            self.expansion = {}
+            self.latest_search = None
+
+    def _scan_decision_changes(self) -> None:
+        decision = self.state.active_decision
+        if decision is None or not self.decision_feedback:
+            return
+        for row in decision.adopted:
+            try:
+                current = self.resolve(row.exact_ref)
+            except (KeyError, ValueError):
+                current = "unavailable"
+            if current != row.observed_ref:
+                mark_decision_change(decision, exact_ref=row.exact_ref,
+                                     current_ref=current, reason="adopted_version_changed")
 
     def bind_envelope(self, envelope: TaskEnvelope) -> None:
         if envelope.user_id != self.user_id or envelope.task_id != self.state.task_id:
@@ -1407,6 +1484,7 @@ class ContextualMemory:
 
     def search(
         self, query: str = "", limit: int = 8, max_bytes: int = 16000,
+        focus: str = "default",
         valid_at: str = "", known_at: str = "", date_from: str = "",
         date_to: str = "", session_id: str = "", neighbor_window: int = 0,
         condition_evidence: list[dict[str, str]] | None = None,
@@ -1414,6 +1492,12 @@ class ContextualMemory:
         self._accept_condition_evidence(condition_evidence)
         projection = project_query(
             query, task_context=self.state.query_context, state=self.state,
+            focus=focus,
+            gap=(self.state.active_decision.critical_gap
+                 if self.state.active_decision is not None else "")
+                if self.decision_policy == "basis" and self.decision_gap_focus else "",
+            anchor=(self.state.active_decision.scope
+                    if self.state.active_decision is not None else {}),
             explicit_filters={
                 "valid_at": valid_at, "known_at": known_at,
                 "date_from": date_from, "date_to": date_to,
@@ -1991,6 +2075,9 @@ class ContextualMemory:
             "embedding_identity": self.embedding_identity,
             "index_policy": INDEX_POLICY,
             "state_policy": self.state_policy,
+            "decision_policy": self.decision_policy,
+            "decision_feedback": self.decision_feedback,
+            "decision_gap_focus": self.decision_gap_focus,
             "profile": self.profile,
             "material_mode": self.material_mode,
             "maintenance_mode": self.maintenance_mode,
@@ -2052,6 +2139,9 @@ class ContextualMemory:
         embedding_dimension: int | None = None,
         material_mode: str | None = None,
         state_policy: str | None = None,
+        decision_policy: str | None = None,
+        decision_feedback: bool | None = None,
+        decision_gap_focus: bool | None = None,
         deletion_ledger: DeletionLedger | None = None,
     ) -> ContextualMemory:
         if value["format"] != METHOD_VERSION or value["user_id"] != user_id:
@@ -2059,6 +2149,17 @@ class ContextualMemory:
         effective_policy = state_policy or value["state_policy"]
         if (effective_policy != value["state_policy"] and value["task"] is not None):
             raise ValueError("CHECKPOINT_TASK_POLICY_MISMATCH")
+        effective_decision = decision_policy or value["decision_policy"]
+        effective_feedback = (value["decision_feedback"] if decision_feedback is None
+                              else decision_feedback)
+        effective_gap_focus = (value["decision_gap_focus"] if decision_gap_focus is None
+                               else decision_gap_focus)
+        if value["task"] is not None and (
+            effective_decision != value["decision_policy"]
+            or effective_feedback != value["decision_feedback"]
+            or effective_gap_focus != value["decision_gap_focus"]
+        ):
+            raise ValueError("CHECKPOINT_TASK_DECISION_POLICY_MISMATCH")
         actual_model = embedding_model if embedding_model is not None else value["embedding_model"]
         actual_dimension = (
             embedding_dimension if embedding_dimension is not None else value["embedding_dimension"]
@@ -2078,6 +2179,9 @@ class ContextualMemory:
             embedding_dimension=actual_dimension,
             embedding_identity=embedding_identity,
             state_policy=effective_policy,
+            decision_policy=effective_decision,
+            decision_feedback=effective_feedback,
+            decision_gap_focus=effective_gap_focus,
             profile=value["profile"],
             material_mode=material_mode or value["material_mode"],
             maintenance_mode=value["maintenance_mode"],
@@ -2108,7 +2212,11 @@ class ContextualMemory:
             memory._restore_overlay(value["task"]["overlay"])
             if same_index:
                 memory.expansion = copy.deepcopy(value["task"]["expansion"])
-            memory.state = TaskState(**value["task"]["state"])
+            state_data = dict(value["task"]["state"])
+            state_data["active_decision"] = restored_decision(
+                state_data.get("active_decision")
+            )
+            memory.state = TaskState(**state_data)
             memory.state_used = bool(value["task"].get("state_used", False))
             if same_index:
                 memory.latest_search = copy.deepcopy(value["task"]["latest_search"])
@@ -2123,6 +2231,7 @@ class ContextualMemory:
                 raise ValueError("CHECKPOINT_SOURCE_MISSING")
             memory._dependency_status(memory.details[handle])
         memory._apply_deletions()
+        memory._scan_decision_changes()
         memory.execution_context = TaskEnvelope(
             user_id, memory.state.task_id,
             "history" if memory.state.task_id == "history" else "answer",
@@ -2139,6 +2248,8 @@ class ContextualMemory:
         actual_id = operation_id if operation_id is not None else new_save_operation_id()
         result = self._dispatch(name, arguments)
         result["operation_id"] = actual_id
+        if result.get("decision") in {"COMMITTED", "PARTIAL"}:
+            self._scan_decision_changes()
         return result
 
     def _dispatch(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:

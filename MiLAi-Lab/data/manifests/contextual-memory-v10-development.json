@@ -1,0 +1,519 @@
+{
+  "stage": "E1_COMPLETE_CANDIDATE_NOT_USED_EFFECT_UNESTABLISHED",
+  "baseline_commit": "7247742133de888276342c48638b12c81eaeec23",
+  "baseline_source_mapping_sha256": "9854a237f583563618c45ffb59e589484f6c4dea74a8393a1b5c41aa0ce7a0b8",
+  "baseline_source_files_verified": 44,
+  "v9_ledger": {
+    "generation_requests": 119,
+    "generation_tokens": 966332,
+    "embedding_tokens": 4358,
+    "sha256": "8f5021ff4b7cb7d04b3fae7954d488d90ef4a3e08716f0ea97db8cebc401aed6"
+  },
+  "v10_real_model_calls": 51,
+  "local_references": [
+    {
+      "name": "MERIT",
+      "local_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+      "official_source": "https://github.com/smshweta/merit-bench.git",
+      "commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+      "license": "MIT",
+      "consulted_files": {
+        "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+        "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+        "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+        "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d"
+      },
+      "use": "Unchanged original tasks, native business tools and checker; no new selection before implementation.",
+      "copied_source": false
+    },
+    {
+      "name": "AgeMem",
+      "local_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/AgeMem",
+      "official_source": "https://github.com/y1y5/AgeMem.git",
+      "commit": "98f563f907d67b2f2436e3ae7b7ceff32e482814",
+      "license": "No repository license file found; consulted interfaces only, no source copied",
+      "consulted_files": {
+        "README.md": "288c9d9ab062b7184a5c26aa7912155378e293e7e11764430bfea70b35e267a2",
+        "AgeMem_code_agentscope/agent.py": "da5c2067e487e1de003b082b6af4816bd1fa779371a167bdd0b0548f9bd445ad",
+        "AgeMem_code_agentscope/src/schemas.py": "4d2c999517426258945761a6b934015ef238eb92d034a0462f04c06e51302b47"
+      },
+      "use": "Use normal ReAct CRUD and context operations; do not import training or arbitrary execution tooling.",
+      "copied_source": false
+    },
+    {
+      "name": "ProactiveMemory",
+      "local_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/ProactiveMemory",
+      "official_source": "https://github.com/yifannnwu/proactive-memory-agent.git",
+      "commit": "89e5c0d6aadfe531a1aee42fd290d48be89973dd",
+      "license": "Apache-2.0",
+      "consulted_files": {
+        "README.md": "b4b07b9cf9dd8ed7624b393ee9f8a6301fd72cbcb9fbcfb994d92d30d885ef8a",
+        "LICENSE": "bbbcb4cfa4a21f1f5a1dbb6941c4005c284851843849d250833af730e1d4a376",
+        "src/memory_agent/memory/trigger.py": "4c9981e57ba9b28ae2da398b2d2eb8a30905bdd4b33951a827b6f60227abd16f",
+        "src/memory_agent/memory/universal_memory.py": "bc816449dbdac2cb0b2d03d0e2e5af008ce9c563fcabb93d741a09d7be0bf8b0"
+      },
+      "use": "Separate current task status from durable memory; do not copy its every-turn memory-agent trigger.",
+      "copied_source": false
+    },
+    {
+      "name": "MemTX",
+      "local_root": "/cra/memory/mx_memory/reference-sources/contextual-v3/MemTX",
+      "official_source": "https://github.com/lxy1134/MEMTX_.git",
+      "commit": "4e1124ccd5fd384857463020e3497aa73ec93be6",
+      "license": "No repository license file found; consulted interfaces only, no source copied",
+      "consulted_files": {
+        "README.md": "51a94bd2ed36fa40640a50737c31f29b692639031ac02af48aae8ea151050602",
+        "src/memtx/dependency_graph.py": "26b34e1fdf1d05416bcdc5bca365c7baa55987b28a896ae272789bb0b9be09c0",
+        "src/memtx/state_machine.py": "fff3a5f2dfaa91a6d001d2809011d57532e0b6d0ef398ad70472100a9bec61ef"
+      },
+      "use": "Inspect explicit dependency changes and cleanup; V0 scans one adopted set, no global DAG or transaction framework.",
+      "copied_source": false
+    }
+  ],
+  "literature_only": [
+    {
+      "name": "MAGE",
+      "paper": "https://arxiv.org/html/2606.06090v1",
+      "implementation_required": false,
+      "version": "2606.06090v1",
+      "official_paper_checked": true,
+      "use": "Execution-state maintenance as prior work; no execution tree or GUI environment introduced"
+    },
+    {
+      "name": "MemR3",
+      "paper": "https://arxiv.org/html/2512.20237v1",
+      "implementation_required": false,
+      "version": "2512.20237v1",
+      "official_paper_checked": true,
+      "use": "Explicit information gap and new query as prior work; no separate reflective model"
+    }
+  ],
+  "sample_selection": "data/manifests/contextual-memory-v10-selection.json",
+  "product_changes": false,
+  "interface_freeze": {
+    "decision_policy": [
+      "off",
+      "notes",
+      "basis"
+    ],
+    "candidate_task_state_policy": "off",
+    "candidate_transport": "json_action",
+    "sidecar": {
+      "basis": "state_delta: null | set | clear",
+      "notes": "work_note: null | text"
+    },
+    "method_version": "contextual-user-memory-v15",
+    "decision_protocol": "decision-basis-v1",
+    "action_protocol": "contextual-json-action-v2",
+    "decision_feedback": true,
+    "decision_gap_focus": true,
+    "feedback_disabled_scope": "Only candidate automatic needs_recheck notifications; lifecycle and permission checks remain",
+    "gap_disabled_scope": "Only critical_gap focus action; explicit rewritten queries remain available",
+    "code_owner": "Sol xhigh integration",
+    "implementation_status": "IMPLEMENTED_NARROW_CHECKS_PASSED"
+  },
+  "official_release_check_manifest": {
+    "path": "/cra/memory/mx_memory/reference-sources/contextual-v10/reference-preparation.json",
+    "sha256": "07c44558256ae13324fb711d869a1a18e92c7641c2eb95259e999f213c68c9e6"
+  },
+  "official_references": [
+    {
+      "name": "StateMem / StateMemBench",
+      "arxiv_id": "2608.19652",
+      "version": "v1",
+      "official_urls": {
+        "abstract": "https://arxiv.org/abs/2608.19652v1",
+        "html": "https://arxiv.org/html/2608.19652v1",
+        "pdf": "https://arxiv.org/pdf/2608.19652v1",
+        "source_archive": "https://arxiv.org/e-print/2608.19652v1"
+      },
+      "paper_license": {
+        "name": "arXiv non-exclusive distribution license",
+        "url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "scope_note": "This is the paper's arXiv distribution license, not a license for StateMem code or benchmark data. No separate code/data license was found."
+      },
+      "downloaded_reference_files": [
+        {
+          "path": "state-mem-2608.19652/2608.19652v1.pdf",
+          "bytes": 797972,
+          "sha256": "fc03a3ae74997cbab8983118a05a19b573991846d3ef48774ebe7fc9e25811b5",
+          "kind": "official versioned paper PDF"
+        },
+        {
+          "path": "state-mem-2608.19652/2608.19652v1-source.tar.gz",
+          "bytes": 454693,
+          "sha256": "14232915a0e7d29e14dbaf02c64136d6c79a04ce87faa9611aceb6dbd7c4ed26",
+          "kind": "official arXiv TeX/source package; contains paper sources and figures, not benchmark data or an executable scorer"
+        }
+      ],
+      "official_code_release": {
+        "status": "not_located",
+        "repository_url": null,
+        "commit": null,
+        "license": null,
+        "evidence": [
+          "The v1 arXiv HTML and source package contain no project repository or code-download URL; source-package search found only unrelated cited repositories.",
+          "GitHub repository API exact queries for StateMemBench and 2608.19652 returned 0 repositories on 2026-09-25.",
+          "Miri Liu's author site links the GitHub account emmatliu; its public repository listing contains no StateMem/StateMemBench repository. This is one author-linked publication check, not proof that no private or later release exists."
+        ],
+        "preparation_status": "No official implementation downloaded; do not substitute same-name projects."
+      },
+      "official_dataset_release": {
+        "status": "not_located_or_not_verifiable_from_official_release_endpoint",
+        "repository_url": null,
+        "commit": null,
+        "license": null,
+        "paper_claim": "The paper describes the benchmark as released and outlines its generation/validation process, but gives no project or dataset URL in the v1 paper/source package.",
+        "evidence": [
+          "Hugging Face dataset API search for StateMemBench returned no datasets on 2026-09-25.",
+          "GitHub repository API search for StateMemBench returned 0 repositories on 2026-09-25.",
+          "The downloaded arXiv source archive contains TeX, bibliography, and figures only; no scenario data or scorer files."
+        ],
+        "preparation_status": "No scenarios or gold labels obtained. Dataset license and actual downloadable availability remain unverified; do not select the planned four cases or recreate questions."
+      },
+      "original_evaluation_entry": {
+        "described_in_paper": "§4.1 (symbolic event programs, deterministic replay evaluator, closed-pool choices and failure modes), §4.3 (Set A/Set B and final probes), and Appendix D.6 (validation). The paper reports 190 Set A single-probe scenarios and 44 Set B composite scenarios with three-part probes.",
+        "executable_official_entrypoint_url": null,
+        "status": "paper-described_only; scorer code and runnable entrypoint not located"
+      }
+    },
+    {
+      "name": "ATMem / DataScope",
+      "arxiv_id": "2606.31612",
+      "version": "v2",
+      "official_urls": {
+        "abstract": "https://arxiv.org/abs/2606.31612v2",
+        "html": "https://arxiv.org/html/2606.31612v2",
+        "pdf": "https://arxiv.org/pdf/2606.31612v2",
+        "source_archive": "https://arxiv.org/e-print/2606.31612v2"
+      },
+      "paper_license": {
+        "name": "arXiv non-exclusive distribution license",
+        "url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "scope_note": "This is the paper's arXiv distribution license, not a license for ATMem code, model weights, or DataScope data. No separate code/data license was found."
+      },
+      "downloaded_reference_files": [
+        {
+          "path": "atmem-2606.31612/2606.31612v2.pdf",
+          "bytes": 13512438,
+          "sha256": "cdd01f44574d677bb9ed43c588e9c037159cc7d54eab15392b42806780f69bb8",
+          "kind": "official versioned paper PDF"
+        },
+        {
+          "path": "atmem-2606.31612/2606.31612v2-source.tar.gz",
+          "bytes": 12806626,
+          "sha256": "6ee34dadd8b2027b5254094457f81d56a84a1fdc00788a5bf70b2b92c35c2fc0",
+          "kind": "official arXiv TeX/source package; includes paper assets and figures, not an ATMem repository or DataScope dataset"
+        }
+      ],
+      "official_code_release": {
+        "status": "not_yet_available_or_not_located",
+        "repository_url": null,
+        "commit": null,
+        "license": null,
+        "paper_claim": "The v2 abstract says the code and model will be publicly available (future tense), with no URL.",
+        "evidence": [
+          "The v2 HTML/source package has no ATMem or DataScope project URL; its only relevant GitHub citation is the unrelated GELab-Zero environment.",
+          "GitHub repository API searches for 2606.31612 and ATMem-UI returned 0 repositories on 2026-09-25.",
+          "The Tongyi-Lab GitHub organization endpoint checked during preparation returned HTTP 404; no official repository was identified through that route."
+        ],
+        "preparation_status": "No official code/model repository or commit downloaded; do not use same-name AtMem/ATMem projects."
+      },
+      "official_dataset_release": {
+        "status": "not_located",
+        "repository_url": null,
+        "commit": null,
+        "license": null,
+        "paper_claim": "The paper describes DataScope (32 templates, 96 instances, 3 difficulty levels) but gives no data-release URL.",
+        "evidence": [
+          "Hugging Face dataset API search for DataScope returned unrelated repositories only; exact ATMem/DataScope attribution was not found.",
+          "The downloaded arXiv source archive contains TeX, bibliography, fonts, and paper figures only; no DataScope examples or evaluator source."
+        ],
+        "preparation_status": "No benchmark data obtained. Dataset license and downloadable availability are unknown; do not synthesize substitute tasks."
+      },
+      "original_evaluation_entry": {
+        "described_in_paper": "§3.4 DataScope Online Mobile Benchmark and Metrics; App-Level Progress and Scope-Aware F1 are described there and in Appendix A.4/A.6. Appendix A.4–A.7 contains benchmark construction, verifier calibration, and task templates.",
+        "executable_official_entrypoint_url": null,
+        "status": "paper-described_only; official verifier/scoring code and runnable entrypoint not located"
+      }
+    }
+  ],
+  "statemembench_experiment_status": "NOT_RUN_OFFICIAL_DATA_LICENSE_SCORER_UNAVAILABLE",
+  "validation": {
+    "kind": "v10_development_narrow_validation",
+    "before_focus_cache_fix": [
+      {
+        "command": "uv run pytest -q --tb=line tests/unit/test_contextual_decision_basis.py tests/unit/test_contextual_host_adapter.py tests/unit/test_contextual_runtime_store.py tests/unit/test_contextual_retrieval.py tests/unit/test_contextual_sessions.py tests/unit/test_contextual_v9_prepare.py tests/unit/test_contextual_merit_adapter.py tests/unit/test_contextual_turn_maintenance.py",
+        "result": "77 passed in 3.46s"
+      },
+      {
+        "command": "uv run pytest -q --tb=line tests/unit/test_contextual_runtime_recovery.py::test_v3_raw_business_result_recovers_in_new_process_and_finishes tests/unit/test_contextual_deletion.py::test_external_deletion_survives_old_checkpoint_and_republication tests/unit/test_contextual_sessions.py::test_incremental_session_uses_explicit_binding_and_never_caches_business_execution",
+        "result": "3 passed in 3.90s"
+      },
+      {
+        "command": "uv run ruff check src/milai_lab/methods/contextual_memory/decision_basis.py src/milai_lab/methods/contextual_memory/models.py src/milai_lab/methods/contextual_memory/query_context.py src/milai_lab/methods/contextual_user_memory.py src/milai_lab/runners/contextual_host.py src/milai_lab/runners/contextual_agent_tasks.py src/milai_lab/runners/contextual_runtime_store.py src/milai_lab/runners/contextual_maintenance.py tools/prepare_contextual_v9.py tools/run_contextual_merit.py tests/unit/test_contextual_decision_basis.py tests/unit/test_contextual_v9_prepare.py",
+        "result": "All checks passed"
+      },
+      {
+        "command": "uv run mypy src/milai_lab/methods/contextual_memory/decision_basis.py src/milai_lab/methods/contextual_memory/models.py src/milai_lab/methods/contextual_memory/query_context.py src/milai_lab/methods/contextual_user_memory.py src/milai_lab/runners/contextual_host.py src/milai_lab/runners/contextual_agent_tasks.py src/milai_lab/runners/contextual_runtime_store.py src/milai_lab/runners/contextual_maintenance.py tools/prepare_contextual_v9.py tools/run_contextual_merit.py",
+        "result": "Success: no issues found in 10 source files"
+      }
+    ],
+    "focus_cache_fix": [
+      {
+        "command": "uv run pytest -q --tb=line tests/unit/test_contextual_decision_basis.py",
+        "result": "7 passed in 1.66s"
+      },
+      {
+        "command": "uv run ruff check src/milai_lab/methods/contextual_user_memory.py src/milai_lab/runners/contextual_host.py tests/unit/test_contextual_decision_basis.py",
+        "result": "All checks passed"
+      },
+      {
+        "command": "uv run mypy src/milai_lab/methods/contextual_user_memory.py src/milai_lab/runners/contextual_host.py",
+        "result": "Success: no issues found in 2 source files"
+      }
+    ]
+  },
+  "grammar_validation": {
+    "xgrammar": "0.2.3",
+    "vllm": "0.27.1",
+    "any_order": false,
+    "model_calls": 0,
+    "results": [
+      {
+        "name": "basis_null",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "basis_set_gap",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "basis_set_patch",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "basis_clear_finish",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "basis_continue",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "notes_null",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "notes_and_finish",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "final_basis_set",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "missing_sidecar",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "forbidden_resolved",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "mixed_sidecars",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "notes_cannot_claim_basis",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      }
+    ]
+  },
+  "frozen_source": {
+    "status": "DEVELOPMENT_COMPLETE_READY_FOR_BENCHMARK_SELECTION",
+    "source_sha256": {
+      "src/milai_lab/datasets/contextual.py": "2d856518eb0ac3b5e0f5da03833563bcc4155663140f8c4a2f11519e465127bf",
+      "src/milai_lab/datasets/memsyco.py": "1547cf025cff2d3980a57afcdb710372ea8a42b4094918518fb9ac1b2a8b9110",
+      "src/milai_lab/datasets/stale.py": "132a00b9adaa77dcc9974e87041460fa9462a55a97a6f4f6ddd6cd580109d447",
+      "src/milai_lab/scorers/contextual.py": "d275c70d536b67702c9ef4e5ab0bb742a80301c1f5fe0b1da0e676d37f394558",
+      "src/milai_lab/scorers/memsyco.py": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+      "src/milai_lab/scorers/stale.py": "683ff4bb82dc7c0c4e4a18824504a44d865f04980158322757f39e8612b0f75f",
+      "src/milai_lab/methods/contextual_user_memory.py": "40ec447b84a1a2ea8f7da6db2d8557b03cf774ff6556a8685c6606dfe7e1028f",
+      "src/milai_lab/methods/controlled_workspace.py": "4d62f79faa15f7b442862bc7702cb9f2532e49c6051782544d973f96d3ea95a3",
+      "src/milai_lab/methods/reasoning_bank.py": "1ad2548cb22e0c9abba294157aeefd04a2a907888c7f256b71487b635549581f",
+      "src/milai_lab/methods/state_attention.py": "642b8eab8fbf4b34d48187c99b5d31960d32f5dbc98b7a0912073199382f4ebd",
+      "src/milai_lab/methods/state_focus.py": "bcdb8056944f7989cfed62361660ceb3be7a5a11db2ad8d7243fdacdb005b061",
+      "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+      "src/milai_lab/providers/contextual_embeddings.py": "9500273aa839663b713d57b3d008c38dba1845e6645f38f8b779937e10e0b604",
+      "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+      "src/milai_lab/runners/contextual.py": "3ffde5762de5acf053abde1ed1c477077d910974d3584728cc55fc30dbb3665d",
+      "src/milai_lab/runners/contextual_agent_tasks.py": "c75f7eb2190b8dec679dea147206dc0479329665629812c4ccd98868c703098a",
+      "src/milai_lab/runners/contextual_delivery.py": "88aeb913e4d433d78c04fa2a85d5a756c5346cb293ede836573f6d7138b13be3",
+      "src/milai_lab/runners/contextual_host.py": "4f077061aa25b0cb407a9573cad8061e89a17a48076128ad4b75ab4081b41c39",
+      "src/milai_lab/runners/contextual_ingestion.py": "71817b6e967c7258567af7ef58e2331233b76f7abda9bd781da321bc2e03d604",
+      "src/milai_lab/runners/contextual_maintenance.py": "092976d65af952e93015ae48ac63cf3d83c10ce0a65dcae8b71f334e31eb467c",
+      "src/milai_lab/runners/contextual_profiles.py": "ceece4d86a31b510e3d1c7e3c95fc396d0f0c78d99682b271f29f21b2b83c01f",
+      "src/milai_lab/runners/contextual_runtime_store.py": "9ae0fd792a4befe1bff2f2226b00bfbe96f14bf8d9e5f7df8da890d792eef490",
+      "src/milai_lab/runners/contextual_scoring.py": "4ac57a9f77f7ca5ccae7e3e5a04122500b3b41c9a39e8df246848fd08f7b4a12",
+      "src/milai_lab/runners/contextual_session.py": "c51ff93945b079df55f1e6c91f520a616fbe1518998f2efb8f0f9c234f31e395",
+      "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+      "tools/prepare_contextual_v9.py": "8daeb9122bf8d92f5e64f7e4bb41b5df3426cdf49b471f32244aecae034437dc",
+      "tools/run_contextual_merit.py": "8ed6717d6ab00dc2b9f857d17a32378afcf705ee8ef6dd8e238c698b25029729",
+      "tools/run_contextual_user_memory.py": "c309706c62da1dc30ff7df59a77f1f727260f40bc41a8d45ba28fa3c22d84b13",
+      "examples/contextual_document.py": "fd2e27603d1918f97827bced49cf7d42e894dd44ccfede3938291ba402babd8f",
+      "configs/contextual-memory-v9-template.json": "8deead51f32ca00894ef0bb79b41e6ade013e60e4d3dc6177b094c02f540451f",
+      "data/manifests/contextual-memory-v9-document-sequence.json": "b6af859639f3475af2bc54840758a63f87b6877bdc0e4923f8a3365ce1fdba8c",
+      "pyproject.toml": "a1ca4c535526fd0c822373bfb97bb77dfd2daf9c2855c8db276e9fdbf245395e",
+      "uv.lock": "36050ba3e272b7904a3e47542b3daf53dd8677ae4de5a7bed3e499220beefb01",
+      "configs/contextual-memory-v10-notes-template.json": "4d2685e9979416ebe59bc30226108e3af4ab88430db9efe344afcc217ee008b7",
+      "configs/contextual-memory-v10-basis-template.json": "888b8b2207b3a41b0f6787457bc58b9494f9900c621db73e2c42a82bb6b31cb3",
+      "src/milai_lab/methods/contextual_memory/__init__.py": "2cead58efc51f4927abffb680acfa3ab94205136a1aa39e593a97764c3eaa58d",
+      "src/milai_lab/methods/contextual_memory/decision_basis.py": "245cfef6acb11dae3953b94bd52a197bf6322fd0e3157a43b5cd892d97fa8d3b",
+      "src/milai_lab/methods/contextual_memory/deletion.py": "9e9f6b6176a0c0187c6d8d8470d53db2d6cab369640402914de87089f0b441d1",
+      "src/milai_lab/methods/contextual_memory/material_view.py": "0d35dca5aa400d35d5bc05fb63fd49faea78880058b6983ff3ecd6f784577357",
+      "src/milai_lab/methods/contextual_memory/materials.py": "5311cdd7973130680a1dfb0cd4f98790e133df29be547f26b06d75b47dd09fa7",
+      "src/milai_lab/methods/contextual_memory/models.py": "07b82268552fd2aa2c34576a02e1184fd7c2d58d93d67d81efbf5aa1d3d2286d",
+      "src/milai_lab/methods/contextual_memory/operations.py": "6daf5b369afec36bab9a9868f06f6cfb2788d8ca4c42892525c08fd67629bced",
+      "src/milai_lab/methods/contextual_memory/query_context.py": "0d5c3e8e3965aa9045efc75d5d16236bec41a83ed85658de278a4d37d5449e5c",
+      "src/milai_lab/methods/contextual_memory/retrieval.py": "7e6d26360305cfdf3d7d60d56f03afe281b81be67b7185b8f1ab5a58b2c5cea8",
+      "src/milai_lab/methods/contextual_memory/revision.py": "362b0d3c4dc99a40b9e6e14c2d5cfa434881d324277f69ca52719e6ffd6243d6",
+      "src/milai_lab/methods/contextual_memory/store.py": "df4a67b086b6bd48599bcd2e98c2a06d86188560cc71871e9ff6ced38abee670",
+      "src/milai_lab/methods/contextual_memory/write_contract.py": "dd6c62e046eeea0196f5228447afefd96755c51f733adb89c3486c192f864067"
+    },
+    "source_mapping_sha256": "57fef8a534cef57e2d44015f91bb6fb443066484ca1420f74c4216a655344f14",
+    "config_sha256": {
+      "artifacts/contextual-user-memory/v10-notes-prepared/config.json": "188f8ef5ba31405e2f06fd21ded5c0d0ad8b7205f70c107733ca23711d724af0"
+    }
+  },
+  "frozen_configurations": {
+    "notes": {
+      "config_sha256": "188f8ef5ba31405e2f06fd21ded5c0d0ad8b7205f70c107733ca23711d724af0",
+      "config_path": "artifacts/contextual-user-memory/v10-notes-prepared/config.json",
+      "decision_policy": "notes",
+      "model_identity": {
+        "artifacts": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v10-notes-prepared/model-weights.json",
+            "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v10-notes-prepared/model-metadata.json",
+            "sha256": "195cc9b2901da04bdcbd923458f4606a22c8b156c09df25620731171efefd594"
+          },
+          {
+            "path": "/data/models/embed/tokenizer.json",
+            "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+          }
+        ],
+        "host": {
+          "local_path": "/cra/qwen36-35B",
+          "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+          "metadata": {
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+            "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+            "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+            "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+            "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b"
+          },
+          "served_model": "Qwen3.6-35B-A3B-FP8",
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_model_len": 65536
+        },
+        "embedding": {
+          "local_path": "/data/models/embed",
+          "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+          "metadata": {
+            "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+            "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1",
+            "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+          },
+          "served_model": "bge-m3"
+        },
+        "verification": "Local weights and metadata hashed during v10 preparation; manifests checked on run."
+      },
+      "selection_path": "artifacts/contextual-user-memory/v10-notes-prepared/selection.json",
+      "freeze_path": "artifacts/contextual-user-memory/v10-notes-prepared/freeze.json"
+    },
+    "basis": {
+      "config_sha256": "df8bf48b1302da7fe51ed6e8209e37c83bf17508e0d674b643de2a727bd31b69",
+      "config_path": "artifacts/contextual-user-memory/v10-basis-prepared/config.json",
+      "decision_policy": "basis",
+      "model_identity": {
+        "artifacts": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v10-basis-prepared/model-weights.json",
+            "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v10-basis-prepared/model-metadata.json",
+            "sha256": "195cc9b2901da04bdcbd923458f4606a22c8b156c09df25620731171efefd594"
+          },
+          {
+            "path": "/data/models/embed/tokenizer.json",
+            "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+          }
+        ],
+        "host": {
+          "local_path": "/cra/qwen36-35B",
+          "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+          "metadata": {
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+            "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+            "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+            "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+            "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b"
+          },
+          "served_model": "Qwen3.6-35B-A3B-FP8",
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_model_len": 65536
+        },
+        "embedding": {
+          "local_path": "/data/models/embed",
+          "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+          "metadata": {
+            "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+            "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1",
+            "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+          },
+          "served_model": "bge-m3"
+        },
+        "verification": "Local weights and metadata hashed during v10 preparation; manifests checked on run."
+      },
+      "selection_path": "artifacts/contextual-user-memory/v10-basis-prepared/selection.json",
+      "freeze_path": "artifacts/contextual-user-memory/v10-basis-prepared/freeze.json"
+    }
+  },
+  "results": "data/manifests/contextual-memory-v10-results.json",
+  "goal_complete": false
+}

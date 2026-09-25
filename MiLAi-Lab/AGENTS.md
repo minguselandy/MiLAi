@@ -36,6 +36,23 @@ canonical memory state.
 
 ## Required checks
 
+The user explicitly authorized execution of [Goal v10.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)
+and its detailed design. Planning-only wording is historical. Follow A → B–D implementation
+and narrow checks → E frozen original small selection → F staged real comparisons. Keep one
+Sol xhigh owner for the core/Host/session integration; Luna high handles official downloads
+and user-authorized publication. No standing review agent. One model controller, concurrency 1.
+StateMemBench availability is a separate evidence question; do not invent or rename data.
+Keep ordinary default, old State/H1–H6 frozen, Lab-only scope, existing identity/permission/
+lifecycle/recovery guarantees, and continuous new v10 accounting that cites sealed v9 costs.
+No full suite or benchmark, no Product migration. No fresh model run before development freeze.
+The first frozen E1 comparison now completed: notes 5/5 (dependent 2/2), basis 3/5
+(dependent 1/2), both 7/7 Host turns. Basis produced 25 null deltas and no actual adoption,
+gap query or recheck chain. Preserve the two truncations, two native misses and all v10
+charges: 51 generations / 452656 generation tokens / 3955 embedding tokens, unknown=0,
+Judge=0. B–D engineering passed narrow checks; full Goal completion is NOT established.
+Do not force a State ritual, alter tasks or rerun simply to replace this negative result.
+See [v10 results](docs/CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md).
+
 [Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md)
 completed A–E and scoped final continuous validation. Preserve its
 [results](docs/CONTEXTUAL_USER_MEMORY_V9_RESULTS_20260925.md), first failed attempt,

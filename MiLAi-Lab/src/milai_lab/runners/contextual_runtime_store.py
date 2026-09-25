@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.harness.contextual_artifacts import digest
+from milai_lab.methods.contextual_memory.decision_basis import DECISION_PROTOCOL
 from milai_lab.methods.contextual_memory.deletion import DeletionLedger
 from milai_lab.methods.contextual_memory.material_view import (
     VIEW_PROTOCOL,
@@ -23,6 +24,7 @@ from milai_lab.methods.contextual_memory.material_view import (
 from milai_lab.methods.contextual_memory.operations import OPERATION_CONTRACT_VERSION
 from milai_lab.methods.contextual_memory.write_contract import WRITE_CONTRACT_VERSION
 from milai_lab.methods.contextual_user_memory import METHOD_VERSION, ContextualMemory
+from milai_lab.runners.contextual_host import ACTION_PROTOCOL
 from milai_lab.runners.contextual_session import HostSession
 
 STORE_PROTOCOL = "contextual-runtime-store-v1"
@@ -38,6 +40,11 @@ class RuntimeIdentity:
     embedding_dimension: int
     embedding_identity: str
     state_policy: str
+    decision_policy: str
+    decision_feedback: bool
+    decision_gap_focus: bool
+    decision_protocol: str
+    action_protocol: str
     method_version: str
     write_contract: str
     material_view_protocol: str
@@ -66,6 +73,13 @@ class RuntimeIdentity:
             embedding_dimension=config["embedding_dimension"],
             embedding_identity=embedding_identity,
             state_policy=config["state_policy"],
+            decision_policy=config.get("decision_policy", "off"),
+            decision_feedback=config.get("decision_feedback",
+                                         config.get("decision_policy") == "basis"),
+            decision_gap_focus=config.get("decision_gap_focus",
+                                          config.get("decision_policy") == "basis"),
+            decision_protocol=DECISION_PROTOCOL,
+            action_protocol=ACTION_PROTOCOL,
             method_version=METHOD_VERSION,
             write_contract=WRITE_CONTRACT_VERSION,
             material_view_protocol=VIEW_PROTOCOL,
@@ -298,6 +312,9 @@ class RuntimeStore:
             or checkpoint.get("embedding_dimension") != expected.embedding_dimension
             or checkpoint.get("embedding_identity") != expected.embedding_identity
             or checkpoint.get("state_policy") != expected.state_policy
+            or checkpoint.get("decision_policy") != expected.decision_policy
+            or checkpoint.get("decision_feedback") != expected.decision_feedback
+            or checkpoint.get("decision_gap_focus") != expected.decision_gap_focus
         ):
             raise ValueError("RUNTIME_CHECKPOINT_IDENTITY_MISMATCH")
 
@@ -349,6 +366,9 @@ class RuntimeStore:
             embedding_model=self.identity.embedding_model,
             embedding_dimension=self.identity.embedding_dimension,
             state_policy=self.identity.state_policy,
+            decision_policy=self.identity.decision_policy,
+            decision_feedback=self.identity.decision_feedback,
+            decision_gap_focus=self.identity.decision_gap_focus,
             deletion_ledger=deletion_ledger,
         )
 

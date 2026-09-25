@@ -1,5 +1,19 @@
 # MiLAi Lab goals
 
+## Active decision-basis Goal v10.0 (2026-09-25)
+
+[Goal v10.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md) adds one
+current decision with exact adopted evidence, same-response state and action updates,
+selective change feedback and explicit gap-focused retrieval. Ordinary remains default.
+[Development evidence](CONTEXTUAL_USER_MEMORY_V10_DEVELOPMENT_20260925.md) records
+implementation, checks and the status of scoped comparisons. Official StateMemBench
+data, license and scorer were not obtained; that experiment is NOT_RUN. Preserve v9
+identities, failures and costs; new v10 use has a separate continuous ledger.
+B–D engineering passed narrow checks. [E1 results](CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md)
+are notes 5/5 versus basis 3/5; basis never declared adoption. All 51 generations,
+452656 generation tokens and 3955 embedding tokens remain accounted. The real mechanism
+chain is unestablished, so the full Goal remains active rather than marked complete.
+
 ## Completed scoped maintenance contract Goal v9.0 (2026-09-25)
 
 [Goal v9.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md) completed A–E:

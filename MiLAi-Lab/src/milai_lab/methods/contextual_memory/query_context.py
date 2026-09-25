@@ -41,11 +41,24 @@ def task_context(
 
 def project_query(
     query: str, *, task_context: dict[str, Any], state: Any,
-    explicit_filters: dict[str, str],
+    explicit_filters: dict[str, str], focus: str = "default", gap: str = "",
+    anchor: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """Use the actual search request and declared filters, not State prose as a query."""
-    effective_query = query or str(task_context.get("question", ""))
-    sources: dict[str, Any] = {"query": "tool_argument" if query else "task_input"}
+    if focus == "critical_gap":
+        if query or not gap.strip():
+            raise ValueError("CRITICAL_GAP_REQUIRES_EMPTY_QUERY_AND_ACTIVE_GAP")
+        scope = anchor or {}
+        effective_query = " ".join(part for part in (
+            gap.strip(), scope.get("item", "").strip(),
+        ) if part)
+        origin = "critical_gap"
+    elif focus == "default":
+        effective_query = query or str(task_context.get("question", ""))
+        origin = "tool_argument" if query else "task_input"
+    else:
+        raise ValueError("UNKNOWN_SEARCH_FOCUS")
+    sources: dict[str, Any] = {"query": origin, "focus_origin": focus}
     filters: dict[str, str] = {}
     for key in ("valid_at", "known_at", "date_from", "date_to", "session_id"):
         value = explicit_filters.get(key, "")

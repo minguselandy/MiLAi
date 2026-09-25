@@ -1,4 +1,4 @@
-"""Prepare a fresh v9 MERIT run from local models and the pinned upstream checkout."""
+"""Prepare a pinned MERIT run from the v9 or v10 task template."""
 
 from __future__ import annotations
 
@@ -17,6 +17,10 @@ from milai_lab.harness.contextual_artifacts import digest, read_json, write_json
 
 LAB = Path(__file__).resolve().parents[1]
 TEMPLATE = LAB / "configs/contextual-memory-v9-template.json"
+V10_TEMPLATES = (
+    "configs/contextual-memory-v10-notes-template.json",
+    "configs/contextual-memory-v10-basis-template.json",
+)
 PINNED_SELECTION = LAB / "data/manifests/contextual-memory-v7-e0-selection-final.json"
 PINNED_MERIT_COMMIT = "293933d96b1d1849e1f20d1bb324def5de9ed33f"
 ARC_SHA256 = "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f"
@@ -86,8 +90,8 @@ def model_files(root: Path, *, weights: bool) -> dict[str, Any]:
     }
 
 
-def source_mapping() -> dict[str, str]:
-    paths = [*SOURCE_FILES, *(
+def source_mapping(*, v10: bool = False) -> dict[str, str]:
+    paths = [*SOURCE_FILES, *(V10_TEMPLATES if v10 else ()), *(
         str(path.relative_to(LAB))
         for path in sorted((LAB / "src/milai_lab/methods/contextual_memory").glob("*.py"))
     )]
@@ -123,8 +127,23 @@ def prepare(
     if commit != PINNED_MERIT_COMMIT:
         raise ValueError("MERIT_SOURCE_COMMIT_CHANGED")
     template = read_json(template_path)
-    if template["config_version"] != "contextual-task-v9":
-        raise ValueError("V9_TEMPLATE_VERSION_MISMATCH")
+    version = template.get("config_version")
+    if version == "contextual-task-v10":
+        policy = template.get("decision_policy")
+        if (policy not in {"notes", "basis"} or template.get("state_policy") != "off"
+                or template.get("maintenance_protocol") != "turn-maintenance-v3"
+                or template.get("host", {}).get("tool_mode") != "json_action"
+                or type(template.get("decision_feedback")) is not bool
+                or type(template.get("decision_gap_focus")) is not bool
+                or (policy == "notes" and (template["decision_feedback"]
+                                           or template["decision_gap_focus"]))):
+            raise ValueError("V10_TEMPLATE_DECISION_CONTRACT_MISMATCH")
+        arm = "react_notes_v10_off" if policy == "notes" else "decision_basis_v10_off"
+        label = "V10"
+    elif version == "contextual-task-v9":
+        arm, label = "ordinary_v9_off", "V9"
+    else:
+        raise ValueError("TEMPLATE_VERSION_MISMATCH")
     host_tokenizers = {
         name: file_sha256(host_dir / name)
         for name in ("tokenizer.json", "tokenizer_config.json", "chat_template.jinja")
@@ -175,13 +194,16 @@ def prepare(
             "served_model": config["embedding"]["model"],
         },
         "verification": (
-            "Local weights and metadata hashed during v9 preparation; "
+            f"Local weights and metadata hashed during {label.lower()} preparation; "
             "manifests checked on run."
         ),
     }
     config_path = output_dir / "config.json"
     write_json(config_path, config)
-    mapping = source_mapping()
+    template_key = _within_lab(template_path)
+    if version == "contextual-task-v10" and template_key not in V10_TEMPLATES:
+        raise ValueError("V10_TEMPLATE_PATH_NOT_PINNED")
+    mapping = source_mapping(v10=version == "contextual-task-v10")
     freeze = {
         "status": "DEVELOPMENT_COMPLETE_READY_FOR_BENCHMARK_SELECTION",
         "source_sha256": mapping, "source_mapping_sha256": digest(mapping),
@@ -190,14 +212,14 @@ def prepare(
     freeze_path = output_dir / "freeze.json"
     write_json(freeze_path, freeze)
     selection = copy.deepcopy(read_json(PINNED_SELECTION))
-    selection["status"] = "V9_PINNED_ORIGINAL_ARC"
+    selection["status"] = f"{label}_PINNED_ORIGINAL_ARC"
     selection["selection_role"] = (
-        "Previously exposed fixed arc for v9 continuous validation; not a new independent sample."
+        "Previously exposed fixed arc for continuous validation; not a new independent sample."
     )
     selection["external_root"] = str(merit_root)
     selection["source_commit"] = PINNED_MERIT_COMMIT
-    selection["execution_plan"]["arms"] = ["ordinary_v9_off"]
-    selection["execution_plan"]["status"] = "V9_FINAL_CONTINUOUS_VALIDATION"
+    selection["execution_plan"]["arms"] = [arm]
+    selection["execution_plan"]["status"] = f"{label}_CONTINUOUS_VALIDATION"
     selection["config_path"] = config_key
     selection["config_sha256"] = file_sha256(config_path)
     selection["development_freeze_sha256"] = freeze["source_mapping_sha256"]
@@ -252,6 +274,7 @@ def main() -> None:
     parser.add_argument("--host-model")
     parser.add_argument("--embedding-model")
     parser.add_argument("--embedding-tokenizer", type=Path)
+    parser.add_argument("--template", type=Path, default=TEMPLATE)
     parser.add_argument("--budget-path", type=Path,
                         default=LAB / "artifacts/contextual-user-memory/v9-budget.json")
     parser.add_argument("--live", action="store_true",
@@ -264,6 +287,7 @@ def main() -> None:
         budget_path=args.budget_path, host_model=args.host_model,
         embedding_model=args.embedding_model,
         embedding_tokenizer=args.embedding_tokenizer,
+        template_path=args.template,
     )
     print(json.dumps({"status": "PREPARED_ZERO_MODEL", **result}, ensure_ascii=False))
     if args.live:

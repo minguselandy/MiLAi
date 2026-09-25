@@ -263,6 +263,11 @@ def task_runtime(
                 embedding_model=config["embedding"]["model"],
                 embedding_dimension=config["embedding_dimension"],
                 embedding_identity=embed.identity, state_policy=config["state_policy"],
+                decision_policy=config.get("decision_policy", "off"),
+                decision_feedback=config.get("decision_feedback",
+                                             config.get("decision_policy") == "basis"),
+                decision_gap_focus=config.get("decision_gap_focus",
+                                              config.get("decision_policy") == "basis"),
             )
             profile = {"off": "ordinary", "optional": "state_optional",
                        "forced_legacy": "state"}[config["state_policy"]]
@@ -276,6 +281,7 @@ def task_runtime(
                 initial_context_limit=config.get("initial_context_limit", 4),
                 maintenance_policy=config.get("maintenance_policy", "off"),
                 maintenance_protocol=config.get("maintenance_protocol", "turn-maintenance-v2"),
+                decision_policy=config.get("decision_policy", "off"),
                 runtime_store=store,
             )
             host.last_session = store.restore_session(memory) if store else None
