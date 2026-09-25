@@ -45,13 +45,16 @@ StateMemBench availability is a separate evidence question; do not invent or ren
 Keep ordinary default, old State/H1–H6 frozen, Lab-only scope, existing identity/permission/
 lifecycle/recovery guarantees, and continuous new v10 accounting that cites sealed v9 costs.
 No full suite or benchmark, no Product migration. No fresh model run before development freeze.
-The first frozen E1 comparison now completed: notes 5/5 (dependent 2/2), basis 3/5
-(dependent 1/2), both 7/7 Host turns. Basis produced 25 null deltas and no actual adoption,
-gap query or recheck chain. Preserve the two truncations, two native misses and all v10
-charges: 51 generations / 452656 generation tokens / 3955 embedding tokens, unknown=0,
-Judge=0. B–D engineering passed narrow checks; full Goal completion is NOT established.
-Do not force a State ritual, alter tasks or rerun simply to replace this negative result.
-See [v10 results](docs/CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md).
+Preserve [R1](docs/CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md) as a historical failed
+comparison: notes 5/5, basis 3/5, basis all null, 51 generations / 452656 generation
+tokens / 3955 embedding tokens. [R2](docs/CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md)
+on the same exposed original arc scored notes 5/5, basis 4/5, both 7/7 Host complete;
+basis established one exact-adoption → new-observation → recheck → committed-revision chain,
+but no automatic version notice. Basis cost more. The scoped Goal is
+`COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`; ordinary remains default. Continuous v10
+charges are 122 generations / 1216124 generation tokens / 8148 embedding tokens,
+unknown=0, Judge=0. E2/E3/E4 and StateMemBench remain NOT_RUN. Do not force a State ritual,
+alter tasks or rerun to replace negative evidence. Keep all raw artifacts ignored.
 
 [Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md)
 completed A–E and scoped final continuous validation. Preserve its

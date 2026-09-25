@@ -1,6 +1,6 @@
 # MiLAi Lab v10 详细设计：Evidence-Grounded Decision State V0
 
-日期：2026-09-25。状态：**B–D 已实现并通过必要窄检查；第一次 E1 已运行，候选未声明采用，方法效果未建立**。配套[开发 Goal](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)以本地提交 7247742133de888276342c48638b12c81eaeec23 为基线；实际交付见[执行记录](CONTEXTUAL_USER_MEMORY_V10_DEVELOPMENT_20260925.md)，失败与费用见[结果](CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md)。下文保留设计时的合同说明，不用设计示例替代实测结果。
+日期：2026-09-25。状态：**`COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`，仅限已暴露原生小样本**。配套[开发 Goal](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)以本地提交 7247742133de888276342c48638b12c81eaeec23 为基线；[执行记录](CONTEXTUAL_USER_MEMORY_V10_DEVELOPMENT_20260925.md)列明开发检查，[R1 历史失败](CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md)及[R2 终态比较](CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md)分别保存实际结果和费用。R2 证明一条新观察重核链可达，但任务质量和成本未优于强工作笔记，自动版本通知未实际触发。下文保留设计时的合同说明，不用设计示例替代实测结果。
 
 本文区分当前代码事实与拟议合同。Evidence-Grounded Decision State 是机制描述，不是新系统名；“接地”只表示声明的采用关系可定位到实际交付材料，不认证其语义支持或真实性。
 

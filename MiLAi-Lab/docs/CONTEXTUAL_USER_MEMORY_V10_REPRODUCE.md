@@ -31,3 +31,5 @@ uv run python tools/run_contextual_merit.py \
 加 `--prepare-only` 只检查身份，不请求模型。比较时串行运行两臂，每臂从原始空记忆和原始业务世界开始；保留一个完整 arc 的 5 个 episode、7 条原始消息及原 session 边界。原生任务分数、Host／维护完成、决策机制实际使用和全部费用分别报告。该 arc 已用于开发，不是未暴露确认集；跨 episode 的持久记忆复用也不等于跨任务复用当前决策。
 
 StateMemBench 尚未取得可核验的官方数据、许可和 scorer，相关实验不在这些命令中，也没有用 MERIT 替代其名称。实际执行与未运行项以[开发记录](CONTEXTUAL_USER_MEMORY_V10_DEVELOPMENT_20260925.md)为准。原始模型请求、权重、语料、运行日志和 checkpoint 保持 ignored。
+
+已完成的第二次同题运行使用独立的 `v10-r2-{notes,basis}-prepared` 配置与 freeze，47 文件共同源码映射为 `6528ff9c69a567d40afb096e7ecb1c4e81aeafb3bee0c23b4dba20c57f58e9f4`。[R2 开发身份](../data/manifests/contextual-memory-v10-r2-development.json)、[结果清单](../data/manifests/contextual-memory-v10-r2-results.json)及[报告](CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md)给出精确配置 SHA、原始输入、终态结果和 ignored 制品路径。原始轨迹位于 `artifacts/contextual-user-memory/v10-e1-attempt-2/`，R1 位于 `v10-e1-attempt-1/`，两者均不应覆盖。离线决策链核对可用已保存的 `artifacts/contextual-user-memory/v10-development/inspect_decisions.py` 读取 basis `runtime/trace.jsonl`；它不调用模型或 checker，需与原生 result 和业务回执一并解释。

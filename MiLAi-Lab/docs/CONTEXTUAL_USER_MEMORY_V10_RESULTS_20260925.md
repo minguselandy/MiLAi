@@ -75,3 +75,7 @@ v10 连续账本为 **51 次生成／452656 generation tokens／3955 embedding t
 Lab-only；新增的是研究任务状态与动作外壳，未修改 Product API／Schema、权限或 Canonical 行为。原 write／material／operation 合同延续，旧 State 和 H1–H6 保持冻结。没有移动包边界，不运行额外边界门禁或构建。回退基线为 `7247742133de888276342c48638b12c81eaeec23`；新 checkpoint 使用 method v15，不能伪装旧 v9 身份载入。
 
 [复现说明](CONTEXTUAL_USER_MEMORY_V10_REPRODUCE.md)提供真实源码准备与运行入口。当前工程可提交发布，但 Goal 的真实采用／反馈链和方法收益仍未满足，保持 active；不得把本次提交标成完整 v10 研究结项或一般可靠性通过。
+
+## 后续 R2（历史衔接）
+
+以上数字和“保持 active”判定只描述第一次冻结的 **R1**，未被后续尝试覆盖。提示合同歧义及最终回执的窄修后，同一已暴露原生 arc 在新的源码身份下完成 **R2**：notes 5/5、basis 4/5，两臂 7/7 Host complete；basis 建立了一条真实新观察重核及后续记忆修订链，但自动版本通知仍未触发，任务质量与 generation 费用均不优于 notes。R2 与 v10 连续终态账本、负面／不确定结论和所有 NOT_RUN 项见[R2 独立报告](CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md)及[紧凑清单](../data/manifests/contextual-memory-v10-r2-results.json)。R1 本页的失败、数值和费用继续作为原始历史证据。

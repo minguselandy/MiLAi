@@ -1,0 +1,289 @@
+{
+  "status": "COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT",
+  "goal_complete": true,
+  "scope": "ONE_EXPOSED_ORIGINAL_MERIT_ARC_SCOPED_COMPARISON",
+  "engineering_status": "B_D_IMPLEMENTED_NARROW_CHECKS_PASSED",
+  "source_mapping_sha256": "6528ff9c69a567d40afb096e7ecb1c4e81aeafb3bee0c23b4dba20c57f58e9f4",
+  "source_config_unchanged": true,
+  "concurrency": 1,
+  "original_arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+  "original_initial_world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29",
+  "arms": {
+    "notes": {
+      "native": {
+        "successes": 5,
+        "denominator": 5,
+        "dependent_successes": 2,
+        "dependent_denominator": 2,
+        "episode_successes": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "host": {
+        "complete": 7,
+        "total": 7,
+        "maintenance_pending_episodes": 0
+      },
+      "generation": {
+        "requests": 26,
+        "prompt_tokens": 203165,
+        "completion_tokens": 31667,
+        "total_tokens": 234832,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 12,
+        "prompt_tokens": 2166,
+        "completion_tokens": 0,
+        "total_tokens": 2166,
+        "unknown_usage": 0
+      },
+      "truncated_generations": 1,
+      "write_rejections": 1,
+      "finish_rejections": 0,
+      "provider_http_failures": 0,
+      "sidecar_outputs": {
+        "work_note_proposed": 25
+      },
+      "config_sha256": "2c9dec22ca4c6a8a49a10c2773badbbfc412b3a7d55c49147ca4f8fa2517494e",
+      "freeze_sha256": "39a4bec2c2d14966b7ffbe2050f68d9ac3556cc3185e5c5d83f76465fd41067e",
+      "artifacts": {
+        "result.json": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-2/notes/result.json",
+          "sha256": "d53f2a0d9cdd717d9e97105d04fabece459db84f7741e7aab226be848a64fbd5"
+        },
+        "runtime/trace.jsonl": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-2/notes/runtime/trace.jsonl",
+          "sha256": "f2e041c6fe97a42b8c10a9b99d729a4cecb4a71247a06dcf21642f7922e3adbe"
+        },
+        "runtime/accounting.json": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-2/notes/runtime/accounting.json",
+          "sha256": "e7607fbcc16fe4da754dcca36c248b6c2278cb24f91bd5c5349844f90315b138"
+        }
+      },
+      "accepted_work_note_changes": 24,
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 10,
+          "prompt_tokens": 68970,
+          "completion_tokens": 8821,
+          "total_tokens": 77791,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 8,
+          "prompt_tokens": 62269,
+          "completion_tokens": 15347,
+          "total_tokens": 77616,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 7,
+          "prompt_tokens": 61537,
+          "completion_tokens": 3403,
+          "total_tokens": 64940,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 1,
+          "prompt_tokens": 10389,
+          "completion_tokens": 4096,
+          "total_tokens": 14485,
+          "unknown_usage": 0
+        }
+      },
+      "embedding_cache_hits": 0,
+      "ingestion_extra_generation_requests": 0,
+      "judge_requests": 0,
+      "actual_gap_focus_queries": 0,
+      "write_rejection_reason": "Referenced source body not yet read; no write committed for rejected proposal."
+    },
+    "basis": {
+      "native": {
+        "successes": 4,
+        "denominator": 5,
+        "dependent_successes": 2,
+        "dependent_denominator": 2,
+        "episode_successes": [
+          true,
+          true,
+          true,
+          false,
+          true
+        ]
+      },
+      "host": {
+        "complete": 7,
+        "total": 7,
+        "maintenance_pending_episodes": 0
+      },
+      "generation": {
+        "requests": 45,
+        "prompt_tokens": 407174,
+        "completion_tokens": 121462,
+        "total_tokens": 528636,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 11,
+        "prompt_tokens": 2027,
+        "completion_tokens": 0,
+        "total_tokens": 2027,
+        "unknown_usage": 0
+      },
+      "truncated_generations": 18,
+      "write_rejections": 1,
+      "finish_rejections": 0,
+      "provider_http_failures": 0,
+      "sidecar_outputs": {
+        "state_delta_proposed": 24,
+        "state_delta_null": 3
+      },
+      "config_sha256": "9b240ce544ce5c0e89f0fdfc9e30fcfbbcd217aa8ad5e973bce4cada26ccd73f",
+      "freeze_sha256": "b9a4002b1240d90fb5c3bb58c84724d8ef9635bb1d11f34b7941cf195c675210",
+      "artifacts": {
+        "result.json": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-2/basis/result.json",
+          "sha256": "cb65b1d3e45351a2b836352b3c259ba3760dce05454f4fa9f025a5e09f98b0d2"
+        },
+        "runtime/trace.jsonl": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-2/basis/runtime/trace.jsonl",
+          "sha256": "bff689a4dd76ef91a47de01eeabdd0413b317cb26a107ebf39581e8e0ab997c7"
+        },
+        "runtime/accounting.json": {
+          "path": "artifacts/contextual-user-memory/v10-e1-attempt-2/basis/runtime/accounting.json",
+          "sha256": "d9e90146fb17172b4760670ad18cbdd132cd7438c8f7cf612d9641ea6237226b"
+        }
+      },
+      "accepted_decision_deltas": 23,
+      "nonempty_adoptions": 23,
+      "automatic_change_notices": 0,
+      "decision_opportunities": {
+        "path": "artifacts/contextual-user-memory/v10-e1-attempt-2/basis/runtime/decision-opportunities.json",
+        "sha256": "4ca0ac1dbf56fe82b2b0ef9e8ca824c22e2b2b189e362faa46279e751aa80dca"
+      },
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 12,
+          "prompt_tokens": 98727,
+          "completion_tokens": 16916,
+          "total_tokens": 115643,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 7,
+          "prompt_tokens": 65001,
+          "completion_tokens": 21866,
+          "total_tokens": 86867,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 18,
+          "prompt_tokens": 160709,
+          "completion_tokens": 73728,
+          "total_tokens": 234437,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 7,
+          "prompt_tokens": 74656,
+          "completion_tokens": 8157,
+          "total_tokens": 82813,
+          "unknown_usage": 0
+        },
+        "retrieval": {
+          "requests": 1,
+          "prompt_tokens": 8081,
+          "completion_tokens": 795,
+          "total_tokens": 8876,
+          "unknown_usage": 0
+        }
+      },
+      "embedding_cache_hits": 0,
+      "ingestion_extra_generation_requests": 0,
+      "judge_requests": 0,
+      "actual_gap_focus_queries": 0,
+      "write_rejection_reason": "Referenced source body not yet read; no write committed for rejected proposal."
+    }
+  },
+  "mechanism": {
+    "chain": "EPISODE_2_NEW_OBSERVATION_RECHECK_AND_COMMITTED_REVISION",
+    "m10_adopted_source_spans": [
+      [
+        0,
+        137
+      ]
+    ],
+    "m11_new_refund_observation_spans": [
+      [
+        0,
+        250
+      ]
+    ],
+    "next_action": "memory_read_old_record",
+    "following_action": "memory_save_REVISE_COMMITTED",
+    "automatic_version_change_notice_observed": false,
+    "interpretation": "Reachability of semantic new-observation recheck; no automatic version-recheck or effect proof.",
+    "episode_index": 2,
+    "zero_based_generations": [
+      20,
+      23,
+      24
+    ],
+    "m10_exact_ref": "86f160e0d741454c/source:7a0e195c8a71662fbaab11ba",
+    "m11_exact_ref": "86f160e0d741454c/source:88b69bfc8d81c2dc3864831a",
+    "intervening_failures": {
+      "write_rejections": 1,
+      "truncated_generations": 1
+    },
+    "adoption_kind": "all_accepted_adoptions_source",
+    "actual_gap_focus_queries": 0
+  },
+  "continuous_v10_ledger": {
+    "artifact": {
+      "path": "artifacts/contextual-user-memory/v10-budget.json",
+      "sha256": "7e0c2db25823e3d15f141c84ede59b934e38bf5dd3edd41ec5bfbc37b42b0507"
+    },
+    "generation_requests": 122,
+    "generation_tokens": 1216124,
+    "embedding_tokens": 8148,
+    "unknown_usage": 0,
+    "judge_requests": 0,
+    "v9_history_sha256": "8f5021ff4b7cb7d04b3fae7954d488d90ef4a3e08716f0ea97db8cebc401aed6"
+  },
+  "preserved_R1": "data/manifests/contextual-memory-v10-results.json",
+  "not_run": {
+    "E2": "Actual critical_gap-focus queries were 0; no matched applicable focus-control prefix.",
+    "E3": "All accepted adoptions pointed to sources and no automatic version-change notice occurred; no matched notification-control prefix.",
+    "E4": "Original native session boundaries provide no sustained same-decision reuse window.",
+    "StateMemBench": "Official data, license and scorer not verified",
+    "document_four_turns": "Not repeated",
+    "full_suite_benchmark_product": "Outside scoped validation"
+  },
+  "verification": {
+    "host_decision_narrow": "42 passed",
+    "terminal_receipt_narrow": "8 passed",
+    "ruff": "All checks passed",
+    "decoder_probes": "No extra probe",
+    "model_requests_for_analysis": 0
+  },
+  "artifacts": {
+    "run_manifest": {
+      "path": "artifacts/contextual-user-memory/v10-e1-attempt-2/manifest.json",
+      "sha256": "3c84f67ae45ee1ec484bb29e1b8a726976e40dfe57f4d8d594160621481e14f9"
+    },
+    "native_results": {
+      "path": "artifacts/contextual-user-memory/v10-e1-attempt-2/results.json",
+      "sha256": "f78d5baf53190373d95ea83bde36dd329770f6742ba04eb352229e614cc8dcf7"
+    },
+    "inspector": {
+      "path": "artifacts/contextual-user-memory/v10-development/inspect_decisions.py",
+      "sha256": "78bf4dba8eae889ab4578aae022ab180cb28135277734406d4e2f6d936ac6a5d"
+    }
+  },
+  "cost_interpretation": "Whole provider receipts are charged once. State/notes and action are generated in one response; shared reasoning and repeated input cannot be exactly split into marginal state cost. Primary-action groups are descriptive, not marginal costs or benefits. Ingestion added no generation request; Judge requests were zero."
+}

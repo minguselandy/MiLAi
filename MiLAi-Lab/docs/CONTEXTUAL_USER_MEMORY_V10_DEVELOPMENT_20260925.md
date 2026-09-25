@@ -35,3 +35,9 @@ method v15、decision-basis-v1 和 contextual-json-action-v2 为实际实现身�
 E 已在开发冻结后选定原有一个完整 MERIT arc，见[选择及机会清单](../data/manifests/contextual-memory-v10-selection.json)：5 个 episode、7 条原始消息、2 个依赖任务。各 episode 保留原始 session 重置；第 1、2 个 episode 各有两条消息，但第二条涉及另一订单。跨 episode 的金额变化能验证持久记忆更新，不能当作旧 active_decision 连续传播；只有 Host 在同轮实际采用旧卡并修改它时，才可能出现结构重核机会。不合并 session，不预告未来提问，不添加复用轮数。E4 没有自然的同一决策持续复用窗口，保持 NOT_RUN。
 
 E1 已按同一原始初态顺序运行 notes 与 basis，运行前后源码及配置不变。原生结果为 5/5 与 3/5；两臂都完成 7 个 Host 轮次，但 basis 所有完整动作都为 state_delta:null，没有实际采用、gap query 或重核链。两次截断、业务失败与费用全部保留：51 次生成／452656 generation tokens／3955 embedding tokens，unknown=0、Judge=0。[详细结果](CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md)与[结果清单](../data/manifests/contextual-memory-v10-results.json)记录了语义失败和未运行项。E2/E3 没有适用前态，保持 NOT_RUN；工程窄检查不能补作真实语义链证据，完整 Goal 保持 active。
+
+## R2 终态与开发状态
+
+上段为原封保存的 R1 结论。R2 只修复已定位的 basis 提示歧义及最终 `HostResult` 依据／笔记快照；不增加工具、状态仪式、模型上限或案例规则。47 文件新源码映射为 `6528ff9c69a567d40afb096e7ecb1c4e81aeafb3bee0c23b4dba20c57f58e9f4`；[R2 开发清单](../data/manifests/contextual-memory-v10-r2-development.json)记录 42 项受影响 Host／decision 窄测、终结回执后 8 项窄测及 Ruff 通过，检查未在交接时重跑。部署语法未变化，不追加无用 decoder 探针。
+
+新身份下同题 R2 原生 notes 5/5、basis 4/5，两臂均 7/7 Host complete；basis episode 2（从 0 起）的真实新观察链符合 Goal §8 的机制可达要求，但自动版本通知为 0，质量与成本不优于强笔记。[R2 独立报告](CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md)与[紧凑结果清单](../data/manifests/contextual-memory-v10-r2-results.json)分开记录原生、业务、维护、机制和费用。连续 v10 账本 122 次／1216124 generation tokens／8148 embedding tokens，unknown=0、Judge=0；R1 费用不清零。当前受限状态为 `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`；ordinary 默认不变，E2／E3／E4 及 StateMemBench 仍 NOT_RUN。

@@ -177,6 +177,9 @@ def test_notes_arm_keeps_same_generation_work_note_without_tool_argument() -> No
         result = host.run([], session=HostSession("task", memory), max_calls=2)
     assert result.status == "complete" and len(calls) == 1
     assert memory.state.work_note == "Plan may depend on a later result; check it."
+    assert result.work_note == memory.state.work_note
+    memory.state.work_note = "later mutation"
+    assert result.work_note == "Plan may depend on a later result; check it."
     assert "work_note" not in result.calls[0]["arguments"]
     assert requests[0]["response_format"]["json_schema"]["schema"]["oneOf"][0][
         "required"][0] == "work_note"
@@ -217,6 +220,29 @@ def test_same_action_gap_delta_requeries_instead_of_reusing_old_cache() -> None:
     assert seen_queries == ["first terms? plan", "second terms? plan",
                             "second terms? revised plan"]
     assert all(not call.get("reused", False) for call in result.calls[:3])
+    assert result.active_decision is not None
+    assert result.active_decision["critical_gap"] == "second terms?"
+    assert memory.state.active_decision is not None
+    memory.state.active_decision.critical_gap = "later mutation"
+    assert result.active_decision["critical_gap"] == "second terms?"
+
+
+def test_unfinished_result_retains_actual_decision_snapshot() -> None:
+    memory = bank()
+    actions = [
+        {"state_delta": proposal(), "tool": "memory_search", "arguments": {"query": "plan"}},
+        {"state_delta": None, "tool": "memory_search", "arguments": {"query": "plan"}},
+    ]
+    with _client(actions, []) as client:
+        host = ContextualHost(
+            client, memory.dispatch, MEMORY_TOOLS, "Work", memory=memory,
+            decision_policy="basis", maintenance_policy="required",
+            maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL,
+        )
+        result = host.run([], session=HostSession("task", memory), max_calls=2)
+    assert result.status == "maintenance_pending"
+    assert result.active_decision is not None
+    assert result.active_decision["decision"] == "Use the confirmed plan"
 
 
 def test_deletion_scrubs_decision_text_from_next_checkpoint() -> None:

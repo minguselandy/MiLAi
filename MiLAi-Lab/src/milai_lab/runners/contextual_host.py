@@ -227,6 +227,8 @@ class HostResult:
     elapsed_seconds: float
     transcript: list[dict[str, Any]]
     maintenance: dict[str, Any] = field(default_factory=dict)
+    active_decision: dict[str, Any] | None = None
+    work_note: str = ""
 
 
 class InvalidToolCall(ValueError):
@@ -349,22 +351,30 @@ class ContextualHost:
             )
         if self.decision_policy == "basis":
             protocol_prompt += (
-                "\nIn the same JSON action, include state_delta: null to keep the one current "
-                "decision, {op:'set', decision, scope:{subject_ref,item,context}, "
-                "adopted_evidence, critical_gap, status} to replace it, or {op:'clear'} "
-                "to clear it. Choose adopted_evidence from delivered body refs or cN "
-                "continued exact versions; a link alone is not read evidence. A decision "
+                "\nIn the same JSON action, choose state_delta independently from the tool. "
+                "Use {op:'set', decision, scope:{subject_ref,item,context}, "
+                "adopted_evidence, critical_gap, status} to create the first current decision "
+                "or replace an existing one. Use null only to leave it unchanged, or "
+                "{op:'clear'} to clear it. Maintain a decision when a current judgment, "
+                "adopted evidence, or a concrete gap can guide later actions; a simple "
+                "one-step action can use null. Update it only when useful; no fixed update "
+                "cadence or extra State call is required. Choose adopted_evidence from "
+                "delivered body refs or cN "
+                "continued exact versions; a link alone is not read evidence. For "
+                "scope.subject_ref choose a published subject catalogue handle; use "
+                "unknown when unresolved, not a guessed business ID. A decision "
                 "is a working judgment, not proof or a business receipt. A changed adopted "
                 "version needs review; a new observation may matter even with no old link. "
                 "Use memory_search focus=critical_gap only for a concrete information need, "
-                "with empty query. No extra State call is needed."
+                "with empty query."
             )
         elif self.decision_policy == "notes":
             protocol_prompt += (
-                "\nIn the same JSON action, include work_note: null to keep your current "
-                "work note or a short replacement string. It can record a judgment, "
-                "references, uncertainty, and what to query next; you may revise it each "
-                "step. Use the same memory and business tools. This note is task-local."
+                "\nIn the same JSON action, choose work_note independently from the tool: "
+                "a short replacement string updates it, while null leaves it unchanged. "
+                "The note can record a judgment, material refs, uncertainty, an information "
+                "gap, and a better query to run; revise it when useful. Use the same memory "
+                "and business tools. This note is task-local."
             )
         maintenance_required = self.maintenance_policy == "required"
         semantic_maintenance = (maintenance_required and self.maintenance_protocol ==
@@ -412,20 +422,28 @@ class ContextualHost:
                 "never proposed text. Include each frontier source once."
             )
         if self.client.config.tool_mode == "json_action":
-            sidecar_example = (
-                '"state_delta":null,' if self.decision_policy == "basis" else
-                '"work_note":null,' if self.decision_policy == "notes" else ""
-            )
+            if self.decision_policy == "off":
+                action_instruction = (
+                    '{"tool":"TOOL_NAME","arguments":{...}} to call a tool, or '
+                    + ('{"tool":"finish_turn","arguments":{...}}'
+                       if maintenance_required else '{"answer":"final answer"}')
+                    + " to finish. "
+                )
+            else:
+                sidecar = "state_delta" if self.decision_policy == "basis" else "work_note"
+                action_instruction = (
+                    f"Include {sidecar} with its independently chosen value and the "
+                    "tool/arguments fields for a tool call. To finish, include the same "
+                    f"{sidecar} field with "
+                    + ("finish_turn/arguments. " if maintenance_required
+                       else "the answer field. ")
+                )
             protocol_prompt += (
                 "\n\nJSON-action protocol: respond with exactly one JSON object: "
-                + '{' + sidecar_example
-                + '"tool":"TOOL_NAME","arguments":{...}} to call a tool, or '
-                + ('{' + sidecar_example + '"tool":"finish_turn","arguments":{...}}'
-                   if maintenance_required else
-                   '{' + sidecar_example + '"answer":"final answer"}')
-                + ' to finish. Tool results will be returned '
-                "as a user message. This is the configured json_action mode. "
-                "Available tools (names, descriptions, and JSON Schema parameters):\n"
+                + action_instruction
+                + "Tool results will be returned as a user message. This is the configured "
+                "json_action mode. Available tools (names, descriptions, and JSON Schema "
+                "parameters):\n"
                 + _json(self.tools)
             )
         session = session or HostSession(uuid4().hex, self.memory)
@@ -1638,6 +1656,15 @@ class ContextualHost:
             usage=usage,
             elapsed_seconds=time.monotonic() - started,
             transcript=copy.deepcopy(transcript),
+            active_decision=(
+                asdict(self.memory.state.active_decision)
+                if (self.decision_policy == "basis" and self.memory is not None
+                    and self.memory.state.active_decision is not None) else None
+            ),
+            work_note=(
+                self.memory.state.work_note
+                if self.decision_policy == "notes" and self.memory is not None else ""
+            ),
         )
 
 

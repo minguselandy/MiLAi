@@ -1,0 +1,113 @@
+{
+  "status": "R2_TERMINAL_SCOPED_VALIDATION_COMPLETE",
+  "baseline_commit": "001a6eebed52caecfc1c5c52fa830c57b837fb4a",
+  "baseline_source_mapping_sha256": "57fef8a534cef57e2d44015f91bb6fb443066484ca1420f74c4216a655344f14",
+  "preserved_E1_results": "data/manifests/contextual-memory-v10-results.json",
+  "prior_charges": {
+    "generation_requests": 51,
+    "generation_tokens": 452656,
+    "embedding_tokens": 3955,
+    "ledger_sha256": "bee9d799d5b25b79686e41d5ed6e5e3ff9f7fb361ad020e2c92673a5f38eb486"
+  },
+  "diagnosis": [
+    {
+      "kind": "prompt_contract_ambiguity",
+      "source": "src/milai_lab/runners/contextual_host.py",
+      "evidence": "Basis instructions introduced null first, described set only as replace, and showed literal null in the only complete JSON envelope example. The recorded Host reasoning repeatedly treated that literal as an instruction. No sidecar was rejected.",
+      "trace": "artifacts/contextual-user-memory/v10-e1-attempt-1/basis/runtime/trace.jsonl",
+      "zero_based_generation_examples": [
+        2,
+        4,
+        5,
+        7,
+        15,
+        24
+      ],
+      "conclusion": "Concrete prompt ambiguity worth correcting; this alone does not establish the cause of all non-use or semantic task misses."
+    },
+    {
+      "kind": "missing_final_receipt",
+      "evidence": "HostResult lacked final active_decision/work_note despite TaskState persistence; Goal 2.1.8 requires the terminal receipt as well as checkpoint recovery."
+    }
+  ],
+  "scope": "Same optional single-slot method; no mandatory set, fixed cadence, new tool, validator, benchmark item or reset of charges. Preserve original ordinary/off instructions.",
+  "verification_plan": "Narrow Host checks; unchanged schema does not require another grammar sweep. Run frozen original MERIT comparison under a new source identity after all repairs finish.",
+  "data_scope": "Previously exposed original arc0-000, five complete episodes and original seven messages; no new dataset or changed boundary.",
+  "weight_identity": "Reuse initial v10 verified model manifests explicitly; do not repeat full weight-byte scans for prompt/receipt repair.",
+  "source_sha256": {
+    "src/milai_lab/datasets/contextual.py": "2d856518eb0ac3b5e0f5da03833563bcc4155663140f8c4a2f11519e465127bf",
+    "src/milai_lab/datasets/memsyco.py": "1547cf025cff2d3980a57afcdb710372ea8a42b4094918518fb9ac1b2a8b9110",
+    "src/milai_lab/datasets/stale.py": "132a00b9adaa77dcc9974e87041460fa9462a55a97a6f4f6ddd6cd580109d447",
+    "src/milai_lab/scorers/contextual.py": "d275c70d536b67702c9ef4e5ab0bb742a80301c1f5fe0b1da0e676d37f394558",
+    "src/milai_lab/scorers/memsyco.py": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+    "src/milai_lab/scorers/stale.py": "683ff4bb82dc7c0c4e4a18824504a44d865f04980158322757f39e8612b0f75f",
+    "src/milai_lab/methods/contextual_user_memory.py": "40ec447b84a1a2ea8f7da6db2d8557b03cf774ff6556a8685c6606dfe7e1028f",
+    "src/milai_lab/methods/controlled_workspace.py": "4d62f79faa15f7b442862bc7702cb9f2532e49c6051782544d973f96d3ea95a3",
+    "src/milai_lab/methods/reasoning_bank.py": "1ad2548cb22e0c9abba294157aeefd04a2a907888c7f256b71487b635549581f",
+    "src/milai_lab/methods/state_attention.py": "642b8eab8fbf4b34d48187c99b5d31960d32f5dbc98b7a0912073199382f4ebd",
+    "src/milai_lab/methods/state_focus.py": "bcdb8056944f7989cfed62361660ceb3be7a5a11db2ad8d7243fdacdb005b061",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_embeddings.py": "9500273aa839663b713d57b3d008c38dba1845e6645f38f8b779937e10e0b604",
+    "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+    "src/milai_lab/runners/contextual.py": "3ffde5762de5acf053abde1ed1c477077d910974d3584728cc55fc30dbb3665d",
+    "src/milai_lab/runners/contextual_agent_tasks.py": "c75f7eb2190b8dec679dea147206dc0479329665629812c4ccd98868c703098a",
+    "src/milai_lab/runners/contextual_delivery.py": "88aeb913e4d433d78c04fa2a85d5a756c5346cb293ede836573f6d7138b13be3",
+    "src/milai_lab/runners/contextual_host.py": "e3fc96d3a28f754f7a664653edd796b64532f4219045cadff9b8c103aaf87943",
+    "src/milai_lab/runners/contextual_ingestion.py": "71817b6e967c7258567af7ef58e2331233b76f7abda9bd781da321bc2e03d604",
+    "src/milai_lab/runners/contextual_maintenance.py": "092976d65af952e93015ae48ac63cf3d83c10ce0a65dcae8b71f334e31eb467c",
+    "src/milai_lab/runners/contextual_profiles.py": "ceece4d86a31b510e3d1c7e3c95fc396d0f0c78d99682b271f29f21b2b83c01f",
+    "src/milai_lab/runners/contextual_runtime_store.py": "9ae0fd792a4befe1bff2f2226b00bfbe96f14bf8d9e5f7df8da890d792eef490",
+    "src/milai_lab/runners/contextual_scoring.py": "4ac57a9f77f7ca5ccae7e3e5a04122500b3b41c9a39e8df246848fd08f7b4a12",
+    "src/milai_lab/runners/contextual_session.py": "c51ff93945b079df55f1e6c91f520a616fbe1518998f2efb8f0f9c234f31e395",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "tools/prepare_contextual_v9.py": "8daeb9122bf8d92f5e64f7e4bb41b5df3426cdf49b471f32244aecae034437dc",
+    "tools/run_contextual_merit.py": "8ed6717d6ab00dc2b9f857d17a32378afcf705ee8ef6dd8e238c698b25029729",
+    "tools/run_contextual_user_memory.py": "c309706c62da1dc30ff7df59a77f1f727260f40bc41a8d45ba28fa3c22d84b13",
+    "examples/contextual_document.py": "fd2e27603d1918f97827bced49cf7d42e894dd44ccfede3938291ba402babd8f",
+    "configs/contextual-memory-v9-template.json": "8deead51f32ca00894ef0bb79b41e6ade013e60e4d3dc6177b094c02f540451f",
+    "data/manifests/contextual-memory-v9-document-sequence.json": "b6af859639f3475af2bc54840758a63f87b6877bdc0e4923f8a3365ce1fdba8c",
+    "pyproject.toml": "a1ca4c535526fd0c822373bfb97bb77dfd2daf9c2855c8db276e9fdbf245395e",
+    "uv.lock": "36050ba3e272b7904a3e47542b3daf53dd8677ae4de5a7bed3e499220beefb01",
+    "configs/contextual-memory-v10-notes-template.json": "4d2685e9979416ebe59bc30226108e3af4ab88430db9efe344afcc217ee008b7",
+    "configs/contextual-memory-v10-basis-template.json": "888b8b2207b3a41b0f6787457bc58b9494f9900c621db73e2c42a82bb6b31cb3",
+    "src/milai_lab/methods/contextual_memory/__init__.py": "2cead58efc51f4927abffb680acfa3ab94205136a1aa39e593a97764c3eaa58d",
+    "src/milai_lab/methods/contextual_memory/decision_basis.py": "245cfef6acb11dae3953b94bd52a197bf6322fd0e3157a43b5cd892d97fa8d3b",
+    "src/milai_lab/methods/contextual_memory/deletion.py": "9e9f6b6176a0c0187c6d8d8470d53db2d6cab369640402914de87089f0b441d1",
+    "src/milai_lab/methods/contextual_memory/material_view.py": "0d35dca5aa400d35d5bc05fb63fd49faea78880058b6983ff3ecd6f784577357",
+    "src/milai_lab/methods/contextual_memory/materials.py": "5311cdd7973130680a1dfb0cd4f98790e133df29be547f26b06d75b47dd09fa7",
+    "src/milai_lab/methods/contextual_memory/models.py": "07b82268552fd2aa2c34576a02e1184fd7c2d58d93d67d81efbf5aa1d3d2286d",
+    "src/milai_lab/methods/contextual_memory/operations.py": "6daf5b369afec36bab9a9868f06f6cfb2788d8ca4c42892525c08fd67629bced",
+    "src/milai_lab/methods/contextual_memory/query_context.py": "0d5c3e8e3965aa9045efc75d5d16236bec41a83ed85658de278a4d37d5449e5c",
+    "src/milai_lab/methods/contextual_memory/retrieval.py": "7e6d26360305cfdf3d7d60d56f03afe281b81be67b7185b8f1ab5a58b2c5cea8",
+    "src/milai_lab/methods/contextual_memory/revision.py": "362b0d3c4dc99a40b9e6e14c2d5cfa434881d324277f69ca52719e6ffd6243d6",
+    "src/milai_lab/methods/contextual_memory/store.py": "df4a67b086b6bd48599bcd2e98c2a06d86188560cc71871e9ff6ced38abee670",
+    "src/milai_lab/methods/contextual_memory/write_contract.py": "dd6c62e046eeea0196f5228447afefd96755c51f733adb89c3486c192f864067"
+  },
+  "source_mapping_sha256": "6528ff9c69a567d40afb096e7ecb1c4e81aeafb3bee0c23b4dba20c57f58e9f4",
+  "validation": [
+    {
+      "command": "uv run pytest -q --tb=line tests/unit/test_contextual_host_adapter.py tests/unit/test_contextual_decision_basis.py",
+      "result": "42 passed before terminal receipt addition"
+    },
+    {
+      "command": "uv run pytest -q --tb=line tests/unit/test_contextual_decision_basis.py",
+      "result": "8 passed after terminal receipt addition"
+    },
+    {
+      "command": "uv run ruff check src/milai_lab/runners/contextual_host.py tests/unit/test_contextual_decision_basis.py",
+      "result": "All checks passed"
+    }
+  ],
+  "source_files": 47,
+  "configs": {
+    "notes": {
+      "artifacts/contextual-user-memory/v10-r2-notes-prepared/config.json": "2c9dec22ca4c6a8a49a10c2773badbbfc412b3a7d55c49147ca4f8fa2517494e"
+    },
+    "basis": {
+      "artifacts/contextual-user-memory/v10-r2-basis-prepared/config.json": "9b240ce544ce5c0e89f0fdfc9e30fcfbbcd217aa8ad5e973bce4cada26ccd73f"
+    }
+  },
+  "result_manifest": "data/manifests/contextual-memory-v10-r2-results.json",
+  "result_report": "docs/CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md",
+  "source_config_unchanged": true
+}

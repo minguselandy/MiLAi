@@ -1,6 +1,6 @@
 # MiLAi Lab goals
 
-## Active decision-basis Goal v10.0 (2026-09-25)
+## Completed scoped decision-basis Goal v10.0 (2026-09-25)
 
 [Goal v10.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md) adds one
 current decision with exact adopted evidence, same-response state and action updates,
@@ -9,10 +9,15 @@ selective change feedback and explicit gap-focused retrieval. Ordinary remains d
 implementation, checks and the status of scoped comparisons. Official StateMemBench
 data, license and scorer were not obtained; that experiment is NOT_RUN. Preserve v9
 identities, failures and costs; new v10 use has a separate continuous ledger.
-B–D engineering passed narrow checks. [E1 results](CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md)
-are notes 5/5 versus basis 3/5; basis never declared adoption. All 51 generations,
-452656 generation tokens and 3955 embedding tokens remain accounted. The real mechanism
-chain is unestablished, so the full Goal remains active rather than marked complete.
+B–D engineering passed narrow checks. [R1](CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md)
+remains a failed first comparison: notes 5/5 versus basis 3/5 with no adoption, and all
+51 generations／452656 generation tokens／3955 embedding tokens retained.
+[R2](CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md) on the same exposed arc scored
+notes 5/5 versus basis 4/5, both 7/7 Host complete; basis demonstrated one actual
+new-observation recheck and committed revision but no automatic version notice. It used
+more generation tokens, so the scoped Goal ends `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`
+and ordinary stays default. Continuous v10 use is 122 generations／1216124 generation
+tokens／8148 embedding tokens, unknown=0, Judge=0. E2/E3/E4 and StateMemBench are NOT_RUN.
 
 ## Completed scoped maintenance contract Goal v9.0 (2026-09-25)
 

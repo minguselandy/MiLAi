@@ -2,7 +2,7 @@
 goal_id: MILAI-EVIDENCE-GROUNDED-DECISION-STATE-V0
 version: v10.0
 date: 2026-09-25
-status: ACTIVE_DEVELOPMENT
+status: COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT
 delivery: implementation_and_scoped_validation
 baseline_commit: 7247742133de888276342c48638b12c81eaeec23
 baseline_source_mapping_sha256: 9854a237f583563618c45ffb59e589484f6c4dea74a8393a1b5c41aa0ce7a0b8
@@ -17,7 +17,7 @@ verification_count_cap: null
 
 **目标：在 v9 普通记忆和真实 ReAct 路径上，增加一个小型、可修订的决策依据。Host 在正常动作生成中声明当前判断、实际采用的材料和关键缺口；程序绑定准确版本，追踪实际变化；检索与后续维护消费这份状态。用原生小样本判断它相对强工作笔记是否有价值。**
 
-起草时仅交付本 Goal 与[详细改造设计](MILA_CONTEXTUAL_USER_MEMORY_V10_DECISION_BASIS_DESIGN_20260925.md)。用户随后明确授权执行完整 Goal；A–D 与第一次 E1 小规模比较已完成，实际采用／反馈链未建立，完整 Goal 保持 active。v9 保持关闭；[v10 结果](CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md)记录实现、失败、费用与尚未满足的条件。
+起草时仅交付本 Goal 与[详细改造设计](MILA_CONTEXTUAL_USER_MEMORY_V10_DECISION_BASIS_DESIGN_20260925.md)。用户随后明确授权执行完整 Goal。A–D 与两次冻结的 E1 小规模比较已完成：首次 R1 候选未采用，修复提示歧义及最终回执后的 R2 建立一条真实新观察重核链，但在同一原生 arc 上质量和费用均不优于强工作笔记。受限研究状态为 `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`，ordinary 保持默认。[R1 历史结果](CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md)与[R2 终态结果](CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md)分别保存失败、机制、费用及未运行项；v9 保持关闭。
 
 ## 1. 已确认基线与研究问题
 
@@ -195,4 +195,4 @@ N=1、2、4、8 等只作为自然连续前缀的汇总点；不能重复同一�
 
 状态依次区分 PLANNED_NOT_STARTED、IMPLEMENTED_PENDING_SMALL_VALIDATION、SCOPED_VALIDATED_EFFECT_UNESTABLISHED、COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT。只有实现、运行与对照各自的证据成立，才可提升对应结论；任何状态都不等于 SOTA 或一般可靠性。
 
-**当前状态：A–D 完成并通过窄检查；E 冻结既有原生 arc，E1 完整执行为 notes 5/5、basis 3/5。basis 所有完整响应均为 null，没有实际采用／重核链，完整 Goal 不标 complete。E2/E3 缺少机制对照前态，E4 缺少自然复用窗口，保持 NOT_RUN。StateMemBench 官方数据、许可和评分入口未取得，相关实验仍 NOT_RUN。全部开发可按已有授权提交；发布不代表研究结项。**
+**当前状态：`COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`。A–D 完成并通过窄检查；R1 的 notes 5/5、basis 3/5 且 basis 全 null 作为历史失败保留。R2 在同一已暴露原生 arc、另一冻结身份下为 notes 5/5、basis 4/5，两臂均 7/7 Host complete；basis 实际完成准确采用→退款新观察→同 decision 重核→读旧卡→REVISE 提交的一条链，但自动旧版本通知仍无真实触发。basis 的 generation 费用高于 notes 约 125.11%，故不能据此主张方法收益或改动 ordinary 默认。E2／E3 未做匹配消融、E4 无自然持续窗口、StateMemBench 官方数据／许可／scorer 未取得，均为 NOT_RUN；完整费用、拒绝和截断保存于[R2 结果](CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md)。此状态仅表示受限目标已诚实结项，不表示一般可靠性或 SOTA。**
