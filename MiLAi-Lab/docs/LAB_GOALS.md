@@ -1,5 +1,22 @@
 # MiLAi Lab goals
 
+## Planned maintenance contract Goal v9.0 (2026-09-25)
+
+[Goal v9.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md) and
+[refactor design](MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md)
+are v9 planning and design documents. A has now run: the original MERIT episodes scored 5/5
+with dependent 2/2, all Host runs completed, the four document rounds completed, and the v9
+ledger records 34 generations / 249148 generation tokens / 2205 embedding tokens, unknown=0.
+A narrow checkpoint review found the three current cards consistent with completed refunds and
+no conflicting old todo; the final document card remains `card:1@2` without a duplicate completion
+card. The generated document intentionally retains unverified placeholders for change and
+limitation facts. B–E are unimplemented, so these results do not constitute v9 acceptance.
+Baseline local HEAD and remote main matched
+`b64fc4c9b70c3a8a48cfd770a4b7eaa437f12162`; the v8 implementation remains committed and frozen.
+Final validation must run one frozen version continuously rather than splice staged passes.
+No Product migration or runtime change is part of this documentation publication. Cumulative
+call/token/verification caps remain null; old results and charges remain frozen.
+
 ## Completed scoped usable continuous memory Goal v8.0 (2026-09-25)
 
 [Goal v8.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v8.0_20260925.md) completed A–E:

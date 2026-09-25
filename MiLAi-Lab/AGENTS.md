@@ -36,6 +36,21 @@ canonical memory state.
 
 ## Required checks
 
+The user now explicitly authorized execution of [Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md)
+and its [design](docs/MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md).
+Follow A baseline before runtime edits, then B–D implementation, then E same-version
+continuous validation and local protocol comparison. Planning-only statements are historical.
+Use the two Sol xhigh work packages with single file ownership; Astra only for concrete
+semantic difficulties, Luna only for needed downloads. One model controller, concurrency 1.
+Avoid defensive scaffolding and unnecessary audits/tests. Preserve frozen v8 source/results
+and its 137-generation ledger; all new calls go into v9 accounting. Null cumulative caps,
+Lab-only changes and narrow checks remain. A baseline has run and received a narrow current-card
+semantic check; B–E remain unimplemented, so v9 is not accepted as complete. The user explicitly
+authorized Luna high to commit and push all development work to GitHub. This authorization
+supersedes the no-commit/push and Luna-download-only restrictions. Continue to use Sol for ordinary
+implementation and Astra for concrete difficult semantic issues; Git publication does not imply
+that v9 implementation or validation is complete.
+
 The user-authorized [Goal v8.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v8.0_20260925.md)
 completed A–E development and scoped, staged validation. Durable runtime/recovery, first
 writes, same-record updates, post-action maintenance, explicit source-body delivery and
