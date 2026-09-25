@@ -36,7 +36,73 @@ canonical memory state.
 
 ## Required checks
 
-Before handoff, run:
+The user-authorized [Goal v8.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v8.0_20260925.md)
+completed A–E development and scoped, staged validation. Durable runtime/recovery, first
+writes, same-record updates, post-action maintenance, explicit source-body delivery and
+incomplete-run preservation are implemented. The final isolated original MERIT episode
+passed 1/1 with current original-card completion, after two full native 5/5 runs whose
+maintenance failures remain preserved. Do not describe this as final-source continuous
+five-episode success, general reliability, State benefit or Product readiness.
+Preserve [results](docs/CONTEXTUAL_USER_MEMORY_V8_RESULTS_20260925.md), all source snapshots
+and continuous v8 charges: 137 generations / 948575 generation tokens / 5432 embedding
+tokens, unknown=0, Judge=0. Cumulative and verification caps stay null; closed historical
+stages do not block new user-authorized repairs. Luna high only downloads, Sol xhigh
+ordinary development, Astra xhigh concrete difficult issues. Keep verification narrow;
+do not automatically expand the benchmark or run full suites. Documentation checks need
+no pytest, build or model calls. No commit/tag/push or Product migration was performed.
+
+The [Goal v7.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v7.0_20260925.md)
+completed P0–P7 development before E0 selection, followed by E1/E2 on one complete exposed
+MERIT arc. The final ordinary/off run scored 5/5 (dependent 2/2) and exercised durable
+CREATE → REVISE → later-session memory → native business action. Preserve both earlier
+3/5 failures, the continuous v7 ledger, and the [limits in the results](docs/CONTEXTUAL_USER_MEMORY_V7_RESULTS_20260925.md).
+Method v11 / write v10 / ingestion v27 / view v8 / operation v2 are the final runtime;
+State benefit and reliable post-execution maintenance remain unproven. Do not describe
+this single exposed unit as general quality or a comparative win. Do not automatically
+expand the benchmark or reopen v6. Keep ordinary, H1–H6 frozen, vLLM Host/Judge,
+continuous accounting without cumulative/verification hard stops, and Lab-only boundaries.
+Documentation checks need no pytest/build/model calls; implementation checks stay narrow.
+
+For the contextual user-memory
+[Goal v6.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v6.0_20260924.md),
+the user's current scope takes precedence over the general handoff commands below:
+
+- Keep ordinary as the baseline, freeze H1–H6, and preserve the closed v3/v4/v5
+  Goals and results. v5 completed its required execution wiring but retained semantic
+  failures and no independent H2 benefit. Its 114 requests and budget stay closed.
+- v6's scoped repairs are validated on the three exposed questions across five final
+  paths, with general semantic quality unestablished. Method v10/write v9/ingestion v25/
+  material view v5 are frozen in the final `v6-user-scope-*` runs. Preserve all previous
+  failures, scores and costs: 243 generations, 969510 generation tokens and 93390
+  embedding tokens, unknown=0. Final validation accounted for 43 of those generations.
+- The user explicitly removed local-verification-count and cumulative request/token
+  stopping restrictions. Caps may be null for accounting-only runs; never reset charges
+  or block authorized repair because a previous verification was already used. Keep
+  per-workflow capacity limits and problem-driven small verification.
+- Keep the three exposed native cases and unchanged data/scoring. Ordinary and State
+  histories have different identities; do not bypass ownership validation. Additional
+  local verification is authorized and is not another independent sample. Do not
+  reopen v5, rerun H2 effects, add candidates, expand benchmarks, consume untouched
+  confirmation cases, run full STALE or run the full test suite. Keep real sources,
+  creation/revision, independent dependencies and State consumption working.
+- New schema branches must remain expressible in the deployed generation backend;
+  JSON Schema validation alone is insufficient. Reuse the narrow grammar checks.
+  Actual subject/source and dependency failures are semantic repair failures even when
+  the calls settle; do not close v6 merely because its interfaces are implemented.
+- For documentation/manifests, check paths, JSON, selection counts and source hashes;
+  no pytest, model calls or package build is needed.
+- For implementation, run affected static checks and the narrow existing tests
+  relevant to the change. Add only necessary deterministic checks for semantics a
+  benchmark cannot observe. Run the boundary check when moving package code and a
+  build only when changing packaging.
+- Host and any LLM Judge use vLLM. Gold annotations stay outside method inputs.
+- Run the delivered default configuration's own smoke; distinguish source receipt,
+  committed operations and unfinished maintenance. Verify real mechanism reachability
+  before comparing scores, and keep failed or unscored attempts in the cost record.
+- Keep refactoring incremental, separate structural moves from behavior changes,
+  and avoid repeated validators, silent fallbacks and new review/approval stages.
+
+For other work requiring the general package handoff, run:
 
 ```bash
 uv run milai-lab-check-boundary
@@ -47,4 +113,3 @@ uv build
 ```
 
 The product pin verifier is required before any product-backed effect run.
-

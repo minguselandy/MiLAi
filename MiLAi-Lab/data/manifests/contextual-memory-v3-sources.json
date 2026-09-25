@@ -1,0 +1,391 @@
+{
+  "manifest_kind": "REFERENCE_SOURCE_INVENTORY",
+  "schema_version": 1,
+  "date": "2026-09-23",
+  "goal_version": "v3.0",
+  "scope": "source_inspection_only_no_external_runtime_installation",
+  "repositories": [
+    {
+      "project": "ReFind",
+      "local_path": "/cra/memory/mx_memory/ReFind",
+      "acquisition": "reused_existing_checkout",
+      "source_url": "https://github.com/imlrz/ReFind.git",
+      "commit": "a80175ca0eeb52a938d7cab7a602bc780de8a577",
+      "working_tree_clean": true,
+      "license_id": "MIT",
+      "license_file": "LICENSE",
+      "license_sha256": "fe791beac0812c5bc0f82aeb15dbcd256924c4836f2008f04823f0ade486af4f",
+      "purpose": "session ordering and BM25 retrieval",
+      "selected_files": [
+        {
+          "path": "app/store.py",
+          "sha256": "16b0c4df0d72586f1e8530a375c041499d909287d8302620174e4a3d85fbb8f2"
+        },
+        {
+          "path": "app/bm25.py",
+          "sha256": "3e712cfb1ae8fbda97437dddbca0aecc32505ec3fe52ccab55d460516e60f9ef"
+        },
+        {
+          "path": "app/retriever.py",
+          "sha256": "7b999b75e71bfafc13fa2b1e6d3ac25830b9c84c74f3fb4aeac59a4b8746e2e5"
+        }
+      ],
+      "identity_note": "Author challenge adapter; not claimed to reproduce every paper detail."
+    },
+    {
+      "project": "ReMe",
+      "local_path": "/cra/memory/mx_memory/ReMe",
+      "acquisition": "reused_existing_checkout",
+      "source_url": "https://github.com/agentscope-ai/ReMe",
+      "commit": null,
+      "working_tree_clean": null,
+      "license_id": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_sha256": "cc54d679aaced751c096f120b666355c106d9394d28f93f6df353973f6cd7dbe",
+      "purpose": "incremental revision and source-range assembly; local search_v2 is distinguished from default",
+      "selected_files": [
+        {
+          "path": "reme/__init__.py",
+          "sha256": "492b5fa70baa992c8b41668bddbfe5af322fd51cf69e7cf93e4ac39e52434f7c"
+        },
+        {
+          "path": "reme/steps/index/search.py",
+          "sha256": "eac4b57896d80f8dc784643bc8518bff8bd5ec78b82d08919624ab9ef4a9bb52"
+        },
+        {
+          "path": "reme/steps/index/search_v2.py",
+          "sha256": "14189a25d708ac0a573a767209c188fee231a032ebecc706de08dc5ea46344b9"
+        },
+        {
+          "path": "reme/steps/index/_source_format.py",
+          "sha256": "70e7ee9218776ae83f90bf0164652142d31e5474fa3ee65f2368e459f8ad94c5"
+        },
+        {
+          "path": "reme/components/file_store/local_file_store.py",
+          "sha256": "cf54dad5ee9c73633dce9f410679fd53653f370143520e3cad0ae91547b9baab"
+        },
+        {
+          "path": "reme/steps/evolve/auto_memory.py",
+          "sha256": "ad8cc580614a19767b00e85893d9802c67a2a035bb1d50de9afc40e4d2dbc4dd"
+        },
+        {
+          "path": "reme/steps/evolve/dream/extract.py",
+          "sha256": "f5366c1e63678622e941a10f5737ce0aa5801c7b95da28aa41de73b6cc7520b4"
+        },
+        {
+          "path": "reme/steps/evolve/dream/integrate.py",
+          "sha256": "9ab90a584d344ad9d3ec2eb42985a8051523475ea97eb038efcf95769ebaf393"
+        }
+      ],
+      "identity_note": "Local source tree without .git; selected file hashes identify this inspection; package version 0.4.1.6."
+    },
+    {
+      "project": "OpenViking",
+      "local_path": "/cra/memory/mx_memory/OpenViking",
+      "acquisition": "reused_existing_checkout",
+      "source_url": "https://github.com/volcengine/OpenViking.git",
+      "commit": "499995f3ed2e7f551a715179c4053772c51ff819",
+      "working_tree_clean": true,
+      "license_id": "AGPL-3.0",
+      "license_file": "LICENSE",
+      "license_sha256": "1bd87fa6d9a5c79daf0c2af042b6725c9773bf095cc3d1bdf3656e66d1c3e5b1",
+      "purpose": "budgeted materials and delivery ledger; mechanism reference only",
+      "selected_files": [
+        {
+          "path": "openviking/retrieve/context_assembler/pipeline.py",
+          "sha256": "adca4818081ba97746a35371c168c09fce3acc0117783c12f67b403c4a81fded"
+        },
+        {
+          "path": "openviking/retrieve/context_assembler/ledger.py",
+          "sha256": "24d3658d1b91bf8bbbbdab587482a6af969428f5e7afec72645e07c12052f87e"
+        },
+        {
+          "path": "openviking/retrieve/context_assembler/budget.py",
+          "sha256": "81ae21a7b93bd1f1c23630f55b457657c8a85c7435f3be5cacb41a59d54f843b"
+        },
+        {
+          "path": "openviking/retrieve/context_assembler/expansion.py",
+          "sha256": "5c91fcaddad9447423a1f021d60892925608952790888bce8a4ad217ad9337e0"
+        },
+        {
+          "path": "openviking/retrieve/context_assembler/tiers.py",
+          "sha256": "a41ac8657123bffa44682fa41fe7f30ac814965e7fa7f01a612b2fdb48d83799"
+        },
+        {
+          "path": "openviking/session/session.py",
+          "sha256": "31d2bac3d534ba280f454469cd4ad84f833336b8c79183812f287c90885a8124"
+        },
+        {
+          "path": "openviking/storage/semantic_sidecar.py",
+          "sha256": "26a35a2bfd1b07d40da0688a7a8110c4bd82ab588d669618fc7c76ae7606c18e"
+        }
+      ]
+    },
+    {
+      "project": "MemTX",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v3/MemTX",
+      "acquisition": "downloaded_this_turn",
+      "source_url": "https://github.com/lxy1134/MEMTX_.git",
+      "commit": "4e1124ccd5fd384857463020e3497aa73ec93be6",
+      "working_tree_clean": true,
+      "license_id": null,
+      "license_file": null,
+      "license_sha256": null,
+      "purpose": "dependency cascade and invalid-view isolation; no root license found; read-only design reference",
+      "selected_files": [
+        {
+          "path": "src/schema.py",
+          "sha256": "7dc60d15dc14bed4f6e67b9d175fb1124ba0098d08a76859ad85ca97748c0224"
+        },
+        {
+          "path": "src/memtx/dependency_graph.py",
+          "sha256": "26b34e1fdf1d05416bcdc5bca365c7baa55987b28a896ae272789bb0b9be09c0"
+        },
+        {
+          "path": "src/memtx/memtx_manager.py",
+          "sha256": "b742036ae5a02615803e8cdec454cfafa390f438479d86a205a7859383a4f660"
+        }
+      ]
+    },
+    {
+      "project": "STALE",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v3/STALE",
+      "acquisition": "downloaded_this_turn",
+      "source_url": "https://github.com/icedreamc/STALE.git",
+      "commit": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+      "working_tree_clean": true,
+      "license_id": "MIT",
+      "license_file": "LICENSE",
+      "license_sha256": "0adcc27078a1b9a5f9905b7bba7b9b1a280d56828c2c00b6db17c872ee549bb6",
+      "purpose": "CUPMem revision/readout and unchanged STALE evaluation protocol",
+      "selected_files": [
+        {
+          "path": "cup_mem/memory/models.py",
+          "sha256": "3c8c34ec03d8bcc10d0cfd67696a4886b59f5786b3f9b381fa3db061c9454972"
+        },
+        {
+          "path": "cup_mem/write/update_resolver.py",
+          "sha256": "35b34df5f2d3f9b8695d6395af9fad213a1bc5a9292d745b0523c5bb82e6051b"
+        },
+        {
+          "path": "cup_mem/write/invalidation_resolver.py",
+          "sha256": "bcebf7fdcef23893a5fff5f269017636ea8a5a4896bb2969b9d6051101fba7a8"
+        },
+        {
+          "path": "cup_mem/query/retrieval.py",
+          "sha256": "9dd157375428d9543b624680fbf49ecf96dd30e6e5b20d320b3d1da4a8e4fca5"
+        },
+        {
+          "path": "STALE/Evaluation/run_target_model.py",
+          "sha256": "95e5e67d0bbb68300a95e00bee04cd08ab1ea1c2b1bce67b14909c1760a197e1"
+        },
+        {
+          "path": "STALE/Evaluation/full_eval_performance.py",
+          "sha256": "976ab2ca3b975c58ce5765ab2c0f11a3cc6135f56f72f3807353fe57c72aee82"
+        },
+        {
+          "path": "STALE/Evaluation/judge_prompts.py",
+          "sha256": "123696c2ee24f4159485e700ef29afbb4dc7da956fe0beedd1327b7ad016dcf9"
+        }
+      ]
+    },
+    {
+      "project": "HiMem",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v3/HiMem",
+      "acquisition": "downloaded_this_turn",
+      "source_url": "https://github.com/jojopdq/HiMem.git",
+      "commit": "0cd4a2500f91a0353178c9e380e491c99a0ad61f",
+      "working_tree_clean": true,
+      "license_id": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_sha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+      "purpose": "episode/note separation and conflict-driven updates",
+      "selected_files": [
+        {
+          "path": "himem/components/knowledge_conflict_detector.py",
+          "sha256": "c9600e70c8439b989df85193f4fb0e9e9b17fd25e10924175ae3c4a405f999e1"
+        },
+        {
+          "path": "himem/memory/note_store.py",
+          "sha256": "9d16cf8c5fc3094abecc30371e5bb744bca18b176d8f1a5015d552bc163b1940"
+        },
+        {
+          "path": "himem/memory/episode_store.py",
+          "sha256": "87c13ccea5ac3ae346c1592bcbca274e400a45dff8089580e49d9e9720596d2f"
+        }
+      ]
+    },
+    {
+      "project": "MemSyco-Bench",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v3/MemSyco-Bench",
+      "acquisition": "downloaded_this_turn",
+      "source_url": "https://github.com/XMUDeepLIT/MemSyco-Bench.git",
+      "commit": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+      "working_tree_clean": true,
+      "license_id": "MIT",
+      "license_file": "LICENSE",
+      "license_sha256": "f607254fa7fd8fd9e0ab9c2199ee568c44232053f5affa5130a5330b7bbf148a",
+      "purpose": "native dialogue/question adapter and official scoring; gold memory never sent to Host",
+      "selected_files": [
+        {
+          "path": "dataset/dataset.py",
+          "sha256": "5b250d92da313a9c3af1d6ae43259be7c0479ef736ffe3ef7369555d1c569211"
+        },
+        {
+          "path": "data/README.md",
+          "sha256": "faa1f1275662a1698c2c8bc615c0901e78f6a524ef0e9fecde24bbd307805b5f"
+        },
+        {
+          "path": "data/schema.json",
+          "sha256": "8c54d9a53c9a44478f49dbcb003b6251e09d894fb63b687671f9796c13c11b6c"
+        },
+        {
+          "path": "data/manifest.json",
+          "sha256": "1e996e2677f57d07884365a1d69d1528ddb9859efd25d0210c14bed0608b4505"
+        },
+        {
+          "path": "evaluation/run_task.py",
+          "sha256": "bce2466b5069bda83f9b88a5aaa2b26cb5a24f741cd38f714df6525182569070"
+        },
+        {
+          "path": "evaluation/task_valid_memory_selection.py",
+          "sha256": "2ef2dd63bc7762e4ff6441042e50a915cafa6ae753475bc26a7789142de64a29"
+        },
+        {
+          "path": "evaluation/task_contextual_scope_control.py",
+          "sha256": "2f454b04548dd69b4aefdf4c36efd1de891fe4c93a7ea908daca9fce9648038a"
+        },
+        {
+          "path": "evaluation/task_personalized_memory_use.py",
+          "sha256": "7237b454f102943270e8efc242c21eb3989f4b36c863dcb59f137c668edbf8da"
+        },
+        {
+          "path": "evaluation/_paper_metrics.py",
+          "sha256": "f114a067769d40581a388f73964aca96e0c66d837c79ce97a134a0d30fb2d875"
+        }
+      ]
+    },
+    {
+      "project": "LangMem",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v2.3/langmem-9d033b47d9ce",
+      "acquisition": "reused_existing_checkout",
+      "source_url": "https://github.com/langchain-ai/langmem.git",
+      "commit": "9d033b47d9ce53e37e92c92241b0496c0278932e",
+      "working_tree_clean": true,
+      "license_id": "MIT",
+      "license_file": "LICENSE",
+      "license_sha256": "98af1351ea856e008c835bc89a312905960a318072f950732bf346c741027c7d",
+      "purpose": "unified memory intent tool",
+      "selected_files": [
+        {
+          "path": "src/langmem/knowledge/tools.py",
+          "sha256": "0118d3623a19c9b6c8c3d477aead51f08eeb44771c3ae3f51cd32d8a800b78d7"
+        }
+      ]
+    },
+    {
+      "project": "Mem0",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v2.3/mem0-f8082a7345da",
+      "acquisition": "reused_existing_checkout",
+      "source_url": "https://github.com/mem0ai/mem0.git",
+      "commit": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+      "working_tree_clean": true,
+      "license_id": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_sha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+      "purpose": "bounded batch updates and embedding reuse",
+      "selected_files": [
+        {
+          "path": "mem0/memory/main.py",
+          "sha256": "5b1b75e2f00aca7bd368a6e9cd5905145d60fd05a0e36d6b1ef3e2f1b4f28ca1"
+        }
+      ]
+    },
+    {
+      "project": "Memobase",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v2.3/memobase-358c16bbc6d6",
+      "acquisition": "reused_existing_checkout",
+      "source_url": "https://github.com/memodb-io/memobase.git",
+      "commit": "358c16bbc6d687937d79bc2f984a11c3be8da901",
+      "working_tree_clean": true,
+      "license_id": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_sha256": "ad79127bef564bb5b553d630958ea64212a8a29ef3960d4b407cc1ad781b56a7",
+      "purpose": "raw history/profile/event views",
+      "selected_files": [
+        {
+          "path": "src/server/api/memobase_server/controllers/context.py",
+          "sha256": "2095a6817bb893ed674a1307da0cf608260f824d482e82ea83900741d06e9c81"
+        },
+        {
+          "path": "src/server/api/memobase_server/controllers/buffer.py",
+          "sha256": "77e8e10bf11254717e15a783eb4bb6e046ea427409060ab6250bb17b227a7dcf"
+        }
+      ]
+    },
+    {
+      "project": "Graphiti",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v2.3/graphiti-16cdf7045378",
+      "acquisition": "reused_existing_checkout",
+      "source_url": "https://github.com/getzep/graphiti.git",
+      "commit": "16cdf7045378c8d53ae01f94e2fa60d238cb0f68",
+      "working_tree_clean": true,
+      "license_id": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_sha256": "2825300b20d7b951209835a4a331f29e24725a39d65168e4b831df53aa372650",
+      "purpose": "source-linked derivations and hybrid search",
+      "selected_files": [
+        {
+          "path": "graphiti_core/search/search.py",
+          "sha256": "9fe64da1825864950285b1733a4920001d70c780e3f0386837e98eedbfed7529"
+        },
+        {
+          "path": "graphiti_core/search/search_utils.py",
+          "sha256": "304b1acf9fc50adc1b6fe705667853a7774cd54fd8000feb87575e4f6753221f"
+        }
+      ]
+    }
+  ],
+  "lab_basis": {
+    "repository_commit": "5f233a16829b9c2db603153b0e7d28dd6edb2188",
+    "identity_note": "Working-tree hashes include uncommitted contextual code; repository commit alone does not identify the active implementation.",
+    "files": [
+      {
+        "path": "src/milai_lab/methods/contextual_user_memory.py",
+        "sha256": "f6fd59b1b5dd9b9b8741c8c0ccb0954d4462bf421ddc0435e53dbc255899a8b9"
+      },
+      {
+        "path": "tools/contextual_host_adapter.py",
+        "sha256": "d54ce52cf2b8cc79527e697b649421710d713dfa18655c4cebc25fc0e484eb2e"
+      },
+      {
+        "path": "tools/contextual_ingestion.py",
+        "sha256": "6e229beeabb01b1fdf1fbe6e87e21ef58ec741bc118a968bddd4360cfbffdda2"
+      },
+      {
+        "path": "tools/contextual_embeddings.py",
+        "sha256": "af566c2382dc7967b6430cb4a09b81d9a2f6f2a0e72d29b11effd855a1b9c6b5"
+      },
+      {
+        "path": "tools/run_contextual_user_memory.py",
+        "sha256": "b080d46cfa1b9c9aa038b3f66f69210b50c681b8eaec8ad16b988082d2cc5af2"
+      },
+      {
+        "path": "src/milai_lab/datasets/contextual.py",
+        "sha256": "d5c7a00c760d86b3c495c69b8344b8e6b2bc3d2d2500b61d6b42e5eb70a76b0d"
+      },
+      {
+        "path": "src/milai_lab/scorers/contextual.py",
+        "sha256": "d275c70d536b67702c9ef4e5ab0bb742a80301c1f5fe0b1da0e676d37f394558"
+      },
+      {
+        "path": "docs/milai创新点建议.md",
+        "sha256": "eb4d0c83651fe9a9828870ae8b996e7c854bba4fc0ba7364b0f7c87b24f2399d"
+      },
+      {
+        "path": "docs/创新点补充建议.md",
+        "sha256": "6357ac83fc21119b7311de73c54e201f0c95691a665da5d72e45d0cf8cc8ab81"
+      }
+    ]
+  }
+}

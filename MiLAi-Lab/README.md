@@ -3,7 +3,102 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Current work: [Host memory-control repair Goal](studies/active/MILA_HOST_MEMORY_CONTROL_REPAIR_GOAL_v1.0_20260914.md),
+Latest completed work: [Usable continuous memory Goal v8.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v8.0_20260925.md).
+First writes, current-record revisions, post-action maintenance, durable runtime/recovery,
+explicit source delivery and incomplete-run preservation are implemented. A real document
+sequence and the same exposed MERIT arc passed scoped criteria after preserved repairs;
+the final isolated episode scored 1/1 and updated its original pending card to completed.
+This was staged verification, not a continuous five-episode pass on the final source.
+[Results and costs](docs/CONTEXTUAL_USER_MEMORY_V8_RESULTS_20260925.md): 137 generations,
+948575 generation tokens, 5432 embedding tokens, unknown=0, Judge=0.
+[Usage](docs/CONTEXTUAL_USER_MEMORY_V8_DEVELOPMENT_20260925.md),
+[ordinary default](configs/contextual-memory-v8-off.json), and
+[optional State](configs/contextual-memory-v8-optional.json) are available.
+No full benchmark, full suite or Product migration. General reliability and State benefit remain unproven.
+
+Previous completed work: [Observation-driven memory Goal v7.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v7.0_20260925.md).
+Reusable Host sessions, explicit memory/business dispatch, trusted observations, scoped
+persistence, genuine revisions, optional State and explicit query projection are implemented.
+Development was frozen before selecting one complete exposed native MERIT arc. The final
+ordinary/off run scored 5/5 (dependent 2/2) with a real revision-to-later-action chain.
+[Results and limitations](docs/CONTEXTUAL_USER_MEMORY_V7_RESULTS_20260925.md) preserve two
+failed runs and all costs: 101 generations, 481877 generation tokens, 1273 embedding tokens,
+unknown=0. State benefit and general reliability remain unestablished. The model still omitted
+one initial write and did not refresh pending-status cards after business execution.
+[Usage and generic configs](docs/CONTEXTUAL_USER_MEMORY_V7_DEVELOPMENT_20260925.md) are available.
+No full benchmark, full test suite or Product migration; closed v6 evidence is unchanged.
+
+Completed scoped work: [Semantic repair Goal v6.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v6.0_20260924.md).
+The final three exposed questions across five fixed paths completed and passed native
+scoring. Subject attribution, real revisions without self-dependencies, temporal scope,
+new-preference use and State-to-search consumption were exercised; no final answer
+persisted task text or advice. The [actual default](configs/contextual-memory-v6-user-scope-default.json)
+completed its own small smoke. General semantic reliability remains unestablished:
+broad summaries, overinterpretation and all earlier failures remain documented.
+
+The user-requested cumulative budget and verification-count stops are removed; accounting
+continues unchanged. Final validation used 43 generations; all v6 development used 243
+generations, 969510 generation tokens and 93390 embedding tokens, with zero unknown usage.
+The [results](docs/CONTEXTUAL_USER_MEMORY_V6_RESULTS_20260924.md) retain every failure,
+source identity and stage cost. Method v10 / write v9 / ingestion v25 / material view v5
+share the same source identity across the final paths. Ordinary remains the baseline,
+H1–H6 and closed v5 evidence remain unchanged. No full benchmark, full suite or Product work.
+
+The [v6 experiment report and remaining issues](docs/MILA_CONTEXTUAL_USER_MEMORY_V6_EXPERIMENT_REPORT_20260924.md)
+separates actual feature execution, scoped native results, complete costs and unresolved
+semantic problems, including State initialization and temporary references in stored prose.
+
+Completed scoped engineering work: [Contextual user-memory Goal v5.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v5.0_20260924.md).
+Contracts, compact materials, genuine interpretation revisions, and active State-to-search
+consumption are implemented and exercised. The final ordinary default completed the
+original task without deletion or task reset, but failed native scoring (latest 0,
+contamination 1, pass 0). The separate State diagnostic passed after a concrete
+initialization-schema repair; its failed attempt and all costs remain recorded.
+The sole H2 comparison passed in all three arms without independent quality benefit.
+Role attribution, unsupported writes and inappropriate dependencies remain Host semantic
+failures; engineering completion does not establish reliable memory or a quality win.
+Total use: 114/144 generation requests, 322283/750000 generation tokens and
+22445/290000 embedding tokens. User-approved request partitions are default32/online112,
+with accumulated use retained. Ordinary remains the baseline and H1–H6 remain frozen.
+No further scoped model runs, full benchmark, full suite or Product migration are planned.
+[Implementation, frozen evidence and limitations](docs/CONTEXTUAL_USER_MEMORY_V5_RESULTS_20260924.md)
+remain separate from the closed v4 results.
+
+Completed scoped Lab Goal: [Contextual user-memory execution repair v4.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md).
+Method v7 implements exact ingestion handles, durable local receipts, passive task
+conditions and tokenizer capacity checks. The [frozen v4 ordinary configuration](configs/contextual-memory-v4-default.json)
+completed a smoke on its frozen source, but an empty forget operation reset
+the task context and the answer failed native scoring. One fixed STALE scene completed all 50
+history batches, three probes and native scoring (1/3). The authorized C online
+replay handled four fixed exposed cases: three received three-arm comparisons; one
+stopped after ingestion because the relevant update was not proposed. One H2 chain
+reached both actual materials and the answer. All three arms passed that case, while
+H2 used 27.6% more answer tokens than ordinary. Benefit remains unestablished and Host
+semantic reliability remains limited. The Goal is complete with negative or
+inconclusive effect; [v4 results](docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260924.md)
+record failures, source identities and cumulative costs. H1–H6 stay frozen, ordinary
+stays default, and untouched confirmation cases remain unused. No large tests ran.
+
+The [v7 experiment assessment](docs/MILA_CONTEXTUAL_USER_MEMORY_EXPERIMENT_REPORT_20260924.md)
+checks source snapshots, answers and cumulative cost. It distinguishes the current
+empty-forget side effect from the first smoke's nonempty deletion, identifies actual
+misuse of condition fields, and prioritizes operation contracts and material costs.
+This assessment adds no model calls and leaves the closed Goal and frozen scores intact.
+
+Completed Lab development: [Contextual user-memory Goal v3.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v3.0_20260923.md).
+The Lab runtime now implements the memory lifecycle and six candidate mechanisms.
+Small native comparisons and one fixed H5 confirmation retain negative and incomplete
+results. No candidate met the bar for default adoption. The [results](docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md)
+record the actual coverage and cost. The [minimal configuration](configs/contextual-memory-v3-default.json)
+uses ordinary memory and one exposed case. Host and required LLM Judges use vLLM.
+Full benchmarks, full test-suite runs and Product migration remain outside this Goal.
+
+The [development status report](docs/MILA_LAB_DEVELOPMENT_REPORT_20260924.md) independently
+checks the current source and frozen results, including mechanism coverage, total
+cost and long-history execution limits. The completed v4.0 follow-up records its
+repairs separately; the report and its historical evidence remain unchanged.
+
+Previously completed work: [Host memory-control repair Goal](studies/active/MILA_HOST_MEMORY_CONTROL_REPAIR_GOAL_v1.0_20260914.md),
 [results](studies/active/MILA_HOST_MEMORY_CONTROL_REPAIR_RESULTS_20260914.md),
 [usage](docs/HOST_REVERSIBLE_WORKSPACE.md). Reversible workspace, same-loop ordinary policy and
 public SDK recovery implemented. Limited native comparison is complete; benefit not established.
@@ -198,3 +293,5 @@ Product-05 finished
 restart persistence and two-tenant isolation passed. Generic fixed-Context evidence-use treatments
 did not pass H2 after three bounded repair rounds, so direct Reader remains selected and the gated
 24-case S2 was not entered. The formal 500-case holdout remains unauthorized and unconsumed.
+
+2026-09-25：v7 开发和限定原生评估已完成；实际能力及限制见上方结果。

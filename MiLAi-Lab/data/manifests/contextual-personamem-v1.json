@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "data_policy": "Raw upstream files are immutable, external to Git, and never rewritten by adapters. Gold values were not printed during validation.",
+  "dataset_id": "PersonaMem-v1-32k",
+  "upstream": {
+    "repository": "https://huggingface.co/datasets/bowen-upenn/PersonaMem-v1",
+    "revision": "a8076d5608c93ba2a28983cd78aa99b01a163ae7",
+    "license": "MIT",
+    "license_source": "https://huggingface.co/datasets/bowen-upenn/PersonaMem-v1"
+  },
+  "external_root": "/cra/memory/mx_memory/benchmarks/contextual-user-memory/personamem-v1",
+  "files": {
+    "questions_32k.csv": {
+      "bytes": 1305366,
+      "sha256": "cccd34cf53e0bc4d9536c04cff5ca045156d9a4e227e83327112482840bbc93c"
+    },
+    "shared_contexts_32k.jsonl": {
+      "bytes": 5613210,
+      "sha256": "217247ebfec9e8442fc53570c795ab69f21aad08745f7de78d9beab51b122d4a"
+    }
+  },
+  "sample_counts": {
+    "questions_32k.csv": 589,
+    "shared_contexts_32k.jsonl": 37
+  },
+  "question_fields": [
+    "persona_id",
+    "question_id",
+    "question_type",
+    "topic",
+    "context_length_in_tokens",
+    "context_length_in_letters",
+    "distance_to_ref_in_blocks",
+    "distance_to_ref_in_tokens",
+    "num_irrelevant_tokens",
+    "distance_to_ref_proportion_in_context",
+    "user_question_or_message",
+    "correct_answer",
+    "all_options",
+    "shared_context_id",
+    "end_index_in_shared_context"
+  ],
+  "context_record_shape": "JSONL record is one shared_context_id key mapping to an ordered message list; observed 37 ids.",
+  "history_boundary": {
+    "field": "end_index_in_shared_context",
+    "semantics": "exclusive; adapter passes history[:end_index_in_shared_context]",
+    "validated": "all 589 references resolve; all bounds satisfy 0 <= end_index <= history length"
+  },
+  "protocol_source": {
+    "repository": "https://github.com/bowen-upenn/PersonaMem",
+    "revision": "d07e6ade22e85e0e5d562247323a9c3e07553226",
+    "files": {
+      "inference.py": "9b77115a0d92d255c4c6ef6a710f8975e178d7f0c902739a1538411e06b8a71a",
+      "inference_standalone_openai.py": "7ef9efca3bed32052a014efceb4daffad181ea4c3bad4bbbcb8ffbe386a9a472",
+      "utils.py": "5ff6e52fded86c70f015e2fa6445acb624f47a42c06025c31e27da0da3a3c54d",
+      "prompts.py": "a190fa7c9c29f73756300e253703e5c726896b84c34198030d766dd4946ee1cc"
+    },
+    "purpose": "official MCQ assembly and answer extraction/score matching"
+  },
+  "version": "a8076d5608c93ba2a28983cd78aa99b01a163ae7",
+  "split_files": {
+    "benchmark": "questions_32k.csv",
+    "contexts": "shared_contexts_32k.jsonl"
+  },
+  "file_sha256": {
+    "questions_32k.csv": "cccd34cf53e0bc4d9536c04cff5ca045156d9a4e227e83327112482840bbc93c",
+    "shared_contexts_32k.jsonl": "217247ebfec9e8442fc53570c795ab69f21aad08745f7de78d9beab51b122d4a"
+  }
+}

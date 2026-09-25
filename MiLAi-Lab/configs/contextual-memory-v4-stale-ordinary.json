@@ -1,0 +1,165 @@
+{
+  "run_version": "contextual-v4-stale-ordinary",
+  "phase": "development",
+  "host": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 8
+  },
+  "judge": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 2048,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 1
+  },
+  "embedding": {
+    "base_url": "http://127.0.0.1:7861/v1/",
+    "model": "bge-m3",
+    "timeout": 180
+  },
+  "embedding_dimension": 1024,
+  "embedding_batch": 32,
+  "answer_calls": 8,
+  "judge_attempts": 1,
+  "concurrency": 1,
+  "model_identity": {
+    "artifacts": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/model-weights.json",
+        "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/model-metadata.json",
+        "sha256": "6c6cb5682a3dae59542f6ea1e2717f7ac99dad8980fb64813288e501f3ce1acd"
+      },
+      {
+        "path": "/data/models/embed/tokenizer.json",
+        "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+      }
+    ],
+    "host": {
+      "local_path": "/cra/qwen36-35B",
+      "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+      "metadata": {
+        "modelscope_version": "Revision:master,CreatedAt:1786091362",
+        "configuration": {
+          "framework": "Pytorch",
+          "task": "visual-question-answering"
+        },
+        "files": {
+          "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+          "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+          "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+          "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+          "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6"
+        }
+      },
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      },
+      "served_model": "Qwen3.6-35B-A3B-FP8",
+      "max_model_len": 65536,
+      "tensor_parallel_size": 2
+    },
+    "embedding": {
+      "local_path": "/data/models/embed",
+      "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+      "metadata": {
+        "modelscope_version": "Revision:master,CreatedAt:1726273563",
+        "configuration": {
+          "framework": "pytorch",
+          "task": "sentence-similarity",
+          "allow_remote": true
+        },
+        "files": {
+          "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+          "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+        }
+      },
+      "served_model": "bge-m3",
+      "max_model_len": 8192
+    },
+    "judge_relation": "same model weights and chat template as Host; isolated requests; same-model self-evaluation",
+    "verification": "All local weight files SHA-256 hashed once before development-v3; identity manifests verified on each run."
+  },
+  "exposure": "One previously exposed STALE scene; all native history and three independent probes unchanged.",
+  "datasets": [
+    {
+      "dataset": "stale",
+      "root": "/cra/memory/mx_memory/benchmarks/contextual-user-memory/stale",
+      "split": "fixed-small",
+      "expected_count": 3,
+      "development_ids": [
+        "4ab36c8a-5974-4361-8e17-e73091c193b2:dim1_query",
+        "4ab36c8a-5974-4361-8e17-e73091c193b2:dim2_query",
+        "4ab36c8a-5974-4361-8e17-e73091c193b2:dim3_query"
+      ],
+      "manifest": "data/manifests/contextual-memory-v3-stale-small.json",
+      "data_manifest_sha256": "c62bf9ef2faf3c7a166aa8b9d60a28ec5f06a1508a209bc222edc0177005c24f"
+    }
+  ],
+  "judge_concurrency": 1,
+  "service_capacity": "One Host workflow; frozen answers before one native Judge attempt.",
+  "embedding_window": {
+    "tokenizer_path": "/data/models/embed/tokenizer.json",
+    "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+    "max_tokens": 8192,
+    "pooling": "original_token_count_weighted_mean_l2"
+  },
+  "method_definition": {
+    "ORDINARY_MEMORY": "contextual-user-memory-v7 ordinary; exact handle proposals, per-operation durable receipts; passive QueryContext; natural tokenizer-based history spans; full ordinary material delivery."
+  },
+  "arms": [
+    "ORDINARY_MEMORY"
+  ],
+  "history_max_operations": 6,
+  "history_context_bytes": 12000,
+  "reference_arm": "ORDINARY_MEMORY",
+  "profiles": {
+    "ORDINARY_MEMORY": "ordinary"
+  },
+  "budget": {
+    "questions": 3,
+    "arms": 1,
+    "generation_requests": 96,
+    "generation_tokens": 1000000,
+    "embedding_tokens": 500000
+  },
+  "archive_policy": "All arms may retrieve the same legal native dialogue; retained memory deletion does not edit the benchmark file.",
+  "attribution": "Full-scene execution check of ordinary; no candidate effect claim.",
+  "history_capacity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "context_tokens": 65536,
+    "output_tokens": 4096,
+    "batch_source_tokens": 6000,
+    "safety_tokens": 512,
+    "source_message_overhead_tokens": 32,
+    "related_reserve_tokens": 0,
+    "schema_reserve_tokens": 0
+  },
+  "stage_holdback": {
+    "history": {
+      "generation_requests": 25,
+      "generation_tokens": 300000
+    },
+    "answer": {
+      "generation_requests": 1,
+      "generation_tokens": 20000
+    }
+  },
+  "cumulative_budget_scope": "v4-package-b-stale-ordinary",
+  "cumulative_budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v4-budgets/b-stale-ordinary.json"
+}

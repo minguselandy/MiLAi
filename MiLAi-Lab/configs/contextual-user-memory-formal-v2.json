@@ -1,0 +1,213 @@
+{
+  "run_version": "contextual-formal-v2",
+  "phase": "formal",
+  "host": {
+    "base_url": "http://127.0.0.1:7873/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 8,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "judge": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 32,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 1
+  },
+  "embedding": {
+    "base_url": "http://127.0.0.1:7861/v1/",
+    "model": "bge-m3",
+    "timeout": 180
+  },
+  "embedding_dimension": 1024,
+  "embedding_batch": 32,
+  "history_chunk_chars": 24000,
+  "history_calls_per_chunk": 8,
+  "answer_calls": 8,
+  "judge_attempts": 2,
+  "concurrency": 12,
+  "model_identity": {
+    "artifacts": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/model-weights.json",
+        "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/model-metadata.json",
+        "sha256": "6c6cb5682a3dae59542f6ea1e2717f7ac99dad8980fb64813288e501f3ce1acd"
+      },
+      {
+        "path": "/data/models/embed/tokenizer.json",
+        "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/prefix-cache-probe/runtime-identity.json",
+        "sha256": "3bcb365eac79641e51e3f804fd7f03ca150e60f6619636605de91e5acc75d3f6"
+      }
+    ],
+    "host": {
+      "local_path": "/cra/qwen36-35B",
+      "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+      "metadata": {
+        "modelscope_version": "Revision:master,CreatedAt:1786091362",
+        "configuration": {
+          "framework": "Pytorch",
+          "task": "visual-question-answering"
+        },
+        "files": {
+          "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+          "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+          "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+          "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+          "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6"
+        }
+      },
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      },
+      "served_model": "Qwen3.6-35B-A3B-FP8",
+      "max_model_len": 65536,
+      "tensor_parallel_size": 2
+    },
+    "embedding": {
+      "local_path": "/data/models/embed",
+      "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+      "metadata": {
+        "modelscope_version": "Revision:master,CreatedAt:1726273563",
+        "configuration": {
+          "framework": "pytorch",
+          "task": "sentence-similarity",
+          "allow_remote": true
+        },
+        "files": {
+          "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+          "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+        }
+      },
+      "served_model": "bge-m3",
+      "max_model_len": 8192
+    },
+    "judge_relation": "same model weights and chat template as Host; isolated requests; same-model self-evaluation",
+    "verification": "All local weight files SHA-256 hashed once before development-v3; identity manifests verified on each run."
+  },
+  "exposure": "Development samples remain in formal datasets; LongMemEval has historical Lab exposure.",
+  "datasets": [
+    {
+      "dataset": "personamem-v1",
+      "root": "/cra/memory/mx_memory/benchmarks/contextual-user-memory/personamem-v1",
+      "split": "benchmark",
+      "expected_count": 589,
+      "manifest": "data/manifests/contextual-personamem-v1.json",
+      "data_manifest_sha256": "d4712c8beada61828348359f01ea09c48630b8a71dc79ee55061be423ef846a2"
+    },
+    {
+      "dataset": "personamem-v2",
+      "root": "/cra/memory/mx_memory/benchmarks/contextual-user-memory/personamem-v2",
+      "split": "benchmark_text",
+      "option_seed": 20260923,
+      "expected_count": 5000,
+      "manifest": "data/manifests/contextual-personamem-v2.json",
+      "data_manifest_sha256": "0a85d14b3bf9d698321be52ce9eb50deaf2e4a4859b942aa7dbc0f8c96c75d5e"
+    },
+    {
+      "dataset": "longmemeval-s-cleaned",
+      "root": "/cra/memory/mx_memory/benchmarks/LongMemEval/data",
+      "split": "benchmark",
+      "expected_count": 500,
+      "manifest": "data/manifests/contextual-longmemeval-s-cleaned-500.json",
+      "data_manifest_sha256": "676d47e75d3fc8aa26bf07cddd4bcebe59cc5b107c96211c08ae6cf5f3235b73"
+    }
+  ],
+  "judge_concurrency": 1,
+  "service_capacity": "At most 12 independent Host workflows, one in-flight request each. Dedicated runtime reports 874,763 KV tokens / 13.35 full 65,536-token sequences. Judge remains serial on the original endpoint after all dataset answers freeze.",
+  "embedding_window": {
+    "tokenizer_path": "/data/models/embed/tokenizer.json",
+    "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+    "max_tokens": 8192,
+    "pooling": "original_token_count_weighted_mean_l2"
+  },
+  "method_definition": {
+    "BASELINE": "Existing Workspace read/write/revision and ReasoningBank semantic retrieval; three memory tools, no new memory_state tool.",
+    "CANDIDATE": "Same infrastructure plus memory_state and context-sensitive State/Attention retrieval; same Host and model-call budgets.",
+    "QUERY_ONLY": "PersonaMem-v1 only; same Host and final answer format, without memory tools or history."
+  },
+  "inference_runtime": {
+    "host": {
+      "recorded_utc": "2026-09-23T11:11:26.224493+00:00",
+      "image_id": "sha256:e0cfcfcb9b86e2c2d0d52a93689773f20f380cb8e050a24ce550c44f6f55c5eb",
+      "container_id": "c43325ad2e58701dde643e8c901973f77ad6998f1264b9d2f7d20fd983ffbabe",
+      "container_name": "milai-contextual-prefix-probe",
+      "entrypoint": "vllm",
+      "args": [
+        "serve",
+        "/models",
+        "--port",
+        "7873",
+        "--tensor-parallel-size",
+        "2",
+        "--max-model-len",
+        "65536",
+        "--served-model-name",
+        "Qwen3.6-35B-A3B-FP8",
+        "--gpu-memory-utilization",
+        "0.80",
+        "--reasoning-parser",
+        "qwen3",
+        "--default-chat-template-kwargs",
+        "{\"enable_thinking\": false}",
+        "--enable-prefix-caching",
+        "--mamba-cache-mode",
+        "align"
+      ],
+      "devices": [
+        {
+          "Driver": "",
+          "Count": 0,
+          "DeviceIDs": [
+            "2",
+            "3"
+          ],
+          "Capabilities": [
+            [
+              "gpu"
+            ]
+          ],
+          "Options": {}
+        }
+      ],
+      "port_bindings": {
+        "7873/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "7873"
+          }
+        ]
+      },
+      "shm_size": 10737418240,
+      "vllm_version": "0.27.1",
+      "vllm_commit": "6e448d0ea9bf3d88d898b65449ca6dc2aec170ac",
+      "max_model_len": 65536,
+      "kv_token_capacity": 874763,
+      "max_full_length_concurrency": 13.35,
+      "enable_prefix_caching": true,
+      "mamba_cache_mode": "align",
+      "experimental_notice": "vLLM marks hybrid Mamba prefix caching experimental; same weights and prompt semantics, not a bitwise-output guarantee.",
+      "probe": {
+        "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/prefix-cache-probe/results.json",
+        "sha256": "b90cf2938122d60fd443b07e6fa7dd9767251e15f1bd8c8ec4b8a50a89a1a9c4"
+      }
+    },
+    "judge": "Original vLLM 0.27.1 endpoint on port 7860, prefix caching disabled; same pinned model weights and template as Host.",
+    "supersedes_run": "formal-v1",
+    "reason": "Measured repeated-prefill cost and two 180-second Host timeouts; synthetic prefix-cache capacity/reuse probe passed. No formal gold or accuracy used for runtime selection.",
+    "answer_reuse": "None. All required answers and histories are generated under this version; earlier run and costs remain separate."
+  }
+}

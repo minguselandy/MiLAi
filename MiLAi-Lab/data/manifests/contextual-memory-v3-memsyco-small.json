@@ -1,0 +1,165 @@
+{
+  "manifest_kind": "BENCHMARK_SUBSET_SELECTION",
+  "schema_version": 1,
+  "status": "SELECTED_NOT_RUN_ADAPTER_PENDING",
+  "dataset": "MemSyco-Bench",
+  "source_url": "https://github.com/XMUDeepLIT/MemSyco-Bench",
+  "source_commit": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+  "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v3/MemSyco-Bench",
+  "seed": 20260923,
+  "selection_rule": "Within each declared task, sort by (SHA256(UTF-8(\"{seed}:{source_commit}:{task}:{case_id}\")), case_id); screen = first 4; confirmation = next 4. Only task and case_id are used for selection.",
+  "tracks": [
+    "contextual_scope_control",
+    "valid_memory_selection",
+    "personalized_memory_use"
+  ],
+  "source_files": [
+    {
+      "task": "contextual_scope_control",
+      "relative_path": "data/contextual_scope_control.jsonl",
+      "upstream_count": 300,
+      "sha256": "a233ee49a17434255fd372a95284f57bfa3bbbbcbb5cf9be2d0c6c793865d748"
+    },
+    {
+      "task": "valid_memory_selection",
+      "relative_path": "data/valid_memory_selection.jsonl",
+      "upstream_count": 350,
+      "sha256": "7db0f062306a925f7cea9ea9cfb32cb94bbe2bb17999eff3e4a764aeabc4d498"
+    },
+    {
+      "task": "personalized_memory_use",
+      "relative_path": "data/personalized_memory_use.jsonl",
+      "upstream_count": 300,
+      "sha256": "7e4384008478265e338c8571a0f6d8e7a8720439f97dff8e735c1c858f613e17"
+    }
+  ],
+  "groups": {
+    "screen": {
+      "case_count": 12,
+      "cases": [
+        {
+          "task": "contextual_scope_control",
+          "case_id": "mso_hard_000068"
+        },
+        {
+          "task": "contextual_scope_control",
+          "case_id": "mso_hard_000188"
+        },
+        {
+          "task": "contextual_scope_control",
+          "case_id": "mso_hard_000138"
+        },
+        {
+          "task": "contextual_scope_control",
+          "case_id": "mso_hard_000041"
+        },
+        {
+          "task": "valid_memory_selection",
+          "case_id": "v11_000977"
+        },
+        {
+          "task": "valid_memory_selection",
+          "case_id": "v11_000569"
+        },
+        {
+          "task": "valid_memory_selection",
+          "case_id": "v11_001003"
+        },
+        {
+          "task": "valid_memory_selection",
+          "case_id": "v11_001002"
+        },
+        {
+          "task": "personalized_memory_use",
+          "case_id": "v11_001210"
+        },
+        {
+          "task": "personalized_memory_use",
+          "case_id": "rec_gen_0025"
+        },
+        {
+          "task": "personalized_memory_use",
+          "case_id": "rec_gen_0057"
+        },
+        {
+          "task": "personalized_memory_use",
+          "case_id": "v11_001256"
+        }
+      ]
+    },
+    "confirmation": {
+      "case_count": 12,
+      "cases": [
+        {
+          "task": "contextual_scope_control",
+          "case_id": "mso_hard_000144"
+        },
+        {
+          "task": "contextual_scope_control",
+          "case_id": "mso_hard_000026"
+        },
+        {
+          "task": "contextual_scope_control",
+          "case_id": "mso_hard_000279"
+        },
+        {
+          "task": "contextual_scope_control",
+          "case_id": "mso_hard_000204"
+        },
+        {
+          "task": "valid_memory_selection",
+          "case_id": "v11_000664"
+        },
+        {
+          "task": "valid_memory_selection",
+          "case_id": "v11_000404"
+        },
+        {
+          "task": "valid_memory_selection",
+          "case_id": "v11_000462"
+        },
+        {
+          "task": "valid_memory_selection",
+          "case_id": "v11_000986"
+        },
+        {
+          "task": "personalized_memory_use",
+          "case_id": "rec_gen_0063"
+        },
+        {
+          "task": "personalized_memory_use",
+          "case_id": "v11_001113"
+        },
+        {
+          "task": "personalized_memory_use",
+          "case_id": "rec_gen_0024"
+        },
+        {
+          "task": "personalized_memory_use",
+          "case_id": "v11_001324"
+        }
+      ]
+    }
+  },
+  "input_contract": {
+    "host_fields": [
+      "dialogue",
+      "question"
+    ],
+    "evaluation_only_fields": [
+      "memory",
+      "evaluation",
+      "metadata",
+      "task"
+    ],
+    "note": "case_id and task are runner bookkeeping only; do not inject task-specific policies or gold annotations into Host prompts. Preserve full native dialogue and question."
+  },
+  "execution_policy": {
+    "full_dataset_run": false,
+    "max_arms_per_run": 3,
+    "host_provider": "vllm",
+    "llm_judge_provider": "vllm",
+    "status": "NO_MODEL_CALLS",
+    "confirmation_policy": "Keep confirmation outside development prompts until a candidate version is frozen; after inspection it is an exposed development set, not a permanent holdout."
+  }
+}

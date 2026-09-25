@@ -1,0 +1,102 @@
+{
+  "manifest_kind": "BENCHMARK_SUBSET_SELECTION",
+  "schema_version": 1,
+  "status": "SELECTED_NOT_RUN_ADAPTER_PENDING",
+  "dataset": "STALE",
+  "source_url": "https://huggingface.co/datasets/STALEproj/STALE",
+  "source_revision": "617c51dc200b5ab09970834144c7e51c77959af0",
+  "external_root": "/cra/memory/mx_memory/benchmarks/contextual-user-memory/stale",
+  "license_id": "CC-BY-4.0",
+  "additional_notice": "LongMemEval_LICENSE is retained for upstream-derived distractor sessions.",
+  "upstream_scenario_count": 400,
+  "source_files": [
+    {
+      "path": "README.md",
+      "bytes": 1140,
+      "sha256": "475c84cc2b745746895691ae95d9386bd30b1be584e9ba7562236a9c0f7b0a38"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 18658,
+      "sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f"
+    },
+    {
+      "path": "LongMemEval_LICENSE",
+      "bytes": 1061,
+      "sha256": "0ec577719a69e112e75157b0dc5acfa68dd6c98bca6c5c830a036348c8a5987e"
+    },
+    {
+      "path": "T1_T2_400_FULL.json",
+      "bytes": 305908212,
+      "sha256": "5f3ec375179e20e2e94469e018189188f34e2e7e5f21cbecbd99fcfa648c1876",
+      "upstream_lfs_sha256": "5f3ec375179e20e2e94469e018189188f34e2e7e5f21cbecbd99fcfa648c1876",
+      "upstream_lfs_size": 305908212
+    }
+  ],
+  "source_integrity": "Dataset size and SHA-256 match the upstream LFS metadata at the pinned revision.",
+  "seed": 20260923,
+  "selection_rule": "Within T1 and T2 separately, sort by (SHA256(UTF-8(\"{seed}:{source_revision}:{type}:{uid}\")), uid), then take the first 2 scenarios per type. Selection uses only type and uid, never answers or outcomes.",
+  "scenario_count": 4,
+  "probe_count": 12,
+  "scenarios": [
+    {
+      "scenario_id": "4ab36c8a-5974-4361-8e17-e73091c193b2",
+      "type": "T1",
+      "probe_keys": [
+        "dim1_query",
+        "dim2_query",
+        "dim3_query"
+      ]
+    },
+    {
+      "scenario_id": "e55effb6-32f4-4dcf-b86d-7e4d1e1c8ea4",
+      "type": "T1",
+      "probe_keys": [
+        "dim1_query",
+        "dim2_query",
+        "dim3_query"
+      ]
+    },
+    {
+      "scenario_id": "53d876a2-e3a6-4107-848d-467a5ea117fd",
+      "type": "T2",
+      "probe_keys": [
+        "dim1_query",
+        "dim2_query",
+        "dim3_query"
+      ]
+    },
+    {
+      "scenario_id": "2d92d1c2-6ed8-4777-bde5-225ae1a69197",
+      "type": "T2",
+      "probe_keys": [
+        "dim1_query",
+        "dim2_query",
+        "dim3_query"
+      ]
+    }
+  ],
+  "input_contract": {
+    "host_fields": [
+      "haystack_session",
+      "timestamps",
+      "probing_queries[current_probe]"
+    ],
+    "evaluation_only_fields": [
+      "M_old",
+      "M_new",
+      "explanation",
+      "relevant_session_index",
+      "type"
+    ],
+    "history_policy": "Preserve the complete native haystack and timestamps. Do not enable upstream optional gold-index-guided trimming.",
+    "probe_policy": "Each probe starts independently from the same scenario ingestion snapshot; no sibling answer or score is input to another probe."
+  },
+  "execution_policy": {
+    "full_dataset_run": false,
+    "max_arms_per_run": 3,
+    "host_provider": "vllm",
+    "llm_judge_provider": "vllm",
+    "status": "NO_MODEL_CALLS"
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "run_version": "contextual-v6-default-semantic-repair-v3",
+  "phase": "development",
+  "host": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 6
+  },
+  "judge": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 2048,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 1
+  },
+  "embedding": {
+    "base_url": "http://127.0.0.1:7861/v1/",
+    "model": "bge-m3",
+    "timeout": 180
+  },
+  "embedding_dimension": 1024,
+  "embedding_batch": 32,
+  "answer_calls": 6,
+  "judge_attempts": 1,
+  "concurrency": 1,
+  "model_identity": {
+    "artifacts": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/model-weights.json",
+        "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/model-metadata.json",
+        "sha256": "6c6cb5682a3dae59542f6ea1e2717f7ac99dad8980fb64813288e501f3ce1acd"
+      },
+      {
+        "path": "/data/models/embed/tokenizer.json",
+        "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+      }
+    ],
+    "host": {
+      "local_path": "/cra/qwen36-35B",
+      "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+      "metadata": {
+        "modelscope_version": "Revision:master,CreatedAt:1786091362",
+        "configuration": {
+          "framework": "Pytorch",
+          "task": "visual-question-answering"
+        },
+        "files": {
+          "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+          "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+          "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+          "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+          "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6"
+        }
+      },
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      },
+      "served_model": "Qwen3.6-35B-A3B-FP8",
+      "max_model_len": 65536,
+      "tensor_parallel_size": 2
+    },
+    "embedding": {
+      "local_path": "/data/models/embed",
+      "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+      "metadata": {
+        "modelscope_version": "Revision:master,CreatedAt:1726273563",
+        "configuration": {
+          "framework": "pytorch",
+          "task": "sentence-similarity",
+          "allow_remote": true
+        },
+        "files": {
+          "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+          "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+        }
+      },
+      "served_model": "bge-m3",
+      "max_model_len": 8192
+    },
+    "judge_relation": "same model weights and chat template as Host; isolated requests; same-model self-evaluation",
+    "verification": "All local weight files SHA-256 hashed once before development-v3; identity manifests verified on each run."
+  },
+  "exposure": "One of three fixed exposed cases across five declared answer slots; not independent validation or a full benchmark.",
+  "datasets": [
+    {
+      "dataset": "memsyco",
+      "root": "/cra/memory/mx_memory/reference-sources/contextual-v3/MemSyco-Bench",
+      "split": "screen",
+      "expected_count": 1,
+      "development_ids": [
+        "v11_000977"
+      ],
+      "manifest": "data/manifests/contextual-memory-v3-memsyco-small.json",
+      "data_manifest_sha256": "d8b0b568caa94d8fb6a61a53d3fd359079642f4184b865308245ae83272c7c01"
+    }
+  ],
+  "judge_concurrency": 1,
+  "service_capacity": "One Host workflow; frozen answers before one native Judge attempt.",
+  "embedding_window": {
+    "tokenizer_path": "/data/models/embed/tokenizer.json",
+    "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+    "max_tokens": 8192,
+    "pooling": "original_token_count_weighted_mean_l2"
+  },
+  "method_definition": {
+    "ORDINARY_MEMORY": "Fresh method v9 memory from unchanged legal native history; explicit about_ref and source_refs, complete revision dependencies, source chronology and shared material view. Existing ordinary profile; no candidate effect comparison."
+  },
+  "arms": [
+    "ORDINARY_MEMORY"
+  ],
+  "history_max_operations": 6,
+  "history_context_bytes": 12000,
+  "reference_arm": "ORDINARY_MEMORY",
+  "profiles": {
+    "ORDINARY_MEMORY": "ordinary"
+  },
+  "budget": {
+    "questions": 3,
+    "arms": 2,
+    "generation_requests": 72,
+    "generation_tokens": 350000,
+    "embedding_tokens": 80000
+  },
+  "archive_policy": "All arms may retrieve the same legal native dialogue; retained memory deletion does not edit the benchmark file.",
+  "attribution": "Fixed v6 semantic repair and execution diagnostic on an already exposed native case. Native content/order/question/rubric unchanged; no gold or judge explanation in method inputs; each history built independently.",
+  "history_capacity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "context_tokens": 65536,
+    "output_tokens": 4096,
+    "batch_source_tokens": 6000,
+    "safety_tokens": 512,
+    "source_message_overhead_tokens": 32,
+    "related_reserve_tokens": 0,
+    "schema_reserve_tokens": 0
+  },
+  "stage_holdback": {
+    "history": {
+      "generation_requests": 7,
+      "generation_tokens": 50000
+    },
+    "answer": {
+      "generation_requests": 1,
+      "generation_tokens": 12000
+    }
+  },
+  "cumulative_budget_scope": "v6-attribution-dependency-temporal-repair",
+  "cumulative_budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v6-budget.json",
+  "operation_policy": {
+    "authority": "trusted_runner_TaskEnvelope",
+    "history_capabilities": [
+      "read",
+      "maintain"
+    ],
+    "answer_capabilities": [
+      "read",
+      "maintain"
+    ],
+    "destructive_capability": false
+  },
+  "protocols": {
+    "operation_contract": "contextual-operation-contract-v2",
+    "write_contract": "contextual-write-contract-v4",
+    "ingestion_protocol": "contextual-ingestion-handles-v11",
+    "material_view_protocol": "contextual-material-view-v3"
+  },
+  "history_arrival_policy": "natural_capacity",
+  "budget_policy": "Single new cumulative v6 ledger for all five history/answer slots, failed outputs, Judge and at most one concrete-repair verification. Closed v5 consumption remains unchanged; no budget reset per directory."
+}

@@ -1,0 +1,134 @@
+{
+  "protocol": "legacy-v7-read-only-diagnostic-v1",
+  "note": "Existing uncleaned v4 receipts; not new-protocol writes or effect evidence. No erased smoke text.",
+  "tokenizer_path": "/cra/qwen36-35B",
+  "tokenizer_json_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+  "entries": [
+    {
+      "case": "v977",
+      "arm": "ORDINARY_MEMORY",
+      "trace": "artifacts/contextual-user-memory/v4-c-online-pilot-1/memsyco/screen/answers/ORDINARY_MEMORY/619ef7f631553cb625d047577cc79c5325f458f003a7a52174a2e01068076b0b/trace.jsonl",
+      "trace_sha256": "884523d29d7e34aa9d2434555ed348627dcb789cdf35c5ef3574d4ae9748506c",
+      "read_call_ordinal": 0,
+      "tool": "memory_search",
+      "result_sha256": "738d7e0a0e6673cd475927fcd06201c4d749b7c34736fb07fb1d42d694446058"
+    },
+    {
+      "case": "v977",
+      "arm": "ORDINARY_MEMORY",
+      "trace": "artifacts/contextual-user-memory/v4-c-online-pilot-1/memsyco/screen/answers/ORDINARY_MEMORY/619ef7f631553cb625d047577cc79c5325f458f003a7a52174a2e01068076b0b/trace.jsonl",
+      "trace_sha256": "884523d29d7e34aa9d2434555ed348627dcb789cdf35c5ef3574d4ae9748506c",
+      "read_call_ordinal": 1,
+      "tool": "memory_read",
+      "result_sha256": "9b59e3b46d004803d61de34e5e9689a1eb058214fbd9163d841a1eb63c0da66b"
+    },
+    {
+      "case": "v977",
+      "arm": "H2_LINKED",
+      "trace": "artifacts/contextual-user-memory/v4-c-online-pilot-1/memsyco/screen/answers/H2_LINKED/619ef7f631553cb625d047577cc79c5325f458f003a7a52174a2e01068076b0b/trace.jsonl",
+      "trace_sha256": "f69a66842f9f7bb727aca0742ae2d4fb8bb6b2a0762deb76554f6c69faa9ad87",
+      "read_call_ordinal": 0,
+      "tool": "memory_search",
+      "result_sha256": "c8b1e93604657c48bc3cc6726df15cfc327d5061844f8aa10774096f3e4a723c"
+    },
+    {
+      "case": "v977",
+      "arm": "H2_LINKED",
+      "trace": "artifacts/contextual-user-memory/v4-c-online-pilot-1/memsyco/screen/answers/H2_LINKED/619ef7f631553cb625d047577cc79c5325f458f003a7a52174a2e01068076b0b/trace.jsonl",
+      "trace_sha256": "f69a66842f9f7bb727aca0742ae2d4fb8bb6b2a0762deb76554f6c69faa9ad87",
+      "read_call_ordinal": 1,
+      "tool": "memory_read",
+      "result_sha256": "664030f78f7002b2c3cc81982d2cf4ef38f67f3264562c1f39bdaaf57642f7ac"
+    },
+    {
+      "case": "v1003",
+      "arm": "ORDINARY_MEMORY",
+      "trace": "artifacts/contextual-user-memory/v4-c-fixed-2/memsyco/screen/answers/ORDINARY_MEMORY/c6884be37b04f611d26c0aba9151aa9fe06f085b8a53773ef58aa262e3a88049/trace.jsonl",
+      "trace_sha256": "1105eee3bae69e830083ced60f0f731444bed8abb00f223fa2104c98ba1028e4",
+      "read_call_ordinal": 0,
+      "tool": "memory_search",
+      "result_sha256": "448db95883a23a9f1077543c9fcfd81bb04052f8304ae893aa7cb186dfd1c074"
+    },
+    {
+      "case": "v1003",
+      "arm": "H2_LINKED",
+      "trace": "artifacts/contextual-user-memory/v4-c-fixed-2/memsyco/screen/answers/H2_LINKED/c6884be37b04f611d26c0aba9151aa9fe06f085b8a53773ef58aa262e3a88049/trace.jsonl",
+      "trace_sha256": "ea4f956fecda0df8d0c2fd8da14569377cedc97fc361de8f9bcd552dc3eba21e",
+      "read_call_ordinal": 0,
+      "tool": "memory_search",
+      "result_sha256": "fbc62961fe04ebfd4a8eb75d0e057b4a5a75abe1a118abb53eb2707e139952a1"
+    },
+    {
+      "case": "v1002",
+      "arm": "ORDINARY_MEMORY",
+      "trace": "artifacts/contextual-user-memory/v4-c-fixed-3/memsyco/screen/answers/ORDINARY_MEMORY/0850f0099b8198b1e846557b6a0b659dfb8bcb10b09af637589a3b1e1369fa90/trace.jsonl",
+      "trace_sha256": "3e64c2734bb4ee5aa0f4545714d8c6b229db4b257b42486d40ef08f150782ca1",
+      "read_call_ordinal": 0,
+      "tool": "memory_search",
+      "result_sha256": "7806f42b3cf4b83f47865d93ac24c59b597bd79e6adfac090e03368bfc53d128"
+    },
+    {
+      "case": "v1002",
+      "arm": "ORDINARY_MEMORY",
+      "trace": "artifacts/contextual-user-memory/v4-c-fixed-3/memsyco/screen/answers/ORDINARY_MEMORY/0850f0099b8198b1e846557b6a0b659dfb8bcb10b09af637589a3b1e1369fa90/trace.jsonl",
+      "trace_sha256": "3e64c2734bb4ee5aa0f4545714d8c6b229db4b257b42486d40ef08f150782ca1",
+      "read_call_ordinal": 1,
+      "tool": "memory_read",
+      "result_sha256": "9f92504c02cbb1bdb2aed11c8edb429c067060f8a4c86cb4dccc8e9e239609f9"
+    },
+    {
+      "case": "v1002",
+      "arm": "H2_LINKED",
+      "trace": "artifacts/contextual-user-memory/v4-c-fixed-3/memsyco/screen/answers/H2_LINKED/0850f0099b8198b1e846557b6a0b659dfb8bcb10b09af637589a3b1e1369fa90/trace.jsonl",
+      "trace_sha256": "beeb278732e5619800cdc5272344492b41efeb5d82414dd82e624313aa3fc75e",
+      "read_call_ordinal": 0,
+      "tool": "memory_search",
+      "result_sha256": "3906ec6af50095430e08b75c374a2629394c8dee09ab95635eba434e054f1344"
+    },
+    {
+      "case": "v1002",
+      "arm": "H2_LINKED",
+      "trace": "artifacts/contextual-user-memory/v4-c-fixed-3/memsyco/screen/answers/H2_LINKED/0850f0099b8198b1e846557b6a0b659dfb8bcb10b09af637589a3b1e1369fa90/trace.jsonl",
+      "trace_sha256": "beeb278732e5619800cdc5272344492b41efeb5d82414dd82e624313aa3fc75e",
+      "read_call_ordinal": 1,
+      "tool": "memory_read",
+      "result_sha256": "f52508c32ee8e696d4405a3335b2037a2111d583bee0b88b4ce6c38373980404"
+    },
+    {
+      "case": "v1002",
+      "arm": "H2_LINKED",
+      "trace": "artifacts/contextual-user-memory/v4-c-fixed-3/memsyco/screen/answers/H2_LINKED/0850f0099b8198b1e846557b6a0b659dfb8bcb10b09af637589a3b1e1369fa90/trace.jsonl",
+      "trace_sha256": "beeb278732e5619800cdc5272344492b41efeb5d82414dd82e624313aa3fc75e",
+      "read_call_ordinal": 4,
+      "tool": "memory_search",
+      "result_sha256": "d6c55f8bb550a7a08bc127ddd9c2efdc76c0100486d3638f18da8f9fe7ff6b8b"
+    },
+    {
+      "case": "STALE",
+      "arm": "ORDINARY_MEMORY",
+      "trace": "artifacts/contextual-user-memory/v4-stale-ordinary-repair-1/stale/fixed-small/answers/ORDINARY_MEMORY/04a7ed758671136f1995bd6469c14b8fb04886ab52222318befb0bf51d87b0fc/trace.jsonl",
+      "trace_sha256": "3df3da79c6cac2f632146686b0ad732bf63bbe4d592ceaa72b1330c23c91cc7d",
+      "read_call_ordinal": 0,
+      "tool": "memory_search",
+      "result_sha256": "83363401b9f5491a36b4e6577c31423adb41a63649c901021896e050418d495f"
+    },
+    {
+      "case": "STALE",
+      "arm": "ORDINARY_MEMORY",
+      "trace": "artifacts/contextual-user-memory/v4-stale-ordinary-repair-1/stale/fixed-small/answers/ORDINARY_MEMORY/27efe2f93f8ecf402bc1acaa270883726bc767483c58912320fdb8624019abe3/trace.jsonl",
+      "trace_sha256": "e08ae004bafd52fbe0d7355fa893ab92347c1341668d14f6a7e23a713f045a7a",
+      "read_call_ordinal": 0,
+      "tool": "memory_search",
+      "result_sha256": "7fa687d159ae4d2b155e9db3bbae8ab581ce470338a93b2635f66158e57c19d9"
+    },
+    {
+      "case": "STALE",
+      "arm": "ORDINARY_MEMORY",
+      "trace": "artifacts/contextual-user-memory/v4-stale-ordinary-repair-1/stale/fixed-small/answers/ORDINARY_MEMORY/85e7a30f741a9034a4c7bed378bebdf8c672656d8c29d83d05e5dcddaa158fcb/trace.jsonl",
+      "trace_sha256": "a377dbbda4af2744fa7f16e084eab269cde2c35cc27e6c1ef82f29a5a57b228e",
+      "read_call_ordinal": 0,
+      "tool": "memory_search",
+      "result_sha256": "738be6f66f02277508a8a10ce952fd88196f000405a55863a34c37a16ecd70d2"
+    }
+  ]
+}

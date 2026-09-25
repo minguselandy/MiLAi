@@ -1,0 +1,151 @@
+{
+  "manifest_kind": "BENCHMARK_EXECUTION_SELECTION",
+  "schema_version": 1,
+  "date": "2026-09-25",
+  "dataset": "MERIT",
+  "status": "PLANNED_SAME_EXPOSED_ARC_MAINTENANCE_REPAIR",
+  "purpose": "Verify first commitment retention, correction and post-execution current memory on the already exposed complete MERIT arc. Native score is supplementary; no comparative/generalization claim.",
+  "source_url": "https://github.com/smshweta/merit-bench",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+  "selection_rule": "First arc of the upstream D1 hard suite at base_seed=0; no outcome-based selection; preserve all episodes and all user messages.",
+  "generator": "merit.arcs.generate_suite",
+  "generator_arguments": {
+    "n_arcs": 1,
+    "episodes_per_arc": 5,
+    "dep_ratio": 0.5,
+    "base_seed": 0,
+    "difficulty": "hard"
+  },
+  "arc_id": "arc0-000",
+  "arc_seed": 0,
+  "episode_count": 5,
+  "dependent_episode_count": 2,
+  "user_message_count": 7,
+  "episodes": [
+    {
+      "index": 0,
+      "task_id": "arc0-000-e0-plant-refund",
+      "kind": "I_note",
+      "dependent": false,
+      "user_message_count": 1,
+      "checker": "check_message_sent",
+      "plant_episode": -1
+    },
+    {
+      "index": 1,
+      "task_id": "arc0-000-e1-update-refund",
+      "kind": "I_note",
+      "dependent": false,
+      "user_message_count": 2,
+      "checker": "check_message_sent",
+      "plant_episode": -1
+    },
+    {
+      "index": 2,
+      "task_id": "arc0-000-e2-probe-refund-upd",
+      "kind": "T_refund_upd",
+      "dependent": true,
+      "user_message_count": 2,
+      "checker": "check_refund_issued",
+      "plant_episode": 0
+    },
+    {
+      "index": 3,
+      "task_id": "arc0-000-e3-indep-refund",
+      "kind": "I_refund",
+      "dependent": false,
+      "user_message_count": 1,
+      "checker": "check_refund_issued",
+      "plant_episode": -1
+    },
+    {
+      "index": 4,
+      "task_id": "arc0-000-e4-probe-refund-upd",
+      "kind": "T_refund_upd",
+      "dependent": true,
+      "user_message_count": 1,
+      "checker": "check_refund_issued",
+      "plant_episode": 1
+    }
+  ],
+  "private_artifacts": {
+    "arc": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v7-planning/merit-d1-hard-arc0-000.original.json",
+    "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+    "arc_serialization": "UTF-8 json.dumps(dataclasses.asdict(arc), ensure_ascii=False, sort_keys=True, separators=(comma,colon)); no newline",
+    "initial_world": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v7-planning/merit-d1-hard-arc0-000.initial-world.json",
+    "initial_world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29",
+    "initial_world_serialization": "World.dump_json() UTF-8; no newline"
+  },
+  "source_sha256": {
+    "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+    "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+    "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+    "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+    "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+    "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+    "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+    "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+    "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+    "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+    "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+    "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+  },
+  "input_contract": {
+    "host_visible": "Only the current native user message, earlier legally visible messages in this episode, actual tool observations and MiLAi-delivered memories.",
+    "judge_only": [
+      "gold_fact_value",
+      "gold_fact_values",
+      "checker_args",
+      "private world snapshot",
+      "future user messages"
+    ],
+    "cross_episode": "World and the arm memory persist; Host transcript and task-local State reset. Same-episode multi-message history persists.",
+    "identity": "Customer/order IDs are business entities, not automatically one current_user profile."
+  },
+  "scoring_contract": {
+    "native_success": "not pre_satisfied and the unchanged checker on the post-episode world",
+    "native_denominator": 5,
+    "dependent_denominator": 2,
+    "merged_tasks": "Native _merge retains multiple user messages but scores only the first TaskSpec in that episode; retain that rule. Supplementary obligation checks are diagnostics, not rewritten native scores.",
+    "value_tracer": "Use merit.metrics.memory_utilized on actual executed business tool arguments; distinguish string matching from causal contribution.",
+    "llm_judge": "NOT_REQUIRED_FOR_NATIVE_MERIT_SCORING"
+  },
+  "selection_role": "Same exposed arc from v7, selected for known maintenance defects; no new sample or benchmark expansion.",
+  "execution_plan": {
+    "status": "PLANNED_AFTER_DIRECT_RECORD_AND_TURN_CONTEXT_REPAIR",
+    "arms": [
+      "ordinary_v8_off"
+    ],
+    "native_episode_count": 5,
+    "public_message_count": 7,
+    "per_message_model_capacity": 12,
+    "source_retention": "session; durable record retains cited support",
+    "actor_policy": "No trusted speaker ID in native scripted input: actor_ref empty; exact source-speaker anchors only.",
+    "controller_deviation": "MiLAi autonomous memory/tool loop replaces mandatory opening read and closing write; preserve native messages, world, tools, pre_satisfied and checkers.",
+    "cumulative_budget_caps": null,
+    "auto_expand": false,
+    "llm_judge": false,
+    "host_thinking": true,
+    "judge": false,
+    "maintenance_criteria": [
+      "First plant produces durable commitment without waiting for repeated input",
+      "Explicit update changes the same current matter",
+      "Real business result replaces pending state in current durable memory",
+      "Later episode consumes current memory and uses native tools",
+      "No contradictory obsolete pending agreement remains current after correction and execution; audit actual saved content, not only receipts or score"
+    ]
+  },
+  "selected_at": "2026-09-24T19:52:52.582960+00:00",
+  "development_freeze_sha256": "85e900669bc4d66891c707b75f15b2dfe7e64bc74c1ee8259387cb3e14cdcf4c",
+  "data_changed": false,
+  "native_scoring_changed": false,
+  "config_path": "configs/contextual-memory-v8-off.json",
+  "config_sha256": "07a629d7be623588e82770cc1fd4e3bfb09299b34285696a590aee3e820c4711",
+  "goal": "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v8.0_20260925.md",
+  "repair_freeze_sha256": "b3461930da69f248f323a4f0c07322e77efb1861fb2d11920297698992846015",
+  "development_freeze_path": "artifacts/contextual-user-memory/v8-development/freeze-merit-first.json",
+  "previous_selection_path": "data/manifests/contextual-memory-v8-merit-regression.json",
+  "previous_selection_sha256": "3a2d0e2aac98d83eaed5ffe78f8faec98db7d7d6bb8c36f4b5d6f014bf0c59bf",
+  "preserved_failure": "artifacts/contextual-user-memory/v8-merit-regression/semantic-maintenance-failure.json"
+}

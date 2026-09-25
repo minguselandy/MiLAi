@@ -1,0 +1,223 @@
+{
+  "manifest_kind": "FRONTIER_MEMORY_SOURCE_INVENTORY",
+  "schema_version": 1,
+  "date": "2026-09-25",
+  "goal_version": "v7.0",
+  "status": "REFERENCES_PINNED_IMPLEMENTATION_NOT_STARTED",
+  "scope": "Lab only; pinned design references available before implementation; benchmark choice and native adapter follow development completion. No third-party installation or model run.",
+  "repositories": [
+    {
+      "name": "AgeMem",
+      "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/AgeMem",
+      "origin": "https://github.com/y1y5/AgeMem.git",
+      "commit": "98f563f907d67b2f2436e3ae7b7ceff32e482814",
+      "commit_time": "2026-04-24T15:09:40+08:00",
+      "checkout": "SHALLOW_FILTERED_SPARSE_DETACHED",
+      "working_tree_status": "",
+      "license_at_pinned_tree": "UNVERIFIED_NO_PROJECT_LICENSE_FOUND",
+      "use": "DESIGN_REFERENCE_ONLY",
+      "paper_url": "https://arxiv.org/abs/2601.01885v3",
+      "source_sha256": {
+        "README.md": "288c9d9ab062b7184a5c26aa7912155378e293e7e11764430bfea70b35e267a2",
+        "AgeMem_code_agentscope/agent.py": "da5c2067e487e1de003b082b6af4816bd1fa779371a167bdd0b0548f9bd445ad",
+        "AgeMem_code_agentscope/memory.py": "12d94be5a9b6f070e1829fff85def75c66f74303168113c98fa7bdd31aaa44c6",
+        "trinity/common/workflows/memory_context/memory_store.py": "2069a0815bb83b78f907f701c3c9de0fbd6a8a44738076ca60d522a8d97ad3b5"
+      }
+    },
+    {
+      "name": "SimpleMem",
+      "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem",
+      "origin": "https://github.com/aiming-lab/SimpleMem.git",
+      "commit": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+      "commit_time": "2026-07-24T15:40:38+08:00",
+      "checkout": "SHALLOW_FILTERED_SPARSE_DETACHED",
+      "working_tree_status": "",
+      "license_at_pinned_tree": "MIT",
+      "use": "DESIGN_REFERENCE",
+      "paper_url": "https://arxiv.org/abs/2601.02553v3",
+      "source_sha256": {
+        "README.md": "420cdf2a5c22d74354d11e7617fdd24a1ce60eeba8e0d21b51ed4442b7149001",
+        "LICENSE": "276dc8cc9eb5a8c59d1edca3283163815d2caa512b17bd0bf053050304b4cd3e",
+        "MCP/reference/core/memory_builder.py": "3ea54da5b9d86a2201f5cd88fef966273ed7f79a9469209b190b97030a5c3fab",
+        "MCP/reference/core/hybrid_retriever.py": "2b293f6baf3c20844b3078c8103c1ecf1f5944d3db0a53023e0b28a8287dafe4",
+        "MCP/reference/models/memory_entry.py": "4fe9531e44993d649648b0ccb20df6622806cb7fd3ea118d1d0d6b13f67c7cf1"
+      }
+    },
+    {
+      "name": "MemoryArena",
+      "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MemoryArena",
+      "origin": "https://github.com/ZexueHe/MemoryArena.git",
+      "commit": "6cd9de14b71915e39ac742a20dc33785e14b6aab",
+      "commit_time": "2026-05-31T20:10:42-04:00",
+      "checkout": "SHALLOW_FILTERED_SPARSE_DETACHED",
+      "working_tree_status": "",
+      "license_at_pinned_tree": "UNVERIFIED_NO_PROJECT_LICENSE_FOUND",
+      "use": "DESIGN_REFERENCE_ONLY",
+      "paper_url": "https://arxiv.org/abs/2602.16313v2",
+      "source_sha256": {
+        "README.md": "717264347ce69182d4b4a7809e1e8deabdbe570c6950f42f347c5522e85eb243",
+        "setup_travel.md": "1727b73c119916f3a2475fa2063de1e6d255c45a81f25d3060e13fc37b1b478d",
+        "agent/base.py": "3a7edf6b0f96e1793aef3d658e586c078ebc6a67b0ab0bc4239ba64370571b26",
+        "agent/travel_planner.py": "e96c4ef040156a2d9e6ac7c6598b685e4779adb44fb468bcbe48baa9f982b93f",
+        "memory/client.py": "9efc1c037c9b94d4b17e5d69c4ed80bd5ad7c7f982688b56903b7e0116d62bff"
+      }
+    },
+    {
+      "name": "MERIT",
+      "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+      "origin": "https://github.com/smshweta/merit-bench.git",
+      "commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+      "commit_time": "2026-09-14T20:01:57-07:00",
+      "checkout": "SHALLOW_FILTERED_SPARSE_DETACHED",
+      "working_tree_status": "",
+      "license_at_pinned_tree": "MIT",
+      "use": "NATIVE_BENCHMARK_CANDIDATE_REFERENCE_NOT_SELECTED",
+      "paper_url": "https://arxiv.org/abs/2609.05441v1",
+      "source_sha256": {
+        "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+        "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+        "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+        "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+        "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+        "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+        "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+        "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+        "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+        "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+        "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+        "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+      }
+    },
+    {
+      "name": "ProactiveMemory",
+      "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/ProactiveMemory",
+      "origin": "https://github.com/yifannnwu/proactive-memory-agent.git",
+      "commit": "89e5c0d6aadfe531a1aee42fd290d48be89973dd",
+      "commit_time": "2026-07-13T21:48:04-07:00",
+      "checkout": "SHALLOW_FILTERED_SPARSE_DETACHED",
+      "working_tree_status": "",
+      "license_at_pinned_tree": "Apache-2.0",
+      "use": "DESIGN_REFERENCE",
+      "paper_url": "https://arxiv.org/abs/2607.08716v1",
+      "source_sha256": {
+        "README.md": "b4b07b9cf9dd8ed7624b393ee9f8a6301fd72cbcb9fbcfb994d92d30d885ef8a",
+        "LICENSE": "bbbcb4cfa4a21f1f5a1dbb6941c4005c284851843849d250833af730e1d4a376",
+        "src/memory_agent/memory/memory_agent.py": "e00d412034b8cfebb6b8121477453d2815e26ce2d78344c9f7991a37048e0b35",
+        "src/memory_agent/memory/trigger.py": "4c9981e57ba9b28ae2da398b2d2eb8a30905bdd4b33951a827b6f60227abd16f",
+        "src/memory_agent/memory_enabled_agent.py": "67fe7654d7fba80a19ae7dd0ef958e23e688a23a60d9a4a2a56974df7e52ab96"
+      }
+    },
+    {
+      "name": "ReasoningBank",
+      "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/ReasoningBank",
+      "origin": "https://github.com/google-research/reasoning-bank.git",
+      "commit": "ed80611788292ea739f1effd31f16c53823b8a0d",
+      "commit_time": "2026-05-18T20:59:15-07:00",
+      "checkout": "SHALLOW_FILTERED_SPARSE_DETACHED",
+      "working_tree_status": "",
+      "license_at_pinned_tree": "Apache-2.0",
+      "use": "DESIGN_REFERENCE",
+      "paper_url": "https://arxiv.org/abs/2509.25140",
+      "source_sha256": {
+        "README.md": "7bceb3ce5bfcbb844f165d1395d52741a3b45645f1642e8be4636a444cbe7369",
+        "LICENSE": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+        "WebArena/memory_management.py": "35b8b800180024f3446c4a295fe9d7c19d4aa2cddd0b2f2a44b6680e4d6bc4f9",
+        "WebArena/prompts/memory_instruction.py": "073d354bc84a24ba8a2c697133b5d832fe89ca67a53705fb0af419528f7b11ee"
+      }
+    }
+  ],
+  "existing_local_references": [
+    {
+      "name": "ReMe",
+      "external_root": "/cra/memory/mx_memory/ReMe",
+      "identity_kind": "LOCAL_FILES_HASHED_NOT_ASSUMED_UPSTREAM_CLEAN",
+      "license_at_local_tree": "Apache-2.0",
+      "use": "DESIGN_REFERENCE_ONLY_NO_RUNTIME_IMPORT",
+      "source_sha256": {
+        "LICENSE": "cc54d679aaced751c096f120b666355c106d9394d28f93f6df353973f6cd7dbe",
+        "reme/steps/evolve/auto_memory.py": "ad8cc580614a19767b00e85893d9802c67a2a035bb1d50de9afc40e4d2dbc4dd",
+        "reme/steps/evolve/auto_memory_cc.py": "0c8e58657d9ffda5ba4ff06e173acc13c8b4271c83142887fd0eaf353f562275"
+      }
+    },
+    {
+      "name": "OpenViking",
+      "external_root": "/cra/memory/mx_memory/OpenViking",
+      "identity_kind": "LOCAL_FILES_HASHED_NOT_ASSUMED_UPSTREAM_CLEAN",
+      "license_at_local_tree": "AGPL-3.0_LICENSE_TEXT",
+      "use": "DESIGN_REFERENCE_ONLY_NO_RUNTIME_IMPORT",
+      "source_sha256": {
+        "LICENSE": "1bd87fa6d9a5c79daf0c2af042b6725c9773bf095cc3d1bdf3656e66d1c3e5b1",
+        "openviking/session/session.py": "31d2bac3d534ba280f454469cd4ad84f833336b8c79183812f287c90885a8124"
+      }
+    }
+  ],
+  "paper_only": [
+    {
+      "name": "MemSkill",
+      "paper_url": "https://arxiv.org/abs/2602.02474v2",
+      "status": "PAPER_REVIEWED_NOT_IMPLEMENTATION_REFERENCE"
+    },
+    {
+      "name": "Hindsight Memory-PRM",
+      "paper_url": "https://arxiv.org/abs/2608.29605v1",
+      "status": "PAPER_REVIEWED_OFFICIAL_IMPLEMENTATION_NOT_VERIFIED"
+    }
+  ],
+  "lab_basis": {
+    "method": "contextual-user-memory-v10",
+    "write_protocol": "v9",
+    "ingestion_protocol": "v25",
+    "material_view": "v5",
+    "operation_protocol": "v2",
+    "source_mapping_sha256": "72f0279eae4223918fdd5869b84d75d85a3ac32800a3fbee7f66c8188ed5c312",
+    "mapping_hash_serialization": "UTF-8 json.dumps(source_sha256, sort_keys=True), default separators",
+    "source_sha256": {
+      "tools/run_contextual_user_memory.py": "ef2076e786d737a7aa129f98d719d011962154f57e36860fdd51ce2f37037c84",
+      "tools/contextual_host_adapter.py": "7fee65a7c82f3b698c3aeabebe669bc4341880728505a4b1eb450bada759d62b",
+      "tools/contextual_embeddings.py": "3094f16d309d94141c5fd7bdf1e2334626d6f1bddf7d470d7059c2bff9acc4e4",
+      "tools/contextual_ingestion.py": "e977405d811158fd5c670f00c31c222195fda9772aa5a3c32fc89ff9c7303257",
+      "src/milai_lab/runners/contextual.py": "99eef106e149d35f0597e4b0f1e41c131457ad14e924c967325b215b8c10d24e",
+      "src/milai_lab/runners/contextual_ingestion.py": "7df6d729f62db6f427c126774446f973a4c397afd01b497894adba88dea7ddf7",
+      "src/milai_lab/providers/contextual_embeddings.py": "9500273aa839663b713d57b3d008c38dba1845e6645f38f8b779937e10e0b604",
+      "src/milai_lab/providers/contextual_capacity.py": "72b9a5d729b71d0c13986266ea976610e3967df5b0ed93b118f5fc4689db79cb",
+      "src/milai_lab/methods/contextual_user_memory.py": "42d443644c6f1600c7283e88603bcc67fccca89af72ba0f47457e4401901d00c",
+      "src/milai_lab/datasets/contextual.py": "2d856518eb0ac3b5e0f5da03833563bcc4155663140f8c4a2f11519e465127bf",
+      "src/milai_lab/scorers/contextual.py": "d275c70d536b67702c9ef4e5ab0bb742a80301c1f5fe0b1da0e676d37f394558",
+      "src/milai_lab/datasets/memsyco.py": "1547cf025cff2d3980a57afcdb710372ea8a42b4094918518fb9ac1b2a8b9110",
+      "src/milai_lab/scorers/memsyco.py": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+      "src/milai_lab/datasets/stale.py": "132a00b9adaa77dcc9974e87041460fa9462a55a97a6f4f6ddd6cd580109d447",
+      "src/milai_lab/scorers/stale.py": "683ff4bb82dc7c0c4e4a18824504a44d865f04980158322757f39e8612b0f75f",
+      "src/milai_lab/runners/contextual_scoring.py": "4ac57a9f77f7ca5ccae7e3e5a04122500b3b41c9a39e8df246848fd08f7b4a12",
+      "src/milai_lab/providers/contextual_vllm.py": "5d9f6c9b37e4df47133cde791d3c9ce44f2e98d62f476b98140a8740eaf9ed7f",
+      "src/milai_lab/runners/contextual_host.py": "8ce8a5d7cfb3772b4a3bec50f7bde0f8c1647b2ea723526d6208575b50c27296",
+      "src/milai_lab/runners/contextual_delivery.py": "88aeb913e4d433d78c04fa2a85d5a756c5346cb293ede836573f6d7138b13be3",
+      "src/milai_lab/runners/contextual_profiles.py": "72611e90014c2b4274961d773dfcbc407a21b5d1fa96f0dc9655efc9d457a3e3",
+      "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+      "src/milai_lab/methods/controlled_workspace.py": "4d62f79faa15f7b442862bc7702cb9f2532e49c6051782544d973f96d3ea95a3",
+      "src/milai_lab/methods/reasoning_bank.py": "1ad2548cb22e0c9abba294157aeefd04a2a907888c7f256b71487b635549581f",
+      "src/milai_lab/methods/state_attention.py": "642b8eab8fbf4b34d48187c99b5d31960d32f5dbc98b7a0912073199382f4ebd",
+      "src/milai_lab/methods/state_focus.py": "bcdb8056944f7989cfed62361660ceb3be7a5a11db2ad8d7243fdacdb005b061",
+      "pyproject.toml": "a1ca4c535526fd0c822373bfb97bb77dfd2daf9c2855c8db276e9fdbf245395e",
+      "uv.lock": "36050ba3e272b7904a3e47542b3daf53dd8677ae4de5a7bed3e499220beefb01",
+      "src/milai_lab/methods/contextual_memory/__init__.py": "2cead58efc51f4927abffb680acfa3ab94205136a1aa39e593a97764c3eaa58d",
+      "src/milai_lab/methods/contextual_memory/deletion.py": "9e9f6b6176a0c0187c6d8d8470d53db2d6cab369640402914de87089f0b441d1",
+      "src/milai_lab/methods/contextual_memory/material_view.py": "0c5fa05ebefb1e0f898c0e927f8b1b349c1ad8a61ae422663e660632c791cad4",
+      "src/milai_lab/methods/contextual_memory/materials.py": "7838bb70df6ef94880d127fcd4026232c19ec808bf9412cd959141ffa092e719",
+      "src/milai_lab/methods/contextual_memory/models.py": "4f5959fe4d0a95aa534a778fc86f9937332edfd69ea5cc752cbd1558258fc7ac",
+      "src/milai_lab/methods/contextual_memory/operations.py": "6daf5b369afec36bab9a9868f06f6cfb2788d8ca4c42892525c08fd67629bced",
+      "src/milai_lab/methods/contextual_memory/query_context.py": "da82117184a9323a9630415752faa0dc150c843ef320f5c36b2611eff3341103",
+      "src/milai_lab/methods/contextual_memory/retrieval.py": "97c43ba231c961daaa95bdb2f788f29e8da7d052b9e854f35aa50bc11156d296",
+      "src/milai_lab/methods/contextual_memory/revision.py": "362b0d3c4dc99a40b9e6e14c2d5cfa434881d324277f69ca52719e6ffd6243d6",
+      "src/milai_lab/methods/contextual_memory/store.py": "df4a67b086b6bd48599bcd2e98c2a06d86188560cc71871e9ff6ced38abee670",
+      "src/milai_lab/methods/contextual_memory/write_contract.py": "ffaa0626c62c501979e2a3c11b3fad93fe8dcaf76dc06b84b9de0c679a7d4c2d"
+    }
+  },
+  "limitations": [
+    "Source reading is not benchmark reproduction.",
+    "AgeMem has no project license file in pinned tree; MemoryArena only has a nested third-party MemoRAG license. Do not treat that license as project-wide permission.",
+    "Current repository commits and paper revisions are separate identities.",
+    "MERIT arXiv identifier and displayed submission month differ; this manifest pins the identifier and does not infer a publication month."
+  ],
+  "goal_design_revision": 2,
+  "benchmark_selection_status": "DEFERRED_UNTIL_DEVELOPMENT_COMPLETE"
+}
