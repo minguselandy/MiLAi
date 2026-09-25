@@ -1,0 +1,267 @@
+{
+  "kind": "V14_REMAINING_NINE_FROZEN_DIAGNOSTICS",
+  "status": "OPEN_SEMANTIC_FAILURES",
+  "source_mapping_sha256": "1532ef2edb979ae89ba3da6c6360b5bbe38c03df9254d859713e6e844cf6c201",
+  "cases": [
+    {
+      "id": "d02",
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "usage": {
+        "requests": 5,
+        "input_tokens": 18360,
+        "output_tokens": 1311,
+        "embedding_tokens": 238
+      },
+      "first_boundary_cards": 1,
+      "first_boundary_sources": 1,
+      "business_calls": 1,
+      "write_rejections": 0,
+      "review": {
+        "task": "FAIL_EXTERNAL_RECEIPT_IDENTITY",
+        "G1": "RAW_RECEIPT_SURVIVES",
+        "G2": "NOT_APPLICABLE",
+        "G3": "FAIL_INTERNAL_REF_SUBSTITUTED_FOR_BUSINESS_RECEIPT",
+        "G4": "BUSINESS_RECEIPT_OMITTED_FROM_CARD",
+        "text": "Only message_courier executed once. MSG-K17 is actually delivered and survives in durable source, but card and both answers substitute the internal call ID. Structural action refs are legal, including explicit prior-result use in session 2. Completed-turn replay does not execute or call provider.",
+        "failure_labels": [
+          "MEMORY_MISUSE:business_receipt_identity_substitution"
+        ]
+      }
+    },
+    {
+      "id": "d03",
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "usage": {
+        "requests": 3,
+        "input_tokens": 8888,
+        "output_tokens": 555,
+        "embedding_tokens": 78
+      },
+      "first_boundary_cards": 1,
+      "first_boundary_sources": 1,
+      "business_calls": 0,
+      "write_rejections": 0,
+      "review": {
+        "task": "PASS",
+        "G1": "PASS",
+        "G2": "NOT_APPLICABLE",
+        "G3": "PASS",
+        "G4": "PASS_BODY",
+        "text": "ISO YYYY-MM-DD retained for project summaries and accurately retrieved; no claimed external setting change."
+      }
+    },
+    {
+      "id": "d04",
+      "host_statuses": [
+        "complete"
+      ],
+      "usage": {
+        "requests": 1,
+        "input_tokens": 2526,
+        "output_tokens": 335,
+        "embedding_tokens": 0
+      },
+      "first_boundary_cards": 0,
+      "first_boundary_sources": 0,
+      "business_calls": 0,
+      "write_rejections": 0,
+      "review": {
+        "task": "FAIL_RESPONSE_FORMAT",
+        "G1": "NOT_APPLICABLE",
+        "G2": "PASS",
+        "G3": "NO_SPECIFIC_BUSINESS_COMPLETION_CLAIM",
+        "G4": "NO_DURABLE_PROSE",
+        "text": "No cards/sources survive. Explanation is given, but answer explains READY and does not actually end with READY. Maintenance complete is not task success.",
+        "failure_labels": [
+          "TASK_COMPLETION_ERROR:requested_response_format_not_performed"
+        ]
+      }
+    },
+    {
+      "id": "d06",
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "usage": {
+        "requests": 3,
+        "input_tokens": 8912,
+        "output_tokens": 634,
+        "embedding_tokens": 105
+      },
+      "first_boundary_cards": 1,
+      "first_boundary_sources": 1,
+      "business_calls": 0,
+      "write_rejections": 0,
+      "review": {
+        "task": "PASS",
+        "G1": "PASS",
+        "G2": "NOT_APPLICABLE",
+        "G3": "PASS",
+        "G4": "PASS",
+        "text": "Retains equipment-report scope, effective date and both units; later answer correctly selects pounds before date and kilograms after."
+      }
+    },
+    {
+      "id": "d07",
+      "host_statuses": [
+        "complete"
+      ],
+      "usage": {
+        "requests": 1,
+        "input_tokens": 2523,
+        "output_tokens": 193,
+        "embedding_tokens": 0
+      },
+      "first_boundary_cards": 0,
+      "first_boundary_sources": 0,
+      "business_calls": 0,
+      "write_rejections": 0,
+      "review": {
+        "task": "PASS",
+        "G1": "NOT_APPLICABLE",
+        "G2": "PASS",
+        "G3": "PASS",
+        "G4": "NO_DURABLE_PROSE",
+        "text": "Correct EVEN; no durable card or source."
+      }
+    },
+    {
+      "id": "d08",
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "usage": {
+        "requests": 4,
+        "input_tokens": 13498,
+        "output_tokens": 1121,
+        "embedding_tokens": 141
+      },
+      "first_boundary_cards": 1,
+      "first_boundary_sources": 1,
+      "business_calls": 0,
+      "write_rejections": 1,
+      "review": {
+        "task": "PASS",
+        "G1": "PASS",
+        "G2": "NOT_APPLICABLE",
+        "G3": "PASS",
+        "G4": "PASS_AFTER_REFERENCE_REWRITE",
+        "text": "A proposed u0 body reference is rejected, then prose is rewritten without it. Juniper, East Desk, 16:30 and explicit acceptance condition survive; no pickup booked. Later answer calls the time scheduled but explicitly states it has not been booked; interpreted in full context as planned time."
+      }
+    },
+    {
+      "id": "d09",
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "usage": {
+        "requests": 3,
+        "input_tokens": 9069,
+        "output_tokens": 641,
+        "embedding_tokens": 187
+      },
+      "first_boundary_cards": 1,
+      "first_boundary_sources": 1,
+      "business_calls": 0,
+      "write_rejections": 0,
+      "review": {
+        "task": "PASS",
+        "G1": "PASS",
+        "G2": "NOT_APPLICABLE",
+        "G3": "PASS",
+        "G4": "PASS_BODY",
+        "text": "Retains remote-interview scope, Shanghai local zone and both conditional branches; subsequent answer preserves them, no invitations claimed sent."
+      }
+    },
+    {
+      "id": "d10",
+      "host_statuses": [
+        "complete"
+      ],
+      "usage": {
+        "requests": 1,
+        "input_tokens": 2526,
+        "output_tokens": 145,
+        "embedding_tokens": 0
+      },
+      "first_boundary_cards": 0,
+      "first_boundary_sources": 0,
+      "business_calls": 0,
+      "write_rejections": 0,
+      "review": {
+        "task": "PASS",
+        "G1": "NOT_APPLICABLE",
+        "G2": "PASS",
+        "G3": "PASS",
+        "G4": "NO_DURABLE_PROSE",
+        "text": "Acknowledged; explicit no-save respected with zero durable cards and sources."
+      }
+    },
+    {
+      "id": "d11",
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "usage": {
+        "requests": 4,
+        "input_tokens": 11458,
+        "output_tokens": 1014,
+        "embedding_tokens": 26
+      },
+      "first_boundary_cards": 0,
+      "first_boundary_sources": 0,
+      "business_calls": 0,
+      "write_rejections": 0,
+      "review": {
+        "task": "FAIL_FUTURE_REMINDER_LOST",
+        "G1": "FAIL",
+        "G2": "NO_FORMAT_OVERRETENTION",
+        "G3": "NO_CONTACT_ACTION",
+        "G4": "NO_SURVIVING_CARD",
+        "text": "Writes the next Atlas-session reminder with task persistence. Source association removes it from unhandled candidates, so empty dispositions finish processed. Session close drops reminder/source and next session gives generic deployment advice without Nina or the load-test log.",
+        "failure_labels": [
+          "MEMORY_MISS:future_matter_misclassified_task_local"
+        ]
+      }
+    }
+  ],
+  "stage_usage": {
+    "requests": 25,
+    "input_tokens": 77760,
+    "output_tokens": 5949,
+    "embedding_tokens": 775
+  },
+  "continuous_at_end": {
+    "generation_requests": 39,
+    "generation_tokens": 130052,
+    "embedding_tokens": 992,
+    "unknown_usage": 0,
+    "judge_requests": 0
+  },
+  "reviewer": "root manual review; raw answers, first-boundary cards/sources, journal and separate-process read/replay.",
+  "taxonomy_note": "TASK_COMPLETION_ERROR is a diagnostic supplement for an actual user-format failure; do not mislabel it memory or native scorer failure.",
+  "readiness": false,
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/d02/result.json": "60dd5de11609a0e50354cbf126decd1db4d0efdd35c7a8f5460ee74293170546",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/d03/result.json": "6d5ecd03009f9d971e22c60d4b248ac14a1a7099f7f5025340d6e03d3fb1ca1f",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/d04/result.json": "1a83a5ef46ab2bca3212511617366c74c021674a191b778cacdd2ad222b89756",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/d06/result.json": "8000df6d6e324f3d2694d0e08ae93522e178c8ff86d895f506fb5df5ed5c237c",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/d07/result.json": "dbaa7c23199124f09ba3d7bd8980f18a51b5d9125301ccd91ff76c05e234c32e",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/d08/result.json": "dd4af7dcb6e4592665cc66da7f5aec35d16d50096fad4015c28486bee0af3277",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/d09/result.json": "1d571871b09c55ff2e7815211f4d17e22d54e69ad0c167f0b1069d4ef6680111",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/d10/result.json": "b282a0e075ef594798e8a6a28821e9a926674ef75edeb4a0e86a69eb4076693e",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/d11/result.json": "aafc94a43f880a1f2a45781edba84f61e8f5969a27bd6bbd48a4677ccede1345",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/end-budget.json": "93cb1c16623b1be130fe5dae064a83feddcf915a7ac684f1f9e242448463db8e",
+    "artifacts/contextual-user-memory/v14-v1-r3-remaining/separate-process-read-and-replay.json": "92cd72068c662c40be8cbdce2f09349eea0cce54da53739bdba72898b0dde03d"
+  }
+}

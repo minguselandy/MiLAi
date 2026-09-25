@@ -1,0 +1,97 @@
+{
+  "kind": "V14_V1_INITIAL_THREE_CASE_DIAGNOSTIC",
+  "status": "HISTORICAL_LITERAL_FAILURE_REPAIR_IN_PROGRESS",
+  "source_mapping_sha256": "2c48ef670f3b602db3497fb7e8d170518210336414d6067742d52ebbb78b381a",
+  "cases": [
+    {
+      "id": "d01",
+      "status": "TERMINAL",
+      "sessions_completed": 1,
+      "generation_requests": 1,
+      "generation_tokens": 2679,
+      "host_statuses": [
+        "complete"
+      ],
+      "first_boundary_card_count": 0,
+      "business_calls": 0,
+      "write_rejections": 0,
+      "review": {
+        "G1": "NOT_APPLICABLE",
+        "G2": "PASS",
+        "G3": "PASS_NO_BUSINESS_ACTION",
+        "G4": "PASS_NO_DURABLE_PROSE",
+        "judgment": "Answer 540 is correct. No durable cards or sources survive close and separate-process restore. Host chose none with an accurate task-only reason; label equality is not the success criterion."
+      }
+    },
+    {
+      "id": "d05",
+      "status": "TERMINAL",
+      "sessions_completed": 2,
+      "generation_requests": 3,
+      "generation_tokens": 9672,
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "first_boundary_card_count": 1,
+      "business_calls": 0,
+      "write_rejections": 0,
+      "review": {
+        "G1": "PASS",
+        "G2": "NOT_APPLICABLE",
+        "G3": "PASS",
+        "G4": "PASS_WITHIN_DECLARED_REQUIREMENTS",
+        "judgment": "First session created one durable supported Cedar matter with ten-minute accessibility review before demo and a no-draft/no-send wait. It survived close and separate-process restore; second-session answer recovered the requirement. No agenda tool calls. Relative tomorrow wording is retained as stated; date normalization is not claimed."
+      }
+    },
+    {
+      "id": "d12",
+      "status": "INTERRUPTED",
+      "sessions_completed": 0,
+      "generation_requests": 3,
+      "generation_tokens": 10292,
+      "host_statuses": [
+        "no_progress"
+      ],
+      "first_boundary_card_count": 0,
+      "business_calls": 0,
+      "write_rejections": 3,
+      "review": {
+        "G1": "FAIL",
+        "G2": "NOT_APPLICABLE",
+        "G3": "NO_FALSE_COMPLETION_BUT_TASK_INCOMPLETE",
+        "G4": "FAIL_LITERAL_CONTROL_UNUSABLE",
+        "judgment": "Three attempts preserve genuine model m0 but omit literal_uses, so all are correctly rejected under the declared syntax. Generic repair_of guidance did not expose the required literal-use correction. No durable record and no final answer; this is a real semantic usability failure, not successful protection or readiness.",
+        "failure_labels": [
+          {
+            "category": "MEMORY_MISS",
+            "subtype": "legitimate_literal_not_persisted",
+            "confidence": "high"
+          }
+        ],
+        "repair": "Preserve concrete public error code and explain both self-contained-reference rewrite and supported literal_uses in the existing failure receipt; do not rewrite text or inject a chosen exception."
+      }
+    }
+  ],
+  "cost": {
+    "generation_requests": 7,
+    "input_tokens": 21101,
+    "output_tokens": 1542,
+    "generation_tokens": 22643,
+    "embedding_tokens": 125,
+    "unknown_usage": 0,
+    "judge_requests": 0
+  },
+  "reviewer": "root manual review of actual answers, journal, first checkpoints and separate-process reads; no LLM Judge.",
+  "source_snapshot": "artifacts/contextual-user-memory/v14-v1-r1-small/source-snapshot",
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v14-v1-r1-small/d01/result.json": "daafdba223f8750c68c861905528c388bbb249e14b39ae0e8fe350fdfc59a5f1",
+    "artifacts/contextual-user-memory/v14-v1-r1-small/d05/result.json": "4f4cc3a65291af15bc787e77c058717ced23e4763f121a657a1b12217ab0253b",
+    "artifacts/contextual-user-memory/v14-v1-r1-small/d12/result.json": "cf0bcfed61606e26fa3dda8154b3a705993fb1b8ec17c9fd5f7dc8f9ff05f243",
+    "artifacts/contextual-user-memory/v14-v1-r1-small/separate-process-read.json": "d02da941e2e4ca124bc6a416a5410ed7bf76c6be44e67bb2381ca8c530eacd81",
+    "artifacts/contextual-user-memory/v14-v1-r1-small/end-budget.json": "f4c81f6099230e735bae4d593f80f91187be5f9d81292420a07ff99021f7f07c",
+    "artifacts/contextual-user-memory/v14-v1-spec/freeze.json": "4f4c699990a65a02754fa745c8039d922149a2e8b4dc6728c92ae1efa99f9459"
+  },
+  "native_benchmark": false,
+  "readiness": false
+}

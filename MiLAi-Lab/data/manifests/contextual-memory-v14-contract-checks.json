@@ -1,0 +1,117 @@
+{
+  "kind": "V14_AFFECTED_CONTRACT_CHECKS",
+  "status": "PASS_STRUCTURAL_ONLY",
+  "real_model_calls": 0,
+  "prior_snapshot_affected_tests": 88,
+  "followup_affected_tests": 70,
+  "tests_note": "Counts cover separate overlapping affected runs; do not add them as distinct tests.",
+  "static": "Ruff/mypy and diff check passed by core owner.",
+  "comparison": [
+    {
+      "max_calls": 12,
+      "identical_generation_schema_sha256": "3048d7ef0b85f204caff986aac4cc3cde4d03602f85130cb0db06f71aa65010b",
+      "system_tokens_before": 2493,
+      "system_tokens_after": 2165,
+      "assembled_input_tokens_before": 2818,
+      "assembled_input_tokens_after": 2490
+    },
+    {
+      "max_calls": 1,
+      "identical_generation_schema_sha256": "f5c494b767ee48254a2829a03de0db187d05b188755d942c7702eb1dc90cfae9",
+      "system_tokens_before": 2492,
+      "system_tokens_after": 684,
+      "assembled_input_tokens_before": 2860,
+      "assembled_input_tokens_after": 1052
+    }
+  ],
+  "counting_note": "Same v14 semantic schema, state, tokenizer and callable capabilities before/after compression. Forced-final had finish only in the schema both times; new catalogue now agrees. These local request estimates are not live provider savings. New v14 semantic fields are included; no claim that v13->v14 semantic changes alone save cost.",
+  "decoder": {
+    "xgrammar": "0.2.3",
+    "vllm": "0.27.1",
+    "any_order": false,
+    "model_calls": 0,
+    "results": [
+      {
+        "name": "ordinary_disposition",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "ordinary_dispositions_required",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "ordinary_reject_fabricated_receipt",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "final_disposition",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "final_dispositions_required",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "final_reject_fabricated_receipt",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "create_literal",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "revise_literal",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "patch_literal",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "literal_source_required",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "successful_receipt_and_pending",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      }
+    ],
+    "schema_sha256": {
+      "ordinary": "3048d7ef0b85f204caff986aac4cc3cde4d03602f85130cb0db06f71aa65010b",
+      "final": "f5c494b767ee48254a2829a03de0db187d05b188755d942c7702eb1dc90cfae9",
+      "successful_receipt": "306db5775593479a83cf88c84ab7bed25478805f86585082b0f7169f90321737"
+    },
+    "probe_note": "Mechanical grammar fixtures only; not evidence of model judgment or real execution.",
+    "script_sha256": "8fe30210dd84ed3f8553f67dc112fe4a9fd44f0fda9b117ec1aa2a025657aeca"
+  },
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v14-development/contract-before-d/measurement.json": "1b170e38408cc6a8b4c85d62b7e07ca86e3f806dcc980c3aaa1f4d82c033d022",
+    "artifacts/contextual-user-memory/v14-development/contract-after-d/measurement.json": "56cc61897c3b30d394417c5cdaeedc1ed1ddff7bf5d63338aacbdc991a2251d7",
+    "artifacts/contextual-user-memory/v14-development/grammar-probes.json": "12ac45e0246eb98af51cb32c2c7885bc4db73994dd5fe5e1ffa42ff7bcb8ede1",
+    "artifacts/contextual-user-memory/v14-development/grammar-result.json": "1a7848561d2cc07cfa6728cfd356c2d77c5ae7dbc64eb1c026e9100cb126fb7c",
+    "artifacts/contextual-user-memory/v14-development/capture_contract.py": "f25aefb94a2bafe74a3faa958ce89e9a6cdc5b69a7b192958d2aced3d91021ae",
+    "artifacts/contextual-user-memory/v14-development/check_grammar.py": "8fe30210dd84ed3f8553f67dc112fe4a9fd44f0fda9b117ec1aa2a025657aeca"
+  }
+}

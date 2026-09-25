@@ -27,6 +27,7 @@ from milai_lab.methods.contextual_memory.operations import TaskEnvelope, new_sav
 from milai_lab.methods.contextual_memory.query_context import project_query
 from milai_lab.methods.contextual_memory.write_contract import (
     apply_content_patch,
+    issued_handle_spans,
     issued_handles_in_text,
     validate_persistent_prose,
 )
@@ -368,7 +369,12 @@ class ContextualHost:
                         "oneOf", [function["parameters"]]
                     ):
                         if branch["properties"].get("op", {}).get("const") != "NO_CHANGE":
+                            literal_uses = (branch["properties"].pop("literal_uses", None)
+                                            if self.maintenance_protocol ==
+                                            FRONTIER_MAINTENANCE_PROTOCOL else None)
                             branch["properties"]["repair_of"] = {"type": "string"}
+                            if literal_uses is not None:
+                                branch["properties"]["literal_uses"] = literal_uses
         if self.maintenance_policy == "required":
             terminal = (FRONTIER_FINISH_TOOL if self.maintenance_protocol ==
                         FRONTIER_MAINTENANCE_PROTOCOL else
@@ -422,22 +428,28 @@ class ContextualHost:
             "return its content again."
         )
         if self.memory is not None:
+            retention = ("only for this session; a new session cannot retrieve unsaved "
+                         "observations."
+                         if self.observation_retention == "session" else
+                         "as durable raw sources.")
+            protocol_prompt += "\nNew observations are retained " + retention
+            if self.maintenance_protocol == FRONTIER_MAINTENANCE_PROTOCOL:
+                protocol_prompt += " CURRENT marks a version, not persistence."
+            else:
+                protocol_prompt += (
+                    " CURRENT describes a version, not persistence. A successful business "
+                    "action or confirmation does not save memory. Preserve supported "
+                    "information needed for later work, such as commitments, decisions, "
+                    "requirements or reusable outcomes, with memory_save. Look for the "
+                    "existing person and matter before choosing CREATE or REVISE. Routine "
+                    "outputs, temporary instructions and unchanged understanding need no write."
+                )
+        if self.maintenance_protocol != FRONTIER_MAINTENANCE_PROTOCOL:
             protocol_prompt += (
-                "\nNew observations are retained "
-                + ("only for this session; a new session cannot retrieve unsaved observations. "
-                   if self.observation_retention == "session" else "as durable raw sources. ")
-                + "CURRENT describes a version, not persistence. A successful business action "
-                "or confirmation does not save memory. Preserve supported information needed "
-                "for later work, such as commitments, decisions, requirements or reusable "
-                "outcomes, with memory_save. Look for the existing person and matter before "
-                "choosing CREATE or REVISE. Routine outputs, temporary instructions and "
-                "unchanged understanding need no write."
+                "\nTreat business tool receipts as execution facts. A plan, message, working "
+                "decision or complete finish does not prove an unexecuted business action; "
+                "state clearly when a requested action was not performed."
             )
-        protocol_prompt += (
-            "\nTreat business tool receipts as execution facts. A plan, message, working "
-            "decision or complete finish does not prove an unexecuted business action; "
-            "state clearly when a requested action was not performed."
-        )
         sidecar_instruction_start = len(protocol_prompt)
         if self.decision_policy == "basis":
             protocol_prompt += (
@@ -477,22 +489,10 @@ class ContextualHost:
         if semantic_maintenance:
             if frontier_maintenance:
                 protocol_prompt += (
-                    "\nUse finish_turn once the current turn's memory maintenance is done. "
-                    "The frontier lists still-unhandled delivered observations, actual writes, "
-                    "execution receipts, failed writes, and trusted review requirements. "
-                    "For each unhandled candidate choose an accurate disposition or leave it "
-                    "in remaining with pending. A source cited by one write may contain another "
-                    "matter; a citation alone does not settle that meaning. task_local/none "
-                    "need a reason and cannot override trusted persistence. cross_turn/durable "
-                    "needs an actual current durable record or pending maintenance. "
-                    "A real completed action ref must cite its delivered successful receipt; "
-                    "pending_actions are your proposals, not program execution facts. "
-                    "A future customer reply may still be awaited after maintenance completes. "
-                    "Repair failed writes with repair_of, explicitly abandon an optional attempt, "
-                    "or leave maintenance pending. Compare an actual business result with the "
-                    "current record: a pending plan does not record completed execution. "
-                    "Once evidence suffices, perform the next operation directly. "
-                    "finish_turn must be the sole tool in its response."
+                    "\nThe frontier is program evidence, not a semantic verdict. Choose "
+                    "maintenance dispositions using the finish_turn contract. A future "
+                    "external reply may be explained after current maintenance is processed. "
+                    "Once evidence suffices, perform the next operation directly."
                 )
             else:
                 protocol_prompt += (
@@ -573,7 +573,8 @@ class ContextualHost:
                 "json_action mode. Available tools (names, descriptions, and "
                 + ("schema-derived compact field guide" if repair_maintenance else
                    "JSON Schema parameters") + "):\n"
-                + (_compact_tool_descriptions(self.tools) if repair_maintenance
+                + ("" if frontier_maintenance else
+                   _compact_tool_descriptions(self.tools) if repair_maintenance
                    else _json(self.tools))
             )
         session = session or HostSession(uuid4().hex, self.memory)
@@ -696,14 +697,11 @@ class ContextualHost:
             delivered: dict[str, str] = {}
             source_actions = {source: call_id for call_id, source in
                               session.maintenance.get("action_sources", {}).items()}
-            if bound_memory is not None:
-                for alias, binding in session.visible_bindings.items():
-                    if binding.kind == "source" and binding.spans:
-                        observation = bound_memory.sources.get(binding.exact_ref)
-                        if (observation is not None and observation.role == "tool"
-                                and observation.artifact in self.business_tools):
-                            delivered[source_actions.get(binding.exact_ref,
-                                                         observation.event_id)] = alias
+            visible_sources = [
+                (alias, binding.exact_ref, bound_memory.sources.get(binding.exact_ref))
+                for alias, binding in session.visible_bindings.items()
+                if bound_memory is not None and binding.kind == "source" and binding.spans
+            ]
 
             def identity_arguments(arguments: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:
                 small = {key: value for key, value in arguments.items()
@@ -715,11 +713,39 @@ class ContextualHost:
                 entries = self.runtime_store.actions_for_turn(
                     session.session_id, session.turn_id)
                 current_ids = {item["call_id"] for item in entries}
-                for call_id in delivered:
+                for alias, source_ref, observation in visible_sources:
+                    if observation is None or observation.role != "tool":
+                        continue
+                    call_id = source_actions.get(source_ref) or observation.event_id.removesuffix(
+                        ":reconciled")
+                    entry = self.runtime_store.action(call_id)
+                    if entry is None or entry["name"] not in self.business_tools:
+                        continue
+                    reconciliation = entry.get("reconciliation")
+                    raw = reconciliation["result"] if reconciliation else entry.get("result")
+                    if raw is None:
+                        continue
+                    result = BusinessToolResult(
+                        raw.get("call_id", call_id), raw["status"], raw["output"],
+                        Observation(**raw["observation"]) if raw.get("observation") else None,
+                    )
+                    expected = self._business_observation(
+                        entry["name"], entry["arguments"], result, entry["session_id"])
+                    if reconciliation:
+                        expected = replace(expected, event_id=call_id + ":reconciled",
+                                           content=_json({
+                                               "tool": entry["name"], "call_id": call_id,
+                                               "execution_status": result.status,
+                                               "output": result.output,
+                                               "verification": reconciliation["evidence"],
+                                               "previous_outcome": "unknown",
+                                           }))
+                    if observation != expected:
+                        continue
+                    delivered[call_id] = alias
                     if call_id not in current_ids:
-                        prior = self.runtime_store.action(call_id)
-                        if prior is not None:
-                            entries.append(prior)
+                        entries.append(entry)
+                        current_ids.add(call_id)
                 return [{
                     "call_id": item["call_id"], "name": item["name"],
                     "status": (item.get("reconciliation") or {}).get(
@@ -729,6 +755,14 @@ class ContextualHost:
                     "source_ref": delivered.get(item["call_id"]),
                     "delivered": item["call_id"] in delivered,
                 } for item in entries]
+            calls_by_id = {str(call.get("tool_call_id")): call for call in calls
+                           if call.get("name") in self.business_tools
+                           and "execution_status" in call}
+            for alias, source_ref, observation in visible_sources:
+                call_id = source_actions.get(source_ref)
+                if (call_id in calls_by_id and observation is not None
+                        and observation.role == "tool"):
+                    delivered[call_id] = alias
             return [{
                 "call_id": call.get("tool_call_id"), "name": call["name"],
                 "status": call["execution_status"],
@@ -824,6 +858,15 @@ class ContextualHost:
             emit_action_consumed("finish_turn")
             return make_result(action["answer"], "complete" if reviewed["status"] == "complete"
                                else "maintenance_pending")
+
+        def durable_write(arguments: dict[str, Any], resolved: dict[str, Any]) -> bool:
+            if arguments.get("persistence") is not None:
+                return bool(arguments["persistence"] == "durable")
+            target = resolved.get("target_ref")
+            if isinstance(target, str) and bound_memory is not None:
+                return bool(bound_memory.read(target, include_sources=False,
+                                              _visible=False).get("persistence") == "durable")
+            return arguments.get("op") in {"CREATE", "REVISE"}
 
         def resolved_arguments(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             if material_view is None:
@@ -964,7 +1007,8 @@ class ContextualHost:
                         resolved[key] = [resolve_ref(ref, body=True, kind=kind,
                                                      field=f"{key}[{index}]")
                                          for index, ref in enumerate(resolved[key])]
-                if self.maintenance_protocol == FRONTIER_MAINTENANCE_PROTOCOL:
+                if (self.maintenance_protocol == FRONTIER_MAINTENANCE_PROTOCOL
+                        and durable_write(arguments, resolved)):
                     assert bound_memory is not None
                     fragments = ([arguments["content"]] if isinstance(
                         arguments.get("content"), str) else [])
@@ -987,8 +1031,9 @@ class ContextualHost:
                             if token not in issued or exact not in basis:
                                 raise InvalidToolCall("LITERAL_USE_NOT_GROUNDED")
                             source = bound_memory.sources[exact].content
-                            if any(token in source[start:end] for start, end in
-                                   session.visible_body_spans(alias)):
+                            if any(start <= lower and upper <= end
+                                   for lower, upper in issued_handle_spans(source, token)
+                                   for start, end in session.visible_body_spans(alias)):
                                 grounded.add((token, alias))
                         validate_persistent_prose(
                             fragments, issued, literal_uses, grounded,
@@ -1156,12 +1201,28 @@ class ContextualHost:
                     key for key, item in attempts.items()
                     if item.get("last_operation_id") == rejected_operation_id
                 ), rejected_operation_id)
+                failed = attempts.get(notice["failed_operation_id"], {})
                 notice["next"] = (
                     "For a corrected attempt at the same proposal, pass its "
                     "failed_operation_id as memory_save.repair_of. Otherwise leave it "
                     "pending or, if optional and no longer needed, give its operation ID "
                     "and a real reason in finish_turn.maintenance.abandoned_attempts."
                 )
+                if failed.get("error") == "PERSISTENT_BODY_CONTAINS_EPHEMERAL_HANDLE":
+                    notice["next"] += (
+                        " If the token points to material, rewrite new durable prose as a "
+                        "self-contained claim and keep the source in structured evidence. "
+                        "If it is a real literal value, keep that exact text and add "
+                        "literal_uses [{token, source_ref}] using a delivered source whose "
+                        "original body contains the complete token and which supports this write."
+                    )
+                elif failed.get("error") == "LITERAL_USE_NOT_GROUNDED":
+                    notice["next"] += (
+                        " Correct literal_uses.source_ref to a delivered original source "
+                        "whose visible body contains the complete token and which belongs to "
+                        "this write's effective source basis; otherwise remove the declaration "
+                        "and rewrite the prose without a material handle."
+                    )
             elif committed_write:
                 notice["next"] = (
                     "This write committed, but the listed failed attempts remain unresolved. "
@@ -1187,6 +1248,11 @@ class ContextualHost:
                 outcome["operation_receipt"] = asdict(receipt_outcome(name, result))
                 if repair_maintenance:
                     failed_write(session, result["operation_id"], arguments or {}, error)
+                    attempt: dict[str, Any] = next((item for item in session.maintenance.get(
+                        "failed_attempts", {}).values()
+                        if item.get("last_operation_id") == result["operation_id"]), {})
+                    if frontier_maintenance:
+                        result["error"] = attempt.get("error", "INVALID_WRITE_PROPOSAL")
                     outcome["repair_guidance"] = repair_guidance(
                         rejected_operation_id=result["operation_id"]
                     )
@@ -1223,7 +1289,8 @@ class ContextualHost:
                 return rejected_tool_call(name, f"Invalid tool call: {exc}", arguments)
             inherited_handles: list[str] = []
             if (frontier_maintenance and name == "memory_save"
-                    and "content_patch" in arguments and bound_memory is not None):
+                    and "content_patch" in arguments and bound_memory is not None
+                    and durable_write(arguments, dispatched_arguments)):
                 target = dispatched_arguments["target_ref"]
                 old_text = bound_memory.read(target, include_sources=False,
                                              _visible=False)["text"]
@@ -1659,7 +1726,8 @@ class ContextualHost:
                 [FRONTIER_FINISH_TOOL if frontier_maintenance else
                  REPAIR_FINISH_TOOL if repair_maintenance else
                  SEMANTIC_FINISH_TOOL if semantic_maintenance else FINISH_TOOL]
-                if native and final_request and maintenance_required else
+                if final_request and maintenance_required and (
+                    native or frontier_maintenance) else
                 [required_tool] if required_tool is not None
                 else _subject_tools(self.tools, material_view.subject_catalogue())
                 if material_view is not None else list(self.tools)
@@ -1687,6 +1755,15 @@ class ContextualHost:
                      decision_policy=self.decision_policy))
                 if self.client.config.tool_mode == "json_action" else None
             )
+            request_catalogue = (
+                _compact_tool_descriptions(request_tools)
+                if frontier_maintenance and not native else ""
+            )
+            if request_catalogue:
+                request_transcript[0] = {
+                    **request_transcript[0],
+                    "content": str(transcript[0]["content"]) + request_catalogue,
+                }
             if self.emit:
                 capacity = getattr(self.client, "capacity", None)
 
@@ -1730,6 +1807,9 @@ class ContextualHost:
                     "auto_gap_enabled": bool(bound_memory is not None
                                              and bound_memory.decision_gap_focus),
                     "fixed_contract_tokens": segment_tokens(str(transcript[0]["content"])),
+                    "request_tool_catalogue_tokens": segment_tokens(request_catalogue),
+                    "actual_system_tokens": segment_tokens(
+                        str(request_transcript[0]["content"])),
                     "state_fixed_instruction_tokens": segment_tokens(sidecar_instruction),
                     "decision_projection_tokens": segment_tokens(decision_projection_text),
                     "historical_sidecar_tokens": segment_tokens(old_sidecars),

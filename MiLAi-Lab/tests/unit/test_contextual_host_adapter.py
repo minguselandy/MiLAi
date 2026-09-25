@@ -456,12 +456,17 @@ def test_read_explicit_sources_projects_only_their_delivered_body_ranges(
     client.close()
 
 
-def test_v5_requires_grounded_literal_use_for_issued_handle_in_durable_prose() -> None:
+@pytest.mark.parametrize(("source_text", "grounded"), [
+    ("Model m0", True), ("Model m00", False),
+])
+def test_v5_requires_grounded_literal_use_for_issued_handle_in_durable_prose(
+    source_text: str, grounded: bool,
+) -> None:
     memory = ContextualMemory(
         "user", host_id="host", embed=lambda texts: [[1.0, 0.0] for _ in texts],
         embedding_dimension=2,
     )
-    source = memory.publish(Observation("source", "Model m0", "user", "fixture"))
+    source = memory.publish(Observation("source", source_text, "user", "fixture"))
     session = HostSession("session", memory)
     assert session.material_view is not None
     projected = session.material_view.project(memory.read(
@@ -487,8 +492,41 @@ def test_v5_requires_grounded_literal_use_for_issued_handle_in_durable_prose() -
         maintenance_protocol=FRONTIER_MAINTENANCE_PROTOCOL,
     ).run([], session=session, max_calls=3)
     assert "PERSISTENT_BODY_CONTAINS_EPHEMERAL_HANDLE" in result.calls[0]["error"]
-    assert result.calls[1]["ok"] is True
-    assert next(iter(memory.workspace.cards.values())).text == "Model m0"
+    assert result.calls[1]["ok"] is grounded
+    if grounded:
+        assert next(iter(memory.workspace.cards.values())).text == "Model m0"
+    else:
+        assert "LITERAL_USE_NOT_GROUNDED" in result.calls[1]["error"]
+        assert memory.workspace.cards == {}
+    client.close()
+
+
+def test_v5_allows_issued_handle_in_task_local_note() -> None:
+    memory = ContextualMemory(
+        "user", host_id="host", embed=lambda texts: [[1.0, 0.0] for _ in texts],
+        embedding_dimension=2,
+    )
+    source = memory.publish(Observation("source", "Working context", "user", "fixture"))
+    session = HostSession("session", memory)
+    assert session.material_view is not None
+    projected = session.material_view.project(memory.read(
+        source, include_sources=False, _visible=False))
+    session.append_material(projected)
+    alias = projected["materials"][0]["ref"]
+    client, _ = _provider([
+        _receipt(_tool_call("save", "memory_save", json.dumps({
+            "op": "CREATE", "content": f"Working note for {alias}",
+            "persistence": "task", "about_ref": "unknown", "source_refs": [alias],
+            "certainty": "explicit",
+        }))),
+        _receipt({"role": "assistant", "content": "Done."}),
+    ])
+    result = ContextualHost(
+        client, memory.dispatch, MEMORY_TOOLS, "Work", memory=memory,
+        maintenance_protocol=FRONTIER_MAINTENANCE_PROTOCOL,
+    ).run([], session=session, max_calls=2)
+    assert result.calls[0]["ok"] is True
+    assert next(iter(memory.workspace.cards.values())).text == f"Working note for {alias}"
     client.close()
 
 

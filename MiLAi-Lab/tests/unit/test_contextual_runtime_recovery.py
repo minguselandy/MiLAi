@@ -199,18 +199,31 @@ def test_v5_prior_success_requires_current_explicit_source_delivery(tmp_path: Pa
     with RuntimeStore(tmp_path, contract) as store:
         store.begin_action(call_id, "do_work", {"item": "A"},
                            memory=memory, session=original)
-        store.finish_action(call_id, BusinessToolResult(call_id, "succeeded", {"done": True}),
-                            memory=memory, session=original)
-        source = memory.publish(Observation(call_id, "Executed item A", "tool", "do_work"))
+        business_result = BusinessToolResult(call_id, "succeeded", {"done": True},
+            Observation(call_id, "Executed item A", "tool", "external-receipt",
+                        session_id="earlier", actor_ref="tool:do_work"))
+        store.finish_action(call_id, business_result, memory=memory, session=original)
+        delivered_content = json.dumps({
+            "tool": "do_work", "call_id": call_id, "arguments": {"item": "A"},
+            "execution_status": "succeeded", "output": {"done": True},
+        }, ensure_ascii=False)
+        source = memory.publish(Observation(
+            call_id, delivered_content, "tool", "external-receipt",
+            session_id="earlier", actor_ref="tool:do_work",
+        ))
+        false_source = memory.publish(Observation(
+            call_id, delivered_content, "tool", "unrelated-source",
+            session_id="earlier", actor_ref="tool:do_work",
+        ))
         assert store.action(call_id) is not None
-        for delivered in (False, True):
+        for delivered in (None, source, false_source):
             current = HostSession("current-" + str(delivered), memory)
             current.begin_turn("new-turn")
             current.maintenance["protocol"] = FRONTIER_MAINTENANCE_PROTOCOL
-            if delivered:
+            if delivered is not None:
                 assert current.material_view is not None
                 current.append_material(current.material_view.project(memory.read(
-                    source, include_sources=False, _visible=False), max_bytes=4000))
+                    delivered, include_sources=False, _visible=False), max_bytes=4000))
             with client() as transport:
                 host = ContextualHost(
                     transport, memory.dispatch, [], "Work", memory=memory,
@@ -222,11 +235,14 @@ def test_v5_prior_success_requires_current_explicit_source_delivery(tmp_path: Pa
                 )
                 result = host.run([],
                                   session=current, turn_id="new-turn", max_calls=1)
-            assert result.status == ("complete" if delivered else "maintenance_pending"), (
+            assert result.status == ("complete" if delivered == source
+                                     else "maintenance_pending"), (
                 result.maintenance.get("last_review"), result.calls, result.transcript[-2:])
-            if delivered:
+            if delivered == source:
                 assert result.completed_action_refs == [call_id]
                 assert result.maintenance["execution_facts"][0]["source_ref"]
+            else:
+                assert result.maintenance["execution_facts"] == []
 
 
 def test_settled_business_result_recovers_after_intake_crash_without_reexecution(

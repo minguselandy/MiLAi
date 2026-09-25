@@ -102,13 +102,19 @@ FRONTIER_FINISH_TOOL: dict[str, Any] = copy.deepcopy(REPAIR_FINISH_TOOL)
 FRONTIER_FINISH_TOOL["function"]["parameters"] = FRONTIER_FINAL_SCHEMA
 FRONTIER_FINISH_TOOL["function"]["description"] = (
     "Finish with dispositions for unhandled delivered observations, real completed action "
-    "refs, proposed pending business actions, and the answer. A saved source relation is a "
-    "write fact, not proof that every meaning in that source was handled. A future commitment "
-    "can need durable memory even when execution must wait; explicit task-only or do-not-save "
-    "limits take precedence. cross_turn/durable requires an actual current durable record "
-    "or pending maintenance. completed_action_refs must cite delivered succeeded receipts; "
-    "a query or message proves only that action, not another business completion. "
-    "Failed writes still need repair_of, reasoned abandonment, or pending."
+    "refs, proposed pending business actions, and the answer. For future_use, ask whether "
+    "this matter would still matter after this reply and session; a format limit for this "
+    "reply does not shorten a separate future commitment in the same observation. A saved "
+    "source relation is a write fact, not proof that every meaning was handled. Task writes "
+    "are unavailable in a new session; explicit task-only or do-not-save limits still apply, "
+    "and task_local/none cannot override a trusted persistence requirement. "
+    "cross_turn/durable requires a current durable record actually read or "
+    "pending maintenance. completed_action_refs cite delivered succeeded internal journal "
+    "actions, not external business receipt IDs; use external IDs only from delivered tool "
+    "output. A query or message proves only that action, not another business completion. "
+    "The answer itself must fulfill current content and format instructions; maintenance "
+    "dispositions do not perform the request. Failed writes still need repair_of, reasoned "
+    "abandonment, or pending."
 )
 
 REVIEW_SCHEMA: dict[str, Any] = {
@@ -238,6 +244,13 @@ def failed_write(
     code = error if re.fullmatch(r"[A-Z][A-Z0-9_]{0,127}", error) else (
         "INVALID_WRITE_PROPOSAL"
     )
+    for body_code, body_field in (
+        ("PERSISTENT_BODY_CONTAINS_EPHEMERAL_HANDLE", "content"),
+        ("LITERAL_USE_NOT_GROUNDED", "literal_uses"),
+    ):
+        if body_code in error:
+            code, field = body_code, body_field
+            break
     if code == "ABOUT_SOURCE_NOT_CITED":
         field = "source_delta.remove" if arguments.get("basis_mode") == "delta" else "source_refs"
     attempts[repair_of or operation_id] = {
@@ -411,12 +424,11 @@ def _current_durable_support(session: HostSession) -> set[str]:
 
 def _write_facts(
     session: HostSession, writes: list[dict[str, Any]],
-) -> tuple[list[dict[str, Any]], set[str], set[str]]:
+) -> tuple[list[dict[str, Any]], set[str]]:
     """Project actual current writes, without treating a citation as full semantic coverage."""
     memory = session.memory
     assert memory is not None
     facts: list[dict[str, Any]] = []
-    supported: set[str] = set()
     durable_supported: set[str] = set()
     aliases = {binding.exact_ref: alias for alias, binding in
                session.visible_bindings.items() if binding.kind in {"source", "interpretation"}}
@@ -427,16 +439,16 @@ def _write_facts(
         if record.get("status") != "CURRENT" or card is None or card.retired:
             continue
         sources = record.get("source_refs", [])
-        supported.update(sources)
         if record.get("persistence") == "durable":
             durable_supported.update(sources)
         facts.append({
             "record_ref": aliases.get(ref), "operation_id": item["operation_id"],
             "persistence": record.get("persistence"),
+            "future_session_available": record.get("persistence") == "durable",
             "source_refs": [aliases[source] for source in sources if source in aliases],
             "source_count": len(sources),
         })
-    return facts, supported, durable_supported
+    return facts, durable_supported
 
 
 def semantic_frontier(
@@ -499,7 +511,7 @@ def semantic_frontier(
             for key, item in session.maintenance.get("failed_attempts", {}).items()
         ]
     if protocol == FRONTIER_MAINTENANCE_PROTOCOL:
-        write_facts, written_sources, _ = _write_facts(session, writes)
+        write_facts, durable_sources = _write_facts(session, writes)
         dispositions = session.maintenance.get("dispositions", {})
         frontier["write_facts"] = write_facts
         frontier["unhandled_candidates"] = [
@@ -507,7 +519,7 @@ def semantic_frontier(
              "unreviewed_ranges": row["unreviewed_ranges"]}
             for exact, row in zip(session.maintenance.get("pending", {}), coverage,
                                   strict=True)
-            if row["ref"] != "undelivered" and exact not in written_sources
+            if row["ref"] != "undelivered" and exact not in durable_sources
             and exact not in dispositions
         ]
         frontier["execution_facts"] = frontier.pop("business_outcomes")

@@ -45,11 +45,16 @@ WRITE_RULES = (
 )
 
 
+def issued_handle_spans(text: str, token: str) -> list[tuple[int, int]]:
+    """Locate a complete, case-sensitive issued token within original source characters."""
+    return [(match.start(), match.end()) for match in re.finditer(
+        rf"(?<![A-Za-z0-9_]){re.escape(token)}(?![A-Za-z0-9_])", text,
+    )] if token else []
+
+
 def issued_handles_in_text(text: str, issued_tokens: Sequence[str]) -> set[str]:
     """Find only handles this Host actually issued; preserve ordinary literal identifiers."""
-    return {token for token in issued_tokens if token and re.search(
-        rf"(?<![A-Za-z0-9_]){re.escape(token)}(?![A-Za-z0-9_])", text,
-    )}
+    return {token for token in issued_tokens if issued_handle_spans(text, token)}
 
 
 def validate_persistent_prose(
@@ -225,11 +230,14 @@ def ordinary_save_schema(parameters: dict[str, Any]) -> dict[str, Any]:
             key: value for key, value in branch["properties"].items()
             if key != "op" and key in allowed
         }
+        literal_uses = available.pop("literal_uses", None)
         branch["properties"] = {
             "op": {"const": op},
             **{key: available.pop(key) for key in leading},
             **available,
         }
+        if literal_uses is not None:
+            branch["properties"]["literal_uses"] = literal_uses
         branch["required"] = required
         if op in {"CREATE", "REVISE"}:
             branch["properties"]["source_refs"] = {

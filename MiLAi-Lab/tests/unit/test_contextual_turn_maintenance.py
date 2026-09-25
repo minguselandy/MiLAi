@@ -484,6 +484,33 @@ def test_frontier_durable_candidate_needs_real_record_or_pending() -> None:
                            pending_actions=[])["status"] == "complete"
 
 
+def test_task_write_does_not_settle_future_use_of_its_source() -> None:
+    memory = bank()
+    session = HostSession("session", memory)
+    session.maintenance["protocol"] = FRONTIER_MAINTENANCE_PROTOCOL
+    session.begin_turn("one")
+    acquired = accept_observation(memory, session, Observation(
+        "mixed", "Use one bullet now; remember the follow-up for next session",
+        "user", "fixture"))
+    alias = acquired["material"]["materials"][0]["ref"]
+    created = memory.save(
+        op="CREATE", content="Use one bullet in this answer", about_ref="unresolved",
+        source_refs=[acquired["source_ref"]], persistence="task", certainty="explicit",
+    )
+    committed(session, receipt_outcome("memory_save", created), created)
+    frontier = semantic_frontier(session)
+    assert frontier["write_facts"][0]["future_session_available"] is False
+    assert [item["ref"] for item in frontier["unhandled_candidates"]] == [alias]
+    with pytest.raises(ValueError, match="FRONTIER_CANDIDATES_UNRESOLVED"):
+        semantic_finish(session, {"decision": "processed", "remaining": [],
+                                  "dispositions": []}, completed_action_refs=[],
+                        pending_actions=[])
+    assert semantic_finish(session, {"decision": "processed", "remaining": [],
+                                     "dispositions": [{"refs": [alias],
+                                      "future_use": "task_local", "reason": "Current task only"}]},
+                           completed_action_refs=[], pending_actions=[])["status"] == "complete"
+
+
 def test_v5_host_finish_result_keeps_structured_actions_separate_from_answer() -> None:
     memory = bank(decision_policy="notes")
     response = {"work_note": None, "tool": "finish_turn", "arguments": {
@@ -511,6 +538,113 @@ def test_v5_host_finish_result_keeps_structured_actions_separate_from_answer() -
     assert result.pending_actions == [{"action": "Await external decision",
                                        "reason": "No execution result yet"}]
     assert result.maintenance["protocol"] == FRONTIER_MAINTENANCE_PROTOCOL
+
+
+def test_v5_json_catalogue_matches_each_request_schema_and_final_callable_set() -> None:
+    memory = bank()
+    requests: list[dict[str, Any]] = []
+    actions = [
+        {"tool": "memory_save", "arguments": {"op": "NO_CHANGE"}},
+        {"tool": "finish_turn", "arguments": {
+            "maintenance": {"decision": "processed", "remaining": [], "dispositions": []},
+            "completed_action_refs": [], "pending_actions": [], "answer": "Done",
+        }},
+    ]
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(json.loads(request.content))
+        return httpx.Response(200, json={"choices": [{"message": {
+            "role": "assistant", "content": json.dumps(actions.pop(0)),
+        }}]})
+
+    with VLLMClient(VLLMConfig("http://fixture/v1", "host", max_calls=2,
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        host = ContextualHost(client, memory.dispatch, memory_tools("ordinary"), "Work",
+                              memory=memory, maintenance_policy="required",
+                              maintenance_protocol=FRONTIER_MAINTENANCE_PROTOCOL)
+        result = host.run([], max_calls=2)
+    assert result.status == "complete"
+    catalogue_names = []
+    schema_names = []
+    for request in requests:
+        system = request["messages"][0]["content"]
+        catalogue = json.loads(system.split("field guide):\n", 1)[1])
+        catalogue_names.append({item["name"] for item in catalogue})
+        schema = request["response_format"]["json_schema"]["schema"]
+        branches = schema.get("oneOf", [schema])
+        schema_names.append({branch["properties"]["tool"]["const"]
+                             for branch in branches})
+        if len(catalogue_names) == 1:
+            save_schema = next(branch["properties"]["arguments"] for branch in branches
+                               if branch["properties"]["tool"]["const"] == "memory_save")
+            ordered = [branch for branch in save_schema["oneOf"]
+                       if "literal_uses" in branch["properties"]]
+            assert len(ordered) == 4
+            assert all(list(branch["properties"])[-2:] ==
+                       ["repair_of", "literal_uses"] for branch in ordered)
+            save_catalogue = next(item for item in catalogue
+                                  if item["name"] == "memory_save")
+            assert all(variant["optional"][-2:] == ["repair_of", "literal_uses"]
+                       for variant in save_catalogue["variants"]
+                       if "literal_uses" in variant["optional"])
+    assert catalogue_names == schema_names
+    assert "memory_save" in catalogue_names[0]
+    assert catalogue_names[1] == {"finish_turn"}
+
+
+@pytest.mark.parametrize(("source_text", "claimed_literal", "code", "guidance_text"), [
+    ("Keep model m0", False, "PERSISTENT_BODY_CONTAINS_EPHEMERAL_HANDLE",
+     "self-contained claim"),
+    ("Keep model m00", True, "LITERAL_USE_NOT_GROUNDED",
+     "Correct literal_uses.source_ref"),
+])
+def test_v5_json_action_rejection_explains_both_literal_and_reference_repairs(
+    source_text: str, claimed_literal: bool, code: str, guidance_text: str,
+) -> None:
+    memory = bank(decision_policy="notes")
+    source = memory.publish(Observation("source", source_text, "user", "fixture"))
+    session = HostSession("session", memory)
+    assert session.material_view is not None
+    projected = session.material_view.project(memory.read(
+        source, include_sources=False, _visible=False))
+    session.append_material(projected)
+    alias = projected["materials"][0]["ref"]
+    save_arguments: dict[str, Any] = {
+        "op": "CREATE", "content": f"Model {alias}" if claimed_literal else f"Refer to {alias}",
+        "about_ref": "unknown", "source_refs": [alias], "certainty": "explicit",
+    }
+    if claimed_literal:
+        save_arguments["literal_uses"] = [{"token": alias, "source_ref": alias}]
+    actions = [
+        {"work_note": None, "tool": "memory_save", "arguments": save_arguments},
+        {"work_note": None, "tool": "finish_turn", "arguments": {
+            "maintenance": {"decision": "pending", "remaining": [{
+                "ref": alias, "reason": "Correct the rejected write",
+            }], "dispositions": []},
+            "completed_action_refs": [], "pending_actions": [], "answer": "Still working",
+        }},
+    ]
+    with VLLMClient(VLLMConfig("http://fixture/v1", "host", max_calls=2,
+                               tool_mode="json_action"), transport=httpx.MockTransport(
+        lambda _: httpx.Response(200, json={"choices": [{"message": {
+            "role": "assistant", "content": json.dumps(actions.pop(0)),
+        }}]}))) as client:
+        host = ContextualHost(client, memory.dispatch, memory_tools("ordinary"), "Work",
+                              memory=memory, decision_policy="notes",
+                              maintenance_policy="required",
+                              maintenance_protocol=FRONTIER_MAINTENANCE_PROTOCOL)
+        result = host.run([], session=session, max_calls=2)
+    rejected = result.calls[0]
+    assert "Invalid action and state proposal" in rejected["error"]
+    assert rejected["result"]["error"] == code
+    guidance = rejected["repair_guidance"]
+    assert "memory_save.repair_of" in guidance["next"]
+    assert guidance_text in guidance["next"]
+    if not claimed_literal:
+        assert "literal_uses [{token, source_ref}]" in guidance["next"]
+    assert session.maintenance["failed_attempts"][guidance["failed_operation_id"]][
+        "error"] == code
 
 
 def test_repair_protocol_resolves_only_explicit_attempt_and_keeps_zero_write_legal() -> None:

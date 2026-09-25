@@ -1,0 +1,36 @@
+{
+  "kind": "V14_EXPOSED_LITERAL_ORDER_REPAIR_CHECK",
+  "status": "PASS_WITH_ONE_WRITE_REJECTION",
+  "source_mapping_sha256": "1532ef2edb979ae89ba3da6c6360b5bbe38c03df9254d859713e6e844cf6c201",
+  "case": "d12",
+  "input_and_rubric_unchanged": true,
+  "generations": 4,
+  "input_tokens": 12798,
+  "output_tokens": 799,
+  "generation_tokens": 13597,
+  "embedding_tokens": 92,
+  "write_rejections": 1,
+  "new_durable_cards": 1,
+  "sessions_completed": 2,
+  "G1": "PASS",
+  "G4": "PASS_BODY_AND_LITERAL_REQUIREMENT",
+  "G3": "PASS_NO_BUSINESS_ACTION_OR_FALSE_SAVE_CLAIM",
+  "review": "First save omitted declaration and failed. A later actual write declared token m0 with source m0, preserving both genuine model occurrences. Existing failed attempt was explicitly abandoned after its replacement committed. Both sessions completed; second session and independent process read the exact model and spare-connector relation. No unsupported date/scope metadata committed. The subject title remains a terse u0 label, while about is current_user and the full body is self-contained; no claim of improved title generation.",
+  "continuous_at_end": {
+    "generation_requests": 14,
+    "generation_tokens": 46343,
+    "embedding_tokens": 217,
+    "unknown_usage": 0,
+    "judge_requests": 0
+  },
+  "earlier_failures_preserved": [
+    "v14-v1-r1-small/d12",
+    "v14-v1-r2-literal/d12"
+  ],
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v14-v1-r3-literal/d12/result.json": "1dc349bc338067bfcce9170b84d09dbd400369d9f30795389908917589248c3a",
+    "artifacts/contextual-user-memory/v14-v1-r3-literal/separate-process-read.json": "cf454106ffacd77e69888aa6ffd8e42067a11e320ead3d0c830cbe3b50a3050b",
+    "artifacts/contextual-user-memory/v14-v1-r3-literal/end-budget.json": "1c65aef5d84403e74175708f94fba94b9e53bf28a55f8ab6eac4c4a9fdcd6746",
+    "artifacts/contextual-user-memory/v14-v1-spec/freeze-r3.json": "6d0c4c2ed91b7d1585677905d00efd7d0cf7d4efe1f55127c80f1848b2ef3814"
+  }
+}

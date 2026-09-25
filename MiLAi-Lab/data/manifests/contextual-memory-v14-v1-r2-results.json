@@ -1,0 +1,39 @@
+{
+  "kind": "V14_EXPOSED_LITERAL_REPAIR_CHECK",
+  "status": "FAIL_PRESERVED_NOT_READY",
+  "source_mapping_sha256": "25ab9a6fb005da3a4f2833c7047cbb536c2453dce666071aa01f2171d67445fa",
+  "case": "d12",
+  "input_and_rubric_unchanged": true,
+  "host_status": "no_progress",
+  "generation_requests": 3,
+  "usage": {
+    "prompt_tokens": 9509,
+    "completion_tokens": 594,
+    "total_tokens": 10103
+  },
+  "embedding_tokens": 0,
+  "continuous_generation_requests": 10,
+  "continuous_generation_tokens": 32746,
+  "continuous_embedding_tokens": 125,
+  "unknown_usage": 0,
+  "judge_requests": 0,
+  "first_boundary_durable_cards": 0,
+  "write_rejections": 3,
+  "observations": [
+    "Two work notes explicitly choose literal_uses, but the actual constrained action omits it.",
+    "Two attempted proposals include unsupported date/scope metadata, but no record commits.",
+    "The last attempt cites the retry operation ID rather than the unresolved root repair ID and is rejected."
+  ],
+  "diagnosis": "Actionable error guidance now reaches Host, but cannot itself fix the next observed omission. Actual schema places literal_uses before optional metadata; deployed ordered grammar rejects appending it after metadata/repair_of. This is an evidenced decoding constraint, not proof of the exact counterfactual token choice.",
+  "next_change": "Move optional literal_uses after ordinary metadata and repair_of, keeping legal fields and validators unchanged; probe that specific order before one further exposed check.",
+  "failure_labels": [
+    "MEMORY_MISS:legitimate_literal_not_persisted",
+    "MEMORY_MISUSE:unsupported_metadata_attempt_not_committed"
+  ],
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v14-v1-r2-literal/d12/result.json": "81a081d1d2763f7aa1e4ed1510082662cae8a95f58502fe016e3fd71b6123448",
+    "artifacts/contextual-user-memory/v14-v1-r2-literal/end-budget.json": "cf33ec419637d1c84718851872c5704b45a8715d1180e6eedd32e4ba640b64d9",
+    "artifacts/contextual-user-memory/v14-development/literal-order-r2.json": "d83f98501299f4447063592a1fa5190929fdd2fd9e1a09b044646884d3f4d740",
+    "artifacts/contextual-user-memory/v14-v1-spec/freeze-r2.json": "058000e0780b6cdc13e6c76cac8a5ad26a5fe98ba2b0423e37ad8a5958701f35"
+  }
+}

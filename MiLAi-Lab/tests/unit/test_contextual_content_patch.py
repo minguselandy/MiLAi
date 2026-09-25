@@ -96,12 +96,18 @@ def test_ordinary_schema_selects_patch_then_full_rewrite_without_mixing() -> Non
     revise = [branch for branch in schema["oneOf"]
               if branch["properties"]["op"]["const"] == "REVISE"]
     assert ["content_patch" in branch["required"] for branch in revise] == [True, True, False]
+    assert all(list(branch["properties"])[-1] == "literal_uses"
+               for branch in schema["oneOf"]
+               if branch["properties"]["op"]["const"] in {"CREATE", "REVISE"})
     base: dict[str, Any] = {
         "op": "REVISE", "target_ref": "r0", "about_ref": "unknown",
         "source_refs": ["s0"], "dependencies": [], "certainty": "explicit",
     }
     validate({**base, "content_patch": [{"old": "B", "new": "B2"}]}, schema)
     validate({**base, "content": "full replacement"}, schema)
+    validate({**base, "content": "full replacement", "subject": "matter",
+              "persistence": "durable", "literal_uses": [
+                  {"token": "m0", "source_ref": "s0"}]}, schema)
     validate({
         "op": "REVISE", "basis_mode": "delta", "target_ref": "r0",
         "content_patch": [{"old": "B", "new": "B2"}],

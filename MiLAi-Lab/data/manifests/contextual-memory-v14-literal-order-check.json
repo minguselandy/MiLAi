@@ -1,0 +1,106 @@
+{
+  "kind": "V14_ORDERED_GRAMMAR_LITERAL_REPAIR",
+  "real_model_calls": 0,
+  "same_literal_at_end_probe_before": false,
+  "same_literal_at_end_probe_after": true,
+  "schema_identity": [
+    {
+      "stage": "contract-after-d",
+      "semantic_schema_digest": "3048d7ef0b85f204caff986aac4cc3cde4d03602f85130cb0db06f71aa65010b",
+      "ordered_schema_sha256": "7cde90e795e0e0519923566ecdf2976504ccca00a86e2576bce53161a000def9"
+    },
+    {
+      "stage": "contract-r3",
+      "semantic_schema_digest": "3048d7ef0b85f204caff986aac4cc3cde4d03602f85130cb0db06f71aa65010b",
+      "ordered_schema_sha256": "4937da0934743da6bba6c6c6fc2312b3352f072e29e6ee6fe51d3f6f435d6607"
+    }
+  ],
+  "note": "Canonical sorted schema digests are insensitive to property order; ordered schema and source hashes identify this change. Deployed xgrammar 0.2.3 accepts the repaired order.",
+  "grammar_probes_after": {
+    "xgrammar": "0.2.3",
+    "vllm": "0.27.1",
+    "any_order": false,
+    "model_calls": 0,
+    "results": [
+      {
+        "name": "ordinary_disposition",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "ordinary_dispositions_required",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "ordinary_reject_fabricated_receipt",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "final_disposition",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "final_dispositions_required",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "final_reject_fabricated_receipt",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "create_literal",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "revise_literal",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "patch_literal",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "literal_source_required",
+        "expected": false,
+        "actual": false,
+        "passed": true
+      },
+      {
+        "name": "successful_receipt_and_pending",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      }
+    ],
+    "schema_sha256": {
+      "ordinary": "3048d7ef0b85f204caff986aac4cc3cde4d03602f85130cb0db06f71aa65010b",
+      "final": "f5c494b767ee48254a2829a03de0db187d05b188755d942c7702eb1dc90cfae9",
+      "successful_receipt": "306db5775593479a83cf88c84ab7bed25478805f86585082b0f7169f90321737"
+    },
+    "probe_note": "Mechanical grammar fixtures only; not evidence of model judgment or real execution.",
+    "script_sha256": "17bd4f95828f564623188f190ec493452f8bdd76517be2b9df9b4607d1801413"
+  },
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v14-development/literal-order-r2.json": "d83f98501299f4447063592a1fa5190929fdd2fd9e1a09b044646884d3f4d740",
+    "artifacts/contextual-user-memory/v14-development/literal-order-r3.json": "54459d2aed4a38ee7379a7f134b6e19c99ee9f5e9403eb88b5f6362173b14a79",
+    "artifacts/contextual-user-memory/v14-development/grammar-result-r3.json": "a1ddbcd2ec2f70df0ea54be4e24ec5abfad44154598893bdf5c7b48d2758cb41",
+    "artifacts/contextual-user-memory/v14-development/contract-r3/measurement.json": "a204701b9464c5bfd67f9e118c26663b77f980de4d06abde66643754cfee6385"
+  }
+}
