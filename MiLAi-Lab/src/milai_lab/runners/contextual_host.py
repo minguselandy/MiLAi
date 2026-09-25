@@ -877,8 +877,6 @@ class ContextualHost:
                 new_focus = (
                     candidate.critical_gap, candidate.scope.get("item", ""), candidate.status,
                 ) if candidate is not None else ("", "", "")
-                if old_focus != new_focus:
-                    read_cache.clear()
                 persist()
                 if self.emit:
                     self.emit({
@@ -975,9 +973,7 @@ class ContextualHost:
             )
             material_identity = (
                 [bound_memory.last_known_at, bound_memory.forget_generation,
-                 bound_memory.next_source_sequence,
-                 bound_memory.state.active_decision.recheck_reasons
-                 if bound_memory.state.active_decision is not None else []]
+                 bound_memory.next_source_sequence]
                 if projected_search is not None and bound_memory is not None else None
             )
             key = (_json([name, arguments, projected_search, material_identity], canonical=True)
@@ -990,7 +986,11 @@ class ContextualHost:
                                "request_index": model_calls - 1,
                                "effective_query": projected_search["effective_query"],
                                "origin": projected_search["origin"],
-                               "cached": True, "retrieval_executed": False})
+                               "cached": True, "dispatch_attempted": False,
+                               "search_ok": calls[previous]["ok"],
+                               "operation_completion": calls[previous][
+                                   "operation_receipt"]["completion"],
+                               "retrieval_executed": False})
                 no_progress += 1
                 return {
                     "ok": calls[previous]["ok"],
@@ -1058,15 +1058,18 @@ class ContextualHost:
                         "turn_id": session.turn_id, "result": projected_business}
             if not isinstance(result, dict):
                 raise TypeError("memory dispatch must return a dict")
+            receipt = receipt_outcome(name, result)
             if self.emit and projected_search is not None:
                 self.emit({"event": "search_query_resolved",
                            "session_id": session.session_id, "turn_id": session.turn_id,
                            "request_index": model_calls - 1,
                            "effective_query": projected_search["effective_query"],
                            "origin": projected_search["origin"],
-                           "cached": False, "retrieval_executed": True,
+                           "cached": False, "dispatch_attempted": True,
+                           "search_ok": receipt.ok,
+                           "operation_completion": receipt.completion,
+                           "retrieval_executed": receipt.ok,
                            "tool_call_id": call_id})
-            receipt = receipt_outcome(name, result)
             internal_result = result
             if name == "memory_save":
                 committed(session, receipt, internal_result)

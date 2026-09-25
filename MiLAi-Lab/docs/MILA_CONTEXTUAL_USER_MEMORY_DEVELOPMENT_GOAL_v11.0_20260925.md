@@ -2,8 +2,8 @@
 goal_id: MILAI-SPARSE-DECISION-BASIS-AND-ATTENTION
 version: v11.0
 date: 2026-09-25
-status: IMPLEMENTED_PENDING_SMALL_VALIDATION
-delivery: fixed_small_comparison_running_cache_repair_pending
+status: COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT
+delivery: fixed_comparison_preserved_post_comparison_repairs_verified
 baseline_commit: 6722c5ea3363d33e366bfadad6ae4fcd941a6588
 baseline_source_mapping_sha256: 6528ff9c69a567d40afb096e7ecb1c4e81aeafb3bee0c23b4dba20c57f58e9f4
 experiment_arm_kind: RESEARCH_PROTOTYPE
@@ -17,7 +17,7 @@ verification_count_cap: null
 
 **目标：将 v10 的单决策依据收敛为只在存在行动分歧时启用的短期控制状态；减少重复声明、冗余投影和输出截断；让有意义的缺口在普通 search 调用中进入实际检索。完成开发后，用固定的小规模原生任务比较任务完成、机制使用与全部成本。**
 
-本 Goal 与[详细设计](MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md)先作为计划冻结；随后按用户授权完成 B–D 运行接口、三臂模板及准备入口，状态为 `IMPLEMENTED_PENDING_SMALL_VALIDATION`。初次 48 文件映射、94 项受影响窄测、静态检查、15 项部署 decoder 探针及三份固定投影比较见[开发清单](../data/manifests/contextual-memory-v11-development.json)。旧 arc 首次回归及一次定向恢复均保留失败；公共维护说明修复后，原始后缀的两个 Host 回合完成，原生任务分别失败／通过。两个新实例已按预定规则冻结，六臂比较正以映射 `2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4` 串行运行。另已确认同值确认及显式查询路径存在缓存过度失效，待保持本次比较身份后定向修复，不能宣称工程验收完成。详见[开发与待办记录](CONTEXTUAL_USER_MEMORY_V11_DEVELOPMENT_20260925.md)。Product 与 v10 原始结果未改，本 Goal 不重开 v10。
+本 Goal 按授权完成 A–F 的有范围开发与小比较，状态为 `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`。初次窄测、部署 decoder 与投影检查见[开发清单](../data/manifests/contextual-memory-v11-development.json)。固定六臂比较全部使用 R2 映射 `2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4`；A2 两实例均 5/5，arc1 A0/A1 中止，arc2 A0 为 5/5、A1 为 4/5。自动 gap 检索与版本通知均未发生，arc2 Notes 同等得分且费用更低，收益未建立。之后修复缓存过度失效、检索计数及错误投影，R3 映射 `666344907d0ef59f171431ebc7e572b92bf68fae2378f82fc32dc8df4fff7c12` 通过 59 项相关窄测和静态检查，未再调用模型，不冒充 R3 未见比较。全部失败与连续 238 次生成／2453097 generation tokens／14274 embedding tokens 均保留，unknown=0、Judge=0。详见[最终结果与逐包证据](CONTEXTUAL_USER_MEMORY_V11_RESULTS_20260925.md)及[开发记录](CONTEXTUAL_USER_MEMORY_V11_DEVELOPMENT_20260925.md)。ordinary 默认、Product 与 v10 原始结果保持不变。
 
 ## 1. 核对后的出发点
 
@@ -163,4 +163,4 @@ Sol xhigh 负责核心／Host／查询集成；明确窄任务可交 Luna max，
 
 v11 新账本引用已封存的 v10：122 次生成、1216124 generation tokens、8148 embedding tokens，unknown=0、Judge=0；旧 v9 费用单列。不得重置旧费用或将不同模型的 tokens 混成精确货币成本。
 
-状态按证据推进：`PLANNED_NOT_STARTED` → `IMPLEMENTED_PENDING_SMALL_VALIDATION` → 有范围的小验证结果；效果不足时用 `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`，适用机会不足时说明缺口。**当前固定六臂比较仍在运行，缓存过度失效待修复；已有窄测与旧 arc 诊断不构成最终工程验收或方法收益，Goal 尚未结项。**
+状态按证据推进：`PLANNED_NOT_STARTED` → `IMPLEMENTED_PENDING_SMALL_VALIDATION` → 有范围的小验证结果；效果不足时用 `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`，适用机会不足时说明缺口。**本轮按负面／不确定效果结项：R2 六臂原生证据与 R3 定向工程修复分开，未证明 Attention、自动版本通知或总体质量—成本收益。全部失败、未评分轨迹和费用保留，不扩题、不循环重跑，ordinary 继续默认。**

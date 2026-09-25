@@ -355,6 +355,109 @@ def test_same_action_gap_delta_requeries_instead_of_reusing_old_cache() -> None:
     assert result.active_decision["critical_gap"] == "second terms?"
 
 
+def test_explicit_search_reuses_material_after_unrelated_focus_change() -> None:
+    memory = bank()
+    searches: list[str] = []
+
+    def dispatch(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
+        result = memory.dispatch(name, arguments)
+        if name == "memory_search":
+            searches.append(result["query"])
+        return result
+
+    changed = proposal(gap="What remains?", item="another plan")
+    changed["status"] = "deferred"
+    actions = [
+        {"state_delta": proposal(), "tool": "memory_search",
+         "arguments": {"query": "manual override"}},
+        {"state_delta": changed, "tool": "memory_search",
+         "arguments": {"query": "manual override"}},
+        {"state_delta": None, "tool": "finish_turn", "arguments": {
+            "maintenance": {"decision": "processed", "remaining": []}, "answer": "Done",
+        }},
+    ]
+    with _client(actions, []) as client:
+        host = ContextualHost(client, dispatch, MEMORY_TOOLS, "Work", memory=memory,
+                              decision_policy="basis", maintenance_policy="required",
+                              maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL)
+        result = host.run([], session=HostSession("task", memory), max_calls=3)
+    assert result.status == "complete"
+    assert searches == ["manual override"]
+    assert result.calls[1]["reused"] is True
+
+
+def test_review_ack_reuses_search_without_hiding_version_notice() -> None:
+    memory = bank()
+    source = memory.publish(Observation("first", "Plan A", "tool", "fixture"))
+    current = bind_delta(
+        proposal("m0"), current=None, task_id="task",
+        visible={"m0": MaterialBinding(source, "source", ((0, 6),), "hash")},
+        valid_subjects={"unknown": "unresolved"}, unavailable=set(),
+        current_ref=memory.resolve,
+    )
+    memory.apply_decision(current)
+    successor = memory.publish(Observation("second", "Plan B", "tool", "fixture",
+                                           supersedes=source))
+    searches: list[str] = []
+
+    def dispatch(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
+        result = memory.dispatch(name, arguments)
+        if name == "memory_search":
+            searches.append(result["query"])
+        return result
+
+    events: list[dict[str, Any]] = []
+    actions = [
+        {"state_delta": None, "tool": "memory_search", "arguments": {"query": "plan"}},
+        {"state_delta": proposal("c0"), "tool": "memory_search",
+         "arguments": {"query": "plan"}},
+        {"state_delta": None, "tool": "finish_turn", "arguments": {
+            "maintenance": {"decision": "processed", "remaining": []}, "answer": "Done",
+        }},
+    ]
+    with _client(actions, []) as client:
+        host = ContextualHost(client, dispatch, MEMORY_TOOLS, "Work", memory=memory,
+                              decision_policy="basis", emit=events.append,
+                              maintenance_policy="required",
+                              maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL)
+        result = host.run([], session=HostSession("task", memory), max_calls=3)
+    assert result.status == "complete"
+    assert searches == ["plan"]
+    assert result.calls[1]["reused"] is True
+    assert any(event.get("event") == "decision_change_notice"
+               and event.get("current_ref") == successor for event in events)
+    assert any(event.get("event") == "decision_transition"
+               and event.get("kind") == "REVIEW_ACKNOWLEDGED" for event in events)
+    assert memory.state.active_decision is not None
+    assert memory.state.active_decision.recheck_reasons == []
+
+
+def test_rejected_search_trace_distinguishes_attempt_from_valid_result() -> None:
+    memory = bank()
+    events: list[dict[str, Any]] = []
+    actions = [
+        {"state_delta": None, "tool": "memory_search",
+         "arguments": {"query": "address", "known_at": "m0"}},
+        {"state_delta": None, "tool": "finish_turn", "arguments": {
+            "maintenance": {"decision": "processed", "remaining": []}, "answer": "Done",
+        }},
+    ]
+    with _client(actions, []) as client:
+        host = ContextualHost(client, memory.dispatch, MEMORY_TOOLS, "Work",
+                              memory=memory, decision_policy="basis", emit=events.append,
+                              maintenance_policy="required",
+                              maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL)
+        result = host.run([], session=HostSession("task", memory), max_calls=2)
+    assert result.status == "complete"
+    assert result.calls[0]["operation_receipt"]["completion"] == "failed"
+    search = next(event for event in events if event.get("event") == "search_query_resolved")
+    assert search["cached"] is False
+    assert search["dispatch_attempted"] is True
+    assert search["search_ok"] is False
+    assert search["operation_completion"] == "failed"
+    assert search["retrieval_executed"] is False
+
+
 def test_unfinished_result_retains_actual_decision_snapshot() -> None:
     memory = bank()
     actions = [

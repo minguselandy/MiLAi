@@ -1,0 +1,4348 @@
+{
+  "status": "TERMINAL_ANALYZED_UNCERTAIN_MECHANISM_EFFECT",
+  "source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+  "selection": {
+    "path": "data/manifests/contextual-memory-v11-f-selection.json",
+    "sha256": "a93180b18f6f7e846f6d7c02d4e893948aff885162f26305b3455f343865b246",
+    "bytes": 1907
+  },
+  "prepared": {
+    "path": "data/manifests/contextual-memory-v11-f-prepared.json",
+    "sha256": "b591dc87deaa3ccea0b142473d5790ac61ca0d2c9bcfde8f9009b9966e292db6",
+    "bytes": 28784
+  },
+  "native_opportunity_labels": {
+    "path": "data/manifests/contextual-memory-v11-native-opportunities.json",
+    "sha256": "8d577aab4397ca30becb39c752ea41c366285d56261a0c335ebc7d82dfdf9be9",
+    "bytes": 15235
+  },
+  "runs": [
+    {
+      "arc_id": "arc1-000",
+      "arm": "A0",
+      "status": "INTERRUPTED",
+      "first_request_canonical_sha256": "4678f8c2c27b886ea859cfd80f7337b1cfe48ca7409011e9e0c13f9e12d254f1",
+      "first_action_canonical_sha256": "789fc20fb3efc26e5fbae529c6a779cc05ab77d75d9ed3b6502ec83d2d9b70ea",
+      "identity": {
+        "selection_sha256": "813f99996b3407153b3922864c72251b4e03130e89383184a0981441c97c4274",
+        "config_sha256": "14c14221c98f83cb82d20244adbd532c07e0dc7bcd775d127553a9fdf5cecae5",
+        "selected_config_path": "artifacts/contextual-user-memory/v11-f-arc1-A0-prepared/config.json",
+        "selected_config_sha256": "14c14221c98f83cb82d20244adbd532c07e0dc7bcd775d127553a9fdf5cecae5",
+        "freeze_sha256": "3ee214e8049fe308a3b66b6b83a51503bb0d69f1d7de9d22a505571b8910e349",
+        "freeze_source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_development_freeze_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_execution_freeze_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selection_template_sha256": "0f2e216f2f361a73a937401e307b1baba56d5db23779291d8c31c2751817dccd",
+        "adapter_sha256": "53ebc8a15d6b31e15cad8c11b2d852a9de83c1a8931284434db1af4158bb8620",
+        "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+        "external_source_sha256": {
+          "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+          "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+          "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+          "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+          "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+          "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+          "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+          "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+          "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+          "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+          "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+          "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+        },
+        "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+        "initial_world_sha256": "a88689a69adb70a390936412d536a6c73c7e7180728b702dfd7a4f968e47d0d8"
+      },
+      "artifacts": [
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/manifest.json",
+          "sha256": "e9779b515a0b0bda2e2618abd61791e08269f0b917ff75aaa2095ea7ea514cf0",
+          "bytes": 9385
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A0/interruption.json",
+          "sha256": "db551efe3d800ba9bb66c6a675d1f3ac586652253e4a1be2ac747c35dec36f0b",
+          "bytes": 568423
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A0/runtime/trace.jsonl",
+          "sha256": "f5b2f3ba2f56c236b101b3923a03c40a4c64bca2f5bfffd244877a56ae1876ab",
+          "bytes": 3516461
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A0/runtime/accounting.json",
+          "sha256": "4ee483621942affe44a2e622c954d40299a05f48d0bab312409affc500f4d452",
+          "bytes": 28792
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A0/episodes/episode-0.json",
+          "sha256": "6c3226cd384a5a0146019902cf7cedf9d79f3814b204e0d8bb5c19c03776fc18",
+          "bytes": 211559
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A0/episodes/episode-1.json",
+          "sha256": "aa17f71c5afb50996690144b33c75602f4ddb906c6312c4656aa3a4c1e0d8a1d",
+          "bytes": 239802
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A0/episodes/episode-2.json",
+          "sha256": "007a687cd4bfeb17f8cfd1002965f10c0dae901b0766e6eafe3fb8b064b84b41",
+          "bytes": 300722
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A0/episodes/episode-3.json",
+          "sha256": "52db2c789555284f3252fd021ad0fc1f2fe774d671a391dcf298b5d136ee4e38",
+          "bytes": 366589
+        }
+      ],
+      "native_score": {
+        "status": "UNSCORED_INCOMPLETE",
+        "successes": null,
+        "denominator": 5,
+        "dependent_successes": null,
+        "dependent_denominator": 2
+      },
+      "completed_prefix": [
+        {
+          "episode_index": 0,
+          "task_id": "arc1-000-e0-plant-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete",
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete",
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 1,
+          "task_id": "arc1-000-e1-update-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 2,
+          "task_id": "arc1-000-e2-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": true,
+            "argument_value_match": true,
+            "memory_utilized": true
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 3,
+          "task_id": "arc1-000-e3-update-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        }
+      ],
+      "saved_world_native_checks": [
+        {
+          "episode_index": 0,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 1,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 2,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 3,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 4,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "interruption_snapshot"
+        }
+      ],
+      "saved_world_native_check_scope": "Offline application of the unchanged original checker to actual before/after worlds, including the interruption snapshot when present. These supplementary observations do not change the runner interruption status or imply Host/maintenance completion. Unattempted episodes remain unscored.",
+      "interruption": {
+        "phase": "public_turn_incomplete",
+        "episode_index": 4,
+        "public_turn_index": 0,
+        "maintenance_pending": true,
+        "error": {
+          "type": "RuntimeError",
+          "message": "PUBLIC_TURN_INCOMPLETE: incomplete",
+          "traceback": "Traceback (most recent call last):\n  File \"/cra/memory/mx_memory/MiLAi/MiLAi-Lab/tools/run_contextual_merit.py\", line 459, in run_arc\n    raise RuntimeError(f\"PUBLIC_TURN_INCOMPLETE: {status}\")\nRuntimeError: PUBLIC_TURN_INCOMPLETE: incomplete\n"
+        }
+      },
+      "host_complete": 5,
+      "host_attempted": 6,
+      "planned_public_turns": 6,
+      "business_actions": [
+        {
+          "tool": "get_order",
+          "status": "succeeded",
+          "count": 3
+        },
+        {
+          "tool": "refund",
+          "status": "succeeded",
+          "count": 2
+        },
+        {
+          "tool": "send_message",
+          "status": "succeeded",
+          "count": 4
+        }
+      ],
+      "generation": {
+        "requests": 30,
+        "prompt_tokens": 242755,
+        "completion_tokens": 54757,
+        "total_tokens": 297512,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 10,
+        "prompt_tokens": 1987,
+        "completion_tokens": 0,
+        "total_tokens": 1987,
+        "unknown_usage": 0
+      },
+      "truncated_generations": 6,
+      "provider_http_failures": 0,
+      "write_rejections": 3,
+      "finish_rejections": 0,
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 9,
+          "prompt_tokens": 62394,
+          "completion_tokens": 10262,
+          "total_tokens": 72656,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 8,
+          "prompt_tokens": 65051,
+          "completion_tokens": 15324,
+          "total_tokens": 80375,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 6,
+          "prompt_tokens": 55463,
+          "completion_tokens": 24576,
+          "total_tokens": 80039,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 5,
+          "prompt_tokens": 42346,
+          "completion_tokens": 3672,
+          "total_tokens": 46018,
+          "unknown_usage": 0
+        },
+        "retrieval": {
+          "requests": 2,
+          "prompt_tokens": 17501,
+          "completion_tokens": 923,
+          "total_tokens": 18424,
+          "unknown_usage": 0
+        }
+      },
+      "control": {
+        "request_occupancy": {
+          "numerator": 0,
+          "denominator": 30,
+          "provider_requests": 30
+        },
+        "action_occupancy": {
+          "numerator": 0,
+          "denominator": 21
+        },
+        "activation_count": 0,
+        "transition_counts": {},
+        "parsed_sidecar_counts": {
+          "work_note_replacement": 24
+        },
+        "lifetimes": {},
+        "terminal_turns": [
+          {
+            "episode_index": 0,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 0,
+            "turn_index": 1,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 1,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 2,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 3,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 4,
+            "turn_index": 0,
+            "host_status": "incomplete",
+            "basis_remaining": false,
+            "interrupted_episode": true
+          }
+        ],
+        "truncated_requests_with_dispatch": [],
+        "notification_count": 0,
+        "notification_events": [],
+        "search_requested": 0,
+        "search_origins": {},
+        "gap_eligible_requests": 0,
+        "retrieval_executed": 0,
+        "gap_retrieval_executed": 0,
+        "search_cache_hits": 0,
+        "search_events": [],
+        "independently_labelled_recheck_need": "UNKNOWN_NO_NATIVE_LABEL",
+        "segment_token_estimates": {
+          "decision_projection_tokens": 0,
+          "fixed_contract_tokens": 146674,
+          "historical_sidecar_tokens": 1969,
+          "state_fixed_instruction_tokens": 2100
+        },
+        "segment_unmeasured_requests": {
+          "decision_projection_tokens": 0,
+          "fixed_contract_tokens": 0,
+          "historical_sidecar_tokens": 0,
+          "state_fixed_instruction_tokens": 0
+        },
+        "sidecar_output_token_estimates": {
+          "work_note": 619
+        },
+        "unparseable_output_sidecar_cost_unknown_requests": 6,
+        "tokenizer_identity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "enable_thinking": true,
+          "tokenizer_path": "/cra/qwen36-35B",
+          "tokenizer_files_sha256": {
+            "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+          },
+          "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+        },
+        "interpretation": "Segment estimates are local tokenizer diagnostics; state instruction is a subset of the fixed contract. Segments need not sum to full request usage. Output fields are re-serialized for estimation. Shared reasoning, grammar overhead and counterfactual State-induced calls remain unassigned. Provider usage is the sole charged total.",
+        "truncation_positions": [
+          {
+            "generation": 3,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 3,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 7099,
+              "total_tokens": 11195,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 21,
+            "session_id": "arc1-000:episode:4",
+            "turn_id": "message-0",
+            "request_index": 3,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 8099,
+              "total_tokens": 12195,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 23,
+            "session_id": "arc1-000:episode:4",
+            "turn_id": "message-0",
+            "request_index": 5,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 8879,
+              "total_tokens": 12975,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 26,
+            "session_id": "arc1-000:episode:4",
+            "turn_id": "message-0",
+            "request_index": 8,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 10117,
+              "total_tokens": 14213,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 28,
+            "session_id": "arc1-000:episode:4",
+            "turn_id": "message-0",
+            "request_index": 10,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 10586,
+              "total_tokens": 14682,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 29,
+            "session_id": "arc1-000:episode:4",
+            "turn_id": "message-0",
+            "request_index": 11,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 10683,
+              "total_tokens": 14779,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          }
+        ],
+        "consecutive_truncation_generations": [
+          [
+            3
+          ],
+          [
+            21
+          ],
+          [
+            23
+          ],
+          [
+            26
+          ],
+          [
+            28,
+            29
+          ]
+        ]
+      },
+      "embedding_cache_hits": 0,
+      "judge_requests": 0,
+      "decision_lifecycle_windows": {},
+      "mechanism_trace_review": {
+        "equal_nonnull_gap_set_no_ops": 0,
+        "empty_slot_clear_or_null_gap_no_ops": 0,
+        "new_observation_projection_requests": 0,
+        "distinct_decision_observation_pairs_presented": 0,
+        "responses_to_new_observation_projection": [],
+        "new_observation_response_transitions": {},
+        "gap_projection_request_counts": {},
+        "interpretation": "Presented new observations and accepted Host declarations are observable; semantic review quality is not independently labeled. Empty-slot clears are not equal nonnull-gap sets."
+      },
+      "search_calls_for_review": [],
+      "offline_interpretation": {
+        "version_change_notification": "NOT_OBSERVED",
+        "automatic_gap_retrieval": "NOT_OBSERVED",
+        "recheck_precision_recall": "NOT_ESTIMABLE_NO_NATIVE_LABEL",
+        "accepted_declarations_are_not_semantic_review_gold": true
+      }
+    },
+    {
+      "arc_id": "arc1-000",
+      "arm": "A1",
+      "status": "INTERRUPTED",
+      "first_request_canonical_sha256": "5e8d3ce0d675504e55a7189dffe76940454aac3a279194c350314b207b273b5a",
+      "first_action_canonical_sha256": "acc9fe0604eefcc82e88b2be8f625efab28f5b1a68fb7466d3af2f6e49b48e78",
+      "identity": {
+        "selection_sha256": "c9003408fee64920bd15a48e83d9fdc229c57e84b42e56fb1be471f432715d89",
+        "config_sha256": "9b4a37605890fc744fd70540619f6f8b082d05c6d99c43a19d4b12a0ad78cf02",
+        "selected_config_path": "artifacts/contextual-user-memory/v11-f-arc1-A1-prepared/config.json",
+        "selected_config_sha256": "9b4a37605890fc744fd70540619f6f8b082d05c6d99c43a19d4b12a0ad78cf02",
+        "freeze_sha256": "e2a1925f5158743ad364dd29b3789d1bee0e0d947234f04b3bf005f69f8f2ec1",
+        "freeze_source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_development_freeze_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_execution_freeze_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selection_template_sha256": "0f2e216f2f361a73a937401e307b1baba56d5db23779291d8c31c2751817dccd",
+        "adapter_sha256": "53ebc8a15d6b31e15cad8c11b2d852a9de83c1a8931284434db1af4158bb8620",
+        "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+        "external_source_sha256": {
+          "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+          "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+          "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+          "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+          "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+          "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+          "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+          "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+          "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+          "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+          "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+          "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+        },
+        "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+        "initial_world_sha256": "a88689a69adb70a390936412d536a6c73c7e7180728b702dfd7a4f968e47d0d8"
+      },
+      "artifacts": [
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/manifest.json",
+          "sha256": "e9779b515a0b0bda2e2618abd61791e08269f0b917ff75aaa2095ea7ea514cf0",
+          "bytes": 9385
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A1/interruption.json",
+          "sha256": "c57d6a798abb1b21893d48444577728eea30751b315e352ff6cd43e7a6311be1",
+          "bytes": 503874
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A1/runtime/trace.jsonl",
+          "sha256": "9821a649a13cf3ed972fbb60f50624ad103b06ee7238b68d5d0aff6869f32f7b",
+          "bytes": 5270651
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A1/runtime/accounting.json",
+          "sha256": "ce50c52c8285aa2764b8d1a186dcbe5eb0fa472292e3750a619da9b0256b80bf",
+          "bytes": 36180
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A1/episodes/episode-0.json",
+          "sha256": "616f4f71155eed2bea2c425947703a7ce26c33e63c43a774dc35a47321b2a0dc",
+          "bytes": 214311
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A1/episodes/episode-1.json",
+          "sha256": "eb9808a4c6eb1a682870b7a02307dd5c9e31f51b6da11af86252d59ac4ecec6b",
+          "bytes": 353530
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A1/episodes/episode-2.json",
+          "sha256": "195df75816070497cb0a2135c3a2234e6ee04b134d17eeaf7684eb8126a91ccf",
+          "bytes": 271195
+        }
+      ],
+      "native_score": {
+        "status": "UNSCORED_INCOMPLETE",
+        "successes": null,
+        "denominator": 5,
+        "dependent_successes": null,
+        "dependent_denominator": 2
+      },
+      "completed_prefix": [
+        {
+          "episode_index": 0,
+          "task_id": "arc1-000-e0-plant-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete",
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete",
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 1,
+          "task_id": "arc1-000-e1-update-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 2,
+          "task_id": "arc1-000-e2-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": true,
+            "argument_value_match": true,
+            "memory_utilized": true
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        }
+      ],
+      "saved_world_native_checks": [
+        {
+          "episode_index": 0,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 1,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 2,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 3,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "interruption_snapshot"
+        }
+      ],
+      "saved_world_native_check_scope": "Offline application of the unchanged original checker to actual before/after worlds, including the interruption snapshot when present. These supplementary observations do not change the runner interruption status or imply Host/maintenance completion. Unattempted episodes remain unscored.",
+      "interruption": {
+        "phase": "public_turn_incomplete",
+        "episode_index": 3,
+        "public_turn_index": 0,
+        "maintenance_pending": true,
+        "error": {
+          "type": "RuntimeError",
+          "message": "PUBLIC_TURN_INCOMPLETE: incomplete",
+          "traceback": "Traceback (most recent call last):\n  File \"/cra/memory/mx_memory/MiLAi/MiLAi-Lab/tools/run_contextual_merit.py\", line 459, in run_arc\n    raise RuntimeError(f\"PUBLIC_TURN_INCOMPLETE: {status}\")\nRuntimeError: PUBLIC_TURN_INCOMPLETE: incomplete\n"
+        }
+      },
+      "host_complete": 4,
+      "host_attempted": 5,
+      "planned_public_turns": 6,
+      "business_actions": [
+        {
+          "tool": "get_order",
+          "status": "succeeded",
+          "count": 2
+        },
+        {
+          "tool": "refund",
+          "status": "succeeded",
+          "count": 1
+        },
+        {
+          "tool": "send_message",
+          "status": "succeeded",
+          "count": 4
+        }
+      ],
+      "generation": {
+        "requests": 36,
+        "prompt_tokens": 294689,
+        "completion_tokens": 98603,
+        "total_tokens": 393292,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 8,
+        "prompt_tokens": 1671,
+        "completion_tokens": 0,
+        "total_tokens": 1671,
+        "unknown_usage": 0
+      },
+      "truncated_generations": 17,
+      "provider_http_failures": 0,
+      "write_rejections": 2,
+      "finish_rejections": 0,
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 7,
+          "prompt_tokens": 49719,
+          "completion_tokens": 10277,
+          "total_tokens": 59996,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 17,
+          "prompt_tokens": 144924,
+          "completion_tokens": 69632,
+          "total_tokens": 214556,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 6,
+          "prompt_tokens": 46969,
+          "completion_tokens": 14360,
+          "total_tokens": 61329,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 4,
+          "prompt_tokens": 35177,
+          "completion_tokens": 2844,
+          "total_tokens": 38021,
+          "unknown_usage": 0
+        },
+        "retrieval": {
+          "requests": 2,
+          "prompt_tokens": 17900,
+          "completion_tokens": 1490,
+          "total_tokens": 19390,
+          "unknown_usage": 0
+        }
+      },
+      "control": {
+        "request_occupancy": {
+          "numerator": 14,
+          "denominator": 36,
+          "provider_requests": 36
+        },
+        "action_occupancy": {
+          "numerator": 6,
+          "denominator": 17
+        },
+        "activation_count": 4,
+        "transition_counts": {
+          "STATE_CHANGED": 5,
+          "CLEARED": 3,
+          "NO_STATE_CHANGE": 5,
+          "UNCHANGED_NULL": 4
+        },
+        "parsed_sidecar_counts": {
+          "state_delta_set": 5,
+          "state_delta_clear": 10,
+          "state_delta_null": 4
+        },
+        "lifetimes": {
+          "c38d858eec544879b9833cbbd60f3fc3": {
+            "request_steps": 1,
+            "action_steps": 1,
+            "semantic_revisions": 0,
+            "review_acknowledgements": 0,
+            "churn": 0.0
+          },
+          "340210cce72f4b02ae06fc306f66f850": {
+            "request_steps": 1,
+            "action_steps": 1,
+            "semantic_revisions": 0,
+            "review_acknowledgements": 0,
+            "churn": 0.0
+          },
+          "0a30ee41f8284069a5dc1c73793f7873": {
+            "request_steps": 9,
+            "action_steps": 3,
+            "semantic_revisions": 1,
+            "review_acknowledgements": 0,
+            "churn": 0.3333333333333333
+          },
+          "dbcd49741d2c4933a97bc899651e79cf": {
+            "request_steps": 3,
+            "action_steps": 1,
+            "semantic_revisions": 0,
+            "review_acknowledgements": 0,
+            "churn": 0.0
+          }
+        },
+        "terminal_turns": [
+          {
+            "episode_index": 0,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 0,
+            "turn_index": 1,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 1,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": true
+          },
+          {
+            "episode_index": 2,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 3,
+            "turn_index": 0,
+            "host_status": "incomplete",
+            "basis_remaining": false,
+            "interrupted_episode": true
+          }
+        ],
+        "truncated_requests_with_dispatch": [],
+        "notification_count": 0,
+        "notification_events": [],
+        "search_requested": 0,
+        "search_origins": {},
+        "gap_eligible_requests": 14,
+        "retrieval_executed": 0,
+        "gap_retrieval_executed": 0,
+        "search_cache_hits": 0,
+        "search_events": [],
+        "independently_labelled_recheck_need": "UNKNOWN_NO_NATIVE_LABEL",
+        "segment_token_estimates": {
+          "decision_projection_tokens": 2428,
+          "fixed_contract_tokens": 178095,
+          "historical_sidecar_tokens": 4826,
+          "state_fixed_instruction_tokens": 5400
+        },
+        "segment_unmeasured_requests": {
+          "decision_projection_tokens": 0,
+          "fixed_contract_tokens": 0,
+          "historical_sidecar_tokens": 0,
+          "state_fixed_instruction_tokens": 0
+        },
+        "sidecar_output_token_estimates": {
+          "state_delta": 693
+        },
+        "unparseable_output_sidecar_cost_unknown_requests": 17,
+        "tokenizer_identity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "enable_thinking": true,
+          "tokenizer_path": "/cra/qwen36-35B",
+          "tokenizer_files_sha256": {
+            "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+          },
+          "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+        },
+        "interpretation": "Segment estimates are local tokenizer diagnostics; state instruction is a subset of the fixed contract. Segments need not sum to full request usage. Output fields are re-serialized for estimation. Shared reasoning, grammar overhead and counterfactual State-induced calls remain unassigned. Provider usage is the sole charged total.",
+        "truncation_positions": [
+          {
+            "generation": 2,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 2,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 6498,
+              "total_tokens": 10594,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 3,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 3,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 6552,
+              "total_tokens": 10648,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 4,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 4,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 6606,
+              "total_tokens": 10702,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 13,
+            "session_id": "arc1-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 2,
+            "basis_present": true,
+            "decision_projection_tokens": 181,
+            "usage": {
+              "prompt_tokens": 8243,
+              "total_tokens": 12339,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 14,
+            "session_id": "arc1-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 3,
+            "basis_present": true,
+            "decision_projection_tokens": 181,
+            "usage": {
+              "prompt_tokens": 8297,
+              "total_tokens": 12393,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 15,
+            "session_id": "arc1-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 4,
+            "basis_present": true,
+            "decision_projection_tokens": 181,
+            "usage": {
+              "prompt_tokens": 8351,
+              "total_tokens": 12447,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 16,
+            "session_id": "arc1-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 5,
+            "basis_present": true,
+            "decision_projection_tokens": 181,
+            "usage": {
+              "prompt_tokens": 8405,
+              "total_tokens": 12501,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 17,
+            "session_id": "arc1-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 6,
+            "basis_present": true,
+            "decision_projection_tokens": 181,
+            "usage": {
+              "prompt_tokens": 8459,
+              "total_tokens": 12555,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 18,
+            "session_id": "arc1-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 7,
+            "basis_present": true,
+            "decision_projection_tokens": 181,
+            "usage": {
+              "prompt_tokens": 8513,
+              "total_tokens": 12609,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 19,
+            "session_id": "arc1-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 8,
+            "basis_present": true,
+            "decision_projection_tokens": 181,
+            "usage": {
+              "prompt_tokens": 8567,
+              "total_tokens": 12663,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 28,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 4,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 9129,
+              "total_tokens": 13225,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 29,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 5,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 9183,
+              "total_tokens": 13279,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 30,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 6,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 9237,
+              "total_tokens": 13333,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 31,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 7,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 9291,
+              "total_tokens": 13387,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 32,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 8,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 9345,
+              "total_tokens": 13441,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 33,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 9,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 9399,
+              "total_tokens": 13495,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 35,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 11,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 10849,
+              "total_tokens": 14945,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          }
+        ],
+        "consecutive_truncation_generations": [
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          [
+            28,
+            29,
+            30,
+            31,
+            32,
+            33
+          ],
+          [
+            35
+          ]
+        ]
+      },
+      "embedding_cache_hits": 0,
+      "judge_requests": 0,
+      "decision_lifecycle_windows": {
+        "c38d858eec544879b9833cbbd60f3fc3": {
+          "created_generation": 0,
+          "task_id": "arc1-000:episode:0",
+          "ended_generation": 1,
+          "end_reason": "CLEARED",
+          "observed_generation_span_inclusive": 2
+        },
+        "340210cce72f4b02ae06fc306f66f850": {
+          "created_generation": 7,
+          "task_id": "arc1-000:episode:0",
+          "ended_generation": 8,
+          "end_reason": "CLEARED",
+          "observed_generation_span_inclusive": 2
+        },
+        "0a30ee41f8284069a5dc1c73793f7873": {
+          "created_generation": 11,
+          "task_id": "arc1-000:episode:1",
+          "ended_generation": 20,
+          "end_reason": "reset_before_next_request",
+          "observed_generation_span_inclusive": 10
+        },
+        "dbcd49741d2c4933a97bc899651e79cf": {
+          "created_generation": 24,
+          "task_id": "arc1-000:episode:3",
+          "ended_generation": 27,
+          "end_reason": "CLEARED",
+          "observed_generation_span_inclusive": 4
+        }
+      },
+      "mechanism_trace_review": {
+        "equal_nonnull_gap_set_no_ops": 0,
+        "empty_slot_clear_or_null_gap_no_ops": 5,
+        "new_observation_projection_requests": 6,
+        "distinct_decision_observation_pairs_presented": 4,
+        "responses_to_new_observation_projection": [
+          {
+            "generation": 1,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 1,
+            "new_observations": [
+              "m1"
+            ],
+            "tool": "send_message",
+            "transition": "CLEARED",
+            "truncated": false
+          },
+          {
+            "generation": 8,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-1",
+            "request_index": 1,
+            "new_observations": [
+              "m10"
+            ],
+            "tool": "send_message",
+            "transition": "CLEARED",
+            "truncated": false
+          },
+          {
+            "generation": 12,
+            "session_id": "arc1-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 1,
+            "new_observations": [
+              "m7"
+            ],
+            "tool": "memory_save",
+            "transition": "STATE_CHANGED",
+            "truncated": false
+          },
+          {
+            "generation": 25,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 1,
+            "new_observations": [
+              "m11"
+            ],
+            "tool": "memory_save",
+            "transition": null,
+            "truncated": false
+          },
+          {
+            "generation": 26,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 2,
+            "new_observations": [
+              "m11"
+            ],
+            "tool": "memory_save",
+            "transition": null,
+            "truncated": false
+          },
+          {
+            "generation": 27,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 3,
+            "new_observations": [
+              "m11"
+            ],
+            "tool": "memory_read",
+            "transition": "CLEARED",
+            "truncated": false
+          }
+        ],
+        "new_observation_response_transitions": {
+          "CLEARED": 3,
+          "STATE_CHANGED": 1,
+          "NO_ACCEPTED_DELTA": 2
+        },
+        "gap_projection_request_counts": {
+          "need_order_details_to_verify_refund_context": 2,
+          "memory_update_for_revised_refund": 9,
+          "update_memory_for_new_refund_amount": 3
+        },
+        "interpretation": "Presented new observations and accepted Host declarations are observable; semantic review quality is not independently labeled. Empty-slot clears are not equal nonnull-gap sets."
+      },
+      "search_calls_for_review": [],
+      "offline_interpretation": {
+        "version_change_notification": "NOT_OBSERVED",
+        "automatic_gap_retrieval": "NOT_OBSERVED",
+        "recheck_precision_recall": "NOT_ESTIMABLE_NO_NATIVE_LABEL",
+        "accepted_declarations_are_not_semantic_review_gold": true
+      }
+    },
+    {
+      "arc_id": "arc1-000",
+      "arm": "A2",
+      "status": "COMPLETE",
+      "first_request_canonical_sha256": "5e8d3ce0d675504e55a7189dffe76940454aac3a279194c350314b207b273b5a",
+      "first_action_canonical_sha256": "bf2aa6982b184aea26de9bf9c8b8dfbec2d22756be07089e6afb4f6e672b4a5a",
+      "identity": {
+        "selection_sha256": "581187fc8e8a5475011b01390a3ffde75d7cc49871acdb0674b1f497af8b3ec9",
+        "config_sha256": "0b5afa658247bc43c46d3aca6eba1118ed9be7e22342ee051274e544a2174a27",
+        "selected_config_path": "artifacts/contextual-user-memory/v11-f-arc1-A2-prepared/config.json",
+        "selected_config_sha256": "0b5afa658247bc43c46d3aca6eba1118ed9be7e22342ee051274e544a2174a27",
+        "freeze_sha256": "8c3ad076499c096b383490125ee94888b8914b28206d498a16b87b1f3579994c",
+        "freeze_source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_development_freeze_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_execution_freeze_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selection_template_sha256": "0f2e216f2f361a73a937401e307b1baba56d5db23779291d8c31c2751817dccd",
+        "adapter_sha256": "53ebc8a15d6b31e15cad8c11b2d852a9de83c1a8931284434db1af4158bb8620",
+        "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+        "external_source_sha256": {
+          "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+          "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+          "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+          "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+          "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+          "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+          "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+          "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+          "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+          "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+          "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+          "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+        },
+        "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+        "initial_world_sha256": "a88689a69adb70a390936412d536a6c73c7e7180728b702dfd7a4f968e47d0d8"
+      },
+      "artifacts": [
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/manifest.json",
+          "sha256": "e9779b515a0b0bda2e2618abd61791e08269f0b917ff75aaa2095ea7ea514cf0",
+          "bytes": 9385
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A2/result.json",
+          "sha256": "d686a4e719337c56be466923ba2a9356f6fbbf646a1dc189fee4d54fbe2e958c",
+          "bytes": 2376
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A2/runtime/trace.jsonl",
+          "sha256": "8910f286e1b83159c9baf3e31fe35d95a7d3b027ab8c84efd9c2edf48a73624b",
+          "bytes": 3011151
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A2/runtime/accounting.json",
+          "sha256": "579bac9b5da71aea4090d460b482f076e08858f7d58dd8a7b70bb58b62e49203",
+          "bytes": 27759
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A2/episodes/episode-0.json",
+          "sha256": "5c2f238c29007f876435b1e88ea918f05f0948458daba1566e4b292f08815186",
+          "bytes": 235341
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A2/episodes/episode-1.json",
+          "sha256": "69bdb5b299bfb11b9409a90eef21d578146b073ef9e477e5efb13d9fb92dbf59",
+          "bytes": 304837
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A2/episodes/episode-2.json",
+          "sha256": "d9ed9024380fb85af7fbd75f5f342069528c63a2b18fe27ea1338a84970747d2",
+          "bytes": 380805
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A2/episodes/episode-3.json",
+          "sha256": "2d4f47f732896944089516596fb21016d801188b68e5200b496f4fab7a0dd668",
+          "bytes": 412624
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc1/A2/episodes/episode-4.json",
+          "sha256": "278103538c5c9a73212304d2aa6b5ad0e7e22c60f6f180e85c556ac5ebe61046",
+          "bytes": 442014
+        }
+      ],
+      "native_score": {
+        "status": "SCORED",
+        "successes": 5,
+        "denominator": 5,
+        "dependent_successes": 2,
+        "dependent_denominator": 2
+      },
+      "completed_prefix": [
+        {
+          "episode_index": 0,
+          "task_id": "arc1-000-e0-plant-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete",
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete",
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 1,
+          "task_id": "arc1-000-e1-update-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 2,
+          "task_id": "arc1-000-e2-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": true,
+            "argument_value_match": true,
+            "memory_utilized": true
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 3,
+          "task_id": "arc1-000-e3-update-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 4,
+          "task_id": "arc1-000-e4-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": true,
+            "argument_value_match": true,
+            "memory_utilized": true
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        }
+      ],
+      "saved_world_native_checks": [
+        {
+          "episode_index": 0,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 1,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 2,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 3,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 4,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        }
+      ],
+      "saved_world_native_check_scope": "Offline application of the unchanged original checker to actual before/after worlds, including the interruption snapshot when present. These supplementary observations do not change the runner interruption status or imply Host/maintenance completion. Unattempted episodes remain unscored.",
+      "interruption": null,
+      "host_complete": 6,
+      "host_attempted": 6,
+      "planned_public_turns": 6,
+      "business_actions": [
+        {
+          "tool": "get_order",
+          "status": "succeeded",
+          "count": 2
+        },
+        {
+          "tool": "refund",
+          "status": "succeeded",
+          "count": 2
+        },
+        {
+          "tool": "send_message",
+          "status": "succeeded",
+          "count": 4
+        }
+      ],
+      "generation": {
+        "requests": 24,
+        "prompt_tokens": 193101,
+        "completion_tokens": 41598,
+        "total_tokens": 234699,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 9,
+        "prompt_tokens": 2008,
+        "completion_tokens": 0,
+        "total_tokens": 2008,
+        "unknown_usage": 0
+      },
+      "truncated_generations": 2,
+      "provider_http_failures": 0,
+      "write_rejections": 2,
+      "finish_rejections": 0,
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 8,
+          "prompt_tokens": 57441,
+          "completion_tokens": 10648,
+          "total_tokens": 68089,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 7,
+          "prompt_tokens": 57113,
+          "completion_tokens": 16561,
+          "total_tokens": 73674,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 6,
+          "prompt_tokens": 53035,
+          "completion_tokens": 5339,
+          "total_tokens": 58374,
+          "unknown_usage": 0
+        },
+        "retrieval": {
+          "requests": 1,
+          "prompt_tokens": 7946,
+          "completion_tokens": 858,
+          "total_tokens": 8804,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 2,
+          "prompt_tokens": 17566,
+          "completion_tokens": 8192,
+          "total_tokens": 25758,
+          "unknown_usage": 0
+        }
+      },
+      "control": {
+        "request_occupancy": {
+          "numerator": 4,
+          "denominator": 24,
+          "provider_requests": 24
+        },
+        "action_occupancy": {
+          "numerator": 4,
+          "denominator": 20
+        },
+        "activation_count": 2,
+        "transition_counts": {
+          "STATE_CHANGED": 4,
+          "GAP_RESOLVED": 2,
+          "NO_STATE_CHANGE": 5,
+          "UNCHANGED_NULL": 9
+        },
+        "parsed_sidecar_counts": {
+          "state_delta_set": 8,
+          "state_delta_clear": 3,
+          "state_delta_null": 11
+        },
+        "lifetimes": {
+          "5d1a1b4ad73446009e8e1e3dedbb35c3": {
+            "request_steps": 2,
+            "action_steps": 2,
+            "semantic_revisions": 1,
+            "review_acknowledgements": 0,
+            "churn": 0.5
+          },
+          "b448adc48a5f45d784ff6312219b41f2": {
+            "request_steps": 2,
+            "action_steps": 2,
+            "semantic_revisions": 1,
+            "review_acknowledgements": 0,
+            "churn": 0.5
+          }
+        },
+        "terminal_turns": [
+          {
+            "episode_index": 0,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 0,
+            "turn_index": 1,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 1,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 2,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 3,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 4,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          }
+        ],
+        "truncated_requests_with_dispatch": [],
+        "notification_count": 0,
+        "notification_events": [],
+        "search_requested": 0,
+        "search_origins": {},
+        "gap_eligible_requests": 4,
+        "retrieval_executed": 0,
+        "gap_retrieval_executed": 0,
+        "search_cache_hits": 0,
+        "search_events": [],
+        "independently_labelled_recheck_need": "UNKNOWN_NO_NATIVE_LABEL",
+        "segment_token_estimates": {
+          "decision_projection_tokens": 901,
+          "fixed_contract_tokens": 119121,
+          "historical_sidecar_tokens": 3149,
+          "state_fixed_instruction_tokens": 3600
+        },
+        "segment_unmeasured_requests": {
+          "decision_projection_tokens": 0,
+          "fixed_contract_tokens": 0,
+          "historical_sidecar_tokens": 0,
+          "state_fixed_instruction_tokens": 0
+        },
+        "sidecar_output_token_estimates": {
+          "state_delta": 1007
+        },
+        "unparseable_output_sidecar_cost_unknown_requests": 2,
+        "tokenizer_identity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "enable_thinking": true,
+          "tokenizer_path": "/cra/qwen36-35B",
+          "tokenizer_files_sha256": {
+            "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+          },
+          "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+        },
+        "interpretation": "Segment estimates are local tokenizer diagnostics; state instruction is a subset of the fixed contract. Segments need not sum to full request usage. Output fields are re-serialized for estimation. Shared reasoning, grammar overhead and counterfactual State-induced calls remain unassigned. Provider usage is the sole charged total.",
+        "truncation_positions": [
+          {
+            "generation": 16,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 3,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 8756,
+              "total_tokens": 12852,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 17,
+            "session_id": "arc1-000:episode:3",
+            "turn_id": "message-0",
+            "request_index": 4,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 8810,
+              "total_tokens": 12906,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          }
+        ],
+        "consecutive_truncation_generations": [
+          [
+            16,
+            17
+          ]
+        ]
+      },
+      "embedding_cache_hits": 0,
+      "judge_requests": 0,
+      "decision_lifecycle_windows": {
+        "5d1a1b4ad73446009e8e1e3dedbb35c3": {
+          "created_generation": 0,
+          "task_id": "arc1-000:episode:0",
+          "ended_generation": 2,
+          "end_reason": "GAP_RESOLVED",
+          "observed_generation_span_inclusive": 3
+        },
+        "b448adc48a5f45d784ff6312219b41f2": {
+          "created_generation": 4,
+          "task_id": "arc1-000:episode:0",
+          "ended_generation": 6,
+          "end_reason": "GAP_RESOLVED",
+          "observed_generation_span_inclusive": 3
+        }
+      },
+      "mechanism_trace_review": {
+        "equal_nonnull_gap_set_no_ops": 0,
+        "empty_slot_clear_or_null_gap_no_ops": 5,
+        "new_observation_projection_requests": 4,
+        "distinct_decision_observation_pairs_presented": 4,
+        "responses_to_new_observation_projection": [
+          {
+            "generation": 1,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 1,
+            "new_observations": [
+              "m1"
+            ],
+            "tool": "send_message",
+            "transition": "STATE_CHANGED",
+            "truncated": false
+          },
+          {
+            "generation": 2,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 2,
+            "new_observations": [
+              "m2"
+            ],
+            "tool": "memory_save",
+            "transition": "GAP_RESOLVED",
+            "truncated": false
+          },
+          {
+            "generation": 5,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-1",
+            "request_index": 1,
+            "new_observations": [
+              "m14"
+            ],
+            "tool": "send_message",
+            "transition": "STATE_CHANGED",
+            "truncated": false
+          },
+          {
+            "generation": 6,
+            "session_id": "arc1-000:episode:0",
+            "turn_id": "message-1",
+            "request_index": 2,
+            "new_observations": [
+              "m15"
+            ],
+            "tool": "memory_save",
+            "transition": "GAP_RESOLVED",
+            "truncated": false
+          }
+        ],
+        "new_observation_response_transitions": {
+          "STATE_CHANGED": 2,
+          "GAP_RESOLVED": 2
+        },
+        "gap_projection_request_counts": {
+          "verify_order_details_before_sending_confirmation_message": 2,
+          "send_confirmation_message": 2
+        },
+        "interpretation": "Presented new observations and accepted Host declarations are observable; semantic review quality is not independently labeled. Empty-slot clears are not equal nonnull-gap sets."
+      },
+      "search_calls_for_review": [],
+      "offline_interpretation": {
+        "version_change_notification": "NOT_OBSERVED",
+        "automatic_gap_retrieval": "NOT_OBSERVED",
+        "recheck_precision_recall": "NOT_ESTIMABLE_NO_NATIVE_LABEL",
+        "accepted_declarations_are_not_semantic_review_gold": true
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "arm": "A2",
+      "status": "COMPLETE",
+      "first_request_canonical_sha256": "1d016863447236c21a8a0ab111966ec3ab2557429b1e775c52d9f8e0f2f6377e",
+      "first_action_canonical_sha256": "5a0c526fdebdfd2e8dc9b1cba92efcd49e5730851c23e0a8db5dafcd20c69a51",
+      "identity": {
+        "selection_sha256": "53f5ba77bc94eb815f20913d2b337747612b23b8aaaa004293e7c0b0b5745048",
+        "config_sha256": "33c630ae9a1f17025c7bc29831f25122979338f9fdccc9a5537c44f424e6584b",
+        "selected_config_path": "artifacts/contextual-user-memory/v11-f-arc2-A2-prepared/config.json",
+        "selected_config_sha256": "33c630ae9a1f17025c7bc29831f25122979338f9fdccc9a5537c44f424e6584b",
+        "freeze_sha256": "509d9513387722eaa2a3d7541948f031e688cadfd9e77a6e1d359569ca0a3c3f",
+        "freeze_source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_development_freeze_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_execution_freeze_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selection_template_sha256": "2f74bda5f6140a2ba39d6cdad1ed8de98331713317927bd5843e3344a986eef8",
+        "adapter_sha256": "53ebc8a15d6b31e15cad8c11b2d852a9de83c1a8931284434db1af4158bb8620",
+        "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+        "external_source_sha256": {
+          "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+          "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+          "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+          "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+          "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+          "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+          "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+          "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+          "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+          "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+          "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+          "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+        },
+        "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+        "initial_world_sha256": "21130ceaa1bc7cee64fe2ab037ec35203ebb42f71cb245829e7fe72d433b454a"
+      },
+      "artifacts": [
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/manifest.json",
+          "sha256": "68420aafb31c6a507497018781586aaba094503c22d3ad3367fb78bef348c34a",
+          "bytes": 9387
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A2/result.json",
+          "sha256": "c790604c34ac5a0d39866fd849e684443a9e86965a26475c3abbbb04f596c82d",
+          "bytes": 2395
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A2/runtime/trace.jsonl",
+          "sha256": "4fd2b6effe5886a55efad0fdd5fb5fdd194dfd81c06a2c294071c0ad1528ab57",
+          "bytes": 4159193
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A2/runtime/accounting.json",
+          "sha256": "ac194b3573d04bbb1e3eb51c1277de5a15777ee166997f4872c961704bd413af",
+          "bytes": 34257
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A2/episodes/episode-0.json",
+          "sha256": "4f1368bb82312b4ef78bb1af28d16abc8ae235851ffce0ae3efb8285a02d409f",
+          "bytes": 123287
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A2/episodes/episode-1.json",
+          "sha256": "fa8638c3d64a11d38dd4b760741227b5579eee35e1b6aabf888b4e7e76b95b2d",
+          "bytes": 331056
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A2/episodes/episode-2.json",
+          "sha256": "81b7367962e80ac6e7c8f944cf6d97692c619632d55098b89cac3bb24c94f166",
+          "bytes": 497300
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A2/episodes/episode-3.json",
+          "sha256": "c0ade4c1bac6a2126a68822bccc7759de03ac5ad2153026a75878eb1d0c43fd4",
+          "bytes": 474173
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A2/episodes/episode-4.json",
+          "sha256": "443b39c11a25fe0321a958794da96122396b38f988f2a9368de4236343e90990",
+          "bytes": 535399
+        }
+      ],
+      "native_score": {
+        "status": "SCORED",
+        "successes": 5,
+        "denominator": 5,
+        "dependent_successes": 2,
+        "dependent_denominator": 2
+      },
+      "completed_prefix": [
+        {
+          "episode_index": 0,
+          "task_id": "arc2-000-e0-indep-addr",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 1,
+          "task_id": "arc2-000-e1-plant-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete",
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete",
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 2,
+          "task_id": "arc2-000-e2-update-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete",
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete",
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 3,
+          "task_id": "arc2-000-e3-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": true,
+            "argument_value_match": true,
+            "memory_utilized": true
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 4,
+          "task_id": "arc2-000-e4-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": true,
+            "argument_value_match": true,
+            "memory_utilized": true
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        }
+      ],
+      "saved_world_native_checks": [
+        {
+          "episode_index": 0,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 1,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 2,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 3,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 4,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        }
+      ],
+      "saved_world_native_check_scope": "Offline application of the unchanged original checker to actual before/after worlds, including the interruption snapshot when present. These supplementary observations do not change the runner interruption status or imply Host/maintenance completion. Unattempted episodes remain unscored.",
+      "interruption": null,
+      "host_complete": 7,
+      "host_attempted": 7,
+      "planned_public_turns": 7,
+      "business_actions": [
+        {
+          "tool": "get_order",
+          "status": "succeeded",
+          "count": 3
+        },
+        {
+          "tool": "refund",
+          "status": "succeeded",
+          "count": 2
+        },
+        {
+          "tool": "send_message",
+          "status": "succeeded",
+          "count": 4
+        },
+        {
+          "tool": "update_address",
+          "status": "succeeded",
+          "count": 1
+        }
+      ],
+      "generation": {
+        "requests": 32,
+        "prompt_tokens": 271457,
+        "completion_tokens": 56580,
+        "total_tokens": 328037,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 12,
+        "prompt_tokens": 2454,
+        "completion_tokens": 0,
+        "total_tokens": 2454,
+        "unknown_usage": 0
+      },
+      "truncated_generations": 4,
+      "provider_http_failures": 0,
+      "write_rejections": 2,
+      "finish_rejections": 0,
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 10,
+          "prompt_tokens": 76996,
+          "completion_tokens": 10549,
+          "total_tokens": 87545,
+          "unknown_usage": 0
+        },
+        "retrieval": {
+          "requests": 2,
+          "prompt_tokens": 17713,
+          "completion_tokens": 2068,
+          "total_tokens": 19781,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 4,
+          "prompt_tokens": 26392,
+          "completion_tokens": 16384,
+          "total_tokens": 42776,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 9,
+          "prompt_tokens": 81195,
+          "completion_tokens": 24458,
+          "total_tokens": 105653,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 7,
+          "prompt_tokens": 69161,
+          "completion_tokens": 3121,
+          "total_tokens": 72282,
+          "unknown_usage": 0
+        }
+      },
+      "control": {
+        "request_occupancy": {
+          "numerator": 8,
+          "denominator": 32,
+          "provider_requests": 32
+        },
+        "action_occupancy": {
+          "numerator": 5,
+          "denominator": 26
+        },
+        "activation_count": 3,
+        "transition_counts": {
+          "NO_STATE_CHANGE": 18,
+          "STATE_CHANGED": 5,
+          "GAP_RESOLVED": 1,
+          "CLEARED": 2
+        },
+        "parsed_sidecar_counts": {
+          "state_delta_set": 18,
+          "state_delta_clear": 10
+        },
+        "lifetimes": {
+          "647e387b219a45c79392aeec23c2cef9": {
+            "request_steps": 4,
+            "action_steps": 1,
+            "semantic_revisions": 0,
+            "review_acknowledgements": 0,
+            "churn": 0.0
+          },
+          "2a5daa1cfa904434bab7ccd34eabd984": {
+            "request_steps": 2,
+            "action_steps": 2,
+            "semantic_revisions": 1,
+            "review_acknowledgements": 0,
+            "churn": 0.5
+          },
+          "b850419d2c824a8d80bd8985b45260f1": {
+            "request_steps": 2,
+            "action_steps": 2,
+            "semantic_revisions": 1,
+            "review_acknowledgements": 0,
+            "churn": 0.5
+          }
+        },
+        "terminal_turns": [
+          {
+            "episode_index": 0,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 1,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 1,
+            "turn_index": 1,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 2,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 2,
+            "turn_index": 1,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 3,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 4,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          }
+        ],
+        "truncated_requests_with_dispatch": [],
+        "notification_count": 0,
+        "notification_events": [],
+        "search_requested": 1,
+        "search_origins": {
+          "explicit": 1
+        },
+        "gap_eligible_requests": 8,
+        "retrieval_executed": 1,
+        "gap_retrieval_executed": 0,
+        "search_cache_hits": 0,
+        "search_events": [
+          {
+            "stage": "host",
+            "event": "search_query_resolved",
+            "session_id": "arc2-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 1,
+            "effective_query": "address",
+            "origin": "explicit",
+            "cached": false,
+            "retrieval_executed": true,
+            "tool_call_id": "call:026486f6ba409c8b5145a3b2213dd716"
+          }
+        ],
+        "independently_labelled_recheck_need": "UNKNOWN_NO_NATIVE_LABEL",
+        "segment_token_estimates": {
+          "decision_projection_tokens": 1146,
+          "fixed_contract_tokens": 159159,
+          "historical_sidecar_tokens": 5713,
+          "state_fixed_instruction_tokens": 4800
+        },
+        "segment_unmeasured_requests": {
+          "decision_projection_tokens": 0,
+          "fixed_contract_tokens": 0,
+          "historical_sidecar_tokens": 0,
+          "state_fixed_instruction_tokens": 0
+        },
+        "sidecar_output_token_estimates": {
+          "state_delta": 1765
+        },
+        "unparseable_output_sidecar_cost_unknown_requests": 4,
+        "tokenizer_identity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "enable_thinking": true,
+          "tokenizer_path": "/cra/qwen36-35B",
+          "tokenizer_files_sha256": {
+            "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+          },
+          "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+        },
+        "interpretation": "Segment estimates are local tokenizer diagnostics; state instruction is a subset of the fixed contract. Segments need not sum to full request usage. Output fields are re-serialized for estimation. Shared reasoning, grammar overhead and counterfactual State-induced calls remain unassigned. Provider usage is the sole charged total.",
+        "truncation_positions": [
+          {
+            "generation": 2,
+            "session_id": "arc2-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 2,
+            "basis_present": true,
+            "decision_projection_tokens": 166,
+            "usage": {
+              "prompt_tokens": 6351,
+              "total_tokens": 10447,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 3,
+            "session_id": "arc2-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 3,
+            "basis_present": true,
+            "decision_projection_tokens": 166,
+            "usage": {
+              "prompt_tokens": 6405,
+              "total_tokens": 10501,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 4,
+            "session_id": "arc2-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 4,
+            "basis_present": true,
+            "decision_projection_tokens": 166,
+            "usage": {
+              "prompt_tokens": 6459,
+              "total_tokens": 10555,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 6,
+            "session_id": "arc2-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 6,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 7177,
+              "total_tokens": 11273,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          }
+        ],
+        "consecutive_truncation_generations": [
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            6
+          ]
+        ]
+      },
+      "embedding_cache_hits": 0,
+      "judge_requests": 0,
+      "decision_lifecycle_windows": {
+        "647e387b219a45c79392aeec23c2cef9": {
+          "created_generation": 1,
+          "task_id": "arc2-000:episode:0",
+          "ended_generation": 5,
+          "end_reason": "GAP_RESOLVED",
+          "observed_generation_span_inclusive": 5
+        },
+        "2a5daa1cfa904434bab7ccd34eabd984": {
+          "created_generation": 8,
+          "task_id": "arc2-000:episode:1",
+          "ended_generation": 10,
+          "end_reason": "CLEARED",
+          "observed_generation_span_inclusive": 3
+        },
+        "b850419d2c824a8d80bd8985b45260f1": {
+          "created_generation": 12,
+          "task_id": "arc2-000:episode:1",
+          "ended_generation": 14,
+          "end_reason": "CLEARED",
+          "observed_generation_span_inclusive": 3
+        }
+      },
+      "mechanism_trace_review": {
+        "equal_nonnull_gap_set_no_ops": 0,
+        "empty_slot_clear_or_null_gap_no_ops": 18,
+        "new_observation_projection_requests": 4,
+        "distinct_decision_observation_pairs_presented": 4,
+        "responses_to_new_observation_projection": [
+          {
+            "generation": 9,
+            "session_id": "arc2-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 1,
+            "new_observations": [
+              "m6"
+            ],
+            "tool": "send_message",
+            "transition": "STATE_CHANGED",
+            "truncated": false
+          },
+          {
+            "generation": 10,
+            "session_id": "arc2-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 2,
+            "new_observations": [
+              "m7"
+            ],
+            "tool": "memory_save",
+            "transition": "CLEARED",
+            "truncated": false
+          },
+          {
+            "generation": 13,
+            "session_id": "arc2-000:episode:1",
+            "turn_id": "message-1",
+            "request_index": 1,
+            "new_observations": [
+              "m19"
+            ],
+            "tool": "send_message",
+            "transition": "STATE_CHANGED",
+            "truncated": false
+          },
+          {
+            "generation": 14,
+            "session_id": "arc2-000:episode:1",
+            "turn_id": "message-1",
+            "request_index": 2,
+            "new_observations": [
+              "m20"
+            ],
+            "tool": "memory_save",
+            "transition": "CLEARED",
+            "truncated": false
+          }
+        ],
+        "new_observation_response_transitions": {
+          "STATE_CHANGED": 2,
+          "CLEARED": 2
+        },
+        "gap_projection_request_counts": {
+          "existing_address_record": 4,
+          "verify_order_details_before_confirmation": 2,
+          "save_pending_refund_memory": 2
+        },
+        "interpretation": "Presented new observations and accepted Host declarations are observable; semantic review quality is not independently labeled. Empty-slot clears are not equal nonnull-gap sets."
+      },
+      "search_calls_for_review": [
+        {
+          "stage": "host",
+          "event": "search_query_resolved",
+          "session_id": "arc2-000:episode:0",
+          "turn_id": "message-0",
+          "request_index": 1,
+          "effective_query": "address",
+          "origin": "explicit",
+          "cached": false,
+          "retrieval_executed": true,
+          "tool_call_id": "call:026486f6ba409c8b5145a3b2213dd716",
+          "arguments": {
+            "query": "address",
+            "focus": "default",
+            "limit": 1,
+            "known_at": "m0"
+          },
+          "explicit_gap_requested": false,
+          "automatic_gap_routed": false,
+          "dispatch_attempted": true,
+          "search_ok_from_receipt": false,
+          "operation_receipt": {
+            "completion": "failed",
+            "decision": "REJECTED",
+            "operation_id": "",
+            "succeeded": [],
+            "failed": [
+              "operation:ERROR"
+            ],
+            "cleanup_pending": false
+          },
+          "returned_material_count": 0,
+          "r2_trace_flag_limit": "The frozen R2 retrieval_executed field means an uncached dispatch attempt. A rejected search is not successful retrieval; inspect the actual tool receipt.",
+          "new_relevant_information": "NONE_RETURNED_REJECTED_SEARCH",
+          "later_use": "NO_SEARCH_MATERIAL_AVAILABLE_TO_ADOPT",
+          "review": "The explicit address query used known_at=m0, a material alias rather than a timestamp. The operation receipt is REJECTED/failed. Subsequent CREATE cites the already delivered user message and successful update_address receipt; it is not adoption of search evidence."
+        }
+      ],
+      "offline_interpretation": {
+        "version_change_notification": "NOT_OBSERVED",
+        "automatic_gap_retrieval": "NOT_OBSERVED",
+        "recheck_precision_recall": "NOT_ESTIMABLE_NO_NATIVE_LABEL",
+        "accepted_declarations_are_not_semantic_review_gold": true
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "arm": "A1",
+      "status": "COMPLETE",
+      "first_request_canonical_sha256": "1d016863447236c21a8a0ab111966ec3ab2557429b1e775c52d9f8e0f2f6377e",
+      "first_action_canonical_sha256": "d9aa6d062df3d0ae2ce1ba40f283b4f83e1e4ed25aaa02cea315b08b493e4c69",
+      "identity": {
+        "selection_sha256": "f5441b0081543db928846ccdc801b653851fa1a86034a878e40cd4d55f105fd9",
+        "config_sha256": "eb754ac83ccf9731c1a2e61735156aed86b58d192683a4261b7807db371b0e9e",
+        "selected_config_path": "artifacts/contextual-user-memory/v11-f-arc2-A1-prepared/config.json",
+        "selected_config_sha256": "eb754ac83ccf9731c1a2e61735156aed86b58d192683a4261b7807db371b0e9e",
+        "freeze_sha256": "fbe33f239caa7a9f6761a0d7900f1cede84f8afcaa712678abd8050e472e4717",
+        "freeze_source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_development_freeze_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_execution_freeze_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selection_template_sha256": "2f74bda5f6140a2ba39d6cdad1ed8de98331713317927bd5843e3344a986eef8",
+        "adapter_sha256": "53ebc8a15d6b31e15cad8c11b2d852a9de83c1a8931284434db1af4158bb8620",
+        "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+        "external_source_sha256": {
+          "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+          "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+          "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+          "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+          "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+          "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+          "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+          "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+          "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+          "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+          "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+          "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+        },
+        "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+        "initial_world_sha256": "21130ceaa1bc7cee64fe2ab037ec35203ebb42f71cb245829e7fe72d433b454a"
+      },
+      "artifacts": [
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/manifest.json",
+          "sha256": "68420aafb31c6a507497018781586aaba094503c22d3ad3367fb78bef348c34a",
+          "bytes": 9387
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A1/result.json",
+          "sha256": "d09f0cd009a2a38cc508a5dbc534aa0cf04171284554a7dd07ea3318e04643b1",
+          "bytes": 2397
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A1/runtime/trace.jsonl",
+          "sha256": "bf5a89e0e18cfe837b07ce736a88754e6ed642aa7cff208378376095d52bff5e",
+          "bytes": 4943694
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A1/runtime/accounting.json",
+          "sha256": "fc73d40ba2a617dbd8dee9ab4a367e984531c9b494ad52f36b7cb52a7054e73d",
+          "bytes": 37205
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A1/episodes/episode-0.json",
+          "sha256": "252731d4602fecbfe2031d42d990c2cbb816e18ce4233ec24529909bcc0b1e57",
+          "bytes": 41975
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A1/episodes/episode-1.json",
+          "sha256": "4f44e39da42501740d582a86bd00cd130af83a6f22e33681ed7c3e34a89c9c69",
+          "bytes": 267216
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A1/episodes/episode-2.json",
+          "sha256": "a1657d99f6ad9794ce290062b36cd148b97ba2ba65073d0d48a6c963e7d43913",
+          "bytes": 435551
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A1/episodes/episode-3.json",
+          "sha256": "d4edb6d86d2a11df590aee3d11ac6c7f878e0d42f6d556d92748c3cc02621212",
+          "bytes": 375249
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A1/episodes/episode-4.json",
+          "sha256": "0011a251148d3476aaf7ff0f544d1f31751a71b5b22072a3c8e46a2aed52abf1",
+          "bytes": 480968
+        }
+      ],
+      "native_score": {
+        "status": "SCORED",
+        "successes": 4,
+        "denominator": 5,
+        "dependent_successes": 1,
+        "dependent_denominator": 2
+      },
+      "completed_prefix": [
+        {
+          "episode_index": 0,
+          "task_id": "arc2-000-e0-indep-addr",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 1,
+          "task_id": "arc2-000-e1-plant-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete",
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete",
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 2,
+          "task_id": "arc2-000-e2-update-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete",
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete",
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 3,
+          "task_id": "arc2-000-e3-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": false,
+            "success": false,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 4,
+          "task_id": "arc2-000-e4-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": true,
+            "argument_value_match": true,
+            "memory_utilized": true
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        }
+      ],
+      "saved_world_native_checks": [
+        {
+          "episode_index": 0,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 1,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 2,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 3,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": false,
+          "success": false,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 4,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        }
+      ],
+      "saved_world_native_check_scope": "Offline application of the unchanged original checker to actual before/after worlds, including the interruption snapshot when present. These supplementary observations do not change the runner interruption status or imply Host/maintenance completion. Unattempted episodes remain unscored.",
+      "interruption": null,
+      "host_complete": 7,
+      "host_attempted": 7,
+      "planned_public_turns": 7,
+      "business_actions": [
+        {
+          "tool": "get_order",
+          "status": "succeeded",
+          "count": 3
+        },
+        {
+          "tool": "refund",
+          "status": "succeeded",
+          "count": 2
+        },
+        {
+          "tool": "send_message",
+          "status": "succeeded",
+          "count": 5
+        },
+        {
+          "tool": "update_address",
+          "status": "succeeded",
+          "count": 1
+        }
+      ],
+      "generation": {
+        "requests": 35,
+        "prompt_tokens": 290811,
+        "completion_tokens": 73436,
+        "total_tokens": 364247,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 10,
+        "prompt_tokens": 2169,
+        "completion_tokens": 0,
+        "total_tokens": 2169,
+        "unknown_usage": 0
+      },
+      "truncated_generations": 7,
+      "provider_http_failures": 0,
+      "write_rejections": 6,
+      "finish_rejections": 0,
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 11,
+          "prompt_tokens": 82396,
+          "completion_tokens": 12496,
+          "total_tokens": 94892,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 7,
+          "prompt_tokens": 64558,
+          "completion_tokens": 7135,
+          "total_tokens": 71693,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 7,
+          "prompt_tokens": 58148,
+          "completion_tokens": 28672,
+          "total_tokens": 86820,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 10,
+          "prompt_tokens": 85709,
+          "completion_tokens": 25133,
+          "total_tokens": 110842,
+          "unknown_usage": 0
+        }
+      },
+      "control": {
+        "request_occupancy": {
+          "numerator": 2,
+          "denominator": 35,
+          "provider_requests": 35
+        },
+        "action_occupancy": {
+          "numerator": 2,
+          "denominator": 27
+        },
+        "activation_count": 2,
+        "transition_counts": {
+          "UNCHANGED_NULL": 10,
+          "STATE_CHANGED": 2,
+          "GAP_RESOLVED": 2,
+          "NO_STATE_CHANGE": 13
+        },
+        "parsed_sidecar_counts": {
+          "state_delta_null": 10,
+          "state_delta_set": 10,
+          "state_delta_clear": 8
+        },
+        "lifetimes": {
+          "6b1d96b8c80a4545879423f384eb9747": {
+            "request_steps": 1,
+            "action_steps": 1,
+            "semantic_revisions": 0,
+            "review_acknowledgements": 0,
+            "churn": 0.0
+          },
+          "f1274fff15404a2694e17b8ccbfe3df0": {
+            "request_steps": 1,
+            "action_steps": 1,
+            "semantic_revisions": 0,
+            "review_acknowledgements": 0,
+            "churn": 0.0
+          }
+        },
+        "terminal_turns": [
+          {
+            "episode_index": 0,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 1,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 1,
+            "turn_index": 1,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 2,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 2,
+            "turn_index": 1,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 3,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 4,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          }
+        ],
+        "truncated_requests_with_dispatch": [],
+        "notification_count": 0,
+        "notification_events": [],
+        "search_requested": 0,
+        "search_origins": {},
+        "gap_eligible_requests": 2,
+        "retrieval_executed": 0,
+        "gap_retrieval_executed": 0,
+        "search_cache_hits": 0,
+        "search_events": [],
+        "independently_labelled_recheck_need": "UNKNOWN_NO_NATIVE_LABEL",
+        "segment_token_estimates": {
+          "decision_projection_tokens": 346,
+          "fixed_contract_tokens": 174099,
+          "historical_sidecar_tokens": 4098,
+          "state_fixed_instruction_tokens": 5250
+        },
+        "segment_unmeasured_requests": {
+          "decision_projection_tokens": 0,
+          "fixed_contract_tokens": 0,
+          "historical_sidecar_tokens": 0,
+          "state_fixed_instruction_tokens": 0
+        },
+        "sidecar_output_token_estimates": {
+          "state_delta": 1169
+        },
+        "unparseable_output_sidecar_cost_unknown_requests": 7,
+        "tokenizer_identity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "enable_thinking": true,
+          "tokenizer_path": "/cra/qwen36-35B",
+          "tokenizer_files_sha256": {
+            "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+          },
+          "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+        },
+        "interpretation": "Segment estimates are local tokenizer diagnostics; state instruction is a subset of the fixed contract. Segments need not sum to full request usage. Output fields are re-serialized for estimation. Shared reasoning, grammar overhead and counterfactual State-induced calls remain unassigned. Provider usage is the sole charged total.",
+        "truncation_positions": [
+          {
+            "generation": 4,
+            "session_id": "arc2-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 2,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 6640,
+              "total_tokens": 10736,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 6,
+            "session_id": "arc2-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 4,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 7617,
+              "total_tokens": 11713,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 13,
+            "session_id": "arc2-000:episode:2",
+            "turn_id": "message-0",
+            "request_index": 1,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 7673,
+              "total_tokens": 11769,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 14,
+            "session_id": "arc2-000:episode:2",
+            "turn_id": "message-0",
+            "request_index": 2,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 7728,
+              "total_tokens": 11824,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 15,
+            "session_id": "arc2-000:episode:2",
+            "turn_id": "message-0",
+            "request_index": 3,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 7782,
+              "total_tokens": 11878,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 19,
+            "session_id": "arc2-000:episode:2",
+            "turn_id": "message-0",
+            "request_index": 7,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 9056,
+              "total_tokens": 13152,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 22,
+            "session_id": "arc2-000:episode:2",
+            "turn_id": "message-1",
+            "request_index": 1,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 11652,
+              "total_tokens": 15748,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          }
+        ],
+        "consecutive_truncation_generations": [
+          [
+            4
+          ],
+          [
+            6
+          ],
+          [
+            13,
+            14,
+            15
+          ],
+          [
+            19
+          ],
+          [
+            22
+          ]
+        ]
+      },
+      "embedding_cache_hits": 0,
+      "judge_requests": 0,
+      "decision_lifecycle_windows": {
+        "6b1d96b8c80a4545879423f384eb9747": {
+          "created_generation": 2,
+          "task_id": "arc2-000:episode:1",
+          "ended_generation": 3,
+          "end_reason": "GAP_RESOLVED",
+          "observed_generation_span_inclusive": 2
+        },
+        "f1274fff15404a2694e17b8ccbfe3df0": {
+          "created_generation": 8,
+          "task_id": "arc2-000:episode:1",
+          "ended_generation": 9,
+          "end_reason": "GAP_RESOLVED",
+          "observed_generation_span_inclusive": 2
+        }
+      },
+      "mechanism_trace_review": {
+        "equal_nonnull_gap_set_no_ops": 0,
+        "empty_slot_clear_or_null_gap_no_ops": 13,
+        "new_observation_projection_requests": 2,
+        "distinct_decision_observation_pairs_presented": 2,
+        "responses_to_new_observation_projection": [
+          {
+            "generation": 3,
+            "session_id": "arc2-000:episode:1",
+            "turn_id": "message-0",
+            "request_index": 1,
+            "new_observations": [
+              "m1"
+            ],
+            "tool": "send_message",
+            "transition": "GAP_RESOLVED",
+            "truncated": false
+          },
+          {
+            "generation": 9,
+            "session_id": "arc2-000:episode:1",
+            "turn_id": "message-1",
+            "request_index": 1,
+            "new_observations": [
+              "m14"
+            ],
+            "tool": "send_message",
+            "transition": "GAP_RESOLVED",
+            "truncated": false
+          }
+        ],
+        "new_observation_response_transitions": {
+          "GAP_RESOLVED": 2
+        },
+        "gap_projection_request_counts": {
+          "verify_order_details": 1,
+          "verify_order_details_2": 1
+        },
+        "interpretation": "Presented new observations and accepted Host declarations are observable; semantic review quality is not independently labeled. Empty-slot clears are not equal nonnull-gap sets."
+      },
+      "search_calls_for_review": [],
+      "offline_interpretation": {
+        "version_change_notification": "NOT_OBSERVED",
+        "automatic_gap_retrieval": "NOT_OBSERVED",
+        "recheck_precision_recall": "NOT_ESTIMABLE_NO_NATIVE_LABEL",
+        "accepted_declarations_are_not_semantic_review_gold": true
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "arm": "A0",
+      "status": "COMPLETE",
+      "first_request_canonical_sha256": "a72a55b99e3465ba5073447cd9e6f2967395b5cb41a95dba4add67990427cb4b",
+      "first_action_canonical_sha256": "9800ac2bc8ff18ddd58d015e58c1f4ec09187c09072e75a303e7cda3ce93ca2b",
+      "identity": {
+        "selection_sha256": "a101890722b6aab27e3a7351c353c3b0da75ef0dd944a56f90c288cab368f909",
+        "config_sha256": "6d7670716cfadad7b17287c71f832c4c80a1c29dee376f24fe7183a4777abf08",
+        "selected_config_path": "artifacts/contextual-user-memory/v11-f-arc2-A0-prepared/config.json",
+        "selected_config_sha256": "6d7670716cfadad7b17287c71f832c4c80a1c29dee376f24fe7183a4777abf08",
+        "freeze_sha256": "84694be5d92af15df3fd38ff7e45902ff2c3baf7160c054260450eb184e81e1f",
+        "freeze_source_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_development_freeze_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selected_execution_freeze_mapping_sha256": "2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4",
+        "selection_template_sha256": "2f74bda5f6140a2ba39d6cdad1ed8de98331713317927bd5843e3344a986eef8",
+        "adapter_sha256": "53ebc8a15d6b31e15cad8c11b2d852a9de83c1a8931284434db1af4158bb8620",
+        "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+        "external_source_sha256": {
+          "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+          "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+          "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+          "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+          "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+          "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+          "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+          "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+          "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+          "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+          "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+          "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+        },
+        "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+        "initial_world_sha256": "21130ceaa1bc7cee64fe2ab037ec35203ebb42f71cb245829e7fe72d433b454a"
+      },
+      "artifacts": [
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/manifest.json",
+          "sha256": "68420aafb31c6a507497018781586aaba094503c22d3ad3367fb78bef348c34a",
+          "bytes": 9387
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A0/result.json",
+          "sha256": "75f10dd38b3cc111bf5206694ff42bd6f1ef633877de7a8c7062f01337ac8af1",
+          "bytes": 2395
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A0/runtime/trace.jsonl",
+          "sha256": "552b15904530f9c45d14cdcc39635e73d13ba3ea0ca3fa17f052a4347daebb8c",
+          "bytes": 3144455
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A0/runtime/accounting.json",
+          "sha256": "512bf910c06632916963926c57b70ed7c17708a3aa177f7c2cce0e11c7c18f07",
+          "bytes": 26381
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A0/episodes/episode-0.json",
+          "sha256": "291d58a155bc8a19b00caeda75160f44a4cf1c20a69bf292482c2db5b40d638b",
+          "bytes": 86892
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A0/episodes/episode-1.json",
+          "sha256": "6560ede0bac45c603e13a6ccfb33e91f33c48c766c9f61c0264d5922f81d9160",
+          "bytes": 293960
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A0/episodes/episode-2.json",
+          "sha256": "29313b169d5a9d50e3d66c03b7a5f0bff40d8b0f46faf67e7b7fc8cb885267c0",
+          "bytes": 411339
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A0/episodes/episode-3.json",
+          "sha256": "788afd87c272dcf4272c44a2aa91c8f5ef7cf62037462304b51b793a95fe40af",
+          "bytes": 399691
+        },
+        {
+          "path": "artifacts/contextual-user-memory/v11-f-arc2/A0/episodes/episode-4.json",
+          "sha256": "9a2af1d19aad3fe2f082f2223f439b7541a0f43aa7a4267f8659f311e9a3be2d",
+          "bytes": 431920
+        }
+      ],
+      "native_score": {
+        "status": "SCORED",
+        "successes": 5,
+        "denominator": 5,
+        "dependent_successes": 2,
+        "dependent_denominator": 2
+      },
+      "completed_prefix": [
+        {
+          "episode_index": 0,
+          "task_id": "arc2-000-e0-indep-addr",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 1,
+          "task_id": "arc2-000-e1-plant-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete",
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete",
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 2,
+          "task_id": "arc2-000-e2-update-refund",
+          "dependent": false,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": false,
+            "argument_value_match": false,
+            "memory_utilized": false
+          },
+          "host_statuses": [
+            "complete",
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete",
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 3,
+          "task_id": "arc2-000-e3-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": true,
+            "argument_value_match": true,
+            "memory_utilized": true
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        },
+        {
+          "episode_index": 4,
+          "task_id": "arc2-000-e4-probe-refund-upd",
+          "dependent": true,
+          "native_score": {
+            "pre_satisfied": false,
+            "checker_after": true,
+            "success": true,
+            "memory_had_fact": true,
+            "argument_value_match": true,
+            "memory_utilized": true
+          },
+          "host_statuses": [
+            "complete"
+          ],
+          "maintenance_statuses": [
+            "complete"
+          ]
+        }
+      ],
+      "saved_world_native_checks": [
+        {
+          "episode_index": 0,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 1,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 2,
+          "dependent": false,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 3,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        },
+        {
+          "episode_index": 4,
+          "dependent": true,
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "boundary": "completed_episode"
+        }
+      ],
+      "saved_world_native_check_scope": "Offline application of the unchanged original checker to actual before/after worlds, including the interruption snapshot when present. These supplementary observations do not change the runner interruption status or imply Host/maintenance completion. Unattempted episodes remain unscored.",
+      "interruption": null,
+      "host_complete": 7,
+      "host_attempted": 7,
+      "planned_public_turns": 7,
+      "business_actions": [
+        {
+          "tool": "get_order",
+          "status": "succeeded",
+          "count": 3
+        },
+        {
+          "tool": "refund",
+          "status": "succeeded",
+          "count": 2
+        },
+        {
+          "tool": "send_message",
+          "status": "succeeded",
+          "count": 4
+        },
+        {
+          "tool": "update_address",
+          "status": "succeeded",
+          "count": 1
+        }
+      ],
+      "generation": {
+        "requests": 27,
+        "prompt_tokens": 216812,
+        "completion_tokens": 38769,
+        "total_tokens": 255581,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "requests": 12,
+        "prompt_tokens": 2035,
+        "completion_tokens": 0,
+        "total_tokens": 2035,
+        "unknown_usage": 0
+      },
+      "truncated_generations": 3,
+      "provider_http_failures": 0,
+      "write_rejections": 0,
+      "finish_rejections": 0,
+      "generation_by_primary_action": {
+        "business_action": {
+          "requests": 10,
+          "prompt_tokens": 74875,
+          "completion_tokens": 9351,
+          "total_tokens": 84226,
+          "unknown_usage": 0
+        },
+        "failed_or_truncated": {
+          "requests": 3,
+          "prompt_tokens": 22006,
+          "completion_tokens": 12288,
+          "total_tokens": 34294,
+          "unknown_usage": 0
+        },
+        "memory_maintenance": {
+          "requests": 7,
+          "prompt_tokens": 57034,
+          "completion_tokens": 13871,
+          "total_tokens": 70905,
+          "unknown_usage": 0
+        },
+        "answer": {
+          "requests": 7,
+          "prompt_tokens": 62897,
+          "completion_tokens": 3259,
+          "total_tokens": 66156,
+          "unknown_usage": 0
+        }
+      },
+      "control": {
+        "request_occupancy": {
+          "numerator": 0,
+          "denominator": 27,
+          "provider_requests": 27
+        },
+        "action_occupancy": {
+          "numerator": 0,
+          "denominator": 24
+        },
+        "activation_count": 0,
+        "transition_counts": {},
+        "parsed_sidecar_counts": {
+          "work_note_replacement": 23,
+          "work_note_null": 1
+        },
+        "lifetimes": {},
+        "terminal_turns": [
+          {
+            "episode_index": 0,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 1,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 1,
+            "turn_index": 1,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 2,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 2,
+            "turn_index": 1,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 3,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          },
+          {
+            "episode_index": 4,
+            "turn_index": 0,
+            "host_status": "complete",
+            "basis_remaining": false
+          }
+        ],
+        "truncated_requests_with_dispatch": [],
+        "notification_count": 0,
+        "notification_events": [],
+        "search_requested": 0,
+        "search_origins": {},
+        "gap_eligible_requests": 0,
+        "retrieval_executed": 0,
+        "gap_retrieval_executed": 0,
+        "search_cache_hits": 0,
+        "search_events": [],
+        "independently_labelled_recheck_need": "UNKNOWN_NO_NATIVE_LABEL",
+        "segment_token_estimates": {
+          "decision_projection_tokens": 0,
+          "fixed_contract_tokens": 132100,
+          "historical_sidecar_tokens": 1441,
+          "state_fixed_instruction_tokens": 1890
+        },
+        "segment_unmeasured_requests": {
+          "decision_projection_tokens": 0,
+          "fixed_contract_tokens": 0,
+          "historical_sidecar_tokens": 0,
+          "state_fixed_instruction_tokens": 0
+        },
+        "sidecar_output_token_estimates": {
+          "work_note": 593
+        },
+        "unparseable_output_sidecar_cost_unknown_requests": 3,
+        "tokenizer_identity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "enable_thinking": true,
+          "tokenizer_path": "/cra/qwen36-35B",
+          "tokenizer_files_sha256": {
+            "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+          },
+          "capacity_policy_sha256": "b36fe39b7596a9afa59e555d2e40860b5e8a7e325f2d5520bfb8a838762022c2"
+        },
+        "interpretation": "Segment estimates are local tokenizer diagnostics; state instruction is a subset of the fixed contract. Segments need not sum to full request usage. Output fields are re-serialized for estimation. Shared reasoning, grammar overhead and counterfactual State-induced calls remain unassigned. Provider usage is the sole charged total.",
+        "truncation_positions": [
+          {
+            "generation": 1,
+            "session_id": "arc2-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 1,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 5651,
+              "total_tokens": 9747,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 2,
+            "session_id": "arc2-000:episode:0",
+            "turn_id": "message-0",
+            "request_index": 2,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 5706,
+              "total_tokens": 9802,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          },
+          {
+            "generation": 17,
+            "session_id": "arc2-000:episode:2",
+            "turn_id": "message-1",
+            "request_index": 1,
+            "basis_present": false,
+            "decision_projection_tokens": 0,
+            "usage": {
+              "prompt_tokens": 10649,
+              "total_tokens": 14745,
+              "completion_tokens": 4096,
+              "prompt_tokens_details": null
+            },
+            "output_limit": 4096,
+            "executable_json_present": false,
+            "intended_action": "UNKNOWN"
+          }
+        ],
+        "consecutive_truncation_generations": [
+          [
+            1,
+            2
+          ],
+          [
+            17
+          ]
+        ]
+      },
+      "embedding_cache_hits": 0,
+      "judge_requests": 0,
+      "decision_lifecycle_windows": {},
+      "mechanism_trace_review": {
+        "equal_nonnull_gap_set_no_ops": 0,
+        "empty_slot_clear_or_null_gap_no_ops": 0,
+        "new_observation_projection_requests": 0,
+        "distinct_decision_observation_pairs_presented": 0,
+        "responses_to_new_observation_projection": [],
+        "new_observation_response_transitions": {},
+        "gap_projection_request_counts": {},
+        "interpretation": "Presented new observations and accepted Host declarations are observable; semantic review quality is not independently labeled. Empty-slot clears are not equal nonnull-gap sets."
+      },
+      "search_calls_for_review": [],
+      "offline_interpretation": {
+        "version_change_notification": "NOT_OBSERVED",
+        "automatic_gap_retrieval": "NOT_OBSERVED",
+        "recheck_precision_recall": "NOT_ESTIMABLE_NO_NATIVE_LABEL",
+        "accepted_declarations_are_not_semantic_review_gold": true
+      }
+    }
+  ],
+  "paired_native_events": [
+    {
+      "arc_id": "arc1-000",
+      "episode_index": 0,
+      "message_index": 0,
+      "native_message_ordinal": 1,
+      "pairing_id": "arc1-000/e0/m0",
+      "message_sha256": "8b65473f34de319090805923fc5d67eaa50af050dd07bf187f8b61f2cdde05ac",
+      "native_task_id": "arc1-000-e0-plant-refund",
+      "native_task_kind": "I_note",
+      "native_dependent": false,
+      "native_plant_episode": -1,
+      "matter_key": "refund:ORD-702459",
+      "observed_event_kind": "initial_agreement",
+      "change_to_prior_public_same_matter": "irrelevant",
+      "prior_message": null,
+      "evidence_basis": "First public agreement for this order; no earlier same-order statement.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 5
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 7
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        }
+      }
+    },
+    {
+      "arc_id": "arc1-000",
+      "episode_index": 0,
+      "message_index": 1,
+      "native_message_ordinal": 2,
+      "pairing_id": "arc1-000/e0/m1",
+      "message_sha256": "2c61f9606e6005833b759fac0dd113dc084a7a50e4cb0c4721d47e2c7c52be29",
+      "native_task_id": "arc1-000-e0-plant-refund",
+      "native_task_kind": "I_note",
+      "native_dependent": false,
+      "native_plant_episode": -1,
+      "matter_key": "refund:ORD-284183",
+      "observed_event_kind": "initial_agreement",
+      "change_to_prior_public_same_matter": "irrelevant",
+      "prior_message": null,
+      "evidence_basis": "Separate customer and order from the preceding message; first statement for this matter.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        }
+      }
+    },
+    {
+      "arc_id": "arc1-000",
+      "episode_index": 1,
+      "message_index": 0,
+      "native_message_ordinal": 3,
+      "pairing_id": "arc1-000/e1/m0",
+      "message_sha256": "cd0693ab7a4b89f35bc7ddcda0831d85727b61a9d18a65251ff1bc2de26d25b8",
+      "native_task_id": "arc1-000-e1-update-refund",
+      "native_task_kind": "I_note",
+      "native_dependent": false,
+      "native_plant_episode": -1,
+      "matter_key": "refund:ORD-702459",
+      "observed_event_kind": "explicit_replacement",
+      "change_to_prior_public_same_matter": "relevant",
+      "prior_message": "arc1-000/e0/m0",
+      "evidence_basis": "Explicitly replaces the earlier agreed amount for the same order; the hold remains.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 3
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 10
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 3
+        }
+      }
+    },
+    {
+      "arc_id": "arc1-000",
+      "episode_index": 2,
+      "message_index": 0,
+      "native_message_ordinal": 4,
+      "pairing_id": "arc1-000/e2/m0",
+      "message_sha256": "31a35b22829afd067da4b1ccfdeeb7fafd772ed574de926fcff0b5e25ba7399b",
+      "native_task_id": "arc1-000-e2-probe-refund-upd",
+      "native_task_kind": "T_refund_upd",
+      "native_dependent": true,
+      "native_plant_episode": 0,
+      "matter_key": "refund:ORD-702459",
+      "observed_event_kind": "process_request",
+      "change_to_prior_public_same_matter": "relevant",
+      "prior_message": "arc1-000/e1/m0",
+      "evidence_basis": "Changes the same-order instruction from hold to process; does not restate the amount.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 3
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 3
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 2
+        }
+      }
+    },
+    {
+      "arc_id": "arc1-000",
+      "episode_index": 3,
+      "message_index": 0,
+      "native_message_ordinal": 5,
+      "pairing_id": "arc1-000/e3/m0",
+      "message_sha256": "044efc4b7fd5539aa2595306d6ff81ee194e3524aba2e9a04bd665761788836c",
+      "native_task_id": "arc1-000-e3-update-refund",
+      "native_task_kind": "I_note",
+      "native_dependent": false,
+      "native_plant_episode": -1,
+      "matter_key": "refund:ORD-284183",
+      "observed_event_kind": "explicit_replacement",
+      "change_to_prior_public_same_matter": "relevant",
+      "prior_message": "arc1-000/e0/m1",
+      "evidence_basis": "Explicitly replaces the earlier agreement for the other order, not the recently processed one.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 3
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 12
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 7
+        }
+      }
+    },
+    {
+      "arc_id": "arc1-000",
+      "episode_index": 4,
+      "message_index": 0,
+      "native_message_ordinal": 6,
+      "pairing_id": "arc1-000/e4/m0",
+      "message_sha256": "efc0c7f763fabfcd3fe96295698cf94cd43e4f5454f5870b03e3a34c1d5f3943",
+      "native_task_id": "arc1-000-e4-probe-refund-upd",
+      "native_task_kind": "T_refund_upd",
+      "native_dependent": true,
+      "native_plant_episode": 0,
+      "matter_key": "refund:ORD-284183",
+      "observed_event_kind": "process_request",
+      "change_to_prior_public_same_matter": "relevant",
+      "prior_message": "arc1-000/e3/m0",
+      "evidence_basis": "Changes that order from hold to process; the current amount must come from prior evidence.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 12
+        },
+        "A1": {
+          "native_message_delivered": false,
+          "basis_before_first_generation": null,
+          "generation_requests_in_turn": 0
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        }
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "episode_index": 0,
+      "message_index": 0,
+      "native_message_ordinal": 1,
+      "pairing_id": "arc2-000/e0/m0",
+      "message_sha256": "ef579fe7424aeb827a7631ad2d4886bc759ccf9ba57083c20ac818cc49cfd1e8",
+      "native_task_id": "arc2-000-e0-indep-addr",
+      "native_task_kind": "I_addr",
+      "native_dependent": false,
+      "native_plant_episode": -1,
+      "matter_key": "address:CUST-1002",
+      "observed_event_kind": "address_update",
+      "change_to_prior_public_same_matter": "irrelevant",
+      "prior_message": null,
+      "evidence_basis": "First public address instruction in this arc; no earlier public address claim to compare.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 5
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 2
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 8
+        }
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "episode_index": 1,
+      "message_index": 0,
+      "native_message_ordinal": 2,
+      "pairing_id": "arc2-000/e1/m0",
+      "message_sha256": "b2777454064d0aac4f98e3c2cbf20e81d4a27a7f931cc3473c8d5a28c17a2876",
+      "native_task_id": "arc2-000-e1-plant-refund",
+      "native_task_kind": "I_note",
+      "native_dependent": false,
+      "native_plant_episode": -1,
+      "matter_key": "refund:ORD-753574",
+      "observed_event_kind": "initial_agreement",
+      "change_to_prior_public_same_matter": "irrelevant",
+      "prior_message": null,
+      "evidence_basis": "First refund agreement for this order; distinct matter from the address instruction.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 6
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        }
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "episode_index": 1,
+      "message_index": 1,
+      "native_message_ordinal": 3,
+      "pairing_id": "arc2-000/e1/m1",
+      "message_sha256": "0ee28a26efb98514071a55bfa62605aa9aaa977b9c9c216c0c5ba36bd1f94873",
+      "native_task_id": "arc2-000-e1-plant-refund",
+      "native_task_kind": "I_note",
+      "native_dependent": false,
+      "native_plant_episode": -1,
+      "matter_key": "refund:ORD-467719",
+      "observed_event_kind": "initial_agreement",
+      "change_to_prior_public_same_matter": "irrelevant",
+      "prior_message": null,
+      "evidence_basis": "Second order for the same customer; distinct refund matter from the first order.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        }
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "episode_index": 2,
+      "message_index": 0,
+      "native_message_ordinal": 4,
+      "pairing_id": "arc2-000/e2/m0",
+      "message_sha256": "e3eeaf29124a5400789e5ccb2476818daf9d00431a2aeac5c52e872ae4391acb",
+      "native_task_id": "arc2-000-e2-update-refund",
+      "native_task_kind": "I_note",
+      "native_dependent": false,
+      "native_plant_episode": -1,
+      "matter_key": "refund:ORD-753574",
+      "observed_event_kind": "explicit_replacement",
+      "change_to_prior_public_same_matter": "relevant",
+      "prior_message": "arc2-000/e1/m0",
+      "evidence_basis": "Explicitly replaces the earlier agreed amount for this order; the hold remains.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 3
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 9
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 3
+        }
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "episode_index": 2,
+      "message_index": 1,
+      "native_message_ordinal": 5,
+      "pairing_id": "arc2-000/e2/m1",
+      "message_sha256": "632aa2126e0c1b6daa9fd6179a501b154354a5cca982a2e06c07f6f20ad76e77",
+      "native_task_id": "arc2-000-e2-update-refund",
+      "native_task_kind": "I_note",
+      "native_dependent": false,
+      "native_plant_episode": -1,
+      "matter_key": "refund:ORD-467719",
+      "observed_event_kind": "explicit_replacement",
+      "change_to_prior_public_same_matter": "relevant",
+      "prior_message": "arc2-000/e1/m1",
+      "evidence_basis": "Explicitly replaces the other order agreement, independently of the preceding update.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 5
+        }
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "episode_index": 3,
+      "message_index": 0,
+      "native_message_ordinal": 6,
+      "pairing_id": "arc2-000/e3/m0",
+      "message_sha256": "1a12a210f2d8b2c1ee45147ea18a6f495c98cf949a7c9f440283f6a910b173f1",
+      "native_task_id": "arc2-000-e3-probe-refund-upd",
+      "native_task_kind": "T_refund_upd",
+      "native_dependent": true,
+      "native_plant_episode": 1,
+      "matter_key": "refund:ORD-753574",
+      "observed_event_kind": "process_request",
+      "change_to_prior_public_same_matter": "relevant",
+      "prior_message": "arc2-000/e2/m0",
+      "evidence_basis": "Changes this order from hold to process; the agreed amount is not restated.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 5
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        }
+      }
+    },
+    {
+      "arc_id": "arc2-000",
+      "episode_index": 4,
+      "message_index": 0,
+      "native_message_ordinal": 7,
+      "pairing_id": "arc2-000/e4/m0",
+      "message_sha256": "bd7dc7d88839639502e83c72b4c2a28933af1c66dd906247c9b5c23a2e19e018",
+      "native_task_id": "arc2-000-e4-probe-refund-upd",
+      "native_task_kind": "T_refund_upd",
+      "native_dependent": true,
+      "native_plant_episode": 1,
+      "matter_key": "refund:ORD-467719",
+      "observed_event_kind": "process_request",
+      "change_to_prior_public_same_matter": "relevant",
+      "prior_message": "arc2-000/e2/m1",
+      "evidence_basis": "Changes the other order from hold to process; the agreed amount is not restated.",
+      "basis_recheck_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "version_notification_requirement": "UNKNOWN_NO_NATIVE_LABEL",
+      "arms": {
+        "A0": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 3
+        },
+        "A1": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 5
+        },
+        "A2": {
+          "native_message_delivered": true,
+          "basis_before_first_generation": false,
+          "generation_requests_in_turn": 4
+        }
+      }
+    }
+  ],
+  "basis_first_request_comparisons": [
+    {
+      "arc_id": "arc1-000",
+      "a1_a2_first_request_identical": true,
+      "a1_a2_first_action_identical": false,
+      "interpretation": "Identical recorded requests can yield different actions in these deployed runs despite temperature zero; differences before a gap-routed search do not identify the Attention mechanism."
+    },
+    {
+      "arc_id": "arc2-000",
+      "a1_a2_first_request_identical": true,
+      "a1_a2_first_action_identical": false,
+      "interpretation": "Identical recorded requests can yield different actions in these deployed runs despite temperature zero; differences before a gap-routed search do not identify the Attention mechanism."
+    }
+  ],
+  "continuous_v11_provider_totals": {
+    "generation_requests": 238,
+    "generation_tokens": 2453097,
+    "embedding_tokens": 14274,
+    "generation_unknown_usage": 0,
+    "embedding_unknown_usage": 0,
+    "judge_requests": 0
+  },
+  "budget": {
+    "path": "artifacts/contextual-user-memory/v11-budget.json",
+    "sha256": "47e21d12d2eec9ce25f2cc155bdea22eb81a049ddc0249afb289f7a688066ceb",
+    "bytes": 982
+  },
+  "sealed_history": {
+    "ledger": "artifacts/contextual-user-memory/v10-budget.json",
+    "sha256": "7e0c2db25823e3d15f141c84ede59b934e38bf5dd3edd41ec5bfbc37b42b0507",
+    "generation_requests": 122,
+    "generation_tokens": 1216124,
+    "embedding_tokens": 8148,
+    "modified": false,
+    "earlier_history": {
+      "ledger": "artifacts/contextual-user-memory/v9-budget.json",
+      "sha256": "8f5021ff4b7cb7d04b3fae7954d488d90ef4a3e08716f0ea97db8cebc401aed6",
+      "generation_requests": 119,
+      "generation_tokens": 966332,
+      "embedding_tokens": 4358,
+      "modified": false
+    }
+  },
+  "cost_scope": "All original E attempts, recovery, clean suffix and all six F arms. Failed, rejected and truncated requests remain charged. Development-agent/tool orchestration is not part of the benchmark provider ledger.",
+  "interpretation_limits": [
+    "Two unexposed original instances, not new task families or a generalization estimate.",
+    "No native Basis recheck labels: precision and recall are not estimated.",
+    "Local token segments do not identify shared reasoning or causal State-induced cost.",
+    "Interrupted trajectories retain unscored whole-arc status; completed prefixes do not replace full denominators."
+  ],
+  "arm_aggregates": {
+    "A0": {
+      "whole_arcs_completed": 1,
+      "planned_arcs": 2,
+      "host_completed": 12,
+      "host_attempted": 13,
+      "planned_public_turns": 13,
+      "generation": {
+        "requests": 57,
+        "prompt_tokens": 459567,
+        "completion_tokens": 93526,
+        "total_tokens": 553093
+      },
+      "embedding_tokens": 4022,
+      "truncated_generations": 9,
+      "truncated_generation_tokens": 114333,
+      "native_messages_delivered": 13,
+      "same_matter_change_messages_delivered": 8
+    },
+    "A1": {
+      "whole_arcs_completed": 1,
+      "planned_arcs": 2,
+      "host_completed": 11,
+      "host_attempted": 12,
+      "planned_public_turns": 13,
+      "generation": {
+        "requests": 71,
+        "prompt_tokens": 585500,
+        "completion_tokens": 172039,
+        "total_tokens": 757539
+      },
+      "embedding_tokens": 3840,
+      "truncated_generations": 24,
+      "truncated_generation_tokens": 301376,
+      "native_messages_delivered": 12,
+      "same_matter_change_messages_delivered": 7
+    },
+    "A2": {
+      "whole_arcs_completed": 2,
+      "planned_arcs": 2,
+      "host_completed": 13,
+      "host_attempted": 13,
+      "planned_public_turns": 13,
+      "generation": {
+        "requests": 56,
+        "prompt_tokens": 464558,
+        "completion_tokens": 98178,
+        "total_tokens": 562736
+      },
+      "embedding_tokens": 4462,
+      "truncated_generations": 6,
+      "truncated_generation_tokens": 68534,
+      "native_messages_delivered": 13,
+      "same_matter_change_messages_delivered": 8
+    }
+  },
+  "method_verdict": {
+    "ordinary_default": "RETAINED",
+    "attention_benefit": "NOT_IDENTIFIED_NO_GAP_QUERY_EXECUTED",
+    "automatic_version_notification_benefit": "NOT_OBSERVED",
+    "overall_quality_cost_improvement": "NOT_ESTABLISHED",
+    "source_scope": "All six real model trajectories used R2 mapping 2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4. Later R3 repairs have separate deterministic validation and are not a new unseen comparison.",
+    "raw_data_unchanged": true,
+    "additional_models_or_instances_run_for_interpretation": 0
+  },
+  "failure_cases": [
+    {
+      "arc_id": "arc1-000",
+      "arm": "A0",
+      "episode_index": 4,
+      "finding": "The requested refund executed successfully. Three rejected memory writes and five truncations in this final turn exhausted the turn capacity before maintenance finish. Whole-arc status stays unscored despite the successful saved-world checker."
+    },
+    {
+      "arc_id": "arc1-000",
+      "arm": "A1",
+      "episode_index": 3,
+      "finding": "The updated-amount confirmation was sent, but memory maintenance did not finish after two rejected writes and seven truncations in the turn. Episode 4 was not run."
+    },
+    {
+      "arc_id": "arc2-000",
+      "arm": "A1",
+      "episode_index": 3,
+      "finding": "Episode 2 confirmed 8654 cents but its three first-message revision attempts were rejected. The later native task used the retained 6720-cent record, refunded 6720, and finished Host/maintenance complete. The original checker expects 8654 and fails. Generic failure receipts remained visible, but the material projection dropped specific operation error reasons; the later R3 repair does not retroactively change this result."
+    }
+  ]
+}

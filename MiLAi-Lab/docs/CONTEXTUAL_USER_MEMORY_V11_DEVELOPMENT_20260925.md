@@ -1,8 +1,8 @@
-# v11 开发与受限验证记录
+# v11 开发与小规模验证记录
 
 用户已授权执行 [v11 Goal](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md) 和[详细设计](MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md)，原起草时的仅文档说明不再限制实施。A 离线诊断已完成，B–D 由同一 Sol xhigh 集成人开发；根控制器只在开发冻结后串行调用模型。v10 已关闭，旧结果、代码身份和费用保持独立。
 
-当前交付状态：固定两个新实例的六臂比较正在运行；另已确认缓存过度失效，修复与最终分析尚未完成。以下按发生顺序保留冻结、失败和诊断记录，不以早期“已实现”描述替代最终工程验收。本次 Git 发布是现有开发与证据的检查点，Goal 保持开启。
+当前交付状态：`COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`。固定六臂的 R2 比较、全部费用分析与后续 R3 工程修复完成；[最终报告](CONTEXTUAL_USER_MEMORY_V11_RESULTS_20260925.md)逐项列出效果、失败与限制。以下按发生顺序保留各阶段记录，早期“运行中”描述是历史状态；R2 真实比较与 R3 确定性验证分开，不主张机制收益。
 
 ## A：旧证据与预先选择规则
 
@@ -42,10 +42,20 @@ B–D 已完成：稀疏 Basis 合同、实际查询与缓存接线、三臂模�
 
 六个准备身份见[准备清单](../data/manifests/contextual-memory-v11-f-prepared.json)。独立于模型轨迹的[原生变化机会清单](../data/manifests/contextual-memory-v11-native-opportunities.json)记录 13 条消息中 8 次同事项变化；这些变化均跨原生 episode，不能自动算作同一个未解决 Basis 的重核机会。原题没有 Basis-needed 或版本通知必要性的标签，相应真值保持 unknown，不从 Host 自写 gap 构造 precision／recall。
 
-## 待修复：缓存过度失效
+## F 期间发现：缓存过度失效
 
-F 运行期间的只读源码核对确认两处不必要的失效：Host search 缓存键含 `recheck_reasons`，确认已经交付的通知后，即使有效 query 和材料未变，也因 reasons 清空而失配；`apply_sidecar` 又在 gap／事项／状态字段改变时无条件清缓存，即使本次显式 query 仍相同。真实版本、来源发布及删除另有材料变化标记和失效路径。该问题违反设计中的等值确认和实际查询依赖要求，是尚未修复的工程问题；尚不能声称它在真实 F 轨迹中造成了费用增加。
+F 运行期间的只读源码核对确认两处不必要的失效：Host search 缓存键含 `recheck_reasons`，确认已经交付的通知后，即使有效 query 和材料未变，也因 reasons 清空而失配；`apply_sidecar` 又在 gap／事项／状态字段改变时无条件清缓存，即使本次显式 query 仍相同。真实版本、来源发布及删除另有材料变化标记和失效路径。该问题违反设计中的等值确认和实际查询依赖要求，当时尚未修复；F 最终没有成功的 Host 主动检索或缓存命中，不能声称它在真实轨迹中增加了费用。
 
-为保留六臂一致身份，当前运行源码不在比较途中修改。后续定向修复应覆盖同值确认不重检索、显式 query 不变时无关状态变化不重检索，以及真实 query／材料变化仍失效；同时检查下层 expansion／latest_search 的依赖。修复另记身份，当前 F 结果不能冒充修复后版本的未见比较，不为此自动扩题。
+为保留六臂一致身份，运行源码没有在比较途中修改；修复先在独立工作区完成。定向检查覆盖同值确认不重检索、显式 query 不变时无关状态变化不重检索，以及真实 query／材料变化仍失效；同时核对下层 expansion／latest_search 的依赖。修复另记 R3 身份，F 结果不冒充修复后版本的未见比较，不为此扩题。
 
-本次提交仅涉及 Lab 源码、文档和紧凑清单；Product API、Schema、权限及 Canonical 行为未改，没有新增跨包依赖。维护说明修复的 48 项窄测、Ruff 和 mypy 已通过；此次状态文档更新不重复模型调用、全量测试或构建。原始世界、模型输出、运行日志和缓存继续留在 ignored artifacts。此前已发布检查点为 `27fddfc20535d87d76959247478f23823425c328`；本次发布的精确 Git 身份由提交记录和远端核对给出。
+R2 检查点提交仅涉及 Lab 源码、文档和紧凑清单；Product API、Schema、权限及 Canonical 行为未改，没有新增跨包依赖。维护说明修复的 48 项窄测、Ruff 和 mypy 已通过；状态文档更新未重复模型调用、全量测试或构建。原始世界、模型输出、运行日志和缓存继续留在 ignored artifacts。初次检查点为 `27fddfc20535d87d76959247478f23823425c328`，R2 检查点为 `22e0f22d99a777e8fdb0c56edc222ee522402794`，均已核对远端。
+
+## F 终结与 R3 修复
+
+六臂串行控制器正常终结，最后核对源码与配置均未变。R2 的 arc1 A0/A1 分别在第 4／3 集中止，A2 为 5/5；arc2 A0 为 5/5、A1 为 4/5、A2 为 5/5。A1 的失败是先前记忆更新被拒绝，随后按旧金额 6720 而非新约定 8654 退款，即使 Host／维护 complete 仍不正确。F 自动 gap 查询和版本通知均为 0，唯一一次显式搜索以非法时间参数被拒绝。保留失败、未评分轨迹、实际业务世界和费用，未追加实例或模型复核。
+
+全部 E＋F 连续费用为 238 次生成、2453097 generation tokens、14274 embedding tokens，unknown=0、Judge=0。[结果清单](../data/manifests/contextual-memory-v11-f-results.json)对 provider 原始回执、账本、冻结配置、保存世界及原生 checker 做了核对；费用包含截断、拒绝和恢复。独立原生机会表与实际消息到达配对，未用模型自写 gap 构造标签。
+
+在全部 F 终结后合入 R3 缓存修复，并补两处真实错误交付问题：非缓存 search dispatch 不等于成功检索，事件现在区分尝试与真实回执；MaterialView 原先丢掉读写错误码，搜索 ERROR 甚至被投成 NO_MATERIALS，现保留可公开错误码和失败状态，不将含内部引用的异常文本直接交付。最终只改 Host 与 MaterialView 两个运行文件，未增加语义审核、改变权限或改写 Prompt／任务。
+
+最终[修复冻结](../data/manifests/contextual-memory-v11-repair-freeze.json)的 48 文件映射为 `666344907d0ef59f171431ebc7e572b92bf68fae2378f82fc32dc8df4fff7c12`。关键新测试先在旧代码失败，最终 59 项相关测试、Ruff、mypy 通过；初始独立工作区的 14 项已包含在 59 项内。R3 模型调用为 0，不把 R2 结果当作 R3 未见验证。工程验收及有范围的结果分析完成，方法效果仍负面／不确定，ordinary 保持默认。

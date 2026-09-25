@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Any
 
@@ -39,6 +40,14 @@ class MaterialBinding:
 def serialized_material_bytes(value: Any) -> int:
     """The entire JSON material area, with references and limits included."""
     return len(json.dumps(value, ensure_ascii=False, sort_keys=True).encode())
+
+
+def _public_error(result: dict[str, Any]) -> str:
+    """Expose core diagnostic codes without leaking exact refs in exception text."""
+    error = result.get("error")
+    if isinstance(error, str) and re.fullmatch(r"[A-Z][A-Z0-9_]{0,127}", error):
+        return error
+    return "MEMORY_OPERATION_ERROR"
 
 
 def _parts(item: dict[str, Any]) -> list[tuple[int, int, str, str]]:
@@ -187,6 +196,8 @@ class MaterialView:
             value = result.get(key)
             if isinstance(value, str):
                 output[key] = value
+        if result.get("status") == "ERROR":
+            output["error"] = _public_error(result)
         known: dict[str, str] = {}
         record = result.get("record")
         if isinstance(record, dict) and record.get("kind") in {"source", "interpretation"}:
@@ -274,6 +285,9 @@ class MaterialView:
         include_sources: bool = False,
     ) -> dict[str, Any]:
         """Project one read/search response, including all serialized material bytes."""
+        if result.get("status") == "ERROR":
+            return {"view": VIEW_PROTOCOL, "status": "ERROR",
+                    "error": _public_error(result)}
         if max_bytes <= 0:
             return {"view": VIEW_PROTOCOL, "status": "INSUFFICIENT_MATERIAL_BUDGET"}
         roots = (

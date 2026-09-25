@@ -1,24 +1,21 @@
 # MiLAi Lab goals
 
-## Sparse decision-basis Goal v11.0, implementation pending small validation (2026-09-25)
+## Completed scoped sparse decision-basis Goal v11.0 (2026-09-25)
 
 [Goal v11.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md) and
 [detailed design](MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md)
-use `6722c5e` and the preserved v10 R2 evidence as the baseline. Planned work covers
+use `6722c5e` and the preserved v10 R2 evidence as the baseline. Implemented work covers
 action-sensitive sparse activation, nullable gaps, program-owned recheck notifications,
-true no-ops, compact projection and explicit-query-first gap retrieval. Preparation must
-support frozen original arcs beyond the currently hard-coded arc0-000 without disabling
-identity or native scoring checks. Complete development first, then one exposed wiring
-regression and two previously unused original MERIT arcs across Notes, Sparse Basis and
-Sparse Basis + Attention. The Basis arms share recheck behavior so their difference isolates
-automatic gap routing. Status: `IMPLEMENTED_PENDING_SMALL_VALIDATION`: the B–D runtime,
-three-arm templates and frozen-selection preparation path are frozen after 94 narrow tests,
-static checks, 15 deployed decoder probes and three fixed projection comparisons. The
-exposed-arc failure, shared maintenance wording repair and original-suffix diagnostic are
-preserved in the [development record](CONTEXTUAL_USER_MEMORY_V11_DEVELOPMENT_20260925.md).
-Two new instances are frozen and their six-arm comparison is running serially. A confirmed
-cache over-invalidation issue still needs a separately identified repair and narrow checks;
-engineering acceptance and final analysis remain open. Ordinary stays default; cumulative caps remain null.
+true no-ops, compact projection and explicit-query-first gap retrieval. The parameterized
+preparation path preserves native selection and identity checks. Six R2 trajectories on two
+fixed original instances are terminal: A2 scored 5/5 twice; arc1 A0/A1 interrupted; arc2
+Notes scored 5/5 and A1 4/5. No automatic gap search or version notification occurred;
+Notes cost less on the complete second instance. Status: `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`.
+The [results](CONTEXTUAL_USER_MEMORY_V11_RESULTS_20260925.md) distinguish those real runs
+from post-comparison R3 cache, search-metric and error-projection repairs (59 relevant tests
+and static checks passed; no further model calls). Preserve all failures and continuous
+charges: 238 generations / 2453097 generation tokens / 14274 embedding tokens,
+unknown=0, Judge=0. Ordinary stays default; no broader benchmark or method-benefit claim.
 
 ## Completed scoped decision-basis Goal v10.0 (2026-09-25)
 

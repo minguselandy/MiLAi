@@ -38,15 +38,18 @@ canonical memory state.
 
 The user explicitly authorized execution of [Goal v11.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md)
 and its [sparse-basis design](docs/MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md).
-The B–D runtime, three-arm templates and frozen-selection preparation path are implemented
-with narrow checks; status is `IMPLEMENTED_PENDING_SMALL_VALIDATION`. Root controls the
-development freeze, decoder probe, exposed-arc wiring regression and two new native arcs.
-The exposed-arc failures and original-suffix diagnostic are preserved. The fixed six-arm
-comparison is running on source mapping `2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4`;
-keep that runtime unchanged until its trajectories terminate. A confirmed cache over-invalidation
-issue remains open and requires a separate repair identity and narrow checks. Do not restart
-completed arms, substitute seeds or represent this comparison as evidence for a later repair.
-Keep ordinary default, v10 evidence sealed, native scoring unchanged, and cumulative costs continuous.
+The scoped Goal is `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`; preserve the
+[results](docs/CONTEXTUAL_USER_MEMORY_V11_RESULTS_20260925.md). All six R2 trajectories use
+mapping `2a95dcd0fde0e90a4eff053b5875d0f6d07a3ec61961fd158201c312102d1cf4`: A2 scored 5/5 on
+both instances; arc1 A0/A1 interrupted; arc2 Notes 5/5 and A1 4/5. No automatic gap query or
+version notice occurred; ordinary stays default. R3 fixes Host read-cache invalidation,
+search outcome metrics and error-code projection under mapping
+`666344907d0ef59f171431ebc7e572b92bf68fae2378f82fc32dc8df4fff7c12`, with 59 related tests and
+static checks passing, no new model calls. Do not represent R2 as R3 unseen validation.
+Keep exposed-arc failures, all F interruptions and continuous v11 charges of 238 generations /
+2453097 generation tokens / 14274 embedding tokens, unknown=0, Judge=0. Do not restart
+completed arms, substitute seeds, expand the benchmark or promote an unobserved mechanism.
+Keep ordinary default, v10 evidence sealed and native scoring unchanged.
 
 The user explicitly authorized execution of [Goal v10.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)
 and its detailed design. Planning-only wording is historical. Follow A → B–D implementation

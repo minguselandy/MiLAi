@@ -3,21 +3,22 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Current scoped work: [Sparse decision-basis Goal v11.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md)
+Latest completed scoped research: [Sparse decision-basis Goal v11.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md).
 The plan reduces state updates, separates change notifications from semantic revisions,
 and lets ordinary search consume actionable gaps while respecting explicit queries.
 It includes a frozen-selection preparation path for unseen native MERIT instances and a
-small three-arm comparison after development. Status: `IMPLEMENTED_PENDING_SMALL_VALIDATION`;
-the B–D runtime is frozen after 94 narrow tests and static checks, 15 deployed decoder
-probes and three fixed projection comparisons. The exposed-arc failure, shared maintenance
-wording repair and original-suffix diagnostic are preserved in the
-[development record](docs/CONTEXTUAL_USER_MEMORY_V11_DEVELOPMENT_20260925.md).
-Two newly selected instances are now undergoing the fixed serial three-arm comparison.
-A confirmed cache over-invalidation issue still needs repair under a separate source identity;
-engineering acceptance and final analysis remain open. Ordinary and the v10 evidence remain unchanged.
+small three-arm comparison after development. Status: `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`.
+The [results](docs/CONTEXTUAL_USER_MEMORY_V11_RESULTS_20260925.md) preserve all six R2 trajectories:
+A2 scored 5/5 on both instances; arc1 A0/A1 interrupted; arc2 Notes scored 5/5 and A1 4/5.
+No gap query or automatic version notice occurred. Notes cost less on the complete second
+instance, so no overall or Attention benefit is established. Post-comparison R3 repairs cover
+Host read-cache invalidation, search outcome metrics and error-code delivery, with 59 relevant
+tests and static checks passing. R3 has no new native comparison. All failures and continuous
+costs remain: 238 generations / 2453097 generation tokens / 14274 embedding tokens,
+unknown=0, Judge=0. Ordinary and the v10 evidence remain unchanged; no expanded benchmark.
 
-Latest completed scoped research: [Decision-basis Goal v10.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)
+Previous completed scoped research: [Decision-basis Goal v10.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v10.0_20260925.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V10_DECISION_BASIS_DESIGN_20260925.md).
 V0 keeps one current decision, pins its adopted evidence, and combines state updates
 with normal ReAct actions. [Development evidence](docs/CONTEXTUAL_USER_MEMORY_V10_DEVELOPMENT_20260925.md)

@@ -767,6 +767,31 @@ def test_dispatch_error_reaches_next_request_and_trace(mode: str) -> None:
     client.close()
 
 
+def test_real_failed_search_reason_reaches_host_receipt() -> None:
+    memory = ContextualMemory(
+        "owner", host_id="test-host", embed=lambda texts: [[1.0, 0.0] for _ in texts],
+        embedding_dimension=2,
+    )
+    memory.start_task("task", "Find address")
+    client, requests = _provider([
+        _receipt(_tool_call("search", "memory_search",
+                            '{"query":"address","known_at":"m0"}')),
+        _receipt({"role": "assistant", "content": "Done."}),
+    ])
+    result = ContextualHost(client, memory.dispatch, MEMORY_TOOLS, "Use memory.",
+                            memory=memory).run([], session=HostSession("task", memory),
+                                               max_calls=2)
+    assert result.calls[0]["ok"] is False
+    assert result.calls[0]["result"]["status"] == "ERROR"
+    assert result.calls[0]["result"]["error"] == "INVALID_KNOWN_AT"
+    delivered = json.loads(next(
+        msg["content"] for msg in requests[1]["messages"]
+        if msg.get("tool_call_id") == "search"
+    ))
+    assert delivered["result"]["error"] == "INVALID_KNOWN_AT"
+    client.close()
+
+
 @pytest.mark.parametrize("mode", ["native", "json_action"])
 def test_repeated_read_is_compact_and_write_invalidates_cache(mode: str) -> None:
     actions = ["memory_search", "memory_search", "memory_save", "memory_search"]

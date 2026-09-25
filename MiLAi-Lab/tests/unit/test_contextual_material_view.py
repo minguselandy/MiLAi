@@ -241,6 +241,11 @@ def test_preview_does_not_publish_refs_and_write_receipt_uses_same_binding_table
     superseded = view.project_write({"record": old_version})["record"]
     assert superseded["status"] == "REUSED"
     assert superseded["material"]["materials"][0]["status"] == "SUPERSEDED"
+    rejected = view.project_write({"status": "ERROR", "decision": "REJECTED",
+                                   "error": "REVISION_REQUIRES_READ_TARGET"})
+    assert rejected["error"] == "REVISION_REQUIRES_READ_TARGET"
+    unsafe = view.project_write({"status": "ERROR", "error": "hidden user/source:ref"})
+    assert unsafe["error"] == "MEMORY_OPERATION_ERROR"
 
 
 def test_ordinary_projector_recovers_recorded_time_limits() -> None:
