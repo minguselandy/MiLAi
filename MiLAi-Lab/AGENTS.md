@@ -36,20 +36,22 @@ canonical memory state.
 
 ## Required checks
 
-The user now explicitly authorized execution of [Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md)
-and its [design](docs/MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md).
-Follow A baseline before runtime edits, then B–D implementation, then E same-version
-continuous validation and local protocol comparison. Planning-only statements are historical.
-Use the two Sol xhigh work packages with single file ownership; Astra only for concrete
-semantic difficulties, Luna only for needed downloads. One model controller, concurrency 1.
-Avoid defensive scaffolding and unnecessary audits/tests. Preserve frozen v8 source/results
-and its 137-generation ledger; all new calls go into v9 accounting. Null cumulative caps,
-Lab-only changes and narrow checks remain. A baseline has run and received a narrow current-card
-semantic check; B–E remain unimplemented, so v9 is not accepted as complete. The user explicitly
-authorized Luna high to commit and push all development work to GitHub. This authorization
-supersedes the no-commit/push and Luna-download-only restrictions. Continue to use Sol for ordinary
-implementation and Astra for concrete difficult semantic issues; Git publication does not imply
-that v9 implementation or validation is complete.
+[Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md)
+completed A–E and scoped final continuous validation. Preserve its
+[results](docs/CONTEXTUAL_USER_MEMORY_V9_RESULTS_20260925.md), first failed attempt,
+final source identity and all charges: 119 generations / 966332 generation tokens /
+4358 embedding tokens, unknown=0, Judge=0. Final original MERIT 5/5 (dependent 2/2,
+7/7 Host turns) and document 4/4 use the same frozen implementation from initial states;
+local full/delta branches both completed with no new business action. Delta was cheaper
+locally, but the full continuous trajectory was more expensive than v8. Do not claim
+general reliability, State benefit or overall efficiency. Do not expand the benchmark or
+rerun merely to clear truncation counts. Keep raw model/runtime artifacts ignored.
+The user explicitly authorized Luna high to commit and push all development to GitHub;
+this supersedes old no-commit/push and Luna-download-only restrictions for publication.
+Ordinary development remains Sol xhigh; Astra xhigh only for concrete difficult issues.
+One model controller, concurrency 1, continuous accounting with null cumulative caps,
+Lab-only scope and narrow problem-driven checks remain. No Product migration or full suite.
+Documentation-only changes need no pytest, build or model calls.
 
 The user-authorized [Goal v8.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v8.0_20260925.md)
 completed A–E development and scoped, staged validation. Durable runtime/recovery, first

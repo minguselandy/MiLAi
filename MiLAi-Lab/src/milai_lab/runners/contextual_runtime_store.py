@@ -44,6 +44,7 @@ class RuntimeIdentity:
     operation_contract: str
     source_protocol: str
     actor_protocol: str
+    maintenance_protocol: str
 
     @classmethod
     def from_config(cls, owner_id: str, config: Mapping[str, Any]) -> RuntimeIdentity:
@@ -71,6 +72,7 @@ class RuntimeIdentity:
             operation_contract=OPERATION_CONTRACT_VERSION,
             source_protocol=config["source_protocol"],
             actor_protocol=config["actor_protocol"],
+            maintenance_protocol=config.get("maintenance_protocol", "turn-maintenance-v2"),
         )
 
 

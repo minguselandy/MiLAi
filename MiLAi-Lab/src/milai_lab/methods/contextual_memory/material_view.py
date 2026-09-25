@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from milai_lab.methods.contextual_user_memory import ContextualMemory
 
 
-VIEW_PROTOCOL = "contextual-material-view-v8"
+VIEW_PROTOCOL = "contextual-material-view-v9"
 
 
 def source_speaker_handle(ref: str) -> str:
@@ -310,6 +310,17 @@ class MaterialView:
                 return first_alias[ref]
             return self._bind(ref, kind_for(ref), provisional=provisional)
 
+        def project_reason_refs(value: Any) -> Any:
+            if isinstance(value, dict):
+                return {
+                    key: link(part) if key in {"basis_ref", "source_ref"}
+                    and isinstance(part, str) else project_reason_refs(part)
+                    for key, part in value.items()
+                }
+            if isinstance(value, list):
+                return [project_reason_refs(part) for part in value]
+            return value
+
         def add(item: dict[str, Any]) -> int:
             ref = item["ref"]
             kind = item["kind"]
@@ -328,7 +339,11 @@ class MaterialView:
                                provisional=provisional)
             first_alias.setdefault(ref, alias)
             row: dict[str, Any] = {"ref": alias, "kind": kind,
-                                   "status": item.get("status", "UNKNOWN")}
+                                   "status": item.get("status", "UNKNOWN"),
+                                   "body_delivery": "partial"}
+            page = item.get("page")
+            if isinstance(page, dict) and type(page.get("total_chars")) is int:
+                row["total_chars"] = page["total_chars"]
             for key in (
                 "role", "date", "session_id", "source_sequence", "author",
                 "subject", "context", "certainty", "persistence", "retired",
@@ -339,7 +354,9 @@ class MaterialView:
             ):
                 value = item.get(key)
                 if value not in (None, "", [], {}):
-                    row[key] = value
+                    row[key] = (project_reason_refs(value) if key in {
+                        "applicability_reasons", "scope_reasons",
+                    } else value)
             if kind == "source" and self.memory is not None:
                 row["retention"] = ("durable" if ref in self.memory.retained else
                                     "session" if ref in self.memory.task_sources else
@@ -414,14 +431,35 @@ class MaterialView:
                         link(source): self.memory.sources[source].role
                         for source in source_refs if source in self.memory.sources
                     }
-            dependencies = item.get("dependency_status", [])
-            if isinstance(dependencies, list) and dependencies:
+            dependencies = item.get("dependencies", [])
+            if kind == "interpretation" and isinstance(dependencies, list) and dependencies:
+                row["dependency_refs"] = [link(ref) for ref in dependencies]
+            if kind == "interpretation" and (source_refs or dependencies):
+                row["basis_relation_use"] = "existing_lineage_not_body_read"
+            change = item.get("basis_change")
+            if (kind == "interpretation" and isinstance(change, dict)
+                    and change.get("mode") == "delta"):
+                row["basis_change"] = {
+                    "mode": "delta",
+                    "target_ref": link(change["target_ref"]),
+                    "sources": {key: [link(ref) for ref in change["sources"][key]]
+                                for key in ("inherited", "added", "removed")},
+                    "dependencies": {key: [link(ref) for ref in change["dependencies"][key]]
+                                     for key in ("inherited", "added", "removed")},
+                    "reviewed_source_ranges": [
+                        {"ref": link(ref), "spans": spans}
+                        for ref, spans in change["reviewed_source_ranges"].items()
+                    ],
+                    "meaning": "version_lineage_not_independent_support",
+                }
+            dependency_status = item.get("dependency_status", [])
+            if isinstance(dependency_status, list) and dependency_status:
                 row["dependency_status"] = [
                     {"ref": link(dependency["observed_ref"]),
                      "current_ref": link(dependency["current_ref"])
                      if dependency.get("current_ref") != "UNAVAILABLE" else "UNAVAILABLE",
                      "status": dependency["status"]}
-                    for dependency in dependencies
+                    for dependency in dependency_status
                     if isinstance(dependency, dict) and "observed_ref" in dependency
                 ]
             rows.append(row)
@@ -562,6 +600,18 @@ class MaterialView:
                 old.pop("range", None)
                 old["expand_ref"] = old["ref"]
                 old["correction_status"] = "REQUIRES_EXPANSION"
+        for row in rows:
+            delivered_ranges = (
+                [row["range"]] if isinstance(row.get("range"), list)
+                and (row.get("content") or row.get("text")) else
+                [part["range"] for part in row.get("excerpts", [])]
+            )
+            if not delivered_ranges:
+                row["body_delivery"] = "link"
+            elif (type(row.get("total_chars")) is int
+                  and delivered_ranges == [[0, row["total_chars"]]]
+                  and not row.get("expand_ref")):
+                row["body_delivery"] = "full"
         delivered_speakers = {
             row["speaker_ref"] for row in rows
             if row.get("kind") == "source" and row.get("speaker_ref")

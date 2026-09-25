@@ -8,6 +8,39 @@ from typing import Any
 from milai_lab.runners.contextual_session import HostSession
 
 MAINTENANCE_PROTOCOL = "turn-maintenance-v2"
+SEMANTIC_MAINTENANCE_PROTOCOL = "turn-maintenance-v3"
+
+SEMANTIC_FINAL_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "maintenance": {
+            "type": "object",
+            "properties": {
+                "decision": {"enum": ["processed", "not_selected", "pending"]},
+                "remaining": {"type": "array", "items": {
+                    "type": "object",
+                    "properties": {"ref": {"type": "string"},
+                                   "reason": {"type": "string", "minLength": 1}},
+                    "required": ["ref", "reason"], "additionalProperties": False,
+                }},
+            },
+            "required": ["decision", "remaining"], "additionalProperties": False,
+        },
+        "answer": {"type": "string"},
+    },
+    "required": ["maintenance", "answer"], "additionalProperties": False,
+}
+
+SEMANTIC_FINISH_TOOL: dict[str, Any] = {
+    "type": "function", "function": {
+        "name": "finish_turn",
+        "description": "Finish with a concise semantic maintenance decision. processed means all "
+        "required review and persistence are actually complete; not_selected means no "
+        "durable change was selected; pending lists unfinished matters by delivered ref. "
+        "Actual writes, read ranges and business outcomes are checked by the program.",
+        "parameters": SEMANTIC_FINAL_SCHEMA,
+    },
+}
 
 REVIEW_SCHEMA: dict[str, Any] = {
     "type": "array",
@@ -49,10 +82,21 @@ FINISH_TOOL: dict[str, Any] = {
 }
 
 
-def observe(session: HostSession, ref: str, projected: dict[str, Any], role: str) -> None:
+def observe(
+    session: HostSession, ref: str, projected: dict[str, Any], role: str, *,
+    required_review_ranges: tuple[tuple[int, int], ...] = (),
+    persistence_required: bool = False,
+) -> None:
     """Register an actual new event; repeated intake does not create another obligation."""
     known = session.maintenance.setdefault("observed", [])
     if ref in known:
+        if session.maintenance.get("protocol") == SEMANTIC_MAINTENANCE_PROTOCOL:
+            item = session.maintenance.get("pending", {}).get(ref)
+            if item is not None:
+                item["required_review_ranges"] = [list(span) for span in
+                    dict.fromkeys([*(tuple(span) for span in item.get(
+                        "required_review_ranges", [])), *required_review_ranges])]
+                item["persistence_required"] |= persistence_required
         return
     known.append(ref)
     rows = projected.get("materials", [])
@@ -60,7 +104,12 @@ def observe(session: HostSession, ref: str, projected: dict[str, Any], role: str
     alias = row.get("ref", f"unavailable:{len(known)}")
     # A truncated source may contain additional changes. Acknowledge it as pending
     # until it has actually been expanded, rather than claiming to review hidden text.
-    session.maintenance.setdefault("pending", {})[ref] = {"ref": alias, "role": role}
+    pending_item: dict[str, Any] = {"ref": alias, "role": role}
+    if session.maintenance.get("protocol") == SEMANTIC_MAINTENANCE_PROTOCOL:
+        pending_item.update(required_review_ranges=[list(span) for span in required_review_ranges],
+                            persistence_required=persistence_required,
+                            turn_id=session.turn_id)
+    session.maintenance.setdefault("pending", {})[ref] = pending_item
 
 
 def committed(session: HostSession, receipt: Any, internal: dict[str, Any]) -> None:
@@ -77,7 +126,12 @@ def committed(session: HostSession, receipt: Any, internal: dict[str, Any]) -> N
     record = internal.get("record", {})
     ref = record.get("ref")
     if ref and ref in receipt.memory_changes:
-        session.maintenance.setdefault("writes", []).append(ref)
+        writes = session.maintenance.setdefault("writes", [])
+        if session.maintenance.get("protocol") == SEMANTIC_MAINTENANCE_PROTOCOL:
+            writes.append({"ref": ref, "turn_id": session.turn_id,
+                           "operation_id": receipt.operation_id})
+        else:
+            writes.append(ref)
 
 
 def pending_materials(session: HostSession) -> list[dict[str, Any]]:
@@ -197,5 +251,148 @@ def finish(session: HostSession, review: list[dict[str, Any]]) -> dict[str, Any]
         "review": review,
         "unsettled_operations": operations,
     }
+    session.maintenance["last_review"] = result
+    return result
+
+
+def _missing_ranges(
+    required: list[list[int]], delivered: set[tuple[int, int]],
+) -> list[list[int]]:
+    """Subtract actual delivered body spans from trusted required spans."""
+    missing = []
+    for start, end in required:
+        cursor = start
+        for lower, upper in sorted(delivered):
+            if upper <= cursor or lower >= end:
+                continue
+            if lower > cursor:
+                missing.append([cursor, min(lower, end)])
+            cursor = max(cursor, min(upper, end))
+            if cursor == end:
+                break
+        if cursor < end:
+            missing.append([cursor, end])
+    return missing
+
+
+def _current_durable_support(session: HostSession) -> set[str]:
+    memory = session.memory
+    assert memory is not None
+    supported: set[str] = set()
+    for handle, card in memory.workspace.cards.items():
+        if memory.details[handle].persistence == "durable" and not card.retired:
+            supported.update(card.source_refs)
+    return supported
+
+
+def semantic_frontier(
+    session: HostSession, *, business_outcomes: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Program evidence for one turn; optional unread material stays explicit."""
+    session.refresh_visibility()
+    memory = session.memory
+    assert memory is not None
+    coverage = []
+    for exact, item in session.maintenance.get("pending", {}).items():
+        delivered = memory.visible_source_ranges.get(exact, set())
+        required = item.get("required_review_ranges", [])
+        total = len(memory.sources[exact].content)
+        visible_alias = next((alias for alias, binding in reversed(list(
+            session.visible_bindings.items())) if binding.kind == "source"
+            and binding.exact_ref == exact and binding.spans), None)
+        row: dict[str, Any] = {
+            "ref": visible_alias or "undelivered", "role": item["role"],
+            "total_chars": total,
+            "delivered_ranges": [list(span) for span in sorted(delivered)],
+            "unreviewed_ranges": _missing_ranges([[0, total]], delivered),
+            "unreviewed_required_ranges": _missing_ranges(required, delivered),
+        }
+        if item.get("persistence_required"):
+            row["persistence_required"] = True
+        coverage.append(row)
+    writes = [item for item in session.maintenance.get("writes", [])
+              if isinstance(item, dict) and item.get("turn_id") == session.turn_id]
+    committed_changes = []
+    for item in writes:
+        alias = next((short for short, binding in reversed(list(
+            session.visible_bindings.items())) if binding.kind == "interpretation"
+            and binding.exact_ref == item["ref"]), None)
+        committed_changes.append({
+            "record_ref": alias,
+            "operation_id": item["operation_id"],
+            "delivery": "visible" if alias is not None else "not_delivered",
+        })
+    unsettled = session.maintenance.get("unsettled_operations", {})
+    return {
+        "protocol": SEMANTIC_MAINTENANCE_PROTOCOL,
+        "review_coverage": coverage,
+        "committed_changes": committed_changes,
+        "business_outcomes": business_outcomes or [],
+        "unsettled_operations": [
+            {"operation_id": operation_id, "completion": item["completion"],
+             "pending_count": len(item["pending"])}
+            for operation_id, item in unsettled.items()
+        ],
+    }
+
+
+def semantic_finish_tool(session: HostSession) -> dict[str, Any]:
+    tool = copy.deepcopy(SEMANTIC_FINISH_TOOL)
+    refs = [item["ref"] for item in semantic_frontier(session)["review_coverage"]
+            if item["ref"] != "undelivered"]
+    refs += [alias for alias, binding in session.visible_bindings.items()
+             if binding.kind == "interpretation"]
+    remaining = tool["function"]["parameters"]["properties"]["maintenance"][
+        "properties"]["remaining"]
+    if refs:
+        remaining["items"]["properties"]["ref"] = {"enum": list(dict.fromkeys(refs))}
+    else:
+        remaining["maxItems"] = 0
+    return tool
+
+
+def semantic_finish(
+    session: HostSession, decision: dict[str, Any], *,
+    business_outcomes: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Accept semantic selection only when actual review, writes and outcomes permit it."""
+    if session.maintenance.get("protocol") != SEMANTIC_MAINTENANCE_PROTOCOL:
+        raise ValueError("MAINTENANCE_PROTOCOL_MISMATCH")
+    frontier = semantic_frontier(session, business_outcomes=business_outcomes)
+    choice = decision["decision"]
+    remaining = decision["remaining"]
+    valid_refs = {alias for alias, binding in session.visible_bindings.items()
+                  if binding.kind in {"source", "interpretation"}}
+    if any(item["ref"] not in valid_refs or not item["reason"].strip()
+           for item in remaining):
+        raise ValueError("MAINTENANCE_REMAINING_REF_NOT_DELIVERED")
+    if choice == "not_selected" and frontier["committed_changes"]:
+        raise ValueError("MAINTENANCE_NOT_SELECTED_AFTER_COMMITTED_WRITE")
+    if choice != "pending" and remaining:
+        raise ValueError("MAINTENANCE_REMAINING_CONFLICTS_WITH_DECISION")
+    missing_review = [item["ref"] for item in frontier["review_coverage"]
+                      if item["unreviewed_required_ranges"]]
+    support = _current_durable_support(session)
+    missing_persistence = [item["ref"] for exact, item in session.maintenance.get(
+        "pending", {}).items() if item.get("persistence_required") and exact not in support]
+    if choice != "pending":
+        if missing_review:
+            raise ValueError("MAINTENANCE_REQUIRED_REVIEW_MISSING: " + ", ".join(missing_review))
+        if missing_persistence:
+            raise ValueError("MAINTENANCE_REQUIRED_PERSISTENCE_MISSING: "
+                             + ", ".join(missing_persistence))
+    operations = frontier["unsettled_operations"]
+    if choice == "pending" and not (remaining or missing_review or missing_persistence or
+                                    operations):
+        raise ValueError("MAINTENANCE_PENDING_WITHOUT_REMAINING")
+    status = "pending" if choice == "pending" or operations else "complete"
+    result = {
+        **frontier, "status": status, "semantic_decision": choice,
+        "remaining": copy.deepcopy(remaining),
+        "missing_required_review": missing_review,
+        "missing_required_persistence": missing_persistence,
+    }
+    if status == "complete":
+        session.maintenance["pending"] = {}
     session.maintenance["last_review"] = result
     return result

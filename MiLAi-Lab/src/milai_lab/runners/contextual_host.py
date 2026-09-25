@@ -31,9 +31,15 @@ from milai_lab.runners.contextual_maintenance import (
     FINAL_SCHEMA,
     FINISH_TOOL,
     MAINTENANCE_PROTOCOL,
+    SEMANTIC_FINAL_SCHEMA,
+    SEMANTIC_FINISH_TOOL,
+    SEMANTIC_MAINTENANCE_PROTOCOL,
     committed,
     finish_tool,
     pending_materials,
+    semantic_finish,
+    semantic_finish_tool,
+    semantic_frontier,
 )
 from milai_lab.runners.contextual_maintenance import (
     finish as finish_maintenance,
@@ -194,12 +200,16 @@ class ContextualHost:
     initial_context_bytes: int = field(default=0, kw_only=True)
     initial_context_limit: int = field(default=4, kw_only=True)
     maintenance_policy: Literal["off", "required"] = field(default="off", kw_only=True)
+    maintenance_protocol: str = field(default=MAINTENANCE_PROTOCOL, kw_only=True)
     runtime_store: RuntimeStore | None = field(default=None, kw_only=True)
     last_session: HostSession | None = field(default=None, init=False)
 
     def __post_init__(self) -> None:
         if self.maintenance_policy not in {"off", "required"}:
             raise ValueError("UNKNOWN_MAINTENANCE_POLICY")
+        if self.maintenance_protocol not in {MAINTENANCE_PROTOCOL,
+                                             SEMANTIC_MAINTENANCE_PROTOCOL}:
+            raise ValueError("UNKNOWN_MAINTENANCE_PROTOCOL")
         if self.maintenance_policy == "required" and self.memory is None:
             raise ValueError("MAINTENANCE_REQUIRES_MEMORY")
         if (type(self.initial_context_bytes) is not int
@@ -218,7 +228,9 @@ class ContextualHost:
                 raise ValueError("BUSINESS_TOOL_NAME_MISMATCH")
         self.tools = [*self.tools, *(tool.schema for tool in self.business_tools.values())]
         if self.maintenance_policy == "required":
-            self.tools = [*self.tools, FINISH_TOOL]
+            terminal = (SEMANTIC_FINISH_TOOL if self.maintenance_protocol ==
+                        SEMANTIC_MAINTENANCE_PROTOCOL else FINISH_TOOL)
+            self.tools = [*self.tools, terminal]
 
     def run(
         self, messages: Sequence[Mapping[str, Any]], max_calls: int | None = None,
@@ -276,7 +288,29 @@ class ContextualHost:
                 "unchanged understanding need no write."
             )
         maintenance_required = self.maintenance_policy == "required"
-        if maintenance_required:
+        semantic_maintenance = (maintenance_required and self.maintenance_protocol ==
+                                SEMANTIC_MAINTENANCE_PROTOCOL)
+        if semantic_maintenance:
+            protocol_prompt += (
+                "\nBefore finishing, use finish_turn with maintenance.decision and remaining. "
+                "processed means the new material and actual business outcomes have been "
+                "handled; not_selected means no durable change was chosen; pending names "
+                "unfinished matters by delivered ref and reason. The program checks actual "
+                "writes, source body coverage, unresolved operations and business results. "
+                "Only explicit application requirements appear in the frontier; their absence "
+                "does not mean a supported matter needs no durable memory. Session source "
+                "retention does not bar a durable interpretation. Save the first supported "
+                "commitment or decision needed later, without waiting for repetition. After a "
+                "real business result, update the same matter's status when it changes; an "
+                "earlier pending plan does not record execution. Zero-write processed is for "
+                "routine or unchanged meaning, or when a current durable record already "
+                "expresses it. A tool result or CURRENT version alone is not a durable save. "
+                "Do not claim required review or saving without the delivered body and actual "
+                "current durable record. Once evidence suffices, issue the next operation "
+                "directly instead of repeatedly restating the decision or planned call. "
+                "Finish using finish_turn as the sole tool call in its response."
+            )
+        elif maintenance_required:
             protocol_prompt += (
                 "\nBefore finishing, review every new observation listed in the maintenance "
                 "frontier. Preserve the first supported commitment/requirement for later work; "
@@ -312,6 +346,10 @@ class ContextualHost:
         session = session or HostSession(uuid4().hex, self.memory)
         if session.memory is not self.memory:
             raise ValueError("HOST_SESSION_MEMORY_MISMATCH")
+        if maintenance_required:
+            active = session.maintenance.setdefault("protocol", self.maintenance_protocol)
+            if active != self.maintenance_protocol:
+                raise ValueError("MAINTENANCE_PROTOCOL_MISMATCH")
         self.last_session = session
         if resume:
             if session.closed or session.turn_id != turn_id:
@@ -321,6 +359,13 @@ class ContextualHost:
             session.begin_turn(turn_id)
         if resume:
             self._recover_business_results(session)
+        recovered_settled_actions = (
+            [item for item in self.runtime_store.actions_for_turn(
+                session.session_id, session.turn_id)
+             if (item.get("reconciliation") or {}).get("result", item.get("result") or {}).get(
+                 "status") in {"succeeded", "failed"}]
+            if resume and self.runtime_store is not None else []
+        )
         transcript = session.transcript
         transcript[0] = {"role": "system", "content": protocol_prompt}
         if not resume:
@@ -338,7 +383,9 @@ class ContextualHost:
                     f"{session.turn_id}:input:{index}", str(message["content"]), "user",
                     "host-request", session_id=session.session_id,
                 ), retention=self.observation_retention, max_bytes=self.observation_bytes,
-                   emit=self.emit, label="Current user request")
+                   emit=self.emit, label="Current user request",
+                   required_review_ranges=((0, len(str(message["content"]))),)
+                   if message["content"] else ())
             else:
                 transcript.append(dict(message))
         delivery = session.delivery
@@ -391,6 +438,18 @@ class ContextualHost:
         last_condition_evidence: str | None = None
         no_progress = 0
 
+        def business_outcomes() -> list[dict[str, Any]]:
+            if self.runtime_store is not None:
+                return [{"call_id": item["call_id"], "name": item["name"],
+                         "status": (item.get("reconciliation") or {}).get(
+                             "result", item.get("result") or {}).get("status", "unknown")}
+                        for item in self.runtime_store.actions_for_turn(
+                            session.session_id, session.turn_id)]
+            return [{"call_id": call.get("tool_call_id"), "name": call["name"],
+                     "status": call["execution_status"]}
+                    for call in calls if call.get("name") in self.business_tools
+                    and "execution_status" in call]
+
         def persist() -> None:
             if self.runtime_store is not None:
                 assert self.memory is not None
@@ -402,13 +461,24 @@ class ContextualHost:
             persist()
             result = self._result(answer, status, calls, usage, started, transcript)
             if maintenance_required:
-                result.maintenance = {
-                    "protocol": MAINTENANCE_PROTOCOL,
-                    "status": "pending" if pending_materials(session) or
-                    session.maintenance.get("unsettled_operations") else "complete",
-                    "pending": pending_materials(session),
-                    "last_review": session.maintenance.get("last_review"),
-                }
+                if semantic_maintenance:
+                    reviewed = session.maintenance.get("last_review")
+                    if status == "complete" and reviewed and reviewed["status"] == "complete":
+                        result.maintenance = copy.deepcopy(reviewed)
+                    else:
+                        result.maintenance = {
+                            **semantic_frontier(session,
+                                                business_outcomes=business_outcomes()),
+                            "status": "pending", "last_review": reviewed,
+                        }
+                else:
+                    result.maintenance = {
+                        "protocol": MAINTENANCE_PROTOCOL,
+                        "status": "pending" if pending_materials(session) or
+                        session.maintenance.get("unsettled_operations") else "complete",
+                        "pending": pending_materials(session),
+                        "last_review": session.maintenance.get("last_review"),
+                    }
                 if status == "complete" and result.maintenance["status"] != "complete":
                     result.status = "maintenance_pending"
             return result
@@ -418,8 +488,11 @@ class ContextualHost:
             if not maintenance_required:
                 return make_result(action["answer"], "complete")
             try:
-                validate(action, FINAL_SCHEMA)
-                reviewed = finish_maintenance(session, action["memory_review"])
+                validate(action, SEMANTIC_FINAL_SCHEMA if semantic_maintenance else FINAL_SCHEMA)
+                reviewed = (semantic_finish(
+                    session, action["maintenance"], business_outcomes=business_outcomes(),
+                ) if semantic_maintenance else
+                    finish_maintenance(session, action["memory_review"]))
             except (ValueError, TypeError, ValidationError) as error:
                 no_progress += 1
                 error_text = error.message if isinstance(error, ValidationError) else str(error)
@@ -458,6 +531,66 @@ class ContextualHost:
             if name == "memory_read":
                 resolved["ref"] = resolve_ref(arguments["ref"])
             elif name == "memory_save":
+                if arguments.get("basis_mode") == "delta":
+                    target_alias = arguments["target_ref"]
+                    target_exact = resolve_ref(target_alias, body=True,
+                                               kind="interpretation", field="target_ref")
+                    target_row: dict[str, Any] | None = None
+
+                    def find_target(value: Any) -> None:
+                        nonlocal target_row
+                        if isinstance(value, dict):
+                            if (value.get("kind") == "interpretation"
+                                    and value.get("ref") == target_alias):
+                                if (target_row is None or value.get("body_delivery") == "full"):
+                                    target_row = value
+                            for part in value.values():
+                                if isinstance(part, (dict, list)):
+                                    find_target(part)
+                        elif isinstance(value, list):
+                            for part in value:
+                                find_target(part)
+
+                    for message, content, bindings in reversed(session.deliveries):
+                        if target_alias not in bindings or message.get("content") != content:
+                            continue
+                        from milai_lab.runners.contextual_runtime_store import _payload
+
+                        projected = _payload(message)
+                        if projected is not None:
+                            find_target(projected)
+                        if target_row is not None:
+                            break
+                    if (target_row is None or target_row.get("status") != "CURRENT"
+                            or target_row.get("body_delivery") != "full"):
+                        raise InvalidToolCall(
+                            "DELTA_TARGET_REQUIRES_DELIVERED_CURRENT_FULL_BODY"
+                        )
+                    assert bound_memory is not None
+                    old_target = bound_memory.read(target_exact, include_sources=False,
+                                                   _visible=False)
+                    if old_target.get("current_ref") != target_exact:
+                        raise InvalidToolCall("DELTA_TARGET_VERSION_CHANGED")
+                    for field, kind, relation in (
+                        ("source_delta", "source", "source_refs"),
+                        ("dependency_delta", "interpretation", "dependency_refs"),
+                    ):
+                        if field not in arguments:
+                            continue
+                        delta = arguments[field]
+                        for alias in delta["remove"]:
+                            if alias not in target_row.get(relation, []):
+                                raise InvalidToolCall(
+                                    f"{field}.remove={alias}: not in delivered target {relation}"
+                                )
+                        resolved[field] = {
+                            "add": [resolve_ref(alias, body=True, kind=kind,
+                                                field=f"{field}.add")
+                                    for alias in delta["add"]],
+                            "remove": [resolve_ref(alias, kind=kind,
+                                                   field=f"{field}.remove")
+                                       for alias in delta["remove"]],
+                        }
                 if "content_patch" in resolved:
                     assert bound_memory is not None and material_view is not None
                     target = resolve_ref(arguments["target_ref"], body=True,
@@ -548,6 +681,20 @@ class ContextualHost:
             except (ValueError, TypeError, ValidationError) as exc:
                 no_progress += 1
                 return rejected_tool_call(name, f"Invalid tool call: {exc}")
+            if name in self.business_tools:
+                for prior in recovered_settled_actions:
+                    prior_result = (prior.get("reconciliation") or {}).get(
+                        "result", prior.get("result") or {})
+                    if (prior["name"] == name and prior["arguments"] == dispatched_arguments
+                            and prior_result.get("status") in {"succeeded", "failed"}):
+                        no_progress += 1
+                        return {
+                            "ok": False, "error": "RECOVERED_ACTION_ALREADY_SETTLED",
+                            "prior_call_id": prior["call_id"],
+                            "prior_status": prior_result["status"],
+                            "notice": "This recovered turn already has a settled result for "
+                                      "the same action. Use that result; no action was run.",
+                        }
             if name in READ_ONLY_TOOLS and arguments.get("condition_evidence"):
                 evidence = _json(arguments["condition_evidence"], canonical=True)
                 if evidence != last_condition_evidence:
@@ -759,11 +906,16 @@ class ContextualHost:
             request_transcript = list(transcript)
             if maintenance_required:
                 request_transcript.append({"role": "user", "content":
-                    "Maintenance frontier (new observations to review before finishing): "
-                    + _json(pending_materials(session))})
+                    ("Maintenance frontier (program evidence for this turn): "
+                     + _json(semantic_frontier(
+                         session, business_outcomes=business_outcomes()))
+                     if semantic_maintenance else
+                     "Maintenance frontier (new observations to review before finishing): "
+                     + _json(pending_materials(session)))})
             if final_request:
                 final_format = (
-                    'Call finish_turn with memory_review and answer.'
+                    ('Call finish_turn with maintenance and answer.' if semantic_maintenance
+                     else 'Call finish_turn with memory_review and answer.')
                     if maintenance_required and self.client.config.tool_mode == "json_action"
                     else "Use finish_turn only."
                     if maintenance_required else
@@ -789,12 +941,14 @@ class ContextualHost:
                 if required_name is not None else None
             )
             request_tools = (
-                [FINISH_TOOL] if native and final_request and maintenance_required else
+                [SEMANTIC_FINISH_TOOL if semantic_maintenance else FINISH_TOOL]
+                if native and final_request and maintenance_required else
                 [required_tool] if required_tool is not None
                 else _subject_tools(self.tools, material_view.subject_catalogue())
                 if material_view is not None else list(self.tools)
             )
-            terminal_tool = finish_tool(session) if maintenance_required else FINISH_TOOL
+            terminal_tool = (semantic_finish_tool(session) if semantic_maintenance else
+                             finish_tool(session)) if maintenance_required else FINISH_TOOL
             if maintenance_required:
                 request_tools = [terminal_tool if tool.get("function", tool)["name"] ==
                                  "finish_turn" else tool for tool in request_tools]

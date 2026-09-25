@@ -125,6 +125,10 @@ def test_closed_bank_reopens_and_rejects_identity_or_second_writer(tmp_path: Pat
     with pytest.raises(ValueError, match="RUNTIME_IDENTITY_MISMATCH"):
         with RuntimeStore(tmp_path, replace(contract, write_contract="other-write")):
             pass
+    with pytest.raises(ValueError, match="RUNTIME_IDENTITY_MISMATCH"):
+        with RuntimeStore(tmp_path, replace(contract,
+                                           maintenance_protocol="turn-maintenance-v3")):
+            pass
 
 
 def test_action_intent_and_turn_ids_survive_restart_without_replay(tmp_path: Path) -> None:

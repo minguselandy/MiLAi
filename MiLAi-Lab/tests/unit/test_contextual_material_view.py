@@ -140,6 +140,33 @@ def test_explicit_source_read_keeps_optional_prior_unexpanded() -> None:
     assert view.binding(projected["materials"][1]["ref"]).spans == ((0, 10),)
 
 
+def test_current_target_body_and_old_basis_relations_have_distinct_delivery() -> None:
+    text = "Current outcome"
+    target = {
+        "ref": "user/card:one@2", "kind": "interpretation", "text": text,
+        "status": "CURRENT", "source_refs": ["user/source:old"],
+        "dependencies": ["user/card:premise@1"],
+        "dependency_status": [{
+            "observed_ref": "user/card:premise@1",
+            "current_ref": "user/card:premise@1", "status": "CURRENT",
+        }],
+        "page": {"start": 0, "end": len(text), "total_chars": len(text),
+                 "complete": True, "content_sha256": hashlib.sha256(text.encode()).hexdigest()},
+    }
+    view = MaterialView("target")
+    row = view.project(target)["materials"][0]
+    assert row["body_delivery"] == "full"
+    assert view.binding(row["ref"]).spans == ((0, len(text)),)
+    assert row["basis_relation_use"] == "existing_lineage_not_body_read"
+    assert view.binding(row["source_refs"][0]).spans == ()
+    assert view.binding(row["dependency_refs"][0]).spans == ()
+    assert row["dependency_status"][0]["status"] == "CURRENT"
+    partial = dict(target)
+    partial["text"] = text[:5]
+    partial["page"] = {**target["page"], "end": 5, "complete": False}
+    assert MaterialView("partial").project(partial)["materials"][0]["body_delivery"] == "partial"
+
+
 def test_partial_budget_and_alias_lifetime() -> None:
     ref = "user/source:large"
     packet = source(ref, "x" * 1000)

@@ -55,12 +55,18 @@ def accept_observation(
     retention: Retention = "session", max_bytes: int = 16000,
     emit: Emit | None = None, label: str = "Acquired observation",
     deliver: bool = True,
+    required_review_ranges: Sequence[tuple[int, int]] = (),
+    persistence_required: bool = False,
 ) -> dict[str, Any]:
     """Publish and retain under trusted policy; only transcript delivery grants visibility."""
     if session.memory is not memory or session.closed:
         raise ValueError("OBSERVATION_SESSION_MISMATCH")
     if retention not in {"session", "durable"}:
         raise ValueError("UNKNOWN_SOURCE_RETENTION")
+    if any(type(start) is not int or type(end) is not int or
+           not 0 <= start < end <= len(observation.content)
+           for start, end in required_review_ranges):
+        raise ValueError("INVALID_REQUIRED_REVIEW_RANGE")
     ref = memory.publish(observation)
     if ref not in memory.sources:
         return {"status": "SOURCE_UNAVAILABLE", "source_ref": ref, "delivered": False}
@@ -96,7 +102,9 @@ def accept_observation(
         })
     from milai_lab.runners.contextual_maintenance import observe
 
-    observe(session, ref, projected, observation.role)
+    observe(session, ref, projected, observation.role,
+            required_review_ranges=tuple(required_review_ranges),
+            persistence_required=persistence_required)
     return {"source_ref": ref, "duplicate": duplicate, "material": projected,
             "retention": retained, "delivered": deliver}
 
@@ -108,6 +116,8 @@ class TaskTurn:
     observations: tuple[Observation, ...] = ()
     conditions: dict[str, str] | None = None
     valid_at: str = ""
+    required_review_ranges: dict[str, tuple[tuple[int, int], ...]] | None = None
+    persistence_required: tuple[str, ...] = ()
 
 
 def run_task_session(
@@ -151,8 +161,16 @@ def run_task_session(
     elif session.session_id != session_id or session.memory is not memory or session.closed:
         raise ValueError("TASK_SESSION_MISMATCH")
     host.last_session = session
+    if host.maintenance_policy == "required":
+        active = session.maintenance.setdefault("protocol", host.maintenance_protocol)
+        if active != host.maintenance_protocol:
+            raise ValueError("MAINTENANCE_PROTOCOL_MISMATCH")
     results = []
     for index, turn in enumerate(turns):
+        declared = set(turn.required_review_ranges or {}) | set(turn.persistence_required)
+        observed_ids = {observation.event_id for observation in turn.observations}
+        if declared - observed_ids:
+            raise ValueError("TASK_REVIEW_REQUIREMENT_SOURCE_UNKNOWN")
         reservation = (store.reserve_turn(
             session_id, turn.turn_id, input_sha256=digest(asdict(turn)),
             memory=memory, session=session,
@@ -169,10 +187,18 @@ def run_task_session(
         if not resume:
             host.prime_session(session, turn.question)
         for observation in (() if resume else turn.observations):
+            is_request = observation.content == turn.question
+            required_ranges = (
+                ((0, len(observation.content)),) if is_request and observation.content else
+                (turn.required_review_ranges or {}).get(observation.event_id, ())
+            )
             accept_observation(memory, session, observation, retention=retention,
                                max_bytes=max_bytes, emit=host.emit,
-                               label="Current user request" if observation.content == turn.question
-                               else "Acquired observation")
+                               label="Current user request" if is_request
+                               else "Acquired observation",
+                               required_review_ranges=required_ranges,
+                               persistence_required=(observation.event_id in
+                                                     turn.persistence_required))
         # Avoid a second full copy when the current request was already delivered as a source.
         request_visible = any(
             observation.content == turn.question and any(
@@ -249,6 +275,7 @@ def task_runtime(
                 initial_context_bytes=config.get("initial_context_bytes", 0),
                 initial_context_limit=config.get("initial_context_limit", 4),
                 maintenance_policy=config.get("maintenance_policy", "off"),
+                maintenance_protocol=config.get("maintenance_protocol", "turn-maintenance-v2"),
                 runtime_store=store,
             )
             host.last_session = store.restore_session(memory) if store else None

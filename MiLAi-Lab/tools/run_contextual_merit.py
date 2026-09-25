@@ -1,4 +1,4 @@
-"""Run the pinned first MERIT D1 hard arc through the frozen v7 task runtime.
+"""Run the pinned first MERIT D1 hard arc through the selected task runtime.
 
 The external package supplies the world, tools, arc and checkers. This file only
 adapts its public messages and business results to the Lab's existing Host loop.
@@ -79,7 +79,7 @@ def prepared_inputs(
     if (
         selection["dataset"] != "MERIT"
         or selection["arc_id"] != "arc0-000"
-        or arms not in (["ordinary_v7_off"], ["ordinary_v8_off"])
+        or arms not in (["ordinary_v7_off"], ["ordinary_v8_off"], ["ordinary_v9_off"])
     ):
         raise ValueError("MERIT_SELECTION_CHANGED")
     declared_config = plan.get("config")
@@ -112,6 +112,12 @@ def prepared_inputs(
     if arms == ["ordinary_v8_off"] and config_key != "configs/contextual-memory-v8-off.json":
         raise ValueError("MERIT_ARM_CONFIG_MISMATCH")
     if arms == ["ordinary_v7_off"] and config_key != "configs/contextual-memory-v7-off.json":
+        raise ValueError("MERIT_ARM_CONFIG_MISMATCH")
+    if arms == ["ordinary_v9_off"] and (
+        not config_key.startswith("artifacts/contextual-user-memory/")
+        or config.get("config_version") != "contextual-task-v9"
+        or config.get("maintenance_protocol") != "turn-maintenance-v3"
+    ):
         raise ValueError("MERIT_ARM_CONFIG_MISMATCH")
     if (
         config["profile"] != "ordinary"

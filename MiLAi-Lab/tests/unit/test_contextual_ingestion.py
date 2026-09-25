@@ -11,7 +11,39 @@ import pytest
 from jsonschema import ValidationError, validate
 
 from milai_lab.methods.contextual_user_memory import ContextualMemory, Observation
-from milai_lab.runners.contextual_ingestion import prepare_ingestion, resolve_handles
+from milai_lab.runners.contextual_ingestion import (
+    bind_proposal_handles,
+    prepare_ingestion,
+    proposal_schema,
+    resolve_handles,
+)
+
+
+def test_ordinary_delta_handles_use_the_same_schema_and_exact_refs() -> None:
+    handles = {
+        "r0": {"kind": "record", "ref": "owner/card:current@1"},
+        "s0": {"kind": "source", "ref": "owner/source:old"},
+        "s1": {"kind": "source", "ref": "owner/source:new"},
+        "d0": {"kind": "dependency", "ref": "owner/card:premise@1"},
+    }
+    schema = proposal_schema(2)
+    bind_proposal_handles(schema, handles, "ordinary")
+    proposal = {"operations": [{
+        "op": "REVISE", "basis_mode": "delta", "target_ref": "r0",
+        "content_patch": [{"old": "waiting", "new": "done"}],
+        "source_delta": {"add": ["s1"], "remove": ["s0"]},
+        "dependency_delta": {"add": [], "remove": ["d0"]},
+    }]}
+    validate(proposal, schema)
+    resolved = resolve_handles(proposal, handles)["operations"][0]
+    assert resolved["source_delta"] == {
+        "add": ["owner/source:new"], "remove": ["owner/source:old"],
+    }
+    assert resolved["dependency_delta"]["remove"] == ["owner/card:premise@1"]
+    with pytest.raises(ValidationError):
+        validate({"operations": [{**proposal["operations"][0],
+                                  "source_delta": {"add": ["missing"], "remove": []}}]},
+                 schema)
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
 ingestion = importlib.import_module("contextual_ingestion")

@@ -29,7 +29,7 @@ from milai_lab.methods.contextual_user_memory import (
 )
 from milai_lab.providers.contextual_vllm import Emit, VLLMClient
 
-PROTOCOL_VERSION = "contextual-ingestion-handles-v29"
+PROTOCOL_VERSION = "contextual-ingestion-handles-v30"
 INGESTION_PROMPT = """Maintain reusable understanding from NEW observations in one batch proposal.
 Consider the entire batch before proposing edits. related_records and related_original_sources
 are existing background, not records to copy. Compose changed matters into one current version;
@@ -80,6 +80,9 @@ def resolve_handles(value: Any, handles: dict[str, dict[str, Any]]) -> Any:
             result[key] = ref(item)
         elif key in _SET_FIELDS:
             result[key] = [ref(handle) for handle in item]
+        elif key in {"source_delta", "dependency_delta"}:
+            result[key] = {change: [ref(handle) for handle in refs]
+                           for change, refs in item.items()}
         elif key == "items":
             items = []
             for handle in item:
@@ -105,7 +108,9 @@ def resolve_aliases(value: Any, aliases: dict[str, str]) -> Any:
     return {
         key: aliases.get(item, item) if key in _REF_FIELDS else
         [aliases.get(ref, ref) for ref in item] if key in _SET_FIELDS else
-        resolve_aliases(item, aliases) if key in {"groups", "operations", "changeset", "items"}
+        resolve_aliases(item, aliases) if key in {
+            "groups", "operations", "changeset", "items", "source_delta", "dependency_delta",
+        }
         else item
         for key, item in value.items()
     }
@@ -262,9 +267,10 @@ def proposal_schema(max_operations: int, profile: str = "ordinary") -> dict[str,
     no_change["required"].append("reason")
     for branch in branches:
         if branch["properties"]["op"]["const"] in {"CREATE", "REVISE"}:
-            branch["properties"]["source_refs"] = {
-                **copy.deepcopy(branch["properties"]["source_refs"]), "minItems": 1,
-            }
+            if "source_refs" in branch["properties"]:
+                branch["properties"]["source_refs"] = {
+                    **copy.deepcopy(branch["properties"]["source_refs"]), "minItems": 1,
+                }
             # History maintenance uses the durable default; event time is narrative scope.
             branch["properties"].pop("persistence", None)
     return {
@@ -304,6 +310,16 @@ def bind_proposal_handles(
         elif isinstance(node, dict):
             properties = node.get("properties", {})
             for name in list(properties):
+                if name in {"source_delta", "dependency_delta"}:
+                    delta_choices = sources if name == "source_delta" else dependencies
+                    for change in ("add", "remove"):
+                        field = copy.deepcopy(properties[name]["properties"][change])
+                        if delta_choices:
+                            field["items"] = {"type": "string", "enum": delta_choices}
+                        else:
+                            field["maxItems"] = 0
+                        properties[name]["properties"][change] = field
+                    continue
                 if name not in domains:
                     continue
                 # Core schemas intentionally share reference-set definitions.
@@ -574,15 +590,19 @@ def prepare_ingestion(
         "content, op=REVISE with a delivered target_ref and either an exact local "
         "content_patch or full replacement content, "
         "or op=NO_CHANGE with reason=NO_NEW_MAINTAINABLE_FACT or ALREADY_COVERED. "
-        "CREATE and REVISE require an explicit full source_refs ARRAY of delivered sN "
+        "CREATE and full REVISE require an explicit full source_refs ARRAY of delivered sN "
         "observations and an about_ref: u0 only when a trusted owner binding was delivered, "
         "a delivered actor or source "
         "speaker handle, or unknown when subject identity is unresolved. A speaker anchor "
         "must have its sN source in source_refs. Author identifies who recorded an "
         "interpretation; it does not identify the person the claim is about. "
-        "REVISE also requires the complete dependencies ARRAY of independently needed "
+        "Full REVISE also requires the complete dependencies ARRAY of independently needed "
         "interpretation premises, using delivered rN or dN handles; [] explicitly clears "
         "old dependencies. The target's own prior version is history, not a premise. "
+        "For local text changes on a fully delivered exact target, choose basis_mode=delta "
+        "with content_patch and source_delta add/remove; optional dependency_delta does "
+        "the same for premises. Inherited old relationships are not a claim of rereading. "
+        "Use full REVISE for metadata or global meaning changes. "
         "Source_refs link interpretations to observations; never join handles into one "
         "string, invent refs, or refer to not-yet-created records. "
         "Compare earlier and later expressions about the same subject and matter using "

@@ -3,17 +3,20 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Next planned work: [Maintenance contract Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md)
-and [refactor design](docs/MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md).
-The plan reduces repeated maintenance reporting, distinguishes partial review from persistence
-selection, and proposes explicit incremental evidence updates. It starts with a continuous
-v8 baseline and requires a separate final-version run. The A baseline is complete: the original
-MERIT episodes scored 5/5 with dependent 2/2, and all four document rounds completed. A narrow
-current-card check passed. The generated document intentionally retains unverified placeholders
-for change and limitation facts. B–E are unimplemented, so this is not v9 acceptance. At planning
-start, local HEAD and remote main matched `b64fc4c`.
+Latest completed work: [Maintenance contract Goal v9.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md),
+[design](docs/MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md),
+[results](docs/CONTEXTUAL_USER_MEMORY_V9_RESULTS_20260925.md), and
+[local reproduction](docs/CONTEXTUAL_USER_MEMORY_V9_REPRODUCE.md).
+Semantic maintenance v3, truthful partial review, shared material visibility, explicit delta
+basis updates and same-turn recovery are implemented. One final frozen version continuously
+completed the original MERIT 5/5 (dependent 2/2, all 7 Host turns) and four document rounds.
+The local full/delta comparison completed without another business action; delta was cheaper
+in that comparison, but the full continuous run cost more than the v8 baseline.
+All failures and charges remain: 119 generations / 966332 generation tokens / 4358 embedding
+tokens, unknown=0, Judge=0. No broader benchmark, full suite or Product change; general
+reliability and State benefit remain unproven.
 
-Latest completed work: [Usable continuous memory Goal v8.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v8.0_20260925.md).
+Previous completed work: [Usable continuous memory Goal v8.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v8.0_20260925.md).
 First writes, current-record revisions, post-action maintenance, durable runtime/recovery,
 explicit source delivery and incomplete-run preservation are implemented. A real document
 sequence and the same exposed MERIT arc passed scoped criteria after preserved repairs;

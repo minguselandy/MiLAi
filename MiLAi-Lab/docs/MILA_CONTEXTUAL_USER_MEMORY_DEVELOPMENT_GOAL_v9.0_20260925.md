@@ -2,7 +2,7 @@
 goal_id: MILAI-MAINTENANCE-CONTRACT-SIMPLIFICATION-01
 version: v9.0
 date: 2026-09-25
-status: ACTIVE_DEVELOPMENT
+status: COMPLETE_SCOPED_VALIDATION_NO_OVERALL_COST_BENEFIT
 delivery: implementation_and_continuous_validation
 baseline_commit: b64fc4c9b70c3a8a48cfd770a4b7eaa437f12162
 baseline_implementation_commit: 290f8354bfe2ee45fcfa0c919049387e775cfd26
@@ -17,7 +17,7 @@ verification_count_cap: null
 
 **目标：保留已经实际运行的创建、修订、业务执行与持久恢复闭环，让 Host 主要表达语义变化，由程序提供实际交付、提交与执行事实；在同一最终版本上完成现有小场景的连续验证。**
 
-原始规划稿撰写时，工作包尚未执行。当前更新：A 连续基线现已运行，MERIT 原 5 episodes / 7 messages 为 native 5/5、dependent 2/2，所有 Host runs complete；文档四轮均 complete。v9 总账为 34 generations / 249148 generation tokens / 2205 embedding tokens，unknown=0。当前卡窄核对通过：三张退款卡分别对应已成功退款的 ORD-197802（1774 cents）、ORD-470977（6595 cents）、ORD-964912（16100 cents），未见冲突旧待办；文档终态只有 `card:1@2`，没有重复完成卡；文档原文及概览/变更/限制均保留，变更与限制两节故意保留待核实占位。B–E 尚未实施，因此这些结果不是 v9 完成验收。具体合同见[改造设计](MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md)。v8 的关闭状态、历史失败、费用与源代码身份保持不变。
+A–E 已完成。A 先以未修改的已提交 v8 完成连续基线；B–D 合同及必要窄检查随后接通；E 首次失败保留，修复后同一冻结源码／配置从原始初态完成原生 5/5（dependent 2/2、7/7 Host complete）和文档 4/4。局部完整／增量依据两分支均完成且没有重复业务；增量该次更省，但最终整条连续运行的成本高于旧基线，不能认领整体优化。v9 连续总账为 119 generations／966332 generation tokens／4358 embedding tokens，unknown=0、Judge=0。详见[最终结果与限制](CONTEXTUAL_USER_MEMORY_V9_RESULTS_20260925.md)及[复现说明](CONTEXTUAL_USER_MEMORY_V9_REPRODUCE.md)。v8 的关闭状态、历史失败、费用与源码身份保持不变。下文保留本轮执行合同，具体实现说明见[改造设计](MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md)。
 
 ## 1. 基线与已确认问题
 
@@ -44,7 +44,7 @@ verification_count_cap: null
 - 程序证明提交事实，Host 判断语义是否充分；不能通过自动标记所有来源“已理解”来减少拒绝。
 - 累计请求、tokens、验证次数不硬停止，持续记录失败与未知用量；单工作流容量继续有效。
 - 先完成各项开发再进行改造版本的模型验证。工作包 A 是对已交付 v8 的既有小场景基线核验，不是开发前另开 benchmark 搜索。
-- 本次不进行 Product 迁移、数据集修改、全量测试、全量 benchmark、提交或推送。
+- 本次不进行 Product 迁移、数据集修改、全量测试或全量 benchmark。用户后续已授权全部开发提交与推送，由 Luna 执行 Git 发布。
 
 ## 3. 工作包与执行顺序
 
@@ -168,9 +168,9 @@ MERIT 固定 `arc0-000`，上游 `293933d96b1d1849e1f20d1bb324def5de9ed33f`；�
 | 效率 | 同条件下公开调用、输入／输出与错误差异；无收益可以如实结项，不认领优化成功 |
 | 交接 | 提交身份、配置、原题准备、制品位置和限制明确，历史证据不覆盖 |
 
-当前状态：**A 基线运行及窄卡片语义核对完成；B–E 未实施。**v9 尚未完成验收。不能沿用 v8 的分阶段结果作为 v9 验收。
+当前状态：**A–E 已完成限定验收；整体成本收益未成立。**最终 44 文件源码映射为 `9854a237f583563618c45ffb59e589484f6c4dea74a8393a1b5c41aa0ce7a0b8`。首次 v9 失败与费用保留，最终两条完整轨迹及局部对照均使用同一源码／配置。没有沿用 v8 的分阶段结果作为 v9 验收。
 
 
-## 执行启动
+## 执行启动记录（历史）
 
 用户已明确授权执行本 Goal，原规划交付状态保留为历史记录。先执行 A：保持已提交 v8 运行源码和方法参数，独立 v9 账本连续记录 MERIT 与文档原场景；基线结束前不修改运行代码。随后由两个 Sol xhigh 工作包负责终结／恢复与材料／增量写入，单一入口调度模型。

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Literal
 
@@ -19,6 +21,7 @@ from milai_lab.runners.contextual_agent_tasks import (
     task_runtime,
 )
 from milai_lab.runners.contextual_host import ContextualHost
+from milai_lab.runners.contextual_maintenance import SEMANTIC_MAINTENANCE_PROTOCOL
 from milai_lab.runners.contextual_runtime_store import RuntimeIdentity, RuntimeStore
 from milai_lab.runners.contextual_session import HostSession
 
@@ -27,7 +30,7 @@ def embed(texts: list[str]) -> list[list[float]]:
     return [[1.0, 0.0] for _ in texts]
 
 
-def identity() -> RuntimeIdentity:
+def identity(maintenance_protocol: str = "turn-maintenance-v2") -> RuntimeIdentity:
     return RuntimeIdentity.from_config(
         "owner",
         {
@@ -42,6 +45,7 @@ def identity() -> RuntimeIdentity:
             "state_policy": "off",
             "source_protocol": "publish-retain-project-v1",
             "actor_protocol": "trusted-actor-v1",
+            "maintenance_protocol": maintenance_protocol,
         },
     )
 
@@ -243,6 +247,180 @@ def test_settled_business_result_recovers_after_intake_crash_without_reexecution
             )
 
 
+def test_resume_rejects_same_settled_business_action_without_new_intent(
+    tmp_path: Path, monkeypatch: Any,
+) -> None:
+    contract = identity()
+    turn = TaskTurn("turn-1", "Do item A")
+    executed: list[str] = []
+    with RuntimeStore(tmp_path, contract) as store:
+        memory = bank(contract)
+        with client_with([tool_message()], []) as client:
+            host = host_with(memory, store, client, executed)
+
+            def crash_after_execution(*_: Any) -> Observation:
+                raise RuntimeError("intake interrupted")
+
+            monkeypatch.setattr(host, "_business_observation", crash_after_execution)
+            with pytest.raises(RuntimeError, match="intake interrupted"):
+                run_task_session([turn], memory=memory, host=host,
+                                 session_id="session-1", close=False)
+    assert len(executed) == 1
+    with RuntimeStore(tmp_path, contract) as store:
+        memory = store.restore_memory(embed)
+        assert memory is not None
+        session = store.restore_session(memory)
+        assert session is not None
+        with client_with([tool_message(), {"role": "assistant", "content": "Done."}], []) as client:
+            host = host_with(memory, store, client, executed)
+            _, results = run_task_session([turn], memory=memory, host=host,
+                                          session_id="session-1", session=session,
+                                          close=False)
+        assert results[0].status == "complete"
+        assert len(executed) == 1
+        assert len(store.actions_for_turn("session-1", "turn-1")) == 1
+        assert any(call.get("error") == "RECOVERED_ACTION_ALREADY_SETTLED"
+                   for call in results[0].calls)
+        assert any(call.get("prior_status") == "succeeded"
+                   for call in results[0].calls)
+
+
+def test_v3_raw_business_result_recovers_in_new_process_and_finishes(tmp_path: Path) -> None:
+    state = tmp_path / "state"
+    counter = tmp_path / "executions.txt"
+    first = tmp_path / "first.json"
+    second = tmp_path / "second.json"
+    events = tmp_path / "events.jsonl"
+    for phase, output in (("first", first), ("resume", second)):
+        process = subprocess.run(  # noqa: S603 - fixed interpreter and local test paths
+            [sys.executable, str(Path(__file__).resolve()), phase, str(state), str(counter),
+             str(output), str(events)],
+            capture_output=True, text=True, check=False,
+        )
+        assert process.returncode == 0, process.stderr
+    assert len(counter.read_text().splitlines()) == 1
+    initial = json.loads(first.read_text())
+    resumed = json.loads(second.read_text())
+    assert initial["journal_status"] == "succeeded"
+    assert resumed["status"] == "complete"
+    assert resumed["maintenance"]["protocol"] == SEMANTIC_MAINTENANCE_PROTOCOL
+    assert resumed["maintenance"]["semantic_decision"] == "processed"
+    assert resumed["maintenance"]["status"] == "complete"
+    assert resumed["journal_count"] == 1
+    assert resumed["business_calls"][0]["error"] == "RECOVERED_ACTION_ALREADY_SETTLED"
+    assert resumed["business_calls"][0]["prior_call_id"] == initial["call_id"]
+    assert resumed["memory_save_ok"] and resumed["session_closed"]
+    assert json.loads((state / "state.json").read_text())["session"] is None
+    trace = [json.loads(line) for line in events.read_text().splitlines()]
+    coverage_refs = {item["ref"] for item in resumed["maintenance"]["review_coverage"]}
+    assert any(event.get("event") == "observation_received"
+               and event.get("source_ref") == resumed["source_ref"]
+               and any(row.get("ref") in coverage_refs
+                       for row in event["materials"].get("materials", []))
+               for event in trace)
+    record_alias = resumed["maintenance"]["committed_changes"][0]["record_ref"]
+    assert any(event.get("event") == "material_visible"
+               and event["bindings"].get(record_alias, {}).get("exact_ref")
+               == resumed["record_ref"] for event in trace)
+
+
+def _v3_subprocess_stage(
+    phase: str, state_path: Path, counter_path: Path, output_path: Path, events_path: Path,
+) -> None:
+    from milai_lab.runners.contextual import memory_tools
+
+    contract = identity(SEMANTIC_MAINTENANCE_PROTOCOL)
+    turn = TaskTurn("turn-1", "Do item A")
+
+    def emit(event: dict[str, Any]) -> None:
+        with events_path.open("a") as stream:
+            stream.write(json.dumps(event) + "\n")
+
+    def execute(args: dict[str, Any], call_id: str) -> BusinessToolResult:
+        with counter_path.open("a") as stream:
+            stream.write(call_id + "\n")
+        return BusinessToolResult(call_id, "succeeded", {"item": args["item"], "done": True})
+
+    responses = 0
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        nonlocal responses
+        if phase == "first" or responses == 0:
+            message = tool_message()
+        elif responses == 1:
+            wire = json.loads(request.content)
+            recovered = next(item["content"] for item in wire["messages"]
+                             if item.get("content", "").startswith("Recovered business result:"))
+            projected = json.loads(recovered.split(": ", 1)[1])["result"]
+            source_alias = next(item["ref"] for item in projected["materials"]
+                                if item["kind"] == "source")
+            message = tool_message("memory_save")
+            message["tool_calls"][0]["function"]["arguments"] = json.dumps({
+                "op": "CREATE", "content": "Item A completed", "about_ref": "unknown",
+                "source_refs": [source_alias], "certainty": "explicit",
+            })
+        else:
+            message = tool_message("finish_turn")
+            message["tool_calls"][0]["function"]["arguments"] = json.dumps({
+                "answer": "Done", "maintenance": {"decision": "processed", "remaining": []},
+            })
+        responses += 1
+        return httpx.Response(200, json=response(message))
+
+    with RuntimeStore(state_path, contract) as store:
+        if phase == "first":
+            memory, session = bank(contract), None
+        else:
+            memory = store.restore_memory(embed)
+            assert memory is not None
+            session = store.restore_session(memory)
+            assert session is not None
+        with VLLMClient(VLLMConfig("http://fixture/v1", "fixture", max_calls=3,
+                                   tool_mode="native"),
+                        transport=httpx.MockTransport(respond)) as client:
+            host = ContextualHost(
+                client, memory.dispatch, memory_tools("ordinary"), "Work", memory=memory,
+                business_tools={"do_work": BusinessTool(SCHEMA, execute)},
+                runtime_store=store, maintenance_policy="required",
+                maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL, emit=emit,
+            )
+            if phase == "first":
+                def crash_after_raw_result(*_: Any) -> Observation:
+                    raise RuntimeError("after raw result persist")
+
+                host._business_observation = crash_after_raw_result  # type: ignore[method-assign]
+                try:
+                    run_task_session([turn], memory=memory, host=host,
+                                     session_id="session-1", close=False)
+                except RuntimeError as error:
+                    assert str(error) == "after raw result persist"
+                else:
+                    raise AssertionError("raw result crash did not occur")
+                journal = store.actions_for_turn("session-1", "turn-1")
+                output_path.write_text(json.dumps({
+                    "call_id": journal[0]["call_id"],
+                    "journal_status": journal[0]["result"]["status"],
+                }))
+            else:
+                assert session is not None
+                session, results = run_task_session(
+                    [turn], memory=memory, host=host, session_id="session-1", session=session,
+                )
+                current = next(iter(memory.workspace.cards.values()))
+                result = results[0]
+                output_path.write_text(json.dumps({
+                    "status": result.status, "maintenance": result.maintenance,
+                    "business_calls": [call for call in result.calls
+                                       if call.get("name") == "do_work"],
+                    "memory_save_ok": any(call.get("name") == "memory_save" and call["ok"]
+                                          for call in result.calls),
+                    "journal_count": len(store.actions_for_turn("session-1", "turn-1")),
+                    "session_closed": session.closed,
+                    "source_ref": current.source_refs[0],
+                    "record_ref": memory._ref(current),
+                }))
+
+
 def test_unknown_business_result_blocks_same_action_in_later_turn(tmp_path: Path) -> None:
     contract = identity()
     memory = bank(contract)
@@ -372,3 +550,7 @@ def test_runtime_exit_keeps_primary_error_when_persistence_also_fails(
                           state_path=tmp_path / "state", business_tools={}):
             raise RuntimeError("primary failed")
     assert any("persist failed" in note for note in caught.value.__notes__)
+
+
+if __name__ == "__main__":
+    _v3_subprocess_stage(sys.argv[1], *(Path(value) for value in sys.argv[2:6]))

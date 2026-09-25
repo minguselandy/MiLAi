@@ -10,7 +10,7 @@ from datetime import date
 from itertools import pairwise
 from typing import Any
 
-WRITE_CONTRACT_VERSION = "contextual-write-contract-v12"
+WRITE_CONTRACT_VERSION = "contextual-write-contract-v13"
 
 WRITE_RULES = (
     "Memory can preserve personal information, ongoing work matters and observed lessons. "
@@ -26,8 +26,11 @@ WRITE_RULES = (
     "new matter. REVISE only when subject and matter match a delivered exact version; "
     "prefer content_patch with exact old/new fragments for a local correction, so unchanged "
     "prose and complete lists remain intact; use full content when reorganization is needed. "
-    "Replace source_refs and independent dependencies in full, retaining sources "
-    "for old facts that still appear. Preserve operational names, labels, identifiers, units and "
+    "Full REVISE replaces source_refs and independent dependencies in full. For a local "
+    "change to a fully delivered exact target, basis_mode=delta uses content_patch and "
+    "source_delta/dependency_delta add/remove; old relationships are inherited without "
+    "claiming their bodies were reread. Use full REVISE for metadata or global meaning changes. "
+    "Preserve operational names, labels, identifiers, units and "
     "required literal text in their original language. Enumerated requirements must remain "
     "complete: a replacement includes the stated new item and every unaffected item. "
     "Compose the record in the source language unless translation is explicitly requested. "
@@ -82,6 +85,29 @@ def apply_content_patch(
     return "".join([*parts, text[cursor:]])
 
 
+def normalize_basis_delta(
+    old_refs: Sequence[str], delta: Mapping[str, Sequence[str]], *, kind: str,
+) -> tuple[list[str], dict[str, list[str]]]:
+    """Apply a relationship change to an exact version, retaining stable old order."""
+    if not isinstance(delta, Mapping) or set(delta) != {"add", "remove"} or any(
+        not isinstance(delta[key], list) or any(not isinstance(ref, str) for ref in delta[key])
+        for key in ("add", "remove")
+    ):
+        raise ValueError(f"INVALID_{kind.upper()}_DELTA")
+    old = list(dict.fromkeys(old_refs))
+    added = list(dict.fromkeys(delta["add"]))
+    removed = list(dict.fromkeys(delta["remove"]))
+    if set(added) & set(removed):
+        raise ValueError(f"{kind.upper()}_DELTA_OVERLAP")
+    if not set(removed) <= set(old):
+        raise ValueError(f"{kind.upper()}_DELTA_REMOVE_NOT_IN_TARGET")
+    actual_add = [ref for ref in added if ref not in old]
+    inherited = [ref for ref in old if ref not in removed]
+    return [*inherited, *actual_add], {
+        "inherited": inherited, "added": actual_add, "removed": removed,
+    }
+
+
 @dataclass(frozen=True)
 class ConditionDefinition:
     meaning: str
@@ -132,18 +158,31 @@ def validate_changeset_fields(changeset: dict[str, Any]) -> None:
 def ordinary_save_schema(parameters: dict[str, Any]) -> dict[str, Any]:
     """Select target and evidence before composing a replacement in ordered decoding."""
     branches = []
+    delta_fields = {"basis_mode", "source_delta", "dependency_delta"}
+    delta = deepcopy(parameters)
+    delta["properties"] = {
+        "op": {"const": "REVISE"},
+        "basis_mode": {"const": "delta"},
+        "target_ref": delta["properties"]["target_ref"],
+        "content_patch": delta["properties"]["content_patch"],
+        "source_delta": delta["properties"]["source_delta"],
+        "dependency_delta": delta["properties"]["dependency_delta"],
+    }
+    delta["required"] = ["op", "basis_mode", "target_ref", "content_patch", "source_delta"]
+    branches.append(delta)
     for op, required, allowed, leading in (
         ("CREATE", ["op", "about_ref", "source_refs", "certainty", "content"],
-         set(parameters["properties"]) - {"source_ref", "target_ref", "content_patch"},
+         set(parameters["properties"])
+         - {"source_ref", "target_ref", "content_patch"} - delta_fields,
          ("about_ref", "source_refs", "certainty", "content")),
         ("REVISE", ["op", "target_ref", "about_ref", "source_refs", "dependencies",
                     "certainty", "content_patch"],
-         set(parameters["properties"]) - {"source_ref", "content"},
+         set(parameters["properties"]) - {"source_ref", "content"} - delta_fields,
          ("target_ref", "about_ref", "source_refs", "dependencies", "certainty",
           "content_patch")),
         ("REVISE", ["op", "target_ref", "about_ref", "source_refs", "dependencies",
                     "certainty", "content"],
-         set(parameters["properties"]) - {"source_ref", "content_patch"},
+         set(parameters["properties"]) - {"source_ref", "content_patch"} - delta_fields,
          ("target_ref", "about_ref", "source_refs", "dependencies", "certainty", "content")),
         ("RETAIN_SOURCE", ["op", "source_ref"], {"op", "source_ref", "persistence"},
          ("source_ref",)),

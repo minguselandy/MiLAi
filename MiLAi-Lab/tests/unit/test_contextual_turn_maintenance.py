@@ -18,7 +18,14 @@ from milai_lab.runners.contextual_agent_tasks import (
     run_task_session,
 )
 from milai_lab.runners.contextual_host import ContextualHost
-from milai_lab.runners.contextual_maintenance import committed, finish, pending_materials
+from milai_lab.runners.contextual_maintenance import (
+    SEMANTIC_MAINTENANCE_PROTOCOL,
+    committed,
+    finish,
+    pending_materials,
+    semantic_finish,
+    semantic_frontier,
+)
 from milai_lab.runners.contextual_session import HostSession
 
 
@@ -335,3 +342,142 @@ def test_prefetch_cache_hit_restores_only_delivered_visibility_under_tiny_budget
         for binding in session.visible_bindings.values()
         if binding.kind == "source" and binding.spans
     }
+
+
+def test_semantic_maintenance_checks_trusted_ranges_and_actual_durable_support() -> None:
+    memory = bank()
+    session = HostSession("session", memory)
+    session.maintenance["protocol"] = SEMANTIC_MAINTENANCE_PROTOCOL
+    session.begin_turn("one")
+    source = accept_observation(
+        memory, session, Observation("requirement", "Keep this requirement", "user", "fixture"),
+        required_review_ranges=((0, 21),), persistence_required=True,
+    )["source_ref"]
+    alias = session.maintenance["pending"][source]["ref"]
+    session.transcript.pop()
+    session.refresh_visibility()
+    with pytest.raises(ValueError, match="REQUIRED_REVIEW_MISSING"):
+        semantic_finish(session, {"decision": "processed", "remaining": []})
+    memory.read(source, include_sources=False, _visible=False)
+    assert semantic_frontier(session)["review_coverage"][0][
+        "unreviewed_required_ranges"] == [[0, 21]]
+    view = session.material_view
+    assert view is not None
+    session.append_material(view.project(memory.read(source, include_sources=False,
+                                                      _visible=False), max_bytes=4000))
+    with pytest.raises(ValueError, match="REQUIRED_PERSISTENCE_MISSING"):
+        semantic_finish(session, {"decision": "processed", "remaining": []})
+    created = memory.save(op="CREATE", content="Keep this requirement", about_ref="unresolved",
+                          source_refs=[source], certainty="explicit")
+    committed(session, receipt_outcome("memory_save", created), created)
+    assert semantic_frontier(session)["committed_changes"][0]["delivery"] == "not_delivered"
+    with pytest.raises(ValueError, match="NOT_SELECTED_AFTER_COMMITTED_WRITE"):
+        semantic_finish(session, {"decision": "not_selected", "remaining": []})
+    current = memory.workspace.cards[memory._handle(created["record"]["ref"])]
+    current.retired = True
+    with pytest.raises(ValueError, match="REQUIRED_PERSISTENCE_MISSING"):
+        semantic_finish(session, {"decision": "processed", "remaining": []})
+    current.retired = False
+    result = semantic_finish(session, {"decision": "processed", "remaining": []})
+    assert result["status"] == "complete"
+    session.begin_turn("two")
+    assert semantic_frontier(session)["committed_changes"] == []
+    assert alias not in {item["ref"] for item in semantic_frontier(session)["review_coverage"]}
+
+
+def test_semantic_maintenance_optional_partial_is_reported_without_full_review_claim() -> None:
+    memory = bank()
+    session = HostSession("session", memory)
+    session.maintenance["protocol"] = SEMANTIC_MAINTENANCE_PROTOCOL
+    session.begin_turn("one")
+    acquired = accept_observation(memory, session, Observation(
+        "tool", "abcdef", "tool", "fixture"), deliver=False,
+    )
+    source = acquired["source_ref"]
+    view = session.material_view
+    assert view is not None
+    partial = view.project(memory.read(source, start=0, length=3,
+                                       include_sources=False, _visible=False), max_bytes=1200)
+    session.append_material(partial)
+    frontier = semantic_frontier(session)
+    assert "persistence_required" not in frontier["review_coverage"][0]
+    assert frontier["review_coverage"][0]["unreviewed_required_ranges"] == []
+    assert frontier["review_coverage"][0]["delivered_ranges"] == [
+        [0, 3]]
+    assert frontier["review_coverage"][0]["unreviewed_ranges"] == [[3, 6]]
+    assert semantic_finish(session, {"decision": "not_selected", "remaining": []})[
+        "status"] == "complete"
+    optional = HostSession("session-optional", memory)
+    optional.maintenance["protocol"] = SEMANTIC_MAINTENANCE_PROTOCOL
+    optional.begin_turn("two")
+    accept_observation(memory, optional, Observation(
+        "unseen", "optional context", "tool", "fixture"), deliver=False)
+    unseen = semantic_frontier(optional)
+    assert unseen["committed_changes"] == []
+    assert unseen["review_coverage"][0]["ref"] == "undelivered"
+    assert unseen["review_coverage"][0]["unreviewed_ranges"] == [
+        [0, len("optional context")]]
+    assert semantic_finish(optional, {"decision": "processed", "remaining": []})[
+        "status"] == "complete"
+
+
+def test_semantic_finish_tool_uses_short_receipt_and_program_frontier() -> None:
+    memory = bank()
+    requests: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(json.loads(request.content))
+        action = {"tool": "finish_turn", "arguments": {
+            "maintenance": {"decision": "not_selected", "remaining": []}, "answer": "Done",
+        }}
+        return httpx.Response(200, json={
+            "choices": [{"message": {"role": "assistant", "content": json.dumps(action)}}],
+            "usage": {"prompt_tokens": 1, "completion_tokens": 1, "total_tokens": 2},
+        })
+
+    with VLLMClient(VLLMConfig("http://fixture/v1", "host", max_calls=1),
+                    transport=httpx.MockTransport(respond)) as client:
+        host = ContextualHost(
+            client, memory.dispatch, memory_tools("ordinary"), "Work", memory=memory,
+            maintenance_policy="required", maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL,
+        )
+        _, results = run_task_session([TaskTurn("one", "Hello")], memory=memory,
+                                      host=host, session_id="session")
+    assert results[0].status == "complete"
+    assert results[0].maintenance["protocol"] == SEMANTIC_MAINTENANCE_PROTOCOL
+    schema = requests[0]["response_format"]["json_schema"]["schema"]
+    assert "maintenance" in schema["properties"]["arguments"]["properties"]
+    assert "memory_review" not in schema["properties"]["arguments"]["properties"]
+    frontier = next(message["content"] for message in requests[0]["messages"]
+                    if message.get("role") == "user"
+                    and message["content"].startswith("Maintenance frontier"))
+    assert "unreviewed_required_ranges" in frontier
+    assert '"persistence_required": false' not in frontier
+    assert "Only explicit application requirements" in requests[0]["messages"][0]["content"]
+
+
+def test_trusted_task_turn_persistence_requirement_cannot_be_not_selected() -> None:
+    memory = bank()
+    responses = [{"choices": [{"message": {"role": "assistant", "content": json.dumps({
+        "tool": "finish_turn", "arguments": {
+            "maintenance": {"decision": "not_selected", "remaining": []}, "answer": "Done",
+        },
+    })}}]}]
+
+    def respond(_: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=responses.pop(0))
+
+    with VLLMClient(VLLMConfig("http://fixture/v1", "host", max_calls=1),
+                    transport=httpx.MockTransport(respond)) as client:
+        host = ContextualHost(
+            client, memory.dispatch, memory_tools("ordinary"), "Work", memory=memory,
+            maintenance_policy="required", maintenance_protocol=SEMANTIC_MAINTENANCE_PROTOCOL,
+        )
+        _, results = run_task_session([
+            TaskTurn("one", "Summarize", (Observation("attachment", "retain me", "tool",
+                                                      "fixture"),),
+                     required_review_ranges={"attachment": ((0, 9),)},
+                     persistence_required=("attachment",)),
+        ], memory=memory, host=host, session_id="session")
+    assert results[0].status == "maintenance_pending"
+    assert results[0].maintenance["review_coverage"][0]["persistence_required"]

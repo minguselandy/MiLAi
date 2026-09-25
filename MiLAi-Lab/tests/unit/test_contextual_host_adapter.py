@@ -11,6 +11,7 @@ import pytest
 from jsonschema import ValidationError, validate
 
 from milai_lab.methods.contextual_memory.deletion import DeletionLedger
+from milai_lab.methods.contextual_memory.material_view import VIEW_PROTOCOL
 from milai_lab.methods.contextual_memory.operations import TaskEnvelope
 from milai_lab.methods.contextual_user_memory import TOOLS as MEMORY_TOOLS
 from milai_lab.methods.contextual_user_memory import ContextualMemory, Observation
@@ -86,6 +87,48 @@ def _receipt(message: dict[str, Any], usage: dict[str, int] | None = None) -> di
     if usage is not None:
         result["usage"] = usage
     return result
+
+
+def test_delta_save_resolves_only_delivered_target_relations_and_new_body() -> None:
+    memory = ContextualMemory("owner", host_id="test-host",
+                              embed=lambda texts: [[1.0, 0.0] for _ in texts],
+                              embedding_dimension=2)
+    memory.start_task("session", "Update exact matter")
+    session = HostSession("session", memory)
+    view = session.material_view
+    assert view is not None
+    old_source = memory.publish(Observation("old", "Plan pending", "user", "fixture"))
+    memory.save(op="RETAIN_SOURCE", source_ref=old_source, persistence="durable")
+    saved = memory.save(op="CREATE", content="Plan pending", about_ref="unresolved",
+                        source_refs=[old_source], certainty="explicit")
+    target = saved["record"]["ref"]
+    projected_target = view.project(memory.read(target, include_sources=False,
+                                                _visible=False), max_bytes=6000)
+    session.append_material(projected_target)
+    row = next(item for item in projected_target["materials"]
+               if item.get("kind") == "interpretation")
+    assert row["body_delivery"] == "full"
+    old_alias = row["source_refs"][0]
+    new_source = memory.publish(Observation("new", "Plan complete", "tool", "fixture"))
+    memory.save(op="RETAIN_SOURCE", source_ref=new_source, persistence="durable")
+    projected_source = view.project(memory.read(new_source, include_sources=False,
+                                                _visible=False), max_bytes=6000)
+    session.append_material(projected_source)
+    new_alias = projected_source["materials"][0]["ref"]
+    delta = {"op": "REVISE", "basis_mode": "delta", "target_ref": row["ref"],
+             "content_patch": [{"old": "pending", "new": "complete"}],
+             "source_delta": {"add": [new_alias], "remove": [old_alias]}}
+    client, _ = _provider([
+        _receipt(_tool_call("delta", "memory_save", json.dumps(delta))),
+        _receipt({"role": "assistant", "content": "Done."}),
+    ])
+    result = ContextualHost(client, memory.dispatch, MEMORY_TOOLS, "Update",
+                            memory=memory).run([], session=session, max_calls=2)
+    assert result.status == "complete" and result.calls[0]["ok"]
+    current = memory.workspace.cards[memory._handle(target)]
+    assert current.text == "Plan complete"
+    assert current.source_refs == [new_source]
+    client.close()
 
 
 class _CountingCapacity:
@@ -300,7 +343,7 @@ def test_real_memory_host_projects_read_and_write_refs_without_exposing_internal
         event["internal_material_bytes"] > event["projected_material_bytes"] for event in deliveries
     )
     assert all(
-        event["material_view_protocol"] == "contextual-material-view-v8" for event in deliveries
+        event["material_view_protocol"] == VIEW_PROTOCOL for event in deliveries
     )
     client.close()
 

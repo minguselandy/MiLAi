@@ -1,0 +1,52 @@
+{
+  "kind": "FUNCTIONAL_CONSUMER_NOT_BENCHMARK",
+  "frozen_before_model": true,
+  "sessions": [
+    "plan",
+    "amend",
+    "execute",
+    "verify"
+  ],
+  "requests": [
+    "Atlas 项目后续每份发布说明都采用三个一级章节：概览、变更、参考。这个约定用于后续发布工作；当前稿件尚未检查。今天先登记这项约定，不要编辑文件。",
+    "Atlas 发布说明的要求更正：第三个一级章节改为限制，保留概览和变更，参考不再是必需章节。请按这次更正检查当前草稿，今天只检查，不修改文件。",
+    "请按照已经约定的 Atlas 发布说明要求补全当前文件并检查。保留原有内容，未核实的事实注明待核实，完成后简要汇报。",
+    "继续 Atlas 发布说明工作：上一次检查的结果是什么，当前文件是否仍符合约定，还有哪些未核实内容？先核实当前文件，再给我简短答复。不要重复编辑。"
+  ],
+  "initial_document": "# 概览\n这是一份待完善的 Atlas 发布说明。\n",
+  "check_requirements": [
+    [
+      "# 概览",
+      "# 变更",
+      "# 参考"
+    ],
+    [
+      "# 概览",
+      "# 变更",
+      "# 限制"
+    ],
+    [
+      "# 概览",
+      "# 变更",
+      "# 限制"
+    ],
+    [
+      "# 概览",
+      "# 变更",
+      "# 限制"
+    ]
+  ],
+  "criteria": [
+    "first durable requirement commit",
+    "current revised requirements and observed failed check",
+    "real file modification then passed check with accurate memory status",
+    "fresh process/session consumes current memory and verifies file without writing"
+  ],
+  "not_claimed": [
+    "accuracy/generalization score",
+    "card-only causal benefit",
+    "State superiority"
+  ],
+  "origin": "Unchanged four-turn v8 document consumer sequence; promoted to a portable input manifest for v9.",
+  "original_plan_sha256": "c5fe3679054e4e051dc42c17fa535dda06fdd6b70654165f7c0a8aff8743e337"
+}

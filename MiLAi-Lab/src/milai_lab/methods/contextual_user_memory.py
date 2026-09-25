@@ -55,6 +55,7 @@ from milai_lab.methods.contextual_memory.write_contract import (
     CONDITION_DEFINITIONS,
     WRITE_RULES,
     apply_content_patch,
+    normalize_basis_delta,
     validate_changeset_fields,
     validate_conditions,
     validate_date,
@@ -75,7 +76,7 @@ from milai_lab.methods.state_attention import (
 )
 from milai_lab.methods.state_focus import SourceSnapshot, SourceUnit
 
-METHOD_VERSION = "contextual-user-memory-v13"
+METHOD_VERSION = "contextual-user-memory-v14"
 INDEX_POLICY = "source-range-2048-overlap256-bm25-vector-rrf60-v2"
 
 
@@ -259,6 +260,13 @@ TOOLS = [
                 "description": "Copy an actual published source_ref. Omit if absent.",
             },
             "source_refs": _REFS,
+            "basis_mode": {"enum": ["delta"]},
+            "source_delta": {"type": "object", "properties": {
+                "add": _REFS, "remove": _REFS,
+            }, "required": ["add", "remove"], "additionalProperties": False},
+            "dependency_delta": {"type": "object", "properties": {
+                "add": _REFS, "remove": _REFS,
+            }, "required": ["add", "remove"], "additionalProperties": False},
             "about_ref": {
                 "type": "string",
                 "description": "Bound subject identity: current user, trusted actor, a delivered "
@@ -936,6 +944,9 @@ class ContextualMemory:
         op: str | None = None,
         content: str | None = None,
         content_patch: list[dict[str, str]] | None = None,
+        basis_mode: str | None = None,
+        source_delta: dict[str, list[str]] | None = None,
+        dependency_delta: dict[str, list[str]] | None = None,
         source_ref: str | None = None,
         source_refs: list[str] | None = None,
         about_ref: str | None = None,
@@ -953,6 +964,19 @@ class ContextualMemory:
         uncertain_start: bool | None = None,
         uncertain_end: bool | None = None,
     ) -> dict[str, Any]:
+        if basis_mode not in {None, "delta"}:
+            raise ValueError("UNKNOWN_BASIS_MODE")
+        delta_mode = basis_mode == "delta"
+        if delta_mode:
+            if (op != "REVISE" or target_ref is None or content_patch is None
+                    or source_delta is None or any(value is not None for value in (
+                        content, source_ref, source_refs, about_ref, subject, context,
+                        certainty, persistence, conditions, dependencies, forget_refs,
+                        changeset, valid_from, valid_until, uncertain_start, uncertain_end,
+                    ))):
+                raise ValueError("DELTA_REQUIRES_PATCH_AND_RELATION_CHANGES_ONLY")
+        elif source_delta is not None or dependency_delta is not None:
+            raise ValueError("DELTA_FIELDS_REQUIRE_BASIS_MODE")
         if forget_refs is not None:
             if any(value is not None for value in (
                 content, content_patch, source_ref, source_refs, about_ref, target_ref,
@@ -986,7 +1010,7 @@ class ContextualMemory:
         if op == "REVISE" and ((content is None and content_patch is None)
                                or target_ref is None):
             raise ValueError("REVISE_REQUIRES_TARGET_AND_CONTENT")
-        if op in {"CREATE", "REVISE"}:
+        if op in {"CREATE", "REVISE"} and not delta_mode:
             if about_ref is None or source_refs is None or source_ref is not None:
                 raise ValueError("WRITE_REQUIRES_EXPLICIT_ABOUT_AND_SOURCES")
             if certainty is None:
@@ -1050,6 +1074,7 @@ class ContextualMemory:
             results["decision"] = "COMMITTED" if source_changed else "NO_CHANGE"
             return results
         old: MemoryCard | None = None
+        basis_change: dict[str, Any] = {}
         if target_ref is not None:
             handle = self._handle(target_ref)
             old = self.workspace.cards[handle]
@@ -1064,6 +1089,50 @@ class ContextualMemory:
                 }
             if target_ref not in self.seen:
                 raise ValueError("REVISION_REQUIRES_READ_TARGET")
+            if delta_mode:
+                assert source_delta is not None
+                source_refs, source_change = normalize_basis_delta(
+                    old.source_refs, source_delta, kind="source",
+                )
+                dependencies, dependency_change = normalize_basis_delta(
+                    self.details[handle].dependencies,
+                    dependency_delta or {"add": [], "remove": []}, kind="dependency",
+                )
+                for ref in source_change["inherited"]:
+                    if ref not in self.sources or ref in self.forgotten:
+                        raise ValueError("INHERITED_SOURCE_UNAVAILABLE")
+                    if self.resolve(ref) != ref:
+                        raise ValueError("INHERITED_SOURCE_SUPERSEDED")
+                for ref in source_change["added"]:
+                    if ref not in self.sources or ref in self.forgotten:
+                        raise ValueError("SOURCE_DELTA_ADD_UNAVAILABLE")
+                    if self.resolve(ref) != ref:
+                        raise ValueError("SOURCE_DELTA_ADD_SUPERSEDED")
+                    if not self.visible_source_ranges.get(ref):
+                        raise ValueError("SOURCE_DELTA_ADD_REQUIRES_READ")
+                for ref in dependency_change["inherited"]:
+                    if ref in self.sources:
+                        raise ValueError("DEPENDENCY_REQUIRES_INTERPRETATION")
+                    try:
+                        current = self.resolve(ref)
+                    except (KeyError, ValueError) as error:
+                        raise ValueError("INHERITED_DEPENDENCY_UNAVAILABLE") from error
+                    if current != ref:
+                        raise ValueError("INHERITED_DEPENDENCY_SUPERSEDED")
+                    if self.claim_applicability_view(ref)["status"] == "UNUSABLE":
+                        raise ValueError("INHERITED_DEPENDENCY_UNUSABLE")
+                reviewed = {
+                    ref: [list(span) for span in sorted(self.visible_source_ranges[ref])]
+                    for ref in dict.fromkeys([*old.source_refs, *source_change["added"]])
+                    if self.visible_source_ranges.get(ref)
+                }
+                basis_change = {
+                    "mode": "delta", "target_ref": target_ref,
+                    "sources": source_change, "dependencies": dependency_change,
+                    "reviewed_source_ranges": reviewed,
+                }
+                about_ref = self.details[handle].about_ref
+                certainty = self.details[handle].certainty
             if content_patch is not None:
                 content = apply_content_patch(old.text, content_patch)
             metadata = copy.deepcopy(self.details[handle])
@@ -1071,6 +1140,7 @@ class ContextualMemory:
             metadata = Interpretation(self.host_id)
         assert content is not None
         metadata.author = self.host_id
+        metadata.basis_change = basis_change
         for key, value in (
             ("about_ref", about_ref),
             ("subject", subject),
@@ -1106,10 +1176,13 @@ class ContextualMemory:
                 raise ValueError("DEPENDENCY_REQUIRES_INTERPRETATION")
             if old is not None and self._handle(dependency) == old.handle:
                 raise ValueError("REVISION_CANNOT_DEPEND_ON_OWN_VERSION")
-            if dependency not in self.seen:
+            if dependency not in self.seen and not (
+                delta_mode and dependency in basis_change["dependencies"]["inherited"]
+            ):
                 raise ValueError("DEPENDENCY_REQUIRES_READ_VERSION")
         if (old is not None and old.text == content and old.source_refs == refs
-                and metadata == self.details[old.handle]):
+                and replace(metadata, basis_change=self.details[old.handle].basis_change)
+                == self.details[old.handle]):
             return {
                 "status": "NO_CHANGE", "decision": "NO_CHANGE",
                 "memory_changes": [],
@@ -1184,6 +1257,8 @@ class ContextualMemory:
                 "ref": source_ref,
             }
         results["record"] = {**self.read(self._ref(card), False), "status": "SAVED"}
+        if basis_change:
+            results["basis_change"] = copy.deepcopy(basis_change)
         results["memory_changes"] = [
             *sorted((self.retained - retained_before) |
                     (self.task_sources - task_sources_before)),

@@ -33,6 +33,7 @@ class Interpretation:
     known_at: str = ""
     uncertain_start: bool = False
     uncertain_end: bool = False
+    basis_change: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass

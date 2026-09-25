@@ -47,6 +47,8 @@ class HostSession:
         self.turn_index += 1
         self.turn_id = turn_id or str(self.turn_index)
         self.read_cache.clear()
+        for key in ("last_review", "turn_calls", "turn_usage", "call_ordinal"):
+            self.maintenance.pop(key, None)
         self.refresh_visibility()
 
     def record_delivery(self, message: dict[str, Any], projected: dict[str, Any]) -> None:

@@ -1,0 +1,160 @@
+{
+  "kind": "SCOPED_RESEARCH_RESULT_NOT_PRODUCT_ACCEPTANCE",
+  "status": "COMPLETE_SCOPED_VALIDATION_NO_OVERALL_COST_BENEFIT",
+  "source_mapping_sha256": "9854a237f583563618c45ffb59e589484f6c4dea74a8393a1b5c41aa0ce7a0b8",
+  "config_sha256": "5a0f5c2b1b213e2e5a70b6a51f555a0306b26375d77086f033f2f07d5ffa4d20",
+  "native_independent_units": 1,
+  "native_episodes": 5,
+  "native_successes": 5,
+  "dependent_successes": 2,
+  "dependent_episodes": 2,
+  "native_host_turns_complete": 7,
+  "document_turns_complete": 4,
+  "local_comparison_new_business_calls": 0,
+  "judge_calls": 0,
+  "v8_budget_sha256": "a764997573bb3c9fdf23d1005713486291a072195e9e11a28bee3fd9a12030d9",
+  "phases": {
+    "baseline_v8": {
+      "generation_requests": 34,
+      "input_tokens": 211913,
+      "output_tokens": 37235,
+      "generation_tokens": 249148,
+      "embedding_tokens": 2205,
+      "truncated": 1,
+      "write_rejections": 0,
+      "finish_rejections": 0,
+      "provider_http_failures": 0,
+      "unknown_usage": 0,
+      "partitions": {
+        "through_last_effect": {
+          "requests": 12,
+          "prompt_tokens": 71187,
+          "completion_tokens": 10465,
+          "total_tokens": 81652
+        },
+        "after_last_effect": {
+          "requests": 15,
+          "prompt_tokens": 106754,
+          "completion_tokens": 20835,
+          "total_tokens": 127589
+        },
+        "no_successful_effect_in_turn": {
+          "requests": 7,
+          "prompt_tokens": 33972,
+          "completion_tokens": 5935,
+          "total_tokens": 39907
+        }
+      }
+    },
+    "failed_v9_attempt": {
+      "generation_requests": 38,
+      "input_tokens": 226476,
+      "output_tokens": 88207,
+      "generation_tokens": 314683,
+      "embedding_tokens": 648,
+      "truncated": 17,
+      "write_rejections": 0,
+      "finish_rejections": 0,
+      "provider_http_failures": 0,
+      "unknown_usage": 0,
+      "partitions": {
+        "through_last_effect": {
+          "requests": 4,
+          "prompt_tokens": 21152,
+          "completion_tokens": 3422,
+          "total_tokens": 24574
+        },
+        "after_last_effect": {
+          "requests": 5,
+          "prompt_tokens": 29782,
+          "completion_tokens": 7950,
+          "total_tokens": 37732
+        },
+        "no_successful_effect_in_turn": {
+          "requests": 29,
+          "prompt_tokens": 175542,
+          "completion_tokens": 76835,
+          "total_tokens": 252377
+        }
+      }
+    },
+    "final_v9_continuous": {
+      "generation_requests": 42,
+      "input_tokens": 284380,
+      "output_tokens": 73055,
+      "generation_tokens": 357435,
+      "embedding_tokens": 1505,
+      "truncated": 8,
+      "write_rejections": 1,
+      "finish_rejections": 0,
+      "provider_http_failures": 0,
+      "unknown_usage": 0,
+      "partitions": {
+        "through_last_effect": {
+          "requests": 12,
+          "prompt_tokens": 80079,
+          "completion_tokens": 11780,
+          "total_tokens": 91859
+        },
+        "after_last_effect": {
+          "requests": 18,
+          "prompt_tokens": 138748,
+          "completion_tokens": 34781,
+          "total_tokens": 173529
+        },
+        "no_successful_effect_in_turn": {
+          "requests": 12,
+          "prompt_tokens": 65553,
+          "completion_tokens": 26494,
+          "total_tokens": 92047
+        }
+      }
+    },
+    "local_basis_comparison": {
+      "generation_requests": 5,
+      "input_tokens": 34097,
+      "output_tokens": 10969,
+      "generation_tokens": 45066,
+      "embedding_tokens": 0,
+      "truncated": 0,
+      "write_rejections": 1,
+      "finish_rejections": 0,
+      "provider_http_failures": 0,
+      "unknown_usage": 0,
+      "partitions": {
+        "through_last_effect": {
+          "requests": 0,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "total_tokens": 0
+        },
+        "after_last_effect": {
+          "requests": 0,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "total_tokens": 0
+        },
+        "no_successful_effect_in_turn": {
+          "requests": 5,
+          "prompt_tokens": 34097,
+          "completion_tokens": 10969,
+          "total_tokens": 45066
+        }
+      }
+    }
+  },
+  "totals": {
+    "generation_requests": 119,
+    "input_tokens": 756866,
+    "output_tokens": 209466,
+    "generation_tokens": 966332,
+    "embedding_tokens": 4358,
+    "truncated": 26,
+    "write_rejections": 2,
+    "finish_rejections": 0,
+    "provider_http_failures": 0,
+    "unknown_usage": 0
+  },
+  "report": "../../docs/CONTEXTUAL_USER_MEMORY_V9_RESULTS_20260925.md",
+  "partition_note": "Choosing the last successful refund/send_message/document_write is included through_last_effect. Local comparison has no new effect but all its calls occur after the shared-prefix refund. No cost partition is automatically waste."
+}

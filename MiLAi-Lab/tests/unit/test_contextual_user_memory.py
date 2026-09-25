@@ -540,8 +540,15 @@ def test_ordinary_write_branches_require_bound_subject_and_full_relations() -> N
         if tool["function"]["name"] == "memory_save"
     )
     branches = ordinary_save_schema(parameters)["oneOf"]
-    assert [next(iter(branch["properties"])) for branch in branches] == ["op"] * 5
-    create, patch, revise, retain, _ = branches
+    assert [next(iter(branch["properties"])) for branch in branches] == ["op"] * 6
+    delta, create, patch, revise, retain, _ = branches
+    assert delta["required"] == [
+        "op", "basis_mode", "target_ref", "content_patch", "source_delta",
+    ]
+    assert set(delta["properties"]) == {
+        "op", "basis_mode", "target_ref", "content_patch", "source_delta",
+        "dependency_delta",
+    }
     assert list(create["properties"])[:5] == [
         "op",
         "about_ref",

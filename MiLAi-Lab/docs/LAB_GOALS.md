@@ -1,21 +1,20 @@
 # MiLAi Lab goals
 
-## Planned maintenance contract Goal v9.0 (2026-09-25)
+## Completed scoped maintenance contract Goal v9.0 (2026-09-25)
 
-[Goal v9.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md) and
-[refactor design](MILA_CONTEXTUAL_USER_MEMORY_V9_CONTRACT_REFACTOR_DESIGN_20260925.md)
-are v9 planning and design documents. A has now run: the original MERIT episodes scored 5/5
-with dependent 2/2, all Host runs completed, the four document rounds completed, and the v9
-ledger records 34 generations / 249148 generation tokens / 2205 embedding tokens, unknown=0.
-A narrow checkpoint review found the three current cards consistent with completed refunds and
-no conflicting old todo; the final document card remains `card:1@2` without a duplicate completion
-card. The generated document intentionally retains unverified placeholders for change and
-limitation facts. B–E are unimplemented, so these results do not constitute v9 acceptance.
-Baseline local HEAD and remote main matched
-`b64fc4c9b70c3a8a48cfd770a4b7eaa437f12162`; the v8 implementation remains committed and frozen.
-Final validation must run one frozen version continuously rather than splice staged passes.
-No Product migration or runtime change is part of this documentation publication. Cumulative
-call/token/verification caps remain null; old results and charges remain frozen.
+[Goal v9.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v9.0_20260925.md) completed A–E:
+unchanged v8 baseline, semantic maintenance v3, actual partial-review coverage, unified material
+visibility, explicit delta basis normalization, same-turn recovery and portable preparation.
+The final same-source/config trajectories completed MERIT 5/5 (dependent 2/2, 7/7 Host turns)
+and all four document rounds from original initial states. The local full/delta comparison
+completed without repeating business actions. Delta cost less in this one diagnostic; the
+complete v9 trajectory cost more than v8. No overall efficiency, State or general quality win
+is claimed. [Results and preserved failures](CONTEXTUAL_USER_MEMORY_V9_RESULTS_20260925.md):
+119 generations / 966332 generation tokens / 4358 embedding tokens, unknown=0, Judge=0.
+[Reproduction](CONTEXTUAL_USER_MEMORY_V9_REPRODUCE.md) separates preparation, deterministic
+wiring, real vLLM and historical artifacts. All v8 identities/results/charges remain sealed.
+Lab only; no Product migration, expanded benchmark or full suite. Luna performs the
+user-authorized Git publication; model and raw runtime artifacts remain ignored.
 
 ## Completed scoped usable continuous memory Goal v8.0 (2026-09-25)
 
