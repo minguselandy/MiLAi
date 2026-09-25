@@ -5,6 +5,8 @@ A–E implemented; fixed document sequence and same exposed MERIT arc validated 
 Final original-episode replay: 1/1, original card updated to completed, no stale pending card.
 All prior failures preserved; v8 total 137 generations / 948575 generation tokens / 5432
 embedding tokens, unknown=0, Judge=0. No full suite, benchmark expansion or Product change.
+[Detailed v8 experiment report](MILA_CONTEXTUAL_USER_MEMORY_V8_EXPERIMENT_REPORT_20260925.md)
+includes actual feature usage, stage boundaries, preserved failures and token decomposition.
 
 Latest bounded development: [RWC v0.4 real use and diagnostics](../studies/active/MILA_RWC_V04_DEVELOPMENT_RESULTS_20260915.md),
 [run manifest](../data/manifests/rwc-v04-development-20260915.json).

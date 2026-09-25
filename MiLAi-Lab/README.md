@@ -11,6 +11,8 @@ the final isolated episode scored 1/1 and updated its original pending card to c
 This was staged verification, not a continuous five-episode pass on the final source.
 [Results and costs](docs/CONTEXTUAL_USER_MEMORY_V8_RESULTS_20260925.md): 137 generations,
 948575 generation tokens, 5432 embedding tokens, unknown=0, Judge=0.
+[Experiment report](docs/MILA_CONTEXTUAL_USER_MEMORY_V8_EXPERIMENT_REPORT_20260925.md)
+separates business success, actual maintenance, staged evidence and remaining costs.
 [Usage](docs/CONTEXTUAL_USER_MEMORY_V8_DEVELOPMENT_20260925.md),
 [ordinary default](configs/contextual-memory-v8-off.json), and
 [optional State](configs/contextual-memory-v8-optional.json) are available.

@@ -10,6 +10,8 @@ episode passed 1/1 with actual original-card revision and complete maintenance. 
 native 5/5 runs retained semantic/maintenance failures; scores do not replace saved-content audit.
 [Results](CONTEXTUAL_USER_MEMORY_V8_RESULTS_20260925.md) preserve all failures and costs:
 137 generations, 948575 generation tokens, 5432 embedding tokens, unknown=0, Judge=0.
+[Experiment report](MILA_CONTEXTUAL_USER_MEMORY_V8_EXPERIMENT_REPORT_20260925.md)
+details actual feature use, preserved failures, input/output costs and remaining repairs.
 Final mapping: `039dc573ff428272857ff82c6903023c152a8948868bcfc7ba9181ace7777d05`.
 No full suite, expanded benchmark or Product change; cumulative limits remain null.
 
