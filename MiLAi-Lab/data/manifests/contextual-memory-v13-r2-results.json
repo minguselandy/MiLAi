@@ -1,0 +1,205 @@
+{
+  "kind": "V13_R2_FIRST_COMMITMENT_CLARIFICATION_DIAGNOSTIC",
+  "status": "COMPLETE_WITH_NO_OBSERVED_REPAIR_BENEFIT",
+  "source_mapping_sha256": "8e78117ac201c3e845192dab82c4d883ee3ea8b18f7ba3dd19a5dfbd2c9078a2",
+  "config_sha256": "e17b6a04298df6db701f045843f294d6d9e4a9fd5c56da0ad96483ee0aa568ff",
+  "arc_id": "arc0-000",
+  "native_successes": 4,
+  "native_denominator": 5,
+  "dependent_successes": 2,
+  "dependent_denominator": 2,
+  "host_completed": 7,
+  "public_messages": 7,
+  "generation_requests": 27,
+  "prompt_tokens": 160516,
+  "completion_tokens": 3804,
+  "generation_tokens": 164320,
+  "embedding_requests": 9,
+  "embedding_tokens": 1223,
+  "truncations": 0,
+  "unknown_usage": 0,
+  "judge_requests": 0,
+  "events": {
+    "observation_received": 21,
+    "generation_request_segments": 27,
+    "vllm_response": 36,
+    "work_note_saved": 27,
+    "host_dispatch": 20,
+    "business_result": 14,
+    "decision_action_consumed": 27,
+    "material_visible": 20,
+    "host_tool_call": 20,
+    "maintenance_review": 7,
+    "embedding_cache": 9,
+    "initial_memory_context": 5,
+    "material_delivery": 1
+  },
+  "episodes": [
+    {
+      "index": 0,
+      "native_success": true,
+      "dependent": false,
+      "host_statuses": [
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete"
+      ],
+      "committed_writes": [
+        0
+      ],
+      "current_card_revisions": {},
+      "business_call_names": [
+        "get_order",
+        "send_message"
+      ]
+    },
+    {
+      "index": 1,
+      "native_success": true,
+      "dependent": false,
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete",
+        "complete"
+      ],
+      "committed_writes": [
+        1,
+        1
+      ],
+      "current_card_revisions": {
+        "card:1": 1,
+        "card:2": 1
+      },
+      "business_call_names": [
+        "send_message",
+        "send_message"
+      ]
+    },
+    {
+      "index": 2,
+      "native_success": true,
+      "dependent": true,
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete",
+        "complete"
+      ],
+      "committed_writes": [
+        1,
+        1
+      ],
+      "current_card_revisions": {
+        "card:1": 2,
+        "card:2": 2
+      },
+      "business_call_names": [
+        "get_order",
+        "refund",
+        "send_message"
+      ]
+    },
+    {
+      "index": 3,
+      "native_success": false,
+      "dependent": false,
+      "host_statuses": [
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete"
+      ],
+      "committed_writes": [
+        0
+      ],
+      "current_card_revisions": {
+        "card:1": 2,
+        "card:2": 2
+      },
+      "business_call_names": [
+        "get_order",
+        "get_policy",
+        "get_policy",
+        "get_policy",
+        "send_message"
+      ]
+    },
+    {
+      "index": 4,
+      "native_success": true,
+      "dependent": true,
+      "host_statuses": [
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete"
+      ],
+      "committed_writes": [
+        1
+      ],
+      "current_card_revisions": {
+        "card:1": 2,
+        "card:2": 3
+      },
+      "business_call_names": [
+        "get_order",
+        "refund"
+      ]
+    }
+  ],
+  "first_commitment": {
+    "episode": 0,
+    "prompt_clarification_in_actual_transcript": true,
+    "current_cards": 0,
+    "committed_writes": 0,
+    "host_reason": "Agreement is temporary and pending confirmation, therefore no memory save selected.",
+    "repaired": false,
+    "persisted_sources": 0
+  },
+  "final_choice": "Do not retain the ineffective prompt addition. Ship the R1 source mapping already exercised in a complete native run; keep both runs and all costs.",
+  "quality_limits": {
+    "independent_refund_native_failure": true,
+    "temporary_aliases_in_current_cards": 0,
+    "general_reliability_established": false,
+    "attention_comparison": false,
+    "approval_claim_note": "R2 requested a choice between partial refund and seeking approval; unlike R1 it did not claim an approval escalation had already executed."
+  },
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v13-final-r2/config.json": "e17b6a04298df6db701f045843f294d6d9e4a9fd5c56da0ad96483ee0aa568ff",
+    "artifacts/contextual-user-memory/v13-final-r2/selection.json": "ca198bcedb010c8b9c1ce2aa305938f0e66e473e869658c06d1192233d2dee02",
+    "artifacts/contextual-user-memory/v13-final-r2/freeze.json": "6cd20396ac7885db5e24e550f43040591a30eb2979f1a11c2b9cecb96db4c127",
+    "artifacts/contextual-user-memory/v13-final-r2/frozen-source/contextual_maintenance.py": "8843b8d458cf534cd939fb4995a58c3b61c1d38d1d7ba87606ae358996211976",
+    "artifacts/contextual-user-memory/v13-final-r2/run/manifest.json": "c290a4615f7a126985796bec2865e067696457589f8ecb37431c50ccea2f7363",
+    "artifacts/contextual-user-memory/v13-final-r2/run/prepare.json": "f8c8fc0ed4d309099dc01d446882a5d7df6e04c1c3afe4e3347af0d476f7c564",
+    "artifacts/contextual-user-memory/v13-final-r2/run/started.json": "3ca4647ce9f086c4a93dd972eecbce52a27fb6454b645aa74eecfbe0c828ade0",
+    "artifacts/contextual-user-memory/v13-final-r2/run/result.json": "1812130307f2954024d63775aa7ee777a7b28af0ab1909fd81e7511c70131a29",
+    "artifacts/contextual-user-memory/v13-final-r2/run/runtime/trace.jsonl": "4ee81c148d9240760fdb595952a11b1f1ce33491a86b5208a88bbfd49e75e000",
+    "artifacts/contextual-user-memory/v13-final-r2/run/episodes/episode-0.json": "575225f6825d98af30503432165263a3a1ebbf75c2ebfb904aac9c0d0ddd75bd",
+    "artifacts/contextual-user-memory/v13-final-r2/run/episodes/episode-1.json": "87bbe302c79e5b29fa8390abc6b210cd6aaf12fd0c85ba990a9b630c1787eb91",
+    "artifacts/contextual-user-memory/v13-final-r2/run/episodes/episode-2.json": "70716d5a1b642a586357fb7082c840365005c3bdeb07d47046bfcc62adadf828",
+    "artifacts/contextual-user-memory/v13-final-r2/run/episodes/episode-3.json": "a380edb45121be8eae74fbe8cfedc1786591294dd7ab3629e7c19658b869ce63",
+    "artifacts/contextual-user-memory/v13-final-r2/run/episodes/episode-4.json": "d594dc4f9ce62e0e3140b7ff404a037e919a599449a718c167605ad0e2b04de0",
+    "artifacts/contextual-user-memory/v13-final-r2/run/runtime/runtime-state/state.json": "59f96bcfa09d47a5ff659ca205a2241a3185286abefda9b8b66ff428c4b7251f"
+  },
+  "maintenance_completed": 7,
+  "local_tokenizer_segment_estimates": {
+    "fixed_contract_tokens": 81436,
+    "state_fixed_instruction_tokens": 1890,
+    "decision_projection_tokens": 0,
+    "historical_sidecar_tokens": 2754,
+    "note": "Fixed contract includes the state instruction subset. Segments are not additive Provider billing."
+  },
+  "checks_from_trace": {
+    "natural_write_rejections": 0,
+    "maintenance_rejections": 0,
+    "repair_guidance_delivered": 0,
+    "provider_failures": 0,
+    "business_policy_lookup_failures": 1
+  }
+}

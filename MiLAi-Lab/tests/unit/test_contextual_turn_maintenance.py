@@ -32,12 +32,13 @@ from milai_lab.runners.contextual_maintenance import (
 from milai_lab.runners.contextual_session import HostSession
 
 
-def bank() -> ContextualMemory:
+def bank(*, decision_policy: str = "off") -> ContextualMemory:
     memory = ContextualMemory(
         "owner",
         host_id="host",
         embed=lambda texts: [[1.0, 0.0] for _ in texts],
         embedding_dimension=2,
+        decision_policy=decision_policy,
     )
     memory.start_task("session", "Work")
     return memory
@@ -524,7 +525,12 @@ def test_repair_protocol_tracks_preflight_and_core_rejections_in_host() -> None:
         result = host.run([], session=session, max_calls=3)
     assert result.status == "maintenance_pending"
     assert result.calls[0]["result"]["decision"] == "REJECTED"
+    assert result.calls[0]["repair_guidance"]["failed_operation_id"] == (
+        result.calls[0]["result"]["operation_id"])
+    assert "memory_save.repair_of" in result.calls[0]["repair_guidance"]["next"]
     assert result.calls[1]["result"]["error"] == "ABOUT_SOURCE_NOT_CITED"
+    assert result.calls[1]["repair_guidance"]["failed_operation_id"] == (
+        result.calls[1]["operation_receipt"]["operation_id"])
     assert result.calls[1]["result"]["repair"] == {
         "field": "source_refs", "target_ref": None,
         "identity_anchor": first_row["materials"][0]["ref"],
@@ -593,11 +599,99 @@ def test_repair_protocol_committed_write_closes_original_attempt_and_finishes() 
         )
         result = host.run([], session=session, max_calls=3)
     assert result.status == "complete"
+    assert result.calls[0]["repair_guidance"]["failed_operation_id"] == (
+        result.calls[0]["result"]["operation_id"])
+    assert "repair_guidance" not in result.calls[1]
     assert result.calls[1]["operation_receipt"]["decision"] == "COMMITTED"
     assert result.maintenance["committed_changes"][0]["operation_id"] == (
         result.calls[1]["result"]["operation_id"])
     assert result.maintenance["failed_attempts"] == []
     assert session.maintenance["failed_attempts"] == {}
+
+
+@pytest.mark.parametrize("tool_mode, decision_policy", [
+    ("native", "off"), ("json_action", "notes"),
+])
+def test_committed_write_without_repair_of_exposes_unresolved_attempt_before_finish(
+    tool_mode: str, decision_policy: str,
+) -> None:
+    memory = bank(decision_policy=decision_policy)
+    session = HostSession("session", memory)
+    source = memory.publish(Observation("first", "Supported statement", "user", "fixture"))
+    assert session.material_view is not None
+    projected = session.material_view.project(memory.read(source, False, _visible=False))
+    session.append_material(projected)
+    source_alias = projected["materials"][0]["ref"]
+    failed_id = ""
+    events: list[dict[str, Any]] = []
+    count = 0
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        nonlocal count, failed_id
+        messages = json.loads(request.content)["messages"]
+
+        def previous_result() -> dict[str, Any]:
+            if tool_mode == "native":
+                previous = next(message for message in reversed(messages)
+                                if message["role"] == "tool")
+                return json.loads(previous["content"])
+            previous = next(message for message in reversed(messages)
+                            if message["role"] == "user" and message["content"].startswith(
+                                "json_action tool result: "))
+            return json.loads(previous["content"].split(": ", 1)[1])
+
+        if count == 0:
+            name, arguments = "memory_save", {
+                "op": "CREATE", "content": "Supported statement", "about_ref": "unknown",
+                "source_refs": ["m999"], "certainty": "explicit",
+            }
+        elif count == 1:
+            rejected = previous_result()
+            failed_id = rejected["repair_guidance"]["failed_operation_id"]
+            name, arguments = "memory_save", {
+                "op": "CREATE", "content": "Supported statement", "about_ref": "unknown",
+                "source_refs": [source_alias], "certainty": "explicit",
+            }
+        else:
+            assert list(session.maintenance["failed_attempts"]) == [failed_id]
+            committed = previous_result()
+            assert committed["repair_guidance"]["unresolved_operation_ids"] == [failed_id]
+            name, arguments = "finish_turn", {
+                "maintenance": {"decision": "processed", "remaining": [],
+                                "abandoned_attempts": [{
+                                    "operation_id": failed_id,
+                                    "reason": "The corrected statement was committed",
+                                }]},
+                "answer": "Done",
+            }
+        count += 1
+        message = ({"role": "assistant", "tool_calls": [{
+            "id": f"call-{count}", "type": "function", "function": {
+                "name": name, "arguments": json.dumps(arguments),
+            },
+        }]} if tool_mode == "native" else {"role": "assistant", "content": json.dumps({
+            "work_note": None, "tool": name, "arguments": arguments,
+        })})
+        return httpx.Response(200, json={"choices": [{"message": message}]})
+
+    with VLLMClient(VLLMConfig("http://fixture/v1", "host", max_calls=3,
+                               tool_mode=tool_mode),
+                    transport=httpx.MockTransport(respond)) as client:
+        host = ContextualHost(
+            client, memory.dispatch, memory_tools("ordinary"), "Work", memory=memory,
+            maintenance_policy="required", maintenance_protocol=REPAIR_MAINTENANCE_PROTOCOL,
+            decision_policy=decision_policy, emit=events.append,
+        )
+        result = host.run([], session=session, max_calls=3)
+    assert result.status == "complete"
+    assert result.calls[1]["operation_receipt"]["decision"] == "COMMITTED"
+    assert result.calls[1]["repair_guidance"]["unresolved_operation_ids"] == [failed_id]
+    assert "Do not replay" in result.calls[1]["repair_guidance"]["next"]
+    assert "finish_turn.maintenance.abandoned_attempts" in (
+        result.calls[1]["repair_guidance"]["next"])
+    assert result.maintenance["abandoned_attempts"][0]["operation_id"] == failed_id
+    assert session.maintenance["failed_attempts"] == {}
+    assert not any(event["event"] == "maintenance_rejected" for event in events)
 
 
 def test_compact_v4_tool_catalogue_keeps_schema_branches_and_repair_field() -> None:

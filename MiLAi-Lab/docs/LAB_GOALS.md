@@ -1,5 +1,20 @@
 # MiLAi Lab goals
 
+## Completed scoped continuous runtime Goal v13.0 (2026-09-25)
+
+[Goal v13.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v13.0_20260925.md) implements the
+remaining official v12-template preparation/run path and actionable repair receipts.
+Status: COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT. The final frozen source completed one
+exposed native arc from its original world and empty memory: native 4/5, dependent 2/2,
+Host/maintenance 7/7. First-agreement persistence is NOT_MET. A second complete diagnostic
+did not repair it, so its extra prompt was reverted; both runs and all failures remain.
+Relevant checks: 38 passed. Continuous costs: 56 generations / 345375 generation tokens /
+2797 embedding tokens, unknown=0, Judge=0, no truncations. No new seed, method arm,
+sidecar policy or Attention comparison was added. See the
+[results](CONTEXTUAL_USER_MEMORY_V13_RESULTS_20260925.md),
+[development record](CONTEXTUAL_USER_MEMORY_V13_DEVELOPMENT_20260925.md) and
+[reproduction entry](CONTEXTUAL_USER_MEMORY_V13_REPRODUCE.md).
+
 ## Completed scoped write and maintenance repair Goal v12.0 (2026-09-25)
 
 [Goal v12.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md) is

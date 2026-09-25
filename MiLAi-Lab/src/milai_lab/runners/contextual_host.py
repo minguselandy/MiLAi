@@ -1025,6 +1025,38 @@ class ContextualHost:
                                      material_view.visible_bindings(outcome["result"]).items()},
                     })
 
+        def repair_guidance(*, rejected_operation_id: str | None = None,
+                            committed_write: bool = False) -> dict[str, Any] | None:
+            """Expose existing repair obligations beside the write that changed them."""
+            if not repair_maintenance:
+                return None
+            attempts = session.maintenance.get("failed_attempts", {})
+            if not attempts:
+                return None
+            notice: dict[str, Any] = {"unresolved_operation_ids": list(attempts)}
+            if rejected_operation_id is not None:
+                notice["failed_operation_id"] = next((
+                    key for key, item in attempts.items()
+                    if item.get("last_operation_id") == rejected_operation_id
+                ), rejected_operation_id)
+                notice["next"] = (
+                    "For a corrected attempt at the same proposal, pass its "
+                    "failed_operation_id as memory_save.repair_of. Otherwise leave it "
+                    "pending or, if optional and no longer needed, give its operation ID "
+                    "and a real reason in finish_turn.maintenance.abandoned_attempts."
+                )
+            elif committed_write:
+                notice["next"] = (
+                    "This write committed, but the listed failed attempts remain unresolved. "
+                    "Do not replay an already committed write solely to add repair_of; "
+                    "a genuinely new change may still be revised. If you confirm an old "
+                    "proposal was replaced by this commit or is no longer needed, list "
+                    "its operation ID and the actual reason in "
+                    "finish_turn.maintenance.abandoned_attempts. Otherwise repair the "
+                    "remaining proposal or finish pending."
+                )
+            return notice
+
         def rejected_tool_call(
             name: str, error: str, arguments: dict[str, Any] | None = None,
         ) -> dict[str, Any]:
@@ -1038,6 +1070,9 @@ class ContextualHost:
                 outcome["operation_receipt"] = asdict(receipt_outcome(name, result))
                 if repair_maintenance:
                     failed_write(session, result["operation_id"], arguments or {}, error)
+                    outcome["repair_guidance"] = repair_guidance(
+                        rejected_operation_id=result["operation_id"]
+                    )
                     persist()
             return outcome
 
@@ -1331,6 +1366,15 @@ class ContextualHost:
                        "operation_receipt": operation_receipt,
                        "session_id": session.session_id, "turn_id": session.turn_id,
                        "tool_call_id": call_id}
+            if name == "memory_save":
+                guidance = repair_guidance(
+                    rejected_operation_id=receipt.operation_id
+                    if receipt.completion == "failed" else None,
+                    committed_write=receipt.ok and receipt.decision == "COMMITTED",
+                )
+                if guidance is not None and (receipt.completion == "failed" or
+                                             receipt.decision == "COMMITTED"):
+                    outcome["repair_guidance"] = guidance
             if key is not None:
                 read_cache[key] = len(calls)
             # A dispatched write may have changed state even if its result is partial failure.

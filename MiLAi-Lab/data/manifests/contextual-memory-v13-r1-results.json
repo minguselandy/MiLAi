@@ -1,0 +1,239 @@
+{
+  "kind": "V13_R1_FROZEN_SOURCE_CONTINUOUS_NATIVE_RESULT",
+  "status": "COMPLETE_NATIVE_RUN_WITH_SEMANTIC_FAILURES",
+  "source_mapping_sha256": "5c92005f5e7f2b36c6716dcd8cf5ce1c05091f06fe47141c9f37474c6ff9a773",
+  "config_sha256": "b3517b65a6251b1d84bb670e00184d75b99f49bbefffa4c8b2f9da1f7a802a82",
+  "arc_id": "arc0-000",
+  "selection_scope": "exposed arc0 original world and empty memory; unchanged five episodes/seven public messages",
+  "native_successes": 4,
+  "native_denominator": 5,
+  "dependent_successes": 2,
+  "dependent_denominator": 2,
+  "host_completed": 7,
+  "public_messages": 7,
+  "generation_requests": 29,
+  "prompt_tokens": 176986,
+  "completion_tokens": 4069,
+  "generation_tokens": 181055,
+  "embedding_requests": 9,
+  "embedding_tokens": 1574,
+  "truncations": 0,
+  "unknown_usage": 0,
+  "judge_requests": 0,
+  "events": {
+    "observation_received": 23,
+    "generation_request_segments": 29,
+    "vllm_response": 38,
+    "work_note_saved": 29,
+    "host_dispatch": 22,
+    "business_result": 16,
+    "decision_action_consumed": 29,
+    "material_visible": 22,
+    "host_tool_call": 22,
+    "maintenance_review": 7,
+    "embedding_cache": 9,
+    "initial_memory_context": 5,
+    "material_delivery": 1
+  },
+  "episodes": [
+    {
+      "index": 0,
+      "native_success": true,
+      "dependent": false,
+      "host_statuses": [
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete"
+      ],
+      "committed_writes": [
+        0
+      ],
+      "current_card_revisions": {},
+      "business_call_names": [
+        "get_order",
+        "send_message"
+      ]
+    },
+    {
+      "index": 1,
+      "native_success": true,
+      "dependent": false,
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete",
+        "complete"
+      ],
+      "committed_writes": [
+        1,
+        1
+      ],
+      "current_card_revisions": {
+        "card:1": 1,
+        "card:2": 1
+      },
+      "business_call_names": [
+        "send_message",
+        "send_message"
+      ]
+    },
+    {
+      "index": 2,
+      "native_success": true,
+      "dependent": true,
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete",
+        "complete"
+      ],
+      "committed_writes": [
+        1,
+        1
+      ],
+      "current_card_revisions": {
+        "card:1": 2,
+        "card:2": 2
+      },
+      "business_call_names": [
+        "get_order",
+        "refund",
+        "send_message",
+        "send_message"
+      ]
+    },
+    {
+      "index": 3,
+      "native_success": false,
+      "dependent": false,
+      "host_statuses": [
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete"
+      ],
+      "committed_writes": [
+        0
+      ],
+      "current_card_revisions": {
+        "card:1": 2,
+        "card:2": 2
+      },
+      "business_call_names": [
+        "get_order",
+        "get_policy",
+        "get_policy",
+        "get_policy",
+        "get_policy",
+        "send_message"
+      ]
+    },
+    {
+      "index": 4,
+      "native_success": true,
+      "dependent": true,
+      "host_statuses": [
+        "complete"
+      ],
+      "maintenance_statuses": [
+        "complete"
+      ],
+      "committed_writes": [
+        1
+      ],
+      "current_card_revisions": {
+        "card:1": 2,
+        "card:2": 3
+      },
+      "business_call_names": [
+        "get_order",
+        "refund"
+      ]
+    }
+  ],
+  "failure_analysis": {
+    "first_commitment_missing": {
+      "episode": 0,
+      "native_success": true,
+      "committed_writes": 0,
+      "current_cards": 0,
+      "followup": "R2 clarification also failed to save the first agreement and was reverted; both failures are preserved.",
+      "persisted_sources": 0
+    },
+    "independent_business_failure": {
+      "episode": 3,
+      "native_success": false,
+      "policy_lookup_error": true,
+      "approval_threshold_observed": true,
+      "refund_executed": false,
+      "message_sent": true,
+      "final_claim_escalated_without_execution_receipt": true,
+      "boundary": "No approval tool was invoked; native scorer unchanged. Policy lookup versus native refund checker semantics do not establish a memory failure."
+    },
+    "temporary_aliases_in_durable_prose": {
+      "affected_current_cards": 2,
+      "current_amount_and_completion_status_correct": true,
+      "limitation": "Text still contains session-local handles despite the existing self-contained writing instruction."
+    }
+  },
+  "mechanism_limits": {
+    "natural_write_rejections": 0,
+    "repair_guidance_live_coverage": false,
+    "actual_gap_searches": 0,
+    "automatic_version_notices": 0,
+    "method_comparison": false,
+    "general_reliability_established": false
+  },
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v13-final-r1/config.json": "b3517b65a6251b1d84bb670e00184d75b99f49bbefffa4c8b2f9da1f7a802a82",
+    "artifacts/contextual-user-memory/v13-final-r1/selection.json": "0376751a76bbb3cdc7b808fec46d07424d28beb87fe112c7bcebf302fa1b9209",
+    "artifacts/contextual-user-memory/v13-final-r1/freeze.json": "890b0d509e1b6bec5ef0865ab393febc7bea558525c1405ad438422cc87662c8",
+    "artifacts/contextual-user-memory/v13-final-r1/run/manifest.json": "0f40cafb7b9c6492537a28a0671765a37d552d69f269c081506b97c916bd898a",
+    "artifacts/contextual-user-memory/v13-final-r1/run/prepare.json": "f8c8fc0ed4d309099dc01d446882a5d7df6e04c1c3afe4e3347af0d476f7c564",
+    "artifacts/contextual-user-memory/v13-final-r1/run/started.json": "812915ff8bf3678ee74396761059173ea260af30f73c5c150ceb9e6db6a29ddf",
+    "artifacts/contextual-user-memory/v13-final-r1/run/result.json": "c83b049990df4567f9d00cdf0a38ff4d8cb44287059caedfa5375bcd539ae606",
+    "artifacts/contextual-user-memory/v13-final-r1/run/runtime/trace.jsonl": "0a7f33249bf4b948f67a91bfc35d74c22bf85bdc2dfdd6f5cdde578fca318e40",
+    "artifacts/contextual-user-memory/v13-final-r1/run/episodes/episode-0.json": "a39856ae1db7b89e86b1600dbbe8db41205eae39633251cb15a6d7dc63fd5fbd",
+    "artifacts/contextual-user-memory/v13-final-r1/run/episodes/episode-1.json": "901d307d1d2d53abe3a2731df229c8cfc859ee88d35938303e55aa2ef72b11be",
+    "artifacts/contextual-user-memory/v13-final-r1/run/episodes/episode-2.json": "647556971f9191450a96968f9c993695acd5aebfea6a17f26918efc8c605bcdb",
+    "artifacts/contextual-user-memory/v13-final-r1/run/episodes/episode-3.json": "a7aa62e1db9d540fc2f01bbcc958fb34f81a67a0434601b097fdbf6db0b79a80",
+    "artifacts/contextual-user-memory/v13-final-r1/run/episodes/episode-4.json": "05a6c1588e78406cd069d542dd9eb35a2616e2604b85fe3f5e211c9e6bfe044d",
+    "artifacts/contextual-user-memory/v13-final-r1/run/runtime/runtime-state/state.json": "1ade0e5ae98c48ca22ea13bc0c4302200aabb382f07d3873b2d14dbc6cc0f633"
+  },
+  "read_only_final_card_restore": [
+    {
+      "handle": "card:1",
+      "revision": 2,
+      "status": "CURRENT",
+      "source_count": 4,
+      "text_sha256": "526d2e7c26dff17168922e5597549616fcc0495fcd311b168691e1c800aa29cd"
+    },
+    {
+      "handle": "card:2",
+      "revision": 3,
+      "status": "CURRENT",
+      "source_count": 5,
+      "text_sha256": "dc8abdc1db57c6ed124c2bd428355f2aa74b59c425c5c40187c667649a2743b2"
+    }
+  ],
+  "maintenance_completed": 7,
+  "local_tokenizer_segment_estimates": {
+    "fixed_contract_tokens": 86868,
+    "state_fixed_instruction_tokens": 2030,
+    "decision_projection_tokens": 0,
+    "historical_sidecar_tokens": 3507,
+    "note": "Fixed contract includes the state instruction subset. Segments are not additive Provider billing."
+  },
+  "checks_from_trace": {
+    "natural_write_rejections": 0,
+    "maintenance_rejections": 0,
+    "repair_guidance_delivered": 0,
+    "provider_failures": 0,
+    "business_policy_lookup_failures": 1
+  }
+}

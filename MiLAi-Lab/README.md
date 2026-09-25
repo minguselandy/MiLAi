@@ -3,7 +3,20 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Latest completed scoped engineering: [Write and maintenance repair Goal v12.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md).
+Latest scoped delivery: [Continuous runtime Goal v13.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v13.0_20260925.md).
+The current v12 notes template now works through the official preparation and MERIT runner;
+write receipts expose existing repair IDs and unresolved attempts before finish. Relevant
+core/recovery checks passed 28 tests and preparation/adapter checks passed 10 tests.
+[Results](docs/CONTEXTUAL_USER_MEMORY_V13_RESULTS_20260925.md) report final-source native
+4/5, dependent 2/2 and Host/maintenance 7/7. First-agreement persistence remains NOT_MET;
+an ineffective prompt diagnostic was reverted. Both complete runs and all costs remain:
+56 generations / 345375 generation tokens / 2797 embedding tokens, unknown=0, Judge=0.
+Status: `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`, not full semantic acceptance.
+[Development](docs/CONTEXTUAL_USER_MEMORY_V13_DEVELOPMENT_20260925.md) and
+[running instructions](docs/CONTEXTUAL_USER_MEMORY_V13_REPRODUCE.md) preserve the scope.
+No new memory candidate, sidecar protocol, or Attention comparison is included.
+
+Previous completed scoped engineering: [Write and maintenance repair Goal v12.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md).
 Status: `COMPLETE_WITH_SCOPED_ENGINEERING_VALIDATION`. Exact-object visibility, actionable
 revision, failed-write handling, snapshot recovery and compact shared tools are implemented.
 Selected native suffixes updated the original records; natural and controlled maintenance

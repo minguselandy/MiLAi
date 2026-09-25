@@ -1,0 +1,115 @@
+{
+  "kind": "V13_SCOPED_ENGINEERING_AND_CONTINUOUS_VALIDATION_RESULT",
+  "status": "COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT",
+  "baseline_commit": "4ea47639e6fe0be037c5b052459e03814be8531d",
+  "final_source_mapping_sha256": "5c92005f5e7f2b36c6716dcd8cf5ce1c05091f06fe47141c9f37474c6ff9a773",
+  "final_source_files_verified": 46,
+  "final_selected_run": "R1",
+  "additional_diagnostic": "R2: same original arc, only a generic first-agreement prompt change, ineffective and reverted",
+  "no_model_run_after_revert": true,
+  "unique_native_arcs": 1,
+  "unique_native_episodes": 5,
+  "unique_public_messages": 7,
+  "complete_exposures": 2,
+  "method": {
+    "profile": "ordinary",
+    "decision_policy": "notes",
+    "state_policy": "off",
+    "enable_thinking": false,
+    "maintenance_protocol": "turn-maintenance-v4",
+    "model_concurrency": 1,
+    "new_method_comparison": false
+  },
+  "final_native": {
+    "successes": 4,
+    "denominator": 5,
+    "dependent_successes": 2,
+    "dependent_denominator": 2,
+    "host_complete": 7,
+    "host_denominator": 7,
+    "maintenance_complete": 7
+  },
+  "acceptance": {
+    "official_preparation_and_run": "COMPLETE",
+    "repair_receipt_wiring": "COMPLETE_NARROW_CHECKS_ONLY",
+    "final_source_continuous_execution": "COMPLETE",
+    "first_agreement_persistence": "NOT_MET",
+    "all_native_tasks": "NOT_MET",
+    "general_semantic_reliability": "NOT_ESTABLISHED",
+    "cost_benefit": "NOT_ESTABLISHED",
+    "attention_benefit": "NOT_TESTED"
+  },
+  "stages": [
+    {
+      "name": "R1",
+      "result": "data/manifests/contextual-memory-v13-r1-results.json",
+      "source_mapping_sha256": "5c92005f5e7f2b36c6716dcd8cf5ce1c05091f06fe47141c9f37474c6ff9a773",
+      "native_successes": 4,
+      "native_denominator": 5,
+      "generation_requests": 29,
+      "prompt_tokens": 176986,
+      "completion_tokens": 4069,
+      "generation_tokens": 181055,
+      "embedding_requests": 9,
+      "embedding_tokens": 1574,
+      "truncations": 0,
+      "unknown_usage": 0,
+      "judge_requests": 0
+    },
+    {
+      "name": "R2",
+      "result": "data/manifests/contextual-memory-v13-r2-results.json",
+      "source_mapping_sha256": "8e78117ac201c3e845192dab82c4d883ee3ea8b18f7ba3dd19a5dfbd2c9078a2",
+      "native_successes": 4,
+      "native_denominator": 5,
+      "generation_requests": 27,
+      "prompt_tokens": 160516,
+      "completion_tokens": 3804,
+      "generation_tokens": 164320,
+      "embedding_requests": 9,
+      "embedding_tokens": 1223,
+      "truncations": 0,
+      "unknown_usage": 0,
+      "judge_requests": 0
+    }
+  ],
+  "continuous_cost": {
+    "generation_requests": 56,
+    "prompt_tokens": 337502,
+    "completion_tokens": 7873,
+    "generation_tokens": 345375,
+    "embedding_requests": 18,
+    "embedding_tokens": 2797,
+    "truncations": 0,
+    "unknown_usage": 0,
+    "judge_requests": 0,
+    "budget_path": "artifacts/contextual-user-memory/v13-budget.json",
+    "provider_usage_reconciled": true,
+    "legacy_v12_recounted": false,
+    "agent_tokens_included": false
+  },
+  "remaining_problems": [
+    "First future agreement not persisted; episode 0 cards and sources are empty in both runs.",
+    "R1 claimed approval escalation without an execution receipt; R2 did not reproduce that wording.",
+    "R1 durable prose contains session aliases; R2 does not.",
+    "No natural write failure exercised the new repair guidance."
+  ],
+  "checks": {
+    "core_and_recovery": 28,
+    "prepare_and_adapter": 10,
+    "distinct_total": 38,
+    "ruff": "passed",
+    "mypy": "passed",
+    "full_suite": "NOT_RUN",
+    "new_benchmark_selection": false,
+    "historical_v12_artifacts_verified": 34
+  },
+  "evidence_sha256": {
+    "data/manifests/contextual-memory-v13-development-freeze.json": "b1d2b33cbe18dfe96f29f1e6f186a0e44c43a50364fd698b6885df07305a4a7e",
+    "data/manifests/contextual-memory-v13-final-freeze.json": "f9786d55e3a8306ab3f0ccc62d20586f3e36c60e079a44704d7a98bd2cea3eb8",
+    "data/manifests/contextual-memory-v13-first-commitment-diagnostic-freeze.json": "7db06312de87f5a34647ff81a892febc039559368277f6650bd77009832ade86",
+    "data/manifests/contextual-memory-v13-r1-results.json": "3f0eb809b9f5503dd574edef4c0284c1bb32ab2d48cbf28a3f4833f6525916cc",
+    "data/manifests/contextual-memory-v13-r2-results.json": "d3611dff049750535057e0d15e0c97a87e4a120ebe3485b113bb3628ce051f8b",
+    "artifacts/contextual-user-memory/v13-budget.json": "c9632ca413647fe70a881b7032063e953151ccb5fc6760d96aed49c410d744de"
+  }
+}

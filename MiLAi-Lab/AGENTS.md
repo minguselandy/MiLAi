@@ -36,6 +36,25 @@ canonical memory state.
 
 ## Required checks
 
+The user-authorized [Goal v13.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v13.0_20260925.md)
+is `COMPLETE_WITH_NEGATIVE_OR_UNCERTAIN_EFFECT`; preserve the
+[results](docs/CONTEXTUAL_USER_MEMORY_V13_RESULTS_20260925.md). The current v12 notes template
+now has an official prepare/run path, and Host receipts expose existing unresolved repair
+IDs without auto-clearing failed writes. Relevant checks passed 38 tests plus static checks.
+Final runtime mapping is `5c92005f5e7f2b36c6716dcd8cf5ce1c05091f06fe47141c9f37474c6ff9a773`:
+all 46 files match R1's complete original-world/empty-memory run. Native 4/5, dependent 2/2
+and Host/maintenance 7/7 do not establish semantic acceptance: first-agreement persistence
+is NOT_MET, R1 claimed escalation without a receipt, and durable prose retained session aliases.
+R2's first-agreement prompt clarification did not fix the omission and was reverted;
+its 4/5 result and distinct, more careful approval wording remain diagnostic evidence.
+Do not combine R1 and R2's favorable parts, claim live repair-guidance savings (no natural
+write rejection), or present this exposed arc as unseen validation. Preserve all 56 generations /
+345375 generation tokens / 2797 embedding tokens, unknown=0, Judge=0, truncations=0.
+Ordinary/notes/off, thinking=false, action/maintenance schemas and disk format remain unchanged.
+No Product change, new candidate, Attention comparison or package move. Do not add model
+runs or repeat tests for publication; prior Luna high publication authorization persists.
+Raw transcripts, databases, model files and the rejected R2 source snapshot stay ignored.
+
 The user-authorized [Goal v12.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md)
 is `COMPLETE_WITH_SCOPED_ENGINEERING_VALIDATION`; preserve the
 [results](docs/CONTEXTUAL_USER_MEMORY_V12_RESULTS_20260925.md). Final R4 mapping is
