@@ -1,0 +1,72 @@
+{
+  "kind": "V12_SHARED_TOOL_REPRESENTATION_COMPARISON",
+  "model_calls": 0,
+  "objects": "Exactly the same current memory, maintenance and pinned native MERIT tool schemas.",
+  "method": "Replace only full tool JSON in system text with schema-derived compact descriptions.",
+  "source_sha256": "a1281ac4aed94b0253d605cbcb1ab00730687cf2ae7ee91b460f3d450c715ef9",
+  "projection_function_sha256": "69df010ce134478e07c3695fbd99a58b567c014dab645ae18899e93c64790b9a",
+  "schema_sha256": "7b8c49522ebf03587c37c111b901af73e28f4ebcd46f5281d4df18017507d3f6",
+  "tool_count": 9,
+  "full_tokens": 4080,
+  "compact_tokens": 1915,
+  "per_tool": [
+    {
+      "name": "memory_search",
+      "full_tokens": 308,
+      "compact_tokens": 179
+    },
+    {
+      "name": "memory_read",
+      "full_tokens": 295,
+      "compact_tokens": 156
+    },
+    {
+      "name": "memory_save",
+      "full_tokens": 2723,
+      "compact_tokens": 1096
+    },
+    {
+      "name": "finish_turn",
+      "full_tokens": 411,
+      "compact_tokens": 256
+    },
+    {
+      "name": "get_order",
+      "full_tokens": 68,
+      "compact_tokens": 49
+    },
+    {
+      "name": "refund",
+      "full_tokens": 78,
+      "compact_tokens": 55
+    },
+    {
+      "name": "update_address",
+      "full_tokens": 74,
+      "compact_tokens": 51
+    },
+    {
+      "name": "get_policy",
+      "full_tokens": 59,
+      "compact_tokens": 40
+    },
+    {
+      "name": "send_message",
+      "full_tokens": 72,
+      "compact_tokens": 49
+    }
+  ],
+  "full_validation_and_decoder_schemas_unchanged": true,
+  "tokenizer_identity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "enable_thinking": false,
+    "tokenizer_path": "/cra/qwen36-35B",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+  },
+  "interpretation": "Local text-segment sizes only; per-tool values need not sum to serialized collection size. The experiment does not estimate total task cost or attribute shared reasoning. Repair schema additions are present in both representations."
+}

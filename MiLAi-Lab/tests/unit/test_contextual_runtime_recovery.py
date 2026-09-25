@@ -525,6 +525,11 @@ def test_multiple_visible_ranges_restore_and_new_session_keeps_only_durable_bank
     )["record"]["ref"]
     with RuntimeStore(tmp_path, contract) as store:
         store.persist(memory, session)
+        same_memory = store.restore_memory(embed)
+        assert same_memory is not None
+        same_session = store.restore_session(same_memory)
+        assert same_session is not None
+        assert same_session.visible_bindings == session.visible_bindings
     with RuntimeStore(tmp_path, contract) as store:
         restored = store.restore_memory(embed)
         assert restored is not None

@@ -1,0 +1,524 @@
+{
+  "kind": "V12_SCOPED_NATIVE_DIAGNOSTIC_RESULTS",
+  "status": "SCOPED_ENGINEERING_VALIDATION_COMPLETE_WITH_LIMITATIONS",
+  "final_source_mapping_sha256": "f39d8170f168a56d21057a3079fdaed21a5cb6d32e852687544dd740df8955d0",
+  "config_sha256": "163b8dd74c4cf34ab67e662e154072c47db89e414bb9a931650d52c3ae8efc60",
+  "unique_diagnostic_suffixes": 3,
+  "unique_original_native_messages": 5,
+  "additional_same_message_verifications": 1,
+  "maintenance_recovery_new_native_messages": 0,
+  "method": "ordinary/notes/off",
+  "model_concurrency": 1,
+  "scope": "Hybrid v11 closed prefixes plus R1/R3/R4 suffixes. R4 repeats only the exposed completion-miss message from the same isolated native initial world. No final-source full arc, unseen evaluation or matched method comparison.",
+  "stages": [
+    {
+      "run": "v12-amount-revision-r1",
+      "status": "INTERRUPTED",
+      "generation": {
+        "requests": 20,
+        "unknown_usage": 0,
+        "prompt_tokens": 147649,
+        "completion_tokens": 52478,
+        "total_tokens": 200127
+      },
+      "embedding": {
+        "requests": 6,
+        "unknown_usage": 0,
+        "prompt_tokens": 1313,
+        "completion_tokens": 0,
+        "total_tokens": 1313
+      },
+      "truncation_subset": {
+        "requests": 9,
+        "unknown_usage": 0,
+        "prompt_tokens": 69482,
+        "completion_tokens": 36864,
+        "total_tokens": 106346
+      },
+      "committed_writes": 2,
+      "rejected_writes": 2,
+      "finish_rejections": 0,
+      "explicit_repair_chains": [
+        {
+          "failed_operation_id": "save:f18b6a7785f34aada0a3aa826c98c82a",
+          "committed_operation_id": "save:b195bf3dae9c493a86d25fe126b00c18",
+          "generation_distance": 1,
+          "same_turn": true
+        }
+      ],
+      "maintenance_reviews": [
+        {
+          "session_id": "arc2-000:episode:2",
+          "turn_id": "message-0",
+          "status": "complete",
+          "semantic_decision": "processed",
+          "committed_changes": [
+            {
+              "record_ref": "m12",
+              "operation_id": "save:b195bf3dae9c493a86d25fe126b00c18",
+              "delivery": "visible"
+            }
+          ],
+          "failed_attempts": [],
+          "unresolved_failed_attempts": [],
+          "abandoned_attempts": [],
+          "unsettled_operations": []
+        },
+        {
+          "session_id": "arc2-000:episode:2",
+          "turn_id": "message-1",
+          "status": "complete",
+          "semantic_decision": "processed",
+          "committed_changes": [
+            {
+              "record_ref": "m35",
+              "operation_id": "save:ef58746a36ed4f418582ad06298e9191",
+              "delivery": "visible"
+            }
+          ],
+          "failed_attempts": [],
+          "unresolved_failed_attempts": [],
+          "abandoned_attempts": [],
+          "unsettled_operations": []
+        }
+      ],
+      "tool_calls": {
+        "send_message": 3,
+        "": 9,
+        "memory_save": 4,
+        "refund": 1,
+        "memory_read": 1
+      },
+      "segment_tokens": {
+        "decision_projection_tokens": 0,
+        "fixed_contract_tokens": 59153,
+        "historical_sidecar_tokens": 1615,
+        "state_fixed_instruction_tokens": 1400
+      },
+      "valid_searches": 0,
+      "automatic_gap_queries": 0,
+      "version_notices": 0
+    },
+    {
+      "run": "v12-amount-recovery-r3",
+      "status": "TERMINAL",
+      "generation": {
+        "requests": 3,
+        "unknown_usage": 0,
+        "prompt_tokens": 28462,
+        "completion_tokens": 597,
+        "total_tokens": 29059
+      },
+      "embedding": {
+        "requests": 0,
+        "unknown_usage": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "truncation_subset": {
+        "requests": 0,
+        "unknown_usage": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "committed_writes": 1,
+      "rejected_writes": 0,
+      "finish_rejections": 1,
+      "explicit_repair_chains": [],
+      "maintenance_reviews": [
+        {
+          "session_id": "arc2-000:episode:3",
+          "turn_id": "message-0",
+          "status": "complete",
+          "semantic_decision": "processed",
+          "committed_changes": [
+            {
+              "record_ref": "m28",
+              "operation_id": "save:1de3655618724ec1a359e22346479e90",
+              "delivery": "visible"
+            }
+          ],
+          "failed_attempts": [],
+          "unresolved_failed_attempts": [],
+          "abandoned_attempts": [
+            {
+              "operation_id": "save:198ef52d9b0e4d96bac69eaefd59ebcf",
+              "reason": "Replaced by successful save on m28 for the same subject."
+            }
+          ],
+          "unsettled_operations": []
+        }
+      ],
+      "tool_calls": {
+        "memory_save": 1,
+        "finish_turn": 1
+      },
+      "segment_tokens": {
+        "decision_projection_tokens": 0,
+        "fixed_contract_tokens": 9279,
+        "historical_sidecar_tokens": 413,
+        "state_fixed_instruction_tokens": 210
+      },
+      "valid_searches": 0,
+      "automatic_gap_queries": 0,
+      "version_notices": 0
+    },
+    {
+      "run": "v12-refund-recovery-r3",
+      "status": "TERMINAL",
+      "generation": {
+        "requests": 7,
+        "unknown_usage": 0,
+        "prompt_tokens": 46351,
+        "completion_tokens": 1079,
+        "total_tokens": 47430
+      },
+      "embedding": {
+        "requests": 2,
+        "unknown_usage": 0,
+        "prompt_tokens": 332,
+        "completion_tokens": 0,
+        "total_tokens": 332
+      },
+      "truncation_subset": {
+        "requests": 0,
+        "unknown_usage": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "committed_writes": 1,
+      "rejected_writes": 1,
+      "finish_rejections": 1,
+      "explicit_repair_chains": [],
+      "maintenance_reviews": [
+        {
+          "session_id": "arc1-000:episode:4",
+          "turn_id": "message-0",
+          "status": "complete",
+          "semantic_decision": "processed",
+          "committed_changes": [
+            {
+              "record_ref": "m22",
+              "operation_id": "save:0a37e59c5fb64431b6470bc942a9ba5c",
+              "delivery": "visible"
+            }
+          ],
+          "failed_attempts": [],
+          "unresolved_failed_attempts": [],
+          "abandoned_attempts": [
+            {
+              "operation_id": "save:0b9d2715aa684392bce5c2a9f7670d96",
+              "reason": "Content successfully written to new record m22, making this failed attempt obsolete."
+            }
+          ],
+          "unsettled_operations": []
+        }
+      ],
+      "tool_calls": {
+        "get_order": 1,
+        "memory_save": 2,
+        "memory_read": 1,
+        "finish_turn": 1
+      },
+      "segment_tokens": {
+        "decision_projection_tokens": 0,
+        "fixed_contract_tokens": 21198,
+        "historical_sidecar_tokens": 906,
+        "state_fixed_instruction_tokens": 490
+      },
+      "valid_searches": 0,
+      "automatic_gap_queries": 0,
+      "version_notices": 0
+    },
+    {
+      "run": "v12-completion-maintenance-r3",
+      "status": "TERMINAL",
+      "generation": {
+        "requests": 3,
+        "unknown_usage": 0,
+        "prompt_tokens": 14857,
+        "completion_tokens": 365,
+        "total_tokens": 15222
+      },
+      "embedding": {
+        "requests": 2,
+        "unknown_usage": 0,
+        "prompt_tokens": 369,
+        "completion_tokens": 0,
+        "total_tokens": 369
+      },
+      "truncation_subset": {
+        "requests": 0,
+        "unknown_usage": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "committed_writes": 0,
+      "rejected_writes": 0,
+      "finish_rejections": 0,
+      "explicit_repair_chains": [],
+      "maintenance_reviews": [
+        {
+          "session_id": "arc1-000:episode:2",
+          "turn_id": "message-0",
+          "status": "complete",
+          "semantic_decision": "processed",
+          "committed_changes": [],
+          "failed_attempts": [],
+          "unresolved_failed_attempts": [],
+          "abandoned_attempts": [],
+          "unsettled_operations": []
+        }
+      ],
+      "tool_calls": {
+        "get_order": 1,
+        "refund": 1
+      },
+      "segment_tokens": {
+        "decision_projection_tokens": 0,
+        "fixed_contract_tokens": 8748,
+        "historical_sidecar_tokens": 195,
+        "state_fixed_instruction_tokens": 210
+      },
+      "valid_searches": 0,
+      "automatic_gap_queries": 0,
+      "version_notices": 0
+    },
+    {
+      "run": "v12-completion-maintenance-r4",
+      "status": "TERMINAL",
+      "generation": {
+        "requests": 5,
+        "unknown_usage": 0,
+        "prompt_tokens": 31509,
+        "completion_tokens": 645,
+        "total_tokens": 32154
+      },
+      "embedding": {
+        "requests": 2,
+        "unknown_usage": 0,
+        "prompt_tokens": 369,
+        "completion_tokens": 0,
+        "total_tokens": 369
+      },
+      "truncation_subset": {
+        "requests": 0,
+        "unknown_usage": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "committed_writes": 1,
+      "rejected_writes": 0,
+      "finish_rejections": 0,
+      "explicit_repair_chains": [],
+      "maintenance_reviews": [
+        {
+          "session_id": "arc1-000:episode:2",
+          "turn_id": "message-0",
+          "status": "complete",
+          "semantic_decision": "processed",
+          "committed_changes": [
+            {
+              "record_ref": "m23",
+              "operation_id": "save:c5c48eb1cc2d4a15a18c9e41bf1a5b89",
+              "delivery": "visible"
+            }
+          ],
+          "failed_attempts": [],
+          "unresolved_failed_attempts": [],
+          "abandoned_attempts": [],
+          "unsettled_operations": []
+        }
+      ],
+      "tool_calls": {
+        "get_order": 1,
+        "refund": 1,
+        "memory_read": 1,
+        "memory_save": 1
+      },
+      "segment_tokens": {
+        "decision_projection_tokens": 0,
+        "fixed_contract_tokens": 14905,
+        "historical_sidecar_tokens": 528,
+        "state_fixed_instruction_tokens": 350
+      },
+      "valid_searches": 0,
+      "automatic_gap_queries": 0,
+      "version_notices": 0
+    }
+  ],
+  "r2_preparation": {
+    "status": "FAILED_BEFORE_MODELS",
+    "error": "RUNTIME_SESSION_BINDING_INVALID",
+    "cause": "In-memory snapshot tuple spans versus JSON-list-only restore contract.",
+    "repair": "R3 serializes binding spans in the existing JSON shape; disk format and strict checks unchanged.",
+    "new_generation_or_embedding_or_business_calls": 0,
+    "partial_state_preserved": true
+  },
+  "current_record_reads": [
+    {
+      "run": "v12-amount-recovery-r3",
+      "original_handle": "card:1",
+      "revision": 3,
+      "current_ref": "6d3b4ce75eaf9ae0/card:1@3",
+      "read_status": "CURRENT",
+      "full_body_read": true,
+      "body_sha256": "f390bdd77ca443d453c6a6eecc84f664f3e3134708b0eddb75b891cb170a38f0",
+      "card_count": 2,
+      "successful_business_source_call_ids": [
+        "call:f97fc8b4745126eeccac22e41ae99bc6"
+      ],
+      "semantic_review": "Original card now records actual completion and current agreed amount; no competing card.",
+      "model_calls": 0
+    },
+    {
+      "run": "v12-refund-recovery-r3",
+      "original_handle": "card:2",
+      "revision": 3,
+      "current_ref": "479db7b13db10b3d/card:2@3",
+      "read_status": "CURRENT",
+      "full_body_read": true,
+      "body_sha256": "d65af239eb5b1ad1b4c5cc1f99e19c9ad55d594ced1a8d7e9154430199f052bb",
+      "card_count": 2,
+      "successful_business_source_call_ids": [
+        "call:75298d26e5b708ab0fea97254d6aa9df"
+      ],
+      "semantic_review": "Original card now records actual completion and current agreed amount; no competing card.",
+      "model_calls": 0
+    },
+    {
+      "run": "v12-completion-maintenance-r4",
+      "original_handle": "card:1",
+      "revision": 3,
+      "current_ref": "479db7b13db10b3d/card:1@3",
+      "read_status": "CURRENT",
+      "full_body_read": true,
+      "body_sha256": "17498fbb98e0166f2a7023dfde6cca06543caafb3e05dc19b797c16e4037a2eb",
+      "card_count": 2,
+      "successful_business_source_call_ids": [
+        "call:642901849d59a7aeb8da898af7172b7c"
+      ],
+      "semantic_review": "Original card now records actual completion and current agreed amount; no competing card.",
+      "model_calls": 0
+    }
+  ],
+  "natural_maintenance_recovery": {
+    "host_complete": true,
+    "same_original_turn": true,
+    "new_business_calls": 0,
+    "world_unchanged": true,
+    "original_identity_and_state_unmodified": true,
+    "resolution": "One same-card committed revision, then explicit reasoned abandonment of the old failed proposal after a rejected finish; not an automatic repair_of association."
+  },
+  "controlled_business_recovery": {
+    "native_checker_passed": true,
+    "host_complete": true,
+    "interruption_after_persisted_success_before_source_delivery": true,
+    "business_refund_executions": 1,
+    "business_calls_after_resume": 0,
+    "world_unchanged_during_resume": true,
+    "current_card_revision": 3,
+    "responses_used_before_interruption": 2,
+    "original_response_capacity_remaining": 10
+  },
+  "completion_miss": {
+    "r3_native_checker": true,
+    "r3_host_complete": true,
+    "r3_current_card_complete": false,
+    "r4_native_checker": true,
+    "r4_host_complete": true,
+    "r4_current_card_complete": true,
+    "same_initial_world": true,
+    "same_final_business_world": true,
+    "one_generic_finish_purpose_change": true,
+    "zero_write_semantics_and_validators_unchanged": true
+  },
+  "continuous_cost": {
+    "generation_requests": 38,
+    "generation_input_tokens": 268828,
+    "generation_output_tokens": 55164,
+    "generation_tokens": 323992,
+    "embedding_requests": 12,
+    "embedding_tokens": 2383,
+    "unknown_usage": 0,
+    "judge_requests": 0,
+    "truncation_requests": 9,
+    "truncation_tokens_included_in_total": 106346,
+    "historical_v11": {
+      "ledger": "artifacts/contextual-user-memory/v11-budget.json",
+      "sha256": "47e21d12d2eec9ce25f2cc155bdea22eb81a049ddc0249afb289f7a688066ceb",
+      "generation_requests": 238,
+      "generation_tokens": 2453097,
+      "embedding_tokens": 14274,
+      "unknown_usage": 0,
+      "judge_requests": 0,
+      "earlier_history": {
+        "ledger": "artifacts/contextual-user-memory/v10-budget.json",
+        "sha256": "7e0c2db25823e3d15f141c84ede59b934e38bf5dd3edd41ec5bfbc37b42b0507",
+        "generation_requests": 122,
+        "generation_tokens": 1216124,
+        "embedding_tokens": 8148,
+        "modified": false,
+        "earlier_history": {
+          "ledger": "artifacts/contextual-user-memory/v9-budget.json",
+          "sha256": "8f5021ff4b7cb7d04b3fae7954d488d90ef4a3e08716f0ea97db8cebc401aed6",
+          "generation_requests": 119,
+          "generation_tokens": 966332,
+          "embedding_tokens": 4358,
+          "modified": false
+        }
+      },
+      "sealed": true
+    },
+    "agent_cost_separate": true
+  },
+  "limitations": [
+    "All examples were exposed development cases, not independent generalization evidence.",
+    "The final R4 description has one isolated native verification; successful R3 recovery is not relabeled as a full R4 run.",
+    "A legal zero-write finish cannot certify semantic sufficiency. R3 miss and subsequent local R4 improvement remain visible.",
+    "No Attention/State effect or general cost/reliability benefit is established; ordinary remains default.",
+    "Static tool-text savings do not measure total task savings; all failures and recovery costs are retained."
+  ],
+  "historical_evidence_hashes_unchanged": true,
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/manifest.json": "f33a0a4dc47c320ec071e6e0c7c092f1d6b9f5b9a6d2213a97730535114506cb",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/interruption.json": "d89c767286afad2e6fe4dd4bd63b4c7a391c2783fab12ff378ad8363da12cf0a",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/runtime/accounting.json": "79f9c280f4525aac0c205bae13c88a7736cacb2767aa8f409705e1f3f561d2b1",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/runtime/trace.jsonl": "85a78bc0201ed66e7ffc49882d7228de2775aa646339b536db9494d9b34bc31c",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/runtime/runtime-state/state.json": "6fda78e5ed46d05258b650042f404bb772847d214bedc374804d75a2119c43c8",
+    "artifacts/contextual-user-memory/v12-amount-revision-r1/episodes/episode-2.json": "2d818ca6b30168ea1f86ce6de275446341291a857366d763726c4048cd654a42",
+    "artifacts/contextual-user-memory/v12-amount-recovery-r3/manifest.json": "81f7855c464ac77373ee014d3aafa94ec14fd455c816f9359bc1faef3c993c6a",
+    "artifacts/contextual-user-memory/v12-amount-recovery-r3/result.json": "899cd7cd938fd693c1e78a183ebe10266edc03529955fa6b7c2b42c68ebed5ff",
+    "artifacts/contextual-user-memory/v12-amount-recovery-r3/recovery.json": "5a0099889ec1113c6967c5742af68d894aa042c171e23100fd8eef69b62693aa",
+    "artifacts/contextual-user-memory/v12-amount-recovery-r3/runtime/accounting.json": "ea308230e177d406d1468f2903a0497a281de7779ab0e4d839f3735847f5aa05",
+    "artifacts/contextual-user-memory/v12-amount-recovery-r3/runtime/trace.jsonl": "0ce8b2604a33107dfcefd34239bc57d2368ce333501b038df4de4a49e2dc60f5",
+    "artifacts/contextual-user-memory/v12-amount-recovery-r3/runtime/runtime-state/state.json": "d40e42eb9808910016c358ae41b504b2b4fad4a0614dffb13a254fe2e49c8ea4",
+    "artifacts/contextual-user-memory/v12-refund-recovery-r3/manifest.json": "5655ced3b294bc34c084642f5368bec481c5be41d28cda3858f7bd3b838a1821",
+    "artifacts/contextual-user-memory/v12-refund-recovery-r3/result.json": "4220c02218dcf2ef085127a2ae058d9c1bddd0d213e3ef048a94d71717dfdeb4",
+    "artifacts/contextual-user-memory/v12-refund-recovery-r3/controlled-interruption.json": "216a6a7ffdf38c554c890c44bcf1c3b2b302d1389800614e4bd965f452cb11ac",
+    "artifacts/contextual-user-memory/v12-refund-recovery-r3/recovery.json": "b2e92878685a693584fb4148cbda76eee4f66826cbbdd622df15dfc341872951",
+    "artifacts/contextual-user-memory/v12-refund-recovery-r3/runtime/accounting.json": "d27127ae0f1932a4d194c7e341708ca59163af1e4321809889f801accea2caef",
+    "artifacts/contextual-user-memory/v12-refund-recovery-r3/runtime/trace.jsonl": "334781c9f06a6bf01ea923d8d40aaaa4644a120f6043f269480fed90ab8a255d",
+    "artifacts/contextual-user-memory/v12-refund-recovery-r3/runtime/runtime-state/state.json": "3e593fef4dd8d30a46a43c4f916f2ae4daa8373aac600e971ea4043e40106bc4",
+    "artifacts/contextual-user-memory/v12-refund-recovery-r3/episodes/episode-4.json": "08f9b96084d55ddc0e36d1092f54dccfaff5819f128a5687ed65daaa7bc65fd0",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r3/manifest.json": "7ad4f17f6a18c2f02921361057d22fca7fc677b5f0ef9518aa676f69913a7f81",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r3/result.json": "806e7a2fe6a181e5ac89cdaad679e46f3b6544c7ff81903cf588154eeb97da00",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r3/runtime/accounting.json": "d1f408a7943206462ad71c8e06a0001f73b3b1f8b75ffcf1a2a2ae478244b080",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r3/runtime/trace.jsonl": "1b028c49744bd866e806baecd00f75841a803b850291ba52e89e0a1539560532",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r3/runtime/runtime-state/state.json": "68e02e3f92ab4aeaa88f8a3e7d52df9d5009708f3204619631ba36edbb0b0749",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r3/episodes/episode-2.json": "c1076e995c69f9fc1eccd26c160fa3356fd3a0c7a478f8a28b50820d5202c623",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r4/manifest.json": "15ea9b941f0a32a325f421b089dc63bd5b49160cd057bddb0068f3a0e2a782ff",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r4/result.json": "4031be4b4207baa05c537d9bbde46ddbaf74e27b7e71433c871197bb7653be69",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r4/runtime/accounting.json": "d1b368a03d14e07a08754024807f6acd5ddc23d0f4109b9c9a90ad6d31a2e6fa",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r4/runtime/trace.jsonl": "8b35be12ccb8acbc7e8a7de22c3deb5d32dfa8c3518e558ef101e3e252c9003c",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r4/runtime/runtime-state/state.json": "351972c03037c7fce160d0503948970972729e3489390f9c71a8eadf2d50f501",
+    "artifacts/contextual-user-memory/v12-completion-maintenance-r4/episodes/episode-2.json": "6bfdb853e0dc665f8a2dd9cbb6cf0fd65a008c5bc963f1cda0bff2fc48156533",
+    "artifacts/contextual-user-memory/v12-budget.json": "c5895f2a340812a5210e741abf8244510d8cbb21a21597ce765f2d1229a5e1dc",
+    "artifacts/contextual-user-memory/v12-development/final_evidence.py": "71d85a4bdc4201b3048bdc666cc8420490a44becde3f5c04c43e6c8ffe02ceef"
+  }
+}

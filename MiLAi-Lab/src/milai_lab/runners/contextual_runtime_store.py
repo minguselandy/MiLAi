@@ -151,6 +151,16 @@ def _binding(value: dict[str, Any]) -> MaterialBinding:
     )
 
 
+def _binding_data(binding: MaterialBinding) -> dict[str, Any]:
+    """Use the existing JSON wire shape before and after the atomic write."""
+    return {
+        "exact_ref": binding.exact_ref,
+        "kind": binding.kind,
+        "spans": [list(span) for span in binding.spans],
+        "content_sha256": binding.content_sha256,
+    }
+
+
 def _result_dict(result: Any) -> dict[str, Any]:
     if is_dataclass(result) and not isinstance(result, type):
         return copy.deepcopy(asdict(result))
@@ -185,10 +195,12 @@ def _session_snapshot(session: HostSession) -> dict[str, Any]:
                 "message_index": index,
                 "content": content,
                 "projected": copy.deepcopy(projected),
-                "bindings": {alias: asdict(binding) for alias, binding in bindings.items()},
+                "bindings": {alias: _binding_data(binding)
+                             for alias, binding in bindings.items()},
             }
         )
-    aliases = {alias: asdict(binding) for alias, binding in session.visible_bindings.items()}
+    aliases = {alias: _binding_data(binding)
+               for alias, binding in session.visible_bindings.items()}
     return {
         "session_id": session.session_id,
         "task_id": session.task_id,

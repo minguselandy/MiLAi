@@ -62,7 +62,12 @@ REPAIR_FINISH_TOOL: dict[str, Any] = copy.deepcopy(SEMANTIC_FINISH_TOOL)
 REPAIR_FINISH_TOOL["function"]["parameters"] = REPAIR_FINAL_SCHEMA
 REPAIR_FINISH_TOOL["function"]["description"] += (
     " Failed memory_save attempts must be repaired by a committed write using repair_of, "
-    "explicitly abandoned with a reason if optional, or left pending."
+    "explicitly abandoned with a reason if optional, or left pending. Before processed, "
+    "compare the actual business outcome with the current durable record for the same "
+    "matter: an agreed or pending plan does not record completed execution. Revise that "
+    "record when its status changes; zero-write processed is valid if it already states "
+    "the outcome or no durable update is warranted. Receipt checks do not certify this "
+    "semantic comparison."
 )
 
 REVIEW_SCHEMA: dict[str, Any] = {

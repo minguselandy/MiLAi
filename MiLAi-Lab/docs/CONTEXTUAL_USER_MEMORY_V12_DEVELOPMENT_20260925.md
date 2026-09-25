@@ -1,14 +1,14 @@
 ---
 version: v12.0
 date: 2026-09-25
-status: IMPLEMENTED_PENDING_SMALL_VALIDATION
+status: COMPLETE_WITH_SCOPED_ENGINEERING_VALIDATION
 scope: MiLAi-Lab
 baseline_commit: 822efff48e92f03a493385646a5520a409f2123a
 ---
 
 # v12 写入与维护修复开发记录
 
-用户已授权执行 [v12 Goal](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md)。[规划诊断](../data/manifests/contextual-memory-v12-planning-diagnosis.json)作为 A 包的起点；规划的五项纯主体校验重建不冒充完整历史重放。核心实现和窄检查已完成，第一段金额更正诊断在后续业务成功后的维护阶段中断，恢复准备另有确定性错误。用户要求发布全部已有开发，本次提交保留验证未完成状态；不将发布等同于 Goal 验收完成。
+[v12 Goal](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md)已完成核心开发与所选小规模验证。[最终结果](CONTEXTUAL_USER_MEMORY_V12_RESULTS_20260925.md)区分真实业务、Host 结束和原卡语义；[规划诊断](../data/manifests/contextual-memory-v12-planning-diagnosis.json)及下文阶段记录保留原失败。三条成功路径均读取到正确当前原卡，自然/受控维护恢复没有重复业务。所有结论仅限已暴露开发片段，不代表完整 arc 或通用可靠性。
 
 一个 Sol xhigh 负责 Host、材料交付、维护、恢复及公共工具投影的集成；主控制器负责冻结、必要诊断选择、连续费用和交付。Host 实验并发为 1。Luna high 仅按用户既有授权处理下载或 Git 发布；本轮已有本地源码，无须下载。
 
@@ -16,9 +16,9 @@ baseline_commit: 822efff48e92f03a493385646a5520a409f2123a
 | --- | --- | --- |
 | A 故障固定 | 完成 | 原失败提案/准确绑定的规划证据；合成合同用例；无 benchmark 正文复制入测试 |
 | B 合法写入 | 实现及窄检查完成 | 当前可见准确对象及范围；主体锚点/继承 delta；错误字段及合法去向；真实无效仍拒绝 |
-| C 失败收敛 | 实现及窄检查完成 | preflight/core 失败均保留；显式 repair_of 关联；可选放弃/pending；两进程恢复不重做业务 |
-| D 公共合同 | 完成零模型测量 | 同一九工具 schema：4015 → 1850 本地 tokens；完整验证/解码不变 |
-| E 原生诊断 | 未完成 | 第一段两次金额更正提交、下一集退款成功，但维护中断；R2 恢复准备失败，其余两段未执行 |
+| C 失败收敛 | 完成有限验证 | preflight/core 失败均保留；显式 repair_of / 有理由放弃 / pending；真实恢复不重做业务；漏维护经单项澄清复核 |
+| D 公共合同 | 完成零模型测量 | 初次 4015 → 1850；最终同九工具 4080 → 1915 tokens；完整参数验证/解码不变 |
+| E 原生诊断 | 完成有限验证 | R1/R2 失败保留，R3 两种恢复成功；零尝试漏维护在 R3 失败、R4 同一原生片段复核修订成功 |
 
 已存在旧状态与配置均先检查真实兼容性。只接受显式支持的恢复路径，不编辑旧 identity/hash/CAS 以装载。若不兼容，从原生初态重建必要前缀，保留全部费用。片段和混合来源前缀不报告为当前版本完整 arc。
 
@@ -30,9 +30,9 @@ baseline_commit: 822efff48e92f03a493385646a5520a409f2123a
 
 [选择清单](../data/manifests/contextual-memory-v12-diagnostic-selection.json)固定三个已暴露后缀，共五条原生消息：arc2 A1 的 episode 1 闭合 bank/world → 原 episode 2、3；arc1 A0 的 episode 3 → 原 episode 4；arc1 A2 的 episode 1 → 原 episode 2。它们分别检查金额更正后消费、退款后恢复、已完成业务的当前卡维护。
 
-三份 bank 已通过现有 `ContextualMemory.restore` 的零模型核验，来源、内容、准确版本和向量保持不变。该接口原本明确允许 `task=None` 时切换 decision policy；A1/A2 只切换为 notes/off，A0 bank 完全相同。新运行不导入旧 active session 或旧 RuntimeIdentity，不修改原 checkpoint。最终准备还将按最终代码格式核验。
+三份 bank 已通过现有 `ContextualMemory.restore` 的零模型核验，来源、内容、准确版本和向量保持不变。该接口原本明确允许 `task=None` 时切换 decision policy；A1/A2 只切换为 notes/off，A0 bank 完全相同。新运行不导入旧 active session 或旧 RuntimeIdentity，不修改原 checkpoint。正式准备及最终恢复已按对应冻结代码格式核验。
 
-恢复诊断将在真实退款成功且原执行日志保存结果后，注入一次控制器中断，然后重新打开同一个运行库、同一 session/turn，使用原十二次响应容量的剩余部分继续。该受控中断与自然模型失败分别报告；完整业务工具保持可用，检查后续操作和世界以确认无重复退款。
+恢复诊断已在真实退款成功且原执行日志保存结果后，注入一次控制器中断，再重新打开同一个运行库、同一 session/turn，使用原十二次响应容量的剩余部分完成维护。该受控中断与自然模型失败分别报告；完整业务工具保持可用，实际后续调用与世界变化证实没有重复退款。
 
 v4 新 Host 字段的初次部署 grammar 检查已通过：vLLM 0.27.1、xgrammar 0.2.3、`any_order=False`，notes/basis 的 `repair_of`、普通 finish、带理由放弃、拒绝缺失理由、最终响应放弃共十个探针全部符合。调用模型次数为零；若 schema 后续变化，需核对新的冻结语法身份。
 
@@ -44,7 +44,7 @@ v4 新 Host 字段的初次部署 grammar 检查已通过：vLLM 0.27.1、xgramm
 
 正式[工具投影对照](../data/manifests/contextual-memory-v12-contract-projection.json)在同一 schema 上比较原完整 JSON 展示与短说明，减少约 53.9% 的该文本段 tokens。该比例不是总任务节约；工具目的和实际验证/解码能力保留。最终 schema 与上述十个部署探针的输入相等，因此没有重复编译或增加模型调用。
 
-## 本次发布时的实际诊断状态
+## 首次发布 4affa206 时的实际诊断状态（历史）
 
 [发布检查点](../data/manifests/contextual-memory-v12-publication-checkpoint.json)记录状态、连续费用和本地证据哈希。R1 金额诊断的原 episode 2 两条消息均完成：两张原卡通过 delta 提交了新金额，其中一次错误的 `repair_of` 被拒后，下一次提案使用准确失败操作身份完成了显式修复。随后原 episode 3 按新金额成功退款，但完成状态写入先因真实未读来源被拒，补读后又连续输出截断，最终耗尽该工作流的十二次响应容量。未解决尝试保留在 maintenance 中，没有被标为 processed。
 
@@ -55,3 +55,14 @@ R1 共 20 次生成，147649 输入、52478 输出、200127 generation tokens；
 R2 的零模型准备在新 RuntimeStore 重新载入 session 时触发 `ValueError: RUNTIME_SESSION_BINDING_INVALID`，位置为 `contextual_runtime_store._binding`；准备进程退出码为 1，未生成成功准备清单。该次准备未调用模型、embedding 或业务工具，部分目标状态与 R1 原始证据保留在 ignored artifacts。真实恢复成功、无重复业务以及当前原卡完成状态均尚待验证；不能用已有合成恢复测试替代这次实际失败。另两个选定后缀仅完成 R1 准备，未执行，也未使用变更后的模板冒充 R1 运行。
 
 后续需先定位并修复绑定快照恢复错误，再冻结必要变更并续接小范围验证。本次仅发布已有代码、测试、配置、文档和紧凑清单，不追加模型请求或大规模测试。Product API、Schema、权限、Canonical 与依赖边界均未改动；没有包移动，未重复运行边界检查或构建。发布前回滚基点为 `822efff48e92f03a493385646a5520a409f2123a`。
+
+
+## 后续修复与最终小验证
+
+R3 修复 `_session_snapshot` 的 tuple/list 表示不一致：快照直接生成原磁盘 JSON 形状，读取校验及 STORE_PROTOCOL 不变。既有多跨度恢复用例补同 Store restore 断言，修复前失败，修复后相关文件 9 passed；Ruff、mypy 通过。真实 R1 状态经正常 API 导入新配置身份，checkpoint、session、当前 turn 和已结束操作完全相同，原文件未改写。[R3 冻结](../data/manifests/contextual-memory-v12-recovery-freeze.json)保留此证据。
+
+R3 自然维护恢复 3 次请求完成、原卡 revision 3，零新业务；受控退款恢复 7 次请求完成、原 card:2 revision 3，退款仅执行一次且恢复期间世界不变。两条路径均保留首次结束拒绝，明确处理旧失败才完成。第三段仍出现零写漏维护：原卡保持待办但业务和 Host 均已结束。
+
+R4 只澄清 v4 结束工具说明中的“计划/约定”与“实际完成结果”，不增加强制写入、语义验证器或数据专用规则。参数 schema 与原四份部署探针输入完全相等；维护源码静态检查通过。相同原生消息在独立初始世界上的复核用 5 次请求完成，原卡更新到 revision 3；初始与最终业务世界均与 R3 相同。原 R3 错误和业务世界均保留。[最终冻结](../data/manifests/contextual-memory-v12-final-freeze.json)映射 `f39d8170f168a56d21057a3079fdaed21a5cb6d32e852687544dd740df8955d0`。
+
+[最终结果及逐项验收](CONTEXTUAL_USER_MEMORY_V12_RESULTS_20260925.md)列明 A—E、当前记录正常读取、真实操作身份、未运行项及局限。连续费用为 38 次生成 / 323992 generation tokens / 2383 embedding tokens，unknown=0、Judge=0，九次截断成本均已包含。没有重跑六臂、全套测试或完整 arc；ordinary 仍为默认，未提出方法收益结论。

@@ -36,22 +36,27 @@ canonical memory state.
 
 ## Required checks
 
-The user explicitly authorized full execution of [Goal v12.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md).
-Its implementation is in progress: exact resident visibility, actionable local revision,
-failed-write maintenance and recovery, schema-derived compact shared tools, then small
-exposed native diagnostics. One Sol xhigh owns core integration. One model controller,
-concurrency 1; no standing reviewer, extra arms, full suite or Product changes. Preserve
-all historical failures and v11 charges. Use a new continuous v12 ledger with null
-cumulative caps. New snapshot/schema fields require explicit compatibility identities;
-never rewrite old identities to load a checkpoint. Optional capacity/sidecar work needs
-remaining evidence. Keep ordinary default and report business, maintenance and semantic
-outcomes separately. Existing user authorization for Luna high publication persists.
-The current publication includes core implementation and narrow checks, not completed
-native acceptance. R1 amount changes and refund succeeded, but maintenance exhausted its
-workflow capacity. R2 changes only enable_thinking to false; its zero-model preparation
-failed with RUNTIME_SESSION_BINDING_INVALID while restoring the newly persisted session.
-Preserve the failed state and all 20 generations / 200127 generation tokens / 1313 embedding
-tokens. See the v12 development record and publication checkpoint before any recovery.
+The user-authorized [Goal v12.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md)
+is `COMPLETE_WITH_SCOPED_ENGINEERING_VALIDATION`; preserve the
+[results](docs/CONTEXTUAL_USER_MEMORY_V12_RESULTS_20260925.md). Final R4 mapping is
+`f39d8170f168a56d21057a3079fdaed21a5cb6d32e852687544dd740df8955d0`.
+Implementation covers exact resident visibility, actionable revisions, failed-write repair or
+reasoned abandonment, unchanged-format snapshot recovery and compact shared tools.
+R1 corrected both original amounts and consumed the current amount, then maintenance
+truncated; R2 zero-model preparation failed on tuple/list binding spans. R3 repaired the
+snapshot representation and completed natural/controlled maintenance without repeating
+business actions. R3 also preserved a zero-write semantic miss; R4's single generic finish
+purpose clarification passed that same isolated native message and updated the original card.
+Do not relabel mixed v11 prefixes and R1/R3/R4 suffixes as a final-source full arc, unseen
+validation or general reliability. Preserve all 38 generations / 323992 generation tokens /
+2383 embedding tokens, unknown=0, Judge=0, including earlier failures. Final same-schema
+shared tool text is 4080 -> 1915 tokens; this does not prove total task savings. Ordinary and
+thinking=false remain the delivered default; no Attention comparison or sidecar change.
+No new compatibility format, Product API/schema/permission/Canonical change or package move.
+Do not restart completed diagnostics or broaden tests merely for publication. Existing user
+authorization for Luna high publication persists. New development, if authorized, retains
+one Sol xhigh core owner, one real model controller/concurrency 1, narrow checks and
+continuous accounting; no standing reviewer. Raw transcripts, databases and models stay ignored.
 
 The user explicitly authorized execution of [Goal v11.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v11.0_20260925.md)
 and its [sparse-basis design](docs/MILA_CONTEXTUAL_USER_MEMORY_V11_SPARSE_BASIS_DESIGN_20260925.md).

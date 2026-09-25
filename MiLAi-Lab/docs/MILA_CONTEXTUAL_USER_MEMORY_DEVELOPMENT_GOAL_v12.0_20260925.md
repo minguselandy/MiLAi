@@ -2,7 +2,7 @@
 goal_id: MILAI-WRITE-REPAIR-AND-MAINTENANCE-COMPLETION
 version: v12.0
 date: 2026-09-25
-status: IMPLEMENTED_PENDING_SMALL_VALIDATION
+status: COMPLETE_WITH_SCOPED_ENGINEERING_VALIDATION
 delivery: problem_driven_implementation_and_small_native_validation
 baseline_commit: 822efff48e92f03a493385646a5520a409f2123a
 baseline_source_mapping_sha256: 666344907d0ef59f171431ebc7e572b92bf68fae2378f82fc32dc8df4fff7c12
@@ -18,9 +18,9 @@ verification_count_cap: null
 
 **目标：消除当前真实任务中“已读仍误拒、局部更新难以合法提交、失败修订被静默终结、业务成功后维护无法恢复”的故障；在共享能力不减少的前提下，降低公共合同与失败恢复开销。先完成开发，再用少量原生故障场景验证，不增加记忆候选。**
 
-状态为 IMPLEMENTED_PENDING_SMALL_VALIDATION。用户已授权完整执行 v12；A—D 核心实现和窄检查已完成，现按[冻结身份](../data/manifests/contextual-memory-v12-development-freeze.json)进入 E 的已暴露原生后缀诊断。原规划时的只读事实保留在[分析及改造设计](MILA_CONTEXTUAL_USER_MEMORY_V12_FAILURE_ANALYSIS_AND_REPAIR_DESIGN_20260925.md)及[诊断清单](../data/manifests/contextual-memory-v12-planning-diagnosis.json)，实施情况见[v12 开发记录](CONTEXTUAL_USER_MEMORY_V12_DEVELOPMENT_20260925.md)。v11 仍按负面／不确定效果结项，其结果与费用不重写。
+状态为 COMPLETE_WITH_SCOPED_ENGINEERING_VALIDATION。A—E 已完成开发及所选小规模验证，详见[结果文档](CONTEXTUAL_USER_MEMORY_V12_RESULTS_20260925.md)和[最终冻结](../data/manifests/contextual-memory-v12-final-freeze.json)。两卡金额更正提交且下一集按新金额执行；自然/受控维护恢复未重复业务，当前原卡正常可读。零尝试漏维护在 R3 仍出现，经一项通用结束工具说明澄清后，R4 同一原生消息的隔离复核更新了原卡。完整失败与连续费用均保留：38 次生成、323992 generation tokens、2383 embedding tokens，unknown=0、Judge=0。
 
-本次发布全部已有开发时，E 尚未完成：R1 金额更新及真实退款成功，随后维护因截断中止；仅调整推理设置的 R2 在零模型恢复准备时出现 `RUNTIME_SESSION_BINDING_INVALID`。保留原始失败、连续费用及两段未运行的诊断，不以 Git 发布或窄测试通过宣布本 Goal 完成。详见[发布检查点](../data/manifests/contextual-memory-v12-publication-checkpoint.json)。
+本结项限于所选已暴露片段，不是最终源码完整 arc、泛化可靠性或方法优势。原规划只读事实保留在[分析及改造设计](MILA_CONTEXTUAL_USER_MEMORY_V12_FAILURE_ANALYSIS_AND_REPAIR_DESIGN_20260925.md)及[诊断清单](../data/manifests/contextual-memory-v12-planning-diagnosis.json)；[开发记录](CONTEXTUAL_USER_MEMORY_V12_DEVELOPMENT_20260925.md)与[先前发布检查点](../data/manifests/contextual-memory-v12-publication-checkpoint.json)保留 R1 截断、R2 准备错误和当时未完成状态。v11 结果与费用不重写。
 
 ## 1. 为什么这次优先级要变化
 

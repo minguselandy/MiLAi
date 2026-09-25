@@ -1,25 +1,21 @@
 # MiLAi Lab goals
 
-## Active write and maintenance repair Goal v12.0 (2026-09-25)
+## Completed scoped write and maintenance repair Goal v12.0 (2026-09-25)
 
-[Goal v12.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md) and
-[failure analysis and repair design](MILA_CONTEXTUAL_USER_MEMORY_V12_FAILURE_ANALYSIS_AND_REPAIR_DESIGN_20260925.md)
-start from submitted `822efff`. Status: `IMPLEMENTED_PENDING_SMALL_VALIDATION`; the
-[read-only diagnosis](../data/manifests/contextual-memory-v12-planning-diagnosis.json)
-is the starting evidence. See the [development record](CONTEXTUAL_USER_MEMORY_V12_DEVELOPMENT_20260925.md).
-Priorities are exact-object visibility across aliases, actionable subject/basis constraints
-for existing delta revisions, unresolved rejected-write handling, and maintenance-only
-recovery after successful business actions. Public tool-contract compression follows the
-correctness repairs; further capacity or sidecar changes depend on measured residual failures.
-Develop first, then validate small exposed native failure chains without changing data or
-scorers. No six-trajectory rerun or new Attention comparison is scheduled. Ordinary remains
-default; Lab only; cumulative request/token/verification caps remain null with full accounting.
-Planning made no source changes or model calls. Subsequent core implementation passed
-71 affected tests plus one targeted follow-up. The first native diagnostic committed both
-amount corrections and executed the current refund, but maintenance remained incomplete;
-R2 recovery preparation failed with `RUNTIME_SESSION_BINDING_INVALID` before any new model
-or business call. Current charges are 20 generations / 200127 generation tokens / 1313
-embedding tokens. Publication preserves this unfinished validation status.
+[Goal v12.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v12.0_20260925.md) is
+`COMPLETE_WITH_SCOPED_ENGINEERING_VALIDATION`; see the
+[results](CONTEXTUAL_USER_MEMORY_V12_RESULTS_20260925.md) and
+[development record](CONTEXTUAL_USER_MEMORY_V12_DEVELOPMENT_20260925.md).
+Core changes cover exact-object visibility, actionable delta revisions, unresolved writes,
+normal snapshot restoration and schema-derived compact tools. Selected original suffixes
+committed both amount corrections and consumed the current amount; natural and controlled
+maintenance recovery completed without repeated business actions. R3 zero-write maintenance
+missed the completion state; a generic finish-tool clarification led R4's same isolated native
+message to update the original card. Preserve that failure and all staged identities.
+Continuous costs: 38 generations / 323992 generation tokens / 2383 embedding tokens,
+unknown=0, Judge=0. Final shared tool text is 4080 versus 1915 tokens for the same nine schemas.
+No full suite, expanded benchmark, six-arm rerun or final-source complete arc. Ordinary
+remains default; no method-benefit or general-reliability conclusion; Product unchanged.
 
 ## Completed scoped sparse decision-basis Goal v11.0 (2026-09-25)
 
