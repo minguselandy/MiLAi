@@ -1,0 +1,184 @@
+{
+  "kind": "V14_FINAL_SOURCE_EXPOSED_ORIGINAL_ARC",
+  "status": "TERMINAL_WITH_OPEN_SEMANTIC_FAILURES",
+  "source_mapping_sha256": "944cda954858d7181624fc25c72ada717d3bd973e5231b29ecab85751e7f66ab",
+  "selection_role": "Previously exposed original arc0; not unseen validation",
+  "empty_initial_bank": true,
+  "original_world": true,
+  "native_data_and_scoring_unchanged": true,
+  "native_successes": 4,
+  "native_denominator": 5,
+  "dependent_successes": 1,
+  "dependent_denominator": 2,
+  "host_complete": 7,
+  "host_turns": 7,
+  "maintenance_complete": 7,
+  "episodes": [
+    {
+      "episode_index": 0,
+      "native_success": true,
+      "dependent": false,
+      "host_statuses": [
+        "complete"
+      ],
+      "semantic_status": "FAIL_FIRST_RETENTION",
+      "review": "Initial agreement was marked none after a confirmation message; zero durable cards and sources.",
+      "durable_cards_after_close": 0,
+      "sources_after_close": 0,
+      "memory_write_calls": 0,
+      "rejected_finish_calls": 1,
+      "business_calls": 2,
+      "answer_execution_review": "No unsupported business-completion claim found in the actual answer; memory correctness separately assessed."
+    },
+    {
+      "episode_index": 1,
+      "native_success": true,
+      "dependent": false,
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "semantic_status": "FAIL_AGREEMENT_AND_UPDATE_RETENTION",
+      "review": "Both public messages were marked none. No retained updated amount or second-order initial agreement.",
+      "durable_cards_after_close": 0,
+      "sources_after_close": 0,
+      "memory_write_calls": 0,
+      "rejected_finish_calls": 1,
+      "business_calls": 4,
+      "answer_execution_review": "No unsupported business-completion claim found in the actual answer; memory correctness separately assessed."
+    },
+    {
+      "episode_index": 2,
+      "native_success": false,
+      "dependent": true,
+      "host_statuses": [
+        "complete",
+        "complete"
+      ],
+      "semantic_status": "FAIL_DEPENDENT_ACTION_MEMORY_MISS",
+      "review": "First message cannot retrieve previously stated amount, so no requested refund occurs. Second message creates a self-contained durable updated agreement; it does not repair earlier first-retention failures.",
+      "durable_cards_after_close": 1,
+      "sources_after_close": 1,
+      "memory_write_calls": 1,
+      "rejected_finish_calls": 2,
+      "business_calls": 3,
+      "answer_execution_review": "No unsupported business-completion claim found in the actual answer; memory correctness separately assessed."
+    },
+    {
+      "episode_index": 3,
+      "native_success": true,
+      "dependent": false,
+      "host_statuses": [
+        "complete"
+      ],
+      "semantic_status": "PASS_RECEIPT_GROUNDED_NATIVE_ACTION",
+      "review": "Actual full refund succeeds and supports the answer. Unlike v13 it does not query policy; native success does not establish policy compliance.",
+      "durable_cards_after_close": 1,
+      "sources_after_close": 1,
+      "memory_write_calls": 0,
+      "rejected_finish_calls": 1,
+      "business_calls": 2,
+      "answer_execution_review": "No unsupported business-completion claim found in the actual answer; memory correctness separately assessed."
+    },
+    {
+      "episode_index": 4,
+      "native_success": true,
+      "dependent": true,
+      "host_statuses": [
+        "complete"
+      ],
+      "semantic_status": "FAIL_POST_ACTION_MEMORY_UPDATE",
+      "review": "Actual partial refund uses the saved updated amount and succeeds. No memory revision occurs; final CURRENT card still says NOT processed, despite work_note claiming an update.",
+      "durable_cards_after_close": 1,
+      "sources_after_close": 1,
+      "memory_write_calls": 0,
+      "rejected_finish_calls": 0,
+      "business_calls": 2,
+      "answer_execution_review": "No unsupported business-completion claim found in the actual answer; memory correctness separately assessed."
+    }
+  ],
+  "gates": {
+    "G1": "FAIL: 0/2 initial agreements retained at first boundary; 1/4 agreement/update arrivals retained before the next boundary. Post-refund current memory not updated.",
+    "G2": "NOT_SEPARATELY_ASSESSED_BY_NATIVE_ARC; task-only/none controls are V1",
+    "G3": "PASS_OBSERVED_7_ANSWERS_AND_ACTUAL_COMPLETED_TURN_REPLAY; V1 unsupported-location counterexample remains open",
+    "G4": "PASS_NEW_BODY_SELF_CONTAINMENT_IN_ONE_CREATE; zero revisions in this arc, patch/literal guarantees rely on V0 and V1 scoped evidence. Current body status remains semantically stale."
+  },
+  "counts": {
+    "first_retention_correct": 0,
+    "distinct_first_agreements": 2,
+    "agreement_or_update_retained": 1,
+    "agreement_or_update_arrivals": 4,
+    "unresolved_candidates_at_accepted_finishes": 0,
+    "declared_cross_turn_without_durable_record": 0,
+    "illegal_completed_action_refs": 0,
+    "unsupported_completed_business_claims_in_final_answers": 0,
+    "rejected_finish_calls": 5,
+    "rejected_write_calls": 0,
+    "business_tool_errors": 0,
+    "new_body_protocol_reference_issues": 0,
+    "real_literal_collisions": 0,
+    "patch_operations": 0,
+    "final_stale_current_cards": 1
+  },
+  "failures": [
+    {
+      "label": "MEMORY_MISS:first_agreement_and_update_not_selected",
+      "confidence": "direct",
+      "evidence": "episodes/episode-0.json and episode-1.json: explicit none dispositions; zero closed cards/sources; episode-2 requested refund not performed."
+    },
+    {
+      "label": "MEMORY_MISUSE:stale_current_status_after_successful_action",
+      "confidence": "direct",
+      "evidence": "episodes/episode-4.json: succeeded refund receipt, zero memory_save, unchanged card revision 1 says NOT processed."
+    },
+    {
+      "label": "MEMORY_MISUSE:unsupported_work_note_update_claim",
+      "confidence": "direct",
+      "evidence": "episode-4 final work_note claims memory updated; committed_changes empty and current card unchanged. This is not an unsupported business-completion statement in answer."
+    }
+  ],
+  "policy_note": "Episode 3 did not request policy and refunded successfully; no assertion that v13 policy/tool ambiguity was resolved. Native 4/5 has a different failed episode than v13.",
+  "stage_usage": {
+    "stage": "V2",
+    "generation_requests": 27,
+    "input_tokens": 132706,
+    "output_tokens": 5696,
+    "generation_tokens": 138402,
+    "embedding_requests": 5,
+    "embedding_tokens": 244,
+    "provider_wall_seconds": 59.154,
+    "http_non_200": 0,
+    "truncated_generation_responses": 0,
+    "trace_sha256": {
+      "artifacts/contextual-user-memory/v14-v2-arc0/runtime/trace.jsonl": "f50cc9ae8419f7dc7bff37d3f4ec8ccaddfa141bdc2a0c223add6b64923967d0"
+    }
+  },
+  "continuous_at_end": {
+    "generation_requests": 80,
+    "input_tokens": 299035,
+    "output_tokens": 18063,
+    "generation_tokens": 317098,
+    "embedding_requests": 27,
+    "embedding_tokens": 1540,
+    "provider_wall_seconds": 170.622,
+    "http_non_200": 0,
+    "truncated_generation_responses": 0,
+    "unknown_usage": 0,
+    "judge_requests": 0
+  },
+  "v3": {
+    "status": "NOT_RUN",
+    "reason": "V1/V2 semantic gate failed; no prospective arc generated or read."
+  },
+  "evidence_sha256": {
+    "artifacts/contextual-user-memory/v14-v2-arc0/result.json": "f5031c40547884c0cb0cac86aaf013e167e64df2d3e202d6ec93f48a31955c66",
+    "artifacts/contextual-user-memory/v14-v2-arc0/manifest.json": "03cb6606c9e9da5e6972eb4c16f8ad988470b9bf78e15e6c985aa35a8d80051d",
+    "artifacts/contextual-user-memory/v14-v2-arc0/end-budget.json": "dfc8e15729358cea54a533a83d5096f1f67b858dacc7e21ce0c7ca60c36e9eb0",
+    "artifacts/contextual-user-memory/v14-v2-arc0/separate-process-read-and-replay.json": "b83d4fc0dc78acf541a621d9bb351bd55f8885eded030e690c544296d7926d64",
+    "artifacts/contextual-user-memory/v14-v2-arc0/episodes/episode-3.json": "7a648caac84b3f73d51ea90a5eb41c1e51f11c94082cafc7cb8f68a390c359c0",
+    "artifacts/contextual-user-memory/v14-v2-arc0/episodes/episode-4.json": "c468b6fe6e01fb8ba339717d2d5ad239afafb66892f0d2ce092b23ad2d3c79e4",
+    "artifacts/contextual-user-memory/v14-v2-arc0/episodes/episode-2.json": "8ba4adc29c70f0adb8b891728d9fc297b609d294119b280f2c69920cf9e47d67",
+    "artifacts/contextual-user-memory/v14-v2-arc0/episodes/episode-1.json": "f809a3bb9a5cf3bec751c42eca52b66ce8f03e39b41a7389c99bebbe2f79ae49",
+    "artifacts/contextual-user-memory/v14-v2-arc0/episodes/episode-0.json": "30a7a3b1acacf387fbbf293ebe0556ce7edb417c7d2630ca87f2e87438059337"
+  }
+}

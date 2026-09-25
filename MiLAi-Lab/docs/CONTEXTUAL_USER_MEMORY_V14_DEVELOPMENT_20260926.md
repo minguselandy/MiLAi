@@ -1,7 +1,7 @@
 ---
 version: v14.0
 date: 2026-09-26
-status: IMPLEMENTATION_IN_PROGRESS
+status: IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES
 baseline_commit: 488a4291925c607f6d0dc313a7dcbaf1906a6fad
 planning_commit: a1154d8
 scope: MiLAi-Lab
@@ -96,3 +96,13 @@ R4 使 task 写入后的来源继续参与未来用途处置，并明确其 `fut
 准备 V2 时另发现并修复了确定性业务回执接线问题：原 Host 将 Observation.artifact 当作工具名，但正式 MERIT 来源使用自定义 artifact。当前改为将可见 source 与实际 raw/reconciled journal 动作及完整 Observation 核对；合法自定义 artifact 回执可以使用，错误身份来源仍被排除。Sol xhigh 的 4 项受影响窄检查及 Ruff、mypy、`git diff --check` 通过；未运行模型。该修复发生在 R4 真实运行之后，不能将 R4 结果归属于此后的源码。
 
 本次再次按用户要求交由 Luna high 提交并推送全部当前开发。仍为 **IMPLEMENTATION_IN_PROGRESS**：上述语义反例、冲突句修复及最终源码下的 V2 原始世界／空记忆完整 arc0 尚未完成；V3 未运行，其语义门槛尚未满足。发布不增加实验请求，不扩大测试范围，不关闭 Goal。改动仍仅限 Lab，未改变 Product Schema/API/权限/Canonical，也未增加跨 bundle 依赖或移动包；未运行全套测试、构建或边界套件。此次提交前回退基点为 `23132fbf6bf3e451bf4e14537c1f4f6b83efacc5`；原始运行制品、数据库、模型和语料继续保持 ignored。
+
+## R5、V2 与负面交付
+
+上述快照以 `972c833` 发布并完成远端核对。随后 Sol 删除冲突旧句并停写，root 冻结最终 47 文件映射 `944cda954858d7181624fc25c72ada717d3bd973e5231b29ecab85751e7f66ab`。R5 仅复核 d11：仍写 task，关闭后零卡／来源，未来提醒失效；增加 4 次生成、12803 tokens、26 embedding。独立进程读回确认，没有恢复故障。
+
+最终同一源码从原始世界和空记忆完成 V2 arc0，27 次生成、138402 tokens、244 embedding；native 4/5、dependent 1/2、Host／维护 7/7。首次两个约定均未保存，另一业务成功后卡片未更新；重放已完成 turn 无新业务或 Provider 调用。不能把 complete 或相同的 native 4/5 与 v13 解释为语义改善。
+
+交付核对补齐了 V0 的 Host full REVISE／patch／继承污染覆盖，3 个受影响用例通过，运行源码未改。无全套测试或额外模型请求。一次离线结果清单写出因 Path/string 类型错误失败，修正后写出；不涉及 Provider、运行状态或输入变化。
+
+本轮实现与规定的有限验证、报告已完成，状态为 **IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES**；语义基线未达标，V3 按门槛 NOT_RUN。完整结论、分轮费用、失败分类和边界见[最终结果](CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md)，最小命令见[复现入口](CONTEXTUAL_USER_MEMORY_V14_REPRODUCE.md)。连续账本封存为 80 次生成／317098 generation tokens／1540 embedding tokens，unknown=0、Judge=0；不改写早期快照时点的“尚未执行”记录。

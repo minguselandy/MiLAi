@@ -1,0 +1,227 @@
+{
+  "kind": "V14_CONTINUOUS_PROVIDER_ACCOUNTING",
+  "stages": [
+    {
+      "stage": "V1_R1",
+      "generation_requests": 7,
+      "input_tokens": 21101,
+      "output_tokens": 1542,
+      "generation_tokens": 22643,
+      "embedding_requests": 2,
+      "embedding_tokens": 125,
+      "provider_wall_seconds": 17.511,
+      "http_non_200": 0,
+      "truncated_generation_responses": 0,
+      "trace_sha256": {
+        "artifacts/contextual-user-memory/v14-v1-r1-small/d01/runtime/trace.jsonl": "e0f1d5daafaf54b2b0443b5303c644276021d6dbdf7ea12d881bd0ae3d4922dd",
+        "artifacts/contextual-user-memory/v14-v1-r1-small/d05/runtime/trace.jsonl": "5e9a1fecf616ab57c69eda4aba85c9a73f4396b67d7bf7fcf42650b20546b103",
+        "artifacts/contextual-user-memory/v14-v1-r1-small/d12/runtime/trace.jsonl": "cb0e7ae3ec51a15d2f0c9654f2a33cf7a265247a75fb2b35c9797378cc556dae"
+      }
+    },
+    {
+      "stage": "V1_R2",
+      "generation_requests": 3,
+      "input_tokens": 9509,
+      "output_tokens": 594,
+      "generation_tokens": 10103,
+      "embedding_requests": 0,
+      "embedding_tokens": 0,
+      "provider_wall_seconds": 5.293,
+      "http_non_200": 0,
+      "truncated_generation_responses": 0,
+      "trace_sha256": {
+        "artifacts/contextual-user-memory/v14-v1-r2-literal/d12/runtime/trace.jsonl": "6a0fe90c1beb96925b635798474ff5496676a4488c61c307038bcbb8e479fa05"
+      }
+    },
+    {
+      "stage": "V1_R3_LITERAL",
+      "generation_requests": 4,
+      "input_tokens": 12798,
+      "output_tokens": 799,
+      "generation_tokens": 13597,
+      "embedding_requests": 2,
+      "embedding_tokens": 92,
+      "provider_wall_seconds": 7.475,
+      "http_non_200": 0,
+      "truncated_generation_responses": 0,
+      "trace_sha256": {
+        "artifacts/contextual-user-memory/v14-v1-r3-literal/d12/runtime/trace.jsonl": "5dbb2c43176301caad42efeebda454f4251204152d671bf8adde80c8e2918f83"
+      }
+    },
+    {
+      "stage": "V1_R3_REMAINING",
+      "generation_requests": 25,
+      "input_tokens": 77760,
+      "output_tokens": 5949,
+      "generation_tokens": 83709,
+      "embedding_requests": 12,
+      "embedding_tokens": 775,
+      "provider_wall_seconds": 51.245,
+      "http_non_200": 0,
+      "truncated_generation_responses": 0,
+      "trace_sha256": {
+        "artifacts/contextual-user-memory/v14-v1-r3-remaining/d02/runtime/trace.jsonl": "43a86aac9a892026e0dc129ae8c0d004927942d6f847c0240f8e583b51c73ba5",
+        "artifacts/contextual-user-memory/v14-v1-r3-remaining/d03/runtime/trace.jsonl": "74f0ecc46d4e5c6c2cd76bff3c399f3e835cf5bce4c807b82b9137100bc9d07b",
+        "artifacts/contextual-user-memory/v14-v1-r3-remaining/d04/runtime/trace.jsonl": "ceed47be8c99fc3dd862dbc37708e9de8d793a37e2ee2e0e5b7163cb60f94b2a",
+        "artifacts/contextual-user-memory/v14-v1-r3-remaining/d06/runtime/trace.jsonl": "97ebdda64f2b1e9445e847dbb07a2e798ae903c0898edfe27b34e82a1b1f3708",
+        "artifacts/contextual-user-memory/v14-v1-r3-remaining/d07/runtime/trace.jsonl": "d29b51bafc332e6fc00162adb5c4a6519cd3cdf7e936254ca1929e7916a189c9",
+        "artifacts/contextual-user-memory/v14-v1-r3-remaining/d08/runtime/trace.jsonl": "6a4b65fb1922fa9d95fb2ebcb6c8e0a7cf60f15113a96132039b22579776c207",
+        "artifacts/contextual-user-memory/v14-v1-r3-remaining/d09/runtime/trace.jsonl": "b06aec16524dcc258cfc276223404697839a9152434da5a2c78acd8ad816173d",
+        "artifacts/contextual-user-memory/v14-v1-r3-remaining/d10/runtime/trace.jsonl": "737504dbc88dd9d5c8357fa884d8a58f82be2740a1700eb15a288f4e73817506",
+        "artifacts/contextual-user-memory/v14-v1-r3-remaining/d11/runtime/trace.jsonl": "5a539757a369edb6c1d9350886651dc165e636d74867bbc5c33004b780d7b831"
+      }
+    },
+    {
+      "stage": "V1_R4",
+      "generation_requests": 10,
+      "input_tokens": 33321,
+      "output_tokens": 2520,
+      "generation_tokens": 35841,
+      "embedding_requests": 4,
+      "embedding_tokens": 278,
+      "provider_wall_seconds": 21.743,
+      "http_non_200": 0,
+      "truncated_generation_responses": 0,
+      "trace_sha256": {
+        "artifacts/contextual-user-memory/v14-v1-r4-repairs/d02/runtime/trace.jsonl": "75876d3ab81c40d23f23cf6a941982a0980fead976e36d92eadd95719be926f2",
+        "artifacts/contextual-user-memory/v14-v1-r4-repairs/d04/runtime/trace.jsonl": "c1008777d1e1eb6bc18f6e15f8b9500bd24abe8bf063de75abf824008869569e",
+        "artifacts/contextual-user-memory/v14-v1-r4-repairs/d11/runtime/trace.jsonl": "42be4c670b90265df417da47320556caafa02eee78c4cb9439002902fb91487c"
+      }
+    },
+    {
+      "stage": "V1_R5",
+      "generation_requests": 4,
+      "input_tokens": 11840,
+      "output_tokens": 963,
+      "generation_tokens": 12803,
+      "embedding_requests": 2,
+      "embedding_tokens": 26,
+      "provider_wall_seconds": 8.201,
+      "http_non_200": 0,
+      "truncated_generation_responses": 0,
+      "trace_sha256": {
+        "artifacts/contextual-user-memory/v14-v1-r5-conflict/d11/runtime/trace.jsonl": "cbf638e0a765b551bbfb8491bd04d2aa4a8f95fb9b87b1113598987a251fff2d"
+      }
+    },
+    {
+      "stage": "V2",
+      "generation_requests": 27,
+      "input_tokens": 132706,
+      "output_tokens": 5696,
+      "generation_tokens": 138402,
+      "embedding_requests": 5,
+      "embedding_tokens": 244,
+      "provider_wall_seconds": 59.154,
+      "http_non_200": 0,
+      "truncated_generation_responses": 0,
+      "trace_sha256": {
+        "artifacts/contextual-user-memory/v14-v2-arc0/runtime/trace.jsonl": "f50cc9ae8419f7dc7bff37d3f4ec8ccaddfa141bdc2a0c223add6b64923967d0"
+      }
+    }
+  ],
+  "totals": {
+    "generation_requests": 80,
+    "input_tokens": 299035,
+    "output_tokens": 18063,
+    "generation_tokens": 317098,
+    "embedding_requests": 27,
+    "embedding_tokens": 1540,
+    "provider_wall_seconds": 170.622,
+    "http_non_200": 0,
+    "truncated_generation_responses": 0,
+    "unknown_usage": 0,
+    "judge_requests": 0
+  },
+  "ledger_sha256": "dfc8e15729358cea54a533a83d5096f1f67b858dacc7e21ce0c7ca60c36e9eb0",
+  "v13_unchanged": {
+    "ledger": "artifacts/contextual-user-memory/v13-budget.json",
+    "sha256": "c9632ca413647fe70a881b7032063e953151ccb5fc6760d96aed49c410d744de",
+    "generation_requests": 56,
+    "generation_tokens": 345375,
+    "embedding_tokens": 2797,
+    "unknown_usage": 0,
+    "judge_requests": 0,
+    "earlier_history": null,
+    "sealed": true
+  },
+  "developer_agents": "Sol xhigh engineering, one bounded Astra xhigh diagnosis, Luna high publication. Separate from experiment provider costs; monetary/provider token accounting unavailable here.",
+  "final_mock_request_measurement": {
+    "stage": "contract-final",
+    "results": [
+      {
+        "max_calls": 12,
+        "schema_sha256": "3048d7ef0b85f204caff986aac4cc3cde4d03602f85130cb0db06f71aa65010b",
+        "system_tokens": 2244,
+        "input_tokens": 2569,
+        "message_tokens": [
+          {
+            "role": "system",
+            "tokens": 2244
+          },
+          {
+            "role": "user",
+            "tokens": 133
+          },
+          {
+            "role": "user",
+            "tokens": 6
+          },
+          {
+            "role": "user",
+            "tokens": 160
+          }
+        ],
+        "real_model_calls": 0
+      },
+      {
+        "max_calls": 1,
+        "schema_sha256": "f5c494b767ee48254a2829a03de0db187d05b188755d942c7702eb1dc90cfae9",
+        "system_tokens": 763,
+        "input_tokens": 1131,
+        "message_tokens": [
+          {
+            "role": "system",
+            "tokens": 763
+          },
+          {
+            "role": "user",
+            "tokens": 133
+          },
+          {
+            "role": "user",
+            "tokens": 6
+          },
+          {
+            "role": "user",
+            "tokens": 160
+          },
+          {
+            "role": "user",
+            "tokens": 38
+          }
+        ],
+        "real_model_calls": 0
+      }
+    ],
+    "source_sha256": {
+      "src/milai_lab/runners/contextual_host.py": "1361c58fbb07a4e4b325e7fc3a89867cde09e6b0ab14184365e5ab881d93059f",
+      "src/milai_lab/runners/contextual_maintenance.py": "e4fc3b5018e1d31e428714585279cb02310caea7c5001051b3a814593ee69881"
+    }
+  },
+  "v2_local_segments": {
+    "requests": 27,
+    "fixed_contract_tokens": 12744,
+    "request_tool_catalogue_tokens": 58307,
+    "actual_system_tokens": 71051,
+    "frontier_message_tokens": 13994,
+    "execution_facts_serialized_subset_tokens": 4104,
+    "terminal_dispositions_serialized_output_estimate": 440,
+    "note": "Local tokenizer counts. Execution facts are already included in frontier messages; fixed/tool catalogue are already included in system. Serialized terminal dispositions estimate only the seven accepted finishes, not all sampled output. Do not add overlapping components to provider usage."
+  },
+  "cache": {
+    "prefix_caching": false,
+    "service_changed": false,
+    "cached_tokens": "unavailable",
+    "latency_saving": "not measured"
+  }
+}

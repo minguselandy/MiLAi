@@ -1,0 +1,217 @@
+{
+  "kind": "V14_SCOPED_EXECUTION_DELIVERY",
+  "status": "IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES",
+  "execution_delivery": "COMPLETE_WITH_NEGATIVE_RESULT",
+  "baseline_readiness": "NOT_MET",
+  "source_mapping_sha256": "944cda954858d7181624fc25c72ada717d3bd973e5231b29ecab85751e7f66ab",
+  "requirements": [
+    {
+      "scope": "A future use and remaining dispositions",
+      "implemented": true,
+      "evidence": [
+        "src/milai_lab/runners/contextual_maintenance.py",
+        "tests/unit/test_contextual_turn_maintenance.py"
+      ],
+      "semantic_acceptance": "FAIL; explicit wrong none/task_local remains observable"
+    },
+    {
+      "scope": "B actual receipts and truthful answers",
+      "implemented": true,
+      "evidence": [
+        "src/milai_lab/runners/contextual_host.py",
+        "tests/unit/test_contextual_runtime_recovery.py",
+        "data/manifests/contextual-memory-v14-v2-results.json"
+      ],
+      "semantic_acceptance": "OPEN_FAILURE in V1 answer; limited V2 receipt/replay evidence passes"
+    },
+    {
+      "scope": "C persistent prose, literals, full/partial revisions",
+      "implemented": true,
+      "evidence": [
+        "src/milai_lab/methods/contextual_memory/write_contract.py",
+        "tests/unit/test_contextual_host_adapter.py",
+        "data/manifests/contextual-memory-v14-v1-r3-literal-results.json"
+      ],
+      "semantic_acceptance": "PASS_OBSERVED_LIMITED_SCOPE; lexical/source grounding is not arbitrary prose truth"
+    },
+    {
+      "scope": "D cost projection and protocol identity",
+      "implemented": true,
+      "evidence": [
+        "data/manifests/contextual-memory-v14-contract-checks.json",
+        "data/manifests/contextual-memory-v14-literal-order-check.json",
+        "data/manifests/contextual-memory-v14-final-freeze.json",
+        "data/manifests/contextual-memory-v14-cost-summary.json"
+      ],
+      "semantic_acceptance": "NOT_A_SEMANTIC_GATE; no overall cost/cache savings claim"
+    },
+    {
+      "scope": "V0 affected deterministic checks",
+      "status": "PASS_STRUCTURAL_ONLY",
+      "evidence": "data/manifests/contextual-memory-v14-final-checks.json"
+    },
+    {
+      "scope": "V1 frozen independent diagnostic",
+      "status": "EXECUTED_IN_DEVELOPMENT_STAGES_WITH_OPEN_FAILURES",
+      "final_source_full_suite_run": false,
+      "evidence": [
+        "docs/MILA_CONTEXTUAL_USER_MEMORY_V14_DIAGNOSTIC_INPUTS_20260926.md",
+        "docs/MILA_CONTEXTUAL_USER_MEMORY_V14_DIAGNOSTIC_RUBRIC_20260926.md"
+      ]
+    },
+    {
+      "scope": "V2 exposed original arc0 from initial world/empty memory",
+      "status": "COMPLETED_WITH_SEMANTIC_FAILURES",
+      "evidence": "data/manifests/contextual-memory-v14-v2-results.json"
+    },
+    {
+      "scope": "V3 two prospective original arcs",
+      "status": "NOT_RUN_CONDITION_NOT_MET",
+      "new_arcs_generated_or_read": false,
+      "evidence": "data/manifests/contextual-memory-v14-exposure-rule.json"
+    },
+    {
+      "scope": "Results, taxonomy, cost, minimal reproduction",
+      "status": "DELIVERED",
+      "evidence": [
+        "docs/CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md",
+        "docs/CONTEXTUAL_USER_MEMORY_V14_REPRODUCE.md"
+      ]
+    }
+  ],
+  "v1_latest_case_observations": [
+    {
+      "id": "d01",
+      "source_round": "R1",
+      "source_mapping_sha256": "2c48ef670f3b602db3497fb7e8d170518210336414d6067742d52ebbb78b381a",
+      "first_retention_required": false,
+      "first_retention_correct": null,
+      "latest_observed_result": "PASS_TASK_AND_NO_RETENTION"
+    },
+    {
+      "id": "d02",
+      "source_round": "R4",
+      "source_mapping_sha256": "e624311fe1ba10e228ea8a5fa577c0edb174663cf9c76e4c0e7999037c849822",
+      "first_retention_required": true,
+      "first_retention_correct": true,
+      "latest_observed_result": "FAIL_UNSUPPORTED_PHYSICAL_STATE"
+    },
+    {
+      "id": "d03",
+      "source_round": "R3",
+      "source_mapping_sha256": "1532ef2edb979ae89ba3da6c6360b5bbe38c03df9254d859713e6e844cf6c201",
+      "first_retention_required": true,
+      "first_retention_correct": true,
+      "latest_observed_result": "PASS_DECLARED_SCOPE"
+    },
+    {
+      "id": "d04",
+      "source_round": "R4",
+      "source_mapping_sha256": "e624311fe1ba10e228ea8a5fa577c0edb174663cf9c76e4c0e7999037c849822",
+      "first_retention_required": false,
+      "first_retention_correct": null,
+      "latest_observed_result": "FAIL_RESPONSE_FORMAT_NO_OVERRETENTION"
+    },
+    {
+      "id": "d05",
+      "source_round": "R1",
+      "source_mapping_sha256": "2c48ef670f3b602db3497fb7e8d170518210336414d6067742d52ebbb78b381a",
+      "first_retention_required": true,
+      "first_retention_correct": true,
+      "latest_observed_result": "PASS_DECLARED_SCOPE"
+    },
+    {
+      "id": "d06",
+      "source_round": "R3",
+      "source_mapping_sha256": "1532ef2edb979ae89ba3da6c6360b5bbe38c03df9254d859713e6e844cf6c201",
+      "first_retention_required": true,
+      "first_retention_correct": true,
+      "latest_observed_result": "PASS_DECLARED_SCOPE"
+    },
+    {
+      "id": "d07",
+      "source_round": "R3",
+      "source_mapping_sha256": "1532ef2edb979ae89ba3da6c6360b5bbe38c03df9254d859713e6e844cf6c201",
+      "first_retention_required": false,
+      "first_retention_correct": null,
+      "latest_observed_result": "PASS_TASK_AND_NO_RETENTION"
+    },
+    {
+      "id": "d08",
+      "source_round": "R3",
+      "source_mapping_sha256": "1532ef2edb979ae89ba3da6c6360b5bbe38c03df9254d859713e6e844cf6c201",
+      "first_retention_required": true,
+      "first_retention_correct": true,
+      "latest_observed_result": "PASS_DECLARED_SCOPE_AFTER_ONE_REFERENCE_REJECTION"
+    },
+    {
+      "id": "d09",
+      "source_round": "R3",
+      "source_mapping_sha256": "1532ef2edb979ae89ba3da6c6360b5bbe38c03df9254d859713e6e844cf6c201",
+      "first_retention_required": true,
+      "first_retention_correct": true,
+      "latest_observed_result": "PASS_DECLARED_SCOPE"
+    },
+    {
+      "id": "d10",
+      "source_round": "R3",
+      "source_mapping_sha256": "1532ef2edb979ae89ba3da6c6360b5bbe38c03df9254d859713e6e844cf6c201",
+      "first_retention_required": false,
+      "first_retention_correct": null,
+      "latest_observed_result": "PASS_EXPLICIT_NO_SAVE"
+    },
+    {
+      "id": "d11",
+      "source_round": "R5",
+      "source_mapping_sha256": "944cda954858d7181624fc25c72ada717d3bd973e5231b29ecab85751e7f66ab",
+      "first_retention_required": true,
+      "first_retention_correct": false,
+      "latest_observed_result": "FAIL_FUTURE_REMINDER_LOST"
+    },
+    {
+      "id": "d12",
+      "source_round": "R3",
+      "source_mapping_sha256": "1532ef2edb979ae89ba3da6c6360b5bbe38c03df9254d859713e6e844cf6c201",
+      "first_retention_required": true,
+      "first_retention_correct": true,
+      "latest_observed_result": "PASS_LITERAL_AFTER_ONE_REJECTION_PRIOR_FAILURES_PRESERVED"
+    }
+  ],
+  "v1_cohort_warning": "Rows use different frozen source rounds; do not aggregate them as a final-source pass rate. Final-source R5 rechecked only d11.",
+  "v2": {
+    "native_successes": 4,
+    "native_denominator": 5,
+    "dependent_successes": 1,
+    "dependent_denominator": 2,
+    "host_complete": 7,
+    "host_turns": 7,
+    "initial_agreement_retention_correct": 0,
+    "initial_agreements": 2,
+    "final_stale_current_cards": 1
+  },
+  "continuous_usage": {
+    "generation_requests": 80,
+    "input_tokens": 299035,
+    "output_tokens": 18063,
+    "generation_tokens": 317098,
+    "embedding_requests": 27,
+    "embedding_tokens": 1540,
+    "provider_wall_seconds": 170.622,
+    "http_non_200": 0,
+    "truncated_generation_responses": 0,
+    "unknown_usage": 0,
+    "judge_requests": 0
+  },
+  "history_preserved": true,
+  "product_changed": false,
+  "state_attention_comparison_run": false,
+  "evidence_sha256": {
+    "data/manifests/contextual-memory-v14-final-freeze.json": "150ae37aabf3acce806d06cb31c0457af6812ff2e2a600473032fc4809cab6ce",
+    "data/manifests/contextual-memory-v14-final-checks.json": "47622b8efe6926d6353bdbdd65a82a43dad28050c65e0db624ec1338ced36bd0",
+    "data/manifests/contextual-memory-v14-cost-summary.json": "c2d83f276f500ab2e0586fe4cd075874e35cba9e505f5aaa16dcf2e137a5433a",
+    "data/manifests/contextual-memory-v14-v2-results.json": "52245660ab7c69d2070218c47ccda132d0c34cb152d6527a799aee326440fa94",
+    "data/manifests/contextual-memory-v14-v1-r5-results.json": "d915597ed72c927921b87a2a53e95671f10abff6d87fad760ae3d6cf508d20c4",
+    "docs/CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md": "54d4855555e1ac672f4e9272521aede57b49876512f3145282083688cd95c9c7",
+    "docs/CONTEXTUAL_USER_MEMORY_V14_REPRODUCE.md": "e60a4762d3408781afcc39a4f042e3dd8bc1e6e2460237c7dd73cfd52742206c"
+  }
+}

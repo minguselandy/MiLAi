@@ -1,0 +1,58 @@
+{
+  "kind": "V14_FINAL_AFFECTED_CHECKS",
+  "status": "PASS_STRUCTURAL_ONLY",
+  "source_mapping_sha256": "944cda954858d7181624fc25c72ada717d3bd973e5231b29ecab85751e7f66ab",
+  "real_model_calls": 0,
+  "prior_checks_manifest": "data/manifests/contextual-memory-v14-contract-checks.json",
+  "ordered_decoder_manifest": "data/manifests/contextual-memory-v14-literal-order-check.json",
+  "supplemental_checks": [
+    {
+      "change": "Concrete literal rejection guidance",
+      "tests_passed": 2,
+      "note": "Actual JSON action preflight/repair guidance; overlapping existing suite."
+    },
+    {
+      "change": "Ordered literal-use field position",
+      "tests_passed": 2,
+      "note": "Schema/catalogue property order; deployed 11 grammar probes separately preserved."
+    },
+    {
+      "change": "Task write remains future-use candidate",
+      "tests_passed": 2,
+      "note": "Real task write facts and explicit frontier dispositions."
+    },
+    {
+      "change": "Journal-grounded custom-artifact execution source",
+      "tests_passed": 4,
+      "note": "Existing current/prior/reconciled recovery checks including custom artifact and wrong-identity negative."
+    },
+    {
+      "change": "Remove contradictory temporary-plan sentence",
+      "tests": "not repeated for text-only edit",
+      "static": "Ruff and git diff --check; formal task_runtime uses COMMON_PROMPT."
+    },
+    {
+      "change": "Host full REVISE, delta patch, inherited prose",
+      "test": "tests/unit/test_contextual_host_adapter.py::test_v5_host_checks_new_revision_prose_without_rejecting_inherited_text",
+      "tests_passed": 3,
+      "assertions": [
+        "Rejected full rewrite leaves exact original version/body unchanged",
+        "Rejected patch new reference does not partially commit",
+        "Legal patch preserves untouched text and reports inherited_prose_issue even with old source body not delivered"
+      ],
+      "runtime_source_changed": false,
+      "static": "Ruff and git diff --check"
+    }
+  ],
+  "test_counts_not_additive": true,
+  "source_sha256": {
+    "src/milai_lab/runners/contextual.py": "49ba40b026af64a3cab715668c44ccbb38863c95449f79a04b750af29d195aa4",
+    "src/milai_lab/runners/contextual_host.py": "1361c58fbb07a4e4b325e7fc3a89867cde09e6b0ab14184365e5ab881d93059f",
+    "tests/unit/test_contextual_host_adapter.py": "715d915ba305104c4a22563d9b1630c4dc026ee9eec9547611ad7808c17d5cce",
+    "tests/unit/test_contextual_runtime_recovery.py": "349a4f4c7b6d839bac1b8e6f6c8d99c46e5ae1dc732d716bea21e61a3bb47b15",
+    "tests/unit/test_contextual_turn_maintenance.py": "6cad683df9d570e18b2b788cf9597293a96614927d91525ee6560ee0bf741206",
+    "tests/unit/test_contextual_content_patch.py": "447912972bf2f0ceb9f8f55f25fa3617f8030d7f7a03562ded9571ce187ac57b"
+  },
+  "full_suite_build_boundary_suite": "NOT_RUN; no package or dependency boundary changes",
+  "semantic_readiness": "NOT_PROVEN_BY_THESE_CHECKS"
+}

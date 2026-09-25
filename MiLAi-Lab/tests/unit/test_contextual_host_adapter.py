@@ -530,6 +530,71 @@ def test_v5_allows_issued_handle_in_task_local_note() -> None:
     client.close()
 
 
+@pytest.mark.parametrize("revision", ["full", "patch_new_handle", "patch_inherited"])
+def test_v5_host_checks_new_revision_prose_without_rejecting_inherited_text(
+    revision: str,
+) -> None:
+    memory = ContextualMemory(
+        "user", host_id="host", embed=lambda texts: [[1.0, 0.0] for _ in texts],
+        embedding_dimension=2,
+    )
+    memory.start_task("answer", "Update a legacy record")
+    source = memory.publish(Observation("legacy", "The status was pending", "user", "fixture"))
+    memory.save(op="RETAIN_SOURCE", source_ref=source, persistence="durable")
+    old_text = "Legacy m0; status pending"
+    created = memory.save(op="CREATE", content=old_text, about_ref="unresolved",
+                          source_refs=[source], certainty="explicit")
+    target = created["record"]["ref"]
+    session = HostSession("answer", memory)
+    view = session.material_view
+    assert view is not None
+    session.append_material(view.project(memory.read(
+        target, include_sources=False, _visible=False)))
+    target_alias = next(alias for alias, binding in session.visible_bindings.items()
+                        if binding.exact_ref == target and binding.spans)
+    assert target_alias == "m0"
+    assert source not in memory.visible_source_ranges
+
+    if revision == "full":
+        session.append_material(view.project(memory.read(
+            source, include_sources=False, _visible=False)))
+        source_alias = next(alias for alias, binding in session.visible_bindings.items()
+                            if binding.exact_ref == source and binding.spans)
+        arguments: dict[str, Any] = {
+            "op": "REVISE", "target_ref": target_alias, "about_ref": "unknown",
+            "source_refs": [source_alias], "dependencies": [], "certainty": "explicit",
+            "content": "Legacy m0; status complete",
+        }
+    else:
+        arguments = {
+            "op": "REVISE", "basis_mode": "delta", "target_ref": target_alias,
+            "content_patch": [{"old": "pending", "new":
+                               "m0 complete" if revision == "patch_new_handle" else "complete"}],
+            "source_delta": {"add": [], "remove": []},
+        }
+    client, _ = _provider([
+        _receipt(_tool_call("revise", "memory_save", json.dumps(arguments))),
+        _receipt({"role": "assistant", "content": "Done."}),
+    ])
+    result = ContextualHost(
+        client, memory.dispatch, MEMORY_TOOLS, "Update", memory=memory,
+        maintenance_protocol=FRONTIER_MAINTENANCE_PROTOCOL,
+    ).run([], session=session, max_calls=2)
+    outcome = result.calls[0]
+    card = memory.workspace.cards[memory._handle(target)]
+    if revision == "patch_inherited":
+        assert outcome["ok"] is True
+        assert outcome["inherited_prose_issue"]["tokens"] == [target_alias]
+        assert card.text == "Legacy m0; status complete"
+        assert source not in memory.visible_source_ranges
+    else:
+        assert outcome["ok"] is False
+        assert "PERSISTENT_BODY_CONTAINS_EPHEMERAL_HANDLE" in outcome["error"]
+        assert memory.resolve(target) == target
+        assert card.text == old_text
+    client.close()
+
+
 def test_wrong_reference_kind_names_field_alias_and_legal_destination() -> None:
     memory = ContextualMemory(
         "user", host_id="host", embed=lambda texts: [[1.0, 0.0] for _ in texts],

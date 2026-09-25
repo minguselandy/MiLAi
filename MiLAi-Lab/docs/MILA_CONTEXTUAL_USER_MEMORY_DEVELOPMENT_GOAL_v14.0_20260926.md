@@ -2,7 +2,9 @@
 goal_id: MILAI-SEMANTIC-BOUNDARY-HARDENING
 version: v14.0
 date: 2026-09-26
-status: IMPLEMENTATION_IN_PROGRESS
+status: IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES
+execution_delivery: COMPLETE_WITH_NEGATIVE_RESULT
+baseline_readiness: NOT_MET
 planning_delivery: COMPLETE
 implementation_authorized_this_round: true
 baseline_commit: 488a4291925c607f6d0dc313a7dcbaf1906a6fad
@@ -19,6 +21,8 @@ verification_count_cap: null
 **开发目标：让同一 ordinary Host 区分“现在能否执行、以后是否需要记住、实际执行了什么、哪些只是本轮引用”，修复 v13 已观察到的语义缺口，再判断是否具备恢复 State–Attention 研究的条件。**
 
 此前“先生成 Goal 与详细设计”的规划交付已完成。2026-09-26 用户随后明确要求阅读并执行本 Goal，现进入 IMPLEMENTATION_IN_PROGRESS；最新执行授权优先于原仅规划措辞。[实施基线](../data/manifests/contextual-memory-v14-baseline.json)核对 v13 的 46 份运行文件和封存费用。合同、字段与算法细节见[详细设计](MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md)，实际进展见[开发记录](CONTEXTUAL_USER_MEMORY_V14_DEVELOPMENT_20260926.md)。
+
+最终交付：A–D、V0、分阶段 V1 与最终源码完整 V2 已执行，结论为 **IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES**，见[结果报告](CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md)及[复现入口](CONTEXTUAL_USER_MEMORY_V14_REPRODUCE.md)。这完成本 Goal 规定的开发、有限验证与未通过报告，不代表语义基线目标达成。G1 首次保留、G3 已知无依据状态和实际答题仍有反例；V3 按门槛 NOT_RUN，没有生成新题或恢复 State–Attention 比较。
 
 ## 1. 基线与问题范围
 
@@ -149,3 +153,5 @@ G1—G4 在声明验证范围内通过且没有该范围中未关闭的已知反
 未来实施交付包括：必要源码和窄检查、独立 v14 模板与冻结、语义诊断规范及隔离标签、原生 exposure 清单、分阶段报告、失败分类、连续费用和最小复现入口。原始数据、模型、trace 和数据库继续 ignored，Product 不动。
 
 原规划交付只包含 Goal、详细设计及导航，未执行运行代码、pytest、vLLM、Judge 或新 benchmark 生成。其后明确执行指令已到达，当前开发、窄检查与分阶段验证按本 Goal 推进；尚未通过验证的内容不得提前标记完成。
+
+执行交付已于 2026-09-26 整理完毕：[最终冻结](../data/manifests/contextual-memory-v14-final-freeze.json)为 47 份运行文件、映射 `944cda954858d7181624fc25c72ada717d3bd973e5231b29ecab85751e7f66ab`。V2 原生 4/5、dependent 1/2、Host 7/7，但首次两项约定保留 0/2，业务成功后当前卡仍有过时状态。连续费用为 80 次生成、317098 generation tokens、1540 embedding tokens，unknown=0、Judge=0，所有失败保留。§6 的 readiness 未满足，不能把这一负面交付改称 BASELINE_READY。

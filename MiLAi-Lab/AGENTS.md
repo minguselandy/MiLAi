@@ -38,7 +38,20 @@ canonical memory state.
 
 The user now explicitly authorizes execution of [Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
 and its [semantic boundary design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md).
-Historical planning-only wording is superseded; status is IMPLEMENTATION_IN_PROGRESS.
+Historical planning-only wording is superseded. Execution delivery is complete with status
+IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES; preserve the
+[results](docs/CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md). Final runtime mapping is
+`944cda954858d7181624fc25c72ada717d3bd973e5231b29ecab85751e7f66ab` (47 files).
+A-D, V0, staged V1 and final-source original-world/empty-memory V2 were delivered.
+V2 is native 4/5, dependent 1/2, Host/maintenance 7/7, but initial agreement retention is
+0/2 and the successful final refund leaves a stale CURRENT card. V1 d11 still loses the
+future reminder; d02 unsupported-location and d04 task-format failures remain open.
+Do not combine favorable results from different V1 source rounds or call this baseline ready.
+V3 is NOT_RUN because semantic gates failed; no new seeds were generated/read.
+Preserve all 80 generations / 317098 generation tokens / 1540 embedding tokens,
+unknown=0, Judge=0, including all failed diagnostics. Do not repeat models/tests for publication
+or restart State-Attention research. Read the reproduction entry before any newly authorized run.
+The following execution rules remain relevant to future authorized work:
 Keep v13's runtime/results as the sealed baseline. One Sol xhigh owns core/Host integration;
 root owns freezes, diagnostic inputs, continuous costs and all real model requests (concurrency 1).
 Reuse existing pending/frontier/journal. A source citation is not complete semantic handling,

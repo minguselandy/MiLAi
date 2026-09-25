@@ -3,17 +3,20 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Active development: [Semantic boundary Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
+Latest scoped delivery: [Semantic boundary Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md).
-Status: `IMPLEMENTATION_IN_PROGRESS`; the user explicitly authorized execution after planning.
-The work reuses the existing frontier and journal for future-use dispositions, grounded action
-references and persistent prose with legitimate literal identifiers. It keeps semantic review
-separate from structural checks and native scores. See the
-[development record](docs/CONTEXTUAL_USER_MEMORY_V14_DEVELOPMENT_20260926.md).
-Implementation and narrow checks precede frozen semantic diagnostics; unseen native cases
-remain conditional on the declared readiness gate. No State-Attention comparison is scheduled.
+Status: `IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES`. A–D, narrow contract checks, staged V1
+diagnostics and final-source V2 are delivered. The frontier, journal-grounded action references
+and persistent-prose/literal checks are implemented, but semantic readiness is not met.
+[Results](docs/CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md) report native 4/5,
+dependent 1/2 and Host 7/7; initial agreements remain unsaved and one successful refund leaves
+stale current memory. V1 also retains answer-grounding and task-completion failures.
+All costs remain: 80 generations / 317098 generation tokens / 1540 embedding tokens,
+unknown=0, Judge=0. V3 was not run because the semantic gate failed; no State-Attention comparison.
+See the [development record](docs/CONTEXTUAL_USER_MEMORY_V14_DEVELOPMENT_20260926.md)
+and [reproduction instructions](docs/CONTEXTUAL_USER_MEMORY_V14_REPRODUCE.md).
 
-Latest scoped delivery: [Continuous runtime Goal v13.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v13.0_20260925.md).
+Previous scoped delivery: [Continuous runtime Goal v13.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v13.0_20260925.md).
 The current v12 notes template now works through the official preparation and MERIT runner;
 write receipts expose existing repair IDs and unresolved attempts before finish. Relevant
 core/recovery checks passed 28 tests and preparation/adapter checks passed 10 tests.

@@ -15,6 +15,8 @@ scope: MiLAi-Lab
 
 后续状态：用户已于 2026-09-26 明确授权执行，当前实现进展见[开发记录](CONTEXTUAL_USER_MEMORY_V14_DEVELOPMENT_20260926.md)。本文保留原设计时的提案与未验证声明，具体实现和验收以开发记录及最终结果为准。
 
+执行后的[结果报告](CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md)为 IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES：A–D 与规定的有限验证已交付，语义基线未通过；V3 条件未满足，不恢复比较研究。本文下方“本轮只交付文档”等表述保留为规划时点记录，不表示后续实施尚未执行。
+
 ## 1. 源码事实与建议的修正
 
 | 当前事实 | 位置 | 对本次设计的约束 |

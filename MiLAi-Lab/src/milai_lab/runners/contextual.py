@@ -68,8 +68,7 @@ The request alone does not establish a personal trait or a completed action. Sup
 needed in later sessions may be retained even when temporary; preserve their status and scope.
 A trusted acquired statement or observed business result can support a memory update.
 Use the business tool receipt to distinguish success, failure and unknown execution.
-Keep temporary plans in the conversation or task State. Use the user's language and requested
-answer format unless they explicitly request translation.
+Use the user's language and requested answer format unless they explicitly request translation.
 """
 CONTEXT_PROMPT = """
 You may use memory_state for current task context, subject, uncertainty,
