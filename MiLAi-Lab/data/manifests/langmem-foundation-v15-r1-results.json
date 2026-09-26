@@ -1,0 +1,125 @@
+{
+  "kind": "V15_R1_CHARACTERIZATION_PRESERVED",
+  "source_mapping_sha256": "a686aa61f637aefed857204bdfb69134a5ed126909d7b0eb17603d1bb565c8a2",
+  "status": "SUPERSEDED_AFTER_GENERIC_ARGUMENT_ERROR_DELIVERY_REPAIR",
+  "diagnostics": {
+    "planned": 12,
+    "executed": 12,
+    "terminal": 12,
+    "interrupted": 0,
+    "manual_semantic_passes": 7,
+    "manual_judge": "root; no model Judge; original rubric semantic items; old Host-only structural fields N/A",
+    "first_retention": {
+      "required": 8,
+      "present": 7
+    },
+    "cases": [
+      {
+        "case_id": "d01",
+        "semantic_pass": true,
+        "classification": "TASK_LOCAL_CORRECT",
+        "observation": "540，未持久化临时计算或格式。"
+      },
+      {
+        "case_id": "d02",
+        "semantic_pass": false,
+        "classification": "MEMORY_MISS;ACTION_GROUNDING_ERROR",
+        "observation": "消息真实发送一次，但未保存派送回执；首答称下次可用，第二会话两次搜索为空。"
+      },
+      {
+        "case_id": "d03",
+        "semantic_pass": true,
+        "classification": "RETAINED_AND_RETRIEVED",
+        "observation": "项目摘要ISO日期范围已保存并检索。"
+      },
+      {
+        "case_id": "d04",
+        "semantic_pass": false,
+        "classification": "TASK_COMPLETION_ERROR",
+        "observation": "解释了READY应放最后，但实际回答未以READY结尾。"
+      },
+      {
+        "case_id": "d05",
+        "semantic_pass": true,
+        "classification": "RETAINED_AND_RETRIEVED",
+        "observation": "保留Cedar、演示前十分钟无障碍评审及待触发安排；未发送议程。正文的today仍依赖时点，另列局限。"
+      },
+      {
+        "case_id": "d06",
+        "semantic_pass": true,
+        "classification": "RETAINED_AND_RETRIEVED",
+        "observation": "设备清单范围、生效日期及前后单位正确。"
+      },
+      {
+        "case_id": "d07",
+        "semantic_pass": true,
+        "classification": "TASK_LOCAL_CORRECT",
+        "observation": "EVEN，未持久化临时分支。"
+      },
+      {
+        "case_id": "d08",
+        "semantic_pass": false,
+        "classification": "MEMORY_MISUSE",
+        "observation": "约束已持久化，第二会话未搜索，直接要求用户补信息。"
+      },
+      {
+        "case_id": "d09",
+        "semantic_pass": false,
+        "classification": "MEMORY_MISUSE;TASK_COMPLETION_ERROR",
+        "observation": "双时区/同区单时区及Asia/Shanghai已保存，第二会话未搜索、漏同区分支并给不相干时区示例。"
+      },
+      {
+        "case_id": "d10",
+        "semantic_pass": true,
+        "classification": "NO_OVERRETENTION",
+        "observation": "简短确认，未保存F-28。"
+      },
+      {
+        "case_id": "d11",
+        "semantic_pass": false,
+        "classification": "MEMORY_MISUSE",
+        "observation": "Nina、load-test log、选择部署日前的提醒已保存，但后续未搜索，返回泛化部署建议。"
+      },
+      {
+        "case_id": "d12",
+        "semantic_pass": true,
+        "classification": "LITERAL_CONTENT_PRESERVED",
+        "observation": "字面小写m0及同型号连接器已保存并检索；旧issued-source/literal_uses结构项不适用。"
+      }
+    ]
+  },
+  "merit": {
+    "planned_episodes": 5,
+    "executed_episodes": 3,
+    "scored_episodes": 2,
+    "interrupted_episodes": 1,
+    "unrun_episodes": 2,
+    "successful_scored_episodes": 2,
+    "full_arc_score": null,
+    "cause": "Valid JSON call manage_memory(action=search) was rejected before execution; facade raised instead of giving a normal tool-argument error to ReAct.",
+    "state": "Initial agreements not saved after completed episodes; no false complete-arc claim."
+  },
+  "cost": {
+    "diagnostic_requests": 34,
+    "diagnostic_input_tokens": 17283,
+    "diagnostic_output_tokens": 1525,
+    "diagnostic_embedding_tokens": 356,
+    "merit_requests": 7,
+    "merit_input_tokens": 6035,
+    "merit_output_tokens": 442,
+    "merit_embedding_tokens": 0,
+    "continuous_generation_requests": 53,
+    "continuous_generation_charged_tokens": 36885,
+    "continuous_generation_known_tokens": 31994,
+    "continuous_generation_unknown_reservation": 4891,
+    "continuous_embedding_tokens": 381,
+    "unknown_usage": 1,
+    "judge_requests": 0
+  },
+  "artifact_sha256": {
+    "artifacts/langmem-foundation/final-diagnostic/summary.json": "790acdbaed57865d7b193c0288387e132ed07c32a13709418d56f365b1ad81f4",
+    "artifacts/langmem-foundation/final-merit/summary.json": "db941f1e6dd62d8aeb896b6fa000062dc47a767f9874dcf60ae5e55d7c3b5bff",
+    "artifacts/langmem-foundation/final-merit/results/interruption.json": "845e37077b8c4175183063f410743d4291ed9dd681d0350d017b678d513c274f",
+    "data/manifests/langmem-foundation-v15-r1-freeze.json": "96f25cac288bcccef49185f56dc28732f626c51c5b3ca3d0a2857fa91ca93fd0"
+  }
+}

@@ -23,6 +23,11 @@ milai-lab-check-boundary = "milai_lab.boundary:main"
 milai-lab-check-tools-boundary = "milai_lab.tools_boundary:main"
 
 [dependency-groups]
+baseline-langmem = [
+  "langmem @ git+https://github.com/langchain-ai/langmem.git@9d033b47d9ce53e37e92c92241b0496c0278932e",
+  "langgraph-checkpoint-postgres>=2,<3",
+  "langgraph-checkpoint-sqlite>=2,<3",
+]
 dev = [
   "build>=1.2,<2",
   "mypy>=1.14,<2",
@@ -39,6 +44,7 @@ include = [
   "/README.md",
   "/configs",
   "/data/fixtures",
+  "/data/locks/langmem-foundation.lock.json",
   "/data/manifests",
   "/docs",
   "/product.lock.json",
@@ -84,3 +90,4 @@ ignore = ["S101"]
 python_version = "3.11"
 strict = true
 packages = ["milai_lab"]
+exclude = "(baselines/langmem_agent|baselines/langmem_identity|providers/langmem_chat|runners/langmem_foundation|runners/langmem_merit|runners/langmem_diagnostic|datasets/merit)\\.py$"

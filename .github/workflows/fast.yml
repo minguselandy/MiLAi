@@ -181,6 +181,27 @@ jobs:
           uv run python tools/check_legacy_archive.py
           uv build
 
+  lab-langmem-foundation-fast:
+    name: Lab LangMem foundation fast gate
+    if: github.event_name == 'pull_request' && needs.classify.outputs.lab == 'true'
+    needs: [classify, boundaries]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+      - name: Verify locked optional foundation
+        working-directory: MiLAi-Lab
+        run: |
+          uv sync --frozen --dev --group baseline-langmem --python 3.11
+          uv run --no-sync milai-lab-check-boundary
+          uv run --no-sync ruff check src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py tools/run_langmem_foundation.py tools/prepare_langmem_foundation.py tools/summarize_langmem_foundation.py tests/unit/test_langmem_foundation.py
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py
+          uv run --no-sync pytest -q tests/unit/test_langmem_foundation.py
+
   archive-fast:
     name: Archive validation
     if: github.event_name == 'pull_request' && needs.classify.outputs.archive == 'true'
@@ -206,6 +227,7 @@ jobs:
       - runtime-fast
       - product-integrations-fast
       - lab-fast
+      - lab-langmem-foundation-fast
       - archive-fast
     runs-on: ubuntu-latest
     steps:
@@ -219,6 +241,7 @@ jobs:
           RUNTIME: ${{ needs.runtime-fast.result }}
           INTEGRATIONS: ${{ needs.product-integrations-fast.result }}
           LAB: ${{ needs.lab-fast.result }}
+          LAB_LANGMEM: ${{ needs.lab-langmem-foundation-fast.result }}
           ARCHIVE: ${{ needs.archive-fast.result }}
           FULL_REQUIRED: ${{ needs.classify.outputs.full_required }}
         shell: bash
@@ -226,7 +249,8 @@ jobs:
           set -Eeuo pipefail
           for result in \
             "$CLASSIFY" "$BOUNDARIES" "$IDENTITY" "$CONFORMANCE" \
-            "$TREE_IDENTITY" "$RUNTIME" "$INTEGRATIONS" "$LAB" "$ARCHIVE"; do
+            "$TREE_IDENTITY" "$RUNTIME" "$INTEGRATIONS" "$LAB" \
+            "$LAB_LANGMEM" "$ARCHIVE"; do
             case "$result" in
               success|skipped) ;;
               *) echo "selected fast job did not pass: $result" >&2; exit 1 ;;

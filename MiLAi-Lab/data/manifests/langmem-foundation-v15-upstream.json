@@ -1,0 +1,327 @@
+{
+  "kind": "V15_RESOLVED_UPSTREAM_IDENTITY",
+  "python": "3.11.13",
+  "langmem_source_url": "https://github.com/langchain-ai/langmem.git",
+  "langmem_commit": "9d033b47d9ce53e37e92c92241b0496c0278932e",
+  "declared_version": "0.0.30",
+  "license": "MIT",
+  "license_sha256": "98af1351ea856e008c835bc89a312905960a318072f950732bf346c741027c7d",
+  "direct_url": {
+    "url": "https://github.com/langchain-ai/langmem.git",
+    "vcs_info": {
+      "vcs": "git",
+      "commit_id": "9d033b47d9ce53e37e92c92241b0496c0278932e",
+      "requested_revision": "9d033b47d9ce53e37e92c92241b0496c0278932e"
+    }
+  },
+  "called_source_matches_checkout": true,
+  "called_files_sha256": {
+    "langmem/knowledge/tools.py": "0118d3623a19c9b6c8c3d477aead51f08eeb44771c3ae3f51cd32d8a800b78d7",
+    "langmem/__init__.py": "7af7387c702a9cd8d9895ab37acb17fcbf5606287ce7744bc44b1820a42fc4a1",
+    "langmem/utils.py": "0671eaf7ca9d0c59de4dc07b327799e5371cdb559cfd7f58d01b35081cb73071"
+  },
+  "resolved_dependencies": [
+    {
+      "name": "aiosqlite",
+      "version": "0.22.1",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "0.22.1",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/4e/8a/64761f4005f17809769d23e518d915db74e6310474e733e3593cfc854ef1/aiosqlite-0.22.1.tar.gz",
+        "hash": "sha256:043e0bd78d32888c0a9ca90fc788b38796843360c855a7262a532813133a0650",
+        "size": 14821,
+        "upload-time": "2025-12-23T19:25:43.997Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/00/b7/e3bf5133d697a08128598c8d0abc5e16377b51465a33756de24fa7dee953/aiosqlite-0.22.1-py3-none-any.whl",
+          "hash": "sha256:21c002eb13823fad740196c5a2e9d8e62f6243bd9e7e4a1f87fb5e44ecb4fceb",
+          "size": 17405,
+          "upload-time": "2025-12-23T19:25:42.139Z"
+        }
+      ]
+    },
+    {
+      "name": "langchain",
+      "version": "1.2.18",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "1.2.18",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/1d/4e/b651ecac63af474b28519384f7011294493d139937b1a9591581291eef34/langchain-1.2.18.tar.gz",
+        "hash": "sha256:7e829dbf117affadfd2067a0e97b4af20222f535f30fb812a28472d842c1074c",
+        "size": 582882,
+        "upload-time": "2026-05-08T13:59:19.895Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/59/20/959f6098c79158afe5aedce7de05c3700f10d293890ef9e5dace6c3ad94b/langchain-1.2.18-py3-none-any.whl",
+          "hash": "sha256:8432d43a65540845ed6f1a783d38d869c4659a6b9405f9a510169ad40d2f7bae",
+          "size": 113643,
+          "upload-time": "2026-05-08T13:59:18.461Z"
+        }
+      ]
+    },
+    {
+      "name": "langchain-anthropic",
+      "version": "1.7.4",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "1.7.4",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/83/f8/b1a7e19a4f129f567f04534e263e14e350673fb35ba5e45b2a189c07d85b/langchain_anthropic-1.7.4.tar.gz",
+        "hash": "sha256:7d540300665a1c906986e505cdec41204e759f14dbd989f53f0c180d82624b94",
+        "size": 760340,
+        "upload-time": "2026-09-23T17:55:49.262Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/08/2c/d0389b1d8d4a93eadaa9cda07ef7614c0bbfec71f69997d42c32dabbbefa/langchain_anthropic-1.7.4-py3-none-any.whl",
+          "hash": "sha256:eec1178389358eaa4cff4f3dd353f063746b8c61090cffe9236d9035df71e66c",
+          "size": 63854,
+          "upload-time": "2026-09-23T17:55:48.137Z"
+        }
+      ]
+    },
+    {
+      "name": "langchain-core",
+      "version": "1.6.5",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "1.6.5",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/ed/ed/ceecd3bfcfc77a94cf30a9f1506e907fdea447458825e01914a72d2d1a6f/langchain_core-1.6.5.tar.gz",
+        "hash": "sha256:bdb059fef65473fd444558dbb18f50901657402c43ceed9dc0fdc7b76a393c6b",
+        "size": 1007041,
+        "upload-time": "2026-09-24T18:11:06.487Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/59/68/447ac7e734990b7ed9dcfc3b6dee9a4cd4d4169e296429fa71a9a47c1c7b/langchain_core-1.6.5-py3-none-any.whl",
+          "hash": "sha256:54c7b0e9314b9084fb04405bb33dc5d32986d512d92b7b8863899cd5f6267556",
+          "size": 572136,
+          "upload-time": "2026-09-24T18:11:04.837Z"
+        }
+      ]
+    },
+    {
+      "name": "langchain-openai",
+      "version": "1.6.6",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "1.6.6",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/30/14/6d9c4d07b43c1eaf8a112be3524b951247c44bb195d6224cab8ffb68b3e8/langchain_openai-1.6.6.tar.gz",
+        "hash": "sha256:7b3848f42825aca40165463aa37757051165eb292ba7f24658a2f58f9bb221f9",
+        "size": 3306663,
+        "upload-time": "2026-09-24T11:31:13.55Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/77/c6/0f6b0c9faa7d00eef702c133fd3534cb52cbdf56df9f3524666012ec90e0/langchain_openai-1.6.6-py3-none-any.whl",
+          "hash": "sha256:60dcaa443ddfdf1559feaf1d25916f394c7dda809aebe22a769fc39f02705be7",
+          "size": 127401,
+          "upload-time": "2026-09-24T11:31:11.691Z"
+        }
+      ]
+    },
+    {
+      "name": "langgraph",
+      "version": "1.1.10",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "1.1.10",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/9a/b3/7dec224369c7938eb3227ff69542a0d0f517862a0d27945b8c395f2a781f/langgraph-1.1.10.tar.gz",
+        "hash": "sha256:3115beb58203283c98d8752a90c034f3432177d2979a1fe205f76e5f1b744500",
+        "size": 560685,
+        "upload-time": "2026-04-27T17:19:10.426Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/80/07/057dc1aa7991115fca53f1fa6573a7cc0dd296c05360c672cc67fdb6245b/langgraph-1.1.10-py3-none-any.whl",
+          "hash": "sha256:8a4f163f72f4401648d0c11b48ee906947d938ba8cf1f474540fe591534f0d17",
+          "size": 173750,
+          "upload-time": "2026-04-27T17:19:09.073Z"
+        }
+      ]
+    },
+    {
+      "name": "langgraph-checkpoint",
+      "version": "2.1.2",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "2.1.2",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/29/83/6404f6ed23a91d7bc63d7df902d144548434237d017820ceaa8d014035f2/langgraph_checkpoint-2.1.2.tar.gz",
+        "hash": "sha256:112e9d067a6eff8937caf198421b1ffba8d9207193f14ac6f89930c1260c06f9",
+        "size": 142420,
+        "upload-time": "2025-10-07T17:45:17.129Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/c4/f2/06bf5addf8ee664291e1b9ffa1f28fc9d97e59806dc7de5aea9844cbf335/langgraph_checkpoint-2.1.2-py3-none-any.whl",
+          "hash": "sha256:911ebffb069fd01775d4b5184c04aaafc2962fcdf50cf49d524cd4367c4d0c60",
+          "size": 45763,
+          "upload-time": "2025-10-07T17:45:16.19Z"
+        }
+      ]
+    },
+    {
+      "name": "langgraph-checkpoint-postgres",
+      "version": "2.0.25",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "2.0.25",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/bd/6a/e2c5163b274c80bf7afe48a766b788d922d5a0685b6a6cf65a4e1f0b6ba1/langgraph_checkpoint_postgres-2.0.25.tar.gz",
+        "hash": "sha256:916b80f73a641a589301f6c54414974768b6d646d82db7b301ff8d47105c3613",
+        "size": 118843,
+        "upload-time": "2025-10-07T18:44:55.116Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/38/43/f406097fe110f637282d583f2d1b490c107f6a4c661977bc59aed44f2baa/langgraph_checkpoint_postgres-2.0.25-py3-none-any.whl",
+          "hash": "sha256:cf1248a58fe828c9cfc36ee57ff118d7799ce214d4b35718e57ec98407130fb5",
+          "size": 40944,
+          "upload-time": "2025-10-07T18:44:54.25Z"
+        }
+      ]
+    },
+    {
+      "name": "langgraph-checkpoint-sqlite",
+      "version": "2.0.11",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "2.0.11",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/d2/aa/5f9e9de74a6d0a9b77c703db0068d0f0cdc8dbc2e9b292ae95f4de115a44/langgraph_checkpoint_sqlite-2.0.11.tar.gz",
+        "hash": "sha256:e9337204c27b01a29edff65c1ecb7da0ca8ac7f1bd66b405617459043ac6c3ed",
+        "size": 109749,
+        "upload-time": "2025-07-25T17:32:07.773Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/3d/d4/c56f6b0e8c8211791c9954bef0edaef3dc2e118cf33800be44c7b90432bd/langgraph_checkpoint_sqlite-2.0.11-py3-none-any.whl",
+          "hash": "sha256:11c40d93225ce99fa2800332c97b16280addf9f15274def32c4d547955290d3f",
+          "size": 31191,
+          "upload-time": "2025-07-25T17:32:06.355Z"
+        }
+      ]
+    },
+    {
+      "name": "langgraph-prebuilt",
+      "version": "1.0.13",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "1.0.13",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/b5/a4/f8ac75fa7c503103f0cf7680944e28bbaaef74c19a8d163d7346869cc369/langgraph_prebuilt-1.0.13.tar.gz",
+        "hash": "sha256:ad219782a80e1718e7e7794de49e0ae307111d45cbcffab9a52725a66a609456",
+        "size": 172913,
+        "upload-time": "2026-04-30T01:48:15.742Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/69/ef/5ada0bef4013ef5ae53a0ca1de5736517f1076a54d313f156ca545ec65d5/langgraph_prebuilt-1.0.13-py3-none-any.whl",
+          "hash": "sha256:7055e9fad41fbd3593800aed0aea0a6e974b17f33ed51b80d3d3a031212dd7c0",
+          "size": 37214,
+          "upload-time": "2026-04-30T01:48:14.507Z"
+        }
+      ]
+    },
+    {
+      "name": "langmem",
+      "version": "0.0.30",
+      "source": {
+        "git": "https://github.com/langchain-ai/langmem.git?rev=9d033b47d9ce53e37e92c92241b0496c0278932e#9d033b47d9ce53e37e92c92241b0496c0278932e"
+      },
+      "installed_version": "0.0.30",
+      "sdist": null,
+      "wheels": []
+    },
+    {
+      "name": "psycopg",
+      "version": "3.3.6",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "3.3.6",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/76/26/3ea4ca5eaea1c0debcdf7ee7c1613fbe721dc27a03c461c0817ffd8a0601/psycopg-3.3.6.tar.gz",
+        "hash": "sha256:c081f2250df751a943036e42db6df4571c66cd0aabe8291a7a506512b12007d2",
+        "size": 168171,
+        "upload-time": "2026-09-18T13:22:55.152Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/4e/de/748bd7609c71cae5d737f0ba9192f19329f70180ecda8fff3cac02c5abe3/psycopg-3.3.6-py3-none-any.whl",
+          "hash": "sha256:a1db9f7148b06a28606767efaca51fa6f9398c5c0a3810519be69d7000bdb631",
+          "size": 215490,
+          "upload-time": "2026-09-18T13:15:29.374Z"
+        }
+      ]
+    },
+    {
+      "name": "psycopg-pool",
+      "version": "3.3.3",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "3.3.3",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/74/5e/c0664b968b102ff68b811d999c728546c48d5c1eec03e3bbaf88c0cb4472/psycopg_pool-3.3.3.tar.gz",
+        "hash": "sha256:df87b5d9d0ad7db37f6cdad4fa8ce113d250f5997f6db38e9a99192fb67f9e1d",
+        "size": 32006,
+        "upload-time": "2026-09-22T15:53:24.947Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/5d/b4/452c6607a0f479465cd8a9b0d9956919fcb150050c1f83f9f11e6b8ee8dc/psycopg_pool-3.3.3-py3-none-any.whl",
+          "hash": "sha256:9b9cd6a4fcec47a410f7e82d408540e7f77b478509e91b44c1a5457a13e5ff37",
+          "size": 40304,
+          "upload-time": "2026-09-22T15:53:23.712Z"
+        }
+      ]
+    },
+    {
+      "name": "trustcall",
+      "version": "0.0.39",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "installed_version": "0.0.39",
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/2b/72/4cdb54a31952827e8b58e11ea286bbfe2d3aa0ffb77a2f87dbc1c7ea77d3/trustcall-0.0.39.tar.gz",
+        "hash": "sha256:ec315818224501b9537ce6b7618dbc21be41210c6e8f2e239169a5a00912cd6e",
+        "size": 38637,
+        "upload-time": "2025-04-14T22:02:50.857Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/2c/3a/58de925a104ce554fc250b833fe76401c7822aa8d65f2002cb53195e6c64/trustcall-0.0.39-py3-none-any.whl",
+          "hash": "sha256:d7da42e0bba816c0539b2936dfed90ffb3ea8d789e548e73865d416f8ac4ee64",
+          "size": 30073,
+          "upload-time": "2025-04-14T22:02:49.402Z"
+        }
+      ]
+    }
+  ],
+  "uv_lock_sha256": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8",
+  "pyproject_sha256": "f8c2329a9f34f03e4e38c7745821829f443bef74640569e52ac58614a2d0da35",
+  "factory": "langgraph.prebuilt.create_react_agent",
+  "long_term_store": "langgraph.store.postgres.PostgresStore",
+  "checkpointer": "langgraph.checkpoint.sqlite.SqliteSaver",
+  "implementation_or_spike_pass_claim": false
+}

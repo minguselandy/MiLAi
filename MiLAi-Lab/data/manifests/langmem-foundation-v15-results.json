@@ -1,0 +1,521 @@
+{
+  "kind": "LANGMEM_FOUNDATION_V15_TERMINAL_RESULTS",
+  "status": "COMPLETE_WITH_BASELINE_FAILURES",
+  "foundation_decision": "GO",
+  "experiment_arm_kind": "RESEARCH_PROTOTYPE",
+  "date": "2026-09-26",
+  "recipe_id": "langmem-hotpath-react-json-action-v1",
+  "transport_variant": "json_action",
+  "generation_schema_variant": "free_order_arguments_v1",
+  "source_mapping_sha256": "99fba610b55237aa31de8ad7f25312dc65e847d944b44b3bde1cde572b3e5ef9",
+  "foundation_lock_sha256": "e3b98d9ff15030afeb34eb7548edae3571230f1c20db89766ec7b0c5b12c4090",
+  "gates": {
+    "G0_IDENTITY": "PASS",
+    "G1_TOOL_INTEGRATION": "PASS",
+    "G2_PERSISTENCE_ISOLATION": "PASS",
+    "G3_EVALUATION": "PASS",
+    "G4_CHARACTERIZATION": "PASS",
+    "G5_SCOPE": "PASS"
+  },
+  "diagnostics": {
+    "run_id": "v15-b0-diagnostic-r2",
+    "planned": 12,
+    "executed": 12,
+    "terminal": 12,
+    "interrupted": 0,
+    "sessions": 20,
+    "manual_semantic_passes": 7,
+    "manual_judge": "root; original rubric semantic items; old Host-only structural fields N/A; no model Judge",
+    "cases": [
+      {
+        "case_id": "d01",
+        "status": "TERMINAL",
+        "sessions": 1,
+        "semantic_pass": true,
+        "failure_classes": [],
+        "observation": "540；临时计算与格式未写入长期记忆。"
+      },
+      {
+        "case_id": "d02",
+        "status": "TERMINAL",
+        "sessions": 2,
+        "semantic_pass": false,
+        "failure_classes": [
+          "MEMORY_MISS",
+          "ACTION_GROUNDING_ERROR"
+        ],
+        "observation": "真实发送 K17 消息一次、取得 MSG-K17；未保存回执，却声称下次可用；下一会话两次搜索为空。未释放包裹，也未谎称仓库已执行暂存。"
+      },
+      {
+        "case_id": "d03",
+        "status": "TERMINAL",
+        "sessions": 2,
+        "semantic_pass": true,
+        "failure_classes": [],
+        "observation": "项目摘要的 ISO 日期格式范围已保存并检索。"
+      },
+      {
+        "case_id": "d04",
+        "status": "TERMINAL",
+        "sessions": 1,
+        "semantic_pass": false,
+        "failure_classes": [
+          "TASK_COMPLETION_ERROR"
+        ],
+        "observation": "解释先检查电池及 READY 应放最后，实际回答没有以 READY 结尾；无长期写入。"
+      },
+      {
+        "case_id": "d05",
+        "status": "TERMINAL",
+        "sessions": 2,
+        "semantic_pass": true,
+        "failure_classes": [],
+        "observation": "保存 Cedar 演示前十分钟无障碍评审及后续准备条件，并检索使用；未发送议程。正文 today 缺少绝对时间锚另列局限。"
+      },
+      {
+        "case_id": "d06",
+        "status": "TERMINAL",
+        "sessions": 2,
+        "semantic_pass": true,
+        "failure_classes": [],
+        "observation": "保存设备清单范围、2026-10-01 生效与前后单位；后续正确使用磅和千克。"
+      },
+      {
+        "case_id": "d07",
+        "status": "TERMINAL",
+        "sessions": 1,
+        "semantic_pass": true,
+        "failure_classes": [],
+        "observation": "EVEN；临时分支未持久化。"
+      },
+      {
+        "case_id": "d08",
+        "status": "TERMINAL",
+        "sessions": 2,
+        "semantic_pass": false,
+        "failure_classes": [
+          "MEMORY_MISUSE"
+        ],
+        "observation": "已保存 Juniper / East Desk / 16:30 / documents accepted 触发和待办状态；下一会话跳过搜索。未预订；正文 scheduled 与明确 NOT booked / pending 并存。"
+      },
+      {
+        "case_id": "d09",
+        "status": "TERMINAL",
+        "sessions": 2,
+        "semantic_pass": false,
+        "failure_classes": [
+          "MEMORY_MISUSE",
+          "TASK_COMPLETION_ERROR"
+        ],
+        "observation": "同区/异区分支和 Asia/Shanghai 已保存；下一会话未检索，返回泛化异区建议，遗漏同区分支和用户时区。"
+      },
+      {
+        "case_id": "d10",
+        "status": "TERMINAL",
+        "sessions": 1,
+        "semantic_pass": true,
+        "failure_classes": [],
+        "observation": "仅确认本次试用房间 F-28，未写入长期记忆。"
+      },
+      {
+        "case_id": "d11",
+        "status": "TERMINAL",
+        "sessions": 2,
+        "semantic_pass": false,
+        "failure_classes": [
+          "MEMORY_MISUSE"
+        ],
+        "observation": "保存下次 Atlas 规划在选部署日前提醒 Nina 提供 load-test log；下一会话跳过搜索，遗漏该提醒。未联系 Nina；单项目符号未成为长期格式约束。"
+      },
+      {
+        "case_id": "d12",
+        "status": "TERMINAL",
+        "sessions": 2,
+        "semantic_pass": true,
+        "failure_classes": [],
+        "observation": "保存并检索字面小写 m0 及同型号连接器；旧 issued-source / literal_uses 结构项 N/A。"
+      }
+    ],
+    "first_retention": {
+      "required": 8,
+      "stored": 7
+    },
+    "subsequent_use_of_stored_memory": {
+      "stored_cases": 7,
+      "retrieved_and_used": 4,
+      "search_skipped": 3
+    },
+    "task_local_cases_without_store_writes": 4
+  },
+  "merit": {
+    "run_id": "v15-b0-merit-r2",
+    "arc_id": "arc0-000",
+    "planned": 5,
+    "executed": 5,
+    "scored": 5,
+    "interrupted": 0,
+    "public_messages": 7,
+    "native_successes": 4,
+    "native_denominator": 5,
+    "dependent_successes": 1,
+    "dependent_denominator": 2,
+    "episodes": [
+      {
+        "episode_index": 0,
+        "task_id": "arc0-000-e0-plant-refund",
+        "dependent": false,
+        "public_message_count": 1,
+        "native_score": {
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "memory_had_fact": false,
+          "argument_value_match": false,
+          "memory_utilized": false
+        },
+        "memory_records_at_close": 0
+      },
+      {
+        "episode_index": 1,
+        "task_id": "arc0-000-e1-update-refund",
+        "dependent": false,
+        "public_message_count": 2,
+        "native_score": {
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "memory_had_fact": false,
+          "argument_value_match": false,
+          "memory_utilized": false
+        },
+        "memory_records_at_close": 0
+      },
+      {
+        "episode_index": 2,
+        "task_id": "arc0-000-e2-probe-refund-upd",
+        "dependent": true,
+        "public_message_count": 2,
+        "native_score": {
+          "pre_satisfied": false,
+          "checker_after": false,
+          "success": false,
+          "memory_had_fact": false,
+          "argument_value_match": false,
+          "memory_utilized": false
+        },
+        "memory_records_at_close": 2
+      },
+      {
+        "episode_index": 3,
+        "task_id": "arc0-000-e3-indep-refund",
+        "dependent": false,
+        "public_message_count": 1,
+        "native_score": {
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "memory_had_fact": false,
+          "argument_value_match": false,
+          "memory_utilized": false
+        },
+        "memory_records_at_close": 2
+      },
+      {
+        "episode_index": 4,
+        "task_id": "arc0-000-e4-probe-refund-upd",
+        "dependent": true,
+        "public_message_count": 1,
+        "native_score": {
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "memory_had_fact": true,
+          "argument_value_match": true,
+          "memory_utilized": true
+        },
+        "memory_records_at_close": 2
+      }
+    ],
+    "first_agreement_retention": {
+      "stored": 0,
+      "required": 2
+    },
+    "wrong_refund": {
+      "episode": 2,
+      "order_id": "ORD-197802",
+      "current_agreed_cents": 1774,
+      "fabricated_stored_cents": 5000,
+      "actually_refunded_cents": 5000
+    },
+    "final_records": {
+      "count": 2,
+      "unsupported_agreement": 1,
+      "stale_pending_after_successful_refund": 1
+    },
+    "post_action_update_observed": false,
+    "unrelated_content_preservation_under_revision": "NOT_OBSERVED_NO_REVISION",
+    "semantic_failures": [
+      "MEMORY_MISS",
+      "MEMORY_MISUSE",
+      "ACTION_GROUNDING_ERROR",
+      "POLICY_ACTION_MISMATCH"
+    ]
+  },
+  "continuous_cost": {
+    "ledger": {
+      "limits": {
+        "questions": 12,
+        "arms": 3,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "embedding_tokens": null
+      },
+      "generation_requests": 108,
+      "generation": {
+        "charged_tokens": 76737,
+        "known_tokens": 71846,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 836,
+        "known_tokens": 836,
+        "unknown_usage": 0
+      },
+      "history": {
+        "ledger": "artifacts/contextual-user-memory/v14-budget.json",
+        "sha256": "dfc8e15729358cea54a533a83d5096f1f67b858dacc7e21ce0c7ca60c36e9eb0",
+        "generation_requests": 80,
+        "generation_tokens": 317098,
+        "embedding_tokens": 1540,
+        "unknown_usage": 0,
+        "judge_requests": 0,
+        "sealed": true
+      }
+    },
+    "generation_input_tokens": 66871,
+    "generation_output_tokens": 4975,
+    "generation_unknown_reservation": 4891,
+    "embedding_requests": 33,
+    "judge_requests": 0,
+    "provider_wall_seconds": 48.90664429683238,
+    "agent_development_cost": "UNAVAILABLE_SEPARATE_FROM_VLLM_LEDGER",
+    "prefix_cache_savings": "UNAVAILABLE; service prefix caching disabled",
+    "stages": [
+      {
+        "stage": "native-preflight",
+        "generation_requests": 1,
+        "generation_input_tokens": 0,
+        "generation_output_tokens": 0,
+        "generation_known_tokens": 0,
+        "generation_unknown_usage": 1,
+        "generation_unknown_reservation": 4891,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "provider_wall_seconds": 0.03540503093972802
+      },
+      {
+        "stage": "spike-json-r2",
+        "generation_requests": 5,
+        "generation_input_tokens": 2917,
+        "generation_output_tokens": 197,
+        "generation_known_tokens": 3114,
+        "generation_unknown_usage": 0,
+        "generation_unknown_reservation": 0,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "provider_wall_seconds": 4.17944108042866
+      },
+      {
+        "stage": "spike-json-r3",
+        "generation_requests": 6,
+        "generation_input_tokens": 3287,
+        "generation_output_tokens": 308,
+        "generation_known_tokens": 3595,
+        "generation_unknown_usage": 0,
+        "generation_unknown_reservation": 0,
+        "embedding_requests": 2,
+        "embedding_tokens": 25,
+        "provider_wall_seconds": 3.280147756449878
+      },
+      {
+        "stage": "final-diagnostic",
+        "generation_requests": 34,
+        "generation_input_tokens": 17283,
+        "generation_output_tokens": 1525,
+        "generation_known_tokens": 18808,
+        "generation_unknown_usage": 0,
+        "generation_unknown_reservation": 0,
+        "embedding_requests": 13,
+        "embedding_tokens": 356,
+        "provider_wall_seconds": 14.101544180884957,
+        "process_wall_seconds": 18.546941899694502
+      },
+      {
+        "stage": "final-merit",
+        "generation_requests": 7,
+        "generation_input_tokens": 6035,
+        "generation_output_tokens": 442,
+        "generation_known_tokens": 6477,
+        "generation_unknown_usage": 0,
+        "generation_unknown_reservation": 0,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "provider_wall_seconds": 3.817485311999917,
+        "process_wall_seconds": 7.238733135163784
+      },
+      {
+        "stage": "final-diagnostic-r2",
+        "generation_requests": 34,
+        "generation_input_tokens": 17285,
+        "generation_output_tokens": 1519,
+        "generation_known_tokens": 18804,
+        "generation_unknown_usage": 0,
+        "generation_unknown_reservation": 0,
+        "embedding_requests": 13,
+        "embedding_tokens": 356,
+        "provider_wall_seconds": 14.007473732344806,
+        "process_wall_seconds": 17.946237901691347
+      },
+      {
+        "stage": "final-merit-r2",
+        "generation_requests": 21,
+        "generation_input_tokens": 20064,
+        "generation_output_tokens": 984,
+        "generation_known_tokens": 21048,
+        "generation_unknown_usage": 0,
+        "generation_unknown_reservation": 0,
+        "embedding_requests": 5,
+        "embedding_tokens": 99,
+        "provider_wall_seconds": 9.485147203784436,
+        "process_wall_seconds": 13.170045800041407
+      }
+    ]
+  },
+  "preserved_attempts": [
+    "native HTTP 400 with unknown reservation",
+    "local message-template errors and checkpoint continuation",
+    "xgrammar property-order compatibility error",
+    "active-boundary-rejected source candidate before formal requests",
+    "R1 full diagnostics and interrupted MERIT; costs retained; no cross-source score stitching"
+  ],
+  "final_read_only_checks": {
+    "source_files_matched": 22,
+    "validation_files_matched": 4,
+    "v14_runtime_files_unchanged": 45,
+    "v14_ledger_unchanged": true,
+    "roadmap_unchanged": true,
+    "vllm_running": true,
+    "vllm_original_settings_equal": {
+      "image_id": true,
+      "Cmd": true,
+      "Entrypoint": true,
+      "Env": true,
+      "AutoRemove": true,
+      "Binds": true,
+      "PortBindings": true,
+      "NetworkMode": true,
+      "IpcMode": true,
+      "ShmSize": true,
+      "DeviceRequests": true,
+      "RestartPolicy": true,
+      "Ulimits": true
+    },
+    "image_reference_note": "Original image tag was replaced by its identical immutable image ID when recreating the auto-removed container; actual image bytes unchanged."
+  },
+  "scope_limits": {
+    "new_seeds_consumed": false,
+    "product_changed": false,
+    "product_schema_api_permissions_canonical_changed": false,
+    "v16_started": false,
+    "full_test_suite_run": false,
+    "matched_comparison": false,
+    "remote_ci_claim": "NOT_CLAIMED"
+  },
+  "artifact_sha256": {
+    "artifacts/langmem-foundation/v15-budget.json": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+    "artifacts/langmem-foundation/service/service-restore.json": "3e4adc32da76bae39032e13c5ebac3c29e63079ac0cba029ca6b8f8d5ee0183c",
+    "artifacts/langmem-foundation/development-checks.json": "e1c532cf089b8d422a6791e50b4f5037c2bb95fcb2054885336ed5830860dfd1",
+    "artifacts/langmem-foundation/initial-bank-check-r2.json": "4afdb67758355f049bd98f7a1b68d4932ee81c74ba7e56c377cbb18d216d83fe",
+    "data/locks/langmem-foundation.lock.json": "e3b98d9ff15030afeb34eb7548edae3571230f1c20db89766ec7b0c5b12c4090",
+    "data/manifests/langmem-foundation-v15-final-freeze.json": "96e52acefdc217a596258add87a76f7e7b79081764dda9d08f55ddc1415cc9d7",
+    "data/manifests/langmem-foundation-v15-r1-results.json": "49c369bfc6d84071773d00e208b8bb4c70561ef994bade6d9c80e26f46f9c164",
+    "artifacts/langmem-foundation/final-diagnostic-r2/config.json": "0510a6eb75ada9c045ba1e2f0329a1b679aacfcc8cee54192c020e8068522b0d",
+    "artifacts/langmem-foundation/final-diagnostic-r2/prepared.json": "a7f042e6b5c10202a5e944e5aead445472bfdc652eb1d3ce6023ac4f18152673",
+    "artifacts/langmem-foundation/final-diagnostic-r2/summary.json": "05d7ec863880aae126dcf0e384fe147f4e7650b2f3fa94d15575d530e5da8810",
+    "artifacts/langmem-foundation/final-diagnostic-r2/process.json": "c18fabfe91a6b6aaa773c191f1e1b77f40eba3fc4edd103332fef421efb12757",
+    "artifacts/langmem-foundation/final-diagnostic-r2/trace.jsonl": "958ef3803c895e46ded114fb0c5e281ee1b6dcb87badedacbd08421c147b592d",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d01/result.json": "50490569b9d66defb552e2c1d61ebab3678a3e07522c613c864ab50589a23f08",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d01/session-s1.json": "b6e17c498e9748a387752bf386823fb65fd29318889e1b176dc58f82e745066d",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d01/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d02/business-journal.json": "86d9c1d3347a2b2f81cfca94c69e94d17992ca5653bbcd8008888ba32c451c6d",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d02/result.json": "68f35d620cb70d5eaa005b1f012e727b6302be72fbdcdcabbdda38345da024ae",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d02/session-s1.json": "dd296218339e6252256c1a69b3660b966a05f1e8251933fd8a12e43f89a29a32",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d02/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d02/session-s2.json": "63c5615e1462cbf70a90251b74d3f3b33e5d5d1b188e626a91f888d7d0676bd4",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d02/session-s2.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d03/result.json": "1922de38e15c80bb0eab54a7aec48326abd72dfe755fc9d643333a436adba301",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d03/session-s1.json": "b8f12a514c50cfff25d90a3eb216ea6f7d94b90d8aef01cb14ae9ecbf087fcc6",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d03/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d03/session-s2.json": "6f4431108c738e86c02c59eefed73737f767b7d050ccb642f4d5ba5529d428e5",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d03/session-s2.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d04/result.json": "ad607cfb17926b86329f115d3d54bf3fc392059a48eb9c098ff17bd6a4665f66",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d04/session-s1.json": "65e6a804eb5f759bfc351d9703d4a8fc940865559267bed2e7e9f9f8304513e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d04/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d05/result.json": "6cbe14a2836149c43090688a376427418246465b8bfca8eb8a48214258c9b257",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d05/session-s1.json": "c77635ef4f9764ca42af2842a02e0b47edea9ba710936594b95fda26a4cd9a3a",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d05/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d05/session-s2.json": "cd40dced0757fea5b8402f8ca1a187ffc17e102383070cfe54c3431b8c9b8f16",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d05/session-s2.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d06/result.json": "cdd13b8ac9d468a3f7abddb4802e45b214a23272f1db201968c97c5cbb59f1ec",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d06/session-s1.json": "04a9a4966883765a088ea96567dfbffc0e58fd2d1e174e49663fc9f438d82b13",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d06/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d06/session-s2.json": "e8c710cf14aeb50dcac260fc43fc7792a4a8c4be00113713b794575f0e43ab27",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d06/session-s2.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d07/result.json": "c03df2bd1bf38dbd7fee29eb99f8003673ee6835ebffcfa266c25b9bcf94e6f0",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d07/session-s1.json": "b351088162fec8fd412ce1ebe55f6cbed9375a92916fdd5237c5d77c55bb7a61",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d07/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d08/result.json": "e4b4ac062d47e6ca8af34b07f584d3c975c13abb641834d4f7aa024dcc1fb200",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d08/session-s1.json": "ff53ca256f0a2530ca90dd6883e33deb0c9e99da1cd0a46a85a052328dcd0664",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d08/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d08/session-s2.json": "68311b17eea2b50cd06adc9281a8a1f60d32b3a0a830acc0eebab5401105dc8a",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d08/session-s2.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d09/result.json": "afd70c3ca99a1f55492241c333aab28cc0f466ac10390baf5e1634d6ea1a3edb",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d09/session-s1.json": "14496837a26fac172b358f411519d63f26ff64b99e6d0284e33278a0bd9f2dee",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d09/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d09/session-s2.json": "8ffe0f19b52a0d3368040776105807d10420b3039a82c89169dbbbeff63cfaad",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d09/session-s2.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d10/result.json": "d37a1ca4941737270d88d4ecb52e1ab53ddf37ddef50ab68a3d731e5b3c48c58",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d10/session-s1.json": "850a9ea3c3afab2e34d2ea95e3ed362f114e9a62b7de7d233f55d45b9e96b7c0",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d10/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d11/result.json": "57624a2278d9d6eb7edb3311bb71e299b9b10648f60f30139c75709429ad86e7",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d11/session-s1.json": "c79c78e700e2835c8324f855e44f5e41f65d9ad5b82445adb6e2f67b226929d6",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d11/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d11/session-s2.json": "a237a58a05d602e93ff1e9623b14d6f752f5f8a5fa45ae9c3c33b354c014aca6",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d11/session-s2.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d12/result.json": "921a04daa6adbf5fe81330f2054314a8214f8a4780ab4e60d9293539e1468419",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d12/session-s1.json": "fca6f1c7da17bf0267d0eb1aa717b9467328f14073bce7246a15233bb3bea817",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d12/session-s1.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d12/session-s2.json": "3749a4771c97e515166fab5f02e3dd3457a2ec3a208b1ed4f8caf3c5313af544",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/d12/session-s2.progress.json": "807129e1c1bf01b118848ab541a566d87badbb6511ceb479d27ddd041f23b0e8",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/result.json": "5290ea63bbd700608c4c0acf4c253efae5c13ba5b61771b613d415e262a4b860",
+    "artifacts/langmem-foundation/final-diagnostic-r2/results/run-identity.json": "036f7d276c7b9734b9c87b3b2be34ab29f96bbec7aac4ab51e2fa906e2f09a12",
+    "artifacts/langmem-foundation/final-merit-r2/config.json": "4ab43da0ded42c2ca6f9a1376c8ee5990fd5d2829bd3f163ff6e9309e034531c",
+    "artifacts/langmem-foundation/final-merit-r2/prepared.json": "3a931f58b93cd512a9bd75d13f89b31964ee1407489d7894ed84bbedd544c4ff",
+    "artifacts/langmem-foundation/final-merit-r2/summary.json": "cfbd03e8e22819f189a011c8ae70082c82afd3ef25a0bde6e1907d7677961e49",
+    "artifacts/langmem-foundation/final-merit-r2/process.json": "9d79c6f2be73a741963859960590c7dd4e62a28c07424dc7e1855bd50df350b9",
+    "artifacts/langmem-foundation/final-merit-r2/trace.jsonl": "187e3dc0a0c5f6ef8169554e70424637dff1f728c7cdf1c8228d1f1e2251aead",
+    "artifacts/langmem-foundation/final-merit-r2/results/business-journal.json": "4d60d713e4a93a33cfa7e595dad0bd90513fe7f2ac2a4ecb0cda8f62dc0c8b3f",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-0.json": "2a512ef04e1f8e42283040cee994c5e71e6339012dc7744680199d52f26057ed",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-0.progress.json": "cb55b6cb5e4b09cca11b9c99f4569fb7c8e930ea142b7a386d78b99f52eb7848",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-1.json": "d42b1fac5b39f0b1a15571669f3dc07dbffe2ceda0c951e070d1e7dfa93cf613",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-1.progress.json": "dcd633f2d928759976b1b9fe7352056037f4a31918000b7911f6c71b27066b90",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-2.json": "f1318c2b12d3a3d0582c7d95b0e8246437f987173400d7cb71846ce501f3bc5d",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-2.progress.json": "f04fe876bb91dc483ae652ae3614b901f3a193ef0701a8e7ea60380acf9ec97c",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-3.json": "a76787fd7c9c5a2ab4b1af14476aba5108f8bbec8d67e4d3ab4943f6e551db77",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-3.progress.json": "5503923deb1f2d7bab011a12d2bf27123412449c49c4e93bc700cbe21a68efdf",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-4.json": "007209092cae1ebad0ad7a3404b44761e87e0c0856a936a4daeca30c49c36e0c",
+    "artifacts/langmem-foundation/final-merit-r2/results/episodes/episode-4.progress.json": "f272c90aadef1b7ec1b7a78dbb02abc981895b134e3ebf0d2f9e87b9a4069f3b",
+    "artifacts/langmem-foundation/final-merit-r2/results/result.json": "644b572ec91e4e78ee1d1fd41c4e7430da8b950045f065a84302cb705f5ad539",
+    "artifacts/langmem-foundation/final-merit-r2/results/run-identity.json": "d37ed3ae82e9ea8165fe10005ea7fb0c95328a620147937dd819c25ec7d6f62e"
+  }
+}

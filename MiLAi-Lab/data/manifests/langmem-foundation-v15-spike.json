@@ -1,0 +1,79 @@
+{
+  "kind": "V15_JSON_ACTION_FOUNDATION_SPIKE",
+  "status": "S1_S6_PASSED",
+  "recipe_id": "langmem-hotpath-react-json-action-v1",
+  "transport_variant": "json_action",
+  "generation_schema_variant": "free_order_arguments_v1",
+  "native_parser_pass": false,
+  "vllm_settings_unchanged_after_restore": true,
+  "stages": {
+    "spike-r3-s1": {
+      "generation_requests": 1,
+      "input_tokens": 449,
+      "output_tokens": 13,
+      "embedding_requests": 0,
+      "embedding_tokens": 0,
+      "wall_seconds": 0.29745602421462536
+    },
+    "spike-r3-s2-s3-create": {
+      "generation_requests": 2,
+      "input_tokens": 1075,
+      "output_tokens": 134,
+      "embedding_requests": 1,
+      "embedding_tokens": 18,
+      "wall_seconds": 1.4766298923641443
+    },
+    "spike-r3-s4-s6": {
+      "generation_requests": 1,
+      "input_tokens": 651,
+      "output_tokens": 29,
+      "embedding_requests": 0,
+      "embedding_tokens": 0,
+      "wall_seconds": 0.3455042280256748
+    },
+    "spike-r3-s3-search-s5-s6": {
+      "generation_requests": 2,
+      "input_tokens": 1112,
+      "output_tokens": 132,
+      "embedding_requests": 1,
+      "embedding_tokens": 7,
+      "wall_seconds": 1.1605576118454337
+    }
+  },
+  "evidence": {
+    "ordinary_final": true,
+    "business_receipt_call_id_and_one_action": true,
+    "upstream_create_with_nonempty_content": true,
+    "bge_m3_index_query": "nutrition constraints",
+    "query_score": 0.5576698613861267,
+    "same_thread_human_messages": 2,
+    "new_thread_initial_wire_roles": [
+      "system",
+      "user"
+    ],
+    "cold_store_id_body_equal": true,
+    "cold_checkpoint_restored": true,
+    "cross_run_arm_user_isolation": true
+  },
+  "source_sha256": {
+    "src/milai_lab/baselines/langmem_agent.py": "311f978791decc97447fde05c5c703223518079d0511405270940a35063c313b",
+    "src/milai_lab/providers/langmem_chat.py": "a06cf606514a1fd59b42b36d31db2cb2ecef147d2d355932fb4ee18a818c6184",
+    "src/milai_lab/runners/langmem_foundation.py": "d79d420aa686a9bcee96e68f2202397827e4c02300f2d351982e506a3fb039b8",
+    "tools/run_langmem_foundation.py": "0ff3756ab41161388b5bd1125aaba0db36076613d8de3ed82ea836ee6ba47146"
+  },
+  "artifact_sha256": {
+    "artifacts/langmem-foundation/spike-json-r3/s1.json": "dd412404a5b4532b24f93f4b8f4a21078736bda9dffd08294b1430b053eb5ddd",
+    "artifacts/langmem-foundation/spike-json-r3/s2-create.json": "ba216561d96bf0dd12909429c6cb83415d8acde02920eb6383e701aa31a6f8f7",
+    "artifacts/langmem-foundation/spike-json-r3/s4.json": "1acbad292d8e25cd62dcf2e6bc50c8631132f87d35067b51a10a9c890f3ff573",
+    "artifacts/langmem-foundation/spike-json-r3/s5-search.json": "01d7f2e94676e9329094654266bb753ff588c9bd8588526ee5b418bc47c734fb",
+    "artifacts/langmem-foundation/spike-json-r3/cold-evidence.json": "3be38305461d077f74c6298a26bbc79463f917da78052ff2ccca859df24beb22",
+    "artifacts/langmem-foundation/grammar-order-probe.json": "05f77623629080688178777b81ebcd5adde4d41b4d282379c7b004b44e689714"
+  },
+  "prior_attempts": [
+    "native preflight HTTP400 unknown reservation retained",
+    "r1 duplicate leading system rejected locally before HTTP",
+    "r2 native history serialization rejected locally after business receipt, cold resume no duplicate",
+    "r2 constrained parameter order caused two null-content records; mechanical grammar repair, not a scored B0 result"
+  ],
+  "scope": "Explicit connectivity spike, not natural retention quality or benchmark result."
+}

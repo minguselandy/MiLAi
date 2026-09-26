@@ -3,15 +3,21 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Latest planned work: [LangMem foundation Goal v15](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md),
+Latest scoped delivery: [LangMem foundation Goal v15](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md),
 based on the [vNext roadmap](docs/MiLAi_vNext_Development_Roadmap_20260926.md).
-Status: `PLANNED_NOT_STARTED`; this delivery is documentation only. The next development
-slice builds a pinned public LangGraph/LangMem baseline, validates vLLM/tool/store/restart
-integration, then characterizes the existing 12 diagnostics and exposed MERIT arc0.
-Keep v14 as the frozen reference; B1 instrumentation, Sparse Basis and State-Attention belong
-to later Goals. No new benchmark samples, dependencies or implementation were added here.
+Status: `COMPLETE_WITH_BASELINE_FAILURES`; foundation technical gates passed. A pinned public
+LangGraph/LangMem baseline now uses a JSON-action adapter with the original vLLM settings,
+durable semantic Store, separate thread checkpoint and narrow business recovery.
+[Results](docs/MILA_LANGMEM_FOUNDATION_V15_RESULTS_20260926.md) report final-source diagnostics
+7/12 and original exposed MERIT arc0 native 4/5, dependent 1/2. Missing initial agreements,
+a fabricated 5000-cent refund agreement and stale memory after a correct refund remain failures.
+All costs are retained: 108 generations / 76737 charged tokens (71846 known + 4891 unknown
+reservation) / 836 embedding tokens, Judge=0. See the
+[development record](docs/MILA_LANGMEM_FOUNDATION_V15_DEVELOPMENT_20260926.md) and
+[reproduction entry](docs/MILA_LANGMEM_FOUNDATION_V15_REPRODUCTION_20260926.md).
+v14 stays frozen; B1, Sparse Basis and State-Attention require later Goals. No new seeds or Product changes.
 
-Latest scoped delivery: [Semantic boundary Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
+Previous scoped delivery: [Semantic boundary Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md).
 Status: `IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES`. A–D, narrow contract checks, staged V1
 diagnostics and final-source V2 are delivered. The frontier, journal-grounded action references

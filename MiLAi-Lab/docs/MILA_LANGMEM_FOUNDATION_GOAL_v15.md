@@ -1,17 +1,18 @@
 ---
 version: v15.0
 date: 2026-09-26
-status: PLANNED_NOT_STARTED
+status: COMPLETE_WITH_BASELINE_FAILURES
 planning_delivery: COMPLETE
-implementation_authorized_this_round: false
+implementation_authorized_this_round: true
 scope: MiLAi-Lab
 experiment_arm_kind: RESEARCH_PROTOTYPE
 reference_commit: 0802d34f49db45bd654fc745d33da3252c0d4e24
 reference_runtime_mapping_sha256: 944cda954858d7181624fc25c72ada717d3bd973e5231b29ecab85751e7f66ab
 roadmap_sha256: 2b4868be60fd49f1f5ba645fa5357a445a254782417eb22b4416184b3bf00ed5
 langmem_audit_commit: 9d033b47d9ce53e37e92c92241b0496c0278932e
-foundation_lock_status: NOT_CREATED
-foundation_execution_status: NOT_RUN
+foundation_lock_status: FROZEN
+foundation_execution_status: COMPLETE
+foundation_decision: GO
 cumulative_generation_request_cap: null
 cumulative_generation_token_cap: null
 cumulative_embedding_token_cap: null
@@ -22,7 +23,11 @@ verification_count_cap: null
 
 本 Goal 将 [vNext 路线图](MiLAi_vNext_Development_Roadmap_20260926.md)收敛为第一项可独立完成的开发工作：**在 MiLAi-Lab 中建立固定上游、固定 Agent 配方、使用现有 vLLM 的 LangGraph／LangMem 基线，接通原生业务任务、长期记忆、恢复和连续计账，再记录它在已有小样本上的真实行为。**
 
-本轮只生成规划及导航，不安装依赖、不修改运行代码、不启动开发或实验。下列路径、命令、门槛及交付均为后续实施合同；“规划完成”不等于 v15 开发完成。
+最初规划交付只生成规划及导航，没有安装依赖、修改运行代码或启动实验；该时点记录保留在 §16。随后用户明确授权执行，已按下述合同完成开发和既有小样本验证。
+
+执行结项：A–F 与 G0–G5 技术 gate 已完成，状态为 **COMPLETE_WITH_BASELINE_FAILURES**。最终同一源码完成 12 例／20 会话诊断（人工语义 7/12）及原 arc0 的 5 集／7 消息（native 4/5、dependent 1/2）；语义反例与此前失败费用全部保留。见[最终结果](MILA_LANGMEM_FOUNDATION_V15_RESULTS_20260926.md)、[开发记录](MILA_LANGMEM_FOUNDATION_V15_DEVELOPMENT_20260926.md)及[复现入口](MILA_LANGMEM_FOUNDATION_V15_REPRODUCTION_20260926.md)。技术 GO 不自动启动 v16。
+
+最新执行约束：用户明确要求“不要更改 vLLM 的设置，通过加入适配器来实现功能要求”。保留原服务配置，采用 §7.2 的显式 JSON-action 薄适配；此要求取代下文规划时对修改服务参数的许可。真实 native 预检的失败及撤回服务变更的记录保留，不能将 JSON-action 结果标为 native parser 通过。
 
 ## 1. 目标、研究转向与成功定义
 
@@ -37,7 +42,7 @@ v14 的结构保障已交付，但首次未来约定与业务后记忆更新仍�
 
 **成功是技术接入及行为记录可信，不是 B0 必须语义全通过。** v15 不以修好 v14 的每个失败、MERIT 5/5 或证明 MiLAi 创新为结项目标。基线失败可以成为结果；模型接入失败、检索失效、跨会话偷带历史、评分泄漏和费用缺失则不能当作合格基线。
 
-## 2. 本轮核对事实与尚未证明的部分
+## 2. 规划时点核对事实与当时尚未证明的部分
 
 | 项目 | 已核对事实 | 对本 Goal 的约束 |
 | --- | --- | --- |
@@ -51,7 +56,7 @@ v14 的结构保障已交付，但首次未来约定与业务后记忆更新仍�
 | RuntimeStore | 当前持久库直接依赖旧方法、Host、session、协议身份 | 可以参考动作日志原则，不把整个 RuntimeStore 导入新底座 |
 | 未见任务 | v14 没有生成或读取 seeds 3/4；0/1/2 已暴露 | v15 不消费新 seeds；v17 使用前重新核对暴露登记，不保证它们永远未见 |
 
-本轮未安装 LangGraph、未启动 vLLM 请求、未运行 pytest，也未核验部署中的 native parser／新持久后端兼容性。上述未验证项不能填成通过。[v14 结果](CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md)与[冻结清单](../data/manifests/contextual-memory-v14-final-freeze.json)是旧结果的证据入口。
+上述为规划时点事实，当时未安装 LangGraph、未启动 vLLM 请求、未运行 pytest，也未核验部署中的 native parser／新持久后端兼容性。后续实测以 v15 最终结果为准，不回写当时未验证项。[v14 结果](CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md)与[冻结清单](../data/manifests/contextual-memory-v14-final-freeze.json)是旧结果的证据入口。
 
 ## 3. 范围与后续 Goal 的关系
 
@@ -131,7 +136,7 @@ LangMem 是工具库，不是唯一预设的 benchmark agent。**B0 的正式身
 
 兼容性检查同时覆盖：tool 名称／JSON 参数／call ID、无工具最终回答、错误回执、tool_result 后继续生成。捕获 malformed、length 截断及 parser失败的原始结果；不能从坏 JSON 中截出一段就执行。顺序执行可控业务工具，真实 Provider 并发为 1；若模型一次返回多个 calls，完整保留并按固定顺序处理，不丢弃剩余动作。
 
-SDK 自带重试若未逐次纳入账本，应关闭；不能把多次请求记成一次。服务端 parser能力以实际锁定版本验证，不因 endpoint 自称兼容就假定成功。需要服务参数变更时应使用明确的新服务身份，在实验冻结前完成，不能在对比中途修改。[vLLM 工具调用说明](https://docs.vllm.ai/en/latest/features/tool_calling/)
+SDK 自带重试若未逐次纳入账本，应关闭；不能把多次请求记成一次。服务端 parser能力以实际锁定版本验证，不因 endpoint 自称兼容就假定成功。按最新用户要求，不修改服务参数；不兼容时在客户端薄适配边界解决，并固定新 transport 身份。[vLLM 工具调用说明](https://docs.vllm.ai/en/latest/features/tool_calling/)
 
 ### 7.2 明确而有限的 fallback
 
@@ -316,22 +321,24 @@ v17先冻结方法与选择规则，再生成／读取未见MERIT小样本：从
 
 ## 15. 开发组织、成本与交付清单
 
-常规由一个Sol xhigh负责adapter／graph／provider接线及其窄验证。Luna max可处理上游identity、依赖清单、离线费用核对和文档，限定不重叠文件；Astra xhigh仅在native／Store／因果对照等具体疑难问题无法收敛时介入。不设常驻reviewer或额外语义审核Agent。root唯一控制真实模型请求，concurrency=1；Luna high按已有授权负责最终提交发布。这是后续实施分工，本轮不启动这些开发任务。
+实施使用一个 Sol xhigh 负责 adapter／graph／provider 接线及窄验证，root 负责上游 identity、依赖清单、环境、冻结、真实请求、费用与文档。按用户模型分工，Luna high 仅处理必要下载与已授权的最终提交发布；Astra xhigh 仅用于具体疑难问题，不设常驻 reviewer 或额外语义审核 Agent。root 唯一控制真实模型请求，concurrency=1。规划时的“不启动开发”已由后续执行授权取代。
 
 按工作包交付可审查增量，不以固定工时、累计token或复核次数强制结项；每次额外调用必须对应待解释的问题。完成相关窄检查后继续交付，不反复跑已经通过的检查。开发问题由最接近故障的模块解决，避免在多个层面堆重复断言或case-specific补丁。
 
-最终应交付以下内容；当前均未生成开发结果：
+交付进度如下；详细身份与过程见开发记录和冻结清单：
 
-- [ ] A：reference与foundation lock、独立依赖组／uv.lock、许可与源码核对。
-- [ ] B：公开工具＋vLLM薄接入、有效索引、明确持久后端及S1–S6证据。
-- [ ] C：独立MERIT／诊断适配、原生业务／评分和历史边界核对。
-- [ ] D：固定B0配置、prepare/run／恢复说明、窄检查与CI入口。
-- [ ] E：12例旧诊断＋完整暴露arc0，原始失败及连续费用。
-- [ ] F：`MILA_LANGMEM_FOUNDATION_V15_RESULTS_20260926.md`与复现文档，明确最终identity、GO/PIVOT、已运行／未运行和v16交接条件。
+- [x] A：reference与foundation lock、独立依赖组／uv.lock、许可与源码核对。
+- [x] B：公开工具＋vLLM薄接入、有效索引、明确持久后端及S1–S6证据。
+- [x] C：独立MERIT／诊断适配、原生业务／评分和历史边界核对。
+- [x] D：固定B0配置、prepare/run／恢复说明、窄检查与CI入口。
+- [x] E：12例旧诊断＋完整暴露arc0，原始失败及连续费用。
+- [x] F：[最终结果](MILA_LANGMEM_FOUNDATION_V15_RESULTS_20260926.md)与[复现文档](MILA_LANGMEM_FOUNDATION_V15_REPRODUCTION_20260926.md)，明确最终identity、技术GO、已运行／未运行和v16交接条件。
+
+最终源码映射 `99fba610b55237aa31de8ad7f25312dc65e847d944b44b3bde1cde572b3e5ef9`，foundation lock SHA `e3b98d9ff15030afeb34eb7548edae3571230f1c20db89766ec7b0c5b12c4090`。连续费用 108 次生成／76737 charged tokens（71846 known＋4891 unknown 预留）、836 embedding tokens，Judge=0；所有失败及 R1 中断保留。详见[终态清单](../data/manifests/langmem-foundation-v15-results.json)。
 
 源码、精简manifest、配置模板和结果摘要可以提交；模型、数据库、原始transcript、第三方checkout及运行目录保持仓库外／ignored。旧制品不覆盖，失败记录不改成成功。回退以本Goal所列基点及后续每个实际提交为准，不为规划单独重建回滚框架。
 
-## 16. 本轮规划交付记录
+## 16. 最初规划交付记录（历史时点）
 
 已完整读取319行路线图，核对当前Lab规则、v14结果、47份运行文件身份、provider／MERIT／持久库关键耦合点，以及本地固定LangMem源码与官方持久化／工具调用文档。路线图原文保持不变。
 

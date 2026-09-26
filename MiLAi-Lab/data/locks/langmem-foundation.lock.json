@@ -1,0 +1,289 @@
+{
+  "kind": "LANGMEM_FOUNDATION_LOCK",
+  "schema_version": 1,
+  "status": "FROZEN",
+  "lab_base_commit": "197b75ce9b6db0bebfb272955d625d741e34bd36",
+  "reference_commit": "0802d34f49db45bd654fc745d33da3252c0d4e24",
+  "upstream_manifest": "data/manifests/langmem-foundation-v15-upstream.json",
+  "upstream_manifest_sha256": "09e5f6a038c4ab960c2a47db12ba954b0cd233935edf3e9f43c19f9de3044c57",
+  "upstream_commit": "9d033b47d9ce53e37e92c92241b0496c0278932e",
+  "license": "MIT",
+  "called_files_sha256": {
+    "langmem/knowledge/tools.py": "0118d3623a19c9b6c8c3d477aead51f08eeb44771c3ae3f51cd32d8a800b78d7",
+    "langmem/__init__.py": "7af7387c702a9cd8d9895ab37acb17fcbf5606287ce7744bc44b1820a42fc4a1",
+    "langmem/utils.py": "0671eaf7ca9d0c59de4dc07b327799e5371cdb559cfd7f58d01b35081cb73071"
+  },
+  "python": "3.11.13",
+  "resolved_dependencies": {
+    "aiosqlite": "0.22.1",
+    "langchain": "1.2.18",
+    "langchain-anthropic": "1.7.4",
+    "langchain-core": "1.6.5",
+    "langchain-openai": "1.6.6",
+    "langgraph": "1.1.10",
+    "langgraph-checkpoint": "2.1.2",
+    "langgraph-checkpoint-postgres": "2.0.25",
+    "langgraph-checkpoint-sqlite": "2.0.11",
+    "langgraph-prebuilt": "1.0.13",
+    "langmem": "0.0.30",
+    "psycopg": "3.3.6",
+    "psycopg-pool": "3.3.3",
+    "trustcall": "0.0.39"
+  },
+  "uv_lock_sha256": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8",
+  "pyproject_sha256": "f8c2329a9f34f03e4e38c7745821829f443bef74640569e52ac58614a2d0da35",
+  "recipe_id": "langmem-hotpath-react-json-action-v1",
+  "transport_variant": "json_action",
+  "system_prompt": "You are a helpful assistant. Use the available business tools when a task requires an action, and report their actual results. You can manage and search long-term memories with the provided tools.",
+  "system_prompt_sha256": "edeaf06db6a0b39bc3702b9343127fa199a1702b665dbc8d2eb942b10a8eb9f4",
+  "memory_tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "manage_memory",
+        "description": "Create, update, or delete a memory to persist across conversations.\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\nProactively call this tool when you:\n\n1. Identify a new USER preference.\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\n3. Are working and want to record important context.\n4. Identify that an existing MEMORY is incorrect or outdated.",
+        "parameters": {
+          "properties": {
+            "content": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "action": {
+              "default": "create",
+              "enum": [
+                "create",
+                "update",
+                "delete"
+              ],
+              "type": "string"
+            },
+            "id": {
+              "anyOf": [
+                {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [],
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_memory",
+        "description": "Search your long-term memories for information relevant to your current context.",
+        "parameters": {
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "limit": {
+              "default": 10,
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "type": "integer"
+            },
+            "filter": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "memory_tools_sha256": "17c65075f4c1d959f60aa9c78732eb2777a7dcfaf4dbf431e63668843dd477df",
+  "json_action_schema_memory_only_sha256": "0af5bdd417e489b981929d151780add6ad83176fcf8d8e485270ecd6c2b99c0f",
+  "json_action_prompt_memory_only_sha256": "958b8e71fad22f9a189f39544776a0229e949fbfd7cab0218fcb17fe79361fdf",
+  "business_tool_schema_identity": "Per original input set, incorporated into each run freeze.",
+  "factory": {
+    "entrypoint": "langgraph.prebuilt.create_react_agent",
+    "version": "v1",
+    "max_concurrency": 1,
+    "recursion_limit": 128,
+    "max_model_attempts_per_public_message": 12
+  },
+  "namespace": [
+    "langmem",
+    "{foundation_run_id}",
+    "{arm_id}",
+    "{user_id}"
+  ],
+  "thread_scope": [
+    "run_id",
+    "arm_id",
+    "user_id",
+    "episode_id"
+  ],
+  "long_term_store": {
+    "class": "langgraph.store.postgres.PostgresStore",
+    "backend": "PostgreSQL 16.14",
+    "vector_extension": "0.8.2",
+    "scope": "Independent Lab database on existing isolated experiment backend",
+    "index": {
+      "dims": 1024,
+      "fields": [
+        "content"
+      ],
+      "embedding": "bge-m3",
+      "adapter": "VLLMEmbeddings direct batched endpoint calls"
+    }
+  },
+  "checkpointer": {
+    "class": "langgraph.checkpoint.sqlite.SqliteSaver",
+    "backend": "SQLite",
+    "separate_from_store": true
+  },
+  "model_identity": {
+    "artifacts": [
+      {
+        "logical_name": "model-weights.json",
+        "sha256": "802c74778d7f12cd41f546756cc9646c2c2f662ad3ec1205fea1dcd78a36dc60"
+      },
+      {
+        "logical_name": "model-metadata.json",
+        "sha256": "195cc9b2901da04bdcbd923458f4606a22c8b156c09df25620731171efefd594"
+      },
+      {
+        "logical_name": "tokenizer.json",
+        "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+      }
+    ],
+    "host": {
+      "weights_sha256": "889e66bf712804fd14b5b7a9aedfa0186dd08e10b561bc757cf5a29930453fba",
+      "metadata": {
+        "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+        "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+        "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+        "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+        "model.safetensors.index.json": "6f176f344e41d35b17af12904e33401da5ebff3b49fccb8bfa0185bc2d50f9d6",
+        "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b"
+      },
+      "served_model": "Qwen3.6-35B-A3B-FP8",
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      },
+      "max_model_len": 65536
+    },
+    "embedding": {
+      "weights_sha256": "8e5e7acd2a940237237fec1b4895a3d767bfcda2b588828f119ac88f1e40685f",
+      "metadata": {
+        "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+        "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1",
+        "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+      },
+      "served_model": "bge-m3"
+    },
+    "verification": "Local weights and metadata hashed during v14 preparation; manifests checked on run."
+  },
+  "host_service": {
+    "image": "sha256:e0cfcfcb9b86e2c2d0d52a93689773f20f380cb8e050a24ce550c44f6f55c5eb",
+    "version": "0.27.1",
+    "build_commit": "6e448d0ea9bf3d88d898b65449ca6dc2aec170ac",
+    "original_settings_restored": true,
+    "command": [
+      "/models",
+      "--port",
+      "7860",
+      "--tensor-parallel-size",
+      "2",
+      "--max-model-len",
+      "65536",
+      "--served-model-name",
+      "Qwen3.6-35B-A3B-FP8",
+      "--gpu-memory-utilization",
+      "0.9",
+      "--reasoning-parser",
+      "qwen3",
+      "--default-chat-template-kwargs",
+      "{\"enable_thinking\": false}"
+    ],
+    "native_auto_tool_choice": false,
+    "native_tool_call_parser": null,
+    "reasoning_parser": "qwen3",
+    "enable_thinking": false,
+    "prefix_caching": false
+  },
+  "embedding_service": {
+    "version": "0.9.1",
+    "unchanged": true
+  },
+  "capacity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "context_tokens": 65536,
+    "output_tokens": 4096,
+    "batch_source_tokens": 6000,
+    "safety_tokens": 512,
+    "source_message_overhead_tokens": 32,
+    "related_reserve_tokens": 0,
+    "schema_reserve_tokens": 0,
+    "enable_thinking": false
+  },
+  "source_sha256": {
+    "configs/langmem-baseline-v1.json": "45dbe0fb4843c87d3c5302a32408bb389a82b11bfcb09749fc773aeea5f22c2b",
+    "pyproject.toml": "f8c2329a9f34f03e4e38c7745821829f443bef74640569e52ac58614a2d0da35",
+    "src/milai_lab/__init__.py": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+    "src/milai_lab/baselines/__init__.py": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+    "src/milai_lab/baselines/langmem_agent.py": "dfbb175ba17db7dba68e646401670996a3393ec4cfc276255c5efd24d3fefacf",
+    "src/milai_lab/baselines/langmem_identity.py": "bf3b25663b52478325734f8ba4a3703521d63bb522f8a22133f28680a5187572",
+    "src/milai_lab/datasets/__init__.py": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+    "src/milai_lab/datasets/merit.py": "1e68fafc8f4c571430a5f032961df1e59cb4913f110178ec481d6e24700483a7",
+    "src/milai_lab/harness/__init__.py": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "src/milai_lab/providers/__init__.py": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+    "src/milai_lab/providers/langmem_chat.py": "9f03467bf330bbc0699d7b282cbb41943f23095722a182c24ea71e4be7a5b366",
+    "src/milai_lab/runners/__init__.py": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+    "src/milai_lab/runners/langmem_diagnostic.py": "10a0555a039b8864fa6b44393ae10b3d2b1cbdeec5ec7732f20353a2f28e61be",
+    "src/milai_lab/runners/langmem_foundation.py": "d79d420aa686a9bcee96e68f2202397827e4c02300f2d351982e506a3fb039b8",
+    "src/milai_lab/runners/langmem_merit.py": "e4b0568dd88b104e90f1220c28aac9b455b517bacb37ba65b78dbfab5f3e7524",
+    "tools/prepare_langmem_foundation.py": "b6b4c538d121cd706e3c84c7e1c59ff70b23d8c568a036633bb9ea498865fdce",
+    "tools/run_langmem_foundation.py": "44e27ab5cb78148156e082814b59da7ab639babb48c2f2bb0658ba4edc9b1944",
+    "tools/summarize_langmem_foundation.py": "aea78fc1bc9ddbf7b11a935cd9b4aa19ca05a1bba9ab3475870adc60958e37d7",
+    "uv.lock": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8"
+  },
+  "execution_claim": "S1-S6 passed under final transport schema; full frozen behavior characterization is recorded separately.",
+  "source_mapping_sha256": "99fba610b55237aa31de8ad7f25312dc65e847d944b44b3bde1cde572b3e5ef9",
+  "generation_schema_variant": "free_order_arguments_v1",
+  "generation_only_argument_constraints": "Free-order JSON object; original complete tool schema is validated before any call executes.",
+  "source_mapping_hash_algorithm": "sha256(json.dumps(mapping, sort_keys=True, ensure_ascii=False).encode())",
+  "spike_manifest": "data/manifests/langmem-foundation-v15-spike.json",
+  "spike_manifest_sha256": "e88199b6e86a262f5350a30f2525e935b5798cd9b4759fc650cbfe70b8ca6381",
+  "grammar_order_probe_sha256": "05f77623629080688178777b81ebcd5adde4d41b4d282379c7b004b44e689714",
+  "argument_error_delivery": "Per-call ToolMessage(status=error, same tool_call_id) before tool body or business journal; malformed/truncated/envelope-invalid responses fail without execution."
+}

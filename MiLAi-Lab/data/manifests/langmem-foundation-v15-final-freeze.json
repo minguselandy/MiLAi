@@ -1,0 +1,167 @@
+{
+  "kind": "V15_FINAL_DEVELOPMENT_FREEZE",
+  "status": "READY_FOR_DECLARED_CHARACTERIZATION",
+  "foundation_lock": "data/locks/langmem-foundation.lock.json",
+  "foundation_lock_sha256": "e3b98d9ff15030afeb34eb7548edae3571230f1c20db89766ec7b0c5b12c4090",
+  "source_mapping_sha256": "99fba610b55237aa31de8ad7f25312dc65e847d944b44b3bde1cde572b3e5ef9",
+  "source_sha256": {
+    "configs/langmem-baseline-v1.json": "45dbe0fb4843c87d3c5302a32408bb389a82b11bfcb09749fc773aeea5f22c2b",
+    "pyproject.toml": "f8c2329a9f34f03e4e38c7745821829f443bef74640569e52ac58614a2d0da35",
+    "src/milai_lab/__init__.py": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+    "src/milai_lab/baselines/__init__.py": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+    "src/milai_lab/baselines/langmem_agent.py": "dfbb175ba17db7dba68e646401670996a3393ec4cfc276255c5efd24d3fefacf",
+    "src/milai_lab/baselines/langmem_identity.py": "bf3b25663b52478325734f8ba4a3703521d63bb522f8a22133f28680a5187572",
+    "src/milai_lab/datasets/__init__.py": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+    "src/milai_lab/datasets/merit.py": "1e68fafc8f4c571430a5f032961df1e59cb4913f110178ec481d6e24700483a7",
+    "src/milai_lab/harness/__init__.py": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "src/milai_lab/providers/__init__.py": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+    "src/milai_lab/providers/langmem_chat.py": "9f03467bf330bbc0699d7b282cbb41943f23095722a182c24ea71e4be7a5b366",
+    "src/milai_lab/runners/__init__.py": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+    "src/milai_lab/runners/langmem_diagnostic.py": "10a0555a039b8864fa6b44393ae10b3d2b1cbdeec5ec7732f20353a2f28e61be",
+    "src/milai_lab/runners/langmem_foundation.py": "d79d420aa686a9bcee96e68f2202397827e4c02300f2d351982e506a3fb039b8",
+    "src/milai_lab/runners/langmem_merit.py": "e4b0568dd88b104e90f1220c28aac9b455b517bacb37ba65b78dbfab5f3e7524",
+    "tools/prepare_langmem_foundation.py": "b6b4c538d121cd706e3c84c7e1c59ff70b23d8c568a036633bb9ea498865fdce",
+    "tools/run_langmem_foundation.py": "44e27ab5cb78148156e082814b59da7ab639babb48c2f2bb0658ba4edc9b1944",
+    "tools/summarize_langmem_foundation.py": "aea78fc1bc9ddbf7b11a935cd9b4aa19ca05a1bba9ab3475870adc60958e37d7",
+    "uv.lock": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8"
+  },
+  "recipe_id": "langmem-hotpath-react-json-action-v1",
+  "transport_variant": "json_action",
+  "generation_schema_variant": "free_order_arguments_v1",
+  "configs": {
+    "diagnostic": {
+      "config": "artifacts/langmem-foundation/final-diagnostic-r2/config.json",
+      "prepared": "artifacts/langmem-foundation/final-diagnostic-r2/prepared.json",
+      "run_id": "v15-b0-diagnostic-r2",
+      "config_sha256": "0510a6eb75ada9c045ba1e2f0329a1b679aacfcc8cee54192c020e8068522b0d",
+      "prepared_sha256": "a7f042e6b5c10202a5e944e5aead445472bfdc652eb1d3ce6023ac4f18152673"
+    },
+    "merit": {
+      "config": "artifacts/langmem-foundation/final-merit-r2/config.json",
+      "prepared": "artifacts/langmem-foundation/final-merit-r2/prepared.json",
+      "run_id": "v15-b0-merit-r2",
+      "config_sha256": "4ab43da0ded42c2ca6f9a1376c8ee5990fd5d2829bd3f163ff6e9309e034531c",
+      "prepared_sha256": "3a931f58b93cd512a9bd75d13f89b31964ee1407489d7894ed84bbedd544c4ff"
+    }
+  },
+  "diagnostic_inputs_sha256": "a6852f07b4b1801e0426cb9ca930c518b3182ac2d5b9f2754f9109e98bf862bc",
+  "diagnostic_rubric_sha256": "62ab23a2a15f2ef3b81ecb51a715a19e379d24581b90ade2e9b8c12968a0ebcc",
+  "merit_selection_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+  "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+  "world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29",
+  "initial_memory_check_sha256": "4afdb67758355f049bd98f7a1b68d4932ee81c74ba7e56c377cbb18d216d83fe",
+  "service_restore_sha256": "3e4adc32da76bae39032e13c5ebac3c29e63079ac0cba029ca6b8f8d5ee0183c",
+  "development_checks": {
+    "kind": "LANGMEM_FOUNDATION_DEVELOPMENT_CHECKS",
+    "actor": "v15 foundation source owner",
+    "model_or_embedding_requests_by_actor": 0,
+    "checks": {
+      "python": "3.11.13",
+      "uv_lock_check": "passed; 101 packages resolved",
+      "baseline_langmem_sync": "passed; pinned Git commit 9d033b47d9ce53e37e92c92241b0496c0278932e",
+      "isolated_postgres_store_setup": "passed with fixed 1024-dimensional fixture and no embedding endpoint call",
+      "json_action_hostcapacity_mock": "passed ordinary final and tool-to-final",
+      "upstream_react_mock": "passed manage/search and five-episode exposed MERIT mock",
+      "grammar_order_probe": "artifacts/langmem-foundation/grammar-order-probe.json",
+      "ruff_narrow": "passed",
+      "mypy_optional_new_modules": "passed; 7 source files",
+      "mypy_default_core_without_optional_group": "passed; 99 source files",
+      "optional_test_collection_without_group": "skipped by importorskip as intended",
+      "pytest_narrow": "PASS: complete foundation file, 8 tests, after universal tool validation wrapper",
+      "frozen_identity_gate_synthetic": "passed; config mutation rejected",
+      "summary_interruption_and_usage_synthetic": "passed",
+      "git_diff_check": "passed",
+      "uv_build": "PASS: one necessary R2 rebuild after invalid-argument recovery and new freeze",
+      "sdist_frozen_source_hashes": "PASS: R2 FROZEN lock and all 22/22 source files match packaged bytes",
+      "sdist_foundation_lock": "PASS: exact R2 FROZEN lock bytes included once in sdist",
+      "sdist_wheel_credentials_artifacts": "PASS: no private DSN bytes or artifact/private/.env/sqlite/jsonl filenames in sdist or wheel",
+      "active_boundary_initial": "FAILED: src/milai_lab/datasets/merit.py:36 SYS_PATH_MUTATION insert; first required active boundary check after candidate freeze",
+      "active_boundary_after_fix": "PASS: uv run --no-sync milai-lab-check-boundary",
+      "pinned_merit_import_after_fix": "PASS: package loaded with importlib.util from fixed external directory; actual __file__ checked; sys.path unchanged",
+      "merit_mock_replay_after_fix": "PASS: five episodes, seven mock generations; no real model or embedding request",
+      "merit_ruff_mypy_after_fix": "PASS: Ruff and mypy on datasets/merit.py",
+      "formal_merit_r1_interruption": "R1 episode 2 invalid manage_memory action=search stopped in facade; candidate retained by root, no new model request by source owner",
+      "tool_schema_mechanics": "upstream manage args_schema is Pydantic and raises ValidationError; business JSON-dict args_schema executes invalid input directly without schema validation",
+      "invalid_argument_recovery_graph_mock": "PASS: invalid upstream and business calls return same-ID ToolMessage errors; valid batch call executes once; corrected upstream call and final complete",
+      "bad_json_length_envelope_after_repair": "PASS: three existing malformed/length/unknown-name cases fail before tool execution",
+      "arg_recovery_ruff_mypy": "PASS: Ruff for adapter/agent/test and mypy for 2 changed source files",
+      "active_boundary_after_arg_repair": "PASS: uv run --no-sync milai-lab-check-boundary"
+    },
+    "source_mapping_sha256": "99fba610b55237aa31de8ad7f25312dc65e847d944b44b3bde1cde572b3e5ef9",
+    "status": "R2_FROZEN_SOURCE_PACKAGE_BOUNDARIES_PASSED",
+    "superseded_candidate_lock_sha256": "e5e9c2a4499f67f74f322ee8768a8ab732cb5681fe5c9542e69ecabd1bbdbeb1",
+    "superseded_candidate_packages": {
+      "milai_lab-0.1.0.tar.gz": "963c38edfc6ab49d09ef09d0ce7a2b83f9e1c380c48931c70602110340d64e49",
+      "milai_lab-0.1.0-py3-none-any.whl": "9c6df332cb35d01a96ceb11abe99c5a9b4016d36cdef1b72f514f751f0165f04"
+    },
+    "pre_arg_recovery_lock_sha256": "19b327b616f6f4f22674ca55eb194436c3b594d16a3e0c3d46965263b37b84be",
+    "pre_arg_recovery_packages": {
+      "milai_lab-0.1.0.tar.gz": "66161ecd5b5c90f96f978f41b8ead751d6c802ae201f7df5595ac28c27207723",
+      "milai_lab-0.1.0-py3-none-any.whl": "0bb392de7c38bb26c4e7505ca9ae3b3949ffc0f18f782c51bdd6de90bd825abf"
+    },
+    "frozen_lock_sha256": "e3b98d9ff15030afeb34eb7548edae3571230f1c20db89766ec7b0c5b12c4090",
+    "packages": {
+      "milai_lab-0.1.0.tar.gz": "35b49ee6385ff6e7d51767d39cf8cc950d1b7aaa57865a7b82b9497c6ad714b7",
+      "milai_lab-0.1.0-py3-none-any.whl": "571302c358a31849501cbf8db567dc57aff72238e41658fdbdc77680090e9525"
+    }
+  },
+  "development_checks_sha256": "e1c532cf089b8d422a6791e50b4f5037c2bb95fcb2054885336ed5830860dfd1",
+  "validation_files_sha256": {
+    "tests/unit/test_langmem_foundation.py": "4100a45250984f2725c37dfe3a05b4c73362570cc3a892165f54701484f4676e",
+    ".github/workflows/ci.yml": "e9d68b8fc62dab958b78528493b091ef39bdb3204edcffc67d438adeefc0880a",
+    "../.github/workflows/ci.yml": "15fcb78affcb4770e84c96f44ba4b737ff73fa647cc03e38d9cee3431abe5fc2",
+    "../.github/workflows/fast.yml": "226544412d80ffcf3b3a6758b945f39aacbfc3976195c08067b7e731e840efbe"
+  },
+  "budget_before_characterization": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 53,
+    "generation": {
+      "charged_tokens": 36885,
+      "known_tokens": 31994,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 381,
+      "known_tokens": 381,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/contextual-user-memory/v14-budget.json",
+      "sha256": "dfc8e15729358cea54a533a83d5096f1f67b858dacc7e21ce0c7ca60c36e9eb0",
+      "generation_requests": 80,
+      "generation_tokens": 317098,
+      "embedding_tokens": 1540,
+      "unknown_usage": 0,
+      "judge_requests": 0,
+      "sealed": true
+    }
+  },
+  "scoped_work": [
+    "12 original diagnostics / 20 sessions",
+    "original exposed arc0 / 5 episodes / 7 public messages"
+  ],
+  "new_seeds_consumed": false,
+  "prior_candidate": {
+    "source_mapping_sha256": "4b450bf6fa3dd1f1f48b96f2eba30c8ec70ea843cd254972a0f855c3e4ee99c3",
+    "status": "REJECTED_BEFORE_FORMAL_RUN_BY_ACTIVE_BOUNDARY",
+    "formal_model_requests": 0,
+    "evidence": "artifacts/langmem-foundation/freeze-candidate-r1/"
+  },
+  "post_spike_changes": "Trace context, frozen run entry/identity/summary/CI, pinned external package loading, and ordinary per-call argument-error delivery without executing invalid arguments.",
+  "argument_error_delivery": "Per-call ToolMessage(status=error, same tool_call_id) before tool body or business journal; malformed/truncated/envelope-invalid responses fail without execution.",
+  "prior_formal_round": {
+    "freeze": "data/manifests/langmem-foundation-v15-r1-freeze.json",
+    "results": "data/manifests/langmem-foundation-v15-r1-results.json",
+    "status": "MERIT_INTERRUPTED_AT_INVALID_ARGUMENT; COMPLETE_DIAGNOSTICS_RETAINED",
+    "cost_preserved": true
+  }
+}

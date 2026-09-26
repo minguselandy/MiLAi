@@ -36,11 +36,31 @@ canonical memory state.
 
 ## Required checks
 
-Latest request: read the [vNext roadmap](docs/MiLAi_vNext_Development_Roadmap_20260926.md)
-and produce the [v15 foundation Goal](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md).
-This turn is planning only: v15 is `PLANNED_NOT_STARTED`, with no dependency installation,
-runtime implementation, model calls or benchmark generation authorized by the document itself.
-For subsequent authorized development, the roadmap freezes v14 as a reference and starts a
+The user-authorized [v15 foundation Goal](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md),
+based on the [vNext roadmap](docs/MiLAi_vNext_Development_Roadmap_20260926.md), is
+`COMPLETE_WITH_BASELINE_FAILURES`. A–F and G0–G5 technical gates are delivered; preserve the
+[results](docs/MILA_LANGMEM_FOUNDATION_V15_RESULTS_20260926.md) and use the
+[reproduction entry](docs/MILA_LANGMEM_FOUNDATION_V15_REPRODUCTION_20260926.md) for future authorized runs.
+Final source mapping is `99fba610b55237aa31de8ad7f25312dc65e847d944b44b3bde1cde572b3e5ef9`.
+Final R2 completed 12 diagnostics / 20 sessions (manual semantic 7/12) and the full original
+arc0 / 5 episodes / 7 messages (native 4/5, dependent 1/2), without interruption.
+Preserve the missing initial agreements, fabricated 5000-cent agreement and actual refund
+instead of 1774, and stale pending memory after the correct 6595-cent refund.
+All 108 generations / 76737 charged tokens (71846 known + 4891 unknown reservation) /
+836 embedding tokens remain; Judge=0. Earlier R1 interruption and all repair costs are retained.
+Eight narrow tests plus relevant static, boundary and packaging checks passed; do not rerun
+models/tests for publication. Technical GO does not imply semantic readiness or start v16.
+The following ownership rules apply to future authorized work:
+One Sol xhigh owns adapter/graph/provider implementation and narrow checks; root owns
+reference and foundation locks, environment identity, all actual model calls (concurrency 1),
+continuous costs, freezes and reporting. Luna high handles required reference downloads and
+authorized publication; no standing reviewer. Follow A -> B -> C -> D -> freeze -> E -> F.
+Use the actual pinned upstream manage/search tools with their default contract, effective
+semantic index, durable public Store, separate thread checkpoint and minimal action recovery.
+The latest user instruction forbids vLLM setting changes: retain the original service
+configuration and implement the explicit JSON-action adapter with its own recipe identity.
+Do not use an in-memory Store to claim cold persistence, or change B0 prompts for semantic misses.
+The roadmap freezes v14 as a reference and starts a
 separate public LangGraph/LangMem baseline. Do not extend the old contextual runtime or port
 its frontier/finish policies into B0. v15 covers foundation and exposed-set characterization;
 v16/v17 instrumentation/Basis/Attention require separate scoped Goals and gates.

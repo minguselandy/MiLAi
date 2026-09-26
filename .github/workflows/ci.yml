@@ -203,6 +203,28 @@ jobs:
         working-directory: MiLAi-Lab
         run: uv build
 
+  lab-langmem-foundation:
+    name: Lab LangMem foundation
+    needs: boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+      - name: Install locked LangMem baseline
+        working-directory: MiLAi-Lab
+        run: uv sync --frozen --dev --group baseline-langmem --python 3.11
+      - name: Check LangMem foundation boundary and adapter
+        working-directory: MiLAi-Lab
+        run: |
+          uv run --no-sync milai-lab-check-boundary
+          uv run --no-sync ruff check src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py tools/run_langmem_foundation.py tools/prepare_langmem_foundation.py tools/summarize_langmem_foundation.py tests/unit/test_langmem_foundation.py
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py
+          uv run --no-sync pytest -q tests/unit/test_langmem_foundation.py
+
   lab-regression:
     name: Lab historical replay (${{ matrix.name }})
     needs: boundaries
@@ -285,6 +307,7 @@ jobs:
         product-runtime,
         product-integrations,
         lab,
+        lab-langmem-foundation,
         lab-regression,
         archive,
       ]
