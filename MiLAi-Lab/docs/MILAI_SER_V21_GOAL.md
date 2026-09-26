@@ -1,5 +1,5 @@
 ---
-status: ACTIVE
+status: DEVELOPMENT_CONTROLS_PASS_ADVANCE_P7
 scope: RESEARCH_PROTOTYPE
 parent: MILAI_LONG_HORIZON_EXECUTION_GOAL.md
 reference_commit: 3ecad01dcf2f3f07bc4a44926848597a2e63f71b
@@ -42,10 +42,12 @@ P5同时修正sdist包含`data/diagnostics`，在新锁与源码完成后做一�
 - [x] P5最小实现、11项窄检查、源码与配置冻结；一次必要build通过。
 - [x] P5 R1三例×两臂及Reflection，严格2/6；R2仅澄清两个fixture完整目标引用合同，4个新run通过，见[R2结果](MILAI_SER_V21_P5_R2_RESULTS_20260927.md)。原irrelevant v1证据单列，旧失败不改判。
 - [x] P6九例与P5三例组成同源12类结果：本轮8/9、覆盖11/12，保留唯一current冲突失败与全部费用，见[P6 R1](MILAI_SER_V21_P6_R1_RESULTS_20260927.md)。
-- [ ] 按§11修复current冲突中的存储时间/来源权威混淆，先三个小控制，不将未完成修复当成阶段终结。
-- [ ] 累计成本/存储、打包、复现、Luna发布与远端核对。
-- [ ] 进入P7已暴露12-case/MERIT arc0回归；总体Goal仍ACTIVE。
+- [x] 按§11修复current冲突中的存储时间/来源权威混淆：仅追加通用authority说明，P6R2三个控制3/3，再以同一最终源码完成其余十例10/10；见[最终结果/复现/Reflection](MILAI_SER_V21_FINAL_RESULTS_20260927.md)。
+- [x] 累计成本/存储与checkout复现；P5累计构建已通过。P6R2新增锁打包并入P7新入口的一次必要构建。
+- [x] Luna已发布本轮P6源码/文档/紧凑证据并核对远端；之后P7立即继续，总体Goal仍ACTIVE。
 
 本阶段没有许可提前将开发样例称为unseen，也不跳过formal gate。P7及以后依长程Goal继续；阶段成功不等于整个项目完成。
 
 R1后的明确调整：P6复用两条R2 A5 v2和一条R1 irrelevant A5 v1，再执行九条预先统一完整引用说明的v2案例。没有把这组开发覆盖称为一轮统一新合同的独立12例试验，原四次失败与成本全部保留。方法源码仍为P5冻结版本。
+
+最终调整：P6R2采用新mapping `7ee904cba80c0facf0f513fe7607b15ea4fa5a61fc1a0553c1ef4e85144411e9`，模型可见authority由24增至63tokens。三例加十例形成最终同源13/13，十二类原控制加一个来源优先级反例；未借用旧源码的成功轨迹。最终连续SER累计202生成/195740tokens/2837embeddingtokens/75exact reads。vLLM、schema形状、Store、checkpoint、Product不变；这仍是开发结果，P7、方法冻结及正式评估尚待完成。

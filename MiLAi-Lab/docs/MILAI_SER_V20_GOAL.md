@@ -1,5 +1,5 @@
 ---
-status: ACTIVE
+status: COMPLETE_DEVELOPMENT_STAGE
 scope: RESEARCH_PROTOTYPE
 parent: MILAI_LONG_HORIZON_EXECUTION_GOAL.md
 ---
@@ -31,4 +31,4 @@ parent: MILAI_LONG_HORIZON_EXECUTION_GOAL.md
 - [x] P3原三例3/3通过，完成[逐请求核对和反思](MILAI_SER_V20_P3_RESULTS_20260927.md)。
 - [x] P4非温度控制与反例5/5通过，见[P4结果及中间表述缺陷](MILAI_SER_V20_P4_RESULTS_20260927.md)。
 - [x] P0–P4结果、连续费用、复现与阶段判定；合计41生成/36834tokens/589embeddingtokens，8个开发控制通过。
-- [ ] 源码交付与累计包装检查：sdist补入diagnostics纳入P5首次修改及新锁，之后做一次必要build；保留P4真实运行身份。总Goal继续。
+- [x] 源码交付：P4已在`3ecad01dcf2f3f07bc4a44926848597a2e63f71b`发布；P5在`2c90dd376c3ec486ed154853a6d980eea8094610`交付sdist diagnostics修正及一次成功构建，见[P5结果](MILAI_SER_V21_P5_R1_RESULTS_20260927.md)。该累计构建验证P5当时字节，P4真实运行身份保持原锁；不能把后来新增锁说成已在旧包中。v20阶段完成，总Goal继续。

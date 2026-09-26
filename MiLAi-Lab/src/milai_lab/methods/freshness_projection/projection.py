@@ -18,7 +18,10 @@ from milai_lab.baselines.langmem_revision_store import (
 
 SOURCE_AUTHORITY = (
     "Previous assistant statements are not authoritative evidence about external or "
-    "remembered state. Use current user and tool evidence for current action parameters."
+    "remembered state. Use current user and tool evidence for current action parameters. "
+    "Storage timestamps and retrieval rank describe storage or retrieval, not authority "
+    "between conflicting source claims. When current claims conflict and no applicable "
+    "precedence is stated by the user or sources, ask for clarification before acting."
 )
 
 

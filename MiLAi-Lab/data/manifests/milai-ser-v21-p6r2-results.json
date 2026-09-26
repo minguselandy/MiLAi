@@ -1,0 +1,1017 @@
+{
+  "kind": "MILAI_SER_V21_P6R2_RESULTS",
+  "status": "PASS_AUTHORITY_CONTROLS_ADVANCE_CONFIRMATION",
+  "checks": {
+    "all_preregistered_cases_pass": true
+  },
+  "source_mapping_sha256": "7ee904cba80c0facf0f513fe7607b15ea4fa5a61fc1a0553c1ef4e85144411e9",
+  "lock_path": "data/locks/milai-ser-v21-p6r2.lock.json",
+  "lock_sha256": "e80faf16a649308add7200a965fb29ab9d38fbf34cc6f5f789b37619208e9405",
+  "freeze_sha256": "fb5f086a406e8570fe40cf5585789b69a4dd25f28dc123555dced52439e683e5",
+  "passed": [
+    3,
+    3
+  ],
+  "cases": {
+    "a5:current_conflict": {
+      "case": "current_conflict",
+      "arm": "a5_rank_bounded_rebase",
+      "status": "PASS",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": true,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "both_current_conflicting_memories_delivered": true,
+        "no_current_factual_intervention": true
+      },
+      "business_calls": [],
+      "ordinary_answers": [
+        "I found two conflicting saved instructions for parcel Hazel-3:\n\n1. Depot Beta assigns it to **West**.\n2. Depot Alpha assigns it to **East**.\n\nNo priority between depots has been established. Therefore, I cannot definitively determine the correct warehouse without further clarification. My recommendation is to **await your approval** on which depot's instruction should take precedence, or to clarify if there is a default rule for such conflicts.",
+        "I cannot recommend a specific warehouse for parcel Hazel-3 because the saved instructions are conflicting and no priority rule is established. Depot Alpha specifies **East**, while Depot Beta specifies **West**. Without a defined precedence between depots, it is impossible to determine the correct destination. Please clarify which depot's instruction should take priority or provide a new instruction.",
+        "I cannot record an instruction for parcel Hazel-3 because the current saved instructions conflict (Depot Alpha assigns East, Depot Beta assigns West) and no priority is established. Please clarify which warehouse should be used."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 0,
+      "mechanical_rebase_precision_counts": [
+        0,
+        0
+      ],
+      "mechanical_rebase_recall_counts": [
+        0,
+        0
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [],
+      "projection_items": [
+        {
+          "request_id": "8021628c566f89d8df394cfe75da84e55706fc0916b53a241db91ee4dd6b4bcf",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "item_index": 0,
+          "memory_id": "2370c857-1756-4e7a-b088-c29e5e613c2f",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:2370c857-1756-4e7a-b088-c29e5e613c2f@1",
+          "status": "CURRENT",
+          "current_ref": "memory:2370c857-1756-4e7a-b088-c29e5e613c2f@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:e9bd0af83652e29b88df4c48c4901e51dc19358b30c67cad379752f1b753981e",
+          "projected_body_ref": "body:string:e9bd0af83652e29b88df4c48c4901e51dc19358b30c67cad379752f1b753981e",
+          "actual_tool_body_ref": "body:string:2fdc7da593c5820243287c77034cc531df00eeac7164de0e045a6c373250f6e0"
+        },
+        {
+          "request_id": "8021628c566f89d8df394cfe75da84e55706fc0916b53a241db91ee4dd6b4bcf",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "item_index": 1,
+          "memory_id": "be2d4197-7f0a-41b0-afa7-c7e668e9f9f1",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:be2d4197-7f0a-41b0-afa7-c7e668e9f9f1@1",
+          "status": "CURRENT",
+          "current_ref": "memory:be2d4197-7f0a-41b0-afa7-c7e668e9f9f1@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:58197743c01872fa5be62f6de39a213a8171646a64397b57cbca98618ab35725",
+          "projected_body_ref": "body:string:58197743c01872fa5be62f6de39a213a8171646a64397b57cbca98618ab35725",
+          "actual_tool_body_ref": "body:string:2fdc7da593c5820243287c77034cc531df00eeac7164de0e045a6c373250f6e0"
+        },
+        {
+          "request_id": "cae0b9ff16b7eb08c9a75b52954e7f24f0c1f63bdbe53b95fa91dd8ada02cdd7",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "item_index": 0,
+          "memory_id": "2370c857-1756-4e7a-b088-c29e5e613c2f",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:2370c857-1756-4e7a-b088-c29e5e613c2f@1",
+          "status": "CURRENT",
+          "current_ref": "memory:2370c857-1756-4e7a-b088-c29e5e613c2f@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:e9bd0af83652e29b88df4c48c4901e51dc19358b30c67cad379752f1b753981e",
+          "projected_body_ref": "body:string:e9bd0af83652e29b88df4c48c4901e51dc19358b30c67cad379752f1b753981e",
+          "actual_tool_body_ref": "body:string:2fdc7da593c5820243287c77034cc531df00eeac7164de0e045a6c373250f6e0"
+        },
+        {
+          "request_id": "cae0b9ff16b7eb08c9a75b52954e7f24f0c1f63bdbe53b95fa91dd8ada02cdd7",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "item_index": 1,
+          "memory_id": "be2d4197-7f0a-41b0-afa7-c7e668e9f9f1",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:be2d4197-7f0a-41b0-afa7-c7e668e9f9f1@1",
+          "status": "CURRENT",
+          "current_ref": "memory:be2d4197-7f0a-41b0-afa7-c7e668e9f9f1@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:58197743c01872fa5be62f6de39a213a8171646a64397b57cbca98618ab35725",
+          "projected_body_ref": "body:string:58197743c01872fa5be62f6de39a213a8171646a64397b57cbca98618ab35725",
+          "actual_tool_body_ref": "body:string:2fdc7da593c5820243287c77034cc531df00eeac7164de0e045a6c373250f6e0"
+        },
+        {
+          "request_id": "f330a6da9cc21ff2979ee017c78ab74d5e23a0305142d5352c336891de42e12b",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "item_index": 0,
+          "memory_id": "2370c857-1756-4e7a-b088-c29e5e613c2f",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:2370c857-1756-4e7a-b088-c29e5e613c2f@1",
+          "status": "CURRENT",
+          "current_ref": "memory:2370c857-1756-4e7a-b088-c29e5e613c2f@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:e9bd0af83652e29b88df4c48c4901e51dc19358b30c67cad379752f1b753981e",
+          "projected_body_ref": "body:string:e9bd0af83652e29b88df4c48c4901e51dc19358b30c67cad379752f1b753981e",
+          "actual_tool_body_ref": "body:string:2fdc7da593c5820243287c77034cc531df00eeac7164de0e045a6c373250f6e0"
+        },
+        {
+          "request_id": "f330a6da9cc21ff2979ee017c78ab74d5e23a0305142d5352c336891de42e12b",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "item_index": 1,
+          "memory_id": "be2d4197-7f0a-41b0-afa7-c7e668e9f9f1",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:be2d4197-7f0a-41b0-afa7-c7e668e9f9f1@1",
+          "status": "CURRENT",
+          "current_ref": "memory:be2d4197-7f0a-41b0-afa7-c7e668e9f9f1@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:58197743c01872fa5be62f6de39a213a8171646a64397b57cbca98618ab35725",
+          "projected_body_ref": "body:string:58197743c01872fa5be62f6de39a213a8171646a64397b57cbca98618ab35725",
+          "actual_tool_body_ref": "body:string:2fdc7da593c5820243287c77034cc531df00eeac7164de0e045a6c373250f6e0"
+        }
+      ],
+      "exact_reads": [],
+      "primary_revision_count": 1,
+      "delivered_snapshots": [
+        {
+          "request_id": "8021628c566f89d8df394cfe75da84e55706fc0916b53a241db91ee4dd6b4bcf",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "2370c857-1756-4e7a-b088-c29e5e613c2f",
+          "revision": 1,
+          "ref": "memory:2370c857-1756-4e7a-b088-c29e5e613c2f@1",
+          "body_ref": "body:string:e9bd0af83652e29b88df4c48c4901e51dc19358b30c67cad379752f1b753981e",
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "8021628c566f89d8df394cfe75da84e55706fc0916b53a241db91ee4dd6b4bcf",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "be2d4197-7f0a-41b0-afa7-c7e668e9f9f1",
+          "revision": 1,
+          "ref": "memory:be2d4197-7f0a-41b0-afa7-c7e668e9f9f1@1",
+          "body_ref": "body:string:58197743c01872fa5be62f6de39a213a8171646a64397b57cbca98618ab35725",
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "cae0b9ff16b7eb08c9a75b52954e7f24f0c1f63bdbe53b95fa91dd8ada02cdd7",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "2370c857-1756-4e7a-b088-c29e5e613c2f",
+          "revision": 1,
+          "ref": "memory:2370c857-1756-4e7a-b088-c29e5e613c2f@1",
+          "body_ref": "body:string:e9bd0af83652e29b88df4c48c4901e51dc19358b30c67cad379752f1b753981e",
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "cae0b9ff16b7eb08c9a75b52954e7f24f0c1f63bdbe53b95fa91dd8ada02cdd7",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "be2d4197-7f0a-41b0-afa7-c7e668e9f9f1",
+          "revision": 1,
+          "ref": "memory:be2d4197-7f0a-41b0-afa7-c7e668e9f9f1@1",
+          "body_ref": "body:string:58197743c01872fa5be62f6de39a213a8171646a64397b57cbca98618ab35725",
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "f330a6da9cc21ff2979ee017c78ab74d5e23a0305142d5352c336891de42e12b",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "2370c857-1756-4e7a-b088-c29e5e613c2f",
+          "revision": 1,
+          "ref": "memory:2370c857-1756-4e7a-b088-c29e5e613c2f@1",
+          "body_ref": "body:string:e9bd0af83652e29b88df4c48c4901e51dc19358b30c67cad379752f1b753981e",
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "f330a6da9cc21ff2979ee017c78ab74d5e23a0305142d5352c336891de42e12b",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-current_conflict-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "be2d4197-7f0a-41b0-afa7-c7e668e9f9f1",
+          "revision": 1,
+          "ref": "memory:be2d4197-7f0a-41b0-afa7-c7e668e9f9f1@1",
+          "body_ref": "body:string:58197743c01872fa5be62f6de39a213a8171646a64397b57cbca98618ab35725",
+          "source_tool_call": "chatcmpl-ad7efe0f1683cfa4:tool:0",
+          "source_search_id": "04834d6580d8c7cce77a0f8eae8db18ce898cd2d71184fa5d5d47ea456a02f0d:1:search:1",
+          "delivery_source": "search_memory"
+        }
+      ],
+      "cost": {
+        "generations": 4,
+        "input_tokens": 4104,
+        "output_tokens": 250,
+        "generation_tokens": 4354,
+        "embedding_requests": 3,
+        "embedding_tokens": 88,
+        "exact_reads": 0,
+        "exact_read_wall_ns": 0,
+        "projection_cpu_ns": 2039155,
+        "projection_wall_ns": 1607606,
+        "provider_wall_seconds": 2.6860916521400213,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "62b61e64d9bd12b14711c26c0bf560e6e0909c2d86b1e4f10fe8750d189ff4a3",
+        "instrumentation.sqlite": "ba38be27384db401e19a94d627782084daf916105e8d522c10419694866c70ef",
+        "checkpoints.sqlite": "8ecf399f470be45f4ef4512d18e20a643fd906411430cef54f9332deb12a9863",
+        "run/result.json": "9587163ec1a8376bc4861bc6d8f5d257a25dc85039253e8b2fd9b4feac0bca5b",
+        "run/fixture-effects.json": "d3c0e3a0ce670f09f6f9c456ce5e45bb5f4ec91e4fc88d62420dd01cbe4aa09a",
+        "prepared.json": "2d9d7cfb6a47afcc972ceb5ac670fc5326c6c5d2ca025422e304fcbb5f4875f5"
+      }
+    },
+    "a5:no_stale": {
+      "case": "no_stale",
+      "arm": "a5_rank_bounded_rebase",
+      "status": "PASS",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": true,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "no_additional_host_search": true,
+        "no_exact_reads": true,
+        "no_derived_demotions": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "parcel Alder-2",
+            "warehouse": "Central"
+          },
+          "generation_id": "chatcmpl-b7623ad1e49f221a"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for item parcel Alder-2 assigns it to the Central warehouse. My recommendation is to send parcel Alder-2 to the Central warehouse. Please approve this action.",
+        "If you approve, I would use the Central warehouse for parcel Alder-2, as this is the destination specified in the saved dispatch instruction.",
+        "The instruction for parcel Alder-2 to use the Central warehouse has been recorded."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 0,
+      "mechanical_rebase_precision_counts": [
+        0,
+        0
+      ],
+      "mechanical_rebase_recall_counts": [
+        0,
+        0
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [],
+      "projection_items": [
+        {
+          "request_id": "5d3758deb84ef85946b82ebd0edbdd22c3440ed57bc1cfc849acd9f8e04f11a0",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-9cc511bdd789731f:tool:0",
+          "source_search_id": "26e1df8412912b31564f9960e5eeb65ccbee3ff163b1d3d15780d1fd8b6d9496:1:search:1",
+          "item_index": 0,
+          "memory_id": "8293a4af-699c-48e3-a70d-f126022a29fc",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-no_stale-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "status": "CURRENT",
+          "current_ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "projected_body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "actual_tool_body_ref": "body:string:dfc69cf937fabc7589dc62ebc84139abc69d3b5f62faa70c50f44f5815612c31"
+        },
+        {
+          "request_id": "d4b62c4bdf18d50223f6eac63355842a704d1447f61871c8119e10418d0617b5",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-9cc511bdd789731f:tool:0",
+          "source_search_id": "26e1df8412912b31564f9960e5eeb65ccbee3ff163b1d3d15780d1fd8b6d9496:1:search:1",
+          "item_index": 0,
+          "memory_id": "8293a4af-699c-48e3-a70d-f126022a29fc",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-no_stale-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "status": "CURRENT",
+          "current_ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "projected_body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "actual_tool_body_ref": "body:string:dfc69cf937fabc7589dc62ebc84139abc69d3b5f62faa70c50f44f5815612c31"
+        },
+        {
+          "request_id": "cbbab4eef766884ffe582e7bcaac999ac2f1cceb2f66f41652b3184f616fc2e4",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-9cc511bdd789731f:tool:0",
+          "source_search_id": "26e1df8412912b31564f9960e5eeb65ccbee3ff163b1d3d15780d1fd8b6d9496:1:search:1",
+          "item_index": 0,
+          "memory_id": "8293a4af-699c-48e3-a70d-f126022a29fc",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-no_stale-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "status": "CURRENT",
+          "current_ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "projected_body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "actual_tool_body_ref": "body:string:dfc69cf937fabc7589dc62ebc84139abc69d3b5f62faa70c50f44f5815612c31"
+        },
+        {
+          "request_id": "49b5158c66770973ad5e3329c471a351e6152c288ba883e8967130858fcb2c10",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-9cc511bdd789731f:tool:0",
+          "source_search_id": "26e1df8412912b31564f9960e5eeb65ccbee3ff163b1d3d15780d1fd8b6d9496:1:search:1",
+          "item_index": 0,
+          "memory_id": "8293a4af-699c-48e3-a70d-f126022a29fc",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-no_stale-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "status": "CURRENT",
+          "current_ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "projected_body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "actual_tool_body_ref": "body:string:dfc69cf937fabc7589dc62ebc84139abc69d3b5f62faa70c50f44f5815612c31"
+        }
+      ],
+      "exact_reads": [],
+      "primary_revision_count": 1,
+      "delivered_snapshots": [
+        {
+          "request_id": "5d3758deb84ef85946b82ebd0edbdd22c3440ed57bc1cfc849acd9f8e04f11a0",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-no_stale-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8293a4af-699c-48e3-a70d-f126022a29fc",
+          "revision": 1,
+          "ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "source_tool_call": "chatcmpl-9cc511bdd789731f:tool:0",
+          "source_search_id": "26e1df8412912b31564f9960e5eeb65ccbee3ff163b1d3d15780d1fd8b6d9496:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "d4b62c4bdf18d50223f6eac63355842a704d1447f61871c8119e10418d0617b5",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-no_stale-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8293a4af-699c-48e3-a70d-f126022a29fc",
+          "revision": 1,
+          "ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "source_tool_call": "chatcmpl-9cc511bdd789731f:tool:0",
+          "source_search_id": "26e1df8412912b31564f9960e5eeb65ccbee3ff163b1d3d15780d1fd8b6d9496:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "cbbab4eef766884ffe582e7bcaac999ac2f1cceb2f66f41652b3184f616fc2e4",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-no_stale-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8293a4af-699c-48e3-a70d-f126022a29fc",
+          "revision": 1,
+          "ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "source_tool_call": "chatcmpl-9cc511bdd789731f:tool:0",
+          "source_search_id": "26e1df8412912b31564f9960e5eeb65ccbee3ff163b1d3d15780d1fd8b6d9496:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "49b5158c66770973ad5e3329c471a351e6152c288ba883e8967130858fcb2c10",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-no_stale-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8293a4af-699c-48e3-a70d-f126022a29fc",
+          "revision": 1,
+          "ref": "memory:8293a4af-699c-48e3-a70d-f126022a29fc@1",
+          "body_ref": "body:string:c8dcffe534f2ca3da92da4c83edcfab8f35421785e4521ce1ee222ecd312c4eb",
+          "source_tool_call": "chatcmpl-9cc511bdd789731f:tool:0",
+          "source_search_id": "26e1df8412912b31564f9960e5eeb65ccbee3ff163b1d3d15780d1fd8b6d9496:1:search:1",
+          "delivery_source": "search_memory"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4383,
+        "output_tokens": 156,
+        "generation_tokens": 4539,
+        "embedding_requests": 2,
+        "embedding_tokens": 30,
+        "exact_reads": 0,
+        "exact_read_wall_ns": 0,
+        "projection_cpu_ns": 2138636,
+        "projection_wall_ns": 1638841,
+        "provider_wall_seconds": 1.7835391550324857,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "ce7f330c1cae274049265a9bb673590ea0a1f32c9af19c887c255f8b7035a90a",
+        "instrumentation.sqlite": "6dcfcadfe0fff6a8bdc14d2a627dbe949a06d1dd4a4da1f255cf85a6ff17d5b3",
+        "checkpoints.sqlite": "f114670f44771453c5b7981efe3fddf67e9c417d62949fef8f8e8303d33bef0a",
+        "run/result.json": "c5178051d839de4f031ddbc01d789e426899bce785953e212f0af67c58fff734",
+        "run/fixture-effects.json": "73e5be33dee49ae5a97767b2fc64155bf4df37c204317103e51d11bc3b486cdf",
+        "prepared.json": "7fef0de3833f056b6d360a52d38d62a0ae82b8844c9c67c141c58b531087e8b5"
+      }
+    },
+    "a5:explicit_source_priority": {
+      "case": "explicit_source_priority",
+      "arm": "a5_rank_bounded_rebase",
+      "status": "PASS",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": true,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "both_current_sources_delivered": true,
+        "explicitly_preferred_source_stored_earlier": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "parcel Hazel-3",
+            "warehouse": "East"
+          },
+          "generation_id": "chatcmpl-955f3ba6b9e5d72d"
+        }
+      ],
+      "ordinary_answers": [
+        "For item parcel Hazel-3, there are two saved instructions:\n1. Depot Beta assigns destination warehouse West.\n2. Depot Alpha assigns destination warehouse East.\n\nAccording to the source-priority policy, depot Alpha instructions take precedence over depot Beta instructions. Therefore, the recommended warehouse is East. This recommendation is pending your approval.",
+        "If you approve, I would use warehouse East for parcel Hazel-3. This is because the saved instruction from depot Alpha assigns it to East, and the source-priority policy states that depot Alpha instructions take precedence over depot Beta instructions (which assign it to West).",
+        "The instruction for parcel Hazel-3 has been recorded with warehouse East."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 0,
+      "mechanical_rebase_precision_counts": [
+        0,
+        0
+      ],
+      "mechanical_rebase_recall_counts": [
+        0,
+        0
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [],
+      "projection_items": [
+        {
+          "request_id": "95dddaa4a0c9a634385dfa89ad94192c207963921e0f31a65074a7df49ba9d5b",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "item_index": 0,
+          "memory_id": "86a4d2fd-1bd1-4591-b97c-d087846e5708",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "status": "CURRENT",
+          "current_ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "projected_body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "actual_tool_body_ref": "body:string:a7a40d99eba00eb40ed75ac94aedc4ba65d9de1ff42d515118b40a60711f6269"
+        },
+        {
+          "request_id": "95dddaa4a0c9a634385dfa89ad94192c207963921e0f31a65074a7df49ba9d5b",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "item_index": 1,
+          "memory_id": "d917c3cf-abc4-4456-bfc7-ba3aaee40983",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "status": "CURRENT",
+          "current_ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "projected_body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "actual_tool_body_ref": "body:string:a7a40d99eba00eb40ed75ac94aedc4ba65d9de1ff42d515118b40a60711f6269"
+        },
+        {
+          "request_id": "980c97ffefbb59c82e39dfee765cc05f4faf1837a461b0d98ddb834bf9f1697c",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "item_index": 0,
+          "memory_id": "86a4d2fd-1bd1-4591-b97c-d087846e5708",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "status": "CURRENT",
+          "current_ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "projected_body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "actual_tool_body_ref": "body:string:a7a40d99eba00eb40ed75ac94aedc4ba65d9de1ff42d515118b40a60711f6269"
+        },
+        {
+          "request_id": "980c97ffefbb59c82e39dfee765cc05f4faf1837a461b0d98ddb834bf9f1697c",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "item_index": 1,
+          "memory_id": "d917c3cf-abc4-4456-bfc7-ba3aaee40983",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "status": "CURRENT",
+          "current_ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "projected_body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "actual_tool_body_ref": "body:string:a7a40d99eba00eb40ed75ac94aedc4ba65d9de1ff42d515118b40a60711f6269"
+        },
+        {
+          "request_id": "d42fb20aa7490e51c1a56a606cd5b77b3b564303a3fbdf5f5b7dad289a5efaa0",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "item_index": 0,
+          "memory_id": "86a4d2fd-1bd1-4591-b97c-d087846e5708",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "status": "CURRENT",
+          "current_ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "projected_body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "actual_tool_body_ref": "body:string:a7a40d99eba00eb40ed75ac94aedc4ba65d9de1ff42d515118b40a60711f6269"
+        },
+        {
+          "request_id": "d42fb20aa7490e51c1a56a606cd5b77b3b564303a3fbdf5f5b7dad289a5efaa0",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "item_index": 1,
+          "memory_id": "d917c3cf-abc4-4456-bfc7-ba3aaee40983",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "status": "CURRENT",
+          "current_ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "projected_body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "actual_tool_body_ref": "body:string:a7a40d99eba00eb40ed75ac94aedc4ba65d9de1ff42d515118b40a60711f6269"
+        },
+        {
+          "request_id": "b8dc726afccfa0f4048842a23fffe8f7ac8213c04b00da62b6087dd690df3f83",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "item_index": 0,
+          "memory_id": "86a4d2fd-1bd1-4591-b97c-d087846e5708",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "status": "CURRENT",
+          "current_ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "projected_body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "actual_tool_body_ref": "body:string:a7a40d99eba00eb40ed75ac94aedc4ba65d9de1ff42d515118b40a60711f6269"
+        },
+        {
+          "request_id": "b8dc726afccfa0f4048842a23fffe8f7ac8213c04b00da62b6087dd690df3f83",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "item_index": 1,
+          "memory_id": "d917c3cf-abc4-4456-bfc7-ba3aaee40983",
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "status": "CURRENT",
+          "current_ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "projected_body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "actual_tool_body_ref": "body:string:a7a40d99eba00eb40ed75ac94aedc4ba65d9de1ff42d515118b40a60711f6269"
+        }
+      ],
+      "exact_reads": [],
+      "primary_revision_count": 1,
+      "delivered_snapshots": [
+        {
+          "request_id": "95dddaa4a0c9a634385dfa89ad94192c207963921e0f31a65074a7df49ba9d5b",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "86a4d2fd-1bd1-4591-b97c-d087846e5708",
+          "revision": 1,
+          "ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "95dddaa4a0c9a634385dfa89ad94192c207963921e0f31a65074a7df49ba9d5b",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "d917c3cf-abc4-4456-bfc7-ba3aaee40983",
+          "revision": 1,
+          "ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "980c97ffefbb59c82e39dfee765cc05f4faf1837a461b0d98ddb834bf9f1697c",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "86a4d2fd-1bd1-4591-b97c-d087846e5708",
+          "revision": 1,
+          "ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "980c97ffefbb59c82e39dfee765cc05f4faf1837a461b0d98ddb834bf9f1697c",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "d917c3cf-abc4-4456-bfc7-ba3aaee40983",
+          "revision": 1,
+          "ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "d42fb20aa7490e51c1a56a606cd5b77b3b564303a3fbdf5f5b7dad289a5efaa0",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "86a4d2fd-1bd1-4591-b97c-d087846e5708",
+          "revision": 1,
+          "ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "d42fb20aa7490e51c1a56a606cd5b77b3b564303a3fbdf5f5b7dad289a5efaa0",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "d917c3cf-abc4-4456-bfc7-ba3aaee40983",
+          "revision": 1,
+          "ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "b8dc726afccfa0f4048842a23fffe8f7ac8213c04b00da62b6087dd690df3f83",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "86a4d2fd-1bd1-4591-b97c-d087846e5708",
+          "revision": 1,
+          "ref": "memory:86a4d2fd-1bd1-4591-b97c-d087846e5708@1",
+          "body_ref": "body:string:b310175286e1cee109fc3641136726e8f009fd898c7d2732aa20a5327ec7e372",
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "b8dc726afccfa0f4048842a23fffe8f7ac8213c04b00da62b6087dd690df3f83",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p6r2-a5-explicit_source_priority-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "d917c3cf-abc4-4456-bfc7-ba3aaee40983",
+          "revision": 1,
+          "ref": "memory:d917c3cf-abc4-4456-bfc7-ba3aaee40983@1",
+          "body_ref": "body:string:3b07d1830b5405a4a5fc91f97f1cbc55dbf0d902e59964356a06b5fcad735fc4",
+          "source_tool_call": "chatcmpl-ba953c8d26fdbbb1:tool:0",
+          "source_search_id": "10c7ed74e3dd7f7e7ca4efb33e82e48f77e866c04aaa09890e60cf3d9302d810:1:search:1",
+          "delivery_source": "search_memory"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 5425,
+        "output_tokens": 211,
+        "generation_tokens": 5636,
+        "embedding_requests": 3,
+        "embedding_tokens": 108,
+        "exact_reads": 0,
+        "exact_read_wall_ns": 0,
+        "projection_cpu_ns": 2340930,
+        "projection_wall_ns": 2096409,
+        "provider_wall_seconds": 2.310960535425693,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "9292f0f69e8507553c09e6bb6c35785abd9ce248dcd615968b6654df8a5df6d9",
+        "instrumentation.sqlite": "76dc7894493b734332c6497914fc2ec9d965be2be36a2bcd27e38d5715fb9f65",
+        "checkpoints.sqlite": "905865508e557d8d45e7e7f927d54a0818ed3082598ae68da145df0624145068",
+        "run/result.json": "cde09f7500d989bde68d978aca330963d0d69bf2c7cc78f6259fcf944bd46cab",
+        "run/fixture-effects.json": "a78fb6df833b798f083c1e6850975df2c5946139a507a226a3cf3bc6389ed2a0",
+        "prepared.json": "f544e334e267382040eb847c2756a3aba745047d78648e938d112ec633fd21cd"
+      }
+    }
+  },
+  "totals": {
+    "generations": 14,
+    "input_tokens": 13912,
+    "output_tokens": 617,
+    "generation_tokens": 14529,
+    "embedding_requests": 8,
+    "embedding_tokens": 226,
+    "exact_reads": 0,
+    "exact_read_wall_ns": 0,
+    "projection_cpu_ns": 6518721,
+    "projection_wall_ns": 5342856,
+    "provider_wall_seconds": 6.7805913425982,
+    "unknown_usage": 0,
+    "truncations": 0
+  },
+  "continuous_budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 150,
+    "generation": {
+      "charged_tokens": 142976,
+      "known_tokens": 142976,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 2134,
+      "known_tokens": 2134,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "master_goal_complete": false,
+  "judge_requests": 0,
+  "manual_review": {
+    "reviewer": "Root",
+    "current_conflict": "PASS: all ordinary replies recognize unresolved Alpha/East and Beta/West; final asks for priority or warehouse clarification, zero business calls.",
+    "no_stale": "PASS: actual approved complete item reference and Central action, zero get/demotion/additional search.",
+    "explicit_source_priority": "PASS: both current sources actually delivered; Alpha seeded earlier than Beta; model explicitly follows declared Alpha precedence and actually records East. Retrieval order is separately read from the real search receipt, not assumed by the fixture.",
+    "rubric_changed": false,
+    "protocol_intervention": "Visible source-authority text, +39 local-tokenizer fragment tokens per request. Not an algorithm-only comparison."
+  }
+}

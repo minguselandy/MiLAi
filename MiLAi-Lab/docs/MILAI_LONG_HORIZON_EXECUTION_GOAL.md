@@ -22,8 +22,8 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 | P3 | 原changed/retained/irrelevant真实运行；失败按§6/11/32/37继续最小诊断 | 3/3通过，见[P3结果](MILAI_SER_V20_P3_RESULTS_20260927.md) |
 | P4 | categorical、boolean、deleted、multi-revision、assistant-only stale非温度控制 | 5/5机制与最终动作通过，[中间表述缺陷保留](MILAI_SER_V20_P4_RESULTS_20260927.md) |
 | P5 | correctness成立后可调rank-bounded refresh及必要对照 | 实现/构建完成；保留R1严格2/6，[R2通用目标合同修正4/4](MILAI_SER_V21_P5_R2_RESULTS_20260927.md)；低排名get3→0而tokens略增 |
-| P6 | §7全部类型的参数化generalized suite，rubric不进入runtime | 新九例8/9，全部类型同源开发覆盖11/12；[current冲突误用Store时间为优先级](MILAI_SER_V21_P6_R1_RESULTS_20260927.md)，继续最小authority协议修复 |
-| P7 | 已暴露12-case和MERIT arc0回归，保留原失败/费用与matched基线 | 待运行 |
+| P6 | §7全部类型的参数化generalized suite，rubric不进入runtime | 完成最小authority协议修复；最终同源十三例13/13，见[最终结果](MILAI_SER_V21_FINAL_RESULTS_20260927.md)；旧冲突失败不改判 |
+| P7 | 已暴露12-case和MERIT arc0回归，保留原失败/费用与matched基线 | 下一阶段：同源B1/A5，原12-case/20session与arc0/5episode/7message；复用原loop/scorer |
 | P8 | 方法收敛与formal freeze，逐项满足§25条件 | 待证明 |
 | P9 | 运行前选择冻结的unseen matched evaluation，B1/lite/full输入与scorer一致 | 待前置条件 |
 | P10 | external baselines、至少两模型族、历史/密度/版本比例鲁棒性及参数边界 | 待方法稳定 |
@@ -37,5 +37,7 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 每个失败结果包含Observed failure、Expected mechanism、Actual causal chain、First broken link、至少两个替代假设、通用修复候选、confounds、最小下一实验和Continue/Pivot/Kill理由。每阶段同时回答§32十项Reflection。
 
 温度一例成功不允许进入formal。当前版本进入请求不等于语义权威或实际被采用；snapshot风险不等于逐词因果。原始失败轨迹不能用后续最好轨迹替换。未见样本一旦参与方法修复即转development。
+
+P6最终source mapping为`7ee904cba80c0facf0f513fe7607b15ea4fa5a61fc1a0553c1ef4e85144411e9`，使用独立P6R2锁。新增authority为模型可见协议干预，每生成额外39tokens；十三例66生成/67293tokens/929embeddingtokens/18exact reads。SER连续账本累计202生成/195740tokens/2837embeddingtokens/75exact reads，unknown/truncation/Judge均0。P5四次目标缩写失败、P6 R1冲突失败、P4中间虚称search都保留。没有整体成本下降或unseen收益结论。v20延后包装项已由P5一次成功构建闭合；P6R2新锁的打包随P7新入口统一完成，不重复旧构建。
 
 总体完成要求以原1422行计划逐项核对：实现、条件判定、分阶段运行、成本、最终研究结论/复现、Luna发布和远端核对均有当前证据；本表的状态不能代替证据。

@@ -1,0 +1,100 @@
+{
+  "kind": "MILAI_SER_V21_P6R2_ACCOUNTING",
+  "status": "SEALED",
+  "result_sha256": "1e88868274486612f9d2a8b0a31f1c1218322ad09f5cbcfacb44de0970aec94a",
+  "marker_tokens_per_delivery": 31,
+  "marker_tokens_total": 0,
+  "total_file_bytes": {
+    "trace.jsonl": 539954,
+    "instrumentation.sqlite": 294912,
+    "checkpoints.sqlite": 241664,
+    "run/business-journal.json": 1590
+  },
+  "cases": {
+    "a5:current_conflict": {
+      "files_bytes": {
+        "trace.jsonl": 190053,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 73728,
+        "run/business-journal.json": 0
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 3105,
+      "lineage_event_bytes": 4146,
+      "marker_tokens_delivered": 0,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 62,
+        "observer_cpu_ns": 19818586,
+        "observer_wall_ns": 823059717,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3819426,
+        "extra_read_wall_ns": 8117355,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        0,
+        0
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a5:no_stale": {
+      "files_bytes": {
+        "trace.jsonl": 145588,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 798
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1530,
+      "lineage_event_bytes": 2490,
+      "marker_tokens_delivered": 0,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 60,
+        "observer_cpu_ns": 17773442,
+        "observer_wall_ns": 395546987,
+        "extra_store_reads": 2,
+        "extra_read_cpu_ns": 1956880,
+        "extra_read_wall_ns": 3913095,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        0,
+        0
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a5:explicit_source_priority": {
+      "files_bytes": {
+        "trace.jsonl": 204313,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 90112,
+        "run/business-journal.json": 792
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 3153,
+      "lineage_event_bytes": 4218,
+      "marker_tokens_delivered": 0,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 22648933,
+        "observer_wall_ns": 535016805,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3638204,
+        "extra_read_wall_ns": 6736374,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        0,
+        0
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    }
+  },
+  "interpretation": "Marker tokens are already part of Provider input billing. Snapshot/event bytes are subsets of sidecar/trace. Refresh counts on actual action requests are an operational primary-evidence delivery proxy, not semantic causal precision; reads before recommendations and after completed actions stay in the denominator. 0/0 is undefined. Shared PostgreSQL physical storage is not attributed per run."
+}

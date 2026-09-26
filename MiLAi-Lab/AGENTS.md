@@ -82,6 +82,20 @@ no semantic truth gate, source-value rule or vLLM change. Cumulative SER costs n
 136 generations / 128447 tokens / 1908 embedding tokens / 57 exact reads. Old P5/P6 failures
 remain; the master Goal and the authority repair are active, not completed by archival.
 
+P6 is now complete as development controls: [final P6R2/confirmation results](docs/MILAI_SER_V21_FINAL_RESULTS_20260927.md)
+pass 13/13 on mapping `7ee904cba80c0facf0f513fe7607b15ea4fa5a61fc1a0553c1ef4e85144411e9`.
+The only repair after P6 R1 is a generic source-authority protocol clause, adding 39 tokens
+per generation; report it as model-visible intervention. Continuous SER costs are 202
+generations / 195740 tokens / 2837 embedding tokens / 75 exact reads. All old failures remain.
+P5's successful cumulative build closed the old v20 packaging item; the new P6R2 lock will
+join the P7 CLI/config/lock in one necessary package build. Luna publishes this checkpoint,
+then the same Sol implements a thin v22 exposed-regression CLI reusing original runners and
+scorers. Method recipe/transport stay v21; actual B1 and A5 run identities remain distinct.
+Root runs matched B1/A5 original 12-case/20-session and MERIT arc0/5-episode/7-message inputs,
+with fresh namespaces and one continuous ledger. The native MERIT memory checker sees
+checkpoint history; actual Provider delivery must be reported separately. P7–P12 and the
+master Goal remain active. No publication-only reruns or changes to vLLM settings.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

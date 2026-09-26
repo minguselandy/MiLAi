@@ -1,0 +1,11 @@
+{
+  "kind": "SER_DIAGNOSTIC_INPUT_FREEZE",
+  "status": "FROZEN_BEFORE_AUTHORITY_REQUESTS",
+  "case_id": "explicit_source_priority",
+  "public_messages": 3,
+  "fixture_sha256": "cf7600c6e91fc5773a091e84b6da0626f45866d025ea716729346f222e2e12e5",
+  "rubric_sha256": "6a6f9839df686077044b4869c51a697cd8f9eaa1eb1288010a4a4d4ecb7f042a",
+  "runtime_reads_rubric": false,
+  "parent_fixture_sha256": "532ef7cc5b2b64dce991e4191bb629b903ba83739ba07176b467ac9c8fa0b2cc",
+  "change": "Only declare explicit cross-source precedence; action values and public messages are unchanged."
+}

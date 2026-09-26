@@ -8,12 +8,16 @@ tracked in [the execution Goal](docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md). The 
 [v20 SER](docs/MILAI_SER_V20_GOAL.md), adds request-level assistant lineage and selective
 demotion of stale derived text. Development continues through generalization, matched
 evaluation and lifecycle/quality-cost research; a failed first candidate is diagnostic input,
-not automatic completion. P3 original controls pass 3/3 and [P4 non-temperature controls](docs/MILAI_SER_V20_P4_RESULTS_20260927.md)
-pass 5/5 mechanism/final-action checks, with an unsupported intermediate search claim retained.
-P5 refresh optimization follows; packaging of diagnostic inputs is tracked for that source stage.
+not automatic completion. P3/P4 delivered lineage and request-copy rebase; P5 added configurable
+rank-bounded refresh and completed the diagnostic packaging check. The final
+[v21 development controls](docs/MILAI_SER_V21_FINAL_RESULTS_20260927.md) pass 13/13 on one source
+identity after a generic target-contract repair and an explicit source-authority protocol change.
+Earlier failures remain. Continuous SER costs are 202 generations / 195740 tokens / 2837
+embedding tokens / 75 exact reads; overall cost savings and unseen efficacy are unproven.
+P7 next compares same-source B1/A5 on the exposed original 12 cases and MERIT arc0.
 Historical deliveries below remain preserved.
 
-Latest scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
+Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.
 Original Notice and request-copy Quarantine each pass 1/3 controls; conditional Exact Refresh
 passes 2/3. The current body reaches the Provider, but changed still records old 4 C.

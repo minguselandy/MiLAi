@@ -1,0 +1,67 @@
+{
+  "kind": "SER_V21_AUTHORITY_REPAIR_RUBRICS",
+  "runtime_input": false,
+  "status": "FROZEN_BEFORE_AUTHORITY_REQUESTS",
+  "cases": [
+    {
+      "case_id": "current_conflict",
+      "family": "conflicting_current",
+      "fixture": "data/diagnostics/selective_adaptation_v2/current_conflict.json",
+      "fixture_sha256": "532ef7cc5b2b64dce991e4191bb629b903ba83739ba07176b467ac9c8fa0b2cc",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 0,
+      "expected_arguments": null,
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "14662673e58873b6a8e1ccf5f098232f0030dae394ede80dd8631dc03f9f8075"
+    },
+    {
+      "case_id": "no_stale",
+      "family": "no_stale",
+      "fixture": "data/diagnostics/selective_adaptation_v2/no_stale.json",
+      "fixture_sha256": "3744da353d3fee4770ac832a1273592ef0d08fa087abe2e38658a17aedd9d76a",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Alder-2",
+        "warehouse": "Central"
+      },
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "exact_reads_allowed": false,
+      "derived_demotions_allowed": false,
+      "searches_after_initial_allowed": false,
+      "v1_fixture_sha256": "701d04ea77d26c402fb82aaae607f4d8488cf4139ed8df752ffa7d0ab777a7ab"
+    },
+    {
+      "case_id": "explicit_source_priority",
+      "family": "conflicting_current_with_explicit_priority",
+      "fixture": "data/diagnostics/selective_adaptation_v2/explicit_source_priority.json",
+      "fixture_sha256": "cf7600c6e91fc5773a091e84b6da0626f45866d025ea716729346f222e2e12e5",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Hazel-3",
+        "warehouse": "East"
+      },
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "14662673e58873b6a8e1ccf5f098232f0030dae394ede80dd8631dc03f9f8075",
+      "required_both_current_sources": true,
+      "required_preferred_source_stored_earlier": true
+    }
+  ],
+  "source_authority_control": "Same two different current claims as the failed case, now with explicit Alpha precedence in both sources. Alpha is seeded before Beta; confirm actual storage order. Do not infer retrieval order without observing it."
+}
