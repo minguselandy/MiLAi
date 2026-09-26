@@ -46,6 +46,7 @@ include = [
   "/data/fixtures",
   "/data/locks/langmem-foundation.lock.json",
   "/data/locks/langmem-b1.lock.json",
+  "/data/locks/milai-m1-v17.lock.json",
   "/data/manifests",
   "/docs",
   "/product.lock.json",
@@ -91,4 +92,4 @@ ignore = ["S101"]
 python_version = "3.11"
 strict = true
 packages = ["milai_lab"]
-exclude = "(baselines/langmem_agent|baselines/langmem_identity|baselines/langmem_b1_identity|baselines/langmem_instrumentation|baselines/langmem_revision_store|providers/langmem_chat|runners/langmem_foundation|runners/langmem_merit|runners/langmem_diagnostic|datasets/merit)\\.py$"
+exclude = "(baselines/langmem_agent|baselines/langmem_identity|baselines/langmem_b1_identity|baselines/langmem_instrumentation|baselines/langmem_revision_store|methods/milai_m1/.*|providers/langmem_chat|runners/langmem_foundation|runners/langmem_merit|runners/langmem_diagnostic|runners/langmem_m1_mechanism|datasets/merit)\\.py$"

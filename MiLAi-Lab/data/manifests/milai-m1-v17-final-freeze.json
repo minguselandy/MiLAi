@@ -1,0 +1,96 @@
+{
+  "kind": "MILAI_M1_V17_FINAL_FREEZE",
+  "status": "FROZEN_BEFORE_FORMAL_RUNS",
+  "reference_commit": "3676c511f4c4087453d5bbf54cea3514e57fd948",
+  "lock_sha256": "d03779620ab8a15c3da7902765b9e477af0207257f809046826e35ee80fceb02",
+  "source_mapping_sha256": "392c14287062a92465f74b31e402ea65099a55cb5136a1c3939b05dd1655b66f",
+  "reference_manifest_sha256": "e01b1ca27dc68730d6a24dce6000dbbf914e26e502bea745b61fda026fecb5f7",
+  "development_plan_sha256": "88eab77766ab8ff22730d653f7140a3476aedfe208f816b3c388604054ba1883",
+  "mechanism_freeze_sha256": "d760e5b809f3bb8b53c12a0f728c578bd83f412f9237805ac444b14d0ce1a8ee",
+  "exposed_freeze_sha256": "5d9be700ed893715c1a3b935bfe29878f141bd708ccbe5668c96188c8c2f317c",
+  "evaluation_protocol_sha256": "c59c41a4c609c9e90aeb99745186ef98234c4c530d0e2a720e90a576e30ed964",
+  "decoder_probe_manifest_sha256": "bb410673865c914abd750d2584bdf27471a669f52f8e355fcc2856d374e33fdc",
+  "v0_evidence_sha256": "f3ba75a48c00daf7844f80e3b34a3ac75bc03e518ced8a715cedbf0bd9c2ab88",
+  "package_evidence_sha256": "c7a1b6b8567a1e61a3ef0bdc0237a9b71d571b0e93fdcdaec35542108dbde34c",
+  "environment_evidence_sha256": "027619b1a51da9cc24f7822a2f25557f2b0bee662e67e625e4cd208d61112e11",
+  "initial_namespaces_sha256": "915f9e6fc84d1d96e3007a7fc767a1a60ff52a41e3759a1a39441d2224ea5f48",
+  "initial_namespaces_status": "PASS_EMPTY",
+  "real_model_concurrency": 1,
+  "vllm_settings_changed": false,
+  "decoder_probe_generations_before_freeze": 6,
+  "formal_generations_before_freeze": 42,
+  "budget_before_formal_runs": {
+    "limits": {
+      "questions": 12,
+      "arms": 2,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 48,
+    "generation": {
+      "charged_tokens": 45711,
+      "known_tokens": 45711,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 421,
+      "known_tokens": 421,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/langmem-provenance/v16-budget.json",
+      "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+      "generation_requests": 55,
+      "generation_known_tokens": 40072,
+      "generation_charged_tokens": 40072,
+      "embedding_tokens": 443,
+      "unknown_usage": 0,
+      "judge_requests": 0,
+      "sealed": true,
+      "earlier_v15": {
+        "ledger": "artifacts/langmem-foundation/v15-budget.json",
+        "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+        "generation_requests": 108,
+        "generation_known_tokens": 71846,
+        "generation_unknown_reservation": 4891,
+        "generation_charged_tokens": 76737,
+        "embedding_tokens": 836,
+        "unknown_usage": 1,
+        "judge_requests": 0,
+        "sealed": true
+      }
+    }
+  },
+  "runs": {
+    "mechanism": {
+      "run_id": "v17-m1-mechanism-r2",
+      "arm_id": "m1",
+      "config_path": "artifacts/langmem-m1-v17/final-mechanism-r2/config.json",
+      "config_sha256": "23d54bee9befeda781ae1397ff91501f568ad4020ce37c2646146c3d55af7d16",
+      "prepared_path": "artifacts/langmem-m1-v17/final-mechanism-r2/prepared.json",
+      "prepared_sha256": "99d7c53e1c2d0ddd753943951c78efa3bf89a22dfefb8a49c1388e53233ba086"
+    },
+    "diagnostic": {
+      "run_id": "v17-m1-diagnostic-r2",
+      "arm_id": "m1",
+      "config_path": "artifacts/langmem-m1-v17/final-diagnostic-r2/config.json",
+      "config_sha256": "222b8b4614d547f60c9e2684e637aba3ad6ee1c5eed1e10bb549eeb927daf5d6",
+      "prepared_path": "artifacts/langmem-m1-v17/final-diagnostic-r2/prepared.json",
+      "prepared_sha256": "bb37c7f57c2f514f3971621b746f63324cdff93b30f36d0cbff5c150e5523e12"
+    },
+    "merit": {
+      "run_id": "v17-m1-merit-r2",
+      "arm_id": "m1",
+      "config_path": "artifacts/langmem-m1-v17/final-merit-r2/config.json",
+      "config_sha256": "b865b234bb42832e69ba1a83a6fed59733d9929465ccd0bb8d43f896850d30f2",
+      "prepared_path": "artifacts/langmem-m1-v17/final-merit-r2/prepared.json",
+      "prepared_sha256": "0106529fe2d6a8be36a90dc8f231f19c435252363aa3246b7e68109044df0fa5"
+    }
+  },
+  "round": "r2",
+  "repair_check_sha256": "a11f2cd17c181e6e095e2b8a575a92445a3555902567e7d2c1dc7e2fdcb10fa0",
+  "r1_failure_manifest_sha256": "15f6bd4bb7bc916d801542fa4263e5e29b4c3dc2edf6796d69138b1819de0c9f",
+  "final_round_generations_before_freeze": 0,
+  "package_validation_scope": "R1 inclusion/no-private-files checks; R2 delta schema repair did not change packaging, no repeated build"
+}

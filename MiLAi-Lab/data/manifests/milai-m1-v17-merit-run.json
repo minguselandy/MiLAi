@@ -1,0 +1,132 @@
+{
+  "kind": "MILAI_M1_V17_EXPOSED_RUN",
+  "source_mapping_sha256": "392c14287062a92465f74b31e402ea65099a55cb5136a1c3939b05dd1655b66f",
+  "final_freeze_sha256": "e263aa177869abf63c1c4faaea55f7a9c00b77960ddf241e304a99f112ffc1df",
+  "result": {
+    "mode": "merit",
+    "round": "r2",
+    "usage": {
+      "generation_requests": 18,
+      "generation_input_tokens": 21694,
+      "generation_output_tokens": 1543,
+      "generation_tokens": 23237,
+      "embedding_requests": 4,
+      "embedding_input_tokens": 66,
+      "embedding_output_tokens": 0,
+      "embedding_tokens": 66
+    },
+    "counts": {
+      "pre_generation_basis_turns": 6,
+      "recheck_projected_requests": 0,
+      "NO_STATE_CHANGE": 8,
+      "new_delivered_adoptions": 7,
+      "continued_exact_adoptions": 0,
+      "valid_adoptions": 7,
+      "post_delta_basis_turns": 6,
+      "SET": 5,
+      "adoption_observation": 7,
+      "post_delta_active_turns": 6,
+      "adoption_turns": 6,
+      "all_current_material_adoption_turns": 0,
+      "CLEARED": 5,
+      "extra_independent_state_generations": 0,
+      "protocol_rejections": 0,
+      "semantic_set_revisions": 5,
+      "identical_set_noops": 1,
+      "null_deltas": 3
+    },
+    "state_tokens": {
+      "decision_context_input_tokens": 1593,
+      "decision_delta_field_output_tokens": 561
+    },
+    "activation_numerator": 6,
+    "model_turn_denominator": 18,
+    "churn_numerator": 5,
+    "churn_denominator": 6,
+    "adoption_validity": [
+      7,
+      7
+    ],
+    "sqlite_bytes": 57344,
+    "b1_counts": {
+      "observations": 16,
+      "revisions": 1,
+      "searches": 3,
+      "request_material": 30,
+      "tool_calls": 13,
+      "requests": 18,
+      "delta_receipts": 18,
+      "events": 18
+    },
+    "memory_effects": {
+      "insert": 1
+    },
+    "run_id": "v17-m1-merit-r2",
+    "arm_id": "m1",
+    "status": "TERMINAL",
+    "candidate_counts_by_request": [
+      1,
+      2,
+      1,
+      2,
+      2,
+      3,
+      1,
+      2,
+      2,
+      2,
+      2,
+      3,
+      1,
+      2,
+      3,
+      1,
+      3,
+      4
+    ],
+    "adoption_counts_by_request": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      2,
+      0
+    ],
+    "evidence_sha256": {
+      "trace.jsonl": "926698624a9186ad2437106f1502bbad49209b9a08754e5a94f763cce34f47bf",
+      "process-receipt.json": "06f4115db4112c1198e5213d216f3654fa404c890a101918fa0a6d9b1f6f690b",
+      "instrumentation.sqlite": "d378b5e62f7b53824b6a86ef632f5b57e7a23efe86e285fb689ef766bc351cea",
+      "decision-basis.sqlite": "2cf2e96794df849aa89f2179a83b59483b1187699e544a5591b80fb07b71a4b5",
+      "m1-analysis.json": "afcb1e205d798a4599ff3ca4917b74304e553bef5e9cd79ea147cfa60343b983"
+    },
+    "declared_episodes": 5,
+    "completed_episodes": 5,
+    "public_messages": 7,
+    "native_successes": 4,
+    "native_denominator": 5,
+    "dependent_successes": 1,
+    "dependent_denominator": 2,
+    "first_agreement_retention": [
+      0,
+      2
+    ],
+    "unknown_first_refund_amount": "Asked clarification; no fabricated refund",
+    "final_refund_cents": 6595,
+    "final_memory_still_says_do_not_process": true
+  },
+  "fresh_holdout": false,
+  "input_regeneration": false,
+  "rubric_runtime_input": false
+}

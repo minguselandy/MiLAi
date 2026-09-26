@@ -55,7 +55,7 @@ def run_exposed_merit_arc(
     selection, arc, native_tools, metrics, native_runner = load_exposed_arc(selection_path)
     output.mkdir(parents=True, exist_ok=True)
     identity = {
-        "recipe_id": RECIPE_ID,
+        "recipe_id": model.m1.recipe_id if model.m1 is not None else RECIPE_ID,
         "run_id": run_id,
         "arc_id": arc.arc_id,
         "selection_sha256": hashlib.sha256(selection_path.read_bytes()).hexdigest(),
@@ -111,6 +111,7 @@ def run_exposed_merit_arc(
                 write_json(progress_path, progress)
                 messages = invoke_or_resume_public_message(
                     agent, model, scope, task.user_messages[index], index, pending,
+                    task_id=task.task_id,
                 )
                 progress["next_message"] = index + 1
                 progress["pending_message"] = None
@@ -157,6 +158,9 @@ def run_exposed_merit_arc(
                 "budget_after": copy.deepcopy(model.client.budget.state)
                 if model.client.budget else None,
             }
+            if model.m1 is not None:
+                row["decision_basis"] = model.m1.store.get(
+                    (run_id, arm_id, scope.user_id, task.task_id))
             write_json(row_path, row)
             rows.append(row)
             if observer is not None:

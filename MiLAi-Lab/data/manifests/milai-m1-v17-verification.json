@@ -1,0 +1,62 @@
+{
+  "kind": "MILAI_M1_V17_VERIFICATION",
+  "status": "PASS",
+  "zero_model_tests": {
+    "initial_m1": 7,
+    "related_b1_parity": 1,
+    "schema_repair": 1
+  },
+  "static_and_boundary": "PASS; affected Ruff/mypy, default package mypy, source/tools boundary, CI YAML, optional dependency skip",
+  "build_scope": "One R1 build; sdist 38 source files and lock, wheel 28 Python files matched R1. R2 packaging declarations unchanged; no second build or R2 artifact-byte claim.",
+  "post_run_mechanical_supplement": {
+    "status": "PASS",
+    "phase": "POST_R2_FORMAL_MECHANICAL_SUPPLEMENT",
+    "model_or_embedding_requests": 0,
+    "scope": "isolated temporary SQLite sidecar and InMemoryStore; no formal run data changed",
+    "checks": {
+      "deferred_gap_null_cold_read": "PASS: host_status=deferred, critical_gap=null, semantic revision=1",
+      "next_observation_projection": "PASS: new current-user observation e0 visible in ordinary context",
+      "task_isolation_and_return_notice": "PASS: new task has no inherited basis; old task notice visible on return",
+      "task_notice_ack": "PASS: witnessed return message and unchanged legal set acknowledge notice without semantic revision",
+      "memory_revision_ack": "PASS: @2 acknowledged once and does not retrigger; @3 triggers while adopted ref remains @1"
+    },
+    "limits": "Direct deterministic controller/reducer/sidecar check; not a formal Host run or pre-freeze V0 claim."
+  },
+  "environment_after": {
+    "status": "PASS_UNCHANGED",
+    "checks": {
+      "container_running": true,
+      "container_id": true,
+      "image": true,
+      "command": true,
+      "environment_hash": true,
+      "HostConfig.AutoRemove": true,
+      "HostConfig.Binds": true,
+      "HostConfig.PortBindings": true,
+      "HostConfig.NetworkMode": true,
+      "HostConfig.IpcMode": true,
+      "HostConfig.ShmSize": true,
+      "HostConfig.DeviceRequests": true,
+      "HostConfig.RestartPolicy": true,
+      "HostConfig.Ulimits": true
+    },
+    "source_mapping_sha256": "392c14287062a92465f74b31e402ea65099a55cb5136a1c3939b05dd1655b66f",
+    "frozen_source_files_verified": 38,
+    "prior_locks_and_ledger_unchanged": true,
+    "user_plan_bytes_unchanged": true
+  },
+  "evidence_sha256": {
+    "artifacts/langmem-m1-v17/v0-checks.json": "f3ba75a48c00daf7844f80e3b34a3ac75bc03e518ced8a715cedbf0bd9c2ab88",
+    "artifacts/langmem-m1-v17/r2-schema-checks.json": "a11f2cd17c181e6e095e2b8a575a92445a3555902567e7d2c1dc7e2fdcb10fa0",
+    "artifacts/langmem-m1-v17/package-checks.json": "c7a1b6b8567a1e61a3ef0bdc0237a9b71d571b0e93fdcdaec35542108dbde34c",
+    "artifacts/langmem-m1-v17/v0-supplement.json": "e6d1f801fd439b2b71eb894ac37ad85d0e9d8d7a9d04c5c293ba09e131e243cf",
+    "artifacts/langmem-m1-v17/environment-after.json": "53a58f433cd9b46f6b0db36cf5a5a2aa87c8f0af929e0dbaf8050dec9f1ff756"
+  },
+  "not_run": [
+    "whole repository test suite",
+    "new benchmark seeds or unseen sets",
+    "M2/Attention",
+    "real full B1 rerun",
+    "models/tests/build for publication"
+  ]
+}

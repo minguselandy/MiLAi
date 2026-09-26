@@ -1,0 +1,24 @@
+{
+  "kind": "M1_MECHANISM_DIAGNOSTIC_FREEZE",
+  "status": "FROZEN_BEFORE_MODEL_REQUESTS",
+  "fixture_path": "data/fixtures/milai_m1_v17_mechanism.json",
+  "fixture_sha256": "885024dd97c33addee0854b9c0e4293f44595d7f04a9859d7e522060a9acea67",
+  "rubric_path": "artifacts/langmem-m1-v17/mechanism-rubric.json",
+  "rubric_sha256": "bc4ec78a8c84a74460f494bd0a24c874b48012b258773fcac17e547ed0f8b490",
+  "case_id": "holding_instruction_revision",
+  "cases": 1,
+  "public_messages": 3,
+  "initial_memory_items": 1,
+  "controlled_revision_updates": 1,
+  "update_after_public_index": 0,
+  "fixture_origin": [
+    "FIXTURE_CONTROLLED_SEED",
+    "FIXTURE_CONTROLLED_EXTERNAL_UPDATE"
+  ],
+  "method_state_seeded": false,
+  "benchmark_score": false,
+  "merit_gold_used": false,
+  "forever_exposed_development": true,
+  "model_requests_at_freeze": 0,
+  "source_freeze": "Created separately after V0; a failed round cannot be merged with a later source identity."
+}

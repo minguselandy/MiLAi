@@ -1,0 +1,99 @@
+{
+  "kind": "M1_MECHANISM_DIAGNOSTIC_RESULT",
+  "source_mapping_sha256": "392c14287062a92465f74b31e402ea65099a55cb5136a1c3939b05dd1655b66f",
+  "final_freeze_sha256": "e263aa177869abf63c1c4faaea55f7a9c00b77960ddf241e304a99f112ffc1df",
+  "result": {
+    "mode": "mechanism",
+    "round": "r2",
+    "usage": {
+      "embedding_requests": 3,
+      "embedding_input_tokens": 86,
+      "embedding_output_tokens": 0,
+      "embedding_tokens": 86,
+      "generation_requests": 5,
+      "generation_input_tokens": 5873,
+      "generation_output_tokens": 312,
+      "generation_tokens": 6185
+    },
+    "counts": {
+      "pre_generation_basis_turns": 2,
+      "recheck_projected_requests": 2,
+      "NO_STATE_CHANGE": 3,
+      "new_delivered_adoptions": 2,
+      "continued_exact_adoptions": 0,
+      "valid_adoptions": 2,
+      "post_delta_basis_turns": 2,
+      "SET": 1,
+      "adoption_memory": 2,
+      "post_delta_active_turns": 2,
+      "adoption_turns": 2,
+      "all_current_material_adoption_turns": 0,
+      "CLEARED": 1,
+      "RECHECK_TRIGGERED": 1,
+      "extra_independent_state_generations": 0,
+      "protocol_rejections": 0,
+      "semantic_set_revisions": 1,
+      "identical_set_noops": 1,
+      "null_deltas": 1
+    },
+    "state_tokens": {
+      "decision_context_input_tokens": 875,
+      "decision_delta_field_output_tokens": 157
+    },
+    "activation_numerator": 2,
+    "model_turn_denominator": 5,
+    "churn_numerator": 1,
+    "churn_denominator": 2,
+    "adoption_validity": [
+      2,
+      2
+    ],
+    "sqlite_bytes": 36864,
+    "b1_counts": {
+      "observations": 4,
+      "revisions": 2,
+      "searches": 1,
+      "request_material": 5,
+      "tool_calls": 4,
+      "requests": 5,
+      "delta_receipts": 5,
+      "events": 6
+    },
+    "memory_effects": {
+      "insert": 1,
+      "update": 1
+    },
+    "run_id": "v17-m1-mechanism-r2",
+    "arm_id": "m1",
+    "status": "TERMINAL",
+    "candidate_counts_by_request": [
+      1,
+      2,
+      2,
+      2,
+      3
+    ],
+    "adoption_counts_by_request": [
+      0,
+      1,
+      1,
+      0,
+      0
+    ],
+    "evidence_sha256": {
+      "trace.jsonl": "ba0f87dcee237d31da3a0e7acce1ccf8db8b03d4da945a27a53b9a78167a8dac",
+      "process-receipt.json": "677bd82a59fe9d270a4a625805ed49217121cfa9bd6e61ab3652eb43f1fe8362",
+      "instrumentation.sqlite": "dd16d4b1742078a6891c7706b50ee7f600d7a59eba68bc4cd755941377ba7e03",
+      "decision-basis.sqlite": "1fc443f1ad98cdd7b13ef6fa5047d85fa9e9464528f2c17c46cfd1228e2f0d01",
+      "m1-analysis.json": "4705dc30594bdb3da0eebeae88aed4e60d307587b7a745f0e3f7f235fa7efa65"
+    },
+    "mechanism_status": "RECHECK_NOT_COMPLETED_STALE_ACTION",
+    "public_messages": 3,
+    "recorded_temperature_celsius": 4,
+    "current_fixture_temperature_celsius": 8,
+    "benchmark_score": false
+  },
+  "fresh_holdout": false,
+  "input_regeneration": false,
+  "rubric_runtime_input": false
+}

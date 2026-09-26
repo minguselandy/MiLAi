@@ -56,6 +56,32 @@ class ProvenanceObserver:
     def current_call(self) -> CallContext | None:
         return self._call.get()
 
+    def run_fixture_memory_tool(
+        self, call_key: str, thread_id: str, stage: str,
+        arguments: dict[str, Any], invoke: Callable[[], str],
+    ) -> str:
+        """Bind an explicitly external fixture call; never create a Host observation."""
+        generation_id = "fixture:" + stage
+        call_id = generation_id + ":manage_memory"
+        attempt = self.sidecar.begin_call(
+            call_key, thread_id, generation_id, call_id,
+            "fixture:manage_memory", arguments,
+        )
+        token = self._call.set(CallContext(
+            call_key, thread_id, generation_id, call_id,
+            "fixture:manage_memory", arguments, attempt,
+        ))
+        try:
+            result = invoke()
+        except Exception as error:
+            self.sidecar.finish_call(call_key, None, "unknown", None,
+                                     error=type(error).__name__)
+            raise
+        finally:
+            self._call.reset(token)
+        self.sidecar.finish_call(call_key, result, "success", None)
+        return result
+
     def incomplete(self, reason: str) -> None:
         with self._scope_lock:
             self._failed.append(reason)

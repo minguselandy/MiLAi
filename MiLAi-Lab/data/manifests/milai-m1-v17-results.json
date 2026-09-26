@@ -1,0 +1,434 @@
+{
+  "kind": "MILAI_M1_V17_RESULTS",
+  "status": "COMPLETE_WITH_M1_LIMITATIONS",
+  "decision": "PIVOT_REDESIGN_M1_BEFORE_M2",
+  "m2_go": false,
+  "method_benefit_claim": false,
+  "vllm_settings_changed": false,
+  "source_mapping_sha256": "392c14287062a92465f74b31e402ea65099a55cb5136a1c3939b05dd1655b66f",
+  "lock_sha256": "d03779620ab8a15c3da7902765b9e477af0207257f809046826e35ee80fceb02",
+  "final_freeze_sha256": "e263aa177869abf63c1c4faaea55f7a9c00b77960ddf241e304a99f112ffc1df",
+  "round": "r2",
+  "all_declared_runs_completed": true,
+  "protocol_rejections_final": 0,
+  "runs": {
+    "mechanism": {
+      "mode": "mechanism",
+      "round": "r2",
+      "usage": {
+        "embedding_requests": 3,
+        "embedding_input_tokens": 86,
+        "embedding_output_tokens": 0,
+        "embedding_tokens": 86,
+        "generation_requests": 5,
+        "generation_input_tokens": 5873,
+        "generation_output_tokens": 312,
+        "generation_tokens": 6185
+      },
+      "counts": {
+        "pre_generation_basis_turns": 2,
+        "recheck_projected_requests": 2,
+        "NO_STATE_CHANGE": 3,
+        "new_delivered_adoptions": 2,
+        "continued_exact_adoptions": 0,
+        "valid_adoptions": 2,
+        "post_delta_basis_turns": 2,
+        "SET": 1,
+        "adoption_memory": 2,
+        "post_delta_active_turns": 2,
+        "adoption_turns": 2,
+        "all_current_material_adoption_turns": 0,
+        "CLEARED": 1,
+        "RECHECK_TRIGGERED": 1,
+        "extra_independent_state_generations": 0,
+        "protocol_rejections": 0,
+        "semantic_set_revisions": 1,
+        "identical_set_noops": 1,
+        "null_deltas": 1
+      },
+      "state_tokens": {
+        "decision_context_input_tokens": 875,
+        "decision_delta_field_output_tokens": 157
+      },
+      "activation_numerator": 2,
+      "model_turn_denominator": 5,
+      "churn_numerator": 1,
+      "churn_denominator": 2,
+      "adoption_validity": [
+        2,
+        2
+      ],
+      "sqlite_bytes": 36864,
+      "b1_counts": {
+        "observations": 4,
+        "revisions": 2,
+        "searches": 1,
+        "request_material": 5,
+        "tool_calls": 4,
+        "requests": 5,
+        "delta_receipts": 5,
+        "events": 6
+      },
+      "memory_effects": {
+        "insert": 1,
+        "update": 1
+      },
+      "run_id": "v17-m1-mechanism-r2",
+      "arm_id": "m1",
+      "status": "TERMINAL",
+      "candidate_counts_by_request": [
+        1,
+        2,
+        2,
+        2,
+        3
+      ],
+      "adoption_counts_by_request": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "evidence_sha256": {
+        "trace.jsonl": "ba0f87dcee237d31da3a0e7acce1ccf8db8b03d4da945a27a53b9a78167a8dac",
+        "process-receipt.json": "677bd82a59fe9d270a4a625805ed49217121cfa9bd6e61ab3652eb43f1fe8362",
+        "instrumentation.sqlite": "dd16d4b1742078a6891c7706b50ee7f600d7a59eba68bc4cd755941377ba7e03",
+        "decision-basis.sqlite": "1fc443f1ad98cdd7b13ef6fa5047d85fa9e9464528f2c17c46cfd1228e2f0d01",
+        "m1-analysis.json": "4705dc30594bdb3da0eebeae88aed4e60d307587b7a745f0e3f7f235fa7efa65"
+      },
+      "mechanism_status": "RECHECK_NOT_COMPLETED_STALE_ACTION",
+      "public_messages": 3,
+      "recorded_temperature_celsius": 4,
+      "current_fixture_temperature_celsius": 8,
+      "benchmark_score": false
+    },
+    "diagnostic": {
+      "mode": "diagnostic",
+      "round": "r2",
+      "usage": {
+        "generation_requests": 30,
+        "generation_input_tokens": 23424,
+        "generation_output_tokens": 3253,
+        "generation_tokens": 26677,
+        "embedding_requests": 9,
+        "embedding_input_tokens": 343,
+        "embedding_output_tokens": 0,
+        "embedding_tokens": 343
+      },
+      "counts": {
+        "pre_generation_basis_turns": 10,
+        "recheck_projected_requests": 0,
+        "NO_STATE_CHANGE": 17,
+        "new_delivered_adoptions": 13,
+        "continued_exact_adoptions": 0,
+        "valid_adoptions": 13,
+        "post_delta_basis_turns": 13,
+        "SET": 8,
+        "adoption_observation": 13,
+        "post_delta_active_turns": 13,
+        "adoption_turns": 12,
+        "all_current_material_adoption_turns": 12,
+        "CLEARED": 5,
+        "extra_independent_state_generations": 0,
+        "protocol_rejections": 0,
+        "semantic_set_revisions": 8,
+        "identical_set_noops": 4,
+        "null_deltas": 13
+      },
+      "state_tokens": {
+        "decision_context_input_tokens": 2168,
+        "decision_delta_field_output_tokens": 1027
+      },
+      "activation_numerator": 13,
+      "model_turn_denominator": 30,
+      "churn_numerator": 8,
+      "churn_denominator": 13,
+      "adoption_validity": [
+        13,
+        13
+      ],
+      "sqlite_bytes": 65536,
+      "b1_counts": {
+        "observations": 21,
+        "revisions": 7,
+        "searches": 2,
+        "request_material": 10,
+        "tool_calls": 10,
+        "requests": 30,
+        "delta_receipts": 30,
+        "events": 30
+      },
+      "memory_effects": {
+        "insert": 7
+      },
+      "run_id": "v17-m1-diagnostic-r2",
+      "arm_id": "m1",
+      "status": "TERMINAL",
+      "candidate_counts_by_request": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2
+      ],
+      "adoption_counts_by_request": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "evidence_sha256": {
+        "trace.jsonl": "efd845d695dd0b8a9fa4097f4923f8658e3cbb06eca5846a70f13493f24de06d",
+        "process-receipt.json": "9e0ed115170d25ac29cbff94e8592abf1fbdc2cf5f8f9f68391b910652c5d406",
+        "instrumentation.sqlite": "f2bb30bbb17a41a4f8f1ba205ea683ea2d622c2f5ea9b140b464bbcb2a4438ee",
+        "decision-basis.sqlite": "9325845d9997c8e1910043f7df6acbfe3ff2cec613be6bd4ec61a9fb03ab5660",
+        "m1-analysis.json": "759ad7eda654b12d283a508b07b4d00dce7f164a687ec72e770776af980b3ed1"
+      },
+      "declared_cases": 12,
+      "completed_cases": 12,
+      "declared_sessions": 20,
+      "completed_sessions": 20,
+      "manual_semantic_successes": 5,
+      "manual_review_sha256": "255245694c0605ee3bda900ecca588546e50f18f40c2e27537ddf9e1c67cf79b"
+    },
+    "merit": {
+      "mode": "merit",
+      "round": "r2",
+      "usage": {
+        "generation_requests": 18,
+        "generation_input_tokens": 21694,
+        "generation_output_tokens": 1543,
+        "generation_tokens": 23237,
+        "embedding_requests": 4,
+        "embedding_input_tokens": 66,
+        "embedding_output_tokens": 0,
+        "embedding_tokens": 66
+      },
+      "counts": {
+        "pre_generation_basis_turns": 6,
+        "recheck_projected_requests": 0,
+        "NO_STATE_CHANGE": 8,
+        "new_delivered_adoptions": 7,
+        "continued_exact_adoptions": 0,
+        "valid_adoptions": 7,
+        "post_delta_basis_turns": 6,
+        "SET": 5,
+        "adoption_observation": 7,
+        "post_delta_active_turns": 6,
+        "adoption_turns": 6,
+        "all_current_material_adoption_turns": 0,
+        "CLEARED": 5,
+        "extra_independent_state_generations": 0,
+        "protocol_rejections": 0,
+        "semantic_set_revisions": 5,
+        "identical_set_noops": 1,
+        "null_deltas": 3
+      },
+      "state_tokens": {
+        "decision_context_input_tokens": 1593,
+        "decision_delta_field_output_tokens": 561
+      },
+      "activation_numerator": 6,
+      "model_turn_denominator": 18,
+      "churn_numerator": 5,
+      "churn_denominator": 6,
+      "adoption_validity": [
+        7,
+        7
+      ],
+      "sqlite_bytes": 57344,
+      "b1_counts": {
+        "observations": 16,
+        "revisions": 1,
+        "searches": 3,
+        "request_material": 30,
+        "tool_calls": 13,
+        "requests": 18,
+        "delta_receipts": 18,
+        "events": 18
+      },
+      "memory_effects": {
+        "insert": 1
+      },
+      "run_id": "v17-m1-merit-r2",
+      "arm_id": "m1",
+      "status": "TERMINAL",
+      "candidate_counts_by_request": [
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        1,
+        2,
+        2,
+        2,
+        2,
+        3,
+        1,
+        2,
+        3,
+        1,
+        3,
+        4
+      ],
+      "adoption_counts_by_request": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0
+      ],
+      "evidence_sha256": {
+        "trace.jsonl": "926698624a9186ad2437106f1502bbad49209b9a08754e5a94f763cce34f47bf",
+        "process-receipt.json": "06f4115db4112c1198e5213d216f3654fa404c890a101918fa0a6d9b1f6f690b",
+        "instrumentation.sqlite": "d378b5e62f7b53824b6a86ef632f5b57e7a23efe86e285fb689ef766bc351cea",
+        "decision-basis.sqlite": "2cf2e96794df849aa89f2179a83b59483b1187699e544a5591b80fb07b71a4b5",
+        "m1-analysis.json": "afcb1e205d798a4599ff3ca4917b74304e553bef5e9cd79ea147cfa60343b983"
+      },
+      "declared_episodes": 5,
+      "completed_episodes": 5,
+      "public_messages": 7,
+      "native_successes": 4,
+      "native_denominator": 5,
+      "dependent_successes": 1,
+      "dependent_denominator": 2,
+      "first_agreement_retention": [
+        0,
+        2
+      ],
+      "unknown_first_refund_amount": "Asked clarification; no fabricated refund",
+      "final_refund_cents": 6595,
+      "final_memory_still_says_do_not_process": true
+    }
+  },
+  "manual_decision_quality": {
+    "TASK_SUMMARY": 9,
+    "NOT_ACTION_RELEVANT": 1,
+    "VALID": 3,
+    "UNSUPPORTED_OR_UNCLEAR": 1
+  },
+  "manual_gap_quality": {
+    "UNSUPPORTED_OR_UNCLEAR": 1,
+    "VALID": 1
+  },
+  "total_adoption_validity": [
+    22,
+    22
+  ],
+  "total_activation": [
+    21,
+    53
+  ],
+  "total_churn": [
+    14,
+    21
+  ],
+  "recheck": {
+    "triggers": 1,
+    "projected_requests": 2,
+    "acknowledgements": 0,
+    "successful_recheck_chains": 0,
+    "additional_search_or_reads_after_trigger": 0,
+    "same_semantic_set_after_trigger": 1,
+    "clear_without_ack": 1,
+    "stale_business_action": true,
+    "natural_update_or_delete": 0
+  },
+  "cost_manifest_sha256": "f45a763b55622c9a5bf4d50f3bf664c1cbbad972859c94757712fe981d526fae",
+  "r1_failure_manifest_sha256": "15f6bd4bb7bc916d801542fa4263e5e29b4c3dc2edf6796d69138b1819de0c9f",
+  "non_intervention": {
+    "expected_cases": [
+      "d01",
+      "d04",
+      "d07",
+      "d10"
+    ],
+    "null_cases": [
+      "d01",
+      "d04",
+      "d10"
+    ],
+    "unnecessary_basis_case": "d07",
+    "rate": [
+      3,
+      4
+    ]
+  },
+  "limitations": [
+    "No successful real recheck chain; controlled X@2 was ignored and stale 4 C executed.",
+    "9/14 distinct Basis states are topic/task labels rather than current judgments; 1 unnecessary parity Basis and 1 generic unsupported state.",
+    "Memory adoption in exposed diagnostic/MERIT is zero despite reading memories; final refund amount memory was not explicitly adopted.",
+    "Original exposed semantic result 5/12 versus sealed v16 7/12; native MERIT 4/5 and dependent 1/2 unchanged. No matched/unseen causal claim.",
+    "True task switching, deferred, continuation and tombstone mechanically checked; not naturally reached by final live trajectories.",
+    "No source provenance inferred from adoption; UNKNOWN_NOT_DECLARED stays unchanged."
+  ],
+  "verification_manifest_sha256": "4dd3a69b6e169151b629556c1303fe41f75240872b748d83c7747830cc5e9e70",
+  "manual_basis_review_sha256": "26d0a37a0f11998bea91f72694e351b0993ea15ad8b60c830a0026176d7a4335"
+}

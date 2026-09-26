@@ -1,0 +1,77 @@
+{
+  "kind": "MILAI_M1_V17_OFFLINE_EVALUATION_PROTOCOL",
+  "status": "FROZEN_BEFORE_MODEL_REQUESTS",
+  "runtime_input": false,
+  "activation": {
+    "primary": "basis present after accepted delta / actual model generations; active and deferred separate",
+    "projection": "basis present before generation / actual model generations; needs_recheck projected status separate",
+    "null_delta": "not automatically inactive; may retain a prior basis"
+  },
+  "churn": {
+    "numerator": "accepted semantic set revisions (create/change)",
+    "denominator": "turns with basis after accepted delta",
+    "separate": [
+      "identical set NO_STATE_CHANGE",
+      "clear",
+      "acknowledgements",
+      "protocol rejections"
+    ]
+  },
+  "adoption": {
+    "valid": "current actual request delivery or legally continued exact ref",
+    "counts": [
+      "accepted refs by kind",
+      "new versus continued",
+      "delivered candidates per actual request",
+      "adopted count per turn",
+      "all-material adoption frequency"
+    ],
+    "body_match_required": true,
+    "memory_provenance_unchanged": true
+  },
+  "manual_basis_and_gap_review": {
+    "sample": "every distinct accepted semantic Basis in the declared small runs",
+    "decision": "action-relevant current judgment, not task summary or pure memory transcription",
+    "gap": "different plausible resolutions change next meaningful action, its parameters or whether to act",
+    "judgments": [
+      "VALID",
+      "NOT_ACTION_RELEVANT",
+      "TASK_SUMMARY",
+      "UNSUPPORTED_OR_UNCLEAR"
+    ],
+    "non_intervention_cases": [
+      "d01",
+      "d04",
+      "d07",
+      "d10"
+    ],
+    "case_ids_used_only_offline": true
+  },
+  "recheck": {
+    "counts": [
+      "triggers",
+      "projected requests",
+      "acks",
+      "decision retained",
+      "decision changed",
+      "basis cleared",
+      "additional ordinary reads/searches"
+    ],
+    "success": "a new version alone is not success; require actual ordinary request, new relevant material and accepted Host delta"
+  },
+  "cost": {
+    "context_tokens": "tokenizer count of exact Decision Context text; distinguish fragment tokens from billed full input",
+    "delta_tokens": "tokenizer count of original response decision_delta field text; no claim of additive exact billing across BPE boundaries",
+    "extra_independent_generations": "state/reflection/recheck-only request count; target zero",
+    "ordinary_react_requests": "report all actual iterations/rejections/recovery separately; may differ from v16",
+    "prior_reference": "v16 sealed ledger, no new full B1 real repeat by default"
+  },
+  "go_pivot_kill": "Apply plan sections 34/35 to observed sparse activation, nonzero selective valid adoption, reachable real controlled/natural recheck, cost and ordinary-task behavior; no numerical score win or method-benefit claim. Qualitative judgments must cite actual trajectories and limitations.",
+  "excluded": [
+    "new seeds",
+    "fresh MemSyco",
+    "StateMemBench",
+    "M2",
+    "formal effect comparison"
+  ]
+}

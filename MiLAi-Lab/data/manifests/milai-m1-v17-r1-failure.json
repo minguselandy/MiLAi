@@ -1,0 +1,94 @@
+{
+  "kind": "MILAI_M1_V17_R1_FAILURE_RECORD",
+  "status": "PRESERVED_REPAIR_REQUIRED",
+  "source_mapping_sha256": "ff94284cccc3d8f75ba0c9e6433e30cb40f6f33688bb4c95477ac702551d2ee5",
+  "lock_sha256": "b887f84c84bf0b6c0c314225387e2ad2de30a7bdf512fdf908d7c6676b9534e7",
+  "final_freeze_sha256": "b9c447cdc4a1a847a80761aa29e1e430307e232a53d57cb627369230e0f9b80f",
+  "failures": [
+    {
+      "mode": "mechanism",
+      "status": "TERMINAL_SEMANTIC_FAILURE",
+      "finding": "Adopted X@1 and received X@2 revision reason; did not search/read newer content, retained old label, cleared pending Basis and recorded stale 4 C. No acknowledgement."
+    },
+    {
+      "mode": "diagnostic",
+      "status": "TERMINAL_WITH_INTERRUPTED_CASES",
+      "declared_cases": 12,
+      "terminal_cases": 10,
+      "completed_sessions": 18,
+      "declared_sessions": 20,
+      "error_cases": [
+        "d02",
+        "d11"
+      ],
+      "error": "DECISION_DELTA_INVALID: clear carries extra decision field"
+    },
+    {
+      "mode": "merit",
+      "status": "INTERRUPTED_UNSCORED",
+      "completed_episodes": 1,
+      "declared_episodes": 5,
+      "interrupted_episode_index": 1,
+      "error": "DECISION_DELTA_INVALID: clear carries extra decision field"
+    }
+  ],
+  "root_cause": "Generation schema permits arbitrary decision_delta objects while reducer requires exact null/set/clear. Align adapter schema with existing reducer; do not relax validation, add retries, tune semantic answers or change vLLM.",
+  "next_run_policy": "Same frozen input/rubric; new source/lock and fresh complete V1/V2/V3. No cross-round favorable-splicing.",
+  "budget_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 2,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 45,
+    "generation": {
+      "charged_tokens": 43431,
+      "known_tokens": 43431,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 421,
+      "known_tokens": 421,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/langmem-provenance/v16-budget.json",
+      "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+      "generation_requests": 55,
+      "generation_known_tokens": 40072,
+      "generation_charged_tokens": 40072,
+      "embedding_tokens": 443,
+      "unknown_usage": 0,
+      "judge_requests": 0,
+      "sealed": true,
+      "earlier_v15": {
+        "ledger": "artifacts/langmem-foundation/v15-budget.json",
+        "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+        "generation_requests": 108,
+        "generation_known_tokens": 71846,
+        "generation_unknown_reservation": 4891,
+        "generation_charged_tokens": 76737,
+        "embedding_tokens": 836,
+        "unknown_usage": 1,
+        "judge_requests": 0,
+        "sealed": true
+      }
+    }
+  },
+  "evidence": {
+    "artifacts/langmem-m1-v17/final-mechanism-r1/trace.jsonl": "c7fcb52b0e549f8d128be9947c8912b86183907a7d11d112fdf2ff538382558b",
+    "artifacts/langmem-m1-v17/final-mechanism-r1/process-receipt.json": "b4d9f743fee0bce04878b261dde75a2fda7506fd9b8fb2dde7f59e2dfd722c67",
+    "artifacts/langmem-m1-v17/final-mechanism-r1/decision-basis.sqlite": "c1b22a05cec5e0192fa66a75fa85dc053b51410c434c7b450617faa9ec27bf10",
+    "artifacts/langmem-m1-v17/final-mechanism-r1/instrumentation.sqlite": "3162271227b06a8034138f99670dd4dfbfa4e7f7cac89cc396cc0ed372772d28",
+    "artifacts/langmem-m1-v17/final-diagnostic-r1/trace.jsonl": "4fbf770945052b9be5e9bb3fa73e285ddbfa04a5b91ad98a5caf55b86d15237f",
+    "artifacts/langmem-m1-v17/final-diagnostic-r1/process-receipt.json": "df11dd16ae804d90aef4f48e69e6e963f174fd1182cc3dc2648a7e48a77430d8",
+    "artifacts/langmem-m1-v17/final-diagnostic-r1/decision-basis.sqlite": "66df8671cc16b831094f0f667b43a1152f4426d3d79468d69fd547b0ed9fec45",
+    "artifacts/langmem-m1-v17/final-diagnostic-r1/instrumentation.sqlite": "1f1209b4fc3b38dd7f1b05a7af1181a23fd2ab7563962c9e01bf28a0ff8b9f44",
+    "artifacts/langmem-m1-v17/final-merit-r1/trace.jsonl": "995f66bba3b2f111446f7ef78ac74d87ef64b5296acb4c036559c1bbdeea54ab",
+    "artifacts/langmem-m1-v17/final-merit-r1/process-receipt.json": "806ba99f97f369bf2ca4ef8df5a16e345fdc86b610323fec30397b3ef7c66e4a",
+    "artifacts/langmem-m1-v17/final-merit-r1/decision-basis.sqlite": "b6adde8fc44c38d2f433a1dac1e1c009c4edb900f2e7a688e1e212b79a6cddf9",
+    "artifacts/langmem-m1-v17/final-merit-r1/instrumentation.sqlite": "a4a2842ee641e13ea8746501e17f3729dd959d98f47f8ccced15ace923e08cc1"
+  }
+}

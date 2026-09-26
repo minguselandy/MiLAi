@@ -151,6 +151,7 @@ def invoke_public_message(
     model: VLLMChatModel,
     scope: FoundationScope,
     content: str,
+    task_id: str | None = None,
 ) -> list[BaseMessage]:
     """A later message in the same episode extends its checkpointed thread exactly once."""
     config = scope.config()
@@ -160,6 +161,10 @@ def invoke_public_message(
     _emit_public_context(model, scope, public_index)
     if model.observer is not None:
         model.observer.begin_public_message(scope, public_index, content)
+    if model.m1 is not None:
+        if task_id is None:
+            raise ValueError("M1_TASK_ID_MISSING")
+        model.m1.begin_public_message(scope, task_id, public_index)
     model.begin_public_message(f"{config['configurable']['thread_id']}:{public_index}")
     result = agent.invoke(
         {"messages": [HumanMessage(content=content)]},
@@ -172,12 +177,17 @@ def invoke_public_message(
 
 def resume_public_message(
     agent: Any, model: VLLMChatModel, scope: FoundationScope,
+    task_id: str | None = None,
 ) -> list[BaseMessage]:
     """Continue a checkpointed public message without adding a second user message."""
     config = scope.config()
     snapshot = agent.get_state(config)
     if not snapshot.values:
         raise ValueError("PUBLIC_MESSAGE_CHECKPOINT_MISSING")
+    if model.m1 is not None and not snapshot.next:
+        if model.observer is not None:
+            model.observer.assert_healthy()
+        return cast(list[BaseMessage], snapshot.values["messages"])
     after_user = []
     for message in reversed(snapshot.values["messages"]):
         if isinstance(message, HumanMessage):
@@ -190,6 +200,10 @@ def resume_public_message(
         prior_user = next(message for message in reversed(snapshot.values["messages"])
                           if isinstance(message, HumanMessage))
         model.observer.begin_public_message(scope, public_index, str(prior_user.content))
+    if model.m1 is not None:
+        if task_id is None:
+            raise ValueError("M1_TASK_ID_MISSING")
+        model.m1.begin_public_message(scope, task_id, public_index)
     model.begin_public_message(
         f"{config['configurable']['thread_id']}:{public_index}",
         checkpoint_calls=sum(isinstance(message, AIMessage) for message in after_user),
@@ -220,12 +234,12 @@ def _emit_public_context(
 
 def invoke_or_resume_public_message(
     agent: Any, model: VLLMChatModel, scope: FoundationScope, content: str,
-    public_index: int, pending: bool,
+    public_index: int, pending: bool, task_id: str | None = None,
 ) -> list[BaseMessage]:
     if pending:
         snapshot = agent.get_state(scope.config())
         prior_users = sum(isinstance(item, HumanMessage)
                           for item in snapshot.values.get("messages", [])) if snapshot.values else 0
         if prior_users >= public_index + 1:
-            return resume_public_message(agent, model, scope)
-    return invoke_public_message(agent, model, scope, content)
+            return resume_public_message(agent, model, scope, task_id)
+    return invoke_public_message(agent, model, scope, content, task_id)

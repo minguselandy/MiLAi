@@ -1,0 +1,134 @@
+{
+  "kind": "MILAI_M1_V17_COST_SUMMARY",
+  "status": "FINAL_RECONCILED",
+  "stages": [
+    {
+      "stage": "r1-mechanism",
+      "embedding_requests": 3,
+      "embedding_input_tokens": 86,
+      "embedding_output_tokens": 0,
+      "embedding_tokens": 86,
+      "generation_requests": 5,
+      "generation_input_tokens": 5817,
+      "generation_output_tokens": 318,
+      "generation_tokens": 6135
+    },
+    {
+      "stage": "r1-diagnostic",
+      "generation_requests": 31,
+      "generation_input_tokens": 24563,
+      "generation_output_tokens": 2915,
+      "generation_tokens": 27478,
+      "embedding_requests": 9,
+      "embedding_input_tokens": 335,
+      "embedding_output_tokens": 0,
+      "embedding_tokens": 335
+    },
+    {
+      "stage": "r1-merit",
+      "generation_requests": 6,
+      "generation_input_tokens": 6975,
+      "generation_output_tokens": 563,
+      "generation_tokens": 7538
+    },
+    {
+      "stage": "r2-mechanism",
+      "embedding_requests": 3,
+      "embedding_input_tokens": 86,
+      "embedding_output_tokens": 0,
+      "embedding_tokens": 86,
+      "generation_requests": 5,
+      "generation_input_tokens": 5873,
+      "generation_output_tokens": 312,
+      "generation_tokens": 6185
+    },
+    {
+      "stage": "r2-diagnostic",
+      "generation_requests": 30,
+      "generation_input_tokens": 23424,
+      "generation_output_tokens": 3253,
+      "generation_tokens": 26677,
+      "embedding_requests": 9,
+      "embedding_input_tokens": 343,
+      "embedding_output_tokens": 0,
+      "embedding_tokens": 343
+    },
+    {
+      "stage": "r2-merit",
+      "generation_requests": 18,
+      "generation_input_tokens": 21694,
+      "generation_output_tokens": 1543,
+      "generation_tokens": 23237,
+      "embedding_requests": 4,
+      "embedding_input_tokens": 66,
+      "embedding_output_tokens": 0,
+      "embedding_tokens": 66
+    },
+    {
+      "stage": "r1-decoder",
+      "generation_requests": 3,
+      "generation_input_tokens": 2163,
+      "generation_output_tokens": 117,
+      "generation_tokens": 2280,
+      "embedding_requests": 0,
+      "embedding_tokens": 0
+    },
+    {
+      "stage": "r2-decoder",
+      "generation_requests": 3,
+      "generation_input_tokens": 2163,
+      "generation_output_tokens": 117,
+      "generation_tokens": 2280,
+      "embedding_requests": 0,
+      "embedding_tokens": 0
+    }
+  ],
+  "totals": {
+    "generation_requests": 101,
+    "generation_input_tokens": 92672,
+    "generation_output_tokens": 9138,
+    "generation_tokens": 101810,
+    "embedding_requests": 28,
+    "embedding_tokens": 916
+  },
+  "known_equals_charged": true,
+  "unknown_usage": 0,
+  "judge_requests": 0,
+  "independent_state_reflection_requests": 0,
+  "decoder_probe_requests": 6,
+  "formal_react_requests": 95,
+  "final_r2_react_requests": 53,
+  "final_r2_state_tokens": {
+    "decision_context_input_tokens": 4636,
+    "decision_delta_field_output_tokens": 1745
+  },
+  "token_measurement": "Local pinned tokenizer, exact delivered context fragment and original JSON decision_delta field substring. Fragments are not additive exact billed tokens at BPE boundaries. Fixed M1 protocol remains in full input billing.",
+  "ledger_path": "artifacts/langmem-m1-v17/v17-budget.json",
+  "ledger_sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+  "earlier_history": {
+    "ledger": "artifacts/langmem-provenance/v16-budget.json",
+    "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+    "generation_requests": 55,
+    "generation_known_tokens": 40072,
+    "generation_charged_tokens": 40072,
+    "embedding_tokens": 443,
+    "unknown_usage": 0,
+    "judge_requests": 0,
+    "sealed": true,
+    "earlier_v15": {
+      "ledger": "artifacts/langmem-foundation/v15-budget.json",
+      "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+      "generation_requests": 108,
+      "generation_known_tokens": 71846,
+      "generation_unknown_reservation": 4891,
+      "generation_charged_tokens": 76737,
+      "embedding_tokens": 836,
+      "unknown_usage": 1,
+      "judge_requests": 0,
+      "sealed": true
+    }
+  },
+  "agent_cost": "Platform development-agent usage is separate and unavailable as experimental Provider token charges; not treated as zero.",
+  "fixed_m1_protocol_fragment_tokens_per_request": 217,
+  "fixed_m1_protocol_fragment_tokens_final_r2": 11501
+}

@@ -68,7 +68,7 @@ def run_frozen_diagnostics(
              if selected_cases is None or case["id"] in selected_cases]
     output.mkdir(parents=True, exist_ok=True)
     identity = {
-        "recipe_id": RECIPE_ID,
+        "recipe_id": model.m1.recipe_id if model.m1 is not None else RECIPE_ID,
         "run_id": run_id,
         "inputs_sha256": hashlib.sha256(inputs_path.read_bytes()).hexdigest(),
         "config_sha256": digest(config_identity),
@@ -112,6 +112,7 @@ def run_frozen_diagnostics(
                     write_json(progress_path, progress)
                     messages = invoke_or_resume_public_message(
                         agent, model, scope, declared["turns"][index]["text"], index, pending,
+                        task_id=f"diagnostic:{case['id']}",
                     )
                     progress["next_turn"] = index + 1
                     progress["pending_turn"] = None
@@ -129,6 +130,9 @@ def run_frozen_diagnostics(
                     "budget": copy.deepcopy(model.client.budget.state)
                     if model.client.budget else None,
                 }
+                if model.m1 is not None:
+                    row["decision_basis"] = model.m1.store.get(
+                        (run_id, arm_id, scope.user_id, f"diagnostic:{case['id']}"))
                 write_json(session_path, row)
                 summary["sessions"].append(row)
                 if observer is not None:

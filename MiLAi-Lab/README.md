@@ -3,7 +3,20 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Latest scoped delivery: [Provenance Goal v16](docs/MILA_LANGMEM_PROVENANCE_GOAL_v16.md),
+Latest scoped delivery: [M1 Goal v17](docs/MILA_LANGMEM_M1_GOAL_v17.md), implementing the complete
+[v17 plan](docs/MILA_LANGMEM_M1_V17_DEVELOPMENT_PLAN_20260926.md).
+Status: `COMPLETE_WITH_M1_LIMITATIONS`; decision: PIVOT before M2. The opt-in adapter adds one
+persistent task-local Basis, exact delivered-evidence adoption and program-owned recheck,
+without changing vLLM or adding an independent State call. Final R2 completed the frozen
+mechanism, original 12/20 diagnostics and arc0 5/7 without protocol failures. Adoption is 22/22
+valid, but the controlled recheck retained a stale action; semantic diagnostics are 5/12,
+native MERIT 4/5 and dependent 1/2. Total v17: 101 generations / 101810 tokens / 916 embedding
+tokens, including preserved R1 failures and both probes. No M2, new seeds or method-benefit claim.
+See [results](docs/MILA_LANGMEM_M1_V17_RESULTS_20260926.md),
+[development](docs/MILA_LANGMEM_M1_V17_DEVELOPMENT_20260926.md), and
+[reproduction](docs/MILA_LANGMEM_M1_V17_REPRODUCTION_20260926.md).
+
+Previous scoped delivery: [Provenance Goal v16](docs/MILA_LANGMEM_PROVENANCE_GOAL_v16.md),
 based on the [v16 development plan](docs/MILA_LANGMEM_V16_DEVELOPMENT_PLAN_20260926.md).
 Status: `COMPLETE_WITH_INSTRUMENTED_BASELINE`; G0–G6 passed. B1 adds model-hidden observation,
 revision, search return/request inclusion and original business-receipt tracking while preserving

@@ -16,6 +16,7 @@ from langchain_core.utils.function_calling import convert_to_openai_tool
 from pydantic import ConfigDict
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.methods.milai_m1.controller import M1_PROTOCOL, m1_action_schema
 from milai_lab.providers.contextual_vllm import VLLMClient
 
 
@@ -96,6 +97,7 @@ class VLLMChatModel(BaseChatModel):
     capacity_path: Path | None = None
     active_message_key: str | None = None
     observer: Any = None
+    m1: Any = None
 
     @property
     def _llm_type(self) -> str:
@@ -141,6 +143,11 @@ class VLLMChatModel(BaseChatModel):
             wire_messages = _json_action_history(wire_messages)
             generation_schema = _action_schema(tools, generation_only=True)
             protocol = _action_prompt(tools)
+            m1_context = None
+            if self.m1 is not None:
+                generation_schema = m1_action_schema(generation_schema)
+                m1_context = self.m1.prompt_context(wire_messages)
+                protocol += "\n" + M1_PROTOCOL + "\n" + m1_context
             if wire_messages and wire_messages[0]["role"] == "system":
                 first = dict(wire_messages[0])
                 if not isinstance(first.get("content"), str):
@@ -160,6 +167,12 @@ class VLLMChatModel(BaseChatModel):
                         "schema": generation_schema,
                     }},
                 )
+            if self.m1 is not None and self.client.emit is not None:
+                self.client.emit({
+                    "event": "m1_decision_context", "status": "delivered",
+                    "request_id": self.m1.request_id(self.calls_in_message),
+                    "text": m1_context,
+                })
         else:
             self._reserve_request()
             scope = (self.observer.request_scope(self.active_message_key, self.calls_in_message)
@@ -193,7 +206,16 @@ class VLLMChatModel(BaseChatModel):
             try:
                 validate(action, generation_schema)
             except ValidationError as exc:
+                if self.m1 is not None:
+                    self.m1.record_error(
+                        self.calls_in_message, message_id,
+                        action.get("decision_delta") if isinstance(action, dict) else action,
+                        "DECISION_ENVELOPE_SCHEMA_INVALID",
+                    )
                 raise IncompleteChatResponse("JSON_ACTION_SCHEMA_INVALID") from exc
+            if self.m1 is not None:
+                self.m1.commit(self.calls_in_message, message_id,
+                               action["decision_delta"])
             if "calls" in action:
                 for index, call in enumerate(action["calls"]):
                     calls.append({"name": call["name"], "args": call["arguments"],

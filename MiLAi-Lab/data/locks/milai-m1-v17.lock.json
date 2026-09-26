@@ -1,0 +1,96 @@
+{
+  "kind": "MILAI_M1_V17_LOCK",
+  "status": "FROZEN",
+  "reference_manifest_sha256": "e01b1ca27dc68730d6a24dce6000dbbf914e26e502bea745b61fda026fecb5f7",
+  "reference_b1_lock_sha256": "2098f2708081e1ae23341a301356543cb81e3b2be5fe1614ba487647ac8231a7",
+  "recipe_id": "milai-m1-sparse-decision-json-action-v1",
+  "transport_variant": "json_action_decision_delta_v1",
+  "source_sha256": {
+    "configs/langmem-b1-v16.json": "09999ee2906aa73ab513e7fe2f89826c5785bbef1eaaec7a2c36601372644634",
+    "configs/langmem-baseline-v1.json": "45dbe0fb4843c87d3c5302a32408bb389a82b11bfcb09749fc773aeea5f22c2b",
+    "configs/milai-m1-v17.json": "f2928aaaf29da5bd048aff9e977def99d24c0b7e073e95b6e609e70737e8c33a",
+    "pyproject.toml": "e96b7d8b178534403050938761724dc87fb2d0bbe0f5ae40e4a0115f628ad385",
+    "src/milai_lab/__init__.py": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+    "src/milai_lab/baselines/__init__.py": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+    "src/milai_lab/baselines/langmem_agent.py": "bffc5dbc8c01eb9b5ec159d8c78a84d6ae233fdc9e74d8f683efbde79786e8d3",
+    "src/milai_lab/baselines/langmem_b1_identity.py": "2fd2380bcb93c87c3614a7ec1d917a75faca8eeb3c75dfef0a7c5ce8248a3d11",
+    "src/milai_lab/baselines/langmem_identity.py": "bf3b25663b52478325734f8ba4a3703521d63bb522f8a22133f28680a5187572",
+    "src/milai_lab/baselines/langmem_instrumentation.py": "0a4805f5814b749d8fe9d71d31dfb4c90a7beca4e7a7c85f8edaf7620bae0d8e",
+    "src/milai_lab/baselines/langmem_revision_store.py": "c1e0211f00c3189cf0b356f3fda9dc904955ce468da786ade8a1888f34932082",
+    "src/milai_lab/datasets/__init__.py": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+    "src/milai_lab/datasets/merit.py": "1e68fafc8f4c571430a5f032961df1e59cb4913f110178ec481d6e24700483a7",
+    "src/milai_lab/harness/__init__.py": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "src/milai_lab/methods/__init__.py": "59b20a7a91ee381dda1685ac330a3af7d10aa2c84dbe69cc0ef8b2f767044a81",
+    "src/milai_lab/methods/milai_m1/__init__.py": "8d9a1d208d0df6404166ca73436b42857fd6194707aed0ede0f6e6b86f68a624",
+    "src/milai_lab/methods/milai_m1/controller.py": "9fa7a321ecd224f955da38e7f4fdb885fd9f3f22b37771b05399470e7aceacf3",
+    "src/milai_lab/methods/milai_m1/decision_basis.py": "a6adf31cbd7d4239b3a06aad55e094414b0cbe5f477411b2bfa48b2112f2c151",
+    "src/milai_lab/methods/milai_m1/evidence_view.py": "31e3ec6181418f3ea5b4c48efd09e8d21eae130b6f39beeb1e5ae041938c50fb",
+    "src/milai_lab/methods/milai_m1/identity.py": "294080493cb3d4259bd73488da2861a7c7a06071567c6d89cc698197858dc6b7",
+    "src/milai_lab/methods/milai_m1/recheck.py": "e52cd4ea83fffa3d9d7f24ba0c31af293e4453d56e9e953dd740280cb4565987",
+    "src/milai_lab/methods/milai_m1/state_store.py": "193ba6e471f8297b685785c07a9109f38b36d2ae2700fb1af3e4f59e95eff2d6",
+    "src/milai_lab/providers/__init__.py": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+    "src/milai_lab/providers/langmem_chat.py": "3f04cafdc6cf8f98a7b525750279ebe63ba4606fcff7a8d95c3f9c01b73a4af9",
+    "src/milai_lab/runners/__init__.py": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+    "src/milai_lab/runners/langmem_diagnostic.py": "a0c81e7f7d66e03e103b5fe800fe3b21e94129d2498fd54b002aa7606df75f7f",
+    "src/milai_lab/runners/langmem_foundation.py": "d35ad8659b0a95819415786a750460bcc39e9673aa342ce44d9383f7c7fb5135",
+    "src/milai_lab/runners/langmem_m1_mechanism.py": "40fb08a445f4e21458ffd3a18d44b06a79862bb5119705cd54567fe85f73e1cb",
+    "src/milai_lab/runners/langmem_merit.py": "a69d7c8f63a0b1cc3bf9580add377582892195732af58f78816a45878bbac0a2",
+    "tools/prepare_langmem_foundation.py": "b6b4c538d121cd706e3c84c7e1c59ff70b23d8c568a036633bb9ea498865fdce",
+    "tools/run_langmem_foundation.py": "44e27ab5cb78148156e082814b59da7ab639babb48c2f2bb0658ba4edc9b1944",
+    "tools/run_langmem_provenance.py": "e080e10a9c5cb62336180aff6e53e36056a4fc93763c0c10a99e8f1c2c2aaef3",
+    "tools/run_milai_m1.py": "693095c9f6849188713bd6db3d1eb997919a06a8aabca5c63d30ba054e7b0807",
+    "tools/summarize_langmem_foundation.py": "aea78fc1bc9ddbf7b11a935cd9b4aa19ca05a1bba9ab3475870adc60958e37d7",
+    "uv.lock": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8"
+  },
+  "source_mapping_sha256": "392c14287062a92465f74b31e402ea65099a55cb5136a1c3939b05dd1655b66f",
+  "validation_sha256": {
+    "tests/unit/test_milai_m1.py": "5c9a8ad6a6364ffb02be6f036ea68edaf53d5bef7b82b027a6577324eb4d9877",
+    "tests/unit/test_langmem_provenance.py": "3ef04a0667315b2bdc44b57d321a9f6e3ec41a2c98fc744804744f441df8308d",
+    ".github/workflows/ci.yml": "bee42d908b56ecd2d41bce40071a564d0b12352ba944bc01dbb074aa14ec9074",
+    "../.github/workflows/ci.yml": "2af6a9f8687a266fb96cb8d6a1d2f6e088df5e2e8eec13707062595b50a9ef21"
+  },
+  "source_mapping_hash_encoding": "SHA256 UTF-8 json.dumps(mapping,sort_keys=True,ensure_ascii=False); default separators",
+  "model_visible_contract": {
+    "m1_protocol_sha256": "934a099144f58509f5824e073fb7ea2e0b0c843c809efd6afcf3352a28d72f13",
+    "mechanism_schema_sha256": "d8927c0a9c80da572ad9cc54049b114b34b433bd7a7df540b699ab5d84dfdebe",
+    "mechanism_protocol_sha256": "57f6c86fd55f88ecbcb950e661fd95b69e8624730e378919e2cdddf51517830b",
+    "memory_only_schema_sha256": "338dd8527c3453ac5872d98bdae3c2b5a320896da5b48a92c3b60e6567844165",
+    "base_contract": {
+      "system_prompt_sha256": "edeaf06db6a0b39bc3702b9343127fa199a1702b665dbc8d2eb942b10a8eb9f4",
+      "memory_tools_sha256": "17c65075f4c1d959f60aa9c78732eb2777a7dcfaf4dbf431e63668843dd477df",
+      "json_action_schema_memory_only_sha256": "0af5bdd417e489b981929d151780add6ad83176fcf8d8e485270ecd6c2b99c0f",
+      "json_action_prompt_memory_only_sha256": "958b8e71fad22f9a189f39544776a0229e949fbfd7cab0218fcb17fe79361fdf",
+      "namespace": [
+        "langmem",
+        "{foundation_run_id}",
+        "{arm_id}",
+        "{user_id}"
+      ],
+      "factory": {
+        "entrypoint": "langgraph.prebuilt.create_react_agent",
+        "version": "v1",
+        "max_concurrency": 1,
+        "recursion_limit": 128,
+        "max_model_attempts_per_public_message": 12
+      }
+    }
+  },
+  "data_identity": {
+    "diagnostic_inputs_sha256": "a6852f07b4b1801e0426cb9ca930c518b3182ac2d5b9f2754f9109e98bf862bc",
+    "diagnostic_rubric_sha256": "62ab23a2a15f2ef3b81ecb51a715a19e379d24581b90ade2e9b8c12968a0ebcc",
+    "merit_selection_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+    "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+    "world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29"
+  },
+  "mechanism_fixture_sha256": "885024dd97c33addee0854b9c0e4293f44595d7f04a9859d7e522060a9acea67",
+  "dependency_lock_sha256": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8",
+  "scope": "M1_SPARSE_EVIDENCE_GROUNDED_DECISION_STATE",
+  "vllm_settings_changed": false,
+  "repair_history": {
+    "r1_failure_manifest_sha256": "15f6bd4bb7bc916d801542fa4263e5e29b4c3dc2edf6796d69138b1819de0c9f",
+    "scope": "adapter delta generation schema only; no semantic prompt or service change"
+  }
+}

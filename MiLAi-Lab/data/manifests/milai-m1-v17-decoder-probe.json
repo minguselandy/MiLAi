@@ -1,0 +1,64 @@
+{
+  "kind": "MILAI_M1_V17_DECODER_PROBE",
+  "status": "PASS",
+  "vllm_service_changed": false,
+  "schema_json_sha256": "73ddf4e582d8a60cdd10990ad290da2451d6f9c044b12271e993ed8de179af49",
+  "schema_snapshot_sha256": "78df2f795886e09cd7449743dade42ffaab27ffb226652cc60c59c4ca9e41d33",
+  "report_sha256": "1dc67fbd8e9fa8b83586a01388a62abb9f710cf454a41c326920b6d92084cf8b",
+  "trace_sha256": "cc0f50aa769d98515fa009b7343e1617ff2e99a3d11f75983d6731e6e2215b9e",
+  "cases": [
+    {
+      "case": "set_calls",
+      "schema_valid": true,
+      "delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "call_order": [
+        "holding instruction",
+        "dispatch timing"
+      ],
+      "usage": {
+        "prompt_tokens": 773,
+        "total_tokens": 864,
+        "completion_tokens": 91,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "case": "clear_answer",
+      "schema_valid": true,
+      "delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "call_order": [],
+      "usage": {
+        "prompt_tokens": 696,
+        "total_tokens": 710,
+        "completion_tokens": 14,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "case": "null_answer",
+      "schema_valid": true,
+      "delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "call_order": [],
+      "usage": {
+        "prompt_tokens": 694,
+        "total_tokens": 706,
+        "completion_tokens": 12,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "generation_requests": 3,
+  "input_tokens": 2163,
+  "output_tokens": 117,
+  "known_tokens": 2280,
+  "embedding_requests": 0,
+  "tool_executions": 0,
+  "basis_commits": 0,
+  "interpretation": "Current deployed decoder can emit the M1 envelope; no adoption, recheck or method-behavior claim. Actual requests are charged in continuous v17 ledger."
+}

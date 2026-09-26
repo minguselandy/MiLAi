@@ -1,0 +1,60 @@
+{
+  "kind": "MILAI_M1_V17_DECODER_PROBE_R2",
+  "status": "PASS",
+  "vllm_service_changed": false,
+  "schema_json_sha256": "d8927c0a9c80da572ad9cc54049b114b34b433bd7a7df540b699ab5d84dfdebe",
+  "evidence_sha256": {
+    "artifacts/langmem-m1-v17/decoder-probe-r2/report.json": "1b47fc72c692ea76733824d71f375b3778c294ce7d72d1f7e3fbc8fa2addfda8",
+    "artifacts/langmem-m1-v17/decoder-probe-r2/schema.json": "d1365060130d0bdd30546bc3aac4a75bafeedd08bfb467086f4489b36adb433e",
+    "artifacts/langmem-m1-v17/decoder-probe-r2/trace.jsonl": "454e97eae9d473c14749fc7c9a4794402b3511a6e228b64fcca8415f16da9712"
+  },
+  "cases": [
+    {
+      "case": "set_calls",
+      "schema_valid": true,
+      "delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "usage": {
+        "prompt_tokens": 773,
+        "total_tokens": 864,
+        "completion_tokens": 91,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "case": "clear_answer",
+      "schema_valid": true,
+      "delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "usage": {
+        "prompt_tokens": 696,
+        "total_tokens": 710,
+        "completion_tokens": 14,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "case": "null_answer",
+      "schema_valid": true,
+      "delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "usage": {
+        "prompt_tokens": 694,
+        "total_tokens": 706,
+        "completion_tokens": 12,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "generation_requests": 3,
+  "input_tokens": 2163,
+  "output_tokens": 117,
+  "total_tokens": 2280,
+  "embedding_requests": 0,
+  "basis_commits": 0,
+  "tool_executions": 0,
+  "change": "strict null/set/clear shape in adapter generation schema; all original prompt/runtime validation/service settings unchanged"
+}

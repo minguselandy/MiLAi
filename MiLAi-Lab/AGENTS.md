@@ -36,6 +36,35 @@ canonical memory state.
 
 ## Required checks
 
+The user explicitly requested execution of the full 1553-line
+[v17 M1 plan](docs/MILA_LANGMEM_M1_V17_DEVELOPMENT_PLAN_20260926.md).
+Current [Goal v17](docs/MILA_LANGMEM_M1_GOAL_v17.md): `COMPLETE_WITH_M1_LIMITATIONS`.
+This new authorization supersedes the completed v16 B1-only restriction for this scoped work.
+V17 development and full R2 small runs are complete: 12/20 diagnostics semantic 5/12, arc0
+5/7 native 4/5 and dependent 1/2. Source mapping is
+`392c14287062a92465f74b31e402ea65099a55cb5136a1c3939b05dd1655b66f`.
+Adoption validity is 22/22; one controlled revision trigger reached two actual requests but
+Host ignored it, did not acknowledge and executed stale 4 C. Preserve this and the label-like
+Basis, missing memories, stale pending prose and all R1 schema failures. Decision is PIVOT
+before M2, not method efficacy. Costs: 101 generations / 101810 tokens / 916 embedding tokens,
+unknown=0, Judge=0. See the v17 results/reproduction docs before newly authorized work.
+No automatic new runs, Attention, semantic tuning or tests/models/build for publication.
+The following ownership/scope rules describe the completed v17 execution; they do not reopen it.
+One existing Sol xhigh owns all M1/adapter/runner code and narrow checks. Root owns docs,
+reference/lock/freeze, diagnostic inputs and scoring, unchanged environment, every real
+model request (concurrency 1), continuous costs and reporting; Luna high retains publication.
+Implement one task-local Basis slot, explicit adoption of actually delivered exact evidence,
+program-owned selective recheck, and persistence/replay through the existing ReAct loop.
+State delta and calls/answer must use the same generation. No independent State/reflection
+call, hard action gate, automatic memory/retrieval policy, M2/Attention, old contextual method
+reuse, Product/Archive change or new benchmark seed consumption. Keep all vLLM settings.
+Preserve the user plan bytes, v16 locks/results/ledger; shared changes get a new v17 lock.
+Follow reference -> implementation/necessary decoder probe -> V0 -> final freeze -> frozen
+controlled mechanism diagnostic -> original 12/20 diagnostics -> original arc0 5/7 -> report.
+All failed attempts and costs persist. Narrow problem-driven verification only; no full suite,
+benchmark expansion or reruns for publication. A negative mechanism result remains valid
+research evidence, but missing implementation/run requirements cannot be redefined as done.
+
 The user explicitly requested execution of the updated
 [provenance Goal v16](docs/MILA_LANGMEM_PROVENANCE_GOAL_v16.md), based on the
 [development plan](docs/MILA_LANGMEM_V16_DEVELOPMENT_PLAN_20260926.md).
