@@ -1,0 +1,246 @@
+{
+  "kind": "SELECTIVE_ADAPTATION_V1_OFFLINE_RUBRICS",
+  "runtime_input": false,
+  "status": "DESIGNED_BEFORE_GENERALIZED_RUNS",
+  "cases": [
+    {
+      "case_id": "numeric_amount",
+      "family": "numeric_changed",
+      "fixture": "data/diagnostics/selective_adaptation_v1/numeric_amount.json",
+      "fixture_sha256": "37a8d82754307bf79040e887dd6055efdea383a1c797e3b0f86af9144d5746de",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "invoice Cedar-27",
+        "amount_cents": 6595
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence"
+    },
+    {
+      "case_id": "categorical_route",
+      "family": "categorical_changed",
+      "fixture": "data/diagnostics/selective_adaptation_v1/categorical_route.json",
+      "fixture_sha256": "fcd93c4a9e831cb20b9db9e6ab603d492782404f3cbf08706fd891dc0ddb97b5",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Orion-17",
+        "warehouse": "South"
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence"
+    },
+    {
+      "case_id": "boolean_approved",
+      "family": "boolean_changed",
+      "fixture": "data/diagnostics/selective_adaptation_v1/boolean_approved.json",
+      "fixture_sha256": "87ab5ceab09ee6ec10667adf45b8cab732b1ae09f1aa83464c1bef7074fa55c9",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "pass Birch-6",
+        "permitted": true
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence"
+    },
+    {
+      "case_id": "boolean_cancelled",
+      "family": "boolean_changed",
+      "fixture": "data/diagnostics/selective_adaptation_v1/boolean_cancelled.json",
+      "fixture_sha256": "54c09587f95112d8011b8b121e49a3a719690a76f69b7f62e3be7bf24ac97ee8",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "pass Maple-9",
+        "permitted": false
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence"
+    },
+    {
+      "case_id": "retained_metadata",
+      "family": "retained",
+      "fixture": "data/diagnostics/selective_adaptation_v1/retained_metadata.json",
+      "fixture_sha256": "ba229ef59f2c0e669813fc23181cf4bb865741725b9d5afba70bedf2183f7270",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "container Elm-12",
+        "weight_limit_kg": 48
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence"
+    },
+    {
+      "case_id": "irrelevant_lower_rank",
+      "family": "irrelevant",
+      "fixture": "data/diagnostics/selective_adaptation_v1/irrelevant_lower_rank.json",
+      "fixture_sha256": "eb5a21ac301212d3ab6625f350915554f323dd7158c6ec022fae8b178993f995",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Orion-17",
+        "warehouse": "North"
+      },
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "searches_after_update_allowed": false,
+      "required_secondary_delivered_below_primary": true
+    },
+    {
+      "case_id": "deleted_evidence",
+      "family": "deleted",
+      "fixture": "data/diagnostics/selective_adaptation_v1/deleted_evidence.json",
+      "fixture_sha256": "b837a4ab5fdb2c0ee17cc0512c9dac907d9e353fb6f4b7d15d2d15d32da613b0",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 0,
+      "expected_arguments": null,
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence"
+    },
+    {
+      "case_id": "multi_revision",
+      "family": "multiple_revisions",
+      "fixture": "data/diagnostics/selective_adaptation_v1/multi_revision.json",
+      "fixture_sha256": "32a1ba7d2d06eb4c3f2e9d9b507a7ff9dd6d8f8edc67da386bb6eb6d3612e32e",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Larch-8",
+        "warehouse": "West"
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence"
+    },
+    {
+      "case_id": "current_conflict",
+      "family": "conflicting_current",
+      "fixture": "data/diagnostics/selective_adaptation_v1/current_conflict.json",
+      "fixture_sha256": "14662673e58873b6a8e1ccf5f098232f0030dae394ede80dd8631dc03f9f8075",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 0,
+      "expected_arguments": null,
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence"
+    },
+    {
+      "case_id": "assistant_only_stale",
+      "family": "assistant_only_stale",
+      "fixture": "data/diagnostics/selective_adaptation_v1/assistant_only_stale.json",
+      "fixture_sha256": "01f42886327a5c46d0be3b4315943fafdc6954b0f77d0b0f6bdc10990df3bace",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Orion-17",
+        "warehouse": "South"
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "request_view_contract": "Harness-only copy filter omits search ToolMessages generated before public index 1; original checkpoint and lineage stay intact. New search results at public index >=1 remain visible. Same policy for matched arms, no method case branch."
+    },
+    {
+      "case_id": "no_stale",
+      "family": "no_stale",
+      "fixture": "data/diagnostics/selective_adaptation_v1/no_stale.json",
+      "fixture_sha256": "701d04ea77d26c402fb82aaae607f4d8488cf4139ed8df752ffa7d0ab777a7ab",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Alder-2",
+        "warehouse": "Central"
+      },
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "exact_reads_allowed": false,
+      "derived_demotions_allowed": false,
+      "searches_after_initial_allowed": false
+    },
+    {
+      "case_id": "mixed_memories",
+      "family": "mixed_current_stale_deleted_unknown",
+      "fixture": "data/diagnostics/selective_adaptation_v1/mixed_memories.json",
+      "fixture_sha256": "5573937b4f29eb5a37eb86210707890f7d9a385ec8267de09c2fc88299bd045d",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Ash-4",
+        "warehouse": "South"
+      },
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "unknown_seed_contract": "Use the public LangMem memory tool outside the instrumentation call scope; no fabricated revision. Fixture-only setup, actual returned key retained in evidence."
+    }
+  ],
+  "p4_first_cases": [
+    "categorical_route",
+    "boolean_approved",
+    "deleted_evidence",
+    "multi_revision",
+    "assistant_only_stale"
+  ],
+  "p6_remaining_cases": [
+    "numeric_amount",
+    "boolean_cancelled",
+    "retained_metadata",
+    "irrelevant_lower_rank",
+    "current_conflict",
+    "no_stale",
+    "mixed_memories"
+  ],
+  "general_rules": [
+    "All output schema and business arguments are generic fixture-owned input; expected values never enter method runtime.",
+    "If a required initial search/rank condition is missing, report invalid mechanism exposure separately from action quality; do not silently count it as a pass.",
+    "Every run must independently verify checkpoint non-mutation, exact current delivery, original assistant risk and actual projection.",
+    "Do not change fixture text after observing outcomes; any genuine input repair creates a new version retaining prior cost and evidence."
+  ]
+}

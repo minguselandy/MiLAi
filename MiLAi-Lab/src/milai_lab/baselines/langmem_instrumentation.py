@@ -49,6 +49,8 @@ class ProvenanceObserver:
         self.arm_id = arm_id
         self._call: ContextVar[CallContext | None] = ContextVar("b1_tool_call", default=None)
         self._request: ContextVar[str | None] = ContextVar("b1_request", default=None)
+        self._actual_request: ContextVar[dict[str, Any] | None] = ContextVar(
+            "b1_actual_request", default=None)
         self._projection: ContextVar[dict[str, dict[str, str]] | None] = ContextVar(
             "b1_request_projection", default=None)
         self._scope_lock = threading.RLock()
@@ -203,12 +205,18 @@ class ProvenanceObserver:
                   public_index, request_index)
         self.assert_healthy()
         token = self._request.set(request_id)
+        actual_token = self._actual_request.set(None)
         projection_token = self._projection.set(projected_material)
         try:
             yield
         finally:
             self._projection.reset(projection_token)
+            self._actual_request.reset(actual_token)
             self._request.reset(token)
+
+    def current_provider_request(self) -> dict[str, Any] | None:
+        """The completed wire request is available only inside its synchronous scope."""
+        return self._actual_request.get()
 
     def capture_provider_event(
         self, event: dict[str, Any], trace_ref: dict[str, Any] | None = None,
@@ -227,3 +235,5 @@ class ProvenanceObserver:
             return
         self.safe(self.sidecar.finish_request, request_id, status, event, trace_ref,
                   self._projection.get())
+        if status == "completed" and isinstance(event.get("request"), dict):
+            self._actual_request.set(event["request"])

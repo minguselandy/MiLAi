@@ -147,6 +147,7 @@ class VLLMChatModel(BaseChatModel):
         if not isinstance(wire_messages, list):
             raise TypeError("Expected a message sequence")
         tools = kwargs.get("tools") or []
+        delivered_snapshot: tuple[list[dict[str, Any]], int] | None = None
         if self.client.config.tool_mode == "json_action":
             wire_messages = _json_action_history(wire_messages)
             generation_schema = _action_schema(tools, generation_only=True)
@@ -167,7 +168,8 @@ class VLLMChatModel(BaseChatModel):
                     protocol += "\n" + odr_freshness
             if self.projection is not None:
                 projected = self.projection.project(
-                    wire_messages, self.active_message_key, self.calls_in_message + 1)
+                    wire_messages, self.active_message_key, self.calls_in_message + 1,
+                    messages)
                 wire_messages = projected.messages
                 protocol += "\n" + SOURCE_AUTHORITY
             if wire_messages and wire_messages[0]["role"] == "system":
@@ -191,6 +193,10 @@ class VLLMChatModel(BaseChatModel):
                         "schema": generation_schema,
                     }},
                 )
+                if projected is not None:
+                    delivered_snapshot = self.projection.record_delivery(
+                        self.active_message_key, self.calls_in_message,
+                        projected, action_messages)
             if self.m1 is not None and self.client.emit is not None:
                 self.client.emit({
                     "event": "m1_decision_context", "status": "delivered",
@@ -203,9 +209,6 @@ class VLLMChatModel(BaseChatModel):
                     "request_id": self.odr.request_id(self.calls_in_message),
                     "dynamic_freshness": odr_freshness,
                 })
-            if projected is not None:
-                self.projection.record_delivery(self.active_message_key,
-                                                self.calls_in_message, projected)
         else:
             self._reserve_request()
             scope = (self.observer.request_scope(self.active_message_key, self.calls_in_message)
@@ -304,4 +307,10 @@ class VLLMChatModel(BaseChatModel):
                 "model": receipt.get("model"),
             },
         )
+        if (self.projection is not None and delivered_snapshot is not None
+                and not calls and isinstance(content, str)):
+            exact_snapshot, unknown_items = delivered_snapshot
+            self.projection.record_output(
+                self.active_message_key, self.calls_in_message, message_id,
+                content, exact_snapshot, unknown_items)
         return ChatResult(generations=[ChatGeneration(message=message)])

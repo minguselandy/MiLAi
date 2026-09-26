@@ -1,0 +1,11 @@
+{
+  "kind": "SER_V20_DIAGNOSTIC_INPUT_FREEZE",
+  "status": "FROZEN_BEFORE_RUNS",
+  "case_id": "deleted_evidence",
+  "fixture_sha256": "b837a4ab5fdb2c0ee17cc0512c9dac907d9e353fb6f4b7d15d2d15d32da613b0",
+  "public_messages": 3,
+  "offline_rubric_sha256": "190726ede3276ec830c11f546162541bc690bf761d20bbcf1809371caf73d405",
+  "rubric_read_by_runtime": false,
+  "benchmark_score": false,
+  "input_source": "Parameterized exposed development control"
+}

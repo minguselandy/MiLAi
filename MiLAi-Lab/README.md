@@ -3,6 +3,13 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
+Current work: the full [long-horizon master plan](docs/MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md),
+tracked in [the execution Goal](docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md). The first stage,
+[v20 SER](docs/MILAI_SER_V20_GOAL.md), adds request-level assistant lineage and selective
+demotion of stale derived text. Development continues through generalization, matched
+evaluation and lifecycle/quality-cost research; a failed first candidate is diagnostic input,
+not automatic completion. Historical deliveries below remain preserved.
+
 Latest scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.
 Original Notice and request-copy Quarantine each pass 1/3 controls; conditional Exact Refresh

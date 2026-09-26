@@ -1,0 +1,45 @@
+{
+  "kind": "MILAI_SER_V20_EVALUATION_PROTOCOL",
+  "status": "FROZEN_BEFORE_V20_MODEL_REQUESTS",
+  "runtime_input": false,
+  "reference_commit": "024fa698b97925dba295c3bd674f820f39559f42",
+  "master_plan_sha256": "d7a5331bf20ecd649a1bf75187ea0d65224ad559572a30dde0bb5527a66217d2",
+  "P3": {
+    "arm": "a4_selective_rebase",
+    "cases": ["changed", "retained", "irrelevant"],
+    "inputs": "The byte-identical three original milai_odr_v19 fixtures and mechanism freezes. No new wording, tool schemas, expected-value hints or authority changes.",
+    "reference": "A3 at 024fa69 is the sealed prior comparison. New CLI also supports matched A3 on the same source; do not automatically rerun a reference when no causal question requires it.",
+    "initial_exposure": "X@1 must really be returned by ordinary search and delivered to a Provider request before fixture external update.",
+    "changed": "Current exact X@2 must be delivered, superseded factual body withheld, original ordinary assistant output generated under X@1 demoted, and one approved business action records Lumen-42 at 8 C at public index 2.",
+    "retained": "Current exact X@2 must be delivered and original stale-snapshot output demoted before the one approved action records 8; value equality alone is insufficient.",
+    "irrelevant": "Current primary X remains intact and action is 8, with no induced primary lookup or Host search after update. Report Y exact reads and demotions caused by its snapshot presence independently; mechanical snapshot risk is not semantic causal attribution.",
+    "history": "Original checkpoint ToolMessages and assistant texts remain unchanged; tool-call JSON, role and position remain in the Provider history. Bind ordinary text by actual AIMessage/response identity plus hash, not text-value matching.",
+    "lineage": "Recover generating request and exact namespace/id/revision from actual delivered material. A3 refreshed X@2 must not be mislabeled as original search X@1; withheld or UNKNOWN bodies cannot become exact support.",
+    "business": "No mechanical truth gate or argument rewrite; record actual actions and all Host memory writes. Expected values are evaluation-only."
+  },
+  "P4": {
+    "input_family": "data/diagnostics/selective_adaptation_v1",
+    "rubric": "data/diagnostics/selective_adaptation_v1/rubrics.json",
+    "first_cases": ["categorical_route", "boolean_approved", "deleted_evidence", "multi_revision", "assistant_only_stale"],
+    "gate": "Expand after P3 is understood; at least one non-temperature pass is required for v20, while all declared generic controls remain in the master scope. Do not enter formal benchmark if categorical/boolean fails.",
+    "assistant_only": "A harness-only request-copy filter omits search ToolMessages from public index 0 after that index, preserving checkpoint and actual lineage. Newly acquired search results remain visible. Identical view policy for matched arms; no case-name branch in SER.",
+    "missing_exposure": "If initial retrieval/rank conditions are absent, report invalid mechanism exposure separately from semantic outcome, not an automatic pass. Any input correction receives a new version preserving old evidence."
+  },
+  "metrics": {
+    "rebase_precision": "Actually demoted ordinary outputs with a verified stale/deleted generating snapshot / all demoted outputs. This is mechanical provenance precision, not word-level causal precision.",
+    "rebase_recall": "Demoted eligible ordinary outputs / eligible stale-snapshot ordinary outputs in the pre-projection request. Do not use the post-demotion remainder as a denominator; report UNKNOWN bindings separately.",
+    "refresh_precision": "Report exact reads contributing primary current action evidence / all exact reads, alongside timing relative to action. Reads of irrelevant Y and post-action followup refreshes are separately visible; 0/0 is undefined.",
+    "stale_consumption": "Report actual stale-value actions and the exposed action opportunities; do not infer semantic use from value coincidence in retained.",
+    "preservation": "Compare unaffected current items/order, tool history, no-stale behavior and approved action, and separately count unnecessary demotion/refresh.",
+    "cost": "All generations/input/output/embedding/exact reads/projection CPU and wall/storage, including failures and rejected or truncated responses. Ordinary ReAct followups are not independent State calls."
+  },
+  "stage_stop": "Complete the small frozen group unless a transport/implementation failure makes execution invalid. Preserve every failed attempt, diagnose one first broken link with at least two hypotheses, choose a minimal general fix and counterexample, and freeze a new run. Do not stop the master Goal merely because A4 fails, nor enlarge benchmarks before gates.",
+  "constraints": {
+    "real_request_concurrency": 1,
+    "vllm_settings_changed": false,
+    "second_model_for_rebase": false,
+    "persistent_semantic_state": false,
+    "rubric_read_by_runtime": false,
+    "old_artifacts_overwritten": false
+  }
+}

@@ -7,12 +7,19 @@ from typing import Any
 
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.harness.contextual_artifacts import digest, read_json
-from milai_lab.methods.freshness_projection.controller import RECIPE_ID, TRANSPORT_VARIANT
+from milai_lab.methods.freshness_projection.controller import (
+    RECIPE_ID,
+    SER_RECIPE_ID,
+    SER_TRANSPORT_VARIANT,
+    TRANSPORT_VARIANT,
+)
 
 LAB = Path(__file__).resolve().parents[4]
 REFERENCE = LAB / "data/manifests/freshness-v19-repair-reference.json"
 PLAN = LAB / "docs/v19修复.md"
 B1_CONFIG = LAB / "configs/langmem-b1-v16.json"
+SER_REFERENCE = LAB / "data/manifests/milai-ser-v20-reference.json"
+MASTER_PLAN = LAB / "docs/MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md"
 REQUIRED_RUNTIME = {
     "src/milai_lab/methods/freshness_projection/__init__.py",
     "src/milai_lab/methods/freshness_projection/projection.py",
@@ -25,6 +32,11 @@ REQUIRED_RUNTIME = {
     "src/milai_lab/runners/langmem_projection_mechanism.py",
     "tools/run_milai_freshness_projection.py",
     "configs/milai-freshness-projection-v19.json",
+}
+REQUIRED_SER_RUNTIME = REQUIRED_RUNTIME | {
+    "src/milai_lab/methods/freshness_projection/lineage.py",
+    "tools/run_milai_ser.py",
+    "configs/milai-ser-v20.json",
 }
 
 
@@ -73,4 +85,55 @@ def verify_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
     for key, value in expected.items():
         if receipt.get(key) != value:
             raise ValueError("PROJECTION_PREPARED_" + key.upper() + "_CHANGED")
+    return expected["lock_sha256"]
+
+
+def verify_ser_lock(lock_path: Path, config_path: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+    reference, lock, config = (read_json(SER_REFERENCE), read_json(lock_path),
+                               read_json(config_path))
+    expected = {
+        "kind": "MILAI_SER_V20_LOCK", "status": "FROZEN",
+        "reference_manifest_sha256": sha256_file(SER_REFERENCE),
+        "master_plan_sha256": sha256_file(MASTER_PLAN),
+        "recipe_id": SER_RECIPE_ID,
+        "transport_variant": SER_TRANSPORT_VARIANT,
+    }
+    for key, value in expected.items():
+        if lock.get(key) != value:
+            raise ValueError("SER_LOCK_" + key.upper() + "_CHANGED")
+    if reference["master_plan_sha256"] != sha256_file(MASTER_PLAN):
+        raise ValueError("SER_MASTER_PLAN_CHANGED")
+    source_map = lock.get("source_sha256")
+    if not isinstance(source_map, dict) or not REQUIRED_SER_RUNTIME <= source_map.keys():
+        raise ValueError("SER_SOURCE_MAP_MISSING")
+    if lock.get("source_mapping_sha256") != digest(source_map):
+        raise ValueError("SER_SOURCE_MAPPING_HASH_CHANGED")
+    for relative, sha in source_map.items():
+        if sha256_file(LAB / relative) != sha:
+            raise ValueError("SER_SOURCE_CHANGED:" + relative)
+    baseline = read_json(B1_CONFIG)
+    for key in ("host", "embedding", "embedding_dimension"):
+        if config[key] != baseline[key]:
+            raise ValueError("SER_CONFIG_" + key.upper() + "_CHANGED")
+    if ((config["capacity"] | {"tokenizer_path": ""})
+            != (baseline["capacity"] | {"tokenizer_path": ""})):
+        raise ValueError("SER_CONFIG_CAPACITY_CHANGED")
+    if (config["recipe_id"] != SER_RECIPE_ID
+            or config["transport_variant"] != SER_TRANSPORT_VARIANT):
+        raise ValueError("SER_CONFIG_RECIPE_CHANGED")
+    return lock, config
+
+
+def verify_ser_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
+                        *, run_id: str, arm_id: str, fixture_path: Path) -> str:
+    verify_ser_lock(lock_path, config_path)
+    receipt = read_json(receipt_path)
+    expected = {"status": "PREPARED_ZERO_MODEL", "method": "ser_v20",
+                "run_id": run_id, "arm_id": arm_id,
+                "lock_sha256": sha256_file(lock_path),
+                "config_sha256": sha256_file(config_path),
+                "fixture_sha256": sha256_file(fixture_path)}
+    for key, value in expected.items():
+        if receipt.get(key) != value:
+            raise ValueError("SER_PREPARED_" + key.upper() + "_CHANGED")
     return expected["lock_sha256"]

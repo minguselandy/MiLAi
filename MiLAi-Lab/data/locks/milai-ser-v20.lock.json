@@ -1,0 +1,176 @@
+{
+  "kind": "MILAI_SER_V20_LOCK",
+  "status": "FROZEN",
+  "reference_manifest_sha256": "eac5db32fbbb85cea500482f400146955abbcf0b74024957849a8fcca5db0dd5",
+  "master_plan_sha256": "d7a5331bf20ecd649a1bf75187ea0d65224ad559572a30dde0bb5527a66217d2",
+  "recipe_id": "milai-ser-v20-json-action-v1",
+  "transport_variant": "json_action_ser_v20_v1",
+  "source_sha256": {
+    "configs/langmem-b1-v16.json": "09999ee2906aa73ab513e7fe2f89826c5785bbef1eaaec7a2c36601372644634",
+    "configs/langmem-baseline-v1.json": "45dbe0fb4843c87d3c5302a32408bb389a82b11bfcb09749fc773aeea5f22c2b",
+    "configs/milai-freshness-projection-v19.json": "22da1879eb0ed428e3568ac7703c9b2363720b96bee538f73403577379f19433",
+    "configs/milai-m1-v17.json": "f2928aaaf29da5bd048aff9e977def99d24c0b7e073e95b6e609e70737e8c33a",
+    "configs/milai-m1-v18.json": "5c5154b04f6b082274ca4480f5656c4aae89e67691e46c984b85f39b2a56bbf6",
+    "configs/milai-odr-v19.json": "d246534999bf3a91b770fa6505f68b4480a327345f59ec2c997d112a295d8fac",
+    "configs/milai-ser-v20.json": "25d9f058eb7f6a64e82559aaeae8457986b87d724e56cb9b1894f93f67036860",
+    "pyproject.toml": "a2eb64b13c8a40627a0e3c6c28766bb5f4178b2cae8d76fefac5d619b1e81623",
+    "src/milai_lab/__init__.py": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+    "src/milai_lab/baselines/__init__.py": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+    "src/milai_lab/baselines/langmem_agent.py": "a7a31af45fa630c3dbba2cd97c7833e30b46892ef4d155fafcab984162d979d9",
+    "src/milai_lab/baselines/langmem_b1_identity.py": "2fd2380bcb93c87c3614a7ec1d917a75faca8eeb3c75dfef0a7c5ce8248a3d11",
+    "src/milai_lab/baselines/langmem_identity.py": "bf3b25663b52478325734f8ba4a3703521d63bb522f8a22133f28680a5187572",
+    "src/milai_lab/baselines/langmem_instrumentation.py": "f324283c663f10ad04b52fc33797c068c9d1cc79931c09565445836cae36bab1",
+    "src/milai_lab/baselines/langmem_revision_store.py": "dc2a6470ed4b72eda5a44b0699076965eb85ffca2f8fff0d0ff8695b9cfab20a",
+    "src/milai_lab/datasets/__init__.py": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+    "src/milai_lab/datasets/merit.py": "1e68fafc8f4c571430a5f032961df1e59cb4913f110178ec481d6e24700483a7",
+    "src/milai_lab/harness/__init__.py": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "src/milai_lab/methods/__init__.py": "59b20a7a91ee381dda1685ac330a3af7d10aa2c84dbe69cc0ef8b2f767044a81",
+    "src/milai_lab/methods/freshness_projection/__init__.py": "edf49dc7f013532a7d43590e2081056a60dcb3ba5557ae9866d748fe15ccbd83",
+    "src/milai_lab/methods/freshness_projection/controller.py": "d1deee18c513c8272ba5564d6425cc09c3be263372b1405fc80ebf2b76251816",
+    "src/milai_lab/methods/freshness_projection/identity.py": "1e11fb99b553530e1e9e6c967b2333fbacdaf0238c3654e86b5c7e0a6b4524a4",
+    "src/milai_lab/methods/freshness_projection/lineage.py": "71a19fb10baa3a8b47edae3e1656970c2f6eb8cb9823a6e5392a53c33c918d84",
+    "src/milai_lab/methods/freshness_projection/projection.py": "51ad9f0f7a3a63de88d0c084075da98e4ae5428ed030b2b4c694f4b97b2d8c85",
+    "src/milai_lab/methods/milai_m1/__init__.py": "8d9a1d208d0df6404166ca73436b42857fd6194707aed0ede0f6e6b86f68a624",
+    "src/milai_lab/methods/milai_m1/controller.py": "c871098c684efbb3a54a4dd7f82bb7df00b235e4480b37bd124e8a5d78ceeb8a",
+    "src/milai_lab/methods/milai_m1/decision_basis.py": "07e28bc44c57cb7fc27cc6969bf16dce500449cb1cdef195143297ac3b4d38e7",
+    "src/milai_lab/methods/milai_m1/evidence_view.py": "31e3ec6181418f3ea5b4c48efd09e8d21eae130b6f39beeb1e5ae041938c50fb",
+    "src/milai_lab/methods/milai_m1/identity.py": "7ca19d497b28a0c76ebed245124b45295bf216ba292564918af74ab9a0c24b53",
+    "src/milai_lab/methods/milai_m1/recheck.py": "2c7a4b7f544cbbfed2579e5f5c80cc46bf5a6d6295019a87c6835bab959bfc7d",
+    "src/milai_lab/methods/milai_m1/state_store.py": "165f9c22801764ca98d63e8fc6a13793d3cb4b48dbfc785d9c4bd42b19dddcfd",
+    "src/milai_lab/methods/on_demand_reconstruction/__init__.py": "98f05efd3b1250393d9fc2b276476884bfeb6b92eb1334c68e50a14e6ef669b8",
+    "src/milai_lab/methods/on_demand_reconstruction/controller.py": "df4f32d115b3c88c315b467e8f24e7ee1ceaf3dc4e14a7547ed382c7f5ac5e2f",
+    "src/milai_lab/methods/on_demand_reconstruction/evidence_view.py": "f90f0bf19047a040b484c6f808a9943ba60377a92493f7044a1109339dee332a",
+    "src/milai_lab/methods/on_demand_reconstruction/freshness.py": "02ee313159eecbbd15b3499929712e909a985d28f0116658f4d60511018df59b",
+    "src/milai_lab/methods/on_demand_reconstruction/identity.py": "f96fddca6c9fa7b82a0ed48d68368254ee3772cb2636146e7f291804b7298b0a",
+    "src/milai_lab/methods/on_demand_reconstruction/metrics.py": "64b82a7d98bd8e9721a142c3df866ea96eb69fd5b32c2c2edaa197e401d7518e",
+    "src/milai_lab/methods/on_demand_reconstruction/schema.py": "323032b7cd80d25bee501f0e2174aa070be9d0747ed5aacc171563c27e8e4c4c",
+    "src/milai_lab/providers/__init__.py": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+    "src/milai_lab/providers/langmem_chat.py": "1fbddbed5da420d831a8356861bb0c68415484f8053e59da4be1e4e95248f281",
+    "src/milai_lab/runners/__init__.py": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+    "src/milai_lab/runners/langmem_diagnostic.py": "7c8400540b4562d1aac64da5b6971f377a2e2d2661eedecde5a9250fe6318692",
+    "src/milai_lab/runners/langmem_foundation.py": "d35ad8659b0a95819415786a750460bcc39e9673aa342ce44d9383f7c7fb5135",
+    "src/milai_lab/runners/langmem_m1_mechanism.py": "e004db3799381d361498c9e208b195abcf86866bc8ef083e4e2571f840f1b3e0",
+    "src/milai_lab/runners/langmem_merit.py": "a0a4e04d1497e76b78c1f7d22433db293f13d0279638634e8902163377c0a6e1",
+    "src/milai_lab/runners/langmem_odr_mechanism.py": "a4d2a9b71e4f48cf8d70cbd68de751b9f6daa9443e22f51484d4dbdea020b9c5",
+    "src/milai_lab/runners/langmem_projection_mechanism.py": "cc033a498f8c387d9200c7583e27e369d998f8f0cc1142bea073faf122dd5982",
+    "tools/inspect_milai_m1_v18.py": "74781e18aa99461861a8b69ca4bceacf75f300085a5d8c2a43c7d0b380185ca0",
+    "tools/inspect_milai_odr.py": "63a78c92ce710f6cbe0d4e8d1d1c09ee4509a8613dbaf434673381d394780579",
+    "tools/prepare_langmem_foundation.py": "b6b4c538d121cd706e3c84c7e1c59ff70b23d8c568a036633bb9ea498865fdce",
+    "tools/run_langmem_foundation.py": "44e27ab5cb78148156e082814b59da7ab639babb48c2f2bb0658ba4edc9b1944",
+    "tools/run_langmem_provenance.py": "e080e10a9c5cb62336180aff6e53e36056a4fc93763c0c10a99e8f1c2c2aaef3",
+    "tools/run_milai_freshness_projection.py": "82ba6d1e7cd48d4ea8141e834ad180cca8133dbec41e7ffaaa613e5ace2a2946",
+    "tools/run_milai_m1.py": "031e9659526fdf3b95ed21061ac8b82e3f4bafae49ad3d6d44e8cd336bf4cbcc",
+    "tools/run_milai_m1_v18.py": "41b89144729cc16077dd291e36010b871c00105fa65c4a97500f8b9e447a19f5",
+    "tools/run_milai_odr.py": "566f7bd7bcbd94a0bab74805bf03157ee9f2f09dafd6e5e3cf2f0517f39cec06",
+    "tools/run_milai_ser.py": "71abcc85d17bac83d00437597c8e1f900b527ad97d311ddf0e903f2e7953d213",
+    "tools/summarize_langmem_foundation.py": "aea78fc1bc9ddbf7b11a935cd9b4aa19ca05a1bba9ab3475870adc60958e37d7",
+    "uv.lock": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8"
+  },
+  "source_mapping_sha256": "a4a0036bc86cb145adcb6783fcac0ca2fd9ebe54165e95741e5aec53ae838690",
+  "validation_sha256": {
+    "../.github/workflows/ci.yml": "f1f082cafa38f800a560e067cae2aa59afae3f9510e0a3c3796762916edc69fc",
+    ".github/workflows/ci.yml": "1bb2cc6666a1c5ab03673ac4b697bb9924df5d996a78f80e26b6f985b284979b",
+    "tests/unit/test_freshness_projection.py": "1d79b2333c71152dd733ec7edbb38e9d5d987f6dc5d80d25a9d6cd993b086e81",
+    "tests/unit/test_langmem_provenance.py": "3ef04a0667315b2bdc44b57d321a9f6e3ec41a2c98fc744804744f441df8308d",
+    "tests/unit/test_milai_m1_v18.py": "17c637353133ffcff95db19ec6f9190ccc0dfbf9f556e4a8b75ce203669ac15b",
+    "tests/unit/test_milai_odr.py": "ebef4881f13336f74f5bf729389bb598f99073a7d6e0aa97217267707097c7ab"
+  },
+  "evaluation_protocol_sha256": "acb8b1838b311726005df213261b0e89a42ac79a98c20ab005e414da99554148",
+  "model_visible_contract": {
+    "schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "answer": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "answer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "calls": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "const": "manage_memory"
+                      },
+                      "arguments": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "arguments"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "const": "search_memory"
+                      },
+                      "arguments": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "arguments"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "const": "record_holding_instruction"
+                      },
+                      "arguments": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "arguments"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "calls"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_holding_instruction\",\"description\":\"Record the approved holding instruction in this local simulated packing task. Returns the recorded arguments. This does not dispatch anything or update long-term memory.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"crate\":{\"type\":\"string\"},\"temperature_celsius\":{\"type\":\"integer\"}},\"required\":[\"crate\",\"temperature_celsius\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters.",
+    "arm_id": "a4_selective_rebase",
+    "tool_names": [
+      "manage_memory",
+      "search_memory",
+      "record_holding_instruction"
+    ]
+  },
+  "schema_and_authority_equal_sealed_A3": true,
+  "vllm_settings_changed": false,
+  "persistent_semantic_state": false,
+  "dependency_lock_sha256": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8"
+}

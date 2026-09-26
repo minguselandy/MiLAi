@@ -1,0 +1,45 @@
+{
+  "kind": "SER_V20_REVISION_DIAGNOSTIC",
+  "case_id": "current_conflict",
+  "user_id": "development:selective-adaptation",
+  "task_id": "pending-record:parcel Hazel-3",
+  "seed_memories": [
+    {
+      "name": "primary",
+      "content": "The saved dispatch instruction issued by depot Alpha for parcel Hazel-3 assigns destination warehouse East. No priority between depots has been established."
+    },
+    {
+      "name": "secondary",
+      "content": "The saved dispatch instruction issued by depot Beta for parcel Hazel-3 assigns destination warehouse West. No priority between depots has been established."
+    }
+  ],
+  "revision_updates": [],
+  "public_messages": [
+    "For item parcel Hazel-3, find the warehouse supported by the saved instructions. Tell me your recommendation and leave it pending my approval. Do not record anything or change the stored instructions yet.",
+    "I am still deciding. Tell me what warehouse you would use for parcel Hazel-3 if I approve, and keep it pending. If the saved instructions do not establish one, explain what is missing or conflicting. Do not record anything yet.",
+    "You may now call record_instruction once for parcel Hazel-3, using the current saved instruction. If the current instructions are missing or conflict, ask for clarification instead. Do not change long-term memory."
+  ],
+  "business_tool_schema": {
+    "type": "function",
+    "function": {
+      "name": "record_instruction",
+      "description": "Record the approved warehouse for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "warehouse": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "item",
+          "warehouse"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

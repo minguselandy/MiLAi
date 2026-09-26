@@ -1,0 +1,11 @@
+{
+  "kind": "SER_V20_DIAGNOSTIC_INPUT_FREEZE",
+  "status": "FROZEN_BEFORE_RUNS",
+  "case_id": "categorical_route",
+  "fixture_sha256": "fcd93c4a9e831cb20b9db9e6ab603d492782404f3cbf08706fd891dc0ddb97b5",
+  "public_messages": 3,
+  "offline_rubric_sha256": "190726ede3276ec830c11f546162541bc690bf761d20bbcf1809371caf73d405",
+  "rubric_read_by_runtime": false,
+  "benchmark_score": false,
+  "input_source": "Parameterized exposed development control"
+}

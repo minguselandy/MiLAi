@@ -12,7 +12,7 @@ import pytest
 pytest.importorskip("langmem")
 
 from langchain_core.embeddings import Embeddings
-from langchain_core.messages import ToolMessage
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.tools import tool
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.store.memory import InMemoryStore
@@ -31,6 +31,10 @@ from milai_lab.baselines.langmem_revision_store import (
     content_identity,
 )
 from milai_lab.methods.freshness_projection.controller import ProjectionController
+from milai_lab.methods.freshness_projection.lineage import (
+    DERIVED_WITHHELD,
+    project_derived_assistants,
+)
 from milai_lab.methods.freshness_projection.projection import (
     SOURCE_AUTHORITY,
     project_current_evidence,
@@ -191,6 +195,41 @@ def test_exact_refresh_deduplicates_and_keeps_uncertain_reads_quarantined() -> N
     assert failed.items[0]["current_body_delivered"] is False
 
 
+def test_lineage_uses_namespace_revision_and_response_id() -> None:
+    snapshot = [{"namespace": ["run", "user"], "memory_id": "same-id",
+                 "revision": 1, "ref": "memory:same-id@1", "body_ref": "body:old"}]
+    lineage = {"original_body_ref": content_identity("same text")[2],
+               "generating_request_id": "request-one",
+               "exact_snapshot_json": canonical_json(snapshot)}
+
+    class Sidecar:
+        own_revision = 1
+
+        def get_assistant_lineage(self, thread_id: str,
+                                  response_id: str) -> dict[str, Any] | None:
+            assert thread_id == "thread"
+            return lineage if response_id == "response-one" else None
+
+        def latest_revision(self, namespace: tuple[str, ...],
+                            memory_id: str) -> dict[str, Any] | None:
+            assert memory_id == "same-id"
+            return {"revision": 2 if namespace == ("run", "other") else
+                    self.own_revision, "tombstone": 0}
+
+    sidecar = Sidecar()
+    graph = [AIMessage(id="response-one", content="same text"),
+             AIMessage(id="response-two", content="same text")]
+    wire = [{"role": "assistant", "content": "same text"} for _ in graph]
+    current = project_derived_assistants(graph, wire, sidecar, "thread")  # type: ignore[arg-type]
+    assert current.messages == wire and not current.rebases
+    assert current.unknown_bindings[0]["response_id"] == "response-two"
+    sidecar.own_revision = 2
+    stale = project_derived_assistants(graph, wire, sidecar, "thread")  # type: ignore[arg-type]
+    assert stale.messages[0]["content"] == DERIVED_WITHHELD
+    assert stale.messages[1] == wire[1]
+    assert stale.rebases[0]["stale_refs"][0]["namespace"] == ["run", "user"]
+
+
 @pytest.mark.parametrize("arm", ["a2_quarantine", "a3_exact_refresh"])
 def test_mixed_projection_actual_material_and_completed_replay(
     tmp_path: Path, arm: str,
@@ -327,3 +366,98 @@ def test_mixed_projection_actual_material_and_completed_replay(
             assert after == (len(wires), len(business), len(sidecar.rows("tool_calls")))
     assert business == ["done"]
     sidecar.close()
+
+
+def test_rebase_binds_equal_text_to_response_identity_across_restart(tmp_path: Path) -> None:
+    sidecar_path = tmp_path / "sidecar.sqlite"
+    checkpoint_path = tmp_path / "checkpoint.sqlite"
+    arm = "a4_selective_rebase"
+    scope = FoundationScope("run", arm, "user", "episode")
+    inner = InMemoryStore(index={"dims": 2, "embed": FixedEmbeddings(),
+                                 "fields": ["content"]})
+    wires: list[dict[str, Any]] = []
+    events: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        wires.append(json.loads(request.read()))
+        action = ({"calls": [{"name": "search_memory", "arguments": {
+            "query": "old-4-body", "limit": 10}}]} if len(wires) == 2 else
+                  {"answer": "new conclusion"} if len(wires) == 4 else
+                  {"answer": "same-note"} if len(wires) in {1, 3} else
+                  {"answer": "done"})
+        return httpx.Response(200, json=_receipt(action, f"g{len(wires)}"))
+
+    def make_model(observer: ProvenanceObserver, store: ObservedStore,
+                   client: VLLMClient) -> VLLMChatModel:
+        def emit(event: dict[str, Any]) -> None:
+            events.append(event)
+            observer.capture_provider_event(event)
+
+        client.emit = emit
+        return VLLMChatModel(client=client, observer=observer,
+                             projection=ProjectionController(
+                                 observer, emit, arm=arm, store=store, stage="v20"))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock"),
+                    transport=httpx.MockTransport(respond)) as client:
+        first_sidecar = RevisionSidecar(sidecar_path)
+        first_observer = ProvenanceObserver(first_sidecar, "run", arm)
+        first_store = ObservedStore(inner, first_observer)
+        model = make_model(first_observer, first_store, client)
+        seed = _fixture_memory_effect(
+            "seed:x", {"action": "create", "content": "old-4-body"},
+            scope, first_store, first_observer, tmp_path, Stub(),  # type: ignore[arg-type]
+        )
+        with SqliteSaver.from_conn_string(str(checkpoint_path)) as saver:
+            agent = build_agent(model, first_store, saver, [], observer=first_observer)
+            invoke_public_message(agent, model, scope, "State a note.")
+            invoke_public_message(agent, model, scope, "Find memory x.")
+            assert len(wires) == 3
+            assert len(first_sidecar.rows("assistant_lineage")) == 2
+        _fixture_memory_effect(
+            "update:x", {"action": "update", "id": seed["memory_id"],
+                         "content": "new-8-body"},
+            scope, first_store, first_observer, tmp_path, Stub(),  # type: ignore[arg-type]
+        )
+        first_sidecar.close()
+
+        sidecar = RevisionSidecar(sidecar_path)
+        observer = ProvenanceObserver(sidecar, "run", arm)
+        store = ObservedStore(inner, observer)
+        restarted_model = make_model(observer, store, client)
+        with SqliteSaver.from_conn_string(str(checkpoint_path)) as saver:
+            agent = build_agent(restarted_model, store, saver, [], observer=observer)
+            invoke_public_message(agent, restarted_model, scope, "Proceed with current x.")
+            third_request = wires[3]["messages"]
+            assistant_texts = [item["content"] for item in third_request
+                               if item["role"] == "assistant"]
+            assert assistant_texts.count("same-note") == 1
+            assert assistant_texts.count(DERIVED_WITHHELD) == 1
+            assert any('"search_memory"' in content for content in assistant_texts)
+            tool_contents = [item["content"] for item in third_request
+                             if item["role"] == "tool"]
+            assert all("old-4-body" not in content for content in tool_contents)
+            assert any("new-8-body" in content for content in tool_contents)
+            rebases = [event for event in events
+                       if event.get("event") == "derived_output_rebase"]
+            assert len(rebases) == 1
+            assert rebases[0]["response_id"] == "g3"
+            assert rebases[0]["generating_request_id"] == next(
+                row["generating_request_id"] for row in sidecar.rows("assistant_lineage")
+                if row["response_id"] == "g3")
+            assert rebases[0]["stale_refs"][0]["revision"] == 1
+            assert rebases[0]["current_refs"][0]["revision"] == 2
+            original_assistants = [message for message in agent.get_state(scope.config()).values[
+                "messages"] if getattr(message, "id", None) in {"g1", "g3"}]
+            assert [message.content for message in original_assistants] == [
+                "same-note", "same-note"]
+            invoke_public_message(agent, restarted_model, scope, "Continue.")
+            assert "new conclusion" in [item["content"] for item in wires[4]["messages"]
+                                      if item["role"] == "assistant"]
+            g4 = next(row for row in sidecar.rows("assistant_lineage")
+                      if row["response_id"] == "g4")
+            assert json.loads(g4["exact_snapshot_json"])[0]["revision"] == 2
+            before = len(wires)
+            resume_public_message(agent, restarted_model, scope)
+            assert len(wires) == before
+        sidecar.close()

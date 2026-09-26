@@ -1,0 +1,1164 @@
+{
+  "kind": "MILAI_SER_V20_P3_RESULTS",
+  "status": "PASS_ADVANCE_P4",
+  "source_mapping_sha256": "a4a0036bc86cb145adcb6783fcac0ca2fd9ebe54165e95741e5aec53ae838690",
+  "lock_sha256": "130b3b8bb99ff95fc24d10be2ec87608afff35d510eeb8f6eccc483f1ff970ef",
+  "freeze_sha256": "b93cf9bd6052ff9e2851b308970d5dd9522cc014012c4522699383af8c09f61b",
+  "cases": {
+    "changed": {
+      "status": "PASS",
+      "public_messages_completed": 3,
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_holding_instruction",
+          "args": {
+            "crate": "Lumen-42",
+            "temperature_celsius": 8
+          },
+          "generation_id": "chatcmpl-9e5584044ec6a2c8"
+        }
+      ],
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "host_memory_writes": 0,
+      "lineage_records": 3,
+      "mechanical_rebase_precision": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall": [
+        3,
+        3
+      ],
+      "original_checkpoint_preserved": true,
+      "tool_call_history_preserved": true,
+      "unknown_lineage_events": 0,
+      "irrelevant_Y_reads": 0,
+      "irrelevant_snapshot_demotions": 0,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4309,
+        "output_tokens": 136,
+        "generation_tokens": 4445,
+        "embedding_requests": 3,
+        "embedding_tokens": 86,
+        "provider_wall_seconds": 2.3820781712420285,
+        "projection_cpu_ns": 5972188,
+        "projection_wall_ns": 7242751,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 4170745,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "1471314fe1e136133cc2d26a724bfb32bf143cb45b56278cf7712f8b45444d8d",
+          "response_id": "chatcmpl-8515a8f1fea1c14e",
+          "public_index": 0,
+          "request_index": 1,
+          "current_body_acquired": false,
+          "rebases": [],
+          "exact_snapshot": [],
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction crate Lumen-42 holding temperature"
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "de6b10f44fa9be10b000011f505fcaea6c618a9994c32787323469b25cb79994"
+        },
+        {
+          "request_id": "3a856bf7c0f8432adac8b99c34d86090e874b8cd500e5643a9f554b3d5b9575d",
+          "response_id": "chatcmpl-a6334f3b663f1326",
+          "public_index": 0,
+          "request_index": 2,
+          "current_body_acquired": false,
+          "rebases": [],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-changed-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+              "revision": 1,
+              "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@1",
+              "body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "source_tool_call": "chatcmpl-8515a8f1fea1c14e:tool:0",
+              "source_search_id": "4ea515341d033390185e96b0e282f993f09285b918fa4a2988b5d5f71d0dc705:1:search:1",
+              "delivery_source": "search_memory"
+            }
+          ],
+          "action": {
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 4 degrees Celsius."
+          },
+          "request_object_sha256": "f2cd19dd81e2d3a6e57356c3e130aa1ffbf9873362b5b337c58a7e95e4a90719"
+        },
+        {
+          "request_id": "932d64ad2e08b77f4898c22f4d6d972445e50f72dda8ba8c20f2355a10c4ed9f",
+          "response_id": "chatcmpl-9741e716dfa99b58",
+          "public_index": 1,
+          "request_index": 1,
+          "current_body_acquired": true,
+          "rebases": [
+            {
+              "stage": "ser-v20-p3-a4-changed-r1",
+              "event": "derived_output_rebase",
+              "status": "delivered",
+              "request_id": "932d64ad2e08b77f4898c22f4d6d972445e50f72dda8ba8c20f2355a10c4ed9f",
+              "request_object_sha256": "4cfc645c626dae9e8d1ec614736060d9c95c01c81c5ce64bca4ff94e50ca1137",
+              "public_message_index": 1,
+              "provider_message_index": 4,
+              "message_index": 4,
+              "response_id": "chatcmpl-a6334f3b663f1326",
+              "generating_request_id": "3a856bf7c0f8432adac8b99c34d86090e874b8cd500e5643a9f554b3d5b9575d",
+              "original_body_kind": "string",
+              "original_body_hash": "88050fad6e0e1fce58e8b7118db851576203b7b1f8e702ff2df80204dd86e9c8",
+              "original_body_ref": "body:string:88050fad6e0e1fce58e8b7118db851576203b7b1f8e702ff2df80204dd86e9c8",
+              "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "stale_refs": [
+                {
+                  "body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+                  "delivery_source": "search_memory",
+                  "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-changed-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@1",
+                  "revision": 1,
+                  "source_search_id": "4ea515341d033390185e96b0e282f993f09285b918fa4a2988b5d5f71d0dc705:1:search:1",
+                  "source_tool_call": "chatcmpl-8515a8f1fea1c14e:tool:0",
+                  "status": "SUPERSEDED"
+                }
+              ],
+              "current_refs": [
+                {
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-changed-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+                  "revision": 2,
+                  "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@2",
+                  "status": "CURRENT"
+                }
+              ],
+              "unknown_refs": [],
+              "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+            }
+          ],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-changed-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+              "revision": 2,
+              "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@2",
+              "body_ref": "body:string:382396d1a54f93cea84cbf5c4ced102f5c13e4a4de0d0464bf139c3514ea9d0f",
+              "source_tool_call": "chatcmpl-8515a8f1fea1c14e:tool:0",
+              "source_search_id": "4ea515341d033390185e96b0e282f993f09285b918fa4a2988b5d5f71d0dc705:1:search:1",
+              "delivery_source": "public Store.get"
+            }
+          ],
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is 8 degrees Celsius."
+          },
+          "request_object_sha256": "4cfc645c626dae9e8d1ec614736060d9c95c01c81c5ce64bca4ff94e50ca1137"
+        },
+        {
+          "request_id": "bef8470d8a740fddc88465ef2bdfe1211c33c9a70db7c5bd4ff945f17c58df96",
+          "response_id": "chatcmpl-9e5584044ec6a2c8",
+          "public_index": 2,
+          "request_index": 1,
+          "current_body_acquired": true,
+          "rebases": [
+            {
+              "stage": "ser-v20-p3-a4-changed-r1",
+              "event": "derived_output_rebase",
+              "status": "delivered",
+              "request_id": "bef8470d8a740fddc88465ef2bdfe1211c33c9a70db7c5bd4ff945f17c58df96",
+              "request_object_sha256": "9569395e1af08324b562a677864a7c623bffcde4d62d178a284daa9ccd10a8b9",
+              "public_message_index": 2,
+              "provider_message_index": 4,
+              "message_index": 4,
+              "response_id": "chatcmpl-a6334f3b663f1326",
+              "generating_request_id": "3a856bf7c0f8432adac8b99c34d86090e874b8cd500e5643a9f554b3d5b9575d",
+              "original_body_kind": "string",
+              "original_body_hash": "88050fad6e0e1fce58e8b7118db851576203b7b1f8e702ff2df80204dd86e9c8",
+              "original_body_ref": "body:string:88050fad6e0e1fce58e8b7118db851576203b7b1f8e702ff2df80204dd86e9c8",
+              "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "stale_refs": [
+                {
+                  "body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+                  "delivery_source": "search_memory",
+                  "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-changed-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@1",
+                  "revision": 1,
+                  "source_search_id": "4ea515341d033390185e96b0e282f993f09285b918fa4a2988b5d5f71d0dc705:1:search:1",
+                  "source_tool_call": "chatcmpl-8515a8f1fea1c14e:tool:0",
+                  "status": "SUPERSEDED"
+                }
+              ],
+              "current_refs": [
+                {
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-changed-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+                  "revision": 2,
+                  "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@2",
+                  "status": "CURRENT"
+                }
+              ],
+              "unknown_refs": [],
+              "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+            }
+          ],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-changed-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+              "revision": 2,
+              "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@2",
+              "body_ref": "body:string:382396d1a54f93cea84cbf5c4ced102f5c13e4a4de0d0464bf139c3514ea9d0f",
+              "source_tool_call": "chatcmpl-8515a8f1fea1c14e:tool:0",
+              "source_search_id": "4ea515341d033390185e96b0e282f993f09285b918fa4a2988b5d5f71d0dc705:1:search:1",
+              "delivery_source": "public Store.get"
+            }
+          ],
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "9569395e1af08324b562a677864a7c623bffcde4d62d178a284daa9ccd10a8b9"
+        },
+        {
+          "request_id": "a48584b707e4e2ce3cc3ec08671532d9c65f84985390a27b5257d66601721ad6",
+          "response_id": "chatcmpl-bec62378b49f380c",
+          "public_index": 2,
+          "request_index": 2,
+          "current_body_acquired": true,
+          "rebases": [
+            {
+              "stage": "ser-v20-p3-a4-changed-r1",
+              "event": "derived_output_rebase",
+              "status": "delivered",
+              "request_id": "a48584b707e4e2ce3cc3ec08671532d9c65f84985390a27b5257d66601721ad6",
+              "request_object_sha256": "532759bacdf31d8db538e4ffcda039f88c13fd457b37a1c22157151617a35821",
+              "public_message_index": 2,
+              "provider_message_index": 4,
+              "message_index": 4,
+              "response_id": "chatcmpl-a6334f3b663f1326",
+              "generating_request_id": "3a856bf7c0f8432adac8b99c34d86090e874b8cd500e5643a9f554b3d5b9575d",
+              "original_body_kind": "string",
+              "original_body_hash": "88050fad6e0e1fce58e8b7118db851576203b7b1f8e702ff2df80204dd86e9c8",
+              "original_body_ref": "body:string:88050fad6e0e1fce58e8b7118db851576203b7b1f8e702ff2df80204dd86e9c8",
+              "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "stale_refs": [
+                {
+                  "body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+                  "delivery_source": "search_memory",
+                  "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-changed-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@1",
+                  "revision": 1,
+                  "source_search_id": "4ea515341d033390185e96b0e282f993f09285b918fa4a2988b5d5f71d0dc705:1:search:1",
+                  "source_tool_call": "chatcmpl-8515a8f1fea1c14e:tool:0",
+                  "status": "SUPERSEDED"
+                }
+              ],
+              "current_refs": [
+                {
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-changed-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+                  "revision": 2,
+                  "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@2",
+                  "status": "CURRENT"
+                }
+              ],
+              "unknown_refs": [],
+              "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+            }
+          ],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-changed-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "9c113d3d-2b56-4cb5-9e88-d4684182f5b6",
+              "revision": 2,
+              "ref": "memory:9c113d3d-2b56-4cb5-9e88-d4684182f5b6@2",
+              "body_ref": "body:string:382396d1a54f93cea84cbf5c4ced102f5c13e4a4de0d0464bf139c3514ea9d0f",
+              "source_tool_call": "chatcmpl-8515a8f1fea1c14e:tool:0",
+              "source_search_id": "4ea515341d033390185e96b0e282f993f09285b918fa4a2988b5d5f71d0dc705:1:search:1",
+              "delivery_source": "public Store.get"
+            }
+          ],
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 at 8 degrees Celsius has been recorded."
+          },
+          "request_object_sha256": "532759bacdf31d8db538e4ffcda039f88c13fd457b37a1c22157151617a35821"
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "ee6d92fadac992f8aa13bf9bba3b3bdfda2a1f16efea5bb91499b315a7b0f046",
+        "instrumentation.sqlite": "4d6ee826b74a6395be5dff614d6399fa82d9a55324e28deb63837b1a39030da6",
+        "checkpoints.sqlite": "5ae624b74270cc2a8e1ef10aac210182514de0a2029e021344ecf821a05b2ba6",
+        "run/result.json": "ce749ace446ade896e887c5679d61855695df6eb4608fb7a449e427a378fc02b",
+        "run/fixture-effects.json": "27e12e312180cf7bd9fcc67ce4500f4749c2fc8a34a521b59a146fbfc0b3d6f6",
+        "prepared.json": "71a5d6f7f798c6e8d7c3ccf65fcde7efa30798153794a1ad87edff93995bb813"
+      }
+    },
+    "retained": {
+      "status": "PASS",
+      "public_messages_completed": 3,
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_holding_instruction",
+          "args": {
+            "crate": "Lumen-42",
+            "temperature_celsius": 8
+          },
+          "generation_id": "chatcmpl-8b647f1b3dcac531"
+        }
+      ],
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "host_memory_writes": 0,
+      "lineage_records": 3,
+      "mechanical_rebase_precision": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall": [
+        3,
+        3
+      ],
+      "original_checkpoint_preserved": true,
+      "tool_call_history_preserved": true,
+      "unknown_lineage_events": 0,
+      "irrelevant_Y_reads": 0,
+      "irrelevant_snapshot_demotions": 0,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4341,
+        "output_tokens": 140,
+        "generation_tokens": 4481,
+        "embedding_requests": 3,
+        "embedding_tokens": 105,
+        "provider_wall_seconds": 1.7938951659016311,
+        "projection_cpu_ns": 5771526,
+        "projection_wall_ns": 9250422,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 4192580,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "23253795c3059cb696169f47babaa989cd616706d848b0e7c9e25bd05214d830",
+          "response_id": "chatcmpl-80c531e277ebdcc6",
+          "public_index": 0,
+          "request_index": 1,
+          "current_body_acquired": false,
+          "rebases": [],
+          "exact_snapshot": [],
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction crate Lumen-42 holding temperature"
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "de6b10f44fa9be10b000011f505fcaea6c618a9994c32787323469b25cb79994"
+        },
+        {
+          "request_id": "690a017d0900a1eb87d7ef7f41cb2bb49f8b57d43b10506098dd37c31ec70166",
+          "response_id": "chatcmpl-8a6233feaaad839d",
+          "public_index": 0,
+          "request_index": 2,
+          "current_body_acquired": false,
+          "rebases": [],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-retained-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+              "revision": 1,
+              "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@1",
+              "body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "source_tool_call": "chatcmpl-80c531e277ebdcc6:tool:0",
+              "source_search_id": "a0b281e9a65bb7e7f7ddab42052d81b21b96af8328689dd6ead27cfc2d4ab2c5:1:search:1",
+              "delivery_source": "search_memory"
+            }
+          ],
+          "action": {
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 8 degrees Celsius."
+          },
+          "request_object_sha256": "85100664eca4b3a71c08158c7f3a299a26f711dce0952f89cc0ac750d83293dd"
+        },
+        {
+          "request_id": "4e22ac016de9bf5c07d0c968dd3bf97cfb4bae519b43bc772949c26683ba1cd3",
+          "response_id": "chatcmpl-85403b9fb28f3d3f",
+          "public_index": 1,
+          "request_index": 1,
+          "current_body_acquired": true,
+          "rebases": [
+            {
+              "stage": "ser-v20-p3-a4-retained-r1",
+              "event": "derived_output_rebase",
+              "status": "delivered",
+              "request_id": "4e22ac016de9bf5c07d0c968dd3bf97cfb4bae519b43bc772949c26683ba1cd3",
+              "request_object_sha256": "238e6c08e19e341bf16ffc7ae0b8ceb87e868fbacaa483628c468b7e1745dae9",
+              "public_message_index": 1,
+              "provider_message_index": 4,
+              "message_index": 4,
+              "response_id": "chatcmpl-8a6233feaaad839d",
+              "generating_request_id": "690a017d0900a1eb87d7ef7f41cb2bb49f8b57d43b10506098dd37c31ec70166",
+              "original_body_kind": "string",
+              "original_body_hash": "0a388234d1a0e01b4ee7e9dccbf1890e17a8a482c433554369595929b191703f",
+              "original_body_ref": "body:string:0a388234d1a0e01b4ee7e9dccbf1890e17a8a482c433554369595929b191703f",
+              "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "stale_refs": [
+                {
+                  "body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+                  "delivery_source": "search_memory",
+                  "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-retained-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@1",
+                  "revision": 1,
+                  "source_search_id": "a0b281e9a65bb7e7f7ddab42052d81b21b96af8328689dd6ead27cfc2d4ab2c5:1:search:1",
+                  "source_tool_call": "chatcmpl-80c531e277ebdcc6:tool:0",
+                  "status": "SUPERSEDED"
+                }
+              ],
+              "current_refs": [
+                {
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-retained-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+                  "revision": 2,
+                  "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@2",
+                  "status": "CURRENT"
+                }
+              ],
+              "unknown_refs": [],
+              "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+            }
+          ],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-retained-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+              "revision": 2,
+              "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@2",
+              "body_ref": "body:string:cfdff6a33858a7f12b09c8d04c18bc4ea38855b456bc1060ece5459e1e6af8cd",
+              "source_tool_call": "chatcmpl-80c531e277ebdcc6:tool:0",
+              "source_search_id": "a0b281e9a65bb7e7f7ddab42052d81b21b96af8328689dd6ead27cfc2d4ab2c5:1:search:1",
+              "delivery_source": "public Store.get"
+            }
+          ],
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is to keep it at 8 degrees Celsius."
+          },
+          "request_object_sha256": "238e6c08e19e341bf16ffc7ae0b8ceb87e868fbacaa483628c468b7e1745dae9"
+        },
+        {
+          "request_id": "27aa10f85a74131a2d652552a96b64278f7423c4ff6f30df1ba4f8aa35371c18",
+          "response_id": "chatcmpl-8b647f1b3dcac531",
+          "public_index": 2,
+          "request_index": 1,
+          "current_body_acquired": true,
+          "rebases": [
+            {
+              "stage": "ser-v20-p3-a4-retained-r1",
+              "event": "derived_output_rebase",
+              "status": "delivered",
+              "request_id": "27aa10f85a74131a2d652552a96b64278f7423c4ff6f30df1ba4f8aa35371c18",
+              "request_object_sha256": "a9fd824232177631aaff073efdd89307227c33263ec44866619d2d454d646315",
+              "public_message_index": 2,
+              "provider_message_index": 4,
+              "message_index": 4,
+              "response_id": "chatcmpl-8a6233feaaad839d",
+              "generating_request_id": "690a017d0900a1eb87d7ef7f41cb2bb49f8b57d43b10506098dd37c31ec70166",
+              "original_body_kind": "string",
+              "original_body_hash": "0a388234d1a0e01b4ee7e9dccbf1890e17a8a482c433554369595929b191703f",
+              "original_body_ref": "body:string:0a388234d1a0e01b4ee7e9dccbf1890e17a8a482c433554369595929b191703f",
+              "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "stale_refs": [
+                {
+                  "body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+                  "delivery_source": "search_memory",
+                  "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-retained-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@1",
+                  "revision": 1,
+                  "source_search_id": "a0b281e9a65bb7e7f7ddab42052d81b21b96af8328689dd6ead27cfc2d4ab2c5:1:search:1",
+                  "source_tool_call": "chatcmpl-80c531e277ebdcc6:tool:0",
+                  "status": "SUPERSEDED"
+                }
+              ],
+              "current_refs": [
+                {
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-retained-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+                  "revision": 2,
+                  "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@2",
+                  "status": "CURRENT"
+                }
+              ],
+              "unknown_refs": [],
+              "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+            }
+          ],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-retained-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+              "revision": 2,
+              "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@2",
+              "body_ref": "body:string:cfdff6a33858a7f12b09c8d04c18bc4ea38855b456bc1060ece5459e1e6af8cd",
+              "source_tool_call": "chatcmpl-80c531e277ebdcc6:tool:0",
+              "source_search_id": "a0b281e9a65bb7e7f7ddab42052d81b21b96af8328689dd6ead27cfc2d4ab2c5:1:search:1",
+              "delivery_source": "public Store.get"
+            }
+          ],
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "a9fd824232177631aaff073efdd89307227c33263ec44866619d2d454d646315"
+        },
+        {
+          "request_id": "85aad1c80b508739913ea58daaa36bc0b2e1cacd11e36fda4dbb9b1aeb69162d",
+          "response_id": "chatcmpl-af21ec40960a28a8",
+          "public_index": 2,
+          "request_index": 2,
+          "current_body_acquired": true,
+          "rebases": [
+            {
+              "stage": "ser-v20-p3-a4-retained-r1",
+              "event": "derived_output_rebase",
+              "status": "delivered",
+              "request_id": "85aad1c80b508739913ea58daaa36bc0b2e1cacd11e36fda4dbb9b1aeb69162d",
+              "request_object_sha256": "5b70281e9747a8a75359612e4866dc2974582d616036b8b3bd24e3e1be48b12b",
+              "public_message_index": 2,
+              "provider_message_index": 4,
+              "message_index": 4,
+              "response_id": "chatcmpl-8a6233feaaad839d",
+              "generating_request_id": "690a017d0900a1eb87d7ef7f41cb2bb49f8b57d43b10506098dd37c31ec70166",
+              "original_body_kind": "string",
+              "original_body_hash": "0a388234d1a0e01b4ee7e9dccbf1890e17a8a482c433554369595929b191703f",
+              "original_body_ref": "body:string:0a388234d1a0e01b4ee7e9dccbf1890e17a8a482c433554369595929b191703f",
+              "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "stale_refs": [
+                {
+                  "body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+                  "delivery_source": "search_memory",
+                  "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-retained-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@1",
+                  "revision": 1,
+                  "source_search_id": "a0b281e9a65bb7e7f7ddab42052d81b21b96af8328689dd6ead27cfc2d4ab2c5:1:search:1",
+                  "source_tool_call": "chatcmpl-80c531e277ebdcc6:tool:0",
+                  "status": "SUPERSEDED"
+                }
+              ],
+              "current_refs": [
+                {
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-retained-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+                  "revision": 2,
+                  "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@2",
+                  "status": "CURRENT"
+                }
+              ],
+              "unknown_refs": [],
+              "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+            }
+          ],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-retained-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "8938d748-3fbd-4302-bf63-97b07332791f",
+              "revision": 2,
+              "ref": "memory:8938d748-3fbd-4302-bf63-97b07332791f@2",
+              "body_ref": "body:string:cfdff6a33858a7f12b09c8d04c18bc4ea38855b456bc1060ece5459e1e6af8cd",
+              "source_tool_call": "chatcmpl-80c531e277ebdcc6:tool:0",
+              "source_search_id": "a0b281e9a65bb7e7f7ddab42052d81b21b96af8328689dd6ead27cfc2d4ab2c5:1:search:1",
+              "delivery_source": "public Store.get"
+            }
+          ],
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 has been recorded at 8 degrees Celsius."
+          },
+          "request_object_sha256": "5b70281e9747a8a75359612e4866dc2974582d616036b8b3bd24e3e1be48b12b"
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "90b37a9977512ef80917f8536e93383075f3eadc6a395a37736718bb52e81aee",
+        "instrumentation.sqlite": "9f077d93e363ff39797d05902bf00ce1029f8bfb1d08f181eb5a7c2f71ba71e0",
+        "checkpoints.sqlite": "f4ca488ba4ddb0730ed65ca92f325b4e4419a3196a7c4f2a27fb3ba1ff9028c5",
+        "run/result.json": "b4ccb7d66946d9fd830d6c213bb55b9b095d0eac19e494a3379cdc32fda565c3",
+        "run/fixture-effects.json": "9966e787edbd5b187736ea0c61aedb81ba1dbc16020df325d58c7ae1cbe99795",
+        "prepared.json": "b3f5fc886d7c46829d8134abbfce522618b26fd92daf93d050aafd49ef24e6ae"
+      }
+    },
+    "irrelevant": {
+      "status": "PASS",
+      "public_messages_completed": 3,
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_holding_instruction",
+          "args": {
+            "crate": "Lumen-42",
+            "temperature_celsius": 8
+          },
+          "generation_id": "chatcmpl-86b21e1371dab333"
+        }
+      ],
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "host_memory_writes": 0,
+      "lineage_records": 3,
+      "mechanical_rebase_precision": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall": [
+        3,
+        3
+      ],
+      "original_checkpoint_preserved": true,
+      "tool_call_history_preserved": true,
+      "unknown_lineage_events": 0,
+      "irrelevant_Y_reads": 3,
+      "irrelevant_snapshot_demotions": 3,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 5019,
+        "output_tokens": 145,
+        "generation_tokens": 5164,
+        "embedding_requests": 4,
+        "embedding_tokens": 83,
+        "provider_wall_seconds": 1.8930383170954883,
+        "projection_cpu_ns": 5721840,
+        "projection_wall_ns": 10180506,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 3331677,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "9e3301f247745acd37e83026227e8b34af6d5bbf0c1a2634d0d6de956a468ad8",
+          "response_id": "chatcmpl-9d5fbe9627d5918d",
+          "public_index": 0,
+          "request_index": 1,
+          "current_body_acquired": false,
+          "rebases": [],
+          "exact_snapshot": [],
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction crate Lumen-42 holding temperature"
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "de6b10f44fa9be10b000011f505fcaea6c618a9994c32787323469b25cb79994"
+        },
+        {
+          "request_id": "b6169394cfecbf38d7fd0980d30107c20f0bea187a8b27189fb7e6768c10264b",
+          "response_id": "chatcmpl-957d505bce2c5fa5",
+          "public_index": 0,
+          "request_index": 2,
+          "current_body_acquired": false,
+          "rebases": [],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-irrelevant-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "5bbc867b-7a4e-46de-a600-e7731ee66e99",
+              "revision": 1,
+              "ref": "memory:5bbc867b-7a4e-46de-a600-e7731ee66e99@1",
+              "body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+              "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+              "delivery_source": "search_memory"
+            },
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-irrelevant-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+              "revision": 1,
+              "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@1",
+              "body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+              "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+              "delivery_source": "search_memory"
+            }
+          ],
+          "action": {
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 8 degrees Celsius. This recommendation is kept pending your dispatch decision."
+          },
+          "request_object_sha256": "e1b0a5af924cf212c702624c68fd45ae337eafe1213fea8551bcd390a66fba36"
+        },
+        {
+          "request_id": "05c5f7692cd63d6516c9d1a5975e39f46dbe601ecd95589713095259edd5a03d",
+          "response_id": "chatcmpl-99ac0c312decd224",
+          "public_index": 1,
+          "request_index": 1,
+          "current_body_acquired": true,
+          "rebases": [
+            {
+              "stage": "ser-v20-p3-a4-irrelevant-r1",
+              "event": "derived_output_rebase",
+              "status": "delivered",
+              "request_id": "05c5f7692cd63d6516c9d1a5975e39f46dbe601ecd95589713095259edd5a03d",
+              "request_object_sha256": "9542958a8fed032edb358c78d5ebd223903c001df22df1fadb58b1ee6260f5d9",
+              "public_message_index": 1,
+              "provider_message_index": 4,
+              "message_index": 4,
+              "response_id": "chatcmpl-957d505bce2c5fa5",
+              "generating_request_id": "b6169394cfecbf38d7fd0980d30107c20f0bea187a8b27189fb7e6768c10264b",
+              "original_body_kind": "string",
+              "original_body_hash": "f1501654da1ddeb097baf0263872f907c4b8f221d29f44deb3fadb4e154f26dc",
+              "original_body_ref": "body:string:f1501654da1ddeb097baf0263872f907c4b8f221d29f44deb3fadb4e154f26dc",
+              "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "stale_refs": [
+                {
+                  "body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+                  "delivery_source": "search_memory",
+                  "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-irrelevant-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@1",
+                  "revision": 1,
+                  "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+                  "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+                  "status": "SUPERSEDED"
+                }
+              ],
+              "current_refs": [
+                {
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-irrelevant-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+                  "revision": 2,
+                  "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@2",
+                  "status": "CURRENT"
+                }
+              ],
+              "unknown_refs": [],
+              "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+            }
+          ],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-irrelevant-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "5bbc867b-7a4e-46de-a600-e7731ee66e99",
+              "revision": 1,
+              "ref": "memory:5bbc867b-7a4e-46de-a600-e7731ee66e99@1",
+              "body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+              "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+              "delivery_source": "search_memory"
+            },
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-irrelevant-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+              "revision": 2,
+              "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@2",
+              "body_ref": "body:string:6f6bee342a58a7707db4d0f9494f0556f7c56b7eedc27b595c820928fe19a481",
+              "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+              "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+              "delivery_source": "public Store.get"
+            }
+          ],
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is 8 degrees Celsius."
+          },
+          "request_object_sha256": "9542958a8fed032edb358c78d5ebd223903c001df22df1fadb58b1ee6260f5d9"
+        },
+        {
+          "request_id": "e06f1b8fbc4b7dac5a5cefa22b200fae403a023f18f8f13082665257668159a5",
+          "response_id": "chatcmpl-86b21e1371dab333",
+          "public_index": 2,
+          "request_index": 1,
+          "current_body_acquired": true,
+          "rebases": [
+            {
+              "stage": "ser-v20-p3-a4-irrelevant-r1",
+              "event": "derived_output_rebase",
+              "status": "delivered",
+              "request_id": "e06f1b8fbc4b7dac5a5cefa22b200fae403a023f18f8f13082665257668159a5",
+              "request_object_sha256": "2a09a0b8321ae73be3c70824b28d178ba96ba8fafcc610f8f91b43c5593d72f9",
+              "public_message_index": 2,
+              "provider_message_index": 4,
+              "message_index": 4,
+              "response_id": "chatcmpl-957d505bce2c5fa5",
+              "generating_request_id": "b6169394cfecbf38d7fd0980d30107c20f0bea187a8b27189fb7e6768c10264b",
+              "original_body_kind": "string",
+              "original_body_hash": "f1501654da1ddeb097baf0263872f907c4b8f221d29f44deb3fadb4e154f26dc",
+              "original_body_ref": "body:string:f1501654da1ddeb097baf0263872f907c4b8f221d29f44deb3fadb4e154f26dc",
+              "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "stale_refs": [
+                {
+                  "body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+                  "delivery_source": "search_memory",
+                  "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-irrelevant-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@1",
+                  "revision": 1,
+                  "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+                  "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+                  "status": "SUPERSEDED"
+                }
+              ],
+              "current_refs": [
+                {
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-irrelevant-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+                  "revision": 2,
+                  "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@2",
+                  "status": "CURRENT"
+                }
+              ],
+              "unknown_refs": [],
+              "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+            }
+          ],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-irrelevant-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "5bbc867b-7a4e-46de-a600-e7731ee66e99",
+              "revision": 1,
+              "ref": "memory:5bbc867b-7a4e-46de-a600-e7731ee66e99@1",
+              "body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+              "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+              "delivery_source": "search_memory"
+            },
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-irrelevant-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+              "revision": 2,
+              "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@2",
+              "body_ref": "body:string:6f6bee342a58a7707db4d0f9494f0556f7c56b7eedc27b595c820928fe19a481",
+              "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+              "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+              "delivery_source": "public Store.get"
+            }
+          ],
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "2a09a0b8321ae73be3c70824b28d178ba96ba8fafcc610f8f91b43c5593d72f9"
+        },
+        {
+          "request_id": "da6c4f1bcb79601932b0eed42e1c752cebdb53595cd24a8f67c540cc50c3900c",
+          "response_id": "chatcmpl-80efc9bb7e4a95e3",
+          "public_index": 2,
+          "request_index": 2,
+          "current_body_acquired": true,
+          "rebases": [
+            {
+              "stage": "ser-v20-p3-a4-irrelevant-r1",
+              "event": "derived_output_rebase",
+              "status": "delivered",
+              "request_id": "da6c4f1bcb79601932b0eed42e1c752cebdb53595cd24a8f67c540cc50c3900c",
+              "request_object_sha256": "fb98437c91d7ab4534ce143d96e1e530d56f09887a6cc14ee970e1f44556dfeb",
+              "public_message_index": 2,
+              "provider_message_index": 4,
+              "message_index": 4,
+              "response_id": "chatcmpl-957d505bce2c5fa5",
+              "generating_request_id": "b6169394cfecbf38d7fd0980d30107c20f0bea187a8b27189fb7e6768c10264b",
+              "original_body_kind": "string",
+              "original_body_hash": "f1501654da1ddeb097baf0263872f907c4b8f221d29f44deb3fadb4e154f26dc",
+              "original_body_ref": "body:string:f1501654da1ddeb097baf0263872f907c4b8f221d29f44deb3fadb4e154f26dc",
+              "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+              "stale_refs": [
+                {
+                  "body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+                  "delivery_source": "search_memory",
+                  "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-irrelevant-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@1",
+                  "revision": 1,
+                  "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+                  "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+                  "status": "SUPERSEDED"
+                }
+              ],
+              "current_refs": [
+                {
+                  "namespace": [
+                    "langmem",
+                    "ser-v20-p3-a4-irrelevant-r1",
+                    "a4_selective_rebase",
+                    "mechanism:holding-instruction"
+                  ],
+                  "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+                  "revision": 2,
+                  "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@2",
+                  "status": "CURRENT"
+                }
+              ],
+              "unknown_refs": [],
+              "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+            }
+          ],
+          "exact_snapshot": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-irrelevant-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "5bbc867b-7a4e-46de-a600-e7731ee66e99",
+              "revision": 1,
+              "ref": "memory:5bbc867b-7a4e-46de-a600-e7731ee66e99@1",
+              "body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+              "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+              "delivery_source": "search_memory"
+            },
+            {
+              "namespace": [
+                "langmem",
+                "ser-v20-p3-a4-irrelevant-r1",
+                "a4_selective_rebase",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "36e94cfb-3963-4391-8976-1d6f6fab2e22",
+              "revision": 2,
+              "ref": "memory:36e94cfb-3963-4391-8976-1d6f6fab2e22@2",
+              "body_ref": "body:string:6f6bee342a58a7707db4d0f9494f0556f7c56b7eedc27b595c820928fe19a481",
+              "source_tool_call": "chatcmpl-9d5fbe9627d5918d:tool:0",
+              "source_search_id": "b0fe09c98f305812c2314e97c2c017054ec7ee2d6254ac2ec8f2b0cc19c300c7:1:search:1",
+              "delivery_source": "public Store.get"
+            }
+          ],
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 at 8 degrees Celsius has been recorded."
+          },
+          "request_object_sha256": "fb98437c91d7ab4534ce143d96e1e530d56f09887a6cc14ee970e1f44556dfeb"
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "072322f78e3fdcc10576f4ed2341227861820eae103dd94a8a38e9ca354daaf7",
+        "instrumentation.sqlite": "1ed803194cf4eb350bc0eb906bdc8bc72cb4dcbca2c736a02b655044144fbaf0",
+        "checkpoints.sqlite": "c5ca14204b169e2cea968215b618796cdb9fd7020577cfff4dcd75f3ddc1f9de",
+        "run/result.json": "4055cc88ea522e4c484a11a6180d228b8e24f506cc88c346a5e693a19d314f24",
+        "run/fixture-effects.json": "46a71e093e4f737a82eb2b34e5053ceb21823a54eb254d3bd9dbbabe3d29dbde",
+        "prepared.json": "f2781eb0b62079080ffce349ddc2c7fb7cca20d477491ed310cb100afdc57781"
+      }
+    }
+  },
+  "totals": {
+    "generations": 15,
+    "input_tokens": 13669,
+    "output_tokens": 421,
+    "generation_tokens": 14090,
+    "embedding_requests": 10,
+    "embedding_tokens": 274,
+    "provider_wall_seconds": 6.069011654239148,
+    "projection_cpu_ns": 17465554,
+    "projection_wall_ns": 26673679,
+    "exact_reads": 9,
+    "exact_read_wall_ns": 11695002,
+    "unknown_usage": 0,
+    "truncations": 0
+  },
+  "passed": [
+    3,
+    3
+  ],
+  "budget_after_sha256": "8aca1d43fb522949452d323f4b680aba98574a7d4d5b99fd694af1c6487c03cc",
+  "master_goal_complete": false,
+  "independent_rebase_generations": 0,
+  "judge_requests": 0,
+  "measurement": "Projection wall includes exact-get wall; do not sum nested timings. Precision/recall are mechanical snapshot metrics, not semantic causal attribution."
+}

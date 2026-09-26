@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import time
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 from langgraph.store.base import Item
@@ -28,6 +28,10 @@ class ProjectedRequest:
     materials: dict[str, dict[str, str]]
     items: list[dict[str, Any]]
     exact_reads: list[dict[str, Any]]
+    derived_rebases: list[dict[str, Any]] = field(default_factory=list)
+    unknown_bindings: list[dict[str, Any]] = field(default_factory=list)
+    projection_cpu_ns: int = 0
+    projection_wall_ns: int = 0
 
 
 def _status(item: dict[str, Any], sidecar: RevisionSidecar,

@@ -36,6 +36,22 @@ canonical memory state.
 
 ## Required checks
 
+The user activated the full [long-horizon master plan](docs/MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md),
+tracked by [the execution Goal](docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md).
+This supersedes prior closed-stage restrictions for the new research scope; preserve their
+historical artifacts and conclusions. Follow P0–P12 without declaring the master Goal done
+after a narrow slice. Start with [v20 SER](docs/MILAI_SER_V20_GOAL.md): request-level ordinary
+assistant lineage and request-copy demotion, then original controls and non-temperature
+generalization. Failure requires first-broken-link localization, competing hypotheses and a
+minimal general repair/counterexample; do not stop merely because the first candidate fails.
+One existing Sol xhigh owns source/config/CI and necessary narrow checks; Root owns docs,
+fixtures/rubrics, freezes, all real model/embedding calls (concurrency 1), analysis and cost;
+Luna high owns authorized publication and any needed downloads. Keep vLLM unchanged during
+primary development. Avoid defensive platform growth, redundant audits/tests and benchmark
+heuristics. Method freeze precedes unseen matched evaluation and sensitivity. Product, old
+contextual runtime, M1 and structured ODR remain outside the active method. Conditional
+capsule/action grounding/Attention/Jev require the evidence described in the master plan.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

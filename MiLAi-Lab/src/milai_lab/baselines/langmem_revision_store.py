@@ -118,6 +118,14 @@ class RevisionSidecar:
                 range_end INTEGER,
                 PRIMARY KEY(request_id, tool_call_id)
             );
+            CREATE TABLE IF NOT EXISTS assistant_lineage(
+                thread_id TEXT NOT NULL, response_id TEXT NOT NULL,
+                generating_request_id TEXT NOT NULL,
+                original_body_ref TEXT NOT NULL,
+                exact_snapshot_json TEXT NOT NULL,
+                unknown_items INTEGER NOT NULL,
+                PRIMARY KEY(thread_id, response_id)
+            );
             CREATE TABLE IF NOT EXISTS stats(
                 id INTEGER PRIMARY KEY CHECK(id=1), transactions INTEGER NOT NULL,
                 observer_cpu_ns INTEGER NOT NULL, observer_wall_ns INTEGER NOT NULL,
@@ -536,9 +544,55 @@ class RevisionSidecar:
             ).fetchone()
             return dict(row) if row is not None else None
 
+    def record_assistant_lineage(
+        self, thread_id: str, response_id: str, request_id: str,
+        content: str, exact_snapshot: list[dict[str, Any]], unknown_items: int,
+    ) -> bool:
+        """Bind an ordinary checkpoint message to its completed Provider request."""
+        body_ref = content_identity(content)[2]
+        snapshot_json = canonical_json(exact_snapshot)
+
+        def save(conn: sqlite3.Connection) -> bool:
+            request = conn.execute(
+                "SELECT thread_id,status,provider_receipt_id FROM requests WHERE request_id=?",
+                (request_id,),
+            ).fetchone()
+            if (request is None or request["thread_id"] != thread_id
+                    or request["status"] != "completed"
+                    or request["provider_receipt_id"] != response_id):
+                return False
+            prior = conn.execute(
+                "SELECT * FROM assistant_lineage WHERE thread_id=? AND response_id=?",
+                (thread_id, response_id),
+            ).fetchone()
+            row = (request_id, body_ref, snapshot_json, unknown_items)
+            if prior is not None:
+                if tuple(prior[key] for key in (
+                    "generating_request_id", "original_body_ref",
+                    "exact_snapshot_json", "unknown_items",
+                )) != row:
+                    raise ValueError("ASSISTANT_LINEAGE_RESPONSE_ID_COLLISION")
+                return True
+            conn.execute(
+                "INSERT INTO assistant_lineage VALUES(?,?,?,?,?,?)",
+                (thread_id, response_id, *row),
+            )
+            return True
+
+        return self._write(save)
+
+    def get_assistant_lineage(self, thread_id: str,
+                              response_id: str) -> dict[str, Any] | None:
+        with self._lock:
+            row = self.conn.execute(
+                "SELECT * FROM assistant_lineage WHERE thread_id=? AND response_id=?",
+                (thread_id, response_id),
+            ).fetchone()
+            return dict(row) if row is not None else None
+
     def rows(self, table: str) -> list[dict[str, Any]]:
         if table not in {"bodies", "observations", "tool_calls", "operations", "revisions",
-                         "searches", "requests", "request_material"}:
+                         "searches", "requests", "request_material", "assistant_lineage"}:
             raise ValueError("UNKNOWN_SIDECAR_TABLE")
         with self._lock:
             return [dict(row) for row in self.conn.execute(f"SELECT * FROM {table}")]  # noqa: S608

@@ -1,0 +1,238 @@
+{
+  "kind": "MILAI_SER_V20_P3_FREEZE",
+  "status": "FROZEN_BEFORE_P3_REQUESTS",
+  "created_at": "2026-09-26T16:25:44.657754+00:00",
+  "lock_sha256": "130b3b8bb99ff95fc24d10be2ec87608afff35d510eeb8f6eccc483f1ff970ef",
+  "source_mapping_sha256": "a4a0036bc86cb145adcb6783fcac0ca2fd9ebe54165e95741e5aec53ae838690",
+  "evaluation_protocol_sha256": "acb8b1838b311726005df213261b0e89a42ac79a98c20ab005e414da99554148",
+  "source_verification": {
+    "kind": "MILAI_SER_V20_P3_SOURCE_VERIFICATION",
+    "status": "SOURCE_READY_FOR_FREEZE",
+    "method": "ser_v20",
+    "arms": [
+      "a3_exact_refresh",
+      "a4_selective_rebase"
+    ],
+    "identity": {
+      "config": "configs/milai-ser-v20.json",
+      "cli": "tools/run_milai_ser.py",
+      "lock": "data/locks/milai-ser-v20.lock.json",
+      "lock_kind": "MILAI_SER_V20_LOCK",
+      "recipe_id": "milai-ser-v20-json-action-v1",
+      "transport_variant": "json_action_ser_v20_v1",
+      "required_runtime": [
+        "src/milai_lab/methods/freshness_projection/lineage.py",
+        "src/milai_lab/methods/freshness_projection/projection.py",
+        "src/milai_lab/methods/freshness_projection/controller.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "src/milai_lab/baselines/langmem_instrumentation.py",
+        "src/milai_lab/baselines/langmem_revision_store.py",
+        "src/milai_lab/providers/langmem_chat.py",
+        "tools/run_milai_freshness_projection.py",
+        "tools/run_milai_ser.py",
+        "configs/milai-ser-v20.json",
+        "pyproject.toml",
+        ".github/workflows/ci.yml"
+      ]
+    },
+    "contract": {
+      "provider_schema_and_authority": "A3 and A4 use the same existing JSON-action schema and A2 source-authority text",
+      "lineage": "One model-hidden assistant_lineage table binds thread and response ID to actual generating request, original body ref and exact delivered memory snapshot",
+      "snapshot": "Actual Provider messages and request SHA are checked before recording; refreshed X@2 is snapshotted as X@2, while withheld X@1 is excluded",
+      "derived_rebase": "Only ordinary assistant text whose own bound request snapshot is now superseded/deleted is replaced in the outgoing request copy; role, order, tool-call history, checkpoint and Store remain intact",
+      "unknown": "Missing or mismatched response/message/lineage/currentness does not trigger demotion",
+      "cost": "Projection CPU/wall is inclusive of exact Store.get; exact read wall time is separately reported and is not additive"
+    },
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py tests/unit/test_langmem_provenance.py tests/unit/test_milai_odr.py tests/unit/test_milai_m1_v18.py",
+        "result": "PASS: 29 passed"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/freshness_projection src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_instrumentation.py src/milai_lab/baselines/langmem_revision_store.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_m1_mechanism.py src/milai_lab/runners/langmem_projection_mechanism.py tools/run_milai_freshness_projection.py tools/run_milai_ser.py tests/unit/test_freshness_projection.py",
+        "result": "PASS: All checks passed"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/methods/freshness_projection/*.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_instrumentation.py src/milai_lab/baselines/langmem_revision_store.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_m1_mechanism.py src/milai_lab/runners/langmem_projection_mechanism.py tools/run_milai_freshness_projection.py tools/run_milai_ser.py",
+        "result": "PASS: 13 source files"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-tools-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync python tools/run_milai_ser.py schema --fixture data/fixtures/milai_odr_v19_changed.json --arm a3_exact_refresh|a4_selective_rebase",
+        "result": "PASS: same schema, authority protocol and three tool names across matched arms; no reconstruction field"
+      }
+    ],
+    "changed_test_path": "tests/unit/test_freshness_projection.py",
+    "packaging_build": "NOT_RUN_WAIT_FINAL_STAGE_LOCK",
+    "model_calls_by_source_owner": 0,
+    "embedding_calls_by_source_owner": 0
+  },
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 0,
+    "generation": {
+      "charged_tokens": 0,
+      "known_tokens": 0,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 0,
+      "known_tokens": 0,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "case": "changed",
+      "run_id": "ser-v20-p3-a4-changed-r1",
+      "arm": "a4_selective_rebase",
+      "directory": "artifacts/ser-v20/p3-a4-changed-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "ddbed0c95b58f3347c6d3fa2b8b3fe67a749dc708cb621d62f61ac3b15bd9622",
+      "prepared_sha256": "71a5d6f7f798c6e8d7c3ccf65fcde7efa30798153794a1ad87edff93995bb813",
+      "options": [
+        "--config",
+        "artifacts/ser-v20/p3-a4-changed-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v20.lock.json",
+        "--run",
+        "ser-v20-p3-a4-changed-r1",
+        "--arm",
+        "a4_selective_rebase",
+        "--fixture",
+        "data/fixtures/milai_odr_v19_changed.json",
+        "--mechanism-freeze",
+        "data/manifests/milai-odr-v19-changed-freeze.json"
+      ]
+    },
+    {
+      "case": "retained",
+      "run_id": "ser-v20-p3-a4-retained-r1",
+      "arm": "a4_selective_rebase",
+      "directory": "artifacts/ser-v20/p3-a4-retained-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "9add6b33c81949b366a1e427d3e345d755a3597de96bcce8ec4120cef814a459",
+      "prepared_sha256": "b3f5fc886d7c46829d8134abbfce522618b26fd92daf93d050aafd49ef24e6ae",
+      "options": [
+        "--config",
+        "artifacts/ser-v20/p3-a4-retained-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v20.lock.json",
+        "--run",
+        "ser-v20-p3-a4-retained-r1",
+        "--arm",
+        "a4_selective_rebase",
+        "--fixture",
+        "data/fixtures/milai_odr_v19_retained.json",
+        "--mechanism-freeze",
+        "data/manifests/milai-odr-v19-retained-freeze.json"
+      ]
+    },
+    {
+      "case": "irrelevant",
+      "run_id": "ser-v20-p3-a4-irrelevant-r1",
+      "arm": "a4_selective_rebase",
+      "directory": "artifacts/ser-v20/p3-a4-irrelevant-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "d47304c883761418e982b0c881099c9fc90fadd800611421c668a26c1cda1c3a",
+      "prepared_sha256": "f2781eb0b62079080ffce349ddc2c7fb7cca20d477491ed310cb100afdc57781",
+      "options": [
+        "--config",
+        "artifacts/ser-v20/p3-a4-irrelevant-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v20.lock.json",
+        "--run",
+        "ser-v20-p3-a4-irrelevant-r1",
+        "--arm",
+        "a4_selective_rebase",
+        "--fixture",
+        "data/fixtures/milai_odr_v19_irrelevant.json",
+        "--mechanism-freeze",
+        "data/manifests/milai-odr-v19-irrelevant-freeze.json"
+      ]
+    }
+  ],
+  "additional_decoder_probe": "NOT_NEEDED_UNCHANGED_SCHEMA",
+  "packaging": "DEFER_UNTIL_V20_SOURCE_COMPLETE",
+  "reference_A3": "Preserved prior runs at 024fa69; do not rerun without a discriminating question",
+  "master_goal_continues_after_P3": true,
+  "vllm_settings_changed": false
+}

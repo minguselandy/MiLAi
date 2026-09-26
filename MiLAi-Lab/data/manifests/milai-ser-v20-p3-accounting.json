@@ -1,0 +1,84 @@
+{
+  "kind": "MILAI_SER_V20_P3_STORAGE_ACCOUNTING",
+  "status": "SEALED",
+  "cases": {
+    "changed": {
+      "files_bytes": {
+        "trace.jsonl": 199874,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 806
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1509,
+      "lineage_and_rebase_event_bytes": 7920,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 23243891,
+        "observer_wall_ns": 757099098,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 4109704,
+        "extra_read_wall_ns": 8424035,
+        "initial_db_bytes": 98304
+      },
+      "persistent_semantic_state_bytes": 0
+    },
+    "retained": {
+      "files_bytes": {
+        "trace.jsonl": 200183,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 806
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1512,
+      "lineage_and_rebase_event_bytes": 7935,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 21358027,
+        "observer_wall_ns": 467917318,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3395183,
+        "extra_read_wall_ns": 6588023,
+        "initial_db_bytes": 98304
+      },
+      "persistent_semantic_state_bytes": 0
+    },
+    "irrelevant": {
+      "files_bytes": {
+        "trace.jsonl": 254264,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 81920,
+        "run/business-journal.json": 806
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 3027,
+      "lineage_and_rebase_event_bytes": 9531,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 84,
+        "observer_cpu_ns": 23707902,
+        "observer_wall_ns": 505063114,
+        "extra_store_reads": 6,
+        "extra_read_cpu_ns": 4238143,
+        "extra_read_wall_ns": 8433533,
+        "initial_db_bytes": 98304
+      },
+      "persistent_semantic_state_bytes": 0
+    }
+  },
+  "marker_tokens_per_delivery": 31,
+  "marker_tokens_total": 279,
+  "total_file_bytes": {
+    "trace.jsonl": 654321,
+    "instrumentation.sqlite": 294912,
+    "checkpoints.sqlite": 237568,
+    "run/business-journal.json": 2418
+  },
+  "meaning": "Snapshot/event bytes are subsets of sidecar/trace, not extra totals. Marker fragment tokens use the pinned local tokenizer and are already part of Provider input billing. Mechanical lineage is persistent factual metadata, not semantic State. No PostgreSQL physical attribution or causal performance claim."
+}
