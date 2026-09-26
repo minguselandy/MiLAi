@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import httpx
@@ -46,6 +47,7 @@ from milai_lab.methods.freshness_projection.projection import (
 )
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
+from milai_lab.runners import langmem_merit
 from milai_lab.runners.langmem_diagnostic import run_frozen_diagnostics
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
 from milai_lab.runners.langmem_m1_mechanism import (
@@ -703,3 +705,69 @@ def test_fixture_update_list_delete_unknown_seed_and_completed_resume(tmp_path: 
             assert counts == (len(wires), len(sidecar.rows("revisions")),
                               len(sidecar.rows("operations")))
     sidecar.close()
+
+
+@pytest.mark.parametrize("failure", [
+    ValueError("PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"),
+    RuntimeError("service unavailable"),
+])
+def test_merit_local_capacity_keeps_native_result_and_continues_only_that_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: Exception,
+) -> None:
+    tasks = [SimpleNamespace(task_id=f"task-{index}", kind="native", dependent=False,
+                             checker="done", checker_args={},
+                             user_messages=["first", "never after cap"], golds=lambda: [])
+             for index in range(2)]
+    arc = SimpleNamespace(arc_id="arc", episodes=[
+        SimpleNamespace(index=index, task=task) for index, task in enumerate(tasks)])
+    selection = {"private_artifacts": {"arc_sha256": "arc-hash"},
+                 "episode_count": 2, "dependent_episode_count": 0}
+    monkeypatch.setattr(langmem_merit, "load_exposed_arc", lambda _path: (
+        selection, arc, SimpleNamespace(TOOL_SCHEMAS=[], TOOL_FUNCS={}),
+        SimpleNamespace(done=lambda snapshot: snapshot["done"],
+                        memory_utilized=lambda _calls, _golds: False),
+        SimpleNamespace(SYSTEM_PROMPT="rules {memory_block}")))
+    monkeypatch.setattr(langmem_merit, "build_agent", lambda *args, **kwargs: (
+        SimpleNamespace(get_state=lambda _config: SimpleNamespace(
+            values={"messages": [AIMessage(content="partial")]}))))
+    selection_path = tmp_path / "selection.json"
+    selection_path.write_text("{}", encoding="utf-8")
+    model = SimpleNamespace(m1=None, odr=None, projection=None,
+                            client=SimpleNamespace(budget=None))
+
+    world = SimpleNamespace(done=False, conn=SimpleNamespace(close=lambda: None))
+    world.snapshot = lambda: {"done": world.done}
+    monkeypatch.setattr(langmem_merit, "_world_for_run", lambda *_args: world)
+    attempts: list[tuple[str, int]] = []
+
+    def invoke(_agent: Any, _model: Any, scope: FoundationScope, _content: str,
+               index: int, _pending: bool, **_kwargs: Any) -> list[AIMessage]:
+        attempts.append((scope.episode_id, index))
+        if scope.episode_id == "episode:0":
+            if isinstance(failure, ValueError):
+                world.done = True
+            raise failure
+        return [AIMessage(content="done")]
+
+    monkeypatch.setattr(langmem_merit, "invoke_or_resume_public_message", invoke)
+    output = tmp_path / "run"
+    if isinstance(failure, RuntimeError):
+        with pytest.raises(RuntimeError, match="service unavailable"):
+            langmem_merit.run_exposed_merit_arc(
+                selection_path, output, "run", model, InMemoryStore(), object(),
+                {}, continue_on_local_capacity=True)
+        assert attempts == [("episode:0", 0)]
+        assert not (output / "episodes/episode-1.json").exists()
+        return
+    result = langmem_merit.run_exposed_merit_arc(
+        selection_path, output, "run", model, InMemoryStore(), object(),
+        {}, continue_on_local_capacity=True)
+    assert attempts == [("episode:0", 0), ("episode:1", 0), ("episode:1", 1)]
+    failed = json.loads((output / "episodes/episode-0.json").read_text())
+    assert failed["native_score"]["success"] is True
+    assert failed["host_status"] == "LOCAL_CAPACITY_EXCEEDED"
+    assert failed["attempted_public_message_indexes"] == [0]
+    assert failed["completed_public_message_indexes"] == []
+    assert failed["skipped_public_message_indexes"] == [1]
+    assert result["native_successes"] == 1
+    assert not (output / "interruption.json").exists()

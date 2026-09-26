@@ -12,14 +12,19 @@ not automatic completion. P3/P4 delivered lineage and request-copy rebase; P5 ad
 rank-bounded refresh and completed the diagnostic packaging check. The final
 [v21 development controls](docs/MILAI_SER_V21_FINAL_RESULTS_20260927.md) pass 13/13 on one source
 identity after a generic target-contract repair and an explicit source-authority protocol change.
-Earlier failures remain. Continuous SER costs are 202 generations / 195740 tokens / 2837
+Earlier failures remain. At P6 completion, SER costs were 202 generations / 195740 tokens / 2837
 embedding tokens / 75 exact reads; overall cost savings and unseen efficacy are unproven.
 [P7 R1](docs/MILAI_SER_V22_P7_R1_RESULTS_20260927.md) now reports B1 8/12 versus A5 7/12
 on the exposed diagnostics; both MERIT arcs stop at episode 2 after empty-search loops reach
 the original per-message capacity. Full arc scores remain unavailable. Development continues
 with opt-in episode-local failure isolation, then a separate review of authority overhead
 on requests without memory evidence. Continuous SER is 306 generations / 274357 tokens /
-3689 embedding tokens / 75 exact reads; P8 formal freeze is pending.
+3689 embedding tokens / 75 exact reads at the R1 cutoff.
+[P7 R2](docs/MILAI_SER_V22_P7_R2_RESULTS_20260927.md) validates local capacity isolation:
+A5 continues after episode 2 failure and completes episode 3. B1 native 4/5 versus A5 3/5
+still exposes formation and tool-use failures; A5 completes only 4/7 public messages.
+Continuous SER is now 360 generations / 332460 tokens / 3902 embedding tokens / 75 exact reads.
+Next is conditional authority on actual evidence or derived rebases; P8 remains pending.
 Historical deliveries below remain preserved.
 
 Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following

@@ -1,0 +1,170 @@
+{
+  "kind": "MILAI_SER_V22_P7_OFFLINE_AUTHORITY_COUNTERFACTUAL",
+  "actual_provider_calls": 0,
+  "method_changed": false,
+  "meaning": "This is wire equality only, not a model replay or proof of causal quality improvement. Historical B1 variation remains an alternative explanation.",
+  "equal": 20,
+  "denominator": 20,
+  "rows": [
+    {
+      "public_scope": "diagnostic:d01/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d02/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d02/session:s2/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d03/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d03/session:s2/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d04/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d05/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d05/session:s2/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d06/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d06/session:s2/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d07/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d08/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d08/session:s2/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d09/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d09/session:s2/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d10/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d11/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d11/session:s2/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d12/session:s1/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    },
+    {
+      "public_scope": "diagnostic:d12/session:s2/0",
+      "full_wire_equal_after_only_authority_removal": true,
+      "actual_a5_roles": [
+        "system",
+        "user"
+      ]
+    }
+  ]
+}

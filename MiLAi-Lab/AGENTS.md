@@ -108,6 +108,16 @@ and runs only the two affected MERIT arms first. Do not raise capacities or simu
 change authority. A5 has 48/52 requests with no memory items yet still adds authority; its
 conditional inclusion is a separate candidate after the coverage repair. P8 remains pending.
 
+P7 R2 [results](docs/MILAI_SER_V22_P7_R2_RESULTS_20260927.md) confirm local capacity isolation:
+A5 continues to episode 3 after episode 2 failure, but native is B1 4/5 versus A5 3/5.
+Preserve wrong B1 5000 refund, absent early formation, A5 null create/delete, all failures and
+360 continuous generations / 332460 tokens / 3902 embedding tokens / 75 exact reads.
+After Luna checkpoint, Sol makes the separate minimal authority predicate: actual projected
+items or derived rebases. Empty requests return to the B1 system contract; current conflict
+and assistant-only stale retain authority. No benchmark-dependent predicate or vLLM change.
+Narrow offline counterexamples precede Root's new frozen matched small regression. P8–P12
+remain active; lifecycle failures are separate research, not SER successes.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

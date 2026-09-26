@@ -150,7 +150,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                             arm_id=args.arm, observer=observer)
                     return run_exposed_merit_arc(
                         input_path, args.output, args.run, model, store, saver,
-                        identity, arm_id=args.arm, observer=observer)
+                        identity, arm_id=args.arm, observer=observer,
+                        continue_on_local_capacity=config.get(
+                            "continue_on_local_capacity", False))
     finally:
         sidecar.close()
 
@@ -161,9 +163,9 @@ def main() -> None:
     for command in ("prepare", "run"):
         item = commands.add_parser(command)
         item.add_argument("--config", type=Path,
-                          default=LAB / "configs/milai-ser-v22.json")
+                          default=LAB / "configs/milai-ser-v22-r2.json")
         item.add_argument("--lock", type=Path,
-                          default=LAB / "data/locks/milai-ser-v22.lock.json")
+                          default=LAB / "data/locks/milai-ser-v22-p7r2.lock.json")
         item.add_argument("--mode", choices=("diagnostic", "merit"), required=True)
         item.add_argument("--run", required=True)
         item.add_argument("--arm", choices=ARMS, required=True)

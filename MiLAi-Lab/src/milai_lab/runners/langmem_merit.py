@@ -51,6 +51,7 @@ def run_exposed_merit_arc(
     config_identity: dict[str, Any],
     arm_id: str = "b0",
     observer: ProvenanceObserver | None = None,
+    continue_on_local_capacity: bool = False,
 ) -> dict[str, Any]:
     selection, arc, native_tools, metrics, native_runner = load_exposed_arc(selection_path)
     output.mkdir(parents=True, exist_ok=True)
@@ -107,14 +108,23 @@ def run_exposed_merit_arc(
             scope = FoundationScope(run_id, arm_id, f"merit:{arc.arc_id}",
                                     f"episode:{episode.index}")
             messages: list[Any] = []
+            capacity_failed_index: int | None = None
             for index in range(progress["next_message"], len(task.user_messages)):
                 pending = progress["pending_message"] == index
                 progress["pending_message"] = index
                 write_json(progress_path, progress)
-                messages = invoke_or_resume_public_message(
-                    agent, model, scope, task.user_messages[index], index, pending,
-                    task_id=task.task_id,
-                )
+                try:
+                    messages = invoke_or_resume_public_message(
+                        agent, model, scope, task.user_messages[index], index, pending,
+                        task_id=task.task_id,
+                    )
+                except ValueError as error:
+                    if (not continue_on_local_capacity or
+                            str(error) != "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"):
+                        raise
+                    capacity_failed_index = index
+                    messages = agent.get_state(scope.config()).values["messages"]
+                    break
                 progress["next_message"] = index + 1
                 progress["pending_message"] = None
                 write_json(progress_path, progress)
@@ -143,6 +153,15 @@ def run_exposed_merit_arc(
                 "kind": task.kind,
                 "dependent": task.dependent,
                 "public_message_count": len(task.user_messages),
+                "host_status": ("LOCAL_CAPACITY_EXCEEDED" if capacity_failed_index is not None
+                                else "COMPLETED"),
+                "capacity_failed_public_message_index": capacity_failed_index,
+                "attempted_public_message_indexes": list(range(
+                    progress["next_message"] + (capacity_failed_index is not None))),
+                "completed_public_message_indexes": list(range(progress["next_message"])),
+                "skipped_public_message_indexes": (list(range(
+                    capacity_failed_index + 1, len(task.user_messages)))
+                    if capacity_failed_index is not None else []),
                 "before_world": progress["before_world"],
                 "after_world": after,
                 "messages": [item.model_dump(mode="json") for item in messages],
@@ -176,7 +195,16 @@ def run_exposed_merit_arc(
                                        for row in rows if row["dependent"]),
             "episodes": [{"episode_index": row["episode_index"],
                           "success": row["native_score"]["success"],
-                          "dependent": row["dependent"]} for row in rows],
+                          "dependent": row["dependent"],
+                          "host_status": row["host_status"],
+                          "capacity_failed_public_message_index": row[
+                              "capacity_failed_public_message_index"],
+                          "attempted_public_message_indexes": row[
+                              "attempted_public_message_indexes"],
+                          "completed_public_message_indexes": row[
+                              "completed_public_message_indexes"],
+                          "skipped_public_message_indexes": row[
+                              "skipped_public_message_indexes"]} for row in rows],
             "final_budget": copy.deepcopy(model.client.budget.state)
             if model.client.budget else None,
         }

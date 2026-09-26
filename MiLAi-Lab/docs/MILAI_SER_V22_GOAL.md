@@ -7,6 +7,8 @@ reference_commit: 010ada50bddc6f208ce4311fe311beff4c5c4551
 
 # v22：已暴露回归与方法收敛
 
+最新：[P7 R2](MILAI_SER_V22_P7_R2_RESULTS_20260927.md)已完成覆盖修复及两臂原arc重跑。B1 native4/5、dependent1/2；A5 native3/5、dependent0/2，ep2容量错误后ep3真实继续，ep4再次失败，Host仅4/7消息完成。连续SER360生成/332460tokens/3902embeddingtokens/75get。下一候选仅条件化authority，先离线空证据/current/assistant-only反例，再冻结原小规模对照；Formation/Reconciliation不混入方法修复。下文保留原冻结范围与R1历史。
+
 P6最终同源13/13已发布；本Goal执行总计划P7并依据证据判断P8冻结条件。P9及后续仍由长程Goal继续，不能把本轮交付作为整个项目终点。
 
 ## 最小接线
