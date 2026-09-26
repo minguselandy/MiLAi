@@ -1,0 +1,199 @@
+{
+  "status": "FROZEN",
+  "reference_manifest_sha256": "eac5db32fbbb85cea500482f400146955abbcf0b74024957849a8fcca5db0dd5",
+  "master_plan_sha256": "d7a5331bf20ecd649a1bf75187ea0d65224ad559572a30dde0bb5527a66217d2",
+  "dependency_lock_sha256": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8",
+  "kind": "MILAI_LIFECYCLE_V24_LOCK",
+  "stage": "P11 independent prospective formation F-r2",
+  "recipe_id": "langmem-hotpath-react-json-action-v1",
+  "transport_variant": "json_action",
+  "actual_recipe_by_arm": {
+    "b1_control": "langmem-hotpath-react-json-action-v1",
+    "f_prospective_retention": "langmem-hotpath-react-json-action-v1"
+  },
+  "protocol_by_arm": {
+    "b1_control": "langmem_default_v1",
+    "f_prospective_retention": "prospective_retention_duty_v2"
+  },
+  "formation_protocol_id": "prospective_retention_duty_v2",
+  "formation_cue_sha256": "4938d5ceb357e4575662eb6ecd97c25842dc8750d167bb11c24568dc29d14ea4",
+  "source_checkpoint_before_changes": "5c1574c8943bcc0ad0fab0933770a6e4e51d1a62",
+  "previous_lock_path": "data/locks/milai-lifecycle-v24-formation.lock.json",
+  "previous_lock_sha256": "c31b8d1ce23a2401be9b28a351bf30d479c83b454b67ed8129c31d009f1632a3",
+  "source_sha256": {
+    ".github/workflows/ci.yml": "1dedb4a3e41a8886e8bf2c820b217f1a3c7152b0caf53074cb6deb637c27fdbd",
+    "configs/langmem-b1-v16.json": "09999ee2906aa73ab513e7fe2f89826c5785bbef1eaaec7a2c36601372644634",
+    "configs/langmem-baseline-v1.json": "45dbe0fb4843c87d3c5302a32408bb389a82b11bfcb09749fc773aeea5f22c2b",
+    "configs/milai-freshness-projection-v19.json": "22da1879eb0ed428e3568ac7703c9b2363720b96bee538f73403577379f19433",
+    "configs/milai-lifecycle-v24-formation-r2.json": "cf9f5623609ae6d9e3e9fb34ffd39663e034a5fb0907f726a65c8f87c68348cf",
+    "configs/milai-lifecycle-v24-formation.json": "2a7fc7606b635e7be61d80d58dca2291e8744ef8bd901e46ec9e94056a648303",
+    "configs/milai-m1-v17.json": "f2928aaaf29da5bd048aff9e977def99d24c0b7e073e95b6e609e70737e8c33a",
+    "configs/milai-m1-v18.json": "5c5154b04f6b082274ca4480f5656c4aae89e67691e46c984b85f39b2a56bbf6",
+    "configs/milai-odr-v19.json": "d246534999bf3a91b770fa6505f68b4480a327345f59ec2c997d112a295d8fac",
+    "configs/milai-ser-v20.json": "25d9f058eb7f6a64e82559aaeae8457986b87d724e56cb9b1894f93f67036860",
+    "configs/milai-ser-v21.json": "784a7ddb5c72bb3a4ff73c72f9f2d9c9ca240427b00fe5fe3d5da831a0eb0a0d",
+    "configs/milai-ser-v22-r2.json": "7f1c0642162a8c942d9ce64c5a979ced1a56d65e7321957d7ec9d706599caa37",
+    "configs/milai-ser-v22.json": "c5feddbe0fb68cdeb004969a59fb98c923341eff387845f9321a6090a1d23d1a",
+    "configs/milai-ser-v23.json": "4a8f993edea1224ace88157c1ba8166d33f04b2a5973d6c2de1a1344dfa6fef8",
+    "pyproject.toml": "73d9fbbefcfc76070fa6d3bcc2f6da679bde906aad0c955405ea9c62f4522ed5",
+    "src/milai_lab/__init__.py": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+    "src/milai_lab/baselines/__init__.py": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+    "src/milai_lab/baselines/langmem_agent.py": "a7a31af45fa630c3dbba2cd97c7833e30b46892ef4d155fafcab984162d979d9",
+    "src/milai_lab/baselines/langmem_b1_identity.py": "2fd2380bcb93c87c3614a7ec1d917a75faca8eeb3c75dfef0a7c5ce8248a3d11",
+    "src/milai_lab/baselines/langmem_identity.py": "bf3b25663b52478325734f8ba4a3703521d63bb522f8a22133f28680a5187572",
+    "src/milai_lab/baselines/langmem_instrumentation.py": "f324283c663f10ad04b52fc33797c068c9d1cc79931c09565445836cae36bab1",
+    "src/milai_lab/baselines/langmem_revision_store.py": "dc2a6470ed4b72eda5a44b0699076965eb85ffca2f8fff0d0ff8695b9cfab20a",
+    "src/milai_lab/datasets/__init__.py": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+    "src/milai_lab/datasets/merit.py": "1959ebfa1c035520751a2ab7ec397444bbb545e72709b1aca91751d7a495a0e7",
+    "src/milai_lab/harness/__init__.py": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "src/milai_lab/methods/__init__.py": "59b20a7a91ee381dda1685ac330a3af7d10aa2c84dbe69cc0ef8b2f767044a81",
+    "src/milai_lab/methods/freshness_projection/__init__.py": "edf49dc7f013532a7d43590e2081056a60dcb3ba5557ae9866d748fe15ccbd83",
+    "src/milai_lab/methods/freshness_projection/controller.py": "f134b0ae24a6adde60c7f57d4ab12c31e759fa92b757720d1ecb8edfba7dc771",
+    "src/milai_lab/methods/freshness_projection/identity.py": "6515c173e9089b25279041ad380982ab0ad35196eb9aef01802a200674810e2d",
+    "src/milai_lab/methods/freshness_projection/lineage.py": "71a19fb10baa3a8b47edae3e1656970c2f6eb8cb9823a6e5392a53c33c918d84",
+    "src/milai_lab/methods/freshness_projection/projection.py": "ed8dc7fbd65bcf0fe874c2a8ed4e53478f924188dac2838bcb9380889e91c6a5",
+    "src/milai_lab/methods/memory_lifecycle.py": "0a23bfdeb8f3755c8587717c1d11f5e8dd34199bcc5578fc7f34531fd67d10e9",
+    "src/milai_lab/methods/milai_m1/__init__.py": "8d9a1d208d0df6404166ca73436b42857fd6194707aed0ede0f6e6b86f68a624",
+    "src/milai_lab/methods/milai_m1/controller.py": "c871098c684efbb3a54a4dd7f82bb7df00b235e4480b37bd124e8a5d78ceeb8a",
+    "src/milai_lab/methods/milai_m1/decision_basis.py": "07e28bc44c57cb7fc27cc6969bf16dce500449cb1cdef195143297ac3b4d38e7",
+    "src/milai_lab/methods/milai_m1/evidence_view.py": "31e3ec6181418f3ea5b4c48efd09e8d21eae130b6f39beeb1e5ae041938c50fb",
+    "src/milai_lab/methods/milai_m1/identity.py": "7ca19d497b28a0c76ebed245124b45295bf216ba292564918af74ab9a0c24b53",
+    "src/milai_lab/methods/milai_m1/recheck.py": "2c7a4b7f544cbbfed2579e5f5c80cc46bf5a6d6295019a87c6835bab959bfc7d",
+    "src/milai_lab/methods/milai_m1/state_store.py": "165f9c22801764ca98d63e8fc6a13793d3cb4b48dbfc785d9c4bd42b19dddcfd",
+    "src/milai_lab/methods/on_demand_reconstruction/__init__.py": "98f05efd3b1250393d9fc2b276476884bfeb6b92eb1334c68e50a14e6ef669b8",
+    "src/milai_lab/methods/on_demand_reconstruction/controller.py": "df4f32d115b3c88c315b467e8f24e7ee1ceaf3dc4e14a7547ed382c7f5ac5e2f",
+    "src/milai_lab/methods/on_demand_reconstruction/evidence_view.py": "f90f0bf19047a040b484c6f808a9943ba60377a92493f7044a1109339dee332a",
+    "src/milai_lab/methods/on_demand_reconstruction/freshness.py": "02ee313159eecbbd15b3499929712e909a985d28f0116658f4d60511018df59b",
+    "src/milai_lab/methods/on_demand_reconstruction/identity.py": "f96fddca6c9fa7b82a0ed48d68368254ee3772cb2636146e7f291804b7298b0a",
+    "src/milai_lab/methods/on_demand_reconstruction/metrics.py": "64b82a7d98bd8e9721a142c3df866ea96eb69fd5b32c2c2edaa197e401d7518e",
+    "src/milai_lab/methods/on_demand_reconstruction/schema.py": "323032b7cd80d25bee501f0e2174aa070be9d0747ed5aacc171563c27e8e4c4c",
+    "src/milai_lab/providers/__init__.py": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+    "src/milai_lab/providers/langmem_chat.py": "d3d237a32236c4a04d0e778b03cddcbca5e2bb179fb337064ba71a36b522687d",
+    "src/milai_lab/runners/__init__.py": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+    "src/milai_lab/runners/langmem_diagnostic.py": "9f7195aee5ec36f4259a8c0c729debf456b2c2b45cab3118eeac4253ec6e6090",
+    "src/milai_lab/runners/langmem_foundation.py": "d35ad8659b0a95819415786a750460bcc39e9673aa342ce44d9383f7c7fb5135",
+    "src/milai_lab/runners/langmem_m1_mechanism.py": "66afffbe62f57ad545513a5cb5acb61ca2a03f638bd4de30499a2e053abe70ae",
+    "src/milai_lab/runners/langmem_merit.py": "9dc4eccf69938333ddaba4631b101791629e84a7e21979dc885f236c95c3d7b1",
+    "src/milai_lab/runners/langmem_odr_mechanism.py": "a4d2a9b71e4f48cf8d70cbd68de751b9f6daa9443e22f51484d4dbdea020b9c5",
+    "src/milai_lab/runners/langmem_projection_mechanism.py": "cc033a498f8c387d9200c7583e27e369d998f8f0cc1142bea073faf122dd5982",
+    "tools/inspect_milai_m1_v18.py": "74781e18aa99461861a8b69ca4bceacf75f300085a5d8c2a43c7d0b380185ca0",
+    "tools/inspect_milai_odr.py": "63a78c92ce710f6cbe0d4e8d1d1c09ee4509a8613dbaf434673381d394780579",
+    "tools/prepare_langmem_foundation.py": "b6b4c538d121cd706e3c84c7e1c59ff70b23d8c568a036633bb9ea498865fdce",
+    "tools/run_langmem_foundation.py": "44e27ab5cb78148156e082814b59da7ab639babb48c2f2bb0658ba4edc9b1944",
+    "tools/run_langmem_provenance.py": "e080e10a9c5cb62336180aff6e53e36056a4fc93763c0c10a99e8f1c2c2aaef3",
+    "tools/run_milai_freshness_projection.py": "66b2f04aae085e1b2457a1be58eeaa2f3beaf8d6c38583aa0812a234681f679d",
+    "tools/run_milai_lifecycle_v24.py": "c9684c5978c4c8e917bc9f815ae28813afa1ee3d4926641aa4b7dc64d693cad0",
+    "tools/run_milai_m1.py": "031e9659526fdf3b95ed21061ac8b82e3f4bafae49ad3d6d44e8cd336bf4cbcc",
+    "tools/run_milai_m1_v18.py": "41b89144729cc16077dd291e36010b871c00105fa65c4a97500f8b9e447a19f5",
+    "tools/run_milai_odr.py": "566f7bd7bcbd94a0bab74805bf03157ee9f2f09dafd6e5e3cf2f0517f39cec06",
+    "tools/run_milai_ser.py": "71abcc85d17bac83d00437597c8e1f900b527ad97d311ddf0e903f2e7953d213",
+    "tools/run_milai_ser_v21.py": "950de06470d6c73db8484b90957a8dc45ac55961a8de636467bfa6503d347cb7",
+    "tools/run_milai_ser_v22.py": "614fd407fcfd1f2c02205e8971c49ccc57cf345ca04e100a1e63ba4494d4ea17",
+    "tools/run_milai_ser_v23.py": "9cc9796b38484c67ed30a5c38a61c2b7f2e19afb3cdb8c37c51e042d642d3ea9",
+    "tools/summarize_langmem_foundation.py": "aea78fc1bc9ddbf7b11a935cd9b4aa19ca05a1bba9ab3475870adc60958e37d7",
+    "uv.lock": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8"
+  },
+  "source_mapping_sha256": "53cef4aff04cda591b08e5867dc0bc2da7761fba4e713789d740d74e56f5bbf9",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "stage": "FORMATION_V24_R2",
+    "reference_commit": "5c1574c8943bcc0ad0fab0933770a6e4e51d1a62",
+    "source_files": [
+      "src/milai_lab/methods/memory_lifecycle.py",
+      "src/milai_lab/methods/freshness_projection/identity.py",
+      "tools/run_milai_lifecycle_v24.py",
+      "configs/milai-lifecycle-v24-formation-r2.json",
+      "pyproject.toml"
+    ],
+    "new_validation_files": [],
+    "modified_validation_files": [
+      "tests/unit/test_freshness_projection.py"
+    ],
+    "identity": {
+      "lock_expected": "data/locks/milai-lifecycle-v24-formation-r2.lock.json",
+      "kind": "MILAI_LIFECYCLE_V24_LOCK",
+      "formation_protocol_id": "prospective_retention_duty_v2",
+      "formation_cue_sha256": "4938d5ceb357e4575662eb6ecd97c25842dc8750d167bb11c24568dc29d14ea4",
+      "required_runtime_export": "REQUIRED_LIFECYCLE_V24_RUNTIME",
+      "verifier_export": "verify_lifecycle_v24_lock",
+      "continuous_budget_path": "artifacts/ser-v20/budget.json"
+    },
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py::test_formation_cue_is_only_system_difference_and_identity_is_explicit",
+        "result": "PASS; 1 passed; mock Provider B1/F wire and cue identity"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/memory_lifecycle.py src/milai_lab/methods/freshness_projection/identity.py tools/run_milai_lifecycle_v24.py tests/unit/test_freshness_projection.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/methods/memory_lifecycle.py src/milai_lab/methods/freshness_projection/identity.py tools/run_milai_lifecycle_v24.py",
+        "result": "PASS; 3 source files"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      },
+      {
+        "command": "offline R2 cue/protocol/config identity and R1 config parity; v24 CLI prepare --help",
+        "result": "PASS; host, embedding, capacity, recipe, transport and budget unchanged"
+      }
+    ],
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "packaging": "PENDING_LOCK"
+  },
+  "validation_sha256": {
+    "../.github/workflows/ci.yml": "f1f082cafa38f800a560e067cae2aa59afae3f9510e0a3c3796762916edc69fc",
+    ".github/workflows/ci.yml": "1dedb4a3e41a8886e8bf2c820b217f1a3c7152b0caf53074cb6deb637c27fdbd",
+    "tests/unit/test_freshness_projection.py": "d025a849b471295915b0cb17477543bb572c6733b4e170756bdd53f34ddfec0c",
+    "tests/unit/test_langmem_provenance.py": "3ef04a0667315b2bdc44b57d321a9f6e3ec41a2c98fc744804744f441df8308d",
+    "tests/unit/test_milai_m1_v18.py": "17c637353133ffcff95db19ec6f9190ccc0dfbf9f556e4a8b75ce203669ac15b",
+    "tests/unit/test_milai_odr.py": "ebef4881f13336f74f5bf729389bb598f99073a7d6e0aa97217267707097c7ab"
+  },
+  "protocol_path": "data/manifests/milai-lifecycle-v24-formation-r2-protocol.json",
+  "protocol_sha256": "379bd2fbb677196d1df96ab58a2b3bad1f94533b325a8d8f2f1bbe1bb9c89d3a",
+  "input_freeze_sha256": "f29d03d17f61394a1d1a10d82323089fefefb4672faa5fc58cfee61f677c8a2e",
+  "model_visible_contracts": {
+    "f01_future_agreement": {
+      "schema_sha256": "ee2152a285ec47b48ac1d9f6259823c4c5f0ab202d049e431f4ecf2e9b54427c",
+      "tools_sha256": "feecebbc6e84988e7ae74c5e8f94df19e8d19bc5fb5374395dc6e68969246285",
+      "system_sha256_by_arm": {
+        "b1_control": "0a1bdf4e0e08791561dd9b3a74720eec241067a8c8645693bc42f0f8c1a1e556",
+        "f_prospective_retention": "b7064f38884dd25160712f0e6eb13d26f1085d67d4f75606241c220894ebdf88"
+      }
+    },
+    "f02_business_receipt": {
+      "schema_sha256": "4dfdc5687cab021c433822cb0482e0a7151d2a0d667b3734bae669178db59cc3",
+      "tools_sha256": "01020c07098907af6d4d184c0ff0a65badaab1e3c9523931cf3d6ac00633d9ac",
+      "system_sha256_by_arm": {
+        "b1_control": "6574e3f965322fbeb092a5c0794bd959cf9a34cf327d643ac2d276ac0f62093c",
+        "f_prospective_retention": "3f1b93ee306f559f8d148853298afe49fd51006402f1993120f089bb0adddb27"
+      }
+    },
+    "f03_temporary_calculation": {
+      "schema_sha256": "0af5bdd417e489b981929d151780add6ad83176fcf8d8e485270ecd6c2b99c0f",
+      "tools_sha256": "17c65075f4c1d959f60aa9c78732eb2777a7dcfaf4dbf431e63668843dd477df",
+      "system_sha256_by_arm": {
+        "b1_control": "b4c5b0d4aac90d83578dbf9c81f253b710cf90d6fd899fd7904aafc6719f2aef",
+        "f_prospective_retention": "b06945ee19be52aa29da6faf5b86cd4b59e272f68ea46ebb6a7fd8fe13c7620f"
+      }
+    },
+    "f04_one_time_format": {
+      "schema_sha256": "0af5bdd417e489b981929d151780add6ad83176fcf8d8e485270ecd6c2b99c0f",
+      "tools_sha256": "17c65075f4c1d959f60aa9c78732eb2777a7dcfaf4dbf431e63668843dd477df",
+      "system_sha256_by_arm": {
+        "b1_control": "b4c5b0d4aac90d83578dbf9c81f253b710cf90d6fd899fd7904aafc6719f2aef",
+        "f_prospective_retention": "b06945ee19be52aa29da6faf5b86cd4b59e272f68ea46ebb6a7fd8fe13c7620f"
+      }
+    }
+  },
+  "ser_enabled": false,
+  "reconciliation_enabled": false,
+  "vllm_settings_changed": false,
+  "contract_change": "Only F appends the fixed prospective-retention cue to the ordinary LangMem prompt. Same tools, schema, loop and transport; no automatic CRUD or extra model call."
+}

@@ -157,6 +157,17 @@ conditional persistence duty in a separately frozen cue; ordinary Host retains C
 choice. Keep four exposed development cases, fixed historical B1 clearly labeled, no extra
 LLM phase or receipt hook yet. R remains independent and unimplemented; master stays ACTIVE.
 
+[Formation R2](docs/MILAI_LIFECYCLE_V24_FORMATION_R2_RESULTS_20260927.md) on mapping
+`53cef4aff04cda591b08e5867dc0bc2da7761fba4e713789d740d74e56f5bbf9` still retains0/2;
+the explicit-save B1 capability control succeeds at actual create and later search. Preserve
+602 generations /550151tokens /5187embeddingtokens /75exact reads. No deterministic tool,
+schema or transport bug was found; stop wording-only revisions and repeat-CRUD checks.
+After Luna checkpoint, independently freeze a minimal actual-business-observation reminder
+in the FIRST system request copy, keeping original messages/receipts intact and ordinary
+Host CRUD/no-op. The local template forbids later system messages; never change vLLM for it.
+Add one transient business-tool counterexample, no automatic writes, extra model phase or
+semantic relevance gate. R is still independent; no source mutation before Root release.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

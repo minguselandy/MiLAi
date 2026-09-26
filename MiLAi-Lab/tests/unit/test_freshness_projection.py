@@ -48,7 +48,11 @@ from milai_lab.methods.freshness_projection.projection import (
     ProjectedRequest,
     project_current_evidence,
 )
-from milai_lab.methods.memory_lifecycle import FORMATION_CUE, FORMATION_PROTOCOL_ID
+from milai_lab.methods.memory_lifecycle import (
+    FORMATION_CUE,
+    FORMATION_CUE_SHA256,
+    FORMATION_PROTOCOL_ID,
+)
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import langmem_merit
@@ -885,6 +889,14 @@ def test_v23_prepare_binds_declared_arc_and_pre_registration(
 def test_formation_cue_is_only_system_difference_and_identity_is_explicit(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    protocol = json.loads((LAB / "data/manifests/milai-lifecycle-v24-formation-r2-protocol.json")
+                          .read_text(encoding="utf-8"))
+    config = json.loads((LAB / "configs/milai-lifecycle-v24-formation-r2.json")
+                        .read_text(encoding="utf-8"))
+    assert protocol["cue"] == FORMATION_CUE
+    assert protocol["cue_sha256"] == config["formation_cue_sha256"] == FORMATION_CUE_SHA256
+    assert protocol["formation_protocol_id"] == config["formation_protocol_id"] == (
+        FORMATION_PROTOCOL_ID)
     inputs_path = tmp_path / "inputs.json"
     inputs_path.write_text(json.dumps({"cases": [{"id": "generic", "tools": [],
         "sessions": [{"id": "first", "turns": [{"text": "Please help."}]}]}]}),

@@ -61,6 +61,7 @@ REQUIRED_SER_V23_RUNTIME = REQUIRED_SER_V22_RUNTIME | {
 REQUIRED_LIFECYCLE_V24_RUNTIME = REQUIRED_SER_V23_RUNTIME | {
     "tools/run_milai_lifecycle_v24.py",
     "configs/milai-lifecycle-v24-formation.json",
+    "configs/milai-lifecycle-v24-formation-r2.json",
     "src/milai_lab/methods/memory_lifecycle.py",
 }
 

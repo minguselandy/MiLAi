@@ -1,0 +1,121 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_EXPLICIT_SAVE_CAPABILITY_PROTOCOL",
+  "status": "FROZEN_BEFORE_CONTROL_REQUESTS",
+  "goal_path": "docs/MILAI_LIFECYCLE_V24_FORMATION_R2_PLAN.md",
+  "goal_sha256": "93dae1c7bb20a4b3ebc9993db144a4ea8984916323a9632dc4b09cafb8db75c4",
+  "reference_commit": "5c1574c8943bcc0ad0fab0933770a6e4e51d1a62",
+  "inputs_path": "data/diagnostics/milai-lifecycle-v24-formation-capability-inputs.json",
+  "inputs_sha256": "001d105ffa2470143070f35b7fa0752cea7c8c6691c05f029df114e1088e5638",
+  "diagnostic_freeze_path": "data/manifests/milai-lifecycle-v24-formation-capability-diagnostic-freeze.json",
+  "diagnostic_freeze_sha256": "2897b1f9233641ddb6fae6f7f9ff76f138462f589d000af4c65a344de8943700",
+  "input_freeze_path": "data/manifests/milai-lifecycle-v24-formation-capability-input-freeze.json",
+  "input_freeze_sha256": "d52e0ae450f8e57c59697645dae4366de2c7bc929fb6d3ea4111e8ada2634cc3",
+  "rubric_path": "data/diagnostics/milai-lifecycle-v24-formation-capability-rubric.json",
+  "rubric_sha256": "debd05e5cb466cbcbcfb644557f43526659203fdff50e402eec8bdc686ac980a",
+  "rubric_read_by_runner": false,
+  "run_order": [
+    "b1_control"
+  ],
+  "scope": {
+    "cases_per_arm": 1,
+    "sessions_per_arm": 2,
+    "public_messages_per_arm": 2,
+    "new_arms": 1
+  },
+  "intervention": "None: B1 default prompt, explicit public user save request, then separate-session search. Current F2 source unchanged, cue disabled.",
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 598,
+    "generation": {
+      "charged_tokens": 548007,
+      "known_tokens": 548007,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 5144,
+      "known_tokens": 5144,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "model_concurrency": 1,
+  "vllm_settings_changed": false,
+  "per_public_message_generations": 12,
+  "failure_policy": "Preserve all failed attempts/costs; no replacement cases or best-run selection. Diagnose earliest broken link before any new repair freeze.",
+  "unseen": false,
+  "master_goal_complete": false,
+  "cue": "When the user establishes a future use for a commitment, constraint, unfinished obligation, or reusable result, call manage_memory before the final reply to save or update the smallest accurate, scoped durable note, including relevant identifiers from completed tool results. Do not substitute an oral acknowledgement for the memory operation. If no future use is established, do not write memory.",
+  "cue_sha256": "4938d5ceb357e4575662eb6ecd97c25842dc8750d167bb11c24568dc29d14ea4",
+  "formation_protocol_id": "prospective_retention_duty_v2",
+  "source_lock_path": "data/locks/milai-lifecycle-v24-formation-r2.lock.json",
+  "config_path": "configs/milai-lifecycle-v24-formation-r2.json",
+  "verification_dir": "artifacts/lifecycle-v24/r2",
+  "purpose": "After F1 and F2 both fail 0/2, distinguish current tool/Store capability from autonomous retention choice using one independently scored control."
+}

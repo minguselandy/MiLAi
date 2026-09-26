@@ -40,9 +40,9 @@ def main() -> None:
     for command in ("prepare", "run"):
         item = commands.add_parser(command)
         item.add_argument("--config", type=Path, default=LAB /
-                          "configs/milai-lifecycle-v24-formation.json")
+                          "configs/milai-lifecycle-v24-formation-r2.json")
         item.add_argument("--lock", type=Path, default=LAB /
-                          "data/locks/milai-lifecycle-v24-formation.lock.json")
+                          "data/locks/milai-lifecycle-v24-formation-r2.lock.json")
         item.add_argument("--diagnostic-inputs", type=Path, default=LAB /
                           "data/diagnostics/milai-lifecycle-v24-formation-inputs.json")
         item.add_argument("--diagnostic-freeze", type=Path, default=LAB /

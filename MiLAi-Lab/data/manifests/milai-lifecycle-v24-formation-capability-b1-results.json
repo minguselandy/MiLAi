@@ -1,0 +1,194 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_FORMATION_RUN_REVIEW",
+  "run_id": "lifecycle-v24-formation-b1-capability",
+  "arm": "b1_control",
+  "source_mapping_sha256": "53cef4aff04cda591b08e5867dc0bc2da7761fba4e713789d740d74e56f5bbf9",
+  "status": "MECHANICAL_PASS_SEMANTIC_REVIEW_SEPARATE",
+  "runtime_status": "TERMINAL",
+  "identity": {
+    "recipe_id": "langmem-hotpath-react-json-action-v1",
+    "run_id": "lifecycle-v24-formation-b1-capability",
+    "inputs_sha256": "001d105ffa2470143070f35b7fa0752cea7c8c6691c05f029df114e1088e5638",
+    "config_sha256": "53722906e99a8d60c8c88a642840e2b6c3ae3dd63eef0c37aa2a646ce4d8dd4b",
+    "rubric_read_by_runner": false,
+    "arm_id": "b1_control",
+    "protocol_id": "langmem_default_v1"
+  },
+  "usage": {
+    "generations": 4,
+    "input_tokens": 2018,
+    "output_tokens": 126,
+    "generation_tokens": 2144,
+    "embedding_requests": 2,
+    "embedding_tokens": 43,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "provider_wall_seconds": 1.7681856201961637,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "cases": [
+    {
+      "id": "fc_explicit_save",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "save",
+          "answers": [
+            "I have saved the agreement regarding the Brookfield workshop (9 cedar panels and dispatch waiting for coordinator approval) to my long-term memory."
+          ],
+          "calls": [
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "create",
+                "content": "For the Brookfield workshop, 9 cedar panels are required, and dispatch must wait for coordinator approval before proceeding."
+              },
+              "id": "chatcmpl-b17ada46d226bd52:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "manage_memory",
+              "content": "created memory c3cd3dc1-7623-4cc6-849b-c3ce00530929",
+              "status": "success",
+              "tool_call_id": "chatcmpl-b17ada46d226bd52:tool:0"
+            }
+          ],
+          "business_calls": [],
+          "memories": [
+            {
+              "id": "c3cd3dc1-7623-4cc6-849b-c3ce00530929",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-formation-b1-capability",
+                "b1_control",
+                "diagnostic:fc_explicit_save"
+              ],
+              "value": {
+                "content": "For the Brookfield workshop, 9 cedar panels are required, and dispatch must wait for coordinator approval before proceeding."
+              }
+            }
+          ]
+        },
+        {
+          "session_id": "recall",
+          "answers": [
+            "For the Brookfield workshop, the material is 9 cedar panels. Dispatch must wait for coordinator approval before proceeding."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Brookfield workshop material quantity dispatch condition"
+              },
+              "id": "chatcmpl-97809b939cc1b275:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "[{\"namespace\":[\"langmem\",\"lifecycle-v24-formation-b1-capability\",\"b1_control\",\"diagnostic:fc_explicit_save\"],\"key\":\"c3cd3dc1-7623-4cc6-849b-c3ce00530929\",\"value\":{\"content\":\"For the Brookfield workshop, 9 cedar panels are required, and dispatch must wait for coordinator approval before proceeding.\"},\"created_at\":\"2026-09-26T19:36:29.238989+00:00\",\"updated_at\":\"2026-09-26T19:36:29.238989+00:00\",\"score\":0.7003712415252636}]",
+              "status": "success",
+              "tool_call_id": "chatcmpl-97809b939cc1b275:tool:0"
+            }
+          ],
+          "business_calls": [],
+          "memories": [
+            {
+              "id": "c3cd3dc1-7623-4cc6-849b-c3ce00530929",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-formation-b1-capability",
+                "b1_control",
+                "diagnostic:fc_explicit_save"
+              ],
+              "value": {
+                "content": "For the Brookfield workshop, 9 cedar panels are required, and dispatch must wait for coordinator approval before proceeding."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "instrumentation": {
+    "counts": {
+      "searches": 1,
+      "requests": 4,
+      "bodies": 5,
+      "request_material": 2,
+      "operations": 1,
+      "tool_calls": 2,
+      "observations": 2,
+      "revisions": 1
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 2
+      },
+      "operations": {
+        "complete": 1
+      },
+      "searches": {
+        "returned": 1
+      },
+      "requests": {
+        "completed": 4
+      }
+    },
+    "observation_roles": {
+      "user": 2
+    },
+    "revision_effects": {
+      "insert": 1
+    },
+    "material_coverage": {
+      "FULL": 2
+    },
+    "search_returned_items": 1,
+    "search_exact_revision_bindings": 1,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 42,
+      "observer_cpu_ns": 15540918,
+      "observer_wall_ns": 302016253,
+      "extra_store_reads": 2,
+      "extra_read_cpu_ns": 2647434,
+      "extra_read_wall_ns": 7197574,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 98304,
+      "net_sqlite_db_bytes": 0,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "process": {
+    "run_id": "lifecycle-v24-formation-b1-capability",
+    "exit_code": 0,
+    "process_wall_seconds": 5.80862998822704
+  },
+  "cue_cost": {
+    "text_tokens": 70,
+    "actual_requests_with_cue": 0,
+    "fixed_trajectory_prompt_delta_tokens": 0,
+    "per_request_delta_values": [],
+    "meaning": "Tokenizer difference on identical actual request with only cue removed; not an extra model run or causal total-cost estimate."
+  },
+  "file_bytes": {
+    "trace.jsonl": 116579,
+    "instrumentation.sqlite": 98304,
+    "checkpoints.sqlite": 53248
+  },
+  "artifact_sha256": {
+    "artifacts/lifecycle-v24/lifecycle-v24-formation-b1-capability/trace.jsonl": "04a80fd1dcda48b54a9ee363c82a94d4cc85a4bacf7f645c4e54feb2d474e52c",
+    "artifacts/lifecycle-v24/lifecycle-v24-formation-b1-capability/instrumentation.sqlite": "f1d68ebcd4eb99fae49570c4acaa79f6aa5ce030c201874ec69a37e9e5978e27",
+    "artifacts/lifecycle-v24/lifecycle-v24-formation-b1-capability/checkpoints.sqlite": "921f2e67245e622c3c808663e8284159c6fb77db4cd22b1c61e0fc7fff791009",
+    "artifacts/lifecycle-v24/lifecycle-v24-formation-b1-capability/run/result.json": "d9553be6b335adaf200dc4a90267d7b1ca96493ef138455ce03d62df3cdf3613"
+  },
+  "persistent_semantic_state_bytes": 0,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}

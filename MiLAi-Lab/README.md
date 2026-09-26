@@ -47,6 +47,11 @@ Preserve this failure before a minimal generic instruction repair; no extra mode
 or vLLM change. Continuous costs: 588 generations / 541964 tokens / 5115 embedding tokens /
 75 exact reads. Reconciliation and P10/P12 remain open.
 
+[Formation R2](docs/MILAI_LIFECYCLE_V24_FORMATION_R2_RESULTS_20260927.md) also retains 0/2
+future items. A separately frozen explicit-save control passes actual write and later search,
+so stop wording-only changes and test a minimal event reminder with a transient-tool control.
+Continuous costs: 602 generations / 550151 tokens / 5187 embedding tokens / 75 exact reads.
+
 Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.
 Original Notice and request-copy Quarantine each pass 1/3 controls; conditional Exact Refresh

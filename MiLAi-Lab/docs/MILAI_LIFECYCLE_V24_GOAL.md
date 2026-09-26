@@ -9,6 +9,8 @@ reference_commit: 9387f533b9bb76f01beca59e26887194e878fb64
 
 执行总计划§14、§15/P11。P9的21条早期约定观察未保存，成功动作后仍留有pending正文；这些是独立生命周期缺口，不是SER刷新失败。保留P9全部未见结果，不修改其提示或重跑种子3/4。先完成Formation（F）的最小机制，再另行冻结Reconciliation（R），两者不同时改动以免混合归因。
 
+进度：R1已发布`5c1574c8943bcc0ad0fab0933770a6e4e51d1a62`，[R1](MILAI_LIFECYCLE_V24_FORMATION_R1_RESULTS_20260927.md)与[R2](MILAI_LIFECYCLE_V24_FORMATION_R2_RESULTS_20260927.md)静态cue均0/2形成。独立显式保存控制通过，只证明当前工具/Store能力；接着检验最小事件提醒，R尚未开始。下文固定cue为R1原方案，原字节保存在该commit；R2变更由单独plan/protocol绑定。
+
 ## F：单一通用前瞻提示
 
 B1保持默认LangMem系统提示；`f_prospective_retention`仅通过现有`build_agent(environment_rules=...)`追加以下固定文本：

@@ -1,0 +1,26 @@
+{
+  "cases": [
+    {
+      "id": "fc_explicit_save",
+      "tools": [],
+      "sessions": [
+        {
+          "id": "save",
+          "turns": [
+            {
+              "text": "Please remember this for our next related conversation: the Brookfield workshop needs 9 cedar panels, and dispatch must wait for coordinator approval. Save that agreement in your long-term memory now."
+            }
+          ]
+        },
+        {
+          "id": "recall",
+          "turns": [
+            {
+              "text": "Search your stored notes for the Brookfield workshop. State the material, quantity and dispatch condition. Do not assume approval arrived."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

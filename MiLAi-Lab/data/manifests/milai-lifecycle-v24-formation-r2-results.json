@@ -1,0 +1,171 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_FORMATION_R2_RESULTS",
+  "status": "STATIC_CUE_FAILURE_EXPLICIT_SAVE_CAPABILITY_PASS",
+  "source_mapping_sha256": "53cef4aff04cda591b08e5867dc0bc2da7761fba4e713789d740d74e56f5bbf9",
+  "source_lock_sha256": "7d5a1ecdc300252a5074fc2b000938669042d0d52dba61c09540ff86d5bbf882",
+  "run_results_sha256": {
+    "data/manifests/milai-lifecycle-v24-formation-r2-f-results.json": "d5304eceb17eab539b89932034f5faa5f1091746f2f59b54763c135b80adc7a1",
+    "data/manifests/milai-lifecycle-v24-formation-capability-b1-results.json": "71b22cc77204f3472544189a5a1eb1b5beabf0f0683216dea74ba5d7a5fdd495"
+  },
+  "f2": {
+    "formation_successes": 0,
+    "formation_denominator": 2,
+    "later_utility_successes": 0,
+    "later_utility_denominator": 2,
+    "unnecessary_storage": 0,
+    "temporary_denominator": 2,
+    "semantic_cases_passed": 2,
+    "semantic_case_denominator": 4,
+    "host_completed_messages": 6,
+    "declared_messages": 6,
+    "usage": {
+      "generations": 10,
+      "input_tokens": 5703,
+      "output_tokens": 340,
+      "generation_tokens": 6043,
+      "embedding_requests": 2,
+      "embedding_tokens": 29,
+      "unknown_usage": 0,
+      "truncations": 0,
+      "provider_wall_seconds": 3.774013567250222,
+      "exact_version_resolution_reads": 0,
+      "judge_requests": 0
+    },
+    "cue_cost": {
+      "text_tokens": 70,
+      "actual_requests_with_cue": 10,
+      "fixed_trajectory_prompt_delta_tokens": 710,
+      "per_request_delta_values": [
+        71
+      ],
+      "meaning": "Tokenizer difference on identical actual request with only cue removed; not an extra model run or causal total-cost estimate."
+    }
+  },
+  "capability_control": {
+    "arm": "b1_control",
+    "explicit_write_successes": 1,
+    "cross_session_retrieval_successes": 1,
+    "host_completed_messages": 2,
+    "declared_messages": 2,
+    "usage": {
+      "generations": 4,
+      "input_tokens": 2018,
+      "output_tokens": 126,
+      "generation_tokens": 2144,
+      "embedding_requests": 2,
+      "embedding_tokens": 43,
+      "unknown_usage": 0,
+      "truncations": 0,
+      "provider_wall_seconds": 1.7681856201961637,
+      "exact_version_resolution_reads": 0,
+      "judge_requests": 0
+    },
+    "autonomous_formation_success": false,
+    "meaning": "Explicit user save and later search prove the current public CRUD and Store path works; not a method efficacy sample."
+  },
+  "totals": {
+    "generations": 14,
+    "input_tokens": 7721,
+    "output_tokens": 466,
+    "generation_tokens": 8187,
+    "embedding_requests": 4,
+    "embedding_tokens": 72,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "provider_wall_seconds": 5.542199187446386,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "continuous_budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 602,
+    "generation": {
+      "charged_tokens": 550151,
+      "known_tokens": 550151,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 5187,
+      "known_tokens": 5187,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "continuous_exact_resolution_reads": 75,
+  "source_review": {
+    "deterministic_tool_or_transport_bug_found": false,
+    "all_f2_actual_http_requests_contain_exact_cue_and_manage_branch": true,
+    "local_template_only_accepts_first_system_message": true,
+    "server_internal_rendering_independently_observed": false
+  },
+  "decision": "Stop wording-only revisions. Independently freeze one event-timed reminder in the first system request copy after actual business observations, with a transient business-tool counterexample; no automatic writes or new model phase.",
+  "r_reconciliation": "NOT_STARTED",
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}
