@@ -168,6 +168,16 @@ Host CRUD/no-op. The local template forbids later system messages; never change 
 Add one transient business-tool counterexample, no automatic writes, extra model phase or
 semantic relevance gate. R is still independent; no source mutation before Root release.
 
+[Formation R3](docs/MILAI_LIFECYCLE_V24_FORMATION_R3_RESULTS_20260927.md) is complete on
+mapping `390a1d7a5e0618e4a7ee22ab59d91ff8357ede2573a548d0f546f71ef2379846`:
+all three eligible reminders actually arrive, but formation remains0/2. Original four cases
+pass2/4; the added transient business case passes1/1 separately. Preserve continuous
+614 generations /557521tokens /5216embeddingtokens /75exact reads. Stop F cue-family
+escalation as predeclared. After Luna checkpoint, Root releases independent R source work:
+actual ok:true receipts and FULL/EXACT refs from the action-generating request become
+potential candidates; ordinary Host decides update/no-op. Disable F and SER in this comparison.
+No Store read, automatic prose update, new model phase or vLLM change. P10/P12/master continue.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

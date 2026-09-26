@@ -1,0 +1,402 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_FORMATION_RUN_REVIEW",
+  "run_id": "lifecycle-v24-formation-f-r3",
+  "arm": "f_observation_retention",
+  "source_mapping_sha256": "390a1d7a5e0618e4a7ee22ab59d91ff8357ede2573a548d0f546f71ef2379846",
+  "status": "MECHANICAL_PASS_SEMANTIC_REVIEW_SEPARATE",
+  "runtime_status": "TERMINAL",
+  "identity": {
+    "recipe_id": "langmem-hotpath-react-json-action-v1",
+    "run_id": "lifecycle-v24-formation-f-r3",
+    "inputs_sha256": "9ce2567c31870f18c1d4bc70ee4a0e2e6fd298f41f0587b02fcd7c935aa21d2f",
+    "config_sha256": "3e9e0163a71573d9a9a31cd442ef1fc81800f66d89beef205eae8a94f4444b13",
+    "rubric_read_by_runner": false,
+    "arm_id": "f_observation_retention",
+    "protocol_id": "prospective_retention_observation_v3"
+  },
+  "usage": {
+    "generations": 12,
+    "input_tokens": 6996,
+    "output_tokens": 374,
+    "generation_tokens": 7370,
+    "embedding_requests": 2,
+    "embedding_tokens": 29,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "provider_wall_seconds": 4.264136800542474,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "cases": [
+    {
+      "id": "f01_future_agreement",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "agreement",
+          "answers": [
+            "Confirmation sent to Mira at Maple Courtyard (ID: CNF-7318). The 14 rowan saplings are reserved and on hold pending site lead approval."
+          ],
+          "calls": [
+            {
+              "name": "send_confirmation",
+              "args": {
+                "recipient": "Mira at Maple Courtyard",
+                "message": "We have reserved 14 rowan saplings for the courtyard planting. Keep them on hold until the site lead approves release; we will return to arrange pickup later."
+              },
+              "id": "chatcmpl-91b8f1c4c54a8504:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "send_confirmation",
+              "content": "{\"ok\": true, \"confirmation_id\": \"CNF-7318\", \"status\": \"sent\"}",
+              "status": "success",
+              "tool_call_id": "chatcmpl-91b8f1c4c54a8504:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "54111874df6a78c177e0b6873c4100c64eaacc77d63b42461d4bb6d13fd34b75",
+              "generation_id": "chatcmpl-91b8f1c4c54a8504",
+              "call_id": "chatcmpl-91b8f1c4c54a8504:tool:0",
+              "name": "send_confirmation",
+              "args": {
+                "recipient": "Mira at Maple Courtyard",
+                "message": "We have reserved 14 rowan saplings for the courtyard planting. Keep them on hold until the site lead approves release; we will return to arrange pickup later."
+              },
+              "result": {
+                "content": "{\"ok\": true, \"confirmation_id\": \"CNF-7318\", \"status\": \"sent\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "send_confirmation",
+                "id": null,
+                "tool_call_id": "chatcmpl-91b8f1c4c54a8504:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": []
+        },
+        {
+          "session_id": "later",
+          "answers": [
+            "I could not find any stored notes regarding a Maple Courtyard reservation. Please provide the details of the species, quantity, and release conditions, or check if the memory was saved under a different name."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Maple Courtyard reservation species quantity release conditions"
+              },
+              "id": "chatcmpl-a9de701a63caa8ac:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "[]",
+              "status": "success",
+              "tool_call_id": "chatcmpl-a9de701a63caa8ac:tool:0"
+            }
+          ],
+          "business_calls": [],
+          "memories": []
+        }
+      ]
+    },
+    {
+      "id": "f02_business_receipt",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "booking",
+          "answers": [
+            "Collection for consignment 'Eastbank exhibit cases' has been booked. Booking ID: COL-4826, Depot Bay: H-6. Status: Awaiting depot approval. Please return with the approval before arranging the actual collection."
+          ],
+          "calls": [
+            {
+              "name": "book_collection",
+              "args": {
+                "consignment": "Eastbank exhibit cases",
+                "hold_until_approval": true
+              },
+              "id": "chatcmpl-99c9a94cfb5ddf40:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "book_collection",
+              "content": "{\"ok\": true, \"booking_id\": \"COL-4826\", \"depot_bay\": \"H-6\", \"status\": \"awaiting_depot_approval\"}",
+              "status": "success",
+              "tool_call_id": "chatcmpl-99c9a94cfb5ddf40:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "c7161fd0e3be59dc7764c2912e0498e1f80dd00bdac375c38348a32496655d45",
+              "generation_id": "chatcmpl-99c9a94cfb5ddf40",
+              "call_id": "chatcmpl-99c9a94cfb5ddf40:tool:0",
+              "name": "book_collection",
+              "args": {
+                "consignment": "Eastbank exhibit cases",
+                "hold_until_approval": true
+              },
+              "result": {
+                "content": "{\"ok\": true, \"booking_id\": \"COL-4826\", \"depot_bay\": \"H-6\", \"status\": \"awaiting_depot_approval\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "book_collection",
+                "id": null,
+                "tool_call_id": "chatcmpl-99c9a94cfb5ddf40:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": []
+        },
+        {
+          "session_id": "later",
+          "answers": [
+            "I could not find any stored notes regarding the Eastbank exhibit cases collection. Therefore, I cannot provide the booking reference, depot bay, or approval status. No booking has been created or assumed to be approved."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Eastbank exhibit cases collection booking reference depot bay approval status"
+              },
+              "id": "chatcmpl-879ba4a90d1e5111:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "[]",
+              "status": "success",
+              "tool_call_id": "chatcmpl-879ba4a90d1e5111:tool:0"
+            }
+          ],
+          "business_calls": [],
+          "memories": []
+        }
+      ]
+    },
+    {
+      "id": "f03_temporary_calculation",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "once",
+          "answers": [
+            "378"
+          ],
+          "calls": [],
+          "tool_results": [],
+          "business_calls": [],
+          "memories": []
+        }
+      ]
+    },
+    {
+      "id": "f04_one_time_format",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "once",
+          "answers": [
+            "READY"
+          ],
+          "calls": [],
+          "tool_results": [],
+          "business_calls": [],
+          "memories": []
+        }
+      ]
+    },
+    {
+      "id": "f05_transient_business_observation",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "once",
+          "answers": [
+            "The temperature in the West reading room is 21°C."
+          ],
+          "calls": [
+            {
+              "name": "measure_room",
+              "args": {
+                "room": "West reading room"
+              },
+              "id": "chatcmpl-9216bafff7f668c5:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "measure_room",
+              "content": "{\"ok\": true, \"room\": \"West reading room\", \"temperature_c\": 21}",
+              "status": "success",
+              "tool_call_id": "chatcmpl-9216bafff7f668c5:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "334fc5520d4f19fccd0abbfd9ac7ffed41c4fee033dc438a2612455a8e6669dc",
+              "generation_id": "chatcmpl-9216bafff7f668c5",
+              "call_id": "chatcmpl-9216bafff7f668c5:tool:0",
+              "name": "measure_room",
+              "args": {
+                "room": "West reading room"
+              },
+              "result": {
+                "content": "{\"ok\": true, \"room\": \"West reading room\", \"temperature_c\": 21}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "measure_room",
+                "id": null,
+                "tool_call_id": "chatcmpl-9216bafff7f668c5:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": []
+        }
+      ]
+    }
+  ],
+  "instrumentation": {
+    "counts": {
+      "observations": 10,
+      "tool_calls": 5,
+      "request_material": 5,
+      "revisions": 0,
+      "operations": 0,
+      "searches": 2,
+      "bodies": 11,
+      "requests": 12
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 5
+      },
+      "operations": {},
+      "searches": {
+        "returned": 2
+      },
+      "requests": {
+        "completed": 12
+      }
+    },
+    "observation_roles": {
+      "business_tool": 3,
+      "user": 7
+    },
+    "revision_effects": {},
+    "material_coverage": {
+      "FULL": 5
+    },
+    "search_returned_items": 0,
+    "search_exact_revision_bindings": 0,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 100,
+      "observer_cpu_ns": 33421266,
+      "observer_wall_ns": 650368212,
+      "extra_store_reads": 0,
+      "extra_read_cpu_ns": 0,
+      "extra_read_wall_ns": 0,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 114688,
+      "net_sqlite_db_bytes": 16384,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "process": {
+    "run_id": "lifecycle-v24-formation-f-r3",
+    "exit_code": 0,
+    "process_wall_seconds": 9.139863658696413
+  },
+  "observation_reminder": {
+    "projection_attempts": 12,
+    "actual_deliveries": [
+      {
+        "request_id": "6e0ef27c55ce3a28f1e61ab0f531cfdfaee7ddd11a618b1e11853f8b841dd28b",
+        "receipt_id": "chatcmpl-84a8e3aacafb0215",
+        "scope": "diagnostic:f01_future_agreement",
+        "business_call_ids": [
+          "chatcmpl-91b8f1c4c54a8504:tool:0"
+        ]
+      },
+      {
+        "request_id": "b3d3c2ff7a4ce65b44b90f5ff006d7fac8cb1539d6bc3ad9a39686652097d968",
+        "receipt_id": "chatcmpl-a9b7e860b0067e61",
+        "scope": "diagnostic:f02_business_receipt",
+        "business_call_ids": [
+          "chatcmpl-99c9a94cfb5ddf40:tool:0"
+        ]
+      },
+      {
+        "request_id": "1d50d6cbc417f8cbf4f0169fd56a9abc9762a5b59fa0572ad65706b63ed7209c",
+        "receipt_id": "chatcmpl-9808a82e2f78d15c",
+        "scope": "diagnostic:f05_transient_business_observation",
+        "business_call_ids": [
+          "chatcmpl-9216bafff7f668c5:tool:0"
+        ]
+      }
+    ],
+    "cpu_ns": 1024670,
+    "wall_ns": 785103,
+    "direct_input_delta_tokens": 168,
+    "per_request_delta_values": [
+      56
+    ],
+    "text_tokens": 55,
+    "program_store_reads": 0,
+    "program_memory_writes": 0,
+    "independent_model_phases": 0,
+    "qualification": "Projected events separately joined to actual HTTP requests; eligibility reconstructed from current request tool suffix and matching completed per-thread business journal receipts."
+  },
+  "cue_cost": {
+    "text_tokens": 70,
+    "actual_requests_with_cue": 12,
+    "fixed_trajectory_prompt_delta_tokens": 852,
+    "per_request_delta_values": [
+      71
+    ],
+    "meaning": "Tokenizer difference on identical actual request with only cue removed; not an extra model run or causal total-cost estimate."
+  },
+  "file_bytes": {
+    "trace.jsonl": 180534,
+    "instrumentation.sqlite": 114688,
+    "checkpoints.sqlite": 118784
+  },
+  "artifact_sha256": {
+    "artifacts/lifecycle-v24/lifecycle-v24-formation-f-r3/trace.jsonl": "1d6def3f345f7c3efca1a307bd754a54f6126d4eb4e2981f7f7db8b5b6b66838",
+    "artifacts/lifecycle-v24/lifecycle-v24-formation-f-r3/instrumentation.sqlite": "90d627063ec3c61a66316e752d59930263a88ba48ef04fab549feefd5c0cef81",
+    "artifacts/lifecycle-v24/lifecycle-v24-formation-f-r3/checkpoints.sqlite": "cb8fab8942f706b30780a1bfbc1c68cb45ec3040a49e16e7598a07edcce0b629",
+    "artifacts/lifecycle-v24/lifecycle-v24-formation-f-r3/run/result.json": "9012a508e853c5fa209b4ff1a869de1094e88a3f1f90ea1df55728e85ff3c017"
+  },
+  "persistent_semantic_state_bytes": 0,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}

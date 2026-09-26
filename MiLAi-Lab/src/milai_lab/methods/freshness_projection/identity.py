@@ -16,7 +16,12 @@ from milai_lab.methods.freshness_projection.controller import (
     SER_V21_TRANSPORT_VARIANT,
     TRANSPORT_VARIANT,
 )
-from milai_lab.methods.memory_lifecycle import FORMATION_CUE_SHA256, FORMATION_PROTOCOL_ID
+from milai_lab.methods.memory_lifecycle import (
+    FORMATION_CUE_SHA256,
+    FORMATION_PROTOCOL_ID,
+    OBSERVATION_PROTOCOL_ID,
+    OBSERVATION_REMINDER_SHA256,
+)
 
 LAB = Path(__file__).resolve().parents[4]
 REFERENCE = LAB / "data/manifests/freshness-v19-repair-reference.json"
@@ -62,6 +67,7 @@ REQUIRED_LIFECYCLE_V24_RUNTIME = REQUIRED_SER_V23_RUNTIME | {
     "tools/run_milai_lifecycle_v24.py",
     "configs/milai-lifecycle-v24-formation.json",
     "configs/milai-lifecycle-v24-formation-r2.json",
+    "configs/milai-lifecycle-v24-formation-r3.json",
     "src/milai_lab/methods/memory_lifecycle.py",
 }
 
@@ -196,6 +202,11 @@ def verify_lifecycle_v24_lock(lock_path: Path, config_path: Path,
                        "formation_cue_sha256": FORMATION_CUE_SHA256}.items():
         if lock.get(key) != value or config.get(key) != value:
             raise ValueError("LIFECYCLE_V24_" + key.upper() + "_CHANGED")
+    if "observation_protocol_id" in config:
+        for key, value in {"observation_protocol_id": OBSERVATION_PROTOCOL_ID,
+                           "observation_reminder_sha256": OBSERVATION_REMINDER_SHA256}.items():
+            if lock.get(key) != value or config.get(key) != value:
+                raise ValueError("LIFECYCLE_V24_" + key.upper() + "_CHANGED")
     return lock, config
 
 

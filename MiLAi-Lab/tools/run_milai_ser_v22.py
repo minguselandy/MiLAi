@@ -32,6 +32,7 @@ from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_diagnostic import run_frozen_diagnostics
+from milai_lab.runners.langmem_foundation import BusinessActionJournal
 from milai_lab.runners.langmem_merit import run_exposed_merit_arc
 from run_langmem_provenance import _trace_emit
 
@@ -98,7 +99,9 @@ def run(args: argparse.Namespace, *,
         runtime_prefix: str = "ser-v22",
         lock_identity_key: str = "ser_v22_lock_sha256",
         environment_rules: str = "",
-        protocol_id: str | None = None) -> dict[str, Any]:
+        protocol_id: str | None = None,
+        request_view_factory: Callable[[BusinessActionJournal, Any], Any] | None = None,
+        ) -> dict[str, Any]:
     input_path = _input(args)
     lock_sha = prepared_verifier(
         args.prepared, args.lock, args.config, run_id=args.run, arm_id=args.arm,
@@ -159,7 +162,8 @@ def run(args: argparse.Namespace, *,
                             selected_cases=set(args.case) if args.case else None,
                             arm_id=args.arm, observer=observer,
                             environment_rules=environment_rules,
-                            protocol_id=protocol_id)
+                            protocol_id=protocol_id,
+                            request_view_factory=request_view_factory)
                     return run_exposed_merit_arc(
                         input_path, args.output, args.run, model, store, saver,
                         identity, arm_id=args.arm, observer=observer,

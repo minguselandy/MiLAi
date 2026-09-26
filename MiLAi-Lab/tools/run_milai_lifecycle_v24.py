@@ -12,11 +12,16 @@ from milai_lab.methods.freshness_projection.identity import (
     verify_lifecycle_v24_lock,
     verify_lifecycle_v24_prepared,
 )
-from milai_lab.methods.memory_lifecycle import FORMATION_CUE, FORMATION_PROTOCOL_ID
+from milai_lab.methods.memory_lifecycle import (
+    FORMATION_CUE,
+    FORMATION_PROTOCOL_ID,
+    OBSERVATION_PROTOCOL_ID,
+    BusinessObservationRequestView,
+)
 from run_milai_ser_v22 import prepare as prepare_diagnostic
 from run_milai_ser_v22 import run as run_diagnostic
 
-ARMS = ("b1_control", "f_prospective_retention")
+ARMS = ("b1_control", "f_prospective_retention", "f_observation_retention")
 
 
 def prepare(args: argparse.Namespace) -> dict[str, Any]:
@@ -29,9 +34,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         args, prepared_verifier=verify_lifecycle_v24_prepared,
         runtime_prefix="lifecycle-v24-formation",
         lock_identity_key="lifecycle_v24_lock_sha256",
-        environment_rules=FORMATION_CUE if args.arm == "f_prospective_retention" else "",
-        protocol_id=(FORMATION_PROTOCOL_ID if args.arm == "f_prospective_retention"
-                     else "langmem_default_v1"))
+        environment_rules=FORMATION_CUE if args.arm != "b1_control" else "",
+        protocol_id=("langmem_default_v1" if args.arm == "b1_control" else
+                     OBSERVATION_PROTOCOL_ID if args.arm == "f_observation_retention" else
+                     FORMATION_PROTOCOL_ID),
+        request_view_factory=(BusinessObservationRequestView
+                              if args.arm == "f_observation_retention" else None))
 
 
 def main() -> None:
@@ -40,16 +48,16 @@ def main() -> None:
     for command in ("prepare", "run"):
         item = commands.add_parser(command)
         item.add_argument("--config", type=Path, default=LAB /
-                          "configs/milai-lifecycle-v24-formation-r2.json")
+                          "configs/milai-lifecycle-v24-formation-r3.json")
         item.add_argument("--lock", type=Path, default=LAB /
-                          "data/locks/milai-lifecycle-v24-formation-r2.lock.json")
+                          "data/locks/milai-lifecycle-v24-formation-r3.lock.json")
         item.add_argument("--diagnostic-inputs", type=Path, default=LAB /
-                          "data/diagnostics/milai-lifecycle-v24-formation-inputs.json")
+                          "data/diagnostics/milai-lifecycle-v24-formation-r3-inputs.json")
         item.add_argument("--diagnostic-freeze", type=Path, default=LAB /
-                          "data/manifests/milai-lifecycle-v24-formation-diagnostic-freeze.json")
+                          "data/manifests/milai-lifecycle-v24-formation-r3-diagnostic-freeze.json")
         item.add_argument("--input-freeze", "--exposed-freeze", dest="exposed_freeze",
                           type=Path, default=LAB /
-                          "data/manifests/milai-lifecycle-v24-formation-input-freeze.json")
+                          "data/manifests/milai-lifecycle-v24-formation-r3-input-freeze.json")
         item.add_argument("--run", required=True)
         item.add_argument("--arm", choices=ARMS, required=True)
         item.add_argument("--output", type=Path, required=True)

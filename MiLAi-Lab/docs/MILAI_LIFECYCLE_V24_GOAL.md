@@ -9,7 +9,7 @@ reference_commit: 9387f533b9bb76f01beca59e26887194e878fb64
 
 执行总计划§14、§15/P11。P9的21条早期约定观察未保存，成功动作后仍留有pending正文；这些是独立生命周期缺口，不是SER刷新失败。保留P9全部未见结果，不修改其提示或重跑种子3/4。先完成Formation（F）的最小机制，再另行冻结Reconciliation（R），两者不同时改动以免混合归因。
 
-进度：R1已发布`5c1574c8943bcc0ad0fab0933770a6e4e51d1a62`，[R1](MILAI_LIFECYCLE_V24_FORMATION_R1_RESULTS_20260927.md)与[R2](MILAI_LIFECYCLE_V24_FORMATION_R2_RESULTS_20260927.md)静态cue均0/2形成。独立显式保存控制通过，只证明当前工具/Store能力；接着检验最小事件提醒，R尚未开始。下文固定cue为R1原方案，原字节保存在该commit；R2变更由单独plan/protocol绑定。
+进度：[R1](MILAI_LIFECYCLE_V24_FORMATION_R1_RESULTS_20260927.md)、[R2](MILAI_LIFECYCLE_V24_FORMATION_R2_RESULTS_20260927.md)静态cue和[R3事件提醒](MILAI_LIFECYCLE_V24_FORMATION_R3_RESULTS_20260927.md)均0/2形成；独立显式保存控制通过，只证明工具/Store能力。F按预定停点停止cue家族升级，继续独立R。下文固定cue为R1历史方案，原字节保存在`5c1574c8943bcc0ad0fab0933770a6e4e51d1a62`；R2/R3变更由各自plan/protocol绑定。
 
 ## F：单一通用前瞻提示
 
@@ -39,9 +39,9 @@ vLLM设置不变，现有Qwen3.6-35B-A3B-FP8、temperature0、thinking=false、m
 
 ## 交付
 
-- [ ] F输入/rubric/protocol、最小源码、必要窄验证和新源锁。
-- [ ] 同源B1/F十二消息机会、实际wire/持久记忆/业务回执与完整费用。
-- [ ] F Failure Review、十项Reflection与Continue/Pivot/Kill。
+- [x] F输入/rubric/protocol、最小源码、必要窄验证和新源锁。
+- [x] 首轮同源B1/F十二消息机会、后续独立候选、实际wire/持久记忆/业务回执与完整费用。
+- [x] F Failure Review、十项Reflection与Continue/Pivot/Kill；负结果封存，无效cue不默认启用。
 - [ ] 独立R源冻结、三个控制、实际候选/普通CRUD/反例与费用。
 - [ ] 生命周期结果与复现、Luna提交推送并核对remote。
 

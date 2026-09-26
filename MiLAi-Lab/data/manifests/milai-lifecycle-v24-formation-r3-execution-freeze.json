@@ -1,0 +1,236 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_FORMATION_EXECUTION_FREEZE",
+  "status": "FROZEN_BEFORE_FIRST_REAL_REQUEST",
+  "created_at": "2026-09-26T19:52:44.917358+00:00",
+  "protocol_path": "data/manifests/milai-lifecycle-v24-formation-r3-protocol.json",
+  "protocol_sha256": "41106e57703c562bc9be3398263b6a545bf3a7e4ec69d827d3233b43a8fe9a66",
+  "lock_path": "data/locks/milai-lifecycle-v24-formation-r3.lock.json",
+  "lock_sha256": "3b41b19ff0400f76323831f10e57ad3dc46f4e4df2d3a97a82bcb750a91f6c53",
+  "source_mapping_sha256": "390a1d7a5e0618e4a7ee22ab59d91ff8357ede2573a548d0f546f71ef2379846",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "stage": "FORMATION_V24_R3",
+    "reference_commit": "fe9bfa079ccc5c72b0af8e5b6c3fb1c04742ce93",
+    "source_files": [
+      "src/milai_lab/methods/memory_lifecycle.py",
+      "src/milai_lab/methods/freshness_projection/identity.py",
+      "src/milai_lab/runners/langmem_diagnostic.py",
+      "tools/run_milai_ser_v22.py",
+      "tools/run_milai_lifecycle_v24.py",
+      "configs/milai-lifecycle-v24-formation-r3.json",
+      "pyproject.toml"
+    ],
+    "new_validation_files": [],
+    "modified_validation_files": [
+      "tests/unit/test_freshness_projection.py"
+    ],
+    "identity": {
+      "lock_expected": "data/locks/milai-lifecycle-v24-formation-r3.lock.json",
+      "kind": "MILAI_LIFECYCLE_V24_LOCK",
+      "formation_protocol_id": "prospective_retention_duty_v2",
+      "formation_cue_sha256": "4938d5ceb357e4575662eb6ecd97c25842dc8750d167bb11c24568dc29d14ea4",
+      "observation_protocol_id": "prospective_retention_observation_v3",
+      "observation_reminder_sha256": "75e17e77a227c2672eacf5912296cbfad98e4e8d474adbc1df92d63db13ecd86",
+      "required_runtime_export": "REQUIRED_LIFECYCLE_V24_RUNTIME",
+      "verifier_export": "verify_lifecycle_v24_lock",
+      "continuous_budget_path": "artifacts/ser-v20/budget.json"
+    },
+    "behavior": {
+      "arm": "f_observation_retention",
+      "trigger": "current trailing ToolMessage group with exact thread, generation, call, name, args, content and status bound to a completed business journal entry",
+      "request_copy_only": true,
+      "checkpoint_or_tool_body_changed": false,
+      "business_success_assumed": false,
+      "automatic_memory_write_or_store_read": false,
+      "projection_event": "formation_observation_projection",
+      "projection_event_cost_fields": [
+        "cpu_ns",
+        "wall_ns"
+      ],
+      "projection_event_delivery_claim": false
+    },
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py::test_observation_reminder_requires_current_journal_bound_business_receipt tests/unit/test_freshness_projection.py::test_formation_cue_is_only_system_difference_and_identity_is_explicit",
+        "result": "PASS; 2 passed; mock Provider wire, failed receipt, unchanged history, no-marker boundaries and arm identity"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/memory_lifecycle.py src/milai_lab/methods/freshness_projection/identity.py src/milai_lab/runners/langmem_diagnostic.py tools/run_milai_ser_v22.py tools/run_milai_lifecycle_v24.py tests/unit/test_freshness_projection.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/methods/memory_lifecycle.py src/milai_lab/methods/freshness_projection/identity.py src/milai_lab/runners/langmem_diagnostic.py tools/run_milai_ser_v22.py tools/run_milai_lifecycle_v24.py",
+        "result": "PASS; 5 source files"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      },
+      {
+        "command": "offline R3 reminder/protocol/config identity and R2 config parity",
+        "result": "PASS; F2 cue, Host, embedding, capacity, recipe, transport and continuous budget unchanged"
+      }
+    ],
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "packaging": "PENDING_LOCK"
+  },
+  "package_verification": {
+    "status": "PASS",
+    "stage": "FORMATION_V24_R3_FROZEN",
+    "lock": "data/locks/milai-lifecycle-v24-formation-r3.lock.json",
+    "lock_sha256": "3b41b19ff0400f76323831f10e57ad3dc46f4e4df2d3a97a82bcb750a91f6c53",
+    "source_mapping_sha256": "390a1d7a5e0618e4a7ee22ab59d91ff8357ede2573a548d0f546f71ef2379846",
+    "identity_check": "PASS: verify_lifecycle_v24_lock, 75-file source map",
+    "build": {
+      "command": "uv build --out-dir artifacts/lifecycle-v24/r3/dist",
+      "result": "PASS: one build after R3 source lock",
+      "sdist": "artifacts/lifecycle-v24/r3/dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "1e8e1ee327f1cd002541a183d62ba564339dd7bd02ab8ab480bd0e3e68c6fdc5",
+      "wheel": "artifacts/lifecycle-v24/r3/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "6f2d512ea97440b92654eb4be9dca0057aaf12c2e22b07f3258c59e94af19b4e"
+    },
+    "members": {
+      "result": "PASS: all required R3 source/wheel members present; no generated or private runtime artifact paths",
+      "sdist_file_count": 1781,
+      "wheel_file_count": 138,
+      "sdist_required": [
+        "configs/milai-lifecycle-v24-formation-r3.json",
+        "data/locks/milai-lifecycle-v24-formation-r3.lock.json",
+        "data/manifests/milai-lifecycle-v24-formation-r3-protocol.json",
+        "tools/run_milai_lifecycle_v24.py",
+        "tools/run_milai_ser_v22.py",
+        "src/milai_lab/methods/memory_lifecycle.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "src/milai_lab/runners/langmem_diagnostic.py",
+        "tests/unit/test_freshness_projection.py"
+      ],
+      "wheel_required": [
+        "milai_lab/methods/memory_lifecycle.py",
+        "milai_lab/methods/freshness_projection/identity.py",
+        "milai_lab/runners/langmem_diagnostic.py"
+      ],
+      "private_or_generated_members": []
+    },
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_lock": 0
+  },
+  "runs": [
+    {
+      "run_id": "lifecycle-v24-formation-f-r3",
+      "arm": "f_observation_retention",
+      "mode": "diagnostic",
+      "directory": "artifacts/lifecycle-v24/lifecycle-v24-formation-f-r3",
+      "options": [
+        "--config",
+        "artifacts/lifecycle-v24/lifecycle-v24-formation-f-r3/config.json",
+        "--lock",
+        "data/locks/milai-lifecycle-v24-formation-r3.lock.json",
+        "--diagnostic-inputs",
+        "data/diagnostics/milai-lifecycle-v24-formation-r3-inputs.json",
+        "--diagnostic-freeze",
+        "data/manifests/milai-lifecycle-v24-formation-r3-diagnostic-freeze.json",
+        "--input-freeze",
+        "data/manifests/milai-lifecycle-v24-formation-r3-input-freeze.json",
+        "--run",
+        "lifecycle-v24-formation-f-r3",
+        "--arm",
+        "f_observation_retention"
+      ],
+      "initial_namespace_items": 0,
+      "config_sha256": "90b4cfc3943733fc39e80ff4ad3531a21aa7cc029400228354857e33d4a6562c",
+      "prepared_sha256": "41264645e8f63df17905c0b69ae387958d138f880df784ff4d8b51c0b2fa6b47",
+      "result_manifest": "data/manifests/milai-lifecycle-v24-formation-r3-f-results.json"
+    }
+  ],
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 602,
+    "generation": {
+      "charged_tokens": 550151,
+      "known_tokens": 550151,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 5187,
+      "known_tokens": 5187,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "model_concurrency": 1,
+  "environment_reference": {
+    "path": "artifacts/ser-v20/environment-before.json",
+    "sha256": "8aba502900721b86dc778783cc6d59013a7691666b81e82fc86aadbe58f4d9b6"
+  },
+  "vllm_settings_changed": false,
+  "unseen": false,
+  "master_goal_complete": false
+}

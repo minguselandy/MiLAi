@@ -27,7 +27,7 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 | P8 | 方法收敛与formal freeze，逐项满足§25条件 | [九项判定与方法冻结](MILAI_SER_V22_P8_METHOD_FREEZE.md)完成，允许小规模检验；不等于最终质量GO |
 | P9 | 运行前选择冻结的unseen matched evaluation，B1/lite/full输入与scorer一致 | [v23六条已完成](MILAI_SER_V23_RESULTS_20260927.md)：B1 6/10，A3/A4各7/10，0自然refresh/rebase；负面证据保留，PIVOT至生命周期 |
 | P10 | external baselines、至少两模型族、历史/密度/版本比例鲁棒性及参数边界 | 稳定主效果未建立；第二模型独立端点已异步请求，其余工作继续，未标完成 |
-| P11 | Formation与Post-Action Reconciliation独立Goal/机制/评估，不能混同SER收益 | [v24独立Goal](MILAI_LIFECYCLE_V24_GOAL.md)执行中；[F R1](MILAI_LIFECYCLE_V24_FORMATION_R1_RESULTS_20260927.md)/[R2](MILAI_LIFECYCLE_V24_FORMATION_R2_RESULTS_20260927.md)均0/2形成；显式保存控制通过，下一步最小事件提醒，R待独立冻结 |
+| P11 | Formation与Post-Action Reconciliation独立Goal/机制/评估，不能混同SER收益 | [v24独立Goal](MILAI_LIFECYCLE_V24_GOAL.md)执行中；F R1/R2及[R3事件提醒](MILAI_LIFECYCLE_V24_FORMATION_R3_RESULTS_20260927.md)均0/2形成；显式保存控制通过。停止F cue家族升级，R待独立冻结 |
 | P12 | 论文级质量—成本Pareto、错误边界、真实Agent脚本工作负载和复现交付 | 待汇总 |
 
 全程还需覆盖§20–24的多对象/多版本/current冲突、short/medium/long历史及checkpoint边界；§28–30全部指标和完整成本；§43跨session、CRUD、restart、partial failure、无关交错、多用户scope的非benchmark工作负载。Product当前不改；迁移须满足§44。State–Attention、action grounding、Current Evidence Capsule、Jev均按原计划的证据条件决定是否启动，不将“可选”解释为必须提前实现，也不将尚未满足的主阶段冒充完成。
@@ -49,3 +49,5 @@ P7 R3/P8后连续SER415生成/373013tokens/4370embeddingtokens/75get；0未知/�
 P9后连续SER568生成/530611tokens/5057embeddingtokens/75get。本轮42公开消息机会中37完成、4容量失败、1skipped，原业务checker分别计分。三臂21条早期约定观察均未形成记忆；12个依赖任务2次正确/6次错误退款/4容量失败。没有主方法自然适应证据，PIVOT优先级至P11，并继续P10资源/边界与P12真实脚本、Pareto和复现交付，不结束master。
 
 独立Formation R1/R2和显式保存能力控制后，连续602生成/550151tokens/5187embeddingtokens/75get。两个静态cue均未带来形成收益；当前公共CRUD/Store能力控制通过。保留所有费用，先检验一次最小事件提醒及临时工具反例，不继续措辞堆叠或基础设施重跑；R、P10/P12仍继续。
+
+Formation R3后连续614生成/557521tokens/5216embeddingtokens/75get。三次事件提醒准确送达仍0/2形成，原四例2/4、新增临时工具反例1/1；按预定停点停止F cue家族升级。继续独立R、P12非benchmark脚本和错误/成本边界；P10第二模型资源问题仍保留，master ACTIVE。

@@ -13,7 +13,13 @@ import pytest
 pytest.importorskip("langmem")
 
 from langchain_core.embeddings import Embeddings
-from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
+from langchain_core.messages import (
+    AIMessage,
+    HumanMessage,
+    SystemMessage,
+    ToolMessage,
+    convert_to_openai_messages,
+)
 from langchain_core.tools import tool
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.store.memory import InMemoryStore
@@ -52,6 +58,10 @@ from milai_lab.methods.memory_lifecycle import (
     FORMATION_CUE,
     FORMATION_CUE_SHA256,
     FORMATION_PROTOCOL_ID,
+    OBSERVATION_PROTOCOL_ID,
+    OBSERVATION_REMINDER,
+    OBSERVATION_REMINDER_SHA256,
+    BusinessObservationRequestView,
 )
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
@@ -939,9 +949,105 @@ def test_formation_cue_is_only_system_difference_and_identity_is_explicit(
         captured.append(kwargs) or {}))
     for arm in entry.ARMS:
         entry.run(SimpleNamespace(arm=arm))
-    assert [item["environment_rules"] for item in captured] == ["", FORMATION_CUE]
+    assert [item["environment_rules"] for item in captured] == [
+        "", FORMATION_CUE, FORMATION_CUE]
     assert [item["protocol_id"] for item in captured] == [
-        "langmem_default_v1", FORMATION_PROTOCOL_ID]
+        "langmem_default_v1", FORMATION_PROTOCOL_ID, OBSERVATION_PROTOCOL_ID]
+    assert [item["request_view_factory"] for item in captured] == [
+        None, None, BusinessObservationRequestView]
+
+
+def test_observation_reminder_requires_current_journal_bound_business_receipt(
+    tmp_path: Path,
+) -> None:
+    protocol = json.loads((LAB / "data/manifests/milai-lifecycle-v24-formation-r3-protocol.json")
+                          .read_text(encoding="utf-8"))
+    config = json.loads((LAB / "configs/milai-lifecycle-v24-formation-r3.json")
+                        .read_text(encoding="utf-8"))
+    assert protocol["observation_reminder"] == OBSERVATION_REMINDER
+    assert protocol["observation_reminder_sha256"] == config[
+        "observation_reminder_sha256"] == OBSERVATION_REMINDER_SHA256
+    assert protocol["observation_protocol_id"] == config[
+        "observation_protocol_id"] == OBSERVATION_PROTOCOL_ID
+
+    inputs_path = tmp_path / "inputs.json"
+    inputs_path.write_text(json.dumps({"cases": [{"id": "measure", "tools": [{
+        "schema": {"type": "function", "function": {"name": "measure_once",
+                   "description": "Return one measurement.",
+                   "parameters": {"type": "object", "properties": {}}}},
+        "result": {"ok": False, "error": "sensor unavailable"}}],
+        "sessions": [{"id": "first", "turns": [{"text": "Measure this once."}]}]}]}),
+        encoding="utf-8")
+    freeze_path = tmp_path / "freeze.json"
+    freeze_path.write_text(json.dumps({"inputs_file_sha256": sha256_file(inputs_path),
+                                       "cases": 1}), encoding="utf-8")
+    requests: list[dict[str, Any]] = []
+    events: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(json.loads(request.read()))
+        action = ({"calls": [{"name": "measure_once", "arguments": {}}]}
+                  if len(requests) == 1 else {"answer": "The sensor was unavailable."})
+        return httpx.Response(200, json=_receipt(action, f"g{len(requests)}"))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond), emit=events.append) as client:
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            model = VLLMChatModel(client=client)
+            result = run_frozen_diagnostics(
+                inputs_path, freeze_path, tmp_path / "out", "run", model,
+                InMemoryStore(), saver, {"same": True}, arm_id="f_observation_retention",
+                environment_rules=FORMATION_CUE, protocol_id=OBSERVATION_PROTOCOL_ID,
+                request_view_factory=BusinessObservationRequestView)
+    assert result["status"] == "TERMINAL"
+    assert len(requests) == 2
+    assert OBSERVATION_REMINDER not in requests[0]["messages"][0]["content"]
+    assert requests[1]["messages"][0]["content"].endswith(OBSERVATION_REMINDER)
+    assert requests[1]["messages"][-1]["content"] == (
+        '{"ok": false, "error": "sensor unavailable"}')
+    row = json.loads((tmp_path / "out/measure/session-first.json").read_text())
+    assert next(item for item in row["messages"] if item["type"] == "tool")["content"] == (
+        requests[1]["messages"][-1]["content"])
+    projections = [event for event in events
+                   if event.get("event") == "formation_observation_projection"]
+    assert [event["status"] for event in projections] == ["unchanged", "projected"]
+    assert projections[1]["provider_request"] is False
+    assert len(projections[1]["matched_business_call_ids"]) == 1
+    assert projections[1]["cpu_ns"] >= 0 and projections[1]["wall_ns"] >= 0
+
+    journal = BusinessActionJournal(
+        tmp_path / "out/measure/business-journal.json", ["measure_once"])
+    entry = next(iter(json.loads(journal.path.read_text()).values()))
+    thread_id = entry["thread_id"]
+    ai = AIMessage(content="", id=entry["generation_id"], tool_calls=[{
+        "id": entry["call_id"], "name": entry["name"], "args": entry["args"]}])
+    tool = ToolMessage(content=entry["result"]["content"], name=entry["name"],
+                       status=entry["result"]["status"], tool_call_id=entry["call_id"])
+    base = [SystemMessage(content="base"), HumanMessage(content="one-off"), ai, tool]
+    view = BusinessObservationRequestView(journal)
+
+    def projected(graph: list[Any], key: str) -> list[dict[str, Any]]:
+        wire = convert_to_openai_messages(graph)
+        result_wire, result_graph = view.project(wire, graph, key, 2)
+        assert result_graph is graph
+        assert wire[0]["content"] == "base"
+        return result_wire
+
+    assert projected(base, f"{thread_id}:0")[0]["content"].endswith(OBSERVATION_REMINDER)
+    assert projected(base, "other-thread:0")[0]["content"] == "base"
+    assert projected([*base, HumanMessage(content="new user")], f"{thread_id}:1")[0][
+        "content"] == "base"
+    assert projected([*base, AIMessage(content="prior answer")], f"{thread_id}:0")[0][
+        "content"] == "base"
+    wrong_call = ToolMessage(content=tool.content, name=tool.name,
+                             tool_call_id="other-call")
+    assert projected([*base[:-1], wrong_call], f"{thread_id}:0")[0]["content"] == "base"
+    memory_ai = AIMessage(content="", id="search-generation", tool_calls=[{
+        "id": "search-call", "name": "search_memory", "args": {"query": "once"}}])
+    memory_tool = ToolMessage(content="[]", name="search_memory", tool_call_id="search-call")
+    assert projected([*base[:2], memory_ai, memory_tool], f"{thread_id}:0")[0][
+        "content"] == "base"
 
 
 def test_v21_authority_only_when_actual_memory_or_derived_risk_is_projected() -> None:

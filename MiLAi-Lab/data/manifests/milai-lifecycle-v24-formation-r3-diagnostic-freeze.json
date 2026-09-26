@@ -1,0 +1,8 @@
+{
+  "inputs_file_sha256": "9ce2567c31870f18c1d4bc70ee4a0e2e6fd298f41f0587b02fcd7c935aa21d2f",
+  "cases": 5,
+  "sessions": 7,
+  "public_messages": 7,
+  "rubric_path": "data/diagnostics/milai-lifecycle-v24-formation-r3-rubric.json",
+  "rubric_sha256": "0846df0ffaac171b687e76029128faf9fbdbfffd6d3b941be268a35af55e3a67"
+}

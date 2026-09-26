@@ -1,0 +1,199 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_FORMATION_R3_RESULTS",
+  "status": "EVENT_REMINDER_DELIVERED_FORMATION_FAILURE_STOP_CUE_FAMILY",
+  "source_mapping_sha256": "390a1d7a5e0618e4a7ee22ab59d91ff8357ede2573a548d0f546f71ef2379846",
+  "source_lock_sha256": "3b41b19ff0400f76323831f10e57ad3dc46f4e4df2d3a97a82bcb750a91f6c53",
+  "run_results_sha256": {
+    "data/manifests/milai-lifecycle-v24-formation-r3-f-results.json": "4ff16e605d4cdf8026d1290f23b006aede00c38a08b8e04f560fecaa0b63accf"
+  },
+  "original_four_cases": {
+    "formation_successes": 0,
+    "formation_denominator": 2,
+    "later_utility_successes": 0,
+    "later_utility_denominator": 2,
+    "temporary_false_writes": 0,
+    "temporary_denominator": 2,
+    "strict_passes": 2,
+    "strict_denominator": 4,
+    "generations": 10,
+    "input_tokens": 5815,
+    "output_tokens": 337,
+    "generation_tokens": 6152,
+    "comparison": "Fixed historical B1 R1 and F2 references; not fresh matched."
+  },
+  "additional_transient_business_control": {
+    "id": "f05_transient_business_observation",
+    "passed": true,
+    "reminder_delivered": true,
+    "memory_writes": 0,
+    "generations": 2,
+    "input_tokens": 1181,
+    "output_tokens": 37,
+    "generation_tokens": 1218,
+    "included_in_historical_four_case_denominator": false
+  },
+  "host_completed_messages": 7,
+  "declared_messages": 7,
+  "correct_business_actions": 3,
+  "business_action_denominator": 3,
+  "usage": {
+    "generations": 12,
+    "input_tokens": 6996,
+    "output_tokens": 374,
+    "generation_tokens": 7370,
+    "embedding_requests": 2,
+    "embedding_tokens": 29,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "provider_wall_seconds": 4.264136800542474,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "cue_cost": {
+    "text_tokens": 70,
+    "actual_requests_with_cue": 12,
+    "fixed_trajectory_prompt_delta_tokens": 852,
+    "per_request_delta_values": [
+      71
+    ],
+    "meaning": "Tokenizer difference on identical actual request with only cue removed; not an extra model run or causal total-cost estimate."
+  },
+  "observation_reminder": {
+    "projection_attempts": 12,
+    "actual_deliveries": [
+      {
+        "request_id": "6e0ef27c55ce3a28f1e61ab0f531cfdfaee7ddd11a618b1e11853f8b841dd28b",
+        "receipt_id": "chatcmpl-84a8e3aacafb0215",
+        "scope": "diagnostic:f01_future_agreement",
+        "business_call_ids": [
+          "chatcmpl-91b8f1c4c54a8504:tool:0"
+        ]
+      },
+      {
+        "request_id": "b3d3c2ff7a4ce65b44b90f5ff006d7fac8cb1539d6bc3ad9a39686652097d968",
+        "receipt_id": "chatcmpl-a9b7e860b0067e61",
+        "scope": "diagnostic:f02_business_receipt",
+        "business_call_ids": [
+          "chatcmpl-99c9a94cfb5ddf40:tool:0"
+        ]
+      },
+      {
+        "request_id": "1d50d6cbc417f8cbf4f0169fd56a9abc9762a5b59fa0572ad65706b63ed7209c",
+        "receipt_id": "chatcmpl-9808a82e2f78d15c",
+        "scope": "diagnostic:f05_transient_business_observation",
+        "business_call_ids": [
+          "chatcmpl-9216bafff7f668c5:tool:0"
+        ]
+      }
+    ],
+    "cpu_ns": 1024670,
+    "wall_ns": 785103,
+    "direct_input_delta_tokens": 168,
+    "per_request_delta_values": [
+      56
+    ],
+    "text_tokens": 55,
+    "program_store_reads": 0,
+    "program_memory_writes": 0,
+    "independent_model_phases": 0,
+    "qualification": "Projected events separately joined to actual HTTP requests; eligibility reconstructed from current request tool suffix and matching completed per-thread business journal receipts."
+  },
+  "continuous_budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 614,
+    "generation": {
+      "charged_tokens": 557521,
+      "known_tokens": 557521,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 5216,
+      "known_tokens": 5216,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "continuous_exact_resolution_reads": 75,
+  "lifecycle_all_rounds": {
+    "generations": 46,
+    "generation_tokens": 26910,
+    "embedding_tokens": 159,
+    "includes": [
+      "F1 B1",
+      "F1 cue",
+      "F2 cue",
+      "explicit-save B1 capability control",
+      "F3 event reminder"
+    ]
+  },
+  "decision": "Stop cue-family escalation after exact static duty and event delivery both fail. Continue independent reconciliation development and P12; do not claim Formation efficacy.",
+  "r_reconciliation": "NEXT_INDEPENDENT_SOURCE_FREEZE",
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}
