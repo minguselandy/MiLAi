@@ -36,6 +36,19 @@ canonical memory state.
 
 ## Required checks
 
+Latest request: read the [v16 development plan](docs/MILA_LANGMEM_V16_DEVELOPMENT_PLAN_20260926.md)
+and generate the [provenance Goal](docs/MILA_LANGMEM_PROVENANCE_GOAL_v16.md).
+This delivery is planning only; v16 is `PLANNED_NOT_STARTED`. Do not treat the document as
+authorization to implement, install dependencies, run tests/models or generate benchmark data.
+For future authorized v16 work, the latest scope is B1 model-hidden instrumentation only:
+actual observations, memory revisions, search return/request inclusion and existing action
+receipts. Preserve B0 semantics and prove same-output parity before the exposed small runs.
+Do not fix baseline semantic failures or add Basis/adoption/recheck/Attention in this Goal;
+the older roadmap placing M1 inside v16 is superseded by this narrower scope. Preserve
+v15 locks/results, use a new source identity for B1, and keep all original vLLM settings.
+Documentation checks need no pytest/build/model calls. Existing Luna high publication
+authorization persists.
+
 The user-authorized [v15 foundation Goal](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md),
 based on the [vNext roadmap](docs/MiLAi_vNext_Development_Roadmap_20260926.md), is
 `COMPLETE_WITH_BASELINE_FAILURES`. A–F and G0–G5 technical gates are delivered; preserve the

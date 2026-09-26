@@ -3,6 +3,14 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
+Latest planned work: [Provenance Goal v16](docs/MILA_LANGMEM_PROVENANCE_GOAL_v16.md),
+based on the [v16 development plan](docs/MILA_LANGMEM_V16_DEVELOPMENT_PLAN_20260926.md).
+Status: `PLANNED_NOT_STARTED`; this delivery is documentation only. v16 adds model-hidden
+observation, revision, search-delivery and business-receipt tracing to the fixed B0 baseline.
+The main gate is deterministic B0/B1 behavioral parity, followed by the same exposed small
+regressions. Decision Basis, adopted evidence, recheck and Attention are separate later work.
+Keep the original vLLM settings and all v15 results; no new data or model runs occurred here.
+
 Latest scoped delivery: [LangMem foundation Goal v15](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md),
 based on the [vNext roadmap](docs/MiLAi_vNext_Development_Roadmap_20260926.md).
 Status: `COMPLETE_WITH_BASELINE_FAILURES`; foundation technical gates passed. A pinned public

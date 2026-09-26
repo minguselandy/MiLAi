@@ -1,15 +1,28 @@
 # MiLAi Lab goals
 
-## Planned public baseline Goal v15 (2026-09-26)
+## Planned model-hidden provenance Goal v16 (2026-09-26)
 
-[Goal v15](MILA_LANGMEM_FOUNDATION_GOAL_v15.md) implements the first planned slice of the
-[vNext roadmap](MiLAi_vNext_Development_Roadmap_20260926.md). Status: `PLANNED_NOT_STARTED`;
-the current user request authorizes documentation, not implementation or model experiments.
-The future sequence is dependency/source identity → vLLM compatibility and distinct Store /
-checkpoint recovery → native task adapter → freeze → existing diagnostic/arc0 characterization.
-Foundation validity does not require a semantically perfect baseline. Preserve v14 as a frozen
-reference; do not port its frontier/maintenance policies into B0. v16 instrumentation/Basis and
-v17 Attention/matched unseen evaluation have separate entry gates. No new seeds are consumed.
+[Goal v16](MILA_LANGMEM_PROVENANCE_GOAL_v16.md) turns the
+[development plan](MILA_LANGMEM_V16_DEVELOPMENT_PLAN_20260926.md) into scoped B1 work.
+Status: `PLANNED_NOT_STARTED`; the current request is documentation only. Freeze v15, add
+Observation/Revision/SearchDelivery/ActionReceipt tracing, prove same-output B0/B1 parity,
+then run the existing 12 diagnostics and exposed arc0. Returned, delivered and adopted
+materials remain distinct; provenance stays unknown when not explicitly established.
+Basis, automatic recheck and Attention are excluded from this Goal. No semantic repair of
+B0, vLLM service changes, new benchmark samples or runtime implementation occurred here.
+
+## Completed public baseline Goal v15 (2026-09-26)
+
+[Goal v15](MILA_LANGMEM_FOUNDATION_GOAL_v15.md) is `COMPLETE_WITH_BASELINE_FAILURES`,
+foundation GO. See the [results](MILA_LANGMEM_FOUNDATION_V15_RESULTS_20260926.md) and
+[reproduction entry](MILA_LANGMEM_FOUNDATION_V15_REPRODUCTION_20260926.md).
+The pinned LangGraph/LangMem foundation uses the original vLLM settings through JSON-action,
+Postgres Store, SQLite checkpoint and narrow business recovery. Final-source diagnostics
+are 7/12; original exposed arc0 is native 4/5, dependent 1/2. Missing commitments, the
+unsupported 5000-cent agreement/refund and stale memory after the correct refund remain.
+All 108 generations / 76737 charged tokens (71846 known plus 4891 unknown reservation) /
+836 embedding tokens are preserved; Judge=0. Technical GO does not imply semantic reliability.
+The new v16 plan narrows the next stage to B1 only; M1/M2 require later scoped Goals.
 
 ## Completed scoped semantic boundary Goal v14.0 (2026-09-26)
 
