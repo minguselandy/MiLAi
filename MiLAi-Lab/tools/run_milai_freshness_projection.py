@@ -46,7 +46,7 @@ from run_langmem_provenance import _trace_emit
 
 
 def prepare(args: argparse.Namespace) -> dict[str, Any]:
-    verify_lock(args.lock, args.config)
+    verify_lock(args.lock, args.config, args.arm)
     fixture, freeze = read_json(args.fixture), read_json(args.mechanism_freeze)
     if (fixture["kind"] != "ODR_V19_REVISION_DIAGNOSTIC"
             or sha256_file(args.fixture) != freeze["fixture_sha256"]
@@ -108,8 +108,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     notice = (ODRController(observer, "freshness_only",
                                             Path(config["trace_path"]))
                               if args.arm == "a1_notice" else None)
-                    projection = (ProjectionController(observer, emit)
-                                  if args.arm == "a2_quarantine" else None)
+                    projection = (ProjectionController(observer, emit,
+                                                      arm=args.arm, store=store)
+                                  if args.arm in {"a2_quarantine", "a3_exact_refresh"}
+                                  else None)
                     model = VLLMChatModel(
                         client=host, capacity_path=Path(config["message_capacity_path"]),
                         observer=observer, odr=notice, projection=projection,
@@ -127,7 +129,7 @@ def schema(fixture_path: Path | None, arm: str) -> dict[str, Any]:
     if fixture_path is not None:
         tools.append(read_json(fixture_path)["business_tool_schema"])
     protocol = _action_prompt(tools)
-    if arm == "a2_quarantine":
+    if arm in {"a2_quarantine", "a3_exact_refresh"}:
         protocol += "\n" + SOURCE_AUTHORITY
     return {"schema": _action_schema(tools, generation_only=True),
             "protocol": protocol, "arm_id": arm,
@@ -141,8 +143,7 @@ def main() -> None:
         item = commands.add_parser(command)
         item.add_argument("--config", type=Path,
                           default=LAB / "configs/milai-freshness-projection-v19.json")
-        item.add_argument("--lock", type=Path, default=LAB /
-                          "data/locks/milai-freshness-projection-v19-a2.lock.json")
+        item.add_argument("--lock", type=Path)
         item.add_argument("--mode", choices=("mechanism",), default="mechanism")
         item.add_argument("--run", required=True)
         item.add_argument("--arm", choices=ARMS, required=True)
@@ -156,6 +157,9 @@ def main() -> None:
     spec.add_argument("--fixture", type=Path)
     spec.add_argument("--arm", choices=ARMS, default="a2_quarantine")
     args = parser.parse_args()
+    if args.command in {"prepare", "run"} and args.lock is None:
+        stage = "a3" if args.arm == "a3_exact_refresh" else "a2"
+        args.lock = LAB / f"data/locks/milai-freshness-projection-v19-{stage}.lock.json"
     result = (schema(args.fixture, args.arm) if args.command == "schema" else
               prepare(args) if args.command == "prepare" else run(args))
     print(json.dumps(result, ensure_ascii=False))

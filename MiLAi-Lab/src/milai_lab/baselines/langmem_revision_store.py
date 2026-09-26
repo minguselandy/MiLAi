@@ -517,7 +517,7 @@ class RevisionSidecar:
                         and source["source_id"] == projection["source_search_id"]
                         and source["ref"] == projection["original_body_ref"]
                         and body_ref == projection["projected_body_ref"]):
-                    coverage = "PROJECTED_WITHHELD"
+                    coverage = projection.get("coverage", "PROJECTED_WITHHELD")
                 conn.execute(
                     "INSERT OR REPLACE INTO request_material VALUES(?,?,?,?,?,?,?,?,?)",
                     (request_id, call_id, kind if source else "unknown",

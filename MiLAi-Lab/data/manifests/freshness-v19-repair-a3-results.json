@@ -1,0 +1,984 @@
+{
+  "kind": "MILAI_FRESHNESS_V19_REPAIR_A3_RESULTS",
+  "status": "COMPLETE_A3_LIMITED",
+  "source_mapping_sha256": "bfc5c27631a9c41625446bc6cc6617e7a30417b39e23229a2ec6e85fc4105555",
+  "lock_sha256": "5a6a514f8e6281dda30565378e0824314ba2db8e7ec27f0dc1845de87d56169b",
+  "freeze_sha256": "373ba2d108d3a52c0c0c38dadf7f2f142766ffa27e14766f99d38715d92a9d7c",
+  "cases": {
+    "changed": {
+      "status": "FAIL",
+      "public_messages_completed": 3,
+      "initial_primary_exact_delivered": true,
+      "original_history_unchanged": true,
+      "current_items_and_order_preserved": true,
+      "refresh_requests": 3,
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "exact_current_reads": 3,
+      "exact_read_wall_ns": 3995090,
+      "exact_read_target": "X",
+      "exact_current_X_reads": 3,
+      "host_memory_writes": 0,
+      "business_public_index": 2,
+      "business_count": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 4
+      },
+      "business_correct": false,
+      "current_body_acquired_before_business": true,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4261,
+        "output_tokens": 146,
+        "generation_tokens": 4407,
+        "embedding_requests": 3,
+        "embedding_tokens": 84,
+        "provider_wall_seconds": 1.9899931061081588,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "695d590161f2e067f43beb96bdcd8bfef01cf4e9c32e73997345a909dc259b28",
+          "response_id": "chatcmpl-a913202d15ec28cc",
+          "public_index": 0,
+          "request_index": 1,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "exact_reads": [],
+          "projection_items": [],
+          "request_object_sha256": "de6b10f44fa9be10b000011f505fcaea6c618a9994c32787323469b25cb79994",
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction Lumen-42 holding temperature"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "1aab6b196f7c3e3a7c03113c54f772083c620f1933b2fdb310d81431f888f204",
+          "response_id": "chatcmpl-986a8dde61f7bd1b",
+          "public_index": 0,
+          "request_index": 2,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "exact_reads": [],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-a913202d15ec28cc:tool:0",
+              "source_search_id": "57b9f1f4dd0f59c236cb95c8628e5fe7cd0d09814ef0e75ccb8e31d3a6960bb4:1:search:1",
+              "item_index": 0,
+              "memory_id": "32a8a943-40c3-46eb-aa59-c87c0bf72ccb",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-changed-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:32a8a943-40c3-46eb-aa59-c87c0bf72ccb@1",
+              "status": "CURRENT",
+              "current_ref": "memory:32a8a943-40c3-46eb-aa59-c87c0bf72ccb@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "projected_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "actual_tool_body_ref": "body:string:c5d0825e500f023c12ab505901712cb8e45ab8e9d3ac0f0ffb8bcd7b1b1b59e8"
+            }
+          ],
+          "request_object_sha256": "78de15e9de71e0f2e31cb0616c2c97921514310438518778d926b6ed46a84bdb",
+          "action": {
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 4 degrees Celsius. This recommendation is pending your dispatch decision."
+          }
+        },
+        {
+          "request_id": "f6cc1345fbb0fa0674031768419206db5359b3d70875273a0dbb9322bfac5f9c",
+          "response_id": "chatcmpl-8fcbb6329810dbaa",
+          "public_index": 1,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": true,
+          "exact_reads": [
+            {
+              "stage": "v19-repair-a3-changed-r1",
+              "event": "freshness_exact_read",
+              "arm": "a3_exact_refresh",
+              "request_id": "f6cc1345fbb0fa0674031768419206db5359b3d70875273a0dbb9322bfac5f9c",
+              "public_message_index": 1,
+              "provider_delivery": false,
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-changed-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "32a8a943-40c3-46eb-aa59-c87c0bf72ccb",
+              "expected_revision": 2,
+              "source": "public Store.get",
+              "refresh_ttl": false,
+              "wall_ns": 1433252,
+              "status": "BOUND_CURRENT",
+              "returned_body_ref": "body:string:382396d1a54f93cea84cbf5c4ced102f5c13e4a4de0d0464bf139c3514ea9d0f",
+              "error_type": null
+            }
+          ],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-a913202d15ec28cc:tool:0",
+              "source_search_id": "57b9f1f4dd0f59c236cb95c8628e5fe7cd0d09814ef0e75ccb8e31d3a6960bb4:1:search:1",
+              "item_index": 0,
+              "memory_id": "32a8a943-40c3-46eb-aa59-c87c0bf72ccb",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-changed-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:32a8a943-40c3-46eb-aa59-c87c0bf72ccb@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:32a8a943-40c3-46eb-aa59-c87c0bf72ccb@2",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "projected_body_ref": "body:string:382396d1a54f93cea84cbf5c4ced102f5c13e4a4de0d0464bf139c3514ea9d0f",
+              "exact_read_index": 0,
+              "refresh_status": "BOUND_CURRENT",
+              "delivery_source": "public Store.get",
+              "actual_tool_body_ref": "body:string:03071877119a4a95376a9a86c2e95834eaf11840c7b14af439b326a1fc81974b"
+            }
+          ],
+          "request_object_sha256": "ea4bbde9b453b00e29f5f9d496f5309fa30a48b8d245c248837fa873b8143c75",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is 4 degrees Celsius. This is pending your dispatch decision."
+          }
+        },
+        {
+          "request_id": "d226ea22364573bd4da60042f26dc599df8f1564fad34a82e1bb6965963184ce",
+          "response_id": "chatcmpl-862c13faa35e63c9",
+          "public_index": 2,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": true,
+          "exact_reads": [
+            {
+              "stage": "v19-repair-a3-changed-r1",
+              "event": "freshness_exact_read",
+              "arm": "a3_exact_refresh",
+              "request_id": "d226ea22364573bd4da60042f26dc599df8f1564fad34a82e1bb6965963184ce",
+              "public_message_index": 2,
+              "provider_delivery": false,
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-changed-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "32a8a943-40c3-46eb-aa59-c87c0bf72ccb",
+              "expected_revision": 2,
+              "source": "public Store.get",
+              "refresh_ttl": false,
+              "wall_ns": 1422940,
+              "status": "BOUND_CURRENT",
+              "returned_body_ref": "body:string:382396d1a54f93cea84cbf5c4ced102f5c13e4a4de0d0464bf139c3514ea9d0f",
+              "error_type": null
+            }
+          ],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-a913202d15ec28cc:tool:0",
+              "source_search_id": "57b9f1f4dd0f59c236cb95c8628e5fe7cd0d09814ef0e75ccb8e31d3a6960bb4:1:search:1",
+              "item_index": 0,
+              "memory_id": "32a8a943-40c3-46eb-aa59-c87c0bf72ccb",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-changed-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:32a8a943-40c3-46eb-aa59-c87c0bf72ccb@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:32a8a943-40c3-46eb-aa59-c87c0bf72ccb@2",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "projected_body_ref": "body:string:382396d1a54f93cea84cbf5c4ced102f5c13e4a4de0d0464bf139c3514ea9d0f",
+              "exact_read_index": 0,
+              "refresh_status": "BOUND_CURRENT",
+              "delivery_source": "public Store.get",
+              "actual_tool_body_ref": "body:string:03071877119a4a95376a9a86c2e95834eaf11840c7b14af439b326a1fc81974b"
+            }
+          ],
+          "request_object_sha256": "decdc3a326660cbe7a9187606fbf854704a2db78eb26ae42007b8c1977ad8d99",
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 4
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "0f58fdc5e4bcca0690d032f29ee000a161dd89763bf89e52c545675caa9d2c91",
+          "response_id": "chatcmpl-bb4c56ddcb6b7af5",
+          "public_index": 2,
+          "request_index": 2,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": true,
+          "exact_reads": [
+            {
+              "stage": "v19-repair-a3-changed-r1",
+              "event": "freshness_exact_read",
+              "arm": "a3_exact_refresh",
+              "request_id": "0f58fdc5e4bcca0690d032f29ee000a161dd89763bf89e52c545675caa9d2c91",
+              "public_message_index": 2,
+              "provider_delivery": false,
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-changed-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "32a8a943-40c3-46eb-aa59-c87c0bf72ccb",
+              "expected_revision": 2,
+              "source": "public Store.get",
+              "refresh_ttl": false,
+              "wall_ns": 1138898,
+              "status": "BOUND_CURRENT",
+              "returned_body_ref": "body:string:382396d1a54f93cea84cbf5c4ced102f5c13e4a4de0d0464bf139c3514ea9d0f",
+              "error_type": null
+            }
+          ],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-a913202d15ec28cc:tool:0",
+              "source_search_id": "57b9f1f4dd0f59c236cb95c8628e5fe7cd0d09814ef0e75ccb8e31d3a6960bb4:1:search:1",
+              "item_index": 0,
+              "memory_id": "32a8a943-40c3-46eb-aa59-c87c0bf72ccb",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-changed-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:32a8a943-40c3-46eb-aa59-c87c0bf72ccb@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:32a8a943-40c3-46eb-aa59-c87c0bf72ccb@2",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "projected_body_ref": "body:string:382396d1a54f93cea84cbf5c4ced102f5c13e4a4de0d0464bf139c3514ea9d0f",
+              "exact_read_index": 0,
+              "refresh_status": "BOUND_CURRENT",
+              "delivery_source": "public Store.get",
+              "actual_tool_body_ref": "body:string:03071877119a4a95376a9a86c2e95834eaf11840c7b14af439b326a1fc81974b"
+            }
+          ],
+          "request_object_sha256": "c601a842f39568acf6bf59f1cf78a41a73212915e7647069e579809dc33a3e39",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 has been recorded at 4 degrees Celsius."
+          }
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "49215d663405d7476c0417b61c568429149605d46114efc8cd0fa80efd45c380",
+        "run/result.json": "4f10370454a7dee1b074939b7d79f413bea06edc55938f27f31509a47cd56ecc",
+        "instrumentation.sqlite": "2c84ebbf8ed14dfd2718eea0a50d651358452a625eae6a7519110784285cd088",
+        "checkpoints.sqlite": "3018197ea794a3ecf8512bbe99e7655dd5cb764bcf0efa7eac013c57934023f6",
+        "run/fixture-effects.json": "03b02da116bde9f502236bf015a87e5ab7ad26ea31e3125e091270c4313ed683",
+        "prepared.json": "7d692d087790394772e959b172261012da77f87a7af510fb37c230bd08791ace"
+      }
+    },
+    "retained": {
+      "status": "PASS",
+      "public_messages_completed": 3,
+      "initial_primary_exact_delivered": true,
+      "original_history_unchanged": true,
+      "current_items_and_order_preserved": true,
+      "refresh_requests": 3,
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "exact_current_reads": 3,
+      "exact_read_wall_ns": 4168146,
+      "exact_read_target": "X",
+      "exact_current_X_reads": 3,
+      "host_memory_writes": 0,
+      "business_public_index": 2,
+      "business_count": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 8
+      },
+      "business_correct": true,
+      "current_body_acquired_before_business": true,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4291,
+        "output_tokens": 132,
+        "generation_tokens": 4423,
+        "embedding_requests": 3,
+        "embedding_tokens": 105,
+        "provider_wall_seconds": 1.6615935475565493,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "a6422e34119c7a27838f40884fe2e00810bb825b53c16395ee516d6abbb35f4c",
+          "response_id": "chatcmpl-93b23804857fc65b",
+          "public_index": 0,
+          "request_index": 1,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "exact_reads": [],
+          "projection_items": [],
+          "request_object_sha256": "de6b10f44fa9be10b000011f505fcaea6c618a9994c32787323469b25cb79994",
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction crate Lumen-42 holding temperature"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "9502168da721eab6bcaa634f39bae30b2e3d766925c34a1ff19234a00ce9dbe3",
+          "response_id": "chatcmpl-aaff1501c14b25a1",
+          "public_index": 0,
+          "request_index": 2,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "exact_reads": [],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-93b23804857fc65b:tool:0",
+              "source_search_id": "f2b7350e34587af647bec5115495156334695d733561055e59f027d69e8798de:1:search:1",
+              "item_index": 0,
+              "memory_id": "4c6c8f75-29b5-4796-8f5e-b75914ea2223",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-retained-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:4c6c8f75-29b5-4796-8f5e-b75914ea2223@1",
+              "status": "CURRENT",
+              "current_ref": "memory:4c6c8f75-29b5-4796-8f5e-b75914ea2223@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "projected_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "actual_tool_body_ref": "body:string:0feb8092794057ec90ad4ec8c1df01ec71e76de3e7580b69b659ae57cce385ef"
+            }
+          ],
+          "request_object_sha256": "6472e2e7e5bb205ffa39ee1f91b45566ae3d1633319c765d3fac30add7b3bbbe",
+          "action": {
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 8 degrees Celsius."
+          }
+        },
+        {
+          "request_id": "5a592030d0c76c3276b8b6ef6ae55205d45f048ce9f14ae22eb071618f7bc986",
+          "response_id": "chatcmpl-b452d1d18f69c778",
+          "public_index": 1,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": true,
+          "exact_reads": [
+            {
+              "stage": "v19-repair-a3-retained-r1",
+              "event": "freshness_exact_read",
+              "arm": "a3_exact_refresh",
+              "request_id": "5a592030d0c76c3276b8b6ef6ae55205d45f048ce9f14ae22eb071618f7bc986",
+              "public_message_index": 1,
+              "provider_delivery": false,
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-retained-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "4c6c8f75-29b5-4796-8f5e-b75914ea2223",
+              "expected_revision": 2,
+              "source": "public Store.get",
+              "refresh_ttl": false,
+              "wall_ns": 1328999,
+              "status": "BOUND_CURRENT",
+              "returned_body_ref": "body:string:cfdff6a33858a7f12b09c8d04c18bc4ea38855b456bc1060ece5459e1e6af8cd",
+              "error_type": null
+            }
+          ],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-93b23804857fc65b:tool:0",
+              "source_search_id": "f2b7350e34587af647bec5115495156334695d733561055e59f027d69e8798de:1:search:1",
+              "item_index": 0,
+              "memory_id": "4c6c8f75-29b5-4796-8f5e-b75914ea2223",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-retained-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:4c6c8f75-29b5-4796-8f5e-b75914ea2223@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:4c6c8f75-29b5-4796-8f5e-b75914ea2223@2",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "projected_body_ref": "body:string:cfdff6a33858a7f12b09c8d04c18bc4ea38855b456bc1060ece5459e1e6af8cd",
+              "exact_read_index": 0,
+              "refresh_status": "BOUND_CURRENT",
+              "delivery_source": "public Store.get",
+              "actual_tool_body_ref": "body:string:61542422eb165510efd06131a79a6fdf9b8fd0bf10e6966b6616ecc798763772"
+            }
+          ],
+          "request_object_sha256": "873b32aafd9ce99acb5b7e72d6446f67c323496bac14b1258240e593b8d4b8ab",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is 8 degrees Celsius."
+          }
+        },
+        {
+          "request_id": "9550104fdb88780e83352b05c5e6e2f44fe05075d4adbc054b08169869b04169",
+          "response_id": "chatcmpl-b474aa82c2634c2f",
+          "public_index": 2,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": true,
+          "exact_reads": [
+            {
+              "stage": "v19-repair-a3-retained-r1",
+              "event": "freshness_exact_read",
+              "arm": "a3_exact_refresh",
+              "request_id": "9550104fdb88780e83352b05c5e6e2f44fe05075d4adbc054b08169869b04169",
+              "public_message_index": 2,
+              "provider_delivery": false,
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-retained-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "4c6c8f75-29b5-4796-8f5e-b75914ea2223",
+              "expected_revision": 2,
+              "source": "public Store.get",
+              "refresh_ttl": false,
+              "wall_ns": 1706702,
+              "status": "BOUND_CURRENT",
+              "returned_body_ref": "body:string:cfdff6a33858a7f12b09c8d04c18bc4ea38855b456bc1060ece5459e1e6af8cd",
+              "error_type": null
+            }
+          ],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-93b23804857fc65b:tool:0",
+              "source_search_id": "f2b7350e34587af647bec5115495156334695d733561055e59f027d69e8798de:1:search:1",
+              "item_index": 0,
+              "memory_id": "4c6c8f75-29b5-4796-8f5e-b75914ea2223",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-retained-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:4c6c8f75-29b5-4796-8f5e-b75914ea2223@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:4c6c8f75-29b5-4796-8f5e-b75914ea2223@2",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "projected_body_ref": "body:string:cfdff6a33858a7f12b09c8d04c18bc4ea38855b456bc1060ece5459e1e6af8cd",
+              "exact_read_index": 0,
+              "refresh_status": "BOUND_CURRENT",
+              "delivery_source": "public Store.get",
+              "actual_tool_body_ref": "body:string:61542422eb165510efd06131a79a6fdf9b8fd0bf10e6966b6616ecc798763772"
+            }
+          ],
+          "request_object_sha256": "682deacc58a440024c3bcd3c07cff5689eaf04c59bb1811d1cbaa79e5d475cca",
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "85771dab92a645bf2b4ae7837eb1f2a9acbc36424a3bc850ce3cd552314eee4b",
+          "response_id": "chatcmpl-9802c64781e49c6a",
+          "public_index": 2,
+          "request_index": 2,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": true,
+          "exact_reads": [
+            {
+              "stage": "v19-repair-a3-retained-r1",
+              "event": "freshness_exact_read",
+              "arm": "a3_exact_refresh",
+              "request_id": "85771dab92a645bf2b4ae7837eb1f2a9acbc36424a3bc850ce3cd552314eee4b",
+              "public_message_index": 2,
+              "provider_delivery": false,
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-retained-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "4c6c8f75-29b5-4796-8f5e-b75914ea2223",
+              "expected_revision": 2,
+              "source": "public Store.get",
+              "refresh_ttl": false,
+              "wall_ns": 1132445,
+              "status": "BOUND_CURRENT",
+              "returned_body_ref": "body:string:cfdff6a33858a7f12b09c8d04c18bc4ea38855b456bc1060ece5459e1e6af8cd",
+              "error_type": null
+            }
+          ],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-93b23804857fc65b:tool:0",
+              "source_search_id": "f2b7350e34587af647bec5115495156334695d733561055e59f027d69e8798de:1:search:1",
+              "item_index": 0,
+              "memory_id": "4c6c8f75-29b5-4796-8f5e-b75914ea2223",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-retained-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:4c6c8f75-29b5-4796-8f5e-b75914ea2223@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:4c6c8f75-29b5-4796-8f5e-b75914ea2223@2",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "projected_body_ref": "body:string:cfdff6a33858a7f12b09c8d04c18bc4ea38855b456bc1060ece5459e1e6af8cd",
+              "exact_read_index": 0,
+              "refresh_status": "BOUND_CURRENT",
+              "delivery_source": "public Store.get",
+              "actual_tool_body_ref": "body:string:61542422eb165510efd06131a79a6fdf9b8fd0bf10e6966b6616ecc798763772"
+            }
+          ],
+          "request_object_sha256": "da821baea6f30e6d9d236cb6a2991a11964c29a6dde8c4a1decfc1097d55abc4",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 at 8 degrees Celsius has been recorded."
+          }
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "b198357496f535dcd262dea17d408e61d41e2bef80b5ace9937e8bebe36a41fc",
+        "run/result.json": "527256683f7f58670bb2c5d216b0ba4e4dd66e1f3ac4e21413af6ef30993619b",
+        "instrumentation.sqlite": "e0614e8098822fa284c8b51b36e88f2dd2e8fcf4985c5d478a1759bcfdd65eb1",
+        "checkpoints.sqlite": "6b4616a20797c8f49199fcbf7ea31959eb8c0d47a1571654cfe796b10e18cfc6",
+        "run/fixture-effects.json": "d05824f9e2a69fe5f2b7de547df28707b90a76f3708f92ba853aceef7ebfe279",
+        "prepared.json": "e3af664b65cbdf7d16e16923c565ec2c10981ae3f341de85a4bc9143f1568c5c"
+      }
+    },
+    "irrelevant": {
+      "status": "PASS",
+      "public_messages_completed": 3,
+      "initial_primary_exact_delivered": true,
+      "original_history_unchanged": true,
+      "current_items_and_order_preserved": true,
+      "refresh_requests": 3,
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "exact_current_reads": 3,
+      "exact_read_wall_ns": 3698550,
+      "exact_read_target": "Y",
+      "exact_current_X_reads": 0,
+      "host_memory_writes": 0,
+      "business_public_index": 2,
+      "business_count": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 8
+      },
+      "business_correct": true,
+      "current_body_acquired_before_business": true,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4938,
+        "output_tokens": 131,
+        "generation_tokens": 5069,
+        "embedding_requests": 4,
+        "embedding_tokens": 81,
+        "provider_wall_seconds": 1.7727316566742957,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "c9a1cb75f692dc0245dc53c9346cc20f11e0f4c611851882a69e3cbd6d68bb5e",
+          "response_id": "chatcmpl-8ad71bc510d7d001",
+          "public_index": 0,
+          "request_index": 1,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "exact_reads": [],
+          "projection_items": [],
+          "request_object_sha256": "de6b10f44fa9be10b000011f505fcaea6c618a9994c32787323469b25cb79994",
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction Lumen-42 holding temperature"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "6abc909f7ff989f483daef95486ed24f80b000c5c2b8352248eec59bc8caad70",
+          "response_id": "chatcmpl-b9e2413e89d0a576",
+          "public_index": 0,
+          "request_index": 2,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "exact_reads": [],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-8ad71bc510d7d001:tool:0",
+              "source_search_id": "d88a8a369e3d5eea15ea8be50a80b46e30be850920085d3537d68b02f628d547:1:search:1",
+              "item_index": 0,
+              "memory_id": "fad930e4-d812-4051-a22b-ce8f4ee410ce",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:fad930e4-d812-4051-a22b-ce8f4ee410ce@1",
+              "status": "CURRENT",
+              "current_ref": "memory:fad930e4-d812-4051-a22b-ce8f4ee410ce@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "projected_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "actual_tool_body_ref": "body:string:12361b08322639247e36c3058d4e3544b52624c4550879cb2c31c927158f6c0d"
+            },
+            {
+              "source_tool_call": "chatcmpl-8ad71bc510d7d001:tool:0",
+              "source_search_id": "d88a8a369e3d5eea15ea8be50a80b46e30be850920085d3537d68b02f628d547:1:search:1",
+              "item_index": 1,
+              "memory_id": "8f451f54-196a-4ba7-a4c8-7ef6bc082854",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:8f451f54-196a-4ba7-a4c8-7ef6bc082854@1",
+              "status": "CURRENT",
+              "current_ref": "memory:8f451f54-196a-4ba7-a4c8-7ef6bc082854@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "projected_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "actual_tool_body_ref": "body:string:12361b08322639247e36c3058d4e3544b52624c4550879cb2c31c927158f6c0d"
+            }
+          ],
+          "request_object_sha256": "b6b653901dfc576511758dccbaafa86ecf2cc418bd06c30804ab3132d81fda5e",
+          "action": {
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 8 degrees Celsius."
+          }
+        },
+        {
+          "request_id": "af0de8fa340c1780cf9b87710a8a45d18a07562f43454c45e6077694bcac1896",
+          "response_id": "chatcmpl-aea1c698ba8a5b30",
+          "public_index": 1,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": true,
+          "exact_reads": [
+            {
+              "stage": "v19-repair-a3-irrelevant-r1",
+              "event": "freshness_exact_read",
+              "arm": "a3_exact_refresh",
+              "request_id": "af0de8fa340c1780cf9b87710a8a45d18a07562f43454c45e6077694bcac1896",
+              "public_message_index": 1,
+              "provider_delivery": false,
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "8f451f54-196a-4ba7-a4c8-7ef6bc082854",
+              "expected_revision": 2,
+              "source": "public Store.get",
+              "refresh_ttl": false,
+              "wall_ns": 1187263,
+              "status": "BOUND_CURRENT",
+              "returned_body_ref": "body:string:6f6bee342a58a7707db4d0f9494f0556f7c56b7eedc27b595c820928fe19a481",
+              "error_type": null
+            }
+          ],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-8ad71bc510d7d001:tool:0",
+              "source_search_id": "d88a8a369e3d5eea15ea8be50a80b46e30be850920085d3537d68b02f628d547:1:search:1",
+              "item_index": 0,
+              "memory_id": "fad930e4-d812-4051-a22b-ce8f4ee410ce",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:fad930e4-d812-4051-a22b-ce8f4ee410ce@1",
+              "status": "CURRENT",
+              "current_ref": "memory:fad930e4-d812-4051-a22b-ce8f4ee410ce@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "projected_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "actual_tool_body_ref": "body:string:af9e5fd9a364ec93a4374f2320e740a62f56162ccfb0e9ecb216836e1117fa78"
+            },
+            {
+              "source_tool_call": "chatcmpl-8ad71bc510d7d001:tool:0",
+              "source_search_id": "d88a8a369e3d5eea15ea8be50a80b46e30be850920085d3537d68b02f628d547:1:search:1",
+              "item_index": 1,
+              "memory_id": "8f451f54-196a-4ba7-a4c8-7ef6bc082854",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:8f451f54-196a-4ba7-a4c8-7ef6bc082854@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:8f451f54-196a-4ba7-a4c8-7ef6bc082854@2",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "projected_body_ref": "body:string:6f6bee342a58a7707db4d0f9494f0556f7c56b7eedc27b595c820928fe19a481",
+              "exact_read_index": 0,
+              "refresh_status": "BOUND_CURRENT",
+              "delivery_source": "public Store.get",
+              "actual_tool_body_ref": "body:string:af9e5fd9a364ec93a4374f2320e740a62f56162ccfb0e9ecb216836e1117fa78"
+            }
+          ],
+          "request_object_sha256": "6099ba13e015291a2f846eb0b14080d50f2fb39b1cccf0661fc5387066ee4eda",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is 8 degrees Celsius."
+          }
+        },
+        {
+          "request_id": "d332cab982eb4b32db4563e4074a61212109631592831b5137740df43690572e",
+          "response_id": "chatcmpl-b43d9a2ac393b90c",
+          "public_index": 2,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": true,
+          "exact_reads": [
+            {
+              "stage": "v19-repair-a3-irrelevant-r1",
+              "event": "freshness_exact_read",
+              "arm": "a3_exact_refresh",
+              "request_id": "d332cab982eb4b32db4563e4074a61212109631592831b5137740df43690572e",
+              "public_message_index": 2,
+              "provider_delivery": false,
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "8f451f54-196a-4ba7-a4c8-7ef6bc082854",
+              "expected_revision": 2,
+              "source": "public Store.get",
+              "refresh_ttl": false,
+              "wall_ns": 1315249,
+              "status": "BOUND_CURRENT",
+              "returned_body_ref": "body:string:6f6bee342a58a7707db4d0f9494f0556f7c56b7eedc27b595c820928fe19a481",
+              "error_type": null
+            }
+          ],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-8ad71bc510d7d001:tool:0",
+              "source_search_id": "d88a8a369e3d5eea15ea8be50a80b46e30be850920085d3537d68b02f628d547:1:search:1",
+              "item_index": 0,
+              "memory_id": "fad930e4-d812-4051-a22b-ce8f4ee410ce",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:fad930e4-d812-4051-a22b-ce8f4ee410ce@1",
+              "status": "CURRENT",
+              "current_ref": "memory:fad930e4-d812-4051-a22b-ce8f4ee410ce@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "projected_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "actual_tool_body_ref": "body:string:af9e5fd9a364ec93a4374f2320e740a62f56162ccfb0e9ecb216836e1117fa78"
+            },
+            {
+              "source_tool_call": "chatcmpl-8ad71bc510d7d001:tool:0",
+              "source_search_id": "d88a8a369e3d5eea15ea8be50a80b46e30be850920085d3537d68b02f628d547:1:search:1",
+              "item_index": 1,
+              "memory_id": "8f451f54-196a-4ba7-a4c8-7ef6bc082854",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:8f451f54-196a-4ba7-a4c8-7ef6bc082854@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:8f451f54-196a-4ba7-a4c8-7ef6bc082854@2",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "projected_body_ref": "body:string:6f6bee342a58a7707db4d0f9494f0556f7c56b7eedc27b595c820928fe19a481",
+              "exact_read_index": 0,
+              "refresh_status": "BOUND_CURRENT",
+              "delivery_source": "public Store.get",
+              "actual_tool_body_ref": "body:string:af9e5fd9a364ec93a4374f2320e740a62f56162ccfb0e9ecb216836e1117fa78"
+            }
+          ],
+          "request_object_sha256": "98ed139b3f4cd27eb5e162780556b82e977bfc6a15530b0325a742a605c01f28",
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "52c91407b3ad25986b5488ae88b18222e7187cb7b41baeb059b1d32ae054a046",
+          "response_id": "chatcmpl-96dc315d9fd2f370",
+          "public_index": 2,
+          "request_index": 2,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": true,
+          "exact_reads": [
+            {
+              "stage": "v19-repair-a3-irrelevant-r1",
+              "event": "freshness_exact_read",
+              "arm": "a3_exact_refresh",
+              "request_id": "52c91407b3ad25986b5488ae88b18222e7187cb7b41baeb059b1d32ae054a046",
+              "public_message_index": 2,
+              "provider_delivery": false,
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "memory_id": "8f451f54-196a-4ba7-a4c8-7ef6bc082854",
+              "expected_revision": 2,
+              "source": "public Store.get",
+              "refresh_ttl": false,
+              "wall_ns": 1196038,
+              "status": "BOUND_CURRENT",
+              "returned_body_ref": "body:string:6f6bee342a58a7707db4d0f9494f0556f7c56b7eedc27b595c820928fe19a481",
+              "error_type": null
+            }
+          ],
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-8ad71bc510d7d001:tool:0",
+              "source_search_id": "d88a8a369e3d5eea15ea8be50a80b46e30be850920085d3537d68b02f628d547:1:search:1",
+              "item_index": 0,
+              "memory_id": "fad930e4-d812-4051-a22b-ce8f4ee410ce",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:fad930e4-d812-4051-a22b-ce8f4ee410ce@1",
+              "status": "CURRENT",
+              "current_ref": "memory:fad930e4-d812-4051-a22b-ce8f4ee410ce@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "projected_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "actual_tool_body_ref": "body:string:af9e5fd9a364ec93a4374f2320e740a62f56162ccfb0e9ecb216836e1117fa78"
+            },
+            {
+              "source_tool_call": "chatcmpl-8ad71bc510d7d001:tool:0",
+              "source_search_id": "d88a8a369e3d5eea15ea8be50a80b46e30be850920085d3537d68b02f628d547:1:search:1",
+              "item_index": 1,
+              "memory_id": "8f451f54-196a-4ba7-a4c8-7ef6bc082854",
+              "namespace": [
+                "langmem",
+                "v19-repair-a3-irrelevant-r1",
+                "a3_exact_refresh",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:8f451f54-196a-4ba7-a4c8-7ef6bc082854@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:8f451f54-196a-4ba7-a4c8-7ef6bc082854@2",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "projected_body_ref": "body:string:6f6bee342a58a7707db4d0f9494f0556f7c56b7eedc27b595c820928fe19a481",
+              "exact_read_index": 0,
+              "refresh_status": "BOUND_CURRENT",
+              "delivery_source": "public Store.get",
+              "actual_tool_body_ref": "body:string:af9e5fd9a364ec93a4374f2320e740a62f56162ccfb0e9ecb216836e1117fa78"
+            }
+          ],
+          "request_object_sha256": "cc4cd472d83151f3f093f42674622dd573f31966336bfb974b2096803e10166a",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 at 8 degrees Celsius has been recorded."
+          }
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "5d444a87d023ade550d27100b71e3c49682d32b95c0ddb68c08dc227df723860",
+        "run/result.json": "e4764059c4c6470ea712adf5b800eedcb7b0c611f5c62489e0230d05299fef5c",
+        "instrumentation.sqlite": "e7b3c72cadffad4e9ad451607e2ddbda89162b9869fcc0d49093f4f260edff43",
+        "checkpoints.sqlite": "794f60646812b6f4a3b3759e4e00c526d8e4e8e263bf63f297f65345126d7ff8",
+        "run/fixture-effects.json": "e9c11a75d1cf9d7f29c4bcb03415052177c35447480f64b6a43320bfe709d3f0",
+        "prepared.json": "b92d19f36e430efb6a70fab1757273f9cf24700c9d89da209bbd315c9e38ee26"
+      }
+    }
+  },
+  "passed": [
+    2,
+    3
+  ],
+  "totals": {
+    "generations": 15,
+    "input_tokens": 13490,
+    "output_tokens": 409,
+    "generation_tokens": 13899,
+    "embedding_requests": 10,
+    "embedding_tokens": 270,
+    "provider_wall_seconds": 5.424318310339004,
+    "unknown_usage": 0,
+    "truncations": 0
+  },
+  "exact_current_reads": 9,
+  "exact_read_wall_ns": 11861786,
+  "reconstruction_candidate": false,
+  "independent_generations": 0,
+  "judge_requests": 0,
+  "ordinary_search_followup_generations": 3,
+  "budget_after_sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+  "scope": "Three exposed controls only; irrelevant Y exact reads are intervention, even without Host search. No further benchmark or semantic rescue."
+}

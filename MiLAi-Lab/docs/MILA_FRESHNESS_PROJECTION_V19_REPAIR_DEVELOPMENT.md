@@ -37,3 +37,17 @@ A2冻结59文件mapping `03c8923a0069b53ca6fe516fd89b882a14e0aa20bce68aca6ddb824
 Changed仍实际记录4°C；retained记录8°C但未读取X@2；irrelevant正确8°C且无额外search。因此A2仍为1/3，通过的是irrelevant，不能把旧正文隔离成功当作行为修复成功。费用15次／13954tokens／268embeddingtokens，unknown/截断/Judge为0。完整逐请求核对见[A2结果](../data/manifests/freshness-v19-repair-a2-results.json)。
 
 这支持按原顺序进入A3 exact refresh，而不是强化重建schema或改变vLLM。A3保持A2的authority原则和响应合同，唯一新增机制是解析即将进入request的同一过期对象的当前版本。先由Luna建立A2本地源码/证据commit作为可复现点，再改相同文件；最终全部完成后统一推送。
+
+## A3与最终交付
+
+A2已在 `b753347c79edfbad06083a443b6de7f3d0fc8f1c` 保存，Root按Git对象核对59runtime和6validation全部符合A2 lock。旧M1测试期望修复独立提交为 `a0ab47a09a2079e6dbe41e0981978777fb32cd26`。
+
+A3在同一projection流程中加入public Store.get；只针对实际将进入request且缺少当前正文的SUPERSEDED项，按(namespace,id,revision)每request去重，验证返回Item完整身份后才交付当前正文。读取失败、缺失或失配继续隔离；DELETED/UNKNOWN不读。read事实立即留trace，Provider成功后再记录actual material映射。A2的authority与响应schema不变。
+
+27条受影响窄测、ruff/mypy及两个边界检查通过后，Root冻结59文件mapping `bfc5c27631a9c41625446bc6cc6617e7a30417b39e23229a2ec6e85fc4105555`，A3 lock SHA `5a6a514f8e6281dda30565378e0824314ba2db8e7ec27f0dc1845de87d56169b`，完成三组新空namespace/prepare。随后Sol只做一次必要build与wheel/sdist核对，Root串行运行三个原实例；未增加decoder probe或新测试数据。
+
+每例5次生成并完成全部公开消息，各3次精确读取并真实交付当前版本。Changed仍记录4；retained取得X@2后记录8；irrelevant读取Y三次但不重读current X、不额外search并记录8。A3为2/3，没有合格主方法。费用15次/13899tokens/270embeddingtokens，新增9次get不触发embedding；累计45次/41457tokens/808embeddingtokens。旧失败、费用和历史方法保留，vLLM未改。
+
+Root离线核对实际请求、原checkpoint、三阶段账单、片段tokens、本地存储、旧artifact和环境。存储汇总脚本首次将journal路径写成run目录外，修正为实际 `run/business-journal.json` 后完成，仅涉及离线分析，无源码或模型重跑。最终证据见[verification](../data/manifests/freshness-v19-repair-final-verification.json)及[accounting](../data/manifests/freshness-v19-repair-final-accounting.json)。
+
+用户文档§1、11顺序gate全部执行；§2–5、7–9、12–14对应投影、authority、条件exact refresh及历史不变检查；§6、15保留ODR历史且不加语义gate；§10三例全部判定；§16测试漂移单独提交；§17研究判断根据新结果更新。请求呈现问题已修复，但模型继续使用历史助手值的行为未解决，不能宣称freshness无用或Attention必要。最终[结果](MILA_FRESHNESS_PROJECTION_V19_REPAIR_RESULTS_20260926.md)与[复现](MILA_FRESHNESS_PROJECTION_V19_REPAIR_REPRODUCTION_20260926.md)完成，由原Luna high按既有授权统一发布。

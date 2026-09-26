@@ -50,6 +50,20 @@ Use the smallest necessary offline checks and three-case sequential gates; stop 
 when a simpler arm succeeds. New source-authority text must be reported as part of the
 quarantine intervention, not a pure renderer-only causal comparison.
 
+Repair development and sequential evaluation are now complete:
+`COMPLETE_WITH_FRESHNESS_LIMITATIONS`; see [results](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_RESULTS_20260926.md)
+and [reproduction](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_REPRODUCTION_20260926.md).
+A1=1/3, A2=1/3, A3=2/3. A3 actually delivers X@2, yet changed still executes 4 C;
+do not promote any arm as passing all controls. Retained reacquires X@2; irrelevant
+keeps current X unchanged but incurs three exact Y reads, so it is not zero intervention.
+Preserve all 45 generations / 41457 tokens / 808 embedding tokens and 9 exact reads;
+unknown/Judge/truncation=0. Final 59-file mapping:
+`bfc5c27631a9c41625446bc6cc6617e7a30417b39e23229a2ec6e85fc4105555`.
+27 affected checks and the one necessary package build pass; old M1 expectation drift
+is a separate test-only commit. vLLM settings, old methods/results/ledgers and plan bytes
+remain unchanged. Luna's publication authorization persists; do not rerun models/tests/build
+for publication or infer a new semantic rescue, reviewer, Attention or benchmark expansion.
+
 The user explicitly authorized full execution of the 1391-line
 [v19 ODR plan](docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_DEVELOPMENT_PLAN_20260926.md).
 [Goal v19](docs/MILA_ON_DEMAND_RECONSTRUCTION_GOAL_v19.md) is

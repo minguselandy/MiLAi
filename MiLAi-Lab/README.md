@@ -3,14 +3,17 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Current work: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
-[the user's repair plan](docs/v19修复.md). Original Notice and request-copy item Quarantine
-have each completed the same three small controls: changed still records stale 4 C,
-retained does not reacquire the current version, and irrelevant is undisturbed. The
-conditional Exact Refresh stage is next. vLLM settings and historical results remain unchanged;
-structured reconstruction is no longer the active candidate.
+Latest scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
+[the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.
+Original Notice and request-copy Quarantine each pass 1/3 controls; conditional Exact Refresh
+passes 2/3. The current body reaches the Provider, but changed still records old 4 C.
+No arm passes all three. The adapter, 27 narrow checks and one package build are complete;
+vLLM settings and historical results remain unchanged. Costs: 45 generations / 41457 tokens /
+808 embedding tokens and 9 exact reads, including 3 reads of irrelevant Y. See
+[results](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_RESULTS_20260926.md) and
+[reproduction](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_REPRODUCTION_20260926.md).
 
-Latest scoped delivery: [ODR Goal v19](docs/MILA_ON_DEMAND_RECONSTRUCTION_GOAL_v19.md),
+Previous scoped delivery: [ODR Goal v19](docs/MILA_ON_DEMAND_RECONSTRUCTION_GOAL_v19.md),
 executing the [v19 plan](docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_DEVELOPMENT_PLAN_20260926.md).
 Status: `STOPPED_STRUCTURED_RECONSTRUCTION_NOT_JUSTIFIED`. The three-arm adapter, request-time
 freshness and ephemeral reconstruction are implemented with unchanged vLLM settings. V0 and

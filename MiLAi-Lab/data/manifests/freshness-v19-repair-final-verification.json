@@ -1,0 +1,103 @@
+{
+  "kind": "MILAI_FRESHNESS_V19_REPAIR_FINAL_VERIFICATION",
+  "status": "PASS_ENGINEERING_WITH_SEMANTIC_FAILURE",
+  "source_mapping_sha256": "bfc5c27631a9c41625446bc6cc6617e7a30417b39e23229a2ec6e85fc4105555",
+  "source_files_verified": 59,
+  "validation_files_verified": 6,
+  "old_artifacts_unchanged": 18,
+  "old_method_files_unchanged": 14,
+  "repair_plan_unchanged": true,
+  "all_nine_run_artifact_hashes_verified": true,
+  "vllm_settings_changed": false,
+  "environment_before_sha256": "f5dbc7d08962174207ac1ba6bbf0164e9592493e9557e11095f4a6dc5f20cc04",
+  "environment_after_sha256": "48cd90ed0a76fa6710b42c2bcd29e35cc38610d03c58ea017fc5a565e1e28019",
+  "source_verification": {
+    "kind": "MILAI_FRESHNESS_PROJECTION_V19_A3_SOURCE_VERIFICATION",
+    "status": "SOURCE_READY_FOR_FREEZE",
+    "arm": "a3_exact_refresh",
+    "lock": {
+      "path": "data/locks/milai-freshness-projection-v19-a3.lock.json",
+      "kind": "MILAI_FRESHNESS_PROJECTION_V19_A3_LOCK",
+      "recipe_id": "milai-freshness-projection-json-action-v1",
+      "transport_variant": "json_action_freshness_projection_v1"
+    },
+    "contract": {
+      "schema": "B1 JSON action schema unchanged",
+      "source_authority": "The same fixed source-authority principle as A2",
+      "exact_read": "Only actual outgoing SUPERSEDED items whose exact current body is absent; public same-instance Store.get(namespace, memory_id, refresh_ttl=False), deduplicated per request; DELETED and UNKNOWN are not read",
+      "binding": "Returned Store Item must exactly match the sidecar current revision post_item_json; missing, mismatched and failed reads remain quarantined and are recorded UNKNOWN",
+      "projection": "Only the Provider request copy contains refreshed current items; original ToolMessages, checkpoint and Store remain unchanged",
+      "material_coverage": "PROJECTED_REFRESHED only when original search source and actual Provider projected body match; A2 PROJECTED_WITHHELD and B1 FULL retain their meaning",
+      "read_vs_delivery": "Each exact read emits freshness_exact_read immediately with source, revision, result and elapsed wall time; successful Provider delivery separately emits freshness_projection with actual request hash, source binding and material body ref",
+      "b1_extra_store_reads": "Separate from A3 exact reads",
+      "automatic_search": false
+    },
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py tests/unit/test_langmem_provenance.py tests/unit/test_milai_odr.py tests/unit/test_milai_m1_v18.py",
+        "result": "PASS: 27 passed"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/freshness_projection src/milai_lab/baselines/langmem_revision_store.py src/milai_lab/providers/langmem_chat.py tools/run_milai_freshness_projection.py tests/unit/test_freshness_projection.py",
+        "result": "PASS: All checks passed"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/methods/freshness_projection/*.py src/milai_lab/baselines/langmem_revision_store.py src/milai_lab/providers/langmem_chat.py tools/run_milai_freshness_projection.py",
+        "result": "PASS: 7 source files"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-tools-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync python tools/run_milai_freshness_projection.py schema --arm a3_exact_refresh",
+        "result": "PASS: unchanged B1 JSON action schema, same A2 source-authority principle, no reconstruction field"
+      }
+    ],
+    "packaging_build": "NOT_RUN_WAIT_FINAL_A3_LOCK",
+    "model_calls_by_source_owner": 0,
+    "embedding_calls_by_source_owner": 0
+  },
+  "packaging_verification": {
+    "kind": "MILAI_FRESHNESS_PROJECTION_V19_A3_PACKAGING_VERIFICATION",
+    "status": "PASS",
+    "lock_sha256": "5a6a514f8e6281dda30565378e0824314ba2db8e7ec27f0dc1845de87d56169b",
+    "build": {
+      "command": "uv build",
+      "result": "PASS: one source distribution and one wheel built after A3 lock",
+      "wheel": "dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "4263f95f626c06d12842536c0d5d269e8b70ed03a772a74ecd6df29baddb6138",
+      "sdist": "dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "d6976eeacc35375a1b317d10493ddfb26cf909d42016727bb137819988c67156"
+    },
+    "contents": {
+      "wheel_required_paths_present": 5,
+      "sdist_required_paths_present": 6,
+      "a3_lock_in_sdist": true,
+      "a3_config_cli_test_in_sdist": true,
+      "a3_runtime_in_wheel": true,
+      "forbidden_artifact_archive_venv_paths": 0
+    },
+    "model_calls_by_source_owner": 0,
+    "embedding_calls_by_source_owner": 0
+  },
+  "a2_source_checkpoint": {
+    "kind": "MILAI_FRESHNESS_V19_REPAIR_A2_SOURCE_CHECKPOINT",
+    "status": "EXACT_GIT_SOURCE_VERIFIED",
+    "source_commit": "b753347c79edfbad06083a443b6de7f3d0fc8f1c",
+    "historical_m1_test_only_commit": "a0ab47a09a2079e6dbe41e0981978777fb32cd26",
+    "source_mapping_sha256": "03c8923a0069b53ca6fe516fd89b882a14e0aa20bce68aca6ddb824932304460",
+    "source_files_verified": 59,
+    "validation_files_verified": 6,
+    "lock_sha256": "398669b26e9bd26a9b909f9920ab5525972377602f46d21b9ab97b1311395c27",
+    "publication": "Local checkpoint first; final authorized push includes this commit and subsequent A3 work."
+  }
+}

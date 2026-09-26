@@ -1,0 +1,538 @@
+{
+  "kind": "MILAI_FRESHNESS_V19_REPAIR_FINAL_ACCOUNTING",
+  "status": "SEALED",
+  "stages": {
+    "a1": {
+      "cases": {
+        "changed": {
+          "fragment_tokens": {
+            "authority": 0,
+            "notice": 288,
+            "quarantine_marker": 0,
+            "exact_current_body": 0,
+            "exact_version_metadata": 0
+          },
+          "storage_bytes": {
+            "trace.jsonl": 178052,
+            "instrumentation.sqlite": 90112,
+            "checkpoints.sqlite": 77824,
+            "run/business-journal.json": 806,
+            "projection_and_exact_read_trace_bytes": 1586,
+            "sidecar_net_bytes": 0,
+            "persistent_semantic_state_bytes": 0
+          },
+          "b1_observer_stats": {
+            "id": 1,
+            "transactions": 66,
+            "observer_cpu_ns": 20623203,
+            "observer_wall_ns": 395323459,
+            "extra_store_reads": 4,
+            "extra_read_cpu_ns": 6165697,
+            "extra_read_wall_ns": 10109744,
+            "initial_db_bytes": 90112
+          },
+          "sidecar_rows": {
+            "observations": 4,
+            "revisions": 2,
+            "searches": 1,
+            "requests": 5,
+            "request_material": 5
+          },
+          "exact_refresh_reads": 0,
+          "provider_errors": 0
+        },
+        "retained": {
+          "fragment_tokens": {
+            "authority": 0,
+            "notice": 282,
+            "quarantine_marker": 0,
+            "exact_current_body": 0,
+            "exact_version_metadata": 0
+          },
+          "storage_bytes": {
+            "trace.jsonl": 178269,
+            "instrumentation.sqlite": 90112,
+            "checkpoints.sqlite": 77824,
+            "run/business-journal.json": 806,
+            "projection_and_exact_read_trace_bytes": 1591,
+            "sidecar_net_bytes": 0,
+            "persistent_semantic_state_bytes": 0
+          },
+          "b1_observer_stats": {
+            "id": 1,
+            "transactions": 66,
+            "observer_cpu_ns": 20153783,
+            "observer_wall_ns": 406039063,
+            "extra_store_reads": 4,
+            "extra_read_cpu_ns": 5781295,
+            "extra_read_wall_ns": 9082792,
+            "initial_db_bytes": 90112
+          },
+          "sidecar_rows": {
+            "observations": 4,
+            "revisions": 2,
+            "searches": 1,
+            "requests": 5,
+            "request_material": 5
+          },
+          "exact_refresh_reads": 0,
+          "provider_errors": 0
+        },
+        "irrelevant": {
+          "fragment_tokens": {
+            "authority": 0,
+            "notice": 276,
+            "quarantine_marker": 0,
+            "exact_current_body": 0,
+            "exact_version_metadata": 0
+          },
+          "storage_bytes": {
+            "trace.jsonl": 225176,
+            "instrumentation.sqlite": 90112,
+            "checkpoints.sqlite": 77824,
+            "run/business-journal.json": 806,
+            "projection_and_exact_read_trace_bytes": 1601,
+            "sidecar_net_bytes": 0,
+            "persistent_semantic_state_bytes": 0
+          },
+          "b1_observer_stats": {
+            "id": 1,
+            "transactions": 78,
+            "observer_cpu_ns": 25186302,
+            "observer_wall_ns": 519505857,
+            "extra_store_reads": 6,
+            "extra_read_cpu_ns": 8066246,
+            "extra_read_wall_ns": 12422289,
+            "initial_db_bytes": 90112
+          },
+          "sidecar_rows": {
+            "observations": 4,
+            "revisions": 3,
+            "searches": 1,
+            "requests": 5,
+            "request_material": 5
+          },
+          "exact_refresh_reads": 0,
+          "provider_errors": 0
+        }
+      },
+      "costs": {
+        "generations": 15,
+        "input_tokens": 13209,
+        "output_tokens": 395,
+        "generation_tokens": 13604,
+        "embedding_requests": 10,
+        "embedding_tokens": 270,
+        "provider_wall_seconds": 5.217878669966012,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "passed": [
+        1,
+        3
+      ],
+      "fragment_tokens": {
+        "authority": 0,
+        "notice": 846,
+        "quarantine_marker": 0,
+        "exact_current_body": 0,
+        "exact_version_metadata": 0
+      },
+      "storage_bytes": {
+        "trace.jsonl": 581497,
+        "instrumentation.sqlite": 270336,
+        "checkpoints.sqlite": 233472,
+        "run/business-journal.json": 2418,
+        "projection_and_exact_read_trace_bytes": 4778,
+        "sidecar_net_bytes": 0,
+        "persistent_semantic_state_bytes": 0
+      }
+    },
+    "a2": {
+      "cases": {
+        "changed": {
+          "fragment_tokens": {
+            "authority": 120,
+            "notice": 0,
+            "quarantine_marker": 324,
+            "exact_current_body": 0,
+            "exact_version_metadata": 0
+          },
+          "storage_bytes": {
+            "trace.jsonl": 183027,
+            "instrumentation.sqlite": 90112,
+            "checkpoints.sqlite": 77824,
+            "run/business-journal.json": 806,
+            "projection_and_exact_read_trace_bytes": 5633,
+            "sidecar_net_bytes": 0,
+            "persistent_semantic_state_bytes": 0
+          },
+          "b1_observer_stats": {
+            "id": 1,
+            "transactions": 66,
+            "observer_cpu_ns": 21564103,
+            "observer_wall_ns": 398844755,
+            "extra_store_reads": 4,
+            "extra_read_cpu_ns": 6557226,
+            "extra_read_wall_ns": 9656971,
+            "initial_db_bytes": 90112
+          },
+          "sidecar_rows": {
+            "observations": 4,
+            "revisions": 2,
+            "searches": 1,
+            "requests": 5,
+            "request_material": 5
+          },
+          "exact_refresh_reads": 0,
+          "provider_errors": 0
+        },
+        "retained": {
+          "fragment_tokens": {
+            "authority": 120,
+            "notice": 0,
+            "quarantine_marker": 306,
+            "exact_current_body": 0,
+            "exact_version_metadata": 0
+          },
+          "storage_bytes": {
+            "trace.jsonl": 183103,
+            "instrumentation.sqlite": 90112,
+            "checkpoints.sqlite": 77824,
+            "run/business-journal.json": 806,
+            "projection_and_exact_read_trace_bytes": 5642,
+            "sidecar_net_bytes": 0,
+            "persistent_semantic_state_bytes": 0
+          },
+          "b1_observer_stats": {
+            "id": 1,
+            "transactions": 66,
+            "observer_cpu_ns": 20035699,
+            "observer_wall_ns": 474198697,
+            "extra_store_reads": 4,
+            "extra_read_cpu_ns": 4803800,
+            "extra_read_wall_ns": 8146492,
+            "initial_db_bytes": 90112
+          },
+          "sidecar_rows": {
+            "observations": 4,
+            "revisions": 2,
+            "searches": 1,
+            "requests": 5,
+            "request_material": 5
+          },
+          "exact_refresh_reads": 0,
+          "provider_errors": 0
+        },
+        "irrelevant": {
+          "fragment_tokens": {
+            "authority": 120,
+            "notice": 0,
+            "quarantine_marker": 306,
+            "exact_current_body": 0,
+            "exact_version_metadata": 0
+          },
+          "storage_bytes": {
+            "trace.jsonl": 233286,
+            "instrumentation.sqlite": 90112,
+            "checkpoints.sqlite": 81920,
+            "run/business-journal.json": 806,
+            "projection_and_exact_read_trace_bytes": 8492,
+            "sidecar_net_bytes": 0,
+            "persistent_semantic_state_bytes": 0
+          },
+          "b1_observer_stats": {
+            "id": 1,
+            "transactions": 78,
+            "observer_cpu_ns": 23550598,
+            "observer_wall_ns": 501110891,
+            "extra_store_reads": 6,
+            "extra_read_cpu_ns": 7516366,
+            "extra_read_wall_ns": 11680576,
+            "initial_db_bytes": 90112
+          },
+          "sidecar_rows": {
+            "observations": 4,
+            "revisions": 3,
+            "searches": 1,
+            "requests": 5,
+            "request_material": 5
+          },
+          "exact_refresh_reads": 0,
+          "provider_errors": 0
+        }
+      },
+      "costs": {
+        "generations": 15,
+        "input_tokens": 13532,
+        "output_tokens": 422,
+        "generation_tokens": 13954,
+        "embedding_requests": 10,
+        "embedding_tokens": 268,
+        "provider_wall_seconds": 5.477988537400961,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "passed": [
+        1,
+        3
+      ],
+      "fragment_tokens": {
+        "authority": 360,
+        "notice": 0,
+        "quarantine_marker": 936,
+        "exact_current_body": 0,
+        "exact_version_metadata": 0
+      },
+      "storage_bytes": {
+        "trace.jsonl": 599416,
+        "instrumentation.sqlite": 270336,
+        "checkpoints.sqlite": 237568,
+        "run/business-journal.json": 2418,
+        "projection_and_exact_read_trace_bytes": 19767,
+        "sidecar_net_bytes": 0,
+        "persistent_semantic_state_bytes": 0
+      }
+    },
+    "a3": {
+      "cases": {
+        "changed": {
+          "fragment_tokens": {
+            "authority": 120,
+            "notice": 0,
+            "quarantine_marker": 0,
+            "exact_current_body": 96,
+            "exact_version_metadata": 273
+          },
+          "storage_bytes": {
+            "trace.jsonl": 189017,
+            "instrumentation.sqlite": 90112,
+            "checkpoints.sqlite": 77824,
+            "run/business-journal.json": 806,
+            "projection_and_exact_read_trace_bytes": 11164,
+            "sidecar_net_bytes": 0,
+            "persistent_semantic_state_bytes": 0
+          },
+          "b1_observer_stats": {
+            "id": 1,
+            "transactions": 66,
+            "observer_cpu_ns": 22375277,
+            "observer_wall_ns": 432564381,
+            "extra_store_reads": 4,
+            "extra_read_cpu_ns": 4695219,
+            "extra_read_wall_ns": 8336789,
+            "initial_db_bytes": 90112
+          },
+          "sidecar_rows": {
+            "observations": 4,
+            "revisions": 2,
+            "searches": 1,
+            "requests": 5,
+            "request_material": 5
+          },
+          "exact_refresh_reads": 3,
+          "provider_errors": 0
+        },
+        "retained": {
+          "fragment_tokens": {
+            "authority": 120,
+            "notice": 0,
+            "quarantine_marker": 0,
+            "exact_current_body": 108,
+            "exact_version_metadata": 297
+          },
+          "storage_bytes": {
+            "trace.jsonl": 188947,
+            "instrumentation.sqlite": 90112,
+            "checkpoints.sqlite": 77824,
+            "run/business-journal.json": 806,
+            "projection_and_exact_read_trace_bytes": 11182,
+            "sidecar_net_bytes": 0,
+            "persistent_semantic_state_bytes": 0
+          },
+          "b1_observer_stats": {
+            "id": 1,
+            "transactions": 66,
+            "observer_cpu_ns": 21571907,
+            "observer_wall_ns": 426707654,
+            "extra_store_reads": 4,
+            "extra_read_cpu_ns": 5183995,
+            "extra_read_wall_ns": 8791447,
+            "initial_db_bytes": 90112
+          },
+          "sidecar_rows": {
+            "observations": 4,
+            "revisions": 2,
+            "searches": 1,
+            "requests": 5,
+            "request_material": 5
+          },
+          "exact_refresh_reads": 3,
+          "provider_errors": 0
+        },
+        "irrelevant": {
+          "fragment_tokens": {
+            "authority": 120,
+            "notice": 0,
+            "quarantine_marker": 0,
+            "exact_current_body": 60,
+            "exact_version_metadata": 285
+          },
+          "storage_bytes": {
+            "trace.jsonl": 239114,
+            "instrumentation.sqlite": 90112,
+            "checkpoints.sqlite": 77824,
+            "run/business-journal.json": 806,
+            "projection_and_exact_read_trace_bytes": 14478,
+            "sidecar_net_bytes": 0,
+            "persistent_semantic_state_bytes": 0
+          },
+          "b1_observer_stats": {
+            "id": 1,
+            "transactions": 78,
+            "observer_cpu_ns": 25763546,
+            "observer_wall_ns": 456279671,
+            "extra_store_reads": 6,
+            "extra_read_cpu_ns": 7802920,
+            "extra_read_wall_ns": 11977732,
+            "initial_db_bytes": 90112
+          },
+          "sidecar_rows": {
+            "observations": 4,
+            "revisions": 3,
+            "searches": 1,
+            "requests": 5,
+            "request_material": 5
+          },
+          "exact_refresh_reads": 3,
+          "provider_errors": 0
+        }
+      },
+      "costs": {
+        "generations": 15,
+        "input_tokens": 13490,
+        "output_tokens": 409,
+        "generation_tokens": 13899,
+        "embedding_requests": 10,
+        "embedding_tokens": 270,
+        "provider_wall_seconds": 5.424318310339004,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "passed": [
+        2,
+        3
+      ],
+      "fragment_tokens": {
+        "authority": 360,
+        "notice": 0,
+        "quarantine_marker": 0,
+        "exact_current_body": 264,
+        "exact_version_metadata": 855
+      },
+      "storage_bytes": {
+        "trace.jsonl": 617078,
+        "instrumentation.sqlite": 270336,
+        "checkpoints.sqlite": 233472,
+        "run/business-journal.json": 2418,
+        "projection_and_exact_read_trace_bytes": 36824,
+        "sidecar_net_bytes": 0,
+        "persistent_semantic_state_bytes": 0
+      }
+    }
+  },
+  "totals": {
+    "generations": 45,
+    "input_tokens": 40231,
+    "output_tokens": 1226,
+    "generation_tokens": 41457,
+    "embedding_requests": 30,
+    "embedding_tokens": 808,
+    "provider_wall_seconds": 16.120185517705977,
+    "unknown_usage": 0,
+    "truncations": 0
+  },
+  "budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 45,
+    "generation": {
+      "charged_tokens": 41457,
+      "known_tokens": 41457,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 808,
+      "known_tokens": 808,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+      "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+      "generation_requests": 20,
+      "generation_tokens": 20360,
+      "embedding_tokens": 274,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+        "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+        "generation_requests": 16,
+        "generation_known_tokens": 19237,
+        "generation_charged_tokens": 19237,
+        "embedding_tokens": 267,
+        "unknown_usage": 0,
+        "judge_requests": 0,
+        "truncations": 1,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+          "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+          "generation_requests": 101,
+          "generation_known_tokens": 101810,
+          "generation_charged_tokens": 101810,
+          "embedding_tokens": 916,
+          "unknown_usage": 0,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-provenance/v16-budget.json",
+            "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+            "generation_requests": 55,
+            "generation_known_tokens": 40072,
+            "generation_charged_tokens": 40072,
+            "embedding_tokens": 443,
+            "unknown_usage": 0,
+            "judge_requests": 0,
+            "sealed": true,
+            "earlier_v15": {
+              "ledger": "artifacts/langmem-foundation/v15-budget.json",
+              "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+              "generation_requests": 108,
+              "generation_known_tokens": 71846,
+              "generation_unknown_reservation": 4891,
+              "generation_charged_tokens": 76737,
+              "embedding_tokens": 836,
+              "unknown_usage": 1,
+              "judge_requests": 0,
+              "sealed": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "budget_sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+  "fixed_authority_tokens_per_request": 24,
+  "exact_current_reads": 9,
+  "ordinary_search_followup_generations": 9,
+  "ordinary_business_followup_generations": 9,
+  "independent_state_or_refresh_generations": 0,
+  "judge_requests": 0,
+  "fragment_token_measurement": "Pinned local tokenizer, isolated text fragments including repeated delivery; descriptive only, not additive Provider billing or a causal token saving estimate. Exact metadata excludes surrounding JSON keys/delimiters and Store Item metadata.",
+  "storage_measurement": "Actual bytes of local run files. Projection event bytes are a subset of trace.jsonl; sidecar net is a subset of its total. Do not sum overlapping fields. SQLite includes factual provenance/history, not semantic State. PostgreSQL shared-database physical storage is not attributable per run here.",
+  "selection": "NO_ARM_PASSES_ALL_THREE: A1=1/3, A2=1/3, A3=2/3. Current body reaches Provider in A3 but changed still uses old assistant value. No efficacy promotion or further expansion."
+}

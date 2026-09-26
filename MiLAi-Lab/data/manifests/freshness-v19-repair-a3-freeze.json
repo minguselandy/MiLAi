@@ -1,0 +1,215 @@
+{
+  "kind": "MILAI_FRESHNESS_V19_REPAIR_A3_FREEZE",
+  "status": "FROZEN_BEFORE_A3_REQUESTS",
+  "created_at": "2026-09-26T15:34:18.500742+00:00",
+  "lock_sha256": "5a6a514f8e6281dda30565378e0824314ba2db8e7ec27f0dc1845de87d56169b",
+  "source_mapping_sha256": "bfc5c27631a9c41625446bc6cc6617e7a30417b39e23229a2ec6e85fc4105555",
+  "previous_stage_result_sha256": "dd51e602e158ea0962b42ca672e3debb53d4be616343887a95e1c65973eebd2c",
+  "evaluation_protocol_sha256": "bdb974182c14942810a2c7d5c23505666d73ade3015940bd3e51065a6eff82d4",
+  "source_verification": {
+    "kind": "MILAI_FRESHNESS_PROJECTION_V19_A3_SOURCE_VERIFICATION",
+    "status": "SOURCE_READY_FOR_FREEZE",
+    "arm": "a3_exact_refresh",
+    "lock": {
+      "path": "data/locks/milai-freshness-projection-v19-a3.lock.json",
+      "kind": "MILAI_FRESHNESS_PROJECTION_V19_A3_LOCK",
+      "recipe_id": "milai-freshness-projection-json-action-v1",
+      "transport_variant": "json_action_freshness_projection_v1"
+    },
+    "contract": {
+      "schema": "B1 JSON action schema unchanged",
+      "source_authority": "The same fixed source-authority principle as A2",
+      "exact_read": "Only actual outgoing SUPERSEDED items whose exact current body is absent; public same-instance Store.get(namespace, memory_id, refresh_ttl=False), deduplicated per request; DELETED and UNKNOWN are not read",
+      "binding": "Returned Store Item must exactly match the sidecar current revision post_item_json; missing, mismatched and failed reads remain quarantined and are recorded UNKNOWN",
+      "projection": "Only the Provider request copy contains refreshed current items; original ToolMessages, checkpoint and Store remain unchanged",
+      "material_coverage": "PROJECTED_REFRESHED only when original search source and actual Provider projected body match; A2 PROJECTED_WITHHELD and B1 FULL retain their meaning",
+      "read_vs_delivery": "Each exact read emits freshness_exact_read immediately with source, revision, result and elapsed wall time; successful Provider delivery separately emits freshness_projection with actual request hash, source binding and material body ref",
+      "b1_extra_store_reads": "Separate from A3 exact reads",
+      "automatic_search": false
+    },
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py tests/unit/test_langmem_provenance.py tests/unit/test_milai_odr.py tests/unit/test_milai_m1_v18.py",
+        "result": "PASS: 27 passed"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/freshness_projection src/milai_lab/baselines/langmem_revision_store.py src/milai_lab/providers/langmem_chat.py tools/run_milai_freshness_projection.py tests/unit/test_freshness_projection.py",
+        "result": "PASS: All checks passed"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/methods/freshness_projection/*.py src/milai_lab/baselines/langmem_revision_store.py src/milai_lab/providers/langmem_chat.py tools/run_milai_freshness_projection.py",
+        "result": "PASS: 7 source files"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-tools-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync python tools/run_milai_freshness_projection.py schema --arm a3_exact_refresh",
+        "result": "PASS: unchanged B1 JSON action schema, same A2 source-authority principle, no reconstruction field"
+      }
+    ],
+    "packaging_build": "NOT_RUN_WAIT_FINAL_A3_LOCK",
+    "model_calls_by_source_owner": 0,
+    "embedding_calls_by_source_owner": 0
+  },
+  "source_verification_sha256": "8571edefc2a351c1ad275432810515b3361450002aedb87c1a11b6ebb228d8ec",
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 30,
+    "generation": {
+      "charged_tokens": 27558,
+      "known_tokens": 27558,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 538,
+      "known_tokens": 538,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+      "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+      "generation_requests": 20,
+      "generation_tokens": 20360,
+      "embedding_tokens": 274,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+        "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+        "generation_requests": 16,
+        "generation_known_tokens": 19237,
+        "generation_charged_tokens": 19237,
+        "embedding_tokens": 267,
+        "unknown_usage": 0,
+        "judge_requests": 0,
+        "truncations": 1,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+          "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+          "generation_requests": 101,
+          "generation_known_tokens": 101810,
+          "generation_charged_tokens": 101810,
+          "embedding_tokens": 916,
+          "unknown_usage": 0,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-provenance/v16-budget.json",
+            "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+            "generation_requests": 55,
+            "generation_known_tokens": 40072,
+            "generation_charged_tokens": 40072,
+            "embedding_tokens": 443,
+            "unknown_usage": 0,
+            "judge_requests": 0,
+            "sealed": true,
+            "earlier_v15": {
+              "ledger": "artifacts/langmem-foundation/v15-budget.json",
+              "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+              "generation_requests": 108,
+              "generation_known_tokens": 71846,
+              "generation_unknown_reservation": 4891,
+              "generation_charged_tokens": 76737,
+              "embedding_tokens": 836,
+              "unknown_usage": 1,
+              "judge_requests": 0,
+              "sealed": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "case": "changed",
+      "run_id": "v19-repair-a3-changed-r1",
+      "arm": "a3_exact_refresh",
+      "directory": "artifacts/freshness-projection-v19-repair/a3-changed-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "fe61d6c227f7e5443926537484f86067ca9b0ff46859fb1f186af48e1841ce59",
+      "prepared_sha256": "7d692d087790394772e959b172261012da77f87a7af510fb37c230bd08791ace",
+      "options": [
+        "--config",
+        "artifacts/freshness-projection-v19-repair/a3-changed-r1/config.json",
+        "--lock",
+        "data/locks/milai-freshness-projection-v19-a3.lock.json",
+        "--run",
+        "v19-repair-a3-changed-r1",
+        "--arm",
+        "a3_exact_refresh",
+        "--fixture",
+        "data/fixtures/milai_odr_v19_changed.json",
+        "--mechanism-freeze",
+        "data/manifests/milai-odr-v19-changed-freeze.json"
+      ]
+    },
+    {
+      "case": "retained",
+      "run_id": "v19-repair-a3-retained-r1",
+      "arm": "a3_exact_refresh",
+      "directory": "artifacts/freshness-projection-v19-repair/a3-retained-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "f2706599f1062d0faae863d1749d969ddbebbdb604ce2953349a32b23de3996e",
+      "prepared_sha256": "e3af664b65cbdf7d16e16923c565ec2c10981ae3f341de85a4bc9143f1568c5c",
+      "options": [
+        "--config",
+        "artifacts/freshness-projection-v19-repair/a3-retained-r1/config.json",
+        "--lock",
+        "data/locks/milai-freshness-projection-v19-a3.lock.json",
+        "--run",
+        "v19-repair-a3-retained-r1",
+        "--arm",
+        "a3_exact_refresh",
+        "--fixture",
+        "data/fixtures/milai_odr_v19_retained.json",
+        "--mechanism-freeze",
+        "data/manifests/milai-odr-v19-retained-freeze.json"
+      ]
+    },
+    {
+      "case": "irrelevant",
+      "run_id": "v19-repair-a3-irrelevant-r1",
+      "arm": "a3_exact_refresh",
+      "directory": "artifacts/freshness-projection-v19-repair/a3-irrelevant-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "ccd769c0adb588e16a75943bee486697160f8e5705c4ae28462697faf93d8c4d",
+      "prepared_sha256": "b92d19f36e430efb6a70fab1757273f9cf24700c9d89da209bbd315c9e38ee26",
+      "options": [
+        "--config",
+        "artifacts/freshness-projection-v19-repair/a3-irrelevant-r1/config.json",
+        "--lock",
+        "data/locks/milai-freshness-projection-v19-a3.lock.json",
+        "--run",
+        "v19-repair-a3-irrelevant-r1",
+        "--arm",
+        "a3_exact_refresh",
+        "--fixture",
+        "data/fixtures/milai_odr_v19_irrelevant.json",
+        "--mechanism-freeze",
+        "data/manifests/milai-odr-v19-irrelevant-freeze.json"
+      ]
+    }
+  ],
+  "response_schema_equal_actual_A1": true,
+  "additional_decoder_probe": "NOT_NEEDED_UNCHANGED_SCHEMA",
+  "packaging": "DEFERRED_UNTIL_FINAL_SELECTED_STAGE_TO_AVOID_REPEATED_BUILD",
+  "source_authority_is_part_of_A2_intervention": true,
+  "A3_authority_unchanged": true,
+  "vllm_settings_changed": false
+}

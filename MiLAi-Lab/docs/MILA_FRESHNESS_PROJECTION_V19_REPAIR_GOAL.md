@@ -1,6 +1,6 @@
 ---
 date: 2026-09-26
-status: A3_EXACT_REFRESH_PENDING
+status: COMPLETE_WITH_FRESHNESS_LIMITATIONS
 scope: MiLAi-Lab
 experiment_arm_kind: RESEARCH_PROTOTYPE
 ---
@@ -8,6 +8,8 @@ experiment_arm_kind: RESEARCH_PROTOTYPE
 # v19 修复执行 Goal
 
 完整执行用户新保存的 [747 行修复文档](v19修复.md)。新授权解除旧 v19 的 V5 gate，先用提交 `d0367aab36c15b39bdd4e2c1fd7a92a542f66fcf` 的现成 freshness_only 跑三个既有 fixture，不先改源码。旧 ODR 及旧结果封存，新工作不再以 reconstruction 为活动候选。
+
+开发与条件阶段均完成，见[最终结果](MILA_FRESHNESS_PROJECTION_V19_REPAIR_RESULTS_20260926.md)和[复现](MILA_FRESHNESS_PROJECTION_V19_REPAIR_REPRODUCTION_20260926.md)。A1=1/3、A2=1/3、A3=2/3；A3当前正文真实交付后changed仍记录4°C，因此没有通过全部三例的候选。本次保留适配器及失败证据，不声称行为问题已全部解决，也不自动展开下一轮实验。
 
 沿用一名 Sol xhigh 负责必要源码/config/tests/CI，Root 负责文档、冻结、环境、全部真实请求（并发 1）、费用和判定，Luna high 负责已授权的 Git 发布。原 vLLM、Host/embedding 设置不改；无 reviewer、思考模式、业务真值 gate、持续 State 或新基准数据。
 
@@ -41,6 +43,7 @@ A1 为原合同；如 A2 同时引入隔离和 source-authority 原则，报告�
 - [x] 原 v19 与新修复文档封存、A1 前冻结。
 - [x] A1 三例：changed/retained失败，irrelevant通过，进入A2。
 - [x] A2实现与必要验证完成；三例1/3通过，旧正文确实隔离，但changed/retained仍不重新取证，进入A3。
-- [ ] 条件 A3 实现/必要验证/三例或有依据跳过。
+- [x] 条件A3实现、27条受影响窄测及唯一包装检查通过；三例2/3，changed行为仍失败。
 - [x] historical test expectation drift仅更新异常期望，独立窄测1通过；M1语义不变，单独提交。
-- [ ] 最终候选、费用、结果/复现、发布与远端核对。
+- [x] 最终候选判定、费用、结果/复现完成；45次生成/41457tokens/808embeddingtokens，9次exact get，旧费用保留。
+- [x] 用户已授权Luna提交/推送全部开发；远端SHA与工作区核对属于本次发布收尾，执行回执见交付会话及Git记录。

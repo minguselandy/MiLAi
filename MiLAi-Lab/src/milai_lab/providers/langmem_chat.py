@@ -166,7 +166,8 @@ class VLLMChatModel(BaseChatModel):
                 if odr_freshness:
                     protocol += "\n" + odr_freshness
             if self.projection is not None:
-                projected = self.projection.project(wire_messages, self.active_message_key)
+                projected = self.projection.project(
+                    wire_messages, self.active_message_key, self.calls_in_message + 1)
                 wire_messages = projected.messages
                 protocol += "\n" + SOURCE_AUTHORITY
             if wire_messages and wire_messages[0]["role"] == "system":

@@ -1,4 +1,4 @@
-"""Offline identity gate for the conditional A2 quarantine arm."""
+"""Offline identity gate for the staged freshness projection arms."""
 
 from __future__ import annotations
 
@@ -28,9 +28,11 @@ REQUIRED_RUNTIME = {
 }
 
 
-def verify_lock(lock_path: Path, config_path: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+def verify_lock(lock_path: Path, config_path: Path, arm_id: str,
+                ) -> tuple[dict[str, Any], dict[str, Any]]:
     reference, lock, config = read_json(REFERENCE), read_json(lock_path), read_json(config_path)
-    expected = {"kind": "MILAI_FRESHNESS_PROJECTION_V19_A2_LOCK", "status": "FROZEN",
+    stage = "A3" if arm_id == "a3_exact_refresh" else "A2"
+    expected = {"kind": f"MILAI_FRESHNESS_PROJECTION_V19_{stage}_LOCK", "status": "FROZEN",
                 "reference_manifest_sha256": sha256_file(REFERENCE),
                 "recipe_id": RECIPE_ID, "transport_variant": TRANSPORT_VARIANT}
     for key, value in expected.items():
@@ -61,7 +63,7 @@ def verify_lock(lock_path: Path, config_path: Path) -> tuple[dict[str, Any], dic
 
 def verify_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
                     *, run_id: str, arm_id: str, fixture_path: Path) -> str:
-    verify_lock(lock_path, config_path)
+    verify_lock(lock_path, config_path, arm_id)
     receipt = read_json(receipt_path)
     expected = {"status": "PREPARED_ZERO_MODEL", "method": "freshness_projection",
                 "run_id": run_id, "arm_id": arm_id,

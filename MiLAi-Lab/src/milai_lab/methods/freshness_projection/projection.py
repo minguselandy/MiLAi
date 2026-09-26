@@ -3,10 +3,18 @@
 from __future__ import annotations
 
 import json
+import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
-from milai_lab.baselines.langmem_revision_store import RevisionSidecar, content_identity
+from langgraph.store.base import Item
+
+from milai_lab.baselines.langmem_revision_store import (
+    RevisionSidecar,
+    canonical_json,
+    content_identity,
+)
 
 SOURCE_AUTHORITY = (
     "Previous assistant statements are not authoritative evidence about external or "
@@ -19,25 +27,29 @@ class ProjectedRequest:
     messages: list[dict[str, Any]]
     materials: dict[str, dict[str, str]]
     items: list[dict[str, Any]]
+    exact_reads: list[dict[str, Any]]
 
 
-def _status(item: dict[str, Any], sidecar: RevisionSidecar) -> tuple[str, str | None]:
+def _status(item: dict[str, Any], sidecar: RevisionSidecar,
+            ) -> tuple[str, str | None, dict[str, Any] | None]:
     if item["revision_status"] != "EXACT":
-        return "UNKNOWN", None
+        return "UNKNOWN", None, None
     latest = sidecar.latest_revision(tuple(item["namespace"]), item["memory_id"])
     if latest is None:
-        return "UNKNOWN", None
+        return "UNKNOWN", None, None
     if latest["tombstone"]:
-        return "DELETED", None
+        return "DELETED", None, latest
     if latest["revision"] == item["revision"]:
-        return "CURRENT", f"memory:{item['memory_id']}@{item['revision']}"
+        return "CURRENT", f"memory:{item['memory_id']}@{item['revision']}", latest
     if latest["revision"] > item["revision"]:
-        return "SUPERSEDED", f"memory:{item['memory_id']}@{latest['revision']}"
-    return "UNKNOWN", None
+        return "SUPERSEDED", f"memory:{item['memory_id']}@{latest['revision']}", latest
+    return "UNKNOWN", None, latest
 
 
 def project_current_evidence(
     messages: list[dict[str, Any]], sidecar: RevisionSidecar, thread_id: str,
+    get_current: Callable[[tuple[str, ...], str], Item | None] | None = None,
+    record_exact_read: Callable[[dict[str, Any]], None] | None = None,
 ) -> ProjectedRequest:
     """Bind each original search message before replacing individual stale values."""
     searches = {row["call_id"]: row for row in sidecar.rows("searches")
@@ -65,11 +77,15 @@ def project_current_evidence(
     projected = list(messages)
     materials: dict[str, dict[str, str]] = {}
     events: list[dict[str, Any]] = []
+    exact_reads: list[dict[str, Any]] = []
+    refreshed: dict[tuple[tuple[str, ...], str, int], Item | None] = {}
+    read_indexes: dict[tuple[tuple[str, ...], str, int], int] = {}
     for position, (search, entries, body) in bound.items():
         changed = False
+        refreshed_in_message = False
         rendered = list(body)
         for item_index, item in enumerate(entries):
-            status, current_ref = _status(item, sidecar)
+            status, current_ref, latest = _status(item, sidecar)
             ref = (f"memory:{item['memory_id']}@{item['revision']}"
                    if item["revision_status"] == "EXACT" else None)
             current_revision = int(current_ref.rsplit("@", 1)[1]) if current_ref else None
@@ -91,6 +107,57 @@ def project_current_evidence(
                 marker += " Historical body withheld from this request."
                 rendered[item_index] = {**body[item_index], "value": {"content": marker}}
                 event["projected_body_ref"] = content_identity(marker)[2]
+                if (status == "SUPERSEDED" and not delivered
+                        and get_current is not None and latest is not None):
+                    key = (tuple(item["namespace"]), item["memory_id"],
+                           int(latest["revision"]))
+                    if key not in refreshed:
+                        started = time.perf_counter_ns()
+                        error_type = None
+                        try:
+                            current = get_current(key[0], key[1])
+                        except Exception as error:
+                            current = None
+                            error_type = type(error).__name__
+                        wall_ns = time.perf_counter_ns() - started
+                        bound_current = (error_type is None and current is not None and
+                                         canonical_json(current.dict())
+                                         == latest["post_item_json"])
+                        refreshed[key] = current if bound_current else None
+                        read = {
+                            "namespace": list(key[0]), "memory_id": key[1],
+                            "expected_revision": key[2], "source": "public Store.get",
+                            "refresh_ttl": False, "wall_ns": wall_ns,
+                            "status": ("BOUND_CURRENT" if bound_current else
+                                       "UNKNOWN_ERROR" if error_type else
+                                       "UNKNOWN_NOT_FOUND" if current is None else
+                                       "UNKNOWN_BINDING"),
+                            "returned_body_ref": (content_identity(
+                                current.value.get("content"))[2]
+                                if current is not None else None),
+                            "error_type": error_type,
+                        }
+                        read_indexes[key] = len(exact_reads)
+                        exact_reads.append(read)
+                        if record_exact_read is not None:
+                            record_exact_read(read)
+                    current = refreshed[key]
+                    event["exact_read_index"] = read_indexes[key]
+                    event["refresh_status"] = exact_reads[event["exact_read_index"]]["status"]
+                    if current is not None:
+                        rendered[item_index] = {
+                            **current.dict(),
+                            "_version_projection": {
+                                "status": "EXACT_CURRENT_REFRESH",
+                                "ref": current_ref, "supersedes_ref": ref,
+                                "source": "public Store.get",
+                            },
+                        }
+                        event["projected_body_ref"] = content_identity(
+                            current.value.get("content"))[2]
+                        event["current_body_delivered"] = True
+                        event["delivery_source"] = "public Store.get"
+                        refreshed_in_message = True
                 changed = True
             else:
                 event["projected_body_ref"] = item["body_ref"]
@@ -104,5 +171,7 @@ def project_current_evidence(
                 "source_search_id": search["search_id"],
                 "original_body_ref": search["tool_message_body_ref"],
                 "projected_body_ref": content_identity(projected_content)[2],
+                "coverage": ("PROJECTED_REFRESHED" if refreshed_in_message else
+                             "PROJECTED_WITHHELD"),
             }
-    return ProjectedRequest(projected, materials, events)
+    return ProjectedRequest(projected, materials, events, exact_reads)
