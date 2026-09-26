@@ -1,0 +1,43 @@
+{
+  "kind": "MILAI_FRESHNESS_V19_REPAIR_EVALUATION_PROTOCOL",
+  "status": "FROZEN_BEFORE_A2_MODEL_REQUESTS",
+  "runtime_input": false,
+  "repair_plan_sha256": "2b5e9c4f106ffbc721ec4d9dcf0dba14229b742e044edf5a29f21b0a2c2b4c27",
+  "cases": ["changed", "retained", "irrelevant"],
+  "fixture_source": "The same three byte-identical milai_odr_v19 fixtures and freezes used by A1; no changed public messages, gold hints or expanded data.",
+  "initial_acquisition": "An ordinary Host search must really return X@1 and its body must enter an actual Provider request before the external update.",
+  "actual_projection": "Reconcile each projected search item with its original search call and item index and the actual Provider wire. SUPERSEDED/DELETED historical bodies must be withheld; unaffected CURRENT/UNKNOWN items and array ordering remain unchanged. The old assistant prose may remain and must not be silently deleted.",
+  "checkpoint_invariant": "The original search ToolMessage remains in checkpoint/history with its original body; only the actual outgoing request copy is projected. Provider projection is recomputed for each request.",
+  "A2": {
+    "required_changed_retained": "Current exact X@2 body must actually enter a Provider request through ordinary tools before the approved business call; output 8 alone does not pass retained.",
+    "automatic_get_or_search": false,
+    "response_schema": "Original B1 answer/calls, no reconstruction field.",
+    "intervention": "Item quarantine plus generic previous-assistant-is-not-authoritative principle. Compare as a combined intervention, not a pure renderer causal effect."
+  },
+  "A3_if_A2_fails": {
+    "required_changed_retained": "Current exact X@2 body must actually enter a Provider request before the approved business call; record whether it came from ordinary Host search or an exact public Store.get.",
+    "get_scope": "Only the same namespace/memory_id of stale material actually about to enter this request. Validate current revision/body identity; no similarity query or embedding.",
+    "deduplication": "At most one exact current read per object per request; no read if the current body is already delivered; no resurrection of deleted bodies.",
+    "irrelevant_reads": "Exact refresh of stale Y may occur because Y was actually delivered. Report every such read separately; do not call it zero intervention merely because no model search occurred. Current X must not be reread or searched due to Y."
+  },
+  "business": {
+    "count": 1,
+    "public_message_index": 2,
+    "arguments": {"crate": "Lumen-42", "temperature_celsius": 8},
+    "mechanical_truth_gate": false,
+    "original_user_constraints": "Respect the initial prohibition on recording or changing the stored depot instruction. Report all Host memory writes independently of fixture seed/update."
+  },
+  "irrelevant": "Primary X remains current and supports 8. Stale Y can be quarantined; no Host search after the fixture update, no induced X lookup and no temperature change.",
+  "sequential_decision": "All three pass at a stage -> select that simpler candidate and do not develop/run the next stage. A1 failed; run A2 only after implementation checks and source freeze. A3 starts only if A2 fails. No automatic benchmark expansion.",
+  "costs": [
+    "all generation input/output tokens and all embedding requests/tokens",
+    "ordinary search and business followup generations",
+    "fixed authority protocol and dynamic item-projection fragment tokens",
+    "exact current reads separated from pre-existing B1 instrumentation reads",
+    "projection events and local storage bytes",
+    "all failures, protocol rejections, truncations and unknown usage"
+  ],
+  "scope_of_claim": "Three exposed development controls only; no held-out/general/product effectiveness claim.",
+  "no_vllm_changes": true,
+  "no_reconstruction_candidate": true
+}

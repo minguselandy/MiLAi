@@ -462,6 +462,7 @@ class RevisionSidecar:
     def finish_request(
         self, request_id: str, status: str, event: dict[str, Any],
         trace_ref: dict[str, Any] | None = None,
+        projected_material: dict[str, dict[str, str]] | None = None,
     ) -> None:
         request = event.get("request")
         request_json = canonical_json(request) if request is not None else None
@@ -510,6 +511,13 @@ class RevisionSidecar:
                     ).fetchone()
                     kind = "tool_call"
                 coverage = "FULL" if source is not None and source["ref"] == body_ref else "UNBOUND"
+                projection = (projected_material or {}).get(call_id)
+                if (coverage == "UNBOUND" and kind == "search" and source is not None
+                        and projection is not None
+                        and source["source_id"] == projection["source_search_id"]
+                        and source["ref"] == projection["original_body_ref"]
+                        and body_ref == projection["projected_body_ref"]):
+                    coverage = "PROJECTED_WITHHELD"
                 conn.execute(
                     "INSERT OR REPLACE INTO request_material VALUES(?,?,?,?,?,?,?,?,?)",
                     (request_id, call_id, kind if source else "unknown",

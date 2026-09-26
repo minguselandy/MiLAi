@@ -49,6 +49,8 @@ class ProvenanceObserver:
         self.arm_id = arm_id
         self._call: ContextVar[CallContext | None] = ContextVar("b1_tool_call", default=None)
         self._request: ContextVar[str | None] = ContextVar("b1_request", default=None)
+        self._projection: ContextVar[dict[str, dict[str, str]] | None] = ContextVar(
+            "b1_request_projection", default=None)
         self._scope_lock = threading.RLock()
         self._public: dict[str, tuple[int, str, str]] = {}
         self._failed: list[str] = sidecar.unresolved()
@@ -185,7 +187,10 @@ class ProvenanceObserver:
         return result
 
     @contextmanager
-    def request_scope(self, message_key: str | None, request_index: int) -> Iterator[None]:
+    def request_scope(
+        self, message_key: str | None, request_index: int,
+        projected_material: dict[str, dict[str, str]] | None = None,
+    ) -> Iterator[None]:
         self.assert_healthy()
         if message_key is None:
             raise ValueError("B1_PUBLIC_MESSAGE_KEY_MISSING")
@@ -198,9 +203,11 @@ class ProvenanceObserver:
                   public_index, request_index)
         self.assert_healthy()
         token = self._request.set(request_id)
+        projection_token = self._projection.set(projected_material)
         try:
             yield
         finally:
+            self._projection.reset(projection_token)
             self._request.reset(token)
 
     def capture_provider_event(
@@ -218,4 +225,5 @@ class ProvenanceObserver:
             status = "not_sent"
         else:
             return
-        self.safe(self.sidecar.finish_request, request_id, status, event, trace_ref)
+        self.safe(self.sidecar.finish_request, request_id, status, event, trace_ref,
+                  self._projection.get())

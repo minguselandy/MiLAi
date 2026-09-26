@@ -1,0 +1,713 @@
+{
+  "kind": "MILAI_FRESHNESS_V19_REPAIR_A2_RESULTS",
+  "status": "FAIL_ADVANCE_TO_A3",
+  "source_mapping_sha256": "03c8923a0069b53ca6fe516fd89b882a14e0aa20bce68aca6ddb824932304460",
+  "lock_sha256": "398669b26e9bd26a9b909f9920ab5525972377602f46d21b9ab97b1311395c27",
+  "freeze_sha256": "ae3b96cb7d69ba86a230a75100810ef0ee0debd425703713424d03439f189463",
+  "cases": {
+    "changed": {
+      "status": "FAIL_CURRENT_ACQUISITION",
+      "public_messages_completed": 3,
+      "initial_primary_exact_delivered": true,
+      "quarantine_requests": 3,
+      "original_history_unchanged": true,
+      "current_items_and_order_preserved": true,
+      "current_body_acquired_after_update": false,
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "exact_current_reads": 0,
+      "host_memory_writes": 0,
+      "business_public_index": 2,
+      "business_count": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 4
+      },
+      "business_correct": false,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4279,
+        "output_tokens": 144,
+        "generation_tokens": 4423,
+        "embedding_requests": 3,
+        "embedding_tokens": 84,
+        "provider_wall_seconds": 1.946871935389936,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "0a6443f27ca7cd2f0ca391c41b9b27ab739bc1e1d57de94ced4aa9f706fea35a",
+          "response_id": "chatcmpl-8b7917d7eef6c362",
+          "public_index": 0,
+          "request_index": 1,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "projection_items": [],
+          "request_object_sha256": "de6b10f44fa9be10b000011f505fcaea6c618a9994c32787323469b25cb79994",
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction Lumen-42 holding temperature"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "b21eec420467e30cd692cbab45a6488142e67e8b7ad9dc8b5339631436a1e472",
+          "response_id": "chatcmpl-9b7246cb8eea0554",
+          "public_index": 0,
+          "request_index": 2,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-8b7917d7eef6c362:tool:0",
+              "source_search_id": "fd0ab9196f6a7d0282acc734f92c04f0dbc64d28e280c426fd62a08372d3a243:1:search:1",
+              "item_index": 0,
+              "memory_id": "dd3b1553-614c-4841-9198-58f7f1d6e6e6",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-changed-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:dd3b1553-614c-4841-9198-58f7f1d6e6e6@1",
+              "status": "CURRENT",
+              "current_ref": "memory:dd3b1553-614c-4841-9198-58f7f1d6e6e6@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "projected_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e"
+            }
+          ],
+          "request_object_sha256": "b0fb3fe3f20fca769880d3b40af20e6e88512ad0a31f1b42d98cd605985377d9",
+          "action": {
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 4 degrees Celsius."
+          }
+        },
+        {
+          "request_id": "f360049e5c2754d2857c09449b9b9f8d7f64a43f12b3cb8dbd483f206876c6fc",
+          "response_id": "chatcmpl-ae8f816d235c62b4",
+          "public_index": 1,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-8b7917d7eef6c362:tool:0",
+              "source_search_id": "fd0ab9196f6a7d0282acc734f92c04f0dbc64d28e280c426fd62a08372d3a243:1:search:1",
+              "item_index": 0,
+              "memory_id": "dd3b1553-614c-4841-9198-58f7f1d6e6e6",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-changed-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:dd3b1553-614c-4841-9198-58f7f1d6e6e6@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:dd3b1553-614c-4841-9198-58f7f1d6e6e6@2",
+              "current_body_delivered": false,
+              "source_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "projected_body_ref": "body:string:1c38d0686d40b01533104fee173c2b40c53482f40cf6b78381b8fcff2a758fb8"
+            }
+          ],
+          "request_object_sha256": "690e47102cd1bc674e0b0316cf61e56efd3e89d13ef2da6bde1d93a5fdd3895c",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is 4 degrees Celsius. This recommendation is pending your dispatch decision and has not been recorded."
+          }
+        },
+        {
+          "request_id": "09c16c711aebbc5f945b83468b0fb10f5663cb23e0fe1b2357985220cbe2b749",
+          "response_id": "chatcmpl-a8016523d6394e13",
+          "public_index": 2,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-8b7917d7eef6c362:tool:0",
+              "source_search_id": "fd0ab9196f6a7d0282acc734f92c04f0dbc64d28e280c426fd62a08372d3a243:1:search:1",
+              "item_index": 0,
+              "memory_id": "dd3b1553-614c-4841-9198-58f7f1d6e6e6",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-changed-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:dd3b1553-614c-4841-9198-58f7f1d6e6e6@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:dd3b1553-614c-4841-9198-58f7f1d6e6e6@2",
+              "current_body_delivered": false,
+              "source_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "projected_body_ref": "body:string:1c38d0686d40b01533104fee173c2b40c53482f40cf6b78381b8fcff2a758fb8"
+            }
+          ],
+          "request_object_sha256": "21252c9514f7f0da627fc09479bcb9b577c919db8df81615b1a59377cdb31795",
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 4
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "11fe72176ed49e536ac8e8ba68e2b3d0c0b8820a697e3d9da27a59c4fa52e968",
+          "response_id": "chatcmpl-b5d7db896ee3fcd1",
+          "public_index": 2,
+          "request_index": 2,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-8b7917d7eef6c362:tool:0",
+              "source_search_id": "fd0ab9196f6a7d0282acc734f92c04f0dbc64d28e280c426fd62a08372d3a243:1:search:1",
+              "item_index": 0,
+              "memory_id": "dd3b1553-614c-4841-9198-58f7f1d6e6e6",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-changed-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:dd3b1553-614c-4841-9198-58f7f1d6e6e6@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:dd3b1553-614c-4841-9198-58f7f1d6e6e6@2",
+              "current_body_delivered": false,
+              "source_body_ref": "body:string:a7959a4831e907d39da0e9d69babd0e8c5afb959d43f289261740cc651acf54e",
+              "projected_body_ref": "body:string:1c38d0686d40b01533104fee173c2b40c53482f40cf6b78381b8fcff2a758fb8"
+            }
+          ],
+          "request_object_sha256": "04d073622b641492c1e509f3b235497a0f2d5c1d98c6dddf8131e9eafcbe1c13",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 at 4 degrees Celsius has been recorded."
+          }
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "d60f69219fd04f6c6f5dca122e186b217108f2929686e96834bad716d62a233f",
+        "run/result.json": "f492a014e1a266f66d8f8a86ec50f5684ae66a7a60d0a7f25da2a94d7c3c8175",
+        "instrumentation.sqlite": "d3c6856a9d762eb0406a81512d0439a860fa6f571588bc62ad737850ec6cdcdb",
+        "checkpoints.sqlite": "33ecf892ad5094a6eba499dabf7e8cbe6fe2d6ca29d39a25fb4798fb6e418012",
+        "run/fixture-effects.json": "0ee8ff73758bbaf91dd345c6e117064d9536795f9fd8691cab0485ebcbf63993",
+        "prepared.json": "3f5ee05fff22aca58c9aee1a828668873da591d7e8845f1c38c0d6a1e34c18f6"
+      }
+    },
+    "retained": {
+      "status": "FAIL_CURRENT_ACQUISITION",
+      "public_messages_completed": 3,
+      "initial_primary_exact_delivered": true,
+      "quarantine_requests": 3,
+      "original_history_unchanged": true,
+      "current_items_and_order_preserved": true,
+      "current_body_acquired_after_update": false,
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "exact_current_reads": 0,
+      "host_memory_writes": 0,
+      "business_public_index": 2,
+      "business_count": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 8
+      },
+      "business_correct": true,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4251,
+        "output_tokens": 139,
+        "generation_tokens": 4390,
+        "embedding_requests": 3,
+        "embedding_tokens": 103,
+        "provider_wall_seconds": 1.7060955930501223,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "bb94b7810790a22adfc68739bc6e928e7956a474b5c9bb46a48c03d9c083a861",
+          "response_id": "chatcmpl-9297514bd2335a02",
+          "public_index": 0,
+          "request_index": 1,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "projection_items": [],
+          "request_object_sha256": "de6b10f44fa9be10b000011f505fcaea6c618a9994c32787323469b25cb79994",
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction Lumen-42 holding temperature"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "93fcc78251a65eb69b5344b2d7d97d7fc03e59396c7635c95ccdf13085c15810",
+          "response_id": "chatcmpl-afda9ce24b54c149",
+          "public_index": 0,
+          "request_index": 2,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-9297514bd2335a02:tool:0",
+              "source_search_id": "dded615771b9ffade1275bdcbb62ab6fd4170d8a7be1628ef016473c3391cd57:1:search:1",
+              "item_index": 0,
+              "memory_id": "94de0cc2-e978-40f6-9053-98f8ae22a7b9",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-retained-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:94de0cc2-e978-40f6-9053-98f8ae22a7b9@1",
+              "status": "CURRENT",
+              "current_ref": "memory:94de0cc2-e978-40f6-9053-98f8ae22a7b9@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "projected_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657"
+            }
+          ],
+          "request_object_sha256": "cadcc3a45da3bdfb2c95d28b2015fe8928b2107ed6759860261c476d966ddaee",
+          "action": {
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 8 degrees Celsius."
+          }
+        },
+        {
+          "request_id": "97e3fff2a7e10d5969f67990a58a0cf1732d754b41e8d3dfc02504aa448a5b62",
+          "response_id": "chatcmpl-b823211f193f59a4",
+          "public_index": 1,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-9297514bd2335a02:tool:0",
+              "source_search_id": "dded615771b9ffade1275bdcbb62ab6fd4170d8a7be1628ef016473c3391cd57:1:search:1",
+              "item_index": 0,
+              "memory_id": "94de0cc2-e978-40f6-9053-98f8ae22a7b9",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-retained-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:94de0cc2-e978-40f6-9053-98f8ae22a7b9@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:94de0cc2-e978-40f6-9053-98f8ae22a7b9@2",
+              "current_body_delivered": false,
+              "source_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "projected_body_ref": "body:string:218e78b6f1a8728acf2b6e2837a145c344c5ca5106114d1ed962c1be46f2398a"
+            }
+          ],
+          "request_object_sha256": "ba6d867e8187d0a61afd6de420f1d075f09ef2be6564896bb0edea73253e622c",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is 8 degrees Celsius. It is currently pending your dispatch decision."
+          }
+        },
+        {
+          "request_id": "272986135b3e6042719157599b814ba80f3775ed60d003fe967b4af8e4ec1c37",
+          "response_id": "chatcmpl-9b281b2a8972e8b5",
+          "public_index": 2,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-9297514bd2335a02:tool:0",
+              "source_search_id": "dded615771b9ffade1275bdcbb62ab6fd4170d8a7be1628ef016473c3391cd57:1:search:1",
+              "item_index": 0,
+              "memory_id": "94de0cc2-e978-40f6-9053-98f8ae22a7b9",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-retained-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:94de0cc2-e978-40f6-9053-98f8ae22a7b9@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:94de0cc2-e978-40f6-9053-98f8ae22a7b9@2",
+              "current_body_delivered": false,
+              "source_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "projected_body_ref": "body:string:218e78b6f1a8728acf2b6e2837a145c344c5ca5106114d1ed962c1be46f2398a"
+            }
+          ],
+          "request_object_sha256": "0fdc76125b1358d7191f18bbf8b5eee7d8e7540db43715979acdf6a181d96936",
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "497f84ac09490fc6f875705a4f2490b6e8e35188e1617e1bccd79ec5fd23ceaf",
+          "response_id": "chatcmpl-b275dbad72881ddc",
+          "public_index": 2,
+          "request_index": 2,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-9297514bd2335a02:tool:0",
+              "source_search_id": "dded615771b9ffade1275bdcbb62ab6fd4170d8a7be1628ef016473c3391cd57:1:search:1",
+              "item_index": 0,
+              "memory_id": "94de0cc2-e978-40f6-9053-98f8ae22a7b9",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-retained-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:94de0cc2-e978-40f6-9053-98f8ae22a7b9@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:94de0cc2-e978-40f6-9053-98f8ae22a7b9@2",
+              "current_body_delivered": false,
+              "source_body_ref": "body:string:f07a037b66f3e952e0a485411c666bc30610512605bb823d39a103d04bdcf657",
+              "projected_body_ref": "body:string:218e78b6f1a8728acf2b6e2837a145c344c5ca5106114d1ed962c1be46f2398a"
+            }
+          ],
+          "request_object_sha256": "7eac1507df2cadcb2f594189214855c48b246ee93561a3b1f77d09477f543124",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 at 8 degrees Celsius has been recorded."
+          }
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "a16b889fa4950488eaeb7726b701fc2fe1509213653c9da791e0a6ceae286cfd",
+        "run/result.json": "73f3a9e8752dfca73f84535440a3b98e9da9177e81042167307267c868a7462c",
+        "instrumentation.sqlite": "6dad41327786d24d419711a800a54624da1e685f3b21534e31bec52085e1a0e7",
+        "checkpoints.sqlite": "4380d94404d6dbeeb7c94ba84a29b07c8ab13ce46894c6b483e44bc2a7ca5de5",
+        "run/fixture-effects.json": "f0079e3585e19667596124960f4647874a3d59b15025288276ac7d361f7a008b",
+        "prepared.json": "9904a5c88de4cf8502968c63f7406d671be76388a3e33fe2b873f282fe0b69f6"
+      }
+    },
+    "irrelevant": {
+      "status": "PASS",
+      "public_messages_completed": 3,
+      "initial_primary_exact_delivered": true,
+      "quarantine_requests": 3,
+      "original_history_unchanged": true,
+      "current_items_and_order_preserved": true,
+      "current_body_acquired_after_update": false,
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "exact_current_reads": 0,
+      "host_memory_writes": 0,
+      "business_public_index": 2,
+      "business_count": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 8
+      },
+      "business_correct": true,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 5002,
+        "output_tokens": 139,
+        "generation_tokens": 5141,
+        "embedding_requests": 4,
+        "embedding_tokens": 81,
+        "provider_wall_seconds": 1.8250210089609027,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "427f4e0f79de5bbdd7ae55a3c4982426963b32627fd18e2372f836ad9d413b8e",
+          "response_id": "chatcmpl-bf16aac812e73391",
+          "public_index": 0,
+          "request_index": 1,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "projection_items": [],
+          "request_object_sha256": "de6b10f44fa9be10b000011f505fcaea6c618a9994c32787323469b25cb79994",
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction Lumen-42 holding temperature"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "fe12dc2445230afce840abe5ddd809da2bbf28557b4480df9a82ce1bdfa8d401",
+          "response_id": "chatcmpl-866ff7f86c309cae",
+          "public_index": 0,
+          "request_index": 2,
+          "old_body_quarantined": false,
+          "previous_assistant_retained": false,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-bf16aac812e73391:tool:0",
+              "source_search_id": "484f1837edaa02b7138bba86141850199cd30de3bff52922c27817cb5c922127:1:search:1",
+              "item_index": 0,
+              "memory_id": "01b20991-1742-4afb-b54e-515728e4b454",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-irrelevant-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:01b20991-1742-4afb-b54e-515728e4b454@1",
+              "status": "CURRENT",
+              "current_ref": "memory:01b20991-1742-4afb-b54e-515728e4b454@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "projected_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d"
+            },
+            {
+              "source_tool_call": "chatcmpl-bf16aac812e73391:tool:0",
+              "source_search_id": "484f1837edaa02b7138bba86141850199cd30de3bff52922c27817cb5c922127:1:search:1",
+              "item_index": 1,
+              "memory_id": "679183a8-9ee0-4d59-a2ee-49b1494b0db1",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-irrelevant-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:679183a8-9ee0-4d59-a2ee-49b1494b0db1@1",
+              "status": "CURRENT",
+              "current_ref": "memory:679183a8-9ee0-4d59-a2ee-49b1494b0db1@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "projected_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6"
+            }
+          ],
+          "request_object_sha256": "cd4ffd75c2cc1d1cb9cd9d26cd11cf9daeaa404196723cb4f99fa6af6bcb9f86",
+          "action": {
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 8 degrees Celsius. This recommendation is pending your dispatch decision."
+          }
+        },
+        {
+          "request_id": "3f5aba6abc321015cc3e38f9525810861029fe33a8a4f9e2feb82c12c2c89a63",
+          "response_id": "chatcmpl-9ed27cc7e2e177f4",
+          "public_index": 1,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-bf16aac812e73391:tool:0",
+              "source_search_id": "484f1837edaa02b7138bba86141850199cd30de3bff52922c27817cb5c922127:1:search:1",
+              "item_index": 0,
+              "memory_id": "01b20991-1742-4afb-b54e-515728e4b454",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-irrelevant-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:01b20991-1742-4afb-b54e-515728e4b454@1",
+              "status": "CURRENT",
+              "current_ref": "memory:01b20991-1742-4afb-b54e-515728e4b454@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "projected_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d"
+            },
+            {
+              "source_tool_call": "chatcmpl-bf16aac812e73391:tool:0",
+              "source_search_id": "484f1837edaa02b7138bba86141850199cd30de3bff52922c27817cb5c922127:1:search:1",
+              "item_index": 1,
+              "memory_id": "679183a8-9ee0-4d59-a2ee-49b1494b0db1",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-irrelevant-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:679183a8-9ee0-4d59-a2ee-49b1494b0db1@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:679183a8-9ee0-4d59-a2ee-49b1494b0db1@2",
+              "current_body_delivered": false,
+              "source_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "projected_body_ref": "body:string:f7b4b5a84d3872ced39b706a00711b713c69649146048b2b5ffeb068c4008afa"
+            }
+          ],
+          "request_object_sha256": "2dbd0c8dbd9b064fbf4aed1f1dd2339bb2ee0fc605ce027a0326872e9ad3fb5d",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is 8 degrees Celsius."
+          }
+        },
+        {
+          "request_id": "9518aa4c719da2becd17d3dd6b3ddf34584e40a301a8e41daebe7b100dab1fea",
+          "response_id": "chatcmpl-aea984cdedea538c",
+          "public_index": 2,
+          "request_index": 1,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-bf16aac812e73391:tool:0",
+              "source_search_id": "484f1837edaa02b7138bba86141850199cd30de3bff52922c27817cb5c922127:1:search:1",
+              "item_index": 0,
+              "memory_id": "01b20991-1742-4afb-b54e-515728e4b454",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-irrelevant-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:01b20991-1742-4afb-b54e-515728e4b454@1",
+              "status": "CURRENT",
+              "current_ref": "memory:01b20991-1742-4afb-b54e-515728e4b454@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "projected_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d"
+            },
+            {
+              "source_tool_call": "chatcmpl-bf16aac812e73391:tool:0",
+              "source_search_id": "484f1837edaa02b7138bba86141850199cd30de3bff52922c27817cb5c922127:1:search:1",
+              "item_index": 1,
+              "memory_id": "679183a8-9ee0-4d59-a2ee-49b1494b0db1",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-irrelevant-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:679183a8-9ee0-4d59-a2ee-49b1494b0db1@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:679183a8-9ee0-4d59-a2ee-49b1494b0db1@2",
+              "current_body_delivered": false,
+              "source_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "projected_body_ref": "body:string:f7b4b5a84d3872ced39b706a00711b713c69649146048b2b5ffeb068c4008afa"
+            }
+          ],
+          "request_object_sha256": "ae7b431aec50a15ab728e6a7836ed95d9ad8e76ed3a26c654df070b23aa14dc2",
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          }
+        },
+        {
+          "request_id": "40484524036f75a608cfb1fc1f63386e0cb76e6cf3d8f32368e28eb91ca7c1ce",
+          "response_id": "chatcmpl-a93b2a5646901531",
+          "public_index": 2,
+          "request_index": 2,
+          "old_body_quarantined": true,
+          "previous_assistant_retained": true,
+          "current_exact_body_acquired": false,
+          "projection_items": [
+            {
+              "source_tool_call": "chatcmpl-bf16aac812e73391:tool:0",
+              "source_search_id": "484f1837edaa02b7138bba86141850199cd30de3bff52922c27817cb5c922127:1:search:1",
+              "item_index": 0,
+              "memory_id": "01b20991-1742-4afb-b54e-515728e4b454",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-irrelevant-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:01b20991-1742-4afb-b54e-515728e4b454@1",
+              "status": "CURRENT",
+              "current_ref": "memory:01b20991-1742-4afb-b54e-515728e4b454@1",
+              "current_body_delivered": true,
+              "source_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d",
+              "projected_body_ref": "body:string:02c085eb84d3066ef80b17b530713c2b892b9171c8f5dccda7f370f01177760d"
+            },
+            {
+              "source_tool_call": "chatcmpl-bf16aac812e73391:tool:0",
+              "source_search_id": "484f1837edaa02b7138bba86141850199cd30de3bff52922c27817cb5c922127:1:search:1",
+              "item_index": 1,
+              "memory_id": "679183a8-9ee0-4d59-a2ee-49b1494b0db1",
+              "namespace": [
+                "langmem",
+                "v19-repair-a2-irrelevant-r1",
+                "a2_quarantine",
+                "mechanism:holding-instruction"
+              ],
+              "ref": "memory:679183a8-9ee0-4d59-a2ee-49b1494b0db1@1",
+              "status": "SUPERSEDED",
+              "current_ref": "memory:679183a8-9ee0-4d59-a2ee-49b1494b0db1@2",
+              "current_body_delivered": false,
+              "source_body_ref": "body:string:e8931ceee88b7faf62e9d8ede8686fec85f0887e767998842432f8dd084c43c6",
+              "projected_body_ref": "body:string:f7b4b5a84d3872ced39b706a00711b713c69649146048b2b5ffeb068c4008afa"
+            }
+          ],
+          "request_object_sha256": "98a6e5e201e51dca611fca3c1bb5751b14e51c2a295f5df28f0a9f051cbf2742",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 at 8 degrees Celsius has been recorded."
+          }
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "527081fde5270f9b262c0b1d51e4621a84253daa4eae7be08dd38f342870bbed",
+        "run/result.json": "650bb765942a979617e28d684ddca97e2c7373ff2a2b8d3714f299cdaf6d6364",
+        "instrumentation.sqlite": "14dd1798c3bb97ce523346554282616f43cdfb2c8a5e9e47c22b1e6310951e4b",
+        "checkpoints.sqlite": "c0ae09a67cb1f5d6db99f9e2c702cf02eab9a126691a5df9def63aad4902dbd2",
+        "run/fixture-effects.json": "b5c68e4734421978f3326a483ee45862b17f63519bc16136d94c13f7d3def652",
+        "prepared.json": "a213e99a33b531b6b7603b7f553a540cdacceeae3717dac96cf05097f96917e4"
+      }
+    }
+  },
+  "passed": [
+    1,
+    3
+  ],
+  "totals": {
+    "generations": 15,
+    "input_tokens": 13532,
+    "output_tokens": 422,
+    "generation_tokens": 13954,
+    "embedding_requests": 10,
+    "embedding_tokens": 268,
+    "provider_wall_seconds": 5.477988537400961,
+    "unknown_usage": 0,
+    "truncations": 0
+  },
+  "quarantine_requests": [
+    9,
+    15
+  ],
+  "exact_current_reads": 0,
+  "reconstruction_candidate": false,
+  "ordinary_search_followup_generations": 3,
+  "independent_generations": 0,
+  "judge_requests": 0,
+  "budget_after_sha256": "0ab6af0868b03eaaa7e1fb5f1990c36bdceefdc273295d669f8f31a87c55bc08",
+  "decision": "Quarantine is actually applied and historical assistant prose remains; changed still records old 4 and retained never acquires X@2. Proceed to selective exact-current-version refresh, keeping the same source-authority contract. No semantic rescue or response schema change."
+}

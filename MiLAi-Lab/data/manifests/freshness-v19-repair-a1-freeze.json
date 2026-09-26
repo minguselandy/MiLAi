@@ -1,0 +1,95 @@
+{
+  "kind": "MILAI_FRESHNESS_V19_REPAIR_A1_FREEZE",
+  "status": "FROZEN_BEFORE_MODEL_REQUESTS",
+  "reference_sha256": "0b9b0ba740a48a440e84d7105d67aac1b88e709b87fee5c1c4483e61a0ca2fb2",
+  "source_mapping_sha256": "1f22b6b7b032a647e360c140c61467763f7ce71b0a1fdd481d1c00ede88fbfaa",
+  "source_lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+  "runs": [
+    {
+      "case": "changed",
+      "run_id": "v19-repair-a1-changed-r1",
+      "arm": "freshness_only",
+      "directory": "artifacts/freshness-projection-v19-repair/a1-changed-r1",
+      "namespace_initial_items": 0,
+      "config_sha256": "e17ea83c21b7e5c7c2e1d91a958bf602c9f6a0c846352ff04c72b5870a73ad96",
+      "prepared_sha256": "0c07049e9cf47c9362c9c019c292aec6bc3337e1063a874560509124c09554c7",
+      "fixture_sha256": "2789e522699f6f13f7e5687f72c14919572ae7e62a6cef41b8882123280ef13e",
+      "options": [
+        "--config",
+        "artifacts/freshness-projection-v19-repair/a1-changed-r1/config.json",
+        "--mode",
+        "mechanism",
+        "--run",
+        "v19-repair-a1-changed-r1",
+        "--arm",
+        "freshness_only",
+        "--fixture",
+        "data/fixtures/milai_odr_v19_changed.json",
+        "--mechanism-freeze",
+        "data/manifests/milai-odr-v19-changed-freeze.json"
+      ]
+    },
+    {
+      "case": "retained",
+      "run_id": "v19-repair-a1-retained-r1",
+      "arm": "freshness_only",
+      "directory": "artifacts/freshness-projection-v19-repair/a1-retained-r1",
+      "namespace_initial_items": 0,
+      "config_sha256": "7278812521135829356b9c4d5f4e2efc4368cb5fe46f0f7c96636067d2479a29",
+      "prepared_sha256": "52e94425f06deeca8a34a71ffe8ed71129b3430dc95997208f472953db931201",
+      "fixture_sha256": "7014320612725fb4986ac89e6608ab7d6c649a010911af87aaf1c9ec8ba849f5",
+      "options": [
+        "--config",
+        "artifacts/freshness-projection-v19-repair/a1-retained-r1/config.json",
+        "--mode",
+        "mechanism",
+        "--run",
+        "v19-repair-a1-retained-r1",
+        "--arm",
+        "freshness_only",
+        "--fixture",
+        "data/fixtures/milai_odr_v19_retained.json",
+        "--mechanism-freeze",
+        "data/manifests/milai-odr-v19-retained-freeze.json"
+      ]
+    },
+    {
+      "case": "irrelevant",
+      "run_id": "v19-repair-a1-irrelevant-r1",
+      "arm": "freshness_only",
+      "directory": "artifacts/freshness-projection-v19-repair/a1-irrelevant-r1",
+      "namespace_initial_items": 0,
+      "config_sha256": "69e84b092f256605ca6c464a98fa4d8c81a4750b0c5a55c2efe61ba4530926ca",
+      "prepared_sha256": "e16095835e292432582d7d3ef0b044612432689fe41dab030a9d926175aba183",
+      "fixture_sha256": "9112b1b842b60b6f83a2c93791820208c605c3ce31dba405c20387d751d978dd",
+      "options": [
+        "--config",
+        "artifacts/freshness-projection-v19-repair/a1-irrelevant-r1/config.json",
+        "--mode",
+        "mechanism",
+        "--run",
+        "v19-repair-a1-irrelevant-r1",
+        "--arm",
+        "freshness_only",
+        "--fixture",
+        "data/fixtures/milai_odr_v19_irrelevant.json",
+        "--mechanism-freeze",
+        "data/manifests/milai-odr-v19-irrelevant-freeze.json"
+      ]
+    }
+  ],
+  "source_changes_before_A1": 0,
+  "model_calls_before_A1": 0,
+  "required_initial_old_delivery": true,
+  "required_current_acquisition_changed_retained": true,
+  "required_approved_action": {
+    "crate": "Lumen-42",
+    "temperature_celsius": 8
+  },
+  "required_business_public_index": 2,
+  "required_business_count": 1,
+  "irrelevant_no_search_after_update": true,
+  "reconstruction_required": false,
+  "next_gate": "All three pass -> choose Notice and stop; otherwise A2.",
+  "no_new_probe": "Response schema and provider contract unchanged; existing B1/Notice parity evidence retained."
+}

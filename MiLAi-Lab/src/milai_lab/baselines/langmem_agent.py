@@ -186,7 +186,8 @@ def resume_public_message(
     snapshot = agent.get_state(config)
     if not snapshot.values:
         raise ValueError("PUBLIC_MESSAGE_CHECKPOINT_MISSING")
-    if (model.m1 is not None or model.odr is not None) and not snapshot.next:
+    if (model.m1 is not None or model.odr is not None
+            or model.projection is not None) and not snapshot.next:
         if model.observer is not None:
             model.observer.assert_healthy()
         return cast(list[BaseMessage], snapshot.values["messages"])

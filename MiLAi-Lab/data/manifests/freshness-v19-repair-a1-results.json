@@ -1,0 +1,394 @@
+{
+  "kind": "MILAI_FRESHNESS_V19_REPAIR_A1_RESULTS",
+  "status": "FAIL_ADVANCE_TO_A2",
+  "source_commit": "d0367aab36c15b39bdd4e2c1fd7a92a542f66fcf",
+  "source_mapping_sha256": "1f22b6b7b032a647e360c140c61467763f7ce71b0a1fdd481d1c00ede88fbfaa",
+  "freeze_sha256": "ad727c398bcd5a4b75867f76f7db1de7572aa711ab1f7a4d71c4575c82f2800f",
+  "cases": {
+    "changed": {
+      "status": "FAIL_CURRENT_ACQUISITION",
+      "public_messages_completed": 3,
+      "initial_primary_exact_delivered": true,
+      "target_updated_to_revision_2": true,
+      "notice_requests": 3,
+      "target_current_body_acquired": false,
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "exact_refresh_reads": 0,
+      "automatic_search": false,
+      "business_public_index": 2,
+      "business_count": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 4
+      },
+      "business_correct": false,
+      "irrelevant_no_extra_search": false,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4161,
+        "output_tokens": 134,
+        "generation_tokens": 4295,
+        "embedding_requests": 3,
+        "embedding_tokens": 86,
+        "provider_wall_seconds": 1.8368349010124803,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "26d151149ce28fe71be52927d1a188a580ad69eb417fe2f4f6e37c6453ad8466",
+          "response_id": "chatcmpl-84c9c069d6d71e8b",
+          "public_index": 0,
+          "request_index": 1,
+          "notice_delivered": false,
+          "stale_tool_body_still_present": false,
+          "dynamic_freshness": "",
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction crate Lumen-42 holding temperature"
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "2a525b7aa25da7c10d9625ab4ec0ea103e9d37ca3096ed6bcf9a93b9f17d99d3"
+        },
+        {
+          "request_id": "5cd53ee67c3a870d69bb2a2e52f829d0ff268d41d8f98c33664ceb2c75ff1137",
+          "response_id": "chatcmpl-b8f25e7657756995",
+          "public_index": 0,
+          "request_index": 2,
+          "notice_delivered": false,
+          "stale_tool_body_still_present": false,
+          "dynamic_freshness": "",
+          "action": {
+            "answer": "The holding temperature for crate Lumen-42 is 4 degrees Celsius."
+          },
+          "request_object_sha256": "bb0cf0e4bd965889dee8c50a6c8afbde5375fe7ef3737bac6a39ec35f915e060"
+        },
+        {
+          "request_id": "8c0fe6ea406bd94b198cf5189bad98bca9a27a309921d232dd98bb0311167519",
+          "response_id": "chatcmpl-a3a04d187e407dab",
+          "public_index": 1,
+          "request_index": 1,
+          "notice_delivered": true,
+          "stale_tool_body_still_present": true,
+          "dynamic_freshness": "Evidence freshness:\n- memory:453b4e99-b7b1-4287-9a27-b06b29d9a91e@1 is superseded by memory:453b4e99-b7b1-4287-9a27-b06b29d9a91e@2. The current revision body is absent from this request.",
+          "action": {
+            "answer": "The holding instruction I would use if you approve is: crate Lumen-42 at 4 degrees Celsius."
+          },
+          "request_object_sha256": "1bc78cc300642b15a33970782cf105a3cce447ec1899e24883ba0b9e439ad69c"
+        },
+        {
+          "request_id": "44de5809a056b72638ff16c93c1728a95b5f6ec46b56912fc2cf204383960553",
+          "response_id": "chatcmpl-bef37771f5942503",
+          "public_index": 2,
+          "request_index": 1,
+          "notice_delivered": true,
+          "stale_tool_body_still_present": true,
+          "dynamic_freshness": "Evidence freshness:\n- memory:453b4e99-b7b1-4287-9a27-b06b29d9a91e@1 is superseded by memory:453b4e99-b7b1-4287-9a27-b06b29d9a91e@2. The current revision body is absent from this request.",
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 4
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "e4d5cc0a97a1d2df535a1df78c9bab01820bba402fd4abe0747ad13cbabf56ad"
+        },
+        {
+          "request_id": "c529b93fb3f746495d8b1d2de4292744799fc9f20c154ef441346ac7776c6ddb",
+          "response_id": "chatcmpl-baf65d4d5c799ee7",
+          "public_index": 2,
+          "request_index": 2,
+          "notice_delivered": true,
+          "stale_tool_body_still_present": true,
+          "dynamic_freshness": "Evidence freshness:\n- memory:453b4e99-b7b1-4287-9a27-b06b29d9a91e@1 is superseded by memory:453b4e99-b7b1-4287-9a27-b06b29d9a91e@2. The current revision body is absent from this request.",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 at 4 degrees Celsius has been recorded."
+          },
+          "request_object_sha256": "51b4ab9e0f55a1d29fc254ac41cfb77358517f29da9b2ceb98e4542a3508a3f5"
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "9538b30a721ce43e85b00f7d8fd2cb172b1746f14e51bd6aa20c58f9c86c0500",
+        "run/result.json": "f7bf857a5efaf1b8cffe7d72c1793871ec29d61328c8243a9b7966f88e79db04",
+        "instrumentation.sqlite": "a2414489d072bd82f3a423c5f86960f12423f86935ed1e38e7e05795c0c5506b",
+        "checkpoints.sqlite": "2f838397a2f5b3176a09ef54944d91f2650517bb1bda69ef3a18ac1934b1d1a4",
+        "run/fixture-effects.json": "8125d86eb899a676848f099f039e74c0920aad7a2f22fea28021ce96c8b7dfaf",
+        "prepared.json": "0c07049e9cf47c9362c9c019c292aec6bc3337e1063a874560509124c09554c7"
+      }
+    },
+    "retained": {
+      "status": "FAIL_CURRENT_ACQUISITION",
+      "public_messages_completed": 3,
+      "initial_primary_exact_delivered": true,
+      "target_updated_to_revision_2": true,
+      "notice_requests": 3,
+      "target_current_body_acquired": false,
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "exact_refresh_reads": 0,
+      "automatic_search": false,
+      "business_public_index": 2,
+      "business_count": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 8
+      },
+      "business_correct": true,
+      "irrelevant_no_extra_search": false,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4189,
+        "output_tokens": 135,
+        "generation_tokens": 4324,
+        "embedding_requests": 3,
+        "embedding_tokens": 103,
+        "provider_wall_seconds": 1.6846019998192787,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "475ddf98e8178bb6c680e856a5e0cc8652c91fa11a89d791232f6a7dc6e4c1fc",
+          "response_id": "chatcmpl-b51b07789380487c",
+          "public_index": 0,
+          "request_index": 1,
+          "notice_delivered": false,
+          "stale_tool_body_still_present": false,
+          "dynamic_freshness": "",
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction Lumen-42 holding temperature"
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "2a525b7aa25da7c10d9625ab4ec0ea103e9d37ca3096ed6bcf9a93b9f17d99d3"
+        },
+        {
+          "request_id": "bee8b85d1a45e571c4a65d3e28808222ebc9677f8f55c583907ae9026a1aa462",
+          "response_id": "chatcmpl-8713309008ba6f73",
+          "public_index": 0,
+          "request_index": 2,
+          "notice_delivered": false,
+          "stale_tool_body_still_present": false,
+          "dynamic_freshness": "",
+          "action": {
+            "answer": "The holding temperature for crate Lumen-42 is 8 degrees Celsius."
+          },
+          "request_object_sha256": "9c26eea80a242bf5ce7f73b19fe15294fde8c3d6e9aebf5302718425269ccaac"
+        },
+        {
+          "request_id": "1c27af9baa9037449990b4fdec69d96e94771ab0800af3112b399d6200e6617a",
+          "response_id": "chatcmpl-a5855752e0d21fc1",
+          "public_index": 1,
+          "request_index": 1,
+          "notice_delivered": true,
+          "stale_tool_body_still_present": true,
+          "dynamic_freshness": "Evidence freshness:\n- memory:45a9f060-c3c2-497a-995d-10e9fa5fd893@1 is superseded by memory:45a9f060-c3c2-497a-995d-10e9fa5fd893@2. The current revision body is absent from this request.",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is to keep it at 8 degrees Celsius."
+          },
+          "request_object_sha256": "7fbc38478806e402a3adc33315efe9421058f3045f332e95687716aa789d6667"
+        },
+        {
+          "request_id": "b2311b2609556149283c10232eee55911de52f710b71ec2caf87cc19c122c962",
+          "response_id": "chatcmpl-988082b24cfc602d",
+          "public_index": 2,
+          "request_index": 1,
+          "notice_delivered": true,
+          "stale_tool_body_still_present": true,
+          "dynamic_freshness": "Evidence freshness:\n- memory:45a9f060-c3c2-497a-995d-10e9fa5fd893@1 is superseded by memory:45a9f060-c3c2-497a-995d-10e9fa5fd893@2. The current revision body is absent from this request.",
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "e127445dbba52a11efb2fa0a174769265a30d197f3572417b8707ea94ea54d9f"
+        },
+        {
+          "request_id": "0281638aab51df8de88cfaccd95488cd27116a45166767c66748ce34165c54e0",
+          "response_id": "chatcmpl-938f3f648b7b78b1",
+          "public_index": 2,
+          "request_index": 2,
+          "notice_delivered": true,
+          "stale_tool_body_still_present": true,
+          "dynamic_freshness": "Evidence freshness:\n- memory:45a9f060-c3c2-497a-995d-10e9fa5fd893@1 is superseded by memory:45a9f060-c3c2-497a-995d-10e9fa5fd893@2. The current revision body is absent from this request.",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 has been recorded at 8 degrees Celsius."
+          },
+          "request_object_sha256": "f3111c15a7f11dc5ad53535a99bccb9fd30f0064ddffff4c979aaf27e8589257"
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "6d6767eeef923a813a2adcc603fc19f441d39955f4d73d416be9147aaf4961b9",
+        "run/result.json": "23a49fbcad40fb531e12bb727bd3320e8ab697c22c0c241a1be83b7fbe2ef1f4",
+        "instrumentation.sqlite": "067666799fd4c4b601868a58801b800018d2bd82b397f94ad8323074cf745d02",
+        "checkpoints.sqlite": "165cf110f99ffd1c866381814f8dd1f125ee6722c40b2e7aa43a480727c3a5a8",
+        "run/fixture-effects.json": "71aee4d75a636ee3fd99fbb929074fdb7bcf18ef5b7c20afbce6316303b62c50",
+        "prepared.json": "52e94425f06deeca8a34a71ffe8ed71129b3430dc95997208f472953db931201"
+      }
+    },
+    "irrelevant": {
+      "status": "PASS",
+      "public_messages_completed": 3,
+      "initial_primary_exact_delivered": true,
+      "target_updated_to_revision_2": true,
+      "notice_requests": 3,
+      "target_current_body_acquired": false,
+      "host_searches": 1,
+      "searches_after_update": 0,
+      "exact_refresh_reads": 0,
+      "automatic_search": false,
+      "business_public_index": 2,
+      "business_count": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 8
+      },
+      "business_correct": true,
+      "irrelevant_no_extra_search": true,
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4859,
+        "output_tokens": 126,
+        "generation_tokens": 4985,
+        "embedding_requests": 4,
+        "embedding_tokens": 81,
+        "provider_wall_seconds": 1.6964417691342533,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "requests": [
+        {
+          "request_id": "50f96d8632e3bf8a00646dcd3e71aacaab323287efc3b5c5e6b02afd05e5c0c0",
+          "response_id": "chatcmpl-9ee3a2eb39789f81",
+          "public_index": 0,
+          "request_index": 1,
+          "notice_delivered": false,
+          "stale_tool_body_still_present": false,
+          "dynamic_freshness": "",
+          "action": {
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction Lumen-42 holding temperature"
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "2a525b7aa25da7c10d9625ab4ec0ea103e9d37ca3096ed6bcf9a93b9f17d99d3"
+        },
+        {
+          "request_id": "a4698320645f9a325457daed32e9237699a341450e675dacedc4899ce4b0807c",
+          "response_id": "chatcmpl-90c630a1866f22ca",
+          "public_index": 0,
+          "request_index": 2,
+          "notice_delivered": false,
+          "stale_tool_body_still_present": false,
+          "dynamic_freshness": "",
+          "action": {
+            "answer": "The holding temperature for crate Lumen-42 is 8 degrees Celsius."
+          },
+          "request_object_sha256": "38635a2e319fe97e5930e6c1e4d4df597807f9c1e4a857a92f8229a0a84b2e71"
+        },
+        {
+          "request_id": "d9ff6cbbe7cdafee1becd3797641776ab011b607e81534def94205ea09f2b89a",
+          "response_id": "chatcmpl-9f056e90bfa83a38",
+          "public_index": 1,
+          "request_index": 1,
+          "notice_delivered": true,
+          "stale_tool_body_still_present": true,
+          "dynamic_freshness": "Evidence freshness:\n- memory:9eb414eb-21f6-4ea9-8741-533545bb8a67@1 is superseded by memory:9eb414eb-21f6-4ea9-8741-533545bb8a67@2. The current revision body is absent from this request.",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 is 8 degrees Celsius."
+          },
+          "request_object_sha256": "a05924219392ef713d99d5484679426962a165df7d35f310bc16280878538089"
+        },
+        {
+          "request_id": "323b95e94c395babefb08ec3c8bb3abc500ae54a4ce621f0ca2d92a6e2c9a2e0",
+          "response_id": "chatcmpl-8f7c13a1fa9ea95c",
+          "public_index": 2,
+          "request_index": 1,
+          "notice_delivered": true,
+          "stale_tool_body_still_present": true,
+          "dynamic_freshness": "Evidence freshness:\n- memory:9eb414eb-21f6-4ea9-8741-533545bb8a67@1 is superseded by memory:9eb414eb-21f6-4ea9-8741-533545bb8a67@2. The current revision body is absent from this request.",
+          "action": {
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          },
+          "request_object_sha256": "0a9cab3cbc6e3a580aae083442473ffcc00a97d09809a4380eb39a076bb3ee26"
+        },
+        {
+          "request_id": "a4b07d6f004c867aa8ac66d0a105b824917c98d1834c0834d5925ca3964ed4fe",
+          "response_id": "chatcmpl-9a61676578e20b90",
+          "public_index": 2,
+          "request_index": 2,
+          "notice_delivered": true,
+          "stale_tool_body_still_present": true,
+          "dynamic_freshness": "Evidence freshness:\n- memory:9eb414eb-21f6-4ea9-8741-533545bb8a67@1 is superseded by memory:9eb414eb-21f6-4ea9-8741-533545bb8a67@2. The current revision body is absent from this request.",
+          "action": {
+            "answer": "The holding instruction for crate Lumen-42 has been recorded at 8 degrees Celsius."
+          },
+          "request_object_sha256": "fb4113c1baf2e733615d36e5126f1b9689e6b42566aac834d5f3cb08379bbb40"
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "c1d0f1389ebd3581067ae7b02088b671c3ccd75585d5b5093a24477a06593e51",
+        "run/result.json": "338fd816ddd0467d5ebf497539a5441c4ea478270da13d1dccc82b363a294461",
+        "instrumentation.sqlite": "41d24d088bba8ce38d3960c73dc8d61ad831d26a3149beb78beabd6eeea8a6d1",
+        "checkpoints.sqlite": "21d6b86f99b11d4741b6e6dcd6a3b0ee8c264bb895d95b802c7b89f3e087c4ff",
+        "run/fixture-effects.json": "896e55b2832652d3c9c9daee4301985c68c6ba76c6a5d53dc7add26834197883",
+        "prepared.json": "e16095835e292432582d7d3ef0b044612432689fe41dab030a9d926175aba183"
+      }
+    }
+  },
+  "passed": [
+    1,
+    3
+  ],
+  "totals": {
+    "generations": 15,
+    "input_tokens": 13209,
+    "output_tokens": 395,
+    "generation_tokens": 13604,
+    "embedding_requests": 10,
+    "embedding_tokens": 270,
+    "provider_wall_seconds": 5.217878669966012,
+    "unknown_usage": 0,
+    "truncations": 0
+  },
+  "reconstruction_schema_or_prompt": false,
+  "source_changes_before_runs": 0,
+  "independent_generations": 0,
+  "judge_requests": 0,
+  "ordinary_search_followup_generations": 3,
+  "budget_after_sha256": "e62011ac38f257c4b0bf95304deafd66f2c5c346c0bc4d2404b2cc41878e340f",
+  "decision": "Notice alone fails changed/retained; removing ODR overhead did not induce current evidence acquisition. Proceed to A2 item-level quarantine plus the declared generic source-authority principle; do not claim pure renderer causality."
+}

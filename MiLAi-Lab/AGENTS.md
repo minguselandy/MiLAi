@@ -36,6 +36,20 @@ canonical memory state.
 
 ## Required checks
 
+The user reopened work with [v19 repair](docs/v19修复.md), tracked in
+[the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
+old V5 restriction for this new scope: run the existing freshness_only on the three frozen
+fixtures before editing source. If insufficient, implement request-copy item-level stale
+quarantine; only if that is insufficient proceed to selective exact-version refresh.
+One Sol xhigh owns source/config/tests/CI; Root owns docs/freeze/environment/all real requests
+(concurrency 1)/cost/evaluation; Luna high retains authorized publication. Preserve old ODR/M1
+methods and old results/locks/ledgers. No vLLM setting changes, reconstruction candidate,
+semantic truth gate, new benchmark expansion, reviewer or State-Attention. Treat the old M1
+test mismatch separately as expectation drift without changing M1 runtime semantics.
+Use the smallest necessary offline checks and three-case sequential gates; stop escalating
+when a simpler arm succeeds. New source-authority text must be reported as part of the
+quarantine intervention, not a pure renderer-only causal comparison.
+
 The user explicitly authorized full execution of the 1391-line
 [v19 ODR plan](docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_DEVELOPMENT_PLAN_20260926.md).
 [Goal v19](docs/MILA_ON_DEMAND_RECONSTRUCTION_GOAL_v19.md) is

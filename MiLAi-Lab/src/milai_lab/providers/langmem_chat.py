@@ -16,6 +16,7 @@ from langchain_core.utils.function_calling import convert_to_openai_tool
 from pydantic import ConfigDict
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.methods.freshness_projection.projection import SOURCE_AUTHORITY
 from milai_lab.methods.milai_m1.controller import M1_PROTOCOL, m1_action_schema
 from milai_lab.methods.on_demand_reconstruction.schema import (
     ODR_PROTOCOL,
@@ -104,6 +105,7 @@ class VLLMChatModel(BaseChatModel):
     observer: Any = None
     m1: Any = None
     odr: Any = None
+    projection: Any = None
 
     @property
     def _llm_type(self) -> str:
@@ -151,6 +153,7 @@ class VLLMChatModel(BaseChatModel):
             protocol = _action_prompt(tools)
             m1_context = None
             odr_freshness = ""
+            projected = None
             if self.m1 is not None:
                 generation_schema = m1_action_schema(generation_schema)
                 m1_context = self.m1.prompt_context(wire_messages)
@@ -162,6 +165,10 @@ class VLLMChatModel(BaseChatModel):
                     protocol += "\n" + ODR_PROTOCOL + "\n" + odr_evidence
                 if odr_freshness:
                     protocol += "\n" + odr_freshness
+            if self.projection is not None:
+                projected = self.projection.project(wire_messages, self.active_message_key)
+                wire_messages = projected.messages
+                protocol += "\n" + SOURCE_AUTHORITY
             if wire_messages and wire_messages[0]["role"] == "system":
                 first = dict(wire_messages[0])
                 if not isinstance(first.get("content"), str):
@@ -171,7 +178,9 @@ class VLLMChatModel(BaseChatModel):
             else:
                 action_messages = [{"role": "system", "content": protocol}, *wire_messages]
             self._reserve_request()
-            scope = (self.observer.request_scope(self.active_message_key, self.calls_in_message)
+            scope = (self.observer.request_scope(
+                self.active_message_key, self.calls_in_message,
+                projected.materials if projected is not None else None)
                      if self.observer is not None else nullcontext())
             with scope:
                 receipt = self.client.chat(
@@ -193,6 +202,9 @@ class VLLMChatModel(BaseChatModel):
                     "request_id": self.odr.request_id(self.calls_in_message),
                     "dynamic_freshness": odr_freshness,
                 })
+            if projected is not None:
+                self.projection.record_delivery(self.active_message_key,
+                                                self.calls_in_message, projected)
         else:
             self._reserve_request()
             scope = (self.observer.request_scope(self.active_message_key, self.calls_in_message)

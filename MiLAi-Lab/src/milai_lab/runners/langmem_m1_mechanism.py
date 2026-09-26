@@ -67,7 +67,8 @@ def _fixture_memory_effect(
     write_json(journal_path, entries)
     if model.client.emit is not None:
         model.client.emit({
-            "event": ("odr_fixture_memory_effect" if model.odr is not None
+            "event": ("projection_fixture_memory_effect" if model.projection is not None
+                      else "odr_fixture_memory_effect" if model.odr is not None
                       else "m1_fixture_memory_effect"),
             "origin": entries[stage]["origin"],
             "stage": stage, "call_key": call_key, "arguments": arguments,
@@ -94,7 +95,9 @@ def run_mechanism(
                 "fixture_sha256": sha256_file(fixture_path),
                 "freeze_sha256": sha256_file(freeze_path),
                 "recipe_id": (model.m1.recipe_id if model.m1 is not None else
-                              model.odr.recipe_id if model.odr is not None else "b1_control")}
+                              model.odr.recipe_id if model.odr is not None else
+                              model.projection.recipe_id if model.projection is not None
+                              else "b1_control")}
     if identity_path.exists():
         if read_json(identity_path) != identity:
             raise ValueError("M1_MECHANISM_RUN_IDENTITY_CHANGED")

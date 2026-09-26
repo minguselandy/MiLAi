@@ -49,6 +49,7 @@ include = [
   "/data/locks/milai-m1-v17.lock.json",
   "/data/locks/milai-m1-v18.lock.json",
   "/data/locks/milai-odr-v19.lock.json",
+  "/data/locks/milai-freshness-projection-v19-a2.lock.json",
   "/data/manifests",
   "/docs",
   "/product.lock.json",
