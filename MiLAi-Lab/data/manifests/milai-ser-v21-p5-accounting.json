@@ -1,0 +1,184 @@
+{
+  "kind": "MILAI_SER_V21_P5_ACCOUNTING",
+  "status": "SEALED",
+  "result_sha256": "8bd6be30a314143fa21803489647863c2ecf13d071936306a494a9e6904db6a7",
+  "marker_tokens_per_delivery": 31,
+  "marker_tokens_total": 558,
+  "total_file_bytes": {
+    "trace.jsonl": 1310140,
+    "instrumentation.sqlite": 589824,
+    "checkpoints.sqlite": 475136,
+    "run/business-journal.json": 4708
+  },
+  "cases": {
+    "a4:numeric_amount": {
+      "files_bytes": {
+        "trace.jsonl": 200661,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 780
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1539,
+      "lineage_event_bytes": 8052,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 21806017,
+        "observer_wall_ns": 531489129,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3786958,
+        "extra_read_wall_ns": 6870906,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        1,
+        3
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a5:numeric_amount": {
+      "files_bytes": {
+        "trace.jsonl": 200797,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 780
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1548,
+      "lineage_event_bytes": 8079,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 21348329,
+        "observer_wall_ns": 513910773,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 2988912,
+        "extra_read_wall_ns": 6163743,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        1,
+        3
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a4:retained_metadata": {
+      "files_bytes": {
+        "trace.jsonl": 201319,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 778
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1548,
+      "lineage_event_bytes": 8097,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 23725041,
+        "observer_wall_ns": 511415380,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3518625,
+        "extra_read_wall_ns": 7048974,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        1,
+        3
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a5:retained_metadata": {
+      "files_bytes": {
+        "trace.jsonl": 201583,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 778
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1557,
+      "lineage_event_bytes": 8124,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 22250231,
+        "observer_wall_ns": 482010848,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3369469,
+        "extra_read_wall_ns": 6478333,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        1,
+        3
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a4:irrelevant_lower_rank": {
+      "files_bytes": {
+        "trace.jsonl": 255756,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 81920,
+        "run/business-journal.json": 796
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 3111,
+      "lineage_event_bytes": 9765,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 84,
+        "observer_cpu_ns": 27704653,
+        "observer_wall_ns": 783041706,
+        "extra_store_reads": 6,
+        "extra_read_cpu_ns": 4965521,
+        "extra_read_wall_ns": 9193259,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        0,
+        3
+      ],
+      "unnecessary_primary_search_after_update": 0,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a5:irrelevant_lower_rank": {
+      "files_bytes": {
+        "trace.jsonl": 250024,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 81920,
+        "run/business-journal.json": 796
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 2083,
+      "lineage_event_bytes": 8717,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 84,
+        "observer_cpu_ns": 23188309,
+        "observer_wall_ns": 551671939,
+        "extra_store_reads": 6,
+        "extra_read_cpu_ns": 4681746,
+        "extra_read_wall_ns": 8523294,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        0,
+        0
+      ],
+      "unnecessary_primary_search_after_update": 0,
+      "persistent_semantic_state_bytes": 0
+    }
+  },
+  "interpretation": "Marker tokens are already part of Provider input billing. Snapshot/event bytes are subsets of sidecar/trace. Refresh counts on actual action requests are an operational primary-evidence delivery proxy, not semantic causal precision; reads before recommendations and after completed actions stay in the denominator. 0/0 is undefined. Shared PostgreSQL physical storage is not attributed per run."
+}

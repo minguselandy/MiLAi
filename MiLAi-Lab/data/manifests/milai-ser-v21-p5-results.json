@@ -1,0 +1,3023 @@
+{
+  "kind": "MILAI_SER_V21_P5_RESULTS",
+  "status": "FAIL_REFLECT_AND_CONTINUE",
+  "checks": {
+    "all_preregistered_cases_pass": false,
+    "irrelevant_exact_reads_reduced": true,
+    "irrelevant_no_additional_search": true
+  },
+  "source_mapping_sha256": "142ce5dfcc5ecf0f79166cff0c1ad710daeff5e8aac3010ee74db50ad8de70e2",
+  "lock_sha256": "3ac92f27d6ac890ff66d03ce1ffbf7d4b160f34d87a4f23ede8a1d7b2c0ede83",
+  "freeze_sha256": "d7ffc601511f090f381683b5c687031a9606b7fb56620916644f72a6d103cd29",
+  "passed": [
+    2,
+    6
+  ],
+  "cases": {
+    "a4:numeric_amount": {
+      "case": "numeric_amount",
+      "arm": "a4_selective_rebase",
+      "status": "FAIL_REFLECT",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": false,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "current_primary_delivered_before_action": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "Cedar-27",
+            "amount_cents": 6595
+          },
+          "generation_id": "chatcmpl-b382e9c765ec3551"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for invoice Cedar-27 supports an amount of 1774 cents. My recommendation is to use 1774 cents. Please approve this amount.",
+        "Based on the saved instructions, the amount cents for invoice Cedar-27 is 6595. I recommend using 6595 cents. This is pending your approval.",
+        "I have recorded the instruction for invoice Cedar-27 with an amount of 6595 cents as per the saved instructions."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5-a4-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "07663fa1f5f07f5b9970973bd02e8f8ca6338e3b5539bf0407405127d3db586f",
+          "request_object_sha256": "2adf9a20e77d69ac176e33a1b564efd45cf607b099093289b20cc40d93853286",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-b4070f923f0afad7",
+          "generating_request_id": "b358415dd213cbfe9a49a5a5091fc4a3e937050717a4b468fe8412adb037240d",
+          "original_body_kind": "string",
+          "original_body_hash": "3218f7ae54ae6f393f9d64b639ef6de9db7360ebfc07dc14dee3917b52b869d2",
+          "original_body_ref": "body:string:3218f7ae54ae6f393f9d64b639ef6de9db7360ebfc07dc14dee3917b52b869d2",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@1",
+              "revision": 1,
+              "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+              "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+              "revision": 2,
+              "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a4-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "9e554e8c5ae5b3ce2e0785fefb9339016668a0f5592d0596d613035051a304c2",
+          "request_object_sha256": "b101614bdeee5518ce0e92f6335332422a5fbcde2d9564de73c964035426e648",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-b4070f923f0afad7",
+          "generating_request_id": "b358415dd213cbfe9a49a5a5091fc4a3e937050717a4b468fe8412adb037240d",
+          "original_body_kind": "string",
+          "original_body_hash": "3218f7ae54ae6f393f9d64b639ef6de9db7360ebfc07dc14dee3917b52b869d2",
+          "original_body_ref": "body:string:3218f7ae54ae6f393f9d64b639ef6de9db7360ebfc07dc14dee3917b52b869d2",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@1",
+              "revision": 1,
+              "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+              "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+              "revision": 2,
+              "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a4-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "f0c81f445211dfee628db56eae39b2b376284ed31287935f8091d55afb7ba7ef",
+          "request_object_sha256": "2d0a931212444fc66f06beee1656c31b1f91d7ff75dabd9a8740ae4c96a45f3e",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-b4070f923f0afad7",
+          "generating_request_id": "b358415dd213cbfe9a49a5a5091fc4a3e937050717a4b468fe8412adb037240d",
+          "original_body_kind": "string",
+          "original_body_hash": "3218f7ae54ae6f393f9d64b639ef6de9db7360ebfc07dc14dee3917b52b869d2",
+          "original_body_ref": "body:string:3218f7ae54ae6f393f9d64b639ef6de9db7360ebfc07dc14dee3917b52b869d2",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@1",
+              "revision": 1,
+              "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+              "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+              "revision": 2,
+              "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "b358415dd213cbfe9a49a5a5091fc4a3e937050717a4b468fe8412adb037240d",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+          "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+          "item_index": 0,
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@1",
+          "status": "CURRENT",
+          "current_ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "actual_tool_body_ref": "body:string:4424eaaa429635a48aded0e150f23517b1bb217f3d0bef89815b14987eac4e63"
+        },
+        {
+          "request_id": "07663fa1f5f07f5b9970973bd02e8f8ca6338e3b5539bf0407405127d3db586f",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+          "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+          "item_index": 0,
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:ca8f6afa5d0f5a99205e005035ae8a9a4225dc89e9547fd26682309bc38f43ce"
+        },
+        {
+          "request_id": "9e554e8c5ae5b3ce2e0785fefb9339016668a0f5592d0596d613035051a304c2",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+          "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+          "item_index": 0,
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:ca8f6afa5d0f5a99205e005035ae8a9a4225dc89e9547fd26682309bc38f43ce"
+        },
+        {
+          "request_id": "f0c81f445211dfee628db56eae39b2b376284ed31287935f8091d55afb7ba7ef",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+          "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+          "item_index": 0,
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:ca8f6afa5d0f5a99205e005035ae8a9a4225dc89e9547fd26682309bc38f43ce"
+        }
+      ],
+      "exact_reads": [
+        {
+          "stage": "ser-v21-p5-a4-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "07663fa1f5f07f5b9970973bd02e8f8ca6338e3b5539bf0407405127d3db586f",
+          "public_message_index": 1,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1138297,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a4-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "9e554e8c5ae5b3ce2e0785fefb9339016668a0f5592d0596d613035051a304c2",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1680841,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a4-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "f0c81f445211dfee628db56eae39b2b376284ed31287935f8091d55afb7ba7ef",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1365050,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        }
+      ],
+      "primary_revision_count": 2,
+      "delivered_snapshots": [
+        {
+          "request_id": "b358415dd213cbfe9a49a5a5091fc4a3e937050717a4b468fe8412adb037240d",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "revision": 1,
+          "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@1",
+          "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+          "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "07663fa1f5f07f5b9970973bd02e8f8ca6338e3b5539bf0407405127d3db586f",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "revision": 2,
+          "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+          "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "9e554e8c5ae5b3ce2e0785fefb9339016668a0f5592d0596d613035051a304c2",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "revision": 2,
+          "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+          "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "f0c81f445211dfee628db56eae39b2b376284ed31287935f8091d55afb7ba7ef",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "fbdfaeb7-da20-42ef-abdf-c21b9fc37852",
+          "revision": 2,
+          "ref": "memory:fbdfaeb7-da20-42ef-abdf-c21b9fc37852@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-8ff912beef8863a4:tool:0",
+          "source_search_id": "3b567febe1f5263c4107806b9d9af8b188cc7838ab822dbb847c59c1c0dfb455:1:search:1",
+          "delivery_source": "public Store.get"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4271,
+        "output_tokens": 179,
+        "generation_tokens": 4450,
+        "embedding_requests": 3,
+        "embedding_tokens": 69,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 4184188,
+        "projection_cpu_ns": 6663025,
+        "projection_wall_ns": 7260000,
+        "provider_wall_seconds": 2.2151297237724066,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "3777ca2af2d77ff6232835914b781a79e420ea4f58d1e19bf9ec862554df5d31",
+        "instrumentation.sqlite": "87196353d4715c127b0209f729d7115084d3e5fe4eab5707eeaa9e8381c36f38",
+        "checkpoints.sqlite": "7acb6cd161e309e29a9fa21b32084f755f58ad347f2e0e5572b871c595953926",
+        "run/result.json": "76c749d37791ac038110a1387afaf9af250acc3a44828643c92588990eec4835",
+        "run/fixture-effects.json": "3c6e271d317cb61a821c974438b5f21c5e0f48fcb33e8a26bf3f709a6836ee61",
+        "prepared.json": "d375c545677623b947bb1540496961140a19101a76b3f7a02116b32b7cb0525a"
+      }
+    },
+    "a5:numeric_amount": {
+      "case": "numeric_amount",
+      "arm": "a5_rank_bounded_rebase",
+      "status": "FAIL_REFLECT",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": false,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "current_primary_delivered_before_action": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "Cedar-27",
+            "amount_cents": 6595
+          },
+          "generation_id": "chatcmpl-af62950a2392ece8"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for invoice Cedar-27 supports an amount of 1774 cents. My recommendation is to proceed with 1774 cents. Please approve or provide corrections.",
+        "Based on the saved instructions, the amount cents for invoice Cedar-27 is 6595. I recommend using 6595 cents. This is pending your approval.",
+        "I have recorded the instruction for invoice Cedar-27 with an amount of 6595 cents as per the saved instructions."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5-a5-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "fc6871c7dc5cfba1e4515e72de42f18f024f762a034b79cef6047f9d7fd35df9",
+          "request_object_sha256": "7119f7fa1bcdd9187dd27c3c6919116fb5af7e1975f74d4320f2dc467c510e2e",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-b15eb250db38158c",
+          "generating_request_id": "f5fef50be3b12ac577788395f6f1851c5c8ee41adf3d1de394c6881f2f533205",
+          "original_body_kind": "string",
+          "original_body_hash": "9e129afed10add6b3c4e4bdcbb04501a8ff33ceb968c2a3a721dc4eabc71bc88",
+          "original_body_ref": "body:string:9e129afed10add6b3c4e4bdcbb04501a8ff33ceb968c2a3a721dc4eabc71bc88",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@1",
+              "revision": 1,
+              "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+              "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+              "revision": 2,
+              "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a5-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "f0dac4b727b21cd2169218f76d1f00d3d9db3c3e5d224ac1649e8b1d42a78222",
+          "request_object_sha256": "49ca12ff1dae9e8c1fd372ebfc13a77f57c414561b2b8a604bb660ae7394a929",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-b15eb250db38158c",
+          "generating_request_id": "f5fef50be3b12ac577788395f6f1851c5c8ee41adf3d1de394c6881f2f533205",
+          "original_body_kind": "string",
+          "original_body_hash": "9e129afed10add6b3c4e4bdcbb04501a8ff33ceb968c2a3a721dc4eabc71bc88",
+          "original_body_ref": "body:string:9e129afed10add6b3c4e4bdcbb04501a8ff33ceb968c2a3a721dc4eabc71bc88",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@1",
+              "revision": 1,
+              "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+              "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+              "revision": 2,
+              "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a5-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "888d7ad82e616d7f55082ce9b038f057fef2c31463ccbc9499429a21de2f3905",
+          "request_object_sha256": "2c58cbf623f8c215cc90c0424db0a608ae321abf8dd2858601063a7cf359b83e",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-b15eb250db38158c",
+          "generating_request_id": "f5fef50be3b12ac577788395f6f1851c5c8ee41adf3d1de394c6881f2f533205",
+          "original_body_kind": "string",
+          "original_body_hash": "9e129afed10add6b3c4e4bdcbb04501a8ff33ceb968c2a3a721dc4eabc71bc88",
+          "original_body_ref": "body:string:9e129afed10add6b3c4e4bdcbb04501a8ff33ceb968c2a3a721dc4eabc71bc88",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@1",
+              "revision": 1,
+              "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+              "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+              "revision": 2,
+              "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "f5fef50be3b12ac577788395f6f1851c5c8ee41adf3d1de394c6881f2f533205",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+          "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+          "item_index": 0,
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@1",
+          "status": "CURRENT",
+          "current_ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "actual_tool_body_ref": "body:string:2fc5bbdd125b73dff02e2209dc555c1b08cde5175019030bade966424995c42e"
+        },
+        {
+          "request_id": "fc6871c7dc5cfba1e4515e72de42f18f024f762a034b79cef6047f9d7fd35df9",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+          "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+          "item_index": 0,
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:961d8a76342e9353a1b7ab4f2da87f3c21a381683e9c237d6380b256ec8fe750"
+        },
+        {
+          "request_id": "f0dac4b727b21cd2169218f76d1f00d3d9db3c3e5d224ac1649e8b1d42a78222",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+          "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+          "item_index": 0,
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:961d8a76342e9353a1b7ab4f2da87f3c21a381683e9c237d6380b256ec8fe750"
+        },
+        {
+          "request_id": "888d7ad82e616d7f55082ce9b038f057fef2c31463ccbc9499429a21de2f3905",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+          "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+          "item_index": 0,
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:961d8a76342e9353a1b7ab4f2da87f3c21a381683e9c237d6380b256ec8fe750"
+        }
+      ],
+      "exact_reads": [
+        {
+          "stage": "ser-v21-p5-a5-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "fc6871c7dc5cfba1e4515e72de42f18f024f762a034b79cef6047f9d7fd35df9",
+          "public_message_index": 1,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 958871,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a5-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "f0dac4b727b21cd2169218f76d1f00d3d9db3c3e5d224ac1649e8b1d42a78222",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1394082,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a5-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "888d7ad82e616d7f55082ce9b038f057fef2c31463ccbc9499429a21de2f3905",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1207607,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        }
+      ],
+      "primary_revision_count": 2,
+      "delivered_snapshots": [
+        {
+          "request_id": "f5fef50be3b12ac577788395f6f1851c5c8ee41adf3d1de394c6881f2f533205",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "revision": 1,
+          "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@1",
+          "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+          "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "fc6871c7dc5cfba1e4515e72de42f18f024f762a034b79cef6047f9d7fd35df9",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "revision": 2,
+          "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+          "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "f0dac4b727b21cd2169218f76d1f00d3d9db3c3e5d224ac1649e8b1d42a78222",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "revision": 2,
+          "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+          "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "888d7ad82e616d7f55082ce9b038f057fef2c31463ccbc9499429a21de2f3905",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "ad494554-6a34-4691-94cf-573fffbb6cd3",
+          "revision": 2,
+          "ref": "memory:ad494554-6a34-4691-94cf-573fffbb6cd3@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-90a0542102e5d442:tool:0",
+          "source_search_id": "db384dea25589e99ac327c004de0be25e2fb122dc9160d30a18b0989a4bcf7eb:1:search:1",
+          "delivery_source": "public Store.get"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4335,
+        "output_tokens": 181,
+        "generation_tokens": 4516,
+        "embedding_requests": 3,
+        "embedding_tokens": 69,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 3560560,
+        "projection_cpu_ns": 5154688,
+        "projection_wall_ns": 12019467,
+        "provider_wall_seconds": 1.9729840424843132,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "8686143e37d2ae531bf52ad47e7aea75d1861c652018b0f66dd505a08dd5ba9f",
+        "instrumentation.sqlite": "e2c7a5acb5cf4af6acc8f4b71c9d9dd14170d2472b4fa0ac9a5eead1c2bd0874",
+        "checkpoints.sqlite": "36b5f8764e6dec01fc887f9ef06d04224f7ca9b6bc8f450a90804e459cb110d7",
+        "run/result.json": "77f04fded376eae08daf486e47a4693e74840879551194ead5feb2011ef22956",
+        "run/fixture-effects.json": "0bce00734fb31b8ca92df57f098115e1dc5835fe530529411c89944be94b4c52",
+        "prepared.json": "82a0d7fce182b580b484abed695440e8d852f9943a837c37d30a34db87d1c00e"
+      }
+    },
+    "a4:retained_metadata": {
+      "case": "retained_metadata",
+      "arm": "a4_selective_rebase",
+      "status": "FAIL_REFLECT",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": false,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "current_primary_delivered_before_action": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "Elm-12",
+            "weight_limit_kg": 48
+          },
+          "generation_id": "chatcmpl-87bfa8c0d408c8f3"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for container Elm-12 specifies a weight limit of 48 kilograms. My recommendation is to maintain this limit of 48 kg. Please approve or suggest changes.",
+        "Based on the saved instructions, the weight limit for container Elm-12 is 48 kg. I recommend using 48 kg if you approve. No further action has been taken.",
+        "The weight limit for container Elm-12 has been recorded as 48 kg."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5-a4-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "101575685cbfcd76b4ad4055f038dbf14c2b9949d52b0e9399577cf4072d63b9",
+          "request_object_sha256": "2764c62da1f43da8f35ebe7a67e79f16bf6cbeee9ca08e2f26fc8d29d1e4b78c",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-ab375ebaeeab5697",
+          "generating_request_id": "bc288f85e0f197890aa9d5dba5abc31fbbe5362293bebb27c48e8a4490034433",
+          "original_body_kind": "string",
+          "original_body_hash": "a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "original_body_ref": "body:string:a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@1",
+              "revision": 1,
+              "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+              "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+              "revision": 2,
+              "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a4-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "d4efae6cca036e4e781fbb83744cffa91afafbd18912ca23da7d7e7950b1a598",
+          "request_object_sha256": "84bbabf43c2d1f9add947b82c6a404fef299db1c8a85b2335867682639075a44",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-ab375ebaeeab5697",
+          "generating_request_id": "bc288f85e0f197890aa9d5dba5abc31fbbe5362293bebb27c48e8a4490034433",
+          "original_body_kind": "string",
+          "original_body_hash": "a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "original_body_ref": "body:string:a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@1",
+              "revision": 1,
+              "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+              "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+              "revision": 2,
+              "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a4-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "6085aee7f5aa05ee8285e35730d9f46488c47301a0d986a0abdd47f6fe6faeb0",
+          "request_object_sha256": "803f25a8b6df0382c997c0337e38be0c0f384cb093e804a5663406f82381535d",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-ab375ebaeeab5697",
+          "generating_request_id": "bc288f85e0f197890aa9d5dba5abc31fbbe5362293bebb27c48e8a4490034433",
+          "original_body_kind": "string",
+          "original_body_hash": "a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "original_body_ref": "body:string:a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@1",
+              "revision": 1,
+              "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+              "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+              "revision": 2,
+              "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "bc288f85e0f197890aa9d5dba5abc31fbbe5362293bebb27c48e8a4490034433",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+          "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+          "item_index": 0,
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@1",
+          "status": "CURRENT",
+          "current_ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "actual_tool_body_ref": "body:string:4157f2ac01b57e81a8d5c3a3c5bcc6d1877f1a086f95b161451d317a25ec68d7"
+        },
+        {
+          "request_id": "101575685cbfcd76b4ad4055f038dbf14c2b9949d52b0e9399577cf4072d63b9",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+          "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+          "item_index": 0,
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:1320e5362b0bdc0e565075e47cffe930667aae94c07950c85e52948f972025e6"
+        },
+        {
+          "request_id": "d4efae6cca036e4e781fbb83744cffa91afafbd18912ca23da7d7e7950b1a598",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+          "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+          "item_index": 0,
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:1320e5362b0bdc0e565075e47cffe930667aae94c07950c85e52948f972025e6"
+        },
+        {
+          "request_id": "6085aee7f5aa05ee8285e35730d9f46488c47301a0d986a0abdd47f6fe6faeb0",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+          "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+          "item_index": 0,
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:1320e5362b0bdc0e565075e47cffe930667aae94c07950c85e52948f972025e6"
+        }
+      ],
+      "exact_reads": [
+        {
+          "stage": "ser-v21-p5-a4-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "101575685cbfcd76b4ad4055f038dbf14c2b9949d52b0e9399577cf4072d63b9",
+          "public_message_index": 1,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1102988,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a4-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "d4efae6cca036e4e781fbb83744cffa91afafbd18912ca23da7d7e7950b1a598",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1627460,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a4-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "6085aee7f5aa05ee8285e35730d9f46488c47301a0d986a0abdd47f6fe6faeb0",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1287711,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        }
+      ],
+      "primary_revision_count": 2,
+      "delivered_snapshots": [
+        {
+          "request_id": "bc288f85e0f197890aa9d5dba5abc31fbbe5362293bebb27c48e8a4490034433",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "revision": 1,
+          "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@1",
+          "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+          "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "101575685cbfcd76b4ad4055f038dbf14c2b9949d52b0e9399577cf4072d63b9",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "revision": 2,
+          "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+          "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "d4efae6cca036e4e781fbb83744cffa91afafbd18912ca23da7d7e7950b1a598",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "revision": 2,
+          "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+          "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "6085aee7f5aa05ee8285e35730d9f46488c47301a0d986a0abdd47f6fe6faeb0",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "8c57e9fb-0583-4b57-8561-4a535a85cb1a",
+          "revision": 2,
+          "ref": "memory:8c57e9fb-0583-4b57-8561-4a535a85cb1a@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-bd90d897f4aacac3:tool:0",
+          "source_search_id": "4939304d5781e03007414911ac99181c4fb088c4c23945f427cff48146a65661:1:search:1",
+          "delivery_source": "public Store.get"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4421,
+        "output_tokens": 171,
+        "generation_tokens": 4592,
+        "embedding_requests": 3,
+        "embedding_tokens": 80,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 4018159,
+        "projection_cpu_ns": 6166256,
+        "projection_wall_ns": 7744599,
+        "provider_wall_seconds": 1.946410212200135,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "d83a8894a2399c4d64e34fbdbd9c39206c0393370b2d9750e46ae14b42be5dc9",
+        "instrumentation.sqlite": "0a4de81b57c10fe96b0e078379c6e5504bbc62e2430456ed4a7a1ef562596cad",
+        "checkpoints.sqlite": "bbd1e0623e37f9f8de40585ad332f59784a76797477468cf61a7c8a486cf284b",
+        "run/result.json": "53bdd1880f28c85e59075dfd1dd1d4735b241b6e4d9294baca07b951db592f1d",
+        "run/fixture-effects.json": "1aa042fbf81cd7c60e4dc8e7bad22a1b4f92203c6b6ed4b8c805ad30ad128793",
+        "prepared.json": "dbda52cc67426e8de3514f6a90595d0332f86140b0128715550a0c49345ebb81"
+      }
+    },
+    "a5:retained_metadata": {
+      "case": "retained_metadata",
+      "arm": "a5_rank_bounded_rebase",
+      "status": "FAIL_REFLECT",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": false,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "current_primary_delivered_before_action": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "Elm-12",
+            "weight_limit_kg": 48
+          },
+          "generation_id": "chatcmpl-a5b668eed00c92cc"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for container Elm-12 specifies a weight limit of 48 kilograms. My recommendation is to maintain this limit of 48 kg. Please approve or suggest changes.",
+        "Based on the saved instructions, the weight limit for container Elm-12 is 48 kg. I recommend using 48 kg if you approve. No information is missing or conflicting regarding the weight limit itself.",
+        "The weight limit for container Elm-12 has been recorded as 48 kg."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5-a5-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "a649dcac3941b8b698c97765f00fda1f6d549bddf5c24f7b0d5c4d013e861315",
+          "request_object_sha256": "6371567d9c20e06fd01ebf32953ab514a0b2b0b9017bf345d5f3b0e06255eda7",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-85491365b944d980",
+          "generating_request_id": "0ab663e7199cb69ac9670e5ff5d26675a57b84372f4bfcf12137f756f8437236",
+          "original_body_kind": "string",
+          "original_body_hash": "a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "original_body_ref": "body:string:a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@1",
+              "revision": 1,
+              "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+              "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+              "revision": 2,
+              "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a5-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "a122df576188e7e30302949ed325fa1c15d656fcd725935748d65f2993af83a2",
+          "request_object_sha256": "1733c2599df08f21f957672c0cb95192bf699080536df137ae71c394325ba25f",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-85491365b944d980",
+          "generating_request_id": "0ab663e7199cb69ac9670e5ff5d26675a57b84372f4bfcf12137f756f8437236",
+          "original_body_kind": "string",
+          "original_body_hash": "a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "original_body_ref": "body:string:a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@1",
+              "revision": 1,
+              "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+              "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+              "revision": 2,
+              "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a5-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "d03f334b336fe46b0681b19908838c84001b0b205893cf548d881799852f5493",
+          "request_object_sha256": "2e90a99f5e1f9822d65f6e4125f3a94db10ff0a4561a5eea115c7b6861c0c5d2",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-85491365b944d980",
+          "generating_request_id": "0ab663e7199cb69ac9670e5ff5d26675a57b84372f4bfcf12137f756f8437236",
+          "original_body_kind": "string",
+          "original_body_hash": "a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "original_body_ref": "body:string:a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@1",
+              "revision": 1,
+              "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+              "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+              "revision": 2,
+              "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "0ab663e7199cb69ac9670e5ff5d26675a57b84372f4bfcf12137f756f8437236",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+          "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+          "item_index": 0,
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@1",
+          "status": "CURRENT",
+          "current_ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "actual_tool_body_ref": "body:string:24b9c532ae371d114e20b0727314575a68219710a3e5751e398324fd91b124ce"
+        },
+        {
+          "request_id": "a649dcac3941b8b698c97765f00fda1f6d549bddf5c24f7b0d5c4d013e861315",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+          "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+          "item_index": 0,
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:14b406d9e4b25557f3fdeaf1adaf03b48d0578fa2a63e8f1cc3e839ba0b0225d"
+        },
+        {
+          "request_id": "a122df576188e7e30302949ed325fa1c15d656fcd725935748d65f2993af83a2",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+          "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+          "item_index": 0,
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:14b406d9e4b25557f3fdeaf1adaf03b48d0578fa2a63e8f1cc3e839ba0b0225d"
+        },
+        {
+          "request_id": "d03f334b336fe46b0681b19908838c84001b0b205893cf548d881799852f5493",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+          "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+          "item_index": 0,
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:14b406d9e4b25557f3fdeaf1adaf03b48d0578fa2a63e8f1cc3e839ba0b0225d"
+        }
+      ],
+      "exact_reads": [
+        {
+          "stage": "ser-v21-p5-a5-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "a649dcac3941b8b698c97765f00fda1f6d549bddf5c24f7b0d5c4d013e861315",
+          "public_message_index": 1,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1189237,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a5-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "a122df576188e7e30302949ed325fa1c15d656fcd725935748d65f2993af83a2",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1551924,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a5-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "d03f334b336fe46b0681b19908838c84001b0b205893cf548d881799852f5493",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1242282,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        }
+      ],
+      "primary_revision_count": 2,
+      "delivered_snapshots": [
+        {
+          "request_id": "0ab663e7199cb69ac9670e5ff5d26675a57b84372f4bfcf12137f756f8437236",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "revision": 1,
+          "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@1",
+          "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+          "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "a649dcac3941b8b698c97765f00fda1f6d549bddf5c24f7b0d5c4d013e861315",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "revision": 2,
+          "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+          "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "a122df576188e7e30302949ed325fa1c15d656fcd725935748d65f2993af83a2",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "revision": 2,
+          "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+          "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "d03f334b336fe46b0681b19908838c84001b0b205893cf548d881799852f5493",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "3736fc28-fcaa-434c-adc0-3626ef1b9710",
+          "revision": 2,
+          "ref": "memory:3736fc28-fcaa-434c-adc0-3626ef1b9710@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-a97d6f5698732a3a:tool:0",
+          "source_search_id": "c3b47bca8827cc6f6a1235a19582ce6f4f0b84b67259a8d59c953d2e01a6996e:1:search:1",
+          "delivery_source": "public Store.get"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4385,
+        "output_tokens": 176,
+        "generation_tokens": 4561,
+        "embedding_requests": 3,
+        "embedding_tokens": 80,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 3983443,
+        "projection_cpu_ns": 6309843,
+        "projection_wall_ns": 8825834,
+        "provider_wall_seconds": 1.9969465066678822,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "c20c5068e571d41a208489789fa791a52b39c76dc5f73f184963fac3f3181323",
+        "instrumentation.sqlite": "a38c80f7bb50191b91c392afb6c36a533b8212e3a6869fdae682e6131da55b12",
+        "checkpoints.sqlite": "8d5f96f78b7e83171349f904bd1e1a46e5a5658f69204cf18480574b029cd8fb",
+        "run/result.json": "f951937ee0236dd12563c6b3e56d76b7d3c37d172b3ae88f09ac09cf0fea4169",
+        "run/fixture-effects.json": "1563bb217dd2cec16f35a34a64dc804e2f33fa992dc6a78d1e2365d7068bbedb",
+        "prepared.json": "ba9092264ed352fff1656a86246516278685f02be24e8b7de7b35acec285083f"
+      }
+    },
+    "a4:irrelevant_lower_rank": {
+      "case": "irrelevant_lower_rank",
+      "arm": "a4_selective_rebase",
+      "status": "PASS",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": true,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "secondary_actually_delivered_below_primary": true,
+        "no_additional_host_search": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "parcel Orion-17",
+            "warehouse": "North"
+          },
+          "generation_id": "chatcmpl-8556217c939c0ff6"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for item parcel Orion-17 assigns it to the **North** warehouse. My recommendation is to send parcel Orion-17 to the North warehouse. Please approve this action.",
+        "Based on the saved instructions, the recommended warehouse for parcel Orion-17 is **North**. I have not recorded or changed any instructions yet, as requested.",
+        "The warehouse for parcel Orion-17 has been recorded as North."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "60f23ac3b29e1cf328fffc0963529b74bd435e3a751528e7a7a012e57b18f8e7",
+          "request_object_sha256": "292dc038e55fec42852f82ba0936e85294bb1767f3a9b63ea58a987fe2c9977a",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-806a0d1895e5baba",
+          "generating_request_id": "c1d577c966ac85d1fc55bf6663a8563b3ef9a7d14c8ac397332767486ca58395",
+          "original_body_kind": "string",
+          "original_body_hash": "e43d9cd709a68ad9059382ddce75f8372a99aae25fd970137f4da82b7a31be2a",
+          "original_body_ref": "body:string:e43d9cd709a68ad9059382ddce75f8372a99aae25fd970137f4da82b7a31be2a",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+              "delivery_source": "search_memory",
+              "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@1",
+              "revision": 1,
+              "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+              "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+              "revision": 2,
+              "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "c30f781e190273426cad1d97bf8d1692e92ab17401c069c3fbee5e0791e0a4c5",
+          "request_object_sha256": "a37bd7bbcc9c4893e646d8422f536c058819d1678fb754382ae6af744c67cac5",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-806a0d1895e5baba",
+          "generating_request_id": "c1d577c966ac85d1fc55bf6663a8563b3ef9a7d14c8ac397332767486ca58395",
+          "original_body_kind": "string",
+          "original_body_hash": "e43d9cd709a68ad9059382ddce75f8372a99aae25fd970137f4da82b7a31be2a",
+          "original_body_ref": "body:string:e43d9cd709a68ad9059382ddce75f8372a99aae25fd970137f4da82b7a31be2a",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+              "delivery_source": "search_memory",
+              "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@1",
+              "revision": 1,
+              "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+              "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+              "revision": 2,
+              "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "64b05e2c35d40eb830260ec038f99780a49680dcfd2b68f2a3680201722a43ed",
+          "request_object_sha256": "e4061a66e3f84e3eeedc146d275464920adfa6864608f75157c864a0715fa50c",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-806a0d1895e5baba",
+          "generating_request_id": "c1d577c966ac85d1fc55bf6663a8563b3ef9a7d14c8ac397332767486ca58395",
+          "original_body_kind": "string",
+          "original_body_hash": "e43d9cd709a68ad9059382ddce75f8372a99aae25fd970137f4da82b7a31be2a",
+          "original_body_ref": "body:string:e43d9cd709a68ad9059382ddce75f8372a99aae25fd970137f4da82b7a31be2a",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+              "delivery_source": "search_memory",
+              "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@1",
+              "revision": 1,
+              "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+              "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+              "revision": 2,
+              "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "c1d577c966ac85d1fc55bf6663a8563b3ef9a7d14c8ac397332767486ca58395",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "item_index": 0,
+          "memory_id": "e9ab9834-c642-4f1f-af81-77f6928c03d6",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "status": "CURRENT",
+          "current_ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "projected_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "actual_tool_body_ref": "body:string:a80ddc8fb397f440c6f819f2bce95a6f7f2e7b41c97c61588af2159681ece65d"
+        },
+        {
+          "request_id": "c1d577c966ac85d1fc55bf6663a8563b3ef9a7d14c8ac397332767486ca58395",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "item_index": 1,
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@1",
+          "status": "CURRENT",
+          "current_ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "projected_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "actual_tool_body_ref": "body:string:a80ddc8fb397f440c6f819f2bce95a6f7f2e7b41c97c61588af2159681ece65d"
+        },
+        {
+          "request_id": "60f23ac3b29e1cf328fffc0963529b74bd435e3a751528e7a7a012e57b18f8e7",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "item_index": 0,
+          "memory_id": "e9ab9834-c642-4f1f-af81-77f6928c03d6",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "status": "CURRENT",
+          "current_ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "projected_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "actual_tool_body_ref": "body:string:8b17e268a5cd17e818e7af81d46199d9818621cec7e83c99476ce75513830b0a"
+        },
+        {
+          "request_id": "60f23ac3b29e1cf328fffc0963529b74bd435e3a751528e7a7a012e57b18f8e7",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "item_index": 1,
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "projected_body_ref": "body:string:1574847e356aa49b7ccadd244bae686fd63cd8e9c23e1b5768ed70b540b62f16",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:8b17e268a5cd17e818e7af81d46199d9818621cec7e83c99476ce75513830b0a"
+        },
+        {
+          "request_id": "c30f781e190273426cad1d97bf8d1692e92ab17401c069c3fbee5e0791e0a4c5",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "item_index": 0,
+          "memory_id": "e9ab9834-c642-4f1f-af81-77f6928c03d6",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "status": "CURRENT",
+          "current_ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "projected_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "actual_tool_body_ref": "body:string:8b17e268a5cd17e818e7af81d46199d9818621cec7e83c99476ce75513830b0a"
+        },
+        {
+          "request_id": "c30f781e190273426cad1d97bf8d1692e92ab17401c069c3fbee5e0791e0a4c5",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "item_index": 1,
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "projected_body_ref": "body:string:1574847e356aa49b7ccadd244bae686fd63cd8e9c23e1b5768ed70b540b62f16",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:8b17e268a5cd17e818e7af81d46199d9818621cec7e83c99476ce75513830b0a"
+        },
+        {
+          "request_id": "64b05e2c35d40eb830260ec038f99780a49680dcfd2b68f2a3680201722a43ed",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "item_index": 0,
+          "memory_id": "e9ab9834-c642-4f1f-af81-77f6928c03d6",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "status": "CURRENT",
+          "current_ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "projected_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "actual_tool_body_ref": "body:string:8b17e268a5cd17e818e7af81d46199d9818621cec7e83c99476ce75513830b0a"
+        },
+        {
+          "request_id": "64b05e2c35d40eb830260ec038f99780a49680dcfd2b68f2a3680201722a43ed",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "item_index": 1,
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "projected_body_ref": "body:string:1574847e356aa49b7ccadd244bae686fd63cd8e9c23e1b5768ed70b540b62f16",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:8b17e268a5cd17e818e7af81d46199d9818621cec7e83c99476ce75513830b0a"
+        }
+      ],
+      "exact_reads": [
+        {
+          "stage": "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "60f23ac3b29e1cf328fffc0963529b74bd435e3a751528e7a7a012e57b18f8e7",
+          "public_message_index": 1,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 885914,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:1574847e356aa49b7ccadd244bae686fd63cd8e9c23e1b5768ed70b540b62f16",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "c30f781e190273426cad1d97bf8d1692e92ab17401c069c3fbee5e0791e0a4c5",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1189251,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:1574847e356aa49b7ccadd244bae686fd63cd8e9c23e1b5768ed70b540b62f16",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "64b05e2c35d40eb830260ec038f99780a49680dcfd2b68f2a3680201722a43ed",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1182282,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:1574847e356aa49b7ccadd244bae686fd63cd8e9c23e1b5768ed70b540b62f16",
+          "error_type": null
+        }
+      ],
+      "primary_revision_count": 1,
+      "delivered_snapshots": [
+        {
+          "request_id": "c1d577c966ac85d1fc55bf6663a8563b3ef9a7d14c8ac397332767486ca58395",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "e9ab9834-c642-4f1f-af81-77f6928c03d6",
+          "revision": 1,
+          "ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "c1d577c966ac85d1fc55bf6663a8563b3ef9a7d14c8ac397332767486ca58395",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "revision": 1,
+          "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@1",
+          "body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "60f23ac3b29e1cf328fffc0963529b74bd435e3a751528e7a7a012e57b18f8e7",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "e9ab9834-c642-4f1f-af81-77f6928c03d6",
+          "revision": 1,
+          "ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "60f23ac3b29e1cf328fffc0963529b74bd435e3a751528e7a7a012e57b18f8e7",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "revision": 2,
+          "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@2",
+          "body_ref": "body:string:1574847e356aa49b7ccadd244bae686fd63cd8e9c23e1b5768ed70b540b62f16",
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "c30f781e190273426cad1d97bf8d1692e92ab17401c069c3fbee5e0791e0a4c5",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "e9ab9834-c642-4f1f-af81-77f6928c03d6",
+          "revision": 1,
+          "ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "c30f781e190273426cad1d97bf8d1692e92ab17401c069c3fbee5e0791e0a4c5",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "revision": 2,
+          "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@2",
+          "body_ref": "body:string:1574847e356aa49b7ccadd244bae686fd63cd8e9c23e1b5768ed70b540b62f16",
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "64b05e2c35d40eb830260ec038f99780a49680dcfd2b68f2a3680201722a43ed",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "e9ab9834-c642-4f1f-af81-77f6928c03d6",
+          "revision": 1,
+          "ref": "memory:e9ab9834-c642-4f1f-af81-77f6928c03d6@1",
+          "body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "64b05e2c35d40eb830260ec038f99780a49680dcfd2b68f2a3680201722a43ed",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "669f5f6a-bb34-4678-b312-ff1acb8db89f",
+          "revision": 2,
+          "ref": "memory:669f5f6a-bb34-4678-b312-ff1acb8db89f@2",
+          "body_ref": "body:string:1574847e356aa49b7ccadd244bae686fd63cd8e9c23e1b5768ed70b540b62f16",
+          "source_tool_call": "chatcmpl-a65f4f9ec9a8cef2:tool:0",
+          "source_search_id": "a674bf5b2584334492f90eb0248269090507c839b239eec06dabe84fa3659c1a:1:search:1",
+          "delivery_source": "public Store.get"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 5002,
+        "output_tokens": 159,
+        "generation_tokens": 5161,
+        "embedding_requests": 4,
+        "embedding_tokens": 74,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 3257447,
+        "projection_cpu_ns": 6760447,
+        "projection_wall_ns": 7979015,
+        "provider_wall_seconds": 2.004089162684977,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "9b451d95a3f92d447b0fdf3c69a2f12c84868250501ba01ae3d9d1b8924f93a3",
+        "instrumentation.sqlite": "2ad348ff94d817b68e5b8d6bcc38c0aa7b0965932a6ddea165fd00bc8c2a8814",
+        "checkpoints.sqlite": "957acb2fab8195e21d908633ad80e5dfee518cbeabefdb8c2644bfcd30390b91",
+        "run/result.json": "717082db8a8dec7a30602a93b77d754ee0080e1b2e2c8c819fbcc6619572119f",
+        "run/fixture-effects.json": "8594357a3deba260c732ba68fb8bccaba1a68c4d4306524961b791839b914e46",
+        "prepared.json": "36b572a2cea03235f08f76ff6c874266adff941da50c939f61b5e7f03770765e"
+      }
+    },
+    "a5:irrelevant_lower_rank": {
+      "case": "irrelevant_lower_rank",
+      "arm": "a5_rank_bounded_rebase",
+      "status": "PASS",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": true,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "secondary_actually_delivered_below_primary": true,
+        "no_additional_host_search": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "parcel Orion-17",
+            "warehouse": "North"
+          },
+          "generation_id": "chatcmpl-81ef34bb28fffe58"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for item parcel Orion-17 assigns it to the **North** warehouse. My recommendation is to dispatch it to the North warehouse. Please approve this action.",
+        "Based on the saved instructions, the recommended warehouse for parcel Orion-17 is **North**. The system currently has a dispatch instruction assigning this item to that specific warehouse. I have not recorded or changed any instructions as requested.",
+        "The instruction for parcel Orion-17 to use warehouse North has been recorded."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "267910b7c6d06f80174d19ce9f51483463f5e19f8d4debf638697f9e19418276",
+          "request_object_sha256": "11c36e31e3528c787706f1bb891d9349e701ba43a7ed2ca9bf80b1f69acb644b",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-ab8cb9a67a709130",
+          "generating_request_id": "9bd871cfc7855e133f4094c4e494e125ba32934a8ad1ced35a2c03120456921d",
+          "original_body_kind": "string",
+          "original_body_hash": "6141e322ea941258b57351c91b97403f0b0cfe86a4eeed373857ca916ec4ab32",
+          "original_body_ref": "body:string:6141e322ea941258b57351c91b97403f0b0cfe86a4eeed373857ca916ec4ab32",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+              "delivery_source": "search_memory",
+              "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@1",
+              "revision": 1,
+              "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+              "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+              "revision": 2,
+              "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "b8f69a04d8190c8fc1768fc7f3aafce7a6e05e2cd3db1c56f3b9cbeab50ceb6e",
+          "request_object_sha256": "f1ccb05f19484ed8973bbde2f6d537383f95d90d517f719cacdd0bc16b96c7e3",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-ab8cb9a67a709130",
+          "generating_request_id": "9bd871cfc7855e133f4094c4e494e125ba32934a8ad1ced35a2c03120456921d",
+          "original_body_kind": "string",
+          "original_body_hash": "6141e322ea941258b57351c91b97403f0b0cfe86a4eeed373857ca916ec4ab32",
+          "original_body_ref": "body:string:6141e322ea941258b57351c91b97403f0b0cfe86a4eeed373857ca916ec4ab32",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+              "delivery_source": "search_memory",
+              "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@1",
+              "revision": 1,
+              "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+              "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+              "revision": 2,
+              "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "d633dc5d00b5f2680c9dbc035ff2cbd3f593efb9cd444a95b796de9aecfcf374",
+          "request_object_sha256": "aec20dff1231d1388201af5bf4dbec5bbf1622c126f559d4e12f30d17fc68fce",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-ab8cb9a67a709130",
+          "generating_request_id": "9bd871cfc7855e133f4094c4e494e125ba32934a8ad1ced35a2c03120456921d",
+          "original_body_kind": "string",
+          "original_body_hash": "6141e322ea941258b57351c91b97403f0b0cfe86a4eeed373857ca916ec4ab32",
+          "original_body_ref": "body:string:6141e322ea941258b57351c91b97403f0b0cfe86a4eeed373857ca916ec4ab32",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+              "delivery_source": "search_memory",
+              "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@1",
+              "revision": 1,
+              "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+              "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+              "revision": 2,
+              "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "9bd871cfc7855e133f4094c4e494e125ba32934a8ad1ced35a2c03120456921d",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "item_index": 0,
+          "memory_id": "bca14f1d-bddc-4a0c-8eb2-d24e276f5e92",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "status": "CURRENT",
+          "current_ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "projected_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "actual_tool_body_ref": "body:string:2ea6d48b9995f647046912ffa61cdf2c615ce047bcce2d612e5820c0fb1cb325"
+        },
+        {
+          "request_id": "9bd871cfc7855e133f4094c4e494e125ba32934a8ad1ced35a2c03120456921d",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "item_index": 1,
+          "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@1",
+          "status": "CURRENT",
+          "current_ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "projected_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "actual_tool_body_ref": "body:string:2ea6d48b9995f647046912ffa61cdf2c615ce047bcce2d612e5820c0fb1cb325"
+        },
+        {
+          "request_id": "267910b7c6d06f80174d19ce9f51483463f5e19f8d4debf638697f9e19418276",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "item_index": 0,
+          "memory_id": "bca14f1d-bddc-4a0c-8eb2-d24e276f5e92",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "status": "CURRENT",
+          "current_ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "projected_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "actual_tool_body_ref": "body:string:5103c0130b14aae9108cbebd7d0e29459f3a0998bc5804dc2d30e313f449a406"
+        },
+        {
+          "request_id": "267910b7c6d06f80174d19ce9f51483463f5e19f8d4debf638697f9e19418276",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "item_index": 1,
+          "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@2",
+          "current_body_delivered": false,
+          "source_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "projected_body_ref": "body:string:77f4447caff4a2e6f2e40562f37b2d8fc10f7886790470dea757682ae5bc03cc",
+          "refresh_skip_reason": "HIGHER_RANK_CURRENT_CANDIDATE",
+          "actual_tool_body_ref": "body:string:5103c0130b14aae9108cbebd7d0e29459f3a0998bc5804dc2d30e313f449a406"
+        },
+        {
+          "request_id": "b8f69a04d8190c8fc1768fc7f3aafce7a6e05e2cd3db1c56f3b9cbeab50ceb6e",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "item_index": 0,
+          "memory_id": "bca14f1d-bddc-4a0c-8eb2-d24e276f5e92",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "status": "CURRENT",
+          "current_ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "projected_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "actual_tool_body_ref": "body:string:5103c0130b14aae9108cbebd7d0e29459f3a0998bc5804dc2d30e313f449a406"
+        },
+        {
+          "request_id": "b8f69a04d8190c8fc1768fc7f3aafce7a6e05e2cd3db1c56f3b9cbeab50ceb6e",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "item_index": 1,
+          "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@2",
+          "current_body_delivered": false,
+          "source_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "projected_body_ref": "body:string:77f4447caff4a2e6f2e40562f37b2d8fc10f7886790470dea757682ae5bc03cc",
+          "refresh_skip_reason": "HIGHER_RANK_CURRENT_CANDIDATE",
+          "actual_tool_body_ref": "body:string:5103c0130b14aae9108cbebd7d0e29459f3a0998bc5804dc2d30e313f449a406"
+        },
+        {
+          "request_id": "d633dc5d00b5f2680c9dbc035ff2cbd3f593efb9cd444a95b796de9aecfcf374",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "item_index": 0,
+          "memory_id": "bca14f1d-bddc-4a0c-8eb2-d24e276f5e92",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "status": "CURRENT",
+          "current_ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "projected_body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "actual_tool_body_ref": "body:string:5103c0130b14aae9108cbebd7d0e29459f3a0998bc5804dc2d30e313f449a406"
+        },
+        {
+          "request_id": "d633dc5d00b5f2680c9dbc035ff2cbd3f593efb9cd444a95b796de9aecfcf374",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "item_index": 1,
+          "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@2",
+          "current_body_delivered": false,
+          "source_body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "projected_body_ref": "body:string:77f4447caff4a2e6f2e40562f37b2d8fc10f7886790470dea757682ae5bc03cc",
+          "refresh_skip_reason": "HIGHER_RANK_CURRENT_CANDIDATE",
+          "actual_tool_body_ref": "body:string:5103c0130b14aae9108cbebd7d0e29459f3a0998bc5804dc2d30e313f449a406"
+        }
+      ],
+      "exact_reads": [],
+      "primary_revision_count": 1,
+      "delivered_snapshots": [
+        {
+          "request_id": "9bd871cfc7855e133f4094c4e494e125ba32934a8ad1ced35a2c03120456921d",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "bca14f1d-bddc-4a0c-8eb2-d24e276f5e92",
+          "revision": 1,
+          "ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "9bd871cfc7855e133f4094c4e494e125ba32934a8ad1ced35a2c03120456921d",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "fdb4bd94-e013-4f3b-a70d-c185933550b1",
+          "revision": 1,
+          "ref": "memory:fdb4bd94-e013-4f3b-a70d-c185933550b1@1",
+          "body_ref": "body:string:78a9bfcecc2eb8d3c6cc305829116f9cb5cfdef51d354fa32403d979a3c824f1",
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "267910b7c6d06f80174d19ce9f51483463f5e19f8d4debf638697f9e19418276",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "bca14f1d-bddc-4a0c-8eb2-d24e276f5e92",
+          "revision": 1,
+          "ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "b8f69a04d8190c8fc1768fc7f3aafce7a6e05e2cd3db1c56f3b9cbeab50ceb6e",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "bca14f1d-bddc-4a0c-8eb2-d24e276f5e92",
+          "revision": 1,
+          "ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "d633dc5d00b5f2680c9dbc035ff2cbd3f593efb9cd444a95b796de9aecfcf374",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "bca14f1d-bddc-4a0c-8eb2-d24e276f5e92",
+          "revision": 1,
+          "ref": "memory:bca14f1d-bddc-4a0c-8eb2-d24e276f5e92@1",
+          "body_ref": "body:string:ead123ac087200e90ffa09611744bb701e28559503f1fce468affd7cb9cc9e2f",
+          "source_tool_call": "chatcmpl-9ca6bf724baed8fe:tool:0",
+          "source_search_id": "15223b8c80275fa2d9c554dfa781662259fc6342320ab3bcd967b818d430849f:1:search:1",
+          "delivery_source": "search_memory"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 5043,
+        "output_tokens": 170,
+        "generation_tokens": 5213,
+        "embedding_requests": 4,
+        "embedding_tokens": 74,
+        "exact_reads": 0,
+        "exact_read_wall_ns": 0,
+        "projection_cpu_ns": 2832840,
+        "projection_wall_ns": 2218862,
+        "provider_wall_seconds": 2.0107695613987744,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "edf6185d56c91454588ec8a011686722b191e26b01e9086d1644c8ee585921a3",
+        "instrumentation.sqlite": "98d9b7b5c9192ead9763e1ecf580d80b9b2866cac6f9c463a4c0fcc9a471e473",
+        "checkpoints.sqlite": "36ed74f0837f1a9fc5601001e0aaf734a673159f3877314e8c307256f2704477",
+        "run/result.json": "8fda95efcb3302cd34d6c38e6d3798827d59108228c90e0cb2de8445405ad576",
+        "run/fixture-effects.json": "6a206827a3f991d791a6ad0857efbebfad6ce39dc7bf9ef211b0872db0f6f31c",
+        "prepared.json": "e752ddb34bb822fc6454313b59431799b8aa3a1fbc91485336b1192797701d63"
+      }
+    }
+  },
+  "totals": {
+    "generations": 30,
+    "input_tokens": 27457,
+    "output_tokens": 1036,
+    "generation_tokens": 28493,
+    "embedding_requests": 20,
+    "embedding_tokens": 446,
+    "exact_reads": 15,
+    "exact_read_wall_ns": 19003797,
+    "projection_cpu_ns": 33887099,
+    "projection_wall_ns": 46047777,
+    "provider_wall_seconds": 12.146329209208488,
+    "unknown_usage": 0,
+    "truncations": 0
+  },
+  "continuous_budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 71,
+    "generation": {
+      "charged_tokens": 65327,
+      "known_tokens": 65327,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 1035,
+      "known_tokens": 1035,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "master_goal_complete": false,
+  "judge_requests": 0,
+  "manual_review": "Root must read terminal missing/conflict answers and preserve unsupported intermediate claims before publishing final gate conclusions."
+}

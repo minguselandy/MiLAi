@@ -62,6 +62,16 @@ the known sdist `/data/diagnostics` inclusion fix; do not claim that packaging i
 Proceed to configurable rank-bounded refresh with preserved A4 comparator, then P6/P7.
 Eight development controls are not formal/unseen efficacy and do not complete the master Goal.
 
+P5 R1 now has the configurable A5 rank/count policy and matched A4. Preserve strict 2/6:
+the four failures shorten target `item` references despite correct current numeric values;
+irrelevant passes both arms, with gets 3 -> 0 but tokens 5161 -> 5213. See
+[P5 R1 failure analysis](docs/MILAI_SER_V21_P5_R1_RESULTS_20260927.md). Next diagnose the
+generic full-reference tool contract on only the two affected cases, not a SER semantic rule.
+Mapping `142ce5dfcc5ecf0f79166cff0c1ad710daeff5e8aac3010ee74db50ad8de70e2` has 11 necessary
+checks/static/boundary passes and one successful cumulative build including all diagnostics.
+No need to repeat that build/test group for fixture/docs-only changes. Continuous SER costs
+are 71 generations / 65327 tokens / 1035 embedding tokens / 33 exact reads.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

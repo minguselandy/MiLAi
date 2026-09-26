@@ -200,6 +200,108 @@ def test_exact_refresh_deduplicates_and_keeps_uncertain_reads_quarantined() -> N
     assert failed.items[0]["current_body_delivered"] is False
 
 
+def test_rank_bounded_refresh_uses_actual_search_order_and_exact_read_cap() -> None:
+    namespace = ("langmem", "run", "a5_rank_bounded_rebase", "user")
+    store = InMemoryStore()
+    old: dict[str, dict[str, Any]] = {}
+    latest: dict[str, dict[str, Any]] = {}
+    for name in ("x", "y", "current", "deleted"):
+        store.put(namespace, name, {"content": f"old-{name}"})
+        item = store.get(namespace, name)
+        assert item is not None
+        old[name] = item.dict()
+        if name == "deleted":
+            latest[name] = {"revision": 2, "tombstone": 1}
+            store.delete(namespace, name)
+        elif name == "current":
+            latest[name] = {"revision": 1, "tombstone": 0,
+                            "post_item_json": canonical_json(item.dict())}
+        else:
+            store.put(namespace, name, {"content": f"new-{name}"})
+            item = store.get(namespace, name)
+            assert item is not None
+            latest[name] = {"revision": 2, "tombstone": 0,
+                            "post_item_json": canonical_json(item.dict())}
+    unknown = {"namespace": list(namespace), "key": "unknown",
+               "value": {"content": "unversioned"}}
+
+    def search(call_id: str, names: list[str]) -> tuple[dict[str, Any], dict[str, Any]]:
+        items = [unknown if name == "unknown" else old[name] for name in names]
+        body = json.dumps(items, ensure_ascii=False, separators=(",", ":"))
+        entries = [{"namespace": list(namespace), "memory_id": name,
+                    "revision": None if name == "unknown" else 1,
+                    "revision_status": "UNKNOWN" if name == "unknown" else "EXACT",
+                    "body_ref": content_identity(item["value"]["content"])[2],
+                    "store_item": item} for name, item in zip(names, items, strict=True)]
+        return ({"role": "tool", "tool_call_id": call_id, "content": body},
+                {"thread_id": "thread", "call_id": call_id,
+                 "search_id": call_id + ":search", "status": "returned",
+                 "tool_message_body_ref": content_identity(body)[2],
+                 "returned_json": json.dumps(entries)})
+
+    class Sidecar:
+        def __init__(self, rows: list[dict[str, Any]]) -> None:
+            self.searches = rows
+
+        def rows(self, table: str) -> list[dict[str, Any]]:
+            assert table == "searches"
+            return self.searches
+
+        def latest_revision(self, ns: tuple[str, ...], memory_id: str) -> dict[str, Any] | None:
+            assert ns == namespace
+            return latest.get(memory_id)
+
+    calls: list[str] = []
+
+    def get(ns: tuple[str, ...], memory_id: str) -> Any:
+        assert ns == namespace
+        calls.append(memory_id)
+        return store.get(ns, memory_id, refresh_ttl=False)
+
+    def project(names: list[str], getter: Any = get) -> Any:
+        message, row = search("first", names)
+        return project_current_evidence(
+            [message], Sidecar([row]), "thread", getter,  # type: ignore[arg-type]
+            refresh_until_current_candidate=True, max_exact_refresh_per_search=1)
+
+    higher_current = project(["current", "x"])
+    assert calls == []
+    assert higher_current.items[1]["refresh_skip_reason"] == (
+        "HIGHER_RANK_CURRENT_CANDIDATE")
+    assert "old-x" not in higher_current.messages[0]["content"]
+
+    higher_stale = project(["x", "y"])
+    assert calls == ["x"] and len(higher_stale.exact_reads) == 1
+    assert higher_stale.items[0]["delivery_source"] == "public Store.get"
+    assert higher_stale.items[1]["refresh_skip_reason"] == (
+        "HIGHER_RANK_CURRENT_CANDIDATE")
+    assert "new-x" in higher_stale.messages[0]["content"]
+    assert "new-y" not in higher_stale.messages[0]["content"]
+
+    calls.clear()
+    first, first_row = search("first", ["x"])
+    second, second_row = search("second", ["x"])
+    repeated = project_current_evidence(
+        [first, second], Sidecar([first_row, second_row]), "thread", get,  # type: ignore[arg-type]
+        refresh_until_current_candidate=True, max_exact_refresh_per_search=1)
+    assert calls == ["x"] and len(repeated.exact_reads) == 1
+    assert repeated.items[1]["current_body_delivered"] is True
+    assert "Current revision body is absent" not in repeated.messages[1]["content"]
+
+    calls.clear()
+
+    def absent(ns: tuple[str, ...], memory_id: str) -> None:
+        calls.append(memory_id)
+        return None
+
+    uncertain = project(["unknown", "deleted", "x", "y"], absent)
+    assert calls == ["x"] and uncertain.exact_reads[0]["status"] == "UNKNOWN_NOT_FOUND"
+    assert [item["status"] for item in uncertain.items[:2]] == ["UNKNOWN", "DELETED"]
+    assert uncertain.items[3]["refresh_skip_reason"] == "SEARCH_EXACT_READ_LIMIT"
+    assert all("withheld" in json.loads(uncertain.messages[0]["content"])[index][
+        "value"]["content"] for index in (1, 2, 3))
+
+
 def test_lineage_uses_namespace_revision_and_response_id() -> None:
     snapshot = [{"namespace": ["run", "user"], "memory_id": "same-id",
                  "revision": 1, "ref": "memory:same-id@1", "body_ref": "body:old"}]
@@ -374,12 +476,12 @@ def test_mixed_projection_actual_material_and_completed_replay(
 
 
 @pytest.mark.parametrize("omit_old_search", [False, True])
+@pytest.mark.parametrize("arm", ["a4_selective_rebase", "a5_rank_bounded_rebase"])
 def test_rebase_binds_equal_text_to_response_identity_across_restart(
-    tmp_path: Path, omit_old_search: bool,
+    tmp_path: Path, omit_old_search: bool, arm: str,
 ) -> None:
     sidecar_path = tmp_path / "sidecar.sqlite"
     checkpoint_path = tmp_path / "checkpoint.sqlite"
-    arm = "a4_selective_rebase"
     scope = FoundationScope("run", arm, "user", "episode")
     inner = InMemoryStore(index={"dims": 2, "embed": FixedEmbeddings(),
                                  "fields": ["content"]})
@@ -404,7 +506,11 @@ def test_rebase_binds_equal_text_to_response_identity_across_restart(
         client.emit = emit
         model = VLLMChatModel(client=client, observer=observer,
                               projection=ProjectionController(
-                                  observer, emit, arm=arm, store=store, stage="v20"))
+                                  observer, emit, arm=arm, store=store, stage="v21",
+                                  refresh_until_current_candidate=(
+                                      arm == "a5_rank_bounded_rebase"),
+                                  max_exact_refresh_per_search=(
+                                      1 if arm == "a5_rank_bounded_rebase" else None)))
         if omit_old_search:
             model.request_view = SearchResultRequestView(
                 {"omit_search_results_before_public_index": 2,

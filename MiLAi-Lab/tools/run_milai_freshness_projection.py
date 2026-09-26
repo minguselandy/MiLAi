@@ -37,6 +37,8 @@ from milai_lab.methods.freshness_projection.identity import (
     verify_prepared,
     verify_ser_lock,
     verify_ser_prepared,
+    verify_ser_v21_lock,
+    verify_ser_v21_prepared,
 )
 from milai_lab.methods.freshness_projection.projection import SOURCE_AUTHORITY
 from milai_lab.methods.on_demand_reconstruction.controller import ODRController
@@ -48,8 +50,11 @@ from run_langmem_provenance import _trace_emit
 
 
 def prepare(args: argparse.Namespace) -> dict[str, Any]:
-    ser = getattr(args, "stage_identity", "v19") == "v20"
-    if ser:
+    stage_identity = getattr(args, "stage_identity", "v19")
+    ser = stage_identity in {"v20", "v21"}
+    if stage_identity == "v21":
+        verify_ser_v21_lock(args.lock, args.config)
+    elif ser:
         verify_ser_lock(args.lock, args.config)
     else:
         verify_lock(args.lock, args.config, args.arm)
@@ -62,7 +67,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
             or len(fixture["public_messages"]) != freeze["public_messages"]):
         raise ValueError("PROJECTION_MECHANISM_FIXTURE_CHANGED")
     receipt = {"status": "PREPARED_ZERO_MODEL",
-               "method": "ser_v20" if ser else "freshness_projection",
+               "method": f"ser_{stage_identity}" if ser else "freshness_projection",
                "run_id": args.run, "arm_id": args.arm, "mode": "mechanism",
                "lock_sha256": sha256_file(args.lock),
                "config_sha256": sha256_file(args.config),
@@ -74,8 +79,10 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
-    ser = getattr(args, "stage_identity", "v19") == "v20"
-    verify = verify_ser_prepared if ser else verify_prepared
+    stage_identity = getattr(args, "stage_identity", "v19")
+    ser = stage_identity in {"v20", "v21"}
+    verify = (verify_ser_v21_prepared if stage_identity == "v21" else
+              verify_ser_prepared if ser else verify_prepared)
     lock_sha = verify(args.prepared, args.lock, args.config,
                       run_id=args.run, arm_id=args.arm, fixture_path=args.fixture)
     if read_json(args.prepared)["freeze_sha256"] != sha256_file(args.mechanism_freeze):
@@ -118,11 +125,18 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     notice = (ODRController(observer, "freshness_only",
                                             Path(config["trace_path"]))
                               if args.arm == "a1_notice" else None)
+                    policy = (config.get("refresh_policy", {})
+                              if args.arm == "a5_rank_bounded_rebase" else {})
                     projection = (ProjectionController(observer, emit,
                                                       arm=args.arm, store=store,
-                                                      stage="v20" if ser else "v19")
+                                                      stage=stage_identity,
+                                                      refresh_until_current_candidate=policy.get(
+                                                          "refresh_until_current_candidate", False),
+                                                      max_exact_refresh_per_search=policy.get(
+                                                          "max_exact_refresh_per_search"))
                                   if args.arm in {"a2_quarantine", "a3_exact_refresh",
-                                                  "a4_selective_rebase"}
+                                                  "a4_selective_rebase",
+                                                  "a5_rank_bounded_rebase"}
                                   else None)
                     model = VLLMChatModel(
                         client=host, capacity_path=Path(config["message_capacity_path"]),
@@ -141,7 +155,8 @@ def schema(fixture_path: Path | None, arm: str) -> dict[str, Any]:
     if fixture_path is not None:
         tools.append(read_json(fixture_path)["business_tool_schema"])
     protocol = _action_prompt(tools)
-    if arm in {"a2_quarantine", "a3_exact_refresh", "a4_selective_rebase"}:
+    if arm in {"a2_quarantine", "a3_exact_refresh", "a4_selective_rebase",
+               "a5_rank_bounded_rebase"}:
         protocol += "\n" + SOURCE_AUTHORITY
     return {"schema": _action_schema(tools, generation_only=True),
             "protocol": protocol, "arm_id": arm,
@@ -158,7 +173,7 @@ def main() -> None:
         item.add_argument("--lock", type=Path)
         item.add_argument("--mode", choices=("mechanism",), default="mechanism")
         item.add_argument("--run", required=True)
-        item.add_argument("--arm", choices=ARMS[:-1], required=True)
+        item.add_argument("--arm", choices=ARMS[:4], required=True)
         item.add_argument("--fixture", type=Path, required=True)
         item.add_argument("--mechanism-freeze", type=Path, required=True)
         item.add_argument("--output", type=Path, required=True)
@@ -167,7 +182,7 @@ def main() -> None:
             item.add_argument("--stage", required=True)
     spec = commands.add_parser("schema")
     spec.add_argument("--fixture", type=Path)
-    spec.add_argument("--arm", choices=ARMS[:-1], default="a2_quarantine")
+    spec.add_argument("--arm", choices=ARMS[:4], default="a2_quarantine")
     args = parser.parse_args()
     if args.command in {"prepare", "run"} and args.lock is None:
         stage = "a3" if args.arm == "a3_exact_refresh" else "a2"

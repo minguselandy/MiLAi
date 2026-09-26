@@ -25,8 +25,10 @@ RECIPE_ID = "milai-freshness-projection-json-action-v1"
 TRANSPORT_VARIANT = "json_action_freshness_projection_v1"
 SER_RECIPE_ID = "milai-ser-v20-json-action-v1"
 SER_TRANSPORT_VARIANT = "json_action_ser_v20_v1"
+SER_V21_RECIPE_ID = "milai-ser-v21-json-action-v1"
+SER_V21_TRANSPORT_VARIANT = "json_action_ser_v21_v1"
 ARMS = ("b1_control", "a1_notice", "a2_quarantine", "a3_exact_refresh",
-        "a4_selective_rebase")
+        "a4_selective_rebase", "a5_rank_bounded_rebase")
 
 
 class ProjectionController:
@@ -34,19 +36,29 @@ class ProjectionController:
 
     def __init__(self, observer: ProvenanceObserver, emit: Any = None,
                  *, arm: str = "a2_quarantine", store: BaseStore | None = None,
-                 stage: str = "v19") -> None:
-        if arm not in {"a2_quarantine", "a3_exact_refresh", "a4_selective_rebase"}:
+                 stage: str = "v19", refresh_until_current_candidate: bool = False,
+                 max_exact_refresh_per_search: int | None = None) -> None:
+        if arm not in {"a2_quarantine", "a3_exact_refresh", "a4_selective_rebase",
+                       "a5_rank_bounded_rebase"}:
             raise ValueError("PROJECTION_ARM_INVALID")
-        if arm in {"a3_exact_refresh", "a4_selective_rebase"} and store is None:
+        if arm in {"a3_exact_refresh", "a4_selective_rebase",
+                   "a5_rank_bounded_rebase"} and store is None:
             raise ValueError("PROJECTION_EXACT_STORE_MISSING")
-        if stage not in {"v19", "v20"} or (arm == "a4_selective_rebase" and stage != "v20"):
+        if stage not in {"v19", "v20", "v21"} or (
+            arm == "a4_selective_rebase" and stage not in {"v20", "v21"}
+        ) or (arm == "a5_rank_bounded_rebase" and stage != "v21"):
             raise ValueError("PROJECTION_STAGE_INVALID")
         self.observer = observer
         self.emit = emit
         self.arm = arm
         self.store = store
         self.stage = stage
-        self.recipe_id = SER_RECIPE_ID if stage == "v20" else RECIPE_ID
+        self.recipe_id = (SER_V21_RECIPE_ID if stage == "v21" else
+                          SER_RECIPE_ID if stage == "v20" else RECIPE_ID)
+        self.refresh_until_current_candidate = (
+            refresh_until_current_candidate if arm == "a5_rank_bounded_rebase" else False)
+        self.max_exact_refresh_per_search = (
+            max_exact_refresh_per_search if arm == "a5_rank_bounded_rebase" else None)
 
     @staticmethod
     def _identity(message_key: str | None, request_index: int) -> tuple[str, int, str]:
@@ -77,11 +89,14 @@ class ProjectionController:
             messages, self.observer.sidecar, thread_id,
             get_current=(lambda namespace, memory_id: store.get(
                 namespace, memory_id, refresh_ttl=False))
-            if store is not None and self.arm in {"a3_exact_refresh", "a4_selective_rebase"}
+            if store is not None and self.arm in {"a3_exact_refresh", "a4_selective_rebase",
+                                                   "a5_rank_bounded_rebase"}
             else None,
             record_exact_read=record_read,
+            refresh_until_current_candidate=self.refresh_until_current_candidate,
+            max_exact_refresh_per_search=self.max_exact_refresh_per_search,
         )
-        if self.arm != "a4_selective_rebase":
+        if self.arm not in {"a4_selective_rebase", "a5_rank_bounded_rebase"}:
             result = factual
         else:
             if graph_messages is None:
@@ -153,6 +168,10 @@ class ProjectionController:
                                  for item in projected.items],
                        "exact_reads": projected.exact_reads,
                        "exact_store_reads": len(projected.exact_reads),
+                       "refresh_policy": {
+                           "refresh_until_current_candidate": self.refresh_until_current_candidate,
+                           "max_exact_refresh_per_search": self.max_exact_refresh_per_search,
+                       },
                        "projection_cpu_ns": projected.projection_cpu_ns,
                        "projection_wall_ns": projected.projection_wall_ns,
                        "projection_timing_scope": "inclusive_of_exact_store_get",
@@ -164,7 +183,7 @@ class ProjectionController:
                       response_id: str, content: str,
                       exact_snapshot: list[dict[str, Any]],
                       unknown_items: int) -> None:
-        if self.stage != "v20":
+        if self.stage not in {"v20", "v21"}:
             return
         thread_id, public_index, request_id = self._identity(message_key, request_index)
         bound = self.observer.sidecar.record_assistant_lineage(

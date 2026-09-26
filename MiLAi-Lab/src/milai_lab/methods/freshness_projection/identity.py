@@ -11,6 +11,8 @@ from milai_lab.methods.freshness_projection.controller import (
     RECIPE_ID,
     SER_RECIPE_ID,
     SER_TRANSPORT_VARIANT,
+    SER_V21_RECIPE_ID,
+    SER_V21_TRANSPORT_VARIANT,
     TRANSPORT_VARIANT,
 )
 
@@ -37,6 +39,10 @@ REQUIRED_SER_RUNTIME = REQUIRED_RUNTIME | {
     "src/milai_lab/methods/freshness_projection/lineage.py",
     "tools/run_milai_ser.py",
     "configs/milai-ser-v20.json",
+}
+REQUIRED_SER_V21_RUNTIME = REQUIRED_SER_RUNTIME | {
+    "tools/run_milai_ser_v21.py",
+    "configs/milai-ser-v21.json",
 }
 
 
@@ -88,15 +94,17 @@ def verify_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
     return expected["lock_sha256"]
 
 
-def verify_ser_lock(lock_path: Path, config_path: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+def _verify_ser_lock(lock_path: Path, config_path: Path, *, kind: str,
+                     recipe_id: str, transport_variant: str,
+                     required_runtime: set[str]) -> tuple[dict[str, Any], dict[str, Any]]:
     reference, lock, config = (read_json(SER_REFERENCE), read_json(lock_path),
                                read_json(config_path))
     expected = {
-        "kind": "MILAI_SER_V20_LOCK", "status": "FROZEN",
+        "kind": kind, "status": "FROZEN",
         "reference_manifest_sha256": sha256_file(SER_REFERENCE),
         "master_plan_sha256": sha256_file(MASTER_PLAN),
-        "recipe_id": SER_RECIPE_ID,
-        "transport_variant": SER_TRANSPORT_VARIANT,
+        "recipe_id": recipe_id,
+        "transport_variant": transport_variant,
     }
     for key, value in expected.items():
         if lock.get(key) != value:
@@ -104,7 +112,7 @@ def verify_ser_lock(lock_path: Path, config_path: Path) -> tuple[dict[str, Any],
     if reference["master_plan_sha256"] != sha256_file(MASTER_PLAN):
         raise ValueError("SER_MASTER_PLAN_CHANGED")
     source_map = lock.get("source_sha256")
-    if not isinstance(source_map, dict) or not REQUIRED_SER_RUNTIME <= source_map.keys():
+    if not isinstance(source_map, dict) or not required_runtime <= source_map.keys():
         raise ValueError("SER_SOURCE_MAP_MISSING")
     if lock.get("source_mapping_sha256") != digest(source_map):
         raise ValueError("SER_SOURCE_MAPPING_HASH_CHANGED")
@@ -118,10 +126,25 @@ def verify_ser_lock(lock_path: Path, config_path: Path) -> tuple[dict[str, Any],
     if ((config["capacity"] | {"tokenizer_path": ""})
             != (baseline["capacity"] | {"tokenizer_path": ""})):
         raise ValueError("SER_CONFIG_CAPACITY_CHANGED")
-    if (config["recipe_id"] != SER_RECIPE_ID
-            or config["transport_variant"] != SER_TRANSPORT_VARIANT):
+    if (config["recipe_id"] != recipe_id
+            or config["transport_variant"] != transport_variant):
         raise ValueError("SER_CONFIG_RECIPE_CHANGED")
     return lock, config
+
+
+def verify_ser_lock(lock_path: Path, config_path: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+    return _verify_ser_lock(
+        lock_path, config_path, kind="MILAI_SER_V20_LOCK",
+        recipe_id=SER_RECIPE_ID, transport_variant=SER_TRANSPORT_VARIANT,
+        required_runtime=REQUIRED_SER_RUNTIME)
+
+
+def verify_ser_v21_lock(lock_path: Path, config_path: Path,
+                        ) -> tuple[dict[str, Any], dict[str, Any]]:
+    return _verify_ser_lock(
+        lock_path, config_path, kind="MILAI_SER_V21_LOCK",
+        recipe_id=SER_V21_RECIPE_ID, transport_variant=SER_V21_TRANSPORT_VARIANT,
+        required_runtime=REQUIRED_SER_V21_RUNTIME)
 
 
 def verify_ser_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
@@ -129,6 +152,21 @@ def verify_ser_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
     verify_ser_lock(lock_path, config_path)
     receipt = read_json(receipt_path)
     expected = {"status": "PREPARED_ZERO_MODEL", "method": "ser_v20",
+                "run_id": run_id, "arm_id": arm_id,
+                "lock_sha256": sha256_file(lock_path),
+                "config_sha256": sha256_file(config_path),
+                "fixture_sha256": sha256_file(fixture_path)}
+    for key, value in expected.items():
+        if receipt.get(key) != value:
+            raise ValueError("SER_PREPARED_" + key.upper() + "_CHANGED")
+    return expected["lock_sha256"]
+
+
+def verify_ser_v21_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
+                            *, run_id: str, arm_id: str, fixture_path: Path) -> str:
+    verify_ser_v21_lock(lock_path, config_path)
+    receipt = read_json(receipt_path)
+    expected = {"status": "PREPARED_ZERO_MODEL", "method": "ser_v21",
                 "run_id": run_id, "arm_id": arm_id,
                 "lock_sha256": sha256_file(lock_path),
                 "config_sha256": sha256_file(config_path),

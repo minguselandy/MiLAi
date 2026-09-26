@@ -1,0 +1,362 @@
+{
+  "kind": "MILAI_SER_V21_P5_FREEZE",
+  "status": "FROZEN_BEFORE_STAGE_REQUESTS",
+  "created_at": "2026-09-26T17:03:29.761857+00:00",
+  "lock_sha256": "3ac92f27d6ac890ff66d03ce1ffbf7d4b160f34d87a4f23ede8a1d7b2c0ede83",
+  "source_mapping_sha256": "142ce5dfcc5ecf0f79166cff0c1ad710daeff5e8aac3010ee74db50ad8de70e2",
+  "protocol_sha256": "8173d4934ebfc2469d78325b16e1eda268597e6a3e7304f7c8131af27904b8d9",
+  "goal_sha256": "a2b1b958589c7d8a4fc05d05a2f44448f7cb101d69c909979ecc1c0903367080",
+  "rubric_sha256": "190726ede3276ec830c11f546162541bc690bf761d20bbcf1809371caf73d405",
+  "p4_checkpoint": "3ecad01dcf2f3f07bc4a44926848597a2e63f71b",
+  "p4_result_sha256": "7d2a6119e74f949c866fe23cfec413f50924fae28f86893de53d75be15123d34",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "base_commit": "3ecad01dcf2f3f07bc4a44926848597a2e63f71b",
+    "stage": "P5_A4_A5_MATCHED",
+    "arm_ids": [
+      "a4_selective_rebase",
+      "a5_rank_bounded_rebase"
+    ],
+    "identity": {
+      "config": "configs/milai-ser-v21.json",
+      "cli": "tools/run_milai_ser_v21.py",
+      "lock_expected": "data/locks/milai-ser-v21-p5.lock.json",
+      "lock_kind": "MILAI_SER_V21_LOCK",
+      "reference": "data/manifests/milai-ser-v20-reference.json",
+      "recipe_id": "milai-ser-v21-json-action-v1",
+      "transport_variant": "json_action_ser_v21_v1",
+      "prepare_method": "ser_v21",
+      "budget_path": "artifacts/ser-v20/budget.json"
+    },
+    "policy": {
+      "a4_selective_rebase": {
+        "refresh_until_current_candidate": false,
+        "max_exact_refresh_per_search": null
+      },
+      "a5_rank_bounded_rebase": {
+        "refresh_until_current_candidate": true,
+        "max_exact_refresh_per_search": 1
+      }
+    },
+    "changed_source": [
+      "src/milai_lab/methods/freshness_projection/projection.py",
+      "src/milai_lab/methods/freshness_projection/controller.py",
+      "src/milai_lab/methods/freshness_projection/identity.py",
+      "tools/run_milai_freshness_projection.py",
+      "tools/run_milai_ser_v21.py",
+      "configs/milai-ser-v21.json",
+      "pyproject.toml",
+      "tests/unit/test_freshness_projection.py"
+    ],
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py",
+        "result": "PASS 11 tests; 13 dependency deprecation warnings"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/freshness_projection tools/run_milai_freshness_projection.py tools/run_milai_ser_v21.py tests/unit/test_freshness_projection.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy src/milai_lab/methods/freshness_projection tools/run_milai_freshness_projection.py tools/run_milai_ser_v21.py",
+        "result": "PASS 7 source files"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-tools-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync python tools/run_milai_ser_v21.py schema --fixture data/diagnostics/selective_adaptation_v1/numeric_amount.json --arm a5_rank_bounded_rebase",
+        "result": "PASS; existing JSON action schema and source-authority protocol"
+      },
+      {
+        "command": "uv run --no-sync python -c '<v20/v21 service, capacity, budget and rank policy parity assertions>'",
+        "result": "PASS"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      }
+    ],
+    "packaging": "pyproject sdist includes /data/diagnostics and the new v21 lock path; build deferred until the lock is frozen",
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_receipt": 0
+  },
+  "package_verification": {
+    "status": "PASS",
+    "stage": "P5_SER_V21",
+    "lock": "data/locks/milai-ser-v21-p5.lock.json",
+    "lock_sha256": "3ac92f27d6ac890ff66d03ce1ffbf7d4b160f34d87a4f23ede8a1d7b2c0ede83",
+    "source_mapping_sha256": "142ce5dfcc5ecf0f79166cff0c1ad710daeff5e8aac3010ee74db50ad8de70e2",
+    "identity_check": {
+      "command": "uv run --no-sync python -c 'from pathlib import Path; from milai_lab.methods.freshness_projection.identity import verify_ser_v21_lock; verify_ser_v21_lock(Path(\"data/locks/milai-ser-v21-p5.lock.json\"), Path(\"configs/milai-ser-v21.json\"))'",
+      "result": "PASS"
+    },
+    "build": {
+      "command": "uv build --out-dir artifacts/ser-v21/dist",
+      "result": "PASS; one build after P5 source lock",
+      "sdist": "artifacts/ser-v21/dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "2cd09a0447e2a6dfd67ffbb2dc369344738f610b3e738384784efcb6db9c04a4",
+      "wheel": "artifacts/ser-v21/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "4b2798c49e863c35616a112c62be6af440345f284086e5c7a2cc98ba4f8d4ce6"
+    },
+    "members": {
+      "command": "uv run --no-sync python - <<'PY' ... tarfile/zipfile member assertions ... PY",
+      "result": "PASS",
+      "sdist_member_count": 1633,
+      "diagnostic_files_in_sdist": 25,
+      "included": [
+        "data/diagnostics/selective_adaptation_v1",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "configs/milai-ser-v21.json",
+        "tools/run_milai_ser_v21.py",
+        "src/milai_lab/methods/freshness_projection"
+      ],
+      "wheel_member_count": 137,
+      "wheel_freshness_projection_included": true
+    },
+    "note": "The first member-check command used unavailable system python and exited 127; the identical read-only check passed under uv run --no-sync python. No second build or source change occurred.",
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_lock": 0
+  },
+  "environment_check": {
+    "status": "UNCHANGED_BEFORE_P5",
+    "checked_at": "2026-09-26T16:58:34.343326+00:00",
+    "reference_sha256": "8aba502900721b86dc778783cc6d59013a7691666b81e82fc86aadbe58f4d9b6",
+    "container": "25f0a0dee927bc1a94abd3efce5990a52d5c0c219ab40afb6defa2298ff64ab5",
+    "image": "sha256:e0cfcfcb9b86e2c2d0d52a93689773f20f380cb8e050a24ce550c44f6f55c5eb",
+    "command_equal": true,
+    "environment_hash_equal": true,
+    "host_settings_equal": true,
+    "inference_requests": 0
+  },
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 41,
+    "generation": {
+      "charged_tokens": 36834,
+      "known_tokens": 36834,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 589,
+      "known_tokens": 589,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "case": "numeric_amount",
+      "run_id": "ser-v21-p5-a4-numeric_amount-r1",
+      "arm": "a4_selective_rebase",
+      "directory": "artifacts/ser-v21/p5-a4-numeric_amount-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "88ca6d15ca301bdec8f756fa90a68985aa92a0513b13ca0d61cf941c08477934",
+      "prepared_sha256": "d375c545677623b947bb1540496961140a19101a76b3f7a02116b32b7cb0525a",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5-a4-numeric_amount-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5-a4-numeric_amount-r1",
+        "--arm",
+        "a4_selective_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v1/numeric_amount.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v1/freezes/numeric_amount.json"
+      ]
+    },
+    {
+      "case": "numeric_amount",
+      "run_id": "ser-v21-p5-a5-numeric_amount-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p5-a5-numeric_amount-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "fd384107c3ab3f703f1bfda70bf1a0c6cbdebea8a6359c3256e029e776b8850c",
+      "prepared_sha256": "82a0d7fce182b580b484abed695440e8d852f9943a837c37d30a34db87d1c00e",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5-a5-numeric_amount-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5-a5-numeric_amount-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v1/numeric_amount.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v1/freezes/numeric_amount.json"
+      ]
+    },
+    {
+      "case": "retained_metadata",
+      "run_id": "ser-v21-p5-a4-retained_metadata-r1",
+      "arm": "a4_selective_rebase",
+      "directory": "artifacts/ser-v21/p5-a4-retained_metadata-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "445d16b551f2c07b1b71bafadc182f96ab781258769fbc030c1cc62b5563aa5f",
+      "prepared_sha256": "dbda52cc67426e8de3514f6a90595d0332f86140b0128715550a0c49345ebb81",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5-a4-retained_metadata-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5-a4-retained_metadata-r1",
+        "--arm",
+        "a4_selective_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v1/retained_metadata.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v1/freezes/retained_metadata.json"
+      ]
+    },
+    {
+      "case": "retained_metadata",
+      "run_id": "ser-v21-p5-a5-retained_metadata-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p5-a5-retained_metadata-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "14657eb0cf3af8425924df64e77244a6a7132ea7db1febd06d77c9196ac9513a",
+      "prepared_sha256": "ba9092264ed352fff1656a86246516278685f02be24e8b7de7b35acec285083f",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5-a5-retained_metadata-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5-a5-retained_metadata-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v1/retained_metadata.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v1/freezes/retained_metadata.json"
+      ]
+    },
+    {
+      "case": "irrelevant_lower_rank",
+      "run_id": "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+      "arm": "a4_selective_rebase",
+      "directory": "artifacts/ser-v21/p5-a4-irrelevant_lower_rank-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "d88bfb5487c9819f1b7617ef661854dd423e7061568e583dc919f93451608c01",
+      "prepared_sha256": "36b572a2cea03235f08f76ff6c874266adff941da50c939f61b5e7f03770765e",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5-a4-irrelevant_lower_rank-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5-a4-irrelevant_lower_rank-r1",
+        "--arm",
+        "a4_selective_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v1/irrelevant_lower_rank.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v1/freezes/irrelevant_lower_rank.json"
+      ]
+    },
+    {
+      "case": "irrelevant_lower_rank",
+      "run_id": "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p5-a5-irrelevant_lower_rank-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "3766bd0ca912fcaf100087134c02cd1fa8621df2127abd13dff029f06b266269",
+      "prepared_sha256": "e752ddb34bb822fc6454313b59431799b8aa3a1fbc91485336b1192797701d63",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5-a5-irrelevant_lower_rank-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5-a5-irrelevant_lower_rank-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v1/irrelevant_lower_rank.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v1/freezes/irrelevant_lower_rank.json"
+      ]
+    }
+  ],
+  "master_goal_complete": false,
+  "vllm_settings_changed": false
+}
