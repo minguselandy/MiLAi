@@ -20,8 +20,8 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 | P1 | request-level assistant-output lineage，实际生成request与证据版本可恢复 | 完成，mock重启及实际request证据核对 |
 | P2 | A4：A3加ordinary assistant派生文本失效，request-copy only，工具调用历史保留 | 完成，29条受影响窄测通过 |
 | P3 | 原changed/retained/irrelevant真实运行；失败按§6/11/32/37继续最小诊断 | 3/3通过，见[P3结果](MILAI_SER_V20_P3_RESULTS_20260927.md) |
-| P4 | categorical、boolean、deleted、multi-revision、assistant-only stale非温度控制 | 输入已定义，待runner与真实验证 |
-| P5 | correctness成立后可调rank-bounded refresh及必要对照 | 条件阶段 |
+| P4 | categorical、boolean、deleted、multi-revision、assistant-only stale非温度控制 | 5/5机制与最终动作通过，[中间表述缺陷保留](MILAI_SER_V20_P4_RESULTS_20260927.md) |
+| P5 | correctness成立后可调rank-bounded refresh及必要对照 | 前置门槛成立，进入最小通用实现与对照 |
 | P6 | §7全部类型的参数化generalized suite，rubric不进入runtime | 12个非温度fixture已定义，待运行 |
 | P7 | 已暴露12-case和MERIT arc0回归，保留原失败/费用与matched基线 | 待运行 |
 | P8 | 方法收敛与formal freeze，逐项满足§25条件 | 待证明 |

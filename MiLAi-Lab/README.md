@@ -8,7 +8,10 @@ tracked in [the execution Goal](docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md). The 
 [v20 SER](docs/MILAI_SER_V20_GOAL.md), adds request-level assistant lineage and selective
 demotion of stale derived text. Development continues through generalization, matched
 evaluation and lifecycle/quality-cost research; a failed first candidate is diagnostic input,
-not automatic completion. Historical deliveries below remain preserved.
+not automatic completion. P3 original controls pass 3/3 and [P4 non-temperature controls](docs/MILAI_SER_V20_P4_RESULTS_20260927.md)
+pass 5/5 mechanism/final-action checks, with an unsupported intermediate search claim retained.
+P5 refresh optimization follows; packaging of diagnostic inputs is tracked for that source stage.
+Historical deliveries below remain preserved.
 
 Latest scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.

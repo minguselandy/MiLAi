@@ -52,6 +52,16 @@ heuristics. Method freeze precedes unseen matched evaluation and sensitivity. Pr
 contextual runtime, M1 and structured ODR remain outside the active method. Conditional
 capsule/action grounding/Attention/Jev require the evidence described in the master plan.
 
+P3 original controls pass 3/3; P4 non-temperature controls pass 5/5 mechanism/final-action
+checks. Preserve the assistant-only intermediate false search claim and all 41 generations /
+36834 tokens / 589 embedding tokens / 18 exact reads. P4 mapping is
+`7de0f597d54ddce43f77448bdb4aba093a90f4dec1c3ff6975b23e0f6b57d20b`;
+do not rewrite the executed P4 lock when starting P5. The 31 affected tests and static/boundary
+checks pass. The cumulative necessary build is deferred to the P5 source freeze, including
+the known sdist `/data/diagnostics` inclusion fix; do not claim that packaging item is done.
+Proceed to configurable rank-bounded refresh with preserved A4 comparator, then P6/P7.
+Eight development controls are not formal/unseen efficacy and do not complete the master Goal.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

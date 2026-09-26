@@ -106,6 +106,7 @@ class VLLMChatModel(BaseChatModel):
     m1: Any = None
     odr: Any = None
     projection: Any = None
+    request_view: Any = None
 
     @property
     def _llm_type(self) -> str:
@@ -150,6 +151,11 @@ class VLLMChatModel(BaseChatModel):
         delivered_snapshot: tuple[list[dict[str, Any]], int] | None = None
         if self.client.config.tool_mode == "json_action":
             wire_messages = _json_action_history(wire_messages)
+            lineage_messages = messages
+            if self.request_view is not None:
+                wire_messages, lineage_messages = self.request_view.project(
+                    wire_messages, messages, self.active_message_key,
+                    self.calls_in_message + 1)
             generation_schema = _action_schema(tools, generation_only=True)
             protocol = _action_prompt(tools)
             m1_context = None
@@ -169,7 +175,7 @@ class VLLMChatModel(BaseChatModel):
             if self.projection is not None:
                 projected = self.projection.project(
                     wire_messages, self.active_message_key, self.calls_in_message + 1,
-                    messages)
+                    lineage_messages)
                 wire_messages = projected.messages
                 protocol += "\n" + SOURCE_AUTHORITY
             if wire_messages and wire_messages[0]["role"] == "system":

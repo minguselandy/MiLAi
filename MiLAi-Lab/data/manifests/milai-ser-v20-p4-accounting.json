@@ -1,0 +1,130 @@
+{
+  "kind": "MILAI_SER_V20_P4_STORAGE_ACCOUNTING",
+  "status": "SEALED",
+  "cases": {
+    "categorical_route": {
+      "files_bytes": {
+        "trace.jsonl": 201039,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 81920,
+        "run/business-journal.json": 796
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1548,
+      "lineage_and_rebase_event_bytes": 8097,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 20960315,
+        "observer_wall_ns": 453254526,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3427941,
+        "extra_read_wall_ns": 6570769,
+        "initial_db_bytes": 98304
+      },
+      "persistent_semantic_state_bytes": 0
+    },
+    "boolean_approved": {
+      "files_bytes": {
+        "trace.jsonl": 200807,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 81920,
+        "run/business-journal.json": 782
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1545,
+      "lineage_and_rebase_event_bytes": 8082,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 22746713,
+        "observer_wall_ns": 426580212,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3905716,
+        "extra_read_wall_ns": 12743817,
+        "initial_db_bytes": 98304
+      },
+      "persistent_semantic_state_bytes": 0
+    },
+    "deleted_evidence": {
+      "files_bytes": {
+        "trace.jsonl": 194034,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 0
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 517,
+      "lineage_and_rebase_event_bytes": 6889,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 76,
+        "observer_cpu_ns": 24104353,
+        "observer_wall_ns": 527923119,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3592997,
+        "extra_read_wall_ns": 6709120,
+        "initial_db_bytes": 98304
+      },
+      "persistent_semantic_state_bytes": 0
+    },
+    "multi_revision": {
+      "files_bytes": {
+        "trace.jsonl": 250138,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 792
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1539,
+      "lineage_and_rebase_event_bytes": 11752,
+      "marker_tokens_delivered": 155,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 84,
+        "observer_cpu_ns": 24209336,
+        "observer_wall_ns": 602446308,
+        "extra_store_reads": 6,
+        "extra_read_cpu_ns": 4713515,
+        "extra_read_wall_ns": 9423200,
+        "initial_db_bytes": 98304
+      },
+      "persistent_semantic_state_bytes": 0
+    },
+    "assistant_only_stale": {
+      "files_bytes": {
+        "trace.jsonl": 251048,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 98304,
+        "run/business-journal.json": 796
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1036,
+      "lineage_and_rebase_event_bytes": 9468,
+      "marker_tokens_delivered": 124,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 86,
+        "observer_cpu_ns": 25880387,
+        "observer_wall_ns": 627644892,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3610865,
+        "extra_read_wall_ns": 7668841,
+        "initial_db_bytes": 98304
+      },
+      "persistent_semantic_state_bytes": 0
+    }
+  },
+  "marker_tokens_per_delivery": 31,
+  "marker_tokens_total": 558,
+  "total_file_bytes": {
+    "trace.jsonl": 1097066,
+    "instrumentation.sqlite": 491520,
+    "checkpoints.sqlite": 417792,
+    "run/business-journal.json": 3166
+  },
+  "meaning": "Snapshot/event bytes are subsets of sidecar/trace, not extra totals. Marker tokens use the pinned tokenizer and are already billed in input. Lineage is persistent factual metadata, not semantic State. Shared PostgreSQL physical storage is not attributed per run."
+}

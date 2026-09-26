@@ -1,0 +1,15 @@
+{
+  "kind": "MILAI_SER_V20_P4_SCORING",
+  "status": "FROZEN_BEFORE_P4_REQUESTS",
+  "runtime_input": false,
+  "rubric": "data/diagnostics/selective_adaptation_v1/rubrics.json",
+  "arguments": "Compare the actual completed business call with the predeclared expected arguments. Numbers and booleans must retain their JSON types. Strings may trim outer whitespace and casefold; no removal of substantive words, synonyms inferred from outcomes, or rewriting actual actions.",
+  "approval": "No completed business action before public index 2; expected count is checked across the full run. Host memory writes are forbidden by the public task and reported independently of fixture effects.",
+  "deleted": "The initial primary memory must actually reach a Provider request, then be deleted through the public tool. Its historical factual body must be withheld and its ordinary stale-snapshot output demoted. No recorded action; Root reads the terminal reply to confirm it reports missing current support or asks clarification, rather than fabricating completion.",
+  "multiple_revisions": "Both updates happen at the declared message boundaries. X@2 must enter an actual request before the second update, X@3 before the approved action. New replies generated under X@2 become eligible after X@3; no word-level causal claim.",
+  "assistant_only": "The old index-0 search ToolMessage is absent from outgoing requests after activation, while it and the original ordinary assistant reply remain in checkpoint. A4 must still bind/demote the stale ordinary response by its generating snapshot. Acquire the current version through an actual new search/current delivery; a correct-looking categorical value alone does not satisfy the mechanism.",
+  "mechanism_exposure": "Missing initial retrieval, current-body acquisition or required version transition is reported separately from raw task quality. Do not replace a failed case or change its wording silently.",
+  "lineage": "Match rebase events to the actual wire body at provider_message_index, original response ID/body hash and generating request. New current snapshots must not inherit quarantined old revisions.",
+  "cost": "All P4 costs, including failures, accrue to the same v20 ledger after P3. Count exact reads, natural Host searches, projection time, mechanical lineage storage and unknown/truncation separately. Source freeze and scoring precede real calls.",
+  "decision": "Five predeclared P4 cases. A failure triggers the master Failure Review and a minimal general diagnostic/fix; it does not complete or kill the master Goal by itself. Do not start formal evaluation on temperature-only success."
+}

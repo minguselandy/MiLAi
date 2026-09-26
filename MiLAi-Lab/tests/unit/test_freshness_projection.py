@@ -23,6 +23,7 @@ from milai_lab.baselines.langmem_agent import (
     invoke_public_message,
     resume_public_message,
 )
+from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.baselines.langmem_revision_store import (
     ObservedStore,
@@ -42,7 +43,11 @@ from milai_lab.methods.freshness_projection.projection import (
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
-from milai_lab.runners.langmem_m1_mechanism import _fixture_memory_effect
+from milai_lab.runners.langmem_m1_mechanism import (
+    SearchResultRequestView,
+    _fixture_memory_effect,
+    run_mechanism,
+)
 
 
 class FixedEmbeddings(Embeddings):
@@ -368,7 +373,10 @@ def test_mixed_projection_actual_material_and_completed_replay(
     sidecar.close()
 
 
-def test_rebase_binds_equal_text_to_response_identity_across_restart(tmp_path: Path) -> None:
+@pytest.mark.parametrize("omit_old_search", [False, True])
+def test_rebase_binds_equal_text_to_response_identity_across_restart(
+    tmp_path: Path, omit_old_search: bool,
+) -> None:
     sidecar_path = tmp_path / "sidecar.sqlite"
     checkpoint_path = tmp_path / "checkpoint.sqlite"
     arm = "a4_selective_rebase"
@@ -394,9 +402,14 @@ def test_rebase_binds_equal_text_to_response_identity_across_restart(tmp_path: P
             observer.capture_provider_event(event)
 
         client.emit = emit
-        return VLLMChatModel(client=client, observer=observer,
-                             projection=ProjectionController(
-                                 observer, emit, arm=arm, store=store, stage="v20"))
+        model = VLLMChatModel(client=client, observer=observer,
+                              projection=ProjectionController(
+                                  observer, emit, arm=arm, store=store, stage="v20"))
+        if omit_old_search:
+            model.request_view = SearchResultRequestView(
+                {"omit_search_results_before_public_index": 2,
+                 "activate_at_public_index": 2}, observer, emit)
+        return model
 
     with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock"),
                     transport=httpx.MockTransport(respond)) as client:
@@ -437,7 +450,13 @@ def test_rebase_binds_equal_text_to_response_identity_across_restart(tmp_path: P
             tool_contents = [item["content"] for item in third_request
                              if item["role"] == "tool"]
             assert all("old-4-body" not in content for content in tool_contents)
-            assert any("new-8-body" in content for content in tool_contents)
+            if omit_old_search:
+                assert not tool_contents
+                view = [event for event in events
+                        if event.get("event") == "fixture_request_view"][-1]
+                assert view["omitted_search_results"][0]["source_public_message_index"] == 1
+            else:
+                assert any("new-8-body" in content for content in tool_contents)
             rebases = [event for event in events
                        if event.get("event") == "derived_output_rebase"]
             assert len(rebases) == 1
@@ -451,13 +470,94 @@ def test_rebase_binds_equal_text_to_response_identity_across_restart(tmp_path: P
                 "messages"] if getattr(message, "id", None) in {"g1", "g3"}]
             assert [message.content for message in original_assistants] == [
                 "same-note", "same-note"]
+            assert any(isinstance(message, ToolMessage)
+                       and "old-4-body" in message.content for message in
+                       agent.get_state(scope.config()).values["messages"])
             invoke_public_message(agent, restarted_model, scope, "Continue.")
             assert "new conclusion" in [item["content"] for item in wires[4]["messages"]
                                       if item["role"] == "assistant"]
             g4 = next(row for row in sidecar.rows("assistant_lineage")
                       if row["response_id"] == "g4")
-            assert json.loads(g4["exact_snapshot_json"])[0]["revision"] == 2
+            if omit_old_search:
+                assert json.loads(g4["exact_snapshot_json"]) == []
+            else:
+                assert json.loads(g4["exact_snapshot_json"])[0]["revision"] == 2
             before = len(wires)
             resume_public_message(agent, restarted_model, scope)
             assert len(wires) == before
         sidecar.close()
+
+
+def test_fixture_update_list_delete_unknown_seed_and_completed_resume(tmp_path: Path) -> None:
+    fixture = {
+        "kind": "SER_V20_REVISION_DIAGNOSTIC", "case_id": "generic-changes",
+        "user_id": "user", "task_id": "task",
+        "seed_memories": [{"name": "primary", "content": "initial"},
+                          {"name": "remove", "content": "temporary"}],
+        "unobserved_seed_memories": [{"name": "unknown", "content": "imported"}],
+        "revision_updates": [
+            {"after_public_index": 0, "target": "primary", "action": "update",
+             "content": "second"},
+            {"after_public_index": 0, "target": "remove", "action": "delete"},
+            {"after_public_index": 1, "target": "primary", "action": "update",
+             "content": "third"},
+        ],
+        "public_messages": ["Start.", "Continue.", "Finish."],
+        "business_tool_schema": {"type": "function", "function": {
+            "name": "record", "description": "Record a value.",
+            "parameters": {"type": "object", "properties": {"value": {"type": "string"}},
+                           "required": ["value"], "additionalProperties": False}}},
+    }
+    fixture_path = tmp_path / "fixture.json"
+    fixture_path.write_text(json.dumps(fixture), encoding="utf-8")
+    freeze_path = tmp_path / "freeze.json"
+    freeze_path.write_text(json.dumps({"case_id": fixture["case_id"],
+                                       "fixture_sha256": sha256_file(fixture_path),
+                                       "public_messages": 3}), encoding="utf-8")
+    sidecar = RevisionSidecar(tmp_path / "sidecar.sqlite")
+    arm = "a4_selective_rebase"
+    observer = ProvenanceObserver(sidecar, "run", arm)
+    inner = InMemoryStore(index={"dims": 2, "embed": FixedEmbeddings(),
+                                 "fields": ["content"]})
+    store = ObservedStore(inner, observer)
+    wires: list[dict[str, Any]] = []
+    events: list[dict[str, Any]] = []
+
+    def emit(event: dict[str, Any]) -> None:
+        events.append(event)
+        observer.capture_provider_event(event)
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        wires.append(json.loads(request.read()))
+        return httpx.Response(200, json=_receipt({"answer": "ok"}, f"g{len(wires)}"))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock"),
+                    transport=httpx.MockTransport(respond), emit=emit) as client:
+        model = VLLMChatModel(client=client, observer=observer,
+                              projection=ProjectionController(
+                                  observer, emit, arm=arm, store=store, stage="v20"))
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            output = tmp_path / "run"
+            result = run_mechanism(fixture_path, freeze_path, output,
+                                   "run", arm, model, store, saver, observer)
+            assert result["status"] == "TERMINAL" and len(wires) == 3
+            effects = json.loads((output / "fixture-effects.json").read_text())
+            primary = effects["seed:primary"]["memory_id"]
+            removed = effects["seed:remove"]["memory_id"]
+            unknown = effects["seed_unobserved:unknown"]["memory_id"]
+            namespace = ("langmem", "run", arm, "user")
+            assert sidecar.latest_revision(namespace, primary)["revision"] == 3
+            assert sidecar.latest_revision(namespace, removed)["tombstone"] == 1
+            assert sidecar.latest_revision(namespace, unknown) is None
+            assert store.get(namespace, unknown) is not None
+            assert effects["seed_unobserved:unknown"]["origin"] == (
+                "FIXTURE_CONTROLLED_UNOBSERVED_SEED")
+            assert effects["seed_unobserved:unknown"]["call_key"] is None
+            counts = (len(wires), len(sidecar.rows("revisions")),
+                      len(sidecar.rows("operations")))
+            again = run_mechanism(fixture_path, freeze_path, output,
+                                  "run", arm, model, store, saver, observer)
+            assert again["status"] == "TERMINAL"
+            assert counts == (len(wires), len(sidecar.rows("revisions")),
+                              len(sidecar.rows("operations")))
+    sidecar.close()

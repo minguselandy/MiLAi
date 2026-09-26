@@ -29,5 +29,6 @@ parent: MILAI_LONG_HORIZON_EXECUTION_GOAL.md
 - [x] P0封存，见[reference](../data/manifests/milai-ser-v20-reference.json)。
 - [x] P1/P2最小实现与29条受影响窄检查。
 - [x] P3原三例3/3通过，完成[逐请求核对和反思](MILAI_SER_V20_P3_RESULTS_20260927.md)。
-- [ ] P4非温度控制与反例。
-- [ ] v20结果、费用、复现、阶段判定及源码交付；总Goal继续。
+- [x] P4非温度控制与反例5/5通过，见[P4结果及中间表述缺陷](MILAI_SER_V20_P4_RESULTS_20260927.md)。
+- [x] P0–P4结果、连续费用、复现与阶段判定；合计41生成/36834tokens/589embeddingtokens，8个开发控制通过。
+- [ ] 源码交付与累计包装检查：sdist补入diagnostics纳入P5首次修改及新锁，之后做一次必要build；保留P4真实运行身份。总Goal继续。
