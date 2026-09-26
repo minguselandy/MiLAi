@@ -1,0 +1,233 @@
+{
+  "kind": "MILAI_SER_V22_P7_EXECUTION_FREEZE",
+  "status": "FROZEN_BEFORE_FIRST_P7_REQUEST",
+  "stage": "p7r3",
+  "created_at": "2026-09-26T18:30:20.829230+00:00",
+  "protocol_path": "data/manifests/milai-ser-v22-p7r3-protocol.json",
+  "protocol_sha256": "c829b5c24a6e7a3e6c813859ff51d84d8df4e3417b5457d4d95d1c2cc4996db9",
+  "exposed_freeze_sha256": "46252da3788190e353a8881912a6b108e07a341a12ee1495a14fcad75c4f806b",
+  "lock_path": "data/locks/milai-ser-v22-p7r3.lock.json",
+  "lock_sha256": "77a8aa63bb50e9c1fe54383adeeb95a93f55783dc1d731304746b6febfe1c46f",
+  "source_mapping_sha256": "3f8ddd76a143caa9a652faa6ba577ec12a0861a1b4552955ce4ca4910ccd5be7",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "stage": "P7_R3_CONDITIONAL_SOURCE_AUTHORITY",
+    "source_checkpoint_before_changes": "12e654f4ab941dc70ce8ef0a16d63000dbe25b77",
+    "source_files": [
+      "src/milai_lab/providers/langmem_chat.py",
+      "tools/run_milai_ser_v22.py",
+      "pyproject.toml"
+    ],
+    "new_validation_files": [
+      "tests/unit/test_freshness_projection.py"
+    ],
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py::test_v21_authority_only_when_actual_memory_or_derived_risk_is_projected",
+        "result": "PASS: zero-model complete Provider wire equality for empty history and empty search; CURRENT, UNKNOWN, assistant-only stale rebase, and v20 legacy-stage authority boundaries"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/providers/langmem_chat.py tools/run_milai_ser_v22.py tests/unit/test_freshness_projection.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/providers/langmem_chat.py tools/run_milai_ser_v22.py",
+        "result": "PASS: 2 source files"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      },
+      {
+        "command": "offline CLI default-path check",
+        "result": "PASS: reuse configs/milai-ser-v22-r2.json and target data/locks/milai-ser-v22-p7r3.lock.json"
+      }
+    ],
+    "behavior": "Only stage-v21 projection requests with actual memory items or derived assistant rebases include SOURCE_AUTHORITY. B1 remains untouched; v19/v20 stages preserve their previous unconditional authority behavior. No SER projection, response schema, Host, embedding, run loop, budget or R2 config change.",
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "build_deferred_until_lock": true
+  },
+  "package_verification": {
+    "status": "PASS",
+    "stage": "P7_R3_CONDITIONAL_SOURCE_AUTHORITY",
+    "lock": "data/locks/milai-ser-v22-p7r3.lock.json",
+    "lock_sha256": "77a8aa63bb50e9c1fe54383adeeb95a93f55783dc1d731304746b6febfe1c46f",
+    "source_mapping_sha256": "3f8ddd76a143caa9a652faa6ba577ec12a0861a1b4552955ce4ca4910ccd5be7",
+    "identity_check": "PASS: verify_ser_v22_lock with 67-file R3 map and reused R2 config",
+    "build": {
+      "command": "uv build --out-dir artifacts/ser-v22-r3/dist",
+      "result": "PASS: one build after R3 lock",
+      "sdist": "artifacts/ser-v22-r3/dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "6b05382f88e7184848391ff342b73d852be47ff3f8d9c131ad824d0b8aed1c83",
+      "wheel": "artifacts/ser-v22-r3/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "8a2737ff9e263ee4794cd102ffffad792d85d3dfd5f4d705b68640a2db73682c"
+    },
+    "members": {
+      "result": "PASS: required sdist/wheel members and zero private/generated paths",
+      "sdist_file_count": 1717,
+      "wheel_file_count": 137,
+      "sdist_required": [
+        "configs/milai-ser-v22-r2.json",
+        "data/locks/milai-ser-v22-p7r3.lock.json",
+        "data/locks/milai-ser-v22-p7r2.lock.json",
+        "data/locks/milai-ser-v22.lock.json",
+        "data/manifests/milai-ser-v22-p7r3-protocol.json",
+        "tools/run_milai_ser_v22.py",
+        "src/milai_lab/providers/langmem_chat.py",
+        "tests/unit/test_freshness_projection.py"
+      ],
+      "wheel_required": [
+        "milai_lab/providers/langmem_chat.py",
+        "milai_lab/methods/freshness_projection/projection.py"
+      ],
+      "private_or_generated_paths_in_sdist_or_wheel": false
+    },
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_lock": 0
+  },
+  "environment_reference": {
+    "path": "artifacts/ser-v20/environment-before.json",
+    "sha256": "8aba502900721b86dc778783cc6d59013a7691666b81e82fc86aadbe58f4d9b6"
+  },
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 360,
+    "generation": {
+      "charged_tokens": 332460,
+      "known_tokens": 332460,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 3902,
+      "known_tokens": 3902,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "mode": "diagnostic",
+      "arm": "a5_rank_bounded_rebase",
+      "run_id": "ser-v22-p7r3-a5-diagnostic-r1",
+      "directory": "artifacts/ser-v22/p7r3-a5-diagnostic-r1",
+      "initial_namespace_items": 0,
+      "options": [
+        "--config",
+        "artifacts/ser-v22/p7r3-a5-diagnostic-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v22-p7r3.lock.json",
+        "--exposed-freeze",
+        "data/manifests/milai-ser-v22-p7-exposed-freeze.json",
+        "--mode",
+        "diagnostic",
+        "--run",
+        "ser-v22-p7r3-a5-diagnostic-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--diagnostic-inputs",
+        "artifacts/contextual-user-memory/v14-v1-spec/inputs.json",
+        "--diagnostic-freeze",
+        "data/manifests/contextual-memory-v14-diagnostic-freeze.json"
+      ],
+      "config_sha256": "af52121c194d756129000ccf06c81f83c1e10d53ea365353c37b76f7c5fabbb7",
+      "prepared_sha256": "52cd40be99c904d01dd1bf4cd77d5c5850a112baa06a340fdf2644e4cdaa1ca2"
+    },
+    {
+      "mode": "merit",
+      "arm": "a5_rank_bounded_rebase",
+      "run_id": "ser-v22-p7r3-a5-merit-r1",
+      "directory": "artifacts/ser-v22/p7r3-a5-merit-r1",
+      "initial_namespace_items": 0,
+      "options": [
+        "--config",
+        "artifacts/ser-v22/p7r3-a5-merit-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v22-p7r3.lock.json",
+        "--exposed-freeze",
+        "data/manifests/milai-ser-v22-p7-exposed-freeze.json",
+        "--mode",
+        "merit",
+        "--run",
+        "ser-v22-p7r3-a5-merit-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--merit-selection",
+        "data/manifests/contextual-memory-v7-e0-selection-final.json"
+      ],
+      "config_sha256": "06fe9c789a7d93b46d5bc4156296078dc38034bea5b0160b9c4831fab6a5d67b",
+      "prepared_sha256": "b93ca1e64561eb74730a903fd2438033d7b53d225d154c5a01e95d566a2f1792"
+    }
+  ],
+  "unseen": false,
+  "model_concurrency": 1,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}

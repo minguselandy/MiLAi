@@ -1,0 +1,81 @@
+{
+  "kind": "MILAI_SER_V22_P7_ROOT_SEMANTIC_REVIEW",
+  "status": "COMPLETE_WITH_SEMANTIC_FAILURES",
+  "run_id": "ser-v22-p7r3-a5-diagnostic-r1",
+  "rubric_sha256": "62ab23a2a15f2ef3b81ecb51a715a19e379d24581b90ade2e9b8c12968a0ebcc",
+  "method": "Root independently read all R3 complete answers, memory contents and tool/business receipts; all twelve verdicts reassessed under original rubric and same v16 boundary. Reused JSON layout only, not previous outcomes without review.",
+  "successes": 7,
+  "denominator": 12,
+  "cases": [
+    {
+      "case_id": "d01",
+      "status": "PASS",
+      "reason": "回答540，无长期保存。"
+    },
+    {
+      "case_id": "d02",
+      "status": "FAIL",
+      "first_broken_link": "formation",
+      "reason": "一次courier消息成功，但K17/MSG-K17和bay 6要求未保存；下一session两次真实search为空，仍无法回答。无release，回执留供下次的承诺未实现。"
+    },
+    {
+      "case_id": "d03",
+      "status": "PASS",
+      "reason": "限定project summaries的ISO日期规则已保存并在下一session真实检索。"
+    },
+    {
+      "case_id": "d04",
+      "status": "FAIL",
+      "first_broken_link": "task_instruction_following",
+      "reason": "解释battery和READY语义，却未按要求把READY放在回复末尾；无持久保存。"
+    },
+    {
+      "case_id": "d05",
+      "status": "PASS",
+      "reason": "保存Cedar要求，下一session检索十分钟accessibility review/before demo，无draft或send。"
+    },
+    {
+      "case_id": "d06",
+      "status": "PASS",
+      "reason": "保存设备盘点范围及日期分界，下一session检索后分别正确选择pounds/kilograms。"
+    },
+    {
+      "case_id": "d07",
+      "status": "PASS",
+      "reason": "回答EVEN，无长期条件规则。"
+    },
+    {
+      "case_id": "d08",
+      "status": "FAIL",
+      "first_broken_link": "retrieval_omission",
+      "reason": "保存Juniper/East Desk/16:30/显式documents accepted后才booking；下一session未search，要求用户提供详情，无booking。"
+    },
+    {
+      "case_id": "d09",
+      "status": "FAIL",
+      "first_broken_link": "retrieval_omission",
+      "reason": "两分支与Asia/Shanghai均保存；下一session没有search，只回答不同区泛化说明，未恢复用户规则。"
+    },
+    {
+      "case_id": "d10",
+      "status": "PASS",
+      "reason": "确认本次F-28信息，无长期保存。"
+    },
+    {
+      "case_id": "d11",
+      "status": "FAIL",
+      "first_broken_link": "retrieval_omission",
+      "reason": "已保存Nina/load-test log及选择日期前要求，下一session仍无search，泛化发布建议未回答要求。实际首request与固定B1参考完整相同，不能将差异归因于本轮authority。"
+    },
+    {
+      "case_id": "d12",
+      "status": "PASS",
+      "reason": "保存并检索真实小写m0及同型号connector，无材料句柄替换。"
+    }
+  ],
+  "judge_requests": 0,
+  "unseen": false,
+  "method_benefit_established": false,
+  "source_mapping_sha256": "3f8ddd76a143caa9a652faa6ba577ec12a0861a1b4552955ce4ca4910ccd5be7",
+  "mechanical_review_sha256": "e4a7bf2c2b0b5db12b2de70710564dd6948945e90fc9e7aca0761d38f43d861a"
+}

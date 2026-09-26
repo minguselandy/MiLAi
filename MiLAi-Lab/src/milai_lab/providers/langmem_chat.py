@@ -177,7 +177,9 @@ class VLLMChatModel(BaseChatModel):
                     wire_messages, self.active_message_key, self.calls_in_message + 1,
                     lineage_messages)
                 wire_messages = projected.messages
-                protocol += "\n" + SOURCE_AUTHORITY
+                if (self.projection.stage != "v21" or projected.items
+                        or projected.derived_rebases):
+                    protocol += "\n" + SOURCE_AUTHORITY
             if wire_messages and wire_messages[0]["role"] == "system":
                 first = dict(wire_messages[0])
                 if not isinstance(first.get("content"), str):

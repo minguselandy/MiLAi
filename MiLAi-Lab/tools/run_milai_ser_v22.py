@@ -165,7 +165,7 @@ def main() -> None:
         item.add_argument("--config", type=Path,
                           default=LAB / "configs/milai-ser-v22-r2.json")
         item.add_argument("--lock", type=Path,
-                          default=LAB / "data/locks/milai-ser-v22-p7r2.lock.json")
+                          default=LAB / "data/locks/milai-ser-v22-p7r3.lock.json")
         item.add_argument("--mode", choices=("diagnostic", "merit"), required=True)
         item.add_argument("--run", required=True)
         item.add_argument("--arm", choices=ARMS, required=True)

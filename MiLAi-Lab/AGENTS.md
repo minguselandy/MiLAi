@@ -118,6 +118,16 @@ and assistant-only stale retain authority. No benchmark-dependent predicate or v
 Narrow offline counterexamples precede Root's new frozen matched small regression. P8–P12
 remain active; lifecycle failures are separate research, not SER successes.
 
+P7 R3/P8 are complete for method freeze, not efficacy: [R3](docs/MILAI_SER_V22_P7_R3_RESULTS_20260927.md)
+has diagnostic 7/12 and MERIT4/5, dependent1/2, Host7/7. All twenty actual first diagnostic
+requests equal fixed B1 reference wires, yet d11 still misses retrieval. Authority is omitted
+on 49/55 actual requests; preserve all 415 generations / 373013 tokens / 4370 embedding tokens
+and 75 exact reads. The [P8 freeze](docs/MILAI_SER_V22_P8_METHOD_FREEZE.md) allows one small
+unseen same-source B1/a3_exact_refresh/a4_selective_rebase comparison after new selection
+pre-registration and thin v23 entrypoint freeze. Keep stage v21 methods and parameters fixed,
+reuse the original loop/scorer, preserve old exposed loader behavior. No task-driven method
+changes, new model, vLLM adjustment or A5 efficacy claim. P9–P12/master remain ACTIVE.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

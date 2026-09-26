@@ -24,7 +24,13 @@ on requests without memory evidence. Continuous SER is 306 generations / 274357 
 A5 continues after episode 2 failure and completes episode 3. B1 native 4/5 versus A5 3/5
 still exposes formation and tool-use failures; A5 completes only 4/7 public messages.
 Continuous SER is now 360 generations / 332460 tokens / 3902 embedding tokens / 75 exact reads.
-Next is conditional authority on actual evidence or derived rebases; P8 remains pending.
+[P7 R3](docs/MILAI_SER_V22_P7_R3_RESULTS_20260927.md) now removes authority from 49/55 actual
+requests without evidence. Diagnostics remain 7/12 and MERIT reaches 4/5, with all 7 messages
+complete; formation and reconciliation failures remain. All twenty initial diagnostic wires
+equal fixed B1 reference requests, including the still-failing retrieval case.
+[P8 freezes the method](docs/MILAI_SER_V22_P8_METHOD_FREEZE.md) for a small unseen B1/lite/full
+comparison, without claiming task benefit. Current SER costs: 415 generations / 373013 tokens /
+4370 embedding tokens / 75 exact reads. The master Goal continues through P9–P12.
 Historical deliveries below remain preserved.
 
 Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following

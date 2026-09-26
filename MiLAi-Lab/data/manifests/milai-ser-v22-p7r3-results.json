@@ -1,0 +1,167 @@
+{
+  "kind": "MILAI_SER_V22_P7_R3_RESULTS",
+  "status": "CONDITIONAL_AUTHORITY_VERIFIED_BASELINE_LIFECYCLE_FAILURES_REMAIN",
+  "source_mapping_sha256": "3f8ddd76a143caa9a652faa6ba577ec12a0861a1b4552955ce4ca4910ccd5be7",
+  "lock_sha256": "77a8aa63bb50e9c1fe54383adeeb95a93f55783dc1d731304746b6febfe1c46f",
+  "freeze_sha256": "a9636db2d84e69307711ce668615ad29fa30212834a2ab5f35f502b54b64d0be",
+  "run_receipts_sha256": {
+    "data/manifests/milai-ser-v22-p7r3-a5-diagnostic-results.json": "e4a7bf2c2b0b5db12b2de70710564dd6948945e90fc9e7aca0761d38f43d861a",
+    "data/manifests/milai-ser-v22-p7r3-a5-merit-results.json": "1d1d6e5934344d45105f9ab41467af779f86321b2ad37287c3fa662c0ecb6bd6"
+  },
+  "semantic_review_sha256": "86d34e55033c847124f3c40113d546465517f0218d8930d85c9559e8920c3223",
+  "actual_empty_wire_sha256": "9a45d45b359dba97d6dd61f33430407faf2d65dfb1c4dadbd9976fe3e110d604",
+  "diagnostic": [
+    7,
+    12
+  ],
+  "merit_native": [
+    4,
+    5
+  ],
+  "merit_dependent": [
+    1,
+    2
+  ],
+  "merit_host_messages": [
+    7,
+    7
+  ],
+  "fixed_b1_references": {
+    "diagnostic": {
+      "path": "data/manifests/milai-ser-v22-p7-b1-diagnostic-results.json",
+      "sha256": "f933d4fc5731c798052a5acd3f992fc3948d4864a25db053ae4e9383d2d60060"
+    },
+    "merit": {
+      "path": "data/manifests/milai-ser-v22-p7r2-b1-merit-results.json",
+      "sha256": "8bbc0e627fece9ee236ef61979f80138da4cb6a9a5ad83fe95ea4c140561ea60"
+    }
+  },
+  "matched_same_source_b1_rerun": false,
+  "semantic_merit": {
+    "early_agreements_persisted": false,
+    "unsupported_5000_inserted_and_refunded": true,
+    "later_explicit_6595_updates_existing_memory": true,
+    "current_6595_retrieved_and_refunded": true,
+    "post_action_memory_still_says_do_not_process": true,
+    "tool_input_validation_errors": 1,
+    "capacity_failures": 0,
+    "native_memory_metric_causal": false
+  },
+  "authority_requests": 6,
+  "no_evidence_requests_without_authority": 49,
+  "removed_fragment_tokens_counterfactual": 3087,
+  "fragment_estimate_is_additional_measured_saving": false,
+  "actual_generation_token_difference_from_fixed_b1": 448,
+  "actual_diagnostic_token_difference_from_old_a5": -1866,
+  "totals": {
+    "generations": 55,
+    "input_tokens": 37830,
+    "output_tokens": 2723,
+    "generation_tokens": 40553,
+    "embedding_requests": 17,
+    "embedding_tokens": 468,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "projection_cpu_ns": 15378439,
+    "projection_wall_ns": 11934249,
+    "exact_reads": 0,
+    "exact_read_wall_ns": 0,
+    "provider_wall_seconds": 24.867078183684498
+  },
+  "continuous_budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 415,
+    "generation": {
+      "charged_tokens": 373013,
+      "known_tokens": 373013,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 4370,
+      "known_tokens": 4370,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "continuous_exact_reads": 75,
+  "storage_bytes": {
+    "trace.jsonl": 1270156,
+    "instrumentation.sqlite": 356352,
+    "checkpoints.sqlite": 581632
+  },
+  "rebase_precision": null,
+  "rebase_recall": null,
+  "refresh_precision": null,
+  "stale_consumption_rate": null,
+  "judge_requests": 0,
+  "vllm_settings_changed": false,
+  "unseen": false,
+  "master_goal_complete": false,
+  "decision": "Freeze method for small same-source B1/lite/full unseen comparison. No efficacy claim; formation, retrieval omission and reconciliation gaps persist."
+}

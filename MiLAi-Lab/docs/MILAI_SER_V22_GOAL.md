@@ -1,11 +1,13 @@
 ---
-status: ACTIVE
+status: COMPLETE_METHOD_FREEZE_FOR_SMALL_EVALUATION
 scope: RESEARCH_PROTOTYPE
 parent: MILAI_LONG_HORIZON_EXECUTION_GOAL.md
 reference_commit: 010ada50bddc6f208ce4311fe311beff4c5c4551
 ---
 
 # v22：已暴露回归与方法收敛
+
+交付状态：[R3结果](MILAI_SER_V22_P7_R3_RESULTS_20260927.md)验证条件authority，诊断7/12、MERIT4/5、dependent1/2、Host7/7；形成/漏搜/动作后维护缺口全保留。[P8方法冻结](MILAI_SER_V22_P8_METHOD_FREEZE.md)允许小规模正式三臂比较，尚无端到端收益结论。连续SER415生成/373013tokens/4370embeddingtokens/75get。长程P9–P12继续；下文为各轮历史。
 
 最新：[P7 R2](MILAI_SER_V22_P7_R2_RESULTS_20260927.md)已完成覆盖修复及两臂原arc重跑。B1 native4/5、dependent1/2；A5 native3/5、dependent0/2，ep2容量错误后ep3真实继续，ep4再次失败，Host仅4/7消息完成。连续SER360生成/332460tokens/3902embeddingtokens/75get。下一候选仅条件化authority，先离线空证据/current/assistant-only反例，再冻结原小规模对照；Formation/Reconciliation不混入方法修复。下文保留原冻结范围与R1历史。
 
@@ -47,9 +49,9 @@ Sol xhigh独占源码/config/CI/必要窄检查，Root独占方案/冻结/评分
 本次只测试新CLI/身份/原runner接线及实际受影响边界；沿用已有schema，不重跑decoder probes或全套测试。新锁后一次必要build，同时纳入P6R2与v22锁以及新入口/config；不宣称旧包已有新内容。
 
 - [x] 薄入口、正确run身份、20项受影响窄验证与66文件新源码锁；一次必要build通过。
-- [ ] 同源四个串行run，原输入、独立namespace、逐请求费用完整。
-- [ ] 完整语义/native/实际request核对、失败反思、成本/存储与复现。
-- [ ] P8九项判定及下一阶段独立冻结，未满足项保持明确。
-- [ ] Luna发布与remote核对；长程Goal继续P9–P12。
+- [x] R1四个同源串行尝试；R2/R3新源轨迹另列，不拼接，费用完整。
+- [x] 完整语义/native/实际request核对、失败反思、成本/存储与复现；业务失败保留。
+- [x] P8九项判定及方法冻结；P9另冻结selection与新入口。
+- [ ] Luna发布R3/P8并核对remote；长程Goal继续P9–P12。
 
 P7 R1已执行四个预定run，见[R1结果与Failure Review](MILAI_SER_V22_P7_R1_RESULTS_20260927.md)。诊断B1 8/12、A5 7/12；两条MERIT在ep2 msg0因空搜索循环达到12次容量后中止，不能记为完整回归。累计SER306生成/274357tokens/3689embeddingtokens/75exact reads。下一轮先以独立锁增加opt-in episode局部容量失败隔离，原scorer公式、world/Store副作用与全分母保持，未尝试消息单列；不同时调整authority。随后独立检验无memory却注入authority的开销/决策影响。R1所有失败与费用不改。

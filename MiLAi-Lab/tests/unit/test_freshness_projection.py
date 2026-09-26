@@ -13,7 +13,7 @@ import pytest
 pytest.importorskip("langmem")
 
 from langchain_core.embeddings import Embeddings
-from langchain_core.messages import AIMessage, ToolMessage
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langchain_core.tools import tool
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.store.memory import InMemoryStore
@@ -43,6 +43,7 @@ from milai_lab.methods.freshness_projection.lineage import (
 )
 from milai_lab.methods.freshness_projection.projection import (
     SOURCE_AUTHORITY,
+    ProjectedRequest,
     project_current_evidence,
 )
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
@@ -771,3 +772,53 @@ def test_merit_local_capacity_keeps_native_result_and_continues_only_that_error(
     assert failed["skipped_public_message_indexes"] == [1]
     assert result["native_successes"] == 1
     assert not (output / "interruption.json").exists()
+
+
+def test_v21_authority_only_when_actual_memory_or_derived_risk_is_projected() -> None:
+    class Projection:
+        def __init__(self, stage: str, items: list[dict[str, Any]],
+                     rebases: list[dict[str, Any]]) -> None:
+            self.stage, self.items, self.rebases = stage, items, rebases
+
+        def project(self, messages: list[dict[str, Any]], *_args: Any) -> ProjectedRequest:
+            return ProjectedRequest(messages, {}, self.items, [], self.rebases)
+
+        def record_delivery(self, *_args: Any) -> tuple[list[dict[str, Any]], int]:
+            return [], 0
+
+        def record_output(self, *_args: Any) -> None:
+            pass
+
+    def wire(history: list[Any], projection: Projection | None) -> dict[str, Any]:
+        requests: list[dict[str, Any]] = []
+
+        def respond(request: httpx.Request) -> httpx.Response:
+            requests.append(json.loads(request.read()))
+            return httpx.Response(200, json=_receipt({"answer": "ok"}, "response"))
+
+        with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                                   tool_mode="json_action"),
+                        transport=httpx.MockTransport(respond)) as client:
+            VLLMChatModel(client=client, projection=projection).invoke(
+                history, tools=[{"type": "function", "function": {
+                    "name": "search_memory", "description": "Search memory.",
+                    "parameters": {"type": "object", "properties": {
+                        "query": {"type": "string"}}, "required": ["query"]}}}])
+        return requests[0]
+
+    empty = [HumanMessage(content="Please check.")]
+    empty_search = [*empty, AIMessage(content="", tool_calls=[{
+        "name": "search_memory", "args": {"query": "check"}, "id": "call-1"}]),
+        ToolMessage(content="[]", tool_call_id="call-1", name="search_memory")]
+    for history in (empty, empty_search):
+        assert wire(history, Projection("v21", [], [])) == wire(history, None)
+
+    baseline = wire(empty, None)
+    for items, rebases in (([{"status": "CURRENT"}], []),
+                           ([{"status": "UNKNOWN"}], []),
+                           ([], [{"response_id": "bound-stale-output"}])):
+        projected = wire(empty, Projection("v21", items, rebases))
+        assert SOURCE_AUTHORITY in projected["messages"][0]["content"]
+        assert projected["messages"][1:] == baseline["messages"][1:]
+    assert SOURCE_AUTHORITY in wire(
+        empty, Projection("v20", [], []))["messages"][0]["content"]

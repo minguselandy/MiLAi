@@ -23,9 +23,9 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 | P4 | categorical、boolean、deleted、multi-revision、assistant-only stale非温度控制 | 5/5机制与最终动作通过，[中间表述缺陷保留](MILAI_SER_V20_P4_RESULTS_20260927.md) |
 | P5 | correctness成立后可调rank-bounded refresh及必要对照 | 实现/构建完成；保留R1严格2/6，[R2通用目标合同修正4/4](MILAI_SER_V21_P5_R2_RESULTS_20260927.md)；低排名get3→0而tokens略增 |
 | P6 | §7全部类型的参数化generalized suite，rubric不进入runtime | 完成最小authority协议修复；最终同源十三例13/13，见[最终结果](MILAI_SER_V21_FINAL_RESULTS_20260927.md)；旧冲突失败不改判 |
-| P7 | 已暴露12-case和MERIT arc0回归，保留原失败/费用与matched基线 | 进行中：[R2](MILAI_SER_V22_P7_R2_RESULTS_20260927.md)隔离真实生效，native B1 4/5、A5 3/5；下一步独立修空证据authority开销；R1原十二例和失败全保留 |
-| P8 | 方法收敛与formal freeze，逐项满足§25条件 | 待证明 |
-| P9 | 运行前选择冻结的unseen matched evaluation，B1/lite/full输入与scorer一致 | 待前置条件 |
+| P7 | 已暴露12-case和MERIT arc0回归，保留原失败/费用与matched基线 | 开发验证完成：[R3](MILAI_SER_V22_P7_R3_RESULTS_20260927.md)诊断7/12，MERIT4/5；固定B1参考8/12、4/5，原失败保留；无端到端收益结论 |
+| P8 | 方法收敛与formal freeze，逐项满足§25条件 | [九项判定与方法冻结](MILAI_SER_V22_P8_METHOD_FREEZE.md)完成，允许小规模检验；不等于最终质量GO |
+| P9 | 运行前选择冻结的unseen matched evaluation，B1/lite/full输入与scorer一致 | 下一步：v23薄入口、未见selection预注册、完整三臂 |
 | P10 | external baselines、至少两模型族、历史/密度/版本比例鲁棒性及参数边界 | 待方法稳定 |
 | P11 | Formation与Post-Action Reconciliation独立Goal/机制/评估，不能混同SER收益 | 待独立研究 |
 | P12 | 论文级质量—成本Pareto、错误边界、真实Agent脚本工作负载和复现交付 | 待汇总 |
@@ -43,3 +43,5 @@ P6最终source mapping为`7ee904cba80c0facf0f513fe7607b15ea4fa5a61fc1a0553c1ef4e
 总体完成要求以原1422行计划逐项核对：实现、条件判定、分阶段运行、成本、最终研究结论/复现、Luna发布和远端核对均有当前证据；本表的状态不能代替证据。
 
 P7 R2后连续SER为360生成/332460tokens/3902embeddingtokens/75get；0未知/截断/Judge。方法未收敛，master仍ACTIVE；先做独立条件authority修复，然后按§25逐项冻结，继续P9–P12。
+
+P7 R3/P8后连续SER415生成/373013tokens/4370embeddingtokens/75get；0未知/截断/Judge。49/55实际空证据请求省略authority，20首request与B1相同仍有d11漏搜。进入预注册三臂正式小规模比较，基于结果判断收益或pivot；Formation/Reconciliation和非benchmark真实脚本继续。
