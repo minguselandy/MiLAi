@@ -1,0 +1,14 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_FORMATION_INPUT_FREEZE",
+  "diagnostic": {
+    "inputs_path": "data/diagnostics/milai-lifecycle-v24-formation-inputs.json",
+    "inputs_sha256": "f3816265c6c96f8004229c3f86a0039556fd0caf741cd66cce61c906ec0e8279",
+    "freeze_path": "data/manifests/milai-lifecycle-v24-formation-diagnostic-freeze.json",
+    "freeze_sha256": "8b24c28925113a5817c37391d6f0b5d10445b87bde4f6e7e9a8af1d9fafba494",
+    "cases": 4,
+    "sessions": 6,
+    "public_messages": 6
+  },
+  "unseen": false,
+  "synthetic_development": true
+}

@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from milai_lab.baselines.langmem_agent import RECIPE_ID as B1_RECIPE_ID
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.harness.contextual_artifacts import digest, read_json
 from milai_lab.methods.freshness_projection.controller import (
@@ -15,6 +16,7 @@ from milai_lab.methods.freshness_projection.controller import (
     SER_V21_TRANSPORT_VARIANT,
     TRANSPORT_VARIANT,
 )
+from milai_lab.methods.memory_lifecycle import FORMATION_CUE_SHA256, FORMATION_PROTOCOL_ID
 
 LAB = Path(__file__).resolve().parents[4]
 REFERENCE = LAB / "data/manifests/freshness-v19-repair-reference.json"
@@ -55,6 +57,11 @@ REQUIRED_SER_V23_RUNTIME = REQUIRED_SER_V22_RUNTIME | {
     "tools/run_milai_ser_v23.py",
     "configs/milai-ser-v23.json",
     "src/milai_lab/datasets/merit.py",
+}
+REQUIRED_LIFECYCLE_V24_RUNTIME = REQUIRED_SER_V23_RUNTIME | {
+    "tools/run_milai_lifecycle_v24.py",
+    "configs/milai-lifecycle-v24-formation.json",
+    "src/milai_lab/methods/memory_lifecycle.py",
 }
 
 
@@ -178,6 +185,19 @@ def verify_ser_v23_lock(lock_path: Path, config_path: Path,
     return lock, config
 
 
+def verify_lifecycle_v24_lock(lock_path: Path, config_path: Path,
+                              ) -> tuple[dict[str, Any], dict[str, Any]]:
+    lock, config = _verify_ser_lock(
+        lock_path, config_path, kind="MILAI_LIFECYCLE_V24_LOCK",
+        recipe_id=B1_RECIPE_ID, transport_variant="json_action",
+        required_runtime=REQUIRED_LIFECYCLE_V24_RUNTIME)
+    for key, value in {"formation_protocol_id": FORMATION_PROTOCOL_ID,
+                       "formation_cue_sha256": FORMATION_CUE_SHA256}.items():
+        if lock.get(key) != value or config.get(key) != value:
+            raise ValueError("LIFECYCLE_V24_" + key.upper() + "_CHANGED")
+    return lock, config
+
+
 def verify_ser_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
                         *, run_id: str, arm_id: str, fixture_path: Path) -> str:
     verify_ser_lock(lock_path, config_path)
@@ -243,4 +263,24 @@ def verify_ser_v23_prepared(receipt_path: Path, lock_path: Path, config_path: Pa
     for key, value in expected.items():
         if receipt.get(key) != value:
             raise ValueError("SER_V23_PREPARED_" + key.upper() + "_CHANGED")
+    return expected["lock_sha256"]
+
+
+def verify_lifecycle_v24_prepared(receipt_path: Path, lock_path: Path,
+                                  config_path: Path, *, run_id: str, arm_id: str,
+                                  mode: str, input_path: Path, exposed_freeze: Path,
+                                  diagnostic_freeze: Path | None) -> str:
+    verify_lifecycle_v24_lock(lock_path, config_path)
+    receipt = read_json(receipt_path)
+    expected = {"status": "PREPARED_ZERO_MODEL", "method": "lifecycle_v24",
+                "run_id": run_id, "arm_id": arm_id, "mode": mode,
+                "lock_sha256": sha256_file(lock_path),
+                "config_sha256": sha256_file(config_path),
+                "input_sha256": sha256_file(input_path),
+                "exposed_freeze_sha256": sha256_file(exposed_freeze)}
+    if diagnostic_freeze is not None:
+        expected["diagnostic_freeze_sha256"] = sha256_file(diagnostic_freeze)
+    for key, value in expected.items():
+        if receipt.get(key) != value:
+            raise ValueError("LIFECYCLE_V24_PREPARED_" + key.upper() + "_CHANGED")
     return expected["lock_sha256"]

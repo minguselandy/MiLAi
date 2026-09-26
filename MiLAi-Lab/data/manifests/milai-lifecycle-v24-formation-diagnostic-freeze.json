@@ -1,0 +1,11 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_FORMATION_DIAGNOSTIC_FREEZE",
+  "inputs_path": "data/diagnostics/milai-lifecycle-v24-formation-inputs.json",
+  "inputs_file_sha256": "f3816265c6c96f8004229c3f86a0039556fd0caf741cd66cce61c906ec0e8279",
+  "cases": 4,
+  "sessions": 6,
+  "public_messages": 6,
+  "rubric_path": "data/diagnostics/milai-lifecycle-v24-formation-rubric.json",
+  "rubric_sha256": "491d1c434c76f1afd56645ea2b428f8429e0c94916179783dace2da58ce970f9",
+  "rubric_read_by_runner": false
+}

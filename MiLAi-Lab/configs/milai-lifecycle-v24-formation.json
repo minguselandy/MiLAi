@@ -1,0 +1,45 @@
+{
+  "recipe_id": "langmem-hotpath-react-json-action-v1",
+  "transport_variant": "json_action",
+  "formation_protocol_id": "prospective_retention_cue_v1",
+  "formation_cue_sha256": "1e8b133c61d424efe0add50ad26378bf33a19437409f99b0c1c86b2241acb5af",
+  "host": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 12,
+    "enable_thinking": false
+  },
+  "embedding": {
+    "base_url": "http://127.0.0.1:7861/v1/",
+    "model": "bge-m3",
+    "timeout": 180
+  },
+  "embedding_dimension": 1024,
+  "capacity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "tokenizer_path": "",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "context_tokens": 65536,
+    "output_tokens": 4096,
+    "batch_source_tokens": 6000,
+    "safety_tokens": 512,
+    "source_message_overhead_tokens": 32,
+    "related_reserve_tokens": 0,
+    "schema_reserve_tokens": 0,
+    "enable_thinking": false
+  },
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "trace_path": "artifacts/lifecycle-v24/trace.jsonl",
+  "checkpoint_path": "artifacts/lifecycle-v24/checkpoints.sqlite",
+  "business_journal_path": "artifacts/lifecycle-v24/business-journal.json",
+  "message_capacity_path": "artifacts/lifecycle-v24/message-capacity.json",
+  "sidecar_path": "artifacts/lifecycle-v24/instrumentation.sqlite"
+}

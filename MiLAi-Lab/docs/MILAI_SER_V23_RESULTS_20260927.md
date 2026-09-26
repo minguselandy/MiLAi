@@ -68,3 +68,5 @@ projection CPU39399224ns/wall29484202ns；Provider收据wall67.985202秒。trace
 10. 理由：本轮没有SER触发机会，继续扩大同类回归不能填补上游缺口；先修可证断点并保留反例。
 
 Product API/Schema/权限/Canonical均未改变；方法仍是Lab RESEARCH_PROTOTYPE。Luna发布结果后继续开发，master保持ACTIVE。
+
+后续v24冻结时发现v23 lock沿用了P7的描述字段：`actual_recipe_by_arm`仍列A5、`refresh_policy`仍列rank上限1、`model_visible_contracts`仍指旧暴露输入。这些字段未被v23 runtime读取；实际三臂配置、入口参数、run identity及Provider请求以上文和execution freeze为准，A3/A4实际无rank上限。保留已执行lock字节及其SHA，不追改历史；新生命周期lock独立构造当前字段，避免继续复制过时描述。这是记录缺陷，不改变本轮分数或增加重跑。

@@ -36,4 +36,4 @@ reference_commit: 7f26a9b5f3ff3b5ba54f7c2a0b3dacf3d4d03f90
 - [x] 两arc原字节冻结、六条预定运行，全部容量/语义失败及费用保留。
 - [x] 原scorer/实际wire/语义/成本、Failure Review与十项Reflection。
 - [x] 依据结果PIVOT主开发到生命周期；调用前冻结已发布核对。
-- [ ] Luna发布本轮结果并核对remote；master继续。
+- [x] Luna发布本轮结果并核对remote：`9387f533b9bb76f01beca59e26887194e878fb64`；master继续。

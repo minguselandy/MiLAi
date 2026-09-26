@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 import os
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any, cast
 
@@ -42,11 +43,13 @@ def _input(args: argparse.Namespace) -> Path:
                 else args.merit_selection)
 
 
-def prepare(args: argparse.Namespace) -> dict[str, Any]:
-    verify_ser_v22_lock(args.lock, args.config)
+def prepare(args: argparse.Namespace, *,
+            lock_verifier: Callable[[Path, Path], Any] = verify_ser_v22_lock,
+            method_id: str = "ser_v22") -> dict[str, Any]:
+    lock_verifier(args.lock, args.config)
     input_path = _input(args)
     exposed = read_json(args.exposed_freeze)[args.mode]
-    receipt = {"status": "PREPARED_ZERO_MODEL", "method": "ser_v22",
+    receipt = {"status": "PREPARED_ZERO_MODEL", "method": method_id,
                "run_id": args.run, "arm_id": args.arm, "mode": args.mode,
                "lock_sha256": sha256_file(args.lock),
                "config_sha256": sha256_file(args.config),
@@ -90,15 +93,20 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     return receipt
 
 
-def run(args: argparse.Namespace) -> dict[str, Any]:
+def run(args: argparse.Namespace, *,
+        prepared_verifier: Callable[..., str] = verify_ser_v22_prepared,
+        runtime_prefix: str = "ser-v22",
+        lock_identity_key: str = "ser_v22_lock_sha256",
+        environment_rules: str = "",
+        protocol_id: str | None = None) -> dict[str, Any]:
     input_path = _input(args)
-    lock_sha = verify_ser_v22_prepared(
+    lock_sha = prepared_verifier(
         args.prepared, args.lock, args.config, run_id=args.run, arm_id=args.arm,
         mode=args.mode, input_path=input_path, exposed_freeze=args.exposed_freeze,
         diagnostic_freeze=args.diagnostic_freeze if args.mode == "diagnostic" else None)
     config = read_json(args.config)
     marker_path = Path(config["checkpoint_path"]).parent / (
-        "ser-v22-runtime-" + hashlib.sha256(
+        runtime_prefix + "-runtime-" + hashlib.sha256(
             f"{args.run}:{args.arm}".encode()).hexdigest() + ".json")
     marker = {"run_id": args.run, "arm_id": args.arm,
               "lock_sha256": lock_sha, "config_sha256": sha256_file(args.config),
@@ -119,7 +127,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     embed_config = VLLMConfig(base_url=config["embedding"]["base_url"],
                               model=config["embedding"]["model"],
                               timeout=config["embedding"].get("timeout", 180))
-    identity = {**config, "ser_v22_lock_sha256": lock_sha, "arm_id": args.arm}
+    identity = {**config, lock_identity_key: lock_sha, "arm_id": args.arm}
     try:
         observer.assert_healthy()
         with VLLMClient(host_config, emit=emit, budget=budget,
@@ -132,13 +140,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     embedding_dimensions=config["embedding_dimension"],
                 ) as (base_store, saver):
                     store = ObservedStore(base_store, observer)
-                    policy = config["refresh_policy"]
-                    projection = (ProjectionController(
-                        observer, emit, arm=args.arm, store=store, stage="v21",
-                        refresh_until_current_candidate=policy[
-                            "refresh_until_current_candidate"],
-                        max_exact_refresh_per_search=policy["max_exact_refresh_per_search"])
-                        if args.arm == "a5_rank_bounded_rebase" else None)
+                    if args.arm == "a5_rank_bounded_rebase":
+                        policy = config["refresh_policy"]
+                        projection = ProjectionController(
+                            observer, emit, arm=args.arm, store=store, stage="v21",
+                            refresh_until_current_candidate=policy[
+                                "refresh_until_current_candidate"],
+                            max_exact_refresh_per_search=policy["max_exact_refresh_per_search"])
+                    else:
+                        projection = None
                     model = VLLMChatModel(
                         client=host, capacity_path=Path(config["message_capacity_path"]),
                         observer=observer, projection=projection)
@@ -147,7 +157,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                             input_path, args.diagnostic_freeze, args.output,
                             args.run, model, store, saver, identity,
                             selected_cases=set(args.case) if args.case else None,
-                            arm_id=args.arm, observer=observer)
+                            arm_id=args.arm, observer=observer,
+                            environment_rules=environment_rules,
+                            protocol_id=protocol_id)
                     return run_exposed_merit_arc(
                         input_path, args.output, args.run, model, store, saver,
                         identity, arm_id=args.arm, observer=observer,

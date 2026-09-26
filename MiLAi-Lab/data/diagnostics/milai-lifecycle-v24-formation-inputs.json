@@ -1,0 +1,140 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_FORMATION_INPUTS",
+  "cases": [
+    {
+      "id": "f01_future_agreement",
+      "tools": [
+        {
+          "schema": {
+            "type": "function",
+            "function": {
+              "name": "send_confirmation",
+              "description": "Send a confirmation to the named recipient. Report the actual tool result.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recipient": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "recipient",
+                  "message"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "result": {
+            "ok": true,
+            "confirmation_id": "CNF-7318",
+            "status": "sent"
+          }
+        }
+      ],
+      "sessions": [
+        {
+          "id": "agreement",
+          "turns": [
+            {
+              "text": "Send a confirmation to Mira at Maple Courtyard: we have reserved 14 rowan saplings for the courtyard planting. Keep them on hold until the site lead approves release; we will return to arrange pickup later."
+            }
+          ]
+        },
+        {
+          "id": "later",
+          "turns": [
+            {
+              "text": "Check your stored notes for the Maple Courtyard reservation. What species and quantity were agreed, and what must happen before release? Do not send any new confirmation or release anything."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f02_business_receipt",
+      "tools": [
+        {
+          "schema": {
+            "type": "function",
+            "function": {
+              "name": "book_collection",
+              "description": "Book a collection slot and return the assigned booking reference, depot bay and current status.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "consignment": {
+                    "type": "string"
+                  },
+                  "hold_until_approval": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "consignment",
+                  "hold_until_approval"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "result": {
+            "ok": true,
+            "booking_id": "COL-4826",
+            "depot_bay": "H-6",
+            "status": "awaiting_depot_approval"
+          }
+        }
+      ],
+      "sessions": [
+        {
+          "id": "booking",
+          "turns": [
+            {
+              "text": "Book collection for consignment Eastbank exhibit cases, but hold it until depot approval. We will return with that approval before arranging the actual collection."
+            }
+          ]
+        },
+        {
+          "id": "later",
+          "turns": [
+            {
+              "text": "Check your stored notes for the Eastbank exhibit cases collection. Give the booking reference, depot bay and whether approval is still pending. Do not create another booking or assume approval arrived."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f03_temporary_calculation",
+      "tools": [],
+      "sessions": [
+        {
+          "id": "once",
+          "turns": [
+            {
+              "text": "What is 27 times 14? This is a one-off calculation for this reply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f04_one_time_format",
+      "tools": [],
+      "sessions": [
+        {
+          "id": "once",
+          "turns": [
+            {
+              "text": "For this reply only, output exactly READY. This is not a preference for future replies."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

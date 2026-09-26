@@ -147,6 +147,16 @@ P11 Formation/Reconciliation with generic mechanisms and temporary/no-op/failure
 Do not modify the P9 prompt or rerun seeds3/4 to improve scores. A separate second-model
 endpoint question is pending; continue independent work, keep P10/P12/master unfinished.
 
+Independent [v24 Formation R1](docs/MILAI_LIFECYCLE_V24_FORMATION_R1_RESULTS_20260927.md)
+is executed on mapping `4701725c48bd652fde54ca80d821590aa47235860900765613c89afe95099be1`:
+B1/F both retain 0/2 future observations and pass the two temporary controls; all12 messages
+complete, cue reaches all10 F requests, but no memory write occurs. Preserve +703 F tokens
+without benefit and all588 continuous generations / 541964tokens / 5115embeddingtokens /75get.
+Two narrow checks and one package pass. After Luna checkpoint, only strengthen the generic
+conditional persistence duty in a separately frozen cue; ordinary Host retains CRUD/no-op
+choice. Keep four exposed development cases, fixed historical B1 clearly labeled, no extra
+LLM phase or receipt hook yet. R remains independent and unimplemented; master stays ACTIVE.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

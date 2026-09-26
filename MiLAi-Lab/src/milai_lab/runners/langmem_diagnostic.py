@@ -54,6 +54,8 @@ def run_frozen_diagnostics(
     selected_cases: set[str] | None = None,
     arm_id: str = "b0",
     observer: ProvenanceObserver | None = None,
+    environment_rules: str = "",
+    protocol_id: str | None = None,
 ) -> dict[str, Any]:
     freeze = read_json(freeze_path)
     if hashlib.sha256(inputs_path.read_bytes()).hexdigest() != freeze["inputs_file_sha256"]:
@@ -78,6 +80,8 @@ def run_frozen_diagnostics(
     }
     if arm_id != "b0":
         identity["arm_id"] = arm_id
+    if protocol_id is not None:
+        identity["protocol_id"] = protocol_id
     identity_path = output / "run-identity.json"
     if identity_path.exists():
         if read_json(identity_path) != identity:
@@ -92,7 +96,8 @@ def run_frozen_diagnostics(
         journal = BusinessActionJournal(case_path / "business-journal.json",
                                         [item.name for item in tools])
         agent = build_agent(model, store, checkpointer, tools,
-                            business_call_wrapper=journal, observer=observer)
+                            business_call_wrapper=journal, observer=observer,
+                            environment_rules=environment_rules)
         summary: dict[str, Any] = {"id": case["id"], "status": "RUNNING", "sessions": []}
         try:
             for declared in case["sessions"]:

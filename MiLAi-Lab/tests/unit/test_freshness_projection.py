@@ -48,6 +48,7 @@ from milai_lab.methods.freshness_projection.projection import (
     ProjectedRequest,
     project_current_evidence,
 )
+from milai_lab.methods.memory_lifecycle import FORMATION_CUE, FORMATION_PROTOCOL_ID
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import langmem_merit
@@ -879,6 +880,56 @@ def test_v23_prepare_binds_declared_arc_and_pre_registration(
     freeze_path.write_text(json.dumps(freeze), encoding="utf-8")
     with pytest.raises(ValueError, match="SER_V23_FROZEN_ARC_CHANGED"):
         entry.prepare(args)
+
+
+def test_formation_cue_is_only_system_difference_and_identity_is_explicit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    inputs_path = tmp_path / "inputs.json"
+    inputs_path.write_text(json.dumps({"cases": [{"id": "generic", "tools": [],
+        "sessions": [{"id": "first", "turns": [{"text": "Please help."}]}]}]}),
+        encoding="utf-8")
+    freeze_path = tmp_path / "freeze.json"
+    freeze_path.write_text(json.dumps({"inputs_file_sha256": sha256_file(inputs_path),
+                                       "cases": 1}), encoding="utf-8")
+    wires: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        wires.append(json.loads(request.read()))
+        return httpx.Response(200, json=_receipt({"answer": "ok"}, f"g{len(wires)}"))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            for arm, rules, protocol in (("b1_control", "", None),
+                                         ("f_prospective_retention", FORMATION_CUE,
+                                          FORMATION_PROTOCOL_ID)):
+                model = VLLMChatModel(client=client)
+                output = tmp_path / arm
+                result = run_frozen_diagnostics(
+                    inputs_path, freeze_path, output, "run", model, InMemoryStore(),
+                    saver, {"same": True}, arm_id=arm, environment_rules=rules,
+                    protocol_id=protocol)
+                assert result["status"] == "TERMINAL"
+                identity = json.loads((output / "run-identity.json").read_text())
+                assert identity.get("protocol_id") == protocol
+    assert len(wires) == 2
+    assert wires[1]["messages"][0]["content"] == (
+        wires[0]["messages"][0]["content"] + "\n" + FORMATION_CUE)
+    assert wires[1]["messages"][1:] == wires[0]["messages"][1:]
+
+    monkeypatch.syspath_prepend(str(LAB / "tools"))
+    import run_milai_lifecycle_v24 as entry
+
+    captured: list[dict[str, Any]] = []
+    monkeypatch.setattr(entry, "run_diagnostic", lambda _args, **kwargs: (
+        captured.append(kwargs) or {}))
+    for arm in entry.ARMS:
+        entry.run(SimpleNamespace(arm=arm))
+    assert [item["environment_rules"] for item in captured] == ["", FORMATION_CUE]
+    assert [item["protocol_id"] for item in captured] == [
+        "langmem_default_v1", FORMATION_PROTOCOL_ID]
 
 
 def test_v21_authority_only_when_actual_memory_or_derived_risk_is_projected() -> None:

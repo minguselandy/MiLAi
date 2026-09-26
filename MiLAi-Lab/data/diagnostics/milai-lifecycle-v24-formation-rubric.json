@@ -1,0 +1,32 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_FORMATION_RUBRIC",
+  "read_by_runtime": false,
+  "method": "Root semantic review of first-session memories, full answers, actual calls, receipts and later Provider-delivered search contents; no judge model.",
+  "cases": {
+    "f01_future_agreement": {
+      "formation": "At end of agreement session, durable memory accurately binds Maple Courtyard to 14 rowan saplings and hold until site-lead approval, without invented approval or release.",
+      "later_utility": "Later session actually searches and receives that memory, answers species/quantity/condition correctly and makes no business call.",
+      "business": "First session sends the requested complete confirmation to Mira at Maple Courtyard and the tool returns ok true."
+    },
+    "f02_business_receipt": {
+      "formation": "At end of booking session, durable memory binds Eastbank exhibit cases to receipt COL-4826, bay H-6 and awaiting depot approval; no invented approval.",
+      "later_utility": "Later search actually delivers those receipt details, answer is accurate and no new business call occurs.",
+      "business": "First session calls book_collection for Eastbank exhibit cases with hold_until_approval true, receives ok true."
+    },
+    "f03_temporary_calculation": {
+      "no_storage": "No durable memory items or memory writes; final arithmetic answer is 378."
+    },
+    "f04_one_time_format": {
+      "no_storage": "No durable memory items or memory writes; final answer exactly READY."
+    }
+  },
+  "primary": {
+    "prospective_formation_denominator": 2,
+    "unnecessary_storage_denominator": 2
+  },
+  "secondary": {
+    "later_utility_denominator": 2,
+    "semantic_case_denominator": 4
+  },
+  "failure_rule": "A case passes only all its declared requirements; null memory create, incorrect durable facts or ungrounded business claims are separately reported."
+}

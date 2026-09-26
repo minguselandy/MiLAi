@@ -40,6 +40,13 @@ SER benefit. Primary development pivots to independent Formation/Reconciliation,
 model/history boundaries and final usability work remain open. Continuous costs are now
 568 generations / 530611 tokens / 5057 embedding tokens / 75 exact reads.
 
+[Independent Formation R1](docs/MILAI_LIFECYCLE_V24_FORMATION_R1_RESULTS_20260927.md)
+finishes four small cases per arm: B1 and the prospective cue both retain 0/2 future items,
+while temporary controls pass. The cue is delivered but adds 703 tokens without benefit.
+Preserve this failure before a minimal generic instruction repair; no extra model phase
+or vLLM change. Continuous costs: 588 generations / 541964 tokens / 5115 embedding tokens /
+75 exact reads. Reconciliation and P10/P12 remain open.
+
 Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.
 Original Notice and request-copy Quarantine each pass 1/3 controls; conditional Exact Refresh
