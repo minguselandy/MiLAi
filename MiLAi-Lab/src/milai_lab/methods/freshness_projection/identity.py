@@ -44,6 +44,12 @@ REQUIRED_SER_V21_RUNTIME = REQUIRED_SER_RUNTIME | {
     "tools/run_milai_ser_v21.py",
     "configs/milai-ser-v21.json",
 }
+REQUIRED_SER_V22_RUNTIME = REQUIRED_SER_V21_RUNTIME | {
+    "tools/run_milai_ser_v22.py",
+    "configs/milai-ser-v22.json",
+    "src/milai_lab/runners/langmem_diagnostic.py",
+    "src/milai_lab/runners/langmem_merit.py",
+}
 
 
 def verify_lock(lock_path: Path, config_path: Path, arm_id: str,
@@ -147,6 +153,14 @@ def verify_ser_v21_lock(lock_path: Path, config_path: Path,
         required_runtime=REQUIRED_SER_V21_RUNTIME)
 
 
+def verify_ser_v22_lock(lock_path: Path, config_path: Path,
+                        ) -> tuple[dict[str, Any], dict[str, Any]]:
+    return _verify_ser_lock(
+        lock_path, config_path, kind="MILAI_SER_V22_LOCK",
+        recipe_id=SER_V21_RECIPE_ID, transport_variant=SER_V21_TRANSPORT_VARIANT,
+        required_runtime=REQUIRED_SER_V22_RUNTIME)
+
+
 def verify_ser_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
                         *, run_id: str, arm_id: str, fixture_path: Path) -> str:
     verify_ser_lock(lock_path, config_path)
@@ -171,6 +185,26 @@ def verify_ser_v21_prepared(receipt_path: Path, lock_path: Path, config_path: Pa
                 "lock_sha256": sha256_file(lock_path),
                 "config_sha256": sha256_file(config_path),
                 "fixture_sha256": sha256_file(fixture_path)}
+    for key, value in expected.items():
+        if receipt.get(key) != value:
+            raise ValueError("SER_PREPARED_" + key.upper() + "_CHANGED")
+    return expected["lock_sha256"]
+
+
+def verify_ser_v22_prepared(receipt_path: Path, lock_path: Path, config_path: Path,
+                            *, run_id: str, arm_id: str, mode: str,
+                            input_path: Path, exposed_freeze: Path,
+                            diagnostic_freeze: Path | None) -> str:
+    verify_ser_v22_lock(lock_path, config_path)
+    receipt = read_json(receipt_path)
+    expected = {"status": "PREPARED_ZERO_MODEL", "method": "ser_v22",
+                "run_id": run_id, "arm_id": arm_id, "mode": mode,
+                "lock_sha256": sha256_file(lock_path),
+                "config_sha256": sha256_file(config_path),
+                "input_sha256": sha256_file(input_path),
+                "exposed_freeze_sha256": sha256_file(exposed_freeze)}
+    if diagnostic_freeze is not None:
+        expected["diagnostic_freeze_sha256"] = sha256_file(diagnostic_freeze)
     for key, value in expected.items():
         if receipt.get(key) != value:
             raise ValueError("SER_PREPARED_" + key.upper() + "_CHANGED")

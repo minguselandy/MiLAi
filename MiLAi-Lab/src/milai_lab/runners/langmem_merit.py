@@ -56,7 +56,8 @@ def run_exposed_merit_arc(
     output.mkdir(parents=True, exist_ok=True)
     identity = {
         "recipe_id": (model.m1.recipe_id if model.m1 is not None else
-                      model.odr.recipe_id if model.odr is not None else RECIPE_ID),
+                      model.odr.recipe_id if model.odr is not None else
+                      model.projection.recipe_id if model.projection is not None else RECIPE_ID),
         "run_id": run_id,
         "arc_id": arc.arc_id,
         "selection_sha256": hashlib.sha256(selection_path.read_bytes()).hexdigest(),

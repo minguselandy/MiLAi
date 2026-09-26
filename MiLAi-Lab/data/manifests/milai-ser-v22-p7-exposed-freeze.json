@@ -1,0 +1,27 @@
+{
+  "kind": "MILAI_SER_V22_EXPOSED_INPUT_FREEZE",
+  "status": "FROZEN_BEFORE_P7_REQUESTS",
+  "created_at": "2026-09-26T17:46:29.926865+00:00",
+  "prior_checkpoint": "010ada50bddc6f208ce4311fe311beff4c5c4551",
+  "diagnostic": {
+    "inputs_path": "artifacts/contextual-user-memory/v14-v1-spec/inputs.json",
+    "inputs_sha256": "a6852f07b4b1801e0426cb9ca930c518b3182ac2d5b9f2754f9109e98bf862bc",
+    "freeze_path": "data/manifests/contextual-memory-v14-diagnostic-freeze.json",
+    "freeze_sha256": "4f4c699990a65a02754fa745c8039d922149a2e8b4dc6728c92ae1efa99f9459",
+    "cases": 12,
+    "sessions": 20,
+    "public_messages": 20
+  },
+  "merit": {
+    "selection_path": "data/manifests/contextual-memory-v7-e0-selection-final.json",
+    "selection_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+    "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+    "world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29",
+    "arc_id": "arc0-000",
+    "episodes": 5,
+    "dependent_episodes": 2,
+    "public_messages": 7
+  },
+  "rubric_read_by_runner": false,
+  "unseen": false
+}

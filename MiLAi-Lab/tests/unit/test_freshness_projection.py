@@ -17,6 +17,7 @@ from langchain_core.tools import tool
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.store.memory import InMemoryStore
 
+from milai_lab.baselines.langmem_agent import RECIPE_ID as B1_RECIPE_ID
 from milai_lab.baselines.langmem_agent import (
     FoundationScope,
     build_agent,
@@ -31,7 +32,10 @@ from milai_lab.baselines.langmem_revision_store import (
     canonical_json,
     content_identity,
 )
-from milai_lab.methods.freshness_projection.controller import ProjectionController
+from milai_lab.methods.freshness_projection.controller import (
+    SER_V21_RECIPE_ID,
+    ProjectionController,
+)
 from milai_lab.methods.freshness_projection.lineage import (
     DERIVED_WITHHELD,
     project_derived_assistants,
@@ -42,6 +46,7 @@ from milai_lab.methods.freshness_projection.projection import (
 )
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
+from milai_lab.runners.langmem_diagnostic import run_frozen_diagnostics
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
 from milai_lab.runners.langmem_m1_mechanism import (
     SearchResultRequestView,
@@ -335,6 +340,37 @@ def test_lineage_uses_namespace_revision_and_response_id() -> None:
     assert stale.messages[0]["content"] == DERIVED_WITHHELD
     assert stale.messages[1] == wire[1]
     assert stale.rebases[0]["stale_refs"][0]["namespace"] == ["run", "user"]
+
+
+def test_exposed_diagnostic_identity_uses_actual_projection_recipe(tmp_path: Path) -> None:
+    inputs_path = tmp_path / "inputs.json"
+    inputs_path.write_text(json.dumps({"cases": [{"id": "identity", "tools": [],
+                                                   "sessions": []}]}), encoding="utf-8")
+    freeze_path = tmp_path / "freeze.json"
+    freeze_path.write_text(json.dumps({"inputs_file_sha256": sha256_file(inputs_path),
+                                       "cases": 1}), encoding="utf-8")
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock"),
+                    transport=httpx.MockTransport(lambda _: httpx.Response(500))) as client:
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            for arm, expected in (("b1_control", B1_RECIPE_ID),
+                                  ("a5_rank_bounded_rebase", SER_V21_RECIPE_ID)):
+                sidecar = RevisionSidecar(tmp_path / f"{arm}.sqlite")
+                observer = ProvenanceObserver(sidecar, "run", arm)
+                store = ObservedStore(InMemoryStore(), observer)
+                projection = (ProjectionController(
+                    observer, arm=arm, store=store, stage="v21",
+                    refresh_until_current_candidate=True, max_exact_refresh_per_search=1)
+                    if arm == "a5_rank_bounded_rebase" else None)
+                model = VLLMChatModel(client=client, observer=observer,
+                                      projection=projection)
+                output = tmp_path / arm
+                result = run_frozen_diagnostics(
+                    inputs_path, freeze_path, output, "run", model, store, saver,
+                    {"lock": "same"}, arm_id=arm, observer=observer)
+                assert result["status"] == "TERMINAL"
+                assert json.loads((output / "run-identity.json").read_text())[
+                    "recipe_id"] == expected
+                sidecar.close()
 
 
 @pytest.mark.parametrize("arm", ["a2_quarantine", "a3_exact_refresh"])

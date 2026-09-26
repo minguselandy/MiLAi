@@ -96,6 +96,18 @@ with fresh namespaces and one continuous ledger. The native MERIT memory checker
 checkpoint history; actual Provider delivery must be reported separately. P7–P12 and the
 master Goal remain active. No publication-only reruns or changes to vLLM settings.
 
+P7 R1 wiring/build and four frozen attempts are complete, but exposed regression is not:
+[R1 results](docs/MILAI_SER_V22_P7_R1_RESULTS_20260927.md) show B1 diagnostic 8/12 versus A5 7/12;
+both MERIT runs hit the original 12-generation per-message capacity at episode 2 after no
+memory was formed. Full arc scores are unavailable. Preserve all 104 new generations /
+78617 tokens / 852 embedding tokens; continuous SER is 306 / 274357 / 3689, exact reads75.
+Next, after Luna checkpoint, Sol adds opt-in episode-local capacity isolation with default
+false. Keep the native world-checker formula, report Host failure and skipped messages
+separately, retain side effects, and stop on service/Store/instrumentation faults. Root freezes
+and runs only the two affected MERIT arms first. Do not raise capacities or simultaneously
+change authority. A5 has 48/52 requests with no memory items yet still adds authority; its
+conditional inclusion is a separate candidate after the coverage repair. P8 remains pending.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

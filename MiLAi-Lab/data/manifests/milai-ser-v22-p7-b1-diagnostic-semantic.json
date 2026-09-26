@@ -1,0 +1,25 @@
+{
+  "kind": "MILAI_SER_V22_P7_ROOT_SEMANTIC_REVIEW",
+  "status": "COMPLETE_WITH_SEMANTIC_FAILURES",
+  "run_id": "ser-v22-p7-b1-diagnostic-r1",
+  "rubric_sha256": "62ab23a2a15f2ef3b81ecb51a715a19e379d24581b90ade2e9b8c12968a0ebcc",
+  "method": "Root read every complete saved answer, memory and tool/business receipt. Same v16 semantic boundary; no old v14 protocol-only fields required. No Judge call.",
+  "successes": 8,
+  "denominator": 12,
+  "cases": [
+    {"case_id": "d01", "status": "PASS", "reason": "回答540，无长期保存。"},
+    {"case_id": "d02", "status": "FAIL", "first_broken_link": "formation", "reason": "一次message_courier成功，K17/MSG-K17及bay 6要求没有保存；下session真实search为空，无法回答。原回复声称回执可供下次使用，事实未成立；无release。"},
+    {"case_id": "d03", "status": "PASS", "reason": "保存限定project summaries的ISO日期规则，下一session真实检索并回答。"},
+    {"case_id": "d04", "status": "FAIL", "first_broken_link": "task_instruction_following", "reason": "解释了电池检查顺序，但READY只出现在解释中，没有放在回复末尾；无长期保存。"},
+    {"case_id": "d05", "status": "PASS", "reason": "保存Cedar会前十分钟accessibility review及等待后续要求，下一session检索正确，未draft或send。"},
+    {"case_id": "d06", "status": "PASS", "reason": "保存设备盘点范围和2026-10-01分界，下一session检索后分别回答pounds和kilograms。"},
+    {"case_id": "d07", "status": "PASS", "reason": "回答EVEN，无长期规则。"},
+    {"case_id": "d08", "status": "FAIL", "first_broken_link": "retrieval_omission", "reason": "Juniper/East Desk/16:30/显式documents accepted前不得booking均保存；下一session没有search，错误声称不能检索并要求用户去外部平台。未booking。"},
+    {"case_id": "d09", "status": "FAIL", "first_broken_link": "retrieval_omission", "reason": "同区/异区双分支及Asia/Shanghai均保存；下一session没有search，只给不同区泛化说明，缺同区分支及用户时区。"},
+    {"case_id": "d10", "status": "PASS", "reason": "简短确认，无持久保存。"},
+    {"case_id": "d11", "status": "PASS", "reason": "保存Atlas选择发布日期前向Nina索取load-test log，未保存临时one-bullet格式；下一session真实search取得提醒，无联系动作。与历史v16此例失败不同，不能用历史分数替代本轮matched基线。"},
+    {"case_id": "d12", "status": "PASS", "reason": "保存真实型号小写m0及同型号spare connector，下一session检索并正确回答。"}
+  ],
+  "judge_requests": 0,
+  "unseen": false
+}

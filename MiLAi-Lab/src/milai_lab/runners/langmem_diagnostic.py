@@ -69,7 +69,8 @@ def run_frozen_diagnostics(
     output.mkdir(parents=True, exist_ok=True)
     identity = {
         "recipe_id": (model.m1.recipe_id if model.m1 is not None else
-                      model.odr.recipe_id if model.odr is not None else RECIPE_ID),
+                      model.odr.recipe_id if model.odr is not None else
+                      model.projection.recipe_id if model.projection is not None else RECIPE_ID),
         "run_id": run_id,
         "inputs_sha256": hashlib.sha256(inputs_path.read_bytes()).hexdigest(),
         "config_sha256": digest(config_identity),

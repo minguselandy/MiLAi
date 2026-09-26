@@ -1,0 +1,255 @@
+{
+  "kind": "MILAI_SER_V22_P7_RUN_MECHANICAL_REVIEW",
+  "run_id": "ser-v22-p7-b1-merit-r1",
+  "arm": "b1_control",
+  "mode": "merit",
+  "source_mapping_sha256": "6df42a956fbde97e4a1421bc3179b11026ff0ef65c2c93fec280dce25c2e3b3e",
+  "status": "MECHANICAL_PASS_SEMANTIC_REVIEW_SEPARATE",
+  "actual_recipe_id": "langmem-hotpath-react-json-action-v1",
+  "runtime_status": "INTERRUPTED_UNSCORED",
+  "task_summary": {
+    "status": "INTERRUPTED_UNSCORED",
+    "episode_index": 2,
+    "public_message_index": 0,
+    "error_type": "ValueError",
+    "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+    "completed_episodes": 2,
+    "original_denominator": 5,
+    "budget": {
+      "limits": {
+        "questions": 12,
+        "arms": 3,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "embedding_tokens": null
+      },
+      "generation_requests": 288,
+      "generation": {
+        "charged_tokens": 254499,
+        "known_tokens": 254499,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 3632,
+        "known_tokens": 3632,
+        "unknown_usage": 0
+      },
+      "history": {
+        "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+        "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+        "generation_requests": 45,
+        "generation_tokens": 41457,
+        "embedding_tokens": 808,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+          "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+          "generation_requests": 20,
+          "generation_tokens": 20360,
+          "embedding_tokens": 274,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+            "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+            "generation_requests": 16,
+            "generation_known_tokens": 19237,
+            "generation_charged_tokens": 19237,
+            "embedding_tokens": 267,
+            "unknown_usage": 0,
+            "judge_requests": 0,
+            "truncations": 1,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+              "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+              "generation_requests": 101,
+              "generation_known_tokens": 101810,
+              "generation_charged_tokens": 101810,
+              "embedding_tokens": 916,
+              "unknown_usage": 0,
+              "sealed": true,
+              "earlier_history": {
+                "ledger": "artifacts/langmem-provenance/v16-budget.json",
+                "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+                "generation_requests": 55,
+                "generation_known_tokens": 40072,
+                "generation_charged_tokens": 40072,
+                "embedding_tokens": 443,
+                "unknown_usage": 0,
+                "judge_requests": 0,
+                "sealed": true,
+                "earlier_v15": {
+                  "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                  "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                  "generation_requests": 108,
+                  "generation_known_tokens": 71846,
+                  "generation_unknown_reservation": 4891,
+                  "generation_charged_tokens": 76737,
+                  "embedding_tokens": 836,
+                  "unknown_usage": 1,
+                  "judge_requests": 0,
+                  "sealed": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "usage": {
+    "generations": 18,
+    "input_tokens": 18057,
+    "output_tokens": 809,
+    "generation_tokens": 18866,
+    "embedding_requests": 10,
+    "embedding_tokens": 80,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "projection_cpu_ns": 0,
+    "projection_wall_ns": 0,
+    "exact_reads": 0,
+    "exact_read_wall_ns": 0,
+    "provider_wall_seconds": 8.32996154204011
+  },
+  "process": {
+    "run_id": "ser-v22-p7-b1-merit-r1",
+    "exit_code": 1,
+    "process_wall_seconds": 15.566550587769598
+  },
+  "instrumentation": {
+    "counts": {
+      "searches": 10,
+      "tool_calls": 17,
+      "request_material": 83,
+      "requests": 18,
+      "observations": 11,
+      "bodies": 9,
+      "operations": 0,
+      "revisions": 0
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 17
+      },
+      "operations": {},
+      "searches": {
+        "returned": 10
+      },
+      "requests": {
+        "completed": 18
+      }
+    },
+    "observation_roles": {
+      "business_tool": 7,
+      "user": 4
+    },
+    "revision_effects": {},
+    "material_coverage": {
+      "FULL": 83
+    },
+    "search_returned_items": 0,
+    "search_exact_revision_bindings": 0,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 222,
+      "observer_cpu_ns": 70888348,
+      "observer_wall_ns": 2112221540,
+      "extra_store_reads": 0,
+      "extra_read_cpu_ns": 0,
+      "extra_read_wall_ns": 0,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 172032,
+      "net_sqlite_db_bytes": 73728,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "projection_requests": 0,
+  "projection_item_status_counts": {},
+  "ordinary_lineage": 0,
+  "derived_demotions": 0,
+  "rebase_precision_counts": [
+    0,
+    0
+  ],
+  "rebase_recall_counts": [
+    0,
+    0
+  ],
+  "rebase_denominator_meaning": "Request-level snapshot risk reconstructed from real Store-operation generating receipt order; 0/0 undefined, not semantic causal precision.",
+  "business_calls": [
+    {
+      "name": "get_order",
+      "args": {
+        "order_id": "ORD-197802"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-a55cbdeea24f55bf"
+    },
+    {
+      "name": "send_message",
+      "args": {
+        "customer_id": "CUST-1003",
+        "body": "We have noted your request regarding order ORD-197802. We confirm that the agreed partial refund amount is 2492 cents. We will not process the refund until you provide further confirmation. Please let us know once you are ready to proceed."
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-a55cbdeea24f55bf"
+    },
+    {
+      "name": "send_message",
+      "args": {
+        "customer_id": "CUST-1003",
+        "body": "We have updated our records for order ORD-197802. The agreed partial refund amount is confirmed as 1774 cents. This refund has not been processed yet and will only be issued upon your further instruction."
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-9876911b31621609"
+    },
+    {
+      "name": "send_message",
+      "args": {
+        "customer_id": "CUST-1002",
+        "body": "We have updated our records for order ORD-470977. The agreed partial refund amount is confirmed as 503 cents. This refund has not been processed yet and will only be issued upon your further instruction."
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-8344924c99f7e6fe"
+    },
+    {
+      "name": "get_order",
+      "args": {
+        "order_id": "ORD-197802"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-ba2760b247c365d6"
+    },
+    {
+      "name": "get_policy",
+      "args": {
+        "key": "partial_refund_max_percent"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-a1c64509d90244d0"
+    },
+    {
+      "name": "get_policy",
+      "args": {
+        "key": "max_refund_without_approval_cents"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-a7e153005c0d0910"
+    }
+  ],
+  "artifact_sha256": {
+    "artifacts/ser-v22/p7-b1-merit-r1/trace.jsonl": "05ef01f12c8a2e5140fe1608e7c5f7c312d149555a590a56f113db5c1dd4e327",
+    "artifacts/ser-v22/p7-b1-merit-r1/instrumentation.sqlite": "93c0f0a5969244eabc5a4666cc5871d6f208a3f14c41b1ede7d89af0f19b060f",
+    "artifacts/ser-v22/p7-b1-merit-r1/checkpoints.sqlite": "3a754ea5b6619cc63fec362e4f9ed74933cf1a6115c02d0c088529629bae76a6",
+    "artifacts/ser-v22/p7-b1-merit-r1/run/run-identity.json": "4800f16476906a269f6605d8926c911ab5bb27239fa8335cb7c1d5ad2d0585ff",
+    "artifacts/ser-v22/p7-b1-merit-r1/run/interruption.json": "91effe6d6607b2ba72acc9eebeaa3e5a5c02d88a0703f52fed1b4c40430dd7a0"
+  },
+  "file_bytes": {
+    "trace.jsonl": 629463,
+    "instrumentation.sqlite": 172032,
+    "checkpoints.sqlite": 290816
+  },
+  "persistent_semantic_state_bytes": 0,
+  "judge_requests": 0
+}

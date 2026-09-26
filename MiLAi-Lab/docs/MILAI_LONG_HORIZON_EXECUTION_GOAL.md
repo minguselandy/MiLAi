@@ -23,7 +23,7 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 | P4 | categorical、boolean、deleted、multi-revision、assistant-only stale非温度控制 | 5/5机制与最终动作通过，[中间表述缺陷保留](MILAI_SER_V20_P4_RESULTS_20260927.md) |
 | P5 | correctness成立后可调rank-bounded refresh及必要对照 | 实现/构建完成；保留R1严格2/6，[R2通用目标合同修正4/4](MILAI_SER_V21_P5_R2_RESULTS_20260927.md)；低排名get3→0而tokens略增 |
 | P6 | §7全部类型的参数化generalized suite，rubric不进入runtime | 完成最小authority协议修复；最终同源十三例13/13，见[最终结果](MILAI_SER_V21_FINAL_RESULTS_20260927.md)；旧冲突失败不改判 |
-| P7 | 已暴露12-case和MERIT arc0回归，保留原失败/费用与matched基线 | 下一阶段：同源B1/A5，原12-case/20session与arc0/5episode/7message；复用原loop/scorer |
+| P7 | 已暴露12-case和MERIT arc0回归，保留原失败/费用与matched基线 | 进行中：[R1](MILAI_SER_V22_P7_R1_RESULTS_20260927.md)诊断B1 8/12、A5 7/12；两条arc0空搜循环在ep2容量中止；先修局部失败隔离，再独立处理空memory authority开销 |
 | P8 | 方法收敛与formal freeze，逐项满足§25条件 | 待证明 |
 | P9 | 运行前选择冻结的unseen matched evaluation，B1/lite/full输入与scorer一致 | 待前置条件 |
 | P10 | external baselines、至少两模型族、历史/密度/版本比例鲁棒性及参数边界 | 待方法稳定 |

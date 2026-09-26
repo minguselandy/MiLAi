@@ -1,0 +1,199 @@
+{
+  "kind": "MILAI_SER_V22_P7_RUN_MECHANICAL_REVIEW",
+  "run_id": "ser-v22-p7-b1-diagnostic-r1",
+  "arm": "b1_control",
+  "mode": "diagnostic",
+  "source_mapping_sha256": "6df42a956fbde97e4a1421bc3179b11026ff0ef65c2c93fec280dce25c2e3b3e",
+  "status": "MECHANICAL_PASS_SEMANTIC_REVIEW_SEPARATE",
+  "actual_recipe_id": "langmem-hotpath-react-json-action-v1",
+  "runtime_status": "TERMINAL",
+  "task_summary": {
+    "status": "TERMINAL",
+    "cases": [
+      {
+        "id": "d01",
+        "status": "TERMINAL",
+        "completed_sessions": 1,
+        "declared_sessions": 1
+      },
+      {
+        "id": "d02",
+        "status": "TERMINAL",
+        "completed_sessions": 2,
+        "declared_sessions": 2
+      },
+      {
+        "id": "d03",
+        "status": "TERMINAL",
+        "completed_sessions": 2,
+        "declared_sessions": 2
+      },
+      {
+        "id": "d04",
+        "status": "TERMINAL",
+        "completed_sessions": 1,
+        "declared_sessions": 1
+      },
+      {
+        "id": "d05",
+        "status": "TERMINAL",
+        "completed_sessions": 2,
+        "declared_sessions": 2
+      },
+      {
+        "id": "d06",
+        "status": "TERMINAL",
+        "completed_sessions": 2,
+        "declared_sessions": 2
+      },
+      {
+        "id": "d07",
+        "status": "TERMINAL",
+        "completed_sessions": 1,
+        "declared_sessions": 1
+      },
+      {
+        "id": "d08",
+        "status": "TERMINAL",
+        "completed_sessions": 2,
+        "declared_sessions": 2
+      },
+      {
+        "id": "d09",
+        "status": "TERMINAL",
+        "completed_sessions": 2,
+        "declared_sessions": 2
+      },
+      {
+        "id": "d10",
+        "status": "TERMINAL",
+        "completed_sessions": 1,
+        "declared_sessions": 1
+      },
+      {
+        "id": "d11",
+        "status": "TERMINAL",
+        "completed_sessions": 2,
+        "declared_sessions": 2
+      },
+      {
+        "id": "d12",
+        "status": "TERMINAL",
+        "completed_sessions": 2,
+        "declared_sessions": 2
+      }
+    ],
+    "declared_case_count": 12,
+    "inputs_sha256": "a6852f07b4b1801e0426cb9ca930c518b3182ac2d5b9f2754f9109e98bf862bc",
+    "rubric_read_by_runner": false
+  },
+  "usage": {
+    "generations": 34,
+    "input_tokens": 17387,
+    "output_tokens": 1482,
+    "generation_tokens": 18869,
+    "embedding_requests": 13,
+    "embedding_tokens": 373,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "projection_cpu_ns": 0,
+    "projection_wall_ns": 0,
+    "exact_reads": 0,
+    "exact_read_wall_ns": 0,
+    "provider_wall_seconds": 13.601220744661987
+  },
+  "process": {
+    "run_id": "ser-v22-p7-b1-diagnostic-r1",
+    "exit_code": 0,
+    "process_wall_seconds": 22.097073866054416
+  },
+  "instrumentation": {
+    "counts": {
+      "request_material": 14,
+      "revisions": 7,
+      "bodies": 41,
+      "requests": 34,
+      "operations": 7,
+      "searches": 6,
+      "tool_calls": 14,
+      "observations": 21
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 14
+      },
+      "operations": {
+        "complete": 7
+      },
+      "searches": {
+        "returned": 6
+      },
+      "requests": {
+        "completed": 34
+      }
+    },
+    "observation_roles": {
+      "business_tool": 1,
+      "user": 20
+    },
+    "revision_effects": {
+      "insert": 7
+    },
+    "material_coverage": {
+      "FULL": 14
+    },
+    "search_returned_items": 5,
+    "search_exact_revision_bindings": 5,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 326,
+      "observer_cpu_ns": 105808947,
+      "observer_wall_ns": 2335072705,
+      "extra_store_reads": 14,
+      "extra_read_cpu_ns": 9853747,
+      "extra_read_wall_ns": 16514670,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 192512,
+      "net_sqlite_db_bytes": 94208,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "projection_requests": 0,
+  "projection_item_status_counts": {},
+  "ordinary_lineage": 0,
+  "derived_demotions": 0,
+  "rebase_precision_counts": [
+    0,
+    0
+  ],
+  "rebase_recall_counts": [
+    0,
+    0
+  ],
+  "rebase_denominator_meaning": "Request-level snapshot risk reconstructed from real Store-operation generating receipt order; 0/0 undefined, not semantic causal precision.",
+  "business_calls": [
+    {
+      "name": "message_courier",
+      "args": {
+        "parcel_id": "K17",
+        "message": "hold it at bay 6 until I confirm pickup"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-94cd82309461860a"
+    }
+  ],
+  "artifact_sha256": {
+    "artifacts/ser-v22/p7-b1-diagnostic-r1/trace.jsonl": "8e8609d4eb1ae5254c1c1d3c198cf3ed06c46195f56b24949836151a5f2e8442",
+    "artifacts/ser-v22/p7-b1-diagnostic-r1/instrumentation.sqlite": "a9e7adccf0603457a18a9db3a4455c94b2018849e112bb483732a99e516b3cc8",
+    "artifacts/ser-v22/p7-b1-diagnostic-r1/checkpoints.sqlite": "5b64fd220012058fd85654b54ef76256f6f0d399f560e720972c6ede83478179",
+    "artifacts/ser-v22/p7-b1-diagnostic-r1/run/run-identity.json": "95df2bd9940ddbd376ce2d508e1f222e9477535eeff403af88d4acea6b1eabca",
+    "artifacts/ser-v22/p7-b1-diagnostic-r1/run/result.json": "156d9e1d7fe948a3acd435398cf1e27eb874bdeba525e3afa1f5d4c79a2f3b37"
+  },
+  "file_bytes": {
+    "trace.jsonl": 816039,
+    "instrumentation.sqlite": 192512,
+    "checkpoints.sqlite": 303104
+  },
+  "persistent_semantic_state_bytes": 0,
+  "judge_requests": 0
+}
