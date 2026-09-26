@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from functools import partial
 from pathlib import Path
 from typing import Any
 
@@ -16,6 +17,7 @@ from milai_lab.methods.memory_lifecycle import (
     FORMATION_CUE,
     FORMATION_PROTOCOL_ID,
     OBSERVATION_PROTOCOL_ID,
+    RECONCILIATION_CONTENT_PROTOCOL_ID,
     RECONCILIATION_PROTOCOL_ID,
     BusinessObservationRequestView,
     BusinessReconciliationRequestView,
@@ -24,7 +26,7 @@ from run_milai_ser_v22 import prepare as prepare_diagnostic
 from run_milai_ser_v22 import run as run_diagnostic
 
 ARMS = ("b1_control", "f_prospective_retention", "f_observation_retention",
-        "r_post_action")
+        "r_post_action", "r_post_action_content")
 
 
 def prepare(args: argparse.Namespace) -> dict[str, Any]:
@@ -36,17 +38,23 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
 def run(args: argparse.Namespace) -> dict[str, Any]:
     return run_diagnostic(
         args, prepared_verifier=verify_lifecycle_v24_prepared,
-        runtime_prefix=("lifecycle-v24-reconciliation" if args.arm == "r_post_action"
+        runtime_prefix=("lifecycle-v24-reconciliation" if args.arm in {
+            "r_post_action", "r_post_action_content"}
                         else "lifecycle-v24-formation"),
         lock_identity_key="lifecycle_v24_lock_sha256",
         environment_rules=(FORMATION_CUE if args.arm in {
             "f_prospective_retention", "f_observation_retention"} else ""),
         protocol_id=("langmem_default_v1" if args.arm == "b1_control" else
                      OBSERVATION_PROTOCOL_ID if args.arm == "f_observation_retention" else
+                     RECONCILIATION_CONTENT_PROTOCOL_ID
+                     if args.arm == "r_post_action_content" else
                      RECONCILIATION_PROTOCOL_ID if args.arm == "r_post_action" else
                      FORMATION_PROTOCOL_ID),
         request_view_factory=(BusinessObservationRequestView
                               if args.arm == "f_observation_retention" else
+                              partial(BusinessReconciliationRequestView,
+                                      include_content=True)
+                              if args.arm == "r_post_action_content" else
                               BusinessReconciliationRequestView
                               if args.arm == "r_post_action" else None))
 
@@ -57,9 +65,9 @@ def main() -> None:
     for command in ("prepare", "run"):
         item = commands.add_parser(command)
         item.add_argument("--config", type=Path, default=LAB /
-                          "configs/milai-lifecycle-v24-reconciliation-r1.json")
+                          "configs/milai-lifecycle-v24-reconciliation-r2.json")
         item.add_argument("--lock", type=Path, default=LAB /
-                          "data/locks/milai-lifecycle-v24-reconciliation-r1.lock.json")
+                          "data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json")
         item.add_argument("--diagnostic-inputs", type=Path, default=LAB /
                           "data/diagnostics/milai-lifecycle-v24-reconciliation-r1-inputs.json")
         item.add_argument("--diagnostic-freeze", type=Path, default=LAB /

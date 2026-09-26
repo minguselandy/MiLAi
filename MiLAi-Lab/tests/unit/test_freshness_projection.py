@@ -62,6 +62,7 @@ from milai_lab.methods.memory_lifecycle import (
     OBSERVATION_PROTOCOL_ID,
     OBSERVATION_REMINDER,
     OBSERVATION_REMINDER_SHA256,
+    RECONCILIATION_CONTENT_PROTOCOL_ID,
     RECONCILIATION_CUE,
     RECONCILIATION_CUE_SHA256,
     RECONCILIATION_PROTOCOL_ID,
@@ -955,12 +956,15 @@ def test_formation_cue_is_only_system_difference_and_identity_is_explicit(
     for arm in entry.ARMS:
         entry.run(SimpleNamespace(arm=arm))
     assert [item["environment_rules"] for item in captured] == [
-        "", FORMATION_CUE, FORMATION_CUE, ""]
+        "", FORMATION_CUE, FORMATION_CUE, "", ""]
     assert [item["protocol_id"] for item in captured] == [
         "langmem_default_v1", FORMATION_PROTOCOL_ID, OBSERVATION_PROTOCOL_ID,
-        RECONCILIATION_PROTOCOL_ID]
-    assert [item["request_view_factory"] for item in captured] == [
+        RECONCILIATION_PROTOCOL_ID, RECONCILIATION_CONTENT_PROTOCOL_ID]
+    assert [item["request_view_factory"] for item in captured[:4]] == [
         None, None, BusinessObservationRequestView, BusinessReconciliationRequestView]
+    content_factory = captured[4]["request_view_factory"]
+    assert content_factory.func is BusinessReconciliationRequestView
+    assert content_factory.keywords == {"include_content": True}
 
 
 def test_observation_reminder_requires_current_journal_bound_business_receipt(
@@ -1120,6 +1124,7 @@ def test_reconciliation_uses_only_pre_action_full_exact_refs_and_real_ok(
     assert request_id == "request-before-action"
     assert [ref["id"] for ref in refs] == [first_id, second_id]
     assert all(ref["namespace"] == namespace and ref["revision"] == 1 for ref in refs)
+    assert all("content" not in ref for ref in refs)
     assert sidecar.rows("request_material")[1]["coverage"] == "UNBOUND"
 
     journal = BusinessActionJournal(tmp_path / "business-journal.json", ["dispatch"])
@@ -1180,10 +1185,34 @@ def test_reconciliation_uses_only_pre_action_full_exact_refs_and_real_ok(
     assert event["provider_request"] is False
     assert event["cpu_ns"] >= 0 and event["wall_ns"] >= 0
 
+    content_view = BusinessReconciliationRequestView(
+        journal, events.append, observer, include_content=True)
+    read_count = sidecar.costs()["extra_store_reads"]
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client, request_view=content_view)
+        model.begin_public_message(f"{thread}:0")
+        model.invoke(history, tools=[{
+            "type": "function", "function": {"name": "manage_memory",
+            "description": "Manage memory.",
+            "parameters": {"type": "object", "properties": {}}}}])
+    expected_content = [{"id": memory_id, "revision": 1,
+                         "content": f"note-{memory_id}"}
+                        for memory_id in (first_id, second_id)]
+    assert requests[1]["messages"][0]["content"].endswith(
+        RECONCILIATION_CUE + "\n" + json.dumps(
+            expected_content, ensure_ascii=False, separators=(",", ":")))
+    assert requests[1]["messages"][1:] == requests[0]["messages"][1:]
+    assert [candidate["content"] for candidate in events[-1]["candidates"]] == [
+        f"note-{first_id}", f"note-{second_id}"]
+    assert sidecar.costs()["extra_store_reads"] == read_count
+
     failed_generated, failed_result = business("business-generation", "business-call", False)
     failed_history = [*history[:-2], failed_generated, failed_result]
     failed_wire = convert_to_openai_messages(failed_history)
-    projected, unchanged = view.project(failed_wire, failed_history, f"{thread}:0", 3)
+    projected, unchanged = content_view.project(
+        failed_wire, failed_history, f"{thread}:0", 3)
     assert unchanged is failed_history and projected is failed_wire
     assert events[-1]["reason"] == "NO_SUCCESSFUL_BUSINESS_RECEIPT"
 
@@ -1227,6 +1256,19 @@ def test_lifecycle_arm_requires_matching_lock_protocol(
     with pytest.raises(ValueError, match="LIFECYCLE_V24_PROTOCOL_BY_ARM_CHANGED"):
         identity.verify_lifecycle_v24_lock(Path("lock"), Path("config"),
                                            arm_id="r_post_action")
+
+    r2_config = {"reconciliation_protocol_id": RECONCILIATION_CONTENT_PROTOCOL_ID,
+                 "reconciliation_cue_sha256": RECONCILIATION_CUE_SHA256}
+    r2_lock = {**r2_config, "protocol_by_arm": {
+        "b1_control": "langmem_default_v1",
+        "r_post_action_content": RECONCILIATION_CONTENT_PROTOCOL_ID}}
+    monkeypatch.setattr(identity, "_verify_ser_lock", lambda *_args, **_kwargs: (
+        r2_lock, r2_config))
+    identity.verify_lifecycle_v24_lock(
+        Path("lock"), Path("config"), arm_id="r_post_action_content")
+    with pytest.raises(ValueError, match="LIFECYCLE_V24_ARM_NOT_DECLARED"):
+        identity.verify_lifecycle_v24_lock(
+            Path("lock"), Path("config"), arm_id="r_post_action")
 
 
 def test_v21_authority_only_when_actual_memory_or_derived_risk_is_projected() -> None:

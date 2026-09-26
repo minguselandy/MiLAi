@@ -1,0 +1,786 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_RECONCILIATION_RUN_REVIEW",
+  "run_id": "lifecycle-v24-reconciliation-r-r2",
+  "arm": "r_post_action_content",
+  "source_mapping_sha256": "48b85054f8fb39e6363c7d594367579f350e3a2147e0cb146a68823eb46c3066",
+  "status": "MECHANICAL_PASS_SEMANTIC_REVIEW_SEPARATE",
+  "runtime_status": "TERMINAL",
+  "identity": {
+    "recipe_id": "langmem-hotpath-react-json-action-v1",
+    "run_id": "lifecycle-v24-reconciliation-r-r2",
+    "inputs_sha256": "eebbe91d8490ea704b71236ade8fa67c108696580f5a8bc7218cf129fc2e17a2",
+    "config_sha256": "b1b4c094b4011ddaabe58eca5705b252330c37a2e4060ab17585988244f07832",
+    "rubric_read_by_runner": false,
+    "arm_id": "r_post_action_content",
+    "protocol_id": "post_action_reconciliation_content_v2"
+  },
+  "usage": {
+    "generations": 15,
+    "input_tokens": 11555,
+    "output_tokens": 634,
+    "generation_tokens": 12189,
+    "embedding_requests": 9,
+    "embedding_tokens": 220,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "provider_wall_seconds": 6.974677017889917,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "cases": [
+    {
+      "id": "r01_success_dispatch",
+      "status": "TERMINAL",
+      "error": null,
+      "usage": {
+        "generations": 5,
+        "generation_tokens": 4154
+      },
+      "sessions": [
+        {
+          "session_id": "save",
+          "answers": [
+            "Both memory entries have been successfully saved."
+          ],
+          "calls": [
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "create",
+                "content": "Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched."
+              },
+              "id": "chatcmpl-9186ed6684d5d440:tool:0",
+              "type": "tool_call"
+            },
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "create",
+                "content": "Visitors to Alder exhibition use the east entrance, which opens at 08:30."
+              },
+              "id": "chatcmpl-9186ed6684d5d440:tool:1",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "manage_memory",
+              "content": "created memory 492e297e-123a-4027-9c12-a127ea972773",
+              "status": "success",
+              "tool_call_id": "chatcmpl-9186ed6684d5d440:tool:0"
+            },
+            {
+              "name": "manage_memory",
+              "content": "created memory c89440c3-f4d3-4814-91b6-b1c75c744ff8",
+              "status": "success",
+              "tool_call_id": "chatcmpl-9186ed6684d5d440:tool:1"
+            }
+          ],
+          "business_calls": [],
+          "memories": [
+            {
+              "id": "c89440c3-f4d3-4814-91b6-b1c75c744ff8",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r01_success_dispatch"
+              ],
+              "value": {
+                "content": "Visitors to Alder exhibition use the east entrance, which opens at 08:30."
+              }
+            },
+            {
+              "id": "492e297e-123a-4027-9c12-a127ea972773",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r01_success_dispatch"
+              ],
+              "value": {
+                "content": "Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched."
+              }
+            }
+          ]
+        },
+        {
+          "session_id": "act",
+          "answers": [
+            "The crate EXH-284 containing 6 display panels has been successfully dispatched to gallery dock D-2. Dispatch ID: DSP-7421. Additionally, visitors to the Alder exhibition use the east entrance, which opens at 08:30."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Alder exhibition delivery plan visitor access details"
+              },
+              "id": "chatcmpl-9f36540bb3db1e54:tool:0",
+              "type": "tool_call"
+            },
+            {
+              "name": "dispatch_crate",
+              "args": {
+                "crate_ref": "EXH-284",
+                "destination": "gallery dock D-2"
+              },
+              "id": "chatcmpl-916c2caf485cb53e:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "[{\"namespace\":[\"langmem\",\"lifecycle-v24-reconciliation-r-r2\",\"r_post_action_content\",\"diagnostic:r01_success_dispatch\"],\"key\":\"c89440c3-f4d3-4814-91b6-b1c75c744ff8\",\"value\":{\"content\":\"Visitors to Alder exhibition use the east entrance, which opens at 08:30.\"},\"created_at\":\"2026-09-26T20:45:25.424963+00:00\",\"updated_at\":\"2026-09-26T20:45:25.424963+00:00\",\"score\":0.6712507805600998},{\"namespace\":[\"langmem\",\"lifecycle-v24-reconciliation-r-r2\",\"r_post_action_content\",\"diagnostic:r01_success_dispatch\"],\"key\":\"492e297e-123a-4027-9c12-a127ea972773\",\"value\":{\"content\":\"Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched.\"},\"created_at\":\"2026-09-26T20:45:25.255988+00:00\",\"updated_at\":\"2026-09-26T20:45:25.255988+00:00\",\"score\":0.579574039033174}]",
+              "status": "success",
+              "tool_call_id": "chatcmpl-9f36540bb3db1e54:tool:0"
+            },
+            {
+              "name": "dispatch_crate",
+              "content": "{\"ok\": true, \"dispatch_id\": \"DSP-7421\", \"status\": \"dispatched\"}",
+              "status": "success",
+              "tool_call_id": "chatcmpl-916c2caf485cb53e:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "0701102ec93010b5655962be0c95a810387a3950bd0a56e66113776eb8f63282",
+              "generation_id": "chatcmpl-916c2caf485cb53e",
+              "call_id": "chatcmpl-916c2caf485cb53e:tool:0",
+              "name": "dispatch_crate",
+              "args": {
+                "crate_ref": "EXH-284",
+                "destination": "gallery dock D-2"
+              },
+              "result": {
+                "content": "{\"ok\": true, \"dispatch_id\": \"DSP-7421\", \"status\": \"dispatched\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "dispatch_crate",
+                "id": null,
+                "tool_call_id": "chatcmpl-916c2caf485cb53e:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": [
+            {
+              "id": "c89440c3-f4d3-4814-91b6-b1c75c744ff8",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r01_success_dispatch"
+              ],
+              "value": {
+                "content": "Visitors to Alder exhibition use the east entrance, which opens at 08:30."
+              }
+            },
+            {
+              "id": "492e297e-123a-4027-9c12-a127ea972773",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r01_success_dispatch"
+              ],
+              "value": {
+                "content": "Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r02_failed_dispatch",
+      "status": "TERMINAL",
+      "error": null,
+      "usage": {
+        "generations": 5,
+        "generation_tokens": 3907
+      },
+      "sessions": [
+        {
+          "session_id": "save",
+          "answers": [
+            "Both memory entries have been saved successfully."
+          ],
+          "calls": [
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "create",
+                "content": "Marlow studio has a pending delivery of 11 ceramic trays in crate STU-619 to annex bay J-5; the crate has not been dispatched."
+              },
+              "id": "chatcmpl-8a8c2c74c4efc19d:tool:0",
+              "type": "tool_call"
+            },
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "create",
+                "content": "Visitors to Marlow studio use the east entrance, which opens at 09:15."
+              },
+              "id": "chatcmpl-8a8c2c74c4efc19d:tool:1",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "manage_memory",
+              "content": "created memory 63ac4151-4dc8-4665-aa50-258366cc1c28",
+              "status": "success",
+              "tool_call_id": "chatcmpl-8a8c2c74c4efc19d:tool:0"
+            },
+            {
+              "name": "manage_memory",
+              "content": "created memory bcb8ed5b-fc4f-4a87-9916-f5fd913c76d2",
+              "status": "success",
+              "tool_call_id": "chatcmpl-8a8c2c74c4efc19d:tool:1"
+            }
+          ],
+          "business_calls": [],
+          "memories": [
+            {
+              "id": "bcb8ed5b-fc4f-4a87-9916-f5fd913c76d2",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r02_failed_dispatch"
+              ],
+              "value": {
+                "content": "Visitors to Marlow studio use the east entrance, which opens at 09:15."
+              }
+            },
+            {
+              "id": "63ac4151-4dc8-4665-aa50-258366cc1c28",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r02_failed_dispatch"
+              ],
+              "value": {
+                "content": "Marlow studio has a pending delivery of 11 ceramic trays in crate STU-619 to annex bay J-5; the crate has not been dispatched."
+              }
+            }
+          ]
+        },
+        {
+          "session_id": "act",
+          "answers": [
+            "The dispatch of crate STU-619 to annex bay J-5 failed with the error 'vehicle_unavailable' and status 'not_dispatched'."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Marlow studio delivery plan visitor access details"
+              },
+              "id": "chatcmpl-bad584ab84b723ba:tool:0",
+              "type": "tool_call"
+            },
+            {
+              "name": "dispatch_crate",
+              "args": {
+                "crate_ref": "STU-619",
+                "destination": "annex bay J-5"
+              },
+              "id": "chatcmpl-8ac03d79977427a7:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "[{\"namespace\":[\"langmem\",\"lifecycle-v24-reconciliation-r-r2\",\"r_post_action_content\",\"diagnostic:r02_failed_dispatch\"],\"key\":\"bcb8ed5b-fc4f-4a87-9916-f5fd913c76d2\",\"value\":{\"content\":\"Visitors to Marlow studio use the east entrance, which opens at 09:15.\"},\"created_at\":\"2026-09-26T20:45:28.466525+00:00\",\"updated_at\":\"2026-09-26T20:45:28.466525+00:00\",\"score\":0.6593530970619055},{\"namespace\":[\"langmem\",\"lifecycle-v24-reconciliation-r-r2\",\"r_post_action_content\",\"diagnostic:r02_failed_dispatch\"],\"key\":\"63ac4151-4dc8-4665-aa50-258366cc1c28\",\"value\":{\"content\":\"Marlow studio has a pending delivery of 11 ceramic trays in crate STU-619 to annex bay J-5; the crate has not been dispatched.\"},\"created_at\":\"2026-09-26T20:45:28.259694+00:00\",\"updated_at\":\"2026-09-26T20:45:28.259694+00:00\",\"score\":0.5216126597408255}]",
+              "status": "success",
+              "tool_call_id": "chatcmpl-bad584ab84b723ba:tool:0"
+            },
+            {
+              "name": "dispatch_crate",
+              "content": "{\"ok\": false, \"error\": \"vehicle_unavailable\", \"status\": \"not_dispatched\"}",
+              "status": "success",
+              "tool_call_id": "chatcmpl-8ac03d79977427a7:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "8fd77896d0a89d74df72e796ab2d5ed77b650ccbaa595e0b0d401f518dac9f27",
+              "generation_id": "chatcmpl-8ac03d79977427a7",
+              "call_id": "chatcmpl-8ac03d79977427a7:tool:0",
+              "name": "dispatch_crate",
+              "args": {
+                "crate_ref": "STU-619",
+                "destination": "annex bay J-5"
+              },
+              "result": {
+                "content": "{\"ok\": false, \"error\": \"vehicle_unavailable\", \"status\": \"not_dispatched\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "dispatch_crate",
+                "id": null,
+                "tool_call_id": "chatcmpl-8ac03d79977427a7:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": [
+            {
+              "id": "bcb8ed5b-fc4f-4a87-9916-f5fd913c76d2",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r02_failed_dispatch"
+              ],
+              "value": {
+                "content": "Visitors to Marlow studio use the east entrance, which opens at 09:15."
+              }
+            },
+            {
+              "id": "63ac4151-4dc8-4665-aa50-258366cc1c28",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r02_failed_dispatch"
+              ],
+              "value": {
+                "content": "Marlow studio has a pending delivery of 11 ceramic trays in crate STU-619 to annex bay J-5; the crate has not been dispatched."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r03_unrelated_success",
+      "status": "TERMINAL",
+      "error": null,
+      "usage": {
+        "generations": 5,
+        "generation_tokens": 4128
+      },
+      "sessions": [
+        {
+          "session_id": "save",
+          "answers": [
+            "Both memory entries have been successfully saved."
+          ],
+          "calls": [
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "create",
+                "content": "Harbor archive has a pending delivery of 4 map drawers in crate ARC-357 to reading annex dock L-4; the crate has not been dispatched."
+              },
+              "id": "chatcmpl-845863c11aa8396f:tool:0",
+              "type": "tool_call"
+            },
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "create",
+                "content": "Visitors to Harbor archive use the east entrance, which opens at 10:00."
+              },
+              "id": "chatcmpl-845863c11aa8396f:tool:1",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "manage_memory",
+              "content": "created memory 067dd688-b262-4a70-8e4e-9ee5cade71cf",
+              "status": "success",
+              "tool_call_id": "chatcmpl-845863c11aa8396f:tool:0"
+            },
+            {
+              "name": "manage_memory",
+              "content": "created memory 55128b98-2fb5-48e7-b297-07aabd9e0797",
+              "status": "success",
+              "tool_call_id": "chatcmpl-845863c11aa8396f:tool:1"
+            }
+          ],
+          "business_calls": [],
+          "memories": [
+            {
+              "id": "55128b98-2fb5-48e7-b297-07aabd9e0797",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r03_unrelated_success"
+              ],
+              "value": {
+                "content": "Visitors to Harbor archive use the east entrance, which opens at 10:00."
+              }
+            },
+            {
+              "id": "067dd688-b262-4a70-8e4e-9ee5cade71cf",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r03_unrelated_success"
+              ],
+              "value": {
+                "content": "Harbor archive has a pending delivery of 4 map drawers in crate ARC-357 to reading annex dock L-4; the crate has not been dispatched."
+              }
+            }
+          ]
+        },
+        {
+          "session_id": "act",
+          "answers": [
+            "The notice was successfully sent to the Facilities desk (notice ID: NOT-581, status: sent)."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Harbor archive delivery plan visitor access details"
+              },
+              "id": "chatcmpl-a0d7f0405fd913ed:tool:0",
+              "type": "tool_call"
+            },
+            {
+              "name": "send_notice",
+              "args": {
+                "recipient": "Facilities desk",
+                "message": "Visitor entrance for Harbor archive is the east entrance, opening at 10:00. This notice is for today only."
+              },
+              "id": "chatcmpl-8efb3059a548e55a:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "[{\"namespace\":[\"langmem\",\"lifecycle-v24-reconciliation-r-r2\",\"r_post_action_content\",\"diagnostic:r03_unrelated_success\"],\"key\":\"55128b98-2fb5-48e7-b297-07aabd9e0797\",\"value\":{\"content\":\"Visitors to Harbor archive use the east entrance, which opens at 10:00.\"},\"created_at\":\"2026-09-26T20:45:31.396479+00:00\",\"updated_at\":\"2026-09-26T20:45:31.396479+00:00\",\"score\":0.6753937609845785},{\"namespace\":[\"langmem\",\"lifecycle-v24-reconciliation-r-r2\",\"r_post_action_content\",\"diagnostic:r03_unrelated_success\"],\"key\":\"067dd688-b262-4a70-8e4e-9ee5cade71cf\",\"value\":{\"content\":\"Harbor archive has a pending delivery of 4 map drawers in crate ARC-357 to reading annex dock L-4; the crate has not been dispatched.\"},\"created_at\":\"2026-09-26T20:45:31.245688+00:00\",\"updated_at\":\"2026-09-26T20:45:31.245688+00:00\",\"score\":0.5542777941905798}]",
+              "status": "success",
+              "tool_call_id": "chatcmpl-a0d7f0405fd913ed:tool:0"
+            },
+            {
+              "name": "send_notice",
+              "content": "{\"ok\": true, \"notice_id\": \"NOT-581\", \"status\": \"sent\"}",
+              "status": "success",
+              "tool_call_id": "chatcmpl-8efb3059a548e55a:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "f5c6a39c3802b288d25ee86cb0a8a152701b1c4144ea4a9210ed95cf01783b90",
+              "generation_id": "chatcmpl-8efb3059a548e55a",
+              "call_id": "chatcmpl-8efb3059a548e55a:tool:0",
+              "name": "send_notice",
+              "args": {
+                "recipient": "Facilities desk",
+                "message": "Visitor entrance for Harbor archive is the east entrance, opening at 10:00. This notice is for today only."
+              },
+              "result": {
+                "content": "{\"ok\": true, \"notice_id\": \"NOT-581\", \"status\": \"sent\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "send_notice",
+                "id": null,
+                "tool_call_id": "chatcmpl-8efb3059a548e55a:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": [
+            {
+              "id": "55128b98-2fb5-48e7-b297-07aabd9e0797",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r03_unrelated_success"
+              ],
+              "value": {
+                "content": "Visitors to Harbor archive use the east entrance, which opens at 10:00."
+              }
+            },
+            {
+              "id": "067dd688-b262-4a70-8e4e-9ee5cade71cf",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-r-r2",
+                "r_post_action_content",
+                "diagnostic:r03_unrelated_success"
+              ],
+              "value": {
+                "content": "Harbor archive has a pending delivery of 4 map drawers in crate ARC-357 to reading annex dock L-4; the crate has not been dispatched."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "instrumentation": {
+    "counts": {
+      "searches": 3,
+      "requests": 15,
+      "revisions": 6,
+      "operations": 6,
+      "bodies": 24,
+      "request_material": 15,
+      "tool_calls": 12,
+      "observations": 9
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 12
+      },
+      "operations": {
+        "complete": 6
+      },
+      "searches": {
+        "returned": 3
+      },
+      "requests": {
+        "completed": 15
+      }
+    },
+    "observation_roles": {
+      "business_tool": 3,
+      "user": 6
+    },
+    "revision_effects": {
+      "insert": 6
+    },
+    "material_coverage": {
+      "FULL": 15
+    },
+    "search_returned_items": 6,
+    "search_exact_revision_bindings": 6,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 192,
+      "observer_cpu_ns": 63139929,
+      "observer_wall_ns": 1111977583,
+      "extra_store_reads": 12,
+      "extra_read_cpu_ns": 9855555,
+      "extra_read_wall_ns": 19311341,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 163840,
+      "net_sqlite_db_bytes": 65536,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "process": {
+    "run_id": "lifecycle-v24-reconciliation-r-r2",
+    "exit_code": 0,
+    "process_wall_seconds": 13.203057100996375
+  },
+  "reconciliation": {
+    "projection_attempts": 15,
+    "opportunities": [
+      {
+        "request_id": "63ad2b42b4c0be8572923e4cfe67aa1edf4dad3a47ab255c4f18dbfff5342a2d",
+        "scope": "diagnostic:r01_success_dispatch",
+        "business_call_ids": [
+          "chatcmpl-916c2caf485cb53e:tool:0"
+        ],
+        "successful_business_call_ids": [
+          "chatcmpl-916c2caf485cb53e:tool:0"
+        ],
+        "generating_request_id": "76a3cb15e0d839099af4479a718fd4460d9db970ad910eb4969c766e3baea361",
+        "candidates": [
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-r-r2",
+              "r_post_action_content",
+              "diagnostic:r01_success_dispatch"
+            ],
+            "id": "c89440c3-f4d3-4814-91b6-b1c75c744ff8",
+            "revision": 1,
+            "source_search_id": "3944617840620d7e61e058b6ab1d08d73220192f77eab43c7c6c7edca5c271bd:1:search:1",
+            "source_tool_call_id": "chatcmpl-9f36540bb3db1e54:tool:0",
+            "content": "Visitors to Alder exhibition use the east entrance, which opens at 08:30."
+          },
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-r-r2",
+              "r_post_action_content",
+              "diagnostic:r01_success_dispatch"
+            ],
+            "id": "492e297e-123a-4027-9c12-a127ea972773",
+            "revision": 1,
+            "source_search_id": "3944617840620d7e61e058b6ab1d08d73220192f77eab43c7c6c7edca5c271bd:1:search:1",
+            "source_tool_call_id": "chatcmpl-9f36540bb3db1e54:tool:0",
+            "content": "Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched."
+          }
+        ]
+      },
+      {
+        "request_id": "544b5acfaa4fc95b2304cc8c9caaa39a0d0f672e09b2a3be710e5d44c05809fb",
+        "scope": "diagnostic:r02_failed_dispatch",
+        "business_call_ids": [
+          "chatcmpl-8ac03d79977427a7:tool:0"
+        ],
+        "successful_business_call_ids": [],
+        "generating_request_id": null,
+        "candidates": []
+      },
+      {
+        "request_id": "f5710b31215955f459ba974dfab7e2d72e9818d82b4411901a10d70aab821482",
+        "scope": "diagnostic:r03_unrelated_success",
+        "business_call_ids": [
+          "chatcmpl-8efb3059a548e55a:tool:0"
+        ],
+        "successful_business_call_ids": [
+          "chatcmpl-8efb3059a548e55a:tool:0"
+        ],
+        "generating_request_id": "9a500b002ade35f7872d3024b0d72b5248a4beb23d27b95017d2bc8dda830aaf",
+        "candidates": [
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-r-r2",
+              "r_post_action_content",
+              "diagnostic:r03_unrelated_success"
+            ],
+            "id": "55128b98-2fb5-48e7-b297-07aabd9e0797",
+            "revision": 1,
+            "source_search_id": "4f97e84692f8259a30f6b257ce88b1dd3706716ea4b7d524eb89b60f2e82712d:1:search:1",
+            "source_tool_call_id": "chatcmpl-a0d7f0405fd913ed:tool:0",
+            "content": "Visitors to Harbor archive use the east entrance, which opens at 10:00."
+          },
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-r-r2",
+              "r_post_action_content",
+              "diagnostic:r03_unrelated_success"
+            ],
+            "id": "067dd688-b262-4a70-8e4e-9ee5cade71cf",
+            "revision": 1,
+            "source_search_id": "4f97e84692f8259a30f6b257ce88b1dd3706716ea4b7d524eb89b60f2e82712d:1:search:1",
+            "source_tool_call_id": "chatcmpl-a0d7f0405fd913ed:tool:0",
+            "content": "Harbor archive has a pending delivery of 4 map drawers in crate ARC-357 to reading annex dock L-4; the crate has not been dispatched."
+          }
+        ]
+      }
+    ],
+    "actual_deliveries": [
+      {
+        "request_id": "63ad2b42b4c0be8572923e4cfe67aa1edf4dad3a47ab255c4f18dbfff5342a2d",
+        "receipt_id": "chatcmpl-a0a549018b5d4c1e",
+        "scope": "diagnostic:r01_success_dispatch",
+        "business_call_ids": [
+          "chatcmpl-916c2caf485cb53e:tool:0"
+        ],
+        "candidates": [
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-r-r2",
+              "r_post_action_content",
+              "diagnostic:r01_success_dispatch"
+            ],
+            "id": "c89440c3-f4d3-4814-91b6-b1c75c744ff8",
+            "revision": 1,
+            "source_search_id": "3944617840620d7e61e058b6ab1d08d73220192f77eab43c7c6c7edca5c271bd:1:search:1",
+            "source_tool_call_id": "chatcmpl-9f36540bb3db1e54:tool:0",
+            "content": "Visitors to Alder exhibition use the east entrance, which opens at 08:30."
+          },
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-r-r2",
+              "r_post_action_content",
+              "diagnostic:r01_success_dispatch"
+            ],
+            "id": "492e297e-123a-4027-9c12-a127ea972773",
+            "revision": 1,
+            "source_search_id": "3944617840620d7e61e058b6ab1d08d73220192f77eab43c7c6c7edca5c271bd:1:search:1",
+            "source_tool_call_id": "chatcmpl-9f36540bb3db1e54:tool:0",
+            "content": "Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched."
+          }
+        ]
+      },
+      {
+        "request_id": "f5710b31215955f459ba974dfab7e2d72e9818d82b4411901a10d70aab821482",
+        "receipt_id": "chatcmpl-b0e48aec132bc4c8",
+        "scope": "diagnostic:r03_unrelated_success",
+        "business_call_ids": [
+          "chatcmpl-8efb3059a548e55a:tool:0"
+        ],
+        "candidates": [
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-r-r2",
+              "r_post_action_content",
+              "diagnostic:r03_unrelated_success"
+            ],
+            "id": "55128b98-2fb5-48e7-b297-07aabd9e0797",
+            "revision": 1,
+            "source_search_id": "4f97e84692f8259a30f6b257ce88b1dd3706716ea4b7d524eb89b60f2e82712d:1:search:1",
+            "source_tool_call_id": "chatcmpl-a0d7f0405fd913ed:tool:0",
+            "content": "Visitors to Harbor archive use the east entrance, which opens at 10:00."
+          },
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-r-r2",
+              "r_post_action_content",
+              "diagnostic:r03_unrelated_success"
+            ],
+            "id": "067dd688-b262-4a70-8e4e-9ee5cade71cf",
+            "revision": 1,
+            "source_search_id": "4f97e84692f8259a30f6b257ce88b1dd3706716ea4b7d524eb89b60f2e82712d:1:search:1",
+            "source_tool_call_id": "chatcmpl-a0d7f0405fd913ed:tool:0",
+            "content": "Harbor archive has a pending delivery of 4 map drawers in crate ARC-357 to reading annex dock L-4; the crate has not been dispatched."
+          }
+        ]
+      }
+    ],
+    "reason_counts": {
+      "NO_CURRENT_BUSINESS_RECEIPT": 12,
+      "NO_SUCCESSFUL_BUSINESS_RECEIPT": 1,
+      "PROJECTED": 2
+    },
+    "cpu_ns": 2892557,
+    "wall_ns": 2429280,
+    "direct_input_delta_tokens": 429,
+    "per_request_delta_values": [
+      218,
+      211
+    ],
+    "program_store_reads": 0,
+    "program_memory_writes": 0,
+    "independent_model_phases": 0,
+    "qualification": "Eligibility and candidates reconstructed from actual HTTP tails, journals, action-generating request FULL materials and exact scoped search bindings; projection events then compared to actual system text."
+  },
+  "file_bytes": {
+    "trace.jsonl": 531778,
+    "instrumentation.sqlite": 163840,
+    "checkpoints.sqlite": 184320
+  },
+  "artifact_sha256": {
+    "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-r-r2/trace.jsonl": "2f74d8112313cc27ef2d766b67f7e4a726e5447f78c655dd572146b1aac598ec",
+    "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-r-r2/instrumentation.sqlite": "cbec4ef0741df7f40cffaf41b4ac9a19e355e58bf35953d89d92384431352cda",
+    "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-r-r2/checkpoints.sqlite": "5d4c677614a9b51085722ebde316f0f7fd5beb5e5e14ec889caac32aa4813933",
+    "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-r-r2/run/result.json": "8a3516bb88ecc4c6617941c1dd0d2cbca4b1b2f2c713830c366c6f1c64c108e9"
+  },
+  "persistent_semantic_state_bytes": 0,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}

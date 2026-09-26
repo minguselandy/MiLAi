@@ -64,6 +64,7 @@ include = [
   "/data/locks/milai-lifecycle-v24-formation-r2.lock.json",
   "/data/locks/milai-lifecycle-v24-formation-r3.lock.json",
   "/data/locks/milai-lifecycle-v24-reconciliation-r1.lock.json",
+  "/data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json",
   "/data/manifests",
   "/docs",
   "/product.lock.json",

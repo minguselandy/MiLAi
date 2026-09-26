@@ -21,6 +21,7 @@ from milai_lab.methods.memory_lifecycle import (
     FORMATION_PROTOCOL_ID,
     OBSERVATION_PROTOCOL_ID,
     OBSERVATION_REMINDER_SHA256,
+    RECONCILIATION_CONTENT_PROTOCOL_ID,
     RECONCILIATION_CUE_SHA256,
     RECONCILIATION_PROTOCOL_ID,
 )
@@ -71,6 +72,7 @@ REQUIRED_LIFECYCLE_V24_RUNTIME = REQUIRED_SER_V23_RUNTIME | {
     "configs/milai-lifecycle-v24-formation-r2.json",
     "configs/milai-lifecycle-v24-formation-r3.json",
     "configs/milai-lifecycle-v24-reconciliation-r1.json",
+    "configs/milai-lifecycle-v24-reconciliation-r2.json",
     "src/milai_lab/methods/memory_lifecycle.py",
 }
 
@@ -203,10 +205,17 @@ def verify_lifecycle_v24_lock(lock_path: Path, config_path: Path,
         recipe_id=B1_RECIPE_ID, transport_variant="json_action",
         required_runtime=REQUIRED_LIFECYCLE_V24_RUNTIME)
     if "reconciliation_protocol_id" in config:
-        expected = {"reconciliation_protocol_id": RECONCILIATION_PROTOCOL_ID,
+        reconciliation_protocol = config["reconciliation_protocol_id"]
+        reconciliation_arm = {
+            RECONCILIATION_PROTOCOL_ID: "r_post_action",
+            RECONCILIATION_CONTENT_PROTOCOL_ID: "r_post_action_content",
+        }.get(reconciliation_protocol)
+        if reconciliation_arm is None:
+            raise ValueError("LIFECYCLE_V24_RECONCILIATION_PROTOCOL_CHANGED")
+        expected = {"reconciliation_protocol_id": reconciliation_protocol,
                     "reconciliation_cue_sha256": RECONCILIATION_CUE_SHA256}
         protocols = {"b1_control": "langmem_default_v1",
-                     "r_post_action": RECONCILIATION_PROTOCOL_ID}
+                     reconciliation_arm: reconciliation_protocol}
     else:
         expected = {"formation_protocol_id": FORMATION_PROTOCOL_ID,
                     "formation_cue_sha256": FORMATION_CUE_SHA256}

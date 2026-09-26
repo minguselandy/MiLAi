@@ -1,11 +1,13 @@
 ---
-status: ACTIVE
+status: COMPLETE_WITH_NEGATIVE_CUE_RESULTS
 scope: RESEARCH_PROTOTYPE
 parent: MILAI_LONG_HORIZON_EXECUTION_GOAL.md
 reference_commit: 9387f533b9bb76f01beca59e26887194e878fb64
 ---
 
 # v24：独立记忆形成与动作后更新
+
+最终[R2原正文候选](MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS_20260927.md)仍2/3：原文准确送达，必要更新仍0/1。按预定停点停止F/R提示家族；显式用户能力控制不算自主方法收益。连续671生成/604171tokens/6104embeddingtokens/75exact reads。此小阶段实现、窄验证、运行和分析已完成，提交交由Luna；总Goal继续P12应用与P10证据缺口。下文保留各轮方案与历史进度。
 
 执行总计划§14、§15/P11。P9的21条早期约定观察未保存，成功动作后仍留有pending正文；这些是独立生命周期缺口，不是SER刷新失败。保留P9全部未见结果，不修改其提示或重跑种子3/4。先完成Formation（F）的最小机制，再另行冻结Reconciliation（R），两者不同时改动以免混合归因。
 
@@ -47,6 +49,7 @@ vLLM设置不变，现有Qwen3.6-35B-A3B-FP8、temperature0、thinking=false、m
 - [x] 首轮同源B1/F十二消息机会、后续独立候选、实际wire/持久记忆/业务回执与完整费用。
 - [x] F Failure Review、十项Reflection与Continue/Pivot/Kill；负结果封存，无效cue不默认启用。
 - [x] 独立R源冻结、三个控制、实际候选/普通CRUD/反例与费用；原候选无收益，失败诊断继续。
-- [ ] 生命周期结果与复现、Luna提交推送并核对remote。
+- [x] 生命周期结果与复现、全部失败和连续费用封存。
+- [x] Luna已提交推送R2 checkpoint并核对remote；这只完成本轮发布，总Goal及P12仍未完成。
 
 Product、旧M1/ODR、P9结果和原计划字节保持；不引入自动semantic truth gate，不改vLLM配置。

@@ -1,0 +1,248 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_RECONCILIATION_EXECUTION_FREEZE",
+  "status": "FROZEN_BEFORE_FIRST_REAL_REQUEST",
+  "created_at": "2026-09-26T20:40:10.989434+00:00",
+  "protocol_path": "data/manifests/milai-lifecycle-v24-reconciliation-r2-protocol.json",
+  "protocol_sha256": "bc07c94ea17f4d908c46310ae959f09b64b2b1e5f53a0d5e5f51db6c3117b6a8",
+  "lock_path": "data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json",
+  "lock_sha256": "ea702b127ae8506e6c8844ca60c3c6ec18e8204f9e7f533a10d8bb23594bec12",
+  "source_mapping_sha256": "48b85054f8fb39e6363c7d594367579f350e3a2147e0cb146a68823eb46c3066",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "stage": "LIFECYCLE_V24_RECONCILIATION_R2",
+    "reference_commit": "9766dcc925259d4f12ec886e0272336f147428c9",
+    "source_files": [
+      "src/milai_lab/baselines/langmem_revision_store.py",
+      "src/milai_lab/methods/memory_lifecycle.py",
+      "src/milai_lab/methods/freshness_projection/identity.py",
+      "tools/run_milai_lifecycle_v24.py",
+      "configs/milai-lifecycle-v24-reconciliation-r2.json",
+      "pyproject.toml"
+    ],
+    "new_validation_files": [],
+    "modified_validation_files": [
+      "tests/unit/test_freshness_projection.py"
+    ],
+    "identity": {
+      "lock_expected": "data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json",
+      "kind": "MILAI_LIFECYCLE_V24_LOCK",
+      "reconciliation_protocol_id": "post_action_reconciliation_content_v2",
+      "reconciliation_cue_sha256": "1ffa063a937c278019c30c1ecef598dbd0e99bf0e1d1c38d4c113c708a2b9d00",
+      "protocol_by_arm": {
+        "b1_control": "langmem_default_v1",
+        "r_post_action_content": "post_action_reconciliation_content_v2"
+      },
+      "required_runtime_export": "REQUIRED_LIFECYCLE_V24_RUNTIME",
+      "verifier_export": "verify_lifecycle_v24_lock",
+      "continuous_budget_path": "artifacts/ser-v20/budget.json"
+    },
+    "behavior": {
+      "arm": "r_post_action_content",
+      "cue_unchanged": true,
+      "candidate_wire_keys": [
+        "id",
+        "revision",
+        "content"
+      ],
+      "content_source": "store_item.value.content from the original FULL/EXACT search item, after matching the complete ToolMessage body to returned items",
+      "scope_order_trigger_unchanged": true,
+      "r1_default_include_content": false,
+      "new_store_reads_or_model_phases": 0,
+      "projection_event": "reconciliation_projection",
+      "projection_event_candidates_include_content": true,
+      "projection_event_delivery_claim": false
+    },
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py -k 'formation_cue_is_only_system_difference_and_identity_is_explicit or reconciliation_uses_only_pre_action_full_exact_refs_and_real_ok or lifecycle_arm_requires_matching_lock_protocol'",
+        "result": "PASS; 3 passed, 19 deselected; mock Provider verifies R1 default wire, R2 verbatim content/order, unrelated and unknown scope handling, no extra Store read, failed receipt, and arm identity"
+      },
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py -k 'reconciliation_uses_only_pre_action_full_exact_refs_and_real_ok or lifecycle_arm_requires_matching_lock_protocol'",
+        "result": "PASS after final small rendering simplification; 2 passed, 20 deselected"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/baselines/langmem_revision_store.py src/milai_lab/methods/memory_lifecycle.py src/milai_lab/methods/freshness_projection/identity.py tools/run_milai_lifecycle_v24.py tests/unit/test_freshness_projection.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/baselines/langmem_revision_store.py src/milai_lab/methods/memory_lifecycle.py src/milai_lab/methods/freshness_projection/identity.py tools/run_milai_lifecycle_v24.py",
+        "result": "PASS; 4 source files"
+      },
+      {
+        "command": "git diff --check; uv run --no-sync python tools/run_milai_lifecycle_v24.py prepare --help",
+        "result": "PASS; CLI lists new arm"
+      },
+      {
+        "command": "offline comparison of reconciliation-r1 and reconciliation-r2 configs",
+        "result": "PASS; only protocol ID and runtime artifact paths differ; cue SHA, host, embedding, capacity and budget unchanged"
+      }
+    ],
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "packaging": "PENDING_LOCK"
+  },
+  "package_verification": {
+    "status": "PASS",
+    "stage": "LIFECYCLE_V24_RECONCILIATION_R2_FROZEN",
+    "lock": "data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json",
+    "lock_sha256": "ea702b127ae8506e6c8844ca60c3c6ec18e8204f9e7f533a10d8bb23594bec12",
+    "source_mapping_sha256": "48b85054f8fb39e6363c7d594367579f350e3a2147e0cb146a68823eb46c3066",
+    "identity_check": "PASS: verify_lifecycle_v24_lock for r_post_action_content, 77-file source map",
+    "build": {
+      "command": "uv build --out-dir artifacts/lifecycle-v24/reconciliation-r2/dist",
+      "result": "PASS: one build after R2 source lock",
+      "sdist": "artifacts/lifecycle-v24/reconciliation-r2/dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "9005be75ee6603f7c6bf63423a03759c5ece2a3d4782fa6c8a3f929fcf260541",
+      "wheel": "artifacts/lifecycle-v24/reconciliation-r2/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "66d1ab2a69ed1162f66359e02a52e7c10beba1769b740724cc03278d7ad6438e"
+    },
+    "members": {
+      "result": "PASS: R2 source, config, protocol, original input freezes and new lock present; no generated or private runtime paths",
+      "sdist_file_count": 1819,
+      "wheel_file_count": 138,
+      "sdist_required": [
+        "configs/milai-lifecycle-v24-reconciliation-r2.json",
+        "data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json",
+        "data/manifests/milai-lifecycle-v24-reconciliation-r2-protocol.json",
+        "data/manifests/milai-lifecycle-v24-reconciliation-r1-diagnostic-freeze.json",
+        "data/manifests/milai-lifecycle-v24-reconciliation-r1-input-freeze.json",
+        "data/diagnostics/milai-lifecycle-v24-reconciliation-r1-inputs.json",
+        "tools/run_milai_lifecycle_v24.py",
+        "src/milai_lab/methods/memory_lifecycle.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "src/milai_lab/baselines/langmem_revision_store.py",
+        "tests/unit/test_freshness_projection.py"
+      ],
+      "wheel_required": [
+        "milai_lab/methods/memory_lifecycle.py",
+        "milai_lab/methods/freshness_projection/identity.py",
+        "milai_lab/baselines/langmem_revision_store.py"
+      ],
+      "private_or_generated_members": [],
+      "rubric_in_sdist": true,
+      "rubric_in_wheel": false,
+      "rubric_read_by_runtime": false
+    },
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_lock": 0
+  },
+  "runs": [
+    {
+      "run_id": "lifecycle-v24-reconciliation-r-r2",
+      "arm": "r_post_action_content",
+      "mode": "diagnostic",
+      "directory": "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-r-r2",
+      "options": [
+        "--config",
+        "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-r-r2/config.json",
+        "--lock",
+        "data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json",
+        "--diagnostic-inputs",
+        "data/diagnostics/milai-lifecycle-v24-reconciliation-r1-inputs.json",
+        "--diagnostic-freeze",
+        "data/manifests/milai-lifecycle-v24-reconciliation-r1-diagnostic-freeze.json",
+        "--input-freeze",
+        "data/manifests/milai-lifecycle-v24-reconciliation-r1-input-freeze.json",
+        "--run",
+        "lifecycle-v24-reconciliation-r-r2",
+        "--arm",
+        "r_post_action_content"
+      ],
+      "initial_namespace_items": 0,
+      "config_sha256": "b52caea0f9461dc614f6a474cc04008c066a9a140f6a0d12eea7395222a5f92f",
+      "prepared_sha256": "b7f4975769c1bc41c5313d2ff6b36749a67c875dd68cdc191f99f1c222172372",
+      "result_manifest": "data/manifests/milai-lifecycle-v24-reconciliation-r2-r-results.json"
+    }
+  ],
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 656,
+    "generation": {
+      "charged_tokens": 591982,
+      "known_tokens": 591982,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 5884,
+      "known_tokens": 5884,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "model_concurrency": 1,
+  "environment_reference": {
+    "path": "artifacts/ser-v20/environment-before.json",
+    "sha256": "8aba502900721b86dc778783cc6d59013a7691666b81e82fc86aadbe58f4d9b6"
+  },
+  "vllm_settings_changed": false,
+  "unseen": false,
+  "master_goal_complete": false
+}

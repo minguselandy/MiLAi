@@ -69,6 +69,13 @@ receipt of the shipment; retain the first failure and keep this separate from R 
 Current costs:656 generations /591982 tokens /5884 embedding tokens /75 exact reads.
 Next is one independently frozen exact-content presentation candidate, then P12 application work.
 
+[Reconciliation R2](docs/MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS_20260927.md) also passes2/3:
+four exact original contents arrive in two eligible requests, but the required update remains0/1.
+Stop the F/R cue families with preserved negative evidence. Continuous costs are671 generations /
+604171 tokens /6104 embedding tokens /75 exact reads. P12 now proceeds to a durable application
+with real simulated side effects, process restarts, partial failure and multiple user scopes;
+P10 and the master Goal remain open. No vLLM or Product changes.
+
 Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.
 Original Notice and request-copy Quarantine each pass 1/3 controls; conditional Exact Refresh

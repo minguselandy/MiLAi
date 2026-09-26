@@ -34,6 +34,7 @@ OBSERVATION_REMINDER_SHA256 = hashlib.sha256(
     OBSERVATION_REMINDER.encode("utf-8")).hexdigest()
 
 RECONCILIATION_PROTOCOL_ID = "post_action_reconciliation_v1"
+RECONCILIATION_CONTENT_PROTOCOL_ID = "post_action_reconciliation_content_v2"
 RECONCILIATION_CUE = (
     "A business tool has returned ok: true. The following memory references were delivered "
     "before this action and may need reconciliation. Compare their existing contents with "
@@ -132,12 +133,14 @@ class BusinessReconciliationRequestView:
 
     def __init__(self, journal: BusinessActionJournal,
                  emit: Callable[[dict[str, Any]], None] | None,
-                 observer: ProvenanceObserver | None) -> None:
+                 observer: ProvenanceObserver | None,
+                 *, include_content: bool = False) -> None:
         if observer is None:
             raise ValueError("RECONCILIATION_OBSERVER_REQUIRED")
         self.journal = journal
         self.emit = emit
         self.observer = observer
+        self.include_content = include_content
 
     def project(self, wire: list[dict[str, Any]], graph: list[BaseMessage],
                 message_key: str | None, request_index: int,
@@ -179,15 +182,15 @@ class BusinessReconciliationRequestView:
             details["reason"] = "NO_SUCCESSFUL_BUSINESS_RECEIPT"
             return wire, details
         request_id, candidates = self.observer.sidecar.full_exact_memory_refs_for_generation(
-            thread_id, generation_id)
+            thread_id, generation_id, include_content=self.include_content)
         details["generating_request_id"] = request_id
         details["candidates"] = candidates
         if not candidates:
             details["reason"] = ("GENERATING_REQUEST_UNBOUND" if request_id is None
                                  else "NO_FULL_EXACT_CANDIDATES")
             return wire, details
-        visible = [{"id": item["id"], "revision": item["revision"]}
-                   for item in candidates]
+        fields = ("id", "revision", "content") if self.include_content else ("id", "revision")
+        visible = [{field: item[field] for field in fields} for item in candidates]
         first = dict(wire[0])
         first["content"] += "\n" + RECONCILIATION_CUE + "\n" + json.dumps(
             visible, ensure_ascii=False, separators=(",", ":"))

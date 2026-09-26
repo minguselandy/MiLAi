@@ -591,7 +591,7 @@ class RevisionSidecar:
             return dict(row) if row is not None else None
 
     def full_exact_memory_refs_for_generation(
-        self, thread_id: str, response_id: str,
+        self, thread_id: str, response_id: str, *, include_content: bool = False,
     ) -> tuple[str | None, list[dict[str, Any]]]:
         """Read only original search material fully sent in one generating request."""
         with self._lock:
@@ -634,10 +634,13 @@ class RevisionSidecar:
                 if key in seen:
                     continue
                 seen.add(key)
-                refs.append({"namespace": item["namespace"], "id": item["memory_id"],
-                             "revision": item["revision"],
-                             "source_search_id": material["search_id"],
-                             "source_tool_call_id": material["tool_call_id"]})
+                ref = {"namespace": item["namespace"], "id": item["memory_id"],
+                       "revision": item["revision"],
+                       "source_search_id": material["search_id"],
+                       "source_tool_call_id": material["tool_call_id"]}
+                if include_content:
+                    ref["content"] = item["store_item"]["value"]["content"]
+                refs.append(ref)
         return request["request_id"], refs
 
     def rows(self, table: str) -> list[dict[str, Any]]:

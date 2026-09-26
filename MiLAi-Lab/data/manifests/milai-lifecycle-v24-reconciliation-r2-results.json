@@ -1,0 +1,133 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS",
+  "status": "EXACT_CONTENT_DELIVERED_NO_NECESSARY_UPDATE_STOP_CUE_FAMILY",
+  "source_mapping_sha256": "48b85054f8fb39e6363c7d594367579f350e3a2147e0cb146a68823eb46c3066",
+  "source_lock_sha256": "ea702b127ae8506e6c8844ca60c3c6ec18e8204f9e7f533a10d8bb23594bec12",
+  "run_results_sha256": {
+    "data/manifests/milai-lifecycle-v24-reconciliation-r2-r-results.json": "b14f733a545d73eed350229208d694130c7197084504fe3c06e94f2b7c49444a"
+  },
+  "comparison": "One fresh R2 run against fixed historical R1 B1/R references; not a fresh matched comparison.",
+  "strict_case_passes": 2,
+  "strict_case_denominator": 3,
+  "correct_seed_entries": 6,
+  "seed_entry_denominator": 6,
+  "correct_business_actions_and_reports": 3,
+  "business_denominator": 3,
+  "host_completed_messages": 6,
+  "declared_messages": 6,
+  "stale_current_entries": 1,
+  "successful_relevant_action_denominator": 1,
+  "false_updated_original_entries": 0,
+  "original_entry_denominator": 6,
+  "unnecessary_maintenance_calls": 0,
+  "all_post_action_manage_calls": 0,
+  "action_memory_consistency_successes": 2,
+  "consistency_denominator": 3,
+  "eligible_successful_receipts": 2,
+  "actual_marker_deliveries": 2,
+  "exact_scoped_candidate_contents_delivered": 4,
+  "failed_receipt_marker_deliveries": 0,
+  "usage": {
+    "generations": 15,
+    "input_tokens": 11555,
+    "output_tokens": 634,
+    "generation_tokens": 12189,
+    "embedding_requests": 9,
+    "embedding_tokens": 220,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "provider_wall_seconds": 6.974677017889917,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "continuous_budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 671,
+    "generation": {
+      "charged_tokens": 604171,
+      "known_tokens": 604171,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 6104,
+      "known_tokens": 6104,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "continuous_exact_resolution_reads": 75,
+  "v24_all_attempts": {
+    "generations": 103,
+    "generation_tokens": 73560,
+    "embedding_tokens": 1047
+  },
+  "decision": "Stop F/R cue families with preserved negative evidence. Continue P12 durable application and same-scope B1/A3/A4/A5 quality-cost comparison; no further cue wording or CRUD controls.",
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}

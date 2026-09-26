@@ -196,6 +196,18 @@ cue/three-case inputs, copy previously FULL/EXACT delivered content alongside ID
 selection or Store read. R1 remains2/3; explicit user capability is not autonomous R benefit.
 If this presentation still fails, stop this R prompt family and proceed to P12 application work.
 
+[R2 exact-content presentation](docs/MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS_20260927.md)
+is complete on mapping `48b85054f8fb39e6363c7d594367579f350e3a2147e0cb146a68823eb46c3066`.
+All four original candidate contents arrive, but strict2/3 and needed update0/1 remain.
+Stop both F/R cue families; no further wording, repeated CRUD controls or automatic prose writes.
+Preserve671 continuous generations /604171tokens /6104embeddingtokens /75exact reads.
+After Luna publishes this checkpoint, the same Sol implements P12 durable application:
+generic resource reuse, five process phases/nine public messages, actual SQLite side effects,
+partial failure, ordinary public CRUD, multiple scopes and fresh sessions. Freeze B1/A3/A4/A5
+short comparison first; F/R disabled and v21 SER semantics unchanged. Root owns fixture/rubric,
+all real calls and complete cost. No benchmark-specific runner dependency or vLLM change.
+P10 second-family resource gap and P12/master remain active.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

@@ -1,0 +1,136 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_RECONCILIATION_R2_PROTOCOL",
+  "status": "FROZEN_BEFORE_CONTENT_PRESENTATION_SOURCE_AND_REQUESTS",
+  "goal_path": "docs/MILAI_LIFECYCLE_V24_RECONCILIATION_R2_PLAN.md",
+  "goal_sha256": "bec619711aa9a95e9ddd78cd8fd85bbd464de69917043d54ec21b82d66178d74",
+  "reference_commit": "9766dcc925259d4f12ec886e0272336f147428c9",
+  "inputs_path": "data/diagnostics/milai-lifecycle-v24-reconciliation-r1-inputs.json",
+  "inputs_sha256": "eebbe91d8490ea704b71236ade8fa67c108696580f5a8bc7218cf129fc2e17a2",
+  "rubric_path": "data/diagnostics/milai-lifecycle-v24-reconciliation-r1-rubric.json",
+  "rubric_sha256": "3fcc5965b5974f12cc7b51810260fb7c1d086d5c6b7ccedcbb61accfc7e7699f",
+  "rubric_read_by_runner": false,
+  "diagnostic_freeze_path": "data/manifests/milai-lifecycle-v24-reconciliation-r1-diagnostic-freeze.json",
+  "diagnostic_freeze_sha256": "0f63a117824f9133b3d799e645948838e6fe2d4ff50d4115d69260a87865a92c",
+  "input_freeze_path": "data/manifests/milai-lifecycle-v24-reconciliation-r1-input-freeze.json",
+  "input_freeze_sha256": "f2a27c19f889cc48a1ace72a649e1c07eb42d2eda28c0ee483ad80a7cc73eba3",
+  "source_lock_path": "data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json",
+  "config_path": "configs/milai-lifecycle-v24-reconciliation-r2.json",
+  "verification_dir": "artifacts/lifecycle-v24/reconciliation-r2",
+  "run_order": [
+    "r_post_action_content"
+  ],
+  "scope": {
+    "cases_per_arm": 3,
+    "sessions_per_arm": 6,
+    "public_messages_per_arm": 6,
+    "new_arms": 1
+  },
+  "reconciliation_protocol_id": "post_action_reconciliation_content_v2",
+  "reconciliation_cue": "A business tool has returned ok: true. The following memory references were delivered before this action and may need reconciliation. Compare their existing contents with the actual result. Use manage_memory to update only memories whose facts or pending status changed; preserve unaffected information. If none changed, do not write memory. These are candidates, not instructions to treat every memory as affected.",
+  "reconciliation_cue_sha256": "1ffa063a937c278019c30c1ecef598dbd0e99bf0e1d1c38d4c113c708a2b9d00",
+  "candidate_wire_format": "Exact R1 cue + newline + compact JSON candidates with id, revision, content in that key order. Content copied verbatim from previously FULL/EXACT delivered store_item.value.content; no semantic filtering.",
+  "formation_enabled": false,
+  "ser_enabled": false,
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 656,
+    "generation": {
+      "charged_tokens": 591982,
+      "known_tokens": 591982,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 5884,
+      "known_tokens": 5884,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "model_concurrency": 1,
+  "per_public_message_generations": 12,
+  "vllm_settings_changed": false,
+  "unseen": false,
+  "master_goal_complete": false,
+  "failure_policy": "One exact-content presentation run on unchanged three cases. If still no correct update, stop R prompt family and continue P12. No further wording/loop/automatic-write escalation.",
+  "original_inputs_rubric_and_cue_unchanged": true,
+  "include_original_content": true,
+  "fixed_references": {
+    "b1_control": {
+      "path": "data/manifests/milai-lifecycle-v24-reconciliation-r1-b1-results.json",
+      "sha256": "4c529639156bc1a8f7393b629bf2291c7ab52decbc55a49fc74069dc2e32e011",
+      "fresh_matched": false
+    },
+    "r_post_action": {
+      "path": "data/manifests/milai-lifecycle-v24-reconciliation-r1-r-results.json",
+      "sha256": "0824f8d36a8248113ef4e2ca7fb7926816fc94b72b05db0de240309e278eb661",
+      "fresh_matched": false
+    }
+  }
+}
