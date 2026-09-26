@@ -17,6 +17,11 @@ from pydantic import ConfigDict
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.milai_m1.controller import M1_PROTOCOL, m1_action_schema
+from milai_lab.methods.on_demand_reconstruction.schema import (
+    ODR_PROTOCOL,
+    ReconstructionError,
+    odr_action_schema,
+)
 from milai_lab.providers.contextual_vllm import VLLMClient
 
 
@@ -98,6 +103,7 @@ class VLLMChatModel(BaseChatModel):
     active_message_key: str | None = None
     observer: Any = None
     m1: Any = None
+    odr: Any = None
 
     @property
     def _llm_type(self) -> str:
@@ -144,10 +150,18 @@ class VLLMChatModel(BaseChatModel):
             generation_schema = _action_schema(tools, generation_only=True)
             protocol = _action_prompt(tools)
             m1_context = None
+            odr_freshness = ""
             if self.m1 is not None:
                 generation_schema = m1_action_schema(generation_schema)
                 m1_context = self.m1.prompt_context(wire_messages)
                 protocol += "\n" + M1_PROTOCOL + "\n" + m1_context
+            if self.odr is not None:
+                odr_freshness, odr_evidence = self.odr.project(wire_messages)
+                if self.odr.arm == "odr":
+                    generation_schema = odr_action_schema(generation_schema)
+                    protocol += "\n" + ODR_PROTOCOL + "\n" + odr_evidence
+                if odr_freshness:
+                    protocol += "\n" + odr_freshness
             if wire_messages and wire_messages[0]["role"] == "system":
                 first = dict(wire_messages[0])
                 if not isinstance(first.get("content"), str):
@@ -172,6 +186,12 @@ class VLLMChatModel(BaseChatModel):
                     "event": "m1_decision_context", "status": "delivered",
                     "request_id": self.m1.request_id(self.calls_in_message),
                     "text": m1_context,
+                })
+            if self.odr is not None and self.client.emit is not None:
+                self.client.emit({
+                    "event": "odr_request_projection", "arm": self.odr.arm,
+                    "request_id": self.odr.request_id(self.calls_in_message),
+                    "dynamic_freshness": odr_freshness,
                 })
         else:
             self._reserve_request()
@@ -212,10 +232,24 @@ class VLLMChatModel(BaseChatModel):
                         action.get("decision_delta") if isinstance(action, dict) else action,
                         "DECISION_ENVELOPE_SCHEMA_INVALID",
                     )
+                if self.odr is not None and self.odr.arm == "odr":
+                    raw = action.get("reconstruction") if isinstance(action, dict) else action
+                    self.odr.reject(self.calls_in_message, message_id,
+                                    "ODR_ENVELOPE_SCHEMA_INVALID", raw)
                 raise IncompleteChatResponse("JSON_ACTION_SCHEMA_INVALID") from exc
             if self.m1 is not None:
                 self.m1.commit(self.calls_in_message, message_id,
                                action["decision_delta"], action.get("calls"))
+            if self.odr is not None and self.odr.arm == "odr":
+                business_names = {item["function"]["name"] for item in tools}
+                business_names -= {"manage_memory", "search_memory"}
+                try:
+                    self.odr.accept(self.calls_in_message, message_id,
+                                    action["reconstruction"], action, business_names)
+                except ReconstructionError as exc:
+                    self.odr.reject(self.calls_in_message, message_id, str(exc),
+                                    action.get("reconstruction"))
+                    raise IncompleteChatResponse(str(exc)) from exc
             if "calls" in action:
                 for index, call in enumerate(action["calls"]):
                     calls.append({"name": call["name"], "args": call["arguments"],

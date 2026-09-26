@@ -36,6 +36,29 @@ canonical memory state.
 
 ## Required checks
 
+The user explicitly authorized full execution of the 1391-line
+[v19 ODR plan](docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_DEVELOPMENT_PLAN_20260926.md).
+[Goal v19](docs/MILA_ON_DEMAND_RECONSTRUCTION_GOAL_v19.md) is
+`STOPPED_STRUCTURED_RECONSTRUCTION_NOT_JUSTIFIED`; engineering and scoped evaluation are
+complete. Preserve [results](docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_RESULTS_20260926.md) and
+[reproduction](docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_REPRODUCTION_20260926.md). The three-arm
+ODR adapter, V0, five deployment probes and three small controls are delivered. Final mapping:
+`1f22b6b7b032a647e360c140c61467763f7ce71b0a1fdd481d1c00ede88fbfaa`.
+All 9 public messages completed; 15 responses were null reconstruction. Changed received exact
+stale notices yet recorded old 4 C; retained did not read the current revision; irrelevant
+behavior was undisturbed. Do not equate all-null with selective success or 0/0 grounding with
+perfect support. V5/V6/V7 are NOT_RUN_GATE_NOT_MET; F-only efficacy is unknown. Preserve all
+20 generations / 20360 tokens / 274 embedding tokens; unknown/Judge/truncation=0. There are
+zero persistent semantic-state bytes, but factual/history/analysis storage is reported.
+No further semantic rescue, automatic search, hard truth gates, M2/Attention or new data under
+this completed scope. Original vLLM settings, plan bytes, old M1 methods and 16 old artifacts
+are unchanged. One Sol xhigh owned source/config/tests/CI; Root owns all real requests and
+evidence; Luna high retains authorized publication. No model/test/build reruns for publication.
+The required new V0/static/boundary/packaging checks passed; retain the reported pre-existing
+old M1 assertion mismatch (17 affected checks pass, 1 fails), without claiming the old group
+was all green. Future work requires its own explicit scope; this result does not establish
+that freshness-only is sufficient or that automatic retrieval is necessary.
+
 The user-authorized [v18 pivot plan](docs/MILA_LANGMEM_M1_PIVOT_V18_DEVELOPMENT_PLAN_20260926.md)
 is delivered with [Goal v18](docs/MILA_LANGMEM_M1_PIVOT_GOAL_v18.md)
 `STOPPED_M1_RECHECK_NOT_JUSTIFIED`; preserve the [results](docs/MILA_LANGMEM_M1_PIVOT_V18_RESULTS_20260926.md)

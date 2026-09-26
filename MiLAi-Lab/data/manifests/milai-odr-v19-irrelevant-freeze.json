@@ -1,0 +1,26 @@
+{
+  "kind": "MILAI_ODR_V19_MECHANISM_FREEZE",
+  "status": "FROZEN_BEFORE_MODEL_REQUESTS",
+  "case_id": "milai_odr_v19_irrelevant",
+  "fixture_path": "data/fixtures/milai_odr_v19_irrelevant.json",
+  "fixture_sha256": "9112b1b842b60b6f83a2c93791820208c605c3ce31dba405c20387d751d978dd",
+  "development_family_source": "data/fixtures/milai_m1_v18_irrelevant_revision.json",
+  "development_family_source_sha256": "bd836779658f18f70532fa69d0a694c1150436df7423b87a60de9e067160b2ac",
+  "public_messages": 3,
+  "public_messages_and_business_tool_unchanged_from_v18": true,
+  "seed_memories": 2,
+  "external_update_after_public_index": 0,
+  "rubric_path": "artifacts/on-demand-reconstruction-v19/irrelevant-rubric.json",
+  "rubric_sha256": "71df27339d58916215088a87766d0845af3a6685705c6de9476de256dd34f001",
+  "rubric_is_runtime_input": false,
+  "benchmark_score": false,
+  "preset_reconstruction_or_adoption": false,
+  "planned_arms": [
+    "odr",
+    "freshness_only"
+  ],
+  "freshness_only_gate": "All three ODR cases pass on one final implementation",
+  "fresh_namespaces_per_run_arm": true,
+  "regeneration_after_outcomes": false,
+  "actual_model_requests_at_freeze": 0
+}

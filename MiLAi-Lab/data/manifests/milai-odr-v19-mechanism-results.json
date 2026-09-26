@@ -1,0 +1,777 @@
+{
+  "kind": "MILAI_ODR_V19_MECHANISM_RESULTS",
+  "status": "FINAL_NEGATIVE",
+  "source_mapping_sha256": "1f22b6b7b032a647e360c140c61467763f7ce71b0a1fdd481d1c00ede88fbfaa",
+  "cases": {
+    "changed": {
+      "interpretation": "FAIL: X@1 delivered and X@2 updated; three real stale notices delivered; no current X@2 acquisition or reconstruction; approved action actually recorded stale 4 C.",
+      "full_frozen_odr_criterion_pass": false,
+      "ordinary_behavior_non_interference": "NOT_THIS_CONTROL",
+      "public_messages_completed": 3,
+      "public_messages_attempted": 3,
+      "primary_old_revision_actually_delivered": true,
+      "external_revision_update_real": true,
+      "freshness_requests": 3,
+      "primary_unchanged": false,
+      "freshness_target": "primary",
+      "target_current_revision_body_acquired": false,
+      "ordinary_host_search_calls": 1,
+      "searches_after_update": 0,
+      "ordinary_search_followup_generations": 1,
+      "ordinary_business_followup_generations": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 4
+      },
+      "business_public_index": 2,
+      "business_calls": 1,
+      "business_arguments_correct": false,
+      "action_without_reconstruction": 1,
+      "emitted_nonnull": 0,
+      "accepted_nonnull": 0,
+      "rejected_reconstructions": 0,
+      "independent_generations": 0,
+      "automatic_search": false,
+      "business_truth_gate": false,
+      "primary_ref": "memory:bb685877-657c-43e5-aaf8-680f429eb369@1",
+      "external_target_old_ref": "memory:bb685877-657c-43e5-aaf8-680f429eb369@1",
+      "external_target_current_ref": "memory:bb685877-657c-43e5-aaf8-680f429eb369@2",
+      "requests": [
+        {
+          "request_id": "d2238f2f0f765154a9dc4c2551a4b96ec3deb63e908a8d4e3e71baab19bdb7de",
+          "response_id": "chatcmpl-8c4550a90f38a08e",
+          "public_message_index": 0,
+          "request_index": 1,
+          "freshness_delivered": false,
+          "freshness": {},
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction crate Lumen-42 holding temperature"
+                }
+              }
+            ]
+          },
+          "usage": {
+            "prompt_tokens": 638,
+            "total_tokens": 675,
+            "completion_tokens": 37,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 0,
+            "evidence_handle_tokens": 16,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "0a4e5b1a6712998de7a11593215401a2ec92ea38ef8e5140794699ba66fa9933"
+        },
+        {
+          "request_id": "3894076344f2d68bf4724d1b62a23d5857905585bd75c9dc68be370de39f9ec9",
+          "response_id": "chatcmpl-a644fd62179f63b7",
+          "public_message_index": 0,
+          "request_index": 2,
+          "freshness_delivered": false,
+          "freshness": {
+            "memory:bb685877-657c-43e5-aaf8-680f429eb369@1": {
+              "current_body_delivered": true,
+              "current_ref": "memory:bb685877-657c-43e5-aaf8-680f429eb369@1",
+              "status": "CURRENT"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 4 degrees Celsius."
+          },
+          "usage": {
+            "prompt_tokens": 919,
+            "total_tokens": 952,
+            "completion_tokens": 33,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 0,
+            "evidence_handle_tokens": 65,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "ee2f7ea745b53934eac6e9c7da47f044ac9934d78691c5e4d72aaa2dde954401"
+        },
+        {
+          "request_id": "50f7cdddf491f7c2a51409954b756431742518f1401bf6b44484dba639c4b9de",
+          "response_id": "chatcmpl-8c20800c83ceb8df",
+          "public_message_index": 1,
+          "request_index": 1,
+          "freshness_delivered": true,
+          "freshness": {
+            "memory:bb685877-657c-43e5-aaf8-680f429eb369@1": {
+              "current_body_delivered": false,
+              "current_ref": "memory:bb685877-657c-43e5-aaf8-680f429eb369@2",
+              "status": "SUPERSEDED"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "answer": "The holding instruction for crate Lumen-42 is 4 degrees Celsius. This is pending your dispatch decision and has not been recorded."
+          },
+          "usage": {
+            "prompt_tokens": 1082,
+            "total_tokens": 1128,
+            "completion_tokens": 46,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 92,
+            "evidence_handle_tokens": 75,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "38754dc5e153c21e65002d3cc78742a23078e340b3222b923a65a86a2fd2f3a3"
+        },
+        {
+          "request_id": "f5a96bab7b433aea803b67b304db08dd1cdc18bab22b9f48521583062d2c73f0",
+          "response_id": "chatcmpl-91954615a46bc842",
+          "public_message_index": 2,
+          "request_index": 1,
+          "freshness_delivered": true,
+          "freshness": {
+            "memory:bb685877-657c-43e5-aaf8-680f429eb369@1": {
+              "current_body_delivered": false,
+              "current_ref": "memory:bb685877-657c-43e5-aaf8-680f429eb369@2",
+              "status": "SUPERSEDED"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": true,
+          "action": {
+            "reconstruction": null,
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 4
+                }
+              }
+            ]
+          },
+          "usage": {
+            "prompt_tokens": 1161,
+            "total_tokens": 1202,
+            "completion_tokens": 41,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 92,
+            "evidence_handle_tokens": 85,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "871a57f1ceec79faff5187dbf150db80df0f627e15fd2cefcc72cab680e87d2a"
+        },
+        {
+          "request_id": "e378da9844e438534c7fd4c970bfc42ed0188a3c9b56e7186d6b5480077f5468",
+          "response_id": "chatcmpl-b118f4ed7d1c805c",
+          "public_message_index": 2,
+          "request_index": 2,
+          "freshness_delivered": true,
+          "freshness": {
+            "memory:bb685877-657c-43e5-aaf8-680f429eb369@1": {
+              "current_body_delivered": false,
+              "current_ref": "memory:bb685877-657c-43e5-aaf8-680f429eb369@2",
+              "status": "SUPERSEDED"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "answer": "The holding instruction for crate Lumen-42 at 4 degrees Celsius has been recorded."
+          },
+          "usage": {
+            "prompt_tokens": 1254,
+            "total_tokens": 1285,
+            "completion_tokens": 31,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 92,
+            "evidence_handle_tokens": 98,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "995cf91130ac61abb192d66ef19710a3c7b52b19456f0b0bb54ad19c0aded237"
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "9d9d42b4a5bed4dea5f06c0e3976113310c5d59cef59dfa8d3c6dcf8ad7f9029",
+        "reconstruction.jsonl": "e51aa62f1ed477ce14e98f74c39edef4746ac853f28c7c91486ecc78f910b5cf",
+        "instrumentation.sqlite": "f0d8cfebda6faa59bd32d87125e56f6b655ceb9d612111d6c1ccbb18e518df04",
+        "checkpoints.sqlite": "c91b8090835cbeb71cc4d2ca0b7d1fdda0421ecce5eeb7c84ff4dacc3b994d4a",
+        "run/result.json": "fe654829c361f180319a6bafd448554a7e6363bdbe7ed71022506f3a4b9c4a51",
+        "run/fixture-effects.json": "07a48014231d9466f000d2ef10b65f9d30064d50689ac5cd395ad5a0fa9daa00",
+        "run/business-journal.json": "77f9c8167bb77c69922fb30bf2733518ecdf36a01841a2add20899f5fb45dd8a",
+        "run/sim-world.json": "adb5231be19cb3b238ac87833654e21c7a45b385634964fd7f97e8ecc694cc09",
+        "prepared.json": "0e75479eec8076ea6cd40f47cd94d4f138157ae15f4ab79f4908240597c6643a",
+        "process-receipt.json": "6f65b7b76340c5bfdaf0a13b02f8ae16a958064f47a95bc359eacf186f535621"
+      },
+      "factual_rows": {
+        "requests": 5,
+        "request_material": 5,
+        "searches": 1,
+        "revisions": 2,
+        "observations": 4,
+        "tool_calls": 4,
+        "operations": 2
+      }
+    },
+    "retained": {
+      "interpretation": "FAIL: approved action 8 C, but current X@2 was never acquired and no reconstruction occurred; pending answer repeats old note A. Equal numeric value is not proof of revision adaptation.",
+      "full_frozen_odr_criterion_pass": false,
+      "ordinary_behavior_non_interference": "NOT_THIS_CONTROL",
+      "public_messages_completed": 3,
+      "public_messages_attempted": 3,
+      "primary_old_revision_actually_delivered": true,
+      "external_revision_update_real": true,
+      "freshness_requests": 3,
+      "primary_unchanged": false,
+      "freshness_target": "primary",
+      "target_current_revision_body_acquired": false,
+      "ordinary_host_search_calls": 1,
+      "searches_after_update": 0,
+      "ordinary_search_followup_generations": 1,
+      "ordinary_business_followup_generations": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 8
+      },
+      "business_public_index": 2,
+      "business_calls": 1,
+      "business_arguments_correct": true,
+      "action_without_reconstruction": 1,
+      "emitted_nonnull": 0,
+      "accepted_nonnull": 0,
+      "rejected_reconstructions": 0,
+      "independent_generations": 0,
+      "automatic_search": false,
+      "business_truth_gate": false,
+      "primary_ref": "memory:589a168e-350e-4c62-ad5f-512460bb9b17@1",
+      "external_target_old_ref": "memory:589a168e-350e-4c62-ad5f-512460bb9b17@1",
+      "external_target_current_ref": "memory:589a168e-350e-4c62-ad5f-512460bb9b17@2",
+      "requests": [
+        {
+          "request_id": "3219b40e538624b8474b760825c306d0349fe9a28b5e1cb592aa32b72bbf7fd8",
+          "response_id": "chatcmpl-91bf03aafe7808ef",
+          "public_message_index": 0,
+          "request_index": 1,
+          "freshness_delivered": false,
+          "freshness": {},
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction crate Lumen-42 holding temperature"
+                }
+              }
+            ]
+          },
+          "usage": {
+            "prompt_tokens": 638,
+            "total_tokens": 675,
+            "completion_tokens": 37,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 0,
+            "evidence_handle_tokens": 16,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "0a4e5b1a6712998de7a11593215401a2ec92ea38ef8e5140794699ba66fa9933"
+        },
+        {
+          "request_id": "363f1437727e8969447c4149ce0029bc9f9e7ea26cdf41d87c4d6bedcaef225a",
+          "response_id": "chatcmpl-9f6ee19902982f2a",
+          "public_message_index": 0,
+          "request_index": 2,
+          "freshness_delivered": false,
+          "freshness": {
+            "memory:589a168e-350e-4c62-ad5f-512460bb9b17@1": {
+              "current_body_delivered": true,
+              "current_ref": "memory:589a168e-350e-4c62-ad5f-512460bb9b17@1",
+              "status": "CURRENT"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 8 degrees Celsius. This recommendation is pending your dispatch decision."
+          },
+          "usage": {
+            "prompt_tokens": 933,
+            "total_tokens": 974,
+            "completion_tokens": 41,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 0,
+            "evidence_handle_tokens": 66,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "cc9e555556ed94d56bec0610234e0fcce9d0deea86cb946cbd3092b2430c3c0b"
+        },
+        {
+          "request_id": "16592324c735fdc12e33f417c5fe74267b1d2ff7393b82932e5629873b74baf5",
+          "response_id": "chatcmpl-aaca2a79e653ed64",
+          "public_message_index": 1,
+          "request_index": 1,
+          "freshness_delivered": true,
+          "freshness": {
+            "memory:589a168e-350e-4c62-ad5f-512460bb9b17@1": {
+              "current_body_delivered": false,
+              "current_ref": "memory:589a168e-350e-4c62-ad5f-512460bb9b17@2",
+              "status": "SUPERSEDED"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "answer": "The holding instruction for crate Lumen-42, if approved, would be to keep it at 8 degrees Celsius with the crate label facing outward. This remains pending your dispatch decision and has not been recorded as a holding instruction yet."
+          },
+          "usage": {
+            "prompt_tokens": 1106,
+            "total_tokens": 1172,
+            "completion_tokens": 66,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 94,
+            "evidence_handle_tokens": 76,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "be11cea0056a49b323de19c6720f554d907351ceb7cd0e304fe27cf57b31231f"
+        },
+        {
+          "request_id": "aa1838e248cbb49199ba42b3591121cc2bb2d394a1cb1b17a9dcfa6ce70d0140",
+          "response_id": "chatcmpl-aa8574b821c93c83",
+          "public_message_index": 2,
+          "request_index": 1,
+          "freshness_delivered": true,
+          "freshness": {
+            "memory:589a168e-350e-4c62-ad5f-512460bb9b17@1": {
+              "current_body_delivered": false,
+              "current_ref": "memory:589a168e-350e-4c62-ad5f-512460bb9b17@2",
+              "status": "SUPERSEDED"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": true,
+          "action": {
+            "reconstruction": null,
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          },
+          "usage": {
+            "prompt_tokens": 1205,
+            "total_tokens": 1246,
+            "completion_tokens": 41,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 94,
+            "evidence_handle_tokens": 86,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "49deb0d669cc5bb181e2779b6836137df9cb25c234770b4266eeeda292abafd8"
+        },
+        {
+          "request_id": "c21c50aad5042d0344ad1b3c8f53b04952d31c71a456fcd652f902a885957901",
+          "response_id": "chatcmpl-a5b58f5e115f835c",
+          "public_message_index": 2,
+          "request_index": 2,
+          "freshness_delivered": true,
+          "freshness": {
+            "memory:589a168e-350e-4c62-ad5f-512460bb9b17@1": {
+              "current_body_delivered": false,
+              "current_ref": "memory:589a168e-350e-4c62-ad5f-512460bb9b17@2",
+              "status": "SUPERSEDED"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "answer": "The holding instruction for crate Lumen-42 has been successfully recorded with a temperature of 8 degrees Celsius."
+          },
+          "usage": {
+            "prompt_tokens": 1298,
+            "total_tokens": 1333,
+            "completion_tokens": 35,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 94,
+            "evidence_handle_tokens": 99,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "ef590c7e5a7e29e4e3e0b9f17080c6f9eb8fc82966adbc1ea227185e68362bb6"
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "9c07836372b1ae8cf6a33d30286b57e127f5f92dccb2614b9b7ea80ea65f3ba6",
+        "reconstruction.jsonl": "a76169c05aba479b19ae86afb4747e98b151f0e765a7374eba96bdc04dd090d9",
+        "instrumentation.sqlite": "2d0776df3b364aed3b87b061812b1be5b6654bcc9ae0ff988db8c67876902a11",
+        "checkpoints.sqlite": "3514d3f68587d43cb0c5022a276c32896a19ad57744ecc72dd034175be636dd4",
+        "run/result.json": "55bebda82f3ac4dea0980f73113191663cfc96d6fe3eaeed38a7d6cabf9339d0",
+        "run/fixture-effects.json": "e7b9c663a73500ab2a22cd54e894cdf9ef6c41ae7909702ca7f60f286bd77334",
+        "run/business-journal.json": "9f972b99a96c53eb18e8847371aa87a90c644f45b2f683af1dbeb5b0070a5091",
+        "run/sim-world.json": "e2405c1ebd91dfd422ef2b9385202e91b4e1494e46ec1b50d12965a294f2c800",
+        "prepared.json": "4a531c92cef50ca5a78110aacf89e54423d808dd505c128f23ffe76eee753681",
+        "process-receipt.json": "2d0b96a7e6a1da8b0c28868184bf64b35973db4ff8e70f244e9b425617524508"
+      },
+      "factual_rows": {
+        "requests": 5,
+        "request_material": 5,
+        "searches": 1,
+        "revisions": 2,
+        "observations": 4,
+        "tool_calls": 4,
+        "operations": 2
+      }
+    },
+    "irrelevant": {
+      "interpretation": "NON_INTERVENTION_PASS / STRUCTURED_CRITERION_NOT_OBSERVED: initial search returned both primary X and auxiliary Y. Three notices correctly concern only Y@1; X stays current, no extra search or temperature change. All reconstructions null, so the pre-frozen final-reconstruction criterion is not met.",
+      "full_frozen_odr_criterion_pass": false,
+      "ordinary_behavior_non_interference": "PASS",
+      "public_messages_completed": 3,
+      "public_messages_attempted": 3,
+      "primary_old_revision_actually_delivered": true,
+      "external_revision_update_real": true,
+      "freshness_requests": 3,
+      "primary_unchanged": true,
+      "freshness_target": "auxiliary",
+      "target_current_revision_body_acquired": false,
+      "ordinary_host_search_calls": 1,
+      "searches_after_update": 0,
+      "ordinary_search_followup_generations": 1,
+      "ordinary_business_followup_generations": 1,
+      "business_arguments": {
+        "crate": "Lumen-42",
+        "temperature_celsius": 8
+      },
+      "business_public_index": 2,
+      "business_calls": 1,
+      "business_arguments_correct": true,
+      "action_without_reconstruction": 1,
+      "emitted_nonnull": 0,
+      "accepted_nonnull": 0,
+      "rejected_reconstructions": 0,
+      "independent_generations": 0,
+      "automatic_search": false,
+      "business_truth_gate": false,
+      "primary_ref": "memory:47b68dd9-6cd9-479a-8679-e56d6a08902e@1",
+      "external_target_old_ref": "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@1",
+      "external_target_current_ref": "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@2",
+      "requests": [
+        {
+          "request_id": "ab1896260068aa53c45aab97d918d902a2ce3e09522e5df82c95ffbd6bb22084",
+          "response_id": "chatcmpl-a3d05ce3d74dfa74",
+          "public_message_index": 0,
+          "request_index": 1,
+          "freshness_delivered": false,
+          "freshness": {},
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "calls": [
+              {
+                "name": "search_memory",
+                "arguments": {
+                  "query": "depot instruction crate Lumen-42 holding temperature"
+                }
+              }
+            ]
+          },
+          "usage": {
+            "prompt_tokens": 638,
+            "total_tokens": 675,
+            "completion_tokens": 37,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 0,
+            "evidence_handle_tokens": 16,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "0a4e5b1a6712998de7a11593215401a2ec92ea38ef8e5140794699ba66fa9933"
+        },
+        {
+          "request_id": "7dabfce1bf52195b73b162448c511814eb3b37479fb3d0adcf48679300bee727",
+          "response_id": "chatcmpl-ab39bae5c595f02f",
+          "public_message_index": 0,
+          "request_index": 2,
+          "freshness_delivered": false,
+          "freshness": {
+            "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@1": {
+              "current_body_delivered": true,
+              "current_ref": "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@1",
+              "status": "CURRENT"
+            },
+            "memory:47b68dd9-6cd9-479a-8679-e56d6a08902e@1": {
+              "current_body_delivered": true,
+              "current_ref": "memory:47b68dd9-6cd9-479a-8679-e56d6a08902e@1",
+              "status": "CURRENT"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "answer": "The saved depot instruction for crate Lumen-42 specifies a holding temperature of 8 degrees Celsius."
+          },
+          "usage": {
+            "prompt_tokens": 1152,
+            "total_tokens": 1185,
+            "completion_tokens": 33,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 0,
+            "evidence_handle_tokens": 116,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "b349f2830d747151936c723e4a3e374e120a8ed1c9ffa51f97959c3e2df1dcc7"
+        },
+        {
+          "request_id": "e2078b14a694a92db79a6b716935affe68bedea4d9f7b054f84364e623689120",
+          "response_id": "chatcmpl-bc71b5c61c5a7bc3",
+          "public_message_index": 1,
+          "request_index": 1,
+          "freshness_delivered": true,
+          "freshness": {
+            "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@1": {
+              "current_body_delivered": false,
+              "current_ref": "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@2",
+              "status": "SUPERSEDED"
+            },
+            "memory:47b68dd9-6cd9-479a-8679-e56d6a08902e@1": {
+              "current_body_delivered": true,
+              "current_ref": "memory:47b68dd9-6cd9-479a-8679-e56d6a08902e@1",
+              "status": "CURRENT"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "answer": "The holding instruction for crate Lumen-42 is 8 degrees Celsius. This is pending your dispatch decision and has not been recorded."
+          },
+          "usage": {
+            "prompt_tokens": 1317,
+            "total_tokens": 1363,
+            "completion_tokens": 46,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 94,
+            "evidence_handle_tokens": 126,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "6747aa5e9a916c06a36f9cc672a8e3ac245146c7a7c32e22da2da653691453f6"
+        },
+        {
+          "request_id": "02782eac656b8c64b0658f914eceb427ea1a4a366c9231aba961670d7eb13ebc",
+          "response_id": "chatcmpl-87262eb17e6f11e7",
+          "public_message_index": 2,
+          "request_index": 1,
+          "freshness_delivered": true,
+          "freshness": {
+            "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@1": {
+              "current_body_delivered": false,
+              "current_ref": "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@2",
+              "status": "SUPERSEDED"
+            },
+            "memory:47b68dd9-6cd9-479a-8679-e56d6a08902e@1": {
+              "current_body_delivered": true,
+              "current_ref": "memory:47b68dd9-6cd9-479a-8679-e56d6a08902e@1",
+              "status": "CURRENT"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": true,
+          "action": {
+            "reconstruction": null,
+            "calls": [
+              {
+                "name": "record_holding_instruction",
+                "arguments": {
+                  "crate": "Lumen-42",
+                  "temperature_celsius": 8
+                }
+              }
+            ]
+          },
+          "usage": {
+            "prompt_tokens": 1396,
+            "total_tokens": 1437,
+            "completion_tokens": 41,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 94,
+            "evidence_handle_tokens": 136,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "d9dd33e56eeb0968ab86d842b1baf48d0a0b8d13f32b3008be06dd4d761fe05d"
+        },
+        {
+          "request_id": "29d009f641e5a004f8cd3201e3621ed6c606cee069df849364642ff7acfc8d19",
+          "response_id": "chatcmpl-9a2955efde79438e",
+          "public_message_index": 2,
+          "request_index": 2,
+          "freshness_delivered": true,
+          "freshness": {
+            "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@1": {
+              "current_body_delivered": false,
+              "current_ref": "memory:21c305ad-087e-4a5a-a2c1-a8d8411043e3@2",
+              "status": "SUPERSEDED"
+            },
+            "memory:47b68dd9-6cd9-479a-8679-e56d6a08902e@1": {
+              "current_body_delivered": true,
+              "current_ref": "memory:47b68dd9-6cd9-479a-8679-e56d6a08902e@1",
+              "status": "CURRENT"
+            }
+          },
+          "reconstruction": null,
+          "action_without_reconstruction": false,
+          "action": {
+            "reconstruction": null,
+            "answer": "The holding instruction for crate Lumen-42 at 8 degrees Celsius has been recorded."
+          },
+          "usage": {
+            "prompt_tokens": 1489,
+            "total_tokens": 1520,
+            "completion_tokens": 31,
+            "prompt_tokens_details": null
+          },
+          "fragment_tokens": {
+            "fixed_odr_protocol_tokens": 111,
+            "dynamic_freshness_tokens": 94,
+            "evidence_handle_tokens": 149,
+            "reconstruction_output_field_tokens": 5
+          },
+          "actual_request_object_sha256": "076d01aa2b4db6dd58902939aa4cb3c55ee6bfd77716965e248c5ba2083c189b"
+        }
+      ],
+      "artifact_sha256": {
+        "trace.jsonl": "d9555625c7a098daaab5fe5bf23f84cbda62cedb9e706024f1f8e526a7a66ec9",
+        "reconstruction.jsonl": "2381be83d178f66450b2ca4dcef5db75a7e60816737752960ca56d27a4056117",
+        "instrumentation.sqlite": "f144b9da3996c180f7fe61e47ea2418c24dd13ddbfe15548b3964ed9160329dc",
+        "checkpoints.sqlite": "dfce348258acc72ceccb5456c55cb560f553fa5256c635307328d7758c36ddad",
+        "run/result.json": "b9edc5ec55c10d11da9e4bae783a6b3c11da023791504cead61e2d98138c9f03",
+        "run/fixture-effects.json": "3c802d7bb43019bc9ec24ebfbd22747d3f0ab8cf41c40a086bf8889e1b43dead",
+        "run/business-journal.json": "bf48ce429600d1b3a9a24c2b9bff8b36c52c3dbd5e4d9aa8e3248b872f7a81ff",
+        "run/sim-world.json": "e2405c1ebd91dfd422ef2b9385202e91b4e1494e46ec1b50d12965a294f2c800",
+        "prepared.json": "3fb5d9e8c9f49ffbf5f90f113c9fec669b8faea4c76e28ae0466a03d75c2e30f",
+        "process-receipt.json": "1dfb02131365a98f0b99a0621e565db549fb717f1dffc056417ca66a3930cbe4"
+      },
+      "factual_rows": {
+        "requests": 5,
+        "request_material": 5,
+        "searches": 1,
+        "revisions": 3,
+        "observations": 4,
+        "tool_calls": 5,
+        "operations": 3
+      }
+    }
+  },
+  "complete_odr_chains": [
+    0,
+    3
+  ],
+  "completed_public_messages": [
+    9,
+    9
+  ],
+  "correct_business_arguments": [
+    2,
+    3
+  ],
+  "structured_activation": {
+    "emitted": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "actual_generations": 15,
+    "rate": 0.0
+  },
+  "freshness": {
+    "requests": 9,
+    "actual_generations": 15,
+    "rate": 0.6,
+    "all_warnings_exactly_delivered_stale_material": true,
+    "no_stale_requests": 6,
+    "no_stale_dynamic_tokens": 0
+  },
+  "current_exact_evidence_use": {
+    "numerator": 0,
+    "denominator": 0,
+    "rate": null
+  },
+  "grounding_coverage": {
+    "declared_numerator": 0,
+    "semantic_numerator": 0,
+    "denominator": 0,
+    "rate": null
+  },
+  "reconstruction_quality": {
+    "sample_count": 0,
+    "label_like_count": 0,
+    "quality_rate": null
+  },
+  "unresolved_discipline": "NOT_ESTABLISHED: no reconstruction or unresolved_gap despite absent current bodies; changed business used an obsolete value.",
+  "stale_supports_value": {
+    "declared_attempts": 0,
+    "rejected": 0,
+    "accepted": 0,
+    "behavioral_stale_business_actions": 1,
+    "zero_declared_violations_is_not_grounding_success": true
+  },
+  "action_without_reconstruction": 3,
+  "non_intervention": {
+    "irrelevant_business_behavior": "PASS",
+    "ordinary_d01_d04_d07_d10": "NOT_RUN_GATE_NOT_MET",
+    "zero_activation_does_not_prove_selective_reconstruction": true
+  }
+}

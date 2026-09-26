@@ -165,6 +165,8 @@ def invoke_public_message(
         if task_id is None:
             raise ValueError("M1_TASK_ID_MISSING")
         model.m1.begin_public_message(scope, task_id, public_index)
+    if model.odr is not None:
+        model.odr.begin_public_message(scope, public_index)
     model.begin_public_message(f"{config['configurable']['thread_id']}:{public_index}")
     result = agent.invoke(
         {"messages": [HumanMessage(content=content)]},
@@ -184,7 +186,7 @@ def resume_public_message(
     snapshot = agent.get_state(config)
     if not snapshot.values:
         raise ValueError("PUBLIC_MESSAGE_CHECKPOINT_MISSING")
-    if model.m1 is not None and not snapshot.next:
+    if (model.m1 is not None or model.odr is not None) and not snapshot.next:
         if model.observer is not None:
             model.observer.assert_healthy()
         return cast(list[BaseMessage], snapshot.values["messages"])
@@ -204,6 +206,8 @@ def resume_public_message(
         if task_id is None:
             raise ValueError("M1_TASK_ID_MISSING")
         model.m1.begin_public_message(scope, task_id, public_index)
+    if model.odr is not None:
+        model.odr.begin_public_message(scope, public_index)
     model.begin_public_message(
         f"{config['configurable']['thread_id']}:{public_index}",
         checkpoint_calls=sum(isinstance(message, AIMessage) for message in after_user),

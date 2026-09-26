@@ -1,0 +1,419 @@
+{
+  "kind": "MILAI_ODR_V19_FINAL_FREEZE",
+  "status": "FROZEN_BEFORE_FORMAL_RUNS",
+  "created_at": "2026-09-26T14:37:40.106579+00:00",
+  "source_mapping_sha256": "1f22b6b7b032a647e360c140c61467763f7ce71b0a1fdd481d1c00ede88fbfaa",
+  "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+  "reference_sha256": "5742e05a7a182cbaadc8d0fd0d690bba035eb5dba98c36923e7bc3078a6c8bfb",
+  "environment_sha256": "590cf80f7a83c9fca64b9fd767b4ce632081397f3f1706aefb279625f7012d1f",
+  "source_verification_sha256": "8e7c71008de600e7511a2af76bb03b14fb32381a9d7f6277cad020bc4d1eedaf",
+  "source_verification": {
+    "kind": "MILAI_ODR_V19_SOURCE_VERIFICATION",
+    "status": "SOURCE_FREEZE_READY",
+    "source_mapping_sha256": "1f22b6b7b032a647e360c140c61467763f7ce71b0a1fdd481d1c00ede88fbfaa",
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_milai_odr.py",
+        "result": "PASS: 5 passed"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/on_demand_reconstruction src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_m1_mechanism.py src/milai_lab/runners/langmem_odr_mechanism.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/runners/langmem_merit.py tools/run_milai_odr.py tools/inspect_milai_odr.py tests/unit/test_milai_odr.py",
+        "result": "PASS: All checks passed"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_m1_mechanism.py src/milai_lab/runners/langmem_odr_mechanism.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/runners/langmem_merit.py tools/run_milai_odr.py tools/inspect_milai_odr.py",
+        "result": "PASS: 15 source files"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-tools-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_langmem_provenance.py tests/unit/test_milai_m1_v18.py",
+        "result": "17 passed, 1 pre-existing M1 test assertion mismatch",
+        "pre_existing_failure": {
+          "test": "test_milai_m1_v18.py::test_pending_protocol_or_unresolved_business_action[invalid_task_ended]",
+          "explanation": "HEAD test lines 443-447 expect DecisionDeltaError, while HEAD M1 controller lines 33-36 exclude task_ended from calls schema and HEAD adapter lines 206-215 raises IncompleteChatResponse on schema failure before M1 commit. The v19 change does not alter this branch."
+        }
+      },
+      {
+        "command": "uv build",
+        "result": "PASS: source distribution and wheel built once after v19 lock"
+      },
+      {
+        "command": "offline zipfile/tarfile required-path and forbidden-path inspection",
+        "result": "PASS: 3 required wheel paths, 5 required sdist paths, 0 forbidden paths"
+      }
+    ],
+    "packaging": {
+      "wheel": "dist/milai_lab-0.1.0-py3-none-any.whl",
+      "sdist": "dist/milai_lab-0.1.0.tar.gz",
+      "v19_lock_in_sdist": true,
+      "v19_config_and_cli_in_sdist": true,
+      "v19_runtime_in_wheel": true
+    },
+    "model_calls_by_source_owner": 0,
+    "embedding_calls_by_source_owner": 0
+  },
+  "decoder_probe_sha256": "776a5e0c088bf5afc348798666e1ae5b673748e7d5f0305475e0c03458f8c057",
+  "decoder_probe": [
+    {
+      "case": "null_answer",
+      "schema_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 574,
+        "total_tokens": 588,
+        "completion_tokens": 14,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-9bb0c84ebda73bab"
+    },
+    {
+      "case": "null_calls",
+      "schema_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 589,
+        "total_tokens": 618,
+        "completion_tokens": 29,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-8113a7938c54c872"
+    },
+    {
+      "case": "reconstruction_answer",
+      "schema_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 656,
+        "total_tokens": 752,
+        "completion_tokens": 96,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-be789b0edc68f0c3"
+    },
+    {
+      "case": "reconstruction_search",
+      "schema_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 670,
+        "total_tokens": 780,
+        "completion_tokens": 110,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-a8919663c599a53b"
+    },
+    {
+      "case": "reconstruction_business",
+      "schema_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 680,
+        "total_tokens": 800,
+        "completion_tokens": 120,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-a9b8d2b31c3d461a"
+    }
+  ],
+  "input_manifests_sha256": {
+    "data/manifests/milai-odr-v19-changed-freeze.json": "c2a1b160b07aeef50c65081c14b85828ef551aecaffc6b830d2e592f17dfa80b",
+    "data/manifests/milai-odr-v19-evaluation-protocol.json": "13c5203e0ff763cd12db6859f4bd5803f47332643c2997bc373f50281ae6e15d",
+    "data/manifests/milai-odr-v19-exposed-freeze.json": "619fdfed48dd14f4f9bc6181b0bf5c56b8a0eba4259cea05904f0182e97b26f4",
+    "data/manifests/milai-odr-v19-irrelevant-freeze.json": "e152f56be42794196b497d2da4c84099dde9d347032509ad6ed1c045ef2bb1a8",
+    "data/manifests/milai-odr-v19-reference.json": "5742e05a7a182cbaadc8d0fd0d690bba035eb5dba98c36923e7bc3078a6c8bfb",
+    "data/manifests/milai-odr-v19-retained-freeze.json": "e70a47c6f1d9e58e84959641cacb33b2747741776a5af3f7ee34565051cf9e26"
+  },
+  "private_rubric_sha256": {
+    "artifacts/on-demand-reconstruction-v19/changed-rubric.json": "ad2efd6f36acd373b63be0dae4145af23cf6129ae673d40ffcf0d33faeeb3ce7",
+    "artifacts/on-demand-reconstruction-v19/irrelevant-rubric.json": "71df27339d58916215088a87766d0845af3a6685705c6de9476de256dd34f001",
+    "artifacts/on-demand-reconstruction-v19/retained-rubric.json": "fb6f8e4d4fa825947821209d8f3fd22f80364462b9ba5e9909d27924392cd4ce"
+  },
+  "initial_namespaces_sha256": "7c292f6f787647ba84da07af2ee2fadbec81348267796f54445d4abada271660",
+  "initial_empty_namespaces": 10,
+  "prepared_runs": [
+    {
+      "arm": "odr",
+      "mode": "changed",
+      "run_id": "v19-odr-changed-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-odr-changed-r1",
+      "config_sha256": "63e7a207c73e2a5e8f18df0d3a307a06ca366bfcffb493583edaf5c42d04b5dc",
+      "prepared_sha256": "0e75479eec8076ea6cd40f47cd94d4f138157ae15f4ab79f4908240597c6643a",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "odr",
+        "run_id": "v19-odr-changed-r1",
+        "mode": "mechanism",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "63e7a207c73e2a5e8f18df0d3a307a06ca366bfcffb493583edaf5c42d04b5dc",
+        "input_sha256": "2789e522699f6f13f7e5687f72c14919572ae7e62a6cef41b8882123280ef13e",
+        "freeze_sha256": "c2a1b160b07aeef50c65081c14b85828ef551aecaffc6b830d2e592f17dfa80b",
+        "rubric_read_by_runner": false
+      }
+    },
+    {
+      "arm": "odr",
+      "mode": "retained",
+      "run_id": "v19-odr-retained-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-odr-retained-r1",
+      "config_sha256": "ce0488036221be12af92e7dd5abd76ce8a26349138cfa4094d4c7dc555304b6f",
+      "prepared_sha256": "4a531c92cef50ca5a78110aacf89e54423d808dd505c128f23ffe76eee753681",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "odr",
+        "run_id": "v19-odr-retained-r1",
+        "mode": "mechanism",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "ce0488036221be12af92e7dd5abd76ce8a26349138cfa4094d4c7dc555304b6f",
+        "input_sha256": "7014320612725fb4986ac89e6608ab7d6c649a010911af87aaf1c9ec8ba849f5",
+        "freeze_sha256": "e70a47c6f1d9e58e84959641cacb33b2747741776a5af3f7ee34565051cf9e26",
+        "rubric_read_by_runner": false
+      }
+    },
+    {
+      "arm": "odr",
+      "mode": "irrelevant",
+      "run_id": "v19-odr-irrelevant-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-odr-irrelevant-r1",
+      "config_sha256": "9f28d881db44d21095e7a02b6582f728b7bebc9c4a121c8e4e9b5cc4c7319c29",
+      "prepared_sha256": "3fb5d9e8c9f49ffbf5f90f113c9fec669b8faea4c76e28ae0466a03d75c2e30f",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "odr",
+        "run_id": "v19-odr-irrelevant-r1",
+        "mode": "mechanism",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "9f28d881db44d21095e7a02b6582f728b7bebc9c4a121c8e4e9b5cc4c7319c29",
+        "input_sha256": "9112b1b842b60b6f83a2c93791820208c605c3ce31dba405c20387d751d978dd",
+        "freeze_sha256": "e152f56be42794196b497d2da4c84099dde9d347032509ad6ed1c045ef2bb1a8",
+        "rubric_read_by_runner": false
+      }
+    },
+    {
+      "arm": "odr",
+      "mode": "diagnostic",
+      "run_id": "v19-odr-diagnostic-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-odr-diagnostic-r1",
+      "config_sha256": "726e38d32567b7aee7510c5b32d58453f4b8ca93c855e61b6fd1e53511156d27",
+      "prepared_sha256": "eb355084bde40018d410f09a9318c9d3de5c9662559021cc2b40b1bdee9a49f1",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "odr",
+        "run_id": "v19-odr-diagnostic-r1",
+        "mode": "diagnostic",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "726e38d32567b7aee7510c5b32d58453f4b8ca93c855e61b6fd1e53511156d27",
+        "input_sha256": "a6852f07b4b1801e0426cb9ca930c518b3182ac2d5b9f2754f9109e98bf862bc",
+        "freeze_sha256": "4f4c699990a65a02754fa745c8039d922149a2e8b4dc6728c92ae1efa99f9459",
+        "exposed_freeze_sha256": "619fdfed48dd14f4f9bc6181b0bf5c56b8a0eba4259cea05904f0182e97b26f4",
+        "rubric_read_by_runner": false
+      }
+    },
+    {
+      "arm": "odr",
+      "mode": "merit",
+      "run_id": "v19-odr-merit-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-odr-merit-r1",
+      "config_sha256": "b04a0e845d8e3896ddae35339a08ac257cf355f51d7009bf31c9d7fba3baf4d8",
+      "prepared_sha256": "1327047ca85badd5b9dec184a76dfad95abc1f009709409e2acae28c6818bd61",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "odr",
+        "run_id": "v19-odr-merit-r1",
+        "mode": "merit",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "b04a0e845d8e3896ddae35339a08ac257cf355f51d7009bf31c9d7fba3baf4d8",
+        "input_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+        "exposed_freeze_sha256": "619fdfed48dd14f4f9bc6181b0bf5c56b8a0eba4259cea05904f0182e97b26f4",
+        "rubric_read_by_runner": false
+      }
+    },
+    {
+      "arm": "freshness_only",
+      "mode": "changed",
+      "run_id": "v19-freshness_only-changed-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-freshness_only-changed-r1",
+      "config_sha256": "123e3ee48d6f877605e2828df29081b5fd4daab9e195fa5a2398cedc34432087",
+      "prepared_sha256": "6e5b441a15c643ff2638b3459ae55e1b93385ca4bc58f834e494e2e564c1bb23",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "freshness_only",
+        "run_id": "v19-freshness_only-changed-r1",
+        "mode": "mechanism",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "123e3ee48d6f877605e2828df29081b5fd4daab9e195fa5a2398cedc34432087",
+        "input_sha256": "2789e522699f6f13f7e5687f72c14919572ae7e62a6cef41b8882123280ef13e",
+        "freeze_sha256": "c2a1b160b07aeef50c65081c14b85828ef551aecaffc6b830d2e592f17dfa80b",
+        "rubric_read_by_runner": false
+      }
+    },
+    {
+      "arm": "freshness_only",
+      "mode": "retained",
+      "run_id": "v19-freshness_only-retained-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-freshness_only-retained-r1",
+      "config_sha256": "9f01d60534f1b05b875dbf9569e838ff869f6d0686270c81fa1f53a9c5bc5d81",
+      "prepared_sha256": "fd4061b7a2cc3e7d8f396b7d1712cdd4ed84445376c7bebc52d749d24558e8ab",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "freshness_only",
+        "run_id": "v19-freshness_only-retained-r1",
+        "mode": "mechanism",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "9f01d60534f1b05b875dbf9569e838ff869f6d0686270c81fa1f53a9c5bc5d81",
+        "input_sha256": "7014320612725fb4986ac89e6608ab7d6c649a010911af87aaf1c9ec8ba849f5",
+        "freeze_sha256": "e70a47c6f1d9e58e84959641cacb33b2747741776a5af3f7ee34565051cf9e26",
+        "rubric_read_by_runner": false
+      }
+    },
+    {
+      "arm": "freshness_only",
+      "mode": "irrelevant",
+      "run_id": "v19-freshness_only-irrelevant-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-freshness_only-irrelevant-r1",
+      "config_sha256": "a7eccf5e4d4adea200d44618a0738300422c3a772086be2126bdd92f3a841a27",
+      "prepared_sha256": "1ed4e187d058835722615eea5dfd20f1db0a2d1194f02f1ceda1616f31d6faf9",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "freshness_only",
+        "run_id": "v19-freshness_only-irrelevant-r1",
+        "mode": "mechanism",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "a7eccf5e4d4adea200d44618a0738300422c3a772086be2126bdd92f3a841a27",
+        "input_sha256": "9112b1b842b60b6f83a2c93791820208c605c3ce31dba405c20387d751d978dd",
+        "freeze_sha256": "e152f56be42794196b497d2da4c84099dde9d347032509ad6ed1c045ef2bb1a8",
+        "rubric_read_by_runner": false
+      }
+    },
+    {
+      "arm": "freshness_only",
+      "mode": "diagnostic",
+      "run_id": "v19-freshness_only-diagnostic-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-freshness_only-diagnostic-r1",
+      "config_sha256": "637d644d6d1c7b17037d55134b523f4d53e46ccbf0ffbb45249c839241d53935",
+      "prepared_sha256": "ec13e882821b4bca74f113419bf05532b35771debe0038e9b97c86116bfea8e4",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "freshness_only",
+        "run_id": "v19-freshness_only-diagnostic-r1",
+        "mode": "diagnostic",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "637d644d6d1c7b17037d55134b523f4d53e46ccbf0ffbb45249c839241d53935",
+        "input_sha256": "a6852f07b4b1801e0426cb9ca930c518b3182ac2d5b9f2754f9109e98bf862bc",
+        "freeze_sha256": "4f4c699990a65a02754fa745c8039d922149a2e8b4dc6728c92ae1efa99f9459",
+        "exposed_freeze_sha256": "619fdfed48dd14f4f9bc6181b0bf5c56b8a0eba4259cea05904f0182e97b26f4",
+        "rubric_read_by_runner": false
+      }
+    },
+    {
+      "arm": "freshness_only",
+      "mode": "merit",
+      "run_id": "v19-freshness_only-merit-r1",
+      "directory": "artifacts/on-demand-reconstruction-v19/final-freshness_only-merit-r1",
+      "config_sha256": "092f1635125766b5c2445a1544c407d9793a5ef8176773276daa20a4e49f58de",
+      "prepared_sha256": "6e327308c0ae4d9dfb9d244486743178e61592639d15b20e2ca3fd22597c8535",
+      "prepared": {
+        "status": "PREPARED_ZERO_MODEL",
+        "method": "odr",
+        "arm_id": "freshness_only",
+        "run_id": "v19-freshness_only-merit-r1",
+        "mode": "merit",
+        "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+        "config_sha256": "092f1635125766b5c2445a1544c407d9793a5ef8176773276daa20a4e49f58de",
+        "input_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+        "exposed_freeze_sha256": "619fdfed48dd14f4f9bc6181b0bf5c56b8a0eba4259cea05904f0182e97b26f4",
+        "rubric_read_by_runner": false
+      }
+    }
+  ],
+  "cost_before_formal": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 5,
+    "generation": {
+      "charged_tokens": 3538,
+      "known_tokens": 3538,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 0,
+      "known_tokens": 0,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+      "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+      "generation_requests": 16,
+      "generation_known_tokens": 19237,
+      "generation_charged_tokens": 19237,
+      "embedding_tokens": 267,
+      "unknown_usage": 0,
+      "judge_requests": 0,
+      "truncations": 1,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+        "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+        "generation_requests": 101,
+        "generation_known_tokens": 101810,
+        "generation_charged_tokens": 101810,
+        "embedding_tokens": 916,
+        "unknown_usage": 0,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-provenance/v16-budget.json",
+          "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+          "generation_requests": 55,
+          "generation_known_tokens": 40072,
+          "generation_charged_tokens": 40072,
+          "embedding_tokens": 443,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "sealed": true,
+          "earlier_v15": {
+            "ledger": "artifacts/langmem-foundation/v15-budget.json",
+            "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+            "generation_requests": 108,
+            "generation_known_tokens": 71846,
+            "generation_unknown_reservation": 4891,
+            "generation_charged_tokens": 76737,
+            "embedding_tokens": 836,
+            "unknown_usage": 1,
+            "judge_requests": 0,
+            "sealed": true
+          }
+        }
+      }
+    }
+  },
+  "model_request_concurrency": 1,
+  "vllm_settings_changed": false,
+  "freshness_only_V5": "CONDITIONAL_ALL_THREE_ODR_MECHANISMS_PASS",
+  "V6": "CONDITIONAL_ALL_THREE_ODR_MECHANISMS_PASS",
+  "V7": "CONDITIONAL_V6_WITHOUT_OBVIOUS_DEGRADATION"
+}

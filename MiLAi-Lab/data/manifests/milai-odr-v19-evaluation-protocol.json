@@ -1,0 +1,70 @@
+{
+  "kind": "MILAI_ODR_V19_OFFLINE_EVALUATION_PROTOCOL",
+  "status": "FROZEN_BEFORE_MODEL_REQUESTS",
+  "runtime_input": false,
+  "fixtures": {
+    "changed": {
+      "fixture_path": "data/fixtures/milai_odr_v19_changed.json",
+      "fixture_sha256": "2789e522699f6f13f7e5687f72c14919572ae7e62a6cef41b8882123280ef13e",
+      "freeze_path": "data/manifests/milai-odr-v19-changed-freeze.json",
+      "freeze_sha256": "c2a1b160b07aeef50c65081c14b85828ef551aecaffc6b830d2e592f17dfa80b"
+    },
+    "retained": {
+      "fixture_path": "data/fixtures/milai_odr_v19_retained.json",
+      "fixture_sha256": "7014320612725fb4986ac89e6608ab7d6c649a010911af87aaf1c9ec8ba849f5",
+      "freeze_path": "data/manifests/milai-odr-v19-retained-freeze.json",
+      "freeze_sha256": "e70a47c6f1d9e58e84959641cacb33b2747741776a5af3f7ee34565051cf9e26"
+    },
+    "irrelevant": {
+      "fixture_path": "data/fixtures/milai_odr_v19_irrelevant.json",
+      "fixture_sha256": "9112b1b842b60b6f83a2c93791820208c605c3ce31dba405c20387d751d978dd",
+      "freeze_path": "data/manifests/milai-odr-v19-irrelevant-freeze.json",
+      "freeze_sha256": "e152f56be42794196b497d2da4c84099dde9d347032509ad6ed1c045ef2bb1a8"
+    }
+  },
+  "activation": "Report emitted non-null, accepted non-null and rejected reconstructions separately over all actual normal generations; no numeric near-every-turn threshold invented after outcomes.",
+  "quality_sample": "Every accepted non-null reconstruction; no deduplication hides per-request churn. Judge action relevance and label-like content manually against actual delivered evidence.",
+  "grounding": "Among reconstructions declaring critical parameters, report declared supports_value coverage and separately whether exact delivered body supports those values.",
+  "freshness": "Dynamic block must contain only actually included SUPERSEDED/DELETED materials. Report current ref and actual current-body delivery separately; no semantic verdict.",
+  "current_evidence": "Report actual exact current memory use, stale supports_value attempts/rejections, contextual historical use, and UNKNOWN rather than guessing.",
+  "unresolved": "With insufficient delivered evidence, report action-sensitive gap vs invented parameters; do not equate a nonempty gap string to sufficient handling.",
+  "null_business": "ACTION_WITHOUT_RECONSTRUCTION records ordinary legal execution; no compulsory reconstruction gate.",
+  "non_intervention_cases": [
+    "d01",
+    "d04",
+    "d07",
+    "d10"
+  ],
+  "non_intervention_case_ids_offline_only": true,
+  "costs": [
+    "full input/output/embedding usage",
+    "fixed ODR protocol tokens",
+    "dynamic freshness tokens",
+    "ODR evidence-handle tokens",
+    "reconstruction output tokens",
+    "ordinary search-followup generations",
+    "independent generations",
+    "protocol rejection",
+    "truncation",
+    "local trace/storage bytes",
+    "persistent semantic state bytes"
+  ],
+  "token_measurement": "Pinned tokenizer on exact delivered fragments and original response field text. Fragments are included in total usage, not additive billing; truncated output remains fully charged.",
+  "ablation": {
+    "gate": "V2-V4 all pass",
+    "cases": [
+      "changed",
+      "retained",
+      "irrelevant"
+    ],
+    "equivalent_or_better": "F-only completes the same real old/current acquisition, freshness and approved action requirements without new auxiliary harm; do not credit deleted reconstruction criteria as an ODR advantage.",
+    "if_freshness_only_sufficient": "Select simpler freshness-only active method; keep frozen ODR evidence for reproduction, do not claim reconstruction increment."
+  },
+  "conditional_gates": {
+    "V5": "All three ODR mechanism cases pass",
+    "V6": "All three mechanism cases pass and structured ODR is not stopped by section44; if F-only wins, record selected simpler method explicitly",
+    "V7": "V6 no obvious degradation; compare current completion/semantic evidence without treating historical scores as a matched causal estimate"
+  },
+  "stopping": "Apply plan section44: unstable initial acquisition, structured burden, stale support, separate model call, forced search, activation near every request, or equally effective simpler freshness-only. Complete required implementation/evidence/report even for negative research outcomes.",
+  "historical_comparisons": "v16 7/12 and v17 5/12 are descriptive development history only; v18 early failures are not completed-task cost baselines."
+}

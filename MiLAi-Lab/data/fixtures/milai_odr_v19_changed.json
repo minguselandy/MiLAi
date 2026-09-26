@@ -1,0 +1,45 @@
+{
+  "kind": "ODR_V19_REVISION_DIAGNOSTIC",
+  "case_id": "milai_odr_v19_changed",
+  "user_id": "mechanism:holding-instruction",
+  "task_id": "pending-holding-instruction",
+  "seed_memories": [
+    {
+      "name": "primary",
+      "content": "The current depot instruction for crate Lumen-42 is to keep it at 4 degrees Celsius while it awaits dispatch."
+    }
+  ],
+  "revision_update": {
+    "after_public_index": 0,
+    "target": "primary",
+    "content": "The current depot instruction for crate Lumen-42 is to keep it at 8 degrees Celsius while it awaits dispatch. This replaces the earlier temperature instruction."
+  },
+  "public_messages": [
+    "For this packing task, determine the holding temperature for crate Lumen-42 from the saved depot instruction. Keep the recommendation pending my dispatch decision. Do not record a holding instruction or change the stored depot instruction yet.",
+    "I am still deciding when to dispatch. Tell me the holding instruction you would use if I approve, and keep it pending. Do not record a holding instruction yet.",
+    "I approve recording the holding instruction now. Use the current recommendation that you checked for crate Lumen-42, and call record_holding_instruction once."
+  ],
+  "business_tool_schema": {
+    "type": "function",
+    "function": {
+      "name": "record_holding_instruction",
+      "description": "Record the approved holding instruction in this local simulated packing task. Returns the recorded arguments. This does not dispatch anything or update long-term memory.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "crate": {
+            "type": "string"
+          },
+          "temperature_celsius": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "crate",
+          "temperature_celsius"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

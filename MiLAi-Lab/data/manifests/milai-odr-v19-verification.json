@@ -1,0 +1,85 @@
+{
+  "kind": "MILAI_ODR_V19_VERIFICATION",
+  "status": "IMPLEMENTATION_COMPLETE_RESEARCH_NEGATIVE",
+  "source_mapping_sha256": "1f22b6b7b032a647e360c140c61467763f7ce71b0a1fdd481d1c00ede88fbfaa",
+  "source_checks": {
+    "kind": "MILAI_ODR_V19_SOURCE_VERIFICATION",
+    "status": "SOURCE_FREEZE_READY",
+    "source_mapping_sha256": "1f22b6b7b032a647e360c140c61467763f7ce71b0a1fdd481d1c00ede88fbfaa",
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_milai_odr.py",
+        "result": "PASS: 5 passed"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/on_demand_reconstruction src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_m1_mechanism.py src/milai_lab/runners/langmem_odr_mechanism.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/runners/langmem_merit.py tools/run_milai_odr.py tools/inspect_milai_odr.py tests/unit/test_milai_odr.py",
+        "result": "PASS: All checks passed"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_m1_mechanism.py src/milai_lab/runners/langmem_odr_mechanism.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/runners/langmem_merit.py tools/run_milai_odr.py tools/inspect_milai_odr.py",
+        "result": "PASS: 15 source files"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-tools-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_langmem_provenance.py tests/unit/test_milai_m1_v18.py",
+        "result": "17 passed, 1 pre-existing M1 test assertion mismatch",
+        "pre_existing_failure": {
+          "test": "test_milai_m1_v18.py::test_pending_protocol_or_unresolved_business_action[invalid_task_ended]",
+          "explanation": "HEAD test lines 443-447 expect DecisionDeltaError, while HEAD M1 controller lines 33-36 exclude task_ended from calls schema and HEAD adapter lines 206-215 raises IncompleteChatResponse on schema failure before M1 commit. The v19 change does not alter this branch."
+        }
+      },
+      {
+        "command": "uv build",
+        "result": "PASS: source distribution and wheel built once after v19 lock"
+      },
+      {
+        "command": "offline zipfile/tarfile required-path and forbidden-path inspection",
+        "result": "PASS: 3 required wheel paths, 5 required sdist paths, 0 forbidden paths"
+      }
+    ],
+    "packaging": {
+      "wheel": "dist/milai_lab-0.1.0-py3-none-any.whl",
+      "sdist": "dist/milai_lab-0.1.0.tar.gz",
+      "v19_lock_in_sdist": true,
+      "v19_config_and_cli_in_sdist": true,
+      "v19_runtime_in_wheel": true
+    },
+    "model_calls_by_source_owner": 0,
+    "embedding_calls_by_source_owner": 0
+  },
+  "decoder_probe": {
+    "checks": 5,
+    "passed": 5,
+    "sha256": "776a5e0c088bf5afc348798666e1ae5b673748e7d5f0305475e0c03458f8c057"
+  },
+  "prepared_runs": 10,
+  "prepared_runs_with_no_formal_requests": 7,
+  "actual_request_material_reconciled": 15,
+  "final_source_and_validation_files_unchanged": true,
+  "old_artifacts_unchanged": 16,
+  "old_m1_method_files_unchanged": true,
+  "original_plan_bytes_unchanged": true,
+  "vllm_settings_changed": false,
+  "environment_before_sha256": "590cf80f7a83c9fca64b9fd767b4ce632081397f3f1706aefb279625f7012d1f",
+  "environment_after_sha256": "85802a6d9b1f7d731dfa4acf163e4c6060bf13d52c3bf888c3eb09c8e37f023c",
+  "real_model_request_owner": "Root",
+  "real_concurrency": 1,
+  "semantic_truth_gate": false,
+  "automatic_search": false,
+  "conditional_gates": {
+    "V5": "NOT_RUN_GATE_NOT_MET",
+    "V6": "NOT_RUN_GATE_NOT_MET",
+    "V7": "NOT_RUN_GATE_NOT_MET",
+    "reason": "Changed and retained fail current evidence acquisition; changed actually executes old 4 C after two freshness-bearing requests (three such requests in total, including the final acknowledgement). No complete structured ODR chain in any case.",
+    "freshness_only_efficacy": "UNKNOWN_NOT_RUN",
+    "selected_active_method": null,
+    "section44_3": "BEHAVIORAL_STALE_ACTION_OBSERVED; no explicit supports_value declaration because every reconstruction is null."
+  }
+}

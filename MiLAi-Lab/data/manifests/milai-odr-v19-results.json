@@ -1,0 +1,66 @@
+{
+  "kind": "MILAI_ODR_V19_RESULTS",
+  "status": "STOPPED_STRUCTURED_RECONSTRUCTION_NOT_JUSTIFIED",
+  "engineering_delivery": "COMPLETE",
+  "research_mechanism": "NOT_ESTABLISHED",
+  "source_mapping_sha256": "1f22b6b7b032a647e360c140c61467763f7ce71b0a1fdd481d1c00ede88fbfaa",
+  "lock_sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e",
+  "final_freeze_sha256": "aaf62b59475c8e8170a72cfa4af5c8c89a1cbeb7a8d6e5029ff2b06ae9ba4d63",
+  "reference_commit": "90ac0b35e95b0371106cb05fb66b1f933af7f432",
+  "complete_odr_chains": [
+    0,
+    3
+  ],
+  "actual_public_messages_completed": [
+    9,
+    9
+  ],
+  "actual_business_values": [
+    4,
+    8,
+    8
+  ],
+  "freshness_requests": [
+    9,
+    15
+  ],
+  "reconstruction_activation": [
+    0,
+    15
+  ],
+  "action_without_reconstruction": 3,
+  "decision": "Stop structured ODR extension under plan sections38/44; no forced reconstruction, automatic search, hard truth gate, semantic rescue prompt, M2 or Attention added. Freshness-only remains implemented but its efficacy is unmeasured because V5 gate failed.",
+  "reflection": "The adapter carries exact stale facts and parses every ordinary response. On this small family the Host searches initially, then ignores stale notices and always emits null. Copying non-null probe targets proves decoder reachability, not spontaneous reconstruction. Retained correct temperature is compatible with stale evidence; irrelevant no harm does not repair changed failure.",
+  "conditional_gates": {
+    "V5": "NOT_RUN_GATE_NOT_MET",
+    "V6": "NOT_RUN_GATE_NOT_MET",
+    "V7": "NOT_RUN_GATE_NOT_MET",
+    "reason": "Changed and retained fail current evidence acquisition; changed actually executes old 4 C after two freshness-bearing requests (three such requests in total, including the final acknowledgement). No complete structured ODR chain in any case.",
+    "freshness_only_efficacy": "UNKNOWN_NOT_RUN",
+    "selected_active_method": null,
+    "section44_3": "BEHAVIORAL_STALE_ACTION_OBSERVED; no explicit supports_value declaration because every reconstruction is null."
+  },
+  "unseen_data": {
+    "merit_seeds_3_4": "NOT_RUN",
+    "fresh_memsyco": "NOT_RUN",
+    "statemembench": "NOT_RUN"
+  },
+  "costs": {
+    "generations": 20,
+    "input_tokens": 19395,
+    "output_tokens": 965,
+    "generation_tokens": 20360,
+    "embedding_requests": 10,
+    "embedding_tokens": 274,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "provider_wall_seconds": 15.366588435135782
+  },
+  "vllm_settings_changed": false,
+  "new_semantic_state_bytes": 0,
+  "evidence_manifests_sha256": {
+    "data/manifests/milai-odr-v19-mechanism-results.json": "033cd84fa3fd315859029c465626f948861ee14a6b5ca62a8a596df49403144b",
+    "data/manifests/milai-odr-v19-cost-summary.json": "c5a782b72c6da624bb208e11b768a7ebbd5f3abd268c6f3527f24bd8061036ce",
+    "data/manifests/milai-odr-v19-verification.json": "f6a7c0f57908db7dc09e4a3af848bd856ef3f90d8dba19876f12e37f0a18d961"
+  }
+}

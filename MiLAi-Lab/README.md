@@ -3,7 +3,20 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Latest scoped delivery: [M1 pivot Goal v18](docs/MILA_LANGMEM_M1_PIVOT_GOAL_v18.md), executing
+Latest scoped delivery: [ODR Goal v19](docs/MILA_ON_DEMAND_RECONSTRUCTION_GOAL_v19.md),
+executing the [v19 plan](docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_DEVELOPMENT_PLAN_20260926.md).
+Status: `STOPPED_STRUCTURED_RECONSTRUCTION_NOT_JUSTIFIED`. The three-arm adapter, request-time
+freshness and ephemeral reconstruction are implemented with unchanged vLLM settings. V0 and
+all five decoder probes passed. Three controlled cases completed 9/9 public messages, but
+all 15 ordinary responses used null reconstruction; changed executed stale 4 C despite exact
+freshness notices. Retained did not acquire the current revision; irrelevant behavior was
+undisturbed. Conditional F-only/12-case/arc0 runs were not started, and F-only efficacy remains
+unknown. All costs are retained: 20 generations / 20360 tokens / 274 embedding tokens,
+zero truncations and zero persistent semantic-state bytes. See
+[results](docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_RESULTS_20260926.md) and
+[reproduction](docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_REPRODUCTION_20260926.md).
+
+Previous scoped delivery: [M1 pivot Goal v18](docs/MILA_LANGMEM_M1_PIVOT_GOAL_v18.md), executing
 the [v18 plan](docs/MILA_LANGMEM_M1_PIVOT_V18_DEVELOPMENT_PLAN_20260926.md).
 Status: `STOPPED_M1_RECHECK_NOT_JUSTIFIED`. Proposition/support roles/completion/persistence
 are implemented through the existing adapter; vLLM settings remain unchanged. V0 and decoder
