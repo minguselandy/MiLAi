@@ -36,6 +36,19 @@ canonical memory state.
 
 ## Required checks
 
+Latest request: read the [vNext roadmap](docs/MiLAi_vNext_Development_Roadmap_20260926.md)
+and produce the [v15 foundation Goal](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md).
+This turn is planning only: v15 is `PLANNED_NOT_STARTED`, with no dependency installation,
+runtime implementation, model calls or benchmark generation authorized by the document itself.
+For subsequent authorized development, the roadmap freezes v14 as a reference and starts a
+separate public LangGraph/LangMem baseline. Do not extend the old contextual runtime or port
+its frontier/finish policies into B0. v15 covers foundation and exposed-set characterization;
+v16/v17 instrumentation/Basis/Attention require separate scoped Goals and gates.
+The old v14 semantic-readiness failure remains a historical result, not a requirement to keep
+repairing that baseline before a valid public foundation can be studied. Preserve all old
+results/costs and keep seeds 3/4 unconsumed in v15. Documentation checks require no pytest,
+build or model calls. Existing Luna high publication authorization persists.
+
 The user now explicitly authorizes execution of [Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
 and its [semantic boundary design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md).
 Historical planning-only wording is superseded. Execution delivery is complete with status

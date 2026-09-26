@@ -1,18 +1,30 @@
 # MiLAi Lab goals
 
-## Active semantic boundary Goal v14.0 (2026-09-26)
+## Planned public baseline Goal v15 (2026-09-26)
+
+[Goal v15](MILA_LANGMEM_FOUNDATION_GOAL_v15.md) implements the first planned slice of the
+[vNext roadmap](MiLAi_vNext_Development_Roadmap_20260926.md). Status: `PLANNED_NOT_STARTED`;
+the current user request authorizes documentation, not implementation or model experiments.
+The future sequence is dependency/source identity → vLLM compatibility and distinct Store /
+checkpoint recovery → native task adapter → freeze → existing diagnostic/arc0 characterization.
+Foundation validity does not require a semantically perfect baseline. Preserve v14 as a frozen
+reference; do not port its frontier/maintenance policies into B0. v16 instrumentation/Basis and
+v17 Attention/matched unseen evaluation have separate entry gates. No new seeds are consumed.
+
+## Completed scoped semantic boundary Goal v14.0 (2026-09-26)
 
 [Goal v14.0](MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md) and
 [detailed design](MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md)
-are now under explicit execution authorization, status `IMPLEMENTATION_IN_PROGRESS`.
-The [baseline](../data/manifests/contextual-memory-v14-baseline.json) preserves v13 identities
-and all historical costs. One Sol xhigh owns core implementation; root controls real model
-requests serially. Work covers future-use dispositions in the existing frontier, real action
-receipts, persistent prose and literal collisions, then measured shared-contract consolidation.
-See the [development record](CONTEXTUAL_USER_MEMORY_V14_DEVELOPMENT_20260926.md).
-V1 inputs are created and frozen after development and narrow checks. V2 uses the exposed
-original arc0 from empty memory; two prospective new arcs are conditional on V1/V2 semantic
-readiness. Existing inputs/scoring remain unchanged. No State-Attention study is included.
+are delivered with status `IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES`; see the
+[results](CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md) and
+[development record](CONTEXTUAL_USER_MEMORY_V14_DEVELOPMENT_20260926.md).
+A–D, narrow checks, staged V1 and final-source original-world/empty-memory V2 are complete.
+V2 is native 4/5, dependent 1/2 and Host/maintenance 7/7, but first agreements are retained
+0/2 and the successful final refund leaves stale current memory. V1 failures remain open;
+results from different source rounds are not one final-source passing suite.
+All 80 generations / 317098 generation tokens / 1540 embedding tokens are preserved.
+V3 was not run; no new seeds or State-Attention comparison were performed. This path is the
+reference for vNext, not an active request to continue semantic-policy repairs.
 
 ## Completed scoped continuous runtime Goal v13.0 (2026-09-25)
 

@@ -3,6 +3,14 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
+Latest planned work: [LangMem foundation Goal v15](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md),
+based on the [vNext roadmap](docs/MiLAi_vNext_Development_Roadmap_20260926.md).
+Status: `PLANNED_NOT_STARTED`; this delivery is documentation only. The next development
+slice builds a pinned public LangGraph/LangMem baseline, validates vLLM/tool/store/restart
+integration, then characterizes the existing 12 diagnostics and exposed MERIT arc0.
+Keep v14 as the frozen reference; B1 instrumentation, Sparse Basis and State-Attention belong
+to later Goals. No new benchmark samples, dependencies or implementation were added here.
+
 Latest scoped delivery: [Semantic boundary Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md).
 Status: `IMPLEMENTED_WITH_OPEN_SEMANTIC_FAILURES`. A–D, narrow contract checks, staged V1
