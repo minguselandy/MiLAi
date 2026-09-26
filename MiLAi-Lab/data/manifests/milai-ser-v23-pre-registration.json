@@ -1,0 +1,183 @@
+{
+  "kind": "MILAI_SER_V23_PRE_REGISTRATION",
+  "status": "FROZEN_BEFORE_UNSEEN_GENERATION_AND_METHOD_ENTRYPOINT_FREEZE",
+  "created_at": "2026-09-26T18:40:58.107096+00:00",
+  "goal_path": "docs/MILAI_SER_V23_GOAL.md",
+  "goal_sha256": "0bcf95d6a95a0f809e620fb245a8c8f2fa23ef4c31d2b88a160b17a86a42eaaf",
+  "method_freeze_path": "docs/MILAI_SER_V22_P8_METHOD_FREEZE.md",
+  "method_freeze_sha256": "79b58ede5327272cf7cade3bb217ab0df5286297ddcc6a7a4ffaf96d70937a04",
+  "reference_commit": "7f26a9b5f3ff3b5ba54f7c2a0b3dacf3d4d03f90",
+  "source_url": "https://github.com/smshweta/merit-bench",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+  "source_sha256": {
+    "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+    "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+    "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+    "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+    "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+    "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+    "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+    "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+    "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+    "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+    "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+    "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+  },
+  "selection_rule": "Next two unopened ascending base seeds after exposed 0,1,2: 3 and 4. One complete original hard arc each; no content/outcome filter.",
+  "generator": "merit.arcs.generate_suite",
+  "generator_arguments": [
+    {
+      "n_arcs": 1,
+      "episodes_per_arc": 5,
+      "dep_ratio": 0.5,
+      "base_seed": 3,
+      "difficulty": "hard"
+    },
+    {
+      "n_arcs": 1,
+      "episodes_per_arc": 5,
+      "dep_ratio": 0.5,
+      "base_seed": 4,
+      "difficulty": "hard"
+    }
+  ],
+  "run_order": [
+    {
+      "base_seed": 3,
+      "arm": "b1_control"
+    },
+    {
+      "base_seed": 3,
+      "arm": "a3_exact_refresh"
+    },
+    {
+      "base_seed": 3,
+      "arm": "a4_selective_rebase"
+    },
+    {
+      "base_seed": 4,
+      "arm": "b1_control"
+    },
+    {
+      "base_seed": 4,
+      "arm": "a3_exact_refresh"
+    },
+    {
+      "base_seed": 4,
+      "arm": "a4_selective_rebase"
+    }
+  ],
+  "raw_tasks_generated": false,
+  "raw_tasks_read": false,
+  "outcomes_read": false,
+  "model_concurrency": 1,
+  "vllm_settings_changed": false,
+  "host": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 12,
+    "enable_thinking": false
+  },
+  "embedding": {
+    "base_url": "http://127.0.0.1:7861/v1/",
+    "model": "bge-m3",
+    "timeout": 180
+  },
+  "projection_stage": "v21",
+  "rank_bounded_refresh": false,
+  "native_checker_changed": false,
+  "continue_on_local_capacity": true,
+  "capacity_failure_policy": "Retain actual world and Store effects, score original world checker, separately mark Host failed/skipped and continue next original episode. Other service/Store faults abort.",
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 415,
+    "generation": {
+      "charged_tokens": 373013,
+      "known_tokens": 373013,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 4370,
+      "known_tokens": 4370,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "judge_requests": 0,
+  "sample_scope": "Two original arcs, small confirmatory comparison; no population reliability claim.",
+  "post_outcome_prompt_changes": false,
+  "substitute_failed_tasks": false,
+  "master_goal_complete": false
+}

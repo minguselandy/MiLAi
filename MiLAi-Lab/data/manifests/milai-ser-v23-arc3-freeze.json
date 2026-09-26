@@ -1,0 +1,17 @@
+{
+  "kind": "MILAI_SER_V23_ARC_FREEZE",
+  "selection_path": "data/manifests/milai-ser-v23-arc3-selection.json",
+  "selection_sha256": "a69f95a8b13fe46a1984ddb64de2fb79d1b1fd05cf5f7eb04ddc5653d159cf7c",
+  "arc_sha256": "2589ab3113e8617beb6960410d936da71b30e39ba4871adf66f72a488373bfba",
+  "world_sha256": "0a574e9ccb44fb4d3ae4fc1c4cb4692a3837c3dbf739f71c14070f008e3dba43",
+  "arc_id": "arc3-000",
+  "episode_count": 5,
+  "dependent_episode_count": 2,
+  "public_messages": 7,
+  "pre_registration_path": "data/manifests/milai-ser-v23-pre-registration.json",
+  "pre_registration_sha256": "7198499ac31f48bc023c52032be4d842b3af638424286e11586555d3f89031a0",
+  "source_mapping_sha256": "1b90bad524f7ff041fb5484b95fdd91b7f18f9d6240d460ad69afc7ff8f21e07",
+  "unseen_at_selection": true,
+  "native_checker_changed": false,
+  "real_model_runs_at_freeze": 0
+}

@@ -128,6 +128,15 @@ pre-registration and thin v23 entrypoint freeze. Keep stage v21 methods and para
 reuse the original loop/scorer, preserve old exposed loader behavior. No task-driven method
 changes, new model, vLLM adjustment or A5 efficacy claim. P9–P12/master remain ACTIVE.
 
+P9 [v23 Goal](docs/MILAI_SER_V23_GOAL.md) now pre-registers unopened MERIT base_seed3/4,
+one original 5-episode/7-message arc each, b1/a3/a4 in that order per ascending seed.
+The thin entrypoint, generic frozen loader and shared original loop/scorer pass five necessary
+zero-model checks and one build. Source mapping is
+`1b90bad524f7ff041fb5484b95fdd91b7f18f9d6240d460ad69afc7ff8f21e07`.
+Inputs were generated only after source freeze; no method or prompt change. Root owns all
+six serial real runs and full cost/semantic review. Preserve all failures, no task replacement
+or post-outcome tuning. Source remains frozen through this comparison; master stays active.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

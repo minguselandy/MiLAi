@@ -30,6 +30,21 @@ def load_exposed_arc(selection_path: Path) -> tuple[dict[str, Any], Any, Any, An
         }
     ):
         raise ValueError("MERIT_EXPOSED_SELECTION_CHANGED")
+    return load_frozen_arc(selection_path)
+
+
+def load_frozen_arc(selection_path: Path) -> tuple[dict[str, Any], Any, Any, Any, Any]:
+    """Regenerate one declared arc and bind it to its frozen bytes and world."""
+    selection = read_json(selection_path)
+    arguments = selection["generator_arguments"]
+    if (selection["dataset"] != "MERIT"
+            or selection["source_commit"] != "293933d96b1d1849e1f20d1bb324def5de9ed33f"
+            or selection["generator"] != "merit.arcs.generate_suite"
+            or not isinstance(arguments, dict)
+            or set(arguments) != {"n_arcs", "episodes_per_arc", "dep_ratio",
+                                  "base_seed", "difficulty"}
+            or arguments["n_arcs"] != 1):
+        raise ValueError("MERIT_FROZEN_SELECTION_CHANGED")
     root = Path(selection["external_root"]).resolve()
     for relative, expected in selection["source_sha256"].items():
         if _sha256(root / relative) != expected:
@@ -70,6 +85,11 @@ def load_exposed_arc(selection_path: Path) -> tuple[dict[str, Any], Any, Any, An
         arc.arc_id != selection["arc_id"]
         or hashlib.sha256(payload).hexdigest() != pinned["arc_sha256"]
         or payload != Path(pinned["arc"]).read_bytes()
+        or len(arc.episodes) != selection["episode_count"]
+        or sum(item.task.dependent for item in arc.episodes)
+        != selection["dependent_episode_count"]
+        or sum(len(item.task.user_messages) for item in arc.episodes)
+        != selection["user_message_count"]
     ):
         raise ValueError("MERIT_ARC_IDENTITY_MISMATCH")
     world = arc.make_world()

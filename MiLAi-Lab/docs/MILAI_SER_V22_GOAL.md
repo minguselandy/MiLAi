@@ -52,6 +52,6 @@ Sol xhigh独占源码/config/CI/必要窄检查，Root独占方案/冻结/评分
 - [x] R1四个同源串行尝试；R2/R3新源轨迹另列，不拼接，费用完整。
 - [x] 完整语义/native/实际request核对、失败反思、成本/存储与复现；业务失败保留。
 - [x] P8九项判定及方法冻结；P9另冻结selection与新入口。
-- [ ] Luna发布R3/P8并核对remote；长程Goal继续P9–P12。
+- [x] Luna发布R3/P8为`7f26a9b5f3ff3b5ba54f7c2a0b3dacf3d4d03f90`并核对remote；长程Goal继续P9–P12。
 
 P7 R1已执行四个预定run，见[R1结果与Failure Review](MILAI_SER_V22_P7_R1_RESULTS_20260927.md)。诊断B1 8/12、A5 7/12；两条MERIT在ep2 msg0因空搜索循环达到12次容量后中止，不能记为完整回归。累计SER306生成/274357tokens/3689embeddingtokens/75exact reads。下一轮先以独立锁增加opt-in episode局部容量失败隔离，原scorer公式、world/Store副作用与全分母保持，未尝试消息单列；不同时调整authority。随后独立检验无memory却注入authority的开销/决策影响。R1所有失败与费用不改。

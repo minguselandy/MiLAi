@@ -1,0 +1,47 @@
+{
+  "manifest_kind": "BENCHMARK_EXECUTION_SELECTION",
+  "dataset": "MERIT",
+  "status": "FROZEN_UNSEEN_MATCHED_SELECTION",
+  "source_url": "https://github.com/smshweta/merit-bench",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+  "source_sha256": {
+    "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+    "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+    "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+    "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+    "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+    "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+    "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+    "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+    "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+    "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+    "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+    "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+  },
+  "generator": "merit.arcs.generate_suite",
+  "generator_arguments": {
+    "n_arcs": 1,
+    "episodes_per_arc": 5,
+    "dep_ratio": 0.5,
+    "base_seed": 3,
+    "difficulty": "hard"
+  },
+  "arc_id": "arc3-000",
+  "arc_seed": 30000,
+  "episode_count": 5,
+  "dependent_episode_count": 2,
+  "user_message_count": 7,
+  "private_artifacts": {
+    "arc": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v23/inputs/seed3/arc.original.json",
+    "arc_sha256": "2589ab3113e8617beb6960410d936da71b30e39ba4871adf66f72a488373bfba",
+    "initial_world": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v23/inputs/seed3/initial-world.json",
+    "initial_world_sha256": "0a574e9ccb44fb4d3ae4fc1c4cb4692a3837c3dbf739f71c14070f008e3dba43"
+  },
+  "pre_registration_path": "data/manifests/milai-ser-v23-pre-registration.json",
+  "pre_registration_sha256": "7198499ac31f48bc023c52032be4d842b3af638424286e11586555d3f89031a0",
+  "selection_rule": "Next two unopened ascending base seeds after exposed 0,1,2: 3 and 4. One complete original hard arc each; no content/outcome filter.",
+  "unseen_at_selection": true,
+  "native_scoring_changed": false,
+  "real_model_runs_at_selection": 0
+}

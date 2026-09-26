@@ -1,0 +1,372 @@
+{
+  "kind": "MILAI_SER_V23_EXECUTION_FREEZE",
+  "status": "FROZEN_BEFORE_FIRST_REAL_REQUEST",
+  "created_at": "2026-09-26T18:50:04.442615+00:00",
+  "pre_registration_path": "data/manifests/milai-ser-v23-pre-registration.json",
+  "pre_registration_sha256": "7198499ac31f48bc023c52032be4d842b3af638424286e11586555d3f89031a0",
+  "lock_path": "data/locks/milai-ser-v23.lock.json",
+  "lock_sha256": "4ebfe530dc71d95f81d153b3cb9c1dbccbef0127e3b231fac581e824535b21eb",
+  "source_mapping_sha256": "1b90bad524f7ff041fb5484b95fdd91b7f18f9d6240d460ad69afc7ff8f21e07",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "stage": "P9_V23_FROZEN_MERIT_ENTRYPOINT",
+    "source_checkpoint_before_changes": "7f26a9b5f3ff3b5ba54f7c2a0b3dacf3d4d03f90",
+    "pre_registration_sha256": "7198499ac31f48bc023c52032be4d842b3af638424286e11586555d3f89031a0",
+    "source_files": [
+      "src/milai_lab/datasets/merit.py",
+      "src/milai_lab/runners/langmem_merit.py",
+      "src/milai_lab/methods/freshness_projection/identity.py",
+      "tools/run_milai_ser_v23.py",
+      "configs/milai-ser-v23.json",
+      "pyproject.toml",
+      ".github/workflows/ci.yml"
+    ],
+    "new_validation_files": [
+      "tests/unit/test_freshness_projection.py"
+    ],
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py::test_merit_local_capacity_keeps_native_result_and_continues_only_that_error tests/unit/test_freshness_projection.py::test_frozen_merit_loader_and_three_arm_construction tests/unit/test_freshness_projection.py::test_v23_prepare_binds_declared_arc_and_pre_registration",
+        "result": "PASS: 5 zero-model cases; legacy/frozen runner identities, exact seed-0 old wrapper, frozen source-byte binding, three arm constructors, synthetic selection/freeze/pre-registration identity and local capacity continuation"
+      },
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py::test_frozen_merit_loader_and_three_arm_construction",
+        "result": "PASS after adding known arc-0 old-wrapper success assertion"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/datasets/merit.py src/milai_lab/runners/langmem_merit.py src/milai_lab/methods/freshness_projection/identity.py tools/run_milai_ser_v23.py tests/unit/test_freshness_projection.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/datasets/merit.py src/milai_lab/runners/langmem_merit.py src/milai_lab/methods/freshness_projection/identity.py tools/run_milai_ser_v23.py",
+        "result": "PASS: 4 source files"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      },
+      {
+        "command": "offline v23 config parity, runtime mapping, sdist declaration, CI command and CLI help checks",
+        "result": "PASS: original Host/embedding/capacity/recipe/budget retained; unbounded exact policy; isolated output paths; three declared arms"
+      }
+    ],
+    "algorithm_and_prompt_changed": false,
+    "unseen_arc_3_or_4_generated_or_read": false,
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "build_deferred_until_lock": true
+  },
+  "package_verification": {
+    "status": "PASS",
+    "stage": "P9_V23_FROZEN_MERIT_ENTRYPOINT",
+    "lock": "data/locks/milai-ser-v23.lock.json",
+    "lock_sha256": "4ebfe530dc71d95f81d153b3cb9c1dbccbef0127e3b231fac581e824535b21eb",
+    "source_mapping_sha256": "1b90bad524f7ff041fb5484b95fdd91b7f18f9d6240d460ad69afc7ff8f21e07",
+    "identity_check": "PASS: verify_ser_v23_lock with 70-file map and unbounded exact policy",
+    "build": {
+      "command": "uv build --out-dir artifacts/ser-v23/dist",
+      "result": "PASS: one build after v23 source lock",
+      "sdist": "artifacts/ser-v23/dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "ef1bad97a229187a0c714a3dd7c5d52e0b83c44bfa809f2d6a33d48489b208e1",
+      "wheel": "artifacts/ser-v23/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "7b7748dfccfff6e8c50f4f472e41762c5d33809d7b75571306f6a92244644f8b"
+    },
+    "members": {
+      "result": "PASS: required source/wheel members and zero private/generated paths",
+      "sdist_file_count": 1734,
+      "wheel_file_count": 137,
+      "sdist_required": [
+        "configs/milai-ser-v23.json",
+        "data/locks/milai-ser-v23.lock.json",
+        "data/manifests/milai-ser-v23-pre-registration.json",
+        "tools/run_milai_ser_v23.py",
+        "src/milai_lab/datasets/merit.py",
+        "src/milai_lab/runners/langmem_merit.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "tests/unit/test_freshness_projection.py"
+      ],
+      "wheel_required": [
+        "milai_lab/datasets/merit.py",
+        "milai_lab/runners/langmem_merit.py",
+        "milai_lab/methods/freshness_projection/identity.py"
+      ],
+      "private_or_generated_paths_in_sdist_or_wheel": false,
+      "seed_3_and_4_selection_and_freeze_manifests_packaged": true,
+      "raw_arc_or_world_artifacts_packaged": false
+    },
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_lock": 0
+  },
+  "runs": [
+    {
+      "run_id": "ser-v23-arc3-b1-r1",
+      "arc_id": "arc3-000",
+      "base_seed": 3,
+      "arm": "b1_control",
+      "mode": "merit",
+      "directory": "artifacts/ser-v23/ser-v23-arc3-b1-r1",
+      "options": [
+        "--config",
+        "artifacts/ser-v23/ser-v23-arc3-b1-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v23.lock.json",
+        "--selection",
+        "data/manifests/milai-ser-v23-arc3-selection.json",
+        "--freeze",
+        "data/manifests/milai-ser-v23-arc3-freeze.json",
+        "--run",
+        "ser-v23-arc3-b1-r1",
+        "--arm",
+        "b1_control"
+      ],
+      "initial_namespace_items": 0,
+      "selection_path": "data/manifests/milai-ser-v23-arc3-selection.json",
+      "selection_sha256": "a69f95a8b13fe46a1984ddb64de2fb79d1b1fd05cf5f7eb04ddc5653d159cf7c",
+      "freeze_path": "data/manifests/milai-ser-v23-arc3-freeze.json",
+      "freeze_sha256": "cd7a2fd64013d82594f6742bdc9faa001aa84cbdd9a831cde8b67c2670db249c",
+      "config_sha256": "04056df1023e1b10e72aa3199c239743b70acd9a70b66175dc2cc617327d8ef3",
+      "prepared_sha256": "3e295909e684c486325ff0da31fbfbf1cf89d31a586a09c91193cceab2d6f8a6",
+      "result_manifest": "data/manifests/milai-ser-v23-arc3-b1-results.json"
+    },
+    {
+      "run_id": "ser-v23-arc3-a3-r1",
+      "arc_id": "arc3-000",
+      "base_seed": 3,
+      "arm": "a3_exact_refresh",
+      "mode": "merit",
+      "directory": "artifacts/ser-v23/ser-v23-arc3-a3-r1",
+      "options": [
+        "--config",
+        "artifacts/ser-v23/ser-v23-arc3-a3-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v23.lock.json",
+        "--selection",
+        "data/manifests/milai-ser-v23-arc3-selection.json",
+        "--freeze",
+        "data/manifests/milai-ser-v23-arc3-freeze.json",
+        "--run",
+        "ser-v23-arc3-a3-r1",
+        "--arm",
+        "a3_exact_refresh"
+      ],
+      "initial_namespace_items": 0,
+      "selection_path": "data/manifests/milai-ser-v23-arc3-selection.json",
+      "selection_sha256": "a69f95a8b13fe46a1984ddb64de2fb79d1b1fd05cf5f7eb04ddc5653d159cf7c",
+      "freeze_path": "data/manifests/milai-ser-v23-arc3-freeze.json",
+      "freeze_sha256": "cd7a2fd64013d82594f6742bdc9faa001aa84cbdd9a831cde8b67c2670db249c",
+      "config_sha256": "2d7b8ff4b7a529ce9504b6abdcda97fccc5d0a88e656c9981591362efcd68c11",
+      "prepared_sha256": "b9aeabee2fb1cef601c8b426444b8014cdce76a0322fbc17f41cfc5c66e05226",
+      "result_manifest": "data/manifests/milai-ser-v23-arc3-a3-results.json"
+    },
+    {
+      "run_id": "ser-v23-arc3-a4-r1",
+      "arc_id": "arc3-000",
+      "base_seed": 3,
+      "arm": "a4_selective_rebase",
+      "mode": "merit",
+      "directory": "artifacts/ser-v23/ser-v23-arc3-a4-r1",
+      "options": [
+        "--config",
+        "artifacts/ser-v23/ser-v23-arc3-a4-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v23.lock.json",
+        "--selection",
+        "data/manifests/milai-ser-v23-arc3-selection.json",
+        "--freeze",
+        "data/manifests/milai-ser-v23-arc3-freeze.json",
+        "--run",
+        "ser-v23-arc3-a4-r1",
+        "--arm",
+        "a4_selective_rebase"
+      ],
+      "initial_namespace_items": 0,
+      "selection_path": "data/manifests/milai-ser-v23-arc3-selection.json",
+      "selection_sha256": "a69f95a8b13fe46a1984ddb64de2fb79d1b1fd05cf5f7eb04ddc5653d159cf7c",
+      "freeze_path": "data/manifests/milai-ser-v23-arc3-freeze.json",
+      "freeze_sha256": "cd7a2fd64013d82594f6742bdc9faa001aa84cbdd9a831cde8b67c2670db249c",
+      "config_sha256": "5507924bbb2f930efcf68e5f0eae31c7ffe18d1e9839febeea8a5b98bee46acc",
+      "prepared_sha256": "2fb4438ecc5a16876d23133e05c20743e15f840be423c7e65d55e8b0ffdc3999",
+      "result_manifest": "data/manifests/milai-ser-v23-arc3-a4-results.json"
+    },
+    {
+      "run_id": "ser-v23-arc4-b1-r1",
+      "arc_id": "arc4-000",
+      "base_seed": 4,
+      "arm": "b1_control",
+      "mode": "merit",
+      "directory": "artifacts/ser-v23/ser-v23-arc4-b1-r1",
+      "options": [
+        "--config",
+        "artifacts/ser-v23/ser-v23-arc4-b1-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v23.lock.json",
+        "--selection",
+        "data/manifests/milai-ser-v23-arc4-selection.json",
+        "--freeze",
+        "data/manifests/milai-ser-v23-arc4-freeze.json",
+        "--run",
+        "ser-v23-arc4-b1-r1",
+        "--arm",
+        "b1_control"
+      ],
+      "initial_namespace_items": 0,
+      "selection_path": "data/manifests/milai-ser-v23-arc4-selection.json",
+      "selection_sha256": "7e530ec5567abc8fadac61fd6ff7f38f1845e5498830c1e39e13496aab36264e",
+      "freeze_path": "data/manifests/milai-ser-v23-arc4-freeze.json",
+      "freeze_sha256": "7db001dc90f46fa74c2b2b07df0a468335615ea0f80f3a44a76e7a724c47c198",
+      "config_sha256": "f2aae38e115427e118e3bbd362c59307f42c2c7859a3cd438ff75fe20b458a4e",
+      "prepared_sha256": "8abbb68db065a7fcc962fa7cb91ee61bbf3053c7d1058c331d64a61b30fbc6f5",
+      "result_manifest": "data/manifests/milai-ser-v23-arc4-b1-results.json"
+    },
+    {
+      "run_id": "ser-v23-arc4-a3-r1",
+      "arc_id": "arc4-000",
+      "base_seed": 4,
+      "arm": "a3_exact_refresh",
+      "mode": "merit",
+      "directory": "artifacts/ser-v23/ser-v23-arc4-a3-r1",
+      "options": [
+        "--config",
+        "artifacts/ser-v23/ser-v23-arc4-a3-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v23.lock.json",
+        "--selection",
+        "data/manifests/milai-ser-v23-arc4-selection.json",
+        "--freeze",
+        "data/manifests/milai-ser-v23-arc4-freeze.json",
+        "--run",
+        "ser-v23-arc4-a3-r1",
+        "--arm",
+        "a3_exact_refresh"
+      ],
+      "initial_namespace_items": 0,
+      "selection_path": "data/manifests/milai-ser-v23-arc4-selection.json",
+      "selection_sha256": "7e530ec5567abc8fadac61fd6ff7f38f1845e5498830c1e39e13496aab36264e",
+      "freeze_path": "data/manifests/milai-ser-v23-arc4-freeze.json",
+      "freeze_sha256": "7db001dc90f46fa74c2b2b07df0a468335615ea0f80f3a44a76e7a724c47c198",
+      "config_sha256": "ede71dd0ffa114b51c622c77207c86b84979888448f2adfa2d9a502562f83b47",
+      "prepared_sha256": "8a861dcc3289894eb65d5175fdbe42330b0460f6a705f550c68b24711bbb7582",
+      "result_manifest": "data/manifests/milai-ser-v23-arc4-a3-results.json"
+    },
+    {
+      "run_id": "ser-v23-arc4-a4-r1",
+      "arc_id": "arc4-000",
+      "base_seed": 4,
+      "arm": "a4_selective_rebase",
+      "mode": "merit",
+      "directory": "artifacts/ser-v23/ser-v23-arc4-a4-r1",
+      "options": [
+        "--config",
+        "artifacts/ser-v23/ser-v23-arc4-a4-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v23.lock.json",
+        "--selection",
+        "data/manifests/milai-ser-v23-arc4-selection.json",
+        "--freeze",
+        "data/manifests/milai-ser-v23-arc4-freeze.json",
+        "--run",
+        "ser-v23-arc4-a4-r1",
+        "--arm",
+        "a4_selective_rebase"
+      ],
+      "initial_namespace_items": 0,
+      "selection_path": "data/manifests/milai-ser-v23-arc4-selection.json",
+      "selection_sha256": "7e530ec5567abc8fadac61fd6ff7f38f1845e5498830c1e39e13496aab36264e",
+      "freeze_path": "data/manifests/milai-ser-v23-arc4-freeze.json",
+      "freeze_sha256": "7db001dc90f46fa74c2b2b07df0a468335615ea0f80f3a44a76e7a724c47c198",
+      "config_sha256": "130e402990a2ac7eb15c3b3ba87c8493f82960d090a545c512a360203c2ca544",
+      "prepared_sha256": "29da1c9784de2384f8351ce5232f1f393175660869eae895d7271211b77b62e2",
+      "result_manifest": "data/manifests/milai-ser-v23-arc4-a4-results.json"
+    }
+  ],
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 415,
+    "generation": {
+      "charged_tokens": 373013,
+      "known_tokens": 373013,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 4370,
+      "known_tokens": 4370,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "model_concurrency": 1,
+  "environment_reference": {
+    "path": "artifacts/ser-v20/environment-before.json",
+    "sha256": "8aba502900721b86dc778783cc6d59013a7691666b81e82fc86aadbe58f4d9b6"
+  },
+  "vllm_settings_changed": false,
+  "unseen_at_selection": true,
+  "master_goal_complete": false
+}

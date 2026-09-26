@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import sqlite3
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
@@ -22,7 +23,7 @@ from milai_lab.baselines.langmem_instrumentation import (
     InstrumentationIncomplete,
     ProvenanceObserver,
 )
-from milai_lab.datasets.merit import load_exposed_arc
+from milai_lab.datasets.merit import load_exposed_arc, load_frozen_arc
 from milai_lab.harness.contextual_artifacts import digest, read_json, write_json
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
@@ -41,7 +42,7 @@ def _world_for_run(arc: Any, path: Path) -> Any:
     return world
 
 
-def run_exposed_merit_arc(
+def _run_merit_arc(
     selection_path: Path,
     output: Path,
     run_id: str,
@@ -52,8 +53,10 @@ def run_exposed_merit_arc(
     arm_id: str = "b0",
     observer: ProvenanceObserver | None = None,
     continue_on_local_capacity: bool = False,
+    arc_loader: Callable[[Path], tuple[dict[str, Any], Any, Any, Any, Any]] = load_exposed_arc,
+    frozen_identity: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    selection, arc, native_tools, metrics, native_runner = load_exposed_arc(selection_path)
+    selection, arc, native_tools, metrics, native_runner = arc_loader(selection_path)
     output.mkdir(parents=True, exist_ok=True)
     identity = {
         "recipe_id": (model.m1.recipe_id if model.m1 is not None else
@@ -67,6 +70,8 @@ def run_exposed_merit_arc(
     }
     if arm_id != "b0":
         identity["arm_id"] = arm_id
+    if frozen_identity is not None:
+        identity.update(frozen_identity)
     identity_path = output / "run-identity.json"
     if identity_path.exists():
         if read_json(identity_path) != identity:
@@ -227,3 +232,29 @@ def run_exposed_merit_arc(
         raise
     finally:
         world.conn.close()
+
+
+def run_exposed_merit_arc(
+    selection_path: Path, output: Path, run_id: str, model: VLLMChatModel,
+    store: BaseStore, checkpointer: BaseCheckpointSaver[str],
+    config_identity: dict[str, Any], arm_id: str = "b0",
+    observer: ProvenanceObserver | None = None,
+    continue_on_local_capacity: bool = False,
+) -> dict[str, Any]:
+    return _run_merit_arc(
+        selection_path, output, run_id, model, store, checkpointer,
+        config_identity, arm_id, observer, continue_on_local_capacity,
+        arc_loader=load_exposed_arc)
+
+
+def run_frozen_merit_arc(
+    selection_path: Path, output: Path, run_id: str, model: VLLMChatModel,
+    store: BaseStore, checkpointer: BaseCheckpointSaver[str],
+    config_identity: dict[str, Any], frozen_identity: dict[str, Any],
+    arm_id: str = "b0", observer: ProvenanceObserver | None = None,
+    continue_on_local_capacity: bool = False,
+) -> dict[str, Any]:
+    return _run_merit_arc(
+        selection_path, output, run_id, model, store, checkpointer,
+        config_identity, arm_id, observer, continue_on_local_capacity,
+        arc_loader=load_frozen_arc, frozen_identity=frozen_identity)

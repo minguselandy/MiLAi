@@ -33,10 +33,12 @@ from milai_lab.baselines.langmem_revision_store import (
     canonical_json,
     content_identity,
 )
+from milai_lab.datasets.merit import load_exposed_arc, load_frozen_arc
 from milai_lab.methods.freshness_projection.controller import (
     SER_V21_RECIPE_ID,
     ProjectionController,
 )
+from milai_lab.methods.freshness_projection.identity import LAB
 from milai_lab.methods.freshness_projection.lineage import (
     DERIVED_WITHHELD,
     project_derived_assistants,
@@ -708,12 +710,13 @@ def test_fixture_update_list_delete_unknown_seed_and_completed_resume(tmp_path: 
     sidecar.close()
 
 
-@pytest.mark.parametrize("failure", [
-    ValueError("PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"),
-    RuntimeError("service unavailable"),
+@pytest.mark.parametrize(("failure", "frozen"), [
+    (ValueError("PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"), False),
+    (RuntimeError("service unavailable"), False),
+    (ValueError("PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"), True),
 ])
 def test_merit_local_capacity_keeps_native_result_and_continues_only_that_error(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: Exception,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: Exception, frozen: bool,
 ) -> None:
     tasks = [SimpleNamespace(task_id=f"task-{index}", kind="native", dependent=False,
                              checker="done", checker_args={},
@@ -728,6 +731,7 @@ def test_merit_local_capacity_keeps_native_result_and_continues_only_that_error(
         SimpleNamespace(done=lambda snapshot: snapshot["done"],
                         memory_utilized=lambda _calls, _golds: False),
         SimpleNamespace(SYSTEM_PROMPT="rules {memory_block}")))
+    monkeypatch.setattr(langmem_merit, "load_frozen_arc", langmem_merit.load_exposed_arc)
     monkeypatch.setattr(langmem_merit, "build_agent", lambda *args, **kwargs: (
         SimpleNamespace(get_state=lambda _config: SimpleNamespace(
             values={"messages": [AIMessage(content="partial")]}))))
@@ -752,17 +756,23 @@ def test_merit_local_capacity_keeps_native_result_and_continues_only_that_error(
 
     monkeypatch.setattr(langmem_merit, "invoke_or_resume_public_message", invoke)
     output = tmp_path / "run"
+
+    def run_arc() -> dict[str, Any]:
+        args = (selection_path, output, "run", model, InMemoryStore(), object(), {})
+        if frozen:
+            return langmem_merit.run_frozen_merit_arc(
+                *args, {"method": "ser_v23", "lock_sha256": "lock"},
+                continue_on_local_capacity=True)
+        return langmem_merit.run_exposed_merit_arc(
+            *args, continue_on_local_capacity=True)
+
     if isinstance(failure, RuntimeError):
         with pytest.raises(RuntimeError, match="service unavailable"):
-            langmem_merit.run_exposed_merit_arc(
-                selection_path, output, "run", model, InMemoryStore(), object(),
-                {}, continue_on_local_capacity=True)
+            run_arc()
         assert attempts == [("episode:0", 0)]
         assert not (output / "episodes/episode-1.json").exists()
         return
-    result = langmem_merit.run_exposed_merit_arc(
-        selection_path, output, "run", model, InMemoryStore(), object(),
-        {}, continue_on_local_capacity=True)
+    result = run_arc()
     assert attempts == [("episode:0", 0), ("episode:1", 0), ("episode:1", 1)]
     failed = json.loads((output / "episodes/episode-0.json").read_text())
     assert failed["native_score"]["success"] is True
@@ -772,6 +782,103 @@ def test_merit_local_capacity_keeps_native_result_and_continues_only_that_error(
     assert failed["skipped_public_message_indexes"] == [1]
     assert result["native_successes"] == 1
     assert not (output / "interruption.json").exists()
+    identity = json.loads((output / "run-identity.json").read_text())
+    if frozen:
+        assert identity["method"] == "ser_v23" and identity["lock_sha256"] == "lock"
+    else:
+        assert set(identity) == {"recipe_id", "run_id", "arc_id",
+                                 "selection_sha256", "config_sha256", "arc_sha256"}
+
+
+def test_frozen_merit_loader_and_three_arm_construction(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    selection_path = LAB / "data/manifests/contextual-memory-v7-e0-selection-final.json"
+    selection, arc, _, _, _ = load_frozen_arc(selection_path)
+    assert arc.arc_id == selection["arc_id"] and len(arc.episodes) == 5
+    assert load_exposed_arc(selection_path)[1].arc_id == arc.arc_id
+
+    changed = json.loads(selection_path.read_text())
+    changed["generator_arguments"]["base_seed"] = 3
+    changed_path = tmp_path / "changed-selection.json"
+    changed_path.write_text(json.dumps(changed), encoding="utf-8")
+    with pytest.raises(ValueError, match="MERIT_EXPOSED_SELECTION_CHANGED"):
+        load_exposed_arc(changed_path)
+    changed["generator_arguments"]["base_seed"] = 0
+    changed["private_artifacts"]["arc_sha256"] = "0" * 64
+    changed_path.write_text(json.dumps(changed), encoding="utf-8")
+    with pytest.raises(ValueError, match="MERIT_ARC_IDENTITY_MISMATCH"):
+        load_frozen_arc(changed_path)
+
+    monkeypatch.syspath_prepend(str(LAB / "tools"))
+    from run_milai_ser_v23 import projection_for_arm
+
+    sidecar = RevisionSidecar(tmp_path / "sidecar.sqlite")
+    observer = ProvenanceObserver(sidecar, "run", "b1_control")
+    store = ObservedStore(InMemoryStore(), observer)
+    assert projection_for_arm(observer, None, store, "b1_control") is None
+    for arm in ("a3_exact_refresh", "a4_selective_rebase"):
+        projection = projection_for_arm(observer, None, store, arm)
+        assert projection is not None
+        assert projection.arm == arm and projection.stage == "v21"
+        assert projection.refresh_until_current_candidate is False
+        assert projection.max_exact_refresh_per_search is None
+        assert projection.recipe_id == SER_V21_RECIPE_ID
+    sidecar.close()
+
+
+def test_v23_prepare_binds_declared_arc_and_pre_registration(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.syspath_prepend(str(LAB / "tools"))
+    import run_milai_ser_v23 as entry
+
+    arguments = {"n_arcs": 1, "episodes_per_arc": 2, "dep_ratio": 0.5,
+                 "base_seed": 17, "difficulty": "hard"}
+    selection = {"generator_arguments": arguments,
+                 "source_sha256": {"declared": "hash"}, "source_commit": "pinned",
+                 "private_artifacts": {"arc_sha256": "arc-hash",
+                                       "initial_world_sha256": "world-hash"}}
+    selection_path = tmp_path / "selection.json"
+    selection_path.write_text(json.dumps(selection), encoding="utf-8")
+    pre_registration_path = tmp_path / "pre-registration.json"
+    pre_registration_path.write_text(json.dumps({
+        "generator_arguments": [arguments], "source_sha256": selection["source_sha256"],
+        "source_commit": selection["source_commit"]}), encoding="utf-8")
+    monkeypatch.setattr(entry, "SER_V23_PRE_REGISTRATION", pre_registration_path)
+    monkeypatch.setattr(entry, "verify_ser_v23_lock", lambda *_args: None)
+    arc = SimpleNamespace(arc_id="arc", episodes=[
+        SimpleNamespace(task=SimpleNamespace(dependent=index == 1,
+                                             user_messages=["message"]))
+        for index in range(2)])
+    monkeypatch.setattr(entry, "load_frozen_arc", lambda _path: (
+        selection, arc, None, None, None))
+    freeze = {"kind": "MILAI_SER_V23_ARC_FREEZE",
+              "selection_path": str(selection_path),
+              "selection_sha256": sha256_file(selection_path),
+              "arc_sha256": "arc-hash", "world_sha256": "world-hash",
+              "arc_id": "arc", "episode_count": 2, "dependent_episode_count": 1,
+              "public_messages": 2,
+              "pre_registration_path": str(pre_registration_path),
+              "pre_registration_sha256": sha256_file(pre_registration_path),
+              "unseen_at_selection": True}
+    freeze_path = tmp_path / "freeze.json"
+    freeze_path.write_text(json.dumps(freeze), encoding="utf-8")
+    lock_path, config_path = tmp_path / "lock.json", tmp_path / "config.json"
+    lock_path.write_text("{}", encoding="utf-8")
+    config_path.write_text("{}", encoding="utf-8")
+    args = SimpleNamespace(lock=lock_path, config=config_path, freeze=freeze_path,
+                           selection=selection_path, run="run", arm="a3_exact_refresh",
+                           output=tmp_path / "prepared.json")
+    receipt = entry.prepare(args)
+    assert receipt["status"] == "PREPARED_ZERO_MODEL"
+    assert (receipt["arc_sha256"], receipt["world_sha256"], receipt["episodes"],
+            receipt["dependent_episodes"], receipt["public_messages"]) == (
+                "arc-hash", "world-hash", 2, 1, 2)
+    freeze["selection_sha256"] = "changed"
+    freeze_path.write_text(json.dumps(freeze), encoding="utf-8")
+    with pytest.raises(ValueError, match="SER_V23_FROZEN_ARC_CHANGED"):
+        entry.prepare(args)
 
 
 def test_v21_authority_only_when_actual_memory_or_derived_risk_is_projected() -> None:
