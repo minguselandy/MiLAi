@@ -36,11 +36,25 @@ canonical memory state.
 
 ## Required checks
 
-Latest request: read the [v16 development plan](docs/MILA_LANGMEM_V16_DEVELOPMENT_PLAN_20260926.md)
-and generate the [provenance Goal](docs/MILA_LANGMEM_PROVENANCE_GOAL_v16.md).
-This delivery is planning only; v16 is `PLANNED_NOT_STARTED`. Do not treat the document as
-authorization to implement, install dependencies, run tests/models or generate benchmark data.
-For future authorized v16 work, the latest scope is B1 model-hidden instrumentation only:
+The user explicitly requested execution of the updated
+[provenance Goal v16](docs/MILA_LANGMEM_PROVENANCE_GOAL_v16.md), based on the
+[development plan](docs/MILA_LANGMEM_V16_DEVELOPMENT_PLAN_20260926.md).
+Status: `COMPLETE_WITH_INSTRUMENTED_BASELINE`; implementation superseded the historical planning-only restriction.
+One Sol xhigh owns instrumentation/Store/agent/provider/runner code and narrow checks;
+root owns reference and new locks/freezes, environment, real model calls (concurrency 1),
+continuous costs and reporting. Luna high retains authorized publication; no standing reviewer.
+A -> B–E -> F/V0 -> final freeze -> V1 -> V2 -> results is complete; G0–G6 passed.
+Preserve the [v16 results](docs/MILA_LANGMEM_PROVENANCE_V16_RESULTS_20260926.md) and
+[reproduction entry](docs/MILA_LANGMEM_PROVENANCE_V16_REPRODUCTION_20260926.md).
+The frozen 27-file mapping is `ae089f8a1583bf4ef730b0415f4ebd782a722c72398d47ca93af4da9a7d6caea`.
+18 narrow tests and original MERIT same-output raw-wire parity (21 generation / 5 embedding
+requests) passed. Final B1 completed the original 12/20 diagnostics (semantic 7/12) and arc0
+5/7 (native 4/5, dependent 1/2): 55 generations / 40072 tokens, 443 embedding tokens,
+unknown=0, Judge=0. All 39 observations, 10 inserts, 8 searches and 62 request-material
+links were reconciled. Preserve null insert, omitted memory, fabricated 5000-cent refund
+and stale pending content. No natural UPDATE/DELETE occurred; source_refs remain unknown.
+No M1/Basis/recheck/Attention or new seeds have started. No models/tests/build for publication.
+The current scope is B1 model-hidden instrumentation only:
 actual observations, memory revisions, search return/request inclusion and existing action
 receipts. Preserve B0 semantics and prove same-output parity before the exposed small runs.
 Do not fix baseline semantic failures or add Basis/adoption/recheck/Attention in this Goal;

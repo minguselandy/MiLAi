@@ -18,6 +18,10 @@ from milai_lab.baselines.langmem_agent import (
     build_agent,
     invoke_or_resume_public_message,
 )
+from milai_lab.baselines.langmem_instrumentation import (
+    InstrumentationIncomplete,
+    ProvenanceObserver,
+)
 from milai_lab.datasets.merit import load_exposed_arc
 from milai_lab.harness.contextual_artifacts import digest, read_json, write_json
 from milai_lab.providers.langmem_chat import VLLMChatModel
@@ -45,6 +49,8 @@ def run_exposed_merit_arc(
     store: BaseStore,
     checkpointer: BaseCheckpointSaver[str],
     config_identity: dict[str, Any],
+    arm_id: str = "b0",
+    observer: ProvenanceObserver | None = None,
 ) -> dict[str, Any]:
     selection, arc, native_tools, metrics, native_runner = load_exposed_arc(selection_path)
     output.mkdir(parents=True, exist_ok=True)
@@ -56,6 +62,8 @@ def run_exposed_merit_arc(
         "config_sha256": digest(config_identity),
         "arc_sha256": selection["private_artifacts"]["arc_sha256"],
     }
+    if arm_id != "b0":
+        identity["arm_id"] = arm_id
     identity_path = output / "run-identity.json"
     if identity_path.exists():
         if read_json(identity_path) != identity:
@@ -69,7 +77,8 @@ def run_exposed_merit_arc(
                                     [item.name for item in business_tools])
     environment_rules = native_runner.SYSTEM_PROMPT.split("{memory_block}", 1)[0].strip()
     agent = build_agent(model, store, checkpointer, business_tools,
-                        business_call_wrapper=journal, environment_rules=environment_rules)
+                        business_call_wrapper=journal, environment_rules=environment_rules,
+                        observer=observer)
     rows: list[dict[str, Any]] = []
     try:
         for episode in arc.episodes:
@@ -93,7 +102,7 @@ def run_exposed_merit_arc(
                     if model.client.budget else None,
                 }
                 write_json(progress_path, progress)
-            scope = FoundationScope(run_id, "b0", f"merit:{arc.arc_id}",
+            scope = FoundationScope(run_id, arm_id, f"merit:{arc.arc_id}",
                                     f"episode:{episode.index}")
             messages: list[Any] = []
             for index in range(progress["next_message"], len(task.user_messages)):
@@ -123,7 +132,7 @@ def run_exposed_merit_arc(
             memory_had_fact = bool(task.dependent and golds and
                                    all(gold in memory_text for gold in golds))
             argument_value_match = bool(golds and metrics.memory_utilized(native_calls, golds))
-            namespace = ("langmem", run_id, "b0", f"merit:{arc.arc_id}")
+            namespace = ("langmem", run_id, arm_id, f"merit:{arc.arc_id}")
             memories = [item.dict() for item in store.search(namespace, limit=1000)]
             row = {
                 "episode_index": episode.index,
@@ -150,6 +159,8 @@ def run_exposed_merit_arc(
             }
             write_json(row_path, row)
             rows.append(row)
+            if observer is not None:
+                observer.assert_healthy()
         result = {
             "arc_id": arc.arc_id,
             "native_denominator": selection["episode_count"],
@@ -167,7 +178,9 @@ def run_exposed_merit_arc(
         return result
     except Exception as error:
         write_json(output / "interruption.json", {
-            "status": "INTERRUPTED_UNSCORED",
+            "status": ("INSTRUMENTATION_INCOMPLETE"
+                       if isinstance(error, InstrumentationIncomplete)
+                       else "INTERRUPTED_UNSCORED"),
             "episode_index": episode.index,
             "public_message_index": progress.get("pending_message"),
             "error_type": type(error).__name__,

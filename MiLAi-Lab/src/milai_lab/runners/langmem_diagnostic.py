@@ -18,6 +18,10 @@ from milai_lab.baselines.langmem_agent import (
     build_agent,
     invoke_or_resume_public_message,
 )
+from milai_lab.baselines.langmem_instrumentation import (
+    InstrumentationIncomplete,
+    ProvenanceObserver,
+)
 from milai_lab.harness.contextual_artifacts import digest, read_json, write_json
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
@@ -48,6 +52,8 @@ def run_frozen_diagnostics(
     checkpointer: BaseCheckpointSaver[str],
     config_identity: dict[str, Any],
     selected_cases: set[str] | None = None,
+    arm_id: str = "b0",
+    observer: ProvenanceObserver | None = None,
 ) -> dict[str, Any]:
     freeze = read_json(freeze_path)
     if hashlib.sha256(inputs_path.read_bytes()).hexdigest() != freeze["inputs_file_sha256"]:
@@ -68,6 +74,8 @@ def run_frozen_diagnostics(
         "config_sha256": digest(config_identity),
         "rubric_read_by_runner": False,
     }
+    if arm_id != "b0":
+        identity["arm_id"] = arm_id
     identity_path = output / "run-identity.json"
     if identity_path.exists():
         if read_json(identity_path) != identity:
@@ -82,7 +90,7 @@ def run_frozen_diagnostics(
         journal = BusinessActionJournal(case_path / "business-journal.json",
                                         [item.name for item in tools])
         agent = build_agent(model, store, checkpointer, tools,
-                            business_call_wrapper=journal)
+                            business_call_wrapper=journal, observer=observer)
         summary: dict[str, Any] = {"id": case["id"], "status": "RUNNING", "sessions": []}
         try:
             for declared in case["sessions"]:
@@ -95,7 +103,7 @@ def run_frozen_diagnostics(
                 progress: dict[str, Any] = (read_json(progress_path) if progress_path.exists()
                                             else {"next_turn": 0, "pending_turn": None})
                 write_json(progress_path, progress)
-                scope = FoundationScope(run_id, "b0", f"diagnostic:{case['id']}",
+                scope = FoundationScope(run_id, arm_id, f"diagnostic:{case['id']}",
                                         f"session:{session_id}")
                 messages: list[BaseMessage] = []
                 for index in range(int(progress["next_turn"]), len(declared["turns"])):
@@ -110,7 +118,7 @@ def run_frozen_diagnostics(
                     write_json(progress_path, progress)
                 if not messages:
                     messages = agent.get_state(scope.config()).values["messages"]
-                namespace = ("langmem", run_id, "b0", f"diagnostic:{case['id']}")
+                namespace = ("langmem", run_id, arm_id, f"diagnostic:{case['id']}")
                 row = {
                     "session_id": session_id,
                     "public_turn_count": len(declared["turns"]),
@@ -123,10 +131,15 @@ def run_frozen_diagnostics(
                 }
                 write_json(session_path, row)
                 summary["sessions"].append(row)
+                if observer is not None:
+                    observer.assert_healthy()
             summary["status"] = "TERMINAL"
         except Exception as error:
-            summary.update({"status": "INTERRUPTED", "error_type": type(error).__name__,
-                            "error": str(error)})
+            summary.update({
+                "status": ("INSTRUMENTATION_INCOMPLETE"
+                           if isinstance(error, InstrumentationIncomplete) else "INTERRUPTED"),
+                "error_type": type(error).__name__, "error": str(error),
+            })
         write_json(case_path / "result.json", summary)
         summaries.append({"id": case["id"], "status": summary["status"],
                           "completed_sessions": len(summary["sessions"]),

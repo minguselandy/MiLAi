@@ -1,9 +1,9 @@
 ---
 version: v16.0
 date: 2026-09-26
-status: PLANNED_NOT_STARTED
+status: COMPLETE_WITH_INSTRUMENTED_BASELINE
 planning_delivery: COMPLETE
-implementation_authorized_this_round: false
+implementation_authorized_this_round: true
 scope: MiLAi-Lab
 experiment_arm_kind: RESEARCH_PROTOTYPE
 method_scope: B1_MODEL_HIDDEN_INSTRUMENTATION_ONLY
@@ -11,9 +11,9 @@ reference_commit: 46b8a925385e7b38a7111c7c32283af0eb28467e
 reference_source_mapping_sha256: 99fba610b55237aa31de8ad7f25312dc65e847d944b44b3bde1cde572b3e5ef9
 reference_foundation_lock_sha256: e3b98d9ff15030afeb34eb7548edae3571230f1c20db89766ec7b0c5b12c4090
 development_plan_sha256: 9f84265c40954e8e31a10c17862e2a5eec8a700683f3ffcacfeede54902a3c2a
-instrumentation_lock_status: NOT_CREATED
-parity_status: NOT_RUN
-model_validation_status: NOT_RUN
+instrumentation_lock_status: FROZEN
+parity_status: PASS_SAME_OUTPUT_RAW_WIRE
+model_validation_status: COMPLETE_ORIGINAL_V1_V2
 cumulative_generation_request_cap: null
 cumulative_generation_token_cap: null
 cumulative_embedding_token_cap: null
@@ -24,7 +24,7 @@ verification_count_cap: null
 
 本 Goal 将 [v16 开发计划](MILA_LANGMEM_V16_DEVELOPMENT_PLAN_20260926.md)转成可执行工作包。**本阶段只建立 B1：在已有 LangMem B0 上记录真实观察、记忆版本、搜索交付和业务回执，同时保持模型可见信息、工具语义、检索结果与业务行为不变。**
 
-本轮交付仅为 Goal 与导航，未授权或启动实施、依赖更新、测试、模型请求和 benchmark 运行。规划中的接口、文件和验收结果均不得当作现有能力。
+最初交付仅为 Goal 与导航；用户随后明确要求阅读并执行本 Goal，现已完成 A–F/V0 与最终原范围 V1/V2，状态 COMPLETE_WITH_INSTRUMENTED_BASELINE。文末规划记录保留为历史时点，不限制已授权的工作包。具体能力与边界以[结果报告](MILA_LANGMEM_PROVENANCE_V16_RESULTS_20260926.md)为准。执行范围保持 B1-only，vLLM 服务设置不变。进展见[开发记录](MILA_LANGMEM_PROVENANCE_V16_DEVELOPMENT_20260926.md)。
 
 ## 1. 目标与范围收敛
 
@@ -318,17 +318,25 @@ v16不建立MiLAi方法收益。没有UPDATE、gap或重核的自然事件，不
 
 开发交付清单：
 
-- [ ] v15 reference清单，新B1配置／lock／source freeze，原模型可见合同hash。
-- [ ] Observation／Revision／SearchDelivery／ActionReceipt的共同sidecar及窄查询接口。
-- [ ] 默认关闭的注入、B0-control／B1运行入口、原参数错误与业务恢复合同。
-- [ ] V0和同输出parity记录，必要真实后端恢复检查，所有不等价差异解释。
-- [ ] 最终B1的12例旧诊断与完整arc0；原失败、追踪完整性和全部费用。
-- [ ] `MILA_LANGMEM_PROVENANCE_V16_RESULTS_20260926.md`、复现说明及GO／PIVOT／STOP结论。
+- [x] v15 reference清单，新B1配置／lock／source freeze，原模型可见合同hash。
+- [x] Observation／Revision／SearchDelivery／ActionReceipt的共同sidecar及窄查询接口。
+- [x] 默认关闭的注入、B0-control／B1运行入口、原参数错误与业务恢复合同。
+- [x] V0和同输出parity记录，必要真实后端恢复检查，所有不等价差异解释。
+- [x] 最终B1的12例旧诊断与完整arc0；原失败、追踪完整性和全部费用。
+- [x] `MILA_LANGMEM_PROVENANCE_V16_RESULTS_20260926.md`、复现说明及GO／PIVOT／STOP结论。
 
 后续M1只需要准确的只读查询：某memory准确revision、某observation实际内容、某request真正包含过的材料、后续实际版本变化。v16不输出adopted decision、不修改status为needs_recheck，也不制造用户来源句柄。将来要把短引用给Host时，应在新的matched合同中对B1／M1共享材料外壳，不能倒称那仍是本轮完全model-hidden B1。
 
-## 17. 本轮规划记录
+## 17. 历史规划记录（实施前时点）
 
 已完整阅读原1192行计划，核对当前v15结果、已安装上游相关实现、LangMem put／delete行为、Agent wrapper、Provider实际wire生成、业务journal、两类runner和原身份锁。计划原文保持不变。
 
 本轮只生成本Goal并更新规划导航、纠正v15仍被标为planned的过期导航状态；v15运行文件／lock／结果不改动。没有安装依赖、修改运行代码、执行测试／模型调用或读取新benchmark题；B1 lock与实验结果仍为NOT_CREATED／NOT_RUN。
+
+## 18. 实施交付记录
+
+用户后续授权执行后，A–F/V0、G0–G6 和最终完整 V1/V2 已完成。新 27 文件 mapping `ae089f8a1583bf4ef730b0415f4ebd782a722c72398d47ca93af4da9a7d6caea`；B1 lock SHA `2098f2708081e1ae23341a301356543cb81e3b2be5fe1614ba487647ac8231a7`。18 项窄测试、同输出 21/21 生成＋5/5 embedding 原请求字节 parity、固定向量 PostgresStore／冷读和一次必要打包通过。
+
+最终原 12 例／20 会话与 arc0／5 集／7 消息均完成，语义 7/12、native 4/5、dependent 1/2；55 个生成请求／40072 tokens、17 个 embedding 请求／443 tokens、unknown=0、Judge=0。39 个外部 Observation、10 次 insert、8 次搜索和 62 次请求材料关联可核对；来源保持 UNKNOWN_NOT_DECLARED。无真实 UPDATE／DELETE；已保留漏写、错误退款和 stale memory，不声称收益。
+
+原 vLLM 设置、v15 lock/结果/费用和 1192 行计划均不变。详见[最终结果](MILA_LANGMEM_PROVENANCE_V16_RESULTS_20260926.md)、[机器清单](../data/manifests/langmem-b1-v16-results.json)及[复现入口](MILA_LANGMEM_PROVENANCE_V16_REPRODUCTION_20260926.md)。M1/Basis/recheck/Attention 与新 seeds 仍未启动，必须另起独立范围。

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import uuid
+from contextlib import nullcontext
 from pathlib import Path
 from typing import Any
 
@@ -94,6 +95,7 @@ class VLLMChatModel(BaseChatModel):
     calls_in_message: int = 0
     capacity_path: Path | None = None
     active_message_key: str | None = None
+    observer: Any = None
 
     @property
     def _llm_type(self) -> str:
@@ -148,20 +150,26 @@ class VLLMChatModel(BaseChatModel):
             else:
                 action_messages = [{"role": "system", "content": protocol}, *wire_messages]
             self._reserve_request()
-            receipt = self.client.chat(
-                action_messages,
-                response_format={"type": "json_schema", "json_schema": {
-                    "name": "langmem_json_action_v1", "strict": True,
-                    "schema": generation_schema,
-                }},
-            )
+            scope = (self.observer.request_scope(self.active_message_key, self.calls_in_message)
+                     if self.observer is not None else nullcontext())
+            with scope:
+                receipt = self.client.chat(
+                    action_messages,
+                    response_format={"type": "json_schema", "json_schema": {
+                        "name": "langmem_json_action_v1", "strict": True,
+                        "schema": generation_schema,
+                    }},
+                )
         else:
             self._reserve_request()
-            receipt = self.client.chat(
-                wire_messages,
-                tools=tools,
-                tool_choice=kwargs.get("tool_choice"),
-            )
+            scope = (self.observer.request_scope(self.active_message_key, self.calls_in_message)
+                     if self.observer is not None else nullcontext())
+            with scope:
+                receipt = self.client.chat(
+                    wire_messages,
+                    tools=tools,
+                    tool_choice=kwargs.get("tool_choice"),
+                )
         choices = receipt.get("choices")
         if not isinstance(choices, list) or len(choices) != 1:
             raise IncompleteChatResponse("VLLM_CHAT_EXPECTED_ONE_CHOICE")

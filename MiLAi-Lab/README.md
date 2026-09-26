@@ -3,15 +3,21 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Latest planned work: [Provenance Goal v16](docs/MILA_LANGMEM_PROVENANCE_GOAL_v16.md),
+Latest scoped delivery: [Provenance Goal v16](docs/MILA_LANGMEM_PROVENANCE_GOAL_v16.md),
 based on the [v16 development plan](docs/MILA_LANGMEM_V16_DEVELOPMENT_PLAN_20260926.md).
-Status: `PLANNED_NOT_STARTED`; this delivery is documentation only. v16 adds model-hidden
-observation, revision, search-delivery and business-receipt tracing to the fixed B0 baseline.
-The main gate is deterministic B0/B1 behavioral parity, followed by the same exposed small
-regressions. Decision Basis, adopted evidence, recheck and Attention are separate later work.
-Keep the original vLLM settings and all v15 results; no new data or model runs occurred here.
+Status: `COMPLETE_WITH_INSTRUMENTED_BASELINE`; G0–G6 passed. B1 adds model-hidden observation,
+revision, search return/request inclusion and original business-receipt tracking while preserving
+B0 behavior and the original vLLM settings. Same-output raw-wire parity passed for 21 generation
+and 5 embedding requests; 18 narrow tests and the required package checks passed.
+Final B1 completed the original 12/20 diagnostics (semantic 7/12) and arc0 5/7 (native 4/5,
+dependent 1/2), with all observations/revisions/deliveries reconciled. Costs: 55 generations /
+40072 tokens, 443 embedding tokens, unknown=0, Judge=0. Baseline semantic failures remain;
+there is no method-benefit claim. Decision Basis, adoption, recheck and Attention are later work.
+See [results](docs/MILA_LANGMEM_PROVENANCE_V16_RESULTS_20260926.md),
+[development](docs/MILA_LANGMEM_PROVENANCE_V16_DEVELOPMENT_20260926.md), and
+[reproduction](docs/MILA_LANGMEM_PROVENANCE_V16_REPRODUCTION_20260926.md).
 
-Latest scoped delivery: [LangMem foundation Goal v15](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md),
+Previous scoped delivery: [LangMem foundation Goal v15](docs/MILA_LANGMEM_FOUNDATION_GOAL_v15.md),
 based on the [vNext roadmap](docs/MiLAi_vNext_Development_Roadmap_20260926.md).
 Status: `COMPLETE_WITH_BASELINE_FAILURES`; foundation technical gates passed. A pinned public
 LangGraph/LangMem baseline now uses a JSON-action adapter with the original vLLM settings,
@@ -23,7 +29,7 @@ All costs are retained: 108 generations / 76737 charged tokens (71846 known + 48
 reservation) / 836 embedding tokens, Judge=0. See the
 [development record](docs/MILA_LANGMEM_FOUNDATION_V15_DEVELOPMENT_20260926.md) and
 [reproduction entry](docs/MILA_LANGMEM_FOUNDATION_V15_REPRODUCTION_20260926.md).
-v14 stays frozen; B1, Sparse Basis and State-Attention require later Goals. No new seeds or Product changes.
+v14 stays frozen; v16 B1 is delivered above. Sparse Basis and State-Attention require later Goals. No new seeds or Product changes.
 
 Previous scoped delivery: [Semantic boundary Goal v14.0](docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v14.0_20260926.md)
 and [detailed design](docs/MILA_CONTEXTUAL_USER_MEMORY_V14_SEMANTIC_BOUNDARY_DESIGN_20260926.md).

@@ -1,0 +1,502 @@
+{
+  "kind": "LANGMEM_B1_V16_RESULTS",
+  "status": "COMPLETE_WITH_INSTRUMENTED_BASELINE",
+  "technical_go": true,
+  "method_benefit_claim": false,
+  "vllm_settings_changed": false,
+  "source_mapping_sha256": "ae089f8a1583bf4ef730b0415f4ebd782a722c72398d47ca93af4da9a7d6caea",
+  "lock_sha256": "2098f2708081e1ae23341a301356543cb81e3b2be5fe1614ba487647ac8231a7",
+  "final_freeze_sha256": "f3a353c38b4efc8d32ccb15b39237d6a26ab750fe360543c6afad9af3374eee7",
+  "reference_manifest_sha256": "c23eb71ec297cedbfe08fe7e17eafbf61fb3d5adb51f48b075c67042a56115e1",
+  "gates": {
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "PASS",
+    "G5": "PASS",
+    "G6": "PASS"
+  },
+  "runs": {
+    "diagnostic": {
+      "run_id": "v16-b1-diagnostic-r1",
+      "arm_id": "b1_instrumented",
+      "status": "TERMINAL",
+      "coverage": {
+        "user_observations": [
+          20,
+          20
+        ],
+        "business_observations": [
+          1,
+          1
+        ],
+        "journal_links": [
+          1,
+          1
+        ],
+        "confirmed_revisions": [
+          7,
+          7
+        ],
+        "host_searches": [
+          6,
+          6
+        ],
+        "provider_requests": [
+          34,
+          34
+        ],
+        "request_materials": [
+          15,
+          15
+        ],
+        "static_model_visible_contracts": [
+          34,
+          34
+        ],
+        "actual_tool_calls": [
+          14,
+          14
+        ],
+        "actual_tool_results": [
+          14,
+          14
+        ]
+      },
+      "instrumentation": {
+        "counts": {
+          "searches": 6,
+          "bodies": 40,
+          "requests": 34,
+          "request_material": 15,
+          "tool_calls": 14,
+          "observations": 21,
+          "revisions": 7,
+          "operations": 7
+        },
+        "statuses": {
+          "tool_calls": {
+            "success": 14
+          },
+          "operations": {
+            "complete": 7
+          },
+          "searches": {
+            "returned": 6
+          },
+          "requests": {
+            "completed": 34
+          }
+        },
+        "observation_roles": {
+          "business_tool": 1,
+          "user": 20
+        },
+        "revision_effects": {
+          "insert": 7
+        },
+        "material_coverage": {
+          "FULL": 15
+        },
+        "search_returned_items": 4,
+        "search_exact_revision_bindings": 4,
+        "instrumentation_cost": {
+          "id": 1,
+          "transactions": 326,
+          "observer_cpu_ns": 110180707,
+          "observer_wall_ns": 2625005790,
+          "extra_store_reads": 14,
+          "extra_read_cpu_ns": 8582895,
+          "extra_read_wall_ns": 16657712,
+          "initial_db_bytes": 90112,
+          "sqlite_db_bytes": 184320,
+          "net_sqlite_db_bytes": 94208,
+          "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+        }
+      },
+      "tool_calls": {
+        "message_courier": 1,
+        "search_memory": 6,
+        "manage_memory": 7
+      },
+      "usage": {
+        "generation": {
+          "requests": 34,
+          "input_tokens": 17280,
+          "output_tokens": 1481,
+          "known_tokens": 18761,
+          "unknown_usage": 0,
+          "provider_wall_seconds": 13.285279821138829
+        },
+        "embedding": {
+          "requests": 13,
+          "input_tokens": 357,
+          "output_tokens": 0,
+          "known_tokens": 357,
+          "unknown_usage": 0,
+          "provider_wall_seconds": 0.72733249142766
+        }
+      },
+      "process": {
+        "exit_code": 0,
+        "process_wall_seconds": 23.24633315904066,
+        "started_at": "2026-09-26T03:06:23.414255+00:00",
+        "finished_at": "2026-09-26T03:06:46.660608+00:00",
+        "mode": "diagnostic",
+        "run_id": "v16-b1-diagnostic-r1"
+      },
+      "artifact_sha256": {
+        "artifacts/langmem-provenance/final-diagnostic-r1/config.json": "f189e5bf4cb7d05179fc84672b3dfa3339448a07ca9bcff816329c1858b08f86",
+        "artifacts/langmem-provenance/final-diagnostic-r1/prepared.json": "da118c2aff753d306c73e600246f539e31e7e27cc9ccef4db8857cd788b1558f",
+        "artifacts/langmem-provenance/final-diagnostic-r1/process.json": "d8b15729ec89a27935da89435702467ffbaa274dc15200a3ffefc60d62112168",
+        "artifacts/langmem-provenance/final-diagnostic-r1/trace.jsonl": "70c8b1fb35520ba2ed6d3f01f9ba4b34c37fa5386c54b05c32044805b2b7c09e",
+        "artifacts/langmem-provenance/final-diagnostic-r1/instrumentation.sqlite": "92cd392b4db3a5c16cd82c6cd487ca9a5ba3e5de8aaeff817d2fd3e34d3226c1",
+        "artifacts/langmem-provenance/final-diagnostic-r1/results/result.json": "e81a83e16b35235fbdb017b46ed1701ee835244c7133ccf2da5bf3e9205d72ed",
+        "artifacts/langmem-provenance/final-diagnostic-r1/results/run-identity.json": "59d872466fbaf6923f04754c6bb849fa783a6e6965dd3b2836d49f30881e8759",
+        "artifacts/langmem-provenance/final-diagnostic-r1/instrumentation-analysis.json": "a5cdac69ca2008ecc5fc371239c6f1f02eee54a9e7f0e34242ed5b6250803639"
+      },
+      "manual_semantic": {
+        "kind": "V16_FROZEN_DIAGNOSTIC_MANUAL_SEMANTIC_REVIEW",
+        "status": "COMPLETE",
+        "successes": 7,
+        "denominator": 12,
+        "rubric_sha256": "62ab23a2a15f2ef3b81ecb51a715a19e379d24581b90ade2e9b8c12968a0ebcc",
+        "method": "Manual meaning review of complete actual answers, stored contents and business calls; legacy v14 protocol-only fields are not new B0 requirements; instrumentation body retention is not Host durable memory",
+        "judge_requests": 0,
+        "cases": [
+          {
+            "case_id": "d01",
+            "status": "PASS",
+            "reason": "任务计算返回 540；无长期记忆。"
+          },
+          {
+            "case_id": "d02",
+            "status": "FAIL",
+            "reason": "message_courier 成功且只调用一次；未保存 K17/MSG-K17，下一会话两次空搜索后无法回答。"
+          },
+          {
+            "case_id": "d03",
+            "status": "PASS",
+            "reason": "保存项目总结限定的 ISO 日期格式，并从记忆检索回答。"
+          },
+          {
+            "case_id": "d04",
+            "status": "FAIL",
+            "reason": "解释电池检查顺序，但未以独立 READY 结尾；无过度保存。"
+          },
+          {
+            "case_id": "d05",
+            "status": "PASS",
+            "reason": "保存 Cedar 会前十分钟无障碍评审要求，后续检索正确，未发送议程。"
+          },
+          {
+            "case_id": "d06",
+            "status": "PASS",
+            "reason": "保存设备盘点范围与日期分界，后续分别选择 pounds/kilograms。"
+          },
+          {
+            "case_id": "d07",
+            "status": "PASS",
+            "reason": "返回 EVEN；无长期条件规则。"
+          },
+          {
+            "case_id": "d08",
+            "status": "FAIL",
+            "reason": "已保存 Juniper 的触发条件、地点、时间与待办状态；下一会话未搜索，要求用户重述。"
+          },
+          {
+            "case_id": "d09",
+            "status": "FAIL",
+            "reason": "已保存同区/异区双分支及 Asia/Shanghai；下一会话未搜索，仅回答泛化的异区建议。"
+          },
+          {
+            "case_id": "d10",
+            "status": "PASS",
+            "reason": "确认临时信息，无长期记忆。"
+          },
+          {
+            "case_id": "d11",
+            "status": "FAIL",
+            "reason": "已保存先向 Nina 索取日志的要求且未联系；下一会话未搜索，给出泛化发布检查建议。"
+          },
+          {
+            "case_id": "d12",
+            "status": "PASS",
+            "reason": "准确保存并检索真实字面型号 m0 与同型号备件；没有加入旧材料句柄协议。"
+          }
+        ]
+      }
+    },
+    "merit": {
+      "run_id": "v16-b1-merit-r1",
+      "arm_id": "b1_instrumented",
+      "status": "TERMINAL",
+      "coverage": {
+        "user_observations": [
+          7,
+          7
+        ],
+        "business_observations": [
+          11,
+          11
+        ],
+        "journal_links": [
+          11,
+          11
+        ],
+        "confirmed_revisions": [
+          3,
+          3
+        ],
+        "host_searches": [
+          2,
+          2
+        ],
+        "provider_requests": [
+          21,
+          21
+        ],
+        "request_materials": [
+          47,
+          47
+        ],
+        "static_model_visible_contracts": [
+          21,
+          21
+        ],
+        "actual_tool_calls": [
+          16,
+          16
+        ],
+        "actual_tool_results": [
+          16,
+          16
+        ]
+      },
+      "instrumentation": {
+        "counts": {
+          "searches": 2,
+          "bodies": 22,
+          "requests": 21,
+          "request_material": 47,
+          "tool_calls": 16,
+          "observations": 18,
+          "revisions": 3,
+          "operations": 3
+        },
+        "statuses": {
+          "tool_calls": {
+            "success": 16
+          },
+          "operations": {
+            "complete": 3
+          },
+          "searches": {
+            "returned": 2
+          },
+          "requests": {
+            "completed": 21
+          }
+        },
+        "observation_roles": {
+          "business_tool": 11,
+          "user": 7
+        },
+        "revision_effects": {
+          "insert": 3
+        },
+        "material_coverage": {
+          "FULL": 47
+        },
+        "search_returned_items": 2,
+        "search_exact_revision_bindings": 2,
+        "instrumentation_cost": {
+          "id": 1,
+          "transactions": 220,
+          "observer_cpu_ns": 78878430,
+          "observer_wall_ns": 1498161156,
+          "extra_store_reads": 6,
+          "extra_read_cpu_ns": 5519354,
+          "extra_read_wall_ns": 9510887,
+          "initial_db_bytes": 90112,
+          "sqlite_db_bytes": 151552,
+          "net_sqlite_db_bytes": 61440,
+          "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+        }
+      },
+      "tool_calls": {
+        "get_order": 4,
+        "send_message": 4,
+        "manage_memory": 3,
+        "search_memory": 2,
+        "refund": 3
+      },
+      "usage": {
+        "generation": {
+          "requests": 21,
+          "input_tokens": 20338,
+          "output_tokens": 973,
+          "known_tokens": 21311,
+          "unknown_usage": 0,
+          "provider_wall_seconds": 9.29391781333834
+        },
+        "embedding": {
+          "requests": 4,
+          "input_tokens": 86,
+          "output_tokens": 0,
+          "known_tokens": 86,
+          "unknown_usage": 0,
+          "provider_wall_seconds": 0.138134001288563
+        }
+      },
+      "process": {
+        "exit_code": 0,
+        "process_wall_seconds": 16.08244286896661,
+        "started_at": "2026-09-26T03:07:42.775852+00:00",
+        "finished_at": "2026-09-26T03:07:58.858314+00:00",
+        "mode": "merit",
+        "run_id": "v16-b1-merit-r1"
+      },
+      "artifact_sha256": {
+        "artifacts/langmem-provenance/final-merit-r1/config.json": "98a52729dae358a1dc83e671b67c540c5c2f1f9aebdd749d091c7c9d7e11a3ba",
+        "artifacts/langmem-provenance/final-merit-r1/prepared.json": "13af240d9e68fddecd5bb29488f611e4bafe01f521abe6e25115c168ae2afd4a",
+        "artifacts/langmem-provenance/final-merit-r1/process.json": "54f34fdd0163b40649a1b2e48a5ba3e46dbd041a71abcb0541ce0e727ea475fd",
+        "artifacts/langmem-provenance/final-merit-r1/trace.jsonl": "6d1ece7dcce1aae7356ed549cb24ffe25425e87dc308c8078308c34f8d464fa2",
+        "artifacts/langmem-provenance/final-merit-r1/instrumentation.sqlite": "b50ee377b69856412ee01fb797d1e3d8dd1971e8fe33847618515dee3aa2b0e9",
+        "artifacts/langmem-provenance/final-merit-r1/results/result.json": "bebacd1274a41b45fdd04fcab282dcb5cff74550341896376a6a34fb1ca26612",
+        "artifacts/langmem-provenance/final-merit-r1/results/run-identity.json": "8307a4a9592c6cecdbc6aa67d99a3a5528d320458d1012b3152d12b8f1001249",
+        "artifacts/langmem-provenance/final-merit-r1/instrumentation-analysis.json": "ff34cce6654fdccb2b9d02a443dab752c74af106fb2c0279590fb7888787fcd0"
+      },
+      "native_result": {
+        "arc_id": "arc0-000",
+        "native_denominator": 5,
+        "dependent_denominator": 2,
+        "native_successes": 4,
+        "dependent_successes": 1,
+        "episodes": [
+          {
+            "episode_index": 0,
+            "success": true,
+            "dependent": false
+          },
+          {
+            "episode_index": 1,
+            "success": true,
+            "dependent": false
+          },
+          {
+            "episode_index": 2,
+            "success": false,
+            "dependent": true
+          },
+          {
+            "episode_index": 3,
+            "success": true,
+            "dependent": false
+          },
+          {
+            "episode_index": 4,
+            "success": true,
+            "dependent": true
+          }
+        ]
+      }
+    }
+  },
+  "cost": {
+    "generation_requests": 55,
+    "generation_input_tokens": 37618,
+    "generation_output_tokens": 2454,
+    "generation_known_tokens": 40072,
+    "generation_charged_tokens": 40072,
+    "unknown_usage": 0,
+    "unknown_reservation": 0,
+    "embedding_requests": 17,
+    "embedding_tokens": 443,
+    "judge_requests": 0,
+    "instrumentation_only_generation_requests": 0,
+    "instrumentation_only_embedding_requests": 0,
+    "agent_cost": "Unavailable from experimental Provider ledger; platform agent usage is separate",
+    "ledger_sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+    "prior_v15_sealed": {
+      "ledger": "artifacts/langmem-foundation/v15-budget.json",
+      "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+      "generation_requests": 108,
+      "generation_known_tokens": 71846,
+      "generation_unknown_reservation": 4891,
+      "generation_charged_tokens": 76737,
+      "embedding_tokens": 836,
+      "unknown_usage": 1,
+      "judge_requests": 0,
+      "sealed": true
+    }
+  },
+  "v0": {
+    "tests": 18,
+    "same_output_generation_wire_equal": [
+      21,
+      21
+    ],
+    "same_output_embedding_wire_equal": [
+      5,
+      5
+    ],
+    "same_output_merit_episodes_equal": [
+      5,
+      5
+    ],
+    "world_and_journal_equal": true,
+    "fixed_vector_pg_and_cold_read": true,
+    "unexplained_parity_differences": 0,
+    "build_checks": {
+      "kind": "LANGMEM_B1_V16_PACKAGE_CHECK",
+      "status": "PASS",
+      "build_command": "uv build",
+      "sdist": {
+        "path": "dist/milai_lab-0.1.0.tar.gz",
+        "sha256": "75416e6ef499f30420be7bb0bb46c4f219fb4c149b40507b2869a0f1aa47efaf",
+        "members": 1463,
+        "runtime_sources_matched": 27,
+        "included_locks": [
+          "data/locks/langmem-b1.lock.json",
+          "data/locks/langmem-foundation.lock.json"
+        ]
+      },
+      "wheel": {
+        "path": "dist/milai_lab-0.1.0-py3-none-any.whl",
+        "sha256": "077c2c2862e31e6ebd45e7e845db0a519877e24b5f3ee48b0f1c38b732957073",
+        "members": 115
+      },
+      "validation_mapping_matched": 6,
+      "private_dsn_absent": true,
+      "generated_artifact_paths_absent": true,
+      "lock_sha256": "2098f2708081e1ae23341a301356543cb81e3b2be5fe1614ba487647ac8231a7"
+    }
+  },
+  "evidence_sha256": {
+    "artifacts/langmem-provenance/v0-final-checks.json": "7e5a394ac9fa748c29797d8f6e38c3b045bbcca36fb6b1dfb9205946df1c2b2e",
+    "artifacts/langmem-provenance/v0-package-check.json": "911c24e9f932a6b5cadec910dbb173513a8707632542f59b299885263e0e37dc",
+    "artifacts/langmem-provenance/v0-v15-merit-replay-r3/report.json": "d69ec6a08ddddeca015d98eca8d9219fb37e94b40a9a47588e8f0769e87b17be",
+    "artifacts/langmem-provenance/v0-pg.json": "05e9f3c598d068e6c8a5376313e93d194831dcbe295477d5283122cb093c9559",
+    "artifacts/langmem-provenance/v0-pg-cold.json": "39929fec08b7db28450f6c21a62f73530f81d84bf392182e3d3db80f6a4444bb",
+    "artifacts/langmem-provenance/final-cold-state-check.json": "6926b8615684147582b62ce5ab651cbc0ad1f859f7911d8d600d7eb4a6c3f2da",
+    "artifacts/langmem-provenance/environment-and-freeze-after.json": "88be9bd497cf13ca17001773cad5dc6474415f61fa18873463e928e621e6ed00",
+    "artifacts/langmem-provenance/final-instrumentation-analysis.json": "ffcf3e66c7e1ff428ff515f51f532e613fe3ed9704ad8354fd75dbed42a1e8b9",
+    "artifacts/langmem-provenance/analysis-correction.json": "0edd48c7cecc868da5beb5860b58d4fdb3b0e4f1cd003cca2a31044023778364",
+    "artifacts/langmem-provenance/v16-budget.json": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+    "artifacts/langmem-provenance/final-diagnostic-r1/manual-semantic-review.json": "fb8e437089270c0d37cf3e6cad28bf429d6a335f8202467dd7415964c8b4339a"
+  },
+  "limits": [
+    "Only original exposed 12 diagnostics/20 sessions and arc0/5 episodes/7 messages; seeds 3/4 and fresh MemSyco NOT_RUN.",
+    "Natural UPDATE/DELETE/replay/unknown-commit coverage is zero; V0 establishes only the declared mechanical contracts.",
+    "All source_refs remain null / UNKNOWN_NOT_DECLARED; trace completeness does not establish semantic support or adoption.",
+    "One native null-content insert observed; it is a live memory, not a tombstone.",
+    "Sidecar and Postgres are not one atomic transaction; failed instrumentation preserves main results and stops at request/runner boundary.",
+    "Formal request bodies reference original trace; unique short user/business/tool bodies are retained once in content-addressed sidecar storage.",
+    "No true-model B0 full repeat, M1, Basis, recheck or Attention work; score equality is not causal parity evidence.",
+    "Runtime adapter is synchronous and single-writer; async/distributed behavior not claimed."
+  ],
+  "rollback_reference_commit": "79b8b22bb496e85afdac496e04a5cde4057c9cae",
+  "product_schema_api_permissions_changed": false
+}

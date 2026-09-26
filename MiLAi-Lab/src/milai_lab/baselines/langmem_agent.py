@@ -26,6 +26,7 @@ from langmem import (  # type: ignore[import-untyped]
     create_search_memory_tool,
 )
 
+from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel
 
@@ -101,6 +102,7 @@ def build_agent(
     business_tools: Sequence[BaseTool] = (),
     business_call_wrapper: ToolCallWrapper | None = None,
     environment_rules: str = "",
+    observer: ProvenanceObserver | None = None,
 ) -> Any:
     """Use upstream tool schema and instructions without a local memory policy."""
     tools = [
@@ -116,20 +118,23 @@ def build_agent(
     def validate_then_execute(
         request: Any, execute: Any,
     ) -> Any:
-        call = request.tool_call
-        if schema := parameter_schemas.get(call["name"]):
-            try:
-                validate(call["args"], schema)
-            except ValidationError as error:
-                return ToolMessage(
-                    content=f"Tool input validation error: {error.message}",
-                    name=call["name"],
-                    tool_call_id=call["id"],
-                    status="error",
-                )
-        if business_call_wrapper is not None:
-            return business_call_wrapper(request, execute)
-        return execute(request)
+        def original(current: Any) -> Any:
+            call = current.tool_call
+            if schema := parameter_schemas.get(call["name"]):
+                try:
+                    validate(call["args"], schema)
+                except ValidationError as error:
+                    return ToolMessage(
+                        content=f"Tool input validation error: {error.message}",
+                        name=call["name"],
+                        tool_call_id=call["id"],
+                        status="error",
+                    )
+            if business_call_wrapper is not None:
+                return business_call_wrapper(current, execute)
+            return execute(current)
+        return (observer.run_tool(request, original, business_call_wrapper)
+                if observer is not None else original(request))
 
     return create_react_agent(
         model,
@@ -153,11 +158,15 @@ def invoke_public_message(
     public_index = sum(isinstance(item, HumanMessage)
                        for item in snapshot.values.get("messages", [])) if snapshot.values else 0
     _emit_public_context(model, scope, public_index)
+    if model.observer is not None:
+        model.observer.begin_public_message(scope, public_index, content)
     model.begin_public_message(f"{config['configurable']['thread_id']}:{public_index}")
     result = agent.invoke(
         {"messages": [HumanMessage(content=content)]},
         config=config,
     )
+    if model.observer is not None:
+        model.observer.assert_healthy()
     return cast(list[BaseMessage], result["messages"])
 
 
@@ -177,13 +186,21 @@ def resume_public_message(
     public_index = sum(isinstance(item, HumanMessage)
                        for item in snapshot.values["messages"]) - 1
     _emit_public_context(model, scope, public_index)
+    if model.observer is not None:
+        prior_user = next(message for message in reversed(snapshot.values["messages"])
+                          if isinstance(message, HumanMessage))
+        model.observer.begin_public_message(scope, public_index, str(prior_user.content))
     model.begin_public_message(
         f"{config['configurable']['thread_id']}:{public_index}",
         checkpoint_calls=sum(isinstance(message, AIMessage) for message in after_user),
     )
     if snapshot.next:
         result = agent.invoke(None, config=config)
+        if model.observer is not None:
+            model.observer.assert_healthy()
         return cast(list[BaseMessage], result["messages"])
+    if model.observer is not None:
+        model.observer.assert_healthy()
     return cast(list[BaseMessage], snapshot.values["messages"])
 
 

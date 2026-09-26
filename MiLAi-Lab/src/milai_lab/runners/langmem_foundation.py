@@ -69,6 +69,12 @@ class BusinessActionJournal:
     def calls_for_thread(self, thread_id: str) -> list[dict[str, Any]]:
         return [entry for entry in self._entries().values() if entry["thread_id"] == thread_id]
 
+    def entry_for_call(self, thread_id: str, generation_id: str,
+                       call_id: str) -> dict[str, Any] | None:
+        identity = [thread_id, generation_id, call_id]
+        key = hashlib.sha256(json.dumps(identity, ensure_ascii=False).encode()).hexdigest()
+        return self._entries().get(key)
+
 
 def native_business_tools(
     world: Any,

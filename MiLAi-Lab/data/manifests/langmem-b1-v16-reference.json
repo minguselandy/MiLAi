@@ -1,0 +1,104 @@
+{
+  "kind": "LANGMEM_B1_V16_REFERENCE",
+  "status": "FROZEN_REFERENCE",
+  "development_base_commit": "79b8b22bb496e85afdac496e04a5cde4057c9cae",
+  "reference_commit": "46b8a925385e7b38a7111c7c32283af0eb28467e",
+  "reference_source_mapping_sha256": "99fba610b55237aa31de8ad7f25312dc65e847d944b44b3bde1cde572b3e5ef9",
+  "reference_source_sha256": {
+    "configs/langmem-baseline-v1.json": "45dbe0fb4843c87d3c5302a32408bb389a82b11bfcb09749fc773aeea5f22c2b",
+    "pyproject.toml": "f8c2329a9f34f03e4e38c7745821829f443bef74640569e52ac58614a2d0da35",
+    "src/milai_lab/__init__.py": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+    "src/milai_lab/baselines/__init__.py": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+    "src/milai_lab/baselines/langmem_agent.py": "dfbb175ba17db7dba68e646401670996a3393ec4cfc276255c5efd24d3fefacf",
+    "src/milai_lab/baselines/langmem_identity.py": "bf3b25663b52478325734f8ba4a3703521d63bb522f8a22133f28680a5187572",
+    "src/milai_lab/datasets/__init__.py": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+    "src/milai_lab/datasets/merit.py": "1e68fafc8f4c571430a5f032961df1e59cb4913f110178ec481d6e24700483a7",
+    "src/milai_lab/harness/__init__.py": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "src/milai_lab/providers/__init__.py": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+    "src/milai_lab/providers/langmem_chat.py": "9f03467bf330bbc0699d7b282cbb41943f23095722a182c24ea71e4be7a5b366",
+    "src/milai_lab/runners/__init__.py": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+    "src/milai_lab/runners/langmem_diagnostic.py": "10a0555a039b8864fa6b44393ae10b3d2b1cbdeec5ec7732f20353a2f28e61be",
+    "src/milai_lab/runners/langmem_foundation.py": "d79d420aa686a9bcee96e68f2202397827e4c02300f2d351982e506a3fb039b8",
+    "src/milai_lab/runners/langmem_merit.py": "e4b0568dd88b104e90f1220c28aac9b455b517bacb37ba65b78dbfab5f3e7524",
+    "tools/prepare_langmem_foundation.py": "b6b4c538d121cd706e3c84c7e1c59ff70b23d8c568a036633bb9ea498865fdce",
+    "tools/run_langmem_foundation.py": "44e27ab5cb78148156e082814b59da7ab639babb48c2f2bb0658ba4edc9b1944",
+    "tools/summarize_langmem_foundation.py": "aea78fc1bc9ddbf7b11a935cd9b4aa19ca05a1bba9ab3475870adc60958e37d7",
+    "uv.lock": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8"
+  },
+  "reference_foundation_lock_sha256": "e3b98d9ff15030afeb34eb7548edae3571230f1c20db89766ec7b0c5b12c4090",
+  "development_plan_sha256": "9f84265c40954e8e31a10c17862e2a5eec8a700683f3ffcacfeede54902a3c2a",
+  "recipe_id": "langmem-hotpath-react-json-action-v1",
+  "upstream_commit": "9d033b47d9ce53e37e92c92241b0496c0278932e",
+  "model_visible_contract": {
+    "system_prompt_sha256": "edeaf06db6a0b39bc3702b9343127fa199a1702b665dbc8d2eb942b10a8eb9f4",
+    "memory_tools_sha256": "17c65075f4c1d959f60aa9c78732eb2777a7dcfaf4dbf431e63668843dd477df",
+    "json_action_schema_memory_only_sha256": "0af5bdd417e489b981929d151780add6ad83176fcf8d8e485270ecd6c2b99c0f",
+    "json_action_prompt_memory_only_sha256": "958b8e71fad22f9a189f39544776a0229e949fbfd7cab0218fcb17fe79361fdf",
+    "namespace": [
+      "langmem",
+      "{foundation_run_id}",
+      "{arm_id}",
+      "{user_id}"
+    ],
+    "factory": {
+      "entrypoint": "langgraph.prebuilt.create_react_agent",
+      "version": "v1",
+      "max_concurrency": 1,
+      "recursion_limit": 128,
+      "max_model_attempts_per_public_message": 12
+    }
+  },
+  "reference_artifacts_sha256": {
+    "data/locks/langmem-foundation.lock.json": "e3b98d9ff15030afeb34eb7548edae3571230f1c20db89766ec7b0c5b12c4090",
+    "data/manifests/langmem-foundation-v15-final-freeze.json": "96e52acefdc217a596258add87a76f7e7b79081764dda9d08f55ddc1415cc9d7",
+    "data/manifests/langmem-foundation-v15-results.json": "3c958043c977ea927d0eac127844c073f3e5a6ad1686911a96d6baa3651251dd",
+    "artifacts/langmem-foundation/v15-budget.json": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+    "data/manifests/langmem-foundation-v15-upstream.json": "09e5f6a038c4ab960c2a47db12ba954b0cd233935edf3e9f43c19f9de3044c57",
+    "data/manifests/contextual-memory-v7-e0-selection-final.json": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+    "data/manifests/contextual-memory-v14-diagnostic-freeze.json": "4f4c699990a65a02754fa745c8039d922149a2e8b4dc6728c92ae1efa99f9459"
+  },
+  "sealed_v15_cost": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 108,
+    "generation": {
+      "charged_tokens": 76737,
+      "known_tokens": 71846,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 836,
+      "known_tokens": 836,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/contextual-user-memory/v14-budget.json",
+      "sha256": "dfc8e15729358cea54a533a83d5096f1f67b858dacc7e21ce0c7ca60c36e9eb0",
+      "generation_requests": 80,
+      "generation_tokens": 317098,
+      "embedding_tokens": 1540,
+      "unknown_usage": 0,
+      "judge_requests": 0,
+      "sealed": true
+    }
+  },
+  "source_snapshot": "artifacts/langmem-provenance/v15-reference-source",
+  "data_identity": {
+    "diagnostic_inputs_sha256": "a6852f07b4b1801e0426cb9ca930c518b3182ac2d5b9f2754f9109e98bf862bc",
+    "diagnostic_rubric_sha256": "62ab23a2a15f2ef3b81ecb51a715a19e379d24581b90ade2e9b8c12968a0ebcc",
+    "merit_selection_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+    "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+    "world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29"
+  },
+  "new_cost_ledger": "artifacts/langmem-provenance/v16-budget.json",
+  "scope": "B1_MODEL_HIDDEN_INSTRUMENTATION_ONLY",
+  "real_model_requests_at_reference_freeze": 0
+}
