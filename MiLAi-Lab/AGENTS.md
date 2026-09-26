@@ -137,6 +137,16 @@ Inputs were generated only after source freeze; no method or prompt change. Root
 six serial real runs and full cost/semantic review. Preserve all failures, no task replacement
 or post-outcome tuning. Source remains frozen through this comparison; master stays active.
 
+P9 [results](docs/MILAI_SER_V23_RESULTS_20260927.md) complete the six pre-registered runs:
+B1 6/10, A3/A4 each7/10, but zero exact refresh/demotion. Keep source and all unseen outcomes
+frozen; the extra point follows different capacity/formation paths, not demonstrated SER
+causality. Continuous costs are 568 generations / 530611 tokens / 5057 embedding tokens /
+75 exact reads. All 21 early agreement observations were unpersisted; successful later
+actions leave pending prose unchanged. After Luna result checkpoint, prioritize independent
+P11 Formation/Reconciliation with generic mechanisms and temporary/no-op/failure counterexamples.
+Do not modify the P9 prompt or rerun seeds3/4 to improve scores. A separate second-model
+endpoint question is pending; continue independent work, keep P10/P12/master unfinished.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

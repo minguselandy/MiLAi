@@ -1,0 +1,286 @@
+{
+  "kind": "MILAI_SER_V23_RUN_MECHANICAL_REVIEW",
+  "run_id": "ser-v23-arc3-a3-r1",
+  "arm": "a3_exact_refresh",
+  "mode": "merit",
+  "source_mapping_sha256": "1b90bad524f7ff041fb5484b95fdd91b7f18f9d6240d460ad69afc7ff8f21e07",
+  "status": "MECHANICAL_PASS_SEMANTIC_REVIEW_SEPARATE",
+  "actual_recipe_id": "milai-ser-v21-json-action-v1",
+  "runtime_status": "TERMINAL",
+  "task_summary": {
+    "arc_id": "arc3-000",
+    "native_denominator": 5,
+    "dependent_denominator": 2,
+    "native_successes": 3,
+    "dependent_successes": 0,
+    "episodes": [
+      {
+        "episode_index": 0,
+        "success": true,
+        "dependent": false,
+        "host_status": "COMPLETED",
+        "capacity_failed_public_message_index": null,
+        "attempted_public_message_indexes": [
+          0
+        ],
+        "completed_public_message_indexes": [
+          0
+        ],
+        "skipped_public_message_indexes": []
+      },
+      {
+        "episode_index": 1,
+        "success": true,
+        "dependent": false,
+        "host_status": "COMPLETED",
+        "capacity_failed_public_message_index": null,
+        "attempted_public_message_indexes": [
+          0,
+          1
+        ],
+        "completed_public_message_indexes": [
+          0,
+          1
+        ],
+        "skipped_public_message_indexes": []
+      },
+      {
+        "episode_index": 2,
+        "success": true,
+        "dependent": false,
+        "host_status": "COMPLETED",
+        "capacity_failed_public_message_index": null,
+        "attempted_public_message_indexes": [
+          0,
+          1
+        ],
+        "completed_public_message_indexes": [
+          0,
+          1
+        ],
+        "skipped_public_message_indexes": []
+      },
+      {
+        "episode_index": 3,
+        "success": false,
+        "dependent": true,
+        "host_status": "LOCAL_CAPACITY_EXCEEDED",
+        "capacity_failed_public_message_index": 0,
+        "attempted_public_message_indexes": [
+          0
+        ],
+        "completed_public_message_indexes": [],
+        "skipped_public_message_indexes": []
+      },
+      {
+        "episode_index": 4,
+        "success": false,
+        "dependent": true,
+        "host_status": "LOCAL_CAPACITY_EXCEEDED",
+        "capacity_failed_public_message_index": 0,
+        "attempted_public_message_indexes": [
+          0
+        ],
+        "completed_public_message_indexes": [],
+        "skipped_public_message_indexes": []
+      }
+    ]
+  },
+  "usage": {
+    "generations": 34,
+    "input_tokens": 34453,
+    "output_tokens": 1283,
+    "generation_tokens": 35736,
+    "embedding_requests": 22,
+    "embedding_tokens": 152,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "projection_cpu_ns": 15703910,
+    "projection_wall_ns": 11415167,
+    "exact_reads": 0,
+    "exact_read_wall_ns": 0,
+    "provider_wall_seconds": 13.968681024387479
+  },
+  "process": {
+    "run_id": "ser-v23-arc3-a3-r1",
+    "exit_code": 0,
+    "process_wall_seconds": 25.32841924484819
+  },
+  "instrumentation": {
+    "counts": {
+      "requests": 34,
+      "searches": 22,
+      "bodies": 14,
+      "operations": 0,
+      "request_material": 170,
+      "tool_calls": 34,
+      "observations": 19,
+      "revisions": 0
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 34
+      },
+      "operations": {},
+      "searches": {
+        "returned": 22
+      },
+      "requests": {
+        "completed": 34
+      }
+    },
+    "observation_roles": {
+      "business_tool": 12,
+      "user": 7
+    },
+    "revision_effects": {},
+    "material_coverage": {
+      "FULL": 170
+    },
+    "search_returned_items": 0,
+    "search_exact_revision_bindings": 0,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 452,
+      "observer_cpu_ns": 152346884,
+      "observer_wall_ns": 4080665766,
+      "extra_store_reads": 0,
+      "extra_read_cpu_ns": 0,
+      "extra_read_wall_ns": 0,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 245760,
+      "net_sqlite_db_bytes": 147456,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "projection_requests": 34,
+  "projection_item_status_counts": {},
+  "ordinary_lineage": 5,
+  "derived_demotions": 0,
+  "rebase_precision_counts": [
+    0,
+    0
+  ],
+  "rebase_recall_counts": [
+    0,
+    0
+  ],
+  "rebase_denominator_meaning": "Request-level snapshot risk reconstructed from real Store-operation generating receipt order; 0/0 undefined, not semantic causal precision.",
+  "business_calls": [
+    {
+      "name": "update_address",
+      "args": {
+        "customer_id": "CUST-1003",
+        "new_address": "918 Cedar Ln Apt 97, Springfield"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-aaca811923d7e523"
+    },
+    {
+      "name": "get_order",
+      "args": {
+        "order_id": "ORD-509444"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-a55629b86284d9ee"
+    },
+    {
+      "name": "send_message",
+      "args": {
+        "customer_id": "CUST-1002",
+        "body": "We confirm that a partial refund of 7919 cents has been agreed upon for order ORD-509444 due to the damaged item. The refund will be processed once you have confirmed with your bank. Please let us know when you are ready to proceed."
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-a55629b86284d9ee"
+    },
+    {
+      "name": "send_message",
+      "args": {
+        "customer_id": "CUST-1003",
+        "body": "We confirm that a partial refund of 2713 cents has been agreed upon for order ORD-705528 due to the damaged item. The refund will be processed once you have confirmed with your bank. Please let us know when you are ready to proceed."
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-9f12e3222c6ded4d"
+    },
+    {
+      "name": "get_order",
+      "args": {
+        "order_id": "ORD-509444"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-8c6728188ae10b6a"
+    },
+    {
+      "name": "send_message",
+      "args": {
+        "customer_id": "CUST-1002",
+        "body": "We have updated our records for order ORD-509444. The agreed partial refund amount is confirmed as 7256 cents. We will not process this refund until further notice."
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-8c6728188ae10b6a"
+    },
+    {
+      "name": "get_order",
+      "args": {
+        "order_id": "ORD-705528"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-846114f6b916c38a"
+    },
+    {
+      "name": "send_message",
+      "args": {
+        "customer_id": "CUST-1003",
+        "body": "We have updated our records for order ORD-705528. The agreed partial refund amount is confirmed as 1882 cents. We will not process this refund until further notice."
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-846114f6b916c38a"
+    },
+    {
+      "name": "get_order",
+      "args": {
+        "order_id": "ORD-509444"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-9be7962a63ce6516"
+    },
+    {
+      "name": "get_order",
+      "args": {
+        "order_id": "ORD-705528"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-9ab9379679ba0dfb"
+    },
+    {
+      "name": "get_policy",
+      "args": {
+        "key": "partial_refund_max_percent"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-95a7c0b1d1283a44"
+    },
+    {
+      "name": "get_policy",
+      "args": {
+        "key": "max_refund_without_approval_cents"
+      },
+      "status": "complete",
+      "generation_id": "chatcmpl-bf3b29e2a7120e06"
+    }
+  ],
+  "artifact_sha256": {
+    "artifacts/ser-v23/ser-v23-arc3-a3-r1/trace.jsonl": "33423acf6552e4099dc27dc7e2dcfddf4b85875c8eaeb8ebdb14c39c1c89cd5c",
+    "artifacts/ser-v23/ser-v23-arc3-a3-r1/instrumentation.sqlite": "e8a03df4f84aef5f4fdff2b997e9c413c8aa937e10cdf45cec896f627016533a",
+    "artifacts/ser-v23/ser-v23-arc3-a3-r1/checkpoints.sqlite": "a43050520f474474f77506308381ab1fff2c076bcb466901888a3c08d9422324",
+    "artifacts/ser-v23/ser-v23-arc3-a3-r1/run/run-identity.json": "7780f7c90c59987cef6f1fb2db4211e67d3d1c678edcf0baf1f0c191cd362830",
+    "artifacts/ser-v23/ser-v23-arc3-a3-r1/run/result.json": "4e0e5a567f4e5d055df67d1d3c14a8ef45e08a239a4daab0b9086f1237e61fa3"
+  },
+  "file_bytes": {
+    "trace.jsonl": 1395122,
+    "instrumentation.sqlite": 245760,
+    "checkpoints.sqlite": 528384
+  },
+  "persistent_semantic_state_bytes": 0,
+  "judge_requests": 0
+}

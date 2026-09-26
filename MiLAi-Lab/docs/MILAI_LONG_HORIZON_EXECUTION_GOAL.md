@@ -25,9 +25,9 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 | P6 | §7全部类型的参数化generalized suite，rubric不进入runtime | 完成最小authority协议修复；最终同源十三例13/13，见[最终结果](MILAI_SER_V21_FINAL_RESULTS_20260927.md)；旧冲突失败不改判 |
 | P7 | 已暴露12-case和MERIT arc0回归，保留原失败/费用与matched基线 | 开发验证完成：[R3](MILAI_SER_V22_P7_R3_RESULTS_20260927.md)诊断7/12，MERIT4/5；固定B1参考8/12、4/5，原失败保留；无端到端收益结论 |
 | P8 | 方法收敛与formal freeze，逐项满足§25条件 | [九项判定与方法冻结](MILAI_SER_V22_P8_METHOD_FREEZE.md)完成，允许小规模检验；不等于最终质量GO |
-| P9 | 运行前选择冻结的unseen matched evaluation，B1/lite/full输入与scorer一致 | [v23](MILAI_SER_V23_GOAL.md)预注册seed3/4各原5episode、7message，三臂共6run；70文件源锁/单loop接线/零模型检查与打包完成，准备真实执行 |
-| P10 | external baselines、至少两模型族、历史/密度/版本比例鲁棒性及参数边界 | 待方法稳定 |
-| P11 | Formation与Post-Action Reconciliation独立Goal/机制/评估，不能混同SER收益 | 待独立研究 |
+| P9 | 运行前选择冻结的unseen matched evaluation，B1/lite/full输入与scorer一致 | [v23六条已完成](MILAI_SER_V23_RESULTS_20260927.md)：B1 6/10，A3/A4各7/10，0自然refresh/rebase；负面证据保留，PIVOT至生命周期 |
+| P10 | external baselines、至少两模型族、历史/密度/版本比例鲁棒性及参数边界 | 稳定主效果未建立；第二模型独立端点已异步请求，其余工作继续，未标完成 |
+| P11 | Formation与Post-Action Reconciliation独立Goal/机制/评估，不能混同SER收益 | 当前优先：以21次早期观察未保存、成功动作后pending未更新为证据，独立最小机制/反例 |
 | P12 | 论文级质量—成本Pareto、错误边界、真实Agent脚本工作负载和复现交付 | 待汇总 |
 
 全程还需覆盖§20–24的多对象/多版本/current冲突、short/medium/long历史及checkpoint边界；§28–30全部指标和完整成本；§43跨session、CRUD、restart、partial failure、无关交错、多用户scope的非benchmark工作负载。Product当前不改；迁移须满足§44。State–Attention、action grounding、Current Evidence Capsule、Jev均按原计划的证据条件决定是否启动，不将“可选”解释为必须提前实现，也不将尚未满足的主阶段冒充完成。
@@ -45,3 +45,5 @@ P6最终source mapping为`7ee904cba80c0facf0f513fe7607b15ea4fa5a61fc1a0553c1ef4e
 P7 R2后连续SER为360生成/332460tokens/3902embeddingtokens/75get；0未知/截断/Judge。方法未收敛，master仍ACTIVE；先做独立条件authority修复，然后按§25逐项冻结，继续P9–P12。
 
 P7 R3/P8后连续SER415生成/373013tokens/4370embeddingtokens/75get；0未知/截断/Judge。49/55实际空证据请求省略authority，20首request与B1相同仍有d11漏搜。进入预注册三臂正式小规模比较，基于结果判断收益或pivot；Formation/Reconciliation和非benchmark真实脚本继续。
+
+P9后连续SER568生成/530611tokens/5057embeddingtokens/75get。本轮42公开消息机会中37完成、4容量失败、1skipped，原业务checker分别计分。三臂21条早期约定观察均未形成记忆；12个依赖任务2次正确/6次错误退款/4容量失败。没有主方法自然适应证据，PIVOT优先级至P11，并继续P10资源/边界与P12真实脚本、Pareto和复现交付，不结束master。

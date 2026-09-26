@@ -1,0 +1,600 @@
+{
+  "kind": "MILAI_SER_V23_FROZEN_UNSEEN_RESULTS",
+  "status": "NO_NATURAL_SER_ACTIVATION_PIVOT_LIFECYCLE",
+  "pre_inference_commit": "f096e40e0b3311d03ce3a483a5d1716576ea889c",
+  "source_mapping_sha256": "1b90bad524f7ff041fb5484b95fdd91b7f18f9d6240d460ad69afc7ff8f21e07",
+  "lock_sha256": "4ebfe530dc71d95f81d153b3cb9c1dbccbef0127e3b231fac581e824535b21eb",
+  "execution_freeze_sha256": "c6ae20a558ed78ed65c939aa764699781c7d3967318248b046a8b4624633ee13",
+  "run_receipts_sha256": {
+    "data/manifests/milai-ser-v23-arc3-b1-results.json": "d4ee746f735808f2553149976058281038f89b6ec1c025fd5f341c1c9612ddf2",
+    "data/manifests/milai-ser-v23-arc3-a3-results.json": "1c358b333f22a0cfe1445608bc8b51f195c405b13d0dda69a6c8b24519771848",
+    "data/manifests/milai-ser-v23-arc3-a4-results.json": "b317555355261cbd9621c90108fba9aa75216967875bbff4742c6c541a11e9e0",
+    "data/manifests/milai-ser-v23-arc4-b1-results.json": "acefeec9c0c2eb7b362fa9751b75e99cf8acf5f8edcfdc57b002b646d9154a33",
+    "data/manifests/milai-ser-v23-arc4-a3-results.json": "d1d4defb975bbc87ee5e6caa53f6141654a6cef3cae2253d5da7043a12264f13",
+    "data/manifests/milai-ser-v23-arc4-a4-results.json": "43da8d85d6b7ed63fb5879e7cc962492f1579ffed1293db0bab204aa48b2a79d"
+  },
+  "runs": [
+    {
+      "run_id": "ser-v23-arc3-b1-r1",
+      "arc_id": "arc3-000",
+      "arm": "b1_control",
+      "native_successes": 3,
+      "native_denominator": 5,
+      "dependent_successes": 0,
+      "dependent_denominator": 2,
+      "declared_messages": 7,
+      "completed_messages": 7,
+      "attempted_messages": 7,
+      "capacity_failed_messages": 0,
+      "skipped_messages": 0
+    },
+    {
+      "run_id": "ser-v23-arc3-a3-r1",
+      "arc_id": "arc3-000",
+      "arm": "a3_exact_refresh",
+      "native_successes": 3,
+      "native_denominator": 5,
+      "dependent_successes": 0,
+      "dependent_denominator": 2,
+      "declared_messages": 7,
+      "completed_messages": 5,
+      "attempted_messages": 7,
+      "capacity_failed_messages": 2,
+      "skipped_messages": 0
+    },
+    {
+      "run_id": "ser-v23-arc3-a4-r1",
+      "arc_id": "arc3-000",
+      "arm": "a4_selective_rebase",
+      "native_successes": 3,
+      "native_denominator": 5,
+      "dependent_successes": 0,
+      "dependent_denominator": 2,
+      "declared_messages": 7,
+      "completed_messages": 6,
+      "attempted_messages": 7,
+      "capacity_failed_messages": 1,
+      "skipped_messages": 0
+    },
+    {
+      "run_id": "ser-v23-arc4-b1-r1",
+      "arc_id": "arc4-000",
+      "arm": "b1_control",
+      "native_successes": 3,
+      "native_denominator": 5,
+      "dependent_successes": 0,
+      "dependent_denominator": 2,
+      "declared_messages": 7,
+      "completed_messages": 5,
+      "attempted_messages": 6,
+      "capacity_failed_messages": 1,
+      "skipped_messages": 1
+    },
+    {
+      "run_id": "ser-v23-arc4-a3-r1",
+      "arc_id": "arc4-000",
+      "arm": "a3_exact_refresh",
+      "native_successes": 4,
+      "native_denominator": 5,
+      "dependent_successes": 1,
+      "dependent_denominator": 2,
+      "declared_messages": 7,
+      "completed_messages": 7,
+      "attempted_messages": 7,
+      "capacity_failed_messages": 0,
+      "skipped_messages": 0
+    },
+    {
+      "run_id": "ser-v23-arc4-a4-r1",
+      "arc_id": "arc4-000",
+      "arm": "a4_selective_rebase",
+      "native_successes": 4,
+      "native_denominator": 5,
+      "dependent_successes": 1,
+      "dependent_denominator": 2,
+      "declared_messages": 7,
+      "completed_messages": 7,
+      "attempted_messages": 7,
+      "capacity_failed_messages": 0,
+      "skipped_messages": 0
+    }
+  ],
+  "arms": {
+    "b1_control": {
+      "counts": {
+        "native_successes": 6,
+        "native_denominator": 10,
+        "dependent_successes": 0,
+        "dependent_denominator": 4,
+        "declared_messages": 14,
+        "completed_messages": 12,
+        "attempted_messages": 13,
+        "capacity_failed_messages": 1,
+        "skipped_messages": 1
+      },
+      "usage": {
+        "generations": 50,
+        "input_tokens": 48366,
+        "output_tokens": 2237,
+        "generation_tokens": 50603,
+        "embedding_requests": 24,
+        "embedding_tokens": 242,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "projection_cpu_ns": 0,
+        "projection_wall_ns": 0,
+        "exact_reads": 0,
+        "exact_read_wall_ns": 0,
+        "provider_wall_seconds": 22.69136588834226
+      },
+      "storage_bytes": {
+        "trace.jsonl": 1560453,
+        "instrumentation.sqlite": 372736,
+        "checkpoints.sqlite": 679936
+      },
+      "projection_items": {},
+      "ordinary_lineage": 0,
+      "derived_demotions": 0
+    },
+    "a3_exact_refresh": {
+      "counts": {
+        "native_successes": 7,
+        "native_denominator": 10,
+        "dependent_successes": 1,
+        "dependent_denominator": 4,
+        "declared_messages": 14,
+        "completed_messages": 12,
+        "attempted_messages": 14,
+        "capacity_failed_messages": 2,
+        "skipped_messages": 0
+      },
+      "usage": {
+        "generations": 55,
+        "input_tokens": 55296,
+        "output_tokens": 2285,
+        "generation_tokens": 57581,
+        "embedding_requests": 29,
+        "embedding_tokens": 263,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "projection_cpu_ns": 22503254,
+        "projection_wall_ns": 16693557,
+        "exact_reads": 0,
+        "exact_read_wall_ns": 0,
+        "provider_wall_seconds": 23.758721276652068
+      },
+      "storage_bytes": {
+        "trace.jsonl": 1949500,
+        "instrumentation.sqlite": 421888,
+        "checkpoints.sqlite": 823296
+      },
+      "projection_items": {
+        "CURRENT": 4
+      },
+      "ordinary_lineage": 12,
+      "derived_demotions": 0
+    },
+    "a4_selective_rebase": {
+      "counts": {
+        "native_successes": 7,
+        "native_denominator": 10,
+        "dependent_successes": 1,
+        "dependent_denominator": 4,
+        "declared_messages": 14,
+        "completed_messages": 13,
+        "attempted_messages": 14,
+        "capacity_failed_messages": 1,
+        "skipped_messages": 0
+      },
+      "usage": {
+        "generations": 48,
+        "input_tokens": 47234,
+        "output_tokens": 2180,
+        "generation_tokens": 49414,
+        "embedding_requests": 14,
+        "embedding_tokens": 182,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "projection_cpu_ns": 16895970,
+        "projection_wall_ns": 12790645,
+        "exact_reads": 0,
+        "exact_read_wall_ns": 0,
+        "provider_wall_seconds": 21.535115096718073
+      },
+      "storage_bytes": {
+        "trace.jsonl": 1170420,
+        "instrumentation.sqlite": 368640,
+        "checkpoints.sqlite": 663552
+      },
+      "projection_items": {
+        "CURRENT": 4
+      },
+      "ordinary_lineage": 13,
+      "derived_demotions": 0
+    }
+  },
+  "totals": {
+    "generations": 153,
+    "input_tokens": 150896,
+    "output_tokens": 6702,
+    "generation_tokens": 157598,
+    "embedding_requests": 67,
+    "embedding_tokens": 687,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "projection_cpu_ns": 39399224,
+    "projection_wall_ns": 29484202,
+    "exact_reads": 0,
+    "exact_read_wall_ns": 0,
+    "provider_wall_seconds": 67.9852022617124
+  },
+  "continuous_budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 568,
+    "generation": {
+      "charged_tokens": 530611,
+      "known_tokens": 530611,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 5057,
+      "known_tokens": 5057,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "continuous_exact_reads": 75,
+  "actual_first_episode_wire_comparisons": [
+    {
+      "base_seed": 3,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:0",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 3,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:1",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 3,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:2",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 3,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:3",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 3,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:4",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 3,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:0",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 3,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:1",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 3,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:2",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 3,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:3",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 3,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:4",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:0",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:1",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:2",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:3",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a3_exact_refresh",
+      "episode": "episode:4",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:0",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:1",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:2",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:3",
+      "first_actual_wire_equals_b1": true
+    },
+    {
+      "base_seed": 4,
+      "arm": "a4_selective_rebase",
+      "episode": "episode:4",
+      "first_actual_wire_equals_b1": true
+    }
+  ],
+  "semantic_review": {
+    "reviewer": "Root read all complete answers, memory contents, tool arguments, native task/checker facts and business receipts after six frozen runs.",
+    "all_early_agreement_observations_unpersisted": true,
+    "early_agreement_observations": 21,
+    "dependent_opportunities": 12,
+    "correct_refunds": 2,
+    "unsupported_wrong_refunds": 6,
+    "capacity_failed_dependent_messages": 4,
+    "arc3_b1_wrong_amounts": [
+      2000,
+      1900
+    ],
+    "arc3_a4_wrong_amounts": [
+      1000
+    ],
+    "arc4_b1_wrong_amounts": [
+      1000
+    ],
+    "arc4_a3_wrong_amounts": [
+      2000
+    ],
+    "arc4_a4_wrong_amounts": [
+      2000
+    ],
+    "arc4_a3_a4_correct_later_explicit_amount": 1207,
+    "arc4_a3_a4_pending_memory_not_reconciled": true,
+    "null_memory_inserts": {
+      "arc3_b1": 1,
+      "arc3_a4": 1,
+      "arc4_a4": 1
+    },
+    "unsupported_recorded_claims_in_confirmations": true,
+    "extra_point_is_ser_causal_benefit": false
+  },
+  "actual_refund_receipts": [
+    {
+      "run_id": "ser-v23-arc3-b1-r1",
+      "episode": 3,
+      "arguments": {
+        "order_id": "ORD-509444",
+        "amount_cents": 2000
+      },
+      "tool_status": "complete",
+      "actual_result": {
+        "ok": true,
+        "order_id": "ORD-509444",
+        "refunded_cents": 2000
+      }
+    },
+    {
+      "run_id": "ser-v23-arc3-b1-r1",
+      "episode": 4,
+      "arguments": {
+        "order_id": "ORD-705528",
+        "amount_cents": 1900
+      },
+      "tool_status": "complete",
+      "actual_result": {
+        "ok": true,
+        "order_id": "ORD-705528",
+        "refunded_cents": 1900
+      }
+    },
+    {
+      "run_id": "ser-v23-arc3-a4-r1",
+      "episode": 4,
+      "arguments": {
+        "order_id": "ORD-705528",
+        "amount_cents": 1000
+      },
+      "tool_status": "complete",
+      "actual_result": {
+        "ok": true,
+        "order_id": "ORD-705528",
+        "refunded_cents": 1000
+      }
+    },
+    {
+      "run_id": "ser-v23-arc4-b1-r1",
+      "episode": 3,
+      "arguments": {
+        "order_id": "ORD-580634",
+        "amount_cents": 1000
+      },
+      "tool_status": "complete",
+      "actual_result": {
+        "ok": true,
+        "order_id": "ORD-580634",
+        "refunded_cents": 1000
+      }
+    },
+    {
+      "run_id": "ser-v23-arc4-a3-r1",
+      "episode": 2,
+      "arguments": {
+        "order_id": "ORD-685090",
+        "amount_cents": 2000
+      },
+      "tool_status": "complete",
+      "actual_result": {
+        "ok": true,
+        "order_id": "ORD-685090",
+        "refunded_cents": 2000
+      }
+    },
+    {
+      "run_id": "ser-v23-arc4-a3-r1",
+      "episode": 3,
+      "arguments": {
+        "order_id": "ORD-580634",
+        "amount_cents": 1207
+      },
+      "tool_status": "complete",
+      "actual_result": {
+        "ok": true,
+        "order_id": "ORD-580634",
+        "refunded_cents": 1207
+      }
+    },
+    {
+      "run_id": "ser-v23-arc4-a4-r1",
+      "episode": 2,
+      "arguments": {
+        "order_id": "ORD-685090",
+        "amount_cents": 2000
+      },
+      "tool_status": "complete",
+      "actual_result": {
+        "ok": true,
+        "order_id": "ORD-685090",
+        "refunded_cents": 2000
+      }
+    },
+    {
+      "run_id": "ser-v23-arc4-a4-r1",
+      "episode": 3,
+      "arguments": {
+        "order_id": "ORD-580634",
+        "amount_cents": 1207
+      },
+      "tool_status": "complete",
+      "actual_result": {
+        "ok": true,
+        "order_id": "ORD-580634",
+        "refunded_cents": 1207
+      }
+    }
+  ],
+  "natural_exact_refreshes": 0,
+  "natural_derived_demotions": 0,
+  "rebase_precision": null,
+  "rebase_recall": null,
+  "refresh_precision": null,
+  "stale_consumption_rate": null,
+  "storage_bytes": {
+    "trace.jsonl": 4680373,
+    "instrumentation.sqlite": 1163264,
+    "checkpoints.sqlite": 2166784
+  },
+  "judge_requests": 0,
+  "vllm_settings_changed": false,
+  "post_outcome_method_changes": false,
+  "decision": "Keep the demonstrated SER mechanism frozen; no natural efficacy claim. Pivot primary development to independent prospective formation and receipt-driven reconciliation, preserving all six unseen outcomes.",
+  "second_model_family_status": "NOT_RUN_NO_SEPARATE_ENDPOINT_CONFIGURED; asynchronous configuration question pending; independent development continues.",
+  "master_goal_complete": false
+}

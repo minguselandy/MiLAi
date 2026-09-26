@@ -33,6 +33,13 @@ comparison, without claiming task benefit. Current SER costs: 415 generations / 
 4370 embedding tokens / 75 exact reads. The master Goal continues through P9–P12.
 Historical deliveries below remain preserved.
 
+[v23 unseen comparison](docs/MILAI_SER_V23_RESULTS_20260927.md) completed all six frozen runs:
+B1 6/10, SER-lite and SER-full 7/10 each. No exact refresh or derived rebase occurred;
+all 21 early agreement observations went unpersisted. The extra point is not established
+SER benefit. Primary development pivots to independent Formation/Reconciliation, while
+model/history boundaries and final usability work remain open. Continuous costs are now
+568 generations / 530611 tokens / 5057 embedding tokens / 75 exact reads.
+
 Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.
 Original Notice and request-copy Quarantine each pass 1/3 controls; conditional Exact Refresh

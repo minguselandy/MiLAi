@@ -1,11 +1,13 @@
 ---
-status: ACTIVE
+status: COMPLETE_WITH_LIFECYCLE_PIVOT
 scope: RESEARCH_PROTOTYPE
 parent: MILAI_LONG_HORIZON_EXECUTION_GOAL.md
 reference_commit: 7f26a9b5f3ff3b5ba54f7c2a0b3dacf3d4d03f90
 ---
 
 # v23：小规模未见三臂比较
+
+执行结果见[完整报告](MILAI_SER_V23_RESULTS_20260927.md)：B1 6/10、A3/A4各7/10，全部0exact refresh/derived demotion，不成立SER自然收益结论。六条预注册轨迹及费用保留，连续SER568生成/530611tokens/5057embeddingtokens/75get。决定优先独立Formation/Reconciliation；第二模型族和P10/P12未完成，master继续。下文为调用前原方案，其原字节可从`f096e40`恢复。
 
 [P8方法冻结](MILAI_SER_V22_P8_METHOD_FREEZE.md)已经发布并核对remote。本阶段执行总计划P9；不把既有机制控制、原arc0或十二例回归当成未见收益。当前模型/工具/协议与方法参数全部固定，v23只接通被冻结的原始selection。
 
@@ -29,8 +31,9 @@ reference_commit: 7f26a9b5f3ff3b5ba54f7c2a0b3dacf3d4d03f90
 
 ## 完成清单
 
-- [ ] selection规则与三臂预注册，未见任务生成前完成。
-- [ ] 单loop薄接线、窄验证、源码锁和一次必要package。
-- [ ] 两arc原字节冻结、六条完整预定轨迹及全部失败/费用。
-- [ ] 原scorer/实际wire/语义/成本、Failure Review与十项Reflection。
-- [ ] 依据结果继续/PIVOT/KILL，Luna发布与remote核对；master继续。
+- [x] selection规则与三臂预注册，未见任务生成前完成。
+- [x] 单loop薄接线、窄验证、源码锁和一次必要package。
+- [x] 两arc原字节冻结、六条预定运行，全部容量/语义失败及费用保留。
+- [x] 原scorer/实际wire/语义/成本、Failure Review与十项Reflection。
+- [x] 依据结果PIVOT主开发到生命周期；调用前冻结已发布核对。
+- [ ] Luna发布本轮结果并核对remote；master继续。
