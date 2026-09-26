@@ -38,7 +38,11 @@ from milai_lab.methods.milai_m1.decision_basis import DecisionDeltaError, valida
 from milai_lab.methods.milai_m1.recheck import completion_proof, refresh_rechecks
 from milai_lab.methods.milai_m1.state_store import DecisionBasisStore
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel, _action_schema
+from milai_lab.providers.langmem_chat import (
+    IncompleteChatResponse,
+    VLLMChatModel,
+    _action_schema,
+)
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
 from milai_lab.runners.langmem_m1_mechanism import _fixture_memory_effect, run_mechanism
 
@@ -440,10 +444,13 @@ def test_pending_protocol_or_unresolved_business_action(tmp_path: Path, mode: st
                                    "id": seed["memory_id"], "content": "new"},
                                    scope, store, observer, tmp_path, Stub())  # type: ignore[arg-type]
             if mode in {"invalid_clear", "invalid_task_ended"}:
-                with pytest.raises(DecisionDeltaError,
+                # The v18 calls schema rejects task_ended before M1 commit runs.
+                expected = (DecisionDeltaError if mode == "invalid_clear"
+                            else IncompleteChatResponse)
+                with pytest.raises(expected,
                                    match=("DECISION_PENDING_CLEAR_INCOMPLETE"
                                           if mode == "invalid_clear"
-                                          else "DECISION_TASK_ENDED_WITH_CALLS")):
+                                          else "JSON_ACTION_SCHEMA_INVALID")):
                     invoke_public_message(agent, model, scope, "Still pending.", "task")
                 assert world == []
                 assert state.rows("delta_receipts")[-1]["status"] == "ERROR"
