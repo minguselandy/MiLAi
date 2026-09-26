@@ -1,0 +1,11 @@
+{
+  "kind": "SER_DIAGNOSTIC_INPUT_FREEZE",
+  "status": "FROZEN_BEFORE_NEW_REQUESTS",
+  "case_id": "categorical_route",
+  "fixture_sha256": "0f47ee19d2d18c9e2ded4b457fb3d0004fa5c4ced76c08247b4121e5acf204db",
+  "public_messages": 3,
+  "rubric_sha256": "477f20ab9b2b12d436b710e27dffcef6d3a38f6eeb678043d03b1126b74f483c",
+  "runtime_reads_rubric": false,
+  "v1_fixture_sha256": "fcd93c4a9e831cb20b9db9e6ab603d492782404f3cbf08706fd891dc0ddb97b5",
+  "sole_contract_change": "Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference."
+}

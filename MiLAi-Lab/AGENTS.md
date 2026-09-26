@@ -72,6 +72,16 @@ checks/static/boundary passes and one successful cumulative build including all 
 No need to repeat that build/test group for fixture/docs-only changes. Continuous SER costs
 are 71 generations / 65327 tokens / 1035 embedding tokens / 33 exact reads.
 
+P5 R2's two generic target-description repairs pass 4/4 without source changes. P6 R1
+passes 8/9 new controls, giving explicitly variant-labeled 11/12 same-source development
+coverage. Preserve [the current-conflict failure](docs/MILAI_SER_V21_P6_R1_RESULTS_20260927.md):
+both CURRENT bodies are intact, but the model infers source priority from later Store
+created_at, then executes despite unresolved conflict. Next independently freeze a minimal
+source-authority protocol clarification and test conflict/no-stale/explicit-priority controls;
+no semantic truth gate, source-value rule or vLLM change. Cumulative SER costs now include
+136 generations / 128447 tokens / 1908 embedding tokens / 57 exact reads. Old P5/P6 failures
+remain; the master Goal and the authority repair are active, not completed by archival.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

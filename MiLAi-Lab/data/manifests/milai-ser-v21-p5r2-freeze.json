@@ -1,0 +1,492 @@
+{
+  "kind": "MILAI_SER_V21_P5R2_FREEZE",
+  "status": "FROZEN_BEFORE_STAGE_REQUESTS",
+  "created_at": "2026-09-26T17:10:58.489368+00:00",
+  "lock_sha256": "3ac92f27d6ac890ff66d03ce1ffbf7d4b160f34d87a4f23ede8a1d7b2c0ede83",
+  "source_mapping_sha256": "142ce5dfcc5ecf0f79166cff0c1ad710daeff5e8aac3010ee74db50ad8de70e2",
+  "protocol_path": "data/manifests/milai-ser-v21-p5r2-protocol.json",
+  "protocol_sha256": "6d0728029909dfc0989a137ef3061bc5f361757ee2d4a7638162b2fa2aac1db6",
+  "goal_sha256": "a2b1b958589c7d8a4fc05d05a2f44448f7cb101d69c909979ecc1c0903367080",
+  "rubric_path": "data/diagnostics/selective_adaptation_v2/rubrics-p5r2.json",
+  "rubric_sha256": "ab290596f868cc654a3803fbb4d47d9dcc6da579fa7b71681c4d068c95898733",
+  "model_visible_contracts_by_case": {
+    "numeric_amount": {
+      "fixture_sha256": "d55d96938ab44561f210aa956aa85adc42d1a537b9c863281c8b7f81b502a1d0",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved amount cents for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"amount_cents\":{\"type\":\"integer\"}},\"required\":[\"item\",\"amount_cents\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    },
+    "retained_metadata": {
+      "fixture_sha256": "221fb0db95249b6b786d5331de5be65cd31337a9945c1634408d36802951b18e",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved weight limit kg for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"weight_limit_kg\":{\"type\":\"integer\"}},\"required\":[\"item\",\"weight_limit_kg\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    }
+  },
+  "method_lock_fixture_contracts_are_R1_reference": true,
+  "r1_checkpoint": "2c90dd376c3ec486ed154853a6d980eea8094610",
+  "p4_checkpoint": "3ecad01dcf2f3f07bc4a44926848597a2e63f71b",
+  "p4_result_sha256": "7d2a6119e74f949c866fe23cfec413f50924fae28f86893de53d75be15123d34",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "base_commit": "3ecad01dcf2f3f07bc4a44926848597a2e63f71b",
+    "stage": "P5_A4_A5_MATCHED",
+    "arm_ids": [
+      "a4_selective_rebase",
+      "a5_rank_bounded_rebase"
+    ],
+    "identity": {
+      "config": "configs/milai-ser-v21.json",
+      "cli": "tools/run_milai_ser_v21.py",
+      "lock_expected": "data/locks/milai-ser-v21-p5.lock.json",
+      "lock_kind": "MILAI_SER_V21_LOCK",
+      "reference": "data/manifests/milai-ser-v20-reference.json",
+      "recipe_id": "milai-ser-v21-json-action-v1",
+      "transport_variant": "json_action_ser_v21_v1",
+      "prepare_method": "ser_v21",
+      "budget_path": "artifacts/ser-v20/budget.json"
+    },
+    "policy": {
+      "a4_selective_rebase": {
+        "refresh_until_current_candidate": false,
+        "max_exact_refresh_per_search": null
+      },
+      "a5_rank_bounded_rebase": {
+        "refresh_until_current_candidate": true,
+        "max_exact_refresh_per_search": 1
+      }
+    },
+    "changed_source": [
+      "src/milai_lab/methods/freshness_projection/projection.py",
+      "src/milai_lab/methods/freshness_projection/controller.py",
+      "src/milai_lab/methods/freshness_projection/identity.py",
+      "tools/run_milai_freshness_projection.py",
+      "tools/run_milai_ser_v21.py",
+      "configs/milai-ser-v21.json",
+      "pyproject.toml",
+      "tests/unit/test_freshness_projection.py"
+    ],
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py",
+        "result": "PASS 11 tests; 13 dependency deprecation warnings"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/freshness_projection tools/run_milai_freshness_projection.py tools/run_milai_ser_v21.py tests/unit/test_freshness_projection.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy src/milai_lab/methods/freshness_projection tools/run_milai_freshness_projection.py tools/run_milai_ser_v21.py",
+        "result": "PASS 7 source files"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-tools-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync python tools/run_milai_ser_v21.py schema --fixture data/diagnostics/selective_adaptation_v1/numeric_amount.json --arm a5_rank_bounded_rebase",
+        "result": "PASS; existing JSON action schema and source-authority protocol"
+      },
+      {
+        "command": "uv run --no-sync python -c '<v20/v21 service, capacity, budget and rank policy parity assertions>'",
+        "result": "PASS"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      }
+    ],
+    "packaging": "pyproject sdist includes /data/diagnostics and the new v21 lock path; build deferred until the lock is frozen",
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_receipt": 0
+  },
+  "package_verification": {
+    "status": "PASS",
+    "stage": "P5_SER_V21",
+    "lock": "data/locks/milai-ser-v21-p5.lock.json",
+    "lock_sha256": "3ac92f27d6ac890ff66d03ce1ffbf7d4b160f34d87a4f23ede8a1d7b2c0ede83",
+    "source_mapping_sha256": "142ce5dfcc5ecf0f79166cff0c1ad710daeff5e8aac3010ee74db50ad8de70e2",
+    "identity_check": {
+      "command": "uv run --no-sync python -c 'from pathlib import Path; from milai_lab.methods.freshness_projection.identity import verify_ser_v21_lock; verify_ser_v21_lock(Path(\"data/locks/milai-ser-v21-p5.lock.json\"), Path(\"configs/milai-ser-v21.json\"))'",
+      "result": "PASS"
+    },
+    "build": {
+      "command": "uv build --out-dir artifacts/ser-v21/dist",
+      "result": "PASS; one build after P5 source lock",
+      "sdist": "artifacts/ser-v21/dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "2cd09a0447e2a6dfd67ffbb2dc369344738f610b3e738384784efcb6db9c04a4",
+      "wheel": "artifacts/ser-v21/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "4b2798c49e863c35616a112c62be6af440345f284086e5c7a2cc98ba4f8d4ce6"
+    },
+    "members": {
+      "command": "uv run --no-sync python - <<'PY' ... tarfile/zipfile member assertions ... PY",
+      "result": "PASS",
+      "sdist_member_count": 1633,
+      "diagnostic_files_in_sdist": 25,
+      "included": [
+        "data/diagnostics/selective_adaptation_v1",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "configs/milai-ser-v21.json",
+        "tools/run_milai_ser_v21.py",
+        "src/milai_lab/methods/freshness_projection"
+      ],
+      "wheel_member_count": 137,
+      "wheel_freshness_projection_included": true
+    },
+    "note": "The first member-check command used unavailable system python and exited 127; the identical read-only check passed under uv run --no-sync python. No second build or source change occurred.",
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_lock": 0
+  },
+  "environment_check": {
+    "status": "UNCHANGED_BEFORE_P5",
+    "checked_at": "2026-09-26T16:58:34.343326+00:00",
+    "reference_sha256": "8aba502900721b86dc778783cc6d59013a7691666b81e82fc86aadbe58f4d9b6",
+    "container": "25f0a0dee927bc1a94abd3efce5990a52d5c0c219ab40afb6defa2298ff64ab5",
+    "image": "sha256:e0cfcfcb9b86e2c2d0d52a93689773f20f380cb8e050a24ce550c44f6f55c5eb",
+    "command_equal": true,
+    "environment_hash_equal": true,
+    "host_settings_equal": true,
+    "inference_requests": 0
+  },
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 71,
+    "generation": {
+      "charged_tokens": 65327,
+      "known_tokens": 65327,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 1035,
+      "known_tokens": 1035,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "case": "numeric_amount",
+      "run_id": "ser-v21-p5r2-a4-numeric_amount-r1",
+      "arm": "a4_selective_rebase",
+      "directory": "artifacts/ser-v21/p5r2-a4-numeric_amount-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "c62308b19c09b164175ecf3d61f81786d804369329992420e2cb2604403995be",
+      "prepared_sha256": "69f1ced229dc093e0f98911706adfa36ea3ca579cb85f4644139e147650ba635",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5r2-a4-numeric_amount-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5r2-a4-numeric_amount-r1",
+        "--arm",
+        "a4_selective_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/numeric_amount.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/numeric_amount.json"
+      ]
+    },
+    {
+      "case": "numeric_amount",
+      "run_id": "ser-v21-p5r2-a5-numeric_amount-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p5r2-a5-numeric_amount-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "de93dee008752426295ef20d1de5b48f15c8ebd39f596188f206ec33b5279104",
+      "prepared_sha256": "e0f1deea179f2c07f1aae458af44f555ae4052e53a7323cff8aba4b647b2032a",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5r2-a5-numeric_amount-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5r2-a5-numeric_amount-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/numeric_amount.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/numeric_amount.json"
+      ]
+    },
+    {
+      "case": "retained_metadata",
+      "run_id": "ser-v21-p5r2-a4-retained_metadata-r1",
+      "arm": "a4_selective_rebase",
+      "directory": "artifacts/ser-v21/p5r2-a4-retained_metadata-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "4bc28fd4e43d681a8f86f3ae3fcc65e222986e96c0895058ecfe8f5192507e47",
+      "prepared_sha256": "155e9469b6ff3ebad340decd3c5b36d1ca67f765fcf7a5589a4153ea699e8521",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5r2-a4-retained_metadata-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5r2-a4-retained_metadata-r1",
+        "--arm",
+        "a4_selective_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/retained_metadata.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/retained_metadata.json"
+      ]
+    },
+    {
+      "case": "retained_metadata",
+      "run_id": "ser-v21-p5r2-a5-retained_metadata-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p5r2-a5-retained_metadata-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "ead151690ccc177f1911e38b66fab73b056a3814b1fc13de877f4f25894bbd34",
+      "prepared_sha256": "e48bfd2a5159e97bcfd6b655075bef78898003c3b645017615c69620f1278d35",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p5r2-a5-retained_metadata-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p5r2-a5-retained_metadata-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/retained_metadata.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/retained_metadata.json"
+      ]
+    }
+  ],
+  "master_goal_complete": false,
+  "vllm_settings_changed": false
+}

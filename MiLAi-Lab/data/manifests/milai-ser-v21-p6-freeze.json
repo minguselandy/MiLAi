@@ -1,0 +1,1202 @@
+{
+  "kind": "MILAI_SER_V21_P6_FREEZE",
+  "status": "FROZEN_BEFORE_STAGE_REQUESTS",
+  "created_at": "2026-09-26T17:12:15.749356+00:00",
+  "lock_sha256": "3ac92f27d6ac890ff66d03ce1ffbf7d4b160f34d87a4f23ede8a1d7b2c0ede83",
+  "source_mapping_sha256": "142ce5dfcc5ecf0f79166cff0c1ad710daeff5e8aac3010ee74db50ad8de70e2",
+  "protocol_path": "data/manifests/milai-ser-v21-p5r2-protocol.json",
+  "protocol_sha256": "6d0728029909dfc0989a137ef3061bc5f361757ee2d4a7638162b2fa2aac1db6",
+  "goal_sha256": "a2b1b958589c7d8a4fc05d05a2f44448f7cb101d69c909979ecc1c0903367080",
+  "rubric_path": "data/diagnostics/selective_adaptation_v2/rubrics-p6.json",
+  "rubric_sha256": "477f20ab9b2b12d436b710e27dffcef6d3a38f6eeb678043d03b1126b74f483c",
+  "model_visible_contracts_by_case": {
+    "categorical_route": {
+      "fixture_sha256": "0f47ee19d2d18c9e2ded4b457fb3d0004fa5c4ced76c08247b4121e5acf204db",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved warehouse for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"warehouse\":{\"type\":\"string\"}},\"required\":[\"item\",\"warehouse\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    },
+    "boolean_approved": {
+      "fixture_sha256": "a452d0fd4276c9ede4b7e0fba942586f769db27aa1d35b75119c01b6c1f5728d",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved permitted for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"permitted\":{\"type\":\"boolean\"}},\"required\":[\"item\",\"permitted\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    },
+    "boolean_cancelled": {
+      "fixture_sha256": "81ef854e935d549ee82000fbd1947453470cafe8826e7b35cf7320499e86b0b6",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved permitted for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"permitted\":{\"type\":\"boolean\"}},\"required\":[\"item\",\"permitted\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    },
+    "deleted_evidence": {
+      "fixture_sha256": "652407db6eb74465c9f2e3e734aab9ba35a89bb08f075bbd3046169272a600be",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved warehouse for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"warehouse\":{\"type\":\"string\"}},\"required\":[\"item\",\"warehouse\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    },
+    "multi_revision": {
+      "fixture_sha256": "0de58d0d235ea285862f59450290677ddb47983277cb16d32de5ce9898c119dd",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved warehouse for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"warehouse\":{\"type\":\"string\"}},\"required\":[\"item\",\"warehouse\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    },
+    "current_conflict": {
+      "fixture_sha256": "532ef7cc5b2b64dce991e4191bb629b903ba83739ba07176b467ac9c8fa0b2cc",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved warehouse for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"warehouse\":{\"type\":\"string\"}},\"required\":[\"item\",\"warehouse\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    },
+    "assistant_only_stale": {
+      "fixture_sha256": "3885cc755f73b588b656ec83375d8bcc8ff7d63846271338bbf72e62ed990cce",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved warehouse for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"warehouse\":{\"type\":\"string\"}},\"required\":[\"item\",\"warehouse\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    },
+    "no_stale": {
+      "fixture_sha256": "3744da353d3fee4770ac832a1273592ef0d08fa087abe2e38658a17aedd9d76a",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved warehouse for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"warehouse\":{\"type\":\"string\"}},\"required\":[\"item\",\"warehouse\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    },
+    "mixed_memories": {
+      "fixture_sha256": "0186c2c4333aafc462a375eb68a6e7ee6cc9648725de53bd67faa093c1ce0ead",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calls": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "manage_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "search_memory"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "const": "record_instruction"
+                        },
+                        "arguments": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "arguments"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "calls"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "protocol": "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. You may include several calls; they execute in listed order. Use the tool names, descriptions and argument schemas below exactly. A tool result will be returned before your next reply.\n[{\"name\":\"manage_memory\",\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\",\"parameters\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"}},{\"name\":\"search_memory\",\"description\":\"Search your long-term memories for information relevant to your current context.\",\"parameters\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"}},{\"name\":\"record_instruction\",\"description\":\"Record the approved warehouse for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.\",\"parameters\":{\"type\":\"object\",\"properties\":{\"item\":{\"type\":\"string\",\"description\":\"Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference.\"},\"warehouse\":{\"type\":\"string\"}},\"required\":[\"item\",\"warehouse\"],\"additionalProperties\":false}}]\nPrevious assistant statements are not authoritative evidence about external or remembered state. Use current user and tool evidence for current action parameters."
+    }
+  },
+  "method_lock_fixture_contracts_are_R1_reference": true,
+  "r1_checkpoint": "2c90dd376c3ec486ed154853a6d980eea8094610",
+  "p4_checkpoint": "3ecad01dcf2f3f07bc4a44926848597a2e63f71b",
+  "p4_result_sha256": "7d2a6119e74f949c866fe23cfec413f50924fae28f86893de53d75be15123d34",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "base_commit": "3ecad01dcf2f3f07bc4a44926848597a2e63f71b",
+    "stage": "P5_A4_A5_MATCHED",
+    "arm_ids": [
+      "a4_selective_rebase",
+      "a5_rank_bounded_rebase"
+    ],
+    "identity": {
+      "config": "configs/milai-ser-v21.json",
+      "cli": "tools/run_milai_ser_v21.py",
+      "lock_expected": "data/locks/milai-ser-v21-p5.lock.json",
+      "lock_kind": "MILAI_SER_V21_LOCK",
+      "reference": "data/manifests/milai-ser-v20-reference.json",
+      "recipe_id": "milai-ser-v21-json-action-v1",
+      "transport_variant": "json_action_ser_v21_v1",
+      "prepare_method": "ser_v21",
+      "budget_path": "artifacts/ser-v20/budget.json"
+    },
+    "policy": {
+      "a4_selective_rebase": {
+        "refresh_until_current_candidate": false,
+        "max_exact_refresh_per_search": null
+      },
+      "a5_rank_bounded_rebase": {
+        "refresh_until_current_candidate": true,
+        "max_exact_refresh_per_search": 1
+      }
+    },
+    "changed_source": [
+      "src/milai_lab/methods/freshness_projection/projection.py",
+      "src/milai_lab/methods/freshness_projection/controller.py",
+      "src/milai_lab/methods/freshness_projection/identity.py",
+      "tools/run_milai_freshness_projection.py",
+      "tools/run_milai_ser_v21.py",
+      "configs/milai-ser-v21.json",
+      "pyproject.toml",
+      "tests/unit/test_freshness_projection.py"
+    ],
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py",
+        "result": "PASS 11 tests; 13 dependency deprecation warnings"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/methods/freshness_projection tools/run_milai_freshness_projection.py tools/run_milai_ser_v21.py tests/unit/test_freshness_projection.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy src/milai_lab/methods/freshness_projection tools/run_milai_freshness_projection.py tools/run_milai_ser_v21.py",
+        "result": "PASS 7 source files"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-tools-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync python tools/run_milai_ser_v21.py schema --fixture data/diagnostics/selective_adaptation_v1/numeric_amount.json --arm a5_rank_bounded_rebase",
+        "result": "PASS; existing JSON action schema and source-authority protocol"
+      },
+      {
+        "command": "uv run --no-sync python -c '<v20/v21 service, capacity, budget and rank policy parity assertions>'",
+        "result": "PASS"
+      },
+      {
+        "command": "git diff --check",
+        "result": "PASS"
+      }
+    ],
+    "packaging": "pyproject sdist includes /data/diagnostics and the new v21 lock path; build deferred until the lock is frozen",
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_receipt": 0
+  },
+  "package_verification": {
+    "status": "PASS",
+    "stage": "P5_SER_V21",
+    "lock": "data/locks/milai-ser-v21-p5.lock.json",
+    "lock_sha256": "3ac92f27d6ac890ff66d03ce1ffbf7d4b160f34d87a4f23ede8a1d7b2c0ede83",
+    "source_mapping_sha256": "142ce5dfcc5ecf0f79166cff0c1ad710daeff5e8aac3010ee74db50ad8de70e2",
+    "identity_check": {
+      "command": "uv run --no-sync python -c 'from pathlib import Path; from milai_lab.methods.freshness_projection.identity import verify_ser_v21_lock; verify_ser_v21_lock(Path(\"data/locks/milai-ser-v21-p5.lock.json\"), Path(\"configs/milai-ser-v21.json\"))'",
+      "result": "PASS"
+    },
+    "build": {
+      "command": "uv build --out-dir artifacts/ser-v21/dist",
+      "result": "PASS; one build after P5 source lock",
+      "sdist": "artifacts/ser-v21/dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "2cd09a0447e2a6dfd67ffbb2dc369344738f610b3e738384784efcb6db9c04a4",
+      "wheel": "artifacts/ser-v21/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "4b2798c49e863c35616a112c62be6af440345f284086e5c7a2cc98ba4f8d4ce6"
+    },
+    "members": {
+      "command": "uv run --no-sync python - <<'PY' ... tarfile/zipfile member assertions ... PY",
+      "result": "PASS",
+      "sdist_member_count": 1633,
+      "diagnostic_files_in_sdist": 25,
+      "included": [
+        "data/diagnostics/selective_adaptation_v1",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "configs/milai-ser-v21.json",
+        "tools/run_milai_ser_v21.py",
+        "src/milai_lab/methods/freshness_projection"
+      ],
+      "wheel_member_count": 137,
+      "wheel_freshness_projection_included": true
+    },
+    "note": "The first member-check command used unavailable system python and exited 127; the identical read-only check passed under uv run --no-sync python. No second build or source change occurred.",
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_lock": 0
+  },
+  "environment_check": {
+    "status": "UNCHANGED_BEFORE_P5",
+    "checked_at": "2026-09-26T16:58:34.343326+00:00",
+    "reference_sha256": "8aba502900721b86dc778783cc6d59013a7691666b81e82fc86aadbe58f4d9b6",
+    "container": "25f0a0dee927bc1a94abd3efce5990a52d5c0c219ab40afb6defa2298ff64ab5",
+    "image": "sha256:e0cfcfcb9b86e2c2d0d52a93689773f20f380cb8e050a24ce550c44f6f55c5eb",
+    "command_equal": true,
+    "environment_hash_equal": true,
+    "host_settings_equal": true,
+    "inference_requests": 0
+  },
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 91,
+    "generation": {
+      "charged_tokens": 84143,
+      "known_tokens": 84143,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 1333,
+      "known_tokens": 1333,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "case": "categorical_route",
+      "run_id": "ser-v21-p6-a5-categorical_route-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p6-a5-categorical_route-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "d22881f91cd58bfd70282d1bc46b099a713c02efb960e0949c6e3d0185c40e6a",
+      "prepared_sha256": "306bd9cde09c020cef6029a021040091f5099536d0c0724a7d4ce653df9b7426",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p6-a5-categorical_route-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p6-a5-categorical_route-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/categorical_route.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/categorical_route.json"
+      ]
+    },
+    {
+      "case": "boolean_approved",
+      "run_id": "ser-v21-p6-a5-boolean_approved-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p6-a5-boolean_approved-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "168c88ed455e72bfcd069a331f4552e2ec761a248a37da0aa6d8c2f717602cc1",
+      "prepared_sha256": "958641807ea252aeba1602dab0be436fa2c90fbf2b65ea6a7dd0efa360fd69ca",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p6-a5-boolean_approved-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p6-a5-boolean_approved-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/boolean_approved.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/boolean_approved.json"
+      ]
+    },
+    {
+      "case": "boolean_cancelled",
+      "run_id": "ser-v21-p6-a5-boolean_cancelled-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p6-a5-boolean_cancelled-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "1bcc69bfe2cca37de34b891d8aceabba2c6fab9c67c785f052eb54afa584086e",
+      "prepared_sha256": "2d30df95f7507a535726d37d5791a8d9e5af10a9f2b1b6d27f46ea0bcb95bec3",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p6-a5-boolean_cancelled-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p6-a5-boolean_cancelled-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/boolean_cancelled.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/boolean_cancelled.json"
+      ]
+    },
+    {
+      "case": "deleted_evidence",
+      "run_id": "ser-v21-p6-a5-deleted_evidence-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p6-a5-deleted_evidence-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "ebe87a7b6366b345e8b1e712c825247aa802616b33f4ef9084ca98ff0464ac2d",
+      "prepared_sha256": "4ac2abb86738621fc50de49d28a8709112ae1c1c4ce1f631aa1c598a16d996e7",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p6-a5-deleted_evidence-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p6-a5-deleted_evidence-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/deleted_evidence.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/deleted_evidence.json"
+      ]
+    },
+    {
+      "case": "multi_revision",
+      "run_id": "ser-v21-p6-a5-multi_revision-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p6-a5-multi_revision-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "84dd3c022ec68ae3532ca47ac1ff76d0765892f023be9e33dd799894a61d6c5d",
+      "prepared_sha256": "453eb6eca69a953e040c717e823326a05b8a5fdc39ea2d6f22dc724b6a1e7dc3",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p6-a5-multi_revision-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p6-a5-multi_revision-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/multi_revision.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/multi_revision.json"
+      ]
+    },
+    {
+      "case": "current_conflict",
+      "run_id": "ser-v21-p6-a5-current_conflict-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p6-a5-current_conflict-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "169183d9c517666d40cfb378cbc463da472967d77c09c1eb12ca1ccf05c13128",
+      "prepared_sha256": "06bf3d61bb54bb56760767147db25030e3c3453c1eeee5bccd587ebe40c1acb5",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p6-a5-current_conflict-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p6-a5-current_conflict-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/current_conflict.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/current_conflict.json"
+      ]
+    },
+    {
+      "case": "assistant_only_stale",
+      "run_id": "ser-v21-p6-a5-assistant_only_stale-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p6-a5-assistant_only_stale-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "62f4d0980e3009125e14921d78c7c79456b48a53d0d159e22990db5b8635113f",
+      "prepared_sha256": "b15f8bef6ccf43c09e7817958f7ec64641df66e64ef5b79aefc2d5b258c69af9",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p6-a5-assistant_only_stale-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p6-a5-assistant_only_stale-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/assistant_only_stale.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/assistant_only_stale.json"
+      ]
+    },
+    {
+      "case": "no_stale",
+      "run_id": "ser-v21-p6-a5-no_stale-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p6-a5-no_stale-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "82393ef6d1b3b2782d2a001b9c7ab125225c1b1d0d2d98ff27cecc4cb5f16848",
+      "prepared_sha256": "43d08652c06bdf3b538e40dcca4169a0df9685c27be827ecbfcd077ac19f7536",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p6-a5-no_stale-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p6-a5-no_stale-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/no_stale.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/no_stale.json"
+      ]
+    },
+    {
+      "case": "mixed_memories",
+      "run_id": "ser-v21-p6-a5-mixed_memories-r1",
+      "arm": "a5_rank_bounded_rebase",
+      "directory": "artifacts/ser-v21/p6-a5-mixed_memories-r1",
+      "initial_namespace_items": 0,
+      "config_sha256": "214926746bb0b55235f1e148ceca1ffd78634be3e1f2ccca1344bbc8db428e10",
+      "prepared_sha256": "1e4cc14d6a927fa5ccd209c6eb1fc3400c54f0f5cd865830ec718dac5c5ae920",
+      "options": [
+        "--config",
+        "artifacts/ser-v21/p6-a5-mixed_memories-r1/config.json",
+        "--lock",
+        "data/locks/milai-ser-v21-p5.lock.json",
+        "--run",
+        "ser-v21-p6-a5-mixed_memories-r1",
+        "--arm",
+        "a5_rank_bounded_rebase",
+        "--fixture",
+        "data/diagnostics/selective_adaptation_v2/mixed_memories.json",
+        "--mechanism-freeze",
+        "data/diagnostics/selective_adaptation_v2/freezes/mixed_memories.json"
+      ]
+    }
+  ],
+  "master_goal_complete": false,
+  "vllm_settings_changed": false
+}

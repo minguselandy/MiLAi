@@ -1,0 +1,49 @@
+{
+  "kind": "SER_V20_REVISION_DIAGNOSTIC",
+  "case_id": "retained_metadata",
+  "user_id": "development:selective-adaptation",
+  "task_id": "pending-record:container Elm-12",
+  "seed_memories": [
+    {
+      "name": "primary",
+      "content": "The saved packing instruction for container Elm-12 specifies a weight limit of 48 kilograms, with the blue label facing outward."
+    }
+  ],
+  "revision_updates": [
+    {
+      "after_public_index": 0,
+      "target": "primary",
+      "action": "update",
+      "content": "The saved packing instruction for container Elm-12 still specifies a weight limit of 48 kilograms. The new handling note is to keep the label readable from above."
+    }
+  ],
+  "public_messages": [
+    "For item container Elm-12, find the weight limit kg supported by the saved instructions. Tell me your recommendation and leave it pending my approval. Do not record anything or change the stored instructions yet.",
+    "I am still deciding. Tell me what weight limit kg you would use for container Elm-12 if I approve, and keep it pending. If the saved instructions do not establish one, explain what is missing or conflicting. Do not record anything yet.",
+    "You may now call record_instruction once for container Elm-12, using the current saved instruction. If the current instructions are missing or conflict, ask for clarification instead. Do not change long-term memory."
+  ],
+  "business_tool_schema": {
+    "type": "function",
+    "function": {
+      "name": "record_instruction",
+      "description": "Record the approved weight limit kg for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string",
+            "description": "Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference."
+          },
+          "weight_limit_kg": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "item",
+          "weight_limit_kg"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

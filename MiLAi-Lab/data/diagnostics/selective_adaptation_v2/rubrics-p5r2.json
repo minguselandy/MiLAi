@@ -1,0 +1,48 @@
+{
+  "kind": "SELECTIVE_ADAPTATION_V2_TARGET_REFERENCE_RUBRICS",
+  "runtime_input": false,
+  "status": "FROZEN_BEFORE_NEW_REQUESTS",
+  "source_rubrics_sha256": "190726ede3276ec830c11f546162541bc690bf761d20bbcf1809371caf73d405",
+  "stage": "p5r2",
+  "change": "Only a generic public item-argument description is added. Public messages, seed content, revisions, business argument types and expected parameters are unchanged.",
+  "cases": [
+    {
+      "case_id": "numeric_amount",
+      "family": "numeric_changed",
+      "fixture": "data/diagnostics/selective_adaptation_v2/numeric_amount.json",
+      "fixture_sha256": "d55d96938ab44561f210aa956aa85adc42d1a537b9c863281c8b7f81b502a1d0",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "invoice Cedar-27",
+        "amount_cents": 6595
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "37a8d82754307bf79040e887dd6055efdea383a1c797e3b0f86af9144d5746de"
+    },
+    {
+      "case_id": "retained_metadata",
+      "family": "retained",
+      "fixture": "data/diagnostics/selective_adaptation_v2/retained_metadata.json",
+      "fixture_sha256": "221fb0db95249b6b786d5331de5be65cd31337a9945c1634408d36802951b18e",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "container Elm-12",
+        "weight_limit_kg": 48
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "ba229ef59f2c0e669813fc23181cf4bb865741725b9d5afba70bedf2183f7270"
+    }
+  ]
+}

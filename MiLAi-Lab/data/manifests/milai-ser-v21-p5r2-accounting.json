@@ -1,0 +1,128 @@
+{
+  "kind": "MILAI_SER_V21_P5R2_ACCOUNTING",
+  "status": "SEALED",
+  "result_sha256": "c84085624bf927ab952cc2720d1974701757bcaf9b6e9e3038df73ba0b565082",
+  "marker_tokens_per_delivery": 31,
+  "marker_tokens_total": 372,
+  "total_file_bytes": {
+    "trace.jsonl": 808054,
+    "instrumentation.sqlite": 393216,
+    "checkpoints.sqlite": 311296,
+    "run/business-journal.json": 3188
+  },
+  "cases": {
+    "a4:numeric_amount": {
+      "files_bytes": {
+        "trace.jsonl": 201654,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 796
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1545,
+      "lineage_event_bytes": 8082,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 21822401,
+        "observer_wall_ns": 776347786,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3942731,
+        "extra_read_wall_ns": 7698253,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        1,
+        3
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a5:numeric_amount": {
+      "files_bytes": {
+        "trace.jsonl": 201753,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 796
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1554,
+      "lineage_event_bytes": 8109,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 39324218,
+        "observer_wall_ns": 519714565,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 6042577,
+        "extra_read_wall_ns": 10618264,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        1,
+        3
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a4:retained_metadata": {
+      "files_bytes": {
+        "trace.jsonl": 202269,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 798
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1554,
+      "lineage_event_bytes": 8127,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 23079280,
+        "observer_wall_ns": 590279044,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 4258505,
+        "extra_read_wall_ns": 7465374,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        1,
+        3
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    },
+    "a5:retained_metadata": {
+      "files_bytes": {
+        "trace.jsonl": 202378,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 77824,
+        "run/business-journal.json": 798
+      },
+      "lineage_rows": 3,
+      "exact_snapshot_text_bytes": 1563,
+      "lineage_event_bytes": 8154,
+      "marker_tokens_delivered": 93,
+      "b1_observer_stats": {
+        "id": 1,
+        "transactions": 72,
+        "observer_cpu_ns": 20941287,
+        "observer_wall_ns": 677672632,
+        "extra_store_reads": 4,
+        "extra_read_cpu_ns": 3479549,
+        "extra_read_wall_ns": 6670910,
+        "initial_db_bytes": 98304
+      },
+      "primary_refresh_on_actual_action_request_counts": [
+        1,
+        3
+      ],
+      "unnecessary_primary_search_after_update": null,
+      "persistent_semantic_state_bytes": 0
+    }
+  },
+  "interpretation": "Marker tokens are already part of Provider input billing. Snapshot/event bytes are subsets of sidecar/trace. Refresh counts on actual action requests are an operational primary-evidence delivery proxy, not semantic causal precision; reads before recommendations and after completed actions stay in the denominator. 0/0 is undefined. Shared PostgreSQL physical storage is not attributed per run."
+}

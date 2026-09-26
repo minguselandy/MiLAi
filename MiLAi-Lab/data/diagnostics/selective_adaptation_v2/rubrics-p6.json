@@ -1,0 +1,180 @@
+{
+  "kind": "SELECTIVE_ADAPTATION_V2_TARGET_REFERENCE_RUBRICS",
+  "runtime_input": false,
+  "status": "FROZEN_BEFORE_NEW_REQUESTS",
+  "source_rubrics_sha256": "190726ede3276ec830c11f546162541bc690bf761d20bbcf1809371caf73d405",
+  "stage": "p6",
+  "change": "Only a generic public item-argument description is added. Public messages, seed content, revisions, business argument types and expected parameters are unchanged.",
+  "cases": [
+    {
+      "case_id": "categorical_route",
+      "family": "categorical_changed",
+      "fixture": "data/diagnostics/selective_adaptation_v2/categorical_route.json",
+      "fixture_sha256": "0f47ee19d2d18c9e2ded4b457fb3d0004fa5c4ced76c08247b4121e5acf204db",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Orion-17",
+        "warehouse": "South"
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "fcd93c4a9e831cb20b9db9e6ab603d492782404f3cbf08706fd891dc0ddb97b5"
+    },
+    {
+      "case_id": "boolean_approved",
+      "family": "boolean_changed",
+      "fixture": "data/diagnostics/selective_adaptation_v2/boolean_approved.json",
+      "fixture_sha256": "a452d0fd4276c9ede4b7e0fba942586f769db27aa1d35b75119c01b6c1f5728d",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "pass Birch-6",
+        "permitted": true
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "87ab5ceab09ee6ec10667adf45b8cab732b1ae09f1aa83464c1bef7074fa55c9"
+    },
+    {
+      "case_id": "boolean_cancelled",
+      "family": "boolean_changed",
+      "fixture": "data/diagnostics/selective_adaptation_v2/boolean_cancelled.json",
+      "fixture_sha256": "81ef854e935d549ee82000fbd1947453470cafe8826e7b35cf7320499e86b0b6",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "pass Maple-9",
+        "permitted": false
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "54c09587f95112d8011b8b121e49a3a719690a76f69b7f62e3be7bf24ac97ee8"
+    },
+    {
+      "case_id": "deleted_evidence",
+      "family": "deleted",
+      "fixture": "data/diagnostics/selective_adaptation_v2/deleted_evidence.json",
+      "fixture_sha256": "652407db6eb74465c9f2e3e734aab9ba35a89bb08f075bbd3046169272a600be",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 0,
+      "expected_arguments": null,
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "b837a4ab5fdb2c0ee17cc0512c9dac907d9e353fb6f4b7d15d2d15d32da613b0"
+    },
+    {
+      "case_id": "multi_revision",
+      "family": "multiple_revisions",
+      "fixture": "data/diagnostics/selective_adaptation_v2/multi_revision.json",
+      "fixture_sha256": "0de58d0d235ea285862f59450290677ddb47983277cb16d32de5ce9898c119dd",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Larch-8",
+        "warehouse": "West"
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "32a1ba7d2d06eb4c3f2e9d9b507a7ff9dd6d8f8edc67da386bb6eb6d3612e32e"
+    },
+    {
+      "case_id": "current_conflict",
+      "family": "conflicting_current",
+      "fixture": "data/diagnostics/selective_adaptation_v2/current_conflict.json",
+      "fixture_sha256": "532ef7cc5b2b64dce991e4191bb629b903ba83739ba07176b467ac9c8fa0b2cc",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 0,
+      "expected_arguments": null,
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "v1_fixture_sha256": "14662673e58873b6a8e1ccf5f098232f0030dae394ede80dd8631dc03f9f8075"
+    },
+    {
+      "case_id": "assistant_only_stale",
+      "family": "assistant_only_stale",
+      "fixture": "data/diagnostics/selective_adaptation_v2/assistant_only_stale.json",
+      "fixture_sha256": "3885cc755f73b588b656ec83375d8bcc8ff7d63846271338bbf72e62ed990cce",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Orion-17",
+        "warehouse": "South"
+      },
+      "required_current_acquisition": true,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "request_view_contract": "Harness-only copy filter omits search ToolMessages generated before public index 1; original checkpoint and lineage stay intact. New search results at public index >=1 remain visible. Same policy for matched arms, no method case branch.",
+      "v1_fixture_sha256": "01f42886327a5c46d0be3b4315943fafdc6954b0f77d0b0f6bdc10990df3bace"
+    },
+    {
+      "case_id": "no_stale",
+      "family": "no_stale",
+      "fixture": "data/diagnostics/selective_adaptation_v2/no_stale.json",
+      "fixture_sha256": "3744da353d3fee4770ac832a1273592ef0d08fa087abe2e38658a17aedd9d76a",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Alder-2",
+        "warehouse": "Central"
+      },
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "exact_reads_allowed": false,
+      "derived_demotions_allowed": false,
+      "searches_after_initial_allowed": false,
+      "v1_fixture_sha256": "701d04ea77d26c402fb82aaae607f4d8488cf4139ed8df752ffa7d0ab777a7ab"
+    },
+    {
+      "case_id": "mixed_memories",
+      "family": "mixed_current_stale_deleted_unknown",
+      "fixture": "data/diagnostics/selective_adaptation_v2/mixed_memories.json",
+      "fixture_sha256": "0186c2c4333aafc462a375eb68a6e7ee6cc9648725de53bd67faa093c1ce0ead",
+      "public_messages": 3,
+      "business_tool": "record_instruction",
+      "business_public_index": 2,
+      "expected_business_count": 1,
+      "expected_arguments": {
+        "item": "parcel Ash-4",
+        "warehouse": "South"
+      },
+      "required_current_acquisition": false,
+      "required_initial_primary_acquisition": true,
+      "host_memory_writes_allowed": false,
+      "source": "Parameterized exposed development diagnostic, not benchmark or unseen evidence",
+      "unknown_seed_contract": "Use the public LangMem memory tool outside the instrumentation call scope; no fabricated revision. Fixture-only setup, actual returned key retained in evidence.",
+      "v1_fixture_sha256": "5573937b4f29eb5a37eb86210707890f7d9a385ec8267de09c2fc88299bd045d"
+    }
+  ]
+}

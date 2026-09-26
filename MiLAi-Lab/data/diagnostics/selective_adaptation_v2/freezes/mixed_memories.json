@@ -1,0 +1,11 @@
+{
+  "kind": "SER_DIAGNOSTIC_INPUT_FREEZE",
+  "status": "FROZEN_BEFORE_NEW_REQUESTS",
+  "case_id": "mixed_memories",
+  "fixture_sha256": "0186c2c4333aafc462a375eb68a6e7ee6cc9648725de53bd67faa093c1ce0ead",
+  "public_messages": 3,
+  "rubric_sha256": "477f20ab9b2b12d436b710e27dffcef6d3a38f6eeb678043d03b1126b74f483c",
+  "runtime_reads_rubric": false,
+  "v1_fixture_sha256": "5573937b4f29eb5a37eb86210707890f7d9a385ec8267de09c2fc88299bd045d",
+  "sole_contract_change": "Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference."
+}

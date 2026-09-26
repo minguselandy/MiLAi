@@ -1,0 +1,1931 @@
+{
+  "kind": "MILAI_SER_V21_P5R2_RESULTS",
+  "status": "PASS_REPAIRED_TARGET_CONTRACT_ADVANCE_P6",
+  "checks": {
+    "all_preregistered_cases_pass": true
+  },
+  "source_mapping_sha256": "142ce5dfcc5ecf0f79166cff0c1ad710daeff5e8aac3010ee74db50ad8de70e2",
+  "lock_sha256": "3ac92f27d6ac890ff66d03ce1ffbf7d4b160f34d87a4f23ede8a1d7b2c0ede83",
+  "freeze_sha256": "c64ce623d310d98469ef09b8fdfe1cd4dff1a849766317856cbb02e4d8f0e65d",
+  "passed": [
+    4,
+    4
+  ],
+  "cases": {
+    "a4:numeric_amount": {
+      "case": "numeric_amount",
+      "arm": "a4_selective_rebase",
+      "status": "PASS",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": true,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "current_primary_delivered_before_action": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "invoice Cedar-27",
+            "amount_cents": 6595
+          },
+          "generation_id": "chatcmpl-bd15a375e0ef8468"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for invoice Cedar-27 supports an amount of 1774 cents. My recommendation is to approve this amount. Please confirm if you would like me to proceed or if you need any changes.",
+        "Based on the saved instructions, the amount cents for invoice Cedar-27 is 6595. I recommend using 6595 cents. This is pending your approval.",
+        "The instruction for invoice Cedar-27 has been recorded with an amount of 6595 cents."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5r2-a4-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "f6567b051d519b814598fa7135edfd9fc985321e716b438884468f8dba3deba3",
+          "request_object_sha256": "5b28d244e8c8260acf5bb2e7ca41c5f6c8546900b7261d7100414d695ac4d128",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-a61632d60d5e0151",
+          "generating_request_id": "3923ce3f3f9821ffed77d59c7fcf813edae9626956f4331ed9f3614722ee4a4d",
+          "original_body_kind": "string",
+          "original_body_hash": "94cb00ea7564caf53b572cd6e8de696bd1018773487f97f8a1b136304ef58bf4",
+          "original_body_ref": "body:string:94cb00ea7564caf53b572cd6e8de696bd1018773487f97f8a1b136304ef58bf4",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@1",
+              "revision": 1,
+              "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+              "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+              "revision": 2,
+              "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5r2-a4-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "1f5f174e1bcb7c7f3cf0bcf0ed20963290c6cfc44dc79a1bdbc7b54b9bf7e7f8",
+          "request_object_sha256": "d62ad717b4bc13f7f22446083b3e9ac2d04414150f17be63eb18de24cfc92cfb",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-a61632d60d5e0151",
+          "generating_request_id": "3923ce3f3f9821ffed77d59c7fcf813edae9626956f4331ed9f3614722ee4a4d",
+          "original_body_kind": "string",
+          "original_body_hash": "94cb00ea7564caf53b572cd6e8de696bd1018773487f97f8a1b136304ef58bf4",
+          "original_body_ref": "body:string:94cb00ea7564caf53b572cd6e8de696bd1018773487f97f8a1b136304ef58bf4",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@1",
+              "revision": 1,
+              "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+              "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+              "revision": 2,
+              "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5r2-a4-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "718daebf154c868ed86727ae5245fa206cb884030533699402a9f3a1089721ab",
+          "request_object_sha256": "432b321ede9cf0cb7facfb60b49c7e9d25a0211d5703a5d4f64e2c179d965a93",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-a61632d60d5e0151",
+          "generating_request_id": "3923ce3f3f9821ffed77d59c7fcf813edae9626956f4331ed9f3614722ee4a4d",
+          "original_body_kind": "string",
+          "original_body_hash": "94cb00ea7564caf53b572cd6e8de696bd1018773487f97f8a1b136304ef58bf4",
+          "original_body_ref": "body:string:94cb00ea7564caf53b572cd6e8de696bd1018773487f97f8a1b136304ef58bf4",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@1",
+              "revision": 1,
+              "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+              "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-numeric_amount-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+              "revision": 2,
+              "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "3923ce3f3f9821ffed77d59c7fcf813edae9626956f4331ed9f3614722ee4a4d",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+          "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+          "item_index": 0,
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@1",
+          "status": "CURRENT",
+          "current_ref": "memory:a20fe777-3924-4224-af65-241762a5beda@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "actual_tool_body_ref": "body:string:b8b71893c5b5a4b3a590930388d284643a318464974d154e8e977c0e6f37d71b"
+        },
+        {
+          "request_id": "f6567b051d519b814598fa7135edfd9fc985321e716b438884468f8dba3deba3",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+          "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+          "item_index": 0,
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:a20fe777-3924-4224-af65-241762a5beda@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:d08b939b626954563639f24328c9d6c7113da4c69d8bafd55aee3d7971c47c35"
+        },
+        {
+          "request_id": "1f5f174e1bcb7c7f3cf0bcf0ed20963290c6cfc44dc79a1bdbc7b54b9bf7e7f8",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+          "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+          "item_index": 0,
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:a20fe777-3924-4224-af65-241762a5beda@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:d08b939b626954563639f24328c9d6c7113da4c69d8bafd55aee3d7971c47c35"
+        },
+        {
+          "request_id": "718daebf154c868ed86727ae5245fa206cb884030533699402a9f3a1089721ab",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+          "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+          "item_index": 0,
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:a20fe777-3924-4224-af65-241762a5beda@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:d08b939b626954563639f24328c9d6c7113da4c69d8bafd55aee3d7971c47c35"
+        }
+      ],
+      "exact_reads": [
+        {
+          "stage": "ser-v21-p5r2-a4-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "f6567b051d519b814598fa7135edfd9fc985321e716b438884468f8dba3deba3",
+          "public_message_index": 1,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1470857,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5r2-a4-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "1f5f174e1bcb7c7f3cf0bcf0ed20963290c6cfc44dc79a1bdbc7b54b9bf7e7f8",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1543952,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5r2-a4-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "718daebf154c868ed86727ae5245fa206cb884030533699402a9f3a1089721ab",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1437316,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        }
+      ],
+      "primary_revision_count": 2,
+      "delivered_snapshots": [
+        {
+          "request_id": "3923ce3f3f9821ffed77d59c7fcf813edae9626956f4331ed9f3614722ee4a4d",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "revision": 1,
+          "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@1",
+          "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+          "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "f6567b051d519b814598fa7135edfd9fc985321e716b438884468f8dba3deba3",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "revision": 2,
+          "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+          "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "1f5f174e1bcb7c7f3cf0bcf0ed20963290c6cfc44dc79a1bdbc7b54b9bf7e7f8",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "revision": 2,
+          "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+          "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "718daebf154c868ed86727ae5245fa206cb884030533699402a9f3a1089721ab",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-numeric_amount-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a20fe777-3924-4224-af65-241762a5beda",
+          "revision": 2,
+          "ref": "memory:a20fe777-3924-4224-af65-241762a5beda@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-aef66f6ca1fab5b5:tool:0",
+          "source_search_id": "c6a6a7491c5c8ccf66d09809655f02d2852bbe7015adb73dad027bd2e0194a92:1:search:1",
+          "delivery_source": "public Store.get"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4483,
+        "output_tokens": 181,
+        "generation_tokens": 4664,
+        "embedding_requests": 3,
+        "embedding_tokens": 69,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 4452125,
+        "projection_cpu_ns": 5822654,
+        "projection_wall_ns": 7226864,
+        "provider_wall_seconds": 2.069316419772804,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "ec5402f7981adb1e753c6b9c861cb6f6043550e7fd29ea4b23c68caeedee0881",
+        "instrumentation.sqlite": "829a3587bb78554be7869810b8a3183d5b1bdaaaedae15606996148a6a0b408e",
+        "checkpoints.sqlite": "4d6a638875b8768bf56a28e6523e9e56c2de3a114aaac65796321e015b078176",
+        "run/result.json": "adb5546507381563151cdf04f161dc341058df68f1718b5e0ebbb5bd9757d9f8",
+        "run/fixture-effects.json": "a254fee6c23a8dbc93cdf18ef9919751ff49c292c1d9622d03b99b08029af8fe",
+        "prepared.json": "69f1ced229dc093e0f98911706adfa36ea3ca579cb85f4644139e147650ba635"
+      }
+    },
+    "a5:numeric_amount": {
+      "case": "numeric_amount",
+      "arm": "a5_rank_bounded_rebase",
+      "status": "PASS",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": true,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "current_primary_delivered_before_action": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "invoice Cedar-27",
+            "amount_cents": 6595
+          },
+          "generation_id": "chatcmpl-a6499e771b3eee04"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for invoice Cedar-27 supports an amount of 1774 cents. My recommendation is to approve this amount. Please confirm if you would like me to record this or if you have any changes.",
+        "Based on the saved instructions, the amount cents for invoice Cedar-27 is 6595. I recommend using 6595 cents. This is pending your approval.",
+        "The instruction for invoice Cedar-27 has been recorded with an amount of 6595 cents."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5r2-a5-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "577cdaabdf863157419e6d322a3fbc9c124c0e78eefbc33b78d6b4862250fed8",
+          "request_object_sha256": "db9bb5a960d444a7ad91cd3a8e9b4b01a774709db78afb730897f08cc51555e1",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-92a7e27416decc3a",
+          "generating_request_id": "c11dbbafb5e672e3a57bb5935e4b94ceb95d071309e8fc035616f7dc0ed02c17",
+          "original_body_kind": "string",
+          "original_body_hash": "0b4fcf6287237b16696965833e53e692826b4481b7567ef23fd3876a6e16396d",
+          "original_body_ref": "body:string:0b4fcf6287237b16696965833e53e692826b4481b7567ef23fd3876a6e16396d",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@1",
+              "revision": 1,
+              "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+              "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+              "revision": 2,
+              "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5r2-a5-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "084bccfbcae554a03abc573ff6d79d0486bc14547ff541c4cf0842aecd85d6dc",
+          "request_object_sha256": "80909428a340320803246a5db39049ecd191da89335d2c30a0e700bc35834432",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-92a7e27416decc3a",
+          "generating_request_id": "c11dbbafb5e672e3a57bb5935e4b94ceb95d071309e8fc035616f7dc0ed02c17",
+          "original_body_kind": "string",
+          "original_body_hash": "0b4fcf6287237b16696965833e53e692826b4481b7567ef23fd3876a6e16396d",
+          "original_body_ref": "body:string:0b4fcf6287237b16696965833e53e692826b4481b7567ef23fd3876a6e16396d",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@1",
+              "revision": 1,
+              "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+              "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+              "revision": 2,
+              "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5r2-a5-numeric_amount-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "a8fc3293e0575f00d2c203cc86f52b5842ae737203950e2f704faa8b7e9d805e",
+          "request_object_sha256": "90be3ef607bd9c5fe14a498079140dd98fd7c45ebf6d05af613100cc72d806d2",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-92a7e27416decc3a",
+          "generating_request_id": "c11dbbafb5e672e3a57bb5935e4b94ceb95d071309e8fc035616f7dc0ed02c17",
+          "original_body_kind": "string",
+          "original_body_hash": "0b4fcf6287237b16696965833e53e692826b4481b7567ef23fd3876a6e16396d",
+          "original_body_ref": "body:string:0b4fcf6287237b16696965833e53e692826b4481b7567ef23fd3876a6e16396d",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+              "delivery_source": "search_memory",
+              "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@1",
+              "revision": 1,
+              "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+              "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-numeric_amount-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+              "revision": 2,
+              "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "c11dbbafb5e672e3a57bb5935e4b94ceb95d071309e8fc035616f7dc0ed02c17",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+          "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+          "item_index": 0,
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@1",
+          "status": "CURRENT",
+          "current_ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "actual_tool_body_ref": "body:string:6af0eb7e3bdb3669b74e0747327da9773a6cdbc369b18297fcaf3e1a4c0dbe0e"
+        },
+        {
+          "request_id": "577cdaabdf863157419e6d322a3fbc9c124c0e78eefbc33b78d6b4862250fed8",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+          "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+          "item_index": 0,
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:62a1145aa4911e73d11e18c173f66a140901b69e14491e305eca0249adb73cb4"
+        },
+        {
+          "request_id": "084bccfbcae554a03abc573ff6d79d0486bc14547ff541c4cf0842aecd85d6dc",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+          "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+          "item_index": 0,
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:62a1145aa4911e73d11e18c173f66a140901b69e14491e305eca0249adb73cb4"
+        },
+        {
+          "request_id": "a8fc3293e0575f00d2c203cc86f52b5842ae737203950e2f704faa8b7e9d805e",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+          "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+          "item_index": 0,
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "projected_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:62a1145aa4911e73d11e18c173f66a140901b69e14491e305eca0249adb73cb4"
+        }
+      ],
+      "exact_reads": [
+        {
+          "stage": "ser-v21-p5r2-a5-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "577cdaabdf863157419e6d322a3fbc9c124c0e78eefbc33b78d6b4862250fed8",
+          "public_message_index": 1,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1544813,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5r2-a5-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "084bccfbcae554a03abc573ff6d79d0486bc14547ff541c4cf0842aecd85d6dc",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1410273,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5r2-a5-numeric_amount-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "a8fc3293e0575f00d2c203cc86f52b5842ae737203950e2f704faa8b7e9d805e",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1270978,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "error_type": null
+        }
+      ],
+      "primary_revision_count": 2,
+      "delivered_snapshots": [
+        {
+          "request_id": "c11dbbafb5e672e3a57bb5935e4b94ceb95d071309e8fc035616f7dc0ed02c17",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "revision": 1,
+          "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@1",
+          "body_ref": "body:string:473931c38cae9eef065dfc634f6b965faf8675084dd51319e780f64a0ff079db",
+          "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+          "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "577cdaabdf863157419e6d322a3fbc9c124c0e78eefbc33b78d6b4862250fed8",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "revision": 2,
+          "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+          "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "084bccfbcae554a03abc573ff6d79d0486bc14547ff541c4cf0842aecd85d6dc",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "revision": 2,
+          "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+          "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "a8fc3293e0575f00d2c203cc86f52b5842ae737203950e2f704faa8b7e9d805e",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-numeric_amount-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "b879f01d-9568-4b62-938e-e998d4f0fa49",
+          "revision": 2,
+          "ref": "memory:b879f01d-9568-4b62-938e-e998d4f0fa49@2",
+          "body_ref": "body:string:2564a9781a1137633cb4c084b82d2dab3a5d0bcb219d79521ca99ce618328f42",
+          "source_tool_call": "chatcmpl-86498333d1abf5d9:tool:0",
+          "source_search_id": "7b5f215f08c67599b5ccba348dd9f940b996103cb6092c44311c9c8e10b7f3f7:1:search:1",
+          "delivery_source": "public Store.get"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4517,
+        "output_tokens": 182,
+        "generation_tokens": 4699,
+        "embedding_requests": 3,
+        "embedding_tokens": 69,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 4226064,
+        "projection_cpu_ns": 7383843,
+        "projection_wall_ns": 9198372,
+        "provider_wall_seconds": 2.173576205968857,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "db6971b30db601b0403755f682924aaef6181041f8bd88d7e9f7a403fd324b29",
+        "instrumentation.sqlite": "be8f264b10c1251beb108b5551bcf2460b8c37902e1f5ad1995095a41dfaddb5",
+        "checkpoints.sqlite": "4d52840173f340f799485d29b312941d6b87e06f8dcdc105031f7c56661339ba",
+        "run/result.json": "ce4aa95b782daadb0b7efb1b910b5554ad8d500eed4891d514ec6518a28818d7",
+        "run/fixture-effects.json": "b2be52703b5137f7ae9b30d90b418e3cbe545bfd38420449c6be1ca3a8de6121",
+        "prepared.json": "e0f1deea179f2c07f1aae458af44f555ae4052e53a7323cff8aba4b647b2032a"
+      }
+    },
+    "a4:retained_metadata": {
+      "case": "retained_metadata",
+      "arm": "a4_selective_rebase",
+      "status": "PASS",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": true,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "current_primary_delivered_before_action": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "container Elm-12",
+            "weight_limit_kg": 48
+          },
+          "generation_id": "chatcmpl-94fe5427c2b9f635"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for container Elm-12 specifies a weight limit of 48 kilograms. My recommendation is to maintain this limit of 48 kg. Please approve or suggest changes.",
+        "Based on the saved instructions, the weight limit for container Elm-12 is 48 kg. I recommend using 48 kg if you approve. No further action has been taken.",
+        "The weight limit for container Elm-12 has been recorded as 48 kg."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5r2-a4-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "6d88a9101ce12e90d37e92beff99a7b46b8252ff3b44bc696bc3d19f5435c61c",
+          "request_object_sha256": "c19aeb74291575a5321159bfb4f51f5d418bea43ea350e7ca6919488240d39bd",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-81f2a8edc67a89a1",
+          "generating_request_id": "3a01b30d9b14633fcc9783f2085cb3b09528ea31299ec09ba4fda515d4ce03f2",
+          "original_body_kind": "string",
+          "original_body_hash": "a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "original_body_ref": "body:string:a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@1",
+              "revision": 1,
+              "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+              "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+              "revision": 2,
+              "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5r2-a4-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "17da02d39837b6baeaab2fefd7100d5b3f3d943eec810f00d62648b33e38fae8",
+          "request_object_sha256": "678ad848595f131da8748e84e0fddb147a55b9faf040253759e78a6c2f156ed5",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-81f2a8edc67a89a1",
+          "generating_request_id": "3a01b30d9b14633fcc9783f2085cb3b09528ea31299ec09ba4fda515d4ce03f2",
+          "original_body_kind": "string",
+          "original_body_hash": "a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "original_body_ref": "body:string:a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@1",
+              "revision": 1,
+              "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+              "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+              "revision": 2,
+              "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5r2-a4-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "fdbb54849081fe175f6f192b756c9f011ba72426d8b47561b3e1c3f6131db14c",
+          "request_object_sha256": "f2a3293c47c6f8a595c903d1acd9b2b05f8c1eb273eefd3014c7f33afd8f65e9",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-81f2a8edc67a89a1",
+          "generating_request_id": "3a01b30d9b14633fcc9783f2085cb3b09528ea31299ec09ba4fda515d4ce03f2",
+          "original_body_kind": "string",
+          "original_body_hash": "a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "original_body_ref": "body:string:a3ad92df3ede0aeffbaf984a9c62d2a06ef0f010fc05ecb8fb87f3a69d4d5f26",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@1",
+              "revision": 1,
+              "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+              "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a4-retained_metadata-r1",
+                "a4_selective_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+              "revision": 2,
+              "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "3a01b30d9b14633fcc9783f2085cb3b09528ea31299ec09ba4fda515d4ce03f2",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+          "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+          "item_index": 0,
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@1",
+          "status": "CURRENT",
+          "current_ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "actual_tool_body_ref": "body:string:c43189f1c1be7302357320a0e05f652712e1b2a4875a84dad4215631390c2fd5"
+        },
+        {
+          "request_id": "6d88a9101ce12e90d37e92beff99a7b46b8252ff3b44bc696bc3d19f5435c61c",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+          "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+          "item_index": 0,
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:682cfe53610106ddfbb85023c86dfb9befc5796a31ec50f56bb473b5fc2212d7"
+        },
+        {
+          "request_id": "17da02d39837b6baeaab2fefd7100d5b3f3d943eec810f00d62648b33e38fae8",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+          "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+          "item_index": 0,
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:682cfe53610106ddfbb85023c86dfb9befc5796a31ec50f56bb473b5fc2212d7"
+        },
+        {
+          "request_id": "fdbb54849081fe175f6f192b756c9f011ba72426d8b47561b3e1c3f6131db14c",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+          "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+          "item_index": 0,
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:682cfe53610106ddfbb85023c86dfb9befc5796a31ec50f56bb473b5fc2212d7"
+        }
+      ],
+      "exact_reads": [
+        {
+          "stage": "ser-v21-p5r2-a4-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "6d88a9101ce12e90d37e92beff99a7b46b8252ff3b44bc696bc3d19f5435c61c",
+          "public_message_index": 1,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1189815,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5r2-a4-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "17da02d39837b6baeaab2fefd7100d5b3f3d943eec810f00d62648b33e38fae8",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1553217,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5r2-a4-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a4_selective_rebase",
+          "request_id": "fdbb54849081fe175f6f192b756c9f011ba72426d8b47561b3e1c3f6131db14c",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1335482,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        }
+      ],
+      "primary_revision_count": 2,
+      "delivered_snapshots": [
+        {
+          "request_id": "3a01b30d9b14633fcc9783f2085cb3b09528ea31299ec09ba4fda515d4ce03f2",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "revision": 1,
+          "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@1",
+          "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+          "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "6d88a9101ce12e90d37e92beff99a7b46b8252ff3b44bc696bc3d19f5435c61c",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "revision": 2,
+          "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+          "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "17da02d39837b6baeaab2fefd7100d5b3f3d943eec810f00d62648b33e38fae8",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "revision": 2,
+          "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+          "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "fdbb54849081fe175f6f192b756c9f011ba72426d8b47561b3e1c3f6131db14c",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a4-retained_metadata-r1",
+            "a4_selective_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "c51c81f8-d15e-47e2-8764-ac5a71da376c",
+          "revision": 2,
+          "ref": "memory:c51c81f8-d15e-47e2-8764-ac5a71da376c@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-86a2f77c6ed3148e:tool:0",
+          "source_search_id": "e9b1f619802d372300d27079c84d3a1002ab589504b4acd8f87e174cab381dbf:1:search:1",
+          "delivery_source": "public Store.get"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4543,
+        "output_tokens": 171,
+        "generation_tokens": 4714,
+        "embedding_requests": 3,
+        "embedding_tokens": 80,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 4078514,
+        "projection_cpu_ns": 5769825,
+        "projection_wall_ns": 8490885,
+        "provider_wall_seconds": 1.9513294557109475,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "14ece6c6912986f3ef79651a5c93b15dd801e44136b77dd791011d672b345478",
+        "instrumentation.sqlite": "066847b243660331ffd32853e33468c757bb59eb18edd4fd0f68962838d9bb99",
+        "checkpoints.sqlite": "9d7f9aa9f913513f00f128bc5c4357f0e6f42b670a71b7a0fd79151a38b6e8e4",
+        "run/result.json": "1fa1e897e41f0853ce70a9117e2ed2e72f815316c11c9a567a6da0678fb109a6",
+        "run/fixture-effects.json": "df8a7e290f21bc4652db0534a72d680272de7e7b77ecfcbc3530d9ccef312b93",
+        "prepared.json": "155e9469b6ff3ebad340decd3c5b36d1ca67f765fcf7a5589a4153ea699e8521"
+      }
+    },
+    "a5:retained_metadata": {
+      "case": "retained_metadata",
+      "arm": "a5_rank_bounded_rebase",
+      "status": "PASS",
+      "checks": {
+        "initial_primary_delivery": true,
+        "approved_business_matches_rubric": true,
+        "no_host_memory_writes": true,
+        "mechanical_rebase_set_matches_risk": true,
+        "current_primary_delivered_before_action": true
+      },
+      "business_calls": [
+        {
+          "status": "complete",
+          "name": "record_instruction",
+          "args": {
+            "item": "container Elm-12",
+            "weight_limit_kg": 48
+          },
+          "generation_id": "chatcmpl-8ea318f7e8f74d7a"
+        }
+      ],
+      "ordinary_answers": [
+        "The saved instruction for container Elm-12 specifies a weight limit of 48 kilograms. My recommendation is to maintain this weight limit of 48 kg. Please approve or suggest changes.",
+        "Based on the saved instructions, the weight limit for container Elm-12 is 48 kg. I recommend using 48 kg if you approve. No further action has been taken.",
+        "The weight limit for container Elm-12 has been recorded as 48 kg."
+      ],
+      "host_searches": 1,
+      "searches_after_initial": 0,
+      "lineage_records": 3,
+      "derived_demotions": 3,
+      "mechanical_rebase_precision_counts": [
+        3,
+        3
+      ],
+      "mechanical_rebase_recall_counts": [
+        3,
+        3
+      ],
+      "expected_risk_scope": "All earlier ordinary responses in this fixture's checkpoint remain in each request copy; freshness reconstructed from actual seed IDs and declared external mutation boundaries, verified by revisions/effects.",
+      "rebases": [
+        {
+          "stage": "ser-v21-p5r2-a5-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "906bf8314dfd4bf3a02e9d7c6d867f89ab9bd30c06492bc59e952901a29014fa",
+          "request_object_sha256": "c7f976ce494ccf2b397b6140a409c5db01f33908febbd9d6dbef2b187deedb13",
+          "public_message_index": 1,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-a561053c20daf542",
+          "generating_request_id": "4c1b69fc062f5cc3f039e95733c6a494aad3601d0139d88c4a906a85fd9b42fd",
+          "original_body_kind": "string",
+          "original_body_hash": "4257b5090040ae76f7e8eeea84fa8b3158bf7ae8eff04cce74cda4ef09fcbffe",
+          "original_body_ref": "body:string:4257b5090040ae76f7e8eeea84fa8b3158bf7ae8eff04cce74cda4ef09fcbffe",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@1",
+              "revision": 1,
+              "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+              "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+              "revision": 2,
+              "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5r2-a5-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "55194506d4b6d7be487c3b3bca5c7e741cb56713c11d929c92acc6770ef87410",
+          "request_object_sha256": "5b86f9058b6bed1d390305e515c4e78cfef0bb6754b2fb0681718c7aeed6f369",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-a561053c20daf542",
+          "generating_request_id": "4c1b69fc062f5cc3f039e95733c6a494aad3601d0139d88c4a906a85fd9b42fd",
+          "original_body_kind": "string",
+          "original_body_hash": "4257b5090040ae76f7e8eeea84fa8b3158bf7ae8eff04cce74cda4ef09fcbffe",
+          "original_body_ref": "body:string:4257b5090040ae76f7e8eeea84fa8b3158bf7ae8eff04cce74cda4ef09fcbffe",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@1",
+              "revision": 1,
+              "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+              "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+              "revision": 2,
+              "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        },
+        {
+          "stage": "ser-v21-p5r2-a5-retained_metadata-r1",
+          "event": "derived_output_rebase",
+          "status": "delivered",
+          "request_id": "0869954fa4cec3252b4609be69b14caf9a7079845839d28145bef90a4365ebbf",
+          "request_object_sha256": "a002b769d3df15b811e34703d63c323dab06f2da69363890315f928294dc9372",
+          "public_message_index": 2,
+          "provider_message_index": 4,
+          "message_index": 4,
+          "response_id": "chatcmpl-a561053c20daf542",
+          "generating_request_id": "4c1b69fc062f5cc3f039e95733c6a494aad3601d0139d88c4a906a85fd9b42fd",
+          "original_body_kind": "string",
+          "original_body_hash": "4257b5090040ae76f7e8eeea84fa8b3158bf7ae8eff04cce74cda4ef09fcbffe",
+          "original_body_ref": "body:string:4257b5090040ae76f7e8eeea84fa8b3158bf7ae8eff04cce74cda4ef09fcbffe",
+          "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+          "stale_refs": [
+            {
+              "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+              "delivery_source": "search_memory",
+              "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@1",
+              "revision": 1,
+              "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+              "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+              "status": "SUPERSEDED"
+            }
+          ],
+          "current_refs": [
+            {
+              "namespace": [
+                "langmem",
+                "ser-v21-p5r2-a5-retained_metadata-r1",
+                "a5_rank_bounded_rebase",
+                "development:selective-adaptation"
+              ],
+              "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+              "revision": 2,
+              "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@2",
+              "status": "CURRENT"
+            }
+          ],
+          "unknown_refs": [],
+          "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+        }
+      ],
+      "projection_items": [
+        {
+          "request_id": "4c1b69fc062f5cc3f039e95733c6a494aad3601d0139d88c4a906a85fd9b42fd",
+          "public_index": 0,
+          "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+          "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+          "item_index": 0,
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@1",
+          "status": "CURRENT",
+          "current_ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@1",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "actual_tool_body_ref": "body:string:16c7bf36c6480e34221a7c50d5c38a44948d93568b4136b903ebe15b3cf04b48"
+        },
+        {
+          "request_id": "906bf8314dfd4bf3a02e9d7c6d867f89ab9bd30c06492bc59e952901a29014fa",
+          "public_index": 1,
+          "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+          "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+          "item_index": 0,
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:670e5e3f03e2e3b739a6abda4d23fa96dd92ba4db728b6cf5dcd2dcf85fe66e5"
+        },
+        {
+          "request_id": "55194506d4b6d7be487c3b3bca5c7e741cb56713c11d929c92acc6770ef87410",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+          "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+          "item_index": 0,
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:670e5e3f03e2e3b739a6abda4d23fa96dd92ba4db728b6cf5dcd2dcf85fe66e5"
+        },
+        {
+          "request_id": "0869954fa4cec3252b4609be69b14caf9a7079845839d28145bef90a4365ebbf",
+          "public_index": 2,
+          "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+          "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+          "item_index": 0,
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@1",
+          "status": "SUPERSEDED",
+          "current_ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@2",
+          "current_body_delivered": true,
+          "source_body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "projected_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "exact_read_index": 0,
+          "refresh_status": "BOUND_CURRENT",
+          "delivery_source": "public Store.get",
+          "actual_tool_body_ref": "body:string:670e5e3f03e2e3b739a6abda4d23fa96dd92ba4db728b6cf5dcd2dcf85fe66e5"
+        }
+      ],
+      "exact_reads": [
+        {
+          "stage": "ser-v21-p5r2-a5-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "906bf8314dfd4bf3a02e9d7c6d867f89ab9bd30c06492bc59e952901a29014fa",
+          "public_message_index": 1,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1156566,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5r2-a5-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "55194506d4b6d7be487c3b3bca5c7e741cb56713c11d929c92acc6770ef87410",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1367474,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        },
+        {
+          "stage": "ser-v21-p5r2-a5-retained_metadata-r1",
+          "event": "freshness_exact_read",
+          "arm": "a5_rank_bounded_rebase",
+          "request_id": "0869954fa4cec3252b4609be69b14caf9a7079845839d28145bef90a4365ebbf",
+          "public_message_index": 2,
+          "provider_delivery": false,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "expected_revision": 2,
+          "source": "public Store.get",
+          "refresh_ttl": false,
+          "wall_ns": 1179851,
+          "status": "BOUND_CURRENT",
+          "returned_body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "error_type": null
+        }
+      ],
+      "primary_revision_count": 2,
+      "delivered_snapshots": [
+        {
+          "request_id": "4c1b69fc062f5cc3f039e95733c6a494aad3601d0139d88c4a906a85fd9b42fd",
+          "public_index": 0,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "revision": 1,
+          "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@1",
+          "body_ref": "body:string:01e04389b9c5a1888107b23842a178b946368c32bedb963d6c3e189ca8c9f42c",
+          "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+          "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+          "delivery_source": "search_memory"
+        },
+        {
+          "request_id": "906bf8314dfd4bf3a02e9d7c6d867f89ab9bd30c06492bc59e952901a29014fa",
+          "public_index": 1,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "revision": 2,
+          "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+          "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "55194506d4b6d7be487c3b3bca5c7e741cb56713c11d929c92acc6770ef87410",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "revision": 2,
+          "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+          "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+          "delivery_source": "public Store.get"
+        },
+        {
+          "request_id": "0869954fa4cec3252b4609be69b14caf9a7079845839d28145bef90a4365ebbf",
+          "public_index": 2,
+          "namespace": [
+            "langmem",
+            "ser-v21-p5r2-a5-retained_metadata-r1",
+            "a5_rank_bounded_rebase",
+            "development:selective-adaptation"
+          ],
+          "memory_id": "a3555c1f-2d97-4b19-b212-f62c19c1671e",
+          "revision": 2,
+          "ref": "memory:a3555c1f-2d97-4b19-b212-f62c19c1671e@2",
+          "body_ref": "body:string:a5984a0e24029e93ce3b14c4fd3b311a8be6775ff09d805947aec648ec30312a",
+          "source_tool_call": "chatcmpl-ae162d9051e5ab4f:tool:0",
+          "source_search_id": "21974c5130fed0b869be729fea367452780f63b3a89845b6a42eb80884022fb7:1:search:1",
+          "delivery_source": "public Store.get"
+        }
+      ],
+      "cost": {
+        "generations": 5,
+        "input_tokens": 4567,
+        "output_tokens": 172,
+        "generation_tokens": 4739,
+        "embedding_requests": 3,
+        "embedding_tokens": 80,
+        "exact_reads": 3,
+        "exact_read_wall_ns": 3703891,
+        "projection_cpu_ns": 5646324,
+        "projection_wall_ns": 8726384,
+        "provider_wall_seconds": 1.9510794687084854,
+        "unknown_usage": 0,
+        "truncations": 0
+      },
+      "checkpoint_originals_verified": true,
+      "artifact_sha256": {
+        "trace.jsonl": "6e3f3a59165ae2ae749177806a9907fd69b6a11ce9ba40595ba8aebc43e8af96",
+        "instrumentation.sqlite": "42304610fb4482deaf1608d85a575344270edad046b2fa31fc1d00295a7ea87d",
+        "checkpoints.sqlite": "4c06ba9628a338018f85707f652307e8159e13a8dc9a0d8d428eef0a81a925a7",
+        "run/result.json": "fa8c245011ae9a6fb0a638113b02f72d992a5c1a0456c019de0f7989084db80f",
+        "run/fixture-effects.json": "0cd68dae1b7a1464881e1992a7c33bdb5d47524c695ff31f707cc1f0217cd73b",
+        "prepared.json": "e48bfd2a5159e97bcfd6b655075bef78898003c3b645017615c69620f1278d35"
+      }
+    }
+  },
+  "totals": {
+    "generations": 20,
+    "input_tokens": 18110,
+    "output_tokens": 706,
+    "generation_tokens": 18816,
+    "embedding_requests": 12,
+    "embedding_tokens": 298,
+    "exact_reads": 12,
+    "exact_read_wall_ns": 16460594,
+    "projection_cpu_ns": 24622646,
+    "projection_wall_ns": 33642505,
+    "provider_wall_seconds": 8.145301550161093,
+    "unknown_usage": 0,
+    "truncations": 0
+  },
+  "continuous_budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 91,
+    "generation": {
+      "charged_tokens": 84143,
+      "known_tokens": 84143,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 1333,
+      "known_tokens": 1333,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "master_goal_complete": false,
+  "judge_requests": 0,
+  "manual_review": "Root must read terminal missing/conflict answers and preserve unsupported intermediate claims before publishing final gate conclusions."
+}

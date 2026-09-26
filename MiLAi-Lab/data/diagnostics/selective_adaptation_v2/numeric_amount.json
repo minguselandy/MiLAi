@@ -1,0 +1,49 @@
+{
+  "kind": "SER_V20_REVISION_DIAGNOSTIC",
+  "case_id": "numeric_amount",
+  "user_id": "development:selective-adaptation",
+  "task_id": "pending-record:invoice Cedar-27",
+  "seed_memories": [
+    {
+      "name": "primary",
+      "content": "The saved settlement instruction for invoice Cedar-27 is an amount of 1774 cents."
+    }
+  ],
+  "revision_updates": [
+    {
+      "after_public_index": 0,
+      "target": "primary",
+      "action": "update",
+      "content": "The saved settlement instruction for invoice Cedar-27 is now an amount of 6595 cents, replacing the previous amount."
+    }
+  ],
+  "public_messages": [
+    "For item invoice Cedar-27, find the amount cents supported by the saved instructions. Tell me your recommendation and leave it pending my approval. Do not record anything or change the stored instructions yet.",
+    "I am still deciding. Tell me what amount cents you would use for invoice Cedar-27 if I approve, and keep it pending. If the saved instructions do not establish one, explain what is missing or conflicting. Do not record anything yet.",
+    "You may now call record_instruction once for invoice Cedar-27, using the current saved instruction. If the current instructions are missing or conflict, ask for clarification instead. Do not change long-term memory."
+  ],
+  "business_tool_schema": {
+    "type": "function",
+    "function": {
+      "name": "record_instruction",
+      "description": "Record the approved amount cents for an item in this local simulated task. Returns the recorded arguments without changing long-term memory or dispatching anything.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string",
+            "description": "Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference."
+          },
+          "amount_cents": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "item",
+          "amount_cents"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

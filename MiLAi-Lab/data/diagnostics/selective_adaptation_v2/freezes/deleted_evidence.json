@@ -1,0 +1,11 @@
+{
+  "kind": "SER_DIAGNOSTIC_INPUT_FREEZE",
+  "status": "FROZEN_BEFORE_NEW_REQUESTS",
+  "case_id": "deleted_evidence",
+  "fixture_sha256": "652407db6eb74465c9f2e3e734aab9ba35a89bb08f075bbd3046169272a600be",
+  "public_messages": 3,
+  "rubric_sha256": "477f20ab9b2b12d436b710e27dffcef6d3a38f6eeb678043d03b1126b74f483c",
+  "runtime_reads_rubric": false,
+  "v1_fixture_sha256": "b837a4ab5fdb2c0ee17cc0512c9dac907d9e353fb6f4b7d15d2d15d32da613b0",
+  "sole_contract_change": "Copy the complete item reference from the user request, including its type word and identifier. Do not shorten or normalize the reference."
+}
