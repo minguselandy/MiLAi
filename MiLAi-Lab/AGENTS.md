@@ -36,6 +36,24 @@ canonical memory state.
 
 ## Required checks
 
+The user-authorized [v18 pivot plan](docs/MILA_LANGMEM_M1_PIVOT_V18_DEVELOPMENT_PLAN_20260926.md)
+is delivered with [Goal v18](docs/MILA_LANGMEM_M1_PIVOT_GOAL_v18.md)
+`STOPPED_M1_RECHECK_NOT_JUSTIFIED`; preserve the [results](docs/MILA_LANGMEM_M1_PIVOT_V18_RESULTS_20260926.md)
+and [reproduction entry](docs/MILA_LANGMEM_M1_PIVOT_V18_REPRODUCTION_20260926.md).
+Proposition/support roles/completion/persistence are implemented and V0/probes passed.
+Final mapping is `657b0060d8c31385fc6bbe99fdb1a42b9d4815376103983348b4038d9ef6533e`.
+All three R2 small runs failed on their second public message: two no-pending completion
+claims and one 4096-token truncation. No search, accepted Basis/adoption, recheck trigger,
+or business execution occurred. Do not treat zero triggers as selective success, undefined
+0/0 grounding as perfect, or earlier interruption as improvement. V4/V5 are NOT_RUN_GATE_NOT_MET;
+M2 is not admitted. The precise section35 notified-stale-action criterion did not occur.
+Preserve R1's schema-combination failure and every cost: 16 generations / 19237 tokens /
+267 embedding tokens, unknown=0, Judge=0, truncation=1. No further semantic rescue runs,
+fields, longer prompts, automatic search, reviewer or Attention under this completed scope.
+One existing Sol xhigh owned code/config/tests/CI; Root owns all real requests and evidence;
+Luna high retains authorized publication. All vLLM settings and old v17 locks/results/ledger
+remain unchanged. Do not rerun models/tests/build for publication. Raw artifacts remain ignored.
+
 The user explicitly requested execution of the full 1553-line
 [v17 M1 plan](docs/MILA_LANGMEM_M1_V17_DEVELOPMENT_PLAN_20260926.md).
 Current [Goal v17](docs/MILA_LANGMEM_M1_GOAL_v17.md): `COMPLETE_WITH_M1_LIMITATIONS`.

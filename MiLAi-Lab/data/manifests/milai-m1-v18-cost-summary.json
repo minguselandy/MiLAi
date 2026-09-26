@@ -1,0 +1,123 @@
+{
+  "kind": "MILAI_M1_V18_CONTINUOUS_COST",
+  "status": "SEALED",
+  "runs": {
+    "decoder-probe-r1": {
+      "generations": 6,
+      "input_tokens": 4965,
+      "output_tokens": 669,
+      "generation_tokens": 5634,
+      "embedding_requests": 0,
+      "embedding_tokens": 0,
+      "unknown_usage": 0,
+      "truncations": 0,
+      "provider_wall_seconds": 5.534025682602078
+    },
+    "decoder-probe-r2": {
+      "generations": 3,
+      "input_tokens": 2470,
+      "output_tokens": 322,
+      "generation_tokens": 2792,
+      "embedding_requests": 0,
+      "embedding_tokens": 0,
+      "unknown_usage": 0,
+      "truncations": 0,
+      "provider_wall_seconds": 2.5491172880865633
+    },
+    "final-changed-r1": {
+      "generations": 1,
+      "input_tokens": 822,
+      "output_tokens": 93,
+      "generation_tokens": 915,
+      "embedding_requests": 1,
+      "embedding_tokens": 32,
+      "unknown_usage": 0,
+      "truncations": 0,
+      "provider_wall_seconds": 1.2703322800807655
+    },
+    "final-changed-r2": {
+      "generations": 2,
+      "input_tokens": 1733,
+      "output_tokens": 319,
+      "generation_tokens": 2052,
+      "embedding_requests": 2,
+      "embedding_tokens": 73,
+      "unknown_usage": 0,
+      "truncations": 0,
+      "provider_wall_seconds": 2.54620726313442
+    },
+    "final-irrelevant-r2": {
+      "generations": 2,
+      "input_tokens": 1733,
+      "output_tokens": 4182,
+      "generation_tokens": 5915,
+      "embedding_requests": 3,
+      "embedding_tokens": 70,
+      "unknown_usage": 0,
+      "truncations": 1,
+      "provider_wall_seconds": 26.49278125213459
+    },
+    "final-retained-r2": {
+      "generations": 2,
+      "input_tokens": 1733,
+      "output_tokens": 196,
+      "generation_tokens": 1929,
+      "embedding_requests": 2,
+      "embedding_tokens": 92,
+      "unknown_usage": 0,
+      "truncations": 0,
+      "provider_wall_seconds": 1.6567195034585893
+    }
+  },
+  "totals": {
+    "generations": 16,
+    "input_tokens": 13456,
+    "output_tokens": 5781,
+    "generation_tokens": 19237,
+    "embedding_requests": 8,
+    "embedding_tokens": 267,
+    "unknown_usage": 0,
+    "truncations": 1,
+    "provider_wall_seconds": 40.04918326949701
+  },
+  "judge_requests": 0,
+  "independent_state_generations": 0,
+  "ledger_sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+  "history": {
+    "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+    "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+    "generation_requests": 101,
+    "generation_known_tokens": 101810,
+    "generation_charged_tokens": 101810,
+    "embedding_tokens": 916,
+    "unknown_usage": 0,
+    "sealed": true,
+    "earlier_history": {
+      "ledger": "artifacts/langmem-provenance/v16-budget.json",
+      "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+      "generation_requests": 55,
+      "generation_known_tokens": 40072,
+      "generation_charged_tokens": 40072,
+      "embedding_tokens": 443,
+      "unknown_usage": 0,
+      "judge_requests": 0,
+      "sealed": true,
+      "earlier_v15": {
+        "ledger": "artifacts/langmem-foundation/v15-budget.json",
+        "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+        "generation_requests": 108,
+        "generation_known_tokens": 71846,
+        "generation_unknown_reservation": 4891,
+        "generation_charged_tokens": 76737,
+        "embedding_tokens": 836,
+        "unknown_usage": 1,
+        "judge_requests": 0,
+        "sealed": true
+      }
+    }
+  },
+  "source_mapping_sha256": "657b0060d8c31385fc6bbe99fdb1a42b9d4815376103983348b4038d9ef6533e",
+  "dollar_cost": "NOT_MEASURED_LOCAL_VLLM",
+  "development_agent_usage_included": false,
+  "no_cost_reset": true
+}

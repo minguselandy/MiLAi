@@ -3,7 +3,18 @@
 MiLAi Lab is the independent research, evaluation, and benchmarking repository for
 MiLAi. It is intentionally separate from the deployable product.
 
-Latest scoped delivery: [M1 Goal v17](docs/MILA_LANGMEM_M1_GOAL_v17.md), implementing the complete
+Latest scoped delivery: [M1 pivot Goal v18](docs/MILA_LANGMEM_M1_PIVOT_GOAL_v18.md), executing
+the [v18 plan](docs/MILA_LANGMEM_M1_PIVOT_V18_DEVELOPMENT_PLAN_20260926.md).
+Status: `STOPPED_M1_RECHECK_NOT_JUSTIFIED`. Proposition/support roles/completion/persistence
+are implemented through the existing adapter; vLLM settings remain unchanged. V0 and decoder
+probes passed, but all three small R2 runs stopped before establishing a Basis: two invalid
+completion claims and one truncated output. No recheck or business action completed.
+Conditional 12/20 and MERIT runs were not started; M2 is not admitted. All costs are preserved:
+16 generations / 19237 tokens / 267 embedding tokens, including R1 failure and probes.
+See [results](docs/MILA_LANGMEM_M1_PIVOT_V18_RESULTS_20260926.md) and
+[reproduction](docs/MILA_LANGMEM_M1_PIVOT_V18_REPRODUCTION_20260926.md). No publication reruns.
+
+Previous scoped delivery: [M1 Goal v17](docs/MILA_LANGMEM_M1_GOAL_v17.md), implementing the complete
 [v17 plan](docs/MILA_LANGMEM_M1_V17_DEVELOPMENT_PLAN_20260926.md).
 Status: `COMPLETE_WITH_M1_LIMITATIONS`; decision: PIVOT before M2. The opt-in adapter adds one
 persistent task-local Basis, exact delivered-evidence adoption and program-owned recheck,

@@ -48,7 +48,8 @@ def _fixture_memory_effect(
         ensure_ascii=False,
     ).encode()).hexdigest()
     entries[stage] = {"status": "pending", "arguments": arguments,
-                      "origin": ("FIXTURE_CONTROLLED_SEED" if stage == "seed" else
+                      "origin": ("FIXTURE_CONTROLLED_SEED" if stage == "seed"
+                                 or stage.startswith("seed:") else
                                  "FIXTURE_CONTROLLED_EXTERNAL_UPDATE" if
                                  stage == "external_update" else
                                  "FIXTURE_CONTROLLED_EXTERNAL_EFFECT")}
@@ -60,7 +61,7 @@ def _fixture_memory_effect(
     )
     entries[stage].update({"status": "complete", "result": result,
                            "call_key": call_key})
-    if stage == "seed":
+    if stage == "seed" or stage.startswith("seed:"):
         memory_id = result.rsplit(" ", 1)[-1]
         entries[stage]["memory_id"] = str(uuid.UUID(memory_id))
     write_json(journal_path, entries)
@@ -119,16 +120,25 @@ def run_mechanism(
     write_json(progress_path, progress)
     messages: list[Any] = []
     try:
-        seed = _fixture_memory_effect(
-            "seed", {"action": "create", "content": fixture["seed_memory"]["content"]},
-            scope, store, observer, output, model,
-        )
-        memory_id = seed["memory_id"]
+        if "seed_memories" in fixture:
+            seeds = fixture["seed_memories"]
+        else:
+            seeds = [{"name": "primary", "content": fixture["seed_memory"]["content"]}]
+        memory_ids = {}
+        for seed_item in seeds:
+            stage = ("seed:" + seed_item["name"] if "seed_memories" in fixture
+                     else "seed")
+            seed = _fixture_memory_effect(
+                stage, {"action": "create", "content": seed_item["content"]},
+                scope, store, observer, output, model,
+            )
+            memory_ids[seed_item["name"]] = seed["memory_id"]
         for index in range(cast(int, progress["next_turn"]), len(fixture["public_messages"])):
             if index > fixture["revision_update"]["after_public_index"]:
+                target = fixture["revision_update"].get("target", "primary")
                 _fixture_memory_effect(
                     "external_update",
-                    {"action": "update", "id": memory_id,
+                    {"action": "update", "id": memory_ids[target],
                      "content": fixture["revision_update"]["content"]},
                     scope, store, observer, output, model,
                 )

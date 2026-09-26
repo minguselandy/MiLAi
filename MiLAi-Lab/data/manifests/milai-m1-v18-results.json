@@ -1,0 +1,344 @@
+{
+  "kind": "MILAI_M1_V18_RESULTS",
+  "status": "STOPPED_M1_RECHECK_NOT_JUSTIFIED",
+  "experiment_arm_kind": "RESEARCH_PROTOTYPE",
+  "reference_commit": "9438d1349b5f7988ca86f491ad489eefa87becd3",
+  "source_mapping_sha256": "657b0060d8c31385fc6bbe99fdb1a42b9d4815376103983348b4038d9ef6533e",
+  "lock_sha256": "200e8119ee09b1b8cbb5085e51f21c2b11c76755f5c5b335f3a09f1c48d54c11",
+  "final_freeze_sha256": "20407ea9ec505e7361dee8fdc8b5e33577bed9fb1d095982747254cf708dd9c2",
+  "implementation_complete": true,
+  "v0_pass": true,
+  "deployed_protocol_probes": {
+    "r1_six_branches": "PASS",
+    "r2_three_changed_calls_branches": "PASS"
+  },
+  "runs": {
+    "changed": {
+      "run_id": "v18-m1-changed-r2",
+      "status": "FAILED_INCOMPLETE",
+      "interruption": {
+        "error_type": "DecisionDeltaError",
+        "error": "DECISION_RECHECK_OUTCOME_WITHOUT_PENDING",
+        "completed_messages": 1,
+        "public_message_index": 1
+      },
+      "planned_public_messages": 3,
+      "public_messages_attempted": 2,
+      "approved_action_turn_reached": false,
+      "host_searches": 0,
+      "host_memory_operations": 0,
+      "business_actions_executed": 0,
+      "accepted_basis_sets": 0,
+      "adopted_refs": 0,
+      "revision_triggers": 0,
+      "recheck_projected": 0,
+      "recheck_completed": 0,
+      "mechanism_full_chain_pass": false,
+      "origin": "RESEARCH_PROTOTYPE_CONTROLLED_FIXTURE",
+      "benchmark_score": false,
+      "sidecar_counts": {
+        "observations": 2,
+        "tool_calls": 2,
+        "operations": 2,
+        "revisions": 2,
+        "searches": 0,
+        "requests": 2,
+        "request_material": 0
+      },
+      "state_metrics": {
+        "event_counts": {
+          "NO_STATE_CHANGE": 1,
+          "DELTA_REJECTED": 1
+        },
+        "delta_statuses": {
+          "NO_STATE_CHANGE": 1,
+          "ERROR": 1
+        },
+        "basis_present_after": 0,
+        "adopted_binding_occurrences": 0,
+        "write_transactions": {
+          "total": 3,
+          "by_operation": {
+            "activate": 1,
+            "apply_delta": 1,
+            "reject_delta": 1
+          }
+        },
+        "sqlite_bytes": 45056,
+        "sqlite_wal_bytes": 0
+      },
+      "token_fragments": {
+        "context_tokens": 96,
+        "delta_field_tokens": 195,
+        "completion_outcome_field_tokens": 10,
+        "unresolved_outcome_field_tokens": 0,
+        "fixed_protocol_tokens_per_request": 263,
+        "fixed_protocol_tokens_total": 526,
+        "unparseable_output_tokens": 0
+      },
+      "cost": {
+        "generations": 2,
+        "input_tokens": 1733,
+        "output_tokens": 319,
+        "generation_tokens": 2052,
+        "embedding_requests": 2,
+        "embedding_tokens": 73,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "provider_wall_seconds": 2.54620726313442
+      },
+      "artifact_sha256": {
+        "final-changed-r2/trace.jsonl": "b7c2a646f3777e1d294e19a4d58b77e36a7426371172efb0df79184f663a9857",
+        "final-changed-r2/decision-basis.sqlite": "cb658b22486468475167b62165e9b89ecc2f91bfacb8143fa97f486b2a7bc97f",
+        "final-changed-r2/instrumentation.sqlite": "3aff07e68bd74beae255e375b0455ff8ecd96328582d4d2e391d2f6383c072cc",
+        "final-changed-r2/run/interruption.json": "7f05aa2f166008f738a44c0fa0ee7e2c549edafa1fdc581cb2174e6559456e2e",
+        "final-changed-r2/run/progress.json": "5ca2c9aeff18491ab3a1204675991b9a977d1c4ec81da0042118c325692096af",
+        "final-changed-r2/run/fixture-effects.json": "e976e7247d6e45cea5b581f996f5e90d0195b2332d13df7549efe3ac3d31d19a",
+        "final-changed-r2/run/run-identity.json": "656aba12b1b8318807232ca6919e960619f7fd21f5aa73fa66d7f212d6eb034c"
+      },
+      "manual_observation": "First reply falsely claimed saved instruction checked without search, cleared empty state as task_ended. Second reply proposed completed retained clear with 4 C and attempted business action before approval; no pending, so protocol rejected and no action executed."
+    },
+    "retained": {
+      "run_id": "v18-m1-retained-r2",
+      "status": "FAILED_INCOMPLETE",
+      "interruption": {
+        "error_type": "DecisionDeltaError",
+        "error": "DECISION_RECHECK_OUTCOME_WITHOUT_PENDING",
+        "completed_messages": 1,
+        "public_message_index": 1
+      },
+      "planned_public_messages": 3,
+      "public_messages_attempted": 2,
+      "approved_action_turn_reached": false,
+      "host_searches": 0,
+      "host_memory_operations": 0,
+      "business_actions_executed": 0,
+      "accepted_basis_sets": 0,
+      "adopted_refs": 0,
+      "revision_triggers": 0,
+      "recheck_projected": 0,
+      "recheck_completed": 0,
+      "mechanism_full_chain_pass": false,
+      "origin": "RESEARCH_PROTOTYPE_CONTROLLED_FIXTURE",
+      "benchmark_score": false,
+      "sidecar_counts": {
+        "observations": 2,
+        "tool_calls": 2,
+        "operations": 2,
+        "revisions": 2,
+        "searches": 0,
+        "requests": 2,
+        "request_material": 0
+      },
+      "state_metrics": {
+        "event_counts": {
+          "NO_STATE_CHANGE": 1,
+          "DELTA_REJECTED": 1
+        },
+        "delta_statuses": {
+          "NO_STATE_CHANGE": 1,
+          "ERROR": 1
+        },
+        "basis_present_after": 0,
+        "adopted_binding_occurrences": 0,
+        "write_transactions": {
+          "total": 3,
+          "by_operation": {
+            "activate": 1,
+            "apply_delta": 1,
+            "reject_delta": 1
+          }
+        },
+        "sqlite_bytes": 45056,
+        "sqlite_wal_bytes": 0
+      },
+      "token_fragments": {
+        "context_tokens": 96,
+        "delta_field_tokens": 118,
+        "completion_outcome_field_tokens": 9,
+        "unresolved_outcome_field_tokens": 0,
+        "fixed_protocol_tokens_per_request": 263,
+        "fixed_protocol_tokens_total": 526,
+        "unparseable_output_tokens": 0
+      },
+      "cost": {
+        "generations": 2,
+        "input_tokens": 1733,
+        "output_tokens": 196,
+        "generation_tokens": 1929,
+        "embedding_requests": 2,
+        "embedding_tokens": 92,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "provider_wall_seconds": 1.6567195034585893
+      },
+      "artifact_sha256": {
+        "final-retained-r2/trace.jsonl": "71e372a0fa684ee945411f5eda074214b769d2aca7be155e944b9327db0e709f",
+        "final-retained-r2/decision-basis.sqlite": "61e84cc3ab04943fcc83bed15386354196b2e71ee6bddfae88d3459cfa2d9d82",
+        "final-retained-r2/instrumentation.sqlite": "3da64ccd25a1c4329bf853572e9f488dbc1bc4988981e13f3b26993fbc8602d6",
+        "final-retained-r2/run/interruption.json": "dfa9e482c26ab2dcfbbf96452070880464e6d24494b7aacf3ab9c45d8035835d",
+        "final-retained-r2/run/progress.json": "5ca2c9aeff18491ab3a1204675991b9a977d1c4ec81da0042118c325692096af",
+        "final-retained-r2/run/fixture-effects.json": "9476ebba7e61c0f65d248812344ef1d65abd7cbf2d08795d159eecd9f9dd81ac",
+        "final-retained-r2/run/run-identity.json": "b774c5f4c2422aae11e609737db673ff4a610140ccea16321ba71a6f9c91e544"
+      },
+      "manual_observation": "Same unsupported first claim. Second reply asserted 4 C despite fixture remaining 8 C, with contextual e0 and retained completion without pending; rejected. Actual current memory was never retrieved."
+    },
+    "irrelevant": {
+      "run_id": "v18-m1-irrelevant-r2",
+      "status": "FAILED_INCOMPLETE",
+      "interruption": {
+        "error_type": "IncompleteChatResponse",
+        "error": "VLLM_CHAT_TRUNCATED",
+        "completed_messages": 1,
+        "public_message_index": 1
+      },
+      "planned_public_messages": 3,
+      "public_messages_attempted": 2,
+      "approved_action_turn_reached": false,
+      "host_searches": 0,
+      "host_memory_operations": 0,
+      "business_actions_executed": 0,
+      "accepted_basis_sets": 0,
+      "adopted_refs": 0,
+      "revision_triggers": 0,
+      "recheck_projected": 0,
+      "recheck_completed": 0,
+      "mechanism_full_chain_pass": false,
+      "origin": "RESEARCH_PROTOTYPE_CONTROLLED_FIXTURE",
+      "benchmark_score": false,
+      "sidecar_counts": {
+        "observations": 2,
+        "tool_calls": 3,
+        "operations": 3,
+        "revisions": 3,
+        "searches": 0,
+        "requests": 2,
+        "request_material": 0
+      },
+      "state_metrics": {
+        "event_counts": {
+          "NO_STATE_CHANGE": 1
+        },
+        "delta_statuses": {
+          "NO_STATE_CHANGE": 1
+        },
+        "basis_present_after": 0,
+        "adopted_binding_occurrences": 0,
+        "write_transactions": {
+          "total": 2,
+          "by_operation": {
+            "activate": 1,
+            "apply_delta": 1
+          }
+        },
+        "sqlite_bytes": 45056,
+        "sqlite_wal_bytes": 0
+      },
+      "token_fragments": {
+        "context_tokens": 96,
+        "delta_field_tokens": 27,
+        "completion_outcome_field_tokens": 0,
+        "unresolved_outcome_field_tokens": 0,
+        "fixed_protocol_tokens_per_request": 263,
+        "fixed_protocol_tokens_total": 526,
+        "unparseable_output_tokens": 4096
+      },
+      "cost": {
+        "generations": 2,
+        "input_tokens": 1733,
+        "output_tokens": 4182,
+        "generation_tokens": 5915,
+        "embedding_requests": 3,
+        "embedding_tokens": 70,
+        "unknown_usage": 0,
+        "truncations": 1,
+        "provider_wall_seconds": 26.49278125213459
+      },
+      "artifact_sha256": {
+        "final-irrelevant-r2/trace.jsonl": "bb53a39c3ef5910231cf6cb0ecb6b8e9ad40e390c48214b5443890f1ff30a2fd",
+        "final-irrelevant-r2/decision-basis.sqlite": "6f0e31862bf19c0ddaf7407a7bf228545adec0ad03b1df62365cead714f1cffe",
+        "final-irrelevant-r2/instrumentation.sqlite": "5c88db3f12d29399431597d774e03cb0b28a6057a4235315ab70e59ca8ad9c7c",
+        "final-irrelevant-r2/run/interruption.json": "2dad1b15219ecbcc26335977ddd7ff1921d2103b837a12212c03ac44961648d0",
+        "final-irrelevant-r2/run/progress.json": "5ca2c9aeff18491ab3a1204675991b9a977d1c4ec81da0042118c325692096af",
+        "final-irrelevant-r2/run/fixture-effects.json": "ab79868936a397103874fa9d2295edae0a5a74ffa97ea96a9f93817683d7363d",
+        "final-irrelevant-r2/run/run-identity.json": "448057e4aff55da2c4037bc2626c6ed21a650fb06f2c9242e54c36849db3ce90"
+      },
+      "manual_observation": "Same unsupported first claim. Second reply began completed-clear proposition 4 C, then repeated whitespace inside critical_parameters until 4096 output-token truncation. No state delta or tools executed for it."
+    }
+  },
+  "metrics": {
+    "accepted_propositions": 0,
+    "proposition_quality": {
+      "numerator": 0,
+      "denominator": 0,
+      "status": "NOT_ESTIMABLE_NO_ACCEPTED_BASIS"
+    },
+    "label_like_rate": {
+      "numerator": 0,
+      "denominator": 0,
+      "status": "NOT_ESTIMABLE"
+    },
+    "supports_value_coverage": {
+      "numerator": 0,
+      "denominator": 0,
+      "status": "NOT_ESTIMABLE"
+    },
+    "adoption_validity": {
+      "numerator": 0,
+      "denominator": 0,
+      "status": "NOT_ESTIMABLE"
+    },
+    "pre_request_active_basis": {
+      "numerator": 0,
+      "denominator": 6
+    },
+    "post_accepted_reply_active_basis": {
+      "numerator": 0,
+      "denominator": 3
+    },
+    "completed_rechecks": {
+      "numerator": 0,
+      "denominator": 0,
+      "status": "NO_TRIGGER_ESTABLISHED"
+    },
+    "full_chain_instances": {
+      "numerator": 0,
+      "denominator": 3
+    },
+    "ordinary_null_non_intervention": "NOT_ASSESSED_CONDITIONAL_DIAGNOSTIC_NOT_RUN",
+    "critical_parameter_notes": "Rejected concrete 4 C propositions had no actual value-supporting memory; literal parameter name \"4\" also fails the intended semantic naming. These uncommitted outputs do not establish proposition improvement.",
+    "context_input_tokens": 288,
+    "parseable_delta_field_output_tokens": 340,
+    "declared_completion_field_tokens_rejected": 19,
+    "accepted_completion_field_tokens": 0,
+    "unparseable_response_output_tokens": 4096,
+    "fixed_protocol_fragment_tokens_per_request": 263,
+    "fixed_protocol_fragment_tokens_total": 1578,
+    "sqlite_bytes_total": 135168,
+    "sqlite_application_write_transactions_total": 8,
+    "write_transaction_exclusions": "DDL, format initialization and runtime/sidecar/checkpoint files; counts cover instrumented Decision state operations only",
+    "token_fragment_warning": "Fragments use pinned tokenizer and are already within provider usage; they are not additive exact marginal billing. Truncated delta cannot be parsed; all 4096 response tokens remain fully charged.",
+    "context_count_method": "Exact delivered m1_decision_context text, each confirmed as a substring of actual provider system request; excludes base system prompt."
+  },
+  "conditional_gates": {
+    "V4": "NOT_RUN_GATE_NOT_MET",
+    "V5": "NOT_RUN_GATE_NOT_MET",
+    "M2": "NOT_ADMITTED",
+    "changed": "FAIL",
+    "retained": "FAIL",
+    "irrelevant": "FAIL_INCOMPLETE",
+    "strict_section35_condition_met": false,
+    "strict_section35_reason": "No adopted Basis or delivered revision trigger; proposed stale 4 was rejected before execution. Do not claim the specific notified-stale-action kill criterion occurred.",
+    "decision": "STOP_CURRENT_M1_LINE_AS_NOT_JUSTIFIED",
+    "terminal_status": "STOPPED_M1_RECHECK_NOT_JUSTIFIED",
+    "further_semantic_rescue_runs": false
+  },
+  "cost_summary_sha256": "4d2e7b37b9be8cdb82cb4e67c649b84f07cba546c1ac5af7b183beaebd1d1dca",
+  "r1_failure_manifest_sha256": "b3ca2325f3d83cbd2efb7b82e5a8336212fea88158080eef6d0f5dbe9f8d4b71",
+  "vllm_settings_changed": false,
+  "environment_after_sha256": "a081d5eb4dd99566d43d5b8460fa826ad59fa9cbc0166a63b5f59b33d65eb1c8",
+  "all_failed_runs_preserved": true,
+  "fresh_holdouts_consumed": false,
+  "new_seeds_consumed": false,
+  "product_schema_api_permissions_canonical_changes": false
+}

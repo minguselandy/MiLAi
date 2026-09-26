@@ -1,0 +1,157 @@
+{
+  "kind": "MILAI_M1_V18_VERIFICATION",
+  "status": "PASS",
+  "v0": {
+    "status": "SOURCE_FREEZE_READY_ZERO_MODEL",
+    "runtime_changed_or_new_sha256": {
+      "configs/milai-m1-v18.json": "5c5154b04f6b082274ca4480f5656c4aae89e67691e46c984b85f39b2a56bbf6",
+      "pyproject.toml": "87b8ac91b9623ebf027a9c5e3515ca32903bb65215f157dc2166a6d59fad47df",
+      "src/milai_lab/methods/milai_m1/controller.py": "01b9fc8ef43cb0190709d63b91408e976b0845decf3eb19705cbb419f20f454a",
+      "src/milai_lab/methods/milai_m1/decision_basis.py": "07e28bc44c57cb7fc27cc6969bf16dce500449cb1cdef195143297ac3b4d38e7",
+      "src/milai_lab/methods/milai_m1/identity.py": "7ca19d497b28a0c76ebed245124b45295bf216ba292564918af74ab9a0c24b53",
+      "src/milai_lab/methods/milai_m1/recheck.py": "2c7a4b7f544cbbfed2579e5f5c80cc46bf5a6d6295019a87c6835bab959bfc7d",
+      "src/milai_lab/methods/milai_m1/state_store.py": "165f9c22801764ca98d63e8fc6a13793d3cb4b48dbfc785d9c4bd42b19dddcfd",
+      "src/milai_lab/providers/langmem_chat.py": "6ff9f9fbfea5b0c1f2184030d15fc2a3c3ebad95d70e90e54641cddb2d9f1cd6",
+      "src/milai_lab/runners/langmem_m1_mechanism.py": "7e63784ddac75263e3a7094406535a6bcdf4580d8875db7c23a7a031b35d0eba",
+      "tools/run_milai_m1.py": "031e9659526fdf3b95ed21061ac8b82e3f4bafae49ad3d6d44e8cd336bf4cbcc",
+      "tools/run_milai_m1_v18.py": "41b89144729cc16077dd291e36010b871c00105fa65c4a97500f8b9e447a19f5",
+      "tools/inspect_milai_m1_v18.py": "74781e18aa99461861a8b69ca4bceacf75f300085a5d8c2a43c7d0b380185ca0"
+    },
+    "validation_current_sha256": {
+      "tests/unit/test_milai_m1_v18.py": "f4803aa01a4dac5fa55b051effcb5a24b9bb7a2de4f02e1867008f633df84598",
+      ".github/workflows/ci.yml": "075a82242cf0f55588e021acad190a01de14d2933052c1e4e945cbec70607065",
+      "../.github/workflows/ci.yml": "f1f082cafa38f800a560e067cae2aa59afae3f9510e0a3c3796762916edc69fc"
+    },
+    "historical_test_removed_from_active_tree": "tests/unit/test_milai_m1.py",
+    "v0": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_milai_m1_v18.py",
+        "result": "8 passed before final added @2-ack/@3-trigger assertions"
+      },
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_milai_m1_v18.py::test_retained_clear_and_tombstone_contract",
+        "result": "1 passed with final @2-ack/@3-trigger assertions"
+      },
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_milai_m1_v18.py::test_recheck_outcomes_exact_current_and_cold_replay tests/unit/test_milai_m1_v18.py::test_real_graph_changed_recheck_and_completed_replay",
+        "result": "2 passed with pending cold-read/task-slot/replay assertions"
+      }
+    ],
+    "static_boundary": [
+      {
+        "command": "uv run --no-sync ruff check affected v18 runtime/test/CLI paths",
+        "result": "PASS; final changed test rechecked PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent 12 affected source/CLI files",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy src/milai_lab",
+        "result": "PASS, 99 source files"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync milai-lab-check-tools-boundary",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync pytest --collect-only -q tests/unit/test_milai_m1_v18.py",
+        "result": "8 collected; optional imports occur after importorskip"
+      },
+      {
+        "command": "jsonschema Draft202012Validator.check_schema(_schema(changed_fixture))",
+        "result": "PASS, 5 delta branches"
+      },
+      {
+        "command": "PyYAML parse of Lab and root CI",
+        "result": "PASS, 5 and 12 jobs"
+      }
+    ],
+    "decoder_probe": "Root-controlled 6/6 PASS; see artifacts/langmem-m1-v18/decoder-probe-r1/report.json",
+    "pending_until_new_lock": [
+      "verify_m1_lock/prepare with FROZEN v18 lock",
+      "single packaging build and sdist lock/source check"
+    ],
+    "model_or_embedding_requests_by_source_owner": 0,
+    "vllm_settings_changed": false
+  },
+  "package": {
+    "status": "PASS",
+    "build_command": "uv build --offline --out-dir artifacts/langmem-m1-v18/package-dist",
+    "sdist": "artifacts/langmem-m1-v18/package-dist/milai_lab-0.1.0.tar.gz",
+    "wheel": "artifacts/langmem-m1-v18/package-dist/milai_lab-0.1.0-py3-none-any.whl",
+    "lock_sha256": "0859196f56e39c78ea380681cb9407ec0055f40e498d9100b599ef5305890209",
+    "source_mapping_sha256": "ab7d5616165d341ab9a09836994fe110a0ba1b9079d90eb5bea73cb8648f5906",
+    "mapped_runtime_files_verified_in_sdist": 41,
+    "foundation_v18_lock_in_sdist": true,
+    "wheel_v18_m1_modules_present": true,
+    "forbidden_private_or_generated_paths": 0,
+    "source_modified_by_check": false
+  },
+  "zero_model_prepare": {
+    "changed": {
+      "config_sha256": "2235d2f6a05758ce767a98c13488ba96d42a7e358c3b7aa6d625f14ca5ff09c2",
+      "prepared_sha256": "ff2ee054c07e1db9cf26cdafd71e8136a452d4685859a528dc132c18a1a39f7e",
+      "run_id": "v18-m1-changed-r2"
+    },
+    "retained": {
+      "config_sha256": "34e954b916690c1b116582f8076965928792da60b0f33ddd24c9acef9c1d071c",
+      "prepared_sha256": "64bfcc05a469a5ca29125015e28b74e7d5e02c89275575cfe7bcb6b6eeb6e53b",
+      "run_id": "v18-m1-retained-r2"
+    },
+    "irrelevant": {
+      "config_sha256": "e49020c1b06b98f19ebd6d25ea69f758f1ebd69f65840748cb0026a2736d88d7",
+      "prepared_sha256": "e0c7514dbcc5a7a3aba8fd04df80c4f6955cbcf19d374c99017478f0fe38f35e",
+      "run_id": "v18-m1-irrelevant-r2"
+    },
+    "diagnostic": {
+      "config_sha256": "1347bad12426edb8f8151f78eadaf6b8eadb506eefe1b21568554aff2e3dd875",
+      "prepared_sha256": "d56a3156a1541672911405260e7ac399cdf01466565e74431d9078f83fb62438",
+      "run_id": "v18-m1-diagnostic-r2"
+    },
+    "merit": {
+      "config_sha256": "67ea6ed30624b5ca79946cd25cd410b895ea5227d46849fc6ddcb2d13bab4093",
+      "prepared_sha256": "86166426f71510eb9fb3767b5bfcb80b76c81280d2f081c346d803b380e9d3e8",
+      "run_id": "v18-m1-merit-r2"
+    }
+  },
+  "source_mapping_sha256": "657b0060d8c31385fc6bbe99fdb1a42b9d4815376103983348b4038d9ef6533e",
+  "old_results_and_lock_preserved": true,
+  "full_suite_run": false,
+  "actual_model_calls_in_v0": 0,
+  "round": "r2",
+  "r2_schema_checks": {
+    "status": "R2_SCHEMA_READY_ZERO_MODEL",
+    "reason": "R1 task_ended clear plus calls passed generation schema but was rejected before execution by the existing runtime contract",
+    "change_files": {
+      "src/milai_lab/methods/milai_m1/controller.py": "c871098c684efbb3a54a4dd7f82bb7df00b235e4480b37bd124e8a5d78ceeb8a",
+      "tests/unit/test_milai_m1_v18.py": "3bed9d61b75f14e660a57e3a9ba1adb11f51ea1031f352ecff97295c950fcd3c"
+    },
+    "schema_sha256_compact": "3900f3b19c02298283394cfa703d4bfa80dacd3a00e49e2d097523dcf52ca601",
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_milai_m1_v18.py::test_schema_reducer_and_old_state_format",
+        "result": "1 passed; task_ended+answer valid; task_ended+calls invalid; null/set/unresolved+calls valid"
+      },
+      {
+        "command": "uv run --no-sync ruff check controller.py test_milai_m1_v18.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent controller.py",
+        "result": "PASS"
+      }
+    ],
+    "runtime_contract_changed": false,
+    "prompt_changed": false,
+    "vllm_changed": false,
+    "model_or_embedding_requests_by_source_owner": 0,
+    "build": "NOT_RUN: packaging declaration unchanged; root controls new freeze and model probe"
+  },
+  "v0_scope": "R1 full required zero-model contracts; R2 calls-schema repair adds the narrow forbidden-combination test",
+  "package_scope": "R1 inclusion/private checks; R2 schema-only repair changed no packaging; no repeated build"
+}

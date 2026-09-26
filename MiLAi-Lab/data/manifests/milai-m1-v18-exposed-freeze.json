@@ -1,0 +1,36 @@
+{
+  "kind": "MILAI_M1_V18_CONDITIONAL_EXPOSED_FREEZE",
+  "status": "FROZEN_BEFORE_MODEL_REQUESTS",
+  "reference_commit": "9438d1349b5f7988ca86f491ad489eefa87becd3",
+  "reference_exposed_freeze_sha256": "5d9be700ed893715c1a3b935bfe29878f141bd708ccbe5668c96188c8c2f317c",
+  "diagnostic": {
+    "inputs_path": "artifacts/contextual-user-memory/v14-v1-spec/inputs.json",
+    "inputs_sha256": "a6852f07b4b1801e0426cb9ca930c518b3182ac2d5b9f2754f9109e98bf862bc",
+    "rubric_path": "artifacts/contextual-user-memory/v14-v1-spec/rubric.json",
+    "rubric_sha256": "62ab23a2a15f2ef3b81ecb51a715a19e379d24581b90ade2e9b8c12968a0ebcc",
+    "freeze_path": "data/manifests/contextual-memory-v14-diagnostic-freeze.json",
+    "freeze_sha256": "4f4c699990a65a02754fa745c8039d922149a2e8b4dc6728c92ae1efa99f9459",
+    "cases": 12,
+    "sessions": 20,
+    "public_messages": 20,
+    "planned_run_id": "v18-m1-diagnostic-r1",
+    "gate": "V2 changed and both V3 controls PASS"
+  },
+  "merit": {
+    "selection_path": "data/manifests/contextual-memory-v7-e0-selection-final.json",
+    "selection_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+    "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+    "world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29",
+    "episodes": 5,
+    "public_messages": 7,
+    "planned_run_id": "v18-m1-merit-r1",
+    "gate": "preceding mechanism remains valid and no severe new semantic harm"
+  },
+  "arm": "m1",
+  "runtime_reads_rubric": false,
+  "input_regeneration": false,
+  "fresh_holdouts_consumed": false,
+  "empty_new_namespaces_required": true,
+  "same_final_source_required": true,
+  "actual_model_requests_at_freeze": 0
+}

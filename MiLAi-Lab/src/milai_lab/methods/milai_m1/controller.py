@@ -7,45 +7,35 @@ from typing import TYPE_CHECKING, Any
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.baselines.langmem_revision_store import canonical_json
-from milai_lab.methods.milai_m1.decision_basis import DecisionDeltaError, validate_delta
+from milai_lab.methods.milai_m1.decision_basis import (
+    DecisionDeltaError,
+    generation_delta_schema,
+    validate_delta,
+)
 from milai_lab.methods.milai_m1.evidence_view import EvidenceView
-from milai_lab.methods.milai_m1.recheck import acknowledgements, refresh_rechecks
+from milai_lab.methods.milai_m1.recheck import completion_proof, refresh_rechecks
 from milai_lab.methods.milai_m1.state_store import DecisionBasisStore, ScopeKey
 
-M1_RECIPE_ID = "milai-m1-sparse-decision-json-action-v1"
-M1_TRANSPORT_VARIANT = "json_action_decision_delta_v1"
+M1_RECIPE_ID = "milai-m1-proposition-recheck-json-action-v18"
+M1_TRANSPORT_VARIANT = "json_action_proposition_completion_v18"
 
 if TYPE_CHECKING:
     from milai_lab.baselines.langmem_agent import FoundationScope
 
 
 def m1_action_schema(base: dict[str, Any]) -> dict[str, Any]:
-    """Keep the v16 answer/calls catalog; add one generation-only delta field."""
-    delta = {"oneOf": [
-        {"type": "null"},
-        {"type": "object", "properties": {"op": {"const": "clear"}},
-         "required": ["op"], "additionalProperties": False},
-        {"type": "object", "properties": {
-            "op": {"const": "set"},
-            "decision": {"type": "string"},
-            "scope": {"type": "object", "properties": {
-                "subject": {"type": "string"},
-                "item": {"type": "string"},
-                "context": {"type": "string"},
-            }, "required": ["subject", "item", "context"],
-                "additionalProperties": False},
-            "adopted_evidence": {"type": "array", "items": {"type": "string"},
-                                 "maxItems": 8},
-            "critical_gap": {"type": ["string", "null"]},
-            "status": {"enum": ["active", "deferred"]},
-        }, "required": ["op", "decision", "scope", "adopted_evidence",
-                        "critical_gap", "status"], "additionalProperties": False},
-    ]}
+    """Keep the v16 answer/calls catalog; add the v18 delta branches."""
+    delta = generation_delta_schema()
     branches = []
     for branch in base["oneOf"]:
         copy = dict(branch)
+        branch_delta = delta
+        if "calls" in branch["properties"]:
+            branch_delta = {"oneOf": [variant for variant in delta["oneOf"]
+                                      if variant.get("properties", {}).get(
+                                          "clear_reason", {}).get("const") != "task_ended"]}
         copy["properties"] = {
-            "decision_delta": delta,
+            "decision_delta": branch_delta,
             **branch["properties"],
         }
         copy["required"] = ["decision_delta", *branch["required"]]
@@ -55,20 +45,22 @@ def m1_action_schema(base: dict[str, Any]) -> dict[str, Any]:
 
 M1_PROTOCOL = (
     "In the same JSON reply as your normal answer or calls, include decision_delta. "
-    "Use null for ordinary turns without a useful action-sensitive ongoing decision. "
-    "Use a full set only for a current decision that can change a meaningful next action: "
-    '{"op":"set","decision":"...","scope":{"subject":"...","item":"...",'
-    '"context":"..."},"adopted_evidence":["e0"],'
-    '"critical_gap":null,"status":"active"}. '
-    "Use e0/e1/... from this request or c0/c1/... for continued exact evidence. "
-    "critical_gap may be a question string; status may be active or deferred. "
-    'Use {"op":"clear"} only when that '
-    "decision no longer matters. A gap is only a question whose different answers "
-    "would change the next meaningful action. Cite only handles listed below or "
-    "the continued exact handles in the current basis. A handle being available is not "
-    "adoption; include only evidence you actually rely on. A changed memory revision "
-    "requires review, not an automatic decision change. Keep normal tool decisions and "
-    "answers in this same reply; no extra model call is needed."
+    "Use null when no action-sensitive current judgment needs a basis. "
+    "A set must state a concrete, testable proposition whose alternative would change "
+    "a meaningful action, not a topic label. Give action_scope with subject, item, "
+    "action_type, critical_parameters; adopted_evidence entries have ref and "
+    "support_role (supports_value, constrains_applicability, records_execution, "
+    "or contextual); unresolved_gap may be null or a question; status is active or "
+    "deferred. Use only e0/e1/... delivered in this request or continued exact c0/c1/...; "
+    "availability is not adoption. Set recheck_outcome to null without pending recheck. "
+    "With pending recheck, use retained only if the proposition remains the same, changed "
+    "only if it changes, and adopt current/new delivered supporting evidence; unresolved "
+    "must be deferred and leaves recheck pending. A revision notice does not contain the "
+    "new body and does not prove the old proposition false. Obtain evidence through normal "
+    "tools if needed. Pending clear requires task_ended with no calls, or "
+    "recheck_completed with retained/changed plus full proposition, action_scope, "
+    "adopted_evidence, and unresolved_gap. Otherwise use {\"op\":\"clear\"} only "
+    "without pending recheck. Do not add a separate State call."
 )
 
 
@@ -106,7 +98,8 @@ class M1Controller:
         basis = self.store.get(key)
         handles = self.view.handles(planned_messages, thread_id=thread, public_index=index)
         self._planned_short = {f"e{position}": ref for position, ref in enumerate(handles)}
-        continued = ([ref for ref in basis["adopted_evidence"] if ref not in handles]
+        continued = ([item["ref"] for item in basis["adopted_evidence"]
+                      if item["ref"] not in handles]
                      if basis is not None else [])
         self._continued_short = {f"c{position}": ref
                                  for position, ref in enumerate(continued)}
@@ -115,18 +108,23 @@ class M1Controller:
             lines.append("current basis: none")
         else:
             lines.extend([
-                "current decision: " + basis["decision"],
-                "scope: " + canonical_json(basis["scope"]),
+                "current proposition: " + basis["proposition"],
+                "action scope: " + canonical_json(basis["action_scope"]),
                 "adopted handles: " + canonical_json([
-                    next((short for short, ref in {
+                    {"ref": next((short for short, ref in {
                         **self._planned_short, **self._continued_short,
-                    }.items() if ref == adopted), adopted)
-                    for adopted in basis["adopted_evidence"]
+                    }.items() if ref == item["ref"]), item["ref"]),
+                     "support_role": item["support_role"]}
+                    for item in basis["adopted_evidence"]
                 ]),
-                "critical gap: " + canonical_json(basis["critical_gap"]),
+                "unresolved gap: " + canonical_json(basis["unresolved_gap"]),
                 "host status: " + basis["host_status"],
                 "needs recheck: " + str(basis["needs_recheck"]).lower(),
             ])
+            if basis["recheck_reasons"]:
+                lines.append("Recheck required: old proposition is not validated "
+                             "against current evidence; complete as retained, changed, "
+                             "or unresolved. A version change alone proves no new value.")
             for reason in basis["recheck_reasons"]:
                 lines.append("recheck reason: " + canonical_json(reason))
         lines.append("available evidence handles in this request (availability is not adoption):")
@@ -161,22 +159,29 @@ class M1Controller:
 
     def commit(
         self, request_index: int, receipt_id: str, raw_delta: Any,
+        calls: list[dict[str, Any]] | None = None,
     ) -> str:
         key, thread, public_index = self._active()
         request_id = self.request_id(request_index)
         prior = self.store.receipt(request_id)
         try:
-            delta = validate_delta(raw_delta)
             actual = self.view.request_messages(request_id)
+            basis = self.store.get(key)
+            if basis is not None and basis["recheck_reasons"]:
+                self.store.record_projection(key, request_id)
+            delta = validate_delta(raw_delta)
+            if (delta is not None and delta.get("clear_reason") == "task_ended"
+                    and calls):
+                raise DecisionDeltaError("DECISION_TASK_ENDED_WITH_CALLS")
             delivered = self.view.handles(
                 actual, thread_id=thread, public_index=public_index,
                 request_id=request_id,
             )
-            basis = self.store.get(key)
-            bound = []
-            if delta is not None and delta["op"] == "set":
+            bound: list[dict[str, Any]] = []
+            if delta is not None and "adopted_evidence" in delta:
                 exact_refs = []
-                for short in delta["adopted_evidence"]:
+                for adoption in delta["adopted_evidence"]:
+                    short = adoption["ref"]
                     ref = self._planned_short.get(short)
                     if ref is not None:
                         if ref not in delivered:
@@ -185,18 +190,22 @@ class M1Controller:
                         ref = self._continued_short.get(short)
                         if ref is None:
                             raise DecisionDeltaError("DECISION_EVIDENCE_NOT_DELIVERED")
-                    exact_refs.append(ref)
-                if len(set(exact_refs)) != len(exact_refs):
+                    exact_refs.append({"ref": ref,
+                                       "support_role": adoption["support_role"]})
+                refs = [item["ref"] for item in exact_refs]
+                if len(set(refs)) != len(refs):
                     raise DecisionDeltaError("DECISION_EVIDENCE_INVALID")
                 delta["adopted_evidence"] = exact_refs
-                bound = self.view.bind(exact_refs, delivered, basis)
-                for item in bound:
+                bound = self.view.bind(refs, delivered, basis)
+                for item, adoption in zip(bound, exact_refs, strict=True):
+                    item["support_role"] = adoption["support_role"]
                     if item["delivery"] == "continued_exact":
                         item["continuation_request_id"] = request_id
-            current_user_ref = next((ref for ref, item in delivered.items()
-                                     if item["delivery"] == "current_user"), None)
-            ack = acknowledgements(basis, delta, delivered, actual, current_user_ref)
-            return self.store.apply(key, request_id, receipt_id, delta, bound, ack)
+            ack, proof_refs = completion_proof(
+                basis, delta, bound, delivered, actual, self.observer.sidecar, key,
+            )
+            return self.store.apply(key, request_id, receipt_id, delta, bound,
+                                    ack, proof_refs)
         except DecisionDeltaError as error:
             if prior is None:
                 self.store.record_error(key, request_id, receipt_id, raw_delta,

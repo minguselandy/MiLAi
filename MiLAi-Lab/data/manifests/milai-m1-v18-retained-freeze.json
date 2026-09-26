@@ -1,0 +1,18 @@
+{
+  "kind": "MILAI_M1_V18_MECHANISM_FREEZE",
+  "status": "FROZEN_BEFORE_MODEL_REQUESTS",
+  "case_id": "milai_m1_v18_recheck_retained",
+  "fixture_path": "data/fixtures/milai_m1_v18_recheck_retained.json",
+  "fixture_sha256": "634a9fb1351cef0ef4dc3dafcd6a19d6566a138966bbd294c6b52b3226b9b78d",
+  "public_messages": 3,
+  "seed_memory_count": 1,
+  "revision_update_after_public_index": 0,
+  "rubric_path": "artifacts/langmem-m1-v18/retained-rubric.json",
+  "rubric_sha256": "c55fa52bad17b47fc0fd53f0d8baaf70df81ac086db6524480f96243b50f85ea",
+  "rubric_runtime_input": false,
+  "benchmark_score": false,
+  "origin": "EXPOSED_CONTROLLED_DEVELOPMENT_DIAGNOSTIC",
+  "data_regeneration_after_outcomes": false,
+  "preloaded_basis": false,
+  "real_model_requests_at_freeze": 0
+}

@@ -1,4 +1,4 @@
-"""Prepare, run and inspect the opt-in v17 M1 arm over the v16 foundation."""
+"""Prepare, run and inspect the opt-in v18 M1 pivot over the v16 foundation."""
 
 from __future__ import annotations
 
@@ -97,7 +97,7 @@ def _prepare(args: argparse.Namespace) -> dict[str, Any]:
                         "exposed_freeze_sha256": sha256_file(args.exposed_freeze)})
     else:
         fixture, freeze = read_json(input_path), read_json(args.mechanism_freeze)
-        if fixture.get("kind") != "M1_MECHANISM_DIAGNOSTIC":
+        if fixture.get("kind") != "M1_V18_RECHECK_DIAGNOSTIC":
             raise ValueError("M1_MECHANISM_KIND_INVALID")
         if sha256_file(input_path) != freeze["fixture_sha256"]:
             raise ValueError("M1_MECHANISM_FIXTURE_CHANGED")
@@ -190,8 +190,12 @@ def _run(args: argparse.Namespace) -> dict[str, Any]:
         sidecar.close()
 
 
+STATE_TABLES = ("m1_format", "active_tasks", "bases", "delta_receipts",
+                "events", "write_transactions")
+
+
 def _query(path: Path, table: str) -> list[dict[str, Any]]:
-    if table not in {"active_tasks", "bases", "delta_receipts", "events"}:
+    if table not in STATE_TABLES:
         raise ValueError("M1_QUERY_TABLE_UNKNOWN")
     with sqlite3.connect(f"file:{path}?mode=ro", uri=True) as conn:
         conn.row_factory = sqlite3.Row
@@ -201,15 +205,24 @@ def _query(path: Path, table: str) -> list[dict[str, Any]]:
 def _summary(path: Path) -> dict[str, Any]:
     with sqlite3.connect(f"file:{path}?mode=ro", uri=True) as conn:
         counts = {table: conn.execute(f"SELECT count(*) FROM {table}").fetchone()[0]  # noqa: S608
-                  for table in ("active_tasks", "bases", "delta_receipts", "events")}
+                  for table in STATE_TABLES}
         delta = dict(conn.execute(
             "SELECT status,count(*) FROM delta_receipts GROUP BY status"))
         events = dict(conn.execute("SELECT event,count(*) FROM events GROUP BY event"))
         active = conn.execute(
             "SELECT count(*) FROM bases WHERE basis_json IS NOT NULL"
         ).fetchone()[0]
+        writes = dict(conn.execute(
+            "SELECT operation,count(*) FROM write_transactions GROUP BY operation"
+        ))
+        state_format = conn.execute("SELECT version FROM m1_format").fetchone()[0]
     return {"counts": counts, "delta_statuses": delta, "events": events,
-            "active_bases": active, "sqlite_bytes": path.stat().st_size}
+            "active_bases": active, "format": state_format,
+            "write_transactions": {"total": counts["write_transactions"],
+                                   "by_operation": writes},
+            "sqlite_bytes": path.stat().st_size,
+            "sqlite_wal_bytes": Path(str(path) + "-wal").stat().st_size
+            if Path(str(path) + "-wal").exists() else 0}
 
 
 def _schema(fixture_path: Path | None) -> dict[str, Any]:
@@ -232,7 +245,7 @@ def main() -> None:
     for command in ("prepare", "run"):
         item = commands.add_parser(command)
         item.add_argument("--config", required=True, type=Path)
-        item.add_argument("--lock", type=Path, default=LAB / "data/locks/milai-m1-v17.lock.json")
+        item.add_argument("--lock", type=Path, default=LAB / "data/locks/milai-m1-v18.lock.json")
         item.add_argument("--mode", choices=("diagnostic", "merit", "mechanism"), required=True)
         item.add_argument("--run", required=True)
         item.add_argument("--arm", choices=ARMS, required=True)
@@ -243,14 +256,14 @@ def main() -> None:
         item.add_argument("--fixture", type=Path)
         item.add_argument("--mechanism-freeze", type=Path)
         item.add_argument("--exposed-freeze", type=Path,
-                          default=LAB / "data/manifests/milai-m1-v17-exposed-freeze.json")
+                          default=LAB / "data/manifests/milai-m1-v18-exposed-freeze.json")
         if command == "run":
             item.add_argument("--prepared", required=True, type=Path)
             item.add_argument("--stage", required=True)
             item.add_argument("--case", action="append", default=[])
     query = commands.add_parser("query")
     query.add_argument("--state", type=Path, required=True)
-    query.add_argument("--table", choices=("active_tasks", "bases", "delta_receipts", "events"),
+    query.add_argument("--table", choices=STATE_TABLES,
                        required=True)
     summary = commands.add_parser("summary")
     summary.add_argument("--state", type=Path, required=True)

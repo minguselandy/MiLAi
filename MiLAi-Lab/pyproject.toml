@@ -47,6 +47,7 @@ include = [
   "/data/locks/langmem-foundation.lock.json",
   "/data/locks/langmem-b1.lock.json",
   "/data/locks/milai-m1-v17.lock.json",
+  "/data/locks/milai-m1-v18.lock.json",
   "/data/manifests",
   "/docs",
   "/product.lock.json",

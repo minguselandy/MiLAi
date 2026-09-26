@@ -1,0 +1,110 @@
+{
+  "kind": "MILAI_M1_V18_LOCK",
+  "status": "FROZEN",
+  "reference_manifest_sha256": "9bd4654a25db7b583779655b00749a3677e0cad06a4f51434b4a9d96a5d4d953",
+  "reference_b1_lock_sha256": "2098f2708081e1ae23341a301356543cb81e3b2be5fe1614ba487647ac8231a7",
+  "reference_v17_lock_sha256": "d03779620ab8a15c3da7902765b9e477af0207257f809046826e35ee80fceb02",
+  "recipe_id": "milai-m1-proposition-recheck-json-action-v18",
+  "transport_variant": "json_action_proposition_completion_v18",
+  "source_sha256": {
+    "configs/langmem-b1-v16.json": "09999ee2906aa73ab513e7fe2f89826c5785bbef1eaaec7a2c36601372644634",
+    "configs/langmem-baseline-v1.json": "45dbe0fb4843c87d3c5302a32408bb389a82b11bfcb09749fc773aeea5f22c2b",
+    "configs/milai-m1-v17.json": "f2928aaaf29da5bd048aff9e977def99d24c0b7e073e95b6e609e70737e8c33a",
+    "configs/milai-m1-v18.json": "5c5154b04f6b082274ca4480f5656c4aae89e67691e46c984b85f39b2a56bbf6",
+    "pyproject.toml": "87b8ac91b9623ebf027a9c5e3515ca32903bb65215f157dc2166a6d59fad47df",
+    "src/milai_lab/__init__.py": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+    "src/milai_lab/baselines/__init__.py": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+    "src/milai_lab/baselines/langmem_agent.py": "bffc5dbc8c01eb9b5ec159d8c78a84d6ae233fdc9e74d8f683efbde79786e8d3",
+    "src/milai_lab/baselines/langmem_b1_identity.py": "2fd2380bcb93c87c3614a7ec1d917a75faca8eeb3c75dfef0a7c5ce8248a3d11",
+    "src/milai_lab/baselines/langmem_identity.py": "bf3b25663b52478325734f8ba4a3703521d63bb522f8a22133f28680a5187572",
+    "src/milai_lab/baselines/langmem_instrumentation.py": "0a4805f5814b749d8fe9d71d31dfb4c90a7beca4e7a7c85f8edaf7620bae0d8e",
+    "src/milai_lab/baselines/langmem_revision_store.py": "c1e0211f00c3189cf0b356f3fda9dc904955ce468da786ade8a1888f34932082",
+    "src/milai_lab/datasets/__init__.py": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+    "src/milai_lab/datasets/merit.py": "1e68fafc8f4c571430a5f032961df1e59cb4913f110178ec481d6e24700483a7",
+    "src/milai_lab/harness/__init__.py": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "src/milai_lab/methods/__init__.py": "59b20a7a91ee381dda1685ac330a3af7d10aa2c84dbe69cc0ef8b2f767044a81",
+    "src/milai_lab/methods/milai_m1/__init__.py": "8d9a1d208d0df6404166ca73436b42857fd6194707aed0ede0f6e6b86f68a624",
+    "src/milai_lab/methods/milai_m1/controller.py": "c871098c684efbb3a54a4dd7f82bb7df00b235e4480b37bd124e8a5d78ceeb8a",
+    "src/milai_lab/methods/milai_m1/decision_basis.py": "07e28bc44c57cb7fc27cc6969bf16dce500449cb1cdef195143297ac3b4d38e7",
+    "src/milai_lab/methods/milai_m1/evidence_view.py": "31e3ec6181418f3ea5b4c48efd09e8d21eae130b6f39beeb1e5ae041938c50fb",
+    "src/milai_lab/methods/milai_m1/identity.py": "7ca19d497b28a0c76ebed245124b45295bf216ba292564918af74ab9a0c24b53",
+    "src/milai_lab/methods/milai_m1/recheck.py": "2c7a4b7f544cbbfed2579e5f5c80cc46bf5a6d6295019a87c6835bab959bfc7d",
+    "src/milai_lab/methods/milai_m1/state_store.py": "165f9c22801764ca98d63e8fc6a13793d3cb4b48dbfc785d9c4bd42b19dddcfd",
+    "src/milai_lab/providers/__init__.py": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_vllm.py": "b0c861906204049e929179d682f238de7b1a6cfe32ae542dace792ee45a0fb68",
+    "src/milai_lab/providers/langmem_chat.py": "6ff9f9fbfea5b0c1f2184030d15fc2a3c3ebad95d70e90e54641cddb2d9f1cd6",
+    "src/milai_lab/runners/__init__.py": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+    "src/milai_lab/runners/langmem_diagnostic.py": "a0c81e7f7d66e03e103b5fe800fe3b21e94129d2498fd54b002aa7606df75f7f",
+    "src/milai_lab/runners/langmem_foundation.py": "d35ad8659b0a95819415786a750460bcc39e9673aa342ce44d9383f7c7fb5135",
+    "src/milai_lab/runners/langmem_m1_mechanism.py": "7e63784ddac75263e3a7094406535a6bcdf4580d8875db7c23a7a031b35d0eba",
+    "src/milai_lab/runners/langmem_merit.py": "a69d7c8f63a0b1cc3bf9580add377582892195732af58f78816a45878bbac0a2",
+    "tools/inspect_milai_m1_v18.py": "74781e18aa99461861a8b69ca4bceacf75f300085a5d8c2a43c7d0b380185ca0",
+    "tools/prepare_langmem_foundation.py": "b6b4c538d121cd706e3c84c7e1c59ff70b23d8c568a036633bb9ea498865fdce",
+    "tools/run_langmem_foundation.py": "44e27ab5cb78148156e082814b59da7ab639babb48c2f2bb0658ba4edc9b1944",
+    "tools/run_langmem_provenance.py": "e080e10a9c5cb62336180aff6e53e36056a4fc93763c0c10a99e8f1c2c2aaef3",
+    "tools/run_milai_m1.py": "031e9659526fdf3b95ed21061ac8b82e3f4bafae49ad3d6d44e8cd336bf4cbcc",
+    "tools/run_milai_m1_v18.py": "41b89144729cc16077dd291e36010b871c00105fa65c4a97500f8b9e447a19f5",
+    "tools/summarize_langmem_foundation.py": "aea78fc1bc9ddbf7b11a935cd9b4aa19ca05a1bba9ab3475870adc60958e37d7",
+    "uv.lock": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8"
+  },
+  "source_mapping_sha256": "657b0060d8c31385fc6bbe99fdb1a42b9d4815376103983348b4038d9ef6533e",
+  "validation_sha256": {
+    "tests/unit/test_milai_m1_v18.py": "3bed9d61b75f14e660a57e3a9ba1adb11f51ea1031f352ecff97295c950fcd3c",
+    "tests/unit/test_langmem_provenance.py": "3ef04a0667315b2bdc44b57d321a9f6e3ec41a2c98fc744804744f441df8308d",
+    ".github/workflows/ci.yml": "075a82242cf0f55588e021acad190a01de14d2933052c1e4e945cbec70607065",
+    "../.github/workflows/ci.yml": "f1f082cafa38f800a560e067cae2aa59afae3f9510e0a3c3796762916edc69fc"
+  },
+  "source_mapping_hash_encoding": "SHA256 UTF-8 json.dumps(mapping,sort_keys=True,ensure_ascii=False); default separators",
+  "model_visible_contract": {
+    "m1_protocol_sha256": "d27fa3d79c60109264be4c7c2e268fc3414bcc35eb5ad8c532fb9a0c1008cfa5",
+    "mechanism_schema_sha256": "5e9ae6942c917d36aed87c3e948656ea9f27d1403b9727a72b83d522f1300cb3",
+    "mechanism_protocol_sha256": "b89ce223d902e03734169e87890b83e9f12e50c1d01956008d814e961f9a8236",
+    "memory_only_schema_sha256": "4a89315251308ec5c1f1f51e9660b5c61d0e3fd71df3067ae964a61c0cdb0b70",
+    "base_contract": {
+      "m1_protocol_sha256": "934a099144f58509f5824e073fb7ea2e0b0c843c809efd6afcf3352a28d72f13",
+      "mechanism_schema_sha256": "d8927c0a9c80da572ad9cc54049b114b34b433bd7a7df540b699ab5d84dfdebe",
+      "mechanism_protocol_sha256": "57f6c86fd55f88ecbcb950e661fd95b69e8624730e378919e2cdddf51517830b",
+      "memory_only_schema_sha256": "338dd8527c3453ac5872d98bdae3c2b5a320896da5b48a92c3b60e6567844165",
+      "base_contract": {
+        "system_prompt_sha256": "edeaf06db6a0b39bc3702b9343127fa199a1702b665dbc8d2eb942b10a8eb9f4",
+        "memory_tools_sha256": "17c65075f4c1d959f60aa9c78732eb2777a7dcfaf4dbf431e63668843dd477df",
+        "json_action_schema_memory_only_sha256": "0af5bdd417e489b981929d151780add6ad83176fcf8d8e485270ecd6c2b99c0f",
+        "json_action_prompt_memory_only_sha256": "958b8e71fad22f9a189f39544776a0229e949fbfd7cab0218fcb17fe79361fdf",
+        "namespace": [
+          "langmem",
+          "{foundation_run_id}",
+          "{arm_id}",
+          "{user_id}"
+        ],
+        "factory": {
+          "entrypoint": "langgraph.prebuilt.create_react_agent",
+          "version": "v1",
+          "max_concurrency": 1,
+          "recursion_limit": 128,
+          "max_model_attempts_per_public_message": 12
+        }
+      }
+    }
+  },
+  "data_identity": {
+    "diagnostic_inputs_sha256": "a6852f07b4b1801e0426cb9ca930c518b3182ac2d5b9f2754f9109e98bf862bc",
+    "diagnostic_rubric_sha256": "62ab23a2a15f2ef3b81ecb51a715a19e379d24581b90ade2e9b8c12968a0ebcc",
+    "merit_selection_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+    "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+    "world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29"
+  },
+  "fixture_sha256": {
+    "data/fixtures/milai_m1_v18_irrelevant_revision.json": "bd836779658f18f70532fa69d0a694c1150436df7423b87a60de9e067160b2ac",
+    "data/fixtures/milai_m1_v18_recheck_changed.json": "5bf01cc8b701f698fcef85db5d3394853c7557504be262d2e7e63e912eec46e1",
+    "data/fixtures/milai_m1_v18_recheck_retained.json": "634a9fb1351cef0ef4dc3dafcd6a19d6566a138966bbd294c6b52b3226b9b78d"
+  },
+  "dependency_lock_sha256": "232f45d4c85bdb5da67bfe3656d77584e9f53790c0dd22b490c68e9f7998e6f8",
+  "scope": "M1_PROPOSITION_EXPLICIT_RECHECK_COMPLETION",
+  "vllm_settings_changed": false,
+  "repair_history": {
+    "r1_failure_manifest_sha256": "b3ca2325f3d83cbd2efb7b82e5a8336212fea88158080eef6d0f5dbe9f8d4b71",
+    "scope": "Exclude task_ended clear from calls generation branch; no prompt or runtime/service policy changes"
+  }
+}

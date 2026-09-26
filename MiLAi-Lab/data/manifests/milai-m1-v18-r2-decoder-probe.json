@@ -1,0 +1,66 @@
+{
+  "kind": "MILAI_M1_V18_DECODER_PROBE",
+  "status": "PASS_CHANGED_CALLS_BRANCH_ONLY",
+  "checks": [
+    {
+      "case": "null_calls",
+      "schema_valid": true,
+      "runtime_delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 745,
+        "total_tokens": 774,
+        "completion_tokens": 29,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-98fcab40d336e57e"
+    },
+    {
+      "case": "normal_set_calls",
+      "schema_valid": true,
+      "runtime_delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 867,
+        "total_tokens": 1018,
+        "completion_tokens": 151,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-8b6f291eb47e9024"
+    },
+    {
+      "case": "unresolved_calls",
+      "schema_valid": true,
+      "runtime_delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 858,
+        "total_tokens": 1000,
+        "completion_tokens": 142,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-8396f47d88939b40"
+    }
+  ],
+  "actual_generation_requests": 3,
+  "actual_embedding_requests": 0,
+  "actual_tools_executed": 0,
+  "basis_commits": 0,
+  "vllm_settings_changed": false,
+  "elapsed_wall_seconds": 3.4089870397001505,
+  "schema_json_sha256": "5e9ae6942c917d36aed87c3e948656ea9f27d1403b9727a72b83d522f1300cb3",
+  "semantic_method_validation": false,
+  "schema_sha256": "4c02daa67a417a47695e9c761a5cdbeb2d3ff6ca0605ef827c129c6de14c9e4c",
+  "private_report_sha256": "c84aab5f4632dd0c8e920434333ed7fa54c916a56f8029587bd7938159aea56a",
+  "private_trace_sha256": "7410714978f08333437cd59b06dda248613c0d499bb4309dacc0d17cdc94c808",
+  "probe_script_sha256": "f268090f6e11876c0d19e4839e1d552746a69915410da058fee1079a37fb1033",
+  "generation_input_tokens": 2470,
+  "generation_output_tokens": 322,
+  "generation_total_tokens": 2792,
+  "unchanged_answer_branches_verified_by_r1_probe": true,
+  "r1_probe_manifest_sha256": "1393d4c2c8b9ad0d348ba87425698230601ee0c4db36218fef0c6b7437faff66",
+  "unknown_usage": 0
+}

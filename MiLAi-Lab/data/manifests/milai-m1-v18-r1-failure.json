@@ -1,0 +1,37 @@
+{
+  "kind": "MILAI_M1_V18_R1_FAILURE",
+  "status": "PRESERVED_ADAPTER_PROTOCOL_FAILURE",
+  "source_mapping_sha256": "ab7d5616165d341ab9a09836994fe110a0ba1b9079d90eb5bea73cb8648f5906",
+  "lock_sha256": "0859196f56e39c78ea380681cb9407ec0055f40e498d9100b599ef5305890209",
+  "freeze_sha256": "58a244276d44c03527069fd98e2a03fefec1347755726a49dbe3d990d096114a",
+  "failed_run_id": "v18-m1-changed-r1",
+  "public_messages_completed": 0,
+  "actual_generation_requests": 1,
+  "generation_input_tokens": 822,
+  "generation_output_tokens": 93,
+  "generation_total_tokens": 915,
+  "embedding_requests": 1,
+  "embedding_tokens": 32,
+  "unknown_usage": 0,
+  "error": "DECISION_TASK_ENDED_WITH_CALLS",
+  "generated_combination": {
+    "delta_op": "clear",
+    "clear_reason": "task_ended",
+    "call_names": [
+      "search_memory"
+    ]
+  },
+  "host_tool_side_effects": 0,
+  "fixture_seed_committed": true,
+  "recheck_triggered": false,
+  "semantic_4_to_8_result": "NOT_OBSERVED",
+  "diagnosis": "Generation schema permitted task_ended clear plus calls, while the documented runtime protocol forbids it; initial Host selected this contradictory response before any Basis existed.",
+  "repair_scope": "Exclude task_ended clear from the calls branch only; preserve answer branch, prompt, pending rules, data and vLLM.",
+  "artifacts_sha256": {
+    "artifacts/langmem-m1-v18/final-changed-r1/trace.jsonl": "c9d391c94042cb166e48881e8d931c6a0de1a5b0471c41758fe5c70c622a7cf3",
+    "artifacts/langmem-m1-v18/final-changed-r1/run/interruption.json": "d191822cf55f8209dbda7280412eceb2c41f34233750d8ac628c9e5d4e37b3ef",
+    "artifacts/langmem-m1-v18/final-changed-r1/decision-basis.sqlite": "e8251ac89ccc1877fb90959b26906f05c992cd15d9faa0c3f25fe3f403e6176d",
+    "artifacts/langmem-m1-v18/final-changed-r1/instrumentation.sqlite": "1159369d387aeb7d3293511bce55a026eb0b06cc77f5f1a771e19dfd1713f580"
+  },
+  "all_charges_retained_in": "artifacts/langmem-m1-v18/v18-budget.json"
+}

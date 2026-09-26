@@ -60,9 +60,9 @@ jobs:
       - name: Check opt-in M1 boundary
         run: |
           uv run --no-sync milai-lab-check-boundary
-          uv run --no-sync ruff check src/milai_lab/methods/milai_m1 src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_instrumentation.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_m1_mechanism.py tools/run_milai_m1.py tests/unit/test_milai_m1.py
-          uv run --no-sync mypy --follow-imports=silent src/milai_lab/methods/milai_m1/*.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_instrumentation.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_m1_mechanism.py tools/run_milai_m1.py
-          uv run --no-sync pytest -q tests/unit/test_milai_m1.py
+          uv run --no-sync ruff check src/milai_lab/methods/milai_m1 src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_instrumentation.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_m1_mechanism.py tools/run_milai_m1.py tools/run_milai_m1_v18.py tools/inspect_milai_m1_v18.py tests/unit/test_milai_m1_v18.py
+          uv run --no-sync mypy --follow-imports=silent src/milai_lab/methods/milai_m1/*.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_instrumentation.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_m1_mechanism.py tools/run_milai_m1.py tools/run_milai_m1_v18.py tools/inspect_milai_m1_v18.py
+          uv run --no-sync pytest -q tests/unit/test_milai_m1_v18.py
 
   active-package:
     runs-on: ubuntu-latest

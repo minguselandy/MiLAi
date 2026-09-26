@@ -1,0 +1,128 @@
+{
+  "kind": "MILAI_M1_V18_FINAL_FREEZE",
+  "status": "FROZEN_BEFORE_FORMAL_RUNS",
+  "round": "r2",
+  "reference_commit": "9438d1349b5f7988ca86f491ad489eefa87becd3",
+  "lock_sha256": "200e8119ee09b1b8cbb5085e51f21c2b11c76755f5c5b335f3a09f1c48d54c11",
+  "source_mapping_sha256": "657b0060d8c31385fc6bbe99fdb1a42b9d4815376103983348b4038d9ef6533e",
+  "reference_manifest_sha256": "9bd4654a25db7b583779655b00749a3677e0cad06a4f51434b4a9d96a5d4d953",
+  "development_plan_sha256": "d3e95cfae617f03d602575f04b872a39b3da62e259c8b9902f147fd7871460ad",
+  "fixture_freezes_sha256": {
+    "changed": "5d1b5d069e1e955b92a65870aa529c3ad96added730a2d338e45deed0d6ca324",
+    "retained": "5e003a2240d919cb39c5552165cb32a56384ce4a3cad897e999c72803f1d204a",
+    "irrelevant": "00d03b63bef92d7f0aa5c4cd152f7a85c7883e10f2f7135986cffa1abf52bc09"
+  },
+  "exposed_freeze_sha256": "bd89aa3cf6111261af057750300a5a5f5723dcb8e649e04d8c7a17e160b71cb4",
+  "evaluation_protocol_sha256": "fd907b630c46f5783b121e758d6228e3e8717c27dd13e20c1e2b6e49d575a67e",
+  "decoder_probe_manifest_sha256": "18b122908aef1bb4c44f3e5dd153614f70b9aec976a8f4d7edaa3f78ee312de8",
+  "verification_manifest_sha256": "96022db66af5fe288fa8b2f5f9a2578debd79361cc6c52f3c44a28b755757477",
+  "environment_evidence_sha256": "043c1dab90cb52f40da75e88855d9e5e33cb587edd6489c4318fdff96dc191d4",
+  "initial_namespaces_sha256": "a26d74534c66ce5785de2798d1658c6a610c196a8f65644700100d03fa9832e6",
+  "initial_namespaces_status": "PASS_EMPTY",
+  "real_model_concurrency": 1,
+  "vllm_settings_changed": false,
+  "decoder_probe_generations_before_freeze": 9,
+  "formal_generations_before_freeze": 1,
+  "budget_before_formal_runs": {
+    "limits": {
+      "questions": 12,
+      "arms": 2,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 10,
+    "generation": {
+      "charged_tokens": 9341,
+      "known_tokens": 9341,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 32,
+      "known_tokens": 32,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+      "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+      "generation_requests": 101,
+      "generation_known_tokens": 101810,
+      "generation_charged_tokens": 101810,
+      "embedding_tokens": 916,
+      "unknown_usage": 0,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/langmem-provenance/v16-budget.json",
+        "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+        "generation_requests": 55,
+        "generation_known_tokens": 40072,
+        "generation_charged_tokens": 40072,
+        "embedding_tokens": 443,
+        "unknown_usage": 0,
+        "judge_requests": 0,
+        "sealed": true,
+        "earlier_v15": {
+          "ledger": "artifacts/langmem-foundation/v15-budget.json",
+          "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+          "generation_requests": 108,
+          "generation_known_tokens": 71846,
+          "generation_unknown_reservation": 4891,
+          "generation_charged_tokens": 76737,
+          "embedding_tokens": 836,
+          "unknown_usage": 1,
+          "judge_requests": 0,
+          "sealed": true
+        }
+      }
+    }
+  },
+  "runs": {
+    "changed": {
+      "config_sha256": "2235d2f6a05758ce767a98c13488ba96d42a7e358c3b7aa6d625f14ca5ff09c2",
+      "prepared_sha256": "ff2ee054c07e1db9cf26cdafd71e8136a452d4685859a528dc132c18a1a39f7e",
+      "run_id": "v18-m1-changed-r2",
+      "config_path": "artifacts/langmem-m1-v18/final-changed-r2/config.json",
+      "prepared_path": "artifacts/langmem-m1-v18/final-changed-r2/prepared.json",
+      "arm_id": "m1",
+      "conditional": false
+    },
+    "retained": {
+      "config_sha256": "34e954b916690c1b116582f8076965928792da60b0f33ddd24c9acef9c1d071c",
+      "prepared_sha256": "64bfcc05a469a5ca29125015e28b74e7d5e02c89275575cfe7bcb6b6eeb6e53b",
+      "run_id": "v18-m1-retained-r2",
+      "config_path": "artifacts/langmem-m1-v18/final-retained-r2/config.json",
+      "prepared_path": "artifacts/langmem-m1-v18/final-retained-r2/prepared.json",
+      "arm_id": "m1",
+      "conditional": false
+    },
+    "irrelevant": {
+      "config_sha256": "e49020c1b06b98f19ebd6d25ea69f758f1ebd69f65840748cb0026a2736d88d7",
+      "prepared_sha256": "e0c7514dbcc5a7a3aba8fd04df80c4f6955cbcf19d374c99017478f0fe38f35e",
+      "run_id": "v18-m1-irrelevant-r2",
+      "config_path": "artifacts/langmem-m1-v18/final-irrelevant-r2/config.json",
+      "prepared_path": "artifacts/langmem-m1-v18/final-irrelevant-r2/prepared.json",
+      "arm_id": "m1",
+      "conditional": false
+    },
+    "diagnostic": {
+      "config_sha256": "1347bad12426edb8f8151f78eadaf6b8eadb506eefe1b21568554aff2e3dd875",
+      "prepared_sha256": "d56a3156a1541672911405260e7ac399cdf01466565e74431d9078f83fb62438",
+      "run_id": "v18-m1-diagnostic-r2",
+      "config_path": "artifacts/langmem-m1-v18/final-diagnostic-r2/config.json",
+      "prepared_path": "artifacts/langmem-m1-v18/final-diagnostic-r2/prepared.json",
+      "arm_id": "m1",
+      "conditional": true
+    },
+    "merit": {
+      "config_sha256": "67ea6ed30624b5ca79946cd25cd410b895ea5227d46849fc6ddcb2d13bab4093",
+      "prepared_sha256": "86166426f71510eb9fb3767b5bfcb80b76c81280d2f081c346d803b380e9d3e8",
+      "run_id": "v18-m1-merit-r2",
+      "config_path": "artifacts/langmem-m1-v18/final-merit-r2/config.json",
+      "prepared_path": "artifacts/langmem-m1-v18/final-merit-r2/prepared.json",
+      "arm_id": "m1",
+      "conditional": true
+    }
+  },
+  "final_round_generations_before_freeze": 0,
+  "r1_failure_manifest_sha256": "b3ca2325f3d83cbd2efb7b82e5a8336212fea88158080eef6d0f5dbe9f8d4b71"
+}

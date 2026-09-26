@@ -17,13 +17,25 @@ ScopeKey = tuple[str, str, str, str]
 class DecisionBasisStore:
     """One active task per run/arm/user; prior task slots remain separate."""
 
+    FORMAT = "MILAI_M1_PROPOSITION_V18"
+
     def __init__(self, path: Path) -> None:
         self.path = path
         path.parent.mkdir(parents=True, exist_ok=True)
         self._lock = threading.RLock()
         self.conn = sqlite3.connect(path, check_same_thread=False)
         self.conn.row_factory = sqlite3.Row
+        existing = {row["name"] for row in self.conn.execute(
+            "SELECT name FROM sqlite_master WHERE type='table'"
+        )}
+        if "bases" in existing and "m1_format" not in existing:
+            self.conn.close()
+            raise ValueError("M1_STATE_FORMAT_MISMATCH")
         self.conn.executescript("""
+            CREATE TABLE IF NOT EXISTS m1_format(version TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS write_transactions(
+                seq INTEGER PRIMARY KEY AUTOINCREMENT,
+                operation TEXT NOT NULL, recorded_at TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS active_tasks(
                 run_id TEXT, arm_id TEXT, user_id TEXT, task_id TEXT NOT NULL,
                 PRIMARY KEY(run_id,arm_id,user_id));
@@ -46,6 +58,16 @@ class DecisionBasisStore:
                 request_id TEXT, event TEXT NOT NULL, detail_json TEXT NOT NULL,
                 recorded_at TEXT NOT NULL);
         """)
+        marker = self.conn.execute("SELECT version FROM m1_format").fetchone()
+        if marker is None:
+            if "bases" in existing:
+                self.conn.close()
+                raise ValueError("M1_STATE_FORMAT_MISMATCH")
+            with self.conn:
+                self.conn.execute("INSERT INTO m1_format VALUES(?)", (self.FORMAT,))
+        elif marker["version"] != self.FORMAT:
+            self.conn.close()
+            raise ValueError("M1_STATE_FORMAT_MISMATCH")
 
     def close(self) -> None:
         self.conn.close()
@@ -73,20 +95,19 @@ class DecisionBasisStore:
                 "SELECT task_id FROM active_tasks WHERE run_id=? AND arm_id=? AND user_id=?",
                 (run, arm, user),
             ).fetchone()
-            if prior is not None and prior["task_id"] != task:
-                old_key: ScopeKey = (run, arm, user, prior["task_id"])
-                old = self._row(old_key)
-                if old is not None and old["basis_json"] is not None:
-                    reason = {
-                        "kind": "task_identity_changed", "from_task": prior["task_id"],
-                        "to_task": task,
-                    }
-                    if not self.reason_was_acknowledged(old_key, reason):
-                        self._add_reason_locked(old_key, reason)
+            if prior is not None and prior["task_id"] == task:
+                return
             self.conn.execute(
                 "INSERT INTO active_tasks VALUES(?,?,?,?) ON CONFLICT(run_id,arm_id,user_id) "
                 "DO UPDATE SET task_id=excluded.task_id", key,
             )
+            self._write_locked("activate")
+
+    def _write_locked(self, operation: str) -> None:
+        self.conn.execute(
+            "INSERT INTO write_transactions(operation,recorded_at) "
+            "VALUES(?,datetime('now'))", (operation,),
+        )
 
     def _add_reason_locked(self, key: ScopeKey, reason: dict[str, Any]) -> bool:
         row = self._row(key)
@@ -107,7 +128,10 @@ class DecisionBasisStore:
         with self._lock, self.conn:
             if self.reason_was_acknowledged(key, reason):
                 return False
-            return self._add_reason_locked(key, reason)
+            added = self._add_reason_locked(key, reason)
+            if added:
+                self._write_locked("trigger_recheck")
+            return added
 
     def reason_was_acknowledged(self, key: ScopeKey, reason: dict[str, Any]) -> bool:
         with self._lock:
@@ -133,6 +157,23 @@ class DecisionBasisStore:
             ).fetchone()
             return dict(row) if row is not None else None
 
+    def record_projection(self, key: ScopeKey, request_id: str) -> None:
+        """Count a pending notice only after an actual completed request exists."""
+        with self._lock, self.conn:
+            basis = self.get(key)
+            if basis is None or not basis["recheck_reasons"]:
+                return
+            prior = self.conn.execute(
+                "SELECT 1 FROM events WHERE request_id=? AND event='RECHECK_PROJECTED'",
+                (request_id,),
+            ).fetchone()
+            if prior is not None:
+                return
+            self._event_locked(key, request_id, "RECHECK_PROJECTED", {
+                "reasons": basis["recheck_reasons"],
+            })
+            self._write_locked("project_recheck")
+
     def record_error(
         self, key: ScopeKey, request_id: str, receipt_id: str,
         raw_delta: Any, error_code: str,
@@ -152,11 +193,12 @@ class DecisionBasisStore:
                  revision, revision),
             )
             self._event_locked(key, request_id, "DELTA_REJECTED", {"code": error_code})
+            self._write_locked("reject_delta")
 
     def apply(
         self, key: ScopeKey, request_id: str, receipt_id: str,
         delta: dict[str, Any] | None, adopted: list[dict[str, Any]],
-        acknowledged: list[dict[str, Any]],
+        acknowledged: list[dict[str, Any]], proof_refs: list[str],
     ) -> str:
         sha = hashlib.sha256(canonical_json(delta).encode()).hexdigest()
         with self._lock, self.conn:
@@ -178,10 +220,13 @@ class DecisionBasisStore:
                 if before is not None:
                     after = None
                     remaining = []
-                    status = "CLEARED"
+                    status = ("CLEARED_TASK_ENDED" if delta.get("clear_reason") == "task_ended"
+                              else "CLEARED_RECHECK_COMPLETED" if acknowledged
+                              else "CLEARED")
             elif delta is not None:
                 semantic = {field: delta[field] for field in
-                            ("decision", "scope", "adopted_evidence", "critical_gap")}
+                            ("proposition", "action_scope", "adopted_evidence",
+                             "unresolved_gap")}
                 semantic["host_status"] = delta["status"]
                 previous_semantic = None if before is None else {
                     key: before[key] for key in semantic
@@ -193,10 +238,15 @@ class DecisionBasisStore:
                                    ).hexdigest())
                     after = {**semantic, "decision_id": decision_id,
                              "revision": before_revision + 1, "task_id": key[3],
-                             "adopted_bindings": adopted}
+                             "adopted_bindings": adopted,
+                             "recheck_outcome": delta["recheck_outcome"]}
                     status = "SET"
-            after_revision = before_revision + (status in {"SET", "CLEARED"})
-            if status != "NO_STATE_CHANGE" or remaining != reasons:
+                elif before is not None and before["recheck_outcome"] != delta["recheck_outcome"]:
+                    after = {**before, "recheck_outcome": delta["recheck_outcome"]}
+            after_revision = before_revision + (status in {
+                "SET", "CLEARED", "CLEARED_TASK_ENDED", "CLEARED_RECHECK_COMPLETED",
+            })
+            if status != "NO_STATE_CHANGE" or remaining != reasons or after != before:
                 self.conn.execute(
                     "INSERT INTO bases VALUES(?,?,?,?,?,?,?) "
                     "ON CONFLICT(run_id,arm_id,user_id,task_id) DO UPDATE SET "
@@ -220,10 +270,25 @@ class DecisionBasisStore:
             })
             for reason in acknowledged:
                 self._event_locked(key, request_id, "RECHECK_ACKNOWLEDGED", reason)
+            if acknowledged:
+                self._event_locked(key, request_id, "RECHECK_COMPLETED", {
+                    "outcome": delta["recheck_outcome"] if delta else None,
+                    "reasons": acknowledged, "new_adopted_refs": proof_refs,
+                })
+            elif delta is not None and delta.get("recheck_outcome") == "unresolved":
+                self._event_locked(key, request_id, "RECHECK_UNRESOLVED", {
+                    "reasons": reasons, "new_adopted_refs": [],
+                })
+            elif status == "CLEARED_TASK_ENDED" and reasons:
+                self._event_locked(key, request_id, "RECHECK_ABANDONED_TASK_ENDED", {
+                    "reasons": reasons,
+                })
+            self._write_locked("apply_delta")
             return status
 
     def rows(self, table: str) -> list[dict[str, Any]]:
-        if table not in {"active_tasks", "bases", "delta_receipts", "events"}:
+        if table not in {"active_tasks", "bases", "delta_receipts", "events",
+                         "write_transactions", "m1_format"}:
             raise ValueError("M1_TABLE_UNKNOWN")
         with self._lock:
             return [dict(row) for row in self.conn.execute(f"SELECT * FROM {table}")]  # noqa: S608

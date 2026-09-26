@@ -1,0 +1,108 @@
+{
+  "kind": "MILAI_M1_V18_DECODER_PROBE",
+  "status": "PASS_DEPLOYED_PROTOCOL_ONLY",
+  "checks": [
+    {
+      "case": "null",
+      "schema_valid": true,
+      "runtime_delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 730,
+        "total_tokens": 744,
+        "completion_tokens": 14,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-967edebfbb11b819"
+    },
+    {
+      "case": "normal_set",
+      "schema_valid": true,
+      "runtime_delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 867,
+        "total_tokens": 1018,
+        "completion_tokens": 151,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-8126ad4c9c4fa3b6"
+    },
+    {
+      "case": "changed",
+      "schema_valid": true,
+      "runtime_delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 835,
+        "total_tokens": 954,
+        "completion_tokens": 119,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-8a546701f85721df"
+    },
+    {
+      "case": "retained",
+      "schema_valid": true,
+      "runtime_delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 837,
+        "total_tokens": 958,
+        "completion_tokens": 121,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-b329de5a0ce8ec69"
+    },
+    {
+      "case": "unresolved",
+      "schema_valid": true,
+      "runtime_delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 858,
+        "total_tokens": 1000,
+        "completion_tokens": 142,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-941b291aecb8c366"
+    },
+    {
+      "case": "completed_clear",
+      "schema_valid": true,
+      "runtime_delta_structure_valid": true,
+      "requested_branch_exact": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 838,
+        "total_tokens": 960,
+        "completion_tokens": 122,
+        "prompt_tokens_details": null
+      },
+      "receipt_id": "chatcmpl-8ee271f1ae9517f9"
+    }
+  ],
+  "actual_generation_requests": 6,
+  "actual_embedding_requests": 0,
+  "actual_tools_executed": 0,
+  "basis_commits": 0,
+  "vllm_settings_changed": false,
+  "elapsed_wall_seconds": 6.663713084999472,
+  "schema_json_sha256": "36025dd5f3595a62b564cf540fce5eae530f1566c8c4cb0cdfd208bdb2837006",
+  "semantic_method_validation": false,
+  "schema_sha256": "a558c17f5e96b6d083bd86f1f037de15d8638bde0f8ba9106200a510a10670a4",
+  "private_report_sha256": "c4df2ba7f0117a438e8a16cc3e1901ebdd41d9682b13e1ff66e993f95df0b7eb",
+  "private_trace_sha256": "717b71d3d0b9297eca87f231ab99d098ed2ca49a39148c694eb149a0480a8663",
+  "probe_script_sha256": "4d6d4314bff0c90eb78efa543ba6be5ad142e7fbc8999b38f473e05fb0f6ef37",
+  "generation_input_tokens": 4965,
+  "generation_output_tokens": 669,
+  "generation_total_tokens": 5634,
+  "unknown_usage": 0,
+  "environment_evidence_sha256": "043c1dab90cb52f40da75e88855d9e5e33cb587edd6489c4318fdff96dc191d4",
+  "fixed_model": "Qwen3.6-35B-A3B-FP8"
+}

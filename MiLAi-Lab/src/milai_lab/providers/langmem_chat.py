@@ -215,7 +215,7 @@ class VLLMChatModel(BaseChatModel):
                 raise IncompleteChatResponse("JSON_ACTION_SCHEMA_INVALID") from exc
             if self.m1 is not None:
                 self.m1.commit(self.calls_in_message, message_id,
-                               action["decision_delta"])
+                               action["decision_delta"], action.get("calls"))
             if "calls" in action:
                 for index, call in enumerate(action["calls"]):
                     calls.append({"name": call["name"], "args": call["arguments"],

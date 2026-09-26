@@ -1,0 +1,65 @@
+{
+  "kind": "MILAI_M1_V18_OFFLINE_EVALUATION_PROTOCOL",
+  "status": "FROZEN_BEFORE_MODEL_REQUESTS",
+  "runtime_input": false,
+  "primary_proposition_sample": "Every distinct accepted semantic Basis set in each final run; also report turn-weighted occupancy separately",
+  "proposition_quality": "Concrete current judgment with an alternative that changes meaningful action or a critical parameter; judged manually against actually delivered evidence",
+  "judgments": [
+    "VALID",
+    "LABEL_LIKE",
+    "NOT_ACTION_RELEVANT",
+    "UNSUPPORTED_OR_UNCLEAR"
+  ],
+  "support_roles": "Host declarations only. Mechanically exact ref does not prove value support; manually inspect declared supports_value against the actual body.",
+  "grounding_coverage": "Bases with nonempty critical_parameters and at least one supports_value adoption / bases with nonempty critical_parameters; separately report whether critical values actually supported",
+  "recheck_success": "All fixture requirements, actual new-body delivery, explicit matching retained/changed, current revision adoption, lawful completion and correct authorized action. Unresolved is explicit awareness, not completed recheck.",
+  "completion_denominator": "Triggered reason identities, not projected requests. Report retained/changed/unresolved, task_ended clear, plain clear and protocol rejection separately.",
+  "non_intervention_cases": [
+    "d01",
+    "d04",
+    "d07",
+    "d10"
+  ],
+  "non_intervention_case_ids_offline_only": true,
+  "activation": "Basis present after processed generation / actual normal generations; active/deferred and pre-request projected state separately",
+  "tokens": "Pinned tokenizer of exact delivered Decision Context, original decision_delta JSON field, and recheck_outcome field for non-null completion; completion is a subset of delta, not additive billing. Fixed protocol and full request usage separate.",
+  "storage": "Actual final Decision SQLite bytes and committed write-transaction counters; read-only inspection must not write",
+  "conditional_gates": {
+    "V4": "V2 changed and both V3 controls must pass on one final implementation",
+    "V5": "Preceding mechanism remains valid; inspect V4 for severe new semantic harm before running arc0"
+  },
+  "strict_stop": "If the fully implemented changed case still executes stale 4 C under plan section35 conditions, stop this method line; do not rescue by longer prompt/fields/Attention/reviewer or per-case rules.",
+  "source_v17_baseline": {
+    "distinct_states": 14,
+    "label_like": 9,
+    "adoption_validity": [
+      22,
+      22
+    ],
+    "controlled_recheck": [
+      0,
+      1
+    ],
+    "extra_independent_state_generations": 0
+  },
+  "fixtures": {
+    "changed": {
+      "fixture_path": "data/fixtures/milai_m1_v18_recheck_changed.json",
+      "fixture_sha256": "5bf01cc8b701f698fcef85db5d3394853c7557504be262d2e7e63e912eec46e1",
+      "freeze_path": "data/manifests/milai-m1-v18-changed-freeze.json",
+      "freeze_sha256": "5d1b5d069e1e955b92a65870aa529c3ad96added730a2d338e45deed0d6ca324"
+    },
+    "retained": {
+      "fixture_path": "data/fixtures/milai_m1_v18_recheck_retained.json",
+      "fixture_sha256": "634a9fb1351cef0ef4dc3dafcd6a19d6566a138966bbd294c6b52b3226b9b78d",
+      "freeze_path": "data/manifests/milai-m1-v18-retained-freeze.json",
+      "freeze_sha256": "5e003a2240d919cb39c5552165cb32a56384ce4a3cad897e999c72803f1d204a"
+    },
+    "irrelevant": {
+      "fixture_path": "data/fixtures/milai_m1_v18_irrelevant_revision.json",
+      "fixture_sha256": "bd836779658f18f70532fa69d0a694c1150436df7423b87a60de9e067160b2ac",
+      "freeze_path": "data/manifests/milai-m1-v18-irrelevant-freeze.json",
+      "freeze_sha256": "00d03b63bef92d7f0aa5c4cd152f7a85c7883e10f2f7135986cffa1abf52bc09"
+    }
+  }
+}
