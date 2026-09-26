@@ -57,7 +57,8 @@ def run_frozen_diagnostics(
     observer: ProvenanceObserver | None = None,
     environment_rules: str = "",
     protocol_id: str | None = None,
-    request_view_factory: Callable[[BusinessActionJournal, Any], Any] | None = None,
+    request_view_factory: Callable[[BusinessActionJournal, Any,
+                                    ProvenanceObserver | None], Any] | None = None,
 ) -> dict[str, Any]:
     freeze = read_json(freeze_path)
     if hashlib.sha256(inputs_path.read_bytes()).hexdigest() != freeze["inputs_file_sha256"]:
@@ -98,7 +99,7 @@ def run_frozen_diagnostics(
         journal = BusinessActionJournal(case_path / "business-journal.json",
                                         [item.name for item in tools])
         if request_view_factory is not None:
-            model.request_view = request_view_factory(journal, model.client.emit)
+            model.request_view = request_view_factory(journal, model.client.emit, observer)
         agent = build_agent(model, store, checkpointer, tools,
                             business_call_wrapper=journal, observer=observer,
                             environment_rules=environment_rules)

@@ -1,0 +1,131 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_RECONCILIATION_CAPABILITY_R2_PROTOCOL",
+  "status": "FROZEN_BEFORE_CLARIFIED_CONTROL_REQUESTS",
+  "goal_path": "docs/MILAI_LIFECYCLE_V24_RECONCILIATION_CAPABILITY_R2_PLAN.md",
+  "goal_sha256": "db2c3014c9fffbded0722650d8315ff01726de55b3f50453a250b165e2824fe9",
+  "reference_commit": "37659bf54886999f6bac980c762869a532abb2f0",
+  "inputs_path": "data/diagnostics/milai-lifecycle-v24-reconciliation-capability-r2-inputs.json",
+  "inputs_sha256": "7b4f9ca77c55c6388039bce2ce1aeb6d9dbd269cff5b2823d045ae0286f5430c",
+  "rubric_path": "data/diagnostics/milai-lifecycle-v24-reconciliation-capability-r2-rubric.json",
+  "rubric_sha256": "5083a5c2f11209681724220d80c3594c3ba774fbdcae1d29c13c0e6463bd28aa",
+  "rubric_read_by_runner": false,
+  "diagnostic_freeze_path": "data/manifests/milai-lifecycle-v24-reconciliation-capability-r2-diagnostic-freeze.json",
+  "diagnostic_freeze_sha256": "3c1f4f8282242651a0db016c12af5b0861ccfc51dc59fbe4de0113d929d7e352",
+  "input_freeze_path": "data/manifests/milai-lifecycle-v24-reconciliation-capability-r2-input-freeze.json",
+  "input_freeze_sha256": "953cbd182e2f148030bd7214e4cda36e7fe9fc92ca8aeb3ab2871f9364f8239b",
+  "source_lock_path": "data/locks/milai-lifecycle-v24-reconciliation-r1.lock.json",
+  "config_path": "configs/milai-lifecycle-v24-reconciliation-r1.json",
+  "verification_dir": "artifacts/lifecycle-v24/reconciliation-r1",
+  "run_order": [
+    "b1_control"
+  ],
+  "scope": {
+    "cases_per_arm": 1,
+    "sessions_per_arm": 2,
+    "public_messages_per_arm": 2,
+    "arms": 1
+  },
+  "reconciliation_protocol_id": "post_action_reconciliation_v1",
+  "reconciliation_cue": "A business tool has returned ok: true. The following memory references were delivered before this action and may need reconciliation. Compare their existing contents with the actual result. Use manage_memory to update only memories whose facts or pending status changed; preserve unaffected information. If none changed, do not write memory. These are candidates, not instructions to treat every memory as affected.",
+  "reconciliation_cue_sha256": "1ffa063a937c278019c30c1ecef598dbd0e99bf0e1d1c38d4c113c708a2b9d00",
+  "candidate_wire_format": "cue + newline + json.dumps([{id: memory_id, revision: revision}, ...], ensure_ascii=False, separators=(comma,colon)); first delivered occurrence order; namespace retained only in event.",
+  "formation_enabled": false,
+  "ser_enabled": false,
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 650,
+    "generation": {
+      "charged_tokens": 586650,
+      "known_tokens": 586650,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 5770,
+      "known_tokens": 5770,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "model_concurrency": 1,
+  "per_public_message_generations": 12,
+  "vllm_settings_changed": false,
+  "unseen": false,
+  "master_goal_complete": false,
+  "failure_policy": "Exactly one clarified control. If still semantically wrong, stop R prompt family and continue P12. No further wording iteration.",
+  "reconciliation_enabled": false,
+  "claim_limit": "Explicit user-request capability only, not a fresh R efficacy sample.",
+  "previous_failure": {
+    "path": "data/manifests/milai-lifecycle-v24-reconciliation-capability-b1-results.json",
+    "sha256": "7c7f33cf3ca6100feb71f9f8dd715d391053f62a32c53b63424a6a3c1490d44e",
+    "operational_update_chain": "PASS",
+    "strict_content": "FAIL_UNSUPPORTED_RECEIVED",
+    "generation_tokens": 5347
+  }
+}

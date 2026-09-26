@@ -21,6 +21,8 @@ from milai_lab.methods.memory_lifecycle import (
     FORMATION_PROTOCOL_ID,
     OBSERVATION_PROTOCOL_ID,
     OBSERVATION_REMINDER_SHA256,
+    RECONCILIATION_CUE_SHA256,
+    RECONCILIATION_PROTOCOL_ID,
 )
 
 LAB = Path(__file__).resolve().parents[4]
@@ -68,6 +70,7 @@ REQUIRED_LIFECYCLE_V24_RUNTIME = REQUIRED_SER_V23_RUNTIME | {
     "configs/milai-lifecycle-v24-formation.json",
     "configs/milai-lifecycle-v24-formation-r2.json",
     "configs/milai-lifecycle-v24-formation-r3.json",
+    "configs/milai-lifecycle-v24-reconciliation-r1.json",
     "src/milai_lab/methods/memory_lifecycle.py",
 }
 
@@ -193,20 +196,33 @@ def verify_ser_v23_lock(lock_path: Path, config_path: Path,
 
 
 def verify_lifecycle_v24_lock(lock_path: Path, config_path: Path,
+                              *, arm_id: str | None = None,
                               ) -> tuple[dict[str, Any], dict[str, Any]]:
     lock, config = _verify_ser_lock(
         lock_path, config_path, kind="MILAI_LIFECYCLE_V24_LOCK",
         recipe_id=B1_RECIPE_ID, transport_variant="json_action",
         required_runtime=REQUIRED_LIFECYCLE_V24_RUNTIME)
-    for key, value in {"formation_protocol_id": FORMATION_PROTOCOL_ID,
-                       "formation_cue_sha256": FORMATION_CUE_SHA256}.items():
+    if "reconciliation_protocol_id" in config:
+        expected = {"reconciliation_protocol_id": RECONCILIATION_PROTOCOL_ID,
+                    "reconciliation_cue_sha256": RECONCILIATION_CUE_SHA256}
+        protocols = {"b1_control": "langmem_default_v1",
+                     "r_post_action": RECONCILIATION_PROTOCOL_ID}
+    else:
+        expected = {"formation_protocol_id": FORMATION_PROTOCOL_ID,
+                    "formation_cue_sha256": FORMATION_CUE_SHA256}
+        protocols = {"b1_control": "langmem_default_v1",
+                     "f_prospective_retention": FORMATION_PROTOCOL_ID}
+        if "observation_protocol_id" in config:
+            expected.update({"observation_protocol_id": OBSERVATION_PROTOCOL_ID,
+                             "observation_reminder_sha256": OBSERVATION_REMINDER_SHA256})
+            protocols["f_observation_retention"] = OBSERVATION_PROTOCOL_ID
+    for key, value in expected.items():
         if lock.get(key) != value or config.get(key) != value:
             raise ValueError("LIFECYCLE_V24_" + key.upper() + "_CHANGED")
-    if "observation_protocol_id" in config:
-        for key, value in {"observation_protocol_id": OBSERVATION_PROTOCOL_ID,
-                           "observation_reminder_sha256": OBSERVATION_REMINDER_SHA256}.items():
-            if lock.get(key) != value or config.get(key) != value:
-                raise ValueError("LIFECYCLE_V24_" + key.upper() + "_CHANGED")
+    if lock.get("protocol_by_arm") != protocols:
+        raise ValueError("LIFECYCLE_V24_PROTOCOL_BY_ARM_CHANGED")
+    if arm_id is not None and arm_id not in protocols:
+        raise ValueError("LIFECYCLE_V24_ARM_NOT_DECLARED")
     return lock, config
 
 
@@ -282,7 +298,7 @@ def verify_lifecycle_v24_prepared(receipt_path: Path, lock_path: Path,
                                   config_path: Path, *, run_id: str, arm_id: str,
                                   mode: str, input_path: Path, exposed_freeze: Path,
                                   diagnostic_freeze: Path | None) -> str:
-    verify_lifecycle_v24_lock(lock_path, config_path)
+    verify_lifecycle_v24_lock(lock_path, config_path, arm_id=arm_id)
     receipt = read_json(receipt_path)
     expected = {"status": "PREPARED_ZERO_MODEL", "method": "lifecycle_v24",
                 "run_id": run_id, "arm_id": arm_id, "mode": mode,

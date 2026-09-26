@@ -27,6 +27,10 @@ Root冻结四个独立开发fixture：未来约定、业务回执、临时计算
 
 ## R：后续独立冻结
 
+[R1](MILAI_LIFECYCLE_V24_RECONCILIATION_R1_RESULTS_20260927.md)已完成独立实现/冻结/两臂三例：B1/R均2/3，候选2/2送达，成功动作后pending仍不改。单独明确用户要求的控制触发真实update，但误写未获证据的“received”，严格0/1；先澄清控制中receipt的歧义，再判断是否值得一次原content呈现修复。连续650生成/586650tokens/5770embeddingtokens/75exact reads，旧失败保留。
+
+唯一合同澄清控制随后严格1/1，原失败不改判；[控制汇总](../data/manifests/milai-lifecycle-v24-reconciliation-capability-results.json)只证明明确用户任务下的准确组合能力。连续656生成/591982tokens/5884embeddingtokens/75get。Luna发布本轮后，只允许另行冻结一次原content呈现候选，保持R1 cue/三例不变，P12实现随后推进。
+
 仅在F首轮结果分析完成后进入。预期接口为实际成功业务回执→此前动作生成请求实际送达的exact记忆refs→候选提示→普通Host更新或no-op。程序只关联元数据，不判断正文真值/语义相关、不直接改正文，不额外搜索或读取Store。首版业务成功合同为工具JSON回执`ok: true`；journal complete或ToolMessage success本身不能冒充业务成功。无exact候选则不提示。
 
 先用三个独立控制：成功动作对应pending并夹有无关记忆、失败`ok:false`保持pending、成功但无关动作应no-op。具体fixture、提示、source及rubric在调用前另行冻结，F提示不混入R比较。报告stale-current、false update、unnecessary maintenance和action-memory consistency；候选范围仅限实际送达refs的限制必须明确。
@@ -42,7 +46,7 @@ vLLM设置不变，现有Qwen3.6-35B-A3B-FP8、temperature0、thinking=false、m
 - [x] F输入/rubric/protocol、最小源码、必要窄验证和新源锁。
 - [x] 首轮同源B1/F十二消息机会、后续独立候选、实际wire/持久记忆/业务回执与完整费用。
 - [x] F Failure Review、十项Reflection与Continue/Pivot/Kill；负结果封存，无效cue不默认启用。
-- [ ] 独立R源冻结、三个控制、实际候选/普通CRUD/反例与费用。
+- [x] 独立R源冻结、三个控制、实际候选/普通CRUD/反例与费用；原候选无收益，失败诊断继续。
 - [ ] 生命周期结果与复现、Luna提交推送并核对remote。
 
 Product、旧M1/ODR、P9结果和原计划字节保持；不引入自动semantic truth gate，不改vLLM配置。

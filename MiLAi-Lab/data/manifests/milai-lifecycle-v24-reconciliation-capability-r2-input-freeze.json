@@ -1,0 +1,11 @@
+{
+  "diagnostic": {
+    "inputs_path": "data/diagnostics/milai-lifecycle-v24-reconciliation-capability-r2-inputs.json",
+    "inputs_sha256": "7b4f9ca77c55c6388039bce2ce1aeb6d9dbd269cff5b2823d045ae0286f5430c",
+    "freeze_path": "data/manifests/milai-lifecycle-v24-reconciliation-capability-r2-diagnostic-freeze.json",
+    "freeze_sha256": "3c1f4f8282242651a0db016c12af5b0861ccfc51dc59fbe4de0113d929d7e352",
+    "cases": 1,
+    "sessions": 2,
+    "public_messages": 2
+  }
+}

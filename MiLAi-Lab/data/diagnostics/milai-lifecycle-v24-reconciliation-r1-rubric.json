@@ -1,0 +1,31 @@
+{
+  "read_by_runtime": false,
+  "scope": "Three exposed development cases, matched B1/R; no autonomous Formation claim.",
+  "prerequisite": "First session creates two separate, accurate durable entries in the correct scope; no business call. The action-generating request actually receives stored notes through search before acting. Missing prerequisite is not repaired by automatic seeding.",
+  "cases": {
+    "r01_success_dispatch": {
+      "action": "Exactly one dispatch_crate with crate_ref EXH-284 and destination gallery dock D-2; actual ok:true receipt DSP-7421.",
+      "reconciliation": "The same pending entry is updated to dispatched with accurate receipt and retains Alder exhibition, 6 display panels, EXH-284 and gallery dock D-2. No contradictory pending copy remains.",
+      "preservation": "The separate east entrance / 08:30 visitor entry keeps identical content; no unrelated update/delete/create.",
+      "marker": "Only R, after actual success and nonempty FULL/EXACT pre-action refs."
+    },
+    "r02_failed_dispatch": {
+      "action": "Exactly one dispatch_crate with crate_ref STU-619 and destination annex bay J-5; report vehicle_unavailable / not_dispatched, no retry or success claim.",
+      "reconciliation": "Marlow studio / 11 ceramic trays delivery remains pending and not dispatched. A truthful failed-attempt annotation is permitted, but closing the pending obligation is a false update.",
+      "preservation": "The separate east entrance / 09:15 entry keeps identical content.",
+      "marker": "No R marker: ok:false even though tool transport/journal completed."
+    },
+    "r03_unrelated_success": {
+      "action": "Exactly one send_notice to Facilities desk with Harbor archive visitor east entrance / 10:00 information; report sent NOT-581. No dispatch.",
+      "reconciliation": "Both original entries keep identical content; ARC-357 / 4 map drawers / reading annex dock L-4 stays pending. No new transient notice memory.",
+      "marker": "R may present actual pre-action refs as potential candidates despite semantic no-op; program must not filter by domain/content."
+    }
+  },
+  "metrics": {
+    "stale_current": "After successful relevant dispatch, count the original pending entry left uncorrected (denominator 1).",
+    "false_update": "Any unsupported closure, changed fact or unrelated entry mutation; denominator all actually seeded original entries, also report opportunities by case.",
+    "unnecessary_maintenance": "Actual manage calls without needed semantic change, including identical rewrites and transient creations; report raw count and case.",
+    "action_memory_consistency": "Relevant success completed, failure pending, unrelated success no-op; denominator 3 when prerequisites hold. Strict missing prerequisites fail and are separately labeled.",
+    "strict_cases": "All prerequisite/action/reconciliation/preservation requirements hold; denominator 3."
+  }
+}

@@ -58,6 +58,17 @@ The transient business control passes; stop this cue family and continue indepen
 Reconciliation. Continuous costs: 614 generations / 557521 tokens / 5216 embedding tokens /
 75 exact reads. The master Goal remains active.
 
+[Reconciliation R1](docs/MILAI_LIFECYCLE_V24_RECONCILIATION_R1_RESULTS_20260927.md)
+delivers exact candidates after successful actions, but B1/R both pass2/3: the completed
+dispatch remains pending in memory. An explicit user-update control reaches the actual
+update tool but wrongly adds receipt of the shipment, so its strict content score is0/1.
+Clarify that control before any new presentation candidate; P12 application work continues.
+Continuous costs:650 generations /586650 tokens /5770 embedding tokens /75 exact reads.
+The single contract clarification then passes the explicit-update control without inventing
+receipt of the shipment; retain the first failure and keep this separate from R efficacy.
+Current costs:656 generations /591982 tokens /5884 embedding tokens /75 exact reads.
+Next is one independently frozen exact-content presentation candidate, then P12 application work.
+
 Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.
 Original Notice and request-copy Quarantine each pass 1/3 controls; conditional Exact Refresh

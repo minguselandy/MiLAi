@@ -590,6 +590,56 @@ class RevisionSidecar:
             ).fetchone()
             return dict(row) if row is not None else None
 
+    def full_exact_memory_refs_for_generation(
+        self, thread_id: str, response_id: str,
+    ) -> tuple[str | None, list[dict[str, Any]]]:
+        """Read only original search material fully sent in one generating request."""
+        with self._lock:
+            request = self.conn.execute(
+                "SELECT r.request_id,o.run_id,o.arm_id,o.actor_ref FROM requests AS r "
+                "JOIN observations AS o ON o.thread_id=r.thread_id "
+                "AND o.public_message_index=r.public_message_index "
+                "AND o.role='user' AND o.artifact='public_message' "
+                "WHERE r.thread_id=? AND r.provider_receipt_id=? AND r.status='completed' "
+                "ORDER BY r.rowid DESC LIMIT 1", (thread_id, response_id),
+            ).fetchone()
+            if request is None:
+                return None, []
+            materials = self.conn.execute(
+                "SELECT m.tool_call_id,s.search_id,s.returned_json,b.body_json "
+                "FROM request_material AS m JOIN searches AS s "
+                "ON s.search_id=m.source_id AND s.call_id=m.tool_call_id "
+                "JOIN bodies AS b ON b.body_ref=s.tool_message_body_ref "
+                "WHERE m.request_id=? AND m.source_kind='search' AND m.coverage='FULL' "
+                "AND s.thread_id=? AND s.status='returned' "
+                "AND s.tool_message_body_ref=m.body_ref ORDER BY m.rowid",
+                (request["request_id"], thread_id),
+            ).fetchall()
+        expected_namespace = ["langmem", request["run_id"], request["arm_id"],
+                              request["actor_ref"]]
+        refs: list[dict[str, Any]] = []
+        seen: set[tuple[tuple[str, ...], str, int]] = set()
+        for material in materials:
+            returned = json.loads(material["returned_json"])
+            body = json.loads(json.loads(material["body_json"]))
+            if (not isinstance(body, list) or len(body) != len(returned)
+                    or any(raw != item["store_item"] for raw, item in zip(
+                        body, returned, strict=True))):
+                continue
+            for item in returned:
+                if (item["revision_status"] != "EXACT"
+                        or item["namespace"] != expected_namespace):
+                    continue
+                key = (tuple(item["namespace"]), item["memory_id"], item["revision"])
+                if key in seen:
+                    continue
+                seen.add(key)
+                refs.append({"namespace": item["namespace"], "id": item["memory_id"],
+                             "revision": item["revision"],
+                             "source_search_id": material["search_id"],
+                             "source_tool_call_id": material["tool_call_id"]})
+        return request["request_id"], refs
+
     def rows(self, table: str) -> list[dict[str, Any]]:
         if table not in {"bodies", "observations", "tool_calls", "operations", "revisions",
                          "searches", "requests", "request_material", "assistant_lineage"}:

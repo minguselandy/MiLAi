@@ -1,0 +1,148 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_RECONCILIATION_CAPABILITY_RESULTS",
+  "source_mapping_sha256": "f594525fa1cbdf8c422b28ed4a8e73f8d209026d6b8cf5a612a724f9fc7fe8e1",
+  "source_unchanged_between_controls": true,
+  "run_results_sha256": {
+    "data/manifests/milai-lifecycle-v24-reconciliation-capability-b1-results.json": "7c7f33cf3ca6100feb71f9f8dd715d391053f62a32c53b63424a6a3c1490d44e",
+    "data/manifests/milai-lifecycle-v24-reconciliation-capability-r2-b1-results.json": "e0584ecd14e90a89258e67b81254bd844ebfbca4c092acd0de4e33a0ad1805fd"
+  },
+  "first_control": {
+    "operational_chain_successes": 1,
+    "strict_content_successes": 0,
+    "denominator": 1,
+    "failure": "Ordinary update added unsupported received status although business result only said dispatched.",
+    "usage": {
+      "generations": 6,
+      "input_tokens": 5014,
+      "output_tokens": 333,
+      "generation_tokens": 5347,
+      "embedding_requests": 4,
+      "embedding_tokens": 114,
+      "unknown_usage": 0,
+      "truncations": 0,
+      "provider_wall_seconds": 3.161114072892815,
+      "exact_version_resolution_reads": 0,
+      "judge_requests": 0
+    }
+  },
+  "clarified_control": {
+    "operational_chain_successes": 1,
+    "strict_content_successes": 1,
+    "denominator": 1,
+    "repair": "Only public user contract actual outcome and receipt -> actual returned status and identifier.",
+    "unrelated_entries_preserved": 1,
+    "actual_original_id_update": true,
+    "usage": {
+      "generations": 6,
+      "input_tokens": 5009,
+      "output_tokens": 323,
+      "generation_tokens": 5332,
+      "embedding_requests": 4,
+      "embedding_tokens": 114,
+      "unknown_usage": 0,
+      "truncations": 0,
+      "provider_wall_seconds": 3.100537149235606,
+      "exact_version_resolution_reads": 0,
+      "judge_requests": 0
+    }
+  },
+  "totals": {
+    "generations": 12,
+    "input_tokens": 10023,
+    "output_tokens": 656,
+    "generation_tokens": 10679,
+    "embedding_requests": 8,
+    "embedding_tokens": 228,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "provider_wall_seconds": 6.261651222128421,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "continuous_budget": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 656,
+    "generation": {
+      "charged_tokens": 591982,
+      "known_tokens": 591982,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 5884,
+      "known_tokens": 5884,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "continuous_exact_resolution_reads": 75,
+  "claim_limit": "Explicit user-request capability controls, not autonomous R efficacy. R1 remains 2/3 and successful dispatch remains stale-current.",
+  "decision": "Permit one separately frozen exact-content candidate presentation experiment, retaining the R1 cue, inputs, retrieval, tools and model; no further wording iteration.",
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}

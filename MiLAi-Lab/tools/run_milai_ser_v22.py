@@ -100,7 +100,8 @@ def run(args: argparse.Namespace, *,
         lock_identity_key: str = "ser_v22_lock_sha256",
         environment_rules: str = "",
         protocol_id: str | None = None,
-        request_view_factory: Callable[[BusinessActionJournal, Any], Any] | None = None,
+        request_view_factory: Callable[[BusinessActionJournal, Any,
+                                        ProvenanceObserver | None], Any] | None = None,
         ) -> dict[str, Any]:
     input_path = _input(args)
     lock_sha = prepared_verifier(

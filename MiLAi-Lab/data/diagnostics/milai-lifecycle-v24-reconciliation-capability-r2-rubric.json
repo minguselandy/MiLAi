@@ -1,0 +1,11 @@
+{
+  "read_by_runtime": false,
+  "case": {
+    "action": "Exactly one dispatch_crate with crate_ref EXH-284 and destination gallery dock D-2; actual ok:true receipt DSP-7421.",
+    "reconciliation": "The same pending entry is updated to dispatched with accurate receipt and retains Alder exhibition, 6 display panels, EXH-284 and gallery dock D-2. No contradictory pending copy remains.",
+    "preservation": "The separate east entrance / 08:30 visitor entry keeps identical content; no unrelated update/delete/create.",
+    "marker": "No marker; B1 default. Explicit user instruction tests post-business update capability, not autonomous R efficacy."
+  },
+  "prerequisite": "Two accurate separate entries saved in the first session, and actual search delivery precedes the correct dispatch action.",
+  "claim_limit": "Separate explicit user-request capability control; do not combine with R method case score."
+}

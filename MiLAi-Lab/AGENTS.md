@@ -178,6 +178,24 @@ actual ok:true receipts and FULL/EXACT refs from the action-generating request b
 potential candidates; ordinary Host decides update/no-op. Disable F and SER in this comparison.
 No Store read, automatic prose update, new model phase or vLLM change. P10/P12/master continue.
 
+[R1](docs/MILAI_LIFECYCLE_V24_RECONCILIATION_R1_RESULTS_20260927.md) is frozen on mapping
+`f594525fa1cbdf8c422b28ed4a8e73f8d209026d6b8cf5a612a724f9fc7fe8e1`, with four narrow checks
+and one build. B1/R both pass2/3; two R markers actually deliver four scoped exact refs,
+yet the successful dispatch stays pending. The independent explicit-user control performs
+real update but invents “and received”; strict0/1, operational chain only passes. Preserve
+650 generations /586650tokens /5770embeddingtokens /75exact reads. First clarify the control's
+ambiguous “receipt” wording once, with new fixture freeze and unchanged source; only a strict
+pass permits considering one exact-body presentation candidate. No repeat CRUD checks or
+wording pile-up. P12 durable application design proceeds read-only until Root releases source.
+
+The one clarified explicit-update control now passes1/1 with the original ID and accurate
+dispatched status/identifier, no unsupported received fact and no unrelated change. Preserve
+the first strict failure, and continuous656 generations /591982tokens /5884embeddingtokens /75get.
+After Luna checkpoint, Root may release ONE R exact-content presentation candidate: unchanged
+cue/three-case inputs, copy previously FULL/EXACT delivered content alongside IDs, no semantic
+selection or Store read. R1 remains2/3; explicit user capability is not autonomous R benefit.
+If this presentation still fails, stop this R prompt family and proceed to P12 application work.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -61,7 +62,11 @@ from milai_lab.methods.memory_lifecycle import (
     OBSERVATION_PROTOCOL_ID,
     OBSERVATION_REMINDER,
     OBSERVATION_REMINDER_SHA256,
+    RECONCILIATION_CUE,
+    RECONCILIATION_CUE_SHA256,
+    RECONCILIATION_PROTOCOL_ID,
     BusinessObservationRequestView,
+    BusinessReconciliationRequestView,
 )
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
@@ -950,11 +955,12 @@ def test_formation_cue_is_only_system_difference_and_identity_is_explicit(
     for arm in entry.ARMS:
         entry.run(SimpleNamespace(arm=arm))
     assert [item["environment_rules"] for item in captured] == [
-        "", FORMATION_CUE, FORMATION_CUE]
+        "", FORMATION_CUE, FORMATION_CUE, ""]
     assert [item["protocol_id"] for item in captured] == [
-        "langmem_default_v1", FORMATION_PROTOCOL_ID, OBSERVATION_PROTOCOL_ID]
+        "langmem_default_v1", FORMATION_PROTOCOL_ID, OBSERVATION_PROTOCOL_ID,
+        RECONCILIATION_PROTOCOL_ID]
     assert [item["request_view_factory"] for item in captured] == [
-        None, None, BusinessObservationRequestView]
+        None, None, BusinessObservationRequestView, BusinessReconciliationRequestView]
 
 
 def test_observation_reminder_requires_current_journal_bound_business_receipt(
@@ -1048,6 +1054,179 @@ def test_observation_reminder_requires_current_journal_bound_business_receipt(
     memory_tool = ToolMessage(content="[]", name="search_memory", tool_call_id="search-call")
     assert projected([*base[:2], memory_ai, memory_tool], f"{thread_id}:0")[0][
         "content"] == "base"
+
+
+def test_reconciliation_uses_only_pre_action_full_exact_refs_and_real_ok(
+    tmp_path: Path,
+) -> None:
+    protocol_path = LAB / "data/manifests/milai-lifecycle-v24-reconciliation-r1-protocol.json"
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    config = json.loads((LAB / "configs/milai-lifecycle-v24-reconciliation-r1.json")
+                        .read_text(encoding="utf-8"))
+    assert protocol["reconciliation_cue"] == RECONCILIATION_CUE
+    assert protocol["reconciliation_cue_sha256"] == config[
+        "reconciliation_cue_sha256"] == RECONCILIATION_CUE_SHA256
+    assert protocol["reconciliation_protocol_id"] == config[
+        "reconciliation_protocol_id"] == RECONCILIATION_PROTOCOL_ID
+    assert "formation_protocol_id" not in config and "observation_protocol_id" not in config
+
+    sidecar = RevisionSidecar(tmp_path / "sidecar.sqlite")
+    thread, namespace = "thread", ["langmem", "run", "r_post_action", "user"]
+    sidecar.observe("user-0", "run", "r_post_action", thread, "session", 0,
+                    "user", "user", "public_message", "dispatch")
+    first_id = "11111111-1111-4111-8111-111111111111"
+    second_id = "22222222-2222-4222-8222-222222222222"
+
+    def item(memory_id: str, scope: list[str], status: str = "EXACT") -> dict[str, Any]:
+        raw = {"namespace": scope, "key": memory_id,
+               "value": {"content": f"note-{memory_id}"}}
+        return {"namespace": scope, "memory_id": memory_id,
+                "revision": 1 if status == "EXACT" else None,
+                "revision_status": status, "store_item": raw}
+
+    entries = [item(first_id, namespace), item(second_id, namespace),
+               item(first_id, namespace), item("unknown", namespace, "IMPORTED_UNKNOWN"),
+               item("foreign", ["langmem", "other", "r_post_action", "user"])]
+    body = json.dumps([entry["store_item"] for entry in entries])
+    unbound_entries = [item("not-delivered", namespace)]
+    unbound_body = json.dumps([unbound_entries[0]["store_item"]])
+
+    def add_search(search_id: str, call_id: str, original_body: str,
+                   returned: list[dict[str, Any]]) -> None:
+        sidecar.conn.execute(
+            "INSERT INTO searches(search_id,call_key,attempt_no,ordinal,thread_id,"
+            "generation_id,call_id,arguments_json,namespace_json,query_text,filter_json,"
+            "result_limit,result_offset,status,returned_json,tool_message_body_ref,"
+            "tool_message_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (search_id, search_id, 1, 1, thread, "search-generation", call_id, "{}",
+             json.dumps(namespace), "notes", "null", 10, 0, "returned",
+             json.dumps(returned), content_identity(original_body)[2], "success"),
+        )
+
+    add_search("search-1", "search-call", body, entries)
+    add_search("search-2", "unbound-call", unbound_body, unbound_entries)
+    sidecar.conn.commit()
+    sidecar.finish_search_message("search-1", body, "success")
+    sidecar.finish_search_message("search-2", unbound_body, "success")
+    sidecar.plan_request("request-before-action", thread, 0, 2)
+    sidecar.finish_request("request-before-action", "completed", {
+        "request": {"messages": [
+            {"role": "tool", "tool_call_id": "search-call", "content": body},
+            {"role": "tool", "tool_call_id": "unbound-call", "content": "[]"}]},
+        "receipt": {"id": "business-generation"}, "http_status": 200,
+    })
+    request_id, refs = sidecar.full_exact_memory_refs_for_generation(
+        thread, "business-generation")
+    assert request_id == "request-before-action"
+    assert [ref["id"] for ref in refs] == [first_id, second_id]
+    assert all(ref["namespace"] == namespace and ref["revision"] == 1 for ref in refs)
+    assert sidecar.rows("request_material")[1]["coverage"] == "UNBOUND"
+
+    journal = BusinessActionJournal(tmp_path / "business-journal.json", ["dispatch"])
+    records: dict[str, Any] = {}
+
+    def business(generation_id: str, call_id: str, ok: bool) -> tuple[AIMessage, ToolMessage]:
+        generated = AIMessage(content="", id=generation_id, tool_calls=[{
+            "id": call_id, "name": "dispatch", "args": {"crate": "C-7"}}])
+        returned = ToolMessage(content=json.dumps({"ok": ok}), name="dispatch",
+                               tool_call_id=call_id)
+        key = hashlib.sha256(json.dumps([thread, generation_id, call_id],
+                                        ensure_ascii=False).encode()).hexdigest()
+        records[key] = {"status": "complete", "thread_id": thread,
+                        "generation_id": generation_id, "call_id": call_id,
+                        "name": "dispatch", "args": {"crate": "C-7"},
+                        "result": returned.model_dump(mode="json")}
+        journal.path.write_text(json.dumps(records), encoding="utf-8")
+        return generated, returned
+
+    generated, returned = business("business-generation", "business-call", True)
+    search_generated = AIMessage(content="", id="search-generation", tool_calls=[{
+        "id": "search-call", "name": "search_memory", "args": {"query": "notes"}}])
+    search_returned = ToolMessage(content=body, name="search_memory",
+                                  tool_call_id="search-call")
+    history = [SystemMessage(content="base"), HumanMessage(content="dispatch"),
+               search_generated, search_returned, generated, returned]
+    events: list[dict[str, Any]] = []
+    requests: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(json.loads(request.read()))
+        return httpx.Response(200, json=_receipt({"answer": "done"}, "after-action"))
+
+    observer = ProvenanceObserver(sidecar, "run", "r_post_action")
+    view = BusinessReconciliationRequestView(journal, events.append, observer)
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client, request_view=view)
+        model.begin_public_message(f"{thread}:0")
+        model.invoke(history, tools=[{
+            "type": "function", "function": {"name": "manage_memory",
+            "description": "Manage memory.",
+            "parameters": {"type": "object", "properties": {}}}}])
+    suffix = RECONCILIATION_CUE + "\n" + json.dumps(
+        [{"id": first_id, "revision": 1}, {"id": second_id, "revision": 1}],
+        ensure_ascii=False, separators=(",", ":"))
+    assert requests[0]["messages"][0]["content"].endswith(suffix)
+    assert requests[0]["messages"][-1]["content"] == returned.content
+    assert history[0].content == "base" and history[-1].content == '{"ok": true}'
+    event = events[-1]
+    assert event["event"] == "reconciliation_projection"
+    assert event["reason"] == "PROJECTED"
+    assert event["matched_business_call_ids"] == ["business-call"]
+    assert event["successful_business_call_ids"] == ["business-call"]
+    assert event["generating_request_id"] == "request-before-action"
+    assert [candidate["id"] for candidate in event["candidates"]] == [first_id, second_id]
+    assert event["provider_request"] is False
+    assert event["cpu_ns"] >= 0 and event["wall_ns"] >= 0
+
+    failed_generated, failed_result = business("business-generation", "business-call", False)
+    failed_history = [*history[:-2], failed_generated, failed_result]
+    failed_wire = convert_to_openai_messages(failed_history)
+    projected, unchanged = view.project(failed_wire, failed_history, f"{thread}:0", 3)
+    assert unchanged is failed_history and projected is failed_wire
+    assert events[-1]["reason"] == "NO_SUCCESSFUL_BUSINESS_RECEIPT"
+
+    sidecar.plan_request("request-same-batch", thread, 0, 4)
+    sidecar.finish_request("request-same-batch", "completed", {
+        "request": {"messages": [{"role": "user", "content": "search and dispatch"}]},
+        "receipt": {"id": "batch-generation"}, "http_status": 200,
+    })
+    _, batch_result = business("batch-generation", "batch-call", True)
+    batch_generated = AIMessage(content="", id="batch-generation", tool_calls=[{
+        "id": "batch-search", "name": "search_memory", "args": {"query": "notes"}},
+        {"id": "batch-call", "name": "dispatch", "args": {"crate": "C-7"}}])
+    batch_search_result = ToolMessage(content=body, name="search_memory",
+                                      tool_call_id="batch-search")
+    batch_history = [SystemMessage(content="base"), HumanMessage(content="batch"),
+                     batch_generated, batch_search_result, batch_result]
+    batch_wire = convert_to_openai_messages(batch_history)
+    projected, _ = view.project(batch_wire, batch_history, f"{thread}:0", 5)
+    assert projected is batch_wire
+    assert events[-1]["reason"] == "NO_FULL_EXACT_CANDIDATES"
+    assert events[-1]["generating_request_id"] == "request-same-batch"
+    sidecar.close()
+
+
+def test_lifecycle_arm_requires_matching_lock_protocol(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.freshness_projection import identity
+
+    r_config = {"reconciliation_protocol_id": RECONCILIATION_PROTOCOL_ID,
+                "reconciliation_cue_sha256": RECONCILIATION_CUE_SHA256}
+    r_lock = {**r_config, "protocol_by_arm": {
+        "b1_control": "langmem_default_v1", "r_post_action": RECONCILIATION_PROTOCOL_ID}}
+    monkeypatch.setattr(identity, "_verify_ser_lock", lambda *_args, **_kwargs: (
+        r_lock, r_config))
+    identity.verify_lifecycle_v24_lock(Path("lock"), Path("config"), arm_id="r_post_action")
+    with pytest.raises(ValueError, match="LIFECYCLE_V24_ARM_NOT_DECLARED"):
+        identity.verify_lifecycle_v24_lock(Path("lock"), Path("config"),
+                                           arm_id="f_observation_retention")
+    r_lock["protocol_by_arm"]["r_post_action"] = FORMATION_PROTOCOL_ID
+    with pytest.raises(ValueError, match="LIFECYCLE_V24_PROTOCOL_BY_ARM_CHANGED"):
+        identity.verify_lifecycle_v24_lock(Path("lock"), Path("config"),
+                                           arm_id="r_post_action")
 
 
 def test_v21_authority_only_when_actual_memory_or_derived_risk_is_projected() -> None:

@@ -1,0 +1,8 @@
+{
+  "inputs_file_sha256": "eebbe91d8490ea704b71236ade8fa67c108696580f5a8bc7218cf129fc2e17a2",
+  "cases": 3,
+  "sessions": 6,
+  "public_messages": 6,
+  "rubric_path": "data/diagnostics/milai-lifecycle-v24-reconciliation-r1-rubric.json",
+  "rubric_sha256": "3fcc5965b5974f12cc7b51810260fb7c1d086d5c6b7ccedcbb61accfc7e7699f"
+}

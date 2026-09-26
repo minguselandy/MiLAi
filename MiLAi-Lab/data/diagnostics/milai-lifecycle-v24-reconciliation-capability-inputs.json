@@ -1,0 +1,57 @@
+{
+  "cases": [
+    {
+      "id": "rc_explicit_post_action_update",
+      "tools": [
+        {
+          "schema": {
+            "type": "function",
+            "function": {
+              "name": "dispatch_crate",
+              "description": "Dispatch the exact stored crate reference to its specified destination and return the actual outcome.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "crate_ref": {
+                    "type": "string"
+                  },
+                  "destination": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "crate_ref",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "result": {
+            "ok": true,
+            "dispatch_id": "DSP-7421",
+            "status": "dispatched"
+          }
+        }
+      ],
+      "sessions": [
+        {
+          "id": "save",
+          "turns": [
+            {
+              "text": "Please save these as two separate long-term memory entries for our next related conversation. First: Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched. Second: visitors to Alder exhibition use the east entrance, which opens at 08:30. Save both entries now; do not perform any business action yet."
+            }
+          ]
+        },
+        {
+          "id": "act",
+          "turns": [
+            {
+              "text": "Search your stored notes for Alder exhibition, including its delivery plan and visitor access details. Dispatch the planned crate using its exact stored reference and destination. Make one dispatch attempt only; if it fails, report the failure without retrying. Report the actual outcome. If and only if the dispatch succeeds, update the corresponding saved pending delivery entry to reflect the actual outcome and receipt before your final reply. Leave the unrelated visitor entry unchanged."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

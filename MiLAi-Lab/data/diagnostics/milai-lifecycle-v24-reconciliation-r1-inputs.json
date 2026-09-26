@@ -1,0 +1,163 @@
+{
+  "cases": [
+    {
+      "id": "r01_success_dispatch",
+      "tools": [
+        {
+          "schema": {
+            "type": "function",
+            "function": {
+              "name": "dispatch_crate",
+              "description": "Dispatch the exact stored crate reference to its specified destination and return the actual outcome.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "crate_ref": {
+                    "type": "string"
+                  },
+                  "destination": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "crate_ref",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "result": {
+            "ok": true,
+            "dispatch_id": "DSP-7421",
+            "status": "dispatched"
+          }
+        }
+      ],
+      "sessions": [
+        {
+          "id": "save",
+          "turns": [
+            {
+              "text": "Please save these as two separate long-term memory entries for our next related conversation. First: Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched. Second: visitors to Alder exhibition use the east entrance, which opens at 08:30. Save both entries now; do not perform any business action yet."
+            }
+          ]
+        },
+        {
+          "id": "act",
+          "turns": [
+            {
+              "text": "Search your stored notes for Alder exhibition, including its delivery plan and visitor access details. Dispatch the planned crate using its exact stored reference and destination. Make one dispatch attempt only; if it fails, report the failure without retrying. Report the actual outcome."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r02_failed_dispatch",
+      "tools": [
+        {
+          "schema": {
+            "type": "function",
+            "function": {
+              "name": "dispatch_crate",
+              "description": "Dispatch the exact stored crate reference to its specified destination and return the actual outcome.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "crate_ref": {
+                    "type": "string"
+                  },
+                  "destination": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "crate_ref",
+                  "destination"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "result": {
+            "ok": false,
+            "error": "vehicle_unavailable",
+            "status": "not_dispatched"
+          }
+        }
+      ],
+      "sessions": [
+        {
+          "id": "save",
+          "turns": [
+            {
+              "text": "Please save these as two separate long-term memory entries for our next related conversation. First: Marlow studio has a pending delivery of 11 ceramic trays in crate STU-619 to annex bay J-5; the crate has not been dispatched. Second: visitors to Marlow studio use the east entrance, which opens at 09:15. Save both entries now; do not perform any business action yet."
+            }
+          ]
+        },
+        {
+          "id": "act",
+          "turns": [
+            {
+              "text": "Search your stored notes for Marlow studio, including its delivery plan and visitor access details. Dispatch the planned crate using its exact stored reference and destination. Make one dispatch attempt only; if it fails, report the failure without retrying. Report the actual outcome."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r03_unrelated_success",
+      "tools": [
+        {
+          "schema": {
+            "type": "function",
+            "function": {
+              "name": "send_notice",
+              "description": "Send the supplied message to the named recipient and return the actual delivery result.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recipient": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "recipient",
+                  "message"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "result": {
+            "ok": true,
+            "notice_id": "NOT-581",
+            "status": "sent"
+          }
+        }
+      ],
+      "sessions": [
+        {
+          "id": "save",
+          "turns": [
+            {
+              "text": "Please save these as two separate long-term memory entries for our next related conversation. First: Harbor archive has a pending delivery of 4 map drawers in crate ARC-357 to reading annex dock L-4; the crate has not been dispatched. Second: visitors to Harbor archive use the east entrance, which opens at 10:00. Save both entries now; do not perform any business action yet."
+            }
+          ]
+        },
+        {
+          "id": "act",
+          "turns": [
+            {
+              "text": "Search your stored notes for Harbor archive, including its delivery plan and visitor access details. Then send the Facilities desk a one-time notice of the visitor entrance and opening time from those notes. This notice is for today only and has no future use. Do not dispatch anything; report the actual notice result."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

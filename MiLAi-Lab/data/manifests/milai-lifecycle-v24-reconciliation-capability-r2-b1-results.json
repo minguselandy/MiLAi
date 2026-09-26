@@ -1,0 +1,338 @@
+{
+  "kind": "MILAI_LIFECYCLE_V24_RECONCILIATION_RUN_REVIEW",
+  "run_id": "lifecycle-v24-reconciliation-b1-capability-r2",
+  "arm": "b1_control",
+  "source_mapping_sha256": "f594525fa1cbdf8c422b28ed4a8e73f8d209026d6b8cf5a612a724f9fc7fe8e1",
+  "status": "MECHANICAL_PASS_SEMANTIC_REVIEW_SEPARATE",
+  "runtime_status": "TERMINAL",
+  "identity": {
+    "recipe_id": "langmem-hotpath-react-json-action-v1",
+    "run_id": "lifecycle-v24-reconciliation-b1-capability-r2",
+    "inputs_sha256": "7b4f9ca77c55c6388039bce2ce1aeb6d9dbd269cff5b2823d045ae0286f5430c",
+    "config_sha256": "f6d03fd3e45f4ce86e8e7df7410a7536cf047ea5910c4c67dceac72b8e8b676f",
+    "rubric_read_by_runner": false,
+    "arm_id": "b1_control",
+    "protocol_id": "langmem_default_v1"
+  },
+  "usage": {
+    "generations": 6,
+    "input_tokens": 5009,
+    "output_tokens": 323,
+    "generation_tokens": 5332,
+    "embedding_requests": 4,
+    "embedding_tokens": 114,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "provider_wall_seconds": 3.100537149235606,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "cases": [
+    {
+      "id": "rc_explicit_returned_status_update",
+      "status": "TERMINAL",
+      "error": null,
+      "usage": {
+        "generations": 6,
+        "generation_tokens": 5332
+      },
+      "sessions": [
+        {
+          "session_id": "save",
+          "answers": [
+            "Both memory entries have been successfully saved."
+          ],
+          "calls": [
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "create",
+                "content": "Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched."
+              },
+              "id": "chatcmpl-a8b2ef2161d9f3a8:tool:0",
+              "type": "tool_call"
+            },
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "create",
+                "content": "Visitors to Alder exhibition use the east entrance, which opens at 08:30."
+              },
+              "id": "chatcmpl-a8b2ef2161d9f3a8:tool:1",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "manage_memory",
+              "content": "created memory 5514eb71-41f3-41d4-aa96-fcee1ba7f5bd",
+              "status": "success",
+              "tool_call_id": "chatcmpl-a8b2ef2161d9f3a8:tool:0"
+            },
+            {
+              "name": "manage_memory",
+              "content": "created memory 467de40d-c64e-48e9-b10f-d98171cf54b1",
+              "status": "success",
+              "tool_call_id": "chatcmpl-a8b2ef2161d9f3a8:tool:1"
+            }
+          ],
+          "business_calls": [],
+          "memories": [
+            {
+              "id": "467de40d-c64e-48e9-b10f-d98171cf54b1",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-b1-capability-r2",
+                "b1_control",
+                "diagnostic:rc_explicit_returned_status_update"
+              ],
+              "value": {
+                "content": "Visitors to Alder exhibition use the east entrance, which opens at 08:30."
+              }
+            },
+            {
+              "id": "5514eb71-41f3-41d4-aa96-fcee1ba7f5bd",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-b1-capability-r2",
+                "b1_control",
+                "diagnostic:rc_explicit_returned_status_update"
+              ],
+              "value": {
+                "content": "Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched."
+              }
+            }
+          ]
+        },
+        {
+          "session_id": "act",
+          "answers": [
+            "The crate EXH-284 was successfully dispatched to gallery dock D-2 with dispatch ID DSP-7421. The pending delivery entry has been updated to reflect this status. The visitor access details (east entrance, opens at 08:30) remain unchanged."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Alder exhibition delivery plan visitor access"
+              },
+              "id": "chatcmpl-b6b06f9866c3f0b9:tool:0",
+              "type": "tool_call"
+            },
+            {
+              "name": "dispatch_crate",
+              "args": {
+                "crate_ref": "EXH-284",
+                "destination": "gallery dock D-2"
+              },
+              "id": "chatcmpl-af070adb94766174:tool:0",
+              "type": "tool_call"
+            },
+            {
+              "name": "manage_memory",
+              "args": {
+                "action": "update",
+                "id": "5514eb71-41f3-41d4-aa96-fcee1ba7f5bd",
+                "content": "Alder exhibition delivery of 6 display panels in crate EXH-284 to gallery dock D-2 has been successfully dispatched with dispatch ID DSP-7421."
+              },
+              "id": "chatcmpl-999c691f2b36520a:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "[{\"namespace\":[\"langmem\",\"lifecycle-v24-reconciliation-b1-capability-r2\",\"b1_control\",\"diagnostic:rc_explicit_returned_status_update\"],\"key\":\"467de40d-c64e-48e9-b10f-d98171cf54b1\",\"value\":{\"content\":\"Visitors to Alder exhibition use the east entrance, which opens at 08:30.\"},\"created_at\":\"2026-09-26T20:29:06.054467+00:00\",\"updated_at\":\"2026-09-26T20:29:06.054467+00:00\",\"score\":0.6791503834218016},{\"namespace\":[\"langmem\",\"lifecycle-v24-reconciliation-b1-capability-r2\",\"b1_control\",\"diagnostic:rc_explicit_returned_status_update\"],\"key\":\"5514eb71-41f3-41d4-aa96-fcee1ba7f5bd\",\"value\":{\"content\":\"Alder exhibition has a pending delivery of 6 display panels in crate EXH-284 to gallery dock D-2; the crate has not been dispatched.\"},\"created_at\":\"2026-09-26T20:29:05.899144+00:00\",\"updated_at\":\"2026-09-26T20:29:05.899144+00:00\",\"score\":0.5889849732233673}]",
+              "status": "success",
+              "tool_call_id": "chatcmpl-b6b06f9866c3f0b9:tool:0"
+            },
+            {
+              "name": "dispatch_crate",
+              "content": "{\"ok\": true, \"dispatch_id\": \"DSP-7421\", \"status\": \"dispatched\"}",
+              "status": "success",
+              "tool_call_id": "chatcmpl-af070adb94766174:tool:0"
+            },
+            {
+              "name": "manage_memory",
+              "content": "updated memory 5514eb71-41f3-41d4-aa96-fcee1ba7f5bd",
+              "status": "success",
+              "tool_call_id": "chatcmpl-999c691f2b36520a:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "458e065abe2b096fb33d224a0044c6a8f6cfcb6c166fba177e35835ffd62f1ee",
+              "generation_id": "chatcmpl-af070adb94766174",
+              "call_id": "chatcmpl-af070adb94766174:tool:0",
+              "name": "dispatch_crate",
+              "args": {
+                "crate_ref": "EXH-284",
+                "destination": "gallery dock D-2"
+              },
+              "result": {
+                "content": "{\"ok\": true, \"dispatch_id\": \"DSP-7421\", \"status\": \"dispatched\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "dispatch_crate",
+                "id": null,
+                "tool_call_id": "chatcmpl-af070adb94766174:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": [
+            {
+              "id": "5514eb71-41f3-41d4-aa96-fcee1ba7f5bd",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-b1-capability-r2",
+                "b1_control",
+                "diagnostic:rc_explicit_returned_status_update"
+              ],
+              "value": {
+                "content": "Alder exhibition delivery of 6 display panels in crate EXH-284 to gallery dock D-2 has been successfully dispatched with dispatch ID DSP-7421."
+              }
+            },
+            {
+              "id": "467de40d-c64e-48e9-b10f-d98171cf54b1",
+              "namespace": [
+                "langmem",
+                "lifecycle-v24-reconciliation-b1-capability-r2",
+                "b1_control",
+                "diagnostic:rc_explicit_returned_status_update"
+              ],
+              "value": {
+                "content": "Visitors to Alder exhibition use the east entrance, which opens at 08:30."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "instrumentation": {
+    "counts": {
+      "searches": 1,
+      "operations": 3,
+      "observations": 3,
+      "bodies": 10,
+      "revisions": 3,
+      "tool_calls": 5,
+      "requests": 6,
+      "request_material": 8
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 5
+      },
+      "operations": {
+        "complete": 3
+      },
+      "searches": {
+        "returned": 1
+      },
+      "requests": {
+        "completed": 6
+      }
+    },
+    "observation_roles": {
+      "business_tool": 1,
+      "user": 2
+    },
+    "revision_effects": {
+      "insert": 2,
+      "update": 1
+    },
+    "material_coverage": {
+      "FULL": 8
+    },
+    "search_returned_items": 2,
+    "search_exact_revision_bindings": 2,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 80,
+      "observer_cpu_ns": 27333759,
+      "observer_wall_ns": 594318041,
+      "extra_store_reads": 6,
+      "extra_read_cpu_ns": 5699738,
+      "extra_read_wall_ns": 10584463,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 98304,
+      "net_sqlite_db_bytes": 0,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "process": {
+    "run_id": "lifecycle-v24-reconciliation-b1-capability-r2",
+    "exit_code": 0,
+    "process_wall_seconds": 7.453144535887986
+  },
+  "reconciliation": {
+    "projection_attempts": 0,
+    "opportunities": [
+      {
+        "request_id": "26bbedebe6d028482a4a9009e4c9dd3a256ea327165108a572d68af5ada1a111",
+        "scope": "diagnostic:rc_explicit_returned_status_update",
+        "business_call_ids": [
+          "chatcmpl-af070adb94766174:tool:0"
+        ],
+        "successful_business_call_ids": [
+          "chatcmpl-af070adb94766174:tool:0"
+        ],
+        "generating_request_id": "f9a125753e87217a4010e69a7b9b49497ef61ccef70c08b8d62628fcf9344714",
+        "candidates": [
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-b1-capability-r2",
+              "b1_control",
+              "diagnostic:rc_explicit_returned_status_update"
+            ],
+            "id": "467de40d-c64e-48e9-b10f-d98171cf54b1",
+            "revision": 1,
+            "source_search_id": "4533ecd6c14c4d8564ca962fed7f2cbf122052d0f9e1143a06a82415a2db15d5:1:search:1",
+            "source_tool_call_id": "chatcmpl-b6b06f9866c3f0b9:tool:0"
+          },
+          {
+            "namespace": [
+              "langmem",
+              "lifecycle-v24-reconciliation-b1-capability-r2",
+              "b1_control",
+              "diagnostic:rc_explicit_returned_status_update"
+            ],
+            "id": "5514eb71-41f3-41d4-aa96-fcee1ba7f5bd",
+            "revision": 1,
+            "source_search_id": "4533ecd6c14c4d8564ca962fed7f2cbf122052d0f9e1143a06a82415a2db15d5:1:search:1",
+            "source_tool_call_id": "chatcmpl-b6b06f9866c3f0b9:tool:0"
+          }
+        ]
+      }
+    ],
+    "actual_deliveries": [],
+    "reason_counts": {},
+    "cpu_ns": 0,
+    "wall_ns": 0,
+    "direct_input_delta_tokens": 0,
+    "per_request_delta_values": [],
+    "program_store_reads": 0,
+    "program_memory_writes": 0,
+    "independent_model_phases": 0,
+    "qualification": "Eligibility and candidates reconstructed from actual HTTP tails, journals, action-generating request FULL materials and exact scoped search bindings; projection events then compared to actual system text."
+  },
+  "file_bytes": {
+    "trace.jsonl": 229659,
+    "instrumentation.sqlite": 98304,
+    "checkpoints.sqlite": 86016
+  },
+  "artifact_sha256": {
+    "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-b1-capability-r2/trace.jsonl": "f0553a509373408aa735b2b7246c74a447c400a25e14f1fcf83ceb2738ac4a26",
+    "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-b1-capability-r2/instrumentation.sqlite": "8e5d4dfb4b3f23e647285ac6b41b763c3439de986e9fb2e813546007832371a5",
+    "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-b1-capability-r2/checkpoints.sqlite": "356134b6028da49ec7f005dc643aed337062ff7a20922278762f6c73436a9970",
+    "artifacts/lifecycle-v24/lifecycle-v24-reconciliation-b1-capability-r2/run/result.json": "0c78c485ab30e9d6bf2f8613e0c590f2f8500617d15cf5d644efeaa8fd47cf1e"
+  },
+  "persistent_semantic_state_bytes": 0,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}
