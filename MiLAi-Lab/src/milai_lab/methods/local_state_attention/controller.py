@@ -1,4 +1,4 @@
-"""One short, independently accounted control call for a batch of observations."""
+"""LSA control orchestration; model-visible contracts live in protocol.py."""
 
 from __future__ import annotations
 
@@ -7,13 +7,27 @@ from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from contextvars import ContextVar
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import httpx
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
-from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
-from milai_lab.providers.contextual_vllm import VLLMClient
+from milai_lab.methods.local_state_attention.protocol import (
+    ControlResponseError as ControlResponseError,
+    control_prompt,
+    control_schema as control_schema,
+    event_view,
+    parse_control_response,
+    parse_json_response,
+    selected_ids,
+    selection_schema,
+    state_directory,
+    state_view,
+)
+
+if TYPE_CHECKING:
+    from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
+    from milai_lab.providers.contextual_vllm import VLLMClient
 
 REQUEST_ROLE: ContextVar[str] = ContextVar("lsa_request_role", default="task_host")
 CONTROL_STAGE: ContextVar[str | None] = ContextVar("lsa_control_stage", default=None)
@@ -26,40 +40,6 @@ def request_role(value: str) -> Iterator[None]:
         yield
     finally:
         REQUEST_ROLE.reset(token)
-
-
-def control_schema(state_ids: list[str], max_states: int,
-                   single_note: bool = False) -> dict[str, Any]:
-    """Constrain new-State titles and focus to actual or request-local identifiers."""
-    fields: dict[str, Any] = {
-        "title": {"type": "string", "minLength": 1},
-        "content": {"type": "string", "minLength": 1},
-        "needs": {"type": "array", "items": {"type": "string"}},
-        "evidence": {"type": "array", "items": {"type": "string"}},
-    }
-    new_edit = {"type": "object", "properties": {"id": {"type": "null"}, **fields},
-                "required": ["id", "title", "content"], "additionalProperties": False}
-    existing_edit = {
-        "type": "object", "properties": {"id": {"enum": state_ids}, **fields},
-        "required": ["id", "content"], "additionalProperties": False,
-    }
-    edits = ([existing_edit] if single_note and state_ids else
-             [new_edit, existing_edit] if state_ids else [new_edit])
-    focus_ids = ([*state_ids, *([] if state_ids else ["new:0"])] if single_note else
-                 [*state_ids, *(f"new:{index}" for index in range(max_states))])
-    return {
-        "type": "object", "properties": {
-            "edits": {"type": "array", "items": (
-                {"oneOf": edits} if len(edits) > 1 else edits[0]),
-                "maxItems": max_states},
-            "focus": {"type": "array", "items": {"enum": focus_ids}},
-        },
-        "required": ["edits", "focus"], "additionalProperties": False,
-    }
-
-
-class ControlResponseError(ValueError):
-    pass
 
 
 class LocalStateController:
@@ -108,80 +88,24 @@ class LocalStateController:
                     "pending_event_ids": [row["id"] for row in pending]}
         states = self.bank.states(scope)
         events = self.bank.events(scope)
-        prompt = (
-            "Maintain short local States for continuing matters from source-identified events. "
-            "A user request describes intent or pending work; it does not prove an operation "
-            "was attempted, completed, or failed. A user's statement about a past event may "
-            "be kept as their report, without treating it as a tool-confirmed outcome. "
-            "A tool event with a tool_call_id is an observed receipt from an attempted action; "
-            "read its actual fields, including any partial effect when ok=false. Distinguish "
-            "work requested before a receipt from outcomes observed in an existing receipt. "
-            "Preserve exact entity names, identifiers, values, and conditions from sources; "
-            "do not infer a different entity or outcome. A later instruction may advance or "
-            "revise the same matter, even when its verb changes; use its concrete references "
-            "and conditions when deciding whether to update an existing State. "
-            "Independently update States affected by new observations and select focus for "
-            "the current question or action. A State may need an update even when it is not "
-            "in focus; focus need not include every updated State. "
-            "Do not invent a business action, source, or State id. "
-            "Return JSON with edits and focus only. A new edit requires id:null, a short "
-            "nonempty title naming the continuing matter and content; cite source evidence "
-            "when available. "
-            "An update requires an exact existing State id and content; omitted title or "
-            "needs preserves its previous value. No change needs no edit. "
-            "Focus is an array of identifiers only: exact ids from states, or new:0, new:1 "
-            "for a newly created edit at that zero-based edits index. Never put a title, "
-            "factual summary, or answer in focus. Empty focus is valid. "
-            "Choose focus for the current_task, which is a query rather than an answer. "
-            "Evidence may cite only listed source ids. Keep unresolved needs concise."
-        )
-        if self.representation == "global_note":
-            prompt = prompt.replace(
-                "Maintain short local States for continuing matters from source-identified "
-                "events. ",
-                "Maintain one global working note covering continuing matters from "
-                "source-identified events. ", 1).replace(
-                "Focus is an array of identifiers only: exact ids from states, or new:0, "
-                "new:1 for a newly created edit at that zero-based edits index. ",
-                "Focus is an array of identifiers only: the exact existing note id, or "
-                "new:0 when creating the first note. ", 1).replace(
-                "Independently update States affected by new observations and select focus "
-                "for the current question or action. A State may need an update even when "
-                "it is not in focus; focus need not include every updated State. ",
-                "Update the note when new observations affect it, whether or not it is in "
-                "focus. Select focus separately for the current question or action. ",
-                1).replace(
-                "a short nonempty title naming the continuing matter and content; ",
-                "a short nonempty title naming the working note and content; ", 1)
-            prompt += (" Keep all continuing matters in this one note. Create it only when "
-                       "none exists; otherwise update its exact id or make no edit.")
-        elif self.local_granularity:
-            prompt += (" Keep separate local States for matters that can be updated and "
-                       "resumed independently; a shared topic alone does not make them "
-                       "one matter.")
+        prompt = control_prompt(self.representation, self.local_granularity)
         if self.update_policy in {"lr", "lru"}:
             return self._prepare_independent_read(scope, query_id, query, message_key,
-                                                  pending, states, events, prompt)
+                                                  pending, states, events)
         if close_only or self.maintenance_only:
             return self._prepare_all_maintenance(scope, query_id, message_key,
-                                                 pending, states, events, prompt)
+                                                 pending, states, events)
 
         payload = {"current_task": query,
                    "new_observations": [self._event_view(row) for row in pending],
-                   "states": [{key: row[key] for key in (
-                       "id", "title", "content", "needs", "evidence_refs", "revision")}
-                              for row in states],
+                   "states": [state_view(row) for row in states],
                    "source_ids_available": [row["id"] for row in events]}
         schema = control_schema([row["id"] for row in states], self.bank.max_states,
                                 single_note=self.representation == "global_note")
-        if self.capacity_path is not None:
-            counts = read_json(self.capacity_path) if self.capacity_path.exists() else {}
-            if counts.get(message_key, 0) >= self.max_calls_per_message:
-                return {"focus": [], "receipts": [], "degraded": True,
-                        "reused": False, "reason": "control_capacity",
-                        "pending_event_ids": [row["id"] for row in pending]}
-            counts[message_key] = counts.get(message_key, 0) + 1
-            write_json(self.capacity_path, counts)
+        if not self._reserve_call(message_key):
+            return {"focus": [], "receipts": [], "degraded": True,
+                    "reused": False, "reason": "control_capacity",
+                    "pending_event_ids": [row["id"] for row in pending]}
         try:
             with request_role("state_control"):
                 receipt = self.client.chat(
@@ -232,14 +156,21 @@ class LocalStateController:
         return self.prepare(scope, query_source_id, "", message_key,
                             close_only=True)
 
+    def _reserve_call(self, message_key: str) -> bool:
+        """Reserve once before sending; rejected/corrupt capacities are not hidden."""
+        if self.capacity_path is None:
+            return True
+        counts = read_json(self.capacity_path) if self.capacity_path.exists() else {}
+        if counts.get(message_key, 0) >= self.max_calls_per_message:
+            return False
+        counts[message_key] = counts.get(message_key, 0) + 1
+        write_json(self.capacity_path, counts)
+        return True
+
     def _stage_call(self, stage: str, message_key: str, prompt: str,
                     payload: dict[str, Any], schema: dict[str, Any]) -> dict[str, Any]:
-        if self.capacity_path is not None:
-            counts = read_json(self.capacity_path) if self.capacity_path.exists() else {}
-            if counts.get(message_key, 0) >= self.max_calls_per_message:
-                raise ControlResponseError("LSA_CONTROL_CAPACITY")
-            counts[message_key] = counts.get(message_key, 0) + 1
-            write_json(self.capacity_path, counts)
+        if not self._reserve_call(message_key):
+            raise ControlResponseError("LSA_CONTROL_CAPACITY")
         if self.emit is not None:
             self.emit({"event": ("lsa_lru_call" if self.update_policy == "lru"
                                  else "lsa_control_stage_call"), "stage": stage,
@@ -265,9 +196,7 @@ class LocalStateController:
                              events: list[dict[str, Any]]) -> dict[str, Any]:
         return {
             "new_observations": [self._event_view(row) for row in pending],
-            "states": [{key: row[key] for key in (
-                "id", "title", "content", "needs", "evidence_refs", "revision")}
-                       for row in states],
+            "states": [state_view(row) for row in states],
             "source_ids_available": [row["id"] for row in events],
         }
 
@@ -278,32 +207,10 @@ class LocalStateController:
         return {"type": "object", "properties": {"edits": edits},
                 "required": ["edits"], "additionalProperties": False}
 
-    def _maintenance_prompt(self, prompt: str, *, candidate_only: bool) -> str:
-        if self.representation == "global_note":
-            prompt = prompt.replace(
-                "Update the note when new observations affect it, whether or not it is in "
-                "focus. Select focus separately for the current question or action. ",
-                "Update the note when new observations affect it. ", 1)
-        else:
-            prompt = prompt.replace(
-                "Independently update States affected by new observations and select focus "
-                "for the current question or action. A State may need an update even when "
-                "it is not in focus; focus need not include every updated State. ",
-                ("Update only selected existing candidate States affected by new "
-                 "observations; independently decide whether new observations warrant "
-                 "a new State. " if candidate_only else
-                 "Update States affected by new observations independently. "), 1)
-        prompt = prompt.replace("Return JSON with edits and focus only. ",
-                                "Return JSON with edits only. ", 1)
-        start = prompt.index("Focus is an array of identifiers only:")
-        end = prompt.index("Evidence may cite only listed source ids.", start)
-        return prompt[:start] + prompt[end:]
-
     def _prepare_all_maintenance(self, scope: StateScope, query_id: str,
                                  message_key: str, pending: list[dict[str, Any]],
                                  states: list[dict[str, Any]],
-                                 events: list[dict[str, Any]],
-                                 prompt: str) -> dict[str, Any]:
+                                 events: list[dict[str, Any]]) -> dict[str, Any]:
         if not pending:
             self.bank.set_focus(scope, query_id, [])
             return {"focus": [], "receipts": [], "degraded": False,
@@ -311,7 +218,8 @@ class LocalStateController:
         try:
             plan = self._stage_call(
                 "maintenance", message_key,
-                self._maintenance_prompt(prompt, candidate_only=False),
+                control_prompt(self.representation, self.local_granularity,
+                               maintenance=True),
                 self._maintenance_payload(pending, states, events),
                 self._maintenance_schema([row["id"] for row in states]))
         except (ControlResponseError, httpx.TimeoutException) as error:
@@ -342,12 +250,11 @@ class LocalStateController:
 
     def _prepare_independent_read(self, scope: StateScope, query_id: str, query: str,
                                   message_key: str, pending: list[dict[str, Any]],
-                                  states: list[dict[str, Any]], events: list[dict[str, Any]],
-                                  prompt: str) -> dict[str, Any]:
+                                  states: list[dict[str, Any]],
+                                  events: list[dict[str, Any]]) -> dict[str, Any]:
         selective_update = self.update_policy == "lru"
         event_prefix = "lsa_lru" if selective_update else "lsa_lr"
-        directory = ([{key: state[key] for key in ("id", "title", "needs", "revision")}
-                      for state in states] if selective_update else [])
+        directory = state_directory(states) if selective_update else []
         state_ids = {row["id"] for row in states}
         observations = [self._event_view(row) for row in pending]
         base = {"current_task": query, "new_observations": observations,
@@ -355,13 +262,7 @@ class LocalStateController:
         stats = {"directory_bytes": (len(json.dumps(
             directory, ensure_ascii=False).encode("utf-8")) if selective_update else 0),
             "full_bank_content_chars": sum(len(row["content"]) for row in states)}
-        id_items: dict[str, Any] = {"type": "string"}
-        if state_ids:
-            id_items["enum"] = sorted(state_ids)
-        update_schema = {"type": "object", "properties": {
-            "update_ids": {"type": "array", "items": id_items,
-                           "maxItems": len(state_ids)}},
-            "required": ["update_ids"], "additionalProperties": False}
+        update_schema = selection_schema("update_ids", state_ids)
         selected_update_ids: list[str] = []
 
         def degraded(stage: str, reason: str, receipts: list[dict[str, Any]] | None = None,
@@ -392,17 +293,13 @@ class LocalStateController:
                 return degraded("update_selector", self._control_reason(error))
         else:
             route = {"update_ids": []}
-        update_ids = route.get("update_ids")
-        if (set(route) != {"update_ids"}
-                or not isinstance(update_ids, list)
-                or any(not isinstance(key, str) for key in update_ids)
-                or len(set(update_ids)) != len(update_ids)
-                or not set(update_ids) <= state_ids):
+        update_ids = selected_ids(route, "update_ids", state_ids)
+        if update_ids is None:
             return degraded("update_selector", "LSA_UPDATE_SELECTION_INVALID")
         selected_update_ids = update_ids
-        candidates = [{key: row[key] for key in (
-            "id", "title", "content", "needs", "evidence_refs", "revision")}
-            for row in states if row["id"] in set(update_ids)]
+        # Construct once, not once per State; preserve bank order in the payload.
+        update_id_set = set(update_ids)
+        candidates = [state_view(row) for row in states if row["id"] in update_id_set]
         candidate_bytes = len(json.dumps(
             candidates, ensure_ascii=False).encode("utf-8"))
         stats["candidate_body_bytes"] = candidate_bytes
@@ -420,7 +317,8 @@ class LocalStateController:
             try:
                 plan = self._stage_call(
                     "maintenance", message_key,
-                    self._maintenance_prompt(prompt, candidate_only=selective_update),
+                    control_prompt(self.representation, self.local_granularity,
+                                   maintenance=True, candidate_only=selective_update),
                     self._maintenance_payload(pending, candidates, events),
                     self._maintenance_schema(update_ids))
             except (ControlResponseError, httpx.TimeoutException) as error:
@@ -430,21 +328,15 @@ class LocalStateController:
                 return degraded("maintenance", "LSA_MAINTENANCE_INVALID_SHAPE")
             receipts, invalid = self.bank.apply(scope, edits, event_ids,
                                                 query_source_id=query_id,
-                                                allowed_existing_ids=set(update_ids))
+                                                allowed_existing_ids=update_id_set)
             if invalid:
                 return degraded("maintenance", "LSA_MAINTENANCE_INVALID", receipts)
         updated = self.bank.states(scope)
         updated_ids = {row["id"] for row in updated}
-        read_directory = [{key: row[key] for key in ("id", "title", "needs", "revision")}
-                          for row in updated]
+        read_directory = state_directory(updated)
         stats["updated_directory_bytes"] = len(json.dumps(
             read_directory, ensure_ascii=False).encode("utf-8"))
-        read_schema = {"type": "object", "properties": {
-            "read_ids": {"type": "array", "items": (
-                {"type": "string", "enum": sorted(updated_ids)} if updated_ids else
-                {"type": "string"}), "maxItems": len(updated_ids),
-                }}, "required": ["read_ids"],
-            "additionalProperties": False}
+        read_schema = selection_schema("read_ids", updated_ids)
         if updated:
             try:
                 choice = self._stage_call(
@@ -456,11 +348,8 @@ class LocalStateController:
                      "directory": read_directory}, read_schema)
             except (ControlResponseError, httpx.TimeoutException) as error:
                 return degraded("read_selector", self._control_reason(error), receipts)
-            read_ids = choice.get("read_ids")
-            if (set(choice) != {"read_ids"} or not isinstance(read_ids, list)
-                    or any(not isinstance(key, str) for key in read_ids)
-                    or len(set(read_ids)) != len(read_ids)
-                    or not set(read_ids) <= updated_ids):
+            read_ids = selected_ids(choice, "read_ids", updated_ids)
+            if read_ids is None:
                 return degraded("read_selector", "LSA_READ_SELECTION_INVALID", receipts)
         else:
             read_ids = []
@@ -468,7 +357,7 @@ class LocalStateController:
         result = {"focus": read_ids, "receipts": receipts, "degraded": False,
                   "reused": False, "pending_event_ids": []}
         if self.emit is not None:
-                self.emit({"event": event_prefix + "_result", "user_id": scope.user_id,
+            self.emit({"event": event_prefix + "_result", "user_id": scope.user_id,
                        "degraded": False, "update_ids": update_ids,
                        "read_ids": read_ids, "edits": receipts, **stats})
         return result
@@ -477,36 +366,7 @@ class LocalStateController:
     def _control_reason(error: ControlResponseError | httpx.TimeoutException) -> str:
         return str(error) if isinstance(error, ControlResponseError) else type(error).__name__
 
-    @staticmethod
-    def _parse_json(receipt: dict[str, Any]) -> dict[str, Any]:
-        try:
-            choice = receipt["choices"][0]
-            if choice["finish_reason"] != "stop":
-                raise ControlResponseError("LSA_CONTROL_INCOMPLETE")
-            value = json.loads(choice["message"]["content"])
-            if not isinstance(value, dict):
-                raise ControlResponseError("LSA_CONTROL_INVALID_SHAPE")
-            return value
-        except (KeyError, IndexError, TypeError, json.JSONDecodeError) as error:
-            raise ControlResponseError("LSA_CONTROL_INVALID_RESPONSE") from error
-
-    @staticmethod
-    def _event_view(row: dict[str, Any]) -> dict[str, Any]:
-        return {key: row[key] for key in ("id", "kind", "actor", "tool_call_id", "content")
-                if key in row}
-
-    @staticmethod
-    def _parse(receipt: dict[str, Any]) -> dict[str, Any]:
-        try:
-            choice = receipt["choices"][0]
-            if choice["finish_reason"] != "stop":
-                raise ControlResponseError("LSA_CONTROL_INCOMPLETE")
-            result = json.loads(choice["message"]["content"])
-            if (not isinstance(result, dict) or set(result) != {"edits", "focus"}
-                    or not isinstance(result["edits"], list)
-                    or not isinstance(result["focus"], list)
-                    or any(not isinstance(key, str) for key in result["focus"])):
-                raise ControlResponseError("LSA_CONTROL_INVALID_SHAPE")
-            return result
-        except (KeyError, IndexError, TypeError, json.JSONDecodeError) as error:
-            raise ControlResponseError("LSA_CONTROL_INVALID_RESPONSE") from error
+    # Compatibility aliases for existing callers; parsing has one owner.
+    _parse_json = staticmethod(parse_json_response)
+    _parse = staticmethod(parse_control_response)
+    _event_view = staticmethod(event_view)
