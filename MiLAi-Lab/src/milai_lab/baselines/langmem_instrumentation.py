@@ -65,15 +65,23 @@ class ProvenanceObserver:
         arguments: dict[str, Any], invoke: Callable[[], str],
     ) -> str:
         """Bind an explicitly external fixture call; never create a Host observation."""
-        generation_id = "fixture:" + stage
+        return self.run_external_memory_tool(
+            call_key, thread_id, stage, arguments, invoke, origin="fixture")
+
+    def run_external_memory_tool(
+        self, call_key: str, thread_id: str, stage: str,
+        arguments: dict[str, Any], invoke: Callable[[], str], *, origin: str,
+    ) -> str:
+        """Observe a declared non-Host call to the ordinary public memory tool."""
+        generation_id = origin + ":" + stage
         call_id = generation_id + ":manage_memory"
         attempt = self.sidecar.begin_call(
             call_key, thread_id, generation_id, call_id,
-            "fixture:manage_memory", arguments,
+            origin + ":manage_memory", arguments,
         )
         token = self._call.set(CallContext(
             call_key, thread_id, generation_id, call_id,
-            "fixture:manage_memory", arguments, attempt,
+            origin + ":manage_memory", arguments, attempt,
         ))
         try:
             result = invoke()

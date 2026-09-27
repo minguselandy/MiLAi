@@ -75,6 +75,13 @@ REQUIRED_LIFECYCLE_V24_RUNTIME = REQUIRED_SER_V23_RUNTIME | {
     "configs/milai-lifecycle-v24-reconciliation-r2.json",
     "src/milai_lab/methods/memory_lifecycle.py",
 }
+APPLICATION_V25_PROTOCOL = LAB / "data/manifests/milai-application-v25-protocol.json"
+REQUIRED_APPLICATION_V25_RUNTIME = REQUIRED_LIFECYCLE_V24_RUNTIME | {
+    "src/milai_lab/runners/langmem_application.py",
+    "src/milai_lab/runners/langmem_application_runtime.py",
+    "tools/run_milai_application_v25.py",
+    "configs/milai-application-v25.json",
+}
 
 
 def verify_lock(lock_path: Path, config_path: Path, arm_id: str,
@@ -233,6 +240,51 @@ def verify_lifecycle_v24_lock(lock_path: Path, config_path: Path,
     if arm_id is not None and arm_id not in protocols:
         raise ValueError("LIFECYCLE_V24_ARM_NOT_DECLARED")
     return lock, config
+
+
+def verify_application_v25_lock(lock_path: Path, config_path: Path,
+                                *, arm_id: str | None = None,
+                                ) -> tuple[dict[str, Any], dict[str, Any]]:
+    lock, config = _verify_ser_lock(
+        lock_path, config_path, kind="MILAI_APPLICATION_V25_LOCK",
+        recipe_id=SER_V21_RECIPE_ID, transport_variant=SER_V21_TRANSPORT_VARIANT,
+        required_runtime=REQUIRED_APPLICATION_V25_RUNTIME)
+    protocol = read_json(APPLICATION_V25_PROTOCOL)
+    expected_arms = {"b1_control": B1_RECIPE_ID,
+                     "a3_exact_refresh": SER_V21_RECIPE_ID,
+                     "a4_selective_rebase": SER_V21_RECIPE_ID,
+                     "a5_rank_bounded_rebase": SER_V21_RECIPE_ID}
+    if lock.get("application_protocol_sha256") != sha256_file(APPLICATION_V25_PROTOCOL):
+        raise ValueError("APPLICATION_V25_PROTOCOL_CHANGED")
+    if lock.get("protocol_by_arm") != expected_arms:
+        raise ValueError("APPLICATION_V25_ARM_RECIPE_CHANGED")
+    if lock.get("refresh_policy_by_arm") != protocol["refresh_policy_by_arm"]:
+        raise ValueError("APPLICATION_V25_REFRESH_POLICY_CHANGED")
+    if config.get("refresh_policy") != protocol["refresh_policy_by_arm"][
+            "a5_rank_bounded_rebase"]:
+        raise ValueError("APPLICATION_V25_A5_POLICY_CHANGED")
+    if arm_id is not None and arm_id not in expected_arms:
+        raise ValueError("APPLICATION_V25_ARM_NOT_DECLARED")
+    return lock, config
+
+
+def verify_application_v25_prepared(
+    receipt_path: Path, lock_path: Path, config_path: Path, *, run_id: str,
+    arm_id: str, script_path: Path, input_freeze: Path, runtime_root: Path,
+) -> str:
+    verify_application_v25_lock(lock_path, config_path, arm_id=arm_id)
+    receipt = read_json(receipt_path)
+    expected = {"status": "PREPARED_ZERO_MODEL", "method": "application_v25",
+                "run_id": run_id, "arm_id": arm_id,
+                "lock_sha256": sha256_file(lock_path),
+                "config_sha256": sha256_file(config_path),
+                "script_sha256": sha256_file(script_path),
+                "input_freeze_sha256": sha256_file(input_freeze),
+                "runtime_root": str(runtime_root.resolve())}
+    for key, value in expected.items():
+        if receipt.get(key) != value:
+            raise ValueError("APPLICATION_V25_PREPARED_" + key.upper() + "_CHANGED")
+    return expected["lock_sha256"]
 
 
 def verify_ser_prepared(receipt_path: Path, lock_path: Path, config_path: Path,

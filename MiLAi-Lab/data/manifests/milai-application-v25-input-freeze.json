@@ -1,0 +1,17 @@
+{
+  "kind": "MILAI_APPLICATION_V25_INPUT_FREEZE",
+  "script_path": "data/diagnostics/milai-application-v25-script.json",
+  "script_sha256": "125f241bac26fbc687f4fb248772dbcf67638ffb698836c9e4202b7387b622ab",
+  "rubric_path": "data/diagnostics/milai-application-v25-rubric.json",
+  "rubric_sha256": "e15aeb33ff32b37349cf908ebcbbac8c3274e7db0822410e01c7a7c8ba041370",
+  "script_id": "cobalt-handoff-short-v1",
+  "phases": 5,
+  "public_messages": 9,
+  "users": 2,
+  "sessions_per_user": 2,
+  "history_variant": "short",
+  "unseen": false,
+  "rubric_read_by_runner": false,
+  "no_business_expected_result_in_script": true,
+  "source_frozen_before_real_calls": true
+}

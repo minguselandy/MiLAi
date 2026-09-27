@@ -76,6 +76,11 @@ Stop the F/R cue families with preserved negative evidence. Continuous costs are
 with real simulated side effects, process restarts, partial failure and multiple user scopes;
 P10 and the master Goal remain open. No vLLM or Product changes.
 
+[P12 application development](docs/MILAI_APPLICATION_V25_GOAL.md) now has a fixed nine-message,
+five-phase public script for two users. It compares B1/A3/A4/A5 on one durable business world
+per arm, using actual persisted reservations and labels, public memory CRUD and separate-process
+restarts. The independent rubric never enters the runner; short runs follow source freeze.
+
 Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.
 Original Notice and request-copy Quarantine each pass 1/3 controls; conditional Exact Refresh

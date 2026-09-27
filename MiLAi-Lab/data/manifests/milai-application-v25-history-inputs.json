@@ -1,0 +1,30 @@
+{
+  "kind": "MILAI_APPLICATION_V25_HISTORY_INPUTS",
+  "frozen_before_first_short_model_call": true,
+  "lengths": {
+    "short": {
+      "public_message_text_tokens": 354,
+      "unrelated_log_tokens": 50
+    },
+    "medium": {
+      "public_message_text_tokens": 2013,
+      "unrelated_log_tokens": 1709,
+      "neutral_log_lines": 48,
+      "script_sha256": "9689fb5931936df2f80c634b0cb90a64af08b62fe9bd1f9150abec078064e9da"
+    },
+    "long": {
+      "public_message_text_tokens": 7053,
+      "unrelated_log_tokens": 6749,
+      "neutral_log_lines": 192,
+      "script_sha256": "48b53a63901e79ab8f62aaa73021e86f546927b636938baed4b8479c346313ed"
+    }
+  },
+  "arms": [
+    "b1_control",
+    "a4_selective_rebase"
+  ],
+  "token_measurement": "Original pinned Host tokenizer, public user text only; actual full request tokens/latency measured at execution.",
+  "qualification": "Input-length boundary on same real multi-search/conclusion/revision/restart script, not natural many-session distribution or max-context stress. Freeze exact expanded bytes/token counts separately before calls.",
+  "runtime_method_unchanged": true,
+  "real_calls": 0
+}

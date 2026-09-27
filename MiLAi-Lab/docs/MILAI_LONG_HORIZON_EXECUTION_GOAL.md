@@ -28,7 +28,7 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 | P9 | 运行前选择冻结的unseen matched evaluation，B1/lite/full输入与scorer一致 | [v23六条已完成](MILAI_SER_V23_RESULTS_20260927.md)：B1 6/10，A3/A4各7/10，0自然refresh/rebase；负面证据保留，PIVOT至生命周期 |
 | P10 | external baselines、至少两模型族、历史/密度/版本比例鲁棒性及参数边界 | 稳定主效果未建立；第二模型独立端点已异步请求，其余工作继续，未标完成 |
 | P11 | Formation与Post-Action Reconciliation独立Goal/机制/评估，不能混同SER收益 | [v24独立Goal](MILAI_LIFECYCLE_V24_GOAL.md)负结果完成；F三候选均0/2，R1/R2均2/3且必要更新0/1；[R2](MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS_20260927.md)原文送达仍无收益，停止F/R提示家族。显式控制0/1→合同澄清1/1独立保留 |
-| P12 | 论文级质量—成本Pareto、错误边界、真实Agent脚本工作负载和复现交付 | 待汇总 |
+| P12 | 论文级质量—成本Pareto、错误边界、真实Agent脚本工作负载和复现交付 | [v25应用Goal](MILAI_APPLICATION_V25_GOAL.md)开发中；五阶段/九消息/两用户脚本和独立rubric已固定，B1/A3/A4/A5短脚本同域比较随后进行 |
 
 全程还需覆盖§20–24的多对象/多版本/current冲突、short/medium/long历史及checkpoint边界；§28–30全部指标和完整成本；§43跨session、CRUD、restart、partial failure、无关交错、多用户scope的非benchmark工作负载。Product当前不改；迁移须满足§44。State–Attention、action grounding、Current Evidence Capsule、Jev均按原计划的证据条件决定是否启动，不将“可选”解释为必须提前实现，也不将尚未满足的主阶段冒充完成。
 

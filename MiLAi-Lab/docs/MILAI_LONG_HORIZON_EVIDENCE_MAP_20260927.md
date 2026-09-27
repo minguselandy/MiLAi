@@ -1,0 +1,36 @@
+# 长程计划证据与剩余要求
+
+总Goal仍ACTIVE。下表区分实现、开发效果和未见效果；局部测试通过不代替正式收益，负面研究结论也不自动完成尚未交付的应用工作。
+
+| 要求 | 当前证据 | 判断 |
+| --- | --- | --- |
+| §4–7普通assistant lineage、请求副本失效、多类型控制 | [P3](MILAI_SER_V20_P3_RESULTS_20260927.md)、[P4](MILAI_SER_V20_P4_RESULTS_20260927.md)、[P6最终](MILAI_SER_V21_FINAL_RESULTS_20260927.md)；同源十三例13/13，保留旧失败 | 最小机制成立；snapshot风险不是逐词因果 |
+| §8 rank-bounded refresh | [P5 R1](MILAI_SER_V21_P5_R1_RESULTS_20260927.md)、[R2](MILAI_SER_V21_P5_R2_RESULTS_20260927.md)；低排名例get3→0但tokens5161→5213 | 可控读取成立，整体成本优势未证明 |
+| §21多对象/多版本、§22当前冲突、§24checkpoint边界 | [P6最终](MILAI_SER_V21_FINAL_RESULTS_20260927.md)及其原manifest，CURRENT/SUPERSEDED/DELETED/UNKNOWN、两次revision、显式低排名权威反例 | 开发覆盖成立；不把latest当真值权威 |
+| §25冻结、§26/41未见matched | [P8冻结](MILAI_SER_V22_P8_METHOD_FREEZE.md)、[P9全部六条运行](MILAI_SER_V23_RESULTS_20260927.md) | B1 6/10，A3/A4各7/10；0自然refresh/rebase，额外分数不证明SER因果收益 |
+| §14 Formation | [v24 F3](MILAI_LIFECYCLE_V24_FORMATION_R3_RESULTS_20260927.md)及前两轮 | 三种cue均0/2；显式保存控制独立通过；停止cue家族 |
+| §15 Reconciliation | [v24 R2](MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS_20260927.md)及R1/两个能力控制 | 原正文实际送达仍必要更新0/1；停止cue家族，不默认启用 |
+| §20短/中/长历史 | [v25 Goal](MILAI_APPLICATION_V25_GOAL.md)、[提前固定的长度输入](../data/manifests/milai-application-v25-history-inputs.json) | 开发中，尚未运行；合成无关日志扩展不等于自然长期分布 |
+| §30同域四臂Pareto | v25已固定B1/A3/A4/A5同一脚本 | 待实际结果；不能拼接P9和A5开发分数 |
+| §43非benchmark可用性 | v25五阶段/九消息，真实SQLite副作用、partial failure、restart、CRUD、新session和两用户 | 源码已冻结，六项新窄验证和受影响旧检查通过；实际四臂结果待运行 |
+| §19至少两个模型族 | 当前真实研究仅本地Qwen；独立端点信息已请求 | 未完成；不能把subagent推理充作同合同模型评价 |
+| P10 external baselines | 公开LangMem B1已作为实际对照；Mem0/Memobase/Graphiti源码有固定来源 | 其他系统尚未做同域效果比较；源码借鉴不是实验对照 |
+| §18/42广泛鲁棒性 | 主未见效果尚未成立 | 不进行参数/密度/比例大扫描来寻找最好结果；保留第二模型明确缺口和独立历史边界 |
+| §28–29完整质量/适应/保持/currentness/费用 | 各阶段manifest与连续账本；P12补同域结果和作用域检查 | 旧阶段保留，最终汇总待P12 |
+| §44 Product迁移 | 稳定未见收益前提不满足 | NO-GO，Product不改 |
+
+## 条件机制判定
+
+Current Evidence Capsule目前没有新触发证据：十三例开发控制已能消费实际送达的当前证据；P9主要是没有形成记忆和容量路径差异，并非已经证明当前材料因分散而不可用。继续增加呈现层不能由这些失败直接推出。
+
+Evidence-Grounded Action要求可用证据与动作之间有明确、反复的断裂。P9错误退款发生在原约定没有持久化的条件下；v24暴露的是维护操作遗漏。现阶段不加入语义门禁或自动参数修正，P12将保留实际动作参数与证据，用新结果判断是否出现该条件。
+
+State–Attention要求“当前证据已知不足且普通ReAct反复无法取得必要当前证据”。空搜索来自未保存信息时，增加检索控制不能恢复从未存在的内容。没有新增持久Decision State或reviewer的依据。
+
+Jev是后期效率后端；当前主要方法使用机械版本解析和有界策略，未建立需要LLM控制再压缩的稳定收益。暂不引入新后端。统一生命周期框架也缺少F/R独立正面证据，不将负结果包装为完整生命周期能力。
+
+## 复现边界
+
+旧已执行source lock和结果原字节保留，使用各自Git checkpoint复现；当前工作树不应被误称同时符合全部历史锁。P9旧锁描述字段erratum已在[P9报告](MILAI_SER_V23_RESULTS_20260927.md)保存，实际配置/请求仍决定运行身份。公开仓库保存合成输入、rubric、锁和精简结果；原始Provider轨迹、DSN、数据库和构建产物保持本地ignored。
+
+用户要求的参考源码已记录在[来源manifest](../data/manifests/contextual-memory-v3-sources.json)：Mem0批量记忆/embedding、Memobase紧凑上下文、Graphiti混合召回、LangMem普通记忆工具。它们是固定版本的借鉴来源，不因此变成MiLAi运行依赖或公平实验基线。

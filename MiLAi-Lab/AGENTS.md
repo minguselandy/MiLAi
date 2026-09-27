@@ -208,6 +208,16 @@ short comparison first; F/R disabled and v21 SER semantics unchanged. Root owns 
 all real calls and complete cost. No benchmark-specific runner dependency or vLLM change.
 P10 second-family resource gap and P12/master remain active.
 
+[P12 application v25](docs/MILAI_APPLICATION_V25_GOAL.md) source is now frozen on81-file
+mapping `ff874dc00936261303336963a415007ddbe93bbdf06a87cb87ae0a7409ab6e38`.
+Six necessary new checks plus one affected old observer check pass. The mock actual ToolNode
+exposed SQLite thread affinity; allowing tool-thread access with serial business execution
+fixes the integration before real calls. Source/controller/provider/lineage algorithms remain
+frozen throughout the forthcoming B1/A3/A4/A5 short workload. One build and Luna checkpoint
+precede Root's serial real calls. Medium/long input bytes are already fixed (48/192 neutral
+log lines), and only B1/A4 run those later after application development. Keep all failures,
+separate process phases, cost and explicit-user CRUD origin; never score process exit as quality.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

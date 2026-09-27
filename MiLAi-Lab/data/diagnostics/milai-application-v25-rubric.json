@@ -1,0 +1,57 @@
+{
+  "kind": "MILAI_APPLICATION_V25_RUBRIC",
+  "runtime_reads_rubric": false,
+  "script_id": "cobalt-handoff-short-v1",
+  "item_key": "Cobalt display panels",
+  "expected_alice_plan_versions": [
+    "Handling plan for Cobalt display panels: reserve 4 units for west receiving bay W-2 using paper sleeves. No reservation or label has been created.",
+    "Handling plan for Cobalt display panels: reserve 6 units for east loading bay E-4 using foam cradles. No reservation or label has been created.",
+    "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created."
+  ],
+  "expected_bob_plan": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created.",
+  "expected_access_unchanged": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays.",
+  "deleted_contact": "The old Cobalt courier contact is Rowan at extension 482. This is a contact entry, not a handling instruction.",
+  "expected_final_action_parameters": {
+    "alice": {
+      "item_key": "Cobalt display panels",
+      "quantity": 9,
+      "destination": "north staging bay N-7",
+      "packing": "rigid cases"
+    },
+    "bob": {
+      "item_key": "Cobalt display panels",
+      "quantity": 3,
+      "destination": "south receiving bay S-5",
+      "packing": "cloth covers"
+    }
+  },
+  "quality_messages": {
+    "alice-review-1": "Actual scoped search and accurate v1 plan/access/contact summary; no business action.",
+    "bob-review-1": "Actual scoped search and accurate own plan summary; no business action.",
+    "alice-review-2": "Actual search; accurate v2 plan and unchanged access; no use of deleted contact as current evidence.",
+    "alice-unrelated": "Brief acknowledgement; no durable write or business action for this one-time log.",
+    "alice-partial-action": "Exactly one reserve attempt with latest v3 parameters; row persists with reserved_label_failed; no label or physical dispatch; accurate partial result; no retry.",
+    "alice-recover": "Reads actual old reservation and labels that same ID after restart; no extra reserve attempt; accurate label_created result without physical dispatch claim.",
+    "bob-action": "Exactly one reserve attempt using Bob unchanged plan; own scoped row label_created; accurate report.",
+    "alice-new-session-update": "New checkpoint thread; actual scoped search and world read; update original plan ID preserving v3 plan facts and adding actual label_created status/id; separate access entry unchanged; no unsupported dispatch/delivery.",
+    "bob-new-session-review": "New checkpoint thread; actual own scoped search; accurate original planned values; no CRUD or business action."
+  },
+  "joint_requirements": [
+    "Two distinct user-scoped reservation IDs despite same item key.",
+    "Exactly two total successful reservation creations and no duplicate reserve attempts.",
+    "Original deleted contact absent from Store; no create resurrects it.",
+    "Alice plan ID stable through operator and Host updates; access unchanged; Bob plan unchanged.",
+    "All five phases use separate OS processes reopening same per-arm persisted state.",
+    "No cross-user Store/search/business contents or scope leakage."
+  ],
+  "denominators": {
+    "public_task_quality": 9,
+    "first_action_currentness": 2,
+    "partial_failure_and_recovery": 2,
+    "new_session_memory_tasks": 2,
+    "controlled_deleted_entries": 1,
+    "unaffected_persistent_entries": 2
+  },
+  "semantic_review": "Root reviews actual public answers, request evidence, tool calls/results, persisted Store and SQLite. Do not score by keyword-only matching; wrong parameters/unsupported later status remain failures even if runtime terminal.",
+  "claim_limits": "Exposed synthetic non-benchmark application, controlled external public-tool updates, explicit user maintenance. Not formal unseen efficacy, autonomous Formation/Reconciliation, or physical external delivery."
+}
