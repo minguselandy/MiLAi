@@ -476,4 +476,3 @@ def run(args: argparse.Namespace, *, lab_root: Path) -> dict[str, Any]:
         manifest["accounting"] = _accounting(
             args.runtime_root, Path(identity["budget_path"]))
         write_json(manifest_path, manifest)
-

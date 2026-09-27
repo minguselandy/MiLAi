@@ -3,7 +3,7 @@
   "old_commit": "5dc024d3b277915709556af4e3eee4e1e64f06f1",
   "new_source_identity_delta": {
     "added": {
-      "src/milai_lab/runners/local_state_attention.py": "5da7475deb4179849f23e36d5103ab54be354d8285e2c30f5887fed172c3a16b"
+      "src/milai_lab/runners/local_state_attention.py": "3049c871bb3335d7a11607fc564ab0020433764d896b10c2329649f4f8f11a36"
     },
     "changed": {
       "pyproject.toml": {
@@ -85,5 +85,14 @@
     "final_packaging": "external publication receipt after document freeze"
   },
   "real_generation_calls": 0,
-  "real_embedding_calls": 0
+  "real_embedding_calls": 0,
+  "post_verification_eof_fix": {
+    "original_local_commit": "9bc3c9fe74cf6072025e3f205904d85dd66c2b86",
+    "observed": "staged diff check caught one extra final blank line in newly added runner; earlier unstaged diff did not cover this new file",
+    "change": "remove exactly one final newline byte; AST identical",
+    "original_runner_sha256": "5da7475deb4179849f23e36d5103ab54be354d8285e2c30f5887fed172c3a16b",
+    "final_runner_sha256": "3049c871bb3335d7a11607fc564ab0020433764d896b10c2329649f4f8f11a36",
+    "behavior_test_rerun": false,
+    "packaging": "rebuild final distributions after final docs freeze; keep first successful build receipt"
+  }
 }
