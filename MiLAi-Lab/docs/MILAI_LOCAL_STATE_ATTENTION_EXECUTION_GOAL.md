@@ -1,5 +1,5 @@
 ---
-status: ACTIVE
+status: PAUSED
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 reference_commit: 4aea99de0b7e058e2d254bf8860d0aba6d6b48db
 plan_sha256: 079f8bfb6cdefbe4da11696d29b6f6cc74755f81337bdbfe3996add000cf18dd
@@ -7,12 +7,21 @@ plan_sha256: 079f8bfb6cdefbe4da11696d29b6f6cc74755f81337bdbfe3996add000cf18dd
 
 # Local State–Attention 执行 Goal
 
-## 用户最新收束指令
+## 用户最新收束指令与当前暂停状态
 
-用户要求当前任务结束后暂停Goal，生成总体实验报告并上传GitHub。当前任务限定为正在
-进行的window_summary切片：完成实现、必要窄测/构建和已预注册4轨迹验证后暂停。
-不再启动R、U=A、新公开任务、模型下载/部署或其他后续开发。下面仍写ACTIVE或下一步的
-历史段落不覆盖这条指令。总体报告须保留完整失败、连续成本、局限和未完成项。
+用户要求当前任务结束后暂停Goal、生成总体实验报告并上传GitHub。window_summary切片
+已完成实现、必要检查/构建和4轨迹24消息验证，实际thread Goal现为 **paused**。
+最后执行源码bc5a5c8；不再启动R、U=A、新公开任务、模型下载/部署或其他开发/实验。
+当前仅执行用户另外授权的报告与GitHub发布。下面ACTIVE及下一步段落均为历史过程，
+不能覆盖暂停指令；完整研究目标没有完成。
+
+[总体实验报告](MILAI_LOCAL_STATE_ATTENTION_OVERALL_EXPERIMENT_REPORT_20260927.md)汇总全部16轮
+LSA及前序背景。[最后摘要切片](MILAI_LOCAL_STATE_ATTENTION_WINDOW_SUMMARY_WIRING_R1_RESULTS_20260927.md)
+为summary9/12、full10/12，完整0/2、1/2，generation tokens19703/18501。四次真实摘要提交
+与32次Host历史交付核对通过，但第三次摘要丢简报，后续Host虚构；精确key失败保留。
+full恢复操作成功但回答越界推断未发货，该严格评分边界单列披露。新增36/38204/0；
+连续账本最终 **2677/3296791/18445**，LSA相对起账新增1814/2254062/8828。
+
 
 用户已明确要求详细阅读并完整执行
 [736 行原规划](MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md)。
@@ -23,8 +32,8 @@ plan_sha256: 079f8bfb6cdefbe4da11696d29b6f6cc74755f81337bdbfe3996add000cf18dd
 ## 当前事实与责任
 
 授权开始时 main 与远端均为 reference_commit；v26 85 个 source 和 8 个 validation
-文件哈希匹配。只有两份用户提供的未跟踪规划，没有预存 LSA 实现。当前实际 thread Goal
-为 active；新会话没有可复用的旧代理，已启用一名 gpt-6-sol/xhigh 源码负责人。
+文件哈希匹配。只有两份用户提供的未跟踪规划，没有预存 LSA 实现。启动时实际 thread Goal
+为 active（目前已按顶部最新指令暂停）；新会话没有可复用的旧代理，已启用一名 gpt-6-sol/xhigh 源码负责人。
 
 Root 独占 docs、AGENTS、合成输入/rubric、阶段选择与冻结、所有真实模型/embedding 调用、
 评分、成本及报告；Sol 独占 LSA 源码、必要共享接线、config、根 CI 和相邻窄检查。
@@ -401,7 +410,7 @@ attempted与部分提交称failed的语义问题。新增67/74706/108，累计26
 16000 chars，control2048/13与Host4096/12沿用。只在成功时同键提交摘要/游标；原checkpoint
 不变。已知可选模型失败回退完整原历史，真实Store故障显式抛出。共享read_history及owner
 tombstone屏蔽；不完整旧回合不吞掉。源码已完成：80项受影响窄测、目标静态、四个零模型prepare与一次离线build通过，哈希见
-协议。尚未调用本批模型、未生成新题；四轨迹完成后按用户最新要求暂停并做总体报告。
+协议。四轨迹已执行、未生成新题；结果见顶部链接，已按用户最新要求暂停并做总体报告。
 
 R的局部设计冲突已由Astra只读处理，尚未实现或运行。竞争方案是借用LR已维护目录（含
 needs/revision等动态信息，不能免费且不算独立不维护系统）与R自行维护薄目录。Root选择

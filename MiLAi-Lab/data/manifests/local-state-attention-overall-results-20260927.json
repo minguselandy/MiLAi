@@ -1,0 +1,186 @@
+{
+  "kind": "MILAI_LOCAL_STATE_ATTENTION_OVERALL_RESULTS",
+  "status": "PAUSED_BY_USER_AFTER_WINDOW_SUMMARY",
+  "date": "2026-09-27",
+  "scope": "All16 LSA development/diagnostic/comparison rounds; earlier long-horizon stages are separate context, not pooled efficacy.",
+  "last_executed_source_commit": "bc5a5c8b98db8b965432759bdea367c9475869b1",
+  "full_goal_completed": false,
+  "product": "NO-GO",
+  "plan_sha256": "079f8bfb6cdefbe4da11696d29b6f6cc74755f81337bdbfe3996add000cf18dd",
+  "costs": {
+    "lsa_start": {
+      "generation_calls": 863,
+      "generation_tokens": 1042729,
+      "embedding_tokens": 9617
+    },
+    "lsa_delta": {
+      "generation_calls": 1814,
+      "generation_tokens": 2254062,
+      "embedding_tokens": 8828
+    },
+    "continuous_ledger_end": {
+      "generation_calls": 2677,
+      "generation_tokens": 3296791,
+      "embedding_tokens": 18445
+    },
+    "ledger_path": "artifacts/ser-v20/budget.json",
+    "ledger_sha256": "64db6395c91316236291e32c5f233e823f96b98cc7a906a8a3fe985524948085",
+    "generation_unknown_usage": 0,
+    "embedding_unknown_usage": 0,
+    "sealed_earlier_history_preserved": true,
+    "development_agent_tokens_included": false
+  },
+  "rounds": [
+    {
+      "stage": "p1-r1",
+      "generation_calls": 6,
+      "generation_tokens": 5489,
+      "embedding_tokens": 0,
+      "result_document": "docs/MILAI_LOCAL_STATE_ATTENTION_P1_R1_RESULTS_20260927.md"
+    },
+    {
+      "stage": "p1-r2",
+      "generation_calls": 34,
+      "generation_tokens": 34388,
+      "embedding_tokens": 9,
+      "result_manifest": "data/manifests/local-state-attention-p1-r2-results.json",
+      "result_manifest_sha256": "ac2d4dbdb014423c2a275f6cc4e58de393559f8497623dfa609765fe56274331",
+      "source_commit": "bf1ac1f920dd52fb17b6723cb602aae026e43bba"
+    },
+    {
+      "stage": "p2-r1",
+      "generation_calls": 19,
+      "generation_tokens": 17520,
+      "embedding_tokens": 768,
+      "result_manifest": "data/manifests/local-state-attention-p2-r1-results.json",
+      "result_manifest_sha256": "c23507900c6031b28622bd2936e15fff13f9fb757cc5501e2c8a06785ceb841b",
+      "source_commit": "9a06615676e9bff2d5ea90664e967d7160617651"
+    },
+    {
+      "stage": "p1-r3",
+      "generation_calls": 61,
+      "generation_tokens": 84307,
+      "embedding_tokens": 181,
+      "result_manifest": "data/manifests/local-state-attention-p1-r3-results.json",
+      "result_manifest_sha256": "6d88df87c6fc975775bee64db3d5490147dc6b7e1b034b422191e8706fc8b7f6"
+    },
+    {
+      "stage": "p1-r4",
+      "generation_calls": 96,
+      "generation_tokens": 115854,
+      "embedding_tokens": 256,
+      "result_manifest": "data/manifests/local-state-attention-p1-r4-results.json",
+      "result_manifest_sha256": "142b21707743f0633ae9550910e40d8c09774ebb4ffc6bb77e3f0f1d63fe4c85"
+    },
+    {
+      "stage": "p1-r5",
+      "generation_calls": 40,
+      "generation_tokens": 46862,
+      "embedding_tokens": 88,
+      "result_manifest": "data/manifests/local-state-attention-p1-r5-results.json",
+      "result_manifest_sha256": "4da5c7c7beeaa1fd89355b83cf0eb8b29aa5c0a0623f48e7dc46a08a3753b676"
+    },
+    {
+      "stage": "p3-wiring-r1",
+      "generation_calls": 72,
+      "generation_tokens": 93431,
+      "embedding_tokens": 173,
+      "result_manifest": "data/manifests/local-state-attention-p3-wiring-r1-results.json",
+      "result_manifest_sha256": "c8859f7b42f9de5433aee1b2bcb5ed4c0f9abfaa73d80cfe838d79ab7547b506",
+      "source_commit": "053a5ed08b6e01f826997e7b1158d7a9de033fc5"
+    },
+    {
+      "stage": "p3-wiring-r2",
+      "generation_calls": 130,
+      "generation_tokens": 142179,
+      "embedding_tokens": 70,
+      "result_manifest": "data/manifests/local-state-attention-p3-wiring-r2-results.json",
+      "result_manifest_sha256": "bdedd4a6f3981d4063ca846d2e5454add40c25e2a3b70c41315b12864f65c6ed",
+      "source_commit": "2b65c175c9ffe40f2e09f0327ee4f5faec87a84a"
+    },
+    {
+      "stage": "p3-wiring-r3",
+      "generation_calls": 61,
+      "generation_tokens": 51693,
+      "embedding_tokens": 0,
+      "result_manifest": "data/manifests/local-state-attention-p3-wiring-r3-results.json",
+      "result_manifest_sha256": "44f448177ed61b634fe1ad75f7712281bb06afd94d0f7948d95901772fcb1935",
+      "source_commit": "eda7add22d3a78f6074098c800fad36707ed7dd2"
+    },
+    {
+      "stage": "p3-matched-r1",
+      "generation_calls": 922,
+      "generation_tokens": 1241742,
+      "embedding_tokens": 6173,
+      "result_manifest": "data/manifests/local-state-attention-p3-matched-r1-results.json",
+      "result_manifest_sha256": "ec8ccdaebcc1c06bb85caf98e5402be8bf0eb8e031748abf59668e14bdfbedec",
+      "source_commit": "3f155f5213d1ee8f3a594324e3ffe2b4b4fafbb2"
+    },
+    {
+      "stage": "maintenance-events-r1",
+      "generation_calls": 108,
+      "generation_tokens": 135012,
+      "embedding_tokens": 848,
+      "result_manifest": "data/manifests/local-state-attention-maintenance-events-r1-results.json",
+      "result_manifest_sha256": "10e15c55e62b2e6d724dd9635d8091f65179af41bd334621597c91e2070a2c48",
+      "source_commit": "5640a93071af3abdbc816fa914e5f60969364a03"
+    },
+    {
+      "stage": "host-snapshot-r1",
+      "generation_calls": 6,
+      "generation_tokens": 8062,
+      "embedding_tokens": 0,
+      "result_manifest": "data/manifests/local-state-attention-host-snapshot-r1-results.json",
+      "result_manifest_sha256": "59ac789fa3c4a26a081af1a81530b2d16c0a61ed7078aecc9fc4211f0b6bfe1c",
+      "source_commit": "83b707edee01435db454493ee792ca73f9de531f"
+    },
+    {
+      "stage": "host-snapshot-r2",
+      "generation_calls": 6,
+      "generation_tokens": 11093,
+      "embedding_tokens": 0,
+      "result_manifest": "data/manifests/local-state-attention-host-snapshot-r2-results.json",
+      "result_manifest_sha256": "52104c3b8390e3e6007582fc630943ce73267dc2f5f2a861e207f8d6526addb4",
+      "source_commit": "346adc052e1a47e8572369861cd1ad1aeb99eb2f"
+    },
+    {
+      "stage": "lr-wiring-r1",
+      "generation_calls": 150,
+      "generation_tokens": 153520,
+      "embedding_tokens": 154,
+      "result_manifest": "data/manifests/local-state-attention-lr-wiring-r1-results.json",
+      "result_manifest_sha256": "2ca72951e83a6d5ede939d38c826a235fbe447b549eeffe7eb5738cf5009dc45",
+      "source_commit": "857b80c7bc217d78c63b4f4d5dc0528b96a16f6c"
+    },
+    {
+      "stage": "history-wiring-r1",
+      "generation_calls": 67,
+      "generation_tokens": 74706,
+      "embedding_tokens": 108,
+      "result_manifest": "data/manifests/local-state-attention-history-wiring-r1-results.json",
+      "result_manifest_sha256": "d12b4290411e5a9b843e1326187daf63813c3247e22d8cf6ab25229f1fdc1a42",
+      "source_commit": "e44465b4b687dc86e68c6d6f0c079bb81e869d56"
+    },
+    {
+      "stage": "window-summary-wiring-r1",
+      "generation_calls": 36,
+      "generation_tokens": 38204,
+      "embedding_tokens": 0,
+      "source_commit": "bc5a5c8b98db8b965432759bdea367c9475869b1",
+      "result_manifest": "data/manifests/local-state-attention-window-summary-wiring-r1-results.json",
+      "result_manifest_sha256": "267eeee46c83399fc632881a5e851a8c877618a1fb5a40dc992d7aa7644c713d"
+    }
+  ],
+  "not_completed": [
+    "Stable unseen gains",
+    "R implementation and isolated A5",
+    "U=A and remaining matched ablations/A6",
+    "Actual archive/reactivation and shared atomic update groups",
+    "Live full deletion propagation/physical erasure and real unknown-result recovery",
+    "New native MERIT selection and independent MemoryArena evaluation/repeats",
+    "Representative N/d/a/r/H cost-quality boundary",
+    "Second independent model family",
+    "No-template collaboration workload and complete paper evidence pack"
+  ],
+  "pause_policy": "No experiments, development, downloads or deployment until a new explicit resume instruction. Reporting and GitHub publication are separately authorized by latest user request."
+}

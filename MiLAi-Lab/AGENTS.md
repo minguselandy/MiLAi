@@ -36,11 +36,20 @@ canonical memory state.
 
 ## Required checks
 
-Latest user instruction: finish only the current window_summary slice and its four
-pre-registered trajectories, then PAUSE the active Goal, write an overall experiment report,
-and publish it to GitHub through Luna. Do not start R/U=A, new public tasks, model assets or
-other subsequent development. Historical ACTIVE/next-step paragraphs below do not override
-this stop-after-current-task instruction.
+Latest user instruction is now fulfilled for execution: the current window_summary slice and
+all four pre-registered trajectories are finished, and the actual thread Goal is PAUSED.
+Only the separately authorized overall report and GitHub publication remain permitted.
+Do not start or resume development, experiments, R/U=A, public tasks, downloads or deployment
+without a new explicit user instruction. Historical ACTIVE/next-step paragraphs below do not
+override this pause. Preserve the unfinished v27 model-sensitivity draft.
+
+See the [overall report](docs/MILAI_LOCAL_STATE_ATTENTION_OVERALL_EXPERIMENT_REPORT_20260927.md)
+and [final summary results](docs/MILAI_LOCAL_STATE_ATTENTION_WINDOW_SUMMARY_WIRING_R1_RESULTS_20260927.md).
+Summary9/12 vs full10/12, whole0/2 vs1/2, generation tokens19703/18501. The unsupported negative
+physical-dispatch assertion is disclosed separately from successful actual recovery. Four summary
+commits and32 actual Host deliveries were checked; third summary lost original briefing facts.
+Preserve +36/38204/0 and final continuous2677/3296791/18445, including all failures. The full
+LSA Goal is unfinished; pause is not completion or a conclusion of stable benefit.
 
 The [window-summary protocol](data/manifests/local-state-attention-window-summary-wiring-r1-protocol.json)
 compares window_summary/full_history on the original two scripts,4 trajectories/24 messages.
@@ -49,7 +58,7 @@ completed turns, with one accounted2048-token attempt per public message, existi
 control limit and16000-character summary limit. Same read_history, owner scope and tombstones;
 only committed summary/cursor enters Host. Known optional summary errors fall back to raw
 history; real Store errors propagate.80 affected checks, target static,4 zero-model prepares
-and one offline build passed. Freeze after publication; no source changes during4 runs.
+and one offline build passed. Those four runs are complete on bc5a5c8, with source held throughout; do not rerun.
 
 The user explicitly authorized full execution of the
 [Local State–Attention plan](docs/MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md),
