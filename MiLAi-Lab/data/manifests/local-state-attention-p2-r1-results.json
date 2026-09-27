@@ -1,0 +1,329 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P2_R1_RESULTS",
+  "source_commit": "9a06615676e9bff2d5ea90664e967d7160617651",
+  "status": "COMPLETED_FIRST_RESPONSE_DIAGNOSTIC",
+  "protocol": "data/manifests/local-state-attention-p2-r1-protocol.json",
+  "input_sha256": "8b44e57fe3579f46dc89305f1729495e0c9df8e4aa5b13abfa9adb8e3141551a",
+  "jobs": [
+    {
+      "job": {
+        "job_id": "background-all",
+        "case_id": "background",
+        "arm": "all"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319",
+        "169a6115675346968485a59178db8b2a"
+      ],
+      "classification": "INTERMEDIATE_MEMORY_STEP",
+      "host_request_sha256": "b945bb59a41d3dbb897ccda3f375f913a2bcf598330022d56ddf9a3c7d35f14b",
+      "result_sha256": "662a2b79cd994cb9a2b4c1f5a5147e7184e817c970a02c98dea7cf6c1bd9386b",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "background-query",
+        "case_id": "background",
+        "arm": "query"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "11c2efda1912469ea39b09f79cb9d319",
+        "00a3dd7f0a0a47f2a58ca3427e96b45a"
+      ],
+      "classification": "CORRECT_REQUESTED_FIRST_RESPONSE",
+      "host_request_sha256": "1d24e3f0de32fda1db1222809ba5192fb3b727b0e6099b8625b78a69e7b9ccd8",
+      "result_sha256": "2d0c3ded9d30e145aca05de09024c56a2b89d559de8df7f0c0a4c0143510aae2",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "background-focus",
+        "case_id": "background",
+        "arm": "focus"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319"
+      ],
+      "classification": "CORRECT_REQUESTED_FIRST_RESPONSE",
+      "host_request_sha256": "1d24e3f0de32fda1db1222809ba5192fb3b727b0e6099b8625b78a69e7b9ccd8",
+      "result_sha256": "0f24ea87e1726f2c376a0bdaf2fa740a80db5602eb70a9a280e1134f5353b935",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "combined-query",
+        "case_id": "combined",
+        "arm": "query"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "be21f81c8194497888f0d0be19576ad7",
+        "00a3dd7f0a0a47f2a58ca3427e96b45a"
+      ],
+      "classification": "WRONG_BUSINESS_ARGUMENTS",
+      "host_request_sha256": "5be0efbaece10dbd8e069f401f5ded8257e4a895e2d657e60a4e2a7f4844fc25",
+      "result_sha256": "0fce90283fbae2bb53d080b01a8e36eba496e89a994643e5a443bb5125b23d61",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "combined-focus",
+        "case_id": "combined",
+        "arm": "focus"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319"
+      ],
+      "classification": "WRONG_BUSINESS_ARGUMENTS",
+      "host_request_sha256": "1130060190689f207be1b3d1c5db16bf4a7f25dc4d4ee17b114e309aa1395a3b",
+      "result_sha256": "fe9ddeb82914ed544dcb5d6eebe964bdc14479377d426296c95ed3d1182f0a19",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "combined-all",
+        "case_id": "combined",
+        "arm": "all"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319",
+        "169a6115675346968485a59178db8b2a",
+        "7119d6d20e034af19e9801bc9d5c14d5",
+        "be21f81c8194497888f0d0be19576ad7"
+      ],
+      "classification": "CORRECT_REQUESTED_FIRST_RESPONSE",
+      "host_request_sha256": "ccfe843aa73cfe5dfc562617903b4eaf31172c9f555e1b48256df3a6516edd79",
+      "result_sha256": "2ce70b52ee20daac5ae5391c1700166a9c0d954a3f41195450cb0ebbee86a5f9",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "owner-action-focus",
+        "case_id": "owner-action",
+        "arm": "focus"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "be139836ef1f405699695be4360783ff"
+      ],
+      "classification": "WRONG_BUSINESS_ARGUMENTS",
+      "host_request_sha256": "175e05be9f0ef97ff134b49dab7f9d3fdc011a792bec28aec341d6db1ce2fdec",
+      "result_sha256": "1cf8852b07c3428acdcac86016c6b7c86dbac790867406dbfc8a2440335369c9",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "owner-action-all",
+        "case_id": "owner-action",
+        "arm": "all"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "be139836ef1f405699695be4360783ff",
+        "c8f61108c40b4a0e8b282b8281a6ebb4"
+      ],
+      "classification": "WRONG_BUSINESS_ARGUMENTS",
+      "host_request_sha256": "526c7f0dcb4a998163891fa9b6a8e61d513f5ee222a7fcb7f7122873bcc0ab4c",
+      "result_sha256": "236dc05dbb8d89346a98d9d907632fb76fd007c13eb354ebab7cdf82f3dcd20b",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "owner-action-query",
+        "case_id": "owner-action",
+        "arm": "query"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "be139836ef1f405699695be4360783ff",
+        "c8f61108c40b4a0e8b282b8281a6ebb4"
+      ],
+      "classification": "INTERMEDIATE_MEMORY_STEP",
+      "host_request_sha256": "526c7f0dcb4a998163891fa9b6a8e61d513f5ee222a7fcb7f7122873bcc0ab4c",
+      "result_sha256": "d66d287d979daae64a5d967d5a8e6a4ac500002e48029427289f0ef96ecab8ed",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "recovery-all",
+        "case_id": "recovery",
+        "arm": "all"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "4ec316893f8640bca12d6f729937ac8b",
+        "9411ad02aed34f3cb8379edaa0e755ea"
+      ],
+      "classification": "WRONG_BUSINESS_ARGUMENTS",
+      "host_request_sha256": "1bda4642a960dc16a4a29050294c41a34c2d48073104435965d094a98f4ddc1c",
+      "result_sha256": "10454fc9561ab20bc58d5526b821a5be52cc42e57d9148faee5b189a83217a6c",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "recovery-focus",
+        "case_id": "recovery",
+        "arm": "focus"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "4ec316893f8640bca12d6f729937ac8b",
+        "9411ad02aed34f3cb8379edaa0e755ea"
+      ],
+      "classification": "WRONG_BUSINESS_ARGUMENTS",
+      "host_request_sha256": "1bda4642a960dc16a4a29050294c41a34c2d48073104435965d094a98f4ddc1c",
+      "result_sha256": "457cbff8802aef33781e890a085d629b20b7e522d69b299aa8b09f131c3cce75",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "recovery-query",
+        "case_id": "recovery",
+        "arm": "query"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "9411ad02aed34f3cb8379edaa0e755ea",
+        "4ec316893f8640bca12d6f729937ac8b"
+      ],
+      "classification": "WRONG_BUSINESS_ARGUMENTS",
+      "host_request_sha256": "1bda4642a960dc16a4a29050294c41a34c2d48073104435965d094a98f4ddc1c",
+      "result_sha256": "e019412be1602c2913c6f372ef7544969341dc9fac2a5f73c753fa45eadb32dc",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "owner-supported-plan",
+        "case_id": "owner-action",
+        "arm": "diagnostic",
+        "variant": "supported-plan"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "c8f61108c40b4a0e8b282b8281a6ebb4"
+      ],
+      "classification": "DIAGNOSTIC_ONLY",
+      "host_request_sha256": "9e8156ab5f2cb0b244bfd1628dbb954c4723ac26c7dc687b49394c84a1977ad3",
+      "result_sha256": "eeb61d6631d8874da934c80d2375fdb57501a55cda67a719d65d21848ce58331",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "owner-counterfactual-plan",
+        "case_id": "owner-action",
+        "arm": "diagnostic",
+        "variant": "counterfactual-plan"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [
+        "c8f61108c40b4a0e8b282b8281a6ebb4"
+      ],
+      "classification": "DIAGNOSTIC_ONLY",
+      "host_request_sha256": "25acd24b0954775a9263cbbcd2c67fbaccbd3a9f931385270efe5f96ede0b821",
+      "result_sha256": "7ddd0fe0795eee253897041f69ac5433d5aed4339e19b7233eb5468469b2ab92",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    },
+    {
+      "job": {
+        "job_id": "recovery-actual-partial-receipt",
+        "case_id": "recovery",
+        "arm": "diagnostic",
+        "variant": "actual-partial-receipt"
+      },
+      "status": "COMPLETED_FIRST_REQUEST_ONLY",
+      "selected_state_ids": [],
+      "classification": "DIAGNOSTIC_ONLY",
+      "host_request_sha256": "2b305cdc57bef9fbb756684390fe80bbef4869049a51e230cfe15bfb60356c93",
+      "result_sha256": "fbb58401ab7970a369e36e2cb2141615059435ca77ff9676e9acaa98959e3277",
+      "business_tools_executed": 0,
+      "store_writes": 0
+    }
+  ],
+  "method_first_responses": {
+    "correct_requested_response": 3,
+    "intermediate_memory_step": 2,
+    "wrong_business_arguments": 7,
+    "total": 12
+  },
+  "diagnostics": 3,
+  "end_to_end_task_score": null,
+  "accounting": {
+    "task_host": {
+      "attempts": 15,
+      "completed_http": 15,
+      "known_tokens": 15547,
+      "unknown_usage": 0,
+      "errors": 0,
+      "wall_seconds": 9.51827473193407
+    },
+    "query_embedding": {
+      "attempts": 4,
+      "completed_http": 4,
+      "known_tokens": 768,
+      "unknown_usage": 0,
+      "errors": 0,
+      "wall_seconds": 0.2765518859960139
+    },
+    "read_selector": {
+      "attempts": 4,
+      "completed_http": 4,
+      "known_tokens": 1973,
+      "unknown_usage": 0,
+      "errors": 0,
+      "wall_seconds": 2.052401770837605
+    }
+  },
+  "generation_delta": {
+    "requests": 19,
+    "tokens": 17520
+  },
+  "embedding_delta": {
+    "requests": 4,
+    "tokens": 768
+  },
+  "continuous_budget": {
+    "generation_requests": 922,
+    "generation_tokens": 1100126,
+    "embedding_tokens": 10394
+  },
+  "identical_wire_groups": [
+    [
+      "background-query",
+      "background-focus"
+    ],
+    [
+      "owner-action-all",
+      "owner-action-query"
+    ],
+    [
+      "recovery-all",
+      "recovery-focus",
+      "recovery-query"
+    ]
+  ],
+  "identical_wire_different_output": "owner-action-all vs owner-action-query",
+  "next": "One source-preserving controller transition contract; retain independent Host/rendering failures; no P3 yet"
+}

@@ -87,10 +87,21 @@ class LocalStateController:
         states = self.bank.states(scope)
         events = self.bank.events(scope)
         prompt = (
-            "Maintain short local States for continuing matters. Update matters affected by "
-            "new observations, independently choose the States useful to the current task. "
-            "A tool receipt with ok=false can contain a committed partial effect: read its "
-            "actual fields. Do not invent a business action, source, or State id. "
+            "Maintain short local States for continuing matters from source-identified events. "
+            "A user request describes intent or pending work; it does not prove an operation "
+            "was attempted, completed, or failed. A user's statement about a past event may "
+            "be kept as their report, without treating it as a tool-confirmed outcome. "
+            "A tool event with a tool_call_id is an observed receipt from an attempted action; "
+            "read its actual fields, including any partial effect when ok=false. Distinguish "
+            "work requested before a receipt from outcomes observed in an existing receipt. "
+            "Preserve exact entity names, identifiers, values, and conditions from sources; "
+            "do not infer a different entity or outcome. A later instruction may advance or "
+            "revise the same matter, even when its verb changes; use its concrete references "
+            "and conditions when deciding whether to update an existing State. "
+            "Independently update States affected by new observations and select focus for "
+            "the current question or action. A State may need an update even when it is not "
+            "in focus; focus need not include every updated State. "
+            "Do not invent a business action, source, or State id. "
             "Return JSON with edits and focus only. A new edit requires id:null, a short "
             "nonempty title naming the continuing matter and content; cite source evidence "
             "when available. "
@@ -99,8 +110,7 @@ class LocalStateController:
             "Focus is an array of identifiers only: exact ids from states, or new:0, new:1 "
             "for a newly created edit at that zero-based edits index. Never put a title, "
             "factual summary, or answer in focus. Empty focus is valid. "
-            "Update matters affected by observations even when they are not in focus; "
-            "choose focus for the current_task, which is a query rather than an answer. "
+            "Choose focus for the current_task, which is a query rather than an answer. "
             "Evidence may cite only listed source ids. Keep unresolved needs concise."
         )
         payload = {"current_task": query,
@@ -136,7 +146,8 @@ class LocalStateController:
                     "reused": False,
                     "pending_event_ids": [row["id"] for row in pending]}
         event_ids = {row["id"] for row in pending}
-        receipts, invalid = self.bank.apply(scope, plan["edits"], event_ids)
+        receipts, invalid = self.bank.apply(scope, plan["edits"], event_ids,
+                                            query_source_id=query_id)
         current_ids = {row["id"] for row in self.bank.states(scope)}
         new_ids = {index: row["id"] for index, row in enumerate(receipts)
                    if row["status"] == "created"}
@@ -162,7 +173,8 @@ class LocalStateController:
 
     @staticmethod
     def _event_view(row: dict[str, Any]) -> dict[str, Any]:
-        return {key: row[key] for key in ("id", "kind", "content")}
+        return {key: row[key] for key in ("id", "kind", "actor", "tool_call_id", "content")
+                if key in row}
 
     @staticmethod
     def _parse(receipt: dict[str, Any]) -> dict[str, Any]:

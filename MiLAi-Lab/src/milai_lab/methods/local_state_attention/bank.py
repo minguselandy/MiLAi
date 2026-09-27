@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import time
 import uuid
+from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
@@ -30,9 +33,61 @@ class LocalStateBank:
         self.store = store
         self.max_states = max_states
         self.max_events = max_events
+        self._stats: dict[str, dict[str, int]] = {}
+
+    @staticmethod
+    def _bytes(value: Any) -> int:
+        return len(json.dumps(value, ensure_ascii=False, default=str).encode("utf-8"))
+
+    def _access(self, operation: str, call: Callable[[], Any],
+                request: Any) -> Any:
+        row = self._stats.setdefault(operation, {
+            "calls": 0, "failures": 0, "cpu_ns": 0, "wall_ns": 0,
+            "request_bytes": 0, "result_bytes": 0})
+        request_bytes = self._bytes(request)
+        start_wall, start_cpu = time.perf_counter_ns(), time.process_time_ns()
+        try:
+            try:
+                result = call()
+            finally:
+                row["calls"] += 1
+                row["request_bytes"] += request_bytes
+                row["cpu_ns"] += time.process_time_ns() - start_cpu
+                row["wall_ns"] += time.perf_counter_ns() - start_wall
+        except BaseException:
+            row["failures"] += 1
+            raise
+        if operation == "get" and result is not None:
+            row["result_bytes"] += self._bytes(result.value)
+        elif operation == "search":
+            row["result_bytes"] += sum(self._bytes(item.value) for item in result)
+        return result
+
+    def store_stats(self) -> dict[str, dict[str, int]]:
+        """Return this bank's completed Store calls for one runtime phase."""
+        return {operation: row.copy() for operation, row in self._stats.items()}
+
+    def _get(self, scope: StateScope, kind: str, key: str) -> Any:
+        return self._access("get", lambda: self.store.get(scope.namespace(kind), key),
+                            {"namespace": scope.namespace(kind), "key": key})
+
+    def _search(self, scope: StateScope, kind: str, limit: int) -> Any:
+        return self._access("search", lambda: self.store.search(
+            scope.namespace(kind), limit=limit),
+            {"namespace": scope.namespace(kind), "limit": limit})
+
+    def _put(self, scope: StateScope, kind: str, key: str,
+             value: dict[str, Any]) -> None:
+        self._access("put", lambda: self.store.put(
+            scope.namespace(kind), key, value, index=False),
+            {"namespace": scope.namespace(kind), "key": key, "value": value})
+
+    def _delete(self, scope: StateScope, kind: str, key: str) -> None:
+        self._access("delete", lambda: self.store.delete(scope.namespace(kind), key),
+                     {"namespace": scope.namespace(kind), "key": key})
 
     def _all(self, scope: StateScope, kind: str, limit: int) -> list[dict[str, Any]]:
-        rows = self.store.search(scope.namespace(kind), limit=limit + 1)
+        rows = self._search(scope, kind, limit + 1)
         if len(rows) > limit:
             raise ValueError("LSA_STORAGE_LIMIT_EXCEEDED")
         return [dict(row.value) for row in rows]
@@ -50,7 +105,7 @@ class LocalStateBank:
             raise ValueError("LSA_EVENT_ID_MISSING")
         if self.is_forgotten(scope, key):
             return
-        prior = self.store.get(scope.namespace("events"), key)
+        prior = self._get(scope, "events", key)
         if prior is not None:
             if {k: v for k, v in prior.value.items()
                     if k not in {"pending", "arrival_index"}} != event:
@@ -60,27 +115,36 @@ class LocalStateBank:
         if len(existing) >= self.max_events:
             raise ValueError("LSA_EVENT_STORAGE_FULL")
         sequence = max((row["arrival_index"] for row in existing), default=-1) + 1
-        self.store.put(scope.namespace("events"), key,
-                       {**event, "pending": True, "arrival_index": sequence}, index=False)
+        self._put(scope, "events", key,
+                  {**event, "pending": True, "arrival_index": sequence})
 
     def pending(self, scope: StateScope) -> list[dict[str, Any]]:
         return [row for row in self.events(scope) if row["pending"]]
 
     def focus(self, scope: StateScope, query_id: str) -> list[str] | None:
-        row = self.store.get(scope.namespace("meta"), "focus")
+        row = self._get(scope, "meta", "focus")
         if row is None or row.value.get("query_id") != query_id:
             return None
         return [str(item) for item in row.value["ids"]]
 
     def set_focus(self, scope: StateScope, query_id: str, ids: list[str]) -> None:
-        self.store.put(scope.namespace("meta"), "focus",
-                       {"query_id": query_id, "ids": ids}, index=False)
+        self._put(scope, "meta", "focus", {"query_id": query_id, "ids": ids})
 
     def apply(self, scope: StateScope, edits: list[dict[str, Any]],
-              event_ids: set[str]) -> tuple[list[dict[str, Any]], bool]:
+              event_ids: set[str], query_source_id: str | None = None,
+              ) -> tuple[list[dict[str, Any]], bool]:
         """Apply independent valid edits; retain pending when any edit is invalid."""
         current = {row["id"]: row for row in self.states(scope)}
         available = {row["id"] for row in self.events(scope)}
+        visible_dependencies = set(event_ids)
+        if query_source_id is not None:
+            visible_dependencies.add(query_source_id)
+        legacy_dependency_unknown = False
+        for state in current.values():
+            if "dependency_source_ids" not in state or state.get("dependency_unknown"):
+                legacy_dependency_unknown = True
+            else:
+                visible_dependencies.update(state["dependency_source_ids"])
         receipts: list[dict[str, Any]] = []
         invalid = False
         for edit in edits:
@@ -122,20 +186,26 @@ class LocalStateBank:
                      "evidence_refs": sorted(set((old["evidence_refs"] if old else []) + refs)),
                      "revision": old["revision"] if old else 0,
                      "archived": old["archived"] if old else False}
-            if old is not None and value == old:
+            public_old = ({key: old[key] for key in value} if old is not None else None)
+            if old is not None and value == public_old:
                 status = "noop"
             else:
                 value["revision"] += 1
-                self.store.put(scope.namespace("states"), key, value, index=False)
+                value["dependency_source_ids"] = sorted(
+                    visible_dependencies | set(refs)
+                    | set(old.get("dependency_source_ids", []) if old else []))
+                if legacy_dependency_unknown:
+                    value["dependency_unknown"] = True
+                self._put(scope, "states", key, value)
                 current[key] = value
                 status = "created" if old is None else "updated"
             receipts.append({"id": key, "status": status, "revision": value["revision"]})
         if not invalid:
             for event_id in event_ids:
-                item = self.store.get(scope.namespace("events"), event_id)
+                item = self._get(scope, "events", event_id)
                 if item is not None and item.value["pending"]:
-                    self.store.put(scope.namespace("events"), event_id,
-                                   {**item.value, "pending": False}, index=False)
+                    self._put(scope, "events", event_id,
+                              {**item.value, "pending": False})
         return receipts, invalid
 
     @staticmethod
@@ -143,23 +213,24 @@ class LocalStateBank:
         return "forgotten:" + hashlib.sha256(source_id.encode()).hexdigest()
 
     def is_forgotten(self, scope: StateScope, source_id: str) -> bool:
-        return self.store.get(scope.namespace("meta"),
-                              self._tombstone_key(source_id)) is not None
+        return self._get(scope, "meta", self._tombstone_key(source_id)) is not None
 
     def _forget_identity(self, scope: StateScope, source_id: str) -> None:
-        self.store.put(scope.namespace("meta"), self._tombstone_key(source_id),
-                       {"forgotten": True}, index=False)
+        self._put(scope, "meta", self._tombstone_key(source_id), {"forgotten": True})
 
     def forget_source(self, scope: StateScope, source_id: str) -> list[str]:
         """Authorized deletion removes source content and every dependent State body."""
         self._forget_identity(scope, source_id)
         removed = []
         for state in self.states(scope):
-            if source_id in state["evidence_refs"]:
-                self.store.delete(scope.namespace("states"), state["id"])
+            if (source_id in state["evidence_refs"]
+                    or source_id in state.get("dependency_source_ids", [])
+                    or "dependency_source_ids" not in state
+                    or state.get("dependency_unknown")):
+                self._delete(scope, "states", state["id"])
                 removed.append(state["id"])
-        self.store.delete(scope.namespace("events"), source_id)
-        focus = self.store.get(scope.namespace("meta"), "focus")
+        self._delete(scope, "events", source_id)
+        focus = self._get(scope, "meta", "focus")
         if focus is not None:
             self.set_focus(scope, focus.value["query_id"],
                            [key for key in focus.value["ids"] if key not in removed])
@@ -170,5 +241,5 @@ class LocalStateBank:
             self._forget_identity(scope, event["id"])
         for kind, rows in (("states", self.states(scope)), ("events", self.events(scope))):
             for row in rows:
-                self.store.delete(scope.namespace(kind), row["id"])
-        self.store.delete(scope.namespace("meta"), "focus")
+                self._delete(scope, kind, row["id"])
+        self._delete(scope, "meta", "focus")

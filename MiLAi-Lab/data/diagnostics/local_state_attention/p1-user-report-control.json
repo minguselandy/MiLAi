@@ -1,0 +1,39 @@
+{
+  "kind": "MILAI_LOCAL_STATE_ATTENTION_SCRIPT",
+  "script_id": "p1-user-report-control-v1",
+  "split": "development",
+  "users": [
+    "ena"
+  ],
+  "initial_label_available": true,
+  "phases": [
+    {
+      "id": 0,
+      "operator_memory": [],
+      "world_events": [],
+      "messages": [
+        {
+          "message_id": "reported-past-event",
+          "user_id": "ena",
+          "session_id": "report",
+          "public_index": 0,
+          "text": "I personally handed the signed Juniper notes to the coordinator at 09:20. This is an update for later sessions; you did not perform that action. Acknowledge it without calling a business tool."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "operator_memory": [],
+      "world_events": [],
+      "messages": [
+        {
+          "message_id": "restore-reported-event",
+          "user_id": "ena",
+          "session_id": "recall",
+          "public_index": 0,
+          "text": "What did I report handing over, to whom and at what time? Say whether this was my report or an action you performed. Do not reserve or label anything."
+        }
+      ]
+    }
+  ]
+}

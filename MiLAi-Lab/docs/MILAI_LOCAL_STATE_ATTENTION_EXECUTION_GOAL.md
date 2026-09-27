@@ -36,7 +36,7 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 | --- | --- | --- |
 | P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | R2 实际 decoder/manifest/独立计费正常；仍需补实际删除血缘与内部Store读计量 |
 | P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R2 完成12消息，任务9/12、完整业务1/2；存在状态污染/焦点/Host参数错误，方法未通过 |
-| P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | 四个实际R2断点已固定12个读取job及3个单列诊断；runner检查/构建完成，待发布后实际冻结调用 |
+| P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | R1四断点12方法+3诊断完成；State值影响输出，来源直送有用，维护/独立Host错误未闭合 |
 | P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | 未运行；初始建议 6 情景×3 臂×2 重复，调用前固定 |
 | P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | 未运行，遵循进入条件 |
 | P5 / WP5 | 新 frozen 原生 selection、第二任务族、交错顺序及完整重复；原 scorer 和失败分母 | 未运行；不消费旧暴露任务作 unseen |
@@ -139,7 +139,23 @@ Astra建议的后续单一语义候选是来源身份保持的状态迁移：维
 区分请求、用户陈述与真实工具观察，不把读取任务写成已发生结果；不同时改Host。
 删除另外使用程序机械dependency_source_ids，累积旧值、当前来源及所有可见State依赖，
 与模型evidence_refs分开；全bank可见时可能保守多删，必须报告。缺失旧依赖不能视为无依赖。
-这些是待P2证据决定的开发项，未实施/未验收，不能据建议声称问题已经解决。
+这些是开发候选，不能据建议声称问题已经解决。
+
+[P2 R1结果](MILAI_LOCAL_STATE_ATTENTION_P2_R1_RESULTS_20260927.md)与
+[精简数据](../data/manifests/local-state-attention-p2-r1-results.json)记录15个首响应，业务执行0。
+12个方法job为3个直接正确、2个中间memory步、7个错误业务参数，不能换算最终任务分数。
+正确旧计划/反事实值改变输出，完整真实回执消除本例get键类型混淆；但精确对象名和
+内部State ID被误用于memory仍未解决。同wire也出现不同输出，不归因于臂标签。
+累计922生成 /1100126生成tokens /10394 embedding tokens。
+R3仅做一个来源身份保持的控制合同候选，并独立补机械删除依赖/Store计量；Host、工具描述
+和工作视图暂不改。随后原两完整P1轨迹+用户过去事件报告反例，若同族仍失败停止措辞微调。
+[R3协议](../data/manifests/local-state-attention-p1-r3-protocol.json)已固定原12消息与新增2消息
+的独立分母、顺序及输入hash。三个run的新State/memory namespace只读核查为空；正式
+prepare/执行必须在新源码发布后。不是恢复任何旧运行，也不改变旧模型敏感性草稿。
+R3切片已完成13项窄测、目标ruff/mypy及一次必要build，三脚本/tmp prepare零模型通过。
+源码仅改bank/controller、原runner计量和窄测，Host/render/config未动；构建哈希见协议。
+机械依赖不进入模型输入，旧记录unknown依赖会导致授权删除时保守多删；正常no-op不写入/
+不增版本。每phase的finally汇总实际get/search/put/delete次数、耗时及逻辑字节，历史不回填。
 
 ## 后期资源准备记录
 

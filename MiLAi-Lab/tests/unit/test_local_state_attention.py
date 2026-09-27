@@ -20,6 +20,7 @@ from langgraph.store.base import PutOp
 from langgraph.store.memory import InMemoryStore
 
 from milai_lab.baselines.langmem_agent import FoundationScope, build_agent, invoke_public_message
+from milai_lab.harness.contextual_artifacts import Trace
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import (
     LocalStateController,
@@ -51,11 +52,14 @@ def test_bank_order_noop_pending_scope_and_deletion() -> None:
     receipts, invalid = bank.apply(alice, [edit], {"z", "a"})
     assert not invalid and receipts[0]["status"] == "created"
     state_id = receipts[0]["id"]
+    assert bank.states(alice)[0]["dependency_source_ids"] == ["a", "z"]
     assert bank.states(bob) == []
     assert bank.pending(alice) == []
+    puts_before_noop = bank.store_stats()["put"]["calls"]
     receipts, invalid = bank.apply(alice, [{**edit, "id": state_id}], set())
     assert not invalid and receipts[0]["status"] == "noop"
     assert bank.states(alice)[0]["revision"] == 1
+    assert bank.store_stats()["put"]["calls"] == puts_before_noop
     bank.record_event(alice, {"id": "next", "kind": "user", "content": "new"})
     receipts, invalid = bank.apply(alice, [{"id": "missing", "content": "wrong",
                                             "evidence": ["next"]}], {"next"})
@@ -69,6 +73,88 @@ def test_bank_order_noop_pending_scope_and_deletion() -> None:
     bank.delete_scope(alice)
     bank.record_event(alice, {"id": "z", "kind": "user", "content": "first"})
     assert bank.events(alice) == []
+
+
+def test_dependency_tracks_cross_state_copy_without_model_evidence() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "lsa", "alice")
+    for source_id in ("source-a", "source-b"):
+        bank.record_event(scope, {"id": source_id, "kind": "user", "content": source_id})
+    first, invalid = bank.apply(scope, [{"id": None, "title": "first",
+                                         "content": "fact from source-a", "evidence": []}],
+                                {"source-a"}, query_source_id="source-a")
+    assert not invalid
+    second, invalid = bank.apply(scope, [{"id": None, "title": "second",
+                                          "content": "fact copied from first", "evidence": []}],
+                                 set(), query_source_id="source-b")
+    assert not invalid
+    by_id = {row["id"]: row for row in bank.states(scope)}
+    assert by_id[second[0]["id"]]["dependency_source_ids"] == ["source-a", "source-b"]
+    bank.set_focus(scope, "source-b", [first[0]["id"], second[0]["id"]])
+    assert set(bank.forget_source(scope, "source-a")) == {
+        first[0]["id"], second[0]["id"]}
+    assert bank.states(scope) == []
+    assert [row["id"] for row in bank.events(scope)] == ["source-b"]
+    assert bank.focus(scope, "source-b") == []
+    bank.record_event(scope, {"id": "source-a", "kind": "user", "content": "replayed"})
+    assert [row["id"] for row in bank.events(scope)] == ["source-b"]
+
+
+def test_legacy_unknown_dependency_propagates_and_deletes_conservatively() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "lsa", "alice")
+    store.put(scope.namespace("states"), "legacy", {
+        "id": "legacy", "title": "old", "content": "untracked source material",
+        "needs": [], "evidence_refs": [], "revision": 1, "archived": False}, index=False)
+    bank.record_event(scope, {"id": "visible", "kind": "user", "content": "continue"})
+    receipts, invalid = bank.apply(scope, [{"id": None, "title": "derived",
+                                          "content": "from old state", "evidence": []}],
+                                   {"visible"}, query_source_id="visible")
+    assert not invalid
+    derived = next(row for row in bank.states(scope) if row["id"] == receipts[0]["id"])
+    assert derived["dependency_unknown"] is True
+    assert set(bank.forget_source(scope, "unknown-old-source")) == {"legacy", derived["id"]}
+    assert bank.states(scope) == []
+    assert [row["id"] for row in bank.events(scope)] == ["visible"]
+
+
+def test_bank_stats_match_actual_store_calls_and_failure() -> None:
+    class CountingStore(InMemoryStore):
+        def __init__(self) -> None:
+            super().__init__()
+            self.calls: dict[str, int] = {name: 0 for name in (
+                "get", "search", "put", "delete")}
+
+        def get(self, *args: Any, **kwargs: Any) -> Any:
+            self.calls["get"] += 1
+            return super().get(*args, **kwargs)
+
+        def search(self, *args: Any, **kwargs: Any) -> Any:
+            self.calls["search"] += 1
+            return super().search(*args, **kwargs)
+
+        def put(self, *args: Any, **kwargs: Any) -> Any:
+            self.calls["put"] += 1
+            return super().put(*args, **kwargs)
+
+        def delete(self, *args: Any, **kwargs: Any) -> Any:
+            self.calls["delete"] += 1
+            return super().delete(*args, **kwargs)
+
+    store = CountingStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "lsa", "alice")
+    bank.record_event(scope, {"id": "source", "kind": "user", "content": "fact"})
+    bank.apply(scope, [{"id": None, "title": "matter", "content": "fact"}],
+               {"source"}, query_source_id="source")
+    bank.forget_source(scope, "source")
+    stats = bank.store_stats()
+    assert {operation: row["calls"] for operation, row in stats.items()} == store.calls
+    assert all(row["failures"] == 0 and row["wall_ns"] >= 0 and row["cpu_ns"] >= 0
+               for row in stats.values())
+    assert stats["put"]["request_bytes"] > 0
+    assert stats["search"]["result_bytes"] > 0
 
 
 def test_hook_preserves_checkpoint_and_partial_tool_json(tmp_path: Path) -> None:
@@ -128,6 +214,17 @@ def test_hook_preserves_checkpoint_and_partial_tool_json(tmp_path: Path) -> None
     assert len(bank.states(state_scope)) == 1
     assert any(view["event"] == "lsa_view" and view["states"] for view in views)
     control_wire = wires[0]
+    user_event = json.loads(control_wire["messages"][1]["content"])["new_observations"][0]
+    assert user_event["kind"] == "user" and user_event["actor"] == "alice"
+    assert user_event["tool_call_id"] is None
+    tool_wire = next(wire for wire in wires if wire is not control_wire and
+                     wire["response_format"]["json_schema"]["name"] ==
+                     "local_state_control_v1")
+    tool_event = json.loads(tool_wire["messages"][1]["content"])["new_observations"][0]
+    assert tool_event["kind"] == "tool" and tool_event["tool_call_id"]
+    assert tool_event["actor"] != "alice"
+    assert "does not prove an operation" in control_wire["messages"][0]["content"]
+    assert "partial effect when ok=false" in control_wire["messages"][0]["content"]
     assert "nonempty title" in control_wire["messages"][0]["content"]
     assert "Never put a title" in control_wire["messages"][0]["content"]
     assert control_wire["response_format"]["json_schema"]["schema"] == control_schema([], 32)
@@ -309,6 +406,7 @@ def test_store_write_failure_remains_infrastructure_and_pending() -> None:
         controller.prepare(scope, "source", "matter")
     assert bank.states(scope) == []
     assert [row["id"] for row in bank.pending(scope)] == ["source"]
+    assert bank.store_stats()["put"]["failures"] == 1
 
 
 def test_deleted_checkpoint_source_does_not_reenter_state_or_host_view(
@@ -390,7 +488,8 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         def __exit__(self, *_args: Any) -> None:
             return None
 
-    host = FakeClient(VLLMConfig(base_url="http://mock/v1/", model="mock"))
+    host = FakeClient(VLLMConfig(base_url="http://mock/v1/", model="mock"),
+                      emit=Trace(root / "trace.jsonl", "mock"))
 
     @contextmanager
     def runtime(*_args: Any, **kwargs: Any) -> Any:
@@ -401,6 +500,8 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     def phase(*args_: Any) -> dict[str, Any]:
         assert isinstance(args_[-1], LocalStateController)
         called.append(args_[-1].client.config.max_tokens)
+        args_[-1].bank.record_event(StateScope("mock-run", "local_state", "alice"), {
+            "id": "source", "kind": "user", "content": "hello"})
         return {"status": "TERMINAL"}
 
     monkeypatch.setattr(entry, "open_application_runtime", runtime)
@@ -411,3 +512,10 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
     assert manifest["identity"]["rubric_read_by_runner"] is False
+    store_stats = manifest["accounting"]["local_state_store_stats"]
+    assert store_stats["put"]["calls"] == 1
+    assert store_stats["get"]["calls"] == 2
+    assert store_stats["search"]["calls"] == 1
+    trace = [json.loads(line) for line in (root / "trace.jsonl").read_text().splitlines()]
+    assert [event["event"] for event in trace] == ["lsa_store_stats"]
+    assert trace[0]["operations"] == store_stats

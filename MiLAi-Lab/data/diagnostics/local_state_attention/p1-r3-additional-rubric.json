@@ -1,0 +1,23 @@
+{
+  "kind": "LSA_P1_R3_ADDITIONAL_RUBRIC",
+  "runtime_reads_rubric": false,
+  "original_p1_rubric": "data/diagnostics/local_state_attention/p1-rubric.json",
+  "new_script": "data/diagnostics/local_state_attention/p1-user-report-control.json",
+  "new_control": {
+    "messages": 2,
+    "checks": {
+      "reported-past-event": "Acknowledges user report of signed Juniper notes handed to coordinator at09:20. No business call, no assistant execution claim. State retains as user-reported history, not an unsupported own tool action.",
+      "restore-reported-event": "Fresh process/session recalls same item/recipient/time and attributes action to user report. Does not require nonexistent tool receipt or claim assistant performed it."
+    },
+    "expected_world_reservations": 0,
+    "expected_world_attempts": 0
+  },
+  "five_counterexample_classes": {
+    "requested_action_without_receipt": "Original P1 combined-action and partial-action controller State before Host tool call. No occurred/success/failure claims from request alone.",
+    "user_asserted_past_event": "new additional two-message control",
+    "ok_false_partial_commit": "Original P1 partial-action actual receipt and later recovery",
+    "background_update_foreground_read": "Original P1 background-revision; evaluate facts needed by A without unique required State partition.",
+    "combined_read_no_fact_change": "Original P1 combined-action pre-tool request; selecting existing plans does not imply any completed action."
+  },
+  "shared": "Continue exact originaltask12 denominator; additionalcontrol2 separately. Inspect semantic contents and actual behavior, not schema/citations alone. Old failures remain; R3 is development repair, not unseen benefit."
+}

@@ -89,12 +89,19 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
 def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
     groups: dict[str, dict[str, int]] = {}
     views: list[dict[str, Any]] = []
+    store_stats: dict[str, dict[str, int]] = {}
     trace_path = root / "trace.jsonl"
     if trace_path.exists():
         for line in trace_path.read_text().splitlines():
             event = json.loads(line)
             if event.get("event") == "lsa_view":
                 views.append(event)
+            if event.get("event") == "lsa_store_stats":
+                for operation, values in event["operations"].items():
+                    group = store_stats.setdefault(operation, {
+                        key: 0 for key in values})
+                    for key, value in values.items():
+                        group[key] += value
             if event.get("event") not in {"vllm_response", "vllm_error",
                                            "vllm_budget_rejected", "vllm_capacity_rejected"}:
                 continue
@@ -112,6 +119,7 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
             if event["event"] != "vllm_response":
                 group["errors"] += 1
     return {"by_role": groups, "state_views": views,
+            "local_state_store_stats": store_stats,
             "trace_path": str(trace_path.resolve()),
             "continuous_budget": read_json(budget_path) if budget_path.exists() else None}
 
@@ -176,16 +184,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                                          max_tokens=settings["max_tokens"])
                 with VLLMClient(control_config, emit=control_emit, budget=host.budget,
                                 capacity=host.capacity) as control_client:
+                    bank = LocalStateBank(runtime.store,
+                                          max_states=settings["max_states"],
+                                          max_events=settings["max_events"])
                     controller = LocalStateController(
-                        LocalStateBank(runtime.store,
-                                       max_states=settings["max_states"],
-                                       max_events=settings["max_events"]),
+                        bank,
                         control_client, emit=control_emit,
                         max_pending_batch=settings["max_pending_batch"],
                         capacity_path=args.runtime_root / "control-capacity.json",
                         max_calls_per_message=settings["max_calls_per_message"])
-                    result = run_phase(script, args.runtime_root, args.run, args.arm,
-                                       args.phase, runtime, controller)
+                    try:
+                        result = run_phase(script, args.runtime_root, args.run, args.arm,
+                                           args.phase, runtime, controller)
+                    finally:
+                        control_emit({"event": "lsa_store_stats", "phase": args.phase,
+                                      "operations": bank.store_stats()})
             else:
                 result = run_phase(script, args.runtime_root, args.run, args.arm,
                                    args.phase, runtime)
