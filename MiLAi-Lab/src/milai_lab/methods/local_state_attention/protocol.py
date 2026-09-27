@@ -184,6 +184,20 @@ def state_directory(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             for row in rows]
 
 
+READ_SELECTOR_PROMPT = (
+    "From the updated State directory and current task, select the State "
+    "ids needed for the current answer or action. Empty and multiple "
+    "selections are valid. Return read_ids only."
+)
+
+
+def read_selector_payload(query: str, observations: list[dict[str, Any]],
+                          rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """One directory A contract for live LR/LRU and frozen read diagnostics."""
+    return {"current_task": query, "new_observations": observations,
+            "directory": state_directory(rows)}
+
+
 def event_view(row: dict[str, Any]) -> dict[str, Any]:
     return {key: row[key] for key in ("id", "kind", "actor", "tool_call_id", "content")
             if key in row}

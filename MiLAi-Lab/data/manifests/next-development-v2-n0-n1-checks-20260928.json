@@ -1,0 +1,162 @@
+{
+  "kind": "MILAI_V2_N0_N1_PREPUBLICATION_CHECKS",
+  "method_base": "cf1588ab3f1d1fe8105f3f239cb56f1151e8f5bc",
+  "isolation_tree_head": "ae2d29285ce263e32b0729444e1dc6a4f57ed5b1",
+  "source_sha256": {
+    "src/milai_lab/methods/local_state_attention/protocol.py": "756ad59966e8a91483103c9987b6190217208ae4cadf234cb99fe8d68d0e3442",
+    "src/milai_lab/methods/local_state_attention/controller.py": "b41dcb5802c0e00c32803af4dd93129104971b7092c5b843a94477ad23c5bd92"
+  },
+  "original_c5_wip_sha256": {
+    "protocol.py": "756ad59966e8a91483103c9987b6190217208ae4cadf234cb99fe8d68d0e3442",
+    "controller.py": "45211ea522331d4f79a033f1562210fead6b658016eef084372ea32fb919530a"
+  },
+  "controller_difference_from_wip": "Only Ruff-required import grouping; executable selector code identical.",
+  "mock_comparison": {
+    "scenario_count": 35,
+    "request_count": 45,
+    "stages": {
+      "null": 10,
+      "maintenance": 16,
+      "read_selector": 11,
+      "update_selector": 8
+    },
+    "old_and_final_ordered_json_sha256": "1b3069b6a44ef41de18a8ca999eb39dff2d52ac251bfe8dd2dd9a29b7e6edbfb",
+    "ordered_json_equal": true,
+    "object_diff_count": 0,
+    "normalization": [],
+    "observed_fields": [
+      "complete parsed control chat messages and response_format",
+      "control role and stage",
+      "bank call order and apply arguments",
+      "receipts and pending",
+      "capacity file contents",
+      "final role and stage"
+    ],
+    "scope": "Protocol-fake Bank and scripted model only; no raw HTTP bytes, real Store, Host, embedding or business execution.",
+    "reproduction": "In each source tree, import tests/unit/test_lsa_controller_contract.py, execute _run(name, temporary_path/name) for all 35 SCENARIOS, serialize ordered results with json.dumps(ensure_ascii=False,separators=(',',':')), and compare the full strings; no fields excluded."
+  },
+  "checks": [
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_lsa_controller_contract.py",
+      "result": "71 passed"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_langmem_foundation.py::test_agent_strict_content_required_rejects_real_toolnode_then_recovers tests/unit/test_langmem_foundation.py::test_strict_crud_scope_noop_and_native_parameters tests/unit/test_langmem_foundation.py::test_boundary_executor_uses_same_strict_content_guard tests/unit/test_langmem_foundation.py::test_strict_store_failures_propagate tests/unit/test_writer_policy.py::test_three_writer_policies_receive_same_actual_record_ids_bodies_and_sources tests/unit/test_writer_policy.py::test_boundary_partial_write_keeps_real_commit_and_pending tests/unit/test_writer_policy.py::test_partial_automatic_receipts_reach_explicit_trigger_proposal",
+      "result": "11 passed, 7 deprecation warnings"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m ruff check src/milai_lab/methods/local_state_attention/protocol.py src/milai_lab/methods/local_state_attention/controller.py",
+      "result": "All checks passed"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/methods/local_state_attention/protocol.py src/milai_lab/methods/local_state_attention/controller.py",
+      "result": "Success: no issues found in 2 source files"
+    },
+    {
+      "command": "git diff --check -- src/milai_lab/methods/local_state_attention/protocol.py src/milai_lab/methods/local_state_attention/controller.py",
+      "result": "passed"
+    }
+  ],
+  "retained_intermediate_failure": "Initial exact C5 import grouping failed Ruff I001; import grouping alone changed, then Ruff and final diff passed.",
+  "not_run": [
+    "real HTTP",
+    "embedding",
+    "shared PostgreSQL",
+    "full test suite",
+    "package build",
+    "N2 or N3 experiment"
+  ],
+  "original_c5_tree_modified": false,
+  "committed": false,
+  "environment": {
+    "lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1",
+    "core_venv": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv",
+    "foundation_venv": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation"
+  },
+  "plan_sha256": "84d5ddd45224d83c4206c95d8b46ca41f2a5dabd9990266aadccae0df1c0df22",
+  "local_check_receipt_sha256": "7e08b29ee48c2b7ae00e60852bc7428d4cadec6c45ba0fd5138b4d4576b22b5d",
+  "preserved_wip_files": [
+    {
+      "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/controller.py",
+      "git_status": " M",
+      "sha256": "45211ea522331d4f79a033f1562210fead6b658016eef084372ea32fb919530a"
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/protocol.py",
+      "git_status": " M",
+      "sha256": "756ad59966e8a91483103c9987b6190217208ae4cadf234cb99fe8d68d0e3442"
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-read-selection-r1/config.json",
+      "git_status": "??",
+      "sha256": "01ab442d8ae082c0ff02d48af37fb90d77adb3c0a12a8c95b1f35d77927c7070"
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-read-selection-r1/inputs.json",
+      "git_status": "??",
+      "sha256": "0fe3c753207c303a77f5bc17be1863730a7015f7a64cd102d4945f5e07afa060"
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-read-selection-r1/rubric.json",
+      "git_status": "??",
+      "sha256": "800b41ecec2f162a8a0940da83ebfedf545207351b03eab7646b5993b6823070"
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-update-selection-r1/config.json",
+      "git_status": "??",
+      "sha256": "618bb4e574df74841e3793dbcff7bdbdccbca56562eb8f031297e30c9c1851fa"
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-update-selection-r1/inputs.json",
+      "git_status": "??",
+      "sha256": "79a0def7065e355a850b7551718e3e036333de86ff78b3fa3489007cbf226827"
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-update-selection-r1/rubric.json",
+      "git_status": "??",
+      "sha256": "f968eac22bbb6c4d50b1c775001ff6c90ad51c7043cdbd518613833482cce3b0"
+    }
+  ],
+  "n1_existing_wire_audit": {
+    "kind": "MILAI_V2_N1_EXISTING_WIRE_AUDIT",
+    "historical_method_commit": "07aaa3cfc0bec3f914df00a614812aafec967b41",
+    "trace_sha256": "7358563e8490ce5d622b365a8afe0dfd1db7a2d4f9dc5d79412b9ee1d8159bb4",
+    "scope": "Existing C3b increment-boundary trajectory; not a rerun or representative sample expansion.",
+    "raw_http_missing_content_confirmed": true,
+    "host_views_byte_substrings_in_actual_requests": true,
+    "null_ordinary_record_delivered_to_host_and_repair_control": true,
+    "boundary_success_error_receipts_match_actual_repair_request": true,
+    "repair_control_only_called_manage_state": true,
+    "host_trigger_reason_labeled_non_evidence": true,
+    "provider_ids": [
+      "chatcmpl-a11cbf8c1b78c151",
+      "chatcmpl-bfac5b5d111dd436",
+      "chatcmpl-80827cbe379e1123",
+      "chatcmpl-aa7bd30c688e03cc"
+    ],
+    "decision": "Existing evidence rejects missing receipt delivery as the cause of this trajectory. Preserve Host/control semantic consumption uncertainty; no new prompt variant or semantic model call. Strict guard has separate current zero-model verification.",
+    "new_generation_embedding_calls": 0
+  },
+  "g1_limit": "N0 selector extraction accepted within measured scope; N2/N3 behavior/inputs/schema/prepare remain incomplete, not approved for real execution.",
+  "real_new_generation_calls": 0,
+  "real_new_embedding_calls": 0,
+  "ledger_start": {
+    "generation_calls": 2799,
+    "generation_tokens": 3486504,
+    "embedding_tokens": 19273,
+    "generation_unknown_usage": 0,
+    "embedding_unknown_usage": 0,
+    "sha256": "bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6"
+  },
+  "remote_ci": "This new refactor is not yet published. Prior CI belongs to its original head/merge identities.",
+  "publication_whitespace_exception": {
+    "path": "docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md",
+    "lines": [
+      3,
+      4
+    ],
+    "observed": "git diff --cached --check reports two trailing-whitespace Markdown hard breaks",
+    "decision": "Preserve exact user-provided plan bytes/hash. Accept only these two intentional Markdown two-space hard breaks; no source whitespace relaxation.",
+    "source_checks_unchanged": true
+  }
+}
