@@ -1,8 +1,8 @@
 ---
-status: ACTIVE
+status: COMPLETE_WITH_KNOWN_AGENT_FAILURES
 scope: RESEARCH_PROTOTYPE
 parent: MILAI_LONG_HORIZON_EXECUTION_GOAL.md
-reference_commit: 1053719dc004c1a630abac0195f0ce1f290ac6a3
+reference_commit: 44fb7ac9b6ed90cdfce1da8c17de734638d9b937
 ---
 
 # P12：持久化应用与同域质量—成本比较
@@ -35,11 +35,15 @@ reference_commit: 1053719dc004c1a630abac0195f0ce1f290ac6a3
 
 - [x] 持久业务世界、通用资源接线、阶段运行器和四臂入口。
 - [x] 原始公开输入/rubric/协议与必要窄验证，源码锁和一次构建。
-- [ ] 短脚本四臂实际运行、全部语义结果和费用。
-- [ ] 必要medium/long边界及已覆盖/未覆盖项。
-- [ ] Failure Review、十项Reflection、同域Pareto及复现。
-- [ ] Luna提交与远端核对；总Goal继续完成剩余证据要求。
+- [x] 短脚本四臂实际运行、全部语义结果和费用。
+- [x] 必要medium/long边界及已覆盖/未覆盖项。
+- [x] Failure Review、十项Reflection、同域Pareto及复现。
+- [x] Luna已提交并核对v25结果检查点；总Goal继续完成剩余证据要求。
 
 源码已冻结：81文件mapping `ff874dc00936261303336963a415007ddbe93bbdf06a87cb87ae0a7409ab6e38`，lock SHA `796b32df3dbe5d5028d799bbdd92a7ff313ac17fd73ce34a84de3cae3d4d0e25`。六项新窄检查、一个受影响旧fixture观察器检查、ruff/mypy通过，尚未真实调用。mock Provider经真实ToolNode执行时发现SQLite默认线程绑定错误，已改为允许工具线程访问并以小锁串行业务调用；实际部分写入/重开/用户隔离验证通过。没有修改SER算法、JSON-action传输或vLLM设置。
 
 唯一必要构建通过：sdist SHA `e8159a5a8c1b9f5403ec0b3da143fbd15d4bf18bb81908dbb4431781e3faf530`，wheel SHA `fd3f3ad4acdf20c9236d6abe9feb98f61913f6f83df93aa27e030da45e6c6dbc`。短/中/长公开脚本与冻结文件均进入sdist，新runtime进入wheel，未包含private/generated产物；锁后源码不变。后续结果文档不触发重复构建。
+
+执行已完成，前两段保留运行前冻结记录。最终[结果](MILAI_APPLICATION_V25_RESULTS_20260927.md)：short B1/A3/A4/A5为7/9、7/9、9/9、8/9；medium B1/A4为7/9、8/9；long为7/9、9/9。所有partial side effects、同ID恢复、多用户scope和删除/保持经真实产物核对。保留A3/long B1容量失败、A5错key、medium两臂虚构ID和B1旧值行动；未发现需要改源的确定性集成缺陷。
+
+连续账本837生成/983553tokens/8948embeddingtokens/107get。本阶段166生成/379382tokens/2844embeddingtokens/32get，未重置旧费用。所有八条fresh-session首wire相同，long总费用差主要来自新session循环；不声称可靠性或纯长度效率收益。源码、服务、输入冻结不变，公开[复现](MILAI_APPLICATION_V25_REPRODUCTION_20260927.md)已准备。P10至少两模型族/其他外部对照缺口仍在，总Goal不完成。

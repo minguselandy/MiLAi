@@ -1,0 +1,3812 @@
+{
+  "kind": "MILAI_APPLICATION_V25_RUN_REVIEW",
+  "status": "MECHANICAL_PASS_SEMANTIC_REVIEW_SEPARATE",
+  "run_id": "application-v25-long-a4-r1",
+  "arm": "a4_selective_rebase",
+  "history_variant": "long",
+  "source_mapping_sha256": "ff874dc00936261303336963a415007ddbe93bbdf06a87cb87ae0a7409ab6e38",
+  "usage": {
+    "generations": 19,
+    "input_tokens": 62309,
+    "output_tokens": 1140,
+    "generation_tokens": 63449,
+    "embedding_requests": 13,
+    "embedding_tokens": 341,
+    "exact_version_resolution_reads": 7,
+    "projection_cpu_ns": 26933314,
+    "projection_wall_ns": 32964093,
+    "exact_read_wall_ns": 13125822,
+    "provider_wall_seconds": 16.01898470055312,
+    "process_wall_seconds": 34.72885324526578,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "judge_requests": 0
+  },
+  "host_message_statuses": {
+    "COMPLETED": 9
+  },
+  "messages": [
+    {
+      "message_id": "alice-review-1",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 0,
+      "status": "COMPLETED",
+      "answer": "I found three relevant notes in your saved memories:\n\n1. **Handling Plan**: Reserve 4 units of Cobalt display panels for the west receiving bay W-2 using paper sleeves. No reservation or label has been created yet.\n2. **Collection Access**: Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays.\n3. **Courier Contact**: The old Cobalt courier contact is Rowan at extension 482.",
+      "business_calls": [],
+      "phase": 0
+    },
+    {
+      "message_id": "bob-review-1",
+      "user_id": "bob",
+      "session_id": "handoff",
+      "public_index": 0,
+      "status": "COMPLETED",
+      "answer": "The saved handling plan for Cobalt display panels specifies:\n- **Planned Quantity:** 3 units\n- **Destination:** South receiving bay S-5\n- **Packing:** Cloth covers",
+      "business_calls": [],
+      "phase": 0
+    },
+    {
+      "message_id": "alice-review-2",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 1,
+      "status": "COMPLETED",
+      "answer": "Based on the saved notes, here are the details for the Cobalt display panels:\n\n*   **Planned Quantity:** 6 units\n*   **Destination:** East loading bay E-4\n*   **Packing:** Foam cradles\n*   **Access Details:** Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays.",
+      "business_calls": [],
+      "phase": 1
+    },
+    {
+      "message_id": "alice-unrelated",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 2,
+      "status": "COMPLETED",
+      "answer": "Acknowledged. The 192 office log records regarding printer self-checks and stationery drawers are noted as transient and unrelated to the Cobalt collection handoff.",
+      "business_calls": [],
+      "phase": 2
+    },
+    {
+      "message_id": "alice-partial-action",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 3,
+      "status": "COMPLETED",
+      "answer": "Reservation created successfully for 9 Cobalt display panels to north staging bay N-7 in rigid cases (Reservation ID: RSV-736d95d4-dbf6-4678-b4f7-29b798364501). Label creation failed due to label service unavailability; no label was created.",
+      "business_calls": [
+        {
+          "status": "complete",
+          "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+          "generation_id": "chatcmpl-b2a293dc2c148702",
+          "call_id": "chatcmpl-b2a293dc2c148702:tool:0",
+          "name": "reserve_and_label",
+          "args": {
+            "item_key": "Cobalt display panels",
+            "quantity": 9,
+            "destination": "north staging bay N-7",
+            "packing": "rigid cases"
+          },
+          "result": {
+            "content": "{\"ok\": false, \"status\": \"reserved_label_failed\", \"reason\": \"label_service_unavailable\", \"reservation_id\": \"RSV-736d95d4-dbf6-4678-b4f7-29b798364501\", \"item_key\": \"Cobalt display panels\", \"quantity\": 9, \"destination\": \"north staging bay N-7\", \"packing\": \"rigid cases\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "reserve_and_label",
+            "id": null,
+            "tool_call_id": "chatcmpl-b2a293dc2c148702:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        }
+      ],
+      "phase": 2
+    },
+    {
+      "message_id": "alice-recover",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 4,
+      "status": "COMPLETED",
+      "answer": "Reservation RSV-736d95d4-dbf6-4678-b4f7-29b798364501 for 9 Cobalt display panels to north staging bay N-7 in rigid cases has been confirmed. The label has been successfully created.",
+      "business_calls": [
+        {
+          "status": "complete",
+          "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+          "generation_id": "chatcmpl-b2a293dc2c148702",
+          "call_id": "chatcmpl-b2a293dc2c148702:tool:0",
+          "name": "reserve_and_label",
+          "args": {
+            "item_key": "Cobalt display panels",
+            "quantity": 9,
+            "destination": "north staging bay N-7",
+            "packing": "rigid cases"
+          },
+          "result": {
+            "content": "{\"ok\": false, \"status\": \"reserved_label_failed\", \"reason\": \"label_service_unavailable\", \"reservation_id\": \"RSV-736d95d4-dbf6-4678-b4f7-29b798364501\", \"item_key\": \"Cobalt display panels\", \"quantity\": 9, \"destination\": \"north staging bay N-7\", \"packing\": \"rigid cases\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "reserve_and_label",
+            "id": null,
+            "tool_call_id": "chatcmpl-b2a293dc2c148702:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        },
+        {
+          "status": "complete",
+          "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+          "generation_id": "chatcmpl-8d25a9e57d0d132b",
+          "call_id": "chatcmpl-8d25a9e57d0d132b:tool:0",
+          "name": "get_reservation",
+          "args": {
+            "item_key": "Cobalt display panels"
+          },
+          "result": {
+            "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-736d95d4-dbf6-4678-b4f7-29b798364501\", \"item_key\": \"Cobalt display panels\", \"quantity\": 9, \"destination\": \"north staging bay N-7\", \"packing\": \"rigid cases\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "get_reservation",
+            "id": null,
+            "tool_call_id": "chatcmpl-8d25a9e57d0d132b:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        },
+        {
+          "status": "complete",
+          "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+          "generation_id": "chatcmpl-8d25a9e57d0d132b",
+          "call_id": "chatcmpl-8d25a9e57d0d132b:tool:1",
+          "name": "complete_label",
+          "args": {
+            "reservation_id": "RSV-736d95d4-dbf6-4678-b4f7-29b798364501"
+          },
+          "result": {
+            "content": "{\"ok\": true, \"status\": \"label_created\", \"reservation_id\": \"RSV-736d95d4-dbf6-4678-b4f7-29b798364501\", \"item_key\": \"Cobalt display panels\", \"quantity\": 9, \"destination\": \"north staging bay N-7\", \"packing\": \"rigid cases\", \"label_status\": \"created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "complete_label",
+            "id": null,
+            "tool_call_id": "chatcmpl-8d25a9e57d0d132b:tool:1",
+            "artifact": null,
+            "status": "success"
+          }
+        }
+      ],
+      "phase": 3
+    },
+    {
+      "message_id": "bob-action",
+      "user_id": "bob",
+      "session_id": "handoff",
+      "public_index": 1,
+      "status": "COMPLETED",
+      "answer": "The reservation and label for the Cobalt display panels have been successfully created. The reservation ID is RSV-cf78d8ff-bec5-44d2-b1a1-4ed5ce97ee38. The quantity is 3 units, destined for the south receiving bay S-5, packed in cloth covers.",
+      "business_calls": [
+        {
+          "status": "complete",
+          "thread_id": "e83a95b8911dcc9332625629a71b07b6dcba63110066dc15c7dc97636e8bf954",
+          "generation_id": "chatcmpl-857e8b5c5b4bd8c5",
+          "call_id": "chatcmpl-857e8b5c5b4bd8c5:tool:0",
+          "name": "reserve_and_label",
+          "args": {
+            "item_key": "Cobalt display panels",
+            "quantity": 3,
+            "destination": "south receiving bay S-5",
+            "packing": "cloth covers"
+          },
+          "result": {
+            "content": "{\"ok\": true, \"status\": \"label_created\", \"reservation_id\": \"RSV-cf78d8ff-bec5-44d2-b1a1-4ed5ce97ee38\", \"item_key\": \"Cobalt display panels\", \"quantity\": 3, \"destination\": \"south receiving bay S-5\", \"packing\": \"cloth covers\", \"label_status\": \"created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "reserve_and_label",
+            "id": null,
+            "tool_call_id": "chatcmpl-857e8b5c5b4bd8c5:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        }
+      ],
+      "phase": 3
+    },
+    {
+      "message_id": "alice-new-session-update",
+      "user_id": "alice",
+      "session_id": "followup",
+      "public_index": 0,
+      "status": "COMPLETED",
+      "answer": "The handling plan memory has been updated to reflect the actual reservation status and identifier (RSV-736d95d4-dbf6-4678-b4f7-29b798364501) while retaining the planned quantity (9 units), destination (north staging bay N-7), and packing (rigid cases). The separate access note regarding the side gate G-1 remains unchanged.",
+      "business_calls": [
+        {
+          "status": "complete",
+          "thread_id": "0c4ed39f6909f074696c9ecb1d15ddbbacfb47e2234f5db234c7aa5d3532db94",
+          "generation_id": "chatcmpl-86d32fa5c523f670",
+          "call_id": "chatcmpl-86d32fa5c523f670:tool:0",
+          "name": "get_reservation",
+          "args": {
+            "item_key": "Cobalt display panels"
+          },
+          "result": {
+            "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-736d95d4-dbf6-4678-b4f7-29b798364501\", \"item_key\": \"Cobalt display panels\", \"quantity\": 9, \"destination\": \"north staging bay N-7\", \"packing\": \"rigid cases\", \"label_status\": \"created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "get_reservation",
+            "id": null,
+            "tool_call_id": "chatcmpl-86d32fa5c523f670:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        }
+      ],
+      "phase": 4
+    },
+    {
+      "message_id": "bob-new-session-review",
+      "user_id": "bob",
+      "session_id": "followup",
+      "public_index": 0,
+      "status": "COMPLETED",
+      "answer": "The stored handling plan for Cobalt display panels specifies a planned quantity of 3 units, destination of south receiving bay S-5, and packing using cloth covers.",
+      "business_calls": [],
+      "phase": 4
+    }
+  ],
+  "phase_worlds": [
+    {
+      "label_available": false,
+      "reservations": [],
+      "attempts": []
+    },
+    {
+      "label_available": false,
+      "reservations": [],
+      "attempts": []
+    },
+    {
+      "label_available": false,
+      "reservations": [
+        {
+          "reservation_id": "RSV-736d95d4-dbf6-4678-b4f7-29b798364501",
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "quantity": 9,
+          "destination": "north staging bay N-7",
+          "packing": "rigid cases",
+          "label_status": "not_created"
+        }
+      ],
+      "attempts": [
+        {
+          "id": 1,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        }
+      ]
+    },
+    {
+      "label_available": true,
+      "reservations": [
+        {
+          "reservation_id": "RSV-736d95d4-dbf6-4678-b4f7-29b798364501",
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "quantity": 9,
+          "destination": "north staging bay N-7",
+          "packing": "rigid cases",
+          "label_status": "created"
+        },
+        {
+          "reservation_id": "RSV-cf78d8ff-bec5-44d2-b1a1-4ed5ce97ee38",
+          "user_id": "bob",
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers",
+          "label_status": "created"
+        }
+      ],
+      "attempts": [
+        {
+          "id": 1,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        },
+        {
+          "id": 2,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "complete_label",
+          "outcome": "created"
+        },
+        {
+          "id": 3,
+          "user_id": "bob",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        }
+      ]
+    },
+    {
+      "label_available": true,
+      "reservations": [
+        {
+          "reservation_id": "RSV-736d95d4-dbf6-4678-b4f7-29b798364501",
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "quantity": 9,
+          "destination": "north staging bay N-7",
+          "packing": "rigid cases",
+          "label_status": "created"
+        },
+        {
+          "reservation_id": "RSV-cf78d8ff-bec5-44d2-b1a1-4ed5ce97ee38",
+          "user_id": "bob",
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers",
+          "label_status": "created"
+        }
+      ],
+      "attempts": [
+        {
+          "id": 1,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        },
+        {
+          "id": 2,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "complete_label",
+          "outcome": "created"
+        },
+        {
+          "id": 3,
+          "user_id": "bob",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        }
+      ]
+    }
+  ],
+  "phase_memory_snapshots": [
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.018799964804202318,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "value": {
+              "content": "The old Cobalt courier contact is Rowan at extension 482. This is a contact entry, not a handling instruction."
+            },
+            "created_at": "2026-09-27T01:22:31.423627+00:00",
+            "updated_at": "2026-09-27T01:22:31.423627+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "762925ee-9393-4067-bf37-edc6e880de01",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:22:31.265802+00:00",
+            "updated_at": "2026-09-27T01:22:31.265802+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 4 units for west receiving bay W-2 using paper sleeves. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:22:31.097579+00:00",
+            "updated_at": "2026-09-27T01:22:31.097579+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "bob"
+            ],
+            "key": "22471796-c475-4184-bac4-cf2127c136f8",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:22:31.579843+00:00",
+            "updated_at": "2026-09-27T01:22:31.579843+00:00",
+            "score": null
+          }
+        ]
+      }
+    },
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.016993036027997732,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 6 units for east loading bay E-4 using foam cradles. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:22:31.097579+00:00",
+            "updated_at": "2026-09-27T01:22:37.263081+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "762925ee-9393-4067-bf37-edc6e880de01",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:22:31.265802+00:00",
+            "updated_at": "2026-09-27T01:22:31.265802+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "bob"
+            ],
+            "key": "22471796-c475-4184-bac4-cf2127c136f8",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:22:31.579843+00:00",
+            "updated_at": "2026-09-27T01:22:31.579843+00:00",
+            "score": null
+          }
+        ]
+      }
+    },
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.01643545413389802,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:22:31.097579+00:00",
+            "updated_at": "2026-09-27T01:22:42.227058+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "762925ee-9393-4067-bf37-edc6e880de01",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:22:31.265802+00:00",
+            "updated_at": "2026-09-27T01:22:31.265802+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "bob"
+            ],
+            "key": "22471796-c475-4184-bac4-cf2127c136f8",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:22:31.579843+00:00",
+            "updated_at": "2026-09-27T01:22:31.579843+00:00",
+            "score": null
+          }
+        ]
+      }
+    },
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.016775005031377077,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:22:31.097579+00:00",
+            "updated_at": "2026-09-27T01:22:42.227058+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "762925ee-9393-4067-bf37-edc6e880de01",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:22:31.265802+00:00",
+            "updated_at": "2026-09-27T01:22:31.265802+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "bob"
+            ],
+            "key": "22471796-c475-4184-bac4-cf2127c136f8",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:22:31.579843+00:00",
+            "updated_at": "2026-09-27T01:22:31.579843+00:00",
+            "score": null
+          }
+        ]
+      }
+    },
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.017299123108386993,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. Reservation created with ID RSV-736d95d4-dbf6-4678-b4f7-29b798364501. Label status: created."
+            },
+            "created_at": "2026-09-27T01:22:31.097579+00:00",
+            "updated_at": "2026-09-27T01:23:00.762099+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "key": "762925ee-9393-4067-bf37-edc6e880de01",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:22:31.265802+00:00",
+            "updated_at": "2026-09-27T01:22:31.265802+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "bob"
+            ],
+            "key": "22471796-c475-4184-bac4-cf2127c136f8",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:22:31.579843+00:00",
+            "updated_at": "2026-09-27T01:22:31.579843+00:00",
+            "score": null
+          }
+        ]
+      }
+    }
+  ],
+  "operator_memory": {
+    "events": {
+      "seed-alice-plan": {
+        "input": {
+          "event_id": "seed-alice-plan",
+          "user_id": "alice",
+          "action": "create",
+          "alias": "plan",
+          "content": "Handling plan for Cobalt display panels: reserve 4 units for west receiving bay W-2 using paper sleeves. No reservation or label has been created."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "create",
+          "content": "Handling plan for Cobalt display panels: reserve 4 units for west receiving bay W-2 using paper sleeves. No reservation or label has been created."
+        },
+        "result": "created memory 9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a"
+      },
+      "seed-alice-access": {
+        "input": {
+          "event_id": "seed-alice-access",
+          "user_id": "alice",
+          "action": "create",
+          "alias": "access",
+          "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "create",
+          "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+        },
+        "result": "created memory 762925ee-9393-4067-bf37-edc6e880de01"
+      },
+      "seed-alice-contact": {
+        "input": {
+          "event_id": "seed-alice-contact",
+          "user_id": "alice",
+          "action": "create",
+          "alias": "old_contact",
+          "content": "The old Cobalt courier contact is Rowan at extension 482. This is a contact entry, not a handling instruction."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "create",
+          "content": "The old Cobalt courier contact is Rowan at extension 482. This is a contact entry, not a handling instruction."
+        },
+        "result": "created memory edc84600-a017-45fa-ab85-868ff172b5a1"
+      },
+      "seed-bob-plan": {
+        "input": {
+          "event_id": "seed-bob-plan",
+          "user_id": "bob",
+          "action": "create",
+          "alias": "plan",
+          "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "create",
+          "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+        },
+        "result": "created memory 22471796-c475-4184-bac4-cf2127c136f8"
+      },
+      "revise-alice-plan-2": {
+        "input": {
+          "event_id": "revise-alice-plan-2",
+          "user_id": "alice",
+          "action": "update",
+          "alias": "plan",
+          "content": "Handling plan for Cobalt display panels: reserve 6 units for east loading bay E-4 using foam cradles. No reservation or label has been created."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "update",
+          "id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+          "content": "Handling plan for Cobalt display panels: reserve 6 units for east loading bay E-4 using foam cradles. No reservation or label has been created."
+        },
+        "result": "updated memory 9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a"
+      },
+      "delete-alice-contact": {
+        "input": {
+          "event_id": "delete-alice-contact",
+          "user_id": "alice",
+          "action": "delete",
+          "alias": "old_contact"
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "delete",
+          "id": "edc84600-a017-45fa-ab85-868ff172b5a1"
+        },
+        "result": "Deleted memory edc84600-a017-45fa-ab85-868ff172b5a1"
+      },
+      "revise-alice-plan-3": {
+        "input": {
+          "event_id": "revise-alice-plan-3",
+          "user_id": "alice",
+          "action": "update",
+          "alias": "plan",
+          "content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "update",
+          "id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+          "content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created."
+        },
+        "result": "updated memory 9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a"
+      }
+    },
+    "aliases": {
+      "alice": {
+        "plan": {
+          "id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+          "deleted": false
+        },
+        "access": {
+          "id": "762925ee-9393-4067-bf37-edc6e880de01",
+          "deleted": false
+        },
+        "old_contact": {
+          "id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+          "deleted": true
+        }
+      },
+      "bob": {
+        "plan": {
+          "id": "22471796-c475-4184-bac4-cf2127c136f8",
+          "deleted": false
+        }
+      }
+    }
+  },
+  "business_journal": [
+    {
+      "status": "complete",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "generation_id": "chatcmpl-b2a293dc2c148702",
+      "call_id": "chatcmpl-b2a293dc2c148702:tool:0",
+      "name": "reserve_and_label",
+      "args": {
+        "item_key": "Cobalt display panels",
+        "quantity": 9,
+        "destination": "north staging bay N-7",
+        "packing": "rigid cases"
+      },
+      "result": {
+        "content": "{\"ok\": false, \"status\": \"reserved_label_failed\", \"reason\": \"label_service_unavailable\", \"reservation_id\": \"RSV-736d95d4-dbf6-4678-b4f7-29b798364501\", \"item_key\": \"Cobalt display panels\", \"quantity\": 9, \"destination\": \"north staging bay N-7\", \"packing\": \"rigid cases\", \"label_status\": \"not_created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "reserve_and_label",
+        "id": null,
+        "tool_call_id": "chatcmpl-b2a293dc2c148702:tool:0",
+        "artifact": null,
+        "status": "success"
+      }
+    },
+    {
+      "status": "complete",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "generation_id": "chatcmpl-8d25a9e57d0d132b",
+      "call_id": "chatcmpl-8d25a9e57d0d132b:tool:0",
+      "name": "get_reservation",
+      "args": {
+        "item_key": "Cobalt display panels"
+      },
+      "result": {
+        "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-736d95d4-dbf6-4678-b4f7-29b798364501\", \"item_key\": \"Cobalt display panels\", \"quantity\": 9, \"destination\": \"north staging bay N-7\", \"packing\": \"rigid cases\", \"label_status\": \"not_created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "get_reservation",
+        "id": null,
+        "tool_call_id": "chatcmpl-8d25a9e57d0d132b:tool:0",
+        "artifact": null,
+        "status": "success"
+      }
+    },
+    {
+      "status": "complete",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "generation_id": "chatcmpl-8d25a9e57d0d132b",
+      "call_id": "chatcmpl-8d25a9e57d0d132b:tool:1",
+      "name": "complete_label",
+      "args": {
+        "reservation_id": "RSV-736d95d4-dbf6-4678-b4f7-29b798364501"
+      },
+      "result": {
+        "content": "{\"ok\": true, \"status\": \"label_created\", \"reservation_id\": \"RSV-736d95d4-dbf6-4678-b4f7-29b798364501\", \"item_key\": \"Cobalt display panels\", \"quantity\": 9, \"destination\": \"north staging bay N-7\", \"packing\": \"rigid cases\", \"label_status\": \"created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "complete_label",
+        "id": null,
+        "tool_call_id": "chatcmpl-8d25a9e57d0d132b:tool:1",
+        "artifact": null,
+        "status": "success"
+      }
+    },
+    {
+      "status": "complete",
+      "thread_id": "e83a95b8911dcc9332625629a71b07b6dcba63110066dc15c7dc97636e8bf954",
+      "generation_id": "chatcmpl-857e8b5c5b4bd8c5",
+      "call_id": "chatcmpl-857e8b5c5b4bd8c5:tool:0",
+      "name": "reserve_and_label",
+      "args": {
+        "item_key": "Cobalt display panels",
+        "quantity": 3,
+        "destination": "south receiving bay S-5",
+        "packing": "cloth covers"
+      },
+      "result": {
+        "content": "{\"ok\": true, \"status\": \"label_created\", \"reservation_id\": \"RSV-cf78d8ff-bec5-44d2-b1a1-4ed5ce97ee38\", \"item_key\": \"Cobalt display panels\", \"quantity\": 3, \"destination\": \"south receiving bay S-5\", \"packing\": \"cloth covers\", \"label_status\": \"created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "reserve_and_label",
+        "id": null,
+        "tool_call_id": "chatcmpl-857e8b5c5b4bd8c5:tool:0",
+        "artifact": null,
+        "status": "success"
+      }
+    },
+    {
+      "status": "complete",
+      "thread_id": "0c4ed39f6909f074696c9ecb1d15ddbbacfb47e2234f5db234c7aa5d3532db94",
+      "generation_id": "chatcmpl-86d32fa5c523f670",
+      "call_id": "chatcmpl-86d32fa5c523f670:tool:0",
+      "name": "get_reservation",
+      "args": {
+        "item_key": "Cobalt display panels"
+      },
+      "result": {
+        "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-736d95d4-dbf6-4678-b4f7-29b798364501\", \"item_key\": \"Cobalt display panels\", \"quantity\": 9, \"destination\": \"north staging bay N-7\", \"packing\": \"rigid cases\", \"label_status\": \"created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "get_reservation",
+        "id": null,
+        "tool_call_id": "chatcmpl-86d32fa5c523f670:tool:0",
+        "artifact": null,
+        "status": "success"
+      }
+    }
+  ],
+  "thread_scopes": {
+    "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3": {
+      "user_id": "alice",
+      "session_id": "handoff"
+    },
+    "e83a95b8911dcc9332625629a71b07b6dcba63110066dc15c7dc97636e8bf954": {
+      "user_id": "bob",
+      "session_id": "handoff"
+    },
+    "0c4ed39f6909f074696c9ecb1d15ddbbacfb47e2234f5db234c7aa5d3532db94": {
+      "user_id": "alice",
+      "session_id": "followup"
+    },
+    "31fb0168f54baf384abd19bc05c9a355417ca0b190c5db27dba523c1076ba74a": {
+      "user_id": "bob",
+      "session_id": "followup"
+    }
+  },
+  "actual_search_namespace_scope_verified": true,
+  "memory_tool_counts": {
+    "host_manage": 1,
+    "operator_manage": 7,
+    "host_search": 6
+  },
+  "checkpoint_threads": {
+    "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3": {
+      "messages": 19,
+      "ordinary_answers": [
+        {
+          "id": "chatcmpl-b54a2b9a56e16133",
+          "content": "I found three relevant notes in your saved memories:\n\n1. **Handling Plan**: Reserve 4 units of Cobalt display panels for the west receiving bay W-2 using paper sleeves. No reservation or label has been created yet.\n2. **Collection Access**: Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays.\n3. **Courier Contact**: The old Cobalt courier contact is Rowan at extension 482."
+        },
+        {
+          "id": "chatcmpl-80c2484581a80f72",
+          "content": "Based on the saved notes, here are the details for the Cobalt display panels:\n\n*   **Planned Quantity:** 6 units\n*   **Destination:** East loading bay E-4\n*   **Packing:** Foam cradles\n*   **Access Details:** Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+        },
+        {
+          "id": "chatcmpl-94e60956c09c1440",
+          "content": "Acknowledged. The 192 office log records regarding printer self-checks and stationery drawers are noted as transient and unrelated to the Cobalt collection handoff."
+        },
+        {
+          "id": "chatcmpl-bc889c3cb9d7d8c6",
+          "content": "Reservation created successfully for 9 Cobalt display panels to north staging bay N-7 in rigid cases (Reservation ID: RSV-736d95d4-dbf6-4678-b4f7-29b798364501). Label creation failed due to label service unavailability; no label was created."
+        },
+        {
+          "id": "chatcmpl-bc4ffb7b3cdbb8d4",
+          "content": "Reservation RSV-736d95d4-dbf6-4678-b4f7-29b798364501 for 9 Cobalt display panels to north staging bay N-7 in rigid cases has been confirmed. The label has been successfully created."
+        }
+      ]
+    },
+    "e83a95b8911dcc9332625629a71b07b6dcba63110066dc15c7dc97636e8bf954": {
+      "messages": 8,
+      "ordinary_answers": [
+        {
+          "id": "chatcmpl-abc0e5ef24e9c890",
+          "content": "The saved handling plan for Cobalt display panels specifies:\n- **Planned Quantity:** 3 units\n- **Destination:** South receiving bay S-5\n- **Packing:** Cloth covers"
+        },
+        {
+          "id": "chatcmpl-8dd05a0f99a30a21",
+          "content": "The reservation and label for the Cobalt display panels have been successfully created. The reservation ID is RSV-cf78d8ff-bec5-44d2-b1a1-4ed5ce97ee38. The quantity is 3 units, destined for the south receiving bay S-5, packed in cloth covers."
+        }
+      ]
+    },
+    "0c4ed39f6909f074696c9ecb1d15ddbbacfb47e2234f5db234c7aa5d3532db94": {
+      "messages": 9,
+      "ordinary_answers": [
+        {
+          "id": "chatcmpl-9e08539b9c06f0e4",
+          "content": "The handling plan memory has been updated to reflect the actual reservation status and identifier (RSV-736d95d4-dbf6-4678-b4f7-29b798364501) while retaining the planned quantity (9 units), destination (north staging bay N-7), and packing (rigid cases). The separate access note regarding the side gate G-1 remains unchanged."
+        }
+      ]
+    },
+    "31fb0168f54baf384abd19bc05c9a355417ca0b190c5db27dba523c1076ba74a": {
+      "messages": 4,
+      "ordinary_answers": [
+        {
+          "id": "chatcmpl-814e3815d3383276",
+          "content": "The stored handling plan for Cobalt display panels specifies a planned quantity of 3 units, destination of south receiving bay S-5, and packing using cloth covers."
+        }
+      ]
+    }
+  },
+  "instrumentation": {
+    "counts": {
+      "request_material": 33,
+      "requests": 19,
+      "tool_calls": 19,
+      "bodies": 32,
+      "observations": 14,
+      "operations": 8,
+      "revisions": 8,
+      "searches": 6
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 19
+      },
+      "operations": {
+        "complete": 8
+      },
+      "searches": {
+        "returned": 6
+      },
+      "requests": {
+        "completed": 19
+      }
+    },
+    "observation_roles": {
+      "business_tool": 5,
+      "user": 9
+    },
+    "revision_effects": {
+      "delete": 1,
+      "insert": 4,
+      "update": 3
+    },
+    "material_coverage": {
+      "FULL": 19,
+      "PROJECTED_REFRESHED": 13,
+      "PROJECTED_WITHHELD": 1
+    },
+    "search_returned_items": 11,
+    "search_exact_revision_bindings": 11,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 298,
+      "observer_cpu_ns": 99627292,
+      "observer_wall_ns": 1707205326,
+      "extra_store_reads": 16,
+      "extra_read_cpu_ns": 11224121,
+      "extra_read_wall_ns": 23121319,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 237568,
+      "net_sqlite_db_bytes": 139264,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "projection": {
+    "requests": 19,
+    "items": [
+      {
+        "request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "status": "CURRENT",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "projected_body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "actual_tool_body_ref": "body:string:683f7644dc7ad5e85fd50d4fa16c6ec9b508456b827add5441000767728d6290"
+      },
+      {
+        "request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 1,
+        "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "status": "CURRENT",
+        "current_ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "projected_body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "actual_tool_body_ref": "body:string:683f7644dc7ad5e85fd50d4fa16c6ec9b508456b827add5441000767728d6290"
+      },
+      {
+        "request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 2,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:683f7644dc7ad5e85fd50d4fa16c6ec9b508456b827add5441000767728d6290"
+      },
+      {
+        "request_id": "925a680011f42ef6c7c96da6537b7ba4e40be1419273d7b66fa2400634ed888a",
+        "source_tool_call": "chatcmpl-ad2bbca743f40d3e:tool:0",
+        "source_search_id": "6d63784ab8ec530c9081d1d1b7ef412291ea182e2bb6e139d9656d09e1cadee1:1:search:1",
+        "item_index": 0,
+        "memory_id": "22471796-c475-4184-bac4-cf2127c136f8",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "bob"
+        ],
+        "ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "status": "CURRENT",
+        "current_ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "projected_body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "actual_tool_body_ref": "body:string:34e05a4a6262185b3d8188b95f2b4528303c671516bd4dd428c07ec056a4b3db"
+      },
+      {
+        "request_id": "31218d4e374c32d95d4ccffa4ae3488b4006c41689e80bced2f7c124b0527054",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "projected_body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:97a8914d031d9ee0ab51955e57a92934b09a641027d1b595e855b4b827c2e4c7"
+      },
+      {
+        "request_id": "31218d4e374c32d95d4ccffa4ae3488b4006c41689e80bced2f7c124b0527054",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 1,
+        "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "status": "DELETED",
+        "current_ref": null,
+        "current_body_delivered": false,
+        "source_body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "projected_body_ref": "body:string:946809250ad8bdff69f0cd24d2e42a624c2ee531eeb5f27ed339c48ebd7545e1",
+        "actual_tool_body_ref": "body:string:97a8914d031d9ee0ab51955e57a92934b09a641027d1b595e855b4b827c2e4c7"
+      },
+      {
+        "request_id": "31218d4e374c32d95d4ccffa4ae3488b4006c41689e80bced2f7c124b0527054",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 2,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:97a8914d031d9ee0ab51955e57a92934b09a641027d1b595e855b4b827c2e4c7"
+      },
+      {
+        "request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "projected_body_ref": "body:string:5fb6fa1e282b214bc98fce4c06c06e076ea9ff79e1c1d1fd7882e0300f45df23",
+        "actual_tool_body_ref": "body:string:a8bfa3d6d8bf9750764e90b7d6431d73f725618330e9cc18a0dc861c66dd18be"
+      },
+      {
+        "request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 1,
+        "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "status": "DELETED",
+        "current_ref": null,
+        "current_body_delivered": false,
+        "source_body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "projected_body_ref": "body:string:946809250ad8bdff69f0cd24d2e42a624c2ee531eeb5f27ed339c48ebd7545e1",
+        "actual_tool_body_ref": "body:string:a8bfa3d6d8bf9750764e90b7d6431d73f725618330e9cc18a0dc861c66dd18be"
+      },
+      {
+        "request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 2,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:a8bfa3d6d8bf9750764e90b7d6431d73f725618330e9cc18a0dc861c66dd18be"
+      },
+      {
+        "request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "status": "CURRENT",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "projected_body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "actual_tool_body_ref": "body:string:e94b921b43eeda834143c4ccd90451e79a45859c0cd16625d3029bca53631b02"
+      },
+      {
+        "request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 1,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:e94b921b43eeda834143c4ccd90451e79a45859c0cd16625d3029bca53631b02"
+      },
+      {
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 1,
+        "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "status": "DELETED",
+        "current_ref": null,
+        "current_body_delivered": false,
+        "source_body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "projected_body_ref": "body:string:946809250ad8bdff69f0cd24d2e42a624c2ee531eeb5f27ed339c48ebd7545e1",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 2,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 1,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 1,
+        "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "status": "DELETED",
+        "current_ref": null,
+        "current_body_delivered": false,
+        "source_body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "projected_body_ref": "body:string:946809250ad8bdff69f0cd24d2e42a624c2ee531eeb5f27ed339c48ebd7545e1",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 2,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 1,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 1,
+        "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "status": "DELETED",
+        "current_ref": null,
+        "current_body_delivered": false,
+        "source_body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "projected_body_ref": "body:string:946809250ad8bdff69f0cd24d2e42a624c2ee531eeb5f27ed339c48ebd7545e1",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 2,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 1,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 1,
+        "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "status": "DELETED",
+        "current_ref": null,
+        "current_body_delivered": false,
+        "source_body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "projected_body_ref": "body:string:946809250ad8bdff69f0cd24d2e42a624c2ee531eeb5f27ed339c48ebd7545e1",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 2,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 1,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 1,
+        "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "status": "DELETED",
+        "current_ref": null,
+        "current_body_delivered": false,
+        "source_body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "projected_body_ref": "body:string:946809250ad8bdff69f0cd24d2e42a624c2ee531eeb5f27ed339c48ebd7545e1",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "item_index": 2,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:d786392e688d97d3f52cd5e2be3104cac71954a9e2d231ec95b68003680859c3"
+      },
+      {
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "item_index": 1,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:0e8f1606c7731e79d61770851bc515b6d8af5313f4001ac4880bebe28614d02a"
+      },
+      {
+        "request_id": "f59fe01436d7218f1de106b4906e2277f5c7230055f06b753476329ad8c9e0a5",
+        "source_tool_call": "chatcmpl-ad2bbca743f40d3e:tool:0",
+        "source_search_id": "6d63784ab8ec530c9081d1d1b7ef412291ea182e2bb6e139d9656d09e1cadee1:1:search:1",
+        "item_index": 0,
+        "memory_id": "22471796-c475-4184-bac4-cf2127c136f8",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "bob"
+        ],
+        "ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "status": "CURRENT",
+        "current_ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "projected_body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "actual_tool_body_ref": "body:string:34e05a4a6262185b3d8188b95f2b4528303c671516bd4dd428c07ec056a4b3db"
+      },
+      {
+        "request_id": "e70d77a0d8361e155cbe9122c7b59edc5c2f227772d15e3c6554e204cf0e797f",
+        "source_tool_call": "chatcmpl-ad2bbca743f40d3e:tool:0",
+        "source_search_id": "6d63784ab8ec530c9081d1d1b7ef412291ea182e2bb6e139d9656d09e1cadee1:1:search:1",
+        "item_index": 0,
+        "memory_id": "22471796-c475-4184-bac4-cf2127c136f8",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "bob"
+        ],
+        "ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "status": "CURRENT",
+        "current_ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "projected_body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "actual_tool_body_ref": "body:string:34e05a4a6262185b3d8188b95f2b4528303c671516bd4dd428c07ec056a4b3db"
+      },
+      {
+        "request_id": "ebf873e91ac90007414c80c7d8b3c1610e8186cc1522d5e1418b9d3c6f20a225",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:0",
+        "source_search_id": "d414f334e482d897d16680e9c689557925a5c94b062917dbbca9411769097a3e:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "status": "CURRENT",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "actual_tool_body_ref": "body:string:8baf81adb20b5098cd23782ebffc417644fa95abb17b946e8c99066b28a649bb"
+      },
+      {
+        "request_id": "ebf873e91ac90007414c80c7d8b3c1610e8186cc1522d5e1418b9d3c6f20a225",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:0",
+        "source_search_id": "d414f334e482d897d16680e9c689557925a5c94b062917dbbca9411769097a3e:1:search:1",
+        "item_index": 1,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:8baf81adb20b5098cd23782ebffc417644fa95abb17b946e8c99066b28a649bb"
+      },
+      {
+        "request_id": "ebf873e91ac90007414c80c7d8b3c1610e8186cc1522d5e1418b9d3c6f20a225",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "item_index": 0,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:b78cc659f7d276684cbfa204a1c9a0cc381cb5bc903a20c1da54024bebdb4bf5"
+      },
+      {
+        "request_id": "ebf873e91ac90007414c80c7d8b3c1610e8186cc1522d5e1418b9d3c6f20a225",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "item_index": 1,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "status": "CURRENT",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "actual_tool_body_ref": "body:string:b78cc659f7d276684cbfa204a1c9a0cc381cb5bc903a20c1da54024bebdb4bf5"
+      },
+      {
+        "request_id": "9111e9cfecfc69e4141f789edcf33edc4d27a5a7572516102ce275004f1edd17",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:0",
+        "source_search_id": "d414f334e482d897d16680e9c689557925a5c94b062917dbbca9411769097a3e:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "status": "CURRENT",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "actual_tool_body_ref": "body:string:8baf81adb20b5098cd23782ebffc417644fa95abb17b946e8c99066b28a649bb"
+      },
+      {
+        "request_id": "9111e9cfecfc69e4141f789edcf33edc4d27a5a7572516102ce275004f1edd17",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:0",
+        "source_search_id": "d414f334e482d897d16680e9c689557925a5c94b062917dbbca9411769097a3e:1:search:1",
+        "item_index": 1,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:8baf81adb20b5098cd23782ebffc417644fa95abb17b946e8c99066b28a649bb"
+      },
+      {
+        "request_id": "9111e9cfecfc69e4141f789edcf33edc4d27a5a7572516102ce275004f1edd17",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "item_index": 0,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:b78cc659f7d276684cbfa204a1c9a0cc381cb5bc903a20c1da54024bebdb4bf5"
+      },
+      {
+        "request_id": "9111e9cfecfc69e4141f789edcf33edc4d27a5a7572516102ce275004f1edd17",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "item_index": 1,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "status": "CURRENT",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "projected_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "actual_tool_body_ref": "body:string:b78cc659f7d276684cbfa204a1c9a0cc381cb5bc903a20c1da54024bebdb4bf5"
+      },
+      {
+        "request_id": "f6098f309665e2526e4c1b195b3834adc676313b12ad86f78750ca1cf3ca2f77",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:0",
+        "source_search_id": "d414f334e482d897d16680e9c689557925a5c94b062917dbbca9411769097a3e:1:search:1",
+        "item_index": 0,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@4",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "projected_body_ref": "body:string:466a90653a86a7d2318e3b929e80d1744e9af237019d41d59a33403ff9a930c8",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:e4dddffacf83830aa0c4c30daaa7a267c27203e3fda2827b17becbb91ee626f3"
+      },
+      {
+        "request_id": "f6098f309665e2526e4c1b195b3834adc676313b12ad86f78750ca1cf3ca2f77",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:0",
+        "source_search_id": "d414f334e482d897d16680e9c689557925a5c94b062917dbbca9411769097a3e:1:search:1",
+        "item_index": 1,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:e4dddffacf83830aa0c4c30daaa7a267c27203e3fda2827b17becbb91ee626f3"
+      },
+      {
+        "request_id": "f6098f309665e2526e4c1b195b3834adc676313b12ad86f78750ca1cf3ca2f77",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "item_index": 0,
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "status": "CURRENT",
+        "current_ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "projected_body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "actual_tool_body_ref": "body:string:32b4f1761a0adff9ff6b59da07b2c2ebe815b4112b0c9e9ed6f7c6abeaa146e6"
+      },
+      {
+        "request_id": "f6098f309665e2526e4c1b195b3834adc676313b12ad86f78750ca1cf3ca2f77",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "item_index": 1,
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "status": "SUPERSEDED",
+        "current_ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@4",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "projected_body_ref": "body:string:466a90653a86a7d2318e3b929e80d1744e9af237019d41d59a33403ff9a930c8",
+        "exact_read_index": 0,
+        "refresh_status": "BOUND_CURRENT",
+        "delivery_source": "public Store.get",
+        "actual_tool_body_ref": "body:string:32b4f1761a0adff9ff6b59da07b2c2ebe815b4112b0c9e9ed6f7c6abeaa146e6"
+      },
+      {
+        "request_id": "412f6795992864f599468bfae0ca378d0809b4a04bf134f03b1a4ce570e34a3c",
+        "source_tool_call": "chatcmpl-a0a355ade23ce6a8:tool:0",
+        "source_search_id": "92510af7dfd0b3629522e27838a460a9a434f65d633a2e5d1785f88335687708:1:search:1",
+        "item_index": 0,
+        "memory_id": "22471796-c475-4184-bac4-cf2127c136f8",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "bob"
+        ],
+        "ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "status": "CURRENT",
+        "current_ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "current_body_delivered": true,
+        "source_body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "projected_body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "actual_tool_body_ref": "body:string:34e05a4a6262185b3d8188b95f2b4528303c671516bd4dd428c07ec056a4b3db"
+      }
+    ],
+    "delivered_snapshots": [
+      {
+        "request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 1,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+        "body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+        "revision": 1,
+        "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+        "body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "925a680011f42ef6c7c96da6537b7ba4e40be1419273d7b66fa2400634ed888a",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "bob"
+        ],
+        "memory_id": "22471796-c475-4184-bac4-cf2127c136f8",
+        "revision": 1,
+        "ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "source_tool_call": "chatcmpl-ad2bbca743f40d3e:tool:0",
+        "source_search_id": "6d63784ab8ec530c9081d1d1b7ef412291ea182e2bb6e139d9656d09e1cadee1:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "31218d4e374c32d95d4ccffa4ae3488b4006c41689e80bced2f7c124b0527054",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 2,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "delivery_source": "public Store.get"
+      },
+      {
+        "request_id": "31218d4e374c32d95d4ccffa4ae3488b4006c41689e80bced2f7c124b0527054",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+        "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 2,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+        "body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 3,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "public Store.get"
+      },
+      {
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 3,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "public Store.get"
+      },
+      {
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 3,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "public Store.get"
+      },
+      {
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 3,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "public Store.get"
+      },
+      {
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 3,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "public Store.get"
+      },
+      {
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+        "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "f59fe01436d7218f1de106b4906e2277f5c7230055f06b753476329ad8c9e0a5",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "bob"
+        ],
+        "memory_id": "22471796-c475-4184-bac4-cf2127c136f8",
+        "revision": 1,
+        "ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "source_tool_call": "chatcmpl-ad2bbca743f40d3e:tool:0",
+        "source_search_id": "6d63784ab8ec530c9081d1d1b7ef412291ea182e2bb6e139d9656d09e1cadee1:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "e70d77a0d8361e155cbe9122c7b59edc5c2f227772d15e3c6554e204cf0e797f",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "bob"
+        ],
+        "memory_id": "22471796-c475-4184-bac4-cf2127c136f8",
+        "revision": 1,
+        "ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "source_tool_call": "chatcmpl-ad2bbca743f40d3e:tool:0",
+        "source_search_id": "6d63784ab8ec530c9081d1d1b7ef412291ea182e2bb6e139d9656d09e1cadee1:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "ebf873e91ac90007414c80c7d8b3c1610e8186cc1522d5e1418b9d3c6f20a225",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 3,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "ebf873e91ac90007414c80c7d8b3c1610e8186cc1522d5e1418b9d3c6f20a225",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "9111e9cfecfc69e4141f789edcf33edc4d27a5a7572516102ce275004f1edd17",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 3,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+        "body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "9111e9cfecfc69e4141f789edcf33edc4d27a5a7572516102ce275004f1edd17",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "f6098f309665e2526e4c1b195b3834adc676313b12ad86f78750ca1cf3ca2f77",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "revision": 4,
+        "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@4",
+        "body_ref": "body:string:466a90653a86a7d2318e3b929e80d1744e9af237019d41d59a33403ff9a930c8",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "delivery_source": "public Store.get"
+      },
+      {
+        "request_id": "f6098f309665e2526e4c1b195b3834adc676313b12ad86f78750ca1cf3ca2f77",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "762925ee-9393-4067-bf37-edc6e880de01",
+        "revision": 1,
+        "ref": "memory:762925ee-9393-4067-bf37-edc6e880de01@1",
+        "body_ref": "body:string:54dc121d2c5effcf42ebbd1f27ccda12443d32bf17c3b7ff13d099acb18409e9",
+        "source_tool_call": "chatcmpl-bc813bfa4da3e472:tool:1",
+        "source_search_id": "973d6b4a7b541ee93aea5029e65561347a641dfd34fcf1b915616e04f6925913:1:search:1",
+        "delivery_source": "search_memory"
+      },
+      {
+        "request_id": "412f6795992864f599468bfae0ca378d0809b4a04bf134f03b1a4ce570e34a3c",
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "bob"
+        ],
+        "memory_id": "22471796-c475-4184-bac4-cf2127c136f8",
+        "revision": 1,
+        "ref": "memory:22471796-c475-4184-bac4-cf2127c136f8@1",
+        "body_ref": "body:string:39943ddfe0c8b07f058f3ef7e8cb7b8fb58877755821618171598c37cbafeda3",
+        "source_tool_call": "chatcmpl-a0a355ade23ce6a8:tool:0",
+        "source_search_id": "92510af7dfd0b3629522e27838a460a9a434f65d633a2e5d1785f88335687708:1:search:1",
+        "delivery_source": "search_memory"
+      }
+    ],
+    "exact_reads": [
+      {
+        "stage": "application-v25-long-a4-r1:phase-1",
+        "event": "freshness_exact_read",
+        "arm": "a4_selective_rebase",
+        "request_id": "31218d4e374c32d95d4ccffa4ae3488b4006c41689e80bced2f7c124b0527054",
+        "public_message_index": 1,
+        "provider_delivery": false,
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "expected_revision": 2,
+        "source": "public Store.get",
+        "refresh_ttl": false,
+        "wall_ns": 1195535,
+        "status": "BOUND_CURRENT",
+        "returned_body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+        "error_type": null
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-2",
+        "event": "freshness_exact_read",
+        "arm": "a4_selective_rebase",
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "public_message_index": 2,
+        "provider_delivery": false,
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "expected_revision": 3,
+        "source": "public Store.get",
+        "refresh_ttl": false,
+        "wall_ns": 1240715,
+        "status": "BOUND_CURRENT",
+        "returned_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "error_type": null
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-2",
+        "event": "freshness_exact_read",
+        "arm": "a4_selective_rebase",
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "public_message_index": 3,
+        "provider_delivery": false,
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "expected_revision": 3,
+        "source": "public Store.get",
+        "refresh_ttl": false,
+        "wall_ns": 2291668,
+        "status": "BOUND_CURRENT",
+        "returned_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "error_type": null
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-2",
+        "event": "freshness_exact_read",
+        "arm": "a4_selective_rebase",
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "public_message_index": 3,
+        "provider_delivery": false,
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "expected_revision": 3,
+        "source": "public Store.get",
+        "refresh_ttl": false,
+        "wall_ns": 1792622,
+        "status": "BOUND_CURRENT",
+        "returned_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "error_type": null
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-3",
+        "event": "freshness_exact_read",
+        "arm": "a4_selective_rebase",
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "public_message_index": 4,
+        "provider_delivery": false,
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "expected_revision": 3,
+        "source": "public Store.get",
+        "refresh_ttl": false,
+        "wall_ns": 3465060,
+        "status": "BOUND_CURRENT",
+        "returned_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "error_type": null
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-3",
+        "event": "freshness_exact_read",
+        "arm": "a4_selective_rebase",
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "public_message_index": 4,
+        "provider_delivery": false,
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "expected_revision": 3,
+        "source": "public Store.get",
+        "refresh_ttl": false,
+        "wall_ns": 2176547,
+        "status": "BOUND_CURRENT",
+        "returned_body_ref": "body:string:2357e84ccab1de91458381da2574d517618212b783cba58fc63d3ed9bfeba93b",
+        "error_type": null
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-4",
+        "event": "freshness_exact_read",
+        "arm": "a4_selective_rebase",
+        "request_id": "f6098f309665e2526e4c1b195b3834adc676313b12ad86f78750ca1cf3ca2f77",
+        "public_message_index": 0,
+        "provider_delivery": false,
+        "namespace": [
+          "langmem",
+          "application-v25-long-a4-r1",
+          "a4_selective_rebase",
+          "alice"
+        ],
+        "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+        "expected_revision": 4,
+        "source": "public Store.get",
+        "refresh_ttl": false,
+        "wall_ns": 963675,
+        "status": "BOUND_CURRENT",
+        "returned_body_ref": "body:string:466a90653a86a7d2318e3b929e80d1744e9af237019d41d59a33403ff9a930c8",
+        "error_type": null
+      }
+    ],
+    "derived_rebases": [
+      {
+        "stage": "application-v25-long-a4-r1:phase-1",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "31218d4e374c32d95d4ccffa4ae3488b4006c41689e80bced2f7c124b0527054",
+        "request_object_sha256": "377d9c1f0d685b9d5b10784722eaf5f0782497e55f8664c797f2eeba0f994915",
+        "public_message_index": 1,
+        "provider_message_index": 4,
+        "message_index": 4,
+        "response_id": "chatcmpl-b54a2b9a56e16133",
+        "generating_request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "original_body_kind": "string",
+        "original_body_hash": "01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "original_body_ref": "body:string:01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "SUPERSEDED"
+          },
+          {
+            "body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+            "delivery_source": "search_memory",
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "DELETED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 2,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+            "status": "CURRENT"
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "revision": null,
+            "ref": null,
+            "status": "DELETED"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-1",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "request_object_sha256": "b9366ca342584b14dfca6ab00a69a1322edb9f69411262d3802f8556339f8988",
+        "public_message_index": 1,
+        "provider_message_index": 4,
+        "message_index": 4,
+        "response_id": "chatcmpl-b54a2b9a56e16133",
+        "generating_request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "original_body_kind": "string",
+        "original_body_hash": "01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "original_body_ref": "body:string:01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "SUPERSEDED"
+          },
+          {
+            "body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+            "delivery_source": "search_memory",
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "DELETED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 2,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+            "status": "CURRENT"
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "revision": null,
+            "ref": null,
+            "status": "DELETED"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-2",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "request_object_sha256": "4ce94ba5819e7f79af8b2251130cc72131d7993ad6075eca020d4274d9e945aa",
+        "public_message_index": 2,
+        "provider_message_index": 4,
+        "message_index": 4,
+        "response_id": "chatcmpl-b54a2b9a56e16133",
+        "generating_request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "original_body_kind": "string",
+        "original_body_hash": "01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "original_body_ref": "body:string:01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "SUPERSEDED"
+          },
+          {
+            "body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+            "delivery_source": "search_memory",
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "DELETED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "revision": null,
+            "ref": null,
+            "status": "DELETED"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-2",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+        "request_object_sha256": "4ce94ba5819e7f79af8b2251130cc72131d7993ad6075eca020d4274d9e945aa",
+        "public_message_index": 2,
+        "provider_message_index": 8,
+        "message_index": 8,
+        "response_id": "chatcmpl-80c2484581a80f72",
+        "generating_request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "original_body_kind": "string",
+        "original_body_hash": "4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "original_body_ref": "body:string:4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+            "revision": 2,
+            "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+            "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+            "status": "SUPERSEDED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-2",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "request_object_sha256": "c6509a32fdc6d01f47b9304db37df283e8175a949aff52536a15510ab1dd9460",
+        "public_message_index": 3,
+        "provider_message_index": 4,
+        "message_index": 4,
+        "response_id": "chatcmpl-b54a2b9a56e16133",
+        "generating_request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "original_body_kind": "string",
+        "original_body_hash": "01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "original_body_ref": "body:string:01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "SUPERSEDED"
+          },
+          {
+            "body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+            "delivery_source": "search_memory",
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "DELETED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "revision": null,
+            "ref": null,
+            "status": "DELETED"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-2",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+        "request_object_sha256": "c6509a32fdc6d01f47b9304db37df283e8175a949aff52536a15510ab1dd9460",
+        "public_message_index": 3,
+        "provider_message_index": 8,
+        "message_index": 8,
+        "response_id": "chatcmpl-80c2484581a80f72",
+        "generating_request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "original_body_kind": "string",
+        "original_body_hash": "4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "original_body_ref": "body:string:4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+            "revision": 2,
+            "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+            "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+            "status": "SUPERSEDED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-2",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "request_object_sha256": "55a8edc0925d4ae85e5bdea25666c6ed870c3c0795f59baf1967e874795195e6",
+        "public_message_index": 3,
+        "provider_message_index": 4,
+        "message_index": 4,
+        "response_id": "chatcmpl-b54a2b9a56e16133",
+        "generating_request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "original_body_kind": "string",
+        "original_body_hash": "01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "original_body_ref": "body:string:01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "SUPERSEDED"
+          },
+          {
+            "body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+            "delivery_source": "search_memory",
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "DELETED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "revision": null,
+            "ref": null,
+            "status": "DELETED"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-2",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+        "request_object_sha256": "55a8edc0925d4ae85e5bdea25666c6ed870c3c0795f59baf1967e874795195e6",
+        "public_message_index": 3,
+        "provider_message_index": 8,
+        "message_index": 8,
+        "response_id": "chatcmpl-80c2484581a80f72",
+        "generating_request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "original_body_kind": "string",
+        "original_body_hash": "4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "original_body_ref": "body:string:4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+            "revision": 2,
+            "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+            "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+            "status": "SUPERSEDED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-3",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "request_object_sha256": "739c9c50ba470a19dd581056f2f3281de5ff6e6240be7f709b3c5d617e1dd533",
+        "public_message_index": 4,
+        "provider_message_index": 4,
+        "message_index": 4,
+        "response_id": "chatcmpl-b54a2b9a56e16133",
+        "generating_request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "original_body_kind": "string",
+        "original_body_hash": "01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "original_body_ref": "body:string:01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "SUPERSEDED"
+          },
+          {
+            "body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+            "delivery_source": "search_memory",
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "DELETED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "revision": null,
+            "ref": null,
+            "status": "DELETED"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-3",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+        "request_object_sha256": "739c9c50ba470a19dd581056f2f3281de5ff6e6240be7f709b3c5d617e1dd533",
+        "public_message_index": 4,
+        "provider_message_index": 8,
+        "message_index": 8,
+        "response_id": "chatcmpl-80c2484581a80f72",
+        "generating_request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "original_body_kind": "string",
+        "original_body_hash": "4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "original_body_ref": "body:string:4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+            "revision": 2,
+            "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+            "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+            "status": "SUPERSEDED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-3",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "request_object_sha256": "717f13aad01589d231341b7f0ae53cd879e63c8d7ae0646563480bcb65b9f65d",
+        "public_message_index": 4,
+        "provider_message_index": 4,
+        "message_index": 4,
+        "response_id": "chatcmpl-b54a2b9a56e16133",
+        "generating_request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+        "original_body_kind": "string",
+        "original_body_hash": "01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "original_body_ref": "body:string:01d89bd9a936abeb37c5c77efe3353ae83c5b850817e23c027159be3c520605e",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:31089fa4b452c96e6bbe5decabbc39021fc2e64b054cd499fa74710f20872d2b",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "SUPERSEDED"
+          },
+          {
+            "body_ref": "body:string:311dd203e94285cc24a6580418e43c1d1962ca8382d68e8f2cb7093094de5b98",
+            "delivery_source": "search_memory",
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:edc84600-a017-45fa-ab85-868ff172b5a1@1",
+            "revision": 1,
+            "source_search_id": "98178bad14b2c718e048e6d3399ff99400cfa6b062bac24e4378fa47a2272225:1:search:1",
+            "source_tool_call": "chatcmpl-85cfb7f137b7920b:tool:0",
+            "status": "DELETED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "edc84600-a017-45fa-ab85-868ff172b5a1",
+            "revision": null,
+            "ref": null,
+            "status": "DELETED"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      },
+      {
+        "stage": "application-v25-long-a4-r1:phase-3",
+        "event": "derived_output_rebase",
+        "status": "delivered",
+        "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+        "request_object_sha256": "717f13aad01589d231341b7f0ae53cd879e63c8d7ae0646563480bcb65b9f65d",
+        "public_message_index": 4,
+        "provider_message_index": 8,
+        "message_index": 8,
+        "response_id": "chatcmpl-80c2484581a80f72",
+        "generating_request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+        "original_body_kind": "string",
+        "original_body_hash": "4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "original_body_ref": "body:string:4375275ade15162945c9c0e5abd6c4816414d43ad44d5d75dd7e90f25b8d3721",
+        "projected_body_hash": "f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "projected_body_ref": "body:string:f55c8f45125ca19894646a1e0763923f775a55be29e90341bf285c8c246f8d39",
+        "stale_refs": [
+          {
+            "body_ref": "body:string:23d9657aa190bd1adda5d860b45e42c6e48e2d8a63fb24964d336c3148f755ec",
+            "delivery_source": "search_memory",
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@2",
+            "revision": 2,
+            "source_search_id": "056f2e4e93faafe394ab4ec4134c25f5a5b5c729f2faa54af1927de3491c2afc:1:search:1",
+            "source_tool_call": "chatcmpl-b13e0ce39a3a52c5:tool:0",
+            "status": "SUPERSEDED"
+          }
+        ],
+        "current_refs": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-long-a4-r1",
+              "a4_selective_rebase",
+              "alice"
+            ],
+            "memory_id": "9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a",
+            "revision": 3,
+            "ref": "memory:9f0bc3db-4b48-4e5e-93b5-b8c6a00f519a@3",
+            "status": "CURRENT"
+          }
+        ],
+        "unknown_refs": [],
+        "reason": "GENERATING_REQUEST_EXACT_MEMORY_SUPERSEDED_OR_DELETED"
+      }
+    ],
+    "lineage_records": 9,
+    "mechanical_rebase_precision_counts": [
+      12,
+      12
+    ],
+    "mechanical_rebase_recall_counts": [
+      12,
+      12
+    ],
+    "risk_scope": "Actual prior checkpoint ordinary outputs; their delivered snapshots compared to revisions from completed public operator/Host operations before each actual request. Snapshot risk is not word-level causal truth.",
+    "checkpoint_originals_preserved": true,
+    "request_copy_changes_verified": true
+  },
+  "request_metrics": [
+    {
+      "request_id": "02ff7bccbc18ad589fb48232d406668501983dbabdee410a63992bf79cfa7e08",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "phase": 0,
+      "public_index": 0,
+      "input_tokens": 659,
+      "output_tokens": 27,
+      "wall_seconds": 0.3552731592208147
+    },
+    {
+      "request_id": "f751f856a7c2648ad657d362cf9136ea20157e052c8bf3dd54310c823a0ce0c1",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "phase": 0,
+      "public_index": 0,
+      "input_tokens": 1327,
+      "output_tokens": 109,
+      "wall_seconds": 0.8627402982674539
+    },
+    {
+      "request_id": "afda93425bba1147378d8e5a0ce4c59dd8dbdaf553312eb7af2384746806ef07",
+      "thread_id": "e83a95b8911dcc9332625629a71b07b6dcba63110066dc15c7dc97636e8bf954",
+      "phase": 0,
+      "public_index": 0,
+      "input_tokens": 652,
+      "output_tokens": 25,
+      "wall_seconds": 0.29000455513596535
+    },
+    {
+      "request_id": "925a680011f42ef6c7c96da6537b7ba4e40be1419273d7b66fa2400634ed888a",
+      "thread_id": "e83a95b8911dcc9332625629a71b07b6dcba63110066dc15c7dc97636e8bf954",
+      "phase": 0,
+      "public_index": 0,
+      "input_tokens": 953,
+      "output_tokens": 45,
+      "wall_seconds": 0.424775417894125
+    },
+    {
+      "request_id": "31218d4e374c32d95d4ccffa4ae3488b4006c41689e80bced2f7c124b0527054",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "phase": 1,
+      "public_index": 1,
+      "input_tokens": 1506,
+      "output_tokens": 32,
+      "wall_seconds": 0.4592656600289047
+    },
+    {
+      "request_id": "bdeddb804f05dbd2005c593eb4353630b26660a5083a92ae5ec2e05c060b7028",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "phase": 1,
+      "public_index": 1,
+      "input_tokens": 1912,
+      "output_tokens": 90,
+      "wall_seconds": 0.8174745528958738
+    },
+    {
+      "request_id": "13a4cc6dbf78701641f517aa81f24d685052d0fc269178b85ecbf00cd36ae6f0",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "phase": 2,
+      "public_index": 2,
+      "input_tokens": 8792,
+      "output_tokens": 39,
+      "wall_seconds": 1.3965931441634893
+    },
+    {
+      "request_id": "0237957df28d8e82996e381177023c5728a192a177821cdff640c3ba5fecc9eb",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "phase": 2,
+      "public_index": 3,
+      "input_tokens": 8881,
+      "output_tokens": 52,
+      "wall_seconds": 1.4503902569413185
+    },
+    {
+      "request_id": "87f5630474f52908ed5cc1a8cc72a2453f1dacfaaa00cefaf16cec3fb2f768ed",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "phase": 2,
+      "public_index": 3,
+      "input_tokens": 9058,
+      "output_tokens": 81,
+      "wall_seconds": 1.658610433805734
+    },
+    {
+      "request_id": "d3cd9925dee81131ec674e4920e67118297579000dd2effe7f0cb44b5023fdbd",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "phase": 3,
+      "public_index": 4,
+      "input_tokens": 9172,
+      "output_tokens": 79,
+      "wall_seconds": 1.701851626392454
+    },
+    {
+      "request_id": "647600d5fd8044fc47dd4b94c48213643106cf024ef7e74e833fe589ae806310",
+      "thread_id": "e86a649a9bc03198c236e42c98d283c9af0fa5af7d4c4ecca0ed9dcaff783be3",
+      "phase": 3,
+      "public_index": 4,
+      "input_tokens": 9467,
+      "output_tokens": 70,
+      "wall_seconds": 1.6380662168376148
+    },
+    {
+      "request_id": "f59fe01436d7218f1de106b4906e2277f5c7230055f06b753476329ad8c9e0a5",
+      "thread_id": "e83a95b8911dcc9332625629a71b07b6dcba63110066dc15c7dc97636e8bf954",
+      "phase": 3,
+      "public_index": 1,
+      "input_tokens": 1028,
+      "output_tokens": 51,
+      "wall_seconds": 0.4680854878388345
+    },
+    {
+      "request_id": "e70d77a0d8361e155cbe9122c7b59edc5c2f227772d15e3c6554e204cf0e797f",
+      "thread_id": "e83a95b8911dcc9332625629a71b07b6dcba63110066dc15c7dc97636e8bf954",
+      "phase": 3,
+      "public_index": 1,
+      "input_tokens": 1187,
+      "output_tokens": 79,
+      "wall_seconds": 0.6595664410851896
+    },
+    {
+      "request_id": "77840009532d55724feb869bd0e92ebd6065610c5ba4e429b297bed8c93e51fd",
+      "thread_id": "0c4ed39f6909f074696c9ecb1d15ddbbacfb47e2234f5db234c7aa5d3532db94",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 686,
+      "output_tokens": 42,
+      "wall_seconds": 0.4508372340351343
+    },
+    {
+      "request_id": "ebf873e91ac90007414c80c7d8b3c1610e8186cc1522d5e1418b9d3c6f20a225",
+      "thread_id": "0c4ed39f6909f074696c9ecb1d15ddbbacfb47e2234f5db234c7aa5d3532db94",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 1569,
+      "output_tokens": 26,
+      "wall_seconds": 0.3797614690847695
+    },
+    {
+      "request_id": "9111e9cfecfc69e4141f789edcf33edc4d27a5a7572516102ce275004f1edd17",
+      "thread_id": "0c4ed39f6909f074696c9ecb1d15ddbbacfb47e2234f5db234c7aa5d3532db94",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 1708,
+      "output_tokens": 133,
+      "wall_seconds": 1.0576003468595445
+    },
+    {
+      "request_id": "f6098f309665e2526e4c1b195b3834adc676313b12ad86f78750ca1cf3ca2f77",
+      "thread_id": "0c4ed39f6909f074696c9ecb1d15ddbbacfb47e2234f5db234c7aa5d3532db94",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 2131,
+      "output_tokens": 97,
+      "wall_seconds": 0.8870644615963101
+    },
+    {
+      "request_id": "dc0ad2faf96e6a8f9c70ac54d157c725ac9664fc215013532a9740611bd57d32",
+      "thread_id": "31fb0168f54baf384abd19bc05c9a355417ca0b190c5db27dba523c1076ba74a",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 660,
+      "output_tokens": 25,
+      "wall_seconds": 0.2849222030490637
+    },
+    {
+      "request_id": "412f6795992864f599468bfae0ca378d0809b4a04bf134f03b1a4ce570e34a3c",
+      "thread_id": "31fb0168f54baf384abd19bc05c9a355417ca0b190c5db27dba523c1076ba74a",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 961,
+      "output_tokens": 38,
+      "wall_seconds": 0.3798714242875576
+    }
+  ],
+  "process": {
+    "run_id": "application-v25-long-a4-r1",
+    "processes": [
+      {
+        "run_id": "application-v25-long-a4-r1",
+        "phase": 0,
+        "exit_code": 0,
+        "process_wall_seconds": 6.36903571523726
+      },
+      {
+        "run_id": "application-v25-long-a4-r1",
+        "phase": 1,
+        "exit_code": 0,
+        "process_wall_seconds": 4.832557795103639
+      },
+      {
+        "run_id": "application-v25-long-a4-r1",
+        "phase": 2,
+        "exit_code": 0,
+        "process_wall_seconds": 8.083839758764952
+      },
+      {
+        "run_id": "application-v25-long-a4-r1",
+        "phase": 3,
+        "exit_code": 0,
+        "process_wall_seconds": 7.999740967061371
+      },
+      {
+        "run_id": "application-v25-long-a4-r1",
+        "phase": 4,
+        "exit_code": 0,
+        "process_wall_seconds": 7.44367900909856
+      }
+    ],
+    "separate_subprocesses": 5,
+    "process_wall_seconds": 34.72885324526578
+  },
+  "analysis_only_store_reads": 10,
+  "file_bytes": {
+    "trace.jsonl": 1080373,
+    "phase-2-result.json": 2656,
+    "phase-0-result.json": 1143,
+    "instrumentation.sqlite": 237568,
+    "phase-3-result.json": 6462,
+    "message-capacity.json": 678,
+    "phase-1-result.json": 659,
+    "checkpoints.sqlite": 761856,
+    "operator-memory.json": 4856,
+    "business-journal.json": 4997,
+    "runtime-identity.json": 521,
+    "phase-progress.json": 11000,
+    "business-world.sqlite": 36864,
+    "phase-4-result.json": 3211
+  },
+  "artifact_sha256": {
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/trace.jsonl": "963f01bfa0c969f68a6f94c69af505b36978319338429ab2681329aae5b2ab16",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/phase-2-result.json": "7e1662cdc0f5b1157e49c2d318427bde60c05c993870166dddb4d36563650383",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/phase-0-result.json": "26aa8c994b81492c60de07a268dea32d4fc1661c2a4e718ec49a2070b31f2be2",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/instrumentation.sqlite": "e5deb0b8c5af67b0cdce1ec4eba7e5894b92ff2f2883a132d80076c07fa49cdd",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/phase-3-result.json": "a6e91122133c3464c9eb52428c69de62363637a9e0cbdb79f8d81285d0de27f0",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/message-capacity.json": "fa91c2f4df4807f75e11f2016149395a760dd441e6a7faf71726ee0f51caddef",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/phase-1-result.json": "5aabefe872d5d09fe6e3e8aacd5fc5a6ab7b95b1f9408c116673fff03d4eb52c",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/checkpoints.sqlite": "1c2383f13d18bbb33d06235ab6aa022347f4bbd2f6db38cea8179107a9ca92c5",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/operator-memory.json": "447f2b604eba09ae2647256e264bba548255b92fa746d45948890ec5196f1931",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/business-journal.json": "5783f4e41a3bab096737a04e616907724e7384751b953e356908e7fc2c4979e0",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/runtime-identity.json": "5aeb4a05e0de7ab40a0c30ef2affeec5af9d5a857bbcf9dcc4c199ad0e547f90",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/phase-progress.json": "8d6dcd0afcad58adb365851bbfff98f98c84b642b094323aab5ccd071141aa42",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/business-world.sqlite": "13b05183eee311bb02a2292dd7c24c998e9d38210b9069bef0d95971c4ac4fd8",
+    "artifacts/application-v25/application-v25-long-a4-r1/runtime/phase-4-result.json": "a3b066ed923aba7a40b85830e15f60edb2056ff2d23237e2e4412e522cdc6993"
+  },
+  "rubric_read_by_runner": false,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}

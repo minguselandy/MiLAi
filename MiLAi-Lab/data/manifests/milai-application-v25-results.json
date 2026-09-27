@@ -1,0 +1,2001 @@
+{
+  "kind": "MILAI_APPLICATION_V25_FINAL_RESULTS",
+  "status": "COMPLETE_WITH_KNOWN_AGENT_FAILURES",
+  "source_commit": "44fb7ac9b6ed90cdfce1da8c17de734638d9b937",
+  "source_mapping_sha256": "ff874dc00936261303336963a415007ddbe93bbdf06a87cb87ae0a7409ab6e38",
+  "lock_path": "data/locks/milai-application-v25.lock.json",
+  "lock_sha256": "796b32df3dbe5d5028d799bbdd92a7ff313ac17fd73ce34a84de3cae3d4d0e25",
+  "variants": [
+    {
+      "variant": "short",
+      "path": "data/manifests/milai-application-v25-short-results.json",
+      "sha256": "342cfa7119af04f2ab41d3a779992bd89234706100c1cd7e240bba9905fff8d4"
+    },
+    {
+      "variant": "medium",
+      "path": "data/manifests/milai-application-v25-medium-results.json",
+      "sha256": "ed160366a20ca64dc51b17a6a61e2c60517445046ef605bb21316974712abbfa"
+    },
+    {
+      "variant": "long",
+      "path": "data/manifests/milai-application-v25-long-results.json",
+      "sha256": "3f421a30ea1a6222f99ee32996132ecfeb2fd4e18b226303af6f4f9b48543558"
+    }
+  ],
+  "runs": [
+    {
+      "variant": "short",
+      "arm": "b1_control",
+      "run_id": "application-v25-short-b1-r1",
+      "run_review_path": "data/manifests/milai-application-v25-short-b1-results.json",
+      "run_review_sha256": "6cc3e26c51dce2892d9f28d21611b0eb7302107fffe6d444493b2c12e2eb28ad",
+      "task_quality": [
+        7,
+        9
+      ],
+      "message_scores": [
+        {
+          "message_id": "alice-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-review-2",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-unrelated",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-partial-action",
+          "pass": false,
+          "reason": "Uses superseded v2 quantity/destination/packing.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-recover",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-new-session-update",
+          "pass": false,
+          "reason": "Replaces latest planned v3 facts with the wrong actual v2 reservation facts.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-new-session-review",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        }
+      ],
+      "first_action_currentness": [
+        1,
+        2
+      ],
+      "changed_alice_action_current": [
+        0,
+        1
+      ],
+      "stale_parameter_action_rate": [
+        1,
+        1
+      ],
+      "stale_parameter_action_rate_scope": "One Alice action after controlled revision; observed parameter match, not token-level causal attribution.",
+      "partial_side_effect_persistence_and_same_id_recovery": [
+        2,
+        2
+      ],
+      "new_session_tasks": [
+        1,
+        2
+      ],
+      "unaffected_bob_tasks": [
+        3,
+        3
+      ],
+      "unchanged_entries_preserved": [
+        2,
+        2
+      ],
+      "deleted_entry_absent": [
+        1,
+        1
+      ],
+      "actual_action_parameters": {
+        "alice": {
+          "item_key": "Cobalt display panels",
+          "quantity": 6,
+          "destination": "east loading bay E-4",
+          "packing": "foam cradles"
+        },
+        "bob": {
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers"
+        }
+      },
+      "final_alice_plan_content": "Handling plan for Cobalt display panels: reserved 6 units for east loading bay E-4 using foam cradles. Reservation ID: RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14. Label status: created.",
+      "business_world": {
+        "reservations": 2,
+        "reserve_attempts": 2,
+        "duplicate_reserve_attempts": 0,
+        "label_completion_attempts": 1
+      },
+      "five_separate_processes": true,
+      "scope_verified": true,
+      "checkpoint_originals_preserved": true,
+      "request_copy_verified": true,
+      "rebase_precision_counts": [
+        0,
+        0
+      ],
+      "rebase_recall_counts": [
+        0,
+        0
+      ],
+      "demotions": 0,
+      "refresh_precision": {
+        "causal_contribution": "UNKNOWN; no counterfactual per-read intervention.",
+        "actual_reads": 0,
+        "bound_current_reads": 0,
+        "directly_in_alice_action_generating_request": 0,
+        "scope": "Delivery/read counts are proxies, not semantic relevance or causal precision."
+      },
+      "usage": {
+        "generations": 19,
+        "input_tokens": 25834,
+        "output_tokens": 1099,
+        "generation_tokens": 26933,
+        "embedding_requests": 12,
+        "embedding_tokens": 334,
+        "exact_version_resolution_reads": 0,
+        "projection_cpu_ns": 0,
+        "projection_wall_ns": 0,
+        "exact_read_wall_ns": 0,
+        "provider_wall_seconds": 12.349954824894667,
+        "process_wall_seconds": 31.43082416476682,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "judge_requests": 0
+      },
+      "memory_tool_counts": {
+        "host_manage": 1,
+        "operator_manage": 7,
+        "host_search": 5
+      },
+      "observer": {
+        "id": 1,
+        "transactions": 270,
+        "observer_cpu_ns": 87512387,
+        "observer_wall_ns": 1924133368,
+        "extra_store_reads": 16,
+        "extra_read_cpu_ns": 12145419,
+        "extra_read_wall_ns": 28109251,
+        "initial_db_bytes": 98304,
+        "sqlite_db_bytes": 184320,
+        "net_sqlite_db_bytes": 86016,
+        "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+      },
+      "analysis_only_store_reads": 10,
+      "file_bytes": {
+        "trace.jsonl": 741516,
+        "phase-2-result.json": 2677,
+        "phase-0-result.json": 1120,
+        "instrumentation.sqlite": 184320,
+        "phase-3-result.json": 6487,
+        "message-capacity.json": 678,
+        "phase-1-result.json": 626,
+        "checkpoints.sqlite": 323584,
+        "operator-memory.json": 4856,
+        "business-journal.json": 4997,
+        "runtime-identity.json": 513,
+        "phase-progress.json": 10957,
+        "business-world.sqlite": 36864,
+        "phase-4-result.json": 3178
+      },
+      "max_actual_request_input_tokens": 2611,
+      "alice_action_request_input_tokens": 2018,
+      "phase_generation_usage": {
+        "0": {
+          "generations": 4,
+          "tokens": 3648
+        },
+        "1": {
+          "generations": 2,
+          "tokens": 3323
+        },
+        "2": {
+          "generations": 3,
+          "tokens": 6329
+        },
+        "3": {
+          "generations": 4,
+          "tokens": 7286
+        },
+        "4": {
+          "generations": 6,
+          "tokens": 6347
+        }
+      },
+      "reads_during_unrelated_public_message": 0
+    },
+    {
+      "variant": "short",
+      "arm": "a3_exact_refresh",
+      "run_id": "application-v25-short-a3-r1",
+      "run_review_path": "data/manifests/milai-application-v25-short-a3-results.json",
+      "run_review_sha256": "33c2fa995a9962390e96d5c91ba3de604eac5fe34d55aa2def213c2dde4194ca",
+      "task_quality": [
+        7,
+        9
+      ],
+      "message_scores": [
+        {
+          "message_id": "alice-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-review-2",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-unrelated",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-partial-action",
+          "pass": false,
+          "reason": "Uses superseded v2 although v3 is delivered.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-recover",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-new-session-update",
+          "pass": false,
+          "reason": "No world read; unchanged pending prose update, repeated memory search, then 12-generation capacity failure.",
+          "host_status": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+        },
+        {
+          "message_id": "bob-new-session-review",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        }
+      ],
+      "first_action_currentness": [
+        1,
+        2
+      ],
+      "changed_alice_action_current": [
+        0,
+        1
+      ],
+      "stale_parameter_action_rate": [
+        1,
+        1
+      ],
+      "stale_parameter_action_rate_scope": "One Alice action after controlled revision; observed parameter match, not token-level causal attribution.",
+      "partial_side_effect_persistence_and_same_id_recovery": [
+        2,
+        2
+      ],
+      "new_session_tasks": [
+        1,
+        2
+      ],
+      "unaffected_bob_tasks": [
+        3,
+        3
+      ],
+      "unchanged_entries_preserved": [
+        2,
+        2
+      ],
+      "deleted_entry_absent": [
+        1,
+        1
+      ],
+      "actual_action_parameters": {
+        "alice": {
+          "item_key": "Cobalt display panels",
+          "quantity": 6,
+          "destination": "East loading bay E-4",
+          "packing": "Foam cradles"
+        },
+        "bob": {
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers"
+        }
+      },
+      "final_alice_plan_content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created.",
+      "business_world": {
+        "reservations": 2,
+        "reserve_attempts": 2,
+        "duplicate_reserve_attempts": 0,
+        "label_completion_attempts": 1
+      },
+      "five_separate_processes": true,
+      "scope_verified": true,
+      "checkpoint_originals_preserved": true,
+      "request_copy_verified": true,
+      "rebase_precision_counts": [
+        0,
+        0
+      ],
+      "rebase_recall_counts": [
+        0,
+        12
+      ],
+      "demotions": 0,
+      "refresh_precision": {
+        "causal_contribution": "UNKNOWN; no counterfactual per-read intervention.",
+        "actual_reads": 7,
+        "bound_current_reads": 7,
+        "directly_in_alice_action_generating_request": 1,
+        "scope": "Delivery/read counts are proxies, not semantic relevance or causal precision."
+      },
+      "usage": {
+        "generations": 27,
+        "input_tokens": 62370,
+        "output_tokens": 1218,
+        "generation_tokens": 63588,
+        "embedding_requests": 23,
+        "embedding_tokens": 424,
+        "exact_version_resolution_reads": 7,
+        "projection_cpu_ns": 36132993,
+        "projection_wall_ns": 41894613,
+        "exact_read_wall_ns": 13000631,
+        "provider_wall_seconds": 17.0130047025159,
+        "process_wall_seconds": 39.527617304585874,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "judge_requests": 0
+      },
+      "memory_tool_counts": {
+        "host_manage": 1,
+        "operator_manage": 7,
+        "host_search": 16
+      },
+      "observer": {
+        "id": 1,
+        "transactions": 422,
+        "observer_cpu_ns": 142576259,
+        "observer_wall_ns": 4072357841,
+        "extra_store_reads": 16,
+        "extra_read_cpu_ns": 12865998,
+        "extra_read_wall_ns": 24417505,
+        "initial_db_bytes": 98304,
+        "sqlite_db_bytes": 294912,
+        "net_sqlite_db_bytes": 196608,
+        "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+      },
+      "analysis_only_store_reads": 10,
+      "file_bytes": {
+        "trace.jsonl": 1623151,
+        "phase-2-result.json": 2602,
+        "phase-0-result.json": 1143,
+        "instrumentation.sqlite": 294912,
+        "phase-3-result.json": 6473,
+        "message-capacity.json": 679,
+        "phase-1-result.json": 607,
+        "checkpoints.sqlite": 602112,
+        "operator-memory.json": 4856,
+        "business-journal.json": 4062,
+        "runtime-identity.json": 519,
+        "phase-progress.json": 9620,
+        "business-world.sqlite": 36864,
+        "phase-4-result.json": 1930
+      },
+      "max_actual_request_input_tokens": 5557,
+      "alice_action_request_input_tokens": 2263,
+      "phase_generation_usage": {
+        "0": {
+          "generations": 4,
+          "tokens": 3790
+        },
+        "1": {
+          "generations": 2,
+          "tokens": 3653
+        },
+        "2": {
+          "generations": 3,
+          "tokens": 7046
+        },
+        "3": {
+          "generations": 4,
+          "tokens": 7867
+        },
+        "4": {
+          "generations": 14,
+          "tokens": 41232
+        }
+      },
+      "reads_during_unrelated_public_message": 1
+    },
+    {
+      "variant": "short",
+      "arm": "a4_selective_rebase",
+      "run_id": "application-v25-short-a4-r1",
+      "run_review_path": "data/manifests/milai-application-v25-short-a4-results.json",
+      "run_review_sha256": "5bf6dedf49f90d0e452ffb8300f48bcf7374cf341f3032441af2ec0513ddade4",
+      "task_quality": [
+        9,
+        9
+      ],
+      "message_scores": [
+        {
+          "message_id": "alice-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-review-2",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-unrelated",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-partial-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-recover",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-new-session-update",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-new-session-review",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        }
+      ],
+      "first_action_currentness": [
+        2,
+        2
+      ],
+      "changed_alice_action_current": [
+        1,
+        1
+      ],
+      "stale_parameter_action_rate": [
+        0,
+        1
+      ],
+      "stale_parameter_action_rate_scope": "One Alice action after controlled revision; observed parameter match, not token-level causal attribution.",
+      "partial_side_effect_persistence_and_same_id_recovery": [
+        2,
+        2
+      ],
+      "new_session_tasks": [
+        2,
+        2
+      ],
+      "unaffected_bob_tasks": [
+        3,
+        3
+      ],
+      "unchanged_entries_preserved": [
+        2,
+        2
+      ],
+      "deleted_entry_absent": [
+        1,
+        1
+      ],
+      "actual_action_parameters": {
+        "alice": {
+          "item_key": "Cobalt display panels",
+          "quantity": 9,
+          "destination": "north staging bay N-7",
+          "packing": "rigid cases"
+        },
+        "bob": {
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers"
+        }
+      },
+      "final_alice_plan_content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. Reservation RSV-2963ba24-8ebd-426e-a32f-c69eb1bbde21 created with label status created.",
+      "business_world": {
+        "reservations": 2,
+        "reserve_attempts": 2,
+        "duplicate_reserve_attempts": 0,
+        "label_completion_attempts": 1
+      },
+      "five_separate_processes": true,
+      "scope_verified": true,
+      "checkpoint_originals_preserved": true,
+      "request_copy_verified": true,
+      "rebase_precision_counts": [
+        12,
+        12
+      ],
+      "rebase_recall_counts": [
+        12,
+        12
+      ],
+      "demotions": 12,
+      "refresh_precision": {
+        "causal_contribution": "UNKNOWN; no counterfactual per-read intervention.",
+        "actual_reads": 7,
+        "bound_current_reads": 7,
+        "directly_in_alice_action_generating_request": 1,
+        "scope": "Delivery/read counts are proxies, not semantic relevance or causal precision."
+      },
+      "usage": {
+        "generations": 19,
+        "input_tokens": 28679,
+        "output_tokens": 1138,
+        "generation_tokens": 29817,
+        "embedding_requests": 13,
+        "embedding_tokens": 339,
+        "exact_version_resolution_reads": 7,
+        "projection_cpu_ns": 27411944,
+        "projection_wall_ns": 32759655,
+        "exact_read_wall_ns": 13739927,
+        "provider_wall_seconds": 11.841335467994213,
+        "process_wall_seconds": 30.206290344242007,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "judge_requests": 0
+      },
+      "memory_tool_counts": {
+        "host_manage": 1,
+        "operator_manage": 7,
+        "host_search": 6
+      },
+      "observer": {
+        "id": 1,
+        "transactions": 298,
+        "observer_cpu_ns": 98756216,
+        "observer_wall_ns": 1668391013,
+        "extra_store_reads": 16,
+        "extra_read_cpu_ns": 12654687,
+        "extra_read_wall_ns": 24006318,
+        "initial_db_bytes": 98304,
+        "sqlite_db_bytes": 204800,
+        "net_sqlite_db_bytes": 106496,
+        "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+      },
+      "analysis_only_store_reads": 10,
+      "file_bytes": {
+        "trace.jsonl": 924787,
+        "phase-2-result.json": 2612,
+        "phase-0-result.json": 1167,
+        "instrumentation.sqlite": 204800,
+        "phase-3-result.json": 6512,
+        "message-capacity.json": 678,
+        "phase-1-result.json": 659,
+        "checkpoints.sqlite": 327680,
+        "operator-memory.json": 4856,
+        "business-journal.json": 4997,
+        "runtime-identity.json": 522,
+        "phase-progress.json": 11078,
+        "business-world.sqlite": 36864,
+        "phase-4-result.json": 3259
+      },
+      "max_actual_request_input_tokens": 2728,
+      "alice_action_request_input_tokens": 2162,
+      "phase_generation_usage": {
+        "0": {
+          "generations": 4,
+          "tokens": 3803
+        },
+        "1": {
+          "generations": 2,
+          "tokens": 3532
+        },
+        "2": {
+          "generations": 3,
+          "tokens": 6739
+        },
+        "3": {
+          "generations": 4,
+          "tokens": 7703
+        },
+        "4": {
+          "generations": 6,
+          "tokens": 8040
+        }
+      },
+      "reads_during_unrelated_public_message": 1
+    },
+    {
+      "variant": "short",
+      "arm": "a5_rank_bounded_rebase",
+      "run_id": "application-v25-short-a5-r1",
+      "run_review_path": "data/manifests/milai-application-v25-short-a5-results.json",
+      "run_review_sha256": "0da7df7f11368a4d2aeb56b912c3a826cb07b9bdd5857c02a499638095b0a0a6",
+      "task_quality": [
+        8,
+        9
+      ],
+      "message_scores": [
+        {
+          "message_id": "alice-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-review-2",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-unrelated",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-partial-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-recover",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-new-session-update",
+          "pass": false,
+          "reason": "Invented item key yields real not_found; existing reservation is then incorrectly described as absent in memory and answer.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-new-session-review",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        }
+      ],
+      "first_action_currentness": [
+        2,
+        2
+      ],
+      "changed_alice_action_current": [
+        1,
+        1
+      ],
+      "stale_parameter_action_rate": [
+        0,
+        1
+      ],
+      "stale_parameter_action_rate_scope": "One Alice action after controlled revision; observed parameter match, not token-level causal attribution.",
+      "partial_side_effect_persistence_and_same_id_recovery": [
+        2,
+        2
+      ],
+      "new_session_tasks": [
+        1,
+        2
+      ],
+      "unaffected_bob_tasks": [
+        3,
+        3
+      ],
+      "unchanged_entries_preserved": [
+        2,
+        2
+      ],
+      "deleted_entry_absent": [
+        1,
+        1
+      ],
+      "actual_action_parameters": {
+        "alice": {
+          "item_key": "Cobalt display panels",
+          "quantity": 9,
+          "destination": "north staging bay N-7",
+          "packing": "rigid cases"
+        },
+        "bob": {
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers"
+        }
+      },
+      "final_alice_plan_content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created. Actual reservation status: not_found. Actual identifier: none.",
+      "business_world": {
+        "reservations": 2,
+        "reserve_attempts": 2,
+        "duplicate_reserve_attempts": 0,
+        "label_completion_attempts": 1
+      },
+      "five_separate_processes": true,
+      "scope_verified": true,
+      "checkpoint_originals_preserved": true,
+      "request_copy_verified": true,
+      "rebase_precision_counts": [
+        14,
+        14
+      ],
+      "rebase_recall_counts": [
+        14,
+        14
+      ],
+      "demotions": 14,
+      "refresh_precision": {
+        "causal_contribution": "UNKNOWN; no counterfactual per-read intervention.",
+        "actual_reads": 4,
+        "bound_current_reads": 4,
+        "directly_in_alice_action_generating_request": 0,
+        "scope": "Delivery/read counts are proxies, not semantic relevance or causal precision."
+      },
+      "usage": {
+        "generations": 19,
+        "input_tokens": 29860,
+        "output_tokens": 1105,
+        "generation_tokens": 30965,
+        "embedding_requests": 13,
+        "embedding_tokens": 339,
+        "exact_version_resolution_reads": 4,
+        "projection_cpu_ns": 20928115,
+        "projection_wall_ns": 22404230,
+        "exact_read_wall_ns": 5419793,
+        "provider_wall_seconds": 11.75341771915555,
+        "process_wall_seconds": 30.204040694981813,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "judge_requests": 0
+      },
+      "memory_tool_counts": {
+        "host_manage": 1,
+        "operator_manage": 7,
+        "host_search": 6
+      },
+      "observer": {
+        "id": 1,
+        "transactions": 298,
+        "observer_cpu_ns": 96135484,
+        "observer_wall_ns": 1663471464,
+        "extra_store_reads": 16,
+        "extra_read_cpu_ns": 11527958,
+        "extra_read_wall_ns": 22475892,
+        "initial_db_bytes": 98304,
+        "sqlite_db_bytes": 208896,
+        "net_sqlite_db_bytes": 110592,
+        "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+      },
+      "analysis_only_store_reads": 10,
+      "file_bytes": {
+        "trace.jsonl": 932918,
+        "phase-2-result.json": 2655,
+        "phase-0-result.json": 1143,
+        "instrumentation.sqlite": 208896,
+        "phase-3-result.json": 6490,
+        "message-capacity.json": 678,
+        "phase-1-result.json": 659,
+        "checkpoints.sqlite": 348160,
+        "operator-memory.json": 4856,
+        "business-journal.json": 4806,
+        "runtime-identity.json": 525,
+        "phase-progress.json": 10859,
+        "business-world.sqlite": 36864,
+        "phase-4-result.json": 3043
+      },
+      "max_actual_request_input_tokens": 3157,
+      "alice_action_request_input_tokens": 2573,
+      "phase_generation_usage": {
+        "0": {
+          "generations": 4,
+          "tokens": 3803
+        },
+        "1": {
+          "generations": 2,
+          "tokens": 3568
+        },
+        "2": {
+          "generations": 4,
+          "tokens": 9776
+        },
+        "3": {
+          "generations": 4,
+          "tokens": 8538
+        },
+        "4": {
+          "generations": 5,
+          "tokens": 5280
+        }
+      },
+      "reads_during_unrelated_public_message": 1
+    },
+    {
+      "variant": "medium",
+      "arm": "b1_control",
+      "run_id": "application-v25-medium-b1-r1",
+      "run_review_path": "data/manifests/milai-application-v25-medium-b1-results.json",
+      "run_review_sha256": "7311c33841b40b2e9422e8d3f10560a86aef18d29f8888a2f3f1bf990f9e9109",
+      "task_quality": [
+        7,
+        9
+      ],
+      "message_scores": [
+        {
+          "message_id": "alice-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-review-2",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-unrelated",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-partial-action",
+          "pass": false,
+          "reason": "Uses superseded v2 quantity/destination/packing.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-recover",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-new-session-update",
+          "pass": false,
+          "reason": "No world read; writes fabricated RES-COBALT-001 and Reserved instead of actual persisted ID and label_created.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-new-session-review",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        }
+      ],
+      "first_action_currentness": [
+        1,
+        2
+      ],
+      "changed_alice_action_current": [
+        0,
+        1
+      ],
+      "stale_parameter_action_rate": [
+        1,
+        1
+      ],
+      "stale_parameter_action_rate_scope": "One Alice action after controlled revision; observed parameter match, not token-level causal attribution.",
+      "partial_side_effect_persistence_and_same_id_recovery": [
+        2,
+        2
+      ],
+      "new_session_tasks": [
+        1,
+        2
+      ],
+      "unaffected_bob_tasks": [
+        3,
+        3
+      ],
+      "unchanged_entries_preserved": [
+        2,
+        2
+      ],
+      "deleted_entry_absent": [
+        1,
+        1
+      ],
+      "actual_action_parameters": {
+        "alice": {
+          "item_key": "Cobalt display panels",
+          "quantity": 6,
+          "destination": "east loading bay E-4",
+          "packing": "foam cradles"
+        },
+        "bob": {
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers"
+        }
+      },
+      "final_alice_plan_content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. Reservation ID: RES-COBALT-001. Status: Reserved.",
+      "business_world": {
+        "reservations": 2,
+        "reserve_attempts": 2,
+        "duplicate_reserve_attempts": 0,
+        "label_completion_attempts": 1
+      },
+      "five_separate_processes": true,
+      "scope_verified": true,
+      "checkpoint_originals_preserved": true,
+      "request_copy_verified": true,
+      "rebase_precision_counts": [
+        0,
+        0
+      ],
+      "rebase_recall_counts": [
+        0,
+        0
+      ],
+      "demotions": 0,
+      "refresh_precision": {
+        "causal_contribution": "UNKNOWN; no counterfactual per-read intervention.",
+        "actual_reads": 0,
+        "bound_current_reads": 0,
+        "directly_in_alice_action_generating_request": 0,
+        "scope": "Delivery/read counts are proxies, not semantic relevance or causal precision."
+      },
+      "usage": {
+        "generations": 18,
+        "input_tokens": 33642,
+        "output_tokens": 1087,
+        "generation_tokens": 34729,
+        "embedding_requests": 13,
+        "embedding_tokens": 323,
+        "exact_version_resolution_reads": 0,
+        "projection_cpu_ns": 0,
+        "projection_wall_ns": 0,
+        "exact_read_wall_ns": 0,
+        "provider_wall_seconds": 12.192952585872263,
+        "process_wall_seconds": 30.05888660112396,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "judge_requests": 0
+      },
+      "memory_tool_counts": {
+        "host_manage": 1,
+        "operator_manage": 7,
+        "host_search": 6
+      },
+      "observer": {
+        "id": 1,
+        "transactions": 270,
+        "observer_cpu_ns": 95058719,
+        "observer_wall_ns": 1485666534,
+        "extra_store_reads": 16,
+        "extra_read_cpu_ns": 11869609,
+        "extra_read_wall_ns": 23674944,
+        "initial_db_bytes": 98304,
+        "sqlite_db_bytes": 196608,
+        "net_sqlite_db_bytes": 98304,
+        "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+      },
+      "analysis_only_store_reads": 10,
+      "file_bytes": {
+        "trace.jsonl": 818338,
+        "phase-2-result.json": 2729,
+        "phase-0-result.json": 1142,
+        "instrumentation.sqlite": 196608,
+        "phase-3-result.json": 6617,
+        "message-capacity.json": 678,
+        "phase-1-result.json": 618,
+        "checkpoints.sqlite": 425984,
+        "operator-memory.json": 4856,
+        "business-journal.json": 4062,
+        "runtime-identity.json": 514,
+        "phase-progress.json": 10154,
+        "business-world.sqlite": 36864,
+        "phase-4-result.json": 2179
+      },
+      "max_actual_request_input_tokens": 4300,
+      "alice_action_request_input_tokens": 3698,
+      "phase_generation_usage": {
+        "0": {
+          "generations": 4,
+          "tokens": 3656
+        },
+        "1": {
+          "generations": 2,
+          "tokens": 3334
+        },
+        "2": {
+          "generations": 3,
+          "tokens": 11372
+        },
+        "3": {
+          "generations": 4,
+          "tokens": 10693
+        },
+        "4": {
+          "generations": 5,
+          "tokens": 5674
+        }
+      },
+      "reads_during_unrelated_public_message": 0
+    },
+    {
+      "variant": "medium",
+      "arm": "a4_selective_rebase",
+      "run_id": "application-v25-medium-a4-r1",
+      "run_review_path": "data/manifests/milai-application-v25-medium-a4-results.json",
+      "run_review_sha256": "2a488942641451300b9ec5689ef7371eefa7abd2d5de2847c1d15e5158facb54",
+      "task_quality": [
+        8,
+        9
+      ],
+      "message_scores": [
+        {
+          "message_id": "alice-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-review-2",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-unrelated",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-partial-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-recover",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-new-session-update",
+          "pass": false,
+          "reason": "No world read; writes fabricated RES-COBALT-001 and Reserved instead of actual persisted ID and label_created.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-new-session-review",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        }
+      ],
+      "first_action_currentness": [
+        2,
+        2
+      ],
+      "changed_alice_action_current": [
+        1,
+        1
+      ],
+      "stale_parameter_action_rate": [
+        0,
+        1
+      ],
+      "stale_parameter_action_rate_scope": "One Alice action after controlled revision; observed parameter match, not token-level causal attribution.",
+      "partial_side_effect_persistence_and_same_id_recovery": [
+        2,
+        2
+      ],
+      "new_session_tasks": [
+        1,
+        2
+      ],
+      "unaffected_bob_tasks": [
+        3,
+        3
+      ],
+      "unchanged_entries_preserved": [
+        2,
+        2
+      ],
+      "deleted_entry_absent": [
+        1,
+        1
+      ],
+      "actual_action_parameters": {
+        "alice": {
+          "item_key": "Cobalt display panels",
+          "quantity": 9,
+          "destination": "north staging bay N-7",
+          "packing": "rigid cases"
+        },
+        "bob": {
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers"
+        }
+      },
+      "final_alice_plan_content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. Reservation ID: RES-COBALT-001. Status: Reserved.",
+      "business_world": {
+        "reservations": 2,
+        "reserve_attempts": 2,
+        "duplicate_reserve_attempts": 0,
+        "label_completion_attempts": 1
+      },
+      "five_separate_processes": true,
+      "scope_verified": true,
+      "checkpoint_originals_preserved": true,
+      "request_copy_verified": true,
+      "rebase_precision_counts": [
+        12,
+        12
+      ],
+      "rebase_recall_counts": [
+        12,
+        12
+      ],
+      "demotions": 12,
+      "refresh_precision": {
+        "causal_contribution": "UNKNOWN; no counterfactual per-read intervention.",
+        "actual_reads": 7,
+        "bound_current_reads": 7,
+        "directly_in_alice_action_generating_request": 1,
+        "scope": "Delivery/read counts are proxies, not semantic relevance or causal precision."
+      },
+      "usage": {
+        "generations": 18,
+        "input_tokens": 35394,
+        "output_tokens": 1148,
+        "generation_tokens": 36542,
+        "embedding_requests": 13,
+        "embedding_tokens": 323,
+        "exact_version_resolution_reads": 7,
+        "projection_cpu_ns": 21094273,
+        "projection_wall_ns": 29924129,
+        "exact_read_wall_ns": 11345387,
+        "provider_wall_seconds": 12.711445721331984,
+        "process_wall_seconds": 31.965021199081093,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "judge_requests": 0
+      },
+      "memory_tool_counts": {
+        "host_manage": 1,
+        "operator_manage": 7,
+        "host_search": 6
+      },
+      "observer": {
+        "id": 1,
+        "transactions": 288,
+        "observer_cpu_ns": 91270883,
+        "observer_wall_ns": 1934383850,
+        "extra_store_reads": 16,
+        "extra_read_cpu_ns": 11952560,
+        "extra_read_wall_ns": 23361147,
+        "initial_db_bytes": 98304,
+        "sqlite_db_bytes": 208896,
+        "net_sqlite_db_bytes": 110592,
+        "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+      },
+      "analysis_only_store_reads": 10,
+      "file_bytes": {
+        "trace.jsonl": 946414,
+        "phase-2-result.json": 2721,
+        "phase-0-result.json": 1142,
+        "instrumentation.sqlite": 208896,
+        "phase-3-result.json": 6501,
+        "message-capacity.json": 678,
+        "phase-1-result.json": 654,
+        "checkpoints.sqlite": 430080,
+        "operator-memory.json": 4856,
+        "business-journal.json": 4062,
+        "runtime-identity.json": 523,
+        "phase-progress.json": 10147,
+        "business-world.sqlite": 36864,
+        "phase-4-result.json": 2260
+      },
+      "max_actual_request_input_tokens": 4465,
+      "alice_action_request_input_tokens": 3867,
+      "phase_generation_usage": {
+        "0": {
+          "generations": 4,
+          "tokens": 3798
+        },
+        "1": {
+          "generations": 2,
+          "tokens": 3571
+        },
+        "2": {
+          "generations": 3,
+          "tokens": 11874
+        },
+        "3": {
+          "generations": 4,
+          "tokens": 11138
+        },
+        "4": {
+          "generations": 5,
+          "tokens": 6161
+        }
+      },
+      "reads_during_unrelated_public_message": 1
+    },
+    {
+      "variant": "long",
+      "arm": "b1_control",
+      "run_id": "application-v25-long-b1-r1",
+      "run_review_path": "data/manifests/milai-application-v25-long-b1-results.json",
+      "run_review_sha256": "6d3ce47bc77b97d679bb1e476c2462e3618343c6d412a4d1ad43750e800b9535",
+      "task_quality": [
+        7,
+        9
+      ],
+      "message_scores": [
+        {
+          "message_id": "alice-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-review-2",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-unrelated",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-partial-action",
+          "pass": false,
+          "reason": "Uses superseded v2 quantity/destination/packing.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-recover",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-new-session-update",
+          "pass": false,
+          "reason": "No world read; unchanged pending prose update followed by repeated searches and 12-generation capacity failure.",
+          "host_status": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+        },
+        {
+          "message_id": "bob-new-session-review",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        }
+      ],
+      "first_action_currentness": [
+        1,
+        2
+      ],
+      "changed_alice_action_current": [
+        0,
+        1
+      ],
+      "stale_parameter_action_rate": [
+        1,
+        1
+      ],
+      "stale_parameter_action_rate_scope": "One Alice action after controlled revision; observed parameter match, not token-level causal attribution.",
+      "partial_side_effect_persistence_and_same_id_recovery": [
+        2,
+        2
+      ],
+      "new_session_tasks": [
+        1,
+        2
+      ],
+      "unaffected_bob_tasks": [
+        3,
+        3
+      ],
+      "unchanged_entries_preserved": [
+        2,
+        2
+      ],
+      "deleted_entry_absent": [
+        1,
+        1
+      ],
+      "actual_action_parameters": {
+        "alice": {
+          "item_key": "Cobalt display panels",
+          "quantity": 6,
+          "destination": "east loading bay E-4",
+          "packing": "foam cradles"
+        },
+        "bob": {
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers"
+        }
+      },
+      "final_alice_plan_content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created.",
+      "business_world": {
+        "reservations": 2,
+        "reserve_attempts": 2,
+        "duplicate_reserve_attempts": 0,
+        "label_completion_attempts": 1
+      },
+      "five_separate_processes": true,
+      "scope_verified": true,
+      "checkpoint_originals_preserved": true,
+      "request_copy_verified": true,
+      "rebase_precision_counts": [
+        0,
+        0
+      ],
+      "rebase_recall_counts": [
+        0,
+        0
+      ],
+      "demotions": 0,
+      "refresh_precision": {
+        "causal_contribution": "UNKNOWN; no counterfactual per-read intervention.",
+        "actual_reads": 0,
+        "bound_current_reads": 0,
+        "directly_in_alice_action_generating_request": 0,
+        "scope": "Delivery/read counts are proxies, not semantic relevance or causal precision."
+      },
+      "usage": {
+        "generations": 27,
+        "input_tokens": 92119,
+        "output_tokens": 1240,
+        "generation_tokens": 93359,
+        "embedding_requests": 23,
+        "embedding_tokens": 421,
+        "exact_version_resolution_reads": 0,
+        "projection_cpu_ns": 0,
+        "projection_wall_ns": 0,
+        "exact_read_wall_ns": 0,
+        "provider_wall_seconds": 20.801086051855236,
+        "process_wall_seconds": 41.373685592319816,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "judge_requests": 0
+      },
+      "memory_tool_counts": {
+        "host_manage": 1,
+        "operator_manage": 7,
+        "host_search": 16
+      },
+      "observer": {
+        "id": 1,
+        "transactions": 406,
+        "observer_cpu_ns": 138957760,
+        "observer_wall_ns": 2439477543,
+        "extra_store_reads": 16,
+        "extra_read_cpu_ns": 12320563,
+        "extra_read_wall_ns": 23652804,
+        "initial_db_bytes": 98304,
+        "sqlite_db_bytes": 311296,
+        "net_sqlite_db_bytes": 212992,
+        "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+      },
+      "analysis_only_store_reads": 10,
+      "file_bytes": {
+        "trace.jsonl": 1532840,
+        "phase-2-result.json": 2713,
+        "phase-0-result.json": 1146,
+        "instrumentation.sqlite": 311296,
+        "phase-3-result.json": 6448,
+        "message-capacity.json": 679,
+        "phase-1-result.json": 581,
+        "checkpoints.sqlite": 1028096,
+        "operator-memory.json": 4856,
+        "business-journal.json": 4062,
+        "runtime-identity.json": 512,
+        "phase-progress.json": 9683,
+        "business-world.sqlite": 36864,
+        "phase-4-result.json": 1930
+      },
+      "max_actual_request_input_tokens": 9326,
+      "alice_action_request_input_tokens": 8725,
+      "phase_generation_usage": {
+        "0": {
+          "generations": 4,
+          "tokens": 3650
+        },
+        "1": {
+          "generations": 2,
+          "tokens": 3319
+        },
+        "2": {
+          "generations": 3,
+          "tokens": 26451
+        },
+        "3": {
+          "generations": 4,
+          "tokens": 20713
+        },
+        "4": {
+          "generations": 14,
+          "tokens": 39226
+        }
+      },
+      "reads_during_unrelated_public_message": 0
+    },
+    {
+      "variant": "long",
+      "arm": "a4_selective_rebase",
+      "run_id": "application-v25-long-a4-r1",
+      "run_review_path": "data/manifests/milai-application-v25-long-a4-results.json",
+      "run_review_sha256": "276c5f2b8605f72d79c7b886a9ad867fbcc21dccacde102870684fd6e8ed5b47",
+      "task_quality": [
+        9,
+        9
+      ],
+      "message_scores": [
+        {
+          "message_id": "alice-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-review-1",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-review-2",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-unrelated",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-partial-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-recover",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-action",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "alice-new-session-update",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        },
+        {
+          "message_id": "bob-new-session-review",
+          "pass": true,
+          "reason": "Meets the frozen task rubric on actual calls, answer and persisted state.",
+          "host_status": "COMPLETED"
+        }
+      ],
+      "first_action_currentness": [
+        2,
+        2
+      ],
+      "changed_alice_action_current": [
+        1,
+        1
+      ],
+      "stale_parameter_action_rate": [
+        0,
+        1
+      ],
+      "stale_parameter_action_rate_scope": "One Alice action after controlled revision; observed parameter match, not token-level causal attribution.",
+      "partial_side_effect_persistence_and_same_id_recovery": [
+        2,
+        2
+      ],
+      "new_session_tasks": [
+        2,
+        2
+      ],
+      "unaffected_bob_tasks": [
+        3,
+        3
+      ],
+      "unchanged_entries_preserved": [
+        2,
+        2
+      ],
+      "deleted_entry_absent": [
+        1,
+        1
+      ],
+      "actual_action_parameters": {
+        "alice": {
+          "item_key": "Cobalt display panels",
+          "quantity": 9,
+          "destination": "north staging bay N-7",
+          "packing": "rigid cases"
+        },
+        "bob": {
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers"
+        }
+      },
+      "final_alice_plan_content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. Reservation created with ID RSV-736d95d4-dbf6-4678-b4f7-29b798364501. Label status: created.",
+      "business_world": {
+        "reservations": 2,
+        "reserve_attempts": 2,
+        "duplicate_reserve_attempts": 0,
+        "label_completion_attempts": 1
+      },
+      "five_separate_processes": true,
+      "scope_verified": true,
+      "checkpoint_originals_preserved": true,
+      "request_copy_verified": true,
+      "rebase_precision_counts": [
+        12,
+        12
+      ],
+      "rebase_recall_counts": [
+        12,
+        12
+      ],
+      "demotions": 12,
+      "refresh_precision": {
+        "causal_contribution": "UNKNOWN; no counterfactual per-read intervention.",
+        "actual_reads": 7,
+        "bound_current_reads": 7,
+        "directly_in_alice_action_generating_request": 1,
+        "scope": "Delivery/read counts are proxies, not semantic relevance or causal precision."
+      },
+      "usage": {
+        "generations": 19,
+        "input_tokens": 62309,
+        "output_tokens": 1140,
+        "generation_tokens": 63449,
+        "embedding_requests": 13,
+        "embedding_tokens": 341,
+        "exact_version_resolution_reads": 7,
+        "projection_cpu_ns": 26933314,
+        "projection_wall_ns": 32964093,
+        "exact_read_wall_ns": 13125822,
+        "provider_wall_seconds": 16.01898470055312,
+        "process_wall_seconds": 34.72885324526578,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "judge_requests": 0
+      },
+      "memory_tool_counts": {
+        "host_manage": 1,
+        "operator_manage": 7,
+        "host_search": 6
+      },
+      "observer": {
+        "id": 1,
+        "transactions": 298,
+        "observer_cpu_ns": 99627292,
+        "observer_wall_ns": 1707205326,
+        "extra_store_reads": 16,
+        "extra_read_cpu_ns": 11224121,
+        "extra_read_wall_ns": 23121319,
+        "initial_db_bytes": 98304,
+        "sqlite_db_bytes": 237568,
+        "net_sqlite_db_bytes": 139264,
+        "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+      },
+      "analysis_only_store_reads": 10,
+      "file_bytes": {
+        "trace.jsonl": 1080373,
+        "phase-2-result.json": 2656,
+        "phase-0-result.json": 1143,
+        "instrumentation.sqlite": 237568,
+        "phase-3-result.json": 6462,
+        "message-capacity.json": 678,
+        "phase-1-result.json": 659,
+        "checkpoints.sqlite": 761856,
+        "operator-memory.json": 4856,
+        "business-journal.json": 4997,
+        "runtime-identity.json": 521,
+        "phase-progress.json": 11000,
+        "business-world.sqlite": 36864,
+        "phase-4-result.json": 3211
+      },
+      "max_actual_request_input_tokens": 9467,
+      "alice_action_request_input_tokens": 8881,
+      "phase_generation_usage": {
+        "0": {
+          "generations": 4,
+          "tokens": 3797
+        },
+        "1": {
+          "generations": 2,
+          "tokens": 3540
+        },
+        "2": {
+          "generations": 3,
+          "tokens": 26903
+        },
+        "3": {
+          "generations": 4,
+          "tokens": 21133
+        },
+        "4": {
+          "generations": 6,
+          "tokens": 8076
+        }
+      },
+      "reads_during_unrelated_public_message": 1
+    }
+  ],
+  "total_usage": {
+    "generations": 166,
+    "input_tokens": 370207,
+    "output_tokens": 9175,
+    "generation_tokens": 379382,
+    "embedding_requests": 123,
+    "embedding_tokens": 2844,
+    "exact_version_resolution_reads": 32,
+    "projection_cpu_ns": 132500639,
+    "projection_wall_ns": 159946720,
+    "exact_read_wall_ns": 56631560,
+    "provider_wall_seconds": 114.68218177417293,
+    "process_wall_seconds": 269.49521914636716,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "judge_requests": 0
+  },
+  "public_message_opportunities": 72,
+  "host_complete": 70,
+  "public_task_quality": [
+    62,
+    72
+  ],
+  "aggregation_limit": "Eight related development trajectories, not 72 independent samples or an arm-balanced aggregate treatment effect.",
+  "capacity_failed_messages": [
+    {
+      "run_id": "application-v25-short-a3-r1",
+      "message_id": "alice-new-session-update"
+    },
+    {
+      "run_id": "application-v25-long-b1-r1",
+      "message_id": "alice-new-session-update"
+    }
+  ],
+  "initial_wire_equality_across_all_eight_runs": {
+    "phase-0:alice": {
+      "equal": true,
+      "unique_sha256": [
+        "c3097ed27400da53ac4c5a5ea09558ac7e20f1d037fbca2b978c780ab90c93a9"
+      ]
+    },
+    "phase-0:bob": {
+      "equal": true,
+      "unique_sha256": [
+        "2ccd832330493389539fa1e8b45d452ffaab2f9be448a6499a81a202a4580398"
+      ]
+    },
+    "phase-4:alice": {
+      "equal": true,
+      "unique_sha256": [
+        "dc77a260fdd1e0ba33a6cf8d9297cadacba1942a97c60d907ab6cea59a4cd686"
+      ]
+    },
+    "phase-4:bob": {
+      "equal": true,
+      "unique_sha256": [
+        "a9b177b1d97b6ff710ebc04f419481a076b9b2fc018d269fd5726a27799d1cfe"
+      ]
+    }
+  },
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 671,
+    "generation": {
+      "charged_tokens": 604171,
+      "known_tokens": 604171,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 6104,
+      "known_tokens": 6104,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "budget_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 837,
+    "generation": {
+      "charged_tokens": 983553,
+      "known_tokens": 983553,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 8948,
+      "known_tokens": 8948,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "continuous_exact_reads": 107,
+  "source_and_validation_hashes_unchanged_after_all_runs": true,
+  "claim": "Durable app integration and controlled adaptation are demonstrated; stable unseen gain, autonomous lifecycle and second-model generalization are not.",
+  "second_model_family": "NOT_RUN_NO_INDEPENDENT_ENDPOINT_AVAILABLE",
+  "additional_external_matched_baselines": "NOT_RUN; pinned reference source is not matched evaluation.",
+  "product_migration": "NO_GO",
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}

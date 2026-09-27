@@ -1,0 +1,328 @@
+{
+  "kind": "MILAI_APPLICATION_V25_EXECUTION_FREEZE",
+  "status": "FROZEN_BEFORE_FIRST_REAL_REQUEST",
+  "history_variant": "long",
+  "created_at": "2026-09-27T01:21:13.736297+00:00",
+  "protocol_path": "data/manifests/milai-application-v25-protocol.json",
+  "protocol_sha256": "b3a4cb836aac467f847a706d453e03cde371b043b7db22d297dd6ec9042fe9c3",
+  "script_path": "data/diagnostics/milai-application-v25-long-script.json",
+  "script_sha256": "48b53a63901e79ab8f62aaa73021e86f546927b636938baed4b8479c346313ed",
+  "input_freeze_path": "data/manifests/milai-application-v25-long-input-freeze.json",
+  "input_freeze_sha256": "8d6dff44ea7560a24c92309b1740dd470d906b7e8785e7f17a90c9bd3f2cc766",
+  "lock_path": "data/locks/milai-application-v25.lock.json",
+  "lock_sha256": "796b32df3dbe5d5028d799bbdd92a7ff313ac17fd73ce34a84de3cae3d4d0e25",
+  "source_mapping_sha256": "ff874dc00936261303336963a415007ddbe93bbdf06a87cb87ae0a7409ab6e38",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "stage": "MILAI_APPLICATION_V25_P12",
+    "reference_commit": "1053719dc004c1a630abac0195f0ce1f290ac6a3",
+    "source_files": [
+      "src/milai_lab/runners/langmem_application.py",
+      "src/milai_lab/runners/langmem_application_runtime.py",
+      "src/milai_lab/baselines/langmem_instrumentation.py",
+      "src/milai_lab/methods/freshness_projection/identity.py",
+      "tools/run_milai_application_v25.py",
+      "configs/milai-application-v25.json",
+      ".github/workflows/ci.yml",
+      "pyproject.toml"
+    ],
+    "new_validation_files": [
+      "tests/unit/test_langmem_application.py"
+    ],
+    "identity": {
+      "lock_expected": "data/locks/milai-application-v25.lock.json",
+      "kind": "MILAI_APPLICATION_V25_LOCK",
+      "required_runtime_export": "REQUIRED_APPLICATION_V25_RUNTIME",
+      "verifier_exports": [
+        "verify_application_v25_lock",
+        "verify_application_v25_prepared"
+      ],
+      "application_protocol_sha256_field": "application_protocol_sha256",
+      "protocol_by_arm": {
+        "b1_control": "langmem-hotpath-react-json-action-v1",
+        "a3_exact_refresh": "milai-ser-v21-json-action-v1",
+        "a4_selective_rebase": "milai-ser-v21-json-action-v1",
+        "a5_rank_bounded_rebase": "milai-ser-v21-json-action-v1"
+      },
+      "continuous_budget_path": "artifacts/ser-v20/budget.json"
+    },
+    "cli": {
+      "path": "tools/run_milai_application_v25.py",
+      "commands": [
+        "prepare",
+        "run-phase"
+      ],
+      "required_shared_arguments": [
+        "--script",
+        "--input-freeze",
+        "--run",
+        "--arm",
+        "--runtime-root"
+      ],
+      "prepare_additional_argument": "--output",
+      "run_phase_additional_arguments": [
+        "--prepared",
+        "--phase",
+        "--stage"
+      ],
+      "separate_process_phase_order": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "script_variants_verified": [
+        "short",
+        "medium",
+        "long"
+      ]
+    },
+    "behavior": {
+      "normal_agent_and_memory_tools": true,
+      "ser_stage": "v21",
+      "a5_refresh_until_current_candidate": true,
+      "a5_max_exact_refresh_per_search": 1,
+      "formation_and_reconciliation_enabled": false,
+      "world": "Per-arm SQLite world; user-scoped actual reserve/read/label operations and committed partial label failure",
+      "operator_memory": "Ordinary manage_memory CRUD with observed operator origin and per-user returned-ID aliases; pending outcome is never automatically retried",
+      "business_replay": "Existing BusinessActionJournal; completed calls are replayed, pending outcomes remain unknown",
+      "capacity": "Only exact public-message generation-capacity failure is recorded locally; later same-session messages skipped, independent sessions continue; other exceptions abort",
+      "rubric_read_by_runtime": false,
+      "expected_result_values_in_runtime": false
+    },
+    "checks": [
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_langmem_application.py",
+        "result": "PASS; 6 tests: durable partial failure/reopen, user isolation, operator create/update/delete aliases and pending outcome, phase resume/capacity/service fault, real SqliteSaver reopen and new-session thread, mock Provider business ToolNode wire/actual SQLite side effect, all arms and three frozen script variants"
+      },
+      {
+        "command": "uv run --no-sync pytest -q tests/unit/test_freshness_projection.py -k fixture_update_list_delete_unknown_seed_and_completed_resume",
+        "result": "PASS; 1 passed, 21 deselected; existing external fixture observer behavior remains"
+      },
+      {
+        "command": "uv run --no-sync ruff check src/milai_lab/runners/langmem_application.py src/milai_lab/runners/langmem_application_runtime.py src/milai_lab/baselines/langmem_instrumentation.py src/milai_lab/methods/freshness_projection/identity.py tools/run_milai_application_v25.py tests/unit/test_langmem_application.py",
+        "result": "PASS"
+      },
+      {
+        "command": "uv run --no-sync mypy --follow-imports=silent src/milai_lab/runners/langmem_application.py src/milai_lab/runners/langmem_application_runtime.py src/milai_lab/baselines/langmem_instrumentation.py src/milai_lab/methods/freshness_projection/identity.py tools/run_milai_application_v25.py",
+        "result": "PASS; 5 source files"
+      },
+      {
+        "command": "uv run --no-sync python tools/run_milai_application_v25.py run-phase --help; git diff --check",
+        "result": "PASS; four declared arms and phase CLI visible; no whitespace errors"
+      },
+      {
+        "command": "offline config comparison to configs/milai-ser-v21.json and frozen application protocol",
+        "result": "PASS; recipe, transport, Host, embedding, capacity, continuous budget and A5 rank policy identical"
+      }
+    ],
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "packaging": "PENDING_LOCK"
+  },
+  "package_verification": {
+    "status": "PASS",
+    "stage": "MILAI_APPLICATION_V25_P12_FROZEN",
+    "lock": "data/locks/milai-application-v25.lock.json",
+    "lock_sha256": "796b32df3dbe5d5028d799bbdd92a7ff313ac17fd73ce34a84de3cae3d4d0e25",
+    "source_mapping_sha256": "ff874dc00936261303336963a415007ddbe93bbdf06a87cb87ae0a7409ab6e38",
+    "identity_check": "PASS: verify_application_v25_lock for a5_rank_bounded_rebase and 81-file source map",
+    "build": {
+      "command": "uv build --out-dir artifacts/application-v25/dist",
+      "result": "PASS: one build after v25 source lock",
+      "sdist": "artifacts/application-v25/dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "e8159a5a8c1b9f5403ec0b3da143fbd15d4bf18bb81908dbb4431781e3faf530",
+      "wheel": "artifacts/application-v25/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "fd3f3ad4acdf20c9236d6abe9feb98f61913f6f83df93aa27e030da45e6c6dbc"
+    },
+    "members": {
+      "result": "PASS: app source/config/lock/protocol and all pre-frozen short/medium/long scripts/freezes present; no private/generated runtime paths",
+      "sdist_file_count": 1840,
+      "wheel_file_count": 140,
+      "sdist_required": [
+        "configs/milai-application-v25.json",
+        "data/locks/milai-application-v25.lock.json",
+        "data/manifests/milai-application-v25-protocol.json",
+        "data/manifests/milai-application-v25-history-inputs.json",
+        "data/manifests/milai-application-v25-input-freeze.json",
+        "data/manifests/milai-application-v25-medium-input-freeze.json",
+        "data/manifests/milai-application-v25-long-input-freeze.json",
+        "data/diagnostics/milai-application-v25-script.json",
+        "data/diagnostics/milai-application-v25-medium-script.json",
+        "data/diagnostics/milai-application-v25-long-script.json",
+        "tools/run_milai_application_v25.py",
+        "src/milai_lab/runners/langmem_application.py",
+        "src/milai_lab/runners/langmem_application_runtime.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "src/milai_lab/baselines/langmem_instrumentation.py",
+        "tests/unit/test_langmem_application.py"
+      ],
+      "wheel_required": [
+        "milai_lab/runners/langmem_application.py",
+        "milai_lab/runners/langmem_application_runtime.py",
+        "milai_lab/methods/freshness_projection/identity.py",
+        "milai_lab/baselines/langmem_instrumentation.py"
+      ],
+      "private_or_generated_members": [],
+      "rubric_in_sdist": true,
+      "rubric_in_wheel": false,
+      "rubric_read_by_runtime": false
+    },
+    "offline_failure_and_fix": "The first mock Provider business ToolNode check exposed SQLite's default same-thread restriction because LangGraph executes business tools on a worker thread. Before source freeze, the application world connection was opened for cross-thread use and business-tool access serialized with a small lock; the same mock actual-tool call then passed and committed one real reservation while reporting label failure. No real model or embedding was called.",
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_lock": 0
+  },
+  "runs": [
+    {
+      "run_id": "application-v25-long-b1-r1",
+      "arm": "b1_control",
+      "directory": "artifacts/application-v25/application-v25-long-b1-r1",
+      "runtime_root": "artifacts/application-v25/application-v25-long-b1-r1/runtime",
+      "options": [
+        "--config",
+        "artifacts/application-v25/application-v25-long-b1-r1/config.json",
+        "--lock",
+        "data/locks/milai-application-v25.lock.json",
+        "--script",
+        "data/diagnostics/milai-application-v25-long-script.json",
+        "--input-freeze",
+        "data/manifests/milai-application-v25-long-input-freeze.json",
+        "--run",
+        "application-v25-long-b1-r1",
+        "--arm",
+        "b1_control",
+        "--runtime-root",
+        "artifacts/application-v25/application-v25-long-b1-r1/runtime"
+      ],
+      "initial_namespace_items": 0,
+      "config_sha256": "6eef3477ee023e5f6517f9e716c52469e2a8fd4dd1ed9d4e2365e8648bbbe4b8",
+      "prepared_sha256": "373f2594d4c30b97d0d2a044e775d38daaea58c9bd5bb742f81ead7e9dfb0b44",
+      "result_manifest": "data/manifests/milai-application-v25-long-b1-results.json"
+    },
+    {
+      "run_id": "application-v25-long-a4-r1",
+      "arm": "a4_selective_rebase",
+      "directory": "artifacts/application-v25/application-v25-long-a4-r1",
+      "runtime_root": "artifacts/application-v25/application-v25-long-a4-r1/runtime",
+      "options": [
+        "--config",
+        "artifacts/application-v25/application-v25-long-a4-r1/config.json",
+        "--lock",
+        "data/locks/milai-application-v25.lock.json",
+        "--script",
+        "data/diagnostics/milai-application-v25-long-script.json",
+        "--input-freeze",
+        "data/manifests/milai-application-v25-long-input-freeze.json",
+        "--run",
+        "application-v25-long-a4-r1",
+        "--arm",
+        "a4_selective_rebase",
+        "--runtime-root",
+        "artifacts/application-v25/application-v25-long-a4-r1/runtime"
+      ],
+      "initial_namespace_items": 0,
+      "config_sha256": "6eef3477ee023e5f6517f9e716c52469e2a8fd4dd1ed9d4e2365e8648bbbe4b8",
+      "prepared_sha256": "a584ee9b1a214020fa52b980cdf1fdea9a2f522e1195bec9a98bee5e0f7b9ab3",
+      "result_manifest": "data/manifests/milai-application-v25-long-a4-results.json"
+    }
+  ],
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 791,
+    "generation": {
+      "charged_tokens": 826745,
+      "known_tokens": 826745,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 8186,
+      "known_tokens": 8186,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "phase_order": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "model_concurrency": 1,
+  "environment_reference": {
+    "path": "artifacts/ser-v20/environment-before.json",
+    "sha256": "8aba502900721b86dc778783cc6d59013a7691666b81e82fc86aadbe58f4d9b6"
+  },
+  "vllm_settings_changed": false,
+  "rubric_read_by_runner": false,
+  "unseen": false,
+  "master_goal_complete": false
+}

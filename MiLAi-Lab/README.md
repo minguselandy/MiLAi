@@ -76,10 +76,14 @@ Stop the F/R cue families with preserved negative evidence. Continuous costs are
 with real simulated side effects, process restarts, partial failure and multiple user scopes;
 P10 and the master Goal remain open. No vLLM or Product changes.
 
-[P12 application development](docs/MILAI_APPLICATION_V25_GOAL.md) now has a fixed nine-message,
-five-phase public script for two users. It compares B1/A3/A4/A5 on one durable business world
-per arm, using actual persisted reservations and labels, public memory CRUD and separate-process
-restarts. The independent rubric never enters the runner; short runs follow source freeze.
+[P12 application results](docs/MILAI_APPLICATION_V25_RESULTS_20260927.md) complete eight frozen
+trajectories with durable partial side effects, process restarts and two user scopes. Short
+B1/A3/A4/A5 scores are 7/9, 7/9, 9/9, 8/9; medium B1/A4 7/9, 8/9; long 7/9, 9/9.
+Preserve wrong actions, fabricated IDs, wrong-key lookup and capacity failures. Identical fresh-session
+first requests still produce different tool choices; the long-run token gap is mostly a fresh-session
+search loop, not demonstrated context efficiency. [Reproduction](docs/MILAI_APPLICATION_V25_REPRODUCTION_20260927.md)
+uses the frozen source and unchanged vLLM. Continuous costs:837 generations /983553 tokens /
+8948 embedding tokens /107 exact reads. P10 second-family and other external matched evidence remain open.
 
 Historical scoped delivery: [v19 repair](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md), following
 [the user's repair plan](docs/v19修复.md). Status: `COMPLETE_WITH_FRESHNESS_LIMITATIONS`.

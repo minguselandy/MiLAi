@@ -208,15 +208,20 @@ short comparison first; F/R disabled and v21 SER semantics unchanged. Root owns 
 all real calls and complete cost. No benchmark-specific runner dependency or vLLM change.
 P10 second-family resource gap and P12/master remain active.
 
-[P12 application v25](docs/MILAI_APPLICATION_V25_GOAL.md) source is now frozen on81-file
+[P12 application v25](docs/MILAI_APPLICATION_V25_RESULTS_20260927.md) is complete on81-file
 mapping `ff874dc00936261303336963a415007ddbe93bbdf06a87cb87ae0a7409ab6e38`.
-Six necessary new checks plus one affected old observer check pass. The mock actual ToolNode
-exposed SQLite thread affinity; allowing tool-thread access with serial business execution
-fixes the integration before real calls. Source/controller/provider/lineage algorithms remain
-frozen throughout the forthcoming B1/A3/A4/A5 short workload. One build and Luna checkpoint
-precede Root's serial real calls. Medium/long input bytes are already fixed (48/192 neutral
-log lines), and only B1/A4 run those later after application development. Keep all failures,
-separate process phases, cost and explicit-user CRUD origin; never score process exit as quality.
+Eight pre-frozen real runs preserve actual partial side effects, same-ID restart recovery,
+memory CRUD and two user scopes. Short B1/A3/A4/A5 score7/9,7/9,9/9,8/9; medium B1/A4
+7/9,8/9; long7/9,9/9. Keep wrong old-value actions, A5 wrong-key lookup, medium fabricated
+reservation IDs, and short A3/long B1 capacity failures. All eight fresh-session initial wires
+are identical; long token savings mostly reflect a fresh-session search-loop difference.
+Continuous costs837 generations /983553 tokens /8948 embedding tokens /107 exact reads.
+Source and vLLM are unchanged, six new narrow tests plus one affected check and one build
+already passed. No publication-only reruns, full suite, extra cue or benchmark expansion.
+Root/Sol read-only review found no deterministic integration defect; current A4 actions across
+all lengths do not trigger master capsule/action-grounding conditions. Luna publishes results
+and reproduction. P10 second-model endpoint and other external matched comparisons remain
+unfinished; the master Goal must not be marked complete with those gaps.
 
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the

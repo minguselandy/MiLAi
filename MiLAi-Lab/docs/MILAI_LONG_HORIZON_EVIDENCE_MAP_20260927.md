@@ -1,6 +1,6 @@
 # 长程计划证据与剩余要求
 
-总Goal仍ACTIVE。下表区分实现、开发效果和未见效果；局部测试通过不代替正式收益，负面研究结论也不自动完成尚未交付的应用工作。
+总Goal仍ACTIVE。下表区分实现、开发效果和未见效果；局部测试通过不代替正式收益。v25应用已完成，第二模型族及其他外部matched对照仍未完成。
 
 | 要求 | 当前证据 | 判断 |
 | --- | --- | --- |
@@ -10,20 +10,20 @@
 | §25冻结、§26/41未见matched | [P8冻结](MILAI_SER_V22_P8_METHOD_FREEZE.md)、[P9全部六条运行](MILAI_SER_V23_RESULTS_20260927.md) | B1 6/10，A3/A4各7/10；0自然refresh/rebase，额外分数不证明SER因果收益 |
 | §14 Formation | [v24 F3](MILAI_LIFECYCLE_V24_FORMATION_R3_RESULTS_20260927.md)及前两轮 | 三种cue均0/2；显式保存控制独立通过；停止cue家族 |
 | §15 Reconciliation | [v24 R2](MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS_20260927.md)及R1/两个能力控制 | 原正文实际送达仍必要更新0/1；停止cue家族，不默认启用 |
-| §20短/中/长历史 | [v25 Goal](MILAI_APPLICATION_V25_GOAL.md)、[提前固定的长度输入](../data/manifests/milai-application-v25-history-inputs.json) | 开发中，尚未运行；合成无关日志扩展不等于自然长期分布 |
-| §30同域四臂Pareto | v25已固定B1/A3/A4/A5同一脚本 | 待实际结果；不能拼接P9和A5开发分数 |
-| §43非benchmark可用性 | v25五阶段/九消息，真实SQLite副作用、partial failure、restart、CRUD、新session和两用户 | 源码已冻结，六项新窄验证和受影响旧检查通过；实际四臂结果待运行 |
+| §20短/中/长历史 | [v25最终](MILAI_APPLICATION_V25_RESULTS_20260927.md)、[提前固定的长度输入](../data/manifests/milai-application-v25-history-inputs.json) | B1三档7/9，A4为9/9、8/9、9/9；实际最大输入9467tokens；合成日志不等于自然长期分布 |
+| §30同域四臂Pareto | [短四臂](MILAI_APPLICATION_V25_SHORT_RESULTS_20260927.md)，B1/A3/A4/A5为7/9、7/9、9/9、8/9 | 质量/tokens两轴B1/A4非支配；A5少get是第三轴权衡；long成本差受fresh-session循环混杂 |
+| §43非benchmark可用性 | v25五阶段/九消息，真实SQLite副作用、partial failure、restart、CRUD、新session和两用户 | 八条实际运行及必要窄检查完成；保留普通Host取证、维护与容量失败，不宣称可靠Agent |
 | §19至少两个模型族 | 当前真实研究仅本地Qwen；独立端点信息已请求 | 未完成；不能把subagent推理充作同合同模型评价 |
 | P10 external baselines | 公开LangMem B1已作为实际对照；Mem0/Memobase/Graphiti源码有固定来源 | 其他系统尚未做同域效果比较；源码借鉴不是实验对照 |
 | §18/42广泛鲁棒性 | 主未见效果尚未成立 | 不进行参数/密度/比例大扫描来寻找最好结果；保留第二模型明确缺口和独立历史边界 |
-| §28–29完整质量/适应/保持/currentness/费用 | 各阶段manifest与连续账本；P12补同域结果和作用域检查 | 旧阶段保留，最终汇总待P12 |
+| §28–29完整质量/适应/保持/currentness/费用 | [v25完整manifest](../data/manifests/milai-application-v25-results.json)含逐消息/阶段、投影、observer、延迟/存储 | 已汇总；连续837生成/983553tokens/8948embeddingtokens/107get；语义refresh贡献UNKNOWN，不能冒充因果precision |
 | §44 Product迁移 | 稳定未见收益前提不满足 | NO-GO，Product不改 |
 
 ## 条件机制判定
 
-Current Evidence Capsule目前没有新触发证据：十三例开发控制已能消费实际送达的当前证据；P9主要是没有形成记忆和容量路径差异，并非已经证明当前材料因分散而不可用。继续增加呈现层不能由这些失败直接推出。
+Current Evidence Capsule目前没有新触发证据：十三例开发控制已能消费实际送达的当前证据；P9主要是没有形成记忆和容量路径差异。v25 medium新session缺的是未读取的实际业务状态，复制当前memory不能提供真实reservation ID；不能由此推出需要增加呈现层。
 
-Evidence-Grounded Action要求可用证据与动作之间有明确、反复的断裂。P9错误退款发生在原约定没有持久化的条件下；v24暴露的是维护操作遗漏。现阶段不加入语义门禁或自动参数修正，P12将保留实际动作参数与证据，用新结果判断是否出现该条件。
+Evidence-Grounded Action要求隔离、当前正文送达、derived demotion后仍反复旧参数。P9错误退款发生在原约定未持久化时，v24暴露维护遗漏；v25 A4三档行动均为当前9，而新session失败是未取证/虚构，未满足该条件。Root/Sol独立只读核对无确定性集成故障，当前不加入语义门禁或自动参数修正。
 
 State–Attention要求“当前证据已知不足且普通ReAct反复无法取得必要当前证据”。空搜索来自未保存信息时，增加检索控制不能恢复从未存在的内容。没有新增持久Decision State或reviewer的依据。
 

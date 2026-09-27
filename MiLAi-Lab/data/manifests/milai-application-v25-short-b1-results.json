@@ -1,0 +1,1333 @@
+{
+  "kind": "MILAI_APPLICATION_V25_RUN_REVIEW",
+  "status": "MECHANICAL_PASS_SEMANTIC_REVIEW_SEPARATE",
+  "run_id": "application-v25-short-b1-r1",
+  "arm": "b1_control",
+  "history_variant": "short",
+  "source_mapping_sha256": "ff874dc00936261303336963a415007ddbe93bbdf06a87cb87ae0a7409ab6e38",
+  "usage": {
+    "generations": 19,
+    "input_tokens": 25834,
+    "output_tokens": 1099,
+    "generation_tokens": 26933,
+    "embedding_requests": 12,
+    "embedding_tokens": 334,
+    "exact_version_resolution_reads": 0,
+    "projection_cpu_ns": 0,
+    "projection_wall_ns": 0,
+    "exact_read_wall_ns": 0,
+    "provider_wall_seconds": 12.349954824894667,
+    "process_wall_seconds": 31.43082416476682,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "judge_requests": 0
+  },
+  "host_message_statuses": {
+    "COMPLETED": 9
+  },
+  "messages": [
+    {
+      "message_id": "alice-review-1",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 0,
+      "status": "COMPLETED",
+      "answer": "I found three relevant notes regarding Cobalt display panels:\n\n1. **Handling Plan**: Reserve 4 units for the west receiving bay W-2 using paper sleeves. No reservation or label has been created yet.\n2. **Collection Access**: Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays.\n3. **Courier Contact**: The old Cobalt courier contact is Rowan at extension 482.",
+      "business_calls": [],
+      "phase": 0
+    },
+    {
+      "message_id": "bob-review-1",
+      "user_id": "bob",
+      "session_id": "handoff",
+      "public_index": 0,
+      "status": "COMPLETED",
+      "answer": "The handling plan for Cobalt display panels specifies a planned quantity of 3 units, destined for the south receiving bay S-5, with packing using cloth covers.",
+      "business_calls": [],
+      "phase": 0
+    },
+    {
+      "message_id": "alice-review-2",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 1,
+      "status": "COMPLETED",
+      "answer": "Based on the updated handling plan and access note: \n\n- **Planned Quantity**: 6 units\n- **Destination**: East loading bay E-4\n- **Packing**: Foam cradles\n- **Access Details**: Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays.",
+      "business_calls": [],
+      "phase": 1
+    },
+    {
+      "message_id": "alice-unrelated",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 2,
+      "status": "COMPLETED",
+      "answer": "Office equipment log acknowledged: lobby printer self-check completed and spare stapler returned to stationery drawer.",
+      "business_calls": [],
+      "phase": 2
+    },
+    {
+      "message_id": "alice-partial-action",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 3,
+      "status": "COMPLETED",
+      "answer": "The reservation for 6 Cobalt display panels to east loading bay E-4 using foam cradles was successfully created (Reservation ID: RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14). However, label creation failed due to the label service being unavailable. The reservation persists, but the label has not been created.",
+      "business_calls": [
+        {
+          "status": "complete",
+          "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+          "generation_id": "chatcmpl-8c276cb3eb844222",
+          "call_id": "chatcmpl-8c276cb3eb844222:tool:0",
+          "name": "reserve_and_label",
+          "args": {
+            "item_key": "Cobalt display panels",
+            "quantity": 6,
+            "destination": "east loading bay E-4",
+            "packing": "foam cradles"
+          },
+          "result": {
+            "content": "{\"ok\": false, \"status\": \"reserved_label_failed\", \"reason\": \"label_service_unavailable\", \"reservation_id\": \"RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14\", \"item_key\": \"Cobalt display panels\", \"quantity\": 6, \"destination\": \"east loading bay E-4\", \"packing\": \"foam cradles\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "reserve_and_label",
+            "id": null,
+            "tool_call_id": "chatcmpl-8c276cb3eb844222:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        }
+      ],
+      "phase": 2
+    },
+    {
+      "message_id": "alice-recover",
+      "user_id": "alice",
+      "session_id": "handoff",
+      "public_index": 4,
+      "status": "COMPLETED",
+      "answer": "The reservation for 6 Cobalt display panels to east loading bay E-4 using foam cradles (Reservation ID: RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14) was confirmed, and the label has now been successfully created.",
+      "business_calls": [
+        {
+          "status": "complete",
+          "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+          "generation_id": "chatcmpl-8c276cb3eb844222",
+          "call_id": "chatcmpl-8c276cb3eb844222:tool:0",
+          "name": "reserve_and_label",
+          "args": {
+            "item_key": "Cobalt display panels",
+            "quantity": 6,
+            "destination": "east loading bay E-4",
+            "packing": "foam cradles"
+          },
+          "result": {
+            "content": "{\"ok\": false, \"status\": \"reserved_label_failed\", \"reason\": \"label_service_unavailable\", \"reservation_id\": \"RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14\", \"item_key\": \"Cobalt display panels\", \"quantity\": 6, \"destination\": \"east loading bay E-4\", \"packing\": \"foam cradles\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "reserve_and_label",
+            "id": null,
+            "tool_call_id": "chatcmpl-8c276cb3eb844222:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        },
+        {
+          "status": "complete",
+          "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+          "generation_id": "chatcmpl-bc1624ded321cce2",
+          "call_id": "chatcmpl-bc1624ded321cce2:tool:0",
+          "name": "get_reservation",
+          "args": {
+            "item_key": "Cobalt display panels"
+          },
+          "result": {
+            "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14\", \"item_key\": \"Cobalt display panels\", \"quantity\": 6, \"destination\": \"east loading bay E-4\", \"packing\": \"foam cradles\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "get_reservation",
+            "id": null,
+            "tool_call_id": "chatcmpl-bc1624ded321cce2:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        },
+        {
+          "status": "complete",
+          "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+          "generation_id": "chatcmpl-bc1624ded321cce2",
+          "call_id": "chatcmpl-bc1624ded321cce2:tool:1",
+          "name": "complete_label",
+          "args": {
+            "reservation_id": "RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14"
+          },
+          "result": {
+            "content": "{\"ok\": true, \"status\": \"label_created\", \"reservation_id\": \"RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14\", \"item_key\": \"Cobalt display panels\", \"quantity\": 6, \"destination\": \"east loading bay E-4\", \"packing\": \"foam cradles\", \"label_status\": \"created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "complete_label",
+            "id": null,
+            "tool_call_id": "chatcmpl-bc1624ded321cce2:tool:1",
+            "artifact": null,
+            "status": "success"
+          }
+        }
+      ],
+      "phase": 3
+    },
+    {
+      "message_id": "bob-action",
+      "user_id": "bob",
+      "session_id": "handoff",
+      "public_index": 1,
+      "status": "COMPLETED",
+      "answer": "The reservation and label for Cobalt display panels were successfully created. Reservation ID: RSV-ac4d1eca-ea0a-42fb-b97d-6067e66641c2. Quantity: 3 units. Destination: south receiving bay S-5. Packing: cloth covers. Label status: created.",
+      "business_calls": [
+        {
+          "status": "complete",
+          "thread_id": "e004caed8389ea67533e9b8d1b92c154f23c4b19cba6e6cc1002d5678c74143a",
+          "generation_id": "chatcmpl-a5977116579c6c3e",
+          "call_id": "chatcmpl-a5977116579c6c3e:tool:0",
+          "name": "reserve_and_label",
+          "args": {
+            "item_key": "Cobalt display panels",
+            "quantity": 3,
+            "destination": "south receiving bay S-5",
+            "packing": "cloth covers"
+          },
+          "result": {
+            "content": "{\"ok\": true, \"status\": \"label_created\", \"reservation_id\": \"RSV-ac4d1eca-ea0a-42fb-b97d-6067e66641c2\", \"item_key\": \"Cobalt display panels\", \"quantity\": 3, \"destination\": \"south receiving bay S-5\", \"packing\": \"cloth covers\", \"label_status\": \"created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "reserve_and_label",
+            "id": null,
+            "tool_call_id": "chatcmpl-a5977116579c6c3e:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        }
+      ],
+      "phase": 3
+    },
+    {
+      "message_id": "alice-new-session-update",
+      "user_id": "alice",
+      "session_id": "followup",
+      "public_index": 0,
+      "status": "COMPLETED",
+      "answer": "The handling plan memory has been updated to reflect the actual reservation status: 6 units reserved for east loading bay E-4 using foam cradles, with reservation ID RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14 and label status created. The access note regarding side gate G-1 remains unchanged.",
+      "business_calls": [
+        {
+          "status": "complete",
+          "thread_id": "27005e63dfc73f3e65ea9351780766f4787cb4f01a089506f9c4f3603fce6bce",
+          "generation_id": "chatcmpl-a45cfa5e97fd06b9",
+          "call_id": "chatcmpl-a45cfa5e97fd06b9:tool:0",
+          "name": "get_reservation",
+          "args": {
+            "item_key": "Cobalt display panels"
+          },
+          "result": {
+            "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14\", \"item_key\": \"Cobalt display panels\", \"quantity\": 6, \"destination\": \"east loading bay E-4\", \"packing\": \"foam cradles\", \"label_status\": \"created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "get_reservation",
+            "id": null,
+            "tool_call_id": "chatcmpl-a45cfa5e97fd06b9:tool:0",
+            "artifact": null,
+            "status": "success"
+          }
+        }
+      ],
+      "phase": 4
+    },
+    {
+      "message_id": "bob-new-session-review",
+      "user_id": "bob",
+      "session_id": "followup",
+      "public_index": 0,
+      "status": "COMPLETED",
+      "answer": "The stored handling plan for Cobalt display panels specifies a planned quantity of 3 units, destination of south receiving bay S-5, and packing using cloth covers.",
+      "business_calls": [],
+      "phase": 4
+    }
+  ],
+  "phase_worlds": [
+    {
+      "label_available": false,
+      "reservations": [],
+      "attempts": []
+    },
+    {
+      "label_available": false,
+      "reservations": [],
+      "attempts": []
+    },
+    {
+      "label_available": false,
+      "reservations": [
+        {
+          "reservation_id": "RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14",
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "quantity": 6,
+          "destination": "east loading bay E-4",
+          "packing": "foam cradles",
+          "label_status": "not_created"
+        }
+      ],
+      "attempts": [
+        {
+          "id": 1,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        }
+      ]
+    },
+    {
+      "label_available": true,
+      "reservations": [
+        {
+          "reservation_id": "RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14",
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "quantity": 6,
+          "destination": "east loading bay E-4",
+          "packing": "foam cradles",
+          "label_status": "created"
+        },
+        {
+          "reservation_id": "RSV-ac4d1eca-ea0a-42fb-b97d-6067e66641c2",
+          "user_id": "bob",
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers",
+          "label_status": "created"
+        }
+      ],
+      "attempts": [
+        {
+          "id": 1,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        },
+        {
+          "id": 2,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "complete_label",
+          "outcome": "created"
+        },
+        {
+          "id": 3,
+          "user_id": "bob",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        }
+      ]
+    },
+    {
+      "label_available": true,
+      "reservations": [
+        {
+          "reservation_id": "RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14",
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "quantity": 6,
+          "destination": "east loading bay E-4",
+          "packing": "foam cradles",
+          "label_status": "created"
+        },
+        {
+          "reservation_id": "RSV-ac4d1eca-ea0a-42fb-b97d-6067e66641c2",
+          "user_id": "bob",
+          "item_key": "Cobalt display panels",
+          "quantity": 3,
+          "destination": "south receiving bay S-5",
+          "packing": "cloth covers",
+          "label_status": "created"
+        }
+      ],
+      "attempts": [
+        {
+          "id": 1,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        },
+        {
+          "id": 2,
+          "user_id": "alice",
+          "item_key": "Cobalt display panels",
+          "operation": "complete_label",
+          "outcome": "created"
+        },
+        {
+          "id": 3,
+          "user_id": "bob",
+          "item_key": "Cobalt display panels",
+          "operation": "reserve_and_label",
+          "outcome": "reserved"
+        }
+      ]
+    }
+  ],
+  "phase_memory_snapshots": [
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.019947680179029703,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "73b4edfa-5a10-473c-8060-ed4a0a04a6a2",
+            "value": {
+              "content": "The old Cobalt courier contact is Rowan at extension 482. This is a contact entry, not a handling instruction."
+            },
+            "created_at": "2026-09-27T01:06:53.218220+00:00",
+            "updated_at": "2026-09-27T01:06:53.218220+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "ef928b12-54c6-4b19-9cb9-ac38505486fb",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:06:53.055575+00:00",
+            "updated_at": "2026-09-27T01:06:53.055575+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "17df07e9-0261-440d-85bc-3db8910c76dd",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 4 units for west receiving bay W-2 using paper sleeves. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:06:52.892355+00:00",
+            "updated_at": "2026-09-27T01:06:52.892355+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "bob"
+            ],
+            "key": "fc6375e0-60f5-443b-bd4f-7cd4e7734493",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:06:53.392056+00:00",
+            "updated_at": "2026-09-27T01:06:53.392056+00:00",
+            "score": null
+          }
+        ]
+      }
+    },
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.016266230959445238,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "17df07e9-0261-440d-85bc-3db8910c76dd",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 6 units for east loading bay E-4 using foam cradles. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:06:52.892355+00:00",
+            "updated_at": "2026-09-27T01:06:59.575080+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "ef928b12-54c6-4b19-9cb9-ac38505486fb",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:06:53.055575+00:00",
+            "updated_at": "2026-09-27T01:06:53.055575+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "bob"
+            ],
+            "key": "fc6375e0-60f5-443b-bd4f-7cd4e7734493",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:06:53.392056+00:00",
+            "updated_at": "2026-09-27T01:06:53.392056+00:00",
+            "score": null
+          }
+        ]
+      }
+    },
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.01599967060610652,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "17df07e9-0261-440d-85bc-3db8910c76dd",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:06:52.892355+00:00",
+            "updated_at": "2026-09-27T01:07:04.232936+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "ef928b12-54c6-4b19-9cb9-ac38505486fb",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:06:53.055575+00:00",
+            "updated_at": "2026-09-27T01:06:53.055575+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "bob"
+            ],
+            "key": "fc6375e0-60f5-443b-bd4f-7cd4e7734493",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:06:53.392056+00:00",
+            "updated_at": "2026-09-27T01:06:53.392056+00:00",
+            "score": null
+          }
+        ]
+      }
+    },
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.016335043124854565,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "17df07e9-0261-440d-85bc-3db8910c76dd",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:06:52.892355+00:00",
+            "updated_at": "2026-09-27T01:07:04.232936+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "ef928b12-54c6-4b19-9cb9-ac38505486fb",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:06:53.055575+00:00",
+            "updated_at": "2026-09-27T01:06:53.055575+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "bob"
+            ],
+            "key": "fc6375e0-60f5-443b-bd4f-7cd4e7734493",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:06:53.392056+00:00",
+            "updated_at": "2026-09-27T01:06:53.392056+00:00",
+            "score": null
+          }
+        ]
+      }
+    },
+    {
+      "analysis_only": true,
+      "provider_requests": 0,
+      "query_none_reads": 2,
+      "wall_seconds": 0.016472463961690664,
+      "users": {
+        "alice": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "17df07e9-0261-440d-85bc-3db8910c76dd",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserved 6 units for east loading bay E-4 using foam cradles. Reservation ID: RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14. Label status: created."
+            },
+            "created_at": "2026-09-27T01:06:52.892355+00:00",
+            "updated_at": "2026-09-27T01:07:18.832623+00:00",
+            "score": null
+          },
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "alice"
+            ],
+            "key": "ef928b12-54c6-4b19-9cb9-ac38505486fb",
+            "value": {
+              "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+            },
+            "created_at": "2026-09-27T01:06:53.055575+00:00",
+            "updated_at": "2026-09-27T01:06:53.055575+00:00",
+            "score": null
+          }
+        ],
+        "bob": [
+          {
+            "namespace": [
+              "langmem",
+              "application-v25-short-b1-r1",
+              "b1_control",
+              "bob"
+            ],
+            "key": "fc6375e0-60f5-443b-bd4f-7cd4e7734493",
+            "value": {
+              "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+            },
+            "created_at": "2026-09-27T01:06:53.392056+00:00",
+            "updated_at": "2026-09-27T01:06:53.392056+00:00",
+            "score": null
+          }
+        ]
+      }
+    }
+  ],
+  "operator_memory": {
+    "events": {
+      "seed-alice-plan": {
+        "input": {
+          "event_id": "seed-alice-plan",
+          "user_id": "alice",
+          "action": "create",
+          "alias": "plan",
+          "content": "Handling plan for Cobalt display panels: reserve 4 units for west receiving bay W-2 using paper sleeves. No reservation or label has been created."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "create",
+          "content": "Handling plan for Cobalt display panels: reserve 4 units for west receiving bay W-2 using paper sleeves. No reservation or label has been created."
+        },
+        "result": "created memory 17df07e9-0261-440d-85bc-3db8910c76dd"
+      },
+      "seed-alice-access": {
+        "input": {
+          "event_id": "seed-alice-access",
+          "user_id": "alice",
+          "action": "create",
+          "alias": "access",
+          "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "create",
+          "content": "Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+        },
+        "result": "created memory ef928b12-54c6-4b19-9cb9-ac38505486fb"
+      },
+      "seed-alice-contact": {
+        "input": {
+          "event_id": "seed-alice-contact",
+          "user_id": "alice",
+          "action": "create",
+          "alias": "old_contact",
+          "content": "The old Cobalt courier contact is Rowan at extension 482. This is a contact entry, not a handling instruction."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "create",
+          "content": "The old Cobalt courier contact is Rowan at extension 482. This is a contact entry, not a handling instruction."
+        },
+        "result": "created memory 73b4edfa-5a10-473c-8060-ed4a0a04a6a2"
+      },
+      "seed-bob-plan": {
+        "input": {
+          "event_id": "seed-bob-plan",
+          "user_id": "bob",
+          "action": "create",
+          "alias": "plan",
+          "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "create",
+          "content": "Handling plan for Cobalt display panels: reserve 3 units for south receiving bay S-5 using cloth covers. No reservation or label has been created."
+        },
+        "result": "created memory fc6375e0-60f5-443b-bd4f-7cd4e7734493"
+      },
+      "revise-alice-plan-2": {
+        "input": {
+          "event_id": "revise-alice-plan-2",
+          "user_id": "alice",
+          "action": "update",
+          "alias": "plan",
+          "content": "Handling plan for Cobalt display panels: reserve 6 units for east loading bay E-4 using foam cradles. No reservation or label has been created."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "update",
+          "id": "17df07e9-0261-440d-85bc-3db8910c76dd",
+          "content": "Handling plan for Cobalt display panels: reserve 6 units for east loading bay E-4 using foam cradles. No reservation or label has been created."
+        },
+        "result": "updated memory 17df07e9-0261-440d-85bc-3db8910c76dd"
+      },
+      "delete-alice-contact": {
+        "input": {
+          "event_id": "delete-alice-contact",
+          "user_id": "alice",
+          "action": "delete",
+          "alias": "old_contact"
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "delete",
+          "id": "73b4edfa-5a10-473c-8060-ed4a0a04a6a2"
+        },
+        "result": "Deleted memory 73b4edfa-5a10-473c-8060-ed4a0a04a6a2"
+      },
+      "revise-alice-plan-3": {
+        "input": {
+          "event_id": "revise-alice-plan-3",
+          "user_id": "alice",
+          "action": "update",
+          "alias": "plan",
+          "content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created."
+        },
+        "status": "complete",
+        "arguments": {
+          "action": "update",
+          "id": "17df07e9-0261-440d-85bc-3db8910c76dd",
+          "content": "Handling plan for Cobalt display panels: reserve 9 units for north staging bay N-7 using rigid cases. No reservation or label has been created."
+        },
+        "result": "updated memory 17df07e9-0261-440d-85bc-3db8910c76dd"
+      }
+    },
+    "aliases": {
+      "alice": {
+        "plan": {
+          "id": "17df07e9-0261-440d-85bc-3db8910c76dd",
+          "deleted": false
+        },
+        "access": {
+          "id": "ef928b12-54c6-4b19-9cb9-ac38505486fb",
+          "deleted": false
+        },
+        "old_contact": {
+          "id": "73b4edfa-5a10-473c-8060-ed4a0a04a6a2",
+          "deleted": true
+        }
+      },
+      "bob": {
+        "plan": {
+          "id": "fc6375e0-60f5-443b-bd4f-7cd4e7734493",
+          "deleted": false
+        }
+      }
+    }
+  },
+  "business_journal": [
+    {
+      "status": "complete",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "generation_id": "chatcmpl-8c276cb3eb844222",
+      "call_id": "chatcmpl-8c276cb3eb844222:tool:0",
+      "name": "reserve_and_label",
+      "args": {
+        "item_key": "Cobalt display panels",
+        "quantity": 6,
+        "destination": "east loading bay E-4",
+        "packing": "foam cradles"
+      },
+      "result": {
+        "content": "{\"ok\": false, \"status\": \"reserved_label_failed\", \"reason\": \"label_service_unavailable\", \"reservation_id\": \"RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14\", \"item_key\": \"Cobalt display panels\", \"quantity\": 6, \"destination\": \"east loading bay E-4\", \"packing\": \"foam cradles\", \"label_status\": \"not_created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "reserve_and_label",
+        "id": null,
+        "tool_call_id": "chatcmpl-8c276cb3eb844222:tool:0",
+        "artifact": null,
+        "status": "success"
+      }
+    },
+    {
+      "status": "complete",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "generation_id": "chatcmpl-bc1624ded321cce2",
+      "call_id": "chatcmpl-bc1624ded321cce2:tool:0",
+      "name": "get_reservation",
+      "args": {
+        "item_key": "Cobalt display panels"
+      },
+      "result": {
+        "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14\", \"item_key\": \"Cobalt display panels\", \"quantity\": 6, \"destination\": \"east loading bay E-4\", \"packing\": \"foam cradles\", \"label_status\": \"not_created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "get_reservation",
+        "id": null,
+        "tool_call_id": "chatcmpl-bc1624ded321cce2:tool:0",
+        "artifact": null,
+        "status": "success"
+      }
+    },
+    {
+      "status": "complete",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "generation_id": "chatcmpl-bc1624ded321cce2",
+      "call_id": "chatcmpl-bc1624ded321cce2:tool:1",
+      "name": "complete_label",
+      "args": {
+        "reservation_id": "RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14"
+      },
+      "result": {
+        "content": "{\"ok\": true, \"status\": \"label_created\", \"reservation_id\": \"RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14\", \"item_key\": \"Cobalt display panels\", \"quantity\": 6, \"destination\": \"east loading bay E-4\", \"packing\": \"foam cradles\", \"label_status\": \"created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "complete_label",
+        "id": null,
+        "tool_call_id": "chatcmpl-bc1624ded321cce2:tool:1",
+        "artifact": null,
+        "status": "success"
+      }
+    },
+    {
+      "status": "complete",
+      "thread_id": "e004caed8389ea67533e9b8d1b92c154f23c4b19cba6e6cc1002d5678c74143a",
+      "generation_id": "chatcmpl-a5977116579c6c3e",
+      "call_id": "chatcmpl-a5977116579c6c3e:tool:0",
+      "name": "reserve_and_label",
+      "args": {
+        "item_key": "Cobalt display panels",
+        "quantity": 3,
+        "destination": "south receiving bay S-5",
+        "packing": "cloth covers"
+      },
+      "result": {
+        "content": "{\"ok\": true, \"status\": \"label_created\", \"reservation_id\": \"RSV-ac4d1eca-ea0a-42fb-b97d-6067e66641c2\", \"item_key\": \"Cobalt display panels\", \"quantity\": 3, \"destination\": \"south receiving bay S-5\", \"packing\": \"cloth covers\", \"label_status\": \"created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "reserve_and_label",
+        "id": null,
+        "tool_call_id": "chatcmpl-a5977116579c6c3e:tool:0",
+        "artifact": null,
+        "status": "success"
+      }
+    },
+    {
+      "status": "complete",
+      "thread_id": "27005e63dfc73f3e65ea9351780766f4787cb4f01a089506f9c4f3603fce6bce",
+      "generation_id": "chatcmpl-a45cfa5e97fd06b9",
+      "call_id": "chatcmpl-a45cfa5e97fd06b9:tool:0",
+      "name": "get_reservation",
+      "args": {
+        "item_key": "Cobalt display panels"
+      },
+      "result": {
+        "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14\", \"item_key\": \"Cobalt display panels\", \"quantity\": 6, \"destination\": \"east loading bay E-4\", \"packing\": \"foam cradles\", \"label_status\": \"created\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "get_reservation",
+        "id": null,
+        "tool_call_id": "chatcmpl-a45cfa5e97fd06b9:tool:0",
+        "artifact": null,
+        "status": "success"
+      }
+    }
+  ],
+  "thread_scopes": {
+    "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce": {
+      "user_id": "alice",
+      "session_id": "handoff"
+    },
+    "e004caed8389ea67533e9b8d1b92c154f23c4b19cba6e6cc1002d5678c74143a": {
+      "user_id": "bob",
+      "session_id": "handoff"
+    },
+    "27005e63dfc73f3e65ea9351780766f4787cb4f01a089506f9c4f3603fce6bce": {
+      "user_id": "alice",
+      "session_id": "followup"
+    },
+    "41582d83889ce4a0ec12b78878794b3f0bef7118206b9fa68d1add525933ae93": {
+      "user_id": "bob",
+      "session_id": "followup"
+    }
+  },
+  "actual_search_namespace_scope_verified": true,
+  "memory_tool_counts": {
+    "host_manage": 1,
+    "operator_manage": 7,
+    "host_search": 5
+  },
+  "checkpoint_threads": {
+    "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce": {
+      "messages": 19,
+      "ordinary_answers": [
+        {
+          "id": "chatcmpl-aef7273d7e3a76ff",
+          "content": "I found three relevant notes regarding Cobalt display panels:\n\n1. **Handling Plan**: Reserve 4 units for the west receiving bay W-2 using paper sleeves. No reservation or label has been created yet.\n2. **Collection Access**: Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays.\n3. **Courier Contact**: The old Cobalt courier contact is Rowan at extension 482."
+        },
+        {
+          "id": "chatcmpl-9497773f435fc8a7",
+          "content": "Based on the updated handling plan and access note: \n\n- **Planned Quantity**: 6 units\n- **Destination**: East loading bay E-4\n- **Packing**: Foam cradles\n- **Access Details**: Visits to the Cobalt collection use side gate G-1, which opens at 09:30 on weekdays."
+        },
+        {
+          "id": "chatcmpl-b7e19042d54d0228",
+          "content": "Office equipment log acknowledged: lobby printer self-check completed and spare stapler returned to stationery drawer."
+        },
+        {
+          "id": "chatcmpl-9e8685a1f614cc67",
+          "content": "The reservation for 6 Cobalt display panels to east loading bay E-4 using foam cradles was successfully created (Reservation ID: RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14). However, label creation failed due to the label service being unavailable. The reservation persists, but the label has not been created."
+        },
+        {
+          "id": "chatcmpl-8a627e24d4a36b2b",
+          "content": "The reservation for 6 Cobalt display panels to east loading bay E-4 using foam cradles (Reservation ID: RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14) was confirmed, and the label has now been successfully created."
+        }
+      ]
+    },
+    "e004caed8389ea67533e9b8d1b92c154f23c4b19cba6e6cc1002d5678c74143a": {
+      "messages": 8,
+      "ordinary_answers": [
+        {
+          "id": "chatcmpl-a41e72bc9188a694",
+          "content": "The handling plan for Cobalt display panels specifies a planned quantity of 3 units, destined for the south receiving bay S-5, with packing using cloth covers."
+        },
+        {
+          "id": "chatcmpl-84c2f2ce57829f55",
+          "content": "The reservation and label for Cobalt display panels were successfully created. Reservation ID: RSV-ac4d1eca-ea0a-42fb-b97d-6067e66641c2. Quantity: 3 units. Destination: south receiving bay S-5. Packing: cloth covers. Label status: created."
+        }
+      ]
+    },
+    "27005e63dfc73f3e65ea9351780766f4787cb4f01a089506f9c4f3603fce6bce": {
+      "messages": 8,
+      "ordinary_answers": [
+        {
+          "id": "chatcmpl-8dab4812705ad894",
+          "content": "The handling plan memory has been updated to reflect the actual reservation status: 6 units reserved for east loading bay E-4 using foam cradles, with reservation ID RSV-27bea7b9-7dcc-4b43-a50c-b34642f1be14 and label status created. The access note regarding side gate G-1 remains unchanged."
+        }
+      ]
+    },
+    "41582d83889ce4a0ec12b78878794b3f0bef7118206b9fa68d1add525933ae93": {
+      "messages": 4,
+      "ordinary_answers": [
+        {
+          "id": "chatcmpl-860873b2fb9695e7",
+          "content": "The stored handling plan for Cobalt display panels specifies a planned quantity of 3 units, destination of south receiving bay S-5, and packing using cloth covers."
+        }
+      ]
+    }
+  },
+  "instrumentation": {
+    "counts": {
+      "operations": 8,
+      "observations": 14,
+      "tool_calls": 18,
+      "searches": 5,
+      "requests": 19,
+      "request_material": 30,
+      "revisions": 8,
+      "bodies": 31
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 18
+      },
+      "operations": {
+        "complete": 8
+      },
+      "searches": {
+        "returned": 5
+      },
+      "requests": {
+        "completed": 19
+      }
+    },
+    "observation_roles": {
+      "business_tool": 5,
+      "user": 9
+    },
+    "revision_effects": {
+      "delete": 1,
+      "insert": 4,
+      "update": 3
+    },
+    "material_coverage": {
+      "FULL": 30
+    },
+    "search_returned_items": 9,
+    "search_exact_revision_bindings": 9,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 270,
+      "observer_cpu_ns": 87512387,
+      "observer_wall_ns": 1924133368,
+      "extra_store_reads": 16,
+      "extra_read_cpu_ns": 12145419,
+      "extra_read_wall_ns": 28109251,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 184320,
+      "net_sqlite_db_bytes": 86016,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "projection": {
+    "requests": 0,
+    "items": [],
+    "delivered_snapshots": [],
+    "exact_reads": [],
+    "derived_rebases": [],
+    "lineage_records": 0,
+    "mechanical_rebase_precision_counts": [
+      0,
+      0
+    ],
+    "mechanical_rebase_recall_counts": [
+      0,
+      0
+    ],
+    "risk_scope": "Actual prior checkpoint ordinary outputs; their delivered snapshots compared to revisions from completed public operator/Host operations before each actual request. Snapshot risk is not word-level causal truth.",
+    "checkpoint_originals_preserved": true,
+    "request_copy_changes_verified": true
+  },
+  "request_metrics": [
+    {
+      "request_id": "7fc15bf139674720debad3fbcf173e9abf724a3dda3a8ddcf985f64f63ea6d28",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "phase": 0,
+      "public_index": 0,
+      "input_tokens": 659,
+      "output_tokens": 27,
+      "wall_seconds": 0.9728176654316485
+    },
+    {
+      "request_id": "35b3972c737c5908c8471e36d4dc09ea3ab25fd874734c8b6c2888783d409069",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "phase": 0,
+      "public_index": 0,
+      "input_tokens": 1255,
+      "output_tokens": 105,
+      "wall_seconds": 0.8559081978164613
+    },
+    {
+      "request_id": "29d6c6cfb820382b593ab3bb627cfd9c623a7e996759924794e71bb6e1cf59ed",
+      "thread_id": "e004caed8389ea67533e9b8d1b92c154f23c4b19cba6e6cc1002d5678c74143a",
+      "phase": 0,
+      "public_index": 0,
+      "input_tokens": 652,
+      "output_tokens": 25,
+      "wall_seconds": 0.2992466799914837
+    },
+    {
+      "request_id": "7e7102fe83c18f1dd3dbd34114dfe58ec558684c3fc6aa59da3c16597af045cd",
+      "thread_id": "e004caed8389ea67533e9b8d1b92c154f23c4b19cba6e6cc1002d5678c74143a",
+      "phase": 0,
+      "public_index": 0,
+      "input_tokens": 887,
+      "output_tokens": 38,
+      "wall_seconds": 0.3771192296408117
+    },
+    {
+      "request_id": "de45e55c76fe2c3706f0a89189395fa688a28d9a6eef5bddd1419b39c8118494",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "phase": 1,
+      "public_index": 1,
+      "input_tokens": 1397,
+      "output_tokens": 32,
+      "wall_seconds": 0.4717011251486838
+    },
+    {
+      "request_id": "822a327b3a22e2265e2e49ac072c10e7070f192265c504ff215b288f13dae1c9",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "phase": 1,
+      "public_index": 1,
+      "input_tokens": 1814,
+      "output_tokens": 80,
+      "wall_seconds": 0.7490168493241072
+    },
+    {
+      "request_id": "744bed422599ea77b132f98fb1eff2c0da97f2498111b7b27c92d4c39ca694f0",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "phase": 2,
+      "public_index": 2,
+      "input_tokens": 1943,
+      "output_tokens": 25,
+      "wall_seconds": 0.4858877141959965
+    },
+    {
+      "request_id": "95aae70aae9d1aacbed3d6187aabf2161d9846a4839d70ccf102d9e3001f0295",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "phase": 2,
+      "public_index": 3,
+      "input_tokens": 2018,
+      "output_tokens": 54,
+      "wall_seconds": 0.618810900952667
+    },
+    {
+      "request_id": "a9b8c02f09251fdc4477e210d34f4dcb168586b432b19dd21ed87d7e9c5d79f0",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "phase": 2,
+      "public_index": 3,
+      "input_tokens": 2196,
+      "output_tokens": 93,
+      "wall_seconds": 0.8776045991107821
+    },
+    {
+      "request_id": "75b4d02d16d6929ff3e288ff160eabdcd219855115494fb5b7590667c274e428",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "phase": 3,
+      "public_index": 4,
+      "input_tokens": 2321,
+      "output_tokens": 76,
+      "wall_seconds": 0.8189562540501356
+    },
+    {
+      "request_id": "3dff029bad9a0741a7ca9781adaa2a29b0ef2f78672e7686d4db5c9eb0bbcac1",
+      "thread_id": "401b966beb909e86e8575ba78c6dd23daeb9ca0297609c37e108528cbb40ecce",
+      "phase": 3,
+      "public_index": 4,
+      "input_tokens": 2611,
+      "output_tokens": 77,
+      "wall_seconds": 0.8227742249146104
+    },
+    {
+      "request_id": "d81a681e587fe5e1a0ca9d84ff23177c934a94a59926bfdc085a95525ad02f2f",
+      "thread_id": "e004caed8389ea67533e9b8d1b92c154f23c4b19cba6e6cc1002d5678c74143a",
+      "phase": 3,
+      "public_index": 1,
+      "input_tokens": 955,
+      "output_tokens": 51,
+      "wall_seconds": 0.4624606850557029
+    },
+    {
+      "request_id": "bb5c07e0c9e1b19d34f1ebb26e5b2ff0af84544169bef89930c4a369fefa1f75",
+      "thread_id": "e004caed8389ea67533e9b8d1b92c154f23c4b19cba6e6cc1002d5678c74143a",
+      "phase": 3,
+      "public_index": 1,
+      "input_tokens": 1115,
+      "output_tokens": 80,
+      "wall_seconds": 0.66314851725474
+    },
+    {
+      "request_id": "ce365c377b81813bbe1f47431b649a9e541a45c40a3bcce39a00f0b4233ee989",
+      "thread_id": "27005e63dfc73f3e65ea9351780766f4787cb4f01a089506f9c4f3603fce6bce",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 686,
+      "output_tokens": 28,
+      "wall_seconds": 0.3676721081137657
+    },
+    {
+      "request_id": "43ce96da78ca688a019ad856a4c42585f2a3c1d9a146093aa7d90d34099be7ff",
+      "thread_id": "27005e63dfc73f3e65ea9351780766f4787cb4f01a089506f9c4f3603fce6bce",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 1104,
+      "output_tokens": 26,
+      "wall_seconds": 0.32746205013245344
+    },
+    {
+      "request_id": "933858e0af8950a0a2c55708577a8c77c775eaea080f3e07d52f579c5535092b",
+      "thread_id": "27005e63dfc73f3e65ea9351780766f4787cb4f01a089506f9c4f3603fce6bce",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 1242,
+      "output_tokens": 130,
+      "wall_seconds": 0.9839140558615327
+    },
+    {
+      "request_id": "3ee828a7854b7f585ce8b59e8ced65953d535e48e782a111bf066b819ebd8cbf",
+      "thread_id": "27005e63dfc73f3e65ea9351780766f4787cb4f01a089506f9c4f3603fce6bce",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 1424,
+      "output_tokens": 89,
+      "wall_seconds": 0.7629242348484695
+    },
+    {
+      "request_id": "068ae8f51f3c41b534af00e1a35b5a5ed2cc64c77d1188c4efe2974176881422",
+      "thread_id": "41582d83889ce4a0ec12b78878794b3f0bef7118206b9fa68d1add525933ae93",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 660,
+      "output_tokens": 25,
+      "wall_seconds": 0.2944293231703341
+    },
+    {
+      "request_id": "0d63dbc790042dc93ca502595ae1e47cb452423f4a9b4e1a69cf0f8c7979a29c",
+      "thread_id": "41582d83889ce4a0ec12b78878794b3f0bef7118206b9fa68d1add525933ae93",
+      "phase": 4,
+      "public_index": 0,
+      "input_tokens": 895,
+      "output_tokens": 38,
+      "wall_seconds": 0.37568507296964526
+    }
+  ],
+  "process": {
+    "run_id": "application-v25-short-b1-r1",
+    "processes": [
+      {
+        "run_id": "application-v25-short-b1-r1",
+        "phase": 0,
+        "exit_code": 0,
+        "process_wall_seconds": 7.44622392905876
+      },
+      {
+        "run_id": "application-v25-short-b1-r1",
+        "phase": 1,
+        "exit_code": 0,
+        "process_wall_seconds": 4.619935262016952
+      },
+      {
+        "run_id": "application-v25-short-b1-r1",
+        "phase": 2,
+        "exit_code": 0,
+        "process_wall_seconds": 5.832659436855465
+      },
+      {
+        "run_id": "application-v25-short-b1-r1",
+        "phase": 3,
+        "exit_code": 0,
+        "process_wall_seconds": 6.1749942088499665
+      },
+      {
+        "run_id": "application-v25-short-b1-r1",
+        "phase": 4,
+        "exit_code": 0,
+        "process_wall_seconds": 7.357011327985674
+      }
+    ],
+    "separate_subprocesses": 5,
+    "process_wall_seconds": 31.43082416476682
+  },
+  "analysis_only_store_reads": 10,
+  "file_bytes": {
+    "trace.jsonl": 741516,
+    "phase-2-result.json": 2677,
+    "phase-0-result.json": 1120,
+    "instrumentation.sqlite": 184320,
+    "phase-3-result.json": 6487,
+    "message-capacity.json": 678,
+    "phase-1-result.json": 626,
+    "checkpoints.sqlite": 323584,
+    "operator-memory.json": 4856,
+    "business-journal.json": 4997,
+    "runtime-identity.json": 513,
+    "phase-progress.json": 10957,
+    "business-world.sqlite": 36864,
+    "phase-4-result.json": 3178
+  },
+  "artifact_sha256": {
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/trace.jsonl": "2bd49aa920c2eab7776b9d8d30fbd70672bf0fd6d7331a1efaaad7e3e540506c",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/phase-2-result.json": "307f064d402130ba33b1ed0be0b9a45a5c00e568d5f69c6558912dffe10818e9",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/phase-0-result.json": "0f86774a6cc9695f9b9b806832bc5884649302b8d1244e289f93a2358552d3e4",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/instrumentation.sqlite": "979114baecae96f7ac2fa14b3e744c906c632c6ab13ef8820e1304dc495315f1",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/phase-3-result.json": "61ba0417236285261de82b79deeeb160602a4ccf3b0fb8fdbcd5ca6102c7e9f7",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/message-capacity.json": "0761d7d59e7a967685c6a88908ae915d768cff82ba891a30feff8d927b8c57bf",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/phase-1-result.json": "1c14f6ddcc3c81b2f0e513e4817a9841c54f3b7255620ab95dc6be5b4a2aa42b",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/checkpoints.sqlite": "3dcdf69782c2e2c0902c96adb6ca96dd3dfc08359b66d8803f36c504c568564d",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/operator-memory.json": "f305ca9d371c75584733c06812b7d44f9f9f19567427f633e8c37335b6826375",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/business-journal.json": "3c6e533b869c95f3e749f466c0ea4afe29c2e2381333fc97c135c59774434f37",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/runtime-identity.json": "c4cf8a657b3ce4e3350c9856e94c5fd21e415b3d9baddc054d14f36e0c8df924",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/phase-progress.json": "b0cb66bfe8a931df95c81df284de6098ec8f4298946dd8c6dc1b324e74949df2",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/business-world.sqlite": "07abf8a7f99b03b32017014481747827930438ede84de6bb6ec1a5f33d218d92",
+    "artifacts/application-v25/application-v25-short-b1-r1/runtime/phase-4-result.json": "54d4a9c5783e647ccec234af7614a366624c5ce215d9b66c6ab8d8fbd075a463"
+  },
+  "rubric_read_by_runner": false,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}
