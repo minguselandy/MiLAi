@@ -1,0 +1,89 @@
+{
+  "kind": "MILAI_NEXT_C1_STRUCTURAL_EQUIVALENCE",
+  "old_commit": "5dc024d3b277915709556af4e3eee4e1e64f06f1",
+  "new_source_identity_delta": {
+    "added": {
+      "src/milai_lab/runners/local_state_attention.py": "5da7475deb4179849f23e36d5103ab54be354d8285e2c30f5887fed172c3a16b"
+    },
+    "changed": {
+      "pyproject.toml": {
+        "new": "3667e8475e7ecde11f33bcf2dd986249d881d28ea3bcc1a8faa02b4251e125b0",
+        "old": "1b836d0e87c82263b691cd6e93376e9cc25b80c1d340a2c825bb23b11cdf4383"
+      },
+      "tools/run_local_state_attention.py": {
+        "new": "8c89875d1b20f8b1cf3236408bbb4a6e653bcecc6c732c0dc077cfce8a369a9f",
+        "old": "0d7783372e73afec32863273f1ff9801e42466db61e7e0e82425b193ee778bf7"
+      }
+    },
+    "new_count": 147,
+    "old_commit": "5dc024d3b277915709556af4e3eee4e1e64f06f1",
+    "old_count": 146,
+    "removed": {}
+  },
+  "comparison": "Complete parsed HTTP payloads including JSON key and candidate order; not raw HTTP byte equality. In-memory ordered serialization compared during execution; stored normalized JSON compared bytewise afterwards.",
+  "normalized_values": [
+    "case temporary root",
+    "wall_seconds",
+    "wall_ns",
+    "cpu_ns"
+  ],
+  "fixed_values": [
+    "same ordered uuid4 sequence",
+    "mock request IDs"
+  ],
+  "separate_source_identity": true,
+  "local_runtime": "MockTransport; real local SQLite checkpoint and synthetic business-world SQLite; InMemoryStore; no shared Postgres or real model service",
+  "cases": [
+    {
+      "control_cap": 13,
+      "host_capacity_case": false,
+      "equal_normalized_files": true,
+      "normalized_file_sha256": "626071fee9fd7677ec9d886a6e972fa2c7ded4612ad096dc9d0b2e7c6f6003ee",
+      "host_calls": 3,
+      "control_calls": 8,
+      "pending_count": 0,
+      "terminal_status": "TERMINAL",
+      "message_count": 2,
+      "business_attempt_count": 1,
+      "reservation_count": 1
+    },
+    {
+      "control_cap": 1,
+      "host_capacity_case": false,
+      "equal_normalized_files": true,
+      "normalized_file_sha256": "56d52afcbe3bd792e556224023d2731a389b1e87c496f00b36a337f431175f31",
+      "host_calls": 3,
+      "control_calls": 2,
+      "pending_count": 2,
+      "terminal_status": "TERMINAL",
+      "message_count": 2,
+      "business_attempt_count": 1,
+      "reservation_count": 1
+    },
+    {
+      "control_cap": 13,
+      "host_capacity_case": true,
+      "equal_normalized_files": true,
+      "normalized_file_sha256": "92e1188b3e33ab324c4b43928331fef3be9b43ff7cd2f5f8bda91800a358f36b",
+      "host_calls": 12,
+      "control_calls": 13,
+      "pending_count": 8,
+      "terminal_status": "TERMINAL_WITH_LOCAL_CAPACITY_FAILURE",
+      "message_count": 1,
+      "business_attempt_count": 0,
+      "reservation_count": 0
+    }
+  ],
+  "checks": {
+    "before_targeted": 25,
+    "after_targeted": 25,
+    "related_lsa_application": 80,
+    "after_unused_alias_removal": 11,
+    "target_ruff": "PASS",
+    "target_mypy": "PASS",
+    "matrix_and_boundaries": "PASS",
+    "final_packaging": "external publication receipt after document freeze"
+  },
+  "real_generation_calls": 0,
+  "real_embedding_calls": 0
+}
