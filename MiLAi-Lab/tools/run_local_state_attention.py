@@ -21,7 +21,7 @@ from milai_lab.runners.langmem_application import run_phase
 from milai_lab.runners.langmem_application_runtime import open_application_runtime
 
 LAB = Path(__file__).resolve().parents[1]
-ARMS = ("b1_control", "local_state")
+ARMS = ("b1_control", "local_state", "local_all")
 SOURCE_PATHS = (*sorted(
     str(path.relative_to(LAB)) for path in (LAB / "src/milai_lab").rglob("*.py")
 ), "tools/run_local_state_attention.py", "pyproject.toml")
@@ -166,7 +166,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                                       args.runtime_root, args.stage,
                                       enable_projection=False) as runtime:
             controller = None
-            if args.arm == "local_state":
+            if args.arm in {"local_state", "local_all"}:
                 host = runtime.model.client
                 original_emit = host.emit
 
@@ -195,7 +195,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                         max_calls_per_message=settings["max_calls_per_message"])
                     try:
                         result = run_phase(script, args.runtime_root, args.run, args.arm,
-                                           args.phase, runtime, controller)
+                                           args.phase, runtime, controller,
+                                           local_state_read_policy=(
+                                               "all" if args.arm == "local_all" else "focus"))
                     finally:
                         control_emit({"event": "lsa_store_stats", "phase": args.phase,
                                       "operations": bank.store_stats()})

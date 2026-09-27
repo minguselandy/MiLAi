@@ -25,7 +25,10 @@ def _source_id(thread_id: str, position: int, message: BaseMessage) -> str:
 
 
 def make_pre_model_hook(controller: LocalStateController,
-                        system_prompt: str) -> Any:
+                        system_prompt: str, read_policy: str = "focus") -> Any:
+    if read_policy not in {"focus", "all"}:
+        raise ValueError("LSA_READ_POLICY_UNKNOWN")
+
     def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
         cfg = config["configurable"]
         scope = StateScope(cfg["foundation_run_id"], cfg["arm_id"], cfg["user_id"])
@@ -68,14 +71,19 @@ def make_pre_model_hook(controller: LocalStateController,
         public_index = sum(isinstance(message, HumanMessage) for message in messages) - 1
         result = controller.prepare(scope, *latest_user,
                                     message_key=f"{thread_id}:{public_index}")
-        selected = set(result["focus"])
-        states = [row for row in controller.bank.states(scope) if row["id"] in selected]
+        controller_focus = result["focus"]
+        states = controller.bank.states(scope)
+        if read_policy == "focus":
+            selected = set(controller_focus)
+            states = [row for row in states if row["id"] in selected]
         pending = controller.bank.pending(scope)
         view = _render_view(states, pending)
         if controller.emit is not None:
             controller.emit({"event": "lsa_view", "message_key":
                              f"{thread_id}:{public_index}", "user_id": scope.user_id,
-                             "focus": result["focus"], "states": states,
+                             "focus": controller_focus, "controller_focus": controller_focus,
+                             "delivered_state_ids": [row["id"] for row in states],
+                             "read_policy": read_policy, "states": states,
                              "pending_source_ids": [row["id"] for row in pending],
                              "degraded": result["degraded"], "view": view})
         prompt = system_prompt + ("\n" + view if view else "")
@@ -93,7 +101,7 @@ def _render_view(states: list[dict[str, Any]], pending: list[dict[str, Any]]) ->
             "Current user and tool messages below remain authoritative observations.] "]
     for state in states:
         rows.append(json.dumps({key: state[key] for key in (
-            "id", "title", "content", "needs", "evidence_refs", "revision")},
+            "title", "content", "needs", "evidence_refs")},
             ensure_ascii=False))
     if pending:
         rows.append("Unprocessed current observations; stored States may not incorporate them:")

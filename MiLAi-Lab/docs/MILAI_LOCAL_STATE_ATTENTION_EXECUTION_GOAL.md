@@ -34,8 +34,8 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 
 | 阶段/工作包 | 必须交付的证据 | 当前状态 |
 | --- | --- | --- |
-| P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | R2 实际 decoder/manifest/独立计费正常；仍需补实际删除血缘与内部Store读计量 |
-| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R2 完成12消息，任务9/12、完整业务1/2；存在状态污染/焦点/Host参数错误，方法未通过 |
+| P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | R3 补全机械依赖与实际Store计量；真实授权删除链仍待独立验证 |
+| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R3 原任务5/12、新增1/2，完整业务0/2；状态污染/读取与Host参数错误仍在，R4匹配读取对照已冻结 |
 | P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | R1四断点12方法+3诊断完成；State值影响输出，来源直送有用，维护/独立Host错误未闭合 |
 | P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | 未运行；初始建议 6 情景×3 臂×2 重复，调用前固定 |
 | P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | 未运行，遵循进入条件 |
@@ -156,6 +156,19 @@ R3切片已完成13项窄测、目标ruff/mypy及一次必要build，三脚本/t
 源码仅改bank/controller、原runner计量和窄测，Host/render/config未动；构建哈希见协议。
 机械依赖不进入模型输入，旧记录unknown依赖会导致授权删除时保守多删；正常no-op不写入/
 不增版本。每phase的finally汇总实际get/search/put/delete次数、耗时及逻辑字节，历史不回填。
+
+[R3实际结果](MILAI_LOCAL_STATE_ATTENTION_P1_R3_RESULTS_20260927.md)保留六phase全部结果，
+原轨迹5/12、新增用户报告1/2；空focus导致已保存信息不可用，空memory搜索仍被写成业务结果。
+交错组合达到原12次Host容量，末消息跳过并留在分母；两条原完整业务均未通过。
+停止来源合同措辞微调。累计983生成 /1184433生成tokens /10575 embedding tokens。
+实际Store操作已计量，所有六张末State含程序依赖；真实授权删除链尚未执行。
+
+[R4协议](../data/manifests/local-state-attention-p1-r4-protocol.json)固定三原脚本×两臂×一次完整
+运行，全量读取local_all与原focus读取local_state共享R3控制器和调用频率。共同移除Host
+临时视图内部ID/revision，保留控制输入/Store/trace；不同时改变Host业务合同或工具schema。
+这是暴露样本的端到端读取诊断，不是固定bank实验或P3的完整G/L/LRU比较。
+29项相关测试、最后16项LSA测试、目标静态检查、六个/tmp零模型prepare及一次必要build通过；
+不为发布重复检查。正式prepare在源码发布后，完整六轨迹过程中源码冻结。
 
 ## 后期资源准备记录
 

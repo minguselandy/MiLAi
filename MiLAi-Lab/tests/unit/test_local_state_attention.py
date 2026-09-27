@@ -26,6 +26,7 @@ from milai_lab.methods.local_state_attention.controller import (
     LocalStateController,
     control_schema,
 )
+from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import langmem_application_runtime as app_runtime
@@ -213,6 +214,15 @@ def test_hook_preserves_checkpoint_and_partial_tool_json(tmp_path: Path) -> None
     assert bank.pending(state_scope) == []
     assert len(bank.states(state_scope)) == 1
     assert any(view["event"] == "lsa_view" and view["states"] for view in views)
+    state_id = bank.states(state_scope)[0]["id"]
+    assert all(state_id not in wire["messages"][0]["content"]
+               for wire in wires if wire["response_format"]["json_schema"]["name"] ==
+               "langmem_json_action_v1")
+    assert all('"revision"' not in wire["messages"][0]["content"]
+               for wire in wires if wire["response_format"]["json_schema"]["name"] ==
+               "langmem_json_action_v1")
+    assert any(view["states"][0]["id"] == state_id
+               for view in views if view["event"] == "lsa_view" and view["states"])
     control_wire = wires[0]
     user_event = json.loads(control_wire["messages"][1]["content"])["new_observations"][0]
     assert user_event["kind"] == "user" and user_event["actor"] == "alice"
@@ -234,6 +244,85 @@ def test_hook_preserves_checkpoint_and_partial_tool_json(tmp_path: Path) -> None
     assert "Local State working view" in host_wires[0]["messages"][0]["content"]
     assert any(row["role"] == "tool" and "reserved_label_failed" in row["content"]
                for row in host_wires[1]["messages"])
+
+
+def test_all_and_focus_read_same_bank_without_extra_control_or_host_id_leak(
+    tmp_path: Path,
+) -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "local_state", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "seed"})
+    receipts, invalid = bank.apply(scope, [
+        {"id": None, "title": "First matter", "content": "first fact"},
+        {"id": None, "title": "Second matter", "content": "second fact"},
+    ], {"seed"}, query_source_id="seed")
+    assert not invalid
+    first_id, second_id = (row["id"] for row in receipts)
+    control_payloads: list[dict[str, Any]] = []
+    views: list[dict[str, Any]] = []
+
+    class FocusControl:
+        def chat(self, messages: Any, **_kwargs: Any) -> dict[str, Any]:
+            control_payloads.append(json.loads(messages[1]["content"]))
+            return {"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({
+                "edits": [], "focus": [first_id]})}}]}
+
+    controller = LocalStateController(bank, FocusControl(), emit=views.append)  # type: ignore[arg-type]
+    host_wires: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        host_wires.append(json.loads(request.read()))
+        return _response({"answer": "done"}, len(host_wires))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock"),
+                    transport=httpx.MockTransport(respond)) as host:
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            model = VLLMChatModel(client=host)
+            for read_policy in ("focus", "all"):
+                agent = build_agent(model, store, saver,
+                                    local_state_controller=controller,
+                                    local_state_read_policy=read_policy)
+                invoke_public_message(agent, model, FoundationScope(
+                    "run", "local_state", "alice", read_policy), "Current task")
+            assert len(host_wires) == 2 and len(control_payloads) == 2
+            focus_wire, all_wire = host_wires
+            assert "First matter" in focus_wire["messages"][0]["content"]
+            assert "Second matter" not in focus_wire["messages"][0]["content"]
+            assert "First matter" in all_wire["messages"][0]["content"]
+            assert "Second matter" in all_wire["messages"][0]["content"]
+            assert [wire["messages"][1]["content"] for wire in host_wires] == [
+                "Current task", "Current task"]
+            assert all(first_id not in wire["messages"][0]["content"] and
+                       second_id not in wire["messages"][0]["content"] and
+                       '"revision"' not in wire["messages"][0]["content"]
+                       for wire in host_wires)
+            assert all({row["id"] for row in payload["states"]} == {first_id, second_id}
+                       and all(row["revision"] == 1 for row in payload["states"])
+                       for payload in control_payloads)
+            delivered = [view for view in views if view["event"] == "lsa_view"]
+            assert [(view["read_policy"], view["focus"],
+                     view["controller_focus"], view["delivered_state_ids"])
+                    for view in delivered] == [
+                        ("focus", [first_id], [first_id], [first_id]),
+                        ("all", [first_id], [first_id], sorted([first_id, second_id]))]
+            assert all(all("revision" in row and "id" in row for row in view["states"])
+                       for view in delivered)
+
+            class RejectFullBank:
+                enable_thinking = None
+
+                def check(self, messages: Any, *_args: Any) -> Any:
+                    assert "Second matter" in messages[0]["content"]
+                    raise CapacityExceeded({"context_tokens": 1})
+
+            host.capacity = RejectFullBank()  # type: ignore[assignment]
+            agent = build_agent(model, store, saver, local_state_controller=controller,
+                                local_state_read_policy="all")
+            with pytest.raises(CapacityExceeded):
+                invoke_public_message(agent, model, FoundationScope(
+                    "run", "local_state", "alice", "full-over-capacity"), "Current task")
+            assert len(host_wires) == 2 and len(control_payloads) == 3
 
 
 def test_closed_path_keeps_first_wire(tmp_path: Path) -> None:
@@ -318,8 +407,9 @@ def test_control_schema_rejects_r1_missing_title_and_factual_focus() -> None:
     assert bank.states(scope)[0]["revision"] == 1
 
 
+@pytest.mark.parametrize("arm", ["local_state", "local_all"])
 def test_runtime_explicitly_disables_ser_for_local_state(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str,
 ) -> None:
     def forbidden(*_args: Any, **_kwargs: Any) -> Any:
         raise AssertionError("SER projection must remain off")
@@ -350,7 +440,7 @@ def test_runtime_explicitly_disables_ser_for_local_state(
               "embedding": {"base_url": "http://mock/v1/", "model": "mock"},
               "capacity": {}, "embedding_dimension": 3}
     with app_runtime.open_application_runtime(
-        config, "run", "local_state", tmp_path, "mock", enable_projection=False,
+        config, "run", arm, tmp_path, "mock", enable_projection=False,
     ) as runtime:
         assert runtime.model.projection is None
 
@@ -445,8 +535,10 @@ def test_deleted_checkpoint_source_does_not_reenter_state_or_host_view(
         "new allowed source"]
 
 
+@pytest.mark.parametrize("arm,read_policy", [
+    ("local_state", "focus"), ("local_all", "all")])
 def test_cli_local_state_path_reuses_application_runner_without_ser(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, read_policy: str,
 ) -> None:
     from milai_lab.methods.freshness_projection.identity import LAB
 
@@ -469,7 +561,7 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         "control": {"max_tokens": 100, "max_states": 4, "max_events": 8,
                     "max_pending_batch": 4, "max_calls_per_message": 2}}))
     root = tmp_path / "runtime"
-    args = SimpleNamespace(config=config, script=script, run="mock-run", arm="local_state",
+    args = SimpleNamespace(config=config, script=script, run="mock-run", arm=arm,
                            repeat=0, runtime_root=root, output=tmp_path / "prepared.json",
                            prepared=tmp_path / "prepared.json", phase=0, stage="mock")
     entry.prepare(args)
@@ -497,10 +589,11 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         yield SimpleNamespace(model=SimpleNamespace(client=host), store=InMemoryStore(),
                               checkpointer=object(), observer=object())
 
-    def phase(*args_: Any) -> dict[str, Any]:
+    def phase(*args_: Any, **kwargs: Any) -> dict[str, Any]:
         assert isinstance(args_[-1], LocalStateController)
         called.append(args_[-1].client.config.max_tokens)
-        args_[-1].bank.record_event(StateScope("mock-run", "local_state", "alice"), {
+        called.append(kwargs["local_state_read_policy"])
+        args_[-1].bank.record_event(StateScope("mock-run", arm, "alice"), {
             "id": "source", "kind": "user", "content": "hello"})
         return {"status": "TERMINAL"}
 
@@ -508,7 +601,7 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     monkeypatch.setattr(entry, "VLLMClient", FakeClient)
     monkeypatch.setattr(entry, "run_phase", phase)
     assert entry.run(args)["status"] == "TERMINAL"
-    assert called == [False, 100]
+    assert called == [False, 100, read_policy]
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
     assert manifest["identity"]["rubric_read_by_runner"] is False

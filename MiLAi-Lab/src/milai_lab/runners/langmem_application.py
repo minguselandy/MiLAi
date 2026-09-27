@@ -245,7 +245,8 @@ def _operator_memory_event(event: dict[str, Any], run_id: str, arm_id: str,
 
 def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               phase_id: int, runtime: ApplicationRuntime,
-              local_state_controller: LocalStateController | None = None) -> dict[str, Any]:
+              local_state_controller: LocalStateController | None = None,
+              local_state_read_policy: str = "focus") -> dict[str, Any]:
     """Run one frozen phase; the next invocation reopens every process-owned resource."""
     phase = script["phases"][phase_id]
     if phase["id"] != phase_id:
@@ -297,7 +298,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                                     _business_tools(world, user_id),
                                     business_call_wrapper=journal,
                                     observer=runtime.observer,
-                                    local_state_controller=local_state_controller)
+                                    local_state_controller=local_state_controller,
+                                    local_state_read_policy=local_state_read_policy)
                 agents[user_id] = agent
             pending = progress["pending_message"] == message_id
             progress["pending_message"] = message_id

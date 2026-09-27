@@ -1,0 +1,334 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P1_R3_RESULTS",
+  "status": "COMPLETE_WITH_SEMANTIC_FAILURES",
+  "runs": [
+    {
+      "run_id": "lsa-p1-interleaved-r3",
+      "source_commit": "70bb5c59cd86455903d0425c9e3f67ff26cb84b1",
+      "messages": [
+        {
+          "message_id": "brief",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "foreground",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "background-revision",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "restore-background",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "combined-action",
+          "status": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+        },
+        {
+          "message_id": "retained-third",
+          "status": "SKIPPED_AFTER_LOCAL_CAPACITY"
+        }
+      ],
+      "task_strict_passed": 3,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 18,
+          "tokens": 33738,
+          "wall_seconds": 36.194971170742065
+        },
+        "task_host": {
+          "actual_http": 17,
+          "tokens": 25310,
+          "wall_seconds": 6.9331437409855425
+        },
+        "embedding": {
+          "actual_http": 13,
+          "tokens": 162,
+          "wall_seconds": 0.4394864337518811
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 414,
+          "failures": 0,
+          "cpu_ns": 184995096,
+          "wall_ns": 264131335,
+          "request_bytes": 72699,
+          "result_bytes": 45390
+        },
+        "search": {
+          "calls": 180,
+          "failures": 0,
+          "cpu_ns": 111804885,
+          "wall_ns": 170830977,
+          "request_bytes": 20268,
+          "result_bytes": 528969
+        },
+        "put": {
+          "calls": 80,
+          "failures": 0,
+          "cpu_ns": 117597348,
+          "wall_ns": 238456314,
+          "request_bytes": 55326,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "states": {
+          "records": 3,
+          "logical_value_bytes": 4080
+        },
+        "events": {
+          "records": 18,
+          "logical_value_bytes": 6087
+        },
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 137
+        }
+      },
+      "state_count": 3,
+      "states_with_private_dependency": 3,
+      "degraded_views": 0,
+      "empty_views": 5,
+      "pending_events": 0,
+      "world_attempts": {},
+      "evidence_sha256": {
+        "run_manifest.json": "9cf65ccb1cea9d23f44af45183fbe77049bad612f523632a5afb462f8de1f31f",
+        "trace.jsonl": "1a75fee75d621039f6103208df1881832a2f4df64e6a752b630e7b358a0def90",
+        "phase-0-result.json": "d4b35e06afbd15f90628812b54daa2387e2627c4192c0059b060662b2dfd1f8a",
+        "phase-1-result.json": "bcaa9e6e79757afa2d2e6255ed19b6638912f60b25328f103cc48e82033c3523",
+        "phase-0-store-snapshot.json": "6f8a6273e842037556956f62d99e771bd16a96e98e286bce1b6b9b8345735356",
+        "phase-1-store-snapshot.json": "b0df05d590b06512345f587dc0661a76c07724b339d0f006613acfe82e12a3da"
+      }
+    },
+    {
+      "run_id": "lsa-p1-partial-r3",
+      "source_commit": "70bb5c59cd86455903d0425c9e3f67ff26cb84b1",
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED"
+        }
+      ],
+      "task_strict_passed": 2,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 10,
+          "tokens": 10773,
+          "wall_seconds": 12.923854838591069
+        },
+        "task_host": {
+          "actual_http": 10,
+          "tokens": 10031,
+          "wall_seconds": 4.757602500729263
+        },
+        "embedding": {
+          "actual_http": 1,
+          "tokens": 9,
+          "wall_seconds": 0.03376381518319249
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 80,
+          "failures": 0,
+          "cpu_ns": 149466001,
+          "wall_ns": 174479812,
+          "request_bytes": 12960,
+          "result_bytes": 10202
+        },
+        "search": {
+          "calls": 100,
+          "failures": 0,
+          "cpu_ns": 47979911,
+          "wall_ns": 85595898,
+          "request_bytes": 10860,
+          "result_bytes": 124951
+        },
+        "put": {
+          "calls": 37,
+          "failures": 0,
+          "cpu_ns": 11292294,
+          "wall_ns": 62993121,
+          "request_bytes": 21222,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "states": {
+          "records": 2,
+          "logical_value_bytes": 1985
+        },
+        "events": {
+          "records": 10,
+          "logical_value_bytes": 4569
+        },
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 170
+        }
+      },
+      "state_count": 2,
+      "states_with_private_dependency": 2,
+      "degraded_views": 0,
+      "empty_views": 3,
+      "pending_events": 0,
+      "world_attempts": {
+        "reserve_and_label": 2
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "29a22c32afdd1510d775b545c06a8d7096874378489f03a5ff51b0042b8ff1a9",
+        "trace.jsonl": "3b002cf4ff5e8d98c715f96a92cad04b918585c7e079dbdc84125b5310fb1d54",
+        "phase-0-result.json": "3cdf336e5d38e85bb720606132e96767058cfff8bacce8672a6ce467e4f14f13",
+        "phase-1-result.json": "ef948dac327e208212105065386ac4c603844c46966aa8d3ec9952568035a8b9",
+        "phase-0-store-snapshot.json": "24e6844ede64bc6ae9c162afef2f537c76d286034194b3de56be97a82c68e341",
+        "phase-1-store-snapshot.json": "c9f34d8bad0505de47dff6d7186c43c7faccb54585262114a34757d902594922"
+      }
+    },
+    {
+      "run_id": "lsa-p1-user-report-r3",
+      "source_commit": "70bb5c59cd86455903d0425c9e3f67ff26cb84b1",
+      "messages": [
+        {
+          "message_id": "reported-past-event",
+          "status": "COMPLETED"
+        },
+        {
+          "message_id": "restore-reported-event",
+          "status": "COMPLETED"
+        }
+      ],
+      "task_strict_passed": 1,
+      "task_denominator": 2,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 3,
+          "tokens": 2185,
+          "wall_seconds": 1.3473181296139956
+        },
+        "task_host": {
+          "actual_http": 3,
+          "tokens": 2270,
+          "wall_seconds": 1.0910239242948592
+        },
+        "embedding": {
+          "actual_http": 1,
+          "tokens": 10,
+          "wall_seconds": 0.03139082109555602
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 18,
+          "failures": 0,
+          "cpu_ns": 11965241,
+          "wall_ns": 20707598,
+          "request_bytes": 2905,
+          "result_bytes": 1700
+        },
+        "search": {
+          "calls": 30,
+          "failures": 0,
+          "cpu_ns": 14582974,
+          "wall_ns": 28296430,
+          "request_bytes": 3348,
+          "result_bytes": 17616
+        },
+        "put": {
+          "calls": 10,
+          "failures": 0,
+          "cpu_ns": 3332875,
+          "wall_ns": 19639744,
+          "request_bytes": 4508,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "states": {
+          "records": 1,
+          "logical_value_bytes": 424
+        },
+        "events": {
+          "records": 3,
+          "logical_value_bytes": 1090
+        },
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 68
+        }
+      },
+      "state_count": 1,
+      "states_with_private_dependency": 1,
+      "degraded_views": 0,
+      "empty_views": 2,
+      "pending_events": 0,
+      "world_attempts": {},
+      "evidence_sha256": {
+        "run_manifest.json": "49f418ce0d9596d432d29739f331865fe869dabbb003ad70f55c7dad53edb74a",
+        "trace.jsonl": "91ba371e665cf1d845fc92b1a5824d2e41bb9ec5eb317cf7c5daf6abb6a2b433",
+        "phase-0-result.json": "53c625b28217e93476467b455bd54c1e220be2986fa5ac70dd0863a72d3a7886",
+        "phase-1-result.json": "ee799ae2179c2b26de0755d6fd77fd757cf20d9898a6f41bbe0870f0f6f11c1c",
+        "phase-0-store-snapshot.json": "3eebd696a40b8d75216752964b87b1e14e4ca796a35b85a2e4c06e8236c6983d",
+        "phase-1-store-snapshot.json": "c837737f5d785bc109b6d540785b3ee64f7e262ab6498e0198d56aba1c6277fb"
+      }
+    }
+  ],
+  "original_task_score": {
+    "passed": 5,
+    "total": 12
+  },
+  "additional_control_score": {
+    "passed": 1,
+    "total": 2
+  },
+  "whole_original_trajectories": {
+    "passed": 0,
+    "total": 2
+  },
+  "whole_additional_trajectories": {
+    "passed": 0,
+    "total": 1
+  },
+  "generation_delta": {
+    "calls": 61,
+    "tokens": 84307
+  },
+  "embedding_delta": {
+    "calls": 15,
+    "tokens": 181
+  },
+  "continuous_budget": {
+    "generation_requests": 983,
+    "generation_tokens": 1184433,
+    "embedding_tokens": 10575
+  },
+  "decision": "Stop wording-only controller refinements. Freeze matched all-bank vs joint-focus read strategies; common removal of internal State IDs from Host view; no Host business/schema change."
+}

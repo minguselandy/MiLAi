@@ -108,6 +108,7 @@ def build_agent(
     memory_tools: Sequence[BaseTool] | None = None,
     system_prompt: str = SYSTEM_PROMPT,
     local_state_controller: LocalStateController | None = None,
+    local_state_read_policy: str = "focus",
 ) -> Any:
     """Use upstream tool schema and instructions without a local memory policy."""
     tools = [
@@ -148,7 +149,8 @@ def build_agent(
         model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
         prompt=prompt if local_state_controller is None else None,
-        pre_model_hook=(make_pre_model_hook(local_state_controller, prompt)
+        pre_model_hook=(make_pre_model_hook(local_state_controller, prompt,
+                                            read_policy=local_state_read_policy)
                         if local_state_controller is not None else None),
         store=store,
         checkpointer=checkpointer,

@@ -1,0 +1,123 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P1_R4_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_PUBLICATION",
+  "source_change": "Matched local_all/focus read policy with unchanged R3 controller; both arms remove internal State id/revision from temporary Host view only.",
+  "basis": [
+    "docs/MILAI_LOCAL_STATE_ATTENTION_P1_R3_RESULTS_20260927.md",
+    "docs/MILAI_LOCAL_STATE_ATTENTION_P2_R1_RESULTS_20260927.md"
+  ],
+  "run_order": [
+    {
+      "run_id": "lsa-p1-interleaved-local_all-r4",
+      "arm": "local_all",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p1-interleaved-local_state-r4",
+      "arm": "local_state",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p1-partial-local_state-r4",
+      "arm": "local_state",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p1-partial-local_all-r4",
+      "arm": "local_all",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p1-user-report-local_all-r4",
+      "arm": "local_all",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-user-report-control.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p1-user-report-local_state-r4",
+      "arm": "local_state",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-user-report-control.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-interleaved-workshop.json": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63",
+    "data/diagnostics/local_state_attention/p1-user-report-control.json": "ec9140a6c7ba3a9d984bdeafe48e07291e0d1657f8fe2af3790869a6cac90aaf",
+    "data/diagnostics/local_state_attention/p1-r3-additional-rubric.json": "4b3b0b7ce5cf8d4ecd2635159688b0988d1ef43ba5455c620c775cf55f731e6a"
+  },
+  "original_messages": 24,
+  "additional_control_messages": 4,
+  "original_trajectory_denominator": 4,
+  "additional_trajectory_denominator": 2,
+  "split": "development; all scripts exposed; one matched diagnostic repetition, not stable efficacy",
+  "http_concurrency": 1,
+  "host_max_tokens": 4096,
+  "controller_max_tokens": 2048,
+  "host_calls_per_public_message": 12,
+  "controller_calls_per_public_message": 13,
+  "no_vllm_changes": true,
+  "no_rubric_runtime": true,
+  "new_namespaces_checkpoints_worlds": true,
+  "each_phase_new_process": true,
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 983,
+    "generation_tokens": 1184433,
+    "embedding_tokens": 10575
+  },
+  "stop_rule": "Complete all six frozen trajectories, retaining semantic/capacity failures. Stop only on infrastructure or deterministic execution-invalidity. No further wording-only controller tuning; after review choose simplification or separated read/maintenance only from observed first breakpoints.",
+  "source_freeze": "Actual published SHA/identity via runner prepare",
+  "validation": {
+    "affected_tests_before_final_parameter_case": 29,
+    "lsa_tests_after_final_parameter_case": 16,
+    "target_ruff": "PASS",
+    "target_mypy": "PASS",
+    "diff_check": "PASS",
+    "prepare_six_script_arm_pairs": "PASS zero-model in /tmp using prior runtime config for entry validation only",
+    "wire_checks": "all/focus delivery differs as declared; same control call count; no State id/revision in Host; controller/trace retain them; capacity rejection before HTTP",
+    "build": {
+      "sdist_sha256": "b509407a86adcaef0b506c1c5caa732f8f5dc9118d519c615bdd9932cb43e7ba",
+      "wheel_sha256": "e0d44a969c2736d3f4ab85fe3d96cb7a0fe4e2b5f06b02f6c4b76858e61fb352"
+    },
+    "real_model_calls": 0
+  },
+  "read_policies": {
+    "local_state": "unchanged joint controller focus",
+    "local_all": "all actual bank States sorted by stable id; joint controller still computes focus; no silent clipping"
+  },
+  "causal_limits": [
+    "Two-arm online system trajectories can diverge; this is not a fixed-bank intervention.",
+    "Both arms share Host view ID/revision removal; R3-to-R4 differences do not isolate read policy.",
+    "One repetition and exposed fixtures cannot establish stable or unseen efficacy."
+  ]
+}
