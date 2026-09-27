@@ -14,8 +14,9 @@ import httpx
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.protocol import (
     ControlResponseError as ControlResponseError,
+)
+from milai_lab.methods.local_state_attention.protocol import (
     control_prompt,
-    control_schema as control_schema,
     event_view,
     parse_control_response,
     parse_json_response,
@@ -23,6 +24,9 @@ from milai_lab.methods.local_state_attention.protocol import (
     selection_schema,
     state_directory,
     state_view,
+)
+from milai_lab.methods.local_state_attention.protocol import (
+    control_schema as control_schema,
 )
 
 if TYPE_CHECKING:
