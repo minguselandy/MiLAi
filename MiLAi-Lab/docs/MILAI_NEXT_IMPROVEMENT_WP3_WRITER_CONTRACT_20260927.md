@@ -1,6 +1,6 @@
 # WP3：共同记忆操作与写入责任
 
-状态：C3a共同能力本地工程验收通过；C3b角色配方、输入和真实实验未冻结、未运行。
+状态：C3a首次实际core CI失败已完成本地最小导入修复，修复远端结果待验；C3b未冻结/运行。
 本切片基于C2 `93cb3e9cb405c97d52bc807b54f532b2a5b489f3`，分支
 `feat/lab-memory-writer-probe-20260927`。执行范围见[当前记录](MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md)。
 Root负责协议、合成材料与裁判；Sol唯一负责源码；Astra仅解决下述具体跨层设计冲突，
@@ -90,3 +90,25 @@ Observed：统一工具能力可经实际集成执行，但完整角色编排仍
 合理CRUD/续接途径。首断点是接口能力和编排覆盖，而不是已证明的模型语义改进。
 H1责任分散与H2消费生成两解释仍待固定前态比较；通用候选是薄编排，不建新协调模型。
 决定Continue，先独立提交共同能力，再完成最小角色与动作续接接线。
+
+## 首次发布后的实际CI失败
+
+[PR55](https://github.com/minguselandy/MiLAi/pull/55)初始head
+`bd5b4acb50a37b84cdcf87b4fcfab7b4b699faa5`，
+[Fast36331279476](https://github.com/minguselandy/MiLAi/actions/runs/36331279476)
+测试merge `22a4fc671c57a45df50e3fae6e7725a17798c04f`。core job108653618424在
+收集test_lsa_controller_contract时失败，最终gate108653861882失败；foundation/external成功
+不能替代它。首断点为controller.py顶层BaseTool可选依赖导入，core不安装langchain_core。
+
+H1新runtime import破坏纯协议加载边界；H2实际core依赖/测试归属缺失。旧71项测试
+明确不依赖可选LangGraph包，且此前C1/C2同core已通过，所以修复H1，不给core加依赖、
+跳过测试或全局屏蔽。先将类型导入移TYPE_CHECKING，仅writer提案使用时加载转换函数。
+初次本地检查遗漏了受该顶层导入影响的core 71项，foundation环境掩盖依赖问题；
+补该真实环境必要检查，原失败完整保留。修复后的实际远端结果另列，不改写原head为成功。
+
+修复本地结果：controller只改导入位置，SHA
+`fb94a4710cd2f6f6a1142377b323c0424ecf31fde62347e5270d431701b148d0`。
+真实干净core执行71项纯协议全部通过；foundation Writer 7 passed/72 deselected。
+目标Ruff/Mypy、147活动源码/22 core直接/39 foundation显式的矩阵及diff通过。
+中间Ruff导入分组空行提示已修并保留记录。修复无额外模型/embedding或本地构建，
+后续实际CI按新head验收；原bd5b4ac失败记录继续保留。

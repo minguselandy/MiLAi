@@ -13,8 +13,6 @@ from typing import TYPE_CHECKING, Any
 
 import httpx
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
-from langchain_core.tools import BaseTool
-from langchain_core.utils.function_calling import convert_to_openai_tool
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.protocol import (
@@ -35,6 +33,8 @@ from milai_lab.methods.local_state_attention.protocol import (
 )
 
 if TYPE_CHECKING:
+    from langchain_core.tools import BaseTool
+
     from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
     from milai_lab.methods.local_state_attention.writers import WriterProposalContext
     from milai_lab.providers.contextual_vllm import VLLMClient
@@ -207,6 +207,8 @@ class LocalStateController:
     def propose_writes(self, context: WriterProposalContext,
                        allowed_tools: Sequence[BaseTool]) -> dict[str, Any]:
         """Generate a tool proposal from actual scoped observations; execute nothing."""
+        from langchain_core.utils.function_calling import convert_to_openai_tool
+
         if not context.message_key or not allowed_tools:
             raise ValueError("LSA_WRITER_PROPOSAL_CONTEXT_INVALID")
         catalog = [convert_to_openai_tool(tool)["function"] for tool in allowed_tools]
