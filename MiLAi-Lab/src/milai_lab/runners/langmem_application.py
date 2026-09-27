@@ -21,7 +21,9 @@ from milai_lab.baselines.langmem_agent import (
     invoke_or_resume_public_message,
 )
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import LocalStateController
+from milai_lab.methods.local_state_attention.history import HistoryAccess
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
 from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
 
@@ -247,7 +249,9 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               phase_id: int, runtime: ApplicationRuntime,
               local_state_controller: LocalStateController | None = None,
               local_state_read_policy: str = "focus",
-              source_view_max_bytes: int | None = None) -> dict[str, Any]:
+              source_view_max_bytes: int | None = None,
+              history_mode: str | None = None,
+              history_page_max_bytes: int | None = None) -> dict[str, Any]:
     """Run one frozen phase; the next invocation reopens every process-owned resource."""
     phase = script["phases"][phase_id]
     if phase["id"] != phase_id:
@@ -262,8 +266,12 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
         return cast(dict[str, Any], read_json(result_path))
     if phase_id != progress["next_phase"]:
         raise ValueError("APPLICATION_PHASE_OUT_OF_ORDER")
+    if history_mode not in {None, "full", "tool"}:
+        raise ValueError("APPLICATION_HISTORY_MODE_INVALID")
     world = ApplicationWorld(root / "business-world.sqlite",
                              script["initial_label_available"])
+    history_bank = (local_state_controller.bank if local_state_controller is not None else
+                    LocalStateBank(runtime.store)) if history_mode is not None else None
     try:
         for event in phase["operator_memory"]:
             _operator_memory_event(event, run_id, arm_id, root, runtime)
@@ -295,13 +303,34 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
             scope = FoundationScope(run_id, arm_id, user_id, "application:" + session)
             agent = agents.get(user_id)
             if agent is None:
+                history = None
+                if history_mode is not None:
+                    assert history_bank is not None and history_page_max_bytes is not None
+
+                    def checkpoint_for(old_session: str, owner: str = user_id) -> Any:
+                        return agents[owner].get_state(FoundationScope(
+                            run_id, arm_id, owner, "application:" + old_session).config())
+
+                    def thread_id_for(old_session: str, owner: str = user_id) -> str:
+                        return str(FoundationScope(
+                            run_id, arm_id, owner, "application:" + old_session
+                        ).config()["configurable"]["thread_id"])
+
+                    history = HistoryAccess(
+                        root, StateScope(run_id, arm_id, user_id), history_bank,
+                        get_state=checkpoint_for,
+                        thread_id_for_session=thread_id_for,
+                        page_max_bytes=history_page_max_bytes,
+                        emit=runtime.model.client.emit)
                 agent = build_agent(runtime.model, runtime.store, runtime.checkpointer,
                                     _business_tools(world, user_id),
                                     business_call_wrapper=journal,
                                     observer=runtime.observer,
                                     local_state_controller=local_state_controller,
                                     local_state_read_policy=local_state_read_policy,
-                                    source_view_max_bytes=source_view_max_bytes)
+                                    source_view_max_bytes=source_view_max_bytes,
+                                    history_access=history,
+                                    full_history=history_mode == "full")
                 agents[user_id] = agent
             pending = progress["pending_message"] == message_id
             progress["pending_message"] = message_id
@@ -319,6 +348,9 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                     "business_calls": journal.calls_for_thread(
                         scope.config()["configurable"]["thread_id"]),
                 }
+                if history_mode is not None:
+                    progress["messages"][message_id]["visited_ordinal"] = len(
+                        progress["messages"]) - 1
                 progress["blocked_sessions"].append(session_key)
                 progress["next_indices"][session_key] = public_index + 1
                 progress["pending_message"] = None
@@ -334,6 +366,9 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                 "business_calls": journal.calls_for_thread(
                     scope.config()["configurable"]["thread_id"]),
             }
+            if history_mode is not None:
+                progress["messages"][message_id]["visited_ordinal"] = len(
+                    progress["messages"]) - 1
             progress["next_indices"][session_key] = public_index + 1
             progress["pending_message"] = None
             write_json(progress_path, progress)
@@ -352,3 +387,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
         return result
     finally:
         world.close()
+        if history_mode is not None and local_state_controller is None and history_bank is not None:
+            if runtime.model.client.emit is not None:
+                runtime.model.client.emit({"event": "lsa_history_store_stats",
+                                           "phase": phase_id,
+                                           "operations": history_bank.store_stats()})

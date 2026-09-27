@@ -13,7 +13,7 @@ from typing import Any, cast
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 from langchain_core.embeddings import Embeddings
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
-from langchain_core.tools import BaseTool
+from langchain_core.tools import BaseTool, tool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.checkpoint.sqlite import SqliteSaver
@@ -28,7 +28,14 @@ from langmem import (  # type: ignore[import-untyped]
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.methods.local_state_attention.controller import LocalStateController
-from milai_lab.methods.local_state_attention.integration import make_pre_model_hook
+from milai_lab.methods.local_state_attention.history import (
+    HISTORY_TOOL_DESCRIPTION,
+    HistoryAccess,
+)
+from milai_lab.methods.local_state_attention.integration import (
+    make_full_history_hook,
+    make_pre_model_hook,
+)
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel
 
@@ -110,6 +117,8 @@ def build_agent(
     local_state_controller: LocalStateController | None = None,
     local_state_read_policy: str = "focus",
     source_view_max_bytes: int | None = None,
+    history_access: HistoryAccess | None = None,
+    full_history: bool = False,
 ) -> Any:
     """Use upstream tool schema and instructions without a local memory policy."""
     selected_memory_tools: Sequence[BaseTool]
@@ -120,7 +129,23 @@ def build_agent(
     else:
         native_manage = None
         selected_memory_tools = memory_tools
-    tools = [*selected_memory_tools, *business_tools]
+    history_tools: list[BaseTool] = []
+    if history_access is not None:
+        @tool("read_history", description=HISTORY_TOOL_DESCRIPTION)
+        def read_history(cursor: int = 0, max_bytes: int | None = None) -> str:
+            try:
+                result = history_access.page(cursor, max_bytes)
+            except ValueError as error:
+                if str(error) not in {"HISTORY_CURSOR_INVALID", "HISTORY_CURSOR_OUT_OF_RANGE",
+                                      "HISTORY_PAGE_BUDGET_INVALID"}:
+                    raise
+                result = {"status": str(error), "records": []}
+            return json.dumps(result, ensure_ascii=False)
+
+        history_tools.append(read_history)
+    if full_history and history_access is None:
+        raise ValueError("HISTORY_ACCESS_MISSING")
+    tools = [*selected_memory_tools, *history_tools, *business_tools]
     parameter_schemas = {
         tool.name: convert_to_openai_tool(tool)["function"]["parameters"]
         for tool in tools
@@ -162,11 +187,13 @@ def build_agent(
     return create_react_agent(
         model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
-        prompt=prompt if local_state_controller is None else None,
+        prompt=prompt if local_state_controller is None and not full_history else None,
         pre_model_hook=(make_pre_model_hook(local_state_controller, prompt,
                                             read_policy=local_state_read_policy,
                                             source_view_max_bytes=source_view_max_bytes)
-                        if local_state_controller is not None else None),
+                        if local_state_controller is not None else
+                        make_full_history_hook(history_access, prompt)
+                        if full_history and history_access is not None else None),
         store=store,
         checkpointer=checkpointer,
         version="v1",

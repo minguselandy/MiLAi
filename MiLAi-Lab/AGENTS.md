@@ -75,6 +75,16 @@ checkpoint APIs, with equal access and I/O/accounting for matched arms; bank use
 alone are not complete assistant history. Keep remaining strong summaries/rebuild/ablations,
 native tasks, scale/model and lifecycle obligations open; no new archive database or Product work.
 
+The [common-history protocol](data/manifests/local-state-attention-history-wiring-r1-protocol.json)
+freezes four exposed trajectories/24 messages: full_history and local_lr_history share read_history,
+which expands their matched tool contract. Full history uses public scoped checkpoints with final
+assistant/tool chains, chronological visited turns and one current prefix; no State controller.
+LR keeps its maintenance/A and may read the same history on demand. Past capacity-failed prefixes
+remain labeled data; owner tombstones conservatively suppress history, not physical erasure.
+71 affected checks, target static checks, four zero-model prepares and one offline build passed.
+Root freezes after publication and runs all four serially, with full costs and failures retained.
+No source changes during the batch or publication-only test repetition; remaining LSA work stays open.
+
 The user activated the full [long-horizon master plan](docs/MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md),
 tracked by [the execution Goal](docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md).
 This supersedes prior closed-stage restrictions for the new research scope; preserve their

@@ -48,6 +48,25 @@ P3 的建议规模与后期 3–5 次重复在各阶段冻结前按方差/资源
 完整历史、滑动窗口+摘要、强工作笔记/统一短维护器必须进入相关强基线判定；
 B1/Mem0 系统对照与表示/注意力消融分开，不用被动 B1 代表全部 LangMem 能力。
 
+原规划§15.2的覆盖按真实机制逐项区分，不能把fixture中出现过词语当实现完成：
+
+| 项 | 现有输入/证据 | 仍未闭合 |
+| --- | --- | --- |
+| 1 多事项交错/相似对象 | P1 interleaved、P3 shared/conflict | 局部分组仍可能退化为综合卡 |
+| 2 前台不变/后台变化 | P1 background-revision及新session恢复 | 跨模板独立收益未证实 |
+| 3 局部与共享更新 | P3 shared-scope/high-coupling | 多State原子共享更新组未实现 |
+| 4 适用范围变而正文部分不变 | P3 shared-scope的indoor修订 | 最终方法跨模板比较待做 |
+| 5 值/metadata/无关变化 | P3 same-value-confirmation和独立briefing | 保持失败保留；不是鲁棒性完成 |
+| 6 新建/归档/重新打开 | P3 reopen-history | 已测语义关闭/重开，未实现真正archived生命周期 |
+| 7 部分失败/未知/维护滞后 | P1/R5/P3/LR真实部分预约与同ID恢复 | 未知结果仍需独立实际边界验证 |
+| 8 跨会话和独立进程 | 两phase原脚本及P3批次 | 只证明相应小轨迹，不是长期规模可靠性 |
+| 9 历史查询和当前执行 | P3 conflict/reopen-history | 强完整历史/滑窗/重建接口尚待交付 |
+| 10 错误/缺项State遇新证据 | P2交换诊断、Host snapshot R2 | 后者只读且失败；在线状态纠正及A6未完成 |
+| 11 当前来源冲突与权威 | P3 conflicting-sources | 保留混合结果，不能用时间/rank作权威 |
+| 12 高耦合反例 | P3 high-coupling与events-only修复三臂6/6 | 新distinct-event反例仍失败；非密度曲线 |
+
+上述历史结果按各自冻结提交解释，不要求当前源码重新匹配所有旧锁；原始36轨迹没有重跑。
+
 ## 实现与验证不变量
 
 - 复用 BaseStore 独立 owner namespace；程序拥有 ID/revision，模型不生成 UUID/hash。
@@ -346,6 +365,19 @@ LR17次实际全候选维护且0次U，L/LR维护prompt和LR/LRU的A prompt核�
 下一最小源码为所有匹配臂共同可用的合法历史接口及完整历史对照，复用公开checkpoint、
 记录I/O/字节/时延；bank.events仅user/tool不能冒充含assistant的完整历史。不新增私有observer
 档案或数据库。滑窗摘要、R、U=A、生命周期与公开任务等剩余项仍需后续实现/冻结/验收。
+
+[共同历史小接线协议](../data/manifests/local-state-attention-history-wiring-r1-protocol.json)先固定
+原两脚本×full_history/local_lr_history，共4轨迹24消息，源码已完成验证，尚未调用本批模型。
+两新臂共同注册read_history，机械cursor/16384字节整回合分页；这会增加相同工具枚举分支，
+不再称旧B1原工具合同。full_history不调用State控制器，自动提供完整真实既往会话与当前
+前缀，超限由原HostCapacity显式记录，不另设隐藏字节截断；LR历史臂保留原维护/A，按需读取。
+已发生但容量失败的过去前缀保留实际副作用与不完整状态，不补造ToolMessage。已有owner
+tombstone则统一保守抑制新增历史读取/投影，其他owner不受影响；仍不声称物理删除完成。
+Root源码放行范围限共同历史接口及这两臂，不同时实现滑窗摘要/R/U=A，不生成新公开样本。
+71项受影响窄测、目标Ruff/Mypy/diff、四个/tmp零模型prepare和一次离线build通过；
+构建哈希及命令见协议。full_history从公开checkpoint保留final assistant和完整工具链，
+容量失败前缀以带实际序号的数据呈现；原消息不改写。新增Host prompt tokens及checkpoint
+读取逻辑字节/CPU/墙钟计量。源码发布后正式prepare，四轨迹保持同一源码；不为发布重跑。
 
 已核对 [LangMem 官方 API](https://langchain-ai.github.io/langmem/reference/) 确实区分
 memory manager、store manager 与普通 tools；强基线不能只代表后者。

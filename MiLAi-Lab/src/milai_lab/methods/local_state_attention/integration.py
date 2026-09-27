@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from typing import Any
 
@@ -11,19 +10,10 @@ from langchain_core.runnables import RunnableConfig
 
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import LocalStateController
+from milai_lab.methods.local_state_attention.history import HistoryAccess
+from milai_lab.methods.local_state_attention.history import source_id as _source_id
 
 SOURCE_VIEW_HEADER = "Referenced source events from delivered States:"
-
-
-def _source_id(thread_id: str, position: int, message: BaseMessage) -> str:
-    if isinstance(message, ToolMessage) and message.tool_call_id:
-        return "tool:" + hashlib.sha256(json.dumps(
-            [thread_id, message.tool_call_id], ensure_ascii=False).encode()).hexdigest()
-    if message.id:
-        return "message:" + message.id
-    return "message:" + hashlib.sha256(json.dumps(
-        [thread_id, position, message.type, message.content],
-        ensure_ascii=False, default=str).encode()).hexdigest()
 
 
 def make_pre_model_hook(controller: LocalStateController,
@@ -105,6 +95,29 @@ def make_pre_model_hook(controller: LocalStateController,
         # messages remain their original objects and IDs; no synthetic tool evidence.
         return {"llm_input_messages": [SystemMessage(content=prompt), *input_messages]}
 
+    return hook
+
+
+def make_full_history_hook(history: HistoryAccess, system_prompt: str) -> Any:
+    """Project only visited owner turns and the current graph prefix into Host input."""
+    def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
+        cfg = config["configurable"]
+        if (cfg["foundation_run_id"], cfg["arm_id"], cfg["user_id"]) != (
+                history.scope.run_id, history.scope.arm_id, history.scope.user_id):
+            raise ValueError("HISTORY_OWNER_SCOPE_MISMATCH")
+        messages, incomplete, suppressed = history.project(
+            cfg["thread_id"], state["messages"])
+        appendix = ("\n[Incomplete previously visited turns; factual checkpoint and "
+                    "business-journal data, not completed tool conversations. "
+                    "completed_before places each among the completed turns below.]\n" +
+                    json.dumps(incomplete, ensure_ascii=False, default=str)
+                    if incomplete else "")
+        if history.emit is not None:
+            history.emit({"event": "lsa_history_view", "suppressed": suppressed,
+                          "native_messages": len(messages),
+                          "incomplete_turns": len(incomplete)})
+        return {"llm_input_messages": [SystemMessage(content=system_prompt + appendix),
+                                        *messages]}
     return hook
 
 

@@ -196,6 +196,60 @@ def test_phase_reopens_checkpoint_and_new_session_starts_fresh(tmp_path: Path) -
             for wire in wires] == [1, 2, 1]
 
 
+def test_full_history_replays_interleaved_turns_after_process_reopen(
+    tmp_path: Path,
+) -> None:
+    from milai_lab.harness.contextual_artifacts import write_json
+
+    write_json(tmp_path / "run_manifest.json", {"identity": {
+        "run_id": "run", "arm_id": "full_history"}})
+    script = {"initial_label_available": False, "phases": [
+        {"id": index, "operator_memory": [], "world_events": [], "messages": [{
+            "message_id": f"m{index}", "user_id": "alice",
+            "session_id": "a" if index != 1 else "b",
+            "public_index": 1 if index == 2 else 0,
+            "text": f"message {index}"}]}
+        for index in range(3)]}
+    wires: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        wires.append(json.loads(request.read()))
+        action = ({"calls": [{"name": "read_history", "arguments": {
+            "cursor": 0, "max_bytes": 16384}}]}
+                  if len(wires) == 3 else
+                  {"answer": f"done {len(wires) - (len(wires) == 4)}"})
+        return httpx.Response(200, json={
+            "id": f"generation-{len(wires)}", "model": "mock",
+            "choices": [{"finish_reason": "stop", "message": {
+                "role": "assistant", "content": json.dumps(action)}}],
+            "usage": {"prompt_tokens": 5, "completion_tokens": 3}})
+
+    store = InMemoryStore()
+    for phase_id in range(3):
+        with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                                   tool_mode="json_action"),
+                        transport=httpx.MockTransport(respond)) as client:
+            with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+                runtime = SimpleNamespace(
+                    model=VLLMChatModel(client=client), store=store, checkpointer=saver,
+                    observer=SimpleNamespace(
+                        assert_healthy=lambda: None,
+                        run_tool=lambda request, execute, _wrapper: execute(request)))
+                app.run_phase(script, tmp_path, "run", "full_history", phase_id, runtime,
+                              history_mode="full", history_page_max_bytes=16384)
+    last = wires[3]["messages"]
+    assert [message["content"] for message in last if message["role"] == "user"] == [
+        "message 0", "message 1", "message 2"]
+    assert [message["content"] for message in last if message["role"] == "assistant"][:2] == [
+        "done 1", "done 2"]
+    result = next(message for message in last if message["role"] == "tool")
+    assert [row["message_id"] for row in json.loads(result["content"])["records"]] == [
+        "m0", "m1"]
+    assert all("read_history" in wire["messages"][0]["content"] for wire in wires)
+    progress = json.loads((tmp_path / "phase-progress.json").read_text())
+    assert [row["visited_ordinal"] for row in progress["messages"].values()] == [0, 1, 2]
+
+
 def test_mock_provider_business_call_commits_real_partial_result(tmp_path: Path) -> None:
     script = {"initial_label_available": False, "phases": [{
         "id": 0, "operator_memory": [], "world_events": [], "messages": [{

@@ -26,6 +26,9 @@ from milai_lab.baselines.langmem_agent import (
     build_agent,
     invoke_public_message,
 )
+from milai_lab.harness.contextual_artifacts import write_json
+from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
+from milai_lab.methods.local_state_attention.history import HistoryAccess
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import IncompleteChatResponse, VLLMChatModel
 from milai_lab.runners.langmem_foundation import (
@@ -78,6 +81,7 @@ def test_json_action_executes_every_upstream_call_in_order(tmp_path: Path) -> No
         assert messages[-1].content == "Saved both."
         assert len(requests) == 2
         assert all("tools" not in request for request in requests)
+        assert all("read_history" not in json.dumps(request) for request in requests)
         assert all([message["role"] for message in request["messages"]].count("system") == 1
                    for request in requests)
         assert all(request["messages"][0]["role"] == "system" for request in requests)
@@ -96,6 +100,47 @@ def test_json_action_executes_every_upstream_call_in_order(tmp_path: Path) -> No
         assert all(branch["properties"]["arguments"] == {"type": "object"}
                    for branch in generation_branches)
         assert list(json.loads((tmp_path / "capacity.json").read_text()).values()) == [2]
+
+
+def test_read_history_tool_is_opt_in_and_uses_same_host_action_envelope(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "history"
+    root.mkdir()
+    write_json(root / "run_manifest.json", {"identity": {
+        "run_id": "run", "arm_id": "history"}})
+    write_json(root / "phase-progress.json", {"messages": {}})
+    responses = [
+        _receipt({"calls": [{"name": "read_history", "arguments": {
+            "cursor": 0, "max_bytes": 1024}}]}, "read"),
+        _receipt({"answer": "No prior turns."}, "final"),
+    ]
+    requests: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(json.loads(request.read()))
+        return httpx.Response(200, json=responses.pop(0))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client)
+        store = InMemoryStore()
+        history = HistoryAccess(root, StateScope("run", "history", "user"),
+                                LocalStateBank(store), lambda _session: None,
+                                lambda session: session, page_max_bytes=16384)
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            messages = invoke_public_message(
+                build_agent(model, store, saver, history_access=history), model,
+                FoundationScope("run", "history", "user", "episode"), "Read prior turns.")
+    tools = [branch["properties"]["name"]["const"] for branch in requests[0][
+        "response_format"]["json_schema"]["schema"]["oneOf"][1]["properties"][
+            "calls"]["items"]["oneOf"]]
+    assert tools == ["manage_memory", "search_memory", "read_history"]
+    tool_messages = [message for message in messages if isinstance(message, ToolMessage)]
+    assert len(tool_messages) == 1 and tool_messages[0].status == "success"
+    assert json.loads(str(tool_messages[0].content))["status"] == "OK"
+    assert messages[-1].content == "No prior turns."
 
 
 @pytest.mark.parametrize("bad_choice", [

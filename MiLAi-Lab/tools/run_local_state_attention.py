@@ -28,19 +28,21 @@ READ_POLICIES = {"local_state": "focus", "local_all": "all",
                  "local_all_sources": "all_sources",
                  "global_note_sources": "all_sources",
                  "local_lr_sources": "focus_sources",
+                 "local_lr_history": "focus_sources",
                  "local_lru_sources": "focus_sources"}
-ARMS = ("b1_control", *READ_POLICIES)
+HISTORY_ARMS = {"full_history": "full", "local_lr_history": "tool"}
+ARMS = ("b1_control", *READ_POLICIES, "full_history")
 SHARED_CONTENT_LIMIT_ARMS = {"local_all_sources", "global_note_sources",
-                             "local_lr_sources", "local_lru_sources"}
+                             "local_lr_sources", "local_lr_history", "local_lru_sources"}
 SOURCE_POLICIES = {"all_sources", "focus_sources"}
 EVENTS_ONLY_ARMS = {"global_note_sources", "local_all_sources",
-                    "local_lr_sources", "local_lru_sources"}
+                    "local_lr_sources", "local_lr_history", "local_lru_sources"}
 
 
 def _update_policy(arm: str) -> str:
     if arm == "local_lru_sources":
         return "lru"
-    if arm == "local_lr_sources":
+    if arm in {"local_lr_sources", "local_lr_history"}:
         return "lr"
     return "all"
 
@@ -51,10 +53,10 @@ def _local_granularity(arm: str, config: dict[str, Any]) -> bool:
         raise ValueError("LSA_LOCAL_GRANULARITY_INVALID")
     if arm == "local_lru_sources" and not value:
         raise ValueError("LSA_LRU_REQUIRES_LOCAL_GRANULARITY")
-    if arm == "local_lr_sources" and not value:
+    if arm in {"local_lr_sources", "local_lr_history"} and not value:
         raise ValueError("LSA_LR_REQUIRES_LOCAL_GRANULARITY")
     return value and arm in {"local_all_sources", "local_lr_sources",
-                             "local_lru_sources"}
+                             "local_lr_history", "local_lru_sources"}
 
 
 class ContentLimits(TypedDict):
@@ -126,22 +128,30 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "method": "local_state_attention_p1", "run_id": args.run,
         "arm_id": args.arm, "repeat": args.repeat,
         "read_policy": READ_POLICIES.get(args.arm),
-        "update_policy": _update_policy(args.arm),
+        "update_policy": (_update_policy(args.arm)
+                          if args.arm != "full_history" else None),
         "update_candidate_policy": ("all_existing_without_selector"
-                                    if args.arm == "local_lr_sources" else
+                                    if args.arm in {"local_lr_sources",
+                                                    "local_lr_history"} else
                                     "model_selected_existing"
                                     if args.arm == "local_lru_sources" else None),
         "read_selection_policy": ("independent_after_maintenance"
-                                  if args.arm in {"local_lr_sources",
+                                  if args.arm in {"local_lr_sources", "local_lr_history",
                                                   "local_lru_sources"} else None),
-        "maintenance_input_policy": ("pending_events_candidates_source_ids"
+        "maintenance_input_policy": (None if args.arm == "full_history" else
+                                     "pending_events_candidates_source_ids"
                                      if args.arm in EVENTS_ONLY_ARMS else
                                      "current_task_pending_events_states_source_ids"),
-        "maintenance_response_contract": ("edits_only" if args.arm in EVENTS_ONLY_ARMS
+        "maintenance_response_contract": (None if args.arm == "full_history" else
+                                          "edits_only" if args.arm in EVENTS_ONLY_ARMS
                                           else "edits_and_focus"),
         "creation_policy": ("shared_maintenance_each_pending_batch"
-                            if args.arm in {"local_lr_sources", "local_lru_sources"}
+                            if args.arm in {"local_lr_sources", "local_lr_history",
+                                            "local_lru_sources"}
                             else None),
+        "history_policy": (config.get("history") if args.arm in HISTORY_ARMS else None),
+        "read_history_tool": args.arm in HISTORY_ARMS,
+        "history_auto_projection": args.arm == "full_history",
         "local_granularity": (_local_granularity(args.arm, config)
                               if args.arm in READ_POLICIES else False),
         "representation": ("global_note" if args.arm == "global_note_sources" else
@@ -175,13 +185,20 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
     control_stages: dict[str, dict[str, int]] = {}
     views: list[dict[str, Any]] = []
     store_stats: dict[str, dict[str, int]] = {}
+    history_checkpoint = {"calls": 0, "logical_bytes": 0, "cpu_ns": 0, "wall_ns": 0}
+    history_views: list[dict[str, Any]] = []
     trace_path = root / "trace.jsonl"
     if trace_path.exists():
         for line in trace_path.read_text().splitlines():
             event = json.loads(line)
             if event.get("event") == "lsa_view":
                 views.append(event)
-            if event.get("event") == "lsa_store_stats":
+            if event.get("event") == "lsa_history_view":
+                history_views.append(event)
+            if event.get("event") == "lsa_history_checkpoint_read":
+                for key in history_checkpoint:
+                    history_checkpoint[key] += event.get(key, 0)
+            if event.get("event") in {"lsa_store_stats", "lsa_history_store_stats"}:
                 for operation, values in event["operations"].items():
                     group = store_stats.setdefault(operation, {
                         key: 0 for key in values})
@@ -193,7 +210,11 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
             role = ("embedding" if event.get("path") == "embeddings" else
                     event.get("role", "task_host"))
             group = groups.setdefault(role, {"requests": 0, "known_tokens": 0,
-                                             "unknown_usage": 0, "errors": 0})
+                                             "unknown_usage": 0,
+                                             "known_prompt_tokens": 0,
+                                             "unknown_prompt_usage": 0,
+                                             "capacity_prompt_tokens": 0,
+                                             "errors": 0})
             group["requests"] += 1
             usage = event.get("usage")
             total = usage.get("total_tokens") if isinstance(usage, dict) else None
@@ -201,6 +222,16 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
                 group["known_tokens"] += total
             else:
                 group["unknown_usage"] += 1
+            prompt_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
+            if type(prompt_tokens) is int:
+                group["known_prompt_tokens"] += prompt_tokens
+            else:
+                group["unknown_prompt_usage"] += 1
+            capacity = event.get("capacity")
+            reserved_prompt = (capacity.get("prompt_tokens")
+                               if isinstance(capacity, dict) else None)
+            if type(reserved_prompt) is int:
+                group["capacity_prompt_tokens"] += reserved_prompt
             if event["event"] != "vllm_response":
                 group["errors"] += 1
             stage = event.get("control_stage")
@@ -217,6 +248,8 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
                     stage_group["errors"] += 1
     return {"by_role": groups, "by_control_stage": control_stages,
             "state_views": views,
+            "history_views": history_views,
+            "history_checkpoint_reads": history_checkpoint,
             "local_state_store_stats": store_stats,
             "trace_path": str(trace_path.resolve()),
             "continuous_budget": read_json(budget_path) if budget_path.exists() else None}
@@ -226,6 +259,13 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     config, script = read_json(args.config), _script(args.script)
     if args.arm not in ARMS:
         raise ValueError("LSA_ARM_UNKNOWN")
+    history = config.get("history", {"enabled": False})
+    if (type(history) is not dict or type(history.get("enabled", False)) is not bool
+            or (args.arm in HISTORY_ARMS) != history.get("enabled", False)):
+        raise ValueError("LSA_HISTORY_POLICY_INVALID")
+    if args.arm in HISTORY_ARMS and (type(history.get("page_max_bytes")) is not int
+                                     or history["page_max_bytes"] <= 0):
+        raise ValueError("LSA_HISTORY_PAGE_BUDGET_INVALID")
     if READ_POLICIES.get(args.arm) in SOURCE_POLICIES and (
         type(config.get("source_view_max_bytes")) is not int
         or config["source_view_max_bytes"] <= 0
@@ -317,13 +357,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                                            source_view_max_bytes=(
                                                config["source_view_max_bytes"]
                                                if READ_POLICIES[args.arm] in SOURCE_POLICIES
-                                               else None))
+                                               else None),
+                                           history_mode=HISTORY_ARMS.get(args.arm),
+                                           history_page_max_bytes=(
+                                               config["history"]["page_max_bytes"]
+                                               if args.arm in HISTORY_ARMS else None))
                     finally:
                         control_emit({"event": "lsa_store_stats", "phase": args.phase,
                                       "operations": bank.store_stats()})
             else:
                 result = run_phase(script, args.runtime_root, args.run, args.arm,
-                                   args.phase, runtime)
+                                   args.phase, runtime,
+                                   history_mode=HISTORY_ARMS.get(args.arm),
+                                   history_page_max_bytes=(
+                                       config["history"]["page_max_bytes"]
+                                       if args.arm in HISTORY_ARMS else None))
         manifest["phases"][str(args.phase)] = result["status"]
         manifest["outputs"][str(args.phase)] = str(
             (args.runtime_root / f"phase-{args.phase}-result.json").resolve())

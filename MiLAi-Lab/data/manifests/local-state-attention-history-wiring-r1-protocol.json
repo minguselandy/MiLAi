@@ -1,0 +1,133 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_HISTORY_WIRING_R1_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_SOURCE_PUBLICATION",
+  "scope": "Common legitimate history access plus full-history strong-baseline wiring against LR with the same access. Two already-exposed scripts; no window-summary/R/U=A claim.",
+  "basis": [
+    "docs/MILAI_LOCAL_STATE_ATTENTION_LR_WIRING_R1_RESULTS_20260927.md"
+  ],
+  "run_order": [
+    {
+      "run_id": "lsa-history-wiring-r1-interleaved-full_history",
+      "case": "interleaved",
+      "arm": "full_history",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-history-wiring-r1-interleaved-local_lr_history",
+      "case": "interleaved",
+      "arm": "local_lr_history",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-history-wiring-r1-partial-local_lr_history",
+      "case": "partial",
+      "arm": "local_lr_history",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-history-wiring-r1-partial-full_history",
+      "case": "partial",
+      "arm": "full_history",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-interleaved-workshop.json": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "denominators": {
+    "public_messages": 24,
+    "messages_per_arm": 12,
+    "trajectories": 4,
+    "whole_trajectories_per_arm": 2
+  },
+  "split": "exposed development; one repeat per arm/case",
+  "arm_contracts": {
+    "full_history": "No State controller model calls. Automatically deliver complete real occurred history from public scoped checkpoint interfaces, including assistant final/tool calls/results, plus current actual prefix. Common read_history tool available.",
+    "local_lr_history": "Existing LR events-only full-State maintenance and independent A/source view, with the identical common read_history tool. History only through declared runtime access; no observer trace/gold/future access."
+  },
+  "shared": {
+    "controller_max_tokens": 2048,
+    "controller_calls_per_public_message": 13,
+    "host_max_tokens": 4096,
+    "host_calls_per_public_message": 12,
+    "http_concurrency": 1,
+    "aggregate_content_budget_chars": 16000,
+    "source_view_utf8_budget": 16384,
+    "state_content_chars": 4000,
+    "max_states": 32,
+    "max_events": 256,
+    "history_enabled": true,
+    "history_page_max_bytes": 16384,
+    "full_history_capacity": "Existing HostCapacity on entire actual request; no extra full-history byte truncation limit."
+  },
+  "history_contract": [
+    "Runtime indexes only actually visited public turns/sessions under the current run/arm/user, with actual chronological public-turn ordering across sessions.",
+    "Read final assistant/tool-call/result objects from public checkpoints, not copied progress answer strings or evaluator logs; current tool loop prefix is not duplicated.",
+    "Past capacity-failed prefixes retain actual side effects/status and original messages; do not fabricate completion or ToolMessage to make a chain look complete.",
+    "Both arms share the same mechanical cursor/max_bytes read_history tool and whole-record page budget. It extends a new matched tool schema; original answer/calls envelope and native/business tool semantics remain.",
+    "Owner-scoped checkpoint gets/logical bytes/CPU/wall and actual model usage charged; no new database or second persistent body archive.",
+    "Known tombstone under current owner conservatively suppresses new history tools/projection for that owner, including assistant echoes; other owner unaffected. This is not physical erasure of historical evidence.",
+    "Original checkpoints/raw messages retained; projections affect only actual request copies. No use of other-arm history or future script messages."
+  ],
+  "hypotheses": {
+    "H1": "State maintenance can discard previously available details, while complete legitimate history can recover them when it fits the window; LR benefits must be compared with this strong reference.",
+    "H2": "Failures may persist despite available original facts because Host rewrites keys or misreads current/past intent; full history may also add distraction and cost. Do not treat history accessibility alone as semantic success."
+  },
+  "scoring": "Original p1-rubric full12 messages per arm. Preserve exact item_key/destination/packing, real partial receipt/get found/same-id label recovery, other owner isolation, all failures and skipped messages. Mechanism audit uses actual HTTP/State commits/delivery/real actions, not normal exit.",
+  "mechanism_checks": [
+    "Full-history actual HTTP contains complete declared prior observations/assistant/tool chains and current prefix without duplicate turn injection; trace states any suppressed history or capacity failure.",
+    "Full_history has no hidden State-control generation; LR retains actual maintenance/A accounting.",
+    "Common history tool description/schema and scope/byte rules exactly match across arms; actual tool choices and histories may diverge.",
+    "Validate phase restart, current/other owner separation, real partial reservation and same-id read+label recovery, source/HTTP/write/answer chain."
+  ],
+  "order_rationale": "New full_history first; reverse arm order in second script. No result-dependent ordering.",
+  "isolation": "Fresh run/arm/user State+LangMem namespaces, world/checkpoint/journal; independent phase processes.",
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 2574,
+    "generation_tokens": 3183881,
+    "embedding_tokens": 18337
+  },
+  "source_freeze": "Formal prepare only after source and protocol publication; bind actualsource/input/config/dependencies and freeze through all four trajectories.",
+  "stop_rule": "All semantic/capacity/optional-control failures retain full denominators; stop affected execution on infrastructure/uncaught faults and diagnose before remaining originally planned independent runs. No replay/replacement.",
+  "next_decision": "Retain four complete planned trajectories and all costs; repair only concrete integration faults. Do not wording-tune old semantic misses. Then implement/evaluate required window-summary and rebuild controls plus remaining scoped ablations/lifecycle/native tasks.",
+  "validation": {
+    "source_checks": {
+      "pytest_command": "uv run --no-sync --group baseline-langmem pytest -q tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py tests/unit/test_langmem_foundation.py",
+      "passed": 71,
+      "targeted_ruff": "PASS",
+      "targeted_mypy": "PASS: 6 source files",
+      "git_diff_check": "PASS",
+      "zero_model_prepare": "PASS: original2 scripts x full_history/local_lr_history =4"
+    },
+    "build": {
+      "command": "uv build --offline --out-dir /tmp/milai-lsa-shared-history-dist",
+      "sdist_sha256": "0bf4e4be1201fcd040d9eee4a191a7f9bf0c824942f7433f21d0740962da857a",
+      "wheel_sha256": "6a02f56114d3d3441baa4e82eb2165ce43b22db78e519e0dedda2009f8b95085",
+      "package_contents": "sdist CLI and wheel history.py verified"
+    },
+    "real_model_calls": 0
+  }
+}

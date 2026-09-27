@@ -16,20 +16,23 @@ pytest.importorskip("langmem")
 
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.graph import MessagesState, StateGraph
 from langgraph.store.base import PutOp
 from langgraph.store.memory import InMemoryStore
 
 from milai_lab.baselines.langmem_agent import FoundationScope, build_agent, invoke_public_message
-from milai_lab.harness.contextual_artifacts import Trace
+from milai_lab.harness.contextual_artifacts import Trace, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import (
     CONTROL_STAGE,
     LocalStateController,
     control_schema,
 )
+from milai_lab.methods.local_state_attention.history import HistoryAccess
 from milai_lab.methods.local_state_attention.integration import (
     SOURCE_VIEW_HEADER,
     _source_view,
+    make_full_history_hook,
     make_pre_model_hook,
 )
 from milai_lab.providers.contextual_capacity import CapacityExceeded
@@ -101,6 +104,153 @@ def test_bank_order_noop_pending_scope_and_deletion() -> None:
     bank.delete_scope(alice)
     bank.record_event(alice, {"id": "z", "kind": "user", "content": "first"})
     assert bank.events(alice) == []
+
+
+def test_history_interleaves_completed_turns_and_labels_incomplete_prefix(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "run"
+    root.mkdir()
+    write_json(root / "run_manifest.json", {"identity": {
+        "run_id": "run", "arm_id": "full_history"}})
+    call_a = {"name": "get_reservation", "args": {"item_key": "exact"}, "id": "call-a"}
+    call_b = {"name": "reserve_and_label", "args": {"item_key": "exact"},
+              "id": "call-b"}
+    call_live = {"name": "get_reservation", "args": {}, "id": "call-live"}
+    a_messages = [
+        HumanMessage(id="a1", content="first"), AIMessage(id="a1-final", content="first done"),
+        HumanMessage(id="a2", content="second"),
+        AIMessage(id="a2-call", content="", tool_calls=[call_a]),
+        ToolMessage(id="a2-tool", name="get_reservation", tool_call_id="call-a",
+                    content='{"ok":true}'),
+        AIMessage(id="a2-final", content="second done"),
+        HumanMessage(id="a3", content="current"),
+        AIMessage(id="a3-call", content="", tool_calls=[call_live]),
+        ToolMessage(id="a3-tool", name="get_reservation", tool_call_id="call-live",
+                    content='{"ok":false}')]
+    b_messages = [HumanMessage(id="b1", content="other session"),
+                  AIMessage(id="b1-final", content="other done"),
+                  HumanMessage(id="b2", content="attempted"),
+                  AIMessage(id="b2-call", content="", tool_calls=[call_b])]
+    journal = {"generation_id": "b2-call", "call_id": "call-b",
+               "name": "reserve_and_label", "status": "complete",
+               "result": {"content": '{"ok":false,"reserved":true}',
+                          "tool_call_id": "call-b"}}
+    write_json(root / "phase-progress.json", {"messages": {
+        "a1": {"message_id": "a1", "user_id": "alice", "session_id": "a",
+               "public_index": 0, "status": "COMPLETED", "visited_ordinal": 0},
+        "b1": {"message_id": "b1", "user_id": "alice", "session_id": "b",
+               "public_index": 0, "status": "COMPLETED", "visited_ordinal": 1},
+        "a2": {"message_id": "a2", "user_id": "alice", "session_id": "a",
+               "public_index": 1, "status": "COMPLETED", "visited_ordinal": 2},
+        "b2": {"message_id": "b2", "user_id": "alice", "session_id": "b",
+               "public_index": 1, "status": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+               "visited_ordinal": 3, "business_calls": [journal]},
+        "other": {"message_id": "other", "user_id": "bob", "session_id": "c",
+                  "public_index": 0, "status": "COMPLETED", "visited_ordinal": 4}}})
+    reads: list[str] = []
+    emitted: list[dict[str, Any]] = []
+
+    def get_state(session: str) -> Any:
+        reads.append(session)
+        return SimpleNamespace(values={"messages": {"a": a_messages,
+                                                      "b": b_messages}[session]})
+
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "full_history", "alice")
+    history = HistoryAccess(root, scope, bank, get_state,
+                            lambda session: "thread-" + session,
+                            page_max_bytes=16384, emit=emitted.append)
+    hook = make_full_history_hook(history, "Original system")
+    output = hook({"messages": a_messages}, {"configurable": {
+        "foundation_run_id": "run", "arm_id": "full_history", "user_id": "alice",
+        "thread_id": "thread-a"}})
+    wire = output["llm_input_messages"]
+    assert [message.id for message in wire[1:] if isinstance(message, HumanMessage)] == [
+        "a1", "b1", "a2", "a3"]
+    assert [message.id for message in wire[1:] if isinstance(message, AIMessage)
+            and not message.tool_calls] == ["a1-final", "b1-final", "a2-final"]
+    assert [message.tool_call_id for message in wire[1:]
+            if isinstance(message, ToolMessage)] == ["call-a", "call-live"]
+    assert reads == ["b"]
+    assert "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED" in wire[0].content
+    assert "reserved" in wire[0].content and "b2-call" in wire[0].content
+    assert "call-b" not in [message.tool_call_id for message in wire[1:]
+                            if isinstance(message, ToolMessage)]
+    assert [row["session"] for row in emitted
+            if row["event"] == "lsa_history_checkpoint_read"] == ["b"]
+    first_size = history.page(0, 1)["record_bytes"]
+    first = history.page(0, first_size)
+    assert first["status"] == "OK" and first["next_cursor"] == 1
+    assert first["payload_bytes"] == first_size and first["has_more"]
+    assert history.page(0, 1)["status"] == "RECORD_OVER_PAGE_BUDGET"
+    all_rows = history.page(0)["records"]
+    assert [row["message_id"] for row in all_rows] == ["a1", "b1", "a2", "b2"]
+    assert all_rows[-1]["business_journal_delta"] == [journal]
+    assert all_rows[-1]["messages"][-1]["tool_calls"][0]["id"] == "call-b"
+
+
+def test_history_owner_tombstone_suppresses_only_that_owner(tmp_path: Path) -> None:
+    root = tmp_path / "run"
+    root.mkdir()
+    write_json(root / "run_manifest.json", {"identity": {
+        "run_id": "run", "arm_id": "full_history"}})
+    write_json(root / "phase-progress.json", {"messages": {}})
+    bank = LocalStateBank(InMemoryStore())
+    alice = StateScope("run", "full_history", "alice")
+    bob = StateScope("run", "full_history", "bob")
+    for index in range(70):
+        bank.store.put(alice.namespace("meta"), f"other:{index:03d}", {}, index=False)
+    bank.forget_source(alice, "message:deleted")
+    alice_history = HistoryAccess(root, alice, bank, lambda _session: None,
+                                  lambda session: session, page_max_bytes=16384)
+    bob_history = HistoryAccess(root, bob, bank, lambda _session: None,
+                                lambda session: session, page_max_bytes=16384)
+    assert alice_history.page()["status"] == "SUPPRESSED_OWNER_TOMBSTONE"
+    assert bob_history.page()["status"] == "OK"
+    current = [HumanMessage(id="current", content="current actual request")]
+    assert alice_history.project("thread", current) == (current, [], True)
+    with pytest.raises(ValueError, match="HISTORY_OWNER_SCOPE_MISMATCH"):
+        HistoryAccess(root, StateScope("another", "full_history", "alice"), bank,
+                      lambda _session: None, lambda session: session,
+                      page_max_bytes=16384)
+
+
+def test_history_reads_interleaved_completed_checkpoints_after_reopen(tmp_path: Path) -> None:
+    root = tmp_path / "run"
+    root.mkdir()
+    write_json(root / "run_manifest.json", {"identity": {
+        "run_id": "run", "arm_id": "full_history"}})
+    write_json(root / "phase-progress.json", {"messages": {
+        "a1": {"message_id": "a1", "user_id": "alice", "session_id": "a",
+               "public_index": 0, "status": "COMPLETED", "visited_ordinal": 0},
+        "b1": {"message_id": "b1", "user_id": "alice", "session_id": "b",
+               "public_index": 0, "status": "COMPLETED", "visited_ordinal": 1},
+        "a2": {"message_id": "a2", "user_id": "alice", "session_id": "a",
+               "public_index": 1, "status": "COMPLETED", "visited_ordinal": 2}}})
+    builder = StateGraph(MessagesState)
+    builder.add_node("answer", lambda state: {"messages": [AIMessage(
+        content="answer:" + state["messages"][-1].content)]})
+    builder.set_entry_point("answer")
+    builder.set_finish_point("answer")
+    checkpoint = tmp_path / "checkpoints.sqlite"
+    with SqliteSaver.from_conn_string(str(checkpoint)) as saver:
+        graph = builder.compile(checkpointer=saver)
+        for session, message_id in (("a", "a1"), ("b", "b1"), ("a", "a2")):
+            graph.invoke({"messages": [HumanMessage(id=message_id, content=message_id)]},
+                         config={"configurable": {"thread_id": "thread-" + session}})
+    with SqliteSaver.from_conn_string(str(checkpoint)) as reopened:
+        graph = builder.compile(checkpointer=reopened)
+        history = HistoryAccess(
+            root, StateScope("run", "full_history", "alice"),
+            LocalStateBank(InMemoryStore()),
+            lambda session: graph.get_state({"configurable": {
+                "thread_id": "thread-" + session}}),
+            lambda session: "thread-" + session, page_max_bytes=16384)
+        rows = history.page()["records"]
+    assert [row["message_id"] for row in rows] == ["a1", "b1", "a2"]
+    assert [row["messages"][-1]["content"] for row in rows] == [
+        "answer:a1", "answer:b1", "answer:a2"]
 
 
 def test_shared_aggregate_content_boundary_and_local_unaffected_state() -> None:
@@ -1345,6 +1495,7 @@ def test_deleted_checkpoint_source_does_not_reenter_state_or_host_view(
     ("local_all_sources", "all_sources"),
     ("global_note_sources", "all_sources"),
     ("local_lr_sources", "focus_sources"),
+    ("local_lr_history", "focus_sources"),
     ("local_lru_sources", "focus_sources")])
 def test_cli_local_state_path_reuses_application_runner_without_ser(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, read_policy: str,
@@ -1373,6 +1524,8 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
                     "local_granularity": True}}
     if read_policy in {"all_sources", "focus_sources"}:
         config_value["source_view_max_bytes"] = 16384
+    if arm == "local_lr_history":
+        config_value["history"] = {"enabled": True, "page_max_bytes": 16384}
     config.write_text(json.dumps(config_value))
     root = tmp_path / "runtime"
     args = SimpleNamespace(config=config, script=script, run="mock-run", arm=arm,
@@ -1412,6 +1565,8 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         called.append(args_[-1].update_policy)
         called.append(args_[-1].local_granularity)
         called.append(args_[-1].maintenance_only)
+        called.append(kwargs["history_mode"])
+        called.append(kwargs["history_page_max_bytes"])
         called.append((args_[-1].bank.max_states,
                        args_[-1].bank.max_state_content_chars,
                        args_[-1].bank.max_total_content_chars))
@@ -1425,18 +1580,20 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     assert entry.run(args)["status"] == "TERMINAL"
     expected_limits = ((1, 16000, 16000) if arm == "global_note_sources" else
                        (4, 4000, 16000) if arm in {
-                           "local_all_sources", "local_lr_sources",
+                           "local_all_sources", "local_lr_sources", "local_lr_history",
                            "local_lru_sources"} else
                        (4, 4000, None))
     assert called == [False, 100, read_policy,
                       16384 if read_policy in {"all_sources", "focus_sources"} else None,
                       "global_note" if arm == "global_note_sources" else "local",
                       "lru" if arm == "local_lru_sources" else
-                      "lr" if arm == "local_lr_sources" else "all",
-                      arm in {"local_all_sources", "local_lr_sources",
+                      "lr" if arm in {"local_lr_sources", "local_lr_history"} else "all",
+                      arm in {"local_all_sources", "local_lr_sources", "local_lr_history",
                               "local_lru_sources"},
                       arm in {"global_note_sources", "local_all_sources",
-                              "local_lr_sources", "local_lru_sources"},
+                              "local_lr_sources", "local_lr_history", "local_lru_sources"},
+                      "tool" if arm == "local_lr_history" else None,
+                      16384 if arm == "local_lr_history" else None,
                       expected_limits]
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
@@ -1445,28 +1602,34 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     assert manifest["identity"]["representation"] == (
         "global_note" if arm == "global_note_sources" else "local")
     assert manifest["identity"]["local_granularity"] == (
-        arm in {"local_all_sources", "local_lr_sources", "local_lru_sources"})
+        arm in {"local_all_sources", "local_lr_sources", "local_lr_history",
+                "local_lru_sources"})
     assert manifest["identity"]["update_policy"] == (
         "lru" if arm == "local_lru_sources" else
-        "lr" if arm == "local_lr_sources" else "all")
+        "lr" if arm in {"local_lr_sources", "local_lr_history"} else "all")
     assert manifest["identity"]["update_candidate_policy"] == (
-        "all_existing_without_selector" if arm == "local_lr_sources" else
+        "all_existing_without_selector" if arm in {"local_lr_sources",
+                                                  "local_lr_history"} else
         "model_selected_existing" if arm == "local_lru_sources" else None)
     assert manifest["identity"]["read_selection_policy"] == (
         "independent_after_maintenance" if arm in {
-            "local_lr_sources", "local_lru_sources"} else None)
+            "local_lr_sources", "local_lr_history", "local_lru_sources"} else None)
     assert manifest["identity"]["creation_policy"] == (
         "shared_maintenance_each_pending_batch"
-        if arm in {"local_lr_sources", "local_lru_sources"} else None)
+        if arm in {"local_lr_sources", "local_lr_history", "local_lru_sources"} else None)
     assert manifest["identity"]["maintenance_input_policy"] == (
         "pending_events_candidates_source_ids" if arm in {
             "global_note_sources", "local_all_sources", "local_lr_sources",
-            "local_lru_sources"} else
+            "local_lr_history", "local_lru_sources"} else
         "current_task_pending_events_states_source_ids")
     assert manifest["identity"]["maintenance_response_contract"] == (
         "edits_only" if arm in {"global_note_sources", "local_all_sources",
-                                "local_lr_sources", "local_lru_sources"} else
+                                "local_lr_sources", "local_lr_history",
+                                "local_lru_sources"} else
         "edits_and_focus")
+    assert manifest["identity"]["read_history_tool"] == (arm == "local_lr_history")
+    assert manifest["identity"]["history_policy"] == (
+        config_value.get("history") if arm == "local_lr_history" else None)
     assert manifest["identity"]["effective_content_limits"] == dict(zip(
         ("max_states", "max_state_content_chars", "max_total_content_chars"),
         expected_limits, strict=True))
@@ -1477,6 +1640,62 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     trace = [json.loads(line) for line in (root / "trace.jsonl").read_text().splitlines()]
     assert [event["event"] for event in trace] == ["lsa_store_stats"]
     assert trace[0]["operations"] == store_stats
+
+
+def test_cli_full_history_uses_no_state_controller_and_requires_opt_in(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.freshness_projection.identity import LAB
+
+    monkeypatch.syspath_prepend(str(LAB / "tools"))
+    import run_local_state_attention as entry
+
+    script = tmp_path / "script.json"
+    script.write_text(json.dumps({
+        "kind": "MILAI_LOCAL_STATE_ATTENTION_SCRIPT", "script_id": "mock",
+        "users": ["alice"], "initial_label_available": True,
+        "phases": [{"id": 0, "operator_memory": [], "world_events": [],
+                    "messages": [{"message_id": "m0", "user_id": "alice",
+                                  "session_id": "main", "public_index": 0,
+                                  "text": "hello"}]}]}))
+    config = tmp_path / "config.json"
+    config_value = {"host": {"base_url": "http://mock/v1/", "model": "mock"},
+                    "embedding": {"base_url": "http://mock/v1/", "model": "mock"},
+                    "capacity": {}, "budget_path": str(tmp_path / "budget.json"),
+                    "control": {"max_states": 4}}
+    config.write_text(json.dumps(config_value))
+    root = tmp_path / "runtime"
+    args = SimpleNamespace(config=config, script=script, run="mock-run",
+                           arm="full_history", repeat=0, runtime_root=root,
+                           output=tmp_path / "prepared.json",
+                           prepared=tmp_path / "prepared.json", phase=0, stage="mock")
+    with pytest.raises(ValueError, match="LSA_HISTORY_POLICY_INVALID"):
+        entry.prepare(args)
+    config_value["history"] = {"enabled": True, "page_max_bytes": 16384}
+    config.write_text(json.dumps(config_value))
+    entry.prepare(args)
+    called: list[Any] = []
+
+    @contextmanager
+    def runtime(*_args: Any, **kwargs: Any) -> Any:
+        called.append(kwargs["enable_projection"])
+        yield SimpleNamespace(model=SimpleNamespace(client=SimpleNamespace(emit=None)),
+                              store=InMemoryStore(), checkpointer=object(), observer=object())
+
+    def phase(*args_: Any, **kwargs: Any) -> dict[str, Any]:
+        assert len(args_) == 6
+        called.extend([kwargs["history_mode"], kwargs["history_page_max_bytes"]])
+        return {"status": "TERMINAL"}
+
+    monkeypatch.setattr(entry, "open_application_runtime", runtime)
+    monkeypatch.setattr(entry, "run_phase", phase)
+    assert entry.run(args)["status"] == "TERMINAL"
+    assert called == [False, "full", 16384]
+    manifest = json.loads((root / "run_manifest.json").read_text())
+    assert manifest["identity"]["history_auto_projection"] is True
+    assert manifest["identity"]["read_history_tool"] is True
+    assert manifest["identity"]["maintenance_input_policy"] is None
+    assert manifest["identity"]["update_policy"] is None
 
 
 def test_missing_aggregate_setting_preserves_existing_local_capacity(
@@ -1510,19 +1729,27 @@ def test_lru_accounting_preserves_total_role_and_substage_cost(
 
     events = [
         {"event": "vllm_response", "role": "state_control",
-         "control_stage": "update_selector", "usage": {"total_tokens": 11}},
+         "control_stage": "update_selector",
+         "usage": {"total_tokens": 11, "prompt_tokens": 7},
+         "capacity": {"prompt_tokens": 7}},
         {"event": "vllm_response", "role": "state_control",
-         "control_stage": "maintenance", "usage": {"total_tokens": 17}},
+         "control_stage": "maintenance",
+         "usage": {"total_tokens": 17, "prompt_tokens": 10},
+         "capacity": {"prompt_tokens": 10}},
         {"event": "vllm_error", "role": "state_control",
          "control_stage": "read_selector", "usage": None},
         {"event": "vllm_response", "role": "task_host",
-         "usage": {"total_tokens": 23}},
+         "usage": {"total_tokens": 23, "prompt_tokens": 18},
+         "capacity": {"prompt_tokens": 18}},
     ]
     (tmp_path / "trace.jsonl").write_text("".join(
         json.dumps(row) + "\n" for row in events))
     accounting = entry._accounting(tmp_path, tmp_path / "missing-budget.json")
     assert accounting["by_role"]["state_control"] == {
-        "requests": 3, "known_tokens": 28, "unknown_usage": 1, "errors": 1}
+        "requests": 3, "known_tokens": 28, "unknown_usage": 1,
+        "known_prompt_tokens": 17, "unknown_prompt_usage": 1,
+        "capacity_prompt_tokens": 17, "errors": 1}
     assert accounting["by_control_stage"]["read_selector"] == {
         "requests": 1, "known_tokens": 0, "unknown_usage": 1, "errors": 1}
     assert accounting["by_role"]["task_host"]["known_tokens"] == 23
+    assert accounting["by_role"]["task_host"]["known_prompt_tokens"] == 18

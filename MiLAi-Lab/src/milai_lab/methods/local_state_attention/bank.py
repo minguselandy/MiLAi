@@ -277,6 +277,22 @@ class LocalStateBank:
     def is_forgotten(self, scope: StateScope, source_id: str) -> bool:
         return self._get(scope, "meta", self._tombstone_key(source_id)) is not None
 
+    def has_forgotten_sources(self, scope: StateScope) -> bool:
+        """Conservatively gate history when this owner has any source tombstone."""
+        offset = 0
+        while True:
+            def search_page(current_offset: int = offset) -> Any:
+                return self.store.search(scope.namespace("meta"), limit=64,
+                                         offset=current_offset)
+
+            rows = self._access("search", search_page,
+                {"namespace": scope.namespace("meta"), "limit": 64, "offset": offset})
+            if any(row.key.startswith("forgotten:") for row in rows):
+                return True
+            if len(rows) < 64:
+                return False
+            offset += len(rows)
+
     def _forget_identity(self, scope: StateScope, source_id: str) -> None:
         self._put(scope, "meta", self._tombstone_key(source_id), {"forgotten": True})
 
