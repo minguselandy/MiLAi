@@ -1,0 +1,1161 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_MAINTENANCE_EVENTS_R1_RESULTS",
+  "source_commit": "5640a93071af3abdbc816fa914e5f60969364a03",
+  "runs": [
+    {
+      "run_id": "lsa-maintenance-events-r1-coupled-global_note_sources",
+      "case": "coupled",
+      "arm": "global_note_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "joint-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "all-changed",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "no-change-read",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "blocked-combination",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "local-resolution",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "passed": 6,
+      "total": 6,
+      "whole_pass": true,
+      "judgment": {
+        "failed": {},
+        "reviewed_all_messages": true,
+        "mechanism_note": "All requested facts, shared capacity decisions and exact3/4/3 actual reservations correct. One global note records actual reservation IDs."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 9,
+          "tokens": 14183,
+          "wall_seconds": 30.148570265620947
+        },
+        "task_host": {
+          "calls": 9,
+          "tokens": 18881,
+          "wall_seconds": 9.665421210229397
+        },
+        "embedding": {
+          "calls": 2,
+          "tokens": 253,
+          "wall_seconds": 0.4979395060800016
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 9,
+          "tokens": 14183
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 177,
+          "failures": 0,
+          "cpu_ns": 236302571,
+          "wall_ns": 275048787,
+          "request_bytes": 37372,
+          "result_bytes": 29708
+        },
+        "search": {
+          "calls": 83,
+          "failures": 0,
+          "cpu_ns": 50202043,
+          "wall_ns": 99574370,
+          "request_bytes": 12728,
+          "result_bytes": 168503
+        },
+        "put": {
+          "calls": 40,
+          "failures": 0,
+          "cpu_ns": 14796796,
+          "wall_ns": 76069667,
+          "request_bytes": 32764,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 68
+        },
+        "events": {
+          "records": 11,
+          "logical_value_bytes": 5078
+        },
+        "states": {
+          "records": 1,
+          "logical_value_bytes": 2717
+        }
+      },
+      "state_records_per_owner": {
+        "devon": 1
+      },
+      "pending_events": 0,
+      "views": 9,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 38,
+      "source_utf8_bytes": 12450,
+      "tool_only_maintenance_calls": 3,
+      "maintenance_calls": [
+        {
+          "trace_line": 3,
+          "event_ids": [
+            "message:6320b4b0-8b38-4a0e-b8e8-d30166b356ff"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 9,
+          "event_ids": [
+            "message:427aa13a-f381-47ff-8b82-16e06c0ab694"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "7104fc9b18864ee49add8327f3698c9f"
+          ]
+        },
+        {
+          "trace_line": 15,
+          "event_ids": [
+            "tool:df10e0aeef71440e52c05547cc9f3917cdc2bb717109689cf89f89ea756861d1"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "7104fc9b18864ee49add8327f3698c9f"
+          ]
+        },
+        {
+          "trace_line": 21,
+          "event_ids": [
+            "message:18588067-1790-4223-aab2-e89ecf399837"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "7104fc9b18864ee49add8327f3698c9f"
+          ]
+        },
+        {
+          "trace_line": 28,
+          "event_ids": [
+            "message:f1b92266-a763-4a1a-9bea-25fe22aa2a18"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "7104fc9b18864ee49add8327f3698c9f"
+          ]
+        },
+        {
+          "trace_line": 34,
+          "event_ids": [
+            "message:abbf32a3-8e60-4604-821b-afa74c074843"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "7104fc9b18864ee49add8327f3698c9f"
+          ]
+        },
+        {
+          "trace_line": 40,
+          "event_ids": [
+            "tool:d3d5345b893c7cf9db2f1028425d6592a7992ba3be90d925312748777aa2e2fa"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "7104fc9b18864ee49add8327f3698c9f"
+          ]
+        },
+        {
+          "trace_line": 46,
+          "event_ids": [
+            "message:f7ecf134-f11f-48a6-b823-d237385cf2d0"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "7104fc9b18864ee49add8327f3698c9f"
+          ]
+        },
+        {
+          "trace_line": 51,
+          "event_ids": [
+            "tool:134f2b978c25c39856b4d27ab8c48f6017c4e383946204dbde6cccc666b6138f",
+            "tool:e62acd33f1f6294f904ff484057f26138c87f9514ae071d236f576348a3dd719",
+            "tool:9aeb59ce95cbac7a397576bc8bf7b00e970597e6dbcf61361a8da0ab5e7fe2ef"
+          ],
+          "kinds": [
+            "tool",
+            "tool",
+            "tool"
+          ],
+          "candidate_ids": [
+            "7104fc9b18864ee49add8327f3698c9f"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 3
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "439f9a468cfc7adf0459f4284e93f8e179d5443d49185108495a74ef84da050c",
+        "trace.jsonl": "a227efc604ddee57d271e10c21ca3ffaf1f7ccbb589fd56188b363c646cbf90e",
+        "phase-0-result.json": "d950e8d74488464992b81112a4e2293c37a9b6808df87d7741bb49f190212f53",
+        "phase-1-result.json": "ad3907d7161b420020bc63b9638d6a1ae8b4764cba4e204edc3b8806a80796c5",
+        "phase-0-store-snapshot.json": "b61c8643cbcfab7426174784bc93d7a7e82c9c50939297c8950eb438305f93ce",
+        "phase-1-store-snapshot.json": "bd41648883575b04516bb5415c7c885014ce035155fdd81752c9e657d0665db0"
+      }
+    },
+    {
+      "run_id": "lsa-maintenance-events-r1-coupled-local_all_sources",
+      "case": "coupled",
+      "arm": "local_all_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "joint-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "all-changed",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "no-change-read",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "blocked-combination",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "local-resolution",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "passed": 6,
+      "total": 6,
+      "whole_pass": true,
+      "judgment": {
+        "failed": {},
+        "reviewed_all_messages": true,
+        "mechanism_note": "All requested facts and exact actual three actions correct. Final original plan card still says no reservation while separate outcome card contains real receipts plus unnecessary pending confirmation; task success does not imply complete reconciliation."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 10,
+          "tokens": 14338,
+          "wall_seconds": 20.0721543636173
+        },
+        "task_host": {
+          "calls": 10,
+          "tokens": 22966,
+          "wall_seconds": 11.336370626930147
+        },
+        "embedding": {
+          "calls": 3,
+          "tokens": 270,
+          "wall_seconds": 0.10569559503346682
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 10,
+          "tokens": 14338
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 230,
+          "failures": 0,
+          "cpu_ns": 158293918,
+          "wall_ns": 202313158,
+          "request_bytes": 47880,
+          "result_bytes": 40044
+        },
+        "search": {
+          "calls": 92,
+          "failures": 0,
+          "cpu_ns": 118513417,
+          "wall_ns": 168906655,
+          "request_bytes": 13770,
+          "result_bytes": 196991
+        },
+        "put": {
+          "calls": 44,
+          "failures": 0,
+          "cpu_ns": 13747261,
+          "wall_ns": 81060609,
+          "request_bytes": 33060,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 68
+        },
+        "events": {
+          "records": 12,
+          "logical_value_bytes": 5422
+        },
+        "states": {
+          "records": 2,
+          "logical_value_bytes": 3376
+        }
+      },
+      "state_records_per_owner": {
+        "devon": 2
+      },
+      "pending_events": 0,
+      "views": 10,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 56,
+      "source_utf8_bytes": 18645,
+      "tool_only_maintenance_calls": 4,
+      "maintenance_calls": [
+        {
+          "trace_line": 3,
+          "event_ids": [
+            "message:58fb0292-f18f-4f6d-a1c0-9b1c504bb248"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 9,
+          "event_ids": [
+            "tool:4f2f33656d45d937e032254428213587e909c4603289a82c991c9d285baea503"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "f6a3a1c7947746138492274af7d367ca"
+          ]
+        },
+        {
+          "trace_line": 15,
+          "event_ids": [
+            "message:676a1158-ab5b-44aa-9e22-5a478634cb2e"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "f6a3a1c7947746138492274af7d367ca"
+          ]
+        },
+        {
+          "trace_line": 21,
+          "event_ids": [
+            "tool:d327f9dbc0fb4d7021085c3a1a4ca1416e30f0302fb50108f161f704abc905d3"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "f6a3a1c7947746138492274af7d367ca"
+          ]
+        },
+        {
+          "trace_line": 27,
+          "event_ids": [
+            "message:1c2791d7-5d60-49d5-9760-0ffbc2e6af62"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "f6a3a1c7947746138492274af7d367ca"
+          ]
+        },
+        {
+          "trace_line": 34,
+          "event_ids": [
+            "message:292fada4-f9c7-40a9-bc2d-220ca7a3f657"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "f6a3a1c7947746138492274af7d367ca"
+          ]
+        },
+        {
+          "trace_line": 40,
+          "event_ids": [
+            "message:3d383809-a3f4-4f45-b037-99a590713e58"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "f6a3a1c7947746138492274af7d367ca"
+          ]
+        },
+        {
+          "trace_line": 46,
+          "event_ids": [
+            "tool:9f3dc29df15e8092538be7833dc74655c9503c7768c70bbcd9388b965085b291"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "f6a3a1c7947746138492274af7d367ca"
+          ]
+        },
+        {
+          "trace_line": 52,
+          "event_ids": [
+            "message:8b61ffc9-b3d2-4f42-b357-2564be0cfd85"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "f6a3a1c7947746138492274af7d367ca"
+          ]
+        },
+        {
+          "trace_line": 57,
+          "event_ids": [
+            "tool:22aba5a6947aa0a7fee17b66078070b1ee97aa6ad65eff8d799e552972519eca",
+            "tool:b0212a928073b7512a25a827d6570a73dcbf8db54e89795b648bacbed637fb5b",
+            "tool:be3dc200a662d109ecae37d0c87eea268947e45d00c32edb200038002bac1211"
+          ],
+          "kinds": [
+            "tool",
+            "tool",
+            "tool"
+          ],
+          "candidate_ids": [
+            "078b9f82a647499c8c44de9b0adcb8ed",
+            "f6a3a1c7947746138492274af7d367ca"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 3
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "87437bc0f62b445d1f69bd9030651eb135d5df97a1f910d8f5f6b6402fea4996",
+        "trace.jsonl": "1681fb5a3613b1c15e209c92138b767cb001343628a82869e9fd1b1c9cc9f00e",
+        "phase-0-result.json": "27c34d52906a7952f0e377e692511f02105d153b2d391b2fd1d27dca06506fae",
+        "phase-1-result.json": "7b6199fe4a42acd71edee0dc2160da90e49bc65ded4c8728367e8a1e57d846f2",
+        "phase-0-store-snapshot.json": "23bb3d34740026ef62063c6b2db57b98000143b32519f030bd93d6d1bbb2c135",
+        "phase-1-store-snapshot.json": "3d6f790e99e94724d4a01b0ff69541b54e5948b48386f5356d366b4aa648d3ac"
+      }
+    },
+    {
+      "run_id": "lsa-maintenance-events-r1-coupled-local_lru_sources",
+      "case": "coupled",
+      "arm": "local_lru_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "joint-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "all-changed",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "no-change-read",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "blocked-combination",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "local-resolution",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "passed": 6,
+      "total": 6,
+      "whole_pass": true,
+      "judgment": {
+        "failed": {},
+        "reviewed_all_messages": true,
+        "mechanism_note": "Exact six answers and three actual reservations3/4/3 correct; final combined State matches current requirements and completed action."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 29,
+          "tokens": 20305,
+          "wall_seconds": 23.50685340212658
+        },
+        "task_host": {
+          "calls": 10,
+          "tokens": 20237,
+          "wall_seconds": 9.189127599820495
+        },
+        "embedding": {
+          "calls": 3,
+          "tokens": 234,
+          "wall_seconds": 0.18154690135270357
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 10,
+          "tokens": 12857
+        },
+        "read_selector": {
+          "calls": 10,
+          "tokens": 3835
+        },
+        "update_selector": {
+          "calls": 9,
+          "tokens": 3613
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 212,
+          "failures": 0,
+          "cpu_ns": 162674608,
+          "wall_ns": 203927892,
+          "request_bytes": 43965,
+          "result_bytes": 37128
+        },
+        "search": {
+          "calls": 92,
+          "failures": 0,
+          "cpu_ns": 50873926,
+          "wall_ns": 103607126,
+          "request_bytes": 13760,
+          "result_bytes": 174547
+        },
+        "put": {
+          "calls": 44,
+          "failures": 0,
+          "cpu_ns": 15159537,
+          "wall_ns": 410067802,
+          "request_bytes": 32830,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 102
+        },
+        "events": {
+          "records": 12,
+          "logical_value_bytes": 5422
+        },
+        "states": {
+          "records": 1,
+          "logical_value_bytes": 1935
+        }
+      },
+      "state_records_per_owner": {
+        "devon": 1
+      },
+      "pending_events": 0,
+      "views": 10,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 47,
+      "source_utf8_bytes": 16485,
+      "tool_only_maintenance_calls": 4,
+      "maintenance_calls": [
+        {
+          "trace_line": 4,
+          "event_ids": [
+            "message:6f87eac0-1fab-4c68-bc89-5c8303366a4c"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 15,
+          "event_ids": [
+            "tool:4ef1a3c4f82860f28633707965cac490fe9d66e03679cadd7caa80cbd641af0b"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "dff66524f6a949078e2ed9400777fe54"
+          ]
+        },
+        {
+          "trace_line": 26,
+          "event_ids": [
+            "message:c32441dd-d70c-473e-b429-1e3e21924277"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "dff66524f6a949078e2ed9400777fe54"
+          ]
+        },
+        {
+          "trace_line": 37,
+          "event_ids": [
+            "tool:d44561012c66bc1f6bbdd0572857d780fa670144bd54a637cb3e7989c9340d22"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "dff66524f6a949078e2ed9400777fe54"
+          ]
+        },
+        {
+          "trace_line": 48,
+          "event_ids": [
+            "message:24e3a442-df8e-4cbc-b604-ab8cf9cfaf82"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "dff66524f6a949078e2ed9400777fe54"
+          ]
+        },
+        {
+          "trace_line": 60,
+          "event_ids": [
+            "message:eb7aabc3-5337-4dfc-9aeb-13da30551670"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "dff66524f6a949078e2ed9400777fe54"
+          ]
+        },
+        {
+          "trace_line": 71,
+          "event_ids": [
+            "message:0b36de8b-ceab-4b55-a00a-9d28ccf09857"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "dff66524f6a949078e2ed9400777fe54"
+          ]
+        },
+        {
+          "trace_line": 82,
+          "event_ids": [
+            "tool:71cd9b37848692a5dcc611416fcc2864de091dda1962d191ae65b08457d29f0c"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "dff66524f6a949078e2ed9400777fe54"
+          ]
+        },
+        {
+          "trace_line": 93,
+          "event_ids": [
+            "message:7bd076c1-1054-44ba-ab5b-5ec23bd4352c"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "dff66524f6a949078e2ed9400777fe54"
+          ]
+        },
+        {
+          "trace_line": 103,
+          "event_ids": [
+            "tool:842f455f6f0465ba01d981778f9389669787000279444abd0316f9bf62444dde",
+            "tool:7a557543bd88bfac4f80e46c979f3b66f5c689f710c0863cc2c23cafb32298c2",
+            "tool:a64fd74616b7bb07a22cfcb09937d853f02b886cacbcf2a07bef467fd3f4c236"
+          ],
+          "kinds": [
+            "tool",
+            "tool",
+            "tool"
+          ],
+          "candidate_ids": [
+            "dff66524f6a949078e2ed9400777fe54"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 3
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "ec50913248c26a5331d4cb872e81a9da7363480fec786676e9cd3327f77a4c91",
+        "trace.jsonl": "cba10dd2047d23d350915cf5f947c35cf884ffca2e98e4aba7d2ef6e0312af90",
+        "phase-0-result.json": "01ed45d01da955f9984fbffc3652e8cbfb0ea515c58e049bb6098d4356c86299",
+        "phase-1-result.json": "8a409ea059bb137d91db638975d294a2ba302cb00d8ab99be731e1598a8a4a23",
+        "phase-0-store-snapshot.json": "a4f3333639ef82143770d67e934e3c3e29c6543e7238450258f4be45e3645041",
+        "phase-1-store-snapshot.json": "df3450acdf3d14448d37b53e03fb065ed94dfc0ecf86f3cbd63ef0141010addf"
+      }
+    },
+    {
+      "run_id": "lsa-maintenance-events-r1-distinct-local_lru_sources",
+      "case": "distinct",
+      "arm": "local_lru_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "initial-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "first-increment",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "first-read",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "second-increment",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "final-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        }
+      ],
+      "passed": 3,
+      "total": 5,
+      "whole_pass": false,
+      "judgment": {
+        "failed": {
+          "second-increment": "Host reports5 instead of4 after second distinct source event. Controller correctly updates3 to4; Host independently writes5 to LangMem after receiving correct State4.",
+          "final-action": "Actual reserve quantity5 instead of4, destinationS-2 instead of exactstorage S-2. One real action/ID and packing otherwise valid."
+        },
+        "reviewed_all_messages": true,
+        "mechanism_note": "Trace49 correct second increment3->4; Host54 sees4 but writes5 in manage_memory. Tool-only maintenance60 retains4. Host65 answers5; maintenance71 still asks correct4, Host76 reserves5. New distinct source identity not suppressed or replayed; later State81 honestly records actual wrong reservation5. First break is Host consumption of post-event State together with current increment, not writable-maintenance replay."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 23,
+          "tokens": 12548,
+          "wall_seconds": 14.385718430858105
+        },
+        "task_host": {
+          "calls": 8,
+          "tokens": 11554,
+          "wall_seconds": 4.314523718785495
+        },
+        "embedding": {
+          "calls": 2,
+          "tokens": 91,
+          "wall_seconds": 0.06694983085617423
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 8,
+          "tokens": 7857
+        },
+        "read_selector": {
+          "calls": 8,
+          "tokens": 2451
+        },
+        "update_selector": {
+          "calls": 7,
+          "tokens": 2240
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 122,
+          "failures": 0,
+          "cpu_ns": 58636591,
+          "wall_ns": 84978060,
+          "request_bytes": 25335,
+          "result_bytes": 17666
+        },
+        "search": {
+          "calls": 72,
+          "failures": 0,
+          "cpu_ns": 40600668,
+          "wall_ns": 81493684,
+          "request_bytes": 10840,
+          "result_bytes": 90403
+        },
+        "put": {
+          "calls": 31,
+          "failures": 0,
+          "cpu_ns": 13052162,
+          "wall_ns": 66555643,
+          "request_bytes": 19301,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 102
+        },
+        "events": {
+          "records": 8,
+          "logical_value_bytes": 3139
+        },
+        "states": {
+          "records": 1,
+          "logical_value_bytes": 1152
+        }
+      },
+      "state_records_per_owner": {
+        "riley": 1
+      },
+      "pending_events": 0,
+      "views": 8,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 23,
+      "source_utf8_bytes": 6647,
+      "tool_only_maintenance_calls": 3,
+      "maintenance_calls": [
+        {
+          "trace_line": 4,
+          "event_ids": [
+            "message:cedc92e4-50fb-4a7b-9909-8cde4957e178"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 15,
+          "event_ids": [
+            "message:5cfb2b99-1116-4c2c-85ee-30f61fc6cfec"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0f742fc402ca4455a40a7ce323c4d003"
+          ]
+        },
+        {
+          "trace_line": 26,
+          "event_ids": [
+            "tool:43fa5174317805265668445eaaaecb2dc34490c74ff9fe7b6dbbd09faec94a41"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "0f742fc402ca4455a40a7ce323c4d003"
+          ]
+        },
+        {
+          "trace_line": 37,
+          "event_ids": [
+            "message:ed465d5d-1241-4d5b-ab28-86af23b7d835"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 49,
+          "event_ids": [
+            "message:4f63e4e0-b1af-4c68-a02a-af9de991d0d5"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0f742fc402ca4455a40a7ce323c4d003"
+          ]
+        },
+        {
+          "trace_line": 60,
+          "event_ids": [
+            "tool:c52960471c47a8ba0c9b4850c5fa0d6ea3643018d583390eceb3c426a9facf64"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "0f742fc402ca4455a40a7ce323c4d003"
+          ]
+        },
+        {
+          "trace_line": 71,
+          "event_ids": [
+            "message:0c34e6ad-1bda-49f6-b3f5-5df8b7d5ec64"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0f742fc402ca4455a40a7ce323c4d003"
+          ]
+        },
+        {
+          "trace_line": 81,
+          "event_ids": [
+            "tool:27ba01c9bcec94e467ad1d0e37348d83b6b2120ec0e9b41dfeb5190ee1105e7c"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "0f742fc402ca4455a40a7ce323c4d003"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 1
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "d339dd6eb78e72e2c2c0f0075ae9322cbebf842e87d6fcacaeb37a6f3a3c957b",
+        "trace.jsonl": "e3297b7b0effc4d3dc5a09b15504f51fcdd258173aabd8d70367812966f011b9",
+        "phase-0-result.json": "b3664c8be33bf87714d5b73a0943c0d267f93f0bdccc8784654e42e55b68d3c7",
+        "phase-1-result.json": "d437f1aa8bc5c7193c4a344b15d99e62564ed6caa3a2dbf979528ba16355d2ef",
+        "phase-0-store-snapshot.json": "7c129dc6efd8096065e5af90afe8c96689f94c7137926d6dceca0d1d8a8a8bac",
+        "phase-1-store-snapshot.json": "b369591bf2e5646a2384aec71c44dff4ff031efbca6fc4ccf796e1fda265bc86"
+      },
+      "identical_text_new_source_ids": [
+        "message:4f63e4e0-b1af-4c68-a02a-af9de991d0d5",
+        "message:5cfb2b99-1116-4c2c-85ee-30f61fc6cfec"
+      ]
+    }
+  ],
+  "by_role": {
+    "state_control": {
+      "calls": 71,
+      "tokens": 61374,
+      "wall_seconds": 88.11329646222293
+    },
+    "task_host": {
+      "calls": 37,
+      "tokens": 73638,
+      "wall_seconds": 34.50544315576553
+    },
+    "embedding": {
+      "calls": 10,
+      "tokens": 848,
+      "wall_seconds": 0.8521318333223462
+    }
+  },
+  "generation_delta": {
+    "calls": 108,
+    "tokens": 135012
+  },
+  "embedding_delta": {
+    "calls": 10,
+    "tokens": 848
+  },
+  "continuous_budget": {
+    "generation_requests": 2412,
+    "generation_tokens": 3011206,
+    "embedding_tokens": 18183
+  },
+  "freeze_sha256": "1033fb2330e4ab0e614e7a788feb9af39e397019569257ed70ab07bc2f98c68b",
+  "protocol_sha256": "8f07fa09a1900cf6a6da922c5d4bf9f3390bfc7a549a1755d5fa62248bff423a",
+  "validation": {
+    "all_actual_write_payloads_events_only": true,
+    "all_source_bodies_match_original": true,
+    "all_views_bound_to_http": true,
+    "actual_source_params_inputs_verified": true,
+    "ledger_reconciled": true,
+    "unknown_usage": 0,
+    "control_degraded_views": 0,
+    "final_pending_events": 0,
+    "tool_only_maintenance_calls": 14,
+    "root_namespace_preflight_reads": 8,
+    "root_phase_snapshot_reads": 8,
+    "historical_ledger_chain_unchanged": true
+  },
+  "status": "COMPLETE_WITH_HOST_COUNTEREXAMPLE_FAILURE",
+  "denominators": {
+    "original_coupled": {
+      "G": [
+        6,
+        6
+      ],
+      "L": [
+        6,
+        6
+      ],
+      "LRU": [
+        6,
+        6
+      ],
+      "whole": [
+        3,
+        3
+      ]
+    },
+    "additional_distinct_LRU": {
+      "messages": [
+        3,
+        5
+      ],
+      "whole": [
+        0,
+        1
+      ]
+    },
+    "completed_messages": 23,
+    "planned_messages": 23,
+    "completed_trajectories": 4,
+    "planned_trajectories": 4
+  },
+  "causal_evidence": {
+    "distinct_run": "lsa-maintenance-events-r1-distinct-local_lru_sources",
+    "events": [
+      {
+        "trace_line": 49,
+        "role": "state_control",
+        "control_stage": "maintenance",
+        "request_sha256": "50f4990d87cc8a46e9ba0e40e01b7ed8468a784ecbc3b7162c397bbadfba1b30",
+        "summary": "Second genuine increment receives old State3 and writes4."
+      },
+      {
+        "trace_line": 54,
+        "role": "task_host",
+        "control_stage": null,
+        "request_sha256": "69b4714de7aac7dae456736834759dc94538277e2aa94e43cfe771be17ebda2e",
+        "summary": "Actual Host gets State4 and current original user increment, but updates LangMem to5."
+      },
+      {
+        "trace_line": 60,
+        "role": "state_control",
+        "control_stage": "maintenance",
+        "request_sha256": "913468daf00c512459a7a6193ef0ec5eec21f80a65f2719500a2943a3b1eacc7",
+        "summary": "Tool-only maintenance keeps State4; no writable-maintenance replay."
+      },
+      {
+        "trace_line": 65,
+        "role": "task_host",
+        "control_stage": null,
+        "request_sha256": "92e3a43f80e2a97ce55d4d7a312dc90835c81d5cdb41c601cf93fa54e4394fe3",
+        "summary": "Host answers5 despite retained State4."
+      },
+      {
+        "trace_line": 71,
+        "role": "state_control",
+        "control_stage": "maintenance",
+        "request_sha256": "063354f51784f2402d1736d45dc8f8eb55551a6e2e12d21a8c378825a20b310d",
+        "summary": "Maintenance still records correct4 and explicit reserve4 need."
+      },
+      {
+        "trace_line": 76,
+        "role": "task_host",
+        "control_stage": null,
+        "request_sha256": "6c5cc9d29de4d6fc932670c3f33412a630f85601105eb22a86bece02da4da1f7",
+        "summary": "Host actually calls reserve5 with shortened destinationS-2."
+      },
+      {
+        "trace_line": 81,
+        "role": "state_control",
+        "control_stage": "maintenance",
+        "request_sha256": "1b6b456c55fa6438406557a024c2ad5d80efe1e66394edaa3126a8c1fb64d136",
+        "summary": "Maintenance records actual observed wrong reservation5; does not fabricate correct outcome."
+      }
+    ],
+    "first_break": "Host consumption, after correct post-event State was written and delivered. Different user IDs were not deduplicated and controller never writes5 before actual wrong business receipt.",
+    "competing_explanations": [
+      "Duplicate event ingestion or writable-maintenance repeated increment.",
+      "Host interprets post-event State as pre-event base and independently reapplies current user increment; later its wrong memory-write/assistant history persists."
+    ],
+    "local_discriminator": "Actual source identity, HTTP maintenance49/60/71 and Host54/76 isolate first break after State4 delivery. This supports second explanation locally, not a universal causal claim."
+  },
+  "observations": [
+    "All three original coupled trajectories6/6 with exact actual3/4/3 reservations.",
+    "All37 actual maintenance requests contain no current_task;14 tool-only calls preserve that boundary.",
+    "Distinct same-text events correctly produce controller3 then4, but Host changes4 to5 and acts on5.",
+    "L retains stale no-reservation State alongside correct observed outcome State, despite task6/6."
+  ],
+  "decision": "Keep events-only maintenance boundary; stop maintenance prompt tuning. Publish positive/negative results; next separately isolate native optional-tool conditional argument failure and diagnose Host snapshot timing before another narrowly frozen intervention. Continue remaining P4–P7 obligations.",
+  "limits": [
+    "One repeat per original arm and one additional LRU counterexample; all development, no stable efficacy/unseen claim.",
+    "G/L response schema and control contract changed from earlier batch; not pure removal-of-one-field ablation.",
+    "Original coupled scores and additional counterexample are separate; do not aggregate extra LRU into matched denominator.",
+    "Missing-ID native memory-tool exception was intentionally unchanged and did not recur in these four; absence does not close defect.",
+    "Old P3 failures and cost remain. No Product readiness."
+  ],
+  "evidence_index_sha256": {
+    "root_scores.json": "ea2373fbdabd8e0bcdf0b51141b02ec54df0a5068e073a67b962601dbc809be7",
+    "budget-before.json": "4c1d8618eba66875718c80f427e8906d87b0466164f081a75991e3dd856e510f",
+    "budget-after.json": "dec77bea6c0c0935f95694d2de3a5bb21c9abeed3d1eb218d90f8f9f3d8c051d",
+    "service-readonly-check.json": "0d8c9d323dff517aa43cb3e7f42b22c059d74b6433bda30828e01acb985ad88c",
+    "namespace-preflight.json": "05d38e2da3fa68c14fed43ab1645497dca7c507298db4ca16929e1a6d1894dfe"
+  }
+}
