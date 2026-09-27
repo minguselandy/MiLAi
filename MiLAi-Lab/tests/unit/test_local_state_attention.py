@@ -108,6 +108,154 @@ def test_bank_order_noop_pending_scope_and_deletion() -> None:
     assert bank.events(alice) == []
 
 
+def test_partial_batch_retry_does_not_recreate_committed_edit() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "local", "alice")
+    bank.record_event(scope, {"id": "first", "kind": "user", "content": "new matter"})
+    proposed = [{"id": None, "title": "matter", "content": "one fact"},
+                {"id": "missing", "content": "invalid target"}]
+    first, invalid = bank.apply(scope, proposed, {"first"}, query_source_id="first")
+    assert invalid and [row["status"] for row in first] == [
+        "created", "skipped_invalid_edit"]
+    state_id = first[0]["id"]
+    assert [row["id"] for row in bank.pending(scope)] == ["first"]
+    assert "applied_edit_keys" not in bank.states(scope)[0]
+    assert len(store.get(scope.namespace("states"), state_id).value[
+        "applied_edit_keys"]) == 1
+
+    repeated, invalid = bank.apply(scope, proposed, {"first"},
+                                   query_source_id="first")
+    assert invalid and repeated[0] == {"id": state_id, "status": "noop",
+                                       "replayed": True, "operation": "create",
+                                       "revision": 1}
+    assert len(bank.states(scope)) == 1
+    assert [row["id"] for row in bank.pending(scope)] == ["first"]
+
+    # Repairing only the bad edit remains possible; success finally consumes the event.
+    repaired, invalid = bank.apply(scope, [proposed[0],
+                                           {"id": None, "title": "second matter",
+                                            "content": "second fact"}],
+                                   {"first"}, query_source_id="first")
+    assert not invalid and [row["status"] for row in repaired] == ["noop", "created"]
+    assert repaired[0]["id"] == state_id and len(bank.states(scope)) == 2
+    assert bank.pending(scope) == []
+    bank.record_event(scope, {"id": "fresh", "kind": "user", "content": "new matter"})
+    independent, invalid = bank.apply(scope, [proposed[0]], {"fresh"})
+    assert not invalid and independent[0]["status"] == "created"
+    assert len(bank.states(scope)) == 3
+
+
+def test_partial_update_identity_is_per_state_and_per_source() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "original"})
+    seed, invalid = bank.apply(scope, [{"id": None, "title": "matter",
+                                      "content": "quantity 2"}], {"seed"})
+    assert not invalid
+    state_id = seed[0]["id"]
+    bank.record_event(scope, {"id": "increment-a", "kind": "user",
+                              "content": "increase by one"})
+    edits = [{"id": state_id, "content": "quantity 3"},
+             {"id": "missing", "content": "invalid"}]
+    first, invalid = bank.apply(scope, edits, {"increment-a"})
+    assert invalid and first[0]["status"] == "updated"
+    assert bank.states(scope)[0]["revision"] == 2
+    repeated, invalid = bank.apply(scope, edits, {"increment-a"})
+    assert invalid and repeated[0]["status"] == "noop"
+    assert repeated[0]["replayed"] is True
+    assert bank.states(scope)[0]["revision"] == 2
+    # A fresh source ID is actionable even if its text is identical and the old
+    # event remains pending; partial old-marker overlap cannot consume the new one.
+    bank.record_event(scope, {"id": "increment-b", "kind": "user",
+                              "content": "increase by one"})
+    newer, invalid = bank.apply(scope, [{"id": state_id, "content": "quantity 4"},
+                                 edits[1]], {"increment-a", "increment-b"})
+    assert invalid and newer[0]["status"] == "updated"
+    assert bank.states(scope)[0]["revision"] == 3
+    assert {row["id"] for row in bank.pending(scope)} == {
+        "increment-a", "increment-b"}
+    # The original absolute update still has noop behavior without a new event.
+    noop, invalid = bank.apply(scope, [{"id": state_id, "content": "quantity 4"}], set())
+    assert not invalid and noop[0]["status"] == "noop"
+    assert bank.states(scope)[0]["revision"] == 3
+
+
+def test_legacy_focus_resolves_replayed_create_after_partial_retry() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local_state", "alice")
+    bank.record_event(scope, {"id": "source", "kind": "user", "content": "two matters"})
+    replies = LruReplies({"control": [
+        {"edits": [{"id": None, "title": "first", "content": "one"},
+                   {"id": "missing", "content": "bad"}], "focus": ["new:0"]},
+        {"edits": [{"id": None, "title": "first", "content": "one"},
+                   {"id": None, "title": "second", "content": "two"}],
+         "focus": ["new:0", "new:1"]}]})
+    controller = LocalStateController(bank, replies)  # type: ignore[arg-type]
+    first = controller.prepare(scope, "source", "current task")
+    assert first["degraded"] and len(first["focus"]) == 1
+    original_id = first["focus"][0]
+    assert [row["id"] for row in bank.pending(scope)] == ["source"]
+    second = controller.prepare(scope, "source", "current task")
+    assert not second["degraded"]
+    assert [row["status"] for row in second["receipts"]] == ["noop", "created"]
+    assert second["focus"][0] == original_id
+    assert len(second["focus"]) == 2 and bank.pending(scope) == []
+
+
+def test_partial_retry_marks_only_the_state_actually_written() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "two matters"})
+    initial, invalid = bank.apply(scope, [
+        {"id": None, "title": "A", "content": "old A"},
+        {"id": None, "title": "B", "content": "old B"}], {"seed"})
+    assert not invalid
+    first_id, second_id = [row["id"] for row in initial]
+    bank.record_event(scope, {"id": "change", "kind": "user", "content": "change both"})
+    first, invalid = bank.apply(scope, [
+        {"id": first_id, "content": "new A"},
+        {"id": second_id, "content": "x" * 4001}], {"change"})
+    assert invalid and [row["status"] for row in first] == [
+        "updated", "skipped_invalid_edit"]
+    retried, invalid = bank.apply(scope, [
+        {"id": first_id, "content": "new A"},
+        {"id": second_id, "content": "new B"}], {"change"})
+    assert not invalid and [row["status"] for row in retried] == ["noop", "updated"]
+    assert retried[0]["replayed"] is True
+    assert {row["title"]: row["content"] for row in bank.states(scope)} == {
+        "A": "new A", "B": "new B"}
+    assert bank.pending(scope) == []
+
+
+def test_retry_identity_uses_exact_event_set_and_survives_unmarked_update() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "local", "alice")
+    proposal = [{"id": None, "title": "matter", "content": "first"},
+                {"id": "missing", "content": "bad"}]
+    bank.record_event(scope, {"id": "old", "kind": "user", "content": "same"})
+    initial, invalid = bank.apply(scope, proposal, {"old"})
+    assert invalid and initial[0]["status"] == "created"
+    original_id = initial[0]["id"]
+    bank.record_event(scope, {"id": "new", "kind": "user", "content": "same"})
+    mixed, invalid = bank.apply(scope, proposal, {"old", "new"})
+    assert invalid and mixed[0]["status"] == "created"
+    assert mixed[0]["id"] != original_id
+    old_only, invalid = bank.apply(scope, proposal, {"old"})
+    assert invalid and old_only[0]["status"] == "noop"
+    assert old_only[0]["id"] == original_id
+    assert len(bank.states(scope)) == 2
+    revised, invalid = bank.apply(scope, [{"id": original_id,
+                                           "content": "revised without event"}], set())
+    assert not invalid and revised[0]["status"] == "updated"
+    assert len(store.get(scope.namespace("states"), original_id).value[
+        "applied_edit_keys"]) == 1
+    replayed, invalid = bank.apply(scope, proposal, {"old"})
+    assert invalid and replayed[0]["id"] == original_id
+    assert replayed[0]["replayed"] is True
+
+
 def test_history_interleaves_completed_turns_and_labels_incomplete_prefix(
     tmp_path: Path,
 ) -> None:

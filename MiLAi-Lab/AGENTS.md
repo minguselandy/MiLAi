@@ -36,13 +36,27 @@ canonical memory state.
 
 ## Required checks
 
-Latest user instruction is now fulfilled for execution: the current window_summary slice and
-all four pre-registered trajectories are finished, and the actual thread Goal is PAUSED.
-Only the separately authorized overall report and GitHub publication remain permitted.
-Do not start or resume development, experiments, R/U=A, public tasks, downloads or deployment
-without a new explicit user instruction. Historical ACTIVE/next-step paragraphs below do not
-override this pause. Preserve the unfinished v27 model-sensitivity draft.
+The user has now explicitly activated execution of the
+[16-round review and next plan](docs/MILAI_LSA_16_ROUND_REVIEW_AND_NEXT_PLAN_20260927.md).
+The actual thread Goal is ACTIVE; follow the [new execution record](docs/MILAI_LSA_REVIEW_EXECUTION_GOAL.md).
+This supersedes the previous pause for this scope. Preserve the plan bytes, all 16 historical
+results/locks/costs, and the unrelated v27 draft. Start with D0 exposed failure prefixes and
+verified defects, then separately test local entry edits and turn-start snapshots before
+freezing new matched comparisons on one latest substrate. Do not rerun all 16 rounds or mix
+old matched scores with new source. D2–D5 and the minimum evidence package remain obligations;
+D6 training is conditional on demonstrated selector value. Physical deletion/archive and model
+deployment are not prerequisites for every diagnosis. MERIT seeds 0–4 are exposed; prepared
+MemoryArena resources are not a completed native benchmark.
 
+Retain one existing Sol xhigh source/config/runner/check owner, Root docs/fixtures/rubrics/freezes/
+real HTTP/scoring/accounting owner, and Luna high downloads/authorized Git publication owner.
+Astra xhigh is only for a concrete difficult question. Real model HTTP concurrency remains 1.
+Parameters/call cadence/output budgets/candidate counts/thinking/second-model diagnostics may
+change in a separately frozen, interpretable comparison; do not silently change shared deployment.
+Keep owner/time/gold boundaries, actual side effects, unknown-result recovery and all costs.
+No permanent semantic reviewer or new state platform. Product remains NO-GO.
+
+Historical closeout at the previous pause:
 See the [overall report](docs/MILAI_LOCAL_STATE_ATTENTION_OVERALL_EXPERIMENT_REPORT_20260927.md)
 and [final summary results](docs/MILAI_LOCAL_STATE_ATTENTION_WINDOW_SUMMARY_WIRING_R1_RESULTS_20260927.md).
 Summary9/12 vs full10/12, whole0/2 vs1/2, generation tokens19703/18501. The unsupported negative

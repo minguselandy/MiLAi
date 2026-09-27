@@ -1,0 +1,65 @@
+{
+  "kind": "LSA_REVIEW_D0_OFFLINE_RUBRIC",
+  "runtime_read_permitted": false,
+  "scope": "Historical exposed prefixes; no new method score or independent efficacy samples.",
+  "cases": [
+    {
+      "case_id": "state_frame_loss",
+      "expected_invariant": "Original old State contains briefing R-3/14:30/step-free; current action excludes briefing actions, not its arrangements. Preserve those facts and requested-versus-completed status. First omission occurs in this maintenance output.",
+      "first_break_or_control": "frame_preservation"
+    },
+    {
+      "case_id": "summary_frame_loss",
+      "expected_invariant": "Prior summary contains briefing R-3/14:30/step-free. Newly evicted update changes only field kits; keep briefing and handout facts. Third summary output is the first omission, without truncation.",
+      "first_break_or_control": "frame_preservation"
+    },
+    {
+      "case_id": "post_event_double_application",
+      "expected_invariant": "Actual State delivered quantity4 after second distinct increment; do not apply it again to obtain5 or execute business. Original wrong memory update is the first failure; this is not proof of bank replay.",
+      "first_break_or_control": "consumption_timing"
+    },
+    {
+      "case_id": "exact_object_identity",
+      "expected_invariant": "Full legal owner history carries exact plural item key Summit archive crates, quantity5, mezzanine M-4, foam inserts. Proposal must preserve all fields and one attempt. Singular key is a failure independently of correct quantity.",
+      "first_break_or_control": "host_object_identity"
+    },
+    {
+      "case_id": "no_change_read",
+      "expected_invariant": "Read current field kit arrangement8/north rack N-6/rigid cases. Preserve handout and briefing facts; no action is authorized. Prose paraphrase is not automatically a semantic failure.",
+      "first_break_or_control": "no_change_control"
+    },
+    {
+      "case_id": "distinct_increment_first",
+      "expected_invariant": "First actual increment takes2 to3; destination and packing unchanged. The paired later identical text has a different source ID, not a replay.",
+      "first_break_or_control": "distinct_same_text_control"
+    },
+    {
+      "case_id": "distinct_increment_second",
+      "expected_invariant": "Second actual increment takes3 to4; the text equals the earlier event but source ID differs. Both should count; no business action is authorized.",
+      "first_break_or_control": "distinct_same_text_control"
+    },
+    {
+      "case_id": "absolute_user_revision",
+      "expected_invariant": "New user changes field kits3 to8 and destination to north rack N-6; packing stays rigid cases. Handout and briefing remain unchanged, no business action.",
+      "first_break_or_control": "current_user_revision_control"
+    },
+    {
+      "case_id": "internal_memory_receipt",
+      "expected_invariant": "manage_memory created receipt confirms an internal memory write. Keep quantity3 and no reservation; it does not independently add another unit or confirm external completion.",
+      "first_break_or_control": "internal_receipt_control"
+    },
+    {
+      "case_id": "partial_business_receipt",
+      "expected_invariant": "Actual ok=false reserved_label_failed contains persisted reservation identity and fields. Keep reservation and pending label, no rollback/no blind second reservation; do not claim physical dispatch.",
+      "first_break_or_control": "partial_success_control"
+    }
+  ],
+  "score_axes": [
+    "strict",
+    "facts_and_conditions",
+    "object_identity",
+    "actual_side_effects",
+    "unsupported_assertions",
+    "state_understanding"
+  ]
+}

@@ -107,8 +107,13 @@ class LocalStateBank:
             raise ValueError("LSA_STORAGE_LIMIT_EXCEEDED")
         return [dict(row.value) for row in rows]
 
-    def states(self, scope: StateScope) -> list[dict[str, Any]]:
+    def _state_rows(self, scope: StateScope) -> list[dict[str, Any]]:
         return sorted(self._all(scope, "states", self.max_states), key=lambda row: row["id"])
+
+    def states(self, scope: StateScope) -> list[dict[str, Any]]:
+        # Retry identities are storage metadata, never State material for a model.
+        return [{key: value for key, value in row.items() if key != "applied_edit_keys"}
+                for row in self._state_rows(scope)]
 
     def events(self, scope: StateScope) -> list[dict[str, Any]]:
         return sorted(self._all(scope, "events", self.max_events),
@@ -178,13 +183,23 @@ class LocalStateBank:
         self._put(scope, "meta", "history_summary",
                   {"summary": summary, "covered_ordinal": covered_ordinal})
 
+    @staticmethod
+    def _edit_markers(event_ids: set[str], target: str,
+                      operation: str) -> set[str]:
+        """Bind one committed edit to the exact visible event set and target."""
+        if not event_ids:
+            return set()
+        return {hashlib.sha256(json.dumps(
+            ["lsa_edit_v1", sorted(event_ids), target, operation],
+            ensure_ascii=False).encode()).hexdigest()}
+
     def apply(self, scope: StateScope, edits: list[dict[str, Any]],
               event_ids: set[str], query_source_id: str | None = None,
               allowed_existing_ids: set[str] | None = None,
               allow_create: bool = True,
               ) -> tuple[list[dict[str, Any]], bool]:
         """Apply independent valid edits; retain pending when any edit is invalid."""
-        current = {row["id"]: row for row in self.states(scope)}
+        current = {row["id"]: row for row in self._state_rows(scope)}
         available = {row["id"] for row in self.events(scope)}
         visible_dependencies = set(event_ids)
         if query_source_id is not None:
@@ -197,7 +212,7 @@ class LocalStateBank:
                 visible_dependencies.update(state["dependency_source_ids"])
         receipts: list[dict[str, Any]] = []
         invalid = False
-        for edit in edits:
+        for edit_index, edit in enumerate(edits):
             if not isinstance(edit, dict):
                 invalid = True
                 receipts.append({"status": "skipped_invalid_edit"})
@@ -231,7 +246,27 @@ class LocalStateBank:
                 receipts.append({"id": state_id, "status": "skipped_invalid_edit"})
                 continue
             old = current.get(state_id) if state_id is not None else None
-            if old is None and (not title or len(current) >= self.max_states):
+            if old is None and not title:
+                invalid = True
+                receipts.append({"id": state_id, "status": "skipped_invalid_edit"})
+                continue
+            target = state_id if state_id is not None else f"new:{edit_index}"
+            operation = ("update" if state_id is not None else "create") + f":{edit_index}"
+            markers = self._edit_markers(event_ids, target, operation)
+            if markers:
+                matches = ([old] if old is not None else list(current.values()))
+                replayed = [row for row in matches if row is not None and
+                            markers <= set(row.get("applied_edit_keys", []))]
+                if len(replayed) > 1:
+                    raise ValueError("LSA_APPLIED_EDIT_AMBIGUOUS")
+                if replayed:
+                    row = replayed[0]
+                    receipts.append({"id": row["id"], "status": "noop",
+                                     "replayed": True,
+                                     "operation": "update" if old else "create",
+                                     "revision": row["revision"]})
+                    continue
+            if old is None and len(current) >= self.max_states:
                 invalid = True
                 receipts.append({"id": state_id, "status": "skipped_invalid_edit"})
                 continue
@@ -267,6 +302,9 @@ class LocalStateBank:
                     | set(old.get("dependency_source_ids", []) if old else []))
                 if legacy_dependency_unknown:
                     value["dependency_unknown"] = True
+                committed = set(old.get("applied_edit_keys", []) if old else []) | markers
+                if committed:
+                    value["applied_edit_keys"] = sorted(committed)
                 self._put(scope, "states", key, value)
                 current[key] = value
                 status = "created" if old is None else "updated"

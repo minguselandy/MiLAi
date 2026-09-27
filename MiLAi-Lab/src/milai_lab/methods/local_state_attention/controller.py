@@ -197,7 +197,8 @@ class LocalStateController:
                                             query_source_id=query_id)
         current_ids = {row["id"] for row in self.bank.states(scope)}
         new_ids = {index: row["id"] for index, row in enumerate(receipts)
-                   if row["status"] == "created"}
+                   if row["status"] == "created" or
+                   (row.get("replayed") and row.get("operation") == "create")}
         focus = []
         for key in plan["focus"]:
             if key.startswith("new:"):

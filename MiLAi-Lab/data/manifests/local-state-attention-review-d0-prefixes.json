@@ -1,0 +1,262 @@
+{
+  "kind": "LSA_REVIEW_D0_PREFIX_CATALOG",
+  "status": "OFFLINE_EXTRACTED_AND_HASH_VERIFIED",
+  "reference_commit": "a9290f3bc621ee7a00a61d4c9cf8c3a01d92bd46",
+  "plan_sha256": "c8e7dc82f8d70665f731e1b9ff331ab100eeeee429ba90a073a125574bea9e43",
+  "case_count": 10,
+  "cases": [
+    {
+      "case_id": "state_frame_loss",
+      "family": "frame_preservation",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/lr-wiring-r1/lsa-lr-wiring-r1-interleaved-local_all_sources/trace.jsonl",
+      "trace_sha256": "c842419265a2d8f6648bf7799c0081f745ff53f73514062e49e99ca625ec370c",
+      "trace_line": 28,
+      "historical_source_commit": "857b80c7bc217d78c63b4f4d5dc0528b96a16f6c",
+      "historical_result_manifest": "data/manifests/local-state-attention-lr-wiring-r1-results.json",
+      "historical_result_manifest_sha256": "2ca72951e83a6d5ede939d38c826a235fbe447b549eeffe7eb5738cf5009dc45",
+      "role": "state_control",
+      "control_stage": "maintenance",
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/state_frame_loss.json",
+        "sha256": "b847d9c5348cc423ad3e6beaa34ce6912cdc4c8ea1e3a603bada5ad84ce2eedc"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/state_frame_loss.json",
+        "sha256": "32aaae0d3bf03fd0424059f4bdc8fd965f834ae668e796ac12465707cd463a04"
+      }
+    },
+    {
+      "case_id": "summary_frame_loss",
+      "family": "frame_preservation",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/window-summary-wiring-r1/lsa-window-summary-wiring-r1-interleaved-window_summary/trace.jsonl",
+      "trace_sha256": "b54b5474cf1c766b4c6829ffa0b38c3e03222b8b7e8e1672e09ed8b349ea99e0",
+      "trace_line": 31,
+      "historical_source_commit": "bc5a5c8b98db8b965432759bdea367c9475869b1",
+      "historical_result_manifest": "data/manifests/local-state-attention-window-summary-wiring-r1-results.json",
+      "historical_result_manifest_sha256": "267eeee46c83399fc632881a5e851a8c877618a1fb5a40dc992d7aa7644c713d",
+      "role": "state_control",
+      "control_stage": "history_summary",
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/summary_frame_loss.json",
+        "sha256": "8b8f0f400cfaeb9d38a7eedace4ab618417d0577f070f5f5592e55ed503b7d1e"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/summary_frame_loss.json",
+        "sha256": "70917831f5624b94958c734e99386a6f33df7afdd4aa67e3f97433a053650ecc"
+      }
+    },
+    {
+      "case_id": "post_event_double_application",
+      "family": "consumption_timing",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/maintenance-events-r1/lsa-maintenance-events-r1-distinct-local_lru_sources/trace.jsonl",
+      "trace_sha256": "e3297b7b0effc4d3dc5a09b15504f51fcdd258173aabd8d70367812966f011b9",
+      "trace_line": 54,
+      "historical_source_commit": "5640a93071af3abdbc816fa914e5f60969364a03",
+      "historical_result_manifest": "data/manifests/local-state-attention-maintenance-events-r1-results.json",
+      "historical_result_manifest_sha256": "10e15c55e62b2e6d724dd9635d8091f65179af41bd334621597c91e2070a2c48",
+      "role": "task_host",
+      "control_stage": null,
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/post_event_double_application.json",
+        "sha256": "8d2ab90a001374f807c839a90472d6203a14b8bd184d4d590343717c915d4e20"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/post_event_double_application.json",
+        "sha256": "62194fbab6913152fc8d425436b61ed79ac5da5d18da298481dafb924c581c40"
+      }
+    },
+    {
+      "case_id": "exact_object_identity",
+      "family": "host_object_identity",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/history-wiring-r1/lsa-history-wiring-r1-partial-full_history/trace.jsonl",
+      "trace_sha256": "bfb33d19583fb5b96541194a4271f2b578372c230e7d877ac96e892337ee2c98",
+      "trace_line": 12,
+      "historical_source_commit": "e44465b4b687dc86e68c6d6f0c079bb81e869d56",
+      "historical_result_manifest": "data/manifests/local-state-attention-history-wiring-r1-results.json",
+      "historical_result_manifest_sha256": "d12b4290411e5a9b843e1326187daf63813c3247e22d8cf6ab25229f1fdc1a42",
+      "role": "task_host",
+      "control_stage": null,
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/exact_object_identity.json",
+        "sha256": "157abca41427a6663abbc1cb1ac469980da8d7615bad8223418cb80c358e2c45"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/exact_object_identity.json",
+        "sha256": "8fe546f9ac3ef5dc2224cf4ffa4ae334bffb8ca0c869f1406fed0ed8a6a1262c"
+      }
+    },
+    {
+      "case_id": "no_change_read",
+      "family": "no_change_control",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/lr-wiring-r1/lsa-lr-wiring-r1-interleaved-local_all_sources/trace.jsonl",
+      "trace_sha256": "c842419265a2d8f6648bf7799c0081f745ff53f73514062e49e99ca625ec370c",
+      "trace_line": 22,
+      "historical_source_commit": "857b80c7bc217d78c63b4f4d5dc0528b96a16f6c",
+      "historical_result_manifest": "data/manifests/local-state-attention-lr-wiring-r1-results.json",
+      "historical_result_manifest_sha256": "2ca72951e83a6d5ede939d38c826a235fbe447b549eeffe7eb5738cf5009dc45",
+      "role": "state_control",
+      "control_stage": "maintenance",
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/no_change_read.json",
+        "sha256": "debc6d4ea7f097759bcb5401743f11eb1edc173ad09bd430cf5bccf91f9e0453"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/no_change_read.json",
+        "sha256": "c9dd40de1ef5a5af1e664ed1e7e7911adcb56c7d55b484b96f2e79592a2322d2"
+      }
+    },
+    {
+      "case_id": "distinct_increment_first",
+      "family": "distinct_same_text_control",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/maintenance-events-r1/lsa-maintenance-events-r1-distinct-local_lru_sources/trace.jsonl",
+      "trace_sha256": "e3297b7b0effc4d3dc5a09b15504f51fcdd258173aabd8d70367812966f011b9",
+      "trace_line": 15,
+      "historical_source_commit": "5640a93071af3abdbc816fa914e5f60969364a03",
+      "historical_result_manifest": "data/manifests/local-state-attention-maintenance-events-r1-results.json",
+      "historical_result_manifest_sha256": "10e15c55e62b2e6d724dd9635d8091f65179af41bd334621597c91e2070a2c48",
+      "role": "state_control",
+      "control_stage": "maintenance",
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/distinct_increment_first.json",
+        "sha256": "f5384bd464bdbd4a18be502ccdd0b97546515de3e68081665ea822549f140a29"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/distinct_increment_first.json",
+        "sha256": "50ff727f35a7c6c98091063a607a65c897849a333332362af202aa4ef5f29f4f"
+      }
+    },
+    {
+      "case_id": "distinct_increment_second",
+      "family": "distinct_same_text_control",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/maintenance-events-r1/lsa-maintenance-events-r1-distinct-local_lru_sources/trace.jsonl",
+      "trace_sha256": "e3297b7b0effc4d3dc5a09b15504f51fcdd258173aabd8d70367812966f011b9",
+      "trace_line": 49,
+      "historical_source_commit": "5640a93071af3abdbc816fa914e5f60969364a03",
+      "historical_result_manifest": "data/manifests/local-state-attention-maintenance-events-r1-results.json",
+      "historical_result_manifest_sha256": "10e15c55e62b2e6d724dd9635d8091f65179af41bd334621597c91e2070a2c48",
+      "role": "state_control",
+      "control_stage": "maintenance",
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/distinct_increment_second.json",
+        "sha256": "1a9c1e8ad852a9ea40327606058056869a8c23d9d78a64fcf41a825705353c63"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/distinct_increment_second.json",
+        "sha256": "0cd2de2f12c370c31f0652ec207c567a80a2648db2d17570948c2e8e76cd8636"
+      }
+    },
+    {
+      "case_id": "absolute_user_revision",
+      "family": "current_user_revision_control",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/lr-wiring-r1/lsa-lr-wiring-r1-interleaved-local_all_sources/trace.jsonl",
+      "trace_sha256": "c842419265a2d8f6648bf7799c0081f745ff53f73514062e49e99ca625ec370c",
+      "trace_line": 15,
+      "historical_source_commit": "857b80c7bc217d78c63b4f4d5dc0528b96a16f6c",
+      "historical_result_manifest": "data/manifests/local-state-attention-lr-wiring-r1-results.json",
+      "historical_result_manifest_sha256": "2ca72951e83a6d5ede939d38c826a235fbe447b549eeffe7eb5738cf5009dc45",
+      "role": "state_control",
+      "control_stage": "maintenance",
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/absolute_user_revision.json",
+        "sha256": "cd89940af566f45596faaf5bf2480eb0d474ce03968b284ad056d31769ff8bb5"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/absolute_user_revision.json",
+        "sha256": "59c4bc2c36b64c5f833813eabd5844d07da0ad019a52bc65bcc2048601e61ca9"
+      }
+    },
+    {
+      "case_id": "internal_memory_receipt",
+      "family": "internal_receipt_control",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/maintenance-events-r1/lsa-maintenance-events-r1-distinct-local_lru_sources/trace.jsonl",
+      "trace_sha256": "e3297b7b0effc4d3dc5a09b15504f51fcdd258173aabd8d70367812966f011b9",
+      "trace_line": 26,
+      "historical_source_commit": "5640a93071af3abdbc816fa914e5f60969364a03",
+      "historical_result_manifest": "data/manifests/local-state-attention-maintenance-events-r1-results.json",
+      "historical_result_manifest_sha256": "10e15c55e62b2e6d724dd9635d8091f65179af41bd334621597c91e2070a2c48",
+      "role": "state_control",
+      "control_stage": "maintenance",
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/internal_memory_receipt.json",
+        "sha256": "b5036a16ccbd85ecc47b5257d08ad9001f8e2c22c62fcb25941ed07a89a4ae97"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/internal_memory_receipt.json",
+        "sha256": "3ca98adde808a7cff5503ad1fa9475043065cea1fcfcc72a613414f124f823a6"
+      }
+    },
+    {
+      "case_id": "partial_business_receipt",
+      "family": "partial_success_control",
+      "split": "EXPOSED_DEVELOPMENT",
+      "trace_path": "artifacts/local-state-attention/lr-wiring-r1/lsa-lr-wiring-r1-partial-local_lr_sources/trace.jsonl",
+      "trace_sha256": "d55f7e702e550139a91be7866f59aeffc0161afa4ceeb01ef54f24899d2b2e98",
+      "trace_line": 39,
+      "historical_source_commit": "857b80c7bc217d78c63b4f4d5dc0528b96a16f6c",
+      "historical_result_manifest": "data/manifests/local-state-attention-lr-wiring-r1-results.json",
+      "historical_result_manifest_sha256": "2ca72951e83a6d5ede939d38c826a235fbe447b549eeffe7eb5738cf5009dc45",
+      "role": "state_control",
+      "control_stage": "maintenance",
+      "runtime": {
+        "path": "artifacts/local-state-attention/review-d0/runtime/partial_business_receipt.json",
+        "sha256": "48ff71330a736f99a795f805c74d9019d67b67517f94362efc8fa1a183229280"
+      },
+      "evaluator": {
+        "path": "artifacts/local-state-attention/review-d0/evaluator/partial_business_receipt.json",
+        "sha256": "333ffbb7cac0b87b86d8162b2fbccfbf1cc20ed4039c3ba642b0613e174c44a8"
+      }
+    }
+  ],
+  "rubric": {
+    "path": "data/diagnostics/local_state_attention/review-d0-rubric.json",
+    "sha256": "d8747d497e4257db3c886ef8c8ee830135d9e653e2f079be4d729829e664a464"
+  },
+  "extraction": {
+    "path": "artifacts/local-state-attention/review-d0/extract_prefixes.py",
+    "sha256": "0517454adebd533287299f90d27b6406b883add4f0899e3858b9787d23edf2a2"
+  },
+  "runtime_boundary": "Runtime file contains only the original HTTP request, not response/rubric/evaluator. Use source-specific temporal/owner input; any D1 transformation requires a new freeze shared across compared arms.",
+  "limitations": [
+    "Selected after failures; not unseen or 10 independent trajectories.",
+    "Different historical source commits; no pooled new-source score.",
+    "Original request stores exactly its actual materials, not all possibly accessible history.",
+    "D0 catalog is not an execution protocol or a real-model result."
+  ],
+  "new_generation_calls": 0,
+  "new_embedding_calls": 0,
+  "business_or_store_calls": 0,
+  "continuous_budget_sha256": "64db6395c91316236291e32c5f233e823f96b98cc7a906a8a3fe985524948085",
+  "deterministic_repair": {
+    "status": "CHECKED_OFFLINE",
+    "source_files_sha256": {
+      "src/milai_lab/methods/local_state_attention/bank.py": "a66dfc9b5572c094ddef22544f570c43630d457b6c4b240667f587997740f2d9",
+      "src/milai_lab/methods/local_state_attention/controller.py": "de6e7994010868feb28926ffdd2107938009d867ae0ea1d0e9fd873a749b94d2",
+      "tests/unit/test_local_state_attention.py": "6c84d5b86daab1f114d019cca20569e0cef9326e34241430b871e0d6ea723e60"
+    },
+    "identity": "exact sorted event ID set + target State ID or new edit index + create/update edit index",
+    "final_focused_checks_passed": 6,
+    "prior_intermediate_lsa_file_checks_passed": 64,
+    "static_checks": [
+      "targeted Ruff",
+      "Mypy on two changed source modules",
+      "git diff --check"
+    ],
+    "old_state_read_compatible": true,
+    "model_schema_changed": false,
+    "limitations": [
+      "Edit reordering is not the same operation identity.",
+      "New events combined with old pending events may still cause model semantic re-interpretation.",
+      "A corrected semantic proposal at an already committed identical slot is not mechanically distinguished from a retry.",
+      "No new end-to-end model or effect result is claimed."
+    ]
+  }
+}

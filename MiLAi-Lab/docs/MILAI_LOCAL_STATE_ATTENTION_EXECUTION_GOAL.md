@@ -7,7 +7,11 @@ plan_sha256: 079f8bfb6cdefbe4da11696d29b6f6cc74755f81337bdbfe3996add000cf18dd
 
 # Local State–Attention 执行 Goal
 
-## 用户最新收束指令与当前暂停状态
+> 2026-09-27 后续授权：用户已激活[16轮复盘后执行 Goal](MILAI_LSA_REVIEW_EXECUTION_GOAL.md)。
+> 实际 thread Goal 现为 active；本文件 PAUSED 和下段是 a9290f3 收束时的历史状态。
+> 新阶段按新计划推进，不重跑旧批次，不恢复独立的 v27 部署草稿。
+
+## 上一阶段收束与暂停记录
 
 用户要求当前任务结束后暂停Goal、生成总体实验报告并上传GitHub。window_summary切片
 已完成实现、必要检查/构建和4轨迹24消息验证，实际thread Goal现为 **paused**。
