@@ -1,0 +1,153 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P3_WIRING_R2_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_PUBLICATION",
+  "scope": "WP2 G/L/LRU implementation wiring on exposed P1 inputs; not full repeated P3 evaluation",
+  "basis": [
+    "docs/MILAI_LOCAL_STATE_ATTENTION_P3_WIRING_R1_RESULTS_20260927.md"
+  ],
+  "run_order": [
+    {
+      "run_id": "lsa-p3-wiring-interleaved-local_lru_sources-r2",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-interleaved-global_note_sources-r2",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-interleaved-local_all_sources-r2",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-partial-global_note_sources-r2",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-partial-local_all_sources-r2",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-partial-local_lru_sources-r2",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-interleaved-workshop.json": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "split": "development; both original P1 scripts already exposed; no unseen claim",
+  "public_messages": 36,
+  "whole_trajectory_denominator_per_arm": 2,
+  "changes_to_freeze": [
+    "Explicit opt-in local granularity for L and LRU: independently updatable/resumable matters; no preassigned partition.",
+    "LRU: directory update selection, shared maintainer on selected bodies, independent updated-directory read selection; actual calls and errors counted."
+  ],
+  "shared": {
+    "aggregate_content_budget_chars": 16000,
+    "source_view_utf8_budget": 16384,
+    "events_and_permissions": "same scoped user/tool events and explicit-reference source resolver",
+    "controller_max_tokens": 2048,
+    "host_max_tokens": 4096,
+    "controller_calls_per_public_message": 13,
+    "host_calls_per_public_message": 12,
+    "http_concurrency": 1,
+    "no_vllm_changes": true,
+    "runtime_reads_rubric": false
+  },
+  "execution": "Fresh isolated run/State/memory/world/checkpoint per arm; separate phase subprocess; source held throughout all six runs.",
+  "scoring": "Original complete rubric and all failures. Root additionally checks spontaneous partition, per-event submitted body candidates, actual U/A and persisted edits. No oracle State IDs or forced match to a unique partition.",
+  "representation_validity": "A local arm that remains one combined card is reported as unrealized local partition, not a local-selection benefit. More card count alone does not establish semantic independence or benefit.",
+  "computational_limits": [
+    "Selector calls are paid and consume the same 13-control cap. At small N, routing may cost more than all-state maintenance.",
+    "Existing directory construction still reads full Store records; only model-input body reduction is claimed when observed.",
+    "G/L/LRU are online system trajectories; later same-bank/LR controls are needed for isolated selector effects.",
+    "Shared multi-State updates are not claimed atomic in this slice."
+  ],
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 1191,
+    "generation_tokens": 1440580,
+    "embedding_tokens": 11092
+  },
+  "stop_rule": "Complete six runs through semantic/capacity failures; stop only for infrastructure or deterministic execution-invalidity. No broad benchmark or parameter sweep based on a successful one-off case.",
+  "validation": {
+    "affected_tests": 44,
+    "target_ruff": "PASS",
+    "target_mypy": "PASS",
+    "diff_check": "PASS",
+    "prepare_six_runs": "PASS zero-model in /tmp; Root formal namespaces not yet prepared",
+    "build": {
+      "wheel_sha256": "7433e048f45d2ef50699ee55bb132ff4822869a09b317dbe95c8a00e66c38111",
+      "sdist_sha256": "b13436ae9acf04191f941e2e0bbfbb64d7690b1f66343b077e629c5a8b26ead2"
+    },
+    "real_model_calls": 0
+  },
+  "local_granularity_config": "control.local_granularity=true for L/LRU; ignored by G, absent key preserves historical local behavior",
+  "representation_and_update": {
+    "global_note_sources": {
+      "read_policy": "all_sources",
+      "representation": "global_note",
+      "update_policy": "all"
+    },
+    "local_all_sources": {
+      "read_policy": "all_sources",
+      "representation": "local",
+      "update_policy": "all"
+    },
+    "local_lru_sources": {
+      "read_policy": "focus_sources",
+      "representation": "local",
+      "update_policy": "lru"
+    }
+  },
+  "controller_substages": [
+    "update_selector",
+    "maintenance",
+    "read_selector"
+  ],
+  "no_op_and_failures": [
+    "Empty U with may_create=false does not force a maintenance call; the semantic no-op decision remains evaluated.",
+    "Illegal individual edits are skipped while legal independent edits may commit; pending survives mixed failure.",
+    "U or maintenance failure retains pending; A failure does not revert committed state and does not cache a failed read choice.",
+    "All controls, including selectors, share the original 13-call cap. Host can proceed with actual current observations after optional control failure."
+  ],
+  "order_rationale": "New LRU decoder is encountered first for execution validity; then rotate arm order between scripts. This order was fixed before any real request, not chosen after outcomes.",
+  "source_freeze": "Published source/actual config/dependencies/input hashes bound by actual prepare after publication; source unchanged throughout all six full trajectories"
+}

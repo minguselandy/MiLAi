@@ -1,5 +1,5 @@
 {
-  "recipe_id": "local-state-attention-v27-p1",
+  "recipe_id": "local-state-attention-v27-wp2-lru",
   "host": {
     "base_url": "http://127.0.0.1:7860/v1/",
     "model": "Qwen3.6-35B-A3B-FP8",
@@ -16,7 +16,8 @@
     "max_pending_batch": 24,
     "max_states": 32,
     "max_events": 256,
-    "aggregate_content_chars": 16000
+    "aggregate_content_chars": 16000,
+    "local_granularity": true
   },
   "embedding": {
     "base_url": "http://127.0.0.1:7861/v1/",

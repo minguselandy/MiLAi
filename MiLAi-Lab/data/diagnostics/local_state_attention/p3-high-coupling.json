@@ -1,0 +1,66 @@
+{
+  "kind": "MILAI_LOCAL_STATE_ATTENTION_SCRIPT",
+  "script_id": "p3-high-coupling-v1",
+  "users": [
+    "devon"
+  ],
+  "initial_label_available": true,
+  "phases": [
+    {
+      "id": 0,
+      "operator_memory": [],
+      "world_events": [],
+      "messages": [
+        {
+          "message_id": "joint-plan",
+          "user_id": "devon",
+          "session_id": "session-0",
+          "public_index": 0,
+          "text": "We have one shared shipping slot limited to 10 units total across three independently tracked objects: Delta audio packs, 2 units; Delta lighting packs, 3 units; Delta display packs, 4 units. All go to bay B-1 in reusable cases. Nothing is reserved. Keep the common slot limit and acknowledge without business action."
+        },
+        {
+          "message_id": "all-changed",
+          "user_id": "devon",
+          "session_id": "session-0",
+          "public_index": 1,
+          "text": "Every Delta object now needs one additional unit. All three destinations change to bay B-3 and all three packings change to sealed cases. The shared slot remains limited to 10 units total. Record the new requirements, flag any overall issue, and do not reserve."
+        },
+        {
+          "message_id": "no-change-read",
+          "user_id": "devon",
+          "session_id": "session-0",
+          "public_index": 2,
+          "text": "Without changing any plan, list the three revised quantities and their combined total against the slot limit. Do not take an action."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "operator_memory": [],
+      "world_events": [],
+      "messages": [
+        {
+          "message_id": "blocked-combination",
+          "user_id": "devon",
+          "session_id": "session-1",
+          "public_index": 0,
+          "text": "Can all three current Delta plans fit the shared slot? If they do not fit, explain the shortfall and do not make even a partial reservation. Do not silently reduce any requested quantity."
+        },
+        {
+          "message_id": "local-resolution",
+          "user_id": "devon",
+          "session_id": "session-1",
+          "public_index": 1,
+          "text": "I authorize reducing only Delta display packs to 3 units. All other current quantities, destination, packing and the shared slot limit stay unchanged. Confirm the combined plan and whether it fits, without acting yet."
+        },
+        {
+          "message_id": "combined-action",
+          "user_id": "devon",
+          "session_id": "session-1",
+          "public_index": 2,
+          "text": "If the currently agreed combined plan fits, reserve and label Delta audio packs, Delta lighting packs and Delta display packs once each using their agreed fields. Do not add a fourth reservation or invent a dispatch; report actual results."
+        }
+      ]
+    }
+  ]
+}

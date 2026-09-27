@@ -16,6 +16,7 @@ from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateSc
 from milai_lab.providers.contextual_vllm import VLLMClient
 
 REQUEST_ROLE: ContextVar[str] = ContextVar("lsa_request_role", default="task_host")
+CONTROL_STAGE: ContextVar[str | None] = ContextVar("lsa_control_stage", default=None)
 
 
 @contextmanager
@@ -67,9 +68,13 @@ class LocalStateController:
                  max_pending_batch: int = 24,
                  capacity_path: Path | None = None,
                  max_calls_per_message: int = 13,
-                 representation: str = "local") -> None:
+                 representation: str = "local",
+                 local_granularity: bool = False,
+                 update_policy: str = "all") -> None:
         if representation not in {"local", "global_note"}:
             raise ValueError("LSA_REPRESENTATION_UNKNOWN")
+        if update_policy not in {"all", "lru"}:
+            raise ValueError("LSA_UPDATE_POLICY_UNKNOWN")
         self.bank = bank
         self.client = client
         self.emit = emit
@@ -77,6 +82,8 @@ class LocalStateController:
         self.capacity_path = capacity_path
         self.max_calls_per_message = max_calls_per_message
         self.representation = representation
+        self.local_granularity = local_granularity
+        self.update_policy = update_policy
 
     def prepare(self, scope: StateScope, query_id: str, query: str,
                 message_key: str = "") -> dict[str, Any]:
@@ -140,6 +147,13 @@ class LocalStateController:
                 "a short nonempty title naming the working note and content; ", 1)
             prompt += (" Keep all continuing matters in this one note. Create it only when "
                        "none exists; otherwise update its exact id or make no edit.")
+        elif self.local_granularity:
+            prompt += (" Keep separate local States for matters that can be updated and "
+                       "resumed independently; a shared topic alone does not make them "
+                       "one matter.")
+        if self.update_policy == "lru":
+            return self._prepare_lru(scope, query_id, query, message_key,
+                                     pending, states, events, prompt)
         payload = {"current_task": query,
                    "new_observations": [self._event_view(row) for row in pending],
                    "states": [{key: row[key] for key in (
@@ -198,6 +212,207 @@ class LocalStateController:
                        "focus": focus, "edits": receipts, "degraded": invalid,
                        "pending_event_ids": result["pending_event_ids"]})
         return result
+
+    def _lru_call(self, stage: str, message_key: str, prompt: str,
+                  payload: dict[str, Any], schema: dict[str, Any]) -> dict[str, Any]:
+        if self.capacity_path is not None:
+            counts = read_json(self.capacity_path) if self.capacity_path.exists() else {}
+            if counts.get(message_key, 0) >= self.max_calls_per_message:
+                raise ControlResponseError("LSA_CONTROL_CAPACITY")
+            counts[message_key] = counts.get(message_key, 0) + 1
+            write_json(self.capacity_path, counts)
+        if self.emit is not None:
+            self.emit({"event": "lsa_lru_call", "stage": stage,
+                       "message_key": message_key,
+                       "payload_bytes": len(json.dumps(
+                           payload, ensure_ascii=False).encode("utf-8"))})
+        token = CONTROL_STAGE.set(stage)
+        try:
+            with request_role("state_control"):
+                receipt = self.client.chat(
+                    [{"role": "system", "content": prompt},
+                     {"role": "user", "content": json.dumps(
+                         payload, ensure_ascii=False)}],
+                    response_format={"type": "json_schema", "json_schema": {
+                        "name": "local_state_" + stage + "_v1", "strict": True,
+                        "schema": schema}})
+            return self._parse_json(receipt)
+        finally:
+            CONTROL_STAGE.reset(token)
+
+    def _prepare_lru(self, scope: StateScope, query_id: str, query: str,
+                     message_key: str, pending: list[dict[str, Any]],
+                     states: list[dict[str, Any]], events: list[dict[str, Any]],
+                     prompt: str) -> dict[str, Any]:
+        directory = [{key: state[key] for key in ("id", "title", "needs", "revision")}
+                     for state in states]
+        state_ids = {row["id"] for row in states}
+        observations = [self._event_view(row) for row in pending]
+        base = {"current_task": query, "new_observations": observations,
+                "directory": directory}
+        stats = {"directory_bytes": len(json.dumps(
+            directory, ensure_ascii=False).encode("utf-8")),
+            "full_bank_content_chars": sum(len(row["content"]) for row in states)}
+        id_items: dict[str, Any] = {"type": "string"}
+        if state_ids:
+            id_items["enum"] = sorted(state_ids)
+        update_schema = {"type": "object", "properties": {
+            "update_ids": {"type": "array", "items": id_items,
+                           "maxItems": len(state_ids)},
+            "may_create": {"type": "boolean"}},
+            "required": ["update_ids", "may_create"], "additionalProperties": False}
+        selected_update_ids: list[str] = []
+
+        def degraded(stage: str, reason: str, receipts: list[dict[str, Any]] | None = None,
+                     ) -> dict[str, Any]:
+            if stage == "read_selector":
+                self.bank.clear_focus(scope)
+            result = {"focus": [], "receipts": receipts or [], "degraded": True,
+                      "reused": False, "reason": reason,
+                      "pending_event_ids": [row["id"] for row in self.bank.pending(scope)]}
+            if self.emit is not None:
+                self.emit({"event": "lsa_lru_result", "stage": stage,
+                           "user_id": scope.user_id, "degraded": True,
+                           "reason": reason, "update_ids": selected_update_ids,
+                           "read_ids": [],
+                           "edits": result["receipts"], **stats})
+            return result
+        if pending:
+            try:
+                route = self._lru_call(
+                    "update_selector", message_key,
+                    "From source-identified new observations and the short State directory, "
+                    "select every existing State that may need an update. Selection is about "
+                    "event impact, not the current reading task. A new independently "
+                    "resumable matter may require creation. Return update_ids and "
+                    "may_create only.", base, update_schema)
+            except (ControlResponseError, httpx.TimeoutException) as error:
+                return degraded("update_selector", self._control_reason(error))
+        else:
+            route = {"update_ids": [], "may_create": False}
+        update_ids = route.get("update_ids")
+        may_create = route.get("may_create")
+        if (set(route) != {"update_ids", "may_create"}
+                or not isinstance(update_ids, list)
+                or any(not isinstance(key, str) for key in update_ids)
+                or len(set(update_ids)) != len(update_ids)
+                or not set(update_ids) <= state_ids
+                or type(may_create) is not bool):
+            return degraded("update_selector", "LSA_UPDATE_SELECTION_INVALID")
+        selected_update_ids = update_ids
+        candidates = [{key: row[key] for key in (
+            "id", "title", "content", "needs", "evidence_refs", "revision")}
+            for row in states if row["id"] in set(update_ids)]
+        candidate_bytes = len(json.dumps(
+            candidates, ensure_ascii=False).encode("utf-8"))
+        stats["candidate_body_bytes"] = candidate_bytes
+        if self.emit is not None:
+            self.emit({"event": "lsa_lru_selection", "stage": "update_selector",
+                       "user_id": scope.user_id, "update_ids": update_ids,
+                       "may_create": may_create, **stats})
+        event_ids = {row["id"] for row in pending}
+        receipts: list[dict[str, Any]] = []
+        if update_ids or may_create:
+            edit_schema = control_schema(update_ids, self.bank.max_states)[
+                "properties"]["edits"]
+            if not may_create and update_ids:
+                edit_schema = {**edit_schema,
+                               "items": edit_schema["items"]["oneOf"][1]}
+            maintenance_schema = {"type": "object", "properties": {
+                "edits": edit_schema}, "required": ["edits"],
+                "additionalProperties": False}
+            maintenance_prompt = prompt.replace(
+                "Independently update States affected by new observations and select focus "
+                "for the current question or action. A State may need an update even when "
+                "it is not in focus; focus need not include every updated State. ",
+                "Update only the selected candidate States affected by new observations. ",
+                1).replace("Return JSON with edits and focus only. ",
+                           "Return JSON with edits only. ", 1)
+            maintenance_prompt = maintenance_prompt.replace(
+                "Focus is an array of identifiers only: exact ids from states, or new:0, "
+                "new:1 for a newly created edit at that zero-based edits index. Never put "
+                "a title, factual summary, or answer in focus. Empty focus is valid. "
+                "Choose focus for the current_task, which is a query rather than an answer. ",
+                "", 1)
+            try:
+                plan = self._lru_call(
+                    "maintenance", message_key, maintenance_prompt,
+                    {"current_task": query, "new_observations": observations,
+                     "states": candidates,
+                     "source_ids_available": [row["id"] for row in events]},
+                    maintenance_schema)
+            except (ControlResponseError, httpx.TimeoutException) as error:
+                return degraded("maintenance", self._control_reason(error))
+            edits = plan.get("edits")
+            if set(plan) != {"edits"} or not isinstance(edits, list):
+                return degraded("maintenance", "LSA_MAINTENANCE_INVALID_SHAPE")
+            receipts, invalid = self.bank.apply(scope, edits, event_ids,
+                                                query_source_id=query_id,
+                                                allowed_existing_ids=set(update_ids),
+                                                allow_create=may_create)
+            if invalid:
+                return degraded("maintenance", "LSA_MAINTENANCE_INVALID", receipts)
+        else:
+            if event_ids:
+                receipts, invalid = self.bank.apply(scope, [], event_ids,
+                                                    query_source_id=query_id)
+                assert not invalid
+        updated = self.bank.states(scope)
+        updated_ids = {row["id"] for row in updated}
+        read_directory = [{key: row[key] for key in ("id", "title", "needs", "revision")}
+                          for row in updated]
+        stats["updated_directory_bytes"] = len(json.dumps(
+            read_directory, ensure_ascii=False).encode("utf-8"))
+        read_schema = {"type": "object", "properties": {
+            "read_ids": {"type": "array", "items": (
+                {"type": "string", "enum": sorted(updated_ids)} if updated_ids else
+                {"type": "string"}), "maxItems": len(updated_ids),
+                }}, "required": ["read_ids"],
+            "additionalProperties": False}
+        if updated:
+            try:
+                choice = self._lru_call(
+                    "read_selector", message_key,
+                    "From the updated State directory and current task, select the State "
+                    "ids needed for the current answer or action. Empty and multiple "
+                    "selections are valid. Return read_ids only.",
+                    {"current_task": query, "new_observations": observations,
+                     "directory": read_directory}, read_schema)
+            except (ControlResponseError, httpx.TimeoutException) as error:
+                return degraded("read_selector", self._control_reason(error), receipts)
+            read_ids = choice.get("read_ids")
+            if (set(choice) != {"read_ids"} or not isinstance(read_ids, list)
+                    or any(not isinstance(key, str) for key in read_ids)
+                    or len(set(read_ids)) != len(read_ids)
+                    or not set(read_ids) <= updated_ids):
+                return degraded("read_selector", "LSA_READ_SELECTION_INVALID", receipts)
+        else:
+            read_ids = []
+        self.bank.set_focus(scope, query_id, read_ids)
+        result = {"focus": read_ids, "receipts": receipts, "degraded": False,
+                  "reused": False, "pending_event_ids": []}
+        if self.emit is not None:
+            self.emit({"event": "lsa_lru_result", "user_id": scope.user_id,
+                       "degraded": False, "update_ids": update_ids,
+                       "read_ids": read_ids, "edits": receipts, **stats})
+        return result
+
+    @staticmethod
+    def _control_reason(error: ControlResponseError | httpx.TimeoutException) -> str:
+        return str(error) if isinstance(error, ControlResponseError) else type(error).__name__
+
+    @staticmethod
+    def _parse_json(receipt: dict[str, Any]) -> dict[str, Any]:
+        try:
+            choice = receipt["choices"][0]
+            if choice["finish_reason"] != "stop":
+                raise ControlResponseError("LSA_CONTROL_INCOMPLETE")
+            value = json.loads(choice["message"]["content"])
+            if not isinstance(value, dict):
+                raise ControlResponseError("LSA_CONTROL_INVALID_SHAPE")
+            return value
+        except (KeyError, IndexError, TypeError, json.JSONDecodeError) as error:
+            raise ControlResponseError("LSA_CONTROL_INVALID_RESPONSE") from error
 
     @staticmethod
     def _event_view(row: dict[str, Any]) -> dict[str, Any]:

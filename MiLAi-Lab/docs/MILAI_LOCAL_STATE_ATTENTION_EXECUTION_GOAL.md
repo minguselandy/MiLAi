@@ -211,6 +211,22 @@ L为原多State；共享all_sources、16384字节来源和16000字符aggregate�
 pending或容量错误，不把预算未触发说成规模可靠性。下一切片落实通用局部事项粒度和真实
 LRU更新候选/独立读取，保持来源合同与业务接口，不再R3措辞微调，不启动广泛比较。
 
+[R2小接线协议](../data/manifests/local-state-attention-p3-wiring-r2-protocol.json)准备原两脚本×
+G/L/LRU各一次，顺序interleaved LRU→G→L、partial G→L→LRU，共36公开消息；先遇到新
+LRU decoder，全部输入/rubric仍是development。L/LRU显式打开local_granularity，按可
+独立更新/恢复的事项分卡，缺省配置保持旧行为，G保持一note。LRU用短目录选U、只交付U
+正文给维护器，再基于更新目录选A；所有子调用共用原13次控制容量和2048输出上限。
+空U/no-create可跳过维护，坏编辑逐条跳过并保留pending；A失败不撤销已经提交的State。
+目录仍读取完整Store记录，不能把模型正文候选减少说成物理读取减少。新源码已完成44项相关窄测、
+目标静态检查、六个/tmp零模型prepare及一次必要构建（哈希见协议）。发布后Root正式
+freeze再运行，批内不改源码；不是提前开始完整P3重复比较。
+
+另已准备[四类后续输入与rubric草稿](../data/diagnostics/local_state_attention/p3-additional-rubric-draft.json)，
+共27消息，覆盖共享政策/适用范围与同值确认、等权来源冲突、用户报告闭合与重开/历史、
+高耦合共享容量。runtime脚本与rubric分离，不提供oracle State分组；未选入或执行批次，
+不声称unseen。逻辑关闭不等于物理归档实现，未知副作用真实恢复及错误State注入仍是
+独立缺口。先完成当前小接线的机制检查，再冻结后续完整情景/重复/顺序。
+
 ## 后期资源准备记录
 
 已核对 [LangMem 官方 API](https://langchain-ai.github.io/langmem/reference/) 确实区分

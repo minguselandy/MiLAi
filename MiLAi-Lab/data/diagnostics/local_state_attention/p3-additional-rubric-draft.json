@@ -1,0 +1,193 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P3_ADDITIONAL_DEVELOPMENT_RUBRIC",
+  "status": "DRAFT_NOT_SELECTED_OR_EXECUTED",
+  "runtime_reads_rubric": false,
+  "scope": "Four new relation/constraint templates for later six-scenario P3 batch, only after LRU implementation and small wiring validity; not an execution authorization or unseen claim.",
+  "scorer": "Root manual semantic judgment plus exact committed world/journal fields; all predefined messages and each full trajectory in denominators; no unique oracle State partition.",
+  "cases": {
+    "p3-shared-scope": {
+      "message_denominator": 7,
+      "facts": {
+        "display": [
+          4,
+          "court C-7",
+          "sealed covers with a red tamper band"
+        ],
+        "boards": [
+          3,
+          "gallery G-2",
+          "cloth covers with a red tamper band"
+        ],
+        "policy_confirmation": "09:40",
+        "briefing": [
+          "studio T-4",
+          "16:20",
+          "captioned screen"
+        ]
+      },
+      "actions": {
+        "only_at": "both-actions",
+        "reserve_and_label": 2,
+        "complete_label": 0
+      },
+      "invariants": [
+        "Shared packing change affects both deliveries while briefing remains unchanged.",
+        "Moving boards indoors changes applicable cover without changing object quantity/destination.",
+        "Policy confirmation metadata does not overwrite event times or substantive requirements.",
+        "Packing wording may paraphrase the cover-plus-band composition, but neither component may be omitted; object names/quantity/destination must match exactly."
+      ]
+    },
+    "p3-conflicting-sources": {
+      "message_denominator": 7,
+      "facts": {
+        "panels": [
+          7,
+          "dock D-5",
+          "foam rails"
+        ],
+        "books": [
+          2,
+          "library L-9",
+          "paper sleeves"
+        ],
+        "original_proposals": {
+          "facilities": "dock D-5",
+          "curator": "hall H-6"
+        },
+        "resolution": "explicit user approval of facilities, not chronology"
+      },
+      "actions": {
+        "only_at": "resolved-actions",
+        "reserve_and_label": 2,
+        "complete_label": 0
+      },
+      "invariants": [
+        "No action while panel destination unresolved, including blocked-action after restart.",
+        "No timestamp/rank-based source authority.",
+        "Current execution and historical source query remain distinct."
+      ]
+    },
+    "p3-reopen-history": {
+      "message_denominator": 7,
+      "facts": {
+        "old_proof": [
+          4,
+          "desk A-6",
+          "flat folders"
+        ],
+        "new_proof": [
+          6,
+          "desk A-9",
+          "flat folders"
+        ],
+        "photo_mounts": [
+          3,
+          "rack P-2",
+          "rigid sleeves"
+        ],
+        "appointment": [
+          "room B-8",
+          "11:45",
+          "remote dial-in"
+        ]
+      },
+      "actions": {
+        "only_at": "reopened-action",
+        "reserve_and_label": 1,
+        "complete_label": 0
+      },
+      "invariants": [
+        "Prior handoff is user-reported and not system tool-confirmed.",
+        "Reopening retains old historical facts while applying new batch facts.",
+        "No action on photo mounts or appointment; new matter must remain recoverable.",
+        "Logical closure/reopening prose is not evidence that archived metadata/retrieval lifecycle was implemented."
+      ]
+    },
+    "p3-high-coupling": {
+      "message_denominator": 6,
+      "facts": {
+        "after_shared_update": {
+          "audio": 3,
+          "lighting": 4,
+          "display": 5,
+          "sum": 12,
+          "limit": 10,
+          "shortfall": 2
+        },
+        "final": {
+          "audio": 3,
+          "lighting": 4,
+          "display": 3,
+          "sum": 10,
+          "destination": "bay B-3",
+          "packing": "sealed cases"
+        }
+      },
+      "actions": {
+        "only_at": "combined-action",
+        "reserve_and_label": 3,
+        "complete_label": 0
+      },
+      "invariants": [
+        "All three change on the shared event; no sparse-locality assumption.",
+        "No partial reservation when combined capacity exceeded.",
+        "Only display quantity changes at resolution; final combined action uses all three actual plans."
+      ]
+    }
+  },
+  "coverage_plan_section_15_2": {
+    "1": [
+      "p1-interleaved-workshop",
+      "p3-high-coupling"
+    ],
+    "2": [
+      "p1-interleaved-workshop",
+      "p3-shared-scope"
+    ],
+    "3": [
+      "p3-shared-scope",
+      "p3-high-coupling"
+    ],
+    "4": [
+      "p3-shared-scope"
+    ],
+    "5": [
+      "p1-interleaved-workshop",
+      "p3-shared-scope"
+    ],
+    "6": [
+      "p3-reopen-history; logical only, physical archive/reactivation remains unimplemented"
+    ],
+    "7": [
+      "p1-partial-restart; unknown-result live recovery remains separate gap"
+    ],
+    "8": [
+      "all new fixtures have fresh-process/new-session phase boundary"
+    ],
+    "9": [
+      "p3-conflicting-sources",
+      "p3-reopen-history"
+    ],
+    "10": [
+      "new evidence can correct outdated plans; injected wrong/missing State remains separate P4 gap"
+    ],
+    "11": [
+      "p3-conflicting-sources"
+    ],
+    "12": [
+      "p3-high-coupling"
+    ]
+  },
+  "runtime_scripts": {
+    "data/diagnostics/local_state_attention/p3-shared-scope.json": "b34850298dc1b01d36da93f2c1dc076c85fa6e18a23697bfde601dc1f817f31e",
+    "data/diagnostics/local_state_attention/p3-conflicting-sources.json": "ab375216e1109d9cc4f3d14b487573a8bff4b07d7b15ca52f24e03a0fd1b20de",
+    "data/diagnostics/local_state_attention/p3-reopen-history.json": "f367afbd3a301f9ba2fa1cdc4c76f0a4f1de208491371cfd863124b64410cf49",
+    "data/diagnostics/local_state_attention/p3-high-coupling.json": "a68ed59b3f72e53a3a9817c9a5b6933b6b6faf085f7e587bbb94fce1b9a15109"
+  },
+  "required_before_selection": [
+    "Local granularity and LRU frozen/validated",
+    "Per-turn semantic rubric review",
+    "Full-batch arm order/repeats/capacity/cost protocol freeze",
+    "No gold/affected-State labels exposed to runtime"
+  ]
+}

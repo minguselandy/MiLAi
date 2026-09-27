@@ -166,8 +166,13 @@ class LocalStateBank:
     def set_focus(self, scope: StateScope, query_id: str, ids: list[str]) -> None:
         self._put(scope, "meta", "focus", {"query_id": query_id, "ids": ids})
 
+    def clear_focus(self, scope: StateScope) -> None:
+        self._delete(scope, "meta", "focus")
+
     def apply(self, scope: StateScope, edits: list[dict[str, Any]],
               event_ids: set[str], query_source_id: str | None = None,
+              allowed_existing_ids: set[str] | None = None,
+              allow_create: bool = True,
               ) -> tuple[list[dict[str, Any]], bool]:
         """Apply independent valid edits; retain pending when any edit is invalid."""
         current = {row["id"]: row for row in self.states(scope)}
@@ -189,6 +194,15 @@ class LocalStateBank:
                 receipts.append({"status": "skipped_invalid_edit"})
                 continue
             state_id = edit.get("id")
+            if ((state_id is None and not allow_create)
+                    or (isinstance(state_id, str)
+                        and allowed_existing_ids is not None
+                        and state_id not in allowed_existing_ids)):
+                invalid = True
+                receipts.append({"id": state_id, "status": "skipped_invalid_edit",
+                                 "reason": ("creation_not_allowed" if state_id is None
+                                            else "outside_update_candidates")})
+                continue
             refs = edit.get("evidence", [])
             content = edit.get("content")
             if ((state_id is not None and

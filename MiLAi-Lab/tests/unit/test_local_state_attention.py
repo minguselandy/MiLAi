@@ -23,12 +23,14 @@ from milai_lab.baselines.langmem_agent import FoundationScope, build_agent, invo
 from milai_lab.harness.contextual_artifacts import Trace
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import (
+    CONTROL_STAGE,
     LocalStateController,
     control_schema,
 )
 from milai_lab.methods.local_state_attention.integration import (
     SOURCE_VIEW_HEADER,
     _source_view,
+    make_pre_model_hook,
 )
 from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
@@ -43,6 +45,27 @@ def _response(value: dict[str, Any], index: int) -> httpx.Response:
         "choices": [{"finish_reason": "stop", "message": {
             "role": "assistant", "content": json.dumps(value)}}],
         "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}})
+
+
+class LruReplies:
+    def __init__(self, answers: dict[str, list[Any]]) -> None:
+        self.answers = answers
+        self.calls: list[dict[str, Any]] = []
+
+    def chat(self, messages: Any, **kwargs: Any) -> dict[str, Any]:
+        stage = kwargs["response_format"]["json_schema"]["name"].removeprefix(
+            "local_state_").removesuffix("_v1")
+        self.calls.append({"stage": stage, "payload": json.loads(messages[1]["content"]),
+                           "context_stage": CONTROL_STAGE.get(),
+                           "prompt": messages[0]["content"],
+                           "schema": kwargs["response_format"]["json_schema"]["schema"]})
+        answer = self.answers[stage].pop(0)
+        if isinstance(answer, Exception):
+            raise answer
+        if callable(answer):
+            answer = answer(json.loads(messages[1]["content"]))
+        return {"choices": [{"finish_reason": "stop", "message": {
+            "content": json.dumps(answer)}}]}
 
 
 def test_bank_order_noop_pending_scope_and_deletion() -> None:
@@ -584,6 +607,228 @@ def test_global_and_local_share_source_wire_without_extra_control_calls(
                for arm, view in views.items() for state_id in view["delivered_state_ids"])
 
 
+def test_lru_hook_updates_background_and_reads_only_foreground_sources(
+    tmp_path: Path,
+) -> None:
+    bank = LocalStateBank(InMemoryStore(), max_total_content_chars=16000)
+    scope = StateScope("run", "local_lru_sources", "alice")
+    ids: list[str] = []
+    for label in ("background", "foreground"):
+        source_id = "source-" + label
+        bank.record_event(scope, {"id": source_id, "kind": "tool", "actor": "tool",
+                                  "tool_call_id": source_id,
+                                  "content": "receipt-" + label})
+        receipts, invalid = bank.apply(scope, [{"id": None, "title": label,
+                                                "content": "old-" + label,
+                                                "evidence": [source_id]}], {source_id})
+        assert not invalid
+        ids.append(receipts[0]["id"])
+    background, foreground = ids
+    replies = LruReplies({
+        "update_selector": [{"update_ids": [background], "may_create": False}],
+        "maintenance": [{"edits": [{"id": background,
+                                      "content": "new-background"}]}],
+        "read_selector": [{"read_ids": [foreground]}]})
+    emitted: list[dict[str, Any]] = []
+    controller = LocalStateController(
+        bank, replies, emit=emitted.append,  # type: ignore[arg-type]
+        capacity_path=tmp_path / "capacity.json", local_granularity=True,
+        update_policy="lru")
+    original = HumanMessage(content="Update background; answer from foreground", id="live")
+    hook = make_pre_model_hook(controller, "Original system", "focus_sources", 16384)
+    output = hook({"messages": [original]}, {"configurable": {
+        "foundation_run_id": "run", "arm_id": "local_lru_sources", "user_id": "alice",
+        "thread_id": "thread"}})
+    view = next(row for row in emitted if row["event"] == "lsa_view")
+    assert [call["stage"] for call in replies.calls] == [
+        "update_selector", "maintenance", "read_selector"]
+    assert [call["context_stage"] for call in replies.calls] == [
+        "update_selector", "maintenance", "read_selector"]
+    validate({"update_ids": [background], "may_create": False},
+             replies.calls[0]["schema"])
+    validate({"edits": [{"id": background, "content": "new-background"}]},
+             replies.calls[1]["schema"])
+    validate({"read_ids": [foreground]}, replies.calls[2]["schema"])
+    assert all("content" not in row for row in replies.calls[0]["payload"]["directory"])
+    assert [row["id"] for row in replies.calls[1]["payload"]["states"]] == [background]
+    assert "dependency_source_ids" not in replies.calls[1]["payload"]["states"][0]
+    assert replies.calls[2]["payload"]["directory"] != []
+    assert view["controller_focus"] == view["delivered_state_ids"] == [foreground]
+    assert view["source_requested_ids"] == view["source_delivered_ids"] == [
+        "source-foreground"]
+    wire = output["llm_input_messages"]
+    assert wire[1] is original and wire[1].id == "live"
+    assert "receipt-foreground" in wire[0].content
+    assert "receipt-background" not in wire[0].content
+    assert bank.states(scope)[0 if background < foreground else 1]["content"] == (
+        "new-background")
+    assert json.loads((tmp_path / "capacity.json").read_text()) == {"thread:0": 3}
+    assert {row["stage"] for row in emitted if row["event"] == "lsa_lru_call"} == {
+        "update_selector", "maintenance", "read_selector"}
+
+
+def test_lru_shared_update_new_read_and_empty_update() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local_lru_sources", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "two matters"})
+    created, invalid = bank.apply(scope, [
+        {"id": None, "title": "first", "content": "old first"},
+        {"id": None, "title": "second", "content": "old second"}], {"seed"})
+    assert not invalid
+    first, second = (row["id"] for row in created)
+    bank.record_event(scope, {"id": "shared", "kind": "user", "content": "shared change"})
+    replies = LruReplies({
+        "update_selector": [{"update_ids": [first, second], "may_create": True},
+                            {"update_ids": [], "may_create": False}],
+        "maintenance": [{"edits": [
+            {"id": first, "content": "revised first"},
+            {"id": second, "content": "revised second"},
+            {"id": None, "title": "third", "content": "new matter"}]}],
+        "read_selector": [lambda payload: {"read_ids": [next(
+            row["id"] for row in payload["directory"]
+            if row["id"] not in {first, second})]}, {"read_ids": [first]}]})
+    controller = LocalStateController(bank, replies,  # type: ignore[arg-type]
+                                      update_policy="lru", local_granularity=True)
+    result = controller.prepare(scope, "shared", "read new matter")
+    assert not result["degraded"] and len(result["receipts"]) == 3
+    assert result["focus"] == [result["receipts"][2]["id"]]
+    assert {row["content"] for row in bank.states(scope)} == {
+        "revised first", "revised second", "new matter"}
+    assert bank.pending(scope) == []
+    bank.record_event(scope, {"id": "irrelevant", "kind": "user", "content": "no change"})
+    before = {row["id"]: row["revision"] for row in bank.states(scope)}
+    no_op = controller.prepare(scope, "irrelevant", "read first")
+    assert not no_op["degraded"] and no_op["receipts"] == []
+    assert no_op["focus"] == [first] and bank.pending(scope) == []
+    assert {row["id"]: row["revision"] for row in bank.states(scope)} == before
+    assert [call["stage"] for call in replies.calls] == [
+        "update_selector", "maintenance", "read_selector",
+        "update_selector", "read_selector"]
+
+
+@pytest.mark.parametrize("failed_stage", ["update_selector", "maintenance",
+                                           "read_selector", "unauthorized_update"])
+def test_lru_control_failures_keep_pending_or_committed_state(
+    failed_stage: str, tmp_path: Path,
+) -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local_lru_sources", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "matter"})
+    prior, invalid = bank.apply(scope, [{"id": None, "title": "matter",
+                                         "content": "old"}], {"seed"})
+    assert not invalid
+    state_id = prior[0]["id"]
+    bank.record_event(scope, {"id": "change", "kind": "user", "content": "new"})
+    failure = httpx.ReadTimeout("mock")
+    answers: dict[str, list[Any]] = {
+        "update_selector": [{"update_ids": [state_id], "may_create": False}],
+        "maintenance": [{"edits": [{"id": state_id, "content": "new"}]}],
+        "read_selector": [{"read_ids": [state_id]}]}
+    if failed_stage == "unauthorized_update":
+        answers["update_selector"] = [{"update_ids": [], "may_create": True}]
+        answers["maintenance"] = [{"edits": [{"id": state_id, "content": "new"}]}]
+    else:
+        answers[failed_stage] = [failure]
+    replies = LruReplies(answers)
+    controller = LocalStateController(
+        bank, replies, capacity_path=tmp_path / "capacity.json",  # type: ignore[arg-type]
+        update_policy="lru")
+    result = controller.prepare(scope, "change", "question", message_key="one:0")
+    assert result["degraded"] and result["focus"] == []
+    if failed_stage == "read_selector":
+        assert bank.pending(scope) == []
+        assert bank.states(scope)[0]["content"] == "new"
+        assert bank.focus(scope, "change") is None
+        replies.answers["read_selector"] = [{"read_ids": [state_id]}]
+        retried = controller.prepare(scope, "change", "question", message_key="one:0")
+        assert retried["focus"] == [state_id]
+        assert [call["stage"] for call in replies.calls][-1] == "read_selector"
+    else:
+        assert [row["id"] for row in bank.pending(scope)] == ["change"]
+        assert bank.states(scope)[0]["content"] == "old"
+
+
+def test_lru_shared_control_capacity_stops_read_without_rollback(tmp_path: Path) -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local_lru_sources", "alice")
+    bank.record_event(scope, {"id": "change", "kind": "user", "content": "new"})
+    replies = LruReplies({"update_selector": [{"update_ids": [], "may_create": True}],
+                          "maintenance": [{"edits": [{"id": None, "title": "matter",
+                                                       "content": "new"}]}],
+                          "read_selector": []})
+    controller = LocalStateController(
+        bank, replies, capacity_path=tmp_path / "capacity.json",  # type: ignore[arg-type]
+        max_calls_per_message=2, update_policy="lru")
+    result = controller.prepare(scope, "change", "question", message_key="one:0")
+    assert result["degraded"] and len(bank.states(scope)) == 1
+    assert result["reason"] == "LSA_CONTROL_CAPACITY"
+    assert bank.pending(scope) == []
+    assert [call["stage"] for call in replies.calls] == ["update_selector", "maintenance"]
+    assert json.loads((tmp_path / "capacity.json").read_text()) == {"one:0": 2}
+
+
+def test_lru_mixed_valid_and_outside_candidate_edits_commit_independently() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local_lru_sources", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "two matters"})
+    created, invalid = bank.apply(scope, [
+        {"id": None, "title": "first", "content": "old first"},
+        {"id": None, "title": "second", "content": "old second"}], {"seed"})
+    assert not invalid
+    first, second = (row["id"] for row in created)
+    bank.record_event(scope, {"id": "change", "kind": "user", "content": "change"})
+    replies = LruReplies({
+        "update_selector": [{"update_ids": [first], "may_create": False}],
+        "maintenance": [{"edits": [
+            {"id": first, "content": "new first"},
+            {"id": second, "content": "unauthorized second"},
+            {"id": None, "title": "unauthorized third", "content": "new"}]}],
+        "read_selector": []})
+    emitted: list[dict[str, Any]] = []
+    controller = LocalStateController(
+        bank, replies, emit=emitted.append,  # type: ignore[arg-type]
+        update_policy="lru")
+    result = controller.prepare(scope, "change", "question")
+    assert result["degraded"] and result["reason"] == "LSA_MAINTENANCE_INVALID"
+    assert [row["status"] for row in result["receipts"]] == [
+        "updated", "skipped_invalid_edit", "skipped_invalid_edit"]
+    assert [row.get("reason") for row in result["receipts"][1:]] == [
+        "outside_update_candidates", "creation_not_allowed"]
+    by_id = {row["id"]: row for row in bank.states(scope)}
+    assert by_id[first]["content"] == "new first"
+    assert by_id[second]["content"] == "old second"
+    assert [row["id"] for row in bank.pending(scope)] == ["change"]
+    assert [row["stage"] for row in replies.calls] == ["update_selector", "maintenance"]
+    terminal = next(row for row in emitted if row["event"] == "lsa_lru_result")
+    assert terminal["update_ids"] == [first] and terminal["edits"] == result["receipts"]
+
+
+def test_local_granularity_is_opt_in_and_global_prompt_unchanged() -> None:
+    prompts: list[str] = []
+
+    class PromptControl:
+        def chat(self, messages: Any, **_kwargs: Any) -> dict[str, Any]:
+            prompts.append(messages[0]["content"])
+            return {"choices": [{"finish_reason": "stop", "message": {
+                "content": '{"edits":[],"focus":[]}'}}]}
+
+    bank = LocalStateBank(InMemoryStore())
+    for index, (representation, granularity) in enumerate((
+        ("local", False), ("local", True), ("global_note", True)
+    )):
+        scope = StateScope("run", "arm", str(index))
+        bank.record_event(scope, {"id": "event", "kind": "user", "content": "matter"})
+        controller = LocalStateController(
+            bank, PromptControl(),  # type: ignore[arg-type]
+            representation=representation, local_granularity=granularity)
+        controller.prepare(scope, "event", "matter")
+    phrase = "can be updated and resumed independently"
+    assert phrase not in prompts[0]
+    assert phrase in prompts[1]
+    assert phrase not in prompts[2]
+    assert "one global working note" in prompts[2]
+
+
 def test_source_resolution_scope_deletion_restart_empty_refs_and_whole_event_budget() -> None:
     store = InMemoryStore()
     bank = LocalStateBank(store)
@@ -713,7 +958,7 @@ def test_control_schema_rejects_r1_missing_title_and_factual_focus() -> None:
 
 
 @pytest.mark.parametrize("arm", ["local_state", "local_all", "local_all_sources",
-                                 "global_note_sources"])
+                                 "global_note_sources", "local_lru_sources"])
 def test_runtime_explicitly_disables_ser_for_local_state(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str,
 ) -> None:
@@ -844,7 +1089,8 @@ def test_deleted_checkpoint_source_does_not_reenter_state_or_host_view(
 @pytest.mark.parametrize("arm,read_policy", [
     ("local_state", "focus"), ("local_all", "all"),
     ("local_all_sources", "all_sources"),
-    ("global_note_sources", "all_sources")])
+    ("global_note_sources", "all_sources"),
+    ("local_lru_sources", "focus_sources")])
 def test_cli_local_state_path_reuses_application_runner_without_ser(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, read_policy: str,
 ) -> None:
@@ -868,8 +1114,9 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         "capacity": {}, "budget_path": str(tmp_path / "budget.json"),
         "control": {"max_tokens": 100, "max_states": 4, "max_events": 8,
                     "max_pending_batch": 4, "max_calls_per_message": 2,
-                    "aggregate_content_chars": 16000}}
-    if read_policy == "all_sources":
+                    "aggregate_content_chars": 16000,
+                    "local_granularity": True}}
+    if read_policy in {"all_sources", "focus_sources"}:
         config_value["source_view_max_bytes"] = 16384
     config.write_text(json.dumps(config_value))
     root = tmp_path / "runtime"
@@ -907,6 +1154,8 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         called.append(kwargs["local_state_read_policy"])
         called.append(kwargs["source_view_max_bytes"])
         called.append(args_[-1].representation)
+        called.append(args_[-1].update_policy)
+        called.append(args_[-1].local_granularity)
         called.append((args_[-1].bank.max_states,
                        args_[-1].bank.max_state_content_chars,
                        args_[-1].bank.max_total_content_chars))
@@ -919,11 +1168,14 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     monkeypatch.setattr(entry, "run_phase", phase)
     assert entry.run(args)["status"] == "TERMINAL"
     expected_limits = ((1, 16000, 16000) if arm == "global_note_sources" else
-                       (4, 4000, 16000) if arm == "local_all_sources" else
+                       (4, 4000, 16000) if arm in {
+                           "local_all_sources", "local_lru_sources"} else
                        (4, 4000, None))
     assert called == [False, 100, read_policy,
-                      16384 if read_policy == "all_sources" else None,
+                      16384 if read_policy in {"all_sources", "focus_sources"} else None,
                       "global_note" if arm == "global_note_sources" else "local",
+                      "lru" if arm == "local_lru_sources" else "all",
+                      arm in {"local_all_sources", "local_lru_sources"},
                       expected_limits]
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
@@ -931,6 +1183,10 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     assert manifest["identity"]["read_policy"] == read_policy
     assert manifest["identity"]["representation"] == (
         "global_note" if arm == "global_note_sources" else "local")
+    assert manifest["identity"]["local_granularity"] == (
+        arm in {"local_all_sources", "local_lru_sources"})
+    assert manifest["identity"]["update_policy"] == (
+        "lru" if arm == "local_lru_sources" else "all")
     assert manifest["identity"]["effective_content_limits"] == dict(zip(
         ("max_states", "max_state_content_chars", "max_total_content_chars"),
         expected_limits, strict=True))
@@ -957,3 +1213,34 @@ def test_missing_aggregate_setting_preserves_existing_local_capacity(
         "max_total_content_chars": None}
     with pytest.raises(ValueError, match="LSA_GLOBAL_NOTE_CONTENT_LIMIT_MISSING"):
         entry._content_limits("global_note_sources", config)
+    assert entry._local_granularity("local_all_sources", config) is False
+    with pytest.raises(ValueError, match="LSA_LRU_REQUIRES_LOCAL_GRANULARITY"):
+        entry._local_granularity("local_lru_sources", config)
+
+
+def test_lru_accounting_preserves_total_role_and_substage_cost(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.freshness_projection.identity import LAB
+
+    monkeypatch.syspath_prepend(str(LAB / "tools"))
+    import run_local_state_attention as entry
+
+    events = [
+        {"event": "vllm_response", "role": "state_control",
+         "control_stage": "update_selector", "usage": {"total_tokens": 11}},
+        {"event": "vllm_response", "role": "state_control",
+         "control_stage": "maintenance", "usage": {"total_tokens": 17}},
+        {"event": "vllm_error", "role": "state_control",
+         "control_stage": "read_selector", "usage": None},
+        {"event": "vllm_response", "role": "task_host",
+         "usage": {"total_tokens": 23}},
+    ]
+    (tmp_path / "trace.jsonl").write_text("".join(
+        json.dumps(row) + "\n" for row in events))
+    accounting = entry._accounting(tmp_path, tmp_path / "missing-budget.json")
+    assert accounting["by_role"]["state_control"] == {
+        "requests": 3, "known_tokens": 28, "unknown_usage": 1, "errors": 1}
+    assert accounting["by_control_stage"]["read_selector"] == {
+        "requests": 1, "known_tokens": 0, "unknown_usage": 1, "errors": 1}
+    assert accounting["by_role"]["task_host"]["known_tokens"] == 23

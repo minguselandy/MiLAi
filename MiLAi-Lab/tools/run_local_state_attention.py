@@ -15,7 +15,10 @@ from typing import Any, TypedDict
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank
-from milai_lab.methods.local_state_attention.controller import LocalStateController
+from milai_lab.methods.local_state_attention.controller import (
+    CONTROL_STAGE,
+    LocalStateController,
+)
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.langmem_application import run_phase
 from milai_lab.runners.langmem_application_runtime import open_application_runtime
@@ -23,9 +26,21 @@ from milai_lab.runners.langmem_application_runtime import open_application_runti
 LAB = Path(__file__).resolve().parents[1]
 READ_POLICIES = {"local_state": "focus", "local_all": "all",
                  "local_all_sources": "all_sources",
-                 "global_note_sources": "all_sources"}
+                 "global_note_sources": "all_sources",
+                 "local_lru_sources": "focus_sources"}
 ARMS = ("b1_control", *READ_POLICIES)
-SHARED_CONTENT_LIMIT_ARMS = {"local_all_sources", "global_note_sources"}
+SHARED_CONTENT_LIMIT_ARMS = {"local_all_sources", "global_note_sources",
+                             "local_lru_sources"}
+SOURCE_POLICIES = {"all_sources", "focus_sources"}
+
+
+def _local_granularity(arm: str, config: dict[str, Any]) -> bool:
+    value = config["control"].get("local_granularity", False)
+    if type(value) is not bool:
+        raise ValueError("LSA_LOCAL_GRANULARITY_INVALID")
+    if arm == "local_lru_sources" and not value:
+        raise ValueError("LSA_LRU_REQUIRES_LOCAL_GRANULARITY")
+    return value and arm in {"local_all_sources", "local_lru_sources"}
 
 
 class ContentLimits(TypedDict):
@@ -97,12 +112,16 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "method": "local_state_attention_p1", "run_id": args.run,
         "arm_id": args.arm, "repeat": args.repeat,
         "read_policy": READ_POLICIES.get(args.arm),
+        "update_policy": "lru" if args.arm == "local_lru_sources" else "all",
+        "local_granularity": (_local_granularity(args.arm, config)
+                              if args.arm in READ_POLICIES else False),
         "representation": ("global_note" if args.arm == "global_note_sources" else
                            "local" if args.arm in READ_POLICIES else None),
         "effective_content_limits": (_content_limits(args.arm, config)
                                      if args.arm in READ_POLICIES else None),
         "source_view_max_bytes": (config["source_view_max_bytes"]
-                                  if READ_POLICIES.get(args.arm) == "all_sources" else None),
+                                  if READ_POLICIES.get(args.arm) in SOURCE_POLICIES
+                                  else None),
         "git_sha": subprocess.check_output(  # noqa: S603 - fixed command and arguments
             [shutil.which("git") or "/usr/bin/git", "rev-parse", "HEAD"],
             cwd=LAB, text=True).strip(),
@@ -124,6 +143,7 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
 
 def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
     groups: dict[str, dict[str, int]] = {}
+    control_stages: dict[str, dict[str, int]] = {}
     views: list[dict[str, Any]] = []
     store_stats: dict[str, dict[str, int]] = {}
     trace_path = root / "trace.jsonl"
@@ -154,7 +174,20 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
                 group["unknown_usage"] += 1
             if event["event"] != "vllm_response":
                 group["errors"] += 1
-    return {"by_role": groups, "state_views": views,
+            stage = event.get("control_stage")
+            if role == "state_control" and isinstance(stage, str):
+                stage_group = control_stages.setdefault(stage, {
+                    "requests": 0, "known_tokens": 0,
+                    "unknown_usage": 0, "errors": 0})
+                stage_group["requests"] += 1
+                if type(total) is int:
+                    stage_group["known_tokens"] += total
+                else:
+                    stage_group["unknown_usage"] += 1
+                if event["event"] != "vllm_response":
+                    stage_group["errors"] += 1
+    return {"by_role": groups, "by_control_stage": control_stages,
+            "state_views": views,
             "local_state_store_stats": store_stats,
             "trace_path": str(trace_path.resolve()),
             "continuous_budget": read_json(budget_path) if budget_path.exists() else None}
@@ -164,13 +197,14 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     config, script = read_json(args.config), _script(args.script)
     if args.arm not in ARMS:
         raise ValueError("LSA_ARM_UNKNOWN")
-    if READ_POLICIES.get(args.arm) == "all_sources" and (
+    if READ_POLICIES.get(args.arm) in SOURCE_POLICIES and (
         type(config.get("source_view_max_bytes")) is not int
         or config["source_view_max_bytes"] <= 0
     ):
         raise ValueError("LSA_SOURCE_VIEW_BUDGET_INVALID")
     if args.arm in READ_POLICIES:
         _content_limits(args.arm, config)
+        _local_granularity(args.arm, config)
     identity = _identity(args, config, script)
     args.runtime_root.mkdir(parents=True, exist_ok=True)
     manifest_path = args.runtime_root / "run_manifest.json"
@@ -219,7 +253,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
                 def control_emit(event: dict[str, Any]) -> None:
                     if original_emit is not None:
-                        original_emit({**event, "role": "state_control"})
+                        original_emit({**event, "role": "state_control",
+                                       "control_stage": CONTROL_STAGE.get()})
 
                 host.emit = host_emit
                 settings = config["control"]
@@ -242,14 +277,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                         capacity_path=args.runtime_root / "control-capacity.json",
                         max_calls_per_message=settings["max_calls_per_message"],
                         representation=("global_note" if args.arm == "global_note_sources"
-                                        else "local"))
+                                        else "local"),
+                        local_granularity=_local_granularity(args.arm, config),
+                        update_policy=("lru" if args.arm == "local_lru_sources"
+                                       else "all"))
                     try:
                         result = run_phase(script, args.runtime_root, args.run, args.arm,
                                            args.phase, runtime, controller,
                                            local_state_read_policy=READ_POLICIES[args.arm],
                                            source_view_max_bytes=(
                                                config["source_view_max_bytes"]
-                                               if READ_POLICIES[args.arm] == "all_sources"
+                                               if READ_POLICIES[args.arm] in SOURCE_POLICIES
                                                else None))
                     finally:
                         control_emit({"event": "lsa_store_stats", "phase": args.phase,

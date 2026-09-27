@@ -29,10 +29,11 @@ def _source_id(thread_id: str, position: int, message: BaseMessage) -> str:
 def make_pre_model_hook(controller: LocalStateController,
                         system_prompt: str, read_policy: str = "focus",
                         source_view_max_bytes: int | None = None) -> Any:
-    if read_policy not in {"focus", "all", "all_sources"}:
+    if read_policy not in {"focus", "all", "all_sources", "focus_sources"}:
         raise ValueError("LSA_READ_POLICY_UNKNOWN")
-    if read_policy == "all_sources" and (type(source_view_max_bytes) is not int
-                                         or source_view_max_bytes <= 0):
+    if read_policy in {"all_sources", "focus_sources"} and (
+        type(source_view_max_bytes) is not int or source_view_max_bytes <= 0
+    ):
         raise ValueError("LSA_SOURCE_VIEW_BUDGET_INVALID")
 
     def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
@@ -79,13 +80,13 @@ def make_pre_model_hook(controller: LocalStateController,
                                     message_key=f"{thread_id}:{public_index}")
         controller_focus = result["focus"]
         states = controller.bank.states(scope)
-        if read_policy == "focus":
+        if read_policy in {"focus", "focus_sources"}:
             selected = set(controller_focus)
             states = [row for row in states if row["id"] in selected]
         pending = controller.bank.pending(scope)
         source_lines: list[str] = []
         source_trace: dict[str, Any] = {}
-        if read_policy == "all_sources":
+        if read_policy in {"all_sources", "focus_sources"}:
             assert source_view_max_bytes is not None
             source_lines, source_trace = _source_view(
                 controller.bank, scope, states, source_view_max_bytes)
