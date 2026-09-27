@@ -1,0 +1,338 @@
+{
+  "kind": "MILAI_EXTERNAL_MEMORY_V26_RESULTS",
+  "status": "COMPLETE_SMALL_EXPOSED_SYSTEM_COMPARISON",
+  "execution_freeze_path": "data/manifests/milai-external-memory-v26-execution-freeze.json",
+  "execution_freeze_sha256": "1f9e17945d6c6a360d85da9b9cbbcd7adaf9540b28d970c9e1bd89a3d52d5390",
+  "source_mapping_sha256": "37e57b17808d9378111032de11ba66960280620586b1a2a9586e4e81aaffc4cb",
+  "source_publication_commit": "2968f75ab69aedc0fd5349ba196aabe63da7f46f",
+  "runs": [
+    {
+      "arm": "b1_control",
+      "manifest": "data/manifests/milai-external-memory-v26-b1-results.json",
+      "manifest_sha256": "05db5dc2909fa4fce2b6ce3b32509b61bb98dd9c755fc8e2db4badc67db460f3",
+      "scores": {
+        "formation": {
+          "passed": 0,
+          "denominator": 2
+        },
+        "later_utility": {
+          "passed": 0,
+          "denominator": 2
+        },
+        "temporary_no_storage": {
+          "passed": 2,
+          "denominator": 2
+        },
+        "unnecessary_storage": {
+          "count": 0,
+          "denominator": 2
+        },
+        "strict_case": {
+          "passed": 2,
+          "denominator": 4
+        },
+        "host_completed": {
+          "passed": 6,
+          "denominator": 6
+        }
+      },
+      "usage": {
+        "generations": 10,
+        "input_tokens": 4993,
+        "output_tokens": 331,
+        "generation_tokens": 5324,
+        "embedding_requests": 2,
+        "embedding_tokens": 29,
+        "provider_wall_seconds": 3.865874633193016,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "exact_version_resolution_reads": 0,
+        "judge_requests": 0
+      },
+      "host_generation_usage": {
+        "generations": 10,
+        "input_tokens": 4993,
+        "output_tokens": 331,
+        "generation_tokens": 5324,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "provider_wall_seconds": 3.5382287870161235
+      },
+      "native_generation_usage": {
+        "generations": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "generation_tokens": 0,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "provider_wall_seconds": 0
+      },
+      "process_wall_seconds": 9.458758463151753,
+      "native_prompt_cost": null
+    },
+    {
+      "arm": "mem0_native_autoadd",
+      "manifest": "data/manifests/milai-external-memory-v26-mem0-results.json",
+      "manifest_sha256": "baa739adbe491cee6fba2440592d4cb339a9341adfa4bf869f332bc6532817c3",
+      "scores": {
+        "formation": {
+          "passed": 2,
+          "denominator": 2
+        },
+        "later_utility": {
+          "passed": 2,
+          "denominator": 2
+        },
+        "temporary_no_storage": {
+          "passed": 2,
+          "denominator": 2
+        },
+        "unnecessary_storage": {
+          "count": 0,
+          "denominator": 2
+        },
+        "strict_case": {
+          "passed": 4,
+          "denominator": 4
+        },
+        "host_completed": {
+          "passed": 6,
+          "denominator": 6
+        }
+      },
+      "usage": {
+        "generations": 16,
+        "input_tokens": 53343,
+        "output_tokens": 509,
+        "generation_tokens": 53852,
+        "embedding_requests": 14,
+        "embedding_tokens": 640,
+        "provider_wall_seconds": 11.222892291843891,
+        "unknown_usage": 0,
+        "truncations": 0,
+        "exact_version_resolution_reads": 0,
+        "judge_requests": 0
+      },
+      "host_generation_usage": {
+        "generations": 10,
+        "input_tokens": 3446,
+        "output_tokens": 304,
+        "generation_tokens": 3750,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "provider_wall_seconds": 2.872879646718502
+      },
+      "native_generation_usage": {
+        "generations": 6,
+        "input_tokens": 49897,
+        "output_tokens": 205,
+        "generation_tokens": 50102,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "provider_wall_seconds": 7.758466461673379
+      },
+      "process_wall_seconds": 19.617552511394024,
+      "native_prompt_cost": {
+        "system_text_tokens": 8136,
+        "system_sha256": "ad19187a37813ef77ee156e714c0650e6ec749e0264bdc07d499bc9b24115155",
+        "all_six_system_prompts_identical": true,
+        "empty_result_ingestions": 4,
+        "empty_result_ingestion_generation_tokens": 33330,
+        "ingestion_embedding_requests": 10,
+        "ingestion_embedding_tokens": 576
+      }
+    }
+  ],
+  "totals": {
+    "generations": 26,
+    "input_tokens": 58336,
+    "output_tokens": 840,
+    "generation_tokens": 59176,
+    "embedding_requests": 16,
+    "embedding_tokens": 669,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "judge_requests": 0
+  },
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 837,
+    "generation": {
+      "charged_tokens": 983553,
+      "known_tokens": 983553,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 8948,
+      "known_tokens": 8948,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "budget_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 863,
+    "generation": {
+      "charged_tokens": 1042729,
+      "known_tokens": 1042729,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 9617,
+      "known_tokens": 9617,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "cumulative_exact_reads": 107,
+  "generation_token_ratio": 10.114951164537942,
+  "generation_token_difference": 48528,
+  "quality_cost_conclusion": "Mem0 closes these two exposed formation gaps with +48528 generation tokens; neither arm dominates both strict quality and generation cost.",
+  "unseen": false,
+  "new_benchmark_samples": 0,
+  "runtime_reads_rubric": false,
+  "vllm_settings_changed": false,
+  "claim_limits": [
+    "Four exposed cases, one trajectory per arm, one Qwen family; not a general efficacy estimate.",
+    "Different Host systems/tools/search outputs and automatic ingestion; no single-component or SER attribution.",
+    "Only actual user and final assistant text ingested; omitted tool facts would be absent.",
+    "ADD-only formation is not same-ID revision or post-action reconciliation.",
+    "Same isolated Python 3.12.11 environment for both current arms; prior runs used 3.11.",
+    "Native extraction default prompt retained; no extra wording/parameter tuning."
+  ],
+  "decision": "COMPLETE_EXTERNAL_SLICE_KEEP_PRODUCT_NO_GO",
+  "second_model_family": "NOT_RUN_NO_ENDPOINT",
+  "master_goal_complete": false
+}

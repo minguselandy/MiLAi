@@ -235,6 +235,19 @@ into an isolated environment and publishes. Root freezes inputs/model contracts/
 real calls. Preserve all old source locks/results and F/R negative conclusions, no vLLM changes,
 fresh fixtures, extra cue or broad tests. The separate second-model endpoint remains unavailable.
 
+
+[v26 external formation](docs/MILAI_EXTERNAL_MEMORY_V26_RESULTS_20260927.md) is complete on
+85-file mapping `37e57b17808d9378111032de11ba66960280620586b1a2a9586e4e81aaffc4cb`.
+B1 strict2/4, formation0/2; native Mem0 strict4/4, formation2/2 and later utility2/2;
+both pass temporary no-storage controls2/2. Official add/search/persisted IDs and actual HTTP
+delivery agree. Mem0 costs53852 generation tokens versus B1 5324; six default extraction
+calls account for50102, including33330 for four correct empty results. Preserve all863
+continuous generations /1042729 tokens /9617 embedding tokens /107 exact reads. No extra
+sample, prompt tuning, vLLM change or Product migration. Source SDK/fake-provider checks and
+one build already passed; docs/results need no repeat tests/build. Luna publishes result and
+reproduction. P10 external slice is complete, second model family remains NOT_RUN without an
+independent endpoint; broad sensitivity conditions remain unmet and master stays ACTIVE.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen

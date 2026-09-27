@@ -1,0 +1,523 @@
+{
+  "kind": "MILAI_EXTERNAL_MEMORY_V26_RUN_REVIEW",
+  "run_id": "external-memory-v26-b1-r1",
+  "arm": "b1_control",
+  "source_mapping_sha256": "37e57b17808d9378111032de11ba66960280620586b1a2a9586e4e81aaffc4cb",
+  "status": "COMPLETE_WITH_RETAINED_SEMANTIC_FAILURES",
+  "runtime_status": "TERMINAL",
+  "usage": {
+    "generations": 10,
+    "input_tokens": 4993,
+    "output_tokens": 331,
+    "generation_tokens": 5324,
+    "embedding_requests": 2,
+    "embedding_tokens": 29,
+    "provider_wall_seconds": 3.865874633193016,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "host_generation_usage": {
+    "generations": 10,
+    "input_tokens": 4993,
+    "output_tokens": 331,
+    "generation_tokens": 5324,
+    "embedding_requests": 0,
+    "embedding_tokens": 0,
+    "provider_wall_seconds": 3.5382287870161235
+  },
+  "native_generation_usage": {
+    "generations": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "generation_tokens": 0,
+    "embedding_requests": 0,
+    "embedding_tokens": 0,
+    "provider_wall_seconds": 0
+  },
+  "native_operations": [],
+  "native_ingestion": null,
+  "cases": [
+    {
+      "id": "f01_future_agreement",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "agreement",
+          "answers": [
+            "Confirmation sent to Mira at Maple Courtyard (ID: CNF-7318). The 14 rowan saplings are reserved and on hold pending site lead approval."
+          ],
+          "calls": [
+            {
+              "name": "send_confirmation",
+              "args": {
+                "recipient": "Mira at Maple Courtyard",
+                "message": "We have reserved 14 rowan saplings for the courtyard planting. Keep them on hold until the site lead approves release; we will return to arrange pickup later."
+              },
+              "id": "chatcmpl-9575f4d838829dc9:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "send_confirmation",
+              "content": "{\"ok\": true, \"confirmation_id\": \"CNF-7318\", \"status\": \"sent\"}",
+              "tool_call_id": "chatcmpl-9575f4d838829dc9:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "77b47123d52800455887a927bd997f108cc9eac3b2088d8ef91710e27e059ddd",
+              "generation_id": "chatcmpl-9575f4d838829dc9",
+              "call_id": "chatcmpl-9575f4d838829dc9:tool:0",
+              "name": "send_confirmation",
+              "args": {
+                "recipient": "Mira at Maple Courtyard",
+                "message": "We have reserved 14 rowan saplings for the courtyard planting. Keep them on hold until the site lead approves release; we will return to arrange pickup later."
+              },
+              "result": {
+                "content": "{\"ok\": true, \"confirmation_id\": \"CNF-7318\", \"status\": \"sent\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "send_confirmation",
+                "id": null,
+                "tool_call_id": "chatcmpl-9575f4d838829dc9:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": []
+        },
+        {
+          "session_id": "later",
+          "answers": [
+            "I could not find any stored notes regarding a Maple Courtyard reservation. Please provide the details of the species, quantity, and release conditions, or check if the memory was saved under a different name."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Maple Courtyard reservation species quantity release conditions"
+              },
+              "id": "chatcmpl-b1e39dfeb987ad78:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "[]",
+              "tool_call_id": "chatcmpl-b1e39dfeb987ad78:tool:0"
+            }
+          ],
+          "business_calls": [],
+          "memories": []
+        }
+      ],
+      "strict_pass": false,
+      "review": "Business request succeeded but no memory was formed; later search delivered [] and the answer lacks the required facts."
+    },
+    {
+      "id": "f02_business_receipt",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "booking",
+          "answers": [
+            "Collection for consignment 'Eastbank exhibit cases' has been booked. Booking ID: COL-4826, Depot Bay: H-6. Status: Awaiting depot approval. Please return with the approval before arranging the actual collection."
+          ],
+          "calls": [
+            {
+              "name": "book_collection",
+              "args": {
+                "consignment": "Eastbank exhibit cases",
+                "hold_until_approval": true
+              },
+              "id": "chatcmpl-99f3ff302b6dfaa7:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "book_collection",
+              "content": "{\"ok\": true, \"booking_id\": \"COL-4826\", \"depot_bay\": \"H-6\", \"status\": \"awaiting_depot_approval\"}",
+              "tool_call_id": "chatcmpl-99f3ff302b6dfaa7:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "5f899943f04ef3dbb4e5acbb1961abb0083c3ae8196d442da8911d096de489a3",
+              "generation_id": "chatcmpl-99f3ff302b6dfaa7",
+              "call_id": "chatcmpl-99f3ff302b6dfaa7:tool:0",
+              "name": "book_collection",
+              "args": {
+                "consignment": "Eastbank exhibit cases",
+                "hold_until_approval": true
+              },
+              "result": {
+                "content": "{\"ok\": true, \"booking_id\": \"COL-4826\", \"depot_bay\": \"H-6\", \"status\": \"awaiting_depot_approval\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "book_collection",
+                "id": null,
+                "tool_call_id": "chatcmpl-99f3ff302b6dfaa7:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": []
+        },
+        {
+          "session_id": "later",
+          "answers": [
+            "I have checked my stored notes and found no information regarding the Eastbank exhibit cases collection. There is no booking reference, depot bay, or approval status recorded for this item."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Eastbank exhibit cases collection booking reference depot bay approval status"
+              },
+              "id": "chatcmpl-bd97537b5cbae7d5:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "[]",
+              "tool_call_id": "chatcmpl-bd97537b5cbae7d5:tool:0"
+            }
+          ],
+          "business_calls": [],
+          "memories": []
+        }
+      ],
+      "strict_pass": false,
+      "review": "Business request succeeded but no memory was formed; later search delivered [] and the answer lacks the required facts."
+    },
+    {
+      "id": "f03_temporary_calculation",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "once",
+          "answers": [
+            "378"
+          ],
+          "calls": [],
+          "tool_results": [],
+          "business_calls": [],
+          "memories": []
+        }
+      ],
+      "strict_pass": true,
+      "review": "Correct transient answer, no persistent item or memory write."
+    },
+    {
+      "id": "f04_one_time_format",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "once",
+          "answers": [
+            "READY"
+          ],
+          "calls": [],
+          "tool_results": [],
+          "business_calls": [],
+          "memories": []
+        }
+      ],
+      "strict_pass": true,
+      "review": "Correct transient answer, no persistent item or memory write."
+    }
+  ],
+  "verified_host_wire_contracts": 10,
+  "native_runtime_events": [],
+  "instrumentation": {
+    "counts": {
+      "tool_calls": 4,
+      "request_material": 4,
+      "requests": 10,
+      "observations": 8,
+      "bodies": 9,
+      "revisions": 0,
+      "searches": 2,
+      "operations": 0
+    },
+    "statuses": {
+      "tool_calls": {
+        "success": 4
+      },
+      "operations": {},
+      "searches": {
+        "returned": 2
+      },
+      "requests": {
+        "completed": 10
+      }
+    },
+    "observation_roles": {
+      "business_tool": 2,
+      "user": 6
+    },
+    "revision_effects": {},
+    "material_coverage": {
+      "FULL": 4
+    },
+    "search_returned_items": 0,
+    "search_exact_revision_bindings": 0,
+    "instrumentation_cost": {
+      "id": 1,
+      "transactions": 84,
+      "observer_cpu_ns": 29496802,
+      "observer_wall_ns": 970794947,
+      "extra_store_reads": 0,
+      "extra_read_cpu_ns": 0,
+      "extra_read_wall_ns": 0,
+      "initial_db_bytes": 98304,
+      "sqlite_db_bytes": 106496,
+      "net_sqlite_db_bytes": 8192,
+      "measured_scope": "sidecar data transactions including commit; stats bookkeeping excluded; additional Store reads separate"
+    }
+  },
+  "process": {
+    "run_id": "external-memory-v26-b1-r1",
+    "exit_code": 0,
+    "process_wall_seconds": 9.458758463151753
+  },
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 837,
+    "generation": {
+      "charged_tokens": 983553,
+      "known_tokens": 983553,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 8948,
+      "known_tokens": 8948,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "budget_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 847,
+    "generation": {
+      "charged_tokens": 988877,
+      "known_tokens": 988877,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 8977,
+      "known_tokens": 8977,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "runtime_reads_rubric": false,
+  "native_snapshot_reads": 0,
+  "analysis_snapshot_reads": 6,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false,
+  "artifact_sha256": {
+    "artifacts/external-memory-v26/external-memory-v26-b1-r1/trace.jsonl": "b28d83c483b034724eb3d615233415a4b75d22d77942c3336ea7f4a7a8afe0c3",
+    "artifacts/external-memory-v26/external-memory-v26-b1-r1/checkpoints.sqlite": "b42b4ca7c707388fbf90978a60055b428ba34029eac24080f17694300b270216",
+    "artifacts/external-memory-v26/external-memory-v26-b1-r1/run/result.json": "db7313eeef556ec677d3618abe9e9775c1297a116f83589df25b7d2f2ca70d98"
+  },
+  "actual_search_delivery": [
+    {
+      "case_id": "f01_future_agreement",
+      "tool_call_id": "chatcmpl-b1e39dfeb987ad78:tool:0",
+      "actual_provider_receipt_ids": [
+        "chatcmpl-8a67078e8623d74b"
+      ],
+      "search_result_delivered": true,
+      "nonempty": false
+    },
+    {
+      "case_id": "f02_business_receipt",
+      "tool_call_id": "chatcmpl-bd97537b5cbae7d5:tool:0",
+      "actual_provider_receipt_ids": [
+        "chatcmpl-b3267721337c9c83"
+      ],
+      "search_result_delivered": true,
+      "nonempty": false
+    }
+  ],
+  "source_publication_commit": "2968f75ab69aedc0fd5349ba196aabe63da7f46f",
+  "publication_timing": "Source/input/protocol/execution hashes fixed before requests; Git publication occurred after B1 began.",
+  "scores": {
+    "formation": {
+      "passed": 0,
+      "denominator": 2
+    },
+    "later_utility": {
+      "passed": 0,
+      "denominator": 2
+    },
+    "temporary_no_storage": {
+      "passed": 2,
+      "denominator": 2
+    },
+    "unnecessary_storage": {
+      "count": 0,
+      "denominator": 2
+    },
+    "strict_case": {
+      "passed": 2,
+      "denominator": 4
+    },
+    "host_completed": {
+      "passed": 6,
+      "denominator": 6
+    }
+  },
+  "memory_write_scope": "ordinary Host-selected public LangMem CRUD",
+  "snapshot_count_note": "Six case-session inspection reads total; native_snapshot_reads is the same six in the Mem0 arm, not an additional six."
+}

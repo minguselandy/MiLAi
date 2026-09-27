@@ -1,5 +1,5 @@
 ---
-status: ACTIVE
+status: COMPLETE_SMALL_EXPOSED_SYSTEM_COMPARISON
 scope: RESEARCH_PROTOTYPE
 parent: MILAI_LONG_HORIZON_EXECUTION_GOAL.md
 reference_commit: 5e49cf9a7a2cc6eef78f0b76c089c2f1c95e70a8
@@ -47,7 +47,8 @@ Sol负责最小源码/config/依赖声明和必要窄检查；Root负责输入/r
 - [x] 已固定源码来源、语义公平性判断及原四例范围。
 - [x] 官方SDK适配、依赖和必要窄检查。
 - [x] 输入/模型合同/源锁冻结。
-- [ ] 两臂真实小规模运行、全部成本与语义结果。
-- [ ] Failure Review、Reflection、复现和Luna发布。
+- [x] 两臂真实小规模运行、全部成本与语义结果。
+- [x] Failure Review、Reflection、复现。
+- [x] Luna结果发布与远端确认。
 
-源码已冻结为85文件 mapping `37e57b17808d9378111032de11ba66960280620586b1a2a9586e4e81aaffc4cb`。官方SDK假Provider验证4/4，默认B1既有2项、静态/边界检查通过；两臂使用同一Python3.12.11隔离环境，旧Python3.11环境未改。BM25快照缺少FastEmbed要求的`mock.file`和`tamil.txt`，已在隔离缓存补两个空兼容文件并明确记录；真实稀疏向量/实体连接/持久化已在假Provider路径验证。尚无v26真实模型调用。
+源码已冻结为85文件 mapping `37e57b17808d9378111032de11ba66960280620586b1a2a9586e4e81aaffc4cb`。官方SDK假Provider验证4/4，默认B1既有2项、静态/边界检查通过；两臂使用同一Python3.12.11隔离环境，旧Python3.11环境未改。BM25快照缺少FastEmbed要求的`mock.file`和`tamil.txt`，已在隔离缓存补两个空兼容文件并明确记录；真实稀疏向量/实体连接/持久化已在假Provider路径验证。[两臂结果](MILAI_EXTERNAL_MEMORY_V26_RESULTS_20260927.md)已完成：B1严格2/4、Mem0 4/4，形成分别0/2、2/2；两臂临时控制通过。Mem0生成token成本10.1倍，默认抽取开销完整保留。连续863生成/1042729tokens/9617embeddingtokens/107get。开发源码已由Luna发布为`2968f75`；第二模型仍NOT_RUN，master不完成。

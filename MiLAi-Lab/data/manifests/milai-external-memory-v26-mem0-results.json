@@ -1,0 +1,831 @@
+{
+  "kind": "MILAI_EXTERNAL_MEMORY_V26_RUN_REVIEW",
+  "run_id": "external-memory-v26-mem0-r1",
+  "arm": "mem0_native_autoadd",
+  "source_mapping_sha256": "37e57b17808d9378111032de11ba66960280620586b1a2a9586e4e81aaffc4cb",
+  "status": "COMPLETE_SMALL_EXPOSED_SYSTEM_COMPARISON",
+  "runtime_status": "TERMINAL",
+  "usage": {
+    "generations": 16,
+    "input_tokens": 53343,
+    "output_tokens": 509,
+    "generation_tokens": 53852,
+    "embedding_requests": 14,
+    "embedding_tokens": 640,
+    "provider_wall_seconds": 11.222892291843891,
+    "unknown_usage": 0,
+    "truncations": 0,
+    "exact_version_resolution_reads": 0,
+    "judge_requests": 0
+  },
+  "host_generation_usage": {
+    "generations": 10,
+    "input_tokens": 3446,
+    "output_tokens": 304,
+    "generation_tokens": 3750,
+    "embedding_requests": 0,
+    "embedding_tokens": 0,
+    "provider_wall_seconds": 2.872879646718502
+  },
+  "native_generation_usage": {
+    "generations": 6,
+    "input_tokens": 49897,
+    "output_tokens": 205,
+    "generation_tokens": 50102,
+    "embedding_requests": 0,
+    "embedding_tokens": 0,
+    "provider_wall_seconds": 7.758466461673379
+  },
+  "native_operations": [
+    {
+      "event": "mem0_native_ingestion",
+      "case_id": "f01_future_agreement",
+      "usage": {
+        "generations": 1,
+        "input_tokens": 8297,
+        "output_tokens": 98,
+        "generation_tokens": 8395,
+        "embedding_requests": 3,
+        "embedding_tokens": 176,
+        "provider_wall_seconds": 1.945922707207501
+      },
+      "embedding_batch_sizes": [
+        1,
+        1,
+        6
+      ],
+      "wall_ns": 3044618116,
+      "result": {
+        "results": [
+          {
+            "id": "0e46e5de-98dc-47fa-b14e-786c6f17b377",
+            "memory": "User reserved 14 rowan saplings for the Maple Courtyard planting project, with confirmation sent to Mira (ID: CNF-7318) and the saplings placed on hold pending site lead approval for release",
+            "event": "ADD"
+          }
+        ]
+      }
+    },
+    {
+      "event": "mem0_native_search",
+      "case_id": "f01_future_agreement",
+      "usage": {
+        "generations": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "generation_tokens": 0,
+        "embedding_requests": 2,
+        "embedding_tokens": 32,
+        "provider_wall_seconds": 0.06655044946819544
+      },
+      "embedding_batch_sizes": [
+        1,
+        2
+      ],
+      "wall_ns": 97099165,
+      "result": {
+        "results": [
+          {
+            "id": "0e46e5de-98dc-47fa-b14e-786c6f17b377",
+            "memory": "User reserved 14 rowan saplings for the Maple Courtyard planting project, with confirmation sent to Mira (ID: CNF-7318) and the saplings placed on hold pending site lead approval for release",
+            "hash": "7b0981dde7284027ef2f36b6e044672d",
+            "metadata": null,
+            "score": 0.41625885465643153,
+            "created_at": "2026-09-27T02:06:40.907445+00:00",
+            "updated_at": "2026-09-27T02:06:40.907445+00:00",
+            "user_id": "external-memory-v26-mem0-r1:mem0_native_autoadd:f01_future_agreement",
+            "attributed_to": "user"
+          }
+        ]
+      }
+    },
+    {
+      "event": "mem0_native_ingestion",
+      "case_id": "f01_future_agreement",
+      "usage": {
+        "generations": 1,
+        "input_tokens": 8423,
+        "output_tokens": 6,
+        "generation_tokens": 8429,
+        "embedding_requests": 1,
+        "embedding_tokens": 75,
+        "provider_wall_seconds": 1.195489862933755
+      },
+      "embedding_batch_sizes": [
+        1
+      ],
+      "wall_ns": 1243809975,
+      "result": {
+        "results": []
+      }
+    },
+    {
+      "event": "mem0_native_ingestion",
+      "case_id": "f02_business_receipt",
+      "usage": {
+        "generations": 1,
+        "input_tokens": 8294,
+        "output_tokens": 83,
+        "generation_tokens": 8377,
+        "embedding_requests": 3,
+        "embedding_tokens": 198,
+        "provider_wall_seconds": 1.7062159050256014
+      },
+      "embedding_batch_sizes": [
+        1,
+        1,
+        7
+      ],
+      "wall_ns": 1913590759,
+      "result": {
+        "results": [
+          {
+            "id": "2f5fd71f-6c23-4487-8e59-242181c7a91c",
+            "memory": "User booked a consignment collection for 'Eastbank exhibit cases' with Booking ID COL-4826 at Depot Bay H-6, pending depot approval before the actual collection can be arranged",
+            "event": "ADD"
+          }
+        ]
+      }
+    },
+    {
+      "event": "mem0_native_search",
+      "case_id": "f02_business_receipt",
+      "usage": {
+        "generations": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "generation_tokens": 0,
+        "embedding_requests": 2,
+        "embedding_tokens": 32,
+        "provider_wall_seconds": 0.05676029250025749
+      },
+      "embedding_batch_sizes": [
+        1,
+        1
+      ],
+      "wall_ns": 80754423,
+      "result": {
+        "results": [
+          {
+            "id": "2f5fd71f-6c23-4487-8e59-242181c7a91c",
+            "memory": "User booked a consignment collection for 'Eastbank exhibit cases' with Booking ID COL-4826 at Depot Bay H-6, pending depot approval before the actual collection can be arranged",
+            "hash": "614236ffaa97aff7ae3451edf66b4405",
+            "metadata": null,
+            "score": 0.7993723187266261,
+            "created_at": "2026-09-27T02:06:45.969785+00:00",
+            "updated_at": "2026-09-27T02:06:45.969785+00:00",
+            "user_id": "external-memory-v26-mem0-r1:mem0_native_autoadd:f02_business_receipt",
+            "attributed_to": "assistant"
+          }
+        ]
+      }
+    },
+    {
+      "event": "mem0_native_ingestion",
+      "case_id": "f02_business_receipt",
+      "usage": {
+        "generations": 1,
+        "input_tokens": 8408,
+        "output_tokens": 6,
+        "generation_tokens": 8414,
+        "embedding_requests": 1,
+        "embedding_tokens": 71,
+        "provider_wall_seconds": 1.1442327089607716
+      },
+      "embedding_batch_sizes": [
+        1
+      ],
+      "wall_ns": 1184422619,
+      "result": {
+        "results": []
+      }
+    },
+    {
+      "event": "mem0_native_ingestion",
+      "case_id": "f03_temporary_calculation",
+      "usage": {
+        "generations": 1,
+        "input_tokens": 8240,
+        "output_tokens": 6,
+        "generation_tokens": 8246,
+        "embedding_requests": 1,
+        "embedding_tokens": 27,
+        "provider_wall_seconds": 1.1150670717470348
+      },
+      "embedding_batch_sizes": [
+        1
+      ],
+      "wall_ns": 1159277760,
+      "result": {
+        "results": []
+      }
+    },
+    {
+      "event": "mem0_native_ingestion",
+      "case_id": "f04_one_time_format",
+      "usage": {
+        "generations": 1,
+        "input_tokens": 8235,
+        "output_tokens": 6,
+        "generation_tokens": 8241,
+        "embedding_requests": 1,
+        "embedding_tokens": 29,
+        "provider_wall_seconds": 1.1197736472822726
+      },
+      "embedding_batch_sizes": [
+        1
+      ],
+      "wall_ns": 1155007205,
+      "result": {
+        "results": []
+      }
+    }
+  ],
+  "native_ingestion": {
+    "completed": 6,
+    "records": [
+      {
+        "message_key": "f2b0e6097af11cf07b7bd0677389b599f1a37ddf662a087a01fc86703cd6e63a",
+        "status": "complete",
+        "case_id": "f01_future_agreement",
+        "input_hash": "0bc366a94bef17e56858dea38043e06df976b2f463695662f017765518e95ae5",
+        "result": {
+          "results": [
+            {
+              "id": "0e46e5de-98dc-47fa-b14e-786c6f17b377",
+              "memory": "User reserved 14 rowan saplings for the Maple Courtyard planting project, with confirmation sent to Mira (ID: CNF-7318) and the saplings placed on hold pending site lead approval for release",
+              "event": "ADD"
+            }
+          ]
+        },
+        "wall_ns": 3044618116
+      },
+      {
+        "message_key": "7aecc803e37925dad14066334d9ed2c8d06bf374a4e29c33669cad39a126e471",
+        "status": "complete",
+        "case_id": "f01_future_agreement",
+        "input_hash": "aeba9286816e89cfada1faa0b854c9a07193a2110685c2daa479be77023653db",
+        "result": {
+          "results": []
+        },
+        "wall_ns": 1243809975
+      },
+      {
+        "message_key": "31f9f6789a6b0ea2a735624258c4378a00047f852c36357dcc8668f3c6244fd9",
+        "status": "complete",
+        "case_id": "f02_business_receipt",
+        "input_hash": "7a27626e0f614135261a25fafdc395cac7accfb979ee659dce8d9a4fdd7342c3",
+        "result": {
+          "results": [
+            {
+              "id": "2f5fd71f-6c23-4487-8e59-242181c7a91c",
+              "memory": "User booked a consignment collection for 'Eastbank exhibit cases' with Booking ID COL-4826 at Depot Bay H-6, pending depot approval before the actual collection can be arranged",
+              "event": "ADD"
+            }
+          ]
+        },
+        "wall_ns": 1913590759
+      },
+      {
+        "message_key": "04922b5642aa3ee68ebd602b709dde655489a0aaae2b169574a6daee5f11f6c3",
+        "status": "complete",
+        "case_id": "f02_business_receipt",
+        "input_hash": "7411db9c3f0e91ee17199eea909cd3571986927d07daaa235fd9fb81f30b3960",
+        "result": {
+          "results": []
+        },
+        "wall_ns": 1184422619
+      },
+      {
+        "message_key": "89670edb09b84732339994d32ba750d49f108d7dc6ba97dca62465ace2683b38",
+        "status": "complete",
+        "case_id": "f03_temporary_calculation",
+        "input_hash": "2e1cc694a1716f16adb4925f4913441cdf0a2054f09e11e55cf27c3871a6a5b8",
+        "result": {
+          "results": []
+        },
+        "wall_ns": 1159277760
+      },
+      {
+        "message_key": "ca76daea62b1ed5e49beffd347246f599cd1d502d834441a23e7710b51023449",
+        "status": "complete",
+        "case_id": "f04_one_time_format",
+        "input_hash": "be4e290169a9f47d426389247d8d646598c62177226eea596ab00011dd6c2eca",
+        "result": {
+          "results": []
+        },
+        "wall_ns": 1155007205
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "f01_future_agreement",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "agreement",
+          "answers": [
+            "Confirmation sent to Mira at Maple Courtyard (ID: CNF-7318). The 14 rowan saplings are reserved and on hold pending site lead approval."
+          ],
+          "calls": [
+            {
+              "name": "send_confirmation",
+              "args": {
+                "recipient": "Mira at Maple Courtyard",
+                "message": "We have reserved 14 rowan saplings for the courtyard planting. Keep them on hold until the site lead approves release; we will return to arrange pickup later."
+              },
+              "id": "chatcmpl-8dd13dc6f0a42990:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "send_confirmation",
+              "content": "{\"ok\": true, \"confirmation_id\": \"CNF-7318\", \"status\": \"sent\"}",
+              "tool_call_id": "chatcmpl-8dd13dc6f0a42990:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "9e648c89864ddc1147ebcf9473e76ac3eca18f69ccacae51481501e8446070a7",
+              "generation_id": "chatcmpl-8dd13dc6f0a42990",
+              "call_id": "chatcmpl-8dd13dc6f0a42990:tool:0",
+              "name": "send_confirmation",
+              "args": {
+                "recipient": "Mira at Maple Courtyard",
+                "message": "We have reserved 14 rowan saplings for the courtyard planting. Keep them on hold until the site lead approves release; we will return to arrange pickup later."
+              },
+              "result": {
+                "content": "{\"ok\": true, \"confirmation_id\": \"CNF-7318\", \"status\": \"sent\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "send_confirmation",
+                "id": null,
+                "tool_call_id": "chatcmpl-8dd13dc6f0a42990:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": [
+            {
+              "id": "0e46e5de-98dc-47fa-b14e-786c6f17b377",
+              "memory": "User reserved 14 rowan saplings for the Maple Courtyard planting project, with confirmation sent to Mira (ID: CNF-7318) and the saplings placed on hold pending site lead approval for release",
+              "hash": "7b0981dde7284027ef2f36b6e044672d",
+              "metadata": null,
+              "created_at": "2026-09-27T02:06:40.907445+00:00",
+              "updated_at": "2026-09-27T02:06:40.907445+00:00",
+              "user_id": "external-memory-v26-mem0-r1:mem0_native_autoadd:f01_future_agreement",
+              "attributed_to": "user"
+            }
+          ]
+        },
+        {
+          "session_id": "later",
+          "answers": [
+            "The reservation for the Maple Courtyard planting project includes 14 rowan saplings. Before release, site lead approval is required."
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Maple Courtyard reservation species quantity release conditions"
+              },
+              "id": "chatcmpl-a43b23341db78f6f:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "{\"results\": [{\"id\": \"0e46e5de-98dc-47fa-b14e-786c6f17b377\", \"memory\": \"User reserved 14 rowan saplings for the Maple Courtyard planting project, with confirmation sent to Mira (ID: CNF-7318) and the saplings placed on hold pending site lead approval for release\", \"hash\": \"7b0981dde7284027ef2f36b6e044672d\", \"metadata\": null, \"score\": 0.41625885465643153, \"created_at\": \"2026-09-27T02:06:40.907445+00:00\", \"updated_at\": \"2026-09-27T02:06:40.907445+00:00\", \"user_id\": \"external-memory-v26-mem0-r1:mem0_native_autoadd:f01_future_agreement\", \"attributed_to\": \"user\"}]}",
+              "tool_call_id": "chatcmpl-a43b23341db78f6f:tool:0"
+            }
+          ],
+          "business_calls": [],
+          "memories": [
+            {
+              "id": "0e46e5de-98dc-47fa-b14e-786c6f17b377",
+              "memory": "User reserved 14 rowan saplings for the Maple Courtyard planting project, with confirmation sent to Mira (ID: CNF-7318) and the saplings placed on hold pending site lead approval for release",
+              "hash": "7b0981dde7284027ef2f36b6e044672d",
+              "metadata": null,
+              "created_at": "2026-09-27T02:06:40.907445+00:00",
+              "updated_at": "2026-09-27T02:06:40.907445+00:00",
+              "user_id": "external-memory-v26-mem0-r1:mem0_native_autoadd:f01_future_agreement",
+              "attributed_to": "user"
+            }
+          ]
+        }
+      ],
+      "strict_pass": true,
+      "review": "First-session native memory retains all required facts; actual later Provider search delivery and answer are accurate; no extra business call."
+    },
+    {
+      "id": "f02_business_receipt",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "booking",
+          "answers": [
+            "Collection for consignment 'Eastbank exhibit cases' has been booked. Booking ID: COL-4826, Depot Bay: H-6. Status: Awaiting depot approval. Please return with the approval before arranging the actual collection."
+          ],
+          "calls": [
+            {
+              "name": "book_collection",
+              "args": {
+                "consignment": "Eastbank exhibit cases",
+                "hold_until_approval": true
+              },
+              "id": "chatcmpl-b75c6077f1c43ce6:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "book_collection",
+              "content": "{\"ok\": true, \"booking_id\": \"COL-4826\", \"depot_bay\": \"H-6\", \"status\": \"awaiting_depot_approval\"}",
+              "tool_call_id": "chatcmpl-b75c6077f1c43ce6:tool:0"
+            }
+          ],
+          "business_calls": [
+            {
+              "status": "complete",
+              "thread_id": "232e519885ee31073beb558c822a8db22b8694a8d90dc3bc085c78f657eac29c",
+              "generation_id": "chatcmpl-b75c6077f1c43ce6",
+              "call_id": "chatcmpl-b75c6077f1c43ce6:tool:0",
+              "name": "book_collection",
+              "args": {
+                "consignment": "Eastbank exhibit cases",
+                "hold_until_approval": true
+              },
+              "result": {
+                "content": "{\"ok\": true, \"booking_id\": \"COL-4826\", \"depot_bay\": \"H-6\", \"status\": \"awaiting_depot_approval\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "book_collection",
+                "id": null,
+                "tool_call_id": "chatcmpl-b75c6077f1c43ce6:tool:0",
+                "artifact": null,
+                "status": "success"
+              }
+            }
+          ],
+          "memories": [
+            {
+              "id": "2f5fd71f-6c23-4487-8e59-242181c7a91c",
+              "memory": "User booked a consignment collection for 'Eastbank exhibit cases' with Booking ID COL-4826 at Depot Bay H-6, pending depot approval before the actual collection can be arranged",
+              "hash": "614236ffaa97aff7ae3451edf66b4405",
+              "metadata": null,
+              "created_at": "2026-09-27T02:06:45.969785+00:00",
+              "updated_at": "2026-09-27T02:06:45.969785+00:00",
+              "user_id": "external-memory-v26-mem0-r1:mem0_native_autoadd:f02_business_receipt",
+              "attributed_to": "assistant"
+            }
+          ]
+        },
+        {
+          "session_id": "later",
+          "answers": [
+            "Booking Reference: COL-4826, Depot Bay: H-6, Approval Status: Pending"
+          ],
+          "calls": [
+            {
+              "name": "search_memory",
+              "args": {
+                "query": "Eastbank exhibit cases collection booking reference depot bay approval status"
+              },
+              "id": "chatcmpl-866949eca15b6b2b:tool:0",
+              "type": "tool_call"
+            }
+          ],
+          "tool_results": [
+            {
+              "name": "search_memory",
+              "content": "{\"results\": [{\"id\": \"2f5fd71f-6c23-4487-8e59-242181c7a91c\", \"memory\": \"User booked a consignment collection for 'Eastbank exhibit cases' with Booking ID COL-4826 at Depot Bay H-6, pending depot approval before the actual collection can be arranged\", \"hash\": \"614236ffaa97aff7ae3451edf66b4405\", \"metadata\": null, \"score\": 0.7993723187266261, \"created_at\": \"2026-09-27T02:06:45.969785+00:00\", \"updated_at\": \"2026-09-27T02:06:45.969785+00:00\", \"user_id\": \"external-memory-v26-mem0-r1:mem0_native_autoadd:f02_business_receipt\", \"attributed_to\": \"assistant\"}]}",
+              "tool_call_id": "chatcmpl-866949eca15b6b2b:tool:0"
+            }
+          ],
+          "business_calls": [],
+          "memories": [
+            {
+              "id": "2f5fd71f-6c23-4487-8e59-242181c7a91c",
+              "memory": "User booked a consignment collection for 'Eastbank exhibit cases' with Booking ID COL-4826 at Depot Bay H-6, pending depot approval before the actual collection can be arranged",
+              "hash": "614236ffaa97aff7ae3451edf66b4405",
+              "metadata": null,
+              "created_at": "2026-09-27T02:06:45.969785+00:00",
+              "updated_at": "2026-09-27T02:06:45.969785+00:00",
+              "user_id": "external-memory-v26-mem0-r1:mem0_native_autoadd:f02_business_receipt",
+              "attributed_to": "assistant"
+            }
+          ]
+        }
+      ],
+      "strict_pass": true,
+      "review": "First-session native memory retains all required facts; actual later Provider search delivery and answer are accurate; no extra business call."
+    },
+    {
+      "id": "f03_temporary_calculation",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "once",
+          "answers": [
+            "378"
+          ],
+          "calls": [],
+          "tool_results": [],
+          "business_calls": [],
+          "memories": []
+        }
+      ],
+      "strict_pass": true,
+      "review": "Correct transient answer, no persistent item or memory write."
+    },
+    {
+      "id": "f04_one_time_format",
+      "status": "TERMINAL",
+      "error": null,
+      "sessions": [
+        {
+          "session_id": "once",
+          "answers": [
+            "READY"
+          ],
+          "calls": [],
+          "tool_results": [],
+          "business_calls": [],
+          "memories": []
+        }
+      ],
+      "strict_pass": true,
+      "review": "Correct transient answer, no persistent item or memory write."
+    }
+  ],
+  "verified_host_wire_contracts": 10,
+  "native_runtime_events": [
+    {
+      "stage": "external-memory-v26-mem0-r1",
+      "event": "mem0_native_runtime",
+      "run_id": "external-memory-v26-mem0-r1",
+      "arm_id": "mem0_native_autoadd",
+      "vector_store": "qdrant-local",
+      "bm25_slot": true,
+      "bm25_encoder": "Qdrant/bm25",
+      "entity_store": "native_lazy",
+      "fastembed_cache_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/cache/fastembed",
+      "wall_ns": 2055958816,
+      "cpu_ns": 2022065134
+    }
+  ],
+  "instrumentation": null,
+  "process": {
+    "run_id": "external-memory-v26-mem0-r1",
+    "exit_code": 0,
+    "process_wall_seconds": 19.617552511394024
+  },
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 847,
+    "generation": {
+      "charged_tokens": 988877,
+      "known_tokens": 988877,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 8977,
+      "known_tokens": 8977,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "budget_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 863,
+    "generation": {
+      "charged_tokens": 1042729,
+      "known_tokens": 1042729,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 9617,
+      "known_tokens": 9617,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "runtime_reads_rubric": false,
+  "native_snapshot_reads": 6,
+  "analysis_snapshot_reads": 6,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false,
+  "artifact_sha256": {
+    "artifacts/external-memory-v26/external-memory-v26-mem0-r1/trace.jsonl": "86e6c8f7c98c4c880bce83dd1a660bf68727ab2afe9143fec190de814bbc3478",
+    "artifacts/external-memory-v26/external-memory-v26-mem0-r1/checkpoints.sqlite": "67a2fae86c9ca7a5d5786dda9adc32364dca12e8b57078447ffe4063b853a0d0",
+    "artifacts/external-memory-v26/external-memory-v26-mem0-r1/run/result.json": "f606cb2312f17d2342085244f719577d6c85eae2ca0c69b433daaeaa64c8536b"
+  },
+  "actual_search_delivery": [
+    {
+      "case_id": "f01_future_agreement",
+      "tool_call_id": "chatcmpl-a43b23341db78f6f:tool:0",
+      "actual_provider_receipt_ids": [
+        "chatcmpl-9700a8f7bc4284a7"
+      ],
+      "search_result_delivered": true,
+      "nonempty": true
+    },
+    {
+      "case_id": "f02_business_receipt",
+      "tool_call_id": "chatcmpl-866949eca15b6b2b:tool:0",
+      "actual_provider_receipt_ids": [
+        "chatcmpl-98d1dd62760596fa"
+      ],
+      "search_result_delivered": true,
+      "nonempty": true
+    }
+  ],
+  "source_publication_commit": "2968f75ab69aedc0fd5349ba196aabe63da7f46f",
+  "publication_timing": "Source/input/protocol/execution hashes fixed before requests; Git publication occurred after B1 began.",
+  "scores": {
+    "formation": {
+      "passed": 2,
+      "denominator": 2
+    },
+    "later_utility": {
+      "passed": 2,
+      "denominator": 2
+    },
+    "temporary_no_storage": {
+      "passed": 2,
+      "denominator": 2
+    },
+    "unnecessary_storage": {
+      "count": 0,
+      "denominator": 2
+    },
+    "strict_case": {
+      "passed": 4,
+      "denominator": 4
+    },
+    "host_completed": {
+      "passed": 6,
+      "denominator": 6
+    }
+  },
+  "native_prompt_cost": {
+    "system_text_tokens": 8136,
+    "system_sha256": "ad19187a37813ef77ee156e714c0650e6ec749e0264bdc07d499bc9b24115155",
+    "all_six_system_prompts_identical": true,
+    "empty_result_ingestions": 4,
+    "empty_result_ingestion_generation_tokens": 33330,
+    "ingestion_embedding_requests": 10,
+    "ingestion_embedding_tokens": 576
+  },
+  "native_storage_files": {
+    "mem0-ingestion.json": 4841,
+    "mem0-history.sqlite": 20480,
+    "mem0-qdrant/meta.json": 1163,
+    "mem0-qdrant/.lock": 13,
+    "mem0-qdrant/collection/milai_external_v26_entities/storage.sqlite": 147456,
+    "mem0-qdrant/collection/milai_external_v26/storage.sqlite": 36864
+  },
+  "memory_write_scope": "native ADD only",
+  "snapshot_count_note": "Six case-session inspection reads total; native_snapshot_reads is the same six in the Mem0 arm, not an additional six."
+}
