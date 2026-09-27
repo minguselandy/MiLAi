@@ -36,20 +36,26 @@ canonical memory state.
 
 ## Required checks
 
-Latest user instruction: finish the current E2 online snapshot slice, then pause the actual
-Goal, generate the overall experiment report and publish through Luna high. Limit remaining
-execution to the four frozen sandbox trajectories; E1 and D2–D5 remain unfinished and must not
-start during closeout. This pause request overrides older ACTIVE continuation wording below.
+Latest user instruction has been fulfilled for the current E2 online slice: all four frozen
+trajectories /22 messages on 0c5f027 are terminal, and the actual Goal is now PAUSED.
+Only final evidence reporting and authorized Luna high Git publication remain. Do not start
+E1, D2–D5, new experiments, development, downloads or deployment without an explicit resume.
+This status overrides every older ACTIVE/next-step instruction below; full research is unfinished.
 
-The opt-in turn_end implementation is now source-frozen: 17 related checks, then 7 final
-turn_end boundary checks, target static checks, four zero-model prepares and one final build
-passed. Do not repeat them for publication. Root freezes and runs the
-[E2 sandbox protocol](data/manifests/local-state-attention-review-e2-sandbox-r1-protocol.json)
-serially, preserving every failure and cost. No shared service change or model download.
+See the [latest overall report](docs/MILAI_LSA_REVIEW_OVERALL_EXPERIMENT_REPORT_20260927.md),
+[E2 online results](docs/MILAI_LSA_REVIEW_E2_SANDBOX_R1_RESULTS_20260927.md) and
+[execution record](docs/MILAI_LSA_REVIEW_EXECUTION_GOAL.md). Both recipes score7/11 and0/2 whole;
+pre_model generation tokens54453 versus turn_end33039. Preserve both wrong increment actions,
+all four partial-script singularized item keys, the invalid memory-ID error and successful
+same-ID recovery. Snapshot engineering does not prove semantic benefit or stable savings.
+All37 actual Host prefixes,11 stable epochs/18 snapshot deliveries,11 closes, source/input hashes
+and costs were checked. New67/87492/301; final continuous2768/3420333/18746.
+Do not repeat already passed source tests/builds for publication. Preserve the old v27 draft.
 
+Historical activation record (superseded by the pause above):
 The user has now explicitly activated execution of the
 [16-round review and next plan](docs/MILAI_LSA_16_ROUND_REVIEW_AND_NEXT_PLAN_20260927.md).
-The actual thread Goal is ACTIVE; follow the [new execution record](docs/MILAI_LSA_REVIEW_EXECUTION_GOAL.md).
+At activation the thread Goal was ACTIVE; follow the [new execution record](docs/MILAI_LSA_REVIEW_EXECUTION_GOAL.md).
 This supersedes the previous pause for this scope. Preserve the plan bytes, all 16 historical
 results/locks/costs, and the unrelated v27 draft. Start with D0 exposed failure prefixes and
 verified defects, then separately test local entry edits and turn-start snapshots before

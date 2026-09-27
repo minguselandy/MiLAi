@@ -1,0 +1,693 @@
+{
+  "kind": "LSA_REVIEW_E2_SANDBOX_R1_RESULTS",
+  "status": "COMPLETE_EXPOSED_DEVELOPMENT_GOAL_PAUSED",
+  "source_commit": "0c5f027750eac1a45245d5a9ac43e48eb5e202e9",
+  "protocol": "data/manifests/local-state-attention-review-e2-sandbox-r1-protocol.json",
+  "protocol_sha256": "725c6d4801c72411778daa9f081181faefc0951a1e3df72a9ae80faae8b9b9e7",
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/maintenance-distinct-increments.json": "e70cfb79ff85b74587210a200f00103b5c608b0f4fd63ba980b8f18857b325cc",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/maintenance-distinct-increments-rubric.json": "73460af3a69a155903f3ad648b0da5b3e5762437c73a072e757325b3d13c4799",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "source_mapping_sha256": "b469176c5f70e3932b2c8b024b591729fce90f18370db0fd2b9a7d45e1c34b80",
+  "scorer": "Root offline original rubric, actual answers and exact committed business fields; no judge calls",
+  "scoring_boundary": "Natural-language stored in S-2 is acceptable location wording in first-read, as in prior conditional report. Actual API destination remains exact storage S-2; reporting storage S-2 for actual S-2 is unfaithful. Recovery success does not repair initial exact-key failure.",
+  "runs": [
+    {
+      "run_id": "lsa-review-e2-sandbox-r1-distinct-turn_end",
+      "case": "distinct",
+      "update_epoch": "turn_end",
+      "strict": {
+        "passed": 3,
+        "denominator": 5,
+        "whole_passed": false,
+        "failed_messages": [
+          "second-increment",
+          "final-action"
+        ],
+        "reason": "Both distinct events first drive writable State 2→3→4. Host then uses 3 under turn_end or 5 under pre_model; pre_model also rewrites State to5 after an invalid-memory-ID error echo. Actual destination is S-2 instead of storage S-2 in both."
+      },
+      "mechanism": {
+        "actual_host_prefixes_matched_original_checkpoints": 9,
+        "source_deliveries_owner_checked": 12,
+        "events_seen_in_exactly_one_maintenance_batch": 9,
+        "stable_snapshot_host_deliveries": 9,
+        "persisted_snapshot_rows_checked": 3,
+        "close_successes": 5,
+        "natural_capacity_close_failure_or_mid_epoch_crash": false,
+        "same_id_recovery": null
+      },
+      "costs": {
+        "by_role": {
+          "task_host": {
+            "requests": 9,
+            "tokens": 10798,
+            "prompt_tokens": 10343
+          },
+          "embedding": {
+            "requests": 3,
+            "tokens": 90,
+            "prompt_tokens": 90
+          },
+          "state_control": {
+            "requests": 5,
+            "tokens": 5747,
+            "prompt_tokens": 4799
+          }
+        },
+        "http_wall_seconds": {
+          "task_host": 4.796560009475797,
+          "embedding": 0.30941831320524216,
+          "state_control": 6.652268033474684
+        },
+        "by_control_stage": {
+          "maintenance": {
+            "requests": 5,
+            "known_tokens": 5747,
+            "unknown_usage": 0,
+            "errors": 0
+          }
+        },
+        "local_state_store_stats": {
+          "get": {
+            "calls": 178,
+            "failures": 0,
+            "cpu_ns": 83262638,
+            "wall_ns": 128760598,
+            "request_bytes": 35891,
+            "result_bytes": 29514
+          },
+          "search": {
+            "calls": 53,
+            "failures": 0,
+            "cpu_ns": 32676501,
+            "wall_ns": 66969649,
+            "request_bytes": 7458,
+            "result_bytes": 83383
+          },
+          "put": {
+            "calls": 32,
+            "failures": 0,
+            "cpu_ns": 10648748,
+            "wall_ns": 78475701,
+            "request_bytes": 21875,
+            "result_bytes": 0
+          }
+        },
+        "epoch_snapshots": {
+          "captured": 5,
+          "reused": 0,
+          "body_bytes": 3152
+        },
+        "epoch_checkpoint_reads": {
+          "calls": 5,
+          "logical_bytes": 13709,
+          "cpu_ns": 4928071,
+          "wall_ns": 4928762
+        },
+        "local_file_bytes": {
+          "checkpoints.sqlite": 278528,
+          "business-world.sqlite": 36864,
+          "business-journal.json": 1011,
+          "instrumentation.sqlite": 106496
+        },
+        "instrumentation": {
+          "observer_stats": {
+            "id": 1,
+            "transactions": 88,
+            "observer_cpu_ns": 32824172,
+            "observer_wall_ns": 553159235,
+            "extra_store_reads": 6,
+            "extra_read_cpu_ns": 4429312,
+            "extra_read_wall_ns": 8011427,
+            "initial_db_bytes": 98304
+          },
+          "memory_operations": [
+            {
+              "requested_action": "create",
+              "status": "complete",
+              "actual_effect": "insert",
+              "count": 1,
+              "extra_reads": 2
+            },
+            {
+              "requested_action": "update",
+              "status": "complete",
+              "actual_effect": "insert",
+              "count": 1,
+              "extra_reads": 2
+            },
+            {
+              "requested_action": "update",
+              "status": "complete",
+              "actual_effect": "update",
+              "count": 1,
+              "extra_reads": 2
+            }
+          ],
+          "memory_searches": 0,
+          "tool_calls": [
+            {
+              "tool_name": "manage_memory",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 3
+            },
+            {
+              "tool_name": "reserve_and_label",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 1
+            }
+          ],
+          "requests_recorded": 9
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "f1460b8a2e65f768121a98e25ff738f3421a1756d415cb49adde25136d87bebf",
+        "run_manifest.json": "d68babde310c6733e900aef43c52288b8b5dfa5d5653313f8977c483205c7ea6",
+        "prepared.json": "89a624390e68f2186c18cce076b5714dfa4ccb093c04575ce3abcbda175a5b77",
+        "phase-0-result.json": "241f2e6c42350a57d653013d06fa7e4b883d68afb01e4384b37184ae446da58d",
+        "phase-1-result.json": "57a42450c204a8fb70a00e6f538e527f949a6ae63cd570ed2a9796925506d5be",
+        "phase-0-store-snapshot.json": "367e0c2e5e286c681c720af384abe823290d7960e5e7f7db85521e242ec60687",
+        "phase-1-store-snapshot.json": "f9347d953c1c0097d8933707fc93bdd3046e5c67a4e951ad49d2a0daf77b8c46",
+        "checkpoints.sqlite": "31e8c46d48bd2c18790e8e964543ab7c07eea960d15dac255270eafd70cf1e69",
+        "business-world.sqlite": "14cd83121b2e753be80692adc84243a607d187443ccf0e77a7743bc4452afde0",
+        "business-journal.json": "b133a676cede130a4068ecb279fc756166c2e696a740866b9c0ccef399a8a4ab",
+        "phase-progress.json": "61376c5f66bc0a4f7fe4bff042fc3b6a00c1c27a32363070f0499f80fd4e0245"
+      }
+    },
+    {
+      "run_id": "lsa-review-e2-sandbox-r1-distinct-pre_model",
+      "case": "distinct",
+      "update_epoch": "pre_model",
+      "strict": {
+        "passed": 3,
+        "denominator": 5,
+        "whole_passed": false,
+        "failed_messages": [
+          "second-increment",
+          "final-action"
+        ],
+        "reason": "Both distinct events first drive writable State 2→3→4. Host then uses 3 under turn_end or 5 under pre_model; pre_model also rewrites State to5 after an invalid-memory-ID error echo. Actual destination is S-2 instead of storage S-2 in both."
+      },
+      "mechanism": {
+        "actual_host_prefixes_matched_original_checkpoints": 9,
+        "source_deliveries_owner_checked": 31,
+        "events_seen_in_exactly_one_maintenance_batch": 9,
+        "stable_snapshot_host_deliveries": 0,
+        "persisted_snapshot_rows_checked": 0,
+        "close_successes": 0,
+        "natural_capacity_close_failure_or_mid_epoch_crash": false,
+        "same_id_recovery": null
+      },
+      "costs": {
+        "by_role": {
+          "state_control": {
+            "requests": 9,
+            "tokens": 11695,
+            "prompt_tokens": 8677
+          },
+          "task_host": {
+            "requests": 9,
+            "tokens": 17154,
+            "prompt_tokens": 16485
+          },
+          "embedding": {
+            "requests": 2,
+            "tokens": 167,
+            "prompt_tokens": 167
+          }
+        },
+        "http_wall_seconds": {
+          "state_control": 20.214563600718975,
+          "task_host": 6.4172925925813615,
+          "embedding": 0.08471632190048695
+        },
+        "by_control_stage": {
+          "maintenance": {
+            "requests": 9,
+            "known_tokens": 11695,
+            "unknown_usage": 0,
+            "errors": 0
+          }
+        },
+        "local_state_store_stats": {
+          "get": {
+            "calls": 155,
+            "failures": 0,
+            "cpu_ns": 72201276,
+            "wall_ns": 105210918,
+            "request_bytes": 30814,
+            "result_bytes": 26621
+          },
+          "search": {
+            "calls": 81,
+            "failures": 0,
+            "cpu_ns": 132272034,
+            "wall_ns": 180641899,
+            "request_bytes": 11475,
+            "result_bytes": 140876
+          },
+          "put": {
+            "calls": 34,
+            "failures": 0,
+            "cpu_ns": 11471677,
+            "wall_ns": 82558722,
+            "request_bytes": 24900,
+            "result_bytes": 0
+          }
+        },
+        "epoch_snapshots": {
+          "captured": 0,
+          "reused": 0,
+          "body_bytes": 0
+        },
+        "epoch_checkpoint_reads": {
+          "calls": 0,
+          "logical_bytes": 0,
+          "cpu_ns": 0,
+          "wall_ns": 0
+        },
+        "local_file_bytes": {
+          "checkpoints.sqlite": 352256,
+          "business-world.sqlite": 36864,
+          "business-journal.json": 1011,
+          "instrumentation.sqlite": 106496
+        },
+        "instrumentation": {
+          "observer_stats": {
+            "id": 1,
+            "transactions": 80,
+            "observer_cpu_ns": 30228029,
+            "observer_wall_ns": 476762698,
+            "extra_store_reads": 4,
+            "extra_read_cpu_ns": 2608250,
+            "extra_read_wall_ns": 4045276,
+            "initial_db_bytes": 98304
+          },
+          "memory_operations": [
+            {
+              "requested_action": "create",
+              "status": "complete",
+              "actual_effect": "insert",
+              "count": 2,
+              "extra_reads": 4
+            }
+          ],
+          "memory_searches": 0,
+          "tool_calls": [
+            {
+              "tool_name": "manage_memory",
+              "status": "error",
+              "tool_message_status": "error",
+              "count": 1
+            },
+            {
+              "tool_name": "manage_memory",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 2
+            },
+            {
+              "tool_name": "reserve_and_label",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 1
+            }
+          ],
+          "requests_recorded": 9
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "1ffd833d33926f5d341fafe01ec0108013307c03a1899fef63351dfc4f1fc54c",
+        "run_manifest.json": "ea5513f2b0a461985355ecf15d6b2e0647499ec06e3253df6fbf2fc618045e36",
+        "prepared.json": "2aa19dcfcb4ce961b16ea6bbfc36ef71871138e6b06019857d600acadf818a1e",
+        "phase-0-result.json": "e335b689c54bc7b26ec00d182ecb9c0c4cb56fe5d35f45105fc6442b0112a5d0",
+        "phase-1-result.json": "19ef31c09066e3724a1b4fc77d8e17a756bcc03ba5068656131bb386cf33417f",
+        "phase-0-store-snapshot.json": "071c78c777be977e003dd48d3b07ace4de56b9dbc19ea8e8090826efb3d534e5",
+        "phase-1-store-snapshot.json": "342dfe69758f1783bdbed55a102d60edd99eaa38982ffe2ecd93e0aaed55b2b2",
+        "checkpoints.sqlite": "9056ccb55e5c4a72ebf4d5b32dcf5ddbe31f0f805c71d39a093333a0eb05db1a",
+        "business-world.sqlite": "e0bd41bdd6e39b9701d513f2973f72488deb31903929ea80f35b54f4fed2ec6c",
+        "business-journal.json": "1d5f6e0e34bb3ed3aa52bed41d580e1c12b34e0bff23c923246a98ff968e79dd",
+        "phase-progress.json": "ec2380bbabb3dfa9b3c111cb804860f027ed4b556eeca675b063fd7d7352df45"
+      }
+    },
+    {
+      "run_id": "lsa-review-e2-sandbox-r1-partial-pre_model",
+      "case": "partial",
+      "update_epoch": "pre_model",
+      "strict": {
+        "passed": 4,
+        "denominator": 6,
+        "whole_passed": false,
+        "failed_messages": [
+          "partial-action",
+          "other-owner-action"
+        ],
+        "reason": "Both owner reserve calls singularize exact key Summit archive crates to Summit archive crate. Other quantity/destination/packing facts are correct; real same-ID recovery and access retention pass."
+      },
+      "mechanism": {
+        "actual_host_prefixes_matched_original_checkpoints": 10,
+        "source_deliveries_owner_checked": 22,
+        "events_seen_in_exactly_one_maintenance_batch": 11,
+        "stable_snapshot_host_deliveries": 0,
+        "persisted_snapshot_rows_checked": 0,
+        "close_successes": 0,
+        "natural_capacity_close_failure_or_mid_epoch_crash": false,
+        "same_id_recovery": {
+          "same_original_id": true,
+          "no_rereserve": true,
+          "get_found": true,
+          "label_created": true,
+          "unsupported_dispatch_claim": false,
+          "owner_isolation": true,
+          "retained_access": true
+        }
+      },
+      "costs": {
+        "by_role": {
+          "state_control": {
+            "requests": 10,
+            "tokens": 10624,
+            "prompt_tokens": 8355
+          },
+          "task_host": {
+            "requests": 10,
+            "tokens": 14980,
+            "prompt_tokens": 14392
+          },
+          "embedding": {
+            "requests": 1,
+            "tokens": 44,
+            "prompt_tokens": 44
+          }
+        },
+        "http_wall_seconds": {
+          "state_control": 15.582850827369839,
+          "task_host": 5.700965465046465,
+          "embedding": 0.04739075480028987
+        },
+        "by_control_stage": {
+          "maintenance": {
+            "requests": 10,
+            "known_tokens": 10624,
+            "unknown_usage": 0,
+            "errors": 0
+          }
+        },
+        "local_state_store_stats": {
+          "get": {
+            "calls": 125,
+            "failures": 0,
+            "cpu_ns": 138355411,
+            "wall_ns": 164682455,
+            "request_bytes": 24551,
+            "result_bytes": 21940
+          },
+          "search": {
+            "calls": 91,
+            "failures": 0,
+            "cpu_ns": 45299374,
+            "wall_ns": 93632299,
+            "request_bytes": 12710,
+            "result_bytes": 126546
+          },
+          "put": {
+            "calls": 41,
+            "failures": 0,
+            "cpu_ns": 13587825,
+            "wall_ns": 74932516,
+            "request_bytes": 29612,
+            "result_bytes": 0
+          }
+        },
+        "epoch_snapshots": {
+          "captured": 0,
+          "reused": 0,
+          "body_bytes": 0
+        },
+        "epoch_checkpoint_reads": {
+          "calls": 0,
+          "logical_bytes": 0,
+          "cpu_ns": 0,
+          "wall_ns": 0
+        },
+        "local_file_bytes": {
+          "checkpoints.sqlite": 294912,
+          "business-world.sqlite": 36864,
+          "business-journal.json": 4007,
+          "instrumentation.sqlite": 122880
+        },
+        "instrumentation": {
+          "observer_stats": {
+            "id": 1,
+            "transactions": 88,
+            "observer_cpu_ns": 33686183,
+            "observer_wall_ns": 733512983,
+            "extra_store_reads": 2,
+            "extra_read_cpu_ns": 1415349,
+            "extra_read_wall_ns": 2485121,
+            "initial_db_bytes": 98304
+          },
+          "memory_operations": [
+            {
+              "requested_action": "create",
+              "status": "complete",
+              "actual_effect": "insert",
+              "count": 1,
+              "extra_reads": 2
+            }
+          ],
+          "memory_searches": 0,
+          "tool_calls": [
+            {
+              "tool_name": "complete_label",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 1
+            },
+            {
+              "tool_name": "get_reservation",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 1
+            },
+            {
+              "tool_name": "manage_memory",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 1
+            },
+            {
+              "tool_name": "reserve_and_label",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 2
+            }
+          ],
+          "requests_recorded": 10
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "bb7a561e6eccbdbd3a62a2da63f88646757e428c5d24d3b11e884ad66f8f6c17",
+        "run_manifest.json": "5b3efe9fb410fc8691efbd2ff0742ce1389aae03b35db4772be32c3013287a0d",
+        "prepared.json": "531c3215f1f387285f57e5bd0934df114504716e173ab542273bb86e2b954b5e",
+        "phase-0-result.json": "e824ea90a6746ab3e6b2fd39cd5336353e0004f27c892160d9f3900c2b861092",
+        "phase-1-result.json": "16a7a8437bfb8f39c915201aee4ad9ac9d747d2cf10bcfcf67b0bae0380c0283",
+        "phase-0-store-snapshot.json": "ee9eb575e8e35214cd15c6bcd11078638f57ed68f73ce1e081606be66857d573",
+        "phase-1-store-snapshot.json": "b0ffa9e93bc82e1f0239e2989472e91bb86023a2f9f7b71887ad3a618f158c45",
+        "checkpoints.sqlite": "67d1c6641727c9db0eb20743b2e4f85eed0954fedf08520c1e4bfa5c3346e028",
+        "business-world.sqlite": "9fe84e7d221368a408a119100ad9642cf7bb61ac07b0de55934dd09088cf98db",
+        "business-journal.json": "2654704311398948b04dd3cfc72eb013a35d90ccbcad2cda8fdf9fcfaf0e47d6",
+        "phase-progress.json": "3ec74de5819e5017a910bac6a9a9166ab4ba433f6eca02c3b1c54bc3b3649ab4"
+      }
+    },
+    {
+      "run_id": "lsa-review-e2-sandbox-r1-partial-turn_end",
+      "case": "partial",
+      "update_epoch": "turn_end",
+      "strict": {
+        "passed": 4,
+        "denominator": 6,
+        "whole_passed": false,
+        "failed_messages": [
+          "partial-action",
+          "other-owner-action"
+        ],
+        "reason": "Both owner reserve calls singularize exact key Summit archive crates to Summit archive crate. Other quantity/destination/packing facts are correct; real same-ID recovery and access retention pass."
+      },
+      "mechanism": {
+        "actual_host_prefixes_matched_original_checkpoints": 9,
+        "source_deliveries_owner_checked": 5,
+        "events_seen_in_exactly_one_maintenance_batch": 10,
+        "stable_snapshot_host_deliveries": 9,
+        "persisted_snapshot_rows_checked": 6,
+        "close_successes": 6,
+        "natural_capacity_close_failure_or_mid_epoch_crash": false,
+        "same_id_recovery": {
+          "same_original_id": true,
+          "no_rereserve": true,
+          "get_found": true,
+          "label_created": true,
+          "unsupported_dispatch_claim": false,
+          "owner_isolation": true,
+          "retained_access": true
+        }
+      },
+      "costs": {
+        "by_role": {
+          "task_host": {
+            "requests": 9,
+            "tokens": 10274,
+            "prompt_tokens": 9763
+          },
+          "state_control": {
+            "requests": 6,
+            "tokens": 6220,
+            "prompt_tokens": 5104
+          }
+        },
+        "http_wall_seconds": {
+          "task_host": 4.811516955960542,
+          "state_control": 7.733201521914452
+        },
+        "by_control_stage": {
+          "maintenance": {
+            "requests": 6,
+            "known_tokens": 6220,
+            "unknown_usage": 0,
+            "errors": 0
+          }
+        },
+        "local_state_store_stats": {
+          "get": {
+            "calls": 137,
+            "failures": 0,
+            "cpu_ns": 65123660,
+            "wall_ns": 96601404,
+            "request_bytes": 27366,
+            "result_bytes": 27074
+          },
+          "search": {
+            "calls": 61,
+            "failures": 0,
+            "cpu_ns": 135603705,
+            "wall_ns": 171530144,
+            "request_bytes": 8461,
+            "result_bytes": 82427
+          },
+          "put": {
+            "calls": 37,
+            "failures": 0,
+            "cpu_ns": 12172513,
+            "wall_ns": 72910595,
+            "request_bytes": 26107,
+            "result_bytes": 0
+          }
+        },
+        "epoch_snapshots": {
+          "captured": 6,
+          "reused": 0,
+          "body_bytes": 3083
+        },
+        "epoch_checkpoint_reads": {
+          "calls": 6,
+          "logical_bytes": 12673,
+          "cpu_ns": 3385733,
+          "wall_ns": 3385674
+        },
+        "local_file_bytes": {
+          "checkpoints.sqlite": 245760,
+          "business-world.sqlite": 36864,
+          "business-journal.json": 4007,
+          "instrumentation.sqlite": 114688
+        },
+        "instrumentation": {
+          "observer_stats": {
+            "id": 1,
+            "transactions": 72,
+            "observer_cpu_ns": 27159494,
+            "observer_wall_ns": 929098179,
+            "extra_store_reads": 0,
+            "extra_read_cpu_ns": 0,
+            "extra_read_wall_ns": 0,
+            "initial_db_bytes": 98304
+          },
+          "memory_operations": [],
+          "memory_searches": 0,
+          "tool_calls": [
+            {
+              "tool_name": "complete_label",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 1
+            },
+            {
+              "tool_name": "get_reservation",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 1
+            },
+            {
+              "tool_name": "reserve_and_label",
+              "status": "success",
+              "tool_message_status": "success",
+              "count": 2
+            }
+          ],
+          "requests_recorded": 9
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "f2845c18af81072a732095d760276eb3f4adb18bac6a3df40fa6e6910b523ab0",
+        "run_manifest.json": "608ebb9d062081e7a9095cde8fe8418e25650225c774dc013776125396890161",
+        "prepared.json": "a745d2a5fdf0ae3aa82262f425eafe730ad4517f0205ea7de1239cf8c0a38be0",
+        "phase-0-result.json": "a6f3114dbeee0c7462e4f02bf39453cfd32f6235643d2adf8a08243ea418265a",
+        "phase-1-result.json": "9af99e053769d669dc91a11ca90d5f1aeb1c120809e8da74be5e376db14c065d",
+        "phase-0-store-snapshot.json": "5536ead7349a9ef03afc353afa326db6656ce16c8988cedcd00ba52c6e19ad00",
+        "phase-1-store-snapshot.json": "8296b3805ab324d83dab77eb1a218257fbec6a775b6ab41b8ed97cf3fb492db1",
+        "checkpoints.sqlite": "b8af99a54acb5ad745773b66331f4f47d3cc6afe8d81c25ce8c0c6759d3593bd",
+        "business-world.sqlite": "7913c704794c603765d51a30f2d3c9d27f5a4fd7097b3ef0ca461e227750ca37",
+        "business-journal.json": "e35a1b9ea26981d9b61a761e7dd911db7f4359c6e8aa5d32da44236324c496fa",
+        "phase-progress.json": "f9412c509c73258b78d1b66dc4ad5cf3e9c40c886582ad2015ac83030c4610a1"
+      }
+    }
+  ],
+  "costs": {
+    "start": {
+      "generation_calls": 2701,
+      "generation_tokens": 3332841,
+      "embedding_tokens": 18445
+    },
+    "delta": {
+      "generation_calls": 67,
+      "generation_tokens": 87492,
+      "embedding_tokens": 301
+    },
+    "end": {
+      "generation_calls": 2768,
+      "generation_tokens": 3420333,
+      "embedding_tokens": 18746
+    },
+    "ledger_sha256": "a9d4c681e2bee395c170a4672b4895a442522df47951c9a043e9f6b3a32e3580",
+    "history_preserved": true,
+    "root_observation_store_search_calls": 16,
+    "root_observation_embedding_calls": 0,
+    "offline_sqlite_reads": "Per-run public checkpoint list for raw-prefix matching; separate evaluator work, not method runtime I/O."
+  },
+  "limits": [
+    "One repeat on each of two exposed scripts, not a stable or unseen quality estimate.",
+    "Actual same-epoch mid-action process crash, capacity fault and close failure are not forced in these original scripts; cite necessary offline engineering checks separately if no natural live trigger.",
+    "The shared full-history/summary and independent A/U experiments remain future stages.",
+    "No physical deletion/archive, selector training or second model is implicitly authorized by this protocol."
+  ],
+  "pause": "Actual Goal paused after all four trajectories; no E1/D2-D5 started.",
+  "execution_freeze_sha256": "ba666fed79b512b9510196ab5246349d22d76eed5b1957f8febe2e0f95e05b4e",
+  "runtime_config_sha256": {
+    "config-turn_end.json": "45171a5a32f261dbe83f36f71188f013d05dcafcde5aa61fbde98ea0b897b2c9",
+    "config-pre_model.json": "21a3c4e700d3b09fdd7add33682bd5ab56cdd49300bb7faae2fac527590b562e"
+  },
+  "root_driver_sha256": "be33d322b40da104b77b11a41df1e729e03b251965a5e33cc0f91d5a6c51c5f6"
+}

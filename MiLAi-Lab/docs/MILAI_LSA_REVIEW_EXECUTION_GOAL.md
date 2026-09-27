@@ -1,11 +1,15 @@
 ---
-status: ACTIVE_CLOSEOUT_THEN_PAUSE
+status: PAUSED
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 reference_commit: a9290f3bc621ee7a00a61d4c9cf8c3a01d92bd46
 plan_sha256: c8e7dc82f8d70665f731e1b9ff331ab100eeeee429ba90a073a125574bea9e43
 ---
 
 # 16 轮复盘后的执行 Goal
+
+> 最新状态：当前E2在线切片已结束，实际thread Goal已按用户指令设为 **paused**。
+> 总研究目标未完成；以下ACTIVE及“下一步”均保留为过程记录，不授权继续执行。
+> 仅报告/GitHub发布收尾；详见[总体报告](MILAI_LSA_REVIEW_OVERALL_EXPERIMENT_REPORT_20260927.md)。
 
 用户已明确要求详细阅读并执行[新计划](MILAI_LSA_16_ROUND_REVIEW_AND_NEXT_PLAN_20260927.md)。
 已完整阅读587行并核对实际 Goal 为 active；原文的“待恢复/PAUSED”是写作时状态，
@@ -30,7 +34,7 @@ main=a9290f3；最后实际实验源码bc5a5c8。启动时只有新计划及旧v
 | 阶段 | 要求及证明方式 | 状态 |
 |---|---|---|
 | D0 / P0 | 三类真实首断点+四类对照；完整合法前缀、旧State、新事件、原输出、错误位置、离线哈希/故障矩阵；部分提交重试风险复现 | COMPLETE_OFFLINE |
-| D1 / P1 | 独立entry更新与回合snapshot原型；同事件重放、独立同文本、无关保持、部分成功；E1/E2分开冻结，少量重复，再测组合和真实动作 | E2_CONDITIONAL_DONE; PROTOTYPE_COMPLETE; SANDBOX_PENDING |
+| D1 / P1 | 独立entry更新与回合snapshot原型；同事件重放、独立同文本、无关保持、部分成功；E1/E2分开冻结，少量重复，再测组合和真实动作 | E2_CONDITIONAL_AND_SANDBOX_DONE; E1/COMBINATION_NOT_DONE |
 | D2 / P2 | 同bank全读/query检索或rerank/State A；swap/missing/oracle分列；固定前态all/U/U=A/oracle U且都可创建；约12–24对起步 | NOT_RUN |
 | D3 / P3 | 最新统一底座full/G/L/最小有效LSA；4–6独立开发情景、2–3完整重复起步；逐情景strict/整轨迹/事实/ID/动作/无依据断言/State/费用 | NOT_RUN |
 | D4 / P4 | N/d/a/r/H少数独立代表点；真实互动增长；full可容纳历史与超窗策略；query/summary；R与U=A必要消融及维护摊销边界 | NOT_RUN |
@@ -107,3 +111,19 @@ Root独立核对产物哈希。真实SQLite业务/checkpoint配合模拟HTTP验�
 仅epoch配置不同，但调用节奏、合批、State形成和后续轨迹随之改变，是整体recipe比较；
 不是纯时间标签或A/U消融。源码发布后Root prepare冻结实际身份，再串行运行。
 连续账本仍为2701/3332841/18445；当前尚未发生sandbox真实调用。
+
+## E2在线完成与实际暂停记录
+
+源码 `0c5f027750eac1a45245d5a9ac43e48eb5e202e9`，四条原冻结轨迹/22消息/8进程阶段完成。
+[本批结果](MILAI_LSA_REVIEW_E2_SANDBOX_R1_RESULTS_20260927.md)：pre_model和turn_end均7/11、完整0/2；
+distinct均3/5，partial均4/6。两组维护先正确到4，Host最终预约5或3，destination缩写；
+partial两owner初次key均单数化，但真实同ID恢复、owner隔离及access保持通过。
+turn_end生成tokens33039，pre_model54453，单次暴露脚本差异不能称稳定收益。
+
+实际37个HTTP Host prefix与checkpoint匹配；11快照回合18交付稳定，11close成功；无自然容量/close故障。
+67生成/87492tokens/301embedding全部续记，最终2768/3420333/18746。
+账本SHA256 `a9d4c681e2bee395c170a4672b4895a442522df47951c9a043e9f6b3a32e3580`；旧history与16轮结果未修改。
+实际Goal已调用update_goal(status=paused)确认；暂停不标complete。
+
+决策为保留实现、收缩时间边界已解决消费错误的主张；两种竞争解释、最小候选及混杂详见结果报告。
+E1草稿未实施，D2–D5未启动；再继续须用户明确恢复。当前只完成总体报告与Luna授权发布。

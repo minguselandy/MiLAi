@@ -1,0 +1,77 @@
+{
+  "kind": "MILAI_LSA_REVIEW_OVERALL_RESULTS",
+  "date": "2026-09-27",
+  "status": "PAUSED_BY_USER_AFTER_E2_SANDBOX",
+  "full_goal_completed": false,
+  "product": "NO-GO",
+  "last_executed_source_commit": "0c5f027750eac1a45245d5a9ac43e48eb5e202e9",
+  "scope": "Prior MiLAi evidence, historical16 LSA rounds, offline D0 and two new E2 real-call batches. No pooled accuracy across sources.",
+  "historical_16_round_manifest": "data/manifests/local-state-attention-overall-results-20260927.json",
+  "historical_16_round_manifest_sha256": "d8c63a49836bd33605e2f18e29923c7a6fbafe40a7723a487a972207c8a8824c",
+  "review_plan_sha256": "c8e7dc82f8d70665f731e1b9ff331ab100eeeee429ba90a073a125574bea9e43",
+  "new_evidence": [
+    {
+      "stage": "D0",
+      "source_commit": "a471932695dc077dd88077b5aa24949beab978dd",
+      "document": "docs/MILAI_LSA_REVIEW_D0_FAILURE_MATRIX_20260927.md",
+      "kind": "offline defect repair",
+      "generation_calls": 0,
+      "generation_tokens": 0,
+      "embedding_tokens": 0
+    },
+    {
+      "stage": "E2 conditional",
+      "result_manifest": "data/manifests/local-state-attention-review-e2-r1-results.json",
+      "result_manifest_sha256": "5d0d19b114d2b1679dc96724693408a5c78db960fa6276c02233ca31aa44d91f",
+      "generation_calls": 24,
+      "generation_tokens": 36050,
+      "embedding_tokens": 0
+    },
+    {
+      "stage": "E2 online sandbox",
+      "result_manifest": "data/manifests/local-state-attention-review-e2-sandbox-r1-results.json",
+      "result_manifest_sha256": "a1931f8f8c86958085fe8941e6ac03d0ab8f2c141fb8bcb16c264892ec68283d",
+      "generation_calls": 67,
+      "generation_tokens": 87492,
+      "embedding_tokens": 301
+    }
+  ],
+  "costs": {
+    "historical_16_round_delta": {
+      "generation_calls": 1814,
+      "generation_tokens": 2254062,
+      "embedding_tokens": 8828
+    },
+    "review_delta": {
+      "generation_calls": 91,
+      "generation_tokens": 123542,
+      "embedding_tokens": 301
+    },
+    "all_lsa_delta": {
+      "generation_calls": 1905,
+      "generation_tokens": 2377604,
+      "embedding_tokens": 9129
+    },
+    "continuous_ledger_end": {
+      "generation_calls": 2768,
+      "generation_tokens": 3420333,
+      "embedding_tokens": 18746
+    },
+    "ledger_path": "artifacts/ser-v20/budget.json",
+    "ledger_sha256": "a9d4c681e2bee395c170a4672b4895a442522df47951c9a043e9f6b3a32e3580",
+    "sealed_history_preserved": true,
+    "unknown_usage": 0,
+    "development_agent_tokens_included": false
+  },
+  "remaining": [
+    "D1 E1 entry editing and independent/combined comparison",
+    "D2 fixed-bank A, query retrieval and fixed-prestate all/U/U=A/oracle",
+    "D3 common latest-source full/G/L/minimal-LSA repeated online comparison",
+    "D4 representative N/d/a/r/H and rebuild/maintenance amortization",
+    "D5 template-held-out/native MERIT selection, MemoryArena adapter/native scorer and second independent model family",
+    "D6 only conditionally triggered training",
+    "Archive/reactivation, shared atomic groups, physical deletion and real unknown-side-effect recovery",
+    "Minimum paper evidence package and stable unseen benefit"
+  ],
+  "pause_policy": "No development, experiments, downloads or deployment without a new explicit user resume instruction. Reporting and GitHub publication authorized."
+}
