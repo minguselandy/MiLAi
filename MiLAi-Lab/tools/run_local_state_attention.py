@@ -19,6 +19,7 @@ from milai_lab.methods.local_state_attention.controller import (
     CONTROL_STAGE,
     LocalStateController,
 )
+from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.langmem_application import run_phase
 from milai_lab.runners.langmem_application_runtime import open_application_runtime
@@ -30,8 +31,9 @@ READ_POLICIES = {"local_state": "focus", "local_all": "all",
                  "local_lr_sources": "focus_sources",
                  "local_lr_history": "focus_sources",
                  "local_lru_sources": "focus_sources"}
-HISTORY_ARMS = {"full_history": "full", "local_lr_history": "tool"}
-ARMS = ("b1_control", *READ_POLICIES, "full_history")
+HISTORY_ARMS = {"full_history": "full", "local_lr_history": "tool",
+                "window_summary": "window"}
+ARMS = ("b1_control", *READ_POLICIES, "full_history", "window_summary")
 SHARED_CONTENT_LIMIT_ARMS = {"local_all_sources", "global_note_sources",
                              "local_lr_sources", "local_lr_history", "local_lru_sources"}
 SOURCE_POLICIES = {"all_sources", "focus_sources"}
@@ -129,7 +131,7 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "arm_id": args.arm, "repeat": args.repeat,
         "read_policy": READ_POLICIES.get(args.arm),
         "update_policy": (_update_policy(args.arm)
-                          if args.arm != "full_history" else None),
+                          if args.arm not in {"full_history", "window_summary"} else None),
         "update_candidate_policy": ("all_existing_without_selector"
                                     if args.arm in {"local_lr_sources",
                                                     "local_lr_history"} else
@@ -138,11 +140,12 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "read_selection_policy": ("independent_after_maintenance"
                                   if args.arm in {"local_lr_sources", "local_lr_history",
                                                   "local_lru_sources"} else None),
-        "maintenance_input_policy": (None if args.arm == "full_history" else
+        "maintenance_input_policy": (None if args.arm in {"full_history", "window_summary"} else
                                      "pending_events_candidates_source_ids"
                                      if args.arm in EVENTS_ONLY_ARMS else
                                      "current_task_pending_events_states_source_ids"),
-        "maintenance_response_contract": (None if args.arm == "full_history" else
+        "maintenance_response_contract": (None if args.arm in {
+            "full_history", "window_summary"} else
                                           "edits_only" if args.arm in EVENTS_ONLY_ARMS
                                           else "edits_and_focus"),
         "creation_policy": ("shared_maintenance_each_pending_batch"
@@ -152,10 +155,17 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "history_policy": (config.get("history") if args.arm in HISTORY_ARMS else None),
         "read_history_tool": args.arm in HISTORY_ARMS,
         "history_auto_projection": args.arm == "full_history",
+        "history_window_summary": args.arm == "window_summary",
+        "summary_control_policy": ({"role": "state_control",
+                                    "control_stage": "history_summary",
+                                    "max_tokens": config["control"]["max_tokens"],
+                                    "max_calls_per_message": 1}
+                                   if args.arm == "window_summary" else None),
         "local_granularity": (_local_granularity(args.arm, config)
                               if args.arm in READ_POLICIES else False),
         "representation": ("global_note" if args.arm == "global_note_sources" else
-                           "local" if args.arm in READ_POLICIES else None),
+                           "local" if args.arm in READ_POLICIES else args.arm
+                           if args.arm in {"full_history", "window_summary"} else None),
         "effective_content_limits": (_content_limits(args.arm, config)
                                      if args.arm in READ_POLICIES else None),
         "source_view_max_bytes": (config["source_view_max_bytes"]
@@ -187,6 +197,7 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
     store_stats: dict[str, dict[str, int]] = {}
     history_checkpoint = {"calls": 0, "logical_bytes": 0, "cpu_ns": 0, "wall_ns": 0}
     history_views: list[dict[str, Any]] = []
+    summary_events: list[dict[str, Any]] = []
     trace_path = root / "trace.jsonl"
     if trace_path.exists():
         for line in trace_path.read_text().splitlines():
@@ -195,6 +206,9 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
                 views.append(event)
             if event.get("event") == "lsa_history_view":
                 history_views.append(event)
+            if event.get("event") in {"lsa_history_summary_call",
+                                       "lsa_history_summary_result"}:
+                summary_events.append(event)
             if event.get("event") == "lsa_history_checkpoint_read":
                 for key in history_checkpoint:
                     history_checkpoint[key] += event.get(key, 0)
@@ -249,6 +263,7 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
     return {"by_role": groups, "by_control_stage": control_stages,
             "state_views": views,
             "history_views": history_views,
+            "history_summary_events": summary_events,
             "history_checkpoint_reads": history_checkpoint,
             "local_state_store_stats": store_stats,
             "trace_path": str(trace_path.resolve()),
@@ -266,6 +281,13 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     if args.arm in HISTORY_ARMS and (type(history.get("page_max_bytes")) is not int
                                      or history["page_max_bytes"] <= 0):
         raise ValueError("LSA_HISTORY_PAGE_BUDGET_INVALID")
+    if args.arm == "window_summary" and (
+        type(history.get("window_completed_turns")) is not int
+        or history["window_completed_turns"] < 0
+        or type(history.get("summary_content_max_chars")) is not int
+        or history["summary_content_max_chars"] <= 0
+    ):
+        raise ValueError("LSA_HISTORY_SUMMARY_CONFIG_INVALID")
     if READ_POLICIES.get(args.arm) in SOURCE_POLICIES and (
         type(config.get("source_view_max_bytes")) is not int
         or config["source_view_max_bytes"] <= 0
@@ -365,6 +387,38 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     finally:
                         control_emit({"event": "lsa_store_stats", "phase": args.phase,
                                       "operations": bank.store_stats()})
+            elif args.arm == "window_summary":
+                host = runtime.model.client
+                original_emit = host.emit
+
+                def host_emit(event: dict[str, Any]) -> None:
+                    if original_emit is not None:
+                        original_emit({**event, "role": "task_host"})
+
+                def control_emit(event: dict[str, Any]) -> None:
+                    if original_emit is not None:
+                        original_emit({**event, "role": "state_control",
+                                       "control_stage": CONTROL_STAGE.get()})
+
+                host.emit = host_emit
+                settings = config["control"]
+                control_config = replace(VLLMConfig(**config["host"]),
+                                         max_tokens=settings["max_tokens"])
+                with VLLMClient(control_config, emit=control_emit, budget=host.budget,
+                                capacity=host.capacity) as control_client:
+                    summary_controller = HistorySummaryController(
+                        control_client,
+                        window_completed_turns=config["history"]["window_completed_turns"],
+                        summary_content_max_chars=(
+                            config["history"]["summary_content_max_chars"]),
+                        capacity_path=args.runtime_root / "control-capacity.json",
+                        max_calls_per_message=settings["max_calls_per_message"],
+                        emit=control_emit)
+                    result = run_phase(
+                        script, args.runtime_root, args.run, args.arm,
+                        args.phase, runtime, history_mode="window",
+                        history_page_max_bytes=config["history"]["page_max_bytes"],
+                        history_summary_controller=summary_controller)
             else:
                 result = run_phase(script, args.runtime_root, args.run, args.arm,
                                    args.phase, runtime,

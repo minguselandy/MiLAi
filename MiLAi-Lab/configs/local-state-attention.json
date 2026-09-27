@@ -1,8 +1,10 @@
 {
-  "recipe_id": "local-state-attention-v27-p4-shared-history",
+  "recipe_id": "local-state-attention-v27-p4-window-summary",
   "history": {
     "enabled": false,
-    "page_max_bytes": 16384
+    "page_max_bytes": 16384,
+    "window_completed_turns": 2,
+    "summary_content_max_chars": 16000
   },
   "host": {
     "base_url": "http://127.0.0.1:7860/v1/",

@@ -36,6 +36,21 @@ canonical memory state.
 
 ## Required checks
 
+Latest user instruction: finish only the current window_summary slice and its four
+pre-registered trajectories, then PAUSE the active Goal, write an overall experiment report,
+and publish it to GitHub through Luna. Do not start R/U=A, new public tasks, model assets or
+other subsequent development. Historical ACTIVE/next-step paragraphs below do not override
+this stop-after-current-task instruction.
+
+The [window-summary protocol](data/manifests/local-state-attention-window-summary-wiring-r1-protocol.json)
+compares window_summary/full_history on the original two scripts,4 trajectories/24 messages.
+The new arm keeps2 complete turns plus current prefix and summarizes only newly evicted
+completed turns, with one accounted2048-token attempt per public message, existing13-call
+control limit and16000-character summary limit. Same read_history, owner scope and tombstones;
+only committed summary/cursor enters Host. Known optional summary errors fall back to raw
+history; real Store errors propagate.80 affected checks, target static,4 zero-model prepares
+and one offline build passed. Freeze after publication; no source changes during4 runs.
+
 The user explicitly authorized full execution of the
 [Local State–Attention plan](docs/MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md),
 tracked by [its execution Goal](docs/MILAI_LOCAL_STATE_ATTENTION_EXECUTION_GOAL.md).

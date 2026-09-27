@@ -169,6 +169,15 @@ class LocalStateBank:
     def clear_focus(self, scope: StateScope) -> None:
         self._delete(scope, "meta", "focus")
 
+    def history_summary(self, scope: StateScope) -> dict[str, Any] | None:
+        row = self._get(scope, "meta", "history_summary")
+        return dict(row.value) if row is not None else None
+
+    def put_history_summary(self, scope: StateScope, summary: str,
+                            covered_ordinal: int) -> None:
+        self._put(scope, "meta", "history_summary",
+                  {"summary": summary, "covered_ordinal": covered_ordinal})
+
     def apply(self, scope: StateScope, edits: list[dict[str, Any]],
               event_ids: set[str], query_source_id: str | None = None,
               allowed_existing_ids: set[str] | None = None,

@@ -19,6 +19,8 @@ from langgraph.store.memory import InMemoryStore
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
 from milai_lab.methods.freshness_projection.identity import LAB
+from milai_lab.methods.local_state_attention.controller import CONTROL_STAGE
+from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import langmem_application as app
@@ -248,6 +250,100 @@ def test_full_history_replays_interleaved_turns_after_process_reopen(
     assert all("read_history" in wire["messages"][0]["content"] for wire in wires)
     progress = json.loads((tmp_path / "phase-progress.json").read_text())
     assert [row["visited_ordinal"] for row in progress["messages"].values()] == [0, 1, 2]
+
+
+def test_window_summary_uses_one_accounted_control_call_and_same_history_tool(
+    tmp_path: Path,
+) -> None:
+    from milai_lab.harness.contextual_artifacts import write_json
+
+    write_json(tmp_path / "run_manifest.json", {"identity": {
+        "run_id": "run", "arm_id": "window_summary"}})
+    script = {"initial_label_available": False, "phases": [
+        {"id": index, "operator_memory": [], "world_events": [], "messages": [{
+            "message_id": f"m{index}", "user_id": "alice",
+            "session_id": "a" if index % 2 == 0 else "b",
+            "public_index": index // 2,
+            "text": f"message {index}"}]}
+        for index in range(4)]}
+    host_wires: list[dict[str, Any]] = []
+    control_wires: list[dict[str, Any]] = []
+    control_events: list[dict[str, Any]] = []
+
+    def host_response(request: httpx.Request) -> httpx.Response:
+        host_wires.append(json.loads(request.read()))
+        return httpx.Response(200, json={
+            "id": f"host-{len(host_wires)}", "model": "mock",
+            "choices": [{"finish_reason": "stop", "message": {
+                "role": "assistant", "content": json.dumps({"answer": "done"})}}],
+            "usage": {"prompt_tokens": 5, "completion_tokens": 3}})
+
+    def control_response(request: httpx.Request) -> httpx.Response:
+        control_wires.append(json.loads(request.read()))
+        return httpx.Response(200, json={
+            "id": "control-1", "model": "mock",
+            "choices": [{"finish_reason": "stop", "message": {
+                "role": "assistant", "content": json.dumps({"summary": "Message 0."})}}],
+            "usage": {"prompt_tokens": 7, "completion_tokens": 3}})
+
+    store = InMemoryStore()
+    for phase_id in range(4):
+        with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                                   tool_mode="json_action"),
+                        transport=httpx.MockTransport(host_response)) as host:
+            with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                                       max_tokens=2048),
+                            emit=lambda event: control_events.append({
+                                **event, "role": "state_control",
+                                "control_stage": CONTROL_STAGE.get()}),
+                            transport=httpx.MockTransport(control_response)) as control:
+                with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+                    runtime = SimpleNamespace(
+                        model=VLLMChatModel(client=host), store=store, checkpointer=saver,
+                        observer=SimpleNamespace(
+                            assert_healthy=lambda: None,
+                            run_tool=lambda request, execute, _wrapper: execute(request)))
+                    summary = HistorySummaryController(
+                        control, window_completed_turns=2,
+                        summary_content_max_chars=16000,
+                        capacity_path=tmp_path / "control-capacity.json",
+                        max_calls_per_message=13)
+                    app.run_phase(script, tmp_path, "run", "window_summary", phase_id,
+                                  runtime, history_mode="window",
+                                  history_page_max_bytes=16384,
+                                  history_summary_controller=summary)
+    assert len(host_wires) == 4 and len(control_wires) == 1
+    assert [item["content"] for item in host_wires[-1]["messages"]
+            if item["role"] == "user"] == ["message 1", "message 2", "message 3"]
+    assert "Message 0." in host_wires[-1]["messages"][0]["content"]
+    assert "message 3" not in json.dumps(control_wires[0], ensure_ascii=False)
+    assert control_wires[0]["max_tokens"] == 2048
+    assert any(item["event"] == "vllm_response" and item["role"] == "state_control"
+               and item["control_stage"] == "history_summary"
+               for item in control_events)
+    counts = json.loads((tmp_path / "control-capacity.json").read_text())
+    assert sum(value for key, value in counts.items()
+               if key.startswith("history_summary:")) == 1
+    schemas = [wire["response_format"] for wire in host_wires]
+    assert all(item == schemas[0] for item in schemas)
+    assert "read_history" in json.dumps(schemas[0])
+    full_root = tmp_path / "full"
+    full_root.mkdir()
+    write_json(full_root / "run_manifest.json", {"identity": {
+        "run_id": "run", "arm_id": "full_history"}})
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(host_response)) as host:
+        with SqliteSaver.from_conn_string(str(full_root / "checkpoint.sqlite")) as saver:
+            runtime = SimpleNamespace(
+                model=VLLMChatModel(client=host), store=store, checkpointer=saver,
+                observer=SimpleNamespace(
+                    assert_healthy=lambda: None,
+                    run_tool=lambda request, execute, _wrapper: execute(request)))
+            app.run_phase({**script, "phases": script["phases"][:1]}, full_root,
+                          "run", "full_history", 0, runtime,
+                          history_mode="full", history_page_max_bytes=16384)
+    assert host_wires[-1]["response_format"] == schemas[0]
 
 
 def test_mock_provider_business_call_commits_real_partial_result(tmp_path: Path) -> None:

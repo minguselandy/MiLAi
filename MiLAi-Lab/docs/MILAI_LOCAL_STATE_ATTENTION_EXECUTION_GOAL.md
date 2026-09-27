@@ -7,6 +7,13 @@ plan_sha256: 079f8bfb6cdefbe4da11696d29b6f6cc74755f81337bdbfe3996add000cf18dd
 
 # Local State–Attention 执行 Goal
 
+## 用户最新收束指令
+
+用户要求当前任务结束后暂停Goal，生成总体实验报告并上传GitHub。当前任务限定为正在
+进行的window_summary切片：完成实现、必要窄测/构建和已预注册4轨迹验证后暂停。
+不再启动R、U=A、新公开任务、模型下载/部署或其他后续开发。下面仍写ACTIVE或下一步的
+历史段落不覆盖这条指令。总体报告须保留完整失败、连续成本、局限和未完成项。
+
 用户已明确要求详细阅读并完整执行
 [736 行原规划](MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md)。
 本 Goal 保留 P0–P7、WP1–WP5 全部范围，不把完成定义收缩为 P1 原型或局部测试。
@@ -38,7 +45,7 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 | P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R4两臂原各7/12；R5 partial来源on4/6、off3/6，原完整均失败；精确恢复出现局部正例 |
 | P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | R1四断点12方法+3诊断完成；State值影响输出，来源直送有用，维护/独立Host错误未闭合 |
 | P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | 六模板×三臂×两重复已闭合：35完整+1中断；G60/78、L60/78、LRU59/78；未证明稳定收益，维护输入修复原高耦合三臂各6/6，新反例3/5，首断点在Host |
-| P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | LR小接线完成L9/12、LR10/12、LRU8/12；尚未隔离语义收益，U=A/R/强历史与其余消融未完 |
+| P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | LR接线与共同完整历史接线已完成；完整历史/LR历史各10/12且成本不同；U=A/R/滑窗摘要与其余消融未完 |
 | P5 / WP5 | 新 frozen 原生 selection、第二任务族、交错顺序及完整重复；原 scorer 和失败分母 | 未运行；不消费旧暴露任务作 unseen |
 | P6 / WP4–5 | N/d/a/r/H 代表点、质量—成本边界、第二模型族；有瓶颈证据才训练 selector | 未运行；第二模型仍缺独立端点 |
 | P7 / WP5 | 无模板提示的模拟协作应用、复现命令、失败分类、强对照与论文证据包、发布及远端核对 | 未完成；Product 仍 NO-GO |
@@ -60,7 +67,7 @@ B1/Mem0 系统对照与表示/注意力消融分开，不用被动 B1 代表全�
 | 6 新建/归档/重新打开 | P3 reopen-history | 已测语义关闭/重开，未实现真正archived生命周期 |
 | 7 部分失败/未知/维护滞后 | P1/R5/P3/LR真实部分预约与同ID恢复 | 未知结果仍需独立实际边界验证 |
 | 8 跨会话和独立进程 | 两phase原脚本及P3批次 | 只证明相应小轨迹，不是长期规模可靠性 |
-| 9 历史查询和当前执行 | P3 conflict/reopen-history | 强完整历史/滑窗/重建接口尚待交付 |
+| 9 历史查询和当前执行 | P3 conflict/reopen-history | 完整历史公共接口已交付；滑窗摘要/重建待验收 |
 | 10 错误/缺项State遇新证据 | P2交换诊断、Host snapshot R2 | 后者只读且失败；在线状态纠正及A6未完成 |
 | 11 当前来源冲突与权威 | P3 conflicting-sources | 保留混合结果，不能用时间/rank作权威 |
 | 12 高耦合反例 | P3 high-coupling与events-only修复三臂6/6 | 新distinct-event反例仍失败；非密度曲线 |
@@ -387,6 +394,24 @@ found并同ID补标签，无重复预约；原始单数/下划线item_key失败�
 attempted与部分提交称failed的语义问题。新增67/74706/108，累计2641/3258587/18445。
 没有模型/容量/末pending异常。下一最小切片为相同合法历史权限的滑动窗口+摘要强对照，
 先完成接口及少量接线；不等待旧Host命名错误都消失，不重跑本批或恢复旧v27部署。
+
+[滑动窗口+摘要接线协议](../data/manifests/local-state-attention-window-summary-wiring-r1-protocol.json)
+预注册原两脚本×window_summary/full_history，共4轨迹24消息。窗口固定最近2个完整完成
+回合，当前ReAct前缀另保留；更早新驱逐回合与旧摘要最多每公开消息一次短摘要，正文上限
+16000 chars，control2048/13与Host4096/12沿用。只在成功时同键提交摘要/游标；原checkpoint
+不变。已知可选模型失败回退完整原历史，真实Store故障显式抛出。共享read_history及owner
+tombstone屏蔽；不完整旧回合不吞掉。源码已完成：80项受影响窄测、目标静态、四个零模型prepare与一次离线build通过，哈希见
+协议。尚未调用本批模型、未生成新题；四轨迹完成后按用户最新要求暂停并做总体报告。
+
+R的局部设计冲突已由Astra只读处理，尚未实现或运行。竞争方案是借用LR已维护目录（含
+needs/revision等动态信息，不能免费且不算独立不维护系统）与R自行维护薄目录。Root选择
+后者作为后续系统对照：既有Store中只持久事项ID/短title/合法来源指针/机械版本，在线目录
+更新、选择、公共历史读取和临时重建全计费；不存重建content/needs，无LR影子维护。title
+仍是语义信息，不宣称目录免费。原始历史可在同预算继续分页，引用不是完整证据边界；不读
+observer/gold/未来，Host共享原history/memory/business权限。分组分叉如实报告，不造同步器。
+另以真实前缀冻结其实际目录/A集合，比较原持久正文与同历史临时重建；共同前缀目录生成
+成本公开计入，边际成本另列。这只能隔离给定目录/集合下的正文来源，不能称完整A5或独立R
+总成本胜利。当前Sol仍只实现window_summary，R留待其后，不因设计建议扩展本批执行范围。
 
 已核对 [LangMem 官方 API](https://langchain-ai.github.io/langmem/reference/) 确实区分
 memory manager、store manager 与普通 tools；强基线不能只代表后者。

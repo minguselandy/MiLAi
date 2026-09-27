@@ -12,6 +12,7 @@ from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateSc
 from milai_lab.methods.local_state_attention.controller import LocalStateController
 from milai_lab.methods.local_state_attention.history import HistoryAccess
 from milai_lab.methods.local_state_attention.history import source_id as _source_id
+from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 
 SOURCE_VIEW_HEADER = "Referenced source events from delivered States:"
 
@@ -107,11 +108,7 @@ def make_full_history_hook(history: HistoryAccess, system_prompt: str) -> Any:
             raise ValueError("HISTORY_OWNER_SCOPE_MISMATCH")
         messages, incomplete, suppressed = history.project(
             cfg["thread_id"], state["messages"])
-        appendix = ("\n[Incomplete previously visited turns; factual checkpoint and "
-                    "business-journal data, not completed tool conversations. "
-                    "completed_before places each among the completed turns below.]\n" +
-                    json.dumps(incomplete, ensure_ascii=False, default=str)
-                    if incomplete else "")
+        appendix = _incomplete_appendix(incomplete)
         if history.emit is not None:
             history.emit({"event": "lsa_history_view", "suppressed": suppressed,
                           "native_messages": len(messages),
@@ -119,6 +116,50 @@ def make_full_history_hook(history: HistoryAccess, system_prompt: str) -> Any:
         return {"llm_input_messages": [SystemMessage(content=system_prompt + appendix),
                                         *messages]}
     return hook
+
+
+def make_window_summary_hook(history: HistoryAccess,
+                             controller: HistorySummaryController,
+                             system_prompt: str) -> Any:
+    """Show a committed summary, recent complete turns, and the live graph prefix."""
+    def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
+        cfg = config["configurable"]
+        if (cfg["foundation_run_id"], cfg["arm_id"], cfg["user_id"]) != (
+                history.scope.run_id, history.scope.arm_id, history.scope.user_id):
+            raise ValueError("HISTORY_OWNER_SCOPE_MISMATCH")
+        messages: list[BaseMessage] = state["messages"]
+        public_index = sum(isinstance(message, HumanMessage) for message in messages) - 1
+        view = controller.prepare(history, cfg["thread_id"], messages,
+                                  f"{cfg['thread_id']}:{public_index}")
+        appendix = _incomplete_appendix(view.incomplete, full_owner_history=True)
+        if view.summary:
+            appendix += ("\n[Model-generated summary of earlier completed turns "
+                         f"through owner ordinal {view.covered_ordinal}. "
+                         "Original records remain available through read_history.]\n" +
+                         view.summary)
+        if history.emit is not None:
+            history.emit({"event": "lsa_history_view", "suppressed": view.suppressed,
+                          "native_messages": len(view.messages),
+                          "incomplete_turns": len(view.incomplete),
+                          "summary_covered_ordinal": view.covered_ordinal,
+                          "summary_chars": len(view.summary),
+                          "summary_degraded": view.degraded,
+                          "history_policy": "window_summary"})
+        return {"llm_input_messages": [SystemMessage(content=system_prompt + appendix),
+                                        *view.messages]}
+    return hook
+
+
+def _incomplete_appendix(incomplete: list[dict[str, Any]],
+                         *, full_owner_history: bool = False) -> str:
+    return ("\n[Incomplete previously visited turns; factual checkpoint and "
+            "business-journal data, not completed tool conversations. "
+            + ("completed_before counts completed turns in the full owner history, "
+               "including turns covered by the summary; it is not a window index.]\n"
+               if full_owner_history else
+               "completed_before places each among the completed turns below.]\n") +
+            json.dumps(incomplete, ensure_ascii=False, default=str)
+            if incomplete else "")
 
 
 def _source_view(bank: LocalStateBank, scope: StateScope,

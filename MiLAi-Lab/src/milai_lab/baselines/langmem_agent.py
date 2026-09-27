@@ -35,7 +35,9 @@ from milai_lab.methods.local_state_attention.history import (
 from milai_lab.methods.local_state_attention.integration import (
     make_full_history_hook,
     make_pre_model_hook,
+    make_window_summary_hook,
 )
+from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel
 
@@ -119,6 +121,7 @@ def build_agent(
     source_view_max_bytes: int | None = None,
     history_access: HistoryAccess | None = None,
     full_history: bool = False,
+    history_summary_controller: HistorySummaryController | None = None,
 ) -> Any:
     """Use upstream tool schema and instructions without a local memory policy."""
     selected_memory_tools: Sequence[BaseTool]
@@ -144,6 +147,8 @@ def build_agent(
 
         history_tools.append(read_history)
     if full_history and history_access is None:
+        raise ValueError("HISTORY_ACCESS_MISSING")
+    if history_summary_controller is not None and history_access is None:
         raise ValueError("HISTORY_ACCESS_MISSING")
     tools = [*selected_memory_tools, *history_tools, *business_tools]
     parameter_schemas = {
@@ -187,13 +192,18 @@ def build_agent(
     return create_react_agent(
         model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
-        prompt=prompt if local_state_controller is None and not full_history else None,
+        prompt=(prompt if local_state_controller is None and not full_history
+                and history_summary_controller is None else None),
         pre_model_hook=(make_pre_model_hook(local_state_controller, prompt,
                                             read_policy=local_state_read_policy,
                                             source_view_max_bytes=source_view_max_bytes)
                         if local_state_controller is not None else
                         make_full_history_hook(history_access, prompt)
-                        if full_history and history_access is not None else None),
+                        if full_history and history_access is not None else
+                        make_window_summary_hook(history_access,
+                                                 history_summary_controller, prompt)
+                        if history_access is not None
+                        and history_summary_controller is not None else None),
         store=store,
         checkpointer=checkpointer,
         version="v1",

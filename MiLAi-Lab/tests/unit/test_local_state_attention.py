@@ -34,7 +34,9 @@ from milai_lab.methods.local_state_attention.integration import (
     _source_view,
     make_full_history_hook,
     make_pre_model_hook,
+    make_window_summary_hook,
 )
+from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
@@ -188,6 +190,240 @@ def test_history_interleaves_completed_turns_and_labels_incomplete_prefix(
     assert [row["message_id"] for row in all_rows] == ["a1", "b1", "a2", "b2"]
     assert all_rows[-1]["business_journal_delta"] == [journal]
     assert all_rows[-1]["messages"][-1]["tool_calls"][0]["id"] == "call-b"
+
+
+class SummaryReplies:
+    def __init__(self, *answers: Any) -> None:
+        self.answers = list(answers)
+        self.calls: list[dict[str, Any]] = []
+
+    def chat(self, messages: Any, **kwargs: Any) -> dict[str, Any]:
+        self.calls.append({"messages": messages, "schema": kwargs["response_format"],
+                           "role": CONTROL_STAGE.get()})
+        answer = self.answers.pop(0)
+        if isinstance(answer, Exception):
+            raise answer
+        return {"choices": [{"finish_reason": answer.get("finish_reason", "stop"),
+                              "message": {"content": json.dumps(answer["content"])}}]}
+
+
+def _summary_history(tmp_path: Path, store: InMemoryStore,
+                     *, progress_count: int = 3,
+                     arm: str = "window_summary") -> tuple[HistoryAccess, list[Any]]:
+    root = tmp_path / "run"
+    root.mkdir(exist_ok=True)
+    write_json(root / "run_manifest.json", {"identity": {
+        "run_id": "run", "arm_id": arm}})
+    rows = {}
+    sessions = ["a", "b", "a", "b", "a"]
+    indices = [0, 0, 1, 1, 2]
+    for number in range(progress_count):
+        rows[f"m{number}"] = {"message_id": f"m{number}", "user_id": "alice",
+                              "session_id": sessions[number],
+                              "public_index": indices[number], "status": "COMPLETED",
+                              "visited_ordinal": number}
+    write_json(root / "phase-progress.json", {"messages": rows})
+    a_messages: list[Any] = [HumanMessage(id="h0", content="first"),
+                             AIMessage(id="a0", content="first final"),
+                             HumanMessage(id="h2", content="third"),
+                             AIMessage(id="a2", content="third final"),
+                             HumanMessage(id="h4", content="current")]
+    b_messages: list[Any] = [HumanMessage(id="h1", content="second"),
+                             AIMessage(id="a1-call", content="", tool_calls=[{
+                                 "name": "get_reservation", "args": {"item_key": "exact"},
+                                 "id": "prior-call"}]),
+                             ToolMessage(id="a1-tool", tool_call_id="prior-call",
+                                         content='{"ok":false,"partial":true}'),
+                             AIMessage(id="a1", content="second final"),
+                             HumanMessage(id="h3", content="fourth"),
+                             AIMessage(id="a3", content="fourth final")]
+    history = HistoryAccess(root, StateScope("run", arm, "alice"),
+                            LocalStateBank(store),
+                            lambda session: SimpleNamespace(values={"messages":
+                                                                     {"a": a_messages,
+                                                                      "b": b_messages}[session]}),
+                            lambda session: "thread-" + session,
+                            page_max_bytes=16384)
+    return history, a_messages
+
+
+def _summary_controller(tmp_path: Path, replies: SummaryReplies) -> HistorySummaryController:
+    return HistorySummaryController(replies, window_completed_turns=2,
+                                    summary_content_max_chars=16000,
+                                    capacity_path=tmp_path / "control-capacity.json",
+                                    max_calls_per_message=13)
+
+
+def test_window_summary_matches_full_history_before_eviction(tmp_path: Path) -> None:
+    store = InMemoryStore()
+    history, messages = _summary_history(tmp_path, store, progress_count=2)
+    current = messages[:3]
+    cfg = {"configurable": {"foundation_run_id": "run", "arm_id": "window_summary",
+                            "user_id": "alice", "thread_id": "thread-a"}}
+    summary_replies = SummaryReplies()
+    window = make_window_summary_hook(history, _summary_controller(tmp_path, summary_replies),
+                                      "Original system")({"messages": current}, cfg)
+    full = make_full_history_hook(history, "Original system")({"messages": current}, cfg)
+    assert window["llm_input_messages"] == full["llm_input_messages"]
+    assert summary_replies.calls == []
+
+
+def test_window_summary_commits_only_evicted_complete_turns_and_reuses_on_reopen(
+    tmp_path: Path,
+) -> None:
+    store = InMemoryStore()
+    history, current = _summary_history(tmp_path, store)
+    call = {"name": "get_reservation", "args": {"item_key": "exact"}, "id": "live"}
+    current.extend([AIMessage(id="live-call", content="", tool_calls=[call]),
+                    ToolMessage(id="live-tool", tool_call_id="live",
+                                content='{"ok":true}')])
+    replies = SummaryReplies({"content": {"summary": "First final, exact name retained."}},
+                             {"content": {"summary": "First and second final."}})
+    controller = _summary_controller(tmp_path, replies)
+    cfg = {"configurable": {"foundation_run_id": "run", "arm_id": "window_summary",
+                            "user_id": "alice", "thread_id": "thread-a"}}
+    hook = make_window_summary_hook(history, controller, "Original system")
+    first = hook({"messages": current}, cfg)["llm_input_messages"]
+    assert [item.id for item in first[1:]] == [
+        "h1", "a1-call", "a1-tool", "a1", "h2", "a2", "h4", "live-call",
+        "live-tool"]
+    assert "First final" in first[0].content
+    assert history.bank.history_summary(history.scope) == {
+        "summary": "First final, exact name retained.", "covered_ordinal": 0}
+    assert len(replies.calls) == 1
+    assert replies.calls[0]["role"] == "history_summary"
+    assert [row["message_id"] for row in json.loads(
+        replies.calls[0]["messages"][1]["content"])["new_completed_turns"]] == ["m0"]
+    # A second ReAct request keeps its exact live tool prefix and makes no control call.
+    resumed = make_window_summary_hook(
+        history, _summary_controller(tmp_path, SummaryReplies()), "Original system")
+    assert resumed({"messages": current}, cfg)["llm_input_messages"] == first
+    assert len(replies.calls) == 1
+    # A reopened process sees the committed cursor; the next old completed turn
+    # is summarized exactly once when the fourth public turn is visited.
+    reopened, current_again = _summary_history(tmp_path, store, progress_count=4)
+    progress_path = tmp_path / "run" / "phase-progress.json"
+    progress = json.loads(progress_path.read_text())
+    progress["messages"]["m3"].update({"session_id": "a", "public_index": 2})
+    write_json(progress_path, progress)
+    current_again.extend([AIMessage(id="a4", content="fourth final"),
+                          HumanMessage(id="h5", content="next current")])
+    resumed = make_window_summary_hook(reopened, controller, "Original system")
+    second = resumed({"messages": current_again}, cfg)["llm_input_messages"]
+    assert len(replies.calls) == 2
+    assert [row["message_id"] for row in json.loads(
+        replies.calls[1]["messages"][1]["content"])["new_completed_turns"]] == ["m1"]
+    assert json.loads(replies.calls[1]["messages"][1]["content"])[
+        "new_completed_turns"][0]["messages"][2]["tool_call_id"] == "prior-call"
+    assert [item.id for item in second[1:]] == ["h2", "a2", "h4", "a4", "h5"]
+    assert reopened.bank.history_summary(reopened.scope)["covered_ordinal"] == 1
+
+
+@pytest.mark.parametrize("answer", [
+    {"finish_reason": "length", "content": {"summary": "bad"}},
+    httpx.TimeoutException("control timed out"),
+])
+def test_window_summary_fallback_keeps_raw_history_and_does_not_retry(
+    tmp_path: Path,
+    answer: Any,
+) -> None:
+    history, current = _summary_history(tmp_path, InMemoryStore())
+    replies = SummaryReplies(answer)
+    controller = _summary_controller(tmp_path, replies)
+    cfg = {"configurable": {"foundation_run_id": "run", "arm_id": "window_summary",
+                            "user_id": "alice", "thread_id": "thread-a"}}
+    hook = make_window_summary_hook(history, controller, "Original system")
+    first = hook({"messages": current}, cfg)["llm_input_messages"]
+    assert [item.id for item in first[1:]] == [
+        "h0", "a0", "h1", "a1-call", "a1-tool", "a1", "h2", "a2", "h4"]
+    assert history.bank.history_summary(history.scope) is None
+    reopened = make_window_summary_hook(
+        history, _summary_controller(tmp_path, SummaryReplies()), "Original system")
+    assert reopened({"messages": current}, cfg)["llm_input_messages"] == first
+    assert len(replies.calls) == 1
+    counts = json.loads((tmp_path / "control-capacity.json").read_text())
+    assert counts["thread-a:2"] == 1
+    assert counts["history_summary:thread-a:2"] == 1
+
+
+def test_window_summary_store_failure_and_tombstone_scope(tmp_path: Path) -> None:
+    class FailingStore(InMemoryStore):
+        fail_summary = True
+
+        def put(self, namespace: Any, key: Any, value: Any, **kwargs: Any) -> None:
+            if self.fail_summary and key == "history_summary":
+                raise RuntimeError("STORE_FAILED")
+            super().put(namespace, key, value, **kwargs)
+
+    store = FailingStore()
+    history, current = _summary_history(tmp_path, store)
+    controller = _summary_controller(tmp_path, SummaryReplies({"content": {
+        "summary": "A valid summary"}}))
+    with pytest.raises(RuntimeError, match="STORE_FAILED"):
+        controller.prepare(history, "thread-a", current, "thread-a:2")
+    assert history.bank.store_stats()["put"]["failures"] == 1
+    assert history.bank.history_summary(history.scope) is None
+    store.fail_summary = False
+    history.bank.put_history_summary(history.scope, "revoked old summary", 0)
+    history.bank.forget_source(history.scope, "message:old")
+    suppressed = controller.prepare(history, "thread-a", current, "thread-a:2")
+    assert suppressed.suppressed and suppressed.summary == ""
+    assert [item.id for item in suppressed.messages] == ["h4"]
+    other = StateScope("run", "window_summary", "bob")
+    assert not history.bank.has_forgotten_sources(other)
+    bob_history = HistoryAccess(history.root, other, history.bank,
+                                lambda _session: SimpleNamespace(values={"messages": []}),
+                                lambda session: "thread-" + session,
+                                page_max_bytes=16384)
+    bob_view = controller.prepare(bob_history, "thread-b",
+                                  [HumanMessage(id="bob-current", content="hello")],
+                                  "thread-b:0")
+    assert not bob_view.suppressed
+    assert [item.id for item in bob_view.messages] == ["bob-current"]
+
+
+def test_window_summary_control_capacity_falls_back_without_call(tmp_path: Path) -> None:
+    history, current = _summary_history(tmp_path, InMemoryStore())
+    write_json(tmp_path / "control-capacity.json", {"thread-a:2": 13})
+    replies = SummaryReplies()
+    view = _summary_controller(tmp_path, replies).prepare(
+        history, "thread-a", current, "thread-a:2")
+    assert view.degraded and not view.summary
+    assert [item.id for item in view.messages][:2] == ["h0", "a0"]
+    assert not replies.calls
+
+
+def test_window_summary_keeps_incomplete_prior_prefix_as_labeled_data(
+    tmp_path: Path,
+) -> None:
+    history, current = _summary_history(tmp_path, InMemoryStore())
+    progress_path = tmp_path / "run" / "phase-progress.json"
+    progress = json.loads(progress_path.read_text())
+    progress["messages"]["failed"] = {
+        "message_id": "failed", "user_id": "alice", "session_id": "b",
+        "public_index": 1, "status": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+        "visited_ordinal": 3, "business_calls": [{"call_id": "effect-1",
+                                                  "result": {"reserved": True}}]}
+    write_json(progress_path, progress)
+    replies = SummaryReplies({"content": {"summary": "First completed turn."}})
+    # A failed second turn has only an actual call prefix, without a ToolMessage.
+    failed = [HumanMessage(id="h1", content="second"),
+              AIMessage(id="a1", content="second final"),
+              HumanMessage(id="h3", content="failed request"),
+              AIMessage(id="failed-call", content="", tool_calls=[{
+                  "name": "reserve_and_label", "args": {}, "id": "effect-1"}])]
+    history.get_state = lambda session: SimpleNamespace(values={"messages":
+        failed if session == "b" else current})
+    controller = _summary_controller(tmp_path, replies)
+    cfg = {"configurable": {"foundation_run_id": "run", "arm_id": "window_summary",
+                            "user_id": "alice", "thread_id": "thread-a"}}
+    wire = make_window_summary_hook(history, controller, "Original system")(
+        {"messages": current}, cfg)["llm_input_messages"]
+    assert "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED" in wire[0].content
+    assert "effect-1" in wire[0].content and "reserved" in wire[0].content
+    assert all(item.id != "failed-call" for item in wire[1:])
+    assert [row["message_id"] for row in json.loads(
+        replies.calls[0]["messages"][1]["content"])["new_completed_turns"]] == ["m0"]
 
 
 def test_history_owner_tombstone_suppresses_only_that_owner(tmp_path: Path) -> None:
@@ -1696,6 +1932,87 @@ def test_cli_full_history_uses_no_state_controller_and_requires_opt_in(
     assert manifest["identity"]["read_history_tool"] is True
     assert manifest["identity"]["maintenance_input_policy"] is None
     assert manifest["identity"]["update_policy"] is None
+    assert manifest["identity"]["representation"] == "full_history"
+
+
+def test_cli_window_summary_binds_config_and_uses_shared_control_budget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.freshness_projection.identity import LAB
+
+    monkeypatch.syspath_prepend(str(LAB / "tools"))
+    import run_local_state_attention as entry
+
+    script = tmp_path / "script.json"
+    script.write_text(json.dumps({
+        "kind": "MILAI_LOCAL_STATE_ATTENTION_SCRIPT", "script_id": "mock",
+        "users": ["alice"], "initial_label_available": True,
+        "phases": [{"id": 0, "operator_memory": [], "world_events": [],
+                    "messages": [{"message_id": "m0", "user_id": "alice",
+                                  "session_id": "main", "public_index": 0,
+                                  "text": "hello"}]}]}))
+    config = tmp_path / "config.json"
+    settings = {"host": {"base_url": "http://mock/v1/", "model": "mock",
+                         "max_tokens": 4096},
+                "embedding": {"base_url": "http://mock/v1/", "model": "mock"},
+                "capacity": {}, "budget_path": str(tmp_path / "budget.json"),
+                "control": {"max_tokens": 2048, "max_calls_per_message": 13},
+                "history": {"enabled": True, "page_max_bytes": 16384,
+                            "window_completed_turns": 2,
+                            "summary_content_max_chars": 16000}}
+    config.write_text(json.dumps(settings))
+    root = tmp_path / "runtime"
+    args = SimpleNamespace(config=config, script=script, run="mock-run",
+                           arm="window_summary", repeat=0, runtime_root=root,
+                           output=tmp_path / "prepared.json",
+                           prepared=tmp_path / "prepared.json", phase=0, stage="mock")
+    entry.prepare(args)
+    calls: list[Any] = []
+
+    class FakeClient:
+        def __init__(self, config: Any, **kwargs: Any) -> None:
+            self.config = config
+            calls.append(("client", config.max_tokens, kwargs["budget"], kwargs["capacity"]))
+
+        def __enter__(self) -> FakeClient:
+            return self
+
+        def __exit__(self, *_args: Any) -> None:
+            return None
+
+    budget, capacity = object(), object()
+    host = SimpleNamespace(emit=None, budget=budget, capacity=capacity)
+
+    @contextmanager
+    def runtime(*_args: Any, **kwargs: Any) -> Any:
+        calls.append(("projection", kwargs["enable_projection"]))
+        yield SimpleNamespace(model=SimpleNamespace(client=host), store=InMemoryStore(),
+                              checkpointer=object(), observer=object())
+
+    def phase(*_args: Any, **kwargs: Any) -> dict[str, Any]:
+        summary = kwargs["history_summary_controller"]
+        assert isinstance(summary, HistorySummaryController)
+        calls.append(("phase", kwargs["history_mode"],
+                      kwargs["history_page_max_bytes"],
+                      summary.max_calls_per_message,
+                      summary.window_completed_turns,
+                      summary.summary_content_max_chars))
+        return {"status": "TERMINAL"}
+
+    monkeypatch.setattr(entry, "open_application_runtime", runtime)
+    monkeypatch.setattr(entry, "VLLMClient", FakeClient)
+    monkeypatch.setattr(entry, "run_phase", phase)
+    assert entry.run(args)["status"] == "TERMINAL"
+    assert calls == [("projection", False), ("client", 2048, budget, capacity),
+                     ("phase", "window", 16384, 13, 2, 16000)]
+    identity = json.loads((root / "run_manifest.json").read_text())["identity"]
+    assert identity["representation"] == "window_summary"
+    assert identity["history_window_summary"] is True
+    assert identity["read_history_tool"] is True
+    assert identity["summary_control_policy"] == {
+        "role": "state_control", "control_stage": "history_summary",
+        "max_tokens": 2048, "max_calls_per_message": 1}
+    assert identity["maintenance_input_policy"] is None
 
 
 def test_missing_aggregate_setting_preserves_existing_local_capacity(

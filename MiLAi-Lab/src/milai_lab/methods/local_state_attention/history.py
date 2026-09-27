@@ -6,6 +6,7 @@ import hashlib
 import json
 import time
 from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +21,16 @@ HISTORY_TOOL_DESCRIPTION = (
     "order. This is read-only and may include explicitly incomplete prior turns. Use cursor "
     "and max_bytes for mechanical whole-record pagination; no future messages are available."
 )
+
+
+@dataclass(frozen=True)
+class WindowSnapshot:
+    full_messages: list[BaseMessage]
+    window_messages: list[BaseMessage]
+    incomplete: list[dict[str, Any]]
+    newly_covered: list[dict[str, Any]]
+    target_ordinal: int
+    suppressed: bool
 
 
 def source_id(thread_id: str, position: int, message: BaseMessage) -> str:
@@ -211,3 +222,34 @@ class HistoryAccess:
                                                         ensure_ascii=False,
                                                         default=str).encode("utf-8"))})
         return native, incomplete, False
+
+    def window(self, current_thread: str, current_messages: list[BaseMessage],
+               keep_completed: int, covered_ordinal: int) -> WindowSnapshot:
+        """Partition visited turns without altering checkpoint or source order."""
+        if type(keep_completed) is not int or keep_completed < 0:
+            raise ValueError("HISTORY_WINDOW_INVALID")
+        current = _turn(current_messages, sum(isinstance(message, HumanMessage)
+                                              for message in current_messages) - 1)
+        if self._suppressed():
+            return WindowSnapshot(current, current, [], [], covered_ordinal, True)
+        records = self._records(current_thread, current_messages)
+        if covered_ordinal < -1 or covered_ordinal >= len(records):
+            raise ValueError("HISTORY_SUMMARY_CURSOR_INVALID")
+        completed = [(record, turn) for record, turn in records
+                     if record["status"] == "COMPLETED"]
+        older = completed[:-keep_completed] if keep_completed else completed
+        recent = completed[-keep_completed:] if keep_completed else []
+        newly = [record for record, _ in older
+                 if record["ordinal"] > covered_ordinal]
+        target = newly[-1]["ordinal"] if newly else covered_ordinal
+        full = [message for _, turn in completed for message in turn]
+        window = [message for _, turn in recent for message in turn]
+        incomplete: list[dict[str, Any]] = []
+        completed_before = 0
+        for record, _turn_messages in records:
+            if record["status"] == "COMPLETED":
+                completed_before += 1
+            else:
+                incomplete.append({**record, "completed_before": completed_before})
+        return WindowSnapshot([*full, *current], [*window, *current], incomplete,
+                              newly, target, False)

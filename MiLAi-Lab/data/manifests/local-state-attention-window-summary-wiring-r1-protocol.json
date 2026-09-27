@@ -1,0 +1,142 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_WINDOW_SUMMARY_WIRING_R1_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_SOURCE_PUBLICATION",
+  "scope": "Two exposed scripts, same legitimate history access: complete history versus completed-turn window plus incremental summary. Wiring only, not efficacy or long-history scaling.",
+  "basis": [
+    "docs/MILAI_LOCAL_STATE_ATTENTION_HISTORY_WIRING_R1_RESULTS_20260927.md"
+  ],
+  "run_order": [
+    {
+      "run_id": "lsa-window-summary-wiring-r1-interleaved-window_summary",
+      "case": "interleaved",
+      "arm": "window_summary",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-window-summary-wiring-r1-interleaved-full_history",
+      "case": "interleaved",
+      "arm": "full_history",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-window-summary-wiring-r1-partial-full_history",
+      "case": "partial",
+      "arm": "full_history",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-window-summary-wiring-r1-partial-window_summary",
+      "case": "partial",
+      "arm": "window_summary",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-interleaved-workshop.json": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "denominators": {
+    "public_messages": 24,
+    "messages_per_arm": 12,
+    "trajectories": 4,
+    "whole_trajectories_per_arm": 2
+  },
+  "split": "exposed development; one repeat per arm/case",
+  "arm_contracts": {
+    "full_history": "Unchanged complete actual occurred owner history plus current prefix; no summary or State controller calls. Common read_history available.",
+    "window_summary": "Most recent2 whole completed turns plus current full ReAct prefix, and a separately labeled incremental summary of earlier completed turns. At most one summary attempt per public message. Common read_history accesses original checkpoints; incomplete old turns remain labeled raw data."
+  },
+  "shared": {
+    "controller_max_tokens": 2048,
+    "controller_calls_per_public_message": 13,
+    "host_max_tokens": 4096,
+    "host_calls_per_public_message": 12,
+    "http_concurrency": 1,
+    "history_enabled": true,
+    "history_page_max_bytes": 16384,
+    "window_completed_turns": 2,
+    "summary_content_max_chars": 16000,
+    "summary_attempts_per_public_message": 1,
+    "full_history_capacity": "Existing HostCapacity on entire actual request, no extra full-history truncation limit."
+  },
+  "history_contract": [
+    "Runtime indexes only actually visited public turns/sessions under the current run/arm/user, with actual chronological public-turn ordering across sessions.",
+    "Read final assistant/tool-call/result objects from public checkpoints, not copied progress answer strings or evaluator logs; current tool loop prefix is not duplicated.",
+    "Past capacity-failed prefixes retain actual side effects/status and original messages; do not fabricate completion or ToolMessage to make a chain look complete.",
+    "Both arms share the same mechanical cursor/max_bytes read_history tool and whole-record page budget. It extends a new matched tool schema; original answer/calls envelope and native/business tool semantics remain.",
+    "Owner-scoped checkpoint gets/logical bytes/CPU/wall and actual model usage charged; no new database or second persistent body archive.",
+    "Known tombstone under current owner conservatively suppresses new history tools/projection for that owner, including assistant echoes; other owner unaffected. This is not physical erasure of historical evidence.",
+    "Original checkpoints/raw messages retained; projections affect only actual request copies. No use of other-arm history or future script messages."
+  ],
+  "hypotheses": {
+    "H1": "A compact rolling summary can preserve evicted constraints and actions while reducing later Host prompt tokens; complete raw history remains an available strong baseline.",
+    "H2": "Summary omissions, key rewriting or extra control cost may outweigh any input reduction; on these short histories the entire raw context may be simpler and cheaper."
+  },
+  "scoring": "Original p1-rubric full12 messages per arm. Preserve exact item_key/destination/packing, real partial receipt/get found/same-id label recovery, other owner isolation, all failures and skipped messages. Mechanism audit uses actual HTTP/summary commits/delivery/real actions, not normal exit.",
+  "mechanism_checks": [
+    "Full-history actual HTTP matches original owner checkpoints/current prefix; off-path remains unchanged.",
+    "Actual first summary receives only prior evicted complete turns; committed summary and cursor survive separate phase processes. Subsequent summaries include exactly newly evicted completed turns, without resummarizing current tools.",
+    "Summary source/HTTP/Store commit/next Host system delivery and exact retained recent turns are auditable. Count all summary/Host/native memory costs.",
+    "Both arms use identical common read_history description/schema and owner scope. Report if no natural tool invocation, truncation or tombstone case occurs.",
+    "Both partial actual existing reservation reads and label completions use original IDs, with no extra reservation; report exact wrong keys under original rubric."
+  ],
+  "order_rationale": "New window_summary first on interleaved; reverse on partial. Historical history-wiring-r1 results remain preserved; these are new same-source matched runs, not publication reruns or replacements.",
+  "isolation": "Fresh run/arm/user State+LangMem namespaces, world/checkpoint/journal; independent phase processes.",
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 2641,
+    "generation_tokens": 3258587,
+    "embedding_tokens": 18445
+  },
+  "source_freeze": "Formal prepare only after source and protocol publication; bind actualsource/input/config/dependencies and freeze through all four trajectories.",
+  "stop_rule": "All semantic/capacity/optional-control failures retain full denominators; stop affected execution on infrastructure/uncaught faults and diagnose before remaining originally planned independent runs. No replay/replacement.",
+  "next_decision": "Retain all4 planned trajectories/costs. Diagnose only concrete integration faults; no wording loop on old key misses. Then remaining R/U=A/ablation, lifecycle/native task/scale/model obligations, without claiming short-history compression or stable benefit.",
+  "validation": {
+    "source_checks": {
+      "pytest_command": "uv run --no-sync --group baseline-langmem pytest -q tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py tests/unit/test_langmem_foundation.py",
+      "passed": 80,
+      "targeted_ruff": "PASS",
+      "targeted_mypy": "PASS:7 source files",
+      "git_diff_check": "PASS",
+      "zero_model_prepare": "PASS: original2 scripts x window_summary/full_history =4"
+    },
+    "build": {
+      "command": "uv build --offline --out-dir /tmp/milai-lsa-window-summary-dist",
+      "sdist_sha256": "a498451b569c72bd03924da8ce8a6d49a65b58ea7ca27932c6bae8c63a1572bb",
+      "wheel_sha256": "0b1f7825095aac2e72b751d4ed1f54352237f4bb21caddc5a6a98c9567a84e96",
+      "package_contents": "sdist CLI and wheel summary.py verified"
+    },
+    "real_model_calls": 0
+  },
+  "summary_contract": [
+    "Read only actual visited scoped checkpoints in chronological public-turn order; no private observer history, rubric, future task, or offline answer.",
+    "Only whole COMPLETED assistant/tool-balanced turns enter window and summary cursor. Actual incomplete prefixes and business journal observations remain explicitly labeled raw data.",
+    "Only newly evicted completed turns plus previously committed summary go to the short generic summarizer; no current task in this maintenance input.",
+    "Summary text and covered visited ordinal commit together to one existing owner-scoped Store key. Original checkpoints remain; no new database or archive body copy.",
+    "At most one summary attempt per public message, including process restart; no new eviction means zero model calls. All actual successful/failed calls count in the same continuous ledger.",
+    "Known optional model timeout/truncation/invalid response may fall back to full original history, without advancing cursor or displaying uncommitted summary. Real Store read/write failure remains an explicit infrastructure fault. Existing request capacity still applies.",
+    "Owner tombstones suppress previous summary and history access/projection conservatively. Other owners stay isolated; this is not physical erasure."
+  ],
+  "post_task_user_instruction": "After this current window_summary slice and its4 pre-registered trajectories, pause the active Goal; write an overall report and publish to GitHub. Do not start subsequent R/U=A/native/model work."
+}

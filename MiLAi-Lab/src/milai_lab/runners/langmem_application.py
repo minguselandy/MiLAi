@@ -24,6 +24,7 @@ from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import LocalStateController
 from milai_lab.methods.local_state_attention.history import HistoryAccess
+from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
 from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
 
@@ -251,7 +252,9 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               local_state_read_policy: str = "focus",
               source_view_max_bytes: int | None = None,
               history_mode: str | None = None,
-              history_page_max_bytes: int | None = None) -> dict[str, Any]:
+              history_page_max_bytes: int | None = None,
+              history_summary_controller: HistorySummaryController | None = None,
+              ) -> dict[str, Any]:
     """Run one frozen phase; the next invocation reopens every process-owned resource."""
     phase = script["phases"][phase_id]
     if phase["id"] != phase_id:
@@ -266,8 +269,10 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
         return cast(dict[str, Any], read_json(result_path))
     if phase_id != progress["next_phase"]:
         raise ValueError("APPLICATION_PHASE_OUT_OF_ORDER")
-    if history_mode not in {None, "full", "tool"}:
+    if history_mode not in {None, "full", "tool", "window"}:
         raise ValueError("APPLICATION_HISTORY_MODE_INVALID")
+    if (history_mode == "window") != (history_summary_controller is not None):
+        raise ValueError("APPLICATION_HISTORY_SUMMARY_MISMATCH")
     world = ApplicationWorld(root / "business-world.sqlite",
                              script["initial_label_available"])
     history_bank = (local_state_controller.bank if local_state_controller is not None else
@@ -330,7 +335,10 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                                     local_state_read_policy=local_state_read_policy,
                                     source_view_max_bytes=source_view_max_bytes,
                                     history_access=history,
-                                    full_history=history_mode == "full")
+                                    full_history=history_mode == "full",
+                                    history_summary_controller=(
+                                        history_summary_controller
+                                        if history_mode == "window" else None))
                 agents[user_id] = agent
             pending = progress["pending_message"] == message_id
             progress["pending_message"] = message_id
