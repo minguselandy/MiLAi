@@ -1,0 +1,1029 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P3_WIRING_R3_RESULTS",
+  "status": "COMPLETE_WITH_SEMANTIC_FAILURES",
+  "source_commit": "eda7add22d3a78f6074098c800fad36707ed7dd2",
+  "runs": [
+    {
+      "run_id": "lsa-p3-wiring-interleaved-local_lru_sources-r3",
+      "arm": "local_lru_sources",
+      "source_commit": "eda7add22d3a78f6074098c800fad36707ed7dd2",
+      "messages": [
+        {
+          "message_id": "brief",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "foreground",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "background-revision",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-background",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-third",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "task_strict_passed": 4,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 20,
+          "tokens": 13444,
+          "wall_seconds": 15.841295817866921
+        },
+        "task_host": {
+          "actual_http": 7,
+          "tokens": 9799,
+          "wall_seconds": 4.0042043649591506
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 99,
+          "failures": 0,
+          "cpu_ns": 52977441,
+          "wall_ns": 80865313,
+          "request_bytes": 19656,
+          "result_bytes": 16230
+        },
+        "search": {
+          "calls": 64,
+          "failures": 0,
+          "cpu_ns": 143768238,
+          "wall_ns": 175658734,
+          "request_bytes": 9188,
+          "result_bytes": 111973
+        },
+        "put": {
+          "calls": 33,
+          "failures": 0,
+          "cpu_ns": 13172295,
+          "wall_ns": 198036703,
+          "request_bytes": 20807,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 102
+        },
+        "events": {
+          "records": 8,
+          "logical_value_bytes": 3751
+        },
+        "states": {
+          "records": 3,
+          "logical_value_bytes": 2119
+        }
+      },
+      "degraded_views": 0,
+      "empty_views": 0,
+      "empty_controller_focus": 0,
+      "pending_events": 0,
+      "world_attempts": {
+        "reserve_and_label": 2
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "7fdd24ddbdc1b71b05a20e6b982978dad3779f0fceeefb3ea289722722f68570",
+        "trace.jsonl": "a27fc729373fa9fff3cb9da319f7361d488c01d089ea43283e7b922ac63776bf",
+        "phase-0-result.json": "c253e6901b4b1fa74d8b578c52e30ddd07936426527ea8cef295ecf093a232b9",
+        "phase-1-result.json": "f07054c336b32cb2a9f10d291d9586374f2070db41eb0c825bf2be94c3177c65",
+        "phase-0-store-snapshot.json": "827b7f075a1aa53dccfccde0ad0895c46365384ce9954561e29ffb810c4778d3",
+        "phase-1-store-snapshot.json": "9e43ab13dac52080f04454016faf8e1a1c318ba5fad9c9af032f098791e75497"
+      },
+      "source_delivery": {
+        "views": 7,
+        "activated_views": 5,
+        "expanded_event_deliveries": 15,
+        "source_utf8_bytes": 5198,
+        "omitted_events": 0,
+        "missing_events": 0,
+        "deleted_events": 0,
+        "invalid_refs": 0,
+        "body_bytes_match_original": true
+      },
+      "state_records_per_owner": {
+        "iris": 3
+      },
+      "max_state_content_chars_in_view": 318,
+      "max_state_count_in_view": 3,
+      "controller_edit_receipts": {
+        "created": 3,
+        "updated": 7
+      },
+      "total_view_utf8_bytes": 9773,
+      "request_json_bytes_by_role": {
+        "state_control": 52551,
+        "task_host": 49625
+      },
+      "max_output_tokens_by_role": {
+        "state_control": 416,
+        "task_host": 141
+      },
+      "physical_runtime_files": {
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 249856,
+        "business-world.sqlite": 36864
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "requests": 7,
+          "known_tokens": 7278,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "read_selector": {
+          "requests": 7,
+          "known_tokens": 3331,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "update_selector": {
+          "requests": 6,
+          "known_tokens": 2835,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "route_records": [
+        {
+          "user_id": "iris",
+          "update_ids": [],
+          "may_create": null,
+          "directory_bytes": 2,
+          "full_bank_content_chars": 0,
+          "candidate_body_bytes": 2
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "24e3bbbf95354323ac1a690f833993fe"
+          ],
+          "may_create": null,
+          "directory_bytes": 321,
+          "full_bank_content_chars": 292,
+          "candidate_body_bytes": 242
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "may_create": null,
+          "directory_bytes": 321,
+          "full_bank_content_chars": 292,
+          "candidate_body_bytes": 233
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "may_create": null,
+          "directory_bytes": 321,
+          "full_bank_content_chars": 315,
+          "candidate_body_bytes": 302
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "may_create": null,
+          "directory_bytes": 321,
+          "full_bank_content_chars": 454,
+          "candidate_body_bytes": 777
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "may_create": null,
+          "directory_bytes": 443,
+          "full_bank_content_chars": 405,
+          "candidate_body_bytes": 946
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "4ac4366799194cbab055fbb4bbc60827"
+          ],
+          "may_create": null,
+          "directory_bytes": 321,
+          "full_bank_content_chars": 418,
+          "candidate_body_bytes": 246
+        }
+      ],
+      "lru_update_read_pairs": [
+        {
+          "user_id": "iris",
+          "update_ids": [],
+          "read_ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "4ac4366799194cbab055fbb4bbc60827",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "edits": [
+            {
+              "id": "24e3bbbf95354323ac1a690f833993fe",
+              "status": "created",
+              "revision": 1
+            },
+            {
+              "id": "a41f908656c441b48035c54913db39b9",
+              "status": "created",
+              "revision": 1
+            },
+            {
+              "id": "4ac4366799194cbab055fbb4bbc60827",
+              "status": "created",
+              "revision": 1
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "24e3bbbf95354323ac1a690f833993fe"
+          ],
+          "read_ids": [
+            "24e3bbbf95354323ac1a690f833993fe"
+          ],
+          "edits": [
+            {
+              "id": "24e3bbbf95354323ac1a690f833993fe",
+              "status": "updated",
+              "revision": 2
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "read_ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "edits": [
+            {
+              "id": "a41f908656c441b48035c54913db39b9",
+              "status": "updated",
+              "revision": 2
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "read_ids": [
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "edits": [
+            {
+              "id": "a41f908656c441b48035c54913db39b9",
+              "status": "updated",
+              "revision": 3
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "read_ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "edits": [
+            {
+              "id": "24e3bbbf95354323ac1a690f833993fe",
+              "status": "updated",
+              "revision": 3
+            },
+            {
+              "id": "a41f908656c441b48035c54913db39b9",
+              "status": "updated",
+              "revision": 4
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "read_ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "edits": [
+            {
+              "id": "24e3bbbf95354323ac1a690f833993fe",
+              "status": "updated",
+              "revision": 4
+            },
+            {
+              "id": "a41f908656c441b48035c54913db39b9",
+              "status": "updated",
+              "revision": 5
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "iris",
+          "update_ids": [
+            "4ac4366799194cbab055fbb4bbc60827"
+          ],
+          "read_ids": [
+            "4ac4366799194cbab055fbb4bbc60827"
+          ],
+          "edits": [],
+          "degraded": false,
+          "reason": null
+        }
+      ],
+      "model_candidate_inputs": [
+        {
+          "ids": [],
+          "content_chars": 0,
+          "new_observation_ids": [
+            "message:5647ab9c-3810-4132-ab93-88a4ed7b74bd"
+          ]
+        },
+        {
+          "ids": [
+            "24e3bbbf95354323ac1a690f833993fe"
+          ],
+          "content_chars": 99,
+          "new_observation_ids": [
+            "message:e1b39aa9-07a1-4deb-806c-f72aa6dd34e6"
+          ]
+        },
+        {
+          "ids": [
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "content_chars": 93,
+          "new_observation_ids": [
+            "message:38e18aa6-1e5d-4b5c-9577-e44e401ff6ef"
+          ]
+        },
+        {
+          "ids": [
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "content_chars": 116,
+          "new_observation_ids": [
+            "message:e5d249f1-47b0-4bab-85b9-6f20335abf21"
+          ]
+        },
+        {
+          "ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "content_chars": 354,
+          "new_observation_ids": [
+            "message:13de9ee7-85f7-4079-9b74-22eb6dd5290a"
+          ]
+        },
+        {
+          "ids": [
+            "24e3bbbf95354323ac1a690f833993fe",
+            "a41f908656c441b48035c54913db39b9"
+          ],
+          "content_chars": 305,
+          "new_observation_ids": [
+            "tool:b6800e3caed92dbdc2f2c55756e4fc2f7661babe0f52dcbe6ad8ad58315299e9",
+            "tool:7e1bb4b3d4c6c782b2e25f1ad81d4d85e4a0d4c350b9b6d7ec98c212d6b021b7"
+          ]
+        },
+        {
+          "ids": [
+            "4ac4366799194cbab055fbb4bbc60827"
+          ],
+          "content_chars": 100,
+          "new_observation_ids": [
+            "message:ee931433-2e37-4140-8ba8-f4c9c8a3556b"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-partial-local_lru_sources-r3",
+      "arm": "local_lru_sources",
+      "source_commit": "eda7add22d3a78f6074098c800fad36707ed7dd2",
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "task_strict_passed": 4,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 25,
+          "tokens": 15782,
+          "wall_seconds": 18.9434205442667
+        },
+        "task_host": {
+          "actual_http": 9,
+          "tokens": 12668,
+          "wall_seconds": 5.302727482281625
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 105,
+          "failures": 0,
+          "cpu_ns": 158975058,
+          "wall_ns": 185702786,
+          "request_bytes": 20542,
+          "result_bytes": 18834
+        },
+        "search": {
+          "calls": 82,
+          "failures": 0,
+          "cpu_ns": 47167845,
+          "wall_ns": 84480383,
+          "request_bytes": 11444,
+          "result_bytes": 102290
+        },
+        "put": {
+          "calls": 37,
+          "failures": 0,
+          "cpu_ns": 15603644,
+          "wall_ns": 77542981,
+          "request_bytes": 24377,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 274
+        },
+        "events": {
+          "records": 10,
+          "logical_value_bytes": 4978
+        },
+        "states": {
+          "records": 4,
+          "logical_value_bytes": 2737
+        }
+      },
+      "degraded_views": 0,
+      "empty_views": 0,
+      "empty_controller_focus": 0,
+      "pending_events": 0,
+      "world_attempts": {
+        "reserve_and_label": 2,
+        "complete_label": 1
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "537c5468aa3d8f9b9b21a35d0762e3f707e085986fe7ba0425c02a1ca6e1329d",
+        "trace.jsonl": "7c5bad0dfd50cae99cb9e3068d49a70463007aa3e2df7aada3e4f8ffa393d9c0",
+        "phase-0-result.json": "725013dc60cf4acc7e2a8b638fdef15ad9b2ffc32c839188cb9f82e9ed678140",
+        "phase-1-result.json": "1267abc12331b01cf48390daf6c3b34e13db14abf1bef5e6dd630689abb67eb8",
+        "phase-0-store-snapshot.json": "8eff51814d9842069bb05d1b7f9c252980f7bdcf1ec40a644616c02373c46060",
+        "phase-1-store-snapshot.json": "e663c445c1f09c98721eb5c5c6b7ceb3ddee1fce475e76104897fb5fd2bcda38"
+      },
+      "source_delivery": {
+        "views": 9,
+        "activated_views": 5,
+        "expanded_event_deliveries": 16,
+        "source_utf8_bytes": 7155,
+        "omitted_events": 0,
+        "missing_events": 0,
+        "deleted_events": 0,
+        "invalid_refs": 0,
+        "body_bytes_match_original": true
+      },
+      "state_records_per_owner": {
+        "noel": 3,
+        "mira": 1
+      },
+      "max_state_content_chars_in_view": 593,
+      "max_state_count_in_view": 3,
+      "controller_edit_receipts": {
+        "created": 4,
+        "updated": 4,
+        "noop": 1
+      },
+      "total_view_utf8_bytes": 14303,
+      "request_json_bytes_by_role": {
+        "state_control": 63077,
+        "task_host": 63384
+      },
+      "max_output_tokens_by_role": {
+        "state_control": 487,
+        "task_host": 121
+      },
+      "physical_runtime_files": {
+        "instrumentation.sqlite": 114688,
+        "checkpoints.sqlite": 262144,
+        "business-world.sqlite": 36864
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "requests": 9,
+          "known_tokens": 9437,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "read_selector": {
+          "requests": 9,
+          "known_tokens": 3583,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "update_selector": {
+          "requests": 7,
+          "known_tokens": 2762,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "route_records": [
+        {
+          "user_id": "noel",
+          "update_ids": [],
+          "may_create": null,
+          "directory_bytes": 2,
+          "full_bank_content_chars": 0,
+          "candidate_body_bytes": 2
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [],
+          "may_create": null,
+          "directory_bytes": 2,
+          "full_bank_content_chars": 0,
+          "candidate_body_bytes": 2
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "may_create": null,
+          "directory_bytes": 138,
+          "full_bank_content_chars": 195,
+          "candidate_body_bytes": 369
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "may_create": null,
+          "directory_bytes": 138,
+          "full_bank_content_chars": 293,
+          "candidate_body_bytes": 513
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "may_create": null,
+          "directory_bytes": 138,
+          "full_bank_content_chars": 324,
+          "candidate_body_bytes": 617
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "may_create": null,
+          "directory_bytes": 429,
+          "full_bank_content_chars": 593,
+          "candidate_body_bytes": 1225
+        },
+        {
+          "user_id": "noel",
+          "update_ids": [],
+          "may_create": null,
+          "directory_bytes": 119,
+          "full_bank_content_chars": 123,
+          "candidate_body_bytes": 2
+        },
+        {
+          "user_id": "noel",
+          "update_ids": [],
+          "may_create": null,
+          "directory_bytes": 243,
+          "full_bank_content_chars": 276,
+          "candidate_body_bytes": 2
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "may_create": null,
+          "directory_bytes": 211,
+          "full_bank_content_chars": 438,
+          "candidate_body_bytes": 998
+        }
+      ],
+      "lru_update_read_pairs": [
+        {
+          "user_id": "noel",
+          "update_ids": [],
+          "read_ids": [
+            "a400f7c9cd3f455ba594e01a7454f7e1"
+          ],
+          "edits": [
+            {
+              "id": "a400f7c9cd3f455ba594e01a7454f7e1",
+              "status": "created",
+              "revision": 1
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [],
+          "read_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "edits": [
+            {
+              "id": "9bd9b3dcc3734d0b8fdf320994e472e5",
+              "status": "created",
+              "revision": 1
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "read_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "edits": [
+            {
+              "id": "9bd9b3dcc3734d0b8fdf320994e472e5",
+              "status": "updated",
+              "revision": 2
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "read_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "edits": [
+            {
+              "id": "9bd9b3dcc3734d0b8fdf320994e472e5",
+              "status": "updated",
+              "revision": 3
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "read_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "edits": [
+            {
+              "id": "9bd9b3dcc3734d0b8fdf320994e472e5",
+              "status": "updated",
+              "revision": 4
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "read_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "edits": [
+            {
+              "id": "9bd9b3dcc3734d0b8fdf320994e472e5",
+              "status": "updated",
+              "revision": 5
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "noel",
+          "update_ids": [],
+          "read_ids": [
+            "0d3aebe9750b43558f5b4c64adff829f",
+            "a400f7c9cd3f455ba594e01a7454f7e1"
+          ],
+          "edits": [
+            {
+              "id": "0d3aebe9750b43558f5b4c64adff829f",
+              "status": "created",
+              "revision": 1
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "noel",
+          "update_ids": [],
+          "read_ids": [
+            "0d3aebe9750b43558f5b4c64adff829f",
+            "2d7403ac9226449881339839d0dc4cca",
+            "a400f7c9cd3f455ba594e01a7454f7e1"
+          ],
+          "edits": [
+            {
+              "id": "2d7403ac9226449881339839d0dc4cca",
+              "status": "created",
+              "revision": 1
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        },
+        {
+          "user_id": "mira",
+          "update_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "read_ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "edits": [
+            {
+              "id": "9bd9b3dcc3734d0b8fdf320994e472e5",
+              "status": "noop",
+              "revision": 5
+            }
+          ],
+          "degraded": false,
+          "reason": null
+        }
+      ],
+      "model_candidate_inputs": [
+        {
+          "ids": [],
+          "content_chars": 0,
+          "new_observation_ids": [
+            "message:267187bb-9a28-426a-ba9e-015c7b56c1b0"
+          ]
+        },
+        {
+          "ids": [],
+          "content_chars": 0,
+          "new_observation_ids": [
+            "message:b38f757e-817f-401f-b116-860997a4a274"
+          ]
+        },
+        {
+          "ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "content_chars": 195,
+          "new_observation_ids": [
+            "message:617d4a1a-3c66-4686-88fb-fba202ef9796"
+          ]
+        },
+        {
+          "ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "content_chars": 293,
+          "new_observation_ids": [
+            "tool:3e73ea34d1d8d881464ac2ba5553fd32cdd391654dbd21485a8e479ad9e80e03"
+          ]
+        },
+        {
+          "ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "content_chars": 324,
+          "new_observation_ids": [
+            "message:3254de79-1dc8-4a18-b03e-2a6160ae3de5"
+          ]
+        },
+        {
+          "ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "content_chars": 593,
+          "new_observation_ids": [
+            "tool:8ac421aad4580f7f25d78b27663eee1dfa7e99afebdebaaea38d7d20cc5911a2",
+            "tool:0fffe450c477c036ed3f0b45ffb0cd67e46238a84ed497b98f778ee6ae6d3ef0"
+          ]
+        },
+        {
+          "ids": [],
+          "content_chars": 0,
+          "new_observation_ids": [
+            "message:f847c2df-ad03-4705-b1fe-edb6299aa3a6"
+          ]
+        },
+        {
+          "ids": [],
+          "content_chars": 0,
+          "new_observation_ids": [
+            "tool:4dedd8b5d11d2570c7102f0b15472901e1408a9c770814d7aa8d13e506aec672"
+          ]
+        },
+        {
+          "ids": [
+            "9bd9b3dcc3734d0b8fdf320994e472e5"
+          ],
+          "content_chars": 438,
+          "new_observation_ids": [
+            "message:ab63acef-126f-40e1-9b26-cdc06061b73d"
+          ]
+        }
+      ]
+    }
+  ],
+  "by_role": {
+    "state_control": {
+      "actual_http": 45,
+      "tokens": 29226,
+      "wall_seconds": 34.78471636213362
+    },
+    "task_host": {
+      "actual_http": 16,
+      "tokens": 22467,
+      "wall_seconds": 9.306931847240776
+    },
+    "embedding": {}
+  },
+  "by_arm": {
+    "local_lru_sources": {
+      "passed": 8,
+      "total": 12,
+      "whole_passed": 0,
+      "whole_total": 2,
+      "accounting": {
+        "state_control": {
+          "actual_http": 45,
+          "tokens": 29226,
+          "wall_seconds": 34.78471636213362
+        },
+        "task_host": {
+          "actual_http": 16,
+          "tokens": 22467,
+          "wall_seconds": 9.306931847240776
+        }
+      }
+    }
+  },
+  "generation_delta": {
+    "calls": 61,
+    "tokens": 51693
+  },
+  "embedding_delta": {
+    "calls": 0,
+    "tokens": 0
+  },
+  "continuous_budget": {
+    "generation_requests": 1382,
+    "generation_tokens": 1634452,
+    "embedding_tokens": 11162
+  },
+  "freeze_sha256": "7fdb3dbb0b2f2b880a2a9a944904bd338f11790d300cc97d60d4149ed11b059f",
+  "protocol_sha256": "e1aadae25791d07ae7730ed30d5db6700ace544f8a19679a105a91d5a0951621",
+  "observations": [
+    "Both complete LRU trajectories and all 12 public messages finished; strict 8/12 and whole 0/2.",
+    "Every pending batch receives maintenance. Initial interleaved plan creates three States and both initial partial owner plans persist; creation veto removed.",
+    "Interleaved background selector chooses the correct field-kit State, and actual maintenance input still contains rigid cases. The maintenance output replaces that value with packing stays the same and cites only the latest update; later Host cannot recover packing and actually reserves with packing same.",
+    "The unchanged briefing survives and is correctly read after restart. Initial state formation now succeeds, but fact-preserving revision does not.",
+    "Partial recovery actually gets the existing record, returns found, and completes label under the original reservation ID. Both initial Mira key and Noel key still differ from the exact user object.",
+    "Noel action U is empty despite an existing related State; shared maintenance creates a duplicate proposal card, then another receipt card. Empty U no longer loses creation opportunity but can fragment one matter.",
+    "No transport, capacity, optional-control degraded, or pending failures; no embedding calls."
+  ],
+  "limits": [
+    "Exposed development templates, one repeat; historical R2 G/L are not a newly matched comparator.",
+    "Directory construction still reads full Store records; only maintenance model-input candidates are reduced.",
+    "Mira logistics/access stay in a single card; local granularity is an instruction, not an enforced oracle partition.",
+    "Selector, maintenance and source-reference quality remain model dependent. No forced creation or successful semantic no-op guarantee.",
+    "Business_call arrays are cumulative within a session; action counts use unique journal call IDs and world attempts, not summed message arrays."
+  ],
+  "decision": "Creation-opportunity structural repair is live-valid. Keep semantic failures and current frozen method; proceed to pre-registered six-template G/L/LRU comparison with two complete repeats per arm to measure formation, preservation, independent selection and total cost. Do not keep tuning source wording or wait for every old Host parameter error to vanish.",
+  "first_break_evidence": [
+    {
+      "break": "maintenance drops retained packing despite correct selected candidate",
+      "run": "lsa-p3-wiring-interleaved-local_lru_sources-r3",
+      "input_old_state": {
+        "id": "a41f908656c441b48035c54913db39b9",
+        "title": "Workshop field kits",
+        "content": "3 kits located in west dock W-4, stored in rigid cases. No reservation or labeling performed.",
+        "needs": [],
+        "evidence_refs": [],
+        "revision": 1
+      },
+      "actual_output": {
+        "edits": [
+          {
+            "id": "a41f908656c441b48035c54913db39b9",
+            "title": "Workshop field kits",
+            "content": "Required quantity is 8, destination is north rack N-6. Packing stays the same. No reservation or labeling performed.",
+            "needs": [],
+            "evidence": [
+              "message:38e18aa6-1e5d-4b5c-9577-e44e401ff6ef"
+            ]
+          }
+        ]
+      },
+      "actual_generation_id": "chatcmpl-9f5bfcf77c60afdd"
+    }
+  ]
+}

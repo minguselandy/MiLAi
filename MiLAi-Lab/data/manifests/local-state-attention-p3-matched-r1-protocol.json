@@ -1,0 +1,582 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P3_MATCHED_R1_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_PUBLICATION",
+  "purpose": "Six-template, two-repeat G/L/LRU online system characterization after live creation-opportunity repair. Establish variability and failure scope before conditional LR/R/U=A. Not a pure selector ablation or unseen efficacy.",
+  "prerequisites": {
+    "wiring": "R3 all12 completed; initial formation opportunity validated; semantic failures remain and are not admission exclusions.",
+    "results": "docs/MILAI_LOCAL_STATE_ATTENTION_P3_WIRING_R3_RESULTS_20260927.md",
+    "method_base_source": "eda7add22d3a78f6074098c800fad36707ed7dd2",
+    "source_changes_after_wiring": "none"
+  },
+  "run_order": [
+    {
+      "run_id": "lsa-p3-matched-r1-conflict-local_all_sources-repeat1",
+      "case": "conflict",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-conflicting-sources.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-conflict-global_note_sources-repeat1",
+      "case": "conflict",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-conflicting-sources.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-conflict-local_lru_sources-repeat1",
+      "case": "conflict",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-conflicting-sources.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-reopen-local_lru_sources-repeat1",
+      "case": "reopen",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-reopen-history.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-reopen-global_note_sources-repeat1",
+      "case": "reopen",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-reopen-history.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-reopen-local_all_sources-repeat1",
+      "case": "reopen",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-reopen-history.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-interleaved-local_all_sources-repeat1",
+      "case": "interleaved",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-interleaved-local_lru_sources-repeat1",
+      "case": "interleaved",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-interleaved-global_note_sources-repeat1",
+      "case": "interleaved",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-shared-local_all_sources-repeat1",
+      "case": "shared",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-shared-scope.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-shared-local_lru_sources-repeat1",
+      "case": "shared",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-shared-scope.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-shared-global_note_sources-repeat1",
+      "case": "shared",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-shared-scope.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-partial-local_lru_sources-repeat1",
+      "case": "partial",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-partial-local_all_sources-repeat1",
+      "case": "partial",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-partial-global_note_sources-repeat1",
+      "case": "partial",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-coupled-global_note_sources-repeat1",
+      "case": "coupled",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-high-coupling.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-coupled-local_lru_sources-repeat1",
+      "case": "coupled",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-high-coupling.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-coupled-local_all_sources-repeat1",
+      "case": "coupled",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-high-coupling.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-conflict-global_note_sources-repeat2",
+      "case": "conflict",
+      "arm": "global_note_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-conflicting-sources.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-conflict-local_lru_sources-repeat2",
+      "case": "conflict",
+      "arm": "local_lru_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-conflicting-sources.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-conflict-local_all_sources-repeat2",
+      "case": "conflict",
+      "arm": "local_all_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-conflicting-sources.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-partial-local_all_sources-repeat2",
+      "case": "partial",
+      "arm": "local_all_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-partial-global_note_sources-repeat2",
+      "case": "partial",
+      "arm": "global_note_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-partial-local_lru_sources-repeat2",
+      "case": "partial",
+      "arm": "local_lru_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-interleaved-local_all_sources-repeat2",
+      "case": "interleaved",
+      "arm": "local_all_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-interleaved-global_note_sources-repeat2",
+      "case": "interleaved",
+      "arm": "global_note_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-interleaved-local_lru_sources-repeat2",
+      "case": "interleaved",
+      "arm": "local_lru_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-reopen-global_note_sources-repeat2",
+      "case": "reopen",
+      "arm": "global_note_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-reopen-history.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-reopen-local_lru_sources-repeat2",
+      "case": "reopen",
+      "arm": "local_lru_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-reopen-history.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-reopen-local_all_sources-repeat2",
+      "case": "reopen",
+      "arm": "local_all_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-reopen-history.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-coupled-local_all_sources-repeat2",
+      "case": "coupled",
+      "arm": "local_all_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-high-coupling.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-coupled-local_lru_sources-repeat2",
+      "case": "coupled",
+      "arm": "local_lru_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-high-coupling.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-coupled-global_note_sources-repeat2",
+      "case": "coupled",
+      "arm": "global_note_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-high-coupling.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-shared-global_note_sources-repeat2",
+      "case": "shared",
+      "arm": "global_note_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-shared-scope.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-shared-local_lru_sources-repeat2",
+      "case": "shared",
+      "arm": "local_lru_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-shared-scope.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-matched-r1-shared-local_all_sources-repeat2",
+      "case": "shared",
+      "arm": "local_all_sources",
+      "repeat": 2,
+      "script": "data/diagnostics/local_state_attention/p3-shared-scope.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "block_order": [
+    {
+      "case": "conflict",
+      "repeat": 1,
+      "arms": [
+        "local_all_sources",
+        "global_note_sources",
+        "local_lru_sources"
+      ]
+    },
+    {
+      "case": "reopen",
+      "repeat": 1,
+      "arms": [
+        "local_lru_sources",
+        "global_note_sources",
+        "local_all_sources"
+      ]
+    },
+    {
+      "case": "interleaved",
+      "repeat": 1,
+      "arms": [
+        "local_all_sources",
+        "local_lru_sources",
+        "global_note_sources"
+      ]
+    },
+    {
+      "case": "shared",
+      "repeat": 1,
+      "arms": [
+        "local_all_sources",
+        "local_lru_sources",
+        "global_note_sources"
+      ]
+    },
+    {
+      "case": "partial",
+      "repeat": 1,
+      "arms": [
+        "local_lru_sources",
+        "local_all_sources",
+        "global_note_sources"
+      ]
+    },
+    {
+      "case": "coupled",
+      "repeat": 1,
+      "arms": [
+        "global_note_sources",
+        "local_lru_sources",
+        "local_all_sources"
+      ]
+    },
+    {
+      "case": "conflict",
+      "repeat": 2,
+      "arms": [
+        "global_note_sources",
+        "local_lru_sources",
+        "local_all_sources"
+      ]
+    },
+    {
+      "case": "partial",
+      "repeat": 2,
+      "arms": [
+        "local_all_sources",
+        "global_note_sources",
+        "local_lru_sources"
+      ]
+    },
+    {
+      "case": "interleaved",
+      "repeat": 2,
+      "arms": [
+        "local_all_sources",
+        "global_note_sources",
+        "local_lru_sources"
+      ]
+    },
+    {
+      "case": "reopen",
+      "repeat": 2,
+      "arms": [
+        "global_note_sources",
+        "local_lru_sources",
+        "local_all_sources"
+      ]
+    },
+    {
+      "case": "coupled",
+      "repeat": 2,
+      "arms": [
+        "local_all_sources",
+        "local_lru_sources",
+        "global_note_sources"
+      ]
+    },
+    {
+      "case": "shared",
+      "repeat": 2,
+      "arms": [
+        "global_note_sources",
+        "local_lru_sources",
+        "local_all_sources"
+      ]
+    }
+  ],
+  "order_seed": 2026092703,
+  "order_rule": "Python random.Random(seed), shuffle six scenarios per repeat then shuffle three arms within each block; order is explicitly frozen above.",
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-interleaved-workshop.json": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p3-shared-scope.json": "b34850298dc1b01d36da93f2c1dc076c85fa6e18a23697bfde601dc1f817f31e",
+    "data/diagnostics/local_state_attention/p3-conflicting-sources.json": "ab375216e1109d9cc4f3d14b487573a8bff4b07d7b15ca52f24e03a0fd1b20de",
+    "data/diagnostics/local_state_attention/p3-reopen-history.json": "f367afbd3a301f9ba2fa1cdc4c76f0a4f1de208491371cfd863124b64410cf49",
+    "data/diagnostics/local_state_attention/p3-high-coupling.json": "a68ed59b3f72e53a3a9817c9a5b6933b6b6faf085f7e587bbb94fce1b9a15109",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63",
+    "data/diagnostics/local_state_attention/p3-matched-r1-additional-rubric.json": "aac4ce878218e6b41885b1e6bc5be5f8f936899720b35aac99bc11fc12557bf6"
+  },
+  "split": "development; original two exposed repeatedly, four new relation/constraint templates authored/reviewed by Root before this batch; no formal unseen claim.",
+  "denominators": {
+    "scenarios": 6,
+    "repeats_per_arm": 2,
+    "arms": 3,
+    "complete_trajectories": 36,
+    "phases": 72,
+    "public_messages": 234,
+    "messages_per_arm": 78,
+    "full_trajectories_per_arm": 12
+  },
+  "comparators": {
+    "global_note_sources": "G: one global note per owner/workspace; shared automatic maintenance, all_sources.",
+    "local_all_sources": "L: local granularity; all existing State candidates to joint edits+focus maintainer, budgeted all_sources delivery.",
+    "local_lru_sources": "LRU: local granularity; directory U selector for existing candidates, every pending batch gets shared maintenance creation/no-op, independent post-update A and focus_sources."
+  },
+  "shared": {
+    "events_and_permissions": "Same scoped real public user/tool events; explicit-reference source resolver only. No oracle State partition/IDs or future input.",
+    "state_aggregate_content_chars": 16000,
+    "source_view_utf8_budget": 16384,
+    "controller_max_tokens": 2048,
+    "host_max_tokens": 4096,
+    "controller_calls_per_public_message": 13,
+    "host_calls_per_public_message": 12,
+    "temperature": 0,
+    "thinking": false,
+    "context": 65536,
+    "http_concurrency": 1,
+    "runtime_reads_rubric": false,
+    "no_vllm_changes": true
+  },
+  "isolation": "New run/arm/repeat/user State namespace, LangMem namespace, checkpoint/journal/world; separate processes for each phase, new fixture sessions at phase boundary. No state/output reuse across arms/repeats.",
+  "freeze": "Actual published Git/source/config/dependency/input identity bound by prepare before generation; method and fixtures unchanged through all36 runs.",
+  "scorer": "Root offline full original p1 rubric plus per-turn new rubric; actual world and unique journal calls, source/State/view/HTTP chain; no runtime gold.",
+  "analysis": [
+    "Report turn counts and full-trajectory counts per scenario/repeat/arm, all failures/degraded/capacity cases.",
+    "Repeated trajectories within a scenario are not independent scenario families; report paired scenario differences and repeat range, no significance claim from 234 turns.",
+    "Audit exact current facts, unrelated retention, conflict/history, shared constraints, selected U/A/body candidates, content loss, source expansion and actual side effects.",
+    "Reconcile controller substages, Host, embeddings and failures to continuous ledger; record Store operations/bytes, scoped storage and elapsed time.",
+    "G/L joint generation schema differs from LRU maintenance+selectors; this is an online system comparison. LR is a later attribution control, not inferred here.",
+    "Physical shared-update atomicity, physical archive/reactivation, unknown-result recovery, wrong-State interventions and actual authorized deletion remain separate gaps."
+  ],
+  "stop_rule": "Complete all predefined runs through semantic/capacity misses. Stop batch on infrastructure/Store/instrumentation/deterministic invalidity, preserve all costs and failed denominators; no automatic replay, substitution, method editing or favorable-arm early stop.",
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 1382,
+    "generation_tokens": 1634452,
+    "embedding_tokens": 11162
+  },
+  "cost_policy": "No new cumulative hard cap; per-message capacities unchanged; all observation/failed/no-op costs retained. No unplanned repeats.",
+  "validation": "Reuse 45 affected tests/static/build from R3; fixture/rubric/protocol checks only. Formal zero-model prepare for all36 after publication; no redundant build/model smoke."
+}

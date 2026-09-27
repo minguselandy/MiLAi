@@ -37,7 +37,7 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 | P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | R3 补全机械依赖与实际Store计量；真实授权删除链仍待独立验证 |
 | P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R4两臂原各7/12；R5 partial来源on4/6、off3/6，原完整均失败；精确恢复出现局部正例 |
 | P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | R1四断点12方法+3诊断完成；State值影响输出，来源直送有用，维护/独立Host错误未闭合 |
-| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | R2小wiring完成：G9/12、L8/12、LRU6/12；L形成局部卡，LRU新建门槛漏存；正在修复形成机会，完整重复比较未完成 |
+| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | R3 LRU修复验证8/12、完整0/2；新建机会已通，内容丢失仍在；六模板×三臂×两重复已预注册，未运行 |
 | P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | 未运行，遵循进入条件 |
 | P5 / WP5 | 新 frozen 原生 selection、第二任务族、交错顺序及完整重复；原 scorer 和失败分母 | 未运行；不消费旧暴露任务作 unseen |
 | P6 / WP4–5 | N/d/a/r/H 代表点、质量—成本边界、第二模型族；有瓶颈证据才训练 selector | 未运行；第二模型仍缺独立端点 |
@@ -241,6 +241,25 @@ may_create=false拦截，维护未调用且pending消费，导致后续缺项/�
 config/窄测，45项相关检查、目标静态、两次/tmp prepare及一次build通过。新manifest
 声明creation_policy=shared_maintenance_each_pending_batch；selector不再否决新建，所有
 pending到共享维护器，但合法空edits仍消费pending，因此语义是否改善仍待真实核查。
+
+[R3真实结果](MILAI_LOCAL_STATE_ATTENTION_P3_WIRING_R3_RESULTS_20260927.md)完成两条原LRU：
+8/12、完整0/2。三处初始计划都进入维护，交错三卡保存；正确U与实际旧正文中的rigid cases
+已到维护HTTP，却被替换为packing stays the same，后续实际行动用same。Mira沿原ID实际
+found/补label成功，两owner初始key错误仍计失败。Noel空U导致后续重复新建，不能把新建
+机会等同于正确粒度。新增61生成/51693tokens/0embedding；累计1382/1634452/11162。
+保留当前源码，不继续提示词微调，也不等所有Host错误消失才进行方法比较。
+
+[P3完整小样本协议](../data/manifests/local-state-attention-p3-matched-r1-protocol.json)固定
+原两模板加四个关系/约束模板，G/L/LRU各两次独立完整运行，共36轨迹/72phase/234消息。
+分块交错顺序与seed、全部输入/逐turn rubric、隔离、成本、全失败分母均已冻结；发布后
+正式prepare，批内不改源码/输入。四模板是Root预先编写审阅的development，不冒充unseen。
+L联合edits+focus与LRU拆分控制的合同差异明确列为系统比较混杂；后续LR用于归因。
+§15.2的物理归档/重激活、未知结果恢复、错误State注入等缺口仍单列，不靠覆盖表宣称完成。
+
+Sol只读核查还确认：forget_source/delete_scope已有Bank原语及删除后的防重摄取hook，但
+应用/CLI没有实际授权删除入口；不能直接把mock删除当成完整授权链。后续独立实现入口并
+冻结真实删除验证。跨session完整历史/滑窗摘要与R也需合法、同权限且计费的事件档案入口，
+不能偷偷从trace或其他臂checkpoint取免费历史。当前bank.events的256上限不得被称为全档案。
 
 ## 后期资源准备记录
 

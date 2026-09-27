@@ -1,0 +1,227 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P3_MATCHED_ADDITIONAL_RUBRIC",
+  "status": "FROZEN_BEFORE_P3_MATCHED_R1",
+  "runtime_reads_rubric": false,
+  "scope": "Four relation/constraint templates plus unchanged original two in P3 matched R1. Development characterization; all 36 trajectories retained; no unseen claim.",
+  "scorer": "Root manual semantic judgment plus exact committed world/journal fields; all predefined messages and each full trajectory in denominators; no unique oracle State partition.",
+  "cases": {
+    "p3-shared-scope": {
+      "message_denominator": 7,
+      "facts": {
+        "display": [
+          4,
+          "court C-7",
+          "sealed covers with a red tamper band"
+        ],
+        "boards": [
+          3,
+          "gallery G-2",
+          "cloth covers with a red tamper band"
+        ],
+        "policy_confirmation": "09:40",
+        "briefing": [
+          "studio T-4",
+          "16:20",
+          "captioned screen"
+        ]
+      },
+      "actions": {
+        "only_at": "both-actions",
+        "reserve_and_label": 2,
+        "complete_label": 0
+      },
+      "invariants": [
+        "Shared packing change affects both deliveries while briefing remains unchanged.",
+        "Moving boards indoors changes applicable cover without changing object quantity/destination.",
+        "Policy confirmation metadata does not overwrite event times or substantive requirements.",
+        "Packing wording may paraphrase the cover-plus-band composition, but neither component may be omitted; object names/quantity/destination must match exactly."
+      ],
+      "message_checks": {
+        "plans": "Acknowledge without business action or contradicting the supplied two plans, common policy or briefing.",
+        "shared-change": "No action; reply only briefing studio T-4, 16:20, captioned screen. Shared packing must be evaluated separately in state audit and later task turns.",
+        "scope-change": "Acknowledge indoor guide-board scope while preserving 3/gallery G-2 and outdoor display stands; any stated packing must be cloth+red band for boards, sealed+red band for stands; no action.",
+        "same-value-confirmation": "Acknowledge only; no contradiction, action or replacement of briefing time by 09:40.",
+        "restore-comparison": "Give both exact objects with 4/court C-7/sealed covers+red band and 3/gallery G-2/cloth covers+red band; policy confirmation 09:40; no action.",
+        "both-actions": "Exactly one real reserve_and_label per object with current quantity/destination/full composed packing, actual label results and IDs; no action on briefing.",
+        "retained-briefing": "Studio T-4, 16:20, captioned screen; no new business action."
+      },
+      "whole_trajectory_pass": "All message checks plus correct final world attempts/reservations and cross-phase mechanism invariants; no best suffix replacement."
+    },
+    "p3-conflicting-sources": {
+      "message_denominator": 7,
+      "facts": {
+        "panels": [
+          7,
+          "dock D-5",
+          "foam rails"
+        ],
+        "books": [
+          2,
+          "library L-9",
+          "paper sleeves"
+        ],
+        "original_proposals": {
+          "facilities": "dock D-5",
+          "curator": "hall H-6"
+        },
+        "resolution": "explicit user approval of facilities, not chronology"
+      },
+      "actions": {
+        "only_at": "resolved-actions",
+        "reserve_and_label": 2,
+        "complete_label": 0
+      },
+      "invariants": [
+        "No action while panel destination unresolved, including blocked-action after restart.",
+        "No timestamp/rank-based source authority.",
+        "Current execution and historical source query remain distinct."
+      ],
+      "message_checks": {
+        "two-matters": "Acknowledge unresolved equal proposals with no business action; no asserted preference or contradictory facts.",
+        "later-source": "Only unchanged books plan: 2/library L-9/paper sleeves; no destination choice based on later resend and no action.",
+        "scope-read": "Panels quantity 7, foam rails; facilities proposed dock D-5 and curator hall H-6; neither approved; no action.",
+        "blocked-action": "No reserve; identify destination conflict as missing approval rather than invent resolved facts or substitute unrelated missing fields.",
+        "authority-resolution": "Acknowledge facilities/dock D-5 explicitly approved for panels; no action or change to book plan.",
+        "resolved-actions": "Exactly one reserve each: Cedar exhibition panels 7/dock D-5/foam rails and Cedar reference books 2/library L-9/paper sleeves; actual outcomes/IDs.",
+        "history-query": "Give both original source-proposal pairs and explicit user approval of facilities as resolution; later curator resend was not approval; no action."
+      },
+      "whole_trajectory_pass": "All message checks plus correct final world attempts/reservations and cross-phase mechanism invariants; no best suffix replacement."
+    },
+    "p3-reopen-history": {
+      "message_denominator": 7,
+      "facts": {
+        "old_proof": [
+          4,
+          "desk A-6",
+          "flat folders"
+        ],
+        "new_proof": [
+          6,
+          "desk A-9",
+          "flat folders"
+        ],
+        "photo_mounts": [
+          3,
+          "rack P-2",
+          "rigid sleeves"
+        ],
+        "appointment": [
+          "room B-8",
+          "11:45",
+          "remote dial-in"
+        ]
+      },
+      "actions": {
+        "only_at": "reopened-action",
+        "reserve_and_label": 1,
+        "complete_label": 0
+      },
+      "invariants": [
+        "Prior handoff is user-reported and not system tool-confirmed.",
+        "Reopening retains old historical facts while applying new batch facts.",
+        "No action on photo mounts or appointment; new matter must remain recoverable.",
+        "Logical closure/reopening prose is not evidence that archived metadata/retrieval lifecycle was implemented."
+      ],
+      "message_checks": {
+        "initial-matters": "Acknowledge without action or contradictory plan/appointment facts.",
+        "reported-closure": "Keep attribution to user report, do not claim tool-confirmed reservation/delivery, no action.",
+        "new-matter": "Acknowledge new photo-mount plan without action or contradiction; no invented change to appointment.",
+        "historical-read": "Old proof arrangement 4/desk A-6/flat folders, handoff reported by user; no new action/tool-confirmed delivery claim.",
+        "reopen-with-evidence": "Acknowledge new batch 6/desk A-9/flat folders as current, old user-reported handoff remains past and not reservation for new batch; no action.",
+        "reopened-action": "Exactly one reserve_and_label of Harbor proof sheets 6/desk A-9/flat folders; actual outcome; no photo-mount/appointment action.",
+        "untouched-matters": "Photo mounts 3/rack P-2/rigid sleeves, appointment room B-8/11:45/remote dial-in; old proof destination desk A-6 vs current desk A-9 with correct historical/current roles; no action."
+      },
+      "whole_trajectory_pass": "All message checks plus correct final world attempts/reservations and cross-phase mechanism invariants; no best suffix replacement."
+    },
+    "p3-high-coupling": {
+      "message_denominator": 6,
+      "facts": {
+        "after_shared_update": {
+          "audio": 3,
+          "lighting": 4,
+          "display": 5,
+          "sum": 12,
+          "limit": 10,
+          "shortfall": 2
+        },
+        "final": {
+          "audio": 3,
+          "lighting": 4,
+          "display": 3,
+          "sum": 10,
+          "destination": "bay B-3",
+          "packing": "sealed cases"
+        }
+      },
+      "actions": {
+        "only_at": "combined-action",
+        "reserve_and_label": 3,
+        "complete_label": 0
+      },
+      "invariants": [
+        "All three change on the shared event; no sparse-locality assumption.",
+        "No partial reservation when combined capacity exceeded.",
+        "Only display quantity changes at resolution; final combined action uses all three actual plans."
+      ],
+      "message_checks": {
+        "joint-plan": "Acknowledge original requirements and shared limit without action or contradictory quantities.",
+        "all-changed": "Revised quantities audio3/lighting4/display5, destination bay B-3/packing sealed cases, total12 exceeds10 by2; flag issue, no action. Full explicit enumeration is not required if concise acknowledgement clearly retains the update and correctly flags total/shortfall.",
+        "no-change-read": "List quantities3/4/5, total12 against limit10; no action or modification.",
+        "blocked-combination": "Does not fit; total12 vs10/shortfall2; no partial reservation or unapproved quantity reduction.",
+        "local-resolution": "Only display reduced to3; audio3/lighting4 remain; combined total10 fits limit10 with unchanged B-3/sealed cases; no action.",
+        "combined-action": "Exactly three reserve_and_label: Delta audio packs3, Delta lighting packs4, Delta display packs3, all bay B-3/sealed cases; no fourth action or fabricated dispatch; real results."
+      },
+      "whole_trajectory_pass": "All message checks plus correct final world attempts/reservations and cross-phase mechanism invariants; no best suffix replacement."
+    }
+  },
+  "coverage_plan_section_15_2": {
+    "1": [
+      "p1-interleaved-workshop",
+      "p3-high-coupling"
+    ],
+    "2": [
+      "p1-interleaved-workshop",
+      "p3-shared-scope"
+    ],
+    "3": [
+      "p3-shared-scope",
+      "p3-high-coupling"
+    ],
+    "4": [
+      "p3-shared-scope"
+    ],
+    "5": [
+      "p1-interleaved-workshop",
+      "p3-shared-scope"
+    ],
+    "6": [
+      "p3-reopen-history; logical only, physical archive/reactivation remains unimplemented"
+    ],
+    "7": [
+      "p1-partial-restart; unknown-result live recovery remains separate gap"
+    ],
+    "8": [
+      "all new fixtures have fresh-process/new-session phase boundary"
+    ],
+    "9": [
+      "p3-conflicting-sources",
+      "p3-reopen-history"
+    ],
+    "10": [
+      "new evidence can correct outdated plans; injected wrong/missing State remains separate P4 gap"
+    ],
+    "11": [
+      "p3-conflicting-sources"
+    ],
+    "12": [
+      "p3-high-coupling"
+    ]
+  },
+  "runtime_scripts": {
+    "data/diagnostics/local_state_attention/p3-shared-scope.json": "b34850298dc1b01d36da93f2c1dc076c85fa6e18a23697bfde601dc1f817f31e",
+    "data/diagnostics/local_state_attention/p3-conflicting-sources.json": "ab375216e1109d9cc4f3d14b487573a8bff4b07d7b15ca52f24e03a0fd1b20de",
+    "data/diagnostics/local_state_attention/p3-reopen-history.json": "f367afbd3a301f9ba2fa1cdc4c76f0a4f1de208491371cfd863124b64410cf49",
+    "data/diagnostics/local_state_attention/p3-high-coupling.json": "a68ed59b3f72e53a3a9817c9a5b6933b6b6faf085f7e587bbb94fce1b9a15109"
+  },
+  "per_turn_rule": "Pass requires every requested fact and action invariant; concise acknowledgement need not enumerate facts when the user requests acknowledgement only, but any stated contradiction fails. Extra unsupported business outcome fails. Actions use actual committed arguments/results; cumulative per-session business_calls are deduplicated by journal call ID. Missing/skipped/capacity messages fail and remain in denominator."
+}
