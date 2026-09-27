@@ -8,7 +8,7 @@ from collections.abc import Iterator, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, Literal, cast
 
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 from langchain_core.embeddings import Embeddings
@@ -27,6 +27,7 @@ from langmem import (  # type: ignore[import-untyped]
 )
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
+from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
 from milai_lab.methods.local_state_attention.controller import LocalStateController
 from milai_lab.methods.local_state_attention.history import (
     HISTORY_TOOL_DESCRIPTION,
@@ -123,15 +124,22 @@ def build_agent(
     history_access: HistoryAccess | None = None,
     full_history: bool = False,
     history_summary_controller: HistorySummaryController | None = None,
+    memory_contract: Literal["native", "strict"] = "native",
 ) -> Any:
-    """Use upstream tool schema and instructions without a local memory policy."""
+    """Select the native or strict memory mutation contract for Host tools."""
+    if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
+        raise ValueError("LANGMEM_MEMORY_CONTRACT_UNKNOWN")
+    if memory_contract == "strict" and memory_tools is not None:
+        raise ValueError("LANGMEM_STRICT_CUSTOM_MEMORY_TOOLS_CONFLICT")
     selected_memory_tools: Sequence[BaseTool]
     if memory_tools is None:
-        native_manage = create_manage_memory_tool(namespace=MEMORY_NAMESPACE)
-        selected_memory_tools = (native_manage,
+        owned_manage = (create_manage_memory_tool(namespace=MEMORY_NAMESPACE)
+                        if memory_contract == "native" else
+                        create_strict_manage_memory_tool(namespace=MEMORY_NAMESPACE))
+        selected_memory_tools = (owned_manage,
                                  create_search_memory_tool(namespace=MEMORY_NAMESPACE))
     else:
-        native_manage = None
+        owned_manage = None
         selected_memory_tools = memory_tools
     history_tools: list[BaseTool] = []
     if history_access is not None:
@@ -172,7 +180,7 @@ def build_agent(
                         tool_call_id=call["id"],
                         status="error",
                     )
-            if native_manage is not None and current.tool is native_manage:
+            if owned_manage is not None and current.tool is owned_manage:
                 action = call["args"].get("action", "create")
                 memory_id = call["args"].get("id")
                 if action in {"update", "delete"} and not memory_id:

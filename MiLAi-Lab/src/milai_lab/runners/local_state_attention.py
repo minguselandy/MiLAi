@@ -11,7 +11,7 @@ import subprocess
 import sys
 from dataclasses import replace
 from pathlib import Path
-from typing import Any, TypedDict
+from typing import Any, Literal, TypedDict
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank
@@ -39,6 +39,15 @@ SOURCE_POLICIES = {"all_sources", "focus_sources"}
 EVENTS_ONLY_ARMS = {"global_note_sources", "local_all_sources",
                     "local_lr_sources", "local_lr_history", "local_lru_sources"}
 TURN_END_ARMS = {"local_all", "local_all_sources", "global_note_sources"}
+
+
+def _memory_contract(config: dict[str, Any]) -> Literal["native", "strict"]:
+    value = config.get("memory_contract", "native")
+    if value == "native":
+        return "native"
+    if value == "strict":
+        return "strict"
+    raise ValueError("LSA_MEMORY_CONTRACT_INVALID")
 
 
 def _update_epoch(arm: str, config: dict[str, Any]) -> str:
@@ -140,6 +149,8 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
     return {
         "method": "local_state_attention_p1", "run_id": args.run,
         "arm_id": args.arm, "repeat": args.repeat,
+        "memory_contract": _memory_contract(config),
+        "operator_memory_contract": "native",
         "read_policy": READ_POLICIES.get(args.arm),
         "update_epoch": _update_epoch(args.arm, config),
         "update_policy": (_update_policy(args.arm)
@@ -304,6 +315,7 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
 
 def prepare(args: argparse.Namespace, *, lab_root: Path) -> dict[str, Any]:
     config, script = read_json(args.config), _script(args.script)
+    _memory_contract(config)
     if args.arm not in ARMS:
         raise ValueError("LSA_ARM_UNKNOWN")
     _update_epoch(args.arm, config)
@@ -415,6 +427,7 @@ def run(args: argparse.Namespace, *, lab_root: Path) -> dict[str, Any]:
                                                else None),
                                            local_state_update_epoch=(
                                                _update_epoch(args.arm, config)),
+                                           memory_contract=_memory_contract(config),
                                            history_mode=HISTORY_ARMS.get(args.arm),
                                            history_page_max_bytes=(
                                                config["history"]["page_max_bytes"]
@@ -453,14 +466,16 @@ def run(args: argparse.Namespace, *, lab_root: Path) -> dict[str, Any]:
                         script, args.runtime_root, args.run, args.arm,
                         args.phase, runtime, history_mode="window",
                         history_page_max_bytes=config["history"]["page_max_bytes"],
-                        history_summary_controller=summary_controller)
+                        history_summary_controller=summary_controller,
+                        memory_contract=_memory_contract(config))
             else:
                 result = run_phase(script, args.runtime_root, args.run, args.arm,
                                    args.phase, runtime,
                                    history_mode=HISTORY_ARMS.get(args.arm),
                                    history_page_max_bytes=(
                                        config["history"]["page_max_bytes"]
-                                       if args.arm in HISTORY_ARMS else None))
+                                       if args.arm in HISTORY_ARMS else None),
+                                   memory_contract=_memory_contract(config))
         manifest["phases"][str(args.phase)] = result["status"]
         manifest["outputs"][str(args.phase)] = str(
             (args.runtime_root / f"phase-{args.phase}-result.json").resolve())

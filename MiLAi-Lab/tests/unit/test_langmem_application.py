@@ -164,6 +164,30 @@ def test_phase_resume_and_local_capacity_only_skip_same_session(
         "pending_message"] == "fault"
 
 
+def test_phase_passes_strict_host_contract_without_changing_operator_path(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    script = {"initial_label_available": True, "phases": [{
+        "id": 0, "operator_memory": [], "world_events": [], "messages": [{
+            "message_id": "m0", "user_id": "alice", "session_id": "main",
+            "public_index": 0, "text": "hello"}]}]}
+    selected: list[str] = []
+
+    def build(*_args: Any, **kwargs: Any) -> object:
+        selected.append(kwargs["memory_contract"])
+        return object()
+
+    monkeypatch.setattr(app, "build_agent", build)
+    monkeypatch.setattr(app, "invoke_or_resume_public_message",
+                        lambda *_args: [AIMessage(content="done")])
+    runtime = SimpleNamespace(model=object(), store=object(), checkpointer=object(),
+                              observer=SimpleNamespace(assert_healthy=lambda: None))
+    result = app.run_phase(script, tmp_path, "run", "b1_control", 0, runtime,
+                           memory_contract="strict")
+    assert result["messages"][0]["status"] == "COMPLETED"
+    assert selected == ["strict"]
+
+
 def test_phase_reopens_checkpoint_and_new_session_starts_fresh(tmp_path: Path) -> None:
     script = {"initial_label_available": False, "phases": [
         {"id": index, "operator_memory": [], "world_events": [], "messages": [{

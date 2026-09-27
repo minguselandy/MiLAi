@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import uuid
 from pathlib import Path
@@ -16,6 +17,7 @@ pytest.importorskip("langmem")
 from langchain_core.embeddings import Embeddings
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langchain_core.tools import tool
+from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.prebuilt.tool_node import ToolCallRequest
 from langgraph.store.memory import InMemoryStore
@@ -26,6 +28,7 @@ from milai_lab.baselines.langmem_agent import (
     build_agent,
     invoke_public_message,
 )
+from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
 from milai_lab.harness.contextual_artifacts import write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.history import HistoryAccess
@@ -311,7 +314,10 @@ def test_invalid_arguments_return_tool_error_then_graph_corrects(tmp_path: Path)
             ]
 
 
-def test_native_manage_conditional_ids_return_errors_then_recover(tmp_path: Path) -> None:
+@pytest.mark.parametrize("contract", ["native", "strict"])
+def test_native_manage_conditional_ids_return_errors_then_recover(
+    tmp_path: Path, contract: str,
+) -> None:
     class CountingStore(InMemoryStore):
         def __init__(self) -> None:
             super().__init__()
@@ -351,7 +357,7 @@ def test_native_manage_conditional_ids_return_errors_then_recover(tmp_path: Path
         store = CountingStore()
         with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
             messages = invoke_public_message(
-                build_agent(model, store, saver), model,
+                build_agent(model, store, saver, memory_contract=contract), model,
                 FoundationScope("run", "b0", "user", "episode"), "Remember correctly.")
     results = [message for message in messages if isinstance(message, ToolMessage)]
     assert [result.status for result in results] == ["error", "error", "error", "success"]
@@ -391,7 +397,10 @@ def test_external_manage_name_does_not_get_native_conditions(tmp_path: Path) -> 
     assert results[0].content == "external update"
 
 
-def test_native_manage_store_value_error_is_not_converted(tmp_path: Path) -> None:
+@pytest.mark.parametrize("contract", ["native", "strict"])
+def test_native_manage_store_value_error_is_not_converted(
+    tmp_path: Path, contract: str,
+) -> None:
     class BrokenStore(InMemoryStore):
         def put(self, *_args: Any, **_kwargs: Any) -> None:
             raise ValueError("store write failed")
@@ -409,7 +418,8 @@ def test_native_manage_store_value_error_is_not_converted(tmp_path: Path) -> Non
         with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
             with pytest.raises(ValueError, match="store write failed"):
                 invoke_public_message(
-                    build_agent(model, BrokenStore(), saver), model,
+                    build_agent(model, BrokenStore(), saver,
+                                memory_contract=contract), model,
                     FoundationScope("run", "b0", "user", "episode"), "Remember this.")
 
 
@@ -440,3 +450,199 @@ def test_upstream_manage_search_preserves_public_null_and_id_behavior() -> None:
         f"Deleted memory {unknown_id}"
     )
     assert store.get(namespace, unknown_id) is None
+
+
+def test_agent_native_unknown_update_still_upserts(tmp_path: Path) -> None:
+    unknown_id = str(uuid.uuid4())
+    responses = [
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "update", "id": unknown_id, "content": "proposed memory"}}]}, "update"),
+        _receipt({"answer": "Done."}, "final"),
+    ]
+
+    def respond(_: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=responses.pop(0))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client)
+        store = InMemoryStore()
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            messages = invoke_public_message(
+                build_agent(model, store, saver), model,
+                FoundationScope("run", "native", "user", "episode"), "Update memory.")
+    namespace = ("langmem", "run", "native", "user")
+    assert store.get(namespace, unknown_id).value == {"content": "proposed memory"}
+    receipts = [row for row in messages if isinstance(row, ToolMessage)]
+    assert len(receipts) == 1
+    assert receipts[0].status == "success"
+    assert receipts[0].content == f"updated memory {unknown_id}"
+
+
+def test_agent_strict_rejects_unknown_update_then_accepts_create(tmp_path: Path) -> None:
+    unknown_id = str(uuid.uuid4())
+    namespace = ("langmem", "run", "strict", "user")
+    store = InMemoryStore()
+    store.put(("langmem", "run", "strict", "other"), unknown_id,
+              {"content": "other user's memory"})
+    responses = [
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "update", "id": unknown_id, "content": "proposed memory"}}]}, "update"),
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "create", "content": "valid memory"}}]}, "create"),
+        _receipt({"answer": "Done."}, "final"),
+    ]
+    requests: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(json.loads(request.read()))
+        if len(requests) == 2:
+            assert store.search(namespace) == []
+        return httpx.Response(200, json=responses.pop(0))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client)
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            messages = invoke_public_message(
+                build_agent(model, store, saver, memory_contract="strict"), model,
+                FoundationScope("run", "strict", "user", "episode"), "Update memory.")
+    receipts = [row for row in messages if isinstance(row, ToolMessage)]
+    assert [row.status for row in receipts] == ["error", "success"]
+    assert [json.loads(str(row.content))["status"] for row in receipts] == [
+        "not_found", "created"]
+    assert store.get(namespace, unknown_id) is None
+    assert store.get(("langmem", "run", "strict", "other"), unknown_id).value == {
+        "content": "other user's memory"}
+    assert len(store.search(namespace)) == 1
+    assert len(requests) == 3
+    assert [row["tool_call_id"] for row in requests[1]["messages"]
+            if row["role"] == "tool"] == ["update:tool:0"]
+
+
+@pytest.mark.parametrize("asynchronous", [False, True])
+def test_strict_crud_scope_noop_and_native_parameters(asynchronous: bool) -> None:
+    class CountingStore(InMemoryStore):
+        writes = 0
+        deletes = 0
+
+        def put(self, *args: Any, **kwargs: Any) -> None:
+            self.writes += 1
+            super().put(*args, **kwargs)
+
+        async def aput(self, *args: Any, **kwargs: Any) -> None:
+            self.writes += 1
+            await super().aput(*args, **kwargs)
+
+        def delete(self, *args: Any, **kwargs: Any) -> None:
+            self.deletes += 1
+            super().delete(*args, **kwargs)
+
+        async def adelete(self, *args: Any, **kwargs: Any) -> None:
+            self.deletes += 1
+            await super().adelete(*args, **kwargs)
+
+    store = CountingStore()
+    native = create_manage_memory_tool(namespace=("langmem", "{user_id}"))
+    strict = create_strict_manage_memory_tool(("langmem", "{user_id}"), store)
+    assert (convert_to_openai_tool(native)["function"]["parameters"] ==
+            convert_to_openai_tool(strict)["function"]["parameters"])
+
+    def call(arguments: dict[str, Any], user: str, ordinal: int) -> ToolMessage:
+        payload = {"type": "tool_call", "name": "manage_memory",
+                   "args": arguments, "id": f"call-{ordinal}"}
+        config = {"configurable": {"user_id": user}}
+        return (asyncio.run(strict.ainvoke(payload, config=config)) if asynchronous
+                else strict.invoke(payload, config=config))
+
+    absent = str(uuid.uuid4())
+    missing = call({"action": "update", "id": absent, "content": "proposal"}, "alice", 0)
+    assert missing.status == "error"
+    assert json.loads(str(missing.content)) == {
+        "ok": False, "status": "not_found", "id": absent}
+    assert store.writes == 0
+    created = call({"action": "create", "content": "first"}, "alice", 1)
+    memory_id = json.loads(str(created.content))["id"]
+    assert created.status == "success"
+    assert store.get(("langmem", "alice"), memory_id).value == {"content": "first"}
+    assert store.writes == 1
+    cross_owner = call({"action": "update", "id": memory_id,
+                        "content": "wrong owner"}, "bob", 2)
+    assert cross_owner.status == "error"
+    assert store.writes == 1
+    same = call({"action": "update", "id": memory_id, "content": "first"}, "alice", 3)
+    assert json.loads(str(same.content))["status"] == "no_change"
+    assert store.writes == 1
+    changed = call({"action": "update", "id": memory_id, "content": "second"},
+                   "alice", 4)
+    assert json.loads(str(changed.content))["status"] == "updated"
+    assert store.writes == 2
+    search = create_search_memory_tool(namespace=("langmem", "{user_id}"), store=store)
+    hits = json.loads(search.invoke({"query": "second", "limit": 3},
+                                   config={"configurable": {"user_id": "alice"}}))
+    assert [(hit["key"], hit["value"]) for hit in hits] == [
+        (memory_id, {"content": "second"})]
+    assert json.loads(search.invoke({"query": "second", "limit": 3},
+                                    config={"configurable": {"user_id": "bob"}})) == []
+    deleted = call({"action": "delete", "id": memory_id}, "alice", 5)
+    assert json.loads(str(deleted.content))["status"] == "deleted"
+    assert store.deletes == 1
+    missing_again = call({"action": "delete", "id": memory_id}, "alice", 6)
+    assert missing_again.status == "error"
+    assert store.deletes == 1
+    assert store.get(("langmem", "alice"), memory_id) is None
+
+
+@pytest.mark.parametrize("asynchronous", [False, True])
+def test_strict_store_failures_propagate(asynchronous: bool) -> None:
+    class BrokenStore(InMemoryStore):
+        def get(self, *_args: Any, **_kwargs: Any) -> Any:
+            raise ValueError("store read failed")
+
+        async def aget(self, *_args: Any, **_kwargs: Any) -> Any:
+            raise ValueError("store read failed")
+
+    strict = create_strict_manage_memory_tool(("langmem", "{user_id}"), BrokenStore())
+    payload = {"type": "tool_call", "name": "manage_memory", "id": "call",
+               "args": {"action": "update", "id": str(uuid.uuid4()), "content": "x"}}
+    config = {"configurable": {"user_id": "alice"}}
+    with pytest.raises(ValueError, match="store read failed"):
+        if asynchronous:
+            asyncio.run(strict.ainvoke(payload, config=config))
+        else:
+            strict.invoke(payload, config=config)
+
+    class BrokenDeleteStore(InMemoryStore):
+        def delete(self, *_args: Any, **_kwargs: Any) -> None:
+            raise ValueError("store delete failed")
+
+        async def adelete(self, *_args: Any, **_kwargs: Any) -> None:
+            raise ValueError("store delete failed")
+
+    delete_store = BrokenDeleteStore()
+    memory_id = str(uuid.uuid4())
+    delete_store.put(("langmem", "alice"), memory_id, {"content": "saved"})
+    deleting = create_strict_manage_memory_tool(("langmem", "{user_id}"), delete_store)
+    payload["args"] = {"action": "delete", "id": memory_id}
+    with pytest.raises(ValueError, match="store delete failed"):
+        if asynchronous:
+            asyncio.run(deleting.ainvoke(payload, config=config))
+        else:
+            deleting.invoke(payload, config=config)
+    assert delete_store.get(("langmem", "alice"), memory_id) is not None
+
+
+def test_strict_conflicts_with_external_memory_tools(tmp_path: Path) -> None:
+    @tool
+    def manage_memory(action: str) -> str:
+        """An external memory tool."""
+        return action
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock")) as client:
+        model = VLLMChatModel(client=client)
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            with pytest.raises(ValueError, match="LANGMEM_STRICT_CUSTOM_MEMORY_TOOLS_CONFLICT"):
+                build_agent(model, InMemoryStore(), saver, memory_tools=[manage_memory],
+                            memory_contract="strict")

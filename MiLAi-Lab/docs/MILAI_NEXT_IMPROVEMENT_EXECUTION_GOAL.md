@@ -50,8 +50,8 @@ PR合并仍须正常检查和审阅闭环，当前不自动merge；先完成可�
 | 工作包/门槛 | 必需完成及权威证据 | 当前状态 |
 | --- | --- | --- |
 | WP0/C0/G0 | 同命令main/PR隔离复现；静态源码—依赖—测试归属无遗漏；core/foundation/external真实依赖；锁定pytest运行71纯协议及原集成、实际收集数；全Ruff、适用Mypy、边界/归档、最终wheel/sdist；真实CI | G0_PASSED（声明的历史资产skip不算通过） |
-| WP1/C1/X0 | 保留protocol/controller分工；CLI职责归包内且单实现；活动AGENTS与历史分开且原内容可恢复；完整请求/顺序/U维护A/来源/pending/容量/回执/trace等价，规范化项明确 | IN_PROGRESS |
-| WP2/C2/G1 | 锁定上游实际集成复现未知合法UUID被upsert；薄严格CRUD同步/异步一致；已有/缺失/错误namespace/message UUID/空删除/真实删除/Store异常/无副作用回执；不强制每次额外Host READ，不声称CAS | NOT_DONE |
+| WP1/C1/X0 | 保留protocol/controller分工；CLI职责归包内且单实现；活动AGENTS与历史分开且原内容可恢复；完整请求/顺序/U维护A/来源/pending/容量/回执/trace等价，规范化项明确 | ACCEPTED；C1本地检查/最终构建与实际Fast已通过 |
+| WP2/C2/G1 | 锁定上游实际集成复现未知合法UUID被upsert；薄严格CRUD同步/异步一致；已有/缺失/错误namespace/message UUID/空删除/真实删除/Store异常/无副作用回执；不强制每次额外Host READ，不声称CAS | LOCAL_ACCEPTED（CRUD工程）；C2远端及在线语义待验证 |
 | WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | NOT_RUN |
 | WP4/C5/X3/X4/G2 | 明确A≠U且U空可CREATE；保留原问题实体、全读/普通检索/同State查询增强/可关selector；固定同bank与前态比较all/U/U=A/oracle；对真正使用引用做有限失效，不引全库图 | NOT_DONE |
 | WP5/C4/X2 | 同粒度整体/普通patch/候选局部维护；明确目标版本/唯一片段，广泛变动可整体；更新与无关保持同时测；D0/真实事件身份/部分成功维护续接保留 | NOT_DONE |
@@ -153,3 +153,18 @@ Astra只读分析了WP3的具体冲突：Host普通memory与控制器State是两
 需要立即结果的边界路径返回真实提交结果，所有新增调用与原提案保留计费。
 **该设计未实施；共同操作入口不能混入C2首次仅补存在性/回执的修复。**
 先完成C2，再选择一个第二次增量和一个无变化反例的最小条件比较；正例后还须验证真实动作。
+
+### C1完成与C2开始
+
+C1最终内容为`0d04ca68d0e575919773c24b764c3c0b1832de7e`。发布预检发现新文件EOF空白，
+原本地提交`9bc3c9fe74cf6072025e3f205904d85dd66c2b86`保留，后续只去除一个换行字节且AST相同。
+最终必要构建通过：wheel `b968f3183fdb4b47ec08526e1a50f58cdb47566da892a16f5eee5796584cd552`；
+sdist `db650a7bb4c4d173d2cdc0ce4382dff12745567535decec211875b4fe0a134f4`。
+源码/请求差分归属与首轮构建保留，已发布[PR53](https://github.com/minguselandy/MiLAi/pull/53)，Root核对远端head一致；
+其Fast36328343542及最终gate108646972066均已通过，按新head独立验证。PR53保持draft，main与原PR不变。
+
+独立C2分支`fix/lab-strict-memory-contract-20260927`已开始。
+[WP2合同记录](MILAI_NEXT_IMPROVEMENT_WP2_STRICT_CRUD_20260927.md)列出首断点、
+模型身份混淆与集成upsert两种解释及最小可选严格接口；102项相关检查和必要静态/边界通过，
+C2本地工程验收通过，尚未开始在线语义验证。
+现有服务只读GET核实7860为Qwen3.6-35B-A3B-FP8/65536，7861为bge-m3；没有推理或部署。

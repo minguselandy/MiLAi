@@ -2208,6 +2208,8 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         config_value["source_view_max_bytes"] = 16384
     if arm == "local_lr_history":
         config_value["history"] = {"enabled": True, "page_max_bytes": 16384}
+    if arm == "local_all_sources":
+        config_value["memory_contract"] = "strict"
     config.write_text(json.dumps(config_value))
     root = tmp_path / "runtime"
     args = SimpleNamespace(config=config, script=script, run="mock-run", arm=arm,
@@ -2249,6 +2251,7 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         called.append(args_[-1].maintenance_only)
         called.append(kwargs["history_mode"])
         called.append(kwargs["history_page_max_bytes"])
+        called.append(kwargs["memory_contract"])
         called.append((args_[-1].bank.max_states,
                        args_[-1].bank.max_state_content_chars,
                        args_[-1].bank.max_total_content_chars))
@@ -2276,6 +2279,7 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
                               "local_lr_sources", "local_lr_history", "local_lru_sources"},
                       "tool" if arm == "local_lr_history" else None,
                       16384 if arm == "local_lr_history" else None,
+                      "strict" if arm == "local_all_sources" else "native",
                       expected_limits]
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
@@ -2286,6 +2290,9 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         assert source_hashes[path] == entry.runner._sha(entry.LAB / path)
     assert manifest["identity"]["rubric_read_by_runner"] is False
     assert manifest["identity"]["read_policy"] == read_policy
+    assert manifest["identity"]["memory_contract"] == (
+        "strict" if arm == "local_all_sources" else "native")
+    assert manifest["identity"]["operator_memory_contract"] == "native"
     assert manifest["identity"]["representation"] == (
         "global_note" if arm == "global_note_sources" else "local")
     assert manifest["identity"]["local_granularity"] == (
@@ -2359,6 +2366,7 @@ def test_cli_full_history_uses_no_state_controller_and_requires_opt_in(
     with pytest.raises(ValueError, match="LSA_HISTORY_POLICY_INVALID"):
         entry.prepare(args)
     config_value["history"] = {"enabled": True, "page_max_bytes": 16384}
+    config_value["memory_contract"] = "strict"
     config.write_text(json.dumps(config_value))
     entry.prepare(args)
     called: list[Any] = []
@@ -2371,19 +2379,21 @@ def test_cli_full_history_uses_no_state_controller_and_requires_opt_in(
 
     def phase(*args_: Any, **kwargs: Any) -> dict[str, Any]:
         assert len(args_) == 6
-        called.extend([kwargs["history_mode"], kwargs["history_page_max_bytes"]])
+        called.extend([kwargs["history_mode"], kwargs["history_page_max_bytes"],
+                       kwargs["memory_contract"]])
         return {"status": "TERMINAL"}
 
     monkeypatch.setattr(entry.runner, "open_application_runtime", runtime)
     monkeypatch.setattr(entry.runner, "run_phase", phase)
     assert entry.run(args)["status"] == "TERMINAL"
-    assert called == [False, "full", 16384]
+    assert called == [False, "full", 16384, "strict"]
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["identity"]["history_auto_projection"] is True
     assert manifest["identity"]["read_history_tool"] is True
     assert manifest["identity"]["maintenance_input_policy"] is None
     assert manifest["identity"]["update_policy"] is None
     assert manifest["identity"]["representation"] == "full_history"
+    assert manifest["identity"]["memory_contract"] == "strict"
 
 
 def test_cli_window_summary_binds_config_and_uses_shared_control_budget(
@@ -2410,7 +2420,8 @@ def test_cli_window_summary_binds_config_and_uses_shared_control_budget(
                 "control": {"max_tokens": 2048, "max_calls_per_message": 13},
                 "history": {"enabled": True, "page_max_bytes": 16384,
                             "window_completed_turns": 2,
-                            "summary_content_max_chars": 16000}}
+                            "summary_content_max_chars": 16000},
+                "memory_contract": "strict"}
     config.write_text(json.dumps(settings))
     root = tmp_path / "runtime"
     args = SimpleNamespace(config=config, script=script, run="mock-run",
@@ -2447,7 +2458,8 @@ def test_cli_window_summary_binds_config_and_uses_shared_control_budget(
                       kwargs["history_page_max_bytes"],
                       summary.max_calls_per_message,
                       summary.window_completed_turns,
-                      summary.summary_content_max_chars))
+                      summary.summary_content_max_chars,
+                      kwargs["memory_contract"]))
         return {"status": "TERMINAL"}
 
     monkeypatch.setattr(entry.runner, "open_application_runtime", runtime)
@@ -2455,7 +2467,7 @@ def test_cli_window_summary_binds_config_and_uses_shared_control_budget(
     monkeypatch.setattr(entry.runner, "run_phase", phase)
     assert entry.run(args)["status"] == "TERMINAL"
     assert calls == [("projection", False), ("client", 2048, budget, capacity),
-                     ("phase", "window", 16384, 13, 2, 16000)]
+                     ("phase", "window", 16384, 13, 2, 16000, "strict")]
     identity = json.loads((root / "run_manifest.json").read_text())["identity"]
     assert identity["representation"] == "window_summary"
     assert identity["history_window_summary"] is True
@@ -2464,6 +2476,7 @@ def test_cli_window_summary_binds_config_and_uses_shared_control_budget(
         "role": "state_control", "control_stage": "history_summary",
         "max_tokens": 2048, "max_calls_per_message": 1}
     assert identity["maintenance_input_policy"] is None
+    assert identity["memory_contract"] == "strict"
 
 
 def test_missing_aggregate_setting_preserves_existing_local_capacity(

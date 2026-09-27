@@ -1,0 +1,85 @@
+{
+  "kind": "MILAI_NEXT_WP2_STRICT_CRUD_RESULTS",
+  "status": "LOCAL_ENGINEERING_ACCEPTED_REMOTE_CI_PENDING",
+  "base_commit": "0d04ca68d0e575919773c24b764c3c0b1832de7e",
+  "contracts": {
+    "default": "native",
+    "candidate": "strict",
+    "operator_memory": "native",
+    "custom_memory_tools_with_strict": "configuration conflict",
+    "model_visible_parameter_schema": "equal to native",
+    "description_and_receipt": "deliberately changed strict behavior identity",
+    "no_change": "existing content equal, no put",
+    "missing_update_delete": "ToolMessage error/not_found, no mutation",
+    "store_failures": "propagate",
+    "concurrency": "read-before-write only, no CAS"
+  },
+  "checks_receipt_sha256": "07f7f64879e5ed98f677db22bd06f7a8ad978bc0fe6422823dc3eb97d8bdcd18",
+  "source_sha256": {
+    "src/milai_lab/baselines/langmem_strict_tools.py": "f18ea64898cdc041bdb9128bb5a0baccffc22e3070d73714b64b2f3b95aa5125",
+    "src/milai_lab/baselines/langmem_agent.py": "a8e9f2cf700d7a2bc5557f00102d946408fcfd0dceebc6ab4698d9828699f676",
+    "src/milai_lab/runners/langmem_application.py": "85a152f61324b42148ba4340e122a90b0e6a72c4dafd77c6bb6af10975354684",
+    "src/milai_lab/runners/local_state_attention.py": "323329c03a8ed6b387f4dc25e1754b340831c83a695d6b6b38068246db707105",
+    "tests/unit/test_langmem_foundation.py": "5c97f8b585e31c1b56ddb5fadffa254bc3512db4b07890fefdfb143900abb893",
+    "tests/unit/test_langmem_application.py": "91d75c00ab930a493b6d67d26447d9a03b666722349300cd0d4cd99cef45733a",
+    "tests/unit/test_local_state_attention.py": "bd9edc20bd617fe65393b9e77597e7527361e83809292dd2c277837c76f4de7a"
+  },
+  "checks": [
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_langmem_foundation.py::test_agent_native_unknown_update_still_upserts",
+      "result": "1 passed"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_langmem_foundation.py -k 'strict or agent_native_unknown_update_still_upserts or conditional_ids or store_value_error'",
+      "result": "11 passed, 10 deselected"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_langmem_foundation.py tests/unit/test_langmem_application.py tests/unit/test_local_state_attention.py",
+      "result": "102 passed"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_langmem_foundation.py::test_strict_crud_scope_noop_and_native_parameters",
+      "result": "2 passed after SEARCH assertion"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/ruff check src/milai_lab/baselines/langmem_strict_tools.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/langmem_application.py src/milai_lab/runners/local_state_attention.py tests/unit/test_langmem_foundation.py tests/unit/test_langmem_application.py tests/unit/test_local_state_attention.py",
+      "result": "pass"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/mypy --follow-imports=silent src/milai_lab/baselines/langmem_strict_tools.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/langmem_application.py src/milai_lab/runners/local_state_attention.py",
+      "result": "pass, 4 files"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python tools/check_verification_matrix.py",
+      "result": "pass, 146 active sources, 38 foundation explicit"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/milai-lab-check-boundary && artifacts/next-improvement/envs/foundation/bin/milai-lab-check-tools-boundary",
+      "result": "both pass"
+    },
+    {
+      "command": "git diff --check; Python EOF/whitespace assertion on new strict module",
+      "result": "both pass"
+    }
+  ],
+  "retained_failure": "new application mock initially lacked observer.assert_healthy; mock corrected, target 1 passed",
+  "not_run": [
+    "new real model semantic evaluation",
+    "local package rebuild",
+    "remote C2 CI at record freeze"
+  ],
+  "runtime_test_boundary": "MockTransport with real local SQLite checkpoints/synthetic business world and InMemoryStore; no shared PostgreSQL or real model HTTP",
+  "experiment_delta": {
+    "generation_calls": 0,
+    "generation_tokens": 0,
+    "embedding_tokens": 0
+  },
+  "continuous_ledger": {
+    "generation_calls": 2768,
+    "generation_tokens": 3420333,
+    "embedding_tokens": 18746,
+    "sha256": "a9d4c681e2bee395c170a4672b4895a442522df47951c9a043e9f6b3a32e3580"
+  },
+  "decision": "CONTINUE_SMALL_FROZEN_DIAGNOSTICS; tool rejection is not semantic correctness",
+  "research_goal_complete": false
+}

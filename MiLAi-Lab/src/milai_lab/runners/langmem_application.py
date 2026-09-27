@@ -10,7 +10,7 @@ import time
 import uuid
 from collections.abc import Callable
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, Literal, cast
 
 from langchain_core.messages import AIMessage
 from langmem import create_manage_memory_tool  # type: ignore[import-untyped]
@@ -298,6 +298,7 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               history_page_max_bytes: int | None = None,
               history_summary_controller: HistorySummaryController | None = None,
               local_state_update_epoch: str = "pre_model",
+              memory_contract: Literal["native", "strict"] = "native",
               ) -> dict[str, Any]:
     """Run one frozen phase; the next invocation reopens every process-owned resource."""
     phase = script["phases"][phase_id]
@@ -315,6 +316,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
         raise ValueError("APPLICATION_PHASE_OUT_OF_ORDER")
     if history_mode not in {None, "full", "tool", "window"}:
         raise ValueError("APPLICATION_HISTORY_MODE_INVALID")
+    if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
+        raise ValueError("LANGMEM_MEMORY_CONTRACT_UNKNOWN")
     if (history_mode == "window") != (history_summary_controller is not None):
         raise ValueError("APPLICATION_HISTORY_SUMMARY_MISMATCH")
     if local_state_update_epoch not in {"pre_model", "turn_end"}:
@@ -390,7 +393,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                                     full_history=history_mode == "full",
                                     history_summary_controller=(
                                         history_summary_controller
-                                        if history_mode == "window" else None))
+                                        if history_mode == "window" else None),
+                                    memory_contract=memory_contract)
                 agents[user_id] = agent
             pending = progress["pending_message"] == message_id
             progress["pending_message"] = message_id
