@@ -1,6 +1,8 @@
 # WP4：固定bank的读取与固定前态的更新选择
 
-状态：输入/设计准备中，尚未实现最终合同、冻结或运行。依据[计划§7](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)。
+状态：**PAUSED / NOT_RUN**。用户已明确停止实验，实际Goal已暂停；以下设计不是恢复授权。
+暂停前仅有输入/设计准备与两处未验证源码修改，尚未完成最终合同、源码/工具/执行冻结或运行。
+依据[计划§7](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)，终态见[总体报告](MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md)。
 不把旧P2首响应诊断改称本轮完整A/U结果；输入源与原哈希继续保留。
 
 ## 首断点与竞争解释
@@ -68,3 +70,15 @@ turn_end旧正文仍按原快照交付，反馈作为旁边状态信息，不重
 若进行提醒对照，另冻结已提交UPDATE与CREATE两种续接的开/关，费用/提示差异单列，
 不把提醒收益算成U维护收益。X5才评价重读、判断更新、实际行动与总费用。
 这限定完成机械失效准确/真实交付/快照保持的工程义务，语义采用、充分性及稳定收益仍未证明。
+
+## 立即暂停时的实际保留项
+
+开发树`MiLAi-worktrees/next-improvement`的`feat/lab-state-selection-20260928`分支仍以cf1588a为HEAD。
+Sol只改了`protocol.py`的共同读取selector提示/载荷函数和`controller.py`的调用接线；没有完成C5实现，
+没有运行相关局部检查、prepare或真实模型调用。两处修改留在本地未提交，不进入本次报告分支。
+
+Root准备了read-selection和update-selection两个目录，各含inputs/config/rubric，共六份未跟踪JSON。
+这些输入字节已登记哈希，但源码、schema和执行identity未冻结；不能称为已冻结可执行实验。
+六份文件原地保留、不随报告发布，身份见[暂停清单](../data/manifests/next-improvement-overall-results-20260928.json)。
+交付版本反馈只有有界设计，所列工程检查和语义对照都未运行。X5生命周期草案也未冻结、未运行。
+自C4结束以来新增generation/embedding为0；不以这份草案或任何历史ACTIVE文字恢复工作。

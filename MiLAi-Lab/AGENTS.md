@@ -2,15 +2,19 @@
 
 ## Current scope and authority
 
-The user activated the [next improvement plan v1.0](docs/MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md).
-Follow the [current execution record](docs/MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md) and the actual
-Goal state. The plan's original planning-only wording and older pauses do not override that
-explicit activation. The full WP0–WP7 / X0–X5 scope remains open; green CI is only an engineering gate.
+Latest user instruction: **pause the current experiment, generate an experiment summary, and
+publish it to GitHub.** The actual Goal was set to `paused` at 2026-09-27 17:41:51 UTC
+(2026-09-28 01:41:51 Asia/Shanghai). This immediate stop supersedes the earlier instruction to
+finish the activated plan before pausing. Only Root's closeout documents and Luna high's Git
+publication remain authorized; do not continue development, experiments, downloads or deployment.
 
-Latest user closeout instruction: **after the current authorized task ends, pause the actual Goal,
-produce an overall experiment report, and publish it to GitHub through Luna high.** This is not
-an instruction to pause midway or mark the broader research complete. Any new explicit stop
-overrides an older ACTIVE record. A paused Goal never resumes merely because a document says ACTIVE.
+The [next improvement plan v1.0](docs/MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md) remains unfinished.
+Follow the [current execution record](docs/MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md), the actual Goal
+state and the [overall experiment report](docs/MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md).
+C5 has two unverified local source edits and six untracked input/config/rubric files: preserve
+them in the original development worktree, without committing or treating them as accepted code.
+Green CI is only an engineering gate. A paused Goal never resumes because a document says ACTIVE;
+new explicit user instruction is required to resume the unfinished plan.
 
 The exact former AGENTS content is preserved at
 [the historical instruction snapshot](AGENTS_HISTORY_PRE_WP1_20260927.md), in the same directory

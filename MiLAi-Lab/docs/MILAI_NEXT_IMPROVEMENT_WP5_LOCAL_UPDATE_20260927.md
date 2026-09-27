@@ -138,3 +138,11 @@ State种子index=false，trace确无embedding，不是漏记后补零。Store读
 复现使用该commit的`tools/run_state_update_probe.py prepare/run-job`、公开inputs/config、原ledger绝对路径，
 注入ignored DSN，新隔离run/namespace，四job原顺序串行且每个只一次提案。rubric不进入运行时。
 原失败attempt不可重放替换；新合同或重试预算需独立冻结并披露曝光。
+
+## 收尾时远端核实与暂停
+
+Root只读核实C4 5874ca4的[Fast36336941840](https://github.com/minguselandy/MiLAi/actions/runs/36336941840)
+和最终gate108671892705均成功；实际CI组合8462a6daccf9d3b604e63b834abcbe1dbaabe79d。
+core5114 passed/142 skipped/14 deselected，foundation196 passed/1 deselected，external与必要分发构建成功。
+声明的Product/Archive/tree-identity跳过项不计通过。本报告四条真实结果不变，不追加patch变体。
+用户已明确暂停实验，实际Goal为paused；[总体报告](MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md)记录未完成项与连续账本。

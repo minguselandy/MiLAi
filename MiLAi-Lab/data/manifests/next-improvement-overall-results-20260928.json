@@ -1,0 +1,471 @@
+{
+  "kind": "MILAI_NEXT_IMPROVEMENT_PAUSED_OVERALL_RESULTS",
+  "remote_ci": {
+    "checked_at_utc": "2026-09-27 17:54:11 UTC",
+    "runs": [
+      {
+        "pr": 58,
+        "head": "5874ca4ffbf7c08cfb8c4bf8f3108c9b9700696c",
+        "run_id": 36336941840,
+        "url": "https://github.com/minguselandy/MiLAi/actions/runs/36336941840",
+        "tested_merge_commit": "8462a6daccf9d3b604e63b834abcbe1dbaabe79d",
+        "read_only_verified": true,
+        "core": {
+          "passed": 5114,
+          "skipped": 142,
+          "deselected": 14,
+          "wheel_sdist_built": true
+        },
+        "foundation": {
+          "passed": 196,
+          "deselected": 1,
+          "command_summaries": [
+            "2026-09-27T17:27:47.0616264Z 21 passed, 16 warnings in 3.40s",
+            "2026-09-27T17:27:57.1195563Z 88 passed, 29 warnings in 4.26s",
+            "2026-09-27T17:28:02.8211882Z 7 passed, 1 warning in 1.65s",
+            "2026-09-27T17:28:09.3371760Z 6 passed, 5 warnings in 2.16s",
+            "2026-09-27T17:28:17.1378877Z 16 passed, 15 warnings in 3.34s",
+            "2026-09-27T17:28:23.9126333Z 12 passed, 2 warnings in 1.97s",
+            "2026-09-27T17:28:51.9895643Z 46 passed, 1 deselected, 36 warnings in 8.08s"
+          ]
+        },
+        "jobs": [
+          {
+            "id": 108669484660,
+            "name": "Classify changed paths",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108669511193,
+            "name": "Fail-fast source boundaries",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108669538699,
+            "name": "Lab LangMem foundation fast gate",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108669538741,
+            "name": "Lab fast gate",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108669538757,
+            "name": "Product identity manifest",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108669538770,
+            "name": "Lab locked external adapter fast gate",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108669539701,
+            "name": "Product integration fast gate (${{ matrix.package }})",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "id": 108669539898,
+            "name": "Product Runtime fast gate",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "id": 108669539912,
+            "name": "Archive validation",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "id": 108669539915,
+            "name": "Tested PR tree identity",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "id": 108669562397,
+            "name": "Current implementation conformance receipt",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108671892705,
+            "name": "Fast verification gate",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "pr": 59,
+        "head": "cf1588ab3f1d1fe8105f3f239cb56f1151e8f5bc",
+        "run_id": 36337502319,
+        "url": "https://github.com/minguselandy/MiLAi/actions/runs/36337502319",
+        "tested_merge_commit": "3594eef1f06f5c2ef41bae5335ee868f0b73070b",
+        "read_only_verified": true,
+        "core": {
+          "passed": 5114,
+          "skipped": 142,
+          "deselected": 14,
+          "wheel_sdist_built": true
+        },
+        "foundation": {
+          "passed": 198,
+          "deselected": 1,
+          "command_summaries": [
+            "2026-09-27T17:36:22.5374849Z 23 passed, 17 warnings in 2.75s",
+            "2026-09-27T17:36:29.1557133Z 88 passed, 29 warnings in 3.51s",
+            "2026-09-27T17:36:32.7586064Z 7 passed, 1 warning in 1.18s",
+            "2026-09-27T17:36:36.6060793Z 6 passed, 5 warnings in 1.46s",
+            "2026-09-27T17:36:41.6791948Z 16 passed, 15 warnings in 2.62s",
+            "2026-09-27T17:36:45.3739422Z 12 passed, 2 warnings in 1.19s",
+            "2026-09-27T17:37:08.4781159Z 46 passed, 1 deselected, 36 warnings in 12.23s"
+          ]
+        },
+        "jobs": [
+          {
+            "id": 108671057079,
+            "name": "Classify changed paths",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108671075929,
+            "name": "Fail-fast source boundaries",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108671106527,
+            "name": "Product identity manifest",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108671106533,
+            "name": "Lab LangMem foundation fast gate",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108671106540,
+            "name": "Lab fast gate",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108671106552,
+            "name": "Lab locked external adapter fast gate",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108671107402,
+            "name": "Product Runtime fast gate",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "id": 108671107436,
+            "name": "Archive validation",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "id": 108671107439,
+            "name": "Product integration fast gate (${{ matrix.package }})",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "id": 108671107610,
+            "name": "Tested PR tree identity",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "id": 108671128082,
+            "name": "Current implementation conformance receipt",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 108672382540,
+            "name": "Fast verification gate",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "PAUSED",
+  "paused_at_utc": "2026-09-27T17:41:51Z",
+  "paused_at_asia_shanghai": "2026-09-28T01:41:51+08:00",
+  "authority": "User explicitly requested immediate experiment pause, an experiment summary, and GitHub publication; this supersedes the earlier finish-plan-then-pause instruction.",
+  "goal_objective": "详细阅读并执行/cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md",
+  "goal_complete": false,
+  "scope": "MiLAi-Lab / RESEARCH_PROTOTYPE",
+  "product": "NO-GO",
+  "report": "docs/MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md",
+  "main_commit": "9515017a5dfaba6b6e306fa778fd20f4383b6e35",
+  "published_method_head": "cf1588ab3f1d1fe8105f3f239cb56f1151e8f5bc",
+  "publication": {
+    "report_worktree": "MiLAi-worktrees/next-improvement-closeout",
+    "branch": "docs/lab-next-improvement-pause-20260928",
+    "base_branch": "fix/lab-strict-memory-content-20260928",
+    "mode": "Luna high commit/push and stacked draft PR; no merge or old PR closure",
+    "self_commit": "Use containing Git commit; no self-referential hash."
+  },
+  "cost": {
+    "continuous_before": {
+      "generation_calls": 2768,
+      "generation_tokens": 3420333,
+      "embedding_tokens": 18746,
+      "sha256": "a9d4c681e2bee395c170a4672b4895a442522df47951c9a043e9f6b3a32e3580"
+    },
+    "batches": [
+      {
+        "name": "WP6 first responses",
+        "generation_calls": 6,
+        "generation_tokens": 7605,
+        "embedding_tokens": 0
+      },
+      {
+        "name": "WP6 actual continuation",
+        "generation_calls": 6,
+        "generation_tokens": 8846,
+        "embedding_tokens": 327
+      },
+      {
+        "name": "C3b full writer-policy turns",
+        "generation_calls": 15,
+        "generation_tokens": 42578,
+        "embedding_tokens": 200
+      },
+      {
+        "name": "C4 one-proposal State maintenance",
+        "generation_calls": 4,
+        "generation_tokens": 7142,
+        "embedding_tokens": 0
+      }
+    ],
+    "increment": {
+      "generation_calls": 31,
+      "generation_tokens": 66171,
+      "embedding_tokens": 527
+    },
+    "continuous_after": {
+      "generation_calls": 2799,
+      "generation_tokens": 3486504,
+      "embedding_tokens": 19273,
+      "generation_unknown_usage": 0,
+      "embedding_unknown_usage": 0,
+      "sha256": "bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6"
+    },
+    "ledger_path": "MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sealed_history_unchanged": true,
+    "judge_calls": 0,
+    "c5_generation_embedding_calls": 0,
+    "developer_agent_cost_included": false,
+    "failed_retries_seed_embedding_preserved": true,
+    "embedding_split": {
+      "wp6_seed_restore": 327,
+      "c3b_seed": 150,
+      "c3b_runtime_update": 50
+    },
+    "scope_limit": "Not monetary/GPU cost or a complete lifecycle cost measurement."
+  },
+  "semantic_results": [
+    {
+      "phase": "WP6 presentation plus continuation",
+      "first_response_commit": "93cb3e9cb405c97d52bc807b54f532b2a5b489f3",
+      "continuation_commit": "ec34c89d96ecbf6030777b8b23c5dc9773d27ac4",
+      "exposed_arcs": 2,
+      "conditional_trajectories": 6,
+      "strict": {
+        "passed": 1,
+        "denominator": 6
+      },
+      "actual_business_execution": 6,
+      "failed_proposals_persisted": 5,
+      "decision": "Pivot title-only repair; raw_sources is a composite treatment, not pure State removal."
+    },
+    {
+      "phase": "C3b writer policy",
+      "method_commit": "07aaa3cfc0bec3f914df00a614812aafec967b41",
+      "exposed_arcs": 1,
+      "prefixes": 2,
+      "full_turns": 6,
+      "strict_by_policy": {
+        "host_both": [
+          2,
+          2
+        ],
+        "boundary_both": [
+          1,
+          2
+        ],
+        "overlap": [
+          2,
+          2
+        ]
+      },
+      "decision": "Retain Host double-write/overlap as candidates; correct null-content contract separately; no lifecycle advantage claim."
+    },
+    {
+      "phase": "C4 local update",
+      "method_commit": "5874ca4ffbf7c08cfb8c4bf8f3108c9b9700696c",
+      "exposed_arcs": 1,
+      "constructed_prefixes": 2,
+      "one_proposal_diagnostics": 4,
+      "maintenance_by_contract": {
+        "replace": [
+          2,
+          2
+        ],
+        "patch_or_replace": [
+          1,
+          2
+        ]
+      },
+      "decision": "Pivot default patch advantage; retain optional interface; no new variants. Not full Host task score."
+    },
+    {
+      "phase": "strict content followup",
+      "method_commit": "cf1588ab3f1d1fe8105f3f239cb56f1151e8f5bc",
+      "engineering": "Accepted zero-model reproduction and narrow checks; actual CI successful. Native parameter schema unchanged.",
+      "real_model_calls": 0,
+      "old_results_replaced": false
+    }
+  ],
+  "unfinished": {
+    "WP4_C5_X3_X4_G2": "PAUSED / NOT_DONE / NOT_RUN",
+    "delivered_version_feedback": "design only; not implemented or tested",
+    "WP3_lifecycle": "NOT_DONE",
+    "WP7": "NOT_DONE",
+    "X5_G3_C6": "NOT_RUN; ignored design not frozen",
+    "G4": "NOT_TRIGGERED",
+    "second_independent_model_family": "NOT_RUN",
+    "stable_unseen_benefit": "NOT_PROVEN"
+  },
+  "wip": {
+    "worktree": "MiLAi-worktrees/next-improvement",
+    "branch": "feat/lab-state-selection-20260928",
+    "head": "cf1588ab3f1d1fe8105f3f239cb56f1151e8f5bc",
+    "source_checks_run": false,
+    "executable_protocol_frozen": false,
+    "preserved_locally": true,
+    "published_in_closeout": false,
+    "files": [
+      {
+        "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/controller.py",
+        "git_status": " M",
+        "sha256": "45211ea522331d4f79a033f1562210fead6b658016eef084372ea32fb919530a"
+      },
+      {
+        "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/protocol.py",
+        "git_status": " M",
+        "sha256": "756ad59966e8a91483103c9987b6190217208ae4cadf234cb99fe8d68d0e3442"
+      },
+      {
+        "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-read-selection-r1/config.json",
+        "git_status": "??",
+        "sha256": "01ab442d8ae082c0ff02d48af37fb90d77adb3c0a12a8c95b1f35d77927c7070"
+      },
+      {
+        "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-read-selection-r1/inputs.json",
+        "git_status": "??",
+        "sha256": "0fe3c753207c303a77f5bc17be1863730a7015f7a64cd102d4945f5e07afa060"
+      },
+      {
+        "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-read-selection-r1/rubric.json",
+        "git_status": "??",
+        "sha256": "800b41ecec2f162a8a0940da83ebfedf545207351b03eab7646b5993b6823070"
+      },
+      {
+        "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-update-selection-r1/config.json",
+        "git_status": "??",
+        "sha256": "618bb4e574df74841e3793dbcff7bdbdccbca56562eb8f031297e30c9c1851fa"
+      },
+      {
+        "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-update-selection-r1/inputs.json",
+        "git_status": "??",
+        "sha256": "79a0def7065e355a850b7551718e3e036333de86ff78b3fa3489007cbf226827"
+      },
+      {
+        "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-update-selection-r1/rubric.json",
+        "git_status": "??",
+        "sha256": "f968eac22bbb6c4d50b1c775001ff6c90ad51c7043cdbd518613833482cce3b0"
+      }
+    ]
+  },
+  "privacy": "Raw private traces, DSN/credentials, databases, environments, assets/caches and build products excluded. Old v27 untracked draft preserved locally.",
+  "reproduction_limit": "WP6 actual continuation requires ignored original actual first-response artifacts; public summaries alone do not supply byte-identical replay.",
+  "evidence": [
+    {
+      "path": "docs/MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md",
+      "sha256": "e407a8ac577b2fb184b6e4386efb79536bcf75007252c8006e96eb296fa3cbbb"
+    },
+    {
+      "path": "docs/MILAI_LSA_REVIEW_OVERALL_EXPERIMENT_REPORT_20260927.md",
+      "sha256": "2a2b52edc9086997caa1ce37bba7c1b6869bd0d3cf4f35ea3f4914ee7c059433"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp6-presentation-freeze-20260927.json",
+      "sha256": "e7db3db193c1bf76cd73720953f08c523b38f606440b8b163d8b16aebdc9286e"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp6-presentation-results-20260927.json",
+      "sha256": "722bbdf958cd12090403d50bb98d22d89822cef8784303603f8c0f1888ced24d"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp6-continuation-checks-20260928.json",
+      "sha256": "bad277dd3329926be49c3afa13185ac48477ae39db1c3193e3c64f88dd44a2f4"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp6-continuation-freeze-20260928.json",
+      "sha256": "fae5f6ed2712fc87fe182486df270a1d57c84d91f09670e76b66d9ba7eb51912"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp6-continuation-results-20260928.json",
+      "sha256": "0d6e28bc38f438f39bdfc9762321581910f2af719a88e5f4c0d83909fb706ba1"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp3-writer-policy-checks-20260928.json",
+      "sha256": "c90e66803984f4aa15840f096025acfd3ddb683556c7c04fbfb36bec991cddb4"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp3-writer-policy-freeze-20260928.json",
+      "sha256": "3fdf37be3a7ee19e1b2894fb82ac606a5cff216c14289aa76267f7595f28d5f0"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp3-writer-policy-results-20260928.json",
+      "sha256": "ecbbdd8c103875280deda9f10643ef310a30abe6ebe568c7f7f31dafb0745576"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp5-local-update-checks-20260928.json",
+      "sha256": "470152c47fc8bafdd7f16005929b080e9bad2dd1334e494e2dda0fa636e67cb7"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp5-local-update-freeze-20260928.json",
+      "sha256": "6659c34bcf16b3e70c13c86ff2c4eafa0dece749a52df9bd5fe49ce7ae073858"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp5-local-update-results-20260928.json",
+      "sha256": "4e004d0874589e88337c1a4c1028c545a1251caeba6b2fb507ed17c2129a4285"
+    },
+    {
+      "path": "data/manifests/next-improvement-wp2-strict-content-checks-20260928.json",
+      "sha256": "4583ac7f48afc2f999a194f7cf4ac95087cd5568407377407f433d12b58e4fe8"
+    }
+  ]
+}
