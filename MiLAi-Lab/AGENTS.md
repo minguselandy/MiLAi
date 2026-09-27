@@ -56,6 +56,16 @@ change in a separately frozen, interpretable comparison; do not silently change 
 Keep owner/time/gold boundaries, actual side effects, unknown-result recovery and all costs.
 No permanent semantic reviewer or new state platform. Product remains NO-GO.
 
+The [D0 failure catalog](docs/MILAI_LSA_REVIEW_D0_FAILURE_MATRIX_20260927.md) and exact
+partial-commit retry fix are published at a471932. The [E2 conditional result](docs/MILAI_LSA_REVIEW_E2_R1_RESULTS_20260927.md)
+completed24 first responses on that source: post-event10/12, turn-start11/12. Second increment
+is5 versus4 in both repeats, but turn-start once substitutes planned destination for the actual
+receipt field. Preserve that failure and +24/36050/0; cumulative2701/3332841/18445. This is
+proposal-only exposed evidence, not online persistence or savings. Sol now owns the opt-in
+turn_end snapshot/explicit close prototype and its necessary checks; Root alone freezes/runs
+the later small sandbox. Entry preservation is a separate intervention; no new Host wording
+or selector optimization bundled into the epoch prototype.
+
 Historical closeout at the previous pause:
 See the [overall report](docs/MILAI_LOCAL_STATE_ATTENTION_OVERALL_EXPERIMENT_REPORT_20260927.md)
 and [final summary results](docs/MILAI_LOCAL_STATE_ATTENTION_WINDOW_SUMMARY_WIRING_R1_RESULTS_20260927.md).

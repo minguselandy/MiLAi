@@ -1,0 +1,559 @@
+{
+  "kind": "LSA_REVIEW_E2_R1_RESULTS",
+  "status": "COMPLETE_CONDITIONAL_TIMING_SIGNAL_WITH_RECEIPT_COUNTEREXAMPLE",
+  "source_commit": "a471932695dc077dd88077b5aa24949beab978dd",
+  "protocol_sha256": "8addf5e10afaf43a544966dc34a22fd28e15e87938f45fd2197a1c6ab73cc038",
+  "jobs": [
+    {
+      "job_id": "r1-first_increment-post_event",
+      "case_id": "first_increment",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "calls",
+      "proposed_tool_names": [
+        "manage_memory"
+      ],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "c1c260648ada3d35996948392a28bd527732e9ff36cc4a89e7c8c61364babf06",
+      "tokens": 1011
+    },
+    {
+      "job_id": "r1-first_increment-turn_start",
+      "case_id": "first_increment",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "d97116a04dbf47adcf79e54353305b64e98a0f717987dd19af098d1239e76e91",
+      "tokens": 980
+    },
+    {
+      "job_id": "r1-second_distinct_increment-turn_start",
+      "case_id": "second_distinct_increment",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "calls",
+      "proposed_tool_names": [
+        "manage_memory"
+      ],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "c5ebc5f0e254db68ddbf36621192207faee84a7cedf62de32d26e593cbf5ae64",
+      "tokens": 1267
+    },
+    {
+      "job_id": "r1-second_distinct_increment-post_event",
+      "case_id": "second_distinct_increment",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "SEMANTIC_FAILURE",
+      "correct": false,
+      "reason": "Correct post-event4 is applied again in a proposed memory update to5.",
+      "first_response_kind": "calls",
+      "proposed_tool_names": [
+        "manage_memory"
+      ],
+      "axes": {
+        "facts_conditions": false,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "dea724b5d60fe4e17481dd7b7d3c7c0a65122ec1a97915ad721d2b28a37262f5",
+      "tokens": 1304
+    },
+    {
+      "job_id": "r1-internal_memory_receipt-post_event",
+      "case_id": "internal_memory_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "c7f95642e71bbef723057df0120ae7def214c039a578812d5f0533770f01d242",
+      "tokens": 1306
+    },
+    {
+      "job_id": "r1-internal_memory_receipt-turn_start",
+      "case_id": "internal_memory_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "712149746abea2d7b18e7b24ded8f885ba8addb9837b803dbeb933f2914792a0",
+      "tokens": 1219
+    },
+    {
+      "job_id": "r1-no_change-turn_start",
+      "case_id": "no_change",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "67b7d9bf6bebd314d096900e3c0b817e39fc4a6ea2d42b00368a2acb170d539e",
+      "tokens": 1367
+    },
+    {
+      "job_id": "r1-no_change-post_event",
+      "case_id": "no_change",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "fefb3e62d21398bebdf35a54a1631ace345239be71f4b6e4c292629f881c6992",
+      "tokens": 1359
+    },
+    {
+      "job_id": "r1-actual_business_receipt-post_event",
+      "case_id": "actual_business_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "ad561045ac5a66fb5303a084bfda71bc21a397977d7b8d9bc0a12041a82d7c2f",
+      "tokens": 2289
+    },
+    {
+      "job_id": "r1-actual_business_receipt-turn_start",
+      "case_id": "actual_business_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "SEMANTIC_FAILURE",
+      "correct": false,
+      "reason": "Reports planned destination storage S-2 instead of the actual returned field S-2; actual quantity5 and ID are retained.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": false,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": false
+      },
+      "output_sha256": "7539d877676393fe82243f807e714e92f2a8bcdfc38cb1fbf64dff5786232f81",
+      "tokens": 2188
+    },
+    {
+      "job_id": "r1-partial_business_receipt-turn_start",
+      "case_id": "partial_business_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "86ba95dbfd1ce51b0530edf49f047d319985fb424a26acc8e69438024b14a706",
+      "tokens": 1799
+    },
+    {
+      "job_id": "r1-partial_business_receipt-post_event",
+      "case_id": "partial_business_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "0fc176c93279f0248a27676a11a116918f980cd59083dcc701fcd7bafab37a19",
+      "tokens": 1927
+    },
+    {
+      "job_id": "r2-first_increment-turn_start",
+      "case_id": "first_increment",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "calls",
+      "proposed_tool_names": [
+        "manage_memory"
+      ],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "d1b6fb72c73d57dd9e5da4c2971ab98ea291d720dd9e5fbcd3a08e901989fb08",
+      "tokens": 998
+    },
+    {
+      "job_id": "r2-first_increment-post_event",
+      "case_id": "first_increment",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "calls",
+      "proposed_tool_names": [
+        "manage_memory"
+      ],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "5e21672594c9427779c53426ff11d6c1c21dd6152480dc7d954bae3af0ae4602",
+      "tokens": 1011
+    },
+    {
+      "job_id": "r2-second_distinct_increment-post_event",
+      "case_id": "second_distinct_increment",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "SEMANTIC_FAILURE",
+      "correct": false,
+      "reason": "Same repeat-increment failure: proposed memory content5, expected4.",
+      "first_response_kind": "calls",
+      "proposed_tool_names": [
+        "manage_memory"
+      ],
+      "axes": {
+        "facts_conditions": false,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "fe05166ce5820a37f8fe7b8d0868b0c2d0318355cca75357fedb9c545934267a",
+      "tokens": 1304
+    },
+    {
+      "job_id": "r2-second_distinct_increment-turn_start",
+      "case_id": "second_distinct_increment",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "calls",
+      "proposed_tool_names": [
+        "manage_memory"
+      ],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "26cc3f60b7fa9fc0bb533912f26b60ba50e43de26077dc2314a1cdddbfbfde3c",
+      "tokens": 1267
+    },
+    {
+      "job_id": "r2-internal_memory_receipt-turn_start",
+      "case_id": "internal_memory_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "f468df54c940eba880a8951cb90a2a6afb75f8db3814717a576980912f36d745",
+      "tokens": 1219
+    },
+    {
+      "job_id": "r2-internal_memory_receipt-post_event",
+      "case_id": "internal_memory_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "7493ee9de9acdc6d2983c6ed3be34a897fc95aa972158298efd47082903b2026",
+      "tokens": 1304
+    },
+    {
+      "job_id": "r2-no_change-post_event",
+      "case_id": "no_change",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "e2fa8a86b85be7bd71b191f635d1a0d9c7fe5d37befef7d42f34d06c22723f4a",
+      "tokens": 1359
+    },
+    {
+      "job_id": "r2-no_change-turn_start",
+      "case_id": "no_change",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "836ad84fc2692c6b90d8717b02072ef48900673190a97e30b2e4688f674f1e0b",
+      "tokens": 1367
+    },
+    {
+      "job_id": "r2-actual_business_receipt-turn_start",
+      "case_id": "actual_business_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "178b3fa5d38a07964cf4e4816a9873e63a91120c08f13509c1ac69d82ad5e913",
+      "tokens": 2181
+    },
+    {
+      "job_id": "r2-actual_business_receipt-post_event",
+      "case_id": "actual_business_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "2f5b06eeacab90a817af5b41797ce910b3bb4ffcf6d23b745460e56edd6ea13b",
+      "tokens": 2289
+    },
+    {
+      "job_id": "r2-partial_business_receipt-post_event",
+      "case_id": "partial_business_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "7359078edd39b60c0036363dfb7a0757b58347033b4f96fdb1ed196c012d40a8",
+      "tokens": 1932
+    },
+    {
+      "job_id": "r2-partial_business_receipt-turn_start",
+      "case_id": "partial_business_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start",
+      "category": "CORRECT_PROPOSAL",
+      "correct": true,
+      "reason": "Required current facts or actual receipt acknowledged without a forbidden business proposal.",
+      "first_response_kind": "answer",
+      "proposed_tool_names": [],
+      "axes": {
+        "facts_conditions": true,
+        "object_identity": true,
+        "action_permission": true,
+        "answer_faithfulness": true
+      },
+      "output_sha256": "d2cf7f92e1edaa15901683516d95b04ca6f3b9dcfb9dd70dcb6d8c667758e84c",
+      "tokens": 1803
+    }
+  ],
+  "by_variant": {
+    "post_event": {
+      "correct_proposals": 10,
+      "first_responses": 12,
+      "calls": 12,
+      "prompt_tokens": 17612,
+      "completion_tokens": 783,
+      "tokens": 18395,
+      "wall_seconds": 7.803070662077516
+    },
+    "turn_start": {
+      "correct_proposals": 11,
+      "first_responses": 12,
+      "calls": 12,
+      "prompt_tokens": 16868,
+      "completion_tokens": 787,
+      "tokens": 17655,
+      "wall_seconds": 7.320513878017664
+    }
+  },
+  "scoring_boundaries": [
+    "Planned-location prose paraphrase S-2 / stored in S-2 is accepted when the same unique storage location is identified; no changed business parameter is executed. Actual-receipt tasks must report the returned field, so inserting storage into returned S-2 fails.",
+    "First-response acknowledgments of an updated plan count only as a semantically correct proposal/answer; they do not prove any new persistent memory write.",
+    "Natural plural crates describing five units does not assert a different reservation ID; the original bad item_key action remains an earlier failure and is not regraded here.",
+    "Successfully labeled is accepted as the natural-language equivalent of label_status=created. No physical dispatch claim appears."
+  ],
+  "quantity_only_diagnostic": {
+    "post_event": {
+      "correct": 10,
+      "total": 12
+    },
+    "turn_start": {
+      "correct": 12,
+      "total": 12
+    }
+  },
+  "generation_delta": {
+    "calls": 24,
+    "tokens": 36050
+  },
+  "embedding_delta": {
+    "calls": 0,
+    "tokens": 0
+  },
+  "continuous_budget": {
+    "generation_requests": 2701,
+    "generation_tokens": 3332841,
+    "embedding_tokens": 18445
+  },
+  "audit": {
+    "actual24_http_bound_to_outputs": true,
+    "non_system_messages_unchanged": true,
+    "params_tools_schema_unchanged": true,
+    "source_bytes_match_published_commit": true,
+    "frozen_job_order": true,
+    "business_tool_or_store_execution": 0,
+    "ledger_reconciled": true,
+    "old_sealed_history_unchanged": true,
+    "http_or_capacity_or_parse_errors": 0,
+    "intermediate_lookup_responses": 0
+  },
+  "artifacts": {
+    "inputs.json": "03632589561661ef662e03857db088bea2036b484c0266616ccbbaccef903b6b",
+    "config.json": "5c6a14b0ea71638049cf77c07929802a03744adf9d4e2e954e50113893ee2ca4",
+    "lineage.json": "64913bb9f55a489a57d5c3dc22769d74d962d093edd4d2f33aade9a457fdd63b",
+    "prepared.json": "ebcf855a00fb33cc8737afb4a0c1950ccda60a64c3bc1cbf22fc97b4b9140856",
+    "execution-freeze.json": "fbc9af85f7e3c388ec92d6616f91abf4af08368bf7211ab8614e3e2fef01c787",
+    "budget-before.json": "64db6395c91316236291e32c5f233e823f96b98cc7a906a8a3fe985524948085",
+    "budget-after.json": "b365f942eab0e64c04a7f66eec13ff2f3fba1bdb0cf8e54a0d3dc0e5822960fa",
+    "runtime/run_manifest.json": "1dd5f087271529577a95774172f5c0e1f6deefca5455aa8e9e226f3526ee9806",
+    "runtime/trace.jsonl": "6d3fca3c292648b8fb995e1f4920ad48e39552a9f791354b575ff508de7fd208",
+    "root_scores.json": "294951311456648986dea3b26bf3f9dd05b537987bbccbd7895d0975b17a697d"
+  },
+  "decision": "Continue with a minimal turn-start snapshot and explicit close prototype, then small sandbox validation; independently test entry preservation. No label/prompt tuning to hide the receipt failure.",
+  "limits": [
+    "Six nested prefixes from two exposed historical trajectories, not six independent or unseen cases.",
+    "Proposal-only conditional comparison; no completed-task, online persistence, cost-saving or physical-recovery claim.",
+    "The epoch intervention changes State contents and adds one factual epoch label; not a pure label ablation.",
+    "Ordinary memory and original assistant prefix remain unchanged and can still propagate errors.",
+    "The incorrect prior reservation in actual_business_receipt remains a historical failure; correct reporting cannot undo it."
+  ]
+}

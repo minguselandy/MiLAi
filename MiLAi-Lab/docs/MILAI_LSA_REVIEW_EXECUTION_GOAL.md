@@ -30,7 +30,7 @@ main=a9290f3；最后实际实验源码bc5a5c8。启动时只有新计划及旧v
 | 阶段 | 要求及证明方式 | 状态 |
 |---|---|---|
 | D0 / P0 | 三类真实首断点+四类对照；完整合法前缀、旧State、新事件、原输出、错误位置、离线哈希/故障矩阵；部分提交重试风险复现 | COMPLETE_OFFLINE |
-| D1 / P1 | 独立entry更新与回合snapshot原型；同事件重放、独立同文本、无关保持、部分成功；E1/E2分开冻结，少量重复，再测组合和真实动作 | NOT_RUN |
+| D1 / P1 | 独立entry更新与回合snapshot原型；同事件重放、独立同文本、无关保持、部分成功；E1/E2分开冻结，少量重复，再测组合和真实动作 | E2_CONDITIONAL_DONE; PROTOTYPE_IN_PROGRESS |
 | D2 / P2 | 同bank全读/query检索或rerank/State A；swap/missing/oracle分列；固定前态all/U/U=A/oracle U且都可创建；约12–24对起步 | NOT_RUN |
 | D3 / P3 | 最新统一底座full/G/L/最小有效LSA；4–6独立开发情景、2–3完整重复起步；逐情景strict/整轨迹/事实/ID/动作/无依据断言/State/费用 | NOT_RUN |
 | D4 / P4 | N/d/a/r/H少数独立代表点；真实互动增长；full可容纳历史与超窗策略；query/summary；R与U=A必要消融及维护摊销边界 | NOT_RUN |
@@ -69,3 +69,21 @@ D0已完成：见[故障矩阵](MILAI_LSA_REVIEW_D0_FAILURE_MATRIX_20260927.md)�
 已修复，最终相关6项窄测及目标静态通过，旧State兼容；仅证明精确事件集合/编辑槽重试。
 根链路为120个文档本地链接和十组输入/evaluator哈希核对通过，计划和账本原字节不变。
 D1下一步按新计划先做时间边界小诊断和最小原型，再独立检验局部entry；不增加无益审核器。
+
+## D1 E2 首轮条件证据与实现决定
+
+[E2 R1](MILAI_LSA_REVIEW_E2_R1_RESULTS_20260927.md)在a471932上完成6前缀×2条件×2重复，
+正确proposal为post-event10/12、turn-start11/12。第二次增量分别两次5与两次4；
+turn-start另保留一次把实际回执S-2改成计划storage S-2的失败。不是在线任务或未见收益。
+新增24生成/36050tokens/0embedding，连续2701/3332841/18445；所有实际HTTP、原prefix、
+冻结顺序和源hash已核对。Root独占运行/评分，源切片在最后调用后才交回Sol继续。
+
+D1下一步为可选turn_end原型：公开回合开始冻结真实正文，同epoch恢复保持同快照；
+回合内保留原prefix并收集真实事件，normal/capacity明确close，异常finally不隐式调模型。
+复用Store/meta和现有journal，未归并尾部合法可见，真实业务结果与维护成败分列。
+Astra已就这一个跨层边界给出只读建议，问题实现仍由同一Sol负责，不设常驻审计。
+局部entry、D2、在线matched、规模、未见与第二模型尚未完成。
+
+D0最终复现窄检查原命令（已通过，不为发布重跑）：
+`uv run --no-sync --group baseline-langmem pytest -q tests/unit/test_local_state_attention.py -k 'partial_batch_retry or partial_update_identity or legacy_focus_resolves or partial_retry_marks or retry_identity_uses or store_write_failure'`。
+Ruff检查两修改源码与相邻测试；Mypy检查bank/controller；无新build或真实服务调用。

@@ -1,0 +1,216 @@
+{
+  "kind": "LSA_REVIEW_E2_R1_PROTOCOL",
+  "status": "FROZEN_BEFORE_REAL_CALLS",
+  "source_commit": "a471932695dc077dd88077b5aa24949beab978dd",
+  "purpose": "Conditional first-response comparison of actual post-event State versus actual turn-start State; no online epoch or maintenance-cost claim.",
+  "input": {
+    "path": "artifacts/local-state-attention/review-e2-r1/inputs.json",
+    "sha256": "03632589561661ef662e03857db088bea2036b484c0266616ccbbaccef903b6b"
+  },
+  "config": {
+    "path": "artifacts/local-state-attention/review-e2-r1/config.json",
+    "sha256": "5c6a14b0ea71638049cf77c07929802a03744adf9d4e2e954e50113893ee2ca4"
+  },
+  "rubric": {
+    "path": "data/diagnostics/local_state_attention/review-e2-r1-rubric.json",
+    "sha256": "9d847cd3e19b971f2715b1d09558f2592b77c618ba660f553b1e2b269d82d1f2"
+  },
+  "lineage": {
+    "path": "artifacts/local-state-attention/review-e2-r1/lineage.json",
+    "sha256": "64913bb9f55a489a57d5c3dc22769d74d962d093edd4d2f33aade9a457fdd63b"
+  },
+  "constructor": {
+    "path": "artifacts/local-state-attention/review-e2-r1/prepare_inputs.py",
+    "sha256": "994ce2c8c45e5943997e0beb80587ea7f0fcbedb6d9a83ca7070ecaeec8a72bc"
+  },
+  "jobs": [
+    {
+      "job_id": "r1-first_increment-post_event",
+      "case_id": "first_increment",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r1-first_increment-turn_start",
+      "case_id": "first_increment",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r1-second_distinct_increment-turn_start",
+      "case_id": "second_distinct_increment",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r1-second_distinct_increment-post_event",
+      "case_id": "second_distinct_increment",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r1-internal_memory_receipt-post_event",
+      "case_id": "internal_memory_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r1-internal_memory_receipt-turn_start",
+      "case_id": "internal_memory_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r1-no_change-turn_start",
+      "case_id": "no_change",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r1-no_change-post_event",
+      "case_id": "no_change",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r1-actual_business_receipt-post_event",
+      "case_id": "actual_business_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r1-actual_business_receipt-turn_start",
+      "case_id": "actual_business_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r1-partial_business_receipt-turn_start",
+      "case_id": "partial_business_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r1-partial_business_receipt-post_event",
+      "case_id": "partial_business_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r2-first_increment-turn_start",
+      "case_id": "first_increment",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r2-first_increment-post_event",
+      "case_id": "first_increment",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r2-second_distinct_increment-post_event",
+      "case_id": "second_distinct_increment",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r2-second_distinct_increment-turn_start",
+      "case_id": "second_distinct_increment",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r2-internal_memory_receipt-turn_start",
+      "case_id": "internal_memory_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r2-internal_memory_receipt-post_event",
+      "case_id": "internal_memory_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r2-no_change-post_event",
+      "case_id": "no_change",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r2-no_change-turn_start",
+      "case_id": "no_change",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r2-actual_business_receipt-turn_start",
+      "case_id": "actual_business_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    },
+    {
+      "job_id": "r2-actual_business_receipt-post_event",
+      "case_id": "actual_business_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r2-partial_business_receipt-post_event",
+      "case_id": "partial_business_receipt",
+      "arm": "diagnostic",
+      "variant": "post_event"
+    },
+    {
+      "job_id": "r2-partial_business_receipt-turn_start",
+      "case_id": "partial_business_receipt",
+      "arm": "diagnostic",
+      "variant": "turn_start"
+    }
+  ],
+  "denominator": {
+    "prefix_boundaries": 6,
+    "independent_historical_source_trajectories": 2,
+    "conditions": 2,
+    "repeats": 2,
+    "first_responses": 24,
+    "business_actions": 0
+  },
+  "fairness": [
+    "Original non-system messages, tools/schema, legal source expansion and request parameters identical per pair.",
+    "All six before/after banks share actual State IDs; only epoch content and one factual turn-start label differ.",
+    "Tool-loop snapshot is from the beginning of its public user turn, not the preceding hook.",
+    "State snapshots and source excerpts are historical actual runtime material, not correct oracle edits.",
+    "No runtime rubric/evaluator reads. Both conditions use same root/source boundary."
+  ],
+  "hypotheses": [
+    "H1: post-event State used as pre-event base causes repeat increment; pre-turn State plus original prefix reduces it.",
+    "H2: ordinary memory and assistant history propagate wrong values independently; epoch change alone may fail."
+  ],
+  "parameters": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "thinking": false,
+    "context_tokens": 65536,
+    "http_concurrency": 1
+  },
+  "accounting": {
+    "budget_path": "artifacts/ser-v20/budget.json",
+    "before_sha256": "64db6395c91316236291e32c5f233e823f96b98cc7a906a8a3fe985524948085",
+    "starting_generation_calls": 2677,
+    "starting_generation_tokens": 3296791,
+    "starting_embedding_tokens": 18445,
+    "include_all_failed_attempts": true
+  },
+  "execution": "Use existing tools/run_local_state_attention_read_probe.py prepare then run-job in the frozen jobs order; one fresh isolated attempt per job, no reattempt/replacement. No Store, business or embedding calls. The actual prepare binds all source hashes and dependencies.",
+  "scoring": "Root judges all original first responses under frozen rubric; CORRECT_PROPOSAL/INTERMEDIATE_LOOKUP/SEMANTIC_FAILURE/EXECUTION_FAILURE and independent axes. No LLM judge.",
+  "decision": "A consistent conditional timing signal admits a minimal epoch prototype and small sandbox verification; failure selects the next competing cause, not wording iteration or stopping the full research goal.",
+  "limits": [
+    "Exposed prefixes selected after failure, nested within two old trajectories; no unseen/general efficacy or statistical independence claim.",
+    "Historical bank grouping and prior actions are held fixed; proposed epoch variant was not produced by an online snapshot runner.",
+    "Real wrong/partial side effects already in the prefix must be reported, not corrected by a stale plan.",
+    "Costs here cover new proposal calls only; historical trajectory costs remain in the continuous ledger and this is not a counterfactual online savings estimate."
+  ]
+}
