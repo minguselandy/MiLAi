@@ -1,0 +1,667 @@
+{
+  "kind": "MILAI_WP6_CONTINUATION_R1_RESULTS",
+  "status": "ALL_SIX_ACTUAL_CONTINUATIONS_COMPLETE",
+  "scored_at_utc": "2026-09-27T16:32:57.255083+00:00",
+  "method_commit": "ec34c89d96ecbf6030777b8b23c5dc9773d27ac4",
+  "freeze_sha256": "fae5f6ed2712fc87fe182486df270a1d57c84d91f09670e76b66d9ba7eb51912",
+  "rubric_sha256": "a60aa8c49306691f094c2689f00fba1a0d05e76e68ac1ad29c990a161f01ce45",
+  "independent_arcs": 2,
+  "conditional_trajectories": 6,
+  "rows": [
+    {
+      "job": {
+        "job_id": "1-partial-original",
+        "case_id": "partial",
+        "arm": "diagnostic",
+        "variant": "original"
+      },
+      "status": "COMPLETED",
+      "checks": {
+        "initial_proposal_correct": false,
+        "actual_world_correct": false,
+        "one_attempt_constraint": true,
+        "persistence_and_receipt_agree": true,
+        "original_request_prefix_and_parameters_preserved": true,
+        "actual_receipt_delivered_in_next_http": true,
+        "answer_actual_id_quantity_label": true,
+        "answer_faithful": true,
+        "strict_task_success": false,
+        "infrastructure_or_format_failure": false,
+        "seeded_memory_unchanged": true
+      },
+      "wrong_fields": {
+        "item_key": {
+          "expected": "Summit archive crates",
+          "actual": "Summit archive crate"
+        }
+      },
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-ffe45fd7-8855-49f4-bb8f-7fb60d81190b",
+            "user_id": "mira",
+            "item_key": "Summit archive crate",
+            "quantity": 5,
+            "destination": "mezzanine M-4",
+            "packing": "foam inserts",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "mira",
+            "item_key": "Summit archive crate",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "actual_tool_receipt": {
+        "ok": false,
+        "status": "reserved_label_failed",
+        "reason": "label_service_unavailable",
+        "reservation_id": "RSV-ffe45fd7-8855-49f4-bb8f-7fb60d81190b",
+        "item_key": "Summit archive crate",
+        "quantity": 5,
+        "destination": "mezzanine M-4",
+        "packing": "foam inserts",
+        "label_status": "not_created"
+      },
+      "answer": "Reservation created successfully for 5 Summit archive crates destined for mezzanine M-4 with foam inserts. However, labeling failed due to an unavailable label service. The reservation ID is RSV-ffe45fd7-8855-49f4-bb8f-7fb60d81190b, and the label status is 'not_created'. No further actions were taken as per instructions.",
+      "answer_assessment": "Actual ID, quantity, packing and label outcome faithfully reported. Natural-language pluralization/shortening of item description is accepted by the frozen rubric; this does not repair an incorrect persisted exact item_key.",
+      "first_generation_id": "chatcmpl-96abe99c7b400d48",
+      "first_tool_call_id": "chatcmpl-96abe99c7b400d48:tool:0",
+      "followup_generation_id": "chatcmpl-997a591788c6d6f0",
+      "first_usage": {
+        "prompt_tokens": 1129,
+        "total_tokens": 1169,
+        "completion_tokens": 40,
+        "prompt_tokens_details": null
+      },
+      "continuation_usage": {
+        "prompt_tokens": 1302,
+        "total_tokens": 1397,
+        "completion_tokens": 95,
+        "prompt_tokens_details": null
+      },
+      "continuation_generation_calls": 1,
+      "seed_embedding_calls": 1,
+      "seed_embedding_tokens": 44,
+      "generation_tokens_combined": 2566,
+      "host_wall_seconds": 1.1535057229921222,
+      "embedding_wall_seconds": 0.3005278492346406,
+      "observer_stats": {
+        "id": 1,
+        "transactions": 12,
+        "observer_cpu_ns": 5944290,
+        "observer_wall_ns": 72021189,
+        "extra_store_reads": 0,
+        "extra_read_cpu_ns": 0,
+        "extra_read_wall_ns": 0,
+        "initial_db_bytes": 98304
+      },
+      "hashes": {
+        "result": "c9a3621dab02f6d8314e01d68773db1e4c64b6d19b24cbd0795f46a8b144a27e",
+        "trace": "7eaa84b2a6b34e861101e754e4812a903fa7ecf247e77466d9b57f1e7a77f81d",
+        "world_db": "f9e4977f0d32ea2a06a80661a8f294360d2063c259e07d36e28d5d15825f1352",
+        "checkpoint_db": "aa8bb88ec4cd62b30cd2ea096858bda36585b3f7b3d117049b5d53f8c3d3e68b",
+        "instrumentation_db": "7b8f624d7f4b11005b7a99a2ea19e1b1915c5f89dbbd75024b06f9a50e2fe029"
+      },
+      "first_break": "First-response Host generated incorrect action arguments before any current tool/world side effect. Actual ToolNode and persistence faithfully used them; later response did not repair them."
+    },
+    {
+      "job": {
+        "job_id": "2-distinct-source_title",
+        "case_id": "distinct",
+        "arm": "diagnostic",
+        "variant": "source_title"
+      },
+      "status": "COMPLETED",
+      "checks": {
+        "initial_proposal_correct": false,
+        "actual_world_correct": false,
+        "one_attempt_constraint": true,
+        "persistence_and_receipt_agree": true,
+        "original_request_prefix_and_parameters_preserved": true,
+        "actual_receipt_delivered_in_next_http": true,
+        "answer_actual_id_quantity_label": true,
+        "answer_faithful": true,
+        "strict_task_success": false,
+        "infrastructure_or_format_failure": false,
+        "seeded_memory_unchanged": true
+      },
+      "wrong_fields": {
+        "quantity": {
+          "expected": 4,
+          "actual": 3
+        }
+      },
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-242d5158-e672-4f9d-b2f6-c71a54e310ae",
+            "user_id": "riley",
+            "item_key": "Cobalt delivery kits",
+            "quantity": 3,
+            "destination": "storage S-2",
+            "packing": "fiber cases",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "riley",
+            "item_key": "Cobalt delivery kits",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "actual_tool_receipt": {
+        "ok": true,
+        "status": "label_created",
+        "reservation_id": "RSV-242d5158-e672-4f9d-b2f6-c71a54e310ae",
+        "item_key": "Cobalt delivery kits",
+        "quantity": 3,
+        "destination": "storage S-2",
+        "packing": "fiber cases",
+        "label_status": "created"
+      },
+      "answer": "Reservation created successfully. Reservation ID: RSV-242d5158-e672-4f9d-b2f6-c71a54e310ae. 3 units of Cobalt delivery kits reserved for storage S-2 in fiber cases with label created.",
+      "answer_assessment": "Actual ID, quantity, packing and label outcome faithfully reported. Natural-language pluralization/shortening of item description is accepted by the frozen rubric; this does not repair an incorrect persisted exact item_key.",
+      "first_generation_id": "chatcmpl-b9a702bab79eeaf8",
+      "first_tool_call_id": "chatcmpl-b9a702bab79eeaf8:tool:0",
+      "followup_generation_id": "chatcmpl-ac2d0eb067cd806c",
+      "first_usage": {
+        "prompt_tokens": 1476,
+        "total_tokens": 1525,
+        "completion_tokens": 49,
+        "prompt_tokens_details": null
+      },
+      "continuation_usage": {
+        "prompt_tokens": 1635,
+        "total_tokens": 1705,
+        "completion_tokens": 70,
+        "prompt_tokens_details": null
+      },
+      "continuation_generation_calls": 1,
+      "seed_embedding_calls": 2,
+      "seed_embedding_tokens": 65,
+      "generation_tokens_combined": 3230,
+      "host_wall_seconds": 0.7219728380441666,
+      "embedding_wall_seconds": 0.06968724960461259,
+      "observer_stats": {
+        "id": 1,
+        "transactions": 12,
+        "observer_cpu_ns": 3057033,
+        "observer_wall_ns": 72516143,
+        "extra_store_reads": 0,
+        "extra_read_cpu_ns": 0,
+        "extra_read_wall_ns": 0,
+        "initial_db_bytes": 98304
+      },
+      "hashes": {
+        "result": "c506822517b9e7cac943db8f23dc45f237770d7542d0b00a24573babd0e8c60e",
+        "trace": "28a33a199ad14c771101381c61551f99e951bb6ee5554563d4d3d9a5d1cc1bd3",
+        "world_db": "e92fd7494538ba0f90bab61f6242ab7bc0d864da7d9da7db4b585d8beaa09b2e",
+        "checkpoint_db": "0b852c09f01f1a44acf1473e2c5527f1605579940013c0870d3e72762960b798",
+        "instrumentation_db": "25a66385b6cf5c963543063b8847cbcb13ad89620d03adb59c3ba7e81aa6789d"
+      },
+      "first_break": "First-response Host generated incorrect action arguments before any current tool/world side effect. Actual ToolNode and persistence faithfully used them; later response did not repair them."
+    },
+    {
+      "job": {
+        "job_id": "3-partial-raw_sources",
+        "case_id": "partial",
+        "arm": "diagnostic",
+        "variant": "raw_sources"
+      },
+      "status": "COMPLETED",
+      "checks": {
+        "initial_proposal_correct": true,
+        "actual_world_correct": true,
+        "one_attempt_constraint": true,
+        "persistence_and_receipt_agree": true,
+        "original_request_prefix_and_parameters_preserved": true,
+        "actual_receipt_delivered_in_next_http": true,
+        "answer_actual_id_quantity_label": true,
+        "answer_faithful": true,
+        "strict_task_success": true,
+        "infrastructure_or_format_failure": false,
+        "seeded_memory_unchanged": true
+      },
+      "wrong_fields": {},
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-ccda2693-2f2c-4d49-af12-14e678dc5a02",
+            "user_id": "mira",
+            "item_key": "Summit archive crates",
+            "quantity": 5,
+            "destination": "mezzanine M-4",
+            "packing": "foam inserts",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "mira",
+            "item_key": "Summit archive crates",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "actual_tool_receipt": {
+        "ok": false,
+        "status": "reserved_label_failed",
+        "reason": "label_service_unavailable",
+        "reservation_id": "RSV-ccda2693-2f2c-4d49-af12-14e678dc5a02",
+        "item_key": "Summit archive crates",
+        "quantity": 5,
+        "destination": "mezzanine M-4",
+        "packing": "foam inserts",
+        "label_status": "not_created"
+      },
+      "answer": "Reservation created successfully for 5 Summit archive crates destined for mezzanine M-4 with foam inserts. Reservation ID: RSV-ccda2693-2f2c-4d49-af12-14e678dc5a02. However, labeling failed due to label service unavailability. The reservation persists but the label was not created.",
+      "answer_assessment": "Actual ID, quantity, packing and label outcome faithfully reported. Natural-language pluralization/shortening of item description is accepted by the frozen rubric; this does not repair an incorrect persisted exact item_key.",
+      "first_generation_id": "chatcmpl-b7f59bc1d9702bca",
+      "first_tool_call_id": "chatcmpl-b7f59bc1d9702bca:tool:0",
+      "followup_generation_id": "chatcmpl-893572a9bc93f987",
+      "first_usage": {
+        "prompt_tokens": 935,
+        "total_tokens": 975,
+        "completion_tokens": 40,
+        "prompt_tokens_details": null
+      },
+      "continuation_usage": {
+        "prompt_tokens": 1109,
+        "total_tokens": 1196,
+        "completion_tokens": 87,
+        "prompt_tokens_details": null
+      },
+      "continuation_generation_calls": 1,
+      "seed_embedding_calls": 1,
+      "seed_embedding_tokens": 44,
+      "generation_tokens_combined": 2171,
+      "host_wall_seconds": 0.7707974780350924,
+      "embedding_wall_seconds": 0.031950618140399456,
+      "observer_stats": {
+        "id": 1,
+        "transactions": 12,
+        "observer_cpu_ns": 3474687,
+        "observer_wall_ns": 70313586,
+        "extra_store_reads": 0,
+        "extra_read_cpu_ns": 0,
+        "extra_read_wall_ns": 0,
+        "initial_db_bytes": 98304
+      },
+      "hashes": {
+        "result": "9ee89f1f614a4008ebdd6c551806043d478ec5e4262febec6100828728fc9fe9",
+        "trace": "d99db8aad63447de20237e71b4f7ed4188492fae176a81372cdc6879e20cd817",
+        "world_db": "58fed388e901cea9a91cacd0405228d9bec64611229a4d41340b8b15e3dc4723",
+        "checkpoint_db": "41e78d278c35db2844ebe1936de13439db9ff33bcd5ef71bd3a7a94d45a68658",
+        "instrumentation_db": "d05999a4dec1e8529c7bafb2b2ceba4d854bf342296579abdecfb04557227f36"
+      },
+      "first_break": "none"
+    },
+    {
+      "job": {
+        "job_id": "4-distinct-original",
+        "case_id": "distinct",
+        "arm": "diagnostic",
+        "variant": "original"
+      },
+      "status": "COMPLETED",
+      "checks": {
+        "initial_proposal_correct": false,
+        "actual_world_correct": false,
+        "one_attempt_constraint": true,
+        "persistence_and_receipt_agree": true,
+        "original_request_prefix_and_parameters_preserved": true,
+        "actual_receipt_delivered_in_next_http": true,
+        "answer_actual_id_quantity_label": true,
+        "answer_faithful": false,
+        "strict_task_success": false,
+        "infrastructure_or_format_failure": false,
+        "seeded_memory_unchanged": true
+      },
+      "wrong_fields": {
+        "quantity": {
+          "expected": 4,
+          "actual": 3
+        },
+        "destination": {
+          "expected": "storage S-2",
+          "actual": "S-2"
+        }
+      },
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-7df91b00-8211-4f82-ad32-6db6f4b0f09c",
+            "user_id": "riley",
+            "item_key": "Cobalt delivery kits",
+            "quantity": 3,
+            "destination": "S-2",
+            "packing": "fiber cases",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "riley",
+            "item_key": "Cobalt delivery kits",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "actual_tool_receipt": {
+        "ok": true,
+        "status": "label_created",
+        "reservation_id": "RSV-7df91b00-8211-4f82-ad32-6db6f4b0f09c",
+        "item_key": "Cobalt delivery kits",
+        "quantity": 3,
+        "destination": "S-2",
+        "packing": "fiber cases",
+        "label_status": "created"
+      },
+      "answer": "Reservation created successfully. Reservation ID: RSV-7df91b00-8211-4f82-ad32-6db6f4b0f09c. 3 units of Cobalt delivery kits reserved for storage S-2 in fiber cases with label created.",
+      "answer_assessment": "Destination rendering says storage S-2 though actual stored field is S-2; exact destination fidelity is not established, so full faithful-answer criterion is conservatively false.",
+      "first_generation_id": "chatcmpl-a1932b91aee7f241",
+      "first_tool_call_id": "chatcmpl-a1932b91aee7f241:tool:0",
+      "followup_generation_id": "chatcmpl-b3b58111a604e41f",
+      "first_usage": {
+        "prompt_tokens": 1478,
+        "total_tokens": 1526,
+        "completion_tokens": 48,
+        "prompt_tokens_details": null
+      },
+      "continuation_usage": {
+        "prompt_tokens": 1635,
+        "total_tokens": 1705,
+        "completion_tokens": 70,
+        "prompt_tokens_details": null
+      },
+      "continuation_generation_calls": 1,
+      "seed_embedding_calls": 2,
+      "seed_embedding_tokens": 65,
+      "generation_tokens_combined": 3231,
+      "host_wall_seconds": 0.716916729696095,
+      "embedding_wall_seconds": 0.06610983982682228,
+      "observer_stats": {
+        "id": 1,
+        "transactions": 12,
+        "observer_cpu_ns": 3507027,
+        "observer_wall_ns": 78087269,
+        "extra_store_reads": 0,
+        "extra_read_cpu_ns": 0,
+        "extra_read_wall_ns": 0,
+        "initial_db_bytes": 98304
+      },
+      "hashes": {
+        "result": "284675941fc3c89e0562d865a2f06d1af26c3810aa5f87bb943cb041a5ee3938",
+        "trace": "714d8e223c77d854fe8635fc2c7b17e314206cff0716f37ea54383c9789c316d",
+        "world_db": "589fd397d80b1e401d822370280333c561b068420f49ad881eeaf0d7e552a960",
+        "checkpoint_db": "7c4087e91128f8029e337c12b0365e353854b9b5f72010476c06ed9d1d2c4d1c",
+        "instrumentation_db": "d54fe457e76747f06dbe05ca0345932c489cdd874a438d43ff777bbb06d07855"
+      },
+      "first_break": "First-response Host generated incorrect action arguments before any current tool/world side effect. Actual ToolNode and persistence faithfully used them; later response did not repair them."
+    },
+    {
+      "job": {
+        "job_id": "5-partial-source_title",
+        "case_id": "partial",
+        "arm": "diagnostic",
+        "variant": "source_title"
+      },
+      "status": "COMPLETED",
+      "checks": {
+        "initial_proposal_correct": false,
+        "actual_world_correct": false,
+        "one_attempt_constraint": true,
+        "persistence_and_receipt_agree": true,
+        "original_request_prefix_and_parameters_preserved": true,
+        "actual_receipt_delivered_in_next_http": true,
+        "answer_actual_id_quantity_label": true,
+        "answer_faithful": true,
+        "strict_task_success": false,
+        "infrastructure_or_format_failure": false,
+        "seeded_memory_unchanged": true
+      },
+      "wrong_fields": {
+        "item_key": {
+          "expected": "Summit archive crates",
+          "actual": "Summit archive crates (mezzanine M-4, 5 crates, foam inserts)"
+        }
+      },
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-d7cf5912-7722-47f5-a67d-15e25fa77b8b",
+            "user_id": "mira",
+            "item_key": "Summit archive crates (mezzanine M-4, 5 crates, foam inserts)",
+            "quantity": 5,
+            "destination": "mezzanine M-4",
+            "packing": "foam inserts",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "mira",
+            "item_key": "Summit archive crates (mezzanine M-4, 5 crates, foam inserts)",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "actual_tool_receipt": {
+        "ok": false,
+        "status": "reserved_label_failed",
+        "reason": "label_service_unavailable",
+        "reservation_id": "RSV-d7cf5912-7722-47f5-a67d-15e25fa77b8b",
+        "item_key": "Summit archive crates (mezzanine M-4, 5 crates, foam inserts)",
+        "quantity": 5,
+        "destination": "mezzanine M-4",
+        "packing": "foam inserts",
+        "label_status": "not_created"
+      },
+      "answer": "The reservation for 5 Summit archive crates (mezzanine M-4, foam inserts) was successfully created with reservation ID RSV-d7cf5912-7722-47f5-a67d-15e25fa77b8b. However, the label creation failed due to a label service unavailability. The label status remains 'not_created'. No further attempts will be made in this turn.",
+      "answer_assessment": "Actual ID, quantity, packing and label outcome faithfully reported. Natural-language pluralization/shortening of item description is accepted by the frozen rubric; this does not repair an incorrect persisted exact item_key.",
+      "first_generation_id": "chatcmpl-a5e84fcfda07bfe0",
+      "first_tool_call_id": "chatcmpl-a5e84fcfda07bfe0:tool:0",
+      "followup_generation_id": "chatcmpl-9fe0c5730f3e9ad1",
+      "first_usage": {
+        "prompt_tokens": 1125,
+        "total_tokens": 1179,
+        "completion_tokens": 54,
+        "prompt_tokens_details": null
+      },
+      "continuation_usage": {
+        "prompt_tokens": 1327,
+        "total_tokens": 1426,
+        "completion_tokens": 99,
+        "prompt_tokens_details": null
+      },
+      "continuation_generation_calls": 1,
+      "seed_embedding_calls": 1,
+      "seed_embedding_tokens": 44,
+      "generation_tokens_combined": 2605,
+      "host_wall_seconds": 0.8523967671208084,
+      "embedding_wall_seconds": 0.0344341779127717,
+      "observer_stats": {
+        "id": 1,
+        "transactions": 12,
+        "observer_cpu_ns": 3543631,
+        "observer_wall_ns": 100325141,
+        "extra_store_reads": 0,
+        "extra_read_cpu_ns": 0,
+        "extra_read_wall_ns": 0,
+        "initial_db_bytes": 98304
+      },
+      "hashes": {
+        "result": "c367dc5d953897e46f0454c9a483cacf07fb68c86fb8975b7bb74cb80e7b8c7e",
+        "trace": "e1d52ae7f4572d9c7c741cc9ab788469d5c7133f7c9ab0afdb9cfb138755e864",
+        "world_db": "d567c071982d341a63a8e2bcdf546d3af06356e646d6de94c48559398355c815",
+        "checkpoint_db": "6a7537ec586dd7ebff0baa5a3ec848937560f51345a5eed4522c5aae8e86b031",
+        "instrumentation_db": "cf68c334047d98ca40ed61868f8fc01f43ee70e5f49045b1d63c70db34e187cd"
+      },
+      "first_break": "First-response Host generated incorrect action arguments before any current tool/world side effect. Actual ToolNode and persistence faithfully used them; later response did not repair them."
+    },
+    {
+      "job": {
+        "job_id": "6-distinct-raw_sources",
+        "case_id": "distinct",
+        "arm": "diagnostic",
+        "variant": "raw_sources"
+      },
+      "status": "COMPLETED",
+      "checks": {
+        "initial_proposal_correct": false,
+        "actual_world_correct": false,
+        "one_attempt_constraint": true,
+        "persistence_and_receipt_agree": true,
+        "original_request_prefix_and_parameters_preserved": true,
+        "actual_receipt_delivered_in_next_http": true,
+        "answer_actual_id_quantity_label": true,
+        "answer_faithful": true,
+        "strict_task_success": false,
+        "infrastructure_or_format_failure": false,
+        "seeded_memory_unchanged": true
+      },
+      "wrong_fields": {
+        "quantity": {
+          "expected": 4,
+          "actual": 3
+        }
+      },
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-205b9f9a-670a-4b39-9233-a14f66d47652",
+            "user_id": "riley",
+            "item_key": "Cobalt delivery kits",
+            "quantity": 3,
+            "destination": "storage S-2",
+            "packing": "fiber cases",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "riley",
+            "item_key": "Cobalt delivery kits",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "actual_tool_receipt": {
+        "ok": true,
+        "status": "label_created",
+        "reservation_id": "RSV-205b9f9a-670a-4b39-9233-a14f66d47652",
+        "item_key": "Cobalt delivery kits",
+        "quantity": 3,
+        "destination": "storage S-2",
+        "packing": "fiber cases",
+        "label_status": "created"
+      },
+      "answer": "Reservation created successfully. Reservation ID: RSV-205b9f9a-670a-4b39-9233-a14f66d47652. 3 units of Cobalt delivery kits reserved for storage S-2 in fiber cases with label created.",
+      "answer_assessment": "Actual ID, quantity, packing and label outcome faithfully reported. Natural-language pluralization/shortening of item description is accepted by the frozen rubric; this does not repair an incorrect persisted exact item_key.",
+      "first_generation_id": "chatcmpl-94a40ec13e309143",
+      "first_tool_call_id": "chatcmpl-94a40ec13e309143:tool:0",
+      "followup_generation_id": "chatcmpl-8d1deee3fcfd9ded",
+      "first_usage": {
+        "prompt_tokens": 1182,
+        "total_tokens": 1231,
+        "completion_tokens": 49,
+        "prompt_tokens_details": null
+      },
+      "continuation_usage": {
+        "prompt_tokens": 1344,
+        "total_tokens": 1417,
+        "completion_tokens": 73,
+        "prompt_tokens_details": null
+      },
+      "continuation_generation_calls": 1,
+      "seed_embedding_calls": 2,
+      "seed_embedding_tokens": 65,
+      "generation_tokens_combined": 2648,
+      "host_wall_seconds": 0.6931743947789073,
+      "embedding_wall_seconds": 0.06264770682901144,
+      "observer_stats": {
+        "id": 1,
+        "transactions": 12,
+        "observer_cpu_ns": 4090843,
+        "observer_wall_ns": 78396838,
+        "extra_store_reads": 0,
+        "extra_read_cpu_ns": 0,
+        "extra_read_wall_ns": 0,
+        "initial_db_bytes": 98304
+      },
+      "hashes": {
+        "result": "4d1ef0c82b214b58cc6d77be3c5ea589d1c8cb7a742f9e59c05a006b18f586bc",
+        "trace": "e4c737d568b9b496c08e91117bea6c6abdaa3421182c77f648b34d0a330693d2",
+        "world_db": "e99a8ec20530477c1df93d521d820fb7ba8fc077e8ca799a054fa6f6e9a67c9f",
+        "checkpoint_db": "76a7922331a02afab5bb8bdef843c8ba341048b15e4c31c84f921f0704d221f2",
+        "instrumentation_db": "b24e7011e45710856c3d84eaae21614a4b8d3e058e006774f4bd510cf662b0ec"
+      },
+      "first_break": "First-response Host generated incorrect action arguments before any current tool/world side effect. Actual ToolNode and persistence faithfully used them; later response did not repair them."
+    }
+  ],
+  "totals": {
+    "strict_task_success": 1,
+    "faithful_execution": 6,
+    "actual_id_quantity_label_answer": 6,
+    "full_answer_faithful_conservative": 5,
+    "continuation_delta": {
+      "generation_calls": 6,
+      "generation_tokens": 8846,
+      "embedding_tokens": 327
+    },
+    "combined_first_and_continuation": {
+      "generation_calls": 12,
+      "generation_tokens": 16451,
+      "embedding_tokens": 327
+    },
+    "embedding_calls": 9,
+    "business_calls": 6,
+    "new_memory_tool_calls": 0,
+    "costs_by_variant": {
+      "original": 5797,
+      "source_title": 5835,
+      "raw_sources": 4819
+    },
+    "http_host_wall_seconds": 4.908763930667192,
+    "http_embedding_wall_seconds": 0.5653574415482581
+  },
+  "ledger_after": {
+    "generation_calls": 2780,
+    "generation_tokens": 3436784,
+    "embedding_tokens": 19073,
+    "sha256": "0caa21c1e6e483af4863808c382d97057e5d473b985ef783dc35c4e058e5d52d"
+  },
+  "decision": "PIVOT away from title-only repair; CONTINUE separately frozen writer-responsibility diagnosis; no repeated wording tuning or deployment. No causal pure-State, unseen, cross-model or population effect claim.",
+  "measurement_limits": [
+    "The actual business world is local synthetic SQLite, not a Product or external shipping system.",
+    "Restore embeddings are experiment setup costs and reported separately; no runtime memory search/write occurred.",
+    "ObservedStore does not log unbound fixture/snapshot operations as Host semantic memory operations. Direct Store CPU/wall was not measured here; observer stats and exact embeddings are retained.",
+    "Original source traces and current full traces remain ignored; exact frozen job files are required to reproduce the same saved responses. New R1 generations are a new execution with new actual IDs.",
+    "A conservative answer-fidelity judgement for the storage qualifier does not affect the strict task-success numerator, because that case already has wrong world fields.",
+    "Old history/checkpoints and frozen first-response bytes remain unchanged."
+  ]
+}

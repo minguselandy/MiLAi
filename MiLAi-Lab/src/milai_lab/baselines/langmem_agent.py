@@ -37,6 +37,7 @@ from milai_lab.methods.local_state_attention.integration import (
     make_full_history_hook,
     make_pre_model_hook,
     make_window_summary_hook,
+    make_writer_view_hook,
 )
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 from milai_lab.providers.contextual_vllm import VLLMClient
@@ -129,6 +130,11 @@ def build_agent(
     history_summary_controller: HistorySummaryController | None = None,
     memory_contract: Literal["native", "strict"] = "native",
     writer_tools: WriterTools | None = None,
+    writer_tool_mode: Literal["full", "read_only", "memory_only"] = "full",
+    writer_maintenance_trigger: BaseTool | None = None,
+    writer_view_bank: Any = None,
+    writer_known_prefix_messages: int = 0,
+    writer_initial_boundary: dict[str, Any] | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
@@ -141,10 +147,23 @@ def build_agent(
         or writer_tools.bank.store is not store
     ):
         raise ValueError("LANGMEM_WRITER_TOOLSET_CONFLICT")
+    if writer_tool_mode not in {"full", "read_only", "memory_only"} or (
+        writer_tools is None and (writer_tool_mode != "full"
+                                  or writer_maintenance_trigger is not None)
+    ) or (writer_tool_mode != "read_only" and writer_maintenance_trigger is not None):
+        raise ValueError("LANGMEM_WRITER_TOOL_MODE_INVALID")
+    if writer_view_bank is not None and (
+        writer_tools is None or writer_view_bank is not writer_tools.bank
+        or local_state_controller is not None or full_history
+        or history_summary_controller is not None
+    ):
+        raise ValueError("LANGMEM_WRITER_VIEW_CONFLICT")
     selected_memory_tools: Sequence[BaseTool]
     if writer_tools is not None:
         owned_manage = writer_tools.manage_memory
-        selected_memory_tools = (owned_manage, writer_tools.search_memory)
+        selected_memory_tools = ((writer_tools.search_memory,) if writer_tool_mode ==
+                                 "read_only" else
+                                 (owned_manage, writer_tools.search_memory))
     elif memory_tools is None:
         owned_manage = (create_manage_memory_tool(namespace=MEMORY_NAMESPACE)
                         if memory_contract == "native" else
@@ -172,9 +191,13 @@ def build_agent(
         raise ValueError("HISTORY_ACCESS_MISSING")
     if history_summary_controller is not None and history_access is None:
         raise ValueError("HISTORY_ACCESS_MISSING")
-    tools = [*selected_memory_tools, *history_tools,
-             *([writer_tools.manage_state, writer_tools.read_record]
-               if writer_tools is not None else []), *business_tools]
+    writer_extra = (
+        [writer_tools.manage_state, writer_tools.read_record]
+        if writer_tools is not None and writer_tool_mode == "full" else
+        [writer_tools.read_record, *([writer_maintenance_trigger]
+                                    if writer_maintenance_trigger is not None else [])]
+        if writer_tools is not None else [])
+    tools = [*selected_memory_tools, *history_tools, *writer_extra, *business_tools]
     parameter_schemas = {
         tool.name: convert_to_openai_tool(tool)["function"]["parameters"]
         for tool in tools
@@ -217,7 +240,8 @@ def build_agent(
         model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
         prompt=(prompt if local_state_controller is None and not full_history
-                and history_summary_controller is None else None),
+                and history_summary_controller is None and writer_view_bank is None
+                else None),
                         pre_model_hook=(make_pre_model_hook(local_state_controller, prompt,
                                             read_policy=local_state_read_policy,
                                             source_view_max_bytes=source_view_max_bytes,
@@ -228,7 +252,14 @@ def build_agent(
                         make_window_summary_hook(history_access,
                                                  history_summary_controller, prompt)
                         if history_access is not None
-                        and history_summary_controller is not None else None),
+                        and history_summary_controller is not None else
+                        make_writer_view_hook(
+                            writer_tools, prompt,
+                            source_view_max_bytes=source_view_max_bytes,
+                            known_prefix_messages=writer_known_prefix_messages,
+                            initial_boundary=writer_initial_boundary,
+                            emit=model.client.emit)
+                        if writer_view_bank is not None else None),
         store=store,
         checkpointer=checkpointer,
         version="v1",

@@ -1,0 +1,37 @@
+{
+  "kind": "MILAI_WRITER_POLICY_RUBRIC",
+  "status": "SCORER_FROZEN_BEFORE_EXECUTION",
+  "runtime_reads_rubric": false,
+  "independent_arcs": 1,
+  "prefixes": 2,
+  "strict_criteria": {
+    "second_increment": {
+      "memory": "Existing scoped plan record keeps actual ID, current quantity becomes 4 exactly once; source item key, destination storage S-2 and fiber cases remain. No new duplicate persistent plan.",
+      "state": "Existing scoped State keeps ID and same current 4-unit plan; unrelated needs/owner/provenance not fabricated. Prior 3 may only be explicitly historical, not concurrent current truth.",
+      "no_action": "No business action is permitted at this prefix.",
+      "both_stores": "Report memory and State separately, plus consistency; completing only one copy is not full two-store maintenance.",
+      "answer": "Host reports actual successful change only if ordinary plan now four units, storage S-2, fiber cases; no invented operation or no-side-effect success. Root separately scores final State after turn_end overlap."
+    },
+    "no_change": {
+      "memory": "No content mutation or duplicate record for a read-only user request.",
+      "state": "No semantic or revision change merely from the read request; pending acknowledgement is separate metadata.",
+      "answer": "Host must answer actual three units, storage S-2, fiber cases and no unauthorized business action; a silent empty boundary proposal is insufficient.",
+      "no_action": "No business side effect permitted."
+    }
+  },
+  "classification": [
+    "maintenance_correct",
+    "wrong_or_incomplete_maintenance",
+    "unnecessary_change",
+    "requires_read_continuation",
+    "invalid_or_infrastructure_failure"
+  ],
+  "cost": "Complete public-message Host answer plus configured boundary maintenance, including all read/search continuations, rejected proposals/repairs, seed embeddings and snapshot/observation overhead. Count Host/control separately and combined; boundary-only NO_CHANGE is not a user answer.",
+  "decision": "Only a signal with necessary update plus no-change counterexample can select a candidate for a short complete lifecycle against adapted overlap; no unseen or semantic exactly-once claim.",
+  "strict_completion": "For each complete trajectory, required memory and State outcomes, no unauthorized business action, and truthful useful Host answer must all hold. Scores by store, answer and pending acknowledgement are also reported separately.",
+  "units": {
+    "independent_arcs": 1,
+    "prefixes": 2,
+    "isolated_complete_trajectories": 6
+  }
+}

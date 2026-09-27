@@ -1,0 +1,117 @@
+{
+  "kind": "MILAI_C3B_WRITER_POLICY_CHECKS_RECEIPT",
+  "source_head_before_publication": "ec34c89d96ecbf6030777b8b23c5dc9773d27ac4",
+  "changed_file_sha256": {
+    ".github/workflows/ci.yml": "ab8c1e2ac944b3ff8d93f1587fe21723b879546ff3df79435965af093652f811",
+    ".github/workflows/fast.yml": "6c8a88727939ba697f559eb2ed288bc06f4ef4655800bd8974ca4113ebfd0590",
+    "MiLAi-Lab/configs/lab-verification-matrix.json": "1b35ee0ff3d11a54bacd4f1203aa8de64ca63b14ab2cb04789709e9443ed0eca",
+    "MiLAi-Lab/src/milai_lab/methods/local_state_attention/writers.py": "185709e0229375e17b2e11914cefeabac5bedacf9bd8d8d9b37b1a9af06e1cb4",
+    "MiLAi-Lab/src/milai_lab/methods/local_state_attention/controller.py": "5e900f6a60aec27a7479cdccd7c3eb16c389a51abe9258a2ab17c7217280612b",
+    "MiLAi-Lab/src/milai_lab/methods/local_state_attention/integration.py": "5a458a9fe7ffc88abfdef762a33f2aef0646c1b797a984d364863bdc1107ed4a",
+    "MiLAi-Lab/src/milai_lab/baselines/langmem_agent.py": "6dee59735f13ba5d3629251f2aaee98043274adab6d5a30f693e06fa9908b9c4",
+    "MiLAi-Lab/src/milai_lab/runners/langmem_application.py": "a58fe6cf8520f7b33a96528d67a3b4a6289001e06d3d3f5a2c94502b8c0d7590",
+    "MiLAi-Lab/src/milai_lab/runners/writer_policy.py": "5fe33994b97f43d76992ea4db08c3211fcea963e0934f057271db83f26105adb",
+    "MiLAi-Lab/tools/run_writer_policy.py": "924915faffa52c073f85763b7574af2eb76ac6cc4119f681f6acf1f383a15d77",
+    "MiLAi-Lab/tests/unit/test_writer_policy.py": "4e2cfbf57dbfff659f81cc4bb886c0e92053c6d563941c13e98a13befaff211c"
+  },
+  "public_inputs_sha256": "039b99e04e4070dc75ee2c588793a71541518d76444f10ec1256a73b0059a4b0",
+  "public_config_sha256": "568713c65a742f29c9bf91b96a889025b98cbe8c24a953839f5bba70a7cff461",
+  "public_rubric_sha256_not_read_by_runner": "91a260823d37c4e19fd21e52ea90a44dd87081b5f158d92d582ca4c5d35e8e7a",
+  "prepare": {
+    "command": "PYTHONPATH=src artifacts/next-improvement/envs/foundation/bin/python tools/run_writer_policy.py prepare --config data/diagnostics/next-improvement-wp3-writer-policy-r1/config.json --inputs data/diagnostics/next-improvement-wp3-writer-policy-r1/inputs.json --run c3b-public-final-zero-model --runtime-root /tmp/milai-c3b-public-final-zero-model --output /tmp/milai-c3b-public-final-zero-model/prepared.json",
+    "result": "PREPARED_ZERO_MODEL",
+    "jobs": 6,
+    "identity_sha256": "ea2e38f93b24b3dbfcb4a20f191a8cbb48782e37f2d99a1f0823aeef4d8e4075",
+    "receipt_path": "/tmp/milai-c3b-public-final-zero-model/prepared.json",
+    "manifest_path": "/tmp/milai-c3b-public-final-zero-model/run_manifest.json",
+    "status": "pre-publication Git HEAD; Root must prepare formal run after commit"
+  },
+  "checks": [
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/pytest -q tests/unit/test_writer_policy.py",
+      "result": "16 passed",
+      "elapsed_seconds": 3.34,
+      "source_stage": "final after same-turn receipt callback"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/pytest -q tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py tests/unit/test_langmem_foundation.py",
+      "result": "109 passed",
+      "source_stage": "after main agent/integration changes; before final writer callback"
+    },
+    {
+      "command": ".venv/bin/pytest -q tests/unit/test_lsa_controller_contract.py",
+      "result": "71 passed",
+      "source_stage": "after controller context/prompt; final change only writer callback"
+    },
+    {
+      "command": "ruff check src/milai_lab/methods/local_state_attention/writers.py src/milai_lab/methods/local_state_attention/controller.py src/milai_lab/methods/local_state_attention/integration.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/langmem_application.py src/milai_lab/runners/writer_policy.py tools/run_writer_policy.py tests/unit/test_writer_policy.py",
+      "result": "pass",
+      "source_stage": "final"
+    },
+    {
+      "command": "mypy src/milai_lab/methods/local_state_attention/writers.py src/milai_lab/methods/local_state_attention/controller.py src/milai_lab/methods/local_state_attention/integration.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/langmem_application.py src/milai_lab/runners/writer_policy.py tools/run_writer_policy.py",
+      "result": "pass",
+      "source_stage": "final"
+    },
+    {
+      "command": "tools/check_verification_matrix.py",
+      "result": "pass; active_sources=149, foundation_explicit=41, optional_tests_owned=11",
+      "source_stage": "final"
+    },
+    {
+      "command": "milai-lab-check-boundary; milai-lab-check-tools-boundary; git diff --check",
+      "result": "pass",
+      "source_stage": "final"
+    },
+    {
+      "command": "explicit EOF and trailing-whitespace check on all three new files",
+      "result": "pass",
+      "source_stage": "final"
+    }
+  ],
+  "build": {
+    "final_command": "uv build --offline --out-dir artifacts/next-improvement/wp3/writer-policy-dist-final",
+    "final_log_path": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/wp3/writer-policy-build-final.log",
+    "final_log_sha256": "a67df55d35784279a440fb115c142ae0b19ac1052d368c6503813ff2e72ed8be",
+    "final_artifacts": {
+      "milai_lab-0.1.0-py3-none-any.whl": {
+        "sha256": "2d2ca88da91b5eff94695f7220a76a4f8e304f8e5107d85aa8fa03242850d23e",
+        "bytes": 527643
+      },
+      "milai_lab-0.1.0.tar.gz": {
+        "sha256": "e7512a07133bf36014e90e36686d67921a54018daea6c0969cd92c1393d55bea",
+        "bytes": 5082789
+      }
+    },
+    "content_check": "wheel includes writer_policy.py and writers.py; sdist includes CLI, test, public inputs, verification matrix; both exclude artifacts/.venv",
+    "earlier_build_stale_due_to_final_same_turn_receipt_fix": {
+      "log_path": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/wp3/writer-policy-build.log",
+      "artifacts": {
+        "milai_lab-0.1.0-py3-none-any.whl": {
+          "sha256": "15ffc36fd1d605716597bd310c2ab731c9008aeac726cde570afaa1c21fa583b",
+          "bytes": 527505
+        },
+        "milai_lab-0.1.0.tar.gz": {
+          "sha256": "2a8a7186f8d1e01a4f1db257b6997d63ba30d80bcf455bb5924859a6762c3404",
+          "bytes": 5082417
+        }
+      },
+      "result": "build itself passed; source changed afterward, so not publishable final artifact"
+    }
+  },
+  "retained_intermediate_failures": [
+    "Initial host_both pending test expected only user source; actual ToolNode produced real tool source IDs. Implemented terminal-success mechanical ack of actually captured sources and adjusted test.",
+    "New seed test tried instance monkeypatch on InMemoryStore.put; changed to class monkeypatch.",
+    "Synthetic prepare test omitted required strict contract config; corrected fixture.",
+    "Capacity test expected only user pending; actual tool receipt is also a new source; corrected assertion.",
+    "Initial package-inspection script tried opening dist/.gitignore as tar; build succeeded. Final inspection filtered only wheel and tar.gz.",
+    "Final package-inspection first command used unavailable bare python executable; reran with .venv/bin/python. Build succeeded."
+  ],
+  "execution_limits": {
+    "real_host_http_calls": 0,
+    "real_embedding_calls": 0,
+    "shared_postgres_calls": 0,
+    "test_store": "MockTransport and InMemoryStore; affected tests also use actual local SQLite checkpoint with synthetic ApplicationWorld",
+    "not_claimed": "No cross-process replay guarantee for same-turn boundary receipts, no exactly-once ordinary-memory writes, no two-store transaction, no rubric access or real-model outcome."
+  }
+}

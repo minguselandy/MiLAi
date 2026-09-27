@@ -20,6 +20,7 @@
     "src/milai_lab/providers/langmem_chat.py",
     "src/milai_lab/runners/langmem_*.py",
     "src/milai_lab/runners/frozen_action_continuation.py",
+    "src/milai_lab/runners/writer_policy.py",
     "src/milai_lab/datasets/merit.py"
   ],
   "foundation_tests": [
@@ -31,6 +32,7 @@
     "tests/unit/test_local_state_attention.py",
     "tests/unit/test_local_state_attention_read_probe.py",
     "tests/unit/test_frozen_action_continuation.py",
+    "tests/unit/test_writer_policy.py",
     "tests/unit/test_langmem_application.py"
   ],
   "core_pytest_ignores": [
@@ -42,6 +44,7 @@
     "tests/unit/test_local_state_attention.py",
     "tests/unit/test_local_state_attention_read_probe.py",
     "tests/unit/test_frozen_action_continuation.py",
+    "tests/unit/test_writer_policy.py",
     "tests/unit/test_langmem_application.py",
     "tests/unit/test_external_memory_v26.py"
   ],
