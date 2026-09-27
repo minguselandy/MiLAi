@@ -71,7 +71,7 @@
   ],
   "shared_postgres_calls": 0,
   "local_test_backends": "MockTransport, InMemoryStore and actual local SQLite checkpoints/synthetic world in affected tests",
-  "status": "CORE_OPTIONAL_IMPORT_REPAIR_LOCAL_PASSED_REMOTE_PENDING",
+  "status": "ENGINEERING_ACCEPTED_ACTUAL_FAST_PASSED_C3B_NOT_RUN",
   "receipt_sha256": "bf1cd864ea80a3fe7809e6eb1afa20d0e8f8759db56b2bf847368ca55ff93738",
   "initial_publication": {
     "commit": "bd5b4acb50a37b84cdcf87b4fcfab7b4b699faa5",
@@ -111,6 +111,21 @@
     "retained_intermediate_failure": "TYPE_CHECKING import grouping Ruff warning fixed before final pass",
     "real_model_calls": 0,
     "extra_local_build": false,
-    "remote_result": "PENDING"
+    "remote_result": {
+      "run": 36331881913,
+      "tested_merge": "9b09559bb327c71163eab89b09ba60c686f1611a",
+      "core_job": 108655424439,
+      "core": "5114 passed, 142 skipped, 14 deselected in 489.98s; wheel/sdist built",
+      "pure_protocol": "71 passed also included in core total; not additive",
+      "foundation_job": 108655424441,
+      "foundation": "21+88+7+46=162 passed, 1 deselected",
+      "external_job": 108655424416,
+      "external": "success",
+      "final_gate": 108656930104,
+      "final_gate_result": "success",
+      "skips": "unselected Product and archive jobs skipped; not passes",
+      "extra_local_build": false
+    },
+    "commit": "2c7b7ddcca952f8d24ec31fe90709f1706ddeb35"
   }
 }

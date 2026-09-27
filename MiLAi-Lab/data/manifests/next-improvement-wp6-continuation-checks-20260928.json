@@ -1,0 +1,74 @@
+{
+  "kind": "MILAI_WP6_FROZEN_ACTION_CONTINUATION_CHECKS",
+  "prepublish_head": "2c7b7ddcca952f8d24ec31fe90709f1706ddeb35",
+  "source_frozen": true,
+  "changed_source_sha256": {
+    "src/milai_lab/runners/frozen_action_continuation.py": "95ddd1577662944faaffab85885d245847d87e44e582172296c11059ec32cc61",
+    "tools/run_frozen_action_continuation.py": "0261797c0346a358ad8146422315c565dc446d18a140ef1e4608e1dd30307d06",
+    "tests/unit/test_frozen_action_continuation.py": "05d219e25c60f0410d01ac0bd5c234c2d41216548162c940841c7b9fd4436e24",
+    "configs/lab-verification-matrix.json": "ebfe3250043c7cf83e397be48b5541a2f6bb5955b3e700c52b49d97cfcf4b894",
+    "../.github/workflows/fast.yml": "6ce161a1613e1a8f58fba9dbf61791b37e774dbea3783520fd01bda9b9f21c76",
+    "../.github/workflows/ci.yml": "40e6b4622fbe7000b1a51b26fad221cb9c24b3bb7f4e9fceb51439c10d53171c"
+  },
+  "final_prestate_sha256": "a36fd64679577d2ec1a2731ac3f10a3c773e3c7edf6e1555d7711a1826cd69be",
+  "checks": [
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_frozen_action_continuation.py",
+      "result": "6 passed, 5 locked-dependency deprecation warnings",
+      "timing": "after final dirty-current-owner guard"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m ruff check src/milai_lab/runners/frozen_action_continuation.py tests/unit/test_frozen_action_continuation.py",
+      "result": "All checks passed",
+      "timing": "after final dirty-current-owner guard; unchanged new CLI passed earlier target Ruff"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m mypy --follow-imports=silent src/milai_lab/runners/frozen_action_continuation.py",
+      "result": "Success: no issues found in 1 source file",
+      "timing": "after final dirty-current-owner guard; unchanged new CLI passed earlier target Mypy"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab",
+      "result": "Success: no issues found in 113 source files",
+      "timing": "before final narrow prestate guard; that file passed targeted Mypy afterward"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python tools/check_verification_matrix.py",
+      "result": "active_sources=148, foundation_explicit=40, optional_tests_owned=10",
+      "timing": "after workflow and matrix edits"
+    },
+    {
+      "command": "milai-lab-check-boundary; milai-lab-check-tools-boundary; git diff --check",
+      "result": "all passed",
+      "timing": "boundary commands before final narrow prestate guard; final diff check after"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python tools/run_frozen_action_continuation.py prepare --config /cra/memory/mx_memory/MiLAi-worktrees/next-experiment-c2/MiLAi-Lab/artifacts/next-improvement-wp6/config.json --inputs /cra/memory/mx_memory/MiLAi-worktrees/next-experiment-c2/MiLAi-Lab/artifacts/next-improvement-wp6/inputs.json --first-run-root /cra/memory/mx_memory/MiLAi-worktrees/next-experiment-c2/MiLAi-Lab/artifacts/next-improvement-wp6/run --prestates data/diagnostics/next-improvement-wp6-continuation-r1/prestates.json --run wp6-continuation-final-source-prepublish --arm frozen_action --runtime-root /tmp/milai-wp6-continuation-final-source-prepublish --output /tmp/milai-wp6-continuation-final-source-prepublish/prepared.json",
+      "result": "PREPARED_ZERO_MODEL; 6 frozen jobs; identity_sha256=7784065d660beac41c69d6497787d2e4a8441dea2bd42fe6f68880c706a0949a",
+      "manifest_path": "/tmp/milai-wp6-continuation-final-source-prepublish/run_manifest.json"
+    },
+    {
+      "command": "uv build --offline --out-dir artifacts/next-improvement/wp6/continuation-dist",
+      "result": "wheel and sdist built; wheel contains new runner; sdist contains CLI, new test, final prestate and WP6 continuation doc; no artifacts or venv",
+      "log_path": "artifacts/next-improvement/wp6/continuation-build.log"
+    }
+  ],
+  "offline_graph_evidence": "Both partial and distinct frozen histories were resumed with real local SQLite checkpoint and ApplicationWorld, InMemoryStore, and httpx.MockTransport. Each preserved the entire original parsed HTTP request prefix, used the original generation/tool IDs, executed one BusinessActionJournal call, emitted one mock later Host request, and advanced per-message capacity from 1 to 2. The unit suite also tests an already paired historical tool, cap=1 failure after actual side effect, no-seed dirty-owner rejection, and repeated-attempt guard.",
+  "resolved_intermediate_failures": [
+    "New runner initial Ruff import ordering was fixed before final target checks.",
+    "Initial local input inspection used run/inputs.json; the frozen inputs are at the parent directory. No source behavior changed for this path error.",
+    "Review found an unseeded current-owner dirty namespace could leak; added pre-write exact-scope emptiness check and narrow regression.",
+    "Earlier /tmp prepare receipts used draft prestate or pre-final source bytes and are superseded by the final-prepublish receipt."
+  ],
+  "unresolved_test_failures": [],
+  "distribution_sha256": {
+    "artifacts/next-improvement/wp6/continuation-dist/milai_lab-0.1.0-py3-none-any.whl": "4a0bd864a56529ca5e80db0307fa441f079ad90f71162b625e593410e2706ffd",
+    "artifacts/next-improvement/wp6/continuation-dist/milai_lab-0.1.0.tar.gz": "1d173e2f42469229a0c01ae975e1e8853f68a204706f6497f05e130439dea757"
+  },
+  "real_host_http_calls": 0,
+  "real_embedding_http_calls": 0,
+  "shared_postgres_calls": 0,
+  "mock_and_local_io": "httpx.MockTransport, InMemoryStore, real local SQLite checkpoint and synthetic ApplicationWorld were used.",
+  "local_receipt_sha256": "b190c99cc7e2189d5bcabcf4eb845ef70e2e1d1048f8cdefcf527202b2c1c17c",
+  "publication_note": "Build precedes addition of its own public verification receipt and acceptance paragraph; frozen source/entry/prestate bytes are unchanged. No new build required for subsequent report-only metadata."
+}

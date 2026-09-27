@@ -112,3 +112,14 @@ H1新runtime import破坏纯协议加载边界；H2实际core依赖/测试归属
 目标Ruff/Mypy、147活动源码/22 core直接/39 foundation显式的矩阵及diff通过。
 中间Ruff导入分组空行提示已修并保留记录。修复无额外模型/embedding或本地构建，
 后续实际CI按新head验收；原bd5b4ac失败记录继续保留。
+
+## 修复后的实际远端验收
+
+修复head `2c7b7ddcca952f8d24ec31fe90709f1706ddeb35`的
+[Fast36331881913](https://github.com/minguselandy/MiLAi/actions/runs/36331881913)
+和最终gate108656930104均成功，测试merge为`9b09559bb327c71163eab89b09ba60c686f1611a`。
+core job108655424439为5114 passed / 142 skipped / 14 deselected，489.98秒；wheel/sdist实际构建成功。
+71项纯协议也独立执行通过，已包含在5114项内，不叠加。foundation job108655424441为
+21+88+7+46=162 passed / 1 deselected；external108655424416、边界和conformance成功。
+未选择的Product/Archive任务跳过，不计成功。没有额外本地重测或构建；main未合并。
+这关闭C3a工程门槛，C3b写入责任语义比较仍未运行。

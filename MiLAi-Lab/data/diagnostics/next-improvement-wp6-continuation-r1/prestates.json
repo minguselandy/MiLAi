@@ -1,0 +1,74 @@
+{
+  "kind": "MILAI_FROZEN_ACTION_PRESTATES",
+  "status": "INPUT_BYTES_FROZEN_BEFORE_EXECUTION",
+  "cases": [
+    {
+      "case_id": "partial",
+      "user_id": "mira",
+      "initial_label_available": false,
+      "business_world": {
+        "reservations": [],
+        "attempts": []
+      },
+      "memory_records": [
+        {
+          "user_id": "noel",
+          "key": "ccdba07d-7faa-4c1f-b410-3623a2baf867",
+          "value": {
+            "content": "User's handling plan for Summit archive crates: 2 crates for south bay S-8, using cloth covers. No reservation exists yet. Acknowledged without business action."
+          }
+        }
+      ],
+      "source_selection": {
+        "source": "partial-pre_model",
+        "selected_trace_index": 23,
+        "selected_request_sha256": "b5f95c4fd9ab5ceddc072fb78aeb3ef85afbd8880bf3840e2a1eb56e4905ac4c",
+        "prior_generation_ids_count": 8,
+        "observed_memory_operation_count": 1,
+        "operation_ids": [
+          "5f82a07dc58218395a2d8bfcd9b876d9e4ff978485a04dee5d621c54389379cb:1:store:1"
+        ],
+        "selection": "only observed ordinary-memory operations linked to actual receipt generation IDs strictly earlier than selected request trace record; no time comparison or expected answer"
+      }
+    },
+    {
+      "case_id": "distinct",
+      "user_id": "riley",
+      "initial_label_available": true,
+      "business_world": {
+        "reservations": [],
+        "attempts": []
+      },
+      "memory_records": [
+        {
+          "user_id": "riley",
+          "key": "fa676864-9958-4aa2-ac65-1b4f563ff420",
+          "value": {
+            "content": "Cobalt delivery kits: 3 units to storage S-2 in fiber cases. Status: Nothing is reserved."
+          }
+        },
+        {
+          "user_id": "riley",
+          "key": "7edbb74e-e1f5-4f3b-bbe8-85b858b31ae3",
+          "value": {
+            "content": "User requested to keep for later: Cobalt delivery kits, 3 units to storage S-2 in fiber cases. Nothing is reserved. Acknowledge without taking a business action."
+          }
+        }
+      ],
+      "source_selection": {
+        "source": "distinct-turn_end",
+        "selected_trace_index": 49,
+        "selected_request_sha256": "766b91fe861cadeee952af26afa87ce3557d0715e643fe2ebec1d9225b04b7e6",
+        "prior_generation_ids_count": 14,
+        "observed_memory_operation_count": 3,
+        "operation_ids": [
+          "b231cdc49773a63d277f850606f2b005ddc3a42d62b35c6a1699aeb43d6313e1:1:store:1",
+          "e4d763937e4e5105db3635190be407555b03b3b79676fd5f401b675be8d841f6:1:store:1",
+          "629dcf9430d3337a4b0abdb584eff8703304fb8f7d50bf61d97a9b4582275d99:1:store:1"
+        ],
+        "selection": "only observed ordinary-memory operations linked to actual receipt generation IDs strictly earlier than selected request trace record; no time comparison or expected answer"
+      }
+    }
+  ],
+  "policy": "Keep each record owner; remap only run and arm namespace. Exact historical keys and values, no future state. Seed embeddings charged when executed."
+}
