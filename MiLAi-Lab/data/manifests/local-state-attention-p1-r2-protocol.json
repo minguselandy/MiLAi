@@ -1,0 +1,50 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P1_R2_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_PUBLICATION",
+  "parent_protocol": "data/manifests/local-state-attention-p1-protocol.json",
+  "parent_protocol_sha256": "ca38944f8f289d557134630c9e1e7fc4b390a14350cc3c24de8214c8571c3c43",
+  "r1_results": "docs/MILAI_LOCAL_STATE_ATTENTION_P1_R1_RESULTS_20260927.md",
+  "change": "Generic create/edit/focus contract alignment only; same tasks, rubric, order, budgets, process boundaries, empty-state isolation and vLLM configuration.",
+  "run_order": [
+    {
+      "run_id": "lsa-p1-interleaved-r2",
+      "arm": "local_state",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p1-partial-r2",
+      "arm": "local_state",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-interleaved-workshop.json": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "public_messages": 12,
+  "trajectory_denominator": 2,
+  "split": "exposed_development",
+  "source_identity": "Actual prepare/run manifests generated after publication",
+  "accounting": "All R1 failure costs retained; artifacts/ser-v20/budget.json continuous; R2 starts at 869 calls /1048218 gen tokens /9617 embedding tokens",
+  "repair_validation": {
+    "tests": 10,
+    "test_file": "tests/unit/test_local_state_attention.py",
+    "ruff": "PASS",
+    "mypy_controller": "PASS",
+    "diff_check": "PASS",
+    "build": "NOT_REPEATED_NO_PACKAGING_CHANGE",
+    "real_decoder": "R2 first actual control request checks compatibility; no unrecorded probes"
+  },
+  "claim_limit": "End-to-end validity only; no matched-arm efficacy conclusion"
+}

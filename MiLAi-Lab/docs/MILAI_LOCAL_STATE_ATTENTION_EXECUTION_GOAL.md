@@ -34,8 +34,8 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 
 | 阶段/工作包 | 必须交付的证据 | 当前状态 |
 | --- | --- | --- |
-| P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | 源码、零模型接线和必要构建完成；待发布冻结，尚无真实请求 |
-| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | 实现完成，输入固定，待源码发布/冻结与真实验收 |
+| P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | 原型已发布；实际 manifest/HTTP已核对，发现 schema/store 契约缺口，修复中 |
+| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R1 三消息后因确定性接口问题停止；0/2 完整轨迹验收，保留原输入待修复后重跑 |
 | P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | 未运行；oracle 上界单列 |
 | P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | 未运行；初始建议 6 情景×3 臂×2 重复，调用前固定 |
 | P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | 未运行，遵循进入条件 |
@@ -100,6 +100,22 @@ P1 实现是小 bank 全目录和原始事件逐项读取，尚未交付规模�
 引用绑定原编辑索引；LSA 显式关闭 SER；删除身份阻止旧 checkpoint 内容重新进入 State，
 发送副本在删除来源后的下一条真实用户消息处重新开始，避免旧助手复述泄漏；原 checkpoint 保留。原始 DB 写入故障显式失败并保留 pending；
 可选控制超时/截断允许 Host 继续。真实 Postgres 只读连接和现有依赖已核实可用。
+
+## P1 实际进展
+
+原型提交 `031acc7ae63353ac00ef237755b7b028ef8ae989` 已与远端 main 核对。
+[R1 失败记录](MILAI_LOCAL_STATE_ATTENTION_P1_R1_RESULTS_20260927.md)确认新建 title
+在 schema 可选、bank 必需，导致三次合法 HTTP 输出均未形成 State，pending 被保留。
+实际运行 3/12 消息，Host 当轮 3/3 完成不能替代 State 验收；后九条未运行，不替换。
+同一 Sol 仅修复通用字段契约，Root 将冻结新版本并重跑两条完整原 development 轨迹。
+累计成本为 869 generation / 1048218 generation tokens / 9617 embedding tokens。
+P2–P7 和完整 Goal 保持 ACTIVE。
+
+R2 通用契约修复已冻结：创建必须有标题，更新可保持省略字段，focus 限于当前真实 ID
+或本批新建短引用；10 项 LSA 窄测、相关 ruff/mypy/diff 通过，没有重新 build 或模型探针。
+[R2 协议](../data/manifests/local-state-attention-p1-r2-protocol.json)继承原输入及 rubric
+字节和顺序，新的源码发布后由实际 prepare 生成运行身份。R2 首请求检验新 schema 的
+真实 decoder 兼容性，P1 语义验收仍待完成。
 
 ## 后期资源准备记录
 

@@ -10,6 +10,7 @@ from typing import Any
 
 import httpx
 import pytest
+from jsonschema import ValidationError, validate
 
 pytest.importorskip("langmem")
 
@@ -20,7 +21,10 @@ from langgraph.store.memory import InMemoryStore
 
 from milai_lab.baselines.langmem_agent import FoundationScope, build_agent, invoke_public_message
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
-from milai_lab.methods.local_state_attention.controller import LocalStateController
+from milai_lab.methods.local_state_attention.controller import (
+    LocalStateController,
+    control_schema,
+)
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import langmem_application_runtime as app_runtime
@@ -123,6 +127,10 @@ def test_hook_preserves_checkpoint_and_partial_tool_json(tmp_path: Path) -> None
     assert bank.pending(state_scope) == []
     assert len(bank.states(state_scope)) == 1
     assert any(view["event"] == "lsa_view" and view["states"] for view in views)
+    control_wire = wires[0]
+    assert "nonempty title" in control_wire["messages"][0]["content"]
+    assert "Never put a title" in control_wire["messages"][0]["content"]
+    assert control_wire["response_format"]["json_schema"]["schema"] == control_schema([], 32)
     host_wires = [wire for wire in wires if wire["response_format"]["json_schema"]["name"]
                   == "langmem_json_action_v1"]
     assert len(host_wires) == 2
@@ -174,6 +182,43 @@ def test_new_focus_uses_original_edit_index_after_skip() -> None:
     assert result["focus"][0] == bank.states(scope)[0]["id"]
     assert result["degraded"] is True
     assert [row["id"] for row in bank.pending(scope)] == ["source"]
+
+
+def test_control_schema_rejects_r1_missing_title_and_factual_focus() -> None:
+    schema = control_schema([], 32)
+    r1_response = {
+        "edits": [{"id": None,
+                   "content": ("The Workshop handout packs matter involves 6 packs "
+                               "destined for east archive E-2, packed in paper sleeves."),
+                   "evidence": ["message:17d8c811-3614-4ab8-bd27-1afd20c6a1b9"]}],
+        "focus": ["Workshop handout packs: 6 packs, east archive E-2, paper sleeves."],
+    }
+    with pytest.raises(ValidationError):
+        validate(r1_response, schema)
+    missing_title_only = {**r1_response, "focus": ["new:0"]}
+    with pytest.raises(ValidationError):
+        validate(missing_title_only, schema)
+    factual_focus_only = {**r1_response,
+                          "edits": [{**r1_response["edits"][0],
+                                     "title": "Workshop handout packs"}]}
+    with pytest.raises(ValidationError):
+        validate(factual_focus_only, schema)
+    legal_new = {**factual_focus_only, "focus": ["new:0"]}
+    validate(legal_new, schema)
+
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local_state", "alice")
+    source_id = r1_response["edits"][0]["evidence"][0]
+    bank.record_event(scope, {"id": source_id, "kind": "user", "content": "source"})
+    receipts, invalid = bank.apply(scope, legal_new["edits"], {source_id})
+    assert not invalid and receipts[0]["status"] == "created"
+    state_id = receipts[0]["id"]
+    legal_update = {"edits": [{"id": state_id, "content": legal_new["edits"][0]["content"]}],
+                    "focus": [state_id]}
+    validate(legal_update, control_schema([state_id], 32))
+    receipts, invalid = bank.apply(scope, legal_update["edits"], set())
+    assert not invalid and receipts[0]["status"] == "noop"
+    assert bank.states(scope)[0]["revision"] == 1
 
 
 def test_runtime_explicitly_disables_ser_for_local_state(

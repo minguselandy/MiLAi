@@ -27,20 +27,31 @@ def request_role(value: str) -> Iterator[None]:
         REQUEST_ROLE.reset(token)
 
 
-CONTROL_SCHEMA: dict[str, Any] = {
-    "type": "object",
-    "properties": {
-        "edits": {"type": "array", "items": {"type": "object", "properties": {
-            "id": {"type": ["string", "null"]},
-            "title": {"type": "string"},
-            "content": {"type": "string"},
-            "needs": {"type": "array", "items": {"type": "string"}},
-            "evidence": {"type": "array", "items": {"type": "string"}},
-        }, "required": ["id", "content"], "additionalProperties": False}},
-        "focus": {"type": "array", "items": {"type": "string"}},
-    },
-    "required": ["edits", "focus"], "additionalProperties": False,
-}
+def control_schema(state_ids: list[str], max_states: int) -> dict[str, Any]:
+    """Constrain new-State titles and focus to actual or request-local identifiers."""
+    fields: dict[str, Any] = {
+        "title": {"type": "string", "minLength": 1},
+        "content": {"type": "string", "minLength": 1},
+        "needs": {"type": "array", "items": {"type": "string"}},
+        "evidence": {"type": "array", "items": {"type": "string"}},
+    }
+    new_edit = {"type": "object", "properties": {"id": {"type": "null"}, **fields},
+                "required": ["id", "title", "content"], "additionalProperties": False}
+    existing_edit = {
+        "type": "object", "properties": {"id": {"enum": state_ids}, **fields},
+        "required": ["id", "content"], "additionalProperties": False,
+    }
+    edits = [new_edit, existing_edit] if state_ids else [new_edit]
+    focus_ids = [*state_ids, *(f"new:{index}" for index in range(max_states))]
+    return {
+        "type": "object", "properties": {
+            "edits": {"type": "array", "items": (
+                {"oneOf": edits} if len(edits) > 1 else edits[0]),
+                "maxItems": max_states},
+            "focus": {"type": "array", "items": {"enum": focus_ids}},
+        },
+        "required": ["edits", "focus"], "additionalProperties": False,
+    }
 
 
 class ControlResponseError(ValueError):
@@ -80,9 +91,16 @@ class LocalStateController:
             "new observations, independently choose the States useful to the current task. "
             "A tool receipt with ok=false can contain a committed partial effect: read its "
             "actual fields. Do not invent a business action, source, or State id. "
-            "Return JSON edits and focus only. New edit id is null; focus may name a newly "
-            "created edit as new:0, new:1, etc. Existing ids must be exact. "
-            "No change needs no edit; no useful State needs empty focus. "
+            "Return JSON with edits and focus only. A new edit requires id:null, a short "
+            "nonempty title naming the continuing matter and content; cite source evidence "
+            "when available. "
+            "An update requires an exact existing State id and content; omitted title or "
+            "needs preserves its previous value. No change needs no edit. "
+            "Focus is an array of identifiers only: exact ids from states, or new:0, new:1 "
+            "for a newly created edit at that zero-based edits index. Never put a title, "
+            "factual summary, or answer in focus. Empty focus is valid. "
+            "Update matters affected by observations even when they are not in focus; "
+            "choose focus for the current_task, which is a query rather than an answer. "
             "Evidence may cite only listed source ids. Keep unresolved needs concise."
         )
         payload = {"current_task": query,
@@ -91,6 +109,7 @@ class LocalStateController:
                        "id", "title", "content", "needs", "evidence_refs", "revision")}
                               for row in states],
                    "source_ids_available": [row["id"] for row in events]}
+        schema = control_schema([row["id"] for row in states], self.bank.max_states)
         if self.capacity_path is not None:
             counts = read_json(self.capacity_path) if self.capacity_path.exists() else {}
             if counts.get(message_key, 0) >= self.max_calls_per_message:
@@ -106,7 +125,7 @@ class LocalStateController:
                      {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}],
                     response_format={"type": "json_schema", "json_schema": {
                         "name": "local_state_control_v1", "strict": True,
-                        "schema": CONTROL_SCHEMA}},
+                        "schema": schema}},
                 )
             plan = self._parse(receipt)
         except (ControlResponseError, httpx.TimeoutException) as error:
