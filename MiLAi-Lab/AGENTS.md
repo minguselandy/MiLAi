@@ -64,6 +64,17 @@ do not repeat them for publication. Root runs after Luna publication, with sourc
 the complete batch and all failures/costs retained. Strong history/rebuild baselines and
 the remaining complete LSA plan stay active. MERIT base seeds0–4 are all already exposed.
 
+The [LR wiring results](docs/MILAI_LOCAL_STATE_ATTENTION_LR_WIRING_R1_RESULTS_20260927.md)
+complete those six runs: L9/12, LR10/12, LRU8/12, whole0/2,1/2,0/2. All partial runs actually
+read and label the same original reservation, but retain wrong initial exact item keys.
+L/LRU also lost unrelated briefing facts inside a combined card; initial partition differences
+prevent a pure selector-effect claim. Preserve +150 generations/153520 tokens/154 embedding
+tokens and cumulative2574/3183881/18337. Do not rerun for publication or add Host wording.
+Next implement common legitimate history access and a complete-history baseline via public
+checkpoint APIs, with equal access and I/O/accounting for matched arms; bank user/tool events
+alone are not complete assistant history. Keep remaining strong summaries/rebuild/ablations,
+native tasks, scale/model and lifecycle obligations open; no new archive database or Product work.
+
 The user activated the full [long-horizon master plan](docs/MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md),
 tracked by [the execution Goal](docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md).
 This supersedes prior closed-stage restrictions for the new research scope; preserve their

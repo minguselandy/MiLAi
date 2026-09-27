@@ -1,0 +1,1615 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_LR_WIRING_R1_RESULTS",
+  "source_commit": "857b80c7bc217d78c63b4f4d5dc0528b96a16f6c",
+  "runs": [
+    {
+      "run_id": "lsa-lr-wiring-r1-interleaved-local_lr_sources",
+      "case": "interleaved",
+      "arm": "local_lr_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "brief",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "foreground",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "background-revision",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-background",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "retained-third",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "passed": 6,
+      "total": 6,
+      "whole_pass": true,
+      "judgment": {
+        "failed": [],
+        "observed": "All six message facts correct, no early actions; exactly two correct item keys/quantities/destinations/packing and real receipts. Cross-process field-kit8 and retained briefing facts correct.",
+        "limits": "One exposed trajectory. Briefing State puts source id in prose but empty evidence_refs; correct answer alone does not prove every evidence link maintained."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 14,
+          "tokens": 12640,
+          "wall_seconds": 17.025238015688956
+        },
+        "task_host": {
+          "calls": 7,
+          "tokens": 9893,
+          "wall_seconds": 3.844905521720648
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 7,
+          "tokens": 9440
+        },
+        "read_selector": {
+          "calls": 7,
+          "tokens": 3200
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 89,
+          "failures": 0,
+          "cpu_ns": 46047879,
+          "wall_ns": 70166551,
+          "request_bytes": 17488,
+          "result_bytes": 14799
+        },
+        "search": {
+          "calls": 64,
+          "failures": 0,
+          "cpu_ns": 39446045,
+          "wall_ns": 80425911,
+          "request_bytes": 9060,
+          "result_bytes": 110850
+        },
+        "put": {
+          "calls": 31,
+          "failures": 0,
+          "cpu_ns": 12476637,
+          "wall_ns": 72188477,
+          "request_bytes": 19187,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 102
+        },
+        "events": {
+          "records": 8,
+          "logical_value_bytes": 3758
+        },
+        "states": {
+          "records": 3,
+          "logical_value_bytes": 2167
+        }
+      },
+      "state_records_per_owner": {
+        "iris": 3
+      },
+      "pending_events": 0,
+      "views": 7,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 10,
+      "source_utf8_bytes": 4295,
+      "tool_only_maintenance_calls": 1,
+      "maintenance_calls": [
+        {
+          "trace_line": 4,
+          "event_ids": [
+            "message:57c277ab-2351-41a0-828d-3c573ba9e021"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 13,
+          "event_ids": [
+            "message:13378b57-fefe-4a2a-9777-6f345f67ecac"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "33aff2974aa845aca683709558ecc193",
+            "9a022f8b4bc04e78ae8be3aeb8a9d71a",
+            "d7ab22aaa0df4cdbb49ed7e2e31ec42e"
+          ]
+        },
+        {
+          "trace_line": 22,
+          "event_ids": [
+            "message:e09f4ea1-c81e-4a51-b0a6-fdff9c75ff06"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "33aff2974aa845aca683709558ecc193",
+            "9a022f8b4bc04e78ae8be3aeb8a9d71a",
+            "d7ab22aaa0df4cdbb49ed7e2e31ec42e"
+          ]
+        },
+        {
+          "trace_line": 32,
+          "event_ids": [
+            "message:54863be0-543d-4b5b-86cc-e2cb0c7c6ebb"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "33aff2974aa845aca683709558ecc193",
+            "9a022f8b4bc04e78ae8be3aeb8a9d71a",
+            "d7ab22aaa0df4cdbb49ed7e2e31ec42e"
+          ]
+        },
+        {
+          "trace_line": 41,
+          "event_ids": [
+            "message:fbaa5811-6d43-4565-ad32-d00a7fe10530"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "33aff2974aa845aca683709558ecc193",
+            "9a022f8b4bc04e78ae8be3aeb8a9d71a",
+            "d7ab22aaa0df4cdbb49ed7e2e31ec42e"
+          ]
+        },
+        {
+          "trace_line": 49,
+          "event_ids": [
+            "tool:a20ed1639ca99b5af70cc94416c03b2964f6968c5baf61fd957eecaa76b81608",
+            "tool:ee98d34a2c322b99b7fb6b93b86971919c3fd592998d301613da22baaceff246"
+          ],
+          "kinds": [
+            "tool",
+            "tool"
+          ],
+          "candidate_ids": [
+            "33aff2974aa845aca683709558ecc193",
+            "9a022f8b4bc04e78ae8be3aeb8a9d71a",
+            "d7ab22aaa0df4cdbb49ed7e2e31ec42e"
+          ]
+        },
+        {
+          "trace_line": 58,
+          "event_ids": [
+            "message:3cb44493-a505-405f-bb9e-966397691db6"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "33aff2974aa845aca683709558ecc193",
+            "9a022f8b4bc04e78ae8be3aeb8a9d71a",
+            "d7ab22aaa0df4cdbb49ed7e2e31ec42e"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 2
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "223ea29aa664cff14fcad47b534e65877a7ba612c21a664b3bf24a31c14b7032",
+        "trace.jsonl": "e128c0334b15c55097b4cc177a0a5786ef21128e54bc1f370237c18b353b19a2",
+        "phase-0-result.json": "e6762a9fc7d5655c31f0496ce0aa0b7ad11e489ead2bf0ac6f2702854ccc8715",
+        "phase-1-result.json": "011ed2a482a144ff91536ac86158bc18477ebfeca0e24fe94692ff52eecdcc0a",
+        "phase-0-store-snapshot.json": "a4bccddf40436e62c9aba3b9a240142d906d121bc79256b96753fd2eebc9db91",
+        "phase-1-store-snapshot.json": "753597c25377a58b2bc7a92d41345a625dd2deb5e7e71618631c8d1423ea6d8b"
+      },
+      "mechanism_audit": {
+        "lr_full_candidate_boundaries": 7,
+        "new_state_ids_selected_by_a": 3,
+        "maintenance_http_calls": 7,
+        "lru_selected_body_chars": null,
+        "lru_full_bank_body_chars": null,
+        "candidate_selection_records": null,
+        "partial_same_id_found_and_recovered": false
+      }
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-interleaved-local_all_sources",
+      "case": "interleaved",
+      "arm": "local_all_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "brief",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "foreground",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "background-revision",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-background",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "retained-third",
+          "status": "COMPLETED",
+          "strict_pass": false
+        }
+      ],
+      "passed": 5,
+      "total": 6,
+      "whole_pass": false,
+      "judgment": {
+        "failed": [
+          "retained-third"
+        ],
+        "observed": "First five messages and exactly two real reservations match all required fields. Final answer invents Room101/9AM/main lobby rather than R-3/14:30/step-free.",
+        "first_broken_link": "Trace28 maintenance deletes welcome-briefing facts from its single combined State when told not to act on that matter; trace33 further retains only completed reservation facts. Initial source was never in explicit evidence_refs, so final refs-only source expansion cannot recover it. Trace39 edits=[] and subsequent Host fabricates missing facts.",
+        "competing_explanations": [
+          "One combined State permits unrelated facts to be lost during full rewrite.",
+          "The maintainer treats current action exclusion as information discard; explicit initial-source references are missing, preventing ordinary view recovery."
+        ],
+        "limits": "Despite local-granularity option, L formed one combined card; online trajectories differ before A. Cannot assign this miss to absent A alone."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 7,
+          "tokens": 7667,
+          "wall_seconds": 10.772648086305708
+        },
+        "task_host": {
+          "calls": 7,
+          "tokens": 11196,
+          "wall_seconds": 4.004093793686479
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 7,
+          "tokens": 7667
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 113,
+          "failures": 0,
+          "cpu_ns": 54079800,
+          "wall_ns": 78192365,
+          "request_bytes": 22492,
+          "result_bytes": 19134
+        },
+        "search": {
+          "calls": 64,
+          "failures": 0,
+          "cpu_ns": 33363669,
+          "wall_ns": 68686588,
+          "request_bytes": 9195,
+          "result_bytes": 106519
+        },
+        "put": {
+          "calls": 29,
+          "failures": 0,
+          "cpu_ns": 9786760,
+          "wall_ns": 51704017,
+          "request_bytes": 19799,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 68
+        },
+        "events": {
+          "records": 8,
+          "logical_value_bytes": 3758
+        },
+        "states": {
+          "records": 1,
+          "logical_value_bytes": 1266
+        }
+      },
+      "state_records_per_owner": {
+        "iris": 1
+      },
+      "pending_events": 0,
+      "views": 7,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 22,
+      "source_utf8_bytes": 7694,
+      "tool_only_maintenance_calls": 1,
+      "maintenance_calls": [
+        {
+          "trace_line": 3,
+          "event_ids": [
+            "message:56cfb37c-638b-45e2-bd7e-7d632e7d3254"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 9,
+          "event_ids": [
+            "message:60a1cd42-5aa6-4ae8-87b6-410788f64ee6"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "11070d48fb164b0ebd3725bed66393ea"
+          ]
+        },
+        {
+          "trace_line": 15,
+          "event_ids": [
+            "message:dae171fa-c642-4310-aeda-fd1430ea37d5"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "11070d48fb164b0ebd3725bed66393ea"
+          ]
+        },
+        {
+          "trace_line": 22,
+          "event_ids": [
+            "message:6ea5743e-6161-4913-9d5a-69298bdd7fdd"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "11070d48fb164b0ebd3725bed66393ea"
+          ]
+        },
+        {
+          "trace_line": 28,
+          "event_ids": [
+            "message:54571dba-f284-453e-912b-647de9e5cabb"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "11070d48fb164b0ebd3725bed66393ea"
+          ]
+        },
+        {
+          "trace_line": 33,
+          "event_ids": [
+            "tool:effb764a65e9cfb65f4e4fe6da79a88f58f58984473c0a25bd797e5c77af6e43",
+            "tool:ad7e7a4e5f83a2e2b65060f6462b4ba6cc64434e275dee8e0952262233410612"
+          ],
+          "kinds": [
+            "tool",
+            "tool"
+          ],
+          "candidate_ids": [
+            "11070d48fb164b0ebd3725bed66393ea"
+          ]
+        },
+        {
+          "trace_line": 39,
+          "event_ids": [
+            "message:f8b155e0-a3bd-4675-8840-8a6ebc05a123"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "11070d48fb164b0ebd3725bed66393ea"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 2
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "509840bcc1c226a83e520624e668332db533d07333e896b2a12dd39fdcbc10c5",
+        "trace.jsonl": "c842419265a2d8f6648bf7799c0081f745ff53f73514062e49e99ca625ec370c",
+        "phase-0-result.json": "dc3ec1c787e9e68fd76d09736f9b69462165af78f6b5305ba8440a94e951717d",
+        "phase-1-result.json": "dc583db819ac302429dcc39899cb58cce2041267ba3d01677e3b9250fd16d512",
+        "phase-0-store-snapshot.json": "b61a0ec8a7ebe85f0ddf370ffa5589719a962f25d3744ed1f641f3fb45784125",
+        "phase-1-store-snapshot.json": "7a0b3ed9b9b4c68e3c1eaf14e4cd5b0aab0647728e68d181841739c83ca91d53"
+      },
+      "mechanism_audit": {
+        "lr_full_candidate_boundaries": 0,
+        "new_state_ids_selected_by_a": 0,
+        "maintenance_http_calls": 7,
+        "lru_selected_body_chars": null,
+        "lru_full_bank_body_chars": null,
+        "candidate_selection_records": null,
+        "partial_same_id_found_and_recovered": false
+      }
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-interleaved-local_lru_sources",
+      "case": "interleaved",
+      "arm": "local_lru_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "brief",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "foreground",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "background-revision",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-background",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-third",
+          "status": "COMPLETED",
+          "strict_pass": false
+        }
+      ],
+      "passed": 4,
+      "total": 6,
+      "whole_pass": false,
+      "judgment": {
+        "failed": [
+          "combined-action",
+          "retained-third"
+        ],
+        "observed": "Correct current quantities/destinations/packing but actual tool keys handout_packs and field_kits replace full exact user object names. Final briefing answer says details unavailable, despite initial preservation.",
+        "first_broken_link": "Trace4 creates one combined State. Trace49 maintenance discards briefing room/time/entrance when told to exclude it from actions, despite U including the combined State. Trace70 creates an inquiry State without old facts. Initial source lacks explicit evidence_refs; final Host lacks original facts.",
+        "competing_explanations": [
+          "Combined-card rewriting loses unrelated facts during action focus.",
+          "Action exclusion is misread as discarding preserved content; refs-only fallback cannot restore uncited initial source."
+        ],
+        "limits": "The combined-card maintenance loss occurs after U selected it, so not an update-selector omission. Wrong action keys are separate Host field consumption errors."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 20,
+          "tokens": 12789,
+          "wall_seconds": 16.047508534044027
+        },
+        "task_host": {
+          "calls": 7,
+          "tokens": 11252,
+          "wall_seconds": 3.719829862937331
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 7,
+          "tokens": 7929
+        },
+        "read_selector": {
+          "calls": 7,
+          "tokens": 2633
+        },
+        "update_selector": {
+          "calls": 6,
+          "tokens": 2227
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 115,
+          "failures": 0,
+          "cpu_ns": 54795436,
+          "wall_ns": 81253115,
+          "request_bytes": 22890,
+          "result_bytes": 19653
+        },
+        "search": {
+          "calls": 64,
+          "failures": 0,
+          "cpu_ns": 134438334,
+          "wall_ns": 173406761,
+          "request_bytes": 9188,
+          "result_bytes": 100507
+        },
+        "put": {
+          "calls": 30,
+          "failures": 0,
+          "cpu_ns": 12796015,
+          "wall_ns": 61245028,
+          "request_bytes": 21099,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 137
+        },
+        "events": {
+          "records": 8,
+          "logical_value_bytes": 3740
+        },
+        "states": {
+          "records": 2,
+          "logical_value_bytes": 2230
+        }
+      },
+      "state_records_per_owner": {
+        "iris": 2
+      },
+      "pending_events": 0,
+      "views": 7,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 23,
+      "source_utf8_bytes": 7927,
+      "tool_only_maintenance_calls": 1,
+      "maintenance_calls": [
+        {
+          "trace_line": 4,
+          "event_ids": [
+            "message:e6817cfc-9f78-4368-9fc5-d18e6815bb69"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 15,
+          "event_ids": [
+            "message:4f6acc9d-9519-4b35-a794-4972ccdb654f"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0640ea3108ff405b925ec38aba3d9c10"
+          ]
+        },
+        {
+          "trace_line": 26,
+          "event_ids": [
+            "message:5b1f4435-7f33-4634-847b-dfeb9490034e"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0640ea3108ff405b925ec38aba3d9c10"
+          ]
+        },
+        {
+          "trace_line": 38,
+          "event_ids": [
+            "message:d06f1f76-cfc0-4efd-948c-30a91e66f016"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0640ea3108ff405b925ec38aba3d9c10"
+          ]
+        },
+        {
+          "trace_line": 49,
+          "event_ids": [
+            "message:20f7247e-474e-49e0-abc5-ca579d779d44"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0640ea3108ff405b925ec38aba3d9c10"
+          ]
+        },
+        {
+          "trace_line": 59,
+          "event_ids": [
+            "tool:afb8db8773a2970cebae93a05c6cea01bfb9ed7e7261f61a6f978b34d5b994e4",
+            "tool:2c66110e00c07aa69558b9ac64e314642145c10b11429017952ad8fc4752a574"
+          ],
+          "kinds": [
+            "tool",
+            "tool"
+          ],
+          "candidate_ids": [
+            "0640ea3108ff405b925ec38aba3d9c10"
+          ]
+        },
+        {
+          "trace_line": 70,
+          "event_ids": [
+            "message:d2d90ecd-9fec-4904-a2df-88061ec40f53"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0640ea3108ff405b925ec38aba3d9c10"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 2
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "418cb392f20424a5d10550ff611cff7d3a719619871e81fd34a481fbc883531e",
+        "trace.jsonl": "128d6a53d9a01579a46f77c05eb511b1ea08c5ade32cbdbb27261a434caec4e5",
+        "phase-0-result.json": "c764b60ec0e3ad91c16e9f12a1b1fc60e2db66f4c4ce1e06769e3feb39533fc6",
+        "phase-1-result.json": "86edfd25c055bb748c97f8bd4f121362610415d0e8fb06e2e93981d8875162ef",
+        "phase-0-store-snapshot.json": "3c1f84bcd24c227ed4e7b32cfa2e37b4e28dc74bffda7f8cbc7e315a58143939",
+        "phase-1-store-snapshot.json": "03fc6357d29bf1ab971d1a994e0d5d05800c8d455f414d451039d0756c9d586c"
+      },
+      "mechanism_audit": {
+        "lr_full_candidate_boundaries": 0,
+        "new_state_ids_selected_by_a": 0,
+        "maintenance_http_calls": 7,
+        "lru_selected_body_chars": 2163,
+        "lru_full_bank_body_chars": 2163,
+        "candidate_selection_records": 7,
+        "partial_same_id_found_and_recovered": false
+      }
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-partial-local_lru_sources",
+      "case": "partial",
+      "arm": "local_lru_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "passed": 4,
+      "total": 6,
+      "whole_pass": false,
+      "judgment": {
+        "failed": [
+          "partial-action",
+          "other-owner-action"
+        ],
+        "observed": "Both owners retain distinct numeric/location/packing facts. Actual first reservation uses a wrong key (singular or underscore form), so both creation messages fail exact-key criterion. After restart, get uses actual stored wrong key and returns found; same original reservation ID is labeled without re-reservation or dispatch claim. Access facts remain D-2/10:15.",
+        "first_broken_link": "Host emits a modified item_key on each owner reservation; source-level exact full-name contract already exists. Post-receipt maintenance retains the real wrong-key record and recovery correctly follows it.",
+        "competing_explanations": [
+          "Host normalizes human-readable full object references into singular/slug forms.",
+          "Model-generated State titles and own native memory wording influence action key choice despite original user/receipt context."
+        ],
+        "limits": "Recovery is operationally correct; it does not retroactively fix initial exact-key failures. One complete exposed trajectory per arm."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 28,
+          "tokens": 17187,
+          "wall_seconds": 19.116016608197242
+        },
+        "task_host": {
+          "calls": 10,
+          "tokens": 14034,
+          "wall_seconds": 5.160602282732725
+        },
+        "embedding": {
+          "calls": 1,
+          "tokens": 44,
+          "wall_seconds": 0.2180206198245287
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 10,
+          "tokens": 10143
+        },
+        "read_selector": {
+          "calls": 10,
+          "tokens": 3820
+        },
+        "update_selector": {
+          "calls": 8,
+          "tokens": 3224
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 119,
+          "failures": 0,
+          "cpu_ns": 124218390,
+          "wall_ns": 155026586,
+          "request_bytes": 23306,
+          "result_bytes": 21138
+        },
+        "search": {
+          "calls": 91,
+          "failures": 0,
+          "cpu_ns": 49502308,
+          "wall_ns": 112756518,
+          "request_bytes": 12700,
+          "result_bytes": 116170
+        },
+        "put": {
+          "calls": 41,
+          "failures": 0,
+          "cpu_ns": 16063767,
+          "wall_ns": 111361500,
+          "request_bytes": 27446,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 204
+        },
+        "events": {
+          "records": 11,
+          "logical_value_bytes": 5321
+        },
+        "states": {
+          "records": 3,
+          "logical_value_bytes": 2617
+        }
+      },
+      "state_records_per_owner": {
+        "noel": 2,
+        "mira": 1
+      },
+      "pending_events": 0,
+      "views": 10,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 19,
+      "source_utf8_bytes": 8342,
+      "tool_only_maintenance_calls": 4,
+      "maintenance_calls": [
+        {
+          "trace_line": 4,
+          "event_ids": [
+            "message:3dc0e72a-1f71-4f20-88fd-f67fc8f8e2b9"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 15,
+          "event_ids": [
+            "tool:f2f786f38255334748dcfb95b83ca648585bcc849b5518cea957890d94f2f3f9"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 24,
+          "event_ids": [
+            "message:973d3682-19ab-4418-95c4-08f3030ffb53"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 35,
+          "event_ids": [
+            "message:4fcfcb71-613c-4b9a-9711-c14c569ebc53"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "d6dae71813c04085a98bb29ea7ecc0e7"
+          ]
+        },
+        {
+          "trace_line": 45,
+          "event_ids": [
+            "tool:af5d3ac380340bd7b02c98eaef135798c9bd8a07d9ced19f6194c212898855f7"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "d6dae71813c04085a98bb29ea7ecc0e7"
+          ]
+        },
+        {
+          "trace_line": 57,
+          "event_ids": [
+            "message:051d46f8-264e-480a-98c8-5f13386aab0b"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "d6dae71813c04085a98bb29ea7ecc0e7"
+          ]
+        },
+        {
+          "trace_line": 67,
+          "event_ids": [
+            "tool:554e6a34d7708e96e6ce5cb494edcb7f7dca66b0e1ac4079f2c38bbc00ffb5a6",
+            "tool:ac179f0a60b41e70e0a1752ea9e526bc3d4b8f414da86a8514a45fd2490ec4f8"
+          ],
+          "kinds": [
+            "tool",
+            "tool"
+          ],
+          "candidate_ids": [
+            "d6dae71813c04085a98bb29ea7ecc0e7"
+          ]
+        },
+        {
+          "trace_line": 78,
+          "event_ids": [
+            "message:b953ecd6-cb4d-4fb4-9395-761cb95c335b"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "3eef8e2f78654ac08f0cc0b24279cfe1"
+          ]
+        },
+        {
+          "trace_line": 88,
+          "event_ids": [
+            "tool:75bee83af2f7d031e4f1f52ca1afec419bc81410e6db13efbf5501b58ad6c0d9"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "3eef8e2f78654ac08f0cc0b24279cfe1"
+          ]
+        },
+        {
+          "trace_line": 99,
+          "event_ids": [
+            "message:973c6578-8df3-4923-9950-ed751d05b448"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "d6dae71813c04085a98bb29ea7ecc0e7"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 2,
+        "complete_label": 1
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "6b61f9d1e2faf5598c614dae32eef7c66689e328f1241ea3aef3277bbc8659de",
+        "trace.jsonl": "abf22cad0644305f763a6c3144a9b7206dc42bb1df5803b4223076d2bfe066c0",
+        "phase-0-result.json": "daf5b3ba43e2404a4656ce225a4331ff0367c1d16b2fa579c121f27be3724eaf",
+        "phase-1-result.json": "5ec02f0aa49f017a1b9efcc4567c15e85a80073125443a256fa81d5a1065035d",
+        "phase-0-store-snapshot.json": "5056ab9ccab7220d590f329555be5542f501950d9f008261e73e55aa2b8bc14d",
+        "phase-1-store-snapshot.json": "9cef1d0314607c630efd486e74fdad386ab9b1dde745b293bdeb666a5fbd77f7"
+      },
+      "mechanism_audit": {
+        "lr_full_candidate_boundaries": 0,
+        "new_state_ids_selected_by_a": 0,
+        "maintenance_http_calls": 10,
+        "lru_selected_body_chars": 2729,
+        "lru_full_bank_body_chars": 3099,
+        "candidate_selection_records": 10,
+        "partial_same_id_found_and_recovered": true
+      }
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-partial-local_all_sources",
+      "case": "partial",
+      "arm": "local_all_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "passed": 4,
+      "total": 6,
+      "whole_pass": false,
+      "judgment": {
+        "failed": [
+          "partial-action",
+          "other-owner-action"
+        ],
+        "observed": "Both owners retain distinct numeric/location/packing facts. Actual first reservation uses a wrong key (singular or underscore form), so both creation messages fail exact-key criterion. After restart, get uses actual stored wrong key and returns found; same original reservation ID is labeled without re-reservation or dispatch claim. Access facts remain D-2/10:15.",
+        "first_broken_link": "Host emits a modified item_key on each owner reservation; source-level exact full-name contract already exists. Post-receipt maintenance retains the real wrong-key record and recovery correctly follows it.",
+        "competing_explanations": [
+          "Host normalizes human-readable full object references into singular/slug forms.",
+          "Model-generated State titles and own native memory wording influence action key choice despite original user/receipt context."
+        ],
+        "limits": "Recovery is operationally correct; it does not retroactively fix initial exact-key failures. One complete exposed trajectory per arm."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 10,
+          "tokens": 10632,
+          "wall_seconds": 15.846057624090463
+        },
+        "task_host": {
+          "calls": 10,
+          "tokens": 15377,
+          "wall_seconds": 6.074999130796641
+        },
+        "embedding": {
+          "calls": 1,
+          "tokens": 66,
+          "wall_seconds": 0.03962615830823779
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 10,
+          "tokens": 10632
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 137,
+          "failures": 0,
+          "cpu_ns": 144386947,
+          "wall_ns": 176241064,
+          "request_bytes": 26894,
+          "result_bytes": 24739
+        },
+        "search": {
+          "calls": 91,
+          "failures": 0,
+          "cpu_ns": 52341054,
+          "wall_ns": 111109333,
+          "request_bytes": 12710,
+          "result_bytes": 127679
+        },
+        "put": {
+          "calls": 41,
+          "failures": 0,
+          "cpu_ns": 13641643,
+          "wall_ns": 75815579,
+          "request_bytes": 27315,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 136
+        },
+        "events": {
+          "records": 11,
+          "logical_value_bytes": 5324
+        },
+        "states": {
+          "records": 2,
+          "logical_value_bytes": 2289
+        }
+      },
+      "state_records_per_owner": {
+        "noel": 1,
+        "mira": 1
+      },
+      "pending_events": 0,
+      "views": 10,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 25,
+      "source_utf8_bytes": 10756,
+      "tool_only_maintenance_calls": 4,
+      "maintenance_calls": [
+        {
+          "trace_line": 3,
+          "event_ids": [
+            "message:0eda2112-4c68-4501-b941-192706ddb9d6"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 9,
+          "event_ids": [
+            "message:73623292-a2e6-4fcf-a45d-24ba4007de0c"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 15,
+          "event_ids": [
+            "tool:970b068a357a3e920572af4f3dac7c207df8bb1ac0ac29c494ed7ef4b9a31ad1"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "0f950e09cbdc431497665d3a20dd6a28"
+          ]
+        },
+        {
+          "trace_line": 21,
+          "event_ids": [
+            "message:ac8089ed-3d39-48ea-bd38-3fe6691192fc"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0f950e09cbdc431497665d3a20dd6a28"
+          ]
+        },
+        {
+          "trace_line": 26,
+          "event_ids": [
+            "tool:6c0c83768748f737192addb1267da07a82cf18787455571ef1af162db7a5358e"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "0f950e09cbdc431497665d3a20dd6a28"
+          ]
+        },
+        {
+          "trace_line": 33,
+          "event_ids": [
+            "message:cf4b0c86-b6cb-4ee2-9607-aa4f7f55332e"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0f950e09cbdc431497665d3a20dd6a28"
+          ]
+        },
+        {
+          "trace_line": 38,
+          "event_ids": [
+            "tool:7cb3e4acb699f38fa6c2caa173f7a233a94fc7ad28dd71f0df71e9ee6b9f4cab",
+            "tool:9b2ff94f2806c4fbdf4f4dde4aab9ab117e357e889fa7cd3e10b7903152beda6"
+          ],
+          "kinds": [
+            "tool",
+            "tool"
+          ],
+          "candidate_ids": [
+            "0f950e09cbdc431497665d3a20dd6a28"
+          ]
+        },
+        {
+          "trace_line": 44,
+          "event_ids": [
+            "message:e4a6e460-9375-406e-8d71-836af0b5bc99"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "075c8f764ba44824bc6db999512ea0a3"
+          ]
+        },
+        {
+          "trace_line": 49,
+          "event_ids": [
+            "tool:7ebdd03f6d652e48dcc742b8239e67bd4a9498126d1f4efd0b774f3d60eb2100"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "075c8f764ba44824bc6db999512ea0a3"
+          ]
+        },
+        {
+          "trace_line": 55,
+          "event_ids": [
+            "message:c48e58f9-5ddc-450f-9f4b-6a416942da29"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "0f950e09cbdc431497665d3a20dd6a28"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 2,
+        "complete_label": 1
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "ddbae2ecf506138d1cfb4f07f0c8eec544cff9ff018450387b370dfaa3c8cedc",
+        "trace.jsonl": "f3a9e59c9d114af393de6724598dfc2b469b4e9847525e26b82eb9fe7ceaaaa9",
+        "phase-0-result.json": "02f5f77da9ddb43018b852a1040c49a80b7d41eb9b7bac089bdda9002c3ed3e0",
+        "phase-1-result.json": "9d346e3accbfea3cd35df236006dfd7f92a7d0ee2fd0529fa52e9ecf1bedd73d",
+        "phase-0-store-snapshot.json": "bcffe1602369ddbb98b4171034a9c4f1c92415870b36aba1abbd20f2c3b15282",
+        "phase-1-store-snapshot.json": "102ddf588a8e0333cd4a2ef970436a7a945589c05dc1d96f31a7e73ddcbf6b20"
+      },
+      "mechanism_audit": {
+        "lr_full_candidate_boundaries": 0,
+        "new_state_ids_selected_by_a": 0,
+        "maintenance_http_calls": 10,
+        "lru_selected_body_chars": null,
+        "lru_full_bank_body_chars": null,
+        "candidate_selection_records": null,
+        "partial_same_id_found_and_recovered": true
+      }
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-partial-local_lr_sources",
+      "case": "partial",
+      "arm": "local_lr_sources",
+      "runtime_status": "TERMINAL",
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "passed": 4,
+      "total": 6,
+      "whole_pass": false,
+      "judgment": {
+        "failed": [
+          "partial-action",
+          "other-owner-action"
+        ],
+        "observed": "Both owners use correct quantities/destinations/packing but Host singularizes exact object key for both reservations. Real partial-failure receipt persists and after restart get finds that record; same ID label completed without extra reservation. Access D-2/10:15 retained.",
+        "first_broken_link": "Host reserve_and_label item_key is Summit archive crate rather than required Summit archive crates. Recovery truthfully follows actual side effect.",
+        "competing_explanations": [
+          "Host rewrites full reference as singular tool key despite exact-name contract.",
+          "State title uses singular while content/user use plural, providing an inconsistent object-reference cue."
+        ],
+        "limits": "Operational recovery does not repair original wrong-key action. Final long State calls initial attempt failed but preserves reservation ID/effects and correct final label; prose may still be misleading."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 20,
+          "tokens": 15415,
+          "wall_seconds": 24.039544973056763
+        },
+        "task_host": {
+          "calls": 10,
+          "tokens": 15438,
+          "wall_seconds": 5.438714896328747
+        },
+        "embedding": {
+          "calls": 1,
+          "tokens": 44,
+          "wall_seconds": 0.03716792864724994
+        }
+      },
+      "by_control_stage": {
+        "maintenance": {
+          "calls": 10,
+          "tokens": 11708
+        },
+        "read_selector": {
+          "calls": 10,
+          "tokens": 3707
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 127,
+          "failures": 0,
+          "cpu_ns": 61934361,
+          "wall_ns": 91637259,
+          "request_bytes": 24687,
+          "result_bytes": 22598
+        },
+        "search": {
+          "calls": 91,
+          "failures": 0,
+          "cpu_ns": 49265770,
+          "wall_ns": 102371610,
+          "request_bytes": 12518,
+          "result_bytes": 119688
+        },
+        "put": {
+          "calls": 42,
+          "failures": 0,
+          "cpu_ns": 17271585,
+          "wall_ns": 294670366,
+          "request_bytes": 31328,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 204
+        },
+        "events": {
+          "records": 11,
+          "logical_value_bytes": 5321
+        },
+        "states": {
+          "records": 2,
+          "logical_value_bytes": 3211
+        }
+      },
+      "state_records_per_owner": {
+        "mira": 1,
+        "noel": 1
+      },
+      "pending_events": 0,
+      "views": 10,
+      "degraded_views": 0,
+      "empty_views": 0,
+      "source_event_deliveries": 23,
+      "source_utf8_bytes": 9378,
+      "tool_only_maintenance_calls": 4,
+      "maintenance_calls": [
+        {
+          "trace_line": 4,
+          "event_ids": [
+            "message:d54dd775-5604-47be-bdab-d07ec85a9ce9"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 13,
+          "event_ids": [
+            "tool:1833c646268e05d48f7189507155957048c6ddf6c52f484d3462d13a765bf594"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "71fcdbd1b3b64077ad34af33ad421b3a"
+          ]
+        },
+        {
+          "trace_line": 22,
+          "event_ids": [
+            "message:2c673eac-f159-49de-8543-202f383801ea"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": []
+        },
+        {
+          "trace_line": 31,
+          "event_ids": [
+            "message:2c6dba45-f1c6-4e83-8ca9-f0940c69a762"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "213b8be5dc394035b036e340b5c7f4e5"
+          ]
+        },
+        {
+          "trace_line": 39,
+          "event_ids": [
+            "tool:6efe0b1f695e2ffc341f18025f20cfe51f4b221b8a616c0abd62aa5022ee6669"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "213b8be5dc394035b036e340b5c7f4e5"
+          ]
+        },
+        {
+          "trace_line": 49,
+          "event_ids": [
+            "message:6aeb31d4-f406-4271-ba32-2bbf2cf9bcb6"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "213b8be5dc394035b036e340b5c7f4e5"
+          ]
+        },
+        {
+          "trace_line": 57,
+          "event_ids": [
+            "tool:84ed72c678dd548b0f8b33cddf75a57656ac0512acf3ab3f6b8491a0267a4062",
+            "tool:f1675d126caae8bfebc07065de09f63b2e287c5f327d47fd7e285be5a960861e"
+          ],
+          "kinds": [
+            "tool",
+            "tool"
+          ],
+          "candidate_ids": [
+            "213b8be5dc394035b036e340b5c7f4e5"
+          ]
+        },
+        {
+          "trace_line": 66,
+          "event_ids": [
+            "message:e379c2a4-15a5-4495-b445-a15b4d8d422b"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "71fcdbd1b3b64077ad34af33ad421b3a"
+          ]
+        },
+        {
+          "trace_line": 74,
+          "event_ids": [
+            "tool:2d1aaf81226cc1d3df1dedbdf42f2ee41c0d6502f51b434f5b8b11dfcf363d1d"
+          ],
+          "kinds": [
+            "tool"
+          ],
+          "candidate_ids": [
+            "71fcdbd1b3b64077ad34af33ad421b3a"
+          ]
+        },
+        {
+          "trace_line": 83,
+          "event_ids": [
+            "message:4553e220-2b99-40cf-8302-697da136a390"
+          ],
+          "kinds": [
+            "user"
+          ],
+          "candidate_ids": [
+            "213b8be5dc394035b036e340b5c7f4e5"
+          ]
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 2,
+        "complete_label": 1
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "cacb12ef60a1f9b325924a97d24081ab4a34941716dc737b1d280d77954f130f",
+        "trace.jsonl": "d55f7e702e550139a91be7866f59aeffc0161afa4ceeb01ef54f24899d2b2e98",
+        "phase-0-result.json": "6a10b7dd2739a253ec30bf62852a396cdc674a7e7620dc42e11c0c8221b5f471",
+        "phase-1-result.json": "d82a73bf8fbc1eb533ea740d514e1842a54f32df70c602a936e619bbf9422225",
+        "phase-0-store-snapshot.json": "9f4f51764d64c3b98b58bd02bcd38c8ee762f4cf5d3c5547cc5f70a28ac79fa1",
+        "phase-1-store-snapshot.json": "b0b6e7a8ef35a7aecc29c5607152f1867bc1172d62a946a883727edfb16c4971"
+      },
+      "mechanism_audit": {
+        "lr_full_candidate_boundaries": 10,
+        "new_state_ids_selected_by_a": 2,
+        "maintenance_http_calls": 10,
+        "lru_selected_body_chars": null,
+        "lru_full_bank_body_chars": null,
+        "candidate_selection_records": null,
+        "partial_same_id_found_and_recovered": true
+      }
+    }
+  ],
+  "by_role": {
+    "state_control": {
+      "calls": 99,
+      "tokens": 76330,
+      "wall_seconds": 102.84701384138316
+    },
+    "task_host": {
+      "calls": 51,
+      "tokens": 77190,
+      "wall_seconds": 28.243145488202572
+    },
+    "embedding": {
+      "calls": 3,
+      "tokens": 154,
+      "wall_seconds": 0.2948147067800164
+    }
+  },
+  "generation_delta": {
+    "calls": 150,
+    "tokens": 153520
+  },
+  "embedding_delta": {
+    "calls": 3,
+    "tokens": 154
+  },
+  "continuous_budget": {
+    "generation_requests": 2574,
+    "generation_tokens": 3183881,
+    "embedding_tokens": 18337
+  },
+  "freeze_sha256": "41a96587a784b1c33175a71fc9081b3c406b61a3aa3345effb30dee22f1be012",
+  "protocol_sha256": "91727f90a6436ab100aaacd550907b0651c48991d909f3df0b3184fe921aad2f",
+  "validation": {
+    "all_actual_write_payloads_events_only": true,
+    "all_source_bodies_match_original": true,
+    "all_views_bound_to_http": true,
+    "actual_source_params_inputs_verified": true,
+    "ledger_reconciled": true,
+    "lr_no_u_calls": true,
+    "lr_full_candidate_boundaries_checked": 17,
+    "l_lr_actual_maintenance_prompt_equal": true,
+    "lr_lru_actual_read_prompt_equal": true,
+    "live_view_has_no_timing_candidate": true,
+    "all_partial_arms_found_same_id_label_recovery": true,
+    "source_errors_or_omissions": 0
+  },
+  "by_arm": {
+    "local_lr_sources": {
+      "calls": 51,
+      "tokens": 53386,
+      "passed": 10,
+      "total": 12,
+      "whole_pass": 1,
+      "whole_total": 2
+    },
+    "local_all_sources": {
+      "calls": 34,
+      "tokens": 44872,
+      "passed": 9,
+      "total": 12,
+      "whole_pass": 0,
+      "whole_total": 2
+    },
+    "local_lru_sources": {
+      "calls": 65,
+      "tokens": 55262,
+      "passed": 8,
+      "total": 12,
+      "whole_pass": 0,
+      "whole_total": 2
+    }
+  },
+  "root_observation_store_reads": {
+    "namespace_preflight": 12,
+    "phase_snapshots": 12,
+    "embedding_calls": 0,
+    "mutations": 0
+  },
+  "status": "COMPLETE_SMALL_WIRING_WITH_OPEN_SEMANTIC_FAILURES",
+  "limits": [
+    "One exposed trajectory per case/arm; no repeated efficacy estimate.",
+    "L and LRU interleaved initially formed one combined card, LR formed3: online partition confound prevents attributing score to A or U alone.",
+    "LRU selected-candidate maintenance instruction remains different from L/LR.",
+    "Full-bank Store scanning remains; smaller submitted State content is not physical I/O savings.",
+    "All three partial runs used wrong initial exact item keys; successful later recovery does not replace those failures.",
+    "Native memory guard had no observed invalid conditional-id case in this batch."
+  ],
+  "artifact_sha256": {
+    "execution-freeze.json": "41a96587a784b1c33175a71fc9081b3c406b61a3aa3345effb30dee22f1be012",
+    "budget-before.json": "75deecace75419e8b51423e748554d35a3d10ee8b12ada3f18b2d133679ea065",
+    "budget-after.json": "4c55480d597789d46baa9b5d554cc464068041f7d463c41acd3a2c2c86724fd9",
+    "root_scores.json": "d4c861c40343bf4be44d1b4dc914df936543fa8e109ae03f26ee80976864a4b7"
+  }
+}
