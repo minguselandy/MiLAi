@@ -258,9 +258,8 @@ class LocalStateController:
             id_items["enum"] = sorted(state_ids)
         update_schema = {"type": "object", "properties": {
             "update_ids": {"type": "array", "items": id_items,
-                           "maxItems": len(state_ids)},
-            "may_create": {"type": "boolean"}},
-            "required": ["update_ids", "may_create"], "additionalProperties": False}
+                           "maxItems": len(state_ids)}},
+            "required": ["update_ids"], "additionalProperties": False}
         selected_update_ids: list[str] = []
 
         def degraded(stage: str, reason: str, receipts: list[dict[str, Any]] | None = None,
@@ -277,27 +276,24 @@ class LocalStateController:
                            "read_ids": [],
                            "edits": result["receipts"], **stats})
             return result
-        if pending:
+        if pending and states:
             try:
                 route = self._lru_call(
                     "update_selector", message_key,
                     "From source-identified new observations and the short State directory, "
                     "select every existing State that may need an update. Selection is about "
-                    "event impact, not the current reading task. A new independently "
-                    "resumable matter may require creation. Return update_ids and "
-                    "may_create only.", base, update_schema)
+                    "event impact, not the current reading task. Return update_ids only; "
+                    "creation is decided by the shared maintainer.", base, update_schema)
             except (ControlResponseError, httpx.TimeoutException) as error:
                 return degraded("update_selector", self._control_reason(error))
         else:
-            route = {"update_ids": [], "may_create": False}
+            route = {"update_ids": []}
         update_ids = route.get("update_ids")
-        may_create = route.get("may_create")
-        if (set(route) != {"update_ids", "may_create"}
+        if (set(route) != {"update_ids"}
                 or not isinstance(update_ids, list)
                 or any(not isinstance(key, str) for key in update_ids)
                 or len(set(update_ids)) != len(update_ids)
-                or not set(update_ids) <= state_ids
-                or type(may_create) is not bool):
+                or not set(update_ids) <= state_ids):
             return degraded("update_selector", "LSA_UPDATE_SELECTION_INVALID")
         selected_update_ids = update_ids
         candidates = [{key: row[key] for key in (
@@ -309,15 +305,14 @@ class LocalStateController:
         if self.emit is not None:
             self.emit({"event": "lsa_lru_selection", "stage": "update_selector",
                        "user_id": scope.user_id, "update_ids": update_ids,
-                       "may_create": may_create, **stats})
+                       "selector_skipped_reason": (
+                           "no_pending" if not pending else
+                           "empty_bank" if not states else None), **stats})
         event_ids = {row["id"] for row in pending}
         receipts: list[dict[str, Any]] = []
-        if update_ids or may_create:
+        if pending:
             edit_schema = control_schema(update_ids, self.bank.max_states)[
                 "properties"]["edits"]
-            if not may_create and update_ids:
-                edit_schema = {**edit_schema,
-                               "items": edit_schema["items"]["oneOf"][1]}
             maintenance_schema = {"type": "object", "properties": {
                 "edits": edit_schema}, "required": ["edits"],
                 "additionalProperties": False}
@@ -325,7 +320,9 @@ class LocalStateController:
                 "Independently update States affected by new observations and select focus "
                 "for the current question or action. A State may need an update even when "
                 "it is not in focus; focus need not include every updated State. ",
-                "Update only the selected candidate States affected by new observations. ",
+                "Update only selected existing candidate States affected by new "
+                "observations; independently decide whether new observations warrant "
+                "a new State. ",
                 1).replace("Return JSON with edits and focus only. ",
                            "Return JSON with edits only. ", 1)
             maintenance_prompt = maintenance_prompt.replace(
@@ -348,15 +345,9 @@ class LocalStateController:
                 return degraded("maintenance", "LSA_MAINTENANCE_INVALID_SHAPE")
             receipts, invalid = self.bank.apply(scope, edits, event_ids,
                                                 query_source_id=query_id,
-                                                allowed_existing_ids=set(update_ids),
-                                                allow_create=may_create)
+                                                allowed_existing_ids=set(update_ids))
             if invalid:
                 return degraded("maintenance", "LSA_MAINTENANCE_INVALID", receipts)
-        else:
-            if event_ids:
-                receipts, invalid = self.bank.apply(scope, [], event_ids,
-                                                    query_source_id=query_id)
-                assert not invalid
         updated = self.bank.states(scope)
         updated_ids = {row["id"] for row in updated}
         read_directory = [{key: row[key] for key in ("id", "title", "needs", "revision")}

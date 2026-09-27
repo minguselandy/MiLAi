@@ -113,6 +113,8 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "arm_id": args.arm, "repeat": args.repeat,
         "read_policy": READ_POLICIES.get(args.arm),
         "update_policy": "lru" if args.arm == "local_lru_sources" else "all",
+        "creation_policy": ("shared_maintenance_each_pending_batch"
+                            if args.arm == "local_lru_sources" else None),
         "local_granularity": (_local_granularity(args.arm, config)
                               if args.arm in READ_POLICIES else False),
         "representation": ("global_note" if args.arm == "global_note_sources" else

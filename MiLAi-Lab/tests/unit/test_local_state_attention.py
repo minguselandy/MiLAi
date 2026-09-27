@@ -625,7 +625,7 @@ def test_lru_hook_updates_background_and_reads_only_foreground_sources(
         ids.append(receipts[0]["id"])
     background, foreground = ids
     replies = LruReplies({
-        "update_selector": [{"update_ids": [background], "may_create": False}],
+        "update_selector": [{"update_ids": [background]}],
         "maintenance": [{"edits": [{"id": background,
                                       "content": "new-background"}]}],
         "read_selector": [{"read_ids": [foreground]}]})
@@ -644,7 +644,7 @@ def test_lru_hook_updates_background_and_reads_only_foreground_sources(
         "update_selector", "maintenance", "read_selector"]
     assert [call["context_stage"] for call in replies.calls] == [
         "update_selector", "maintenance", "read_selector"]
-    validate({"update_ids": [background], "may_create": False},
+    validate({"update_ids": [background]},
              replies.calls[0]["schema"])
     validate({"edits": [{"id": background, "content": "new-background"}]},
              replies.calls[1]["schema"])
@@ -678,12 +678,13 @@ def test_lru_shared_update_new_read_and_empty_update() -> None:
     first, second = (row["id"] for row in created)
     bank.record_event(scope, {"id": "shared", "kind": "user", "content": "shared change"})
     replies = LruReplies({
-        "update_selector": [{"update_ids": [first, second], "may_create": True},
-                            {"update_ids": [], "may_create": False}],
+        "update_selector": [{"update_ids": [first, second]},
+                            {"update_ids": []}],
         "maintenance": [{"edits": [
             {"id": first, "content": "revised first"},
             {"id": second, "content": "revised second"},
-            {"id": None, "title": "third", "content": "new matter"}]}],
+            {"id": None, "title": "third", "content": "new matter"}]},
+            {"edits": []}],
         "read_selector": [lambda payload: {"read_ids": [next(
             row["id"] for row in payload["directory"]
             if row["id"] not in {first, second})]}, {"read_ids": [first]}]})
@@ -703,7 +704,44 @@ def test_lru_shared_update_new_read_and_empty_update() -> None:
     assert {row["id"]: row["revision"] for row in bank.states(scope)} == before
     assert [call["stage"] for call in replies.calls] == [
         "update_selector", "maintenance", "read_selector",
-        "update_selector", "read_selector"]
+        "update_selector", "maintenance", "read_selector"]
+
+
+def test_lru_first_observation_and_empty_u_each_reach_shared_maintainer() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local_lru_sources", "alice")
+    bank.record_event(scope, {"id": "first", "kind": "user", "content": "first matter"})
+    first_id = ""
+    replies = LruReplies({
+        "update_selector": [{"update_ids": []}],
+        "maintenance": [
+            {"edits": [{"id": None, "title": "first", "content": "first fact"}]},
+            {"edits": [{"id": None, "title": "second", "content": "second fact"}]}],
+        "read_selector": [
+            lambda payload: {"read_ids": [payload["directory"][0]["id"]]},
+            lambda payload: {"read_ids": [next(
+                row["id"] for row in payload["directory"] if row["id"] != first_id)]}]})
+    controller = LocalStateController(bank, replies,  # type: ignore[arg-type]
+                                      update_policy="lru")
+    first = controller.prepare(scope, "first", "first matter")
+    assert first["receipts"][0]["status"] == "created"
+    first_id = first["receipts"][0]["id"]
+    assert [call["stage"] for call in replies.calls] == ["maintenance", "read_selector"]
+    assert [row["id"] for row in bank.pending(scope)] == []
+    bank.record_event(scope, {"id": "second", "kind": "user", "content": "second matter"})
+    second = controller.prepare(scope, "second", "second matter")
+    assert second["receipts"][0]["status"] == "created"
+    assert second["focus"] == [second["receipts"][0]["id"]]
+    assert [call["stage"] for call in replies.calls] == [
+        "maintenance", "read_selector", "update_selector", "maintenance",
+        "read_selector"]
+    assert replies.calls[2]["payload"]["directory"] == [{
+        "id": first["receipts"][0]["id"], "title": "first", "needs": [],
+        "revision": 1}]
+    assert replies.calls[3]["payload"]["states"] == []
+    assert {row["content"] for row in bank.states(scope)} == {
+        "first fact", "second fact"}
+    assert bank.pending(scope) == []
 
 
 @pytest.mark.parametrize("failed_stage", ["update_selector", "maintenance",
@@ -721,11 +759,11 @@ def test_lru_control_failures_keep_pending_or_committed_state(
     bank.record_event(scope, {"id": "change", "kind": "user", "content": "new"})
     failure = httpx.ReadTimeout("mock")
     answers: dict[str, list[Any]] = {
-        "update_selector": [{"update_ids": [state_id], "may_create": False}],
+        "update_selector": [{"update_ids": [state_id]}],
         "maintenance": [{"edits": [{"id": state_id, "content": "new"}]}],
         "read_selector": [{"read_ids": [state_id]}]}
     if failed_stage == "unauthorized_update":
-        answers["update_selector"] = [{"update_ids": [], "may_create": True}]
+        answers["update_selector"] = [{"update_ids": []}]
         answers["maintenance"] = [{"edits": [{"id": state_id, "content": "new"}]}]
     else:
         answers[failed_stage] = [failure]
@@ -748,23 +786,25 @@ def test_lru_control_failures_keep_pending_or_committed_state(
         assert bank.states(scope)[0]["content"] == "old"
 
 
-def test_lru_shared_control_capacity_stops_read_without_rollback(tmp_path: Path) -> None:
+def test_lru_empty_bank_skips_u_and_capacity_stops_read_without_rollback(
+    tmp_path: Path,
+) -> None:
     bank = LocalStateBank(InMemoryStore())
     scope = StateScope("run", "local_lru_sources", "alice")
     bank.record_event(scope, {"id": "change", "kind": "user", "content": "new"})
-    replies = LruReplies({"update_selector": [{"update_ids": [], "may_create": True}],
+    replies = LruReplies({"update_selector": [],
                           "maintenance": [{"edits": [{"id": None, "title": "matter",
                                                        "content": "new"}]}],
                           "read_selector": []})
     controller = LocalStateController(
         bank, replies, capacity_path=tmp_path / "capacity.json",  # type: ignore[arg-type]
-        max_calls_per_message=2, update_policy="lru")
+        max_calls_per_message=1, update_policy="lru")
     result = controller.prepare(scope, "change", "question", message_key="one:0")
     assert result["degraded"] and len(bank.states(scope)) == 1
     assert result["reason"] == "LSA_CONTROL_CAPACITY"
     assert bank.pending(scope) == []
-    assert [call["stage"] for call in replies.calls] == ["update_selector", "maintenance"]
-    assert json.loads((tmp_path / "capacity.json").read_text()) == {"one:0": 2}
+    assert [call["stage"] for call in replies.calls] == ["maintenance"]
+    assert json.loads((tmp_path / "capacity.json").read_text()) == {"one:0": 1}
 
 
 def test_lru_mixed_valid_and_outside_candidate_edits_commit_independently() -> None:
@@ -778,7 +818,7 @@ def test_lru_mixed_valid_and_outside_candidate_edits_commit_independently() -> N
     first, second = (row["id"] for row in created)
     bank.record_event(scope, {"id": "change", "kind": "user", "content": "change"})
     replies = LruReplies({
-        "update_selector": [{"update_ids": [first], "may_create": False}],
+        "update_selector": [{"update_ids": [first]}],
         "maintenance": [{"edits": [
             {"id": first, "content": "new first"},
             {"id": second, "content": "unauthorized second"},
@@ -791,12 +831,12 @@ def test_lru_mixed_valid_and_outside_candidate_edits_commit_independently() -> N
     result = controller.prepare(scope, "change", "question")
     assert result["degraded"] and result["reason"] == "LSA_MAINTENANCE_INVALID"
     assert [row["status"] for row in result["receipts"]] == [
-        "updated", "skipped_invalid_edit", "skipped_invalid_edit"]
-    assert [row.get("reason") for row in result["receipts"][1:]] == [
-        "outside_update_candidates", "creation_not_allowed"]
+        "updated", "skipped_invalid_edit", "created"]
+    assert result["receipts"][1]["reason"] == "outside_update_candidates"
     by_id = {row["id"]: row for row in bank.states(scope)}
     assert by_id[first]["content"] == "new first"
     assert by_id[second]["content"] == "old second"
+    assert len(by_id) == 3
     assert [row["id"] for row in bank.pending(scope)] == ["change"]
     assert [row["stage"] for row in replies.calls] == ["update_selector", "maintenance"]
     terminal = next(row for row in emitted if row["event"] == "lsa_lru_result")
@@ -1187,6 +1227,9 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         arm in {"local_all_sources", "local_lru_sources"})
     assert manifest["identity"]["update_policy"] == (
         "lru" if arm == "local_lru_sources" else "all")
+    assert manifest["identity"]["creation_policy"] == (
+        "shared_maintenance_each_pending_batch"
+        if arm == "local_lru_sources" else None)
     assert manifest["identity"]["effective_content_limits"] == dict(zip(
         ("max_states", "max_state_content_chars", "max_total_content_chars"),
         expected_limits, strict=True))

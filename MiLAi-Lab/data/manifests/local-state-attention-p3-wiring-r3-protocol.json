@@ -1,0 +1,79 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P3_WIRING_R3_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_PUBLICATION",
+  "scope": "Two affected LRU trajectories after structural creation-opportunity repair; G/L remain labeled historical R2 comparators, not rerun or combined into a new matched estimate.",
+  "basis": [
+    "docs/MILAI_LOCAL_STATE_ATTENTION_P3_WIRING_R2_RESULTS_20260927.md"
+  ],
+  "run_order": [
+    {
+      "run_id": "lsa-p3-wiring-interleaved-local_lru_sources-r3",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-partial-local_lru_sources-r3",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-interleaved-workshop.json": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "split": "development; both original P1 scripts already exposed; no unseen claim",
+  "public_messages": 12,
+  "whole_trajectory_denominator": 2,
+  "method_change": "U selector governs only existing-State body candidates. Every pending batch reaches the shared maintainer for create/no-op; empty bank skips known-empty U selection. No forced State creation, old-event replay or Host change.",
+  "creation_policy": "shared_maintenance_each_pending_batch",
+  "shared": {
+    "aggregate_content_budget_chars": 16000,
+    "source_view_utf8_budget": 16384,
+    "events_and_permissions": "same scoped user/tool events and explicit-reference source resolver",
+    "controller_max_tokens": 2048,
+    "host_max_tokens": 4096,
+    "controller_calls_per_public_message": 13,
+    "host_calls_per_public_message": 12,
+    "http_concurrency": 1,
+    "no_vllm_changes": true,
+    "runtime_reads_rubric": false
+  },
+  "computational_limits": [
+    "Selector calls are paid and consume the same 13-control cap. At small N, routing may cost more than all-state maintenance.",
+    "Existing directory construction still reads full Store records; only model-input body reduction is claimed when observed.",
+    "G/L/LRU are online system trajectories; later same-bank/LR controls are needed for isolated selector effects.",
+    "Shared multi-State updates are not claimed atomic in this slice."
+  ],
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 1321,
+    "generation_tokens": 1582759,
+    "embedding_tokens": 11162
+  },
+  "scoring": "Unchanged full original rubric, all failures retained. Root separately verifies initial events actually reach maintenance, substantive facts persisted, actual U/A/candidate bodies and later get/action/answers. No initial State or oracle partition.",
+  "source_freeze": "Published Git/source/config/dependencies/input identity bound by actual prepare; no mutation throughout the two full runs.",
+  "stop_rule": "Complete both through semantic/capacity failures; stop for infrastructure or deterministic execution-invalidity. No favorable suffix replacement or extra cases.",
+  "validation": {
+    "affected_tests": 45,
+    "target_ruff": "PASS",
+    "target_mypy": "PASS",
+    "diff_check": "PASS",
+    "prepare_two_runs": "PASS zero-model in /tmp",
+    "build": {
+      "wheel_sha256": "e7761bfedd1819e18e80f7fdb1cc8519f279765452d238986762060377321e37",
+      "sdist_sha256": "2a6ed8849a59cbf130e5401c3627e418f382afb99a9216c6bcab4c510466c2c1"
+    },
+    "real_model_calls": 0
+  }
+}

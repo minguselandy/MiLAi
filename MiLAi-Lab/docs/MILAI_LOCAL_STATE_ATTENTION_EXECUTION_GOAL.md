@@ -37,7 +37,7 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 | P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | R3 补全机械依赖与实际Store计量；真实授权删除链仍待独立验证 |
 | P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R4两臂原各7/12；R5 partial来源on4/6、off3/6，原完整均失败；精确恢复出现局部正例 |
 | P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | R1四断点12方法+3诊断完成；State值影响输出，来源直送有用，维护/独立Host错误未闭合 |
-| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | G/L小wiring完成：G11/12、L9/12，但L也每owner单卡；局部粒度/LRU及完整重复比较未完成 |
+| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | R2小wiring完成：G9/12、L8/12、LRU6/12；L形成局部卡，LRU新建门槛漏存；正在修复形成机会，完整重复比较未完成 |
 | P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | 未运行，遵循进入条件 |
 | P5 / WP5 | 新 frozen 原生 selection、第二任务族、交错顺序及完整重复；原 scorer 和失败分母 | 未运行；不消费旧暴露任务作 unseen |
 | P6 / WP4–5 | N/d/a/r/H 代表点、质量—成本边界、第二模型族；有瓶颈证据才训练 selector | 未运行；第二模型仍缺独立端点 |
@@ -226,6 +226,21 @@ freeze再运行，批内不改源码；不是提前开始完整P3重复比较。
 高耦合共享容量。runtime脚本与rubric分离，不提供oracle State分组；未选入或执行批次，
 不声称unseen。逻辑关闭不等于物理归档实现，未知副作用真实恢复及错误State注入仍是
 独立缺口。先完成当前小接线的机制检查，再冻结后续完整情景/重复/顺序。
+
+[R2结果](MILAI_LOCAL_STATE_ATTENTION_P3_WIRING_R2_RESULTS_20260927.md)已完成6轨迹36消息，
+源码2b65c175c9ffe40f2e09f0327ee4f5faec87a84a，G9/12、L8/12、LRU6/12，完整各0/2。
+L在workshop形成3卡，后台修订初次只改field-kit卡，但Mira仍合卡。LRU首次计划被
+may_create=false拦截，维护未调用且pending消费，导致后续缺项/虚构；无控制退化不等于
+正确no-op。三partial均实际found/原ID补label，错误初始key和其他字段仍计失败。
+累计1321生成/1582759tokens/11162embeddingtokens；本批130/142179/70，历史不变。
+下一单一结构修复让U只选择已有State，所有pending批都有共享维护器的新建/no-op机会，
+空bank直接维护→A；保持预算、来源合同、Host与G/L，随后仅两原LRU轨迹小验证。
+
+[R3修复协议](../data/manifests/local-state-attention-p3-wiring-r3-protocol.json)已固定仅两条原LRU
+轨迹、12消息；G/L保留R2历史身份，不重跑、不伪称新配对比较。Sol修改限controller/CLI/
+config/窄测，45项相关检查、目标静态、两次/tmp prepare及一次build通过。新manifest
+声明creation_policy=shared_maintenance_each_pending_batch；selector不再否决新建，所有
+pending到共享维护器，但合法空edits仍消费pending，因此语义是否改善仍待真实核查。
 
 ## 后期资源准备记录
 
