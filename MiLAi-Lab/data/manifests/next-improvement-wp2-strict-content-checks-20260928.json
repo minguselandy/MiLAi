@@ -1,0 +1,62 @@
+{
+  "kind": "MILAI_C2_STRICT_CONTENT_FOLLOWUP_CHECKS_RECEIPT",
+  "baseline_git_sha": "5874ca4ffbf7c08cfb8c4bf8f3108c9b9700696c",
+  "source_head_before_publication": "5874ca4ffbf7c08cfb8c4bf8f3108c9b9700696c",
+  "changed_file_sha256": {
+    "MiLAi-Lab/src/milai_lab/baselines/langmem_strict_tools.py": "9fe477678f4db773c1c5f4771262043adf9c0a43b9244f431cc51c20c86f6fdd",
+    "MiLAi-Lab/tests/unit/test_langmem_foundation.py": "4c33617f94ec12d1f823044cca38fa7719306bb5a6a456f41233777f6ad3d2a9"
+  },
+  "observed_trigger": "Published C3b boundary update with action and id but omitted content passed strict tool default None and wrote {content:null}; original real generation chatcmpl-a11cbf8c1b78c151. This followup does not change that frozen run.",
+  "isolated_old_new_reproduction": {
+    "method": "Loaded pinned baseline strict factory source via git show into an isolated Python module; invoked real StructuredTool with InMemoryStore and no HTTP.",
+    "input": "existing owner record {content:original}; UPDATE action+id with content omitted; CREATE action with content omitted",
+    "old": "UPDATE success/updated stored {content:null}; CREATE success stored second record {content:null}",
+    "new": "both error ToolMessages {ok:false,status:invalid_arguments,reason:content_required}; original record remains {content:original}; no second record",
+    "native_parameter_schema_equal_old_new": true,
+    "native_parameter_schema_sha256_old_new": "f9ac40bcc2230e120937f58102663cd09fedd811f2b03a889e31e05d158d6453",
+    "old_description_sha256": "b8d5eed7d2b5664285ae96b5d8bf2c037fb629a1fc88df1af501258465d8ae78",
+    "new_description_sha256": "08285278ee83728a297f658d3002f3e16bdc47ff83e8501c38ae896cedfefb03",
+    "description_delta": "Added generic sentence: Create and update require non-null content."
+  },
+  "checks": [
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/pytest -q tests/unit/test_langmem_foundation.py::test_agent_strict_content_required_rejects_real_toolnode_then_recovers tests/unit/test_langmem_foundation.py::test_strict_crud_scope_noop_and_native_parameters tests/unit/test_langmem_foundation.py::test_boundary_executor_uses_same_strict_content_guard tests/unit/test_langmem_foundation.py::test_strict_store_failures_propagate tests/unit/test_langmem_foundation.py::test_agent_strict_rejects_unknown_update_then_accepts_create",
+      "result": "7 passed",
+      "seconds": 1.91,
+      "scope": "actual ToolNode MockTransport, sync/async strict factory, shared boundary executor, Store exception and existing target/owner contracts"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/pytest -q tests/unit/test_langmem_foundation.py::test_strict_crud_scope_noop_and_native_parameters",
+      "result": "2 passed",
+      "seconds": 1.51,
+      "reason": "final test-only assertion of zero deletes added"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/ruff check src/milai_lab/baselines/langmem_strict_tools.py tests/unit/test_langmem_foundation.py",
+      "result": "pass; final test target ruff also pass"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/mypy src/milai_lab/baselines/langmem_strict_tools.py",
+      "result": "pass; 1 source file"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "behavior_boundary": {
+    "strict_create_update": "None including omitted content rejected before Store read/write with actual error ToolMessage",
+    "strict_delete": "omitted content remains valid",
+    "valid_explicit_string": "existing update and same-content no_change unchanged",
+    "native_default": "native create_manage_memory_tool untouched",
+    "scope_and_faults": "existing namespace/unknown-ID checks and real Store exceptions remain",
+    "not_changed": "No empty-string semantic rule, Host prompt/State writer changes, model response retry, or old experiment rerun"
+  },
+  "verification_limits": {
+    "real_host_http_calls": 0,
+    "real_embedding_calls": 0,
+    "shared_postgres_calls": 0,
+    "test_store": "MockTransport and InMemoryStore; actual local SQLite checkpoint in ToolNode graph test",
+    "local_build": "NOT_RUN; no packaging, CLI, dependency, or package include changes"
+  }
+}

@@ -1,6 +1,6 @@
 # WP5：同粒度整体更新与普通patch
 
-状态：设计收敛，输入与评分已冻结；源码实现、必要检查及终版构建已完成；发布后执行identity待冻结，真实实验尚未运行。依据[计划§8](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)
+状态：设计收敛，输入与评分已冻结；源码实现、必要检查及终版构建已完成；四条真实一次提案诊断已完成并评分；实际CI按后续独立记录。依据[计划§8](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)
 和[执行Goal](MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md)。不覆盖C3a及历史D0合同。
 
 ## 首断点与可比较范围
@@ -85,3 +85,56 @@ SQLite写入与真实工具执行，未重新执行业务。该回执在本X2中
 新CLI/输入包含、私密artifacts与环境排除已核对。本工程回执与本段是构建后补齐元数据，
 不声称之前分发包已含这些文字，也不为纯元数据再构建。正式运行在发布后的detached源码重prepare。
 expected_revision为串行读后检查，不是跨进程CAS；局部patch不证明语义正确或事件只消费一次。
+
+## X2实际结果（5874ca4，2026-09-28）
+
+[PR58](https://github.com/minguselandy/MiLAi/pull/58)发布head
+`5874ca4ffbf7c08cfb8c4bf8f3108c9b9700696c`，base为07aaa3c；独立detached源码执行，未合并main。
+[正式冻结](../data/manifests/next-improvement-wp5-local-update-freeze-20260928.json)的prepare identity为
+`c755db0f1bde4b852a9d4eebe44510ba530d1f7207526f64bab15c649a80198e`，freeze SHA为
+`6659c34bcf16b3e70c13c86ff2c4eafa0dece749a52df9bd5fe49ce7ae073858`。
+[逐例实际结果](../data/manifests/next-improvement-wp5-local-update-results-20260928.json)保留每次提案、真实回执、
+State读回、pending和费用。四条均实际HTTP 200/usage已知，没有新业务调用、Host回答或embedding。
+
+| 前缀 | replace | patch_or_replace | generation tokens：replace / patch配方 |
+| --- | --- | --- | --- |
+| 只改访问时间 | 正确，原ID revision1→2 | 正确，唯一完整句patch，revision1→2 | 1452 / 1507 |
+| 实际预订成功但标签失败回执 | 正确，revision2→3、实际ID/失败结果/待办正确 | 拒绝，选择replace回退但误撤非现有链接，零State写 | 2015 / 2168 |
+
+整体重写2/2，patch配方1/2；三个成功提交均保持原精确计划、包装、门位及对应时间，原来源未删除。
+局部patch成功后的完整正文与replace完全相同（除本轮引用集合不同），并非只检查一个数字。
+部分回执成功例记录了实际reservation ID和标签未创建，清空原待执行预订，未丢失访问安排。
+这是一条已暴露arc的两个构造前缀、四次一次提案Store诊断；不是四个独立样本或完整任务成功率。
+
+## 拒绝原因与决定
+
+Observed：失败臂选择了允许的整体重写回退，正文和needs提案合理，但remove_evidence包含初始用户来源。
+该来源在合法source catalog中存在，却不在当前revision2 State的evidence_refs内；
+程序按冻结的“撤回已有链接”合同拒绝整条更新。State正文/revision完全不变，待处理ToolMessage仍pending，
+State bank put计数相对seed没有增加。保持旧内容不能抵消必要更新未完成。
+Expected：提交实际预订/标签失败结果、解除旧待办，并保留无关信息和正确来源链接。
+
+第一断点在提案选择了未绑定的来源链接；它没有尝试literal patch，不能归因为patch匹配器坏了。
+两个解释是：模型混淆“可见来源”与“当前已绑定来源”；或者对已不存在链接采用严格拒绝增加了接口摩擦。
+后者可以是另一合同，但不能在看过结果后放宽校验改写本轮成绩。实际HTTP原文与执行calls一致，
+同前缀两臂material payload逐字段完全相同，排除了材料分叉或parser丢字段作为这次原因。
+
+决定为Pivot默认局部维护优势主张，保留可选普通patch接口，停止增加变体或反复提示调参。
+X5在没有新证据前继续简洁整体正文路径。若以后实际任务确需拒绝后修复，须对两臂另冻相同真实错误续接机会；
+本轮一次提案协议不追加修复，也不据未修复结果否定所有patch用途。
+
+## 完整费用与适用边界
+
+replace两例合计3467 tokens（2863输入/604输出）；patch配方3675（3097输入/578输出），
+多208，约6.0%。局部例虽少输出62 tokens，但多输入117，合计反而多55；大schema开销已计入。
+部分例是replace回退，不能将其成本解释为“短patch”效果。没有节约信号或维护质量优势证据。
+
+新增4次生成/7142 tokens，全部control；0 embedding、0 Judge、0新业务执行。
+实际生成HTTP wall合计8.523396秒。连续账本为2799次生成、3486504 generation tokens、19273 embedding tokens，
+SHA `bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6`，历史链逐字段未变。
+State种子index=false，trace确无embedding，不是漏记后补零。Store读写/CPU/wall/逻辑字节包含seed与观察，
+详见逐例记录；不是物理I/O，也不代表形成加多次复用的生命周期成本。
+
+复现使用该commit的`tools/run_state_update_probe.py prepare/run-job`、公开inputs/config、原ledger绝对路径，
+注入ignored DSN，新隔离run/namespace，四job原顺序串行且每个只一次提案。rubric不进入运行时。
+原失败attempt不可重放替换；新合同或重试预算需独立冻结并披露曝光。

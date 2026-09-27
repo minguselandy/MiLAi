@@ -54,7 +54,7 @@ PR合并仍须正常检查和审阅闭环，当前不自动merge；先完成可�
 | WP2/C2/G1 | 锁定上游实际集成复现未知合法UUID被upsert；薄严格CRUD同步/异步一致；已有/缺失/错误namespace/message UUID/空删除/真实删除/Store异常/无副作用回执；不强制每次额外Host READ，不声称CAS | ENGINEERING_ACCEPTED；C2实际Fast通过，在线语义另验 |
 | WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | C3a PR55初轮失败保留，2c7修复实际Fast通过；C3b六完整轨迹完成：Host双写2/2、boundary1/2、overlap2/2；连续生命周期仍待X5 |
 | WP4/C5/X3/X4/G2 | 明确A≠U且U空可CREATE；保留原问题实体、全读/普通检索/同State查询增强/可关selector；固定同bank与前态比较all/U/U=A/oracle；对真正使用引用做有限失效，不引全库图 | NOT_DONE |
-| WP5/C4/X2 | 同粒度整体/普通patch/候选局部维护；明确目标版本/唯一片段，广泛变动可整体；更新与无关保持同时测；D0/真实事件身份/部分成功维护续接保留 | 候选与强普通patch合并两臂；C4工程冻结及必要检查/构建完成，实际实验NOT_RUN |
+| WP5/C4/X2 | 同粒度整体/普通patch/候选局部维护；明确目标版本/唯一片段，广泛变动可整体；更新与无关保持同时测；D0/真实事件身份/部分成功维护续接保留 | C4两臂四真实一次提案完成：replace2/2、patch配方1/2且更贵；保留可选接口，Pivot默认收益主张 |
 | WP6/X1 | 用户、真实工具结果、助手提案、可修订State角色清楚且原回执完整；固定正确正文比原标题/源标题/无State，首响应后实际动作；无gold键名规则 | R1六次首响应及全部实际续接完成；严格1/6，标题修复Pivot |
 | WP7 | 独立语义写入/重复规则/依赖、Host/U/maint/A、材料、Store调用/CPU/wall、任务与维护分别测量；全生命周期Cbuild+Cmaint+ΣCuse及复用摊销；只有实测热点才优化 | NOT_DONE |
 | X5/G3/C6 | 正常可用简洁基线＋独立可切换最小候选；同合法历史/权限/CRUD/可比预算；连续在线真实世界/恢复/复用及全成本；逐例首断点和可执行Go/Pivot/Stop | NOT_RUN |
@@ -235,3 +235,17 @@ Host双写与overlap均2/2；boundary增量缺content导致ordinary memory写nul
 临时要求/复用/动作恢复与完整费用；不能以这六轨迹结案。
 [WP5](MILAI_NEXT_IMPROVEMENT_WP5_LOCAL_UPDATE_20260927.md)两前缀四job的输入及scorer已冻结，
 Sol在独立C4分支实现同粒度整体/普通patch合同；没有独立第三算法，实际比较尚未运行。
+
+
+### C4/X2实际诊断完成，严格正文guard跟进
+
+C4源码5874ca4四条固定Store诊断完成，replace2/2、patch配方1/2。失败是回退整体重写时误撤
+当前State未绑定的来源链接，按冻结合同零写拒绝；不是literal patch匹配失败。patch两例3675tokens，
+replace3467；没有额外质量/成本优势信号，不追加变体，不默认加入X5。
+新增4/7142/0，连续2799/3486504/19273。C3b暴露的普通memory null正文缺口在独立strict followup修复中，
+不会改变C3b/C4冻结结果。WP4及连续生命周期/总费用仍未完成，实际Goal继续active至任务结束后暂停。
+
+
+严格正文followup已完成两文件最小修复，旧工具隔离复现确会写null，新strict工具缺失/null正文返回错误且零写。
+7项定向检查通过（最终补断言重跑其中2项），native参数schema相同；无入口/包装变化未做本地build。
+C3b/C4真实结果不动，后续方法身份会包含此共同guard。实际远端CI待发布后核实，不冒充语义效果收益。
