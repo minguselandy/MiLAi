@@ -8,7 +8,8 @@ import time
 import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any
+from itertools import pairwise
+from typing import Any, cast
 
 from langgraph.store.base import BaseStore
 
@@ -289,6 +290,46 @@ class LocalStateBank:
         return {hashlib.sha256(json.dumps(
             identity, ensure_ascii=False).encode()).hexdigest()}
 
+    @staticmethod
+    def _explicit_update_content(old: dict[str, Any], edit: dict[str, Any]) -> str:
+        """Resolve an exact revision's replace or nonoverlapping literal patches."""
+        revision = edit.get("expected_revision")
+        mode = edit.get("mode")
+        if type(revision) is not int or revision != old["revision"]:
+            raise ValueError("revision_conflict")
+        if mode == "replace":
+            if "patches" in edit or not isinstance(edit.get("content"), str):
+                raise ValueError("replace_arguments_invalid")
+            return cast(str, edit["content"])
+        if mode != "patch" or "content" in edit:
+            raise ValueError("patch_arguments_invalid")
+        patches = edit.get("patches")
+        if not isinstance(patches, list) or not patches:
+            raise ValueError("patch_arguments_invalid")
+        original = old["content"]
+        spans: list[tuple[int, int, str]] = []
+        for patch in patches:
+            if (not isinstance(patch, dict) or set(patch) != {"old_text", "new_text"}
+                    or not isinstance(patch["old_text"], str)
+                    or not patch["old_text"]
+                    or not isinstance(patch["new_text"], str)):
+                raise ValueError("patch_arguments_invalid")
+            start = original.find(patch["old_text"])
+            if start < 0 or original.find(patch["old_text"], start + 1) >= 0:
+                raise ValueError("patch_text_not_unique")
+            spans.append((start, start + len(patch["old_text"]), patch["new_text"]))
+        spans.sort(key=lambda span: span[0])
+        if any(previous[1] > following[0]
+               for previous, following in pairwise(spans)):
+            raise ValueError("patch_spans_overlap")
+        pieces: list[str] = []
+        offset = 0
+        for start, end, replacement in spans:
+            pieces.extend((original[offset:start], replacement))
+            offset = end
+        pieces.append(original[offset:])
+        return "".join(pieces)
+
     def apply(self, scope: StateScope, edits: list[dict[str, Any]],
               event_ids: set[str], query_source_id: str | None = None,
               allowed_existing_ids: set[str] | None = None,
@@ -326,6 +367,8 @@ class LocalStateBank:
                 receipts.append({"status": "skipped_invalid_edit"})
                 continue
             state_id = edit.get("id")
+            explicit_update = any(key in edit for key in (
+                "expected_revision", "mode", "patches", "remove_evidence"))
             if ((state_id is None and not allow_create)
                     or (isinstance(state_id, str)
                         and allowed_existing_ids is not None
@@ -339,9 +382,12 @@ class LocalStateBank:
             content = edit.get("content")
             if ((state_id is not None and
                  (not isinstance(state_id, str) or state_id not in current))
-                    or not isinstance(refs, list)
-                    or any(not isinstance(ref, str) or ref not in available for ref in refs)
-                    or not isinstance(content, str) or not content.strip()):
+                    or (explicit_update and state_id is None)
+                    or (not explicit_update and (
+                        not isinstance(refs, list)
+                        or any(not isinstance(ref, str) or ref not in available
+                               for ref in refs)
+                        or not isinstance(content, str) or not content.strip()))):
                 invalid = True
                 receipts.append({"id": state_id, "status": "skipped_invalid_edit"})
                 continue
@@ -374,6 +420,30 @@ class LocalStateBank:
                                      "operation": "update" if old else "create",
                                      "revision": row["revision"]})
                     continue
+            removed_refs: list[str] = []
+            if explicit_update:
+                if old is None:
+                    invalid = True
+                    receipts.append({"id": state_id, "status": "skipped_invalid_edit"})
+                    continue
+                try:
+                    content = self._explicit_update_content(old, edit)
+                    removed_refs = edit.get("remove_evidence", [])
+                    if (not isinstance(refs, list)
+                            or any(not isinstance(ref, str) or ref not in available
+                                   for ref in refs)
+                            or not isinstance(removed_refs, list)
+                            or any(not isinstance(ref, str) for ref in removed_refs)
+                            or set(refs) & set(removed_refs)
+                            or not set(removed_refs) <= set(old["evidence_refs"])
+                            or not content.strip()):
+                        raise ValueError("explicit_update_invalid")
+                except ValueError as error:
+                    invalid = True
+                    receipts.append({"id": state_id, "status": "skipped_invalid_edit",
+                                     "reason": str(error)})
+                    continue
+            assert isinstance(content, str)
             if old is None and len(current) >= self.max_states:
                 invalid = True
                 receipts.append({"id": state_id, "status": "skipped_invalid_edit"})
@@ -384,7 +454,8 @@ class LocalStateBank:
                      "title": title if title is not None else (old["title"] if old else ""),
                      "content": content,
                      "needs": needs if needs is not None else (old["needs"] if old else []),
-                     "evidence_refs": sorted(set((old["evidence_refs"] if old else []) + refs)),
+                     "evidence_refs": sorted((set(old["evidence_refs"] if old else [])
+                                              | set(refs)) - set(removed_refs)),
                      "revision": old["revision"] if old else 0,
                      "archived": old["archived"] if old else False}
             public_old = ({key: old[key] for key in value} if old is not None else None)

@@ -1,0 +1,35 @@
+{
+  "kind": "MILAI_LOCAL_UPDATE_RUBRIC",
+  "status": "SCORER_FROZEN_BEFORE_EXECUTION",
+  "runtime_reads_rubric": false,
+  "criteria": {
+    "common": [
+      "Update actual supplied existing State ID; do not create duplicate or another owner record.",
+      "Keep exact item handling plan 5 Summit archive crates / mezzanine M-4 / foam inserts and side door D-2.",
+      "Necessary update AND unrelated constraints both must pass; rejected/no-change when needed is failure.",
+      "Cite actual available newly consumed source; inherited references are lineage, not proof of current re-review."
+    ],
+    "one_constraint": [
+      "Current access time 11:45; 10:15 may remain only explicitly historical.",
+      "No invented reservation/label result, no business action; original no-reservation state preserved."
+    ],
+    "actual_partial_receipt": [
+      "Record actual reservation ID RSV-ccda2693-2f2c-4d49-af12-14e678dc5a02.",
+      "Record created reservation plus failed/unavailable label and label_status not_created.",
+      "Remove/supersede current claim no business action has been taken; retain the exact plan and 10:15 access time.",
+      "Do not keep making a reservation or retry labeling as an immediate remaining task; report actual result/stop is acceptable pending task."
+    ]
+  },
+  "scorer": "Root exact IDs/numbers/fields plus offline semantic preservation and current-vs-historical reading; no Judge",
+  "no_unseen_claim": true,
+  "cost": "All shared complete State, source text, schema, patch old/new spans, failed attempts and allowed replacement fallback counted; no preselected gold patch spans in runtime input.",
+  "unit": "Two constructed prefixes from one exposed historical arc, two update-contract conditions each; 4 one-proposal actual Store diagnostics, no Host answer or new business execution.",
+  "classification": [
+    "required_change_and_preservation_correct",
+    "necessary_change_missing",
+    "unrelated_fact_loss",
+    "wrong_or_invented_result",
+    "rejected_or_invalid",
+    "infrastructure_failure"
+  ]
+}

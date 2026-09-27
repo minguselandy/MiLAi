@@ -19,6 +19,7 @@ from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.config import get_config
 from langmem import create_search_memory_tool  # type: ignore[import-untyped]
 from langmem.utils import NamespaceTemplate  # type: ignore[import-untyped]
+from typing_extensions import TypedDict
 
 from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
@@ -38,6 +39,7 @@ class WriterTools:
     search_memory: BaseTool
     manage_state: BaseTool
     read_record: BaseTool
+    state_update_contract: Literal["legacy", "replace", "patch_or_replace"] = "legacy"
 
     def host_tools(self) -> tuple[BaseTool, ...]:
         return (self.manage_memory, self.search_memory,
@@ -79,6 +81,11 @@ class _StateWriteContext:
     query_source_id: str | None
 
 
+class TextPatch(TypedDict):
+    old_text: str
+    new_text: str
+
+
 _STATE_WRITE: ContextVar[_StateWriteContext | None] = ContextVar(
     "lsa_state_writer_batch", default=None)
 
@@ -100,10 +107,31 @@ def _receipt(call_id: str, name: str, *, ok: bool, status: str,
         name=name, tool_call_id=call_id, status="success" if ok else "error")
 
 
-def create_writer_tools(bank: LocalStateBank,
-                        memory_namespace: tuple[str, ...]) -> WriterTools:
+def create_writer_tools(
+    bank: LocalStateBank, memory_namespace: tuple[str, ...], *,
+    state_update_contract: Literal["legacy", "replace", "patch_or_replace"] = "legacy",
+) -> WriterTools:
     """Build one toolset; the memory mutator is the exact C2 strict tool."""
     namespacer = NamespaceTemplate(memory_namespace)
+
+    def _commit_state_edit(edit: dict[str, Any], tool_call_id: str) -> ToolMessage:
+        scope = _scope()
+        context = _STATE_WRITE.get()
+        receipts, invalid = bank.apply(
+            scope, [edit], set(context.event_ids) if context else set(),
+            query_source_id=context.query_source_id if context else None,
+            batch_id=context.batch_id if context else None,
+            edit_slots=[context.slot] if context else None,
+            ack_events=False)
+        result = receipts[0]
+        if invalid:
+            return _receipt(tool_call_id, "manage_state", ok=False,
+                            status="invalid_edit", id=edit.get("id"),
+                            reason=result.get("reason"))
+        return _receipt(tool_call_id, "manage_state", ok=True,
+                        status=result["status"], id=result["id"],
+                        revision=result["revision"],
+                        replayed=result.get("replayed", False))
 
     def manage_state(
         action: Literal["create", "update", "delete"],
@@ -115,14 +143,12 @@ def create_writer_tools(bank: LocalStateBank,
         *,
         tool_call_id: Annotated[str, InjectedToolCallId],
     ) -> ToolMessage:
-        scope = _scope()
-        context = _STATE_WRITE.get()
         if action == "delete":
             if not id or any(value is not None for value in
                              (title, content, needs, evidence)):
                 return _receipt(tool_call_id, "manage_state", ok=False,
                                 status="invalid_arguments")
-            deleted = bank.delete_state(scope, id)
+            deleted = bank.delete_state(_scope(), id)
             return _receipt(tool_call_id, "manage_state", ok=deleted,
                             status="deleted" if deleted else "not_found", id=id)
         if (action == "create" and id is not None) or (action == "update" and not id):
@@ -135,20 +161,42 @@ def create_writer_tools(bank: LocalStateBank,
             edit["needs"] = needs
         if evidence is not None:
             edit["evidence"] = evidence
-        receipts, invalid = bank.apply(
-            scope, [edit], set(context.event_ids) if context else set(),
-            query_source_id=context.query_source_id if context else None,
-            batch_id=context.batch_id if context else None,
-            edit_slots=[context.slot] if context else None,
-            ack_events=False)
-        result = receipts[0]
-        if invalid:
-            return _receipt(tool_call_id, "manage_state", ok=False,
-                            status="invalid_edit", id=id, reason=result.get("reason"))
-        return _receipt(tool_call_id, "manage_state", ok=True,
-                        status=result["status"], id=result["id"],
-                        revision=result["revision"],
-                        replayed=result.get("replayed", False))
+        return _commit_state_edit(edit, tool_call_id)
+
+    def manage_state_replace(
+        action: Literal["update"], id: str, expected_revision: int,
+        mode: Literal["replace"], content: str,
+        title: str | None = None, needs: list[str] | None = None,
+        evidence: list[str] | None = None,
+        remove_evidence: list[str] | None = None, *,
+        tool_call_id: Annotated[str, InjectedToolCallId],
+    ) -> ToolMessage:
+        edit: dict[str, Any] = {"id": id, "expected_revision": expected_revision,
+                                "mode": mode, "content": content}
+        for key, value in (("title", title), ("needs", needs),
+                           ("evidence", evidence), ("remove_evidence", remove_evidence)):
+            if value is not None:
+                edit[key] = value
+        return _commit_state_edit(edit, tool_call_id)
+
+    def manage_state_patch_or_replace(
+        action: Literal["update"], id: str, expected_revision: int,
+        mode: Literal["replace", "patch"],
+        content: str | None = None,
+        patches: list[TextPatch] | None = None,
+        title: str | None = None, needs: list[str] | None = None,
+        evidence: list[str] | None = None,
+        remove_evidence: list[str] | None = None, *,
+        tool_call_id: Annotated[str, InjectedToolCallId],
+    ) -> ToolMessage:
+        edit: dict[str, Any] = {"id": id, "expected_revision": expected_revision,
+                                "mode": mode}
+        for key, value in (("content", content), ("patches", patches),
+                           ("title", title), ("needs", needs),
+                           ("evidence", evidence), ("remove_evidence", remove_evidence)):
+            if value is not None:
+                edit[key] = value
+        return _commit_state_edit(edit, tool_call_id)
 
     def read_record(
         target_kind: Literal["memory", "state"], id: str,
@@ -178,11 +226,24 @@ def create_writer_tools(bank: LocalStateBank,
                         status="found", target_kind="memory", id=memory_id,
                         value=memory_row.value)
 
-    state_tool = StructuredTool.from_function(
-        manage_state, name="manage_state",
-        description=("Create, update, or delete one scoped local State. Create omits id and "
-                     "requires title and content; update requires an existing id and content; "
-                     "delete requires an existing id. Evidence cites actual source ids."))
+    if state_update_contract == "legacy":
+        state_tool = StructuredTool.from_function(
+            manage_state, name="manage_state",
+            description=("Create, update, or delete one scoped local State. Create omits id and "
+                         "requires title and content; update requires an existing id and content; "
+                         "delete requires an existing id. Evidence cites actual source ids."))
+    elif state_update_contract in {"replace", "patch_or_replace"}:
+        state_tool = StructuredTool.from_function(
+            manage_state_replace if state_update_contract == "replace" else
+            manage_state_patch_or_replace, name="manage_state",
+            description=("Update one existing scoped State using its exact id and revision. "
+                         "Replace the full content" +
+                         (" or patch unique old_text spans, with full replacement fallback"
+                          if state_update_contract == "patch_or_replace" else "") +
+                         ". Omitted title or needs is preserved. Evidence adds source links; "
+                         "remove_evidence retracts links without deleting sources."))
+    else:
+        raise ValueError("LSA_STATE_UPDATE_CONTRACT_INVALID")
     read_tool = StructuredTool.from_function(
         read_record, name="read_record",
         description="Read one existing memory or State by its exact scoped id.")
@@ -191,7 +252,8 @@ def create_writer_tools(bank: LocalStateBank,
         manage_memory=create_strict_manage_memory_tool(memory_namespace, bank.store),
         search_memory=create_search_memory_tool(namespace=memory_namespace,
                                                 store=bank.store),
-        manage_state=state_tool, read_record=read_tool)
+        manage_state=state_tool, read_record=read_tool,
+        state_update_contract=state_update_contract)
 
 
 def scoped_memory_records(toolset: WriterTools, scope: StateScope, *,
@@ -344,6 +406,15 @@ def execute_writes(
         if not isinstance(name, str) or name not in tools or not isinstance(arguments, dict):
             receipts.append(_receipt(call_id, str(name), ok=False,
                                      status="invalid_call"))
+            continue
+        if (name == "manage_state" and toolset.state_update_contract != "legacy"
+                and (not set(arguments) <= set(schemas[name]["properties"])
+                     or ("patches" in arguments and isinstance(arguments["patches"], list)
+                         and any(not isinstance(patch, dict)
+                                 or set(patch) != {"old_text", "new_text"}
+                                 for patch in arguments["patches"])))):
+            receipts.append(_receipt(call_id, name, ok=False,
+                                     status="invalid_arguments"))
             continue
         try:
             validate(arguments, schemas[name], format_checker=FormatChecker())

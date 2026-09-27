@@ -1,0 +1,143 @@
+{
+  "kind": "MILAI_LOCAL_UPDATE_INPUTS",
+  "status": "INPUTS_FROZEN_BEFORE_EXECUTION",
+  "independent_historical_arcs": 1,
+  "constructed_prefix_cases": 2,
+  "historical_trace_sha256": "bb7a561e6eccbdbd3a62a2da63f88646757e428c5d24d3b11e884ad66f8f6c17",
+  "runtime_reads_rubric": false,
+  "cases": [
+    {
+      "case_id": "one_constraint",
+      "user_id": "mira",
+      "states": [
+        {
+          "id": "5589f93f3aa04bbdaacbeae595397d20",
+          "title": "Summit archive crate handling and access arrangement",
+          "content": "Mira reports plans to handle Summit archive crates across sessions: 5 crates for mezzanine M-4 using foam inserts. No reservations have been made yet. Separate access is arranged via side door D-2 at 10:15. No business action was taken; this is an acknowledgment of arrangements.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        }
+      ],
+      "source_events": [
+        {
+          "id": "message:5f21c759-df8b-407a-a51c-9623042cebb3",
+          "kind": "user",
+          "actor": "mira",
+          "tool_call_id": null,
+          "content": "We will handle Summit archive crates across sessions: 5 crates for mezzanine M-4, using foam inserts. Nothing has been reserved yet. The separate Summit archive access arrangement is the side door D-2 at 10:15. Acknowledge these arrangements without a business action."
+        },
+        {
+          "id": "message:wp5-time-e9b4588cf20e5ba46b24c958",
+          "kind": "user",
+          "actor": "mira",
+          "tool_call_id": null,
+          "content": "The separate Summit archive access arrangement has changed: use side door D-2 at 11:45 instead of 10:15. Keep the crate handling plan and all other details unchanged. Remember this change without taking any business action."
+        }
+      ],
+      "pending_event_ids": [
+        "message:wp5-time-e9b4588cf20e5ba46b24c958"
+      ],
+      "current_task": "The separate Summit archive access arrangement has changed: use side door D-2 at 11:45 instead of 10:15. Keep the crate handling plan and all other details unchanged. Remember this change without taking any business action.",
+      "raw_history": [
+        {
+          "role": "user",
+          "content": "We will handle Summit archive crates across sessions: 5 crates for mezzanine M-4, using foam inserts. Nothing has been reserved yet. The separate Summit archive access arrangement is the side door D-2 at 10:15. Acknowledge these arrangements without a business action."
+        },
+        {
+          "role": "user",
+          "content": "The separate Summit archive access arrangement has changed: use side door D-2 at 11:45 instead of 10:15. Keep the crate handling plan and all other details unchanged. Remember this change without taking any business action."
+        }
+      ],
+      "selection": "Constructed new time-change observation over actual pre-control revision1 State at historical trace index20; no business result in this case."
+    },
+    {
+      "case_id": "actual_partial_receipt",
+      "user_id": "mira",
+      "states": [
+        {
+          "id": "5589f93f3aa04bbdaacbeae595397d20",
+          "title": "Summit archive crate handling and access arrangement",
+          "content": "Mira reports plans to handle Summit archive crates across sessions: 5 crates for mezzanine M-4 using foam inserts. Separate access is arranged via side door D-2 at 10:15. Mira instructs to make just one reservation attempt for labeling and handling; no business action has been taken yet. This is an acknowledgment of arrangements and pending instruction.",
+          "needs": [
+            "Execute one reservation attempt for Summit archive crates (mezzanine M-4, 5 crates) and label them. If labeling fails after reservation, report actual persisted result and stop."
+          ],
+          "evidence_refs": [
+            "message:2df63915-4711-4a3a-b399-cba950079447"
+          ],
+          "revision": 2,
+          "archived": false
+        }
+      ],
+      "source_events": [
+        {
+          "id": "message:5f21c759-df8b-407a-a51c-9623042cebb3",
+          "kind": "user",
+          "actor": "mira",
+          "tool_call_id": null,
+          "content": "We will handle Summit archive crates across sessions: 5 crates for mezzanine M-4, using foam inserts. Nothing has been reserved yet. The separate Summit archive access arrangement is the side door D-2 at 10:15. Acknowledge these arrangements without a business action."
+        },
+        {
+          "id": "message:2df63915-4711-4a3a-b399-cba950079447",
+          "kind": "user",
+          "actor": "mira",
+          "tool_call_id": null,
+          "content": "Reserve and label Summit archive crates according to my agreed handling plan. Make just one reservation attempt. If labeling fails after a reservation is created, report the actual persisted result and stop; do not retry in this turn."
+        },
+        {
+          "id": "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf",
+          "kind": "tool",
+          "actor": "reserve_and_label",
+          "tool_call_id": "chatcmpl-b7f59bc1d9702bca:tool:0",
+          "content": "{\"ok\": false, \"status\": \"reserved_label_failed\", \"reason\": \"label_service_unavailable\", \"reservation_id\": \"RSV-ccda2693-2f2c-4d49-af12-14e678dc5a02\", \"item_key\": \"Summit archive crates\", \"quantity\": 5, \"destination\": \"mezzanine M-4\", \"packing\": \"foam inserts\", \"label_status\": \"not_created\"}"
+        }
+      ],
+      "pending_event_ids": [
+        "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+      ],
+      "current_task": "Reserve and label Summit archive crates according to my agreed handling plan. Make just one reservation attempt. If labeling fails after a reservation is created, report the actual persisted result and stop; do not retry in this turn.",
+      "raw_history": [
+        {
+          "role": "user",
+          "content": "We will handle Summit archive crates across sessions: 5 crates for mezzanine M-4, using foam inserts. Nothing has been reserved yet. The separate Summit archive access arrangement is the side door D-2 at 10:15. Acknowledge these arrangements without a business action."
+        },
+        {
+          "role": "user",
+          "content": "Reserve and label Summit archive crates according to my agreed handling plan. Make just one reservation attempt. If labeling fails after a reservation is created, report the actual persisted result and stop; do not retry in this turn."
+        }
+      ],
+      "selection": "Actual revision2 State supplied at historical control25 before its old tool observation was applied, exact same body as WP6 frozen view. New tool observation is from WP6 correct partial trajectory, not historical wrong-key result or its final answer.",
+      "actual_receipt_source": {
+        "result_sha256": "9ee89f1f614a4008ebdd6c551806043d478ec5e4262febec6100828728fc9fe9",
+        "method_commit": "ec34c89d96ecbf6030777b8b23c5dc9773d27ac4",
+        "generation_id": "chatcmpl-b7f59bc1d9702bca",
+        "tool_call_id": "chatcmpl-b7f59bc1d9702bca:tool:0",
+        "thread_id": "826edcc77771e3d2bac5f5f05d5a76bdd7e6859d6768dbc4b0d2fa2283c80ff0",
+        "event_id_rule": "existing history.source_id(thread_id, ToolMessage) SHA of [thread_id,tool_call_id]"
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "job_id": "1-local-replace",
+      "case_id": "one_constraint",
+      "update_contract": "replace"
+    },
+    {
+      "job_id": "2-partial-patch",
+      "case_id": "actual_partial_receipt",
+      "update_contract": "patch_or_replace"
+    },
+    {
+      "job_id": "3-local-patch",
+      "case_id": "one_constraint",
+      "update_contract": "patch_or_replace"
+    },
+    {
+      "job_id": "4-partial-replace",
+      "case_id": "actual_partial_receipt",
+      "update_contract": "replace"
+    }
+  ]
+}

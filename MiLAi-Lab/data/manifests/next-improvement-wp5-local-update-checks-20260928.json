@@ -1,0 +1,93 @@
+{
+  "kind": "MILAI_C4_LOCAL_UPDATE_CHECKS_RECEIPT",
+  "source_head_before_publication": "07aaa3cfc0bec3f914df00a614812aafec967b41",
+  "changed_file_sha256": {
+    ".github/workflows/ci.yml": "9e0c496effb1a8cc8e4bdc8e44e7cbc5ee2a0c60208a69a61415335f57308d44",
+    ".github/workflows/fast.yml": "4328797aaba45ff99055b9d2171c32d3f3197a29629a87eb664fbac0a9382159",
+    "MiLAi-Lab/configs/lab-verification-matrix.json": "5036f8cdf7313f37562a9fcfd7f640115e65f15815c0de43f0116e90a3d8126d",
+    "MiLAi-Lab/src/milai_lab/methods/local_state_attention/bank.py": "df459a2a0d63a0e82f0ee5afada5f233050e775f83cd2c85dfefc487534a6454",
+    "MiLAi-Lab/src/milai_lab/methods/local_state_attention/writers.py": "c456694f6fec2769ed439c8aa17ddf5c2e18c1e8acf4bbd096d6defd743979de",
+    "MiLAi-Lab/src/milai_lab/runners/state_update_probe.py": "424ce73dc9ba97565a4a222b9d8429f3743d47a73c3295fb82e74169e1fd2695",
+    "MiLAi-Lab/tools/run_state_update_probe.py": "cb5634e2ce5875cdfb7e88887d3c6c78c697a502ffc2103db1b870b2430d21fb",
+    "MiLAi-Lab/tests/unit/test_state_update_probe.py": "379ccced30c89e679855ca0a948ef00aec773a1ed22df09a6bf7b4704b70bd52"
+  },
+  "frozen_inputs_sha256": "f958762b65121e6b82cbc6e488b6dde423d862807bc85a47c3b0c41092e74a8f",
+  "frozen_config_sha256": "71881640bbae4ba4107134f52a5a52afbff28dae4d5164e489bdf03c4bbad306",
+  "frozen_rubric_sha256_not_read_by_runner": "23d6ee47d9d785bce7879fb99e7ffd5b296f90372c1fe3606eea433a483b24cf",
+  "prepare": {
+    "command": "PYTHONPATH=src artifacts/next-improvement/envs/foundation/bin/python tools/run_state_update_probe.py prepare --config data/diagnostics/next-improvement-wp5-local-update-r1/config.json --inputs data/diagnostics/next-improvement-wp5-local-update-r1/inputs.json --run c4-public-prepublish-zero-model --runtime-root /tmp/milai-c4-public-prepublish-zero-model --output /tmp/milai-c4-public-prepublish-zero-model/prepared.json",
+    "result": "PREPARED_ZERO_MODEL",
+    "cases": 2,
+    "jobs": 4,
+    "identity_sha256": "39055f7a68b40ef61051b48e0864c0c44851ab28cc6aafe0abd39b5b5582be98",
+    "receipt_path": "/tmp/milai-c4-public-prepublish-zero-model/prepared.json",
+    "manifest_path": "/tmp/milai-c4-public-prepublish-zero-model/run_manifest.json",
+    "note": "pre-publication Git HEAD; Root must prepare formal run after commit"
+  },
+  "checks": [
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/pytest -q tests/unit/test_state_update_probe.py",
+      "result": "12 passed",
+      "seconds": 1.62,
+      "source_stage": "final after test-only replay assertion"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/pytest -q tests/unit/test_local_state_attention.py tests/unit/test_writer_policy.py",
+      "result": "95 passed",
+      "seconds": 5.76,
+      "source_stage": "final runtime source"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/ruff check src/milai_lab/methods/local_state_attention/bank.py src/milai_lab/methods/local_state_attention/writers.py src/milai_lab/runners/state_update_probe.py tools/run_state_update_probe.py tests/unit/test_state_update_probe.py",
+      "result": "pass",
+      "source_stage": "final runtime source; final test-only change then target test Ruff pass"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/mypy src/milai_lab/methods/local_state_attention/bank.py src/milai_lab/methods/local_state_attention/writers.py src/milai_lab/runners/state_update_probe.py tools/run_state_update_probe.py",
+      "result": "pass; 4 files",
+      "source_stage": "final runtime source"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/python tools/check_verification_matrix.py",
+      "result": "pass; active_sources=150, foundation_explicit=42, optional_tests_owned=12",
+      "source_stage": "final matrix/workflow"
+    },
+    {
+      "command": "artifacts/next-improvement/envs/foundation/bin/milai-lab-check-boundary; artifacts/next-improvement/envs/foundation/bin/milai-lab-check-tools-boundary; git diff --check; explicit new-file EOF/whitespace",
+      "result": "pass",
+      "source_stage": "final"
+    }
+  ],
+  "build": {
+    "command": "uv build --offline --out-dir artifacts/next-improvement/wp5/local-update-dist",
+    "result": "pass; only build for this slice",
+    "log_path": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/wp5/local-update-build.log",
+    "log_sha256": "4f7babee81def608b29f7e3a1d407d25412fdd2535f0a6b164de22265e522e72",
+    "artifacts": {
+      "milai_lab-0.1.0-py3-none-any.whl": {
+        "sha256": "e31fcd8a194c02678134f82f8e4aea11e6f6452441bf8db222d9a44fa8d18081",
+        "bytes": 533288
+      },
+      "milai_lab-0.1.0.tar.gz": {
+        "sha256": "ffc8a5e5f6285aef7aef635e58e0fc761da891c22df4ae70f022839874a66516",
+        "bytes": 5115564
+      }
+    },
+    "contents": "wheel includes state_update_probe and writers; sdist includes thin CLI, unit test, frozen public input, matrix; both exclude artifacts/.venv"
+  },
+  "retained_intermediate_failures": [
+    "Initial overlap test used old_text=\"5\", which also occurs inside 10:15; exact uniqueness correctly rejected before overlap. Test changed to a uniquely occurring overlapping span.",
+    "TypedDict from typing is unsupported by installed Pydantic on Python 3.11; imported typing_extensions.TypedDict for patch item schema.",
+    "Target Ruff required itertools.pairwise for adjacent patch spans; corrected.",
+    "Initial target Mypy exposed optional-old/content narrowing and literal contract typing; corrected without changing intended behavior."
+  ],
+  "limits": {
+    "real_host_http_calls": 0,
+    "real_embedding_calls": 0,
+    "shared_postgres_calls": 0,
+    "test_store": "InMemoryStore for new tests; adjacent groups use mock transports and local SQLite checkpoints",
+    "diagnostic_only": "One State proposal and actual Store commit per job, not a completed user task or score. No business tool execution.",
+    "concurrency": "Expected revision is a serial read/check, not cross-process CAS. No two-State transaction or semantic correctness guarantee.",
+    "old_factory": "Legacy manage_state schema and default path remain selected when state_update_contract is omitted."
+  }
+}
