@@ -1,6 +1,6 @@
 {
   "kind": "MILAI_NEXT_WP2_STRICT_CRUD_RESULTS",
-  "status": "LOCAL_ENGINEERING_ACCEPTED_REMOTE_CI_PENDING",
+  "status": "ENGINEERING_ACCEPTED_ACTUAL_REMOTE_CI_PASSED",
   "base_commit": "0d04ca68d0e575919773c24b764c3c0b1832de7e",
   "contracts": {
     "default": "native",
@@ -65,8 +65,7 @@
   "retained_failure": "new application mock initially lacked observer.assert_healthy; mock corrected, target 1 passed",
   "not_run": [
     "new real model semantic evaluation",
-    "local package rebuild",
-    "remote C2 CI at record freeze"
+    "local package rebuild"
   ],
   "runtime_test_boundary": "MockTransport with real local SQLite checkpoints/synthetic business world and InMemoryStore; no shared PostgreSQL or real model HTTP",
   "experiment_delta": {
@@ -81,5 +80,105 @@
     "sha256": "a9d4c681e2bee395c170a4672b4895a442522df47951c9a043e9f6b3a32e3580"
   },
   "decision": "CONTINUE_SMALL_FROZEN_DIAGNOSTICS; tool rejection is not semantic correctness",
-  "research_goal_complete": false
+  "research_goal_complete": false,
+  "publication": {
+    "head": "93cb3e9cb405c97d52bc807b54f532b2a5b489f3",
+    "base": "0d04ca68d0e575919773c24b764c3c0b1832de7e",
+    "tested_merge": "972e9a94786d0862161c2c640677d2148f9ca843",
+    "run_id": 36329556696,
+    "status": "success",
+    "jobs": [
+      {
+        "id": 108648767254,
+        "name": "Classify changed paths",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108648791563,
+        "name": "Fail-fast source boundaries",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108648815449,
+        "name": "Product identity manifest",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108648815475,
+        "name": "Lab fast gate",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108648815509,
+        "name": "Lab locked external adapter fast gate",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108648815523,
+        "name": "Lab LangMem foundation fast gate",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108648816078,
+        "name": "Archive validation",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 108648816209,
+        "name": "Tested PR tree identity",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 108648816523,
+        "name": "Product integration fast gate (${{ matrix.package }})",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 108648816734,
+        "name": "Product Runtime fast gate",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 108648842534,
+        "name": "Current implementation conformance receipt",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108650321223,
+        "name": "Fast verification gate",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "core": {
+      "passed": 5114,
+      "skipped": 142,
+      "deselected": 14,
+      "wall_seconds": 499.94,
+      "protocol_71_included": true,
+      "build": "wheel and sdist succeeded"
+    },
+    "foundation": {
+      "passed": 155,
+      "deselected": 1,
+      "groups": [
+        21,
+        81,
+        7,
+        46
+      ]
+    },
+    "extra_local_rebuild": false
+  }
 }

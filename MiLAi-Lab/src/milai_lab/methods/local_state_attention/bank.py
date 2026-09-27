@@ -115,6 +115,16 @@ class LocalStateBank:
         return [{key: value for key, value in row.items() if key != "applied_edit_keys"}
                 for row in self._state_rows(scope)]
 
+    def state(self, scope: StateScope, state_id: str) -> dict[str, Any] | None:
+        """Read one scoped public State without exposing retry markers."""
+        row = self._get(scope, "states", state_id)
+        if row is None:
+            return None
+        if row.value.get("id") != state_id:
+            raise ValueError("LSA_STATE_ID_CHANGED")
+        return {key: value for key, value in row.value.items()
+                if key != "applied_edit_keys"}
+
     def events(self, scope: StateScope) -> list[dict[str, Any]]:
         return sorted(self._all(scope, "events", self.max_events),
                       key=lambda row: row["arrival_index"])
@@ -224,6 +234,40 @@ class LocalStateBank:
                 break
             offset += len(rows)
 
+    def _drop_state_references(self, scope: StateScope, state_id: str) -> None:
+        focus = self._get(scope, "meta", "focus")
+        if focus is not None and state_id in focus.value["ids"]:
+            self.set_focus(scope, focus.value["query_id"],
+                           [key for key in focus.value["ids"] if key != state_id])
+        offset = 0
+        while True:
+            def search_page(current_offset: int = offset) -> Any:
+                return self.store.search(scope.namespace("meta"), limit=64,
+                                         offset=current_offset)
+
+            rows = self._access("search", search_page,
+                {"namespace": scope.namespace("meta"), "limit": 64, "offset": offset})
+            for row in rows:
+                if not row.key.startswith("epoch_snapshot:"):
+                    continue
+                kept = [state for state in row.value["states"]
+                        if state["id"] != state_id]
+                if len(kept) != len(row.value["states"]):
+                    self._put(scope, "meta", row.key, {**row.value, "states": kept})
+            if len(rows) < 64:
+                break
+            offset += len(rows)
+
+    def delete_state(self, scope: StateScope, state_id: str) -> bool:
+        """Delete exactly one State, leaving source observations and tombstones alone."""
+        if not isinstance(state_id, str) or not state_id:
+            raise ValueError("LSA_STATE_ID_INVALID")
+        existed = self.state(scope, state_id) is not None
+        if existed:
+            self._delete(scope, "states", state_id)
+        self._drop_state_references(scope, state_id)
+        return existed
+
     def history_summary(self, scope: StateScope) -> dict[str, Any] | None:
         row = self._get(scope, "meta", "history_summary")
         return dict(row.value) if row is not None else None
@@ -235,20 +279,33 @@ class LocalStateBank:
 
     @staticmethod
     def _edit_markers(event_ids: set[str], target: str,
-                      operation: str) -> set[str]:
+                      operation: str, batch_id: str | None = None) -> set[str]:
         """Bind one committed edit to the exact visible event set and target."""
         if not event_ids:
             return set()
+        identity = (["lsa_edit_v1", sorted(event_ids), target, operation]
+                    if batch_id is None else
+                    ["lsa_edit_v2", batch_id, sorted(event_ids), target, operation])
         return {hashlib.sha256(json.dumps(
-            ["lsa_edit_v1", sorted(event_ids), target, operation],
-            ensure_ascii=False).encode()).hexdigest()}
+            identity, ensure_ascii=False).encode()).hexdigest()}
 
     def apply(self, scope: StateScope, edits: list[dict[str, Any]],
               event_ids: set[str], query_source_id: str | None = None,
               allowed_existing_ids: set[str] | None = None,
               allow_create: bool = True,
+              batch_id: str | None = None,
+              edit_slots: list[int] | None = None,
+              ack_events: bool = True,
               ) -> tuple[list[dict[str, Any]], bool]:
         """Apply independent valid edits; retain pending when any edit is invalid."""
+        if batch_id is not None and (not isinstance(batch_id, str) or not batch_id):
+            raise ValueError("LSA_EDIT_BATCH_ID_INVALID")
+        if edit_slots is not None and (
+            len(edit_slots) != len(edits)
+            or any(type(slot) is not int or slot < 0 for slot in edit_slots)
+            or len(set(edit_slots)) != len(edit_slots)
+        ):
+            raise ValueError("LSA_EDIT_SLOTS_INVALID")
         current = {row["id"]: row for row in self._state_rows(scope)}
         available = {row["id"] for row in self.events(scope)}
         visible_dependencies = set(event_ids)
@@ -262,7 +319,8 @@ class LocalStateBank:
                 visible_dependencies.update(state["dependency_source_ids"])
         receipts: list[dict[str, Any]] = []
         invalid = False
-        for edit_index, edit in enumerate(edits):
+        for position, edit in enumerate(edits):
+            edit_index = edit_slots[position] if edit_slots is not None else position
             if not isinstance(edit, dict):
                 invalid = True
                 receipts.append({"status": "skipped_invalid_edit"})
@@ -302,7 +360,7 @@ class LocalStateBank:
                 continue
             target = state_id if state_id is not None else f"new:{edit_index}"
             operation = ("update" if state_id is not None else "create") + f":{edit_index}"
-            markers = self._edit_markers(event_ids, target, operation)
+            markers = self._edit_markers(event_ids, target, operation, batch_id)
             if markers:
                 matches = ([old] if old is not None else list(current.values()))
                 replayed = [row for row in matches if row is not None and
@@ -359,13 +417,17 @@ class LocalStateBank:
                 current[key] = value
                 status = "created" if old is None else "updated"
             receipts.append({"id": key, "status": status, "revision": value["revision"]})
-        if not invalid:
-            for event_id in event_ids:
-                item = self._get(scope, "events", event_id)
-                if item is not None and item.value["pending"]:
-                    self._put(scope, "events", event_id,
-                              {**item.value, "pending": False})
+        if not invalid and ack_events:
+            self.acknowledge_events(scope, event_ids)
         return receipts, invalid
+
+    def acknowledge_events(self, scope: StateScope, event_ids: set[str]) -> None:
+        """Advance pending only after a whole proposal has completed successfully."""
+        for event_id in event_ids:
+            item = self._get(scope, "events", event_id)
+            if item is not None and item.value["pending"]:
+                self._put(scope, "events", event_id,
+                          {**item.value, "pending": False})
 
     @staticmethod
     def _tombstone_key(source_id: str) -> str:

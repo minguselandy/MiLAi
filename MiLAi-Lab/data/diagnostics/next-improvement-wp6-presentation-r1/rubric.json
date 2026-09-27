@@ -1,0 +1,35 @@
+{
+  "kind": "MILAI_WP6_FIRST_RESPONSE_RUBRIC",
+  "runtime_reads_rubric": false,
+  "independent_arcs": 2,
+  "trials": 6,
+  "expected": {
+    "partial": {
+      "name": "reserve_and_label",
+      "arguments": {
+        "item_key": "Summit archive crates",
+        "quantity": 5,
+        "destination": "mezzanine M-4",
+        "packing": "foam inserts"
+      }
+    },
+    "distinct": {
+      "name": "reserve_and_label",
+      "arguments": {
+        "item_key": "Cobalt delivery kits",
+        "quantity": 4,
+        "destination": "storage S-2",
+        "packing": "fiber cases"
+      }
+    }
+  },
+  "classification": [
+    "direct_correct_action",
+    "direct_wrong_action",
+    "requires_tool_continuation",
+    "answer_without_action",
+    "invalid_output_or_infrastructure_failure"
+  ],
+  "rule": "Only exactly one reserve call with exact complete source item key, quantity, destination and packing counts direct_correct_action. Multiple business attempts or mismatched fields are direct_wrong_action. A first memory/search/read request is deferred for actual continuation, not scored as ordinary semantic failure. Preserve all output and cost.",
+  "scope": "First response diagnostics only, not business success. All titles share current strict tool presentation and identical raw history. Raw-source condition removes derived State but retains cited observations; it is not a pure title or equal-token control. Historical native receipts remain historical. No unseen claim, no repeated trials or population CI from two arcs."
+}

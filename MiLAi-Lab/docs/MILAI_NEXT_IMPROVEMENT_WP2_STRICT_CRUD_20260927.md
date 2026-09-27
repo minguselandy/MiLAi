@@ -1,6 +1,6 @@
 # WP2：可选严格记忆 CRUD 合同
 
-状态：本地工程合同验收通过，待独立发布后的实际CI；行为修复，独立于C1结构整理。未进行真实模型调用。
+状态：本地工程合同与实际远端CI验收通过；行为修复，独立于C1结构整理。C2验证本身未进行真实模型调用。
 执行依据为[新计划](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)与
 [当前执行记录](MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md)。C0/G0已通过；
 本切片基于C1最终提交`0d04ca68d0e575919773c24b764c3c0b1832de7e`，
@@ -87,3 +87,13 @@ H1身份混淆仍待模型级诊断，H2合同缺口在局部集成证据中已�
 最小下一步是固定前态/输入的小型语义诊断。决定Continue；不声称unseen收益或Product可用。
 代码可退回C1提交，实际世界副作用仍不可借代码回退消除。完整任务结束后才执行用户的
 暂停Goal、总体报告和GitHub发布安排。
+
+## 发布后实际CI
+
+[PR54](https://github.com/minguselandy/MiLAi/pull/54) head `93cb3e9cb405c97d52bc807b54f532b2a5b489f3`，
+base为C1；[Fast36329556696](https://github.com/minguselandy/MiLAi/actions/runs/36329556696)及最终gate108650321223均成功。
+实际测试merge `972e9a94786d0862161c2c640677d2148f9ca843`，不是main已合并。
+core 5114 passed/142 skipped/14 deselected，499.94s；71条协议检查已包括其中，不重复相加。
+foundation 21+81+7+46=155 passed/1 deselected，external成功，wheel/sdist构建成功。
+未选择的Product/archive等job为skipped，不能列为通过。没有为发布重复本地构建或旧实验。
+本段为发布后的记录，后续提交收录；不冒充已写入C2构建产物。

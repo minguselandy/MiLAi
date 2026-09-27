@@ -22,6 +22,13 @@ def _receipt(call_id: str, status: str, memory_id: uuid.UUID, *, ok: bool) -> To
     )
 
 
+def _invalid_receipt(call_id: str, reason: str) -> ToolMessage:
+    return ToolMessage(
+        content=json.dumps({"ok": False, "status": "invalid_arguments",
+                            "reason": reason}),
+        name="manage_memory", tool_call_id=call_id, status="error")
+
+
 def create_strict_manage_memory_tool(
     namespace: tuple[str, ...], store: BaseStore | None = None,
 ) -> StructuredTool:
@@ -40,12 +47,12 @@ def create_strict_manage_memory_tool(
         current_namespace = namespacer()
         if action == "create":
             if id is not None:
-                raise ValueError("LANGMEM_STRICT_CREATE_ID_FORBIDDEN")
+                return _invalid_receipt(tool_call_id, "create_must_omit_id")
             memory_id = uuid.uuid4()
             current_store.put(current_namespace, str(memory_id), {"content": content})
             return _receipt(tool_call_id, "created", memory_id, ok=True)
         if id is None:
-            raise ValueError("LANGMEM_STRICT_TARGET_ID_REQUIRED")
+            return _invalid_receipt(tool_call_id, "target_id_required")
         prior = current_store.get(current_namespace, str(id))
         if prior is None:
             return _receipt(tool_call_id, "not_found", id, ok=False)
@@ -68,12 +75,12 @@ def create_strict_manage_memory_tool(
         current_namespace = namespacer()
         if action == "create":
             if id is not None:
-                raise ValueError("LANGMEM_STRICT_CREATE_ID_FORBIDDEN")
+                return _invalid_receipt(tool_call_id, "create_must_omit_id")
             memory_id = uuid.uuid4()
             await current_store.aput(current_namespace, str(memory_id), {"content": content})
             return _receipt(tool_call_id, "created", memory_id, ok=True)
         if id is None:
-            raise ValueError("LANGMEM_STRICT_TARGET_ID_REQUIRED")
+            return _invalid_receipt(tool_call_id, "target_id_required")
         prior = await current_store.aget(current_namespace, str(id))
         if prior is None:
             return _receipt(tool_call_id, "not_found", id, ok=False)

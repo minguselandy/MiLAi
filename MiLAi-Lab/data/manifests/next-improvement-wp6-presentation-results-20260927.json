@@ -1,0 +1,226 @@
+{
+  "kind": "MILAI_WP6_PRESENTATION_FIRST_RESPONSES",
+  "status": "FIRST_RESPONSES_COMPLETE_ACTION_CONTINUATION_REQUIRED",
+  "scored_at_utc": "2026-09-27T15:43:49.518509+00:00",
+  "rubric_sha256": "c300f6edf67bca9c4fd6557454fd9b307d4af46a1930696ad0770b92a8049519",
+  "freeze_sha256": "e7db3db193c1bf76cd73720953f08c523b38f606440b8b163d8b16aebdc9286e",
+  "trace_sha256": "a82bbbedaa04128fc24f6a15cba98f81d00055b819fedf3582f86d90cc0fa109",
+  "rows": [
+    {
+      "job": {
+        "job_id": "1-partial-original",
+        "case_id": "partial",
+        "arm": "diagnostic",
+        "variant": "original"
+      },
+      "classification": "direct_wrong_action",
+      "first_action": {
+        "calls": [
+          {
+            "name": "reserve_and_label",
+            "arguments": {
+              "item_key": "Summit archive crate",
+              "quantity": 5,
+              "destination": "mezzanine M-4",
+              "packing": "foam inserts"
+            }
+          }
+        ]
+      },
+      "http_request_sha256": "51981aba16053603413fe84276e6c4bbcc4a21479bd8d1ae74ebff1ffbbbc14f",
+      "generation_id": "chatcmpl-96abe99c7b400d48",
+      "usage": {
+        "prompt_tokens": 1129,
+        "total_tokens": 1169,
+        "completion_tokens": 40,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.9218856082297862,
+      "result_sha256": "67f79fbe5dcfa746e6f71461d5bec87f786470f613b5df1308e82ab15482926d",
+      "business_tools_executed": 0
+    },
+    {
+      "job": {
+        "job_id": "2-distinct-source_title",
+        "case_id": "distinct",
+        "arm": "diagnostic",
+        "variant": "source_title"
+      },
+      "classification": "direct_wrong_action",
+      "first_action": {
+        "calls": [
+          {
+            "name": "reserve_and_label",
+            "arguments": {
+              "item_key": "Cobalt delivery kits",
+              "quantity": 3,
+              "destination": "storage S-2",
+              "packing": "fiber cases"
+            }
+          }
+        ]
+      },
+      "http_request_sha256": "29bede3755d0f99f25515f1632fb92b6d29fd298264a5efccb0d25f933f49f84",
+      "generation_id": "chatcmpl-b9a702bab79eeaf8",
+      "usage": {
+        "prompt_tokens": 1476,
+        "total_tokens": 1525,
+        "completion_tokens": 49,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.5266892570070922,
+      "result_sha256": "1ba14f9934d4f97f9f2dec2ceabdd3a8a9ce987c63638aaa9d7b645b72a560be",
+      "business_tools_executed": 0
+    },
+    {
+      "job": {
+        "job_id": "3-partial-raw_sources",
+        "case_id": "partial",
+        "arm": "diagnostic",
+        "variant": "raw_sources"
+      },
+      "classification": "direct_correct_action",
+      "first_action": {
+        "calls": [
+          {
+            "name": "reserve_and_label",
+            "arguments": {
+              "item_key": "Summit archive crates",
+              "quantity": 5,
+              "destination": "mezzanine M-4",
+              "packing": "foam inserts"
+            }
+          }
+        ]
+      },
+      "http_request_sha256": "46c7e138a2aaa5f07553bf137eed7480f4769a9d2b10a2d175e01e5eaf5b05b2",
+      "generation_id": "chatcmpl-b7f59bc1d9702bca",
+      "usage": {
+        "prompt_tokens": 935,
+        "total_tokens": 975,
+        "completion_tokens": 40,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.39770351722836494,
+      "result_sha256": "83dcc642a5eb9dfb75d0d21f11113afb1aa1dc70d73c570781119d1f2f217d0b",
+      "business_tools_executed": 0
+    },
+    {
+      "job": {
+        "job_id": "4-distinct-original",
+        "case_id": "distinct",
+        "arm": "diagnostic",
+        "variant": "original"
+      },
+      "classification": "direct_wrong_action",
+      "first_action": {
+        "calls": [
+          {
+            "name": "reserve_and_label",
+            "arguments": {
+              "item_key": "Cobalt delivery kits",
+              "quantity": 3,
+              "destination": "S-2",
+              "packing": "fiber cases"
+            }
+          }
+        ]
+      },
+      "http_request_sha256": "7ca7c97a6752d59d391d4c27a99c44e85818058d160ed21b42530c4404dcf305",
+      "generation_id": "chatcmpl-a1932b91aee7f241",
+      "usage": {
+        "prompt_tokens": 1478,
+        "total_tokens": 1526,
+        "completion_tokens": 48,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.5089494958519936,
+      "result_sha256": "1e964766c608300655f275a97fb0ac37213bdfba01f1dd8dfec27d8011afe7ca",
+      "business_tools_executed": 0
+    },
+    {
+      "job": {
+        "job_id": "5-partial-source_title",
+        "case_id": "partial",
+        "arm": "diagnostic",
+        "variant": "source_title"
+      },
+      "classification": "direct_wrong_action",
+      "first_action": {
+        "calls": [
+          {
+            "name": "reserve_and_label",
+            "arguments": {
+              "item_key": "Summit archive crates (mezzanine M-4, 5 crates, foam inserts)",
+              "quantity": 5,
+              "destination": "mezzanine M-4",
+              "packing": "foam inserts"
+            }
+          }
+        ]
+      },
+      "http_request_sha256": "ffd607850d20a5599594c8a57d789fa71bfe3388d8ddaca579adc7a18761036d",
+      "generation_id": "chatcmpl-a5e84fcfda07bfe0",
+      "usage": {
+        "prompt_tokens": 1125,
+        "total_tokens": 1179,
+        "completion_tokens": 54,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.5032544787973166,
+      "result_sha256": "b819b35cfcff405300d4cf043d0ce3719d3c7090dc283865a1ced105c9d344ad",
+      "business_tools_executed": 0
+    },
+    {
+      "job": {
+        "job_id": "6-distinct-raw_sources",
+        "case_id": "distinct",
+        "arm": "diagnostic",
+        "variant": "raw_sources"
+      },
+      "classification": "direct_wrong_action",
+      "first_action": {
+        "calls": [
+          {
+            "name": "reserve_and_label",
+            "arguments": {
+              "item_key": "Cobalt delivery kits",
+              "quantity": 3,
+              "destination": "storage S-2",
+              "packing": "fiber cases"
+            }
+          }
+        ]
+      },
+      "http_request_sha256": "2ce1b909620ad2efb51ef78f01a8a17294d37ce69de3a4299338b804350ccfcb",
+      "generation_id": "chatcmpl-94a40ec13e309143",
+      "usage": {
+        "prompt_tokens": 1182,
+        "total_tokens": 1231,
+        "completion_tokens": 49,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.4769678683951497,
+      "result_sha256": "f1b1ee46888b72950665e4564fdb15b55700aff811de7376cbf9ed8687c39fec",
+      "business_tools_executed": 0
+    }
+  ],
+  "independent_arcs": 2,
+  "direct_correct_proposals": 1,
+  "direct_wrong_proposals": 5,
+  "invalid_or_infrastructure_failures": 0,
+  "business_success": "NOT_YET_TESTED",
+  "delta": {
+    "generation_calls": 6,
+    "generation_tokens": 7605,
+    "embedding_tokens": 0,
+    "unknown_usage": 0
+  },
+  "continuous_budget": {
+    "generation_calls": 2774,
+    "generation_tokens": 3427938,
+    "embedding_tokens": 18746,
+    "sha256": "081ba35785677dbc11c231762db755821a79f34206cae6db47ce4f75ba0d9cb4"
+  },
+  "decision": "PIVOT_FROM_TITLE_ONLY_FIX; continue all six actual actions under separate continuation freeze"
+}

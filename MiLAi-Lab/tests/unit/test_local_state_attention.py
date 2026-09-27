@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
+import uuid
 from contextlib import contextmanager
 from pathlib import Path
 from types import SimpleNamespace
@@ -20,7 +22,12 @@ from langgraph.graph import MessagesState, StateGraph
 from langgraph.store.base import PutOp
 from langgraph.store.memory import InMemoryStore
 
-from milai_lab.baselines.langmem_agent import FoundationScope, build_agent, invoke_public_message
+from milai_lab.baselines.langmem_agent import (
+    MEMORY_NAMESPACE,
+    FoundationScope,
+    build_agent,
+    invoke_public_message,
+)
 from milai_lab.harness.contextual_artifacts import Trace, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import (
@@ -38,6 +45,11 @@ from milai_lab.methods.local_state_attention.integration import (
     make_window_summary_hook,
 )
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController
+from milai_lab.methods.local_state_attention.writers import (
+    WriterProposalContext,
+    create_writer_tools,
+    execute_writes,
+)
 from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
@@ -536,6 +548,11 @@ def test_retry_identity_uses_exact_event_set_and_survives_unmarked_update() -> N
     initial, invalid = bank.apply(scope, proposal, {"old"})
     assert invalid and initial[0]["status"] == "created"
     original_id = initial[0]["id"]
+    legacy_marker = hashlib.sha256(json.dumps(
+        ["lsa_edit_v1", ["old"], "new:0", "create:0"],
+        ensure_ascii=False).encode()).hexdigest()
+    assert store.get(scope.namespace("states"), original_id).value[
+        "applied_edit_keys"] == [legacy_marker]
     bank.record_event(scope, {"id": "new", "kind": "user", "content": "same"})
     mixed, invalid = bank.apply(scope, proposal, {"old", "new"})
     assert invalid and mixed[0]["status"] == "created"
@@ -552,6 +569,317 @@ def test_retry_identity_uses_exact_event_set_and_survives_unmarked_update() -> N
     replayed, invalid = bank.apply(scope, proposal, {"old"})
     assert invalid and replayed[0]["id"] == original_id
     assert replayed[0]["replayed"] is True
+
+
+def test_writer_executor_scoped_crud_read_and_state_reference_cleanup() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "writer", "alice")
+    config = FoundationScope("run", "writer", "alice", "episode").config()
+    bank.record_event(scope, {"id": "source", "kind": "user", "content": "actual source"})
+    tools = create_writer_tools(bank, MEMORY_NAMESPACE)
+    result = execute_writes(tools, [
+        {"name": "manage_memory", "arguments": {
+            "action": "create", "content": "memory fact"}},
+        {"name": "manage_state", "arguments": {
+            "action": "create", "title": "matter", "content": "state fact",
+            "needs": ["follow up"], "evidence": ["source"]}},
+        {"name": "search_memory", "arguments": {"query": "memory fact", "limit": 3}},
+    ], config=config, scope=scope, batch_id="first", event_ids={"source"})
+    assert result.status == "APPLIED" and result.pending_event_ids == []
+    assert [row.name for row in result.receipts] == [
+        "manage_memory", "manage_state", "search_memory"]
+    memory_id = json.loads(str(result.receipts[0].content))["id"]
+    state_id = json.loads(str(result.receipts[1].content))["id"]
+    hits = json.loads(str(result.receipts[2].content))
+    assert [(hit["key"], hit["value"]) for hit in hits] == [
+        (memory_id, {"content": "memory fact"})]
+    read = execute_writes(tools, [
+        {"name": "read_record", "arguments": {
+            "target_kind": "memory", "id": memory_id}},
+        {"name": "read_record", "arguments": {
+            "target_kind": "state", "id": state_id}},
+    ], config=config, scope=scope, batch_id="read", event_ids=set())
+    memory, state = [json.loads(str(row.content)) for row in read.receipts]
+    assert memory["value"] == {"content": "memory fact"}
+    assert state["record"] == {
+        "id": state_id, "title": "matter", "content": "state fact",
+        "needs": ["follow up"], "evidence_refs": ["source"],
+        "revision": 1, "archived": False}
+    assert "applied_edit_keys" not in json.dumps(state)
+    no_change = execute_writes(tools, [{"name": "manage_state", "arguments": {
+        "action": "update", "id": state_id, "content": "state fact"}}],
+        config=config, scope=scope, batch_id="same", event_ids=set())
+    assert json.loads(str(no_change.receipts[0].content))["status"] == "noop"
+    assert bank.state(scope, state_id)["revision"] == 1
+    updated = execute_writes(tools, [{"name": "manage_state", "arguments": {
+        "action": "update", "id": state_id, "content": "revised fact"}}],
+        config=config, scope=scope, batch_id="revision", event_ids=set())
+    assert json.loads(str(updated.receipts[0].content))["status"] == "updated"
+    assert bank.state(scope, state_id)["revision"] == 2
+    bob_scope = StateScope("run", "writer", "bob")
+    bob_config = FoundationScope("run", "writer", "bob", "episode").config()
+    foreign = execute_writes(tools, [
+        {"name": "read_record", "arguments": {
+            "target_kind": "state", "id": state_id}},
+        {"name": "read_record", "arguments": {
+            "target_kind": "memory", "id": memory_id}},
+        {"name": "manage_state", "arguments": {
+            "action": "update", "id": state_id, "content": "wrong owner"}},
+    ], config=bob_config, scope=bob_scope, batch_id="foreign", event_ids=set())
+    assert foreign.status == "PARTIAL_REJECTED"
+    assert [row.status for row in foreign.receipts] == ["error", "error", "error"]
+    assert bank.state(scope, state_id)["content"] == "revised fact"
+    bank.set_focus(scope, "query", [state_id])
+    bank.epoch_snapshot(scope, "thread", 0, create=True)
+    deleted = execute_writes(tools, [
+        {"name": "manage_state", "arguments": {"action": "delete", "id": state_id}},
+        {"name": "manage_memory", "arguments": {"action": "delete", "id": memory_id}},
+    ], config=config, scope=scope, batch_id="delete", event_ids=set())
+    assert [json.loads(str(row.content))["status"] for row in deleted.receipts] == [
+        "deleted", "deleted"]
+    assert bank.state(scope, state_id) is None
+    assert store.get(("langmem", "run", "writer", "alice"), memory_id) is None
+    assert [row["id"] for row in bank.events(scope)] == ["source"]
+    assert bank.focus(scope, "query") == []
+    assert bank.epoch_snapshot(scope, "thread", 0)["states"] == []
+    missing = execute_writes(tools, [
+        {"name": "read_record", "arguments": {"target_kind": "state", "id": state_id}},
+        {"name": "manage_state", "arguments": {"action": "delete", "id": state_id}},
+    ], config=config, scope=scope, batch_id="missing", event_ids=set())
+    assert missing.status == "PARTIAL_REJECTED"
+    assert [row.status for row in missing.receipts] == ["error", "error"]
+
+
+def test_writer_batch_slots_partial_retry_and_distinct_generation() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "writer", "alice")
+    config = FoundationScope("run", "writer", "alice", "episode").config()
+    bank.record_event(scope, {"id": "event", "kind": "user", "content": "two matters"})
+    tools = create_writer_tools(bank, MEMORY_NAMESPACE)
+    missing_id = str(uuid.uuid4())
+    calls = [
+        {"name": "manage_state", "arguments": {
+            "action": "create", "title": "A", "content": "one"}},
+        {"name": "manage_memory", "arguments": {
+            "action": "update", "id": missing_id, "content": "not saved"}},
+        {"name": "manage_state", "arguments": {
+            "action": "create", "title": "B", "content": "two"}},
+    ]
+    first = execute_writes(tools, calls, config=config, scope=scope,
+                           batch_id="generation-1", event_ids={"event"})
+    first_ids = [json.loads(str(first.receipts[index].content))["id"]
+                 for index in (0, 2)]
+    assert first.status == "PARTIAL_REJECTED"
+    assert first_ids[0] != first_ids[1]
+    assert first.pending_event_ids == ["event"]
+    assert [row.status for row in first.receipts] == ["success", "error", "success"]
+    replay = execute_writes(tools, calls, config=config, scope=scope,
+                            batch_id="generation-1", event_ids={"event"})
+    assert replay.status == "PARTIAL_REJECTED"
+    assert [json.loads(str(row.content))["status"] for row in replay.receipts] == [
+        "noop", "not_found", "noop"]
+    assert [json.loads(str(replay.receipts[index].content))["id"]
+            for index in (0, 2)] == first_ids
+    assert len(bank.states(scope)) == 2 and replay.pending_event_ids == ["event"]
+    distinct = execute_writes(tools, [{"name": "manage_state", "arguments": {
+        "action": "create", "title": "C", "content": "third"}}],
+        config=config, scope=scope, batch_id="generation-2", event_ids={"event"})
+    assert distinct.status == "APPLIED" and distinct.pending_event_ids == []
+    assert len(bank.states(scope)) == 3
+
+
+def test_writer_successful_read_and_write_can_defer_event_ack() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "writer", "alice")
+    config = FoundationScope("run", "writer", "alice", "episode").config()
+    bank.record_event(scope, {"id": "source", "kind": "user", "content": "actual"})
+    tools = create_writer_tools(bank, MEMORY_NAMESPACE)
+    written = execute_writes(tools, [{"name": "manage_memory", "arguments": {
+        "action": "create", "content": "saved"}}], config=config, scope=scope,
+        batch_id="write", event_ids={"source"}, ack_events=False)
+    memory_id = json.loads(str(written.receipts[0].content))["id"]
+    assert written.status == "APPLIED" and written.pending_event_ids == ["source"]
+    read = execute_writes(tools, [{"name": "read_record", "arguments": {
+        "target_kind": "memory", "id": memory_id}}], config=config, scope=scope,
+        batch_id="read", event_ids={"source"}, ack_events=False)
+    assert read.receipts[0].status == "success"
+    assert read.pending_event_ids == ["source"]
+    bank.acknowledge_events(scope, {"source"})
+    assert bank.pending(scope) == []
+
+
+def test_writer_store_failure_keeps_committed_state_and_pending() -> None:
+    class FailingMemoryStore(InMemoryStore):
+        fail = True
+
+        def put(self, namespace: Any, key: str, value: Any, **kwargs: Any) -> None:
+            if namespace[0] == "langmem" and self.fail:
+                raise ValueError("memory Store write failed")
+            super().put(namespace, key, value, **kwargs)
+
+    store = FailingMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "writer", "alice")
+    config = FoundationScope("run", "writer", "alice", "episode").config()
+    bank.record_event(scope, {"id": "source", "kind": "user", "content": "actual"})
+    tools = create_writer_tools(bank, MEMORY_NAMESPACE)
+    calls = [
+        {"name": "manage_state", "arguments": {
+            "action": "create", "title": "matter", "content": "kept"}},
+        {"name": "manage_memory", "arguments": {
+            "action": "create", "content": "later"}},
+    ]
+    with pytest.raises(ValueError, match="memory Store write failed"):
+        execute_writes(tools, calls, config=config, scope=scope,
+                       batch_id="generation", event_ids={"source"})
+    state_id = bank.states(scope)[0]["id"]
+    assert [row["id"] for row in bank.pending(scope)] == ["source"]
+    store.fail = False
+    reopened_bank = LocalStateBank(store)
+    reopened_tools = create_writer_tools(reopened_bank, MEMORY_NAMESPACE)
+    retry = execute_writes(reopened_tools, calls, config=config, scope=scope,
+                           batch_id="generation", event_ids={"source"})
+    assert retry.status == "APPLIED" and retry.pending_event_ids == []
+    assert json.loads(str(retry.receipts[0].content)) == {
+        "ok": True, "status": "noop", "id": state_id,
+        "revision": 1, "replayed": True}
+    assert len(reopened_bank.states(scope)) == 1
+    assert len(store.search(("langmem", "run", "writer", "alice"))) == 1
+
+
+def test_writer_rejection_scope_and_empty_followup() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "writer", "alice")
+    config = FoundationScope("run", "writer", "alice", "episode").config()
+    tools = create_writer_tools(bank, MEMORY_NAMESPACE)
+    bank.record_event(scope, {"id": "source", "kind": "user", "content": "actual"})
+    calls = [
+        {"name": "manage_memory", "arguments": {
+            "action": "update", "content": "missing id"}},
+        {"name": "manage_state", "arguments": {
+            "action": "update", "id": "unknown", "content": "proposal"}},
+        {"name": "manage_state", "arguments": {
+            "action": "create", "title": "uncited", "content": "not authorized",
+            "evidence": ["other-owner-source"]}},
+        {"name": "manage_memory", "arguments": {
+            "action": "create", "content": "real"}},
+    ]
+    result = execute_writes(tools, calls, config=config, scope=scope,
+                            batch_id="mixed", event_ids={"source"})
+    assert result.status == "PARTIAL_REJECTED"
+    assert [row.status for row in result.receipts] == [
+        "error", "error", "error", "success"]
+    assert [json.loads(str(row.content))["status"] for row in result.receipts] == [
+        "invalid_arguments", "invalid_edit", "invalid_edit", "created"]
+    assert bank.states(scope) == [] and result.pending_event_ids == ["source"]
+    assert len(bank.store.search(("langmem", "run", "writer", "alice"))) == 1
+    with pytest.raises(ValueError, match="LSA_WRITER_SCOPE_MISMATCH"):
+        execute_writes(tools, [], config=FoundationScope(
+            "run", "writer", "bob", "episode").config(), scope=scope,
+            batch_id="wrong-owner", event_ids={"source"})
+    assert execute_writes(tools, [], config=config, scope=scope,
+                          batch_id="no-change", event_ids={"source"}).status == "NO_CHANGE"
+    assert bank.pending(scope) == []
+
+
+def test_writer_toolset_uses_actual_agent_toolnode_only_when_explicit(
+    tmp_path: Path,
+) -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "writer", "alice")
+    bank.record_event(scope, {"id": "source", "kind": "user", "content": "actual"})
+    tools = create_writer_tools(bank, MEMORY_NAMESPACE)
+    responses = [
+        _response({"calls": [
+            {"name": "manage_state", "arguments": {
+                "action": "create", "title": "matter", "content": "state fact",
+                "evidence": ["source"]}},
+            {"name": "manage_memory", "arguments": {
+                "action": "create", "content": "memory fact"}},
+        ]}, 0),
+        _response({"answer": "Done."}, 1),
+    ]
+    requests: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(json.loads(request.read()))
+        return responses.pop(0)
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client)
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            with pytest.raises(ValueError, match="LANGMEM_WRITER_TOOLSET_CONFLICT"):
+                build_agent(model, store, saver, writer_tools=tools)
+            agent = build_agent(model, store, saver, writer_tools=tools,
+                                memory_contract="strict")
+            messages = invoke_public_message(
+                agent, model, FoundationScope("run", "writer", "alice", "episode"),
+                "Remember both.")
+    receipts = [row for row in messages if isinstance(row, ToolMessage)]
+    assert [row.name for row in receipts] == ["manage_state", "manage_memory"]
+    assert all(row.status == "success" for row in receipts)
+    assert [json.loads(str(row.content))["status"] for row in receipts] == [
+        "created", "created"]
+    assert len(bank.states(scope)) == 1
+    assert bank.states(scope)[0]["evidence_refs"] == ["source"]
+    assert len(store.search(("langmem", "run", "writer", "alice"))) == 1
+    assert [row["id"] for row in bank.pending(scope)] == ["source"]
+    assert len(requests) == 2
+    tool_schema = requests[0]["response_format"]["json_schema"]["schema"]
+    assert {branch["properties"]["name"]["const"] for branch in
+            tool_schema["oneOf"][1]["properties"]["calls"]["items"]["oneOf"]} >= {
+                "manage_memory", "search_memory", "manage_state", "read_record"}
+
+
+def test_writer_proposal_uses_actual_bank_and_shared_control_capacity(
+    tmp_path: Path,
+) -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "writer", "alice")
+    bank.record_event(scope, {"id": "source", "kind": "user", "content": "actual only"})
+    tools = create_writer_tools(bank, MEMORY_NAMESPACE)
+    seen: list[dict[str, Any]] = []
+
+    class Replies:
+        def chat(self, messages: Any, **kwargs: Any) -> dict[str, Any]:
+            seen.append({"payload": json.loads(messages[1]["content"]),
+                         "schema": kwargs["response_format"]["json_schema"]["schema"],
+                         "stage": CONTROL_STAGE.get()})
+            return {"id": "possibly-reused-generation-id", "choices": [{
+                "finish_reason": "stop", "message": {"content": '{"calls":[]}'}}]}
+
+    emitted: list[dict[str, Any]] = []
+    controller = LocalStateController(
+        bank, Replies(), emit=emitted.append, capacity_path=tmp_path / "capacity.json",
+        max_calls_per_message=2)  # type: ignore[arg-type]
+    context = WriterProposalContext(scope, "thread:0", "current question")
+    first = controller.propose_writes(context, tools.host_tools())
+    second = controller.propose_writes(context, tools.host_tools())
+    assert first["calls"] == second["calls"] == []
+    assert first["event_ids"] == second["event_ids"] == ["source"]
+    assert first["generation_id"] == second["generation_id"]
+    assert first["batch_id"] != second["batch_id"]
+    assert [row["stage"] for row in seen] == ["writer_proposal", "writer_proposal"]
+    assert [row["id"] for row in seen[0]["payload"]["new_observations"]] == ["source"]
+    assert seen[0]["payload"]["source_ids_available"] == ["source"]
+    assert seen[0]["payload"]["states"] == []
+    assert {branch["properties"]["name"]["const"] for branch in
+            seen[0]["schema"]["properties"]["calls"]["items"]["oneOf"]} == {
+                "manage_memory", "search_memory", "manage_state", "read_record"}
+    assert bank.states(scope) == [] and [row["id"] for row in bank.pending(scope)] == [
+        "source"]
+    assert [row["event"] for row in emitted].count("lsa_writer_proposal_result") == 2
+    with pytest.raises(ValueError, match="LSA_CONTROL_CAPACITY"):
+        controller.propose_writes(context, tools.host_tools())
+    assert len(seen) == 2
+    assert emitted[-1]["event"] == "lsa_control_degraded"
+    assert emitted[-1]["reason"] == "LSA_CONTROL_CAPACITY"
 
 
 def test_history_interleaves_completed_turns_and_labels_incomplete_prefix(
