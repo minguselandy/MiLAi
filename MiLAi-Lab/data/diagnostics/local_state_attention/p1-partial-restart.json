@@ -1,0 +1,73 @@
+{
+  "kind": "MILAI_LOCAL_STATE_ATTENTION_SCRIPT",
+  "script_id": "p1-partial-restart-v1",
+  "users": [
+    "mira",
+    "noel"
+  ],
+  "initial_label_available": false,
+  "phases": [
+    {
+      "id": 0,
+      "operator_memory": [],
+      "world_events": [],
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "user_id": "noel",
+          "session_id": "planning",
+          "public_index": 0,
+          "text": "For a later session, my handling plan for Summit archive crates is 2 crates for south bay S-8, using cloth covers. No reservation exists for me yet. Acknowledge it without a business action."
+        },
+        {
+          "message_id": "owner-plan",
+          "user_id": "mira",
+          "session_id": "planning",
+          "public_index": 0,
+          "text": "We will handle Summit archive crates across sessions: 5 crates for mezzanine M-4, using foam inserts. Nothing has been reserved yet. The separate Summit archive access arrangement is the side door D-2 at 10:15. Acknowledge these arrangements without a business action."
+        },
+        {
+          "message_id": "partial-action",
+          "user_id": "mira",
+          "session_id": "planning",
+          "public_index": 1,
+          "text": "Reserve and label Summit archive crates according to my agreed handling plan. Make just one reservation attempt. If labeling fails after a reservation is created, report the actual persisted result and stop; do not retry in this turn."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "operator_memory": [],
+      "world_events": [
+        {
+          "event_id": "label-service-restored",
+          "action": "set_label_available",
+          "available": true
+        }
+      ],
+      "messages": [
+        {
+          "message_id": "restart-recovery",
+          "user_id": "mira",
+          "session_id": "recovery",
+          "public_index": 0,
+          "text": "Continue the Summit archive crates handoff. Read the actual existing reservation and finish its label using that same reservation identifier. Do not create another reservation. Report the actual returned quantity, destination, packing and label status, without inferring physical dispatch."
+        },
+        {
+          "message_id": "other-owner-action",
+          "user_id": "noel",
+          "session_id": "followup",
+          "public_index": 0,
+          "text": "Please reserve and label Summit archive crates according to my agreed handling plan. Make one reservation attempt and report the actual returned quantity, destination, packing and identifier."
+        },
+        {
+          "message_id": "retained-access",
+          "user_id": "mira",
+          "session_id": "recovery",
+          "public_index": 1,
+          "text": "What separate access door and time did we agree for the Summit archive? Report those arrangements only; do not perform another business action."
+        }
+      ]
+    }
+  ]
+}

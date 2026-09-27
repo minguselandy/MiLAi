@@ -21,6 +21,7 @@ from milai_lab.baselines.langmem_agent import (
     invoke_or_resume_public_message,
 )
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.methods.local_state_attention.controller import LocalStateController
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
 from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
 
@@ -243,7 +244,8 @@ def _operator_memory_event(event: dict[str, Any], run_id: str, arm_id: str,
 
 
 def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
-              phase_id: int, runtime: ApplicationRuntime) -> dict[str, Any]:
+              phase_id: int, runtime: ApplicationRuntime,
+              local_state_controller: LocalStateController | None = None) -> dict[str, Any]:
     """Run one frozen phase; the next invocation reopens every process-owned resource."""
     phase = script["phases"][phase_id]
     if phase["id"] != phase_id:
@@ -294,7 +296,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                 agent = build_agent(runtime.model, runtime.store, runtime.checkpointer,
                                     _business_tools(world, user_id),
                                     business_call_wrapper=journal,
-                                    observer=runtime.observer)
+                                    observer=runtime.observer,
+                                    local_state_controller=local_state_controller)
                 agents[user_id] = agent
             pending = progress["pending_message"] == message_id
             progress["pending_message"] = message_id

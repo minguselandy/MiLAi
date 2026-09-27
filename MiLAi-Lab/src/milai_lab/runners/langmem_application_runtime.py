@@ -46,7 +46,8 @@ def projection_for_arm(observer: ProvenanceObserver, emit: Any, store: ObservedS
 
 @contextmanager
 def open_application_runtime(config: dict[str, Any], run_id: str, arm_id: str,
-                             root: Path, stage: str) -> Iterator[ApplicationRuntime]:
+                             root: Path, stage: str, *,
+                             enable_projection: bool = True) -> Iterator[ApplicationRuntime]:
     root.mkdir(parents=True, exist_ok=True)
     budget = RunBudget(RunLimits(questions=12, arms=3, generation_requests=None,
                                  generation_tokens=None, embedding_tokens=None),
@@ -80,7 +81,8 @@ def open_application_runtime(config: dict[str, Any], run_id: str, arm_id: str,
                     embedding_dimensions=config["embedding_dimension"],
                 ) as (base_store, saver):
                     store = ObservedStore(base_store, observer)
-                    projection = projection_for_arm(observer, emit, store, arm_id, config)
+                    projection = (projection_for_arm(observer, emit, store, arm_id, config)
+                                  if enable_projection else None)
                     model = VLLMChatModel(
                         client=host, capacity_path=root / "message-capacity.json",
                         observer=observer, projection=projection)

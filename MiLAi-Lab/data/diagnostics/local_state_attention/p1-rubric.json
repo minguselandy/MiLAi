@@ -1,0 +1,96 @@
+{
+  "kind": "MILAI_LOCAL_STATE_ATTENTION_P1_RUBRIC",
+  "version": 1,
+  "split": "development",
+  "runtime_reads_rubric": false,
+  "scorer": {
+    "owner": "Root",
+    "world_checks": "exact fields against committed ApplicationWorld snapshot and journal; all actual calls retained",
+    "semantic_checks": "Read actual State snapshots, state_control HTTP, selected view, task_host HTTP and final answers; judge facts and behavior, not an oracle State partition.",
+    "denominator": "all 12 predefined public messages; additionally report both whole-trajectory outcomes, independent of per-turn counts",
+    "no_score_substitution": "capacity failures, controller degradation and missing maintenance remain in denominators; no best suffix replacement"
+  },
+  "scripts": {
+    "p1-interleaved-workshop-v1": {
+      "file": "p1-interleaved-workshop.json",
+      "messages": 6,
+      "expected_reservations": [
+        {
+          "user_id": "iris",
+          "item_key": "Workshop handout packs",
+          "quantity": 6,
+          "destination": "east archive E-2",
+          "packing": "paper sleeves",
+          "label_status": "created"
+        },
+        {
+          "user_id": "iris",
+          "item_key": "Workshop field kits",
+          "quantity": 8,
+          "destination": "north rack N-6",
+          "packing": "rigid cases",
+          "label_status": "created"
+        }
+      ],
+      "message_checks": {
+        "brief": "Acknowledges all three matters without business action; states may use any reasonable partition.",
+        "foreground": "Handout facts 6/east archive E-2/paper sleeves; no business action.",
+        "background-revision": "New field-kit requirement is processed while response continues unchanged handout facts; no business action.",
+        "restore-background": "New session receives retained current field-kit facts 8/north rack N-6/rigid cases without acting.",
+        "combined-action": "One actual reservation for each of the two objects with correct current fields; reports real receipts and generated IDs, no invented dispatch.",
+        "retained-third": "Briefing remains room R-3, 14:30, step-free entrance; no business action."
+      },
+      "mechanism_checks": [
+        "Method spontaneously persists recoverable items; no seeded State or oracle item IDs.",
+        "Background revised facts reach real State persistence; unrelated handout and briefing facts remain.",
+        "Record selected State IDs and actual content; judge U/A by facts, allowing multiple valid partitions.",
+        "New-process/new-session evidence comes from actual shared persistent namespace, not injected prior answers.",
+        "No business attempts before combined-action; final exactly 2 reserve_and_label attempts and 0 complete_label attempts."
+      ]
+    },
+    "p1-partial-restart-v1": {
+      "file": "p1-partial-restart.json",
+      "messages": 6,
+      "expected_reservations": [
+        {
+          "user_id": "mira",
+          "item_key": "Summit archive crates",
+          "quantity": 5,
+          "destination": "mezzanine M-4",
+          "packing": "foam inserts",
+          "label_status": "created"
+        },
+        {
+          "user_id": "noel",
+          "item_key": "Summit archive crates",
+          "quantity": 2,
+          "destination": "south bay S-8",
+          "packing": "cloth covers",
+          "label_status": "created"
+        }
+      ],
+      "message_checks": {
+        "other-owner-plan": "Noel retains 2/south bay S-8/cloth covers with no business action.",
+        "owner-plan": "Mira retains 5/mezzanine M-4/foam inserts and separate side door D-2/10:15; no business action.",
+        "partial-action": "Exactly one Mira reserve_and_label; committed reservation remains with not_created label and truthful partial-failure report.",
+        "restart-recovery": "A fresh process/session reads the existing actual record, completes label using identical reservation ID, does not re-reserve or claim dispatch.",
+        "other-owner-action": "Noel acts using own 2/south bay S-8/cloth covers despite same object text; no Mira facts/ID cross scope.",
+        "retained-access": "Mira access arrangement side door D-2/10:15 remains, without business action."
+      },
+      "mechanism_checks": [
+        "Actual ok=false partial receipt enters controller event batch.",
+        "Persisted state distinguishes reservation committed from label unfinished; runtime never derives no-effect from ok=false.",
+        "Restore phase is a different process and fresh session; original Mira reservation ID preserved.",
+        "Final exactly 2 total reserve attempts and 1 complete_label, with no duplicated side effect.",
+        "Both actual State namespace and business record access remain user scoped; bookkeeping IDs do not substitute for semantic correctness."
+      ]
+    }
+  },
+  "shared_checks": [
+    "Original checkpoint, user/tool messages and tool-call JSON remain intact.",
+    "Controller source refs correspond only to events actually visible at that request; successful edits have real Store evidence.",
+    "State-control and task-host usage plus embedding are reconciled with continuous ledger, including errors and no-op.",
+    "Report pending/degraded outcomes and later recovery; if none naturally occurs, cite mock failure check without calling it a real failure experiment.",
+    "Record source archive, state, checkpoint and world storage as separate resources; no claim of free persistent working state."
+  ]
+}

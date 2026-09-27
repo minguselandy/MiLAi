@@ -117,4 +117,4 @@ ignore = ["S101"]
 python_version = "3.11"
 strict = true
 packages = ["milai_lab"]
-exclude = "(baselines/langmem_agent|baselines/langmem_identity|baselines/langmem_b1_identity|baselines/langmem_instrumentation|baselines/langmem_revision_store|methods/milai_m1/.*|methods/on_demand_reconstruction/.*|providers/langmem_chat|runners/langmem_foundation|runners/langmem_merit|runners/langmem_diagnostic|runners/langmem_m1_mechanism|runners/langmem_odr_mechanism|datasets/merit)\\.py$"
+exclude = "(baselines/langmem_agent|baselines/langmem_identity|baselines/langmem_b1_identity|baselines/langmem_instrumentation|baselines/langmem_revision_store|methods/local_state_attention/.*|methods/milai_m1/.*|methods/on_demand_reconstruction/.*|providers/langmem_chat|runners/langmem_foundation|runners/langmem_merit|runners/langmem_diagnostic|runners/langmem_m1_mechanism|runners/langmem_odr_mechanism|datasets/merit)\\.py$"

@@ -36,6 +36,24 @@ canonical memory state.
 
 ## Required checks
 
+The user explicitly authorized full execution of the
+[Local State–Attention plan](docs/MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md),
+tracked by [its execution Goal](docs/MILAI_LOCAL_STATE_ATTENTION_EXECUTION_GOAL.md).
+This is the current development scope and supersedes the earlier pause and conditional
+State–Attention admission restrictions for this new method. Preserve the original plan bytes,
+all historical results/locks/costs, and the unrelated unfinished model-sensitivity-v27 draft.
+Do not restart that draft's deployment merely because the new method also uses v27 naming.
+One Sol xhigh owns source/config/root CI/narrow checks; Root owns docs, fixtures/rubrics,
+freezes, all real Host/controller/embedding calls (HTTP concurrency 1), scoring and accounting;
+Luna high owns authorized downloads and Git publication. The new independent controller
+must share the existing continuous ledger, use ordinary ReAct without a required State field,
+and preserve actual observations, scoped persistence, partial side effects and recoverable
+pending events. Start with P0/P1, then follow the complete P2–P7/WP2–WP5 evidence sequence;
+do not declare the Goal complete after only a working prototype or passing tests.
+Use the actual pinned LangGraph public hook and existing ApplicationWorld/journal.
+Keep vLLM and Product unchanged. Broad evaluation follows implementation and small validity
+checks; matched baselines have equal event/source access and recovery opportunities.
+
 The user activated the full [long-horizon master plan](docs/MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md),
 tracked by [the execution Goal](docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md).
 This supersedes prior closed-stage restrictions for the new research scope; preserve their

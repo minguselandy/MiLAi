@@ -27,6 +27,8 @@ from langmem import (  # type: ignore[import-untyped]
 )
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
+from milai_lab.methods.local_state_attention.controller import LocalStateController
+from milai_lab.methods.local_state_attention.integration import make_pre_model_hook
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel
 
@@ -105,6 +107,7 @@ def build_agent(
     observer: ProvenanceObserver | None = None,
     memory_tools: Sequence[BaseTool] | None = None,
     system_prompt: str = SYSTEM_PROMPT,
+    local_state_controller: LocalStateController | None = None,
 ) -> Any:
     """Use upstream tool schema and instructions without a local memory policy."""
     tools = [
@@ -140,10 +143,13 @@ def build_agent(
         return (observer.run_tool(request, original, business_call_wrapper)
                 if observer is not None else original(request))
 
+    prompt = system_prompt + ("\n" + environment_rules if environment_rules else "")
     return create_react_agent(
         model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
-        prompt=system_prompt + ("\n" + environment_rules if environment_rules else ""),
+        prompt=prompt if local_state_controller is None else None,
+        pre_model_hook=(make_pre_model_hook(local_state_controller, prompt)
+                        if local_state_controller is not None else None),
         store=store,
         checkpointer=checkpointer,
         version="v1",

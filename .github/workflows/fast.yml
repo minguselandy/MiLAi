@@ -201,6 +201,9 @@ jobs:
           uv run --no-sync ruff check src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py tools/run_langmem_foundation.py tools/prepare_langmem_foundation.py tools/summarize_langmem_foundation.py tests/unit/test_langmem_foundation.py
           uv run --no-sync mypy src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py
           uv run --no-sync pytest -q tests/unit/test_langmem_foundation.py
+          uv run --no-sync ruff check src/milai_lab/methods/local_state_attention src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/langmem_application.py src/milai_lab/runners/langmem_application_runtime.py tools/run_local_state_attention.py tests/unit/test_local_state_attention.py
+          uv run --no-sync mypy src/milai_lab/methods/local_state_attention/bank.py src/milai_lab/methods/local_state_attention/controller.py src/milai_lab/methods/local_state_attention/integration.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/langmem_application.py src/milai_lab/runners/langmem_application_runtime.py tools/run_local_state_attention.py
+          uv run --no-sync pytest -q tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py
 
   archive-fast:
     name: Archive validation

@@ -1,0 +1,86 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_REFERENCE_RESOURCES",
+  "status": "SOURCE_METADATA_ONLY_NOT_INTEGRATED",
+  "purpose": "P5/WP5 independent public task-family feasibility; no executed benchmark claim",
+  "official_sources": {
+    "project_page": "https://memoryarena.github.io/",
+    "paper": "https://arxiv.org/abs/2602.16313",
+    "code_repository": "https://github.com/ZexueHe/MemoryArena",
+    "dataset": "https://huggingface.co/datasets/ZexueHe/memoryarena"
+  },
+  "source": {
+    "reused_existing_checkout": true,
+    "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/MemoryArena",
+    "origin": "https://github.com/ZexueHe/MemoryArena.git",
+    "exact_commit": "6cd9de14b71915e39ac742a20dc33785e14b6aab",
+    "official_main_at_check_time": "6cd9de14b71915e39ac742a20dc33785e14b6aab",
+    "working_tree_clean": true,
+    "recursive_submodules_fetched": false,
+    "submodule_gitlinks_at_commit": 0,
+    "tracked_file_count": 205,
+    "tracked_blob_bytes": 3885657,
+    "local_tracked_file_bytes": 3035425,
+    "repo_root_license": "not found",
+    "license_paths_found": [
+      "memory/memory_systems/MemoRAG/LICENSE"
+    ],
+    "license_scope_note": "Only memory/memory_systems/MemoRAG/LICENSE exists; it is a nested subproject license, not a repository-wide license."
+  },
+  "dataset": {
+    "revision": "da1a37c8b19280e18627ca01cf368195a5e1d92e",
+    "last_modified": "2026-03-03T00:39:50.000Z",
+    "dataset_card_license": "CC-BY-4.0 (as stated in README.md)",
+    "readme_license_metadata_field": null,
+    "all_files_bytes": 12315679,
+    "jsonl_total_bytes": 12302265,
+    "jsonl_files_downloaded": 0,
+    "remaining_jsonl_files": 5,
+    "jsonl_payloads_read": false,
+    "notes": "Dataset card README documents five test configurations; no task rows were requested, downloaded, or previewed."
+  },
+  "download_accounting": {
+    "new_source_checkout_bytes": 0,
+    "existing_checkout_local_tracked_bytes": 3035425,
+    "dataset_readme_bytes_downloaded": 4762,
+    "dataset_jsonl_bytes_downloaded": 0,
+    "dataset_expected_jsonl_bytes_not_downloaded": 12302265,
+    "budget_limit_bytes": 100000000,
+    "dataset_payload_expected_under_limit": true
+  },
+  "receipt_sha256": "8083d23d2de447800e1eb7f9ad7f3affaa93277df15df651f08bc46de58463c3",
+  "files_metadata_sha256": "965e258db6067c25bf9a6c73179728cc5bb27e3dac04d51e6327cedd115e9d62",
+  "dataset_readme_sha256": "27573c423dbe8abee530dbf4f8fe0a757c3fbbdec57703db2ba3c8706e103935",
+  "exposure": {
+    "root_web_preview": {
+      "config": "bundled_shopping",
+      "ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "extent": "partial question/answer previews automatically rendered by HF dataset landing page"
+    },
+    "luna_read_jsonl_payloads": false
+  },
+  "remaining": [
+    "environment/scorer and dependency feasibility assessment",
+    "code license scope unresolved; do not redistribute external implementation as project code",
+    "select task configuration and pre-register fresh selection before opening rows",
+    "implement minimal adapter only when P1-P4 prerequisites are met"
+  ]
+}

@@ -6,6 +6,12 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 
 # 长程总计划执行 Goal
 
+2026-09-27 新授权：用户要求完整执行
+[局部多 State–Attention 规划](MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md)。
+当前开发转入[LSA 执行 Goal](MILAI_LOCAL_STATE_ATTENTION_EXECUTION_GOAL.md)，此前暂停对该新范围解除。
+下列 SER/P0–P12 表保留历史证据；其未触发的 Attention 限制不阻断新授权方法。
+旧模型敏感性 v27 草稿继续保留，不作为部署授权；总目标和第二模型等证据缺口尚未完成。
+
 完整执行[长程总规划](MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md)，不将总目标缩成v20或某个易通过的实例。各阶段分别保留Goal、freeze和results；阶段通过不等于总Goal完成。研究结论依据实际证据选择GO/PIVOT/KILL，失败先定位问题、比较假设并尝试最小通用修复。
 
 沿用一名Sol xhigh负责源码/config/CI及必要窄测试；Root负责方案、fixture/评分、冻结、所有真实模型与embedding调用（并发1）、连续费用和报告；Luna high负责已授权的Git提交/推送。新增下载如有必要由Luna high执行。默认vLLM设置不变；主开发不换模型或参数寻找最好结果。后续独立sensitivity遵循方法先冻结和matched reference，任何部署变更仍须明确记录依据。

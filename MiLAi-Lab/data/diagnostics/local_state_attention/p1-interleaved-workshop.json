@@ -1,0 +1,66 @@
+{
+  "kind": "MILAI_LOCAL_STATE_ATTENTION_SCRIPT",
+  "script_id": "p1-interleaved-workshop-v1",
+  "users": [
+    "iris"
+  ],
+  "initial_label_available": true,
+  "phases": [
+    {
+      "id": 0,
+      "operator_memory": [],
+      "world_events": [],
+      "messages": [
+        {
+          "message_id": "brief",
+          "user_id": "iris",
+          "session_id": "planning",
+          "public_index": 0,
+          "text": "We have three ongoing workshop matters to return to in later sessions. Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 3 kits, west dock W-4, rigid cases. Workshop welcome briefing: room R-3 at 14:30, using the step-free entrance. Nothing has been reserved yet. Acknowledge the arrangements; do not reserve or label anything."
+        },
+        {
+          "message_id": "foreground",
+          "user_id": "iris",
+          "session_id": "planning",
+          "public_index": 1,
+          "text": "Continue the Workshop handout packs matter. Give its quantity, destination and packing in one short sentence. Do not take a business action."
+        },
+        {
+          "message_id": "background-revision",
+          "user_id": "iris",
+          "session_id": "planning",
+          "public_index": 2,
+          "text": "An update for Workshop field kits: the required quantity is now 8 and the destination is north rack N-6; packing stays the same. My current work is still Workshop handout packs: give its unchanged handling summary. Do not reserve or label anything."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "operator_memory": [],
+      "world_events": [],
+      "messages": [
+        {
+          "message_id": "restore-background",
+          "user_id": "iris",
+          "session_id": "followup",
+          "public_index": 0,
+          "text": "We are resuming Workshop field kits. What quantity, destination and packing are currently agreed? Do not reserve or label anything yet."
+        },
+        {
+          "message_id": "combined-action",
+          "user_id": "iris",
+          "session_id": "followup",
+          "public_index": 1,
+          "text": "Now reserve and label both Workshop handout packs and Workshop field kits using their respective current agreed arrangements. Make one reservation attempt for each and report the actual results. Do not act on the welcome briefing."
+        },
+        {
+          "message_id": "retained-third",
+          "user_id": "iris",
+          "session_id": "followup",
+          "public_index": 2,
+          "text": "What room, time and entrance were agreed for the Workshop welcome briefing? Report the arrangements only; do not create or change a reservation."
+        }
+      ]
+    }
+  ]
+}
