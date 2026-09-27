@@ -1,0 +1,163 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R1_RESULTS",
+  "status": "COMPLETE_READ_ONLY_DIAGNOSTIC",
+  "source_commit": "83b707edee01435db454493ee792ca73f9de531f",
+  "original_failure_source_commit": "5640a93071af3abdbc816fa914e5f60969364a03",
+  "jobs": [
+    {
+      "job_id": "snapshot-original-r1",
+      "variant": "original",
+      "classification": "wrong_reapplication",
+      "quantity": 5,
+      "outcome": "First response only; proposed memory update not executed.",
+      "tokens": {
+        "prompt_tokens": 1206,
+        "total_tokens": 1304,
+        "completion_tokens": 98,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 1.1825620979070663,
+      "request_sha256": "69b4714de7aac7dae456736834759dc94538277e2aa94e43cfe771be17ebda2e",
+      "artifact_sha256": "b08c6be72d1db98ca14657d3fd10d13656a43be0d271ec20de22a5ec3fa980d1"
+    },
+    {
+      "job_id": "snapshot-timing_identity-r1",
+      "variant": "timing_identity",
+      "classification": "correct_memory_content_step",
+      "quantity": 4,
+      "outcome": "First response only; proposed memory update not executed.",
+      "tokens": {
+        "prompt_tokens": 1398,
+        "total_tokens": 1496,
+        "completion_tokens": 98,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.890350149013102,
+      "request_sha256": "aac327b823ccdbcd0a572469e86a2a963964e15ee5e64ef200ebc9676d59bf7d",
+      "artifact_sha256": "e56beda03fde30fc852a9902e24aec58370e1abf225056e1b5d330e7abac1d19"
+    },
+    {
+      "job_id": "snapshot-actual_prior_state-r1",
+      "variant": "actual_prior_state",
+      "classification": "correct_memory_content_step",
+      "quantity": 4,
+      "outcome": "First response only; proposed memory update not executed.",
+      "tokens": {
+        "prompt_tokens": 1165,
+        "total_tokens": 1256,
+        "completion_tokens": 91,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.8066935129463673,
+      "request_sha256": "098eb86e432aee2e0c0cffac93d194efd2e5e3a4f6ec95ade8a1a3e1b819ed54",
+      "artifact_sha256": "a28e254dcc42fcc12511f71b78b08393b94a978db86717fab1fa99e6bdfa4ae0"
+    },
+    {
+      "job_id": "snapshot-actual_prior_state-r2",
+      "variant": "actual_prior_state",
+      "classification": "correct_memory_content_step",
+      "quantity": 4,
+      "outcome": "First response only; proposed memory update not executed.",
+      "tokens": {
+        "prompt_tokens": 1165,
+        "total_tokens": 1257,
+        "completion_tokens": 92,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.8052589711733162,
+      "request_sha256": "098eb86e432aee2e0c0cffac93d194efd2e5e3a4f6ec95ade8a1a3e1b819ed54",
+      "artifact_sha256": "ddda659805baff3d034a9d3d5e94db491909876bbd6ddb941b442dc127ecc4a3"
+    },
+    {
+      "job_id": "snapshot-original-r2",
+      "variant": "original",
+      "classification": "wrong_reapplication",
+      "quantity": 5,
+      "outcome": "First response only; proposed memory update not executed.",
+      "tokens": {
+        "prompt_tokens": 1206,
+        "total_tokens": 1303,
+        "completion_tokens": 97,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.8417079909704626,
+      "request_sha256": "69b4714de7aac7dae456736834759dc94538277e2aa94e43cfe771be17ebda2e",
+      "artifact_sha256": "0f9b8fdd04e28e99b5729cb46ae0c86c8928b8289788b4b117246f2ffdf34219"
+    },
+    {
+      "job_id": "snapshot-timing_identity-r2",
+      "variant": "timing_identity",
+      "classification": "correct_direct_answer",
+      "quantity": 4,
+      "outcome": "Direct answer4; persisted State already4, but no native LangMem write executed by this diagnostic.",
+      "tokens": {
+        "prompt_tokens": 1398,
+        "total_tokens": 1446,
+        "completion_tokens": 48,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.5611096592620015,
+      "request_sha256": "aac327b823ccdbcd0a572469e86a2a963964e15ee5e64ef200ebc9676d59bf7d",
+      "artifact_sha256": "abc090563ef81ee3b1eff7e05382cd082f4fddc7eee1e33e10451da2b23e6a9b"
+    }
+  ],
+  "summary": {
+    "original": {
+      "wrong_reapplication": 2,
+      "total": 2
+    },
+    "timing_identity": {
+      "correct_memory_content_step": 1,
+      "correct_direct_answer": 1,
+      "total": 2
+    },
+    "actual_prior_state": {
+      "correct_memory_content_step": 2,
+      "total": 2
+    }
+  },
+  "generation_delta": {
+    "calls": 6,
+    "tokens": 8062
+  },
+  "embedding_delta": {
+    "calls": 0,
+    "tokens": 0
+  },
+  "continuous_budget": {
+    "generation_requests": 2418,
+    "generation_tokens": 3019268,
+    "embedding_tokens": 18183
+  },
+  "http_wall_seconds": 5.087682381272316,
+  "business_tools_executed": 0,
+  "store_reads": 0,
+  "store_writes": 0,
+  "mechanism": "Original exact request repeats both propose5. Timing/source-identity annotation gives4, as does actual pre-event State3 with current+1. Supports a temporal-basis/source-copy ambiguity at first Host request; no prior assistant5 exists there.",
+  "limits": [
+    "Six first responses are not six completed tasks or independent trajectories.",
+    "Metadata plus one generic clause is a bundled intervention; this does not isolate their separate contributions.",
+    "Actual-prior-State is diagnostic only, not a live pre-user snapshot architecture.",
+    "No tool execution, no real persistence/recovery after outputs, no unseen or stability claim.",
+    "Native memory argument guard is not exercised in this probe.",
+    "Stale/no-op State and real receipt counterexamples required before live candidate admission."
+  ],
+  "decision": "Continue unchanged timing/source-identity candidate into small read-only correctness counterexamples, not live deployment or wording revision. Keep G/L/LRU source frozen.",
+  "evidence_sha256": {
+    "runtime/run_manifest.json": "a6159d9e26aabbd6543e597b121301a6f699427c5ff13d7b84834cbbd3b772f5",
+    "runtime/trace.jsonl": "2658d8a0a9c451c07422d8ecf9ca623654a65028e5dc2068b826aa3d186eba2c",
+    "execution-freeze.json": "3f85d23f601d4b092eee69c19e17d457495281291d727ecbc771a5ba1f88d154",
+    "inputs.json": "6bf85f24599e8a9ab8dce7c59f6739331b143f6726d0c8d97a521ccd0651d58a",
+    "budget-before.json": "dec77bea6c0c0935f95694d2de3a5bb21c9abeed3d1eb218d90f8f9f3d8c051d",
+    "budget-after.json": "7d698fd551b0312211be062e24c4d135e35d1caa7f9eb78c21245a4fd8b81ccd"
+  },
+  "validation": {
+    "original_variants_equal_original_request": true,
+    "other_views_change_only_work_view": true,
+    "http_receipts_equal_frozen_requests": true,
+    "source_config_input_hashes_match": true,
+    "ledger_reconciled": true,
+    "unknown_usage": 0,
+    "historical_chain_unchanged": true
+  }
+}

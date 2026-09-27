@@ -1,0 +1,117 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R2_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_SOURCE_PUBLICATION",
+  "scope": "Read-only correctness counterexamples before live admission of unchanged timing/identity candidate. Three frozen causal boundaries, unannotated versus same R1 clause; no wording tuning or live method modification.",
+  "input_path": "artifacts/local-state-attention/host-snapshot-r2/inputs.json",
+  "input_sha256": "9bf102820b879f466ce5824cf3dfcff3c749d69f3aee538abb12918e2daec12f",
+  "rubric_path": "data/diagnostics/local_state_attention/host-snapshot-r2-rubric.json",
+  "rubric_sha256": "f244b419c3ae29311b368f5f1f32372e3f470e25eb62c905daa5a33a7d866a72",
+  "source_trace": {
+    "path": "artifacts/local-state-attention/maintenance-events-r1/lsa-maintenance-events-r1-distinct-local_lru_sources/trace.jsonl",
+    "sha256": "e3297b7b0effc4d3dc5a09b15504f51fcdd258173aabd8d70367812966f011b9",
+    "original_source_commit": "5640a93071af3abdbc816fa914e5f60969364a03"
+  },
+  "cases": [
+    {
+      "case_id": "stale_noop",
+      "host_trace_line": 54,
+      "maintenance_trace_line": 49,
+      "state_injection": "actual pre-maintenance State replacing current State, diagnostic only",
+      "extra_source": "same initial user event2 supplied to both variants to make true2+1+1 independently recoverable"
+    },
+    {
+      "case_id": "tool_loop",
+      "host_trace_line": 65,
+      "maintenance_trace_line": 60,
+      "state_injection": "none; exact actual view4 with wrong prior memory-write/assistant5",
+      "extra_source": "none; all actual source/current tool messages unchanged"
+    },
+    {
+      "case_id": "actual_receipt",
+      "host_trace_line": 86,
+      "maintenance_trace_line": 81,
+      "state_injection": "actual pre-maintenance State replacing current State, diagnostic only",
+      "extra_source": "none; all actual source/current tool messages unchanged"
+    }
+  ],
+  "jobs": [
+    {
+      "job_id": "stale_noop-unannotated",
+      "case_id": "stale_noop",
+      "arm": "diagnostic",
+      "variant": "unannotated"
+    },
+    {
+      "job_id": "stale_noop-timing_identity",
+      "case_id": "stale_noop",
+      "arm": "diagnostic",
+      "variant": "timing_identity"
+    },
+    {
+      "job_id": "tool_loop-timing_identity",
+      "case_id": "tool_loop",
+      "arm": "diagnostic",
+      "variant": "timing_identity"
+    },
+    {
+      "job_id": "tool_loop-unannotated",
+      "case_id": "tool_loop",
+      "arm": "diagnostic",
+      "variant": "unannotated"
+    },
+    {
+      "job_id": "actual_receipt-unannotated",
+      "case_id": "actual_receipt",
+      "arm": "diagnostic",
+      "variant": "unannotated"
+    },
+    {
+      "job_id": "actual_receipt-timing_identity",
+      "case_id": "actual_receipt",
+      "arm": "diagnostic",
+      "variant": "timing_identity"
+    }
+  ],
+  "repeats_per_case_variant": 1,
+  "denominator": {
+    "first_responses": 6,
+    "completed_tasks_claimed": 0
+  },
+  "candidate_clause_sha256": "44feb7a63a57afe9f26e1d6bed82e814c2064258765bf5d5b4a1a899c56afa69",
+  "candidate_frozen_from": "artifacts/local-state-attention/host-snapshot-r1/inputs.json timing_identity clause; metadata IDs vary only with actual request boundary",
+  "fairness": [
+    "Same non-system messages, original system prefix, schema and model params per paired case",
+    "No future data relative to each chosen Host request",
+    "Stale/noop has identical extra legitimate initial event in both variants; declared direct-source diagnostic, not normal reference-expansion arm",
+    "Injected prior State is an explicitly labeled offline diagnostic counterfactual, not actual post-maintenance snapshot or method score",
+    "All actual tool JSON and attempted side effects remain in corresponding request",
+    "No controller/embedding/tool execution/Store calls"
+  ],
+  "capacity": {
+    "host_generations": 6,
+    "host_max_tokens": 4096,
+    "temperature": 0,
+    "thinking": false,
+    "context_tokens": 65536,
+    "http_concurrency": 1
+  },
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 2418,
+    "generation_tokens": 3019268,
+    "embedding_tokens": 18183
+  },
+  "source_freeze": "No additional source change after83b707edee01435db454493ee792ca73f9de531f; actual prepare after protocol publication binds source/config/input. Native-tool guard not executed.",
+  "stop_rule": "Retain all six semantic outputs; stop for service/schema/instrumentation mismatch, diagnose with all costs and no replay/replacement.",
+  "next_gate": "Only correct timing-candidate handling of all three diagnostic boundaries permits considering a separately frozen live slice. If a boundary remains wrong/inconclusive, preserve the limited R1 signal, do not deploy or iterate the wording; continue LR/strong-baseline obligations with current live view and declared Host limitation.",
+  "limits": [
+    "One first response per case/variant, no stability or task success estimate",
+    "R1 bundled timing metadata and clause not decomposed here",
+    "Extra raw initial source and injected old State are diagnostics only"
+  ],
+  "validation": {
+    "source_checks": "Reuse prior24 affected tests/static and one build; no source changes, no publication-only rerun",
+    "new_input_prepare": "Formal zero-model prepare after publication before any Host call",
+    "real_model_calls": 0
+  }
+}

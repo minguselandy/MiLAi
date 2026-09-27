@@ -307,6 +307,19 @@ prepare与Root串行诊断。原生工具修复不被这个probe执行，不能�
 即使时点候选有利，live采用前仍需stale/no-op State和tool-loop反例，不把引用/观察过等同于
 变化已经正确应用。当前Host实时view和原始用户/工具消息尚未修改。
 
+[Host快照R1结果](MILAI_LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R1_RESULTS_20260927.md)完成六次只读首响应：
+原请求两次都提出写5；时点/来源身份说明两次使用4（一次memory提案、一次直接回答）；实际
+维护前State3两次都提出写4。首次错误无旧assistant5，支持快照基准/来源副本歧义，但未分离
+元数据与说明的贡献，且没有工具执行或完整任务成绩。新增6/8062/0；累计2418/3019268/18183。
+
+[R2正确性反例协议](../data/manifests/local-state-attention-host-snapshot-r2-protocol.json)固定三断点×
+无说明/同一说明，共6个首响应：注入实际旧State3且两臂同加真实initial2来源，tool-only回合的
+正确State4与实际错误memory5，以及注入旧计划4但真实预约回执5。不得把时点当语义应用证明，
+不得隐藏真实side effect。来源/当前消息相对于各断点无未来信息，原工具JSON保留，全部为
+明确offline diagnostic，不作方法分数。无新源码改动或构建；发布后正式prepare并串行执行。
+只有三个候选反例均正确才考虑另外冻结的live切片；否则不部署/不调措辞，继续LR及强基线，
+当前Host liveview保持原样。完整Goal不因这六个诊断结束而关闭。
+
 ## 后期资源准备记录
 
 已核对 [LangMem 官方 API](https://langchain-ai.github.io/langmem/reference/) 确实区分
