@@ -1,0 +1,213 @@
+{
+  "kind": "MILAI_EXTERNAL_MEMORY_V26_LOCK",
+  "status": "FROZEN",
+  "stage": "P10_EXTERNAL_FORMATION_SYSTEMS",
+  "recipe_id": "langmem-hotpath-react-json-action-v1",
+  "transport_variant": "json_action",
+  "protocol_by_arm": {
+    "b1_control": "langmem_default_v1",
+    "mem0_native_autoadd": "mem0_oss_native_autoadd_v1"
+  },
+  "reference_manifest_sha256": "eac5db32fbbb85cea500482f400146955abbcf0b74024957849a8fcca5db0dd5",
+  "master_plan_sha256": "d7a5331bf20ecd649a1bf75187ea0d65224ad559572a30dde0bb5527a66217d2",
+  "protocol_sha256": "5561d5e214a435555d012b4b26abed29cdc676d68941f505037d0a2ec5eb2040",
+  "input_reference_sha256": "2c8e47a48714d6d02992f5f6d4e696269bf084f30073e804cebf53c42020f47f",
+  "mem0_source_commit": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+  "mem0_system_prompt_sha256": "6f268dd400b18a6dc014707f8f22945ec2b54c2eebf89dc84b62afaea85a2de0",
+  "mem0_search_contract_sha256": "2259e791a65c08314d388129ae540f98d329e5f9d0ab25f9c03ae5411639db78",
+  "mem0_environment_receipt_sha256": "8ceb0360a33ca40f4200bc0a1eb4173915419b8710b4a6db54959a1d063993d6",
+  "source_checkpoint_before_changes": "5e49cf9a7a2cc6eef78f0b76c089c2f1c95e70a8",
+  "previous_lock_path": "data/locks/milai-application-v25.lock.json",
+  "previous_lock_sha256": "796b32df3dbe5d5028d799bbdd92a7ff313ac17fd73ce34a84de3cae3d4d0e25",
+  "source_sha256": {
+    ".github/workflows/ci.yml": "c3ed92419ddab55ee2850fcb7ce8b836c329e73d2cb09ecf57f9b9d7b3200dbb",
+    "configs/langmem-b1-v16.json": "09999ee2906aa73ab513e7fe2f89826c5785bbef1eaaec7a2c36601372644634",
+    "configs/langmem-baseline-v1.json": "45dbe0fb4843c87d3c5302a32408bb389a82b11bfcb09749fc773aeea5f22c2b",
+    "configs/milai-application-v25.json": "81180152d1d7aa788d19ce1d8ddfe524a23d31034c479ff560cbb83121a8def4",
+    "configs/milai-external-memory-v26.json": "1ec15532c7ac0d04295a95223592424dd9b03706ec53c309cbfee51b69f8c3e4",
+    "configs/milai-freshness-projection-v19.json": "22da1879eb0ed428e3568ac7703c9b2363720b96bee538f73403577379f19433",
+    "configs/milai-lifecycle-v24-formation-r2.json": "cf9f5623609ae6d9e3e9fb34ffd39663e034a5fb0907f726a65c8f87c68348cf",
+    "configs/milai-lifecycle-v24-formation-r3.json": "991c13889b84ac96f81cf730a7bdcf26e018f89f0371d4a2d965dc5f72478d33",
+    "configs/milai-lifecycle-v24-formation.json": "2a7fc7606b635e7be61d80d58dca2291e8744ef8bd901e46ec9e94056a648303",
+    "configs/milai-lifecycle-v24-reconciliation-r1.json": "7b7819d47f8b7e4294937ab423a6a165958d34645bb00d939f748f3a3e590604",
+    "configs/milai-lifecycle-v24-reconciliation-r2.json": "a19b7d326d7c63b691e2b548d55417f3dce3f14d4ca6747ab27e5d09716514a1",
+    "configs/milai-m1-v17.json": "f2928aaaf29da5bd048aff9e977def99d24c0b7e073e95b6e609e70737e8c33a",
+    "configs/milai-m1-v18.json": "5c5154b04f6b082274ca4480f5656c4aae89e67691e46c984b85f39b2a56bbf6",
+    "configs/milai-odr-v19.json": "d246534999bf3a91b770fa6505f68b4480a327345f59ec2c997d112a295d8fac",
+    "configs/milai-ser-v20.json": "25d9f058eb7f6a64e82559aaeae8457986b87d724e56cb9b1894f93f67036860",
+    "configs/milai-ser-v21.json": "784a7ddb5c72bb3a4ff73c72f9f2d9c9ca240427b00fe5fe3d5da831a0eb0a0d",
+    "configs/milai-ser-v22-r2.json": "7f1c0642162a8c942d9ce64c5a979ced1a56d65e7321957d7ec9d706599caa37",
+    "configs/milai-ser-v22.json": "c5feddbe0fb68cdeb004969a59fb98c923341eff387845f9321a6090a1d23d1a",
+    "configs/milai-ser-v23.json": "4a8f993edea1224ace88157c1ba8166d33f04b2a5973d6c2de1a1344dfa6fef8",
+    "pyproject.toml": "b6ea793acd8ae41554378523ac3fbaa6e5478d2c5e6162b8d15cccc1af43a006",
+    "src/milai_lab/__init__.py": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+    "src/milai_lab/baselines/__init__.py": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+    "src/milai_lab/baselines/langmem_agent.py": "ff1bd68e90aa05465b9cbee58f8ad473a607cdecb7e175deb34fa4108925077c",
+    "src/milai_lab/baselines/langmem_b1_identity.py": "2fd2380bcb93c87c3614a7ec1d917a75faca8eeb3c75dfef0a7c5ce8248a3d11",
+    "src/milai_lab/baselines/langmem_identity.py": "bf3b25663b52478325734f8ba4a3703521d63bb522f8a22133f28680a5187572",
+    "src/milai_lab/baselines/langmem_instrumentation.py": "528537564b2a1aec89c5d11c0cfdd9ebb433e7795d78d89d8483e6ac4b5ac3f9",
+    "src/milai_lab/baselines/langmem_revision_store.py": "679eec0c8300e3275819c317743a319f7876dd1ee22520e5f38b540f6bc946c8",
+    "src/milai_lab/datasets/__init__.py": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+    "src/milai_lab/datasets/merit.py": "1959ebfa1c035520751a2ab7ec397444bbb545e72709b1aca91751d7a495a0e7",
+    "src/milai_lab/harness/__init__.py": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+    "src/milai_lab/harness/contextual_artifacts.py": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+    "src/milai_lab/methods/__init__.py": "59b20a7a91ee381dda1685ac330a3af7d10aa2c84dbe69cc0ef8b2f767044a81",
+    "src/milai_lab/methods/freshness_projection/__init__.py": "edf49dc7f013532a7d43590e2081056a60dcb3ba5557ae9866d748fe15ccbd83",
+    "src/milai_lab/methods/freshness_projection/controller.py": "f134b0ae24a6adde60c7f57d4ab12c31e759fa92b757720d1ecb8edfba7dc771",
+    "src/milai_lab/methods/freshness_projection/identity.py": "b51c4dc5cc306339899bb2cc844b6db7bd6be4e685b2d85c252bece8e4cf385e",
+    "src/milai_lab/methods/freshness_projection/lineage.py": "71a19fb10baa3a8b47edae3e1656970c2f6eb8cb9823a6e5392a53c33c918d84",
+    "src/milai_lab/methods/freshness_projection/projection.py": "ed8dc7fbd65bcf0fe874c2a8ed4e53478f924188dac2838bcb9380889e91c6a5",
+    "src/milai_lab/methods/memory_lifecycle.py": "2644e387d08a453579991ab2590bff89f3adf11d5d445114068301a6ca77a2ad",
+    "src/milai_lab/methods/milai_m1/__init__.py": "8d9a1d208d0df6404166ca73436b42857fd6194707aed0ede0f6e6b86f68a624",
+    "src/milai_lab/methods/milai_m1/controller.py": "c871098c684efbb3a54a4dd7f82bb7df00b235e4480b37bd124e8a5d78ceeb8a",
+    "src/milai_lab/methods/milai_m1/decision_basis.py": "07e28bc44c57cb7fc27cc6969bf16dce500449cb1cdef195143297ac3b4d38e7",
+    "src/milai_lab/methods/milai_m1/evidence_view.py": "31e3ec6181418f3ea5b4c48efd09e8d21eae130b6f39beeb1e5ae041938c50fb",
+    "src/milai_lab/methods/milai_m1/identity.py": "7ca19d497b28a0c76ebed245124b45295bf216ba292564918af74ab9a0c24b53",
+    "src/milai_lab/methods/milai_m1/recheck.py": "2c7a4b7f544cbbfed2579e5f5c80cc46bf5a6d6295019a87c6835bab959bfc7d",
+    "src/milai_lab/methods/milai_m1/state_store.py": "165f9c22801764ca98d63e8fc6a13793d3cb4b48dbfc785d9c4bd42b19dddcfd",
+    "src/milai_lab/methods/on_demand_reconstruction/__init__.py": "98f05efd3b1250393d9fc2b276476884bfeb6b92eb1334c68e50a14e6ef669b8",
+    "src/milai_lab/methods/on_demand_reconstruction/controller.py": "df4f32d115b3c88c315b467e8f24e7ee1ceaf3dc4e14a7547ed382c7f5ac5e2f",
+    "src/milai_lab/methods/on_demand_reconstruction/evidence_view.py": "f90f0bf19047a040b484c6f808a9943ba60377a92493f7044a1109339dee332a",
+    "src/milai_lab/methods/on_demand_reconstruction/freshness.py": "02ee313159eecbbd15b3499929712e909a985d28f0116658f4d60511018df59b",
+    "src/milai_lab/methods/on_demand_reconstruction/identity.py": "f96fddca6c9fa7b82a0ed48d68368254ee3772cb2636146e7f291804b7298b0a",
+    "src/milai_lab/methods/on_demand_reconstruction/metrics.py": "64b82a7d98bd8e9721a142c3df866ea96eb69fd5b32c2c2edaa197e401d7518e",
+    "src/milai_lab/methods/on_demand_reconstruction/schema.py": "323032b7cd80d25bee501f0e2174aa070be9d0747ed5aacc171563c27e8e4c4c",
+    "src/milai_lab/providers/__init__.py": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+    "src/milai_lab/providers/contextual_capacity.py": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+    "src/milai_lab/providers/contextual_vllm.py": "a9f15fcbbcc0ead318f0871538269128eb904d6cbe13c2f3fbd7c23f5927809a",
+    "src/milai_lab/providers/langmem_chat.py": "d3d237a32236c4a04d0e778b03cddcbca5e2bb179fb337064ba71a36b522687d",
+    "src/milai_lab/runners/__init__.py": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+    "src/milai_lab/runners/langmem_application.py": "dcd8923731f4cf3c72c0b497bbbe1c2bc3ef19584bcceee4b6424cb8d6d5f8a0",
+    "src/milai_lab/runners/langmem_application_runtime.py": "a00c79b2789b8ecb23a76f6eed50f2731ae8b9f90fb65530da524a5febe31ca0",
+    "src/milai_lab/runners/langmem_diagnostic.py": "aa8fb6bbb9ac237f643b711a8e1a779f28f5be3e5b4e779d2960e231ff129136",
+    "src/milai_lab/runners/langmem_foundation.py": "d35ad8659b0a95819415786a750460bcc39e9673aa342ce44d9383f7c7fb5135",
+    "src/milai_lab/runners/langmem_m1_mechanism.py": "66afffbe62f57ad545513a5cb5acb61ca2a03f638bd4de30499a2e053abe70ae",
+    "src/milai_lab/runners/langmem_merit.py": "9dc4eccf69938333ddaba4631b101791629e84a7e21979dc885f236c95c3d7b1",
+    "src/milai_lab/runners/langmem_odr_mechanism.py": "a4d2a9b71e4f48cf8d70cbd68de751b9f6daa9443e22f51484d4dbdea020b9c5",
+    "src/milai_lab/runners/langmem_projection_mechanism.py": "cc033a498f8c387d9200c7583e27e369d998f8f0cc1142bea073faf122dd5982",
+    "src/milai_lab/runners/mem0_identity.py": "4c3536300135a8cb2f520b6069525f0a9feeb7523b85b44cda749577d09596f6",
+    "src/milai_lab/runners/mem0_native.py": "83ce967378aca796a1670697aab5ec32f2db3e62c546b0cdadc2dc564f0b3760",
+    "tools/inspect_milai_m1_v18.py": "74781e18aa99461861a8b69ca4bceacf75f300085a5d8c2a43c7d0b380185ca0",
+    "tools/inspect_milai_odr.py": "63a78c92ce710f6cbe0d4e8d1d1c09ee4509a8613dbaf434673381d394780579",
+    "tools/prepare_langmem_foundation.py": "b6b4c538d121cd706e3c84c7e1c59ff70b23d8c568a036633bb9ea498865fdce",
+    "tools/run_langmem_foundation.py": "44e27ab5cb78148156e082814b59da7ab639babb48c2f2bb0658ba4edc9b1944",
+    "tools/run_langmem_provenance.py": "e080e10a9c5cb62336180aff6e53e36056a4fc93763c0c10a99e8f1c2c2aaef3",
+    "tools/run_milai_application_v25.py": "9c57a33cbc1678a2c6ce787c1c9104262cee9b5f2f9ac649f44c6ebe7d85f3bf",
+    "tools/run_milai_external_memory_v26.py": "724ddfdbf4edc68fbf921dfa0779822574bad78c64f34e54b6ef4f08fbda10fc",
+    "tools/run_milai_freshness_projection.py": "66b2f04aae085e1b2457a1be58eeaa2f3beaf8d6c38583aa0812a234681f679d",
+    "tools/run_milai_lifecycle_v24.py": "0aacdcf256efa8b16f2eacf241a56afb48e9486199539679d5e4a6495fc0a27c",
+    "tools/run_milai_m1.py": "031e9659526fdf3b95ed21061ac8b82e3f4bafae49ad3d6d44e8cd336bf4cbcc",
+    "tools/run_milai_m1_v18.py": "41b89144729cc16077dd291e36010b871c00105fa65c4a97500f8b9e447a19f5",
+    "tools/run_milai_odr.py": "566f7bd7bcbd94a0bab74805bf03157ee9f2f09dafd6e5e3cf2f0517f39cec06",
+    "tools/run_milai_ser.py": "71abcc85d17bac83d00437597c8e1f900b527ad97d311ddf0e903f2e7953d213",
+    "tools/run_milai_ser_v21.py": "950de06470d6c73db8484b90957a8dc45ac55961a8de636467bfa6503d347cb7",
+    "tools/run_milai_ser_v22.py": "6333253cac1068d35d425a861086a3a3b62d4ec07542ac373435b37297ed89a0",
+    "tools/run_milai_ser_v23.py": "9cc9796b38484c67ed30a5c38a61c2b7f2e19afb3cdb8c37c51e042d642d3ea9",
+    "tools/summarize_langmem_foundation.py": "aea78fc1bc9ddbf7b11a935cd9b4aa19ca05a1bba9ab3475870adc60958e37d7",
+    "uv.lock": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1"
+  },
+  "source_mapping_sha256": "37e57b17808d9378111032de11ba66960280620586b1a2a9586e4e81aaffc4cb",
+  "validation_sha256": {
+    "../.github/workflows/ci.yml": "f1f082cafa38f800a560e067cae2aa59afae3f9510e0a3c3796762916edc69fc",
+    ".github/workflows/ci.yml": "c3ed92419ddab55ee2850fcb7ce8b836c329e73d2cb09ecf57f9b9d7b3200dbb",
+    "tests/unit/test_external_memory_v26.py": "632c8829781caae277446940f2a50cb89ae59a13380661a1bcbce8df7083d908",
+    "tests/unit/test_freshness_projection.py": "790dbe22584274b1c75af9a1a202a60aaf7070ae2385c6718b1c1f293fcf0f32",
+    "tests/unit/test_langmem_application.py": "e9ff21eb527b47b3f36fe8f77eef79b87427af80b054691906a1bfc6b31cb17f",
+    "tests/unit/test_langmem_provenance.py": "3ef04a0667315b2bdc44b57d321a9f6e3ec41a2c98fc744804744f441df8308d",
+    "tests/unit/test_milai_m1_v18.py": "17c637353133ffcff95db19ec6f9190ccc0dfbf9f556e4a8b75ce203669ac15b",
+    "tests/unit/test_milai_odr.py": "ebef4881f13336f74f5bf729389bb598f99073a7d6e0aa97217267707097c7ab"
+  },
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "method": "external_memory_v26",
+    "real_generation_requests": 0,
+    "real_embedding_requests": 0,
+    "environment_receipt_sha256": "8ceb0360a33ca40f4200bc0a1eb4173915419b8710b4a6db54959a1d063993d6",
+    "source_files": [
+      ".github/workflows/ci.yml",
+      "pyproject.toml",
+      "uv.lock",
+      "configs/milai-external-memory-v26.json",
+      "src/milai_lab/baselines/langmem_agent.py",
+      "src/milai_lab/providers/contextual_vllm.py",
+      "src/milai_lab/runners/langmem_diagnostic.py",
+      "src/milai_lab/runners/mem0_native.py",
+      "src/milai_lab/runners/mem0_identity.py",
+      "tools/run_milai_external_memory_v26.py"
+    ],
+    "new_validation_files": [
+      "tests/unit/test_external_memory_v26.py"
+    ],
+    "checks": [
+      {
+        "command": "artifacts/external-memory-v26/.venv/bin/pytest -q tests/unit/test_external_memory_v26.py",
+        "result": "PASS 4; official Mem0 infer=True add, scoped search, BM25 sparse vectors, linked entities, native persistence/restart, actual top_p wire, no embedding dimensions, batch order and charged usage verified with fake HTTP responses"
+      },
+      {
+        "command": ".venv/bin/pytest -q tests/unit/test_external_memory_v26.py",
+        "result": "PASS 3, SKIP 1 official SDK integration absent from standard environment"
+      },
+      {
+        "command": ".venv/bin/pytest -q tests/unit/test_langmem_foundation.py::test_json_action_executes_every_upstream_call_in_order tests/unit/test_langmem_foundation.py::test_upstream_manage_search_preserves_public_null_and_id_behavior",
+        "result": "PASS 2; default B1 tools and execution path"
+      },
+      {
+        "command": ".venv/bin/ruff check src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/contextual_vllm.py tools/run_milai_external_memory_v26.py tests/unit/test_external_memory_v26.py",
+        "result": "PASS"
+      },
+      {
+        "command": ".venv/bin/mypy --follow-imports=silent src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/contextual_vllm.py tools/run_milai_external_memory_v26.py",
+        "result": "PASS 6 source files"
+      },
+      {
+        "command": ".venv/bin/milai-lab-check-boundary",
+        "result": "PASS active package has no private product or legacy imports"
+      },
+      {
+        "command": "artifacts/external-memory-v26/.venv/bin/python tools/run_milai_external_memory_v26.py --help",
+        "result": "PASS prepare/run CLI"
+      }
+    ],
+    "resource_finding": "FastEmbed 0.8.1 silently disables BM25 when its local Qdrant/bm25 snapshot lacks required compatibility files. The isolated cache and environment receipt now include mock.file and tamil.txt; runtime verifies sparse slot and encoder before any model call and emits native configuration/cost event.",
+    "package_build": "WAITING_FOR_ROOT_SOURCE_LOCK"
+  },
+  "source_verification_receipt_sha256": "13e2f02007e4ea3fdf1f74c6d20388c8d3382bde33067304aa36b13b5ae0798f",
+  "dependency_lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1",
+  "model_visible_contracts": {
+    "b1": "Unchanged public LangMem tools/system; ordinary Host-selected CRUD.",
+    "mem0_system_prompt": "You are a helpful assistant. Use the available business tools when a task requires an action, and report their actual results. Long-term memory from completed conversations is saved automatically. Use search_memory when prior notes are needed. You cannot write or edit memory directly.",
+    "mem0_system_prompt_sha256": "6f268dd400b18a6dc014707f8f22945ec2b54c2eebf89dc84b62afaea85a2de0",
+    "mem0_search_schema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    },
+    "mem0_search_description": "Search this user's Mem0 long-term memories.",
+    "mem0_search_contract_sha256": "2259e791a65c08314d388129ae540f98d329e5f9d0ab25f9c03ae5411639db78",
+    "mem0_native_extractor": "Official ADDITIVE_EXTRACTION_PROMPT; original parse_messages and native batch pipeline.",
+    "mem0_native_generation_parameters": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "temperature": 0,
+      "max_tokens": 4096,
+      "top_p": 1.0,
+      "response_format": {
+        "type": "json_object"
+      },
+      "enable_thinking": false
+    },
+    "host_requests": "Original json_action transport, no added top_p field.",
+    "claim": "Different tools/system and automatic ingestion are declared system-level interventions, not SER ablations."
+  },
+  "ser_enabled": false,
+  "formation_cue_enabled": false,
+  "reconciliation_cue_enabled": false,
+  "vllm_settings_changed": false,
+  "claim": "Native Mem0 automatic-ingestion versus ordinary public LangMem; declared system-level comparison."
+}

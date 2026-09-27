@@ -1,0 +1,531 @@
+{
+  "kind": "MILAI_EXTERNAL_MEMORY_V26_PROTOCOL",
+  "status": "FROZEN_BEFORE_REAL_REQUESTS",
+  "created_at": "2026-09-27T02:01:33.120189+00:00",
+  "goal_path": "docs/MILAI_EXTERNAL_MEMORY_V26_GOAL.md",
+  "reference_commit": "5e49cf9a7a2cc6eef78f0b76c089c2f1c95e70a8",
+  "master_plan_sha256": "d7a5331bf20ecd649a1bf75187ea0d65224ad559572a30dde0bb5527a66217d2",
+  "input_reference_path": "data/manifests/milai-external-memory-v26-input-reference.json",
+  "input_reference_sha256": "2c8e47a48714d6d02992f5f6d4e696269bf084f30073e804cebf53c42020f47f",
+  "inputs_path": "data/diagnostics/milai-lifecycle-v24-formation-inputs.json",
+  "inputs_sha256": "f3816265c6c96f8004229c3f86a0039556fd0caf741cd66cce61c906ec0e8279",
+  "diagnostic_freeze_path": "data/manifests/milai-lifecycle-v24-formation-diagnostic-freeze.json",
+  "diagnostic_freeze_sha256": "8b24c28925113a5817c37391d6f0b5d10445b87bde4f6e7e9a8af1d9fafba494",
+  "rubric_path": "data/diagnostics/milai-lifecycle-v24-formation-rubric.json",
+  "rubric_sha256": "491d1c434c76f1afd56645ea2b428f8429e0c94916179783dace2da58ce970f9",
+  "source_lock_path": "data/locks/milai-external-memory-v26.lock.json",
+  "config_path": "configs/milai-external-memory-v26.json",
+  "verification_dir": "artifacts/external-memory-v26",
+  "run_order": [
+    "b1_control",
+    "mem0_native_autoadd"
+  ],
+  "protocol_by_arm": {
+    "b1_control": "langmem_default_v1",
+    "mem0_native_autoadd": "mem0_oss_native_autoadd_v1"
+  },
+  "scope": {
+    "cases_per_arm": 4,
+    "sessions_per_arm": 6,
+    "messages_per_arm": 6,
+    "arms": 2,
+    "new_samples": 0
+  },
+  "native_policy": {
+    "infer": true,
+    "search_top_k": 20,
+    "search_threshold": 0.1,
+    "ingestion": "completed_user_final_assistant",
+    "vector_store": "qdrant-local",
+    "telemetry": false
+  },
+  "native_ingestion": {
+    "trigger": "after each successfully completed public turn, including controls and later queries",
+    "messages": [
+      "actual user text",
+      "actual final assistant text"
+    ],
+    "infer": true,
+    "raw_tool_messages_included": false,
+    "synthetic_assistant_tool_serialization": false,
+    "pending_ingestion": "UNKNOWN_NO_AUTOMATIC_RETRY"
+  },
+  "model_visible_contracts": {
+    "b1": "Unchanged public LangMem tools/system; ordinary Host-selected CRUD.",
+    "mem0_system_prompt": "You are a helpful assistant. Use the available business tools when a task requires an action, and report their actual results. Long-term memory from completed conversations is saved automatically. Use search_memory when prior notes are needed. You cannot write or edit memory directly.",
+    "mem0_system_prompt_sha256": "6f268dd400b18a6dc014707f8f22945ec2b54c2eebf89dc84b62afaea85a2de0",
+    "mem0_search_schema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    },
+    "mem0_search_description": "Search this user's Mem0 long-term memories.",
+    "mem0_search_contract_sha256": "2259e791a65c08314d388129ae540f98d329e5f9d0ab25f9c03ae5411639db78",
+    "mem0_native_extractor": "Official ADDITIVE_EXTRACTION_PROMPT; original parse_messages and native batch pipeline.",
+    "mem0_native_generation_parameters": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "temperature": 0,
+      "max_tokens": 4096,
+      "top_p": 1.0,
+      "response_format": {
+        "type": "json_object"
+      },
+      "enable_thinking": false
+    },
+    "host_requests": "Original json_action transport, no added top_p field.",
+    "claim": "Different tools/system and automatic ingestion are declared system-level interventions, not SER ablations."
+  },
+  "external_source": {
+    "project": "Mem0 OSS",
+    "version": "2.1.0",
+    "commit": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+    "url": "https://github.com/mem0ai/mem0.git",
+    "source_files_sha256": {
+      "mem0/memory/main.py": "5b1b75e2f00aca7bd368a6e9cd5905145d60fd05a0e36d6b1ef3e2f1b4f28ca1",
+      "mem0/configs/prompts.py": "10bc8a34b3b5f0ce24560a2a3190c9112b979a891b981f48393bbd168d915a5c",
+      "mem0/memory/utils.py": "f1dcbfcb0261de5717755ef41c0b9db35939d42056a4e06cdfca37650c0eb1f9",
+      "mem0/llms/vllm.py": "a47c9d95ce5720972310dc8c307458eac7008742f33f6cb42149d61ee4d2606f",
+      "mem0/embeddings/openai.py": "bd8c0cfeaa1ac89511350d51c5042a3b01f90530e18259ed5b0c3e019595e1e1",
+      "mem0/vector_stores/qdrant.py": "da570579d5cad69e6f123fdfe32b725235a25604e70047666bec763ba6e2bf43",
+      "mem0/utils/factory.py": "b7883d7c48264eeac449e3696ad90d96db4ae6d3404e886c8dfc930d0843d02d",
+      "mem0/configs/llms/base.py": "3db97971a4f46b63115a51db27eff3c176ffd31e50b98e9f1c9ca0ddd6914a75",
+      "mem0/configs/llms/vllm.py": "cdbd4df82c9c1f9ebfcd20873ad17c54aae0f41555c83b0e6a170ddcdd5f83ff",
+      "mem0/configs/embeddings/base.py": "3c79daa02ecb4b6f33fe4ddca1ae1eea49ade1c3f538bc9bf46a501da0062dd8",
+      "pyproject.toml": "1662b662cf75295be5d78fa9c8be48166b7f09ab3985ff20891201cb9ceb708d",
+      "LICENSE": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219"
+    }
+  },
+  "environment_receipt_path": "artifacts/external-memory-v26/environment-receipt.json",
+  "environment_receipt_sha256": "8ceb0360a33ca40f4200bc0a1eb4173915419b8710b4a6db54959a1d063993d6",
+  "environment_summary": {
+    "python_version": "Python 3.12.11",
+    "environment": {
+      "dev_tools_installed_in_isolated_env": true,
+      "isolated": true,
+      "original_lab_venv_modified": false
+    },
+    "packages": {
+      "fastembed": "0.8.1",
+      "langmem": "0.0.30",
+      "mem0ai": "2.1.0",
+      "mypy": "1.20.2",
+      "pytest": "8.4.2",
+      "qdrant-client": "1.19.1",
+      "ruff": "0.16.5",
+      "spacy": "3.8.16"
+    },
+    "fastembed_sparse_model": {
+      "cache_compatibility_placeholders": [
+        {
+          "path": "mock.file",
+          "reason": "FastEmbed 0.8.1 Qdrant/bm25 model description declares this required model_file placeholder; BM25 has no model weights.",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        {
+          "path": "tamil.txt",
+          "reason": "FastEmbed 0.8.1 required additional-file list includes tamil.txt, absent from pinned Hub snapshot; BM25 stopword loader treats an absent/empty list as no stopwords.",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        }
+      ],
+      "cache_root": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/cache/fastembed",
+      "embed_or_query_embed_called": false,
+      "file_count": 20,
+      "files": [
+        {
+          "path": "arabic.txt",
+          "sha256": "0df01c0a184d8c15077c6f0ee70e25e0c0308d827b92b14a19f5f819a0c465d0",
+          "size_bytes": 6348
+        },
+        {
+          "path": "config.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "size_bytes": 2
+        },
+        {
+          "path": "danish.txt",
+          "sha256": "1bedc9cf5a8830dacf8c4ee0d8b301f0801861756ad0d504431d01047f961b0c",
+          "size_bytes": 424
+        },
+        {
+          "path": "dutch.txt",
+          "sha256": "e5a2a7c390fe3ad0c0a132586ed11492b635d66a1f426cd89677f80b07bc76a6",
+          "size_bytes": 453
+        },
+        {
+          "path": "english.txt",
+          "sha256": "019f104ba2ed07436d05f9cdd3383034ad66014edc27fc651f837e1a038b6451",
+          "size_bytes": 936
+        },
+        {
+          "path": "finnish.txt",
+          "sha256": "952af766edc9b8e7ddc877fc464cbd94b91754b5621fdfdd7020568fd4813fcd",
+          "size_bytes": 1579
+        },
+        {
+          "path": "french.txt",
+          "sha256": "58ac7f7c074b70dc0fc86f6fcf40b2c227e9f95627e90e57971d5cce1e30e2e9",
+          "size_bytes": 813
+        },
+        {
+          "path": "german.txt",
+          "sha256": "f0c25acd7ec02a31f6679d9664ec5222ca846fdbc58db96160f4e7c0ddb0f7ea",
+          "size_bytes": 1362
+        },
+        {
+          "path": "greek.txt",
+          "sha256": "7a97c6dc81144f7e8fcfe976025954ca3731f78a75d1fd86aa87f261fd195dae",
+          "size_bytes": 2167
+        },
+        {
+          "path": "hungarian.txt",
+          "sha256": "64a68b5ebaa616b25bd976ac915c326f2ea8cce8b59a0ac8c5728b980ae4fb0c",
+          "size_bytes": 1227
+        },
+        {
+          "path": "italian.txt",
+          "sha256": "293d7841f198e4012f49e8e5653c3bfd073a58cea1259fa2c0fcec894167b628",
+          "size_bytes": 1654
+        },
+        {
+          "path": "mock.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        {
+          "path": "norwegian.txt",
+          "sha256": "f7e5b42208ccf1b1f282f9e0f8570e464272762bda5718b6b26750f510a688dc",
+          "size_bytes": 851
+        },
+        {
+          "path": "portuguese.txt",
+          "sha256": "6e7b98378c6b728266a83ebf035d927abf16b9e0d815d6204d81d90d896bcc9b",
+          "size_bytes": 1286
+        },
+        {
+          "path": "romanian.txt",
+          "sha256": "0ab53d21cbde00c6bf367706a0243c646140ba564cce7e83ac33d80f8923e957",
+          "size_bytes": 1910
+        },
+        {
+          "path": "russian.txt",
+          "sha256": "1743191192b4a4f77fcc216499455dc00c1b8626fdd407076a8deefff80e3d59",
+          "size_bytes": 1235
+        },
+        {
+          "path": "spanish.txt",
+          "sha256": "6125eadf28ba664a60bf4296147bcbd40b80be93670056fdb229960ac15e2310",
+          "size_bytes": 2176
+        },
+        {
+          "path": "swedish.txt",
+          "sha256": "2a9d9d756bc4257d49329994f805c712cd5ab6746162e2082752238766c1c0c8",
+          "size_bytes": 559
+        },
+        {
+          "path": "tamil.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        {
+          "path": "turkish.txt",
+          "sha256": "f2c7f0c2bd3dba42da700776266831853a3b5f1207fada5c15207334109abb57",
+          "size_bytes": 260
+        }
+      ],
+      "model_id": "Qdrant/bm25",
+      "offline_initialization_verified": true,
+      "snapshot_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/cache/fastembed/models--Qdrant--bm25/snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412",
+      "snapshot_revision": "22b8d2af71a76161e18dd432d2cee0eefa66e412",
+      "total_bytes": 25242
+    }
+  },
+  "spacy_model": {
+    "file_count": 26,
+    "files": [
+      {
+        "path": "LICENSE",
+        "sha256": "3933c176979b68bc6d0bcc902c7d6c130f1d127f476f17ba5cdba8d99cfd0012",
+        "size_bytes": 1056
+      },
+      {
+        "path": "LICENSES_SOURCES",
+        "sha256": "20d9dfacd215112251f15341edd1a47b1f98bf393a212f10f194ffdc7ee98a90",
+        "size_bytes": 2347
+      },
+      {
+        "path": "README.md",
+        "sha256": "91b0ed1742ea0803034b4d769c4536e88d9d4da7808d833f2a804b6c54aae220",
+        "size_bytes": 2587
+      },
+      {
+        "path": "accuracy.json",
+        "sha256": "e7572d7f2f3c18e9921471f9d0b3424f8cf7f1a909ae484fa10b780a13f4c676",
+        "size_bytes": 6341
+      },
+      {
+        "path": "attribute_ruler/patterns",
+        "sha256": "f8b97f7ebef9b8536bba5f0fc1e73af6183563e96e2325bcbb021b8c6dbc6683",
+        "size_bytes": 14735
+      },
+      {
+        "path": "config.cfg",
+        "sha256": "65c545ca2da5bd4b87b22d4917318605360b37dee6ed6b18516a036f87319f79",
+        "size_bytes": 5527
+      },
+      {
+        "path": "lemmatizer/lookups/lookups.bin",
+        "sha256": "eb64f40c0f8396d1762730c0ddf4dad2a52d138f5a389f71a1a1d088173b7737",
+        "size_bytes": 972893
+      },
+      {
+        "path": "meta.json",
+        "sha256": "7456349002fa8cf31111051bd37fdbea67a1b7f7a0a60ce235466f98a6758125",
+        "size_bytes": 10106
+      },
+      {
+        "path": "ner/cfg",
+        "sha256": "a7172edadafba9f472e9ac0f2660eec04b6405e471be9e20267b79c67288d22d",
+        "size_bytes": 221
+      },
+      {
+        "path": "ner/model",
+        "sha256": "cd93e9ca9126c69f1d10a1039ef67c3d9ec1223b44d079856705970f0f19ff4e",
+        "size_bytes": 6154601
+      },
+      {
+        "path": "ner/moves",
+        "sha256": "d82b13473ebd33e0396004dd22f00c71fe3c1251742bf1f7c4554f23fd3b0af4",
+        "size_bytes": 1064
+      },
+      {
+        "path": "parser/cfg",
+        "sha256": "e2a240ef01f95e58f5dd4c9d6e90d61f597b8d998966570d3009dd81e8879780",
+        "size_bytes": 222
+      },
+      {
+        "path": "parser/model",
+        "sha256": "e0098910535a863d430082ece57455d5fa071cd4ca3a0054e80582076c752b1e",
+        "size_bytes": 319909
+      },
+      {
+        "path": "parser/moves",
+        "sha256": "ec41318c32eb7f9e4d8f050b2e8466ee67954d2d3455c1aec73abf46c82dd67f",
+        "size_bytes": 1571
+      },
+      {
+        "path": "senter/cfg",
+        "sha256": "2a4db4a729b6469da1f87d71cc7cd3ed2a73360cc85326821e850836c4671103",
+        "size_bytes": 23
+      },
+      {
+        "path": "senter/model",
+        "sha256": "b69e7174a0b6307739adec3c8053ac45fdbad7171c4d3d8bfcd9713ecbc01f8c",
+        "size_bytes": 197089
+      },
+      {
+        "path": "tagger/cfg",
+        "sha256": "d484c3d9391f37bf9c727aa2eb4c477a24cb103020f95e52dc37842818b50118",
+        "size_bytes": 615
+      },
+      {
+        "path": "tagger/model",
+        "sha256": "1ec3d93f38cebe172f2b5c89d84be72856ce42c8f1a64f1699f1d98a771f36b7",
+        "size_bytes": 19829
+      },
+      {
+        "path": "tok2vec/cfg",
+        "sha256": "f8a5a26e3056eb6fb06deeb3dbccfd88ae74900200c98c70b5966bbb7ec9d4de",
+        "size_bytes": 4
+      },
+      {
+        "path": "tok2vec/model",
+        "sha256": "e84fc06eb319c94d28e460fc334e292120b01f18baa5dc8b50c977459820a090",
+        "size_bytes": 6269370
+      },
+      {
+        "path": "tokenizer",
+        "sha256": "b014e8bba4958b120af2d0c1c63eabb7c00379f2bacaf10df7c5325efd2ea467",
+        "size_bytes": 77066
+      },
+      {
+        "path": "vocab/key2row",
+        "sha256": "76be8b528d0075f7aae98d6fa57a6d3c83ae480a8469e668d7b0af968995ac71",
+        "size_bytes": 1
+      },
+      {
+        "path": "vocab/lookups.bin",
+        "sha256": "fce9c883c56165f29573cc938c2a1c9d417ac61bd8f56b671dd5f7996de70682",
+        "size_bytes": 70040
+      },
+      {
+        "path": "vocab/strings.json",
+        "sha256": "b1966d1f07a05b68576df07f43f40203b4e11124ad82cc839e8312ad8d7fdae7",
+        "size_bytes": 1103983
+      },
+      {
+        "path": "vocab/vectors",
+        "sha256": "14772b683e726436d5948ad3fff2b43d036ef2ebbe3458aafed6004e05a40706",
+        "size_bytes": 128
+      },
+      {
+        "path": "vocab/vectors.cfg",
+        "sha256": "ff4359091952c8cd16f1f0482f5770fb82d1707368d5cca3c46aa501f552e3c5",
+        "size_bytes": 22
+      }
+    ],
+    "model_data_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0",
+    "model_package": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/.venv/lib/python3.12/site-packages/en_core_web_sm/__init__.py",
+    "model_version": "3.8.0",
+    "spacy": "3.8.16"
+  },
+  "environment_difference": "Both v26 arms use the same isolated Python 3.12.11 environment; prior runs used Python 3.11. Original environment untouched.",
+  "dependency_lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1",
+  "existing_dependency_versions_changed": {},
+  "added_dependency_versions": {
+    "annotated-doc": "0.0.5",
+    "backoff": "2.2.1",
+    "blis": "1.3.3",
+    "catalogue": "2.0.10",
+    "cloudpathlib": "0.25.0",
+    "confection": "1.3.3",
+    "cymem": "2.0.13",
+    "fastembed": "0.8.1",
+    "flatbuffers": "25.12.19",
+    "grpcio": "1.84.0",
+    "h2": "4.4.1",
+    "hpack": "4.2.0",
+    "hyperframe": "6.1.0",
+    "loguru": "0.7.3",
+    "markdown-it-py": "4.2.0",
+    "mdurl": "0.1.2",
+    "mem0ai": "2.1.0",
+    "mmh3": "5.3.0",
+    "murmurhash": "1.0.15",
+    "onnxruntime": "1.30.0",
+    "pillow": "12.3.0",
+    "portalocker": "3.2.0",
+    "posthog": "7.60.1",
+    "preshed": "3.0.13",
+    "protobuf": "6.33.6",
+    "py-rust-stemmers": "0.1.8",
+    "pytz": "2026.4",
+    "qdrant-client": "1.19.1",
+    "rich": "15.0.0",
+    "setuptools": "84.0.0",
+    "shellingham": "1.5.4",
+    "smart-open": "8.0.1",
+    "spacy": "3.8.16",
+    "spacy-legacy": "3.0.12",
+    "spacy-loggers": "1.0.5",
+    "sqlalchemy": "2.1.1",
+    "srsly": "2.5.3",
+    "thinc": "8.3.13",
+    "typer": "0.27.2",
+    "wasabi": "1.1.3",
+    "weasel": "1.0.0",
+    "win32-setctime": "1.2.0",
+    "wrapt": "2.5.0"
+  },
+  "environment_reference_path": "artifacts/ser-v20/environment-before.json",
+  "environment_reference_sha256": "8aba502900721b86dc778783cc6d59013a7691666b81e82fc86aadbe58f4d9b6",
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 837,
+    "generation": {
+      "charged_tokens": 983553,
+      "known_tokens": 983553,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 8948,
+      "known_tokens": 8948,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "previous_exact_reads": 107,
+  "all_native_model_and_embedding_calls_counted": true,
+  "judge_requests": 0,
+  "model_concurrency": 1,
+  "runtime_reads_rubric": false,
+  "unseen": false,
+  "vllm_settings_changed": false,
+  "product_migration": false,
+  "master_goal_complete": false
+}

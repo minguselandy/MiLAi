@@ -97,17 +97,21 @@ def open_persistent_state(
 
 def build_agent(
     model: VLLMChatModel,
-    store: BaseStore,
+    store: BaseStore | None,
     checkpointer: BaseCheckpointSaver[str],
     business_tools: Sequence[BaseTool] = (),
     business_call_wrapper: ToolCallWrapper | None = None,
     environment_rules: str = "",
     observer: ProvenanceObserver | None = None,
+    memory_tools: Sequence[BaseTool] | None = None,
+    system_prompt: str = SYSTEM_PROMPT,
 ) -> Any:
     """Use upstream tool schema and instructions without a local memory policy."""
     tools = [
-        create_manage_memory_tool(namespace=MEMORY_NAMESPACE),
-        create_search_memory_tool(namespace=MEMORY_NAMESPACE),
+        *(memory_tools if memory_tools is not None else (
+            create_manage_memory_tool(namespace=MEMORY_NAMESPACE),
+            create_search_memory_tool(namespace=MEMORY_NAMESPACE),
+        )),
         *business_tools,
     ]
     parameter_schemas = {
@@ -139,7 +143,7 @@ def build_agent(
     return create_react_agent(
         model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
-        prompt=SYSTEM_PROMPT + ("\n" + environment_rules if environment_rules else ""),
+        prompt=system_prompt + ("\n" + environment_rules if environment_rules else ""),
         store=store,
         checkpointer=checkpointer,
         version="v1",

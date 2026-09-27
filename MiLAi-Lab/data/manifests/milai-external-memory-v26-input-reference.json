@@ -1,0 +1,56 @@
+{
+  "kind": "MILAI_EXTERNAL_MEMORY_V26_INPUT_REFERENCE",
+  "status": "FIXED_BEFORE_ADAPTER_COMPLETION_AND_REAL_CALLS",
+  "goal_path": "docs/MILAI_EXTERNAL_MEMORY_V26_GOAL.md",
+  "reference_commit": "5e49cf9a7a2cc6eef78f0b76c089c2f1c95e70a8",
+  "inputs_path": "data/diagnostics/milai-lifecycle-v24-formation-inputs.json",
+  "inputs_sha256": "f3816265c6c96f8004229c3f86a0039556fd0caf741cd66cce61c906ec0e8279",
+  "rubric_path": "data/diagnostics/milai-lifecycle-v24-formation-rubric.json",
+  "rubric_sha256": "491d1c434c76f1afd56645ea2b428f8429e0c94916179783dace2da58ce970f9",
+  "diagnostic_freeze_path": "data/manifests/milai-lifecycle-v24-formation-diagnostic-freeze.json",
+  "diagnostic_freeze_sha256": "8b24c28925113a5817c37391d6f0b5d10445b87bde4f6e7e9a8af1d9fafba494",
+  "cases": [
+    "f01_future_agreement",
+    "f02_business_receipt",
+    "f03_temporary_calculation",
+    "f04_one_time_format"
+  ],
+  "sessions_per_arm": 6,
+  "public_messages_per_arm": 6,
+  "run_order": [
+    "b1_control",
+    "mem0_native_autoadd"
+  ],
+  "primary_denominators": {
+    "prospective_formation_denominator": 2,
+    "unnecessary_storage_denominator": 2
+  },
+  "secondary_denominators": {
+    "later_utility_denominator": 2,
+    "semantic_case_denominator": 4
+  },
+  "unseen": false,
+  "runtime_reads_rubric": false,
+  "new_benchmark_samples": 0,
+  "system_comparison_not_ser_ablation": true,
+  "native_ingestion": {
+    "trigger": "after each successfully completed public turn, including controls and later queries",
+    "messages": [
+      "actual user text",
+      "actual final assistant text"
+    ],
+    "infer": true,
+    "raw_tool_messages_included": false,
+    "synthetic_assistant_tool_serialization": false,
+    "pending_ingestion": "UNKNOWN_NO_AUTOMATIC_RETRY"
+  },
+  "cost_origin_start": {
+    "generation_requests": 837,
+    "generation_tokens": 983553,
+    "embedding_tokens": 8948,
+    "exact_reads": 107
+  },
+  "model_concurrency": 1,
+  "vllm_settings_changed": false,
+  "master_goal_complete": false
+}

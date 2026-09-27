@@ -94,6 +94,7 @@ class VLLMClient:
         *,
         tool_choice: str | None = None,
         response_format: dict[str, Any] | None = None,
+        top_p: float | None = None,
     ) -> dict[str, Any]:
         request: dict[str, Any] = {
             "model": self.config.model,
@@ -108,6 +109,8 @@ class VLLMClient:
         if tools:
             request["tools"] = list(tools)
             request["tool_choice"] = tool_choice or "auto"
+        if top_p is not None:
+            request["top_p"] = top_p
         selected_format = (
             response_format if response_format is not None else self.config.response_format
         )

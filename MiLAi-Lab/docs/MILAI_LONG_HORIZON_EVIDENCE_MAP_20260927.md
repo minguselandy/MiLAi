@@ -14,7 +14,7 @@
 | §30同域四臂Pareto | [短四臂](MILAI_APPLICATION_V25_SHORT_RESULTS_20260927.md)，B1/A3/A4/A5为7/9、7/9、9/9、8/9 | 质量/tokens两轴B1/A4非支配；A5少get是第三轴权衡；long成本差受fresh-session循环混杂 |
 | §43非benchmark可用性 | v25五阶段/九消息，真实SQLite副作用、partial failure、restart、CRUD、新session和两用户 | 八条实际运行及必要窄检查完成；保留普通Host取证、维护与容量失败，不宣称可靠Agent |
 | §19至少两个模型族 | 当前真实研究仅本地Qwen；独立端点信息已请求 | 未完成；不能把subagent推理充作同合同模型评价 |
-| P10 external baselines | 公开LangMem B1已作为实际对照；Mem0/Memobase/Graphiti源码有固定来源 | 其他系统尚未做同域效果比较；源码借鉴不是实验对照 |
+| P10 external baselines | 公开LangMem B1已实际运行；[v26](MILAI_EXTERNAL_MEMORY_V26_GOAL.md)开始原四例B1/Mem0 native形成系统对照开发 | 尚未真实运行；ADD-only摄取不冒充v25同ID修订，源码借鉴不是实验对照 |
 | §18/42广泛鲁棒性 | 主未见效果尚未成立 | 不进行参数/密度/比例大扫描来寻找最好结果；保留第二模型明确缺口和独立历史边界 |
 | §28–29完整质量/适应/保持/currentness/费用 | [v25完整manifest](../data/manifests/milai-application-v25-results.json)含逐消息/阶段、投影、observer、延迟/存储 | 已汇总；连续837生成/983553tokens/8948embeddingtokens/107get；语义refresh贡献UNKNOWN，不能冒充因果precision |
 | §44 Product迁移 | 稳定未见收益前提不满足 | NO-GO，Product不改 |

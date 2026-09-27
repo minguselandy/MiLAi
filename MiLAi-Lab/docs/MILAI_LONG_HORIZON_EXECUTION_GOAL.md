@@ -26,7 +26,7 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 | P7 | 已暴露12-case和MERIT arc0回归，保留原失败/费用与matched基线 | 开发验证完成：[R3](MILAI_SER_V22_P7_R3_RESULTS_20260927.md)诊断7/12，MERIT4/5；固定B1参考8/12、4/5，原失败保留；无端到端收益结论 |
 | P8 | 方法收敛与formal freeze，逐项满足§25条件 | [九项判定与方法冻结](MILAI_SER_V22_P8_METHOD_FREEZE.md)完成，允许小规模检验；不等于最终质量GO |
 | P9 | 运行前选择冻结的unseen matched evaluation，B1/lite/full输入与scorer一致 | [v23六条已完成](MILAI_SER_V23_RESULTS_20260927.md)：B1 6/10，A3/A4各7/10，0自然refresh/rebase；负面证据保留，PIVOT至生命周期 |
-| P10 | external baselines、至少两模型族、历史/密度/版本比例鲁棒性及参数边界 | 稳定主效果未建立；第二模型独立端点已异步请求，其余工作继续，未标完成 |
+| P10 | external baselines、至少两模型族、历史/密度/版本比例鲁棒性及参数边界 | [v26外部形成对照](MILAI_EXTERNAL_MEMORY_V26_GOAL.md)开始适配；原四例B1/Mem0 native小规模系统比较。第二模型独立端点仍未获得；广泛扫描条件未触发，不标完成 |
 | P11 | Formation与Post-Action Reconciliation独立Goal/机制/评估，不能混同SER收益 | [v24独立Goal](MILAI_LIFECYCLE_V24_GOAL.md)负结果完成；F三候选均0/2，R1/R2均2/3且必要更新0/1；[R2](MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS_20260927.md)原文送达仍无收益，停止F/R提示家族。显式控制0/1→合同澄清1/1独立保留 |
 | P12 | 论文级质量—成本Pareto、错误边界、真实Agent脚本工作负载和复现交付 | [v25结果](MILAI_APPLICATION_V25_RESULTS_20260927.md)完成八条预冻结轨迹；短四臂7/9、7/9、9/9、8/9，中B1/A4为7/9、8/9，长7/9、9/9；Pareto/错误链/复现完成，Luna发布随本交付 |
 
@@ -59,3 +59,5 @@ R1与明确用户要求的update控制后连续650生成/586650tokens/5770embedd
 R2原content试验已完成，严格2/3、必要更新0/1，两次提示四条原文均实际送达。停止F/R提示家族；连续671生成/604171tokens/6104embeddingtokens/75get。接着开发P12五阶段/九消息的持久应用，冻结B1/A3/A4/A5同域短脚本，再做必要历史边界；不继续措辞试探、重复CRUD检查或扩大benchmark。P10第二模型缺口仍保留，master ACTIVE。
 
 P12 v25开发和八条冻结运行已完成，连续837生成/983553tokens/8948embeddingtokens/107get。八条均保留部分失败副作用、同ID恢复、用户隔离及删除/保持；Host70/72、严格62/72，不能当作独立样本汇总收益。short A3/long B1容量失败、A5错key、medium两臂虚构业务ID均保留。全部八条phase0/4首wire逐字段相同，fresh-session轨迹差异解释部分质量与费用差额。源码不变，§38/39条件未触发，无追加模型调用。Luna发布结果、复现和证据表；P10第二模型及其他外部matched比较未完成，master继续ACTIVE。
+
+v25已发布并核对远端`5e49cf9a7a2cc6eef78f0b76c089c2f1c95e70a8`。P10源码核对发现固定Mem0原生ADD-only语义不等于v25同IDrevision，因此不伪造同源CRUD比较。转向独立v26原四例形成任务：两臂各六消息、相同实际用户/业务任务与rubric，原生user+final assistant自动摄取、公开管理/搜索接口，完整计入额外模型成本。先薄适配开发/窄验证/冻结，再真实运行；第二模型资源问题不阻塞这项独立工作。

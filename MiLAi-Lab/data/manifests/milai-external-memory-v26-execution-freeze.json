@@ -1,0 +1,250 @@
+{
+  "kind": "MILAI_EXTERNAL_MEMORY_V26_EXECUTION_FREEZE",
+  "status": "FROZEN_BEFORE_FIRST_REAL_REQUEST",
+  "created_at": "2026-09-27T02:03:04.326674+00:00",
+  "protocol_path": "data/manifests/milai-external-memory-v26-protocol.json",
+  "protocol_sha256": "5561d5e214a435555d012b4b26abed29cdc676d68941f505037d0a2ec5eb2040",
+  "lock_path": "data/locks/milai-external-memory-v26.lock.json",
+  "lock_sha256": "f559887e0a781943afcfd0f8a586588aa4a785e13291ee64b0b53dabd3337191",
+  "source_mapping_sha256": "37e57b17808d9378111032de11ba66960280620586b1a2a9586e4e81aaffc4cb",
+  "python": "artifacts/external-memory-v26/.venv/bin/python",
+  "source_verification": {
+    "status": "SOURCE_READY_ZERO_MODEL",
+    "method": "external_memory_v26",
+    "real_generation_requests": 0,
+    "real_embedding_requests": 0,
+    "environment_receipt_sha256": "8ceb0360a33ca40f4200bc0a1eb4173915419b8710b4a6db54959a1d063993d6",
+    "source_files": [
+      ".github/workflows/ci.yml",
+      "pyproject.toml",
+      "uv.lock",
+      "configs/milai-external-memory-v26.json",
+      "src/milai_lab/baselines/langmem_agent.py",
+      "src/milai_lab/providers/contextual_vllm.py",
+      "src/milai_lab/runners/langmem_diagnostic.py",
+      "src/milai_lab/runners/mem0_native.py",
+      "src/milai_lab/runners/mem0_identity.py",
+      "tools/run_milai_external_memory_v26.py"
+    ],
+    "new_validation_files": [
+      "tests/unit/test_external_memory_v26.py"
+    ],
+    "checks": [
+      {
+        "command": "artifacts/external-memory-v26/.venv/bin/pytest -q tests/unit/test_external_memory_v26.py",
+        "result": "PASS 4; official Mem0 infer=True add, scoped search, BM25 sparse vectors, linked entities, native persistence/restart, actual top_p wire, no embedding dimensions, batch order and charged usage verified with fake HTTP responses"
+      },
+      {
+        "command": ".venv/bin/pytest -q tests/unit/test_external_memory_v26.py",
+        "result": "PASS 3, SKIP 1 official SDK integration absent from standard environment"
+      },
+      {
+        "command": ".venv/bin/pytest -q tests/unit/test_langmem_foundation.py::test_json_action_executes_every_upstream_call_in_order tests/unit/test_langmem_foundation.py::test_upstream_manage_search_preserves_public_null_and_id_behavior",
+        "result": "PASS 2; default B1 tools and execution path"
+      },
+      {
+        "command": ".venv/bin/ruff check src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/contextual_vllm.py tools/run_milai_external_memory_v26.py tests/unit/test_external_memory_v26.py",
+        "result": "PASS"
+      },
+      {
+        "command": ".venv/bin/mypy --follow-imports=silent src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/contextual_vllm.py tools/run_milai_external_memory_v26.py",
+        "result": "PASS 6 source files"
+      },
+      {
+        "command": ".venv/bin/milai-lab-check-boundary",
+        "result": "PASS active package has no private product or legacy imports"
+      },
+      {
+        "command": "artifacts/external-memory-v26/.venv/bin/python tools/run_milai_external_memory_v26.py --help",
+        "result": "PASS prepare/run CLI"
+      }
+    ],
+    "resource_finding": "FastEmbed 0.8.1 silently disables BM25 when its local Qdrant/bm25 snapshot lacks required compatibility files. The isolated cache and environment receipt now include mock.file and tamil.txt; runtime verifies sparse slot and encoder before any model call and emits native configuration/cost event.",
+    "package_build": "WAITING_FOR_ROOT_SOURCE_LOCK"
+  },
+  "package_verification": {
+    "status": "PASS",
+    "stage": "MILAI_EXTERNAL_MEMORY_V26_FROZEN",
+    "lock": "data/locks/milai-external-memory-v26.lock.json",
+    "lock_sha256": "f559887e0a781943afcfd0f8a586588aa4a785e13291ee64b0b53dabd3337191",
+    "source_mapping_sha256": "37e57b17808d9378111032de11ba66960280620586b1a2a9586e4e81aaffc4cb",
+    "identity_check": "PASS: verify_external_v26_lock for both b1_control and mem0_native_autoadd",
+    "build": {
+      "command": "uv build --out-dir artifacts/external-memory-v26/dist",
+      "result": "PASS: one build after v26 source lock",
+      "sdist": "artifacts/external-memory-v26/dist/milai_lab-0.1.0.tar.gz",
+      "sdist_sha256": "e62d85918fd768717660f61a11debb543f34f561b16a1f65a5bf97896c498e1c",
+      "wheel": "artifacts/external-memory-v26/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "wheel_sha256": "15e2896b20161d001bbd6fdcaeb767f643efda760d0662c0f6294792197a26d8"
+    },
+    "members": {
+      "sdist_file_count": 1867,
+      "wheel_file_count": 142,
+      "required_sdist_present": [
+        "configs/milai-external-memory-v26.json",
+        "data/locks/milai-external-memory-v26.lock.json",
+        "data/manifests/milai-external-memory-v26-protocol.json",
+        "data/manifests/milai-external-memory-v26-input-reference.json",
+        "data/diagnostics/milai-lifecycle-v24-formation-inputs.json",
+        "data/diagnostics/milai-lifecycle-v24-formation-rubric.json",
+        "data/manifests/milai-lifecycle-v24-formation-diagnostic-freeze.json",
+        "tools/run_milai_external_memory_v26.py",
+        "src/milai_lab/runners/mem0_native.py",
+        "src/milai_lab/runners/mem0_identity.py",
+        "tests/unit/test_external_memory_v26.py",
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "required_wheel_present": [
+        "milai_lab/runners/mem0_native.py",
+        "milai_lab/runners/mem0_identity.py",
+        "milai_lab/runners/langmem_diagnostic.py",
+        "milai_lab/providers/contextual_vllm.py",
+        "milai_lab/baselines/langmem_agent.py"
+      ],
+      "private_or_generated_members": [],
+      "rubric_in_sdist": true,
+      "rubric_in_wheel": false,
+      "rubric_read_by_runtime": false
+    },
+    "model_requests": 0,
+    "embedding_requests": 0,
+    "source_writes_after_lock": 0
+  },
+  "runs": [
+    {
+      "run_id": "external-memory-v26-b1-r1",
+      "arm": "b1_control",
+      "directory": "artifacts/external-memory-v26/external-memory-v26-b1-r1",
+      "options": [
+        "--config",
+        "artifacts/external-memory-v26/external-memory-v26-b1-r1/config.json",
+        "--lock",
+        "data/locks/milai-external-memory-v26.lock.json",
+        "--diagnostic-inputs",
+        "data/diagnostics/milai-lifecycle-v24-formation-inputs.json",
+        "--diagnostic-freeze",
+        "data/manifests/milai-lifecycle-v24-formation-diagnostic-freeze.json",
+        "--run",
+        "external-memory-v26-b1-r1",
+        "--arm",
+        "b1_control"
+      ],
+      "initial_namespace_items": 0,
+      "runtime_root": "artifacts/external-memory-v26/runtime/external-memory-v26-b1-r1",
+      "config_sha256": "c109af29f6f38a22462e65b434ab708a4deb4d58a80b113426be3e037f1b7403",
+      "prepared_sha256": "77189b17d66f010f1d1743044c2a5c4cb6f8fb5a79fcb8ee6bdadc80f120ad80",
+      "result_manifest": "data/manifests/milai-external-memory-v26-b1-results.json"
+    },
+    {
+      "run_id": "external-memory-v26-mem0-r1",
+      "arm": "mem0_native_autoadd",
+      "directory": "artifacts/external-memory-v26/external-memory-v26-mem0-r1",
+      "options": [
+        "--config",
+        "artifacts/external-memory-v26/external-memory-v26-mem0-r1/config.json",
+        "--lock",
+        "data/locks/milai-external-memory-v26.lock.json",
+        "--diagnostic-inputs",
+        "data/diagnostics/milai-lifecycle-v24-formation-inputs.json",
+        "--diagnostic-freeze",
+        "data/manifests/milai-lifecycle-v24-formation-diagnostic-freeze.json",
+        "--run",
+        "external-memory-v26-mem0-r1",
+        "--arm",
+        "mem0_native_autoadd"
+      ],
+      "initial_namespace_items": 0,
+      "runtime_root": "artifacts/external-memory-v26/runtime/external-memory-v26-mem0-r1",
+      "config_sha256": "266abdee41e839d863b30b58366d3041f4a7d10a9654ee50e2f51580c262c40f",
+      "prepared_sha256": "37b8a50aff9e17a460e1df19e55d87c2241d27ee23971a71635a658bc8fcccf5",
+      "result_manifest": "data/manifests/milai-external-memory-v26-mem0-results.json"
+    }
+  ],
+  "budget_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 837,
+    "generation": {
+      "charged_tokens": 983553,
+      "known_tokens": 983553,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 8948,
+      "known_tokens": 8948,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "model_concurrency": 1,
+  "environment_receipt_sha256": "8ceb0360a33ca40f4200bc0a1eb4173915419b8710b4a6db54959a1d063993d6",
+  "vllm_settings_changed": false,
+  "unseen": false,
+  "master_goal_complete": false
+}

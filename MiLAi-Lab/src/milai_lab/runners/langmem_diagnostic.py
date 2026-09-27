@@ -15,6 +15,7 @@ from langgraph.store.base import BaseStore
 
 from milai_lab.baselines.langmem_agent import (
     RECIPE_ID,
+    SYSTEM_PROMPT,
     FoundationScope,
     build_agent,
     invoke_or_resume_public_message,
@@ -49,7 +50,7 @@ def run_frozen_diagnostics(
     output: Path,
     run_id: str,
     model: VLLMChatModel,
-    store: BaseStore,
+    store: BaseStore | None,
     checkpointer: BaseCheckpointSaver[str],
     config_identity: dict[str, Any],
     selected_cases: set[str] | None = None,
@@ -59,6 +60,7 @@ def run_frozen_diagnostics(
     protocol_id: str | None = None,
     request_view_factory: Callable[[BusinessActionJournal, Any,
                                     ProvenanceObserver | None], Any] | None = None,
+    external_memory: Any = None,
 ) -> dict[str, Any]:
     freeze = read_json(freeze_path)
     if hashlib.sha256(inputs_path.read_bytes()).hexdigest() != freeze["inputs_file_sha256"]:
@@ -100,9 +102,15 @@ def run_frozen_diagnostics(
                                         [item.name for item in tools])
         if request_view_factory is not None:
             model.request_view = request_view_factory(journal, model.client.emit, observer)
-        agent = build_agent(model, store, checkpointer, tools,
-                            business_call_wrapper=journal, observer=observer,
-                            environment_rules=environment_rules)
+        agent = build_agent(
+            model, store, checkpointer, tools,
+            business_call_wrapper=journal, observer=observer,
+            environment_rules=environment_rules,
+            memory_tools=(external_memory.tools(case["id"])
+                          if external_memory is not None else None),
+            system_prompt=(external_memory.system_prompt
+                           if external_memory is not None else SYSTEM_PROMPT),
+        )
         summary: dict[str, Any] = {"id": case["id"], "status": "RUNNING", "sessions": []}
         try:
             for declared in case["sessions"]:
@@ -126,19 +134,29 @@ def run_frozen_diagnostics(
                         agent, model, scope, declared["turns"][index]["text"], index, pending,
                         task_id=f"diagnostic:{case['id']}",
                     )
+                    if external_memory is not None:
+                        external_memory.after_turn(
+                            case["id"], scope, index,
+                            declared["turns"][index]["text"], messages)
                     progress["next_turn"] = index + 1
                     progress["pending_turn"] = None
                     write_json(progress_path, progress)
                 if not messages:
                     messages = agent.get_state(scope.config()).values["messages"]
                 namespace = ("langmem", run_id, arm_id, f"diagnostic:{case['id']}")
+                if external_memory is not None:
+                    memories = external_memory.snapshot(case["id"])
+                else:
+                    if store is None:
+                        raise ValueError("DIAGNOSTIC_STORE_MISSING")
+                    memories = [item.dict() for item in store.search(namespace, limit=1000)]
                 row = {
                     "session_id": session_id,
                     "public_turn_count": len(declared["turns"]),
                     "messages": [message.model_dump(mode="json") for message in messages],
                     "business_calls": journal.calls_for_thread(
                         scope.config()["configurable"]["thread_id"]),
-                    "memories": [item.dict() for item in store.search(namespace, limit=1000)],
+                    "memories": memories,
                     "budget": copy.deepcopy(model.client.budget.state)
                     if model.client.budget else None,
                 }

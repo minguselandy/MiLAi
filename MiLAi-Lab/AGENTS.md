@@ -223,6 +223,18 @@ all lengths do not trigger master capsule/action-grounding conditions. Luna publ
 and reproduction. P10 second-model endpoint and other external matched comparisons remain
 unfinished; the master Goal must not be marked complete with those gaps.
 
+After v25 publication `5e49cf9`, [P10 external memory v26](docs/MILAI_EXTERNAL_MEMORY_V26_GOAL.md)
+is active. Implement one native Mem0 OSS automatic-ingestion comparison against public LangMem
+B1 on the original four exposed v24 Formation cases, six messages per arm. This is a system-level
+comparison, not a SER ablation or managed Mem0 benchmark reproduction. Keep native infer=True
+ingestion of actual user/final-assistant pairs and default search20/0.1; do not turn raw tool
+receipts into synthetic assistant evidence. Mem0/Host internal calls and embedding all use the
+existing service contracts and Root's continuous ledger/concurrency1. Sol owns thin adapters,
+source/config/dependency declarations and narrow offline checks; Luna high downloads dependencies
+into an isolated environment and publishes. Root freezes inputs/model contracts/source before
+real calls. Preserve all old source locks/results and F/R negative conclusions, no vLLM changes,
+fresh fixtures, extra cue or broad tests. The separate second-model endpoint remains unavailable.
+
 The user reopened work with [v19 repair](docs/v19修复.md), tracked in
 [the repair Goal](docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_GOAL.md). This supersedes the
 old V5 restriction for this new scope: run the existing freshness_only on the three frozen
