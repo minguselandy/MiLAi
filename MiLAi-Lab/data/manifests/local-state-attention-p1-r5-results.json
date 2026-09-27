@@ -1,0 +1,315 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P1_R5_RESULTS",
+  "status": "COMPLETE_WITH_SEMANTIC_FAILURES",
+  "runs": [
+    {
+      "run_id": "lsa-p1-partial-local_all_sources-r5",
+      "arm": "local_all_sources",
+      "source_commit": "51244424def98b6acde7be9ffd18e2f5d5309581",
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "task_strict_passed": 4,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 10,
+          "tokens": 11508,
+          "wall_seconds": 15.718694064300507
+        },
+        "task_host": {
+          "actual_http": 10,
+          "tokens": 13486,
+          "wall_seconds": 5.401213617995381
+        },
+        "embedding": {
+          "actual_http": 1,
+          "tokens": 44,
+          "wall_seconds": 0.2878721924498677
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 105,
+          "failures": 0,
+          "cpu_ns": 163096413,
+          "wall_ns": 190489688,
+          "request_bytes": 19841,
+          "result_bytes": 17783
+        },
+        "search": {
+          "calls": 101,
+          "failures": 0,
+          "cpu_ns": 52673051,
+          "wall_ns": 91127352,
+          "request_bytes": 13393,
+          "result_bytes": 128318
+        },
+        "put": {
+          "calls": 39,
+          "failures": 0,
+          "cpu_ns": 12697069,
+          "wall_ns": 78174077,
+          "request_bytes": 25445,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 170
+        },
+        "events": {
+          "records": 11,
+          "logical_value_bytes": 5321
+        },
+        "states": {
+          "records": 2,
+          "logical_value_bytes": 2523
+        }
+      },
+      "degraded_views": 0,
+      "empty_views": 0,
+      "empty_controller_focus": 4,
+      "pending_events": 0,
+      "world_attempts": {
+        "reserve_and_label": 2,
+        "complete_label": 1
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "de6190ac77d51280a7f8b35becf956c8e3f94647f81d3360c3daa29104c765dc",
+        "trace.jsonl": "1bb5ee783beb1ed587bfc0d1079ebb69edbc53383387fe4f8b0ae15b1b65648e",
+        "phase-0-result.json": "c6406b7dd43dacb61c49dc7d62e631a614a0fdd4fc586262ab05a0dfb05dd06e",
+        "phase-1-result.json": "32ce5225004efe28c974019d069a4a2fcc5e75fb54236064b5c10b413dd0ad66",
+        "phase-0-store-snapshot.json": "f8aa57fc8fd3fc4e7251e4facebdda86dd80e3ef90ef9bd049cd311578959069",
+        "phase-1-store-snapshot.json": "8a79733d79df6a8513a08eb4a2916775fb83ce6a88efdf9f88fbea8fdb5659a4"
+      },
+      "source_delivery": {
+        "views": 10,
+        "activated_views": 5,
+        "expanded_event_deliveries": 12,
+        "source_utf8_bytes": 5819,
+        "omitted_events": 0,
+        "missing_events": 0,
+        "deleted_events": 0,
+        "invalid_refs": 0,
+        "body_bytes_match_original": true
+      }
+    },
+    {
+      "run_id": "lsa-p1-partial-local_all-r5",
+      "arm": "local_all",
+      "source_commit": "51244424def98b6acde7be9ffd18e2f5d5309581",
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "task_strict_passed": 3,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 10,
+          "tokens": 11086,
+          "wall_seconds": 14.866509270388633
+        },
+        "task_host": {
+          "actual_http": 10,
+          "tokens": 10782,
+          "wall_seconds": 5.212905324064195
+        },
+        "embedding": {
+          "actual_http": 1,
+          "tokens": 44,
+          "wall_seconds": 0.03805789723992348
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 80,
+          "failures": 0,
+          "cpu_ns": 46253830,
+          "wall_ns": 67305055,
+          "request_bytes": 13650,
+          "result_bytes": 10117
+        },
+        "search": {
+          "calls": 101,
+          "failures": 0,
+          "cpu_ns": 51655531,
+          "wall_ns": 88020231,
+          "request_bytes": 11777,
+          "result_bytes": 122538
+        },
+        "put": {
+          "calls": 37,
+          "failures": 0,
+          "cpu_ns": 11954098,
+          "wall_ns": 65068318,
+          "request_bytes": 23031,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "events": {
+          "records": 11,
+          "logical_value_bytes": 5160
+        },
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 204
+        },
+        "states": {
+          "records": 2,
+          "logical_value_bytes": 2085
+        }
+      },
+      "degraded_views": 1,
+      "empty_views": 0,
+      "empty_controller_focus": 2,
+      "pending_events": 1,
+      "world_attempts": {
+        "reserve_and_label": 2,
+        "complete_label": 1
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "54a080d7cd15ba52c5f1bfad06f1160d293f229fb84c5a377a5f34dc5bf2432f",
+        "trace.jsonl": "d9ea5f12bdac35b652c1423a96764b03d9afe30e994f686ba41084181687ccc6",
+        "phase-0-result.json": "d3596f4074ea671529125fedfcf20dd4ac1cb8d0eecc79499ab5499c902d2998",
+        "phase-1-result.json": "32b361e626668078475a157d2592d752572956ce937c439ec1ac8123dced9fe3",
+        "phase-0-store-snapshot.json": "6ec55e51d1756256fcdc46ad2898d860a66ac0833ed36f4136c7c79c20636127",
+        "phase-1-store-snapshot.json": "39db22b292771b9e0b5a55c0350cfc8eb08678e658295d5f5a0c2b757026d215"
+      },
+      "source_delivery": {
+        "views": 10,
+        "activated_views": 0,
+        "expanded_event_deliveries": 0,
+        "source_utf8_bytes": 0,
+        "omitted_events": 0,
+        "missing_events": 0,
+        "deleted_events": 0,
+        "invalid_refs": 0,
+        "body_bytes_match_original": true
+      }
+    }
+  ],
+  "by_role": {
+    "state_control": {
+      "actual_http": 20,
+      "tokens": 22594,
+      "wall_seconds": 30.58520333468914
+    },
+    "task_host": {
+      "actual_http": 20,
+      "tokens": 24268,
+      "wall_seconds": 10.614118942059577
+    },
+    "embedding": {
+      "actual_http": 2,
+      "tokens": 88,
+      "wall_seconds": 0.3259300896897912
+    }
+  },
+  "task_score": {
+    "local_all_sources": {
+      "passed": 4,
+      "total": 6
+    },
+    "local_all": {
+      "passed": 3,
+      "total": 6
+    }
+  },
+  "whole_trajectories": {
+    "local_all_sources": {
+      "passed": 0,
+      "total": 1
+    },
+    "local_all": {
+      "passed": 0,
+      "total": 1
+    }
+  },
+  "recovery_actual_get_and_same_id_label": {
+    "local_all_sources": true,
+    "local_all": false
+  },
+  "generation_delta": {
+    "calls": 40,
+    "tokens": 46862
+  },
+  "embedding_delta": {
+    "calls": 2,
+    "tokens": 88
+  },
+  "continuous_budget": {
+    "generation_requests": 1119,
+    "generation_tokens": 1347149,
+    "embedding_tokens": 10919
+  },
+  "limits": [
+    "One exposed repetition with independent online State formation.",
+    "Both initial Mira item keys are singular instead of the exact user name; both Noel keys are wrong.",
+    "Successful recovery cannot erase wrong initial business arguments.",
+    "No claim of stable source or attention efficacy; full strict P1 remains incomplete."
+  ],
+  "decision": "Keep minimal source expansion available; stop wording-only controller revisions and proceed to strong G/L implementation plus small wiring, not broad benchmark."
+}

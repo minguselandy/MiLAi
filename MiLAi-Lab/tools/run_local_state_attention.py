@@ -11,7 +11,7 @@ import subprocess
 import sys
 from dataclasses import replace
 from pathlib import Path
-from typing import Any
+from typing import Any, TypedDict
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank
@@ -22,8 +22,18 @@ from milai_lab.runners.langmem_application_runtime import open_application_runti
 
 LAB = Path(__file__).resolve().parents[1]
 READ_POLICIES = {"local_state": "focus", "local_all": "all",
-                 "local_all_sources": "all_sources"}
+                 "local_all_sources": "all_sources",
+                 "global_note_sources": "all_sources"}
 ARMS = ("b1_control", *READ_POLICIES)
+SHARED_CONTENT_LIMIT_ARMS = {"local_all_sources", "global_note_sources"}
+
+
+class ContentLimits(TypedDict):
+    max_states: int
+    max_state_content_chars: int
+    max_total_content_chars: int | None
+
+
 SOURCE_PATHS = (*sorted(
     str(path.relative_to(LAB)) for path in (LAB / "src/milai_lab").rglob("*.py")
 ), "tools/run_local_state_attention.py", "pyproject.toml")
@@ -31,6 +41,23 @@ SOURCE_PATHS = (*sorted(
 
 def _sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _content_limits(arm: str, config: dict[str, Any]) -> ContentLimits:
+    settings = config["control"]
+    aggregate = (settings.get("aggregate_content_chars")
+                 if arm in SHARED_CONTENT_LIMIT_ARMS else None)
+    if (aggregate is not None and (type(aggregate) is not int or aggregate <= 0)):
+        raise ValueError("LSA_AGGREGATE_CONTENT_LIMIT_INVALID")
+    if arm == "global_note_sources":
+        if aggregate is None:
+            raise ValueError("LSA_GLOBAL_NOTE_CONTENT_LIMIT_MISSING")
+        per_state = aggregate
+    else:
+        per_state = 4000
+    return {"max_states": 1 if arm == "global_note_sources" else settings["max_states"],
+            "max_state_content_chars": per_state,
+            "max_total_content_chars": aggregate}
 
 
 def _script(path: Path) -> dict[str, Any]:
@@ -70,8 +97,12 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "method": "local_state_attention_p1", "run_id": args.run,
         "arm_id": args.arm, "repeat": args.repeat,
         "read_policy": READ_POLICIES.get(args.arm),
+        "representation": ("global_note" if args.arm == "global_note_sources" else
+                           "local" if args.arm in READ_POLICIES else None),
+        "effective_content_limits": (_content_limits(args.arm, config)
+                                     if args.arm in READ_POLICIES else None),
         "source_view_max_bytes": (config["source_view_max_bytes"]
-                                  if args.arm == "local_all_sources" else None),
+                                  if READ_POLICIES.get(args.arm) == "all_sources" else None),
         "git_sha": subprocess.check_output(  # noqa: S603 - fixed command and arguments
             [shutil.which("git") or "/usr/bin/git", "rev-parse", "HEAD"],
             cwd=LAB, text=True).strip(),
@@ -133,11 +164,13 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     config, script = read_json(args.config), _script(args.script)
     if args.arm not in ARMS:
         raise ValueError("LSA_ARM_UNKNOWN")
-    if args.arm == "local_all_sources" and (
+    if READ_POLICIES.get(args.arm) == "all_sources" and (
         type(config.get("source_view_max_bytes")) is not int
         or config["source_view_max_bytes"] <= 0
     ):
         raise ValueError("LSA_SOURCE_VIEW_BUDGET_INVALID")
+    if args.arm in READ_POLICIES:
+        _content_limits(args.arm, config)
     identity = _identity(args, config, script)
     args.runtime_root.mkdir(parents=True, exist_ok=True)
     manifest_path = args.runtime_root / "run_manifest.json"
@@ -194,22 +227,30 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                                          max_tokens=settings["max_tokens"])
                 with VLLMClient(control_config, emit=control_emit, budget=host.budget,
                                 capacity=host.capacity) as control_client:
+                    limits = _content_limits(args.arm, config)
                     bank = LocalStateBank(runtime.store,
-                                          max_states=settings["max_states"],
-                                          max_events=settings["max_events"])
+                                          max_states=limits["max_states"],
+                                          max_events=settings["max_events"],
+                                          max_state_content_chars=(
+                                              limits["max_state_content_chars"]),
+                                          max_total_content_chars=(
+                                              limits["max_total_content_chars"]))
                     controller = LocalStateController(
                         bank,
                         control_client, emit=control_emit,
                         max_pending_batch=settings["max_pending_batch"],
                         capacity_path=args.runtime_root / "control-capacity.json",
-                        max_calls_per_message=settings["max_calls_per_message"])
+                        max_calls_per_message=settings["max_calls_per_message"],
+                        representation=("global_note" if args.arm == "global_note_sources"
+                                        else "local"))
                     try:
                         result = run_phase(script, args.runtime_root, args.run, args.arm,
                                            args.phase, runtime, controller,
                                            local_state_read_policy=READ_POLICIES[args.arm],
                                            source_view_max_bytes=(
                                                config["source_view_max_bytes"]
-                                               if args.arm == "local_all_sources" else None))
+                                               if READ_POLICIES[args.arm] == "all_sources"
+                                               else None))
                     finally:
                         control_emit({"event": "lsa_store_stats", "phase": args.phase,
                                       "operations": bank.store_stats()})

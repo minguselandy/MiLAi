@@ -36,10 +36,18 @@ class EvidenceResolution:
 
 class LocalStateBank:
     def __init__(self, store: BaseStore, *, max_states: int = 32,
-                 max_events: int = 256) -> None:
+                 max_events: int = 256, max_state_content_chars: int = 4000,
+                 max_total_content_chars: int | None = None) -> None:
+        if (type(max_state_content_chars) is not int or max_state_content_chars <= 0
+                or (max_total_content_chars is not None
+                    and (type(max_total_content_chars) is not int
+                         or max_total_content_chars <= 0))):
+            raise ValueError("LSA_CONTENT_LIMIT_INVALID")
         self.store = store
         self.max_states = max_states
         self.max_events = max_events
+        self.max_state_content_chars = max_state_content_chars
+        self.max_total_content_chars = max_total_content_chars
         self._stats: dict[str, dict[str, int]] = {}
 
     @staticmethod
@@ -187,8 +195,7 @@ class LocalStateBank:
                  (not isinstance(state_id, str) or state_id not in current))
                     or not isinstance(refs, list)
                     or any(not isinstance(ref, str) or ref not in available for ref in refs)
-                    or not isinstance(content, str) or not content.strip()
-                    or len(content) > 4000):
+                    or not isinstance(content, str) or not content.strip()):
                 invalid = True
                 receipts.append({"id": state_id, "status": "skipped_invalid_edit"})
                 continue
@@ -218,6 +225,19 @@ class LocalStateBank:
             if old is not None and value == public_old:
                 status = "noop"
             else:
+                if len(content) > self.max_state_content_chars:
+                    invalid = True
+                    receipts.append({"id": state_id, "status": "skipped_invalid_edit",
+                                     "reason": "state_content_limit"})
+                    continue
+                projected_total = (sum(len(row["content"]) for row in current.values())
+                                   - (len(old["content"]) if old else 0) + len(content))
+                if (self.max_total_content_chars is not None
+                        and projected_total > self.max_total_content_chars):
+                    invalid = True
+                    receipts.append({"id": state_id, "status": "skipped_invalid_edit",
+                                     "reason": "aggregate_content_limit"})
+                    continue
                 value["revision"] += 1
                 value["dependency_source_ids"] = sorted(
                     visible_dependencies | set(refs)

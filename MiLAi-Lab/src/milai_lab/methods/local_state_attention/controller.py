@@ -27,7 +27,8 @@ def request_role(value: str) -> Iterator[None]:
         REQUEST_ROLE.reset(token)
 
 
-def control_schema(state_ids: list[str], max_states: int) -> dict[str, Any]:
+def control_schema(state_ids: list[str], max_states: int,
+                   single_note: bool = False) -> dict[str, Any]:
     """Constrain new-State titles and focus to actual or request-local identifiers."""
     fields: dict[str, Any] = {
         "title": {"type": "string", "minLength": 1},
@@ -41,8 +42,10 @@ def control_schema(state_ids: list[str], max_states: int) -> dict[str, Any]:
         "type": "object", "properties": {"id": {"enum": state_ids}, **fields},
         "required": ["id", "content"], "additionalProperties": False,
     }
-    edits = [new_edit, existing_edit] if state_ids else [new_edit]
-    focus_ids = [*state_ids, *(f"new:{index}" for index in range(max_states))]
+    edits = ([existing_edit] if single_note and state_ids else
+             [new_edit, existing_edit] if state_ids else [new_edit])
+    focus_ids = ([*state_ids, *([] if state_ids else ["new:0"])] if single_note else
+                 [*state_ids, *(f"new:{index}" for index in range(max_states))])
     return {
         "type": "object", "properties": {
             "edits": {"type": "array", "items": (
@@ -63,13 +66,17 @@ class LocalStateController:
                  emit: Callable[[dict[str, Any]], None] | None = None,
                  max_pending_batch: int = 24,
                  capacity_path: Path | None = None,
-                 max_calls_per_message: int = 13) -> None:
+                 max_calls_per_message: int = 13,
+                 representation: str = "local") -> None:
+        if representation not in {"local", "global_note"}:
+            raise ValueError("LSA_REPRESENTATION_UNKNOWN")
         self.bank = bank
         self.client = client
         self.emit = emit
         self.max_pending_batch = max_pending_batch
         self.capacity_path = capacity_path
         self.max_calls_per_message = max_calls_per_message
+        self.representation = representation
 
     def prepare(self, scope: StateScope, query_id: str, query: str,
                 message_key: str = "") -> dict[str, Any]:
@@ -113,13 +120,34 @@ class LocalStateController:
             "Choose focus for the current_task, which is a query rather than an answer. "
             "Evidence may cite only listed source ids. Keep unresolved needs concise."
         )
+        if self.representation == "global_note":
+            prompt = prompt.replace(
+                "Maintain short local States for continuing matters from source-identified "
+                "events. ",
+                "Maintain one global working note covering continuing matters from "
+                "source-identified events. ", 1).replace(
+                "Focus is an array of identifiers only: exact ids from states, or new:0, "
+                "new:1 for a newly created edit at that zero-based edits index. ",
+                "Focus is an array of identifiers only: the exact existing note id, or "
+                "new:0 when creating the first note. ", 1).replace(
+                "Independently update States affected by new observations and select focus "
+                "for the current question or action. A State may need an update even when "
+                "it is not in focus; focus need not include every updated State. ",
+                "Update the note when new observations affect it, whether or not it is in "
+                "focus. Select focus separately for the current question or action. ",
+                1).replace(
+                "a short nonempty title naming the continuing matter and content; ",
+                "a short nonempty title naming the working note and content; ", 1)
+            prompt += (" Keep all continuing matters in this one note. Create it only when "
+                       "none exists; otherwise update its exact id or make no edit.")
         payload = {"current_task": query,
                    "new_observations": [self._event_view(row) for row in pending],
                    "states": [{key: row[key] for key in (
                        "id", "title", "content", "needs", "evidence_refs", "revision")}
                               for row in states],
                    "source_ids_available": [row["id"] for row in events]}
-        schema = control_schema([row["id"] for row in states], self.bank.max_states)
+        schema = control_schema([row["id"] for row in states], self.bank.max_states,
+                                single_note=self.representation == "global_note")
         if self.capacity_path is not None:
             counts = read_json(self.capacity_path) if self.capacity_path.exists() else {}
             if counts.get(message_key, 0) >= self.max_calls_per_message:

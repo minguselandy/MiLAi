@@ -1,0 +1,125 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P3_WIRING_R1_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_PUBLICATION",
+  "scope": "WP2 minimal G/L implementation and small end-to-end wiring, not full P3 G/L/LRU comparison",
+  "basis": [
+    "docs/MILAI_LOCAL_STATE_ATTENTION_P1_R5_RESULTS_20260927.md",
+    "docs/MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md"
+  ],
+  "run_order": [
+    {
+      "run_id": "lsa-p3-wiring-interleaved-global_note_sources-r1",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-interleaved-local_all_sources-r1",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-partial-local_all_sources-r1",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p3-wiring-partial-global_note_sources-r1",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-interleaved-workshop.json": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "split": "development; both original P1 scripts already exposed; no unseen claim",
+  "public_messages": 24,
+  "whole_trajectory_denominator_per_arm": 2,
+  "representation": {
+    "global_note_sources": "one persistent working note per owner/workspace scope; create once then update/no-op existing id",
+    "local_all_sources": "existing multiple local States; no forced rewrite of unaffected States"
+  },
+  "shared": {
+    "controller": "same model/provenance rules/edits+focus envelope; G only has minimal one-note representation contract",
+    "read_policy": "all_sources; ignore generated focus for both arms; no update-candidate reduction claim",
+    "source_view_utf8_budget": 16384,
+    "aggregate_content_budget_chars": 16000,
+    "events_and_permissions": "same scoped user/tool events and explicit-reference source resolver; independent State formation",
+    "max_events": 256,
+    "degradation": "same invalid-edit/pending/no-op and nonblocking optional control behavior"
+  },
+  "effective_limits": {
+    "global_note_sources": {
+      "max_states": 1,
+      "max_total_content_chars": 16000,
+      "max_state_content_chars": 16000
+    },
+    "local_all_sources": {
+      "max_states": 32,
+      "max_total_content_chars": 16000,
+      "max_state_content_chars": 4000
+    }
+  },
+  "budget_scope": "Only State content chars are matched by this aggregate bound; title/needs/refs/raw sources/checkpoint and actual wire bytes are separately measured. No silent content or message truncation.",
+  "http_concurrency": 1,
+  "host_max_tokens": 4096,
+  "controller_max_tokens": 2048,
+  "host_calls_per_public_message": 12,
+  "controller_calls_per_public_message": 13,
+  "no_vllm_changes": true,
+  "no_rubric_runtime": true,
+  "new_namespaces_checkpoints_worlds": true,
+  "each_phase_new_process": true,
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 1119,
+    "generation_tokens": 1347149,
+    "embedding_tokens": 10919
+  },
+  "source_freeze": "Published source/actual config/input identity bound by runner prepare; freeze all four full trajectories",
+  "scoring": "Unchanged original strict P1 rubric; separately inspect retained/changed facts, actual recovery actions, G/L bytes/operations/limits/no-op and source activation. All errors stay in denominators.",
+  "causal_limits": [
+    "One exposed repetition and online trajectories; not stable efficacy.",
+    "G requires a representation instruction and single-note schema; retained joint focus is generated but unused by both arms.",
+    "Whole-note rewrite and local edits may face different pressure under same 2048 output limit. If G truncates, report capacity-related incomparability for pure representation claims; do not tune mid-batch.",
+    "This is not LRU or sparse update candidate selection.",
+    "Conservative dependency deletion may remove all of G note; state granularity is itself part of the representation."
+  ],
+  "stop_rule": "Complete four runs through semantic/capacity failures; stop only for infrastructure or deterministic execution-invalidity. No broad benchmark or parameter sweep based on a successful one-off case.",
+  "validation": {
+    "affected_tests": 32,
+    "lsa_tests": 26,
+    "adjacent_application_tests": 6,
+    "final_test_only_assertion": "PASS; after build, no package source changed",
+    "target_ruff": "PASS",
+    "target_mypy": "PASS",
+    "diff_check": "PASS",
+    "prepare_four_runs": "PASS zero-model in /tmp; effective representation/limits/source-view verified",
+    "build": {
+      "sdist_sha256": "cea032298f096d1b713b34819801b1d2d02e5ee32d6458f2e31b26143989a284",
+      "wheel_sha256": "140fe59893cd63a7bd7fffa35e2cc5d43b9d83ce8c83455ceead2689b01daadf"
+    },
+    "real_model_calls": 0
+  }
+}

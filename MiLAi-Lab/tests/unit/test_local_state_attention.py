@@ -80,6 +80,106 @@ def test_bank_order_noop_pending_scope_and_deletion() -> None:
     assert bank.events(alice) == []
 
 
+def test_shared_aggregate_content_boundary_and_local_unaffected_state() -> None:
+    bank = LocalStateBank(InMemoryStore(), max_states=8,
+                          max_state_content_chars=4000, max_total_content_chars=16000)
+    scope = StateScope("run", "local_all_sources", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "four matters"})
+    edits = [{"id": None, "title": f"matter {index}", "content": str(index) * 4000}
+             for index in range(4)]
+    receipts, invalid = bank.apply(scope, edits, {"seed"}, query_source_id="seed")
+    assert not invalid and all(row["status"] == "created" for row in receipts)
+    assert sum(len(row["content"]) for row in bank.states(scope)) == 16000
+    bank.record_event(scope, {"id": "extra", "kind": "user", "content": "another matter"})
+    overflow, invalid = bank.apply(scope, [{"id": None, "title": "fifth", "content": "x"}],
+                                   {"extra"}, query_source_id="extra")
+    assert invalid and overflow[0]["reason"] == "aggregate_content_limit"
+    assert [row["id"] for row in bank.pending(scope)] == ["extra"]
+    before = {row["id"]: row for row in bank.states(scope)}
+    first_id = receipts[0]["id"]
+    revised, invalid = bank.apply(scope, [{"id": first_id, "content": "0" * 3999}],
+                                  {"extra"}, query_source_id="extra")
+    assert not invalid and revised[0]["status"] == "updated"
+    after = {row["id"]: row for row in bank.states(scope)}
+    assert all(after[key] == value for key, value in before.items() if key != first_id)
+    assert [row["id"] for row in bank.pending(scope)] == []
+    too_long, invalid = bank.apply(scope, [{"id": first_id, "content": "x" * 4001}], set())
+    assert invalid and too_long[0]["reason"] == "state_content_limit"
+    assert bank.states(scope) == list(sorted(after.values(), key=lambda row: row["id"]))
+
+
+def test_global_note_create_update_noop_schema_pending_and_deletion() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store, max_states=1, max_state_content_chars=16000,
+                          max_total_content_chars=16000)
+    scope = StateScope("run", "global_note_sources", "alice")
+    calls: list[dict[str, Any]] = []
+
+    class GlobalControl:
+        def chat(self, messages: Any, **kwargs: Any) -> dict[str, Any]:
+            payload = json.loads(messages[1]["content"])
+            schema = kwargs["response_format"]["json_schema"]["schema"]
+            calls.append({"prompt": messages[0]["content"],
+                          "payload": payload, "schema": schema})
+            if len(calls) == 1:
+                plan = {"edits": [{"id": None, "title": "Working note",
+                                    "content": "first matter", "evidence": ["first"]}],
+                        "focus": ["new:0"]}
+            else:
+                note_id = bank.states(scope)[0]["id"]
+                plan = {"edits": [{"id": note_id,
+                                    "content": "first matter; second matter"}],
+                        "focus": [note_id]}
+            validate(plan, schema)
+            return {"choices": [{"finish_reason": "stop", "message": {
+                "content": json.dumps(plan)}}]}
+
+    controller = LocalStateController(bank, GlobalControl(),  # type: ignore[arg-type]
+                                      representation="global_note")
+    bank.record_event(scope, {"id": "first", "kind": "user", "actor": "alice",
+                              "tool_call_id": None, "content": "first matter"})
+    created = controller.prepare(scope, "first", "first matter")
+    assert created["receipts"][0]["status"] == "created"
+    note_id = bank.states(scope)[0]["id"]
+    assert len(bank.states(scope)) == 1 and bank.states(scope)[0]["revision"] == 1
+    assert "Maintain one global working note" in calls[0]["prompt"]
+    assert "Maintain short local States" not in calls[0]["prompt"]
+    bank.record_event(scope, {"id": "second", "kind": "user", "actor": "alice",
+                              "tool_call_id": None, "content": "second matter"})
+    updated = controller.prepare(scope, "second", "second matter")
+    assert updated["receipts"][0]["status"] == "updated"
+    assert bank.states(scope)[0]["revision"] == 2
+    with pytest.raises(ValidationError):
+        validate({"edits": [{"id": None, "title": "illegal second note",
+                              "content": "another"}], "focus": ["new:0"]},
+                 calls[1]["schema"])
+    assert calls[1]["payload"]["new_observations"] == [{
+        "id": "second", "kind": "user", "actor": "alice",
+        "tool_call_id": None, "content": "second matter"}]
+    bank.record_event(scope, {"id": "third", "kind": "user", "actor": "alice",
+                              "tool_call_id": None, "content": "no new fact"})
+    puts_before = bank.store_stats()["put"]["calls"]
+    noop = controller.prepare(scope, "third", "no new fact")
+    assert noop["receipts"][0]["status"] == "noop"
+    assert bank.states(scope)[0]["revision"] == 2
+    assert bank.store_stats()["put"]["calls"] == puts_before + 2  # event settled, focus
+    bank.record_event(scope, {"id": "oversize", "kind": "user", "actor": "alice",
+                              "tool_call_id": None, "content": "long note"})
+    rejected, invalid = bank.apply(scope, [{"id": note_id, "content": "x" * 16001}],
+                                   {"oversize"}, query_source_id="oversize")
+    assert invalid and rejected[0]["reason"] == "state_content_limit"
+    assert [row["id"] for row in bank.pending(scope)] == ["oversize"]
+    assert bank.forget_source(scope, "first") == [note_id]
+    assert bank.states(scope) == []
+    assert bank.is_forgotten(scope, "first")
+    assert "second" in {row["id"] for row in bank.events(scope)}
+    exact_scope = StateScope("run", "global_note_sources", "bob")
+    exact, invalid = bank.apply(exact_scope, [{"id": None, "title": "Working note",
+                                              "content": "x" * 16000}], set())
+    assert not invalid and exact[0]["status"] == "created"
+    assert len(bank.states(exact_scope)[0]["content"]) == 16000
+
+
 def test_dependency_tracks_cross_state_copy_without_model_evidence() -> None:
     bank = LocalStateBank(InMemoryStore())
     scope = StateScope("run", "lsa", "alice")
@@ -406,6 +506,84 @@ def test_source_view_live_arm_expands_only_cited_events_on_actual_host_wire(
     assert all(row["id"] in delivered[1]["delivered_state_ids"] for row in receipts)
 
 
+def test_global_and_local_share_source_wire_without_extra_control_calls(
+    tmp_path: Path,
+) -> None:
+    wires: dict[str, dict[str, Any]] = {}
+    host_counts: dict[str, int] = {}
+    views: dict[str, dict[str, Any]] = {}
+    controls: dict[str, list[dict[str, Any]]] = {}
+    source_content = '{"ok":false,"item_key":"exact-key","quantity":2}'
+    for arm in ("global_note_sources", "local_all_sources"):
+        store = InMemoryStore()
+        bank = LocalStateBank(store, max_states=1 if arm == "global_note_sources" else 4,
+                              max_state_content_chars=(16000 if arm ==
+                                                       "global_note_sources" else 4000),
+                              max_total_content_chars=16000)
+        scope = StateScope("run", arm, "alice")
+        bank.record_event(scope, {"id": "receipt", "kind": "tool", "actor": "inventory",
+                                  "tool_call_id": "call-1", "content": source_content})
+        edits = [{"id": None, "title": "Working note", "content": "one matter",
+                  "evidence": ["receipt"]}]
+        if arm == "local_all_sources":
+            edits.append({"id": None, "title": "Other matter", "content": "another matter",
+                          "evidence": ["receipt"]})
+        receipts, invalid = bank.apply(scope, edits, {"receipt"})
+        assert not invalid and len(receipts) == len(edits)
+        controls[arm] = []
+        host_counts[arm] = 0
+        emitted: list[dict[str, Any]] = []
+
+        class NoEditControl:
+            def __init__(self, arm_id: str) -> None:
+                self.arm_id = arm_id
+
+            def chat(self, messages: Any, **kwargs: Any) -> dict[str, Any]:
+                controls[self.arm_id].append({
+                    "payload": json.loads(messages[1]["content"]),
+                    "schema": kwargs["response_format"]})
+                return {"choices": [{"finish_reason": "stop", "message": {
+                    "content": '{"edits":[],"focus":[]}'}}]}
+
+        def respond(request: httpx.Request, arm_id: str = arm) -> httpx.Response:
+            host_counts[arm_id] += 1
+            wires[arm_id] = json.loads(request.read())
+            return _response({"answer": "done"}, 1)
+
+        controller = LocalStateController(
+            bank, NoEditControl(arm), emit=emitted.append,  # type: ignore[arg-type]
+            representation=("global_note" if arm == "global_note_sources" else "local"))
+        with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock"),
+                        transport=httpx.MockTransport(respond)) as host:
+            with SqliteSaver.from_conn_string(str(tmp_path / f"{arm}.sqlite")) as saver:
+                model = VLLMChatModel(client=host)
+                agent = build_agent(model, store, saver,
+                                    local_state_controller=controller,
+                                    local_state_read_policy="all_sources",
+                                    source_view_max_bytes=16384)
+                invoke_public_message(agent, model, FoundationScope(
+                    "run", arm, "alice", "session"), "Continue both matters")
+        views[arm] = next(row for row in emitted if row["event"] == "lsa_view")
+
+    assert all(len(controls[arm]) == 1 for arm in controls)
+    assert list(host_counts.values()) == [1, 1]
+    assert all(controls[arm][0]["payload"]["new_observations"][0]["content"] ==
+               "Continue both matters" for arm in controls)
+    assert all(view["source_requested_ids"] == view["source_delivered_ids"] ==
+               ["receipt"] for view in views.values())
+    assert [len(views[arm]["delivered_state_ids"]) for arm in controls] == [1, 2]
+    assert all(SOURCE_VIEW_HEADER in wire["messages"][0]["content"]
+               and json.loads(wire["messages"][0]["content"].split(
+                   SOURCE_VIEW_HEADER + "\n", 1)[1].splitlines()[0])["content"] ==
+               source_content for wire in wires.values())
+    assert all(wire["messages"][1]["content"] == "Continue both matters"
+               for wire in wires.values())
+    assert wires["global_note_sources"].get("tools") == wires["local_all_sources"].get(
+        "tools")
+    assert all(state_id not in wires[arm]["messages"][0]["content"]
+               for arm, view in views.items() for state_id in view["delivered_state_ids"])
+
+
 def test_source_resolution_scope_deletion_restart_empty_refs_and_whole_event_budget() -> None:
     store = InMemoryStore()
     bank = LocalStateBank(store)
@@ -534,7 +712,8 @@ def test_control_schema_rejects_r1_missing_title_and_factual_focus() -> None:
     assert bank.states(scope)[0]["revision"] == 1
 
 
-@pytest.mark.parametrize("arm", ["local_state", "local_all", "local_all_sources"])
+@pytest.mark.parametrize("arm", ["local_state", "local_all", "local_all_sources",
+                                 "global_note_sources"])
 def test_runtime_explicitly_disables_ser_for_local_state(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str,
 ) -> None:
@@ -664,7 +843,8 @@ def test_deleted_checkpoint_source_does_not_reenter_state_or_host_view(
 
 @pytest.mark.parametrize("arm,read_policy", [
     ("local_state", "focus"), ("local_all", "all"),
-    ("local_all_sources", "all_sources")])
+    ("local_all_sources", "all_sources"),
+    ("global_note_sources", "all_sources")])
 def test_cli_local_state_path_reuses_application_runner_without_ser(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, read_policy: str,
 ) -> None:
@@ -687,8 +867,9 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         "embedding": {"base_url": "http://mock/v1/", "model": "mock"},
         "capacity": {}, "budget_path": str(tmp_path / "budget.json"),
         "control": {"max_tokens": 100, "max_states": 4, "max_events": 8,
-                    "max_pending_batch": 4, "max_calls_per_message": 2}}
-    if arm == "local_all_sources":
+                    "max_pending_batch": 4, "max_calls_per_message": 2,
+                    "aggregate_content_chars": 16000}}
+    if read_policy == "all_sources":
         config_value["source_view_max_bytes"] = 16384
     config.write_text(json.dumps(config_value))
     root = tmp_path / "runtime"
@@ -725,6 +906,10 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         called.append(args_[-1].client.config.max_tokens)
         called.append(kwargs["local_state_read_policy"])
         called.append(kwargs["source_view_max_bytes"])
+        called.append(args_[-1].representation)
+        called.append((args_[-1].bank.max_states,
+                       args_[-1].bank.max_state_content_chars,
+                       args_[-1].bank.max_total_content_chars))
         args_[-1].bank.record_event(StateScope("mock-run", arm, "alice"), {
             "id": "source", "kind": "user", "content": "hello"})
         return {"status": "TERMINAL"}
@@ -733,11 +918,22 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     monkeypatch.setattr(entry, "VLLMClient", FakeClient)
     monkeypatch.setattr(entry, "run_phase", phase)
     assert entry.run(args)["status"] == "TERMINAL"
+    expected_limits = ((1, 16000, 16000) if arm == "global_note_sources" else
+                       (4, 4000, 16000) if arm == "local_all_sources" else
+                       (4, 4000, None))
     assert called == [False, 100, read_policy,
-                      16384 if arm == "local_all_sources" else None]
+                      16384 if read_policy == "all_sources" else None,
+                      "global_note" if arm == "global_note_sources" else "local",
+                      expected_limits]
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
     assert manifest["identity"]["rubric_read_by_runner"] is False
+    assert manifest["identity"]["read_policy"] == read_policy
+    assert manifest["identity"]["representation"] == (
+        "global_note" if arm == "global_note_sources" else "local")
+    assert manifest["identity"]["effective_content_limits"] == dict(zip(
+        ("max_states", "max_state_content_chars", "max_total_content_chars"),
+        expected_limits, strict=True))
     store_stats = manifest["accounting"]["local_state_store_stats"]
     assert store_stats["put"]["calls"] == 1
     assert store_stats["get"]["calls"] == 2
@@ -745,3 +941,19 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     trace = [json.loads(line) for line in (root / "trace.jsonl").read_text().splitlines()]
     assert [event["event"] for event in trace] == ["lsa_store_stats"]
     assert trace[0]["operations"] == store_stats
+
+
+def test_missing_aggregate_setting_preserves_existing_local_capacity(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.freshness_projection.identity import LAB
+
+    monkeypatch.syspath_prepend(str(LAB / "tools"))
+    import run_local_state_attention as entry
+
+    config = {"control": {"max_states": 32}}
+    assert entry._content_limits("local_all_sources", config) == {
+        "max_states": 32, "max_state_content_chars": 4000,
+        "max_total_content_chars": None}
+    with pytest.raises(ValueError, match="LSA_GLOBAL_NOTE_CONTENT_LIMIT_MISSING"):
+        entry._content_limits("global_note_sources", config)

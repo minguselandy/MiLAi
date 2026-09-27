@@ -35,9 +35,9 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 | 阶段/工作包 | 必须交付的证据 | 当前状态 |
 | --- | --- | --- |
 | P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | R3 补全机械依赖与实际Store计量；真实授权删除链仍待独立验证 |
-| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R4两臂原各7/12、原完整各0/2；all报告控制2/2；读取/维护和精确参数错误分层保留 |
+| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R4两臂原各7/12；R5 partial来源on4/6、off3/6，原完整均失败；精确恢复出现局部正例 |
 | P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | R1四断点12方法+3诊断完成；State值影响输出，来源直送有用，维护/独立Host错误未闭合 |
-| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | 完整比较未运行；可先补G/L小wiring，广泛批次仍须可用性证据 |
+| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | G/L代码和4条小wiring协议已冻结；完整G/L/LRU重复比较未运行 |
 | P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | 未运行，遵循进入条件 |
 | P5 / WP5 | 新 frozen 原生 selection、第二任务族、交错顺序及完整重复；原 scorer 和失败分母 | 未运行；不消费旧暴露任务作 unseen |
 | P6 / WP4–5 | N/d/a/r/H 代表点、质量—成本边界、第二模型族；有瓶颈证据才训练 selector | 未运行；第二模型仍缺独立端点 |
@@ -185,6 +185,24 @@ P3完整比较尚未启动；强G/L的少量实现/wiring可推进，不等所�
 无模型replay解析3个refs/1336字节（含1条实际tool receipt），额外6get；不是再次运行P2能力探针。
 构建哈希和验证见协议。发布后正式prepare与两条真实运行，源码全批保持冻结。
 
+[R5结果](MILAI_LOCAL_STATE_ATTENTION_P1_R5_RESULTS_20260927.md)完成两条partial：来源on4/6、
+off3/6，原完整均0/1。on实际交付原部分失败回执后get使用真实持久key并found，再沿原ID
+补标签；off仍把RSV作key而not_found。初始单数key与Noel错误保留，不能称P1全过。
+off还有一次错误evidence ID被独立跳过，pending保留但Host正确回答，降级也在分母。
+累计1119生成 /1347149生成tokens /10919 embedding tokens；此切片新增40/46862/88。
+下一切片已授权Sol实现强G/L小wiring：单global note vs local bank，共同已有来源展开，
+相同事件/维护/模型/工具/读取预算。共享aggregate正文16000 chars，G单note16000、L每卡4000，
+报告其他字段/来源/实际wire容量；原配置不显式给新预算时维持历史行为。
+只先两原脚本×两臂的少量wiring，不运行36轨迹，不宣称更新候选缩减/LRU或P3完成。
+
+[G/L wiring协议](../data/manifests/local-state-attention-p3-wiring-r1-protocol.json)固定4条完整
+原development轨迹：interleaved G→L，partial L→G，各一次。G为每owner/workspace一note，
+L为原多State；共享all_sources、16384字节来源和16000字符aggregate正文预算。
+源码只改bank/controller/CLI/config及窄测：G现存note仅update/no-op，保留共同edits+focus外层；
+原L提示与业务合同不改。26项LSA+6项相邻application检查、目标静态、四/tmp prepare和一次build
+通过；最后仅补测试断言，无产品目录修改。协议载构建哈希；发布后正式prepare，批内源码不变。
+这一步不包含LRU候选缩减，全部结果仍按完整原rubric及失败分母报告。
+
 ## 后期资源准备记录
 
 已核对 [LangMem 官方 API](https://langchain-ai.github.io/langmem/reference/) 确实区分
@@ -207,6 +225,21 @@ Root 浏览 Hugging Face 数据卡时，网页自动呈现了 bundled_shopping i
 [RIMs](https://arxiv.org/abs/1909.10893)和
 [HiAgent](https://aclanthology.org/2025.acl-long.1575/)分别已有稀疏模块更新、子目标工作记忆
 研究；本方法不以“多个 State”主张首次性，后期仍需操作级比较与独立收益证据。
+
+后续资源准备已取得 pinned `group_travel_planner/data.jsonl`（270组、ID 1–270，6165901字节）
+及官方Drive航班CSV（304807007字节）。Luna仅用程序统计结构/ID/列表长度和哈希，没有向
+Root展示问题/答案，没有选择样本、安装宽泛依赖或运行Agent/scorer。实际环境为5个CSV与
+3个城市/州文本资源；6是工具数，固定HF revision并无nested_constraints_satisfaction配置。
+[资源manifest](../data/manifests/local-state-attention-resources.json)已记录正式身份、哈希与
+接触范围；上面的JSONL=0是早期回执，不再是当前库存。HF数据卡的CC-BY-4.0不自动覆盖
+参考实现和外部CSV；这些内容继续留在ignored外部资源中，不进入Git。第二任务族尚未接入。
+
+静态接入核查还确认：native ToolExecutor支持显式db_path及六个本地工具，离线PS/SPS/SR
+scorer不调用LLM，但只遍历已提交项；未来冻结分母必须给失败/缺失项保留空plan，不能消失。
+原loader默认拉最新HF且把answers与questions一起返回，native runner也有ground_truth判分/
+judgement feedback路径；直接运行它尚不满足本项目runtime不读gold边界。后续薄适配器须
+固定本地revision、隔离gold并明确反馈合同，保留官方给定base_person初始plan及原scorer公式。
+这是静态可行性发现，不是已运行独立任务族；未读取任何任务正文或选择样本。
 
 ## 失败、决策与完成审核
 

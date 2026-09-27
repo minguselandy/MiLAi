@@ -1,6 +1,6 @@
 {
   "kind": "LOCAL_STATE_ATTENTION_REFERENCE_RESOURCES",
-  "status": "SOURCE_METADATA_ONLY_NOT_INTEGRATED",
+  "status": "TRAVEL_ASSETS_DOWNLOADED_NOT_INTEGRATED_OR_EVALUATED",
   "purpose": "P5/WP5 independent public task-family feasibility; no executed benchmark claim",
   "official_sources": {
     "project_page": "https://memoryarena.github.io/",
@@ -33,19 +33,20 @@
     "readme_license_metadata_field": null,
     "all_files_bytes": 12315679,
     "jsonl_total_bytes": 12302265,
-    "jsonl_files_downloaded": 0,
-    "remaining_jsonl_files": 5,
-    "jsonl_payloads_read": false,
-    "notes": "Dataset card README documents five test configurations; no task rows were requested, downloaded, or previewed."
+    "jsonl_files_downloaded": 1,
+    "remaining_jsonl_files": 4,
+    "jsonl_payloads_read": "structure only by download process; no task text inspected by agents",
+    "notes": "Pinned group_travel_planner payload acquired; 270 groups. No task selection or environment execution."
   },
   "download_accounting": {
     "new_source_checkout_bytes": 0,
     "existing_checkout_local_tracked_bytes": 3035425,
     "dataset_readme_bytes_downloaded": 4762,
-    "dataset_jsonl_bytes_downloaded": 0,
-    "dataset_expected_jsonl_bytes_not_downloaded": 12302265,
-    "budget_limit_bytes": 100000000,
-    "dataset_payload_expected_under_limit": true
+    "dataset_jsonl_bytes_downloaded": 6165901,
+    "dataset_expected_jsonl_bytes_not_downloaded": 6136364,
+    "flight_csv_bytes_downloaded": 304807007,
+    "total_new_download_bytes_including_prior_readme": 310977670,
+    "latest_per_asset_approved_limit_bytes": 2000000000
   },
   "receipt_sha256": "8083d23d2de447800e1eb7f9ad7f3affaa93277df15df651f08bc46de58463c3",
   "files_metadata_sha256": "965e258db6067c25bf9a6c73179728cc5bb27e3dac04d51e6327cedd115e9d62",
@@ -75,12 +76,172 @@
       ],
       "extent": "partial question/answer previews automatically rendered by HF dataset landing page"
     },
-    "luna_read_jsonl_payloads": false
+    "luna_task_access": "Downloaded JSONL; program parsed keys, ids, and list lengths only. No question/answer text previewed, selected, scored, or summarized."
   },
   "remaining": [
-    "environment/scorer and dependency feasibility assessment",
-    "code license scope unresolved; do not redistribute external implementation as project code",
-    "select task configuration and pre-register fresh selection before opening rows",
-    "implement minimal adapter only when P1-P4 prerequisites are met"
-  ]
+    "Minimal environment/dependency/scorer feasibility; assets acquired does not mean native environment runs",
+    "Keep reference implementation and datasets outside Git; source root license and external CSV license unspecified in consulted metadata",
+    "Pre-register fresh task selection before content inspection and preserve native evaluation",
+    "Integrate thin adapter after relevant method/wiring prerequisites; no current public benchmark execution"
+  ],
+  "preparation_history": [
+    {
+      "stage": "source_metadata_only",
+      "manifest_commit": "51244424def98b6acde7be9ffd18e2f5d5309581",
+      "manifest_sha256": "f8e178aa89281bd6cda31d03125ef997aa8ab5684ded373911f86951973c8785",
+      "jsonl_downloaded": 0,
+      "initial_download_budget_bytes": 100000000
+    }
+  ],
+  "travel_task": {
+    "public_config": "group_travel_planner",
+    "not_present_config_name": "nested_constraints_satisfaction",
+    "source": "https://huggingface.co/datasets/ZexueHe/memoryarena",
+    "revision": "da1a37c8b19280e18627ca01cf368195a5e1d92e",
+    "file": "group_travel_planner/data.jsonl",
+    "local_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/local-state-attention/resources/MemoryArena/travel_task/group_travel_planner.data.jsonl",
+    "size_bytes": 6165901,
+    "hub_git_blob_oid_sha1": "e3953b64b9559f6343f0e55170238a6260e5e4ff",
+    "sha256": "2f955d444f6f3ad3c5da2064359ab19f8fc1f90621ff9d00723a450a009c3732",
+    "dataset_license": "CC-BY-4.0 as stated on the pinned dataset card",
+    "structural_summary": {
+      "row_count": 270,
+      "top_level_key_presence_counts": {
+        "answers": 270,
+        "base_person": 270,
+        "id": 270,
+        "questions": 270
+      },
+      "available_ids": {
+        "count": 270,
+        "unique_count": 270,
+        "range": [
+          1,
+          270
+        ],
+        "contiguous": true
+      },
+      "questions_per_group_distribution": {
+        "5": 37,
+        "6": 47,
+        "7": 86,
+        "8": 100
+      },
+      "answers_per_group_distribution": {
+        "5": 37,
+        "6": 47,
+        "7": 86,
+        "8": 100
+      },
+      "base_person_value_shape_counts": {
+        "object": 270
+      },
+      "structural_issues": 0
+    },
+    "content_access": "Downloaded the complete pinned public JSONL; parsing accessed only record structure, integer ids, key names and list lengths. No question or answer text was printed, selected, scored or summarized."
+  },
+  "travel_environment": {
+    "documented_tool_count": 6,
+    "verified_csv_asset_count": 5,
+    "csv_assets": [
+      {
+        "path": "reference-sources/contextual-v7/MemoryArena/env/env_systems/travel_planner_env/database/accommodations/clean_accommodations_2022.csv",
+        "origin": "official_repo_at_pinned_commit",
+        "size_bytes": 520458,
+        "sha256": "7e70cc8cb573e824267be47153a3cf7934c839f01c955fb523d18be405921d86",
+        "records_including_header": 5048,
+        "data_rows": 5047,
+        "column_count": 9
+      },
+      {
+        "path": "reference-sources/contextual-v7/MemoryArena/env/env_systems/travel_planner_env/database/attractions/attractions.csv",
+        "origin": "official_repo_at_pinned_commit",
+        "size_bytes": 817982,
+        "sha256": "8007fa851ba5b3adb205fbd298169c95116b297cef7ccd21dbea26ecce2605d8",
+        "records_including_header": 5303,
+        "data_rows": 5302,
+        "column_count": 7
+      },
+      {
+        "path": "reference-sources/contextual-v7/MemoryArena/env/env_systems/travel_planner_env/database/googleDistanceMatrix/distance.csv",
+        "origin": "official_repo_at_pinned_commit",
+        "size_bytes": 795427,
+        "sha256": "7dc1a26dc7877ae96ce63e74be0d9660bbdef96ffccaffce441128e3a4864a27",
+        "records_including_header": 17603,
+        "data_rows": 17602,
+        "column_count": 5
+      },
+      {
+        "path": "reference-sources/contextual-v7/MemoryArena/env/env_systems/travel_planner_env/database/restaurants/clean_restaurant_2022.csv",
+        "origin": "official_repo_at_pinned_commit",
+        "size_bytes": 683023,
+        "sha256": "a38ef00a3398b1ef78306a9b1851c491723d27899c6a1d4a3d6fe042929c0f26",
+        "records_including_header": 9552,
+        "data_rows": 9551,
+        "column_count": 6
+      },
+      {
+        "path": "MiLAi/MiLAi-Lab/artifacts/local-state-attention/resources/MemoryArena/travel_environment/flights/clean_Flights_2022.csv",
+        "origin": "official_Google_Drive_link_from_setup_travel_md",
+        "size_bytes": 304807007,
+        "sha256": "8dafdb0e3f8b79ce599a1e612a772865295bc226b46e5fb278368f7255b11cee",
+        "records_including_header": 3827361,
+        "data_rows": 3827360,
+        "column_count": 9
+      }
+    ],
+    "background_text_assets": [
+      {
+        "path": "reference-sources/contextual-v7/MemoryArena/env/env_systems/travel_planner_env/database/background/citySet.txt",
+        "size_bytes": 3064,
+        "sha256": "5e80edac9ccacec673d51bbeaf2d4e99339e104684988eafdb42c214ddb0ce39",
+        "line_count": 311,
+        "origin": "official_repo_at_pinned_commit"
+      },
+      {
+        "path": "reference-sources/contextual-v7/MemoryArena/env/env_systems/travel_planner_env/database/background/citySet_with_states.txt",
+        "size_bytes": 5921,
+        "sha256": "a3d18b5c692857cd561cbb4ad8d221ac3eb6c47af7c787a3489e3ffa184ca4d6",
+        "line_count": 312,
+        "origin": "official_repo_at_pinned_commit"
+      },
+      {
+        "path": "reference-sources/contextual-v7/MemoryArena/env/env_systems/travel_planner_env/database/background/stateSet.txt",
+        "size_bytes": 642,
+        "sha256": "ad8d88f7e87cf85f230abf4b69c69cd4908399c1c93049eaa466d0ce0fe6bed5",
+        "line_count": 65,
+        "origin": "official_repo_at_pinned_commit"
+      }
+    ],
+    "asset_count_note": "At the pinned source commit the database has four vendored CSV files; setup_travel.md identifies the fifth, missing CSV as clean_Flights_2022.csv. The six tools are not six distinct CSV files: city/state lookup also has text files. No sixth CSV appears in the tracked travel database inventory.",
+    "flight_source_folder_url": "https://drive.google.com/drive/folders/1fHBg6Ro4bSbTBgxeQZ6piYNtmqy8a_kK?usp=sharing",
+    "flight_file_id": "1dNtxHFv7k0PeMHI0smZk8t-dBlWLA0Gz",
+    "flight_advertised_size": "290.7 MB in public Drive folder metadata",
+    "flight_confirmed_response_bytes": 304807007,
+    "flight_license": "not stated in consulted repo/travel/database documentation or public download metadata",
+    "license_note": "HF card states CC-BY-4.0 for its dataset. License terms for external environment CSVs were not found in the consulted materials. Keep all payloads outside Git; do not treat the dataset card as a repository-wide implementation license."
+  },
+  "travel_receipt_sha256": "81e606bff7f1542a2598bb75c8b89536f2db50952ef09f0970d969b3949ce6fb",
+  "static_integration_review": {
+    "mode": "static source only; no task payload access/import/execution",
+    "source_commit": "6cd9de14b71915e39ac742a20dc33785e14b6aab",
+    "source_sha256": {
+      "env/env_systems/travel_planner_env/eval.py": "6b1da29d295207898401bf325684b83a0691ecd04cd5211ff5f1fca4d8555942",
+      "env/env_systems/travel_planner_env/data_loader.py": "8033cc39ab6514f9e79a7044ab84b4dffd1f6a72dcbe4a6281ea49766076c7af",
+      "env/env_systems/travel_planner_env/tool_executor.py": "bfa838a63d2db4c886dcfdb2682210c6045f8f2b82c387d9a1ba6d4d2f9e0de7",
+      "env/env_systems/travel_planner_env/tools/distance_matrix.py": "096090321aa4ea426dc9615942652c9bd708321fddb1dd8682cb22384daa5147",
+      "run_travel.py": "3b35937f0caba4c2b614f42d1b0cd0d4f32242973e4942bca5eda89df82e5d5f",
+      "agent/travel_planner.py": "e96c4ef040156a2d9e6ac7c6598b685e4779adb44fb468bcbe48baa9f982b93f"
+    },
+    "findings": [
+      "ToolExecutor accepts explicit db_path and dispatches six public tools over the local assets; DistanceMatrix dispatch uses the local evaluation method, not run_online.",
+      "Offline eval.py PS/SPS/SR uses native similarity threshold 0.7 and no LLM judge; preserve its formula. It iterates submitted groups/persons, so a frozen submission must include missing/failed planned persons as empty plans rather than let them vanish from denominator.",
+      "Native data_loader loads latest HF data by default and returns answers alongside questions; a future adapter must use the pinned local payload and split runtime-visible fields from offline gold.",
+      "Native run_travel gives base_person query/plan as initial context, unlike future answers; preserve and declare this initial context equally.",
+      "Native runner has inline ground_truth judging and later judgement feedback paths. User no-runtime-gold boundary requires separate scoring and careful adapter protocol; native default runner is not yet suitable for direct execution.",
+      "Final agent plans are later context in the native workflow; integration must preserve proposal provenance rather than treat generated itinerary as an observed business outcome."
+    ],
+    "status": "ADAPTER_NOT_IMPLEMENTED; no public experiment or sample selection"
+  },
+  "static_integration_review_sha256": "2a45929fd888fb75e544ac20005c96e3ef49f8f09357f9bd6d63fbf9b246fb5a"
 }
