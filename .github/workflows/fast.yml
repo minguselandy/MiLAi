@@ -173,12 +173,26 @@ jobs:
         working-directory: MiLAi-Lab
         run: |
           uv sync --frozen --dev --python 3.11
-          uv run milai-lab-check-boundary
-          uv run milai-lab-check-tools-boundary
-          uv run ruff check src tests tools
-          uv run mypy src/milai_lab
-          uv run pytest -q --maxfail=1 -m 'not regression'
-          uv run python tools/check_legacy_archive.py
+          uv run --no-sync python tools/check_verification_matrix.py
+          uv run --no-sync milai-lab-check-boundary
+          uv run --no-sync milai-lab-check-tools-boundary
+          uv run --no-sync ruff check src tests tools
+          uv run --no-sync mypy src/milai_lab/contracts src/milai_lab/analysis src/milai_lab/harness src/milai_lab/scorers src/milai_lab/boundary.py src/milai_lab/tools_boundary.py
+          if test -f tests/unit/test_lsa_controller_contract.py; then
+            uv run --no-sync mypy src/milai_lab/methods/local_state_attention/protocol.py
+            uv run --no-sync pytest -q tests/unit/test_lsa_controller_contract.py
+          fi
+          uv run --no-sync pytest -q --maxfail=1 -m 'not regression and not local_artifacts' \
+            --ignore=tests/unit/test_langmem_foundation.py \
+            --ignore=tests/unit/test_langmem_provenance.py \
+            --ignore=tests/unit/test_freshness_projection.py \
+            --ignore=tests/unit/test_milai_m1_v18.py \
+            --ignore=tests/unit/test_milai_odr.py \
+            --ignore=tests/unit/test_local_state_attention.py \
+            --ignore=tests/unit/test_local_state_attention_read_probe.py \
+            --ignore=tests/unit/test_langmem_application.py \
+            --ignore=tests/unit/test_external_memory_v26.py
+          uv run --no-sync python tools/check_legacy_archive.py
           uv build
 
   lab-langmem-foundation-fast:
@@ -197,6 +211,7 @@ jobs:
         working-directory: MiLAi-Lab
         run: |
           uv sync --frozen --dev --group baseline-langmem --python 3.11
+          uv run --no-sync python -c 'import langchain_core, langgraph, langmem, openai'
           uv run --no-sync milai-lab-check-boundary
           uv run --no-sync ruff check src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py tools/run_langmem_foundation.py tools/prepare_langmem_foundation.py tools/summarize_langmem_foundation.py tests/unit/test_langmem_foundation.py
           uv run --no-sync mypy src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py
@@ -207,6 +222,31 @@ jobs:
           uv run --no-sync ruff check src/milai_lab/methods/local_state_attention/read_probe.py tools/run_local_state_attention_read_probe.py tests/unit/test_local_state_attention_read_probe.py
           uv run --no-sync mypy src/milai_lab/methods/local_state_attention/read_probe.py tools/run_local_state_attention_read_probe.py
           uv run --no-sync pytest -q tests/unit/test_local_state_attention_read_probe.py
+          uv run --no-sync mypy src/milai_lab
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/datasets/merit.py
+          uv run --no-sync pytest -q tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
+
+  lab-external-fast:
+    name: Lab locked external adapter fast gate
+    if: github.event_name == 'pull_request' && needs.classify.outputs.lab == 'true'
+    needs: [classify, boundaries]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+      - name: Verify locked Mem0 adapter and collected tests
+        working-directory: MiLAi-Lab
+        run: |
+          uv sync --frozen --dev --group baseline-langmem --group external-mem0 --python 3.11
+          uv pip install --python .venv/bin/python --no-deps https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+          HF_HUB_DISABLE_TELEMETRY=1 uv run --no-sync python tools/prepare_external_memory_v26_assets.py --prepare
+          uv run --no-sync python -c 'import langmem, mem0, spacy'
+          uv run --no-sync mypy src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py
+          uv run --no-sync pytest -q tests/unit/test_external_memory_v26.py
 
   archive-fast:
     name: Archive validation
@@ -234,6 +274,7 @@ jobs:
       - product-integrations-fast
       - lab-fast
       - lab-langmem-foundation-fast
+      - lab-external-fast
       - archive-fast
     runs-on: ubuntu-latest
     steps:
@@ -248,6 +289,8 @@ jobs:
           INTEGRATIONS: ${{ needs.product-integrations-fast.result }}
           LAB: ${{ needs.lab-fast.result }}
           LAB_LANGMEM: ${{ needs.lab-langmem-foundation-fast.result }}
+          LAB_EXTERNAL: ${{ needs.lab-external-fast.result }}
+          LAB_SELECTED: ${{ needs.classify.outputs.lab }}
           ARCHIVE: ${{ needs.archive-fast.result }}
           FULL_REQUIRED: ${{ needs.classify.outputs.full_required }}
         shell: bash
@@ -256,10 +299,18 @@ jobs:
           for result in \
             "$CLASSIFY" "$BOUNDARIES" "$IDENTITY" "$CONFORMANCE" \
             "$TREE_IDENTITY" "$RUNTIME" "$INTEGRATIONS" "$LAB" \
-            "$LAB_LANGMEM" "$ARCHIVE"; do
+            "$LAB_LANGMEM" "$LAB_EXTERNAL" "$ARCHIVE"; do
             case "$result" in
               success|skipped) ;;
               *) echo "selected fast job did not pass: $result" >&2; exit 1 ;;
             esac
           done
+          if [[ "${{ github.event_name }}" == 'pull_request' && "$LAB_SELECTED" == 'true' ]]; then
+            for result in "$LAB" "$LAB_LANGMEM" "$LAB_EXTERNAL"; do
+              if [[ "$result" != 'success' ]]; then
+                echo "selected Lab check did not pass: $result" >&2
+                exit 1
+              fi
+            done
+          fi
           echo "full_required=$FULL_REQUIRED"
