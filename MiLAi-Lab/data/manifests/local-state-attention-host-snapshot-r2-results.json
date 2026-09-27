@@ -1,0 +1,180 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R2_RESULTS",
+  "status": "COMPLETE_DIAGNOSTIC_CANDIDATE_NOT_ADMITTED",
+  "source_commit": "346adc052e1a47e8572369861cd1ad1aeb99eb2f",
+  "source_implementation_commit": "83b707edee01435db454493ee792ca73f9de531f",
+  "jobs": [
+    {
+      "job_id": "stale_noop-unannotated",
+      "case_id": "stale_noop",
+      "arm": "diagnostic",
+      "variant": "unannotated",
+      "classification": "wrong_quantity_or_fact",
+      "observed_quantity": 3,
+      "expected_intended_quantity": 4,
+      "actual_receipt_quantity_and_id_preserved": false,
+      "strict_boundary_correct": false,
+      "outcome": "Proposed unexecuted native memory update3, expected intended4 from initial2 and two distinct increments. Legal native memory id; no business action.",
+      "tokens": {
+        "prompt_tokens": 1263,
+        "total_tokens": 1354,
+        "completion_tokens": 91,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.8766377279534936,
+      "request_sha256": "ecd97997d381d69aae89be21f4731c80407c8c1e239d8f5d6c1eb8ee35483a8c",
+      "artifact_sha256": "f4a2ec205f0c7e5b2bcd8c905645f1b35b4a2eade244a2797665b860d6b29cc7"
+    },
+    {
+      "job_id": "stale_noop-timing_identity",
+      "case_id": "stale_noop",
+      "arm": "diagnostic",
+      "variant": "timing_identity",
+      "classification": "wrong_quantity_or_fact",
+      "observed_quantity": 3,
+      "expected_intended_quantity": 4,
+      "actual_receipt_quantity_and_id_preserved": false,
+      "strict_boundary_correct": false,
+      "outcome": "Proposed unexecuted native memory update3, expected intended4 from initial2 and two distinct increments. Legal native memory id; no business action.",
+      "tokens": {
+        "prompt_tokens": 1455,
+        "total_tokens": 1540,
+        "completion_tokens": 85,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.7749458733014762,
+      "request_sha256": "881ae719f6d3d8fcd04fdbf1ab4d34a5bb136cabd716817ab82050ffb0b08d9b",
+      "artifact_sha256": "fef0c48c0c45e22436757fa303baf745c56b6e5d45faa1e8f5de40f543e0de96"
+    },
+    {
+      "job_id": "tool_loop-timing_identity",
+      "case_id": "tool_loop",
+      "arm": "diagnostic",
+      "variant": "timing_identity",
+      "classification": "wrong_quantity_or_fact",
+      "observed_quantity": 5,
+      "expected_intended_quantity": 4,
+      "actual_receipt_quantity_and_id_preserved": false,
+      "strict_boundary_correct": false,
+      "outcome": "Directly asserted agreed plan5 and recorded change; actual native memory write5 exists but intended plan4 is not reconciled. No new action.",
+      "tokens": {
+        "prompt_tokens": 1783,
+        "total_tokens": 1825,
+        "completion_tokens": 42,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.5506617119535804,
+      "request_sha256": "a0fb27b0136435eebb3f1251aa0fc0ecc43aee394a3b6fae77814424ebc81649",
+      "artifact_sha256": "8af8272fa0c4134b492080c302caa90772b93ce2bd26220ed463fbc74854caf4"
+    },
+    {
+      "job_id": "tool_loop-unannotated",
+      "case_id": "tool_loop",
+      "arm": "diagnostic",
+      "variant": "unannotated",
+      "classification": "wrong_quantity_or_fact",
+      "observed_quantity": 5,
+      "expected_intended_quantity": 4,
+      "actual_receipt_quantity_and_id_preserved": false,
+      "strict_boundary_correct": false,
+      "outcome": "Directly asserted agreed plan5 and recorded change; actual native memory write5 exists but intended plan4 is not reconciled. No new action.",
+      "tokens": {
+        "prompt_tokens": 1566,
+        "total_tokens": 1611,
+        "completion_tokens": 45,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.5549517767503858,
+      "request_sha256": "d5c48d64b1af90ef124854f46f47d0c59d9b93cfa02bc2c07a96faec57ae3aa7",
+      "artifact_sha256": "139d60e1ae287fab118226c82a873c24c74712c26b2a03a998b0c97fe2d1b7e6"
+    },
+    {
+      "job_id": "actual_receipt-unannotated",
+      "case_id": "actual_receipt",
+      "arm": "diagnostic",
+      "variant": "unannotated",
+      "classification": "wrong_quantity_or_fact",
+      "observed_quantity": 5,
+      "expected_intended_quantity": 4,
+      "actual_receipt_quantity_and_id_preserved": true,
+      "strict_boundary_correct": false,
+      "outcome": "Preserved actual reservation quantity5 and exact reservation id without repeating business action. Answer destination storage S-2 differs from actual receipt destination S-2; strict full receipt fidelity is not awarded.",
+      "tokens": {
+        "prompt_tokens": 2197,
+        "total_tokens": 2273,
+        "completion_tokens": 76,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.8156726099550724,
+      "request_sha256": "39d226ca2acd47c6e0a4d59e91795276784002e24d14f657df39c857b018f8d3",
+      "artifact_sha256": "4c6c83a25d8d3b05286c42a97281e00d509ae4d8e0b43385f742ecbad0f3964f"
+    },
+    {
+      "job_id": "actual_receipt-timing_identity",
+      "case_id": "actual_receipt",
+      "arm": "diagnostic",
+      "variant": "timing_identity",
+      "classification": "wrong_quantity_or_fact",
+      "observed_quantity": 5,
+      "expected_intended_quantity": 4,
+      "actual_receipt_quantity_and_id_preserved": true,
+      "strict_boundary_correct": false,
+      "outcome": "Preserved actual reservation quantity5 and exact reservation id without repeating business action. Answer destination storage S-2 differs from actual receipt destination S-2; strict full receipt fidelity is not awarded.",
+      "tokens": {
+        "prompt_tokens": 2414,
+        "total_tokens": 2490,
+        "completion_tokens": 76,
+        "prompt_tokens_details": null
+      },
+      "http_wall_seconds": 0.8468954809941351,
+      "request_sha256": "e40ac6a32320197a14344205509bdd1235bf874edd9deced48ed81664cc6ae58",
+      "artifact_sha256": "d18de4d485117bd3e5cd68f0435ffb567a1ed78810e6a082968709c1d3fbc03f"
+    }
+  ],
+  "decision": "Do not deploy or iterate timing/identity clause. Keep original live Host view; proceed to LR and strong baselines with declared Host semantic limitations.",
+  "denominator": {
+    "first_responses": 6,
+    "complete_tasks_claimed": 0
+  },
+  "calls": {
+    "host": 6,
+    "controller": 0,
+    "embedding": 0,
+    "business_execution": 0,
+    "store_reads": 0,
+    "store_writes": 0
+  },
+  "generation_tokens": 11093,
+  "http_wall_seconds": 4.4197651809081435,
+  "continuous_budget": {
+    "generation_requests": 2424,
+    "generation_tokens": 3030361,
+    "embedding_tokens": 18183
+  },
+  "artifact_sha256": {
+    "inputs.json": "9bf102820b879f466ce5824cf3dfcff3c749d69f3aee538abb12918e2daec12f",
+    "config.json": "2e6801b84190c1681ea835dc45c276eb1ee12390aa826196ddecd75767a0f46f",
+    "execution-freeze.json": "f4e9446135766f4cbf9a082d5c07e69b3637767f27918a141560a2cde231405f",
+    "prepared.json": "39ae4f60cfff20070f1852d8bceede012562f8fdfd3fda92a97f5cacc274c3ec",
+    "runtime/run_manifest.json": "ea5b12c7205f7ee8d1ad9d0222d3b7d048bba987f886d9e2585ead90cad63d12",
+    "runtime/trace.jsonl": "8f6bd5bc8993ed1c7e4a13e004b640f4cc86b759e92b28ae95db68c5ac1ee577",
+    "budget-before.json": "7d698fd551b0312211be062e24c4d135e35d1caa7f9eb78c21245a4fd8b81ccd",
+    "budget-after.json": "75deecace75419e8b51423e748554d35a3d10ee8b12ada3f18b2d133679ea065"
+  },
+  "validation": {
+    "frozen_source_files": 143,
+    "same_non_view_messages_schema_parameters": true,
+    "tool_loop_unannotated_equals_original_request": true,
+    "unchanged_r1_clause": true,
+    "http_receipts_equal_job_requests": true,
+    "ledger_reconciled": true,
+    "unknown_usage": 0,
+    "historical_cost_chain_unchanged": true
+  },
+  "limits": [
+    "One response per boundary/variant; not task success or repeat stability.",
+    "Stale/no-op has identical extra real initial source in both variants; old-State injections are offline diagnostics only.",
+    "Real-receipt quantity/id success does not imply matching destination or repair of wrong business action.",
+    "Native-memory argument guard is not exercised by read-only probe."
+  ]
+}

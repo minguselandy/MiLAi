@@ -54,6 +54,16 @@ Use the actual pinned LangGraph public hook and existing ApplicationWorld/journa
 Keep vLLM and Product unchanged. Broad evaluation follows implementation and small validity
 checks; matched baselines have equal event/source access and recovery opportunities.
 
+The [Host snapshot R2 counterexamples](docs/MILAI_LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R2_RESULTS_20260927.md)
+did not admit the timing/identity clause: do not deploy it or continue wording tweaks.
+Keep the current live Host view. The [LR wiring protocol](data/manifests/local-state-attention-lr-wiring-r1-protocol.json)
+freezes two exposed scripts across L/LR/LRU, six full trajectories/36 messages. LR uses exact
+L full-candidate events-only maintenance followed by the same independent A as LRU, without
+a U call. 53 affected checks, two zero-model prepares and one necessary build have passed;
+do not repeat them for publication. Root runs after Luna publication, with source held for
+the complete batch and all failures/costs retained. Strong history/rebuild baselines and
+the remaining complete LSA plan stay active. MERIT base seeds0–4 are all already exposed.
+
 The user activated the full [long-horizon master plan](docs/MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md),
 tracked by [the execution Goal](docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md).
 This supersedes prior closed-stage restrictions for the new research scope; preserve their

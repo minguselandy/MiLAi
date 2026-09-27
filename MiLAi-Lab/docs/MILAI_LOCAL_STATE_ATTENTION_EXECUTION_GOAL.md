@@ -320,6 +320,21 @@ prepare与Root串行诊断。原生工具修复不被这个probe执行，不能�
 只有三个候选反例均正确才考虑另外冻结的live切片；否则不部署/不调措辞，继续LR及强基线，
 当前Host liveview保持原样。完整Goal不因这六个诊断结束而关闭。
 
+[R2正确性反例结果](MILAI_LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R2_RESULTS_20260927.md)已完成全部六首响应。
+两视图在旧State下均提出3而非应有4，tool-only均沿错误memory历史答5；真实预约组均保留5和
+真实ID、不重复业务，但把实际目的地S-2写成storage S-2。按原门槛不部署/不调时点说明，
+Host liveview不变。新增6/11093/0；累计2424/3030361/18183，143源码及wire/ledger核对通过。
+下一最小实现为LR：沿L全候选events-only维护，再复用LRU独立A；没有U模型调用。
+先以原interleaved/partial小接线验证L/LR/LRU，原失败不替换，随后推进强历史/重建对照。
+源码由同一Sol负责，Root继续冻结输入与评分；不同时修改Host或恢复旧v27部署。
+
+[LR小接线协议](../data/manifests/local-state-attention-lr-wiring-r1-protocol.json)已冻结六轨迹36消息，
+interleaved顺序LR→L→LRU，partial顺序LRU→L→LR，每格一次，保留原12消息/rubric。
+实现只改controller/CLI/config/LSA窄测，LR没有U调用；L/LR维护请求、LR/LRU独立A请求的
+mock相等性通过，并覆盖新卡读取及A失败后已写State保留。53项受影响检查、目标静态、两原
+脚本LR零模型prepare及一次必要build通过，哈希在协议。发布后正式prepare绑定实际源码；
+六轨迹期间不修改源文件。LRU候选限制措辞与L/LR仍有差异，在线分叉不能称纯U因果效应。
+
 ## 后期资源准备记录
 
 已核对 [LangMem 官方 API](https://langchain-ai.github.io/langmem/reference/) 确实区分
@@ -359,6 +374,11 @@ judgement feedback路径；直接运行它尚不满足本项目runtime不读gold
 这是静态可行性发现，不是已运行独立任务族；未读取任何任务正文或选择样本。
 
 ## 失败、决策与完成审核
+
+Luna的[MERIT元数据暴露盘点](../data/manifests/local-state-attention-merit-exposure.json)补充确认
+base_seed0–4均已暴露：1/2在v11已有完整或中断的模型轨迹，3/4在v23完成三臂。后续P5须全部
+排除，不能只排0/3/4。当前最小未记录seed是5；本次没有生成、选择或查看新题正文，仍需在
+P5源码冻结后另行预注册原生selection。记录之外的手动接触无法由元数据证明不存在。
 
 每个失败阶段记录 Observed、Expected、实际链、首断点、至少两种解释、最小区分实验、
 通用修复与反例、混杂、完整成本和 Continue/Simplify/Redesign/Stop 理由。

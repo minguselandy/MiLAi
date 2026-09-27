@@ -74,7 +74,7 @@ class LocalStateController:
                  maintenance_only: bool = False) -> None:
         if representation not in {"local", "global_note"}:
             raise ValueError("LSA_REPRESENTATION_UNKNOWN")
-        if update_policy not in {"all", "lru"}:
+        if update_policy not in {"all", "lr", "lru"}:
             raise ValueError("LSA_UPDATE_POLICY_UNKNOWN")
         self.bank = bank
         self.client = client
@@ -153,9 +153,9 @@ class LocalStateController:
             prompt += (" Keep separate local States for matters that can be updated and "
                        "resumed independently; a shared topic alone does not make them "
                        "one matter.")
-        if self.update_policy == "lru":
-            return self._prepare_lru(scope, query_id, query, message_key,
-                                     pending, states, events, prompt)
+        if self.update_policy in {"lr", "lru"}:
+            return self._prepare_independent_read(scope, query_id, query, message_key,
+                                                  pending, states, events, prompt)
         if self.maintenance_only:
             return self._prepare_all_maintenance(scope, query_id, message_key,
                                                  pending, states, events, prompt)
@@ -326,18 +326,20 @@ class LocalStateController:
         return {"focus": [], "receipts": receipts, "degraded": invalid,
                 "reused": False, "pending_event_ids": remaining}
 
-    def _prepare_lru(self, scope: StateScope, query_id: str, query: str,
-                     message_key: str, pending: list[dict[str, Any]],
-                     states: list[dict[str, Any]], events: list[dict[str, Any]],
-                     prompt: str) -> dict[str, Any]:
-        directory = [{key: state[key] for key in ("id", "title", "needs", "revision")}
-                     for state in states]
+    def _prepare_independent_read(self, scope: StateScope, query_id: str, query: str,
+                                  message_key: str, pending: list[dict[str, Any]],
+                                  states: list[dict[str, Any]], events: list[dict[str, Any]],
+                                  prompt: str) -> dict[str, Any]:
+        selective_update = self.update_policy == "lru"
+        event_prefix = "lsa_lru" if selective_update else "lsa_lr"
+        directory = ([{key: state[key] for key in ("id", "title", "needs", "revision")}
+                      for state in states] if selective_update else [])
         state_ids = {row["id"] for row in states}
         observations = [self._event_view(row) for row in pending]
         base = {"current_task": query, "new_observations": observations,
                 "directory": directory}
-        stats = {"directory_bytes": len(json.dumps(
-            directory, ensure_ascii=False).encode("utf-8")),
+        stats = {"directory_bytes": (len(json.dumps(
+            directory, ensure_ascii=False).encode("utf-8")) if selective_update else 0),
             "full_bank_content_chars": sum(len(row["content"]) for row in states)}
         id_items: dict[str, Any] = {"type": "string"}
         if state_ids:
@@ -356,13 +358,15 @@ class LocalStateController:
                       "reused": False, "reason": reason,
                       "pending_event_ids": [row["id"] for row in self.bank.pending(scope)]}
             if self.emit is not None:
-                self.emit({"event": "lsa_lru_result", "stage": stage,
+                self.emit({"event": event_prefix + "_result", "stage": stage,
                            "user_id": scope.user_id, "degraded": True,
                            "reason": reason, "update_ids": selected_update_ids,
                            "read_ids": [],
                            "edits": result["receipts"], **stats})
             return result
-        if pending and states:
+        if not selective_update:
+            route = {"update_ids": ([row["id"] for row in states] if pending else [])}
+        elif pending and states:
             try:
                 route = self._stage_call(
                     "update_selector", message_key,
@@ -389,9 +393,11 @@ class LocalStateController:
             candidates, ensure_ascii=False).encode("utf-8"))
         stats["candidate_body_bytes"] = candidate_bytes
         if self.emit is not None:
-            self.emit({"event": "lsa_lru_selection", "stage": "update_selector",
+            self.emit({"event": event_prefix + "_selection",
+                       "stage": "update_selector" if selective_update else "update_candidates",
                        "user_id": scope.user_id, "update_ids": update_ids,
                        "selector_skipped_reason": (
+                           "full_bank_policy" if not selective_update else
                            "no_pending" if not pending else
                            "empty_bank" if not states else None), **stats})
         event_ids = {row["id"] for row in pending}
@@ -400,7 +406,7 @@ class LocalStateController:
             try:
                 plan = self._stage_call(
                     "maintenance", message_key,
-                    self._maintenance_prompt(prompt, candidate_only=True),
+                    self._maintenance_prompt(prompt, candidate_only=selective_update),
                     self._maintenance_payload(pending, candidates, events),
                     self._maintenance_schema(update_ids))
             except (ControlResponseError, httpx.TimeoutException) as error:
@@ -448,7 +454,7 @@ class LocalStateController:
         result = {"focus": read_ids, "receipts": receipts, "degraded": False,
                   "reused": False, "pending_event_ids": []}
         if self.emit is not None:
-            self.emit({"event": "lsa_lru_result", "user_id": scope.user_id,
+                self.emit({"event": event_prefix + "_result", "user_id": scope.user_id,
                        "degraded": False, "update_ids": update_ids,
                        "read_ids": read_ids, "edits": receipts, **stats})
         return result

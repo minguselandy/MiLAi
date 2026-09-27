@@ -1,0 +1,155 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_LR_WIRING_R1_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_SOURCE_PUBLICATION",
+  "scope": "Two exposed complete trajectories across L/LR/LRU; small wiring and contract comparison for P4, not repeated efficacy or completion of six ablations.",
+  "basis": [
+    "docs/MILAI_LOCAL_STATE_ATTENTION_P3_MATCHED_R1_RESULTS_20260927.md",
+    "docs/MILAI_LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R2_RESULTS_20260927.md"
+  ],
+  "run_order": [
+    {
+      "run_id": "lsa-lr-wiring-r1-interleaved-local_lr_sources",
+      "case": "interleaved",
+      "arm": "local_lr_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-interleaved-local_all_sources",
+      "case": "interleaved",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-interleaved-local_lru_sources",
+      "case": "interleaved",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-interleaved-workshop.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-partial-local_lru_sources",
+      "case": "partial",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-partial-local_all_sources",
+      "case": "partial",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-lr-wiring-r1-partial-local_lr_sources",
+      "case": "partial",
+      "arm": "local_lr_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-interleaved-workshop.json": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "denominators": {
+    "public_messages": 36,
+    "messages_per_arm": 12,
+    "trajectories": 6,
+    "whole_trajectories_per_arm": 2
+  },
+  "split": "exposed development",
+  "shared": {
+    "controller_max_tokens": 2048,
+    "controller_calls_per_public_message": 13,
+    "host_max_tokens": 4096,
+    "host_calls_per_public_message": 12,
+    "http_concurrency": 1,
+    "aggregate_content_budget_chars": 16000,
+    "source_view_utf8_budget": 16384,
+    "state_content_chars": 4000,
+    "max_states": 32,
+    "max_events": 256
+  },
+  "method_contracts": {
+    "L": "all existing State bodies to events-only edits-only maintainer, all-source read",
+    "LR": "same L maintenance prompt/payload/schema and all candidate bodies; no U call; independently run same LRU post-maintenance A; focus-source read",
+    "LRU": "unchanged short-directory U and selected-candidate maintenance, then independent same A; focus-source read"
+  },
+  "hypotheses": {
+    "H1": "P3 L/LRU difference includes an independent post-maintenance A contract and creation-path difference, so cannot isolate U cost/benefit. LR fills the missing all-update/independent-read reference.",
+    "H2": "At current small bank sizes selection saves little body context while directory/U/A overhead or omissions can outweigh any benefit; actual stage costs and delivery must separate this from state formation and Host use errors."
+  },
+  "fairness": [
+    "Same original full scripts/rubric, current source/config, observation/source access and budgets.",
+    "Each arm forms its own State partitions; no oracle IDs or other-arm bank reuse.",
+    "LRU selected-candidate maintenance instruction differs naturally from L/LR all-candidate instruction; report remaining prompt and trajectory differences, not a perfectly isolated semantic U ablation.",
+    "Native memory conditional-argument guard applies equally to all three arms; historical abort stays historical.",
+    "No Host timing/identity candidate, no vLLM change, no rubric at runtime."
+  ],
+  "scoring": "Original p1-rubric full12 messages per arm. Preserve exact item_key/destination/packing, real partial receipt/get found/same-id label recovery, other owner isolation, all failures and skipped messages. Mechanism audit uses actual HTTP/State commits/delivery/real actions, not normal exit.",
+  "mechanism_checks": [
+    "LR has zero update_selector HTTP, maintenance sees every current State with no current_task and same L shared contract.",
+    "LR independent A runs after durable maintenance and can choose newly created State IDs; same LRU A contract.",
+    "A failures preserve successful writes; pending/optional-control capacity behavior recorded.",
+    "Record every role/stage token, candidate/directory/body/wire bytes, Store I/O, partitions and pending. Full Store directory scan is not counted as physical read savings."
+  ],
+  "order_rationale": "New LR first for wiring validity; reverse outer arm order for second script. Fixed before any real call.",
+  "isolation": "Fresh run/arm/user State+LangMem namespaces, world/checkpoint/journal; independent phase processes.",
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 2424,
+    "generation_tokens": 3030361,
+    "embedding_tokens": 18183
+  },
+  "source_freeze": "Formal prepare only after source and protocol publication; bind actualsource/input/config/dependencies and freeze through all six trajectories.",
+  "stop_rule": "All semantic/capacity/optional-control failures retain full denominators; stop affected execution on infrastructure/uncaught faults and diagnose before remaining originally planned independent runs. No replay/replacement.",
+  "next_decision": "After six full trajectories inspect wiring once. Do not keep tuning exposed Host mistakes. Advance common legitimate history/strong baselines and remaining targeted obligations; broad sensitivity waits for implementation/validity.",
+  "validation": {
+    "affected_unit_tests": 53,
+    "target_ruff": "PASS",
+    "target_mypy": "PASS",
+    "diff_check": "PASS",
+    "zero_model_prepare": "PASS final-source LR on original interleaved/partial in /tmp; formal prepare after publication",
+    "build": {
+      "wheel_sha256": "5c28ef7b121fd34b3a473a46552a7816964d0cad4c47a9d80c721367756bc387",
+      "sdist_sha256": "041722edb9f7775690f038d70cb13c2bff65322752b99d9b86b9074414a91028",
+      "checks": "wheel controller and sdist CLI present"
+    },
+    "contract_checks": [
+      "L/LR maintenance request equality",
+      "LR/LRU A request equality",
+      "A selects newly created State",
+      "A failure preserves real successful maintenance and pending semantics",
+      "focus_sources delivers only selected refs"
+    ],
+    "real_model_calls": 0
+  }
+}

@@ -678,6 +678,44 @@ def test_lru_hook_updates_background_and_reads_only_foreground_sources(
         "update_selector", "maintenance", "read_selector"}
 
 
+def test_lr_hook_reads_only_selected_sources_after_full_bank_maintenance() -> None:
+    bank = LocalStateBank(InMemoryStore(), max_total_content_chars=16000)
+    scope = StateScope("run", "local_lr_sources", "alice")
+    state_ids: dict[str, str] = {}
+    for label in ("background", "foreground"):
+        source_id = "source-" + label
+        bank.record_event(scope, {"id": source_id, "kind": "tool", "actor": "tool",
+                                  "tool_call_id": source_id,
+                                  "content": "receipt-" + label})
+        created, invalid = bank.apply(scope, [{"id": None, "title": label,
+                                               "content": "state-" + label,
+                                               "evidence": [source_id]}], {source_id})
+        assert not invalid
+        state_ids[label] = created[0]["id"]
+    replies = LruReplies({"maintenance": [{"edits": []}],
+                          "read_selector": [{"read_ids": [state_ids["foreground"]]}]})
+    emitted: list[dict[str, Any]] = []
+    controller = LocalStateController(
+        bank, replies, emit=emitted.append,  # type: ignore[arg-type]
+        local_granularity=True, update_policy="lr", maintenance_only=True)
+    original = HumanMessage(id="live", content="Read the foreground matter")
+    hook = make_pre_model_hook(controller, "Original system", "focus_sources", 16384)
+    output = hook({"messages": [original]}, {"configurable": {
+        "foundation_run_id": "run", "arm_id": "local_lr_sources", "user_id": "alice",
+        "thread_id": "thread"}})
+    assert [call["stage"] for call in replies.calls] == ["maintenance", "read_selector"]
+    assert {row["id"] for row in replies.calls[0]["payload"]["states"]} == set(
+        state_ids.values())
+    view = next(row for row in emitted if row["event"] == "lsa_view")
+    assert view["controller_focus"] == view["delivered_state_ids"] == [
+        state_ids["foreground"]]
+    assert view["source_delivered_ids"] == ["source-foreground"]
+    wire = output["llm_input_messages"]
+    assert wire[1] is original
+    assert "receipt-foreground" in wire[0].content
+    assert "receipt-background" not in wire[0].content
+
+
 @pytest.mark.parametrize("arm", ["global_note_sources", "local_all_sources"])
 def test_all_read_maintenance_uses_only_pending_events_and_preserves_identity(
     arm: str,
@@ -778,6 +816,108 @@ def test_lru_shared_update_new_read_and_empty_update() -> None:
     assert [call["stage"] for call in replies.calls] == [
         "update_selector", "maintenance", "read_selector",
         "update_selector", "maintenance", "read_selector"]
+
+
+def test_lr_matches_l_maintenance_and_reads_new_state_without_u() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store, max_total_content_chars=16000)
+    l_scope = StateScope("run", "local_all_sources", "alice")
+    lr_scope = StateScope("run", "local_lr_sources", "alice")
+    bank.record_event(l_scope, {"id": "seed", "kind": "user", "content": "first matter"})
+    created, invalid = bank.apply(l_scope, [{"id": None, "title": "first",
+                                            "content": "old first"}], {"seed"})
+    assert not invalid
+    first_id = created[0]["id"]
+    for state in bank.states(l_scope):
+        store.put(lr_scope.namespace("states"), state["id"], state, index=False)
+    for event in bank.events(l_scope):
+        store.put(lr_scope.namespace("events"), event["id"], event, index=False)
+    for scope in (l_scope, lr_scope):
+        bank.record_event(scope, {"id": "change", "kind": "user",
+                                  "content": "revise first; add second"})
+    edits = [{"id": first_id, "content": "revised first"},
+             {"id": None, "title": "second", "content": "new second"}]
+    l_replies = LruReplies({"maintenance": [{"edits": edits}]})
+    lr_replies = LruReplies({"maintenance": [{"edits": edits}],
+                             "read_selector": [lambda payload: {"read_ids": [next(
+                                 row["id"] for row in payload["directory"]
+                                 if row["id"] != first_id)]}]})
+    local_controller = LocalStateController(bank, l_replies,  # type: ignore[arg-type]
+                                             local_granularity=True, maintenance_only=True)
+    emitted: list[dict[str, Any]] = []
+    lr = LocalStateController(bank, lr_replies, emit=emitted.append,  # type: ignore[arg-type]
+                              local_granularity=True, update_policy="lr",
+                              maintenance_only=True)
+    l_result = local_controller.prepare(l_scope, "change", "read second")
+    lr_result = lr.prepare(lr_scope, "change", "read second")
+    assert not l_result["degraded"] and not lr_result["degraded"]
+    assert l_replies.calls == lr_replies.calls[:1]
+    assert [call["stage"] for call in lr_replies.calls] == [
+        "maintenance", "read_selector"]
+    assert [row["id"] for row in lr_replies.calls[0]["payload"]["states"]] == [first_id]
+    assert lr_result["focus"] == [lr_result["receipts"][1]["id"]]
+    assert lr_replies.calls[1]["payload"]["current_task"] == "read second"
+    assert bank.pending(lr_scope) == []
+    assert next(row for row in emitted if row["event"] == "lsa_lr_selection")[
+        "selector_skipped_reason"] == "full_bank_policy"
+    assert {row["stage"] for row in emitted if row["event"] == "lsa_control_stage_call"} == {
+        "maintenance", "read_selector"}
+
+
+def test_lr_and_lru_use_identical_independent_read_contract() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    lr_scope = StateScope("run", "local_lr_sources", "alice")
+    lru_scope = StateScope("run", "local_lru_sources", "alice")
+    bank.record_event(lr_scope, {"id": "seed", "kind": "user", "content": "matter"})
+    created, invalid = bank.apply(lr_scope, [{"id": None, "title": "matter",
+                                              "content": "known"}], {"seed"})
+    assert not invalid
+    state_id = created[0]["id"]
+    for state in bank.states(lr_scope):
+        store.put(lru_scope.namespace("states"), state["id"], state, index=False)
+    for event in bank.events(lr_scope):
+        store.put(lru_scope.namespace("events"), event["id"], event, index=False)
+    lr_replies = LruReplies({"read_selector": [{"read_ids": [state_id]}]})
+    lru_replies = LruReplies({"read_selector": [{"read_ids": [state_id]}]})
+    lr = LocalStateController(bank, lr_replies,  # type: ignore[arg-type]
+                              update_policy="lr", maintenance_only=True)
+    lru = LocalStateController(bank, lru_replies,  # type: ignore[arg-type]
+                               update_policy="lru", maintenance_only=True)
+    assert lr.prepare(lr_scope, "query", "read matter")["focus"] == [state_id]
+    assert lru.prepare(lru_scope, "query", "read matter")["focus"] == [state_id]
+    assert lr_replies.calls == lru_replies.calls
+    assert [call["stage"] for call in lr_replies.calls] == ["read_selector"]
+
+
+def test_lr_read_failure_keeps_committed_update_and_maintenance_failure_pending() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local_lr_sources", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "matter"})
+    created, invalid = bank.apply(scope, [{"id": None, "title": "matter",
+                                           "content": "old"}], {"seed"})
+    assert not invalid
+    state_id = created[0]["id"]
+    bank.record_event(scope, {"id": "change", "kind": "user", "content": "new"})
+    replies = LruReplies({
+        "maintenance": [httpx.ReadTimeout("mock"),
+                        {"edits": [{"id": state_id, "content": "new"}]}],
+        "read_selector": [httpx.ReadTimeout("mock"), {"read_ids": [state_id]}]})
+    controller = LocalStateController(bank, replies,  # type: ignore[arg-type]
+                                      update_policy="lr", maintenance_only=True)
+    first = controller.prepare(scope, "change", "read matter")
+    assert first["degraded"] and first["reason"] == "ReadTimeout"
+    assert [row["id"] for row in bank.pending(scope)] == ["change"]
+    assert bank.states(scope)[0]["content"] == "old"
+    second = controller.prepare(scope, "change", "read matter")
+    assert second["degraded"] and second["reason"] == "ReadTimeout"
+    assert second["receipts"][0]["status"] == "updated"
+    assert bank.pending(scope) == [] and bank.states(scope)[0]["content"] == "new"
+    assert bank.focus(scope, "change") is None
+    recovered = controller.prepare(scope, "change", "read matter")
+    assert recovered["focus"] == [state_id] and not recovered["degraded"]
+    assert [call["stage"] for call in replies.calls] == [
+        "maintenance", "maintenance", "read_selector", "read_selector"]
 
 
 def test_lru_first_observation_and_empty_u_each_reach_shared_maintainer() -> None:
@@ -1071,7 +1211,8 @@ def test_control_schema_rejects_r1_missing_title_and_factual_focus() -> None:
 
 
 @pytest.mark.parametrize("arm", ["local_state", "local_all", "local_all_sources",
-                                 "global_note_sources", "local_lru_sources"])
+                                 "global_note_sources", "local_lr_sources",
+                                 "local_lru_sources"])
 def test_runtime_explicitly_disables_ser_for_local_state(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str,
 ) -> None:
@@ -1203,6 +1344,7 @@ def test_deleted_checkpoint_source_does_not_reenter_state_or_host_view(
     ("local_state", "focus"), ("local_all", "all"),
     ("local_all_sources", "all_sources"),
     ("global_note_sources", "all_sources"),
+    ("local_lr_sources", "focus_sources"),
     ("local_lru_sources", "focus_sources")])
 def test_cli_local_state_path_reuses_application_runner_without_ser(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, read_policy: str,
@@ -1283,15 +1425,18 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     assert entry.run(args)["status"] == "TERMINAL"
     expected_limits = ((1, 16000, 16000) if arm == "global_note_sources" else
                        (4, 4000, 16000) if arm in {
-                           "local_all_sources", "local_lru_sources"} else
+                           "local_all_sources", "local_lr_sources",
+                           "local_lru_sources"} else
                        (4, 4000, None))
     assert called == [False, 100, read_policy,
                       16384 if read_policy in {"all_sources", "focus_sources"} else None,
                       "global_note" if arm == "global_note_sources" else "local",
-                      "lru" if arm == "local_lru_sources" else "all",
-                      arm in {"local_all_sources", "local_lru_sources"},
-                      arm in {"global_note_sources", "local_all_sources",
+                      "lru" if arm == "local_lru_sources" else
+                      "lr" if arm == "local_lr_sources" else "all",
+                      arm in {"local_all_sources", "local_lr_sources",
                               "local_lru_sources"},
+                      arm in {"global_note_sources", "local_all_sources",
+                              "local_lr_sources", "local_lru_sources"},
                       expected_limits]
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
@@ -1300,19 +1445,28 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     assert manifest["identity"]["representation"] == (
         "global_note" if arm == "global_note_sources" else "local")
     assert manifest["identity"]["local_granularity"] == (
-        arm in {"local_all_sources", "local_lru_sources"})
+        arm in {"local_all_sources", "local_lr_sources", "local_lru_sources"})
     assert manifest["identity"]["update_policy"] == (
-        "lru" if arm == "local_lru_sources" else "all")
+        "lru" if arm == "local_lru_sources" else
+        "lr" if arm == "local_lr_sources" else "all")
+    assert manifest["identity"]["update_candidate_policy"] == (
+        "all_existing_without_selector" if arm == "local_lr_sources" else
+        "model_selected_existing" if arm == "local_lru_sources" else None)
+    assert manifest["identity"]["read_selection_policy"] == (
+        "independent_after_maintenance" if arm in {
+            "local_lr_sources", "local_lru_sources"} else None)
     assert manifest["identity"]["creation_policy"] == (
         "shared_maintenance_each_pending_batch"
-        if arm == "local_lru_sources" else None)
+        if arm in {"local_lr_sources", "local_lru_sources"} else None)
     assert manifest["identity"]["maintenance_input_policy"] == (
         "pending_events_candidates_source_ids" if arm in {
-            "global_note_sources", "local_all_sources", "local_lru_sources"} else
+            "global_note_sources", "local_all_sources", "local_lr_sources",
+            "local_lru_sources"} else
         "current_task_pending_events_states_source_ids")
     assert manifest["identity"]["maintenance_response_contract"] == (
         "edits_only" if arm in {"global_note_sources", "local_all_sources",
-                                "local_lru_sources"} else "edits_and_focus")
+                                "local_lr_sources", "local_lru_sources"} else
+        "edits_and_focus")
     assert manifest["identity"]["effective_content_limits"] == dict(zip(
         ("max_states", "max_state_content_chars", "max_total_content_chars"),
         expected_limits, strict=True))
@@ -1342,6 +1496,8 @@ def test_missing_aggregate_setting_preserves_existing_local_capacity(
     assert entry._local_granularity("local_all_sources", config) is False
     with pytest.raises(ValueError, match="LSA_LRU_REQUIRES_LOCAL_GRANULARITY"):
         entry._local_granularity("local_lru_sources", config)
+    with pytest.raises(ValueError, match="LSA_LR_REQUIRES_LOCAL_GRANULARITY"):
+        entry._local_granularity("local_lr_sources", config)
 
 
 def test_lru_accounting_preserves_total_role_and_substage_cost(

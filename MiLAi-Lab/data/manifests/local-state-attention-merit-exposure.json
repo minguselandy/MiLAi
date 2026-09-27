@@ -1,0 +1,118 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_MERIT_EXPOSURE_INVENTORY",
+  "status": "METADATA_ONLY_NO_NEW_SELECTION",
+  "known_exposed_base_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "records": [
+    {
+      "base_seed": 0,
+      "arc_id": "arc0-000",
+      "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 0,
+        "difficulty": "hard"
+      },
+      "selection_path": "data/manifests/contextual-memory-v7-e0-selection-final.json",
+      "selection_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+      "private_artifact_hashes": {
+        "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+        "initial_world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29"
+      }
+    },
+    {
+      "base_seed": 1,
+      "arc_id": "arc1-000",
+      "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 1,
+        "difficulty": "hard"
+      },
+      "selection_path": "data/manifests/contextual-memory-v11-f-arc1-selection.json",
+      "selection_sha256": "0f2e216f2f361a73a937401e307b1baba56d5db23779291d8c31c2751817dccd",
+      "private_artifact_hashes": {
+        "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+        "initial_world_sha256": "a88689a69adb70a390936412d536a6c73c7e7180728b702dfd7a4f968e47d0d8"
+      }
+    },
+    {
+      "base_seed": 2,
+      "arc_id": "arc2-000",
+      "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 2,
+        "difficulty": "hard"
+      },
+      "selection_path": "data/manifests/contextual-memory-v11-f-arc2-selection.json",
+      "selection_sha256": "2f74bda5f6140a2ba39d6cdad1ed8de98331713317927bd5843e3344a986eef8",
+      "private_artifact_hashes": {
+        "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+        "initial_world_sha256": "21130ceaa1bc7cee64fe2ab037ec35203ebb42f71cb245829e7fe72d433b454a"
+      }
+    },
+    {
+      "base_seed": 3,
+      "arc_id": "arc3-000",
+      "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 3,
+        "difficulty": "hard"
+      },
+      "selection_path": "data/manifests/milai-ser-v23-arc3-selection.json",
+      "selection_sha256": "a69f95a8b13fe46a1984ddb64de2fb79d1b1fd05cf5f7eb04ddc5653d159cf7c",
+      "private_artifact_hashes": {
+        "arc_sha256": "2589ab3113e8617beb6960410d936da71b30e39ba4871adf66f72a488373bfba",
+        "initial_world_sha256": "0a574e9ccb44fb4d3ae4fc1c4cb4692a3837c3dbf739f71c14070f008e3dba43"
+      }
+    },
+    {
+      "base_seed": 4,
+      "arc_id": "arc4-000",
+      "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+      "generator_arguments": {
+        "n_arcs": 1,
+        "episodes_per_arc": 5,
+        "dep_ratio": 0.5,
+        "base_seed": 4,
+        "difficulty": "hard"
+      },
+      "selection_path": "data/manifests/milai-ser-v23-arc4-selection.json",
+      "selection_sha256": "7e530ec5567abc8fadac61fd6ff7f38f1845e5498830c1e39e13496aab36264e",
+      "private_artifact_hashes": {
+        "arc_sha256": "5e286130a9c3c7fd1c2787bd4f63a9682ea322f2d7691ca352616fd7108aad44",
+        "initial_world_sha256": "249280f5a675e135a628f69b30c84a2fe14fd1be3ae1f7db2b3f6c9fbbc1f1bb"
+      }
+    }
+  ],
+  "execution_evidence": [
+    "data/manifests/contextual-memory-v11-f-results.json",
+    "docs/CONTEXTUAL_USER_MEMORY_V11_RESULTS_20260925.md",
+    "data/manifests/contextual-memory-v14-exposure-rule.json",
+    "data/manifests/milai-ser-v23-results.json",
+    "docs/MILAI_SER_V23_RESULTS_20260927.md"
+  ],
+  "future_rule": "Freeze a later P5 protocol before generating new original arcs. Exclude known base seeds under pinned upstream/generator identity and known arc/world hash collisions. Smallest currently unrecorded base_seed is5; not yet selected/generated. Never replace model failures or call renamed exposed arcs unseen.",
+  "limits": [
+    "No evidence of seed>4 selection/model runs was found in inspected docs/manifests/artifact metadata. This does not prove absence of unrecorded manual exposure.",
+    "Only metadata read; no new sample bodies/gold/rubrics opened or arcs generated.",
+    "Public task source and selection are independent from development-agent models."
+  ],
+  "real_model_calls": 0,
+  "new_native_arcs_generated": 0
+}

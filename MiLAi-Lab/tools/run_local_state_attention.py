@@ -27,12 +27,22 @@ LAB = Path(__file__).resolve().parents[1]
 READ_POLICIES = {"local_state": "focus", "local_all": "all",
                  "local_all_sources": "all_sources",
                  "global_note_sources": "all_sources",
+                 "local_lr_sources": "focus_sources",
                  "local_lru_sources": "focus_sources"}
 ARMS = ("b1_control", *READ_POLICIES)
 SHARED_CONTENT_LIMIT_ARMS = {"local_all_sources", "global_note_sources",
-                             "local_lru_sources"}
+                             "local_lr_sources", "local_lru_sources"}
 SOURCE_POLICIES = {"all_sources", "focus_sources"}
-EVENTS_ONLY_ARMS = {"global_note_sources", "local_all_sources", "local_lru_sources"}
+EVENTS_ONLY_ARMS = {"global_note_sources", "local_all_sources",
+                    "local_lr_sources", "local_lru_sources"}
+
+
+def _update_policy(arm: str) -> str:
+    if arm == "local_lru_sources":
+        return "lru"
+    if arm == "local_lr_sources":
+        return "lr"
+    return "all"
 
 
 def _local_granularity(arm: str, config: dict[str, Any]) -> bool:
@@ -41,7 +51,10 @@ def _local_granularity(arm: str, config: dict[str, Any]) -> bool:
         raise ValueError("LSA_LOCAL_GRANULARITY_INVALID")
     if arm == "local_lru_sources" and not value:
         raise ValueError("LSA_LRU_REQUIRES_LOCAL_GRANULARITY")
-    return value and arm in {"local_all_sources", "local_lru_sources"}
+    if arm == "local_lr_sources" and not value:
+        raise ValueError("LSA_LR_REQUIRES_LOCAL_GRANULARITY")
+    return value and arm in {"local_all_sources", "local_lr_sources",
+                             "local_lru_sources"}
 
 
 class ContentLimits(TypedDict):
@@ -113,14 +126,22 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "method": "local_state_attention_p1", "run_id": args.run,
         "arm_id": args.arm, "repeat": args.repeat,
         "read_policy": READ_POLICIES.get(args.arm),
-        "update_policy": "lru" if args.arm == "local_lru_sources" else "all",
+        "update_policy": _update_policy(args.arm),
+        "update_candidate_policy": ("all_existing_without_selector"
+                                    if args.arm == "local_lr_sources" else
+                                    "model_selected_existing"
+                                    if args.arm == "local_lru_sources" else None),
+        "read_selection_policy": ("independent_after_maintenance"
+                                  if args.arm in {"local_lr_sources",
+                                                  "local_lru_sources"} else None),
         "maintenance_input_policy": ("pending_events_candidates_source_ids"
                                      if args.arm in EVENTS_ONLY_ARMS else
                                      "current_task_pending_events_states_source_ids"),
         "maintenance_response_contract": ("edits_only" if args.arm in EVENTS_ONLY_ARMS
                                           else "edits_and_focus"),
         "creation_policy": ("shared_maintenance_each_pending_batch"
-                            if args.arm == "local_lru_sources" else None),
+                            if args.arm in {"local_lr_sources", "local_lru_sources"}
+                            else None),
         "local_granularity": (_local_granularity(args.arm, config)
                               if args.arm in READ_POLICIES else False),
         "representation": ("global_note" if args.arm == "global_note_sources" else
@@ -287,8 +308,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                         representation=("global_note" if args.arm == "global_note_sources"
                                         else "local"),
                         local_granularity=_local_granularity(args.arm, config),
-                        update_policy=("lru" if args.arm == "local_lru_sources"
-                                       else "all"),
+                        update_policy=_update_policy(args.arm),
                         maintenance_only=args.arm in EVENTS_ONLY_ARMS)
                     try:
                         result = run_phase(script, args.runtime_root, args.run, args.arm,
