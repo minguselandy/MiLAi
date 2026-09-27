@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 import sys
 import tempfile
-from dataclasses import asdict, replace
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -19,6 +20,85 @@ import prepare_contextual_v9 as preparer
 import run_contextual_merit as merit
 
 
+@dataclass
+class SyntheticArc:
+    arc_id: str = "public-fixture-arc"
+    seed: int = 0
+
+    def make_world(self) -> SimpleNamespace:
+        return SimpleNamespace(
+            dump_json=lambda: '{"fixture":"world"}',
+            conn=SimpleNamespace(close=lambda: None),
+        )
+
+
+def test_prepare_v9_with_synthetic_arc_binds_local_inputs(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    arc = SyntheticArc()
+    arc_bytes = json.dumps(asdict(arc), ensure_ascii=False, sort_keys=True,
+                           separators=(",", ":")).encode()
+    world_bytes = arc.make_world().dump_json().encode()
+    managed = preparer.LAB / "artifacts/contextual-user-memory"
+    managed.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="public-v9-prepare-", dir=managed) as temporary:
+        local = Path(temporary)
+        host_dir, embedding_dir = local / "host", local / "embedding"
+        host_dir.mkdir()
+        embedding_dir.mkdir()
+        for name in ("layers-0.safetensors", "config.json", "tokenizer.json",
+                     "tokenizer_config.json", "chat_template.jinja"):
+            (host_dir / name).write_text(name)
+        for name in ("pytorch_model.bin", "config.json", "tokenizer.json",
+                     "tokenizer_config.json"):
+            (embedding_dir / name).write_text(name)
+        selection = read_json(preparer.PINNED_SELECTION)
+        selection["arc_id"] = arc.arc_id
+        selection["arc_seed"] = arc.seed
+        selection["private_artifacts"]["arc_sha256"] = hashlib.sha256(arc_bytes).hexdigest()
+        selection["private_artifacts"]["initial_world_sha256"] = (
+            hashlib.sha256(world_bytes).hexdigest()
+        )
+        selection_template = local / "synthetic-selection.json"
+        write_json(selection_template, selection)
+        monkeypatch.setattr(subprocess, "check_output", lambda *_, **__: (
+            preparer.PINNED_MERIT_COMMIT + "\n"
+        ))
+        monkeypatch.setattr(merit, "pinned_merit", lambda _: (
+            SimpleNamespace(generate_suite=lambda **__: [arc]), None, None, None,
+        ))
+        prepared_inputs_calls: list[tuple[Path, Path, Path]] = []
+        monkeypatch.setattr(merit, "prepared_inputs", lambda *paths: (
+            prepared_inputs_calls.append(paths)
+        ))
+        result = preparer.prepare(
+            output_dir=local / "prepared", merit_root=local / "synthetic-merit",
+            host_dir=host_dir, embedding_dir=embedding_dir,
+            host_url="http://host.test/v1/", embedding_url="http://embed.test/v1/",
+            budget_path=local / "budget.json", selection_template_path=selection_template,
+        )
+        output = local / "prepared"
+        assert Path(result["selection"]) == output / "selection.json"
+        assert prepared_inputs_calls == [(output / "selection.json", output / "config.json",
+                                          output / "freeze.json")]
+        assert (output / f"{arc.arc_id}.original.json").read_bytes() == arc_bytes
+        assert (output / f"{arc.arc_id}.initial-world.json").read_bytes() == world_bytes
+        selected = read_json(output / "selection.json")
+        config = read_json(output / "config.json")
+        freeze = read_json(output / "freeze.json")
+        assert selected["private_artifacts"]["arc_sha256"] == result["arc_sha256"]
+        assert config["model_identity"]["host"]["weights_sha256"] == digest(
+            read_json(output / "model-weights.json")["host"]
+        )
+        assert config["budget_path"] == str(local / "budget.json")
+        assert freeze["config_sha256"][preparer._within_lab(output / "config.json")] == (
+            preparer.file_sha256(output / "config.json")
+        )
+        assert not (local / "budget.json").exists()
+        assert not Path(result["run_output"]).exists()
+
+
+@pytest.mark.local_artifacts
 def test_prepare_v9_from_local_files_rebuilds_exact_original_arc(tmp_path: Path) -> None:
     host_dir = tmp_path / "host"
     embedding_dir = tmp_path / "embedding"
@@ -68,6 +148,7 @@ def test_prepare_v9_from_local_files_rebuilds_exact_original_arc(tmp_path: Path)
         )
 
 
+@pytest.mark.local_artifacts
 def test_prepare_v10_notes_and_basis_reuse_same_pinned_arc(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -119,6 +200,7 @@ def test_prepare_v10_notes_and_basis_reuse_same_pinned_arc(
         assert mappings[0] == mappings[1]
 
 
+@pytest.mark.local_artifacts
 def test_prepare_v11_three_arms_share_source_identity_on_exposed_arc(tmp_path: Path) -> None:
     host_dir, embedding_dir = tmp_path / "host", tmp_path / "embedding"
     host_dir.mkdir()
@@ -158,6 +240,7 @@ def test_prepare_v11_three_arms_share_source_identity_on_exposed_arc(tmp_path: P
         assert len(set(mappings)) == 1
 
 
+@pytest.mark.local_artifacts
 def test_prepare_accepts_a_frozen_nondefault_arc_identity_without_new_generation(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -216,6 +299,7 @@ def test_prepare_accepts_a_frozen_nondefault_arc_identity_without_new_generation
                                   Path(result["freeze"]))
 
 
+@pytest.mark.local_artifacts
 @pytest.mark.parametrize(("template", "arm", "protocol"), [
     (preparer.V12_TEMPLATES[0], "react_notes_v12_off", "turn-maintenance-v4"),
     (preparer.V14_TEMPLATES[0], "react_notes_v14_off", "turn-maintenance-v5"),

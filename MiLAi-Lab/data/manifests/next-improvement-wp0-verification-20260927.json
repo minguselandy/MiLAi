@@ -1,6 +1,6 @@
 {
   "kind": "MILAI_NEXT_IMPROVEMENT_WP0_VERIFICATION_V1",
-  "status": "LOCAL_CHECKS_COMPLETED_FINAL_PACKAGING_AND_REMOTE_CI_PENDING_AT_REPORT_FREEZE",
+  "status": "IN_PROGRESS_INITIAL_REMOTE_CORE_AND_FOUNDATION_FAILED_EXTERNAL_PASSED",
   "base_main": "9515017a5dfaba6b6e306fa778fd20f4383b6e35",
   "baseline_pr51_head": "055a0769c1ce75d128d6459ee25773587d9003ae",
   "original_plan_sha256": "e407a8ac577b2fb184b6e4386efb79536bcf75007252c8006e96eb296fa3cbbb",
@@ -85,10 +85,30 @@
       "result_location": "GitHub publication receipt and ignored build receipt; do not embed a hash of an sdist into its own included manifest"
     },
     "new_remote_fast": {
-      "status": "NOT_RUN"
+      "status": "INITIAL_CORE_AND_FOUNDATION_FAILED_EXTERNAL_PASSED",
+      "run_id": 36324207954,
+      "commit": "64741a6475fbc30ccabeffd3ba782de9763d0d98",
+      "failure_jobs": [
+        108633760931,
+        108633760963
+      ],
+      "failure_log_sha256": {
+        "108633760931": "882c6c07276006879ed61a9219b6415178023cf87f49f8bbb3aa35102d18a50c",
+        "108633760963": "5e2413c1b3e7cb300fa0feaa1e0f0d58549189e8e3f257a12b902fde1b5e951f"
+      }
     },
     "new_remote_full": {
-      "status": "NOT_RUN"
+      "status": "INITIAL_CORE_AND_FOUNDATION_FAILED_EXTERNAL_PASSED",
+      "run_id": 36324207975,
+      "commit": "64741a6475fbc30ccabeffd3ba782de9763d0d98",
+      "failure_jobs": [
+        108633733529,
+        108633733537
+      ],
+      "failure_log_sha256": {
+        "108633733529": "f797fad3a5dedd1ea5f73d6b4f3da757871bc90bb9a1cc2e0ab0732f0c5480ea",
+        "108633733537": "854ae9b9040883a0cfc8d8cb89aaac97e5f1568b7ec68e8b7ebaef16e092fb7f"
+      }
     },
     "historical_sdk_local": {
       "status": "PASS",
@@ -159,7 +179,9 @@
   "retained_failures": [
     "core optional-import collection failure",
     "core historical private-freeze FileNotFoundError",
-    "stale exact-schema assertion missing pre-existing literal_uses"
+    "stale exact-schema assertion missing pre-existing literal_uses",
+    "remote core test_contextual_v9_prepare requires absent absolute-path MERIT checkout",
+    "remote foundation test_freshness_projection requires absent absolute-path MERIT checkout"
   ],
   "experiment_delta": {
     "generation_calls": 0,
@@ -205,5 +227,43 @@
       "count": 6,
       "owner": "external V0213 tokenizer evidence"
     }
-  ]
+  ],
+  "followup_asset_dependency_repair": {
+    "status": "TARGETED_CHECKS_PASSED_ISOLATED_CORE_AND_NEW_REMOTE_CI_PENDING",
+    "runtime_changed": false,
+    "historical_manifests_changed": false,
+    "local_artifact_collected_nodes": 11,
+    "public_v9_prepare": {
+      "passed": 1,
+      "deselected": 6
+    },
+    "public_freshness": {
+      "passed": 23,
+      "deselected": 1
+    },
+    "additional_historical_assets_local": {
+      "passed": 7,
+      "deselected": 24
+    },
+    "synthetic_source_is_official_merit": false,
+    "target_static_and_matrix": "PASS",
+    "isolated_core": {
+      "status": "IN_PROGRESS",
+      "isolation": "child user/mount namespace binds local MERIT directory to empty temporary directory; parent unchanged"
+    },
+    "remote_repair_ci": "PENDING",
+    "local_rebuild": "NOT_REQUIRED_TESTS_AND_CI_ONLY; earlier distribution hashes belong to 64741a6",
+    "isolated_public_freshness": {
+      "passed": 23,
+      "deselected": 1,
+      "seconds": 7.32,
+      "log_sha256": "f99b23552aea2c525783a100db978f17c73c918e7436815eb78a86b7f3b564ca"
+    },
+    "local_artifact_collection": {
+      "selected_nodes": 11,
+      "total_nodes": 36,
+      "deselected": 25
+    },
+    "targeted_evidence": "tool receipts; no separate disk logs; no repetition to manufacture logs"
+  }
 }

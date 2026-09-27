@@ -34,8 +34,13 @@ def _pytest_targets(job: str) -> set[str]:
                           "\n".join(commands)))
 
 
-def _marked_local_artifacts() -> set[str]:
+def _pytest_commands(job: str) -> list[str]:
+    return re.findall(r"(?m)^\s*uv run --no-sync pytest[^\n]*", job)
+
+
+def _marked_local_artifacts() -> tuple[set[str], int]:
     nodes: set[str] = set()
+    collected = 0
     for path in (LAB / "tests/unit").glob("test_*.py"):
         for node in ast.parse(path.read_text()).body:
             if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
@@ -46,7 +51,17 @@ def _marked_local_artifacts() -> set[str]:
                    and decorator.value.attr == "mark"
                    for decorator in node.decorator_list):
                 nodes.add(f"{path.relative_to(LAB)}::{node.name}")
-    return nodes
+                cases = 1
+                for decorator in node.decorator_list:
+                    if (isinstance(decorator, ast.Call)
+                            and isinstance(decorator.func, ast.Attribute)
+                            and decorator.func.attr == "parametrize"):
+                        values = decorator.args[1]
+                        if not isinstance(values, (ast.List, ast.Tuple)):
+                            raise ValueError("LAB_VERIFICATION_DYNAMIC_LOCAL_ASSET_CASES")
+                        cases *= len(values.elts)
+                collected += cases
+    return nodes, collected
 
 
 def _check_workflows(matrix: dict[str, Any]) -> None:
@@ -77,6 +92,12 @@ def _check_workflows(matrix: dict[str, Any]) -> None:
             matrix["foundation_explicit_globs"]), workflow)
         if not set(matrix["foundation_tests"]) <= _pytest_targets(foundation):
             raise ValueError(f"LAB_VERIFICATION_FOUNDATION_PYTEST_DRIFT:{workflow}")
+        freshness_commands = [command for command in _pytest_commands(foundation)
+                              if "tests/unit/test_freshness_projection.py" in command]
+        if len(freshness_commands) != 1 or "-m 'not local_artifacts'" not in (
+            freshness_commands[0]
+        ):
+            raise ValueError(f"LAB_VERIFICATION_FOUNDATION_LOCAL_ASSET_GATE:{workflow}")
         _require(external, "uv run --no-sync mypy " + " ".join(
             matrix["external_mypy_paths"]), workflow)
         _require(external, "tools/prepare_external_memory_v26_assets.py --prepare", workflow)
@@ -114,8 +135,11 @@ def main() -> None:
         set(matrix["foundation_tests"]) | set(matrix["external_tests"])
     ):
         raise ValueError("LAB_VERIFICATION_OPTIONAL_TEST_OWNER_MISMATCH")
-    if _marked_local_artifacts() != set(matrix["local_artifact_tests"]):
+    marked, collected = _marked_local_artifacts()
+    if marked != set(matrix["local_artifact_tests"]):
         raise ValueError("LAB_VERIFICATION_LOCAL_ARTIFACT_MARKER_MISMATCH")
+    if collected != matrix["local_artifact_collected_nodes"]:
+        raise ValueError("LAB_VERIFICATION_LOCAL_ARTIFACT_NODE_COUNT_MISMATCH")
     if not matrix["local_artifact_owner"]:
         raise ValueError("LAB_VERIFICATION_LOCAL_ARTIFACT_OWNER_MISSING")
     integration = {str(path.relative_to(LAB))
@@ -150,7 +174,7 @@ def main() -> None:
                       "core_direct": len(core_sources),
                       "external_direct": len(external_sources),
                       "optional_tests_owned": len(matrix["core_pytest_ignores"]),
-                      "private_asset_tests": len(matrix["local_artifact_tests"]),
+                      "private_asset_tests": collected,
                       "integration_tests": len(integration),
                       "protocol_contract_present": protocol.exists()}, sort_keys=True))
 

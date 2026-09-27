@@ -109,6 +109,18 @@ foundation144 passed/0 skipped，external4 passed/0 skipped，本地历史MERIT4
 
 ### 后续定向诊断准备（未冻结、未运行）
 
+C0已作为[PR52](https://github.com/minguselandy/MiLAi/pull/52)发布，head
+`64741a6475fbc30ccabeffd3ba782de9763d0d98`，最终本地分发构建通过。
+实际Fast36324207954/Full36324207975的core和foundation因未声明的本地MERIT历史路径失败；
+external真实依赖检查成功。首断点、竞争解释和原失败job已写入WP0验证记录。
+继续最小测试资产修复；未关闭G0，未开始真实研究调用，main和PR51保持原身份。
+
+修复精确登记11项历史MERIT资产node，并在相同文件保留公共合成prepare/loader及三臂装配
+覆盖，不改运行时或历史freeze。public定向1＋23项、新增历史7项以及目标静态/matrix已通过；
+隐藏本地MERIT目录的子进程隔离public core检查与修复后远端CI仍待实际结果。
+通过后C1使用独立stacked branch承接C0和PR51两个原结构提交，原PR和main保留，
+新组合以实际新head验证，不声称原PR51失败head已经变绿。
+
 Root保存5个已有已发布哈希的完整历史HTTP请求，来自两个已暴露脚本，涵盖对象key、
 第二次增量及正确State后的错误动作；这些嵌套前缀不构成5个独立场景。
 目录为ignored `artifacts/next-improvement/x1-source-catalog/`，仅保存原请求，不带原答案或rubric。

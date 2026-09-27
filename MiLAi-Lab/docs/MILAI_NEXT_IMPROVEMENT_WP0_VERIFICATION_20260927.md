@@ -1,7 +1,7 @@
 # WP0：依赖、源码与检查对应
 
 范围为[后续改进计划](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)的C0工程验证。
-状态：**IN_PROGRESS，尚未取得本次修复的远端CI结果。** 不涉及Host提示、实验算法、模型部署或Product行为。
+状态：**IN_PROGRESS，C0首轮远端CI失败，正修复本地历史资产依赖。** 不涉及Host提示、实验算法、模型部署或Product行为。
 实际Goal继续执行本计划；按用户最新要求，在当前任务结束后暂停Goal、发布总体实验报告。
 [机器结果清单](../data/manifests/next-improvement-wp0-verification-20260927.json)明确分开已完成检查与待执行项。
 
@@ -34,7 +34,7 @@ fast与full组合CI必须按相同归属执行。`pyproject.toml`和`uv.lock`的
 | core | `--frozen --dev --python 3.11` | contracts、analysis、harness、scorers及两个boundary入口；PR51存在时单独检查纯protocol | 无可选依赖的公开测试；PR51的纯协议合同实际执行 |
 | foundation | core＋`--group baseline-langmem` | 全包发现＋原exclude模块的显式glob | LangMem、provenance、freshness、M1、ODR、LSA、application、read-probe |
 | external | core＋`--group baseline-langmem --group external-mem0` | mem0_native与mem0_identity | 原生Mem0 add/search、稀疏向量、实体关联和重启等模拟HTTP集成 |
-| 历史私有资产 | 保留的v7原始资产与现有core依赖 | 源码仍由上述静态环境负责 | 精确列出的4项MERIT历史资产合同；公共CI不声称执行，本地结果单列 |
+| 历史本地资产 | 保留的v7原始资产与对应core/foundation依赖 | 源码仍由上述静态环境负责 | 精确列出的11项MERIT历史资产合同；公共CI不声称执行，本地结果单列 |
 
 在当前main源码上，core直接22个文件；foundation默认发现110个，加显式36个，
 其中33个恢复原exclude，3个重合，合并覆盖全部143个活动Python源码；external直接2个。
@@ -68,13 +68,13 @@ U/maintenance/A、解析错误、事件角色及兼容导出保持原设计。�
 不为补造日志重跑已通过检查；远端旧错误日志已保存并有公开run链接。
 后续C0新检查日志位于ignored临时目录`/tmp/milai-next-c0-checks/`。
 
-新矩阵的foundation八个文件实际执行144 passed、0 skipped；四项历史私有资产合同
+首提交64741a6矩阵的foundation八个文件实际执行144 passed、0 skipped；四项历史私有资产合同
 在复制原freeze并保留原arc/world/模型身份检查的本地环境中为4 passed、1 deselected。
 那1项无私有资产测试仍属于core公共门禁，没有丢弃整份测试文件。
 另修正一处旧schema精确断言，使其包含main运行源码早已存在的`literal_uses`字段；
 未改变运行schema，也未放宽精确字段集合。
 
-公共core为5198项收集：**5171 passed、19 skipped、8 deselected**，耗时756.94秒。
+首提交本地公共core为5198项收集：**5171 passed、19 skipped、8 deselected**，耗时756.94秒。
 19项skip中，1项需要历史固定Host SDK wheel；18项需要未入Git的V0213 tokenizer/model证据。
 精确文件/行号/数量见机器清单。8项deselect是4项本地MERIT合同和4项既有regression；
 这两类数量分别记录，不将它们加到公共core通过数。
@@ -89,6 +89,52 @@ U/maintenance/A、解析错误、事件角色及兼容导出保持原设计。�
 全局ignore_missing_imports、仅扩大exclude、整文件importorskip和必需job跳过均不作为通过。
 
 ## 成本、发布与回滚
+
+### C0首轮实际远端结果
+
+独立[PR52](https://github.com/minguselandy/MiLAi/pull/52)已发布提交
+`64741a6475fbc30ccabeffd3ba782de9763d0d98`，main及PR51未合并、未改变。
+最终本地wheel/sdist构建成功，精确hash在该PR发布回执中；这不能替代远端测试。
+[Fast run36324207954](https://github.com/minguselandy/MiLAi/actions/runs/36324207954)与
+[Full run36324207975](https://github.com/minguselandy/MiLAi/actions/runs/36324207975)
+均已实际运行；Lab core和foundation失败，external成功。另一次PR创建事件的Fast
+run36324203008属于同一提交，不累计成独立版本验证。
+
+Observed：core首失败为`test_contextual_v9_prepare.py::test_prepare_v9_from_local_files_rebuilds_exact_original_arc`，
+在本地绝对MERIT路径执行`git rev-parse HEAD`失败；foundation首失败为
+`test_freshness_projection.py::test_frozen_merit_loader_and_three_arm_construction`，
+读取同一外部checkout的README失败。Full core为303 passed、5 skipped、8 deselected后首次失败；
+Full foundation为131 passed、1 failed。Fast分段foundation先有12、80、7项通过，再44 passed、1 failed。
+不同命令和停止位置不可拼接成完整通过数。
+
+Expected：公共CI测试应自行提供所需公开/合成输入；必须历史资产的合同应单列明确归属，
+不得靠本地恰好存在的绝对路径通过。竞争解释为H1本机资产掩盖未声明测试前置，
+H2远端依赖安装或输入版本不同。当前错误发生在历史文件/git读取，支持H1；继续核对相同
+选定测试中的隐含前置，保留锁文件与运行时合同。Sol负责最小测试/CI修复，Root记录结果。
+不得整文件忽略、增添静默skip或声称首轮已通过；WP0/G0仍未关闭。
+
+四份原始失败job日志108633733529、108633733537、108633760931、108633760963
+保存在ignored `artifacts/next-improvement/wp0/`。本地通过数仍是此前环境中的真实结果，
+但其历史资产可用性与远端不同，不能外推公共CI结果。此次尚无新增真实模型调用。
+
+### 对实际资产缺口的定向修复
+
+静态检查selected tests中的绝对路径、snapshot/cache和loader调用后，确认v9 prepare五函数
+共六个node、freshness一个node依赖同一本地MERIT来源。连同原四项，共11个历史资产node
+由矩阵精确登记；不忽略整个测试文件。foundation的相应pytest命令显式选择公共测试，
+checker核对标记、参数化后的数量及工作流命令一致性。
+
+公共覆盖由同文件中的小型合成输入承担：v9准备器绑定arc/world/config/freeze字节且不创建
+预算或运行目录；真实loader读取合成模块并验证输入，源文件hash变化必须拒绝；三臂构造
+从需要历史arc的测试拆出独立执行。合成模块不是官方MERIT来源，不把这些检查称作原生复现。
+未改运行时、旧selection/external_root/hash、模型参数或依赖锁。
+
+定向结果：public v9 prepare为1 passed/6 deselected，public freshness为23 passed/1 deselected；
+新增七个历史node在原资产环境为7 passed；collect-only核实全部11个历史node。
+目标Ruff、checker Mypy、matrix及diff-check通过。此前原四项历史检查仍保留，不为发布重跑。
+进一步用`unshare`子进程挂载namespace将MERIT目录绑定为空目录，父环境与原文件保持不变；
+该条件下的一次public core验证在本报告修订冻结时仍进行中，修复后远端CI也待实际结果。
+不将这些待执行/运行中的检查写成通过，不重复此前同环境全量测试或本地构建。
 
 本轮真实generation/embedding调用为0；模拟HTTP测试不计为真实模型请求。
 连续实验账本仍为2768次生成、3420333 generation tokens、18746 embedding tokens；

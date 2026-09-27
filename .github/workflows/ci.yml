@@ -241,7 +241,7 @@ jobs:
           uv run --no-sync pytest -q tests/unit/test_langmem_foundation.py
           uv run --no-sync mypy src/milai_lab
           uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/datasets/merit.py
-          uv run --no-sync pytest -q tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py tests/unit/test_local_state_attention_read_probe.py tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
+          uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py tests/unit/test_local_state_attention_read_probe.py tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
 
   lab-external:
     name: Lab locked external adapter

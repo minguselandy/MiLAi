@@ -51,8 +51,15 @@
     "tests/unit/test_contextual_merit_adapter.py::test_v8_selection_requires_declared_config_and_matching_freeze",
     "tests/unit/test_contextual_merit_adapter.py::test_pinned_prepare_preserves_native_tools_and_visible_memory_gate",
     "tests/unit/test_contextual_merit_adapter.py::test_arc_interrupts_on_incomplete_public_turn_without_closing_or_scoring",
-    "tests/unit/test_contextual_merit_adapter.py::test_interruption_preserves_live_world_session_and_unscored_status"
+    "tests/unit/test_contextual_merit_adapter.py::test_interruption_preserves_live_world_session_and_unscored_status",
+    "tests/unit/test_contextual_v9_prepare.py::test_prepare_v9_from_local_files_rebuilds_exact_original_arc",
+    "tests/unit/test_contextual_v9_prepare.py::test_prepare_v10_notes_and_basis_reuse_same_pinned_arc",
+    "tests/unit/test_contextual_v9_prepare.py::test_prepare_v11_three_arms_share_source_identity_on_exposed_arc",
+    "tests/unit/test_contextual_v9_prepare.py::test_prepare_accepts_a_frozen_nondefault_arc_identity_without_new_generation",
+    "tests/unit/test_contextual_v9_prepare.py::test_prepare_current_notes_preserves_repair_protocol_and_rejects_other_controls",
+    "tests/unit/test_freshness_projection.py::test_frozen_merit_loader_and_three_arm_construction"
   ],
-  "local_artifact_owner": "preserved ignored v7 freeze, private MERIT arc/world, and local model assets",
+  "local_artifact_collected_nodes": 11,
+  "local_artifact_owner": "preserved ignored v7 freeze, pinned local MERIT source and private arc/world; run these historical tests only with those assets",
   "integration_tests": []
 }
