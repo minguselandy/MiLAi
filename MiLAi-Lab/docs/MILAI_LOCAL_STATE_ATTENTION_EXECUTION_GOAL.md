@@ -37,7 +37,7 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 | P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | R3 补全机械依赖与实际Store计量；真实授权删除链仍待独立验证 |
 | P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R4两臂原各7/12；R5 partial来源on4/6、off3/6，原完整均失败；精确恢复出现局部正例 |
 | P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | R1四断点12方法+3诊断完成；State值影响输出，来源直送有用，维护/独立Host错误未闭合 |
-| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | G/L代码和4条小wiring协议已冻结；完整G/L/LRU重复比较未运行 |
+| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | G/L小wiring完成：G11/12、L9/12，但L也每owner单卡；局部粒度/LRU及完整重复比较未完成 |
 | P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | 未运行，遵循进入条件 |
 | P5 / WP5 | 新 frozen 原生 selection、第二任务族、交错顺序及完整重复；原 scorer 和失败分母 | 未运行；不消费旧暴露任务作 unseen |
 | P6 / WP4–5 | N/d/a/r/H 代表点、质量—成本边界、第二模型族；有瓶颈证据才训练 selector | 未运行；第二模型仍缺独立端点 |
@@ -202,6 +202,14 @@ L为原多State；共享all_sources、16384字节来源和16000字符aggregate�
 原L提示与业务合同不改。26项LSA+6项相邻application检查、目标静态、四/tmp prepare和一次build
 通过；最后仅补测试断言，无产品目录修改。协议载构建哈希；发布后正式prepare，批内源码不变。
 这一步不包含LRU候选缩减，全部结果仍按完整原rubric及失败分母报告。
+
+[G/L wiring R1结果](MILAI_LOCAL_STATE_ATTENTION_P3_WIRING_R1_RESULTS_20260927.md)已完成4轨迹24消息，
+源码053a5ed08b6e01f826997e7b1158d7a9de033fc5。G11/12、完整1/2，L9/12、完整0/2；
+两臂均实际get found并原ID恢复label，但interleaved错对象键，L另有初始/第二owner字段错误。
+关键限制是L本批也每owner只有1张综合卡，不能称已隔离局部表示收益。G作为强基线保留。
+本批新增72生成/93431tokens/173embeddingtokens；累计1191/1440580/11092。无控制退化、
+pending或容量错误，不把预算未触发说成规模可靠性。下一切片落实通用局部事项粒度和真实
+LRU更新候选/独立读取，保持来源合同与业务接口，不再R3措辞微调，不启动广泛比较。
 
 ## 后期资源准备记录
 
