@@ -1,5 +1,5 @@
 ---
-status: ACTIVE
+status: ACTIVE_CLOSEOUT_THEN_PAUSE
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 reference_commit: a9290f3bc621ee7a00a61d4c9cf8c3a01d92bd46
 plan_sha256: c8e7dc82f8d70665f731e1b9ff331ab100eeeee429ba90a073a125574bea9e43
@@ -30,7 +30,7 @@ main=a9290f3；最后实际实验源码bc5a5c8。启动时只有新计划及旧v
 | 阶段 | 要求及证明方式 | 状态 |
 |---|---|---|
 | D0 / P0 | 三类真实首断点+四类对照；完整合法前缀、旧State、新事件、原输出、错误位置、离线哈希/故障矩阵；部分提交重试风险复现 | COMPLETE_OFFLINE |
-| D1 / P1 | 独立entry更新与回合snapshot原型；同事件重放、独立同文本、无关保持、部分成功；E1/E2分开冻结，少量重复，再测组合和真实动作 | E2_CONDITIONAL_DONE; PROTOTYPE_IN_PROGRESS |
+| D1 / P1 | 独立entry更新与回合snapshot原型；同事件重放、独立同文本、无关保持、部分成功；E1/E2分开冻结，少量重复，再测组合和真实动作 | E2_CONDITIONAL_DONE; PROTOTYPE_COMPLETE; SANDBOX_PENDING |
 | D2 / P2 | 同bank全读/query检索或rerank/State A；swap/missing/oracle分列；固定前态all/U/U=A/oracle U且都可创建；约12–24对起步 | NOT_RUN |
 | D3 / P3 | 最新统一底座full/G/L/最小有效LSA；4–6独立开发情景、2–3完整重复起步；逐情景strict/整轨迹/事实/ID/动作/无依据断言/State/费用 | NOT_RUN |
 | D4 / P4 | N/d/a/r/H少数独立代表点；真实互动增长；full可容纳历史与超窗策略；query/summary；R与U=A必要消融及维护摊销边界 | NOT_RUN |
@@ -87,3 +87,23 @@ Astra已就这一个跨层边界给出只读建议，问题实现仍由同一Sol
 D0最终复现窄检查原命令（已通过，不为发布重跑）：
 `uv run --no-sync --group baseline-langmem pytest -q tests/unit/test_local_state_attention.py -k 'partial_batch_retry or partial_update_identity or legacy_focus_resolves or partial_retry_marks or retry_identity_uses or store_write_failure'`。
 Ruff检查两修改源码与相邻测试；Mypy检查bank/controller；无新build或真实服务调用。
+
+## 最新用户收尾指令
+
+用户要求“这个任务结束后，暂停当前goal，生成总体实验报告，上传到github”。
+本次收尾限定于当前D1 E2快照原型及已准备的4条在线轨迹；之后暂停实际Goal，
+保留E1、D2–D5和论文证据包未完成状态，不再启动新阶段。暂停不等于研究完成。
+
+Sol已冻结8个源码/config/runner/test路径，默认pre_model保持，turn_end可选。
+17项相邻检查通过；最后no-Human/old-pending边界修改后7项turn_end检查通过，
+目标Ruff、六源码Mypy及diff通过，四次零模型prepare成功。最终离线构建：
+sdist SHA256 `535e1e5055d1016263a6eff6233d622badbbdcdcb27af57206a6246ddc09be11`；
+wheel SHA256 `c771232d9ed9d4ae4a635a91f3d4d8c56ccb660eca317fb38563d8b53cd67a74`。
+Root独立核对产物哈希。真实SQLite业务/checkpoint配合模拟HTTP验证部分副作用后State
+写失败的恢复不重放业务；这不是实际模型语义验证，也不保证old+new事件合批语义纠错。
+
+[在线协议](../data/manifests/local-state-attention-review-e2-sandbox-r1-protocol.json)冻结
+原distinct/partial脚本，pre_model与turn_end各2轨迹、共22消息/8进程阶段、每条件1次。
+仅epoch配置不同，但调用节奏、合批、State形成和后续轨迹随之改变，是整体recipe比较；
+不是纯时间标签或A/U消融。源码发布后Root prepare冻结实际身份，再串行运行。
+连续账本仍为2701/3332841/18445；当前尚未发生sandbox真实调用。

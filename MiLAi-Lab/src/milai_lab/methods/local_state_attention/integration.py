@@ -19,69 +19,53 @@ SOURCE_VIEW_HEADER = "Referenced source events from delivered States:"
 
 def make_pre_model_hook(controller: LocalStateController,
                         system_prompt: str, read_policy: str = "focus",
-                        source_view_max_bytes: int | None = None) -> Any:
+                        source_view_max_bytes: int | None = None,
+                        update_epoch: str = "pre_model") -> Any:
     if read_policy not in {"focus", "all", "all_sources", "focus_sources"}:
         raise ValueError("LSA_READ_POLICY_UNKNOWN")
     if read_policy in {"all_sources", "focus_sources"} and (
         type(source_view_max_bytes) is not int or source_view_max_bytes <= 0
     ):
         raise ValueError("LSA_SOURCE_VIEW_BUDGET_INVALID")
+    if update_epoch not in {"pre_model", "turn_end"}:
+        raise ValueError("LSA_UPDATE_EPOCH_UNKNOWN")
+    if update_epoch == "turn_end" and read_policy not in {"all", "all_sources"}:
+        raise ValueError("LSA_TURN_END_REQUIRES_ALL_READ")
 
     def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
         cfg = config["configurable"]
         scope = StateScope(cfg["foundation_run_id"], cfg["arm_id"], cfg["user_id"])
         thread_id = cfg["thread_id"]
         messages: list[BaseMessage] = state["messages"]
-        latest_user: tuple[str, str] | None = None
-        input_messages: list[BaseMessage] = []
-        forgotten_positions: list[int] = []
-        for position, message in enumerate(messages):
-            if not isinstance(message, (HumanMessage, ToolMessage)):
-                input_messages.append(message)
-                continue
-            source_id = _source_id(thread_id, position, message)
-            if controller.bank.is_forgotten(scope, source_id):
-                forgotten_positions.append(position)
-                input_messages.append(message.model_copy(
-                    update={"content": "[authorized source deletion]"}))
-                continue
-            input_messages.append(message)
-            kind = "user" if isinstance(message, HumanMessage) else "tool"
-            event = {"id": source_id, "kind": kind, "content": message.content,
-                     "thread_id": thread_id,
-                     "actor": (cfg["user_id"] if kind == "user"
-                               else message.name or "tool"),
-                     "tool_call_id": (message.tool_call_id
-                                      if isinstance(message, ToolMessage) else None)}
-            controller.bank.record_event(scope, event)
-            if isinstance(message, HumanMessage):
-                latest_user = (source_id, str(message.content))
+        latest_user, input_messages, current_source_ids = collect_observations(
+            controller.bank, scope, thread_id, messages)
         if latest_user is None:
             raise ValueError("LSA_CURRENT_USER_MISSING")
-        if forgotten_positions:
-            # An old assistant answer may repeat deleted source content. Resume the
-            # working view at the next genuine user turn after the deletion marker.
-            restart = next((index for index, message in enumerate(messages)
-                            if index > max(forgotten_positions)
-                            and isinstance(message, HumanMessage)), None)
-            if restart is not None:
-                input_messages = input_messages[restart:]
         public_index = sum(isinstance(message, HumanMessage) for message in messages) - 1
-        result = controller.prepare(scope, *latest_user,
-                                    message_key=f"{thread_id}:{public_index}")
-        controller_focus = result["focus"]
-        states = controller.bank.states(scope)
+        if update_epoch == "turn_end":
+            snapshot = controller.bank.epoch_snapshot(scope, thread_id, public_index)
+            states = snapshot["states"]
+            controller_focus: list[str] = []
+            result: dict[str, Any] = {"degraded": False}
+        else:
+            result = controller.prepare(scope, *latest_user,
+                                        message_key=f"{thread_id}:{public_index}")
+            controller_focus = result["focus"]
+            states = controller.bank.states(scope)
         if read_policy in {"focus", "focus_sources"}:
             selected = set(controller_focus)
             states = [row for row in states if row["id"] in selected]
-        pending = controller.bank.pending(scope)
+        all_pending = controller.bank.pending(scope)
+        pending = ([row for row in all_pending if row["id"] not in current_source_ids]
+                   if update_epoch == "turn_end" else all_pending)
         source_lines: list[str] = []
         source_trace: dict[str, Any] = {}
         if read_policy in {"all_sources", "focus_sources"}:
             assert source_view_max_bytes is not None
             source_lines, source_trace = _source_view(
                 controller.bank, scope, states, source_view_max_bytes)
-        view = _render_view(states, pending, source_lines)
+        view = _render_view(states, pending, source_lines,
+                            turn_start_snapshot=update_epoch == "turn_end")
         if controller.emit is not None:
             controller.emit({"event": "lsa_view", "message_key":
                              f"{thread_id}:{public_index}", "user_id": scope.user_id,
@@ -89,6 +73,13 @@ def make_pre_model_hook(controller: LocalStateController,
                              "delivered_state_ids": [row["id"] for row in states],
                              "read_policy": read_policy, "states": states,
                              "pending_source_ids": [row["id"] for row in pending],
+                             "current_pending_source_ids": (
+                                 [row["id"] for row in all_pending
+                                  if row["id"] in current_source_ids]
+                                 if update_epoch == "turn_end" else []),
+                             "update_epoch": update_epoch,
+                             "snapshot_reused": (snapshot["reused"]
+                                                 if update_epoch == "turn_end" else None),
                              "degraded": result["degraded"], "view": view,
                              **source_trace})
         prompt = system_prompt + ("\n" + view if view else "")
@@ -97,6 +88,45 @@ def make_pre_model_hook(controller: LocalStateController,
         return {"llm_input_messages": [SystemMessage(content=prompt), *input_messages]}
 
     return hook
+
+
+def collect_observations(bank: LocalStateBank, scope: StateScope,
+                         thread_id: str, messages: list[BaseMessage],
+                         ) -> tuple[tuple[str, str] | None, list[BaseMessage], set[str]]:
+    """Collect actual checkpoint user/tool sources without creating tool evidence."""
+    latest_user: tuple[str, str] | None = None
+    input_messages: list[BaseMessage] = []
+    forgotten_positions: list[int] = []
+    current_source_ids: set[str] = set()
+    for position, message in enumerate(messages):
+        if not isinstance(message, (HumanMessage, ToolMessage)):
+            input_messages.append(message)
+            continue
+        source_id = _source_id(thread_id, position, message)
+        current_source_ids.add(source_id)
+        if bank.is_forgotten(scope, source_id):
+            forgotten_positions.append(position)
+            input_messages.append(message.model_copy(
+                update={"content": "[authorized source deletion]"}))
+            continue
+        input_messages.append(message)
+        kind = "user" if isinstance(message, HumanMessage) else "tool"
+        bank.record_event(scope, {"id": source_id, "kind": kind,
+                                  "content": message.content, "thread_id": thread_id,
+                                  "actor": (scope.user_id if kind == "user"
+                                            else message.name or "tool"),
+                                  "tool_call_id": (message.tool_call_id
+                                                   if isinstance(message, ToolMessage)
+                                                   else None)})
+        if isinstance(message, HumanMessage):
+            latest_user = (source_id, str(message.content))
+    if forgotten_positions:
+        restart = next((index for index, message in enumerate(messages)
+                        if index > max(forgotten_positions)
+                        and isinstance(message, HumanMessage)), None)
+        if restart is not None:
+            input_messages = input_messages[restart:]
+    return latest_user, input_messages, current_source_ids
 
 
 def make_full_history_hook(history: HistoryAccess, system_prompt: str) -> Any:
@@ -211,11 +241,14 @@ def _source_view(bank: LocalStateBank, scope: StateScope,
 
 
 def _render_view(states: list[dict[str, Any]], pending: list[dict[str, Any]],
-                 source_lines: list[str] | None = None) -> str:
-    if not states and not pending and not source_lines:
+                 source_lines: list[str] | None = None,
+                 *, turn_start_snapshot: bool = False) -> str:
+    if not states and not pending and not source_lines and not turn_start_snapshot:
         return ""
     rows = ["[Local State working view: model estimates, source IDs are references. "
             "Current user and tool messages below remain authoritative observations.] "]
+    if turn_start_snapshot:
+        rows.append("Snapshot captured before the current public user turn.")
     for state in states:
         rows.append(json.dumps({key: state[key] for key in (
             "title", "content", "needs", "evidence_refs")},
@@ -223,7 +256,11 @@ def _render_view(states: list[dict[str, Any]], pending: list[dict[str, Any]],
     if source_lines:
         rows.extend(source_lines)
     if pending:
-        rows.append("Unprocessed current observations; stored States may not incorporate them:")
-        rows.extend(json.dumps({key: row[key] for key in ("id", "kind", "content")},
+        rows.append("Unmerged prior observations; snapshot may not incorporate them:"
+                    if turn_start_snapshot else
+                    "Unprocessed current observations; stored States may not incorporate them:")
+        keys = (("id", "kind", "actor", "tool_call_id", "content")
+                if turn_start_snapshot else ("id", "kind", "content"))
+        rows.extend(json.dumps({key: row.get(key) for key in keys},
                                ensure_ascii=False) for row in pending)
     return "\n".join(rows)

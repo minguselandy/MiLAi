@@ -1,5 +1,5 @@
 {
-  "recipe_id": "local-state-attention-v27-p4-window-summary",
+  "recipe_id": "local-state-attention-v28-d1-turn-end-snapshot",
   "history": {
     "enabled": false,
     "page_max_bytes": 16384,
@@ -17,6 +17,7 @@
     "enable_thinking": false
   },
   "control": {
+    "update_epoch": "pre_model",
     "max_tokens": 2048,
     "max_calls_per_message": 13,
     "max_pending_batch": 24,

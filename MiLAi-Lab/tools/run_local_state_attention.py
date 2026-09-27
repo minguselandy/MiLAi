@@ -39,6 +39,16 @@ SHARED_CONTENT_LIMIT_ARMS = {"local_all_sources", "global_note_sources",
 SOURCE_POLICIES = {"all_sources", "focus_sources"}
 EVENTS_ONLY_ARMS = {"global_note_sources", "local_all_sources",
                     "local_lr_sources", "local_lr_history", "local_lru_sources"}
+TURN_END_ARMS = {"local_all", "local_all_sources", "global_note_sources"}
+
+
+def _update_epoch(arm: str, config: dict[str, Any]) -> str:
+    value = config["control"].get("update_epoch", "pre_model")
+    if value not in {"pre_model", "turn_end"} or type(value) is not str:
+        raise ValueError("LSA_UPDATE_EPOCH_INVALID")
+    if value == "turn_end" and arm not in TURN_END_ARMS:
+        raise ValueError("LSA_TURN_END_ARM_UNSUPPORTED")
+    return value
 
 
 def _update_policy(arm: str) -> str:
@@ -130,6 +140,7 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "method": "local_state_attention_p1", "run_id": args.run,
         "arm_id": args.arm, "repeat": args.repeat,
         "read_policy": READ_POLICIES.get(args.arm),
+        "update_epoch": _update_epoch(args.arm, config),
         "update_policy": (_update_policy(args.arm)
                           if args.arm not in {"full_history", "window_summary"} else None),
         "update_candidate_policy": ("all_existing_without_selector"
@@ -142,11 +153,14 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
                                                   "local_lru_sources"} else None),
         "maintenance_input_policy": (None if args.arm in {"full_history", "window_summary"} else
                                      "pending_events_candidates_source_ids"
-                                     if args.arm in EVENTS_ONLY_ARMS else
+                                     if (args.arm in EVENTS_ONLY_ARMS or
+                                         _update_epoch(args.arm, config) == "turn_end") else
                                      "current_task_pending_events_states_source_ids"),
         "maintenance_response_contract": (None if args.arm in {
             "full_history", "window_summary"} else
-                                          "edits_only" if args.arm in EVENTS_ONLY_ARMS
+                                          "edits_only" if (args.arm in EVENTS_ONLY_ARMS or
+                                                           _update_epoch(args.arm, config) ==
+                                                           "turn_end")
                                           else "edits_and_focus"),
         "creation_policy": ("shared_maintenance_each_pending_batch"
                             if args.arm in {"local_lr_sources", "local_lr_history",
@@ -198,6 +212,9 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
     history_checkpoint = {"calls": 0, "logical_bytes": 0, "cpu_ns": 0, "wall_ns": 0}
     history_views: list[dict[str, Any]] = []
     summary_events: list[dict[str, Any]] = []
+    epoch_snapshots = {"captured": 0, "reused": 0, "body_bytes": 0}
+    epoch_checkpoint = {"calls": 0, "logical_bytes": 0, "cpu_ns": 0, "wall_ns": 0}
+    turn_closes: list[dict[str, Any]] = []
     trace_path = root / "trace.jsonl"
     if trace_path.exists():
         for line in trace_path.read_text().splitlines():
@@ -212,6 +229,17 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
             if event.get("event") == "lsa_history_checkpoint_read":
                 for key in history_checkpoint:
                     history_checkpoint[key] += event.get(key, 0)
+            if event.get("event") == "lsa_epoch_snapshot":
+                epoch_snapshots["reused" if event["reused"] else "captured"] += 1
+                epoch_snapshots["body_bytes"] += event.get("body_bytes", 0)
+            if event.get("event") == "lsa_epoch_checkpoint_read":
+                epoch_checkpoint["calls"] += 1
+                for key in ("logical_bytes", "cpu_ns", "wall_ns"):
+                    epoch_checkpoint[key] += event.get(key, 0)
+            if event.get("event") == "lsa_turn_close":
+                turn_closes.append({key: event.get(key) for key in (
+                    "message_key", "user_id", "degraded", "reason", "receipts",
+                    "pending_event_ids")})
             if event.get("event") in {"lsa_store_stats", "lsa_history_store_stats"}:
                 for operation, values in event["operations"].items():
                     group = store_stats.setdefault(operation, {
@@ -265,6 +293,9 @@ def _accounting(root: Path, budget_path: Path) -> dict[str, Any]:
             "history_views": history_views,
             "history_summary_events": summary_events,
             "history_checkpoint_reads": history_checkpoint,
+            "epoch_snapshots": epoch_snapshots,
+            "epoch_checkpoint_reads": epoch_checkpoint,
+            "turn_closes": turn_closes,
             "local_state_store_stats": store_stats,
             "trace_path": str(trace_path.resolve()),
             "continuous_budget": read_json(budget_path) if budget_path.exists() else None}
@@ -274,6 +305,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     config, script = read_json(args.config), _script(args.script)
     if args.arm not in ARMS:
         raise ValueError("LSA_ARM_UNKNOWN")
+    _update_epoch(args.arm, config)
     history = config.get("history", {"enabled": False})
     if (type(history) is not dict or type(history.get("enabled", False)) is not bool
             or (args.arm in HISTORY_ARMS) != history.get("enabled", False)):
@@ -380,6 +412,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                                                config["source_view_max_bytes"]
                                                if READ_POLICIES[args.arm] in SOURCE_POLICIES
                                                else None),
+                                           local_state_update_epoch=(
+                                               _update_epoch(args.arm, config)),
                                            history_mode=HISTORY_ARMS.get(args.arm),
                                            history_page_max_bytes=(
                                                config["history"]["page_max_bytes"]

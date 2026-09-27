@@ -29,6 +29,7 @@ from milai_lab.methods.local_state_attention.controller import (
     control_schema,
 )
 from milai_lab.methods.local_state_attention.history import HistoryAccess
+from milai_lab.methods.local_state_attention.history import source_id as history_source_id
 from milai_lab.methods.local_state_attention.integration import (
     SOURCE_VIEW_HEADER,
     _source_view,
@@ -41,7 +42,7 @@ from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import langmem_application_runtime as app_runtime
-from milai_lab.runners.langmem_application import run_phase
+from milai_lab.runners.langmem_application import _collect_turn_tail, run_phase
 
 
 def _response(value: dict[str, Any], index: int) -> httpx.Response:
@@ -179,6 +180,303 @@ def test_partial_update_identity_is_per_state_and_per_source() -> None:
     noop, invalid = bank.apply(scope, [{"id": state_id, "content": "quantity 4"}], set())
     assert not invalid and noop[0]["status"] == "noop"
     assert bank.states(scope)[0]["revision"] == 3
+
+
+def test_turn_end_snapshot_stays_fixed_through_receipt_close_and_process_reopen() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "local_all_sources", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "count 3"})
+    created, invalid = bank.apply(scope, [{"id": None, "title": "count",
+                                           "content": "count 3",
+                                           "evidence": ["seed"]}], {"seed"})
+    assert not invalid
+    state_id = created[0]["id"]
+    thread = "thread-one"
+    snapshot = bank.epoch_snapshot(scope, thread, 0, create=True)
+    assert snapshot["states"][0]["content"] == "count 3"
+    assert "applied_edit_keys" not in snapshot["states"][0]
+    first = HumanMessage(content="Increase count by one", id="user-one")
+    assistant = AIMessage(content="", tool_calls=[{
+        "name": "reserve_and_label", "args": {}, "id": "call-one"}])
+    receipt = ToolMessage(content='{"ok":false,"quantity":4,"reservation_id":"R-1"}',
+                          name="reserve_and_label", tool_call_id="call-one")
+    user_source = history_source_id(thread, 0, first)
+    tool_source = history_source_id(thread, 2, receipt)
+    replies = LruReplies({"maintenance": [{"edits": [{"id": state_id,
+        "content": "count 4; reservation R-1 exists despite failed label",
+        "evidence": [tool_source]}]}, {"edits": [{"id": state_id,
+        "content": "count 5; reservation R-1 exists despite failed label",
+        "evidence": []}]}]})
+    trace: list[dict[str, Any]] = []
+    controller = LocalStateController(bank, replies, emit=trace.append,
+                                      maintenance_only=True)
+    hook = make_pre_model_hook(controller, "System", "all_sources", 16384,
+                               update_epoch="turn_end")
+    cfg = {"configurable": {"foundation_run_id": "run", "arm_id": scope.arm_id,
+                            "user_id": "alice", "thread_id": thread}}
+    initial = hook({"messages": [first]}, cfg)["llm_input_messages"]
+    during = hook({"messages": [first, assistant, receipt]}, cfg)["llm_input_messages"]
+    assert "count 3" in initial[0].content and "count 3" in during[0].content
+    assert "count 4" not in during[0].content
+    assert during[1:] == [first, assistant, receipt]
+    assert replies.calls == []
+    assert bank.pending(scope)[-1]["content"] == receipt.content
+    close = controller.close_turn(scope, user_source, f"{thread}:0")
+    assert not close["degraded"] and close["receipts"][0]["status"] == "updated"
+    assert bank.states(scope)[0]["content"].startswith("count 4")
+    assert replies.calls[0]["payload"]["new_observations"][-1]["tool_call_id"] == (
+        "call-one")
+    assert "current_task" not in replies.calls[0]["payload"]
+    assert hook({"messages": [first, assistant, receipt]}, cfg)[
+        "llm_input_messages"][0].content == during[0].content
+    reopened = LocalStateBank(store)
+    assert reopened.epoch_snapshot(scope, thread, 0, create=True)["reused"] is True
+    assert reopened.epoch_snapshot(scope, thread, 0)["states"][0]["content"] == (
+        "count 3")
+    assert reopened.epoch_snapshot(StateScope("run", scope.arm_id, "bob"), thread, 0,
+                                   create=True)["states"] == []
+
+    second = HumanMessage(content="Increase count by one", id="user-two")
+    reopened.epoch_snapshot(scope, thread, 1, create=True)
+    next_hook = make_pre_model_hook(LocalStateController(reopened, replies), "System",
+                                    "all", update_epoch="turn_end")
+    next_view = next_hook({"messages": [first, assistant, receipt, second]}, cfg)[
+        "llm_input_messages"][0].content
+    assert "count 4" in next_view and "count 5" not in next_view
+    assert history_source_id(thread, 3, second) != user_source
+    assert [row["id"] for row in reopened.pending(scope)] == [
+        history_source_id(thread, 3, second)]
+    second_close = controller.close_turn(scope, history_source_id(thread, 3, second),
+                                         f"{thread}:1")
+    assert not second_close["degraded"] and bank.states(scope)[0]["content"].startswith(
+        "count 5")
+    assert len(replies.calls) == 2
+    assert bank.forget_source(scope, "seed") == [state_id]
+    assert reopened.epoch_snapshot(scope, thread, 1)["states"] == []
+    assert reopened.epoch_snapshot(StateScope("run", scope.arm_id, "bob"), thread, 0)[
+        "states"] == []
+
+
+def test_turn_end_failed_close_keeps_raw_receipt_visible_across_session() -> None:
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    scope = StateScope("run", "local_all_sources", "alice")
+    bank.record_event(scope, {"id": "seed", "kind": "user", "content": "plan count 3"})
+    bank.apply(scope, [{"id": None, "title": "count", "content": "plan count 3"}],
+               {"seed"})
+    prior_thread = "prior"
+    bank.epoch_snapshot(scope, prior_thread, 0, create=True)
+    user = HumanMessage(content="Do the reservation", id="old-user")
+    receipt = ToolMessage(content='{"ok":false,"quantity":3,"reservation_id":"R-2"}',
+                          name="reserve_and_label", tool_call_id="call-two")
+    old_hook = make_pre_model_hook(LocalStateController(bank, LruReplies({})),
+                                   "System", "all", update_epoch="turn_end")
+    old_cfg = {"configurable": {"foundation_run_id": "run", "arm_id": scope.arm_id,
+                                "user_id": "alice", "thread_id": prior_thread}}
+    old_hook({"messages": [user, receipt]}, old_cfg)
+    failing = LruReplies({"maintenance": [httpx.TimeoutException("control timeout")]})
+    close = LocalStateController(bank, failing, maintenance_only=True).close_turn(
+        scope, history_source_id(prior_thread, 0, user), f"{prior_thread}:0")
+    assert close["degraded"] and len(bank.pending(scope)) == 2
+    assert bank.states(scope)[0]["content"] == "plan count 3"
+
+    next_thread = "fresh-session"
+    bank.epoch_snapshot(scope, next_thread, 0, create=True)
+    next_user = HumanMessage(content="What actually happened?", id="new-user")
+    next_cfg = {"configurable": {**old_cfg["configurable"], "thread_id": next_thread}}
+    trace: list[dict[str, Any]] = []
+    next_hook = make_pre_model_hook(LocalStateController(bank, failing,
+                                                         emit=trace.append),
+                                    "System", "all", update_epoch="turn_end")
+    wire = next_hook({"messages": [next_user]}, next_cfg)["llm_input_messages"]
+    assert wire[1] is next_user
+    assert json.dumps(receipt.content, ensure_ascii=False) in wire[0].content
+    assert wire[0].content.count("What actually happened?") == 0
+    assert trace[-1]["pending_source_ids"] == [
+        history_source_id(prior_thread, 0, user),
+        history_source_id(prior_thread, 1, receipt)]
+    assert trace[-1]["current_pending_source_ids"] == [
+        history_source_id(next_thread, 0, next_user)]
+
+
+def test_turn_end_real_partial_tool_tail_survives_store_failure_and_resume(
+    tmp_path: Path,
+) -> None:
+    class FailOneStatePut(InMemoryStore):
+        fail = True
+
+        def put(self, namespace: tuple[str, ...], key: str, value: dict[str, Any],
+                **kwargs: Any) -> None:
+            if namespace[-1] == "states" and self.fail:
+                self.fail = False
+                raise RuntimeError("STORE_DOWN")
+            super().put(namespace, key, value, **kwargs)
+
+    script = {"initial_label_available": False, "phases": [{
+        "id": 0, "operator_memory": [], "world_events": [], "messages": [{
+            "message_id": "partial", "user_id": "alice", "session_id": "main",
+            "public_index": 0, "text": "Reserve item A quantity 3."}]}]}
+    store = FailOneStatePut()
+    bank = LocalStateBank(store)
+    host_wires: list[dict[str, Any]] = []
+    control_wires: list[dict[str, Any]] = []
+
+    def host_reply(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.read())
+        host_wires.append(wire)
+        action = ({"calls": [{"name": "reserve_and_label", "arguments": {
+            "item_key": "item A", "quantity": 3, "destination": "south bay",
+            "packing": "foam"}}]} if len(host_wires) == 1 else
+            {"answer": "Reservation exists, but its label was not created."})
+        return _response(action, len(host_wires))
+
+    def control_reply(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.read())
+        control_wires.append(wire)
+        observations = json.loads(wire["messages"][1]["content"])["new_observations"]
+        tool = next(row for row in observations if row["kind"] == "tool")
+        return _response({"edits": [{"id": None, "title": "item A reservation",
+                                     "content": "Reservation exists; label failed",
+                                     "evidence": [tool["id"]]}]}, len(control_wires))
+
+    config = VLLMConfig(base_url="http://mock/v1/", model="mock")
+    with VLLMClient(config, transport=httpx.MockTransport(host_reply)) as host:
+        with VLLMClient(config, transport=httpx.MockTransport(control_reply)) as control:
+            with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+                model = VLLMChatModel(client=host)
+                controller = LocalStateController(bank, control, maintenance_only=True)
+                runtime = SimpleNamespace(model=model, store=store, checkpointer=saver,
+                                          observer=SimpleNamespace(
+                                              assert_healthy=lambda: None,
+                                              run_tool=lambda request, execute, _: (
+                                                  execute(request))))
+                with pytest.raises(RuntimeError, match="STORE_DOWN"):
+                    run_phase(script, tmp_path, "run", "local_all_sources", 0,
+                              runtime, controller, local_state_read_policy="all_sources",
+                              source_view_max_bytes=16384,
+                              local_state_update_epoch="turn_end")
+                assert json.loads((tmp_path / "phase-progress.json").read_text())[
+                    "pending_message"] == "partial"
+                state_scope = StateScope("run", "local_all_sources", "alice")
+                assert bank.states(state_scope) == []
+                assert {row["kind"] for row in bank.pending(state_scope)} == {
+                    "user", "tool"}
+                result = run_phase(script, tmp_path, "run", "local_all_sources", 0,
+                                   runtime, controller,
+                                   local_state_read_policy="all_sources",
+                                   source_view_max_bytes=16384,
+                                   local_state_update_epoch="turn_end")
+    assert len(host_wires) == 2 and len(control_wires) == 2
+    assert all("Snapshot captured before the current public user turn." in
+               wire["messages"][0]["content"] for wire in host_wires)
+    assert all("Reservation exists; label failed" not in wire["messages"][0]["content"]
+               for wire in host_wires)
+    assert any(row["role"] == "tool" and "reserved_label_failed" in row["content"]
+               for row in host_wires[1]["messages"])
+    assert len(result["world"]["attempts"]) == 1
+    assert result["messages"][0]["status"] == "COMPLETED"
+    assert result["messages"][0]["state_close"]["status"] == "APPLIED"
+    assert bank.pending(state_scope) == []
+    assert bank.states(state_scope)[0]["content"] == "Reservation exists; label failed"
+
+
+@pytest.mark.parametrize("capacity", [True, False])
+def test_turn_end_capacity_closes_tail_but_other_fault_only_collects(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capacity: bool,
+) -> None:
+    user = HumanMessage(content="Reserve item", id="user")
+    call = AIMessage(content="", tool_calls=[{
+        "name": "reserve_and_label", "args": {}, "id": "call"}])
+    receipt = ToolMessage(content='{"ok":false,"reservation_id":"R-3"}',
+                          name="reserve_and_label", tool_call_id="call")
+
+    class Agent:
+        def get_state(self, _config: dict[str, Any]) -> Any:
+            return SimpleNamespace(values={"messages": [user, call, receipt]})
+
+    monkeypatch.setattr("milai_lab.runners.langmem_application.build_agent",
+                        lambda *_args, **_kwargs: Agent())
+
+    def fail_invoke(*_args: Any) -> Any:
+        raise (ValueError("PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED") if capacity
+               else RuntimeError("HOST_DOWN"))
+
+    monkeypatch.setattr("milai_lab.runners.langmem_application."
+                        "invoke_or_resume_public_message", fail_invoke)
+    store = InMemoryStore()
+    bank = LocalStateBank(store)
+    answers = {"maintenance": [lambda payload: {"edits": [{
+        "id": None, "title": "reservation", "content": "R-3 exists; label failed",
+        "evidence": [next(row["id"] for row in payload["new_observations"]
+                          if row["kind"] == "tool")]}]}]}
+    control = LruReplies(answers)
+    controller = LocalStateController(bank, control)
+    runtime = SimpleNamespace(model=object(), store=store, checkpointer=object(),
+                              observer=SimpleNamespace(assert_healthy=lambda: None))
+    script = {"initial_label_available": False, "phases": [{
+        "id": 0, "operator_memory": [], "world_events": [], "messages": [{
+            "message_id": "m", "user_id": "alice", "session_id": "s",
+            "public_index": 0, "text": "Reserve item"}]}]}
+    if capacity:
+        result = run_phase(script, tmp_path, "run", "local_all_sources", 0,
+                           runtime, controller, local_state_read_policy="all_sources",
+                           source_view_max_bytes=16384,
+                           local_state_update_epoch="turn_end")
+        assert result["messages"][0]["status"] == (
+            "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED")
+        assert result["messages"][0]["state_close"]["status"] == "APPLIED"
+        assert bank.states(StateScope("run", "local_all_sources", "alice"))[0][
+            "content"] == "R-3 exists; label failed"
+        assert len(control.calls) == 1
+    else:
+        with pytest.raises(RuntimeError, match="HOST_DOWN"):
+            run_phase(script, tmp_path, "run", "local_all_sources", 0,
+                      runtime, controller, local_state_read_policy="all_sources",
+                      source_view_max_bytes=16384,
+                      local_state_update_epoch="turn_end")
+        assert control.calls == []
+        assert json.loads((tmp_path / "phase-progress.json").read_text())[
+            "pending_message"] == "m"
+    scope = StateScope("run", "local_all_sources", "alice")
+    assert {row["kind"] for row in bank.events(scope)} == {"user", "tool"}
+    assert next(row for row in bank.events(scope) if row["kind"] == "tool")[
+        "content"] == receipt.content
+
+
+def test_turn_end_recipe_is_explicit_and_rejects_selector_combinations(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.freshness_projection.identity import LAB
+
+    monkeypatch.syspath_prepend(str(LAB / "tools"))
+    import run_local_state_attention as entry
+
+    assert entry._update_epoch("local_all_sources", {"control": {}}) == "pre_model"
+    settings = {"control": {"update_epoch": "turn_end"}}
+    assert entry._update_epoch("local_all", settings) == "turn_end"
+    assert entry._update_epoch("global_note_sources", settings) == "turn_end"
+    with pytest.raises(ValueError, match="LSA_TURN_END_ARM_UNSUPPORTED"):
+        entry._update_epoch("local_lru_sources", settings)
+    with pytest.raises(ValueError, match="LSA_TURN_END_ARM_UNSUPPORTED"):
+        entry._update_epoch("local_state", settings)
+
+
+def test_turn_end_close_uses_real_pending_when_checkpoint_has_no_user() -> None:
+    bank = LocalStateBank(InMemoryStore())
+    scope = StateScope("run", "local_all_sources", "alice")
+    bank.record_event(scope, {"id": "old-raw", "kind": "user",
+                              "content": "An unfinished prior observation"})
+    replies = LruReplies({"maintenance": [{"edits": []}]})
+    controller = LocalStateController(bank, replies)
+    agent = SimpleNamespace(get_state=lambda _cfg: SimpleNamespace(values={}))
+    foundation = FoundationScope("run", "local_all_sources", "alice",
+                                  "application:new-session")
+    result = _collect_turn_tail(agent, foundation, controller, 0, close=True)
+    assert result is not None and result["status"] == "APPLIED"
+    assert [row["id"] for row in replies.calls[0]["payload"]["new_observations"]] == [
+        "old-raw"]
+    assert bank.pending(scope) == []
 
 
 def test_legacy_focus_resolves_replayed_create_after_partial_retry() -> None:

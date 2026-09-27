@@ -6,6 +6,7 @@ import hashlib
 import json
 import sqlite3
 import threading
+import time
 import uuid
 from collections.abc import Callable
 from pathlib import Path
@@ -24,6 +25,7 @@ from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import LocalStateController
 from milai_lab.methods.local_state_attention.history import HistoryAccess
+from milai_lab.methods.local_state_attention.integration import collect_observations
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
 from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
@@ -246,6 +248,47 @@ def _operator_memory_event(event: dict[str, Any], run_id: str, arm_id: str,
     write_json(path, ledger)
 
 
+def _collect_turn_tail(agent: Any, scope: FoundationScope,
+                       controller: LocalStateController, public_index: int,
+                       *, close: bool) -> dict[str, Any] | None:
+    epoch_scope = StateScope(scope.run_id, scope.arm_id, scope.user_id)
+    thread_id = str(scope.config()["configurable"]["thread_id"])
+    message_key = f"{thread_id}:{public_index}"
+    start_wall, start_cpu = time.perf_counter_ns(), time.process_time_ns()
+    checkpoint = agent.get_state(scope.config())
+    actual = checkpoint.values.get("messages", []) if checkpoint.values else []
+    elapsed = {"wall_ns": time.perf_counter_ns() - start_wall,
+               "cpu_ns": time.process_time_ns() - start_cpu}
+    latest, _, source_ids = collect_observations(
+        controller.bank, epoch_scope, thread_id, actual)
+    if controller.emit is not None:
+        controller.emit({
+            "event": "lsa_epoch_checkpoint_read", "message_key": message_key,
+            "user_id": scope.user_id, "message_count": len(actual),
+            "source_count": len(source_ids),
+            "logical_bytes": controller.bank._bytes(
+                [item.model_dump(mode="json") for item in actual]), **elapsed})
+    if not close:
+        return None
+    pending = controller.bank.pending(epoch_scope) if latest is None else []
+    close_source_id = (latest[0] if latest is not None else
+                       pending[-1]["id"] if pending else None)
+    if close_source_id is None:
+        return {"status": "NO_CHECKPOINT_SOURCE", "degraded": False,
+                "pending_event_ids": []}
+    result = controller.close_turn(epoch_scope, close_source_id, message_key)
+    if controller.emit is not None:
+        controller.emit({
+            "event": "lsa_turn_close", "message_key": message_key,
+            "user_id": scope.user_id, "degraded": result["degraded"],
+            "reason": result.get("reason"), "receipts": result["receipts"],
+            "pending_event_ids": result["pending_event_ids"]})
+    return {"status": "DEGRADED" if result["degraded"] else "APPLIED",
+            "degraded": result["degraded"], "reason": result.get("reason"),
+            "receipts": result["receipts"],
+            "pending_event_ids": result["pending_event_ids"]}
+
+
 def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               phase_id: int, runtime: ApplicationRuntime,
               local_state_controller: LocalStateController | None = None,
@@ -254,6 +297,7 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               history_mode: str | None = None,
               history_page_max_bytes: int | None = None,
               history_summary_controller: HistorySummaryController | None = None,
+              local_state_update_epoch: str = "pre_model",
               ) -> dict[str, Any]:
     """Run one frozen phase; the next invocation reopens every process-owned resource."""
     phase = script["phases"][phase_id]
@@ -273,6 +317,13 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
         raise ValueError("APPLICATION_HISTORY_MODE_INVALID")
     if (history_mode == "window") != (history_summary_controller is not None):
         raise ValueError("APPLICATION_HISTORY_SUMMARY_MISMATCH")
+    if local_state_update_epoch not in {"pre_model", "turn_end"}:
+        raise ValueError("LSA_UPDATE_EPOCH_UNKNOWN")
+    if local_state_update_epoch == "turn_end" and (
+        local_state_controller is None or local_state_read_policy not in {"all", "all_sources"}
+        or local_state_controller.update_policy != "all"
+    ):
+        raise ValueError("LSA_TURN_END_COMBINATION_UNSUPPORTED")
     world = ApplicationWorld(root / "business-world.sqlite",
                              script["initial_label_available"])
     history_bank = (local_state_controller.bank if local_state_controller is not None else
@@ -334,6 +385,7 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                                     local_state_controller=local_state_controller,
                                     local_state_read_policy=local_state_read_policy,
                                     source_view_max_bytes=source_view_max_bytes,
+                                    local_state_update_epoch=local_state_update_epoch,
                                     history_access=history,
                                     full_history=history_mode == "full",
                                     history_summary_controller=(
@@ -343,12 +395,34 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
             pending = progress["pending_message"] == message_id
             progress["pending_message"] = message_id
             write_json(progress_path, progress)
+            epoch_scope = StateScope(run_id, arm_id, user_id)
+            thread_id = str(scope.config()["configurable"]["thread_id"])
+            message_key = f"{thread_id}:{public_index}"
+            if local_state_update_epoch == "turn_end":
+                assert local_state_controller is not None
+                snapshot = local_state_controller.bank.epoch_snapshot(
+                    epoch_scope, thread_id, public_index, create=True)
+                if local_state_controller.emit is not None:
+                    local_state_controller.emit({
+                        "event": "lsa_epoch_snapshot", "message_key": message_key,
+                        "user_id": user_id, "reused": snapshot["reused"],
+                        "state_ids": [row["id"] for row in snapshot["states"]],
+                        "body_bytes": local_state_controller.bank._bytes(snapshot["states"])})
+
             try:
                 messages = invoke_or_resume_public_message(
                     agent, runtime.model, scope, message["text"], public_index, pending)
             except ValueError as error:
                 if str(error) != "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED":
+                    if local_state_update_epoch == "turn_end":
+                        assert local_state_controller is not None
+                        _collect_turn_tail(agent, scope, local_state_controller,
+                                           public_index, close=False)
                     raise
+                close_result = (_collect_turn_tail(agent, scope, local_state_controller,
+                                                   public_index, close=True)
+                                if local_state_controller is not None
+                                and local_state_update_epoch == "turn_end" else None)
                 progress["messages"][message_id] = {
                     "message_id": message_id, "user_id": user_id,
                     "session_id": session, "public_index": public_index,
@@ -356,6 +430,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                     "business_calls": journal.calls_for_thread(
                         scope.config()["configurable"]["thread_id"]),
                 }
+                if close_result is not None:
+                    progress["messages"][message_id]["state_close"] = close_result
                 if history_mode is not None:
                     progress["messages"][message_id]["visited_ordinal"] = len(
                         progress["messages"]) - 1
@@ -364,6 +440,16 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                 progress["pending_message"] = None
                 write_json(progress_path, progress)
                 continue
+            except BaseException:
+                if local_state_update_epoch == "turn_end":
+                    assert local_state_controller is not None
+                    _collect_turn_tail(agent, scope, local_state_controller,
+                                       public_index, close=False)
+                raise
+            close_result = (_collect_turn_tail(agent, scope, local_state_controller,
+                                               public_index, close=True)
+                            if local_state_controller is not None
+                            and local_state_update_epoch == "turn_end" else None)
             final = next((item for item in reversed(messages)
                           if isinstance(item, AIMessage)), None)
             progress["messages"][message_id] = {
@@ -374,6 +460,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                 "business_calls": journal.calls_for_thread(
                     scope.config()["configurable"]["thread_id"]),
             }
+            if close_result is not None:
+                progress["messages"][message_id]["state_close"] = close_result
             if history_mode is not None:
                 progress["messages"][message_id]["visited_ordinal"] = len(
                     progress["messages"]) - 1

@@ -119,6 +119,7 @@ def build_agent(
     local_state_controller: LocalStateController | None = None,
     local_state_read_policy: str = "focus",
     source_view_max_bytes: int | None = None,
+    local_state_update_epoch: str = "pre_model",
     history_access: HistoryAccess | None = None,
     full_history: bool = False,
     history_summary_controller: HistorySummaryController | None = None,
@@ -194,9 +195,10 @@ def build_agent(
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
         prompt=(prompt if local_state_controller is None and not full_history
                 and history_summary_controller is None else None),
-        pre_model_hook=(make_pre_model_hook(local_state_controller, prompt,
+                        pre_model_hook=(make_pre_model_hook(local_state_controller, prompt,
                                             read_policy=local_state_read_policy,
-                                            source_view_max_bytes=source_view_max_bytes)
+                                            source_view_max_bytes=source_view_max_bytes,
+                                            update_epoch=local_state_update_epoch)
                         if local_state_controller is not None else
                         make_full_history_hook(history_access, prompt)
                         if full_history and history_access is not None else

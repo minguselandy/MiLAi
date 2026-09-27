@@ -1,0 +1,149 @@
+{
+  "kind": "LSA_REVIEW_E2_SANDBOX_R1_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_SOURCE_PUBLICATION",
+  "purpose": "Small online execution comparison of pre-model maintenance and turn-end maintenance with a stable turn-start State on the same newest substrate. No frozen-oracle bank and no unseen claim.",
+  "run_order": [
+    {
+      "case": "distinct",
+      "update_epoch": "turn_end",
+      "run_id": "lsa-review-e2-sandbox-r1-distinct-turn_end",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/maintenance-distinct-increments.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "case": "distinct",
+      "update_epoch": "pre_model",
+      "run_id": "lsa-review-e2-sandbox-r1-distinct-pre_model",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/maintenance-distinct-increments.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "case": "partial",
+      "update_epoch": "pre_model",
+      "run_id": "lsa-review-e2-sandbox-r1-partial-pre_model",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "case": "partial",
+      "update_epoch": "turn_end",
+      "run_id": "lsa-review-e2-sandbox-r1-partial-turn_end",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/maintenance-distinct-increments.json": "e70cfb79ff85b74587210a200f00103b5c608b0f4fd63ba980b8f18857b325cc",
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/maintenance-distinct-increments-rubric.json": "73460af3a69a155903f3ad648b0da5b3e5762437c73a072e757325b3d13c4799",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "denominators": {
+    "trajectories": 4,
+    "independent_development_scripts": 2,
+    "repeats_per_script_epoch": 1,
+    "messages_per_epoch": 11,
+    "total_public_messages": 22,
+    "process_phases": 8
+  },
+  "split": "EXPOSED_DEVELOPMENT",
+  "source_freeze": "After implementation, necessary narrow checks and publication, actual prepare binds the same Git/source/dependency mapping for all four runs. Hold source and protocol for the entire batch.",
+  "comparison_contract": {
+    "arm": "local_all_sources",
+    "vary_only_declared_epoch_recipe": [
+      "control.update_epoch=pre_model",
+      "control.update_epoch=turn_end"
+    ],
+    "shared": "Same raw script, tools and owner permissions, events-only maintenance generator, all-State reading, source-view budgets, memory tools, model and output/capacity limits. Fresh independent state formation in each trajectory; no seeded State.",
+    "epoch_effects": "turn_end snapshots prior State bodies at public-turn start, collects actual user/tool events within the turn, exposes prior unmerged raw tail where absent from current prefix, and explicitly maintains at close; thus maintenance cadence, batching, State formation and later trajectories may differ. This is an online recipe comparison, not pure label or A/U ablation.",
+    "snapshot_label": "Snapshot captured before the current public user turn."
+  },
+  "shared": {
+    "host": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "thinking": false,
+    "host_max_tokens": 4096,
+    "host_calls_per_public_message": 12,
+    "control_max_tokens": 2048,
+    "control_calls_per_public_message": 13,
+    "http_concurrency": 1,
+    "context_tokens": 65536,
+    "aggregate_content_chars": 16000,
+    "source_view_max_bytes": 16384,
+    "embedding": "bge-m3",
+    "embedding_dimension": 1024
+  },
+  "scoring": {
+    "primary": "Unchanged original per-message checks for distinct(5) and partial(6), exact actual business fields/ID and truthful responses. Whole trajectory requires every message. No post-outcome replacement.",
+    "additional_axes": [
+      "facts_conditions",
+      "object_identity",
+      "actual_side_effects",
+      "unsupported_assertions",
+      "State_understanding"
+    ],
+    "answer_boundary": "Negative or positive physical-dispatch assertions unsupported by receipts fail the original recovery rubric. Prior bad key remains an initial-action failure even if same-ID recovery succeeds.",
+    "not_substitutes": [
+      "Process success is not semantic success.",
+      "Correct proposal diagnostic does not count as actual action.",
+      "Clear pending/close success is not factual reconciliation."
+    ]
+  },
+  "mechanism_checks": [
+    "Same epoch uses the same persisted prior State bodies in every Host request; actual metadata/HTTP/checkpoint evidence, not only trace counts.",
+    "Both distinct same-text source IDs are real and independently enter maintenance; no text deduplication.",
+    "Current raw user/tool prefix is intact; current events are not appended again as prior unmerged tail.",
+    "Actual partial ok=false reservation survives; later same-ID get/label and no duplicate reserve verified in the real world/journal.",
+    "Close maintenance receives only newly pending actual events, no extra current_task; final actual tool tail is collected.",
+    "State close result is recorded separately from Host/business completion; maintenance errors/capacity results remain visible.",
+    "All Host/control/embedding calls, Store and added checkpoint reads, snapshot bytes, retries/noops/failed calls are reported."
+  ],
+  "isolation": "Fresh run/arm/user namespaces, store state and local world/checkpoints; two independent phase processes per run. Root serial real HTTP. Existing private DSN supplied only via environment and never published.",
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 2701,
+    "generation_tokens": 3332841,
+    "embedding_tokens": 18445
+  },
+  "stop_rule": "Keep semantic/capacity/degraded failures in original denominators. A real Store/service/journal fault stops the affected run for causal diagnosis before safe continuation of separately frozen independent runs; never blindly replay unknown business side effects or replace a failed trajectory.",
+  "limits": [
+    "One repeat on each of two exposed scripts, not a stable or unseen quality estimate.",
+    "Actual same-epoch mid-action process crash, capacity fault and close failure are not forced in these original scripts; cite necessary offline engineering checks separately if no natural live trigger.",
+    "The shared full-history/summary and independent A/U experiments remain future stages.",
+    "No physical deletion/archive, selector training or second model is implicitly authorized by this protocol."
+  ],
+  "validation": {
+    "status": "SOURCE_OWNER_FREEZE_READY",
+    "owner": "Sol xhigh",
+    "related_checks": 17,
+    "final_turn_end_boundary_checks": 7,
+    "static": "Target Ruff, six-source Mypy and diff check passed",
+    "zero_model_prepares": 4,
+    "builds": {
+      "sdist_sha256": "535e1e5055d1016263a6eff6233d622badbbdcdcb27af57206a6246ddc09be11",
+      "wheel_sha256": "c771232d9ed9d4ae4a635a91f3d4d8c56ccb660eca317fb38563d8b53cd67a74"
+    },
+    "boundary": "Real SQLite world/checkpointer with mocked HTTP validates partial side effect plus State-write failure retry without business replay; no live failure injection claimed."
+  },
+  "closeout": "User requests pause after this current slice. Complete only these four frozen trajectories, report all results and costs, pause actual Goal, publish overall report. Do not start E1 or D2-D5."
+}

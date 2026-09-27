@@ -36,6 +36,17 @@ canonical memory state.
 
 ## Required checks
 
+Latest user instruction: finish the current E2 online snapshot slice, then pause the actual
+Goal, generate the overall experiment report and publish through Luna high. Limit remaining
+execution to the four frozen sandbox trajectories; E1 and D2–D5 remain unfinished and must not
+start during closeout. This pause request overrides older ACTIVE continuation wording below.
+
+The opt-in turn_end implementation is now source-frozen: 17 related checks, then 7 final
+turn_end boundary checks, target static checks, four zero-model prepares and one final build
+passed. Do not repeat them for publication. Root freezes and runs the
+[E2 sandbox protocol](data/manifests/local-state-attention-review-e2-sandbox-r1-protocol.json)
+serially, preserving every failure and cost. No shared service change or model download.
+
 The user has now explicitly activated execution of the
 [16-round review and next plan](docs/MILAI_LSA_16_ROUND_REVIEW_AND_NEXT_PLAN_20260927.md).
 The actual thread Goal is ACTIVE; follow the [new execution record](docs/MILAI_LSA_REVIEW_EXECUTION_GOAL.md).

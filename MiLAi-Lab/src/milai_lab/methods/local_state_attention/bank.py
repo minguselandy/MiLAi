@@ -174,6 +174,56 @@ class LocalStateBank:
     def clear_focus(self, scope: StateScope) -> None:
         self._delete(scope, "meta", "focus")
 
+    @staticmethod
+    def _epoch_key(thread_id: str) -> str:
+        if not thread_id:
+            raise ValueError("LSA_EPOCH_THREAD_MISSING")
+        return "epoch_snapshot:" + hashlib.sha256(thread_id.encode()).hexdigest()
+
+    def epoch_snapshot(self, scope: StateScope, thread_id: str,
+                       public_index: int, *, create: bool = False,
+                       ) -> dict[str, Any]:
+        """Keep one full turn-start view per thread, including across process resume."""
+        if type(public_index) is not int or public_index < 0:
+            raise ValueError("LSA_EPOCH_INDEX_INVALID")
+        key = self._epoch_key(thread_id)
+        item = self._get(scope, "meta", key)
+        if item is not None and item.value.get("thread_id") != thread_id:
+            raise ValueError("LSA_EPOCH_THREAD_CHANGED")
+        if item is not None and item.value.get("public_index") == public_index:
+            result = dict(item.value)
+            result["reused"] = True
+            return result
+        if not create:
+            raise ValueError("LSA_EPOCH_SNAPSHOT_MISSING")
+        if item is not None and item.value.get("public_index", -1) > public_index:
+            raise ValueError("LSA_EPOCH_INDEX_REWOUND")
+        states = self.states(scope)
+        value = {"thread_id": thread_id, "public_index": public_index,
+                 "states": states}
+        self._put(scope, "meta", key, value)
+        return {**value, "reused": False}
+
+    def _clear_epoch_snapshots(self, scope: StateScope) -> None:
+        """A deletion invalidates copied bodies as well as live State rows."""
+        offset = 0
+        while True:
+            def search_page(current_offset: int = offset) -> Any:
+                return self.store.search(scope.namespace("meta"), limit=64,
+                                         offset=current_offset)
+
+            rows = self._access("search", search_page,
+                {"namespace": scope.namespace("meta"), "limit": 64, "offset": offset})
+            for row in rows:
+                if row.key.startswith("epoch_snapshot:"):
+                    self._put(scope, "meta", row.key,
+                              {"thread_id": row.value["thread_id"],
+                               "public_index": row.value["public_index"],
+                               "states": [], "invalidated_by_deletion": True})
+            if len(rows) < 64:
+                break
+            offset += len(rows)
+
     def history_summary(self, scope: StateScope) -> dict[str, Any] | None:
         row = self._get(scope, "meta", "history_summary")
         return dict(row.value) if row is not None else None
@@ -355,6 +405,7 @@ class LocalStateBank:
                 self._delete(scope, "states", state["id"])
                 removed.append(state["id"])
         self._delete(scope, "events", source_id)
+        self._clear_epoch_snapshots(scope)
         focus = self._get(scope, "meta", "focus")
         if focus is not None:
             self.set_focus(scope, focus.value["query_id"],
@@ -368,3 +419,4 @@ class LocalStateBank:
             for row in rows:
                 self._delete(scope, kind, row["id"])
         self._delete(scope, "meta", "focus")
+        self._clear_epoch_snapshots(scope)

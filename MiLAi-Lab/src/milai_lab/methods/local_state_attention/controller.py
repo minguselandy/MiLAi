@@ -88,10 +88,16 @@ class LocalStateController:
         self.maintenance_only = maintenance_only
 
     def prepare(self, scope: StateScope, query_id: str, query: str,
-                message_key: str = "") -> dict[str, Any]:
+                message_key: str = "", *, close_only: bool = False,
+                ) -> dict[str, Any]:
+        if close_only and self.update_policy != "all":
+            raise ValueError("LSA_TURN_END_UPDATE_POLICY_UNSUPPORTED")
         pending = self.bank.pending(scope)
+        if close_only and not pending:
+            return {"focus": [], "receipts": [], "degraded": False,
+                    "reused": True, "pending_event_ids": []}
         previous = self.bank.focus(scope, query_id)
-        if not pending and previous is not None:
+        if not close_only and not pending and previous is not None:
             valid = {row["id"] for row in self.bank.states(scope)}
             return {"focus": [key for key in previous if key in valid],
                     "receipts": [], "degraded": False, "reused": True,
@@ -156,9 +162,10 @@ class LocalStateController:
         if self.update_policy in {"lr", "lru"}:
             return self._prepare_independent_read(scope, query_id, query, message_key,
                                                   pending, states, events, prompt)
-        if self.maintenance_only:
+        if close_only or self.maintenance_only:
             return self._prepare_all_maintenance(scope, query_id, message_key,
                                                  pending, states, events, prompt)
+
         payload = {"current_task": query,
                    "new_observations": [self._event_view(row) for row in pending],
                    "states": [{key: row[key] for key in (
@@ -218,6 +225,12 @@ class LocalStateController:
                        "focus": focus, "edits": receipts, "degraded": invalid,
                        "pending_event_ids": result["pending_event_ids"]})
         return result
+
+    def close_turn(self, scope: StateScope, query_source_id: str,
+                   message_key: str) -> dict[str, Any]:
+        """Apply pending observations once at the public-turn boundary; never select A."""
+        return self.prepare(scope, query_source_id, "", message_key,
+                            close_only=True)
 
     def _stage_call(self, stage: str, message_key: str, prompt: str,
                     payload: dict[str, Any], schema: dict[str, Any]) -> dict[str, Any]:
