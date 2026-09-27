@@ -34,9 +34,9 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 
 | 阶段/工作包 | 必须交付的证据 | 当前状态 |
 | --- | --- | --- |
-| P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | 原型已发布；实际 manifest/HTTP已核对，发现 schema/store 契约缺口，修复中 |
-| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R1 三消息后因确定性接口问题停止；0/2 完整轨迹验收，保留原输入待修复后重跑 |
-| P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | 未运行；oracle 上界单列 |
+| P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | R2 实际 decoder/manifest/独立计费正常；仍需补实际删除血缘与内部Store读计量 |
+| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R2 完成12消息，任务9/12、完整业务1/2；存在状态污染/焦点/Host参数错误，方法未通过 |
+| P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | 四个实际R2断点已固定12个读取job及3个单列诊断；runner检查/构建完成，待发布后实际冻结调用 |
 | P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | 未运行；初始建议 6 情景×3 臂×2 重复，调用前固定 |
 | P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | 未运行，遵循进入条件 |
 | P5 / WP5 | 新 frozen 原生 selection、第二任务族、交错顺序及完整重复；原 scorer 和失败分母 | 未运行；不消费旧暴露任务作 unseen |
@@ -116,6 +116,30 @@ R2 通用契约修复已冻结：创建必须有标题，更新可保持省略�
 [R2 协议](../data/manifests/local-state-attention-p1-r2-protocol.json)继承原输入及 rubric
 字节和顺序，新的源码发布后由实际 prepare 生成运行身份。R2 首请求检验新 schema 的
 真实 decoder 兼容性，P1 语义验收仍待完成。
+
+[R2 实际结果](MILAI_LOCAL_STATE_ATTENTION_P1_R2_RESULTS_20260927.md)及
+[精简数据](../data/manifests/local-state-attention-p1-r2-results.json)保留全部两条轨迹。
+跨进程持久恢复与部分失败 ID 保持可用，但控制器在业务调用前虚构了行动结果，且存在
+读取遗漏和独立 Host 参数错误。真实用户/工具历史保留，0 degraded/0 pending 不等同
+语义通过。全部9张State无evidence_refs，当前删除关联和Store操作计量也需补。
+累计903 generation /1082606 generation tokens /9626 embedding tokens。
+先进行冻结同bank的P2条件使用诊断（不声称P1已完成），再由Sol实现单一通用修复候选；
+P3仍未触发。临时Astra只处理这一个具体跨层问题，不是常驻审计或效果裁判。
+
+[P2 读取诊断协议](../data/manifests/local-state-attention-p2-r1-protocol.json)固定
+四个真实断点的同bank all/query/focus。bank由真实请求与已接受写入重建，并逐项核对
+实际view；普通query用bge-m3相似度top2，只读focus额外调用单列计费。
+所有原始Host历史、工具合同和模型参数保留；仅改变临时工作视图，停在第一answer/calls，
+不执行业务动作。12个方法job按固定轮转顺序，另3个diagnostic覆盖人工选择的真实旧计划、
+反事实值及完整真实部分失败回执。raw输入留ignored，协议绑定输入字节hash；rubric分离。
+独立薄入口已通过4项窄测及ruff/mypy，实际冻结输入的临时prepare为15 jobs/0 attempts。
+一次必要build确认新CLI在sdist、新模块在wheel；哈希见协议，正式manifest在发布后生成。
+
+Astra建议的后续单一语义候选是来源身份保持的状态迁移：维护输入保留actor/call身份，
+区分请求、用户陈述与真实工具观察，不把读取任务写成已发生结果；不同时改Host。
+删除另外使用程序机械dependency_source_ids，累积旧值、当前来源及所有可见State依赖，
+与模型evidence_refs分开；全bank可见时可能保守多删，必须报告。缺失旧依赖不能视为无依赖。
+这些是待P2证据决定的开发项，未实施/未验收，不能据建议声称问题已经解决。
 
 ## 后期资源准备记录
 

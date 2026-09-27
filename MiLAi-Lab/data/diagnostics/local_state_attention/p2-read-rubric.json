@@ -1,0 +1,87 @@
+{
+  "kind": "LSA_READ_PROBE_RUBRIC",
+  "runtime_reads_rubric": false,
+  "scope": "First Host response only; no business execution and no end-to-end task success claim. All 12 method jobs retained; 3 diagnostics separate.",
+  "method_cases": {
+    "background": {
+      "expected_answer_facts": [
+        "6",
+        "east archive E-2",
+        "paper sleeves"
+      ],
+      "expected_business_calls": 0,
+      "causal_limit": "Original same-session history can answer even when attention fails; additionally check A includes handout facts."
+    },
+    "combined": {
+      "expected_calls": [
+        {
+          "name": "reserve_and_label",
+          "item_key": "Workshop handout packs",
+          "quantity": 6,
+          "destination": "east archive E-2",
+          "packing": "paper sleeves"
+        },
+        {
+          "name": "reserve_and_label",
+          "item_key": "Workshop field kits",
+          "quantity": 8,
+          "destination": "north rack N-6",
+          "packing": "rigid cases"
+        }
+      ],
+      "call_order": "either, one each",
+      "causal_limit": "Bank includes real prematurely failed action cards; observe choice without executing."
+    },
+    "owner-action": {
+      "expected_calls": [
+        {
+          "name": "reserve_and_label",
+          "item_key": "Summit archive crates",
+          "quantity": 2,
+          "destination": "south bay S-8",
+          "packing": "cloth covers"
+        }
+      ],
+      "first_break_fields": [
+        "quantity",
+        "destination",
+        "packing",
+        "item_key"
+      ]
+    },
+    "recovery": {
+      "expected_read": "get_reservation item_key equal to actual persisted R2 world key, not reservation ID",
+      "actual_persisted_key": "Summit archive crate",
+      "allowed_label_call": "same actual R2 reservation ID; no new reserve",
+      "metrics": [
+        "correct get key",
+        "correct complete_label ID if any",
+        "no duplicate reserve",
+        "first reply factual claims"
+      ],
+      "causal_limit": "Cannot establish a completed recovery without tool execution; R2 wrong created key remains failure in R2."
+    }
+  },
+  "diagnostics": {
+    "owner-supported-plan": {
+      "classification": "diagnostic_oracle_selection_of_actual_pre_request_state",
+      "expected_quantity": 2,
+      "expected_destination": "south bay S-8",
+      "expected_packing": "cloth covers",
+      "expected_item_key": "Summit archive crates"
+    },
+    "owner-counterfactual-plan": {
+      "classification": "diagnostic_counterfactual_state",
+      "expected_quantity": 7,
+      "expected_destination": "north bay N-9",
+      "expected_packing": "cloth covers",
+      "expected_item_key": "Summit archive crates",
+      "criterion": "Does Host action respond to changed State values; not a true-world task score."
+    },
+    "recovery-actual-partial-receipt": {
+      "classification": "diagnostic_direct_actual_source",
+      "criterion": "Proper actual item_key versus reservation_id use from full raw partial-effect receipt; no business execution."
+    }
+  },
+  "scoring": "Root offline exact action fields plus concise content review; misses/parse/errors stay denominators. No runtime gold."
+}

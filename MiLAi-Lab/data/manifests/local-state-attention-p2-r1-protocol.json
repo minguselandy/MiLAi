@@ -1,0 +1,180 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P2_READ_DIAGNOSTIC_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_PUBLICATION",
+  "scope": "Conditional read/use diagnosis while P1 semantic acceptance remains open; not P3 efficacy.",
+  "source_bank_commit": "bf1ac1f920dd52fb17b6723cb602aae026e43bba",
+  "input_path": "artifacts/local-state-attention/p2-r1/inputs.json",
+  "input_sha256": "8b44e57fe3579f46dc89305f1729495e0c9df8e4aa5b13abfa9adb8e3141551a",
+  "input_reconstruction": [
+    {
+      "case_id": "background",
+      "source_run": "lsa-p1-interleaved-r2",
+      "trace_path": "artifacts/local-state-attention/p1-r2/lsa-p1-interleaved-r2/trace.jsonl",
+      "trace_sha256": "38ea180cbd0cf1e34e24f3e67b13cf2c072ba0b4a7c4056ea4e6f76942bf1a17",
+      "control_response_line": 12,
+      "host_response_line": 15,
+      "bank_reconstruction": "Actual pre-control bank plus actual accepted edit receipts; validated against emitted selected-state bodies.",
+      "message_id": "background-revision"
+    },
+    {
+      "case_id": "combined",
+      "source_run": "lsa-p1-interleaved-r2",
+      "trace_path": "artifacts/local-state-attention/p1-r2/lsa-p1-interleaved-r2/trace.jsonl",
+      "trace_sha256": "38ea180cbd0cf1e34e24f3e67b13cf2c072ba0b4a7c4056ea4e6f76942bf1a17",
+      "control_response_line": 22,
+      "host_response_line": 25,
+      "bank_reconstruction": "Actual pre-control bank plus actual accepted edit receipts; validated against emitted selected-state bodies.",
+      "message_id": "combined-action"
+    },
+    {
+      "case_id": "owner-action",
+      "source_run": "lsa-p1-partial-r2",
+      "trace_path": "artifacts/local-state-attention/p1-r2/lsa-p1-partial-r2/trace.jsonl",
+      "trace_sha256": "0798501dcc19c006eb85e798c5cfc8d32b4a14f3fdc057de29ee6f434f5ad04d",
+      "control_response_line": 30,
+      "host_response_line": 33,
+      "bank_reconstruction": "Actual pre-control bank plus actual accepted edit receipts; validated against emitted selected-state bodies.",
+      "message_id": "other-owner-action"
+    },
+    {
+      "case_id": "recovery",
+      "source_run": "lsa-p1-partial-r2",
+      "trace_path": "artifacts/local-state-attention/p1-r2/lsa-p1-partial-r2/trace.jsonl",
+      "trace_sha256": "0798501dcc19c006eb85e798c5cfc8d32b4a14f3fdc057de29ee6f434f5ad04d",
+      "control_response_line": 21,
+      "host_response_line": 24,
+      "bank_reconstruction": "Actual pre-control bank plus actual accepted edit receipts; validated against emitted selected-state bodies.",
+      "message_id": "restart-recovery"
+    }
+  ],
+  "rubric_path": "data/diagnostics/local_state_attention/p2-read-rubric.json",
+  "rubric_sha256": "859c7f3a369ded9015612b815f71aba15f817ccfa089ce9281121c03ff281b6b",
+  "jobs": [
+    {
+      "job_id": "background-all",
+      "case_id": "background",
+      "arm": "all"
+    },
+    {
+      "job_id": "background-query",
+      "case_id": "background",
+      "arm": "query"
+    },
+    {
+      "job_id": "background-focus",
+      "case_id": "background",
+      "arm": "focus"
+    },
+    {
+      "job_id": "combined-query",
+      "case_id": "combined",
+      "arm": "query"
+    },
+    {
+      "job_id": "combined-focus",
+      "case_id": "combined",
+      "arm": "focus"
+    },
+    {
+      "job_id": "combined-all",
+      "case_id": "combined",
+      "arm": "all"
+    },
+    {
+      "job_id": "owner-action-focus",
+      "case_id": "owner-action",
+      "arm": "focus"
+    },
+    {
+      "job_id": "owner-action-all",
+      "case_id": "owner-action",
+      "arm": "all"
+    },
+    {
+      "job_id": "owner-action-query",
+      "case_id": "owner-action",
+      "arm": "query"
+    },
+    {
+      "job_id": "recovery-all",
+      "case_id": "recovery",
+      "arm": "all"
+    },
+    {
+      "job_id": "recovery-focus",
+      "case_id": "recovery",
+      "arm": "focus"
+    },
+    {
+      "job_id": "recovery-query",
+      "case_id": "recovery",
+      "arm": "query"
+    },
+    {
+      "job_id": "owner-supported-plan",
+      "case_id": "owner-action",
+      "arm": "diagnostic",
+      "variant": "supported-plan"
+    },
+    {
+      "job_id": "owner-counterfactual-plan",
+      "case_id": "owner-action",
+      "arm": "diagnostic",
+      "variant": "counterfactual-plan"
+    },
+    {
+      "job_id": "recovery-actual-partial-receipt",
+      "case_id": "recovery",
+      "arm": "diagnostic",
+      "variant": "actual-partial-receipt"
+    }
+  ],
+  "arms": {
+    "all": "All actual State bodies sorted by id; no maintenance.",
+    "query": "Same actual bank; bge-m3 query and title+content embeddings, cosine top2; all costs included.",
+    "focus": "Same actual bank/query; one independent read-only selector {focus:[actual ids]}; no edits.",
+    "diagnostic": "3 separate predeclared upper/counterfactual/direct-source views; never method score."
+  },
+  "fairness": {
+    "same_original_host_history": true,
+    "same_tool_schema": true,
+    "same_provider_parameters": true,
+    "same_state_bank_per_case": true,
+    "maintenance_disabled": true,
+    "no_rubric_gold_future_input": true,
+    "business_tools_executed": false,
+    "scope": "Only replace existing final Local State work-view section of first system message."
+  },
+  "capacity": {
+    "host_calls": 15,
+    "read_selector_calls": 4,
+    "embedding_batches": "four query+bank jobs, actual HTTP receipts reported",
+    "host_max_tokens": 4096,
+    "selector_max_tokens": 2048,
+    "http_concurrency": 1,
+    "source_store_writes": 0
+  },
+  "repeat": 1,
+  "order": "Predeclared rotated blocks in jobs, diagnostics last; small diagnosis not a variance/efficacy estimate.",
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 903,
+    "generation_tokens": 1082606,
+    "embedding_tokens": 9626
+  },
+  "stop_rule": "Infra/schema failure isolates and retains costs; do not replace affected case. Semantic failures continue all frozen jobs.",
+  "next_decision": "If correct State works but actual maintenance view fails, repair source-preserving maintenance. If State/full source both fail, isolate Host use. After minimal repair rerun P1 original full trajectories; P3 not authorized by diagnostic pass alone.",
+  "validation": {
+    "narrow_tests": 4,
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "diff_check": "PASS",
+    "actual_inputs_prepare": "15 jobs; zero attempts/outputs; temporary prepublication identity only",
+    "build": {
+      "reason": "New source module and independent CLI entry; one necessary inclusion check",
+      "sdist_sha256": "d9ea836d8157207e2bfacdf92172256692b45dd60629a6f212aea0e83482c139",
+      "wheel_sha256": "4dc6a3f0e379654efa0b9aa847c1979427f2f3b2148b52ba8f7217aa14946197"
+    },
+    "real_calls": 0
+  }
+}

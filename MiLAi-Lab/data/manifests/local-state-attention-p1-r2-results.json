@@ -1,0 +1,269 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P1_R2_RESULTS",
+  "status": "EXECUTION_VALID_SEMANTIC_FAILURES",
+  "protocol": "data/manifests/local-state-attention-p1-r2-protocol.json",
+  "source_commit": "bf1ac1f920dd52fb17b6723cb602aae026e43bba",
+  "split": "exposed_development",
+  "runs": [
+    {
+      "run_id": "lsa-p1-interleaved-r2",
+      "source_commit": "bf1ac1f920dd52fb17b6723cb602aae026e43bba",
+      "input_sha256": "6b7febc8284c347af18c1a232b71308c7f067a6f9aaeefa8d14a58bd8cc045f8",
+      "costs": {
+        "state_control": {
+          "requests": 7,
+          "known_tokens": 7083,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "task_host": {
+          "requests": 7,
+          "known_tokens": 7685,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "http_wall_seconds": {
+        "state_control": 7.490623461082578,
+        "task_host": 3.62940230127424
+      },
+      "world_exact_matches": [
+        {
+          "expected_owner": "iris",
+          "expected_key": "Workshop handout packs",
+          "exact_fields_match": true
+        },
+        {
+          "expected_owner": "iris",
+          "expected_key": "Workshop field kits",
+          "exact_fields_match": true
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 2
+      },
+      "degraded_views": 0,
+      "pending_events": 0,
+      "storage": {
+        "states": {
+          "records": 5,
+          "logical_value_utf8_bytes": 1344
+        },
+        "events": {
+          "records": 8,
+          "logical_value_utf8_bytes": 3758
+        },
+        "meta": {
+          "records": 1,
+          "logical_value_utf8_bytes": 102
+        }
+      },
+      "local_files_bytes": {
+        "trace.jsonl": 133868,
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 212992,
+        "business-world.sqlite": 36864
+      },
+      "checkpoint_checks": [
+        {
+          "owner": "iris",
+          "session": "planning",
+          "user_bytes_equal": true,
+          "tool_messages": 0,
+          "local_state_view_in_original": false
+        },
+        {
+          "owner": "iris",
+          "session": "followup",
+          "user_bytes_equal": true,
+          "tool_messages": 2,
+          "local_state_view_in_original": false
+        }
+      ],
+      "observer": {
+        "id": 1,
+        "transactions": 52,
+        "observer_cpu_ns": 16827882,
+        "observer_wall_ns": 369447641,
+        "extra_store_reads": 0,
+        "extra_read_cpu_ns": 0,
+        "extra_read_wall_ns": 0,
+        "initial_db_bytes": 98304
+      },
+      "lsa_internal_store_reads": "NOT_INSTRUMENTED_R2; no retroactive actual count claim",
+      "source_refs_empty_states": 5,
+      "task_strict_messages": {
+        "passed": 6,
+        "total": 6
+      },
+      "whole_task_trajectory_pass": true,
+      "full_method_acceptance": false,
+      "evidence_sha256": {
+        "trace.jsonl": "38ea180cbd0cf1e34e24f3e67b13cf2c072ba0b4a7c4056ea4e6f76942bf1a17",
+        "run_manifest.json": "13e318cfd8c44472a5d14cbcd4d80f2bdb4a1dc667a4f88cbcb4e9bc0a97a835",
+        "phase-0-result.json": "8e7a344befb7151c758186d2757c1ec69c4b9ca6ba9d916ac82a2f412ca0a96d",
+        "phase-1-result.json": "9a08df60fc4127d46f427c9f3335f891529f798f979b571726c125ce6fb514bc",
+        "phase-0-store-snapshot.json": "d22981fc14d2dbca83316de6cb34de540e4d2d3d7fb7ce686d5bae6e46ccf5a8",
+        "phase-1-store-snapshot.json": "2bdf27f62f1a2bbcbe6f9669f3f63fcb1b25222e8d1987eed16ace110ee63106"
+      }
+    },
+    {
+      "run_id": "lsa-p1-partial-r2",
+      "source_commit": "bf1ac1f920dd52fb17b6723cb602aae026e43bba",
+      "input_sha256": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+      "costs": {
+        "state_control": {
+          "requests": 10,
+          "known_tokens": 9000,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "task_host": {
+          "requests": 10,
+          "known_tokens": 10620,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "embedding": {
+          "requests": 1,
+          "known_tokens": 9,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "http_wall_seconds": {
+        "state_control": 10.591084124520421,
+        "task_host": 5.451866994611919,
+        "embedding": 0.36723938398063183
+      },
+      "world_exact_matches": [
+        {
+          "expected_owner": "mira",
+          "expected_key": "Summit archive crates",
+          "exact_fields_match": false
+        },
+        {
+          "expected_owner": "noel",
+          "expected_key": "Summit archive crates",
+          "exact_fields_match": false
+        }
+      ],
+      "world_attempts": {
+        "reserve_and_label": 2,
+        "complete_label": 1
+      },
+      "degraded_views": 0,
+      "pending_events": 0,
+      "storage": {
+        "states": {
+          "records": 4,
+          "logical_value_utf8_bytes": 1536
+        },
+        "events": {
+          "records": 11,
+          "logical_value_utf8_bytes": 5108
+        },
+        "meta": {
+          "records": 2,
+          "logical_value_utf8_bytes": 204
+        }
+      },
+      "local_files_bytes": {
+        "trace.jsonl": 227654,
+        "instrumentation.sqlite": 106496,
+        "checkpoints.sqlite": 258048,
+        "business-world.sqlite": 36864
+      },
+      "checkpoint_checks": [
+        {
+          "owner": "noel",
+          "session": "planning",
+          "user_bytes_equal": true,
+          "tool_messages": 0,
+          "local_state_view_in_original": false
+        },
+        {
+          "owner": "mira",
+          "session": "planning",
+          "user_bytes_equal": true,
+          "tool_messages": 1,
+          "local_state_view_in_original": false
+        },
+        {
+          "owner": "mira",
+          "session": "recovery",
+          "user_bytes_equal": true,
+          "tool_messages": 3,
+          "local_state_view_in_original": false
+        },
+        {
+          "owner": "noel",
+          "session": "followup",
+          "user_bytes_equal": true,
+          "tool_messages": 1,
+          "local_state_view_in_original": false
+        }
+      ],
+      "observer": {
+        "id": 1,
+        "transactions": 86,
+        "observer_cpu_ns": 31863164,
+        "observer_wall_ns": 561253925,
+        "extra_store_reads": 0,
+        "extra_read_cpu_ns": 0,
+        "extra_read_wall_ns": 0,
+        "initial_db_bytes": 98304
+      },
+      "lsa_internal_store_reads": "NOT_INSTRUMENTED_R2; no retroactive actual count claim",
+      "source_refs_empty_states": 4,
+      "task_strict_messages": {
+        "passed": 3,
+        "total": 6
+      },
+      "whole_task_trajectory_pass": false,
+      "full_method_acceptance": false,
+      "evidence_sha256": {
+        "trace.jsonl": "0798501dcc19c006eb85e798c5cfc8d32b4a14f3fdc057de29ee6f434f5ad04d",
+        "run_manifest.json": "f453209be0829ef9342f08afc62ec77d0f97046507002119ec4f013970a50d94",
+        "phase-0-result.json": "37d2604ad3754e5b18bd29f23b760d6685fa7a111baa988a250213eff90c2a9b",
+        "phase-1-result.json": "eec076794260d9c3662fc51acc6a0aa3d2ad913e2117607a24dac826fb1de87e",
+        "phase-0-store-snapshot.json": "58c5735f47cff6067320d3abbb672c15eaee6fe6a78ff836c0903ebf4f6c0fef",
+        "phase-1-store-snapshot.json": "270862dcbe59e7b08dfd49a36710984962fcff8c08c4511427490b1a7e1810f6"
+      }
+    }
+  ],
+  "total_task_messages": {
+    "passed": 9,
+    "total": 12
+  },
+  "whole_task_trajectories": {
+    "passed": 1,
+    "total": 2
+  },
+  "full_method_acceptance": false,
+  "generation_delta": {
+    "requests": 34,
+    "tokens": 34388
+  },
+  "embedding_delta": {
+    "requests": 1,
+    "tokens": 9
+  },
+  "continuous_budget": {
+    "generation_requests": 903,
+    "generation_tokens": 1082606,
+    "embedding_tokens": 9626
+  },
+  "prior_exact_version_reads": 107,
+  "lsa_bank_store_op_counts": "NOT_INSTRUMENTED",
+  "storage_bytes_scope": "Canonical compact JSON value bytes only; excludes Postgres row/key/index/page/WAL overhead",
+  "failures": [
+    "background focus follows updated B rather than current A",
+    "pre-tool control fabricates attempted/failed actions",
+    "duplicate current cards retain stale action status",
+    "empty source refs leave real-output deletion coverage incomplete",
+    "Host changes exact item key and quantity; wrong read identifier",
+    "internal Store access costs not individually metered"
+  ],
+  "next": "P2 frozen read-use diagnosis, then minimal source-preserving controller transition candidate; no P3 yet"
+}
