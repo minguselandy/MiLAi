@@ -1,0 +1,587 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_HISTORY_WIRING_R1_RESULTS",
+  "source_commit": "e44465b4b687dc86e68c6d6f0c079bb81e869d56",
+  "runs": [
+    {
+      "run_id": "lsa-history-wiring-r1-interleaved-full_history",
+      "case": "interleaved",
+      "arm": "full_history",
+      "passed": 5,
+      "total": 6,
+      "whole_pass": 0,
+      "whole_total": 1,
+      "calls": 7,
+      "tokens": 8520,
+      "messages": [
+        {
+          "message_id": "brief",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "foreground",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "background-revision",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-background",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-third",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "judgment": {
+        "failed": [
+          "combined-action"
+        ],
+        "reason": "Both actual reservation item keys were rewritten to lowercase underscore keys: workshop_handout_packs/workshop_field_kits; exact current quantities/destinations/packing, real IDs and briefing R-3/14:30/step-free were otherwise preserved. Original exact item_key rubric retained."
+      },
+      "accounting": {
+        "task_host": {
+          "calls": 7,
+          "tokens": 8520,
+          "prompt_tokens": 8082,
+          "wall_seconds": 4.526442533824593
+        }
+      },
+      "control_stages": {},
+      "history_checkpoint_reads": {
+        "calls": 4,
+        "logical_bytes": 7332,
+        "cpu_ns": 2739269,
+        "wall_ns": 14504518
+      },
+      "store_ops": {
+        "search": {
+          "calls": 7,
+          "failures": 0,
+          "cpu_ns": 8440151,
+          "wall_ns": 16264687,
+          "request_bytes": 1043,
+          "result_bytes": 0
+        }
+      },
+      "full_history_http_bound": 7,
+      "state_http_bound": 0,
+      "history_tool_calls": 0,
+      "source_deliveries": 0,
+      "exceptions": [],
+      "pending": 0,
+      "state_records": 0,
+      "evidence_sha256": {
+        "run_manifest.json": "604f85def70344d058bd50e9e9ed61219b716c587f3dcf24f76cb26bbbe41e74",
+        "trace.jsonl": "5300bcd5c69abdfa8565eedb451906060bd932c8bf4c124fb9db064a9e782349",
+        "phase-0-result.json": "b762b512a697c3c0eff590744bd4f1fd3995e66d1f93d548f46570eb484b6cb1",
+        "phase-1-result.json": "867f461cf4d5c755460feb84da142bc4d39357f69b264af01ebaa019b5afb952",
+        "phase-0-store-snapshot.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "phase-1-store-snapshot.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "local_state_storage": {},
+      "sqlite_bytes": {
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 249856,
+        "business-world.sqlite": 36864
+      },
+      "degraded_views": 0,
+      "errors": [],
+      "partial_same_id_recovery": false,
+      "actual_http_peak_reserved_tokens": 6238
+    },
+    {
+      "run_id": "lsa-history-wiring-r1-interleaved-local_lr_history",
+      "case": "interleaved",
+      "arm": "local_lr_history",
+      "passed": 6,
+      "total": 6,
+      "whole_pass": 1,
+      "whole_total": 1,
+      "calls": 24,
+      "tokens": 28278,
+      "messages": [
+        {
+          "message_id": "brief",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "foreground",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "background-revision",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-background",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "retained-third",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "judgment": {
+        "failed": [],
+        "reason": "All six message checks pass; exact two original keys and current fields, actual IDs, retained briefing and no extraneous business actions."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 16,
+          "tokens": 14377,
+          "prompt_tokens": 12122,
+          "wall_seconds": 16.14894153457135
+        },
+        "task_host": {
+          "calls": 8,
+          "tokens": 13901,
+          "prompt_tokens": 13321,
+          "wall_seconds": 5.4463108400814235
+        },
+        "embedding": {
+          "calls": 2,
+          "tokens": 108,
+          "prompt_tokens": 108,
+          "wall_seconds": 0.29125040071085095
+        }
+      },
+      "control_stages": {
+        "maintenance": {
+          "calls": 8,
+          "tokens": 10389
+        },
+        "read_selector": {
+          "calls": 8,
+          "tokens": 3988
+        }
+      },
+      "history_checkpoint_reads": {
+        "calls": 0,
+        "logical_bytes": 0,
+        "cpu_ns": 0,
+        "wall_ns": 0
+      },
+      "store_ops": {
+        "get": {
+          "calls": 142,
+          "failures": 0,
+          "cpu_ns": 65051848,
+          "wall_ns": 97796444,
+          "request_bytes": 28968,
+          "result_bytes": 23432
+        },
+        "search": {
+          "calls": 74,
+          "failures": 0,
+          "cpu_ns": 42493235,
+          "wall_ns": 87235833,
+          "request_bytes": 10846,
+          "result_bytes": 148375
+        },
+        "put": {
+          "calls": 40,
+          "failures": 0,
+          "cpu_ns": 14839938,
+          "wall_ns": 86213787,
+          "request_bytes": 25801,
+          "result_bytes": 0
+        }
+      },
+      "full_history_http_bound": 0,
+      "state_http_bound": 8,
+      "history_tool_calls": 0,
+      "source_deliveries": 23,
+      "exceptions": [],
+      "pending": 0,
+      "state_records": 3,
+      "evidence_sha256": {
+        "run_manifest.json": "54c97d96479ace04c28f2f74720477741ba998d23369f68032084cc9c6eaa683",
+        "trace.jsonl": "7815059577f1be03e38cd05042908a950769cd587b157a5cc175a2ea4ce67f19",
+        "phase-0-result.json": "7b9a6671c6167263c740ce51ed74b3101bae7113441df011747e5dc185cec598",
+        "phase-1-result.json": "54abfbbb3601f9db3b8e858ef24f70c7627c9215d6eb6861260ca56950c3a798",
+        "phase-0-store-snapshot.json": "b3c6043256ecf22e8d4f730413703b944d00347cb4e474a970eae041cf707922",
+        "phase-1-store-snapshot.json": "361275d9a3e4e65da49a1e1848f23b8b9b4c764429460a044e5a1cf2beb67ab9"
+      },
+      "local_state_storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 102
+        },
+        "events": {
+          "records": 10,
+          "logical_value_bytes": 4444
+        },
+        "states": {
+          "records": 3,
+          "logical_value_bytes": 2548
+        }
+      },
+      "sqlite_bytes": {
+        "instrumentation.sqlite": 98304,
+        "checkpoints.sqlite": 323584,
+        "business-world.sqlite": 36864
+      },
+      "degraded_views": 0,
+      "errors": [],
+      "partial_same_id_recovery": false,
+      "actual_http_peak_reserved_tokens": 7779
+    },
+    {
+      "run_id": "lsa-history-wiring-r1-partial-local_lr_history",
+      "case": "partial",
+      "arm": "local_lr_history",
+      "passed": 4,
+      "total": 6,
+      "whole_pass": 0,
+      "whole_total": 1,
+      "calls": 27,
+      "tokens": 27920,
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "judgment": {
+        "failed": [
+          "partial-action",
+          "other-owner-action"
+        ],
+        "reason": "Both initial reserve calls singularized Summit archive crates to Summit archive crate. Actual partial effect truthfully reported; restart get found the actual singular key and complete_label used the identical original reservation ID without re-reserving. Owner quantities/destinations/packing and Mira access facts preserved. Recovery does not erase initial failures."
+      },
+      "accounting": {
+        "state_control": {
+          "calls": 18,
+          "tokens": 13418,
+          "prompt_tokens": 10531,
+          "wall_seconds": 20.838854325469583
+        },
+        "task_host": {
+          "calls": 9,
+          "tokens": 14502,
+          "prompt_tokens": 13960,
+          "wall_seconds": 5.340439474675804
+        }
+      },
+      "control_stages": {
+        "maintenance": {
+          "calls": 9,
+          "tokens": 10008
+        },
+        "read_selector": {
+          "calls": 9,
+          "tokens": 3410
+        }
+      },
+      "history_checkpoint_reads": {
+        "calls": 0,
+        "logical_bytes": 0,
+        "cpu_ns": 0,
+        "wall_ns": 0
+      },
+      "store_ops": {
+        "get": {
+          "calls": 113,
+          "failures": 0,
+          "cpu_ns": 65086164,
+          "wall_ns": 89455229,
+          "request_bytes": 22466,
+          "result_bytes": 20629
+        },
+        "search": {
+          "calls": 82,
+          "failures": 0,
+          "cpu_ns": 63170299,
+          "wall_ns": 115958987,
+          "request_bytes": 11690,
+          "result_bytes": 107778
+        },
+        "put": {
+          "calls": 38,
+          "failures": 0,
+          "cpu_ns": 15333829,
+          "wall_ns": 76403404,
+          "request_bytes": 28673,
+          "result_bytes": 0
+        }
+      },
+      "full_history_http_bound": 0,
+      "state_http_bound": 9,
+      "history_tool_calls": 0,
+      "source_deliveries": 20,
+      "exceptions": [],
+      "pending": 0,
+      "state_records": 2,
+      "evidence_sha256": {
+        "run_manifest.json": "79c111869760d838631a87a2037356a0c9f92e4471445eec57a84b150545ba03",
+        "trace.jsonl": "83c1ddd121058753884f00c3e764b4f0e83e64a7e04dacceab82f570c7faedd7",
+        "phase-0-result.json": "cda2236b6b4ae3168099a664fe9d34c3346a5641fed03eec3448dc93cffaf11c",
+        "phase-1-result.json": "094fe629c52b1ff0680d2480f534652be59b7b1fb707495cd7588ed53217cc70",
+        "phase-0-store-snapshot.json": "935217ad233276a9dd170f821502c72acc75167f5010f148c325f2219124db39",
+        "phase-1-store-snapshot.json": "7bbbf0349348e923acec5f83de906c7d73ee17e609f83b3886bdfff9a709d761"
+      },
+      "local_state_storage": {
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 204
+        },
+        "events": {
+          "records": 10,
+          "logical_value_bytes": 4978
+        },
+        "states": {
+          "records": 2,
+          "logical_value_bytes": 3045
+        }
+      },
+      "sqlite_bytes": {
+        "instrumentation.sqlite": 114688,
+        "checkpoints.sqlite": 286720,
+        "business-world.sqlite": 36864
+      },
+      "degraded_views": 0,
+      "errors": [],
+      "partial_same_id_recovery": true,
+      "actual_http_peak_reserved_tokens": 7354
+    },
+    {
+      "run_id": "lsa-history-wiring-r1-partial-full_history",
+      "case": "partial",
+      "arm": "full_history",
+      "passed": 5,
+      "total": 6,
+      "whole_pass": 0,
+      "whole_total": 1,
+      "calls": 9,
+      "tokens": 9988,
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "judgment": {
+        "failed": [
+          "partial-action"
+        ],
+        "reason": "Mira initial reserve singularized Summit archive crates to Summit archive crate. Restart actually found and labeled the same persisted reservation ID without re-reserving; Noel exact key/own fields pass; access D-2/10:15 retained. Original error remains in denominator."
+      },
+      "accounting": {
+        "task_host": {
+          "calls": 9,
+          "tokens": 9988,
+          "prompt_tokens": 9475,
+          "wall_seconds": 4.74295447813347
+        }
+      },
+      "control_stages": {},
+      "history_checkpoint_reads": {
+        "calls": 5,
+        "logical_bytes": 7244,
+        "cpu_ns": 3787163,
+        "wall_ns": 15875566
+      },
+      "store_ops": {
+        "search": {
+          "calls": 9,
+          "failures": 0,
+          "cpu_ns": 11150412,
+          "wall_ns": 21627288,
+          "request_bytes": 1305,
+          "result_bytes": 0
+        }
+      },
+      "full_history_http_bound": 9,
+      "state_http_bound": 0,
+      "history_tool_calls": 0,
+      "source_deliveries": 0,
+      "exceptions": [],
+      "pending": 0,
+      "state_records": 0,
+      "evidence_sha256": {
+        "run_manifest.json": "cef9cc280d83f0edef7f74f00b2bb8f2391916fb4934ee503f6af7554335664f",
+        "trace.jsonl": "bfb33d19583fb5b96541194a4271f2b578372c230e7d877ac96e892337ee2c98",
+        "phase-0-result.json": "1626e17296639d6df3055236c12f452096d24357dab7caaa1c99cf4ed4ad7808",
+        "phase-1-result.json": "6e094e21927c361fd5f0f36a1cd53564efea8b6c7b70b9930cb7730317e6717b",
+        "phase-0-store-snapshot.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "phase-1-store-snapshot.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "local_state_storage": {},
+      "sqlite_bytes": {
+        "instrumentation.sqlite": 114688,
+        "checkpoints.sqlite": 249856,
+        "business-world.sqlite": 36864
+      },
+      "degraded_views": 0,
+      "errors": [],
+      "partial_same_id_recovery": true,
+      "actual_http_peak_reserved_tokens": 6168
+    }
+  ],
+  "by_arm": {
+    "full_history": {
+      "passed": 10,
+      "total": 12,
+      "whole_pass": 0,
+      "whole_total": 2,
+      "calls": 16,
+      "tokens": 18508
+    },
+    "local_lr_history": {
+      "passed": 10,
+      "total": 12,
+      "whole_pass": 1,
+      "whole_total": 2,
+      "calls": 51,
+      "tokens": 56198
+    }
+  },
+  "by_role": {
+    "task_host": {
+      "calls": 33,
+      "tokens": 46911,
+      "prompt_tokens": 44838,
+      "wall_seconds": 20.05614732671529
+    },
+    "state_control": {
+      "calls": 34,
+      "tokens": 27795,
+      "prompt_tokens": 22653,
+      "wall_seconds": 36.98779586004093
+    },
+    "embedding": {
+      "calls": 2,
+      "tokens": 108,
+      "prompt_tokens": 108,
+      "wall_seconds": 0.29125040071085095
+    }
+  },
+  "generation_delta": {
+    "calls": 67,
+    "tokens": 74706
+  },
+  "embedding_delta": {
+    "calls": 2,
+    "tokens": 108,
+    "prompt_tokens": 108,
+    "wall_seconds": 0.29125040071085095
+  },
+  "continuous_budget": {
+    "generation_requests": 2641,
+    "generation_tokens": 3258587,
+    "embedding_tokens": 18445
+  },
+  "validation": {
+    "full_history_http_matches_owner_original_checkpoints": true,
+    "current_prefix_once": true,
+    "original_checkpoint_not_replaced_by_projection": true,
+    "shared_generation_schema": true,
+    "shared_history_tool_description_schema": true,
+    "all_lsa_source_bodies_match_original": true,
+    "ledger_reconciled": true,
+    "all_24_messages_completed": true,
+    "both_partial_same_actual_id_found_label_no_duplicate_reserve": true,
+    "history_tool_was_naturally_invoked": false,
+    "full_history_has_no_state_controller": true,
+    "lr_has_no_update_selector": true
+  },
+  "artifact_sha256": {
+    "execution-freeze.json": "59cf4769a98dd923f6790c1db7094a4a14f29b78afe4eacdb6018c63ad217c1d",
+    "budget-before.json": "4c55480d597789d46baa9b5d554cc464068041f7d463c41acd3a2c2c86724fd9",
+    "budget-after.json": "a8408fecfc16693e615099c23ab17194eac56cb2c51da6f9150f71f6bcb499ac",
+    "root_scores.json": "c8a0de2d023d580400c0777034bca67ffeb34b4cbb2bec3fab9e43d83ccf7718"
+  },
+  "status": "COMPLETE_SMALL_WIRING_WITH_OPEN_SEMANTIC_FAILURES",
+  "protocol_sha256": "11f8f18bdf7cc3300d7cb9dad8971c530cc82e57367fdc0137323700d0b644d6",
+  "source_validation": "71 affected tests, targeted Ruff/Mypy/diff,4 zero-model prepares and1 offline build; no publication-only rerun",
+  "root_observation_io": {
+    "empty_namespace_store_reads": 8,
+    "phase_snapshot_store_reads": 8,
+    "offline_checkpoint_session_reads": 12,
+    "model_or_embedding_calls": 0,
+    "mutations": 0
+  },
+  "limits": [
+    "One exposed trajectory per case/arm; no repeated efficacy or unseen claim.",
+    "Online histories and tool choices differ; full_history10/12 versus LR10/12 is not an isolated attention effect.",
+    "Neither arm naturally called read_history; actual full-history projection was exercised, tool paging/tombstone/incomplete-prefix coverage is offline only in this batch.",
+    "All failures preserve exact original item-key rubric; correct quantities/locations and later recovery do not erase wrong keys.",
+    "LR interleaved State called a reservation attempted before the actual tool at trace46, and Mira final State retained misleading failed-reservation prose despite real partial commitment/recovery.",
+    "All histories fit existing capacity; no large-history or compression benefit demonstrated.",
+    "Tombstone suppression is conservative read gating, not physical erasure; lifecycle and remaining full plan obligations are open."
+  ]
+}

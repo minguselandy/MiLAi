@@ -85,6 +85,16 @@ remain labeled data; owner tombstones conservatively suppress history, not physi
 Root freezes after publication and runs all four serially, with full costs and failures retained.
 No source changes during the batch or publication-only test repetition; remaining LSA work stays open.
 
+The [history wiring results](docs/MILAI_LOCAL_STATE_ATTENTION_HISTORY_WIRING_R1_RESULTS_20260927.md)
+complete all four trajectories/24 messages on e44465b: full_history10/12, LR history10/12,
+whole0/2 and1/2; generation tokens18508/56198. Exact key failures remain despite original facts.
+Both partial runs found and labeled the same actual original ID without re-reserving. All16 full
+history requests match original scoped checkpoints;17 LR views/43 source deliveries checked.
+Neither arm naturally called read_history; do not claim live pagination/deletion/failure-prefix
+validation. Preserve +67/74706/108 and cumulative2641/3258587/18445. Next implement the required
+window-plus-summary baseline with shared legitimate history and accounting, then small wiring.
+No repetition of this batch, Host wording loop, model deployment or Product work.
+
 The user activated the full [long-horizon master plan](docs/MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md),
 tracked by [the execution Goal](docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md).
 This supersedes prior closed-stage restrictions for the new research scope; preserve their

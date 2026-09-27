@@ -379,6 +379,15 @@ Root源码放行范围限共同历史接口及这两臂，不同时实现滑窗�
 容量失败前缀以带实际序号的数据呈现；原消息不改写。新增Host prompt tokens及checkpoint
 读取逻辑字节/CPU/墙钟计量。源码发布后正式prepare，四轨迹保持同一源码；不为发布重跑。
 
+[共同历史R1结果](MILAI_LOCAL_STATE_ATTENTION_HISTORY_WIRING_R1_RESULTS_20260927.md)完成全部4轨迹24消息，
+源码e44465b全批冻结。完整历史10/12、LR历史10/12，完整0/2、1/2；生成tokens18508与56198
+（3.04倍）。16次full HTTP逐消息匹配原checkpoint，17次LR视图/43次来源绑定。两臂都未
+自然调用read_history；分页/删除/不完整前缀只属离线检查，不冒充真实触发。两partial实际
+found并同ID补标签，无重复预约；原始单数/下划线item_key失败保留。LR卡也有行动前称
+attempted与部分提交称failed的语义问题。新增67/74706/108，累计2641/3258587/18445。
+没有模型/容量/末pending异常。下一最小切片为相同合法历史权限的滑动窗口+摘要强对照，
+先完成接口及少量接线；不等待旧Host命名错误都消失，不重跑本批或恢复旧v27部署。
+
 已核对 [LangMem 官方 API](https://langchain-ai.github.io/langmem/reference/) 确实区分
 memory manager、store manager 与普通 tools；强基线不能只代表后者。
 LangGraph 官方 reference 页面本次抓取返回 unsupported content-type，实际本地锁定源码
