@@ -27,6 +27,13 @@ class StateScope:
                 self.workspace_id, kind)
 
 
+@dataclass(frozen=True)
+class EvidenceResolution:
+    events: list[dict[str, Any]]
+    deleted_source_ids: list[str]
+    missing_source_ids: list[str]
+
+
 class LocalStateBank:
     def __init__(self, store: BaseStore, *, max_states: int = 32,
                  max_events: int = 256) -> None:
@@ -98,6 +105,27 @@ class LocalStateBank:
     def events(self, scope: StateScope) -> list[dict[str, Any]]:
         return sorted(self._all(scope, "events", self.max_events),
                       key=lambda row: row["arrival_index"])
+
+    def resolve_evidence(self, scope: StateScope,
+                         source_ids: list[str]) -> EvidenceResolution:
+        """Read only named, live source events in this scope; never search an archive."""
+        events: list[dict[str, Any]] = []
+        deleted: list[str] = []
+        missing: list[str] = []
+        for source_id in dict.fromkeys(source_ids):
+            if not isinstance(source_id, str) or not source_id:
+                raise ValueError("LSA_EVIDENCE_SOURCE_ID_INVALID")
+            if self.is_forgotten(scope, source_id):
+                deleted.append(source_id)
+                continue
+            item = self._get(scope, "events", source_id)
+            if item is None:
+                missing.append(source_id)
+            elif item.value.get("id") != source_id:
+                raise ValueError("LSA_EVIDENCE_ID_CHANGED")
+            else:
+                events.append(dict(item.value))
+        return EvidenceResolution(events, deleted, missing)
 
     def record_event(self, scope: StateScope, event: dict[str, Any]) -> None:
         key = event["id"]

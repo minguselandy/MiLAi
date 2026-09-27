@@ -21,7 +21,9 @@ from milai_lab.runners.langmem_application import run_phase
 from milai_lab.runners.langmem_application_runtime import open_application_runtime
 
 LAB = Path(__file__).resolve().parents[1]
-ARMS = ("b1_control", "local_state", "local_all")
+READ_POLICIES = {"local_state": "focus", "local_all": "all",
+                 "local_all_sources": "all_sources"}
+ARMS = ("b1_control", *READ_POLICIES)
 SOURCE_PATHS = (*sorted(
     str(path.relative_to(LAB)) for path in (LAB / "src/milai_lab").rglob("*.py")
 ), "tools/run_local_state_attention.py", "pyproject.toml")
@@ -67,6 +69,9 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
     return {
         "method": "local_state_attention_p1", "run_id": args.run,
         "arm_id": args.arm, "repeat": args.repeat,
+        "read_policy": READ_POLICIES.get(args.arm),
+        "source_view_max_bytes": (config["source_view_max_bytes"]
+                                  if args.arm == "local_all_sources" else None),
         "git_sha": subprocess.check_output(  # noqa: S603 - fixed command and arguments
             [shutil.which("git") or "/usr/bin/git", "rev-parse", "HEAD"],
             cwd=LAB, text=True).strip(),
@@ -128,6 +133,11 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     config, script = read_json(args.config), _script(args.script)
     if args.arm not in ARMS:
         raise ValueError("LSA_ARM_UNKNOWN")
+    if args.arm == "local_all_sources" and (
+        type(config.get("source_view_max_bytes")) is not int
+        or config["source_view_max_bytes"] <= 0
+    ):
+        raise ValueError("LSA_SOURCE_VIEW_BUDGET_INVALID")
     identity = _identity(args, config, script)
     args.runtime_root.mkdir(parents=True, exist_ok=True)
     manifest_path = args.runtime_root / "run_manifest.json"
@@ -166,7 +176,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                                       args.runtime_root, args.stage,
                                       enable_projection=False) as runtime:
             controller = None
-            if args.arm in {"local_state", "local_all"}:
+            if args.arm in READ_POLICIES:
                 host = runtime.model.client
                 original_emit = host.emit
 
@@ -196,8 +206,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     try:
                         result = run_phase(script, args.runtime_root, args.run, args.arm,
                                            args.phase, runtime, controller,
-                                           local_state_read_policy=(
-                                               "all" if args.arm == "local_all" else "focus"))
+                                           local_state_read_policy=READ_POLICIES[args.arm],
+                                           source_view_max_bytes=(
+                                               config["source_view_max_bytes"]
+                                               if args.arm == "local_all_sources" else None))
                     finally:
                         control_emit({"event": "lsa_store_stats", "phase": args.phase,
                                       "operations": bank.store_stats()})

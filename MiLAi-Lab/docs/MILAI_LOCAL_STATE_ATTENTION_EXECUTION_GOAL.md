@@ -35,9 +35,9 @@ thinking=false、context=65536、每公开消息 Host 最多 12 次；embedding 
 | 阶段/工作包 | 必须交付的证据 | 当前状态 |
 | --- | --- | --- |
 | P0 / WP1 | 方法关闭 B1 请求/工具/持久状态对照；锁定公共 hook；实际 run_manifest；来源权限及计费角色 | R3 补全机械依赖与实际Store计量；真实授权删除链仍待独立验证 |
-| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R3 原任务5/12、新增1/2，完整业务0/2；状态污染/读取与Host参数错误仍在，R4匹配读取对照已冻结 |
+| P1 / WP1 | bank、独立共享维护器、U/A、实际视图；两条完整交错轨迹，含跨进程、新 session、真实部分失败与恢复 | R4两臂原各7/12、原完整各0/2；all报告控制2/2；读取/维护和精确参数错误分层保留 |
 | P2 | 同 bank 的扁平/普通检索/State-conditioned 读取；组合与交换/缺项/错误状态诊断 | R1四断点12方法+3诊断完成；State值影响输出，来源直送有用，维护/独立Host错误未闭合 |
-| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | 未运行；初始建议 6 情景×3 臂×2 重复，调用前固定 |
+| P3 / WP2 | G/L/LRU 同维护机会、来源权限、预算、降级策略的小样本重复比较 | 完整比较未运行；可先补G/L小wiring，广泛批次仍须可用性证据 |
 | P4 / WP3 | 信号出现后 LR、U=A、R；六项关键消融及跨模板验证；共享约束、高耦合与错误状态反例 | 未运行，遵循进入条件 |
 | P5 / WP5 | 新 frozen 原生 selection、第二任务族、交错顺序及完整重复；原 scorer 和失败分母 | 未运行；不消费旧暴露任务作 unseen |
 | P6 / WP4–5 | N/d/a/r/H 代表点、质量—成本边界、第二模型族；有瓶颈证据才训练 selector | 未运行；第二模型仍缺独立端点 |
@@ -169,6 +169,21 @@ R3切片已完成13项窄测、目标ruff/mypy及一次必要build，三脚本/t
 这是暴露样本的端到端读取诊断，不是固定bank实验或P3的完整G/L/LRU比较。
 29项相关测试、最后16项LSA测试、目标静态检查、六个/tmp零模型prepare及一次必要build通过；
 不为发布重复检查。正式prepare在源码发布后，完整六轨迹过程中源码冻结。
+
+[R4实际结果](MILAI_LOCAL_STATE_ATTENTION_P1_R4_RESULTS_20260927.md)完成六轨迹28消息：
+两臂原各7/12、原完整各0/2；新增用户报告all2/2、focus1/2。全量解决了部分读取遗漏，
+却不能阻止维护丢信息与Host错用对象/地点。两partial臂均实际原ID补标签，但get均not_found，
+初始key也错误，严格分数不追补。累计1079生成 /1300287生成tokens /10831 embedding tokens。
+下一薄切片按选中State的合法evidence_refs展开原始来源，机械删除依赖不作为语义引用；
+不继续来源合同措辞微调，不同时换Host业务schema或独立selector。
+P3完整比较尚未启动；强G/L的少量实现/wiring可推进，不等所有旧Host参数失误都消失。
+
+[R5协议](../data/manifests/local-state-attention-p1-r5-protocol.json)固定两条完整partial轨迹，
+来源展开on/off各一次，原6消息/rubric不变。新臂local_all_sources只展开交付State的显式引用，
+精确当前scope读取，16384 UTF-8整事件预算；空refs无额外get，不回退机械依赖或全档案。
+38项相关窄测、目标ruff/mypy/diff、两个/tmp零模型prepare与一次build通过。R4真实恢复断点
+无模型replay解析3个refs/1336字节（含1条实际tool receipt），额外6get；不是再次运行P2能力探针。
+构建哈希和验证见协议。发布后正式prepare与两条真实运行，源码全批保持冻结。
 
 ## 后期资源准备记录
 

@@ -1,0 +1,102 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P1_R5_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_PUBLICATION",
+  "basis": [
+    "docs/MILAI_LOCAL_STATE_ATTENTION_P1_R4_RESULTS_20260927.md",
+    "docs/MILAI_LOCAL_STATE_ATTENTION_P2_R1_RESULTS_20260927.md"
+  ],
+  "source_change": "Only expand selected States explicit evidence_refs to current-scope original events in temporary Host working data. No controller, State editing, focus, business schema, Host parameters, or service changes.",
+  "run_order": [
+    {
+      "run_id": "lsa-p1-partial-local_all_sources-r5",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-p1-partial-local_all-r5",
+      "arm": "local_all",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p1-partial-restart.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p1-partial-restart.json": "fcb55d2af5d93d140ccc2e4ee38eee5b442bca598f824292cb3e9a41fd9e049a",
+    "data/diagnostics/local_state_attention/p1-rubric.json": "87f86d118a9ea8be337028402dd8100b3dacc99c3035a6b074853176b8b62e63"
+  },
+  "original_partial_messages_per_arm": 6,
+  "total_messages": 12,
+  "whole_trajectory_denominator_per_arm": 1,
+  "split": "development; exposed original partial-restart script only; other P1 scripts not rerun or replaced",
+  "source_view": {
+    "enabled_arm": "local_all_sources",
+    "disabled_arm": "local_all",
+    "max_utf8_bytes": 16384,
+    "references": "selected State evidence_refs only; no dependency_source_ids or archive fallback",
+    "resolution": "exact current owner/run/arm/workspace event; nonexistent/deleted refs reported and skipped",
+    "ordering": "stable arrival_index then id; source ids deduplicated",
+    "overflow": "omit whole event and report source id/byte cost; never truncate content/JSON; existing full-request Host capacity check remains",
+    "input_identity": "preserve id/kind/actor/tool_call_id/content; no domain-specific field extraction, repair, or pseudo-ToolMessage",
+    "zero_reference_case": "no source expansion; report not activated separately from ineffective delivery"
+  },
+  "http_concurrency": 1,
+  "host_max_tokens": 4096,
+  "controller_max_tokens": 2048,
+  "host_calls_per_public_message": 12,
+  "controller_calls_per_public_message": 13,
+  "no_vllm_changes": true,
+  "no_rubric_runtime": true,
+  "new_namespaces_checkpoints_worlds": true,
+  "each_phase_new_process": true,
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 1079,
+    "generation_tokens": 1300287,
+    "embedding_tokens": 10831
+  },
+  "source_freeze": "Actual published SHA/identity via runner prepare; no source mutations through two full trajectories",
+  "scoring": "Original exact-field/world/semantic rubric unchanged. Additionally record actual evidence delivery, exact persisted get key, same-ID label completion, source omission and costs. Initial wrong item key remains a strict failure even if recovery succeeds.",
+  "competing_hypotheses": [
+    "State summary loses exact item identity: original receipt delivery restores get key.",
+    "Host receives exact source yet still confuses fields: independent source use failure."
+  ],
+  "causal_limits": [
+    "Fresh online trajectories may differ before recovery; one exposed repetition is not stable efficacy.",
+    "No claim that source expansion repairs State formation or empty focus.",
+    "P2 first-response capability probe already exists and is not rerun."
+  ],
+  "stop_rule": "Complete both trajectories retaining semantic and local-capacity failures unless infrastructure/execution contract invalid. No wording-only control tuning. Review next minimal G/L wiring after results, not broad benchmark.",
+  "validation": {
+    "affected_tests": 38,
+    "target_ruff": "PASS",
+    "target_mypy": "PASS",
+    "diff_check": "PASS",
+    "prepare_two_runs": "PASS in /tmp; each 2 phases/6 messages/0 execution; formal roots untouched",
+    "actual_r4_readonly_replay": {
+      "run": "lsa-p1-partial-local_all-r4",
+      "trace_line": 29,
+      "states": 1,
+      "explicit_refs": 3,
+      "resolved_refs": 3,
+      "tool_receipts": 1,
+      "source_view_utf8_bytes": 1336,
+      "store_get_calls": 6,
+      "missing_deleted_omitted": 0,
+      "source_identity_and_content_exact": true,
+      "real_model_calls": 0
+    },
+    "build": {
+      "sdist_sha256": "a53bb44eb6d176a8e0c1e384d13cbb93e05b49ada95f11f57feaca0150ac1afc",
+      "wheel_sha256": "5a835285e2e9ac22ff3d7261d27c85e75e334a3ca51355ebe0f76e8c4c209ddd"
+    },
+    "read_probe_test_adjustment": "Update obsolete R4 renderer assertion: Host view omits internal State id/revision; historical P2 source remains pinned."
+  }
+}

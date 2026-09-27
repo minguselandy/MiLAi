@@ -52,7 +52,8 @@ def test_only_first_system_view_changes_and_first_call_is_not_executed() -> None
     assert {key: value for key, value in request.items() if key != "messages"} == {
         key: value for key, value in original.items() if key != "messages"}
     assert original["messages"][0]["content"].endswith("old state")
-    assert view.index('"id": "a"') < view.index('"id": "b"')
+    assert view.index('"title": "First"') < view.index('"title": "Second"')
+    assert '"id":' not in view and '"revision":' not in view
     receipt = {"choices": [{"finish_reason": "stop", "message": {
         "content": '{"calls":[{"name":"reserve_and_label","arguments":{}}]}'}}]}
     assert first_action(receipt, request)["calls"][0]["name"] == "reserve_and_label"

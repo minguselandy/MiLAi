@@ -23,6 +23,7 @@
     "timeout": 180
   },
   "embedding_dimension": 1024,
+  "source_view_max_bytes": 16384,
   "capacity": {
     "model": "Qwen3.6-35B-A3B-FP8",
     "tokenizer_path": "",

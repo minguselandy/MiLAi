@@ -1,0 +1,712 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_P1_R4_RESULTS",
+  "status": "COMPLETE_WITH_SEMANTIC_FAILURES",
+  "runs": [
+    {
+      "run_id": "lsa-p1-interleaved-local_all-r4",
+      "arm": "local_all",
+      "source_commit": "aa73962426d67de648505b2d367b3f033652bce6",
+      "messages": [
+        {
+          "message_id": "brief",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "foreground",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "background-revision",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-background",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-third",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "task_strict_passed": 5,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 10,
+          "tokens": 12721,
+          "wall_seconds": 9.912979846354574
+        },
+        "task_host": {
+          "actual_http": 10,
+          "tokens": 12720,
+          "wall_seconds": 5.374393678735942
+        },
+        "embedding": {
+          "actual_http": 2,
+          "tokens": 30,
+          "wall_seconds": 0.08297973917797208
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 120,
+          "failures": 0,
+          "cpu_ns": 158712939,
+          "wall_ns": 181849591,
+          "request_bytes": 21253,
+          "result_bytes": 16926
+        },
+        "search": {
+          "calls": 101,
+          "failures": 0,
+          "cpu_ns": 57112806,
+          "wall_ns": 89083101,
+          "request_bytes": 12181,
+          "result_bytes": 210685
+        },
+        "put": {
+          "calls": 40,
+          "failures": 0,
+          "cpu_ns": 12187071,
+          "wall_ns": 104948619,
+          "request_bytes": 21518,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 68
+        },
+        "events": {
+          "records": 11,
+          "logical_value_bytes": 4978
+        },
+        "states": {
+          "records": 5,
+          "logical_value_bytes": 2462
+        }
+      },
+      "degraded_views": 0,
+      "empty_views": 0,
+      "empty_controller_focus": 4,
+      "pending_events": 0,
+      "world_attempts": {
+        "reserve_and_label": 2
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "071f91ecfe2361d476c9e4c58e3d17bfa103b78fb9d3d1e1985870de497188a3",
+        "trace.jsonl": "f8e5abda198cc9fe67f1a0feeea77332b9e387eaab8d4300fd03a83c356f1eb9",
+        "phase-0-result.json": "299a5f63afa2745351538bf05d75b4e2b6fb548650b7768deeac7a9a0b6c7647",
+        "phase-1-result.json": "52c65ebb6e70102bfefd147f621fc69b3c2c737c5a00d1f98d0c7d51c3d368bd",
+        "phase-0-store-snapshot.json": "e28bf0188584b59af27097cfc47c6cd4f8656fd1c6e2a2b6f4151fc1e6e56e2d",
+        "phase-1-store-snapshot.json": "689b40ffa0d091f5a50fd8c0d5f5a52e1e0eb531db78eec6d163f751e3751054"
+      }
+    },
+    {
+      "run_id": "lsa-p1-interleaved-local_state-r4",
+      "arm": "local_state",
+      "source_commit": "aa73962426d67de648505b2d367b3f033652bce6",
+      "messages": [
+        {
+          "message_id": "brief",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "foreground",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "background-revision",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-background",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "combined-action",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "retained-third",
+          "status": "COMPLETED",
+          "strict_pass": false
+        }
+      ],
+      "task_strict_passed": 4,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 10,
+          "tokens": 15072,
+          "wall_seconds": 17.51278325682506
+        },
+        "task_host": {
+          "actual_http": 10,
+          "tokens": 12853,
+          "wall_seconds": 5.4363736575469375
+        },
+        "embedding": {
+          "actual_http": 3,
+          "tokens": 53,
+          "wall_seconds": 0.10363619681447744
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 132,
+          "failures": 0,
+          "cpu_ns": 63709786,
+          "wall_ns": 89138115,
+          "request_bytes": 24099,
+          "result_bytes": 18083
+        },
+        "search": {
+          "calls": 101,
+          "failures": 0,
+          "cpu_ns": 57310155,
+          "wall_ns": 92286319,
+          "request_bytes": 12585,
+          "result_bytes": 226722
+        },
+        "put": {
+          "calls": 43,
+          "failures": 0,
+          "cpu_ns": 13100529,
+          "wall_ns": 75999145,
+          "request_bytes": 28131,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 68
+        },
+        "events": {
+          "records": 11,
+          "logical_value_bytes": 5465
+        },
+        "states": {
+          "records": 3,
+          "logical_value_bytes": 3191
+        }
+      },
+      "degraded_views": 0,
+      "empty_views": 4,
+      "empty_controller_focus": 4,
+      "pending_events": 0,
+      "world_attempts": {
+        "reserve_and_label": 2
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "9c61ab75b408430abfde7158a4b4b2903e27338e984521aafb1378c7e59a5e3d",
+        "trace.jsonl": "60186fd1f28c5ae247c93460b671d9b16f996f0822d5f1c59c2b8a5e81002e5c",
+        "phase-0-result.json": "bab0678d911a4f25351e07ea5e27c7a82ffada510f8d04f3c22c58a95c43d67a",
+        "phase-1-result.json": "780776f19e8d8addde36934591c1cb8b318fea0f11f4f90e4e87f9617207c4a0",
+        "phase-0-store-snapshot.json": "658ac24009de041969114bbb571b3f953cc069cf34ca31c7806090851d942503",
+        "phase-1-store-snapshot.json": "ded7ccc974f09c10157c8f0b9cee1cd354a9f062166f6f9610b975fa04ae642b"
+      }
+    },
+    {
+      "run_id": "lsa-p1-partial-local_state-r4",
+      "arm": "local_state",
+      "source_commit": "aa73962426d67de648505b2d367b3f033652bce6",
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "task_strict_passed": 3,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 12,
+          "tokens": 16428,
+          "wall_seconds": 22.191628702916205
+        },
+        "task_host": {
+          "actual_http": 12,
+          "tokens": 13708,
+          "wall_seconds": 6.082149994093925
+        },
+        "embedding": {
+          "actual_http": 3,
+          "tokens": 110,
+          "wall_seconds": 0.11115520261228085
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 112,
+          "failures": 0,
+          "cpu_ns": 65539909,
+          "wall_ns": 89398387,
+          "request_bytes": 19776,
+          "result_bytes": 14983
+        },
+        "search": {
+          "calls": 121,
+          "failures": 0,
+          "cpu_ns": 71971946,
+          "wall_ns": 111219049,
+          "request_bytes": 14593,
+          "result_bytes": 198007
+        },
+        "put": {
+          "calls": 48,
+          "failures": 0,
+          "cpu_ns": 18084399,
+          "wall_ns": 86593887,
+          "request_bytes": 33897,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 205
+        },
+        "events": {
+          "records": 13,
+          "logical_value_bytes": 6306
+        },
+        "states": {
+          "records": 3,
+          "logical_value_bytes": 3405
+        }
+      },
+      "degraded_views": 0,
+      "empty_views": 3,
+      "empty_controller_focus": 3,
+      "pending_events": 0,
+      "world_attempts": {
+        "reserve_and_label": 2,
+        "complete_label": 1
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "815ab6602b04aabfa41b5d00afc8959aebca4ffde9981006c6a4b42d4aff440f",
+        "trace.jsonl": "bf05b2dc05481059a14c0f287642fc7ff5a1526299d11573a9ea429b0d982fbb",
+        "phase-0-result.json": "35c526e6a3e0e9b396d34e64fc11f93a42a5dc60057e254b8af32355081f5ad5",
+        "phase-1-result.json": "075a1514c7fd5a24e2dee00146d720b7f2845d1017a8e5e755deb006fdb274ab",
+        "phase-0-store-snapshot.json": "42b00fd11362e357ae69159c850afa8d548fa2d456c4ebe47389da552378a32c",
+        "phase-1-store-snapshot.json": "2ef71ffa68f58481286786309b878b054d3b21c5dc61ff121215c934b3b04f57"
+      }
+    },
+    {
+      "run_id": "lsa-p1-partial-local_all-r4",
+      "arm": "local_all",
+      "source_commit": "aa73962426d67de648505b2d367b3f033652bce6",
+      "messages": [
+        {
+          "message_id": "other-owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "owner-plan",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "partial-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "restart-recovery",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "other-owner-action",
+          "status": "COMPLETED",
+          "strict_pass": false
+        },
+        {
+          "message_id": "retained-access",
+          "status": "COMPLETED",
+          "strict_pass": false
+        }
+      ],
+      "task_strict_passed": 2,
+      "task_denominator": 6,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 11,
+          "tokens": 12463,
+          "wall_seconds": 14.27384457970038
+        },
+        "task_host": {
+          "actual_http": 11,
+          "tokens": 12544,
+          "wall_seconds": 5.8713349141180515
+        },
+        "embedding": {
+          "actual_http": 2,
+          "tokens": 53,
+          "wall_seconds": 0.07661458384245634
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 98,
+          "failures": 0,
+          "cpu_ns": 52337361,
+          "wall_ns": 72540825,
+          "request_bytes": 16833,
+          "result_bytes": 12784
+        },
+        "search": {
+          "calls": 111,
+          "failures": 0,
+          "cpu_ns": 59225314,
+          "wall_ns": 95504985,
+          "request_bytes": 12943,
+          "result_bytes": 153702
+        },
+        "put": {
+          "calls": 43,
+          "failures": 0,
+          "cpu_ns": 14950878,
+          "wall_ns": 81598355,
+          "request_bytes": 25878,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 2,
+          "logical_value_bytes": 170
+        },
+        "events": {
+          "records": 12,
+          "logical_value_bytes": 5455
+        },
+        "states": {
+          "records": 3,
+          "logical_value_bytes": 2308
+        }
+      },
+      "degraded_views": 0,
+      "empty_views": 0,
+      "empty_controller_focus": 4,
+      "pending_events": 0,
+      "world_attempts": {
+        "reserve_and_label": 2,
+        "complete_label": 1
+      },
+      "evidence_sha256": {
+        "run_manifest.json": "389f94afc4519f13a750374abcb0603d030bf70ed8f7115fbe823264a7b7b229",
+        "trace.jsonl": "f2b102efb2b76b17ca64fefdea7f58e5f1aa19e392bd4cc42fe13f14ee9cdf53",
+        "phase-0-result.json": "a5d40e6ff203ce2dbd8594542e65a4723908e9d2c8045768de41f619125a9816",
+        "phase-1-result.json": "ea88e1645ef69765c367703d57a1ffdb1df153eab231f49c45a4a7cc3f833113",
+        "phase-0-store-snapshot.json": "c614f284aeb3124d4ac90a7acb4f46796566410ad277a139383b7dac4327424b",
+        "phase-1-store-snapshot.json": "bb7e72802e00cbe0569cc0a3cfed36232e42b51d70c9b1ffdbd12952b63e207b"
+      }
+    },
+    {
+      "run_id": "lsa-p1-user-report-local_all-r4",
+      "arm": "local_all",
+      "source_commit": "aa73962426d67de648505b2d367b3f033652bce6",
+      "messages": [
+        {
+          "message_id": "reported-past-event",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-reported-event",
+          "status": "COMPLETED",
+          "strict_pass": true
+        }
+      ],
+      "task_strict_passed": 2,
+      "task_denominator": 2,
+      "whole_task_pass": true,
+      "accounting": {
+        "state_control": {
+          "actual_http": 2,
+          "tokens": 1395,
+          "wall_seconds": 1.1085019316524267
+        },
+        "task_host": {
+          "actual_http": 2,
+          "tokens": 1585,
+          "wall_seconds": 0.7720953486859798
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 10,
+          "failures": 0,
+          "cpu_ns": 7395218,
+          "wall_ns": 13423089,
+          "request_bytes": 1640,
+          "result_bytes": 929
+        },
+        "search": {
+          "calls": 20,
+          "failures": 0,
+          "cpu_ns": 10723342,
+          "wall_ns": 19552529,
+          "request_bytes": 2392,
+          "result_bytes": 9206
+        },
+        "put": {
+          "calls": 7,
+          "failures": 0,
+          "cpu_ns": 2837700,
+          "wall_ns": 13500132,
+          "request_bytes": 3349,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 68
+        },
+        "events": {
+          "records": 2,
+          "logical_value_bytes": 796
+        },
+        "states": {
+          "records": 1,
+          "logical_value_bytes": 398
+        }
+      },
+      "degraded_views": 0,
+      "empty_views": 0,
+      "empty_controller_focus": 1,
+      "pending_events": 0,
+      "world_attempts": {},
+      "evidence_sha256": {
+        "run_manifest.json": "a21ff785c98c9aa4a082a7c9e0b088e18deb010530641126be10f63071f2a2d9",
+        "trace.jsonl": "a1b33522b253ecf6eeff4064f6ba1de3d7c5c798011f50aa76573f0b37ec5699",
+        "phase-0-result.json": "5449272d50b488f47a51e2c3578e2759563c513c57aaece0de8a185c1720720d",
+        "phase-1-result.json": "ce87183980d4741062a4765176ad220a9718c0a84d0399c13e66e40bd2a47896",
+        "phase-0-store-snapshot.json": "edd0797b57e81554de4a6df2466a0106170b173677fe6f525fa4e79af25a64f4",
+        "phase-1-store-snapshot.json": "c2f6a8c30d4b923a9893a86f781348e6dc03ea27ab615f853f60ab163e4646f0"
+      }
+    },
+    {
+      "run_id": "lsa-p1-user-report-local_state-r4",
+      "arm": "local_state",
+      "source_commit": "aa73962426d67de648505b2d367b3f033652bce6",
+      "messages": [
+        {
+          "message_id": "reported-past-event",
+          "status": "COMPLETED",
+          "strict_pass": true
+        },
+        {
+          "message_id": "restore-reported-event",
+          "status": "COMPLETED",
+          "strict_pass": false
+        }
+      ],
+      "task_strict_passed": 1,
+      "task_denominator": 2,
+      "whole_task_pass": false,
+      "accounting": {
+        "state_control": {
+          "actual_http": 3,
+          "tokens": 2139,
+          "wall_seconds": 1.327850271947682
+        },
+        "task_host": {
+          "actual_http": 3,
+          "tokens": 2226,
+          "wall_seconds": 1.0982543071731925
+        },
+        "embedding": {
+          "actual_http": 1,
+          "tokens": 10,
+          "wall_seconds": 0.035489387810230255
+        }
+      },
+      "store_ops": {
+        "get": {
+          "calls": 18,
+          "failures": 0,
+          "cpu_ns": 12238793,
+          "wall_ns": 18978915,
+          "request_bytes": 3121,
+          "result_bytes": 1700
+        },
+        "search": {
+          "calls": 30,
+          "failures": 0,
+          "cpu_ns": 14302699,
+          "wall_ns": 26279068,
+          "request_bytes": 3708,
+          "result_bytes": 17356
+        },
+        "put": {
+          "calls": 10,
+          "failures": 0,
+          "cpu_ns": 3213665,
+          "wall_ns": 17977896,
+          "request_bytes": 4602,
+          "result_bytes": 0
+        }
+      },
+      "storage": {
+        "meta": {
+          "records": 1,
+          "logical_value_bytes": 68
+        },
+        "events": {
+          "records": 3,
+          "logical_value_bytes": 1090
+        },
+        "states": {
+          "records": 1,
+          "logical_value_bytes": 398
+        }
+      },
+      "degraded_views": 0,
+      "empty_views": 2,
+      "empty_controller_focus": 2,
+      "pending_events": 0,
+      "world_attempts": {},
+      "evidence_sha256": {
+        "run_manifest.json": "01fee41d353120d0358ffd1c98e1fd6d9d08ab35d5341b7c1ffc4ddb1cb3f7a0",
+        "trace.jsonl": "f1a5668e81a12c92217a2e6aad7c180540354146bb1b06fb18c756faa212a05c",
+        "phase-0-result.json": "53c625b28217e93476467b455bd54c1e220be2986fa5ac70dd0863a72d3a7886",
+        "phase-1-result.json": "0e6e76c7283f5f3e96a977740c7efc8f41e2e095ade009a34192cf5b5aaa56b8",
+        "phase-0-store-snapshot.json": "3067c68ad6e04455488d9d7a003374c416356cb77e0959cb82939950c0700737",
+        "phase-1-store-snapshot.json": "3add4b8fecc1213ea8de59cc7e8009d3816ff4541cd146abe0f3cdc232ad1ba1"
+      }
+    }
+  ],
+  "by_role": {
+    "state_control": {
+      "actual_http": 48,
+      "tokens": 60218,
+      "wall_seconds": 66.32758858939633
+    },
+    "task_host": {
+      "actual_http": 48,
+      "tokens": 55636,
+      "wall_seconds": 24.634601900354028
+    },
+    "embedding": {
+      "actual_http": 11,
+      "tokens": 256,
+      "wall_seconds": 0.40987511025741696
+    }
+  },
+  "original_task_score": {
+    "local_all": {
+      "passed": 7,
+      "total": 12
+    },
+    "local_state": {
+      "passed": 7,
+      "total": 12
+    }
+  },
+  "additional_control_score": {
+    "local_all": {
+      "passed": 2,
+      "total": 2
+    },
+    "local_state": {
+      "passed": 1,
+      "total": 2
+    }
+  },
+  "whole_original_trajectories": {
+    "local_all": {
+      "passed": 0,
+      "total": 2
+    },
+    "local_state": {
+      "passed": 0,
+      "total": 2
+    }
+  },
+  "whole_additional_trajectories": {
+    "local_all": {
+      "passed": 1,
+      "total": 1
+    },
+    "local_state": {
+      "passed": 0,
+      "total": 1
+    }
+  },
+  "generation_delta": {
+    "calls": 96,
+    "tokens": 115854
+  },
+  "embedding_delta": {
+    "calls": 11,
+    "tokens": 256
+  },
+  "continuous_budget": {
+    "generation_requests": 1079,
+    "generation_tokens": 1300287,
+    "embedding_tokens": 10831
+  },
+  "wire_checks": {
+    "all_public_messages_exactly_delivered": true,
+    "host_state_object_fields": "title/content/needs/evidence_refs; no internal id or revision",
+    "focus_and_delivery_distinct_in_trace": true
+  },
+  "limits": [
+    "One exposed repetition; independent online bank formation/trajectories.",
+    "State granularity and unrelated content differ after divergence.",
+    "Common Host ID/revision removal prevents R3/R4 pure read attribution.",
+    "No claim that whole strict P1 passed."
+  ]
+}
