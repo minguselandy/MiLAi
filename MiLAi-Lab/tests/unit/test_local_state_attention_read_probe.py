@@ -106,13 +106,17 @@ def test_probe_cli_prepare_and_one_job_cannot_overwrite(
         "capacity": {"enable_thinking": False},
         "budget_path": str(tmp_path / "budget.json")}))
     input_path = tmp_path / "inputs.json"
+    original_view = _request()["messages"][0]["content"].split("Base prompt\n", 1)[1]
     input_path.write_text(json.dumps({"kind": "LSA_READ_PROBE_INPUTS", "cases": [{
         "case_id": "case", "query": "current user", "bank": [_state("a", "First")],
         "host_request": _request(), "variants": {
-            "receipt": {"diagnostic_only": True, "context_text": '{"ok":false}'}}}],
+            "receipt": {"diagnostic_only": True, "context_text": '{"ok":false}'},
+            "original": {"diagnostic_only": True, "view_text": original_view}}}],
         "jobs": [{"job_id": "all-one", "case_id": "case", "arm": "all"},
                  {"job_id": "diagnostic-one", "case_id": "case", "arm": "diagnostic",
-                  "variant": "receipt"}]}))
+                  "variant": "receipt"},
+                 {"job_id": "original-one", "case_id": "case", "arm": "diagnostic",
+                  "variant": "original"}]}))
     root = tmp_path / "run"
     args = SimpleNamespace(config=config_path, inputs=input_path, run="mock-run",
                            runtime_root=root, output=root / "prepared.json",
@@ -161,6 +165,34 @@ def test_probe_cli_prepare_and_one_job_cannot_overwrite(
     assert second["diagnostic_only"] is True
     assert second["view"].endswith('{"ok":false}')
     assert len(sent) == 2
+    args.job = "original-one"
+    third = entry.run_job(args)
+    assert third["view"] == original_view
+    assert third["host_request"] == _request()
+    assert sent[2] == _request()
+    assert len(sent) == 3
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
-    assert manifest["accounting"]["by_role"]["task_host"]["known_tokens"] == 30
+    assert manifest["accounting"]["by_role"]["task_host"]["known_tokens"] == 45
+
+
+@pytest.mark.parametrize("variant", [
+    {"diagnostic_only": True, "view_text": 123},
+    {"diagnostic_only": True, "view_text": "raw", "context_text": "wrapped"},
+    {"diagnostic_only": False, "view_text": "raw"},
+])
+def test_probe_view_text_is_diagnostic_only_and_exclusive(
+    variant: dict[str, Any], tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.freshness_projection.identity import LAB
+
+    monkeypatch.syspath_prepend(str(LAB / "tools"))
+    import run_local_state_attention_read_probe as entry
+
+    inputs = {"kind": "LSA_READ_PROBE_INPUTS", "cases": [{
+        "case_id": "case", "query": "current user", "bank": [],
+        "host_request": _request(), "variants": {"bad": variant}}], "jobs": []}
+    with pytest.raises(ValueError, match="LSA_PROBE_VARIANT_INVALID"):
+        entry._cases(inputs, {"host": {"model": "mock", "temperature": 0,
+                                         "max_tokens": 100},
+                              "capacity": {"enable_thinking": False}})

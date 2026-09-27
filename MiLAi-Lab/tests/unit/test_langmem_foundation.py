@@ -266,6 +266,108 @@ def test_invalid_arguments_return_tool_error_then_graph_corrects(tmp_path: Path)
             ]
 
 
+def test_native_manage_conditional_ids_return_errors_then_recover(tmp_path: Path) -> None:
+    class CountingStore(InMemoryStore):
+        def __init__(self) -> None:
+            super().__init__()
+            self.writes: list[str] = []
+
+        def put(self, namespace: Any, key: str, value: Any, **kwargs: Any) -> None:
+            self.writes.append(key)
+            super().put(namespace, key, value, **kwargs)
+
+        def delete(self, namespace: Any, key: str) -> None:
+            self.writes.append(key)
+            super().delete(namespace, key)
+
+    responses = [
+        _receipt({"calls": [
+            {"name": "manage_memory", "arguments": {"action": "update",
+                                                     "content": "do not write"}},
+            {"name": "manage_memory", "arguments": {"action": "delete"}},
+            {"name": "manage_memory", "arguments": {"action": "create",
+                                                     "id": str(uuid.uuid4()),
+                                                     "content": "do not write"}},
+        ]}, "invalid"),
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "create", "content": "saved after errors"}}]}, "valid"),
+        _receipt({"answer": "Saved."}, "final"),
+    ]
+    requests: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(json.loads(request.read()))
+        return httpx.Response(200, json=responses.pop(0))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client)
+        store = CountingStore()
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            messages = invoke_public_message(
+                build_agent(model, store, saver), model,
+                FoundationScope("run", "b0", "user", "episode"), "Remember correctly.")
+    results = [message for message in messages if isinstance(message, ToolMessage)]
+    assert [result.status for result in results] == ["error", "error", "error", "success"]
+    assert all("validation error" in str(result.content) for result in results[:3])
+    assert len(store.writes) == 1
+    assert len(store.search(("langmem", "run", "b0", "user"))) == 1
+    assert messages[-1].content == "Saved."
+    assert len(requests) == 3
+    assert len([row for row in requests[1]["messages"] if row["role"] == "tool"]) == 3
+
+
+def test_external_manage_name_does_not_get_native_conditions(tmp_path: Path) -> None:
+    @tool
+    def manage_memory(action: str) -> str:
+        """Handle an external memory action."""
+        return f"external {action}"
+
+    responses = [
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "update"}}]}, "external"),
+        _receipt({"answer": "External action completed."}, "final"),
+    ]
+
+    def respond(_: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=responses.pop(0))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client)
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            messages = invoke_public_message(
+                build_agent(model, InMemoryStore(), saver, memory_tools=[manage_memory]),
+                model, FoundationScope("run", "b0", "user", "episode"), "Call external.")
+    results = [message for message in messages if isinstance(message, ToolMessage)]
+    assert len(results) == 1 and results[0].status == "success"
+    assert results[0].content == "external update"
+
+
+def test_native_manage_store_value_error_is_not_converted(tmp_path: Path) -> None:
+    class BrokenStore(InMemoryStore):
+        def put(self, *_args: Any, **_kwargs: Any) -> None:
+            raise ValueError("store write failed")
+
+    responses = [_receipt({"calls": [{"name": "manage_memory", "arguments": {
+        "action": "create", "content": "will fail"}}]}, "broken")]
+
+    def respond(_: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=responses.pop(0))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client)
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            with pytest.raises(ValueError, match="store write failed"):
+                invoke_public_message(
+                    build_agent(model, BrokenStore(), saver), model,
+                    FoundationScope("run", "b0", "user", "episode"), "Remember this.")
+
+
 def test_upstream_manage_search_preserves_public_null_and_id_behavior() -> None:
     class FixedEmbeddings(Embeddings):
         def embed_documents(self, texts: list[str]) -> list[list[float]]:

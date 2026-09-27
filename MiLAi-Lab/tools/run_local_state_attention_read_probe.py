@@ -71,11 +71,12 @@ def _cases(inputs: dict[str, Any], config: dict[str, Any]) -> dict[str, dict[str
         replace_view(request, "")
         for variant in case.get("variants", {}).values():
             if (variant.get("diagnostic_only") is not True
-                    or ("bank" in variant) == ("context_text" in variant)):
+                    or sum(key in variant for key in (
+                        "bank", "context_text", "view_text")) != 1):
                 raise ValueError("LSA_PROBE_VARIANT_INVALID")
             if "bank" in variant:
                 sorted_states(variant["bank"])
-            elif not isinstance(variant["context_text"], str):
+            elif not isinstance(variant.get("context_text", variant.get("view_text")), str):
                 raise ValueError("LSA_PROBE_VARIANT_INVALID")
         cases[case_id] = case
     job_ids: set[str] = set()
@@ -202,6 +203,7 @@ def _execute(job: dict[str, Any], case: dict[str, Any], config: dict[str, Any],
     host_config = VLLMConfig(**config["host"])
     bank = sorted_states(case["bank"])
     context_text = None
+    view_text = None
     selected: list[dict[str, Any]]
     if arm == "all":
         selected = bank
@@ -209,6 +211,7 @@ def _execute(job: dict[str, Any], case: dict[str, Any], config: dict[str, Any],
         variant = case["variants"][job["variant"]]
         selected = sorted_states(variant["bank"]) if "bank" in variant else []
         context_text = variant.get("context_text")
+        view_text = variant.get("view_text")
     elif arm == "query":
         embed_cfg = VLLMConfig(base_url=config["embedding"]["base_url"],
                                model=config["embedding"]["model"],
@@ -223,7 +226,7 @@ def _execute(job: dict[str, Any], case: dict[str, Any], config: dict[str, Any],
             selected = select_focus(bank, case["query"], selector)
     else:
         raise ValueError("LSA_PROBE_ARM_UNKNOWN")
-    view = render_view(selected, context_text)
+    view = view_text if view_text is not None else render_view(selected, context_text)
     request = replace_view(case["host_request"], view)
     with VLLMClient(host_config, emit=_emit(trace, "task_host", job_id),
                     budget=budget, capacity=capacity) as host:

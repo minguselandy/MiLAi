@@ -293,6 +293,20 @@ edits-only且controller_focus为空；U/A和Host仍有当前任务，legacy focu
 Host快照时点/事件关系冲突，候选尚未冻结；不删除真实当前消息、不把引用当正确性证明、
 不重跑36条或宣布整体可靠。完整Goal与后续强基线/消融/公开任务/规模等工作仍ACTIVE。
 
+下一两个薄边界已由同一Sol完成：默认原生manage_memory实例的update/delete缺ID、create带ID，
+在已有参数校验入口返回真实error ToolMessage；同名外部工具不误套，底层Store ValueError仍抛出。
+这处理了P3中断的确定性条件参数缺口，未改变工具schema或强迫模型成功恢复。
+
+[Host快照诊断协议](../data/manifests/local-state-attention-host-snapshot-r1-protocol.json)仅复用现有
+first-response probe，增加diagnostic_only原样view_text变体，避免诊断wrapper污染原请求对照。
+固定失败trace54的原视图、时点/当前source身份说明、实际维护前State3，三种各两次，共6次
+Host首响应，不执行工具/不读写Store，不把中间步骤称完整任务成功。首次错误请求只有system+
+当前user，尚无旧assistant5；所以先定位快照基准/来源副本关系，再单列后续历史混杂。
+24项相关单测、目标静态、6-job/tmp零模型prepare及一次build通过，哈希在协议；发布后正式
+prepare与Root串行诊断。原生工具修复不被这个probe执行，不能用诊断结果声称它有语义收益。
+即使时点候选有利，live采用前仍需stale/no-op State和tool-loop反例，不把引用/观察过等同于
+变化已经正确应用。当前Host实时view和原始用户/工具消息尚未修改。
+
 ## 后期资源准备记录
 
 已核对 [LangMem 官方 API](https://langchain-ai.github.io/langmem/reference/) 确实区分

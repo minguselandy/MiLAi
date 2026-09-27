@@ -1,0 +1,103 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R1_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_SOURCE_PUBLICATION",
+  "scope": "Read-only causal diagnosis of first Host wrong increment after correct post-event State delivery; no live Host method change, no business execution, no36-run repeat.",
+  "input_path": "artifacts/local-state-attention/host-snapshot-r1/inputs.json",
+  "input_sha256": "6bf85f24599e8a9ab8dce7c59f6739331b143f6726d0c8d97a521ccd0651d58a",
+  "source_trace": {
+    "path": "artifacts/local-state-attention/maintenance-events-r1/lsa-maintenance-events-r1-distinct-local_lru_sources/trace.jsonl",
+    "sha256": "e3297b7b0effc4d3dc5a09b15504f51fcdd258173aabd8d70367812966f011b9",
+    "source_commit": "5640a93071af3abdbc816fa914e5f60969364a03",
+    "host_request_line": 54,
+    "maintenance_request_response_line": 49,
+    "causal_boundary": "First Host request of fresh session, only system+current user, before assistant5 or corrupt LangMem update exists.",
+    "future_trace_content_in_inputs": false
+  },
+  "rubric_path": "data/diagnostics/local_state_attention/host-snapshot-r1-rubric.json",
+  "rubric_sha256": "42e91a17484664d0c98cc0e62896c1babcce141a31b6d698b957ba9b698aeace",
+  "jobs": [
+    {
+      "job_id": "snapshot-original-r1",
+      "case_id": "second-distinct-increment",
+      "arm": "diagnostic",
+      "variant": "original"
+    },
+    {
+      "job_id": "snapshot-timing_identity-r1",
+      "case_id": "second-distinct-increment",
+      "arm": "diagnostic",
+      "variant": "timing_identity"
+    },
+    {
+      "job_id": "snapshot-actual_prior_state-r1",
+      "case_id": "second-distinct-increment",
+      "arm": "diagnostic",
+      "variant": "actual_prior_state"
+    },
+    {
+      "job_id": "snapshot-actual_prior_state-r2",
+      "case_id": "second-distinct-increment",
+      "arm": "diagnostic",
+      "variant": "actual_prior_state"
+    },
+    {
+      "job_id": "snapshot-original-r2",
+      "case_id": "second-distinct-increment",
+      "arm": "diagnostic",
+      "variant": "original"
+    },
+    {
+      "job_id": "snapshot-timing_identity-r2",
+      "case_id": "second-distinct-increment",
+      "arm": "diagnostic",
+      "variant": "timing_identity"
+    }
+  ],
+  "variants": {
+    "original": "Exact original Host request bytes, including existing post-event State4 and source expansion.",
+    "timing_identity": "Same actual request; insert program-truthful timing/source-identity metadata and one generic interpretive clause inside work view. No applied/correct/incorporated claim.",
+    "actual_prior_state": "Only public State row replaced by actual pre-maintenance State3 from trace49; all original expanded sources and current user retained. Diagnostic temporal-basis control, not live protocol."
+  },
+  "order": "Rotated two-repeat blocks listed above; all6 retained, no adaptive replacement.",
+  "unchanged": [
+    "All non-system messages byte-identical",
+    "Original system prefix before work-view marker unchanged",
+    "Original tool/response schema and model params unchanged",
+    "No controller, selector or embedding call",
+    "No source Store access, business execution or persistent State mutation",
+    "Runtime does not read rubric or future events"
+  ],
+  "capacity": {
+    "host_generations": 6,
+    "host_max_tokens": 4096,
+    "temperature": 0,
+    "thinking": false,
+    "context_tokens": 65536,
+    "http_concurrency": 1
+  },
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 2412,
+    "generation_tokens": 3011206,
+    "embedding_tokens": 18183
+  },
+  "source_freeze": "Use existing read-probe runner after exact view_text diagnostic variant is implemented and published; native tool conditional guard is independent and not exercised because this probe never executes tools. Actual prepare binds all source/config/input bytes.",
+  "interpretation": "First responses are diagnostic categories, not completed task success. Original-wire repeats test whether failure recurs. Metadata+clause is a bundled candidate; six responses cannot establish reliability or unseen benefit.",
+  "next_gate": "Even favorable metadata result requires stale-State/no-op and tool-loop counterexamples before any live deployment; no automatic metadata truth gate. If no distinguishing signal, do not repeat wording tuning.",
+  "validation": {
+    "affected_tests": 24,
+    "foundation_and_probe_tests": 18,
+    "adjacent_application_tests": 6,
+    "target_ruff": "PASS",
+    "target_mypy": "PASS",
+    "diff_check": "PASS",
+    "frozen_six_job_prepare": "PASS zero-model /tmp",
+    "build": {
+      "wheel_sha256": "44b4d3ceedbea852dcb6ffe93accf7e9000dff2c238c1220503a52824735eb50",
+      "sdist_sha256": "60e6337d7a3fe943ae214b0086693bc7f352986fd883af5b024337b53802a2ce",
+      "inclusion": "wheel native agent; sdist exact-view probe CLI"
+    },
+    "real_model_calls": 0
+  },
+  "stop_rule": "All six predefined semantic outputs remain. Stop on service, actual request mismatch or instrumentation/schema failure for diagnosis; no replay/replacement, all costs retained."
+}

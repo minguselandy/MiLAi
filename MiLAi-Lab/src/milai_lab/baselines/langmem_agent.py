@@ -112,13 +112,15 @@ def build_agent(
     source_view_max_bytes: int | None = None,
 ) -> Any:
     """Use upstream tool schema and instructions without a local memory policy."""
-    tools = [
-        *(memory_tools if memory_tools is not None else (
-            create_manage_memory_tool(namespace=MEMORY_NAMESPACE),
-            create_search_memory_tool(namespace=MEMORY_NAMESPACE),
-        )),
-        *business_tools,
-    ]
+    selected_memory_tools: Sequence[BaseTool]
+    if memory_tools is None:
+        native_manage = create_manage_memory_tool(namespace=MEMORY_NAMESPACE)
+        selected_memory_tools = (native_manage,
+                                 create_search_memory_tool(namespace=MEMORY_NAMESPACE))
+    else:
+        native_manage = None
+        selected_memory_tools = memory_tools
+    tools = [*selected_memory_tools, *business_tools]
     parameter_schemas = {
         tool.name: convert_to_openai_tool(tool)["function"]["parameters"]
         for tool in tools
@@ -139,6 +141,17 @@ def build_agent(
                         tool_call_id=call["id"],
                         status="error",
                     )
+            if native_manage is not None and current.tool is native_manage:
+                action = call["args"].get("action", "create")
+                memory_id = call["args"].get("id")
+                if action in {"update", "delete"} and not memory_id:
+                    return ToolMessage(
+                        content="Tool input validation error: update and delete require an id",
+                        name=call["name"], tool_call_id=call["id"], status="error")
+                if action == "create" and memory_id is not None:
+                    return ToolMessage(
+                        content="Tool input validation error: create must omit id",
+                        name=call["name"], tool_call_id=call["id"], status="error")
             if business_call_wrapper is not None:
                 return business_call_wrapper(current, execute)
             return execute(current)

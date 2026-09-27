@@ -1,0 +1,28 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R1_RUBRIC",
+  "runtime_reads_rubric": false,
+  "diagnostic_only": true,
+  "expected_current_quantity": 4,
+  "expected_destination": "storage S-2",
+  "expected_packing": "fiber cases",
+  "request": "Second distinct user increment, no business action. Capture first response only; no tools or Store writes.",
+  "classification": {
+    "correct_direct_answer": "States quantity4 without contradictory fields, fabricated business outcome or business call.",
+    "correct_memory_content_step": "Native memory create/update content uses quantity4 and preserves any stated fields, with legal conditional args. Intermediate proposal only; no tool effect or complete task claim.",
+    "information_seeking_intermediate": "Search/get or other valid read without unsupported quantity; unscored for final correctness, not automatically success.",
+    "wrong_reapplication": "States/writes5, or another wrong quantity.",
+    "invalid_or_forbidden_call": "Malformed native conditional arguments or business action despite no-action request.",
+    "inconclusive": "Acknowledgement without enough content to judge quantity and no decisive call."
+  },
+  "rules": [
+    "Do not turn six first responses into six completed tasks.",
+    "Missing fields in a concise acknowledgement do not automatically fail; unjudgeable quantity remains inconclusive.",
+    "All six responses/failed attempts remain; no favorable replacement or follow-up completion.",
+    "Actual-prior-State is a diagnostic temporal-basis control, not a deployable method or improvement score."
+  ],
+  "counterexamples_required_before_live_candidate": [
+    "Same text at different source ID remains a real new event.",
+    "Post-stage identity does not prove semantic incorporation; stale/no-op State must remain corrigible.",
+    "Tool-only rounds and actual wrong side effects must be reported accurately."
+  ]
+}
