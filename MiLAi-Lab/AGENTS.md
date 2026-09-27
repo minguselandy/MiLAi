@@ -2,26 +2,27 @@
 
 ## Current scope and authority
 
-The user activated the v2.0 development plan. The actual Goal is `active` with a new
-objective, superseding the previous immediate pause for this newly authorized scope.
-The Goal names `MILAI_NEXT_IMPROVEMENT_PLAN_20260928_v2.0.md`, which is absent; the only
-matching date/version plan is [NEXT_DEVELOPMENT v2.0](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md).
-Root disclosed this filename mismatch and is proceeding with that document; preserve its
-original planning-only bytes as historical context, not a current refusal of execution.
-Follow the [v2 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md).
+The user's latest instruction is to pause experiments and publish an overall summary.
+The actual Goal is `paused` as of 2026-09-27 18:46:35 UTC. Stop implementation,
+experiments, model downloads and deployment; only report closeout and authorized Git
+publication are active. Resume requires a new explicit user instruction. Historical ACTIVE
+text and the v2 plan are not current execution authorization. See the
+[latest overall report](docs/MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md) and
+[v2 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md).
 
-Keep the full N0–N6 scope and its conditional gates. N0 is WIP protection and narrow equivalence,
-not another WP0 rebuild. N1 audits actual receipts and consumption; N2/N3 fix bank/prestate;
-N4 is optional and requires a relevant observed need. N5 includes real continuous tasks and
-WP7 lifecycle costs. N6 follows evidence and resource gates; no automatic second-model deployment.
-Engineering checks alone do not finish the research objective. Product remains NO-GO.
+N0 selector extraction is published at ddd5ab71 (PR61); N1 audited one existing actual
+failure trace. N2 has unfinished, uncommitted implementation and fixed input bytes;
+no v2 real generation or embedding calls occurred. N3 remains a local draft; N4/N6
+are conditional and untriggered, N5/WP7 remain unfinished. Product remains NO-GO.
+Do not complete the full research Goal based on engineering checks or this report.
 
-The original C5 worktree and all eight WIP files stay unchanged. Work in the separate
-`next-development-v2` worktree; pure selector extraction and behavior changes use separate
-commits. Root owns docs/data/rubrics/freezes/real calls/scoring; Sol xhigh remains the sole source
-owner and Luna high owns authorized publication. Prior [pause report](docs/MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md)
-and [v1 execution history](docs/MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md) remain historical evidence.
-A new explicit stop would override this active record.
+Preserve both WIP trees: original `next-improvement` at cf1588a (eight files) and
+`next-development-v2` at ddd5ab71 (eleven N2 files, plus pause-status documentation).
+Do not clean, reset, continue or publish unfinished WIP as an accepted method.
+The docs-only closeout uses `next-development-v2-closeout` from ddd5ab71. Root owns
+reports/status/manifests, Luna high owns Git publication, and Sol is stopped.
+The v2 plan's original bytes and the disclosed NEXT_IMPROVEMENT/NEXT_DEVELOPMENT
+filename discrepancy remain recorded. Prior pause reports and old failures are historical evidence.
 
 The exact former AGENTS content is preserved at
 [the historical instruction snapshot](AGENTS_HISTORY_PRE_WP1_20260927.md), in the same directory
