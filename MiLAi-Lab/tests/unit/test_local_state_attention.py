@@ -14,7 +14,7 @@ from jsonschema import ValidationError, validate
 
 pytest.importorskip("langmem")
 
-from langchain_core.messages import HumanMessage, ToolMessage
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.store.base import PutOp
 from langgraph.store.memory import InMemoryStore
@@ -351,7 +351,9 @@ def test_hook_preserves_checkpoint_and_partial_tool_json(tmp_path: Path) -> None
     assert any(view["states"][0]["id"] == state_id
                for view in views if view["event"] == "lsa_view" and view["states"])
     control_wire = wires[0]
-    user_event = json.loads(control_wire["messages"][1]["content"])["new_observations"][0]
+    legacy_payload = json.loads(control_wire["messages"][1]["content"])
+    assert "current_task" in legacy_payload
+    user_event = legacy_payload["new_observations"][0]
     assert user_event["kind"] == "user" and user_event["actor"] == "alice"
     assert user_event["tool_call_id"] is None
     tool_wire = next(wire for wire in wires if wire is not control_wire and
@@ -365,6 +367,8 @@ def test_hook_preserves_checkpoint_and_partial_tool_json(tmp_path: Path) -> None
     assert "nonempty title" in control_wire["messages"][0]["content"]
     assert "Never put a title" in control_wire["messages"][0]["content"]
     assert control_wire["response_format"]["json_schema"]["schema"] == control_schema([], 32)
+    assert set(control_wire["response_format"]["json_schema"]["schema"]["required"]) == {
+        "edits", "focus"}
     host_wires = [wire for wire in wires if wire["response_format"]["json_schema"]["name"]
                   == "langmem_json_action_v1"]
     assert len(host_wires) == 2
@@ -644,6 +648,13 @@ def test_lru_hook_updates_background_and_reads_only_foreground_sources(
         "update_selector", "maintenance", "read_selector"]
     assert [call["context_stage"] for call in replies.calls] == [
         "update_selector", "maintenance", "read_selector"]
+    assert replies.calls[0]["payload"]["current_task"] == (
+        "Update background; answer from foreground")
+    assert set(replies.calls[1]["payload"]) == {
+        "new_observations", "states", "source_ids_available"}
+    assert replies.calls[2]["payload"]["current_task"] == (
+        "Update background; answer from foreground")
+    assert "current_task" not in replies.calls[1]["prompt"]
     validate({"update_ids": [background]},
              replies.calls[0]["schema"])
     validate({"edits": [{"id": background, "content": "new-background"}]},
@@ -665,6 +676,68 @@ def test_lru_hook_updates_background_and_reads_only_foreground_sources(
     assert json.loads((tmp_path / "capacity.json").read_text()) == {"thread:0": 3}
     assert {row["stage"] for row in emitted if row["event"] == "lsa_lru_call"} == {
         "update_selector", "maintenance", "read_selector"}
+
+
+@pytest.mark.parametrize("arm", ["global_note_sources", "local_all_sources"])
+def test_all_read_maintenance_uses_only_pending_events_and_preserves_identity(
+    arm: str,
+) -> None:
+    bank = LocalStateBank(InMemoryStore(), max_states=(
+        1 if arm == "global_note_sources" else 32),
+        max_state_content_chars=(16000 if arm == "global_note_sources" else 4000),
+        max_total_content_chars=16000)
+    scope = StateScope("run", arm, "alice")
+    user_text = "Increase the three recorded values by one"
+    replies = LruReplies({"maintenance": [
+        lambda payload: {"edits": [{"id": None, "title": "continuing matter",
+                                   "content": "recorded values",
+                                   "evidence": [payload["new_observations"][0]["id"]]}]},
+        lambda payload: {"edits": [{"id": bank.states(scope)[0]["id"],
+                                   "content": "partial receipt observed",
+                                   "evidence": [payload["new_observations"][0]["id"]]}]},
+        {"edits": []}]})
+    controller = LocalStateController(
+        bank, replies,  # type: ignore[arg-type]
+        representation=("global_note" if arm == "global_note_sources" else "local"),
+        local_granularity=arm == "local_all_sources", maintenance_only=True)
+    hook = make_pre_model_hook(controller, "Original system", "all_sources", 16384)
+    cfg = {"configurable": {"foundation_run_id": "run", "arm_id": arm,
+                            "user_id": "alice", "thread_id": "thread"}}
+    user_one = HumanMessage(id="u1", content=user_text)
+    first = hook({"messages": [user_one]}, cfg)
+    assert first["llm_input_messages"][1] is user_one
+    assert bank.states(scope)[0]["revision"] == 1
+    ai = AIMessage(content="", tool_calls=[{"name": "manage_memory",
+                                            "args": {}, "id": "call-1"}])
+    receipt = ToolMessage(id="t1", name="manage_memory", tool_call_id="call-1",
+                          content='{"ok":false,"partial":true}')
+    second = hook({"messages": [user_one, ai, receipt]}, cfg)
+    assert second["llm_input_messages"][3] is receipt
+    assert bank.states(scope)[0]["content"] == "partial receipt observed"
+    assert bank.states(scope)[0]["revision"] == 2
+    user_two = HumanMessage(id="u2", content=user_text)
+    hook({"messages": [user_one, ai, receipt, user_two]}, cfg)
+    assert [call["stage"] for call in replies.calls] == ["maintenance"] * 3
+    assert all(set(call["payload"]) == {
+        "new_observations", "states", "source_ids_available"}
+               and "current_task" not in call["prompt"]
+               and "focus" not in call["prompt"].lower()
+               and set(call["schema"]["required"]) == {"edits"}
+               for call in replies.calls)
+    assert [row["id"] for row in replies.calls[1]["payload"]["new_observations"]] == [
+        next(row["id"] for row in bank.events(scope) if row["kind"] == "tool")]
+    assert replies.calls[1]["payload"]["new_observations"][0]["content"] == (
+        '{"ok":false,"partial":true}')
+    assert replies.calls[1]["payload"]["new_observations"][0]["tool_call_id"] == "call-1"
+    assert [row["id"] for row in bank.events(scope) if row["kind"] == "user"] == [
+        "message:u1", "message:u2"]
+    assert [row["id"] for row in replies.calls[2]["payload"]["new_observations"]] == [
+        "message:u2"]
+    assert len(bank.states(scope)) == 1 and bank.pending(scope) == []
+    if arm == "global_note_sources":
+        with pytest.raises(ValidationError):
+            validate({"edits": [{"id": None, "title": "second note",
+                                  "content": "wrong"}]}, replies.calls[1]["schema"])
 
 
 def test_lru_shared_update_new_read_and_empty_update() -> None:
@@ -1196,6 +1269,7 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
         called.append(args_[-1].representation)
         called.append(args_[-1].update_policy)
         called.append(args_[-1].local_granularity)
+        called.append(args_[-1].maintenance_only)
         called.append((args_[-1].bank.max_states,
                        args_[-1].bank.max_state_content_chars,
                        args_[-1].bank.max_total_content_chars))
@@ -1216,6 +1290,8 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
                       "global_note" if arm == "global_note_sources" else "local",
                       "lru" if arm == "local_lru_sources" else "all",
                       arm in {"local_all_sources", "local_lru_sources"},
+                      arm in {"global_note_sources", "local_all_sources",
+                              "local_lru_sources"},
                       expected_limits]
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
@@ -1230,6 +1306,13 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
     assert manifest["identity"]["creation_policy"] == (
         "shared_maintenance_each_pending_batch"
         if arm == "local_lru_sources" else None)
+    assert manifest["identity"]["maintenance_input_policy"] == (
+        "pending_events_candidates_source_ids" if arm in {
+            "global_note_sources", "local_all_sources", "local_lru_sources"} else
+        "current_task_pending_events_states_source_ids")
+    assert manifest["identity"]["maintenance_response_contract"] == (
+        "edits_only" if arm in {"global_note_sources", "local_all_sources",
+                                "local_lru_sources"} else "edits_and_focus")
     assert manifest["identity"]["effective_content_limits"] == dict(zip(
         ("max_states", "max_state_content_chars", "max_total_content_chars"),
         expected_limits, strict=True))

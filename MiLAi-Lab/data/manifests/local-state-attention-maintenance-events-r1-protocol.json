@@ -1,0 +1,121 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_MAINTENANCE_EVENTS_R1_PROTOCOL",
+  "status": "PRE_REGISTERED_READY_FOR_SOURCE_PUBLICATION",
+  "scope": "One general writable-maintenance input boundary repair; three affected original development high-coupling trajectories plus one new distinct-event counterexample. No36-run repeat or pure old/new ablation claim.",
+  "basis": [
+    "docs/MILAI_LOCAL_STATE_ATTENTION_P3_MATCHED_R1_RESULTS_20260927.md"
+  ],
+  "run_order": [
+    {
+      "run_id": "lsa-maintenance-events-r1-coupled-global_note_sources",
+      "case": "coupled",
+      "arm": "global_note_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-high-coupling.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-maintenance-events-r1-coupled-local_all_sources",
+      "case": "coupled",
+      "arm": "local_all_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-high-coupling.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-maintenance-events-r1-coupled-local_lru_sources",
+      "case": "coupled",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/p3-high-coupling.json",
+      "phases": [
+        0,
+        1
+      ]
+    },
+    {
+      "run_id": "lsa-maintenance-events-r1-distinct-local_lru_sources",
+      "case": "distinct",
+      "arm": "local_lru_sources",
+      "repeat": 1,
+      "script": "data/diagnostics/local_state_attention/maintenance-distinct-increments.json",
+      "phases": [
+        0,
+        1
+      ]
+    }
+  ],
+  "input_sha256": {
+    "data/diagnostics/local_state_attention/p3-high-coupling.json": "a68ed59b3f72e53a3a9817c9a5b6933b6b6faf085f7e587bbb94fce1b9a15109",
+    "data/diagnostics/local_state_attention/p3-matched-r1-additional-rubric.json": "aac4ce878218e6b41885b1e6bc5be5f8f936899720b35aac99bc11fc12557bf6",
+    "data/diagnostics/local_state_attention/maintenance-distinct-increments.json": "e70cfb79ff85b74587210a200f00103b5c608b0f4fd63ba980b8f18857b325cc",
+    "data/diagnostics/local_state_attention/maintenance-distinct-increments-rubric.json": "73460af3a69a155903f3ad648b0da5b3e5762437c73a072e757325b3d13c4799"
+  },
+  "denominators": {
+    "original_coupled_per_arm": 6,
+    "original_coupled_trajectories": 3,
+    "additional_lru_counterexample_messages": 5,
+    "additional_lru_counterexample_trajectories": 1,
+    "total_public_messages": 23,
+    "total_trajectories": 4
+  },
+  "split": "development; no unseen claim",
+  "method_change": "Writable maintenance receives new_observations, candidate states and available source IDs, with no separate repeated current_task. U/A/Host retain query. G/L all-read use edits-only shared maintenance without extra selector; legacy focus stays explicit. New same-text source events are not deduplicated.",
+  "non_changes": [
+    "Host/history/tool schema unchanged",
+    "No additional processed-event ledger",
+    "Native missing-ID memory-tool exception fix deferred to independent slice",
+    "No vLLM changes",
+    "No oracle groupings or runtime rubric reads"
+  ],
+  "shared": {
+    "controller_max_tokens": 2048,
+    "controller_calls_per_public_message": 13,
+    "host_max_tokens": 4096,
+    "host_calls_per_public_message": 12,
+    "http_concurrency": 1,
+    "aggregate_content_budget_chars": 16000,
+    "source_view_utf8_budget": 16384
+  },
+  "budget_path": "artifacts/ser-v20/budget.json",
+  "starting_budget": {
+    "generation_requests": 2304,
+    "generation_tokens": 2876194,
+    "embedding_tokens": 17335
+  },
+  "scoring": "Original full frozen high-coupling per-message rubric and separate five-message distinct-event rubric. Review actual controller request, committed State, cross-process Host delivery and actual world actions; preserve case-only failures separately. No change to denominator after observed outcomes.",
+  "mechanism_checks": [
+    "Every write request lacks current_task; actual current user event still appears once with source identity in pending observations.",
+    "Actual tool-only maintenance receives real receipt and no additional repeated user task field. No forced model tool loop solely for demonstration.",
+    "Same text at new source ID must remain a new event; second legitimate increment is not suppressed.",
+    "Host wrong answer after correct State delivery remains separately attributable; request-boundary pass is not task pass."
+  ],
+  "isolation": "Fresh run/arm/user namespaces, independent world/checkpoint, two independent phase processes per trajectory; no polluted bank reuse.",
+  "source_freeze": "Actual prepare after source/config publication binds Git/source/dependency/input identities. Freeze all four runs until terminal.",
+  "stop_rule": "Preserve semantic/capacity/optional-control failures in full denominator. Stop affected run on uncaught tool/infrastructure errors; diagnose before continuing originally frozen independent remaining runs. Do not resume failed pending business graph, replay, replace, or silently ignore DB faults.",
+  "validation": {
+    "affected_unit_tests": 47,
+    "target_ruff": "PASS",
+    "target_mypy": "PASS",
+    "diff_check": "PASS",
+    "zero_model_prepare": "PASS in /tmp for G/L/LRU on new distinct-events script",
+    "build": {
+      "wheel_sha256": "0559a22dd5c9e0ec9a73787f1123696d2e5840fbab5cc74a4682d3480bdc729f",
+      "sdist_sha256": "adaca91016ae92cc97da6093f4091dc5867b449d846649314371219638c2998a",
+      "checks": "wheel controller and sdist controller/CLI present"
+    },
+    "real_model_calls": 0
+  },
+  "manifest_contract": {
+    "maintenance_input_policy": "pending_events_candidates_source_ids",
+    "maintenance_response_contract": "edits_only",
+    "global_local_read": "all_sources; controller_focus=[] is unused, delivered_state_ids records actual full bank",
+    "legacy_focus": "current_task_pending_events_states_source_ids; edits_and_focus"
+  }
+}

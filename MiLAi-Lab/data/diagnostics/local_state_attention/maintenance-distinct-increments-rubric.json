@@ -1,0 +1,25 @@
+{
+  "kind": "LOCAL_STATE_ATTENTION_MAINTENANCE_DISTINCT_INCREMENTS_RUBRIC",
+  "status": "PRE_REGISTERED_BEFORE_SOURCE_FREEZE",
+  "runtime_reads_rubric": false,
+  "split": "development",
+  "message_denominator": 5,
+  "whole_denominator": 1,
+  "message_checks": {
+    "initial-plan": "Acknowledge exact2/storage S-2/fiber cases without business action or contrary facts.",
+    "first-increment": "Acknowledge new event; if quantity stated it is3. No business action.",
+    "first-read": "State quantity3 and exact storage S-2/fiber cases without action.",
+    "second-increment": "Acknowledge a new event with byte-identical text and distinct source ID; current quantity4 if stated, not3 or5. No action.",
+    "final-action": "Exactly one actual reserve_and_label with key Cobalt delivery kits, quantity4, destination storage S-2, packing fiber cases; actual ID/result, no other business attempt."
+  },
+  "mechanism_checks": [
+    "First and second increment have distinct source IDs despite identical content; both reach actual writable maintenance as new_observations.",
+    "Writable maintenance payload omits current_task in every call.",
+    "A tool-only pending batch does not receive original task text outside its actual event bodies; actual tool receipts remain accessible.",
+    "Actual committed State, cross-process delivery and final world are reviewed separately from request schema."
+  ],
+  "limits": [
+    "One additional LRU development counterexample, not a matched new three-arm estimate or unseen evidence.",
+    "No forced tool call merely to trigger a maintenance path; absent natural tool-only batch is reported, with deterministic check kept separate."
+  ]
+}

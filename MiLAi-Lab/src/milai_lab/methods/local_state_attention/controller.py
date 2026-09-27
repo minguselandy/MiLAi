@@ -70,7 +70,8 @@ class LocalStateController:
                  max_calls_per_message: int = 13,
                  representation: str = "local",
                  local_granularity: bool = False,
-                 update_policy: str = "all") -> None:
+                 update_policy: str = "all",
+                 maintenance_only: bool = False) -> None:
         if representation not in {"local", "global_note"}:
             raise ValueError("LSA_REPRESENTATION_UNKNOWN")
         if update_policy not in {"all", "lru"}:
@@ -84,6 +85,7 @@ class LocalStateController:
         self.representation = representation
         self.local_granularity = local_granularity
         self.update_policy = update_policy
+        self.maintenance_only = maintenance_only
 
     def prepare(self, scope: StateScope, query_id: str, query: str,
                 message_key: str = "") -> dict[str, Any]:
@@ -154,6 +156,9 @@ class LocalStateController:
         if self.update_policy == "lru":
             return self._prepare_lru(scope, query_id, query, message_key,
                                      pending, states, events, prompt)
+        if self.maintenance_only:
+            return self._prepare_all_maintenance(scope, query_id, message_key,
+                                                 pending, states, events, prompt)
         payload = {"current_task": query,
                    "new_observations": [self._event_view(row) for row in pending],
                    "states": [{key: row[key] for key in (
@@ -213,8 +218,8 @@ class LocalStateController:
                        "pending_event_ids": result["pending_event_ids"]})
         return result
 
-    def _lru_call(self, stage: str, message_key: str, prompt: str,
-                  payload: dict[str, Any], schema: dict[str, Any]) -> dict[str, Any]:
+    def _stage_call(self, stage: str, message_key: str, prompt: str,
+                    payload: dict[str, Any], schema: dict[str, Any]) -> dict[str, Any]:
         if self.capacity_path is not None:
             counts = read_json(self.capacity_path) if self.capacity_path.exists() else {}
             if counts.get(message_key, 0) >= self.max_calls_per_message:
@@ -222,7 +227,8 @@ class LocalStateController:
             counts[message_key] = counts.get(message_key, 0) + 1
             write_json(self.capacity_path, counts)
         if self.emit is not None:
-            self.emit({"event": "lsa_lru_call", "stage": stage,
+            self.emit({"event": ("lsa_lru_call" if self.update_policy == "lru"
+                                 else "lsa_control_stage_call"), "stage": stage,
                        "message_key": message_key,
                        "payload_bytes": len(json.dumps(
                            payload, ensure_ascii=False).encode("utf-8"))})
@@ -239,6 +245,86 @@ class LocalStateController:
             return self._parse_json(receipt)
         finally:
             CONTROL_STAGE.reset(token)
+
+    def _maintenance_payload(self, pending: list[dict[str, Any]],
+                             states: list[dict[str, Any]],
+                             events: list[dict[str, Any]]) -> dict[str, Any]:
+        return {
+            "new_observations": [self._event_view(row) for row in pending],
+            "states": [{key: row[key] for key in (
+                "id", "title", "content", "needs", "evidence_refs", "revision")}
+                       for row in states],
+            "source_ids_available": [row["id"] for row in events],
+        }
+
+    def _maintenance_schema(self, state_ids: list[str]) -> dict[str, Any]:
+        edits = control_schema(state_ids, self.bank.max_states,
+                               single_note=self.representation == "global_note")[
+                                   "properties"]["edits"]
+        return {"type": "object", "properties": {"edits": edits},
+                "required": ["edits"], "additionalProperties": False}
+
+    def _maintenance_prompt(self, prompt: str, *, candidate_only: bool) -> str:
+        if self.representation == "global_note":
+            prompt = prompt.replace(
+                "Update the note when new observations affect it, whether or not it is in "
+                "focus. Select focus separately for the current question or action. ",
+                "Update the note when new observations affect it. ", 1)
+        else:
+            prompt = prompt.replace(
+                "Independently update States affected by new observations and select focus "
+                "for the current question or action. A State may need an update even when "
+                "it is not in focus; focus need not include every updated State. ",
+                ("Update only selected existing candidate States affected by new "
+                 "observations; independently decide whether new observations warrant "
+                 "a new State. " if candidate_only else
+                 "Update States affected by new observations independently. "), 1)
+        prompt = prompt.replace("Return JSON with edits and focus only. ",
+                                "Return JSON with edits only. ", 1)
+        start = prompt.index("Focus is an array of identifiers only:")
+        end = prompt.index("Evidence may cite only listed source ids.", start)
+        return prompt[:start] + prompt[end:]
+
+    def _prepare_all_maintenance(self, scope: StateScope, query_id: str,
+                                 message_key: str, pending: list[dict[str, Any]],
+                                 states: list[dict[str, Any]],
+                                 events: list[dict[str, Any]],
+                                 prompt: str) -> dict[str, Any]:
+        if not pending:
+            self.bank.set_focus(scope, query_id, [])
+            return {"focus": [], "receipts": [], "degraded": False,
+                    "reused": True, "pending_event_ids": []}
+        try:
+            plan = self._stage_call(
+                "maintenance", message_key,
+                self._maintenance_prompt(prompt, candidate_only=False),
+                self._maintenance_payload(pending, states, events),
+                self._maintenance_schema([row["id"] for row in states]))
+        except (ControlResponseError, httpx.TimeoutException) as error:
+            reason = self._control_reason(error)
+            if self.emit is not None:
+                self.emit({"event": "lsa_control_degraded", "stage": "maintenance",
+                           "reason": reason, "user_id": scope.user_id,
+                           "pending": len(pending)})
+            return {"focus": [], "receipts": [], "degraded": True,
+                    "reused": False, "reason": reason,
+                    "pending_event_ids": [row["id"] for row in pending]}
+        edits = plan.get("edits")
+        if set(plan) != {"edits"} or not isinstance(edits, list):
+            return {"focus": [], "receipts": [], "degraded": True,
+                    "reused": False, "reason": "LSA_MAINTENANCE_INVALID_SHAPE",
+                    "pending_event_ids": [row["id"] for row in pending]}
+        receipts, invalid = self.bank.apply(
+            scope, edits, {row["id"] for row in pending}, query_source_id=query_id)
+        if not invalid:
+            self.bank.set_focus(scope, query_id, [])
+        remaining = [row["id"] for row in self.bank.pending(scope)]
+        if self.emit is not None:
+            self.emit({"event": "lsa_control_result", "stage": "maintenance",
+                       "user_id": scope.user_id, "focus": [], "edits": receipts,
+                       "degraded": invalid, "pending_event_ids": remaining})
+        return {"focus": [], "receipts": receipts, "degraded": invalid,
+                "reused": False, "pending_event_ids": remaining}
 
     def _prepare_lru(self, scope: StateScope, query_id: str, query: str,
                      message_key: str, pending: list[dict[str, Any]],
@@ -278,7 +364,7 @@ class LocalStateController:
             return result
         if pending and states:
             try:
-                route = self._lru_call(
+                route = self._stage_call(
                     "update_selector", message_key,
                     "From source-identified new observations and the short State directory, "
                     "select every existing State that may need an update. Selection is about "
@@ -311,33 +397,12 @@ class LocalStateController:
         event_ids = {row["id"] for row in pending}
         receipts: list[dict[str, Any]] = []
         if pending:
-            edit_schema = control_schema(update_ids, self.bank.max_states)[
-                "properties"]["edits"]
-            maintenance_schema = {"type": "object", "properties": {
-                "edits": edit_schema}, "required": ["edits"],
-                "additionalProperties": False}
-            maintenance_prompt = prompt.replace(
-                "Independently update States affected by new observations and select focus "
-                "for the current question or action. A State may need an update even when "
-                "it is not in focus; focus need not include every updated State. ",
-                "Update only selected existing candidate States affected by new "
-                "observations; independently decide whether new observations warrant "
-                "a new State. ",
-                1).replace("Return JSON with edits and focus only. ",
-                           "Return JSON with edits only. ", 1)
-            maintenance_prompt = maintenance_prompt.replace(
-                "Focus is an array of identifiers only: exact ids from states, or new:0, "
-                "new:1 for a newly created edit at that zero-based edits index. Never put "
-                "a title, factual summary, or answer in focus. Empty focus is valid. "
-                "Choose focus for the current_task, which is a query rather than an answer. ",
-                "", 1)
             try:
-                plan = self._lru_call(
-                    "maintenance", message_key, maintenance_prompt,
-                    {"current_task": query, "new_observations": observations,
-                     "states": candidates,
-                     "source_ids_available": [row["id"] for row in events]},
-                    maintenance_schema)
+                plan = self._stage_call(
+                    "maintenance", message_key,
+                    self._maintenance_prompt(prompt, candidate_only=True),
+                    self._maintenance_payload(pending, candidates, events),
+                    self._maintenance_schema(update_ids))
             except (ControlResponseError, httpx.TimeoutException) as error:
                 return degraded("maintenance", self._control_reason(error))
             edits = plan.get("edits")
@@ -362,7 +427,7 @@ class LocalStateController:
             "additionalProperties": False}
         if updated:
             try:
-                choice = self._lru_call(
+                choice = self._stage_call(
                     "read_selector", message_key,
                     "From the updated State directory and current task, select the State "
                     "ids needed for the current answer or action. Empty and multiple "

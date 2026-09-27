@@ -276,6 +276,14 @@ U/A与Host保留任务；G/L全读改为edits-only，legacy focus显式兼容。
 相同文本新事件反例，不重跑36条。缺ID工具错误观察另作局部切片，不宽泛吞掉Store异常。
 LR、共享合法档案/强历史基线、授权删除及P4–P7仍待实现；不以这些失败终止完整Goal。
 
+[维护输入隔离R1协议](../data/manifests/local-state-attention-maintenance-events-r1-protocol.json)已固定
+原高耦合G/L/LRU各一次，加一条LRU相同文本/不同来源ID增量反例，共4轨迹23消息。
+Sol仅改controller/CLI/config/相邻窄测：G/L/LRU写维护payload不含current_task，G/L全读使用
+edits-only且controller_focus为空；U/A和Host仍有当前任务，legacy focus联合合同保留。
+47项受影响检查、目标静态、三臂/tmp零模型prepare及一次必要build通过，哈希在协议。
+现在先发布、正式prepare绑定实际源码/输入/配置，再由Root串行执行；四轨迹完成前源码冻结。
+请求边界通过不代表模型增量语义或最终行动已经通过；缺ID工具异常仍未在此切片修复。
+
 ## 后期资源准备记录
 
 已核对 [LangMem 官方 API](https://langchain-ai.github.io/langmem/reference/) 确实区分

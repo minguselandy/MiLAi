@@ -1,0 +1,59 @@
+{
+  "kind": "MILAI_LOCAL_STATE_ATTENTION_SCRIPT",
+  "script_id": "maintenance-distinct-increments-v1",
+  "users": [
+    "riley"
+  ],
+  "initial_label_available": true,
+  "phases": [
+    {
+      "id": 0,
+      "operator_memory": [],
+      "world_events": [],
+      "messages": [
+        {
+          "message_id": "initial-plan",
+          "user_id": "riley",
+          "session_id": "session-0",
+          "public_index": 0,
+          "text": "Keep for later: Cobalt delivery kits, 2 units to storage S-2 in fiber cases. Nothing is reserved. Acknowledge without taking a business action."
+        },
+        {
+          "message_id": "first-increment",
+          "user_id": "riley",
+          "session_id": "session-0",
+          "public_index": 1,
+          "text": "Add one unit to the current Cobalt delivery kits plan. Keep its destination and packing unchanged. Record this change without taking any business action."
+        },
+        {
+          "message_id": "first-read",
+          "user_id": "riley",
+          "session_id": "session-0",
+          "public_index": 2,
+          "text": "What is the current Cobalt delivery kits quantity, destination and packing? Do not change anything or take an action."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "operator_memory": [],
+      "world_events": [],
+      "messages": [
+        {
+          "message_id": "second-increment",
+          "user_id": "riley",
+          "session_id": "session-1",
+          "public_index": 0,
+          "text": "Add one unit to the current Cobalt delivery kits plan. Keep its destination and packing unchanged. Record this change without taking any business action."
+        },
+        {
+          "message_id": "final-action",
+          "user_id": "riley",
+          "session_id": "session-1",
+          "public_index": 1,
+          "text": "Reserve and label Cobalt delivery kits once using the current agreed quantity, destination and packing. Report the actual result and reservation identifier; do not create another reservation."
+        }
+      ]
+    }
+  ]
+}

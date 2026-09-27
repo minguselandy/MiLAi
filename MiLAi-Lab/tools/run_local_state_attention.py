@@ -32,6 +32,7 @@ ARMS = ("b1_control", *READ_POLICIES)
 SHARED_CONTENT_LIMIT_ARMS = {"local_all_sources", "global_note_sources",
                              "local_lru_sources"}
 SOURCE_POLICIES = {"all_sources", "focus_sources"}
+EVENTS_ONLY_ARMS = {"global_note_sources", "local_all_sources", "local_lru_sources"}
 
 
 def _local_granularity(arm: str, config: dict[str, Any]) -> bool:
@@ -113,6 +114,11 @@ def _identity(args: argparse.Namespace, config: dict[str, Any],
         "arm_id": args.arm, "repeat": args.repeat,
         "read_policy": READ_POLICIES.get(args.arm),
         "update_policy": "lru" if args.arm == "local_lru_sources" else "all",
+        "maintenance_input_policy": ("pending_events_candidates_source_ids"
+                                     if args.arm in EVENTS_ONLY_ARMS else
+                                     "current_task_pending_events_states_source_ids"),
+        "maintenance_response_contract": ("edits_only" if args.arm in EVENTS_ONLY_ARMS
+                                          else "edits_and_focus"),
         "creation_policy": ("shared_maintenance_each_pending_batch"
                             if args.arm == "local_lru_sources" else None),
         "local_granularity": (_local_granularity(args.arm, config)
@@ -282,7 +288,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                                         else "local"),
                         local_granularity=_local_granularity(args.arm, config),
                         update_policy=("lru" if args.arm == "local_lru_sources"
-                                       else "all"))
+                                       else "all"),
+                        maintenance_only=args.arm in EVENTS_ONLY_ARMS)
                     try:
                         result = run_phase(script, args.runtime_root, args.run, args.arm,
                                            args.phase, runtime, controller,
