@@ -1,6 +1,6 @@
 # v2 N3 / X4：固定前态的更新选择
 
-状态：**输入与 rubric 字节已固定，实现与必要局部检查通过；等待方法发布和正式执行冻结，真实运行 NOT_RUN。**
+状态：**已按 dfbc59d 固定方法完成八条真实维护诊断；输入/rubric未改。结果见 [N3结果](MILAI_NEXT_DEVELOPMENT_V2_N3_RESULTS_20260928.md)。**
 依据 [v2 计划 §9](MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md)，独立于已完成的
 [N2 读取结果](MILAI_NEXT_DEVELOPMENT_V2_N2_RESULTS_20260928.md)。运行时不读取 rubric，也不按 case ID/gold 决定动作。
 

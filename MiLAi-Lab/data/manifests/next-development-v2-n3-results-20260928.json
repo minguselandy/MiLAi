@@ -1,0 +1,783 @@
+{
+  "kind": "MILAI_V2_N3_FIXED_UPDATE_RESULTS",
+  "status": "COMPLETE",
+  "method_commit": "dfbc59d39f445dd6d2c3642069e11a8a4da4ed7d",
+  "method_pr": 64,
+  "run_id": "next-development-v2-n3-fixed-update-r1",
+  "exposure": "Two prefixes sharing one previously exposed prestate; second observation is constructed. Eight conditions are not eight independent samples.",
+  "decision": "PIVOT independent U in this small-bank slice; all and actual U=A satisfy both content and source binding, all is cheaper. Continue N5 with simple shared Host CRUD and H/all State-body prefill comparison; no selector/feedback enhancement.",
+  "freeze_sha256": "4e7bf2866b70e5325c503940c0621c99269cb98192bb0838331c0dad32736b0d",
+  "prepared_identity_sha256": "4f896268f727b380e2008e8d0e9f6d9c1823f33992b8b19f9632645c6a209962",
+  "input_hashes": {
+    "inputs.json": "f0a835f550bfb7ce1a7046bfd504ddff1cf11089979884cc62b17edac0a58e4f",
+    "config.json": "d339c9b260e221b58591cebc0fde5f02c034e46376529b9d9a30c341129d97bc",
+    "rubric.json": "1ce5e0fae92040944bd5f72c05d70cf2e180c988ffe73b96518a2f1e7c3681a7"
+  },
+  "scoring": "Root reviewed frozen rubric against actual readback. Source-linked means actual evidence_refs binding; automatic conservative dependency_source_ids with dependency_unknown=true and an inline Source string are separately reported, not accepted as explicit binding. Runtime never read rubric. No Judge call.",
+  "aggregates": {
+    "all": {
+      "diagnostics": 2,
+      "content_preservation_pass": 2,
+      "source_binding_pass": 2,
+      "strict_pass": 2,
+      "calls": 2,
+      "tokens": 1846,
+      "selector_tokens": 0,
+      "maintenance_tokens": 1846
+    },
+    "u_selector": {
+      "diagnostics": 2,
+      "content_preservation_pass": 2,
+      "source_binding_pass": 1,
+      "strict_pass": 1,
+      "calls": 4,
+      "tokens": 2110,
+      "selector_tokens": 736,
+      "maintenance_tokens": 1374
+    },
+    "u_equals_a": {
+      "diagnostics": 2,
+      "content_preservation_pass": 2,
+      "source_binding_pass": 2,
+      "strict_pass": 2,
+      "calls": 4,
+      "tokens": 2466,
+      "selector_tokens": 887,
+      "maintenance_tokens": 1579
+    },
+    "oracle_u": {
+      "diagnostics": 2,
+      "content_preservation_pass": 2,
+      "source_binding_pass": 1,
+      "strict_pass": 1,
+      "calls": 2,
+      "tokens": 1386,
+      "selector_tokens": 0,
+      "maintenance_tokens": 1386
+    }
+  },
+  "totals": {
+    "calls": 12,
+    "prompt_tokens": 6666,
+    "completion_tokens": 1142,
+    "tokens": 7808,
+    "http_wall_seconds": 9.037664741743356
+  },
+  "embedding_calls": 0,
+  "embedding_tokens": 0,
+  "provider_ids_unique": true,
+  "seed_state_puts": 24,
+  "seed_event_puts": 24,
+  "seed_ordinary_memory_puts": 0,
+  "store_stats_including_seed_ack_and_observation": {
+    "get": {
+      "calls": 72,
+      "failures": 0,
+      "cpu_ns": 103417354,
+      "wall_ns": 131302219,
+      "request_bytes": 14484,
+      "result_bytes": 9820
+    },
+    "search": {
+      "calls": 104,
+      "failures": 0,
+      "cpu_ns": 51881617,
+      "wall_ns": 133421550,
+      "request_bytes": 15724,
+      "result_bytes": 96053
+    },
+    "put": {
+      "calls": 56,
+      "failures": 0,
+      "cpu_ns": 14981857,
+      "wall_ns": 103791862,
+      "request_bytes": 34705,
+      "result_bytes": 0
+    }
+  },
+  "cost_limits": [
+    "Bank metrics overlap seed/observation; do not add them again",
+    "Direct initial State puts (24) are outside Bank counters; seed events and acknowledgement inside Bank counters",
+    "All arms still scan full bank; candidate payload savings are not physical Store I/O savings",
+    "Full-process latency, physical I/O and original formation cost not measured; unknown, not zero",
+    "No Host/business/ordinary memory semantic success claim"
+  ],
+  "ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "before_sha256": "9488b804f5b3c6eecdbcc79b833220f2cab13ac7b39c9bac7e75a35b6e16064f",
+    "after_sha256": "b41871849789b7961c088c6c2750f28f98fc94fb268f73c51004b120d543adc7",
+    "before": {
+      "calls": 2818,
+      "generation_tokens": 3504405,
+      "embedding_tokens": 20093
+    },
+    "after": {
+      "calls": 2830,
+      "generation_tokens": 3512213,
+      "embedding_tokens": 20093
+    },
+    "unknown_current_usage": {
+      "generation": 0,
+      "embedding": 0
+    },
+    "sealed_history_unchanged": true
+  },
+  "rows": [
+    {
+      "job": {
+        "job_id": "1-background_change-all",
+        "case_id": "background_change",
+        "arm": "all"
+      },
+      "status": "APPLIED",
+      "selected_update_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319",
+        "169a6115675346968485a59178db8b2a"
+      ],
+      "candidate_body_bytes": 679,
+      "proposal": {
+        "edits": [
+          {
+            "id": "11c2efda1912469ea39b09f79cb9d319",
+            "title": "Workshop field kits",
+            "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+            "needs": [],
+            "evidence": [
+              "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+            ]
+          }
+        ]
+      },
+      "changed_or_new_state": {
+        "id": "11c2efda1912469ea39b09f79cb9d319",
+        "needs": [],
+        "title": "Workshop field kits",
+        "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+        "archived": false,
+        "revision": 2,
+        "evidence_refs": [
+          "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+        ],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "id": "11c2efda1912469ea39b09f79cb9d319",
+          "status": "updated",
+          "revision": 2
+        }
+      ],
+      "score": {
+        "necessary_content": true,
+        "unrelated_records_exact_preservation": true,
+        "explicit_source_binding": true,
+        "strict": true,
+        "ordinary_memory": "NA",
+        "host_business": "NOT_RUN"
+      },
+      "pending_after": [],
+      "cost": {
+        "calls": 1,
+        "prompt_tokens": 804,
+        "completion_tokens": 148,
+        "tokens": 952,
+        "http_wall_seconds": 1.4967971378937364
+      },
+      "cost_by_stage": {
+        "maintenance": {
+          "requests": 1,
+          "known_tokens": 952,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "provider_ids": [
+        "chatcmpl-aded6acd94f0c88b"
+      ],
+      "artifacts_sha256": {
+        "result.json": "1251722106884378a9d19cc26d00b97144c158a572920f0b792eeb0d97b4051b",
+        "trace.jsonl": "78de1d08cdbf0ff85f5bcf480bac77273337d135a665f5e7a1b8be1157ba43c6",
+        "seed-receipt.json": "26bb17e44c7235d17f35e96a0a1582506fd6956254f5b35e5afb2a393b43ed3d"
+      }
+    },
+    {
+      "job": {
+        "job_id": "2-background_change-u_selector",
+        "case_id": "background_change",
+        "arm": "u_selector"
+      },
+      "status": "APPLIED",
+      "selected_update_ids": [
+        "11c2efda1912469ea39b09f79cb9d319"
+      ],
+      "candidate_body_bytes": 217,
+      "proposal": {
+        "edits": [
+          {
+            "id": "11c2efda1912469ea39b09f79cb9d319",
+            "title": "Workshop field kits",
+            "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+            "needs": [],
+            "evidence": [
+              "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+            ]
+          }
+        ]
+      },
+      "changed_or_new_state": {
+        "id": "11c2efda1912469ea39b09f79cb9d319",
+        "needs": [],
+        "title": "Workshop field kits",
+        "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+        "archived": false,
+        "revision": 2,
+        "evidence_refs": [
+          "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+        ],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "id": "11c2efda1912469ea39b09f79cb9d319",
+          "status": "updated",
+          "revision": 2
+        }
+      ],
+      "score": {
+        "necessary_content": true,
+        "unrelated_records_exact_preservation": true,
+        "explicit_source_binding": true,
+        "strict": true,
+        "ordinary_memory": "NA",
+        "host_business": "NOT_RUN"
+      },
+      "pending_after": [],
+      "cost": {
+        "calls": 2,
+        "prompt_tokens": 978,
+        "completion_tokens": 183,
+        "tokens": 1161,
+        "http_wall_seconds": 1.4349369425326586
+      },
+      "cost_by_stage": {
+        "update_selector": {
+          "requests": 1,
+          "known_tokens": 387,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "maintenance": {
+          "requests": 1,
+          "known_tokens": 774,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "provider_ids": [
+        "chatcmpl-840010b6684a6e50",
+        "chatcmpl-a87bea0250c39fe2"
+      ],
+      "artifacts_sha256": {
+        "result.json": "1f95554f5c21a893691fe950f70ea666b21c6a818240ab219569ff94a928132a",
+        "trace.jsonl": "928c5c1fc01726ed0a9de3ed3891b677e8f2ce2c34d3821064839fa1f9fa1448",
+        "seed-receipt.json": "b14cc1702c92bccdd109c7f40d1c7ba9a71edc9c9bb559885465d0012f53c8c3"
+      }
+    },
+    {
+      "job": {
+        "job_id": "3-background_change-u_equals_a",
+        "case_id": "background_change",
+        "arm": "u_equals_a"
+      },
+      "status": "APPLIED",
+      "selected_update_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319"
+      ],
+      "candidate_body_bytes": 443,
+      "proposal": {
+        "edits": [
+          {
+            "id": "11c2efda1912469ea39b09f79cb9d319",
+            "title": "Workshop field kits",
+            "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+            "needs": [],
+            "evidence": [
+              "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+            ]
+          }
+        ]
+      },
+      "changed_or_new_state": {
+        "id": "11c2efda1912469ea39b09f79cb9d319",
+        "needs": [],
+        "title": "Workshop field kits",
+        "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+        "archived": false,
+        "revision": 2,
+        "evidence_refs": [
+          "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+        ],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "id": "11c2efda1912469ea39b09f79cb9d319",
+          "status": "updated",
+          "revision": 2
+        }
+      ],
+      "score": {
+        "necessary_content": true,
+        "unrelated_records_exact_preservation": true,
+        "explicit_source_binding": true,
+        "strict": true,
+        "ordinary_memory": "NA",
+        "host_business": "NOT_RUN"
+      },
+      "pending_after": [],
+      "cost": {
+        "calls": 2,
+        "prompt_tokens": 1106,
+        "completion_tokens": 215,
+        "tokens": 1321,
+        "http_wall_seconds": 1.5554290441796184
+      },
+      "cost_by_stage": {
+        "read_selector": {
+          "requests": 1,
+          "known_tokens": 461,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "maintenance": {
+          "requests": 1,
+          "known_tokens": 860,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "provider_ids": [
+        "chatcmpl-b23de414356ca21e",
+        "chatcmpl-b3af40f8f40861ea"
+      ],
+      "artifacts_sha256": {
+        "result.json": "cd02b4e582e8eefb76cd9b96fb711729f8d07136be69a8e050bf0cac9fc8fb40",
+        "trace.jsonl": "44cb148ca41ae6fc4e844300b0c92c3eb83d6b4b9e45bb22938ec7831e97e5dc",
+        "seed-receipt.json": "e67a782f9d5e359af22c7891bec040fc3546b320b444f6b48077e287096c5b1c"
+      }
+    },
+    {
+      "job": {
+        "job_id": "4-background_change-oracle_u",
+        "case_id": "background_change",
+        "arm": "oracle_u",
+        "diagnostic_only": true,
+        "oracle_update_ids": [
+          "11c2efda1912469ea39b09f79cb9d319"
+        ]
+      },
+      "status": "APPLIED",
+      "selected_update_ids": [
+        "11c2efda1912469ea39b09f79cb9d319"
+      ],
+      "candidate_body_bytes": 217,
+      "proposal": {
+        "edits": [
+          {
+            "id": "11c2efda1912469ea39b09f79cb9d319",
+            "title": "Workshop field kits",
+            "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+            "needs": [],
+            "evidence": [
+              "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+            ]
+          }
+        ]
+      },
+      "changed_or_new_state": {
+        "id": "11c2efda1912469ea39b09f79cb9d319",
+        "needs": [],
+        "title": "Workshop field kits",
+        "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+        "archived": false,
+        "revision": 2,
+        "evidence_refs": [
+          "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+        ],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "id": "11c2efda1912469ea39b09f79cb9d319",
+          "status": "updated",
+          "revision": 2
+        }
+      ],
+      "score": {
+        "necessary_content": true,
+        "unrelated_records_exact_preservation": true,
+        "explicit_source_binding": true,
+        "strict": true,
+        "ordinary_memory": "NA",
+        "host_business": "NOT_RUN"
+      },
+      "pending_after": [],
+      "cost": {
+        "calls": 1,
+        "prompt_tokens": 626,
+        "completion_tokens": 148,
+        "tokens": 774,
+        "http_wall_seconds": 1.0576871549710631
+      },
+      "cost_by_stage": {
+        "maintenance": {
+          "requests": 1,
+          "known_tokens": 774,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "provider_ids": [
+        "chatcmpl-b9c91432b192fa70"
+      ],
+      "artifacts_sha256": {
+        "result.json": "22f5e8bdf3f6587c1c2f747a739c8c3f13a193c9813c7a1e236034dd40e7885f",
+        "trace.jsonl": "0ca0a6f10816440fc637e2b58749bf184cd9d276f152b10b256dfa74617a4eec",
+        "seed-receipt.json": "7d01e46cad1912c3cf3eb8ba014f3bcd59aa7edb162e3d123341a90c4c39673b"
+      }
+    },
+    {
+      "job": {
+        "job_id": "5-new_topic-all",
+        "case_id": "new_topic",
+        "arm": "all"
+      },
+      "status": "APPLIED",
+      "selected_update_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319",
+        "169a6115675346968485a59178db8b2a"
+      ],
+      "candidate_body_bytes": 679,
+      "proposal": {
+        "edits": [
+          {
+            "id": null,
+            "title": "Workshop accessibility contact",
+            "content": "Assistance desk A-6, open 08:00 to 16:00. Acknowledged; no reservation or labeling.",
+            "needs": [],
+            "evidence": [
+              "message:wp4-new-topic-3f3408b7afcde315"
+            ]
+          }
+        ]
+      },
+      "changed_or_new_state": {
+        "id": "6788654da91d4b3582717a024dccd360",
+        "needs": [],
+        "title": "Workshop accessibility contact",
+        "content": "Assistance desk A-6, open 08:00 to 16:00. Acknowledged; no reservation or labeling.",
+        "archived": false,
+        "revision": 1,
+        "evidence_refs": [
+          "message:wp4-new-topic-3f3408b7afcde315"
+        ],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:wp4-new-topic-3f3408b7afcde315"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "id": "6788654da91d4b3582717a024dccd360",
+          "status": "created",
+          "revision": 1
+        }
+      ],
+      "score": {
+        "necessary_content": true,
+        "unrelated_records_exact_preservation": true,
+        "explicit_source_binding": true,
+        "strict": true,
+        "ordinary_memory": "NA",
+        "host_business": "NOT_RUN"
+      },
+      "pending_after": [],
+      "cost": {
+        "calls": 1,
+        "prompt_tokens": 779,
+        "completion_tokens": 115,
+        "tokens": 894,
+        "http_wall_seconds": 0.8552501508966088
+      },
+      "cost_by_stage": {
+        "maintenance": {
+          "requests": 1,
+          "known_tokens": 894,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "provider_ids": [
+        "chatcmpl-8db4e7e7a413c478"
+      ],
+      "artifacts_sha256": {
+        "result.json": "722ae6a65a13ff29a0bc0a2a122633b32aaea223269eacacfc2b7ac6f274aef0",
+        "trace.jsonl": "70dbf0bc4e3d5a254ab6b7cfca53eae1c29aa40ccc7d47a2ba308cff1ad4d6e3",
+        "seed-receipt.json": "6d1f459ae947eae830801d8d44f68c42efcb25753252200e330f095151a6638c"
+      }
+    },
+    {
+      "job": {
+        "job_id": "6-new_topic-u_selector",
+        "case_id": "new_topic",
+        "arm": "u_selector"
+      },
+      "status": "APPLIED",
+      "selected_update_ids": [],
+      "candidate_body_bytes": 2,
+      "proposal": {
+        "edits": [
+          {
+            "id": null,
+            "title": "Workshop accessibility contact details",
+            "content": "Accessibility assistance desk is A-6, open from 08:00 to 16:00. This is for later reference.",
+            "needs": []
+          }
+        ]
+      },
+      "changed_or_new_state": {
+        "id": "4296be18326f439d9fffd9e977ad29ef",
+        "needs": [],
+        "title": "Workshop accessibility contact details",
+        "content": "Accessibility assistance desk is A-6, open from 08:00 to 16:00. This is for later reference.",
+        "archived": false,
+        "revision": 1,
+        "evidence_refs": [],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:wp4-new-topic-3f3408b7afcde315"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "id": "4296be18326f439d9fffd9e977ad29ef",
+          "status": "created",
+          "revision": 1
+        }
+      ],
+      "score": {
+        "necessary_content": true,
+        "unrelated_records_exact_preservation": true,
+        "explicit_source_binding": false,
+        "strict": false,
+        "ordinary_memory": "NA",
+        "host_business": "NOT_RUN"
+      },
+      "pending_after": [],
+      "cost": {
+        "calls": 2,
+        "prompt_tokens": 861,
+        "completion_tokens": 88,
+        "tokens": 949,
+        "http_wall_seconds": 0.7662494196556509
+      },
+      "cost_by_stage": {
+        "update_selector": {
+          "requests": 1,
+          "known_tokens": 349,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "maintenance": {
+          "requests": 1,
+          "known_tokens": 600,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "provider_ids": [
+        "chatcmpl-ba6bf82b7e6057f9",
+        "chatcmpl-88e0d55cf6eb1932"
+      ],
+      "artifacts_sha256": {
+        "result.json": "c69cad6736d203010aa656178928c5579dc69b935fd47af97f771ef0373bc8e7",
+        "trace.jsonl": "cbae0f1b5f2274a6c7e808fd674e50c60867c7c2dc7503a9f7ac42942dfc3e89",
+        "seed-receipt.json": "007b631f13a522714f2efe5ded88914e05ea70837826285167be440c98ab6797"
+      }
+    },
+    {
+      "job": {
+        "job_id": "7-new_topic-u_equals_a",
+        "case_id": "new_topic",
+        "arm": "u_equals_a"
+      },
+      "status": "APPLIED",
+      "selected_update_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a"
+      ],
+      "candidate_body_bytes": 226,
+      "proposal": {
+        "edits": [
+          {
+            "id": null,
+            "title": "Workshop accessibility contact",
+            "content": "Assistance desk A-6, open 08:00 to 16:00. User request for later; no action taken.",
+            "needs": [],
+            "evidence": [
+              "message:wp4-new-topic-3f3408b7afcde315"
+            ]
+          }
+        ]
+      },
+      "changed_or_new_state": {
+        "id": "1f08db3d49aa4a4890d7453265f047a4",
+        "needs": [],
+        "title": "Workshop accessibility contact",
+        "content": "Assistance desk A-6, open 08:00 to 16:00. User request for later; no action taken.",
+        "archived": false,
+        "revision": 1,
+        "evidence_refs": [
+          "message:wp4-new-topic-3f3408b7afcde315"
+        ],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:wp4-new-topic-3f3408b7afcde315"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "id": "1f08db3d49aa4a4890d7453265f047a4",
+          "status": "created",
+          "revision": 1
+        }
+      ],
+      "score": {
+        "necessary_content": true,
+        "unrelated_records_exact_preservation": true,
+        "explicit_source_binding": true,
+        "strict": true,
+        "ordinary_memory": "NA",
+        "host_business": "NOT_RUN"
+      },
+      "pending_after": [],
+      "cost": {
+        "calls": 2,
+        "prompt_tokens": 993,
+        "completion_tokens": 152,
+        "tokens": 1145,
+        "http_wall_seconds": 1.162975353654474
+      },
+      "cost_by_stage": {
+        "read_selector": {
+          "requests": 1,
+          "known_tokens": 426,
+          "unknown_usage": 0,
+          "errors": 0
+        },
+        "maintenance": {
+          "requests": 1,
+          "known_tokens": 719,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "provider_ids": [
+        "chatcmpl-9620a0a9b544da66",
+        "chatcmpl-a5215a534c4e6110"
+      ],
+      "artifacts_sha256": {
+        "result.json": "6fe86ebab2079005423814741c50ce7fd68a0fdd979cc0462e3208d6f7dd4151",
+        "trace.jsonl": "ba7cde56193506a4ce9f3bd13756a7ec675f885e6d2f56096f7a4714a0d872e5",
+        "seed-receipt.json": "ec77f3a5201edb56e4f36ab0347347f7309403094eacdef2188b32fbe1f029fb"
+      }
+    },
+    {
+      "job": {
+        "job_id": "8-new_topic-oracle_u",
+        "case_id": "new_topic",
+        "arm": "oracle_u",
+        "diagnostic_only": true,
+        "oracle_update_ids": []
+      },
+      "status": "APPLIED",
+      "selected_update_ids": [],
+      "candidate_body_bytes": 2,
+      "proposal": {
+        "edits": [
+          {
+            "id": null,
+            "title": "Workshop accessibility contact details",
+            "content": "Accessibility assistance desk is A-6, open from 08:00 to 16:00. (Source: message:wp4-new-topic-3f3408b7afcde315)"
+          }
+        ]
+      },
+      "changed_or_new_state": {
+        "id": "6fdcc0bcacde4d0092e3246ee5f79166",
+        "needs": [],
+        "title": "Workshop accessibility contact details",
+        "content": "Accessibility assistance desk is A-6, open from 08:00 to 16:00. (Source: message:wp4-new-topic-3f3408b7afcde315)",
+        "archived": false,
+        "revision": 1,
+        "evidence_refs": [],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:wp4-new-topic-3f3408b7afcde315"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "id": "6fdcc0bcacde4d0092e3246ee5f79166",
+          "status": "created",
+          "revision": 1
+        }
+      ],
+      "score": {
+        "necessary_content": true,
+        "unrelated_records_exact_preservation": true,
+        "explicit_source_binding": false,
+        "strict": false,
+        "ordinary_memory": "NA",
+        "host_business": "NOT_RUN"
+      },
+      "pending_after": [],
+      "cost": {
+        "calls": 1,
+        "prompt_tokens": 519,
+        "completion_tokens": 93,
+        "tokens": 612,
+        "http_wall_seconds": 0.7083395379595459
+      },
+      "cost_by_stage": {
+        "maintenance": {
+          "requests": 1,
+          "known_tokens": 612,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "provider_ids": [
+        "chatcmpl-86c27c286d02e342"
+      ],
+      "artifacts_sha256": {
+        "result.json": "fa942a98960e80b72d15e38a7cab4321e10b6522715ff7588e5e05ca59d95cd1",
+        "trace.jsonl": "298cab4aa6e6b1b4e00d568c7f65d73bfe7a8539d6f15a7e66280f807838f903",
+        "seed-receipt.json": "335edf6929a249626ba59a70bb95fdd4bdd5c40aae442835d3cec8907abbd1eb"
+      }
+    }
+  ]
+}

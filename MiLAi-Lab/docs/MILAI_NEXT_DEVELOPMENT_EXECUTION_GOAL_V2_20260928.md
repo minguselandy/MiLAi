@@ -24,10 +24,10 @@ Root已完整读取527行、向用户说明文件名差异并提出可选澄清�
 
 | 包/要求 | 证明完成需要什么 | 当前状态 |
 | --- | --- | --- |
-| N0 / G1现场与基线 | 8个WIP实物身份、真实PR拓扑；等价提取与行为分开；同输入请求差分、相关窄检；新协议prepare覆盖源码/schema/模型/输入/评分 | 8/8哈希一致；35场景/45控制请求等价；N2源码/prepare/真实路径已完成。N3实现及相关检查收敛中，其新执行freeze尚未完成 |
+| N0 / G1现场与基线 | 8个WIP实物身份、真实PR拓扑；等价提取与行为分开；同输入请求差分、相关窄检；新协议prepare覆盖源码/schema/模型/输入/评分 | 8/8哈希一致；35场景/45控制请求等价；N2源码/prepare/真实路径已完成。N3源码/正式prepare/154项身份与八条真实路径也已完成 |
 | N1消费与维护 | 既有真实HTTP、来源和部分成功回执核对；确认已有strict护栏；仅有明确竞争因素才调用新模型 | 窄机械检查与一个历史boundary失败的实际HTTP核对完成；实际回执已交付，保留语义消费瓶颈，不加提示变体 |
 | N2 / X3固定bank读取 | 两前缀全读/query/同State增强/实际A/完整历史共10条路径；共同读取能力、维护冻结、实际交付与最终回答/续接、全部费用 | 已完成5753602冻结的10条完整路径；五条件各2/2，H1836/query3189/all3447/enh3889/A5540 tokens；本切片Pivot独立A，保留一次错误READ |
-| N3 / X4固定前态更新 | 两前缀all/U/U=A/oracle共8条诊断；同前态/整体维护/权限；空U可CREATE；实际提交/保持/误改/pending/费用 | 原草案保留；正式三JSON与rubric字节已固定，新runner与受影响窄检/prepare/必要build通过；等待源码发布及正式执行freeze，真实0/8 |
+| N3 / X4固定前态更新 | 两前缀all/U/U=A/oracle共8条诊断；同前态/整体维护/权限；空U可CREATE；实际提交/保持/误改/pending/费用 | dfbc59d冻结八条完成；正文/保持四臂2/2，来源严格all与U=A各2/2、U与oracle各1/2；all1846tokens最省，本切片Pivot独立U |
 | N4有限交付版本反馈 | 仅有相关问题才触发；UPDATE/DELETE/CREATE/NO_CHANGE/拒绝/恢复/超限机械检查；独立开关和真实续接 | NOT_TRIGGERED；不是N2/N3前置 |
 | N5 / X5 / G3连续任务 | 一个强简单基线与至多一个获筛选候选，同版本从形成到复用、变化、owner/临时约束、真实副作用/恢复/授权退出；原生单元与构造补充明确分列 | NOT_RUN；11消息旧草案不是已冻结协议 |
 | WP7全生命周期 | 形成/维护/使用/恢复互斥归属、request ID不重复记账、摊销R、质量并列；Store/CPU/wall/逻辑字节/观测边界 | NOT_DONE |
@@ -152,3 +152,11 @@ A背景Host误用target_kind=memory，真实not_found已送达；与query首Host
 N2方法固定5753602，N3新源码/输入独立冻结；不修改本轮结果或实验bank，不把N2成功升级为N5/G3/全生命周期验收。
 
 N3工程准入见[冻结协议](MILAI_NEXT_DEVELOPMENT_V2_N3_FIXED_UPDATE_20260928.md)与[检查回执](../data/manifests/next-development-v2-n3-checks-20260928.json)。不将Mock检查计作真实模型样本。
+
+## N3完成，进入N5最小连续比较
+
+[N3结果](MILAI_NEXT_DEVELOPMENT_V2_N3_RESULTS_20260928.md)保留两条创建成功但缺结构化来源绑定的失败。
+新增12生成/7808tokens/0embedding，连续2830/3512213/20093。全部8job终态，未重试或回写旧分数。
+Root选择关闭独立A/U/N4，N5保留共同Host双库CRUD与Archive-access的H_shared/all_shared；
+唯一读取差异为State正文预交付，不称原生B1或selector胜利。原生arc与构造owner/临时/退出/恢复补充另列。
+N5尚未实现验收/WP7未完成，N6不自动触发，Goal继续active。
