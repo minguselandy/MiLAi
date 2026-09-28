@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "assistant_interpretation-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "For a provisional dispatch glossary, write one sentence explaining READY using this tentative convention: READY means the parcel has already left the depot. This is a draft explanation only; do not save it as a standing definition or take business action."
+          },
+          {
+            "message_id": "assistant_interpretation-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Correction for our actual dispatch workflow: READY means inspection is complete and the parcel is still at the depot; it does not mean dispatched. Save this corrected standing definition for future tasks and explicitly confirm its meaning. Do not take business action."
+          },
+          {
+            "message_id": "assistant_interpretation-3",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 1,
+            "text": "Our actual dispatch board marks a parcel READY. Using the corrected standing definition, tell me whether inspection is finished and whether the parcel has left the depot. Do not use the provisional glossary explanation as current truth. Read only: do not change memory or take business action."
+          }
+        ]
+      }
+    ]
+  }
+}

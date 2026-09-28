@@ -1,0 +1,47 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "temporary_override-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember a standing preference for my checklist explanations: answer in exactly two bullet points. Apply it in future sessions unless I explicitly override it for a particular reply. Save it and confirm without taking business action."
+          },
+          {
+            "message_id": "temporary_override-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "For this reply only, explain a pre-departure checklist in one short paragraph with no bullet points. Do not save this one-reply override or change my standing preference; do not take business action."
+          },
+          {
+            "message_id": "temporary_override-3",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 1,
+            "text": "Now explain a return-inspection checklist using my standing preference again. Mention checking damage and missing items. Read only: do not change memory or take business action."
+          },
+          {
+            "message_id": "temporary_override-4",
+            "user_id": "rowan",
+            "session_id": "session-4",
+            "public_index": 0,
+            "text": "Explain a borrowed-equipment return checklist using my standing preference. Mention returning accessories and recording damage. Read only: do not change memory or take business action."
+          }
+        ]
+      }
+    ]
+  }
+}

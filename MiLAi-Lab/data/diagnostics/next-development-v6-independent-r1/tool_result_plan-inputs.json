@@ -1,0 +1,47 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "tool_result_plan-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Save my ongoing relocation plan: 8 Amber probe cases in total to rack P-5, packed in padded fabric sleeves. Keep the total plan for future sessions. Confirm the save without booking anything."
+          },
+          {
+            "message_id": "tool_result_plan-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "For the first shipment only, reserve and label exactly 3 Amber probe cases to rack P-5 in padded fabric sleeves, once. Report the actual result. Keep my saved total relocation plan unchanged; do not write memory, repeat the booking, or book the rest now."
+          },
+          {
+            "message_id": "tool_result_plan-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "Use the business lookup to check the actual reservation for the exact item Amber probe cases, and compare it with my saved total relocation plan. State the total planned quantity, actual reserved quantity, quantity still outside that reservation, and actual label status. Do not describe reservation as physical dispatch. Read only: do not change memory or reserve or label again."
+          },
+          {
+            "message_id": "tool_result_plan-4",
+            "user_id": "rowan",
+            "session_id": "session-4",
+            "public_index": 0,
+            "text": "What total quantity, destination and packing remain in my saved ongoing relocation plan? Give the planning values, not just the first-shipment quantity. Read only: do not call business tools or change memory."
+          }
+        ]
+      }
+    ]
+  }
+}

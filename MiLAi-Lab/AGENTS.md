@@ -15,9 +15,12 @@ embedding/115 tokens are reconciled to the continuous ledger. See the
 S2's sole compact_v6 proposal removes only ordinary value wrappers, empty working containers and
 model-facing tool-body hashes; Audit retains everything. Default full and system remain. Extra
 record fields and nonempty refs are preserved; no protocol wording, actual tool body or ID is removed.
-S2 implementation is engineered and Root accepted:30 narrow tests,131 full/compact replays and86 audits passed.
-See the S2 implementation manifest; source publication/freeze and full S3b12-script/156-task regression precede S4. No prompt patch for
-a compact regression. Root's draft S4 inputs are not frozen or executed. Do not merge future PRs
+S2 source85f45b3 is published with Fast36406544195 success. Complete S3b at that source passed
+12scripts/35messages/156task obligations (current55/later34/persistent67);3 optional diagnostic omissions
+remain. Root reconciled54generation/74019tokens and23embedding/448tokens. See the S3b report.
+Only an offline historical-receipt timestamp assertion was refined; runtime and frozen inputs were unchanged.
+S4 pre-authored12scripts/40messages/193task contracts are now fixed for publication; execution still
+requires exact published-source/runtime freeze. No S4 calls yet. Do not merge future PRs
 automatically from the completed S0-only merge action.
 Root read all 1,497 original plan lines; keep original DRAFT/NOT_STARTED bytes and correct stale
 PR68 metadata only in new records. Main05601148 now contains PR52–68; its tree equals v5 report1abf5c4.

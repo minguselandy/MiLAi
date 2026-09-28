@@ -1,0 +1,48 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan",
+      "ellis"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "multi_owner-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember my personal Field kit plan for future sessions: 5 units to locker B-2, packed in blue fabric bags. Confirm the save without booking anything."
+          },
+          {
+            "message_id": "multi_owner-2",
+            "user_id": "ellis",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember my personal Field kit plan for future sessions: 9 units to locker R-6, packed in red fabric bags. Confirm the save without booking anything."
+          },
+          {
+            "message_id": "multi_owner-3",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Using only my saved personal Field kit plan, state my quantity, destination and packing. Read only: do not change memory or take business action."
+          },
+          {
+            "message_id": "multi_owner-4",
+            "user_id": "ellis",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Using only my saved personal Field kit plan, state my quantity, destination and packing. Read only: do not change memory or take business action."
+          }
+        ]
+      }
+    ]
+  }
+}
