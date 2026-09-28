@@ -13,6 +13,10 @@ from milai_lab.methods.local_state_attention.controller import LocalStateControl
 from milai_lab.methods.local_state_attention.history import HistoryAccess
 from milai_lab.methods.local_state_attention.history import source_id as _source_id
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController
+from milai_lab.methods.local_state_attention.writers import (
+    WriterTools,
+    scoped_memory_records,
+)
 
 SOURCE_VIEW_HEADER = "Referenced source events from delivered States:"
 
@@ -92,6 +96,8 @@ def make_pre_model_hook(controller: LocalStateController,
 
 def collect_observations(bank: LocalStateBank, scope: StateScope,
                          thread_id: str, messages: list[BaseMessage],
+                         *, skip_before: int = 0,
+                         include_tool_status: bool = False,
                          ) -> tuple[tuple[str, str] | None, list[BaseMessage], set[str]]:
     """Collect actual checkpoint user/tool sources without creating tool evidence."""
     latest_user: tuple[str, str] | None = None
@@ -99,6 +105,9 @@ def collect_observations(bank: LocalStateBank, scope: StateScope,
     forgotten_positions: list[int] = []
     current_source_ids: set[str] = set()
     for position, message in enumerate(messages):
+        if position < skip_before:
+            input_messages.append(message)
+            continue
         if not isinstance(message, (HumanMessage, ToolMessage)):
             input_messages.append(message)
             continue
@@ -111,13 +120,15 @@ def collect_observations(bank: LocalStateBank, scope: StateScope,
             continue
         input_messages.append(message)
         kind = "user" if isinstance(message, HumanMessage) else "tool"
-        bank.record_event(scope, {"id": source_id, "kind": kind,
-                                  "content": message.content, "thread_id": thread_id,
-                                  "actor": (scope.user_id if kind == "user"
-                                            else message.name or "tool"),
-                                  "tool_call_id": (message.tool_call_id
-                                                   if isinstance(message, ToolMessage)
-                                                   else None)})
+        event = {"id": source_id, "kind": kind,
+                 "content": message.content, "thread_id": thread_id,
+                 "actor": (scope.user_id if kind == "user"
+                           else message.name or "tool"),
+                 "tool_call_id": (message.tool_call_id
+                                  if isinstance(message, ToolMessage) else None)}
+        if include_tool_status and isinstance(message, ToolMessage):
+            event["status"] = message.status
+        bank.record_event(scope, event)
         if isinstance(message, HumanMessage):
             latest_user = (source_id, str(message.content))
     if forgotten_positions:
@@ -127,6 +138,76 @@ def collect_observations(bank: LocalStateBank, scope: StateScope,
         if restart is not None:
             input_messages = input_messages[restart:]
     return latest_user, input_messages, current_source_ids
+
+
+def make_writer_view_hook(toolset: WriterTools, system_prompt: str, *,
+                          source_view_max_bytes: int | None = None,
+                          known_prefix_messages: int = 0,
+                          initial_boundary: dict[str, Any] | None = None,
+                          emit: Any = None) -> Any:
+    """Expose actual State without invoking automatic semantic maintenance."""
+    if (type(known_prefix_messages) is not int or known_prefix_messages < 0
+            or (source_view_max_bytes is not None and
+                (type(source_view_max_bytes) is not int or source_view_max_bytes <= 0))):
+        raise ValueError("LSA_WRITER_VIEW_CONFIG_INVALID")
+
+    def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
+        cfg = config["configurable"]
+        scope = StateScope(cfg["foundation_run_id"], cfg["arm_id"], cfg["user_id"])
+        bank = toolset.bank
+        messages: list[BaseMessage] = state["messages"]
+        _, delivered, _ = collect_observations(
+            bank, scope, cfg["thread_id"], messages,
+            skip_before=known_prefix_messages, include_tool_status=True)
+        states = bank.states(scope)
+        pending = bank.pending(scope)
+        events = bank.events(scope)
+        memories = scoped_memory_records(toolset, scope, emit=emit)
+        source_lines: list[str] = []
+        source_trace: dict[str, Any] = {}
+        if source_view_max_bytes is not None:
+            source_lines, source_trace = _source_view(
+                bank, scope, states, source_view_max_bytes)
+        view = _render_view(states, pending, source_lines)
+        directory = [{key: row[key] for key in ("id", "title", "revision")}
+                     for row in states]
+        if directory:
+            view = ("[Scoped State directory for exact writer targets:]\n" +
+                    json.dumps(directory, ensure_ascii=False) + "\n" + view)
+        catalog = [{**{key: row.get(key) for key in (
+            "id", "kind", "actor", "tool_call_id", "content")},
+            "pending": row["pending"],
+            **({"status": row["status"]} if "status" in row else {})}
+            for row in events]
+        common = ["[Actual scoped ordinary memory records (id and value):]",
+                  json.dumps(memories, ensure_ascii=False),
+                  "[Actual scoped source events; pending=true means not yet acknowledged:]",
+                  json.dumps(catalog, ensure_ascii=False)]
+        if initial_boundary is not None:
+            actual_boundary = {key: initial_boundary.get(key) for key in (
+                "status", "reason", "receipts", "pending_event_ids",
+                "acknowledged_event_ids") if key in initial_boundary}
+            common.extend([
+                "[Actual automatic maintenance result before this Host turn; "
+                "NO_CHANGE is not a user answer and a degraded result is not saved:]",
+                json.dumps(actual_boundary, ensure_ascii=False)])
+        view = "\n".join([*common, view] if view else common)
+        if emit is not None:
+            emit({"event": "lsa_writer_view", "user_id": scope.user_id,
+                  "state_ids": [row["id"] for row in states],
+                  "state_directory": directory,
+                  "memory_ids": [row["id"] for row in memories],
+                  "source_catalog_ids": [row["id"] for row in catalog],
+                  "source_catalog_bytes": len(json.dumps(
+                      catalog, ensure_ascii=False).encode("utf-8")),
+                  "view_bytes": len(view.encode("utf-8")),
+                  "initial_boundary": initial_boundary,
+                  "pending_source_ids": [row["id"] for row in pending],
+                  "view": view, **source_trace})
+        return {"llm_input_messages": [SystemMessage(
+            content=system_prompt + ("\n" + view if view else "")), *delivered]}
+
+    return hook
 
 
 def make_full_history_hook(history: HistoryAccess, system_prompt: str) -> Any:

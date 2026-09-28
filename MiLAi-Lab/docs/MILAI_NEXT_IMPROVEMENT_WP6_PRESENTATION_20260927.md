@@ -87,3 +87,7 @@ strict工具呈现共同变化、temperature=0仍非确定性，以及distinct�
 实际raw messages含完整初始计划，输入始终未改。原冻结说明字节保存在
 [协议快照](../data/diagnostics/next-improvement-wp6-presentation-r1/protocol-freeze.txt)，
 冻结manifest中的protocol SHA指该快照；本更正不改变输入、顺序、rubric或计分。
+
+后续事实：上述六臂已全部完成[实际工具与Host续接](MILAI_NEXT_IMPROVEMENT_WP6_CONTINUATION_20260928.md)。
+原首提案未重发，五个错误均忠实落库，严格任务1/6；两阶段合计12次/16451 generation tokens，
+另327 embedding tokens为前态索引恢复。原首响应结果与冻结输入保持原样，不改写为新的方法分数。

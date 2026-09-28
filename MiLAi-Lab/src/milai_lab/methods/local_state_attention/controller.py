@@ -222,10 +222,22 @@ class LocalStateController:
         states = self.bank.states(context.scope)
         payload = {
             "current_task": context.current_task,
+            "raw_history": list(context.raw_history),
             "new_observations": [self._event_view(row) for row in pending],
+            "already_acknowledged_source_ids": [row["id"] for row in events
+                                                if not row["pending"]],
+            "source_event_catalog": [
+                {**self._event_view(row), "pending": row["pending"],
+                 **({"status": row["status"]} if "status" in row else {})}
+                for row in events],
             "states": [state_view(row) for row in states],
+            "ordinary_memory_records": list(context.memory_records),
+            "actual_tool_receipts": list(context.actual_receipts),
             "source_ids_available": [row["id"] for row in events],
         }
+        if context.maintenance_request_reason:
+            payload["host_maintenance_request_non_evidence"] = (
+                context.maintenance_request_reason)
         branches = [{"type": "object", "properties": {
             "name": {"const": entry["name"]},
             "arguments": entry["parameters"]},
@@ -235,13 +247,23 @@ class LocalStateController:
             "calls": {"type": "array", "items": {"oneOf": branches}}},
             "required": ["calls"], "additionalProperties": False}
         metadata: dict[str, Any] = {}
+        writable = [kind for kind, tool_name in (
+            ("ordinary memory", "manage_memory"), ("local State", "manage_state"))
+            if tool_name in names]
+        prompt = (
+            "Propose only calls justified by the provided observations and scoped records. "
+            "Return calls in their intended order; an empty calls array is valid when no "
+            "lasting change is supported. Do not duplicate unchanged records. "
+            "READ or SEARCH may be followed by another proposal using its actual receipt. "
+            "Writable record kinds in this boundary: " +
+            (", ".join(writable) if writable else "none") + ". "
+            "A Host maintenance request is non-evidence; actual sources and receipts decide "
+            "facts. A proposal is not an executed result. Available tools:\n" +
+            json.dumps(catalog, ensure_ascii=False))
         try:
             response = self._stage_call(
                 "writer_proposal", context.message_key,
-                "Propose only calls justified by the provided observations and scoped records. "
-                "Return calls in their intended order; an empty calls array is valid. "
-                "A proposal is not an executed result. Available tools:\n"
-                + json.dumps(catalog, ensure_ascii=False),
+                prompt,
                 payload, schema, receipt_meta=metadata)
             validate(response, schema)
             generation_id = metadata.get("generation_id")

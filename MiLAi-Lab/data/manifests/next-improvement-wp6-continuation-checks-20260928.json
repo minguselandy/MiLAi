@@ -70,5 +70,22 @@
   "shared_postgres_calls": 0,
   "mock_and_local_io": "httpx.MockTransport, InMemoryStore, real local SQLite checkpoint and synthetic ApplicationWorld were used.",
   "local_receipt_sha256": "b190c99cc7e2189d5bcabcf4eb845ef70e2e1d1048f8cdefcf527202b2c1c17c",
-  "publication_note": "Build precedes addition of its own public verification receipt and acceptance paragraph; frozen source/entry/prestate bytes are unchanged. No new build required for subsequent report-only metadata."
+  "publication_note": "Build precedes addition of its own public verification receipt and acceptance paragraph; frozen source/entry/prestate bytes are unchanged. No new build required for subsequent report-only metadata.",
+  "actual_remote_ci": {
+    "head": "ec34c89d96ecbf6030777b8b23c5dc9773d27ac4",
+    "run": 36333288437,
+    "tested_merge": "99d6d036daced715ea5e3f3fcf452104706c7c16",
+    "core_job": 108659286011,
+    "core": "5114 passed, 142 skipped, 14 deselected in 606.42s",
+    "pure_protocol": "71 passed; included in 5114, not additive",
+    "build": "wheel/sdist built",
+    "foundation_job": 108659285975,
+    "foundation": "21+88+7+6+46=168 passed, 1 deselected; new continuation6 executed",
+    "external_job": 108659286057,
+    "external": "success",
+    "final_gate": 108661104754,
+    "final_gate_result": "success",
+    "unselected_jobs": "Product runtime/integration, archive and tree-identity skipped; not passes",
+    "main_merged": false
+  }
 }

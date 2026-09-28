@@ -198,6 +198,7 @@ jobs:
           --ignore=tests/unit/test_local_state_attention.py \
           --ignore=tests/unit/test_local_state_attention_read_probe.py \
           --ignore=tests/unit/test_frozen_action_continuation.py \
+          --ignore=tests/unit/test_writer_policy.py \
           --ignore=tests/unit/test_langmem_application.py \
           --ignore=tests/unit/test_external_memory_v26.py \
           --junitxml="${{ github.workspace }}/lab-test-results/junit.xml"
@@ -241,8 +242,8 @@ jobs:
           uv run --no-sync mypy src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py
           uv run --no-sync pytest -q tests/unit/test_langmem_foundation.py
           uv run --no-sync mypy src/milai_lab
-          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/datasets/merit.py
-          uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py tests/unit/test_local_state_attention_read_probe.py tests/unit/test_frozen_action_continuation.py tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/datasets/merit.py
+          uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py tests/unit/test_local_state_attention_read_probe.py tests/unit/test_frozen_action_continuation.py tests/unit/test_writer_policy.py tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
 
   lab-external:
     name: Lab locked external adapter

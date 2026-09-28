@@ -52,10 +52,10 @@ PR合并仍须正常检查和审阅闭环，当前不自动merge；先完成可�
 | WP0/C0/G0 | 同命令main/PR隔离复现；静态源码—依赖—测试归属无遗漏；core/foundation/external真实依赖；锁定pytest运行71纯协议及原集成、实际收集数；全Ruff、适用Mypy、边界/归档、最终wheel/sdist；真实CI | G0_PASSED（声明的历史资产skip不算通过） |
 | WP1/C1/X0 | 保留protocol/controller分工；CLI职责归包内且单实现；活动AGENTS与历史分开且原内容可恢复；完整请求/顺序/U维护A/来源/pending/容量/回执/trace等价，规范化项明确 | ACCEPTED；C1本地检查/最终构建与实际Fast已通过 |
 | WP2/C2/G1 | 锁定上游实际集成复现未知合法UUID被upsert；薄严格CRUD同步/异步一致；已有/缺失/错误namespace/message UUID/空删除/真实删除/Store异常/无副作用回执；不强制每次额外Host READ，不声称CAS | ENGINEERING_ACCEPTED；C2实际Fast通过，在线语义另验 |
-| WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | C3a PR55初轮失败保留，2c7修复实际Fast通过；C3b NOT_RUN |
+| WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | C3a PR55初轮失败保留，2c7修复实际Fast通过；C3b工程冻结通过，真实比较NOT_RUN |
 | WP4/C5/X3/X4/G2 | 明确A≠U且U空可CREATE；保留原问题实体、全读/普通检索/同State查询增强/可关selector；固定同bank与前态比较all/U/U=A/oracle；对真正使用引用做有限失效，不引全库图 | NOT_DONE |
 | WP5/C4/X2 | 同粒度整体/普通patch/候选局部维护；明确目标版本/唯一片段，广泛变动可整体；更新与无关保持同时测；D0/真实事件身份/部分成功维护续接保留 | 设计收敛：候选与强普通patch合并，两臂；实现/实验NOT_DONE |
-| WP6/X1 | 用户、真实工具结果、助手提案、可修订State角色清楚且原回执完整；固定正确正文比原标题/源标题/无State，首响应后实际动作；无gold键名规则 | 首响应协议R1已冻结，Root串行执行；实际动作续接待验 |
+| WP6/X1 | 用户、真实工具结果、助手提案、可修订State角色清楚且原回执完整；固定正确正文比原标题/源标题/无State，首响应后实际动作；无gold键名规则 | R1六次首响应及全部实际续接完成；严格1/6，标题修复Pivot |
 | WP7 | 独立语义写入/重复规则/依赖、Host/U/maint/A、材料、Store调用/CPU/wall、任务与维护分别测量；全生命周期Cbuild+Cmaint+ΣCuse及复用摊销；只有实测热点才优化 | NOT_DONE |
 | X5/G3/C6 | 正常可用简洁基线＋独立可切换最小候选；同合法历史/权限/CRUD/可比预算；连续在线真实世界/恢复/复用及全成本；逐例首断点和可执行Go/Pivot/Stop | NOT_RUN |
 | G4（条件后续） | 有有效比较与投入信号后，模板未见/跨模型/强外部对照及局限；无端点/原生scorer不称完成 | NOT_TRIGGERED |
@@ -211,3 +211,16 @@ PR55初始Fast36331279476未通过：新controller顶层可选LangChain导入阻
 C3a修复Fast36331881913与最终gate108656930104实际成功，core5114/142skip/14deselect、
 foundation162/1deselect、external成功；C3a工程门槛关闭。WP6续接前态与评分输入已冻结，
 入口源检查/最终构建和执行identity仍须完成，实际续接尚未开始。
+
+### WP6续接完成，C3b开始
+
+[WP6续接](MILAI_NEXT_IMPROVEMENT_WP6_CONTINUATION_20260928.md)在独立ec34c89源码完成六条实际ToolNode/SQLite/后续Host链。
+五个错误提案全部落库，严格任务1/6；三条标签失败均停止，六条实际ID正确。新增6/8846/327，
+连续2780/3436784/19073。停止标题措辞路线，保留角色/原历史混杂，不宣称纯State消融或unseen收益。
+[三种写入责任](MILAI_NEXT_IMPROVEMENT_WP3_WRITER_POLICY_20260928.md)在独立开发branch准备；
+仍待源码/协议冻结与真实运行。完整WP0—WP7目标继续active，任务结束后按用户要求暂停并整体报告。
+
+
+C3b工程已冻结，终版16项定向检查通过，预发布六job零模型prepare通过；
+真实运行仍NOT_RUN。Root公开检查回执及构建前后身份，Luna随后发布独立C3b提交。
+同回合真实维护回执续接已修复，跨进程保证仍留待连续生命周期切片，不据本切片提前宣称。

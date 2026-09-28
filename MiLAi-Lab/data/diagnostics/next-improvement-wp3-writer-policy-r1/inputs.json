@@ -1,0 +1,258 @@
+{
+  "kind": "MILAI_WRITER_POLICY_INPUTS",
+  "status": "INPUT_BYTES_FROZEN_BEFORE_EXECUTION",
+  "historical_trace_sha256": "f1460b8a2e65f768121a98e25ff738f3421a1756d415cb49adde25136d87bebf",
+  "independent_arcs": 1,
+  "prefix_cases": 2,
+  "no_unseen_claim": true,
+  "cases": [
+    {
+      "case_id": "second_increment",
+      "user_id": "riley",
+      "source_host_trace_index": 37,
+      "source_maintenance_trace_index": 43,
+      "selection": "actual State body before selected Host request; ordinary memory only from earlier generation receipts; exclude later tool observations",
+      "raw_history": [
+        {
+          "role": "user",
+          "content": "Add one unit to the current Cobalt delivery kits plan. Keep its destination and packing unchanged. Record this change without taking any business action."
+        }
+      ],
+      "states": [
+        {
+          "id": "7c3d500b6bac43689eb199f5a7003aaa",
+          "title": "Cobalt delivery kits pending storage",
+          "content": "User requested to keep for later: Cobalt delivery kits, 3 units to storage S-2 in fiber cases. Nothing is reserved. Acknowledge without taking a business action. Source: message:7edbb74e-e1f5-4f3b-bbe8-85b858b31ae3, message:1662a172-8dc3-47da-b2a7-493a762affab",
+          "needs": [],
+          "evidence_refs": [
+            "message:1662a172-8dc3-47da-b2a7-493a762affab",
+            "message:7edbb74e-e1f5-4f3b-bbe8-85b858b31ae3"
+          ],
+          "revision": 2,
+          "archived": false
+        }
+      ],
+      "memories": [
+        {
+          "key": "fa676864-9958-4aa2-ac65-1b4f563ff420",
+          "owner": "riley",
+          "value": {
+            "content": "Cobalt delivery kits: 3 units to storage S-2 in fiber cases. Status: Nothing is reserved."
+          }
+        }
+      ],
+      "source_events": [
+        {
+          "id": "message:7edbb74e-e1f5-4f3b-bbe8-85b858b31ae3",
+          "kind": "user",
+          "actor": "riley",
+          "tool_call_id": null,
+          "content": "Keep for later: Cobalt delivery kits, 2 units to storage S-2 in fiber cases. Nothing is reserved. Acknowledge without taking a business action."
+        },
+        {
+          "id": "tool:385860acbedb490ed957dff895b567604348364306cc87976b8c740d7f648f7d",
+          "kind": "tool",
+          "actor": "manage_memory",
+          "tool_call_id": "chatcmpl-aaeb613b8580d7d0:tool:0",
+          "content": "created memory fa676864-9958-4aa2-ac65-1b4f563ff420"
+        },
+        {
+          "id": "message:1662a172-8dc3-47da-b2a7-493a762affab",
+          "kind": "user",
+          "actor": "riley",
+          "tool_call_id": null,
+          "content": "Add one unit to the current Cobalt delivery kits plan. Keep its destination and packing unchanged. Record this change without taking any business action."
+        },
+        {
+          "id": "tool:7c7a7142dea9d478453647b136b164ab638277add2f8cc4a81cf554887785f36",
+          "kind": "tool",
+          "actor": "manage_memory",
+          "tool_call_id": "chatcmpl-85ed984d1eaaf8df:tool:0",
+          "content": "updated memory fa676864-9958-4aa2-ac65-1b4f563ff420"
+        },
+        {
+          "id": "message:84e94cef-2e02-4473-a9ce-5d206c549fde",
+          "kind": "user",
+          "actor": "riley",
+          "tool_call_id": null,
+          "content": "What is the current Cobalt delivery kits quantity, destination and packing? Do not change anything or take an action."
+        },
+        {
+          "id": "message:3e29d505-5f03-4ccd-8242-91daddc443a7",
+          "kind": "user",
+          "actor": "riley",
+          "tool_call_id": null,
+          "content": "Add one unit to the current Cobalt delivery kits plan. Keep its destination and packing unchanged. Record this change without taking any business action."
+        }
+      ],
+      "pending_event_ids": [
+        "message:3e29d505-5f03-4ccd-8242-91daddc443a7"
+      ],
+      "current_task": "Add one unit to the current Cobalt delivery kits plan. Keep its destination and packing unchanged. Record this change without taking any business action.",
+      "historical_operation_ids": [
+        "b231cdc49773a63d277f850606f2b005ddc3a42d62b35c6a1699aeb43d6313e1:1:store:1",
+        "e4d763937e4e5105db3635190be407555b03b3b79676fd5f401b675be8d841f6:1:store:1"
+      ],
+      "business_world": {
+        "reservations": [],
+        "attempts": []
+      },
+      "initial_label_available": false
+    },
+    {
+      "case_id": "no_change",
+      "user_id": "riley",
+      "source_host_trace_index": 27,
+      "source_maintenance_trace_index": 30,
+      "selection": "actual State body before selected Host request; ordinary memory only from earlier generation receipts; exclude later tool observations",
+      "raw_history": [
+        {
+          "role": "user",
+          "content": "Keep for later: Cobalt delivery kits, 2 units to storage S-2 in fiber cases. Nothing is reserved. Acknowledge without taking a business action."
+        },
+        {
+          "role": "assistant",
+          "content": "{\"calls\": [{\"name\": \"manage_memory\", \"arguments\": {\"action\": \"create\", \"content\": \"Cobalt delivery kits: 2 units to storage S-2 in fiber cases. Status: Nothing is reserved.\"}}]}"
+        },
+        {
+          "role": "tool",
+          "name": "manage_memory",
+          "tool_call_id": "chatcmpl-aaeb613b8580d7d0:tool:0",
+          "content": "created memory fa676864-9958-4aa2-ac65-1b4f563ff420"
+        },
+        {
+          "role": "assistant",
+          "content": "Memory created successfully. Cobalt delivery kits (2 units to storage S-2 in fiber cases) have been noted with no reservations."
+        },
+        {
+          "role": "user",
+          "content": "Add one unit to the current Cobalt delivery kits plan. Keep its destination and packing unchanged. Record this change without taking any business action."
+        },
+        {
+          "role": "assistant",
+          "content": "{\"calls\": [{\"name\": \"manage_memory\", \"arguments\": {\"action\": \"update\", \"id\": \"fa676864-9958-4aa2-ac65-1b4f563ff420\", \"content\": \"Cobalt delivery kits: 3 units to storage S-2 in fiber cases. Status: Nothing is reserved.\"}}]}"
+        },
+        {
+          "role": "tool",
+          "name": "manage_memory",
+          "tool_call_id": "chatcmpl-85ed984d1eaaf8df:tool:0",
+          "content": "updated memory fa676864-9958-4aa2-ac65-1b4f563ff420"
+        },
+        {
+          "role": "assistant",
+          "content": "Updated the plan to include 3 units of Cobalt delivery kits for storage S-2 in fiber cases. No business actions were taken."
+        },
+        {
+          "role": "user",
+          "content": "What is the current Cobalt delivery kits quantity, destination and packing? Do not change anything or take an action."
+        }
+      ],
+      "states": [
+        {
+          "id": "7c3d500b6bac43689eb199f5a7003aaa",
+          "title": "Cobalt delivery kits pending storage",
+          "content": "User requested to keep for later: Cobalt delivery kits, 3 units to storage S-2 in fiber cases. Nothing is reserved. Acknowledge without taking a business action. Source: message:7edbb74e-e1f5-4f3b-bbe8-85b858b31ae3, message:1662a172-8dc3-47da-b2a7-493a762affab",
+          "needs": [],
+          "evidence_refs": [
+            "message:1662a172-8dc3-47da-b2a7-493a762affab",
+            "message:7edbb74e-e1f5-4f3b-bbe8-85b858b31ae3"
+          ],
+          "revision": 2,
+          "archived": false
+        }
+      ],
+      "memories": [
+        {
+          "key": "fa676864-9958-4aa2-ac65-1b4f563ff420",
+          "owner": "riley",
+          "value": {
+            "content": "Cobalt delivery kits: 3 units to storage S-2 in fiber cases. Status: Nothing is reserved."
+          }
+        }
+      ],
+      "source_events": [
+        {
+          "id": "message:7edbb74e-e1f5-4f3b-bbe8-85b858b31ae3",
+          "kind": "user",
+          "actor": "riley",
+          "tool_call_id": null,
+          "content": "Keep for later: Cobalt delivery kits, 2 units to storage S-2 in fiber cases. Nothing is reserved. Acknowledge without taking a business action."
+        },
+        {
+          "id": "tool:385860acbedb490ed957dff895b567604348364306cc87976b8c740d7f648f7d",
+          "kind": "tool",
+          "actor": "manage_memory",
+          "tool_call_id": "chatcmpl-aaeb613b8580d7d0:tool:0",
+          "content": "created memory fa676864-9958-4aa2-ac65-1b4f563ff420"
+        },
+        {
+          "id": "message:1662a172-8dc3-47da-b2a7-493a762affab",
+          "kind": "user",
+          "actor": "riley",
+          "tool_call_id": null,
+          "content": "Add one unit to the current Cobalt delivery kits plan. Keep its destination and packing unchanged. Record this change without taking any business action."
+        },
+        {
+          "id": "tool:7c7a7142dea9d478453647b136b164ab638277add2f8cc4a81cf554887785f36",
+          "kind": "tool",
+          "actor": "manage_memory",
+          "tool_call_id": "chatcmpl-85ed984d1eaaf8df:tool:0",
+          "content": "updated memory fa676864-9958-4aa2-ac65-1b4f563ff420"
+        },
+        {
+          "id": "message:84e94cef-2e02-4473-a9ce-5d206c549fde",
+          "kind": "user",
+          "actor": "riley",
+          "tool_call_id": null,
+          "content": "What is the current Cobalt delivery kits quantity, destination and packing? Do not change anything or take an action."
+        }
+      ],
+      "pending_event_ids": [
+        "message:84e94cef-2e02-4473-a9ce-5d206c549fde"
+      ],
+      "current_task": "What is the current Cobalt delivery kits quantity, destination and packing? Do not change anything or take an action.",
+      "historical_operation_ids": [
+        "b231cdc49773a63d277f850606f2b005ddc3a42d62b35c6a1699aeb43d6313e1:1:store:1",
+        "e4d763937e4e5105db3635190be407555b03b3b79676fd5f401b675be8d841f6:1:store:1"
+      ],
+      "business_world": {
+        "reservations": [],
+        "attempts": []
+      },
+      "initial_label_available": false
+    }
+  ],
+  "jobs": [
+    {
+      "job_id": "1-no-change-host",
+      "case_id": "no_change",
+      "writer_policy": "host_both"
+    },
+    {
+      "job_id": "2-increment-boundary",
+      "case_id": "second_increment",
+      "writer_policy": "boundary_both"
+    },
+    {
+      "job_id": "3-no-change-overlap",
+      "case_id": "no_change",
+      "writer_policy": "overlap"
+    },
+    {
+      "job_id": "4-increment-host",
+      "case_id": "second_increment",
+      "writer_policy": "host_both"
+    },
+    {
+      "job_id": "5-no-change-boundary",
+      "case_id": "no_change",
+      "writer_policy": "boundary_both"
+    },
+    {
+      "job_id": "6-increment-overlap",
+      "case_id": "second_increment",
+      "writer_policy": "overlap"
+    }
+  ],
+  "policy": "All scopes isolated. Full actual source events/history and both-store records are common legal context. Runtime never reads rubric. No business action authorized by either current task."
+}

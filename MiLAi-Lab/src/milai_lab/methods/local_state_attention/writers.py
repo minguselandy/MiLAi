@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import json
+import time
 import uuid
 from collections.abc import Sequence
 from contextvars import ContextVar
 from dataclasses import dataclass
-from typing import Annotated, Any, Literal, cast
+from typing import TYPE_CHECKING, Annotated, Any, Literal, cast
 
+import httpx
 from jsonschema import FormatChecker, ValidationError, validate  # type: ignore[import-untyped]
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableConfig
@@ -20,6 +22,12 @@ from langmem.utils import NamespaceTemplate  # type: ignore[import-untyped]
 
 from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
+from milai_lab.methods.local_state_attention.protocol import ControlResponseError
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from milai_lab.methods.local_state_attention.controller import LocalStateController
 
 
 @dataclass(frozen=True)
@@ -41,6 +49,10 @@ class WriterProposalContext:
     scope: StateScope
     message_key: str
     current_task: str = ""
+    raw_history: tuple[dict[str, Any], ...] = ()
+    memory_records: tuple[dict[str, Any], ...] = ()
+    actual_receipts: tuple[dict[str, Any], ...] = ()
+    maintenance_request_reason: str = ""
 
 
 @dataclass(frozen=True)
@@ -48,6 +60,15 @@ class WriterExecution:
     status: Literal["NO_CHANGE", "APPLIED", "PARTIAL_REJECTED"]
     receipts: list[ToolMessage]
     pending_event_ids: list[str]
+
+
+@dataclass(frozen=True)
+class WriterBoundaryResult:
+    status: Literal["NO_CHANGE", "APPLIED", "PARTIAL_REJECTED"]
+    proposals: list[dict[str, Any]]
+    receipts: list[ToolMessage]
+    pending_event_ids: list[str]
+    acknowledged_event_ids: list[str]
 
 
 @dataclass(frozen=True)
@@ -171,6 +192,130 @@ def create_writer_tools(bank: LocalStateBank,
         search_memory=create_search_memory_tool(namespace=memory_namespace,
                                                 store=bank.store),
         manage_state=state_tool, read_record=read_tool)
+
+
+def scoped_memory_records(toolset: WriterTools, scope: StateScope, *,
+                          emit: Callable[[dict[str, Any]], None] | None = None,
+                          ) -> list[dict[str, Any]]:
+    """Read actual owner records in pages; this is charged Store work, not a cache."""
+    namespace = tuple(part.format(foundation_run_id=scope.run_id,
+                                  arm_id=scope.arm_id, user_id=scope.user_id)
+                      for part in toolset.memory_namespace)
+    rows: list[dict[str, Any]] = []
+    offset = 0
+    start_wall, start_cpu = time.perf_counter_ns(), time.process_time_ns()
+    calls = 0
+    while True:
+        page = toolset.bank.store.search(namespace, limit=64, offset=offset)
+        calls += 1
+        if any(tuple(item.namespace) != namespace for item in page):
+            raise ValueError("LSA_WRITER_MEMORY_SCOPE_CHANGED")
+        rows.extend({"id": item.key, "value": item.value} for item in page)
+        if len(page) < 64:
+            break
+        offset += len(page)
+    rows.sort(key=lambda row: row["id"])
+    if emit is not None:
+        emit({"event": "lsa_writer_memory_read", "user_id": scope.user_id,
+              "calls": calls, "records": len(rows),
+              "logical_bytes": len(json.dumps(rows, ensure_ascii=False).encode("utf-8")),
+              "wall_ns": time.perf_counter_ns() - start_wall,
+              "cpu_ns": time.process_time_ns() - start_cpu})
+    return rows
+
+
+def run_writer_boundary(
+    controller: LocalStateController, toolset: WriterTools,
+    context: WriterProposalContext, allowed_tools: Sequence[BaseTool], *,
+    config: RunnableConfig, query_source_id: str | None = None,
+) -> WriterBoundaryResult:
+    """One charged boundary, including any model-requested READ/SEARCH followups."""
+    allowed_names = {tool.name for tool in allowed_tools}
+    if not allowed_names or any(tool.name not in {item.name for item in toolset.host_tools()}
+                                for tool in allowed_tools):
+        raise ValueError("LSA_WRITER_ALLOWED_TOOLS_INVALID")
+    scope = context.scope
+    initial_ids = {row["id"] for row in toolset.bank.pending(scope)}
+    receipts: list[ToolMessage] = []
+    proposals: list[dict[str, Any]] = []
+    while True:
+        current = WriterProposalContext(
+            scope, context.message_key, context.current_task, context.raw_history,
+            tuple(scoped_memory_records(toolset, scope, emit=controller.emit)),
+            context.actual_receipts + tuple(
+                {"name": row.name, "tool_call_id": row.tool_call_id,
+                 "status": row.status, "content": str(row.content)} for row in receipts),
+            context.maintenance_request_reason)
+        proposal = controller.propose_writes(current, allowed_tools)
+        calls = proposal["calls"]
+        if any(call["name"] not in allowed_names for call in calls):
+            raise ValueError("LSA_WRITER_PROPOSAL_TOOL_NOT_ALLOWED")
+        proposals.append(proposal)
+        executed = execute_writes(
+            toolset, calls, config=config, scope=scope, batch_id=proposal["batch_id"],
+            event_ids=set(proposal["event_ids"]), query_source_id=query_source_id,
+            ack_events=False)
+        receipts.extend(executed.receipts)
+        if controller.emit is not None:
+            controller.emit({"event": "lsa_writer_boundary_step",
+                             "message_key": context.message_key,
+                             "batch_id": proposal["batch_id"],
+                             "call_names": [call["name"] for call in calls],
+                             "receipts": [row.model_dump(mode="json")
+                                          for row in executed.receipts],
+                             "pending_event_ids": executed.pending_event_ids})
+        reads_only = bool(calls) and all(call["name"] in {
+            "search_memory", "read_record"} for call in calls)
+        if executed.status == "PARTIAL_REJECTED" and not reads_only:
+            return WriterBoundaryResult("PARTIAL_REJECTED", proposals, receipts,
+                                        executed.pending_event_ids, [])
+        if reads_only:
+            continue
+        if not calls or any(call["name"] in {"manage_memory", "manage_state"}
+                            for call in calls):
+            # A successful whole boundary, not a successful intermediate read,
+            # consumes exactly the source IDs that were pending at its start.
+            toolset.bank.acknowledge_events(scope, initial_ids)
+            return WriterBoundaryResult(
+                "NO_CHANGE" if not calls else "APPLIED", proposals, receipts,
+                [row["id"] for row in toolset.bank.pending(scope)], sorted(initial_ids))
+
+
+def make_maintenance_trigger(
+    controller: LocalStateController, toolset: WriterTools,
+    context_factory: Callable[[str, RunnableConfig], WriterProposalContext],
+    record_result: Callable[[WriterBoundaryResult], None] | None = None,
+) -> BaseTool:
+    """A Host request starts one real, separately charged boundary transaction."""
+    def maintain_records(
+        reason: str,
+        *, tool_call_id: Annotated[str, InjectedToolCallId],
+    ) -> ToolMessage:
+        config = get_config()
+        context = context_factory(reason, config)
+        if _scope(config) != context.scope:
+            raise ValueError("LSA_WRITER_TRIGGER_SCOPE_CHANGED")
+        try:
+            result = run_writer_boundary(
+                controller, toolset, context, toolset.host_tools(), config=config)
+        except (ControlResponseError, httpx.TimeoutException) as error:
+            return _receipt(tool_call_id, "maintain_records", ok=False,
+                            status="degraded", reason=str(error),
+                            pending_event_ids=[row["id"] for row in
+                                               toolset.bank.pending(context.scope)])
+        if record_result is not None:
+            record_result(result)
+        return _receipt(tool_call_id, "maintain_records",
+                        ok=result.status != "PARTIAL_REJECTED", status=result.status,
+                        receipts=[row.model_dump(mode="json") for row in result.receipts],
+                        pending_event_ids=result.pending_event_ids,
+                        acknowledged_event_ids=result.acknowledged_event_ids)
+
+    return StructuredTool.from_function(
+        maintain_records, name="maintain_records",
+        description=("Request a fresh memory and State maintenance proposal. The reason "
+                     "is a request, not evidence; this returns actual per-tool receipts. "
+                     "An empty proposal means no change, not an answer to the user."))
 
 
 def execute_writes(
