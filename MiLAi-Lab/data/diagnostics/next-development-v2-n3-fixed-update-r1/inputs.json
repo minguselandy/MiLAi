@@ -1,0 +1,206 @@
+{
+  "kind": "MILAI_FIXED_UPDATE_INPUTS",
+  "status": "INPUTS_FROZEN_BEFORE_EXECUTION",
+  "source_trace_sha256": "38ea180cbd0cf1e34e24f3e67b13cf2c072ba0b4a7c4056ea4e6f76942bf1a17",
+  "independent_historical_arcs": 1,
+  "cases": [
+    {
+      "case_id": "background_change",
+      "user_id": "iris",
+      "states": [
+        {
+          "id": "00a3dd7f0a0a47f2a58ca3427e96b45a",
+          "title": "Workshop handout packs",
+          "content": "6 packs, east archive E-2, paper sleeves. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        },
+        {
+          "id": "11c2efda1912469ea39b09f79cb9d319",
+          "title": "Workshop field kits",
+          "content": "3 kits, west dock W-4, rigid cases. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        },
+        {
+          "id": "169a6115675346968485a59178db8b2a",
+          "title": "Workshop welcome briefing",
+          "content": "Room R-3 at 14:30, using the step-free entrance. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        }
+      ],
+      "source_events": [
+        {
+          "id": "message:f857ca8f-eabf-4f58-9b6e-4aa2cd34e49b",
+          "kind": "user",
+          "content": "We have three ongoing workshop matters to return to in later sessions. Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 3 kits, west dock W-4, rigid cases. Workshop welcome briefing: room R-3 at 14:30, using the step-free entrance. Nothing has been reserved yet. Acknowledge the arrangements; do not reserve or label anything.",
+          "actor": "iris",
+          "tool_call_id": null
+        },
+        {
+          "id": "message:6bc0b781-9cc0-49f5-ac6b-67f43ea554a8",
+          "kind": "user",
+          "content": "Continue the Workshop handout packs matter. Give its quantity, destination and packing in one short sentence. Do not take a business action.",
+          "actor": "iris",
+          "tool_call_id": null
+        },
+        {
+          "id": "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7",
+          "kind": "user",
+          "content": "An update for Workshop field kits: the required quantity is now 8 and the destination is north rack N-6; packing stays the same. My current work is still Workshop handout packs: give its unchanged handling summary. Do not reserve or label anything.",
+          "actor": "iris",
+          "tool_call_id": null
+        }
+      ],
+      "pending_event_ids": [
+        "message:4d646e49-05d8-4fe5-8851-f59b414fa7a7"
+      ],
+      "query": "An update for Workshop field kits: the required quantity is now 8 and the destination is north rack N-6; packing stays the same. My current work is still Workshop handout packs: give its unchanged handling summary. Do not reserve or label anything.",
+      "selection": "actual pre-control bank at historical trace index 11, not later updated bank",
+      "source_trace_index": 11,
+      "memories": []
+    },
+    {
+      "case_id": "new_topic",
+      "user_id": "iris",
+      "states": [
+        {
+          "id": "00a3dd7f0a0a47f2a58ca3427e96b45a",
+          "title": "Workshop handout packs",
+          "content": "6 packs, east archive E-2, paper sleeves. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        },
+        {
+          "id": "11c2efda1912469ea39b09f79cb9d319",
+          "title": "Workshop field kits",
+          "content": "3 kits, west dock W-4, rigid cases. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        },
+        {
+          "id": "169a6115675346968485a59178db8b2a",
+          "title": "Workshop welcome briefing",
+          "content": "Room R-3 at 14:30, using the step-free entrance. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        }
+      ],
+      "source_events": [
+        {
+          "id": "message:f857ca8f-eabf-4f58-9b6e-4aa2cd34e49b",
+          "kind": "user",
+          "content": "We have three ongoing workshop matters to return to in later sessions. Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 3 kits, west dock W-4, rigid cases. Workshop welcome briefing: room R-3 at 14:30, using the step-free entrance. Nothing has been reserved yet. Acknowledge the arrangements; do not reserve or label anything.",
+          "actor": "iris",
+          "tool_call_id": null
+        },
+        {
+          "id": "message:6bc0b781-9cc0-49f5-ac6b-67f43ea554a8",
+          "kind": "user",
+          "content": "Continue the Workshop handout packs matter. Give its quantity, destination and packing in one short sentence. Do not take a business action.",
+          "actor": "iris",
+          "tool_call_id": null
+        },
+        {
+          "id": "message:wp4-new-topic-3f3408b7afcde315",
+          "kind": "user",
+          "actor": "iris",
+          "tool_call_id": null,
+          "content": "For later, remember this separate workshop accessibility contact: the assistance desk is A-6, open from 08:00 to 16:00. My current work is still Workshop handout packs: give its unchanged handling summary. Do not reserve or label anything."
+        }
+      ],
+      "pending_event_ids": [
+        "message:wp4-new-topic-3f3408b7afcde315"
+      ],
+      "query": "For later, remember this separate workshop accessibility contact: the assistance desk is A-6, open from 08:00 to 16:00. My current work is still Workshop handout packs: give its unchanged handling summary. Do not reserve or label anything.",
+      "selection": "synthetic new observation over same actual prestate; exposed development fixture, not unseen",
+      "memories": []
+    }
+  ],
+  "runtime_reads_rubric": false,
+  "source_hash_verification": {
+    "actual_sha256": "38ea180cbd0cf1e34e24f3e67b13cf2c072ba0b4a7c4056ea4e6f76942bf1a17",
+    "expected_from": "data/manifests/local-state-attention-p2-r1-protocol.json input_reconstruction[0].trace_sha256",
+    "passed": true,
+    "preparation_correction": "Initial preparation command contained a vacuous conditional hash assertion; this explicit check against the published manifest replaces it before any freeze/call. Input bytes were independently hashed throughout; no runtime was run."
+  },
+  "source_projection": "Original actual user source id/kind/content retained; missing actor/tool_call_id explicitly normalized to scoped user and null, shared across arms.",
+  "jobs": [
+    {
+      "job_id": "1-background_change-all",
+      "case_id": "background_change",
+      "arm": "all"
+    },
+    {
+      "job_id": "2-background_change-u_selector",
+      "case_id": "background_change",
+      "arm": "u_selector"
+    },
+    {
+      "job_id": "3-background_change-u_equals_a",
+      "case_id": "background_change",
+      "arm": "u_equals_a"
+    },
+    {
+      "job_id": "4-background_change-oracle_u",
+      "case_id": "background_change",
+      "arm": "oracle_u",
+      "diagnostic_only": true,
+      "oracle_update_ids": [
+        "11c2efda1912469ea39b09f79cb9d319"
+      ]
+    },
+    {
+      "job_id": "5-new_topic-all",
+      "case_id": "new_topic",
+      "arm": "all"
+    },
+    {
+      "job_id": "6-new_topic-u_selector",
+      "case_id": "new_topic",
+      "arm": "u_selector"
+    },
+    {
+      "job_id": "7-new_topic-u_equals_a",
+      "case_id": "new_topic",
+      "arm": "u_equals_a"
+    },
+    {
+      "job_id": "8-new_topic-oracle_u",
+      "case_id": "new_topic",
+      "arm": "oracle_u",
+      "diagnostic_only": true,
+      "oracle_update_ids": []
+    }
+  ],
+  "protocol": {
+    "update_default": "independent_directory_model_u",
+    "u_equals_a": "One actual call to the same directory A helper used by N2 with current task plus actual pending observations; returned mask/cost are used unchanged.",
+    "maintenance": "One candidate-only edits-only proposal using existing LocalStateController payload/schema/prompt; all arms same contract, whole-record edits, no new patch. Existing bank.apply with allowed_existing_ids=actual selected mask, allow_create=True, same actual pending event identities. No extra post-failure repair in this diagnostic.",
+    "oracle": "Explicit diagnostic job input only; mask is not read from rubric or supplied to other arms. Excluded from main-method claims.",
+    "feedback_mode": "off",
+    "source_isolation": "fresh run_id:job_id scoped Store and separate runtime root",
+    "http_concurrency": 1,
+    "no_unseen_claim": true,
+    "ordinary_memory": "No ordinary-memory mutation tool in this State-only maintenance diagnostic; ordinary-memory quality NA, not globally correct. No Host answer/business execution.",
+    "u_query_caveat": "Pending observation text itself includes the user's current reading task. Preserve the full actual observation; do not strip phrases using case-specific text. Independent U receives only observed content, but this does not guarantee independence from every mention of current task.",
+    "u_selector": "One existing event-impact update selector prompt and update_ids schema, seeing actual pending observation views plus the same prestate directory. No separate current_task input; preserve any task mention already in the actual observations. Empty and multiple update_ids are valid. Record full actual selection cost.",
+    "draft_change_before_freeze": "The paused, unexecuted draft used mandatory retrieval_top2. Current v2 section 9 tests independent observation/directory U, so this new draft uses the existing event-impact model selector, including an actual empty-set option. No prior experiment or result was changed; original draft bytes remain preserved. This does not evaluate or reject retrieval-based U."
+  },
+  "study": "next-development-v2-n3-fixed-update-r1",
+  "original_c5_input_sha256": "79a0def7065e355a850b7551718e3e036333de86ff78b3fa3489007cbf226827",
+  "original_paused_v2_draft_sha256": "e1f84522238958d107f0d86e7d6f082e94721e1d27c0fb7a94b8e7d0914b43ff"
+}

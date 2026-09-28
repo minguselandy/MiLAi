@@ -12,6 +12,8 @@ from jsonschema import validate  # type: ignore[import-untyped]
 from milai_lab.methods.local_state_attention.integration import _render_view
 from milai_lab.methods.local_state_attention.protocol import (
     READ_SELECTOR_PROMPT,
+    UPDATE_SELECTOR_PROMPT,
+    ControlResponseError,
     parse_json_response,
     read_selector_payload,
     selected_ids,
@@ -142,6 +144,29 @@ def select_directory_a(bank: list[dict[str, Any]], query: str,
     chosen = selected_ids(parse_json_response(receipt), "read_ids", allowed)
     if chosen is None:
         raise ValueError("LSA_READ_SELECTION_INVALID")
+    ids = set(chosen)
+    return [row for row in states if row["id"] in ids]
+
+
+def select_directory_u(bank: list[dict[str, Any]],
+                       observations: list[dict[str, Any]],
+                       client: VLLMClient) -> list[dict[str, Any]]:
+    """Select update candidates from actual observations, without a task field."""
+    states = sorted_states(bank)
+    if not states:
+        return []
+    allowed = {row["id"] for row in states}
+    receipt = client.chat(
+        [{"role": "system", "content": UPDATE_SELECTOR_PROMPT},
+         {"role": "user", "content": json.dumps(
+             {"new_observations": observations, "directory": state_directory(states)},
+             ensure_ascii=False)}],
+        response_format={"type": "json_schema", "json_schema": {
+            "name": "local_state_update_selector_v1", "strict": True,
+            "schema": selection_schema("update_ids", allowed)}})
+    chosen = selected_ids(parse_json_response(receipt), "update_ids", allowed)
+    if chosen is None:
+        raise ControlResponseError("LSA_UPDATE_SELECTION_INVALID")
     ids = set(chosen)
     return [row for row in states if row["id"] in ids]
 

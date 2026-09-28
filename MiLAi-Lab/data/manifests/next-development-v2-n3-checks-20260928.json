@@ -1,0 +1,227 @@
+{
+  "kind": "MILAI_V2_N3_PRE_EXECUTION_CHECKS",
+  "source_owner_receipt_sha256": "bd8ad9d5898de9e330335cdab23b95ffc98f0cf11f181be3b99e43da0d529a20",
+  "source_owner_receipt": {
+    "kind": "MILAI_N3_FIXED_UPDATE_SOURCE_CHECKS",
+    "status": "FREEZE_READY_FOR_ROOT_SERIAL_EXECUTION",
+    "head": "8eca99e06f6de3642371a37cc38b08703bfb166b",
+    "source_hashes": {
+      "MiLAi-Lab/src/milai_lab/runners/fixed_state_update.py": "83f8f2ed17f0140581d5649a3964ae7cae79825248a439df4ec052ace3566e29",
+      "MiLAi-Lab/src/milai_lab/methods/local_state_attention/read_probe.py": "b894c67e70c4874535b54b2567b3027a8de693f0ebf8bb9c8459a7af4bc5df65",
+      "MiLAi-Lab/src/milai_lab/methods/local_state_attention/protocol.py": "402cf80653f3185b3832896dfa19686bddec8bbac3a1f46ce9bf2a76533e38da",
+      "MiLAi-Lab/src/milai_lab/methods/local_state_attention/controller.py": "c65edefcdbb97207e63115bfb23076af98d1d70222cd34f6ab07218063abc8ee",
+      "MiLAi-Lab/tools/run_fixed_state_update.py": "18221d1a398d5e982b02a835f90eaa75b9105082b3eac15e0af91971f5d80e86",
+      "MiLAi-Lab/tests/unit/test_fixed_state_update.py": "8123bf0abf45f09ac8f79e964d3221fd78f96b27b91bfad43535832240e26ea8",
+      "MiLAi-Lab/configs/lab-verification-matrix.json": "d8342a95e98360789c59b9f8104edbf9f427472fdb01628643c2e4dc2307b211",
+      ".github/workflows/fast.yml": "6a017a44e22ec78a1044d42cf63653e85af516cf2ec6f442ee90166623a83b93",
+      ".github/workflows/ci.yml": "e7a0445f37336d0f5c5307d55c3c4f8357f41f7d0d08b35937f98cc07175a195"
+    },
+    "inputs_sha256": "f0a835f550bfb7ce1a7046bfd504ddff1cf11089979884cc62b17edac0a58e4f",
+    "config_sha256": "d339c9b260e221b58591cebc0fde5f02c034e46376529b9d9a30c341129d97bc",
+    "check_execution": [
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_fixed_state_update.py tests/unit/test_local_state_attention_read_probe.py",
+        "result": "17 passed, 2 failed, 2 teardown errors in 2.19s; failures were two new test setups monkeypatching readonly slotted InMemoryStore.put",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/foundation.log",
+        "passed_retained": 17
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_fixed_state_update.py::test_empty_proposal_ack_is_not_store_success_and_store_error_propagates",
+        "result": "2 passed in 1.65s after test-only subclass substitution",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/store-error-final.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_fixed_state_update.py::test_actual_mask_shared_maintenance_scope_and_cost",
+        "result": "4 passed in 1.59s after final actual candidate-payload-byte measurement and assertion",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/final-mask-metrics.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_lsa_controller_contract.py",
+        "result": "71 passed in 0.26s in locked core without optional LangChain",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/core-protocol.log"
+      },
+      {
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m ruff check src/milai_lab/runners/fixed_state_update.py src/milai_lab/methods/local_state_attention/{read_probe,controller,protocol}.py tools/run_fixed_state_update.py tests/unit/test_fixed_state_update.py",
+        "result": "passed; changed runner/test also individually passed after final edits",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/ruff.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/runners/fixed_state_update.py src/milai_lab/methods/local_state_attention/{read_probe,controller,protocol}.py tools/run_fixed_state_update.py",
+        "result": "Success in 5 source files; final runner alone success after byte metric edit",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/mypy.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/check_verification_matrix.py",
+        "result": {
+          "active_sources": 152,
+          "core_direct": 22,
+          "foundation_discovery": 117,
+          "foundation_explicit": 44,
+          "excluded_recovered": 35,
+          "optional_tests_owned": 14,
+          "private_asset_tests": 11,
+          "actual_fast_full_targets_checked": true
+        },
+        "evidence": "tool output chunk d67fd9"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m milai_lab.boundary",
+        "result": "passed",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/boundary.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m milai_lab.tools_boundary",
+        "result": "passed",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/tools-boundary.log"
+      },
+      {
+        "command": "git diff --check and git diff --no-index --check /dev/null for each new Python file",
+        "result": "passed"
+      }
+    ],
+    "final_unique_test_coverage": {
+      "new_n3": 12,
+      "adjacent_read_probe": 7,
+      "core_protocol": 71,
+      "total": 90,
+      "failed_remaining": 0,
+      "skipped": 0,
+      "count_is_union_of_passed_groups_not_claim_of_one_90_item_run": true
+    },
+    "initial_failures_preserved": [
+      {
+        "result": "first new group 4 failed, 6 passed",
+        "cause": "test used nonexistent control_stages instead of by_control_stage",
+        "repair": "test key corrected; all runtime/scope/mask assertions before key had passed",
+        "evidence": "tool output chunk 035efd"
+      },
+      {
+        "result": "first Mypy 1 no-redef",
+        "cause": "annotated job row reused loop variable name",
+        "repair": "job_row local name",
+        "evidence": "tool output chunk 074fe2"
+      },
+      {
+        "result": "two test failures and two teardown errors",
+        "cause": "slotted InMemoryStore.put cannot be patched on an instance",
+        "repair": "test uses real InMemoryStore subclass, no runtime change",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/foundation.log"
+      }
+    ],
+    "final_source_adjustment": {
+      "purpose": "candidate_body_bytes now measures exact maintenance states projection, excluding unsent archived field",
+      "runtime_request_unchanged": true,
+      "target_final_check": "4 mask cases passed"
+    },
+    "prepare": {
+      "command": "env -u MILAI_LANGMEM_POSTGRES_DSN PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_fixed_state_update.py prepare --config data/diagnostics/next-development-v2-n3-fixed-update-r1/config.json --inputs data/diagnostics/next-development-v2-n3-fixed-update-r1/inputs.json --run n3-final-prepare-only --runtime-root /tmp/milai-n3-final-prepare-yj356T --output /tmp/milai-n3-final-prepare-yj356T/prepared.json",
+      "root": "/tmp/milai-n3-final-prepare-yj356T",
+      "jobs": 8,
+      "identity_sha256": "0f6eb1f65ffbca403da41120a55364a2c24f34c391ddf7cf41b34b424400f2ec",
+      "source_identity_files": 154,
+      "identity_check": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/identity-check.json",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/prepare-final.log",
+      "preliminary_before_metric_adjustment_preserved": "/tmp/milai-n3-prepare-Zy4Jjs"
+    },
+    "build": {
+      "command": "uv build --offline --out-dir artifacts/next-development-v2/n3-dist",
+      "attempts": 1,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-checks/build.log",
+      "checks": {
+        "wheel_src/milai_lab/runners/fixed_state_update.py": true,
+        "wheel_src/milai_lab/methods/local_state_attention/read_probe.py": true,
+        "wheel_src/milai_lab/methods/local_state_attention/protocol.py": true,
+        "wheel_src/milai_lab/methods/local_state_attention/controller.py": true,
+        "sdist_src/milai_lab/runners/fixed_state_update.py": true,
+        "sdist_src/milai_lab/methods/local_state_attention/read_probe.py": true,
+        "sdist_src/milai_lab/methods/local_state_attention/protocol.py": true,
+        "sdist_src/milai_lab/methods/local_state_attention/controller.py": true,
+        "sdist_tools/run_fixed_state_update.py": true,
+        "sdist_tests/unit/test_fixed_state_update.py": true,
+        "sdist_configs/lab-verification-matrix.json": true,
+        "sdist_data/diagnostics/next-development-v2-n3-fixed-update-r1/inputs.json": true,
+        "sdist_data/diagnostics/next-development-v2-n3-fixed-update-r1/config.json": true,
+        "sdist_docs/MILAI_NEXT_DEVELOPMENT_V2_N3_FIXED_UPDATE_20260928.md": true,
+        "sdist_no_generated_private_assets": true
+      },
+      "wheel": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-dist/milai_lab-0.1.0-py3-none-any.whl",
+        "bytes": 544806,
+        "sha256": "4a9ca33a4b2d396a0cbe220cf79006f893012f525e72c28f6ba85cfd5650b597"
+      },
+      "sdist": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n3-dist/milai_lab-0.1.0.tar.gz",
+        "bytes": 5229945,
+        "sha256": "71c269cc210257d3092590d55f00ee4a0b407a7d051ff43e1be8b7c5638ae69e"
+      }
+    },
+    "environment": {
+      "foundation_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+      "core_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+      "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+      "dependencies": {
+        "langchain-core": "1.6.5",
+        "langgraph": "1.1.10",
+        "langgraph-checkpoint-postgres": "2.0.25",
+        "langgraph-checkpoint-sqlite": "2.0.11",
+        "langmem": "0.0.30",
+        "psycopg": "3.3.6",
+        "jsonschema": "4.26.0"
+      },
+      "uv_lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1"
+    },
+    "contracts": {
+      "arms": [
+        "all",
+        "u_selector",
+        "u_equals_a",
+        "oracle_u"
+      ],
+      "independent_u": "actual pending event views plus short directory; no separate current_task",
+      "u_equals_a": "same N2 select_directory_a with actual query and pending views; no lookalike selector",
+      "maintenance": "same local/granular/events-only candidate_only edits schema and prompt in all four arms",
+      "create": "allowed with empty mask; ids generated by existing Bank",
+      "existing_update": "allowed_existing_ids=actual selected mask, per-edit rejection and partial success",
+      "pending_ack": "only shared bank.apply successful whole batch acknowledges; partial/known control failures keep pending",
+      "legacy_controller": "only prompt literal extracted; old U payload/current_task/schema/stage preserved",
+      "host_business_calls": 0,
+      "ordinary_memory_quality": "NA",
+      "rubric_read_by_runtime": false,
+      "control_tokens": 2048,
+      "control_per_public_message": 13,
+      "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    },
+    "limits": [
+      "One maintenance proposal per job; not a complete user/Host/business task score",
+      "All-bank Store reads still occur for directory and Bank.apply; candidate prompt savings are not Store-I/O savings",
+      "Current-task mentions inside actual observations are preserved; independent U is an input-field boundary, not psychological independence",
+      "Mechanical acknowledgement and D0 retry identity do not prove correct semantic adoption",
+      "Oracle mask is diagnostic-only input and excluded from ordinary-method claims",
+      "State-only current representation, no new index/journal/CAS/patch/repair platform",
+      "Physical I/O and unmeasured costs remain unknown"
+    ],
+    "test_backends": "MockTransport + InMemoryStore + temporary JSON RunBudget; N3 tests do not exercise shared Postgres",
+    "real_http_calls": 0,
+    "shared_postgres_calls": 0,
+    "embedding_calls": 0,
+    "not_run": [
+      "8 real proposals",
+      "semantic scoring",
+      "N5 behavior",
+      "full test suite",
+      "Git commit/push"
+    ],
+    "no_background_sessions": true
+  },
+  "root_review": {
+    "source_hashes_match": true,
+    "old_update_prompt_exact_bytes": true,
+    "controller_payload_schema_stage_unchanged": true,
+    "rubric_sha256": "1ce5e0fae92040944bd5f72c05d70cf2e180c988ffe73b96518a2f1e7c3681a7",
+    "input_prestate_and_background_observation_match_original_trace": true,
+    "method_publication_and_formal_prepare": "PENDING",
+    "real_generation_or_embedding_calls": 0,
+    "ledger_sha256": "9488b804f5b3c6eecdbcc79b833220f2cab13ac7b39c9bac7e75a35b6e16064f",
+    "limits": "Narrow scripted checks are engineering evidence; not semantic outcomes or real Postgres validation."
+  }
+}

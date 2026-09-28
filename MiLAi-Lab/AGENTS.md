@@ -13,8 +13,11 @@ Its original planning-only bytes stay unchanged. Follow the
 Continue the full N0–N6 objective and its conditional gates. N0 is published at ddd5ab71
 and N1 audited one existing failure trace. N2 completed all ten fixed-bank paths at 5753602: all arms answered correctly, with
 full history cheapest; independent A/query enhancement was not useful in this slice.
-Continue N3 fixed-prestate maintenance,
-N5 continuous native tasks plus explicitly constructed coverage and WP7 lifecycle costs.
+N3 completed eight fixed-prestate paths at dfbc59d: all and actual U=A satisfy both
+content and source binding; U/oracle miss one explicit binding. All costs least, so
+independent U is also Pivot in this slice. Continue N5 continuous native tasks plus
+explicit constructed coverage and WP7 lifecycle costs; use shared Host CRUD/history
+with H/all State-body prefill, not an independent selector or native-B1 claim.
 N4 and N6 need their documented evidence/resource conditions, not automatic expansion.
 Green engineering checks do not finish the research objective. Product remains NO-GO.
 
