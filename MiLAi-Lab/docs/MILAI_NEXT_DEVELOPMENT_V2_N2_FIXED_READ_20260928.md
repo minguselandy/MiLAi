@@ -1,6 +1,6 @@
 # v2 N2 / X3：固定bank的完整读取路径
 
-状态：输入/配置/scorer字节已固定，薄runner及必要检查/构建已完成；**等待发布源码并建立正式执行冻结，真实运行NOT_RUN**。
+状态：**已完成全部10条真实读取路径**。五条件最终答案均2/2，完整历史成本最低；见[结果与局限](MILAI_NEXT_DEVELOPMENT_V2_N2_RESULTS_20260928.md)。下文保留运行前协议和准备沿革。
 承接[v2计划§8](MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md)和[N0/N1记录](MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md)。
 本页逐阶段追加真实证据，不能用输入文件存在替代可执行方法。
 
@@ -93,3 +93,11 @@ N3固定更新、N5连续任务与WP7生命周期费用继续独立验收；N2�
 再独立绑定本页rubric、共同输入与实际账本起点；只有该正式冻结完成才串行调用模型。
 [精简检查回执](../data/manifests/next-development-v2-n2-checks-20260928.json)保留命令、旧检查、初始失败、包身份和未运行项。
 检查只支持实现准入，真实decoder、数据库持久化与最终回答仍由10条完整路径核实；不以CI替代语义结果。
+
+## 本轮执行已完成
+
+正式方法 575360295946a77847702a527271f66102375365，十条路径全部终态。
+生成19次/17901tokens，embedding4次/820tokens；五条件答案各2/2，保留A背景错误memory读取而最终回答正确的轨迹。
+连续账本为2818/3504405/20093，全部收费与实际trace对齐。
+结论Pivot本切片独立A/查询增强必需性，不扩充干扰造收益；N3/N5与WP7继续独立验收。
+[结果报告](MILAI_NEXT_DEVELOPMENT_V2_N2_RESULTS_20260928.md)及[清单](../data/manifests/next-development-v2-n2-results-20260928.json)保存完整证据与边界。

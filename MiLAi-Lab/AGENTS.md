@@ -11,8 +11,9 @@ Its original planning-only bytes stay unchanged. Follow the
 [v2 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md).
 
 Continue the full N0–N6 objective and its conditional gates. N0 is published at ddd5ab71
-and N1 audited one existing failure trace. Finish N2 preparation, required packaging,
-execution freeze and complete fixed-bank paths, then N3 fixed-prestate maintenance,
+and N1 audited one existing failure trace. N2 completed all ten fixed-bank paths at 5753602: all arms answered correctly, with
+full history cheapest; independent A/query enhancement was not useful in this slice.
+Continue N3 fixed-prestate maintenance,
 N5 continuous native tasks plus explicitly constructed coverage and WP7 lifecycle costs.
 N4 and N6 need their documented evidence/resource conditions, not automatic expansion.
 Green engineering checks do not finish the research objective. Product remains NO-GO.

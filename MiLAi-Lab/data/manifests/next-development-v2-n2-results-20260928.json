@@ -1,0 +1,1096 @@
+{
+  "kind": "MILAI_V2_N2_FIXED_READ_RESULTS",
+  "method_commit": "575360295946a77847702a527271f66102375365",
+  "method_source_files_verified_against_commit": 153,
+  "freeze_sha256": "b52a42a51df76c6e11d6c6f5fd90289800ffb703322bc2ee0819e5390fb61740",
+  "freeze": {
+    "kind": "MILAI_V2_N2_EXECUTION_FREEZE",
+    "status": "FROZEN_BEFORE_FIRST_REAL_CALL",
+    "frozen_at_utc": "2026-09-28T00:21:20.869332+00:00",
+    "method_commit": "575360295946a77847702a527271f66102375365",
+    "prepare": {
+      "status": "PREPARED_ZERO_MODEL",
+      "run_id": "next-development-v2-n2-fixed-read-r1",
+      "jobs": 10,
+      "manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n2-fixed-read-r1/run_manifest.json",
+      "identity_sha256": "6ff5dc46c355753f725afcef46f920c5a22395614d037245bc173bf597a99e77"
+    },
+    "prepared_manifest_sha256": "42885a2c297e90c0c5f7c24d716e7704a27c2a7e80a4125c4eeb01ce293147ad",
+    "files": {
+      "inputs": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/data/diagnostics/next-development-v2-n2-fixed-read-r1/inputs.json",
+        "sha256": "50b334aee2e234952940bcce286cdbb677ef9cdc403c28442b9c42b58120f8fb"
+      },
+      "config": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/data/diagnostics/next-development-v2-n2-fixed-read-r1/config.json",
+        "sha256": "c5fb7130f801d738a37189bc71474a34216e062f4017116b633a3e25eff7e41f"
+      },
+      "rubric": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/data/diagnostics/next-development-v2-n2-fixed-read-r1/rubric.json",
+        "sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      }
+    },
+    "scorer": "Root manual semantic criteria in frozen rubric; no external Judge; runner cannot read rubric",
+    "group_order": [
+      {
+        "job_id": "1-background-all",
+        "case_id": "background",
+        "arm": "all"
+      },
+      {
+        "job_id": "2-combined-query",
+        "case_id": "combined",
+        "arm": "query"
+      },
+      {
+        "job_id": "3-background-query_enhanced",
+        "case_id": "background",
+        "arm": "query_enhanced"
+      },
+      {
+        "job_id": "4-combined-a_selector",
+        "case_id": "combined",
+        "arm": "a_selector"
+      },
+      {
+        "job_id": "5-background-diagnostic",
+        "case_id": "background",
+        "arm": "full_history"
+      },
+      {
+        "job_id": "6-combined-all",
+        "case_id": "combined",
+        "arm": "all"
+      },
+      {
+        "job_id": "7-background-query",
+        "case_id": "background",
+        "arm": "query"
+      },
+      {
+        "job_id": "8-combined-query_enhanced",
+        "case_id": "combined",
+        "arm": "query_enhanced"
+      },
+      {
+        "job_id": "9-background-a_selector",
+        "case_id": "background",
+        "arm": "a_selector"
+      },
+      {
+        "job_id": "10-combined-diagnostic",
+        "case_id": "combined",
+        "arm": "full_history"
+      }
+    ],
+    "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n2-fixed-read-r1",
+    "namespace": "new run_id:job_id / arm / owner",
+    "checkpoint": "each job_root/checkpoints.sqlite",
+    "maintenance": "off",
+    "http_concurrency": 1,
+    "feedback": "off",
+    "same_legal_history_and_tools": true,
+    "ledger_before": {
+      "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "sha256": "bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6",
+      "generation_calls": 2799,
+      "generation_tokens": 3486504,
+      "embedding_tokens": 19273
+    },
+    "failure_policy": "Keep every terminal error and cost; no rerun/replacement in this frozen batch; inspect first actual link; no arm-specific repair",
+    "limitations": [
+      "one exposed arc / two dependent prefixes / five conditions",
+      "combined is constructed read-only task",
+      "two model-generated failure cards are not real business receipts",
+      "H still has State READ and directory",
+      "no business or maintenance capabilities in this slice"
+    ]
+  },
+  "status": "ALL_10_PATHS_TERMINAL",
+  "exposed_arcs": 1,
+  "dependent_prefixes": 2,
+  "by_arm": {
+    "all": {
+      "correct_final_answers": 2,
+      "paths": 2,
+      "generation_calls": 3,
+      "generation_tokens": 3447,
+      "embedding_calls": 0,
+      "embedding_tokens": 0,
+      "successful_state_reads": 1,
+      "failed_reads": 0
+    },
+    "query": {
+      "correct_final_answers": 2,
+      "paths": 2,
+      "generation_calls": 3,
+      "generation_tokens": 3189,
+      "embedding_calls": 2,
+      "embedding_tokens": 387,
+      "successful_state_reads": 1,
+      "failed_reads": 0
+    },
+    "query_enhanced": {
+      "correct_final_answers": 2,
+      "paths": 2,
+      "generation_calls": 5,
+      "generation_tokens": 3889,
+      "embedding_calls": 2,
+      "embedding_tokens": 433,
+      "successful_state_reads": 1,
+      "failed_reads": 0
+    },
+    "a_selector": {
+      "correct_final_answers": 2,
+      "paths": 2,
+      "generation_calls": 6,
+      "generation_tokens": 5540,
+      "embedding_calls": 0,
+      "embedding_tokens": 0,
+      "successful_state_reads": 2,
+      "failed_reads": 1
+    },
+    "full_history": {
+      "correct_final_answers": 2,
+      "paths": 2,
+      "generation_calls": 2,
+      "generation_tokens": 1836,
+      "embedding_calls": 0,
+      "embedding_tokens": 0,
+      "successful_state_reads": 0,
+      "failed_reads": 0
+    }
+  },
+  "jobs": [
+    {
+      "job": {
+        "job_id": "1-background-all",
+        "case_id": "background",
+        "arm": "all"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "The Workshop handout packs consist of 6 packs, located at east archive E-2, and are packed in paper sleeves.",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319",
+        "169a6115675346968485a59178db8b2a"
+      ],
+      "selected_titles": [
+        "Workshop handout packs",
+        "Workshop field kits",
+        "Workshop welcome briefing"
+      ],
+      "selected_fact_coverage": "all_required_groups",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [
+        {
+          "tool_name": "read_record",
+          "ok": true,
+          "status": "found",
+          "target_kind": "state",
+          "record_id": "00a3dd7f0a0a47f2a58ca3427e96b45a",
+          "record_revision": 1
+        }
+      ],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "task_host": {
+          "calls": 2,
+          "prompt_tokens": 2037,
+          "completion_tokens": 81,
+          "total_tokens": 2118,
+          "http_wall_seconds": 1.439712324179709
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "task_host",
+          "provider_id": "chatcmpl-9d46099257f347e7"
+        },
+        {
+          "trace_line_zero_based": 1,
+          "role": "task_host",
+          "provider_id": "chatcmpl-b6a12ea7ca8d087b"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 3,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 15280522,
+        "cpu_ns": 2734470
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2521701,
+          "wall_ns": 8126227,
+          "request_bytes": 682,
+          "result_bytes": 2193
+        },
+        "get": {
+          "calls": 1,
+          "failures": 0,
+          "cpu_ns": 2796669,
+          "wall_ns": 7263771,
+          "request_bytes": 166,
+          "result_bytes": 243
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "9c41054a1e846c416a4449ea3748a1fde566d88a0525bf220d32887efb93edde",
+        "result.json": "c345c6285281643bc430b901a0f0db558ad7297d452f0cd7b3aa955f5ce7f4c1",
+        "seed-receipt.json": "eb8b2778a06e83d59e146cca3444a8eb4a17fa89664b6daa250d5b7cadcd0387"
+      }
+    },
+    {
+      "job": {
+        "job_id": "2-combined-query",
+        "case_id": "combined",
+        "arm": "query"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 8 kits, north rack N-6, rigid cases.",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "169a6115675346968485a59178db8b2a"
+      ],
+      "selected_titles": [
+        "Workshop handout packs",
+        "Workshop welcome briefing"
+      ],
+      "selected_fact_coverage": "partial_combined_missing_field",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "embedding": {
+          "calls": 1,
+          "prompt_tokens": 228,
+          "completion_tokens": 0,
+          "total_tokens": 228,
+          "http_wall_seconds": 0.2818818078376353
+        },
+        "task_host": {
+          "calls": 1,
+          "prompt_tokens": 1128,
+          "completion_tokens": 46,
+          "total_tokens": 1174,
+          "http_wall_seconds": 0.5106745990924537
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "embedding",
+          "provider_id": "embd-1768b1bbf923488aa37de2096497bd2a"
+        },
+        {
+          "trace_line_zero_based": 1,
+          "role": "task_host",
+          "provider_id": "chatcmpl-9fb83d2ad0d5d34b"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 5,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 15777073,
+        "cpu_ns": 3122250
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2496701,
+          "wall_ns": 6544063,
+          "request_bytes": 692,
+          "result_bytes": 3999
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "07f4aef67b0195f60900ad9b4667661ce38413304c84a8be773c8f5b93cb4042",
+        "result.json": "e6be3fb8933fa51e5c975a5696ab72661ec1e5c2764d928a55e7ee4014a8eda3",
+        "seed-receipt.json": "1b8292b8fc6efc3d5cc8ca274e8f70ecda32a42b2aac51831e06ac3caccbd4be"
+      }
+    },
+    {
+      "job": {
+        "job_id": "3-background-query_enhanced",
+        "case_id": "background",
+        "arm": "query_enhanced"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "The Workshop handout packs consist of 6 packs, located at east archive E-2, and are packed in paper sleeves.",
+      "selected_state_ids": [
+        "11c2efda1912469ea39b09f79cb9d319",
+        "00a3dd7f0a0a47f2a58ca3427e96b45a"
+      ],
+      "selected_titles": [
+        "Workshop field kits",
+        "Workshop handout packs"
+      ],
+      "selected_fact_coverage": "all_required_groups",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [
+        {
+          "tool_name": "read_record",
+          "ok": true,
+          "status": "found",
+          "target_kind": "state",
+          "record_id": "00a3dd7f0a0a47f2a58ca3427e96b45a",
+          "record_revision": 1
+        }
+      ],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "query_enhancer": {
+          "calls": 1,
+          "prompt_tokens": 282,
+          "completion_tokens": 19,
+          "total_tokens": 301,
+          "http_wall_seconds": 0.1906413296237588
+        },
+        "embedding": {
+          "calls": 1,
+          "prompt_tokens": 182,
+          "completion_tokens": 0,
+          "total_tokens": 182,
+          "http_wall_seconds": 0.05260121589526534
+        },
+        "task_host": {
+          "calls": 2,
+          "prompt_tokens": 1933,
+          "completion_tokens": 81,
+          "total_tokens": 2014,
+          "http_wall_seconds": 0.7975979414768517
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "query_enhancer",
+          "provider_id": "chatcmpl-9fe779ed6e4e7baf"
+        },
+        {
+          "trace_line_zero_based": 1,
+          "role": "embedding",
+          "provider_id": "embd-1544449b1e6d4322a08267512c78975d"
+        },
+        {
+          "trace_line_zero_based": 2,
+          "role": "task_host",
+          "provider_id": "chatcmpl-a5c9e5b64eb9ee08"
+        },
+        {
+          "trace_line_zero_based": 3,
+          "role": "task_host",
+          "provider_id": "chatcmpl-a3a601715e8bd53c"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 3,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 8481903,
+        "cpu_ns": 2402103
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2269681,
+          "wall_ns": 6137400,
+          "request_bytes": 792,
+          "result_bytes": 2193
+        },
+        "get": {
+          "calls": 1,
+          "failures": 0,
+          "cpu_ns": 1161965,
+          "wall_ns": 2121866,
+          "request_bytes": 188,
+          "result_bytes": 243
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "0a9f24c87fcc09d8bb852da02c0e28bd98df76c811e65dbc4f5c490058591d9a",
+        "result.json": "ca5a22fea75ab6bcac2e351bc56a3290802b861d2bd765627ac395697ba8a88e",
+        "seed-receipt.json": "690948c1f8d27fd60b6eb85b2c58fcf22f4c3d9a11d852b53ebe44512bb0ec88"
+      }
+    },
+    {
+      "job": {
+        "job_id": "4-combined-a_selector",
+        "case_id": "combined",
+        "arm": "a_selector"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 8 kits, north rack N-6, rigid cases.",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319"
+      ],
+      "selected_titles": [
+        "Workshop handout packs",
+        "Workshop field kits"
+      ],
+      "selected_fact_coverage": "all_required_groups",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [
+        {
+          "tool_name": "read_record",
+          "ok": true,
+          "status": "found",
+          "target_kind": "state",
+          "record_id": "00a3dd7f0a0a47f2a58ca3427e96b45a",
+          "record_revision": 1
+        },
+        {
+          "tool_name": "read_record",
+          "ok": true,
+          "status": "found",
+          "target_kind": "state",
+          "record_id": "11c2efda1912469ea39b09f79cb9d319",
+          "record_revision": 2
+        }
+      ],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "read_selector": {
+          "calls": 1,
+          "prompt_tokens": 378,
+          "completion_tokens": 67,
+          "total_tokens": 445,
+          "http_wall_seconds": 0.49822452617809176
+        },
+        "task_host": {
+          "calls": 2,
+          "prompt_tokens": 2597,
+          "completion_tokens": 193,
+          "total_tokens": 2790,
+          "http_wall_seconds": 1.5721869166009128
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "read_selector",
+          "provider_id": "chatcmpl-8b8a09236211aa43"
+        },
+        {
+          "trace_line_zero_based": 1,
+          "role": "task_host",
+          "provider_id": "chatcmpl-a39cc9ccc142ba20"
+        },
+        {
+          "trace_line_zero_based": 2,
+          "role": "task_host",
+          "provider_id": "chatcmpl-a34b5e8c56193008"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 5,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 12358341,
+        "cpu_ns": 3049349
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2674215,
+          "wall_ns": 6716878,
+          "request_bytes": 742,
+          "result_bytes": 3999
+        },
+        "get": {
+          "calls": 2,
+          "failures": 0,
+          "cpu_ns": 1800392,
+          "wall_ns": 3389122,
+          "request_bytes": 356,
+          "result_bytes": 478
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "a5f3a018f8fe151411d5ab24bbce4fdf44ffcf3f9fa7a26ab6ccfd8a34329ad2",
+        "result.json": "d6e6cdbe41a4c7598de25c14587364e41c4448b5c794834fae87b092c3a7bde2",
+        "seed-receipt.json": "edc7f06e576b2f89a8e5d7803d3d778fa4d19cd3865297d11d17e97805976405"
+      }
+    },
+    {
+      "job": {
+        "job_id": "5-background-diagnostic",
+        "case_id": "background",
+        "arm": "full_history"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "The Workshop handout packs consist of 6 packs, located at east archive E-2, and are packed in paper sleeves.",
+      "selected_state_ids": [],
+      "selected_titles": [],
+      "selected_fact_coverage": "none",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "task_host": {
+          "calls": 1,
+          "prompt_tokens": 755,
+          "completion_tokens": 31,
+          "total_tokens": 786,
+          "http_wall_seconds": 0.33551028091460466
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "task_host",
+          "provider_id": "chatcmpl-bbd9bb7a40516630"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 3,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 9509283,
+        "cpu_ns": 2561394
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2375580,
+          "wall_ns": 6344485,
+          "request_bytes": 762,
+          "result_bytes": 2193
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "d9a2dc86dc7119b2e8a4461f409722c321bbfb7768c1165658e26a82470d8359",
+        "result.json": "83ce147541ed71147020ff1b96a5d0e4df0d6a2c542a7e9b4f457c47952541a3",
+        "seed-receipt.json": "c5dc8fc0cba6af372ef73e06772bdc5a8c7714877c97caa2b07c4ede4f651eff"
+      }
+    },
+    {
+      "job": {
+        "job_id": "6-combined-all",
+        "case_id": "combined",
+        "arm": "all"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 8 kits, north rack N-6, rigid cases.",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319",
+        "169a6115675346968485a59178db8b2a",
+        "7119d6d20e034af19e9801bc9d5c14d5",
+        "be21f81c8194497888f0d0be19576ad7"
+      ],
+      "selected_titles": [
+        "Workshop handout packs",
+        "Workshop field kits",
+        "Workshop welcome briefing",
+        "Reserve and label Workshop field kits",
+        "Reserve and label Workshop handout packs"
+      ],
+      "selected_fact_coverage": "all_required_groups",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "task_host": {
+          "calls": 1,
+          "prompt_tokens": 1284,
+          "completion_tokens": 45,
+          "total_tokens": 1329,
+          "http_wall_seconds": 0.5323931090533733
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "task_host",
+          "provider_id": "chatcmpl-88815845f5275799"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 5,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 11734222,
+        "cpu_ns": 3099742
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2802345,
+          "wall_ns": 7097433,
+          "request_bytes": 672,
+          "result_bytes": 3999
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "dcb07c590172a7891edb5c31513835dcecc9d738f874114152bde738a2eefdd6",
+        "result.json": "9f187e7d4d3dfae3a538f8366b106f14821bd4daf255ad6544903a07f7113ba7",
+        "seed-receipt.json": "e2faf1acb7f7490de68be45098a09a425f443d51b66ae16aa5c7cedab39d0496"
+      }
+    },
+    {
+      "job": {
+        "job_id": "7-background-query",
+        "case_id": "background",
+        "arm": "query"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "The Workshop handout packs consist of 6 packs, located at east archive E-2, and are packed in paper sleeves.",
+      "selected_state_ids": [
+        "11c2efda1912469ea39b09f79cb9d319",
+        "00a3dd7f0a0a47f2a58ca3427e96b45a"
+      ],
+      "selected_titles": [
+        "Workshop field kits",
+        "Workshop handout packs"
+      ],
+      "selected_fact_coverage": "all_required_groups",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [
+        {
+          "tool_name": "read_record",
+          "ok": true,
+          "status": "found",
+          "target_kind": "state",
+          "record_id": "00a3dd7f0a0a47f2a58ca3427e96b45a",
+          "record_revision": 1
+        }
+      ],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "embedding": {
+          "calls": 1,
+          "prompt_tokens": 159,
+          "completion_tokens": 0,
+          "total_tokens": 159,
+          "http_wall_seconds": 0.04542778991162777
+        },
+        "task_host": {
+          "calls": 2,
+          "prompt_tokens": 1933,
+          "completion_tokens": 82,
+          "total_tokens": 2015,
+          "http_wall_seconds": 0.8369260840117931
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "embedding",
+          "provider_id": "embd-debdfef86283474cb685979ffc6049f2"
+        },
+        {
+          "trace_line_zero_based": 1,
+          "role": "task_host",
+          "provider_id": "chatcmpl-9fd7b0ea5454a2e2"
+        },
+        {
+          "trace_line_zero_based": 2,
+          "role": "task_host",
+          "provider_id": "chatcmpl-9ccfa108986954e5"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 3,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 10216329,
+        "cpu_ns": 2540360
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2487958,
+          "wall_ns": 6512795,
+          "request_bytes": 702,
+          "result_bytes": 2193
+        },
+        "get": {
+          "calls": 1,
+          "failures": 0,
+          "cpu_ns": 1089613,
+          "wall_ns": 2134146,
+          "request_bytes": 170,
+          "result_bytes": 243
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "9b989a2b0ccd897d431d4862b2221e48470e1029bfae893c28c5437fe0d0f536",
+        "result.json": "313d9ad80167540db36921a8655e3fe0c45b5cdf44bb9673c8c932dad70efa99",
+        "seed-receipt.json": "094d213a702880eec81c5e95a7fd8cf3cc091ba4213181b20143afc7a67f818c"
+      }
+    },
+    {
+      "job": {
+        "job_id": "8-combined-query_enhanced",
+        "case_id": "combined",
+        "arm": "query_enhanced"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 8 kits, north rack N-6, rigid cases.",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "169a6115675346968485a59178db8b2a"
+      ],
+      "selected_titles": [
+        "Workshop handout packs",
+        "Workshop welcome briefing"
+      ],
+      "selected_fact_coverage": "partial_combined_missing_field",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "query_enhancer": {
+          "calls": 1,
+          "prompt_tokens": 381,
+          "completion_tokens": 19,
+          "total_tokens": 400,
+          "http_wall_seconds": 0.19033688586205244
+        },
+        "embedding": {
+          "calls": 1,
+          "prompt_tokens": 251,
+          "completion_tokens": 0,
+          "total_tokens": 251,
+          "http_wall_seconds": 0.049453220795840025
+        },
+        "task_host": {
+          "calls": 1,
+          "prompt_tokens": 1128,
+          "completion_tokens": 46,
+          "total_tokens": 1174,
+          "http_wall_seconds": 0.45411866111680865
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "query_enhancer",
+          "provider_id": "chatcmpl-bab9da688a6f712e"
+        },
+        {
+          "trace_line_zero_based": 1,
+          "role": "embedding",
+          "provider_id": "embd-659e0d4893564660a81d1f18b734cd22"
+        },
+        {
+          "trace_line_zero_based": 2,
+          "role": "task_host",
+          "provider_id": "chatcmpl-bf3822dbb7150095"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 5,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 11570110,
+        "cpu_ns": 3625104
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2866639,
+          "wall_ns": 6909159,
+          "request_bytes": 782,
+          "result_bytes": 3999
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "ed93f35a4e7cbb6f88f45f47d91475d92292d68aa3cdf5f106a6acd897354c4a",
+        "result.json": "40a61011c2a1f2bb00c431db21725b8cadaa74c635377df2b061e73701a03e90",
+        "seed-receipt.json": "66b71f79d2bb1de4806754aaf8129a5dfdfaec752ae1820fe114a141eb512ace"
+      }
+    },
+    {
+      "job": {
+        "job_id": "9-background-a_selector",
+        "case_id": "background",
+        "arm": "a_selector"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "The Workshop handout packs consist of 6 packs, located at east archive E-2, and are packed in paper sleeves.",
+      "selected_state_ids": [
+        "00a3dd7f0a0a47f2a58ca3427e96b45a",
+        "11c2efda1912469ea39b09f79cb9d319"
+      ],
+      "selected_titles": [
+        "Workshop handout packs",
+        "Workshop field kits"
+      ],
+      "selected_fact_coverage": "all_required_groups",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [
+        {
+          "tool_name": "read_record",
+          "ok": false,
+          "status": "not_found",
+          "target_kind": "memory",
+          "record_id": null,
+          "record_revision": null
+        }
+      ],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "read_selector": {
+          "calls": 1,
+          "prompt_tokens": 279,
+          "completion_tokens": 67,
+          "total_tokens": 346,
+          "http_wall_seconds": 0.51183977490291
+        },
+        "task_host": {
+          "calls": 2,
+          "prompt_tokens": 1877,
+          "completion_tokens": 82,
+          "total_tokens": 1959,
+          "http_wall_seconds": 0.7984651769511402
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "read_selector",
+          "provider_id": "chatcmpl-816ef9fc3463dec7"
+        },
+        {
+          "trace_line_zero_based": 1,
+          "role": "task_host",
+          "provider_id": "chatcmpl-aa71fba6301f4b9d"
+        },
+        {
+          "trace_line_zero_based": 2,
+          "role": "task_host",
+          "provider_id": "chatcmpl-a7e2817dd3e51d7f"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 3,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 8645322,
+        "cpu_ns": 2539795
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2547269,
+          "wall_ns": 7446062,
+          "request_bytes": 752,
+          "result_bytes": 2193
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "d85b891a34f80065260c8c320ec96c8f74f9993866b503f0cb8595568b1e5404",
+        "result.json": "00ff783d7cc8bf58d7521a2b543b9f09ae3d8971400e60a9ef656fc313f74f0f",
+        "seed-receipt.json": "966a319faf36e3e5cb312e0f06fc52bd51786c1a18ac0eee792e2073dea45939"
+      }
+    },
+    {
+      "job": {
+        "job_id": "10-combined-diagnostic",
+        "case_id": "combined",
+        "arm": "full_history"
+      },
+      "status": "COMPLETED",
+      "semantic_score": {
+        "correct_final_answer": true,
+        "unsupported_business_claim": false,
+        "scored_by": "Root manual application of frozen rubric after all outputs",
+        "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+      },
+      "answer": "Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 8 kits, north rack N-6, rigid cases.",
+      "selected_state_ids": [],
+      "selected_titles": [],
+      "selected_fact_coverage": "none",
+      "same_complete_legal_history_in_actual_first_http": true,
+      "frozen_view_delivered_in_every_actual_host_http": true,
+      "readbacks_delivered_verbatim": true,
+      "readbacks": [],
+      "state_unchanged": true,
+      "ordinary_memory_unchanged": true,
+      "roles": {
+        "task_host": {
+          "calls": 1,
+          "prompt_tokens": 1004,
+          "completion_tokens": 46,
+          "total_tokens": 1050,
+          "http_wall_seconds": 0.43514519929885864
+        }
+      },
+      "provider_event_refs": [
+        {
+          "trace_line_zero_based": 0,
+          "role": "task_host",
+          "provider_id": "chatcmpl-9576ea706c867277"
+        }
+      ],
+      "seed": {
+        "seed_state_puts": 5,
+        "seed_event_puts": 0,
+        "seed_memory_puts": 0,
+        "wall_ns": 12146106,
+        "cpu_ns": 3216406
+      },
+      "local_state_bank_store_stats": {
+        "search": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 2736104,
+          "wall_ns": 6841419,
+          "request_bytes": 757,
+          "result_bytes": 3999
+        }
+      },
+      "artifact_sha256": {
+        "trace.jsonl": "50e22f48b12feb97cc0779e3377974453a5c8500690dae4ccf644c158a8df9d2",
+        "result.json": "6b1d34dff313f4d07e094522e0a60bc5940a333a4f8caf037f30b9f059896ca7",
+        "seed-receipt.json": "9da168ee47ab2ebdbc228afe4813d2509da6840fdd8a8db5e13db9dd01abf555"
+      }
+    }
+  ],
+  "cost_delta": {
+    "generation_calls": 19,
+    "generation_tokens": 17901,
+    "embedding_calls": 4,
+    "embedding_tokens": 820
+  },
+  "ledger_end": {
+    "generation_calls": 2818,
+    "generation_tokens": 3504405,
+    "embedding_tokens": 20093,
+    "sha256": "9488b804f5b3c6eecdbcc79b833220f2cab13ac7b39c9bac7e75a35b6e16064f",
+    "generation_unknown_usage": 0,
+    "embedding_unknown_usage": 0
+  },
+  "provider_dedup": {
+    "unique_generation_provider_ids": 19,
+    "embedding_provider_ids_available": false,
+    "embedding_identity": "unique trace path plus response line; four actual HTTP events, ledger delta reconciled; no invented provider ids"
+  },
+  "failure_diagnostic": {
+    "job_id": "9-background-a_selector",
+    "observed": "Host attempted target_kind=memory with a State id, got actual not_found, then answered correctly from available context",
+    "expected": "If choosing to read State directory entry, use target_kind=state",
+    "first_broken_link": "Host tool arguments",
+    "identical_first_host_request_to": "7-background-query",
+    "same_first_request": true,
+    "cost_confound": "Shorter not_found readback reduced this continuation prompt by 56 tokens compared with the successful State read; not compression or selection savings",
+    "semantic_task_score_preserved": true,
+    "competing_explanations": [
+      "Host target-kind confusion or inference-path variability despite temperature zero",
+      "Different selected materials or missing State delivery; ruled out for these two first requests by equality and actual delivery"
+    ],
+    "decision": "Preserve failed read and its cost; no post-result retry or prompt change"
+  },
+  "decision": "PIVOT independent A/query-enhancement in this small-bank full-history slice; full_history and ordinary/all were sufficient. Do not inflate distractors to force gains. N3 and N5 remain separate.",
+  "limitations": [
+    "One exposed arc with two dependent prefixes; no unseen/statistical/lifecycle claim",
+    "Selection != delivery != causal adoption; query arms missed field preselection yet answered from shared history",
+    "H has State READ and directory but did not invoke either tool",
+    "State-bank counters include seed/observer/readback calls; direct seed puts separately counted, do not add overlapping measurements",
+    "Ordinary-read CPU/physical I/O and full process end-to-end wall were not separately measured; unknown, not zero"
+  ],
+  "common_host_schema_actual_http_sha256": "d2d23c50d3272b2a0072789386551e3cf751322c7ae6c061ae6f6db69e8d074d",
+  "all_actual_host_schemas_identical": true,
+  "measured_http_wall_seconds": {
+    "generation": 9.103772809263319,
+    "embedding": 0.4293640344403684
+  }
+}
