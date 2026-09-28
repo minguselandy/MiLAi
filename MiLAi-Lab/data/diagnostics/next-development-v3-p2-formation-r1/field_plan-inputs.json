@@ -1,0 +1,33 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "marin"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "field_plan-1",
+            "user_id": "marin",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Keep this as my ongoing sample-delivery plan: Harbor sampler trays, 4 units to rack R-7 in sealed sleeves. Nothing has been booked. When I later ask for the plan, include how the trays are packed. Confirm without booking anything."
+          },
+          {
+            "message_id": "field_plan-2",
+            "user_id": "marin",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "What is my current sample-delivery plan, including quantity, destination and packing? Do not book anything."
+          }
+        ]
+      }
+    ]
+  }
+}

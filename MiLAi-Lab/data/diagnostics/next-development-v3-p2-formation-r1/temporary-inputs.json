@@ -1,0 +1,33 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "tess"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "temporary-1",
+            "user_id": "tess",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "For this reply only, begin with BRIEF and explain the difference between a title and a heading in one sentence. Do not make BRIEF a standing rule for later replies."
+          },
+          {
+            "message_id": "temporary-2",
+            "user_id": "tess",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Explain what an image caption does in one ordinary sentence."
+          }
+        ]
+      }
+    ]
+  }
+}

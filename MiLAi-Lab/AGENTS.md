@@ -2,41 +2,27 @@
 
 ## Current scope and authority
 
-The user confirmed NEXT_DEVELOPMENT v2.0 and the actual thread Goal has resumed to
-`active` (verified after the paused-report publication). This new activation supersedes
-only the execution pause; preserve the historical pause report and all WIP snapshots.
-The objective's NEXT_IMPROVEMENT filename remains absent. The user explicitly confirmed
-[the existing NEXT_DEVELOPMENT plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md).
-Its original planning-only bytes stay unchanged. Follow the
-[v2 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md).
+The user created a new ACTIVE v3 Goal and explicitly confirmed
+[the actual NEXT_DEVELOPMENT v3 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v3.0.md).
+The objective's NEXT_IMPROVEMENT filename is absent; do not create an alias or rewrite it.
+Preserve the plan's original proposed-only bytes; execution authority is the new user Goal
+and confirmation. Follow the [v3 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V3_20260928.md).
 
-The user-confirmed v2 execution has reached its evidence-based closeout. N0/N1/N2/N3
-and the N5/WP7 frozen batch are complete; see the
-[overall report](docs/MILAI_NEXT_DEVELOPMENT_V2_OVERALL_EXPERIMENT_REPORT_20260928.md).
-N2/N3 did not justify independent A/U. N5 native tasks scored 5/5 per arm, but both
-State banks stayed empty. Constructed lifecycle strict is 0/1 per arm because explicit
-formation/maintenance/exit failed despite correct business and closed-turn recovery.
-Do not call the unexercised body-prefill contrast a State benefit or compression result.
-N4 and N6 conditions did not trigger. Stop the current State-superiority claim and do
-not automatically launch new experiments, model assets or deployments from old ACTIVE
-text. The execution closeout is not research success; Product remains NO-GO.
-Actual thread Goal status is authoritative; historical pause/activation records stay.
+v2 is closed with Pivot at b848367; do not reopen it, rewrite failures/costs, or carry its
+untriggered N4/N6 as automatic obligations. v3 must execute P0/P1/P2, conditional P3/P4/P5
+according to the actual gates, and P6 reporting. Green source checks are not completion.
+Compare ordinary B0, one frozen responsibility B1, and optional mechanical result closure C.
+C cannot infer semantic saved, auto-write user text, invent receipts, or hide extra calls.
+Only one correction entry in the same Host/public-message capacity, with no business replay.
+Archive-access and Retained-memory are distinct common-arm contracts; audit history must
+not leak into retained Host inputs through source catalogs, tools or hidden caches.
 
-Work only in `next-development-v2-resume`, based on pause-report commit 105bdaee.
-Eleven N2 WIP files were copied byte-identically and checked against the pause manifest.
-Preserve the former `next-development-v2`, `next-development-v2-closeout`, and original
-C5 `next-improvement` worktrees as historical evidence; no reset/clean or silent discard.
-Root owns docs/data/rubrics/freezes/real calls/scoring; the existing Sol xhigh owns source,
-config, CI and necessary checks; Luna high owns authorized Git publication/downloads.
-Do not repeat already-passed unchanged checks or resume old completed repairs.
-A new explicit stop always overrides this active record.
-
-The exact former AGENTS content is preserved at
-[the historical instruction snapshot](AGENTS_HISTORY_PRE_WP1_20260927.md), in the same directory
-so its relative links retain their original meaning. It is historical evidence, not a second
-active instruction source. Its byte identity and recovery commit are recorded in the
-[WP1 review](docs/MILAI_NEXT_IMPROVEMENT_WP1_REVIEW_20260927.md).
-Do not restart completed historical repairs or turn every older phase restriction into a current blocker.
+Work only in the new `next-development-v3` worktree based on b848367 plus necessary root CI.
+Preserve all old trees, original C5 WIP and v27 draft. Root owns docs/data/rubrics/freezes/
+real HTTP/scoring; existing Sol xhigh owns source/config/CI/necessary checks; Luna high owns
+Git publication and authorized resource downloads. No new downloads are currently required.
+Astra is for a concrete difficult conflict only. No automatic merges or main rewrites.
+A new explicit stop overrides ongoing work. The research goal is not yet achieved; Product NO-GO.
 
 ## Stable boundaries
 

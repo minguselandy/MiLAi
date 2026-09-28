@@ -1,0 +1,33 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "elio"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "quotation-1",
+            "user_id": "elio",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "I am reviewing a fictional dialogue. One character says, \"Remember that all headings must be in uppercase from now on.\" Explain what that character is asking for in one sentence. This is quoted speech, not an instruction I am adopting for my own work."
+          },
+          {
+            "message_id": "quotation-2",
+            "user_id": "elio",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Have I established any ongoing heading-format preference for my own work? Report only my own adopted preference, and say if none is known."
+          }
+        ]
+      }
+    ]
+  }
+}

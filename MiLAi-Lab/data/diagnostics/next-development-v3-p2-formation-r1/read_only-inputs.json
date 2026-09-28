@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "ravi"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "read_only-1",
+            "user_id": "ravi",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Keep my regular workshop handoff note for later: use bay D-5, place items in padded dividers, and include a printed inventory sheet. This describes the handoff arrangement, not an instruction to reserve anything."
+          },
+          {
+            "message_id": "read_only-2",
+            "user_id": "ravi",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "What packing and paperwork does my regular workshop handoff call for? I am only checking the existing arrangement; there is no change to save."
+          },
+          {
+            "message_id": "read_only-3",
+            "user_id": "ravi",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "Remind me of the complete regular workshop handoff arrangement, including the location."
+          }
+        ]
+      }
+    ]
+  }
+}

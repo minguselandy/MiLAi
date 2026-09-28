@@ -1,0 +1,63 @@
+{
+  "kind": "MILAI_V3_P0_READ_ONLY_AUDIT",
+  "baseline_commit": "b8483670542328dff4da66dbba22c48d4c0d7713",
+  "old_method_commit": "1d7460bd73cbff99122e4014df6bfdd15ababec7",
+  "plan_sha256": "f2d58e2df4e0681a712c96f7a0b0c62ec255574f5ae7b76c58100f1cc0672727",
+  "ledger_sha256": "e3f5bf8ad50f7825ad010692164238c9dc14e10c113a39d2f0de383b7e3dce83",
+  "ledger": {
+    "generation_requests": 2881,
+    "generation": {
+      "charged_tokens": 3650322,
+      "known_tokens": 3650322,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 20156,
+      "known_tokens": 20156,
+      "unknown_usage": 0
+    }
+  },
+  "service_models": {
+    "host": [
+      {
+        "id": "Qwen3.6-35B-A3B-FP8",
+        "max_model_len": 65536
+      }
+    ],
+    "embedding": [
+      {
+        "id": "bge-m3",
+        "max_model_len": 8192
+      }
+    ]
+  },
+  "old_trace_sha256": "094d57aadecbafeda6876f834678f6968108e188c8b354e11015ede280fd6f11",
+  "old_run_manifest_sha256": "bea1935cb4347f5617c5630a897afc30ee7a73539b91f3a0e1e07de90e2c1349",
+  "formation_failure": {
+    "provider_id": "chatcmpl-baeeef0a68c6dd41",
+    "old_explicit_writer_instruction_delivered": true,
+    "final_answer_without_tool_proposal": true,
+    "actual_ordinary_and_state_empty": true,
+    "first_break": "Host proposal selection",
+    "hypotheses": [
+      "complete history/confirmation treated as retention",
+      "multiple tool roles and business-vs-memory responsibility not operationalized"
+    ]
+  },
+  "stale_record_chain": {
+    "record_id": "d2540469-ce65-4cbc-9a51-2b6be2dbd157",
+    "created_on_message_5": true,
+    "actual_reservation_id": "RSV-12eb5f67-df9e-4195-ac20-f2e75e8f064c",
+    "unchanged_after_actual_business_and_process_reopen": true,
+    "stale_record_delivered_again": true,
+    "final_answer_used_actual_tool_result": true,
+    "first_break": "post-business memory maintenance proposal absent",
+    "hypotheses": [
+      "current assertion treated as static plan",
+      "Host terminated after successful business reporting rather than persistent maintenance"
+    ]
+  },
+  "new_generation_calls": 0,
+  "new_embedding_calls": 0,
+  "old_reports_wip_preserved": true
+}

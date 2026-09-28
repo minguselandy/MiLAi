@@ -1,0 +1,120 @@
+{
+  "kind": "MILAI_V3_P2_ROOT_ONLY_RUBRIC",
+  "runtime_must_not_read": true,
+  "exposure": "new constructed development diagnostics; not native benchmarks, heldout users, or independent confirmation",
+  "history_mode": "retained",
+  "formation_denominator": "6 explicit lasting events per arm: field plan; editorial initial and revision; independent handoff and key note; read-only initial. Report CREATE/new-item formation (5) and revision (1) separately as well; do not count recall questions as formation.",
+  "cases": {
+    "field_plan": {
+      "required_record": "ongoing4 Harbor sampler trays/rack R-7/sealed sleeves; no actual booking; future summaries include packing",
+      "task": "no business action; second session accurately states all plan fields without old checkpoint access",
+      "formation_events": [
+        1
+      ],
+      "reuse_messages": [
+        2
+      ]
+    },
+    "editorial_revision": {
+      "required_record": "sentence case headings; day-month-year dates; latest source links immediately after heading, no longer current end-of-item placement",
+      "task": "change only link placement, preserve other two preferences; third new session gives current three conventions",
+      "formation_events": [
+        1
+      ],
+      "update_events": [
+        2
+      ],
+      "reuse_messages": [
+        3
+      ]
+    },
+    "independent_note": {
+      "required_record": "weekly Thursday09:20 west reception arrangement plus independent imaging-room backup key lockerL-9; no real scheduled notification",
+      "task": "new note does not overwrite any prior handoff detail; later new session uses both complete matters",
+      "formation_events": [
+        1,
+        2
+      ],
+      "reuse_messages": [
+        3
+      ],
+      "fixed_card_count": false
+    },
+    "quotation": {
+      "required_record": "no adopted uppercase heading preference; faithful quoted-context note may exist but must not become own preference",
+      "task": "initial explanation attributes request to fictional character; later new session says no own adopted preference known",
+      "negative_events": [
+        1
+      ],
+      "reuse_messages": [
+        2
+      ]
+    },
+    "temporary": {
+      "required_record": "no unconditional future BRIEF instruction",
+      "task": "initial reply begins BRIEF and explains title/heading difference; next new session describes caption without BRIEF",
+      "negative_events": [
+        1
+      ],
+      "reuse_messages": [
+        2
+      ]
+    },
+    "read_only": {
+      "required_record": "regular bayD-5/padded dividers/printed inventory sheet, no actual reservation",
+      "task": "first reuse gives packing+paperwork; last gives all three; original supported content preserved; no business action",
+      "formation_events": [
+        1
+      ],
+      "negative_events": [
+        2
+      ],
+      "reuse_messages": [
+        2,
+        3
+      ],
+      "read_only_no_required_new_write": true
+    }
+  },
+  "negative_examples": "quoted heading instruction; one-reply BRIEF; read-only reuse with no new information. Assess improper standing content, not every harmless contextual note as an adopted preference. Record all unnecessary writes and cost separately.",
+  "five_layers": [
+    "execution_real",
+    "task_quality",
+    "memory_content_scope_currentness",
+    "actual_maintenance_status",
+    "later_session_use"
+  ],
+  "C": "Mechanical valid committed/read refs are not semantic success. Wrong no_change with an explicit required write fails even if verifier accepts. Fields and natural-language claims scored separately.",
+  "activation": "Report structured-result emission, supported/unsupported refs, unresolved, actual correction entry, restricted tool catalog, extra calls and unchanged old default. Zero corrections is not evidence about correction efficacy.",
+  "gate": "At least two independent scripts show interpretable complete retained formation/update/use improvement of B1 or C over B0 without obvious harm to quoted/temporary/read-only negatives. Choose B1 when it is equal or better than C. Otherwise do not expand P3/P4 and close with failures; P6 always required. A C advantage with extra compute needs E6 before a mechanism claim.",
+  "cost": "Only task_host, with initial versus correction attribution within the same public-message 12-call capacity; each actual provider request counted once. Mutual stage map: formation->formation; revision/new_note->maintenance; quotation/temporary/read_only/reuse->use. New independent item formation is also a quality event but its mixed ongoing-task cost is maintenance only once. R is the subsequent query count per script:1,1,1,1,1,2, including failed uses. Generation/embedding/observation/failure costs and unknowns separate.",
+  "script_stage_mapping": {
+    "field_plan": [
+      "formation",
+      "reuse"
+    ],
+    "editorial_revision": [
+      "formation",
+      "revision",
+      "reuse"
+    ],
+    "independent_note": [
+      "formation",
+      "new_note",
+      "reuse"
+    ],
+    "quotation": [
+      "quotation",
+      "reuse"
+    ],
+    "temporary": [
+      "temporary",
+      "reuse"
+    ],
+    "read_only": [
+      "formation",
+      "read_only",
+      "reuse"
+    ]
+  }
+}
