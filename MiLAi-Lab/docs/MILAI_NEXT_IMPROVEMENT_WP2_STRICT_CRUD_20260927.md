@@ -97,3 +97,38 @@ core 5114 passed/142 skipped/14 deselected，499.94s；71条协议检查已包�
 foundation 21+81+7+46=155 passed/1 deselected，external成功，wheel/sdist构建成功。
 未选择的Product/archive等job为skipped，不能列为通过。没有为发布重复本地构建或旧实验。
 本段为发布后的记录，后续提交收录；不冒充已写入C2构建产物。
+
+
+## C3b真实暴露后的缺正文合同修复（2026-09-28，工程已冻结）
+
+[写入责任R1](MILAI_NEXT_IMPROVEMENT_WP3_WRITER_POLICY_20260928.md)的boundary增量首次实际HTTP
+`chatcmpl-a11cbf8c1b78c151`输出普通memory和State两项update，均只有action/id、没有content。
+当前严格memory接口沿用了native可选参数，默认None被实际put为null并回updated；State拒绝缺正文。
+后续真实维护只修State，普通memory仍null。旧C2仅修存在性/NO_CHANGE/身份合同，未覆盖这个条件参数缺口。
+不把旧验证改写为已经覆盖，也不修改旧冻结源码或R1失败。
+
+Expected：没有新正文的create/update应返回明确参数错误，原内容和记录集合保持；delete仍可省略正文。
+H1：HTTP提案本来缺字段，可选schema及默认None进入持久化；H2：adapter/parser丢字段。
+原response_text确认H1的实在链条并排除本次H2。为什么后续未修复普通memory仍是语义问题，
+参数guard不保证模型生成正确正文或忠实回答。
+
+Sol仅在strict factory同步/异步入口检查content is None（包括省略），返回error ToolMessage且零写；
+CREATE保留原id拒绝优先级，UPDATE保留缺id拒绝，DELETE不变。保留native参数schema字节兼容，
+只补所有调用者共用的正文要求描述；不改变native默认路径，不扩大为空字符串或正文真伪判定。
+Host ToolNode与boundary executor使用同一实际工具入口，不按策略/样本设例外。
+
+源码/检查已冻结；验证以零模型同步/异步、真实ToolNode及共享executor为限。
+本修复独立于C4 patch，后续实验须采用新方法身份；不重跑六条R1，也不把接口拒绝称为质量提高。
+若未来完整任务仍失败，继续记录实际首断点，禁止在本题反复调提示词直至通过。
+
+
+[后续检查回执](../data/manifests/next-improvement-wp2-strict-content-checks-20260928.json)固定两源码/测试文件。
+用git show隔离加载旧5874ca4工具，真实StructuredTool/InMemoryStore复现UPDATE擦成null与CREATE新增null；
+新工具均返回invalid_arguments/content_required，原记录/数量不变。该复现无HTTP，不改变共享数据库。
+实际ToolNode、sync/async、共享boundary executor、合法操作与Store异常共7项通过；最终仅补零delete断言
+后其中2项通过，不能相加为9个独立检查。目标Ruff/Mypy/diff通过，无包装/入口/依赖变化，不做本地重构建。
+
+原生参数schema新旧相等，SHA
+`f9ac40bcc2230e120937f58102663cd09fedd811f2b03a889e31e05d158d6453`；通用description新旧哈希见回执。
+没有修改共享服务、State合同、Host专用提示、空字符串规则或历史结果。这只验收零写拒绝的工程语义，
+真实后续任务是否因此改善仍由新冻结连续比较判断。实际远端CI在发布后核实。

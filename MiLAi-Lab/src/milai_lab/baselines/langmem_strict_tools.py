@@ -48,11 +48,15 @@ def create_strict_manage_memory_tool(
         if action == "create":
             if id is not None:
                 return _invalid_receipt(tool_call_id, "create_must_omit_id")
+            if content is None:
+                return _invalid_receipt(tool_call_id, "content_required")
             memory_id = uuid.uuid4()
             current_store.put(current_namespace, str(memory_id), {"content": content})
             return _receipt(tool_call_id, "created", memory_id, ok=True)
         if id is None:
             return _invalid_receipt(tool_call_id, "target_id_required")
+        if action == "update" and content is None:
+            return _invalid_receipt(tool_call_id, "content_required")
         prior = current_store.get(current_namespace, str(id))
         if prior is None:
             return _receipt(tool_call_id, "not_found", id, ok=False)
@@ -76,11 +80,15 @@ def create_strict_manage_memory_tool(
         if action == "create":
             if id is not None:
                 return _invalid_receipt(tool_call_id, "create_must_omit_id")
+            if content is None:
+                return _invalid_receipt(tool_call_id, "content_required")
             memory_id = uuid.uuid4()
             await current_store.aput(current_namespace, str(memory_id), {"content": content})
             return _receipt(tool_call_id, "created", memory_id, ok=True)
         if id is None:
             return _invalid_receipt(tool_call_id, "target_id_required")
+        if action == "update" and content is None:
+            return _invalid_receipt(tool_call_id, "content_required")
         prior = await current_store.aget(current_namespace, str(id))
         if prior is None:
             return _receipt(tool_call_id, "not_found", id, ok=False)
@@ -95,7 +103,8 @@ def create_strict_manage_memory_tool(
     # Reuse LangMem's tool subclass so the model-visible required list stays identical.
     return cast(StructuredTool, type(native).from_function(
         manage_memory, coroutine=amanage_memory, name=native.name,
-        description=(native.description + "\nUpdate and delete require an existing memory "
-                     "in this user's namespace; an unchanged update makes no write."),
+        description=(native.description + "\nCreate and update require non-null content. "
+                     "Update and delete require an existing memory in this user's "
+                     "namespace; an unchanged update makes no write."),
         args_schema=native.args_schema,
     ))

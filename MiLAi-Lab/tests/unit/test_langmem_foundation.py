@@ -24,6 +24,7 @@ from langgraph.store.memory import InMemoryStore
 from langmem import create_manage_memory_tool, create_search_memory_tool
 
 from milai_lab.baselines.langmem_agent import (
+    MEMORY_NAMESPACE,
     FoundationScope,
     build_agent,
     invoke_public_message,
@@ -32,6 +33,10 @@ from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory
 from milai_lab.harness.contextual_artifacts import write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.history import HistoryAccess
+from milai_lab.methods.local_state_attention.writers import (
+    create_writer_tools,
+    execute_writes,
+)
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import IncompleteChatResponse, VLLMChatModel
 from milai_lab.runners.langmem_foundation import (
@@ -522,6 +527,53 @@ def test_agent_strict_rejects_unknown_update_then_accepts_create(tmp_path: Path)
             if row["role"] == "tool"] == ["update:tool:0"]
 
 
+def test_agent_strict_content_required_rejects_real_toolnode_then_recovers(
+    tmp_path: Path,
+) -> None:
+    memory_id = str(uuid.uuid4())
+    namespace = ("langmem", "run", "strict", "user")
+    store = InMemoryStore()
+    store.put(namespace, memory_id, {"content": "original"})
+    responses = [
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "update", "id": memory_id}}]}, "update-omitted"),
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "update", "id": memory_id, "content": None}}]}, "update-null"),
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "create"}}]}, "create-omitted"),
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "create", "content": None}}]}, "create-null"),
+        _receipt({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "update", "id": memory_id, "content": "corrected"}}]}, "valid"),
+        _receipt({"answer": "Actual receipt observed."}, "final"),
+    ]
+    requests: list[dict[str, Any]] = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(json.loads(request.read()))
+        if 2 <= len(requests) <= 5:
+            assert store.get(namespace, memory_id).value == {"content": "original"}
+            assert len(store.search(namespace)) == 1
+        return httpx.Response(200, json=responses.pop(0))
+
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client)
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            messages = invoke_public_message(
+                build_agent(model, store, saver, memory_contract="strict"), model,
+                FoundationScope("run", "strict", "user", "episode"), "Update memory.")
+    receipts = [row for row in messages if isinstance(row, ToolMessage)]
+    assert len(requests) == 6 and len(receipts) == 5
+    assert [row.status for row in receipts] == ["error"] * 4 + ["success"]
+    assert [json.loads(str(row.content)).get("reason") for row in receipts[:4]] == [
+        "content_required"] * 4
+    assert json.loads(str(receipts[-1].content))["status"] == "updated"
+    assert [(row.key, row.value) for row in store.search(namespace)] == [
+        (memory_id, {"content": "corrected"})]
+
+
 @pytest.mark.parametrize("asynchronous", [False, True])
 def test_strict_crud_scope_noop_and_native_parameters(asynchronous: bool) -> None:
     class CountingStore(InMemoryStore):
@@ -549,6 +601,7 @@ def test_strict_crud_scope_noop_and_native_parameters(asynchronous: bool) -> Non
     strict = create_strict_manage_memory_tool(("langmem", "{user_id}"), store)
     assert (convert_to_openai_tool(native)["function"]["parameters"] ==
             convert_to_openai_tool(strict)["function"]["parameters"])
+    assert "Create and update require non-null content." in strict.description
 
     def call(arguments: dict[str, Any], user: str, ordinal: int) -> ToolMessage:
         payload = {"type": "tool_call", "name": "manage_memory",
@@ -558,6 +611,13 @@ def test_strict_crud_scope_noop_and_native_parameters(asynchronous: bool) -> Non
                 else strict.invoke(payload, config=config))
 
     absent = str(uuid.uuid4())
+    for ordinal, arguments in enumerate(({}, {"action": "create"},
+                                         {"action": "create", "content": None}), 10):
+        rejected = call(arguments, "alice", ordinal)
+        assert rejected.status == "error"
+        assert json.loads(str(rejected.content))["reason"] == "content_required"
+    assert store.writes == 0 and store.deletes == 0
+    assert store.search(("langmem", "alice")) == []
     missing = call({"action": "update", "id": absent, "content": "proposal"}, "alice", 0)
     assert missing.status == "error"
     assert json.loads(str(missing.content)) == {
@@ -568,6 +628,15 @@ def test_strict_crud_scope_noop_and_native_parameters(asynchronous: bool) -> Non
     assert created.status == "success"
     assert store.get(("langmem", "alice"), memory_id).value == {"content": "first"}
     assert store.writes == 1
+    for ordinal, arguments in enumerate((
+        {"action": "update", "id": memory_id},
+        {"action": "update", "id": memory_id, "content": None},
+    ), 20):
+        rejected = call(arguments, "alice", ordinal)
+        assert rejected.status == "error"
+        assert json.loads(str(rejected.content))["reason"] == "content_required"
+    assert store.writes == 1 and store.deletes == 0
+    assert store.get(("langmem", "alice"), memory_id).value == {"content": "first"}
     cross_owner = call({"action": "update", "id": memory_id,
                         "content": "wrong owner"}, "bob", 2)
     assert cross_owner.status == "error"
@@ -593,6 +662,25 @@ def test_strict_crud_scope_noop_and_native_parameters(asynchronous: bool) -> Non
     assert missing_again.status == "error"
     assert store.deletes == 1
     assert store.get(("langmem", "alice"), memory_id) is None
+
+
+def test_boundary_executor_uses_same_strict_content_guard() -> None:
+    store = InMemoryStore()
+    scope = StateScope("run", "boundary", "alice")
+    memory_id = str(uuid.uuid4())
+    namespace = ("langmem", "run", "boundary", "alice")
+    store.put(namespace, memory_id, {"content": "original"})
+    toolset = create_writer_tools(LocalStateBank(store), MEMORY_NAMESPACE)
+    config = {"configurable": {"foundation_run_id": scope.run_id,
+                               "arm_id": scope.arm_id, "user_id": scope.user_id,
+                               "workspace_id": scope.workspace_id}}
+    result = execute_writes(toolset, [{"name": "manage_memory", "arguments": {
+        "action": "update", "id": memory_id}}], config=config, scope=scope,
+        batch_id="boundary", event_ids=set())
+    assert result.status == "PARTIAL_REJECTED"
+    assert result.receipts[0].status == "error"
+    assert json.loads(str(result.receipts[0].content))["reason"] == "content_required"
+    assert store.get(namespace, memory_id).value == {"content": "original"}
 
 
 @pytest.mark.parametrize("asynchronous", [False, True])

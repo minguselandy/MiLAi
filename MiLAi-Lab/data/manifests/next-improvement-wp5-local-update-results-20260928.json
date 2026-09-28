@@ -1,0 +1,729 @@
+{
+  "kind": "MILAI_LOCAL_UPDATE_R1_RESULTS",
+  "scored_at_utc": "2026-09-27T17:31:27.072225+00:00",
+  "method_commit": "5874ca4ffbf7c08cfb8c4bf8f3108c9b9700696c",
+  "freeze_sha256": "6659c34bcf16b3e70c13c86ff2c4eafa0dece749a52df9bd5fe49ce7ae073858",
+  "rubric_sha256": "23d6ee47d9d785bce7879fb99e7ffd5b296f90372c1fe3606eea433a483b24cf",
+  "units": {
+    "exposed_historical_arcs": 1,
+    "constructed_prefixes": 2,
+    "one_proposal_real_store_diagnostics": 4
+  },
+  "maintenance_correct": {
+    "passed": 3,
+    "denominator": 4
+  },
+  "by_contract": {
+    "replace": {
+      "jobs": 2,
+      "correct": 2,
+      "generation_tokens": 3467,
+      "prompt_tokens": 2863,
+      "completion_tokens": 604
+    },
+    "patch_or_replace": {
+      "jobs": 2,
+      "correct": 1,
+      "generation_tokens": 3675,
+      "prompt_tokens": 3097,
+      "completion_tokens": 578
+    }
+  },
+  "jobs": [
+    {
+      "job": {
+        "job_id": "1-local-replace",
+        "case_id": "one_constraint",
+        "update_contract": "replace"
+      },
+      "status": "APPLIED",
+      "maintenance_correct": true,
+      "necessary_change_committed": true,
+      "unrelated_facts_preserved": true,
+      "state_id": "5589f93f3aa04bbdaacbeae595397d20",
+      "before_revision": 1,
+      "after_revision": 2,
+      "selected_mode": "replace",
+      "used_full_replacement_fallback": false,
+      "proposal": {
+        "batch_id": "1a857db7e2e85b3178e71ff7cf78f54d8d5fd4d2d8d7cb5ea56c00ece709e108",
+        "generation_id": "chatcmpl-835041f5c9bbd119",
+        "calls": [
+          {
+            "name": "manage_state",
+            "arguments": {
+              "action": "update",
+              "id": "5589f93f3aa04bbdaacbeae595397d20",
+              "expected_revision": 1,
+              "mode": "replace",
+              "content": "Mira reports plans to handle Summit archive crates across sessions: 5 crates for mezzanine M-4 using foam inserts. No reservations have been made yet. Separate access is arranged via side door D-2 at 11:45. No business action was taken; this is an acknowledgment of arrangements.",
+              "title": "Summit archive crate handling and access arrangement",
+              "needs": [],
+              "evidence": [
+                "message:5f21c759-df8b-407a-a51c-9623042cebb3",
+                "message:wp5-time-e9b4588cf20e5ba46b24c958"
+              ]
+            }
+          }
+        ],
+        "event_ids": [
+          "message:wp5-time-e9b4588cf20e5ba46b24c958"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"5589f93f3aa04bbdaacbeae595397d20\", \"revision\": 2, \"replayed\": false}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "manage_state",
+          "id": null,
+          "tool_call_id": "1a857db7e2e85b3178e71ff7cf78f54d8d5fd4d2d8d7cb5ea56c00ece709e108:tool:0",
+          "artifact": null,
+          "status": "success"
+        }
+      ],
+      "state_after": {
+        "id": "5589f93f3aa04bbdaacbeae595397d20",
+        "needs": [],
+        "title": "Summit archive crate handling and access arrangement",
+        "content": "Mira reports plans to handle Summit archive crates across sessions: 5 crates for mezzanine M-4 using foam inserts. No reservations have been made yet. Separate access is arranged via side door D-2 at 11:45. No business action was taken; this is an acknowledgment of arrangements.",
+        "archived": false,
+        "revision": 2,
+        "evidence_refs": [
+          "message:5f21c759-df8b-407a-a51c-9623042cebb3",
+          "message:wp5-time-e9b4588cf20e5ba46b24c958"
+        ],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:5f21c759-df8b-407a-a51c-9623042cebb3",
+          "message:wp5-time-e9b4588cf20e5ba46b24c958"
+        ]
+      },
+      "pending_event_ids": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 1452,
+        "prompt_tokens": 1187,
+        "completion_tokens": 265,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "generation_http_wall_seconds": 1.9848685967735946
+      },
+      "state_store_stats_including_seed": {
+        "get": {
+          "calls": 6,
+          "failures": 0,
+          "cpu_ns": 3071212,
+          "wall_ns": 6069617,
+          "request_bytes": 1190,
+          "result_bytes": 810
+        },
+        "search": {
+          "calls": 14,
+          "failures": 0,
+          "cpu_ns": 7476719,
+          "wall_ns": 18967905,
+          "request_bytes": 2082,
+          "result_bytes": 9126
+        },
+        "put": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 1738920,
+          "wall_ns": 13924585,
+          "request_bytes": 3408,
+          "result_bytes": 0
+        }
+      },
+      "seed_measurements": {
+        "state_ids": [
+          "5589f93f3aa04bbdaacbeae595397d20"
+        ],
+        "pending_event_ids": [
+          "message:wp5-time-e9b4588cf20e5ba46b24c958"
+        ],
+        "seed_memory_puts": 0,
+        "seed_state_puts": 1,
+        "seed_event_puts": 2,
+        "memory_snapshot_search_calls": 2,
+        "namespace_guard_search_calls": 3,
+        "memory_record_put_calls": 0,
+        "memory_snapshot_result_bytes": 28,
+        "state_event_store_stats": {
+          "get": {
+            "calls": 5,
+            "failures": 0,
+            "cpu_ns": 2428749,
+            "wall_ns": 4967778,
+            "request_bytes": 1003,
+            "result_bytes": 429
+          },
+          "search": {
+            "calls": 4,
+            "failures": 0,
+            "cpu_ns": 1518421,
+            "wall_ns": 5855745,
+            "request_bytes": 595,
+            "result_bytes": 1709
+          },
+          "put": {
+            "calls": 3,
+            "failures": 0,
+            "cpu_ns": 903150,
+            "wall_ns": 9843133,
+            "request_bytes": 1840,
+            "result_bytes": 0
+          }
+        },
+        "wall_ns": 23359091,
+        "cpu_ns": 6128318
+      },
+      "verification": {
+        "actual_http_proposal_equals_executed_calls": true,
+        "same_case_material_payload_identical_across_arms": true,
+        "source_catalog_content_and_identity_unchanged": true,
+        "all_sources_retained": true,
+        "one_http_call_with_known_usage": true,
+        "no_host_business_execution": true,
+        "rejected_state_and_revision_unchanged": null
+      },
+      "artifacts_sha256": {
+        "result.json": "9112e0f07cbeebcc12a62d11cfb02322417c35dc1da5369a3a7ed60f44fe2669",
+        "seed-receipt.json": "8487242c9ea4cbc99c70bd81aed397632fbf0e79f1f0f8ae8e56849f04979a59",
+        "trace.jsonl": "3e87a686e7b1d1ce3c1d207326a4f0eb34a927a900370ed08f0c77284af53a60"
+      }
+    },
+    {
+      "job": {
+        "job_id": "2-partial-patch",
+        "case_id": "actual_partial_receipt",
+        "update_contract": "patch_or_replace"
+      },
+      "status": "PARTIAL_REJECTED",
+      "maintenance_correct": false,
+      "necessary_change_committed": false,
+      "unrelated_facts_preserved": true,
+      "state_id": "5589f93f3aa04bbdaacbeae595397d20",
+      "before_revision": 2,
+      "after_revision": 2,
+      "selected_mode": "replace",
+      "used_full_replacement_fallback": true,
+      "proposal": {
+        "batch_id": "29f9b65a4e4f7d9231d0456deeff450de0f75c8c746b42398d6ab7b6184c4b3d",
+        "generation_id": "chatcmpl-82c7d078e46dfe27",
+        "calls": [
+          {
+            "name": "manage_state",
+            "arguments": {
+              "action": "update",
+              "id": "5589f93f3aa04bbdaacbeae595397d20",
+              "expected_revision": 2,
+              "mode": "replace",
+              "content": "Summit archive crate handling and access arrangement: 5 crates for mezzanine M-4 using foam inserts. Separate access is arranged via side door D-2 at 10:15. One reservation attempt was made. The reservation succeeded (RSV-ccda2693-2f2c-4d49-af12-14e678dc5a02), but labeling failed due to label service unavailability. The crates are reserved but not labeled. No further action is taken in this turn.",
+              "needs": [],
+              "evidence": [
+                "message:2df63915-4711-4a3a-b399-cba950079447",
+                "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+              ],
+              "remove_evidence": [
+                "message:5f21c759-df8b-407a-a51c-9623042cebb3"
+              ]
+            }
+          }
+        ],
+        "event_ids": [
+          "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "content": "{\"ok\": false, \"status\": \"invalid_edit\", \"id\": \"5589f93f3aa04bbdaacbeae595397d20\", \"reason\": \"explicit_update_invalid\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "manage_state",
+          "id": null,
+          "tool_call_id": "29f9b65a4e4f7d9231d0456deeff450de0f75c8c746b42398d6ab7b6184c4b3d:tool:0",
+          "artifact": null,
+          "status": "error"
+        }
+      ],
+      "state_after": {
+        "id": "5589f93f3aa04bbdaacbeae595397d20",
+        "needs": [
+          "Execute one reservation attempt for Summit archive crates (mezzanine M-4, 5 crates) and label them. If labeling fails after reservation, report actual persisted result and stop."
+        ],
+        "title": "Summit archive crate handling and access arrangement",
+        "content": "Mira reports plans to handle Summit archive crates across sessions: 5 crates for mezzanine M-4 using foam inserts. Separate access is arranged via side door D-2 at 10:15. Mira instructs to make just one reservation attempt for labeling and handling; no business action has been taken yet. This is an acknowledgment of arrangements and pending instruction.",
+        "archived": false,
+        "revision": 2,
+        "evidence_refs": [
+          "message:2df63915-4711-4a3a-b399-cba950079447"
+        ]
+      },
+      "pending_event_ids": [
+        "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2168,
+        "prompt_tokens": 1793,
+        "completion_tokens": 375,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "generation_http_wall_seconds": 2.643935425207019
+      },
+      "state_store_stats_including_seed": {
+        "get": {
+          "calls": 8,
+          "failures": 0,
+          "cpu_ns": 3844773,
+          "wall_ns": 6953587,
+          "request_bytes": 1701,
+          "result_bytes": 824
+        },
+        "search": {
+          "calls": 15,
+          "failures": 0,
+          "cpu_ns": 7490042,
+          "wall_ns": 20881825,
+          "request_bytes": 2366,
+          "result_bytes": 15357
+        },
+        "put": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 1463985,
+          "wall_ns": 9877540,
+          "request_bytes": 3277,
+          "result_bytes": 0
+        }
+      },
+      "seed_measurements": {
+        "state_ids": [
+          "5589f93f3aa04bbdaacbeae595397d20"
+        ],
+        "pending_event_ids": [
+          "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+        ],
+        "seed_memory_puts": 0,
+        "seed_state_puts": 1,
+        "seed_event_puts": 3,
+        "memory_snapshot_search_calls": 2,
+        "namespace_guard_search_calls": 3,
+        "memory_record_put_calls": 0,
+        "memory_snapshot_result_bytes": 28,
+        "state_event_store_stats": {
+          "get": {
+            "calls": 8,
+            "failures": 0,
+            "cpu_ns": 3844773,
+            "wall_ns": 6953587,
+            "request_bytes": 1701,
+            "result_bytes": 824
+          },
+          "search": {
+            "calls": 5,
+            "failures": 0,
+            "cpu_ns": 2261859,
+            "wall_ns": 5619638,
+            "request_bytes": 789,
+            "result_bytes": 3401
+          },
+          "put": {
+            "calls": 5,
+            "failures": 0,
+            "cpu_ns": 1463985,
+            "wall_ns": 9877540,
+            "request_bytes": 3277,
+            "result_bytes": 0
+          }
+        },
+        "wall_ns": 25707598,
+        "cpu_ns": 9210597
+      },
+      "verification": {
+        "actual_http_proposal_equals_executed_calls": true,
+        "same_case_material_payload_identical_across_arms": true,
+        "source_catalog_content_and_identity_unchanged": true,
+        "all_sources_retained": true,
+        "one_http_call_with_known_usage": true,
+        "no_host_business_execution": true,
+        "rejected_state_and_revision_unchanged": true
+      },
+      "artifacts_sha256": {
+        "result.json": "b8d52e8da2456ee39c4e3062ef00f0ba18959db1c4e1b9603ad8b0c6189799fb",
+        "seed-receipt.json": "ababf04803e7c7a92abf6535007b03fca87053cabebdfc2f100b524f04131498",
+        "trace.jsonl": "63aac5a3454996895f8df1d11e92291dc88d68e5757a4cabfd8596f2e6d4f5db"
+      }
+    },
+    {
+      "job": {
+        "job_id": "3-local-patch",
+        "case_id": "one_constraint",
+        "update_contract": "patch_or_replace"
+      },
+      "status": "APPLIED",
+      "maintenance_correct": true,
+      "necessary_change_committed": true,
+      "unrelated_facts_preserved": true,
+      "state_id": "5589f93f3aa04bbdaacbeae595397d20",
+      "before_revision": 1,
+      "after_revision": 2,
+      "selected_mode": "patch",
+      "used_full_replacement_fallback": false,
+      "proposal": {
+        "batch_id": "bb4c8dd2d8be484683e1854f1775985f1b9a0b23cf90a46dbc5b8b66dfca702c",
+        "generation_id": "chatcmpl-9def5ba435e003c3",
+        "calls": [
+          {
+            "name": "manage_state",
+            "arguments": {
+              "action": "update",
+              "id": "5589f93f3aa04bbdaacbeae595397d20",
+              "expected_revision": 1,
+              "mode": "patch",
+              "patches": [
+                {
+                  "old_text": "Separate access is arranged via side door D-2 at 10:15.",
+                  "new_text": "Separate access is arranged via side door D-2 at 11:45."
+                }
+              ],
+              "evidence": [
+                "message:wp5-time-e9b4588cf20e5ba46b24c958"
+              ]
+            }
+          }
+        ],
+        "event_ids": [
+          "message:wp5-time-e9b4588cf20e5ba46b24c958"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"5589f93f3aa04bbdaacbeae595397d20\", \"revision\": 2, \"replayed\": false}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "manage_state",
+          "id": null,
+          "tool_call_id": "bb4c8dd2d8be484683e1854f1775985f1b9a0b23cf90a46dbc5b8b66dfca702c:tool:0",
+          "artifact": null,
+          "status": "success"
+        }
+      ],
+      "state_after": {
+        "id": "5589f93f3aa04bbdaacbeae595397d20",
+        "needs": [],
+        "title": "Summit archive crate handling and access arrangement",
+        "content": "Mira reports plans to handle Summit archive crates across sessions: 5 crates for mezzanine M-4 using foam inserts. No reservations have been made yet. Separate access is arranged via side door D-2 at 11:45. No business action was taken; this is an acknowledgment of arrangements.",
+        "archived": false,
+        "revision": 2,
+        "evidence_refs": [
+          "message:wp5-time-e9b4588cf20e5ba46b24c958"
+        ],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:wp5-time-e9b4588cf20e5ba46b24c958"
+        ]
+      },
+      "pending_event_ids": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 1507,
+        "prompt_tokens": 1304,
+        "completion_tokens": 203,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "generation_http_wall_seconds": 1.511116819921881
+      },
+      "state_store_stats_including_seed": {
+        "get": {
+          "calls": 6,
+          "failures": 0,
+          "cpu_ns": 3301372,
+          "wall_ns": 5922367,
+          "request_bytes": 1232,
+          "result_bytes": 810
+        },
+        "search": {
+          "calls": 14,
+          "failures": 0,
+          "cpu_ns": 7348570,
+          "wall_ns": 17329699,
+          "request_bytes": 2180,
+          "result_bytes": 9030
+        },
+        "put": {
+          "calls": 5,
+          "failures": 0,
+          "cpu_ns": 1655603,
+          "wall_ns": 62400763,
+          "request_bytes": 3347,
+          "result_bytes": 0
+        }
+      },
+      "seed_measurements": {
+        "state_ids": [
+          "5589f93f3aa04bbdaacbeae595397d20"
+        ],
+        "pending_event_ids": [
+          "message:wp5-time-e9b4588cf20e5ba46b24c958"
+        ],
+        "seed_memory_puts": 0,
+        "seed_state_puts": 1,
+        "seed_event_puts": 2,
+        "memory_snapshot_search_calls": 2,
+        "namespace_guard_search_calls": 3,
+        "memory_record_put_calls": 0,
+        "memory_snapshot_result_bytes": 28,
+        "state_event_store_stats": {
+          "get": {
+            "calls": 5,
+            "failures": 0,
+            "cpu_ns": 2805143,
+            "wall_ns": 4892379,
+            "request_bytes": 1038,
+            "result_bytes": 429
+          },
+          "search": {
+            "calls": 4,
+            "failures": 0,
+            "cpu_ns": 1795577,
+            "wall_ns": 4477557,
+            "request_bytes": 623,
+            "result_bytes": 1709
+          },
+          "put": {
+            "calls": 3,
+            "failures": 0,
+            "cpu_ns": 976527,
+            "wall_ns": 5529880,
+            "request_bytes": 1861,
+            "result_bytes": 0
+          }
+        },
+        "wall_ns": 17988668,
+        "cpu_ns": 7061844
+      },
+      "verification": {
+        "actual_http_proposal_equals_executed_calls": true,
+        "same_case_material_payload_identical_across_arms": true,
+        "source_catalog_content_and_identity_unchanged": true,
+        "all_sources_retained": true,
+        "one_http_call_with_known_usage": true,
+        "no_host_business_execution": true,
+        "rejected_state_and_revision_unchanged": null
+      },
+      "artifacts_sha256": {
+        "result.json": "8de35e9b1ce22cbd39685f41ac508738053583c2706680f9827a44ccf53aadca",
+        "seed-receipt.json": "a5f4ed5e8f4b646a20a24d83a4afc1b313f7d4bd1c24e33858eada9c59f92601",
+        "trace.jsonl": "378b601371d3334029a34130f6656bfc5e71aef57acf52936be3a9852abfe856"
+      }
+    },
+    {
+      "job": {
+        "job_id": "4-partial-replace",
+        "case_id": "actual_partial_receipt",
+        "update_contract": "replace"
+      },
+      "status": "APPLIED",
+      "maintenance_correct": true,
+      "necessary_change_committed": true,
+      "unrelated_facts_preserved": true,
+      "state_id": "5589f93f3aa04bbdaacbeae595397d20",
+      "before_revision": 2,
+      "after_revision": 3,
+      "selected_mode": "replace",
+      "used_full_replacement_fallback": false,
+      "proposal": {
+        "batch_id": "e78f7a08a4a27dfd7160f2e67d869488b7e8abdd7992a30fc14a8d50af93852c",
+        "generation_id": "chatcmpl-9eaa01ef8800164a",
+        "calls": [
+          {
+            "name": "manage_state",
+            "arguments": {
+              "action": "update",
+              "id": "5589f93f3aa04bbdaacbeae595397d20",
+              "expected_revision": 2,
+              "mode": "replace",
+              "content": "Mira reports plans to handle Summit archive crates across sessions: 5 crates for mezzanine M-4 using foam inserts. Separate access is arranged via side door D-2 at 10:15. One reservation attempt was made. The reservation succeeded (RSV-ccda2693-2f2c-4d49-af12-14e678dc5a02), but labeling failed due to label service unavailability. The reservation is persisted; labeling was not created. No further action is taken in this turn.",
+              "needs": [],
+              "evidence": [
+                "message:2df63915-4711-4a3a-b399-cba950079447",
+                "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+              ],
+              "remove_evidence": null
+            }
+          }
+        ],
+        "event_ids": [
+          "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+        ]
+      },
+      "actual_receipts": [
+        {
+          "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"5589f93f3aa04bbdaacbeae595397d20\", \"revision\": 3, \"replayed\": false}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "manage_state",
+          "id": null,
+          "tool_call_id": "e78f7a08a4a27dfd7160f2e67d869488b7e8abdd7992a30fc14a8d50af93852c:tool:0",
+          "artifact": null,
+          "status": "success"
+        }
+      ],
+      "state_after": {
+        "id": "5589f93f3aa04bbdaacbeae595397d20",
+        "needs": [],
+        "title": "Summit archive crate handling and access arrangement",
+        "content": "Mira reports plans to handle Summit archive crates across sessions: 5 crates for mezzanine M-4 using foam inserts. Separate access is arranged via side door D-2 at 10:15. One reservation attempt was made. The reservation succeeded (RSV-ccda2693-2f2c-4d49-af12-14e678dc5a02), but labeling failed due to label service unavailability. The reservation is persisted; labeling was not created. No further action is taken in this turn.",
+        "archived": false,
+        "revision": 3,
+        "evidence_refs": [
+          "message:2df63915-4711-4a3a-b399-cba950079447",
+          "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+        ],
+        "dependency_unknown": true,
+        "dependency_source_ids": [
+          "message:2df63915-4711-4a3a-b399-cba950079447",
+          "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+        ]
+      },
+      "pending_event_ids": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2015,
+        "prompt_tokens": 1676,
+        "completion_tokens": 339,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "generation_http_wall_seconds": 2.3834755709394813
+      },
+      "state_store_stats_including_seed": {
+        "get": {
+          "calls": 9,
+          "failures": 0,
+          "cpu_ns": 4022721,
+          "wall_ns": 7311670,
+          "request_bytes": 1862,
+          "result_bytes": 1376
+        },
+        "search": {
+          "calls": 15,
+          "failures": 0,
+          "cpu_ns": 6816379,
+          "wall_ns": 17887571,
+          "request_bytes": 2261,
+          "result_bytes": 15594
+        },
+        "put": {
+          "calls": 7,
+          "failures": 0,
+          "cpu_ns": 1964286,
+          "wall_ns": 11028525,
+          "request_bytes": 5218,
+          "result_bytes": 0
+        }
+      },
+      "seed_measurements": {
+        "state_ids": [
+          "5589f93f3aa04bbdaacbeae595397d20"
+        ],
+        "pending_event_ids": [
+          "tool:cdb26ad70ba08f283ef460ab63343873bbdf1704a2a853d69edaf282c6dfbacf"
+        ],
+        "seed_memory_puts": 0,
+        "seed_state_puts": 1,
+        "seed_event_puts": 3,
+        "memory_snapshot_search_calls": 2,
+        "namespace_guard_search_calls": 3,
+        "memory_record_put_calls": 0,
+        "memory_snapshot_result_bytes": 28,
+        "state_event_store_stats": {
+          "get": {
+            "calls": 8,
+            "failures": 0,
+            "cpu_ns": 3585991,
+            "wall_ns": 6578637,
+            "request_bytes": 1645,
+            "result_bytes": 824
+          },
+          "search": {
+            "calls": 5,
+            "failures": 0,
+            "cpu_ns": 2005379,
+            "wall_ns": 5324133,
+            "request_bytes": 754,
+            "result_bytes": 3401
+          },
+          "put": {
+            "calls": 5,
+            "failures": 0,
+            "cpu_ns": 1377724,
+            "wall_ns": 7667514,
+            "request_bytes": 3242,
+            "result_bytes": 0
+          }
+        },
+        "wall_ns": 22692298,
+        "cpu_ns": 8595933
+      },
+      "verification": {
+        "actual_http_proposal_equals_executed_calls": true,
+        "same_case_material_payload_identical_across_arms": true,
+        "source_catalog_content_and_identity_unchanged": true,
+        "all_sources_retained": true,
+        "one_http_call_with_known_usage": true,
+        "no_host_business_execution": true,
+        "rejected_state_and_revision_unchanged": null
+      },
+      "artifacts_sha256": {
+        "result.json": "9e725bcbd6ba8c3637af30511bf56d6430ef4dc31ad8ba07cfcfe3256a4a9ade",
+        "seed-receipt.json": "e74a479b42a9ffa51906b4de264a9a19557ed4708ceef18da415f8a2fa6112f3",
+        "trace.jsonl": "cc5a049928ebaf2a4498dd6929ae052901854b70f685d19889308a8893cacaf0"
+      }
+    }
+  ],
+  "cost": {
+    "generation_calls": 4,
+    "generation_tokens": 7142,
+    "prompt_tokens": 5960,
+    "completion_tokens": 1182,
+    "embedding_calls": 0,
+    "embedding_tokens": 0,
+    "generation_http_wall_seconds": 8.523396412841976
+  },
+  "continuous_after": {
+    "generation_requests": 2799,
+    "generation_tokens": 3486504,
+    "embedding_tokens": 19273,
+    "sha256": "bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6",
+    "sealed_history_unchanged": true
+  },
+  "failure_analysis": {
+    "observed": "Patch-capable partial-result arm selected legal full-replacement fallback, generated plausible updated body/needs, but requested removal of an available source not linked in the current State. Entire edit rejected; State and pending tool event unchanged.",
+    "expected": "Commit actual persisted reservation and label failure, remove stale pending action, retain unrelated plan/access and actual references.",
+    "first_break": "Proposal confused available source catalog with currently attached evidence_refs; strict existing-link removal validation rejected before any State write.",
+    "competing_explanations": [
+      "Model selected the wrong source link to remove; source availability does not mean the State currently cites it.",
+      "Rejecting an already-absent link rather than treating removal as idempotent no-op can add contract friction; that would be a different contract and cannot be silently relaxed after results."
+    ],
+    "not_a_patch_match_failure": "No literal patch was attempted in this failed job; allowed replacement fallback and common evidence-removal capability were used.",
+    "minimal_next": "Keep ordinary patch optional; no more prompt/patch variants in this phase. Only if a later real task requires repair continuation, freeze both arms with the same actual-error opportunity separately; never rewrite this one-proposal result.",
+    "decision": "Pivot from a default local-update advantage claim; use simpler existing whole-body path in X5 absent further evidence, retain bounded optional implementation.",
+    "confounds": [
+      "One exposed historical arc and two constructed prefixes; no statistical quality or unseen claim.",
+      "Patch-capable schema is larger; full same material payload verified, but schema/token differences are treatment.",
+      "One proposal per diagnostic, no repair continuation or complete Host task; rejection keeps information but does not count necessary update success.",
+      "The partial-result observation is a fixed real WP6 receipt, not a new business execution."
+    ]
+  },
+  "measurement_limits": [
+    "Store stats include seed/events/meta and readback; logical bytes are serialized sizes, not disk I/O.",
+    "State-only seeds indexed false; zero embedding calls observed, not unmeasured charges filled with zero.",
+    "No lifecycle formation/reuse benefit or price estimate; developer costs separate."
+  ]
+}
