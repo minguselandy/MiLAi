@@ -1,0 +1,111 @@
+{
+  "kind": "UNIFIED_V8_V9_MERIT_SMOKE_INPUTS",
+  "status": "GENERATED_NO_MODEL_CALLS",
+  "created_at_utc": "2026-09-28T17:26:57.643144+00:00",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "adapter_source_commit": "aa7a25ed203cc9b3a93801d7ac00ae7bfa255c83",
+  "policy_sha256": "aa829ce2265800ad7fdb3e59ea6c41f215e04959d888e7bf77c8a6126c7856e9",
+  "groups": {
+    "smoke": {
+      "purpose": "smoke",
+      "arcs": [
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "arc_id": "arc5-000",
+          "base_seed": 5,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=5",
+          "selection_path": "unified-v8-v9-merit-smoke/arc5-000.json",
+          "selection_sha256": "106a7666f91096416b3ff4acb8f49569a7de54132de606792618c93fe6d6bcbe",
+          "arc_sha256": "dd11b2704f7b811a7a8be34f1a70b7399c7e2d8d459e829305be57c16fa87416",
+          "initial_world_sha256": "f975486ed2fc5e3b2506ee6d1f7d5856ee725653b159e96c3b2cc61ee83f3db8",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 6
+        },
+        {
+          "domain": "d1",
+          "difficulty": "hard",
+          "arc_id": "arc6-000",
+          "base_seed": 6,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=6",
+          "selection_path": "unified-v8-v9-merit-smoke/arc6-000.json",
+          "selection_sha256": "32cb435822c1c5cfc143a2d6b633fb63b88fcb954588f5093378c70e785bc9a2",
+          "arc_sha256": "03850efa1bc312cf5ab4e124b6827352de19782fd2a7fb2ea6d24e0a2a725550",
+          "initial_world_sha256": "5c6122bed74f5f7ddf662c84cadbde2ba929fe642d23157887c6e4739d7bad55",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 7
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "arc_id": "d2-arc7-000",
+          "base_seed": 7,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=7",
+          "selection_path": "unified-v8-v9-merit-smoke/d2-arc7-000.json",
+          "selection_sha256": "56a40c46a74a880ddf47ddaf7eebc23ccaa6fdb1d81cd547c9b42e140bc8dd4b",
+          "arc_sha256": "fe996b7c31c76d51cf15bd3c69d0e680dd705341c7ed3516630d963384d0dc0a",
+          "initial_world_sha256": "44b33e82de9c85e079afd8dfc89cf0b59b846fdcb7a685b22c55843391c91032",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 5
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "arc_id": "d2-arc8-000",
+          "base_seed": 8,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=8",
+          "selection_path": "unified-v8-v9-merit-smoke/d2-arc8-000.json",
+          "selection_sha256": "7eec1683d92875186a9254e75062fdf5e4ad57746552d6e4e02a7801676a58e4",
+          "arc_sha256": "7cea7d96a9a2c201d0f3a7594dd14dcb9ebbee782c26834e910af3f226901598",
+          "initial_world_sha256": "4877cf3b28c322280ccd70618456b34434035fbbc90275842a97c9b175b97ea8",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 7
+        },
+        {
+          "domain": "d3",
+          "difficulty": "easy",
+          "arc_id": "d3-arc9-000",
+          "base_seed": 9,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=9",
+          "selection_path": "unified-v8-v9-merit-smoke/d3-arc9-000.json",
+          "selection_sha256": "859db88493927f122cdc4a43c68de9056aa402277567b5f29361406ec30adffe",
+          "arc_sha256": "ba2921b4cb3c156c2e1f685d12c156830aef557e99305310ba308e446b07c0f6",
+          "initial_world_sha256": "efd2e10e8a3b2d37503ff72a96a4a6a61939ca33465beb5790c9cd28a7c15b9a",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 6
+        },
+        {
+          "domain": "d3",
+          "difficulty": "hard",
+          "arc_id": "d3-arc10-000",
+          "base_seed": 10,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=10",
+          "selection_path": "unified-v8-v9-merit-smoke/d3-arc10-000.json",
+          "selection_sha256": "41b3bfc0da3a17d4b04b2f2a890e737bc923c256b086cf6f54f5e69ae257da37",
+          "arc_sha256": "af665434af762cc910c8f002bdf8f15b4e1a0f829ceba171934866623179e6be",
+          "initial_world_sha256": "c930e5841739fcbbebcf20c12d2126ab46a32aa77c84d77f953a942a657d049c",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 7
+        }
+      ],
+      "arc_count": 6,
+      "episode_count": 30,
+      "public_message_count": 38
+    }
+  },
+  "historical_or_within_batch_hash_collisions": [],
+  "official_leak_check": "All six unmodified generators completed, each invokes official leak_check. No outcome filtering or replacement.",
+  "limits": [
+    "New seeds from the same published generator/templates; not independent task families.",
+    "Full original five episodes, native task/checker/merge behavior and world preserved.",
+    "Raw arc/world bytes are ignored; public manifest contains IDs/arguments/hashes."
+  ],
+  "real_generation_calls": 0,
+  "real_embedding_calls": 0
+}

@@ -191,6 +191,12 @@ R1费用／副作用／未运行项保留，R2全新namespace，不拼接轨迹�
 实际SDK六路径dry-run、六CLI零模型prepare、必要单次离线构建通过。源码已停笔等待发布；Root核对15工程文件及46项制品哈希。
 完整MERIT输入或具体运行身份仍待冻结，当前没有开始原生benchmark模型调用。
 
+U1适配器及协议已由Luna发布为`aa7a25ed203cc9b3a93801d7ac00ae7bfa255c83`，Root核对远端一致。
+随后按原规则生成[六个完整MERIT inputs](../data/manifests/unified-v8-v9-merit-smoke-inputs-20260929.json)：
+三域easy/hard、seeds5—10，共30 episodes、12 dependent、38公开消息；官方leak check通过，arc/world历史及批内哈希无碰撞。
+原始arc和world留在ignored artifacts，公开仅身份／生成参数／哈希，0模型或embedding调用。
+输入和运行顺序将在发布后于同一HEAD正式prepare；再冻结全部身份、scorer、namespace和连续账本，才开始U1。
+
 ## 全范围需求与当前状态
 
 | 要求 | 证明完成所需证据 | 当前 |

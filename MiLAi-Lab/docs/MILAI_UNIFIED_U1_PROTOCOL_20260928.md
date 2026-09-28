@@ -1,10 +1,10 @@
 # Unified V8/V9 U1 原生功能切片协议
 
-状态：**SOURCE_FREEZE_READY_INPUT_FREEZE_PENDING**。本文件固定拟接通的任务与信息合同；
-源码、完整 MERIT 输入、方法配置、独立运行身份和实际环境清单尚待冻结。不得把此草稿当作已执行结果。
+状态：**INPUT_BYTES_FIXED_PREPARE_PENDING**。源码已发布为`aa7a25ed203cc9b3a93801d7ac00ae7bfa255c83`；
+完整输入、方法配置与运行顺序已固定，正式prepare及执行环境／账本快照待输入发布后冻结。尚未执行原生benchmark。
 U1 之后仍须独立 U2 和适用条件分支，不以 smoke 结束整个 Goal。
-与实现对接的[共同配置草稿](../data/diagnostics/unified-v8-v9-u1/native-common-config.json)也尚未冻结，
-仅供零模型 prepare 核对；Root 是其唯一写入负责人。
+与实现对接的[共同配置](../data/diagnostics/unified-v8-v9-u1/native-common-config.json)固定哈希为
+`8f6437d5ae1870d7ba3a1313d26e9b299e25c25511a7ee095c07d146526c6a2b`；Root 是其唯一写入负责人。
 
 ## 范围与顺序
 
@@ -16,7 +16,8 @@ U1 之后仍须独立 U2 和适用条件分支，不以 smoke 结束整个 Goal�
 
 使用[MERIT 前瞻规则](../data/manifests/unified-v8-v9-merit-selection-policy-20260928.json)中的 smoke 六个完整 arcs：
 三域各 easy/hard 一条，base seeds5—10；每 arc 保留原生五个 episodes 和全部用户消息。
-待 adapter 源码冻结后生成、核查官方 leak check 并保存完整 arc/world 字节，再冻结实际输入哈希。
+已在上述源码发布后生成，官方leak check通过，并保存完整arc/world字节及[输入清单](../data/manifests/unified-v8-v9-merit-smoke-inputs-20260929.json)。
+六arc共30 episodes／12 dependent episodes／38公开消息；与既有及批内arc/world哈希无碰撞，未按结果筛选或替换。
 先执行 NoMemory 与 `native_full_replay_tail60000`，再执行通过 MCP 主动 CRUD 的 ordinary/MiLAi。
 每臂从独立相同初始 world 开始；同一 arc 内 world 随实际执行持续变化。
 NoMemory 的实际 dependent 成绩必须报告，不能假定为0，也不据其结果剔除样本。
@@ -26,7 +27,7 @@ NoMemory 的实际 dependent 成绩必须报告，不能假定为0，也不据�
 [运行顺序](../data/diagnostics/unified-v8-v9-u1/run-order.json)事前指定6个run／36个Host jobs：
 先MemSyco的三臂各6题，再MERIT的NoMemory、原生FullReplay、MiLAi各6完整arcs；最后冻结全部答案并进行MemSyco评分。
 各臂内遵守原选择清单顺序；MERIT每臂30 episodes，共90，不把episode当作90个独立arc。
-此顺序文件尚待源码、完整arc字节和prepare身份冻结，不能单独触发真实调用。
+此顺序文件已绑定源码、选择清单及配置，prepare与实际执行快照尚待冻结，不能单独触发真实调用。
 
 ## MemSyco 信息权限与形成
 
