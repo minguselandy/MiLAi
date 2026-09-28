@@ -31,6 +31,36 @@ SUMMARY_PROMPT = (
 )
 
 
+def summary_request(prior_summary: str, completed_turns: list[dict[str, Any]],
+                    max_chars: int) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Shared archive/live rolling update; no question or current-task argument."""
+    messages = [{"role": "system", "content": SUMMARY_PROMPT},
+                {"role": "user", "content": json.dumps({
+                    "prior_summary": prior_summary,
+                    "new_completed_turns": completed_turns}, ensure_ascii=False, default=str)}]
+    response_format = {"type": "json_schema", "json_schema": {
+        "name": "history_summary_v1", "strict": True,
+        "schema": {"type": "object", "properties": {
+            "summary": {"type": "string", "minLength": 1, "maxLength": max_chars}},
+            "required": ["summary"], "additionalProperties": False}}}
+    return messages, response_format
+
+
+def parse_summary(receipt: dict[str, Any], max_chars: int) -> str:
+    try:
+        choice = receipt["choices"][0]
+        if choice["finish_reason"] != "stop":
+            raise ControlResponseError("HISTORY_SUMMARY_INCOMPLETE")
+        value = json.loads(choice["message"]["content"])
+        if (not isinstance(value, dict) or set(value) != {"summary"}
+                or not isinstance(value["summary"], str) or not value["summary"].strip()
+                or len(value["summary"]) > max_chars):
+            raise ControlResponseError("HISTORY_SUMMARY_INVALID_SHAPE")
+        return value["summary"]
+    except (KeyError, IndexError, TypeError, json.JSONDecodeError) as error:
+        raise ControlResponseError("HISTORY_SUMMARY_INVALID_RESPONSE") from error
+
+
 @dataclass(frozen=True)
 class SummaryView:
     messages: list[BaseMessage]
@@ -45,7 +75,8 @@ class HistorySummaryController:
     def __init__(self, client: VLLMClient, *, window_completed_turns: int,
                  summary_content_max_chars: int, capacity_path: Path,
                  max_calls_per_message: int,
-                 emit: Callable[[dict[str, Any]], None] | None = None) -> None:
+                 emit: Callable[[dict[str, Any]], None] | None = None,
+                 admit_generation: Callable[[], None] | None = None) -> None:
         if (type(window_completed_turns) is not int or window_completed_turns < 0
                 or type(summary_content_max_chars) is not int
                 or summary_content_max_chars <= 0
@@ -57,6 +88,7 @@ class HistorySummaryController:
         self.capacity_path = capacity_path
         self.max_calls_per_message = max_calls_per_message
         self.emit = emit
+        self.admit_generation = admit_generation
 
     def prepare(self, history: HistoryAccess, current_thread: str,
                 current_messages: list[BaseMessage], message_key: str) -> SummaryView:
@@ -95,7 +127,8 @@ class HistorySummaryController:
         payload = {"prior_summary": summary,
                    "new_completed_turns": snapshot.newly_covered}
         payload_text = json.dumps(payload, ensure_ascii=False, default=str)
-        counts[message_key] = counts.get(message_key, 0) + 1
+        if self.admit_generation is None:
+            counts[message_key] = counts.get(message_key, 0) + 1
         counts[attempt_key] = 1
         write_json(self.capacity_path, counts)
         if self.emit is not None:
@@ -108,15 +141,11 @@ class HistorySummaryController:
         token = CONTROL_STAGE.set("history_summary")
         try:
             with request_role("state_control"):
-                receipt = self.client.chat(
-                    [{"role": "system", "content": SUMMARY_PROMPT},
-                     {"role": "user", "content": payload_text}],
-                    response_format={"type": "json_schema", "json_schema": {
-                        "name": "history_summary_v1", "strict": True,
-                        "schema": {"type": "object", "properties": {
-                            "summary": {"type": "string", "minLength": 1,
-                                        "maxLength": self.summary_content_max_chars}},
-                            "required": ["summary"], "additionalProperties": False}}})
+                if self.admit_generation is not None:
+                    self.admit_generation()
+                messages, response_format = summary_request(
+                    summary, snapshot.newly_covered, self.summary_content_max_chars)
+                receipt = self.client.chat(messages, response_format=response_format)
             updated = self._parse(receipt)
         except (ControlResponseError, httpx.TimeoutException) as error:
             self._emit("fallback", message_key, source_ids, covered,
@@ -135,19 +164,7 @@ class HistorySummaryController:
                            updated, snapshot.target_ordinal, False, False)
 
     def _parse(self, receipt: dict[str, Any]) -> str:
-        try:
-            choice = receipt["choices"][0]
-            if choice["finish_reason"] != "stop":
-                raise ControlResponseError("HISTORY_SUMMARY_INCOMPLETE")
-            value = json.loads(choice["message"]["content"])
-            if (not isinstance(value, dict) or set(value) != {"summary"}
-                    or not isinstance(value["summary"], str)
-                    or not value["summary"].strip()
-                    or len(value["summary"]) > self.summary_content_max_chars):
-                raise ControlResponseError("HISTORY_SUMMARY_INVALID_SHAPE")
-            return value["summary"]
-        except (KeyError, IndexError, TypeError, json.JSONDecodeError) as error:
-            raise ControlResponseError("HISTORY_SUMMARY_INVALID_RESPONSE") from error
+        return parse_summary(receipt, self.summary_content_max_chars)
 
     def _emit(self, status: str, message_key: str, source_ids: list[str],
               previous: int, target: int, start_wall: int, start_cpu: int,

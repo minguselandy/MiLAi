@@ -29,6 +29,7 @@ from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.merit_metered import TRANSPORT_CONTRACT, metered_litellm
 
 ARMS = {"no_memory", "native_full_replay_tail60000", "milai"}
+U2_ARMS = {"full_history", "strong_raw_rag", "rolling_summary", "ordinary_milai", "mem0_native"}
 
 
 def sha(path: Path) -> str:
@@ -39,6 +40,7 @@ def trace_costs(root: Path) -> dict[str, Any]:
     """Disjoint request/usage categories; inclusive MCP timing is not added to model wall time."""
     roles: dict[str, Any] = {}
     mcp: dict[str, Any] = {}
+    observations: dict[str, Any] = {}
     phase = "task_host"
     path = root / "trace.jsonl"
     for line in path.read_text().splitlines() if path.exists() else []:
@@ -64,7 +66,18 @@ def trace_costs(root: Path) -> dict[str, Any]:
             row["logical_bytes"] += (len(event["request_body"].encode()) +
                 len(event["response_body"].encode()) if event["kind"] == "http" else
                 event["logical_bytes"])
+        if event.get("event") in {"benchmark_backend_artifact_io", "mem0_native_runtime",
+            "mem0_benchmark_archive_add", "mem0_benchmark_search", "mem0_benchmark_snapshot",
+            "persistent_memory_checkpoint_read", "lsa_history_checkpoint_read",
+            "lsa_history_summary_result", "benchmark_summary_update",
+            "benchmark_raw_index", "benchmark_raw_retrieval"}:
+            row = observations.setdefault(event["event"], {"observations": 0})
+            row["observations"] += 1
+            for key in ("calls", "logical_bytes", "cpu_ns", "wall_ns"):
+                if key in event:
+                    row[key] = row.get(key, 0) + event[key]
     return {"roles": roles, "mcp_inclusive_observation_costs": mcp,
+            **({"backend_observation_costs": observations} if observations else {}),
             "physical_io": None, "store_net_cpu_ns": None,
             "timing_scope": "transport/service/material timings overlap; not additive",
             "ledger_owner": "single runtime RunBudget; no second charge here"}
@@ -146,8 +159,12 @@ def selection_jobs(path: Path, group: str) -> list[dict[str, Any]]:
 def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
     config = read_json(args.config)
     validate_config(config)
-    if args.arm not in ARMS:
+    if args.arm not in ARMS | U2_ARMS:
         raise ValueError("MERIT_ARM_INVALID")
+    if args.arm in U2_ARMS:
+        from milai_lab.baselines.benchmark_memories import validate_u2
+
+        validate_u2(config)
     jobs = selection_jobs(args.selection, args.group)
     identity = {**source_identity(lab_root), "benchmark": "merit", "run_id": args.run,
         "arm_id": args.arm, "recipe_id": config["recipe_id"], "group": args.group,
@@ -164,6 +181,22 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
             else "official episode-local context plus selected native memory",
         "scorer": "official native checker; pre_satisfied distinct from success",
         "rubric_read_by_runner": False}
+    if args.arm in U2_ARMS:
+        from milai_lab.baselines.benchmark_memories import (
+            backend_identity,
+            mem0_dependency_identity,
+        )
+
+        identity.update({"backend": backend_identity(args.arm),
+            "transport": "common public LangGraph/v1/native ToolNode; same native business schemas",
+            "history_policy": "common lawful Archive-access/read_history; backend projection",
+            "memory_cadence": "Host direct strict MCP CRUD" if args.arm == "ordinary_milai" else
+                "native Mem0 ADD-only after closed public turn" if args.arm == "mem0_native" else
+                "automatic archive projection/update; no ordinary write tools",
+            "native_read_context": "current public Human only; no future episode messages",
+            "native_replay": "not used; raw checkpoints exclude injected memory shown"})
+        if args.arm == "mem0_native":
+            identity["mem0_dependency"] = mem0_dependency_identity()
     catalogs = []
     for job in jobs:
         selection, _arc, tools, _metrics, runner = load_native_domain_arc(
@@ -172,9 +205,10 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
                          "business_tools": tools.TOOL_SCHEMAS,
                          "system_prompt": runner.SYSTEM_PROMPT})
     identity["native_contracts"] = catalogs
-    if args.arm != "milai" and identity["dependencies"]["litellm"] is None:
+    if args.arm in {"no_memory", "native_full_replay_tail60000"} and (
+            identity["dependencies"]["litellm"] is None):
         raise ValueError("MERIT_LITELLM_DEPENDENCY_UNAVAILABLE")
-    if args.arm == "milai":
+    if args.arm == "milai" or args.arm in U2_ARMS:
         from langchain_core.utils.function_calling import convert_to_openai_tool
         from langgraph.store.memory import InMemoryStore
 
@@ -182,8 +216,19 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
         from milai_lab.baselines.langmem_mcp import MemoryMCP
 
         peer = MemoryMCP(InMemoryStore(), args.run, args.arm, "schema-only",
-                         history_tool=create_history_read_tool(None))
+                         history_tool=create_history_read_tool(None),
+                         read_only=args.arm in U2_ARMS - {"ordinary_milai"})
         identity["memory_tools"] = peer.catalog
+        if args.arm in {"full_history", "rolling_summary", "strong_raw_rag"}:
+            identity["memory_tools"] = [tool for tool in peer.catalog
+                                        if tool["function"]["name"] == "read_history"]
+        if args.arm == "mem0_native":
+            from milai_lab.runners.mem0_native import MEM0_SEARCH_DESCRIPTION, MEM0_SEARCH_SCHEMA
+
+            identity["memory_tools"] = [{"type": "function", "function": {
+                "name": "search_memory", "description": MEM0_SEARCH_DESCRIPTION,
+                "parameters": MEM0_SEARCH_SCHEMA}},
+                convert_to_openai_tool(create_history_read_tool(None))]
         identity["namespace_template"] = list(MEMORY_NAMESPACE)
         identity["history_read_tool"] = convert_to_openai_tool(create_history_read_tool(None))
     return prepare_manifest(args, identity, jobs)
@@ -301,14 +346,15 @@ def run(args: Any, *, lab_root: Path) -> dict[str, Any]:
     run_id = args.run + ":" + args.job
     write_json(root / "run_manifest.json", {"identity": {"run_id": run_id, "arm_id": args.arm}})
     try:
-        if args.arm == "milai":
+        if args.arm == "milai" or args.arm in U2_ARMS:
             from milai_lab.baselines.langmem_benchmark import merit_adapters
             from milai_lab.runners.langmem_application_runtime import open_application_runtime
             from milai_lab.runners.langmem_merit import _run_merit_arc
 
             with open_application_runtime(config, run_id, args.arm, root, "unified-merit",
                                           enable_projection=False) as runtime, ExitStack() as stack:
-                factory, completed = merit_adapters(runtime, root, run_id, args.arm, config, stack)
+                factory, completed = merit_adapters(runtime, root, run_id, args.arm, config, stack,
+                    backend=args.arm if args.arm in U2_ARMS else None)
                 result = _run_merit_arc(Path(job["selection_path"]), root, run_id, runtime.model,
                     runtime.store, runtime.checkpointer, config, arm_id=args.arm,
                     observer=runtime.observer, arc_loader=load_native_domain_arc,

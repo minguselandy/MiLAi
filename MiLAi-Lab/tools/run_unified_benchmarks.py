@@ -24,13 +24,21 @@ def main() -> None:
     execute.add_argument("--job", required=True)
     execute.add_argument("--prepared", type=Path, required=True)
     execute.add_argument("--output", type=Path, required=True)
+    archive = commands.add_parser("run-history")
+    archive.add_argument("--history", required=True)
+    archive.add_argument("--prepared", type=Path, required=True)
+    archive.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     # Native MERIT references do not import LangMem/MCP or its optional dependencies.
     if args.benchmark == "memsyco":
         from milai_lab.runners import memsyco_native
 
-        action = memsyco_native.prepare if args.command == "prepare" else memsyco_native.run
+        action = (memsyco_native.prepare if args.command == "prepare" else
+                  memsyco_native.run_history if args.command == "run-history" else
+                  memsyco_native.run)
     else:
+        if args.command == "run-history":
+            parser.error("run-history is only available for MemSyco U2 archive units")
         from milai_lab.runners import merit_native
 
         action = merit_native.prepare if args.command == "prepare" else merit_native.run

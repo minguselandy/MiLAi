@@ -50,6 +50,16 @@ must not see future within-episode messages. Keep original tools/world/checkers 
 Second external follows the first table; U3–U5 remain evidence-gated, U6 still required.
 Root owns reporting/selection/real calls; Sol is the only source writer; Luna owns Git publication.
 
+U2 implementation and narrow checks are now ready; follow
+[the U2 protocol](docs/MILAI_UNIFIED_U2_PROTOCOL_20260929.md). Ten zero-model pilot prepares passed,
+with actual pinned Mem0/MockHTTP and shared-capacity checks. No U2 real call has occurred yet.
+Publish source, then Root freezes and serially runs the exposed first U1 MemSyco case and complete
+arc5 across five methods before the independent development matrix. Preserve every initial check
+failure; do not repeat passed checks for publication. Simple MERIT controls expose business tools
+and actual MCP read_history only; ordinary retains strict CRUD/search/exact and Mem0 its native search.
+Archive formation and query are separate, with exact owner/source/history cache keys and no gold.
+No new model download, service change or main/old-PR merge is part of this publication.
+
 The following v7 closure is historical:
 
 

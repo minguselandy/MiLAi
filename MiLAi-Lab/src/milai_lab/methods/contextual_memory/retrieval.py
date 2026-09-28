@@ -192,6 +192,26 @@ def _bm25_scores(entries: list[IndexEntry], query: str) -> list[float]:
     return scores
 
 
+def hybrid_order(entries: list[IndexEntry], query: str,
+                 vectors: list[list[float]], query_vector: list[float],
+                 *, rrf_k: int = 60) -> list[int]:
+    """Stable BM25/dense RRF over the same raw entries, without a memory lifecycle."""
+    if len(entries) != len(vectors) or rrf_k <= 0:
+        raise ValueError("HYBRID_INDEX_INVALID")
+    normalized_query = normalized(query_vector, len(query_vector))
+    dense = sorted(range(len(entries)), key=lambda index: (-sum(
+        a * b for a, b in zip(normalized_query,
+            normalized(vectors[index], len(query_vector)), strict=True)), index))
+    scores = _bm25_scores(entries, query)
+    lexical = sorted((index for index, score in enumerate(scores) if score > 0),
+                     key=lambda index: (-scores[index], index))
+    fused = [0.0] * len(entries)
+    for order in (dense, lexical):
+        for position, index in enumerate(order, 1):
+            fused[index] += 1 / (rrf_k + position)
+    return sorted(range(len(entries)), key=lambda index: (-fused[index], index))
+
+
 def rank(
     memory: ContextualMemory, query: str, *, sources: bool = True,
     records: bool = True, valid_at: str = "", known_at: str = "",

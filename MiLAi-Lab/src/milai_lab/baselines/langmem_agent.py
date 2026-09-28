@@ -197,10 +197,17 @@ def build_agent(
     persistent_memory_records: Callable[[RunnableConfig], list[dict[str, Any]]] | None = None,
     memory_boundaries: MemoryBoundaryView | None = None,
     memory_mcp: MemoryMCP | None = None,
+    benchmark_view_hook: Callable[..., Any] | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
         raise ValueError("LANGMEM_MEMORY_CONTRACT_UNKNOWN")
+    if benchmark_view_hook is not None and (
+        local_state_controller is not None or full_history
+        or history_summary_controller is not None or persistent_memory_arm is not None
+        or writer_view_bank is not None or memory_boundaries is not None
+    ):
+        raise ValueError("LANGMEM_BENCHMARK_VIEW_CONFLICT")
     if memory_contract == "strict" and memory_tools is not None:
         raise ValueError("LANGMEM_STRICT_CUSTOM_MEMORY_TOOLS_CONFLICT")
     if memory_mcp is not None and (memory_contract != "strict" or memory_tools is not None
@@ -338,8 +345,10 @@ def build_agent(
         prompt=(prompt if persistent_memory_arm is None
                 and local_state_controller is None and not full_history
                 and history_summary_controller is None and writer_view_bank is None
+                and benchmark_view_hook is None
                 else None),
-                        pre_model_hook=(make_persistent_memory_hook(
+                        pre_model_hook=(benchmark_view_hook if benchmark_view_hook is not None else
+                        make_persistent_memory_hook(
                             prompt, persistent_memory_records,
                             history=history_access if full_history else None,
                             emit=model.client.emit, boundary_view=memory_boundaries, model=model)

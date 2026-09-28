@@ -16,6 +16,7 @@
   "foundation_discovery": "src/milai_lab",
   "foundation_explicit_globs": [
     "src/milai_lab/baselines/langmem_*.py",
+    "src/milai_lab/baselines/benchmark_memories.py",
     "src/milai_lab/methods/local_state_attention/*.py",
     "src/milai_lab/methods/milai_m1/*.py",
     "src/milai_lab/methods/on_demand_reconstruction/*.py",
@@ -50,6 +51,7 @@
     "tests/unit/test_persistent_memory.py",
     "tests/unit/test_langmem_application.py",
     "tests/unit/test_unified_benchmarks.py",
+    "tests/unit/test_benchmark_memories.py",
     "tests/unit/test_merit_native.py"
   ],
   "core_pytest_ignores": [
@@ -70,6 +72,7 @@
     "tests/unit/test_langmem_application.py",
     "tests/unit/test_external_memory_v26.py",
     "tests/unit/test_unified_benchmarks.py",
+    "tests/unit/test_benchmark_memories.py",
     "tests/unit/test_merit_native.py"
   ],
   "external_mypy_paths": [

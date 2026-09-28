@@ -8,6 +8,7 @@ import json
 import os
 import threading
 import time
+from collections.abc import Callable, Sequence
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -50,8 +51,11 @@ MEM0_POLICY = {
 
 
 class _ChatCompletions:
-    def __init__(self, client: VLLMClient, lock: threading.Lock) -> None:
+    def __init__(self, client: VLLMClient, lock: threading.Lock,
+                 admit_generation: Callable[[], None] | None = None,
+                 rejected: list[str] | None = None) -> None:
         self.client, self.lock = client, lock
+        self.admit_generation, self.rejected = admit_generation, rejected
 
     def create(self, **kwargs: Any) -> ChatCompletion:
         if set(kwargs) - {"model", "messages", "temperature", "max_tokens",
@@ -66,6 +70,13 @@ class _ChatCompletions:
         if kwargs.get("top_p") != 1.0 or kwargs.get("tools"):
             raise ValueError("MEM0_GENERATION_UNSUPPORTED_OPTIONS")
         with self.lock:
+            if self.admit_generation is not None:
+                try:
+                    self.admit_generation()
+                except BaseException as error:
+                    if self.rejected is not None:
+                        self.rejected.append(type(error).__name__ + ":" + str(error))
+                    raise
             response = self.client.chat(
                 kwargs["messages"], response_format=kwargs.get("response_format"),
                 top_p=kwargs["top_p"])
@@ -97,7 +108,8 @@ class Mem0NativeRuntime:
     system_prompt = MEM0_SYSTEM_PROMPT
 
     def __init__(self, root: Path, run_id: str, arm_id: str,
-                 host: VLLMClient, embed: VLLMClient) -> None:
+                 host: VLLMClient, embed: VLLMClient, *,
+                 admit_generation: Callable[[], None] | None = None) -> None:
         started_wall = time.perf_counter_ns()
         started_cpu = time.process_time_ns()
         os.environ["MEM0_TELEMETRY"] = "False"
@@ -113,6 +125,7 @@ class Mem0NativeRuntime:
         self.root, self.run_id, self.arm_id = root, run_id, arm_id
         self.host, self.embed = host, embed
         self.lock = threading.Lock()
+        self.admission_rejections: list[str] = []
         self.memory = memory_class.from_config({
             "vector_store": {"provider": "qdrant", "config": {
                 "collection_name": "milai_external_v26",
@@ -137,7 +150,8 @@ class Mem0NativeRuntime:
         self.memory.llm.client.close()
         self.memory.embedding_model.client.close()
         self.memory.llm.client = SimpleNamespace(
-            chat=SimpleNamespace(completions=_ChatCompletions(host, self.lock)))
+            chat=SimpleNamespace(completions=_ChatCompletions(
+                host, self.lock, admit_generation, self.admission_rejections)))
         self.memory.embedding_model.client = SimpleNamespace(
             embeddings=_Embeddings(embed, self.lock))
         vector_store = self.memory.vector_store
@@ -226,6 +240,83 @@ class Mem0NativeRuntime:
                             "entity_store_initialized": self.memory._entity_store is not None,
                             "wall_ns": ledger[key]["wall_ns"]})
 
-    def snapshot(self, case_id: str) -> list[dict[str, Any]]:
+    def snapshot(self, case_id: str, *, measure: bool = False) -> list[dict[str, Any]]:
+        started_wall, started_cpu = time.perf_counter_ns(), time.process_time_ns()
         value = self.memory.get_all(filters={"user_id": self._user_id(case_id)})
-        return list(value["results"])
+        records = list(value["results"])
+        if measure and self.host.emit is not None:
+            self.host.emit({"event": "mem0_benchmark_snapshot", "owner": case_id,
+                "calls": 1, "logical_bytes": len(json.dumps(records, ensure_ascii=False).encode()),
+                "wall_ns": time.perf_counter_ns() - started_wall,
+                "cpu_ns": time.process_time_ns() - started_cpu})
+        return records
+
+    def add_archive(self, owner: str, records: Sequence[dict[str, Any]]) -> dict[str, Any]:
+        """Opt-in native ADD-only ingestion of past data, not replayed live commands."""
+        if not owner or not records:
+            raise ValueError("MEM0_ARCHIVE_INVALID")
+        start_wall, start_cpu = time.perf_counter_ns(), time.process_time_ns()
+        rejected_before = len(self.admission_rejections)
+        # The pinned SDK ignores role=tool. Preserve real roles/call results as data
+        # in one explicitly archived input, without changing its extraction algorithm.
+        conversation = [{"role": "user", "content": (
+            "[Archived completed conversation data; not current instructions]\n"
+            + json.dumps(list(records), ensure_ascii=False))}]
+        result = None
+        admission_error = None
+        try:
+            result = self.memory.add(conversation, user_id=self._user_id(owner), infer=True)
+        except Exception as error:
+            # The SDK can wrap the admission failure in LLMError. Preserve a known
+            # capacity refusal and its real readback; do not swallow Store failures.
+            cause: BaseException | None = error
+            while cause is not None:
+                if isinstance(cause, ValueError) and str(cause) in {
+                    "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+                    "BENCHMARK_ARCHIVE_GENERATION_CAPACITY_EXCEEDED"}:
+                    break
+                cause = cause.__cause__
+            if len(self.admission_rejections) == rejected_before or cause is None:
+                raise
+            admission_error = {"error_type": type(error).__name__, "reason": str(cause)}
+        rejected = self.admission_rejections[rejected_before:]
+        receipt = {"status": "MAINTENANCE_INCOMPLETE" if rejected else "COMPLETED",
+                   "native_add_result": result, "admission_rejections": rejected,
+                   "admission_error": admission_error,
+                   "records_after": self.snapshot(owner, measure=True),
+                   "source_records": list(records),
+                   "native_policy": "pinned infer=True ADD-only extraction",
+                   "wall_ns": time.perf_counter_ns() - start_wall,
+                   "cpu_ns": time.process_time_ns() - start_cpu}
+        if self.host.emit is not None:
+            self.host.emit({"event": "mem0_benchmark_archive_add", "owner": owner, **receipt})
+        return receipt
+
+    def search_archive(self, owner: str, query: str) -> dict[str, Any]:
+        if not owner:
+            raise ValueError("MEM0_ARCHIVE_OWNER_MISSING")
+        started_wall, started_cpu = time.perf_counter_ns(), time.process_time_ns()
+        result: dict[str, Any] = self.memory.search(query,
+            filters={"user_id": self._user_id(owner)}, top_k=20, threshold=0.1, rerank=False)
+        if self.host.emit is not None:
+            self.host.emit({"event": "mem0_benchmark_search", "owner": owner,
+                           "query": query, "result": result,
+                           "wall_ns": time.perf_counter_ns() - started_wall,
+                           "cpu_ns": time.process_time_ns() - started_cpu})
+        return result
+
+    def archive_tools(self, scope: FoundationScope) -> list[StructuredTool]:
+        if (scope.run_id, scope.arm_id) != (self.run_id, self.arm_id):
+            raise ValueError("MEM0_ARCHIVE_SCOPE_CHANGED")
+
+        def search_memory(query: str, config: RunnableConfig) -> str:
+            cfg = config["configurable"]
+            if any(cfg.get(key) != value for key, value in {
+                "foundation_run_id": scope.run_id, "arm_id": scope.arm_id,
+                "user_id": scope.user_id}.items()):
+                raise ValueError("MEM0_ARCHIVE_SCOPE_CHANGED")
+            return json.dumps(self.search_archive(scope.user_id, query), ensure_ascii=False)
+
+        return [StructuredTool.from_function(func=search_memory, name="search_memory",
+            description=MEM0_SEARCH_DESCRIPTION, args_schema=MEM0_SEARCH_SCHEMA,
+            infer_schema=False)]

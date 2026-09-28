@@ -1,5 +1,5 @@
 ---
-status: ACTIVE_U2_IMPLEMENTATION
+status: ACTIVE_U2_ENGINEERING_READY
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 plan_sha256: b496818cc94dc5a3eee83f7795f8afb7f145cc16aa628f31c52d7e33251a948c
 base_commit: 77dfc2f43f2307bb649cdbee9d62a97e5863fac0
@@ -211,15 +211,33 @@ U1新增321 generation/613029tokens/1330embeddingtokens，与真实HTTP及连续
 连续累计3627/4825845/24962，当前unknown usage0，历史嵌套账本保留。本Goal含先前MCP失败和验收新增326/620642/1392。
 G0/G1在本切片范围通过；当前进入独立U2实现，不能以smoke关闭完整Goal。
 
+## U2 实现与试跑准备
+
+[U2协议](MILAI_UNIFIED_U2_PROTOCOL_20260929.md)固定五方法：完整历史、真实滚动摘要、BM25+dense原文RAG、ordinary/MiLAi合并和原生Mem0。
+Sol已完成同一MERIT公开graph、合法当前query、共享12次generation容量、MemSyco独立归档build与只读共同reader。
+相同source group不能冒充相同历史：development为60份不同dialogue，预期0跨题exact-history复用。
+简单三臂只暴露原生业务工具及MCP read_history；ordinary保留strict CRUD/search/exact/history，Mem0提供实际native search/history。
+后端自动取材与Host自主调用分别记录，Mem0固定SDK自动ADD-only能力不扩大为同ID维护。
+
+首次窄检暴露LangGraph hook参数注入名和Mem0包装容量拒绝两个接线问题，已最小修复，失败日志保留；
+mock零向量/缺run_manifest及静态检查问题也保留。真实SDK使用本地Qdrant/SQLite和MockHTTP，
+已验证业务完成后维护容量拒绝保留实际结果、真实Store异常继续抛出。没有真实模型、embedding、Judge或共享Postgres调用。
+最终两benchmark×五臂共10份零模型prepare成功，源码已停笔等待发布和Root执行freeze。
+[工程回执](../data/manifests/unified-v8-v9-u2-engineering-checks-20260929.json)记录26个去重目标通过、0skip及首次失败；
+Root核对15工程文件、57检查制品和10份prepare源码身份全部哈希一致，没有重跑测试。
+[现external环境身份](../data/manifests/unified-v8-v9-u2-external-environment-20260929.json)已核对149个固定Mem0源码文件及既有BM25/spaCy资产，0下载/安装。
+Root先用已曝光U1首题与首arc做10-job小pilot；具体冻结前不运行。独立MERIT18 arcs输入仍未生成，完整development矩阵NOT_RUN。
+账本仍为3627 generation/4,825,845tokens/24,962embeddingtokens。第二外部与适用U3—U6仍待完成；Goal保持active。
+
 ## 全范围需求与当前状态
 
 | 要求 | 证明完成所需证据 | 当前 |
 | --- | --- | --- |
-| U0 身份/资源/许可/曝光 | 源码、模型、数据、scorer 哈希；历史曝光和无模型账本 | COMPLETE_FOR_U1；U2外部身份待补 |
+| U0 身份/资源/许可/曝光 | 源码、模型、数据、scorer 哈希；历史曝光和无模型账本 | COMPLETE_FOR_U1；U2固定Mem0环境身份已核对，具体执行另冻 |
 | Host Agent 真实 MCP | 实际模型提案、MCP 请求/回执、同一 Store 和后续回答 | R2 PASSED 2脚本/3消息/9任务义务；R1失败保留 |
 | U1 MemSyco | 三类各2原题、原生参考及MiLAi、完整历史、原生评分和成本 | COMPLETE；18/18答案单次评分，非满分 |
 | U1 MERIT | 三域easy/hard各1完整arc、原生tools/world/checker、两路径、leak check | COMPLETE；18/18 arc运行、90 episodes |
-| U2 独立比较 | 60题/18arcs建议规模，正式ID另冻；强原文RAG、真实摘要、完整历史、ordinary/候选和Mem0 | IMPLEMENTATION；模型NOT_RUN |
+| U2 独立比较 | 60题/18arcs建议规模，正式ID另冻；强原文RAG、真实摘要、完整历史、ordinary/候选和Mem0 | ENGINEERING_READY；pilot与正式模型NOT_RUN |
 | 第二外部系统 | A-MEM/SimpleMem择一，在首表可用后接入，原生能力和成本可追溯 | NOT_RUN |
 | U3-P 协议 | 需要时独立冻结J/N和thinking；自动选择而非强制调用 | CONDITION_OPEN |
 | U3-O 对象 | 原生真实key失败触发；原工具主表和ref扩展分开 | OBSERVED_PARAMETER_PREFIX_LOSS；待U2决定独立诊断 |
