@@ -1,0 +1,292 @@
+{
+  "kind": "MILAI_V2_N2_PRE_EXECUTION_CHECKS",
+  "source_owner_receipt_sha256": "5e4c79ee0893828ee20f7b5845e6a248f8e4914986b17e1321633c7abbf68b9a",
+  "source_owner_receipt": {
+    "kind": "MILAI_N2_SOURCE_CHECKS",
+    "status": "FREEZE_READY_FOR_ROOT_SERIAL_EXECUTION",
+    "head": "105bdaee7f95d6cccc9b4d227f3492ee33f8794d",
+    "branch": "feat/lab-fixed-state-read-v2-resume-20260928",
+    "source_changes_after_resume": false,
+    "source_hashes": {
+      "MiLAi-Lab/src/milai_lab/methods/local_state_attention/read_probe.py": "f241eac255d8c4a039dc2924f884fa63c8aec65baae9cf4d500cd3dbade1db39",
+      "MiLAi-Lab/src/milai_lab/runners/fixed_state_read.py": "273cfd55d00a4f2bbefee0f19ffdaf2703c5da403b8d48b49a03cf7ff6e3d330",
+      "MiLAi-Lab/tools/run_fixed_state_read.py": "8550939210af3e3c4219d0b754bf48366f0eb4178bbea1f989d072f55358e518",
+      "MiLAi-Lab/tests/unit/test_fixed_state_read.py": "746a5cbf8df0ad558f44fc3d8da4f929ab3cf47f285fb872103568a67dd37a55",
+      "MiLAi-Lab/configs/lab-verification-matrix.json": "6ea871fb7ac8b2c1bbb57f433b2d88674992d633e382ac9b9e9c5d18feff9a8c",
+      ".github/workflows/fast.yml": "15a27e849c10eabc1e90223c70d55ebc4598b0ebef66c9f11ce336828dd0f613",
+      ".github/workflows/ci.yml": "ceaded73291aa97d4d131e2bff6464f8e02ff38eb3a28bffe629157928767bd2"
+    },
+    "migration": [
+      {
+        "path": "MiLAi-Lab/data/diagnostics/next-development-v2-n2-fixed-read-r1/config.json",
+        "paused_sha256": "c5fb7130f801d738a37189bc71474a34216e062f4017116b633a3e25eff7e41f",
+        "original_sha256": "c5fb7130f801d738a37189bc71474a34216e062f4017116b633a3e25eff7e41f",
+        "resumed_sha256": "c5fb7130f801d738a37189bc71474a34216e062f4017116b633a3e25eff7e41f",
+        "exact_match": true
+      },
+      {
+        "path": "MiLAi-Lab/data/diagnostics/next-development-v2-n2-fixed-read-r1/inputs.json",
+        "paused_sha256": "50b334aee2e234952940bcce286cdbb677ef9cdc403c28442b9c42b58120f8fb",
+        "original_sha256": "50b334aee2e234952940bcce286cdbb677ef9cdc403c28442b9c42b58120f8fb",
+        "resumed_sha256": "50b334aee2e234952940bcce286cdbb677ef9cdc403c28442b9c42b58120f8fb",
+        "exact_match": true
+      },
+      {
+        "path": "MiLAi-Lab/data/diagnostics/next-development-v2-n2-fixed-read-r1/rubric.json",
+        "paused_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e",
+        "original_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e",
+        "resumed_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e",
+        "exact_match": true
+      },
+      {
+        "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V2_N2_FIXED_READ_20260928.md",
+        "paused_sha256": "6380567a1ae57e1fe30d20d9c25ff33c05f8eee9c980e9646248413712649582",
+        "original_sha256": "6380567a1ae57e1fe30d20d9c25ff33c05f8eee9c980e9646248413712649582",
+        "resumed_sha256": "6380567a1ae57e1fe30d20d9c25ff33c05f8eee9c980e9646248413712649582",
+        "exact_match": true
+      },
+      {
+        "path": "MiLAi-Lab/src/milai_lab/runners/fixed_state_read.py",
+        "paused_sha256": "273cfd55d00a4f2bbefee0f19ffdaf2703c5da403b8d48b49a03cf7ff6e3d330",
+        "original_sha256": "273cfd55d00a4f2bbefee0f19ffdaf2703c5da403b8d48b49a03cf7ff6e3d330",
+        "resumed_sha256": "273cfd55d00a4f2bbefee0f19ffdaf2703c5da403b8d48b49a03cf7ff6e3d330",
+        "exact_match": true
+      },
+      {
+        "path": "MiLAi-Lab/tests/unit/test_fixed_state_read.py",
+        "paused_sha256": "746a5cbf8df0ad558f44fc3d8da4f929ab3cf47f285fb872103568a67dd37a55",
+        "original_sha256": "746a5cbf8df0ad558f44fc3d8da4f929ab3cf47f285fb872103568a67dd37a55",
+        "resumed_sha256": "746a5cbf8df0ad558f44fc3d8da4f929ab3cf47f285fb872103568a67dd37a55",
+        "exact_match": true
+      },
+      {
+        "path": "MiLAi-Lab/tools/run_fixed_state_read.py",
+        "paused_sha256": "8550939210af3e3c4219d0b754bf48366f0eb4178bbea1f989d072f55358e518",
+        "original_sha256": "8550939210af3e3c4219d0b754bf48366f0eb4178bbea1f989d072f55358e518",
+        "resumed_sha256": "8550939210af3e3c4219d0b754bf48366f0eb4178bbea1f989d072f55358e518",
+        "exact_match": true
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "paused_sha256": "ceaded73291aa97d4d131e2bff6464f8e02ff38eb3a28bffe629157928767bd2",
+        "original_sha256": "ceaded73291aa97d4d131e2bff6464f8e02ff38eb3a28bffe629157928767bd2",
+        "resumed_sha256": "ceaded73291aa97d4d131e2bff6464f8e02ff38eb3a28bffe629157928767bd2",
+        "exact_match": true
+      },
+      {
+        "path": ".github/workflows/fast.yml",
+        "paused_sha256": "15a27e849c10eabc1e90223c70d55ebc4598b0ebef66c9f11ce336828dd0f613",
+        "original_sha256": "15a27e849c10eabc1e90223c70d55ebc4598b0ebef66c9f11ce336828dd0f613",
+        "resumed_sha256": "15a27e849c10eabc1e90223c70d55ebc4598b0ebef66c9f11ce336828dd0f613",
+        "exact_match": true
+      },
+      {
+        "path": "MiLAi-Lab/configs/lab-verification-matrix.json",
+        "paused_sha256": "6ea871fb7ac8b2c1bbb57f433b2d88674992d633e382ac9b9e9c5d18feff9a8c",
+        "original_sha256": "6ea871fb7ac8b2c1bbb57f433b2d88674992d633e382ac9b9e9c5d18feff9a8c",
+        "resumed_sha256": "6ea871fb7ac8b2c1bbb57f433b2d88674992d633e382ac9b9e9c5d18feff9a8c",
+        "exact_match": true
+      },
+      {
+        "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/read_probe.py",
+        "paused_sha256": "f241eac255d8c4a039dc2924f884fa63c8aec65baae9cf4d500cd3dbade1db39",
+        "original_sha256": "f241eac255d8c4a039dc2924f884fa63c8aec65baae9cf4d500cd3dbade1db39",
+        "resumed_sha256": "f241eac255d8c4a039dc2924f884fa63c8aec65baae9cf4d500cd3dbade1db39",
+        "exact_match": true
+      }
+    ],
+    "migration_matches": 11,
+    "checks": [
+      {
+        "phase": "before_pause",
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2/MiLAi-Lab",
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_fixed_state_read.py tests/unit/test_local_state_attention_read_probe.py",
+        "result": "12 passed, 6 warnings in 2.15s",
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "evidence": "original tool output; no saved disk log",
+        "rerun_after_resume": false
+      },
+      {
+        "phase": "before_pause",
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2/MiLAi-Lab",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m ruff check src/milai_lab/methods/local_state_attention/read_probe.py src/milai_lab/runners/fixed_state_read.py tools/run_fixed_state_read.py tests/unit/test_fixed_state_read.py",
+        "result": "All checks passed",
+        "evidence": "original tool output",
+        "rerun_after_resume": false
+      },
+      {
+        "phase": "before_pause",
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2/MiLAi-Lab",
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/methods/local_state_attention/read_probe.py src/milai_lab/runners/fixed_state_read.py tools/run_fixed_state_read.py",
+        "result": "Success: no issues found in 3 source files",
+        "evidence": "original tool output",
+        "rerun_after_resume": false
+      },
+      {
+        "phase": "before_pause",
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2/MiLAi-Lab",
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/check_verification_matrix.py",
+        "result": {
+          "active_sources": 151,
+          "core_direct": 22,
+          "excluded_recovered": 35,
+          "external_direct": 2,
+          "foundation_discovery": 116,
+          "foundation_explicit": 43,
+          "integration_tests": 0,
+          "optional_tests_owned": 13,
+          "private_asset_tests": 11,
+          "protocol_contract_present": true
+        },
+        "evidence": "original tool output",
+        "rerun_after_resume": false
+      },
+      {
+        "phase": "resume",
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab",
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m milai_lab.boundary",
+        "result": "PASS active package has no private product or legacy imports",
+        "evidence": "tool output chunk 6ca7df"
+      },
+      {
+        "phase": "resume",
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab",
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m milai_lab.tools_boundary",
+        "result": "PASS active tools Product dependency inventory (11 files, 20 dependencies, 6 grandfathered private)",
+        "evidence": "tool output chunk 4da21c"
+      },
+      {
+        "phase": "resume",
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab",
+        "command": "git diff --check; plus git diff --no-index --check -- /dev/null for each new runner/CLI/test",
+        "result": "passed, no whitespace error output",
+        "evidence": "tool output and n2-build-receipt.json"
+      },
+      {
+        "phase": "resume",
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab",
+        "command": "env -u MILAI_LANGMEM_POSTGRES_DSN PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_fixed_state_read.py prepare --config data/diagnostics/next-development-v2-n2-fixed-read-r1/config.json --inputs data/diagnostics/next-development-v2-n2-fixed-read-r1/inputs.json --run n2-resume-prepare-only --runtime-root /tmp/milai-n2-resume-prepare-nhn0uM --output /tmp/milai-n2-resume-prepare-nhn0uM/prepared.json",
+        "result": "PREPARED_ZERO_MODEL, 10 jobs",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n2-prepare.log"
+      },
+      {
+        "phase": "resume",
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab",
+        "command": "uv build --offline --out-dir artifacts/next-development-v2/dist",
+        "result": "one successful offline wheel and sdist build",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n2-build.log"
+      }
+    ],
+    "prepare": {
+      "root": "/tmp/milai-n2-resume-prepare-nhn0uM",
+      "identity_sha256": "bf46fa38ea35c26e7a943b61053c36aa90b00d58d34ac61e3e4e628fdd1dc0c8",
+      "source_files_bound": 153,
+      "identity_check": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n2-prepare-identity-check.json"
+    },
+    "build_receipt": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n2-build-receipt.json",
+    "wheel": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "bytes": 539577,
+      "sha256": "0ae3d56445d809b43c8a9ddd8f44312ba1bae90c56308b65e05d30624562d7ae"
+    },
+    "sdist": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/dist/milai_lab-0.1.0.tar.gz",
+      "bytes": 5204063,
+      "sha256": "79176c37b0e0ded116f87b4e666a8bb31ad5d42415307ba14e444f230420e6ac"
+    },
+    "environment": {
+      "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+      "dependencies": {
+        "langchain-core": "1.6.5",
+        "langgraph": "1.1.10",
+        "langgraph-checkpoint-postgres": "2.0.25",
+        "langgraph-checkpoint-sqlite": "2.0.11",
+        "langmem": "0.0.30",
+        "psycopg": "3.3.6",
+        "jsonschema": "4.26.0"
+      },
+      "lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1",
+      "foundation_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python"
+    },
+    "initial_failures_preserved": [
+      {
+        "stage": "first new test execution",
+        "result": "1 failed, 3 passed",
+        "cause": "test assumed top-level tools in JSON-action request; actual catalog is embedded in system",
+        "repair": "assert actual catalog/system and original messages; subsequent 4 passed then related 12 passed"
+      },
+      {
+        "stage": "first Ruff execution",
+        "result": "I001/F401",
+        "cause": "runner import order and unused Trace import",
+        "repair": "imports corrected before final Ruff pass"
+      },
+      {
+        "stage": "resumed task bookkeeping",
+        "result": "first relative foundation-python path did not exist; no tests executed",
+        "repair": "used existing absolute locked foundation path"
+      },
+      {
+        "stage": "package content inspection launcher",
+        "result": "bare python command absent; no package inspection executed",
+        "repair": "ran same inspection with existing absolute foundation Python, all checks passed"
+      }
+    ],
+    "runtime_contract": {
+      "arms": [
+        "all",
+        "query",
+        "query_enhanced",
+        "a_selector",
+        "full_history"
+      ],
+      "tools": [
+        "search_memory",
+        "read_record"
+      ],
+      "host_calls_per_public_message": 12,
+      "control_calls_per_public_message": 13,
+      "host_max_tokens": 4096,
+      "control_max_tokens": 2048,
+      "ordinary_memory": "controlled empty fixture, not historical snapshot",
+      "maintenance": false,
+      "full_history": "same inline legal history and directory/READ rights, no upfront State body",
+      "a_selector": "N0 directory prompt/payload/schema with observations=[]; helper accepts actual observations",
+      "query_enhanced": "entire original query retained as exact prefix before generated anchors",
+      "failed_attempt_retry": "refused; STARTED/FAILED plus partial checkpoint and trace retained",
+      "rubric_read_by_runtime": false,
+      "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    },
+    "verification_limits": [
+      "MockTransport and InMemoryStore with real local SQLite checkpoint; no semantic acceptance",
+      "No real N2 Host/embedding/shared Postgres execution; actual schema decoder compatibility remains for Root",
+      "No broader suite/core71 rerun after resume; source bytes and check ownership unchanged",
+      "Selection or embedding failure terminates that once-only attempt; no silent all fallback",
+      "Physical I/O and unmeasured CPU/monetary cost remain unknown"
+    ],
+    "network_model_calls": 0,
+    "embedding_calls": 0,
+    "shared_postgres_calls": 0,
+    "test_backends": "MockTransport + InMemoryStore + actual local SQLite synthetic checkpoint",
+    "not_run": [
+      "10 real full ReAct paths",
+      "semantic scoring",
+      "new N3 behavior",
+      "full test suite",
+      "new Git commit/push"
+    ],
+    "no_background_sessions": true
+  },
+  "root_acceptance": {
+    "scope": "implementation, prepare and packaging only; real semantic results NOT_RUN",
+    "actual_goal": "active",
+    "input_sha256": "50b334aee2e234952940bcce286cdbb677ef9cdc403c28442b9c42b58120f8fb",
+    "config_sha256": "c5fb7130f801d738a37189bc71474a34216e062f4017116b633a3e25eff7e41f",
+    "rubric_sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e",
+    "continuous_ledger_sha256": "bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6",
+    "formal_prepare_after_source_publication_required": true,
+    "new_real_calls": 0
+  }
+}

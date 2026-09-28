@@ -10,6 +10,14 @@ from typing import Any
 from jsonschema import validate  # type: ignore[import-untyped]
 
 from milai_lab.methods.local_state_attention.integration import _render_view
+from milai_lab.methods.local_state_attention.protocol import (
+    READ_SELECTOR_PROMPT,
+    parse_json_response,
+    read_selector_payload,
+    selected_ids,
+    selection_schema,
+    state_directory,
+)
 from milai_lab.providers.contextual_vllm import VLLMClient
 
 VIEW_MARKER = "[Local State working view:"
@@ -82,6 +90,60 @@ def select_focus(bank: list[dict[str, Any]], query: str,
         raise ValueError("LSA_PROBE_SELECTOR_INVALID") from error
     chosen = set(selected["focus"])
     return [row for row in states if row["id"] in chosen]
+
+
+ANCHOR_PROMPT = (
+    "From the current question and short State directory, return concise entity or "
+    "topic anchors useful for retrieving the same States. Do not answer the question, "
+    "edit States, or infer future observations. Return entity_anchors only."
+)
+
+
+def enhance_query(bank: list[dict[str, Any]], query: str,
+                  client: VLLMClient) -> tuple[str, list[str]]:
+    """Retain the entire original query as the retrieval query's exact prefix."""
+    states = sorted_states(bank)
+    schema: dict[str, Any] = {"type": "object", "properties": {
+        "entity_anchors": {"type": "array", "items": {"type": "string", "minLength": 1},
+                           "maxItems": 8}}, "required": ["entity_anchors"],
+        "additionalProperties": False}
+    receipt = client.chat(
+        [{"role": "system", "content": ANCHOR_PROMPT},
+         {"role": "user", "content": json.dumps(
+             {"current_task": query, "directory": state_directory(states)},
+             ensure_ascii=False)}],
+        response_format={"type": "json_schema", "json_schema": {
+            "name": "local_state_query_anchors_v1", "strict": True, "schema": schema}})
+    plan = parse_json_response(receipt)
+    validate(plan, schema)
+    anchors: list[str] = plan["entity_anchors"]
+    augmented = (query + "\nEntity anchors: " + json.dumps(anchors, ensure_ascii=False)
+                 if anchors else query)
+    return augmented, anchors
+
+
+def select_directory_a(bank: list[dict[str, Any]], query: str,
+                       client: VLLMClient, *,
+                       observations: list[dict[str, Any]] | None = None,
+                       ) -> list[dict[str, Any]]:
+    """Use the live LR/LRU directory A wire; old full-body focus remains separate."""
+    states = sorted_states(bank)
+    if not states:
+        return []
+    allowed = {row["id"] for row in states}
+    receipt = client.chat(
+        [{"role": "system", "content": READ_SELECTOR_PROMPT},
+         {"role": "user", "content": json.dumps(
+             read_selector_payload(query, observations or [], states),
+             ensure_ascii=False)}],
+        response_format={"type": "json_schema", "json_schema": {
+            "name": "local_state_read_selector_v1", "strict": True,
+            "schema": selection_schema("read_ids", allowed)}})
+    chosen = selected_ids(parse_json_response(receipt), "read_ids", allowed)
+    if chosen is None:
+        raise ValueError("LSA_READ_SELECTION_INVALID")
+    ids = set(chosen)
+    return [row for row in states if row["id"] in ids]
 
 
 def render_view(states: list[dict[str, Any]], context_text: str | None = None) -> str:

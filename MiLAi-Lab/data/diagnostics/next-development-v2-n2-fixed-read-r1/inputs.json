@@ -1,0 +1,252 @@
+{
+  "kind": "MILAI_FIXED_READ_INPUTS",
+  "status": "INPUTS_FROZEN_BEFORE_EXECUTION",
+  "study": "next-development-v2-n2-fixed-read-r1",
+  "runtime_reads_rubric": false,
+  "independent_exposed_arcs": 1,
+  "cases": [
+    {
+      "case_id": "background",
+      "user_id": "iris",
+      "current_task": "An update for Workshop field kits: the required quantity is now 8 and the destination is north rack N-6; packing stays the same. My current work is still Workshop handout packs: give its unchanged handling summary. Do not reserve or label anything.",
+      "raw_history": [
+        {
+          "role": "user",
+          "content": "We have three ongoing workshop matters to return to in later sessions. Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 3 kits, west dock W-4, rigid cases. Workshop welcome briefing: room R-3 at 14:30, using the step-free entrance. Nothing has been reserved yet. Acknowledge the arrangements; do not reserve or label anything."
+        },
+        {
+          "role": "assistant",
+          "content": "Acknowledged. Workshop handout packs (6 packs, east archive E-2, paper sleeves), workshop field kits (3 kits, west dock W-4, rigid cases), and workshop welcome briefing (room R-3 at 14:30, step-free entrance) have been noted. No reservations or labeling have been performed."
+        },
+        {
+          "role": "user",
+          "content": "Continue the Workshop handout packs matter. Give its quantity, destination and packing in one short sentence. Do not take a business action."
+        },
+        {
+          "role": "assistant",
+          "content": "The Workshop handout packs consist of 6 packs, located at east archive E-2, and are packed in paper sleeves."
+        },
+        {
+          "role": "user",
+          "content": "An update for Workshop field kits: the required quantity is now 8 and the destination is north rack N-6; packing stays the same. My current work is still Workshop handout packs: give its unchanged handling summary. Do not reserve or label anything."
+        }
+      ],
+      "states": [
+        {
+          "id": "00a3dd7f0a0a47f2a58ca3427e96b45a",
+          "title": "Workshop handout packs",
+          "content": "6 packs, east archive E-2, paper sleeves. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        },
+        {
+          "id": "11c2efda1912469ea39b09f79cb9d319",
+          "title": "Workshop field kits",
+          "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 2,
+          "archived": false
+        },
+        {
+          "id": "169a6115675346968485a59178db8b2a",
+          "title": "Workshop welcome briefing",
+          "content": "Room R-3 at 14:30, using the step-free entrance. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        }
+      ],
+      "memories": [],
+      "source_events": [],
+      "pending_event_ids": [],
+      "provenance": {
+        "state_bank": "Exact original C5 fixed bank; not reformed or corrected.",
+        "history": "Actual owner first-session prefix",
+        "cutoff": "Before original combined-action Host execution; no later tool receipt or answer included.",
+        "source_trace_sha256": "38ea180cbd0cf1e34e24f3e67b13cf2c072ba0b4a7c4056ea4e6f76942bf1a17",
+        "source_trace_zero_based_host_rows": [
+          14
+        ],
+        "auxiliary_memory": "Controlled empty ordinary-memory store, not a claimed historical memory snapshot.",
+        "source_event_store": "Empty in fixed read-only diagnostic; complete allowed source messages are inline. No maintenance/source expansion."
+      }
+    },
+    {
+      "case_id": "combined",
+      "user_id": "iris",
+      "current_task": "Give the current agreed quantity, destination and packing for both Workshop handout packs and Workshop field kits. Do not reserve, label or change anything. Do not act on the welcome briefing.",
+      "raw_history": [
+        {
+          "role": "user",
+          "content": "We have three ongoing workshop matters to return to in later sessions. Workshop handout packs: 6 packs, east archive E-2, paper sleeves. Workshop field kits: 3 kits, west dock W-4, rigid cases. Workshop welcome briefing: room R-3 at 14:30, using the step-free entrance. Nothing has been reserved yet. Acknowledge the arrangements; do not reserve or label anything."
+        },
+        {
+          "role": "assistant",
+          "content": "Acknowledged. Workshop handout packs (6 packs, east archive E-2, paper sleeves), workshop field kits (3 kits, west dock W-4, rigid cases), and workshop welcome briefing (room R-3 at 14:30, step-free entrance) have been noted. No reservations or labeling have been performed."
+        },
+        {
+          "role": "user",
+          "content": "Continue the Workshop handout packs matter. Give its quantity, destination and packing in one short sentence. Do not take a business action."
+        },
+        {
+          "role": "assistant",
+          "content": "The Workshop handout packs consist of 6 packs, located at east archive E-2, and are packed in paper sleeves."
+        },
+        {
+          "role": "user",
+          "content": "An update for Workshop field kits: the required quantity is now 8 and the destination is north rack N-6; packing stays the same. My current work is still Workshop handout packs: give its unchanged handling summary. Do not reserve or label anything."
+        },
+        {
+          "role": "assistant",
+          "content": "The Workshop handout packs consist of 6 packs, located at east archive E-2, and are packed in paper sleeves."
+        },
+        {
+          "role": "user",
+          "content": "We are resuming Workshop field kits. What quantity, destination and packing are currently agreed? Do not reserve or label anything yet."
+        },
+        {
+          "role": "assistant",
+          "content": "The current agreement is for 8 kits, with the destination being the north rack N-6 and packing specified as rigid cases."
+        },
+        {
+          "role": "user",
+          "content": "Give the current agreed quantity, destination and packing for both Workshop handout packs and Workshop field kits. Do not reserve, label or change anything. Do not act on the welcome briefing."
+        }
+      ],
+      "states": [
+        {
+          "id": "00a3dd7f0a0a47f2a58ca3427e96b45a",
+          "title": "Workshop handout packs",
+          "content": "6 packs, east archive E-2, paper sleeves. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        },
+        {
+          "id": "11c2efda1912469ea39b09f79cb9d319",
+          "title": "Workshop field kits",
+          "content": "8 kits, north rack N-6, rigid cases. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 2,
+          "archived": false
+        },
+        {
+          "id": "169a6115675346968485a59178db8b2a",
+          "title": "Workshop welcome briefing",
+          "content": "Room R-3 at 14:30, using the step-free entrance. Acknowledged; no reservation or labeling.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        },
+        {
+          "id": "7119d6d20e034af19e9801bc9d5c14d5",
+          "title": "Reserve and label Workshop field kits",
+          "content": "Reservation attempt for 8 Workshop field kits (north rack N-6, rigid cases) failed. No reservation or labeling performed.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        },
+        {
+          "id": "be21f81c8194497888f0d0be19576ad7",
+          "title": "Reserve and label Workshop handout packs",
+          "content": "Reservation attempt for 6 Workshop handout packs (east archive E-2, paper sleeves) failed. No reservation or labeling performed.",
+          "needs": [],
+          "evidence_refs": [],
+          "revision": 1,
+          "archived": false
+        }
+      ],
+      "memories": [],
+      "source_events": [],
+      "pending_event_ids": [],
+      "provenance": {
+        "state_bank": "Exact original C5 fixed bank; not reformed or corrected.",
+        "history": "Actual complete first session plus actual second-session field question/answer, followed by a constructed read-only task replacing the original action request.",
+        "cutoff": "Before original combined-action Host execution; no later tool receipt or answer included.",
+        "source_trace_sha256": "38ea180cbd0cf1e34e24f3e67b13cf2c072ba0b4a7c4056ea4e6f76942bf1a17",
+        "source_trace_zero_based_host_rows": [
+          14,
+          24
+        ],
+        "auxiliary_memory": "Controlled empty ordinary-memory store, not a claimed historical memory snapshot.",
+        "source_event_store": "Empty in fixed read-only diagnostic; complete allowed source messages are inline. No maintenance/source expansion."
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "job_id": "1-background-all",
+      "case_id": "background",
+      "arm": "all"
+    },
+    {
+      "job_id": "2-combined-query",
+      "case_id": "combined",
+      "arm": "query"
+    },
+    {
+      "job_id": "3-background-query_enhanced",
+      "case_id": "background",
+      "arm": "query_enhanced"
+    },
+    {
+      "job_id": "4-combined-a_selector",
+      "case_id": "combined",
+      "arm": "a_selector"
+    },
+    {
+      "job_id": "5-background-diagnostic",
+      "case_id": "background",
+      "arm": "full_history"
+    },
+    {
+      "job_id": "6-combined-all",
+      "case_id": "combined",
+      "arm": "all"
+    },
+    {
+      "job_id": "7-background-query",
+      "case_id": "background",
+      "arm": "query"
+    },
+    {
+      "job_id": "8-combined-query_enhanced",
+      "case_id": "combined",
+      "arm": "query_enhanced"
+    },
+    {
+      "job_id": "9-background-a_selector",
+      "case_id": "background",
+      "arm": "a_selector"
+    },
+    {
+      "job_id": "10-combined-diagnostic",
+      "case_id": "combined",
+      "arm": "full_history"
+    }
+  ],
+  "protocol": {
+    "host_execution": "Complete shared read-only ReAct turn, including actual read tools and follow-up responses, until final answer or recorded cap/failure.",
+    "writing_frozen": true,
+    "same_full_legal_history_inline_for_all_arms": true,
+    "ordinary_memory_common_empty": true,
+    "feedback_mode": "off",
+    "host_tools": "Existing writer read_only tools: search_memory and read_record; no business/write/maintenance tools. Full-history reference shares these permissions and State directory but receives no preselected State bodies.",
+    "directory": "Same actual id/title/needs/revision entries for every Host and for query-enhanced/A selection.",
+    "query": "Full original question, same existing bge-m3 title+content cosine top2.",
+    "query_enhanced": "One directory-assisted entity_anchors generation, append after complete original query; same cosine top2, all costs.",
+    "a_selector": "One N0 shared directory read selection, new_observations=[], actual returned ids; multiple/empty valid.",
+    "full_history_label": "Full lawful history with shared State read capability, no upfront State bodies; representation reference, not a no-State-tool ablation.",
+    "current_not_truth": "Combined bank has two model-generated claims of failed actions created before actual business execution; these are not tool receipts.",
+    "http_concurrency": 1,
+    "no_unseen_claim": true
+  }
+}

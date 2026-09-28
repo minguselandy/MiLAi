@@ -1,15 +1,14 @@
 ---
-status: PAUSED
+status: ACTIVE
 scope: MiLAi-Lab
 reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 ---
 
 # 长程总计划执行 Goal
 
-> 最新状态（2026-09-28）：用户再次明确暂停，实际 v2 Goal 于 2026-09-27 18:46:35 UTC 设为 paused。
-> 总目标未完成；旧激活及下一步段落是历史证据，不能恢复执行。
-> [最新总体报告](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)涵盖历史实验、N0/N1 与未完成 N2。
-> 本页下表保留早期 SER/P0–P12 时点证据，连续账本以最新总体报告核对值为准。
+> 最新状态（2026-09-28）：用户确认 NEXT_DEVELOPMENT v2.0，实际 Goal 已恢复 active。
+> 当前执行见 [v2 执行记录](MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md)，完整目标尚未完成。
+> [上一暂停报告](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)保留停止时点证据；下表为历史 P0–P12，不能覆盖新阶段状态。
 
 2026-09-27 新授权：用户要求完整执行
 [局部多 State–Attention 规划](MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md)。
