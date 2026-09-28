@@ -1,0 +1,1222 @@
+{
+  "kind": "MILAI_V6_S2_SOURCE_CHECKS",
+  "status": "ROOT_ENGINEERING_ACCEPTED_S3B_REQUIRED_NOT_RUN",
+  "baseline_commit": "4ffd17664ce9d8a6497e57b199b3a6d764adae86",
+  "source_root": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v6/MiLAi-Lab",
+  "source_changes": [
+    {
+      "path": "src/milai_lab/methods/request_context.py",
+      "sha256": "159d6178d519e3c3471bb5ff88698d0855327c9ec16177d21b898f871adb3151",
+      "bytes": 4321,
+      "old_path": "4ffd17664ce9d8a6497e57b199b3a6d764adae86:MiLAi-Lab/src/milai_lab/methods/request_context.py",
+      "old_sha256": "a5c0d20162f1bdee336ab750d383f7235aec87a3fa5ee8676f0a4dac9ad95892",
+      "old_bytes": 2726
+    },
+    {
+      "path": "src/milai_lab/methods/memory_boundaries.py",
+      "sha256": "9c62ba12cf4cf15ccbbfe41c6989569510fb239005626274a4b3eff9df0d500b",
+      "bytes": 24861,
+      "old_path": "4ffd17664ce9d8a6497e57b199b3a6d764adae86:MiLAi-Lab/src/milai_lab/methods/memory_boundaries.py",
+      "old_sha256": "6ca8d6794a1ac34444e456077ecdd8bb18af7a4729af04a4da9fa2574743c484",
+      "old_bytes": 24048
+    },
+    {
+      "path": "tests/unit/test_memory_boundaries.py",
+      "sha256": "3f9be60827f4c906aa70f81dbbc820052830623b4719047b5de53e8533a768e6",
+      "bytes": 19886,
+      "old_path": "4ffd17664ce9d8a6497e57b199b3a6d764adae86:MiLAi-Lab/tests/unit/test_memory_boundaries.py",
+      "old_sha256": "2476039eca34c978fc4e8a73e2b26aa4c5b910cf0d234b7fcda800c56f32d095",
+      "old_bytes": 15490
+    },
+    {
+      "path": "tests/unit/test_persistent_memory.py",
+      "sha256": "31a51cae9588b1cf6a346fca209fa4bb759ab2ca6675545413c136d40873b769",
+      "bytes": 46062,
+      "old_path": "4ffd17664ce9d8a6497e57b199b3a6d764adae86:MiLAi-Lab/tests/unit/test_persistent_memory.py",
+      "old_sha256": "b57265afbc6a3fa3ff8167e9d86236082bab13cf02697969236d88d28556881d",
+      "old_bytes": 44824
+    },
+    {
+      "path": "data/diagnostics/next-development-v6-compact/config.json",
+      "sha256": "d33130e51ce1bfeff1e2f0d6da36c9690312bddba7db2b25eae79eb77e4fcd6f",
+      "bytes": 2012,
+      "old_path": "data/diagnostics/next-development-v5-authority-r2/config.json",
+      "old_sha256": "91105f1ca25cc5cdd21077141eb86bd8913ad2ed061a7693f3e46eb89db23ecd"
+    }
+  ],
+  "config_scope_check": {
+    "path": "artifacts/next-development-v6/s2-checks/config-check.json",
+    "sha256": "37afb5168de3b6ff1a4d354fa3cf3a19a54cf04010b1a9d44f3b5474d4cda336",
+    "bytes": 1190
+  },
+  "commands": [
+    {
+      "id": "core_tests",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_memory_boundaries.py",
+      "exit_code": 0,
+      "collected": 17,
+      "passed": 17,
+      "skipped": 0,
+      "elapsed_seconds": 0.13,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/core-tests.log",
+        "sha256": "7b58711a0cd9206183408ff980a12d4ff24244c6a8b6816024a4374005fd4c6d",
+        "bytes": 99
+      },
+      "nodes": [
+        "tests/unit/test_memory_boundaries.py::test_all_is_complete_and_query_threshold_is_not_a_second_hard_budget",
+        "tests/unit/test_memory_boundaries.py::test_attention_only_when_query_exceeds_capacity_and_base_can_fit",
+        "tests/unit/test_memory_boundaries.py::test_audit_has_no_saved_certification_or_circular_evidence",
+        "tests/unit/test_memory_boundaries.py::test_candidate_replacement_and_every_capacity_check_use_final_user_layout[attention]",
+        "tests/unit/test_memory_boundaries.py::test_candidate_replacement_and_every_capacity_check_use_final_user_layout[query]",
+        "tests/unit/test_memory_boundaries.py::test_candidate_replacement_and_every_capacity_check_use_final_user_layout[rejected]",
+        "tests/unit/test_memory_boundaries.py::test_compact_renderer_preserves_unknown_fields_and_full_audit_material[current_request]",
+        "tests/unit/test_memory_boundaries.py::test_compact_renderer_preserves_unknown_fields_and_full_audit_material[system]",
+        "tests/unit/test_memory_boundaries.py::test_compact_routes_count_model_material_but_selector_keeps_full_candidates[attention]",
+        "tests/unit/test_memory_boundaries.py::test_compact_routes_count_model_material_but_selector_keeps_full_candidates[query]",
+        "tests/unit/test_memory_boundaries.py::test_default_projection_bytes_and_candidate_only_move_one_existing_block",
+        "tests/unit/test_memory_boundaries.py::test_memory_placement_is_explicitly_validated_even_when_disabled",
+        "tests/unit/test_memory_boundaries.py::test_model_view_is_explicitly_validated_even_when_disabled",
+        "tests/unit/test_memory_boundaries.py::test_refs_resolve_current_records_and_delete_does_not_activate_old_content",
+        "tests/unit/test_memory_boundaries.py::test_renderer_keeps_explicit_parts_and_current_user_anchor_after_tools[current_request]",
+        "tests/unit/test_memory_boundaries.py::test_renderer_keeps_explicit_parts_and_current_user_anchor_after_tools[system]",
+        "tests/unit/test_memory_boundaries.py::test_retrieval_error_and_invalid_selected_identity_are_not_soft_success"
+      ]
+    },
+    {
+      "id": "ruff",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/methods/request_context.py src/milai_lab/methods/memory_boundaries.py tests/unit/test_memory_boundaries.py tests/unit/test_persistent_memory.py",
+      "exit_code": 0,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/ruff.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "bytes": 19
+      }
+    },
+    {
+      "id": "mypy_initial",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m mypy src/milai_lab/methods/request_context.py src/milai_lab/methods/memory_boundaries.py",
+      "exit_code": 1,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/mypy.log",
+        "sha256": "dfd3e6664e39963eb9aa4a3e0385ff8c51f7b526c1636a04296a83493ea2c4df",
+        "bytes": 208
+      },
+      "reason": "one assignment error: the tool-observation loop reused position:int before current_user_index:int|None assignment"
+    },
+    {
+      "id": "mypy_final",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m mypy src/milai_lab/methods/request_context.py src/milai_lab/methods/memory_boundaries.py",
+      "exit_code": 0,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/mypy-final.log",
+        "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "bytes": 43
+      },
+      "checked_source_files": 2
+    },
+    {
+      "id": "ruff_after_identifier_repair",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/methods/request_context.py",
+      "exit_code": 0,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/ruff-final.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "bytes": 19
+      }
+    },
+    {
+      "id": "foundation_tests",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity",
+      "exit_code": 0,
+      "collected": 13,
+      "passed": 13,
+      "skipped": 0,
+      "warnings": 15,
+      "elapsed_seconds": 3.19,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/foundation-tests.log",
+        "sha256": "b66943619630d5be572f4dfbcd24729f760d01fbb09e254d4bd277409d6d6441",
+        "bytes": 1814
+      },
+      "nodes": [
+        "tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body[compact_v6-current_request]",
+        "tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body[compact_v6-system]",
+        "tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body[full-current_request]",
+        "tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body[full-system]",
+        "tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost[compact_v6-current_request]",
+        "tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost[compact_v6-system]",
+        "tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost[full-current_request]",
+        "tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost[full-system]",
+        "tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset[compact_v6-current_request]",
+        "tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset[compact_v6-system]",
+        "tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset[full-current_request]",
+        "tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset[full-system]",
+        "tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity"
+      ]
+    },
+    {
+      "id": "actual_frozen_replay",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python artifacts/next-development-v6/s2-checks/replay_full_compact.py",
+      "exit_code": 0,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/replay.log",
+        "sha256": "3d5b30fb6145a08583a68fc2961e6d417f9d63baad0ea4350c81114b4a8fa90f",
+        "bytes": 1543
+      },
+      "mock_requests": 262,
+      "actual_frozen_requests": 131,
+      "complete_actual_turn_audits": 86
+    },
+    {
+      "id": "boundary",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.boundary",
+      "exit_code": 0,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/boundary.log",
+        "sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+        "bytes": 61
+      }
+    },
+    {
+      "id": "tools_boundary",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.tools_boundary",
+      "exit_code": 0,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/tools-boundary.log",
+        "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "bytes": 100
+      }
+    },
+    {
+      "id": "matrix",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python tools/check_verification_matrix.py",
+      "exit_code": 0,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/matrix.log",
+        "sha256": "c38c0811635cd37239afdb2ca64b77f5d44e6513d76e377ae07c501ee900604b",
+        "bytes": 261
+      }
+    },
+    {
+      "id": "diff_check",
+      "command": "git diff --check -- MiLAi-Lab/src/milai_lab/methods/request_context.py MiLAi-Lab/src/milai_lab/methods/memory_boundaries.py MiLAi-Lab/tests/unit/test_memory_boundaries.py MiLAi-Lab/tests/unit/test_persistent_memory.py",
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v6",
+      "exit_code": 0,
+      "log": {
+        "path": "artifacts/next-development-v6/s2-checks/diff-check.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  ],
+  "environments": {
+    "core": {
+      "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+      "executable": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+      "packages": {
+        "pytest": "8.4.2",
+        "ruff": "0.16.5",
+        "mypy": "1.20.2"
+      }
+    },
+    "foundation": {
+      "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+      "executable": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+      "packages": {
+        "pytest": "8.4.2",
+        "httpx": "0.28.1",
+        "langchain-core": "1.6.5",
+        "langgraph": "1.1.10",
+        "langgraph-checkpoint": "2.1.2",
+        "langgraph-checkpoint-sqlite": "2.0.11",
+        "langmem": "0.0.30",
+        "transformers": "4.57.6"
+      }
+    }
+  },
+  "total_passed_pytest_nodes": 30,
+  "total_unique_test_functions": 17,
+  "node_source": ".pytest_cache/v/cache/nodeids, restricted to the exact successful selections; no repeat pytest collection",
+  "retained_failures": [
+    {
+      "check": "mypy_initial",
+      "count": 1,
+      "repair": "rename the observation loop index to observation_index; no request behavior change",
+      "following_checks": [
+        "mypy_final",
+        "ruff_after_identifier_repair",
+        "foundation_tests",
+        "actual_frozen_replay"
+      ]
+    },
+    {
+      "phase": "read_only_command_lookup",
+      "exit_code": 2,
+      "detail": "rg was given nonexistent tools/check_lab_boundaries.py during boundary entry discovery; used existing public milai_lab.boundary/tools_boundary, both passed"
+    }
+  ],
+  "replay_summary": {
+    "path": "artifacts/next-development-v6/s2-checks/replay-summary.json",
+    "sha256": "c1a1687587f3f90670fb89923fa0e6ffeb5abfc256c55dacb5e41d1f9b63f9b5",
+    "bytes": 1959
+  },
+  "replay_observations": {
+    "full": {
+      "path": "artifacts/next-development-v6/s2-checks/full-observations.json",
+      "sha256": "1989f42b1b5e5b070904b451cf498e235720a5ac23669d07a3bafaa047e76706",
+      "bytes": 6938557
+    },
+    "compact_v6": {
+      "path": "artifacts/next-development-v6/s2-checks/compact_v6-observations.json",
+      "sha256": "3d5a4cf9c9d9ec2e5aa9b1d9becfb2abeb4c8b8144bb52f6b1c88f8d6315a217",
+      "bytes": 6874972
+    },
+    "request_pairs": {
+      "path": "artifacts/next-development-v6/s2-checks/request-pairs.json",
+      "sha256": "5caf41f5fd7d57478af2ea50bbd90aae36c54427109ec241575dbdacae0ef493",
+      "bytes": 82070
+    }
+  },
+  "root_profile": {
+    "path": "data/manifests/next-development-v6-s2-offline-profile-20260928.json",
+    "sha256": "a6f4a9054f29eb7cade23668340e445b1d731e44df28402b3a07df76da84c434",
+    "bytes": 167204
+  },
+  "root_combined_profile_summary": {
+    "requests": 131,
+    "before_tokens": 180667,
+    "after_tokens": 173797,
+    "saved_tokens": 6870,
+    "full_input_saving_ratio": 0.038025760100073615,
+    "old_memory_context_overhead_standalone": 72040,
+    "new_memory_context_overhead_standalone": 65170,
+    "standalone_overhead_saving_ratio": 0.09536368684064409,
+    "removed_counts": {
+      "empty_open_questions": 131,
+      "empty_active_refs": 95,
+      "value_wrappers": 140,
+      "tool_content_sha256": 78
+    }
+  },
+  "coverage": [
+    "historical absent model_view defaults to full: all 131 ordered payloads, complete capacity/template/token observations, graph and 86 audit values exact",
+    "compact actual hook/provider projection equals all 131 combined candidate message hashes and token counts; non-message request fields exact",
+    "full raw hook/checkpoint SystemMessage, Store record material, hash-validation metadata, source references, tool JSON and full audit remain unchanged",
+    "extra ordinary outer/value fields retained intact; nonempty active refs and questions retained",
+    "query and attention actual Graph continuations in both placements; selector receives original records; single cached-ID selector resolves current updated body",
+    "compact candidate token/byte and complete capacity checks/delivery describe actual Model View; invalid config values rejected"
+  ],
+  "unrun_or_limits": [
+    "No new real semantic regression or effect measurement; Root S3b is required before adoption",
+    "131 replay requests are exposed fixed v5 all routes; query/attention coverage is synthetic MockTransport/Graph, not new real requests",
+    "Original traces capture ordered dictionaries, not original socket bytes; locked httpx encoding is compared with actual new MockTransport body bytes",
+    "Original response receipt and token usage are replayed unchanged; compact token counts are local template measurements, not new generation usage",
+    "Unknown extra ordinary fields retain full shape and may reduce savings on future data",
+    "No build: no entrypoint, package declaration, dependency or lock change; no broad suites or additional source changes"
+  ],
+  "execution_scope": {
+    "new_real_http_calls": 0,
+    "new_real_embedding_calls": 0,
+    "shared_postgres_calls": 0,
+    "ledger_attached_to_replay": false,
+    "test_storage": "InMemoryStore plus actual local SQLite checkpoints/synthetic fixtures; MockTransport HTTP only",
+    "git_mutations": 0,
+    "downloads": 0
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/next-development-v6/s2-checks/boundary.log",
+      "sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+      "bytes": 61
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/compact_v6-observations.json",
+      "sha256": "3d5a4cf9c9d9ec2e5aa9b1d9becfb2abeb4c8b8144bb52f6b1c88f8d6315a217",
+      "bytes": 6874972
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/config-check.json",
+      "sha256": "37afb5168de3b6ff1a4d354fa3cf3a19a54cf04010b1a9d44f3b5474d4cda336",
+      "bytes": 1190
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/core-tests.log",
+      "sha256": "7b58711a0cd9206183408ff980a12d4ff24244c6a8b6816024a4374005fd4c6d",
+      "bytes": 99
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/finalize_checks.py",
+      "sha256": "6c37448af6cc92310d78f305fe7ad88a836a65fa742bbde5965e95fe293fd472",
+      "bytes": 11698
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/foundation-tests.log",
+      "sha256": "b66943619630d5be572f4dfbcd24729f760d01fbb09e254d4bd277409d6d6441",
+      "bytes": 1814
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/full-observations.json",
+      "sha256": "1989f42b1b5e5b070904b451cf498e235720a5ac23669d07a3bafaa047e76706",
+      "bytes": 6938557
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/matrix.log",
+      "sha256": "c38c0811635cd37239afdb2ca64b77f5d44e6513d76e377ae07c501ee900604b",
+      "bytes": 261
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/mypy-final.log",
+      "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+      "bytes": 43
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/mypy.log",
+      "sha256": "dfd3e6664e39963eb9aa4a3e0385ff8c51f7b526c1636a04296a83493ea2c4df",
+      "bytes": 208
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/replay-summary.json",
+      "sha256": "c1a1687587f3f90670fb89923fa0e6ffeb5abfc256c55dacb5e41d1f9b63f9b5",
+      "bytes": 1959
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/replay.log",
+      "sha256": "3d5b30fb6145a08583a68fc2961e6d417f9d63baad0ea4350c81114b4a8fa90f",
+      "bytes": 1543
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/replay_full_compact.py",
+      "sha256": "12f7e58e3593513754f962092da369025fe1dda5b00e2faa0b05ee66ff9c8c24",
+      "bytes": 14277
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/request-pairs.json",
+      "sha256": "5caf41f5fd7d57478af2ea50bbd90aae36c54427109ec241575dbdacae0ef493",
+      "bytes": 82070
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/ruff-final.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "artifacts/next-development-v6/s2-checks/tools-boundary.log",
+      "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "bytes": 100
+    }
+  ],
+  "source_receipt_sha256": "b46ef461a546ff8d2ff33ebc19224bc464b8672429a9ee420457d9567d1ec3c8",
+  "root_verification": {
+    "all_5_changed_file_hashes": true,
+    "all_18_evidence_hashes": true,
+    "full_131_ordered_observations_and_86_audits_equal_s1": true,
+    "compact_131_message_hashes_tokens_capacity_match_root_profile": true,
+    "original_graph_and_pre_model_inputs_unchanged": true,
+    "source_and_helper_reviewed": true,
+    "tests_repeated_by_root": false,
+    "continuous_budget_sha256": "db0b1e4ea95b2c68155e742627cfbbc9fb4c4f9c68d56d5f01aca4f5ea64aa6b"
+  },
+  "all_runtime_source_files": [
+    {
+      "path": "src/milai_lab/__init__.py",
+      "sha256": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+      "bytes": 225
+    },
+    {
+      "path": "src/milai_lab/analysis/__init__.py",
+      "sha256": "4a2776360023e0eecb6a8ad3fde5334db99dc1914fd91b9f414466afd6853fb0",
+      "bytes": 47
+    },
+    {
+      "path": "src/milai_lab/analysis/obligation_trace.py",
+      "sha256": "03b90d2014c49133ab6872a00417addba47c6b670e83e84fe97ba626f46eab14",
+      "bytes": 10224
+    },
+    {
+      "path": "src/milai_lab/analysis/opportunity_capture.py",
+      "sha256": "20f7b19dbc8eae275eac1f721a0173c8ce50bc75373f9d3e528b51d081950ea4",
+      "bytes": 7847
+    },
+    {
+      "path": "src/milai_lab/analysis/opportunity_ledger.py",
+      "sha256": "ad76a99696b415808cb875961c83d1af6d44ff9fb24280bf634048d451c6a37d",
+      "bytes": 19876
+    },
+    {
+      "path": "src/milai_lab/analysis/owner_exports.py",
+      "sha256": "ac5de073c12c5b27c1376225ee6d903c42f1771d71893b0daf666fece541b376",
+      "bytes": 13070
+    },
+    {
+      "path": "src/milai_lab/analysis/revision_eligibility.py",
+      "sha256": "35a74a9aea8a29d7e27dd35f889e1d4765ded3f06695d808954032f1ba4cd20e",
+      "bytes": 11048
+    },
+    {
+      "path": "src/milai_lab/analysis/trace_join.py",
+      "sha256": "5b3e5e54ce65b77b79e357049339a3883686ff95542947c8fdf7922c51510084",
+      "bytes": 18673
+    },
+    {
+      "path": "src/milai_lab/baselines/__init__.py",
+      "sha256": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+      "bytes": 79
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_agent.py",
+      "sha256": "b7bb10c4dbbf93bb1f6dcc861d4510f636c575bb0a11f8d2af65b570effdf65b",
+      "bytes": 25334
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_b1_identity.py",
+      "sha256": "2fd2380bcb93c87c3614a7ec1d917a75faca8eeb3c75dfef0a7c5ce8248a3d11",
+      "bytes": 5830
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_identity.py",
+      "sha256": "bf3b25663b52478325734f8ba4a3703521d63bb522f8a22133f28680a5187572",
+      "bytes": 4597
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_instrumentation.py",
+      "sha256": "528537564b2a1aec89c5d11c0cfdd9ebb433e7795d78d89d8483e6ac4b5ac3f9",
+      "bytes": 10305
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_revision_store.py",
+      "sha256": "679eec0c8300e3275819c317743a319f7876dd1ee22520e5f38b540f6bc946c8",
+      "bytes": 37224
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_strict_tools.py",
+      "sha256": "9fe477678f4db773c1c5f4771262043adf9c0a43b9244f431cc51c20c86f6fdd",
+      "bytes": 5148
+    },
+    {
+      "path": "src/milai_lab/boundary.py",
+      "sha256": "4b0725d59b7747449b0a5aab5900235edf52f51c88b631335dee3d0c73cfb4b3",
+      "bytes": 3534
+    },
+    {
+      "path": "src/milai_lab/context_preflight.py",
+      "sha256": "600ead271809a72e7f142c864ff124441559ea794d674e21e226d5b017d49763",
+      "bytes": 7988
+    },
+    {
+      "path": "src/milai_lab/contracts/__init__.py",
+      "sha256": "e0ab8e72b56b04ba0b38e93263b26bade5241ffa38199de061bd4638a02c68ce",
+      "bytes": 330
+    },
+    {
+      "path": "src/milai_lab/contracts/arms.py",
+      "sha256": "1417d119692ef9a6092982afc50aab6faf3dec3d8a8f272c24a457b0f00e3b7c",
+      "bytes": 2202
+    },
+    {
+      "path": "src/milai_lab/contracts/protocol.py",
+      "sha256": "2400020757f754b86e2b53ed8d895d9f984495dc5c885101cdf51dd06206da06",
+      "bytes": 434
+    },
+    {
+      "path": "src/milai_lab/contracts/records.py",
+      "sha256": "ff5367e1d9715c2cc86eeb608ffa73ad3ce8f4548312992b46cd0a047ee98fbd",
+      "bytes": 2161
+    },
+    {
+      "path": "src/milai_lab/datasets/__init__.py",
+      "sha256": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+      "bytes": 178
+    },
+    {
+      "path": "src/milai_lab/datasets/contextual.py",
+      "sha256": "2d856518eb0ac3b5e0f5da03833563bcc4155663140f8c4a2f11519e465127bf",
+      "bytes": 12414
+    },
+    {
+      "path": "src/milai_lab/datasets/memsyco.py",
+      "sha256": "1547cf025cff2d3980a57afcdb710372ea8a42b4094918518fb9ac1b2a8b9110",
+      "bytes": 4705
+    },
+    {
+      "path": "src/milai_lab/datasets/merit.py",
+      "sha256": "1959ebfa1c035520751a2ab7ec397444bbb545e72709b1aca91751d7a495a0e7",
+      "bytes": 4662
+    },
+    {
+      "path": "src/milai_lab/datasets/registry.py",
+      "sha256": "6fca725baa40322487763315765a17080dc94adaf1a055f2dc1cd7a0b6ea6b68",
+      "bytes": 1757
+    },
+    {
+      "path": "src/milai_lab/datasets/stale.py",
+      "sha256": "132a00b9adaa77dcc9974e87041460fa9462a55a97a6f4f6ddd6cd580109d447",
+      "bytes": 5394
+    },
+    {
+      "path": "src/milai_lab/harness/__init__.py",
+      "sha256": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+      "bytes": 244
+    },
+    {
+      "path": "src/milai_lab/harness/artifacts.py",
+      "sha256": "f06be68b2e21ed54239c146584a1d0bd06a528d4b625202db9d1be3a079536c1",
+      "bytes": 1418
+    },
+    {
+      "path": "src/milai_lab/harness/contextual_artifacts.py",
+      "sha256": "133283613529a3356fbbd31563fb0cb19b1a4497c1ff3bf197ab58b4223fb620",
+      "bytes": 8186
+    },
+    {
+      "path": "src/milai_lab/harness/lease.py",
+      "sha256": "8e73b8654bb57bc5639b984e38376e628766c19b5016c0fb7261929c3da8842b",
+      "bytes": 1380
+    },
+    {
+      "path": "src/milai_lab/local_usability_gate.py",
+      "sha256": "599e9c37506f617001cb43d243b8f50d8f149059f0a7c09f186d98dc1d86ce6d",
+      "bytes": 3343
+    },
+    {
+      "path": "src/milai_lab/longmemeval_gate.py",
+      "sha256": "3e9235bf8696d36cc4ecd841f631f6553fcf2f6f6748b9b894c15e291b27a005",
+      "bytes": 11599
+    },
+    {
+      "path": "src/milai_lab/methods/__init__.py",
+      "sha256": "59b20a7a91ee381dda1685ac330a3af7d10aa2c84dbe69cc0ef8b2f767044a81",
+      "bytes": 68
+    },
+    {
+      "path": "src/milai_lab/methods/acquisition_use.py",
+      "sha256": "e401ca020f59aa0e53497e9c3a6a5a57842e1134b1d4893e11ebf35bd8a083ce",
+      "bytes": 9266
+    },
+    {
+      "path": "src/milai_lab/methods/adaptive_memory.py",
+      "sha256": "dd6d77e377c80811a1e4aae208813c9526d041d4f5b81e108d58886ab2fb581e",
+      "bytes": 51958
+    },
+    {
+      "path": "src/milai_lab/methods/attention_expansion.py",
+      "sha256": "9baac0b9391eb669cf3a2713eec79eb6e16d3e2f844d0d4909b2346335204b30",
+      "bytes": 9232
+    },
+    {
+      "path": "src/milai_lab/methods/bundle_adoption_proxy.py",
+      "sha256": "f716b5376b214019ebf3cb79436d2ffde42e8e3c9294e7d372a70f47e3084f88",
+      "bytes": 1958
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/__init__.py",
+      "sha256": "2cead58efc51f4927abffb680acfa3ab94205136a1aa39e593a97764c3eaa58d",
+      "bytes": 345
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/decision_basis.py",
+      "sha256": "2931e479c41593bd30ff4a05aebb74bb60ef7dc38114f96f14336dee5ed0d2bf",
+      "bytes": 10634
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/deletion.py",
+      "sha256": "9e9f6b6176a0c0187c6d8d8470d53db2d6cab369640402914de87089f0b441d1",
+      "bytes": 7238
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/material_view.py",
+      "sha256": "5ab7d170fbdbc98f005ccf01c5abacdcd288a4468da42e25f35ef6a217dd0b65",
+      "bytes": 33601
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/materials.py",
+      "sha256": "5311cdd7973130680a1dfb0cd4f98790e133df29be547f26b06d75b47dd09fa7",
+      "bytes": 11419
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/models.py",
+      "sha256": "07b82268552fd2aa2c34576a02e1184fd7c2d58d93d67d81efbf5aa1d3d2286d",
+      "bytes": 7637
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/operations.py",
+      "sha256": "6daf5b369afec36bab9a9868f06f6cfb2788d8ca4c42892525c08fd67629bced",
+      "bytes": 1263
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/query_context.py",
+      "sha256": "f3db98be98f232b9eb7682740821c9ddae771104af9640b4fd7f8d6bc65191a7",
+      "bytes": 8207
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/retrieval.py",
+      "sha256": "7e6d26360305cfdf3d7d60d56f03afe281b81be67b7185b8f1ab5a58b2c5cea8",
+      "bytes": 10663
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/revision.py",
+      "sha256": "362b0d3c4dc99a40b9e6e14c2d5cfa434881d324277f69ca52719e6ffd6243d6",
+      "bytes": 24310
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/store.py",
+      "sha256": "df4a67b086b6bd48599bcd2e98c2a06d86188560cc71871e9ff6ced38abee670",
+      "bytes": 4948
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_memory/write_contract.py",
+      "sha256": "5ce2f4be7abdde608c93ed0470b8820dccffa4d6544cd209883646011ade9beb",
+      "bytes": 13053
+    },
+    {
+      "path": "src/milai_lab/methods/contextual_user_memory.py",
+      "sha256": "15dbf9020f57bbe21bacfddb2ec232fa4634677939babc5fa543f57d1c9ba17d",
+      "bytes": 106959
+    },
+    {
+      "path": "src/milai_lab/methods/controlled_workspace.py",
+      "sha256": "4d62f79faa15f7b442862bc7702cb9f2532e49c6051782544d973f96d3ea95a3",
+      "bytes": 43539
+    },
+    {
+      "path": "src/milai_lab/methods/correctable_control.py",
+      "sha256": "0fce55ae4a7bd8bfaa1c53bed5931c4208115c839700ed2ef3b855439b55c8da",
+      "bytes": 4260
+    },
+    {
+      "path": "src/milai_lab/methods/evidence_maintenance.py",
+      "sha256": "8db2a928ba35830fcc427fb5a6ce34a279ef2d1b68c178850e8cd6718ffd57c0",
+      "bytes": 7057
+    },
+    {
+      "path": "src/milai_lab/methods/evidence_utility_session.py",
+      "sha256": "9b63f2f70b46655e8d74b930b1905ffb3fd0d8d15c9d1eb2755951dd50680361",
+      "bytes": 12014
+    },
+    {
+      "path": "src/milai_lab/methods/experience_revision.py",
+      "sha256": "6133abd13e57e04db30bec622613841c45a4ea5bc81f1748ccf3d57aaea6e1a4",
+      "bytes": 22897
+    },
+    {
+      "path": "src/milai_lab/methods/experience_utility.py",
+      "sha256": "98cc37c277c7922a2535886e9d7cade77fdd3faf70c2b722f51a6896e7da7676",
+      "bytes": 9199
+    },
+    {
+      "path": "src/milai_lab/methods/external_diagnostic.py",
+      "sha256": "574a167967b395cc8f50e03b682d31ef461963eef4efc2b0a99db486f32c9bec",
+      "bytes": 3035
+    },
+    {
+      "path": "src/milai_lab/methods/finite_research_budget.py",
+      "sha256": "ac12ef1dc7fff48331573e27316358c5bef2cc279003706dfe43aac4f63ef55c",
+      "bytes": 8839
+    },
+    {
+      "path": "src/milai_lab/methods/freshness_projection/__init__.py",
+      "sha256": "edf49dc7f013532a7d43590e2081056a60dcb3ba5557ae9866d748fe15ccbd83",
+      "bytes": 236
+    },
+    {
+      "path": "src/milai_lab/methods/freshness_projection/controller.py",
+      "sha256": "f134b0ae24a6adde60c7f57d4ab12c31e759fa92b757720d1ecb8edfba7dc771",
+      "bytes": 10839
+    },
+    {
+      "path": "src/milai_lab/methods/freshness_projection/identity.py",
+      "sha256": "b51c4dc5cc306339899bb2cc844b6db7bd6be4e685b2d85c252bece8e4cf385e",
+      "bytes": 18556
+    },
+    {
+      "path": "src/milai_lab/methods/freshness_projection/lineage.py",
+      "sha256": "71a19fb10baa3a8b47edae3e1656970c2f6eb8cb9823a6e5392a53c33c918d84",
+      "bytes": 6316
+    },
+    {
+      "path": "src/milai_lab/methods/freshness_projection/projection.py",
+      "sha256": "ed8dc7fbd65bcf0fe874c2a8ed4e53478f924188dac2838bcb9380889e91c6a5",
+      "bytes": 11288
+    },
+    {
+      "path": "src/milai_lab/methods/hiagent.py",
+      "sha256": "4f65c1bb908c1811088738bdcdb6d21e2a9b8907d296b1e87c92e6705a16f22e",
+      "bytes": 9360
+    },
+    {
+      "path": "src/milai_lab/methods/horizon_diagnostic.py",
+      "sha256": "7f2249148c15bebbe06b96115ea1906951575b1bb0aee136f73f2883ef064a98",
+      "bytes": 1225
+    },
+    {
+      "path": "src/milai_lab/methods/host_acquisition.py",
+      "sha256": "68b141735eeb9090a3d5c6473da8c906d2fa1e722f813a20e1d95107c182169e",
+      "bytes": 7546
+    },
+    {
+      "path": "src/milai_lab/methods/local_state_attention/__init__.py",
+      "sha256": "f4eae7f0c83a0985a1f29771cb0e75037733a336d64e12d84b61018b7b30655a",
+      "bytes": 80
+    },
+    {
+      "path": "src/milai_lab/methods/local_state_attention/bank.py",
+      "sha256": "df459a2a0d63a0e82f0ee5afada5f233050e775f83cd2c85dfefc487534a6454",
+      "bytes": 27363
+    },
+    {
+      "path": "src/milai_lab/methods/local_state_attention/controller.py",
+      "sha256": "c65edefcdbb97207e63115bfb23076af98d1d70222cd34f6ab07218063abc8ee",
+      "bytes": 25002
+    },
+    {
+      "path": "src/milai_lab/methods/local_state_attention/history.py",
+      "sha256": "019b0ff159a6c8811fd654261d1756c9b968baff7269cf58d119dbd9a804151f",
+      "bytes": 12557
+    },
+    {
+      "path": "src/milai_lab/methods/local_state_attention/integration.py",
+      "sha256": "b4c054ca575b734cfc28eda4323ca5ea2397b768cc5c216672a7c206b9e5c4e9",
+      "bytes": 22455
+    },
+    {
+      "path": "src/milai_lab/methods/local_state_attention/protocol.py",
+      "sha256": "402cf80653f3185b3832896dfa19686bddec8bbac3a1f46ce9bf2a76533e38da",
+      "bytes": 9828
+    },
+    {
+      "path": "src/milai_lab/methods/local_state_attention/read_probe.py",
+      "sha256": "b894c67e70c4874535b54b2567b3027a8de693f0ebf8bb9c8459a7af4bc5df65",
+      "bytes": 9367
+    },
+    {
+      "path": "src/milai_lab/methods/local_state_attention/summary.py",
+      "sha256": "2297391d73ebc5c8c1b73484c5d1336819a8ce43d365b18efd9cac538314ab35",
+      "bytes": 8643
+    },
+    {
+      "path": "src/milai_lab/methods/local_state_attention/writers.py",
+      "sha256": "c456694f6fec2769ed439c8aa17ddf5c2e18c1e8acf4bbd096d6defd743979de",
+      "bytes": 21391
+    },
+    {
+      "path": "src/milai_lab/methods/memory_boundaries.py",
+      "sha256": "9c62ba12cf4cf15ccbbfe41c6989569510fb239005626274a4b3eff9df0d500b",
+      "bytes": 24861
+    },
+    {
+      "path": "src/milai_lab/methods/memory_lifecycle.py",
+      "sha256": "2644e387d08a453579991ab2590bff89f3adf11d5d445114068301a6ca77a2ad",
+      "bytes": 9848
+    },
+    {
+      "path": "src/milai_lab/methods/memory_result.py",
+      "sha256": "8fa7ac561f6b23d8cc4afb084099b7eb92e4ddf423c28e8e85d6bff913fb7e6e",
+      "bytes": 8942
+    },
+    {
+      "path": "src/milai_lab/methods/memrl_port.py",
+      "sha256": "36998fa79ba5e797061c9967af23a85f88444c38dfade8d68ead1ca9cd0fecaa",
+      "bytes": 20102
+    },
+    {
+      "path": "src/milai_lab/methods/memrl_text.py",
+      "sha256": "0f7a754943daacee6fa6350f4ff2c511be80d14819807ca5a96fb55e67bedfca",
+      "bytes": 2534
+    },
+    {
+      "path": "src/milai_lab/methods/milai_m1/__init__.py",
+      "sha256": "8d9a1d208d0df6404166ca73436b42857fd6194707aed0ede0f6e6b86f68a624",
+      "bytes": 70
+    },
+    {
+      "path": "src/milai_lab/methods/milai_m1/controller.py",
+      "sha256": "c871098c684efbb3a54a4dd7f82bb7df00b235e4480b37bd124e8a5d78ceeb8a",
+      "bytes": 10702
+    },
+    {
+      "path": "src/milai_lab/methods/milai_m1/decision_basis.py",
+      "sha256": "07e28bc44c57cb7fc27cc6969bf16dce500449cb1cdef195143297ac3b4d38e7",
+      "bytes": 6695
+    },
+    {
+      "path": "src/milai_lab/methods/milai_m1/evidence_view.py",
+      "sha256": "31e3ec6181418f3ea5b4c48efd09e8d21eae130b6f39beeb1e5ae041938c50fb",
+      "bytes": 7422
+    },
+    {
+      "path": "src/milai_lab/methods/milai_m1/identity.py",
+      "sha256": "7ca19d497b28a0c76ebed245124b45295bf216ba292564918af74ab9a0c24b53",
+      "bytes": 4952
+    },
+    {
+      "path": "src/milai_lab/methods/milai_m1/recheck.py",
+      "sha256": "2c7a4b7f544cbbfed2579e5f5c80cc46bf5a6d6295019a87c6835bab959bfc7d",
+      "bytes": 5890
+    },
+    {
+      "path": "src/milai_lab/methods/milai_m1/state_store.py",
+      "sha256": "165f9c22801764ca98d63e8fc6a13793d3cb4b48dbfc785d9c4bd42b19dddcfd",
+      "bytes": 13955
+    },
+    {
+      "path": "src/milai_lab/methods/observational_capacity.py",
+      "sha256": "5185d6c4fe92c7986ac8651c5b67c0ec3415ad4f1bbc39a5c59831397d220444",
+      "bytes": 9319
+    },
+    {
+      "path": "src/milai_lab/methods/observational_memory.py",
+      "sha256": "bfffc745618715fdfba2f2dbc2bc91e9bcb4607bd63920693594b281993c081e",
+      "bytes": 22777
+    },
+    {
+      "path": "src/milai_lab/methods/on_demand_reconstruction/__init__.py",
+      "sha256": "98f05efd3b1250393d9fc2b276476884bfeb6b92eb1334c68e50a14e6ef669b8",
+      "bytes": 141
+    },
+    {
+      "path": "src/milai_lab/methods/on_demand_reconstruction/controller.py",
+      "sha256": "df4f32d115b3c88c315b467e8f24e7ee1ceaf3dc4e14a7547ed382c7f5ac5e2f",
+      "bytes": 5847
+    },
+    {
+      "path": "src/milai_lab/methods/on_demand_reconstruction/evidence_view.py",
+      "sha256": "f90f0bf19047a040b484c6f808a9943ba60377a92493f7044a1109339dee332a",
+      "bytes": 5909
+    },
+    {
+      "path": "src/milai_lab/methods/on_demand_reconstruction/freshness.py",
+      "sha256": "02ee313159eecbbd15b3499929712e909a985d28f0116658f4d60511018df59b",
+      "bytes": 2186
+    },
+    {
+      "path": "src/milai_lab/methods/on_demand_reconstruction/identity.py",
+      "sha256": "f96fddca6c9fa7b82a0ed48d68368254ee3772cb2636146e7f291804b7298b0a",
+      "bytes": 3982
+    },
+    {
+      "path": "src/milai_lab/methods/on_demand_reconstruction/metrics.py",
+      "sha256": "64b82a7d98bd8e9721a142c3df866ea96eb69fd5b32c2c2edaa197e401d7518e",
+      "bytes": 1280
+    },
+    {
+      "path": "src/milai_lab/methods/on_demand_reconstruction/schema.py",
+      "sha256": "323032b7cd80d25bee501f0e2174aa070be9d0747ed5aacc171563c27e8e4c4c",
+      "bytes": 3052
+    },
+    {
+      "path": "src/milai_lab/methods/prospective_admission.py",
+      "sha256": "3b65d95f8b4f3a4de4b69cacc7f96d8215a8b4ab10d50da40badca8685f2a457",
+      "bytes": 3668
+    },
+    {
+      "path": "src/milai_lab/methods/reasoning_bank.py",
+      "sha256": "1ad2548cb22e0c9abba294157aeefd04a2a907888c7f256b71487b635549581f",
+      "bytes": 14514
+    },
+    {
+      "path": "src/milai_lab/methods/request_context.py",
+      "sha256": "159d6178d519e3c3471bb5ff88698d0855327c9ec16177d21b898f871adb3151",
+      "bytes": 4321
+    },
+    {
+      "path": "src/milai_lab/methods/state_attention.py",
+      "sha256": "642b8eab8fbf4b34d48187c99b5d31960d32f5dbc98b7a0912073199382f4ebd",
+      "bytes": 11566
+    },
+    {
+      "path": "src/milai_lab/methods/state_control.py",
+      "sha256": "5a1c5e3b2e33e31798c00d2bbeb880d04956b42fbae5fae996459006b0161bc6",
+      "bytes": 5790
+    },
+    {
+      "path": "src/milai_lab/methods/state_focus.py",
+      "sha256": "bcdb8056944f7989cfed62361660ceb3be7a5a11db2ad8d7243fdacdb005b061",
+      "bytes": 8835
+    },
+    {
+      "path": "src/milai_lab/methods/workspace_control.py",
+      "sha256": "8f366c28c766f2f57e6b7ef1b6d5b09a2665b0a4a8c6bd853b224011bc81270e",
+      "bytes": 19138
+    },
+    {
+      "path": "src/milai_lab/methods/workspace_policy.py",
+      "sha256": "654c5e34d2ac0bc0a63ad1d6dc3d460c86193012a1ffab96635c9f08cfa87807",
+      "bytes": 12576
+    },
+    {
+      "path": "src/milai_lab/product02_decision.py",
+      "sha256": "46ce8a0e0dabde06689d7aeb8bec92aa555d062f76602b77f95c231a8236bc94",
+      "bytes": 12842
+    },
+    {
+      "path": "src/milai_lab/product03_opportunity.py",
+      "sha256": "f7780eb20235c4504541e6b1260329d5b0e249af3f9ff208af61c832a673c290",
+      "bytes": 9669
+    },
+    {
+      "path": "src/milai_lab/product10.py",
+      "sha256": "8a702ee615ab60512ebd905e2d57436b9c17b685ea805f63ccc3d9770aefd0e6",
+      "bytes": 10978
+    },
+    {
+      "path": "src/milai_lab/product11.py",
+      "sha256": "506135cc7fecdea5a1bd0c59787d81d9ed715ac2eaee3de18ab43f7f308ebb41",
+      "bytes": 25269
+    },
+    {
+      "path": "src/milai_lab/product11_human.py",
+      "sha256": "cc8d64b826489968b87106251cffd9a5d7d5801f79cdfff3bf0b18fbd292130b",
+      "bytes": 18277
+    },
+    {
+      "path": "src/milai_lab/product11_subagent.py",
+      "sha256": "b95e2e7a2ab99a29e99c5748d83924ee22a2f4d46c2366f8032093e50b815331",
+      "bytes": 40246
+    },
+    {
+      "path": "src/milai_lab/product_adapter/__init__.py",
+      "sha256": "70fc871cc98772cb7f07196c01ee48228d06492d192169e4226ca01f66d015b0",
+      "bytes": 66
+    },
+    {
+      "path": "src/milai_lab/product_adapter/manifest.py",
+      "sha256": "cf9da2b3a06e311c047ec4abe1eecc11b2a084334df77b5271ca7b01ece5a11c",
+      "bytes": 9543
+    },
+    {
+      "path": "src/milai_lab/providers/__init__.py",
+      "sha256": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+      "bytes": 162
+    },
+    {
+      "path": "src/milai_lab/providers/config.py",
+      "sha256": "7e3e894260ca2c8f0ad19f3f8f1f06059de59e9c7de00576f9c585bcceeeb63e",
+      "bytes": 894
+    },
+    {
+      "path": "src/milai_lab/providers/contextual_capacity.py",
+      "sha256": "70fbd1f6cb7d169c95c9e1ccfb874aea07ef7976de5833f372b8508897c31c15",
+      "bytes": 11409
+    },
+    {
+      "path": "src/milai_lab/providers/contextual_embeddings.py",
+      "sha256": "9500273aa839663b713d57b3d008c38dba1845e6645f38f8b779937e10e0b604",
+      "bytes": 3040
+    },
+    {
+      "path": "src/milai_lab/providers/contextual_vllm.py",
+      "sha256": "a9f15fcbbcc0ead318f0871538269128eb904d6cbe13c2f3fbd7c23f5927809a",
+      "bytes": 8901
+    },
+    {
+      "path": "src/milai_lab/providers/langmem_chat.py",
+      "sha256": "45c6751a58e92c2d02754d51b8a60c100e2927ce6a55947ed982d67215e6951d",
+      "bytes": 19584
+    },
+    {
+      "path": "src/milai_lab/recollection_gate.py",
+      "sha256": "a0ee5cdc6609491f2ca1c8ce5ec1e1500fe4e8d9892fe44fc1e3a011a68a551c",
+      "bytes": 12230
+    },
+    {
+      "path": "src/milai_lab/runners/__init__.py",
+      "sha256": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+      "bytes": 74
+    },
+    {
+      "path": "src/milai_lab/runners/contextual.py",
+      "sha256": "49ba40b026af64a3cab715668c44ccbb38863c95449f79a04b750af29d195aa4",
+      "bytes": 72831
+    },
+    {
+      "path": "src/milai_lab/runners/contextual_agent_tasks.py",
+      "sha256": "2fbbb012931a05e9faa86bf78a9c66f62900bf6f409791e28d9568d7251ad6ba",
+      "bytes": 15586
+    },
+    {
+      "path": "src/milai_lab/runners/contextual_delivery.py",
+      "sha256": "88aeb913e4d433d78c04fa2a85d5a756c5346cb293ede836573f6d7138b13be3",
+      "bytes": 4880
+    },
+    {
+      "path": "src/milai_lab/runners/contextual_host.py",
+      "sha256": "1361c58fbb07a4e4b325e7fc3a89867cde09e6b0ab14184365e5ab881d93059f",
+      "bytes": 130177
+    },
+    {
+      "path": "src/milai_lab/runners/contextual_ingestion.py",
+      "sha256": "71817b6e967c7258567af7ef58e2331233b76f7abda9bd781da321bc2e03d604",
+      "bytes": 43840
+    },
+    {
+      "path": "src/milai_lab/runners/contextual_maintenance.py",
+      "sha256": "e4fc3b5018e1d31e428714585279cb02310caea7c5001051b3a814593ee69881",
+      "bytes": 36289
+    },
+    {
+      "path": "src/milai_lab/runners/contextual_profiles.py",
+      "sha256": "ceece4d86a31b510e3d1c7e3c95fc396d0f0c78d99682b271f29f21b2b83c01f",
+      "bytes": 3605
+    },
+    {
+      "path": "src/milai_lab/runners/contextual_runtime_store.py",
+      "sha256": "b424bf21d8c39b9d89700da624dc0623e50137b9e51efbef2bdc45444184edfc",
+      "bytes": 24493
+    },
+    {
+      "path": "src/milai_lab/runners/contextual_scoring.py",
+      "sha256": "4ac57a9f77f7ca5ccae7e3e5a04122500b3b41c9a39e8df246848fd08f7b4a12",
+      "bytes": 8977
+    },
+    {
+      "path": "src/milai_lab/runners/contextual_session.py",
+      "sha256": "246dc4fff5163a038d62297edf5deca5eb0398a3a58e35bb36331539b484c5cd",
+      "bytes": 5687
+    },
+    {
+      "path": "src/milai_lab/runners/fixed_state_read.py",
+      "sha256": "273cfd55d00a4f2bbefee0f19ffdaf2703c5da403b8d48b49a03cf7ff6e3d330",
+      "bytes": 17934
+    },
+    {
+      "path": "src/milai_lab/runners/fixed_state_update.py",
+      "sha256": "83f8f2ed17f0140581d5649a3964ae7cae79825248a439df4ec052ace3566e29",
+      "bytes": 17970
+    },
+    {
+      "path": "src/milai_lab/runners/frozen_action_continuation.py",
+      "sha256": "95ddd1577662944faaffab85885d245847d87e44e582172296c11059ec32cc61",
+      "bytes": 23019
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_application.py",
+      "sha256": "f76af55ff70ed7165a3f2a72ffc22c5bf422f17a194671f901b18832b392a00b",
+      "bytes": 39057
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_application_runtime.py",
+      "sha256": "76172dcab229a6fe19086091e43ba2417d247b5286f5deb93ae6ea315dca2f83",
+      "bytes": 4234
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_diagnostic.py",
+      "sha256": "aa8fb6bbb9ac237f643b711a8e1a779f28f5be3e5b4e779d2960e231ff129136",
+      "bytes": 8839
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_foundation.py",
+      "sha256": "d35ad8659b0a95819415786a750460bcc39e9673aa342ce44d9383f7c7fb5135",
+      "bytes": 4065
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_m1_mechanism.py",
+      "sha256": "66afffbe62f57ad545513a5cb5acb61ca2a03f638bd4de30499a2e053abe70ae",
+      "bytes": 13681
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_merit.py",
+      "sha256": "72037ce98c35e2485cab4e9a46ef3b01eab421ad78524d7bfc82c68d29ea9464",
+      "bytes": 13572
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_odr_mechanism.py",
+      "sha256": "a4d2a9b71e4f48cf8d70cbd68de751b9f6daa9443e22f51484d4dbdea020b9c5",
+      "bytes": 176
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_projection_mechanism.py",
+      "sha256": "cc033a498f8c387d9200c7583e27e369d998f8f0cc1142bea073faf122dd5982",
+      "bytes": 179
+    },
+    {
+      "path": "src/milai_lab/runners/local_state_attention.py",
+      "sha256": "323329c03a8ed6b387f4dc25e1754b340831c83a695d6b6b38068246db707105",
+      "bytes": 26366
+    },
+    {
+      "path": "src/milai_lab/runners/mem0_identity.py",
+      "sha256": "4c3536300135a8cb2f520b6069525f0a9feeb7523b85b44cda749577d09596f6",
+      "bytes": 3603
+    },
+    {
+      "path": "src/milai_lab/runners/mem0_native.py",
+      "sha256": "83ce967378aca796a1670697aab5ec32f2db3e62c546b0cdadc2dc564f0b3760",
+      "bytes": 10286
+    },
+    {
+      "path": "src/milai_lab/runners/persistent_memory.py",
+      "sha256": "11a52af6769351775ccf3098e35300d627ae2ec3d740a433f8701c41968ae230",
+      "bytes": 27743
+    },
+    {
+      "path": "src/milai_lab/runners/product02_context_gate.py",
+      "sha256": "c26257c7099b843a947ca8a3328da0e5d8f48c2a62d435105a0f1314a249a4cc",
+      "bytes": 48678
+    },
+    {
+      "path": "src/milai_lab/runners/product03_openworker_usability.py",
+      "sha256": "cb07222ee3f61c1af006a5f1ca64aec9bebf731036f201ceb8cb0dc4b7444183",
+      "bytes": 36874
+    },
+    {
+      "path": "src/milai_lab/runners/shared_record_use.py",
+      "sha256": "aee4d706955f03e373538d496e993bb369f998cbec670a21e426a45b0747ceda",
+      "bytes": 23511
+    },
+    {
+      "path": "src/milai_lab/runners/state_update_probe.py",
+      "sha256": "424ce73dc9ba97565a4a222b9d8429f3743d47a73c3295fb82e74169e1fd2695",
+      "bytes": 13698
+    },
+    {
+      "path": "src/milai_lab/runners/writer_policy.py",
+      "sha256": "5fe33994b97f43d76992ea4db08c3211fcea963e0934f057271db83f26105adb",
+      "bytes": 17422
+    },
+    {
+      "path": "src/milai_lab/scorers/__init__.py",
+      "sha256": "faf8ee91a4d7a449c237f0ea597212208401b118ddf338542459870e4458e458",
+      "bytes": 178
+    },
+    {
+      "path": "src/milai_lab/scorers/answers.py",
+      "sha256": "19eefe2e40d2df37294826d8419e113b96bf51ceee671a375ebf23e50851a512",
+      "bytes": 2075
+    },
+    {
+      "path": "src/milai_lab/scorers/contextual.py",
+      "sha256": "d275c70d536b67702c9ef4e5ab0bb742a80301c1f5fe0b1da0e676d37f394558",
+      "bytes": 8644
+    },
+    {
+      "path": "src/milai_lab/scorers/focus.py",
+      "sha256": "2df3fb1593e4253c82f41e58faf4c6be4ab4102ee583e8ca08d6f74a32c0829b",
+      "bytes": 2445
+    },
+    {
+      "path": "src/milai_lab/scorers/memsyco.py",
+      "sha256": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+      "bytes": 18423
+    },
+    {
+      "path": "src/milai_lab/scorers/stale.py",
+      "sha256": "683ff4bb82dc7c0c4e4a18824504a44d865f04980158322757f39e8612b0f75f",
+      "bytes": 7986
+    },
+    {
+      "path": "src/milai_lab/tools_boundary.py",
+      "sha256": "ace6984ada50ea6361bb1d5af4ec44bb1ff3b25673ad2bb43e43b65de1412d6a",
+      "bytes": 10676
+    }
+  ]
+}

@@ -1,0 +1,621 @@
+{
+  "kind": "MILAI_V6_S3A_SMOKE_RESULTS",
+  "status": "PASS_EXPOSED_SMOKE_ONLY",
+  "source_commit": "4ffd17664ce9d8a6497e57b199b3a6d764adae86",
+  "execution_freeze_sha256": "23396f4b3d3fea2897e515f7e8e02a651408b791fc001bd3bed3aad51dcc94fc",
+  "protocol_sha256": "f05e015188d01361215d026ac9db30dba120f3aa9552547468dcac606ce6f1eb",
+  "input_sha256": {
+    "data/diagnostics/next-development-v5-authority-confirmation-r2/revised_location-inputs.json": "cfea30313cd31bdf5ee88db4f4bdf6321e7a8298a9741b8cc3e07f0536912c48",
+    "data/diagnostics/next-development-v5-authority-r2/config.json": "91105f1ca25cc5cdd21077141eb86bd8913ad2ed061a7693f3e46eb89db23ecd",
+    "data/diagnostics/next-development-v5-prospective-r1/dynamic_world-inputs.json": "04056f7d845c79969f68537394d0df39713c8c0948e99d0b4f072393f7b01257",
+    "data/diagnostics/next-development-v5-prospective-r1/explicit_delete-inputs.json": "1e55414b044ebdca243e9e9301d14f7618aad273f7c862be062568d4794980ae",
+    "data/diagnostics/next-development-v5-prospective-r1/one_reply_format-inputs.json": "0909250b5946c4865b273b9cd4ef32a353f012a400f4942077295c6232c77a2b",
+    "data/diagnostics/next-development-v6-s3a-smoke/execution-order.json": "5691dba657e37f720584f1e5facd0fa4122beab1bf5cddbe9e82dc214febb42f",
+    "data/diagnostics/next-development-v6-s3a-smoke/obligations.json": "b599ccec4f670031509c7b6757cddba3ae0fba801f11b72441d12fd82a953017",
+    "data/diagnostics/next-development-v6-s3a-smoke/rubric-guide.json": "84230ff80aa06351d0c3b1f4f5c5ccb48fe8f0c3b47656607c19485f864fa76d",
+    "docs/MILAI_NEXT_DEVELOPMENT_V6_S3A_SMOKE_PROTOCOL_20260928.md": "f05e015188d01361215d026ac9db30dba120f3aa9552547468dcac606ce6f1eb"
+  },
+  "scorer": "Root manual unchanged selected v5 obligations; no Judge",
+  "completed_jobs": 4,
+  "public_messages": 13,
+  "counts": {
+    "total": 54,
+    "pass": 54,
+    "fail": 0,
+    "unknown": 0,
+    "not_applicable": 0,
+    "missing": 0
+  },
+  "explicit": {
+    "total": 34,
+    "pass": 34,
+    "fail": 0,
+    "unknown": 0,
+    "not_applicable": 0,
+    "missing": 0
+  },
+  "layer_counts": {
+    "current_explicit_obligations": {
+      "total": 26,
+      "pass": 26,
+      "fail": 0,
+      "unknown": 0,
+      "not_applicable": 0,
+      "missing": 0
+    },
+    "persistent_obligations": {
+      "total": 20,
+      "pass": 20,
+      "fail": 0,
+      "unknown": 0,
+      "not_applicable": 0,
+      "missing": 0
+    },
+    "later_use_obligations": {
+      "total": 8,
+      "pass": 8,
+      "fail": 0,
+      "unknown": 0,
+      "not_applicable": 0,
+      "missing": 0
+    },
+    "diagnostic_completeness": {
+      "total": 0,
+      "pass": 0,
+      "fail": 0,
+      "unknown": 0,
+      "not_applicable": 0,
+      "missing": 0
+    }
+  },
+  "jobs": [
+    {
+      "case_id": "revised_location",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 13,
+        "pass": 13,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 7,
+          "pass": 7,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 4,
+          "pass": 4,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 6,
+        "generation_prompt_tokens": 8357,
+        "generation_completion_tokens": 171,
+        "generation_tokens": 8528,
+        "embedding_calls": 2,
+        "embedding_tokens": 32,
+        "http_wall_seconds": 3.144416089169681,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "5afe37f051d7c00afb762c771bdd371907c0b370aeb22115053e0a916898e062",
+      "result_sha256": "a16c0fd73c0885a152a21acd2269e9ab8d6066449e40e0e6b4f2d868a3d8e0c0",
+      "manifest_sha256": "ad130a599cb53faf7cf599b0da76c24c83bc7766e1e04561a573b192d6e8c58b",
+      "answers": [
+        {
+          "message_id": "revised_location-1",
+          "answer": "The storage note has been saved: the spectroscope cover is stored in locker L-2.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "revised_location-2",
+          "answer": "The storage location for the spectroscope cover has been updated to cupboard D-9.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "revised_location-3",
+          "answer": "LOCATION\ncupboard D-9",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "revised_location-4",
+          "answer": "L-2",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "dynamic_world",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 23,
+        "pass": 23,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 12,
+          "pass": 12,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 8,
+          "pass": 8,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 3,
+          "pass": 3,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 7,
+        "generation_prompt_tokens": 9280,
+        "generation_completion_tokens": 339,
+        "generation_tokens": 9619,
+        "embedding_calls": 1,
+        "embedding_tokens": 51,
+        "http_wall_seconds": 3.570608855690807,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "d39d0e9ce28450877038251d41b062deed6cbb681602532b33587774391e933c",
+      "result_sha256": "eabbc73924de202c9c0daddac77e22f7b90bdf6f54afffac58cf22ee0a9f8761",
+      "manifest_sha256": "4a555729e04945a132c040e7b90995ca44315ebe3cedc50d94ad73a611c54514",
+      "answers": [
+        {
+          "message_id": "dynamic_world-1",
+          "answer": "Your ongoing shipment plan for 'Copper relay cases' (3 units, destination cabinet N-4, packing numbered cloth bags) has been saved with a booking status of 'not booked'. No reservation was made.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "dynamic_world-2",
+          "answer": "The reservation for 3 units of 'Copper relay cases' to cabinet N-4 in numbered cloth bags has been successfully created. Reservation ID: RSV-f37d309e-996f-4a97-8aab-957108c28577. The label has been created.",
+          "observed_write": false,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "dynamic_world-3",
+          "answer": "A reservation exists for 'Copper relay cases' (Reservation ID: RSV-f37d309e-996f-4a97-8aab-957108c28577) with quantity 3, destination 'cabinet N-4', and packing 'numbered cloth bags'. The label has been created.",
+          "observed_write": false,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "dynamic_world-4",
+          "answer": "The stored status is: not booked.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 1,
+      "business_attempts": 1
+    },
+    {
+      "case_id": "explicit_delete",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 13,
+        "pass": 13,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 5,
+          "pass": 5,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 6,
+          "pass": 6,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 5,
+        "generation_prompt_tokens": 6825,
+        "generation_completion_tokens": 268,
+        "generation_tokens": 7093,
+        "embedding_calls": 2,
+        "embedding_tokens": 32,
+        "http_wall_seconds": 2.7639894247986376,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "18d0732b18c376728b9ed24fb986be40747f2e582ed66f2b69b438b2e4e21eec",
+      "result_sha256": "d88b959b94d3776f39cdab24370725237f29431161c4b3565b6ae174f75b6fb8",
+      "manifest_sha256": "1088ae41ab891a5ed43e5191840dc34f890bc36404c47156aa200f53610f5d34",
+      "answers": [
+        {
+          "message_id": "explicit_delete-1",
+          "answer": "Both notes have been saved successfully:\n1. Textile catalog note (ID: 07d2c328-7285-4c6f-9e8a-cf760e9cf21b)\n2. Ceramics catalog note (ID: fca4a4a6-732f-4c7f-abab-067e4f32e5d8)\n\nThese are independently deletable notes as requested.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "explicit_delete-2",
+          "answer": "The textile-catalog note has been successfully deleted. The ceramics-catalog note remains unchanged.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "explicit_delete-3",
+          "answer": "The ceramics catalog prefix is CR. The textile-catalog prefix is no longer stored.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "one_reply_format",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 5,
+        "pass": 5,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 1,
+          "pass": 1,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 2,
+        "generation_prompt_tokens": 2167,
+        "generation_completion_tokens": 77,
+        "generation_tokens": 2244,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 0.8800606778822839,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "ce63d1b9dad93d59b36dccf4add28baafd19221925922a917120223591668367",
+      "result_sha256": "53b93a3d89499ded9728f79fbcb2a561d33c93fe98265b579928ed0c8e5795a1",
+      "manifest_sha256": "172d4a379cf27b1992598362d59e468f83292669c7e6fdf7a0ca1a577e53c152",
+      "answers": [
+        {
+          "message_id": "one_reply_format-1",
+          "answer": "LOCAL: A deadline is a specific point in time by which something must be completed, whereas a duration is the length of time it takes to complete the task.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "one_reply_format-2",
+          "answer": "A checklist is a simple tool used to ensure that all necessary steps or items in a process are completed by providing a list of tasks to be checked off as they are finished.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    }
+  ],
+  "cost": {
+    "generation_calls": 20,
+    "generation_prompt_tokens": 26629,
+    "generation_completion_tokens": 855,
+    "generation_tokens": 27484,
+    "embedding_calls": 5,
+    "embedding_tokens": 115,
+    "http_wall_seconds": 10.35907504754141,
+    "http_errors": 0,
+    "unknown_usage": 0,
+    "local_rejections": 0
+  },
+  "by_lifecycle": {
+    "formation": {
+      "generation_calls": 6,
+      "generation_prompt_tokens": 8332,
+      "generation_completion_tokens": 326,
+      "generation_tokens": 8658,
+      "embedding_calls": 4,
+      "embedding_tokens": 99,
+      "http_wall_seconds": 4.340103428345174,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "maintenance": {
+      "generation_calls": 4,
+      "generation_prompt_tokens": 5328,
+      "generation_completion_tokens": 165,
+      "generation_tokens": 5493,
+      "embedding_calls": 1,
+      "embedding_tokens": 16,
+      "http_wall_seconds": 1.8171219290234149,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "use": {
+      "generation_calls": 10,
+      "generation_prompt_tokens": 12969,
+      "generation_completion_tokens": 364,
+      "generation_tokens": 13333,
+      "embedding_calls": 0,
+      "embedding_tokens": 0,
+      "http_wall_seconds": 4.201849690172821,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    }
+  },
+  "observations": {
+    "lsa_writer_memory_read": {
+      "calls": 37,
+      "logical_bytes": 4690,
+      "cpu_ns": 37628781,
+      "wall_ns": 69940656
+    },
+    "shared_namespace_guard": {
+      "calls": 12,
+      "logical_bytes": 48,
+      "cpu_ns": 4314449,
+      "wall_ns": 14256096
+    },
+    "route_inclusive": {
+      "cpu_ns": 577042986,
+      "wall_ns": 553748688
+    },
+    "persistent_memory_checkpoint_read": {
+      "calls": 13,
+      "logical_bytes": 25869,
+      "cpu_ns": 9024063,
+      "wall_ns": 9016379
+    },
+    "operation_audit": {
+      "cpu_ns": 1411030,
+      "wall_ns": 1456633,
+      "logical_bytes": 18878,
+      "additional_checkpoint_reads": 0,
+      "calls": 13
+    }
+  },
+  "actual_memory_tools": {
+    "create": 4,
+    "update": 1,
+    "delete": 1
+  },
+  "memory_tool_argument_logical_bytes": 645,
+  "business_tools": {
+    "reserve_and_label": 1,
+    "get_reservation": 1
+  },
+  "routes": {
+    "all": 20
+  },
+  "max_records": 2,
+  "max_candidate_tokens": 127,
+  "max_generation_calls_per_public_message": 2,
+  "process": {
+    "wall_seconds": 27.495113167446107,
+    "child_user_cpu_seconds": 22.943853000000004,
+    "child_system_cpu_seconds": 1.708554
+  },
+  "all_actual_prompt_counts_match_local_template": true,
+  "unique_generation_provider_ids": 20,
+  "controller_selector_correction_calls": 0,
+  "semantic_retries": 0,
+  "infrastructure_retries": 0,
+  "unknown_costs": [
+    "physical Store I/O",
+    "ordinary memory write CPU",
+    "GPU time",
+    "currency cost",
+    "prepare and Root offline analysis time not instrumented"
+  ],
+  "budget": {
+    "before_sha256": "98b02945ab195ad94e37061f97c5ba5eb8068ecd87ff47caef9f76f9e51fdd15",
+    "after_sha256": "db0b1e4ea95b2c68155e742627cfbbc9fb4c4f9c68d56d5f01aca4f5ea64aa6b",
+    "history_and_limits_unchanged": true,
+    "before": {
+      "generation_requests": 3125,
+      "generation": {
+        "charged_tokens": 3971354,
+        "known_tokens": 3971354,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 22221,
+        "known_tokens": 22221,
+        "unknown_usage": 0
+      }
+    },
+    "after": {
+      "generation_requests": 3145,
+      "generation": {
+        "charged_tokens": 3998838,
+        "known_tokens": 3998838,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 22336,
+        "known_tokens": 22336,
+        "unknown_usage": 0
+      }
+    }
+  },
+  "local_evidence": {
+    "manual-observations.json": "06f732a2d75af24980ae62aad54cde63f63f47b9646c7f788028938e879d19a5",
+    "obligation-results.json": "271252050f01a7060e6313513df29060f9e526f4379a84521acc094476e27d3f",
+    "root-cost-audit.json": "eebabea13636cd726ab5cacffdb16f0459332afb0ddb87c5eaf8d220eaeb1806",
+    "root-chain-audit.json": "e260d92621a2d74f3e5ca65fdf2040439c290b42fd19e0802d2659ba047d831c"
+  },
+  "root_helpers": {
+    "run_s3a.py": "6e60bac9b5e192457198a738308940c7f4f8cc6db0fd0295886d4e11e62b8b58",
+    "cost_s3a.py": "87af52973196e9918d6a467991621b2acf88ae3a9d39a94834aebaddfd0fa5b5",
+    "chain_s3a.py": "3ff530296fafbaefa05bd9a63447b49e852fd0dd612d20a372c4402e15571455",
+    "aggregate_s3a.py": "bda05126bb6a74403e9a21bd3fd320a9929a4c2099f43c6e570d9e6227cf2e26"
+  },
+  "format_interpretation": "Historical answer L-2 unambiguously identifies the original locker in retained context; no unrequested requirement to repeat the noun locker. Current LOCATION answer follows the exact two-line contract.",
+  "limits": [
+    "four exposed scripts, one family, full Model View",
+    "not complete S3b regression or new S4 evidence",
+    "actual newly formed UUIDs/wording can change trajectories; cost difference is not compression",
+    "S2 profile does not establish semantic preservation before complete regression"
+  ]
+}

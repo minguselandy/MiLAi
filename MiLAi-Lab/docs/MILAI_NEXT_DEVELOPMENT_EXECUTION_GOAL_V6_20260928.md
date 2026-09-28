@@ -28,10 +28,10 @@ v5 head 两次 Fast `36393968381`、`36397917433` 均 success，Full `3639396833
 | 要求 | 必须取得的证据 | 当前状态 |
 | --- | --- | --- |
 | S0 / §7 | 旧 system/candidate、当前/历史、world/DELETE/临时/只读/多事项及费用原样保留，旧分归旧提交 | COMPLETE；159 源文件、14 公开证据、28 个 terminal jobs、131 个生成 ID、86 消息核平 |
-| S1 / §8、18、19、23.1–2 | 显式结构化请求对象/renderer/router；无序列化块搬运；old/new wire bytes、capacity/token、audit、原 graph 完全等价；独立源码发布 | MECHANICAL_GATE_PASS；131实际请求、86审计、22条件/26阶段及27窄测通过；源码与本记录一同独立发布 |
-| S2 / §9、21、23.3 | 明确 Model/Audit 边界、冻结请求组件计量、每项删除依据与 trace 可恢复性，保留语义/ID/scope/业务正文 | NOT_STARTED；先完成 S1 门槛，再离线选择；10%–20% 为目标而非强行删数据的门槛 |
-| S3a / §10 | S1 机械等价后 2–4 个真实 smoke，所有成本计入 | NOT_RUN；不得在 S1 完成前调用模型 |
-| S3b / §10 | 若 S2 改 Model View，完整 12-script/156-obligation 暴露回归；任何退化先定位被删信息，不加 prompt 修分 | CONDITIONAL_NOT_RUN |
+| S1 / §8、18、19、23.1–2 | 显式结构化请求对象/renderer/router；无序列化块搬运；old/new wire bytes、capacity/token、audit、原 graph 完全等价；独立源码发布 | COMPLETE；4ffd176/PR70独立发布、远端核对、Fast success；131请求/86审计/22条件26阶段/27窄测通过 |
+| S2 / §9、21、23.3 | 明确 Model/Audit 边界、冻结请求组件计量、每项删除依据与 trace 可恢复性，保留语义/ID/scope/业务正文 | ENGINEERING_ACCEPTED_S3B_PENDING；30窄测、131full/compact回放和86审计通过；唯一候选移出wrapper/空容器/模型hash，固定输入-3.80%、记忆组件-9.54%；不硬凑目标 |
+| S3a / §10 | S1 机械等价后 2–4 个真实 smoke，所有成本计入 | PASS；4已暴露scripts/13消息/54任务全过；20生成27484tokens、5embedding115tokens已归账 |
+| S3b / §10 | 若 S2 改 Model View，完整 12-script/156-obligation 暴露回归；任何退化先定位被删信息，不加 prompt 修分 | REQUIRED_NOT_RUN；12脚本35消息的原合同已准备，待S2源码发布/冻结 |
 | S4 / §11–12、17、23.4–5 | 12–16 个独立结构脚本、约 35–50 公开消息；十二任务族、quoted imperative/carrier 边界；显式≥98%、所需持久100%、无跨owner/重复业务/假保存/隐藏rubric失败 | DRAFT_INPUTS_NOT_FROZEN_NOT_RUN；Root草拟12 scripts/40消息与可见义务合同，待S1/S2/S3完成后冻结；不能用旧回归替代 |
 | S5 / §13 | 仅 S4 通过后，不改方法/prompt，另一模型家族 6–8 脚本覆盖六类边界 | CONDITIONAL_NOT_RUN；不同量化不算另一家族，开发 subagent 不算实验 Host |
 | S6 / §14 | S4 稳定后、最好已有 S5 确认，20–30 sessions 自然积累10–20独立事项，先正常 all，无人为压预算 | CONDITIONAL_NOT_RUN |
@@ -91,6 +91,15 @@ BOUNDARY_PROTOCOL四职责常量拼接值保持1232 bytes。S1独立发布前不
 tree等于S0 `c6dcd1d7`，Fast36400064797 success；Root核对远端SHA、parents/tree、原七份草稿与连续账本。
 这次合并只有S0，正在验收的S1另行发布，不把源码工作树混入S0。旧PR51仍未验收、不合入。
 
+S1现已由Luna独立发布`4ffd17664ce9d8a6497e57b199b3a6d764adae86`，draft PR70、Fast36403127754 success。
+Root核对精确9文件、远端head/base和S4草稿排除状态。随后完成S2离线profiling与S1-source真实S3a，见
+[阶段结果](MILAI_NEXT_DEVELOPMENT_V6_S2_PROFILE_S3A_RESULTS_20260928.md)。
+S3a四个完整脚本均terminal且54/54，累计账本更新为3145calls/3998838generation tokens/22336embedding tokens，
+SHA`db0b1e4ea95b2c68155e742627cfbbc9fb4c4f9c68d56d5f01aca4f5ea64aa6b`；无语义或基础设施重试。
+这不是完整S3b或新S4证据。S2实现放行于S3a全部终止之后，仍由Sol唯一写入相关源码/测试/新config。
+S2的Model/Audit字段边界、默认full、未知额外字段保留、tool metadata结构化及compact实际容量均须验证；
+不通过删除更多语义去达到10%–20%的工程目标。
+
 ## 职责、冻结和验收纪律
 
 Root：计划/报告/合成 fixtures/rubric、协议与输入冻结、所有真实调用、语义评分、分析、完整成本与验收。
@@ -113,3 +122,8 @@ fixed-request 输入差与真实轨迹总费用分开，开发代理 tokens 与�
 既有 vLLM 设置不改；优先复用公开 LangGraph/LangMem API、现有 runner 和薄适配。
 Lab-only，Product NO_GO；不自动恢复旧 M1/ODR/第二份 State facts 或过期 v27 方案。
 原 plans/protocols/failures/锁不重写，新阶段各自记录真实身份。
+
+S2源码现已由Sol完成、Root核平并验收，详见[实现回执](../data/manifests/next-development-v6-s2-implementation-checks-20260928.json)。
+30窄测、131full默认等价与131compact预测匹配、86审计及原checkpoint保持；未做新的真实调用。
+库默认system/full不变；S3b尚未运行，不能宣布compact语义通过。下一步Luna发布已验收源码与阶段结果，
+然后Root在确切发布SHA上prepare/freeze并串行回归；S4草稿仍不发布、不执行。

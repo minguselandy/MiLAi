@@ -11,6 +11,7 @@ from typing import Any
 
 from milai_lab.methods.request_context import (
     MemoryPlacement,
+    ModelView,
     RequestContext,
     record_material,
     render_request,
@@ -60,11 +61,15 @@ def boundary_policy(value: Any) -> dict[str, Any] | None:
     placement = value.get("memory_placement", "system")
     if not isinstance(placement, str) or placement not in {"system", "current_request"}:
         raise ValueError("MEMORY_BOUNDARY_CONFIG_INVALID")
+    model_view = value.get("model_view", "full")
+    if not isinstance(model_view, str) or model_view not in {"full", "compact_v6"}:
+        raise ValueError("MEMORY_BOUNDARY_CONFIG_INVALID")
     if not value.get("enabled", False):
         return None
     policy = {"enabled": True, "candidate_count_threshold": 32,
               "candidate_token_threshold": 6000, "query_limit": 10,
-              "attention_enabled": False, "memory_placement": "system", **value}
+              "attention_enabled": False, "memory_placement": "system",
+              "model_view": "full", **value}
     if any(type(policy[key]) is not int or policy[key] <= 0 for key in (
         "candidate_count_threshold", "candidate_token_threshold", "query_limit"
     )) or type(policy["attention_enabled"]) is not bool:
@@ -242,13 +247,15 @@ class MemoryBoundaryView:
         self.delivery = None
         self.request_context = RequestContext(
             base_system=base_system, durable_records=tuple(records),
-            boundary_protocol=boundary_protocol, system_tail=system_tail)
+            boundary_protocol=boundary_protocol, system_tail=system_tail,
+            model_view=ModelView((self.policy or {}).get("model_view", "full")))
 
     def prepared_system(self) -> str:
         """Preserve the pre-model SystemMessage without parsing it during later assembly."""
         if self.request_context is None:
             raise ValueError("MEMORY_BOUNDARY_REQUEST_SCOPE_CHANGED")
-        return render_system(self.request_context, MemoryPlacement.SYSTEM)
+        return render_system(self.request_context.with_model_view(ModelView.FULL),
+                             MemoryPlacement.SYSTEM)
 
     def final_request_context(self, action_protocol: str) -> RequestContext:
         if self.request_context is None:
@@ -284,6 +291,7 @@ class MemoryBoundaryView:
         self.query = originals[last_user]["content"]
         self.active_ids = {row["record_id"] for row in state["active_refs"]}
         projected = []
+        tool_observations: dict[int, Mapping[str, Any]] = {}
         for position, (message, original) in enumerate(zip(wire, originals, strict=True)):
             copy = dict(message)
             kind = original.get("type")
@@ -291,14 +299,17 @@ class MemoryBoundaryView:
                 label = ("[CURRENT USER REQUEST]\n[CURRENT TASK]" if position == last_user
                          else "[USER HISTORY]")
             elif kind == "tool":
-                label = "[TOOL OBSERVATION] " + json.dumps({
+                label = ""
+                if not isinstance(original["content"], str):
+                    raise ValueError("MEMORY_BOUNDARY_CONTENT_NOT_TEXT")
+                tool_observations[position - 1] = {
                     "tool_call_id": original.get("tool_call_id"),
                     "tool_name": original.get("name"),
                     "content_sha256": _body_hash(original["content"]),
                     "observation_received_at": _receipt_time(event_reference(
                         self.thread_id, position, original), original["content"],
                         self.receipt_metadata, self.scope),
-                }, ensure_ascii=False)
+                }
                 # Replace the earlier v3 receipt prefix only in this v4 request copy.
                 copy["content"] = original["content"]
             elif kind == "ai":
@@ -320,7 +331,8 @@ class MemoryBoundaryView:
             base_system=context.base_system, durable_records=context.durable_records,
             boundary_protocol=context.boundary_protocol, system_tail=context.system_tail,
             working_state=state, messages=tuple(projected[1:]), current_user_index=last_user - 1,
-            system_message=projected[0])
+            system_message=projected[0], model_view=context.model_view,
+            tool_observations=tool_observations)
         placement = MemoryPlacement((self.policy or {}).get("memory_placement", "system"))
         projected = render_request(self.request_context, placement)
         if self.emit is not None:
@@ -338,18 +350,20 @@ class MemoryBoundaryView:
         placement = MemoryPlacement(self.policy.get("memory_placement", "system"))
         messages = render_request(context, placement)
         records = [dict(row) for row in context.durable_records]
-        all_material = record_material(context.durable_records)
+        all_material = record_material(context.durable_records, context.model_view)
         candidate_tokens = self.capacity.text_tokens(all_material)
         details: dict[str, Any] = {**self.scope, "event": "memory_boundary_route",
             "request_index": self.request_index,
             "candidate_count": len(records), "candidate_tokens": candidate_tokens,
             "candidate_bytes": len(all_material.encode("utf-8")),
             "query": self.query, "route": "all", "trigger_reason": [], "prepared_only": True}
+        if context.model_view is ModelView.COMPACT_V6:
+            details["model_view"] = context.model_view.value
         def render(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             return render_request(context.with_records(rows), placement)
         def checked(rows: list[dict[str, Any]], request: list[dict[str, Any]],
                     route: str, receipt: Any = None) -> list[dict[str, Any]]:
-            material = record_material(rows)
+            material = record_material(rows, context.model_view)
             details.update({"route": route, "selected_record_ids": [row["id"] for row in rows],
                             "selected_material_tokens": self.capacity.text_tokens(material),
                             "selected_material_bytes": len(material.encode("utf-8"))})

@@ -8,8 +8,16 @@ S0 PR69 is now merged at07cc364f by separate explicit user instruction. S1's exp
 renderer, structural route and unchanged protocol components passed131 actual-payload replays,
 86 operation audits,22 prepared route conditions/26 stages and27 narrow tests; see the
 [S1 engineering report](docs/MILAI_NEXT_DEVELOPMENT_V6_S1_ASSEMBLY_RESULTS_20260928.md).
-These are mechanical results only. S1 source publication precedes S2; real S3 smoke and all later
-gates remain pending. Root's draft S4 inputs are not frozen or executed. Do not merge future PRs
+S1 source4ffd176 is published on draft PR70, Fast36403127754 success. S3a at that full-view source
+passed4 exposed scripts/13 messages/54 task obligations; its20 generation/27484 tokens and5
+embedding/115 tokens are reconciled to the continuous ledger. See the
+[S2 profile and S3a report](docs/MILAI_NEXT_DEVELOPMENT_V6_S2_PROFILE_S3A_RESULTS_20260928.md).
+S2's sole compact_v6 proposal removes only ordinary value wrappers, empty working containers and
+model-facing tool-body hashes; Audit retains everything. Default full and system remain. Extra
+record fields and nonempty refs are preserved; no protocol wording, actual tool body or ID is removed.
+S2 implementation is engineered and Root accepted:30 narrow tests,131 full/compact replays and86 audits passed.
+See the S2 implementation manifest; source publication/freeze and full S3b12-script/156-task regression precede S4. No prompt patch for
+a compact regression. Root's draft S4 inputs are not frozen or executed. Do not merge future PRs
 automatically from the completed S0-only merge action.
 Root read all 1,497 original plan lines; keep original DRAFT/NOT_STARTED bytes and correct stale
 PR68 metadata only in new records. Main05601148 now contains PR52–68; its tree equals v5 report1abf5c4.

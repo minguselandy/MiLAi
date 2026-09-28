@@ -180,8 +180,9 @@ def _scope(arm: str = "C", session: str = "one") -> FoundationScope:
 
 
 @pytest.mark.parametrize("memory_placement", ["system", "current_request"])
+@pytest.mark.parametrize("model_view", ["full", "compact_v6"])
 def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
-    tmp_path: Path, memory_placement: str,
+    tmp_path: Path, memory_placement: str, model_view: str,
 ) -> None:
     store, wires = InMemoryStore(), []
     memory_id = str(uuid.uuid4())
@@ -201,7 +202,8 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
         return {"answer": "saved in final prose without proving a write"}
     with _runtime(tmp_path, store, wires, respond) as runtime:
         agent = _agent(runtime, tmp_path, "B0", boundaries=True,
-                       boundary_options={"memory_placement": memory_placement})
+                       boundary_options={"memory_placement": memory_placement,
+                                         "model_view": model_view})
         scope = _scope("B0")
         agent.update_state(scope.config(), {"messages": [
             HumanMessage(id="old-user", content="earlier request"),
@@ -240,7 +242,11 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
                             next(row for row in reversed(wires[2]["messages"])
                                  if row["role"] == "user"))
         assert "updated durable 4" in material_message["content"]
-        assert '"active_refs": []' in wires[-1]["messages"][0]["content"]
+        assert ('"active_refs": []' in wires[-1]["messages"][0]["content"]) == (
+            model_view == "full")
+        assert '"active_refs": [{"record_id":' in wires[1]["messages"][0]["content"]
+        inputs = agent.get_state(scope.config()).values["llm_input_messages"]
+        assert "[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]" in inputs[0].content
         for original in originals:
             assert "[CURRENT TASK]" not in original.content
             assert "[TOOL OBSERVATION]" not in original.content
@@ -254,7 +260,10 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
                     original.model_dump(mode="json"))]
                 label = json.loads(projected["content"].split("\n", 1)[0].split(" ", 2)[2])
                 assert label["observation_received_at"] == received["observation_received_at"]
-                assert label["content_sha256"] == received["content_sha256"]
+                if model_view == "full":
+                    assert label["content_sha256"] == received["content_sha256"]
+                else:
+                    assert "content_sha256" not in label
                 assert received["user_id"] == "alice"
                 assert received["message_key"] == runtime.model.active_message_key
                 assert received["tool_call_id"] == original.tool_call_id
@@ -269,7 +278,8 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
         assert "PRIVATE OTHER OWNER" not in json.dumps(wires)
         invoke_public_message(agent, runtime.model, _scope("B0", "new"), "NEXT TASK")
         assert "TEMP current task bytes" not in json.dumps(wires[-1])
-        assert '"active_refs": []' in wires[-1]["messages"][0]["content"]
+        assert ('"active_refs": []' in wires[-1]["messages"][0]["content"]) == (
+            model_view == "full")
 
 
 def test_boundary_config_defaults_zero_correction_and_preserves_legacy_c(tmp_path: Path) -> None:
@@ -283,8 +293,9 @@ def test_boundary_config_defaults_zero_correction_and_preserves_legacy_c(tmp_pat
 
 
 @pytest.mark.parametrize("memory_placement", ["system", "current_request"])
+@pytest.mark.parametrize("model_view", ["full", "compact_v6"])
 def test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost(
-    tmp_path: Path, memory_placement: str,
+    tmp_path: Path, memory_placement: str, model_view: str,
 ) -> None:
     from langgraph.store.base import PutOp
 
@@ -312,7 +323,8 @@ def test_boundary_query_uses_complete_query_actual_index_and_continuous_embeddin
         with _runtime(tmp_path, store, wires, lambda *_: {"answer": "read-only"},
                       budget=budget) as runtime:
             invoke_public_message(_agent(runtime, tmp_path, "B0", boundaries=True,
-                boundary_options={"memory_placement": memory_placement}), runtime.model,
+                boundary_options={"memory_placement": memory_placement,
+                                  "model_view": model_view}), runtime.model,
                                   _scope("B0"), query)
         assert len(embedding_wires) == 2 and embedding_wires[-1]["input"] == [query]
         assert len(wires) == 1
@@ -322,6 +334,8 @@ def test_boundary_query_uses_complete_query_actual_index_and_continuous_embeddin
         material = json.loads(containing["content"].split("[DURABLE MEMORY]\n", 1)[1].split(
             "\n[/DURABLE MEMORY]", 1)[0])
         assert len(material) == 10
+        assert all(set(row) == ({"id", "value"} if model_view == "full" else {"id", "content"})
+                   for row in material)
         assert read_json(tmp_path / "budget.json")["embedding"]["charged_tokens"] == 6
         after = {row.key: row.value for row in store.search(namespace, limit=64)}
         assert before == after
@@ -348,8 +362,9 @@ class _OneRecordCapacity(_MockCapacity):
 
 
 @pytest.mark.parametrize("memory_placement", ["system", "current_request"])
+@pytest.mark.parametrize("model_view", ["full", "compact_v6"])
 def test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body(
-    tmp_path: Path, memory_placement: str,
+    tmp_path: Path, memory_placement: str, model_view: str,
 ) -> None:
     store, wires, control_wires = InMemoryStore(), [], []
     namespace = ("langmem", "run", "B0", "alice")
@@ -375,11 +390,15 @@ def test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body(
             transport=httpx.MockTransport(control)) as selector:
             agent = _agent(runtime, tmp_path, "B0", boundaries=True,
                            boundary_options={"attention_enabled": True,
-                                             "memory_placement": memory_placement},
+                                             "memory_placement": memory_placement,
+                                             "model_view": model_view},
                            selector_client=selector)
             invoke_public_message(agent, runtime.model, _scope("B0"), "original task")
             checkpoint = agent.get_state(_scope("B0").config()).values["messages"]
         assert len(control_wires) == 1 and len(wires) == 2 and runtime.model.calls_in_message == 2
+        candidates = json.loads(control_wires[0]["messages"][-1]["content"])["candidates"]
+        assert all(set(row) == {"id", "value"} and set(row["value"]) == {"content"}
+                   for row in candidates)
         containing = next(row for row in wires[-1]["messages"] if "[DURABLE MEMORY]\n"
                           in row["content"])
         assert containing["role"] == ("system" if memory_placement == "system" else "user")
