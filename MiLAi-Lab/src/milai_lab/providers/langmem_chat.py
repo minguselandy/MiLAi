@@ -227,6 +227,8 @@ class VLLMChatModel(BaseChatModel):
                 action_messages = [first, *wire_messages[1:]]
             else:
                 action_messages = [{"role": "system", "content": protocol}, *wire_messages]
+            if self.request_view is not None and hasattr(self.request_view, "fit_final_request"):
+                action_messages = self.request_view.fit_final_request(action_messages)
             self._reserve_request()
             scope = (self.observer.request_scope(
                 self.active_message_key, self.calls_in_message,
@@ -244,6 +246,8 @@ class VLLMChatModel(BaseChatModel):
                     delivered_snapshot = self.projection.record_delivery(
                         self.active_message_key, self.calls_in_message,
                         projected, action_messages)
+                if self.request_view is not None and hasattr(self.request_view, "record_delivery"):
+                    self.request_view.record_delivery(receipt)
             if self.m1 is not None and self.client.emit is not None:
                 self.client.emit({
                     "event": "m1_decision_context", "status": "delivered",

@@ -10,6 +10,8 @@ import subprocess
 import sys
 import time
 from collections.abc import Callable, Sequence
+from contextlib import ExitStack
+from dataclasses import replace
 from pathlib import Path
 from typing import Any, cast
 
@@ -32,12 +34,25 @@ from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
+from milai_lab.methods.local_state_attention.controller import (
+    ControlResponseError,
+    LocalStateController,
+)
 from milai_lab.methods.local_state_attention.history import HistoryAccess, _turn
 from milai_lab.methods.local_state_attention.writers import (
     create_writer_tools,
     scoped_memory_records,
 )
+from milai_lab.methods.memory_boundaries import (
+    BOUNDARY_PROTOCOL,
+    READ_SELECTION_PROMPT,
+    MemoryBoundaryView,
+    boundary_policy,
+    operation_audit,
+)
 from milai_lab.methods.memory_result import RESPONSIBILITY_PROMPT, turn_receipts
+from milai_lab.providers.contextual_capacity import CapacityExceeded
+from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel, _action_prompt, _action_schema
 from milai_lab.runners.frozen_action_continuation import _sha
 from milai_lab.runners.langmem_application import ApplicationWorld, _business_tools, run_phase
@@ -109,11 +124,16 @@ def _script(inputs: dict[str, Any]) -> dict[str, Any]:
 
 
 def _validate(config: dict[str, Any], arm: str) -> None:
+    policy = boundary_policy(config.get("memory_boundaries", {}))
+    enabled = policy is not None
+    correction_entries = config.get("memory_result", {}).get(
+        "correction_entries", 0 if enabled else None)
     if (
         arm not in ARMS
         or config.get("memory_contract") != "strict"
         or config.get("history_mode") not in {"archive", "retained"}
-        or config.get("memory_result", {}).get("correction_entries") != 1
+        or correction_entries != (0 if enabled else 1)
+        or (enabled and arm != "B0")
         or config["host"]["tool_mode"] != "json_action"
         or config["host"]["max_calls"] != 12
         or config["host"]["max_tokens"] != 4096
@@ -126,6 +146,11 @@ def _validate(config: dict[str, Any], arm: str) -> None:
         or not Path(config["budget_path"]).is_absolute()
     ):
         raise ValueError("PERSISTENT_MEMORY_CONFIG_INVALID")
+    if policy is not None and policy["attention_enabled"] and (
+        config.get("control", {}).get("max_tokens") != 2048
+        or config.get("control", {}).get("max_calls_per_message") != 13
+    ):
+        raise ValueError("MEMORY_BOUNDARY_CONTROL_CONFIG_INVALID")
 
 
 def _catalog(history_mode: str) -> list[dict[str, Any]]:
@@ -162,8 +187,9 @@ def _identity(
             "jsonschema",
         )
     }
-    return {
-        "method": "persistent-memory-react-v3",
+    identity = {
+        "method": ("persistent-memory-boundaries-v4" if config.get("memory_boundaries", {}).get(
+            "enabled", False) else "persistent-memory-react-v3"),
         "recipe_id": config["recipe_id"],
         "run_id": args.run,
         "arm_id": args.arm,
@@ -200,6 +226,24 @@ def _identity(
         "python": sys.version,
         "dependencies": dependencies,
     }
+    if config.get("memory_boundaries", {}).get("enabled", False):
+        policy = boundary_policy(config["memory_boundaries"])
+        assert policy is not None
+        identity.update({"memory_boundaries": policy,
+                         "boundary_protocol": BOUNDARY_PROTOCOL,
+                         "read_selection_prompt": READ_SELECTION_PROMPT,
+                         "common_receipt_projection": (
+                             "request copy: actual ref/name/hash-bound receipt time; "
+                             "missing or historical time unknown; original ToolMessage unchanged"),
+                         "candidate_token_policy": "all-to-query trigger; not query hard cap",
+                         "selection_calls": "conditional; at most one per public turn"
+                         if policy["attention_enabled"] else False,
+                         "selection_cache": (
+                             "ephemeral current-turn IDs only; Store bodies resolved per request; "
+                             "no crash-resume cache guarantee"),
+                         "program_operation_audit": True,
+                         "working_state_persistence": False})
+    return identity
 
 
 def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
@@ -238,9 +282,38 @@ def _adapters(
     run_id: str,
     arm: str,
     config: dict[str, Any],
+    *, selector_client: VLLMClient | None = None,
 ) -> tuple[Callable[..., Any], Callable[..., None]]:
     # Only reuse the existing ordinary-record reader; these State tools are never exposed.
     record_reader = create_writer_tools(bank, MEMORY_NAMESPACE)
+    policy = boundary_policy(config.get("memory_boundaries", {}))
+    views: dict[str, MemoryBoundaryView] = {}
+    selector = (LocalStateController(bank, selector_client, emit=selector_client.emit,
+                                    capacity_path=root / "control-capacity.json",
+                                    max_calls_per_message=13)
+                if selector_client is not None else None)
+
+    def select(message_key: str, query: str, candidates: list[dict[str, Any]]) -> list[str]:
+        if selector is None:
+            raise ValueError("MEMORY_BOUNDARY_ATTENTION_UNAVAILABLE")
+        path = root / "control-capacity.json"
+        if path.exists():
+            used = read_json(path).get(message_key, 0)
+            if used >= 13:
+                raise ControlResponseError("LSA_CONTROL_CAPACITY")
+            if used >= 1:
+                raise ValueError("MEMORY_BOUNDARY_ATTENTION_ALREADY_ATTEMPTED")
+        ids = [row["id"] for row in candidates]
+        schema = {"type": "object", "properties": {"record_ids": {"type": "array",
+                  "items": {"type": "string", "enum": ids}, "uniqueItems": True}},
+                  "required": ["record_ids"], "additionalProperties": False}
+        plan = selector._stage_call("memory_read_selection", message_key, READ_SELECTION_PROMPT,
+                                    {"current_query": query, "candidates": candidates}, schema)
+        if (set(plan) != {"record_ids"} or not isinstance(plan["record_ids"], list)
+                or any(not isinstance(key, str) or key not in ids for key in plan["record_ids"])
+                or len(plan["record_ids"]) != len(set(plan["record_ids"]))):
+            raise ValueError("MEMORY_BOUNDARY_ATTENTION_INVALID_IDS")
+        return cast(list[str], plan["record_ids"])
 
     def factory(
         model: VLLMChatModel,
@@ -281,6 +354,36 @@ def _adapters(
                 raise ValueError("PERSISTENT_MEMORY_RECORD_OWNER_CHANGED")
             return scoped_memory_records(record_reader, scope, emit=model.client.emit)
 
+        def retrieve(query: str, limit: int) -> list[dict[str, Any]]:
+            namespace = ("langmem", run_id, arm, user_id)
+            start_wall, start_cpu = time.perf_counter_ns(), time.process_time_ns()
+            event: dict[str, Any] = {"event": "memory_boundary_retrieval", "user_id": user_id,
+                "calls": 1, "query": query, "limit": limit, "logical_bytes": None}
+            try:
+                page = store.search(namespace, query=query, limit=limit)
+                if any(tuple(item.namespace) != namespace for item in page):
+                    raise ValueError("MEMORY_BOUNDARY_RETRIEVAL_SCOPE_CHANGED")
+                rows = [{"id": item.key, "value": item.value} for item in page]
+                event.update({"status": "completed", "returned_ids": [row["id"] for row in rows],
+                    "scores": [item.score for item in page],
+                    "logical_bytes": len(json.dumps(rows, ensure_ascii=False).encode("utf-8"))})
+                return rows
+            except Exception as error:
+                event.update({"status": "failed", "error_type": type(error).__name__})
+                raise
+            finally:
+                event.update({"cpu_ns": time.process_time_ns() - start_cpu,
+                              "wall_ns": time.perf_counter_ns() - start_wall})
+                if model.client.emit is not None:
+                    model.client.emit(event)
+
+        view = (MemoryBoundaryView(
+            emit=model.client.emit, policy=policy, capacity=model.client.capacity,
+            capacity_error=CapacityExceeded, output_tokens=model.client.config.max_tokens,
+            retrieve=retrieve, select=select if policy["attention_enabled"] else None)
+            if policy is not None else None)
+        if view is not None:
+            views[user_id] = view
         graph["agent"] = build_agent(
             model,
             store,
@@ -295,6 +398,7 @@ def _adapters(
             persistent_memory_records=records,
             history_access=history,
             full_history=history is not None,
+            memory_boundaries=view,
         )
         return graph["agent"]
 
@@ -348,6 +452,19 @@ def _adapters(
             ],
             "checkpoint_read": checkpoint_cost,
         }
+        if config.get("memory_boundaries", {}).get("enabled", False):
+            start_wall, start_cpu = time.perf_counter_ns(), time.process_time_ns()
+            receipt["operation_audit"] = operation_audit(
+                [row.model_dump(mode="json") for row in messages], context, thread,
+                views[scope.user_id].receipt_metadata if views[scope.user_id].scope == context
+                else {})
+            receipt["operation_audit_cost"] = {
+                "cpu_ns": time.process_time_ns() - start_cpu,
+                "wall_ns": time.perf_counter_ns() - start_wall,
+                "logical_bytes": len(json.dumps(receipt["operation_audit"],
+                                                ensure_ascii=False).encode("utf-8")),
+                "additional_checkpoint_reads": 0,
+            }
         write_json(root / "turns" / f"{thread}-{public_index}.json", receipt)
         if runtime.model.client.emit is not None:
             runtime.model.client.emit(
@@ -369,6 +486,8 @@ def _accounting(root: Path, budget: Path) -> dict[str, Any]:
         for name in ("persistent_memory_checkpoint_read", "correction_checkpoint_write")
     }
     trace = root / "trace.jsonl"
+    boundary_costs: dict[str, Any] = {}
+    routes, deliveries = [], []
     for line in trace.read_text().splitlines() if trace.exists() else []:
         event = json.loads(line)
         name = event.get("event")
@@ -380,7 +499,31 @@ def _accounting(root: Path, budget: Path) -> dict[str, Any]:
             cost["calls"] += event["checkpoint_writes"]
             for key in ("logical_bytes", "cpu_ns", "wall_ns"):
                 cost[key] += event[key]
-    return {**result, "v3_checkpoint_costs": costs}
+        if name == "memory_boundary_retrieval" or (
+            name == "persistent_memory_turn" and "operation_audit_cost" in event
+        ):
+            category = "retrieval" if name == "memory_boundary_retrieval" else "operation_audit"
+            observed = event if category == "retrieval" else event["operation_audit_cost"]
+            cost = boundary_costs.setdefault(category, {"calls": 0, "logical_bytes": 0,
+                "unknown_logical_bytes": 0, "cpu_ns": 0, "wall_ns": 0})
+            cost["calls"] += observed.get("calls", 1)
+            for key in ("logical_bytes", "cpu_ns", "wall_ns"):
+                if type(observed.get(key)) is int:
+                    cost[key] += observed[key]
+                elif key == "logical_bytes":
+                    cost["unknown_logical_bytes"] += 1
+        elif name == "memory_boundary_route":
+            routes.append(event)
+        elif name == "memory_boundary_delivery":
+            deliveries.append(event)
+    output = {**result, "v3_checkpoint_costs": costs}
+    if boundary_costs or routes or deliveries:
+        output.update({"boundary_observation_costs": boundary_costs,
+            "boundary_routes": routes, "boundary_deliveries": deliveries,
+            "boundary_route_timing": {"cpu_ns": sum(row["cpu_ns"] for row in routes),
+                "wall_ns": sum(row["wall_ns"] for row in routes),
+                "scope": "inclusive; do not add retrieval/selector timings again"}})
+    return output
 
 
 def run(args: Any, *, lab_root: Path) -> dict[str, Any]:
@@ -422,8 +565,18 @@ def run(args: Any, *, lab_root: Path) -> dict[str, Any]:
             try:
                 if args.phase == 0:
                     _empty_namespace(runtime, bank, args.run, args.arm, script["users"])
-                factory, callback = _adapters(runtime, bank, root, args.run, args.arm, config)
-                result = run_phase(
+                with ExitStack() as controls:
+                    policy = boundary_policy(config.get("memory_boundaries", {}))
+                    control = (controls.enter_context(VLLMClient(
+                        replace(runtime.model.client.config, max_tokens=2048),
+                        emit=lambda event: original_emit({**event, "role": "state_control",
+                            "control_stage": "memory_read_selection"})
+                        if original_emit is not None else None,
+                        budget=runtime.model.client.budget, capacity=runtime.model.client.capacity))
+                        if policy is not None and policy["attention_enabled"] else None)
+                    factory, callback = _adapters(runtime, bank, root, args.run, args.arm, config,
+                                                   selector_client=control)
+                    result = run_phase(
                     script,
                     root,
                     args.run,
@@ -433,7 +586,9 @@ def run(args: Any, *, lab_root: Path) -> dict[str, Any]:
                     memory_contract="strict",
                     agent_factory=factory,
                     public_turn_callback=callback,
-                )
+                    capture_interrupted_turn=config.get("memory_boundaries", {}).get(
+                        "enabled", False),
+                    )
             finally:
                 if runtime.model.client.emit is not None:
                     runtime.model.client.emit(

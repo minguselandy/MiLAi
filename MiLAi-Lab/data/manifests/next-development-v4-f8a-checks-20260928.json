@@ -1,0 +1,910 @@
+{
+  "kind": "MILAI_NEXT_DEVELOPMENT_V4_F8A_ENGINEERING_ACCEPTANCE",
+  "status": "ACCEPTED_ENGINEERING_ONLY_REAL_B_C_NOT_RUN",
+  "reviewed_at_utc": "2026-09-28T05:05:06.216294+00:00",
+  "source_baseline_commit": "8d4ddc4a315bd97f4a7a62a84ec51f23fbaf53eb",
+  "plan_sha256": "c9a149cf5a7ad1ff6fc833702391813afd4c1494187bdb350c8e545e8b42625e",
+  "source_receipt_sha256": "d8965fc360754b7fbfd9bd380f551bb962b1c39d321ddb4e2f1e7c807cf256b8",
+  "source_checks": {
+    "kind": "MILAI_NEXT_DEVELOPMENT_V4_F1_F7_SOURCE_CHECKS",
+    "status": "FREEZE_READY",
+    "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4",
+    "git_head": "8d4ddc4a315bd97f4a7a62a84ec51f23fbaf53eb",
+    "model_role": "existing Sol xhigh; unique source/CI owner",
+    "changed_files": [
+      {
+        "path": "MiLAi-Lab/src/milai_lab/methods/memory_boundaries.py",
+        "bytes": 21922,
+        "sha256": "51f500a5b2c3aff46ed6526f8a34736f6dc25f02ceeb171de9d2f93c9b7d51d8",
+        "single_final_newline": true
+      },
+      {
+        "path": "MiLAi-Lab/src/milai_lab/baselines/langmem_agent.py",
+        "bytes": 25334,
+        "sha256": "b7bb10c4dbbf93bb1f6dcc861d4510f636c575bb0a11f8d2af65b570effdf65b",
+        "single_final_newline": true
+      },
+      {
+        "path": "MiLAi-Lab/src/milai_lab/providers/langmem_chat.py",
+        "bytes": 19492,
+        "sha256": "3373be66349a9b67e0d22b96c9244d8116af6bd35c78a064762cb3725cf31232",
+        "single_final_newline": true
+      },
+      {
+        "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/integration.py",
+        "bytes": 22525,
+        "sha256": "fb1b15a8a0f91139c96e382fb17f7a6fc5dcd37ee6ba1a5a04ec33169fb9bda8",
+        "single_final_newline": true
+      },
+      {
+        "path": "MiLAi-Lab/src/milai_lab/runners/persistent_memory.py",
+        "bytes": 27743,
+        "sha256": "11a52af6769351775ccf3098e35300d627ae2ec3d740a433f8701c41968ae230",
+        "single_final_newline": true
+      },
+      {
+        "path": "MiLAi-Lab/src/milai_lab/runners/langmem_application.py",
+        "bytes": 39057,
+        "sha256": "f76af55ff70ed7165a3f2a72ffc22c5bf422f17a194671f901b18832b392a00b",
+        "single_final_newline": true
+      },
+      {
+        "path": "MiLAi-Lab/tests/unit/test_memory_boundaries.py",
+        "bytes": 8615,
+        "sha256": "91bad7a387d8b9315f3a9c86a348d04184f82779d733b074193ba44aef900855",
+        "single_final_newline": true
+      },
+      {
+        "path": "MiLAi-Lab/tests/unit/test_persistent_memory.py",
+        "bytes": 42541,
+        "sha256": "8b4cef0d708bffc124c92796525b56d06d2aa025b9e6502a5df1073044fba24d",
+        "single_final_newline": true
+      },
+      {
+        "path": "MiLAi-Lab/configs/lab-verification-matrix.json",
+        "bytes": 4394,
+        "sha256": "21e09ef850bc72bdb806c6a11aa13625deec101f345e9a9bb50adff3ca4a0f10",
+        "single_final_newline": true
+      },
+      {
+        "path": ".github/workflows/fast.yml",
+        "bytes": 17389,
+        "sha256": "1ad66aff4ac393b47f191d7f4d73d849aab58e61acf59e7f7631f869eb1e9a95",
+        "single_final_newline": true
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "bytes": 20759,
+        "sha256": "1ac6ab54cb6278f4bf2ffde87cbed56443a5aaaeddd5ecb7b18628384f8d80ba",
+        "single_final_newline": true
+      }
+    ],
+    "environment": {
+      "core_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+      "foundation_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+      "foundation_python_version": "3.11.13",
+      "uv": "uv 0.8.3",
+      "lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1",
+      "versions": {
+        "pytest": "8.4.2",
+        "ruff": "0.16.5",
+        "mypy": "1.20.2",
+        "langchain-core": "1.6.5",
+        "langgraph": "1.1.10",
+        "langgraph-checkpoint-sqlite": "2.0.11",
+        "langmem": "0.0.30",
+        "httpx": "0.28.1",
+        "transformers": "4.57.6"
+      }
+    },
+    "checks": [
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_memory_boundaries.py",
+        "exit_code": 0,
+        "passed": 5,
+        "skipped": 0,
+        "seconds": 0.08,
+        "evidence": "tool result 2489c8; no saved stdout log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body tests/unit/test_persistent_memory.py::test_boundary_persisted_selector_capacity_refuses_without_another_http tests/unit/test_persistent_memory.py::test_boundary_host_twelve_call_capacity_does_not_replay_or_add_control tests/unit/test_persistent_memory.py::test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay tests/unit/test_persistent_memory.py::test_actual_history_permission_and_owner_isolation",
+        "exit_code": 1,
+        "passed": 13,
+        "failed": 1,
+        "seconds": 3.87,
+        "evidence": "tool result 38b75b",
+        "failure": "indexed embedding charged_tokens was 3, expected 6; test created a second RunBudget object; production already shares one"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost",
+        "exit_code": 0,
+        "passed": 1,
+        "skipped": 0,
+        "seconds": 1.58,
+        "evidence": "tool result be9435; same shared RunBudget used by seed, query and Host"
+      },
+      {
+        "command": "MILAI_V4_WIRE_CAPTURE=artifacts/next-development-v4/p1-checks/final-wire-capture.json PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity tests/unit/test_persistent_memory.py::test_existing_record_read_nochange_never_forces_create_or_reads_foreign_owner tests/unit/test_persistent_memory.py::test_partial_operations_keep_real_commits_errors_and_no_semantic_certification tests/unit/test_persistent_memory.py::test_nochange_contradiction_gets_only_one_entry_and_invalid_second_final_is_preserved tests/unit/test_persistent_memory.py::test_semantically_wrong_nochange_is_not_auto_corrected_and_cap_is_not_extended tests/unit/test_persistent_memory.py::test_business_partial_effect_is_never_replayed_by_memory_correction tests/unit/test_persistent_memory.py::test_unknown_business_side_effect_propagates_without_correction_or_replay tests/unit/test_persistent_memory.py::test_prepared_phase_entry_reopens_retained_records_records_costs_and_refuses_rerun tests/unit/test_langmem_application.py tests/unit/test_langmem_foundation.py::test_agent_native_unknown_update_still_upserts tests/unit/test_langmem_foundation.py::test_agent_strict_rejects_unknown_update_then_accepts_create tests/unit/test_langmem_foundation.py::test_agent_strict_content_required_rejects_real_toolnode_then_recovers tests/unit/test_langmem_foundation.py::test_strict_crud_scope_noop_and_native_parameters tests/unit/test_langmem_foundation.py::test_strict_store_failures_propagate",
+        "exit_code": 0,
+        "passed": 25,
+        "skipped": 0,
+        "seconds": 4.92,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/adjacent-final.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_memory_boundaries.py::test_audit_has_no_saved_certification_or_circular_evidence tests/unit/test_memory_boundaries.py::test_refs_resolve_current_records_and_delete_does_not_activate_old_content",
+        "exit_code": 0,
+        "passed": 2,
+        "skipped": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/pure-audit-final.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset tests/unit/test_persistent_memory.py::test_boundary_config_defaults_zero_correction_and_preserves_legacy_c tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity",
+        "passed": 2,
+        "skipped": 0,
+        "evidence": "initial run; config and C correction passed, new role test failed harness schema assertion; later role pass in adjacent-final.log",
+        "exit_code": 1,
+        "failed": 1,
+        "seconds": 2.2
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/methods/memory_boundaries.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/langmem_chat.py src/milai_lab/methods/local_state_attention/integration.py src/milai_lab/runners/persistent_memory.py src/milai_lab/runners/langmem_application.py tests/unit/test_memory_boundaries.py tests/unit/test_persistent_memory.py",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/ruff-final.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/methods/memory_boundaries.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/langmem_chat.py src/milai_lab/methods/local_state_attention/integration.py src/milai_lab/runners/persistent_memory.py src/milai_lab/runners/langmem_application.py",
+        "exit_code": 0,
+        "checked_source_files": 6,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/mypy-final.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m mypy src/milai_lab/methods/memory_boundaries.py",
+        "exit_code": 0,
+        "checked_source_files": 1,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/core-mypy-final.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python tools/check_verification_matrix.py",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/matrix-final.log",
+        "active_sources": 156,
+        "core_direct": 24,
+        "actual_fast_full_command_coverage_checked": true
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.boundary",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/boundary-final.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.tools_boundary",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/tools-boundary-final.log"
+      },
+      {
+        "command": "git diff --check -- MiLAi-Lab/src MiLAi-Lab/tests MiLAi-Lab/configs/lab-verification-matrix.json .github/workflows/fast.yml .github/workflows/ci.yml",
+        "exit_code": 0,
+        "evidence": "tool result 0d78db; two untracked new files separately verified for single trailing newline in changed-files.json"
+      }
+    ],
+    "unique_passed_nodeids": [
+      "tests/unit/test_langmem_application.py::test_durable_partial_business_result_and_user_scope",
+      "tests/unit/test_langmem_application.py::test_four_arm_policy_and_generic_frozen_script_prepare",
+      "tests/unit/test_langmem_application.py::test_full_history_replays_interleaved_turns_after_process_reopen",
+      "tests/unit/test_langmem_application.py::test_mock_provider_business_call_commits_real_partial_result",
+      "tests/unit/test_langmem_application.py::test_operator_aliases_bind_public_tool_ids_per_user",
+      "tests/unit/test_langmem_application.py::test_phase_passes_strict_host_contract_without_changing_operator_path",
+      "tests/unit/test_langmem_application.py::test_phase_reopens_checkpoint_and_new_session_starts_fresh",
+      "tests/unit/test_langmem_application.py::test_phase_resume_and_local_capacity_only_skip_same_session",
+      "tests/unit/test_langmem_application.py::test_window_summary_uses_one_accounted_control_call_and_same_history_tool",
+      "tests/unit/test_langmem_foundation.py::test_agent_native_unknown_update_still_upserts",
+      "tests/unit/test_langmem_foundation.py::test_agent_strict_content_required_rejects_real_toolnode_then_recovers",
+      "tests/unit/test_langmem_foundation.py::test_agent_strict_rejects_unknown_update_then_accepts_create",
+      "tests/unit/test_langmem_foundation.py::test_strict_crud_scope_noop_and_native_parameters[False]",
+      "tests/unit/test_langmem_foundation.py::test_strict_crud_scope_noop_and_native_parameters[True]",
+      "tests/unit/test_langmem_foundation.py::test_strict_store_failures_propagate[False]",
+      "tests/unit/test_langmem_foundation.py::test_strict_store_failures_propagate[True]",
+      "tests/unit/test_memory_boundaries.py::test_all_is_complete_and_query_threshold_is_not_a_second_hard_budget",
+      "tests/unit/test_memory_boundaries.py::test_attention_only_when_query_exceeds_capacity_and_base_can_fit",
+      "tests/unit/test_memory_boundaries.py::test_audit_has_no_saved_certification_or_circular_evidence",
+      "tests/unit/test_memory_boundaries.py::test_refs_resolve_current_records_and_delete_does_not_activate_old_content",
+      "tests/unit/test_memory_boundaries.py::test_retrieval_error_and_invalid_selected_identity_are_not_soft_success",
+      "tests/unit/test_persistent_memory.py::test_actual_history_permission_and_owner_isolation[archive-False]",
+      "tests/unit/test_persistent_memory.py::test_actual_history_permission_and_owner_isolation[archive-True]",
+      "tests/unit/test_persistent_memory.py::test_actual_history_permission_and_owner_isolation[retained-False]",
+      "tests/unit/test_persistent_memory.py::test_actual_history_permission_and_owner_isolation[retained-True]",
+      "tests/unit/test_persistent_memory.py::test_boundary_config_defaults_zero_correction_and_preserves_legacy_c",
+      "tests/unit/test_persistent_memory.py::test_boundary_host_twelve_call_capacity_does_not_replay_or_add_control",
+      "tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body",
+      "tests/unit/test_persistent_memory.py::test_boundary_persisted_selector_capacity_refuses_without_another_http[13]",
+      "tests/unit/test_persistent_memory.py::test_boundary_persisted_selector_capacity_refuses_without_another_http[1]",
+      "tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost",
+      "tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset",
+      "tests/unit/test_persistent_memory.py::test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay[False-False-False]",
+      "tests/unit/test_persistent_memory.py::test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay[False-False-True]",
+      "tests/unit/test_persistent_memory.py::test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay[True-False-False]",
+      "tests/unit/test_persistent_memory.py::test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay[True-True-False]",
+      "tests/unit/test_persistent_memory.py::test_business_partial_effect_is_never_replayed_by_memory_correction",
+      "tests/unit/test_persistent_memory.py::test_existing_record_read_nochange_never_forces_create_or_reads_foreign_owner",
+      "tests/unit/test_persistent_memory.py::test_nochange_contradiction_gets_only_one_entry_and_invalid_second_final_is_preserved",
+      "tests/unit/test_persistent_memory.py::test_partial_operations_keep_real_commits_errors_and_no_semantic_certification",
+      "tests/unit/test_persistent_memory.py::test_prepared_phase_entry_reopens_retained_records_records_costs_and_refuses_rerun",
+      "tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity",
+      "tests/unit/test_persistent_memory.py::test_semantically_wrong_nochange_is_not_auto_corrected_and_cap_is_not_extended",
+      "tests/unit/test_persistent_memory.py::test_unknown_business_side_effect_propagates_without_correction_or_replay"
+    ],
+    "unique_target_count_basis": {
+      "pure_memory_boundaries": 5,
+      "persistent_memory": 23,
+      "application": 9,
+      "selected_foundation": 7
+    },
+    "earlier_failures_retained": [
+      {
+        "failure": "new wire test used schema.properties; actual generation schema is oneOf",
+        "category": "harness assertion",
+        "repair": "assert absence of memory_result in actual complete schema",
+        "final_evidence": "adjacent-final.log"
+      },
+      {
+        "failure": "3 actual run-phase tests queried world.sqlite instead of business-world.sqlite",
+        "category": "harness path",
+        "repair": "use real ApplicationWorld runtime path; 4 parameter cases passed",
+        "final_evidence": "tool result 38b75b; 4 pass"
+      },
+      {
+        "failure": "Ruff import ordering, E501 and UTC alias; Mypy optional dict.pop assignment",
+        "category": "format/type",
+        "repair": "targeted imports/line wrapping/accurate optional type",
+        "final_evidence": "ruff-final.log and mypy-final.log"
+      },
+      {
+        "failure": "indexed query first assumed embedding_tokens field; then observed only 3 charged tokens due separate test RunBudget objects",
+        "category": "harness ledger",
+        "repair": "use actual charged_tokens and same shared object; expected 6 passed",
+        "final_evidence": "tool result be9435 and retained f7-query/budget.json"
+      },
+      {
+        "failure": "no-isolation package build lacked Hatchling",
+        "category": "build environment",
+        "repair": "existing uv offline isolated build; one successful build",
+        "final_evidence": "build.log and build-offline.log"
+      },
+      {
+        "failure": "package verifier attempted tarfile.open on uv-created dist/.gitignore",
+        "category": "verification harness",
+        "repair": "check .whl and .tar.gz only; no package/source change",
+        "final_evidence": "build-receipt.json"
+      }
+    ],
+    "prepare_receipt": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/prepare-checks.json",
+    "prepare_summary": {
+      "cases": 6,
+      "public_messages": 15,
+      "source_identity_entries": 158,
+      "temporary_root": "/tmp/milai-v4-prepare-rh2af0ab",
+      "dsn_in_child": false
+    },
+    "actual_template_receipt": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/actual-template-checks.json",
+    "actual_template_requests": 4,
+    "build_receipt": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/build-receipt.json",
+    "cost_receipt": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/f7-cost-checks.json",
+    "execution": {
+      "external_http_requests": 0,
+      "real_host_calls": 0,
+      "real_embedding_calls": 0,
+      "shared_postgres_calls": 0,
+      "test_backends": "MockTransport + InMemoryStore + actual local SQLite checkpoints/synthetic ApplicationWorld",
+      "git_commit_or_push": false,
+      "running_sessions": []
+    },
+    "limitations": [
+      "Mechanical engineering evidence only, no semantic correctness/saved certification or real B/C/D results.",
+      "Ephemeral refs/selector IDs and receipt times are not crash-persistent; no new CAS/exactly-once guarantee.",
+      "Physical Store I/O unknown; route timing inclusive, do not double-count retrieval/selector.",
+      "Legacy C remains opt-in; Root-only documentation edits after build are a later snapshot, no rebuild."
+    ],
+    "unique_passed_count": 44,
+    "nodeid_source": "actual passed target groups; param IDs expanded from the exact static literal parametrizations; no extra pytest collection/rerun",
+    "build_packages": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/dist/milai_lab-0.1.0-py3-none-any.whl",
+        "bytes": 572127,
+        "sha256": "050c45dd5ed755dfb763493773b4242022230a07a2a05dfc5aadccfb14c5cc9d"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/dist/milai_lab-0.1.0.tar.gz",
+        "bytes": 5433870,
+        "sha256": "f2e6dab30df0c94dffdb1fac2d35dd47345e9ee8b9013ebb6c7ca448d0c944bf"
+      }
+    ]
+  },
+  "ownership": {
+    "source_and_checks": "reused Sol xhigh",
+    "protocols_inputs_review_real_calls": "Root",
+    "git_publication": "reused Luna high"
+  },
+  "f8a_mapping": {
+    "1_final_text_cannot_forge_saved": [
+      "test_audit_has_no_saved_certification_or_circular_evidence",
+      "test_actual_history_permission_and_owner_isolation"
+    ],
+    "2_receipt_and_record_identity": [
+      "test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset",
+      "test_agent_strict_rejects_unknown_update_then_accepts_create"
+    ],
+    "3_final_wire_roles": [
+      "test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset",
+      "actual-template-checks.json"
+    ],
+    "4_working_state_no_durable_copy": [
+      "test_refs_resolve_current_records_and_delete_does_not_activate_old_content"
+    ],
+    "5_session_clears_constraints": [
+      "test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset",
+      "test_actual_history_permission_and_owner_isolation"
+    ],
+    "6_business_not_durable_truth": [
+      "test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay",
+      "BOUNDARY_PROTOCOL; real semantics still pending"
+    ],
+    "7_strict_target_contract": [
+      "test_agent_strict_content_required_rejects_real_toolnode_then_recovers",
+      "test_strict_crud_scope_noop_and_native_parameters",
+      "test_strict_store_failures_propagate"
+    ],
+    "8_provenance_not_support": [
+      "test_audit_has_no_saved_certification_or_circular_evidence",
+      "test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay"
+    ]
+  },
+  "zero_model_prepare": {
+    "cases": 6,
+    "public_messages": 15,
+    "source_identity_entries": 158,
+    "external_http_requests": 0,
+    "shared_postgres_calls": 0,
+    "dsn_in_child": false,
+    "prepared_identities": [
+      {
+        "case": "field_plan-inputs",
+        "identity_sha256": "0449ed9ed4ac5a95df39fd5ff8d2b79c330b45a75ecd2bbf373e6a9725760bca"
+      },
+      {
+        "case": "editorial_revision-inputs",
+        "identity_sha256": "5a6c8c1e1b23a94799dba05f984c6b12254b25e4f7243a526e3f3821f80489e6"
+      },
+      {
+        "case": "independent_note-inputs",
+        "identity_sha256": "4140b31b8d6f1ac79fcd02773340191a2d18b95c4b84f4713e98f5b1ea81efaa"
+      },
+      {
+        "case": "quotation-inputs",
+        "identity_sha256": "1dc4d46d31e845e066cc827c6a63609525b8e081b6e3596d8b867997a852925b"
+      },
+      {
+        "case": "temporary-inputs",
+        "identity_sha256": "972cf5e441875e949c841bcd275d9e6e5e1dedf3739ae1f4489a79d9707291b1"
+      },
+      {
+        "case": "read_only-inputs",
+        "identity_sha256": "080fb34f9a1a6d3f4d69a950e7970602fbd9ba892f00b3b7f47d3754eaa00fde"
+      }
+    ]
+  },
+  "actual_template": {
+    "kind": "MILAI_V4_ACTUAL_TEMPLATE_CHECKS",
+    "tokenizer_identity": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "enable_thinking": false,
+      "tokenizer_path": "/cra/qwen36-35B",
+      "tokenizer_files_sha256": {
+        "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+        "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+      },
+      "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+    },
+    "requests": [
+      {
+        "request_index": 1,
+        "full_message_contents_visible": true,
+        "rendered_sha256": "427cd53c4a3ca94c2b4e314ff312457fffc17f4d0af5ac9404cce13613fa3972",
+        "capacity": {
+          "prompt_tokens": 866,
+          "output_reserve_tokens": 4096,
+          "safety_tokens": 512,
+          "related_reserve_tokens": 0,
+          "schema_reserve_tokens": 0,
+          "context_tokens": 65536,
+          "total_reserved_tokens": 5474,
+          "remaining_tokens": 60062,
+          "identity": {
+            "model": "Qwen3.6-35B-A3B-FP8",
+            "enable_thinking": false,
+            "tokenizer_path": "/cra/qwen36-35B",
+            "tokenizer_files_sha256": {
+              "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+              "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+              "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+            },
+            "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+          }
+        }
+      },
+      {
+        "request_index": 2,
+        "full_message_contents_visible": true,
+        "rendered_sha256": "c95124289e1c63c668401e50d682c8a244ad66dbd6fa17b12304b35aa1641366",
+        "capacity": {
+          "prompt_tokens": 1244,
+          "output_reserve_tokens": 4096,
+          "safety_tokens": 512,
+          "related_reserve_tokens": 0,
+          "schema_reserve_tokens": 0,
+          "context_tokens": 65536,
+          "total_reserved_tokens": 5852,
+          "remaining_tokens": 59684,
+          "identity": {
+            "model": "Qwen3.6-35B-A3B-FP8",
+            "enable_thinking": false,
+            "tokenizer_path": "/cra/qwen36-35B",
+            "tokenizer_files_sha256": {
+              "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+              "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+              "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+            },
+            "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+          }
+        }
+      },
+      {
+        "request_index": 3,
+        "full_message_contents_visible": true,
+        "rendered_sha256": "1b2b3bb373fa1fd9e6244d968bb1e20d37f4e942a9febab9cfbdc537cc3a3076",
+        "capacity": {
+          "prompt_tokens": 1519,
+          "output_reserve_tokens": 4096,
+          "safety_tokens": 512,
+          "related_reserve_tokens": 0,
+          "schema_reserve_tokens": 0,
+          "context_tokens": 65536,
+          "total_reserved_tokens": 6127,
+          "remaining_tokens": 59409,
+          "identity": {
+            "model": "Qwen3.6-35B-A3B-FP8",
+            "enable_thinking": false,
+            "tokenizer_path": "/cra/qwen36-35B",
+            "tokenizer_files_sha256": {
+              "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+              "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+              "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+            },
+            "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+          }
+        }
+      },
+      {
+        "request_index": 4,
+        "full_message_contents_visible": true,
+        "rendered_sha256": "32df6f706ebf941851f6dc41f43eb6273930d5e8924edb486cfda37ec337d484",
+        "capacity": {
+          "prompt_tokens": 1631,
+          "output_reserve_tokens": 4096,
+          "safety_tokens": 512,
+          "related_reserve_tokens": 0,
+          "schema_reserve_tokens": 0,
+          "context_tokens": 65536,
+          "total_reserved_tokens": 6239,
+          "remaining_tokens": 59297,
+          "identity": {
+            "model": "Qwen3.6-35B-A3B-FP8",
+            "enable_thinking": false,
+            "tokenizer_path": "/cra/qwen36-35B",
+            "tokenizer_files_sha256": {
+              "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+              "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+              "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+            },
+            "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+          }
+        }
+      }
+    ],
+    "original_checkpoint_projection": "unchanged; actual graph test checks original IDs/content/tool calls",
+    "external_http_requests": 0
+  },
+  "build": {
+    "kind": "MILAI_V4_OFFLINE_PACKAGE_CHECKS",
+    "successful_command": "uv build --offline --out-dir artifacts/next-development-v4/p1-checks/dist",
+    "attempts": [
+      {
+        "command": "PIP_NO_INDEX=1 PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m build --no-isolation --outdir artifacts/next-development-v4/p1-checks/dist",
+        "exit_code": 1,
+        "reason": "foundation environment has no hatchling.build backend",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/build.log"
+      },
+      {
+        "command": "uv build --offline --out-dir artifacts/next-development-v4/p1-checks/dist",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/build-offline.log"
+      }
+    ],
+    "successful_builds": 1,
+    "package_check_intermediate_failure": "first verification enumerated uv-created .gitignore as tar; filtered to .whl/.tar.gz; package bytes unchanged",
+    "packages": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/dist/milai_lab-0.1.0-py3-none-any.whl",
+        "bytes": 572127,
+        "sha256": "050c45dd5ed755dfb763493773b4242022230a07a2a05dfc5aadccfb14c5cc9d",
+        "bytes_equal_to_source": [
+          "src/milai_lab/methods/memory_boundaries.py",
+          "src/milai_lab/baselines/langmem_agent.py",
+          "src/milai_lab/providers/langmem_chat.py",
+          "src/milai_lab/methods/local_state_attention/integration.py",
+          "src/milai_lab/runners/persistent_memory.py",
+          "src/milai_lab/runners/langmem_application.py"
+        ],
+        "private_assets_excluded": true
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/p1-checks/dist/milai_lab-0.1.0.tar.gz",
+        "bytes": 5433870,
+        "sha256": "f2e6dab30df0c94dffdb1fac2d35dd47345e9ee8b9013ebb6c7ca448d0c944bf",
+        "bytes_equal_to_source": [
+          "src/milai_lab/methods/memory_boundaries.py",
+          "src/milai_lab/baselines/langmem_agent.py",
+          "src/milai_lab/providers/langmem_chat.py",
+          "src/milai_lab/methods/local_state_attention/integration.py",
+          "src/milai_lab/runners/persistent_memory.py",
+          "src/milai_lab/runners/langmem_application.py",
+          "tests/unit/test_memory_boundaries.py",
+          "tests/unit/test_persistent_memory.py",
+          "configs/lab-verification-matrix.json",
+          "tools/run_persistent_memory.py",
+          "AGENTS.md",
+          "docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v4.0.md",
+          "docs/MILAI_NEXT_DEVELOPMENT_V4_IMPLEMENTATION_CONTRACT_20260928.md",
+          "docs/MILAI_NEXT_DEVELOPMENT_V4_B_REGRESSION_20260928.md",
+          "data/diagnostics/next-development-v4-b-regression-r1/config.json"
+        ],
+        "private_assets_excluded": true
+      }
+    ]
+  },
+  "build_scope_note": "Build-time snapshot; later Root documentation status/link edits do not change tested source. No rebuild for documentation-only edits.",
+  "mock_cost_evidence": {
+    "f7-query": {
+      "by_role": {
+        "embedding": {
+          "requests": 2,
+          "known_tokens": 6,
+          "unknown_usage": 0,
+          "known_prompt_tokens": 6,
+          "unknown_prompt_usage": 0,
+          "capacity_prompt_tokens": 0,
+          "errors": 0
+        },
+        "task_host": {
+          "requests": 1,
+          "known_tokens": 13,
+          "unknown_usage": 0,
+          "known_prompt_tokens": 8,
+          "unknown_prompt_usage": 0,
+          "capacity_prompt_tokens": 4324,
+          "errors": 0
+        }
+      },
+      "by_control_stage": {},
+      "continuous_budget": {
+        "limits": {
+          "questions": 1,
+          "arms": 3,
+          "generation_requests": null,
+          "generation_tokens": null,
+          "embedding_tokens": null
+        },
+        "generation_requests": 1,
+        "generation": {
+          "charged_tokens": 13,
+          "known_tokens": 13,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "charged_tokens": 6,
+          "known_tokens": 6,
+          "unknown_usage": 0
+        }
+      },
+      "boundary_observation_costs": {
+        "retrieval": {
+          "calls": 1,
+          "logical_bytes": 809,
+          "unknown_logical_bytes": 0,
+          "cpu_ns": 2165697,
+          "wall_ns": 2860558
+        }
+      },
+      "boundary_route_timing": {
+        "cpu_ns": 2394509,
+        "wall_ns": 3064106,
+        "scope": "inclusive; do not add retrieval/selector timings again"
+      },
+      "evidence_stage": "targeted F7 mock before final receipt-header content hash; routing/cost source unchanged"
+    },
+    "f7-selector": {
+      "by_role": {
+        "state_control": {
+          "requests": 1,
+          "known_tokens": 9,
+          "unknown_usage": 0,
+          "known_prompt_tokens": 7,
+          "unknown_prompt_usage": 0,
+          "capacity_prompt_tokens": 471,
+          "errors": 0
+        },
+        "task_host": {
+          "requests": 2,
+          "known_tokens": 26,
+          "unknown_usage": 0,
+          "known_prompt_tokens": 16,
+          "unknown_prompt_usage": 0,
+          "capacity_prompt_tokens": 7650,
+          "errors": 0
+        }
+      },
+      "by_control_stage": {
+        "memory_read_selection": {
+          "requests": 1,
+          "known_tokens": 9,
+          "unknown_usage": 0,
+          "errors": 0
+        }
+      },
+      "continuous_budget": {
+        "limits": {
+          "questions": 1,
+          "arms": 3,
+          "generation_requests": null,
+          "generation_tokens": null,
+          "embedding_tokens": null
+        },
+        "generation_requests": 3,
+        "generation": {
+          "charged_tokens": 35,
+          "known_tokens": 35,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "charged_tokens": 0,
+          "known_tokens": 0,
+          "unknown_usage": 0
+        }
+      },
+      "boundary_observation_costs": {
+        "retrieval": {
+          "calls": 2,
+          "logical_bytes": 340,
+          "unknown_logical_bytes": 0,
+          "cpu_ns": 65801,
+          "wall_ns": 69359
+        }
+      },
+      "boundary_route_timing": {
+        "cpu_ns": 1890905,
+        "wall_ns": 2306503,
+        "scope": "inclusive; do not add retrieval/selector timings again"
+      },
+      "evidence_stage": "targeted F7 mock before final receipt-header content hash; routing/cost source unchanged"
+    }
+  },
+  "mock_cost_warning": "Synthetic transport receipts validate shared accounting; never real Host/embedding tokens or experiment ledger charges.",
+  "root_acceptance": {
+    "changed_engineering_hashes_verified": 11,
+    "final_request_and_actual_pairing_reviewed": true,
+    "strict_tools_and_historical_memory_result_unchanged": true,
+    "real_semantic_acceptance": false,
+    "future_B_inputs": "same exposed v3 bytes",
+    "new_C_inputs_created": false,
+    "full_suite_run": false
+  },
+  "root_tool_failures": [
+    {
+      "action": "offline syntax check",
+      "observed": "python absent; no script executed",
+      "resolution": "python3 syntax compile passed"
+    },
+    {
+      "action": "read-only workflow status",
+      "observed": "gh absent",
+      "resolution": "existing GitHub connector returned completed/success"
+    },
+    {
+      "action": "public manifest preparation",
+      "observed": "count/list assertion then missing f8a_mapping field while adapting final compact Sol receipt",
+      "resolution": "use final hash-bound receipt, validate full unique nodeid list, Root maps eight requirements; both failures preceded any manifest write or model call"
+    }
+  ],
+  "retained_ignored_evidence": [
+    {
+      "path": "artifacts/next-development-v4/p1-checks/actual-template-checks.json",
+      "sha256": "a474a9d69b2223e608121aa3ea74769db750a5760a36b553cc4f3cc0557fa05c",
+      "bytes": 5170
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/adjacent-final.log",
+      "sha256": "7eab56112dc61f0b9f9cb28b65e3967f4e1a49633a5b35f42127353315493da3",
+      "bytes": 1916
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/boundary-final.log",
+      "sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+      "bytes": 61
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/build-offline.log",
+      "sha256": "4a3de0e602c48b0610ad4fb0ee88cbeb03c49f40b48979049972fce040814d14",
+      "bytes": 259
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/build-receipt.json",
+      "sha256": "7040c2e69a44cf6ffcb69dd5f97fad5eed36a48cbc482accc6f5e008e2b21ed1",
+      "bytes": 3004
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/build.log",
+      "sha256": "a849b099f394ce815468abad6be09a79ee68525cd81559370f9770e04d7cca70",
+      "bytes": 639
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/changed-files.json",
+      "sha256": "eede6e4bcba42cd2dedf7be170308af185cc242139bb796817ae4975d1548d44",
+      "bytes": 2274
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/checks-receipt.json",
+      "sha256": "d8965fc360754b7fbfd9bd380f551bb962b1c39d321ddb4e2f1e7c807cf256b8",
+      "bytes": 21256
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/core-mypy-final.log",
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "bytes": 42
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "sha256": "050c45dd5ed755dfb763493773b4242022230a07a2a05dfc5aadccfb14c5cc9d",
+      "bytes": 572127
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/dist/milai_lab-0.1.0.tar.gz",
+      "sha256": "f2e6dab30df0c94dffdb1fac2d35dd47345e9ee8b9013ebb6c7ca448d0c944bf",
+      "bytes": 5433870
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/f7-cost-checks.json",
+      "sha256": "956e143659ef823adfdb9713491ceee63effd32d4ba7e757358ee972655d356e",
+      "bytes": 3151
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/f7-query/budget.json",
+      "sha256": "c89ec50927172466c1a9aa807aa3250738fa16846b8c456fdd28b32b640d6f15",
+      "bytes": 367
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/f7-query/trace.jsonl",
+      "sha256": "88c65640079602f799ee702fc49ec737712f065645e6a92c85e7a81457854431",
+      "bytes": 20693
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/f7-retained-evidence.json",
+      "sha256": "f3ebe06523ceda00de692b50f1e59a1a538aa419a384ed622aa59fd673c40aa5",
+      "bytes": 745
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/f7-selector/budget.json",
+      "sha256": "7274ff7ac594b4122a0e5570dd237814d646798d45d34f82588a7c884151de71",
+      "bytes": 367
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/f7-selector/trace.jsonl",
+      "sha256": "4fb2cb93ecc8c076bf0faf9eef82a51b121145b48b0d26116821328d5f5700da",
+      "bytes": 26085
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/final-wire-capture.json",
+      "sha256": "bcf8730c856176dd766d5a0b00efe6ea9bb025b441d7a2fe65a5841d77b06a97",
+      "bytes": 40155
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/matrix-final.log",
+      "sha256": "9989d90080386265ded00e812566766ecc2d07343b9bb439d8bbb28ce4996853",
+      "bytes": 261
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/mypy-final.log",
+      "sha256": "ab35ee42183d4d6d3ba483825ab037d18a5a15622d03be01d82220b1564851ff",
+      "bytes": 43
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/prepare-checks.json",
+      "sha256": "c2e9313b5da92d5908fcfa1c8b7aeb9489ed825f15ea6584e224ab5b2c53e7c1",
+      "bytes": 8412
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/prepare-editorial_revision.log",
+      "sha256": "e12e1717dbdff0253f370ec9e0c8650c56c1f0ce61d16b8ce9b1d0155cc6631c",
+      "bytes": 864
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/prepare-field_plan.log",
+      "sha256": "405621641e6af4643b674afe0e06d0d87765e3779eb9d6319cdc63d758d4c545",
+      "bytes": 856
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/prepare-independent_note.log",
+      "sha256": "b0733a6f61a8da9b3a89a0403f0a2190db98e02fa05705ca1ade77f30dc9a575",
+      "bytes": 862
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/prepare-quotation.log",
+      "sha256": "a414f154e3ef3c695339a174dc12eeb03399272d8c13ade3d56b1ce1a194404b",
+      "bytes": 855
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/prepare-read_only.log",
+      "sha256": "14f3d1fe04ca7b9041b5dbf2b2f76c8a50527eef1429cc72d416203519763d08",
+      "bytes": 855
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/prepare-temporary.log",
+      "sha256": "ec98fa590eaf9ee751f64d44f8366618f7bbcdccc5bc4aaf2a19fb2c14f15b74",
+      "bytes": 855
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/pure-audit-final.log",
+      "sha256": "bfb94aa3bce5e5c9a8e413d4c0b8cbbecf5444cc553dd49310e15bc548c86a10",
+      "bytes": 98
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/qwen-template-request-1.txt",
+      "sha256": "427cd53c4a3ca94c2b4e314ff312457fffc17f4d0af5ac9404cce13613fa3972",
+      "bytes": 3808
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/qwen-template-request-2.txt",
+      "sha256": "c95124289e1c63c668401e50d682c8a244ad66dbd6fa17b12304b35aa1641366",
+      "bytes": 4542
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/qwen-template-request-3.txt",
+      "sha256": "1b2b3bb373fa1fd9e6244d968bb1e20d37f4e942a9febab9cfbdc537cc3a3076",
+      "bytes": 5145
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/qwen-template-request-4.txt",
+      "sha256": "32df6f706ebf941851f6dc41f43eb6273930d5e8924edb486cfda37ec337d484",
+      "bytes": 5478
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/ruff-final.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "artifacts/next-development-v4/p1-checks/tools-boundary-final.log",
+      "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "bytes": 100
+    }
+  ],
+  "continuous_experiment_ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "28cbcfe8c0be9208aaa9e6898daa36dcaa1d9202ee27fa73a613d5f45f7a4e38",
+    "generation_requests": 2950,
+    "generation_tokens": 3729307,
+    "embedding_tokens": 20729,
+    "v4_new_real_generation": 0,
+    "v4_new_real_embedding": 0
+  }
+}

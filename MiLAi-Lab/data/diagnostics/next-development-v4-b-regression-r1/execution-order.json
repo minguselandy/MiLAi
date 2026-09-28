@@ -1,0 +1,43 @@
+{
+  "kind": "MILAI_V4_B_EXPOSED_REGRESSION_ORDER",
+  "status": "PENDING_SOURCE_ACCEPTANCE_AND_EXECUTION_FREEZE",
+  "jobs": [
+    {
+      "case_id": "field_plan",
+      "arm": "B0",
+      "inputs": "../next-development-v3-p2-formation-r1/field_plan-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "editorial_revision",
+      "arm": "B0",
+      "inputs": "../next-development-v3-p2-formation-r1/editorial_revision-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "independent_note",
+      "arm": "B0",
+      "inputs": "../next-development-v3-p2-formation-r1/independent_note-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "quotation",
+      "arm": "B0",
+      "inputs": "../next-development-v3-p2-formation-r1/quotation-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "temporary",
+      "arm": "B0",
+      "inputs": "../next-development-v3-p2-formation-r1/temporary-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "read_only",
+      "arm": "B0",
+      "inputs": "../next-development-v3-p2-formation-r1/read_only-inputs.json",
+      "phase": 0
+    }
+  ],
+  "rule": "Root serial, six new isolated runtime/store/namespace/checkpoint/world roots. Original v3 input bytes; no C rerun, no replacements, no retries to hide failures. Every public message uses its original new session."
+}
