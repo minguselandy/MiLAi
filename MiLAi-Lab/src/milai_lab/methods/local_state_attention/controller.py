@@ -16,17 +16,19 @@ from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.protocol import (
-    ControlResponseError as ControlResponseError,
-)
-from milai_lab.methods.local_state_attention.protocol import (
+    READ_SELECTOR_PROMPT,
     control_prompt,
     event_view,
     parse_control_response,
     parse_json_response,
+    read_selector_payload,
     selected_ids,
     selection_schema,
     state_directory,
     state_view,
+)
+from milai_lab.methods.local_state_attention.protocol import (
+    ControlResponseError as ControlResponseError,
 )
 from milai_lab.methods.local_state_attention.protocol import (
     control_schema as control_schema,
@@ -443,11 +445,8 @@ class LocalStateController:
             try:
                 choice = self._stage_call(
                     "read_selector", message_key,
-                    "From the updated State directory and current task, select the State "
-                    "ids needed for the current answer or action. Empty and multiple "
-                    "selections are valid. Return read_ids only.",
-                    {"current_task": query, "new_observations": observations,
-                     "directory": read_directory}, read_schema)
+                    READ_SELECTOR_PROMPT,
+                    read_selector_payload(query, observations, updated), read_schema)
             except (ControlResponseError, httpx.TimeoutException) as error:
                 return degraded("read_selector", self._control_reason(error), receipts)
             read_ids = selected_ids(choice, "read_ids", updated_ids)

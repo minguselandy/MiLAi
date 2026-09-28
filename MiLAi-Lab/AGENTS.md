@@ -2,19 +2,26 @@
 
 ## Current scope and authority
 
-Latest user instruction: **pause the current experiment, generate an experiment summary, and
-publish it to GitHub.** The actual Goal was set to `paused` at 2026-09-27 17:41:51 UTC
-(2026-09-28 01:41:51 Asia/Shanghai). This immediate stop supersedes the earlier instruction to
-finish the activated plan before pausing. Only Root's closeout documents and Luna high's Git
-publication remain authorized; do not continue development, experiments, downloads or deployment.
+The user activated the v2.0 development plan. The actual Goal is `active` with a new
+objective, superseding the previous immediate pause for this newly authorized scope.
+The Goal names `MILAI_NEXT_IMPROVEMENT_PLAN_20260928_v2.0.md`, which is absent; the only
+matching date/version plan is [NEXT_DEVELOPMENT v2.0](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md).
+Root disclosed this filename mismatch and is proceeding with that document; preserve its
+original planning-only bytes as historical context, not a current refusal of execution.
+Follow the [v2 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md).
 
-The [next improvement plan v1.0](docs/MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md) remains unfinished.
-Follow the [current execution record](docs/MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md), the actual Goal
-state and the [overall experiment report](docs/MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md).
-C5 has two unverified local source edits and six untracked input/config/rubric files: preserve
-them in the original development worktree, without committing or treating them as accepted code.
-Green CI is only an engineering gate. A paused Goal never resumes because a document says ACTIVE;
-new explicit user instruction is required to resume the unfinished plan.
+Keep the full N0–N6 scope and its conditional gates. N0 is WIP protection and narrow equivalence,
+not another WP0 rebuild. N1 audits actual receipts and consumption; N2/N3 fix bank/prestate;
+N4 is optional and requires a relevant observed need. N5 includes real continuous tasks and
+WP7 lifecycle costs. N6 follows evidence and resource gates; no automatic second-model deployment.
+Engineering checks alone do not finish the research objective. Product remains NO-GO.
+
+The original C5 worktree and all eight WIP files stay unchanged. Work in the separate
+`next-development-v2` worktree; pure selector extraction and behavior changes use separate
+commits. Root owns docs/data/rubrics/freezes/real calls/scoring; Sol xhigh remains the sole source
+owner and Luna high owns authorized publication. Prior [pause report](docs/MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md)
+and [v1 execution history](docs/MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md) remain historical evidence.
+A new explicit stop would override this active record.
 
 The exact former AGENTS content is preserved at
 [the historical instruction snapshot](AGENTS_HISTORY_PRE_WP1_20260927.md), in the same directory
