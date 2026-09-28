@@ -1,5 +1,5 @@
 ---
-status: ACTIVE_P0_P1_E1
+status: EXECUTION_CLOSED_INCONCLUSIVE
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 plan_sha256: a4b0fe36e77e20c5e227c6341ea6de3b5febcd415f22b2e4c6938c70d9a84269
 base_commit: c6f335fef7cf00c86fa3dbe201a60c802439ca12
@@ -8,6 +8,29 @@ product: NO_GO
 ---
 
 # v7 执行记录
+
+## 当前结案状态（优先于以下历史准备记录）
+
+P0/P1 和全部可运行 E1 已结束；[总体实验报告](MILAI_DEVELOPMENT_EXPERIMENT_V7_OVERALL_REPORT_20260928.md)
+及[逐项需求审计](../data/manifests/development-experiment-v7-requirement-audit-20260928.json)构成 P5 交付。
+结论为 **协议 INCONCLUSIVE / N BLOCKED_ENVIRONMENT**。这不是整体研究目标达成，Product 仍 NO_GO。
+配套架构复盘已完整补读且 hash 一致，初始路径缺失已解除。
+
+- 源码 A：`37d48577bdff582f74faf2f5e663b359885350ec`；实际 E1 输入／运行 B：`2f30c14c5e7ea82db2b0a962d3636e14de5f2391`。
+- 全部 24 job 已 prepare/freeze；J12 条／26 消息／22 session 各运行一次，N12 条事前环境阻断保留。
+- J12/12、任务92/92（current52、later8、persistent32）；26诊断无新问题。六结构的两次重复不是独立样本。
+- 真正效果为8 CREATE、2同ID UPDATE、2预约／标签、2实时查询；无重试、假保存或新隐藏评分修复。
+- 新增38次生成／49,456生成tokens及10次embedding／294tokens；权威账本末值3301／4,205,203／23,570。
+- 末账本 SHA `f9efa35e1a83f4c4300f03f28394a584868f8955b320e960dc3f8bb7a4ce1592`；完整历史未动。
+- B Fast36422762879的缺tokenizer资产失败保留；C `a1c6c683a39e8d0bf87e75afec32061fae46dfd4`仅补测试／矩阵和独立检查回执，运行源码／输入不改。
+- C Fast36425412512待最终状态核对；Full36425412508 skipped。最终文档提交的CI状态由PR71 checks直接给出，不改原冻结证据。
+
+所有运行进程已结束。停止本slice，不自动开启 N、E2–E6、第二家族、下载或新服务。
+Root 完成纯文档／JSON／链接／哈希核对，Luna high 提交推送；实际 Goal 仅在最终远端核对后结案。
+PR71 保持 draft/open、base v6分支 @ c6f335fe；PR70未合并、main07cc364f不变。
+最终报告提交身份取本文件所在 Git commit，不能冒充实验 B；发布后核对收据保存在 ignored 制品及 PR。
+
+## 初始准备记录（历史快照）
 
 实际active Goal明确要求详细阅读并执行[原v7计划](MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20260928_v7.0.md)。
 Root完整阅读1055行，原DESIGN_ONLY/NOT_STARTED字节保留。新Goal仅恢复新计划范围，旧v6结论不改。
@@ -60,7 +83,7 @@ runner还把tool_mode限定json_action。仅改配置不会构成同材料比较
 先让Sol核对并实现最小完整P1路径，不把未运行native说成质量失败。
 
 源码/测试/config由Sol唯一负责；Root只写文档/输入/评分/制品，所有真实调用由Root串行。
-Luna负责精确Git发布；先源码提交A，再冻结输入提交B，再Root在发布SHA prepare/freeze，最后结果提交C。
+Luna负责精确Git发布；先源码提交A，再冻结输入提交B，再Root在发布SHA prepare/freeze，结果提交单独发布。后因CI资产登记修复插入C，最终报告为D；实际E1身份始终为B。
 不合并PR70，不擅改共享服务，不下载模型，不恢复历史C/ODR/M1。最新v7具体职责优先于旧阶段过时限制。
 
 ## 配套复盘补读

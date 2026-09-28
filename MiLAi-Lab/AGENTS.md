@@ -2,32 +2,39 @@
 
 ## Current scope and authority
 
-The new actual user Goal authorizes detailed execution of
-[DEVELOPMENT_EXPERIMENT v7](docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20260928_v7.0.md).
-Follow [v7 execution record](docs/MILAI_DEVELOPMENT_EXPERIMENT_EXECUTION_V7_20260928.md).
-This supersedes the v6 stop only for the new plan scope; v6 results, scores and failed compact
-candidate remain historical. The first slice is P0/P1 engineering and E1 only. E2–E6, second
-family, object adapters, synchronous writer and selector are conditional, not an automatic matrix.
-Root read all1055 plan lines. Keep original DESIGN_ONLY metadata bytes; authorization comes
-from the active Goal, not document status. The user supplied the architecture-review basis path; Root read all487 lines and verified
-SHA03ba2a29 against the v7 plan. Preserve its original research/design-only bytes.
-Base is c6f335fe, isolated development-experiment-v7 worktree; PR70 remains draft/open and main
-07cc364f. No merge authorization follows from v7. Original main has nine untracked plan/review documents now,
-including v7; preserve all old trees, v27, failures, logs and ledgers. v6 Fast36411545487 succeeded.
-P0 read-only deployed version0.27.1/process flags and exact installed code confirm auto-tool-choice
-and tool parser are disabled. Native N is BLOCKED_ENVIRONMENT; J remains runnable after freeze. Do not
-modify shared vLLM, download weights or deploy another service. P0 makes zero generation calls.
-P1 must share legal material/permissions between JSON and native, retain old JSON encoding,
-account for native tools in actual capacity, reject unsupported legacy combinations, and verify
-real ToolNode scheduling/receipts/errors. Keep current_request/compact_v6 fixed for E1's failure
-condition; native natural-text final vs JSON decoded answer is a protocol distinction. No online
-rubric/Judge, forced tool_choice=required, keyword writer, or hidden result repair.
-Root owns docs/fixtures/contracts/freezes/serial real HTTP/scoring/continuous ledger; one reused
-Sol xhigh is sole source/config/test owner; reused Luna high owns Git worktree/commit/push and
-needed public resource downloads only. Astra xhigh only a specific difficult conflict.
-The v7 plan explicitly permits a negative or environment-limited execution conclusion with
-unmet quality goals reported. Do not close Goal before P0/P1, every runnable authorized E1 job,
-full P5 report and requirement audit plus publication verification are complete.
+The v7 first slice is now executed and closed as **INCONCLUSIVE** with native **BLOCKED_ENVIRONMENT**.
+Follow the [v7 overall report](docs/MILAI_DEVELOPMENT_EXPERIMENT_V7_OVERALL_REPORT_20260928.md),
+[execution record](docs/MILAI_DEVELOPMENT_EXPERIMENT_EXECUTION_V7_20260928.md), and
+[requirement audit](data/manifests/development-experiment-v7-requirement-audit-20260928.json).
+P0 read the full plan/review, preserved four v6 counterexamples and verified deployed vLLM 0.27.1
+without auto tool-choice/parser. P1's common projection, native capacity and strict execution
+checks are complete; engineering tests do not establish native model efficacy.
+All twelve runnable frozen J jobs finished once at B 2f30c14c: 26 messages, 22 sessions,
+92/92 task obligations (52 current, 8 later use, 32 persistent), 26 diagnostic observations.
+N's twelve planned jobs remain unrun and in the denominator. Six structures and two repeats
+are not twelve independent tasks. No J/N effect estimate or stable unseen claim is supported.
+Actual effects: 8 CREATE, 2 same-ID UPDATE, 2 reserve_and_label and 2 live get_reservation.
+New costs: 38 generation calls / 49,456 generation tokens / 294 embedding tokens.
+Continuous ledger: 3301 generation calls / 4,205,203 generation tokens / 23,570 embedding tokens;
+preserve all old history. Separate reasoning tokens remain unknown.
+C a1c6c683 only repairs a missing local-tokenizer test gate and matrix ownership; runtime,
+recipes and E1 freeze remain unchanged. Local checks passed; exact remote status is recorded
+in the execution record and GitHub PR checks. Do not repeat model runs for publication.
+
+This closes P0/P1/runnable E1/P5 for the plan-permitted environment-limited conclusion.
+The actual Goal may close only after final report publication and remote verification.
+No further N, E2–E6, second-family, prompt variants, downloads, deployments, object adapter,
+synchronous writer, State platform or selector follows automatically. Broader research remains
+NOT_ACHIEVED, stable unseen benefit unestablished, Product NO_GO. A new explicit task is required.
+The original plan DESIGN_ONLY and review research-only bytes are preserved; historical ACTIVE
+text is not an instruction to resume. v6 failed compact results are unchanged.
+
+Source A 37d48577 and execution B 2f30c14c are on draft PR71, stacked on PR70 @ c6f335fe.
+PR70 and PR71 remain draft/open; main remains 07cc364f. No merge authorization follows from v7.
+Preserve the original main tree's nine untracked plan/review files, v27 draft, all prior WIP,
+failed attempts, raw logs and continuous ledger. Root owns closeout docs, evidence and real calls;
+reused Sol xhigh owns source/config/tests, reused Luna high owns Git publication. No model role
+or thinking setting may be silently changed.
 
 The following v6 record remains historical:
 
