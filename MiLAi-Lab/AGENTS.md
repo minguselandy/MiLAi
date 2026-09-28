@@ -2,6 +2,32 @@
 
 ## Current scope and authority
 
+The current actual user Goal explicitly authorizes the complete [NEXT_DEVELOPMENT v6 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v6.0.md).
+Follow the [v6 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V6_20260928.md).
+Root read all 1,497 original plan lines; keep original DRAFT/NOT_STARTED bytes and correct stale
+PR68 metadata only in new records. Main05601148 now contains PR52–68; its tree equals v5 report1abf5c4.
+S0 preserves v5 evidence and costs. S1 must replace string movement with explicit structured
+assembly, renderer and routing before any S2 slimming. Exact old/new wire bytes, capacity/token
+inputs, operation audit and original graph/checkpoint/tool JSON must match, including empty,
+all/query/attention prepared views, continuation, update and delete. No compatibility wrapper
+that retains string block search/replace counts as completing this requirement.
+S2 first profiles model/audit components offline. S3a uses narrow mechanical evidence plus2–4
+real smoke; if S2 changes Model View, S3b must run all12 exposed scripts/156 obligations.
+S4 is the principal new12–16-script independent-task evaluation, including quoted imperatives,
+owner isolation and actual world/partial failure. It must not be replaced by old-value/new-value
+variants or old regressions. All task failures need visible user basis; no runtime rubric/Judge.
+S4 pass triggers S5 another-family6–8-script confirmation and S6 natural accumulation according
+to the plan; S7/S8 require actual query/capacity bottlenecks. Do not preemptively download/deploy,
+reduce budgets to force Attention, add reviewers/controllers or change shared vLLM settings.
+The library default stays system; v6 explicitly uses current_request. Cost reduction is a target,
+not permission to remove necessary semantics. Complete S9 and all applicable gates before Goal completion.
+Root owns docs/data/freezes/real serial HTTP/scoring/costs, one reused Sol xhigh owns source/config
+and necessary checks, Luna high owns authorized Git publication/actually needed downloads;
+Astra xhigh is only for a concrete difficult conflict. Broader research remains NOT_ACHIEVED,
+Product NO_GO. The new v6 Goal supersedes prior execution stops for its defined scope only.
+
+The following v5 execution and closure remain historical evidence:
+
 The new actual user Goal explicitly authorizes the complete [NEXT_DEVELOPMENT v5 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v5.0.md).
 Follow the [v5 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V5_20260928.md).
 This resume supersedes the prior v4 pause for v5 only; do not inherit an automatic after-task pause.
