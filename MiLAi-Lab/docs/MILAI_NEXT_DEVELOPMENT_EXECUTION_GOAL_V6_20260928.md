@@ -1,5 +1,5 @@
 ---
-status: ACTIVE
+status: EXECUTION_STOP_PIVOT_PUBLICATION_PENDING
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 plan_sha256: 446e8b401eb558edd76c98dfcda0c0bc9daf1408c7d0d18ba583ce5cb2ea34ee
 baseline_main: 05601148c1c060d09c6cd64927a88ad7106aa537
@@ -32,12 +32,12 @@ v5 head 两次 Fast `36393968381`、`36397917433` 均 success，Full `3639396833
 | S2 / §9、21、23.3 | 明确 Model/Audit 边界、冻结请求组件计量、每项删除依据与 trace 可恢复性，保留语义/ID/scope/业务正文 | ENGINEERING_ACCEPTED_S3B_PASS；30窄测、131full/compact回放和86审计通过；唯一候选移出wrapper/空容器/模型hash，固定输入-3.80%、记忆组件-9.54%；不硬凑目标 |
 | S3a / §10 | S1 机械等价后 2–4 个真实 smoke，所有成本计入 | PASS；4已暴露scripts/13消息/54任务全过；20生成27484tokens、5embedding115tokens已归账 |
 | S3b / §10 | 若 S2 改 Model View，完整 12-script/156-obligation 暴露回归；任何退化先定位被删信息，不加 prompt 修分 | PASS；85f45b3/12scripts35消息/156任务；显式89/89、持久67/67；3诊断缺项单列 |
-| S4 / §11–12、17、23.4–5 | 12–16 个独立结构脚本、约 35–50 公开消息；十二任务族、quoted imperative/carrier 边界；显式≥98%、所需持久100%、无跨owner/重复业务/假保存/隐藏rubric失败 | PROTOCOL_FIXED_RUNTIME_FREEZE_PENDING_NOT_RUN；12scripts/40消息/193任务；原输入/合同字节保持；待发布与运行前冻结 |
+| S4 / §11–12、17、23.4–5 | 12–16 个独立结构脚本、约 35–50 公开消息；十二任务族、quoted imperative/carrier 边界；显式≥98%、所需持久100%、无跨owner/重复业务/假保存/隐藏rubric失败 | COMPLETE_R1_FAILED；12scripts/40消息，10/12scripts，166/193任务，显式102/121、持久64/72；两次虚假保存；诊断不支持选出修复 |
 | S5 / §13 | 仅 S4 通过后，不改方法/prompt，另一模型家族 6–8 脚本覆盖六类边界 | CONDITIONAL_NOT_RUN；不同量化不算另一家族，开发 subagent 不算实验 Host |
 | S6 / §14 | S4 稳定后、最好已有 S5 确认，20–30 sessions 自然积累10–20独立事项，先正常 all，无人为压预算 | CONDITIONAL_NOT_RUN |
 | S7 / §15 | 实际阈值/容量触发后 all（可行时）对 ordinary query，命中、质量、全成本核对 | CONDITIONAL_NOT_TRIGGERED |
 | S8 / §16 | 实际 query 不足/超容量/可见 scope 错误后，固定共同条件比较 ordinary/working-query/lazy attention | CONDITIONAL_NOT_TRIGGERED；不新增 durable fact copy 或独立 U |
-| S9 / §22–25 | 逐项完成审计、真实失败分类/两解释/反思、全成本、复现、Go/Pivot/Stop、Luna 发布与远端核对 | PENDING |
+| S9 / §22–25 | 逐项完成审计、真实失败分类/两解释/反思、全成本、复现、Go/Pivot/Stop、Luna 发布与远端核对 | REPORT_COMPLETE_PUBLICATION_PENDING；按§22 Stop/Pivot，§23最低稳定性NOT_ACHIEVED |
 
 这张表保留完整任务，不把工程整理、最容易通过的几例或最低标准摘录当作整个 Goal。
 触发条件按实际证据判定；S4 通过后推进 S5 与 S6，不以“条件项”逃避已经成立的前置条件。
@@ -137,3 +137,26 @@ Root完整回归12/12、156/156，详见[S3b结果](MILAI_NEXT_DEVELOPMENT_V6_S3
 至此v6新增74generation/101503tokens、28embedding/563tokens。S3b通过只放行S4，不代替S4/S5/S6/S9。
 Root已复核预先草拟的12独立脚本与193义务，只有order加入已验收config/完整路径；inputs、合同与guide不改。
 [独立任务协议](MILAI_NEXT_DEVELOPMENT_V6_INDEPENDENT_TASK_PROTOCOL_20260928.md)待Luna发布并绑定实际执行freeze；S4尚未调用。
+
+## S4完整失败与S9收敛
+
+以上S0–S3段落是各次发布时点记录，NOT_RUN/放行描述不覆盖本节。
+S4在515ec714真实冻结后完整执行12脚本40消息，10/12、166/193，显式102/121（84.30%）、持久64/72。
+详见[S4结果](MILAI_NEXT_DEVELOPMENT_V6_S4_INDEPENDENT_RESULTS_20260928.md)及[总体报告](MILAI_NEXT_DEVELOPMENT_V6_OVERALL_EXPERIMENT_REPORT_20260928.md)。
+两次Host直接确认保存而无CREATE，另有key改写/遗漏业务lookup。部分失败前置未形成，NOT_ACTIVATED。
+原第8项快照和16失败/69未知保留；Root追加明确continuation amendment完成原9–12各一次，没有源码/输入/门槛变更。
+原I guide预设预约成功，三项状态答复按真实not_found缺席分支纠正；原guide、前序11失败和分母保持。
+四次冻结proposal-only诊断full2/2、compact1/2，未满足预定选型条件；不执行工具，不计持久成功，不增加重复试到一致。
+
+S9逐项审计全部要求：结构/等价/ModelAudit/独立覆盖/成本/后续判断已落实，§23第5项整体消费稳定未达到。
+按§22 Stop/Pivot结束当前候选评估，不以最低标准未通过伪装成功，也不以条件阶段未触发称为通过。
+没有证据支持允许范围内的新源码修复；未选新候选，不继续措辞或controller路线。
+S5/S6因S4失败不触发，S7/S8没有实际query压力。最终发布核验后关闭“执行v6计划”任务，
+其含义为允许的否定Stop结案；方法/最低稳定性/长期研究仍NOT_ACHIEVED，Product NO_GO。
+不是主动暂停Goal；后续新的研究方案须新的明确任务，旧ACTIVE文本不构成授权。
+
+v6合计138generation/184393tokens、47embedding/1055tokens。
+最终连续3263calls/4155747generation/23276embeddingtokens，SHA
+`2df7547a9d038cb53105afbf5daa97bbd8225bb204c19af40b7c68eee264ade2`；history/limits保持，known=charged，unknown0。
+全部真实作业已终止，无实验/下载后台任务；既有Host/embedding服务保持。
+Root只做文档/JSON/链接/哈希/diff核查，Luna high提交和推送PR70，不自动合并。

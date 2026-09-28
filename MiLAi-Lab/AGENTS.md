@@ -19,9 +19,21 @@ S2 source85f45b3 is published with Fast36406544195 success. Complete S3b at that
 12scripts/35messages/156task obligations (current55/later34/persistent67);3 optional diagnostic omissions
 remain. Root reconciled54generation/74019tokens and23embedding/448tokens. See the S3b report.
 Only an offline historical-receipt timestamp assertion was refined; runtime and frozen inputs were unchanged.
-S4 pre-authored12scripts/40messages/193task contracts are now fixed for publication; execution still
-requires exact published-source/runtime freeze. No S4 calls yet. Do not merge future PRs
-automatically from the completed S0-only merge action.
+S4 now completed all12scripts/40messages: 10/12scripts,166/193task,102/121explicit,64/72persistent.
+Two unsupported saved claims and world-action failures reject the compact candidate. Partial failure
+was NOT_ACTIVATED. Original R1 inputs/freeze, initial8-script snapshot, all27 failures and costs remain.
+A documented actual-world scoring correction passes three truthful absent-object answers, without
+removing failed formation/booking or changing193 denominator; original guide remains.
+Four frozen first-response diagnostic calls returned full2/2 and compact1/2 legal proposals;
+no tools executed, no persistence success claimed, no reliable fallback candidate selected.
+Follow the [overall report](docs/MILAI_NEXT_DEVELOPMENT_V6_OVERALL_EXPERIMENT_REPORT_20260928.md):
+Stop/Pivot after full applicable evaluation, not method success. Section23 consumption stability
+and broader research remain NOT_ACHIEVED; Product NO_GO. S5/S6 not triggered; S7/S8 no pressure.
+Root finishes report/remote verification, Luna high publishes draft PR70. Do not merge PR70 from
+the completed S0-only action. No further experiments, wording variants, downloads or deployments
+follow from historical ACTIVE text. Actual execution Goal closes only after publication verification;
+closure means the plan-permitted negative Stop decision, never that minimum stability passed.
+Final continuous ledger3263generation/4155747tokens/23276embeddingtokens; preserve all history.
 Root read all 1,497 original plan lines; keep original DRAFT/NOT_STARTED bytes and correct stale
 PR68 metadata only in new records. Main05601148 now contains PR52–68; its tree equals v5 report1abf5c4.
 S0 preserves v5 evidence and costs. S1 must replace string movement with explicit structured
