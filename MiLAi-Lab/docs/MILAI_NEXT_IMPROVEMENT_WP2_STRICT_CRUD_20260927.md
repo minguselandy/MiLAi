@@ -132,3 +132,12 @@ Host ToolNode与boundary executor使用同一实际工具入口，不按策略/�
 `f9ac40bcc2230e120937f58102663cd09fedd811f2b03a889e31e05d158d6453`；通用description新旧哈希见回执。
 没有修改共享服务、State合同、Host专用提示、空字符串规则或历史结果。这只验收零写拒绝的工程语义，
 真实后续任务是否因此改善仍由新冻结连续比较判断。实际远端CI在发布后核实。
+
+## 收尾时远端核实与暂停
+
+cf1588a已发布PR59。Root只读核实[Fast36337502319](https://github.com/minguselandy/MiLAi/actions/runs/36337502319)
+和最终gate108672382540均成功；实际CI组合3594eef1f06f5c2ef41bae5335ee868f0b73070b。
+core5114 passed/142 skipped/14 deselected，foundation198 passed/1 deselected，external与必要分发构建成功。
+声明的Product/Archive/tree-identity跳过项不计通过。本地无包装变化没有重复build，远端构建为工作流实际执行。
+用户最新明确暂停实验，实际Goal已paused；没有重跑C3b或新增语义样本。
+[总体报告](MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md)记录终态，历史待执行文案不再授权工作。

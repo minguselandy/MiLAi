@@ -1,5 +1,5 @@
 ---
-status: ACTIVE
+status: PAUSED
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE; necessary root CI only
 reference_commit: 9515017a5dfaba6b6e306fa778fd20f4383b6e35
 plan_sha256: e407a8ac577b2fb184b6e4386efb79536bcf75007252c8006e96eb296fa3cbbb
@@ -7,16 +7,19 @@ plan_sha256: e407a8ac577b2fb184b6e4386efb79536bcf75007252c8006e96eb296fa3cbbb
 
 # 后续改进计划执行记录
 
-用户已明确要求详细阅读并执行[新计划v1.0](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)。
-Root完整阅读466行并核对实际Goal为active。规划稿写作时的未授权/暂停说明及上一轮暂停
-保留原样，不能覆盖这次明确执行指令。保留完整WP0—WP7与X0—X5目标，不把成功收缩为修CI。
+用户最新明确要求：**暂停当前实验，总结提交到GitHub，生成实验总结文档。**
+实际Goal已于2026-09-27 17:41:51 UTC（北京时间2026-09-28 01:41:51）设为`paused`。
+本次立即停止覆盖此前“完整执行计划后再暂停”的安排；当前仅继续Root报告整理与Luna high的Git发布。
+不启动开发、实验、测试/构建、模型下载或部署。报告文档的链接、JSON、哈希与发布身份检查仍属于收尾。
 
-用户追加收尾要求：**当前任务结束后暂停实际Goal，生成总体实验报告并上传GitHub。**
-这是一项任务结束后的安排，并非立即停止指令。执行期间继续记录全部失败、未完成项及累计费用；
-达到本计划阶段结束条件后，暂停实际Goal（不把总研究目标标成完成），由Root生成总体报告，
-Luna high提交/推送并核对远端SHA。总体报告须独立列出工程完成、实验结论与尚未触发的G4。
+[总体实验报告](MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md)和
+[暂停清单](../data/manifests/next-improvement-overall-results-20260928.json)记录当前终态。
+连续账本为2799次生成、3486504 generation tokens、19273 embedding tokens；本计划增量31/66171/527。
+C5只有两处未验证源码修改及六份本地输入文件，原工作树保留，未执行、未验收、不随报告发布。
+WP4、WP7、X5尚未完成，G4未触发，Product NO-GO；暂停不代表[新计划v1.0](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)完成。
+再次继续需要用户新的明确指令。下方按时间保留的active/待执行文案是历史记录，不能覆盖本段和实际Goal。
 
-## 基线、证据与当前实际状态
+## 启动时基线、证据与状态（历史）
 
 main=`9515017a5dfaba6b6e306fa778fd20f4383b6e35`；PR51 head=
 `055a0769c1ce75d128d6459ee25773587d9003ae`，首个结构提交
@@ -36,12 +39,12 @@ foundation job108617763499成功；full run36318522284 skipped。其余成功不
 `MiLAi-worktrees/next-improvement`为开发工作树，分支`ci/lab-verification-matrix-20260927`，起自main。
 三个独立core环境，foundation/external另置ignored环境；不复用主研究环境造成可选依赖假通过。
 
-## 工作归属与授权
+## 工作归属与原执行授权（已暂停）
 
 沿用现有Sol xhigh唯一源码/配置/CI/必要检查负责人；Root独占文档、合成输入、rubric、
 协议冻结、全部真实HTTP/embedding/评分/连续费用；Luna high负责依赖/参考源码下载和已授权Git发布。
 Astra xhigh仅在具体难题需要时启用。每文件一个写入负责人，真实HTTP并发1。
-本次执行授权涵盖计划内实现及冻结后的小规模研究，不须为规划时“需新授权”逐项重复询问。
+暂停前的执行授权涵盖计划内实现及冻结后的小规模研究；该授权现已由最新停止指令暂停。
 PR合并仍须正常检查和审阅闭环，当前不自动merge；先完成可审查产物，不提前制造许可阻塞。
 第二模型部署、学习selector、Product迁移、分布式事务和物理删除保证不在当前默认范围。
 
@@ -53,7 +56,7 @@ PR合并仍须正常检查和审阅闭环，当前不自动merge；先完成可�
 | WP1/C1/X0 | 保留protocol/controller分工；CLI职责归包内且单实现；活动AGENTS与历史分开且原内容可恢复；完整请求/顺序/U维护A/来源/pending/容量/回执/trace等价，规范化项明确 | ACCEPTED；C1本地检查/最终构建与实际Fast已通过 |
 | WP2/C2/G1 | 锁定上游实际集成复现未知合法UUID被upsert；薄严格CRUD同步/异步一致；已有/缺失/错误namespace/message UUID/空删除/真实删除/Store异常/无副作用回执；不强制每次额外Host READ，不声称CAS | ENGINEERING_ACCEPTED；C2实际Fast通过，在线语义另验 |
 | WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | C3a PR55初轮失败保留，2c7修复实际Fast通过；C3b六完整轨迹完成：Host双写2/2、boundary1/2、overlap2/2；连续生命周期仍待X5 |
-| WP4/C5/X3/X4/G2 | 明确A≠U且U空可CREATE；保留原问题实体、全读/普通检索/同State查询增强/可关selector；固定同bank与前态比较all/U/U=A/oracle；对真正使用引用做有限失效，不引全库图 | NOT_DONE |
+| WP4/C5/X3/X4/G2 | 明确A≠U且U空可CREATE；保留原问题实体、全读/普通检索/同State查询增强/可关selector；固定同bank与前态比较all/U/U=A/oracle；对真正使用引用做有限失效，不引全库图 | PAUSED / NOT_DONE；两处源码WIP未经检查，六份输入字节准备不等于执行冻结；X3/X4/反馈未运行 |
 | WP5/C4/X2 | 同粒度整体/普通patch/候选局部维护；明确目标版本/唯一片段，广泛变动可整体；更新与无关保持同时测；D0/真实事件身份/部分成功维护续接保留 | C4两臂四真实一次提案完成：replace2/2、patch配方1/2且更贵；保留可选接口，Pivot默认收益主张 |
 | WP6/X1 | 用户、真实工具结果、助手提案、可修订State角色清楚且原回执完整；固定正确正文比原标题/源标题/无State，首响应后实际动作；无gold键名规则 | R1六次首响应及全部实际续接完成；严格1/6，标题修复Pivot |
 | WP7 | 独立语义写入/重复规则/依赖、Host/U/maint/A、材料、Store调用/CPU/wall、任务与维护分别测量；全生命周期Cbuild+Cmaint+ΣCuse及复用摊销；只有实测热点才优化 | NOT_DONE |
@@ -85,7 +88,7 @@ Root按真实结果补依赖对应表/协议/总证据，Luna在最终构建后�
 每切片记录原问题、变更类型/路径、输入输出合同、已运行与未运行、费用/失败/样本单位、剩余风险和决定。
 代码C0可回滚至9515017；PR51结构分别保留26c4f305/055a0769身份。方法变化独立C2—C6提交与freeze。
 未知真实副作用不盲重放；旧snapshot不能回滚业务世界。原始轨迹、凭据、数据库、缓存/模型继续ignored。
-原计划、旧报告、rubric、曝光集合与旧v27草稿原样保留；遵从用户本次任务结束后暂停的安排。
+原计划、旧报告、rubric、曝光集合与旧v27草稿原样保留；遵从最新立即暂停指令。
 
 ### WP0离线复现进展
 
@@ -249,3 +252,13 @@ replace3467；没有额外质量/成本优势信号，不追加变体，不默�
 严格正文followup已完成两文件最小修复，旧工具隔离复现确会写null，新strict工具缺失/null正文返回错误且零写。
 7项定向检查通过（最终补断言重跑其中2项），native参数schema相同；无入口/包装变化未做本地build。
 C3b/C4真实结果不动，后续方法身份会包含此共同guard。实际远端CI待发布后核实，不冒充语义效果收益。
+
+### 最新终态：用户立即暂停与总体报告
+
+2026-09-27 17:41:51 UTC实际Goal设为paused，Sol/Astra停止，未发现本任务仍运行的实验进程。
+源码最后发布为cf1588a；原C5开发树的两处未验证修改与六份未跟踪JSON保留，不纳入报告提交。
+收尾只读核实C4 Fast36336941840/gate108671892705与strict正文Fast36337502319/gate108672382540均成功。
+各自core均5114 passed/142 skipped/14 deselected，foundation为196与198 passed、各1 deselected；
+external及必要分发构建成功，声明的skipped job不计通过。
+详细实际CI组合身份、完整成本、结果边界与未完成项见本页顶部链接的总体报告及机器清单。
+当前只授权报告与GitHub发布，旧段落中的后续实验安排不继续执行。
