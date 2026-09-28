@@ -72,6 +72,32 @@ then formal prepare and freeze the690-unit independent matrix at that published 
 No first-table quality results exist yet. Preserve frozen protocol/config/pilot bytes and costs.
 The full Goal remains active through the independent comparison and applicable U3–U6 work.
 
+U2 first five-method development table is now complete at execution B e6df2f5d / method A795725a2;
+the earlier U2 preparation paragraphs above are historical snapshots. Follow
+[the main result report](docs/MILAI_UNIFIED_U2_MAIN_RESULTS_20260929.md) and
+[reproduction instructions](docs/MILAI_UNIFIED_U2_MAIN_REPRODUCTION_20260929.md).
+All690 invocation units were attempted once:686 completed,4 interrupted. MemSyco299 single-attempt
+Judge calls parsed;1 Host-incomplete slot remains. Scope/valid/personalized passes respectively:
+Raw17/13+1unknown/17, RAG19/15/18, summary17/15/19, ordinary6/13/16, Mem016/12/16, each planned20.
+MERIT episode successes Full89/90,RAG90/90,summary89/90,ordinary75/90+7unknown,Mem086/90;
+dependent36/36,36/36,36/36,32/36+4unknown,35/36. No retries, replacements or method tuning.
+Ordinary has no actual CRUD; its completed snapshots remain empty despite legal full-history access.
+Three ordinary arcs suffer real label-output loops; one first performs seven unrequested deploy(latest).
+41 frozen request replays show request-copy rendering preserves checkpoint content: repeated labels
+are actual model output, not established in-place renderer corruption. Causality remains unisolated.
+Exact-key, native formatting, policy/checker conflict and Mem0 temporal formation failures remain.
+New main cost2228 generation/5803724 tokens/376823 embedding tokens; continuous5941/10864712/414792.
+Do not change or rerun this first table. Source freeze can end only for a separately identified next
+method after report publication; historical results reproduce at A/B, not a later report commit.
+Root owns full reporting/real calls; Sol owns next minimal source work; Luna owns publication.
+Second external-system integration and applicable U3–U5/U6 remain unfinished. Resource inventory
+found pinned SimpleMem source but missing optional dependencies/default encoder assets; it did not
+download/install anything and is not execution evidence. Choose a concrete compatible text path,
+then complete needed development and small checks before new real evaluation. No inferred second
+Host-family weights/deployment. All conditional branches need actual gate dispositions; no automatic
+selector, State platform, native score normalization, main merge or Product migration. Full Goal
+remains ACTIVE, research NOT_ACHIEVED, Product NO_GO. Respect any new explicit stop.
+
 The following v7 closure is historical:
 
 

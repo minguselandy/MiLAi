@@ -1,5 +1,5 @@
 ---
-status: ACTIVE_U2_PILOT_COMPLETE_MAIN_PREPARATION
+status: ACTIVE_U2_FIRST_TABLE_COMPLETE_NEXT_STAGE_PENDING
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 plan_sha256: b496818cc94dc5a3eee83f7795f8afb7f145cc16aa628f31c52d7e33251a948c
 base_commit: 77dfc2f43f2307bb649cdbee9d62a97e5863fac0
@@ -264,3 +264,32 @@ Root随后按既定规则生成[18条开发arcs](../data/manifests/unified-v8-v9
 90episodes/36dependent/111公开消息，官方leak check通过且哈希无碰撞，无新增模型调用。
 [开发合同](../data/diagnostics/unified-v8-v9-u2/development-contract.json)先随报告/输入发布，再正式prepare并冻结全部身份。
 独立U2主表尚NOT_RUN；整个Goal保持ACTIVE，U3—U6仍按完整计划推进。
+
+## U2 首张主表完成：负面结果、费用及后续边界
+
+在已发布输入/执行B `e6df2f5d914c3ea2f08ce34f0887749e6f0c30dc`、不变方法A `795725a2`，Root冻结496份文件后串行执行全部690单元。
+686完成、4异常退出；RawDialogue一题输出循环截断，ordinary三条MERIT arc输出标记循环中断。没有重试/替换/方法修改。
+随后冻结300个MemSyco回答/状态，再单次评分：299个SCORED、1个HOST_INCOMPLETE，无Judge解析失败或重评。
+详见[主表报告](MILAI_UNIFIED_U2_MAIN_RESULTS_20260929.md)、[复现说明](MILAI_UNIFIED_U2_MAIN_REPRODUCTION_20260929.md)、
+[机器结果](../data/manifests/unified-v8-v9-u2-main-results-20260929.json)及[失败表](../data/manifests/unified-v8-v9-u2-main-failure-map-20260929.json)。
+
+MemSyco范围/新旧/个性化各20计划题：原文17/13+1unknown/17，RAG19/15/18，摘要17/15/19，ordinary6/13/16，Mem016/12/16。
+ordinary范围相对原文−55个百分点，预注册来源组bootstrap95%区间[−80,−30]；此为单族本地Judge/当前开发切片，非跨家族结论。
+MERIT每方法90 episodes：Full89、RAG90、摘要89、ordinary75成功+8失败+7未评分、Mem086；dependent分别36/36、36/36、36/36、32成功+4未知/36、35/36。
+完整arc分别17、18、17、10成功+3未知、14/18。所有未知保留分母，不计算相应完整配对CI。
+
+ordinary实际7次MCP search和7次read_history，无CRUD，完成episode快照均0条记录；不能推导形成能力通过。
+MemSyco普通201条、Mem0291条记录均实际交付且查询前后不变；范围退化不能直接归于漏检索。
+MERIT摘要57次更新全部committed，Mem0111次维护完成/最终186条记录；计入维护后摘要362960 tokens略高于Full361588，Mem01684029约为Full4.66倍。
+原生千位逗号/大小写、coffee key、政策/checker冲突及Mem0绝对日期形成失败都保留原分，Root诊断不替官方结果。
+ordinary额外deploy先于末端重复：不能用取消标记必能修动作循环作承诺。Sol只读41请求重放证明原checkpoint/wire未被渲染污染，真实模型输出中的标记通过历史回流；候选尚未实施。
+
+本主表新增2228 generation /5803724 generation tokens /376823 embedding tokens；连续账本5941/10864712/414792。
+本Goal含U0失败、U1和pilot累计2640 generation /6659509 generation tokens /391222 embedding tokens。旧嵌套历史字段不变，费用不清零。
+1929 Host/形成/维护生成与299 Judge生成的prompt计数均精确匹配实际usage，新unknown usage0。
+Root离线汇总的摘要attempt标志误加、ordinary/backend字段误用，以及Sol离线helper初次系统前缀假设错误均保留并修正；未改实验/评分/统计，未重复模型调用。
+
+本阶段决定 Continue/Pivot：第一张公平对照表完成，当前ordinary/Mem0无稳定净优势；强简单方法继续作为参照。
+第二外部系统还未运行，Luna只读盘点确认SimpleMem固定源码存在、依赖和默认encoder资产缺失，未安装/下载；下一步需选择真实兼容路径并由Sol完成薄接入。
+U3-P/O/W/R、U4、U5和U6仍须根据上述真实首断点分别处理，不将已实现模块自动全部启用，也不以首表结案缩小总Goal。
+Root发布结果/文档，Luna执行精确allowlist commit/push并核对远端；没有main/旧PR合并。实际Goal仍ACTIVE，研究NOT_ACHIEVED，ProductNO_GO。

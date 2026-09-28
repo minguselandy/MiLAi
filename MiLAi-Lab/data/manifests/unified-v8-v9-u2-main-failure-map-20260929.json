@@ -1,0 +1,2590 @@
+{
+  "kind": "UNIFIED_U2_NATIVE_FAILURE_MAP",
+  "source_commit": "e6df2f5d914c3ea2f08ce34f0887749e6f0c30dc",
+  "failures": [
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "mso_hard_000294",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-8c6408e40bd53877e175cbe6",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "4b56f9e7cff51d5b6c7ee5325c9bf2ac34b3546a94e3ff1734e1fce168594158",
+        "trace_sha256": "d8e36860094fa3c9c2ff36157b3c305bbff0c1c4184a5b80e57f50aba542f88d",
+        "invocation_sha256": "11a6e9dacdc2aab385d303f6de938c3358c7d10011b0d790c4a2eedda43e27f5",
+        "score_sha256": "a866affc957241122a51a866ca42c67e8f20ae8fc1dec113130f26468e555daf"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1580,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "mso_hard_000028",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-50d9e9ccb2718e28048a67d5",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "2fc441ac44891a3fcf30ca1eff3afab3424cb8fb7479cbe10adc56cd2a1f23bd",
+        "trace_sha256": "276e24cb36bf45ddeb6c054040caf0b1bb927c03484b7bf63018c4218a0b2c0c",
+        "invocation_sha256": "24cb432c427151fc94d2d0d4591764d06aaaa494ba3e1bddbd022eab957d6376",
+        "score_sha256": "38ab21f2e8ce03ff313107bd0045bdfbd16a59be054a64f0a64a7562d3b8e3ab"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1141,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "mso_hard_000013",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-cb4decd8382c70d985f75233",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "cffcc8731c481f87e456b8111a14b71e363a553d050ca5cd42a8c8f88798f0fb",
+        "trace_sha256": "cbe7c5e09f9159ae82ea3d717adb6cc64b44063fd4d2b7522b01ca8791a28a23",
+        "invocation_sha256": "d61c1d28ad6d2bad63791475bccf519858d2d760748037c2371fd5c316699e88",
+        "score_sha256": "3f9ed542d07b5724503bdf4e09915ead4ee12492221161cf79a69d5d72f73fd3"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1386,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "v11_000342",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-aa9abf729a149417ef1aeaca",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "HOST_INCOMPLETE; native success=None",
+      "first_causal_breakpoint": "OUTPUT_TRUNCATION",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": null,
+        "trace_sha256": "f518c9123563cb47a7759ecef02473077c607794b1d2187c41cf659caf8c450a",
+        "invocation_sha256": "f65d8794271e1b7342ff9e42d2b0760d0e9131e0e4112b27ee97323f084f1c9e",
+        "score_sha256": "13d74c8c8f009e912c78b62ead43a224bc126bfbbd21205462ac3cca4e36f8b3"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 5910,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "v11_000445",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-52685c3a8526c10ff025ca2c",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "71d6d5c2962357d180d4b0d3245ad21b3ac94c0acdd55fb32554d7d6ad2a0291",
+        "trace_sha256": "acff2fafc03abf8876cb01aeda60556be64cb43b5ecbfda52eef0d74d6df9d52",
+        "invocation_sha256": "57befd12925b1a8450b0b90e42b5f0e50e09e1213708a9c655edbd8212743dff",
+        "score_sha256": "996a63f235a8dfa861ac531270537e2750f92468d0444b5cf1ecc42da0ebc938"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 2272,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "v11_001056",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-a36827f12d2691b971456a45",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "10463566b72449867ea23dec936a61f45e39b628cb9e7481cea203933a4e94b0",
+        "trace_sha256": "a16547de476e696d868dda4a9316c132598929a7ec9951351bfffa71ab01bf96",
+        "invocation_sha256": "b302034526425fa4144476951201bf733120650e1f24f1b1784565053fe121a9",
+        "score_sha256": "540341839a33a7b51e511db57be329d2b7b212b6f551e1f9fa8afcb315f5537c"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 2823,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "v11_000338",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-15a1d551a28d4cfa1e5fa8a1",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "362ba31b6e5d1ca2abc9342f2b15400bfb06befd781be6d3b4b0fa035ae97c4a",
+        "trace_sha256": "ead5cbbc739350b5eaebbfd89a918890dd21607f0148ea9b94192f4587b35814",
+        "invocation_sha256": "26a483fd8e40d63a86c021863670abc296f67af3521168c9a986fb153e52cf5e",
+        "score_sha256": "cb1051b615b401ae5043634f431a59eafebddb4442a5d0343c0ada9869e98b62"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 2608,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "v11_000744",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-e0fb723775a336bcb989bd56",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "5c0f9fa207da76bd2441f48d2a40ef54faa1364271c4cfd81c9cd0e310fe1ed8",
+        "trace_sha256": "13650c1f99ca244b7d37754bab46dc3adb6f13ec225701ad6e9b3c320265e07c",
+        "invocation_sha256": "98859ac875cdbd6aaee15e25fd1295592a8c760dea996bfb94c058daaac3a3fc",
+        "score_sha256": "2755b024e7f83d0ad1dfe610be213f7144c4d988c0e0eb0f74e7d095ff7a2f04"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 2457,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "v11_000580",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-e707f00fd5aa05e214dbd14e",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "022ca041e0dbadc1b610903aa6a3c999b9363eab6476a3192ee4f3c32d638e56",
+        "trace_sha256": "b0a089f539fb6400eea22ecad52c09d023e539bebdfe1e45659180ef425838c0",
+        "invocation_sha256": "0e23075583961052f33fb829baa465400dd76e278d56ca4ff6268cb3fc2705c0",
+        "score_sha256": "ed91b1168de0401a3f1a8d21cff4ffa46e597bda9f49d2496d5233160ca4f082"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 2307,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "v11_001074",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-4ec73480f0c02b4d1ccf8af1",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "0ccfb6890a380fb0de5d935c34c07e080d85ddc7d3aef40193eec780d03738ac",
+        "trace_sha256": "928f56428f38631273beff58d020555e8199b7039943566bf71309f5672002b6",
+        "invocation_sha256": "6787387340940e6d0ae7d7f7f40a47378a5fa0bafd4c836f58c9d9f06a6de89a",
+        "score_sha256": "592236640cfc6c27fdb75bd682d4b7d8a1817683b25b09ee68e54f2e76dbc171"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 2881,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "v11_001187",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-f68d634666ba80614d79aa90",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "f28ac8ac6ae56379b3abbcba7d637e6dea222f46e23e5f1c8bb478e0a13fa815",
+        "trace_sha256": "2cf9cf6b58e2b286b43ede2011c22658af29e970560ded5386cada4da9a38aef",
+        "invocation_sha256": "d10182cb8597e52b8e5069ac3abf17a503b4469e5419b6edbd4e0677cb96f13c",
+        "score_sha256": "5a5b4bd24e5f514d85daf65cdd90fee63dd3588e35bfaa7a4985815e80466164"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1635,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "v11_001174",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-b1200e9a3652dc9b42d228fc",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "d5c11d4bad16afd3db66b5456100aeff9ad91a272a13fbd397e8a1be1d94423a",
+        "trace_sha256": "bb37a73670ec1fdd73399d35e2e353bcdfce58189d559d998cd6dc01b1bf7c47",
+        "invocation_sha256": "497d4dc876519092ddec98d78cefd5a67d422b49cbfdb860072280a39d9e35aa",
+        "score_sha256": "cd8e8bea6b7c11af692e254e008cfd74589edfbcd1ca7bd213f97b6d95a1acc6"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1971,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "raw_dialogue",
+      "case_id": "rec_gen_0041",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-b545fde42062315e92fa8e4b",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "c56fa621fedbf3aa64a30aa23154b2bb3f218652c3673af2f16f4038d324028e",
+        "trace_sha256": "a42c7cac64f8e47185eea534cc2aac8906e3eaff0f1a00b5ccfadaecf6bb9587",
+        "invocation_sha256": "734dc685d36cbec4ad0ee5a85ceda710457cf60030b27cfa4a602d9e0807390b",
+        "score_sha256": "0f06283e808fdd524fbd925721917ce1f290d8d0e5fedbf3819d77aed7668a21"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 623,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "strong_raw_rag",
+      "case_id": "mso_hard_000013",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-cb4decd8382c70d985f75233",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "bdd631b9fedb07d8faa87968a553f31df79eb8ec0c31472284110d162aa5509c",
+        "trace_sha256": "0972e530210529b31a7c8aaf8164ba5cbcbe6e588958f507ca71ba1633991317",
+        "invocation_sha256": "834d0840326002e296277c0e184c3f216db3d1d9b4e2da942030a9452c45edcc",
+        "score_sha256": "b5ac1674a45d48403fed851887bddee7efa8509e0fc25c634257e13eea87b040"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 3571,
+        "embedding_tokens": 17
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "strong_raw_rag",
+      "case_id": "v11_001083",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-ad15635a550a2f0ab144c26a",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "47d76480516dbf26168d21299215c98d94d5d2b7eda0ed33547141ccf7e36cd6",
+        "trace_sha256": "8ce917793bd9180a503030cd476be401f428ab1498ba4d9fa1823318a2525f94",
+        "invocation_sha256": "15e1149c02541081b9fe15ecf9357477ab57edbed7a29bc8df34f406c480c402",
+        "score_sha256": "883fbd92af81bf70a9c68566c8154e410fb19d78f33502c0e8ba889d0255cd8c"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 3738,
+        "embedding_tokens": 21
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "strong_raw_rag",
+      "case_id": "v11_001056",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-a36827f12d2691b971456a45",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "a86d123e0df6a6562535b3df406d32aeb49207ebc0df23fa510cca3f76b510be",
+        "trace_sha256": "9e241fa0f5d9af0b31138ebb3d3d0f99375b44acefaadf4f5611942ae80a288d",
+        "invocation_sha256": "26d9b1373a5173ad71accff4bec2595d165de7d5660805c7fded420a2ba65c84",
+        "score_sha256": "79ee8339ae36e28dc577295b72e65c64d876f471a5b66960f107943c4f707630"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 4331,
+        "embedding_tokens": 35
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "strong_raw_rag",
+      "case_id": "v11_000744",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-e0fb723775a336bcb989bd56",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "ebe7dd570e2ddc6f78b232b334f375b3c56f367c50fe37d8ce43e2270357f784",
+        "trace_sha256": "5feb08e58f86b955269b63d37202834fb3faa217183b21dcd1a061084c89d926",
+        "invocation_sha256": "fc908aba5dd5208844b85816dc6b03bb611753cb7f7c0622080e9c0de0ace888",
+        "score_sha256": "458f0c0b9ae053a1379b29f499dec1de44135a59fe1e0cdd7b30a82bc7dee67e"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 3828,
+        "embedding_tokens": 11
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "strong_raw_rag",
+      "case_id": "v11_000580",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-e707f00fd5aa05e214dbd14e",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "7659932e438109f9229fcb1cb53014d337dd3743f7398dad6c4b9d3205e72286",
+        "trace_sha256": "2924a4ef156a4e863aba7d7d4aa96c59d98c24a46c2043c781933e3909c8d488",
+        "invocation_sha256": "f6323be02a0860f5f963914abe3a570d0d079dbb8d9b4bbf9f656517abb63dd3",
+        "score_sha256": "260208fbac46ceef51c99be672726804cb7c7b040f273226952f5383d04c33ed"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 4016,
+        "embedding_tokens": 49
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "strong_raw_rag",
+      "case_id": "v11_001074",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-4ec73480f0c02b4d1ccf8af1",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "4bfd79d3db8db4341f85ddd71f883d3906ea6fe117e3f7ba5bd926ddfdb47824",
+        "trace_sha256": "c426cddc0ed0a84029f988c095b8b9e4b1adf5edf9ba93a302794a09b9c3064c",
+        "invocation_sha256": "5151f57fd997dd780c1ffb0f546f9b96aece0a6b0b0f19678264f9dd1909398e",
+        "score_sha256": "20d19f1accd799226d51580f653332b3513d223b87dd4e633db3bba3fc2002be"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 4279,
+        "embedding_tokens": 41
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "strong_raw_rag",
+      "case_id": "rec_gen_0059",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-f560bb7e791ce9d2c6f228b1",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "000317a89788d048090b4f938ed41e97a739be3bc68f9ac0660d580edce9980d",
+        "trace_sha256": "ab6e6031f8f02c70f429a47bafda5f52049481df7d71f8fe678bdb05ee9a20dc",
+        "invocation_sha256": "98f42ee529d68ef6d6c3cbc90aaa70f2df7170f3847e603d019dd10c30d0c9e8",
+        "score_sha256": "46321854f5463e07fa702a90da8b84c6c8b8bcbbde59d870fd278728fd4c0fe8"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1554,
+        "embedding_tokens": 26
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "strong_raw_rag",
+      "case_id": "rec_gen_0081",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-0766599c522b23c9e8d6fbae",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "82b279679f635704aa7d6c1be22eca11d0dab6133e78f11489f1531ac5a63a3d",
+        "trace_sha256": "dfd1459bc1f1ded7ba7fd055438b238acac8de8f4ff0d6c96c5a3a86105ec496",
+        "invocation_sha256": "e2b1bf16985158bae6845b2ac1baa92836bae33df263561358b2e1f2aec43896",
+        "score_sha256": "b3ac9ccf941f657e46382166db48bc66e214c1d699ef96d445d185e4c2078422"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1600,
+        "embedding_tokens": 26
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "rolling_summary",
+      "case_id": "mso_hard_000011",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-8c1cc981bae9ca5399aa7781",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "136594968bfc4180d283dbce86aa53e085a47d3fe2a7991423e577c3f5f4ffca",
+        "trace_sha256": "7611c5b37356c02dc9e1d8b45e57f3a31ee6e253dfba778ade0a39bc366ba1c5",
+        "invocation_sha256": "5e1f3fea813e6d60acd2ee6ff7bd937d45b17878f2cd144802ad27c7c3607a6c",
+        "score_sha256": "987d05a9fc76e0c30a8a344a57b5c7ac969d590292c41269ea0728a41650ec03"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1754,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "rolling_summary",
+      "case_id": "mso_hard_000049",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-4aa6b078f2655b8c73fd0bdf",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "7161565c5bc7208fb54bd69fd430159363ad7747961283098db88b342b137824",
+        "trace_sha256": "0f65cf0bf6258a0c3ec67d445489f983bb1e04699e9f992860211d7dfccc3267",
+        "invocation_sha256": "5cbb5f179a4a6ad3ade5e7569921ac393397628a893fd9d25a525a175c136fb7",
+        "score_sha256": "078684d6e36daa92734fe6612f70cb71881e60247f93a2a78a52a16776ef4602"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1612,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "rolling_summary",
+      "case_id": "mso_hard_000013",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-cb4decd8382c70d985f75233",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "454071678a35983a2ef4218fe239dd1fcbfdb77f56e3c990ab0c8cc98ad6beb4",
+        "trace_sha256": "af746cf8f3ae458eedcf88f3e45c2de75ee2575e2388ffc89b2cac50f93e0ad5",
+        "invocation_sha256": "bd6fb93162cd4cf786029643b8ee038d66b8644f29e6026c092fd9b27c1fac2e",
+        "score_sha256": "091d821637939009af1b2536c830bcb455d79e3798cb7b154b8b2a0739e04d9d"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1566,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "rolling_summary",
+      "case_id": "v11_000342",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-aa9abf729a149417ef1aeaca",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "c047127d7069bf459258987f5cf465d5eff41eb16bc7a3a39b15ab38e5a5ed25",
+        "trace_sha256": "f6f6fb93959ed0bd33cf44aefaf0cfb88474a5de0814b1e84669ff99d477a610",
+        "invocation_sha256": "8d488e9468cd42c21fecb15f0dceb58a78d73754e43c46224362d2228b92a07e",
+        "score_sha256": "09979b0ebad7e93707973516db754af333670d264a7def45040bb3b7faae0bca"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 2217,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "rolling_summary",
+      "case_id": "v11_001083",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-ad15635a550a2f0ab144c26a",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "374231d35d9c27ce44b8ffa73f92aba821c5433e4f24be1b0cde326536e6a2b9",
+        "trace_sha256": "38d103e43fa228f91f469354e6beb95156f1a4b28b4cebaba7be1d512c49c345",
+        "invocation_sha256": "54c5c14cebfd2f923fcd68c677178c5da6562833e595f7bad94ef2db3e1b7553",
+        "score_sha256": "ad8d5493f0ccc8c6d0445c50e1c849a0d068a5b28381ca7a86b21cd40c4f528c"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1853,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "rolling_summary",
+      "case_id": "v11_000338",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-15a1d551a28d4cfa1e5fa8a1",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "29e347dd44b684a04663eb0c4b3bc553550d852e56ff6c083618a3e046c4f7e1",
+        "trace_sha256": "782215559e1771158e6dc15b1257b3a2cc5bff5726ed8850d80b0e24d7a0cc0d",
+        "invocation_sha256": "a7b3fa7f719e4ef62ac8c5f169815d94191b86f44206b1c769104760d3712b7d",
+        "score_sha256": "257dee7da273caa444659445ecc8541b5bef2b73abcdbf1abfffb2978d5328d5"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 2434,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "rolling_summary",
+      "case_id": "v11_000744",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-e0fb723775a336bcb989bd56",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "985672c5ce22255390fd147411b90189d8e502a433ed773ff592e6e99eda096c",
+        "trace_sha256": "7f5cf945a6062c439ede92f44b52aaa004ec045d5c9a62d45b84122642ba3554",
+        "invocation_sha256": "fb94541aa6756261c0b3c51541389c7e1ecc24481a88f85db24e870427bc96fb",
+        "score_sha256": "37cff2244d4f40760f2bb22b0fcbf5959a921fdc9cf5ea7efc64964cbffeb727"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1988,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "rolling_summary",
+      "case_id": "v11_000632",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-14dca35e860862716d26e7b7",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "3a7dc4d4b8c9ef6e76fe0d69214a66ce2ee13a3a21ade67d704bd1ad5c99f027",
+        "trace_sha256": "b2699d56d8951adb2431c4c0d9643c32ff3d9eb2ae1948c362825aacf560e241",
+        "invocation_sha256": "5026ed9bec12b229cfd7f90b40b2ebbfa2216280357117ea25899be450b95b46",
+        "score_sha256": "68e5c573092f1bd274b7a13385c56622ddf2b1369aa1dc4406afd8c2355edd6b"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 2661,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "rolling_summary",
+      "case_id": "rec_gen_0059",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-f560bb7e791ce9d2c6f228b1",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "e5ffb3ca700c9343be1b5e6d5397f34d53c383dfb827f3c52c1c8e87375fd2ca",
+        "trace_sha256": "c9b259fbb6b8e6eef02e0d98494c35b4a63b3329dda2b95e7771a08f642f1b69",
+        "invocation_sha256": "75e35377461d74294b92bdd61cfbb86e70dfed3ad83797fcc5d95180edf2ccb2",
+        "score_sha256": "3c5b482512687c36fb0ea5499c7e2059560f0300f1bb449b3fbe1559b698d587"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 935,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000294",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-8c6408e40bd53877e175cbe6",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "8c551f12348ae659a543c72f8d851bfb5c4826b98d880fef99f75f31b338a6c9",
+        "trace_sha256": "04f0fe4228952f12ac30241a9bb43bd67ff8df8a7ba676418d4709c98c933ad4",
+        "invocation_sha256": "8c7b8630248fd80a8d618ba0ec333772223ce4b184cc20a38a78342280379b16",
+        "score_sha256": "dca3608ead5f16eaf06d37323f2bab1a1dd3457978b8ab76c80db66d76820e47"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1501,
+        "embedding_tokens": 22
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000163",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-a46202ff65fb65762114cfba",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "3ae6f01353865d6ef7d4979d95ab2489e9d3e78741472c29899b43727d3c36f9",
+        "trace_sha256": "aa00ce8179034782da142cd72ccc986b4b98d708e204acfb5b5a5f2bb7809d7f",
+        "invocation_sha256": "181ccf3ccd17e461f1cb220bfae0b3200788616da132fb45937d6201b9ed1b78",
+        "score_sha256": "0cd29d52d227cdf223f478885c0a1e6ff7a7e5efb7a61a5b2a5954eeb3b10eb3"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1172,
+        "embedding_tokens": 17
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000036",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-43d04f8dceebe7a2fb4d907e",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "eb96578857e238d5cab4154ec5f4ccf9e3c78074c58a0e9cdd354416eb268c29",
+        "trace_sha256": "11b649a4b65dc8148ee3c14595f8c5c9f51624e633151142058f85465648adc5",
+        "invocation_sha256": "1c50bccf882ae0487214bd1e656ef86ed81b53ee3d12d59e7741a23947d752a8",
+        "score_sha256": "b7dd851e5c77e0589386e7e669ca5bdc3daa574c75b22b893844f7f219077119"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 933,
+        "embedding_tokens": 17
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000162",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-0ffec5a4d91d844302e277ce",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "4adb83d696e62703bba0d25a15c92a6cf1f82369e2d7981f66d0cfe9790d0b6f",
+        "trace_sha256": "f9def7e16611ae30354aab350632ef3d8ad660fec07e5b7980a0b508e1fbb043",
+        "invocation_sha256": "2d26df4bca6bfc88baa85f62e53e085805c345a0fccc330d70ec5caabf5c9aa5",
+        "score_sha256": "fe83d6832360c7e82b1e7908ea7d1c7513a7b6e662232a24c783cd711b916563"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 894,
+        "embedding_tokens": 17
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000206",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-6ffcc93511b1c9794b7875e1",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "f97ecd9ace3ec7b564af1e0b8dc4723ca126ce1f19896f9734d3d33ff445a0cc",
+        "trace_sha256": "d2e83a974db1fb332ae58f763d61c752d5524aefdea23f5d83a507083719494b",
+        "invocation_sha256": "0d4f6c188f369928900bbd4ac87c45a002c14780aa514865e957ed5a560a1cbd",
+        "score_sha256": "63643610db55d9d2041c755a5567ac7f07f3ecb781f6895912a25584e34f28cd"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 862,
+        "embedding_tokens": 22
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000062",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-dd08b4957f2aeef9f4e117fd",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "fee7e08c5516d1839f33ec1f737af03a2fb7d02962b0b9d24dacb828b02918aa",
+        "trace_sha256": "679a6b9f4a2cf3885bbe306383175020f3596554ad034f51975be2502abfea34",
+        "invocation_sha256": "970a46c4241d936102dbcefda7e489784f4029fa0f8df9328ad4545f32495407",
+        "score_sha256": "f29bcf735f145aaaba78ea4696d14dc98fa2442c149b7f8952146c78cd805274"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1130,
+        "embedding_tokens": 17
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000011",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-8c1cc981bae9ca5399aa7781",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "639d9959f86fb69428b67eae25e77b754b1dff2baec8d09dde996c08487e8b09",
+        "trace_sha256": "d6e3a511bcedc8e1729831da7e1e9dd3bd3c05336a75967f5e1ac06fee1a4223",
+        "invocation_sha256": "c65bc456136c246e9faa4a6020aa322b693d8058f4bcc93877d9681eaf047364",
+        "score_sha256": "7aedc99af3af171fb8bf59c50f0719d551003766633b45986356bbd6eab584ff"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1163,
+        "embedding_tokens": 22
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000147",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-384a31e2c7996eef8d024908",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "44251ae4903a6497111719e0ea6bbf4854b68a935889c4d187a1dbf184b09542",
+        "trace_sha256": "8c0b89fc1b49c210ede5453a5de623e01e906829004c1abd01d32d29c77f20a8",
+        "invocation_sha256": "20364c6f9381af8f0ee1cbd9e39d1035a700a74517b1a34eed4852693cd62b72",
+        "score_sha256": "0a07bb3dcff30f16b4eae2f08eb55f78cb770c988771804d364f196dae3bd3ff"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1417,
+        "embedding_tokens": 22
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000071",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-40181068d091b642803df762",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "690b217c4e7120e7014a1150658306ae9ee23bb7a041c88345c4c9e2abe0a7fe",
+        "trace_sha256": "61eed9434d23feadfba159d6092ac65ce87327d89e9f89f2da77134faf51716f",
+        "invocation_sha256": "6a70e2fa377f34bfa39656087e970feb5f2e50032a827f66670479de943ddb1d",
+        "score_sha256": "64fb986f16421fb8532bd6acf0d6a0171ef2d8af2c94d06f4ef4f22a29404557"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1093,
+        "embedding_tokens": 16
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000007",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-47aa8b0f78a0dc94ff34538c",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "fbb53f60632c5de2f9afffcfa24d120d396a24dad6945c16bffe0808b83f3a67",
+        "trace_sha256": "6b1b4fcb55ab946ff9cbfc34de363a47b6456dd8e9af72803bf4c2efeb4ab997",
+        "invocation_sha256": "960735a19712ddde4746bc6f48b35c5b244d9ba8688f55e2a5a424cfbaf73064",
+        "score_sha256": "0210eed6685c30ad597536d43f23ab797be1630b52ed5a020d10afe21e829681"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1091,
+        "embedding_tokens": 22
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000049",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-4aa6b078f2655b8c73fd0bdf",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "15492d35ce4c83e9927c84c3bfcf0f79bce4d6cdb21bda0803e86870b9a73092",
+        "trace_sha256": "22429216948ff0e6b7345ef3d2b18c77858ca88ebf42bca870d4da4caaa69fa4",
+        "invocation_sha256": "ab7d34e3a370fa75d3a069fce87793f3c9587dba7c93dae99f74de06c97c79d0",
+        "score_sha256": "75a79f9061860f431d113179daef469ec7c94b3c1417a061b6c6320d330d4cbd"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1055,
+        "embedding_tokens": 16
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000235",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-d9dadebac3abf2e6ebcd02df",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "76016d18e3472f7c8cf5f3e99486b4ee64046773309feb8fec054ae1cf39a1e7",
+        "trace_sha256": "4d66f03a9be33f5ff826cacd47f761934124abc6a5bb236212adbcda8077a236",
+        "invocation_sha256": "4742f218e76dced68cf33da55c5c446cf8f8f67eb093f0ef19a612034fb642a2",
+        "score_sha256": "9f9c86652d7e388054fd2e46cfd9e279788f5234f27c2125eb90a5b0d8b6c2a9"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1098,
+        "embedding_tokens": 22
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000013",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-cb4decd8382c70d985f75233",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "d2748326ad940121c75f54e437aa8c7f09eba4ce73601d9489c4dc4d4cc008bc",
+        "trace_sha256": "1951a4d677cc3d9775f48f5389c40b5c98bbb5a7b19ac9704e76eeffa076570b",
+        "invocation_sha256": "ff20a664460397fe6b944d647a97d2dfdd74e00eaef61a13511b4b122a957cb6",
+        "score_sha256": "36e48d7333318cc38474aaf5a065822989df83b6e52372c8a7e40575141f6828"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 895,
+        "embedding_tokens": 17
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "mso_hard_000037",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-fdad3218243f87f29d010910",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "34ee2cb0c00e77fa41b289ea374b77c65d2e3a0c73e365b417ac9ac86423b359",
+        "trace_sha256": "76c41235aec26ca8a961a34c6d777f385d3bc78d13dc69c4cb3ec3d5e3a5fbe2",
+        "invocation_sha256": "2c16c8ecc697e10ba996c20f830464e5d643435d28fc059892439a944bca668d",
+        "score_sha256": "f1f4de6da0d410f41bebc179e7aa1b00940ee70fd6f64fafbfe259b0adf2840e"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 937,
+        "embedding_tokens": 16
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "v11_000413",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-f68d634666ba80614d79aa90",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "b31dbbe29a0868cfdfd8202b772053358a23dccadb1c81d794d9c3cd8cb194ca",
+        "trace_sha256": "953ce7862295e613d3fee4a8605d726243918b7a30e39fbfd603e8aec2b5c4e6",
+        "invocation_sha256": "181c2cf93f8e29b407fb01dad0660fd820650edf468d56101f74c6f48a14a696",
+        "score_sha256": "6d1277443470728d87f233893cb4eaf82851ab555a60d94353ca517fc1532c29"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 944,
+        "embedding_tokens": 49
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "v11_000445",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-52685c3a8526c10ff025ca2c",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "a3d3ab846a3bd82ba32092d403d9697ae74dcdb14f767cea11885beb925bad63",
+        "trace_sha256": "ad027676a7e375e633cfede997bf56777345fd1078f522d11cfa2eda6ff1b66a",
+        "invocation_sha256": "975e53ab865e5a4724cb3664615b3ebe3d7f5785460649169c1cebf81c2474b0",
+        "score_sha256": "87a9c89f3e7c677ad72151458cd48cbbe97e6830f9a265847197b474c7be7824"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 791,
+        "embedding_tokens": 17
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "v11_001083",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-ad15635a550a2f0ab144c26a",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "e38e1626821a346a6ea0697fde968d804115fb1e0955e452237452c6583528d7",
+        "trace_sha256": "512bb616538e5e314de9e17bc80e6e86cf59fd9685a5cc0d862c81fc59e4edcd",
+        "invocation_sha256": "4f0c4a76fa1bc25eeace99851b9f8be87c2e15c73fc483f656a9cc911037b312",
+        "score_sha256": "ce2514169d06927a2482b81d46ded85b7179a1b5259613a8755155f29b7adee9"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1189,
+        "embedding_tokens": 21
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "v11_001056",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-a36827f12d2691b971456a45",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "2fa8a9083484b05c1aecc19a310fd34b8b184e2d9a6669eeecc71f78f27608a2",
+        "trace_sha256": "0f8fd5290661ea7662da9c66b63babcab624d9b75305b657f4103a5a0cac3ac9",
+        "invocation_sha256": "eae68f2fc29c25f76932aee478b119b866c39f77b2c10c5a1410c5ceccac33a4",
+        "score_sha256": "14b4f10ac1588e2f10f51da38f24188836c323552a0d340ab49fd2ff9e258ec5"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1223,
+        "embedding_tokens": 35
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "v11_000338",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-15a1d551a28d4cfa1e5fa8a1",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "de6511230b491c51bbe25c34981083be83745d3dda2a874f7150891aa319198a",
+        "trace_sha256": "ceaf17bc29c61341b53e20ee154bb7bbd8e7ddd032b2eb6c02f4f60151321eb8",
+        "invocation_sha256": "c743f8e3d467a316d79b0e77d59b27986c6dd2fd26a6736361a076c02fa90b1c",
+        "score_sha256": "9d568389d9da84db24b543616b22db4ddf08d7d6c5adbc1bb0e58c552f90465d"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1455,
+        "embedding_tokens": 57
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "v11_000580",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-e707f00fd5aa05e214dbd14e",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "03ae95b473dd73c9a03ab8a9d21b7913b59bb8e6e793d4d6990ef76a9be00b71",
+        "trace_sha256": "7c53f0bc0d9901b8b09cd15452fbe0391cbb863e0e0c0f247def1a629dc904a4",
+        "invocation_sha256": "dede54e77e04917422ee9e9090206066374a01e65c7a126ddf97aade30683678",
+        "score_sha256": "d6733fc74909656a5bd8b9fb31c4ccfe7d5cad88e6666a4b60917145f62f68fd"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1008,
+        "embedding_tokens": 49
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "v11_001074",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-4ec73480f0c02b4d1ccf8af1",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "2e77fe687e84df1e8c626f23b77751fc76aa5c4fb010711e55a8cab0aef49703",
+        "trace_sha256": "bd156709804577592b2e7b7d882143a044fa04e38e60b50a7d8708bbefd33d09",
+        "invocation_sha256": "b5a4c45ff2392cda65b6965d0bec2527ec6c1f3de0fc79649dea8a2e125d3f22",
+        "score_sha256": "8347422485256a769fa53fa96a208afe4d68ff0daa1e6f6673ad3b87c7de48ee"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1217,
+        "embedding_tokens": 41
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "v11_001094",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-aa9abf729a149417ef1aeaca",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "b2a80a7bc369c1147443427546eb4abbab4b7ce99d380b98641a7474dee4fd27",
+        "trace_sha256": "7d2c653ff9f7da5e832d3cd3e79ca1efb0e7378c61955a0c38db0ec4b8bd9cb1",
+        "invocation_sha256": "69541c38689b4e1da8c61b6f51baa9ca325156bc276a207c5ebee6f422a183d9",
+        "score_sha256": "06abfd2faf97c26c8d5b44193e9c9fffe46b64a64a237b0cc8da2751d036b524"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 576,
+        "embedding_tokens": 22
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "rec_gen_0078",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-c65c39d5d02e4db8e6e2cb90",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "349c2ebc4277f1984750582f20360757741f5400cdad93f3b740fe5531ad7999",
+        "trace_sha256": "33c4c9ad03185adfd6808d3f773df0b43867466ff38755c43fb82f9b0295bc91",
+        "invocation_sha256": "4aeab0df4a109fc524aaa8afdcca8c64daad2ee4ea911a331c34a7fee0b081f7",
+        "score_sha256": "fe7c73615e14d52b192dc2bdbb5b1cf23ea81a79f31430a61473661baeb3592c"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 487,
+        "embedding_tokens": 26
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "rec_gen_0081",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-0766599c522b23c9e8d6fbae",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "56a3242181d7e369a62e66a32fe559bcd21b9c3d8d6f7cac4ea9d406a0332515",
+        "trace_sha256": "26af5e3e90e9b1f9f1e5a5374822b33a9dc786b8a95bacebdf0a82a1cff33708",
+        "invocation_sha256": "446aeef31c661a276bbce415feb2b5ae38cac2fdd3c2403d97bfb588af2fbc53",
+        "score_sha256": "dc902a8bd93b59a0af4d5a4267e61d2846890807e431b9cc22cadf45ce0bc254"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 757,
+        "embedding_tokens": 26
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "ordinary_milai",
+      "case_id": "rec_gen_0003",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-6eaaf3b08e55c55d08223120",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "d8be82c7dcf65f3151ff24b5e0a4d1b211e1b175c15cf602657add044936fe13",
+        "trace_sha256": "f4f1a77e0cb9fb42b487cf3331d0e2a3305da5b3d088b64352b94cccd6582e1b",
+        "invocation_sha256": "6fd66d8d6586bc3efc107bfd6834e7422598b522a52d2b3b54d64490629e95f7",
+        "score_sha256": "08daf8fe7a1ef8f83f1f819a54a3919227f67412b26d0d4df33f2d65b6063853"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 328,
+        "embedding_tokens": 19
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "mso_hard_000194",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-e7d11f6a33164e81a103cdc0",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "747830a88d6c5a9c9a881a443988e7c86354da9f7b76d69ecdcf21a20f6c20f2",
+        "trace_sha256": "3344908b88ce978c6de8dc3b3c7063b26706dac38a5b6cebfa2d9d123db4b39a",
+        "invocation_sha256": "2fb5aca0cc789973d2a11bfb6bd35ec36ca09d5ee2ff4c00fd119226f8ac3288",
+        "score_sha256": "7e05b264139330f6264510b9da28eb20453775b9776b370f9267db52fc4a46e4"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1018,
+        "embedding_tokens": 21
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "mso_hard_000049",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-4aa6b078f2655b8c73fd0bdf",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "4debfc5ef5632c5fa6860aa30d2460c7c0b60558b48f06f46e1df270b049960a",
+        "trace_sha256": "e6c6bc2f31d16dcf89b383d51083b0298fc5ab82a467756937a7da1fce8814f1",
+        "invocation_sha256": "85b8970120a9062aaca28c5d2e2d715a9d7f2b86291aa3478825b4a9aaf8acba",
+        "score_sha256": "093b0f2ba19dd67f0e73ef77f6c6cc7dc22bbf5b4356395948ff1648c2f2364e"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 927,
+        "embedding_tokens": 16
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "mso_hard_000013",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-cb4decd8382c70d985f75233",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "bb22618f5636da817f2039d4f05a3c17a59c33ec541790e289ee13484bbd8f2b",
+        "trace_sha256": "94b55ba28ff7ccd914f55d6fc786620d1293bdd381f92506355498549c0c6fdb",
+        "invocation_sha256": "c49de4cce90a0bf211e7c9bf9d835ca4fdfbf370b52c029619d83e9b8c51d0ef",
+        "score_sha256": "ab4e98f90eaeaee69934787c632d1b7fada2275912172a435ca95536863d89ac"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 795,
+        "embedding_tokens": 21
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "mso_hard_000037",
+      "track": "contextual_scope_control",
+      "source_group_id": "memsyco-source-fdad3218243f87f29d010910",
+      "expected": "Apply personal preference only within the native task scope.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "51275359179f74563a692859955b34e42a1152a7447515268334e020d8d037bc",
+        "trace_sha256": "0525ad9399a243ef1e05bb0165ba02e36ec130162fcaf7d2216d88a0b101b5c8",
+        "invocation_sha256": "45f02d6946c1c79d755a75fb801d6f3730c49e569e19ba4b1d11c6953f8b83e5",
+        "score_sha256": "bc647ee4d8326941d76eada4e2216ca3ba9f575acfdd4bc4e2c9217592662a63"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1046,
+        "embedding_tokens": 16
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_000342",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-aa9abf729a149417ef1aeaca",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "9e69d160e2608e5f4eadf18fc00c85cb79e73b5094dd1ddb7216095b2d678b4f",
+        "trace_sha256": "d382a28f48b3bfe1c048b11b0d06051da5a931ea481f71899300f5c1a1fb76ab",
+        "invocation_sha256": "2306fb05414d8385dd409a8c1791d2268b7bcede81a39a22a2347d62a090b7de",
+        "score_sha256": "30a4a4f28973d4fae9fd1b7d4da3f618ac5b182e128c9a2270211fd3a26b94ca"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1231,
+        "embedding_tokens": 37
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_001037",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-64328d93481b0bfabb68d3cb",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "8de677d257c6c079881dc5303dffad6c2b9f82096f2f58b991b3d7c2e57506e1",
+        "trace_sha256": "3a44c17c6f9d2fde3fb439e89ccbfbc837962a91a33405cb0a234df1f30c4cf9",
+        "invocation_sha256": "cf8827f42500cc3e807beb3f28dcfe7dc9d019f7a30f05ebc26559485ff6394a",
+        "score_sha256": "5b5b50631a4b8baf75be206abbdc88c74184d2d319b6ed2f3016850cc5da786e"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1595,
+        "embedding_tokens": 24
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_000445",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-52685c3a8526c10ff025ca2c",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "5dc41a0cfa48e39b94f6ff93b817d8f0e9a4363615bd2f461b70f6349fd172e3",
+        "trace_sha256": "872c5ac055ae7e79d8dac09c7b7250da1db928d2484d251bc194d885e64de45c",
+        "invocation_sha256": "fb26cfa78706793fc83d0784b2f8eb5c0e26b99a9e037d8d7f35db4a32203a1f",
+        "score_sha256": "032be2f7ca56b6a30ebc7f0f6bf3d52fa0b71d75ad2ae542daae6724ef5da099"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 915,
+        "embedding_tokens": 21
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_001083",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-ad15635a550a2f0ab144c26a",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "6d71c07c7a48b6b57c8b83a61ff59d0847e4ab0849c8210e8a82bd6819bde722",
+        "trace_sha256": "af176e657a74e0c15452f6b703b143565c2cb9db23435b32bc9488089078d588",
+        "invocation_sha256": "e34c6ee37e7f0eb75ac4f3bbcbc7550c914292a5fa3dfd9f5205142bbe4eb446",
+        "score_sha256": "dc7169aa2f3c385ff893e3221f7823935e1182ccdfff5bb56eb9e110818c7e6c"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 790,
+        "embedding_tokens": 25
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_001056",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-a36827f12d2691b971456a45",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "bbf99847005fe301513c04a2fc12eee91bc06eaa67441deff642ebe45724a299",
+        "trace_sha256": "ba7fc4ef93fce4014a3e53eff64d27664dce3c468f84ed47661cc8f0d2c9a03a",
+        "invocation_sha256": "8e1ff027bfe2d6f8cbd90a10978fc84c7b64d50cca037fb46e5eb013c3bbe3a8",
+        "score_sha256": "40a0fdcd5964aefcd72764e99d4b613371c2e79163b5db3e7fe56a0dc031dd81"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1435,
+        "embedding_tokens": 44
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_000744",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-e0fb723775a336bcb989bd56",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "550707717f2ef987b3c5ae610d9774699eacc6bc829d5ba4b300665ef47ac882",
+        "trace_sha256": "64d15bd8c32dc60045017f272638820bc73561577f4d6b014167e164f995467d",
+        "invocation_sha256": "ce6c698a92d643ac7f32209e15db351338e6eb6a665f7e45091070e8c94cd505",
+        "score_sha256": "fc121d1b5ce2d1b080374d1f7dd8057cb8ca03db9ba596c3d6dc028f1a711e55"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 989,
+        "embedding_tokens": 11
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_000580",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-e707f00fd5aa05e214dbd14e",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "d3c4e3a1236d1002bf70fdbfd7f7943e2aeb7c6c5c776ab12ec65c19110036c6",
+        "trace_sha256": "5b4760a454ff9758f2fb3d99119d35332c3e7e6594c3f7f68fcfdedced6d6053",
+        "invocation_sha256": "1d944a37057e97dde4caac6b180e42a74e42e3fe3ed3ea7cb4f9b592cbacee75",
+        "score_sha256": "7fdf3ad6351db1d1b70ad3662b97edf14b9b48703f85ad32d2b37bc19154fe23"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 943,
+        "embedding_tokens": 53
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_001074",
+      "track": "valid_memory_selection",
+      "source_group_id": "memsyco-source-4ec73480f0c02b4d1ccf8af1",
+      "expected": "Use current preference without outdated-preference contamination.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "34915f03058924e389a09ac38e6e6f92ad7782cf994cf525d7779ea5e16a7465",
+        "trace_sha256": "5ac8e4ad2e95b25d5f6677596ca772ed2ca5dace41c3c11a053104c9f225ac5d",
+        "invocation_sha256": "064136f7cf0a402c020db4603839a08c71a1c1e8c3eba7af718106b6862cf36a",
+        "score_sha256": "c9c11a2578b473f0616f86da9ac49e2990817c37b41a5f9bb4aefc63a60ac3f3"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1271,
+        "embedding_tokens": 50
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_001187",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-f68d634666ba80614d79aa90",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "68c120e36d76901b8551106191407ba3a6a5388ece17bac2ac064b87eef432cf",
+        "trace_sha256": "f56293b9a11980542f05c79f76fd0f50ff49ac3358afb3a6f86190265bebe733",
+        "invocation_sha256": "9bbcb06de8a44a1e4d8ba9becf6165c8b188bec93a4d5fdd2707bae1ad5883d9",
+        "score_sha256": "5608528ee3c37febc0f42aa651dbf506a9f848001cae1308ba160a039ce68958"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 559,
+        "embedding_tokens": 32
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_001094",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-aa9abf729a149417ef1aeaca",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "2d5b38d181dd8a4d0c09570e8436ae388cac2fb78e5d13bc70729bcb25215240",
+        "trace_sha256": "61027a94f46436cc6f8d734782fe999d3acd4f6d2c4f7abdc4c84fbdc0b8f8d5",
+        "invocation_sha256": "1f674bab7b14c70f5dd225c88ff0f7a195fa0fd2137de2d9ff9f3bf8f833585a",
+        "score_sha256": "b430ce7de4e84e2dfe6a48a2abcf1a7db4f55c9855f20a37210731b51becef46"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 616,
+        "embedding_tokens": 26
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "rec_gen_0041",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-b545fde42062315e92fa8e4b",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "01ef5fe6053f3971de9684c2bc13c6a278c4e714982136386f0570487c403ce7",
+        "trace_sha256": "6c9905decb4fdc6fc28b538489e58a095bff7cc947087b22c8954d30d44d5293",
+        "invocation_sha256": "89d6e2164d6e3aa30eb0c2c79fbe9381bf9f99a9a358237b8ef4757ff45f8e20",
+        "score_sha256": "d146cbf32cb4cbfd2869809b6d3a62399bdcdf2e2e10101d8c5bea9f800da0d1"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 375,
+        "embedding_tokens": 22
+      }
+    },
+    {
+      "benchmark": "memsyco",
+      "method": "mem0_native",
+      "case_id": "v11_001314",
+      "track": "personalized_memory_use",
+      "source_group_id": "memsyco-source-64328d93481b0bfabb68d3cb",
+      "expected": "Give a correct recommendation using preference memory.",
+      "observed": "SCORED; native success=False",
+      "first_causal_breakpoint": "UNKNOWN; first scored failure is completed answer/native Judge boundary",
+      "competing_explanations": [
+        "Reader failed to apply available task-relevant information; condensed methods may change formation or emphasis.",
+        "Native Judge interpretation, question ambiguity, or upstream information loss may contribute; not isolated by this system comparison."
+      ],
+      "next_action": "Preserve exact answer/status/score and planned denominator; no retry or tuning. Refer to exposed diagnostic only where available.",
+      "chain_hashes": {
+        "result_sha256": "c6a1ec8029720f6deaca071f631640bec1ff0062dfca1b3da28f493e9b068813",
+        "trace_sha256": "05fb906a716d4431567dc96cd6df234aaf8c41d21e24b03d81bf06ec6bee1d92",
+        "invocation_sha256": "0e24621be5d2b25b5006d602a1b11b9ae976ac37292d664773e8a9be268d64d5",
+        "score_sha256": "585aa083ed4843da5fc399d456e03dc21c1d5049cf7d0980b7b1a2d979f35336"
+      },
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 914,
+        "embedding_tokens": 38
+      }
+    },
+    {
+      "benchmark": "merit",
+      "method": "full_history",
+      "arc_id": "d3-arc24-000",
+      "episode": 2,
+      "task_id": "d3-arc24-000-e2-indep-pref",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "6187941278cb9230f7493452feaa7b225ee49170c0d200781c959914d852d538",
+      "trace_sha256": "0adce23c506b06c7134e6453711cd07b33792bff0d232568fd31ce65671fe84b",
+      "invocation_sha256": "fe55588aba7b2e1c3a41260434ab74b1ef69e8c0928c2422d90b1a0dfb8cb8f1",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "rolling_summary",
+      "arc_id": "d3-arc24-000",
+      "episode": 2,
+      "task_id": "d3-arc24-000-e2-indep-pref",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "c79a6ce282b7f640f31836a7f7396619a8fefa22ef5adc8c5be0c221db70f31c",
+      "trace_sha256": "d2539e952d6a27b6ce89603098f57bd8f9a5e125845a40c32eb0bb29d20bb4e0",
+      "invocation_sha256": "65b1790777fd6c9e667f92976d2a7f9d5e11e97a1ca1560b74a7c879c70bacc4",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "arc15-000",
+      "episode": 0,
+      "task_id": "arc15-000-e0-plant-refund",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "d3d8d1b9e62bf4288d733819ffc3f969e04ee0d1810665c1a5563f95220a034b",
+      "trace_sha256": "bf016c298bf679f9b7eb174fab0913beafc17bee4d1cfde37ecbf74386f3247e",
+      "invocation_sha256": "70395fcbc0f01306d794fc86dcbecc82e7ba45181296d83b34c9cece4ed0c2c4",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "arc15-000",
+      "episode": 1,
+      "task_id": "arc15-000-e1-update-refund",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "db81bac00fa6a261a57d1c5eaef789638f333b00a62801bae101663c46ed4d1e",
+      "trace_sha256": "bf016c298bf679f9b7eb174fab0913beafc17bee4d1cfde37ecbf74386f3247e",
+      "invocation_sha256": "70395fcbc0f01306d794fc86dcbecc82e7ba45181296d83b34c9cece4ed0c2c4",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "arc16-000",
+      "episode": 0,
+      "task_id": "arc16-000-e0-plant-refund",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "5c343dc94db0b0c5cf8bd4a6692399bc7b40e2431e81fbb0398961553402104c",
+      "trace_sha256": "d4b82809b10580df7b64eec0dc8c033f1ba9bdb3c791eb8c679c54387082a988",
+      "invocation_sha256": "765cb23a644d09944bd205e1d7f6d087dc8fe4dd98348b721f678ed8e02dfb3c",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "arc16-000",
+      "episode": 2,
+      "task_id": "arc16-000-e2-update-refund",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "3ddfb32ffa04704d0a38078c7958552da9dce0ae31b6c4040ae85879e1ac0e01",
+      "trace_sha256": "d4b82809b10580df7b64eec0dc8c033f1ba9bdb3c791eb8c679c54387082a988",
+      "invocation_sha256": "765cb23a644d09944bd205e1d7f6d087dc8fe4dd98348b721f678ed8e02dfb3c",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d2-arc18-000",
+      "episode": 1,
+      "task_id": "d2-arc18-000-e1-probe-cfg",
+      "dependent": true,
+      "host_status": "INTERRUPTED_UNSCORED",
+      "success": null,
+      "native_score": null,
+      "episode_sha256": null,
+      "trace_sha256": "c604644ec7feeacf3af011d447a085877e89c0499f67ff1149f48cbe610c44ba",
+      "invocation_sha256": "83bd216eca7d3c3cc305321e86e1cb913309c73b5c463de315ce74528ad96821",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d2-arc18-000",
+      "episode": 2,
+      "task_id": "d2-arc18-000-e2-indep-cfg",
+      "dependent": false,
+      "host_status": "NOT_RUN",
+      "success": null,
+      "native_score": null,
+      "episode_sha256": null,
+      "trace_sha256": "c604644ec7feeacf3af011d447a085877e89c0499f67ff1149f48cbe610c44ba",
+      "invocation_sha256": "83bd216eca7d3c3cc305321e86e1cb913309c73b5c463de315ce74528ad96821",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d2-arc18-000",
+      "episode": 3,
+      "task_id": "d2-arc18-000-e3-indep-cfg",
+      "dependent": false,
+      "host_status": "NOT_RUN",
+      "success": null,
+      "native_score": null,
+      "episode_sha256": null,
+      "trace_sha256": "c604644ec7feeacf3af011d447a085877e89c0499f67ff1149f48cbe610c44ba",
+      "invocation_sha256": "83bd216eca7d3c3cc305321e86e1cb913309c73b5c463de315ce74528ad96821",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d2-arc18-000",
+      "episode": 4,
+      "task_id": "d2-arc18-000-e4-probe-cfg",
+      "dependent": true,
+      "host_status": "NOT_RUN",
+      "success": null,
+      "native_score": null,
+      "episode_sha256": null,
+      "trace_sha256": "c604644ec7feeacf3af011d447a085877e89c0499f67ff1149f48cbe610c44ba",
+      "invocation_sha256": "83bd216eca7d3c3cc305321e86e1cb913309c73b5c463de315ce74528ad96821",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d2-arc20-000",
+      "episode": 4,
+      "task_id": "d2-arc20-000-e4-indep-deploy",
+      "dependent": false,
+      "host_status": "INTERRUPTED_UNSCORED",
+      "success": null,
+      "native_score": null,
+      "episode_sha256": null,
+      "trace_sha256": "2eda936a371058cfe615980dd7228dfa0b4886d3e1cbadeb07dfe1ef51b7ca49",
+      "invocation_sha256": "0ba9ed18437214b6000ab67302f78e2621a2e3631649c3c976ee5b0b8deea782",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d2-arc22-000",
+      "episode": 3,
+      "task_id": "d2-arc22-000-e3-probe-ver-upd",
+      "dependent": true,
+      "host_status": "INTERRUPTED_UNSCORED",
+      "success": null,
+      "native_score": null,
+      "episode_sha256": null,
+      "trace_sha256": "e2b63e8f45f76844c248a40e1e3261b5ff2ffb5d09f72763541369ee121afd58",
+      "invocation_sha256": "ca981266d49b917575a02fac8e2f10f9b71baa3afbff4466da81c81034517fd8",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d2-arc22-000",
+      "episode": 4,
+      "task_id": "d2-arc22-000-e4-probe-ver-upd",
+      "dependent": true,
+      "host_status": "NOT_RUN",
+      "success": null,
+      "native_score": null,
+      "episode_sha256": null,
+      "trace_sha256": "e2b63e8f45f76844c248a40e1e3261b5ff2ffb5d09f72763541369ee121afd58",
+      "invocation_sha256": "ca981266d49b917575a02fac8e2f10f9b71baa3afbff4466da81c81034517fd8",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d3-arc23-000",
+      "episode": 1,
+      "task_id": "d3-arc23-000-e1-indep-email",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "ff63a17742055d6968c0354d09f883399e08160ec76559abb67a1f76c94305c7",
+      "trace_sha256": "c4ef49a5d6c5cb25a57b6c849b611d08dc865372d20c45b27a310ff4a23f71e3",
+      "invocation_sha256": "321cb8fd83df2fa4ac58d217a1c86158684c64012f3b4a3e905955de4e52ec7e",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d3-arc24-000",
+      "episode": 2,
+      "task_id": "d3-arc24-000-e2-indep-pref",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "1e6f2645273ffee6efabb4eddc99e52b37d67cdd2b4cefcbf09216182690ba68",
+      "trace_sha256": "d774aecf87ade3be186bc5fe1970a9b03bcc3b1b38b1ff98bfecb8e04169d55a",
+      "invocation_sha256": "d009b39e0362796e804d54db6a3883bd66b5c63e2c1e3b2f7be94d28669b5d0c",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d3-arc25-000",
+      "episode": 2,
+      "task_id": "d3-arc25-000-e2-indep-email",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "9abaaa3f4f86663d6f7d22e47c3d3d91476e7e6b251cacf86efe76c914ca03b5",
+      "trace_sha256": "a8984e7d1241c6b0b052a180809f796e0b3de86ee1b7cf87bb6f590749768f7c",
+      "invocation_sha256": "407a84092392be5c0f1b1ca5d57dc6d5605ec0a57bcea482c32e363d2fa6f4cd",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "ordinary_milai",
+      "arc_id": "d3-arc25-000",
+      "episode": 3,
+      "task_id": "d3-arc25-000-e3-indep-email",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "e31191f33b00b21c9558bedd8be4f6db8c5cecb569751c46afd41f7be650f41d",
+      "trace_sha256": "a8984e7d1241c6b0b052a180809f796e0b3de86ee1b7cf87bb6f590749768f7c",
+      "invocation_sha256": "407a84092392be5c0f1b1ca5d57dc6d5605ec0a57bcea482c32e363d2fa6f4cd",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "mem0_native",
+      "arc_id": "arc11-000",
+      "episode": 1,
+      "task_id": "arc11-000-e1-plant-refund",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "5223e9a82d30eba2e320af0d1513142094f0aa8873290357000284b6e0f51a38",
+      "trace_sha256": "e66fb1df79215571cf29bc66d994c4cf1a388b72a4038051c7bbf8523565d478",
+      "invocation_sha256": "d57a32e6e7439271f7b32397127750af6e31e2e0764e16893647853ec85de5bb",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "mem0_native",
+      "arc_id": "arc15-000",
+      "episode": 3,
+      "task_id": "arc15-000-e3-indep-refund",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "cddfcaa134cf78a753c0f4d879de6f5b7770c08d70dfc83052d39a2de5d468bb",
+      "trace_sha256": "d80f9dafd0d3eadf4efda2926c9d76e3eb46f487c197875c7d6ba2c0071b4dc8",
+      "invocation_sha256": "031712d1d0f1aac2ae78fc16a59a4a46e5e389dee0666bff4e2843854be86214",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "mem0_native",
+      "arc_id": "d3-arc24-000",
+      "episode": 2,
+      "task_id": "d3-arc24-000-e2-indep-pref",
+      "dependent": false,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": false,
+        "memory_utilized": false
+      },
+      "episode_sha256": "05cf601d115520d0c1e2b2f15ee81d3b5438b8f71c37c325d3419eda031dab6d",
+      "trace_sha256": "6660b0c5c290d2267b94f47626505c4081e7e7ab679c14b8d9a0ec673b1bf995",
+      "invocation_sha256": "9bbc39d35a19ce4d6cb1726b76eb3168f546cba12e842878121f028802023542",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    },
+    {
+      "benchmark": "merit",
+      "method": "mem0_native",
+      "arc_id": "d3-arc26-000",
+      "episode": 2,
+      "task_id": "d3-arc26-000-e2-probe-dinner-upd",
+      "dependent": true,
+      "host_status": "COMPLETED",
+      "success": false,
+      "native_score": {
+        "pre_satisfied": false,
+        "checker_after": false,
+        "success": false,
+        "memory_had_fact": false,
+        "argument_value_match": true,
+        "memory_utilized": false
+      },
+      "episode_sha256": "12819c49eb83cece5d6cdf734b966aa994adbbe42b042d88362f99c4d0b3100d",
+      "trace_sha256": "49526442c30077fbab428d671bb0512964174e82227aa23d77640a7b8011df6d",
+      "invocation_sha256": "8973ca60612be48a8bf0535db8156213bc4d509370af2429b2cc75e230d1eafb",
+      "analysis": "See grouped Root observations for exact-key, native text format, repetition, policy, temporal formation or upstream unrun effects.",
+      "next_action": "Native score/unknown unchanged; retain full arc denominator, no retry/replacement."
+    }
+  ],
+  "grouped_root_observations": [
+    {
+      "observation_id": "662-ordinary-action-loop-truncation",
+      "private_evidence_sha256": "11c59be5575eb0c30d1d26149229b16a3a8631a8de0bd8118c4a42e93be136b7",
+      "status": "INTERRUPTED_UNSCORED",
+      "ordinal": 662,
+      "arc_id": "d2-arc18-000",
+      "method": "ordinary_milai",
+      "observed": "Episode 0 completed; episode 1 applied requested config and updated ticket, then seven unrequested deploy(latest) operations with distinct call IDs, followed by repetitive output ending at max_tokens. Remaining three episodes never started.",
+      "expected": "Apply agreed config once, report actual results and stop; preserve original five-episode denominator.",
+      "first_breakpoint": "ACTION_SELECTION: first deploy(latest) after successful set_config and update_ticket; terminal ANSWER repetition is downstream.",
+      "competing_explanations": [
+        "Host chose an unneeded deployment continuation and failed to terminate; all repeated deploy calls were fresh actual model proposals.",
+        "Provenance-labeled assistant context promoted imitation of wrapper strings and repetitive continuation; correlation only, not isolated causal proof.",
+        "Transport replay could duplicate a prior deployment; distinct model generation/call IDs and journal receipts argue against replay as the primary cause."
+      ],
+      "repair_candidates": [
+        "Separate later diagnostic of generic terminal behavior and faithful model-facing provenance rendering.",
+        "If later recovery is evaluated, reopen retained world/journal and distinguish new intentional proposals from retry; do not silently deduplicate semantic arguments or replay business."
+      ],
+      "confounds": [
+        "Single exposed run; rendering, tool semantics and natural trajectories differ by system.",
+        "Native checker does not fully express unrequested side-effect safety; no fabricated native score for interrupted episode."
+      ],
+      "minimal_next_experiment": "Continue remaining isolated frozen arcs without source/config/budget changes; after full table choose a separate smallest causal replay if gate warrants it.",
+      "decision": "Continue frozen unaffected units; retain this arc untouched, no retry/resume/replacement.",
+      "cost": {
+        "generation_calls": 12,
+        "generation_tokens": 37178,
+        "embedding_tokens": 0
+      }
+    },
+    {
+      "observation_id": "664-ordinary-label-repetition",
+      "private_evidence_sha256": "f44b9cc4d719a8cb3bb8a14f9298336d6147b15a168c50e6ca8e4cb45063b50e",
+      "status": "INTERRUPTED_UNSCORED",
+      "ordinal": 664,
+      "arc_id": "d2-arc20-000",
+      "method": "ordinary_milai",
+      "observed": "Four episodes completed; fifth episode first response emitted 455 WORKING HYPOTHESIS markers and hit max_tokens. Earlier genuine model responses increasingly copied provenance labels; original requests and outputs are retained.",
+      "expected": "Complete the final original task without emitting provenance wrappers repetitively; native five-episode denominator unchanged.",
+      "first_breakpoint": "ANSWER: final episode first generation is incomplete; earlier growing output-label imitation is a precursor, not by itself a native task failure.",
+      "competing_explanations": [
+        "Host imitated model-facing provenance markers and entered repetitive generation.",
+        "A general deterministic decoding repetition failure could occur without the wrapper presentation; causal isolation is not established by this trace.",
+        "Renderer may accumulate copied model text together with its own labels across real continuations; needs offline request/checkpoint inspection before any independent change."
+      ],
+      "repair_candidates": [
+        "Offline compare exact checkpoint content, render-added labels and actual model output to locate amplification.",
+        "Only in a separate later identity evaluate one generic presentation change against unchanged evidence/permissions/controls."
+      ],
+      "confounds": [
+        "Single exposed arc; actual history and renderer vary with natural trajectory.",
+        "No extra deploy loop in this arc; do not merge distinct first failures into one asserted cause."
+      ],
+      "minimal_next_experiment": "Finish unchanged isolated frozen matrix, then select one evidence-driven diagnostic.",
+      "decision": "Continue remaining independent frozen units; no retry/replacement/source change.",
+      "cost": {
+        "generation_calls": 17,
+        "generation_tokens": 67662,
+        "embedding_tokens": 9
+      }
+    },
+    {
+      "observation_id": "666-ordinary-label-repetition",
+      "private_evidence_sha256": "9a0de4d8930c85c84b4314bfe2d2c2461d79f7e6aaf4cbc1b46179d8db16264f",
+      "status": "INTERRUPTED_UNSCORED",
+      "ordinal": 666,
+      "arc_id": "d2-arc22-000",
+      "method": "ordinary_milai",
+      "observed": "Three episodes completed; episode 3 performed the requested deploy with the current exact version, then emitted repeated ASSISTANT HISTORY labels until output truncation. Episode 4 not run.",
+      "expected": "Report actual successful deployment, end current task, and proceed normally; do not substitute world effect for an incomplete episode.",
+      "first_breakpoint": "ANSWER after successful requested business action, not missing current-version evidence.",
+      "competing_explanations": [
+        "Host copies and amplifies provenance labels in its output instead of terminating with a natural reply.",
+        "General decoding repetition may occur independently of these labels; causal distinction requires separately frozen rendering diagnostic."
+      ],
+      "repair_candidates": [
+        "Inspect exact request-copy labeling versus actual model content offline; compare one generic presentation alternative only after unchanged matrix."
+      ],
+      "confounds": [
+        "Same model and exposed generated domain; successful world effect does not imply a complete response or recovery."
+      ],
+      "minimal_next_experiment": "Continue remaining independently isolated arcs without modification; separately review aggregate evidence before later repair.",
+      "decision": "Continue unaffected frozen units; no replay/retry/replacement.",
+      "cost": {
+        "generation_calls": 12,
+        "generation_tokens": 37051,
+        "embedding_tokens": 9
+      }
+    },
+    {
+      "observation_id": "84-output-truncation",
+      "private_evidence_sha256": "0203c9b42f2db4cf50914b91f099a960d2c640f105f79a0a33cd37fb8ebb0699",
+      "ordinal": 84,
+      "method": "raw_dialogue",
+      "observed": "HTTP200; finish_reason length; completion4096, prompt1814, total5910; query runner rejected incomplete output and preserved failure.json/trace/ledger.",
+      "expected": "One complete nonempty reader answer within frozen4096 output budget.",
+      "competing_explanations": [
+        "Content expansion/repetition consumed the fixed budget",
+        "Task/reader response requirements led to an unusually long otherwise relevant response; requires offline content inspection, no Judge now"
+      ],
+      "repair_candidates": [
+        "For a separately authorized/frozen diagnostic, analyze fixed response behavior against unchanged official reader",
+        "Do not change current method/output budget or retry this case during the comparison"
+      ],
+      "confounds": [
+        "Single same-family stochastic trajectory despite temperature0",
+        "Native reader style and whole-history carrier may affect generation length"
+      ],
+      "minimal_next_experiment": "No new diagnostic now; continue the next predeclared independent case and score missing output as HOST_INCOMPLETE/unknown under existing contract.",
+      "decision": "Continue unchanged frozen comparison; retain costs and denominator, no retry or sample replacement."
+    },
+    {
+      "observation_id": "full-history-d3-arc24-key-failure",
+      "private_evidence_sha256": "e1d3dfefa3a241a885325ee3de7e1990b46520da1ed0fddc85713f45651820dd",
+      "arc_id": "d3-arc24-000",
+      "method": "full_history",
+      "observed": "User asked to update coffee preference to flat white. Actual set_preference used key coffee_preference; original coffee remained oat latte and a new coffee_preference row was created. Tool returned ok; final assistant claimed update. Native checker failed.",
+      "expected": "Existing coffee preference row changes to requested value under original native world/checker.",
+      "competing_explanations": [
+        "Model mapped the natural-language phrase coffee preference to a newly synthesized compound key",
+        "Native string-key interface does not enumerate canonical keys, and no existing key was first read; target discovery/validation contract is underspecified to this request"
+      ],
+      "confounds": [
+        "Single first-table trajectory from a fixed public generator",
+        "FullHistory and other system contracts have different tool catalogs/materials",
+        "Tool success confirms actual insertion, not satisfaction of the user intent"
+      ],
+      "minimal_next_experiment": "Finish frozen paired system matrix unchanged, then judge U3-O scope using all observed failures and actual reference availability.",
+      "decision": "Continue unchanged native main comparison; preserve failure, side effect and cost. No repair or retry in this matrix."
+    },
+    {
+      "observation_id": "label-repetition-offline-replay-verification",
+      "private_evidence_sha256": "bd2fdc1dd8691b7e458e420caf348f537355708c9fbcc00c5f723fa854fa8eb4",
+      "status": "ROOT_RECEIPT_AND_EVIDENCE_HASHES_VERIFIED"
+    },
+    {
+      "observation_id": "mem0-absolute-date-formation-failure",
+      "private_evidence_sha256": "7d42181831f56a6636b65d16b991091137fd295739938b07ac53e87d6f10c19c",
+      "status": "NATIVE_DEPENDENT_TASK_FAILED",
+      "arc": "d3-arc26-000",
+      "episode": 2,
+      "method": "mem0_native",
+      "observed": "Original Friday was expanded during first real Mem0 extraction into Friday, September 25, 2026; the actual record persisted, was retrieved after the location update, appeared in Host HTTP, and became create_event.day. Native exact weekday checker failed; time and current location matched.",
+      "expected": "Carry the original day/time and current location through formation, update evidence and action without unsupported date specificity; original native checker expects Friday.",
+      "first_breakpoint": "MEMORY_CONTENT: first ADD extraction at trace line21 introduces an absolute date absent from source conversation.",
+      "competing_explanations": [
+        "Pinned native ADD prompt instructs temporal grounding against Observation Date and model chooses a specific previous Friday.",
+        "Host treats the derived date as business argument truth and copies it; strict native day format also rejects expanded strings.",
+        "Native checker exactness contributes to the numeric score, but the source-to-record addition is independently observed and not merely a final capitalization change."
+      ],
+      "repair_candidates": [
+        "Do not rewrite pinned Mem0 prompts or normalize weekday arguments during this comparison. A separate temporal-grounding diagnostic could distinguish source uncertainty from canonical business day format."
+      ],
+      "confounds": [
+        "Native SDK date grounding is part of this pin/system contract; observation date derives from actual execution date, and other-day reproduction may differ.",
+        "Formation and Host consumption differ across systems; no pure retrieval ablation."
+      ],
+      "minimal_next_experiment": "Retain source-to-record-to-request evidence and frozen score; no rerun for this failure.",
+      "decision": "Continue original scoring/reporting, no candidate patch.",
+      "cost": "Included in corresponding full lifecycle run; no additional model calls for diagnosis."
+    },
+    {
+      "observation_id": "mem0-other-native-failures",
+      "private_evidence_sha256": "dd785219b5077eba020fc2de0694c32ccc110f9ca885c53a30cec4805a4674a5",
+      "status": "NATIVE_FAILURES_PRESERVED",
+      "decision": "No replacement/normalization/retry; exact same failure categories explained in shared analysis.",
+      "cost": "Included in full arc receipts; zero diagnostic calls."
+    },
+    {
+      "observation_id": "mem0-refund-policy-native-failure",
+      "private_evidence_sha256": "c9ad04c7ae82504537c068fe42e2959be18deedecfdca8dc22b9e91b3098881c",
+      "status": "NATIVE_TASK_FAILED_WITH_POLICY_CONFLICT_DIAGNOSTIC",
+      "arc": "arc15-000",
+      "episode": 3,
+      "method": "mem0_native",
+      "observed": "Actual get_order returned 11500 cents/delivered; get_policy returned max_refund_without_approval_cents=10000. Host requested approval/clarification and made no refund call.",
+      "expected": "Original generated I_refund task/checker requires the full order amount to be refunded.",
+      "first_breakpoint": "ACTION_SELECTION: Host withholds refund after reading real policy, so native world condition is unmet.",
+      "competing_explanations": [
+        "Model applies the policy threshold to an action requiring approval; this is a policy-versus-native-goal ambiguity, not absent order information.",
+        "Model introduces clarification beyond the benchmark action contract; unchanged native score correctly reports that the requested world effect did not occur."
+      ],
+      "repair_candidates": [
+        "No gold-driven forced refund, policy removal or scorer adjustment. Keep the native failure and separately report policy conflict."
+      ],
+      "confounds": [
+        "Native policy availability is common, but trajectories/tool choices differ; no isolated memory mechanism effect."
+      ],
+      "minimal_next_experiment": "No repeat required for this observation; finish frozen comparison.",
+      "decision": "Continue unchanged; do not relabel the native result.",
+      "cost": "Included in arc15 complete lifecycle ledger delta; offline diagnosis adds no model call."
+    },
+    {
+      "observation_id": "memsyco-consumption-and-judge-boundary-diagnostic",
+      "private_evidence_sha256": "c62180d997cf69453ff9e7ce123877bced4c7c359cf28cbab8de704db80e2e2c",
+      "status": "POST_SCORE_DIAGNOSTIC_NOT_NEW_EVALUATION",
+      "observed": "All persisted records were delivered in these examples. Scope case contains both group needs and personal preference; response still prioritizes personal mode under native Judge. Temporal case includes explicit evolved/current preference yet recommendation leans older style. Recommendation question does not give a concrete option list even to RawDialogue; ordinary asks for options while other methods offer titles.",
+      "expected": "Follow native task scope/current preference and give the recommendation judged by the frozen rubric.",
+      "first_breakpoint": "Actual first semantic cause remains UNKNOWN for the aggregate; completed reader outputs receive native Judge failure. Present evidence rules out omission of already persisted records in these selected examples.",
+      "competing_explanations": [
+        "Condensation and system-carried memory change emphasis/salience, with reader overapplying older or personal preferences despite legal current/context evidence being present.",
+        "Formation may omit conversational qualifications even when the surviving records all arrive; fixed-bank presentation versus formation must be separated.",
+        "Same-family Judge interpretation and underspecified option questions may contribute; no independent adjudicator or rerun is available in this table."
+      ],
+      "repair_candidates": [
+        "If selected under U4, compare a single presentation variable with identical actual bank/content/reader/budget; do not invent retrieval loss or add a selector automatically."
+      ],
+      "confounds": [
+        "No causal presentation ablation yet; examples are selected after exposure; same model family supplies Host and Judge."
+      ],
+      "minimal_next_experiment": "Publish full table and choose one bounded mechanism diagnostic under an independent identity, with reverse controls and no feedback into these scores.",
+      "decision": "Reject stable ordinary advantage for this development slice; continue evidence-driven plan without changing native scores.",
+      "cost": "Offline analysis only; all original execution/Judge costs retained.",
+      "selection": "Three exposed illustrative ordinary failures: scope interpretation, temporal preference, and absent explicit recommendation options. Not a new performance subset."
+    },
+    {
+      "observation_id": "offline-capacity-counter-aggregation-correction",
+      "private_evidence_sha256": "5b397308eb34c93c6a68136491212b28654afaeaaba3384bbbecccc09b20f62c",
+      "status": "ROOT_OFFLINE_AGGREGATOR_ASSUMPTION_CORRECTED",
+      "observed": "Initial sum included both shared public-message generation counters and history_summary single-attempt flags.",
+      "competing_explanations": [
+        "Actual overcounted model requests or lost ledger usage.",
+        "Auxiliary attempt markers were mistaken for disjoint generation counters; source semantics and trace reconciliation support this."
+      ],
+      "correction": "Exclude auxiliary attempt flags from additive generation count; retain/check them separately.",
+      "real_calls_repeated": 0
+    },
+    {
+      "observation_id": "offline-turn-schema-aggregation-correction",
+      "private_evidence_sha256": "1cce083d03584d6a872e82a0e0e2634c7d4b35b624319ac2adfe6398c32d37e3",
+      "status": "ROOT_OFFLINE_AGGREGATION_SCHEMA_CORRECTION",
+      "effect": "Offline assembly only; original scores, frozen statistics, model calls, ledger and source unchanged.",
+      "correction": "Report backend count only when native backend receipt exists; ordinary records remain in actual per-episode counts. Do not invent backend zero from absent field.",
+      "additional_model_calls": 0
+    },
+    {
+      "observation_id": "ordinary-d1-thousands-format-native-failures",
+      "private_evidence_sha256": "16a1ebb8914dbdb784257ebec418df6c5d20abb7e353a5cd2f5c4bb98285b42c",
+      "status": "DIAGNOSTIC_ONLY_NATIVE_SCORES_UNCHANGED",
+      "observed": "Four completed ordinary episodes failed original check_message_sent because expected ungrouped amount digits were written with thousands separators in the actual sent message.",
+      "expected": "Original checker requires contiguous must_contain substring for the customer; natural-language request states the agreed cents amount.",
+      "first_breakpoint": "EVALUATION/ANSWER_FORMAT boundary: actual sent text retains numeric value but not native exact substring.",
+      "competing_explanations": [
+        "This is a formatting-sensitive native checker rejection rather than lost amount information.",
+        "Under the original exact-text benchmark contract the generated message is still noncompliant; semantic equivalence is not permission to replace native score."
+      ],
+      "repair_candidates": [
+        "No runtime/scorer repair in this matrix. Retain native false and separately describe numeric formatting diagnostic."
+      ],
+      "confounds": [
+        "Four episodes share two generated arcs and one renderer/system; not four independent source families."
+      ],
+      "minimal_next_experiment": "No rerun for formatting. Include original scores and diagnostic limitation in first table.",
+      "decision": "Continue frozen main; preserve official scoring, no normalized score substituted."
+    },
+    {
+      "observation_id": "ordinary-d3-coffee-key-failure",
+      "private_evidence_sha256": "383fd9cfa00fa687737f5140fbe9b6ce729288972c994cdce5d8f23196392e3a",
+      "status": "NATIVE_TASK_FAILED",
+      "arc": "d3-arc24-000",
+      "episode": 2,
+      "method": "ordinary_milai",
+      "observed": "Same actual coffee_preference key construction as FullHistory and rolling summary, with canonical coffee row unchanged.",
+      "first_breakpoint": "TOOL_ARGUMENT: canonical business key was not discovered or selected.",
+      "competing_explanations": [
+        "Natural phrase leads to composed coffee_preference key.",
+        "Original free-string tool schema does not list existing keys; no prior real canonical-key observation in legal context."
+      ],
+      "repair_candidates": [
+        "Separate lawful key discovery/selection diagnostic if U3-O gate selected; no gold-backed refs or silent key rewrite."
+      ],
+      "confounds": [
+        "Different tool catalogs and natural histories; not a clean memory-component comparison."
+      ],
+      "minimal_next_experiment": "Complete frozen matrix first; retain original tools/world/checker.",
+      "decision": "Continue unchanged; failure retained.",
+      "cost": "Included in full arc; no diagnostic model calls.",
+      "shared_analysis": "full-history-d3-arc24-key-failure.json"
+    },
+    {
+      "observation_id": "ordinary-d3-email-case-native-failures",
+      "private_evidence_sha256": "ab1ed7ae18eeabca58aff646b6932eee686c4208d5823fdb667ef39aca10d8e7",
+      "status": "DIAGNOSTIC_ONLY_NATIVE_SCORES_UNCHANGED",
+      "observed": "Three independent-email episode results failed case-sensitive native substring checking; actual email bodies capitalized the requested initial lowercase p.",
+      "expected": "Send the requested phrase; original check_email_sent is case-sensitive.",
+      "first_breakpoint": "TOOL_ARGUMENT/ANSWER_FORMAT at send_email body, before unchanged native checker.",
+      "competing_explanations": [
+        "Host stylistic sentence capitalization changed exact requested bytes despite preserving the reminder content.",
+        "Strict benchmark treats this variation as noncompliance; no evidence of memory retrieval failure."
+      ],
+      "repair_candidates": [
+        "No normalization or scorer patch; keep precise native failure and separate content diagnostic."
+      ],
+      "confounds": [
+        "Three correlated generated episodes in two arcs, not independent task families."
+      ],
+      "minimal_next_experiment": "No rerun for capitalization; retain original score and report boundary.",
+      "decision": "Continue unchanged matrix.",
+      "cost": "Included in corresponding full-arc ledger deltas; no extra model call for this offline diagnosis."
+    }
+  ],
+  "limits": "UNKNOWN labels are not a diagnosed root cause. Native Judge failures retain single-attempt original labels; grouped observations do not change scores."
+}

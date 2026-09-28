@@ -1,0 +1,139 @@
+{
+  "status": "READ_ONLY_DIAGNOSIS_COMPLETE_SOURCE_FROZEN",
+  "head": "e6df2f5d914c3ea2f08ce34f0887749e6f0c30dc",
+  "method_source": "795725a2 (per Root frozen identity; inspected source hashes match execution manifest)",
+  "source_sha256": {
+    "src/milai_lab/methods/memory_boundaries.py": "c84a44be07a3578b3a1b5f00a0a091ed8840b43c303d14acfa2340a8bd664924",
+    "src/milai_lab/methods/request_context.py": "d0ae47a3f0e2c82d8372e67f023f10b6fb8324d087781f324d0dcfadbd71055b",
+    "src/milai_lab/providers/langmem_chat.py": "882e183bd750a9de243f19140f57fdbdc198f56c834d80dad842bc665e43e97d",
+    "src/milai_lab/methods/local_state_attention/integration.py": "b4c054ca575b734cfc28eda4323ca5ea2397b768cc5c216672a7c206b9e5c4e9",
+    "src/milai_lab/baselines/langmem_agent.py": "57a9e20895b18a3b40699802838aa4812d56ee208fc7633375dd619a90164717",
+    "src/milai_lab/baselines/langmem_benchmark.py": "9946020c275d724f1a39be6c86e733cd379dca3db61537156d8dea99a9b8a70e"
+  },
+  "coverage": {
+    "jobs": 3,
+    "invocations": [
+      662,
+      664,
+      666
+    ],
+    "requests": 41,
+    "accepted_AI_bodies": 38,
+    "provider_to_checkpoint_body_equality": true,
+    "exactly_one_program_prefix_per_delivered_assistant": true,
+    "repeat_projection_and_render_equal": true,
+    "original_graph_and_wire_unchanged": true,
+    "truncated_terminal_AI_not_committed": 3,
+    "checkpoint_read_mode": "sqlite mode=ro",
+    "comparison": "ordered locally serialized parsed request-message bytes; no original socket capture claim"
+  },
+  "first_breaks": [
+    {
+      "invocation": 662,
+      "generation": 5,
+      "trace_line": 62,
+      "generation_id": "chatcmpl-87c1085a1aacd34d",
+      "break": "first deploy(latest); later seven distinct real deploy proposals and terminal length at line139"
+    },
+    {
+      "invocation": 664,
+      "generation": 17,
+      "trace_line": 247,
+      "generation_id": "chatcmpl-b4bf5ad1807b188a",
+      "break": "fifth episode first generation length; 455 WORKING HYPOTHESIS"
+    },
+    {
+      "invocation": 666,
+      "generation": 12,
+      "trace_line": 177,
+      "generation_id": "chatcmpl-8fc8fc882f12be04",
+      "break": "reply length after actual deploy;372 ASSISTANT HISTORY"
+    }
+  ],
+  "conclusion": "Intended per-request copy labels plus model-emitted copies are observed. Original checkpoint pollution/repeated mutation is contradicted on inspected paths. Label imitation versus general decoding/termination causal effects remain unisolated.",
+  "candidate": "Future opt-in presentation candidate only: remove program-owned per-assistant content prefixes while preserving native roles/tool_calls/call IDs, one source-role contract and all current-task/durable/tool-observation/owner/history boundaries. Never strip real generated body, repair parameters, deduplicate business calls or retry here.",
+  "candidate_implemented": false,
+  "experiment_parameters_selected": false,
+  "Root_observations_sha256": {
+    "662-ordinary-action-loop-truncation.json": "11c59be5575eb0c30d1d26149229b16a3a8631a8de0bd8118c4a42e93be136b7",
+    "664-ordinary-label-repetition.json": "f44b9cc4d719a8cb3bb8a14f9298336d6147b15a168c50e6ca8e4cb45063b50e",
+    "666-ordinary-label-repetition.json": "9a0de4d8930c85c84b4314bfe2d2c2461d79f7e6aaf4cbc1b46179d8db16264f"
+  },
+  "job_evidence_sha256": {
+    "d2-arc18-000": {
+      "trace.jsonl": "c604644ec7feeacf3af011d447a085877e89c0499f67ff1149f48cbe610c44ba",
+      "checkpoints.sqlite": "d051e4de9ef80a771bdb229d5c8e89138ca1ca753bd42ab7161d2c5c2d3f53d9",
+      "business-journal.json": "d005b96d9a97cf09f8bd57720ebc5b92f57cb2dcb91e46c6476662b04e401b2e",
+      "interruption.json": "8b701db977aa87eabb831cf45e6bb9a986ed89c7492d20874653bf0d68c424b2"
+    },
+    "d2-arc20-000": {
+      "trace.jsonl": "2eda936a371058cfe615980dd7228dfa0b4886d3e1cbadeb07dfe1ef51b7ca49",
+      "checkpoints.sqlite": "4888a85e8b65d61ccb25a6944a5dff36e72838823fb93d5c7639786526f4baf2",
+      "business-journal.json": "00cda8110951262d4ec3dc890b197eb0ccc12dbe64df71aa232bef6143a6acd3",
+      "interruption.json": "8a79a06c90b702a8caa762ca483dea07be7cee1ea08a42f7c726f6947433e0cc"
+    },
+    "d2-arc22-000": {
+      "trace.jsonl": "e2b63e8f45f76844c248a40e1e3261b5ff2ffb5d09f72763541369ee121afd58",
+      "checkpoints.sqlite": "63f50615442f06f4c83a0eb602820e282af2423c5b703ecd805b0cdafe326e1f",
+      "business-journal.json": "0c98babced32c4611d75ce09293a5a79b057d437460f9ecaf33ce1821bfd59b5",
+      "interruption.json": "d48fa1056e4e0609e161a5f4d3be94976b7505e741d2a8591a496ba0d126adb7"
+    }
+  },
+  "artifacts": {
+    "replay_projection.py": {
+      "sha256": "e04aeea75f59d3b98e3eac7ca1d91d59092d76bdf43ef9d1f77eac5c7557a62c",
+      "bytes": 10197
+    },
+    "replay.log": {
+      "sha256": "3fb25cf138c879d647c5380628847163b3dc419cae68b75d553988f8e48f882f",
+      "bytes": 922
+    },
+    "replay-initial.log": {
+      "sha256": "3fb25cf138c879d647c5380628847163b3dc419cae68b75d553988f8e48f882f",
+      "bytes": 922
+    },
+    "replay-final.log": {
+      "sha256": "1eaed7800c146407c33825888fc62149fea2e8648c9abae1d10464ec413b122e",
+      "bytes": 1380
+    },
+    "projection-replay.json": {
+      "sha256": "1d921e30f3a57da8ffd990262e37c72694170de328fdc3f480e9cb90660a884b",
+      "bytes": 288259
+    },
+    "diagnosis.md": {
+      "sha256": "89d2575114e2b876ccf884873f3448738a2b6e7980ddbd3f4404224b9213e0f1",
+      "bytes": 7581
+    }
+  },
+  "calls": {
+    "Host": 0,
+    "embedding": 0,
+    "Judge": 0,
+    "MCP": 0,
+    "shared_Postgres": 0
+  },
+  "not_run": [
+    "pytest",
+    "build",
+    "experiment rerun/resume",
+    "service changes",
+    "Git mutation"
+  ],
+  "source_config_tests_frozen_files_edited": false,
+  "limitations": [
+    "Three inspected failures are not causal effect evaluation.",
+    "662 first action error predates large repeated text; presentation-only candidate cannot be claimed to repair it.",
+    "Original native scores/failed and unstarted episode denominators remain unchanged."
+  ],
+  "background_check_processes": "all helper exec sessions completed; no own remaining session",
+  "private_receipt_sha256": "3002cdefbe4f58758cd35fdea7bb227567a2543503ebe0fca512a17c461c6125",
+  "root_verification": {
+    "status": "ROOT_RECEIPT_AND_EVIDENCE_HASHES_VERIFIED",
+    "receipt_sha256": "3002cdefbe4f58758cd35fdea7bb227567a2543503ebe0fca512a17c461c6125",
+    "source_files": 6,
+    "artifact_files": 6,
+    "job_evidence_files": 12,
+    "tests_rerun": false,
+    "model_calls": 0
+  }
+}
