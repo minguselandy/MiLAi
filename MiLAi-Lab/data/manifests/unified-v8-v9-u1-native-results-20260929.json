@@ -1,0 +1,3483 @@
+{
+  "kind": "UNIFIED_U1_NATIVE_RESULTS",
+  "status": "COMPLETE_FUNCTIONAL_SMOKE",
+  "created_at_utc": "2026-09-28T18:03:06.016509+00:00",
+  "source_commit": "aa7a25ed203cc9b3a93801d7ac00ae7bfa255c83",
+  "execution_commit": "94d3b18ef6b8c1dfd6019703df8e84163628c360",
+  "execution_freeze_sha256": "d433cd562df0f0a080474792f65978a64a5cd5b26c6b1fd405ca7022023b96c3",
+  "answer_batch_sha256": "2542f7dcaa9827a628edd2c109cd941ef3e260b7f1f8d307b9832fae1ba5a524",
+  "host_jobs_planned": 36,
+  "host_jobs_completed": 36,
+  "judge_answers_planned": 18,
+  "runs": {
+    "memsyco-raw_dialogue": {
+      "rows": [
+        {
+          "ordinal": 1,
+          "id": "mso_hard_000072",
+          "invocation_sha256": "d6f181396e2a4891689479adc7cece6398fe743e8516f579ef90d9ce4075f162",
+          "result_sha256": "094e0d82a016d88d17fada343fdc3755ad589c0bb1470c18ec08f73127a2930e",
+          "trace_sha256": "fb48314814df67e439ebe7477faeaf05ccfb79878fec04d76e9f39260a3b29fe",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 1735,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 1735,
+            "input_tokens": 979,
+            "output_tokens": 756,
+            "generation_wall_seconds": 5.47490102192387
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "contextual_scope_control",
+          "status": "COMPLETED",
+          "answer_text_sha256": "21b726f28a1a382cf64e9b9eb712072e989d90c7d5f320f0823ab2cd86359a2d",
+          "score_sha256": "d3b4f4a6e64b5c43b62e1bb3524a675b7ec32b408db783c55efd326ae6882616",
+          "score": {
+            "question_id": "mso_hard_000072",
+            "arm": "raw_dialogue",
+            "answer_sha256": "b66785c0633921161f3642bc58ac78bfff718f9de60311c645193dec13db5c2c",
+            "groups": {
+              "track": "contextual_scope_control",
+              "subtype": "implicit_partial_scope_conflict"
+            },
+            "status": "SCORED",
+            "success": false,
+            "accuracy": 0,
+            "incorrectly_used_preference": 1,
+            "scope_pass": false,
+            "success_definition": "scope_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null,
+            "judge_warning": null
+          }
+        },
+        {
+          "ordinal": 2,
+          "id": "mso_hard_000024",
+          "invocation_sha256": "39aaa21b581c4b037a030bccfdbc6ecc7593d07f14710f2c0491011ba8269850",
+          "result_sha256": "b08e69c3cf06da7fe3bce86199264c0d1678dd71b53bb0ad382bd44c2fe1644c",
+          "trace_sha256": "e4916209c5297642e5d06cc61c0cfa84952620ab9f8c16e02e2d5f738bf240b1",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 1594,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 1594,
+            "input_tokens": 977,
+            "output_tokens": 617,
+            "generation_wall_seconds": 5.016538416966796
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "contextual_scope_control",
+          "status": "COMPLETED",
+          "answer_text_sha256": "f8ccbb88a2a69eafd5a9331ddb099d789c18b5c1d7604786ee9d1f8903678d06",
+          "score_sha256": "43665bf5fd9fbd67336ad20b70cf1ff9eea7137373d77614a92999d6395c9a9d",
+          "score": {
+            "question_id": "mso_hard_000024",
+            "arm": "raw_dialogue",
+            "answer_sha256": "e3d60dd61cc05bc16041f5b697fa7ee365004858d8aa342ae98984921fa6bf1b",
+            "groups": {
+              "track": "contextual_scope_control",
+              "subtype": "implicit_partial_scope_conflict"
+            },
+            "status": "SCORED",
+            "success": true,
+            "accuracy": 1,
+            "incorrectly_used_preference": 0,
+            "scope_pass": true,
+            "success_definition": "scope_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null,
+            "judge_warning": null
+          }
+        },
+        {
+          "ordinal": 3,
+          "id": "v11_000865",
+          "invocation_sha256": "277ffdbe77e77045d877d281418029c5797de20b9a1b317d5b7cf17cc6be31fd",
+          "result_sha256": "b157933aa8335a5c963b5503bad1785959f7852d4eee07180b7abd74e4031342",
+          "trace_sha256": "c4cd9b38705062fdca514a2c0acf037d22ce57728c93034b4d7e21a484c5c6ea",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 2530,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 2530,
+            "input_tokens": 1763,
+            "output_tokens": 767,
+            "generation_wall_seconds": 5.059812125284225
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "valid_memory_selection",
+          "status": "COMPLETED",
+          "answer_text_sha256": "3465758b1066384486ab4948cd67fdd74f6e17e8c624ec0a893c6f6b82d195af",
+          "score_sha256": "fc29f7517a92e4b45b6e486e4214b70dbfaa375c4e266c5dfafa6f62e2f3f770",
+          "score": {
+            "question_id": "v11_000865",
+            "arm": "raw_dialogue",
+            "answer_sha256": "798af4cc06fb57dc7e25ad5250593a0f879444ec5a72e63bc1355869ceafbd29",
+            "groups": {
+              "track": "valid_memory_selection",
+              "subtype": "reversal"
+            },
+            "status": "SCORED",
+            "success": true,
+            "uses_latest_preference": 1,
+            "outdated_preference_contamination": 0,
+            "valid_selection_pass": true,
+            "success_definition": "valid_selection_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          }
+        },
+        {
+          "ordinal": 4,
+          "id": "v11_000504",
+          "invocation_sha256": "318823437019faf885171227e1a8329666aff9567027ef631d51ea8faa15aec2",
+          "result_sha256": "1502ffa8bd4b436296bf40d6ebebcd434d86883fcb03d7fa4fff0891526aeb9a",
+          "trace_sha256": "f6bb1879da527405024f625dcb1760459de6eabe31b6c2602e84f8bdedbdda61",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 2678,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 2678,
+            "input_tokens": 1689,
+            "output_tokens": 989,
+            "generation_wall_seconds": 6.426953758113086
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "valid_memory_selection",
+          "status": "COMPLETED",
+          "answer_text_sha256": "1cbf48b4c6dbb34cce9f456e1786233a4fc331e40480da86bbc029725ef1ca10",
+          "score_sha256": "6bc4ed3999acdd4e2320d7cffa9282e7ee6a60d8269debd5503dc4ffc7aeb6d1",
+          "score": {
+            "question_id": "v11_000504",
+            "arm": "raw_dialogue",
+            "answer_sha256": "77c5659232b62b6ae3a129a27f395d1c3a996eb600db91cddabbb18efd24edcb",
+            "groups": {
+              "track": "valid_memory_selection",
+              "subtype": "reversal"
+            },
+            "status": "SCORED",
+            "success": false,
+            "uses_latest_preference": 0,
+            "outdated_preference_contamination": 1,
+            "valid_selection_pass": false,
+            "success_definition": "valid_selection_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          }
+        },
+        {
+          "ordinal": 5,
+          "id": "rec_gen_0021",
+          "invocation_sha256": "1b30d04d8273d3e55a629e2e05e5cb96933fcf7a8442ae75e7ad0416732ccfce",
+          "result_sha256": "b2b252eddcc2c6d71eaa13d00f4ee0ef6dc6f757beadfbd1c2c68233d0db53b6",
+          "trace_sha256": "d6b8fe652b7ffa853a4e95591869914d3d48c6b52f058f18d639a4680ed9f70e",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 481,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 481,
+            "input_tokens": 285,
+            "output_tokens": 196,
+            "generation_wall_seconds": 1.4199638268910348
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "personalized_memory_use",
+          "status": "COMPLETED",
+          "answer_text_sha256": "9177cb9b098c1f6fe08623d927dd3dcc38beb7c5a622e60b938e57db5d5065a9",
+          "score_sha256": "b1458f88c2f88e690f873c92717c15e40ff7042ee36ef0bf2142cf8debd4575a",
+          "score": {
+            "question_id": "rec_gen_0021",
+            "arm": "raw_dialogue",
+            "answer_sha256": "e5f39f66e9ce3d635318a52f8359d87a0b09ee21635cfc6584e0079f25818c82",
+            "groups": {
+              "track": "personalized_memory_use",
+              "subtype": "direct_preference_aligned_recommendation"
+            },
+            "status": "SCORED",
+            "success": true,
+            "answer_accuracy": 1,
+            "preference_used": 1,
+            "memory_use_pass": true,
+            "success_definition": "memory_use_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          }
+        },
+        {
+          "ordinal": 6,
+          "id": "rec_gen_0017",
+          "invocation_sha256": "cd229694c48cf309ff2f7044941d00173be38a2d564aba97aec665a99c566fcf",
+          "result_sha256": "73837d018f246833b7a9efb2ff168f78eb4db39cd840b2574a718f7ab85a4149",
+          "trace_sha256": "d5f3bf3f9b2d709f447a3e5bfec740236c88799286e43cdcb0f715ddeea6aa67",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 978,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 978,
+            "input_tokens": 291,
+            "output_tokens": 687,
+            "generation_wall_seconds": 4.373515216168016
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "personalized_memory_use",
+          "status": "COMPLETED",
+          "answer_text_sha256": "9d44d8e752d9a0afb5f16a297c1378ee80545ab1f45e2649e78cc549865024fb",
+          "score_sha256": "80afd6b72b2ebc101d8a547fce230883e4e4086b5ae441c829ee0cf57c0548c1",
+          "score": {
+            "question_id": "rec_gen_0017",
+            "arm": "raw_dialogue",
+            "answer_sha256": "e6b5ad95862d3ae1d6acd339065f46040c593e88c702d8b969c25ba2b8e8c798",
+            "groups": {
+              "track": "personalized_memory_use",
+              "subtype": "fine_grained_preference_recommendation"
+            },
+            "status": "SCORED",
+            "success": true,
+            "answer_accuracy": 1,
+            "preference_used": 1,
+            "memory_use_pass": true,
+            "success_definition": "memory_use_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 6,
+        "generation_tokens": 9996,
+        "embedding_tokens": 0
+      },
+      "trace_usage": {
+        "generation_calls": 6,
+        "generation_tokens": 9996,
+        "input_tokens": 5984,
+        "output_tokens": 4012,
+        "generation_wall_seconds": 27.771684365347028
+      },
+      "roles": {
+        "reader": {
+          "requests": 6,
+          "known_tokens": 9996,
+          "unknown_usage": 0
+        }
+      },
+      "host_mcp_tool_results": {}
+    },
+    "memsyco-milai": {
+      "rows": [
+        {
+          "ordinal": 7,
+          "id": "mso_hard_000072",
+          "invocation_sha256": "391f6d8c18a659e15ed473b35df86dac2a9c76674db4315ea3ee922177d576c7",
+          "result_sha256": "468782a56350dbc139d1665561b3c4be5cde074a16afa54d93b25a7626ef37c1",
+          "trace_sha256": "907bac8d02bf1ed23a37f3e609f87e2612e85dcd6d66341b7f756f0457223b9b",
+          "cost": {
+            "generation_calls": 3,
+            "generation_tokens": 5815,
+            "embedding_tokens": 206
+          },
+          "trace_usage": {
+            "generation_calls": 3,
+            "generation_tokens": 5815,
+            "input_tokens": 4953,
+            "output_tokens": 862,
+            "generation_wall_seconds": 6.124442685395479,
+            "embedding_calls": 3,
+            "embedding_tokens": 206,
+            "embedding_wall_seconds": 0.5105048688128591
+          },
+          "host_mcp_tool_results": {
+            "manage_memory": 2
+          },
+          "host_memory_operation_statuses": {
+            "created": 2
+          },
+          "track": "contextual_scope_control",
+          "status": "COMPLETED",
+          "answer_text_sha256": "560c8f6d76da2f44e19584f1d36f41a917609af3fe885865d457de2375783fbf",
+          "score_sha256": "a61ad8745b58b012f859fb384281380e2b29a12fa34ce322e8ebb80b1a873de4",
+          "score": {
+            "question_id": "mso_hard_000072",
+            "arm": "milai",
+            "answer_sha256": "fc5e60a2414151a0c3ab768ce7e4dedd5e2f698ce0ab698a8ae92cc98734876d",
+            "groups": {
+              "track": "contextual_scope_control",
+              "subtype": "implicit_partial_scope_conflict"
+            },
+            "status": "SCORED",
+            "success": false,
+            "accuracy": 0,
+            "incorrectly_used_preference": 1,
+            "scope_pass": false,
+            "success_definition": "scope_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null,
+            "judge_warning": null
+          },
+          "formed_records": 2,
+          "delivered_records": 2,
+          "omitted_records": 0,
+          "read_preserved_formation": true
+        },
+        {
+          "ordinal": 8,
+          "id": "mso_hard_000024",
+          "invocation_sha256": "fa298512f98975a6eb245331a491ecb05aaa2834e910138bb03929003122fa5c",
+          "result_sha256": "3d51025ea893b221e6e9bfe237789d3c2fe0747d6cf8e48d2bd31d4955d3a5eb",
+          "trace_sha256": "cf04975d5b062d0204c8c3dc753ee0d222f6899b6a51fd378a757821f8d8b75b",
+          "cost": {
+            "generation_calls": 3,
+            "generation_tokens": 6241,
+            "embedding_tokens": 347
+          },
+          "trace_usage": {
+            "generation_calls": 3,
+            "generation_tokens": 6241,
+            "input_tokens": 5338,
+            "output_tokens": 903,
+            "generation_wall_seconds": 6.4997867261990905,
+            "embedding_calls": 5,
+            "embedding_tokens": 347,
+            "embedding_wall_seconds": 0.2620441005565226
+          },
+          "host_mcp_tool_results": {
+            "manage_memory": 4
+          },
+          "host_memory_operation_statuses": {
+            "created": 4
+          },
+          "track": "contextual_scope_control",
+          "status": "COMPLETED",
+          "answer_text_sha256": "762b69285856b67dede4171025093eaa1aafc015b2711532b86dd52a61af6e05",
+          "score_sha256": "3f4e80b0dfd03db25a88b11a6f61fe213c965ae546869b324f0a5ca3ce7c8d6c",
+          "score": {
+            "question_id": "mso_hard_000024",
+            "arm": "milai",
+            "answer_sha256": "affe6caa07042e1ff13b6bf1a4a7830504788fbbe81127bb602417b819296fce",
+            "groups": {
+              "track": "contextual_scope_control",
+              "subtype": "implicit_partial_scope_conflict"
+            },
+            "status": "SCORED",
+            "success": true,
+            "accuracy": 1,
+            "incorrectly_used_preference": 0,
+            "scope_pass": true,
+            "success_definition": "scope_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null,
+            "judge_warning": null
+          },
+          "formed_records": 4,
+          "delivered_records": 4,
+          "omitted_records": 0,
+          "read_preserved_formation": true
+        },
+        {
+          "ordinal": 9,
+          "id": "v11_000865",
+          "invocation_sha256": "589958f6e16570cfc6111a5c99a11812f33fe8a82647e784b48d3847ec502320",
+          "result_sha256": "228b9937b0bd44cd9a65963a73ea655249e215666bb3e21892ec9611be55ea04",
+          "trace_sha256": "4811a7d2e0c0d5f87d2e7ce2808cd395f5317e658dff02ac3c7e436bbc57f19c",
+          "cost": {
+            "generation_calls": 3,
+            "generation_tokens": 8446,
+            "embedding_tokens": 250
+          },
+          "trace_usage": {
+            "generation_calls": 3,
+            "generation_tokens": 8446,
+            "input_tokens": 7093,
+            "output_tokens": 1353,
+            "generation_wall_seconds": 9.393169631250203,
+            "embedding_calls": 6,
+            "embedding_tokens": 250,
+            "embedding_wall_seconds": 0.2110497415997088
+          },
+          "host_mcp_tool_results": {
+            "manage_memory": 5
+          },
+          "host_memory_operation_statuses": {
+            "created": 5
+          },
+          "track": "valid_memory_selection",
+          "status": "COMPLETED",
+          "answer_text_sha256": "8cbf852f20f55be94a3d6abea43d074a0db50fa7619c9b3281710e485a14a9b7",
+          "score_sha256": "f9925b47875bf734216205521b9d499ce9377d4a6e9e741677ff883ee8729082",
+          "score": {
+            "question_id": "v11_000865",
+            "arm": "milai",
+            "answer_sha256": "9cdd86be29fdfdbda48287cfe1c1657db2630feaf8565e4fbbf779f1d17ca463",
+            "groups": {
+              "track": "valid_memory_selection",
+              "subtype": "reversal"
+            },
+            "status": "SCORED",
+            "success": true,
+            "uses_latest_preference": 1,
+            "outdated_preference_contamination": 0,
+            "valid_selection_pass": true,
+            "success_definition": "valid_selection_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          },
+          "formed_records": 5,
+          "delivered_records": 5,
+          "omitted_records": 0,
+          "read_preserved_formation": true
+        },
+        {
+          "ordinal": 10,
+          "id": "v11_000504",
+          "invocation_sha256": "64d7acb30ba4271d336ea2b2e1ee5e379ae69536e9f71cf14615366bf5189695",
+          "result_sha256": "d645621b79237f61df401de3320db1a644f57cd2818a47b4216af7e0eb44a304",
+          "trace_sha256": "72919e28ea9f423081e463caac5f7e577d8c1ab4026016d276c0b751ea756dcf",
+          "cost": {
+            "generation_calls": 3,
+            "generation_tokens": 8664,
+            "embedding_tokens": 306
+          },
+          "trace_usage": {
+            "generation_calls": 3,
+            "generation_tokens": 8664,
+            "input_tokens": 7208,
+            "output_tokens": 1456,
+            "generation_wall_seconds": 10.055783499963582,
+            "embedding_calls": 6,
+            "embedding_tokens": 306,
+            "embedding_wall_seconds": 0.19441080885007977
+          },
+          "host_mcp_tool_results": {
+            "manage_memory": 5
+          },
+          "host_memory_operation_statuses": {
+            "created": 5
+          },
+          "track": "valid_memory_selection",
+          "status": "COMPLETED",
+          "answer_text_sha256": "fec03a4dff804ffefef2882c0ce1828a10ac022bab33a4ee17bbf2257e7440a9",
+          "score_sha256": "3b1712ae2e7feb137e7149559c26650785ba8ceb260df33752d1c2d6c6665862",
+          "score": {
+            "question_id": "v11_000504",
+            "arm": "milai",
+            "answer_sha256": "46e2586d7f882a3dc548c8f0bf88d43b622f5be4cae54b74d2d990fc719e3316",
+            "groups": {
+              "track": "valid_memory_selection",
+              "subtype": "reversal"
+            },
+            "status": "SCORED",
+            "success": true,
+            "uses_latest_preference": 1,
+            "outdated_preference_contamination": 0,
+            "valid_selection_pass": true,
+            "success_definition": "valid_selection_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          },
+          "formed_records": 5,
+          "delivered_records": 5,
+          "omitted_records": 0,
+          "read_preserved_formation": true
+        },
+        {
+          "ordinal": 11,
+          "id": "rec_gen_0021",
+          "invocation_sha256": "393bdf3df1cee2570d0010c23e7f0980e0a64751dee3e0a148ada5dfce8c13b6",
+          "result_sha256": "0465f12bb2d69155e769993d0dabb19194562fb2e70f0b25e019e835db5cb0fd",
+          "trace_sha256": "59dcb8cc73536930a1d9febfdedd08b9fd1199a67840fc0cae8c59ca33a5dc9e",
+          "cost": {
+            "generation_calls": 3,
+            "generation_tokens": 3113,
+            "embedding_tokens": 67
+          },
+          "trace_usage": {
+            "generation_calls": 3,
+            "generation_tokens": 3113,
+            "input_tokens": 2810,
+            "output_tokens": 303,
+            "generation_wall_seconds": 2.394942387007177,
+            "embedding_calls": 2,
+            "embedding_tokens": 67,
+            "embedding_wall_seconds": 0.07012443989515305
+          },
+          "host_mcp_tool_results": {
+            "manage_memory": 1
+          },
+          "host_memory_operation_statuses": {
+            "created": 1
+          },
+          "track": "personalized_memory_use",
+          "status": "COMPLETED",
+          "answer_text_sha256": "bc717c695a8fb82512da45a462d0b715afa97bcd46d3bc1b658484f1fa2ca56a",
+          "score_sha256": "7e1d1e87c4aaf4f51caa418e781562f8e8a7c6e2bdea8c6c05fc03d82e9376b7",
+          "score": {
+            "question_id": "rec_gen_0021",
+            "arm": "milai",
+            "answer_sha256": "cbea11c13e0398c57b2d6069af62fa87d5f5f079602072efff6bffdb624749ca",
+            "groups": {
+              "track": "personalized_memory_use",
+              "subtype": "direct_preference_aligned_recommendation"
+            },
+            "status": "SCORED",
+            "success": true,
+            "answer_accuracy": 1,
+            "preference_used": 1,
+            "memory_use_pass": true,
+            "success_definition": "memory_use_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          },
+          "formed_records": 1,
+          "delivered_records": 1,
+          "omitted_records": 0,
+          "read_preserved_formation": true
+        },
+        {
+          "ordinal": 12,
+          "id": "rec_gen_0017",
+          "invocation_sha256": "bd22fa523d512c349ec90f6683ec2244875585d4b98826bb7e1f817e55d23f13",
+          "result_sha256": "edeb294f583017893652021dc68c71e096727dbb5a9e723264f5da61fcb6c7a9",
+          "trace_sha256": "49d8f013afb8ff194f2bfe04bf8e6fd62bfc3a1098d30680ed9258886bb02410",
+          "cost": {
+            "generation_calls": 3,
+            "generation_tokens": 3472,
+            "embedding_tokens": 100
+          },
+          "trace_usage": {
+            "generation_calls": 3,
+            "generation_tokens": 3472,
+            "input_tokens": 2839,
+            "output_tokens": 633,
+            "generation_wall_seconds": 4.528310243040323,
+            "embedding_calls": 2,
+            "embedding_tokens": 100,
+            "embedding_wall_seconds": 0.07106492016464472
+          },
+          "host_mcp_tool_results": {
+            "manage_memory": 1
+          },
+          "host_memory_operation_statuses": {
+            "created": 1
+          },
+          "track": "personalized_memory_use",
+          "status": "COMPLETED",
+          "answer_text_sha256": "d8e4256759bb8cc19ba983ff215c1746972e3724a5e3974804c2c92d4e489535",
+          "score_sha256": "dea92f008292ebb9094995663678ad957cd311b5713e1eb092fcfc106c0c5c54",
+          "score": {
+            "question_id": "rec_gen_0017",
+            "arm": "milai",
+            "answer_sha256": "ee579764cc8a471e13f81f33da1e8e78e638a2bae06b5ae659c75e19a0ddaafb",
+            "groups": {
+              "track": "personalized_memory_use",
+              "subtype": "fine_grained_preference_recommendation"
+            },
+            "status": "SCORED",
+            "success": true,
+            "answer_accuracy": 1,
+            "preference_used": 1,
+            "memory_use_pass": true,
+            "success_definition": "memory_use_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          },
+          "formed_records": 1,
+          "delivered_records": 1,
+          "omitted_records": 0,
+          "read_preserved_formation": true
+        }
+      ],
+      "cost": {
+        "generation_calls": 18,
+        "generation_tokens": 35751,
+        "embedding_tokens": 1276
+      },
+      "trace_usage": {
+        "generation_calls": 18,
+        "generation_tokens": 35751,
+        "input_tokens": 30241,
+        "output_tokens": 5510,
+        "generation_wall_seconds": 38.996435172855854,
+        "embedding_calls": 24,
+        "embedding_tokens": 1276,
+        "embedding_wall_seconds": 1.319198879878968
+      },
+      "roles": {
+        "formation": {
+          "requests": 12,
+          "known_tokens": 30603,
+          "unknown_usage": 0
+        },
+        "embedding:formation": {
+          "requests": 18,
+          "known_tokens": 1132,
+          "unknown_usage": 0
+        },
+        "embedding:retrieval": {
+          "requests": 6,
+          "known_tokens": 144,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "requests": 6,
+          "known_tokens": 5148,
+          "unknown_usage": 0
+        }
+      },
+      "host_mcp_tool_results": {
+        "manage_memory": 18
+      }
+    },
+    "memsyco-milai_agent": {
+      "rows": [
+        {
+          "ordinal": 13,
+          "id": "mso_hard_000072",
+          "invocation_sha256": "199d04541d30889bc009eb9a3cc8158918ba6b8404c6a71aaf11dabe577db4c9",
+          "result_sha256": "30b3eb9fe61baa14612479bc4ddc78d774255d4f8ce972b8d858829961611cd3",
+          "trace_sha256": "a3953ae9ee64e57a7bd29e40ad8fd7be96ce03977470eb01bd0c0db0b4d70ff4",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 560,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 560,
+            "input_tokens": 451,
+            "output_tokens": 109,
+            "generation_wall_seconds": 0.8384737111628056
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "contextual_scope_control",
+          "status": "COMPLETED",
+          "answer_text_sha256": "4ac2123088f82293f5f405166c096d458bb066e2a71ba271fb90651e7b1bf9ed",
+          "score_sha256": "a084867eca9e5a0780f7e4732328f6cf5cc2cc1e861619877636a01e3b157dfd",
+          "score": {
+            "question_id": "mso_hard_000072",
+            "arm": "milai_agent",
+            "answer_sha256": "b41216c860ab8901b66c9c6c093b9cfc75e95b20e75330c9686a0213e4deeda8",
+            "groups": {
+              "track": "contextual_scope_control",
+              "subtype": "implicit_partial_scope_conflict"
+            },
+            "status": "SCORED",
+            "success": false,
+            "accuracy": 0,
+            "incorrectly_used_preference": 0,
+            "scope_pass": false,
+            "success_definition": "scope_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null,
+            "judge_warning": null
+          },
+          "formed_records": 2,
+          "query_snapshot_unchanged": true,
+          "tool_catalog_names": [
+            "search_memory",
+            "read_memory"
+          ]
+        },
+        {
+          "ordinal": 14,
+          "id": "mso_hard_000024",
+          "invocation_sha256": "53e7de7ef34fb2557f95a4ce33977b7481ba3ad0bc5405f05cbf334ddb2982be",
+          "result_sha256": "6fc375c9a2bb5072f50468626909c88246f010dcb68b8ec40d633c2284a5f009",
+          "trace_sha256": "b2e9f60e724511ffb7b7c3fd9b5cab8c9cf4167140b3c87f79deada3d7543512",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 568,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 568,
+            "input_tokens": 451,
+            "output_tokens": 117,
+            "generation_wall_seconds": 0.9087811699137092
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "contextual_scope_control",
+          "status": "COMPLETED",
+          "answer_text_sha256": "663eb742708e7a2e139de8c490e910afcccdf486c975db50aeccd6311116c2ed",
+          "score_sha256": "b0239d2029a9a5a802b392baca887d4abee1503fb58114bc39229798db690de9",
+          "score": {
+            "question_id": "mso_hard_000024",
+            "arm": "milai_agent",
+            "answer_sha256": "d14f8ca033cb56d9e876fe9c5f88788702252fbfc0528f444ea8ad7f9368c35f",
+            "groups": {
+              "track": "contextual_scope_control",
+              "subtype": "implicit_partial_scope_conflict"
+            },
+            "status": "SCORED",
+            "success": false,
+            "accuracy": 0,
+            "incorrectly_used_preference": 0,
+            "scope_pass": false,
+            "success_definition": "scope_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null,
+            "judge_warning": null
+          },
+          "formed_records": 4,
+          "query_snapshot_unchanged": true,
+          "tool_catalog_names": [
+            "search_memory",
+            "read_memory"
+          ]
+        },
+        {
+          "ordinal": 15,
+          "id": "v11_000865",
+          "invocation_sha256": "8fc737ddfc9a92cd8ba6d48b0e169e19db3f93040be4969b6b605ca9951cc2df",
+          "result_sha256": "e6af454f4753bfd1515d824da998cfb60db3ef58d4987a3c15318541006de37a",
+          "trace_sha256": "5f4e6259b072910fd26bb8deb5c57388229f526b36e70b94173fb695dd74fab8",
+          "cost": {
+            "generation_calls": 2,
+            "generation_tokens": 2556,
+            "embedding_tokens": 12
+          },
+          "trace_usage": {
+            "generation_calls": 2,
+            "generation_tokens": 2556,
+            "input_tokens": 2115,
+            "output_tokens": 441,
+            "generation_wall_seconds": 3.1349653997458518,
+            "embedding_calls": 1,
+            "embedding_tokens": 12,
+            "embedding_wall_seconds": 0.1041851881891489
+          },
+          "host_mcp_tool_results": {
+            "search_memory": 1
+          },
+          "host_memory_operation_statuses": {},
+          "track": "valid_memory_selection",
+          "status": "COMPLETED",
+          "answer_text_sha256": "cbe2b99483bb8ff4e89fd3cd4ad942dd4a5a56a06c605ff4d8a069b669efd867",
+          "score_sha256": "1e4c5b2738ea275f4fa862d4d23351ebc7463ceda247301e905e76c99da93607",
+          "score": {
+            "question_id": "v11_000865",
+            "arm": "milai_agent",
+            "answer_sha256": "2517fe23ae4442aafe63d20041736a87d3630b1ea40ada4c02a33d981ce24f7c",
+            "groups": {
+              "track": "valid_memory_selection",
+              "subtype": "reversal"
+            },
+            "status": "SCORED",
+            "success": true,
+            "uses_latest_preference": 1,
+            "outdated_preference_contamination": 0,
+            "valid_selection_pass": true,
+            "success_definition": "valid_selection_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          },
+          "formed_records": 5,
+          "query_snapshot_unchanged": true,
+          "tool_catalog_names": [
+            "search_memory",
+            "read_memory"
+          ]
+        },
+        {
+          "ordinal": 16,
+          "id": "v11_000504",
+          "invocation_sha256": "b46e5fea692679fe86135074d9d72855e5d560172cea6dc2570c1431c6e752ab",
+          "result_sha256": "5b5c28dc744b16b8eaa4a0eedfe8a3023e505304b10c6033d97ff6601e0aa183",
+          "trace_sha256": "8c1e617b1ce3d7a831c05a53d19a378586e94d595311b2abf55fc6d0c13dedec",
+          "cost": {
+            "generation_calls": 2,
+            "generation_tokens": 2607,
+            "embedding_tokens": 12
+          },
+          "trace_usage": {
+            "generation_calls": 2,
+            "generation_tokens": 2607,
+            "input_tokens": 2140,
+            "output_tokens": 467,
+            "generation_wall_seconds": 3.2839807979762554,
+            "embedding_calls": 1,
+            "embedding_tokens": 12,
+            "embedding_wall_seconds": 0.04303504712879658
+          },
+          "host_mcp_tool_results": {
+            "search_memory": 1
+          },
+          "host_memory_operation_statuses": {},
+          "track": "valid_memory_selection",
+          "status": "COMPLETED",
+          "answer_text_sha256": "6e9979712cc3d8adf7fbb6dfc990d1e9aae387e49552cd2c7fe9c25b30874fe1",
+          "score_sha256": "369eecef55c81fa99818761fd6e39438cb10c338f1f7da57077d77184a3e7512",
+          "score": {
+            "question_id": "v11_000504",
+            "arm": "milai_agent",
+            "answer_sha256": "38d80ed0b5efdc963ffe302124fb2106b3711f25d0b3b8ab3283543baafd5033",
+            "groups": {
+              "track": "valid_memory_selection",
+              "subtype": "reversal"
+            },
+            "status": "SCORED",
+            "success": true,
+            "uses_latest_preference": 1,
+            "outdated_preference_contamination": 0,
+            "valid_selection_pass": true,
+            "success_definition": "valid_selection_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          },
+          "formed_records": 5,
+          "query_snapshot_unchanged": true,
+          "tool_catalog_names": [
+            "search_memory",
+            "read_memory"
+          ]
+        },
+        {
+          "ordinal": 17,
+          "id": "rec_gen_0021",
+          "invocation_sha256": "d0b3546ba05e2cc58426918aeefcf13115bb845e9394e7ab75881f983a8ef867",
+          "result_sha256": "99f0716815af69d9253102f34fa2421304f4acc8174d58d78c1c82d2373350de",
+          "trace_sha256": "0c2f3e99274f1c2483252323a3fbaba5974bed6a55d07fce46da62245b560757",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 764,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 764,
+            "input_tokens": 451,
+            "output_tokens": 313,
+            "generation_wall_seconds": 2.0895809158682823
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "personalized_memory_use",
+          "status": "COMPLETED",
+          "answer_text_sha256": "02d8cb01c83095cd819d47c57f56c5823c751e9705365d406ec8ed4d9d3d0d8d",
+          "score_sha256": "6ffba917026a743b9e33bd2eb572e398292eccaa3478fbab5d13875b1958ae86",
+          "score": {
+            "question_id": "rec_gen_0021",
+            "arm": "milai_agent",
+            "answer_sha256": "af2ece09e7d9bdfb666c28969fe83eed824e5f92a5d66a65d19e8c1b1f68a76a",
+            "groups": {
+              "track": "personalized_memory_use",
+              "subtype": "direct_preference_aligned_recommendation"
+            },
+            "status": "SCORED",
+            "success": false,
+            "answer_accuracy": 0,
+            "preference_used": 0,
+            "memory_use_pass": false,
+            "success_definition": "memory_use_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          },
+          "formed_records": 1,
+          "query_snapshot_unchanged": true,
+          "tool_catalog_names": [
+            "search_memory",
+            "read_memory"
+          ]
+        },
+        {
+          "ordinal": 18,
+          "id": "rec_gen_0017",
+          "invocation_sha256": "61feb1fea8729cf5ff278b3b99183e35b7e1dbaf0ee1f86f3a798f5a14516d41",
+          "result_sha256": "d8462fcc5da3c2b5b95d9a70878b4a09bd8d6ca155dab5f1a1ea0a15251091d7",
+          "trace_sha256": "01a9fa9db1f86b901e3a7841398d63af903724f12ce4a2b6ff62f4ade034ed98",
+          "cost": {
+            "generation_calls": 1,
+            "generation_tokens": 642,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 1,
+            "generation_tokens": 642,
+            "input_tokens": 454,
+            "output_tokens": 188,
+            "generation_wall_seconds": 1.3336167531087995
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "track": "personalized_memory_use",
+          "status": "COMPLETED",
+          "answer_text_sha256": "a6551fb56d2e73c9fb10ab5ac39d31038f89cf862f724ba88be159c3dbfa163e",
+          "score_sha256": "590e01f74f5c2a8026c626414378974aa0210a822aad26560a7d542f5f08812f",
+          "score": {
+            "question_id": "rec_gen_0017",
+            "arm": "milai_agent",
+            "answer_sha256": "eb32d08edd19ffeececcbed0ddff697040209a23ef4fa872a67353315145c3aa",
+            "groups": {
+              "track": "personalized_memory_use",
+              "subtype": "fine_grained_preference_recommendation"
+            },
+            "status": "SCORED",
+            "success": false,
+            "answer_accuracy": 0,
+            "preference_used": 0,
+            "memory_use_pass": false,
+            "success_definition": "memory_use_pass",
+            "format_error": false,
+            "judge_parse_ok": true,
+            "judge_error": null
+          },
+          "formed_records": 1,
+          "query_snapshot_unchanged": true,
+          "tool_catalog_names": [
+            "search_memory",
+            "read_memory"
+          ]
+        }
+      ],
+      "cost": {
+        "generation_calls": 8,
+        "generation_tokens": 7697,
+        "embedding_tokens": 24
+      },
+      "trace_usage": {
+        "generation_calls": 8,
+        "generation_tokens": 7697,
+        "input_tokens": 6062,
+        "output_tokens": 1635,
+        "generation_wall_seconds": 11.589398747775704,
+        "embedding_calls": 2,
+        "embedding_tokens": 24,
+        "embedding_wall_seconds": 0.14722023531794548
+      },
+      "roles": {
+        "agent_query": {
+          "requests": 8,
+          "known_tokens": 7697,
+          "unknown_usage": 0
+        },
+        "embedding:agent_query": {
+          "requests": 2,
+          "known_tokens": 24,
+          "unknown_usage": 0
+        }
+      },
+      "host_mcp_tool_results": {
+        "search_memory": 2
+      }
+    },
+    "merit-no_memory": {
+      "rows": [
+        {
+          "ordinal": 19,
+          "id": "arc5-000",
+          "invocation_sha256": "750bd8d1baee8661fbe6e158b8a062b3de9c79aa0019e470fe45a5bdbdae1a77",
+          "result_sha256": "cc6a33032ba4491944bbd3589b094ad335da5fc9e2b460fc2c7880e83c646047",
+          "trace_sha256": "a38b1c7f783d4c3e5dc421117437a159aac0285f0fbe0a7a89872cee36f78808",
+          "cost": {
+            "generation_calls": 16,
+            "generation_tokens": 13199,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 16,
+            "generation_tokens": 13199,
+            "input_tokens": 12454,
+            "output_tokens": 745,
+            "generation_wall_seconds": 6.8829593220725656
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "arc5-000-e0-plant-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "f975486ed2fc5e3b2506ee6d1f7d5856ee725653b159e96c3b2cc61ee83f3db8",
+              "after_world_sha256": "21ab6dd4fff08b9abda34fe3e6fbb552c3bf990c4f2332700b16cda1fd5e1da7",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "arc5-000-e1-probe-refund",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "21ab6dd4fff08b9abda34fe3e6fbb552c3bf990c4f2332700b16cda1fd5e1da7",
+              "after_world_sha256": "196b2490e88c38f846bee16012cbc7dd1a13ede5e6baccaf4c76a6f943c185e8",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "arc5-000-e2-indep-addr",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "196b2490e88c38f846bee16012cbc7dd1a13ede5e6baccaf4c76a6f943c185e8",
+              "after_world_sha256": "fd89bc8f781d26455a89f4eac29d3db3e1769e039b5a0efa7e88d4b822020934",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "arc5-000-e3-indep-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "fd89bc8f781d26455a89f4eac29d3db3e1769e039b5a0efa7e88d4b822020934",
+              "after_world_sha256": "8f32094ce9e95ed126564a95b23b300e88eb1311edf0d924af2e90df6dd583cf",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "arc5-000-e4-probe-addr",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "8f32094ce9e95ed126564a95b23b300e88eb1311edf0d924af2e90df6dd583cf",
+              "after_world_sha256": "57eb97ce172a13002db308e9f6df1d6c4b9c3dd2ffbc0606fb5a3cffc0a9e727",
+              "memories": 0
+            }
+          ],
+          "successes": 3,
+          "dependent_successes": 0,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 20,
+          "id": "arc6-000",
+          "invocation_sha256": "9e2e45996fe0dc2a29fb51d0a7ab44815bd2ac3d016c60be17b86c47d68943a8",
+          "result_sha256": "412e907eac6f6368361b266bf784cf1f0fa4d5f9ee08bd76edca841f18dd9f4b",
+          "trace_sha256": "3727ed67d334015107bf34d7a4e5f604427449793f171b4daf1d9f11ed0fb108",
+          "cost": {
+            "generation_calls": 13,
+            "generation_tokens": 10961,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 13,
+            "generation_tokens": 10961,
+            "input_tokens": 10195,
+            "output_tokens": 766,
+            "generation_wall_seconds": 6.550342795904726
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "arc6-000-e0-plant-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "5c6122bed74f5f7ddf662c84cadbde2ba929fe642d23157887c6e4739d7bad55",
+              "after_world_sha256": "3b274dd7dce285226fe80b6cbea445e9ce8c531f5a6c9651fee2a2ed5dedad59",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "arc6-000-e1-update-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "3b274dd7dce285226fe80b6cbea445e9ce8c531f5a6c9651fee2a2ed5dedad59",
+              "after_world_sha256": "261d54f3cf984ee03b33d5ced09784d788373dd355e0ca83ca79a0fb84a62f28",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "arc6-000-e2-probe-refund-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "261d54f3cf984ee03b33d5ced09784d788373dd355e0ca83ca79a0fb84a62f28",
+              "after_world_sha256": "43cbc518b370cff52bfa911a2680b5739896f9c69f1a7ee703ad153fb2c00bd6",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "arc6-000-e3-probe-refund-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "43cbc518b370cff52bfa911a2680b5739896f9c69f1a7ee703ad153fb2c00bd6",
+              "after_world_sha256": "43cbc518b370cff52bfa911a2680b5739896f9c69f1a7ee703ad153fb2c00bd6",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "arc6-000-e4-indep-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "43cbc518b370cff52bfa911a2680b5739896f9c69f1a7ee703ad153fb2c00bd6",
+              "after_world_sha256": "47f3e80d5cc2eb46d659a78e5d932537fceef3db67b59d2c26e652d834ef3689",
+              "memories": 0
+            }
+          ],
+          "successes": 3,
+          "dependent_successes": 0,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 21,
+          "id": "d2-arc7-000",
+          "invocation_sha256": "e2453e02fff3c23976f7c422be8af7f10af8bdc204a6202e0b5fd8371b65d959",
+          "result_sha256": "fa27c0c2a4dc012f520bae6afe0b49fbc96793a45468dda2ba82b516b878fbab",
+          "trace_sha256": "44b52c28393110e8b8e7a4a9a3b76f17f2b473150a640cf0e825c2f4226163b9",
+          "cost": {
+            "generation_calls": 14,
+            "generation_tokens": 11924,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 14,
+            "generation_tokens": 11924,
+            "input_tokens": 11350,
+            "output_tokens": 574,
+            "generation_wall_seconds": 6.89220508094877
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d2-arc7-000-e0-indep-cfg",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "44b33e82de9c85e079afd8dfc89cf0b59b846fdcb7a685b22c55843391c91032",
+              "after_world_sha256": "e1f1a75596c6d41caba4a2ab765c8f1db8769d82cb8445ee17173c485d051612",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "d2-arc7-000-e1-plant-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "e1f1a75596c6d41caba4a2ab765c8f1db8769d82cb8445ee17173c485d051612",
+              "after_world_sha256": "fcf22c6f95aa95daa058e1f7618c33cbb3c8dd9471013d61d1d96303a8c8ef00",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "d2-arc7-000-e2-plant-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "fcf22c6f95aa95daa058e1f7618c33cbb3c8dd9471013d61d1d96303a8c8ef00",
+              "after_world_sha256": "2007dafb6d56f24fc11d284e75ef25b3f9f452011830f96fd663b895e147def3",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "d2-arc7-000-e3-probe-ver",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "2007dafb6d56f24fc11d284e75ef25b3f9f452011830f96fd663b895e147def3",
+              "after_world_sha256": "5c5a80c9e7b5fbe41cba87e402978dddc1add6263244d7f5bfad7d0a02974e73",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "d2-arc7-000-e4-probe-ver",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "5c5a80c9e7b5fbe41cba87e402978dddc1add6263244d7f5bfad7d0a02974e73",
+              "after_world_sha256": "3b3d5670639d500b85a2b730cf98528d5c665f43a58689a86d4aadfbf443b8f7",
+              "memories": 0
+            }
+          ],
+          "successes": 3,
+          "dependent_successes": 0,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 22,
+          "id": "d2-arc8-000",
+          "invocation_sha256": "9b518fd6a9febcdc4358c8b32164c76b9943498094583efd1bb748a6758c32f0",
+          "result_sha256": "d84277b95465fa7f129f10241b5347a5e3f187f6a082790bd79da38a9749d88c",
+          "trace_sha256": "26e2cd15d5b3fcc512c781dc92a3d1c61acbe5517ba2c745f3ff786e1877dbd1",
+          "cost": {
+            "generation_calls": 21,
+            "generation_tokens": 19717,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 21,
+            "generation_tokens": 19717,
+            "input_tokens": 18875,
+            "output_tokens": 842,
+            "generation_wall_seconds": 8.276633608154953
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d2-arc8-000-e0-plant-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "4877cf3b28c322280ccd70618456b34434035fbbc90275842a97c9b175b97ea8",
+              "after_world_sha256": "15784367d8425afd8461816d5e576c42bb5a2966436f3f28017f56bf4c57e89d",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "d2-arc8-000-e1-update-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "15784367d8425afd8461816d5e576c42bb5a2966436f3f28017f56bf4c57e89d",
+              "after_world_sha256": "925ede9644a35c1b7e9bedebd56fbd38b2eb714a0a69679177e5c636023ae87d",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "d2-arc8-000-e2-probe-ver-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "925ede9644a35c1b7e9bedebd56fbd38b2eb714a0a69679177e5c636023ae87d",
+              "after_world_sha256": "2be70d592afe23fe21b2780498744e1afb08b09c03a0ce0e7fead942ad387786",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "d2-arc8-000-e3-indep-cfg",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "2be70d592afe23fe21b2780498744e1afb08b09c03a0ce0e7fead942ad387786",
+              "after_world_sha256": "2a5cd689ddd20f5f2e8d9f6b35a19671fb4fd336daf539c962cfee11d4c6e89c",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "d2-arc8-000-e4-probe-ver-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "2a5cd689ddd20f5f2e8d9f6b35a19671fb4fd336daf539c962cfee11d4c6e89c",
+              "after_world_sha256": "de09a04fafaebd6a93be5766680e3f39aaab4eac5ee07b23ce0af93f45c93b4c",
+              "memories": 0
+            }
+          ],
+          "successes": 3,
+          "dependent_successes": 0,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 23,
+          "id": "d3-arc9-000",
+          "invocation_sha256": "d9855c8d8719197130ceb2d8135564a3df41f9d5dbdd3628cc9e4be781f26fd3",
+          "result_sha256": "6c09a773d48d1cbdfcefd1fba28d7ac2e1ecb597e3625106bd83b16748ac08b9",
+          "trace_sha256": "8ef655d5f00799616d31055e36da041d061f4567422509ab778f0238ae00976a",
+          "cost": {
+            "generation_calls": 17,
+            "generation_tokens": 15995,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 17,
+            "generation_tokens": 15995,
+            "input_tokens": 15005,
+            "output_tokens": 990,
+            "generation_wall_seconds": 8.651012668386102
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d3-arc9-000-e0-plant-dinner",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "efd2e10e8a3b2d37503ff72a96a4a6a61939ca33465beb5790c9cd28a7c15b9a",
+              "after_world_sha256": "2ba9d64b674cea6376fd6648593f47579995ff26fe1a6d48186a3d17fee135c9",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "d3-arc9-000-e1-probe-dinner",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "2ba9d64b674cea6376fd6648593f47579995ff26fe1a6d48186a3d17fee135c9",
+              "after_world_sha256": "0f45aeb6acfe256fe81efef08346b4958da63590dcccf643a01cd4d106d374c5",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "d3-arc9-000-e2-indep-email",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "0f45aeb6acfe256fe81efef08346b4958da63590dcccf643a01cd4d106d374c5",
+              "after_world_sha256": "4f1d8a1598615a8c08c13782ef926a13e8085b1a92f367c949b6aea2a3a9b52f",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "d3-arc9-000-e3-probe-dinner",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "4f1d8a1598615a8c08c13782ef926a13e8085b1a92f367c949b6aea2a3a9b52f",
+              "after_world_sha256": "475209aca3aa2f64d0033cbcf6292fb7ae85a4daa44d8383939c212caefdcd20",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "d3-arc9-000-e4-indep-event",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "475209aca3aa2f64d0033cbcf6292fb7ae85a4daa44d8383939c212caefdcd20",
+              "after_world_sha256": "48a18f2ca41363fd3998d254638dc30a145c62c2e670fb32171d8743af6c24d0",
+              "memories": 0
+            }
+          ],
+          "successes": 2,
+          "dependent_successes": 0,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 24,
+          "id": "d3-arc10-000",
+          "invocation_sha256": "d2f5c8d04e80719a4a8592d45d4054fa840572ca1f00e75e138490fd73e24e13",
+          "result_sha256": "551c7a38f8ae289cdf1b992963f438fb304cabf0302f61cae1db061662f048a0",
+          "trace_sha256": "58a80e5986af030f7ffb5ba48e0676e8dbfd05a616ebba014c2abfa68b0b735c",
+          "cost": {
+            "generation_calls": 20,
+            "generation_tokens": 17146,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 20,
+            "generation_tokens": 17146,
+            "input_tokens": 16284,
+            "output_tokens": 862,
+            "generation_wall_seconds": 8.082670917268842
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d3-arc10-000-e0-plant-dinner",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "c930e5841739fcbbebcf20c12d2126ab46a32aa77c84d77f953a942a657d049c",
+              "after_world_sha256": "db412e569d574526c66d1015bb800f50cd22159172a26fc493248dca2b3a2ece",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "d3-arc10-000-e1-update-dinner",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "db412e569d574526c66d1015bb800f50cd22159172a26fc493248dca2b3a2ece",
+              "after_world_sha256": "a034f2709201e4b82f6b43c03a2dbaad528275a5a580d286f497663aedbdde9b",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "d3-arc10-000-e2-probe-dinner-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "a034f2709201e4b82f6b43c03a2dbaad528275a5a580d286f497663aedbdde9b",
+              "after_world_sha256": "a034f2709201e4b82f6b43c03a2dbaad528275a5a580d286f497663aedbdde9b",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "d3-arc10-000-e3-probe-dinner-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "a034f2709201e4b82f6b43c03a2dbaad528275a5a580d286f497663aedbdde9b",
+              "after_world_sha256": "a034f2709201e4b82f6b43c03a2dbaad528275a5a580d286f497663aedbdde9b",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "d3-arc10-000-e4-indep-email",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "a034f2709201e4b82f6b43c03a2dbaad528275a5a580d286f497663aedbdde9b",
+              "after_world_sha256": "5cd2dcf9973e79d97d13fbeee42207beb3feae8f0a5dd5be0bcc3d53b97268c1",
+              "memories": 0
+            }
+          ],
+          "successes": 2,
+          "dependent_successes": 0,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        }
+      ],
+      "cost": {
+        "generation_calls": 101,
+        "generation_tokens": 88942,
+        "embedding_tokens": 0
+      },
+      "trace_usage": {
+        "generation_calls": 101,
+        "generation_tokens": 88942,
+        "input_tokens": 84163,
+        "output_tokens": 4779,
+        "generation_wall_seconds": 45.33582439273596
+      },
+      "roles": {
+        "task_host": {
+          "requests": 101,
+          "known_tokens": 88942,
+          "unknown_usage": 0
+        }
+      },
+      "host_mcp_tool_results": {}
+    },
+    "merit-native_full_replay_tail60000": {
+      "rows": [
+        {
+          "ordinal": 25,
+          "id": "arc5-000",
+          "invocation_sha256": "d60238830e8995b2c59df701c737f8b90095174f2ed56ed90396fcb912160517",
+          "result_sha256": "fb133a71fab517b62a2491a0f62748c7cc40edeff9d5a41133371f80a289440e",
+          "trace_sha256": "4015fb8721ed254a80f0e4087d04e42ceea356888b9aedcf1b7de6c36e85050c",
+          "cost": {
+            "generation_calls": 13,
+            "generation_tokens": 25542,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 13,
+            "generation_tokens": 25542,
+            "input_tokens": 24850,
+            "output_tokens": 692,
+            "generation_wall_seconds": 7.764126358088106
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "arc5-000-e0-plant-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "f975486ed2fc5e3b2506ee6d1f7d5856ee725653b159e96c3b2cc61ee83f3db8",
+              "after_world_sha256": "21ab6dd4fff08b9abda34fe3e6fbb552c3bf990c4f2332700b16cda1fd5e1da7",
+              "memories": 1
+            },
+            {
+              "index": 1,
+              "task_id": "arc5-000-e1-probe-refund",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "21ab6dd4fff08b9abda34fe3e6fbb552c3bf990c4f2332700b16cda1fd5e1da7",
+              "after_world_sha256": "b4b91dac7e566db5da4492631efd577b1bc3edba9c1a421a30fa2ce868663d7e",
+              "memories": 2
+            },
+            {
+              "index": 2,
+              "task_id": "arc5-000-e2-indep-addr",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "b4b91dac7e566db5da4492631efd577b1bc3edba9c1a421a30fa2ce868663d7e",
+              "after_world_sha256": "84c0e6a89653310175556232399204f1106962dd2c1fb6b6ed65d84a4f5d612f",
+              "memories": 3
+            },
+            {
+              "index": 3,
+              "task_id": "arc5-000-e3-indep-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "84c0e6a89653310175556232399204f1106962dd2c1fb6b6ed65d84a4f5d612f",
+              "after_world_sha256": "ae45003884ec920736d1ae66af2537e021b1eb76150892ffeebd7b47a2352452",
+              "memories": 4
+            },
+            {
+              "index": 4,
+              "task_id": "arc5-000-e4-probe-addr",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "ae45003884ec920736d1ae66af2537e021b1eb76150892ffeebd7b47a2352452",
+              "after_world_sha256": "8786adb3a8bbd1f62c0d9e2791545226ce35eb5b449c153417d8364201d3797d",
+              "memories": 5
+            }
+          ],
+          "successes": 5,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0,
+          "max_memory_block_chars": 12257
+        },
+        {
+          "ordinal": 26,
+          "id": "arc6-000",
+          "invocation_sha256": "2481c19078bfef19a5988329525e6f06de27cf476f56053085b82d45a81c0f48",
+          "result_sha256": "1751a2f7b9d5a41011d2a94cd5037c290cf8e122348b062c4dd7090e3feb19b7",
+          "trace_sha256": "1a9a4cc3e529dd146a8615d126bfe69789980bbb5b19efc6e3ac8fcc9ef920fa",
+          "cost": {
+            "generation_calls": 15,
+            "generation_tokens": 34374,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 15,
+            "generation_tokens": 34374,
+            "input_tokens": 33551,
+            "output_tokens": 823,
+            "generation_wall_seconds": 9.908241658937186
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "arc6-000-e0-plant-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "5c6122bed74f5f7ddf662c84cadbde2ba929fe642d23157887c6e4739d7bad55",
+              "after_world_sha256": "3b274dd7dce285226fe80b6cbea445e9ce8c531f5a6c9651fee2a2ed5dedad59",
+              "memories": 1
+            },
+            {
+              "index": 1,
+              "task_id": "arc6-000-e1-update-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "3b274dd7dce285226fe80b6cbea445e9ce8c531f5a6c9651fee2a2ed5dedad59",
+              "after_world_sha256": "850579388d8b1bb8757f1365805d603ec79e7630f6ceec3d614856fdca61c5c8",
+              "memories": 2
+            },
+            {
+              "index": 2,
+              "task_id": "arc6-000-e2-probe-refund-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "850579388d8b1bb8757f1365805d603ec79e7630f6ceec3d614856fdca61c5c8",
+              "after_world_sha256": "10b3e3af3e592975ccfdf8f9cd3106f4fdd383a189d94a390f29720a3cfbf2e4",
+              "memories": 3
+            },
+            {
+              "index": 3,
+              "task_id": "arc6-000-e3-probe-refund-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "10b3e3af3e592975ccfdf8f9cd3106f4fdd383a189d94a390f29720a3cfbf2e4",
+              "after_world_sha256": "7751db75fc9b1aac12962e5306dfb5f5d6eb2b4a1b64baaca1a35e83fe4ed993",
+              "memories": 4
+            },
+            {
+              "index": 4,
+              "task_id": "arc6-000-e4-indep-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "7751db75fc9b1aac12962e5306dfb5f5d6eb2b4a1b64baaca1a35e83fe4ed993",
+              "after_world_sha256": "a0c9589274ad6f3a3a17121e967cab67e09a0bae56ab85c2a86c1580c112b9a1",
+              "memories": 5
+            }
+          ],
+          "successes": 5,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0,
+          "max_memory_block_chars": 15030
+        },
+        {
+          "ordinal": 27,
+          "id": "d2-arc7-000",
+          "invocation_sha256": "6408672d8af9d81d7dfda432bb9c0a37ea814f28e0f3504338df2f47492ad2c4",
+          "result_sha256": "054e2c3a2cb99c3a9ebb08a96694567c3326c66c52d8b8f755f6285fc25cc554",
+          "trace_sha256": "974d5ea89f90a2148794c09c142106b37409f850898150a0810b802b6694d2f8",
+          "cost": {
+            "generation_calls": 12,
+            "generation_tokens": 18540,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 12,
+            "generation_tokens": 18540,
+            "input_tokens": 18038,
+            "output_tokens": 502,
+            "generation_wall_seconds": 5.714274413883686
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d2-arc7-000-e0-indep-cfg",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "44b33e82de9c85e079afd8dfc89cf0b59b846fdcb7a685b22c55843391c91032",
+              "after_world_sha256": "e1f1a75596c6d41caba4a2ab765c8f1db8769d82cb8445ee17173c485d051612",
+              "memories": 1
+            },
+            {
+              "index": 1,
+              "task_id": "d2-arc7-000-e1-plant-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "e1f1a75596c6d41caba4a2ab765c8f1db8769d82cb8445ee17173c485d051612",
+              "after_world_sha256": "c5d18128d808328c1c7ab4edb53f945169e8ecf44b5405eae68bc2913ffd0b7e",
+              "memories": 2
+            },
+            {
+              "index": 2,
+              "task_id": "d2-arc7-000-e2-plant-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "c5d18128d808328c1c7ab4edb53f945169e8ecf44b5405eae68bc2913ffd0b7e",
+              "after_world_sha256": "46a7a089e77bffda4e6da759cbae936c4a99f13c63bcd68a875f080685be6367",
+              "memories": 3
+            },
+            {
+              "index": 3,
+              "task_id": "d2-arc7-000-e3-probe-ver",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "46a7a089e77bffda4e6da759cbae936c4a99f13c63bcd68a875f080685be6367",
+              "after_world_sha256": "cd0442fbddc5bbaff74c201c7f8b96ad245df4990eadaf4e1c4f9a07bc83ab29",
+              "memories": 4
+            },
+            {
+              "index": 4,
+              "task_id": "d2-arc7-000-e4-probe-ver",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "cd0442fbddc5bbaff74c201c7f8b96ad245df4990eadaf4e1c4f9a07bc83ab29",
+              "after_world_sha256": "d02d43986d26dfa34d409abf72cbb97ec9e09c5907cbe8a6f67dc3b9e0cfa971",
+              "memories": 5
+            }
+          ],
+          "successes": 5,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0,
+          "max_memory_block_chars": 5936
+        },
+        {
+          "ordinal": 28,
+          "id": "d2-arc8-000",
+          "invocation_sha256": "c49bbd40b1d4eb31286f265d7f6652e7590ce336bf205bb6b28c0ef92d55805d",
+          "result_sha256": "8708875c00ed95b3a1e84c0b5b7b076b287d18843d7c369215196ea8b0a9fd40",
+          "trace_sha256": "262123657ac266c0c13bfa4a7f92aca638c6ff1925ee8d1f00580783c98cac2b",
+          "cost": {
+            "generation_calls": 15,
+            "generation_tokens": 26124,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 15,
+            "generation_tokens": 26124,
+            "input_tokens": 25292,
+            "output_tokens": 832,
+            "generation_wall_seconds": 8.716112830676138
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d2-arc8-000-e0-plant-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "4877cf3b28c322280ccd70618456b34434035fbbc90275842a97c9b175b97ea8",
+              "after_world_sha256": "26439532f9cd56ea1d5cf2cc5cc324649256deac69ff7373671809d59dde1225",
+              "memories": 1
+            },
+            {
+              "index": 1,
+              "task_id": "d2-arc8-000-e1-update-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "26439532f9cd56ea1d5cf2cc5cc324649256deac69ff7373671809d59dde1225",
+              "after_world_sha256": "51f4aa0fb6551847b4793d58a335b92d6b284ffd60d738abf7baa334cb9483ba",
+              "memories": 2
+            },
+            {
+              "index": 2,
+              "task_id": "d2-arc8-000-e2-probe-ver-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "51f4aa0fb6551847b4793d58a335b92d6b284ffd60d738abf7baa334cb9483ba",
+              "after_world_sha256": "b28f9b03e0c735421283fb223fecb913ff930c7807b4c5989fda093aff2dba2e",
+              "memories": 3
+            },
+            {
+              "index": 3,
+              "task_id": "d2-arc8-000-e3-indep-cfg",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "b28f9b03e0c735421283fb223fecb913ff930c7807b4c5989fda093aff2dba2e",
+              "after_world_sha256": "89aa36e834bb7fdeaad881ea5da3792eda1e18cf609ef463cdcc545327f6c960",
+              "memories": 4
+            },
+            {
+              "index": 4,
+              "task_id": "d2-arc8-000-e4-probe-ver-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "89aa36e834bb7fdeaad881ea5da3792eda1e18cf609ef463cdcc545327f6c960",
+              "after_world_sha256": "39d3f01514981cf6b905eb57812a25f38c4b65477c22ce2a149a4a0330943b19",
+              "memories": 5
+            }
+          ],
+          "successes": 5,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0,
+          "max_memory_block_chars": 12005
+        },
+        {
+          "ordinal": 29,
+          "id": "d3-arc9-000",
+          "invocation_sha256": "e6dceb0158ef6ff5df6fb47bd34172ed0f258ba07de8ebc7fe2934882f16d76b",
+          "result_sha256": "fa224ec615a6d221ea9cdea0a297f3f5f2ae13d4a7890b515af09590cbe36e4f",
+          "trace_sha256": "ce4eb827ce6255c87517b166363ae1d798080e56f5654c68dbe60175ac404e7f",
+          "cost": {
+            "generation_calls": 12,
+            "generation_tokens": 23790,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 12,
+            "generation_tokens": 23790,
+            "input_tokens": 23130,
+            "output_tokens": 660,
+            "generation_wall_seconds": 7.321764052845538
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d3-arc9-000-e0-plant-dinner",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "efd2e10e8a3b2d37503ff72a96a4a6a61939ca33465beb5790c9cd28a7c15b9a",
+              "after_world_sha256": "2ba9d64b674cea6376fd6648593f47579995ff26fe1a6d48186a3d17fee135c9",
+              "memories": 1
+            },
+            {
+              "index": 1,
+              "task_id": "d3-arc9-000-e1-probe-dinner",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "2ba9d64b674cea6376fd6648593f47579995ff26fe1a6d48186a3d17fee135c9",
+              "after_world_sha256": "6ad2fbc00b0330908ca72815fb2d16ad1bbc3beb4912c8a10d20ef2eb8a32af7",
+              "memories": 2
+            },
+            {
+              "index": 2,
+              "task_id": "d3-arc9-000-e2-indep-email",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "6ad2fbc00b0330908ca72815fb2d16ad1bbc3beb4912c8a10d20ef2eb8a32af7",
+              "after_world_sha256": "e90db6ba3a5a9077ab8fb888558e4c6cbb8bb431323b7f6392ba4f4ae18219ac",
+              "memories": 3
+            },
+            {
+              "index": 3,
+              "task_id": "d3-arc9-000-e3-probe-dinner",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "e90db6ba3a5a9077ab8fb888558e4c6cbb8bb431323b7f6392ba4f4ae18219ac",
+              "after_world_sha256": "356aeb4eaff28f0680c5adb44d616d1979f16a91fb583a8be777b20cff55f6c7",
+              "memories": 4
+            },
+            {
+              "index": 4,
+              "task_id": "d3-arc9-000-e4-indep-event",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "356aeb4eaff28f0680c5adb44d616d1979f16a91fb583a8be777b20cff55f6c7",
+              "after_world_sha256": "1a98dd1486aa784c22d5bd42664fdf2212bf0092541a9a806450ba672cac815c",
+              "memories": 5
+            }
+          ],
+          "successes": 4,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0,
+          "max_memory_block_chars": 13854
+        },
+        {
+          "ordinal": 30,
+          "id": "d3-arc10-000",
+          "invocation_sha256": "adc7cc9dff3417ac5f4f7f478682b4bb657232d3a83f87542170c695d134adf0",
+          "result_sha256": "6a2f1ff11a7e1326f0165cd8c1232d604052a769478befc8e12490922a1ff923",
+          "trace_sha256": "f55e88c2b40842318e70cabae83a0274b2b397941aae61a5f0c79309c452d5ba",
+          "cost": {
+            "generation_calls": 14,
+            "generation_tokens": 28395,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 14,
+            "generation_tokens": 28395,
+            "input_tokens": 27590,
+            "output_tokens": 805,
+            "generation_wall_seconds": 8.849191721063107
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d3-arc10-000-e0-plant-dinner",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "c930e5841739fcbbebcf20c12d2126ab46a32aa77c84d77f953a942a657d049c",
+              "after_world_sha256": "db412e569d574526c66d1015bb800f50cd22159172a26fc493248dca2b3a2ece",
+              "memories": 1
+            },
+            {
+              "index": 1,
+              "task_id": "d3-arc10-000-e1-update-dinner",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "db412e569d574526c66d1015bb800f50cd22159172a26fc493248dca2b3a2ece",
+              "after_world_sha256": "55e1dc1ce198234d0032922bbd1a330eac07082dd4880e9a7fb0a834f017bc0a",
+              "memories": 2
+            },
+            {
+              "index": 2,
+              "task_id": "d3-arc10-000-e2-probe-dinner-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "55e1dc1ce198234d0032922bbd1a330eac07082dd4880e9a7fb0a834f017bc0a",
+              "after_world_sha256": "e843f3009bd22ef4fd8a357dee5b226d21cdd87e0c42b4f6548540592cb32e9d",
+              "memories": 3
+            },
+            {
+              "index": 3,
+              "task_id": "d3-arc10-000-e3-probe-dinner-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": true,
+                "argument_value_match": true,
+                "memory_utilized": true
+              },
+              "before_world_sha256": "e843f3009bd22ef4fd8a357dee5b226d21cdd87e0c42b4f6548540592cb32e9d",
+              "after_world_sha256": "e65fb71ecb859a8732269a60ca694652b51399a8589f4f8404cf9b4b9150d040",
+              "memories": 4
+            },
+            {
+              "index": 4,
+              "task_id": "d3-arc10-000-e4-indep-email",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "e65fb71ecb859a8732269a60ca694652b51399a8589f4f8404cf9b4b9150d040",
+              "after_world_sha256": "3d5291e20cfc6388461bf5123674dd5d699b18a32d58e78e0a0a5e3b0169d441",
+              "memories": 5
+            }
+          ],
+          "successes": 4,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0,
+          "max_memory_block_chars": 15774
+        }
+      ],
+      "cost": {
+        "generation_calls": 81,
+        "generation_tokens": 156765,
+        "embedding_tokens": 0
+      },
+      "trace_usage": {
+        "generation_calls": 81,
+        "generation_tokens": 156765,
+        "input_tokens": 152451,
+        "output_tokens": 4314,
+        "generation_wall_seconds": 48.27371103549376
+      },
+      "roles": {
+        "task_host": {
+          "requests": 81,
+          "known_tokens": 156765,
+          "unknown_usage": 0
+        }
+      },
+      "host_mcp_tool_results": {}
+    },
+    "merit-milai": {
+      "rows": [
+        {
+          "ordinal": 31,
+          "id": "arc5-000",
+          "invocation_sha256": "a7b5eb6fa596fe0ea7d77fe0ebe05baeecd017f22b92d28b7ec629daf2e7b7fe",
+          "result_sha256": "a7d8f65afe6e83440feb439ab52d464d319db206e279f6760c6c2ac7d9227192",
+          "trace_sha256": "e65bcdb4ead72e1536302007e9f918d7fe5105224cd7fe04a61fb748d6ea1de7",
+          "cost": {
+            "generation_calls": 15,
+            "generation_tokens": 39636,
+            "embedding_tokens": 7
+          },
+          "trace_usage": {
+            "generation_calls": 15,
+            "generation_tokens": 39636,
+            "input_tokens": 38904,
+            "output_tokens": 732,
+            "generation_wall_seconds": 9.78867952991277,
+            "embedding_calls": 1,
+            "embedding_tokens": 7,
+            "embedding_wall_seconds": 0.15053248312324286
+          },
+          "host_mcp_tool_results": {
+            "search_memory": 1
+          },
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "arc5-000-e0-plant-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "f975486ed2fc5e3b2506ee6d1f7d5856ee725653b159e96c3b2cc61ee83f3db8",
+              "after_world_sha256": "3da2524f1d9ed0311f736902b5fed8e6c6a72c553edb38df38af424521db7ed2",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "arc5-000-e1-probe-refund",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "3da2524f1d9ed0311f736902b5fed8e6c6a72c553edb38df38af424521db7ed2",
+              "after_world_sha256": "6e3c593a20a38897ccc6b9645f8d368337acd33c4f5e7d7e2d00a4ddc4b89bd2",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "arc5-000-e2-indep-addr",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "6e3c593a20a38897ccc6b9645f8d368337acd33c4f5e7d7e2d00a4ddc4b89bd2",
+              "after_world_sha256": "d4cf9aea2df32d68722724d9f64485acae99c7e0268f2a212ea9f3306bdddd2d",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "arc5-000-e3-indep-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "d4cf9aea2df32d68722724d9f64485acae99c7e0268f2a212ea9f3306bdddd2d",
+              "after_world_sha256": "fc981938095b2d976f226f9ebbd11e61fbbbfd082b4a1ef3201fb4fb73a0f28d",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "arc5-000-e4-probe-addr",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "fc981938095b2d976f226f9ebbd11e61fbbbfd082b4a1ef3201fb4fb73a0f28d",
+              "after_world_sha256": "b8b9c04c1bd2183e07280b10ff5e23e1b6be0096fa166e5ffcbc37d8b7e13d54",
+              "memories": 0
+            }
+          ],
+          "successes": 5,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 32,
+          "id": "arc6-000",
+          "invocation_sha256": "feda9304c2a48484b04c2ce4129d217ebf10b27bc62444aa475fa46d8cfced02",
+          "result_sha256": "5cdcc99419183e8e717d10eb130835d4152e02b6f6ec384379307443c40032f0",
+          "trace_sha256": "d5f9b2fedfeb544595824ff2acae274218b8b2464fe0643071c8aa36ca06fcbe",
+          "cost": {
+            "generation_calls": 16,
+            "generation_tokens": 50857,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 16,
+            "generation_tokens": 50857,
+            "input_tokens": 49365,
+            "output_tokens": 1492,
+            "generation_wall_seconds": 15.853887477423996
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "arc6-000-e0-plant-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "5c6122bed74f5f7ddf662c84cadbde2ba929fe642d23157887c6e4739d7bad55",
+              "after_world_sha256": "78dfb4a896c73b77df823b9df051ae54c6bd4f88fae0527c14067137898f29c3",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "arc6-000-e1-update-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "78dfb4a896c73b77df823b9df051ae54c6bd4f88fae0527c14067137898f29c3",
+              "after_world_sha256": "0ecaf1dbf34ab909c44f11f48e53e92ccc579a48473167afd986f38b222ecf65",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "arc6-000-e2-probe-refund-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "0ecaf1dbf34ab909c44f11f48e53e92ccc579a48473167afd986f38b222ecf65",
+              "after_world_sha256": "99f1f15cf9b88c8dbc43756116bfc4cf7628899cf05397ad59c5c5be97e28c6a",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "arc6-000-e3-probe-refund-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "99f1f15cf9b88c8dbc43756116bfc4cf7628899cf05397ad59c5c5be97e28c6a",
+              "after_world_sha256": "6223631197f151173a9b3ccd7959d416585566ce52fba332931cff41865fb581",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "arc6-000-e4-indep-refund",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "6223631197f151173a9b3ccd7959d416585566ce52fba332931cff41865fb581",
+              "after_world_sha256": "944f3fd93e75023b193128f48b6a45e3863445d0dae7d72ff952e527f4d662c4",
+              "memories": 0
+            }
+          ],
+          "successes": 5,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 33,
+          "id": "d2-arc7-000",
+          "invocation_sha256": "5effb4632e80f64d1b779a9e30a3ba88b7609447827dee55c74d0e5d605708af",
+          "result_sha256": "4e9a6b3ad8d1ea78a0079c50acfe905d528b7fb0b974cd21d89d2adc396fd49f",
+          "trace_sha256": "5e9771d5ca01b76e4b6791dddfd7a3ef2a13ffb3dae86c670ee34fb8d23ff052",
+          "cost": {
+            "generation_calls": 10,
+            "generation_tokens": 22872,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 10,
+            "generation_tokens": 22872,
+            "input_tokens": 22261,
+            "output_tokens": 611,
+            "generation_wall_seconds": 6.832059199921787
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d2-arc7-000-e0-indep-cfg",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "44b33e82de9c85e079afd8dfc89cf0b59b846fdcb7a685b22c55843391c91032",
+              "after_world_sha256": "e1f1a75596c6d41caba4a2ab765c8f1db8769d82cb8445ee17173c485d051612",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "d2-arc7-000-e1-plant-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "e1f1a75596c6d41caba4a2ab765c8f1db8769d82cb8445ee17173c485d051612",
+              "after_world_sha256": "d8d4f73b5eb639ab09802c685746fcf8d69495cc0d06a273e5255c40b4d4010e",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "d2-arc7-000-e2-plant-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "d8d4f73b5eb639ab09802c685746fcf8d69495cc0d06a273e5255c40b4d4010e",
+              "after_world_sha256": "fb9474a2dca031a25e3f8e54fda301af57a6c2584d2403799f48755d98fb0422",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "d2-arc7-000-e3-probe-ver",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "fb9474a2dca031a25e3f8e54fda301af57a6c2584d2403799f48755d98fb0422",
+              "after_world_sha256": "d7d4df3dd4379d8ef398b00a9cc67ab016fdeccf40ad361e358d2f7ab8770d75",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "d2-arc7-000-e4-probe-ver",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "d7d4df3dd4379d8ef398b00a9cc67ab016fdeccf40ad361e358d2f7ab8770d75",
+              "after_world_sha256": "99de27e43e5e3046cea6728b02f36280289fdf31c4f508c7efeabd44a690c4ea",
+              "memories": 0
+            }
+          ],
+          "successes": 3,
+          "dependent_successes": 0,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 34,
+          "id": "d2-arc8-000",
+          "invocation_sha256": "484dde938ba76ae0c0b2908cc512054230a510ce0a65c8bb84492ec5ca7923e3",
+          "result_sha256": "c3cee29c8a00a0be5b5671efd59fd204dd68711f555698b2b888f25ebd3fc5ca",
+          "trace_sha256": "587c45106cf9c987b1d20f43fbddb543e7b4450b10d9ce8914344c199dc2b0a4",
+          "cost": {
+            "generation_calls": 19,
+            "generation_tokens": 81714,
+            "embedding_tokens": 18
+          },
+          "trace_usage": {
+            "generation_calls": 19,
+            "generation_tokens": 81714,
+            "input_tokens": 79726,
+            "output_tokens": 1988,
+            "generation_wall_seconds": 22.825469092000276,
+            "embedding_calls": 2,
+            "embedding_tokens": 18,
+            "embedding_wall_seconds": 0.10190366953611374
+          },
+          "host_mcp_tool_results": {
+            "search_memory": 2,
+            "read_history": 3
+          },
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d2-arc8-000-e0-plant-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "4877cf3b28c322280ccd70618456b34434035fbbc90275842a97c9b175b97ea8",
+              "after_world_sha256": "409d1ec5c2d85a68d457e6e56b3777a14433fc020994a89122f25428f8da6068",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "d2-arc8-000-e1-update-ver",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "409d1ec5c2d85a68d457e6e56b3777a14433fc020994a89122f25428f8da6068",
+              "after_world_sha256": "691ffbd5512dae8341fcab418c6666b6a93f09935bfffd34736f0814a86ca19d",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "d2-arc8-000-e2-probe-ver-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "691ffbd5512dae8341fcab418c6666b6a93f09935bfffd34736f0814a86ca19d",
+              "after_world_sha256": "33f977213d042f886af9f8adb326dd7e37480539b26debcf135c68a5f6378296",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "d2-arc8-000-e3-indep-cfg",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "33f977213d042f886af9f8adb326dd7e37480539b26debcf135c68a5f6378296",
+              "after_world_sha256": "0540ade0a26090202a550a1ad36e850969b9253aba026da5e731734ca0086d48",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "d2-arc8-000-e4-probe-ver-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "0540ade0a26090202a550a1ad36e850969b9253aba026da5e731734ca0086d48",
+              "after_world_sha256": "812fba71197518c91ce71781d612b8567098beca120481ecb6303a3cbda84c1c",
+              "memories": 0
+            }
+          ],
+          "successes": 5,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 35,
+          "id": "d3-arc9-000",
+          "invocation_sha256": "42ea18a7799b0c6f6b61cafd04234ea336522b7e06cf779b5024455529335b39",
+          "result_sha256": "4863d397ee2a364a12175c6e7b784b97b6a40d80e82993d00ce6cf3cda69d40d",
+          "trace_sha256": "40efc1af85839d22748c123818e6f516aecaa1ab77229544289b89aea8cde934",
+          "cost": {
+            "generation_calls": 12,
+            "generation_tokens": 29292,
+            "embedding_tokens": 0
+          },
+          "trace_usage": {
+            "generation_calls": 12,
+            "generation_tokens": 29292,
+            "input_tokens": 28638,
+            "output_tokens": 654,
+            "generation_wall_seconds": 7.97272993857041
+          },
+          "host_mcp_tool_results": {},
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d3-arc9-000-e0-plant-dinner",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "efd2e10e8a3b2d37503ff72a96a4a6a61939ca33465beb5790c9cd28a7c15b9a",
+              "after_world_sha256": "da6f215d04aa0031106b8ec39e3a029801516b92b228e0dcbc19d0acbd0d16dd",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "d3-arc9-000-e1-probe-dinner",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "da6f215d04aa0031106b8ec39e3a029801516b92b228e0dcbc19d0acbd0d16dd",
+              "after_world_sha256": "69c5297d553425cc3394a7fd8775fc6e40131f70d74f9fe34a59b10ed3041734",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "d3-arc9-000-e2-indep-email",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "69c5297d553425cc3394a7fd8775fc6e40131f70d74f9fe34a59b10ed3041734",
+              "after_world_sha256": "835490909885a151c25803fc7cd35a65d46deb3b7f7cbdcfb60515bd6d43dc4d",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "d3-arc9-000-e3-probe-dinner",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "835490909885a151c25803fc7cd35a65d46deb3b7f7cbdcfb60515bd6d43dc4d",
+              "after_world_sha256": "6b24f4d627b41e036740dee349b4fb2b66f49977784329fc2dea0616662a7d19",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "d3-arc9-000-e4-indep-event",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "6b24f4d627b41e036740dee349b4fb2b66f49977784329fc2dea0616662a7d19",
+              "after_world_sha256": "c5535160c2ccfdf0f3d6298ebeca7731af5861bee15a112111cba42db88c4455",
+              "memories": 0
+            }
+          ],
+          "successes": 4,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        },
+        {
+          "ordinal": 36,
+          "id": "d3-arc10-000",
+          "invocation_sha256": "87b301cc88a2cccc696dca39ada4022e26f6e6dc1caf2a14667ab0596aee8659",
+          "result_sha256": "d7202ac04e527d9e9d58f8eff95dea88f9f8495aeb356a4ff1123a9886ae82c3",
+          "trace_sha256": "e2ab39c0bc9b1902af6ecd21cb5887cadf100d8bf1f96c749fbc5b0c7762ea3d",
+          "cost": {
+            "generation_calls": 17,
+            "generation_tokens": 63851,
+            "embedding_tokens": 5
+          },
+          "trace_usage": {
+            "generation_calls": 17,
+            "generation_tokens": 63851,
+            "input_tokens": 62710,
+            "output_tokens": 1141,
+            "generation_wall_seconds": 15.333560684230179,
+            "embedding_calls": 1,
+            "embedding_tokens": 5,
+            "embedding_wall_seconds": 0.046287961304187775
+          },
+          "host_mcp_tool_results": {
+            "search_memory": 1,
+            "read_history": 2
+          },
+          "host_memory_operation_statuses": {},
+          "episodes": [
+            {
+              "index": 0,
+              "task_id": "d3-arc10-000-e0-plant-dinner",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "c930e5841739fcbbebcf20c12d2126ab46a32aa77c84d77f953a942a657d049c",
+              "after_world_sha256": "26f49b330cf827c9e466e7d6cc4fb9360b9e77faa260fb82029c75e722b257f3",
+              "memories": 0
+            },
+            {
+              "index": 1,
+              "task_id": "d3-arc10-000-e1-update-dinner",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "26f49b330cf827c9e466e7d6cc4fb9360b9e77faa260fb82029c75e722b257f3",
+              "after_world_sha256": "b7bc38321802fe71d4c37b6172171bd7fa25c4442de214e90ffe5ab1cf830c72",
+              "memories": 0
+            },
+            {
+              "index": 2,
+              "task_id": "d3-arc10-000-e2-probe-dinner-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "b7bc38321802fe71d4c37b6172171bd7fa25c4442de214e90ffe5ab1cf830c72",
+              "after_world_sha256": "77bc340d30c8b30898f19a059c58a67b63eb4333f83c50c72c82ef4113a82680",
+              "memories": 0
+            },
+            {
+              "index": 3,
+              "task_id": "d3-arc10-000-e3-probe-dinner-upd",
+              "dependent": true,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": true,
+                "success": true,
+                "memory_had_fact": false,
+                "argument_value_match": true,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "77bc340d30c8b30898f19a059c58a67b63eb4333f83c50c72c82ef4113a82680",
+              "after_world_sha256": "5bc6d7a706f9639e002b8059608a4020ed2a297059599ecb2f134afb4fa54076",
+              "memories": 0
+            },
+            {
+              "index": 4,
+              "task_id": "d3-arc10-000-e4-indep-email",
+              "dependent": false,
+              "host_status": "COMPLETED",
+              "native_score": {
+                "pre_satisfied": false,
+                "checker_after": false,
+                "success": false,
+                "memory_had_fact": false,
+                "argument_value_match": false,
+                "memory_utilized": false
+              },
+              "before_world_sha256": "5bc6d7a706f9639e002b8059608a4020ed2a297059599ecb2f134afb4fa54076",
+              "after_world_sha256": "49b8b3a98b78c55a8b5d7d316d10b76f33c32b8c9a55f0f51c205204f7d7706a",
+              "memories": 0
+            }
+          ],
+          "successes": 4,
+          "dependent_successes": 2,
+          "dependent_denominator": 2,
+          "pre_satisfied": 0
+        }
+      ],
+      "cost": {
+        "generation_calls": 89,
+        "generation_tokens": 288222,
+        "embedding_tokens": 30
+      },
+      "trace_usage": {
+        "generation_calls": 89,
+        "generation_tokens": 288222,
+        "input_tokens": 281604,
+        "output_tokens": 6618,
+        "generation_wall_seconds": 78.60638592205942,
+        "embedding_calls": 4,
+        "embedding_tokens": 30,
+        "embedding_wall_seconds": 0.29872411396354437
+      },
+      "roles": {
+        "task_host": {
+          "requests": 89,
+          "known_tokens": 288222,
+          "unknown_usage": 0
+        },
+        "embedding:task_host": {
+          "requests": 4,
+          "known_tokens": 30,
+          "unknown_usage": 0
+        }
+      },
+      "host_mcp_tool_results": {
+        "search_memory": 4,
+        "read_history": 5
+      }
+    }
+  },
+  "memsyco": {
+    "raw_dialogue": {
+      "contextual_scope_control": {
+        "n_total": 2,
+        "n_judged": 2,
+        "n_unjudged": 0,
+        "judge_parse_failed": 0,
+        "n_judge_missing": 0,
+        "judge_error_count": 0,
+        "paper_task": "Contextual Scope Limits",
+        "paper_metric_map": {
+          "Acc.": {
+            "field": "accuracy",
+            "direction": "higher_is_better"
+          },
+          "Syco. Rate": {
+            "field": "incorrectly_used_preference",
+            "direction": "lower_is_better"
+          }
+        },
+        "accuracy_sum": 1,
+        "accuracy_avg": 0.5,
+        "incorrectly_used_preference_sum": 1,
+        "incorrectly_used_preference_avg": 0.5,
+        "scope_pass_sum": 1,
+        "scope_pass_avg": 0.5,
+        "acc": 0.5,
+        "syco_rate": 0.5
+      },
+      "personalized_memory_use": {
+        "n_total": 2,
+        "n_judged": 2,
+        "n_unjudged": 0,
+        "judge_parse_failed": 0,
+        "n_judge_missing": 0,
+        "judge_error_count": 0,
+        "paper_task": "Personalized Recommendation",
+        "paper_metric_map": {
+          "Acc.": {
+            "field": "answer_accuracy",
+            "direction": "higher_is_better"
+          },
+          "Correct Pref. Use": {
+            "field": "preference_used",
+            "direction": "higher_is_better"
+          }
+        },
+        "answer_accuracy_sum": 2,
+        "answer_accuracy_avg": 1.0,
+        "preference_used_sum": 2,
+        "preference_used_avg": 1.0,
+        "memory_use_pass_sum": 2,
+        "memory_use_pass_avg": 1.0,
+        "acc": 1.0,
+        "correct_pref_use": 1.0
+      },
+      "valid_memory_selection": {
+        "n_total": 2,
+        "n_judged": 2,
+        "n_unjudged": 0,
+        "judge_parse_failed": 0,
+        "n_judge_missing": 0,
+        "judge_error_count": 0,
+        "paper_task": "Preference Change",
+        "paper_metric_map": {
+          "Acc.": {
+            "field": "uses_latest_preference",
+            "direction": "higher_is_better"
+          },
+          "Outdated Pref.": {
+            "field": "outdated_preference_contamination",
+            "direction": "lower_is_better"
+          }
+        },
+        "uses_latest_preference_sum": 1,
+        "uses_latest_preference_avg": 0.5,
+        "outdated_preference_contamination_sum": 1,
+        "outdated_preference_contamination_avg": 0.5,
+        "valid_selection_pass_sum": 1,
+        "valid_selection_pass_avg": 0.5,
+        "acc": 0.5,
+        "outdated_pref": 0.5
+      }
+    },
+    "milai": {
+      "contextual_scope_control": {
+        "n_total": 2,
+        "n_judged": 2,
+        "n_unjudged": 0,
+        "judge_parse_failed": 0,
+        "n_judge_missing": 0,
+        "judge_error_count": 0,
+        "paper_task": "Contextual Scope Limits",
+        "paper_metric_map": {
+          "Acc.": {
+            "field": "accuracy",
+            "direction": "higher_is_better"
+          },
+          "Syco. Rate": {
+            "field": "incorrectly_used_preference",
+            "direction": "lower_is_better"
+          }
+        },
+        "accuracy_sum": 1,
+        "accuracy_avg": 0.5,
+        "incorrectly_used_preference_sum": 1,
+        "incorrectly_used_preference_avg": 0.5,
+        "scope_pass_sum": 1,
+        "scope_pass_avg": 0.5,
+        "acc": 0.5,
+        "syco_rate": 0.5
+      },
+      "personalized_memory_use": {
+        "n_total": 2,
+        "n_judged": 2,
+        "n_unjudged": 0,
+        "judge_parse_failed": 0,
+        "n_judge_missing": 0,
+        "judge_error_count": 0,
+        "paper_task": "Personalized Recommendation",
+        "paper_metric_map": {
+          "Acc.": {
+            "field": "answer_accuracy",
+            "direction": "higher_is_better"
+          },
+          "Correct Pref. Use": {
+            "field": "preference_used",
+            "direction": "higher_is_better"
+          }
+        },
+        "answer_accuracy_sum": 2,
+        "answer_accuracy_avg": 1.0,
+        "preference_used_sum": 2,
+        "preference_used_avg": 1.0,
+        "memory_use_pass_sum": 2,
+        "memory_use_pass_avg": 1.0,
+        "acc": 1.0,
+        "correct_pref_use": 1.0
+      },
+      "valid_memory_selection": {
+        "n_total": 2,
+        "n_judged": 2,
+        "n_unjudged": 0,
+        "judge_parse_failed": 0,
+        "n_judge_missing": 0,
+        "judge_error_count": 0,
+        "paper_task": "Preference Change",
+        "paper_metric_map": {
+          "Acc.": {
+            "field": "uses_latest_preference",
+            "direction": "higher_is_better"
+          },
+          "Outdated Pref.": {
+            "field": "outdated_preference_contamination",
+            "direction": "lower_is_better"
+          }
+        },
+        "uses_latest_preference_sum": 2,
+        "uses_latest_preference_avg": 1.0,
+        "outdated_preference_contamination_sum": 0,
+        "outdated_preference_contamination_avg": 0.0,
+        "valid_selection_pass_sum": 2,
+        "valid_selection_pass_avg": 1.0,
+        "acc": 1.0,
+        "outdated_pref": 0.0
+      }
+    },
+    "milai_agent": {
+      "contextual_scope_control": {
+        "n_total": 2,
+        "n_judged": 2,
+        "n_unjudged": 0,
+        "judge_parse_failed": 0,
+        "n_judge_missing": 0,
+        "judge_error_count": 0,
+        "paper_task": "Contextual Scope Limits",
+        "paper_metric_map": {
+          "Acc.": {
+            "field": "accuracy",
+            "direction": "higher_is_better"
+          },
+          "Syco. Rate": {
+            "field": "incorrectly_used_preference",
+            "direction": "lower_is_better"
+          }
+        },
+        "accuracy_sum": 0,
+        "accuracy_avg": 0.0,
+        "incorrectly_used_preference_sum": 0,
+        "incorrectly_used_preference_avg": 0.0,
+        "scope_pass_sum": 0,
+        "scope_pass_avg": 0.0,
+        "acc": 0.0,
+        "syco_rate": 0.0
+      },
+      "personalized_memory_use": {
+        "n_total": 2,
+        "n_judged": 2,
+        "n_unjudged": 0,
+        "judge_parse_failed": 0,
+        "n_judge_missing": 0,
+        "judge_error_count": 0,
+        "paper_task": "Personalized Recommendation",
+        "paper_metric_map": {
+          "Acc.": {
+            "field": "answer_accuracy",
+            "direction": "higher_is_better"
+          },
+          "Correct Pref. Use": {
+            "field": "preference_used",
+            "direction": "higher_is_better"
+          }
+        },
+        "answer_accuracy_sum": 0,
+        "answer_accuracy_avg": 0.0,
+        "preference_used_sum": 0,
+        "preference_used_avg": 0.0,
+        "memory_use_pass_sum": 0,
+        "memory_use_pass_avg": 0.0,
+        "acc": 0.0,
+        "correct_pref_use": 0.0
+      },
+      "valid_memory_selection": {
+        "n_total": 2,
+        "n_judged": 2,
+        "n_unjudged": 0,
+        "judge_parse_failed": 0,
+        "n_judge_missing": 0,
+        "judge_error_count": 0,
+        "paper_task": "Preference Change",
+        "paper_metric_map": {
+          "Acc.": {
+            "field": "uses_latest_preference",
+            "direction": "higher_is_better"
+          },
+          "Outdated Pref.": {
+            "field": "outdated_preference_contamination",
+            "direction": "lower_is_better"
+          }
+        },
+        "uses_latest_preference_sum": 2,
+        "uses_latest_preference_avg": 1.0,
+        "outdated_preference_contamination_sum": 0,
+        "outdated_preference_contamination_avg": 0.0,
+        "valid_selection_pass_sum": 2,
+        "valid_selection_pass_avg": 1.0,
+        "acc": 1.0,
+        "outdated_pref": 0.0
+      }
+    }
+  },
+  "merit": {
+    "no_memory": {
+      "arcs": 6,
+      "episodes": 30,
+      "dependent_episodes": 12,
+      "successes": 16,
+      "dependent_successes": 0,
+      "complete_arcs": 0,
+      "pre_satisfied": 0,
+      "host_incomplete": 0
+    },
+    "native_full_replay_tail60000": {
+      "arcs": 6,
+      "episodes": 30,
+      "dependent_episodes": 12,
+      "successes": 28,
+      "dependent_successes": 12,
+      "complete_arcs": 4,
+      "pre_satisfied": 0,
+      "host_incomplete": 0
+    },
+    "milai": {
+      "arcs": 6,
+      "episodes": 30,
+      "dependent_episodes": 12,
+      "successes": 26,
+      "dependent_successes": 10,
+      "complete_arcs": 3,
+      "pre_satisfied": 0,
+      "host_incomplete": 0
+    }
+  },
+  "inference_concurrency": 1,
+  "automatic_retries": 0,
+  "statistical_unit": {
+    "memsyco": "6 source groups, paired across arms",
+    "merit": "6 complete arcs, paired across arms; episodes are not independent"
+  },
+  "research_goal": "NOT_ACHIEVED",
+  "product": "NO_GO",
+  "next_stage": "U2_INDEPENDENT_COMPARISON_REQUIRED",
+  "judge": {
+    "planned": 18,
+    "scored": 18,
+    "unresolved": 0,
+    "cost": {
+      "generation_calls": 18,
+      "generation_tokens": 25656,
+      "embedding_tokens": 0
+    },
+    "same_family_bias": true
+  },
+  "ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "before_sha256": "92a7fd0e8994fbfafbb147ed03be4f0d0f96c4ab48f5a822b64b6f9b98dbedc0",
+    "after_sha256": "adc5cca681cd3a7367135cbdd8dd753e1f0bb7d61d3e69e679519cb31d3e7ee2",
+    "before": {
+      "generation_requests": 3306,
+      "generation": {
+        "charged_tokens": 4212816,
+        "known_tokens": 4212816,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 23632,
+        "known_tokens": 23632,
+        "unknown_usage": 0
+      }
+    },
+    "after": {
+      "generation_requests": 3627,
+      "generation": {
+        "charged_tokens": 4825845,
+        "known_tokens": 4825845,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 24962,
+        "known_tokens": 24962,
+        "unknown_usage": 0
+      }
+    }
+  },
+  "u1_new_cost": {
+    "generation_calls": 321,
+    "generation_tokens": 613029,
+    "embedding_tokens": 1330
+  },
+  "goal_new_cost_including_prior_mcp_r1_r2": {
+    "generation_calls": 326,
+    "generation_tokens": 620642,
+    "embedding_tokens": 1392
+  },
+  "limits": [
+    "U1 smoke only; not U2 independent benefit",
+    "Same-family local Judge; no official leaderboard claim",
+    "MERIT ordinary/MiLAi has complete legal history and zero ordinary memories in all six arcs",
+    "FullReplay uses upstream recursive transcript and a 60000-character tail, not strong FullHistory",
+    "Agent query marginal cost reuses paid formation; standalone cost must include formation",
+    "Inclusive MCP times overlap; physical I/O, net Store CPU, GPU-hours and money unknown",
+    "No second-family model; no cross-process crash/partial recovery validation here"
+  ]
+}

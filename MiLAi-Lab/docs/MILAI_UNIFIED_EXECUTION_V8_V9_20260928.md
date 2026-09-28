@@ -1,5 +1,5 @@
 ---
-status: ACTIVE_U0_U1_PREPARATION
+status: ACTIVE_U2_IMPLEMENTATION
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 plan_sha256: b496818cc94dc5a3eee83f7795f8afb7f145cc16aa628f31c52d7e33251a948c
 base_commit: 77dfc2f43f2307bb649cdbee9d62a97e5863fac0
@@ -197,18 +197,32 @@ U1适配器及协议已由Luna发布为`aa7a25ed203cc9b3a93801d7ac00ae7bfa255c83
 原始arc和world留在ignored artifacts，公开仅身份／生成参数／哈希，0模型或embedding调用。
 输入和运行顺序将在发布后于同一HEAD正式prepare；再冻结全部身份、scorer、namespace和连续账本，才开始U1。
 
+## U1 原生切片完成
+
+输入由Luna发布为`94d3b18ef6b8c1dfd6019703df8e84163628c360`，Root核对远端一致；Fast36458779219 success。
+同一HEAD六份正式prepare和完整执行freeze后，Root依固定顺序完成36 Host jobs，再冻结18份MemSyco答案并完成单次Judge。
+详见[U1结果及首断点报告](MILAI_UNIFIED_U1_NATIVE_RESULTS_20260929.md)与[逐项机器证据](../data/manifests/unified-v8-v9-u1-native-results-20260929.json)。
+MERIT NoMemory16/30、原生FullReplay28/30、ordinary/MiLAi26/30，dependent分别0/12、12/12、10/12；
+全部pre_satisfied为false。MiLAi六arc零普通记忆写入，能访问完整合法历史，不能声称持久维护或SER效果。
+额外D2失败来自实际工具参数丢失版本前缀；共同D3邮件失败来自原生大小写敏感检查。原分数/世界/失败保留。
+MemSyco共同reader按scope/valid/personalized为RawDialogue1/2、1/2、2/2，MiLAi1/2、2/2、2/2；
+只读Agent扩展0/2、2/2、0/2，四题没有检索就要求补背景。Judge局限和两种竞争解释均已记录。
+U1新增321 generation/613029tokens/1330embeddingtokens，与真实HTTP及连续账本逐项核平；
+连续累计3627/4825845/24962，当前unknown usage0，历史嵌套账本保留。本Goal含先前MCP失败和验收新增326/620642/1392。
+G0/G1在本切片范围通过；当前进入独立U2实现，不能以smoke关闭完整Goal。
+
 ## 全范围需求与当前状态
 
 | 要求 | 证明完成所需证据 | 当前 |
 | --- | --- | --- |
-| U0 身份/资源/许可/曝光 | 源码、模型、数据、scorer 哈希；历史曝光和无模型账本 | IN_PROGRESS |
+| U0 身份/资源/许可/曝光 | 源码、模型、数据、scorer 哈希；历史曝光和无模型账本 | COMPLETE_FOR_U1；U2外部身份待补 |
 | Host Agent 真实 MCP | 实际模型提案、MCP 请求/回执、同一 Store 和后续回答 | R2 PASSED 2脚本/3消息/9任务义务；R1失败保留 |
-| U1 MemSyco | 三类各2原题、原生参考及MiLAi、完整历史、原生评分和成本 | NOT_RUN |
-| U1 MERIT | 三域easy/hard各1完整arc、原生tools/world/checker、两路径、leak check | NOT_RUN |
-| U2 独立比较 | 60题/18arcs建议规模，正式ID另冻；强原文RAG、真实摘要、完整历史、ordinary/候选和Mem0 | NOT_RUN |
+| U1 MemSyco | 三类各2原题、原生参考及MiLAi、完整历史、原生评分和成本 | COMPLETE；18/18答案单次评分，非满分 |
+| U1 MERIT | 三域easy/hard各1完整arc、原生tools/world/checker、两路径、leak check | COMPLETE；18/18 arc运行、90 episodes |
+| U2 独立比较 | 60题/18arcs建议规模，正式ID另冻；强原文RAG、真实摘要、完整历史、ordinary/候选和Mem0 | IMPLEMENTATION；模型NOT_RUN |
 | 第二外部系统 | A-MEM/SimpleMem择一，在首表可用后接入，原生能力和成本可追溯 | NOT_RUN |
 | U3-P 协议 | 需要时独立冻结J/N和thinking；自动选择而非强制调用 | CONDITION_OPEN |
-| U3-O 对象 | 原生真实key失败触发；原工具主表和ref扩展分开 | CONDITION_OPEN |
+| U3-O 对象 | 原生真实key失败触发；原工具主表和ref扩展分开 | OBSERVED_PARAMETER_PREFIX_LOSS；待U2决定独立诊断 |
 | U3-W 写入 | 实际漏维护触发；同服务、可信触发、正负例与全成本 | CONDITION_OPEN |
 | U3-R 恢复 | 相关行动需求触发；partial/unknown、进程重开、实际ID及无重复副作用 | CONDITION_OPEN |
 | U4 机制 | 真信号/瓶颈；MAB6k/32k及必要固定bank/State/writer/预算对照 | CONDITION_OPEN |
@@ -217,4 +231,4 @@ U1适配器及协议已由Luna发布为`aa7a25ed203cc9b3a93801d7ac00ae7bfa255c83
 
 数量先按计划建议组织；若实际数据/资源要求调整，必须在模型运行前说明理由、保持完整实例并冻结。
 研究优势不预设；最终必须说明形成、取材、呈现、动作或额外计算的证据边界。
-当前 Goal 保持 active；R2实际接线验收通过，完整原生适配与后续实验尚未完成。
+当前Goal保持active；R2接线与完整U1功能切片已完成，独立U2及适用U3—U6仍待完成。

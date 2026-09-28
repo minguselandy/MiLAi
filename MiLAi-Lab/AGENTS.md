@@ -34,6 +34,22 @@ has twelve untracked plans/reviews including v27; preserve all originals and his
 The full objective remains active until requirement-by-requirement evidence, costs, reports and
 remote publication are verified. Product remains NO_GO; no automatic claim of unseen benefit.
 
+U1 native smoke is now complete at execution B94d3b18; see
+[the U1 report](docs/MILAI_UNIFIED_U1_NATIVE_RESULTS_20260929.md). All36 Host jobs and18 single-attempt
+Judge calls finished. MERIT NoMemory16/30, native FullReplay28/30, ordinary/MiLAi26/30;
+dependent0/12,12/12,10/12. MiLAi had no ordinary writes in any arc and could access complete legal
+history, so this is not persistent-maintenance evidence. MemSyco per-track outcomes and exact costs
+are in the report; the readonly Agent's four no-search failures remain. Preserve the exact native
+version-prefix and email-case failures, source/input/scoring freezes and all trajectories.
+U1 added321 generation/613029tokens/1330embeddingtokens; continuous ledger3627/4825845/24962.
+G0/G1 pass only for this functional slice. Continue the authorized independent U2 implementation:
+60 MemSyco tasks/54 source groups and18 complete MERIT arcs; true FullHistory, actual rolling LLM
+summary, BM25+dense RawRAG, ordinary/current identical candidate merged, and real pinned Mem0.
+Question-free formation cache must preserve exact source/owner/history permissions; query baselines
+must not see future within-episode messages. Keep original tools/world/checkers and common reader.
+Second external follows the first table; U3–U5 remain evidence-gated, U6 still required.
+Root owns reporting/selection/real calls; Sol is the only source writer; Luna owns Git publication.
+
 The following v7 closure is historical:
 
 
