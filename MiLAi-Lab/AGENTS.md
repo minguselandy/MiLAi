@@ -2,6 +2,35 @@
 
 ## Current scope and authority
 
+The new actual user Goal authorizes detailed execution of
+[DEVELOPMENT_EXPERIMENT v7](docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20260928_v7.0.md).
+Follow [v7 execution record](docs/MILAI_DEVELOPMENT_EXPERIMENT_EXECUTION_V7_20260928.md).
+This supersedes the v6 stop only for the new plan scope; v6 results, scores and failed compact
+candidate remain historical. The first slice is P0/P1 engineering and E1 only. E2–E6, second
+family, object adapters, synchronous writer and selector are conditional, not an automatic matrix.
+Root read all1055 plan lines. Keep original DESIGN_ONLY metadata bytes; authorization comes
+from the active Goal, not document status. The user supplied the architecture-review basis path; Root read all487 lines and verified
+SHA03ba2a29 against the v7 plan. Preserve its original research/design-only bytes.
+Base is c6f335fe, isolated development-experiment-v7 worktree; PR70 remains draft/open and main
+07cc364f. No merge authorization follows from v7. Original main has nine untracked plan/review documents now,
+including v7; preserve all old trees, v27, failures, logs and ledgers. v6 Fast36411545487 succeeded.
+P0 read-only deployed version0.27.1/process flags and exact installed code confirm auto-tool-choice
+and tool parser are disabled. Native N is BLOCKED_ENVIRONMENT; J remains runnable after freeze. Do not
+modify shared vLLM, download weights or deploy another service. P0 makes zero generation calls.
+P1 must share legal material/permissions between JSON and native, retain old JSON encoding,
+account for native tools in actual capacity, reject unsupported legacy combinations, and verify
+real ToolNode scheduling/receipts/errors. Keep current_request/compact_v6 fixed for E1's failure
+condition; native natural-text final vs JSON decoded answer is a protocol distinction. No online
+rubric/Judge, forced tool_choice=required, keyword writer, or hidden result repair.
+Root owns docs/fixtures/contracts/freezes/serial real HTTP/scoring/continuous ledger; one reused
+Sol xhigh is sole source/config/test owner; reused Luna high owns Git worktree/commit/push and
+needed public resource downloads only. Astra xhigh only a specific difficult conflict.
+The v7 plan explicitly permits a negative or environment-limited execution conclusion with
+unmet quality goals reported. Do not close Goal before P0/P1, every runnable authorized E1 job,
+full P5 report and requirement audit plus publication verification are complete.
+
+The following v6 record remains historical:
+
 The current actual user Goal explicitly authorizes the complete [NEXT_DEVELOPMENT v6 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v6.0.md).
 Follow the [v6 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V6_20260928.md).
 S0 PR69 is now merged at07cc364f by separate explicit user instruction. S1's explicit RequestContext,
