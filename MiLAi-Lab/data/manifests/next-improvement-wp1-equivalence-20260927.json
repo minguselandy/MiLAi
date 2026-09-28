@@ -94,5 +94,61 @@
     "final_runner_sha256": "3049c871bb3335d7a11607fc564ab0020433764d896b10c2329649f4f8f11a36",
     "behavior_test_rerun": false,
     "packaging": "rebuild final distributions after final docs freeze; keep first successful build receipt"
+  },
+  "publication_and_ci_followup": {
+    "pr": 53,
+    "head": "0d04ca68d0e575919773c24b764c3c0b1832de7e",
+    "base": "ebf7878fc34bef6f72723ce22e445e5bf712d4f3",
+    "tested_merge_commit": "98e3c3d8546f7f5118132bb01d87a0fda59a34bb",
+    "fast_run": 36328343542,
+    "status": "SUCCESS",
+    "gate_job": 108646972066,
+    "core": {
+      "passed": 5114,
+      "skipped": 142,
+      "deselected": 14,
+      "seconds": 525.91,
+      "protocol_subset_separately_executed": 71,
+      "protocol_count_included_in_core_total": true,
+      "build": "SUCCESS"
+    },
+    "foundation": {
+      "passed": 145,
+      "skipped": 0,
+      "deselected": 1
+    },
+    "external": "SUCCESS",
+    "nonselected_jobs": "SKIPPED, not counted as passed",
+    "logs": {
+      "108645384700": "1a9cd72f159d10156aa601e20917997f9da96e69bd0f8bcb38fc65a7f5379b7e",
+      "108645384771": "19f2c4e0713eb6015c5ddc39a2b48f374c000bd4b8599aa7f0b5496817478869"
+    },
+    "final_local_build": {
+      "build_log": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/wp1/c1-build-final.log",
+      "checks": {
+        "sdist_cli_current_bytes": true,
+        "sdist_history_original_sha256": true,
+        "sdist_no_artifacts_venv_pycache": true,
+        "sdist_runner_current_bytes": true,
+        "sdist_wp1_manifest_current_bytes": true,
+        "wheel_runner_current_bytes": true,
+        "wheel_runner_single": true
+      },
+      "command": "uv build --offline --out-dir artifacts/next-improvement/wp1/dist-final",
+      "history_sha256": "a97255a2ff0891e4586310af5c86f723ed82cd7fe7af2aedacddc66168d1c77d",
+      "kind": "MILAI_LSA_C1_FINAL_BUILD_RECEIPT",
+      "runner_sha256": "3049c871bb3335d7a11607fc564ab0020433764d896b10c2329649f4f8f11a36",
+      "sdist": {
+        "bytes": 4983872,
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/wp1/dist-final/milai_lab-0.1.0.tar.gz",
+        "sha256": "db650a7bb4c4d173d2cdc0ce4382dff12745567535decec211875b4fe0a134f4"
+      },
+      "wheel": {
+        "bytes": 504015,
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/wp1/dist-final/milai_lab-0.1.0-py3-none-any.whl",
+        "sha256": "b968f3183fdb4b47ec08526e1a50f58cdb47566da892a16f5eee5796584cd552"
+      }
+    },
+    "recording_boundary": "Post-publication follow-up in C2 docs; not inserted into already-built C1 sdist"
   }
 }

@@ -1,6 +1,6 @@
 # WP1：入口职责与活动指引整理
 
-状态：结构与局部等价验收通过；文档冻结后进行一次必要分发构建，精确结果另附发布回执。范围为等价结构整理，不改研究方法、模型提示、CRUD行为或实验分数。
+状态：结构与局部等价验收、最终必要构建通过；[PR53](https://github.com/minguselandy/MiLAi/pull/53)已发布，Fast36328343542及最终gate108646972066已通过。范围为等价结构整理，不改研究方法、模型提示、CRUD行为或实验分数。
 本切片按[新计划](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)和
 [执行记录](MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md)推进。尚无新增真实模型调用。
 
@@ -92,3 +92,17 @@ Root核实AST完全相同，更新源码身份。三组差分与局部测试不�
 恢复代码不会恢复已经发生的业务世界。当前无新增真实业务动作，连续实验账本仍为
 2768次生成、3420333 generation tokens、18746 embedding tokens。
 用户要求在完整当前任务结束后暂停Goal并发布总体报告；本切片完成不等于总目标完成。
+
+发布核对：远端head为`0d04ca68d0e575919773c24b764c3c0b1832de7e`，base为C0分支ebf7878。
+最终wheel为`b968f3183fdb4b47ec08526e1a50f58cdb47566da892a16f5eee5796584cd552`；
+sdist为`db650a7bb4c4d173d2cdc0ce4382dff12745567535decec211875b4fe0a134f4`。
+本段是发布后的结果补记，属于随后C2文档记录，不回写已构建C1分发包。
+
+C1远端终态：Fast36328343542全部按变更选中的必需job及汇总gate成功；
+未选中的Product/Archive job为skip，不计为通过。未额外触发C1全量Full；
+C0完整组合门禁与C1局部变化检查按各自源码版本分开记录。
+
+C1远端core为5114 passed/142 skipped/14 deselected（525.91秒），并完成分发构建；
+单独执行的71项纯协议包含在5114总集合内，不再相加。foundation合计145 passed/1 deselected，
+external成功。实际checkout为PR merge tree `98e3c3d8546f7f5118132bb01d87a0fda59a34bb`，
+将C1 head组合到C0 base，不表示已合并。日志hash与分发回执补记在机器证据。
