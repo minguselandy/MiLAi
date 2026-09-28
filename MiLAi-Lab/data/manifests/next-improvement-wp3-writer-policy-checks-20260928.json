@@ -113,5 +113,141 @@
     "shared_postgres_calls": 0,
     "test_store": "MockTransport and InMemoryStore; affected tests also use actual local SQLite checkpoint with synthetic ApplicationWorld",
     "not_claimed": "No cross-process replay guarantee for same-turn boundary receipts, no exactly-once ordinary-memory writes, no two-store transaction, no rubric access or real-model outcome."
+  },
+  "pre_publication_receipt_sha256": "4a322b540ac14f6adbe603da69b91b6f96b8bdfb0946a4d8258cd36291147b8a",
+  "remote_ci": {
+    "kind": "MILAI_C3B_ACTUAL_CI_RECEIPT",
+    "pr": 57,
+    "head_sha": "07aaa3cfc0bec3f914df00a614812aafec967b41",
+    "base_sha": "ec34c89d96ecbf6030777b8b23c5dc9773d27ac4",
+    "tested_merge_sha": "62e0f607f9395b1b601a94a274c5cf36e29fc110",
+    "run_id": 36335918071,
+    "run_url": "https://github.com/minguselandy/MiLAi/actions/runs/36335918071",
+    "conclusion": "success",
+    "final_gate_job": 108667751104,
+    "core": {
+      "job_id": 108666670599,
+      "passed": 5114,
+      "skipped": 142,
+      "deselected": 14,
+      "seconds": 350.48,
+      "protocol_71_included_in_total": true,
+      "wheel_and_sdist_built": true
+    },
+    "foundation": {
+      "job_id": 108666670535,
+      "passed": 184,
+      "deselected": 1,
+      "writer_policy_checks": 16
+    },
+    "external": {
+      "job_id": 108666670581,
+      "conclusion": "success"
+    },
+    "jobs": [
+      {
+        "id": 108666617574,
+        "name": "Classify changed paths",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108666643301,
+        "name": "Fail-fast source boundaries",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108666670506,
+        "name": "Product identity manifest",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108666670535,
+        "name": "Lab LangMem foundation fast gate",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108666670581,
+        "name": "Lab locked external adapter fast gate",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108666670599,
+        "name": "Lab fast gate",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108666671201,
+        "name": "Product Runtime fast gate",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 108666671247,
+        "name": "Archive validation",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 108666671623,
+        "name": "Product integration fast gate (${{ matrix.package }})",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 108666671627,
+        "name": "Tested PR tree identity",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 108666697521,
+        "name": "Current implementation conformance receipt",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 108667751104,
+        "name": "Fast verification gate",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "log_evidence": [
+      {
+        "job_id": 108666670599,
+        "evidence": [
+          "2026-09-27T17:10:29.5542561Z HEAD is now at 62e0f60 Merge 07aaa3cfc0bec3f914df00a614812aafec967b41 into ec34c89d96ecbf6030777b8b23c5dc9773d27ac4",
+          "2026-09-27T17:10:35.6107038Z All checks passed!",
+          "2026-09-27T17:10:37.3854626Z 71 passed in 0.29s",
+          "2026-09-27T17:16:28.9977491Z 5114 passed, 142 skipped, 14 deselected in 350.48s (0:05:50)",
+          "2026-09-27T17:16:32.2515053Z Successfully built dist/milai_lab-0.1.0.tar.gz",
+          "2026-09-27T17:16:32.2515552Z Successfully built dist/milai_lab-0.1.0-py3-none-any.whl"
+        ]
+      },
+      {
+        "job_id": 108666670535,
+        "evidence": [
+          "2026-09-27T17:10:29.1407483Z HEAD is now at 62e0f60 Merge 07aaa3cfc0bec3f914df00a614812aafec967b41 into ec34c89d96ecbf6030777b8b23c5dc9773d27ac4",
+          "2026-09-27T17:10:37.3340291Z All checks passed!",
+          "2026-09-27T17:11:00.4571198Z 21 passed, 16 warnings in 2.18s",
+          "2026-09-27T17:11:00.6349431Z All checks passed!",
+          "2026-09-27T17:11:06.1660198Z 88 passed, 29 warnings in 3.47s",
+          "2026-09-27T17:11:06.3327025Z All checks passed!",
+          "2026-09-27T17:11:08.9318475Z 7 passed, 1 warning in 0.97s",
+          "2026-09-27T17:11:09.0879274Z All checks passed!",
+          "2026-09-27T17:11:12.3689727Z 6 passed, 5 warnings in 1.53s",
+          "2026-09-27T17:11:12.5551385Z All checks passed!",
+          "2026-09-27T17:11:16.5245266Z 16 passed, 15 warnings in 2.21s",
+          "2026-09-27T17:11:41.8553091Z 46 passed, 1 deselected, 36 warnings in 15.78s"
+        ]
+      }
+    ],
+    "limitations": "Declared Product/archive/tree-identity skips are not passes; the tested merge ref is not a merge to main."
   }
 }

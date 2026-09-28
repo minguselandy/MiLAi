@@ -52,9 +52,9 @@ PR合并仍须正常检查和审阅闭环，当前不自动merge；先完成可�
 | WP0/C0/G0 | 同命令main/PR隔离复现；静态源码—依赖—测试归属无遗漏；core/foundation/external真实依赖；锁定pytest运行71纯协议及原集成、实际收集数；全Ruff、适用Mypy、边界/归档、最终wheel/sdist；真实CI | G0_PASSED（声明的历史资产skip不算通过） |
 | WP1/C1/X0 | 保留protocol/controller分工；CLI职责归包内且单实现；活动AGENTS与历史分开且原内容可恢复；完整请求/顺序/U维护A/来源/pending/容量/回执/trace等价，规范化项明确 | ACCEPTED；C1本地检查/最终构建与实际Fast已通过 |
 | WP2/C2/G1 | 锁定上游实际集成复现未知合法UUID被upsert；薄严格CRUD同步/异步一致；已有/缺失/错误namespace/message UUID/空删除/真实删除/Store异常/无副作用回执；不强制每次额外Host READ，不声称CAS | ENGINEERING_ACCEPTED；C2实际Fast通过，在线语义另验 |
-| WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | C3a PR55初轮失败保留，2c7修复实际Fast通过；C3b工程冻结通过，真实比较NOT_RUN |
+| WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | C3a PR55初轮失败保留，2c7修复实际Fast通过；C3b六完整轨迹完成：Host双写2/2、boundary1/2、overlap2/2；连续生命周期仍待X5 |
 | WP4/C5/X3/X4/G2 | 明确A≠U且U空可CREATE；保留原问题实体、全读/普通检索/同State查询增强/可关selector；固定同bank与前态比较all/U/U=A/oracle；对真正使用引用做有限失效，不引全库图 | NOT_DONE |
-| WP5/C4/X2 | 同粒度整体/普通patch/候选局部维护；明确目标版本/唯一片段，广泛变动可整体；更新与无关保持同时测；D0/真实事件身份/部分成功维护续接保留 | 设计收敛：候选与强普通patch合并，两臂；实现/实验NOT_DONE |
+| WP5/C4/X2 | 同粒度整体/普通patch/候选局部维护；明确目标版本/唯一片段，广泛变动可整体；更新与无关保持同时测；D0/真实事件身份/部分成功维护续接保留 | 候选与强普通patch合并两臂；C4工程冻结及必要检查/构建完成，实际实验NOT_RUN |
 | WP6/X1 | 用户、真实工具结果、助手提案、可修订State角色清楚且原回执完整；固定正确正文比原标题/源标题/无State，首响应后实际动作；无gold键名规则 | R1六次首响应及全部实际续接完成；严格1/6，标题修复Pivot |
 | WP7 | 独立语义写入/重复规则/依赖、Host/U/maint/A、材料、Store调用/CPU/wall、任务与维护分别测量；全生命周期Cbuild+Cmaint+ΣCuse及复用摊销；只有实测热点才优化 | NOT_DONE |
 | X5/G3/C6 | 正常可用简洁基线＋独立可切换最小候选；同合法历史/权限/CRUD/可比预算；连续在线真实世界/恢复/复用及全成本；逐例首断点和可执行Go/Pivot/Stop | NOT_RUN |
@@ -224,3 +224,14 @@ foundation162/1deselect、external成功；C3a工程门槛关闭。WP6续接前�
 C3b工程已冻结，终版16项定向检查通过，预发布六job零模型prepare通过；
 真实运行仍NOT_RUN。Root公开检查回执及构建前后身份，Luna随后发布独立C3b提交。
 同回合真实维护回执续接已修复，跨进程保证仍留待连续生命周期切片，不据本切片提前宣称。
+
+
+### C3b实际比较完成，WP5独立实现
+
+C3b在07aaa3c独立冻结源码完成六完整轨迹，严格5/6；一个已暴露arc/两个前缀，不作统计或unseen主张。
+Host双写与overlap均2/2；boundary增量缺content导致ordinary memory写null，后续只修State。
+真实HTTP证明不是parser丢字段；保留失败，另立strict CRUD缺正文拒绝修复，不混入WP5。
+连续费用2795/3479362/19273，历史链未变。Host双写先作为最小候选进入后续X5，仍需真实形成/owner/
+临时要求/复用/动作恢复与完整费用；不能以这六轨迹结案。
+[WP5](MILAI_NEXT_IMPROVEMENT_WP5_LOCAL_UPDATE_20260927.md)两前缀四job的输入及scorer已冻结，
+Sol在独立C4分支实现同粒度整体/普通patch合同；没有独立第三算法，实际比较尚未运行。

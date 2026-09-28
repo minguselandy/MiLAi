@@ -192,6 +192,7 @@ jobs:
             --ignore=tests/unit/test_local_state_attention_read_probe.py \
             --ignore=tests/unit/test_frozen_action_continuation.py \
             --ignore=tests/unit/test_writer_policy.py \
+            --ignore=tests/unit/test_state_update_probe.py \
             --ignore=tests/unit/test_langmem_application.py \
             --ignore=tests/unit/test_external_memory_v26.py
           uv run --no-sync python tools/check_legacy_archive.py
@@ -230,8 +231,11 @@ jobs:
           uv run --no-sync ruff check src/milai_lab/runners/writer_policy.py tools/run_writer_policy.py tests/unit/test_writer_policy.py
           uv run --no-sync mypy src/milai_lab/runners/writer_policy.py tools/run_writer_policy.py
           uv run --no-sync pytest -q tests/unit/test_writer_policy.py
+          uv run --no-sync ruff check src/milai_lab/runners/state_update_probe.py tools/run_state_update_probe.py tests/unit/test_state_update_probe.py
+          uv run --no-sync mypy src/milai_lab/runners/state_update_probe.py tools/run_state_update_probe.py
+          uv run --no-sync pytest -q tests/unit/test_state_update_probe.py
           uv run --no-sync mypy src/milai_lab
-          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/datasets/merit.py
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/runners/state_update_probe.py src/milai_lab/datasets/merit.py
           uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
 
   lab-external-fast:

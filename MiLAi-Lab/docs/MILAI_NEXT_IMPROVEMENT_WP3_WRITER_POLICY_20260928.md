@@ -1,6 +1,6 @@
 # WP3/C3b：同一前态下的写入责任比较
 
-状态：源码、输入与评分字节已冻结，必要局部检查和终版构建通过；尚未冻结发布后执行identity或运行。承接[共同工具合同](MILAI_NEXT_IMPROVEMENT_WP3_WRITER_CONTRACT_20260927.md)。
+状态：源码和协议已冻结，六条完整实际轨迹已执行并评分；该发布源码的实际远端CI已通过。承接[共同工具合同](MILAI_NEXT_IMPROVEMENT_WP3_WRITER_CONTRACT_20260927.md)。
 默认旧运行路径保持可用；本切片只有显式配方才启用新策略。
 
 ## 问题与竞争解释
@@ -78,3 +78,79 @@ core协议71项通过，准确源码阶段分列，不能将重叠测试相加�
 不保证跨进程续接，也不保证普通memory写入严格一次性或两库事务。
 预发布零模型prepare六job通过；其HEAD仍是父提交，正式实验将在发布后的独立detached checkout
 重新prepare并冻结identity，不能直接沿用预发布身份。实际远端CI另记，不冒充已完成。
+
+## R1实际结果（07aaa3c，2026-09-28）
+
+已发布[PR57](https://github.com/minguselandy/MiLAi/pull/57)，head
+`07aaa3cfc0bec3f914df00a614812aafec967b41`，base为ec34c89；未合并main。
+Root使用独立detached源码完成六条轨迹，源码与[执行冻结](../data/manifests/next-improvement-wp3-writer-policy-freeze-20260928.json)
+一致。prepare identity为`e57a3558d82c4744c54def792fbe52dfb172abbc3df9d8c339d4e730145f4ea2`，
+freeze SHA为`3fdf37be3a7ee19e1b2894fb82ac606a5cff216c14289aa76267f7595f28d5f0`。
+[逐例结果、实际费用和核验](../data/manifests/next-improvement-wp3-writer-policy-results-20260928.json)
+保留失败、回执、pending及各层测量；运行时未读取rubric，无Judge。
+
+| 策略 | 无变化 / 第二增量严格通过 | Host calls/tokens | Control calls/tokens | 合计generation tokens | embedding tokens |
+| --- | --- | --- | --- | --- | --- |
+| host_both | 是 / 是 | 4 / 11629 | 0 / 0 | 11629 | 75 |
+| boundary_both | 是 / 否 | 3 / 8179 | 3 / 9349 | 17528 | 50 |
+| overlap | 是 / 是 | 3 / 7185 | 2 / 6236 | 13421 | 75 |
+
+严格合计5/6，但单位仍是一个已暴露arc的两个前缀、六条件完整轨迹，不是六独立样本。
+三组无变化均保持原State正文/revision及普通memory，回答三件/S-2/fiber正确。
+Host双写与overlap增量均把原两条实际ID更新到四，State revision2→3，来源保持且没有重复记录。
+所有业务SQLite reservations/attempts实际为空，无业务调用。
+
+每条实际Host请求均核对了工作视图字节，全部control请求保留同一前缀raw history/真实源事件；
+Host provider receipt ID与instrumentation SQLite请求记录一致，所有HTTP 200且usage已知。
+两种维护职责虽具有同样当前前态和合法来源，仍有角色、工具呈现和时点差异，是系统策略比较。
+
+## 失败链与最小后续
+
+Observed：boundary增量的首次实际HTTP回答只给两个update的action/id，均缺content。
+普通memory接口把默认None实际写入原ID并回updated；State接口拒绝缺正文更新。
+Expected：两库都准确改为四；不完整更新不得擦除原正文，也不能以局部成功声称全部完成。
+首个语义断点是缺正文提案，首个破坏性程序断点是接受默认None写入。
+
+Host实际收到了PARTIAL_REJECTED、原回执及当前null memory后调用maintain_records。
+后续control确实收到先前success/error回执与null记录，却只修State为四；普通memory仍null。
+Host最终声称计划已增加一件，未满足冻结评分中的普通memory实际保存要求。
+用户增量事件被ack，但新维护ToolMessage仍pending；两者单列，ack不证明语义正确。
+没有HTTP/进程/容量失败；这次显式修复调用和失败写入全部保留计费。
+
+竞争解释包括：可选schema允许模型只生成action/id；或者adapter/parser丢了正文。
+实际原始HTTP字节排除了后一解释。实际局部成功及正确State可能影响后续修复选择，
+但一条轨迹不能证明这种认知归因。该缺口与职责比较混杂，不将其简单归为boundary天然较差。
+
+最小通用修复另立严格CRUD后续提交：create/update缺失或null正文返回错误且不写，
+delete仍允许省略，native默认模式保留；同步/异步及Host/boundary共享入口做机械复现。
+不据本题微调提示词，不替换或重跑六条R1。继续选择host_both作为最小职责候选，与overlap做
+后续形成、临时要求、owner、复用、真实动作与部分失败恢复比较。boundary此轮Pivot。
+这不是稳定质量、跨模型或完整方法收益结论。
+
+## 成本与测量边界
+
+新增15次生成、42578 generation tokens、8次embedding共200 tokens；其中150为六份前态索引恢复，
+50为两次实际普通memory正文更新。Host为10次/26993 tokens，control为5次/15585 tokens。
+HTTP wall合计generation16.282259秒、embedding0.490770秒；不等于独立进程启动或完整服务计算成本。
+连续账本为2795次生成、3479362 generation tokens、19273 embedding tokens，SHA
+`fea3eca7e56946cf09ea9b044255d31e76ee1269081994fcc7f66307e726ec54`；旧sealed history逐字段未变。
+
+两前缀合计host_both比overlap少1792 tokens（约13.4%）；只看增量时却更贵9045对8200。
+这体现任务组合与维护时点影响，不是生命周期20%节约，更不能当压缩收益。
+当前接续既有前态，不含原始形成费用；完整C_build+C_maint+ΣC_use须由X5另测。
+
+State bank计数含seed/事件/meta/观察；普通memory扫描与observer各自CPU/wall/逻辑字节单列，
+重叠时间不能直接相加。自动boundary和turn_end操作不一定有绑定的Host observer记录，
+实际工具回执与后续Store读回仍保留；普通memory写入的独立CPU/wall尚未单测，不补零。
+逻辑序列化字节不等于物理I/O；没有新增持久索引或依据调用数猜GPU成本。
+
+复现使用该commit的`tools/run_writer_policy.py prepare/run-job`及公开inputs/config，注入已忽略DSN，
+新run根与namespace、相同冻结顺序、真实HTTP并发1。原attempt禁止重放；后续验证须独立新run并披露曝光。
+
+## 实际远端CI
+
+[Fast36335918071](https://github.com/minguselandy/MiLAi/actions/runs/36335918071)与最终gate108667751104成功，
+实际测试merge为`62e0f607f9395b1b601a94a274c5cf36e29fc110`，并非合并main。
+core5114 passed/142 skipped/14 deselected，350.48秒，71协议已包含在5114中，wheel/sdist通过；
+foundation184 passed/1 deselected，含16项新writer-policy检查，external成功。
+未选中的Product/archive/tree identity显式skip，不算通过。原预发布回执及构建身份继续保留。

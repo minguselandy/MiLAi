@@ -1,0 +1,1031 @@
+{
+  "kind": "MILAI_WRITER_POLICY_R1_RESULTS",
+  "scored_at_utc": "2026-09-27T17:16:49.386429+00:00",
+  "method_commit": "07aaa3cfc0bec3f914df00a614812aafec967b41",
+  "freeze_sha256": "3fdf37be3a7ee19e1b2894fb82ac606a5cff216c14289aa76267f7595f28d5f0",
+  "rubric_sha256": "91a260823d37c4e19fd21e52ea90a44dd87081b5f158d92d582ca4c5d35e8e7a",
+  "units": {
+    "exposed_arcs": 1,
+    "prefixes": 2,
+    "isolated_full_turn_trajectories": 6
+  },
+  "strict": {
+    "passed": 5,
+    "denominator": 6
+  },
+  "by_policy": {
+    "host_both": {
+      "trajectories": 2,
+      "strict_pass": 2,
+      "generation_calls": 4,
+      "generation_tokens": 11629,
+      "host_calls": 4,
+      "host_tokens": 11629,
+      "control_calls": 0,
+      "control_tokens": 0,
+      "embedding_calls": 3,
+      "embedding_tokens": 75
+    },
+    "boundary_both": {
+      "trajectories": 2,
+      "strict_pass": 1,
+      "generation_calls": 6,
+      "generation_tokens": 17528,
+      "host_calls": 3,
+      "host_tokens": 8179,
+      "control_calls": 3,
+      "control_tokens": 9349,
+      "embedding_calls": 2,
+      "embedding_tokens": 50
+    },
+    "overlap": {
+      "trajectories": 2,
+      "strict_pass": 2,
+      "generation_calls": 5,
+      "generation_tokens": 13421,
+      "host_calls": 3,
+      "host_tokens": 7185,
+      "control_calls": 2,
+      "control_tokens": 6236,
+      "embedding_calls": 3,
+      "embedding_tokens": 75
+    }
+  },
+  "jobs": [
+    {
+      "job": {
+        "job_id": "1-no-change-host",
+        "case_id": "no_change",
+        "writer_policy": "host_both"
+      },
+      "strict": true,
+      "state_correct": true,
+      "memory_correct": true,
+      "answer_truthful_and_useful": true,
+      "no_business_action": true,
+      "state_revision": 2,
+      "state_content_sha256": "0b7872def8d956a7b06c5f749439b91394d9b788027829dbcf6b7ab5353e5f57",
+      "ordinary_memory_content": "Cobalt delivery kits: 3 units to storage S-2 in fiber cases. Status: Nothing is reserved.",
+      "answer": "The current Cobalt delivery kits plan includes 3 units, destined for storage S-2, packed in fiber cases.",
+      "pending_event_ids": [],
+      "classification": "maintenance_correct",
+      "initial_boundary_status": null,
+      "post_turn_boundary_status": null,
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2584,
+        "host_calls": 1,
+        "host_tokens": 2584,
+        "control_calls": 0,
+        "control_tokens": 0,
+        "embedding_calls": 1,
+        "embedding_tokens": 25,
+        "seed_embedding_tokens": 25,
+        "runtime_embedding_tokens": 0,
+        "generation_http_wall_seconds": 1.0193005101755261,
+        "embedding_http_wall_seconds": 0.24677809979766607
+      },
+      "store_measurements": {
+        "state_bank_including_seed": {
+          "get": {
+            "calls": 19,
+            "failures": 0,
+            "cpu_ns": 7356129,
+            "wall_ns": 13535019,
+            "request_bytes": 4001,
+            "result_bytes": 2073
+          },
+          "search": {
+            "calls": 13,
+            "failures": 0,
+            "cpu_ns": 6354696,
+            "wall_ns": 16885359,
+            "request_bytes": 1999,
+            "result_bytes": 11814
+          },
+          "put": {
+            "calls": 10,
+            "failures": 0,
+            "cpu_ns": 4720445,
+            "wall_ns": 23692047,
+            "request_bytes": 5067,
+            "result_bytes": 0
+          }
+        },
+        "ordinary_scoped_reads_including_final_observation": {
+          "calls": 2,
+          "records": 2,
+          "logical_bytes": 326,
+          "cpu_ns": 767137,
+          "wall_ns": 1627878
+        },
+        "seed_receipt": {
+          "state_ids": [
+            "7c3d500b6bac43689eb199f5a7003aaa"
+          ],
+          "pending_event_ids": [
+            "message:84e94cef-2e02-4473-a9ce-5d206c549fde"
+          ],
+          "seed_memory_puts": 1,
+          "seed_state_puts": 1,
+          "seed_event_puts": 5,
+          "memory_snapshot_search_calls": 2,
+          "namespace_guard_search_calls": 3,
+          "memory_record_put_calls": 1,
+          "memory_snapshot_result_bytes": 192,
+          "state_event_store_stats": {
+            "get": {
+              "calls": 14,
+              "failures": 0,
+              "cpu_ns": 5183653,
+              "wall_ns": 10235823,
+              "request_bytes": 2970,
+              "result_bytes": 1172
+            },
+            "search": {
+              "calls": 7,
+              "failures": 0,
+              "cpu_ns": 2849907,
+              "wall_ns": 8321954,
+              "request_bytes": 1077,
+              "result_bytes": 4937
+            },
+            "put": {
+              "calls": 9,
+              "failures": 0,
+              "cpu_ns": 4456717,
+              "wall_ns": 21235539,
+              "request_bytes": 4581,
+              "result_bytes": 0
+            }
+          },
+          "wall_ns": 311424702,
+          "cpu_ns": 23035891
+        },
+        "observer": {
+          "id": 1,
+          "transactions": 6,
+          "observer_cpu_ns": 3418105,
+          "observer_wall_ns": 39663128,
+          "extra_store_reads": 0,
+          "extra_read_cpu_ns": 0,
+          "extra_read_wall_ns": 0,
+          "initial_db_bytes": 98304
+        },
+        "observed_operations": [],
+        "host_tool_deliveries": []
+      },
+      "host_material": {
+        "view_count": 1,
+        "view_bytes_total": 3288,
+        "source_catalog_bytes_total": 1365,
+        "metadata_and_body_overlap": "view contains current bodies plus directory/source roles; source_catalog_bytes is subset, not additive"
+      },
+      "verification": {
+        "all_http_200_known_usage": true,
+        "original_sources_in_controller_payload": true,
+        "host_actual_views_in_wire_requests": true,
+        "host_receipt_ids_match_sqlite_requests": true,
+        "world_tables_empty": true,
+        "observer_health_errors": 0
+      },
+      "artifacts_sha256": {
+        "result.json": "36889c71c45fcbc5c678415e7a3f224df8fa4e8839832f9db3d3207801062520",
+        "seed-receipt.json": "1021e638b2392271acfadc461d49c069f3663eb13b72144a2cc87ef0c5ac74cf",
+        "trace.jsonl": "8e72b86fa66ba6a9be0e10ed821a8465d76e5367fc88bfb058f930791447bdc7"
+      }
+    },
+    {
+      "job": {
+        "job_id": "2-increment-boundary",
+        "case_id": "second_increment",
+        "writer_policy": "boundary_both"
+      },
+      "strict": false,
+      "state_correct": true,
+      "memory_correct": false,
+      "answer_truthful_and_useful": false,
+      "no_business_action": true,
+      "state_revision": 3,
+      "state_content_sha256": "242cb7f88211df7c1b850ee42d9166902e3453671c0ca2d3f699ed8e6541e3ab",
+      "ordinary_memory_content": null,
+      "answer": "The Cobalt delivery kits plan has been updated to include one additional unit, with the destination (storage S-2) and packing (fiber cases) remaining unchanged.",
+      "pending_event_ids": [
+        "tool:6871f08c676f60f1ad4438981ffce173e47f57b395239f7c28bc080eb0d628da"
+      ],
+      "classification": "wrong_or_incomplete_maintenance",
+      "initial_boundary_status": "PARTIAL_REJECTED",
+      "post_turn_boundary_status": null,
+      "cost": {
+        "generation_calls": 4,
+        "generation_tokens": 12192,
+        "host_calls": 2,
+        "host_tokens": 5897,
+        "control_calls": 2,
+        "control_tokens": 6295,
+        "embedding_calls": 1,
+        "embedding_tokens": 25,
+        "seed_embedding_tokens": 25,
+        "runtime_embedding_tokens": 0,
+        "generation_http_wall_seconds": 5.2419268735684454,
+        "embedding_http_wall_seconds": 0.03640002524480224
+      },
+      "store_measurements": {
+        "state_bank_including_seed": {
+          "get": {
+            "calls": 34,
+            "failures": 0,
+            "cpu_ns": 19777602,
+            "wall_ns": 27717785,
+            "request_bytes": 7472,
+            "result_bytes": 4246
+          },
+          "search": {
+            "calls": 38,
+            "failures": 0,
+            "cpu_ns": 21774480,
+            "wall_ns": 51247876,
+            "request_bytes": 6148,
+            "result_bytes": 54666
+          },
+          "put": {
+            "calls": 14,
+            "failures": 0,
+            "cpu_ns": 12286399,
+            "wall_ns": 205381148,
+            "request_bytes": 8479,
+            "result_bytes": 0
+          }
+        },
+        "ordinary_scoped_reads_including_final_observation": {
+          "calls": 5,
+          "records": 5,
+          "logical_bytes": 467,
+          "cpu_ns": 2453425,
+          "wall_ns": 4421211
+        },
+        "seed_receipt": {
+          "state_ids": [
+            "7c3d500b6bac43689eb199f5a7003aaa"
+          ],
+          "pending_event_ids": [
+            "message:3e29d505-5f03-4ccd-8242-91daddc443a7"
+          ],
+          "seed_memory_puts": 1,
+          "seed_state_puts": 1,
+          "seed_event_puts": 6,
+          "memory_snapshot_search_calls": 2,
+          "namespace_guard_search_calls": 3,
+          "memory_record_put_calls": 1,
+          "memory_snapshot_result_bytes": 192,
+          "state_event_store_stats": {
+            "get": {
+              "calls": 17,
+              "failures": 0,
+              "cpu_ns": 8262989,
+              "wall_ns": 13127044,
+              "request_bytes": 3719,
+              "result_bytes": 1451
+            },
+            "search": {
+              "calls": 8,
+              "failures": 0,
+              "cpu_ns": 3502184,
+              "wall_ns": 8709327,
+              "request_bytes": 1295,
+              "result_bytes": 6704
+            },
+            "put": {
+              "calls": 11,
+              "failures": 0,
+              "cpu_ns": 2582725,
+              "wall_ns": 18546229,
+              "request_bytes": 5676,
+              "result_bytes": 0
+            }
+          },
+          "wall_ns": 91351356,
+          "cpu_ns": 23945675
+        },
+        "observer": {
+          "id": 1,
+          "transactions": 30,
+          "observer_cpu_ns": 9140489,
+          "observer_wall_ns": 225988550,
+          "extra_store_reads": 4,
+          "extra_read_cpu_ns": 1768583,
+          "extra_read_wall_ns": 2727931,
+          "initial_db_bytes": 98304
+        },
+        "observed_operations": [
+          {
+            "requested_action": "create",
+            "actual_effect": "update",
+            "status": "complete",
+            "extra_reads": 2
+          },
+          {
+            "requested_action": "create",
+            "actual_effect": "update",
+            "status": "complete",
+            "extra_reads": 2
+          }
+        ],
+        "host_tool_deliveries": [
+          {
+            "tool_name": "maintain_records",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success"
+          }
+        ]
+      },
+      "host_material": {
+        "view_count": 2,
+        "view_bytes_total": 10665,
+        "source_catalog_bytes_total": 4148,
+        "metadata_and_body_overlap": "view contains current bodies plus directory/source roles; source_catalog_bytes is subset, not additive"
+      },
+      "verification": {
+        "all_http_200_known_usage": true,
+        "original_sources_in_controller_payload": true,
+        "host_actual_views_in_wire_requests": true,
+        "host_receipt_ids_match_sqlite_requests": true,
+        "world_tables_empty": true,
+        "observer_health_errors": 0
+      },
+      "artifacts_sha256": {
+        "result.json": "1f1fd67b0fc8288b4afb3059c41849149656270b1443ee5b451dcdc20920dc9c",
+        "seed-receipt.json": "8d05df427b5b248f7e35a86624e2d672c17cb6b309293946ab5e9349096bd018",
+        "trace.jsonl": "7358563e8490ce5d622b365a8afe0dfd1db7a2d4f9dc5d79412b9ee1d8159bb4"
+      }
+    },
+    {
+      "job": {
+        "job_id": "3-no-change-overlap",
+        "case_id": "no_change",
+        "writer_policy": "overlap"
+      },
+      "strict": true,
+      "state_correct": true,
+      "memory_correct": true,
+      "answer_truthful_and_useful": true,
+      "no_business_action": true,
+      "state_revision": 2,
+      "state_content_sha256": "0b7872def8d956a7b06c5f749439b91394d9b788027829dbcf6b7ab5353e5f57",
+      "ordinary_memory_content": "Cobalt delivery kits: 3 units to storage S-2 in fiber cases. Status: Nothing is reserved.",
+      "answer": "The current Cobalt delivery kits plan is for 3 units to be delivered to storage S-2 in fiber cases.",
+      "pending_event_ids": [],
+      "classification": "maintenance_correct",
+      "initial_boundary_status": null,
+      "post_turn_boundary_status": "NO_CHANGE",
+      "cost": {
+        "generation_calls": 2,
+        "generation_tokens": 5221,
+        "host_calls": 1,
+        "host_tokens": 2403,
+        "control_calls": 1,
+        "control_tokens": 2818,
+        "embedding_calls": 1,
+        "embedding_tokens": 25,
+        "seed_embedding_tokens": 25,
+        "runtime_embedding_tokens": 0,
+        "generation_http_wall_seconds": 0.997579425573349,
+        "embedding_http_wall_seconds": 0.036621199920773506
+      },
+      "store_measurements": {
+        "state_bank_including_seed": {
+          "get": {
+            "calls": 19,
+            "failures": 0,
+            "cpu_ns": 7984103,
+            "wall_ns": 14298262,
+            "request_bytes": 4020,
+            "result_bytes": 2073
+          },
+          "search": {
+            "calls": 21,
+            "failures": 0,
+            "cpu_ns": 10575219,
+            "wall_ns": 24751481,
+            "request_bytes": 3251,
+            "result_bytes": 22528
+          },
+          "put": {
+            "calls": 10,
+            "failures": 0,
+            "cpu_ns": 4296694,
+            "wall_ns": 24181393,
+            "request_bytes": 5077,
+            "result_bytes": 0
+          }
+        },
+        "ordinary_scoped_reads_including_final_observation": {
+          "calls": 3,
+          "records": 3,
+          "logical_bytes": 489,
+          "cpu_ns": 1520959,
+          "wall_ns": 2462391
+        },
+        "seed_receipt": {
+          "state_ids": [
+            "7c3d500b6bac43689eb199f5a7003aaa"
+          ],
+          "pending_event_ids": [
+            "message:84e94cef-2e02-4473-a9ce-5d206c549fde"
+          ],
+          "seed_memory_puts": 1,
+          "seed_state_puts": 1,
+          "seed_event_puts": 5,
+          "memory_snapshot_search_calls": 2,
+          "namespace_guard_search_calls": 3,
+          "memory_record_put_calls": 1,
+          "memory_snapshot_result_bytes": 192,
+          "state_event_store_stats": {
+            "get": {
+              "calls": 14,
+              "failures": 0,
+              "cpu_ns": 4970532,
+              "wall_ns": 9195037,
+              "request_bytes": 2984,
+              "result_bytes": 1172
+            },
+            "search": {
+              "calls": 7,
+              "failures": 0,
+              "cpu_ns": 2740776,
+              "wall_ns": 7305907,
+              "request_bytes": 1084,
+              "result_bytes": 4937
+            },
+            "put": {
+              "calls": 9,
+              "failures": 0,
+              "cpu_ns": 4044218,
+              "wall_ns": 22248163,
+              "request_bytes": 4590,
+              "result_bytes": 0
+            }
+          },
+          "wall_ns": 89570827,
+          "cpu_ns": 21116631
+        },
+        "observer": {
+          "id": 1,
+          "transactions": 6,
+          "observer_cpu_ns": 2579370,
+          "observer_wall_ns": 47022396,
+          "extra_store_reads": 0,
+          "extra_read_cpu_ns": 0,
+          "extra_read_wall_ns": 0,
+          "initial_db_bytes": 98304
+        },
+        "observed_operations": [],
+        "host_tool_deliveries": []
+      },
+      "host_material": {
+        "view_count": 1,
+        "view_bytes_total": 3288,
+        "source_catalog_bytes_total": 1365,
+        "metadata_and_body_overlap": "view contains current bodies plus directory/source roles; source_catalog_bytes is subset, not additive"
+      },
+      "verification": {
+        "all_http_200_known_usage": true,
+        "original_sources_in_controller_payload": true,
+        "host_actual_views_in_wire_requests": true,
+        "host_receipt_ids_match_sqlite_requests": true,
+        "world_tables_empty": true,
+        "observer_health_errors": 0
+      },
+      "artifacts_sha256": {
+        "result.json": "ed657591aa26b3cbbc7729649f00f677d319285230732eeef0a194b74433205f",
+        "seed-receipt.json": "fdd041543d970b3441488499e031293e4ed62351e3b4a2ff84b1639bb0b773cc",
+        "trace.jsonl": "35116081b88557d10f5f8454af2a2fd7d812e9ba1627c578b67b2adfc1e93087"
+      }
+    },
+    {
+      "job": {
+        "job_id": "4-increment-host",
+        "case_id": "second_increment",
+        "writer_policy": "host_both"
+      },
+      "strict": true,
+      "state_correct": true,
+      "memory_correct": true,
+      "answer_truthful_and_useful": true,
+      "no_business_action": true,
+      "state_revision": 3,
+      "state_content_sha256": "242cb7f88211df7c1b850ee42d9166902e3453671c0ca2d3f699ed8e6541e3ab",
+      "ordinary_memory_content": "Cobalt delivery kits: 4 units to storage S-2 in fiber cases. Status: Nothing is reserved.",
+      "answer": "The Cobalt delivery kits plan has been updated to 4 units, with destination storage S-2 and packing in fiber cases. No business actions were taken.",
+      "pending_event_ids": [],
+      "classification": "maintenance_correct",
+      "initial_boundary_status": null,
+      "post_turn_boundary_status": null,
+      "cost": {
+        "generation_calls": 3,
+        "generation_tokens": 9045,
+        "host_calls": 3,
+        "host_tokens": 9045,
+        "control_calls": 0,
+        "control_tokens": 0,
+        "embedding_calls": 2,
+        "embedding_tokens": 50,
+        "seed_embedding_tokens": 25,
+        "runtime_embedding_tokens": 25,
+        "generation_http_wall_seconds": 3.971511961426586,
+        "embedding_http_wall_seconds": 0.06926676258444786
+      },
+      "store_measurements": {
+        "state_bank_including_seed": {
+          "get": {
+            "calls": 49,
+            "failures": 0,
+            "cpu_ns": 28277024,
+            "wall_ns": 38844345,
+            "request_bytes": 10474,
+            "result_bytes": 6093
+          },
+          "search": {
+            "calls": 24,
+            "failures": 0,
+            "cpu_ns": 15754011,
+            "wall_ns": 41699549,
+            "request_bytes": 3690,
+            "result_bytes": 34538
+          },
+          "put": {
+            "calls": 17,
+            "failures": 0,
+            "cpu_ns": 9684650,
+            "wall_ns": 117069928,
+            "request_bytes": 9781,
+            "result_bytes": 0
+          }
+        },
+        "ordinary_scoped_reads_including_final_observation": {
+          "calls": 4,
+          "records": 4,
+          "logical_bytes": 652,
+          "cpu_ns": 1620331,
+          "wall_ns": 3632699
+        },
+        "seed_receipt": {
+          "state_ids": [
+            "7c3d500b6bac43689eb199f5a7003aaa"
+          ],
+          "pending_event_ids": [
+            "message:3e29d505-5f03-4ccd-8242-91daddc443a7"
+          ],
+          "seed_memory_puts": 1,
+          "seed_state_puts": 1,
+          "seed_event_puts": 6,
+          "memory_snapshot_search_calls": 2,
+          "namespace_guard_search_calls": 3,
+          "memory_record_put_calls": 1,
+          "memory_snapshot_result_bytes": 192,
+          "state_event_store_stats": {
+            "get": {
+              "calls": 17,
+              "failures": 0,
+              "cpu_ns": 10175601,
+              "wall_ns": 14646448,
+              "request_bytes": 3583,
+              "result_bytes": 1451
+            },
+            "search": {
+              "calls": 8,
+              "failures": 0,
+              "cpu_ns": 3661043,
+              "wall_ns": 8957996,
+              "request_bytes": 1231,
+              "result_bytes": 6704
+            },
+            "put": {
+              "calls": 11,
+              "failures": 0,
+              "cpu_ns": 2859769,
+              "wall_ns": 18685172,
+              "request_bytes": 5588,
+              "result_bytes": 0
+            }
+          },
+          "wall_ns": 91557068,
+          "cpu_ns": 26664065
+        },
+        "observer": {
+          "id": 1,
+          "transactions": 38,
+          "observer_cpu_ns": 15471415,
+          "observer_wall_ns": 257147523,
+          "extra_store_reads": 4,
+          "extra_read_cpu_ns": 2770665,
+          "extra_read_wall_ns": 4129605,
+          "initial_db_bytes": 98304
+        },
+        "observed_operations": [
+          {
+            "requested_action": "update",
+            "actual_effect": "update",
+            "status": "complete",
+            "extra_reads": 2
+          },
+          {
+            "requested_action": "update",
+            "actual_effect": "update",
+            "status": "complete",
+            "extra_reads": 2
+          }
+        ],
+        "host_tool_deliveries": [
+          {
+            "tool_name": "manage_memory",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success"
+          },
+          {
+            "tool_name": "manage_state",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success"
+          }
+        ]
+      },
+      "host_material": {
+        "view_count": 3,
+        "view_bytes_total": 12857,
+        "source_catalog_bytes_total": 5973,
+        "metadata_and_body_overlap": "view contains current bodies plus directory/source roles; source_catalog_bytes is subset, not additive"
+      },
+      "verification": {
+        "all_http_200_known_usage": true,
+        "original_sources_in_controller_payload": true,
+        "host_actual_views_in_wire_requests": true,
+        "host_receipt_ids_match_sqlite_requests": true,
+        "world_tables_empty": true,
+        "observer_health_errors": 0
+      },
+      "artifacts_sha256": {
+        "result.json": "f7eac6b55cd919086ccf06794e83ede20adca4b1053e08e713282dd1595d9379",
+        "seed-receipt.json": "bc23c321057ee8f2e67023bc96881956c0d5aef0793a4c372e586a2bcd505d1e",
+        "trace.jsonl": "6bd958956b7c2aa9d6999ac161ad72a51dbe436571c50f13f60e369b3cec1861"
+      }
+    },
+    {
+      "job": {
+        "job_id": "5-no-change-boundary",
+        "case_id": "no_change",
+        "writer_policy": "boundary_both"
+      },
+      "strict": true,
+      "state_correct": true,
+      "memory_correct": true,
+      "answer_truthful_and_useful": true,
+      "no_business_action": true,
+      "state_revision": 2,
+      "state_content_sha256": "0b7872def8d956a7b06c5f749439b91394d9b788027829dbcf6b7ab5353e5f57",
+      "ordinary_memory_content": "Cobalt delivery kits: 3 units to storage S-2 in fiber cases. Status: Nothing is reserved.",
+      "answer": "The current Cobalt delivery kits plan includes 3 units, destined for storage S-2, packed in fiber cases.",
+      "pending_event_ids": [],
+      "classification": "maintenance_correct",
+      "initial_boundary_status": "NO_CHANGE",
+      "post_turn_boundary_status": null,
+      "cost": {
+        "generation_calls": 2,
+        "generation_tokens": 5336,
+        "host_calls": 1,
+        "host_tokens": 2282,
+        "control_calls": 1,
+        "control_tokens": 3054,
+        "embedding_calls": 1,
+        "embedding_tokens": 25,
+        "seed_embedding_tokens": 25,
+        "runtime_embedding_tokens": 0,
+        "generation_http_wall_seconds": 0.9978544069454074,
+        "embedding_http_wall_seconds": 0.038911272305995226
+      },
+      "store_measurements": {
+        "state_bank_including_seed": {
+          "get": {
+            "calls": 19,
+            "failures": 0,
+            "cpu_ns": 7617245,
+            "wall_ns": 12190742,
+            "request_bytes": 4153,
+            "result_bytes": 2073
+          },
+          "search": {
+            "calls": 22,
+            "failures": 0,
+            "cpu_ns": 12131348,
+            "wall_ns": 28203034,
+            "request_bytes": 3560,
+            "result_bytes": 23985
+          },
+          "put": {
+            "calls": 10,
+            "failures": 0,
+            "cpu_ns": 4753219,
+            "wall_ns": 17435530,
+            "request_bytes": 5147,
+            "result_bytes": 0
+          }
+        },
+        "ordinary_scoped_reads_including_final_observation": {
+          "calls": 3,
+          "records": 3,
+          "logical_bytes": 489,
+          "cpu_ns": 1517501,
+          "wall_ns": 2588918
+        },
+        "seed_receipt": {
+          "state_ids": [
+            "7c3d500b6bac43689eb199f5a7003aaa"
+          ],
+          "pending_event_ids": [
+            "message:84e94cef-2e02-4473-a9ce-5d206c549fde"
+          ],
+          "seed_memory_puts": 1,
+          "seed_state_puts": 1,
+          "seed_event_puts": 5,
+          "memory_snapshot_search_calls": 2,
+          "namespace_guard_search_calls": 3,
+          "memory_record_put_calls": 1,
+          "memory_snapshot_result_bytes": 192,
+          "state_event_store_stats": {
+            "get": {
+              "calls": 14,
+              "failures": 0,
+              "cpu_ns": 5422196,
+              "wall_ns": 9152812,
+              "request_bytes": 3082,
+              "result_bytes": 1172
+            },
+            "search": {
+              "calls": 7,
+              "failures": 0,
+              "cpu_ns": 2817546,
+              "wall_ns": 7191066,
+              "request_bytes": 1133,
+              "result_bytes": 4937
+            },
+            "put": {
+              "calls": 9,
+              "failures": 0,
+              "cpu_ns": 4474260,
+              "wall_ns": 15837865,
+              "request_bytes": 4653,
+              "result_bytes": 0
+            }
+          },
+          "wall_ns": 86615850,
+          "cpu_ns": 22530225
+        },
+        "observer": {
+          "id": 1,
+          "transactions": 6,
+          "observer_cpu_ns": 2684728,
+          "observer_wall_ns": 44273337,
+          "extra_store_reads": 0,
+          "extra_read_cpu_ns": 0,
+          "extra_read_wall_ns": 0,
+          "initial_db_bytes": 98304
+        },
+        "observed_operations": [],
+        "host_tool_deliveries": []
+      },
+      "host_material": {
+        "view_count": 1,
+        "view_bytes_total": 3281,
+        "source_catalog_bytes_total": 1366,
+        "metadata_and_body_overlap": "view contains current bodies plus directory/source roles; source_catalog_bytes is subset, not additive"
+      },
+      "verification": {
+        "all_http_200_known_usage": true,
+        "original_sources_in_controller_payload": true,
+        "host_actual_views_in_wire_requests": true,
+        "host_receipt_ids_match_sqlite_requests": true,
+        "world_tables_empty": true,
+        "observer_health_errors": 0
+      },
+      "artifacts_sha256": {
+        "result.json": "e674aa0092f08a99d0f1dcb54747d2adfe76f596e6cf2903f6bdb21269cb66f0",
+        "seed-receipt.json": "97ad7448c49fd4523c79c8a79c4f92057c6cb69f7b26666c15b96b4be913ce2e",
+        "trace.jsonl": "efa1bce599c7a33cf968ba83672ebb7cd77e5b0465d35e275d73ba639a10cebf"
+      }
+    },
+    {
+      "job": {
+        "job_id": "6-increment-overlap",
+        "case_id": "second_increment",
+        "writer_policy": "overlap"
+      },
+      "strict": true,
+      "state_correct": true,
+      "memory_correct": true,
+      "answer_truthful_and_useful": true,
+      "no_business_action": true,
+      "state_revision": 3,
+      "state_content_sha256": "242cb7f88211df7c1b850ee42d9166902e3453671c0ca2d3f699ed8e6541e3ab",
+      "ordinary_memory_content": "Cobalt delivery kits: 4 units to storage S-2 in fiber cases. Status: Nothing is reserved.",
+      "answer": "The Cobalt delivery kits plan has been updated to 4 units, with the destination remaining storage S-2 and packing unchanged in fiber cases. No business action was taken.",
+      "pending_event_ids": [],
+      "classification": "maintenance_correct",
+      "initial_boundary_status": null,
+      "post_turn_boundary_status": "APPLIED",
+      "cost": {
+        "generation_calls": 3,
+        "generation_tokens": 8200,
+        "host_calls": 2,
+        "host_tokens": 4782,
+        "control_calls": 1,
+        "control_tokens": 3418,
+        "embedding_calls": 2,
+        "embedding_tokens": 50,
+        "seed_embedding_tokens": 25,
+        "runtime_embedding_tokens": 25,
+        "generation_http_wall_seconds": 4.0540862968191504,
+        "embedding_http_wall_seconds": 0.06279228627681732
+      },
+      "store_measurements": {
+        "state_bank_including_seed": {
+          "get": {
+            "calls": 33,
+            "failures": 0,
+            "cpu_ns": 17744286,
+            "wall_ns": 25007043,
+            "request_bytes": 7035,
+            "result_bytes": 3842
+          },
+          "search": {
+            "calls": 28,
+            "failures": 0,
+            "cpu_ns": 15477235,
+            "wall_ns": 36542405,
+            "request_bytes": 4334,
+            "result_bytes": 41362
+          },
+          "put": {
+            "calls": 15,
+            "failures": 0,
+            "cpu_ns": 4380518,
+            "wall_ns": 22490810,
+            "request_bytes": 8599,
+            "result_bytes": 0
+          }
+        },
+        "ordinary_scoped_reads_including_final_observation": {
+          "calls": 4,
+          "records": 4,
+          "logical_bytes": 652,
+          "cpu_ns": 1649699,
+          "wall_ns": 3311606
+        },
+        "seed_receipt": {
+          "state_ids": [
+            "7c3d500b6bac43689eb199f5a7003aaa"
+          ],
+          "pending_event_ids": [
+            "message:3e29d505-5f03-4ccd-8242-91daddc443a7"
+          ],
+          "seed_memory_puts": 1,
+          "seed_state_puts": 1,
+          "seed_event_puts": 6,
+          "memory_snapshot_search_calls": 2,
+          "namespace_guard_search_calls": 3,
+          "memory_record_put_calls": 1,
+          "memory_snapshot_result_bytes": 192,
+          "state_event_store_stats": {
+            "get": {
+              "calls": 17,
+              "failures": 0,
+              "cpu_ns": 10408037,
+              "wall_ns": 15199720,
+              "request_bytes": 3600,
+              "result_bytes": 1451
+            },
+            "search": {
+              "calls": 8,
+              "failures": 0,
+              "cpu_ns": 3622077,
+              "wall_ns": 9285032,
+              "request_bytes": 1239,
+              "result_bytes": 6704
+            },
+            "put": {
+              "calls": 11,
+              "failures": 0,
+              "cpu_ns": 2855073,
+              "wall_ns": 16563278,
+              "request_bytes": 5599,
+              "result_bytes": 0
+            }
+          },
+          "wall_ns": 86079865,
+          "cpu_ns": 27086373
+        },
+        "observer": {
+          "id": 1,
+          "transactions": 22,
+          "observer_cpu_ns": 7519823,
+          "observer_wall_ns": 149116712,
+          "extra_store_reads": 2,
+          "extra_read_cpu_ns": 1046499,
+          "extra_read_wall_ns": 1472992,
+          "initial_db_bytes": 98304
+        },
+        "observed_operations": [
+          {
+            "requested_action": "update",
+            "actual_effect": "update",
+            "status": "complete",
+            "extra_reads": 2
+          }
+        ],
+        "host_tool_deliveries": [
+          {
+            "tool_name": "manage_memory",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success"
+          }
+        ]
+      },
+      "host_material": {
+        "view_count": 2,
+        "view_bytes_total": 7761,
+        "source_catalog_bytes_total": 3643,
+        "metadata_and_body_overlap": "view contains current bodies plus directory/source roles; source_catalog_bytes is subset, not additive"
+      },
+      "verification": {
+        "all_http_200_known_usage": true,
+        "original_sources_in_controller_payload": true,
+        "host_actual_views_in_wire_requests": true,
+        "host_receipt_ids_match_sqlite_requests": true,
+        "world_tables_empty": true,
+        "observer_health_errors": 0
+      },
+      "artifacts_sha256": {
+        "result.json": "925895815836ecde878617a90eb07e29ae8197a16243da39da74404111c9b420",
+        "seed-receipt.json": "f50aef20ed310d8691cb5a9080ae31f4f5927ddb2e9374cd8401761aae9769a1",
+        "trace.jsonl": "8c14c869c168e317ef299efe808b0b3369edaec4164cd0c256dfb9bfce02dcea"
+      }
+    }
+  ],
+  "cost": {
+    "generation_calls": 15,
+    "generation_tokens": 42578,
+    "host_calls": 10,
+    "host_tokens": 26993,
+    "control_calls": 5,
+    "control_tokens": 15585,
+    "embedding_calls": 8,
+    "embedding_tokens": 200,
+    "seed_embedding_tokens": 150,
+    "runtime_embedding_tokens": 50,
+    "generation_http_wall_seconds": 16.282259474508464,
+    "embedding_http_wall_seconds": 0.4907696461305022
+  },
+  "continuous_after": {
+    "generation_requests": 2795,
+    "generation_tokens": 3479362,
+    "embedding_tokens": 19273,
+    "sha256": "fea3eca7e56946cf09ea9b044255d31e76ee1269081994fcc7f66307e726ec54",
+    "sealed_history_unchanged": true
+  },
+  "failure_analysis": {
+    "observed": "Initial boundary omitted content in both update calls; memory was persisted as null with updated receipt, State rejected; explicit Host trigger repaired only State and Host reported plan updated.",
+    "expected": "Both original records become four once, preserving fields; incomplete update must not erase content or claim both stores maintained.",
+    "first_break": "Actual first controller JSON omitted content. First destructive program step accepted the missing content as None and overwrote memory.",
+    "causal_chain": [
+      "Actual HTTP proposal lacks content (not parser loss).",
+      "Native-shaped optional argument defaults None in strict mutator.",
+      "Ordinary memory put content null returns updated; State rejects contentless update.",
+      "Host receives actual partial/error receipt and null current memory, calls maintain_records.",
+      "Controller sees both prior actual receipts and null record, writes only correct State.",
+      "Host final claim fails frozen ordinary-memory truthfulness criterion."
+    ],
+    "competing_explanations": [
+      "Under-specified optional schema permits minimal action/id generation; controller failed to generate changed bodies.",
+      "Adapter/parser may have dropped fields; actual raw HTTP response rules this out for this trajectory.",
+      "Partial success receipt and correct State may anchor later repair/answer despite null ordinary memory; one trajectory cannot isolate that cognitive cause."
+    ],
+    "generic_fix": "Separate strict CRUD follow-up rejects missing/null content on create/update before write, preserves delete semantics and native mode; no prompt tuning or sample routing.",
+    "confounds": [
+      "Policies change roles/tool sets/cadence; no pure call-count or prompt-only causal claim.",
+      "One exposed arc, two nested prefixes; no independent statistical sample or unseen claim.",
+      "All strategies receive frozen formed records; prior formation cost is not measured by this screen.",
+      "Boundary still has one newly generated trigger ToolMessage pending after completing the user event; acknowledgement is not semantic correctness."
+    ],
+    "minimal_next": "Mechanically reproduce null rejection in sync/async and both shared tool paths; freeze change separately. Later X5 compares host_both with adapted overlap across real formation/reuse/owner/temporary/action/recovery. Do not replace or rerun these failures as R1.",
+    "decision": "Continue host_both as minimal writer candidate versus overlap; Pivot boundary_both on contract/repair gap. No stable quality or lifecycle-cost superiority claim."
+  },
+  "measurement_limits": [
+    "State-bank stats include seeding/events/meta/observation; ordinary scan stats separate; overlapping timings must not be added blindly.",
+    "Observer operations are bound Host/trigger operations; initial automatic/turn_end writes may lack bound observer records. Raw writes/actual readbacks remain authoritative.",
+    "Serialized logical bytes are not physical disk I/O; direct ordinary-memory mutation CPU/wall is not separately measured.",
+    "No network price or developer-agent token estimate; known HTTP usage and scoped local measurements only.",
+    "No new business execution in this slice; X5 lifecycle still required."
+  ]
+}
