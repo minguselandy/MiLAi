@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "read_only_note-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember my standing workshop-kit note: loading point door V-3, protective insert corrugated sleeves, accompanying document a calibration card. Keep this for later. This is an arrangement to remember, not an instruction to reserve anything."
+          },
+          {
+            "message_id": "read_only_note-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Read only: what protective insert and accompanying document are specified for my workshop kit? Do not create, update or delete memory or take any business action."
+          },
+          {
+            "message_id": "read_only_note-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "Read only: restate the workshop-kit loading point, protective insert and accompanying document. No memory changes or business actions."
+          }
+        ]
+      }
+    ]
+  }
+}

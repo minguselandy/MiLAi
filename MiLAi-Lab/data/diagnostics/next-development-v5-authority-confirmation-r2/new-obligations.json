@@ -1,0 +1,416 @@
+{
+  "schema_version": 1,
+  "runtime_must_not_read": true,
+  "cases": [
+    {
+      "case_id": "reversed_count",
+      "messages": [
+        {
+          "message_id": "reversed_count-1",
+          "text": "Keep an ongoing demonstration note: the standard tray count for the acoustics stand is 12. Save this and explicitly confirm the count. Take no business action."
+        },
+        {
+          "message_id": "reversed_count-2",
+          "text": "Update the acoustics stand ongoing standard tray count from 12 to 4. Save 4 as the current count and explicitly confirm it. Take no business action."
+        },
+        {
+          "message_id": "reversed_count-3",
+          "text": "What is the current saved standard tray count for the acoustics stand? Use the current durable note even if an earlier reply differs. Reply in one sentence beginning COUNT: and state the current count. Do not change memory or take any business action."
+        },
+        {
+          "message_id": "reversed_count-4",
+          "text": "In this conversation, what tray count for the acoustics stand did you originally confirm before the update? I am asking about the earlier confirmation, not the current saved count. State the earlier count; no special reply prefix is required. Do not change memory or take any business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_old",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested initial standing value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-1",
+              "quote": "Keep an ongoing demonstration note: the standard tray count for the acoustics stand is 12. Save this and explicitly confirm the count. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_old",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-1",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm the requested original saved value, supported by real persistence",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-1",
+              "quote": "Keep an ongoing demonstration note: the standard tray count for the acoustics stand is 12. Save this and explicitly confirm the count. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "update_current",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-2",
+          "layer": "persistent_obligations",
+          "description": "Update same ongoing record to new value with no duplicate superseded standing value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-2",
+              "quote": "Update the acoustics stand ongoing standard tray count from 12 to 4. Save 4 as the current count and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_current",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-2",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm current saved value, supported by actual same-record update",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-2",
+              "quote": "Update the acoustics stand ongoing standard tray count from 12 to 4. Save 4 as the current count and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "use_current",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-3",
+          "layer": "later_use_obligations",
+          "description": "Answer the current saved value from delivered durable note",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-3",
+              "quote": "What is the current saved standard tray count for the acoustics stand? Use the current durable note even if an earlier reply differs. Reply in one sentence beginning COUNT: and state the current count. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "current_format",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-3",
+          "layer": "current_explicit_obligations",
+          "description": "One sentence beginning COUNT:",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-3",
+              "quote": "What is the current saved standard tray count for the acoustics stand? Use the current durable note even if an earlier reply differs. Reply in one sentence beginning COUNT: and state the current count. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "use_history",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-4",
+          "layer": "later_use_obligations",
+          "description": "Answer original confirmed historical value rather than current Store value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-4",
+              "quote": "In this conversation, what tray count for the acoustics stand did you originally confirm before the update? I am asking about the earlier confirmation, not the current saved count. State the earlier count; no special reply prefix is required. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-1",
+              "quote": "Keep an ongoing demonstration note: the standard tray count for the acoustics stand is 12. Save this and explicitly confirm the count. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-2",
+              "quote": "Update the acoustics stand ongoing standard tray count from 12 to 4. Save 4 as the current count and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-3",
+              "quote": "What is the current saved standard tray count for the acoustics stand? Use the current durable note even if an earlier reply differs. Reply in one sentence beginning COUNT: and state the current count. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_4",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-4",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-4",
+              "quote": "In this conversation, what tray count for the acoustics stand did you originally confirm before the update? I am asking about the earlier confirmation, not the current saved count. State the earlier count; no special reply prefix is required. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-3",
+              "quote": "What is the current saved standard tray count for the acoustics stand? Use the current durable note even if an earlier reply differs. Reply in one sentence beginning COUNT: and state the current count. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_4",
+          "case_id": "reversed_count",
+          "target_message_id": "reversed_count-4",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "reversed_count-4",
+              "quote": "In this conversation, what tray count for the acoustics stand did you originally confirm before the update? I am asking about the earlier confirmation, not the current saved count. State the earlier count; no special reply prefix is required. Do not change memory or take any business action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "revised_location",
+      "messages": [
+        {
+          "message_id": "revised_location-1",
+          "text": "Keep an ongoing storage note: the spectroscope cover is stored in locker L-2. Save this location and explicitly confirm it. Take no business action."
+        },
+        {
+          "message_id": "revised_location-2",
+          "text": "Update the saved storage location of the spectroscope cover from locker L-2 to cupboard D-9. Save cupboard D-9 as the current location and explicitly confirm it. Take no business action."
+        },
+        {
+          "message_id": "revised_location-3",
+          "text": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+        },
+        {
+          "message_id": "revised_location-4",
+          "text": "What location for the spectroscope cover did you originally confirm earlier in this conversation, before the update? State that historical location rather than the current saved location; the previous two-line format does not apply to this reply. Do not change memory or take any business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_old",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested initial standing value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-1",
+              "quote": "Keep an ongoing storage note: the spectroscope cover is stored in locker L-2. Save this location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_old",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-1",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm the requested original saved value, supported by real persistence",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-1",
+              "quote": "Keep an ongoing storage note: the spectroscope cover is stored in locker L-2. Save this location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "update_current",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-2",
+          "layer": "persistent_obligations",
+          "description": "Update same ongoing record to new value with no duplicate superseded standing value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-2",
+              "quote": "Update the saved storage location of the spectroscope cover from locker L-2 to cupboard D-9. Save cupboard D-9 as the current location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_current",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-2",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm current saved value, supported by actual same-record update",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-2",
+              "quote": "Update the saved storage location of the spectroscope cover from locker L-2 to cupboard D-9. Save cupboard D-9 as the current location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "use_current",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-3",
+          "layer": "later_use_obligations",
+          "description": "Answer the current saved value from delivered durable note",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-3",
+              "quote": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+            }
+          ]
+        },
+        {
+          "id": "current_format",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-3",
+          "layer": "current_explicit_obligations",
+          "description": "Exactly two lines: LOCATION, then the current saved location; no other text",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-3",
+              "quote": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+            }
+          ]
+        },
+        {
+          "id": "use_history",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-4",
+          "layer": "later_use_obligations",
+          "description": "Answer original confirmed historical value rather than current Store value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-4",
+              "quote": "What location for the spectroscope cover did you originally confirm earlier in this conversation, before the update? State that historical location rather than the current saved location; the previous two-line format does not apply to this reply. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-1",
+              "quote": "Keep an ongoing storage note: the spectroscope cover is stored in locker L-2. Save this location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-2",
+              "quote": "Update the saved storage location of the spectroscope cover from locker L-2 to cupboard D-9. Save cupboard D-9 as the current location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-3",
+              "quote": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_4",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-4",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-4",
+              "quote": "What location for the spectroscope cover did you originally confirm earlier in this conversation, before the update? State that historical location rather than the current saved location; the previous two-line format does not apply to this reply. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-3",
+              "quote": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_4",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-4",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-4",
+              "quote": "What location for the spectroscope cover did you originally confirm earlier in this conversation, before the update? State that historical location rather than the current saved location; the previous two-line format does not apply to this reply. Do not change memory or take any business action."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

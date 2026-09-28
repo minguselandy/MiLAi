@@ -179,13 +179,16 @@ def _scope(arm: str = "C", session: str = "one") -> FoundationScope:
     return FoundationScope("run", arm, "alice", "application:" + session)
 
 
+@pytest.mark.parametrize("memory_placement", ["system", "current_request"])
 def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
-    tmp_path: Path,
+    tmp_path: Path, memory_placement: str,
 ) -> None:
     store, wires = InMemoryStore(), []
     memory_id = str(uuid.uuid4())
     namespace = ("langmem", "run", "B0", "alice")
     store.put(namespace, memory_id, {"content": "actual durable 4"})
+    other_namespace = ("langmem", "run", "B0", "bob")
+    store.put(other_namespace, memory_id, {"content": "PRIVATE OTHER OWNER"})
     def respond(_wire: Any, call: int) -> Any:
         if call == 1:
             return {"calls": [{"name": "read_memory", "arguments": {"id": memory_id}}]}
@@ -197,7 +200,8 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
                 "action": "delete", "id": memory_id}}]}
         return {"answer": "saved in final prose without proving a write"}
     with _runtime(tmp_path, store, wires, respond) as runtime:
-        agent = _agent(runtime, tmp_path, "B0", boundaries=True)
+        agent = _agent(runtime, tmp_path, "B0", boundaries=True,
+                       boundary_options={"memory_placement": memory_placement})
         scope = _scope("B0")
         agent.update_state(scope.config(), {"messages": [
             HumanMessage(id="old-user", content="earlier request"),
@@ -211,10 +215,19 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
             wires[0]["response_format"]["json_schema"]["schema"])
         for wire in wires:
             users = [row for row in wire["messages"] if row["role"] == "user"]
-            assert users[-1]["content"] == (
+            current = users[-1]["content"]
+            if memory_placement == "current_request":
+                assert current.startswith("[DURABLE MEMORY]\n")
+                assert "[DURABLE MEMORY]" not in wire["messages"][0]["content"]
+                current = current.split("\n[/DURABLE MEMORY]\n", 1)[1]
+            else:
+                assert "[DURABLE MEMORY]" in wire["messages"][0]["content"]
+            assert current == (
                 "[CURRENT USER REQUEST]\n[CURRENT TASK]\nTEMP current task bytes")
             assert users[0]["content"] == "[USER HISTORY]\nearlier request"
-            assert "[DURABLE MEMORY]" in wire["messages"][0]["content"]
+            assert sum(row["content"].count("[DURABLE MEMORY]\n")
+                       for row in wire["messages"]) == 1
+            assert all(row["role"] != "system" for row in wire["messages"][1:])
             assert any(row["content"] == (
                            "[ASSISTANT HISTORY - prior model output]\nprior assistant 3")
                        for row in wire["messages"])
@@ -223,7 +236,10 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
         assert len(proposals) == 3
         assert json.loads(proposals[0]["content"].split("\n", 1)[1])["calls"][0]["arguments"][
             "id"] == memory_id
-        assert "updated durable 4" in wires[2]["messages"][0]["content"]
+        material_message = (wires[2]["messages"][0] if memory_placement == "system" else
+                            next(row for row in reversed(wires[2]["messages"])
+                                 if row["role"] == "user"))
+        assert "updated durable 4" in material_message["content"]
         assert '"active_refs": []' in wires[-1]["messages"][0]["content"]
         for original in originals:
             assert "[CURRENT TASK]" not in original.content
@@ -249,6 +265,8 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
                 "original_checkpoint_messages": [row.model_dump(mode="json") for row in originals],
                 "receipt_metadata": runtime.model.request_view.receipt_metadata})
         assert store.search(namespace) == []
+        assert store.get(other_namespace, memory_id).value == {"content": "PRIVATE OTHER OWNER"}
+        assert "PRIVATE OTHER OWNER" not in json.dumps(wires)
         invoke_public_message(agent, runtime.model, _scope("B0", "new"), "NEXT TASK")
         assert "TEMP current task bytes" not in json.dumps(wires[-1])
         assert '"active_refs": []' in wires[-1]["messages"][0]["content"]
@@ -264,8 +282,9 @@ def test_boundary_config_defaults_zero_correction_and_preserves_legacy_c(tmp_pat
     runner._validate(_config(tmp_path), "C")
 
 
+@pytest.mark.parametrize("memory_placement", ["system", "current_request"])
 def test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost(
-    tmp_path: Path,
+    tmp_path: Path, memory_placement: str,
 ) -> None:
     from langgraph.store.base import PutOp
 
@@ -292,10 +311,17 @@ def test_boundary_query_uses_complete_query_actual_index_and_continuous_embeddin
         wires = []
         with _runtime(tmp_path, store, wires, lambda *_: {"answer": "read-only"},
                       budget=budget) as runtime:
-            invoke_public_message(_agent(runtime, tmp_path, "B0", boundaries=True), runtime.model,
+            invoke_public_message(_agent(runtime, tmp_path, "B0", boundaries=True,
+                boundary_options={"memory_placement": memory_placement}), runtime.model,
                                   _scope("B0"), query)
         assert len(embedding_wires) == 2 and embedding_wires[-1]["input"] == [query]
         assert len(wires) == 1
+        containing = next(row for row in wires[0]["messages"] if "[DURABLE MEMORY]\n"
+                          in row["content"])
+        assert containing["role"] == ("system" if memory_placement == "system" else "user")
+        material = json.loads(containing["content"].split("[DURABLE MEMORY]\n", 1)[1].split(
+            "\n[/DURABLE MEMORY]", 1)[0])
+        assert len(material) == 10
         assert read_json(tmp_path / "budget.json")["embedding"]["charged_tokens"] == 6
         after = {row.key: row.value for row in store.search(namespace, limit=64)}
         assert before == after
@@ -311,17 +337,19 @@ def test_boundary_query_uses_complete_query_actual_index_and_continuous_embeddin
 class _OneRecordCapacity(_MockCapacity):
     def check(self, messages: Any, output_tokens: int, tools: Any = None) -> dict[str, Any]:
         receipt = super().check(messages, output_tokens, tools)
-        first = messages[0]["content"]
-        if "[DURABLE MEMORY]\n" in first:
-            rows = json.loads(first.split("[DURABLE MEMORY]\n", 1)[1].split(
+        containing = next((row["content"] for row in messages if "[DURABLE MEMORY]\n" in
+                           row["content"]), None)
+        if containing is not None:
+            rows = json.loads(containing.split("[DURABLE MEMORY]\n", 1)[1].split(
                 "\n[/DURABLE MEMORY]", 1)[0])
             if len(rows) > 1:
                 raise CapacityExceeded(receipt)
         return receipt
 
 
+@pytest.mark.parametrize("memory_placement", ["system", "current_request"])
 def test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body(
-    tmp_path: Path,
+    tmp_path: Path, memory_placement: str,
 ) -> None:
     store, wires, control_wires = InMemoryStore(), [], []
     namespace = ("langmem", "run", "B0", "alice")
@@ -346,12 +374,17 @@ def test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body(
             budget=runtime.model.client.budget, capacity=runtime.model.client.capacity,
             transport=httpx.MockTransport(control)) as selector:
             agent = _agent(runtime, tmp_path, "B0", boundaries=True,
-                           boundary_options={"attention_enabled": True}, selector_client=selector)
+                           boundary_options={"attention_enabled": True,
+                                             "memory_placement": memory_placement},
+                           selector_client=selector)
             invoke_public_message(agent, runtime.model, _scope("B0"), "original task")
             checkpoint = agent.get_state(_scope("B0").config()).values["messages"]
         assert len(control_wires) == 1 and len(wires) == 2 and runtime.model.calls_in_message == 2
-        assert "current updated body" in wires[-1]["messages"][0]["content"]
-        assert "old body" not in wires[-1]["messages"][0]["content"]
+        containing = next(row for row in wires[-1]["messages"] if "[DURABLE MEMORY]\n"
+                          in row["content"])
+        assert containing["role"] == ("system" if memory_placement == "system" else "user")
+        assert "current updated body" in containing["content"]
+        assert "old body" not in containing["content"]
         assert read_json(tmp_path / "control-capacity.json")[
             f"{_scope('B0').config()['configurable']['thread_id']}:0"] == 1
         assert read_json(tmp_path / "budget.json")["generation_requests"] == 3

@@ -1,0 +1,47 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "revised_location-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Keep an ongoing storage note: the spectroscope cover is stored in locker L-2. Save this location and explicitly confirm it. Take no business action."
+          },
+          {
+            "message_id": "revised_location-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Update the saved storage location of the spectroscope cover from locker L-2 to cupboard D-9. Save cupboard D-9 as the current location and explicitly confirm it. Take no business action."
+          },
+          {
+            "message_id": "revised_location-3",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 1,
+            "text": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+          },
+          {
+            "message_id": "revised_location-4",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 2,
+            "text": "What location for the spectroscope cover did you originally confirm earlier in this conversation, before the update? State that historical location rather than the current saved location; the previous two-line format does not apply to this reply. Do not change memory or take any business action."
+          }
+        ]
+      }
+    ]
+  }
+}

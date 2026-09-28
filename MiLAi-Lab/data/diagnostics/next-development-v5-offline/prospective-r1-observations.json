@@ -1,0 +1,3463 @@
+{
+  "schema_version": 1,
+  "observations": [
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "save_1_item",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-af44a005ba0a7684,chatcmpl-a3cc9fa755cf13af"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "save_1_quantity",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-af44a005ba0a7684,chatcmpl-a3cc9fa755cf13af"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "save_1_destination",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-af44a005ba0a7684,chatcmpl-a3cc9fa755cf13af"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "save_1_packing",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-af44a005ba0a7684,chatcmpl-a3cc9fa755cf13af"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "save_1_booking_status",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-af44a005ba0a7684,chatcmpl-a3cc9fa755cf13af"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "confirmation",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-af44a005ba0a7684,chatcmpl-a3cc9fa755cf13af"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "no_business_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-af44a005ba0a7684,chatcmpl-a3cc9fa755cf13af"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "no_business_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-9bd3af4e5b9e4456"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "no_write_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-9bd3af4e5b9e4456"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "use_2_item",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-9bd3af4e5b9e4456"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "use_2_quantity",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-9bd3af4e5b9e4456"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "use_2_destination",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-9bd3af4e5b9e4456"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "use_2_packing",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-9bd3af4e5b9e4456"
+        }
+      ]
+    },
+    {
+      "case_id": "complete_plan",
+      "obligation_id": "use_2_booking_status",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five requested fields. The new-session answer repeats all five; no business call or later mutation.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['complete_plan/B0'].turns[message_id=complete_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/complete_plan/B0/trace.jsonl",
+          "sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+          "location": "actual provider IDs chatcmpl-9bd3af4e5b9e4456"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "save_1_item",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-a17ed98250f0dc48,chatcmpl-be0819e093d1a68c"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "save_1_quantity",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-a17ed98250f0dc48,chatcmpl-be0819e093d1a68c"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "save_1_destination",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-a17ed98250f0dc48,chatcmpl-be0819e093d1a68c"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "save_1_packing",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-a17ed98250f0dc48,chatcmpl-be0819e093d1a68c"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "save_1_booking_status",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-a17ed98250f0dc48,chatcmpl-be0819e093d1a68c"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "confirmation",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-a17ed98250f0dc48,chatcmpl-be0819e093d1a68c"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "no_business_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-a17ed98250f0dc48,chatcmpl-be0819e093d1a68c"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "no_business_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-b6c1d234ac8c48bb"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "no_write_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-b6c1d234ac8c48bb"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "use_2_quantity",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-b6c1d234ac8c48bb"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "use_2_packing",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-b6c1d234ac8c48bb"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "use_2_item",
+      "result": "fail",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "no",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "no",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only. Optional completeness is not a task failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-b6c1d234ac8c48bb"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "use_2_destination",
+      "result": "fail",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "no",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "no",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only. Optional completeness is not a task failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-b6c1d234ac8c48bb"
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "obligation_id": "use_2_booking_status",
+      "result": "fail",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "no",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "no",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE contains all five fields. The later answer contains exactly the requested quantity and packing. Item/destination/booking omission is diagnostic only. Optional completeness is not a task failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['partial_plan/B0'].turns[message_id=partial_plan-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/partial_plan/B0/trace.jsonl",
+          "sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+          "location": "actual provider IDs chatcmpl-b6c1d234ac8c48bb"
+        }
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "obligation_id": "prefix",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "First reply starts LOCAL: and is one correct sentence. Later checklist reply is one ordinary sentence without LOCAL:. Store remains empty and no tool writes occur.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['one_reply_format/B0'].turns[message_id=one_reply_format-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/one_reply_format/B0/trace.jsonl",
+          "sha256": "cb5841d78730287851e3b1bb95d280c589b2ffed8da1cd7a3a0cd24ef469dbe2",
+          "location": "actual provider IDs chatcmpl-b469f4e10a114ede"
+        }
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "obligation_id": "one_sentence_explanation",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "First reply starts LOCAL: and is one correct sentence. Later checklist reply is one ordinary sentence without LOCAL:. Store remains empty and no tool writes occur.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['one_reply_format/B0'].turns[message_id=one_reply_format-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/one_reply_format/B0/trace.jsonl",
+          "sha256": "cb5841d78730287851e3b1bb95d280c589b2ffed8da1cd7a3a0cd24ef469dbe2",
+          "location": "actual provider IDs chatcmpl-b469f4e10a114ede"
+        }
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "obligation_id": "no_write_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "First reply starts LOCAL: and is one correct sentence. Later checklist reply is one ordinary sentence without LOCAL:. Store remains empty and no tool writes occur.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['one_reply_format/B0'].turns[message_id=one_reply_format-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/one_reply_format/B0/trace.jsonl",
+          "sha256": "cb5841d78730287851e3b1bb95d280c589b2ffed8da1cd7a3a0cd24ef469dbe2",
+          "location": "actual provider IDs chatcmpl-b469f4e10a114ede"
+        }
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "obligation_id": "no_write_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "First reply starts LOCAL: and is one correct sentence. Later checklist reply is one ordinary sentence without LOCAL:. Store remains empty and no tool writes occur.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['one_reply_format/B0'].turns[message_id=one_reply_format-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/one_reply_format/B0/trace.jsonl",
+          "sha256": "cb5841d78730287851e3b1bb95d280c589b2ffed8da1cd7a3a0cd24ef469dbe2",
+          "location": "actual provider IDs chatcmpl-a36c7eaea27c584b"
+        }
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "obligation_id": "later_checklist",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "First reply starts LOCAL: and is one correct sentence. Later checklist reply is one ordinary sentence without LOCAL:. Store remains empty and no tool writes occur.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['one_reply_format/B0'].turns[message_id=one_reply_format-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/one_reply_format/B0/trace.jsonl",
+          "sha256": "cb5841d78730287851e3b1bb95d280c589b2ffed8da1cd7a3a0cd24ef469dbe2",
+          "location": "actual provider IDs chatcmpl-a36c7eaea27c584b"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "save_1_review_day",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-b13cdaa9b5e6494e,chatcmpl-8fe1f3f2dc50d953"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "save_1_review_time",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-b13cdaa9b5e6494e,chatcmpl-8fe1f3f2dc50d953"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "save_1_review_room",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-b13cdaa9b5e6494e,chatcmpl-8fe1f3f2dc50d953"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "save_1_key_location",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-b13cdaa9b5e6494e,chatcmpl-8fe1f3f2dc50d953"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "save_1_key_subject",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-b13cdaa9b5e6494e,chatcmpl-8fe1f3f2dc50d953"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "update_preserve_review_day",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-a43e6867dfc909e4,chatcmpl-aad00f41f3f1dadf"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "update_preserve_review_time",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-a43e6867dfc909e4,chatcmpl-aad00f41f3f1dadf"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "update_preserve_review_room",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-a43e6867dfc909e4,chatcmpl-aad00f41f3f1dadf"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "update_preserve_key_location",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-a43e6867dfc909e4,chatcmpl-aad00f41f3f1dadf"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "update_preserve_key_subject",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-a43e6867dfc909e4,chatcmpl-aad00f41f3f1dadf"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "same_matter_update",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-a43e6867dfc909e4,chatcmpl-aad00f41f3f1dadf"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "use_3_review_day",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-acde16b01ad4e987"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "use_3_review_time",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-acde16b01ad4e987"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "use_3_review_room",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-acde16b01ad4e987"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "use_3_key_location",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-acde16b01ad4e987"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "no_business_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-b13cdaa9b5e6494e,chatcmpl-8fe1f3f2dc50d953"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "no_business_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-a43e6867dfc909e4,chatcmpl-aad00f41f3f1dadf"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "no_business_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-acde16b01ad4e987"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "no_write_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-acde16b01ad4e987"
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "obligation_id": "confirm_update",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two independently changeable matters formed. Actual UPDATE keeps review ID and only changes 14:10 to 16:25; day/room and the entire key record remain unchanged. Later answer includes all four requested details.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['independent_update/B0'].turns[message_id=independent_update-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/independent_update/B0/trace.jsonl",
+          "sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+          "location": "actual provider IDs chatcmpl-a43e6867dfc909e4,chatcmpl-aad00f41f3f1dadf"
+        }
+      ]
+    },
+    {
+      "case_id": "quoted_rule",
+      "obligation_id": "attributed_explanation",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "First answer attributes green-ink request to the courier. No memory created. Later search is empty and answer says no adopted rule is known; search overhead retained.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['quoted_rule/B0'].turns[message_id=quoted_rule-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/quoted_rule/B0/trace.jsonl",
+          "sha256": "1175c5a0c7b9e50345dae436a4688d245b5a230784a01f4a22b777e6ed49be2c",
+          "location": "actual provider IDs chatcmpl-b1fae14784e2bae1"
+        }
+      ]
+    },
+    {
+      "case_id": "quoted_rule",
+      "obligation_id": "no_write_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "First answer attributes green-ink request to the courier. No memory created. Later search is empty and answer says no adopted rule is known; search overhead retained.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['quoted_rule/B0'].turns[message_id=quoted_rule-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/quoted_rule/B0/trace.jsonl",
+          "sha256": "1175c5a0c7b9e50345dae436a4688d245b5a230784a01f4a22b777e6ed49be2c",
+          "location": "actual provider IDs chatcmpl-b1fae14784e2bae1"
+        }
+      ]
+    },
+    {
+      "case_id": "quoted_rule",
+      "obligation_id": "no_write_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "First answer attributes green-ink request to the courier. No memory created. Later search is empty and answer says no adopted rule is known; search overhead retained.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['quoted_rule/B0'].turns[message_id=quoted_rule-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/quoted_rule/B0/trace.jsonl",
+          "sha256": "1175c5a0c7b9e50345dae436a4688d245b5a230784a01f4a22b777e6ed49be2c",
+          "location": "actual provider IDs chatcmpl-a7303755a9adedec,chatcmpl-82b13b4c122b2016"
+        }
+      ]
+    },
+    {
+      "case_id": "quoted_rule",
+      "obligation_id": "none_adopted",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "First answer attributes green-ink request to the courier. No memory created. Later search is empty and answer says no adopted rule is known; search overhead retained.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['quoted_rule/B0'].turns[message_id=quoted_rule-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/quoted_rule/B0/trace.jsonl",
+          "sha256": "1175c5a0c7b9e50345dae436a4688d245b5a230784a01f4a22b777e6ed49be2c",
+          "location": "actual provider IDs chatcmpl-a7303755a9adedec,chatcmpl-82b13b4c122b2016"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "save_1_loading_point",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-85ce90ada0533c28,chatcmpl-a7c3518a2108881b"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "save_1_protective_insert",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-85ce90ada0533c28,chatcmpl-a7c3518a2108881b"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "save_1_document",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-85ce90ada0533c28,chatcmpl-a7c3518a2108881b"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "use_2_protective_insert",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-b435688fb4d635da"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "use_2_document",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-b435688fb4d635da"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "use_3_loading_point",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-b0cf03f6ea14a616"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "use_3_protective_insert",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-b0cf03f6ea14a616"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "use_3_document",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-b0cf03f6ea14a616"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "no_business_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-85ce90ada0533c28,chatcmpl-a7c3518a2108881b"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "no_business_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-b435688fb4d635da"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "no_business_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-b0cf03f6ea14a616"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "no_write_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-b435688fb4d635da"
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "obligation_id": "no_write_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "One complete note formed. Both later answers contain requested fields; record ID/content identical, zero mutating tool attempts.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['read_only_note/B0'].turns[message_id=read_only_note-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/read_only_note/B0/trace.jsonl",
+          "sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+          "location": "actual provider IDs chatcmpl-b0cf03f6ea14a616"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "save_1_textile_prefix",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-bf920db6191291bf,chatcmpl-a2961529b3e10b06"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "save_1_ceramics_prefix",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-bf920db6191291bf,chatcmpl-a2961529b3e10b06"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "independent_notes",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-bf920db6191291bf,chatcmpl-a2961529b3e10b06"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "actual_delete",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-afc4848a70ebb986,chatcmpl-9acbb8dc928026dd,chatcmpl-9aba5b293f302bbb"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "preserve_ceramics",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-afc4848a70ebb986,chatcmpl-9acbb8dc928026dd,chatcmpl-9aba5b293f302bbb"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "delete_confirmation",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-afc4848a70ebb986,chatcmpl-9acbb8dc928026dd,chatcmpl-9aba5b293f302bbb"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "use_3_ceramics_prefix",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-bdaa2559c07e14a2"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "textile_absent",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-bdaa2559c07e14a2"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "no_business_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-bf920db6191291bf,chatcmpl-a2961529b3e10b06"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "no_business_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-afc4848a70ebb986,chatcmpl-9acbb8dc928026dd,chatcmpl-9aba5b293f302bbb"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "no_business_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-bdaa2559c07e14a2"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "no_write_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-bdaa2559c07e14a2"
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "obligation_id": "confirm_both_saves",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Two separate notes formed. Search then actual DELETE removes textile ID; ceramics ID/content unchanged. Later answer gives CR and says textile prefix is no longer stored.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['explicit_delete/B0'].turns[message_id=explicit_delete-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/explicit_delete/B0/trace.jsonl",
+          "sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+          "location": "actual provider IDs chatcmpl-bf920db6191291bf,chatcmpl-a2961529b3e10b06"
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "obligation_id": "save_1_count",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE 6 and same-ID UPDATE 9 succeed. Returning S1 HTTP contains current Store 9, retained user/tool/assistant history 6, and explicit current-durable request. Final answer wrongly says 6. This is consumption/authority failure, not formation/delivery failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['assistant_conflict/B0'].turns[message_id=assistant_conflict-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/assistant_conflict/B0/trace.jsonl",
+          "sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+          "location": "actual provider IDs chatcmpl-89300da9802dacda,chatcmpl-b7dcec725f594219"
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "obligation_id": "old_confirm",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE 6 and same-ID UPDATE 9 succeed. Returning S1 HTTP contains current Store 9, retained user/tool/assistant history 6, and explicit current-durable request. Final answer wrongly says 6. This is consumption/authority failure, not formation/delivery failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['assistant_conflict/B0'].turns[message_id=assistant_conflict-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/assistant_conflict/B0/trace.jsonl",
+          "sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+          "location": "actual provider IDs chatcmpl-89300da9802dacda,chatcmpl-b7dcec725f594219"
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "obligation_id": "new_count",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE 6 and same-ID UPDATE 9 succeed. Returning S1 HTTP contains current Store 9, retained user/tool/assistant history 6, and explicit current-durable request. Final answer wrongly says 6. This is consumption/authority failure, not formation/delivery failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['assistant_conflict/B0'].turns[message_id=assistant_conflict-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/assistant_conflict/B0/trace.jsonl",
+          "sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+          "location": "actual provider IDs chatcmpl-a0f60ca3eedaf35c,chatcmpl-a3d9d9642fa63389"
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "obligation_id": "new_confirm",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "CREATE 6 and same-ID UPDATE 9 succeed. Returning S1 HTTP contains current Store 9, retained user/tool/assistant history 6, and explicit current-durable request. Final answer wrongly says 6. This is consumption/authority failure, not formation/delivery failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['assistant_conflict/B0'].turns[message_id=assistant_conflict-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/assistant_conflict/B0/trace.jsonl",
+          "sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+          "location": "actual provider IDs chatcmpl-a0f60ca3eedaf35c,chatcmpl-a3d9d9642fa63389"
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "obligation_id": "use_3_current_count",
+      "result": "fail",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "no",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": "CURRENT_TASK_CONSUMPTION",
+      "note": "CREATE 6 and same-ID UPDATE 9 succeed. Returning S1 HTTP contains current Store 9, retained user/tool/assistant history 6, and explicit current-durable request. Final answer wrongly says 6. This is consumption/authority failure, not formation/delivery failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['assistant_conflict/B0'].turns[message_id=assistant_conflict-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/assistant_conflict/B0/trace.jsonl",
+          "sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+          "location": "actual provider IDs chatcmpl-b690c8303257f276"
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "obligation_id": "no_write_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE 6 and same-ID UPDATE 9 succeed. Returning S1 HTTP contains current Store 9, retained user/tool/assistant history 6, and explicit current-durable request. Final answer wrongly says 6. This is consumption/authority failure, not formation/delivery failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['assistant_conflict/B0'].turns[message_id=assistant_conflict-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/assistant_conflict/B0/trace.jsonl",
+          "sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+          "location": "actual provider IDs chatcmpl-b690c8303257f276"
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "obligation_id": "no_business_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE 6 and same-ID UPDATE 9 succeed. Returning S1 HTTP contains current Store 9, retained user/tool/assistant history 6, and explicit current-durable request. Final answer wrongly says 6. This is consumption/authority failure, not formation/delivery failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['assistant_conflict/B0'].turns[message_id=assistant_conflict-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/assistant_conflict/B0/trace.jsonl",
+          "sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+          "location": "actual provider IDs chatcmpl-89300da9802dacda,chatcmpl-b7dcec725f594219"
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "obligation_id": "no_business_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE 6 and same-ID UPDATE 9 succeed. Returning S1 HTTP contains current Store 9, retained user/tool/assistant history 6, and explicit current-durable request. Final answer wrongly says 6. This is consumption/authority failure, not formation/delivery failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['assistant_conflict/B0'].turns[message_id=assistant_conflict-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/assistant_conflict/B0/trace.jsonl",
+          "sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+          "location": "actual provider IDs chatcmpl-a0f60ca3eedaf35c,chatcmpl-a3d9d9642fa63389"
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "obligation_id": "no_business_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "CREATE 6 and same-ID UPDATE 9 succeed. Returning S1 HTTP contains current Store 9, retained user/tool/assistant history 6, and explicit current-durable request. Final answer wrongly says 6. This is consumption/authority failure, not formation/delivery failure.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['assistant_conflict/B0'].turns[message_id=assistant_conflict-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/assistant_conflict/B0/trace.jsonl",
+          "sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+          "location": "actual provider IDs chatcmpl-b690c8303257f276"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "save_1_item",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-94e05415938b4e87,chatcmpl-a84e45a91850a7fc"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "save_1_quantity",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-94e05415938b4e87,chatcmpl-a84e45a91850a7fc"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "save_1_destination",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-94e05415938b4e87,chatcmpl-a84e45a91850a7fc"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "save_1_packing",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-94e05415938b4e87,chatcmpl-a84e45a91850a7fc"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "save_1_booking_status",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-94e05415938b4e87,chatcmpl-a84e45a91850a7fc"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "no_business_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-94e05415938b4e87,chatcmpl-a84e45a91850a7fc"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "booking_item",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "yes",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a3524e69026da62f,chatcmpl-a8e2de106b22d758"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "booking_quantity",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "yes",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a3524e69026da62f,chatcmpl-a8e2de106b22d758"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "booking_destination",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "yes",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a3524e69026da62f,chatcmpl-a8e2de106b22d758"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "booking_packing",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "yes",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a3524e69026da62f,chatcmpl-a8e2de106b22d758"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "booking_once",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "yes",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a3524e69026da62f,chatcmpl-a8e2de106b22d758"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "report_receipt",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "yes",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a3524e69026da62f,chatcmpl-a8e2de106b22d758"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "no_write_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a3524e69026da62f,chatcmpl-a8e2de106b22d758"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "no_write_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-85fa21b6d123162c,chatcmpl-a9921b036f7d3296"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "no_write_4",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-4]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a32b97e2b9b19370"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "live_lookup",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "yes",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-85fa21b6d123162c,chatcmpl-a9921b036f7d3296"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "use_3_reservation_exists",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "yes",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-85fa21b6d123162c,chatcmpl-a9921b036f7d3296"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "use_3_label_status",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "yes",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-85fa21b6d123162c,chatcmpl-a9921b036f7d3296"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "no_business_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-85fa21b6d123162c,chatcmpl-a9921b036f7d3296"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "use_4_earlier_plan_booking_status",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-4]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a32b97e2b9b19370"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "no_business_4",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-4]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a32b97e2b9b19370"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "no_business_lookup_4",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-4]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-a32b97e2b9b19370"
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "obligation_id": "confirm_plan",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Old plan remains not booked throughout. Exactly one reserve_and_label call creates actual reservation and label using the four specified arguments; answer reports actual UUID. Fresh-session get_reservation returns found/created and answer uses it. Snapshot-only last answer correctly says not booked with no business call or memory write.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['dynamic_world/B0'].turns[message_id=dynamic_world-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/dynamic_world/B0/trace.jsonl",
+          "sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+          "location": "actual provider IDs chatcmpl-94e05415938b4e87,chatcmpl-a84e45a91850a7fc"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "save_1_spectrometer lead",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-a68c424d632b0557,chatcmpl-ac8bc89f8431fbfb"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "save_1_jade reference tile",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-a68c424d632b0557,chatcmpl-ac8bc89f8431fbfb"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "save_1_quartz cuvette",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-a68c424d632b0557,chatcmpl-ac8bc89f8431fbfb"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "save_1_brass calibration ring",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-a68c424d632b0557,chatcmpl-ac8bc89f8431fbfb"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "save_1_violet filter",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-a68c424d632b0557,chatcmpl-ac8bc89f8431fbfb"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "save_1_sample logbook",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "yes",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-a68c424d632b0557,chatcmpl-ac8bc89f8431fbfb"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "six_independent",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-a68c424d632b0557,chatcmpl-ac8bc89f8431fbfb"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "use_2_spectrometer lead",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8a1d96ba54dc3627"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "use_2_quartz cuvette",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8a1d96ba54dc3627"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "use_2_violet filter",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8a1d96ba54dc3627"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "use_3_jade reference tile",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8df98348bd1ff7af"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "use_3_brass calibration ring",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8df98348bd1ff7af"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "use_3_sample logbook",
+      "result": "pass",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8df98348bd1ff7af"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "no_business_1",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-1]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-a68c424d632b0557,chatcmpl-ac8bc89f8431fbfb"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "no_business_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8a1d96ba54dc3627"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "no_business_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8df98348bd1ff7af"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "no_write_2",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-2]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8a1d96ba54dc3627"
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "obligation_id": "no_write_3",
+      "result": "pass",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "earliest_breakpoint": null,
+      "note": "Six separate own-item records actually created in one Host tool batch. Both later queries receive all six records and answer the three requested item/location pairs, without writing or business actions.",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v5-prospective-r1-results-20260928.json",
+          "sha256": "ae86787eac2c2c293a44cf416ad423ee77fc67691d806d2193df90c8224730d7",
+          "location": "jobs['moderate_bank/B0'].turns[message_id=moderate_bank-3]"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/prospective-r1-published/moderate_bank/B0/trace.jsonl",
+          "sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+          "location": "actual provider IDs chatcmpl-8df98348bd1ff7af"
+        }
+      ]
+    }
+  ]
+}

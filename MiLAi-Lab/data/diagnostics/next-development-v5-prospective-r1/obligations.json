@@ -1,0 +1,2046 @@
+{
+  "schema_version": 1,
+  "runtime_must_not_read": true,
+  "cases": [
+    {
+      "case_id": "complete_plan",
+      "messages": [
+        {
+          "message_id": "complete_plan-1",
+          "text": "Save this as my ongoing exhibit-transfer plan: item Cobalt prism mounts, quantity 7, destination alcove T-6, packing individual foam pouches, and booking status not booked. Retain these fields for future sessions. Confirm that you saved the plan, and do not make a reservation."
+        },
+        {
+          "message_id": "complete_plan-2",
+          "text": "Give me the complete saved exhibit-transfer plan. Explicitly state the item, quantity, destination, packing and booking status. Read only: do not change memory or take any business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_item",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested item",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-1",
+              "quote": "Save this as my ongoing exhibit-transfer plan: item Cobalt prism mounts, quantity 7, destination alcove T-6, packing individual foam pouches, and booking status not booked. Retain these fields for future sessions. Confirm that you saved the plan, and do not make a reservation."
+            }
+          ]
+        },
+        {
+          "id": "save_1_quantity",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested quantity",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-1",
+              "quote": "Save this as my ongoing exhibit-transfer plan: item Cobalt prism mounts, quantity 7, destination alcove T-6, packing individual foam pouches, and booking status not booked. Retain these fields for future sessions. Confirm that you saved the plan, and do not make a reservation."
+            }
+          ]
+        },
+        {
+          "id": "save_1_destination",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested destination",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-1",
+              "quote": "Save this as my ongoing exhibit-transfer plan: item Cobalt prism mounts, quantity 7, destination alcove T-6, packing individual foam pouches, and booking status not booked. Retain these fields for future sessions. Confirm that you saved the plan, and do not make a reservation."
+            }
+          ]
+        },
+        {
+          "id": "save_1_packing",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-1",
+              "quote": "Save this as my ongoing exhibit-transfer plan: item Cobalt prism mounts, quantity 7, destination alcove T-6, packing individual foam pouches, and booking status not booked. Retain these fields for future sessions. Confirm that you saved the plan, and do not make a reservation."
+            }
+          ]
+        },
+        {
+          "id": "save_1_booking_status",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested booking_status",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-1",
+              "quote": "Save this as my ongoing exhibit-transfer plan: item Cobalt prism mounts, quantity 7, destination alcove T-6, packing individual foam pouches, and booking status not booked. Retain these fields for future sessions. Confirm that you saved the plan, and do not make a reservation."
+            }
+          ]
+        },
+        {
+          "id": "confirmation",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-1",
+          "layer": "current_explicit_obligations",
+          "description": "Confirm requested save supported by actual persistence",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-1",
+              "quote": "Save this as my ongoing exhibit-transfer plan: item Cobalt prism mounts, quantity 7, destination alcove T-6, packing individual foam pouches, and booking status not booked. Retain these fields for future sessions. Confirm that you saved the plan, and do not make a reservation."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-1",
+              "quote": "Save this as my ongoing exhibit-transfer plan: item Cobalt prism mounts, quantity 7, destination alcove T-6, packing individual foam pouches, and booking status not booked. Retain these fields for future sessions. Confirm that you saved the plan, and do not make a reservation."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-2",
+              "quote": "Give me the complete saved exhibit-transfer plan. Explicitly state the item, quantity, destination, packing and booking status. Read only: do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_2",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-2",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-2",
+              "quote": "Give me the complete saved exhibit-transfer plan. Explicitly state the item, quantity, destination, packing and booking status. Read only: do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "use_2_item",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit item",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-2",
+              "quote": "Give me the complete saved exhibit-transfer plan. Explicitly state the item, quantity, destination, packing and booking status. Read only: do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "use_2_quantity",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit quantity",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-2",
+              "quote": "Give me the complete saved exhibit-transfer plan. Explicitly state the item, quantity, destination, packing and booking status. Read only: do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "use_2_destination",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit destination",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-2",
+              "quote": "Give me the complete saved exhibit-transfer plan. Explicitly state the item, quantity, destination, packing and booking status. Read only: do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "use_2_packing",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-2",
+              "quote": "Give me the complete saved exhibit-transfer plan. Explicitly state the item, quantity, destination, packing and booking status. Read only: do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "use_2_booking_status",
+          "case_id": "complete_plan",
+          "target_message_id": "complete_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit booking_status",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "complete_plan-2",
+              "quote": "Give me the complete saved exhibit-transfer plan. Explicitly state the item, quantity, destination, packing and booking status. Read only: do not change memory or take any business action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "messages": [
+        {
+          "message_id": "partial_plan-1",
+          "text": "Remember my ongoing instrument-transfer plan: Indigo sensor rails, 5 units to shelf M-8, wrapped in antistatic cloth, with booking status not booked. Save the plan for later and confirm, without taking any business action."
+        },
+        {
+          "message_id": "partial_plan-2",
+          "text": "What quantity and packing did I specify for my instrument-transfer plan? Read only: do not change any memory or make a booking."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_item",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested item",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-1",
+              "quote": "Remember my ongoing instrument-transfer plan: Indigo sensor rails, 5 units to shelf M-8, wrapped in antistatic cloth, with booking status not booked. Save the plan for later and confirm, without taking any business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_quantity",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested quantity",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-1",
+              "quote": "Remember my ongoing instrument-transfer plan: Indigo sensor rails, 5 units to shelf M-8, wrapped in antistatic cloth, with booking status not booked. Save the plan for later and confirm, without taking any business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_destination",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested destination",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-1",
+              "quote": "Remember my ongoing instrument-transfer plan: Indigo sensor rails, 5 units to shelf M-8, wrapped in antistatic cloth, with booking status not booked. Save the plan for later and confirm, without taking any business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_packing",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-1",
+              "quote": "Remember my ongoing instrument-transfer plan: Indigo sensor rails, 5 units to shelf M-8, wrapped in antistatic cloth, with booking status not booked. Save the plan for later and confirm, without taking any business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_booking_status",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested booking_status",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-1",
+              "quote": "Remember my ongoing instrument-transfer plan: Indigo sensor rails, 5 units to shelf M-8, wrapped in antistatic cloth, with booking status not booked. Save the plan for later and confirm, without taking any business action."
+            }
+          ]
+        },
+        {
+          "id": "confirmation",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-1",
+          "layer": "current_explicit_obligations",
+          "description": "Confirm requested save supported by actual persistence",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-1",
+              "quote": "Remember my ongoing instrument-transfer plan: Indigo sensor rails, 5 units to shelf M-8, wrapped in antistatic cloth, with booking status not booked. Save the plan for later and confirm, without taking any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-1",
+              "quote": "Remember my ongoing instrument-transfer plan: Indigo sensor rails, 5 units to shelf M-8, wrapped in antistatic cloth, with booking status not booked. Save the plan for later and confirm, without taking any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-2",
+              "quote": "What quantity and packing did I specify for my instrument-transfer plan? Read only: do not change any memory or make a booking."
+            }
+          ]
+        },
+        {
+          "id": "no_write_2",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-2",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-2",
+              "quote": "What quantity and packing did I specify for my instrument-transfer plan? Read only: do not change any memory or make a booking."
+            }
+          ]
+        },
+        {
+          "id": "use_2_quantity",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit quantity",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-2",
+              "quote": "What quantity and packing did I specify for my instrument-transfer plan? Read only: do not change any memory or make a booking."
+            }
+          ]
+        },
+        {
+          "id": "use_2_packing",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "partial_plan-2",
+              "quote": "What quantity and packing did I specify for my instrument-transfer plan? Read only: do not change any memory or make a booking."
+            }
+          ]
+        },
+        {
+          "id": "use_2_item",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-2",
+          "layer": "diagnostic_completeness",
+          "description": "Diagnostic optional item",
+          "task_failing": false,
+          "basis": [
+            {
+              "message_id": "partial_plan-2",
+              "quote": "What quantity and packing did I specify for my instrument-transfer plan? Read only: do not change any memory or make a booking."
+            }
+          ]
+        },
+        {
+          "id": "use_2_destination",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-2",
+          "layer": "diagnostic_completeness",
+          "description": "Diagnostic optional destination",
+          "task_failing": false,
+          "basis": [
+            {
+              "message_id": "partial_plan-2",
+              "quote": "What quantity and packing did I specify for my instrument-transfer plan? Read only: do not change any memory or make a booking."
+            }
+          ]
+        },
+        {
+          "id": "use_2_booking_status",
+          "case_id": "partial_plan",
+          "target_message_id": "partial_plan-2",
+          "layer": "diagnostic_completeness",
+          "description": "Diagnostic optional booking_status",
+          "task_failing": false,
+          "basis": [
+            {
+              "message_id": "partial_plan-2",
+              "quote": "What quantity and packing did I specify for my instrument-transfer plan? Read only: do not change any memory or make a booking."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "messages": [
+        {
+          "message_id": "one_reply_format-1",
+          "text": "For this reply only, begin with LOCAL: and explain how a deadline differs from a duration in one sentence. Do not save this format or make it a rule for later replies."
+        },
+        {
+          "message_id": "one_reply_format-2",
+          "text": "Explain what a checklist is in one ordinary sentence. Do not carry over any previous one-reply format, and do not save a formatting preference."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "prefix",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-1",
+          "layer": "current_explicit_obligations",
+          "description": "Begin current reply with LOCAL:",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-1",
+              "quote": "For this reply only, begin with LOCAL: and explain how a deadline differs from a duration in one sentence. Do not save this format or make it a rule for later replies."
+            }
+          ]
+        },
+        {
+          "id": "one_sentence_explanation",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-1",
+          "layer": "current_explicit_obligations",
+          "description": "One sentence correctly distinguishes deadline and duration",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-1",
+              "quote": "For this reply only, begin with LOCAL: and explain how a deadline differs from a duration in one sentence. Do not save this format or make it a rule for later replies."
+            }
+          ]
+        },
+        {
+          "id": "no_write_1",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-1",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-1",
+              "quote": "For this reply only, begin with LOCAL: and explain how a deadline differs from a duration in one sentence. Do not save this format or make it a rule for later replies."
+            }
+          ]
+        },
+        {
+          "id": "no_write_2",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-2",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-2",
+              "quote": "Explain what a checklist is in one ordinary sentence. Do not carry over any previous one-reply format, and do not save a formatting preference."
+            }
+          ]
+        },
+        {
+          "id": "later_checklist",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-2",
+          "layer": "later_use_obligations",
+          "description": "One ordinary sentence explains checklist without carried LOCAL: format",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-2",
+              "quote": "Explain what a checklist is in one ordinary sentence. Do not carry over any previous one-reply format, and do not save a formatting preference."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "messages": [
+        {
+          "message_id": "independent_update-1",
+          "text": "Keep these two ongoing notes for later; they can change independently. Equipment reviews are every Tuesday at 14:10 in gallery room G-2. The spare key for the herbarium cabinet is in box S-8. Remember both arrangements without scheduling or taking business action."
+        },
+        {
+          "message_id": "independent_update-2",
+          "text": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+        },
+        {
+          "message_id": "independent_update-3",
+          "text": "State the current review day, time and room, and the herbarium spare-key location. Use the saved notes. Read only: no memory changes or business actions."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_review_day",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested review_day",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-1",
+              "quote": "Keep these two ongoing notes for later; they can change independently. Equipment reviews are every Tuesday at 14:10 in gallery room G-2. The spare key for the herbarium cabinet is in box S-8. Remember both arrangements without scheduling or taking business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_review_time",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested review_time",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-1",
+              "quote": "Keep these two ongoing notes for later; they can change independently. Equipment reviews are every Tuesday at 14:10 in gallery room G-2. The spare key for the herbarium cabinet is in box S-8. Remember both arrangements without scheduling or taking business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_review_room",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested review_room",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-1",
+              "quote": "Keep these two ongoing notes for later; they can change independently. Equipment reviews are every Tuesday at 14:10 in gallery room G-2. The spare key for the herbarium cabinet is in box S-8. Remember both arrangements without scheduling or taking business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_key_location",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested key_location",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-1",
+              "quote": "Keep these two ongoing notes for later; they can change independently. Equipment reviews are every Tuesday at 14:10 in gallery room G-2. The spare key for the herbarium cabinet is in box S-8. Remember both arrangements without scheduling or taking business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_key_subject",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested key_subject",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-1",
+              "quote": "Keep these two ongoing notes for later; they can change independently. Equipment reviews are every Tuesday at 14:10 in gallery room G-2. The spare key for the herbarium cabinet is in box S-8. Remember both arrangements without scheduling or taking business action."
+            }
+          ]
+        },
+        {
+          "id": "update_preserve_review_day",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-2",
+          "layer": "persistent_obligations",
+          "description": "Update only time; current review_day remains correct",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-2",
+              "quote": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+            }
+          ]
+        },
+        {
+          "id": "update_preserve_review_time",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-2",
+          "layer": "persistent_obligations",
+          "description": "Update only time; current review_time remains correct",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-2",
+              "quote": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+            }
+          ]
+        },
+        {
+          "id": "update_preserve_review_room",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-2",
+          "layer": "persistent_obligations",
+          "description": "Update only time; current review_room remains correct",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-2",
+              "quote": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+            }
+          ]
+        },
+        {
+          "id": "update_preserve_key_location",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-2",
+          "layer": "persistent_obligations",
+          "description": "Update only time; current key_location remains correct",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-2",
+              "quote": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+            }
+          ]
+        },
+        {
+          "id": "update_preserve_key_subject",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-2",
+          "layer": "persistent_obligations",
+          "description": "Update only time; current key_subject remains correct",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-2",
+              "quote": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+            }
+          ]
+        },
+        {
+          "id": "same_matter_update",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-2",
+          "layer": "persistent_obligations",
+          "description": "Revise existing review matter without duplicate superseded standing time",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-2",
+              "quote": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+            }
+          ]
+        },
+        {
+          "id": "use_3_review_day",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit review_day",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-3",
+              "quote": "State the current review day, time and room, and the herbarium spare-key location. Use the saved notes. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_3_review_time",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit review_time",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-3",
+              "quote": "State the current review day, time and room, and the herbarium spare-key location. Use the saved notes. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_3_review_room",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit review_room",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-3",
+              "quote": "State the current review day, time and room, and the herbarium spare-key location. Use the saved notes. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_3_key_location",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit key_location",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-3",
+              "quote": "State the current review day, time and room, and the herbarium spare-key location. Use the saved notes. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-1",
+              "quote": "Keep these two ongoing notes for later; they can change independently. Equipment reviews are every Tuesday at 14:10 in gallery room G-2. The spare key for the herbarium cabinet is in box S-8. Remember both arrangements without scheduling or taking business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-2",
+              "quote": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-3",
+              "quote": "State the current review day, time and room, and the herbarium spare-key location. Use the saved notes. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-3",
+              "quote": "State the current review day, time and room, and the herbarium spare-key location. Use the saved notes. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "confirm_update",
+          "case_id": "independent_update",
+          "target_message_id": "independent_update-2",
+          "layer": "current_explicit_obligations",
+          "description": "Confirm the requested saved time update, supported by real operation",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_update-2",
+              "quote": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "quoted_rule",
+      "messages": [
+        {
+          "message_id": "quoted_rule-1",
+          "text": "In a play, a courier says, \"From now on, record all route notes in green ink.\" Explain in one sentence what the courier requests. This is dialogue under review, not my instruction or an adopted preference. Do not save the quoted instruction or change any of my memories."
+        },
+        {
+          "message_id": "quoted_rule-2",
+          "text": "Have I adopted an ongoing ink-colour rule for my own route notes? Report only a rule that I adopted; if none is known, say so. Do not create a preference or change memory."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "attributed_explanation",
+          "case_id": "quoted_rule",
+          "target_message_id": "quoted_rule-1",
+          "layer": "current_explicit_obligations",
+          "description": "Explain courier request in one sentence as quoted request, not user preference",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "quoted_rule-1",
+              "quote": "In a play, a courier says, \"From now on, record all route notes in green ink.\" Explain in one sentence what the courier requests. This is dialogue under review, not my instruction or an adopted preference. Do not save the quoted instruction or change any of my memories."
+            }
+          ]
+        },
+        {
+          "id": "no_write_1",
+          "case_id": "quoted_rule",
+          "target_message_id": "quoted_rule-1",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "quoted_rule-1",
+              "quote": "In a play, a courier says, \"From now on, record all route notes in green ink.\" Explain in one sentence what the courier requests. This is dialogue under review, not my instruction or an adopted preference. Do not save the quoted instruction or change any of my memories."
+            }
+          ]
+        },
+        {
+          "id": "no_write_2",
+          "case_id": "quoted_rule",
+          "target_message_id": "quoted_rule-2",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "quoted_rule-2",
+              "quote": "Have I adopted an ongoing ink-colour rule for my own route notes? Report only a rule that I adopted; if none is known, say so. Do not create a preference or change memory."
+            }
+          ]
+        },
+        {
+          "id": "none_adopted",
+          "case_id": "quoted_rule",
+          "target_message_id": "quoted_rule-2",
+          "layer": "later_use_obligations",
+          "description": "No own adopted ink rule known",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "quoted_rule-2",
+              "quote": "Have I adopted an ongoing ink-colour rule for my own route notes? Report only a rule that I adopted; if none is known, say so. Do not create a preference or change memory."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "messages": [
+        {
+          "message_id": "read_only_note-1",
+          "text": "Remember my standing workshop-kit note: loading point door V-3, protective insert corrugated sleeves, accompanying document a calibration card. Keep this for later. This is an arrangement to remember, not an instruction to reserve anything."
+        },
+        {
+          "message_id": "read_only_note-2",
+          "text": "Read only: what protective insert and accompanying document are specified for my workshop kit? Do not create, update or delete memory or take any business action."
+        },
+        {
+          "message_id": "read_only_note-3",
+          "text": "Read only: restate the workshop-kit loading point, protective insert and accompanying document. No memory changes or business actions."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_loading_point",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested loading_point",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-1",
+              "quote": "Remember my standing workshop-kit note: loading point door V-3, protective insert corrugated sleeves, accompanying document a calibration card. Keep this for later. This is an arrangement to remember, not an instruction to reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_protective_insert",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested protective_insert",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-1",
+              "quote": "Remember my standing workshop-kit note: loading point door V-3, protective insert corrugated sleeves, accompanying document a calibration card. Keep this for later. This is an arrangement to remember, not an instruction to reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_document",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested document",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-1",
+              "quote": "Remember my standing workshop-kit note: loading point door V-3, protective insert corrugated sleeves, accompanying document a calibration card. Keep this for later. This is an arrangement to remember, not an instruction to reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "use_2_protective_insert",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit protective_insert",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-2",
+              "quote": "Read only: what protective insert and accompanying document are specified for my workshop kit? Do not create, update or delete memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "use_2_document",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit document",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-2",
+              "quote": "Read only: what protective insert and accompanying document are specified for my workshop kit? Do not create, update or delete memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "use_3_loading_point",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit loading_point",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-3",
+              "quote": "Read only: restate the workshop-kit loading point, protective insert and accompanying document. No memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_3_protective_insert",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit protective_insert",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-3",
+              "quote": "Read only: restate the workshop-kit loading point, protective insert and accompanying document. No memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_3_document",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit document",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-3",
+              "quote": "Read only: restate the workshop-kit loading point, protective insert and accompanying document. No memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-1",
+              "quote": "Remember my standing workshop-kit note: loading point door V-3, protective insert corrugated sleeves, accompanying document a calibration card. Keep this for later. This is an arrangement to remember, not an instruction to reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-2",
+              "quote": "Read only: what protective insert and accompanying document are specified for my workshop kit? Do not create, update or delete memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-3",
+              "quote": "Read only: restate the workshop-kit loading point, protective insert and accompanying document. No memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "no_write_2",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-2",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-2",
+              "quote": "Read only: what protective insert and accompanying document are specified for my workshop kit? Do not create, update or delete memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "read_only_note",
+          "target_message_id": "read_only_note-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only_note-3",
+              "quote": "Read only: restate the workshop-kit loading point, protective insert and accompanying document. No memory changes or business actions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "messages": [
+        {
+          "message_id": "explicit_delete-1",
+          "text": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+        },
+        {
+          "message_id": "explicit_delete-2",
+          "text": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+        },
+        {
+          "message_id": "explicit_delete-3",
+          "text": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_textile_prefix",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested textile_prefix",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_ceramics_prefix",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested ceramics_prefix",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "independent_notes",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "persistent_obligations",
+          "description": "Textile and ceramics separately deletable ordinary records as requested",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "actual_delete",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-2",
+          "layer": "persistent_obligations",
+          "description": "Actual DELETE of textile note; no current textile prefix remains",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-2",
+              "quote": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "preserve_ceramics",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-2",
+          "layer": "persistent_obligations",
+          "description": "Ceramics note unchanged with same surviving identity/content",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-2",
+              "quote": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "delete_confirmation",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-2",
+          "layer": "current_explicit_obligations",
+          "description": "Deletion confirmation is supported by actual DELETE",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-2",
+              "quote": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "use_3_ceramics_prefix",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit ceramics_prefix",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-3",
+              "quote": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "textile_absent",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-3",
+          "layer": "later_use_obligations",
+          "description": "Say textile note is no longer stored; do not invent retained textile prefix",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-3",
+              "quote": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-2",
+              "quote": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-3",
+              "quote": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-3",
+              "quote": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_both_saves",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "current_explicit_obligations",
+          "description": "Confirm both requested saves, supported by actual persistence",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "messages": [
+        {
+          "message_id": "assistant_conflict-1",
+          "text": "Keep an ongoing display-rota note: the default sample count for the optics table is 6. Save it and confirm the saved count explicitly. Take no business action."
+        },
+        {
+          "message_id": "assistant_conflict-2",
+          "text": "Update the optics table's ongoing default sample count from 6 to 9. Save 9 as the current value and confirm it explicitly. Take no business action."
+        },
+        {
+          "message_id": "assistant_conflict-3",
+          "text": "What is the current saved default sample count for the optics table? Use the current durable note, even if an earlier assistant response in this conversation said something else. State the count and do not change memory or take business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_count",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested count",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-1",
+              "quote": "Keep an ongoing display-rota note: the default sample count for the optics table is 6. Save it and confirm the saved count explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "old_confirm",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-1",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm saved old count",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-1",
+              "quote": "Keep an ongoing display-rota note: the default sample count for the optics table is 6. Save it and confirm the saved count explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "new_count",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-2",
+          "layer": "persistent_obligations",
+          "description": "Update existing optics count to 9 without duplicate old standing value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-2",
+              "quote": "Update the optics table's ongoing default sample count from 6 to 9. Save 9 as the current value and confirm it explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "new_confirm",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-2",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm new count",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-2",
+              "quote": "Update the optics table's ongoing default sample count from 6 to 9. Save 9 as the current value and confirm it explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "use_3_current_count",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit current_count",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-3",
+              "quote": "What is the current saved default sample count for the optics table? Use the current durable note, even if an earlier assistant response in this conversation said something else. State the count and do not change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-3",
+              "quote": "What is the current saved default sample count for the optics table? Use the current durable note, even if an earlier assistant response in this conversation said something else. State the count and do not change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-1",
+              "quote": "Keep an ongoing display-rota note: the default sample count for the optics table is 6. Save it and confirm the saved count explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-2",
+              "quote": "Update the optics table's ongoing default sample count from 6 to 9. Save 9 as the current value and confirm it explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-3",
+              "quote": "What is the current saved default sample count for the optics table? Use the current durable note, even if an earlier assistant response in this conversation said something else. State the count and do not change memory or take business action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "messages": [
+        {
+          "message_id": "dynamic_world-1",
+          "text": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+        },
+        {
+          "message_id": "dynamic_world-2",
+          "text": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+        },
+        {
+          "message_id": "dynamic_world-3",
+          "text": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+        },
+        {
+          "message_id": "dynamic_world-4",
+          "text": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_item",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested item",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_quantity",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested quantity",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_destination",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested destination",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_packing",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_booking_status",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested booking_status",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "booking_item",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Actual booking tool argument item",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "booking_quantity",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Actual booking tool argument quantity",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "booking_destination",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Actual booking tool argument destination",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "booking_packing",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Actual booking tool argument packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "booking_once",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Exactly one successful reservation and label, no duplicate attempts",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "report_receipt",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Report actual reservation/label result, no invented ID",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "no_write_2",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "no_write_4",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-4",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-4",
+              "quote": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "live_lookup",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "current_explicit_obligations",
+          "description": "Actually query business tool for exact item before status answer",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "use_3_reservation_exists",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit reservation_exists",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "use_3_label_status",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit label_status",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "use_4_earlier_plan_booking_status",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-4",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit earlier_plan_booking_status",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-4",
+              "quote": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_4",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-4",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-4",
+              "quote": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_lookup_4",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-4",
+          "layer": "current_explicit_obligations",
+          "description": "No business-tool call in saved-snapshot-only question",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-4",
+              "quote": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_plan",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "current_explicit_obligations",
+          "description": "Confirm the saved planning snapshot without claiming a reservation",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "messages": [
+        {
+          "message_id": "moderate_bank-1",
+          "text": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+        },
+        {
+          "message_id": "moderate_bank-2",
+          "text": "Using my saved notes, where are the spectrometer lead, quartz cuvette and violet filter? State each requested item with its location. Read only: no memory changes or business actions."
+        },
+        {
+          "message_id": "moderate_bank-3",
+          "text": "Using my saved notes, where are the jade reference tile, brass calibration ring and sample logbook? State each requested item with its location. Read only: no memory changes or business actions."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_spectrometer lead",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested spectrometer lead",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-1",
+              "quote": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_jade reference tile",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested jade reference tile",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-1",
+              "quote": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_quartz cuvette",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested quartz cuvette",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-1",
+              "quote": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_brass calibration ring",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested brass calibration ring",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-1",
+              "quote": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_violet filter",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested violet filter",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-1",
+              "quote": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_sample logbook",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested sample logbook",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-1",
+              "quote": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "six_independent",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-1",
+          "layer": "persistent_obligations",
+          "description": "Six independent item notes, each with own record as explicitly requested",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-1",
+              "quote": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "use_2_spectrometer lead",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit spectrometer lead",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-2",
+              "quote": "Using my saved notes, where are the spectrometer lead, quartz cuvette and violet filter? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_2_quartz cuvette",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit quartz cuvette",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-2",
+              "quote": "Using my saved notes, where are the spectrometer lead, quartz cuvette and violet filter? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_2_violet filter",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-2",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit violet filter",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-2",
+              "quote": "Using my saved notes, where are the spectrometer lead, quartz cuvette and violet filter? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_3_jade reference tile",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit jade reference tile",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-3",
+              "quote": "Using my saved notes, where are the jade reference tile, brass calibration ring and sample logbook? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_3_brass calibration ring",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit brass calibration ring",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-3",
+              "quote": "Using my saved notes, where are the jade reference tile, brass calibration ring and sample logbook? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "use_3_sample logbook",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit sample logbook",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-3",
+              "quote": "Using my saved notes, where are the jade reference tile, brass calibration ring and sample logbook? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-1",
+              "quote": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-2",
+              "quote": "Using my saved notes, where are the spectrometer lead, quartz cuvette and violet filter? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-3",
+              "quote": "Using my saved notes, where are the jade reference tile, brass calibration ring and sample logbook? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "no_write_2",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-2",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-2",
+              "quote": "Using my saved notes, where are the spectrometer lead, quartz cuvette and violet filter? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "moderate_bank",
+          "target_message_id": "moderate_bank-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "moderate_bank-3",
+              "quote": "Using my saved notes, where are the jade reference tile, brass calibration ring and sample logbook? State each requested item with its location. Read only: no memory changes or business actions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 """Pure request-role, reference and operation provenance contracts."""
 
+import copy
 import hashlib
 import json
+from types import SimpleNamespace
 
 import pytest
 
@@ -87,13 +89,17 @@ class _Capacity:
     def __init__(self, max_records: int = 100, base_fails: bool = False) -> None:
         self.max_records, self.base_fails = max_records, base_fails
         self.checks = 0
+        self.requests = []
 
     def text_tokens(self, text: str) -> int:
         return len(text)
 
     def check(self, messages: list, _output: int) -> dict:
         self.checks += 1
-        material = messages[0]["content"].split("[DURABLE MEMORY]\n", 1)[1].split(
+        self.requests.append(copy.deepcopy(messages))
+        containing = next(row["content"] for row in messages if "[DURABLE MEMORY]\n" in
+                          row["content"])
+        material = containing.split("[DURABLE MEMORY]\n", 1)[1].split(
             "\n[/DURABLE MEMORY]", 1)[0]
         receipt = {"prompt_tokens": len(json.dumps(messages)), "output_reserve_tokens": 4096}
         if self.base_fails or len(json.loads(material)) > self.max_records:
@@ -171,3 +177,87 @@ def test_retrieval_error_and_invalid_selected_identity_are_not_soft_success() ->
     view.retrieve = broken
     with pytest.raises(RuntimeError, match="synthetic real Store failure"):
         view.fit_final_request(messages)
+
+
+def _graph(messages: list) -> list:
+    originals = [{"id": f"message-{i}", "type": {"user": "human", "assistant": "ai"}.get(
+        row["role"], row["role"]), "content": row["content"]} for i, row in enumerate(messages)]
+    return [SimpleNamespace(model_dump=lambda original=original, **_kwargs: copy.deepcopy(original))
+            for original in originals]
+
+
+def test_memory_placement_is_explicitly_validated_even_when_disabled() -> None:
+    assert boundary_policy({"enabled": True})["memory_placement"] == "system"
+    assert boundary_policy({"enabled": False}) is None
+    for placement in (None, [], True, "last_system"):
+        for enabled in (True, False):
+            with pytest.raises(ValueError, match="MEMORY_BOUNDARY_CONFIG_INVALID"):
+                boundary_policy({"enabled": enabled, "memory_placement": placement})
+
+
+def test_default_projection_bytes_and_candidate_only_move_one_existing_block() -> None:
+    rows = [{"id": "actual", "value": {"content": "完整当前正文"}}]
+    view, messages, _, _ = _view(rows, _Capacity(), [])
+    messages[1:1] = [{"role": "user", "content": "old request"},
+                     {"role": "assistant", "content": "old answer"}]
+    graph = _graph(messages)
+    before = copy.deepcopy(messages)
+    originals = [row.model_dump() for row in graph]
+    projected, returned = view.project(messages, graph, SCOPE["message_key"], 1)
+    state = {"goal": {"current_user_ref": "message:message-3"},
+             "turn_constraints": {"current_user_ref": "message:message-3",
+                                  "semantic_extraction": False},
+             "active_refs": [], "open_questions": []}
+    expected = [{"role": "system", "content": messages[0]["content"] +
+                 "\n[WORKING HYPOTHESIS - current task references]\n" + json.dumps(state)},
+                {"role": "user", "content": "[USER HISTORY]\nold request"},
+                {"role": "assistant", "content":
+                 "[ASSISTANT HISTORY - prior model output]\nold answer"},
+                {"role": "user", "content":
+                 "[CURRENT USER REQUEST]\n[CURRENT TASK]\n" + messages[-1]["content"]}]
+    assert projected == expected and returned is graph
+    assert view.fit_final_request(projected) == expected
+    view.policy["memory_placement"] = "system"
+    assert view.project(messages, graph, SCOPE["message_key"], 1)[0] == expected
+    view.policy["memory_placement"] = "current_request"
+    candidate, returned = view.project(messages, graph, SCOPE["message_key"], 1)
+    material = record_material(rows)
+    assert candidate[0]["content"] == expected[0]["content"].replace(material, "", 1)
+    assert candidate[-1]["content"] == material + "\n" + expected[-1]["content"]
+    assert candidate[1:-1] == expected[1:-1]
+    assert sum(row["content"].count(material) for row in candidate) == 1
+    assert view.fit_final_request(candidate) == candidate
+    assert returned is graph and messages == before
+    assert [row.model_dump() for row in graph] == originals
+
+
+@pytest.mark.parametrize("route", ["query", "attention", "rejected"])
+def test_candidate_replacement_and_every_capacity_check_use_final_user_layout(route: str) -> None:
+    rows = [{"id": str(i), "value": {"content": "body"}} for i in range(33)]
+    capacity = _Capacity({"query": 10, "attention": 1, "rejected": 0}[route])
+    selected = []
+    def select(_key, _query, candidates):
+        selected.append(candidates)
+        return [candidates[0]["id"]]
+    view, messages, calls, events = _view(rows, capacity, rows[:10],
+        attention=route == "attention", selector=select)
+    view.policy["memory_placement"] = "current_request"
+    projected, _ = view.project(messages, _graph(messages), SCOPE["message_key"], 1)
+    before = copy.deepcopy(projected)
+    if route == "rejected":
+        with pytest.raises(_CapacityError):
+            view.fit_final_request(projected)
+        assert view.delivery is None and selected == []
+    else:
+        result = view.fit_final_request(projected)
+        expected = rows[:1] if route == "attention" else rows[:10]
+        assert result[-1]["content"] == record_material(expected) + "\n" + (
+            "[CURRENT USER REQUEST]\n[CURRENT TASK]\n" + view.query)
+        assert result[0] == projected[0]
+        assert events[-1]["route"] == route
+        assert events[-1]["final_capacity"]["prompt_tokens"] == len(json.dumps(result))
+        assert len(selected) == (route == "attention")
+    assert calls == [(view.query, 10)] and projected == before
+    assert all("[DURABLE MEMORY]" not in request[0]["content"] for request in capacity.requests)
+    assert all("\n[/DURABLE MEMORY]\n[CURRENT USER REQUEST]\n" in request[-1]["content"]
+               for request in capacity.requests)

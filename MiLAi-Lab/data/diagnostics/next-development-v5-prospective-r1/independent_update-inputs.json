@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "independent_update-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Keep these two ongoing notes for later; they can change independently. Equipment reviews are every Tuesday at 14:10 in gallery room G-2. The spare key for the herbarium cabinet is in box S-8. Remember both arrangements without scheduling or taking business action."
+          },
+          {
+            "message_id": "independent_update-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Update only the equipment-review time to 16:25. Keep its day and room unchanged, and keep the independent herbarium-key note unchanged. Save this update and confirm it; take no business action."
+          },
+          {
+            "message_id": "independent_update-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "State the current review day, time and room, and the herbarium spare-key location. Use the saved notes. Read only: no memory changes or business actions."
+          }
+        ]
+      }
+    ]
+  }
+}

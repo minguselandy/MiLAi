@@ -1,0 +1,233 @@
+{
+  "kind": "MILAI_V5_AUTHORITY_CONFIRMATION_ORDER",
+  "status": "FROZEN_INPUTS_CONDITIONAL_NOT_RUN",
+  "gate": "Run only after authority-r2 diagnostic candidate2/2 current and2/2 history, all persistence/negative-scope pass, with baseline current fewer than2/2",
+  "steps": [
+    {
+      "case_id": "candidate-complete_plan",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/complete_plan-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use"
+      ],
+      "semantic_case": "complete_plan",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "candidate-partial_plan",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/partial_plan-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use"
+      ],
+      "semantic_case": "partial_plan",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "candidate-one_reply_format",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/one_reply_format-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "use",
+        "use"
+      ],
+      "semantic_case": "one_reply_format",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "candidate-independent_update",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/independent_update-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ],
+      "semantic_case": "independent_update",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "candidate-quoted_rule",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/quoted_rule-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "use",
+        "use"
+      ],
+      "semantic_case": "quoted_rule",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "candidate-read_only_note",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/read_only_note-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ],
+      "semantic_case": "read_only_note",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "candidate-explicit_delete",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/explicit_delete-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ],
+      "semantic_case": "explicit_delete",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "candidate-assistant_conflict",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/assistant_conflict-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ],
+      "semantic_case": "assistant_conflict",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "candidate-dynamic_world",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/dynamic_world-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use",
+        "use"
+      ],
+      "semantic_case": "dynamic_world",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "candidate-moderate_bank",
+      "arm": "B0",
+      "inputs": "../next-development-v5-prospective-r1/moderate_bank-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ],
+      "semantic_case": "moderate_bank",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "exposure": "exposed R1 regression"
+    },
+    {
+      "case_id": "system-reversed_count",
+      "semantic_case": "reversed_count",
+      "arm": "B0",
+      "inputs": "reversed_count-inputs.json",
+      "config": "../next-development-v5-prospective-r1/config.json",
+      "placement": "system",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ],
+      "exposure": "new synthetic content before candidate evaluation; related conflict family, not independent user holdout"
+    },
+    {
+      "case_id": "current_request-reversed_count",
+      "semantic_case": "reversed_count",
+      "arm": "B0",
+      "inputs": "reversed_count-inputs.json",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ],
+      "exposure": "new synthetic content before candidate evaluation; related conflict family, not independent user holdout"
+    },
+    {
+      "case_id": "current_request-revised_location",
+      "semantic_case": "revised_location",
+      "arm": "B0",
+      "inputs": "revised_location-inputs.json",
+      "config": "../next-development-v5-authority-r2/config.json",
+      "placement": "current_request",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ],
+      "exposure": "new synthetic content before candidate evaluation; related conflict family, not independent user holdout"
+    },
+    {
+      "case_id": "system-revised_location",
+      "semantic_case": "revised_location",
+      "arm": "B0",
+      "inputs": "revised_location-inputs.json",
+      "config": "../next-development-v5-prospective-r1/config.json",
+      "placement": "system",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ],
+      "exposure": "new synthetic content before candidate evaluation; related conflict family, not independent user holdout"
+    }
+  ],
+  "candidate_acceptance": "all ten exposed scripts and both new scripts satisfy every task-failing obligation; both new current-turn constraints; all persistence/negative scope; no world/assistant regression; no additional controller; report independent baseline outcomes separately",
+  "candidate_denominators": {
+    "scripts": 12,
+    "messages": 35,
+    "current_explicit": 55,
+    "later_use": 34,
+    "explicit_combined": 89,
+    "persistent": 67,
+    "task_failing": 156,
+    "diagnostic_optional": 3
+  },
+  "execution_denominators": {
+    "jobs": 14,
+    "messages": 43
+  }
+}

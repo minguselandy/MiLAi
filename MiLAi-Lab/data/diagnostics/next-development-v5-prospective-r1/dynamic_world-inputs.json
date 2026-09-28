@@ -1,0 +1,47 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "dynamic_world-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+          },
+          {
+            "message_id": "dynamic_world-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+          },
+          {
+            "message_id": "dynamic_world-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+          },
+          {
+            "message_id": "dynamic_world-4",
+            "user_id": "rowan",
+            "session_id": "session-4",
+            "public_index": 0,
+            "text": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+          }
+        ]
+      }
+    ]
+  }
+}

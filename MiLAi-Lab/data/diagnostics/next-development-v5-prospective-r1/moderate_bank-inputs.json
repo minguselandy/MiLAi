@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "moderate_bank-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Save six separate ongoing location notes for six independent items: the spectrometer lead is in drawer A-4; the jade reference tile is in bin B-7; the quartz cuvette is in cabinet C-2; the brass calibration ring is in locker D-6; the violet filter is in case E-9; and the sample logbook is on shelf F-3. Keep each item in its own note for later, without combining them into one note. Do not reserve anything."
+          },
+          {
+            "message_id": "moderate_bank-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Using my saved notes, where are the spectrometer lead, quartz cuvette and violet filter? State each requested item with its location. Read only: no memory changes or business actions."
+          },
+          {
+            "message_id": "moderate_bank-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "Using my saved notes, where are the jade reference tile, brass calibration ring and sample logbook? State each requested item with its location. Read only: no memory changes or business actions."
+          }
+        ]
+      }
+    ]
+  }
+}

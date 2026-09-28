@@ -1,0 +1,475 @@
+{
+  "kind": "MILAI_NEXT_DEVELOPMENT_V5_V4_REINTERPRETATION",
+  "runtime_must_not_read": true,
+  "status": "FROZEN_LEGACY_EVIDENCE_CLASSIFIED",
+  "versions": {
+    "r1": {
+      "method_commit": "e070456b57ce0b941813948464b2c1bf870c99f6",
+      "legacy_strict": {
+        "pass": 5,
+        "total": 6
+      },
+      "result_manifest_sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0"
+    },
+    "r2": {
+      "method_commit": "24ef49945cd12eccbd85792fee3c256bf3fe6d2a",
+      "legacy_strict": {
+        "pass": 5,
+        "total": 6
+      },
+      "result_manifest_sha256": "45844c67ebffbaedb3a3a2e4b917dd761c6864fd131cf897e80bed28e7667a84"
+    }
+  },
+  "case_count": 6,
+  "cases": {
+    "field_plan": {
+      "current": [
+        "Confirm saved ongoing plan without booking; later report quantity, destination and packing; do not book"
+      ],
+      "persistent": [
+        "Retain item, quantity, destination, packing, stated unbooked status and future packing instruction"
+      ],
+      "later": [
+        "Quantity, destination and packing; no booking"
+      ],
+      "diagnostic": [
+        "Item identity and booking-status restatement in the partial later question"
+      ],
+      "interpretation": "R2 explicitly enumerated requested fields and no-action pass. Full-record reproduction omits item identity; legacy all-plan-fields remains fail.",
+      "user_visible_messages": [
+        {
+          "message_id": "field_plan-1",
+          "text": "Keep this as my ongoing sample-delivery plan: Harbor sampler trays, 4 units to rack R-7 in sealed sleeves. Nothing has been booked. When I later ask for the plan, include how the trays are packed. Confirm without booking anything."
+        },
+        {
+          "message_id": "field_plan-2",
+          "text": "What is my current sample-delivery plan, including quantity, destination and packing? Do not book anything."
+        }
+      ],
+      "legacy_scores": {
+        "r1": "pass",
+        "r2": "fail"
+      },
+      "explicit_obligations_interpretation": {
+        "r1": "pass under explicitly enumerated obligations; not a replacement legacy score",
+        "r2": "pass under explicitly enumerated obligations; not a replacement legacy score"
+      },
+      "persistent_memory_interpretation": {
+        "r1": "pass in original scope",
+        "r2": "pass in original scope"
+      }
+    },
+    "editorial_revision": {
+      "current": [
+        "Retain continuing bulletin preferences; change source-link location while keeping other preferences"
+      ],
+      "persistent": [
+        "Initial sentence case/day-month-year/end links; update links to after heading without losing heading/date"
+      ],
+      "later": [
+        "List current heading, date and source-link conventions"
+      ],
+      "diagnostic": [
+        "Specific record count or prose style not required"
+      ],
+      "interpretation": "Both versions satisfy explicit update/recall and persistent preservation; no mandatory card-count rule.",
+      "user_visible_messages": [
+        {
+          "message_id": "editorial_revision-1",
+          "text": "For my continuing bulletin-editing work, retain these preferences: headings use sentence case, dates use day-month-year order, and source links go at the end of each item."
+        },
+        {
+          "message_id": "editorial_revision-2",
+          "text": "Change my ongoing bulletin preference so source links go immediately after the heading. Keep the other established preferences unchanged."
+        },
+        {
+          "message_id": "editorial_revision-3",
+          "text": "List the standing heading, date and source-link conventions for my bulletins."
+        }
+      ],
+      "legacy_scores": {
+        "r1": "pass",
+        "r2": "pass"
+      },
+      "explicit_obligations_interpretation": {
+        "r1": "pass under explicitly enumerated obligations; not a replacement legacy score",
+        "r2": "pass under explicitly enumerated obligations; not a replacement legacy score"
+      },
+      "persistent_memory_interpretation": {
+        "r1": "pass in original scope",
+        "r2": "pass in original scope"
+      }
+    },
+    "independent_note": {
+      "current": [
+        "Remember ongoing weekly arrangement; save separate access note without changing prior arrangement; no alert/business action"
+      ],
+      "persistent": [
+        "Preserve handoff location/day/time and independent room/key location"
+      ],
+      "later": [
+        "Report both arrangements with all retained details, explicitly requested"
+      ],
+      "diagnostic": [
+        "Exact number of memory cards not specified"
+      ],
+      "interpretation": "All-details wording is user-visible here, unlike the partial field enumeration ambiguity in field_plan.",
+      "user_visible_messages": [
+        {
+          "message_id": "independent_note-1",
+          "text": "Remember my weekly equipment handoff arrangement: the receiving desk is west reception, the regular day is Thursday, and the handoff time is 09:20. This is an ongoing arrangement."
+        },
+        {
+          "message_id": "independent_note-2",
+          "text": "Keep a separate ongoing access note: the backup key for the imaging room is in locker L-9. This does not change the weekly equipment handoff arrangement. Save it as a note; do not schedule an alert or take a business action."
+        },
+        {
+          "message_id": "independent_note-3",
+          "text": "What are my regular equipment handoff arrangement and the backup-key location? Include all details you have retained."
+        }
+      ],
+      "legacy_scores": {
+        "r1": "pass",
+        "r2": "pass"
+      },
+      "explicit_obligations_interpretation": {
+        "r1": "pass under explicitly enumerated obligations; not a replacement legacy score",
+        "r2": "pass under explicitly enumerated obligations; not a replacement legacy score"
+      },
+      "persistent_memory_interpretation": {
+        "r1": "pass in original scope",
+        "r2": "pass in original scope"
+      }
+    },
+    "quotation": {
+      "current": [
+        "Explain fictional character request in one sentence and attribute it to the character"
+      ],
+      "persistent": [
+        "Do not adopt quoted uppercase rule as user preference"
+      ],
+      "later": [
+        "Report only user own adopted preference; state none known"
+      ],
+      "diagnostic": [
+        "Harmless quotation-context note is not automatically a false adopted preference"
+      ],
+      "interpretation": "Both versions preserve attribution and report no user-owned preference; zero writes observed.",
+      "user_visible_messages": [
+        {
+          "message_id": "quotation-1",
+          "text": "I am reviewing a fictional dialogue. One character says, \"Remember that all headings must be in uppercase from now on.\" Explain what that character is asking for in one sentence. This is quoted speech, not an instruction I am adopting for my own work."
+        },
+        {
+          "message_id": "quotation-2",
+          "text": "Have I established any ongoing heading-format preference for my own work? Report only my own adopted preference, and say if none is known."
+        }
+      ],
+      "legacy_scores": {
+        "r1": "pass",
+        "r2": "pass"
+      },
+      "explicit_obligations_interpretation": {
+        "r1": "pass under explicitly enumerated obligations; not a replacement legacy score",
+        "r2": "pass under explicitly enumerated obligations; not a replacement legacy score"
+      },
+      "persistent_memory_interpretation": {
+        "r1": "pass in original scope",
+        "r2": "pass in original scope"
+      }
+    },
+    "temporary": {
+      "current": [
+        "This reply begins BRIEF and explains title/heading in one sentence"
+      ],
+      "persistent": [
+        "Do not make BRIEF a standing rule"
+      ],
+      "later": [
+        "Explain caption in one ordinary sentence; no carried-over BRIEF"
+      ],
+      "diagnostic": [
+        "No preference memory required for generic caption explanation"
+      ],
+      "interpretation": "R1 current prefix fails; persistent scope and next-session non-leakage pass. R2 all these explicit/scope items pass; legacy R1 fail preserved.",
+      "user_visible_messages": [
+        {
+          "message_id": "temporary-1",
+          "text": "For this reply only, begin with BRIEF and explain the difference between a title and a heading in one sentence. Do not make BRIEF a standing rule for later replies."
+        },
+        {
+          "message_id": "temporary-2",
+          "text": "Explain what an image caption does in one ordinary sentence."
+        }
+      ],
+      "legacy_scores": {
+        "r1": "fail",
+        "r2": "pass"
+      },
+      "explicit_obligations_interpretation": {
+        "r1": "fail: BRIEF omitted",
+        "r2": "pass under explicitly enumerated obligations; not a replacement legacy score"
+      },
+      "persistent_memory_interpretation": {
+        "r1": "pass in original scope",
+        "r2": "pass in original scope"
+      }
+    },
+    "read_only": {
+      "current": [
+        "Keep regular handoff note without reservation; answer packing/paperwork with no change to save"
+      ],
+      "persistent": [
+        "Bay/padded dividers/inventory sheet retained; read-only query has no new required write"
+      ],
+      "later": [
+        "Packing and paperwork in partial question; complete arrangement including location in final question"
+      ],
+      "diagnostic": [
+        "Extra location in partial answer is optional; exact wording not required"
+      ],
+      "interpretation": "Both versions answer requested fields and preserve records; final complete requirement is user-visible.",
+      "user_visible_messages": [
+        {
+          "message_id": "read_only-1",
+          "text": "Keep my regular workshop handoff note for later: use bay D-5, place items in padded dividers, and include a printed inventory sheet. This describes the handoff arrangement, not an instruction to reserve anything."
+        },
+        {
+          "message_id": "read_only-2",
+          "text": "What packing and paperwork does my regular workshop handoff call for? I am only checking the existing arrangement; there is no change to save."
+        },
+        {
+          "message_id": "read_only-3",
+          "text": "Remind me of the complete regular workshop handoff arrangement, including the location."
+        }
+      ],
+      "legacy_scores": {
+        "r1": "pass",
+        "r2": "pass"
+      },
+      "explicit_obligations_interpretation": {
+        "r1": "pass under explicitly enumerated obligations; not a replacement legacy score",
+        "r2": "pass under explicitly enumerated obligations; not a replacement legacy score"
+      },
+      "persistent_memory_interpretation": {
+        "r1": "pass in original scope",
+        "r2": "pass in original scope"
+      }
+    }
+  },
+  "evidence": {
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/execution-freeze.json": {
+      "sha256": "1f887cbded2ebbeaae07a5c1cd8deaeab10fbe20a803a09b0e376dc2907c9c17",
+      "type": "execution_freeze"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl": {
+      "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/run_manifest.json": {
+      "sha256": "659dc15f2268fffc8c7ebf357345bee8904d6c4ba8ce81ebc299624f69824ea2",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/phase-0-result.json": {
+      "sha256": "f36fad8003406222fe7abea23344459c7ee60396364af030dd80b5d82f0c7850",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl": {
+      "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/run_manifest.json": {
+      "sha256": "085e9a549359cbdda11e98ede4f371715933428612db8de71cb289901385d413",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/phase-0-result.json": {
+      "sha256": "aa6c0138f25831d50a297abeff41cd5262d240d3c3b620cbb14dfa9bfe5ab2dc",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl": {
+      "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/run_manifest.json": {
+      "sha256": "0402a060ffb1db0d9354d770a646a4129be85ed28a8e93e4d5ea28a5b4cd1dd1",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/phase-0-result.json": {
+      "sha256": "4fa453c9af9a23963526ad359a77eba1dbcec2d09f241c4a93bc17cbb4e2b251",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/quotation/B0/trace.jsonl": {
+      "sha256": "0e39af174d998b0847528357f9c52e6fb9330587b98c63c25cd8567c3d354164",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/quotation/B0/run_manifest.json": {
+      "sha256": "ac042ffbcd00c7fb7b0e234f0fdc637731ce0d8a3601cb0373f223cf26075b69",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/quotation/B0/phase-0-result.json": {
+      "sha256": "d8c18c13379c6e9a6cf1300ba9ebe121223599d60fa1140781c00407b3429749",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/temporary/B0/trace.jsonl": {
+      "sha256": "8ac570d7de5a78ba1c08ec1c9f6fa1b64f77ea80c50a3c805318145415ade452",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/temporary/B0/run_manifest.json": {
+      "sha256": "61b64696198bcdf3b2d9e47a73f9fe539dbd08191dbbde72759bbcf31d319400",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/temporary/B0/phase-0-result.json": {
+      "sha256": "73040fd53c3ffe658602c2fab0f2db9b5e30db9f5a170f76233ee120e3816c26",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl": {
+      "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/run_manifest.json": {
+      "sha256": "fedae1484df988f048e089aadfd89a449092f3d74c0b1985564e593ecb03f8a5",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/phase-0-result.json": {
+      "sha256": "e6a441ffae54442ed0af39d967c0dcfa982f7ba80807444f46977a712486c363",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/execution-freeze.json": {
+      "sha256": "593190a15d7be29b2d4be6ee3d532b6505a63fc2832727978a27a9e1ef6a4ffd",
+      "type": "execution_freeze"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/temporary/B0/trace.jsonl": {
+      "sha256": "a77f40cab91be960d4a604babe4b58f7c6954637ce53cba44d0b629c632341ca",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/temporary/B0/run_manifest.json": {
+      "sha256": "b88ce2cfad86cb94fb3533eb76045884af4b43cb6add0119a1dffa51e9b6d8d7",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/temporary/B0/phase-0-result.json": {
+      "sha256": "b9a9174006a7c9f3c11dace4da4c5bf4849487174eba971fb5a70e9d2afa2af2",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/field_plan/B0/trace.jsonl": {
+      "sha256": "42f58fbebc7be90a3d4d9089e71b350e4956ec78af0865cfa08cb2930497037d",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/field_plan/B0/run_manifest.json": {
+      "sha256": "434acdbe3d1e4426978071c5035883121c2d2872fec5a56f76f982bd5dca9577",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/field_plan/B0/phase-0-result.json": {
+      "sha256": "245ab10a35cd5be4b85c8a7a6f25ba1ad044b7b0866f03aaa11347c0a4934cd3",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/editorial_revision/B0/trace.jsonl": {
+      "sha256": "2aa927a22397c08c94f6d87b68f11e025a07208d2adbdb12809e05a5e615261d",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/editorial_revision/B0/run_manifest.json": {
+      "sha256": "ccefee03d802077ef30a5ea8a80593ec04d00eb19ad86d2f97e4bac7d7416e5c",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/editorial_revision/B0/phase-0-result.json": {
+      "sha256": "71220042f37cb861a8757f2bc388a3700b744bb547fa16e75a3137a61400bedd",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/independent_note/B0/trace.jsonl": {
+      "sha256": "f8d38dce83e10d1baa94709697a2f0e86d131ecad342722f69a630fda29ca590",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/independent_note/B0/run_manifest.json": {
+      "sha256": "89fd505e293431d0bdfaff6e2173b58e11d9bfd6fd0693d5e1a9839c5a76269e",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/independent_note/B0/phase-0-result.json": {
+      "sha256": "e1b76559900fbda388c7010caa849ed08e15d7793326a2c00fc82ee0b3072387",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/quotation/B0/trace.jsonl": {
+      "sha256": "7ee1064bb56402b69e18d89cdcabc514b431598ed1ecaad9141b467f465dfa72",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/quotation/B0/run_manifest.json": {
+      "sha256": "a92346720ace418f4602bc19d337ec42be662afe7a68375833eb5500235ebaa8",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/quotation/B0/phase-0-result.json": {
+      "sha256": "b62135e95d4f6865ad95a564bba87166a85ee53cb61a64ee4d667df317483553",
+      "type": "phase-0-result.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/read_only/B0/trace.jsonl": {
+      "sha256": "adef9657d4555c6b5cd6b316c798a1494fc2422091882a67d0ea1d73e00221d1",
+      "type": "trace.jsonl"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/read_only/B0/run_manifest.json": {
+      "sha256": "3d2e14bc8de3eafe563913e2d8ab2c9cc476309b0814cd0c5777a1a193fd3c2d",
+      "type": "run_manifest.json"
+    },
+    "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r2/read_only/B0/phase-0-result.json": {
+      "sha256": "e6a441ffae54442ed0af39d967c0dcfa982f7ba80807444f46977a712486c363",
+      "type": "phase-0-result.json"
+    },
+    "docs/MILAI_NEXT_DEVELOPMENT_V4_OVERALL_EXPERIMENT_REPORT_20260928.md": {
+      "sha256": "5dc7606f1987f1c93d5e93f6ad54603880f7829294c80926e9a0ed5399914261",
+      "type": "published_baseline_file"
+    },
+    "docs/MILAI_NEXT_DEVELOPMENT_V4_B_R1_RESULTS_20260928.md": {
+      "sha256": "37eb4169c6800b64b8f98674ea9d3b268d4048d2cbe2be23a036ba141f3160c5",
+      "type": "published_baseline_file"
+    },
+    "docs/MILAI_NEXT_DEVELOPMENT_V4_B_R2_RESULTS_20260928.md": {
+      "sha256": "12bdfb17ecaa4fd94770c3f7e2bfdf14bd45a5c08a0947a2d663adbf4dd6c7f7",
+      "type": "published_baseline_file"
+    },
+    "data/diagnostics/next-development-v3-p2-formation-r1/rubric.json": {
+      "sha256": "b5b04248c71ccd3f4233e4461e8371c17dc2888fa4f0d52b8aca5177ac1f9a6b",
+      "type": "published_baseline_file"
+    },
+    "data/manifests/next-development-v4-b-r1-results-20260928.json": {
+      "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+      "type": "published_baseline_file"
+    },
+    "data/manifests/next-development-v4-b-r2-results-20260928.json": {
+      "sha256": "45844c67ebffbaedb3a3a2e4b917dd761c6864fd131cf897e80bed28e7667a84",
+      "type": "published_baseline_file"
+    },
+    "data/diagnostics/next-development-v3-p2-formation-r1/field_plan-inputs.json": {
+      "sha256": "789a8f6612adc56a2e0029ee4cfa58a7bd58aaedfa2d813cbbc01ab94f9ac1ba",
+      "type": "published_baseline_file"
+    },
+    "data/diagnostics/next-development-v3-p2-formation-r1/editorial_revision-inputs.json": {
+      "sha256": "848e5d91533e06e6829c73079e2caa42af87f87274a67e8cc7fb5b94037d284d",
+      "type": "published_baseline_file"
+    },
+    "data/diagnostics/next-development-v3-p2-formation-r1/independent_note-inputs.json": {
+      "sha256": "3cc069e6f3feacb668ae87cb3cfbe810f854a8c6f27652a4999bf848307483f0",
+      "type": "published_baseline_file"
+    },
+    "data/diagnostics/next-development-v3-p2-formation-r1/quotation-inputs.json": {
+      "sha256": "bbf90e44cd04da4a7915eaad9ef50bfaf261beba7a2ef0e81312072c3ed0a61e",
+      "type": "published_baseline_file"
+    },
+    "data/diagnostics/next-development-v3-p2-formation-r1/temporary-inputs.json": {
+      "sha256": "682a4c12430dbf2ed09e31e7eec65894c12e6da5aa751b4abc756c7ae70a94e6",
+      "type": "published_baseline_file"
+    },
+    "data/diagnostics/next-development-v3-p2-formation-r1/read_only-inputs.json": {
+      "sha256": "a8108ecd8fc1b22479732fdd9e70c085df3254097380219891f85fc7fddbf636",
+      "type": "published_baseline_file"
+    }
+  },
+  "verification": {
+    "all_12_raw_trace_result_manifest_hashes_match": true,
+    "all_actual_provider_ids_match_published_turns": true,
+    "all_30_actual_answers_match_published_results": true,
+    "new_model_calls": 0,
+    "old_rubrics_modified": false,
+    "legacy_scores_modified": false
+  },
+  "competing_explanations": [
+    "Current plan may conventionally imply full identity and all details",
+    "Legacy rubric requires completeness beyond explicitly enumerated current fields"
+  ],
+  "interpretation_boundary": "Do not upgrade R2 omission alone to proven runtime consumption bug. Explicit pass/full-record incomplete/legacy fail coexist. No new 6/6 legacy score."
+}

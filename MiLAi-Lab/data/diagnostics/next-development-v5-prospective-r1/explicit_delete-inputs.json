@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "explicit_delete-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+          },
+          {
+            "message_id": "explicit_delete-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+          },
+          {
+            "message_id": "explicit_delete-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+          }
+        ]
+      }
+    ]
+  }
+}

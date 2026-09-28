@@ -1,0 +1,33 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "quoted_rule-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "In a play, a courier says, \"From now on, record all route notes in green ink.\" Explain in one sentence what the courier requests. This is dialogue under review, not my instruction or an adopted preference. Do not save the quoted instruction or change any of my memories."
+          },
+          {
+            "message_id": "quoted_rule-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Have I adopted an ongoing ink-colour rule for my own route notes? Report only a rule that I adopted; if none is known, say so. Do not create a preference or change memory."
+          }
+        ]
+      }
+    ]
+  }
+}

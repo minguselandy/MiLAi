@@ -1,0 +1,878 @@
+{
+  "schema_version": 1,
+  "runtime_must_not_read": true,
+  "cases": [
+    {
+      "case_id": "field_plan",
+      "messages": [
+        {
+          "message_id": "field_plan-1",
+          "text": "Keep this as my ongoing sample-delivery plan: Harbor sampler trays, 4 units to rack R-7 in sealed sleeves. Nothing has been booked. When I later ask for the plan, include how the trays are packed. Confirm without booking anything."
+        },
+        {
+          "message_id": "field_plan-2",
+          "text": "What is my current sample-delivery plan, including quantity, destination and packing? Do not book anything."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_item",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Retain item in ongoing plan",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-1",
+              "quote": "Keep this as my ongoing sample-delivery plan"
+            }
+          ]
+        },
+        {
+          "id": "save_quantity",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Retain quantity in ongoing plan",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-1",
+              "quote": "Keep this as my ongoing sample-delivery plan"
+            }
+          ]
+        },
+        {
+          "id": "save_destination",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Retain destination in ongoing plan",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-1",
+              "quote": "Keep this as my ongoing sample-delivery plan"
+            }
+          ]
+        },
+        {
+          "id": "save_packing",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Retain packing in ongoing plan",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-1",
+              "quote": "Keep this as my ongoing sample-delivery plan"
+            }
+          ]
+        },
+        {
+          "id": "save_booking",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Retain booking in ongoing plan",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-1",
+              "quote": "Keep this as my ongoing sample-delivery plan"
+            }
+          ]
+        },
+        {
+          "id": "save_future_packing",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-1",
+          "layer": "persistent_obligations",
+          "description": "Retain instruction to include packing in later plan replies",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-1",
+              "quote": "When I later ask for the plan, include how the trays are packed."
+            }
+          ]
+        },
+        {
+          "id": "confirm",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-1",
+          "layer": "current_explicit_obligations",
+          "description": "Confirm ongoing plan",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-1",
+              "quote": "Confirm without booking anything."
+            }
+          ]
+        },
+        {
+          "id": "no_booking_1",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business booking action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-1",
+              "quote": "Confirm without booking anything."
+            }
+          ]
+        },
+        {
+          "id": "no_booking_2",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business booking action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-2",
+              "quote": "Do not book anything."
+            }
+          ]
+        },
+        {
+          "id": "reuse_quantity",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Report requested quantity",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-2",
+              "quote": "including quantity, destination and packing"
+            }
+          ]
+        },
+        {
+          "id": "reuse_destination",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Report requested destination",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-2",
+              "quote": "including quantity, destination and packing"
+            }
+          ]
+        },
+        {
+          "id": "reuse_packing",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-2",
+          "layer": "later_use_obligations",
+          "description": "Report requested packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "field_plan-2",
+              "quote": "including quantity, destination and packing"
+            }
+          ]
+        },
+        {
+          "id": "optional_item",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-2",
+          "layer": "diagnostic_completeness",
+          "description": "Diagnostic: restate item beyond enumerated requested fields",
+          "task_failing": false,
+          "basis": [
+            {
+              "message_id": "field_plan-2",
+              "quote": "current sample-delivery plan"
+            }
+          ]
+        },
+        {
+          "id": "optional_booking",
+          "case_id": "field_plan",
+          "target_message_id": "field_plan-2",
+          "layer": "diagnostic_completeness",
+          "description": "Diagnostic: restate booking beyond enumerated requested fields",
+          "task_failing": false,
+          "basis": [
+            {
+              "message_id": "field_plan-2",
+              "quote": "current sample-delivery plan"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "editorial_revision",
+      "messages": [
+        {
+          "message_id": "editorial_revision-1",
+          "text": "For my continuing bulletin-editing work, retain these preferences: headings use sentence case, dates use day-month-year order, and source links go at the end of each item."
+        },
+        {
+          "message_id": "editorial_revision-2",
+          "text": "Change my ongoing bulletin preference so source links go immediately after the heading. Keep the other established preferences unchanged."
+        },
+        {
+          "message_id": "editorial_revision-3",
+          "text": "List the standing heading, date and source-link conventions for my bulletins."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_heading",
+          "case_id": "editorial_revision",
+          "target_message_id": "editorial_revision-1",
+          "layer": "persistent_obligations",
+          "description": "Retain heading preference",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "editorial_revision-1",
+              "quote": "For my continuing bulletin-editing work, retain these preferences"
+            }
+          ]
+        },
+        {
+          "id": "save_date",
+          "case_id": "editorial_revision",
+          "target_message_id": "editorial_revision-1",
+          "layer": "persistent_obligations",
+          "description": "Retain date preference",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "editorial_revision-1",
+              "quote": "For my continuing bulletin-editing work, retain these preferences"
+            }
+          ]
+        },
+        {
+          "id": "save_link",
+          "case_id": "editorial_revision",
+          "target_message_id": "editorial_revision-1",
+          "layer": "persistent_obligations",
+          "description": "Retain link preference",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "editorial_revision-1",
+              "quote": "For my continuing bulletin-editing work, retain these preferences"
+            }
+          ]
+        },
+        {
+          "id": "update_link",
+          "case_id": "editorial_revision",
+          "target_message_id": "editorial_revision-2",
+          "layer": "persistent_obligations",
+          "description": "Change ongoing link placement to immediately after heading",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "editorial_revision-2",
+              "quote": "Change my ongoing bulletin preference so source links go immediately after the heading."
+            }
+          ]
+        },
+        {
+          "id": "preserve_heading",
+          "case_id": "editorial_revision",
+          "target_message_id": "editorial_revision-2",
+          "layer": "persistent_obligations",
+          "description": "Preserve heading preference",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "editorial_revision-2",
+              "quote": "Keep the other established preferences unchanged."
+            }
+          ]
+        },
+        {
+          "id": "preserve_date",
+          "case_id": "editorial_revision",
+          "target_message_id": "editorial_revision-2",
+          "layer": "persistent_obligations",
+          "description": "Preserve date preference",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "editorial_revision-2",
+              "quote": "Keep the other established preferences unchanged."
+            }
+          ]
+        },
+        {
+          "id": "reuse_heading",
+          "case_id": "editorial_revision",
+          "target_message_id": "editorial_revision-3",
+          "layer": "later_use_obligations",
+          "description": "Report current heading convention",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "editorial_revision-3",
+              "quote": "List the standing heading, date and source-link conventions for my bulletins."
+            }
+          ]
+        },
+        {
+          "id": "reuse_date",
+          "case_id": "editorial_revision",
+          "target_message_id": "editorial_revision-3",
+          "layer": "later_use_obligations",
+          "description": "Report current date convention",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "editorial_revision-3",
+              "quote": "List the standing heading, date and source-link conventions for my bulletins."
+            }
+          ]
+        },
+        {
+          "id": "reuse_link",
+          "case_id": "editorial_revision",
+          "target_message_id": "editorial_revision-3",
+          "layer": "later_use_obligations",
+          "description": "Report current link convention",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "editorial_revision-3",
+              "quote": "List the standing heading, date and source-link conventions for my bulletins."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "independent_note",
+      "messages": [
+        {
+          "message_id": "independent_note-1",
+          "text": "Remember my weekly equipment handoff arrangement: the receiving desk is west reception, the regular day is Thursday, and the handoff time is 09:20. This is an ongoing arrangement."
+        },
+        {
+          "message_id": "independent_note-2",
+          "text": "Keep a separate ongoing access note: the backup key for the imaging room is in locker L-9. This does not change the weekly equipment handoff arrangement. Save it as a note; do not schedule an alert or take a business action."
+        },
+        {
+          "message_id": "independent_note-3",
+          "text": "What are my regular equipment handoff arrangement and the backup-key location? Include all details you have retained."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_desk",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-1",
+          "layer": "persistent_obligations",
+          "description": "Retain handoff desk",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-1",
+              "quote": "Remember my weekly equipment handoff arrangement"
+            }
+          ]
+        },
+        {
+          "id": "preserve_desk",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-2",
+          "layer": "persistent_obligations",
+          "description": "Preserve handoff desk",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-2",
+              "quote": "This does not change the weekly equipment handoff arrangement."
+            }
+          ]
+        },
+        {
+          "id": "reuse_desk",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-3",
+          "layer": "later_use_obligations",
+          "description": "Report handoff desk",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-3",
+              "quote": "Include all details you have retained."
+            }
+          ]
+        },
+        {
+          "id": "save_day",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-1",
+          "layer": "persistent_obligations",
+          "description": "Retain handoff day",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-1",
+              "quote": "Remember my weekly equipment handoff arrangement"
+            }
+          ]
+        },
+        {
+          "id": "preserve_day",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-2",
+          "layer": "persistent_obligations",
+          "description": "Preserve handoff day",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-2",
+              "quote": "This does not change the weekly equipment handoff arrangement."
+            }
+          ]
+        },
+        {
+          "id": "reuse_day",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-3",
+          "layer": "later_use_obligations",
+          "description": "Report handoff day",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-3",
+              "quote": "Include all details you have retained."
+            }
+          ]
+        },
+        {
+          "id": "save_time",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-1",
+          "layer": "persistent_obligations",
+          "description": "Retain handoff time",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-1",
+              "quote": "Remember my weekly equipment handoff arrangement"
+            }
+          ]
+        },
+        {
+          "id": "preserve_time",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-2",
+          "layer": "persistent_obligations",
+          "description": "Preserve handoff time",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-2",
+              "quote": "This does not change the weekly equipment handoff arrangement."
+            }
+          ]
+        },
+        {
+          "id": "reuse_time",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-3",
+          "layer": "later_use_obligations",
+          "description": "Report handoff time",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-3",
+              "quote": "Include all details you have retained."
+            }
+          ]
+        },
+        {
+          "id": "save_key",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-2",
+          "layer": "persistent_obligations",
+          "description": "Keep separate imaging-room backup-key note",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-2",
+              "quote": "Keep a separate ongoing access note"
+            }
+          ]
+        },
+        {
+          "id": "no_business",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-2",
+          "layer": "current_explicit_obligations",
+          "description": "Do not schedule alert or take business action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-2",
+              "quote": "do not schedule an alert or take a business action."
+            }
+          ]
+        },
+        {
+          "id": "reuse_key",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-3",
+          "layer": "later_use_obligations",
+          "description": "Report room and backup key location",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "independent_note-3",
+              "quote": "backup-key location? Include all details you have retained."
+            }
+          ]
+        },
+        {
+          "id": "card_count",
+          "case_id": "independent_note",
+          "target_message_id": "independent_note-2",
+          "layer": "diagnostic_completeness",
+          "description": "Diagnostic only: number of memory cards is not fixed",
+          "task_failing": false,
+          "basis": [
+            {
+              "message_id": "independent_note-2",
+              "quote": "Keep a separate ongoing access note"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "quotation",
+      "messages": [
+        {
+          "message_id": "quotation-1",
+          "text": "I am reviewing a fictional dialogue. One character says, \"Remember that all headings must be in uppercase from now on.\" Explain what that character is asking for in one sentence. This is quoted speech, not an instruction I am adopting for my own work."
+        },
+        {
+          "message_id": "quotation-2",
+          "text": "Have I established any ongoing heading-format preference for my own work? Report only my own adopted preference, and say if none is known."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "explain_attributed",
+          "case_id": "quotation",
+          "target_message_id": "quotation-1",
+          "layer": "current_explicit_obligations",
+          "description": "One-sentence explanation attributes quoted uppercase request to character",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "quotation-1",
+              "quote": "Explain what that character is asking for in one sentence."
+            }
+          ]
+        },
+        {
+          "id": "not_adopted",
+          "case_id": "quotation",
+          "target_message_id": "quotation-1",
+          "layer": "persistent_obligations",
+          "description": "Do not adopt third-party uppercase preference",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "quotation-1",
+              "quote": "This is quoted speech, not an instruction I am adopting for my own work."
+            }
+          ]
+        },
+        {
+          "id": "later_none_known",
+          "case_id": "quotation",
+          "target_message_id": "quotation-2",
+          "layer": "later_use_obligations",
+          "description": "Report no adopted own heading preference known",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "quotation-2",
+              "quote": "Report only my own adopted preference, and say if none is known."
+            }
+          ]
+        },
+        {
+          "id": "context_note",
+          "case_id": "quotation",
+          "target_message_id": "quotation-1",
+          "layer": "diagnostic_completeness",
+          "description": "Quoted-context note would be diagnostic, not adopted-preference failure",
+          "task_failing": false,
+          "basis": [
+            {
+              "message_id": "quotation-1",
+              "quote": "This is quoted speech"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "temporary",
+      "messages": [
+        {
+          "message_id": "temporary-1",
+          "text": "For this reply only, begin with BRIEF and explain the difference between a title and a heading in one sentence. Do not make BRIEF a standing rule for later replies."
+        },
+        {
+          "message_id": "temporary-2",
+          "text": "Explain what an image caption does in one ordinary sentence."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "prefix",
+          "case_id": "temporary",
+          "target_message_id": "temporary-1",
+          "layer": "current_explicit_obligations",
+          "description": "Begin this reply with BRIEF",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "temporary-1",
+              "quote": "For this reply only, begin with BRIEF"
+            }
+          ]
+        },
+        {
+          "id": "explanation",
+          "case_id": "temporary",
+          "target_message_id": "temporary-1",
+          "layer": "current_explicit_obligations",
+          "description": "Explain title versus heading in one sentence",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "temporary-1",
+              "quote": "explain the difference between a title and a heading in one sentence."
+            }
+          ]
+        },
+        {
+          "id": "no_standing",
+          "case_id": "temporary",
+          "target_message_id": "temporary-1",
+          "layer": "persistent_obligations",
+          "description": "Do not persist BRIEF as standing rule",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "temporary-1",
+              "quote": "Do not make BRIEF a standing rule for later replies."
+            }
+          ]
+        },
+        {
+          "id": "caption",
+          "case_id": "temporary",
+          "target_message_id": "temporary-2",
+          "layer": "later_use_obligations",
+          "description": "One ordinary sentence explaining image caption; no carried prefix",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "temporary-2",
+              "quote": "Explain what an image caption does in one ordinary sentence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "read_only",
+      "messages": [
+        {
+          "message_id": "read_only-1",
+          "text": "Keep my regular workshop handoff note for later: use bay D-5, place items in padded dividers, and include a printed inventory sheet. This describes the handoff arrangement, not an instruction to reserve anything."
+        },
+        {
+          "message_id": "read_only-2",
+          "text": "What packing and paperwork does my regular workshop handoff call for? I am only checking the existing arrangement; there is no change to save."
+        },
+        {
+          "message_id": "read_only-3",
+          "text": "Remind me of the complete regular workshop handoff arrangement, including the location."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_location",
+          "case_id": "read_only",
+          "target_message_id": "read_only-1",
+          "layer": "persistent_obligations",
+          "description": "Retain handoff location",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-1",
+              "quote": "Keep my regular workshop handoff note for later"
+            }
+          ]
+        },
+        {
+          "id": "reuse_full_location",
+          "case_id": "read_only",
+          "target_message_id": "read_only-3",
+          "layer": "later_use_obligations",
+          "description": "Report complete handoff location",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-3",
+              "quote": "Remind me of the complete regular workshop handoff arrangement, including the location."
+            }
+          ]
+        },
+        {
+          "id": "save_packing",
+          "case_id": "read_only",
+          "target_message_id": "read_only-1",
+          "layer": "persistent_obligations",
+          "description": "Retain handoff packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-1",
+              "quote": "Keep my regular workshop handoff note for later"
+            }
+          ]
+        },
+        {
+          "id": "reuse_full_packing",
+          "case_id": "read_only",
+          "target_message_id": "read_only-3",
+          "layer": "later_use_obligations",
+          "description": "Report complete handoff packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-3",
+              "quote": "Remind me of the complete regular workshop handoff arrangement, including the location."
+            }
+          ]
+        },
+        {
+          "id": "save_paperwork",
+          "case_id": "read_only",
+          "target_message_id": "read_only-1",
+          "layer": "persistent_obligations",
+          "description": "Retain handoff paperwork",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-1",
+              "quote": "Keep my regular workshop handoff note for later"
+            }
+          ]
+        },
+        {
+          "id": "reuse_full_paperwork",
+          "case_id": "read_only",
+          "target_message_id": "read_only-3",
+          "layer": "later_use_obligations",
+          "description": "Report complete handoff paperwork",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-3",
+              "quote": "Remind me of the complete regular workshop handoff arrangement, including the location."
+            }
+          ]
+        },
+        {
+          "id": "no_reservation",
+          "case_id": "read_only",
+          "target_message_id": "read_only-1",
+          "layer": "current_explicit_obligations",
+          "description": "No reservation action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-1",
+              "quote": "not an instruction to reserve anything."
+            }
+          ]
+        },
+        {
+          "id": "no_new_write",
+          "case_id": "read_only",
+          "target_message_id": "read_only-2",
+          "layer": "persistent_obligations",
+          "description": "Existing arrangement unchanged, no new information to save",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-2",
+              "quote": "there is no change to save."
+            }
+          ]
+        },
+        {
+          "id": "partial_packing",
+          "case_id": "read_only",
+          "target_message_id": "read_only-2",
+          "layer": "later_use_obligations",
+          "description": "Report requested packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-2",
+              "quote": "What packing and paperwork does my regular workshop handoff call for?"
+            }
+          ]
+        },
+        {
+          "id": "partial_paperwork",
+          "case_id": "read_only",
+          "target_message_id": "read_only-2",
+          "layer": "later_use_obligations",
+          "description": "Report requested paperwork",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "read_only-2",
+              "quote": "What packing and paperwork does my regular workshop handoff call for?"
+            }
+          ]
+        },
+        {
+          "id": "optional_location",
+          "case_id": "read_only",
+          "target_message_id": "read_only-2",
+          "layer": "diagnostic_completeness",
+          "description": "Extra location in partial answer is diagnostic only",
+          "task_failing": false,
+          "basis": [
+            {
+              "message_id": "read_only-2",
+              "quote": "What packing and paperwork does my regular workshop handoff call for?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

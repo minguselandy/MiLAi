@@ -1,0 +1,212 @@
+{
+  "status": "FREEZE_READY_ENGINEERING_ONLY",
+  "lab_root": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab",
+  "source_and_config_files": {
+    "src/milai_lab/methods/memory_boundaries.py": {
+      "sha256": "7aad791facac87fe814869b4c2f684792c6a05c877844cc1cd35d0d734d4cdd3",
+      "bytes": 23505
+    },
+    "tests/unit/test_memory_boundaries.py": {
+      "sha256": "3f9cec98868dd0760e737dab84c2322da924eaf26a0114716ad73e7fce42c296",
+      "bytes": 13613
+    },
+    "tests/unit/test_persistent_memory.py": {
+      "sha256": "b57265afbc6a3fa3ff8167e9d86236082bab13cf02697969236d88d28556881d",
+      "bytes": 44824
+    },
+    "data/diagnostics/next-development-v5-authority-r2/config.json": {
+      "sha256": "91105f1ca25cc5cdd21077141eb86bd8913ad2ed061a7693f3e46eb89db23ecd",
+      "bytes": 1994
+    }
+  },
+  "configuration": {
+    "key": "memory_boundaries.memory_placement",
+    "enum": [
+      "system",
+      "current_request"
+    ],
+    "omitted_default": "system",
+    "invalid_explicit_value": "MEMORY_BOUNDARY_CONFIG_INVALID",
+    "candidate": "current_request",
+    "candidate_enabled": true
+  },
+  "change": "Move the existing record_material block from first system request copy to last actual user request copy immediately before CURRENT USER REQUEST; position plus carrier role treatment.",
+  "preserved": [
+    "BOUNDARY_PROTOCOL",
+    "READ_SELECTION_PROMPT",
+    "record_material serialization",
+    "tool schemas/catalog",
+    "original graph/checkpoint/Human/Tool content and IDs",
+    "working references",
+    "all retained history",
+    "query bytes",
+    "CRUD/provider/runner/parser/budgets/capacity/default C protocol"
+  ],
+  "checks": [
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_memory_boundaries.py > artifacts/next-development-v5/authority-r2-checks/pure-initial.log 2>&1",
+      "exit_code": 0,
+      "result": "10 passed in 0.10s",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-checks/pure-initial.log",
+      "log_sha256": "940557bb0e1c28ea00b395911309b918eeba67f6681e8286abb0f158683b9884"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity > artifacts/next-development-v5/authority-r2-checks/foundation-initial.log 2>&1",
+      "exit_code": 0,
+      "result": "7 passed, 9 dependency deprecation warnings in 2.39s",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-checks/foundation-initial.log",
+      "log_sha256": "f5a12f81dd264c8d7d376090133b6a9183fe95fc1541f99b8ad2fb52df8c0608"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/methods/memory_boundaries.py tests/unit/test_memory_boundaries.py tests/unit/test_persistent_memory.py > artifacts/next-development-v5/authority-r2-checks/ruff-initial.log 2>&1",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-checks/ruff-initial.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m mypy src/milai_lab/methods/memory_boundaries.py > artifacts/next-development-v5/authority-r2-checks/mypy.log 2>&1",
+      "exit_code": 0,
+      "result": "Success: no issues found in 1 source file",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-checks/mypy.log",
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    }
+  ],
+  "unique_executed_target_count": 17,
+  "unique_executed_targets": [
+    "tests/unit/test_memory_boundaries.py::test_audit_has_no_saved_certification_or_circular_evidence",
+    "tests/unit/test_memory_boundaries.py::test_refs_resolve_current_records_and_delete_does_not_activate_old_content",
+    "tests/unit/test_memory_boundaries.py::test_all_is_complete_and_query_threshold_is_not_a_second_hard_budget",
+    "tests/unit/test_memory_boundaries.py::test_attention_only_when_query_exceeds_capacity_and_base_can_fit",
+    "tests/unit/test_memory_boundaries.py::test_retrieval_error_and_invalid_selected_identity_are_not_soft_success",
+    "tests/unit/test_memory_boundaries.py::test_memory_placement_is_explicitly_validated_even_when_disabled",
+    "tests/unit/test_memory_boundaries.py::test_default_projection_bytes_and_candidate_only_move_one_existing_block",
+    "tests/unit/test_memory_boundaries.py::test_candidate_replacement_and_every_capacity_check_use_final_user_layout[query]",
+    "tests/unit/test_memory_boundaries.py::test_candidate_replacement_and_every_capacity_check_use_final_user_layout[attention]",
+    "tests/unit/test_memory_boundaries.py::test_candidate_replacement_and_every_capacity_check_use_final_user_layout[rejected]",
+    "tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset[system]",
+    "tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset[current_request]",
+    "tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost[system]",
+    "tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost[current_request]",
+    "tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body[system]",
+    "tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body[current_request]",
+    "tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity"
+  ],
+  "baseline_and_config_check": {
+    "baseline_commit": "18851d3934e05621ddffecebbfebf69c04c831d5",
+    "baseline_source_sha256": "1cfb089b9a836a64cb25a6713f0f57f1ae79667083fc251dd409fbfa610f0ab9",
+    "default_checks": [
+      {
+        "route": "all",
+        "final_ordered_utf8_equal": true,
+        "all_capacity_requests_equal": true,
+        "capacity_checks": 1,
+        "payload_sha256": "e58649b578f513a05cbe6d1909eea70bb9c09430b491c6094b3409d6093c699d",
+        "request_path": "artifacts/next-development-v5/authority-r2-checks/default-all-ordered-request.json"
+      },
+      {
+        "route": "query",
+        "final_ordered_utf8_equal": true,
+        "all_capacity_requests_equal": true,
+        "capacity_checks": 2,
+        "payload_sha256": "ae72291d0e0ccd7bbcda1104c107c0fc97d3af9959ae4a5bdc2668e4c7921a28",
+        "request_path": "artifacts/next-development-v5/authority-r2-checks/default-query-ordered-request.json"
+      },
+      {
+        "route": "attention",
+        "final_ordered_utf8_equal": true,
+        "all_capacity_requests_equal": true,
+        "capacity_checks": 4,
+        "payload_sha256": "20cf8397a5207adc5680eabcc85f5a28be8bf8e8cd00afe628048476fcbe0f21",
+        "request_path": "artifacts/next-development-v5/authority-r2-checks/default-attention-ordered-request.json"
+      }
+    ],
+    "boundary_protocol_bytes_unchanged": true,
+    "read_selection_prompt_bytes_unchanged": true,
+    "config_changes": [
+      "recipe_id",
+      "memory_boundaries.memory_placement"
+    ],
+    "config_sha256": {
+      "data/diagnostics/next-development-v5-prospective-r1/config.json": "dfcf5b2b48c47af6803375b59e2aada7802ea4af752562826db5e46e0c3fd2f0",
+      "data/diagnostics/next-development-v5-authority-r2/config.json": "91105f1ca25cc5cdd21077141eb86bd8913ad2ed061a7693f3e46eb89db23ecd"
+    }
+  },
+  "baseline_check_log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-checks/default-byte-and-config.log",
+  "baseline_check_scope": "Zero-model complete ordered UTF8 message payload and every complete capacity input for default all/query/attention, using baseline published R1 module. This is not raw HTTP byte capture.",
+  "cross_layer_evidence": {
+    "transport": "actual VLLMChatModel json_action via httpx.MockTransport",
+    "execution": "actual public graph/ToolNode, InMemoryStore and real local SQLite checkpoint",
+    "covered": [
+      "single memory block",
+      "history/current text preserved",
+      "same current Human on tool continuation",
+      "current update/body and delete/empty refs",
+      "owner isolation",
+      "query final destination and mock embedding charges",
+      "attention once then identity reuse/current body",
+      "Host/control charged mock capacity",
+      "historical C correction"
+    ]
+  },
+  "environment": {
+    "core": {
+      "python": "3.11.13",
+      "interpreter": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+      "pytest": "8.4.2",
+      "ruff": "0.16.5",
+      "mypy": "1.20.2"
+    },
+    "foundation": {
+      "interpreter": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+      "packages": {
+        "pytest": "8.4.2",
+        "langchain-core": "1.6.5",
+        "langgraph": "1.1.10",
+        "langmem": "0.0.30"
+      }
+    },
+    "imports": "PYTHONPATH=src",
+    "no_install_or_dependency_change": true
+  },
+  "whitespace": {
+    "git_diff_check_exit_code": 0,
+    "untracked_config_explicitly_checked": true,
+    "all_owned_files_no_trailing_whitespace": true,
+    "single_final_newline": true
+  },
+  "initial_failures": [],
+  "expected_negative_cases": [
+    "invalid placement",
+    "query capacity reject",
+    "base capacity reject",
+    "foreign identity",
+    "real synthetic retrieval failure"
+  ],
+  "running_check_sessions": [],
+  "real_model_http_calls": 0,
+  "real_embedding_http_calls": 0,
+  "shared_postgres_calls": 0,
+  "not_run": [
+    "full suite",
+    "build (no entrypoint/packaging/dependency change)",
+    "real experiment",
+    "deployment",
+    "Git commit/push"
+  ],
+  "limits": [
+    "Engineering preservation/placement does not prove semantic improvement.",
+    "Position and carrier role are changed together; effects cannot be separated by this candidate.",
+    "Token cost/effectiveness require Root's actual template audit and frozen evaluation.",
+    "History is preserved, including conflicting user, tool proposal and assistant text.",
+    "Current stored memory is not authoritative live business-world truth."
+  ],
+  "kind": "MILAI_V5_AUTHORITY_R2_NARROW_CHECKS",
+  "root_receipt_sha256": "c4c17a68842d1f7e3de1f64f5a6261de578f2a2d3059d5dd6cbe0b16b35465f0",
+  "root_offline_cost_manifest": "data/manifests/next-development-v5-authority-r2-offline-cost.json",
+  "root_offline_contract_validation": {
+    "diagnostic_obligations": 12,
+    "new_confirmation_obligations": 26,
+    "status": "exact visible basis and no-future-source check PASS; compose unknown without observations"
+  }
+}
