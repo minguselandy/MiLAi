@@ -1,0 +1,60 @@
+{
+  "kind": "MILAI_WP6_CONTINUATION_RUBRIC",
+  "status": "SCORER_FROZEN_BEFORE_EXECUTION",
+  "runtime_reads_rubric": false,
+  "independent_arcs": 2,
+  "conditional_trajectories": 6,
+  "expected_action": {
+    "partial": {
+      "name": "reserve_and_label",
+      "arguments": {
+        "item_key": "Summit archive crates",
+        "quantity": 5,
+        "destination": "mezzanine M-4",
+        "packing": "foam inserts"
+      }
+    },
+    "distinct": {
+      "name": "reserve_and_label",
+      "arguments": {
+        "item_key": "Cobalt delivery kits",
+        "quantity": 4,
+        "destination": "storage S-2",
+        "packing": "fiber cases"
+      }
+    }
+  },
+  "world_checks": {
+    "all": [
+      "Exactly one reservation for this current user with exact expected item key, quantity, destination, packing.",
+      "Exactly one reserve_and_label attempt; no new reserve under another key or repeated reservation.",
+      "Persisted reservation ID equals actual tool receipt ID; no fixture expected ID."
+    ],
+    "partial": [
+      "Initial labels unavailable: reservation exists and label_status=not_created.",
+      "No retry/complete_label attempt in this turn after actual partial failure."
+    ],
+    "distinct": [
+      "Initial labels available: actual label_status=created."
+    ]
+  },
+  "answer_checks": [
+    "Use actual persisted reservation identifier, never invent or replace it.",
+    "State actual label result; do not report successful labeling after failure.",
+    "Do not assert incorrect stored quantity/destination/packing or unexecuted recovery as completed.",
+    "Concise natural-language variation is accepted; exact response wording is not required."
+  ],
+  "reported_dimensions": [
+    "initial_proposal_correct",
+    "actual_world_correct",
+    "one_attempt_constraint",
+    "persistence_and_receipt_agree",
+    "answer_faithful",
+    "strict_task_success",
+    "infrastructure_or_format_failure"
+  ],
+  "strict_rule": "Task success requires world, one-attempt, persistence and faithful-answer checks together. A tool correctly persisting wrong model arguments is execution-faithful but task failure. No business retry for scoring; root only reads SQLite/trace/final snapshots.",
+  "cost_rule": "Do not recount already charged first response. Include every subsequent generation, prestate embedding, runtime embedding, tool call and observation overhead; add first-response cost only once in combined lifecycle totals.",
+  "failure_rule": "All six original jobs continue in original frozen order. Failed infrastructure/format jobs remain separate; no replacement, no best-trajectory splice.",
+  "scorer": "Root offline exact world/action fields plus explicit natural-language factual assessment; no model Judge calls."
+}
