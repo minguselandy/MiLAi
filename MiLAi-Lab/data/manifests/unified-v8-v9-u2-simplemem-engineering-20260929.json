@@ -1,0 +1,993 @@
+{
+  "status": "FREEZE_READY",
+  "task": "U2 pinned SimpleMem core text adapter",
+  "base_git_sha": "81f2cf469f0a64f53256838c7884592c8d88ab7e",
+  "environment": {
+    "sdk_python": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+    "python_version": "3.11.13",
+    "core_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+    "sdk_packages": 109,
+    "pinned_source": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem",
+    "source_commit": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+    "environment_receipt": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-environment/receipt-r3.json",
+      "sha256": "642a01e772796cc78a6626604a0ddae83048bfa60166b19bc4d6914f0cf0eda6",
+      "bytes": 5367
+    },
+    "full_environment_requirements": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-environment/requirements-r3.txt",
+      "sha256": "e02c84cf625028798463744172dc10ff18d918db7b9d9b36ee519064c5e5dc22",
+      "bytes": 2161
+    },
+    "ci_addition_lock": {
+      "path": "data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt",
+      "sha256": "c4de4f0a77a4561a60528fb3b059b2aa4a5c2d2ae491ea84015f52bffb5fa48f",
+      "bytes": 430
+    },
+    "public_environment": {
+      "path": "data/manifests/unified-v8-v9-u2-simplemem-environment-20260929.json",
+      "sha256": "6c251572da2ac3037e505cf9fe19e6441416a35e9cc099eb22338e8ea11ccab1",
+      "bytes": 13534
+    }
+  },
+  "allowed_source_files": {
+    "MiLAi-Lab/src/milai_lab/runners/simplemem_native.py": {
+      "sha256": "222a0e3c38e4d8439a6f40b037a1cb865b159921a2ca0a1004a56ea8801b3311",
+      "bytes": 24753
+    },
+    "MiLAi-Lab/src/milai_lab/baselines/langmem_benchmark.py": {
+      "sha256": "f23026803662aa64b52739c2e77b9d7483625233cd36b553c13a7e7f51795765",
+      "bytes": 25725
+    },
+    "MiLAi-Lab/src/milai_lab/baselines/benchmark_memories.py": {
+      "sha256": "39f1ed46ed104926f155b1cb96b72dcde2415d300d0fa255d881e5cbae8e921d",
+      "bytes": 13325
+    },
+    "MiLAi-Lab/src/milai_lab/runners/memsyco_native.py": {
+      "sha256": "e72eedd5122ce021b7b62da5e7711f4a6f3c676d2f18369e95e1739f85f3f86e",
+      "bytes": 35812
+    },
+    "MiLAi-Lab/src/milai_lab/runners/merit_native.py": {
+      "sha256": "d0f6dd4af022faf9f15844065913cc7aed4c0e03e043de6c01c1f741c2400e72",
+      "bytes": 21774
+    },
+    "MiLAi-Lab/tests/unit/test_simplemem_native.py": {
+      "sha256": "bcbfb6b10d2dcbeae1d1d6cd61db07f674c07aacd54f7027f212ace672dcde51",
+      "bytes": 25118
+    },
+    "MiLAi-Lab/tools/prepare_simplemem_text_source.py": {
+      "sha256": "8919809e4152bae6fcf59ccd3824e628dce794379fb5f8508de0fbd7748456ee",
+      "bytes": 1390
+    },
+    "MiLAi-Lab/tools/check_verification_matrix.py": {
+      "sha256": "1e1c20d4c77eab4eeaecb792cf0cc96d7b6b5586785b29044793b8d2bcd9e9e5",
+      "bytes": 9624
+    },
+    "MiLAi-Lab/configs/lab-verification-matrix.json": {
+      "sha256": "5043171ef302fbecf02ae17319d45fab8b8e3f05886654adce9d9f391f9bca78",
+      "bytes": 5345
+    },
+    "MiLAi-Lab/pyproject.toml": {
+      "sha256": "c33b82aab39e460cbd0a4fbf80c1d5733bed49db4171da08f407f1c873c9704d",
+      "bytes": 4002
+    },
+    ".github/workflows/fast.yml": {
+      "sha256": "4a97ce09ba6290f22595ab0121dce0876eb679c28bf39b75cfd28c32e596080a",
+      "bytes": 18444
+    },
+    ".github/workflows/ci.yml": {
+      "sha256": "8fcc0591e600e32901367dd0a76695346b2bf44c37b6ddf052bc359f26526c1b",
+      "bytes": 21806
+    }
+  },
+  "pytest": {
+    "unique_current_targets": 14,
+    "unique_new_targets": 12,
+    "unique_adjacent_targets": 2,
+    "final_passed": 14,
+    "final_failed": 0,
+    "final_skipped": 0,
+    "current_targets": [
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_native_writer_40_overlap2_tail_flush_real_ids_reopen_and_owner",
+        "status": "passed",
+        "seconds": 1.857
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_native_retrieval_real_three_channels_reflection_normalization_and_read_only",
+        "status": "passed",
+        "seconds": 1.645
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_native_empty_recovered_exhausted_and_swallowed_admission_are_distinct[valid_empty]",
+        "status": "passed",
+        "seconds": 0.026
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_native_empty_recovered_exhausted_and_swallowed_admission_are_distinct[recovered]",
+        "status": "passed",
+        "seconds": 0.081
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_native_empty_recovered_exhausted_and_swallowed_admission_are_distinct[parse_recovered]",
+        "status": "passed",
+        "seconds": 0.085
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_native_empty_recovered_exhausted_and_swallowed_admission_are_distinct[exhausted]",
+        "status": "passed",
+        "seconds": 0.028
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_native_empty_recovered_exhausted_and_swallowed_admission_are_distinct[admission]",
+        "status": "passed",
+        "seconds": 0.024
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_native_swallowed_channel_error_is_degraded_but_store_insert_error_propagates",
+        "status": "passed",
+        "seconds": 0.11
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_merit_actual_graph_query_once_current_human_closed_turn_and_shared_capacity[False]",
+        "status": "passed",
+        "seconds": 0.16
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_merit_actual_graph_query_once_current_human_closed_turn_and_shared_capacity[True]",
+        "status": "passed",
+        "seconds": 0.251
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_simplemem_configuration_rejects_method_drift",
+        "status": "passed",
+        "seconds": 0.001
+      },
+      {
+        "nodeid": "tests/unit/test_simplemem_native.py::test_memsyco_gold_free_history_degraded_order_shared_query_reader_and_once",
+        "status": "passed",
+        "seconds": 1.707
+      },
+      {
+        "nodeid": "tests/unit/test_benchmark_memories.py::test_exact_archive_key_excludes_questions_but_never_merges_source_or_owner",
+        "status": "passed",
+        "seconds": 0.001
+      },
+      {
+        "nodeid": "tests/unit/test_benchmark_memories.py::test_memsyco_u2_frozen_history_build_fresh_query_gold_free_and_once_guards[raw_dialogue]",
+        "status": "passed",
+        "seconds": 0.024
+      }
+    ],
+    "chronological_runs": [
+      {
+        "log": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/01-sdk.log",
+          "sha256": "637bbf495b2b8113d52fa69e31af7ec1f54488b14659351346253387252520c1",
+          "bytes": 5941
+        },
+        "junit": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/01-sdk.xml",
+          "sha256": "e41fb40c7757c9c0a3ee59b0aae010614d11cd7f9966024aca5b021d5e486487",
+          "bytes": 3982
+        },
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_simplemem_native.py",
+          "--junitxml=artifacts/unified-v8-v9/u2-simplemem-engineering/01-sdk.xml"
+        ],
+        "exit_code": 1,
+        "passed": 7,
+        "failed": 2,
+        "skipped": 0,
+        "testcase_seconds": 2.5069999999999992
+      },
+      {
+        "log": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/08-sdk-r3.log",
+          "sha256": "d26c87ff2340cd2f852d1123284d43dff5cf18a589b1f3b684e14a01ed0d8b05",
+          "bytes": 7507
+        },
+        "junit": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/08-sdk-r3.xml",
+          "sha256": "a944daf1332c23b3a91cbb6ba31384858eefb14f985ed2f7271d46a77e5158e4",
+          "bytes": 6736
+        },
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_simplemem_native.py",
+          "--junitxml=artifacts/unified-v8-v9/u2-simplemem-engineering/08-sdk-r3.xml"
+        ],
+        "exit_code": 1,
+        "passed": 11,
+        "failed": 1,
+        "skipped": 0,
+        "testcase_seconds": 2.845999999999999
+      },
+      {
+        "log": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/09-memsyco.log",
+          "sha256": "1ad57c3d02fba3f97e33592f409a3fab173bf0529541ee5f278ba4101723a657",
+          "bytes": 2012
+        },
+        "junit": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/09-memsyco.xml",
+          "sha256": "c71943858c4c3a665b182b073862006b8053ca6d599dcebd5f53a7139b4cfb53",
+          "bytes": 398
+        },
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_simplemem_native.py::test_memsyco_gold_free_history_degraded_order_shared_query_reader_and_once",
+          "--junitxml=artifacts/unified-v8-v9/u2-simplemem-engineering/09-memsyco.xml"
+        ],
+        "exit_code": 0,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "testcase_seconds": 1.707
+      },
+      {
+        "log": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/11-affected.log",
+          "sha256": "f9917df0a0980580b00646da51a49987cbfd369bfff3dcb9aa5802526804c702",
+          "bytes": 2019
+        },
+        "junit": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/11-affected.xml",
+          "sha256": "69114d1acd2ab46ee8b7656aa46be603776164f34dc381ebf5f7086d2240ed43",
+          "bytes": 885
+        },
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_simplemem_native.py::test_native_retrieval_real_three_channels_reflection_normalization_and_read_only",
+          "tests/unit/test_simplemem_native.py::test_native_swallowed_channel_error_is_degraded_but_store_insert_error_propagates",
+          "tests/unit/test_benchmark_memories.py::test_exact_archive_key_excludes_questions_but_never_merges_source_or_owner",
+          "tests/unit/test_benchmark_memories.py::test_memsyco_u2_frozen_history_build_fresh_query_gold_free_and_once_guards[raw_dialogue]",
+          "--junitxml=artifacts/unified-v8-v9/u2-simplemem-engineering/11-affected.xml"
+        ],
+        "exit_code": 0,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "testcase_seconds": 1.822
+      },
+      {
+        "log": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/18-import-boundary.log",
+          "sha256": "e626c02d13c9e470dc7d29fb2f5c342d938e0c3de51f64f63a1771dc6a9310e7",
+          "bytes": 2026
+        },
+        "junit": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/18-import-boundary.xml",
+          "sha256": "b2d5e432117de8fcd32f565d72de5060ec52ce732e28cd392152f5644f912338",
+          "bytes": 404
+        },
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_simplemem_native.py::test_native_retrieval_real_three_channels_reflection_normalization_and_read_only",
+          "--junitxml=artifacts/unified-v8-v9/u2-simplemem-engineering/18-import-boundary.xml"
+        ],
+        "exit_code": 0,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "testcase_seconds": 1.598
+      },
+      {
+        "log": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/24-tool-boundary.log",
+          "sha256": "2583617912e7dbb13a8aa3c8b278520fe76a88dc22792a6ddf011a0b0e2f7bac",
+          "bytes": 9613
+        },
+        "junit": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/24-tool-boundary.xml",
+          "sha256": "e4e924a0ef9ca9279ea416827ace67c610958a158217cba112a243319b42f66b",
+          "bytes": 6543
+        },
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_simplemem_native.py::test_native_retrieval_real_three_channels_reflection_normalization_and_read_only",
+          "--junitxml=artifacts/unified-v8-v9/u2-simplemem-engineering/24-tool-boundary.xml"
+        ],
+        "exit_code": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "testcase_seconds": 1.871
+      },
+      {
+        "log": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/27-tool-boundary-final.log",
+          "sha256": "a32955e6059a6e43b2f50e76b5eb009901aa87c1fca53533a331b25af058fe4c",
+          "bytes": 2018
+        },
+        "junit": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/27-tool-boundary-final.xml",
+          "sha256": "6b0f6dd8eea8a32776aeaa1c102134ade8974ff91dfb44559c67ab06d4869dd7",
+          "bytes": 404
+        },
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_simplemem_native.py::test_native_retrieval_real_three_channels_reflection_normalization_and_read_only",
+          "--junitxml=artifacts/unified-v8-v9/u2-simplemem-engineering/27-tool-boundary-final.xml"
+        ],
+        "exit_code": 0,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "testcase_seconds": 1.645
+      }
+    ],
+    "accounting": "Counts are unique current nodeids, not summed repeated passes; initial pre-parametrization inventory retained in its original log."
+  },
+  "static_checks": [
+    {
+      "log": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/20-ruff-final.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "bytes": 19
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/runners/simplemem_native.py",
+        "src/milai_lab/baselines/langmem_benchmark.py",
+        "src/milai_lab/baselines/benchmark_memories.py",
+        "src/milai_lab/runners/memsyco_native.py",
+        "src/milai_lab/runners/merit_native.py",
+        "tools/prepare_simplemem_text_source.py",
+        "tools/check_verification_matrix.py",
+        "tests/unit/test_simplemem_native.py"
+      ],
+      "exit_code": 0,
+      "environment": {
+        "PYTHONPATH": "src"
+      }
+    },
+    {
+      "log": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/13-mypy-final.log",
+        "sha256": "050c52a2b0c61e8b681ef5c485e0bc03340b8d55148e0acef27d744c8be42033",
+        "bytes": 43
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/runners/simplemem_native.py",
+        "src/milai_lab/baselines/langmem_benchmark.py",
+        "src/milai_lab/baselines/benchmark_memories.py",
+        "src/milai_lab/runners/memsyco_native.py",
+        "src/milai_lab/runners/merit_native.py",
+        "tools/prepare_simplemem_text_source.py",
+        "tools/check_verification_matrix.py"
+      ],
+      "exit_code": 0,
+      "environment": {
+        "PYTHONPATH": "src"
+      }
+    },
+    {
+      "log": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/21-loader-mypy.log",
+        "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+        "bytes": 42
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/runners/simplemem_native.py"
+      ],
+      "exit_code": 0,
+      "environment": {
+        "PYTHONPATH": "src"
+      }
+    },
+    {
+      "log": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/14-matrix-final.log",
+        "sha256": "3d3b6b44f7c6e1502766e96d5f6d0af1bfa2702a66fa9da151b7f08b62f39574",
+        "bytes": 261
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "tools/check_verification_matrix.py"
+      ],
+      "exit_code": 0,
+      "environment": {
+        "PYTHONPATH": "src"
+      }
+    },
+    {
+      "log": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/19-boundary-final.log",
+        "sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+        "bytes": 61
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.boundary"
+      ],
+      "exit_code": 0,
+      "environment": {
+        "PYTHONPATH": "src"
+      }
+    },
+    {
+      "log": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/16-tools-boundary.log",
+        "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "bytes": 100
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.tools_boundary"
+      ],
+      "exit_code": 0,
+      "environment": {
+        "PYTHONPATH": "src"
+      }
+    },
+    {
+      "log": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/17-source-verify.json",
+        "sha256": "43fe006640c0d1de0c909fdffdf899cdff8b5547500cd207c01e6c43d8da3234",
+        "bytes": 18803
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+        "tools/prepare_simplemem_text_source.py",
+        "--source",
+        "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem"
+      ],
+      "exit_code": 0,
+      "environment": {
+        "PYTHONPATH": "src"
+      }
+    },
+    {
+      "log": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/26-tool-boundary-mypy.log",
+        "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+        "bytes": 42
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/runners/simplemem_native.py"
+      ],
+      "exit_code": 0,
+      "environment": {
+        "PYTHONPATH": "src"
+      }
+    },
+    {
+      "log": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/28-tool-boundary-ruff-final.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "bytes": 19
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/runners/simplemem_native.py",
+        "tests/unit/test_simplemem_native.py"
+      ],
+      "exit_code": 0,
+      "environment": {
+        "PYTHONPATH": "src"
+      }
+    }
+  ],
+  "retained_failures": [
+    {
+      "log": "01-sdk.log",
+      "result": "7 passed / 2 failed",
+      "cause": "Actual native Tantivy initialization required missing pylance; adapter exposed degradation. Final environment uses actual upstream pin 0.39.0; no test was run on mistaken R2 pin 0.25.1."
+    },
+    {
+      "log": "02-ruff-initial.log",
+      "cause": "36 import/style/unused findings; corrected only changed targets. Follow-up 10-ruff.log E501 corrected."
+    },
+    {
+      "log": "04-mypy-initial.log",
+      "cause": "5 typing errors: Optional module path, dynamic pinned SDK base types, and reused Mem0 local name. Corrected guard, narrowly scoped dynamic-class typing annotations, separate local name."
+    },
+    {
+      "log": "05-matrix.log",
+      "cause": "Full workflow missed new external-test core ignore; exact declared ownership and Fast/Full commands corrected."
+    },
+    {
+      "log": "08-sdk-r3.log",
+      "result": "11 passed / 1 failed",
+      "cause": "Harness accessed identity on prepare return rather than actual manifest. Corrected harness; one target rerun passed."
+    },
+    {
+      "log": "15-boundary.log",
+      "cause": "Initial source-loader sys.path.insert rejected. Replaced with execution of the genuine pinned package via importlib spec; actual SDK and boundary target passed without sys.path mutation."
+    },
+    {
+      "log": "24-tool-boundary.log",
+      "result": "1 failed",
+      "cause": "Standalone ToolNode invocation lacked LangGraph runtime. Public StateGraph supplies runtime; same actual native tool boundary target then passed."
+    },
+    {
+      "log": null,
+      "cause": "Earlier helper-path/workflow-path read/edit commands had wrong working-root assumptions and failed with FileNotFoundError; corrected paths. Tool receipts retained, no separate log file."
+    }
+  ],
+  "prepares": [
+    {
+      "exit_code": 0,
+      "runtime_root": "/tmp/milai-simplemem-u2-engineering-awhr8yp2/memsyco",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-simplemem-engineering/prepared-memsyco.json",
+      "identity_sha256": "53390f97f5bc35b4bcf737f2f2275309af2139aebbcff7d5adb6c0812599e3bc",
+      "manifest_sha256": "04fdf26463bb20b8e41ad29a2be7403a77d2e36d00ce0bb30ad954deda6deb0c",
+      "source_phase": "before final explicit-tool audit filtering; retained interface evidence, not final-source run freeze",
+      "source_delta_from_final": {
+        "src/milai_lab/runners/simplemem_native.py": {
+          "prepared": "62b3a53e8a6dfbdb0823d0e6c2fa3528965eda6872120b1335ff3ccd1f8bd389",
+          "final": "222a0e3c38e4d8439a6f40b037a1cb865b159921a2ca0a1004a56ea8801b3311"
+        }
+      },
+      "prepared_result": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/prepared-memsyco.json",
+        "sha256": "69eb6a3d4ed4ec4de19db23068719441a63d1cc0b2d80ae98e55b35addb330e5",
+        "bytes": 616
+      },
+      "run_manifest": {
+        "path": "/tmp/milai-simplemem-u2-engineering-awhr8yp2/memsyco/run_manifest.json",
+        "sha256": "04fdf26463bb20b8e41ad29a2be7403a77d2e36d00ce0bb30ad954deda6deb0c",
+        "bytes": 54474
+      },
+      "source_identities": 167,
+      "command_reference": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/prepare-commands.json",
+        "index": 0
+      }
+    },
+    {
+      "exit_code": 0,
+      "runtime_root": "/tmp/milai-simplemem-u2-engineering-awhr8yp2/merit",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-simplemem-engineering/prepared-merit.json",
+      "identity_sha256": "6398f36b5769d0d7512041f52310ce579494d9b3441ef837c25c8bd77a64a370",
+      "manifest_sha256": "100819aad15c92c942c7d738b4d47bbd22e6aec5f4b3e1021c785f31adbca2dd",
+      "source_phase": "before final explicit-tool audit filtering; retained interface evidence, not final-source run freeze",
+      "source_delta_from_final": {
+        "src/milai_lab/runners/simplemem_native.py": {
+          "prepared": "62b3a53e8a6dfbdb0823d0e6c2fa3528965eda6872120b1335ff3ccd1f8bd389",
+          "final": "222a0e3c38e4d8439a6f40b037a1cb865b159921a2ca0a1004a56ea8801b3311"
+        }
+      },
+      "prepared_result": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/prepared-merit.json",
+        "sha256": "de3b3e0373f5c89d72a5d0573c9b26d7757e8944d713b8effe17ac9307074ac6",
+        "bytes": 650
+      },
+      "run_manifest": {
+        "path": "/tmp/milai-simplemem-u2-engineering-awhr8yp2/merit/run_manifest.json",
+        "sha256": "100819aad15c92c942c7d738b4d47bbd22e6aec5f4b3e1021c785f31adbca2dd",
+        "bytes": 59309
+      },
+      "source_identities": 167,
+      "command_reference": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/prepare-commands.json",
+        "index": 1
+      }
+    }
+  ],
+  "builds": {
+    "initial": {
+      "receipt": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/build-initial-receipt.json",
+        "sha256": "5fc67f68ba2b319e9e3beb098ee7a5d8fe89fc379c2d7af67c443aaa1aaf139c",
+        "bytes": 3027
+      },
+      "result": {
+        "status": "PASSED",
+        "command": "uv build --offline --out-dir artifacts/unified-v8-v9/u2-simplemem-engineering/dist",
+        "wheel": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/dist/milai_lab-0.1.0-py3-none-any.whl",
+          "sha256": "a86d262fe8af0ca59442ea77e51a5c508f221e5c8165974ad70278654c9e6101"
+        },
+        "sdist": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/dist/milai_lab-0.1.0.tar.gz",
+          "sha256": "9ed17d46b69f4d4954d233009d2c85bcb396f399dfb2a7ffd35dbfe585ee6bd2"
+        },
+        "sdist_files": 2323,
+        "wheel_files": 171,
+        "private_assets_excluded": true,
+        "documentation_measurement": "Build-time snapshot; later documentation-only changes do not require rebuilding."
+      }
+    },
+    "final": {
+      "receipt": {
+        "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/build-final-receipt.json",
+        "sha256": "bda8ec029b621a20b029f1703375965deae3cf269ca8b4ce56314b2c4372a1e0",
+        "bytes": 3032
+      },
+      "result": {
+        "status": "PASSED",
+        "command": "uv build --offline --out-dir artifacts/unified-v8-v9/u2-simplemem-engineering/dist-final",
+        "wheel": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/dist-final/milai_lab-0.1.0-py3-none-any.whl",
+          "sha256": "bde6e4dbcfca432f265145a948b864ad8d55b07b5b240be6be095c2e260da0ca"
+        },
+        "sdist": {
+          "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/dist-final/milai_lab-0.1.0.tar.gz",
+          "sha256": "47fc8d9ddd7436f5dd1a448d63e0f4599941d72d2a49f41e81ff2fd68c4ae0b3"
+        },
+        "sdist_files": 2323,
+        "wheel_files": 171,
+        "private_assets_excluded": true,
+        "documentation_measurement": "Build-time snapshot; later documentation-only changes do not require rebuilding."
+      }
+    },
+    "reason_for_second_build": "Root review found explicit search ToolMessage exposed internal planner/admission/retry audit. Final filter and actual ToolNode test changed source after first successful offline build; both original artifacts and source hashes are preserved. No third build or repeat prepare."
+  },
+  "final_boundary_filter": {
+    "source_delta": {
+      "MiLAi-Lab/src/milai_lab/runners/simplemem_native.py": {
+        "before": {
+          "sha256": "62b3a53e8a6dfbdb0823d0e6c2fa3528965eda6872120b1335ff3ccd1f8bd389",
+          "bytes": 24521
+        },
+        "after": {
+          "sha256": "222a0e3c38e4d8439a6f40b037a1cb865b159921a2ca0a1004a56ea8801b3311",
+          "bytes": 24753
+        }
+      },
+      "MiLAi-Lab/tests/unit/test_simplemem_native.py": {
+        "before": {
+          "sha256": "12a1be21a7107d1595d82fdfc4ccfe49bd48da41613feb9d88f2a502dfeeed6f",
+          "bytes": 23478
+        },
+        "after": {
+          "sha256": "bcbfb6b10d2dcbeae1d1d6cd61db07f674c07aacd54f7027f212ace672dcde51",
+          "bytes": 25118
+        }
+      }
+    },
+    "host_tool_result_keys": [
+      "query",
+      "status",
+      "results"
+    ],
+    "private_audit_preserved": true,
+    "algorithm_or_schema_change": false,
+    "evidence": "27-tool-boundary-final.xml: actual public StateGraph -> ToolNode -> pinned retrieval -> real local LanceDB/Tantivy. Exact record IDs/content/metadata/status returned; private operation result retains full admission/fallback/retry audit."
+  },
+  "cli": {
+    "entrypoint": "tools/run_unified_benchmarks.py",
+    "arm": "simplemem_text",
+    "common_arguments": [
+      "--benchmark memsyco|merit",
+      "--arm simplemem_text",
+      "--selection <frozen selection manifest>",
+      "--group smoke|development|confirmation",
+      "--config data/diagnostics/unified-v8-v9-u2-simplemem/native-common-config.json",
+      "--run <isolated run id>",
+      "--runtime-root <isolated directory>"
+    ],
+    "commands": [
+      "prepare --output <prepared.json>",
+      "run-history --history <prepared exact-history id> --prepared <prepared.json> --output <formation-result.json> (MemSyco only)",
+      "run-job --job <prepared job id> --prepared <prepared.json> --output <query-or-arc-result.json>"
+    ],
+    "config_key": "second_external.simplemem_text: exact validated POLICY plus pinned source_root; existing model/tokenizer/budget parameters unchanged",
+    "merit_tools": [
+      "native SimpleMem search_memory",
+      "actual MCP read_history",
+      "unchanged official business tools"
+    ],
+    "memsyco_tools": "No Agent extension in this arm: question-free native formation, program native retrieval, common official reader."
+  },
+  "coverage": [
+    "native writer 40/2 and public tail flush; real IDs/reopen/owner guard",
+    "genuine local LanceDB/Tantivy all three retrieval channels, reflection, normalization",
+    "legal empty vs recovered transport/parse retry vs exhausted native fallback vs sticky admission; insert errors propagate",
+    "actual public MERIT Graph/ToolNode/SQLite current-Human query once through tool continuation, complete closed-turn archive and shared12 capacity with post-turn incomplete",
+    "gold-free MemSyco prepared runtime, degraded history order, real verified partial-bank query and shared planning/final-reader12 admission",
+    "exact history cache source/owner exclusion, no question cache key, old RawDialogue frozen build/query guard",
+    "explicit search actual ToolNode returns no internal audit; private audit retains events",
+    "Fast/Full external actual source/dependency/test ownership and exact core ignores; no skip added",
+    "zero-model pilot prepare (one each), offline package source/helper/test/new lock byte verification"
+  ],
+  "limits": {
+    "real_host_requests": 0,
+    "real_embedding_requests": 0,
+    "real_judge_requests": 0,
+    "shared_postgres_calls": 0,
+    "mcp_service_calls": 0,
+    "dependency_download_or_install_by_source_owner": 0,
+    "git_mutations_by_source_owner": 0,
+    "local_test_database": "Actual temporary LanceDB/Tantivy and SQLite checkpoints; MockHTTP providers and InMemoryStore. This is not a claim that all database I/O was mocked.",
+    "budgets": "Independent local mock budgets only; Root continuous ledger not used by tests."
+  },
+  "unverified": [
+    "Actual provider/embedding/MCP and benchmark effect require Root frozen pilot; no semantic success claim.",
+    "Remote CI/source-fetch/dependency-install path configured and mechanically owned, not executed locally.",
+    "Builder previous_entries and dialogue_buffer are not invented as persisted resume state; upstream short-flush semantics preserved.",
+    "Logical bytes/calls/CPU/wall observed; physical disk/network I/O remains unknown.",
+    "Final-source formal prepare/run identity will be rebuilt by Root after publication; retained two prepares deliberately belong to pre-filter source."
+  ],
+  "all_engineering_evidence": {
+    "01-sdk.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/01-sdk.log",
+      "sha256": "637bbf495b2b8113d52fa69e31af7ec1f54488b14659351346253387252520c1",
+      "bytes": 5941
+    },
+    "01-sdk.xml": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/01-sdk.xml",
+      "sha256": "e41fb40c7757c9c0a3ee59b0aae010614d11cd7f9966024aca5b021d5e486487",
+      "bytes": 3982
+    },
+    "02-ruff-initial.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/02-ruff-initial.log",
+      "sha256": "7ab7b94571c5fcca941b5c7d70d6092bd52f925c8a5d6851ed4c87a05bc64371",
+      "bytes": 22573
+    },
+    "03-ruff-fixes.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/03-ruff-fixes.log",
+      "sha256": "31b638a4d3d68ddf9edb5e79a61385cec04a16638b78d012eb8b00f1e46b9106",
+      "bytes": 17298
+    },
+    "04-mypy-initial.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/04-mypy-initial.log",
+      "sha256": "af5335249280f69b1f14efdff51eb4c6a4406332e785f58aa09ed52af5a65856",
+      "bytes": 1505
+    },
+    "05-matrix.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/05-matrix.log",
+      "sha256": "0df9a8beb7bccdb623edb9b32666bac15a85a8201ffa726d12f9865983525f15",
+      "bytes": 811
+    },
+    "06-matrix-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/06-matrix-final.log",
+      "sha256": "3d3b6b44f7c6e1502766e96d5f6d0af1bfa2702a66fa9da151b7f08b62f39574",
+      "bytes": 261
+    },
+    "07-mypy-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/07-mypy-final.log",
+      "sha256": "050c52a2b0c61e8b681ef5c485e0bc03340b8d55148e0acef27d744c8be42033",
+      "bytes": 43
+    },
+    "08-sdk-r3.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/08-sdk-r3.log",
+      "sha256": "d26c87ff2340cd2f852d1123284d43dff5cf18a589b1f3b684e14a01ed0d8b05",
+      "bytes": 7507
+    },
+    "08-sdk-r3.xml": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/08-sdk-r3.xml",
+      "sha256": "a944daf1332c23b3a91cbb6ba31384858eefb14f985ed2f7271d46a77e5158e4",
+      "bytes": 6736
+    },
+    "09-memsyco.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/09-memsyco.log",
+      "sha256": "1ad57c3d02fba3f97e33592f409a3fab173bf0529541ee5f278ba4101723a657",
+      "bytes": 2012
+    },
+    "09-memsyco.xml": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/09-memsyco.xml",
+      "sha256": "c71943858c4c3a665b182b073862006b8053ca6d599dcebd5f53a7139b4cfb53",
+      "bytes": 398
+    },
+    "10-ruff.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/10-ruff.log",
+      "sha256": "56c1d7c883fbae68ab1ac48aae8823c12077e699914bcfb71766473204e2669f",
+      "bytes": 661
+    },
+    "11-affected.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/11-affected.log",
+      "sha256": "f9917df0a0980580b00646da51a49987cbfd369bfff3dcb9aa5802526804c702",
+      "bytes": 2019
+    },
+    "11-affected.xml": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/11-affected.xml",
+      "sha256": "69114d1acd2ab46ee8b7656aa46be603776164f34dc381ebf5f7086d2240ed43",
+      "bytes": 885
+    },
+    "12-ruff-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/12-ruff-final.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "13-mypy-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/13-mypy-final.log",
+      "sha256": "050c52a2b0c61e8b681ef5c485e0bc03340b8d55148e0acef27d744c8be42033",
+      "bytes": 43
+    },
+    "14-matrix-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/14-matrix-final.log",
+      "sha256": "3d3b6b44f7c6e1502766e96d5f6d0af1bfa2702a66fa9da151b7f08b62f39574",
+      "bytes": 261
+    },
+    "15-boundary.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/15-boundary.log",
+      "sha256": "144f950c67762ba64efa91d01b5fe015759e16de7d5b13caf669841fa5855333",
+      "bytes": 93
+    },
+    "16-tools-boundary.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/16-tools-boundary.log",
+      "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "bytes": 100
+    },
+    "17-source-verify.json": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/17-source-verify.json",
+      "sha256": "43fe006640c0d1de0c909fdffdf899cdff8b5547500cd207c01e6c43d8da3234",
+      "bytes": 18803
+    },
+    "18-import-boundary.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/18-import-boundary.log",
+      "sha256": "e626c02d13c9e470dc7d29fb2f5c342d938e0c3de51f64f63a1771dc6a9310e7",
+      "bytes": 2026
+    },
+    "18-import-boundary.xml": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/18-import-boundary.xml",
+      "sha256": "b2d5e432117de8fcd32f565d72de5060ec52ce732e28cd392152f5644f912338",
+      "bytes": 404
+    },
+    "19-boundary-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/19-boundary-final.log",
+      "sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+      "bytes": 61
+    },
+    "20-ruff-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/20-ruff-final.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "21-loader-mypy.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/21-loader-mypy.log",
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "bytes": 42
+    },
+    "22-prepare-memsyco.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/22-prepare-memsyco.log",
+      "sha256": "208e2a4559fc46a3efee462d80fc9e2788e0beeda354a208abfbef78def1ebaf",
+      "bytes": 846
+    },
+    "22-prepare-merit.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/22-prepare-merit.log",
+      "sha256": "b8f11e44ad95e2c77493109c7e4b89c34b9d9d1b4c26e7c481b89dc7e2666282",
+      "bytes": 844
+    },
+    "23-build.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/23-build.log",
+      "sha256": "013741e63344ce630bac8784a01bab20f714db8550bc4b1ed3f957c1ecd21957",
+      "bytes": 277
+    },
+    "24-tool-boundary.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/24-tool-boundary.log",
+      "sha256": "2583617912e7dbb13a8aa3c8b278520fe76a88dc22792a6ddf011a0b0e2f7bac",
+      "bytes": 9613
+    },
+    "24-tool-boundary.xml": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/24-tool-boundary.xml",
+      "sha256": "e4e924a0ef9ca9279ea416827ace67c610958a158217cba112a243319b42f66b",
+      "bytes": 6543
+    },
+    "25-tool-boundary-ruff.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/25-tool-boundary-ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "26-tool-boundary-mypy.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/26-tool-boundary-mypy.log",
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "bytes": 42
+    },
+    "27-tool-boundary-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/27-tool-boundary-final.log",
+      "sha256": "a32955e6059a6e43b2f50e76b5eb009901aa87c1fca53533a331b25af058fe4c",
+      "bytes": 2018
+    },
+    "27-tool-boundary-final.xml": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/27-tool-boundary-final.xml",
+      "sha256": "6b0f6dd8eea8a32776aeaa1c102134ade8974ff91dfb44559c67ab06d4869dd7",
+      "bytes": 404
+    },
+    "28-tool-boundary-ruff-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/28-tool-boundary-ruff-final.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "29-final-diff-and-whitespace.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/29-final-diff-and-whitespace.log",
+      "sha256": "948836a97d7718b100a1852da4de41c32910a143183b4a17d039437e62366884",
+      "bytes": 1954
+    },
+    "30-build-final.log": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/30-build-final.log",
+      "sha256": "cd00849bde4103098d0604b22e25c59b645876964e1f3a38a63abc5fcd95b6ed",
+      "bytes": 289
+    },
+    "build-final-receipt.json": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/build-final-receipt.json",
+      "sha256": "bda8ec029b621a20b029f1703375965deae3cf269ca8b4ce56314b2c4372a1e0",
+      "bytes": 3032
+    },
+    "build-initial-receipt.json": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/build-initial-receipt.json",
+      "sha256": "5fc67f68ba2b319e9e3beb098ee7a5d8fe89fc379c2d7af67c443aaa1aaf139c",
+      "bytes": 3027
+    },
+    "prepare-commands.json": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/prepare-commands.json",
+      "sha256": "b345db3d6e633f7d14d81febd9e220267c3fd9df8764ef82438b927ef3df879c",
+      "bytes": 2527
+    },
+    "prepared-memsyco.json": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/prepared-memsyco.json",
+      "sha256": "69eb6a3d4ed4ec4de19db23068719441a63d1cc0b2d80ae98e55b35addb330e5",
+      "bytes": 616
+    },
+    "prepared-merit.json": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/prepared-merit.json",
+      "sha256": "de3b3e0373f5c89d72a5d0573c9b26d7757e8944d713b8effe17ac9307074ac6",
+      "bytes": 650
+    },
+    "source-files-before-tool-filter.json": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/source-files-before-tool-filter.json",
+      "sha256": "35c8c83fe3d77cd9007419b6f946f1bf44a05d6903b87c29773be65fe60c2d25",
+      "bytes": 1880
+    },
+    "source-files.json": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/source-files.json",
+      "sha256": "24b2e27421d7fefd7d13545e40b158f388f42667a6674d65165d5653cc9178f6",
+      "bytes": 1880
+    },
+    "verify_build.py": {
+      "path": "artifacts/unified-v8-v9/u2-simplemem-engineering/verify_build.py",
+      "sha256": "43387fd6b75d8163a04046ffb9b9da5c1a606928687dbdd39315f40d4f50e61e",
+      "bytes": 3090
+    }
+  },
+  "pytest_environment": {
+    "PYTHONPATH": "src",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "SIMPLEMEM_TEXT_SOURCE": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem"
+  },
+  "kind": "UNIFIED_U2_SIMPLEMEM_TEXT_ENGINEERING_RECEIPT",
+  "root_receipt_verification": {
+    "at_utc": "2026-09-28T23:12:43.498222+00:00",
+    "receipt_path": "artifacts/unified-v8-v9/u2-simplemem-engineering/checks-receipt.json",
+    "receipt_sha256": "9e567a1410013fe5637947297d2e5f4acf799fb468b82bf084fd3f5fb891db25",
+    "distinct_existing_paths_verified": 68,
+    "source_files": 12,
+    "tests_repeated_by_root": 0,
+    "real_calls_by_root": 0,
+    "scope": "Exact hash verification of existing source/check/prepare/build/environment receipts; no rerun."
+  }
+}

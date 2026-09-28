@@ -293,3 +293,18 @@ Root离线汇总的摘要attempt标志误加、ordinary/backend字段误用，�
 第二外部系统还未运行，Luna只读盘点确认SimpleMem固定源码存在、依赖和默认encoder资产缺失，未安装/下载；下一步需选择真实兼容路径并由Sol完成薄接入。
 U3-P/O/W/R、U4、U5和U6仍须根据上述真实首断点分别处理，不将已实现模块自动全部启用，也不以首表结案缩小总Goal。
 Root发布结果/文档，Luna执行精确allowlist commit/push并核对远端；没有main/旧PR合并。实际Goal仍ACTIVE，研究NOT_ACHIEVED，ProductNO_GO。
+
+
+## U2 第二外部系统工程完成，实际运行待冻结
+
+SimpleMem text 使用官方 core `db80b6a7c591e0ea730a058e9f5fc4eb06572299`，保留原生 writer／多渠道 retrieval／reflection，
+在公共构造器注入同一计账 Qwen、bge-m3，再连接共同 reader／原生业务 Agent；不是完整 native ask() 复现。
+见[协议](MILAI_UNIFIED_U2_SIMPLEMEM_PROTOCOL_20260929.md)、[工程证据](../data/manifests/unified-v8-v9-u2-simplemem-engineering-20260929.json)
+与[独立环境身份](../data/manifests/unified-v8-v9-u2-simplemem-environment-20260929.json)。
+14个去重目标最终通过、0skip，覆盖实际本地LanceDB/Tantivy、原生重试/空提取/拒绝、共享12、跨owner/重开及真实图工具边界。
+初次7pass/2fail发现缺pylance；资源调查错误先装0.25.1后在索引测试前纠正为上游精确0.39.0；旧回执全保留。
+其他harness、类型/矩阵、禁止sys.path修改的loader问题已最小修复，失败不删除。最终search工具只返回query/status/results，内部审计不回流Host。
+静态、边界、矩阵、必要构建通过；两份旧prepare和首构建归属过滤前源码，不冒充最终冻结。Root核对已有哈希，不重复检查。
+依赖为独立环境CPU包，无新模型资产/部署/服务改变；本阶段真实generation/embedding/Judge/MCP为0，账本仍5941/10864712/414792。
+发布后Root重新正式prepare和freeze，再运行已曝光首题及完整arc5（3 invocation，0 Judge）；正常低分保留，不调原生方法。
+可运行后只补SimpleMem相同已曝光development的138单元和最多60次固定Judge，不重跑旧五臂。U3–U6尚未完成，实际Goal仍ACTIVE。

@@ -252,7 +252,7 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
 
     bank = LocalStateBank(runtime.store)
     peers: dict[str, MemoryMCP] = {}
-    external: dict[str, Mem0NativeRuntime] = {}
+    external: dict[str, Any] = {}
     indexes: dict[str, dict[str, Any]] = {}
     selected: dict[str, dict[str, Any]] = {}
     settings = config
@@ -285,6 +285,18 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
                 admit_generation=model._reserve_request)
             stack.callback(native.close)
             if native.snapshot(user_id, measure=True):
+                raise ValueError("BENCHMARK_MEMORY_NAMESPACE_DIRTY")
+        elif backend == "simplemem_text":
+            from milai_lab.runners.simplemem_native import SimpleMemTextRuntime, validate_simplemem
+
+            if runtime.embedding_client is None:
+                raise ValueError("BENCHMARK_EMBEDDING_CLIENT_MISSING")
+            simple_native = external[user_id] = SimpleMemTextRuntime(
+                root / "simplemem" / digest(user_id),
+                run_id, arm, user_id, model.client, runtime.embedding_client,
+                validate_simplemem(config), admit_generation=model._reserve_request)
+            stack.callback(simple_native.close)
+            if simple_native.snapshot(user_id):
                 raise ValueError("BENCHMARK_MEMORY_NAMESPACE_DIRTY")
 
         def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
@@ -341,6 +353,17 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
                     selected[key] = {"material": json.dumps(result, ensure_ascii=False),
                                      "actual_result": result}
                 material = selected[key]["material"]
+            elif backend == "simplemem_text":
+                from milai_lab.runners.simplemem_native import material_rows
+
+                if key not in selected:
+                    with phase(model.client, "simplemem_retrieval"):
+                        result = external[user_id].search_archive(user_id, str(current[0].content))
+                    material, ids, omitted = retrieved_material(material_rows(result["results"]),
+                        lambda rows: json.dumps(rows, ensure_ascii=False), 16000)
+                    selected[key] = {"material": material, "actual_result": result,
+                                     "delivered_ids": ids, "omitted_ids": omitted}
+                material = selected[key]["material"]
             else:
                 raise ValueError("BENCHMARK_U2_ARM_INVALID")
             if suppressed:
@@ -358,7 +381,7 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
             return {"llm_input_messages": [SystemMessage(content=prompt), *delivered]}
 
         common = {**kwargs, "environment_rules": "", "benchmark_view_hook": hook}
-        if backend == "mem0_native":
+        if backend in {"mem0_native", "simplemem_text"}:
             extra = [*external[user_id].archive_tools(
                         FoundationScope(run_id, arm, user_id, "scope")),
                      *(tool for tool in peer.tools if tool.name == "read_history")]
@@ -388,7 +411,7 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
         progress["messages"][key] = row
         write_json(path, progress)
         maintenance: dict[str, Any] | None = None
-        if backend == "mem0_native" and status == "COMPLETED":
+        if backend in {"mem0_native", "simplemem_text"} and status == "COMPLETED":
             starts = [index for index, message in enumerate(messages)
                       if isinstance(message, HumanMessage)]
             turn = messages[starts[public_index]:]
@@ -400,7 +423,8 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
                     "status": message.status} if isinstance(message, ToolMessage) else {})}
                 for message in turn]
             try:
-                with phase(runtime.model.client, "mem0_update"):
+                with phase(runtime.model.client, "simplemem_update" if backend == "simplemem_text"
+                           else "mem0_update"):
                     maintenance = external[scope.user_id].add_archive(scope.user_id, archived)
             except ValueError as error:
                 if str(error) != "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED":
@@ -408,7 +432,7 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
                 maintenance = {"status": "MAINTENANCE_INCOMPLETE", "reason": str(error),
                     "records_after": external[scope.user_id].snapshot(scope.user_id, measure=True)}
         records = (external[scope.user_id].snapshot(scope.user_id, measure=True)
-                   if backend == "mem0_native"
+                   if backend in {"mem0_native", "simplemem_text"}
                    else peers[scope.user_id].records(scope_config(scope)))
         receipt = {**row, "messages": [message.model_dump(mode="json") for message in messages],
                    "backend_records": records, "maintenance": maintenance}

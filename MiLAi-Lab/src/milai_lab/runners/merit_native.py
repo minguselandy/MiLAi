@@ -29,7 +29,8 @@ from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.merit_metered import TRANSPORT_CONTRACT, metered_litellm
 
 ARMS = {"no_memory", "native_full_replay_tail60000", "milai"}
-U2_ARMS = {"full_history", "strong_raw_rag", "rolling_summary", "ordinary_milai", "mem0_native"}
+U2_ARMS = {"full_history", "strong_raw_rag", "rolling_summary", "ordinary_milai", "mem0_native",
+           "simplemem_text"}
 
 
 def sha(path: Path) -> str:
@@ -70,7 +71,7 @@ def trace_costs(root: Path) -> dict[str, Any]:
             "mem0_benchmark_archive_add", "mem0_benchmark_search", "mem0_benchmark_snapshot",
             "persistent_memory_checkpoint_read", "lsa_history_checkpoint_read",
             "lsa_history_summary_result", "benchmark_summary_update",
-            "benchmark_raw_index", "benchmark_raw_retrieval"}:
+            "benchmark_raw_index", "benchmark_raw_retrieval", "simplemem_observation"}:
             row = observations.setdefault(event["event"], {"observations": 0})
             row["observations"] += 1
             for key in ("calls", "logical_bytes", "cpu_ns", "wall_ns"):
@@ -197,6 +198,12 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
             "native_replay": "not used; raw checkpoints exclude injected memory shown"})
         if args.arm == "mem0_native":
             identity["mem0_dependency"] = mem0_dependency_identity()
+    if args.arm == "simplemem_text":
+        from milai_lab.runners.simplemem_native import dependency_identity, validate_simplemem
+
+        identity["simplemem_dependency"] = dependency_identity(validate_simplemem(config))
+        identity["memory_cadence"] = (
+            "pinned core ingest/flush complete closed public turn; native short-flush limits")
     catalogs = []
     for job in jobs:
         selection, _arc, tools, _metrics, runner = load_native_domain_arc(
@@ -228,6 +235,13 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
             identity["memory_tools"] = [{"type": "function", "function": {
                 "name": "search_memory", "description": MEM0_SEARCH_DESCRIPTION,
                 "parameters": MEM0_SEARCH_SCHEMA}},
+                convert_to_openai_tool(create_history_read_tool(None))]
+        if args.arm == "simplemem_text":
+            from milai_lab.runners.simplemem_native import SEARCH_DESCRIPTION, SEARCH_SCHEMA
+
+            identity["memory_tools"] = [{"type": "function", "function": {
+                "name": "search_memory", "description": SEARCH_DESCRIPTION,
+                "parameters": SEARCH_SCHEMA}},
                 convert_to_openai_tool(create_history_read_tool(None))]
         identity["namespace_template"] = list(MEMORY_NAMESPACE)
         identity["history_read_tool"] = convert_to_openai_tool(create_history_read_tool(None))

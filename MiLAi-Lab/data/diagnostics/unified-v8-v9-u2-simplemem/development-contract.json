@@ -1,0 +1,57 @@
+{
+  "kind": "UNIFIED_U2_SIMPLEMEM_TEXT_DEVELOPMENT_EXTENSION_CONTRACT",
+  "status": "ENGINEERING_READY_EXPOSED_PILOT_PENDING",
+  "method_source_commit": null,
+  "protocol": "docs/MILAI_UNIFIED_U2_SIMPLEMEM_PROTOCOL_20260929.md",
+  "protocol_sha256": "68a56060d23c78730f8d7a0a88ab9d749d12146091186bc5d60cafcba49d54d2",
+  "pilot_results": null,
+  "pilot_results_sha256": null,
+  "order": [
+    {
+      "benchmark": "memsyco",
+      "group": "development",
+      "selection": "data/manifests/unified-v8-v9-memsyco-subsets-20260928.json",
+      "arms": [
+        "simplemem_text"
+      ],
+      "per_arm_order": "All prepared history units in source order, then all60 queries in source order. No cache reuse across different exact history/owner/source.",
+      "selection_sha256": "a15ea0c6d4088844687c1bc0ce451150311585d743e2ab7acec3784547e7aabe"
+    },
+    {
+      "benchmark": "merit",
+      "group": "development",
+      "selection": "data/manifests/unified-v8-v9-merit-development-inputs-20260929.json",
+      "arms": [
+        "simplemem_text"
+      ],
+      "per_arm_order": "All18 complete arcs in predeclared source order.",
+      "selection_sha256": "e1f0540a9101517044f169ee14fb517ea91acf21907a24687ffdd7a8193edac3"
+    }
+  ],
+  "planned_host_jobs": 78,
+  "planned_archive_builds": 60,
+  "planned_invocations": 138,
+  "planned_judge_opportunities": 60,
+  "judge_order": "After all138 planned invocations reach terminal status and answer/status batch is frozen; original source case order, one Judge attempt/no rejudge. Missing answers retain unknown and the planned denominator.",
+  "scoring_contract": "data/diagnostics/unified-v8-v9-u2/scoring-contract.json",
+  "scoring_contract_sha256": "ad23ee091ecfdb866b78fda1f9cb07b87e16f646640cfbcc5c0005860e5a899e",
+  "config": "data/diagnostics/unified-v8-v9-u2-simplemem/native-common-config.json",
+  "config_sha256": "c69e00460db176eb36f122a6c7f8ba8b4a809c1b38a7676082ca473965b6644f",
+  "statistical_analysis_script_sha256": "059e293044b3f213a0aceedc5b19d529bdc50da1a0c886fd3a334de8f3555bca",
+  "real_http_concurrency": 1,
+  "failure_rule": "Preserve failures, costs, partial effects and all planned opportunities; no sample replacement. A poll/process success is not semantic success. Real engineering contamination requires a scoped new identity/review.",
+  "isolation": "Each method, archive owner and MERIT arc uses distinct namespace/store/checkpoint/business world; no pilot-state reuse.",
+  "main_results_status": "NOT_RUN",
+  "model_changes": {
+    "new_service_or_weight": false,
+    "native_backend_stage_temperature": "upstream per-stage value; common reader/Host remains0",
+    "embedding": "existing bge-m3 substituted for upstream Qwen3-Embedding; normalized output"
+  },
+  "no_outer_invocation_retry": true,
+  "internal_retry_policy": "Pinned finite upstream retries retained, all physical requests charged and admitted; no wrapper retry or business replay.",
+  "exposure": "Entire development slice and the original five-arm results are already exposed. No new unseen claim, no sample replacement and no parameter tuning on these outcomes.",
+  "reference_results": "data/manifests/unified-v8-v9-u2-main-results-20260929.json",
+  "reference_results_sha256": "1d6d20524790a7ab3cfb30b75fec15ee96b0ed5657eb68ffbd8a434896ff6475",
+  "engineering_receipt": "data/manifests/unified-v8-v9-u2-simplemem-engineering-20260929.json",
+  "engineering_receipt_sha256": "d2185dddd53379ffc2f7c4bf3228793eb27c8f2c2f770e65c8c1e6fd66f9ef1f"
+}

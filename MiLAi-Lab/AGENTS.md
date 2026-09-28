@@ -98,6 +98,24 @@ Host-family weights/deployment. All conditional branches need actual gate dispos
 selector, State platform, native score normalization, main merge or Product migration. Full Goal
 remains ACTIVE, research NOT_ACHIEVED, Product NO_GO. Respect any new explicit stop.
 
+U2 second external SimpleMem core text integration is ENGINEERING_READY; real pilot NOT_RUN.
+Follow [its protocol](docs/MILAI_UNIFIED_U2_SIMPLEMEM_PROTOCOL_20260929.md) and
+[engineering receipt](data/manifests/unified-v8-v9-u2-simplemem-engineering-20260929.json).
+Actual pinned core MemoryBuilder/VectorStore/HybridRetriever use metered existing Qwen/BGE via
+public constructor injection; common reader/Agent remains, so this is not full native ask() reproduction.
+Fourteen unique narrow targets pass with real temporary LanceDB/Tantivy and MockHTTP, no skips;
+initial missing pylance and wrong resource pin investigation are preserved, final upstream pin0.39.0.
+No real model/embedding/MCP/Postgres call occurred in engineering. Final tool results exclude internal
+audit, genuine StateGraph/ToolNode verifies this; private observations remain. Necessary final build passed.
+Publish source then Root formally prepares/freezes the same exposed one-case/one-arc pilot (3 units,
+0 Judge). Normal wrong answers do not gate engineering or trigger tuning. After functional pilot,
+only this new arm uses the existing now-exposed 60 questions/18 arcs, 138 units, then answer freeze
+and single Judge attempts. Old five-arm table remains unchanged. Retain native finite retries,
+all costs and shared12 generation capacity; independent queries may read verified actual partial banks,
+with formation/retrieval status separate. No outer invocation or business retry. Current ledger unchanged
+at5941/10864712/414792. Root owns real calls; Sol source stopped; Luna publishes draft PR72 only.
+U3–U6 still require explicit evidence-gated disposition; research NOT_ACHIEVED, Product NO_GO.
+
 The following v7 closure is historical:
 
 

@@ -20,7 +20,8 @@ from milai_lab.methods.local_state_attention.controller import ControlResponseEr
 from milai_lab.methods.local_state_attention.summary import parse_summary, summary_request
 from milai_lab.providers.contextual_capacity import CapacityExceeded
 
-U2_ARMS = {"full_history", "strong_raw_rag", "rolling_summary", "ordinary_milai", "mem0_native"}
+U2_ARMS = {"full_history", "strong_raw_rag", "rolling_summary", "ordinary_milai", "mem0_native",
+           "simplemem_text"}
 SUMMARY_POLICY = {"window_completed_turns": 2, "content_max_chars": 16000, "max_tokens": 2048}
 RAG_POLICY = {"chunk_chars": 2048, "chunk_step": 1792, "bm25_k1": 1.2,
               "bm25_b": 0.75, "rrf_k": 60, "top_k": 10, "material_max_chars": 16000}
@@ -41,6 +42,13 @@ def validate_u2(config: dict[str, Any]) -> None:
 def backend_identity(arm: str) -> dict[str, Any]:
     if arm not in U2_ARMS | {"raw_dialogue"}:
         raise ValueError("BENCHMARK_U2_ARM_INVALID")
+    if arm == "simplemem_text":
+        from milai_lab.runners.simplemem_native import POLICY
+
+        return {"profile": "unified_u2_second_external", "backend": arm, "policy": POLICY,
+                "query_policy": "current Human; native planning/reflection; shared12 with reader",
+                "write": "complete closed past turn; native final flush; no wrapper retry",
+                "reader": "common benchmark reader; native AnswerGenerator replaced"}
     return {"profile": "unified_u2", "backend": arm,
             "summary": SUMMARY_POLICY, "raw_rag": RAG_POLICY, "mem0": MEM0_POLICY,
             "summary_capacity": SUMMARY_CAPACITY_CONTRACT,

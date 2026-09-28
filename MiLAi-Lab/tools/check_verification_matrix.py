@@ -102,6 +102,9 @@ def _check_workflows(matrix: dict[str, Any]) -> None:
             matrix["external_mypy_paths"]), workflow)
         _require(external, "tools/prepare_external_memory_v26_assets.py --prepare", workflow)
         _require(external, "en_core_web_sm-3.8.0-py3-none-any.whl", workflow)
+        _require(external, matrix["simplemem_source_prepare"], workflow)
+        _require(external, "uv pip install --python .venv/bin/python -r " +
+                 matrix["simplemem_dependencies"], workflow)
         if set(matrix["external_tests"]) != _pytest_targets(external):
             raise ValueError(f"LAB_VERIFICATION_EXTERNAL_PYTEST_DRIFT:{workflow}")
     gate = _workflow_job(ROOT / ".github/workflows/fast.yml", "fast-gate")
@@ -146,9 +149,10 @@ def main() -> None:
                    for path in (LAB / "tests/integration").rglob("*.py")}
     if integration != set(matrix["integration_tests"]):
         raise ValueError("LAB_VERIFICATION_INTEGRATION_TEST_OWNER_MISMATCH")
-    external_test = (LAB / matrix["external_tests"][0]).read_text()
-    if "pytest.skip(" in external_test or "pytest.importorskip(" in external_test:
-        raise ValueError("LAB_VERIFICATION_EXTERNAL_TEST_CAN_SKIP")
+    for target in matrix["external_tests"]:
+        external_test = (LAB / target).read_text()
+        if "pytest.skip(" in external_test or "pytest.importorskip(" in external_test:
+            raise ValueError("LAB_VERIFICATION_EXTERNAL_TEST_CAN_SKIP:" + target)
     for name in ("core_mypy_paths", "external_mypy_paths", "foundation_tests",
                  "external_tests", "core_pytest_ignores"):
         for item in matrix[name]:

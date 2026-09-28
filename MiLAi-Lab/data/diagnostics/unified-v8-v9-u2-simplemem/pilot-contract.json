@@ -1,0 +1,67 @@
+{
+  "kind": "U2_SIMPLEMEM_TEXT_EXPOSED_ENGINEERING_PILOT",
+  "status": "ENGINEERING_READY_EXECUTION_FREEZE_REQUIRED",
+  "purpose": "Validate the real pinned SimpleMem core text backend with the common reader and business Agent using the same already-exposed U2 pilot inputs.",
+  "source_base_commit": "81f2cf469f0a64f53256838c7884592c8d88ab7e",
+  "method_execution_commit": null,
+  "model_http_owner": "Root",
+  "concurrency": 1,
+  "order": [
+    {
+      "benchmark": "memsyco",
+      "group": "smoke",
+      "case_id": "mso_hard_000072",
+      "selection": "data/manifests/unified-v8-v9-u2-pilot-memsyco-selection-20260929.json",
+      "arms": [
+        "simplemem_text"
+      ],
+      "phases_per_arm": [
+        "run-history",
+        "run-job"
+      ],
+      "selection_sha256": "25c60f8328531574ff4238fa98d530a84e4f3267cebd10a0e9c9dfd4eede604b"
+    },
+    {
+      "benchmark": "merit",
+      "arc_id": "arc5-000",
+      "selection": "data/manifests/unified-v8-v9-u2-pilot-merit-selection-20260929.json",
+      "arms": [
+        "simplemem_text"
+      ],
+      "phases_per_arm": [
+        "run-job"
+      ],
+      "group": "smoke",
+      "native_arc_selection": "data/manifests/unified-v8-v9-merit-smoke/arc5-000.json",
+      "selection_sha256": "cd655b4bd389ef6ed0b36c3e26f6bfbbf4648fbc7e290cbb25bfcf25f5769052"
+    }
+  ],
+  "host_job_count": 2,
+  "memsyco_history_units": 1,
+  "native_merit_episodes_per_arm": 5,
+  "native_merit_public_messages_per_arm": 6,
+  "judge_calls_planned": 0,
+  "judge_reason": "This pilot checks actual tool/Store/material/answer and native world chains; full MemSyco native scoring is required in the independent U2 matrix, not repeated to gate engineering on model quality.",
+  "checks": [
+    "Same lawful question-free archive and original public messages",
+    "Real pinned MemoryBuilder plus LanceDB/Tantivy persisted IDs and metadata",
+    "Actual planning, semantic/lexical/symbolic retrieval and reflection with all requests charged",
+    "Common reader byte contract and no native AnswerGenerator call",
+    "Current Human only, actual MERIT Agent/tool continuation and closed-turn flush",
+    "Owner/run/arm/store isolation and unchanged query snapshot",
+    "Shared12 across all generation stages with rejection/partial/degraded distinguished",
+    "Actual answer/world/native score and complete continuous costs, not process exit alone"
+  ],
+  "failure_policy": "Preserve all runs/costs; engineering bug gets a documented new method/execution identity and all affected pilot arms rerun in fresh state, never cherry-pick candidate failures. Native wrong answers retained without prompt tuning.",
+  "independent_development_status": "The original five-arm table is published; this external extension will use the same now-exposed development slice after the pilot, not unseen confirmation.",
+  "method_binding": "Exact published HEAD and input/config/environment hashes will be bound by the Root execution freeze before any real request",
+  "planned_invocations": 3,
+  "no_outer_invocation_retry": true,
+  "native_finite_internal_retries": "Retained, each actual request admitted/charged under shared12.",
+  "protocol": "docs/MILAI_UNIFIED_U2_SIMPLEMEM_PROTOCOL_20260929.md",
+  "config": "data/diagnostics/unified-v8-v9-u2-simplemem/native-common-config.json",
+  "protocol_sha256": "68a56060d23c78730f8d7a0a88ab9d749d12146091186bc5d60cafcba49d54d2",
+  "config_sha256": "c69e00460db176eb36f122a6c7f8ba8b4a809c1b38a7676082ca473965b6644f",
+  "engineering_receipt": "data/manifests/unified-v8-v9-u2-simplemem-engineering-20260929.json",
+  "engineering_receipt_sha256": "d2185dddd53379ffc2f7c4bf3228793eb27c8f2c2f770e65c8c1e6fd66f9ef1f"
+}

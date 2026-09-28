@@ -65,12 +65,14 @@ from milai_lab.runners.merit_native import (
 )
 
 ARMS = {"raw_dialogue", "milai", "milai_agent"}
-U2_ARMS = {"raw_dialogue", "strong_raw_rag", "rolling_summary", "ordinary_milai", "mem0_native"}
+U2_ARMS = {"raw_dialogue", "strong_raw_rag", "rolling_summary", "ordinary_milai", "mem0_native",
+           "simplemem_text"}
 
 
 @contextmanager
 def _runtime(config: dict[str, Any], run_id: str, arm: str, root: Path) -> Iterator[Any]:
-    if arm == "raw_dialogue" or arm in {"strong_raw_rag", "rolling_summary", "mem0_native"}:
+    if arm == "raw_dialogue" or arm in {
+            "strong_raw_rag", "rolling_summary", "mem0_native", "simplemem_text"}:
         budget = RunBudget(RunLimits(questions=12, arms=3, generation_requests=None,
             generation_tokens=None, embedding_tokens=None), Path(config["budget_path"]))
         with VLLMClient(VLLMConfig(**config["host"]), budget=budget,
@@ -157,6 +159,14 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
     if u2:
         if args.arm == "mem0_native":
             identity["mem0_dependency"] = mem0_dependency_identity()
+        if args.arm == "simplemem_text":
+            from milai_lab.runners.simplemem_native import dependency_identity, validate_simplemem
+
+            identity["simplemem_dependency"] = dependency_identity(validate_simplemem(config))
+            identity["memory_tool_catalog"] = []
+            identity["formation_contract"] = (
+                "question-free archive; native core writer, not Host CRUD")
+            identity["agent_query_contract"] = "NA: common native reader, no Agent query extension"
         histories = _history_inputs(tasks, identity, jobs)
         identity.update({"backend": backend_identity(args.arm),
             "runtime_histories_sha256": digest(histories),
@@ -165,6 +175,10 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
             "formation_cadence": "question-free run-history, then fresh read-only native reader",
             "archive_batch_rule": "maximal whole completed-turn prefix fitting summary capacity; "
                                   "last two completed turns remain raw; no text truncation"})
+        if args.arm == "simplemem_text":
+            identity["archive_batch_rule"] = (
+                "native 40 dialogues/overlap2; complete ordered archive; final process_remaining; "
+                "short flush has no cross-flush overlap/previous_entries update")
     if args.arm == "milai_agent":
         formation = read_json(args.formation_root / "run_manifest.json")
         old = formation["identity"]
@@ -215,7 +229,9 @@ def _history_inputs(tasks: list[MemSycoTask], identity: dict[str, Any],
     method = {**_method(identity, identity["memory_tool_catalog"]),
               "backend": backend_identity(identity["arm_id"]),
               "config_sha256": identity["config_sha256"],
-              "backend_dependency": identity.get("mem0_dependency")}
+              "backend_dependency": identity.get("mem0_dependency"),
+              **({"simplemem_dependency": identity["simplemem_dependency"]}
+                 if "simplemem_dependency" in identity else {})}
     units: dict[str, Any] = {}
     for task, job in zip(tasks, jobs, strict=True):
         archive = archive_input(task.task)
@@ -243,6 +259,12 @@ def _prepared_u2(args: Any, lab_root: Path) -> tuple[dict[str, Any], dict[str, A
     validate_u2(identity["config"])
     if args.arm == "mem0_native" and identity["mem0_dependency"] != mem0_dependency_identity():
         raise ValueError("BENCHMARK_MEM0_SOURCE_CHANGED")
+    if args.arm == "simplemem_text":
+        from milai_lab.runners.simplemem_native import dependency_identity, validate_simplemem
+
+        if identity["simplemem_dependency"] != dependency_identity(
+                validate_simplemem(identity["config"])):
+            raise ValueError("SIMPLEMEM_DEPENDENCY_CHANGED")
     hashes = {row["relative_path"]: row["sha256"] for row in identity["source_files"]}
     hashes.update(identity["reader_source_sha256"])
     if any(sha(Path(identity["external_root"]) / relative) != expected
@@ -278,7 +300,9 @@ def run_history(args: Any, *, lab_root: Path) -> dict[str, Any]:
     attempts = manifest.setdefault("history_attempts", {})
     if args.history in attempts:
         raise ValueError("MEMSYCO_HISTORY_ALREADY_ATTEMPTED")
-    if any(attempts.get(row["history_id"], {}).get("status") not in {"COMPLETED", "FAILED"}
+    terminal = {"COMPLETED", "FAILED", "DEGRADED_NATIVE", "INCOMPLETE"} if (
+        args.arm == "simplemem_text") else {"COMPLETED", "FAILED"}
+    if any(attempts.get(row["history_id"], {}).get("status") not in terminal
            for row in histories["histories"][:histories["histories"].index(unit)]):
         raise ValueError("MEMSYCO_HISTORY_ORDER")
     root = args.runtime_root / "histories" / args.history
@@ -316,6 +340,22 @@ def run_history(args: Any, *, lab_root: Path) -> dict[str, Any]:
                     with phase(client, "formation"):
                         result["built"] = form(runtime, peer, archive, run_id, args.arm,
                                                config["formation_instruction"])
+            elif args.arm == "simplemem_text":
+                from milai_lab.runners.simplemem_native import (
+                    SimpleMemTextRuntime,
+                    validate_simplemem,
+                )
+
+                native = SimpleMemTextRuntime(root / "simplemem", run_id, args.arm, archive.user_id,
+                    client, runtime.embedding_client, validate_simplemem(config),
+                    admit_generation=GenerationAdmission())
+                if native.snapshot(archive.user_id):
+                    raise ValueError("BENCHMARK_MEMORY_NAMESPACE_DIRTY")
+                with phase(client, "simplemem_formation"):
+                    result["built"] = native.add_archive(archive.user_id, records)
+                if result["built"]["status"] != "COMPLETED":
+                    result["status"] = result["built"]["status"]
+                native.close()
             elif args.arm == "mem0_native":
                 with _mem0(runtime, root / "mem0", run_id, args.arm,
                            GenerationAdmission()) as native:
@@ -332,7 +372,8 @@ def run_history(args: Any, *, lab_root: Path) -> dict[str, Any]:
         result["costs"] = trace_costs(root)
         path = root / "formation.json"
         backend_artifact(path, client, result)
-        attempts[args.history] = {"status": "COMPLETED" if result["status"] == "COMPLETED"
+        attempts[args.history] = {"status": result["status"] if args.arm == "simplemem_text"
+                                  else "COMPLETED" if result["status"] == "COMPLETED"
                                   else "FAILED", "output": str(path), "sha256": sha(path)}
         manifest["status"] = "HISTORIES_READY" if all(
             attempts.get(row["history_id"], {}).get("status") == "COMPLETED"
@@ -355,7 +396,9 @@ def _run_u2_query(args: Any, row: MemSycoTask, identity: dict[str, Any],
     key = job["build_history_id"]
     attempt = manifest.get("history_attempts", {}).get(key, {})
     path = args.runtime_root / "histories" / key / "formation.json"
-    if attempt.get("status") != "COMPLETED" or attempt.get("sha256") != sha(path):
+    ready = {"COMPLETED", "DEGRADED_NATIVE", "INCOMPLETE"} if (
+        args.arm == "simplemem_text") else {"COMPLETED"}
+    if attempt.get("status") not in ready or attempt.get("sha256") != sha(path):
         raise ValueError("MEMSYCO_HISTORY_NOT_COMPLETED")
     formed = read_json(path)
     if (formed["owner"] != row.task.user_id or formed["archive_sha256"] != digest(
@@ -375,6 +418,8 @@ def _run_u2_query(args: Any, row: MemSycoTask, identity: dict[str, Any],
             "track": row.track, "arm": arm, "owner": row.task.user_id,
             "question": row.task.question, "build_history_id": key,
             "build_receipt_sha256": sha(path), "budget_before": before}
+        if arm == "simplemem_text":
+            result["formation_status"] = formed["status"]
         label = "Retrieved memories from earlier conversation"
         if arm == "raw_dialogue":
             material, label = raw_dialogue(row.task), "Earlier conversation"
@@ -408,6 +453,30 @@ def _run_u2_query(args: Any, row: MemSycoTask, identity: dict[str, Any],
                                "records_before": prior, "records_after": after})
                 if after != prior:
                     raise ValueError("BENCHMARK_READ_ONLY_SNAPSHOT_CHANGED")
+        elif arm == "simplemem_text":
+            from milai_lab.runners.simplemem_native import (
+                SimpleMemTextRuntime,
+                material_rows,
+                validate_simplemem,
+            )
+
+            admission = GenerationAdmission()
+            native = SimpleMemTextRuntime(path.parent / "simplemem", run_id, arm, row.task.user_id,
+                client, runtime.embedding_client, validate_simplemem(config),
+                admit_generation=admission)
+            prior = native.snapshot(row.task.user_id)
+            if prior != formed["built"]["records_after"]:
+                raise ValueError("MEMSYCO_FORMATION_SNAPSHOT_CHANGED")
+            with phase(client, "simplemem_retrieval"):
+                selected = native.search_archive(row.task.user_id, row.task.question)
+            material, ids, omitted = retrieved_material(material_rows(selected["results"]),
+                format_fn, config["retrieval"]["material_max_chars"])
+            after = native.snapshot(row.task.user_id)
+            result.update({"retrieved": selected, "delivered_ids": ids, "omitted_ids": omitted,
+                           "records_before": prior, "records_after": after})
+            if after != prior:
+                raise ValueError("BENCHMARK_READ_ONLY_SNAPSHOT_CHANGED")
+            native.close()
         else:
             with _mem0(runtime, path.parent / "mem0", run_id, arm) as native:
                 prior = native.snapshot(row.task.user_id, measure=True)
@@ -423,6 +492,8 @@ def _run_u2_query(args: Any, row: MemSycoTask, identity: dict[str, Any],
                                "records_before": prior, "records_after": after})
                 if after != prior:
                     raise ValueError("BENCHMARK_READ_ONLY_SNAPSHOT_CHANGED")
+        if arm == "simplemem_text":
+            admission()  # Planning/reflection and this actual final reader share query12.
         with phase(client, "reader"):
             result.update(_answer(client, prompt_fn(config["host"]["model"],
                 config["reader"]["current_date"], material, label), row.task.question))

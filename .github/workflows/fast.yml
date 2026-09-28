@@ -201,7 +201,8 @@ jobs:
             --ignore=tests/unit/test_external_memory_v26.py \
             --ignore=tests/unit/test_unified_benchmarks.py \
             --ignore=tests/unit/test_benchmark_memories.py \
-            --ignore=tests/unit/test_merit_native.py
+            --ignore=tests/unit/test_merit_native.py \
+            --ignore=tests/unit/test_simplemem_native.py
           uv run --no-sync python tools/check_legacy_archive.py
           uv build
 
@@ -278,8 +279,10 @@ jobs:
           uv pip install --python .venv/bin/python --no-deps https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
           HF_HUB_DISABLE_TELEMETRY=1 uv run --no-sync python tools/prepare_external_memory_v26_assets.py --prepare
           uv run --no-sync python -c 'import langmem, mem0, spacy'
-          uv run --no-sync mypy src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py
-          uv run --no-sync pytest -q tests/unit/test_external_memory_v26.py
+          uv pip install --python .venv/bin/python -r data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt
+          uv run --no-sync python tools/prepare_simplemem_text_source.py --prepare
+          uv run --no-sync mypy src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py src/milai_lab/runners/simplemem_native.py
+          uv run --no-sync pytest -q tests/unit/test_external_memory_v26.py tests/unit/test_simplemem_native.py
 
   archive-fast:
     name: Archive validation

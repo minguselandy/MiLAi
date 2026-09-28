@@ -1,0 +1,15 @@
+# Pinned additions to the existing --frozen --dev --group baseline-langmem environment.
+# Real SimpleMem core source is separately pinned; no full upstream setup or local encoder.
+dateparser==1.2.2
+deprecation==2.1.0
+lance-namespace==0.13.0
+lance-namespace-urllib3-client==0.13.0
+lancedb==0.25.3
+overrides==7.7.0
+pyarrow==22.0.0
+pylance==0.39.0
+python-dateutil==2.9.0.post0
+pytz==2026.4
+six==1.17.0
+tantivy==0.26.2
+tzlocal==5.4.4
