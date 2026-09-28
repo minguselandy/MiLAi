@@ -1,7 +1,7 @@
 # WP0：依赖、源码与检查对应
 
 范围为[后续改进计划](MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md)的C0工程验证。
-状态：**IN_PROGRESS，C0首轮远端CI失败，正修复本地历史资产依赖。** 不涉及Host提示、实验算法、模型部署或Product行为。
+状态：**G0 PASSED，首轮失败保留；修复后Fast与Full全部必需门禁通过。** 不涉及Host提示、实验算法、模型部署或Product行为。
 实际Goal继续执行本计划；按用户最新要求，在当前任务结束后暂停Goal、发布总体实验报告。
 [机器结果清单](../data/manifests/next-improvement-wp0-verification-20260927.json)明确分开已完成检查与待执行项。
 
@@ -85,7 +85,8 @@ U/maintenance/A、解析错误、事件角色及兼容导出保持原设计。�
 
 全Ruff、core/foundation/external Mypy、两个Lab边界、1728项Archive校验、矩阵检查、
 工作流YAML解析均通过。文档字节冻结后执行最终wheel/sdist构建，结果与hash由发布回执单列，
-避免将sdist自身hash写回其包含的文档产生循环。当前尚待新提交的实际fast与full composition结果。
+避免将sdist自身hash写回其包含的文档产生循环。首提交报告冻结时尚待实际fast与full composition结果；
+随后取得的失败与修复后结果见下文，不将早期待执行状态作为当前结论。
 全局ignore_missing_imports、仅扩大exclude、整文件importorskip和必需job跳过均不作为通过。
 
 ## 成本、发布与回滚
@@ -133,8 +134,33 @@ checker核对标记、参数化后的数量及工作流命令一致性。
 新增七个历史node在原资产环境为7 passed；collect-only核实全部11个历史node。
 目标Ruff、checker Mypy、matrix及diff-check通过。此前原四项历史检查仍保留，不为发布重跑。
 进一步用`unshare`子进程挂载namespace将MERIT目录绑定为空目录，父环境与原文件保持不变；
-该条件下的一次public core验证在本报告修订冻结时仍进行中，修复后远端CI也待实际结果。
-不将这些待执行/运行中的检查写成通过，不重复此前同环境全量测试或本地构建。
+该条件下的一次public core验证在ebf7878发布前的文档冻结时仍进行中，当时修复后远端CI也待执行。
+该次冻结没有把待执行/运行中的检查写成通过；下节补实际结果，没有重复此前同环境全量测试或本地构建。
+
+### 修复后的实际检查
+
+修复已由Luna发布为`ebf7878fc34bef6f72723ce22e445e5bf712d4f3`，仍为PR52独立C0。
+[Fast36325329534](https://github.com/minguselandy/MiLAi/actions/runs/36325329534)整体gate成功，
+core实际为5043 passed/142 skipped/14 deselected（5199 collected），314.92秒；
+foundation分段合计145 passed/1 deselected，external成功。
+[Full36325329524](https://github.com/minguselandy/MiLAi/actions/runs/36325329524)的core同样为
+5043/142/14，512.57秒；1728项Archive验证及wheel/sdist构建通过，foundation145/1、external通过。
+2026-09-27 14:54 UTC核实：presentation-v2-positive job108636908391与
+最终composition gate108643022708均已成功，修复后Full全部21个job成功，G0关闭。
+
+GitHub实际使用`refs/remotes/pull/52/merge` checkout，commit为
+`516f13aa330625440d98fd53a2bb5b282cffdab7`，将PR head ebf7878组合到main 9515017；
+这项检查不等于PR已经合并。main和原PR51均保持不变。
+
+本地隔离MERIT的完整core为5166 passed/19 skipped/14 deselected，739.71秒；
+子进程退出成功，父namespace与原资产未变。14项deselect为4 regression＋10 local_artifacts；
+foundation中另有1项local_artifacts，因此历史资产总数11。不能误分成7＋7。
+远端比本地多123项skip，原因是历史Host tokenizer、V0222 CPU/presentation/reference、R04等
+外部制品不可用；142项的24组文件/行号/原因已经完整写入机器结果清单。
+这些已声明跳过不算通过，也没有下载历史大模型来凑公共CI数量。
+
+旧64741a6的回放在首轮Full中已通过，但其core/foundation仍失败，整轮仍不能改写为成功。
+修复后的新Full已独立取得全部成功；检查记录保留每个source和环境，不拼接两轮成功部分。
 
 本轮真实generation/embedding调用为0；模拟HTTP测试不计为真实模型请求。
 连续实验账本仍为2768次生成、3420333 generation tokens、18746 embedding tokens；

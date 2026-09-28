@@ -1,6 +1,6 @@
 {
   "kind": "MILAI_NEXT_IMPROVEMENT_WP0_VERIFICATION_V1",
-  "status": "IN_PROGRESS_INITIAL_REMOTE_CORE_AND_FOUNDATION_FAILED_EXTERNAL_PASSED",
+  "status": "G0_PASSED_WITH_DECLARED_HISTORICAL_ASSET_SKIPS",
   "base_main": "9515017a5dfaba6b6e306fa778fd20f4383b6e35",
   "baseline_pr51_head": "055a0769c1ce75d128d6459ee25773587d9003ae",
   "original_plan_sha256": "e407a8ac577b2fb184b6e4386efb79536bcf75007252c8006e96eb296fa3cbbb",
@@ -59,13 +59,15 @@
       "deselection_reasons": {
         "local_private_artifacts": 4,
         "historical_regression": 4
-      }
+      },
+      "evidence_commit": "64741a6475fbc30ccabeffd3ba782de9763d0d98"
     },
     "foundation": {
       "status": "PASS",
       "passed": 144,
       "skipped": 0,
-      "log_sha256": "619a5fc0168cd953059949ee05281f334442aa18a097fc14e9511fc3c2f6a338"
+      "log_sha256": "619a5fc0168cd953059949ee05281f334442aa18a097fc14e9511fc3c2f6a338",
+      "evidence_commit": "64741a6475fbc30ccabeffd3ba782de9763d0d98"
     },
     "external": {
       "status": "PASS",
@@ -78,7 +80,8 @@
       "passed": 4,
       "deselected": 1,
       "public_ci": "NOT_RUN_PRIVATE_ASSETS_EXPLICITLY_DESELECTED",
-      "log_sha256": "25b570071a850f74ceb0dd446e5eea3ce07ab8adaafdf5b5af820f449341b43b"
+      "log_sha256": "25b570071a850f74ceb0dd446e5eea3ce07ab8adaafdf5b5af820f449341b43b",
+      "evidence_commit": "64741a6475fbc30ccabeffd3ba782de9763d0d98"
     },
     "build": {
       "status": "FINAL_BUILD_AFTER_REPORT_BYTE_FREEZE",
@@ -229,7 +232,7 @@
     }
   ],
   "followup_asset_dependency_repair": {
-    "status": "TARGETED_CHECKS_PASSED_ISOLATED_CORE_AND_NEW_REMOTE_CI_PENDING",
+    "status": "G0_PASSED_WITH_DECLARED_HISTORICAL_ASSET_SKIPS",
     "runtime_changed": false,
     "historical_manifests_changed": false,
     "local_artifact_collected_nodes": 11,
@@ -248,10 +251,330 @@
     "synthetic_source_is_official_merit": false,
     "target_static_and_matrix": "PASS",
     "isolated_core": {
-      "status": "IN_PROGRESS",
-      "isolation": "child user/mount namespace binds local MERIT directory to empty temporary directory; parent unchanged"
+      "status": "PASS_WITH_DECLARED_SKIPS",
+      "passed": 5166,
+      "skipped": 19,
+      "deselected": 14,
+      "collected": 5199,
+      "seconds": 739.71,
+      "deselection_reasons": {
+        "regression": 4,
+        "local_artifacts": 10
+      },
+      "log_sha256": "a5e3735bda8aad00cbab94b69c361b8f93c71c03a34adb10b7f10b8e2dc3e584"
     },
-    "remote_repair_ci": "PENDING",
+    "remote_repair_ci": {
+      "commit": "ebf7878fc34bef6f72723ce22e445e5bf712d4f3",
+      "pr": 52,
+      "fast_run": 36325329534,
+      "fast_gate": "SUCCESS",
+      "core": {
+        "passed": 5043,
+        "skipped": 142,
+        "deselected": 14,
+        "collected": 5199,
+        "seconds": 314.92,
+        "skip_owners": [
+          {
+            "count": 1,
+            "location": "tests/unit/test_contextual_capacity.py:48",
+            "reason": "Pinned local Host tokenizer is unavailable"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_contextual_capacity.py:79",
+            "reason": "Pinned local Host tokenizer is unavailable"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_contextual_capacity.py:142",
+            "reason": "Pinned local Host tokenizer is unavailable"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_contextual_capacity.py:177",
+            "reason": "Pinned local Host tokenizer is unavailable"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_contextual_capacity.py:223",
+            "reason": "Pinned local Host tokenizer is unavailable"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_run_v0224_bundle_reference_slice_v2.py:517",
+            "reason": "external V0222 scoped CPU evidence is not part of the Git checkout"
+          },
+          {
+            "count": 2,
+            "location": "tests/unit/test_run_v0224_bundle_reference_slice_v2.py:534",
+            "reason": "external V0222 scoped CPU evidence is not part of the Git checkout"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0214_sdk_host.py:37",
+            "reason": "optional Host SDK wheel"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0222_boundary_preparation.py:48",
+            "reason": "external historical V0222 evidence is not part of the Git checkout"
+          },
+          {
+            "count": 96,
+            "location": "tests/unit/test_v0222_presentation_contract.py:244",
+            "reason": "external frozen V0222 presentation references are not part of the Git checkout"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0222_presentation_preparation.py:31",
+            "reason": "external historical V0222 preparation evidence is not part of the Git checkout"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0222_presentation_preparation_v2.py:35",
+            "reason": "external historical V0222 presentation evidence is not part of the Git checkout"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0222_presentation_references.py:61",
+            "reason": "external frozen V0222 presentation references are not part of the Git checkout"
+          },
+          {
+            "count": 5,
+            "location": "tests/unit/test_v0222_presentation_references.py:94",
+            "reason": "external frozen V0222 presentation references are not part of the Git checkout"
+          },
+          {
+            "count": 5,
+            "location": "tests/unit/test_v0222_presentation_references.py:107",
+            "reason": "external frozen V0222 presentation references are not part of the Git checkout"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0222_presentation_references.py:136",
+            "reason": "external frozen V0222 presentation references are not part of the Git checkout"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0222_presentation_seal.py:116",
+            "reason": "external historical V0222 presentation evidence is not part of the Git checkout"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0222_scoped_cpu_preparation.py:33",
+            "reason": "external historical V0222 presentation evidence is not part of the Git checkout"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0222_string_contract.py:309",
+            "reason": "Already-exposed reference evidence is external to Git"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_v0224_verified_digest_workpoint.py:203",
+            "reason": "external R04 evidence is not part of the Git checkout"
+          },
+          {
+            "count": 6,
+            "location": "tests/unit/test_workspace_continuation.py:26",
+            "reason": "external V0213 tokenizer evidence is not part of the Git checkout"
+          },
+          {
+            "count": 1,
+            "location": "tests/unit/test_workspace_continuation.py:220",
+            "reason": "external tokenizer/model materials are not part of the Git checkout"
+          },
+          {
+            "count": 5,
+            "location": "tests/unit/test_workspace_handoff_ablation.py:70",
+            "reason": "external V0213 tokenizer evidence is not part of the Git checkout"
+          },
+          {
+            "count": 6,
+            "location": "tests/unit/test_workspace_task_a.py:68",
+            "reason": "external V0213 tokenizer evidence is not part of the Git checkout"
+          }
+        ],
+        "log_sha256": "3a1f6185190bdcef29b60948d66765aabbd3b07ed11f245e7a178a44957a5173"
+      },
+      "foundation": {
+        "passed": 145,
+        "skipped": 0,
+        "deselected": 1,
+        "full_job": 108636908205,
+        "fast_job": 108636943851
+      },
+      "external": {
+        "fast_job": 108636943869,
+        "full_job": 108636908258,
+        "status": "SUCCESS"
+      },
+      "full_run": 36325329524,
+      "full_status": "SUCCESS",
+      "local_isolated_core": {
+        "status": "PASS_WITH_DECLARED_SKIPS",
+        "passed": 5166,
+        "skipped": 19,
+        "deselected": 14,
+        "collected": 5199,
+        "seconds": 739.71,
+        "deselection_reasons": {
+          "regression": 4,
+          "local_artifacts": 10
+        },
+        "log_sha256": "a5e3735bda8aad00cbab94b69c361b8f93c71c03a34adb10b7f10b8e2dc3e584"
+      },
+      "experiment_generation_and_embedding_calls": 0,
+      "full_core": {
+        "job_id": 108636908169,
+        "status": "SUCCESS",
+        "log_sha256": "65553330070225ce9d3b36ddb78a4e21e105e2363f4577a5d78b50c33524c60b",
+        "passed": 5043,
+        "skipped": 142,
+        "deselected": 14,
+        "seconds": 512.57,
+        "archive_files": 1728,
+        "distribution_build": "SUCCESS"
+      },
+      "ci_checkout": {
+        "pr_head": "ebf7878fc34bef6f72723ce22e445e5bf712d4f3",
+        "base_main": "9515017a5dfaba6b6e306fa778fd20f4383b6e35",
+        "tested_merge_commit": "516f13aa330625440d98fd53a2bb5b282cffdab7",
+        "source": "actual fast checkout log; refs/remotes/pull/52/merge"
+      },
+      "full_composition_job": 108643022708,
+      "full_positive_replay_job": 108636908391,
+      "final_verification_utc": "2026-09-27 14:54:49 UTC",
+      "full_jobs": [
+        {
+          "id": 108636886699,
+          "name": "Fail-fast source boundaries",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908166,
+          "name": "Product Runtime and PostgreSQL",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908169,
+          "name": "Lab active package and study boundary",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908205,
+          "name": "Lab LangMem foundation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908212,
+          "name": "Lab LangMem provenance B1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908213,
+          "name": "Lab sparse Decision Basis M1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908219,
+          "name": "Product integration packages (mcp)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908238,
+          "name": "Product integration packages (openworker-mcp)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908240,
+          "name": "Product integration packages (hooks)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908248,
+          "name": "Product integration packages (python-client)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908258,
+          "name": "Lab locked external adapter",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908263,
+          "name": "Archive index and reorganization evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908291,
+          "name": "Product identity manifest",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908367,
+          "name": "Lab historical replay (presentation-v2-corruption)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908369,
+          "name": "Product integration packages (langgraph)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908372,
+          "name": "Product integration packages (autogen)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908391,
+          "name": "Lab historical replay (presentation-v2-positive)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908395,
+          "name": "Lab historical replay (presentation-v2-wrong-intent)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636908399,
+          "name": "Lab historical replay (presentation-v1)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108636932106,
+          "name": "Current implementation conformance receipt",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 108643022708,
+          "name": "Product/Lab/Archive composition gate",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
     "local_rebuild": "NOT_REQUIRED_TESTS_AND_CI_ONLY; earlier distribution hashes belong to 64741a6",
     "isolated_public_freshness": {
       "passed": 23,

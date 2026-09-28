@@ -46,6 +46,7 @@ packages = ["src/milai_lab"]
 [tool.hatch.build.targets.sdist]
 include = [
   "/AGENTS.md",
+  "/AGENTS_HISTORY_PRE_WP1_20260927.md",
   "/README.md",
   "/configs",
   "/data/diagnostics",

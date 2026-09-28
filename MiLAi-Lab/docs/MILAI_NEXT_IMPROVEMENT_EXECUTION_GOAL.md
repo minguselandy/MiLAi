@@ -49,8 +49,8 @@ PR合并仍须正常检查和审阅闭环，当前不自动merge；先完成可�
 
 | 工作包/门槛 | 必需完成及权威证据 | 当前状态 |
 | --- | --- | --- |
-| WP0/C0/G0 | 同命令main/PR隔离复现；静态源码—依赖—测试归属无遗漏；core/foundation/external真实依赖；锁定pytest运行71纯协议及原集成、实际收集数；全Ruff、适用Mypy、边界/归档、最终wheel/sdist；真实CI | IN_PROGRESS |
-| WP1/C1/X0 | 保留protocol/controller分工；CLI职责归包内且单实现；活动AGENTS与历史分开且原内容可恢复；完整请求/顺序/U维护A/来源/pending/容量/回执/trace等价，规范化项明确 | NOT_DONE |
+| WP0/C0/G0 | 同命令main/PR隔离复现；静态源码—依赖—测试归属无遗漏；core/foundation/external真实依赖；锁定pytest运行71纯协议及原集成、实际收集数；全Ruff、适用Mypy、边界/归档、最终wheel/sdist；真实CI | G0_PASSED（声明的历史资产skip不算通过） |
+| WP1/C1/X0 | 保留protocol/controller分工；CLI职责归包内且单实现；活动AGENTS与历史分开且原内容可恢复；完整请求/顺序/U维护A/来源/pending/容量/回执/trace等价，规范化项明确 | IN_PROGRESS |
 | WP2/C2/G1 | 锁定上游实际集成复现未知合法UUID被upsert；薄严格CRUD同步/异步一致；已有/缺失/错误namespace/message UUID/空删除/真实删除/Store异常/无副作用回执；不强制每次额外Host READ，不声称CAS | NOT_DONE |
 | WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | NOT_RUN |
 | WP4/C5/X3/X4/G2 | 明确A≠U且U空可CREATE；保留原问题实体、全读/普通检索/同State查询增强/可关selector；固定同bank与前态比较all/U/U=A/oracle；对真正使用引用做有限失效，不引全库图 | NOT_DONE |
@@ -107,7 +107,26 @@ foundation144 passed/0 skipped，external4 passed/0 skipped，本地历史MERIT4
 不把跳过或本地通过写成远端通过。锁定NLP资产准备只是既有原生Mem0集成的检查前置，
 不启动第二LLM下载或部署。
 
-### 后续定向诊断准备（未冻结、未运行）
+### C0修复终态与C1工作记录
+
+修复提交`ebf7878fc34bef6f72723ce22e445e5bf712d4f3`的Fast36325329534已通过；
+远端core为5043 passed/142 skipped/14 deselected，foundation145 passed/1 deselected，
+external成功且原生mock SDK测试真实执行。Full36325329524的core和分发构建均通过，
+2026-09-27 14:54 UTC已核实historical presentation-v2-positive和最终composition gate
+全部成功，Full的21个job成功，G0关闭。
+新CI实际checkout为merge commit `516f13aa330625440d98fd53a2bb5b282cffdab7`，
+将该PR head组合到main `9515017`；这不是已经合并main。
+
+隔离子进程隐藏MERIT后的本地core为5166 passed/19 skipped/14 deselected；
+core deselect精确为4 regression＋10 local_artifacts，foundation另有1项local_artifacts。
+远端142项skip来自缺失的历史资产，逐项记录，不能与本地19项混用或称全部5199项通过。
+直接相关门禁完成后先在独立C1分支做可逆结构工作；随后完整G0也已通过。
+这段工程验证期间没有启动行为实验。
+当前本地组合head `5dc024d3b277915709556af4e3eee4e1e64f06f1`带`-x`保留PR51两原提交，
+main、PR51、C0原分支不变。Root已完整保存旧AGENTS并拆出活动指南，Sol已完成薄runner整理与三组mock差分。
+准确身份、原字节恢复路径和待验证项见[WP1记录](MILAI_NEXT_IMPROVEMENT_WP1_REVIEW_20260927.md)。
+
+### 历史C0发布及后续定向诊断准备（研究仍未冻结、未运行）
 
 C0已作为[PR52](https://github.com/minguselandy/MiLAi/pull/52)发布，head
 `64741a6475fbc30ccabeffd3ba782de9763d0d98`，最终本地分发构建通过。

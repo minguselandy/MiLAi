@@ -2256,9 +2256,9 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
             "id": "source", "kind": "user", "content": "hello"})
         return {"status": "TERMINAL"}
 
-    monkeypatch.setattr(entry, "open_application_runtime", runtime)
-    monkeypatch.setattr(entry, "VLLMClient", FakeClient)
-    monkeypatch.setattr(entry, "run_phase", phase)
+    monkeypatch.setattr(entry.runner, "open_application_runtime", runtime)
+    monkeypatch.setattr(entry.runner, "VLLMClient", FakeClient)
+    monkeypatch.setattr(entry.runner, "run_phase", phase)
     assert entry.run(args)["status"] == "TERMINAL"
     expected_limits = ((1, 16000, 16000) if arm == "global_note_sources" else
                        (4, 4000, 16000) if arm in {
@@ -2279,6 +2279,11 @@ def test_cli_local_state_path_reuses_application_runner_without_ser(
                       expected_limits]
     manifest = json.loads((root / "run_manifest.json").read_text())
     assert manifest["status"] == "TERMINAL"
+    source_hashes = manifest["identity"]["source_sha256"]
+    assert set(source_hashes) == set(entry.runner._source_paths(entry.LAB))
+    for path in ("src/milai_lab/runners/local_state_attention.py",
+                 "tools/run_local_state_attention.py"):
+        assert source_hashes[path] == entry.runner._sha(entry.LAB / path)
     assert manifest["identity"]["rubric_read_by_runner"] is False
     assert manifest["identity"]["read_policy"] == read_policy
     assert manifest["identity"]["representation"] == (
@@ -2369,8 +2374,8 @@ def test_cli_full_history_uses_no_state_controller_and_requires_opt_in(
         called.extend([kwargs["history_mode"], kwargs["history_page_max_bytes"]])
         return {"status": "TERMINAL"}
 
-    monkeypatch.setattr(entry, "open_application_runtime", runtime)
-    monkeypatch.setattr(entry, "run_phase", phase)
+    monkeypatch.setattr(entry.runner, "open_application_runtime", runtime)
+    monkeypatch.setattr(entry.runner, "run_phase", phase)
     assert entry.run(args)["status"] == "TERMINAL"
     assert called == [False, "full", 16384]
     manifest = json.loads((root / "run_manifest.json").read_text())
@@ -2445,9 +2450,9 @@ def test_cli_window_summary_binds_config_and_uses_shared_control_budget(
                       summary.summary_content_max_chars))
         return {"status": "TERMINAL"}
 
-    monkeypatch.setattr(entry, "open_application_runtime", runtime)
-    monkeypatch.setattr(entry, "VLLMClient", FakeClient)
-    monkeypatch.setattr(entry, "run_phase", phase)
+    monkeypatch.setattr(entry.runner, "open_application_runtime", runtime)
+    monkeypatch.setattr(entry.runner, "VLLMClient", FakeClient)
+    monkeypatch.setattr(entry.runner, "run_phase", phase)
     assert entry.run(args)["status"] == "TERMINAL"
     assert calls == [("projection", False), ("client", 2048, budget, capacity),
                      ("phase", "window", 16384, 13, 2, 16000)]
