@@ -1,0 +1,116 @@
+{
+  "kind": "NEXT_IMPROVEMENT_C3A_CHECKS_RECEIPT",
+  "base_head": "93cb3e9cb405c97d52bc807b54f532b2a5b489f3",
+  "source_frozen": true,
+  "changed_source_and_test_sha256": {
+    "src/milai_lab/methods/local_state_attention/writers.py": "5be90aa2017bb4a5eb5ec18dae65b92fec56df5f144e2ef1839041efa317fb37",
+    "src/milai_lab/methods/local_state_attention/bank.py": "4833b299beaf7295a851653fd53a087058dea5e372d80049624a8bfbacde50b7",
+    "src/milai_lab/methods/local_state_attention/controller.py": "e3b9d2b605c09030b7dd76d836d9f228375580a72f2f4efb747df0eb2be77643",
+    "src/milai_lab/baselines/langmem_agent.py": "2be2518a9c65c6f0d1ec27f3e5f0dbbbba0273039a565682a54ad08026c29c14",
+    "src/milai_lab/baselines/langmem_strict_tools.py": "a3c63a19bf90443207cacf331cc2ca1069661f0bb1a8f20682fcf79ad36df02c",
+    "tests/unit/test_local_state_attention.py": "5a30b538e1c78435d2c8820d5bf34ff6eb050c00c595c72059e5978971f5111b"
+  },
+  "checks_in_execution_order": [
+    {
+      "stage": "earlier_adjacent_regression",
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_local_state_attention.py tests/unit/test_langmem_foundation.py tests/unit/test_langmem_application.py",
+      "result": "108 passed, 44 warnings",
+      "timing": "Before later writer nonce, cross-process replay, invalid-evidence test, and ack_events changes; subsequent targeted tests cover those changes."
+    },
+    {
+      "stage": "intermediate_d0_and_writer_target",
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_local_state_attention.py -k 'writer_ or retry_identity_uses_exact_event_set or partial_retry_marks_only_the_state_actually_written or legacy_focus_resolves_replayed_create_after_partial_retry'",
+      "result": "9 passed, 69 deselected",
+      "timing": "After nonce, exact-marker, and cross-process replay changes; before final invalid-evidence assertion and ack_events parameter."
+    },
+    {
+      "stage": "final_writer_target",
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_local_state_attention.py -k 'writer_'",
+      "result": "7 passed, 72 deselected, 2 warnings",
+      "timing": "After all source and test changes, including deferred ack for successful READ and write."
+    },
+    {
+      "stage": "final_target_ruff",
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m ruff check src/milai_lab/methods/local_state_attention/writers.py tests/unit/test_local_state_attention.py",
+      "result": "All checks passed",
+      "timing": "After final ack_events change; the remaining four changed source files passed the earlier five-source Ruff check and were unchanged thereafter."
+    },
+    {
+      "stage": "final_target_mypy",
+      "command": "artifacts/next-improvement/envs/foundation/bin/python -m mypy --follow-imports=silent src/milai_lab/methods/local_state_attention/writers.py",
+      "result": "Success: no issues found in 1 source file",
+      "timing": "After final ack_events change; the other four changed sources passed the earlier five-source Mypy check and were unchanged thereafter."
+    },
+    {
+      "stage": "final_whitespace",
+      "command": "git diff --check",
+      "result": "exit 0, no output",
+      "timing": "After final changes."
+    }
+  ],
+  "other_checks_previously_passed": [
+    "Five changed source files plus LSA test: target Ruff passed before final ack_events change.",
+    "Five changed source files: target Mypy passed before final ack_events change.",
+    "Verification matrix passed: active_sources=147, foundation_explicit=39.",
+    "milai-lab-check-boundary and milai-lab-check-tools-boundary both passed.",
+    "New writers.py ends with exactly one newline; final file length 10190 bytes."
+  ],
+  "resolved_intermediate_failures": [
+    "Initial new-file Ruff import-order failure fixed before passing checks.",
+    "Initial Mypy StateScope casts/row-reuse errors fixed before passing checks.",
+    "An unqualified python executable was absent for the EOF check; the same check passed using the locked foundation Python."
+  ],
+  "unresolved_failures": [],
+  "build": "NOT_RUN: no packaging configuration or CLI entry changed in C3a.",
+  "real_http_calls": 0,
+  "real_embedding_calls": 0,
+  "limitations": [
+    "propose_writes is a single proposal from observations and State; it does not carry ordinary memory bodies or implement a READ/SEARCH-then-repropose loop.",
+    "Host ToolNode calls use the same tool functions but do not carry a boundary batch identity or pending-event acknowledgement context.",
+    "Memory and State DELETE operations are not exactly-once across a crash; two stores have no transaction."
+  ],
+  "shared_postgres_calls": 0,
+  "local_test_backends": "MockTransport, InMemoryStore and actual local SQLite checkpoints/synthetic world in affected tests",
+  "status": "CORE_OPTIONAL_IMPORT_REPAIR_LOCAL_PASSED_REMOTE_PENDING",
+  "receipt_sha256": "bf1cd864ea80a3fe7809e6eb1afa20d0e8f8759db56b2bf847368ca55ff93738",
+  "initial_publication": {
+    "commit": "bd5b4acb50a37b84cdcf87b4fcfab7b4b699faa5",
+    "pr": 55,
+    "run": 36331279476,
+    "tested_merge": "22a4fc671c57a45df50e3fae6e7725a17798c04f",
+    "core_job": 108653618424,
+    "core": "failure before 71 core protocol tests could collect",
+    "foundation": "success",
+    "external": "success",
+    "final_gate": 108653861882,
+    "final_gate_result": "failure",
+    "error": "controller.py:16 top-level langchain_core.tools BaseTool import; ModuleNotFoundError in optional-dependency-free core",
+    "log_sha256": "06e624509efe95d953970ce7bb9ce6f81f0d37f2ba9712cbe58d2f30d4b6708c"
+  },
+  "core_import_repair": {
+    "source_sha256": {
+      "src/milai_lab/methods/local_state_attention/controller.py": "fb94a4710cd2f6f6a1142377b323c0424ecf31fde62347e5270d431701b148d0"
+    },
+    "change": "BaseTool is TYPE_CHECKING-only; convert_to_openai_tool imports only in propose_writes; no protocol/default change",
+    "checks": [
+      {
+        "command": ".venv/bin/python -m pytest -q tests/unit/test_lsa_controller_contract.py",
+        "environment": "clean core",
+        "result": "71 passed"
+      },
+      {
+        "command": "artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_local_state_attention.py -k writer_",
+        "environment": "foundation",
+        "result": "7 passed, 72 deselected"
+      },
+      {
+        "name": "target controller Ruff/Mypy, matrix, diff",
+        "result": "pass; 147 active, 22 core direct, 39 foundation explicit"
+      }
+    ],
+    "retained_intermediate_failure": "TYPE_CHECKING import grouping Ruff warning fixed before final pass",
+    "real_model_calls": 0,
+    "extra_local_build": false,
+    "remote_result": "PENDING"
+  }
+}

@@ -8,7 +8,7 @@ from collections.abc import Iterator, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Literal, cast
+from typing import TYPE_CHECKING, Any, Literal, cast
 
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 from langchain_core.embeddings import Embeddings
@@ -41,6 +41,9 @@ from milai_lab.methods.local_state_attention.integration import (
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel
+
+if TYPE_CHECKING:
+    from milai_lab.methods.local_state_attention.writers import WriterTools
 
 RECIPE_ID = "langmem-hotpath-react-json-action-v1"
 SYSTEM_PROMPT = (
@@ -125,14 +128,24 @@ def build_agent(
     full_history: bool = False,
     history_summary_controller: HistorySummaryController | None = None,
     memory_contract: Literal["native", "strict"] = "native",
+    writer_tools: WriterTools | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
         raise ValueError("LANGMEM_MEMORY_CONTRACT_UNKNOWN")
     if memory_contract == "strict" and memory_tools is not None:
         raise ValueError("LANGMEM_STRICT_CUSTOM_MEMORY_TOOLS_CONFLICT")
+    if writer_tools is not None and (
+        memory_contract != "strict" or memory_tools is not None
+        or writer_tools.memory_namespace != MEMORY_NAMESPACE
+        or writer_tools.bank.store is not store
+    ):
+        raise ValueError("LANGMEM_WRITER_TOOLSET_CONFLICT")
     selected_memory_tools: Sequence[BaseTool]
-    if memory_tools is None:
+    if writer_tools is not None:
+        owned_manage = writer_tools.manage_memory
+        selected_memory_tools = (owned_manage, writer_tools.search_memory)
+    elif memory_tools is None:
         owned_manage = (create_manage_memory_tool(namespace=MEMORY_NAMESPACE)
                         if memory_contract == "native" else
                         create_strict_manage_memory_tool(namespace=MEMORY_NAMESPACE))
@@ -159,7 +172,9 @@ def build_agent(
         raise ValueError("HISTORY_ACCESS_MISSING")
     if history_summary_controller is not None and history_access is None:
         raise ValueError("HISTORY_ACCESS_MISSING")
-    tools = [*selected_memory_tools, *history_tools, *business_tools]
+    tools = [*selected_memory_tools, *history_tools,
+             *([writer_tools.manage_state, writer_tools.read_record]
+               if writer_tools is not None else []), *business_tools]
     parameter_schemas = {
         tool.name: convert_to_openai_tool(tool)["function"]["parameters"]
         for tool in tools

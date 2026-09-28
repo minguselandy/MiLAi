@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
-from collections.abc import Callable, Iterator
+import uuid
+from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
 from contextvars import ContextVar
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import httpx
+from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.protocol import (
@@ -30,7 +33,10 @@ from milai_lab.methods.local_state_attention.protocol import (
 )
 
 if TYPE_CHECKING:
+    from langchain_core.tools import BaseTool
+
     from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
+    from milai_lab.methods.local_state_attention.writers import WriterProposalContext
     from milai_lab.providers.contextual_vllm import VLLMClient
 
 REQUEST_ROLE: ContextVar[str] = ContextVar("lsa_request_role", default="task_host")
@@ -172,7 +178,8 @@ class LocalStateController:
         return True
 
     def _stage_call(self, stage: str, message_key: str, prompt: str,
-                    payload: dict[str, Any], schema: dict[str, Any]) -> dict[str, Any]:
+                    payload: dict[str, Any], schema: dict[str, Any],
+                    receipt_meta: dict[str, Any] | None = None) -> dict[str, Any]:
         if not self._reserve_call(message_key):
             raise ControlResponseError("LSA_CONTROL_CAPACITY")
         if self.emit is not None:
@@ -191,9 +198,78 @@ class LocalStateController:
                     response_format={"type": "json_schema", "json_schema": {
                         "name": "local_state_" + stage + "_v1", "strict": True,
                         "schema": schema}})
+            if receipt_meta is not None:
+                receipt_meta["generation_id"] = receipt.get("id")
             return self._parse_json(receipt)
         finally:
             CONTROL_STAGE.reset(token)
+
+    def propose_writes(self, context: WriterProposalContext,
+                       allowed_tools: Sequence[BaseTool]) -> dict[str, Any]:
+        """Generate a tool proposal from actual scoped observations; execute nothing."""
+        from langchain_core.utils.function_calling import convert_to_openai_tool
+
+        if not context.message_key or not allowed_tools:
+            raise ValueError("LSA_WRITER_PROPOSAL_CONTEXT_INVALID")
+        catalog = [convert_to_openai_tool(tool)["function"] for tool in allowed_tools]
+        names = [entry["name"] for entry in catalog]
+        if len(names) != len(set(names)):
+            raise ValueError("LSA_WRITER_DUPLICATE_TOOL")
+        pending = self.bank.pending(context.scope)
+        if len(pending) > self.max_pending_batch:
+            raise ControlResponseError("LSA_WRITER_PENDING_BATCH_LIMIT")
+        events = self.bank.events(context.scope)
+        states = self.bank.states(context.scope)
+        payload = {
+            "current_task": context.current_task,
+            "new_observations": [self._event_view(row) for row in pending],
+            "states": [state_view(row) for row in states],
+            "source_ids_available": [row["id"] for row in events],
+        }
+        branches = [{"type": "object", "properties": {
+            "name": {"const": entry["name"]},
+            "arguments": entry["parameters"]},
+            "required": ["name", "arguments"], "additionalProperties": False}
+            for entry in catalog]
+        schema = {"type": "object", "properties": {
+            "calls": {"type": "array", "items": {"oneOf": branches}}},
+            "required": ["calls"], "additionalProperties": False}
+        metadata: dict[str, Any] = {}
+        try:
+            response = self._stage_call(
+                "writer_proposal", context.message_key,
+                "Propose only calls justified by the provided observations and scoped records. "
+                "Return calls in their intended order; an empty calls array is valid. "
+                "A proposal is not an executed result. Available tools:\n"
+                + json.dumps(catalog, ensure_ascii=False),
+                payload, schema, receipt_meta=metadata)
+            validate(response, schema)
+            generation_id = metadata.get("generation_id")
+            if not isinstance(generation_id, str) or not generation_id:
+                raise ControlResponseError("LSA_WRITER_GENERATION_ID_MISSING")
+        except (ControlResponseError, httpx.TimeoutException, ValidationError) as error:
+            reason = ("LSA_WRITER_PROPOSAL_INVALID" if isinstance(error, ValidationError)
+                      else self._control_reason(error))
+            if self.emit is not None:
+                self.emit({"event": "lsa_control_degraded", "stage": "writer_proposal",
+                           "reason": reason, "user_id": context.scope.user_id,
+                           "pending": len(pending)})
+            if isinstance(error, ValidationError):
+                raise ControlResponseError(reason) from error
+            raise
+        # The caller must reuse this returned identity when replaying the same proposal.
+        batch_id = hashlib.sha256(json.dumps(
+            ["lsa_writer_batch_v1", context.message_key, generation_id,
+             uuid.uuid4().hex],
+            ensure_ascii=False).encode()).hexdigest()
+        if self.emit is not None:
+            self.emit({"event": "lsa_writer_proposal_result", "stage": "writer_proposal",
+                       "message_key": context.message_key,
+                       "generation_id": generation_id, "batch_id": batch_id,
+                       "call_count": len(response["calls"])})
+        return {"batch_id": batch_id, "generation_id": generation_id,
+                "calls": response["calls"],
+                "event_ids": [row["id"] for row in pending]}
 
     def _maintenance_payload(self, pending: list[dict[str, Any]],
                              states: list[dict[str, Any]],

@@ -51,11 +51,11 @@ PR合并仍须正常检查和审阅闭环，当前不自动merge；先完成可�
 | --- | --- | --- |
 | WP0/C0/G0 | 同命令main/PR隔离复现；静态源码—依赖—测试归属无遗漏；core/foundation/external真实依赖；锁定pytest运行71纯协议及原集成、实际收集数；全Ruff、适用Mypy、边界/归档、最终wheel/sdist；真实CI | G0_PASSED（声明的历史资产skip不算通过） |
 | WP1/C1/X0 | 保留protocol/controller分工；CLI职责归包内且单实现；活动AGENTS与历史分开且原内容可恢复；完整请求/顺序/U维护A/来源/pending/容量/回执/trace等价，规范化项明确 | ACCEPTED；C1本地检查/最终构建与实际Fast已通过 |
-| WP2/C2/G1 | 锁定上游实际集成复现未知合法UUID被upsert；薄严格CRUD同步/异步一致；已有/缺失/错误namespace/message UUID/空删除/真实删除/Store异常/无副作用回执；不强制每次额外Host READ，不声称CAS | LOCAL_ACCEPTED（CRUD工程）；C2远端及在线语义待验证 |
-| WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | NOT_RUN |
+| WP2/C2/G1 | 锁定上游实际集成复现未知合法UUID被upsert；薄严格CRUD同步/异步一致；已有/缺失/错误namespace/message UUID/空删除/真实删除/Store异常/无副作用回执；不强制每次额外Host READ，不声称CAS | ENGINEERING_ACCEPTED；C2实际Fast通过，在线语义另验 |
+| WP3/C3/X1 | 固定表示/前缀/工具能力先比较写入责任；Host主导/边界主导/重叠保持合理CRUD途径；长期约定/临时约束/owner/变化/事件不重复/后续动作与费用；再决定引用化State | C3a本地工程通过，待发布；C3b角色实验NOT_RUN |
 | WP4/C5/X3/X4/G2 | 明确A≠U且U空可CREATE；保留原问题实体、全读/普通检索/同State查询增强/可关selector；固定同bank与前态比较all/U/U=A/oracle；对真正使用引用做有限失效，不引全库图 | NOT_DONE |
 | WP5/C4/X2 | 同粒度整体/普通patch/候选局部维护；明确目标版本/唯一片段，广泛变动可整体；更新与无关保持同时测；D0/真实事件身份/部分成功维护续接保留 | NOT_DONE |
-| WP6/X1 | 用户、真实工具结果、助手提案、可修订State角色清楚且原回执完整；固定正确正文比原标题/源标题/无State，首响应后实际动作；无gold键名规则 | NOT_RUN |
+| WP6/X1 | 用户、真实工具结果、助手提案、可修订State角色清楚且原回执完整；固定正确正文比原标题/源标题/无State，首响应后实际动作；无gold键名规则 | 首响应协议R1已冻结，Root串行执行；实际动作续接待验 |
 | WP7 | 独立语义写入/重复规则/依赖、Host/U/maint/A、材料、Store调用/CPU/wall、任务与维护分别测量；全生命周期Cbuild+Cmaint+ΣCuse及复用摊销；只有实测热点才优化 | NOT_DONE |
 | X5/G3/C6 | 正常可用简洁基线＋独立可切换最小候选；同合法历史/权限/CRUD/可比预算；连续在线真实世界/恢复/复用及全成本；逐例首断点和可执行Go/Pivot/Stop | NOT_RUN |
 | G4（条件后续） | 有有效比较与投入信号后，模板未见/跨模型/强外部对照及局限；无端点/原生scorer不称完成 | NOT_TRIGGERED |
@@ -168,3 +168,26 @@ sdist `db650a7bb4c4d173d2cdc0ce4382dff12745567535decec211875b4fe0a134f4`。
 模型身份混淆与集成upsert两种解释及最小可选严格接口；102项相关检查和必要静态/边界通过，
 C2本地工程验收通过，尚未开始在线语义验证。
 现有服务只读GET核实7860为Qwen3.6-35B-A3B-FP8/65536，7861为bge-m3；没有推理或部署。
+
+### C3a共同能力开始
+
+C2源码与Root检查记录已提交`93cb3e9cb405c97d52bc807b54f532b2a5b489f3`。
+独立C3分支进行[共同能力准备](MILAI_NEXT_IMPROVEMENT_WP3_WRITER_CONTRACT_20260927.md)；
+Astra就State-only controller、两库CRUD能力与D0 slot/ack冲突给出有界建议，采用共同executor
+及薄边界提案入口，保留原State表示与旧controller合同，不全量扩展LR/LRU或创建新journal。
+完整overlap需要两个写阶段，不能把六次生成当三模式各自完整对照。共同能力、角色配方、
+语义输入与执行分别冻结；当前仍为0新增真实调用。
+
+### WP6首响应R1开始
+
+C2 Fast36329556696和最终gate108650321223已通过。Root在独立detached C2 checkout
+冻结[WP6协议](MILAI_NEXT_IMPROVEMENT_WP6_PRESENTATION_20260927.md)，两个已暴露arc、三种材料条件、
+六次首响应按固定顺序串行执行。此前0新增真实调用的记录是当时状态；从本段起新增费用
+以原连续账本和R1 trace为准，不把提案正确当业务成功。C3共同能力仍独立开发。
+
+### C3a冻结与WP6首响应结果
+
+C3a六份源码/测试已停笔冻结，最终7项Writer检查通过，具体时序和限制见WP3合同。
+WP6首响应六次均有已知HTTP usage；正确提案1/6，错误5/6。两个已暴露arc不当六独立样本，
+标题变更未修复，后续六臂均需实际工具与Host续接。费用增量6/7605/0，连续2774/3427938/18746。
+原始输入/rubric/顺序未改；协议说明对partial raw历史信息的误述已有明确更正和原字节快照。
