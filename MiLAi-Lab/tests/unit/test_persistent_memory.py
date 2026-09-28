@@ -323,8 +323,11 @@ def test_v7_profile_is_explicit_and_preserves_old_restrictions(tmp_path: Path) -
             runner._validate(current, "C")
 
 
+@pytest.mark.local_artifacts
 def test_v7_native_actual_template_counts_tools_and_rejects_before_delivery(tmp_path: Path) -> None:
     config = read_json(LAB / "data/diagnostics/development-experiment-v7-e1/native-config.json")
+    if not Path(config["capacity"]["tokenizer_path"]).is_dir():
+        pytest.skip("Pinned local Host tokenizer is unavailable")
     capacity = HostCapacity(config["capacity"])
     store, wires = InMemoryStore(), []
     key = str(uuid.uuid4())

@@ -1,0 +1,173 @@
+{
+  "kind": "MILAI_V7_CI_TOKENIZER_REPAIR_PUBLIC_CHECKS",
+  "status": "LOCAL_CHECKS_PASSED_REMOTE_PENDING",
+  "base_git_sha": "2f30c14c5e7ea82db2b0a962d3636e14de5f2391",
+  "changed_files": [
+    {
+      "path": "tests/unit/test_persistent_memory.py",
+      "sha256": "db9452ab30fa293de7907e005c37c7006440c766ebe5b399063716710dc843bd",
+      "bytes": 57420,
+      "base_sha256": "7f3de98d1c1105cb7455607860eaa3711a2c6179333784e577e52d5655579ae5",
+      "base_bytes": 57261
+    },
+    {
+      "path": "configs/lab-verification-matrix.json",
+      "sha256": "d0374281fea730fffe8c5f3d22972b68f47c8a7990fc80b4498e8492051a9178",
+      "bytes": 4572,
+      "base_sha256": "21e09ef850bc72bdb806c6a11aa13625deec101f345e9a9bb50adff3ca4a0f10",
+      "base_bytes": 4394
+    }
+  ],
+  "checks": [
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "result": "1 passed, 3 warnings in 2.48s; actual pinned tokenizer/template and MockTransport/SQLite",
+      "log": {
+        "path": "artifacts/development-experiment-v7/ci-repair-checks/local-asset-test.log",
+        "sha256": "ccecf2f6ba03f886e7a2af1b6bc20d9a53166deaf253bd2b79a78772ce257fab",
+        "bytes": 1878
+      }
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "artifacts/development-experiment-v7/ci-repair-checks/check_missing_asset.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "result": "Real target raises explicit pytest.skip.Exception before HostCapacity when only its configured tokenizer directory is simulated absent; no asset or frozen config changed. This is a direct branch check, not a fresh pytest skip count.",
+      "log": {
+        "path": "artifacts/development-experiment-v7/ci-repair-checks/missing-asset-check.log",
+        "sha256": "ec9770decc2a109cfddd376f22ec91d74878beae7de259213b7bc1fd7447358e",
+        "bytes": 985
+      }
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "tools/check_verification_matrix.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "result": "158 active sources and 12 marked local asset nodes; exact marker/matrix/workflow mapping passes",
+      "log": {
+        "path": "artifacts/development-experiment-v7/ci-repair-checks/matrix.log",
+        "sha256": "8b510b593e40a8fecf2539f69ca0cf0534e2ed30b2822f363d5b1f3532f8c1f2",
+        "bytes": 261
+      }
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "tests/unit/test_persistent_memory.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "log": {
+        "path": "artifacts/development-experiment-v7/ci-repair-checks/ruff.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "bytes": 19
+      }
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7",
+      "exit_code": 0,
+      "result": "passed",
+      "log": {
+        "path": "artifacts/development-experiment-v7/ci-repair-checks/diff-check.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  ],
+  "first_breakpoint": {
+    "workflow_run": 36422762879,
+    "foundation_job": 108929383613,
+    "node": "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery",
+    "error": "TOKENIZER_PATH_MUST_BE_LOCAL_DIRECTORY",
+    "outcome": "1 failed, 36 passed, 38 warnings in 4.71s",
+    "retained_log": {
+      "path": "artifacts/development-experiment-v7/ci/fast-B-foundation.log",
+      "sha256": "cc32ae435daca92dd5e8f52e3d5a2e05be0cffdc1263134c9b9d837de6f5c349",
+      "bytes": 52956
+    }
+  },
+  "explanations": {
+    "H1": "Confirmed test gate gap: private local tokenizer required without existing conditional skip or local_artifacts ownership.",
+    "H2": "Runtime capacity defect not supported by this failure: failure is before runtime construction, and original assertions pass with locked assets."
+  },
+  "repair": {
+    "node": "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery",
+    "marker": "local_artifacts",
+    "skip_reason": "Pinned local Host tokenizer is unavailable",
+    "skip_condition": "Only configured tokenizer directory is absent. Existing directory still enters unchanged HostCapacity identity/hash/template validation; corruption is not swallowed.",
+    "matrix_collected_nodes_before": 11,
+    "matrix_collected_nodes_after": 12,
+    "fast_expected": "Direct persistent_memory pytest: explicit skip for this node if asset absent; other36 public tests unchanged.",
+    "full_expected": "Existing not local_artifacts expression: exact additional node deselected; public tests unchanged.",
+    "remote_repaired_ci_not_run_by_source_agent": true
+  },
+  "preserved": {
+    "original_p1_receipt": {
+      "path": "artifacts/development-experiment-v7/p1-checks/checks-receipt.json",
+      "sha256": "379229a95fc9c5f92a96134608b501c7082cff09433b2a57dff51eb9dce92b87",
+      "bytes": 35604
+    },
+    "runtime_sources_configs_inputs_and_B_results_changed": false,
+    "no_rerun_of_56_tests_or_131_replay_or_E1": true
+  },
+  "scope": {
+    "real_network_http_calls": 0,
+    "real_embedding_calls": 0,
+    "shared_postgres_calls": 0,
+    "local_test_backends": [
+      "httpx.MockTransport",
+      "InMemoryStore",
+      "actual local SQLite checkpoint",
+      "actual locked local tokenizer/template"
+    ],
+    "downloads": 0,
+    "model_uploads": 0,
+    "builds": 0,
+    "git_mutations": 0,
+    "running_sessions": []
+  },
+  "helper": {
+    "path": "artifacts/development-experiment-v7/ci-repair-checks/check_missing_asset.py",
+    "sha256": "3fde2d1ccc179fba79a7d85eda00c4eb7458d48ceeabe6d50c7e11661442f10b",
+    "bytes": 1798
+  },
+  "remaining_failures": 0,
+  "private_receipt_sha256": "394e8f215d545310b256d673bbf143b196d49b94a3b0fd40c2b7975ddc4ef0c1",
+  "remote_failure_url": "https://github.com/minguselandy/MiLAi/actions/runs/36422762879",
+  "runtime_e1_commit": "2f30c14c5e7ea82db2b0a962d3636e14de5f2391"
+}
