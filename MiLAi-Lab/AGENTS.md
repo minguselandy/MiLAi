@@ -2,17 +2,21 @@
 
 ## Current scope and authority
 
-The latest user Goal explicitly authorizes the full [NEXT_DEVELOPMENT v4 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v4.0.md).
-Follow the [v4 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V4_20260928.md).
-This is new work on the published v3 baseline 44f9291, not a reopening or rewriting of v3 results.
-Preserve the original v4 DRAFT/NOT_STARTED plan bytes; the actual user Goal supplies authorization.
-Implement F0–F7 in separately inspectable steps, then F8 A mechanical checks, B the six exposed
-v3 scripts, and only after A/B pass create and freeze C's 8–12 new scripts. F8 D requires an actual
-selection bottleneck. F9 evaluates the resulting claims; engineering completion is not method stability.
-Root owns docs/data/freezes/real calls/scoring/costs; the existing Sol xhigh owns source and checks;
-Luna high owns Git publication. No new model family, deployment, standing reviewer or Product work.
-Use B0 as the simple baseline, preserve historical C as opt-in, and add no D/E candidate names.
-Do not auto-fill semantic memory, classify facts by sample keywords, or equate provenance with support.
+The user authorized the full [NEXT_DEVELOPMENT v4 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v4.0.md).
+F0–F7 and F8 A are engineered and checked; both exposed B regressions finished at 5/6.
+The sole R2 answer-contract candidate is rejected by its pre-frozen complete regression gate.
+Stop this wording/anchor repair loop. F8 C was not created because A/B did not jointly pass;
+F8 D was not triggered because no actual retrieval bottleneck appeared.
+Follow the [v4 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V4_20260928.md)
+and [F9 overall report](docs/MILAI_NEXT_DEVELOPMENT_V4_OVERALL_EXPERIMENT_REPORT_20260928.md).
+Engineering completion is not method stability: the complete method/research goal is NOT_ACHIEVED,
+and Product remains NO-GO. Preserve the original v4 DRAFT/NOT_STARTED bytes and historical results.
+The user requested report publication and Goal pause after this task; the actual thread Goal tool
+controls that status. No historical ACTIVE text or retained opt-in source authorizes another run.
+Further experiments, downloads, deployments or C creation require a new explicit user instruction.
+Root owns closeout docs/results; Luna high owns Git publication. No automatic merge/main rewrite.
+Use ordinary B0 as the simple reference and preserve historical C for reproduction only.
+Do not add D/E names, auto-fill semantic memory, or equate provenance with semantic support.
 
 The following v3 closure remains historical evidence:
 

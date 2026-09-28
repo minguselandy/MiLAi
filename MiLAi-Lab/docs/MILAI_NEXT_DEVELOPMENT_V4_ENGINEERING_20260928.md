@@ -1,6 +1,7 @@
 # v4 工程验收与语义验证边界
 
-状态：**F8_A_ACCEPTED; REAL_SEMANTICS_NOT_RUN**。
+状态（工程验收时点）：**F8_A_ACCEPTED; REAL_SEMANTICS_NOT_RUN**。
+后续真实B两轮均5/6、停止本轮修订；当前完整结论见[F9总体报告](MILAI_NEXT_DEVELOPMENT_V4_OVERALL_EXPERIMENT_REPORT_20260928.md)。
 本记录对应 [F1–F7 合同](MILAI_NEXT_DEVELOPMENT_V4_IMPLEMENTATION_CONTRACT_20260928.md)，
 不替代 [完整执行记录](MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V4_20260928.md)中的 F8 B/C 与 F9。
 Sol 已停笔，Root 已核对 11 项工程文件的实际字节与哈希及检查回执；真实 generation/embedding 调用均为零。
