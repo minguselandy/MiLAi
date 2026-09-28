@@ -1,0 +1,120 @@
+{
+  "kind": "MILAI_V5_PROSPECTIVE_EXECUTION_ORDER",
+  "status": "INPUTS_FIXED_NOT_RUN",
+  "method": "unchanged v4 R2 B0 only",
+  "steps": [
+    {
+      "case_id": "complete_plan",
+      "arm": "B0",
+      "inputs": "complete_plan-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use"
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "arm": "B0",
+      "inputs": "partial_plan-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use"
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "arm": "B0",
+      "inputs": "one_reply_format-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "arm": "B0",
+      "inputs": "independent_update-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "case_id": "quoted_rule",
+      "arm": "B0",
+      "inputs": "quoted_rule-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "arm": "B0",
+      "inputs": "read_only_note-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "arm": "B0",
+      "inputs": "explicit_delete-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "arm": "B0",
+      "inputs": "assistant_conflict-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "arm": "B0",
+      "inputs": "dynamic_world-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "arm": "B0",
+      "inputs": "moderate_bank-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ]
+    }
+  ],
+  "serial": true,
+  "one_attempt_per_job": true,
+  "runtime_must_not_read": [
+    "obligations.json",
+    "rubric-guide.json"
+  ]
+}

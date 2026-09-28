@@ -1,0 +1,1490 @@
+{
+  "schema_version": 1,
+  "observations": [
+    {
+      "case_id": "field_plan",
+      "obligation_id": "save_item",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-866dd11d874e09f0,chatcmpl-bc32174cfbc27cf3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "save_quantity",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-866dd11d874e09f0,chatcmpl-bc32174cfbc27cf3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "save_destination",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-866dd11d874e09f0,chatcmpl-bc32174cfbc27cf3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "save_packing",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-866dd11d874e09f0,chatcmpl-bc32174cfbc27cf3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "save_booking",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-866dd11d874e09f0,chatcmpl-bc32174cfbc27cf3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "save_future_packing",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-866dd11d874e09f0,chatcmpl-bc32174cfbc27cf3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "confirm",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-866dd11d874e09f0,chatcmpl-bc32174cfbc27cf3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "no_booking_1",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-866dd11d874e09f0,chatcmpl-bc32174cfbc27cf3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "yes"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "no_booking_2",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-bd42e8dfe9c2bc96"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "yes"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "reuse_quantity",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-bd42e8dfe9c2bc96"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "reuse_destination",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-bd42e8dfe9c2bc96"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "reuse_packing",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-bd42e8dfe9c2bc96"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "optional_item",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-bd42e8dfe9c2bc96"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "no",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "field_plan",
+      "obligation_id": "optional_booking",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['field_plan/B0'].turns with message_id=field_plan-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/field_plan/B0/trace.jsonl",
+          "sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+          "location": "provider IDs: chatcmpl-bd42e8dfe9c2bc96"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "no",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "editorial_revision",
+      "obligation_id": "save_heading",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['editorial_revision/B0'].turns with message_id=editorial_revision-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl",
+          "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+          "location": "provider IDs: chatcmpl-a2c3cfe973c3662d,chatcmpl-81b7700d8634a948"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "editorial_revision",
+      "obligation_id": "save_date",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['editorial_revision/B0'].turns with message_id=editorial_revision-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl",
+          "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+          "location": "provider IDs: chatcmpl-a2c3cfe973c3662d,chatcmpl-81b7700d8634a948"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "editorial_revision",
+      "obligation_id": "save_link",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['editorial_revision/B0'].turns with message_id=editorial_revision-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl",
+          "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+          "location": "provider IDs: chatcmpl-a2c3cfe973c3662d,chatcmpl-81b7700d8634a948"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "editorial_revision",
+      "obligation_id": "update_link",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['editorial_revision/B0'].turns with message_id=editorial_revision-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl",
+          "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+          "location": "provider IDs: chatcmpl-938be5f2191cb3f8,chatcmpl-8f03ba4822272e9a"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "editorial_revision",
+      "obligation_id": "preserve_heading",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['editorial_revision/B0'].turns with message_id=editorial_revision-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl",
+          "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+          "location": "provider IDs: chatcmpl-938be5f2191cb3f8,chatcmpl-8f03ba4822272e9a"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "editorial_revision",
+      "obligation_id": "preserve_date",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['editorial_revision/B0'].turns with message_id=editorial_revision-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl",
+          "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+          "location": "provider IDs: chatcmpl-938be5f2191cb3f8,chatcmpl-8f03ba4822272e9a"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "editorial_revision",
+      "obligation_id": "reuse_heading",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['editorial_revision/B0'].turns with message_id=editorial_revision-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl",
+          "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+          "location": "provider IDs: chatcmpl-a0563e3c9d883190"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "editorial_revision",
+      "obligation_id": "reuse_date",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['editorial_revision/B0'].turns with message_id=editorial_revision-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl",
+          "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+          "location": "provider IDs: chatcmpl-a0563e3c9d883190"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "editorial_revision",
+      "obligation_id": "reuse_link",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['editorial_revision/B0'].turns with message_id=editorial_revision-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/editorial_revision/B0/trace.jsonl",
+          "sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+          "location": "provider IDs: chatcmpl-a0563e3c9d883190"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "save_desk",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-ad34c5b59f1740a7,chatcmpl-a662119dd25ed7df"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "preserve_desk",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-8a63d6e2b744f822,chatcmpl-a4b1e6e5f43699c5"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "reuse_desk",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-bb3a0b1e349544f3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "save_day",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-ad34c5b59f1740a7,chatcmpl-a662119dd25ed7df"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "preserve_day",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-8a63d6e2b744f822,chatcmpl-a4b1e6e5f43699c5"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "reuse_day",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-bb3a0b1e349544f3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "save_time",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-ad34c5b59f1740a7,chatcmpl-a662119dd25ed7df"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "preserve_time",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-8a63d6e2b744f822,chatcmpl-a4b1e6e5f43699c5"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "reuse_time",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-bb3a0b1e349544f3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "save_key",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-8a63d6e2b744f822,chatcmpl-a4b1e6e5f43699c5"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "no_business",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-8a63d6e2b744f822,chatcmpl-a4b1e6e5f43699c5"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "yes"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "reuse_key",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-bb3a0b1e349544f3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "independent_note",
+      "obligation_id": "card_count",
+      "result": "not_applicable",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['independent_note/B0'].turns with message_id=independent_note-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/independent_note/B0/trace.jsonl",
+          "sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+          "location": "provider IDs: chatcmpl-8a63d6e2b744f822,chatcmpl-a4b1e6e5f43699c5"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "no",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "quotation",
+      "obligation_id": "explain_attributed",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['quotation/B0'].turns with message_id=quotation-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/quotation/B0/trace.jsonl",
+          "sha256": "0e39af174d998b0847528357f9c52e6fb9330587b98c63c25cd8567c3d354164",
+          "location": "provider IDs: chatcmpl-bdf01b73b71a2b6a"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "quotation",
+      "obligation_id": "not_adopted",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['quotation/B0'].turns with message_id=quotation-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/quotation/B0/trace.jsonl",
+          "sha256": "0e39af174d998b0847528357f9c52e6fb9330587b98c63c25cd8567c3d354164",
+          "location": "provider IDs: chatcmpl-bdf01b73b71a2b6a"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "no",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "quotation",
+      "obligation_id": "later_none_known",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['quotation/B0'].turns with message_id=quotation-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/quotation/B0/trace.jsonl",
+          "sha256": "0e39af174d998b0847528357f9c52e6fb9330587b98c63c25cd8567c3d354164",
+          "location": "provider IDs: chatcmpl-9d68fd4a9feb05ac,chatcmpl-ab2269a2cb006dfa"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "no",
+      "memory_delivered": "no",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "quotation",
+      "obligation_id": "context_note",
+      "result": "not_applicable",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['quotation/B0'].turns with message_id=quotation-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/quotation/B0/trace.jsonl",
+          "sha256": "0e39af174d998b0847528357f9c52e6fb9330587b98c63c25cd8567c3d354164",
+          "location": "provider IDs: chatcmpl-bdf01b73b71a2b6a"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "no",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "temporary",
+      "obligation_id": "prefix",
+      "result": "fail",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['temporary/B0'].turns with message_id=temporary-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/temporary/B0/trace.jsonl",
+          "sha256": "8ac570d7de5a78ba1c08ec1c9f6fa1b64f77ea80c50a3c805318145415ade452",
+          "location": "provider IDs: chatcmpl-bbd0b7ddb383c4cc"
+        }
+      ],
+      "legacy_score": "fail",
+      "earliest_breakpoint": "CURRENT_TASK_CONSUMPTION",
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "no",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "temporary",
+      "obligation_id": "explanation",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['temporary/B0'].turns with message_id=temporary-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/temporary/B0/trace.jsonl",
+          "sha256": "8ac570d7de5a78ba1c08ec1c9f6fa1b64f77ea80c50a3c805318145415ade452",
+          "location": "provider IDs: chatcmpl-bbd0b7ddb383c4cc"
+        }
+      ],
+      "legacy_score": "fail",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "temporary",
+      "obligation_id": "no_standing",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['temporary/B0'].turns with message_id=temporary-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/temporary/B0/trace.jsonl",
+          "sha256": "8ac570d7de5a78ba1c08ec1c9f6fa1b64f77ea80c50a3c805318145415ade452",
+          "location": "provider IDs: chatcmpl-bbd0b7ddb383c4cc"
+        }
+      ],
+      "legacy_score": "fail",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "no",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "temporary",
+      "obligation_id": "caption",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['temporary/B0'].turns with message_id=temporary-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/temporary/B0/trace.jsonl",
+          "sha256": "8ac570d7de5a78ba1c08ec1c9f6fa1b64f77ea80c50a3c805318145415ade452",
+          "location": "provider IDs: chatcmpl-aab03313815cef26"
+        }
+      ],
+      "legacy_score": "fail",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "save_location",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-84b41402f33b5667,chatcmpl-ac8bcf1f08a33bb3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "reuse_full_location",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-92c44519174240f1"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "save_packing",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-84b41402f33b5667,chatcmpl-ac8bcf1f08a33bb3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "reuse_full_packing",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-92c44519174240f1"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "save_paperwork",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-84b41402f33b5667,chatcmpl-ac8bcf1f08a33bb3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "yes",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "reuse_full_paperwork",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-3"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-92c44519174240f1"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "no_reservation",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-1"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-84b41402f33b5667,chatcmpl-ac8bcf1f08a33bb3"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "no",
+      "memory_formed": "not_applicable",
+      "memory_delivered": "not_applicable",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "yes"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "no_new_write",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-9313e8c7ef10186b"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "not_applicable",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "partial_packing",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-9313e8c7ef10186b"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "partial_paperwork",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-9313e8c7ef10186b"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "yes",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "optional_location",
+      "result": "pass",
+      "evidence": [
+        {
+          "path": "data/manifests/next-development-v4-b-r1-results-20260928.json",
+          "sha256": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+          "location": "jobs['read_only/B0'].turns with message_id=read_only-2"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/b-regression-r1/read_only/B0/trace.jsonl",
+          "sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+          "location": "provider IDs: chatcmpl-9313e8c7ef10186b"
+        }
+      ],
+      "legacy_score": "pass",
+      "earliest_breakpoint": null,
+      "note": "Root manual semantic annotation; literal evidence presence is not an automatic scorer. Diagnostic failures do not change task/legacy scores.",
+      "present_in_user_request": "no",
+      "requires_memory": "yes",
+      "memory_formed": "yes",
+      "memory_delivered": "yes",
+      "answer_contains": "yes",
+      "tool_argument_contains": "not_applicable",
+      "world_effect_correct": "not_applicable"
+    }
+  ]
+}

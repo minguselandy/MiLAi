@@ -1,0 +1,338 @@
+{
+  "status": "FREEZE_READY",
+  "scope": "V1/V2 offline obligation composition only",
+  "environment": {
+    "python": "3.11.13",
+    "pytest": "8.4.2",
+    "ruff": "0.16.5",
+    "mypy": "1.20.2",
+    "interpreter": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+    "source_import": "PYTHONPATH=src",
+    "dependency_mutation": false
+  },
+  "source_files": {
+    "src/milai_lab/analysis/obligation_trace.py": {
+      "sha256": "03b90d2014c49133ab6872a00417addba47c6b670e83e84fe97ba626f46eab14",
+      "bytes": 10224
+    },
+    "tests/unit/test_obligation_trace.py": {
+      "sha256": "87d3020c299744f920e4f9ee0b2390b7245619ea52dc7a8b01b5035468d15ebf",
+      "bytes": 9914
+    }
+  },
+  "api": "compose_obligation_trace(contract, observations)",
+  "cli": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.analysis.obligation_trace --contract CONTRACT.json --observations OBSERVATIONS.json [--output OUTPUT.json]",
+  "contracts": [
+    "composite (case_id, obligation_id) identity",
+    "exact contiguous basis quote",
+    "basis message order <= target message order",
+    "diagnostic task_failing prohibited",
+    "manual result/stages/evidence/breakpoint/legacy preserved",
+    "missing observation unknown/missing",
+    "no stage-to-verdict/cause inference",
+    "input bytes and objects unchanged",
+    "no replacement legacy total/taskscore"
+  ],
+  "unique_executed_targets": [
+    "tests/unit/test_obligation_trace.py::test_manual_verdicts_diagnostics_missing_and_legacy_remain_separate",
+    "tests/unit/test_obligation_trace.py::test_later_use_explicit_summary_counts_identity_once_and_scopes_case_ids",
+    "tests/unit/test_obligation_trace.py::test_manual_failure_does_not_need_a_no_stage_and_partial_observation_stays_unknown",
+    "tests/unit/test_obligation_trace.py::test_basis_can_use_past_but_never_future_public_messages",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[case-DUPLICATE_OBLIGATION_CASE]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[message-DUPLICATE_OBLIGATION_MESSAGE]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[obligation-DUPLICATE_OBLIGATION_ID]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[observation-DUPLICATE_OBLIGATION_OBSERVATION]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[foreign-case-DANGLING_OBLIGATION_OBSERVATION]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[foreign-obligation-DANGLING_OBLIGATION_OBSERVATION]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[foreign-target-DANGLING_OBLIGATION_MESSAGE]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[unhashable-target-INVALID_OBLIGATION_TRACE_TEXT]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[quote-OBLIGATION_BASIS_NOT_EXACT_VISIBLE_QUOTE]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[basis-OBLIGATION_REQUIRES_VISIBLE_BASIS]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[diagnostic-DIAGNOSTIC_CANNOT_BE_TASK_FAILING]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[stage-INVALID_OBLIGATION_STAGE_VALUE]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[hash-INVALID_OBLIGATION_EVIDENCE_HASH]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[version-INVALID_OBLIGATION_TRACE_VERSION]",
+    "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[runtime-OBLIGATION_CONTRACT_MUST_BE_OFFLINE]",
+    "tests/unit/test_obligation_trace.py::test_module_cli_writes_only_output_and_refuses_input_aliases"
+  ],
+  "execution_stage": {
+    "initial_19": [
+      "tests/unit/test_obligation_trace.py::test_manual_verdicts_diagnostics_missing_and_legacy_remain_separate",
+      "tests/unit/test_obligation_trace.py::test_later_use_explicit_summary_counts_identity_once_and_scopes_case_ids",
+      "tests/unit/test_obligation_trace.py::test_manual_failure_does_not_need_a_no_stage_and_partial_observation_stays_unknown",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[case-DUPLICATE_OBLIGATION_CASE]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[message-DUPLICATE_OBLIGATION_MESSAGE]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[obligation-DUPLICATE_OBLIGATION_ID]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[observation-DUPLICATE_OBLIGATION_OBSERVATION]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[foreign-case-DANGLING_OBLIGATION_OBSERVATION]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[foreign-obligation-DANGLING_OBLIGATION_OBSERVATION]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[foreign-target-DANGLING_OBLIGATION_MESSAGE]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[unhashable-target-INVALID_OBLIGATION_TRACE_TEXT]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[quote-OBLIGATION_BASIS_NOT_EXACT_VISIBLE_QUOTE]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[basis-OBLIGATION_REQUIRES_VISIBLE_BASIS]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[diagnostic-DIAGNOSTIC_CANNOT_BE_TASK_FAILING]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[stage-INVALID_OBLIGATION_STAGE_VALUE]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[hash-INVALID_OBLIGATION_EVIDENCE_HASH]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[version-INVALID_OBLIGATION_TRACE_VERSION]",
+      "tests/unit/test_obligation_trace.py::test_duplicates_dangling_hidden_obligations_and_invalid_shapes_are_rejected[runtime-OBLIGATION_CONTRACT_MUST_BE_OFFLINE]",
+      "tests/unit/test_obligation_trace.py::test_module_cli_writes_only_output_and_refuses_input_aliases"
+    ],
+    "added_after_initial_run": [
+      "tests/unit/test_obligation_trace.py::test_basis_can_use_past_but_never_future_public_messages"
+    ],
+    "note": "Not one 20-test final invocation; no repeated existing test execution."
+  },
+  "integration": {
+    "contract_case_count": 6,
+    "composite_obligation_count": 55,
+    "input_bytes_unchanged": true,
+    "input_sha256": {
+      "data/diagnostics/next-development-v5-offline/legacy-obligations.json": "ae1c198e3b1ea5c9d6c4bfd0fd8302ac54e5364b5bf124307bfa52561570b117",
+      "data/diagnostics/next-development-v5-offline/r1-observations.json": "d0181faac46ca4c678fbef8535534201d2465aba6144ad31f975aec787bbc4d7",
+      "data/diagnostics/next-development-v5-offline/r2-observations.json": "fbe51fae194755a0330eb054474d21a0d970b00c18d95edcf11c087707d72092"
+    },
+    "runs": [
+      {
+        "name": "r1",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+          "-m",
+          "milai_lab.analysis.obligation_trace",
+          "--contract",
+          "data/diagnostics/next-development-v5-offline/legacy-obligations.json",
+          "--observations",
+          "data/diagnostics/next-development-v5-offline/r1-observations.json",
+          "--output",
+          "artifacts/next-development-v5/v1-checks/r1-trace.json"
+        ],
+        "exit_code": 0,
+        "layer_counts": {
+          "current_explicit_obligations": {
+            "total": 8,
+            "pass": 7,
+            "fail": 1,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "persistent_obligations": {
+            "total": 25,
+            "pass": 25,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "later_use_obligations": {
+            "total": 17,
+            "pass": 17,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "diagnostic_completeness": {
+            "total": 5,
+            "pass": 3,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 2,
+            "missing": 0
+          }
+        },
+        "explicit_current_including_later_use_counts": {
+          "total": 25,
+          "pass": 24,
+          "fail": 1,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "task_failing_counts": {
+          "total": 50,
+          "pass": 49,
+          "fail": 1,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "output_path": "artifacts/next-development-v5/v1-checks/r1-trace.json",
+        "output_sha256": "267a2b2f07a25d6f3ca10d4eb9a279edf16cce02a48d3473b2e931bbcd260b2a"
+      },
+      {
+        "name": "r2",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+          "-m",
+          "milai_lab.analysis.obligation_trace",
+          "--contract",
+          "data/diagnostics/next-development-v5-offline/legacy-obligations.json",
+          "--observations",
+          "data/diagnostics/next-development-v5-offline/r2-observations.json",
+          "--output",
+          "artifacts/next-development-v5/v1-checks/r2-trace.json"
+        ],
+        "exit_code": 0,
+        "layer_counts": {
+          "current_explicit_obligations": {
+            "total": 8,
+            "pass": 8,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "persistent_obligations": {
+            "total": 25,
+            "pass": 25,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "later_use_obligations": {
+            "total": 17,
+            "pass": 17,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "diagnostic_completeness": {
+            "total": 5,
+            "pass": 1,
+            "fail": 2,
+            "unknown": 0,
+            "not_applicable": 2,
+            "missing": 0
+          }
+        },
+        "explicit_current_including_later_use_counts": {
+          "total": 25,
+          "pass": 25,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "task_failing_counts": {
+          "total": 50,
+          "pass": 50,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "output_path": "artifacts/next-development-v5/v1-checks/r2-trace.json",
+        "output_sha256": "902ec9eb4c507939b9e75a7a374ea48d74cc99ba7e50d188a1811fcc453a3b05"
+      }
+    ]
+  },
+  "initial_failures_preserved": [
+    {
+      "kind": "ruff",
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/analysis/obligation_trace.py tests/unit/test_obligation_trace.py",
+      "exit_code": 1,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/v1-checks/ruff-initial.log",
+      "reason": "S603 on fixed module/synthetic-input subprocess test",
+      "resolution": "narrow S603 comment; actual subprocess CLI retained"
+    },
+    {
+      "kind": "integration_shape",
+      "exception": "ValueError: INVALID_OBLIGATION_TRACE_SHAPE",
+      "record": "original exec tool output; no original-data snapshot created",
+      "reason": "Root initial observations placed seven stages in nested stages object; module accepted top-level stages",
+      "resolution": "Root flattened observations/generator to agreed single shape; no compatibility branch added"
+    },
+    {
+      "kind": "ruff",
+      "exit_code": 1,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/v1-checks/ruff-final.log",
+      "reason": "new-test comment E501 and literal match RUF043",
+      "resolution": "shortened comment and raw match literal; no algorithm change"
+    },
+    {
+      "kind": "collection_command",
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest --collect-only -q tests/unit/test_obligation_trace.py",
+      "exit_code": 2,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/v1-checks/collected-final.log",
+      "reason": "reused other-worktree core environment without PYTHONPATH=src",
+      "resolution": "explicit current-source PYTHONPATH; no environment install/change"
+    },
+    {
+      "kind": "read_command",
+      "command": "python - [read observation keys]",
+      "exit_code": 127,
+      "record": "exec tool output only",
+      "reason": "unqualified python unavailable",
+      "resolution": "all checks/CLI use absolute locked core interpreter"
+    }
+  ],
+  "not_run": [
+    "full suite",
+    "build (no packaging/entry configuration change)",
+    "runtime/Host/model/embedding/DB execution",
+    "V3 profiler",
+    "Git commit/push"
+  ],
+  "limits": [
+    "Human evaluator chooses obligations, verdicts and breakpoint causes.",
+    "Quote presence does not establish natural-language entailment.",
+    "Evidence hash/location shape is validated, not source-file authenticity.",
+    "Passed manual counts do not replace frozen legacy scores.",
+    "No runtime, provider, method, runner, rubric, matrix or CI modification."
+  ],
+  "kind": "MILAI_V5_OFFLINE_ENGINEERING_ACCEPTANCE",
+  "source_receipt_sha256": "175b10b0ebbcee1a3e209c71900361c5ad8291a36d6ead813aafda5275dfabad",
+  "checks": [
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_obligation_trace.py > artifacts/next-development-v5/v1-checks/pytest-initial.log 2>&1",
+      "exit_code": 0,
+      "log_sha256": "825b6727fceaedd7feedac51e0d0c095b7ccde29fe9cf165ccb025cb0b6672ac",
+      "result": "19 passed in 0.20s; before future-basis guard"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_obligation_trace.py::test_basis_can_use_past_but_never_future_public_messages > artifacts/next-development-v5/v1-checks/pytest-visible-basis.log 2>&1",
+      "exit_code": 0,
+      "log_sha256": "e8c2ebdecc6c68bd31c948de0b0c1dd4c57dd47d093194a6c1d241c65727824d",
+      "result": "1 added target passed in 0.07s; guard checks past/current/future incl diagnostic"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/analysis/obligation_trace.py tests/unit/test_obligation_trace.py > artifacts/next-development-v5/v1-checks/ruff-final-clean.log 2>&1",
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "result": "All checks passed on final bytes"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m mypy src/milai_lab/analysis/obligation_trace.py > artifacts/next-development-v5/v1-checks/mypy-final.log 2>&1",
+      "exit_code": 0,
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "result": "Success: no issues found in 1 source file"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python tools/check_verification_matrix.py > artifacts/next-development-v5/v1-checks/matrix.log 2>&1",
+      "exit_code": 0,
+      "log_sha256": "8c1d1568e088a0dd70e17f59dd94a46a387937c3db7d742fc00f656670e30122",
+      "result": "157 active sources; analysis automatically core-owned; no matrix/workflow edits"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.boundary > artifacts/next-development-v5/v1-checks/boundary.log 2>&1",
+      "exit_code": 0,
+      "log_sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+      "result": "PASS active package has no private product or legacy imports"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest --collect-only -q tests/unit/test_obligation_trace.py > artifacts/next-development-v5/v1-checks/collected-final-with-source.log 2>&1",
+      "exit_code": 0,
+      "log_sha256": "dc720eaade35df1700d1ff0af798e9889e0c01a06a69544ab2be55b8916c1dcc",
+      "result": "20 collected on final bytes; 20 unique targets executed across two stages"
+    }
+  ],
+  "runtime_equivalence": {
+    "reference_method_commit": "24ef49945cd12eccbd85792fee3c256bf3fe6d2a",
+    "existing_source_runner_package_lock_files_checked": 161,
+    "all_bytes_equal": true,
+    "new_module": "offline analysis only; not imported by runtime"
+  },
+  "real_model_calls": 0
+}

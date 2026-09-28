@@ -2,6 +2,23 @@
 
 ## Current scope and authority
 
+The new actual user Goal explicitly authorizes the complete [NEXT_DEVELOPMENT v5 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v5.0.md).
+Follow the [v5 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V5_20260928.md).
+This resume supersedes the prior v4 pause for v5 only; do not inherit an automatic after-task pause.
+V0 preserves old scores and decomposes all six exposed scripts; V1 makes user-visible obligation
+contracts; V2 traces frozen evidence offline; V3 profiles request cost with offline candidates only.
+V4 freezes 8–10 new scripts; V5 first validates the unchanged v4 R2 method once, without a multi-arm
+matrix. Do not edit runtime before a real V5 failure. V6/V7 repair only the observed layer; V8
+requires an actual retrieval bottleneck. V9 must audit the full objective, not just engineering.
+The new v5 Goal permits new prospective inputs despite the old v4 C gate; old scores/rubrics stay frozen.
+Every task-failing obligation needs user-visible text; unsupported completeness stays diagnostic.
+No LLM evaluator, automatic hidden-requirement inference, runtime rubric access or extra controller.
+Root owns docs/data/freezes/real HTTP/scoring/costs and analysis. Reuse Sol xhigh for offline source
+and necessary checks; Luna high for authorized Git publication; Astra only for a concrete conflict.
+Keep vLLM settings, continuous ledger, serial real calls, Lab-only scope and Product NO-GO unchanged.
+
+The following v4 closure remains historical evidence:
+
 The user authorized the full [NEXT_DEVELOPMENT v4 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v4.0.md).
 F0–F7 and F8 A are engineered and checked; both exposed B regressions finished at 5/6.
 The sole R2 answer-contract candidate is rejected by its pre-frozen complete regression gate.

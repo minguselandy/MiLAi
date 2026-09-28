@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "assistant_conflict-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Keep an ongoing display-rota note: the default sample count for the optics table is 6. Save it and confirm the saved count explicitly. Take no business action."
+          },
+          {
+            "message_id": "assistant_conflict-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Update the optics table's ongoing default sample count from 6 to 9. Save 9 as the current value and confirm it explicitly. Take no business action."
+          },
+          {
+            "message_id": "assistant_conflict-3",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 1,
+            "text": "What is the current saved default sample count for the optics table? Use the current durable note, even if an earlier assistant response in this conversation said something else. State the count and do not change memory or take business action."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,810 @@
+{
+  "kind": "MILAI_V5_ROOT_ONLY_PROSPECTIVE_GUIDE",
+  "runtime_must_not_read": true,
+  "status": "INPUTS_FIXED_NOT_RUN",
+  "obligations": {
+    "complete_plan/save_1_item": {
+      "kind": "positive_memory",
+      "expected": "Cobalt prism mounts",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/save_1_quantity": {
+      "kind": "positive_memory",
+      "expected": 7,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/save_1_destination": {
+      "kind": "positive_memory",
+      "expected": "alcove T-6",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/save_1_packing": {
+      "kind": "positive_memory",
+      "expected": "individual foam pouches",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/save_1_booking_status": {
+      "kind": "positive_memory",
+      "expected": "not booked",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/confirmation": {
+      "kind": "supported_save_claim",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/no_write_2": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/save_1_item": {
+      "kind": "positive_memory",
+      "expected": "Indigo sensor rails",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/save_1_quantity": {
+      "kind": "positive_memory",
+      "expected": 5,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/save_1_destination": {
+      "kind": "positive_memory",
+      "expected": "shelf M-8",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/save_1_packing": {
+      "kind": "positive_memory",
+      "expected": "antistatic cloth",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/save_1_booking_status": {
+      "kind": "positive_memory",
+      "expected": "not booked",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/confirmation": {
+      "kind": "supported_save_claim",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/no_write_2": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/use_2_item": {
+      "kind": "answer",
+      "expected": "Cobalt prism mounts",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/use_2_quantity": {
+      "kind": "answer",
+      "expected": 7,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/use_2_destination": {
+      "kind": "answer",
+      "expected": "alcove T-6",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/use_2_packing": {
+      "kind": "answer",
+      "expected": "individual foam pouches",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "complete_plan/use_2_booking_status": {
+      "kind": "answer",
+      "expected": "not booked",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/use_2_quantity": {
+      "kind": "answer",
+      "expected": 5,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/use_2_packing": {
+      "kind": "answer",
+      "expected": "antistatic cloth",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/use_2_item": {
+      "kind": "answer",
+      "expected": "Indigo sensor rails",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/use_2_destination": {
+      "kind": "answer",
+      "expected": "shelf M-8",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "partial_plan/use_2_booking_status": {
+      "kind": "answer",
+      "expected": "not booked",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "one_reply_format/prefix": {
+      "kind": "prefix",
+      "expected": "LOCAL:",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "one_reply_format/one_sentence_explanation": {
+      "kind": "semantic_answer",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "one_reply_format/no_write_1": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "one_reply_format/no_write_2": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "one_reply_format/later_checklist": {
+      "kind": "semantic_answer_no_prefix",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/save_1_review_day": {
+      "kind": "positive_memory",
+      "expected": "Tuesday",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/save_1_review_time": {
+      "kind": "positive_memory",
+      "expected": "14:10",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/save_1_review_room": {
+      "kind": "positive_memory",
+      "expected": "gallery room G-2",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/save_1_key_location": {
+      "kind": "positive_memory",
+      "expected": "box S-8",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/save_1_key_subject": {
+      "kind": "positive_memory",
+      "expected": "herbarium cabinet",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/update_preserve_review_day": {
+      "kind": "update_or_preserve",
+      "expected": "Tuesday",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/update_preserve_review_time": {
+      "kind": "update_or_preserve",
+      "expected": "16:25",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/update_preserve_review_room": {
+      "kind": "update_or_preserve",
+      "expected": "gallery room G-2",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/update_preserve_key_location": {
+      "kind": "update_or_preserve",
+      "expected": "box S-8",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/update_preserve_key_subject": {
+      "kind": "update_or_preserve",
+      "expected": "herbarium cabinet",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/same_matter_update": {
+      "kind": "same_record_update",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/use_3_review_day": {
+      "kind": "answer",
+      "expected": "Tuesday",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/use_3_review_time": {
+      "kind": "answer",
+      "expected": "16:25",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/use_3_review_room": {
+      "kind": "answer",
+      "expected": "gallery room G-2",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/use_3_key_location": {
+      "kind": "answer",
+      "expected": "box S-8",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/no_business_3": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/no_write_3": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "quoted_rule/attributed_explanation": {
+      "kind": "semantic_attribution",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "quoted_rule/no_write_1": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "quoted_rule/no_write_2": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "quoted_rule/none_adopted": {
+      "kind": "absence_answer",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/save_1_loading_point": {
+      "kind": "positive_memory",
+      "expected": "door V-3",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/save_1_protective_insert": {
+      "kind": "positive_memory",
+      "expected": "corrugated sleeves",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/save_1_document": {
+      "kind": "positive_memory",
+      "expected": "calibration card",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/use_2_protective_insert": {
+      "kind": "answer",
+      "expected": "corrugated sleeves",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/use_2_document": {
+      "kind": "answer",
+      "expected": "calibration card",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/use_3_loading_point": {
+      "kind": "answer",
+      "expected": "door V-3",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/use_3_protective_insert": {
+      "kind": "answer",
+      "expected": "corrugated sleeves",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/use_3_document": {
+      "kind": "answer",
+      "expected": "calibration card",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/no_business_3": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/no_write_2": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "read_only_note/no_write_3": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/save_1_textile_prefix": {
+      "kind": "positive_memory",
+      "expected": "TX",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/save_1_ceramics_prefix": {
+      "kind": "positive_memory",
+      "expected": "CR",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/independent_notes": {
+      "kind": "separate_records",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/actual_delete": {
+      "kind": "actual_delete",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/preserve_ceramics": {
+      "kind": "preserve_unrelated",
+      "expected": "CR",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/delete_confirmation": {
+      "kind": "supported_delete_claim",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/use_3_ceramics_prefix": {
+      "kind": "answer",
+      "expected": "CR",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/textile_absent": {
+      "kind": "absence_answer",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/no_business_3": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "explicit_delete/no_write_3": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/save_1_count": {
+      "kind": "positive_memory",
+      "expected": 6,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/old_confirm": {
+      "kind": "answer",
+      "expected": 6,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/new_count": {
+      "kind": "same_record_update",
+      "expected": 9,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/new_confirm": {
+      "kind": "answer",
+      "expected": 9,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/use_3_current_count": {
+      "kind": "answer",
+      "expected": 9,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/no_write_3": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/no_business_3": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/save_1_item": {
+      "kind": "positive_memory",
+      "expected": "Copper relay cases",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/save_1_quantity": {
+      "kind": "positive_memory",
+      "expected": 3,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/save_1_destination": {
+      "kind": "positive_memory",
+      "expected": "cabinet N-4",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/save_1_packing": {
+      "kind": "positive_memory",
+      "expected": "numbered cloth bags",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/save_1_booking_status": {
+      "kind": "positive_memory",
+      "expected": "not booked",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/booking_item": {
+      "kind": "tool_argument",
+      "expected": "Copper relay cases",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/booking_quantity": {
+      "kind": "tool_argument",
+      "expected": 3,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/booking_destination": {
+      "kind": "tool_argument",
+      "expected": "cabinet N-4",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/booking_packing": {
+      "kind": "tool_argument",
+      "expected": "numbered cloth bags",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/booking_once": {
+      "kind": "world_effect",
+      "expected": {
+        "reservations": 1,
+        "reserve_attempts": 1,
+        "label_status": "created"
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/report_receipt": {
+      "kind": "actual_tool_answer",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/no_write_2": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/no_write_3": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/no_write_4": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/live_lookup": {
+      "kind": "business_lookup",
+      "expected": "Copper relay cases",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/use_3_reservation_exists": {
+      "kind": "answer",
+      "expected": true,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/use_3_label_status": {
+      "kind": "answer",
+      "expected": "created",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/no_business_3": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/use_4_earlier_plan_booking_status": {
+      "kind": "answer",
+      "expected": "not booked",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/no_business_4": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "dynamic_world/no_business_lookup_4": {
+      "kind": "business_call_count",
+      "expected": 0,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/save_1_spectrometer lead": {
+      "kind": "positive_memory",
+      "expected": "drawer A-4",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/save_1_jade reference tile": {
+      "kind": "positive_memory",
+      "expected": "bin B-7",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/save_1_quartz cuvette": {
+      "kind": "positive_memory",
+      "expected": "cabinet C-2",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/save_1_brass calibration ring": {
+      "kind": "positive_memory",
+      "expected": "locker D-6",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/save_1_violet filter": {
+      "kind": "positive_memory",
+      "expected": "case E-9",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/save_1_sample logbook": {
+      "kind": "positive_memory",
+      "expected": "shelf F-3",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/six_independent": {
+      "kind": "separate_records_count",
+      "expected": 6,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/use_2_spectrometer lead": {
+      "kind": "answer",
+      "expected": "drawer A-4",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/use_2_quartz cuvette": {
+      "kind": "answer",
+      "expected": "cabinet C-2",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/use_2_violet filter": {
+      "kind": "answer",
+      "expected": "case E-9",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/use_3_jade reference tile": {
+      "kind": "answer",
+      "expected": "bin B-7",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/use_3_brass calibration ring": {
+      "kind": "answer",
+      "expected": "locker D-6",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/use_3_sample logbook": {
+      "kind": "answer",
+      "expected": "shelf F-3",
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/no_business_3": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/no_write_2": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "moderate_bank/no_write_3": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "independent_update/confirm_update": {
+      "kind": "supported_update_claim",
+      "expected": true,
+      "note": "Explicit confirmation request; actual tool/Store evidence required; no auto semantic score."
+    },
+    "explicit_delete/confirm_both_saves": {
+      "kind": "supported_save_claim",
+      "expected": true,
+      "note": "Explicit confirmation request; actual tool/Store evidence required; no auto semantic score."
+    },
+    "dynamic_world/confirm_plan": {
+      "kind": "supported_save_claim",
+      "expected": true,
+      "note": "Explicit confirmation request; actual tool/Store evidence required; no auto semantic score."
+    }
+  },
+  "global_gate": {
+    "explicit_current_and_later_obligation_ratio_minimum": 0.95,
+    "requested_persistent_changes": "all correct",
+    "false_persistence": 0,
+    "false_save_claims": 0,
+    "duplicate_business_actions": 0,
+    "hidden_rubric_only_task_failures": 0
+  },
+  "activation_checks": {
+    "assistant_conflict": "actual old assistant answer with6 retained in revisited session and new durable9 delivered; otherwise report activation missing, not passed conflict",
+    "dynamic_world": "actual successful business change, stale planning snapshot unchanged and later actual lookup; no operator-injected world/memory",
+    "moderate_bank": "six actual independently created records delivered within real all budget; no synthetic preseed"
+  },
+  "exposure": "new synthetic contents created after v4 R2 method freeze; task families are related to exposed diagnostics, not native/independent heldout users",
+  "additional_reporting": [
+    "Keep whole-script success and per-category failures alongside pooled explicit rate",
+    "Report raw explicit and no-business counts separately, so easy no-action obligations cannot hide field omissions",
+    "Method stability also requires dynamic-world and assistant-conflict boundaries in plan sections17/20; core pooled95% alone does not prove those categories",
+    "Any failed obligation is classified before considering a V6/V7 repair; first batch method and cases stay fixed"
+  ]
+}

@@ -1,0 +1,3712 @@
+{
+  "kind": "MILAI_V5_OFFLINE_REQUEST_COMPONENT_PROFILE",
+  "status": "OFFLINE_ONLY_RUNTIME_UNCHANGED",
+  "tokenizer_identity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "enable_thinking": false,
+    "tokenizer_path": "/cra/qwen36-35B",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+  },
+  "summary": {
+    "v3_B0": {
+      "generation_calls": 22,
+      "actual_prompt_tokens": 18884,
+      "local_template_tokens": 18884,
+      "component_standalone_tokens": {
+        "system_base": 2398,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1199,
+        "authority_labels": 356,
+        "source_event_metadata": 300,
+        "tool_schemas": 12716,
+        "checkpoint_transcript": 689,
+        "current_user": 733
+      },
+      "template_and_bpe_boundary_residual": 493,
+      "candidate_template_tokens": 18884,
+      "candidate_standalone_tokens": {
+        "system_base": 2398,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1199,
+        "authority_labels": 356,
+        "source_event_metadata": 300,
+        "tool_schemas": 12716,
+        "checkpoint_transcript": 689,
+        "current_user": 733
+      },
+      "candidate_boundary_residual": 493,
+      "saved_tokens": 0,
+      "saving_ratio": 0.0,
+      "actual_completion_tokens_not_part_of_input_profile": true
+    },
+    "v4_R1": {
+      "generation_calls": 22,
+      "actual_prompt_tokens": 26742,
+      "local_template_tokens": 26742,
+      "component_standalone_tokens": {
+        "system_base": 2398,
+        "memory_boundary_text": 3564,
+        "current_task_wrapper": 396,
+        "ordinary_memory_view": 1264,
+        "authority_labels": 537,
+        "source_event_metadata": 3928,
+        "tool_schemas": 12716,
+        "checkpoint_transcript": 713,
+        "current_user": 733
+      },
+      "template_and_bpe_boundary_residual": 493,
+      "candidate_template_tokens": 26411,
+      "candidate_standalone_tokens": {
+        "system_base": 2398,
+        "memory_boundary_text": 3564,
+        "current_task_wrapper": 396,
+        "ordinary_memory_view": 1204,
+        "authority_labels": 537,
+        "source_event_metadata": 3657,
+        "tool_schemas": 12716,
+        "checkpoint_transcript": 713,
+        "current_user": 733
+      },
+      "candidate_boundary_residual": 493,
+      "saved_tokens": 331,
+      "saving_ratio": 0.012377533467953032,
+      "actual_completion_tokens_not_part_of_input_profile": true,
+      "component_growth_vs_v3_B0": {
+        "system_base": 0,
+        "memory_boundary_text": 3564,
+        "current_task_wrapper": 396,
+        "ordinary_memory_view": 65,
+        "authority_labels": 181,
+        "source_event_metadata": 3628,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 24,
+        "current_user": 0
+      }
+    },
+    "v4_R2": {
+      "generation_calls": 22,
+      "actual_prompt_tokens": 27707,
+      "local_template_tokens": 27707,
+      "component_standalone_tokens": {
+        "system_base": 2398,
+        "memory_boundary_text": 4598,
+        "current_task_wrapper": 396,
+        "ordinary_memory_view": 1224,
+        "authority_labels": 537,
+        "source_event_metadata": 3913,
+        "tool_schemas": 12716,
+        "checkpoint_transcript": 699,
+        "current_user": 733
+      },
+      "template_and_bpe_boundary_residual": 493,
+      "candidate_template_tokens": 27376,
+      "candidate_standalone_tokens": {
+        "system_base": 2398,
+        "memory_boundary_text": 4598,
+        "current_task_wrapper": 396,
+        "ordinary_memory_view": 1164,
+        "authority_labels": 537,
+        "source_event_metadata": 3642,
+        "tool_schemas": 12716,
+        "checkpoint_transcript": 699,
+        "current_user": 733
+      },
+      "candidate_boundary_residual": 493,
+      "saved_tokens": 331,
+      "saving_ratio": 0.011946439527917133,
+      "actual_completion_tokens_not_part_of_input_profile": true,
+      "component_growth_vs_v3_B0": {
+        "system_base": 0,
+        "memory_boundary_text": 4598,
+        "current_task_wrapper": 396,
+        "ordinary_memory_view": 25,
+        "authority_labels": 181,
+        "source_event_metadata": 3613,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 10,
+        "current_user": 0
+      }
+    }
+  },
+  "requests": [
+    {
+      "version": "v3_B0",
+      "case_id": "field_plan",
+      "provider_id": "chatcmpl-8b829f86975a990c",
+      "source_trace_sha256": "947d7e93665efdd818e8c6584d4a300e61abae6623eeca053c989bb9de41fa7b",
+      "old_request_tokens": 769,
+      "candidate_request_tokens": 769,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "field_plan",
+      "provider_id": "chatcmpl-be0cea794d6e8b8f",
+      "source_trace_sha256": "947d7e93665efdd818e8c6584d4a300e61abae6623eeca053c989bb9de41fa7b",
+      "old_request_tokens": 1046,
+      "candidate_request_tokens": 1046,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 90,
+        "authority_labels": 23,
+        "source_event_metadata": 45,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 116,
+        "current_user": 51
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 90,
+        "authority_labels": 23,
+        "source_event_metadata": 45,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 116,
+        "current_user": 51
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "field_plan",
+      "provider_id": "chatcmpl-95660b5e34731e85",
+      "source_trace_sha256": "947d7e93665efdd818e8c6584d4a300e61abae6623eeca053c989bb9de41fa7b",
+      "old_request_tokens": 828,
+      "candidate_request_tokens": 828,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 90,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 90,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-81e6843fc203ed5a",
+      "source_trace_sha256": "772d6b8987c1c7ab7a9fd0b036bc1b5c8f4f55ef108fe9468105d82fa210f2a1",
+      "old_request_tokens": 753,
+      "candidate_request_tokens": 753,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-ba33cc22033b5941",
+      "source_trace_sha256": "772d6b8987c1c7ab7a9fd0b036bc1b5c8f4f55ef108fe9468105d82fa210f2a1",
+      "old_request_tokens": 1000,
+      "candidate_request_tokens": 1000,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 76,
+        "authority_labels": 23,
+        "source_event_metadata": 43,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 102,
+        "current_user": 35
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 76,
+        "authority_labels": 23,
+        "source_event_metadata": 43,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 102,
+        "current_user": 35
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-b3a965568bfd81c4",
+      "source_trace_sha256": "772d6b8987c1c7ab7a9fd0b036bc1b5c8f4f55ef108fe9468105d82fa210f2a1",
+      "old_request_tokens": 814,
+      "candidate_request_tokens": 814,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 76,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 76,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-9fdb8320801a5376",
+      "source_trace_sha256": "772d6b8987c1c7ab7a9fd0b036bc1b5c8f4f55ef108fe9468105d82fa210f2a1",
+      "old_request_tokens": 1020,
+      "candidate_request_tokens": 1020,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 74,
+        "authority_labels": 23,
+        "source_event_metadata": 42,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 139,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 74,
+        "authority_labels": 23,
+        "source_event_metadata": 42,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 139,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-8256773f8d49eef6",
+      "source_trace_sha256": "772d6b8987c1c7ab7a9fd0b036bc1b5c8f4f55ef108fe9468105d82fa210f2a1",
+      "old_request_tokens": 806,
+      "candidate_request_tokens": 806,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 74,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 15
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 74,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 15
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-ac337274f32751a0",
+      "source_trace_sha256": "5f5c5f4576b5d52ab04ae7571ee6e961027a714048d137780ab103b48e10e4cc",
+      "old_request_tokens": 758,
+      "candidate_request_tokens": 758,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 40
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 40
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-a8c77405293a64a6",
+      "source_trace_sha256": "5f5c5f4576b5d52ab04ae7571ee6e961027a714048d137780ab103b48e10e4cc",
+      "old_request_tokens": 1021,
+      "candidate_request_tokens": 1021,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 84,
+        "authority_labels": 23,
+        "source_event_metadata": 43,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 110,
+        "current_user": 40
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 84,
+        "authority_labels": 23,
+        "source_event_metadata": 43,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 110,
+        "current_user": 40
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-a3fa91a13482c5af",
+      "source_trace_sha256": "5f5c5f4576b5d52ab04ae7571ee6e961027a714048d137780ab103b48e10e4cc",
+      "old_request_tokens": 850,
+      "candidate_request_tokens": 850,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 84,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 49
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 84,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 49
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-8c1708e7cdaea677",
+      "source_trace_sha256": "5f5c5f4576b5d52ab04ae7571ee6e961027a714048d137780ab103b48e10e4cc",
+      "old_request_tokens": 1063,
+      "candidate_request_tokens": 1063,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 142,
+        "authority_labels": 23,
+        "source_event_metadata": 42,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 86,
+        "current_user": 49
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 142,
+        "authority_labels": 23,
+        "source_event_metadata": 42,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 86,
+        "current_user": 49
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-87346c3a96807294",
+      "source_trace_sha256": "5f5c5f4576b5d52ab04ae7571ee6e961027a714048d137780ab103b48e10e4cc",
+      "old_request_tokens": 880,
+      "candidate_request_tokens": 880,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 142,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 142,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "quotation",
+      "provider_id": "chatcmpl-98ff1b7792abd82b",
+      "source_trace_sha256": "9de8978ea704fd70ddbab3f4607febd22cbd9016f45217617298a9c4d907dc8d",
+      "old_request_tokens": 769,
+      "candidate_request_tokens": 769,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "quotation",
+      "provider_id": "chatcmpl-bce8205132dc5810",
+      "source_trace_sha256": "9de8978ea704fd70ddbab3f4607febd22cbd9016f45217617298a9c4d907dc8d",
+      "old_request_tokens": 745,
+      "candidate_request_tokens": 745,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 27
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 27
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "quotation",
+      "provider_id": "chatcmpl-bd1bff1ce62008cf",
+      "source_trace_sha256": "9de8978ea704fd70ddbab3f4607febd22cbd9016f45217617298a9c4d907dc8d",
+      "old_request_tokens": 838,
+      "candidate_request_tokens": 838,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 23,
+        "source_event_metadata": 42,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 24,
+        "current_user": 27
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 23,
+        "source_event_metadata": 42,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 24,
+        "current_user": 27
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "temporary",
+      "provider_id": "chatcmpl-bbde35b1ef4c96be",
+      "source_trace_sha256": "af2bc0be96b010cabe660f92a50bfb3270f92dad21fb7bbf98af6aed29fef50b",
+      "old_request_tokens": 753,
+      "candidate_request_tokens": 753,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "temporary",
+      "provider_id": "chatcmpl-97dadb22924f8437",
+      "source_trace_sha256": "af2bc0be96b010cabe660f92a50bfb3270f92dad21fb7bbf98af6aed29fef50b",
+      "old_request_tokens": 730,
+      "candidate_request_tokens": 730,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 12
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 12
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-afe7e53c05108b0e",
+      "source_trace_sha256": "7a87b5b934d9b2b794e04d235ccaf5d2c563ded02faf108c4abab1918d9b5a56",
+      "old_request_tokens": 762,
+      "candidate_request_tokens": 762,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 44
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 1,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 44
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-982c3e908e3c950d",
+      "source_trace_sha256": "7a87b5b934d9b2b794e04d235ccaf5d2c563ded02faf108c4abab1918d9b5a56",
+      "old_request_tokens": 1029,
+      "candidate_request_tokens": 1029,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 86,
+        "authority_labels": 23,
+        "source_event_metadata": 43,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 112,
+        "current_user": 44
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 86,
+        "authority_labels": 23,
+        "source_event_metadata": 43,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 112,
+        "current_user": 44
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-a0b9e6b4013b6e3a",
+      "source_trace_sha256": "7a87b5b934d9b2b794e04d235ccaf5d2c563ded02faf108c4abab1918d9b5a56",
+      "old_request_tokens": 831,
+      "candidate_request_tokens": 831,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 86,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 28
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 86,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 28
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v3_B0",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-8102593deb038813",
+      "source_trace_sha256": "7a87b5b934d9b2b794e04d235ccaf5d2c563ded02faf108c4abab1918d9b5a56",
+      "old_request_tokens": 819,
+      "candidate_request_tokens": 819,
+      "saved_tokens": 0,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 86,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 16
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 86,
+        "authority_labels": 13,
+        "source_event_metadata": 0,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 16
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": 0,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "field_plan",
+      "provider_id": "chatcmpl-866dd11d874e09f0",
+      "source_trace_sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+      "old_request_tokens": 1062,
+      "candidate_request_tokens": 1053,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 106,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 97,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "9c9eaf68eae11f675b81d026b9177c2434e55d5450945d06db0eeb2d192d00bf",
+          "after_sha256": "0d2ee2349d15cff64a1e0fb5de9094aaa620b33d159cb1787ce4e4385862ec4d"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "field_plan",
+      "provider_id": "chatcmpl-bc32174cfbc27cf3",
+      "source_trace_sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+      "old_request_tokens": 1542,
+      "candidate_request_tokens": 1518,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 89,
+        "authority_labels": 36,
+        "source_event_metadata": 351,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 114,
+        "current_user": 51
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 85,
+        "authority_labels": 36,
+        "source_event_metadata": 331,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 114,
+        "current_user": 51
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "f2b672b342ca6374cf74ee78aef485985e6864f11c12e450839c448d1d3a6051",
+          "after_sha256": "aaa93b1ec6e63985aba44476cad00d38c85d46a9482ba20671dfecca19745ed8"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "31901212dc61f78646deec84e37212d33df6fc511cf9c677884031cc0640803c",
+          "after_sha256": "90399ba5ce06b02375b2afb88aced3186504973a0862cc6630e4d39d9d50a0b1"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "field_plan",
+      "provider_id": "chatcmpl-bd42e8dfe9c2bc96",
+      "source_trace_sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+      "old_request_tokens": 1117,
+      "candidate_request_tokens": 1104,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 89,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 85,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "f2b672b342ca6374cf74ee78aef485985e6864f11c12e450839c448d1d3a6051",
+          "after_sha256": "aaa93b1ec6e63985aba44476cad00d38c85d46a9482ba20671dfecca19745ed8"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "696bb113e342297c8f6db3624f9e1f6c6ca16d6d2f3d0be3c7492838965cc389",
+          "after_sha256": "06a717258a91afad64f53bd3cd4ebc86493777419e0b9107c4e725c76453daaa"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-a2c3cfe973c3662d",
+      "source_trace_sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+      "old_request_tokens": 1044,
+      "candidate_request_tokens": 1035,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "03fdaaa7ff763a5b5cf6354bcb4c52cf6f671236edd23eeb898a88e49bd6f06b",
+          "after_sha256": "4c4400457de22e5dc6e46889fbf771cb916b602cb81f939ca0d8f8eaa08cf7a9"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-81b7700d8634a948",
+      "source_trace_sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+      "old_request_tokens": 1505,
+      "candidate_request_tokens": 1481,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 79,
+        "authority_labels": 36,
+        "source_event_metadata": 350,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 104,
+        "current_user": 35
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 75,
+        "authority_labels": 36,
+        "source_event_metadata": 330,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 104,
+        "current_user": 35
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "dc87540792bce1eeef7d2ea6a4f868ec5a290b1c3f54be78cd0a77978b0aa954",
+          "after_sha256": "1b94f237a28ce4505218048d7596b9d4d84e6f0f25ef57780ba3ed2441903dc4"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "a5b6407205dcb7a4797865364b018f52ab03440cfdc8744c2c46155d9d9a411e",
+          "after_sha256": "55740b5988ffa4dfd2e644ed07a97b6f278e205dfa866b675d26bf5197c402d6"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-938be5f2191cb3f8",
+      "source_trace_sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+      "old_request_tokens": 1107,
+      "candidate_request_tokens": 1094,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 79,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 75,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "dc87540792bce1eeef7d2ea6a4f868ec5a290b1c3f54be78cd0a77978b0aa954",
+          "after_sha256": "1b94f237a28ce4505218048d7596b9d4d84e6f0f25ef57780ba3ed2441903dc4"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "77531daeaba0b7e866837ebf76576ebed33d9c3fea869715f23f755ce7c9338d",
+          "after_sha256": "9c09c57fa059517d99b52f07bf4383d135ddb90b8f17ba98d8249c0949cf0432"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-8f03ba4822272e9a",
+      "source_trace_sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+      "old_request_tokens": 1524,
+      "candidate_request_tokens": 1500,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 77,
+        "authority_labels": 36,
+        "source_event_metadata": 348,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 141,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 73,
+        "authority_labels": 36,
+        "source_event_metadata": 328,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 141,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "b8d730840675b749a91b4e54471d8fb500dcbe97dcf56e930ee6911bf8a1328d",
+          "after_sha256": "678ce434851f229a4c12c8f59763b6995d06f4055ff70d21bebee68ac850d2f0"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "2e68786a8a718cf7981e873c486239f140d5c788cc7089ac2ac948d5e2934845",
+          "after_sha256": "0e30aa6c163b715c909f0e430952f5cf96bfeb409ca71a4219abd6009d5c3774"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-a0563e3c9d883190",
+      "source_trace_sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+      "old_request_tokens": 1105,
+      "candidate_request_tokens": 1092,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 77,
+        "authority_labels": 19,
+        "source_event_metadata": 110,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 15
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 73,
+        "authority_labels": 19,
+        "source_event_metadata": 101,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 15
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "b8d730840675b749a91b4e54471d8fb500dcbe97dcf56e930ee6911bf8a1328d",
+          "after_sha256": "678ce434851f229a4c12c8f59763b6995d06f4055ff70d21bebee68ac850d2f0"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "0be25ad6fb456864a11d71ce7c318634450ce0797e415325f32b61279b601624",
+          "after_sha256": "f8bd388c4772bbe24b35ba2eb2ceea0a71ddb9c5bf71c1965ea6649970431e9a"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-ad34c5b59f1740a7",
+      "source_trace_sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+      "old_request_tokens": 1053,
+      "candidate_request_tokens": 1044,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 108,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 40
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 99,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 40
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "51b8226452e95006194bd7b9f4ce38f0101c60965d735b0a4afa5e7a554b92af",
+          "after_sha256": "0cc6d4e57a3b23930a50248c741b85aee97a963d3324e910d51f82af0d29203e"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-a662119dd25ed7df",
+      "source_trace_sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+      "old_request_tokens": 1515,
+      "candidate_request_tokens": 1491,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 82,
+        "authority_labels": 36,
+        "source_event_metadata": 349,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 107,
+        "current_user": 40
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 78,
+        "authority_labels": 36,
+        "source_event_metadata": 329,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 107,
+        "current_user": 40
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "20df2fa6a0fd3399c3210e634c717890b633d990a8877e122e852cab8d2b3f80",
+          "after_sha256": "9e119d16617b1baf9dc32ab0c898a0e9148cd25c91de11a8674437a8016f6d50"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "1a686367cfbc6a87dd370d8a5d5349798847eec59eb24c811d1c72d680c60ed8",
+          "after_sha256": "c2ae6adfec129a4cc9d6ec6cdf01a5efe993aacec25709143ea3032c2f073fe6"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-8a63d6e2b744f822",
+      "source_trace_sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+      "old_request_tokens": 1138,
+      "candidate_request_tokens": 1125,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 82,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 49
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 78,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 49
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "20df2fa6a0fd3399c3210e634c717890b633d990a8877e122e852cab8d2b3f80",
+          "after_sha256": "9e119d16617b1baf9dc32ab0c898a0e9148cd25c91de11a8674437a8016f6d50"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "ccca08a1a1ba626e09b76690d82d63433fdc38deb5ec84610944827edfff7d37",
+          "after_sha256": "f8160e2cd58694b886c6367a7df2545d44bb5ab4f5d34a9a6031ef88e3120990"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-a4b1e6e5f43699c5",
+      "source_trace_sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+      "old_request_tokens": 1617,
+      "candidate_request_tokens": 1589,
+      "saved_tokens": 28,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 164,
+        "authority_labels": 36,
+        "source_event_metadata": 357,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 110,
+        "current_user": 49
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 156,
+        "authority_labels": 36,
+        "source_event_metadata": 337,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 110,
+        "current_user": 49
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -8,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4194ab37644d544db9bf088149a3aab96e7a622c1b16dbadd6136d47cee8fc39",
+          "after_sha256": "6e8d609c4662bf234ce5c3c8498b9c8dd9576f2bfb43c31f0447f8e36186f931"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "6a9aa7617e6aeee720dcbdffff1cbed8d0f8ee75952dc272060deff98decfe44",
+          "after_sha256": "3f35640209c2e3360c670bc27ae36c9876c0ba55bb4ad708d202d5792bf6e057"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-bb3a0b1e349544f3",
+      "source_trace_sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+      "old_request_tokens": 1196,
+      "candidate_request_tokens": 1179,
+      "saved_tokens": 17,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 164,
+        "authority_labels": 19,
+        "source_event_metadata": 108,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 156,
+        "authority_labels": 19,
+        "source_event_metadata": 99,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -8,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4194ab37644d544db9bf088149a3aab96e7a622c1b16dbadd6136d47cee8fc39",
+          "after_sha256": "6e8d609c4662bf234ce5c3c8498b9c8dd9576f2bfb43c31f0447f8e36186f931"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "6666da169c57318e0b3ead668408499a610a179752b7235d77b482bb59770b0c",
+          "after_sha256": "785f6a8d8c58b500486b2e9836ae2fc1325882621b7c0ad843df2c4a6e099644"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "quotation",
+      "provider_id": "chatcmpl-bdf01b73b71a2b6a",
+      "source_trace_sha256": "0e39af174d998b0847528357f9c52e6fb9330587b98c63c25cd8567c3d354164",
+      "old_request_tokens": 1058,
+      "candidate_request_tokens": 1049,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 102,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 93,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "04faf9327ccc30a6efe6873c6d741adc5f16d4b02f5d8dd48b74279609e85711",
+          "after_sha256": "2a9c5dc0477450d5f822cf3d252a2725489a0602cbd1e0c577720117ba24de72"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "quotation",
+      "provider_id": "chatcmpl-9d68fd4a9feb05ac",
+      "source_trace_sha256": "0e39af174d998b0847528357f9c52e6fb9330587b98c63c25cd8567c3d354164",
+      "old_request_tokens": 1040,
+      "candidate_request_tokens": 1031,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 108,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 27
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 99,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 27
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "2a0f4a9c32f8b4b0bc8308a9ddf13edd2abba559b208765194d4349c461947d8",
+          "after_sha256": "3f63777ad9166fd7b3d55ec41d7f2b7b43236929399e6d5ac90d4cb932ed4af8"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "quotation",
+      "provider_id": "chatcmpl-ab2269a2cb006dfa",
+      "source_trace_sha256": "0e39af174d998b0847528357f9c52e6fb9330587b98c63c25cd8567c3d354164",
+      "old_request_tokens": 1233,
+      "candidate_request_tokens": 1217,
+      "saved_tokens": 16,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 36,
+        "source_event_metadata": 243,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 24,
+        "current_user": 27
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 36,
+        "source_event_metadata": 227,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 24,
+        "current_user": 27
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -16,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "2a0f4a9c32f8b4b0bc8308a9ddf13edd2abba559b208765194d4349c461947d8",
+          "after_sha256": "3f63777ad9166fd7b3d55ec41d7f2b7b43236929399e6d5ac90d4cb932ed4af8"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "temporary",
+      "provider_id": "chatcmpl-bbd0b7ddb383c4cc",
+      "source_trace_sha256": "8ac570d7de5a78ba1c08ec1c9f6fa1b64f77ea80c50a3c805318145415ade452",
+      "old_request_tokens": 1046,
+      "candidate_request_tokens": 1037,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 106,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 97,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "061f97a94673a89ee7a1ff7e868cf3b64c328ec33b06c07b6ffdd4dbde5aec59",
+          "after_sha256": "84d1b0ab47dda1a6cc1e299878aaa7cea4e941ea39c505becd1e862121a641e9"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "temporary",
+      "provider_id": "chatcmpl-aab03313815cef26",
+      "source_trace_sha256": "8ac570d7de5a78ba1c08ec1c9f6fa1b64f77ea80c50a3c805318145415ade452",
+      "old_request_tokens": 1023,
+      "candidate_request_tokens": 1014,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 106,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 12
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 97,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 12
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "084604b0c931f8b984e0f87d65b209e7bd929bcc9094342ab3c7e65bead4ff97",
+          "after_sha256": "1476a0025a3c7956b78241e535de0ee0effa75c17247f72f81b7075f913ba566"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-84b41402f33b5667",
+      "source_trace_sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+      "old_request_tokens": 1055,
+      "candidate_request_tokens": 1046,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 106,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 44
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 97,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 44
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "60c574bd68489584ce554b1963de31b9ae5cc0b1a7f2c0c2db5c7e0e45f2db73",
+          "after_sha256": "9ee92afe321c509a7dc8489e81cca8f53285a9be44ddc5ac866fc2c11475eda1"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-ac8bcf1f08a33bb3",
+      "source_trace_sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+      "old_request_tokens": 1530,
+      "candidate_request_tokens": 1506,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 88,
+        "authority_labels": 36,
+        "source_event_metadata": 348,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 113,
+        "current_user": 44
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 84,
+        "authority_labels": 36,
+        "source_event_metadata": 328,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 113,
+        "current_user": 44
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "35b5ee929670754419097f476a2b8dbc8a1939ebd18ee4d55e956e7cb5991752",
+          "after_sha256": "e2a5a135a90161363688e07ae09de7f2b08a0055b72f854b1628cd315880b8a8"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "0cccdc351c931d9d68aefedd25e61c24cb3e4e2a91b2f7e1ffa3d758da517e55",
+          "after_sha256": "5e448250589f1880c5e4c0ac23a8419a71b8a5af0013a553b034119314ac9d9d"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-9313e8c7ef10186b",
+      "source_trace_sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+      "old_request_tokens": 1123,
+      "candidate_request_tokens": 1110,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 88,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 28
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 84,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 28
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "35b5ee929670754419097f476a2b8dbc8a1939ebd18ee4d55e956e7cb5991752",
+          "after_sha256": "e2a5a135a90161363688e07ae09de7f2b08a0055b72f854b1628cd315880b8a8"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "aa85b5c5ad50e9a95bdf9e37db6d2d5d6c3cca615ff8f3aa12f24ba16ecc1574",
+          "after_sha256": "d52e8019a848af401d7ff46dd2ee73fb61001528ebdb4cdfd00ea98f09972e35"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R1",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-92c44519174240f1",
+      "source_trace_sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+      "old_request_tokens": 1109,
+      "candidate_request_tokens": 1096,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 88,
+        "authority_labels": 19,
+        "source_event_metadata": 102,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 16
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 162,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 84,
+        "authority_labels": 19,
+        "source_event_metadata": 93,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 16
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "35b5ee929670754419097f476a2b8dbc8a1939ebd18ee4d55e956e7cb5991752",
+          "after_sha256": "e2a5a135a90161363688e07ae09de7f2b08a0055b72f854b1628cd315880b8a8"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "8dfb14ffb9157e18e19640bf48a934e070678c011f46173930d48af48097d171",
+          "after_sha256": "987ada08780f79b61992e0275cc50f1bcb924d22cf725745c91839c3f439df02"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "field_plan",
+      "provider_id": "chatcmpl-a1e77a1deabc849d",
+      "source_trace_sha256": "42f58fbebc7be90a3d4d9089e71b350e4956ec78af0865cfa08cb2930497037d",
+      "old_request_tokens": 1107,
+      "candidate_request_tokens": 1098,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "5dc25b0ea0b92def03dc2ce4b0e797c40076bc5da9691be0a4911506820a51f9",
+          "after_sha256": "bf276582e733aaee8a6d2917c8a2d53d549bf8c4623b909ec58c7eb56d5896c6"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "field_plan",
+      "provider_id": "chatcmpl-815d396f2cb00b57",
+      "source_trace_sha256": "42f58fbebc7be90a3d4d9089e71b350e4956ec78af0865cfa08cb2930497037d",
+      "old_request_tokens": 1592,
+      "candidate_request_tokens": 1568,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 89,
+        "authority_labels": 36,
+        "source_event_metadata": 354,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 114,
+        "current_user": 51
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 85,
+        "authority_labels": 36,
+        "source_event_metadata": 334,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 114,
+        "current_user": 51
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "87a9fb6b01db8415334b32280cc3f68a00c83b85dab94edbafec4a17d0dffc8c",
+          "after_sha256": "af46fbf7bf6774d0a1dc74a4d883bae8132bdf4db033a1d213d7f921e03b9e1b"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "da943c4ae34b9b29f921ff39dd479d0c1b40682124d782788e3012e92511ddd3",
+          "after_sha256": "3698f004b2ea2861ecf464340d61434a2410d114f1bd1eba8aa2aaa8d2c8e8f4"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "field_plan",
+      "provider_id": "chatcmpl-a6acf7d898d4f5e1",
+      "source_trace_sha256": "42f58fbebc7be90a3d4d9089e71b350e4956ec78af0865cfa08cb2930497037d",
+      "old_request_tokens": 1158,
+      "candidate_request_tokens": 1145,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 89,
+        "authority_labels": 19,
+        "source_event_metadata": 98,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 85,
+        "authority_labels": 19,
+        "source_event_metadata": 89,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "87a9fb6b01db8415334b32280cc3f68a00c83b85dab94edbafec4a17d0dffc8c",
+          "after_sha256": "af46fbf7bf6774d0a1dc74a4d883bae8132bdf4db033a1d213d7f921e03b9e1b"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "206c619646e996b849a7b3b3e540dbd33c72f09a1f560eabdcbdbec6766085a8",
+          "after_sha256": "b49af5881f75b620897b2f427ce0aa23bcfa225f9a49868b884392f61c8d24db"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-84a47760448fc92d",
+      "source_trace_sha256": "2aa927a22397c08c94f6d87b68f11e025a07208d2adbdb12809e05a5e615261d",
+      "old_request_tokens": 1087,
+      "candidate_request_tokens": 1078,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 100,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 91,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "e4ad3632df6874913ca41f535a29810a67c51c6567fb51ccc6cfb2d86d95bb76",
+          "after_sha256": "e51e4e74630b77cb9d222f05a4a021c9744bc0f7b7cdc673b69a080de3be791f"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-88cf11068bdc3d9b",
+      "source_trace_sha256": "2aa927a22397c08c94f6d87b68f11e025a07208d2adbdb12809e05a5e615261d",
+      "old_request_tokens": 1546,
+      "candidate_request_tokens": 1522,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 78,
+        "authority_labels": 36,
+        "source_event_metadata": 346,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 103,
+        "current_user": 35
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 74,
+        "authority_labels": 36,
+        "source_event_metadata": 326,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 103,
+        "current_user": 35
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "d2e48ad5594c9cc2e4a0245e10f9cf86cd2d8fb63ef140c1b3e2f0210fe7ba3e",
+          "after_sha256": "98757f69471a7faec68b64a9334a9c3d0103e52978ec09db1c3309163c0c98a6"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "b681cbad907a31ff6cf1bd5d350d0562fa7a86bdb3c098823027c2f32fea2e24",
+          "after_sha256": "79aefdfddb08efaf70581d93c43b26f3bd4bd3674091e77dfc8de6103e1bd9a2"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-b31d389d0bdfc38a",
+      "source_trace_sha256": "2aa927a22397c08c94f6d87b68f11e025a07208d2adbdb12809e05a5e615261d",
+      "old_request_tokens": 1155,
+      "candidate_request_tokens": 1142,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 78,
+        "authority_labels": 19,
+        "source_event_metadata": 106,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 74,
+        "authority_labels": 19,
+        "source_event_metadata": 97,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "d2e48ad5594c9cc2e4a0245e10f9cf86cd2d8fb63ef140c1b3e2f0210fe7ba3e",
+          "after_sha256": "98757f69471a7faec68b64a9334a9c3d0103e52978ec09db1c3309163c0c98a6"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "4485aa9b9bf15ceb0d49f3812310d681440973e9d00414a6cb048239693306a2",
+          "after_sha256": "66aa8d04927d2ec3c4939e5f7e132e2fe9f0471e5b4c12042a5d00307f2b2a30"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-9e273354dd7dc710",
+      "source_trace_sha256": "2aa927a22397c08c94f6d87b68f11e025a07208d2adbdb12809e05a5e615261d",
+      "old_request_tokens": 1579,
+      "candidate_request_tokens": 1555,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 76,
+        "authority_labels": 36,
+        "source_event_metadata": 359,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 139,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 72,
+        "authority_labels": 36,
+        "source_event_metadata": 339,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 139,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "e1221742c48fa49b10bc07bc5e487e24b625693ef9a31a6ab8f80e0549cca00c",
+          "after_sha256": "55c86477551f8003cdad73a9032957b8358cf86a673d84a5457c2fff0abea7fc"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "04e65deb8ec57db9f6d30f318500e052d720b960ccd334e30ece5cc7669636f2",
+          "after_sha256": "6831e7d4238c54a2efb87020ec9e25cf8f74d3cfda99b8231715a69af186c9ce"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "editorial_revision",
+      "provider_id": "chatcmpl-940532fe8de5750a",
+      "source_trace_sha256": "2aa927a22397c08c94f6d87b68f11e025a07208d2adbdb12809e05a5e615261d",
+      "old_request_tokens": 1145,
+      "candidate_request_tokens": 1132,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 76,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 15
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 72,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 15
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "e1221742c48fa49b10bc07bc5e487e24b625693ef9a31a6ab8f80e0549cca00c",
+          "after_sha256": "55c86477551f8003cdad73a9032957b8358cf86a673d84a5457c2fff0abea7fc"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "ed56ca404ee4c77574f515dbb490ad8ebfb9e19eb97f089f077d7322191e9747",
+          "after_sha256": "9cadb834d41bd6614183628072493a864a16602ada6132b9579d815e76685364"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-914e6ed23b0dea56",
+      "source_trace_sha256": "f8d38dce83e10d1baa94709697a2f0e86d131ecad342722f69a630fda29ca590",
+      "old_request_tokens": 1104,
+      "candidate_request_tokens": 1095,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 112,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 40
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 103,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 40
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "ed11ebed3fb00e85e1ad0cae2422bb3011805498200bd3eadf60173e946c6711",
+          "after_sha256": "993d9b94a961993358ede49d553f6c86285555cad16e0ebf2e911f07d79197ff"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-a3e576336752c50e",
+      "source_trace_sha256": "f8d38dce83e10d1baa94709697a2f0e86d131ecad342722f69a630fda29ca590",
+      "old_request_tokens": 1573,
+      "candidate_request_tokens": 1549,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 82,
+        "authority_labels": 36,
+        "source_event_metadata": 360,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 107,
+        "current_user": 40
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 78,
+        "authority_labels": 36,
+        "source_event_metadata": 340,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 107,
+        "current_user": 40
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "459e6d43c3428e1214a83b44b739449ef282f66bcfd129c2d6483a1708a0ffca",
+          "after_sha256": "c660a60c55e470e6c1a51374fb0629cd14ac00712de1e62a8ae4e0751fca1938"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "09d8d6d2b815fbf22c6f776c785ba75b52605ebb34686d2f47eb5e5e91b96fc0",
+          "after_sha256": "0ef983beec7d8d7e2e259b5d5f030ad4b9c18d71bbf5095e236f79080ac704c7"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-9e8d01cf29788e65",
+      "source_trace_sha256": "f8d38dce83e10d1baa94709697a2f0e86d131ecad342722f69a630fda29ca590",
+      "old_request_tokens": 1185,
+      "candidate_request_tokens": 1172,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 82,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 49
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 78,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 49
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "459e6d43c3428e1214a83b44b739449ef282f66bcfd129c2d6483a1708a0ffca",
+          "after_sha256": "c660a60c55e470e6c1a51374fb0629cd14ac00712de1e62a8ae4e0751fca1938"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "9a00882f2458a156ba36e9b2aecb0aa1a2b3c5876b3161f8bbd91a0c8bad9866",
+          "after_sha256": "4b1b3bdf040e8e2888b718045298725fc9aca736c469d740209267cdddae0bce"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-88a5c17cdfa846b0",
+      "source_trace_sha256": "f8d38dce83e10d1baa94709697a2f0e86d131ecad342722f69a630fda29ca590",
+      "old_request_tokens": 1616,
+      "candidate_request_tokens": 1588,
+      "saved_tokens": 28,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 146,
+        "authority_labels": 36,
+        "source_event_metadata": 345,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 92,
+        "current_user": 49
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 138,
+        "authority_labels": 36,
+        "source_event_metadata": 325,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 92,
+        "current_user": 49
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -8,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "328babd60a58eff9d4208336b24d86c3bf3fac39dda04ec9968ad42cf88b13c5",
+          "after_sha256": "5be9dd78d830da368b7d17b722440211ae1e90461a68553a033324897161d3ae"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "2bea9e8d7851aa70277919710042fa0c741a4d61b8cda0fc6c11888e6b837251",
+          "after_sha256": "dc774cf8a2575e1ce6b8527bf49e24f219dfb26e23629c7f42dfb5165692dc1f"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "independent_note",
+      "provider_id": "chatcmpl-a61079814428e363",
+      "source_trace_sha256": "f8d38dce83e10d1baa94709697a2f0e86d131ecad342722f69a630fda29ca590",
+      "old_request_tokens": 1215,
+      "candidate_request_tokens": 1198,
+      "saved_tokens": 17,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 146,
+        "authority_labels": 19,
+        "source_event_metadata": 98,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 138,
+        "authority_labels": 19,
+        "source_event_metadata": 89,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 21
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -8,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "328babd60a58eff9d4208336b24d86c3bf3fac39dda04ec9968ad42cf88b13c5",
+          "after_sha256": "5be9dd78d830da368b7d17b722440211ae1e90461a68553a033324897161d3ae"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "a9b275b401324ef67eebe9be5f1c62e6fdbc3e3ff79d751883355c8cf216a122",
+          "after_sha256": "75c6ff7c3786746aa2ba27ca3ad2209bac3f0bfc50a523fc70097c6c0288203b"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "quotation",
+      "provider_id": "chatcmpl-9993c5c97440ad27",
+      "source_trace_sha256": "7ee1064bb56402b69e18d89cdcabc514b431598ed1ecaad9141b467f465dfa72",
+      "old_request_tokens": 1105,
+      "candidate_request_tokens": 1096,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 102,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 93,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 51
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "b5ad571ad8a51ea168d65764df6a4f291b6b9497a8730cef275cb8303182cb3a",
+          "after_sha256": "835e34b1bed4bc0275f43b8015e34ce67b0b8f6f163861dc3db23f299cecf280"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "quotation",
+      "provider_id": "chatcmpl-998fbe5150e094fa",
+      "source_trace_sha256": "7ee1064bb56402b69e18d89cdcabc514b431598ed1ecaad9141b467f465dfa72",
+      "old_request_tokens": 1085,
+      "candidate_request_tokens": 1076,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 106,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 27
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 97,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 27
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "b9367591b7641c3c5579e97e62696e7439622d46fb12dc310430298e623b615a",
+          "after_sha256": "9555492e2be49b67b2a043552ef2ab7a465f53b70a25e70cd66123efdd257b94"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "quotation",
+      "provider_id": "chatcmpl-98c0d6bcb4862da9",
+      "source_trace_sha256": "7ee1064bb56402b69e18d89cdcabc514b431598ed1ecaad9141b467f465dfa72",
+      "old_request_tokens": 1286,
+      "candidate_request_tokens": 1270,
+      "saved_tokens": 16,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 36,
+        "source_event_metadata": 242,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 31,
+        "current_user": 27
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 36,
+        "source_event_metadata": 226,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 31,
+        "current_user": 27
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -16,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "b9367591b7641c3c5579e97e62696e7439622d46fb12dc310430298e623b615a",
+          "after_sha256": "9555492e2be49b67b2a043552ef2ab7a465f53b70a25e70cd66123efdd257b94"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "temporary",
+      "provider_id": "chatcmpl-b82fae5349274ea6",
+      "source_trace_sha256": "a77f40cab91be960d4a604babe4b58f7c6954637ce53cba44d0b629c632341ca",
+      "old_request_tokens": 1095,
+      "candidate_request_tokens": 1086,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 108,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 99,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 35
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "e827c4098409cd85926ebba2aa48463cf1e59a13235c39626c5c0f69b1eb4117",
+          "after_sha256": "d903ba5a96f5f9d00e2083de8fa1748f6208219e038493c351720aee8605a26a"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "temporary",
+      "provider_id": "chatcmpl-8f0e2b700d6bf53a",
+      "source_trace_sha256": "a77f40cab91be960d4a604babe4b58f7c6954637ce53cba44d0b629c632341ca",
+      "old_request_tokens": 1066,
+      "candidate_request_tokens": 1057,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 102,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 12
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 93,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 12
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "62b978bd7e1d1162a168d582aa025971ebf0d5fd9f3a83323fe8ef3961d3bbf2",
+          "after_sha256": "583cfe2e1f8820920aeaac11e221d0f808b7c4950a72c00ce57d0b1e5624adad"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-ac6dfda0609c50ad",
+      "source_trace_sha256": "adef9657d4555c6b5cd6b316c798a1494fc2422091882a67d0ea1d73e00221d1",
+      "old_request_tokens": 1100,
+      "candidate_request_tokens": 1091,
+      "saved_tokens": 9,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 44
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 2,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 44
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": 0,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "ad156e90de981a3a589720f4f58ea153f8c5185a92252e5e3d81003f60d5ba0b",
+          "after_sha256": "6b470f2a79395e8cf88335d051c56958688704bbe3430cee400051b19b435b89"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-b8deb16ac83615f0",
+      "source_trace_sha256": "adef9657d4555c6b5cd6b316c798a1494fc2422091882a67d0ea1d73e00221d1",
+      "old_request_tokens": 1576,
+      "candidate_request_tokens": 1552,
+      "saved_tokens": 24,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 88,
+        "authority_labels": 36,
+        "source_event_metadata": 347,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 113,
+        "current_user": 44
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 84,
+        "authority_labels": 36,
+        "source_event_metadata": 327,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 113,
+        "current_user": 44
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -20,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "07bbc60250d2a4f2b2d1452ef543fbf8e58146b7a0280370a304b84677152491",
+          "after_sha256": "cfbd08b507ee0028ca3f615961367a0e5d361141d0988a5aa306a9ac26b397b1"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "e01ba8e3a82b0856c2759c20ad3e914e9e8137106db579a9559feb5d914b5c1c",
+          "after_sha256": "2091bc3da0871a4d8d19366513c85844df4a536945877ffe7043327d709d53b9"
+        },
+        {
+          "kind": "tool_observation_metadata",
+          "decoded_equal": true,
+          "body_bytes_unchanged": true
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-9fd7939453e8379b",
+      "source_trace_sha256": "adef9657d4555c6b5cd6b316c798a1494fc2422091882a67d0ea1d73e00221d1",
+      "old_request_tokens": 1170,
+      "candidate_request_tokens": 1157,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 88,
+        "authority_labels": 19,
+        "source_event_metadata": 104,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 28
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 84,
+        "authority_labels": 19,
+        "source_event_metadata": 95,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 28
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "07bbc60250d2a4f2b2d1452ef543fbf8e58146b7a0280370a304b84677152491",
+          "after_sha256": "cfbd08b507ee0028ca3f615961367a0e5d361141d0988a5aa306a9ac26b397b1"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "7361e1e5d12964471e4fb57190e20a61a1a4c20c7814fdf0213b31bae7dca62f",
+          "after_sha256": "d733c74ebc61684a02e6c91461b1b4a225538d6e38efbd2e5ec00748533010cd"
+        }
+      ],
+      "candidate_is_offline_only": true
+    },
+    {
+      "version": "v4_R2",
+      "case_id": "read_only",
+      "provider_id": "chatcmpl-8bea5b3fa6c9490a",
+      "source_trace_sha256": "adef9657d4555c6b5cd6b316c798a1494fc2422091882a67d0ea1d73e00221d1",
+      "old_request_tokens": 1162,
+      "candidate_request_tokens": 1149,
+      "saved_tokens": 13,
+      "component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 88,
+        "authority_labels": 19,
+        "source_event_metadata": 108,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 16
+      },
+      "candidate_component_tokens": {
+        "system_base": 109,
+        "memory_boundary_text": 209,
+        "current_task_wrapper": 18,
+        "ordinary_memory_view": 84,
+        "authority_labels": 19,
+        "source_event_metadata": 99,
+        "tool_schemas": 578,
+        "checkpoint_transcript": 0,
+        "current_user": 16
+      },
+      "delta_by_component": {
+        "system_base": 0,
+        "memory_boundary_text": 0,
+        "current_task_wrapper": 0,
+        "ordinary_memory_view": -4,
+        "authority_labels": 0,
+        "source_event_metadata": -9,
+        "tool_schemas": 0,
+        "checkpoint_transcript": 0,
+        "current_user": 0
+      },
+      "semantic_fields_preserved": [
+        {
+          "kind": "[DURABLE MEMORY]",
+          "decoded_equal": true,
+          "before_sha256": "07bbc60250d2a4f2b2d1452ef543fbf8e58146b7a0280370a304b84677152491",
+          "after_sha256": "cfbd08b507ee0028ca3f615961367a0e5d361141d0988a5aa306a9ac26b397b1"
+        },
+        {
+          "kind": "[WORKING HYPOTHESIS - current task references]",
+          "decoded_equal": true,
+          "before_sha256": "980b2fdf455f963e2f9a608c34e80eed06c872c4b0b2a6a935e445482441311c",
+          "after_sha256": "9f966704c86c9f2b77cf97c986eef6e385a4f34aa12318f02f975555c3c261c5"
+        }
+      ],
+      "candidate_is_offline_only": true
+    }
+  ],
+  "candidate": "Only insignificant JSON whitespace in durable-view/working-state/observation-metadata objects; no removed keys, values, user text, record bodies, labels, actual tool result or schema",
+  "interpretation": [
+    "Component standalone token counts have BPE/template residual; do not sum them as exact marginal costs",
+    "The full local chat-template counts match all frozen provider input usages",
+    "Syntactic decoded information equality is proved for this offline candidate; Host behavior equality has not been tested",
+    "V5 first run must use unchanged v4 R2, so this candidate is not deployed"
+  ],
+  "new_model_calls": 0,
+  "evidence_script_sha256": "604c8e087fcd1d80b15faa2d5454f9accc8cd9690d6fbc17f49ace96a0d451fe",
+  "repeated_delivery_r2": {
+    "working_state_objects": 22,
+    "duplicate_current_ref_pairs": 22,
+    "empty_open_questions": 22,
+    "empty_active_refs": 16,
+    "tool_observation_metadata": 7,
+    "read_only_generation_requests": 10,
+    "read_only_boundary_text_deliveries": 10,
+    "read_only_write_tool_catalog_deliveries": 10
+  },
+  "repetition_interpretation": {
+    "largest_input_growth_vs_v3_B0": "R1 source/event metadata +3628 vs boundary +3564; R2 boundary +4598 then metadata +3613. Metadata includes working-state refs and actual receipt identities.",
+    "repeated_each_call": "Tool catalog, base instructions, boundary paragraph and current-task/ref view repeat in all22; same current user and memory can recur on tool continuation by design.",
+    "audit_only": "content_sha256 is independently verified by program and is not a legal task tool argument; no operational Host use was observed in these frozen traces. This does not authorize removing all provenance.",
+    "write_detail_on_read_only": "Original write-tool description and strict CRUD rules repeat in all10 no-write generation requests. These tools remain available, so removing their contract on intent inference would change semantics and is not done.",
+    "safe_candidate_scope": "Whitespace-only JSON re-encoding removes no field and preserves all values; repeated refs/empty state/boundary clauses remain. The small saving is reported honestly."
+  }
+}
