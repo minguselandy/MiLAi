@@ -28,10 +28,10 @@ Root完整读取1,204行；原文DRAFT/PAUSED/NOT_STARTED原样保留，授权�
 | V1 / §7 | 四层rubric；每个task-failing要求有用户可见依据，持久要求有意图依据；diagnostic不改任务分 | COMPLETE；20项窄检查与实际两轮CLI通过；原文依据人工复核 |
 | V2 / §8 | 冻结HTTP的obligation→user→formation→delivery→answer链；工具任务另看args/world；无LLM评分 | COMPLETE；6×55人工链已组合，legacy与diagnostic分列 |
 | V3 / §9 | 九类请求组件成本；重复/仅审计/只写所需信息；确定性候选old/new tokens和保留证明 | 离线测量完成；R2仅JSON空白候选节省331输入tokens（1.19%），未部署 |
-| V4 / §10 | 8–10脚本、每脚本2–4session；完整/部分/临时/独立/引用/只读/删除/助手冲突/动态world/moderate bank | INPUTS_FIXED；10脚本/27消息/133义务，10个正式零模型prepare通过，待发布后freeze |
-| V5 / §11 | 当前v4 R2一方法一次前瞻验证；explicit≥95%、所有requested持久变化正确、无假保存/误持久化/重复业务/隐藏要求失败 | NOT_RUN |
+| V4 / §10 | 8–10脚本、每脚本2–4session；完整/部分/临时/独立/引用/只读/删除/助手冲突/动态world/moderate bank | COMPLETE；10脚本/27消息/133义务发布冻结，发布SHA身份前置故障已保留并解决 |
+| V5 / §11 | 当前v4 R2一方法一次前瞻验证；explicit≥95%、所有requested持久变化正确、无假保存/误持久化/重复业务/隐藏要求失败 | R1_COMPLETE；9/10脚本、explicit70/71、persistent59/59；H冲突失败，未满足完整稳定性 |
 | V6 / §12 | 仅真实失败首断点触发单层通用修复；约束修复须旧回归＋至少两个新约束验证 | CONDITIONAL_NOT_TRIGGERED |
-| V7 / §13 | 真实world与助手历史冲突覆盖；实际旧transcript保留、current工具/有效来源和无重复副作用 | 新样本必须覆盖；修复条件待V5 |
+| V7 / §13 | 真实world与助手历史冲突覆盖；实际旧transcript保留、current工具/有效来源和无重复副作用 | 覆盖已完成；dynamic world通过，assistant conflict失败，单层诊断进行中 |
 | V8 / §14 | 真正检索瓶颈后同bank/history/model/tools/world的all/query/working-query/lazy-A比较，全成本 | CONDITIONAL_NOT_TRIGGERED |
 | V9 / §17–20 | 四层证据、失败首断点/两解释/反思、成本、复现、Go/Pivot/Stop、逐项完成审计和Luna发布 | PENDING |
 
@@ -57,5 +57,12 @@ V0–V5 runtime不变，真实HTTP并发1，不启动Judge/controller/selector/�
 初始只读核对无实验runner。连续账本为原树 `artifacts/ser-v20/budget.json`，
 **2994 generation calls / 3,785,491 generation tokens / 21,237 embedding tokens**，
 SHA `e47de5a370b7c6dad581d836a440411055c01c137ec4c589f95389109a4ca668`。
-V1/V2离线工具和V3请求分析已完成；V4完整输入已固定，正式prepare为159项源码。当前v5新增真实generation/embedding为0。开发代理和离线tokenizer不混入实验费用。
+V1/V2离线工具和V3请求分析已完成；V4完整输入已固定，正式prepare为159项源码。R1新增42 generation /60,039 tokens、19 embedding /380 tokens；账本3036/3,845,530/21,617。开发代理和离线tokenizer不混入实验费用。
 runtime永不读取rubric/gold；只读实际证据与人工判定严格分开，未知值不自动变pass。
+
+## V5 首轮更新
+
+见[R1结果](MILAI_NEXT_DEVELOPMENT_V5_PROSPECTIVE_R1_RESULTS_20260928.md)。
+持久形成/同ID更新/DELETE/范围与动态world通过；保留旧历史时当前Store9被回答为6。
+首断点CURRENT_TASK_CONSUMPTION，Astra仅对此具体冲突提供局部建议，后续候选须由Root冻结、Sol实现。
+实际Goal仍active；V9和§20方法稳定尚未完成。
