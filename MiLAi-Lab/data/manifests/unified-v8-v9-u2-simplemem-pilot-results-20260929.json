@@ -1,0 +1,372 @@
+{
+  "kind": "UNIFIED_U2_SIMPLEMEM_EXPOSED_PILOT_RESULTS",
+  "status": "COMPLETE_WITH_NATIVE_CAPACITY_INTERRUPTION",
+  "created_at_utc": "2026-09-28T23:22:44.211273+00:00",
+  "method_source_commit": "9200de0146da03ac09c78dab820feb1c9d09a708",
+  "execution_commit": "9200de0146da03ac09c78dab820feb1c9d09a708",
+  "execution_freeze_sha256": "493a1f835e7e806eafa716b787e0222d31e1c984d9953dbe52d4ad2554672084",
+  "run_order_sha256": "8900652ad37339b78f91f9c40bd10a91847d25aeb592103002235cbee96d9810",
+  "frozen_files": 390,
+  "planned_invocations": 3,
+  "invocation_statuses": {
+    "COMPLETED": 2,
+    "FAILED": 1
+  },
+  "planned_judge": 0,
+  "actual_judge": 0,
+  "source_publication": {
+    "branch": "feat/lab-unified-benchmarks-v8-v9-20260928",
+    "pr": 72,
+    "draft": true,
+    "commit": "9200de0146da03ac09c78dab820feb1c9d09a708",
+    "publication_receipt_sha256": "f2ff8f1c057e7ddb3a4dfb805e0398bf397257fff353869419dd28509f2a88d5"
+  },
+  "memsyco": {
+    "case_id": "mso_hard_000072",
+    "formation_status": "COMPLETED",
+    "query_status": "COMPLETED",
+    "retrieval_status": "COMPLETED",
+    "archive_messages": 10,
+    "formed_records": 33,
+    "retrieved_records": 29,
+    "delivered_records": 29,
+    "omitted_records": 0,
+    "native_input_exact": true,
+    "persisted_reopen_snapshot_equal": true,
+    "query_snapshot_unchanged": true,
+    "literal_material_in_actual_reader_http": true,
+    "answer_sha256": "d4ad4e143b11cb2157fe7866535a1ed345493abeae8576bf623a2b2f67a24c29",
+    "formation_sha256": "cbe84c9298392dcef13cc7a456b24f4caa1399b1756f6c6aeef8d2e45da64d38",
+    "query_result_sha256": "3e92c5d062462c84abd07f33104b01514f1eef958f8b0e6d11fb3b379accbcbc",
+    "scoring_status": "NOT_PLANNED_IN_ENGINEERING_PILOT"
+  },
+  "merit": {
+    "arc_id": "arc5-000",
+    "planned_episodes": 5,
+    "planned_dependent": 2,
+    "planned_public_messages": 6,
+    "episodes": [
+      {
+        "index": 0,
+        "dependent": false,
+        "success": true,
+        "status": "COMPLETED",
+        "native_score": {
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "memory_had_fact": false,
+          "argument_value_match": false,
+          "memory_utilized": false
+        },
+        "episode_sha256": "f36995cd65576391bea4fb4b978f3fa14f30d174be9afaba25c95d3aa61cff0d"
+      },
+      {
+        "index": 1,
+        "dependent": true,
+        "success": true,
+        "status": "COMPLETED",
+        "native_score": {
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "memory_had_fact": false,
+          "argument_value_match": true,
+          "memory_utilized": false
+        },
+        "episode_sha256": "46fe659aafe097fdefc4a4146f410310a3a1e92b3ab94537bfc510a94188d123"
+      },
+      {
+        "index": 2,
+        "dependent": false,
+        "success": true,
+        "status": "COMPLETED",
+        "native_score": {
+          "pre_satisfied": false,
+          "checker_after": true,
+          "success": true,
+          "memory_had_fact": false,
+          "argument_value_match": false,
+          "memory_utilized": false
+        },
+        "episode_sha256": "6b2ad81a814a4040c58611807e06cfbbd1fe954d6f0066b92cc6316e3ba20dee"
+      },
+      {
+        "index": 3,
+        "dependent": false,
+        "success": null,
+        "status": "INTERRUPTED_UNSCORED",
+        "native_score": null,
+        "episode_sha256": null
+      },
+      {
+        "index": 4,
+        "dependent": true,
+        "success": null,
+        "status": "NOT_RUN",
+        "native_score": null,
+        "episode_sha256": null
+      }
+    ],
+    "successes": 3,
+    "unscored": 2,
+    "dependent_successes": 1,
+    "dependent_unscored": 1,
+    "whole_arc_success": null,
+    "completed_turns": 4,
+    "maintenance_statuses": {
+      "COMPLETED": 4
+    },
+    "native_final_record_count": 11,
+    "unique_public_queries": 5,
+    "actual_native_retrieval_operations": 5,
+    "same_query_and_material_reused_across_react": true,
+    "completed_turn_current_human_verified": 4,
+    "business_journal_count": 9,
+    "business_tool_counts": {
+      "send_message": 1,
+      "refund": 1,
+      "update_address": 2,
+      "get_order": 1,
+      "get_policy": 4
+    },
+    "business_statuses": {
+      "complete": 9
+    },
+    "business_journal_sha256": "eb07cdc2d6caf219dab3087476b9d70faf4b1f502321ef1ef9c23f9f7abbf817",
+    "capacity_counts": {
+      "99b1cf9e3994c31a1610b5e67cb607a363b09f4b4bd32fc8fdd89bd638b58b3d:0": 6,
+      "5a5118c6fe7ce7525beb627176833695c601f5d15af2c15c42a667be28eef057:0": 7,
+      "5a5118c6fe7ce7525beb627176833695c601f5d15af2c15c42a667be28eef057:1": 10,
+      "ccb2a3ded645abe57e052b1bdac0341c040a1def3d4c255e30c97ce93e889e47:0": 10,
+      "98c156a775b5223b4fff511352b403116e3f5e0e99a5735713dc3c4bcd4fa7eb:0": 12
+    },
+    "failure_sha256": "bfc3e487d69f4f33c0d70d7f0acbfa8c21c3b780be85c43f3f50ce223476cdd5",
+    "interruption_sha256": "407e90b70a39b4c75cca6c5bcb80d2903c03a2db2c65076b9b953c51a0364ec1",
+    "last_public_message_actual_generation": [
+      {
+        "trace_index": 302,
+        "phase": "simplemem_retrieval",
+        "generation_id": "chatcmpl-a78566e0696241f1",
+        "tokens": 586,
+        "finish_reason": "stop",
+        "tool_names": []
+      },
+      {
+        "trace_index": 307,
+        "phase": "simplemem_retrieval",
+        "generation_id": "chatcmpl-8259d5fc38117d52",
+        "tokens": 583,
+        "finish_reason": "stop",
+        "tool_names": []
+      },
+      {
+        "trace_index": 321,
+        "phase": "simplemem_retrieval",
+        "generation_id": "chatcmpl-be77bf6f51d0d929",
+        "tokens": 275,
+        "finish_reason": "stop",
+        "tool_names": []
+      },
+      {
+        "trace_index": 328,
+        "phase": "simplemem_retrieval",
+        "generation_id": "chatcmpl-83bd946ffe18057f",
+        "tokens": 1017,
+        "finish_reason": "stop",
+        "tool_names": []
+      },
+      {
+        "trace_index": 333,
+        "phase": "simplemem_retrieval",
+        "generation_id": "chatcmpl-83909c1d8fcc8b53",
+        "tokens": 1052,
+        "finish_reason": "stop",
+        "tool_names": []
+      },
+      {
+        "trace_index": 347,
+        "phase": "simplemem_retrieval",
+        "generation_id": "chatcmpl-ac7668cac246db03",
+        "tokens": 1011,
+        "finish_reason": "stop",
+        "tool_names": []
+      },
+      {
+        "trace_index": 352,
+        "phase": "simplemem_retrieval",
+        "generation_id": "chatcmpl-b8c644eb9782a61f",
+        "tokens": 1037,
+        "finish_reason": "stop",
+        "tool_names": []
+      },
+      {
+        "trace_index": 369,
+        "phase": "task_host",
+        "generation_id": "chatcmpl-ae1d0d031906ec02",
+        "tokens": 1734,
+        "finish_reason": "tool_calls",
+        "tool_names": [
+          "get_order"
+        ]
+      },
+      {
+        "trace_index": 375,
+        "phase": "task_host",
+        "generation_id": "chatcmpl-a38e8d1308e3e61a",
+        "tokens": 1842,
+        "finish_reason": "tool_calls",
+        "tool_names": [
+          "get_policy"
+        ]
+      },
+      {
+        "trace_index": 381,
+        "phase": "task_host",
+        "generation_id": "chatcmpl-a4c88483e7fb4643",
+        "tokens": 1923,
+        "finish_reason": "tool_calls",
+        "tool_names": [
+          "get_policy"
+        ]
+      },
+      {
+        "trace_index": 387,
+        "phase": "task_host",
+        "generation_id": "chatcmpl-ab4018c01ae9ef3e",
+        "tokens": 1990,
+        "finish_reason": "tool_calls",
+        "tool_names": [
+          "get_policy"
+        ]
+      },
+      {
+        "trace_index": 393,
+        "phase": "task_host",
+        "generation_id": "chatcmpl-b386febb161717b0",
+        "tokens": 2049,
+        "finish_reason": "tool_calls",
+        "tool_names": [
+          "get_policy"
+        ]
+      }
+    ],
+    "native_observation_outcomes": {
+      "get_all:success": 9,
+      "provider_attempt:success": 32,
+      "completion:success": 32,
+      "parse:success": 32,
+      "_analyze_information_requirements:success": 5,
+      "_generate_targeted_queries:success": 5,
+      "_analyze_query:success": 5,
+      "operation_result:": 9,
+      "archive_input:": 4,
+      "writer_parse:success": 4,
+      "writer_window:success": 4,
+      "embedding:success": 33,
+      "insert:success": 4,
+      "semantic_search:success": 29,
+      "keyword_search:success": 4,
+      "structured_search:success": 4,
+      "_analyze_information_completeness:success": 7,
+      "_generate_missing_info_queries:success": 6
+    },
+    "trace_sha256": "5c458b753f81345a08f4b67e3730f42e86a3b0a3e8c9daa4bae419a0509af044",
+    "all_started_turn_current_human_verified": 5,
+    "chronological_retrieval_matches_actual_prior_bank": true,
+    "unique_query_retrieved_record_counts": [
+      0,
+      6,
+      8,
+      9,
+      11
+    ]
+  },
+  "failure_analysis": {
+    "Observed": "MERIT episode3 is interrupted before final answer; episode4 not run. Seven normal native retrieval generations plus five actual Host read-only business-tool proposals use public-message capacity12. Earlier3 native episodes pass; partial bank has11 records from4 closed turns.",
+    "Expected": "Complete each public turn and maintenance inside the unchanged shared12 contract, preserve results when unavailable. No automatic extension/retry.",
+    "first_break": "PUBLIC_MESSAGE_CAPACITY: next Host continuation refused after actual12; the first generic refund_policy query misses but the tool returns available keys and subsequent queries use them. No native retries or exhausted fallbacks were observed.",
+    "causal_chain": [
+      "Current Human is queried once",
+      "Native planning, structured query and two reflection rounds use7 actual generations",
+      "Stable material reused across5 Host tool continuations",
+      "get_order and4get_policy calls finish",
+      "Next Host generation rejected before HTTP; final answer/closed-turn writer absent",
+      "Native episode3 unscored; episode4 not started; prior world/journal/checkpoint/bank preserved"
+    ],
+    "competing_explanations": [
+      {
+        "explanation": "Combined native retrieval overhead and natural Agent policy lookups consume the declared common capacity.",
+        "evidence": "Exact12 response receipts,7+5 phases, unique native retrieval once/current message; all45 MERIT prompt counts match usage.",
+        "assessment": "SUPPORTED_FOR_THIS_RUN"
+      },
+      {
+        "explanation": "Integration repeats automatic retrieval or debits requests without actual HTTP, artificially exhausting capacity.",
+        "evidence": "5 retrieval operations for5 started public messages; ReAct uses identical cached query/material, capacity sum45 equals45 actual generation receipts.",
+        "assessment": "NOT_SUPPORTED"
+      },
+      {
+        "explanation": "Policy conflict could independently prevent a refund after more capacity.",
+        "evidence": "Actual order amount13100 exceeds policy threshold10000; no final policy decision exists because run stops after reads.",
+        "assessment": "POSSIBLE_COUNTERFACTUAL_NOT_EVALUATED"
+      }
+    ],
+    "generic_candidates": [
+      "A separately declared reduced planning/reflection or larger budget would change the method/comparison; not applied here.",
+      "No adapter repair justified by this trace; do not resume business or append a final answer."
+    ],
+    "confounds": [
+      "Exposed one-arc pilot",
+      "Native SimpleMem stages plus common Agent differ from upstream ask",
+      "Single Qwen family and native stochastic stage temperatures",
+      "Capacity and policy-choice effects are not causally isolated"
+    ],
+    "minimal_next_experiment": "Run this unchanged external arm once on the already-declared60 histories/queries and18 complete arcs; retain all interruptions and planned denominators. Do not rerun the pilot or old five arms.",
+    "decision": "CONTINUE_UNCHANGED_SYSTEM_COMPARISON; no quality or safety claim"
+  },
+  "costs": {
+    "generation_calls": 51,
+    "generation_tokens": 56629,
+    "embedding_tokens": 2010
+  },
+  "by_run_costs": {
+    "memsyco-simplemem_text": {
+      "generation_calls": 6,
+      "generation_tokens": 10164,
+      "embedding_tokens": 1094
+    },
+    "merit-simplemem_text": {
+      "generation_calls": 45,
+      "generation_tokens": 46465,
+      "embedding_tokens": 916
+    }
+  },
+  "prompt_estimate_errors": {
+    "0": 51
+  },
+  "trace_audit_sha256": "9a9075014c0c0c58eccc9d4f43fc2f7436493d8ae2d52a24661ad55b2c29a2db",
+  "ledger_after": {
+    "generation_requests": 5992,
+    "generation_tokens": 10921341,
+    "embedding_tokens": 416802
+  },
+  "ledger_after_sha256": "2ef3e45b0150cb6c5cc2c47dc0f0493497157e84dae0a9e991d71b1181113e3c",
+  "limits": [
+    "No pilot MemSyco Judge; answer existence is not a pass.",
+    "Three successful episodes and four maintained turns establish actual chains, not all-arc success or arbitrary recovery.",
+    "No explicit SimpleMem search/history escape was selected by the Host in this pilot; automatic native retrieval is separately verified.",
+    "SimpleMem SDK operations are not MiLAi MCP calls; actual native business tools and same shared Agent/ledger used.",
+    "G0/G1 support comparison with normal failures, not product readiness.",
+    "Same already-exposed cases, no independent new benefit claim."
+  ],
+  "research": "NOT_ACHIEVED",
+  "product": "NO_GO",
+  "pause_override": {
+    "status": "PAUSED_BY_USER",
+    "at_utc": "2026-09-28T23:24:40.554546+00:00",
+    "user_request": "暂停当前实验，生成实验报告",
+    "authority": "The earlier Continue decision and proposed development comparison are superseded. Report/publication only; no experiment, download, deployment or source development without a new explicit resume.",
+    "private_pre_pause_result_sha256": "d999782f9cf59d375d6f0a7dbae86a07f24592903772cdb4c4f4fc96ef5ffa51",
+    "development_status": "NOT_RUN_NO_PREPARE_NO_EXECUTION_FREEZE"
+  }
+}

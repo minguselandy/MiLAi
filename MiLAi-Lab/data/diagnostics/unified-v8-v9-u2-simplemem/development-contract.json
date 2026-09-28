@@ -1,11 +1,11 @@
 {
   "kind": "UNIFIED_U2_SIMPLEMEM_TEXT_DEVELOPMENT_EXTENSION_CONTRACT",
-  "status": "ENGINEERING_READY_EXPOSED_PILOT_PENDING",
-  "method_source_commit": null,
+  "status": "PAUSED_BY_USER_NOT_RUN",
+  "method_source_commit": "9200de0146da03ac09c78dab820feb1c9d09a708",
   "protocol": "docs/MILAI_UNIFIED_U2_SIMPLEMEM_PROTOCOL_20260929.md",
   "protocol_sha256": "68a56060d23c78730f8d7a0a88ab9d749d12146091186bc5d60cafcba49d54d2",
-  "pilot_results": null,
-  "pilot_results_sha256": null,
+  "pilot_results": "data/manifests/unified-v8-v9-u2-simplemem-pilot-results-20260929.json",
+  "pilot_results_sha256": "fa687ca7b6fafb5ba9947df21c35e5199b617f2bc79d648ef95a5542d82d9a67",
   "order": [
     {
       "benchmark": "memsyco",
@@ -53,5 +53,9 @@
   "reference_results": "data/manifests/unified-v8-v9-u2-main-results-20260929.json",
   "reference_results_sha256": "1d6d20524790a7ab3cfb30b75fec15ee96b0ed5657eb68ffbd8a434896ff6475",
   "engineering_receipt": "data/manifests/unified-v8-v9-u2-simplemem-engineering-20260929.json",
-  "engineering_receipt_sha256": "d2185dddd53379ffc2f7c4bf3228793eb27c8f2c2f770e65c8c1e6fd66f9ef1f"
+  "engineering_receipt_sha256": "d2185dddd53379ffc2f7c4bf3228793eb27c8f2c2f770e65c8c1e6fd66f9ef1f",
+  "pilot_gate_decision": "No engineering duplication/accounting fault. Preserve natural native-capacity interruption and use unchanged method on all existing exposed development tasks.",
+  "execution_authority": "NONE_WHILE_PAUSED; prior design/order/Continue is not permission to run",
+  "execution_freeze": null,
+  "pause_request": "暂停当前实验，生成实验报告"
 }

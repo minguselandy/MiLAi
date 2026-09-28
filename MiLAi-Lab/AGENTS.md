@@ -1,5 +1,28 @@
 # MiLAi Lab agent instructions
 
+## Latest user stop: 2026-09-29
+
+The user explicitly requested: “暂停当前实验，生成实验报告”. Actual Goal is **paused**.
+Follow [the pause report](docs/MILAI_UNIFIED_V8_V9_EXPERIMENT_REPORT_20260929.md) and
+[requirement/cost record](data/manifests/unified-v8-v9-pause-summary-20260929.json).
+This instruction overrides every historical ACTIVE, Continue and preparation paragraph below.
+Only report/state reconciliation and already-authorized Luna Git publication continue. Do not
+run experiments, source development, model/dependency downloads or deployments without a new
+explicit user resume. Do not mark the full original Goal complete merely because this report is done.
+
+U2 first five-method table is preserved at method795725a2/executione6df2f5d/report81f2cf4.
+SimpleMem core text engineering and exposed pilot ran at9200de0146da03ac09c78dab820feb1c9d09a708:
+MemSyco formation33records/query29delivered with equal snapshots; no pilot Judge. MERIT3pass/2unknown
+of5, dependent1pass/1unknown of2; native7 retrieval generations plus5 Host tool generations exhausted
+shared12 on the fourth episode. No duplicate retrieval/debit found, no rerun/limit increase/repair.
+Pilot added51 generation/56629tokens/2010embeddingtokens; continuous ledger5992/10921341/416802.
+SimpleMem planned138-unit development and60Judge remain NOT_RUN, no formal prepare/freeze exists.
+U3–U5 and full U6 remain unfinished; research NOT_ACHIEVED, Product NO_GO. No running experiment
+or model-asset download was found at pause. Preserve existing services, banks, all raw failures,
+private traces, old checkouts, original drafts and ledgers. PR72 remains draft/open/unmerged; main
+and PR70/71 remain unchanged. Prior frozen protocols retain their historical pre-run bytes.
+
+
 ## Current scope and authority
 
 The actual user Goal now authorizes the full [unified V8/V9 plan](docs/MILAI_UNIFIED_DEVELOPMENT_EXPERIMENT_PLAN_V8_V9_20260928.md).

@@ -1,4 +1,9 @@
 ---
+
+> **2026-09-29 当前状态：PAUSED_BY_USER。** 用户要求暂停实验并生成报告，实际Goal已paused。
+> [总体暂停报告](MILAI_UNIFIED_V8_V9_EXPERIMENT_REPORT_20260929.md)及[机器状态](../data/manifests/unified-v8-v9-pause-summary-20260929.json)优先于下文历史ACTIVE／Continue。
+> 仅整理报告与已授权Git发布；未有新的明确恢复指令，不启动实验、开发、下载或部署。完整Goal尚未完成。
+
 status: ACTIVE_U2_FIRST_TABLE_COMPLETE_NEXT_STAGE_PENDING
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 plan_sha256: b496818cc94dc5a3eee83f7795f8afb7f145cc16aa628f31c52d7e33251a948c
@@ -308,3 +313,20 @@ SimpleMem text 使用官方 core `db80b6a7c591e0ea730a058e9f5fc4eb06572299`，�
 依赖为独立环境CPU包，无新模型资产/部署/服务改变；本阶段真实generation/embedding/Judge/MCP为0，账本仍5941/10864712/414792。
 发布后Root重新正式prepare和freeze，再运行已曝光首题及完整arc5（3 invocation，0 Judge）；正常低分保留，不调原生方法。
 可运行后只补SimpleMem相同已曝光development的138单元和最多60次固定Judge，不重跑旧五臂。U3–U6尚未完成，实际Goal仍ACTIVE。
+
+
+## 用户暂停：SimpleMem pilot 已结束，development 未启动
+
+源码及pilot实际提交 `9200de0146da03ac09c78dab820feb1c9d09a708` 已发布，Root核远端及21文件allowlist一致。
+在390文件冻结后完成3次外层尝试：MemSyco形成与查询成功，MERIT原生容量中断；没有重试或方法改变。
+详见[SimpleMem试跑结果](MILAI_UNIFIED_U2_SIMPLEMEM_PILOT_RESULTS_20260929.md)。
+MemSyco33条原生记录、29条取回/交付、0省略、查询前后快照不变；按pilot合同0Judge，不报语义通过。
+MERIT前3/5 episodes成功，第4个中断、第5个未运行；dependent1成功＋1未知/2。4个已关闭turn维护完成，保留11条记录。
+中断消息7次原生检索生成＋5次Host工具查询达到共享12。5个已启动公开消息各检索一次，ReAct复用相同材料；45次MERIT生成与额度/费用一一对应，不支持适配器重复执行解释。
+全部实际world/journal/checkpoint/bank保留，不加额度、不缩减原生反思、不续接业务。计划138单元开发及最多60Judge没有正式prepare、冻结或执行。
+
+用户随后明确“暂停当前实验，生成实验报告”。实际Goal为paused，当前无实验/模型资产下载进程；既有推理和数据库服务未停改。
+本pilot新增51generation/56629tokens/2010embeddingtokens，连续5992/10921341/416802；本Goal累计新增2691/6716138/393232。
+旧账本、失败、曝光、协议和结果全部保留。原Continue/Pivot只保留历史意义，不是恢复授权。
+Root完成总体报告和状态核对，Luna只发布精确文档/结果allowlist至draft PR72；不合并main/旧PR、不运行模型/整套测试/build。
+U3–U5及完整U6未完成；本次暂停报告不能标Goal complete，研究NOT_ACHIEVED，ProductNO_GO。
