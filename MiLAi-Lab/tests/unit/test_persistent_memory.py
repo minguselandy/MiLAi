@@ -29,7 +29,7 @@ from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateSc
 from milai_lab.methods.local_state_attention.controller import ControlResponseError
 from milai_lab.methods.memory_boundaries import event_reference, operation_audit
 from milai_lab.methods.memory_result import RESPONSIBILITY_PROMPT
-from milai_lab.providers.contextual_capacity import CapacityExceeded
+from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import IncompleteChatResponse, VLLMChatModel
 from milai_lab.runners import persistent_memory as runner
@@ -91,21 +91,22 @@ def _runtime(
     max_calls: int = 12,
     capacity: Any = None,
     budget: RunBudget | None = None,
+    tool_mode: str = "json_action",
 ) -> Any:
     def transport(request: httpx.Request) -> httpx.Response:
         wire = json.loads(request.read())
         wires.append(wire)
+        answer = respond(wire, len(wires))
+        message = (answer if tool_mode == "native" else {
+            "role": "assistant", "content": json.dumps(answer)})
         return httpx.Response(
             200,
             json={
                 "id": f"generation-{len(wires)}",
                 "choices": [
                     {
-                        "finish_reason": "stop",
-                        "message": {
-                            "role": "assistant",
-                            "content": json.dumps(respond(wire, len(wires))),
-                        },
+                        "finish_reason": "tool_calls" if message.get("tool_calls") else "stop",
+                        "message": message,
                     }
                 ],
                 "usage": {"prompt_tokens": 8, "completion_tokens": 5, "total_tokens": 13},
@@ -115,7 +116,7 @@ def _runtime(
     if budget is None:
         budget = RunBudget(RunLimits(1, 3, None, None, None), root / "budget.json")
     with VLLMClient(
-        VLLMConfig(**_config(root)["host"]),
+        VLLMConfig(**{**_config(root)["host"], "tool_mode": tool_mode}),
         transport=httpx.MockTransport(transport),
         emit=Trace(root / "trace.jsonl", "mock"),
         budget=budget,
@@ -149,9 +150,13 @@ def _agent(
     boundaries: bool = False,
     boundary_options: dict[str, Any] | None = None,
     selector_client: VLLMClient | None = None,
+    research_profile: str | None = None,
 ) -> Any:
     write_json(root / "run_manifest.json", {"identity": {"run_id": "run", "arm_id": arm}})
     config = _config(root, history)
+    config["host"]["tool_mode"] = runtime.model.client.config.tool_mode
+    if research_profile is not None:
+        config["research_profile"] = research_profile
     if boundaries:
         config["memory_boundaries"] = {"enabled": True, **(boundary_options or {})}
         config["memory_result"] = {"correction_entries": 0}
@@ -177,6 +182,186 @@ def _final(status: str, refs: list[str] | None = None) -> dict[str, Any]:
 
 def _scope(arm: str = "C", session: str = "one") -> FoundationScope:
     return FoundationScope("run", arm, "alice", "application:" + session)
+
+
+def _protocol_reply(action: dict, mode: str, index: int) -> dict:
+    if mode == "json_action":
+        return action
+    if "calls" not in action:
+        return {"role": "assistant", "content": action["answer"],
+                "reasoning_content": "private reasoning is not the answer"}
+    return {"role": "assistant", "content": "These are proposed operations.", "tool_calls": [
+        {"id": f"native-{index}-{position}", "type": "function", "function": {
+            "name": call["name"], "arguments": json.dumps(call["arguments"])}}
+        for position, call in enumerate(action["calls"])]}
+
+
+@pytest.mark.parametrize("mode", ["json_action", "native"])
+def test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool(
+    tmp_path: Path, mode: str,
+) -> None:
+    from langchain_core.tools import tool
+
+    owner_scope = _scope("B0")
+    namespace = ("langmem", "run", "B0", "alice")
+    foreign = str(uuid.uuid4())
+    store = InMemoryStore()
+    store.put(("langmem", "run", "B0", "bob"), foreign, {"content": "PRIVATE_BOB"})
+    side_effects = []
+    @tool
+    def partial_action() -> str:
+        """Execute a synthetic action with an actual partial result."""
+        side_effects.append("reserved")
+        return json.dumps({"ok": False, "status": "reserved_label_failed",
+                           "reservation_id": "actual-reservation"})
+    ids = []
+    actions = [
+        lambda: {"calls": [
+            {"name": "manage_memory", "arguments": {"action": "create", "content": "PLAN_A"}},
+            {"name": "manage_memory", "arguments": {"action": "create", "content": "PLAN_B"}},
+            {"name": "manage_memory", "arguments": {"action": "create", "content": None}},
+            {"name": "read_memory", "arguments": {"id": "not-a-uuid"}},
+            {"name": "partial_action", "arguments": {}}]},
+        lambda: {"answer": "Actual partial result retained."},
+        lambda: {"calls": [
+            {"name": "manage_memory", "arguments": {"action": "update", "id": ids[0],
+                                                      "content": "PLAN_A_CURRENT"}},
+            {"name": "manage_memory", "arguments": {"action": "update", "id": ids[0],
+                                                      "content": "PLAN_A_CURRENT"}},
+            {"name": "read_memory", "arguments": {"id": foreign}}]},
+        lambda: {"answer": "Updated the same record."},
+        lambda: {"calls": [
+            {"name": "manage_memory", "arguments": {"action": "delete", "id": ids[0]}},
+            {"name": "read_memory", "arguments": {"id": ids[0]}}]},
+        lambda: {"answer": "Deleted the record; exact read is absent."},
+        lambda: {"answer": "A legal read-only final reply."},
+    ]
+    wires = []
+    def respond(_wire, index):
+        return _protocol_reply(actions[index - 1](), mode, index)
+    with _runtime(tmp_path, store, wires, respond, tool_mode=mode) as runtime:
+        agent = _agent(runtime, tmp_path, "B0", business=[partial_action], boundaries=True,
+            boundary_options={"memory_placement": "current_request", "model_view": "compact_v6"},
+            research_profile="protocol_calibration_v7")
+        first = invoke_public_message(
+            agent, runtime.model, owner_scope, "Keep two independent plans.")
+        receipts = [row for row in first if isinstance(row, ToolMessage)]
+        assert [row.name for row in receipts] == ["manage_memory"] * 3 + [
+            "read_memory", "partial_action"]
+        assert [row.status for row in receipts] == [
+            "success", "success", "error", "error", "success"]
+        ids.extend(json.loads(row.content)["id"] for row in receipts[:2])
+        assert len(set(ids)) == 2 and [store.get(namespace, key).value for key in ids] == [
+            {"content": "PLAN_A"}, {"content": "PLAN_B"}]
+        assert side_effects == ["reserved"]
+        audit = operation_audit([row.model_dump(mode="json") for row in first],
+                               runtime.model.memory_turn,
+                               owner_scope.config()["configurable"]["thread_id"],
+                               runtime.model.request_view.receipt_metadata)
+        assert audit["operations"][-1]["status"] == "reserved_label_failed"
+        assert len(audit["actual_memory_change_refs"]) == 2
+        updated = invoke_public_message(
+            agent, runtime.model, owner_scope, "Update only the first plan.")
+        assert [json.loads(row.content)["status"] for row in
+                [row for row in updated if isinstance(row, ToolMessage)][-3:]] == [
+            "updated", "no_change", "not_found"]
+        assert store.get(namespace, ids[0]).value == {"content": "PLAN_A_CURRENT"}
+        deleted = invoke_public_message(
+            agent, runtime.model, owner_scope, "Delete only the first plan.")
+        assert [json.loads(row.content)["status"] for row in
+                [row for row in deleted if isinstance(row, ToolMessage)][-2:]] == [
+            "deleted", "not_found"]
+        final = invoke_public_message(
+            agent, runtime.model, owner_scope, "Just reply without writing.")
+        assert final[-1].content == "A legal read-only final reply."
+        assert store.get(namespace, ids[0]) is None
+        assert store.get(namespace, ids[1]).value == {"content": "PLAN_B"}
+        assert side_effects == ["reserved"] and len(wires) == 7
+        assert all("PRIVATE_BOB" not in json.dumps(wire) for wire in wires)
+        assert all(sum("[DURABLE MEMORY]" in row["content"] for row in wire["messages"]) == 1
+                   for wire in wires)
+        assert all("Keep two independent plans." in json.dumps(wire) for wire in wires)
+        assert all("[CURRENT USER REQUEST]" in json.dumps(wire) for wire in wires)
+        assert runtime.model.calls_in_message == 1
+        if mode == "native":
+            assert all("tools" in wire and wire["tool_choice"] == "auto" and
+                       "response_format" not in wire for wire in wires)
+            assert all("JSON object" not in wire["messages"][0]["content"] and
+                       "transport envelope" not in wire["messages"][0]["content"] for wire in wires)
+            proposed = next(row for row in first if isinstance(row, AIMessage) and row.tool_calls)
+            assert proposed.content == "These are proposed operations."
+            assert proposed.response_metadata["tool_narrative_status"] == "proposal_not_execution"
+            assert [row.tool_call_id for row in receipts] == [
+                call["id"] for call in proposed.tool_calls]
+            history_call = next(row for row in wires[1]["messages"] if row["role"] == "assistant")
+            assert len(history_call["tool_calls"]) == 5
+        else:
+            assert all("tools" not in wire and wire["response_format"]["type"] == "json_schema"
+                       for wire in wires)
+
+
+def test_v7_profile_is_explicit_and_preserves_old_restrictions(tmp_path: Path) -> None:
+    import copy
+
+    old = read_json(LAB / "data/diagnostics/next-development-v6-compact/config.json")
+    runner._validate(old, "B0")
+    for name in ("json-action-config.json", "native-config.json"):
+        current = read_json(LAB / "data/diagnostics/development-experiment-v7-e1" / name)
+        runner._validate(current, "B0")
+        for changed in ({"research_profile": "anything"}, {"research_profile": None}):
+            invalid = {**current, **changed}
+            if changed["research_profile"] is not None or current["host"]["tool_mode"] == "native":
+                with pytest.raises(ValueError):
+                    runner._validate(invalid, "B0")
+        for key, value in (("model_view", "full"), ("memory_placement", "system"),
+                           ("attention_enabled", True)):
+            invalid = copy.deepcopy(current)
+            invalid["memory_boundaries"][key] = value
+            with pytest.raises(ValueError):
+                runner._validate(invalid, "B0")
+        with pytest.raises(ValueError):
+            runner._validate(current, "C")
+
+
+def test_v7_native_actual_template_counts_tools_and_rejects_before_delivery(tmp_path: Path) -> None:
+    config = read_json(LAB / "data/diagnostics/development-experiment-v7-e1/native-config.json")
+    capacity = HostCapacity(config["capacity"])
+    store, wires = InMemoryStore(), []
+    key = str(uuid.uuid4())
+    store.put(("langmem", "run", "B0", "alice"), key, {"content": "OWN_CURRENT_BODY"})
+    store.put(("langmem", "run", "B0", "bob"), key, {"content": "PRIVATE_OTHER_BODY"})
+    with _runtime(tmp_path, store, wires,
+                  lambda *_: {"role": "assistant", "content": "A legal final."},
+                  tool_mode="native", capacity=capacity) as runtime:
+        agent = _agent(runtime, tmp_path, "B0", boundaries=True,
+            boundary_options={"memory_placement": "current_request", "model_view": "compact_v6"},
+            research_profile="protocol_calibration_v7")
+        invoke_public_message(agent, runtime.model, _scope("B0"), "Read my current plan.")
+        wire = wires[0]
+        with_tools = capacity.check(wire["messages"], wire["max_tokens"], wire["tools"])
+        without_tools = capacity.check(wire["messages"], wire["max_tokens"])
+        assert with_tools["prompt_tokens"] > without_tools["prompt_tokens"]
+        template = capacity.tokenizer.apply_chat_template(
+            wire["messages"], tools=wire["tools"], tokenize=False,
+            add_generation_prompt=True, enable_thinking=False)
+        assert "read_memory" in template and "OWN_CURRENT_BODY" in template
+        assert "PRIVATE_OTHER_BODY" not in template and "Read my current plan." in template
+        events = [json.loads(line) for line in (tmp_path / "trace.jsonl").read_text().splitlines()]
+        route = next(row for row in events if row["event"] == "memory_boundary_route")
+        delivery = next(row for row in events if row["event"] == "memory_boundary_delivery")
+        assert route["final_capacity"] == with_tools
+        assert delivery["final_capacity"] == with_tools and delivery["generation_id"]
+        assert runtime.model.calls_in_message == 1
+
+        # A catalog-aware capacity failure is pre-HTTP, so no delivery or generation is claimed.
+        capacity.context_tokens = 1
+        with pytest.raises(CapacityExceeded):
+            invoke_public_message(agent, runtime.model, _scope("B0", "too-small"),
+                                  "Read my current plan.")
+        assert len(wires) == 1 and runtime.model.calls_in_message == 0
+        final_events = [json.loads(line) for line in
+                        (tmp_path / "trace.jsonl").read_text().splitlines()]
+        assert sum(row["event"] == "memory_boundary_delivery" for row in final_events) == 1
 
 
 @pytest.mark.parametrize("memory_placement", ["system", "current_request"])
@@ -444,12 +629,16 @@ def test_boundary_persisted_selector_capacity_refuses_without_another_http(
             assert read_json(tmp_path / "control-capacity.json")[message_key] == used
 
 
-def test_boundary_host_twelve_call_capacity_does_not_replay_or_add_control(tmp_path: Path) -> None:
+@pytest.mark.parametrize("mode", ["json_action", "native"])
+def test_boundary_host_twelve_call_capacity_does_not_replay_or_add_control(
+    tmp_path: Path, mode: str,
+) -> None:
     store, wires = InMemoryStore(), []
     record_id = str(uuid.uuid4())
     store.put(("langmem", "run", "B0", "alice"), record_id, {"content": "actual content"})
-    with _runtime(tmp_path, store, wires, lambda *_: {"calls": [{"name": "read_memory",
-        "arguments": {"id": record_id}}]}) as runtime:
+    with _runtime(tmp_path, store, wires, lambda _wire, index: _protocol_reply({
+        "calls": [{"name": "read_memory", "arguments": {"id": record_id}}]}, mode, index),
+        tool_mode=mode) as runtime:
         agent = _agent(runtime, tmp_path, "B0", boundaries=True)
         with pytest.raises(ValueError, match="PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"):
             invoke_public_message(agent, runtime.model, _scope("B0"), "read actual content")

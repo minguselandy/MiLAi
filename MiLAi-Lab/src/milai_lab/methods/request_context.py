@@ -32,15 +32,37 @@ class RequestContext:
     action_protocol: str | None = None
     model_view: ModelView = ModelView.FULL
     tool_observations: Mapping[int, Mapping[str, Any]] = field(default_factory=dict)
+    history_protocol: str = "json_action"
+    assistant_call_labels: Mapping[int, str] = field(default_factory=dict)
 
     def with_records(self, records: Sequence[Mapping[str, Any]]) -> RequestContext:
         return replace(self, durable_records=tuple(records))
 
-    def with_action_protocol(self, protocol: str) -> RequestContext:
+    def with_action_protocol(self, protocol: str | None) -> RequestContext:
         return replace(self, action_protocol=protocol)
 
     def with_model_view(self, model_view: ModelView) -> RequestContext:
         return replace(self, model_view=model_view)
+
+    def with_protocol(self, protocol: str, boundary_protocol: str | None) -> RequestContext:
+        if protocol not in {"json_action", "native"}:
+            raise ValueError("MEMORY_BOUNDARY_PROTOCOL_UNKNOWN")
+        return replace(self, history_protocol=protocol, boundary_protocol=boundary_protocol)
+
+
+def json_action_calls(calls: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """One history encoder, shared by boundary and historical JSON request paths."""
+    encoded = []
+    for call in calls:
+        function = call["function"]
+        try:
+            arguments = json.loads(function["arguments"])
+        except (TypeError, ValueError) as exc:
+            raise ValueError("JSON_ACTION_HISTORY_INVALID_ARGUMENTS") from exc
+        if not isinstance(arguments, dict):
+            raise ValueError("JSON_ACTION_HISTORY_ARGUMENTS_NOT_OBJECT")
+        encoded.append({"name": function["name"], "arguments": arguments})
+    return {"calls": encoded}
 
 
 def record_material(records: Sequence[Mapping[str, Any]],
@@ -81,6 +103,15 @@ def render_request(context: RequestContext, placement: MemoryPlacement) -> list[
     system = dict(context.system_message)
     system["content"] = render_system(context, placement)
     messages = [dict(message) for message in context.messages]
+    for history_index, message in enumerate(messages):
+        if message.get("role") == "assistant" and message.get("tool_calls"):
+            if context.history_protocol == "json_action":
+                body = json.dumps(json_action_calls(message["tool_calls"]), ensure_ascii=False)
+                message.pop("tool_calls")
+            else:
+                body = message["content"]
+            label = context.assistant_call_labels.get(history_index)
+            message["content"] = (label + "\n" if label else "") + body
     for observation_index, observation in context.tool_observations.items():
         metadata = {key: value for key, value in observation.items()
                     if context.model_view is ModelView.FULL or key != "content_sha256"}

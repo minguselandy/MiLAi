@@ -45,6 +45,7 @@ from milai_lab.methods.local_state_attention.writers import (
 )
 from milai_lab.methods.memory_boundaries import (
     BOUNDARY_PROTOCOL,
+    NATIVE_BOUNDARY_PROTOCOL,
     READ_SELECTION_PROMPT,
     MemoryBoundaryView,
     boundary_policy,
@@ -128,13 +129,22 @@ def _validate(config: dict[str, Any], arm: str) -> None:
     enabled = policy is not None
     correction_entries = config.get("memory_result", {}).get(
         "correction_entries", 0 if enabled else None)
+    profile = config.get("research_profile")
+    if profile is not None and profile != "protocol_calibration_v7":
+        raise ValueError("PERSISTENT_MEMORY_RESEARCH_PROFILE_INVALID")
+    if profile is not None and (arm != "B0" or policy is None
+        or policy["memory_placement"] != "current_request"
+        or policy["model_view"] != "compact_v6" or policy["attention_enabled"]
+        or config["host"].get("response_format") is not None):
+        raise ValueError("PERSISTENT_MEMORY_RESEARCH_PROFILE_INVALID")
     if (
         arm not in ARMS
         or config.get("memory_contract") != "strict"
         or config.get("history_mode") not in {"archive", "retained"}
         or correction_entries != (0 if enabled else 1)
         or (enabled and arm != "B0")
-        or config["host"]["tool_mode"] != "json_action"
+        or config["host"]["tool_mode"] not in (
+            {"json_action", "native"} if profile is not None else {"json_action"})
         or config["host"]["max_calls"] != 12
         or config["host"]["max_tokens"] != 4096
         or config["host"]["temperature"] != 0
@@ -243,6 +253,17 @@ def _identity(
                              "no crash-resume cache guarantee"),
                          "program_operation_audit": True,
                          "working_state_persistence": False})
+    if config.get("research_profile") is not None:
+        native = config["host"]["tool_mode"] == "native"
+        identity.update({"method": "persistent-memory-protocol-calibration-v7",
+            "research_profile": config["research_profile"],
+            "tool_protocol": config["host"]["tool_mode"],
+            "action_prompt": None if native else identity["action_prompt"],
+            "action_schema": None if native else identity["action_schema"],
+            "boundary_protocol": NATIVE_BOUNDARY_PROTOCOL if native else BOUNDARY_PROTOCOL,
+            "tool_execution": "synchronous ToolNode executor.map; max_concurrency=1",
+            "final_reply": "native natural text" if native else "decoded JSON answer",
+            "native_service_verified_by_runner": False})
     return identity
 
 
@@ -326,6 +347,7 @@ def _adapters(
         environment_rules: str = "",
         observer: ProvenanceObserver | None = None,
     ) -> Any:
+        model.research_profile = config.get("research_profile")
         scope = StateScope(run_id, arm, user_id)
         graph: dict[str, Any] = {}
 

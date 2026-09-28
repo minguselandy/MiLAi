@@ -32,6 +32,7 @@ from milai_lab.methods.on_demand_reconstruction.schema import (
     ReconstructionError,
     odr_action_schema,
 )
+from milai_lab.methods.request_context import json_action_calls
 from milai_lab.providers.contextual_vllm import VLLMClient
 
 
@@ -95,18 +96,12 @@ def _json_action_history(messages: list[dict[str, Any]]) -> list[dict[str, Any]]
         if message["role"] != "assistant" or not message.get("tool_calls"):
             rendered.append(message)
             continue
-        calls = []
-        for call in message["tool_calls"]:
-            function = call["function"]
-            try:
-                arguments = json.loads(function["arguments"])
-            except (TypeError, ValueError) as exc:
-                raise IncompleteChatResponse("JSON_ACTION_HISTORY_INVALID_ARGUMENTS") from exc
-            if not isinstance(arguments, dict):
-                raise IncompleteChatResponse("JSON_ACTION_HISTORY_ARGUMENTS_NOT_OBJECT")
-            calls.append({"name": function["name"], "arguments": arguments})
+        try:
+            action = json_action_calls(message["tool_calls"])
+        except ValueError as exc:
+            raise IncompleteChatResponse(str(exc)) from exc
         history_message = {key: value for key, value in message.items() if key != "tool_calls"}
-        history_message["content"] = json.dumps({"calls": calls}, ensure_ascii=False)
+        history_message["content"] = json.dumps(action, ensure_ascii=False)
         rendered.append(history_message)
     return rendered
 
@@ -128,6 +123,7 @@ class VLLMChatModel(BaseChatModel):
     request_view: Any = None
     memory_protocol: str | None = None
     memory_turn: dict[str, str] | None = None
+    research_profile: str | None = None
 
     @property
     def _llm_type(self) -> str:
@@ -169,6 +165,15 @@ class VLLMChatModel(BaseChatModel):
         if not isinstance(wire_messages, list):
             raise TypeError("Expected a message sequence")
         tools = kwargs.get("tools") or []
+        native = self.client.config.tool_mode == "native"
+        boundary = isinstance(self.request_view, MemoryBoundaryView)
+        if native and (self.memory_protocol == "C" or self.m1 is not None
+                       or self.odr is not None or self.projection is not None
+                       or (self.request_view is not None and not boundary)):
+            raise ValueError("NATIVE_CHAT_RECIPE_UNSUPPORTED")
+        if native and (kwargs.get("tool_choice") not in (None, "auto", "none")
+                       or self.client.config.response_format is not None):
+            raise ValueError("NATIVE_CHAT_PROTOCOL_UNSUPPORTED")
         original_messages = ([row.model_dump(mode="json") for row in messages]
                              if self.memory_protocol is not None else [])
         memory_receipts = (turn_receipts(original_messages, self.memory_turn)
@@ -178,6 +183,16 @@ class VLLMChatModel(BaseChatModel):
         if correcting is not None:
             tools = [row for row in tools if row["function"]["name"] in CORRECTION_TOOLS]
         delivered_snapshot: tuple[list[dict[str, Any]], int] | None = None
+        if boundary:
+            try:
+                wire_messages, _ = self.request_view.project(
+                    wire_messages, messages, self.active_message_key,
+                    self.calls_in_message + 1)
+            except ValueError as exc:
+                if str(exc) in {"JSON_ACTION_HISTORY_INVALID_ARGUMENTS",
+                                "JSON_ACTION_HISTORY_ARGUMENTS_NOT_OBJECT"}:
+                    raise IncompleteChatResponse(str(exc)) from exc
+                raise
         if self.client.config.tool_mode == "json_action":
             wire_messages = _json_action_history(wire_messages)
             if self.memory_protocol is not None:
@@ -191,7 +206,7 @@ class VLLMChatModel(BaseChatModel):
                     if row["role"] == "tool" and row.get("tool_call_id") in refs else row
                     for row in wire_messages]
             lineage_messages = messages
-            if self.request_view is not None:
+            if self.request_view is not None and not boundary:
                 wire_messages, lineage_messages = self.request_view.project(
                     wire_messages, messages, self.active_message_key,
                     self.calls_in_message + 1)
@@ -263,6 +278,9 @@ class VLLMChatModel(BaseChatModel):
                     "dynamic_freshness": odr_freshness,
                 })
         else:
+            if boundary:
+                wire_messages = self.request_view.fit_final_request(
+                    self.request_view.final_request_context(None, native=True), tools=tools)
             self._reserve_request()
             scope = (self.observer.request_scope(self.active_message_key, self.calls_in_message)
                      if self.observer is not None else nullcontext())
@@ -272,6 +290,8 @@ class VLLMChatModel(BaseChatModel):
                     tools=tools,
                     tool_choice=kwargs.get("tool_choice"),
                 )
+                if self.request_view is not None and hasattr(self.request_view, "record_delivery"):
+                    self.request_view.record_delivery(receipt)
         choices = receipt.get("choices")
         if not isinstance(choices, list) or len(choices) != 1:
             raise IncompleteChatResponse("VLLM_CHAT_EXPECTED_ONE_CHOICE")
@@ -344,10 +364,27 @@ class VLLMChatModel(BaseChatModel):
                                                 "memory_result_action": action,
                                                 "memory_result_verification": verification})
         else:
-            for call in wire_message.get("tool_calls") or []:
-                function = call.get("function")
-                if not isinstance(function, dict) or not call.get("id") or not function.get("name"):
+            native_calls = wire_message.get("tool_calls")
+            if native_calls is None:
+                native_calls = []
+            if not isinstance(native_calls, list):
+                raise IncompleteChatResponse("VLLM_CHAT_INVALID_TOOL_CALL")
+            names = {item["function"]["name"] for item in tools}
+            seen = {call["id"] for row in messages if isinstance(row, AIMessage)
+                    for call in row.tool_calls}
+            for call in native_calls:
+                if not isinstance(call, dict):
                     raise IncompleteChatResponse("VLLM_CHAT_INVALID_TOOL_CALL")
+                function = call.get("function")
+                if (not isinstance(function, dict) or call.get("type") != "function"
+                        or not isinstance(call.get("id"), str) or not call["id"]
+                        or not isinstance(function.get("name"), str)):
+                    raise IncompleteChatResponse("VLLM_CHAT_INVALID_TOOL_CALL")
+                if call["id"] in seen:
+                    raise IncompleteChatResponse("VLLM_CHAT_DUPLICATE_TOOL_CALL_ID")
+                if function["name"] not in names:
+                    raise IncompleteChatResponse("VLLM_CHAT_UNKNOWN_TOOL")
+                seen.add(call["id"])
                 try:
                     args = json.loads(function["arguments"])
                 except (TypeError, ValueError) as exc:
@@ -355,7 +392,16 @@ class VLLMChatModel(BaseChatModel):
                 if not isinstance(args, dict):
                     raise IncompleteChatResponse("VLLM_CHAT_TOOL_ARGUMENTS_NOT_OBJECT")
                 calls.append({"name": function["name"], "args": args, "id": call["id"]})
-            content = wire_message.get("content") or ""
+            if (bool(calls) != (choice["finish_reason"] == "tool_calls")):
+                raise IncompleteChatResponse("VLLM_CHAT_TOOL_FINISH_MISMATCH")
+            native_content = wire_message.get("content")
+            if native_content is None and calls:
+                native_content = ""
+            if not isinstance(native_content, str):
+                raise IncompleteChatResponse("VLLM_CHAT_INVALID_CONTENT")
+            content = native_content
+            if calls and content:
+                completion_metadata["tool_narrative_status"] = "proposal_not_execution"
         usage = receipt.get("usage") or {}
         usage_metadata = None
         if isinstance(usage, dict):

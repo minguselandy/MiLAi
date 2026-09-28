@@ -56,6 +56,65 @@ def _receipt(action: dict[str, Any], request_id: str) -> dict[str, Any]:
     }
 
 
+@pytest.mark.parametrize(("change", "reason"), [
+    ({"id": None}, "INVALID_TOOL_CALL"),
+    ({"id": ""}, "INVALID_TOOL_CALL"),
+    ({"name": "unknown_tool"}, "UNKNOWN_TOOL"),
+    ({"arguments": "[]"}, "TOOL_ARGUMENTS_NOT_OBJECT"),
+    ({"arguments": "{"}, "INVALID_TOOL_ARGUMENTS"),
+    ({"repeat": True}, "DUPLICATE_TOOL_CALL_ID"),
+    ({"finish_reason": "length"}, "TRUNCATED"),
+    ({"finish_reason": "stop"}, "TOOL_FINISH_MISMATCH"),
+    ({"calls_shape": {}}, "INVALID_TOOL_CALL"),
+])
+def test_native_invalid_proposal_never_reaches_toolnode(change: dict, reason: str,
+                                                       tmp_path: Path) -> None:
+    effects = []
+    @tool
+    def action(value: int) -> str:
+        """Perform a synthetic action."""
+        effects.append(value)
+        return "actual result"
+    call = {"id": change.get("id", "call-1"), "type": "function", "function": {
+        "name": change.get("name", "action"), "arguments": change.get("arguments", '{"value":1}')}}
+    receipt = {"id": "generation", "choices": [{
+        "finish_reason": change.get("finish_reason", "tool_calls"), "message": {
+            "role": "assistant", "content": "A proposal, not execution.",
+            "tool_calls": change.get("calls_shape", [call, call] if change.get("repeat")
+                                      else [call])}}]}
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock", tool_mode="native"),
+                   transport=httpx.MockTransport(
+                       lambda _request: httpx.Response(200, json=receipt))) as client:
+        model = VLLMChatModel(client=client)
+        with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+            agent = build_agent(model, InMemoryStore(), saver, [action])
+            with pytest.raises(IncompleteChatResponse, match=reason):
+                invoke_public_message(agent, model,
+                    FoundationScope("run", "arm", "user", "session"), "Do it.")
+        assert effects == [] and model.calls_in_message == 1
+
+
+@pytest.mark.parametrize("extension", ["m1", "odr", "projection", "request_view", "C", "required"])
+def test_native_rejects_unsupported_extensions_before_http(extension: str) -> None:
+    requests = []
+    def respond(request):
+        requests.append(request)
+        raise AssertionError("unsupported request must not be sent")
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock", tool_mode="native"),
+                   transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client)
+        kwargs = {}
+        if extension == "C":
+            model.memory_protocol = "C"
+        elif extension == "required":
+            kwargs["tool_choice"] = "required"
+        else:
+            setattr(model, extension, object())
+        with pytest.raises(ValueError, match=r"NATIVE_CHAT_.*UNSUPPORTED"):
+            model._generate([HumanMessage(content="original")], **kwargs)
+        assert requests == [] and model.calls_in_message == 0
+
+
 def test_json_action_executes_every_upstream_call_in_order(tmp_path: Path) -> None:
     responses = [
         _receipt({"calls": [
@@ -402,9 +461,10 @@ def test_external_manage_name_does_not_get_native_conditions(tmp_path: Path) -> 
     assert results[0].content == "external update"
 
 
+@pytest.mark.parametrize("protocol", ["json_action", "native"])
 @pytest.mark.parametrize("contract", ["native", "strict"])
 def test_native_manage_store_value_error_is_not_converted(
-    tmp_path: Path, contract: str,
+    tmp_path: Path, contract: str, protocol: str,
 ) -> None:
     class BrokenStore(InMemoryStore):
         def put(self, *_args: Any, **_kwargs: Any) -> None:
@@ -412,12 +472,18 @@ def test_native_manage_store_value_error_is_not_converted(
 
     responses = [_receipt({"calls": [{"name": "manage_memory", "arguments": {
         "action": "create", "content": "will fail"}}]}, "broken")]
+    if protocol == "native":
+        responses[0]["choices"] = [{"finish_reason": "tool_calls", "message": {
+            "role": "assistant", "content": "A proposal.", "tool_calls": [{
+                "id": "create-1", "type": "function", "function": {
+                    "name": "manage_memory", "arguments": json.dumps({
+                        "action": "create", "content": "will fail"})}}]}}]
 
     def respond(_: httpx.Request) -> httpx.Response:
         return httpx.Response(200, json=responses.pop(0))
 
     with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock",
-                               tool_mode="json_action"),
+                               tool_mode=protocol),
                     transport=httpx.MockTransport(respond)) as client:
         model = VLLMChatModel(client=client)
         with SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:

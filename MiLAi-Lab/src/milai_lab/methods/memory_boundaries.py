@@ -42,8 +42,14 @@ REPLY_ENVELOPE_PROTOCOL = (
     "the transport envelope. Apply the user's applicable requirements for the reply's format, "
     "language, and length to that text while preserving the required JSON structure."
 )
+NATIVE_REPLY_PROTOCOL = (
+    "For a final reply, use natural text. Apply the user's applicable requirements for "
+    "the reply's format, language, and length to that text."
+)
 BOUNDARY_PROTOCOL = (SOURCE_ROLE_PROTOCOL + MEMORY_WORLD_PROTOCOL
                      + WORKING_MAINTENANCE_PROTOCOL + REPLY_ENVELOPE_PROTOCOL)
+NATIVE_BOUNDARY_PROTOCOL = (SOURCE_ROLE_PROTOCOL + MEMORY_WORLD_PROTOCOL
+                           + WORKING_MAINTENANCE_PROTOCOL + NATIVE_REPLY_PROTOCOL)
 READ_SELECTION_PROMPT = (
     "Select actual ordinary-memory record IDs useful for the complete current user query. "
     "This is read-only material selection, not fact formation, correction or a write. "
@@ -257,10 +263,13 @@ class MemoryBoundaryView:
         return render_system(self.request_context.with_model_view(ModelView.FULL),
                              MemoryPlacement.SYSTEM)
 
-    def final_request_context(self, action_protocol: str) -> RequestContext:
+    def final_request_context(self, action_protocol: str | None,
+                              *, native: bool = False) -> RequestContext:
         if self.request_context is None:
             raise ValueError("MEMORY_BOUNDARY_REQUEST_SCOPE_CHANGED")
-        return self.request_context.with_action_protocol(action_protocol)
+        context = self.request_context.with_action_protocol(action_protocol)
+        return (context.with_protocol("native", NATIVE_BOUNDARY_PROTOCOL)
+                if native else context)
 
     def observe_receipt(self, message: Any, scope: Mapping[str, str] | None) -> None:
         if scope is None or dict(scope) != self.scope:
@@ -292,6 +301,7 @@ class MemoryBoundaryView:
         self.active_ids = {row["record_id"] for row in state["active_refs"]}
         projected = []
         tool_observations: dict[int, Mapping[str, Any]] = {}
+        assistant_call_labels: dict[int, str] = {}
         for position, (message, original) in enumerate(zip(wire, originals, strict=True)):
             copy = dict(message)
             kind = original.get("type")
@@ -315,6 +325,10 @@ class MemoryBoundaryView:
             elif kind == "ai":
                 label = ("[WORKING HYPOTHESIS]" if original.get("tool_calls") else
                          "[ASSISTANT HISTORY - prior model output]")
+                if original.get("tool_calls") and copy.get("tool_calls"):
+                    # Label after the protocol-specific history encoder, without parsing labels.
+                    assistant_call_labels[position - 1] = label
+                    label = ""
             else:
                 label = ""
             if label:
@@ -332,7 +346,7 @@ class MemoryBoundaryView:
             boundary_protocol=context.boundary_protocol, system_tail=context.system_tail,
             working_state=state, messages=tuple(projected[1:]), current_user_index=last_user - 1,
             system_message=projected[0], model_view=context.model_view,
-            tool_observations=tool_observations)
+            tool_observations=tool_observations, assistant_call_labels=assistant_call_labels)
         placement = MemoryPlacement((self.policy or {}).get("memory_placement", "system"))
         projected = render_request(self.request_context, placement)
         if self.emit is not None:
@@ -342,7 +356,8 @@ class MemoryBoundaryView:
                        "prepared_only": True})
         return projected, graph
 
-    def fit_final_request(self, context: RequestContext) -> list[dict[str, Any]]:
+    def fit_final_request(self, context: RequestContext,
+                          tools: Sequence[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
         """Count the complete catalog-bearing request; never trim originals or record bodies."""
         if self.capacity is None or self.policy is None or self.retrieve is None:
             raise ValueError("MEMORY_BOUNDARY_CAPACITY_OR_RETRIEVAL_MISSING")
@@ -359,6 +374,11 @@ class MemoryBoundaryView:
             "query": self.query, "route": "all", "trigger_reason": [], "prepared_only": True}
         if context.model_view is ModelView.COMPACT_V6:
             details["model_view"] = context.model_view.value
+        if context.history_protocol == "native":
+            details["tool_protocol"] = "native"
+        def check_capacity(request: list[dict[str, Any]]) -> Any:
+            return (self.capacity.check(request, self.output_tokens, tools) if tools
+                    else self.capacity.check(request, self.output_tokens))
         def render(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             return render_request(context.with_records(rows), placement)
         def checked(rows: list[dict[str, Any]], request: list[dict[str, Any]],
@@ -368,7 +388,7 @@ class MemoryBoundaryView:
                             "selected_material_tokens": self.capacity.text_tokens(material),
                             "selected_material_bytes": len(material.encode("utf-8"))})
             if receipt is None:
-                receipt = self.capacity.check(request, self.output_tokens)
+                receipt = check_capacity(request)
             details["final_capacity"] = receipt
             self.delivery = dict(details)
             return request
@@ -378,7 +398,7 @@ class MemoryBoundaryView:
             if candidate_tokens > self.policy["candidate_token_threshold"]:
                 details["trigger_reason"].append("candidate_token_threshold")
             try:
-                details["all_capacity"] = self.capacity.check(messages, self.output_tokens)
+                details["all_capacity"] = check_capacity(messages)
             except self.capacity_error as error:
                 details["all_capacity"] = getattr(error, "receipt", None)
                 details["trigger_reason"].append("all_request_capacity")
@@ -399,8 +419,7 @@ class MemoryBoundaryView:
                 if not self.policy["attention_enabled"]:
                     raise
             try:
-                details["noncandidate_capacity"] = self.capacity.check(
-                    render([]), self.output_tokens)
+                details["noncandidate_capacity"] = check_capacity(render([]))
             except self.capacity_error:
                 details["trigger_reason"].append("noncandidate_request_capacity")
                 raise

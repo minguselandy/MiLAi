@@ -282,6 +282,10 @@ def build_agent(
     ) -> Any:
         def original(current: Any) -> Any:
             call = current.tool_call
+            if model.research_profile is not None and current.runtime.config.get(
+                "max_concurrency"
+            ) != 1:
+                raise ValueError("PROTOCOL_PROFILE_TOOL_CONCURRENCY_UNSUPPORTED")
             if persistent_memory_arm == "C" and correction_marker([
                 row.model_dump(mode="json") for row in current.state["messages"]
             ], model.active_message_key or "") is not None and call["name"] not in CORRECTION_TOOLS:
