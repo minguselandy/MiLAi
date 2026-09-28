@@ -1,5 +1,5 @@
 ---
-status: PAUSED
+status: ACTIVE
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 method_reference: cf1588ab3f1d1fe8105f3f239cb56f1151e8f5bc
 report_reference: ae2d29285ce263e32b0729444e1dc6a4f57ed5b1
@@ -8,9 +8,10 @@ plan_sha256: 84d5ddd45224d83c4206c95d8b46ca41f2a5dabd9990266aadccae0df1c0df22
 
 # 后续开发 v2.0 执行记录
 
-> 最新状态：用户再次明确要求暂停实验并发布总结。实际 Goal 于 2026-09-27 18:46:35 UTC 设为 `paused`。
-> Sol 已停止；仅文档/清单收尾和 Luna Git 发布继续。总研究目标未完成，后文激活叙述保留为历史，不能恢复授权。
-> [总体实验总结与暂停交接](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)是当前结果和 WIP 状态入口。
+> 最新状态：用户已确认 NEXT_DEVELOPMENT v2.0；实际 Goal 恢复为 active（updatedAt 1790554126）。
+> 本次恢复覆盖执行暂停，完整 N0–N6 目标及条件门槛不变；停止报告 105bdaee/PR62 保留历史身份。
+> 工作转到隔离的 next-development-v2-resume，原 11 个 N2 WIP 按暂停清单哈希完整复制。
+> 原暂停时点的[总体报告](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)不改写，新结果独立追加。
 
 此前用户启动新的实际 active Goal，要求详细阅读并执行 v2.0，覆盖上一任务的暂停；该授权现被最新停止指令覆盖。
 Goal给定文件名为`MILAI_NEXT_IMPROVEMENT_PLAN_20260928_v2.0.md`，现场不存在；唯一同日期/版本文件为
@@ -25,7 +26,7 @@ Root已完整读取527行、向用户说明文件名差异并提出可选澄清�
 | --- | --- | --- |
 | N0 / G1现场与基线 | 8个WIP实物身份、真实PR拓扑；等价提取与行为分开；同输入请求差分、相关窄检；新协议prepare覆盖源码/schema/模型/输入/评分 | 8/8哈希一致；35场景/45控制请求等价、相关检查通过；N2/N3实现及新prepare未完成，未关闭整个G1 |
 | N1消费与维护 | 既有真实HTTP、来源和部分成功回执核对；确认已有strict护栏；仅有明确竞争因素才调用新模型 | 窄机械检查与一个历史boundary失败的实际HTTP核对完成；实际回执已交付，保留语义消费瓶颈，不加提示变体 |
-| N2 / X3固定bank读取 | 两前缀全读/query/同State增强/实际A/完整历史共10条路径；共同读取能力、维护冻结、实际交付与最终回答/续接、全部费用 | 新输入字节已固定，薄 runner WIP、12项相关窄测通过；prepare/build/执行冻结未完成，0/10真实运行 |
+| N2 / X3固定bank读取 | 两前缀全读/query/同State增强/实际A/完整历史共10条路径；共同读取能力、维护冻结、实际交付与最终回答/续接、全部费用 | 新输入字节已固定，薄runner/12项窄测/边界/零模型prepare/必要build完成；待正式发布与执行冻结，0/10真实运行 |
 | N3 / X4固定前态更新 | 两前缀all/U/U=A/oracle共8条诊断；同前态/整体维护/权限；空U可CREATE；实际提交/保持/误改/pending/费用 | 原6文件保留；新ignored输入/config/rubric草案存在，未实现runner或运行，0/8 |
 | N4有限交付版本反馈 | 仅有相关问题才触发；UPDATE/DELETE/CREATE/NO_CHANGE/拒绝/恢复/超限机械检查；独立开关和真实续接 | NOT_TRIGGERED；不是N2/N3前置 |
 | N5 / X5 / G3连续任务 | 一个强简单基线与至多一个获筛选候选，同版本从形成到复用、变化、owner/临时约束、真实副作用/恢复/授权退出；原生单元与构造补充明确分列 | NOT_RUN；11消息旧草案不是已冻结协议 |
@@ -85,7 +86,7 @@ Astra仅处理明确困难问题，不设常驻审计者。每个文件一个写
 只发布源码、配置/锁、合成输入/rubric、精简结果和文档；不含凭据/DSN、私密原始轨迹、数据库、环境/模型/缓存/构建制品。
 原v27草稿保留且不是当前授权。每阶段Root写真实结果和局限后，Luna提交/推送并核对远端SHA与预期工作树。
 原源码检查不为发布重复执行，必要构建取决于入口/依赖/包装改动；文档仅检查链接/JSON/哈希。
-实际 Goal 现为 paused；完整目标和未完成义务保留。报告发布不等于研究完成，未经新授权不推进本表后续阶段。
+实际 Goal 已恢复 active；完整目标和未完成义务保留。阶段发布不等于总研究完成，按本表及原计划逐项验收。
 
 ## N0等价提取与N1已有链核对完成
 
@@ -124,3 +125,20 @@ SHA256 bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6；本 v2
 报告使用独立 next-development-v2-closeout 树，docs/lab-next-development-v2-pause-20260928 分支，
 不提交未完成 N2 源码、不恢复模型实验、不将旧计划中的 ACTIVE 当授权。
 详见[机器清单](../data/manifests/milai-overall-v2-pause-20260928.json)和[总体报告](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)。
+
+## 本次明确恢复与最小下一步
+
+用户确认 NEXT_DEVELOPMENT v2.0 后，实际 Goal 控制状态由 paused 恢复 active；Root 已重新读取实际状态、计划与现场。
+新树 next-development-v2-resume 从已发布暂停报告 105bdaee 建立，原 11 个 N2 文件 SHA256 全部一致。
+原 17 处开发树状态、原 C5 八文件、暂停报告和失败均保留。未将原计划 PAUSED 文字修改成事后授权。
+
+只读模型列表仍为 Qwen3.6-35B-A3B-FP8 / bge-m3，未见任务遗留实验进程；账本仍为
+2799 / 3486504 / 19273，SHA256 bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6。
+Sol 继续尚缺的零模型 prepare、必要入口构建及最终检查回执；已通过且字节不变的12窄测/static/matrix不机械重跑。
+Root 再绑定实际已发布源码、rubric、顺序及隔离后运行 N2，不能直接把暂停草案作为完整执行冻结。
+首个未完成断点是新runner的执行准备；竞争解释为现有装配已完整、或 prepare/包装/工具合同仍有实际缺口。
+只修验证发现的通用缺陷，不加模型或为更好分数调服务设置。
+
+N2 实现准入已完成：[检查回执](../data/manifests/next-development-v2-n2-checks-20260928.json)。
+恢复后源码未新增修改，旧12窄测不重跑；一次离线build及10-job零模型prepare通过。
+Root将在Luna源码发布后建立新正式prepare与评分冻结，沿固定10路径串行执行；N3与N5仍独立待完成。

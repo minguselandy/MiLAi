@@ -1,0 +1,44 @@
+{
+  "kind": "MILAI_V2_N2_FIXED_READ_RUBRIC",
+  "status": "SCORER_FROZEN_BEFORE_EXECUTION",
+  "runtime_reads_rubric": false,
+  "scorer": "Root applies these fixed semantic criteria after receiving actual outputs; no external LLM Judge. Mechanical delivery/store/accounting checks are separate.",
+  "unit": {
+    "exposed_arcs": 1,
+    "prefixes": 2,
+    "conditions_per_prefix": 5,
+    "complete_read_trajectories": 10
+  },
+  "criteria": {
+    "background": {
+      "required": "Identify the Workshop handout packs handling plan as 6 packs, east archive E-2, paper sleeves. Do not substitute the field quantity/location or change the plan.",
+      "not_required": "The user only asks for the unchanged handout summary; mentioning correct field update is optional and gives no extra quality credit."
+    },
+    "combined": {
+      "required": "Correctly associate both Workshop handout packs with 6/east archive E-2/paper sleeves and Workshop field kits with 8/north rack N-6/rigid cases. No swapped associations or stale field 3/west W-4.",
+      "not_required": "No requested welcome briefing action or reservation-status narrative."
+    }
+  },
+  "common": [
+    "Complete final useful answer required; a tool proposal or process exit alone is not a successful read task. Incomplete capacity, invalid output and infrastructure interruption remain explicit.",
+    "Normal paraphrase and punctuation are acceptable in the answer if entity-to-fact associations are unambiguous. This is a summary task, not an exact business-key call metric.",
+    "Unsupported claims of a performed or failed business attempt are answer failures. The two combined-bank cards are model claims generated before business execution, not actual tool receipts.",
+    "Score selected-fact coverage separately from actual HTTP delivery, read-tool content delivery, and final correctness. Any actual body containing required facts can supply information; no expected-ID-only scoring.",
+    "All methods receive the same full permitted owner history, actual directory and read-only tool rights. H is full history without preselected State bodies, with the same State READ capability; no no-State-tool ablation claim.",
+    "Empty selection followed by successful actual READ or sufficient history can pass. Do not force selection disagreement or tool use.",
+    "State IDs/revisions/content/needs and ordinary records must remain unchanged after initialization. Read-only permissions mean this batch cannot establish general avoidance of available harmful business actions.",
+    "Embedding, query-enhancement, A selection, every Host continuation, failures, Store reads and observer costs counted. No first-response-only cost comparisons.",
+    "The combined question and cross-session inline history are explicit diagnostic constructions over an exposed fixed bank. No untouched native-task, unseen, statistical superiority or lifecycle claim."
+  ],
+  "classifications": [
+    "correct_final_answer",
+    "wrong_final_answer",
+    "incomplete_capacity",
+    "invalid_or_infrastructure_failure"
+  ],
+  "decision_rules": {
+    "continue": "An interpretable task/fact coverage or complete-path cost advantage over simple all/query/directory-assisted query, with all actual costs. One/two prefixes are screening only.",
+    "pivot": "All/full history or ordinary/directory-assisted query is sufficient; remove unnecessary independent selection in the next minimal candidate. Do not inflate bank size merely to force benefit."
+  },
+  "cost_attribution": "Provider request IDs unique within batch; Host and read-selection/query-enhancement generation roles exclusive; embedding and initialization/observer overhead distinct; same call counted once. Unknown measurements stay unknown."
+}
