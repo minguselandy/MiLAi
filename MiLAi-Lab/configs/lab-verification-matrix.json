@@ -7,7 +7,8 @@
     "src/milai_lab/harness",
     "src/milai_lab/scorers",
     "src/milai_lab/boundary.py",
-    "src/milai_lab/tools_boundary.py"
+    "src/milai_lab/tools_boundary.py",
+    "src/milai_lab/methods/memory_result.py"
   ],
   "core_optional_protocol": "src/milai_lab/methods/local_state_attention/protocol.py",
   "core_optional_protocol_test": "tests/unit/test_lsa_controller_contract.py",
@@ -25,6 +26,7 @@
     "src/milai_lab/runners/fixed_state_read.py",
     "src/milai_lab/runners/fixed_state_update.py",
     "src/milai_lab/runners/shared_record_use.py",
+    "src/milai_lab/runners/persistent_memory.py",
     "src/milai_lab/datasets/merit.py"
   ],
   "foundation_tests": [
@@ -41,6 +43,7 @@
     "tests/unit/test_fixed_state_read.py",
     "tests/unit/test_fixed_state_update.py",
     "tests/unit/test_shared_record_use.py",
+    "tests/unit/test_persistent_memory.py",
     "tests/unit/test_langmem_application.py"
   ],
   "core_pytest_ignores": [
@@ -57,6 +60,7 @@
     "tests/unit/test_fixed_state_read.py",
     "tests/unit/test_fixed_state_update.py",
     "tests/unit/test_shared_record_use.py",
+    "tests/unit/test_persistent_memory.py",
     "tests/unit/test_langmem_application.py",
     "tests/unit/test_external_memory_v26.py"
   ],

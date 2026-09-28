@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Callable
 from typing import Any
 
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage, ToolMessage
@@ -17,8 +18,44 @@ from milai_lab.methods.local_state_attention.writers import (
     WriterTools,
     scoped_memory_records,
 )
+from milai_lab.methods.memory_result import CORRECTION_PROTOCOL, correction_marker
 
 SOURCE_VIEW_HEADER = "Referenced source events from delivered States:"
+
+
+def make_persistent_memory_hook(
+    system_prompt: str,
+    records: Callable[[RunnableConfig], list[dict[str, Any]]], *,
+    history: HistoryAccess | None = None, emit: Any = None,
+) -> Any:
+    """A v3-only ordinary view; retained mode never reads a source/history bank."""
+    def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
+        cfg = config["configurable"]
+        messages: list[BaseMessage] = state["messages"]
+        public_index = sum(isinstance(row, HumanMessage) for row in messages) - 1
+        message_key = f"{cfg['thread_id']}:{public_index}"
+        actual_records = records(config)
+        delivered, incomplete, suppressed = (history.project(cfg["thread_id"], messages)
+                                             if history is not None else
+                                             (messages, [], False))
+        prompt = (system_prompt + "\n[Actual scoped ordinary memory records (id and value):]\n"
+                  + json.dumps(actual_records, ensure_ascii=False)
+                  + _incomplete_appendix(incomplete))
+        marker = correction_marker([row.model_dump(mode="json") for row in messages],
+                                   message_key)
+        if marker is not None:
+            prompt += "\n" + CORRECTION_PROTOCOL + "\n" + json.dumps({
+                "previous_memory_result": marker["memory_result"],
+                "mechanical_verification": marker["verification"]}, ensure_ascii=False)
+        if emit is not None:
+            emit({"event": "persistent_memory_view", "message_key": message_key,
+                  "user_id": cfg["user_id"], "history_mode": (
+                      "archive" if history is not None else "retained"),
+                  "history_suppressed": suppressed, "ordinary_records": actual_records,
+                  "correction": marker is not None, "prepared_only": True})
+        return {"llm_input_messages": [SystemMessage(content=prompt), *delivered]}
+
+    return hook
 
 
 def make_pre_model_hook(controller: LocalStateController,

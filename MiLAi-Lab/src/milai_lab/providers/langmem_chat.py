@@ -17,6 +17,14 @@ from pydantic import ConfigDict
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.freshness_projection.projection import SOURCE_AUTHORITY
+from milai_lab.methods.memory_result import (
+    CORRECTION_TOOLS,
+    RESULT_PROTOCOL,
+    correction_marker,
+    result_schema,
+    turn_receipts,
+    verify_result,
+)
 from milai_lab.methods.milai_m1.controller import M1_PROTOCOL, m1_action_schema
 from milai_lab.methods.on_demand_reconstruction.schema import (
     ODR_PROTOCOL,
@@ -32,6 +40,7 @@ class IncompleteChatResponse(ValueError):
 
 def _action_schema(
     tools: list[dict[str, Any]], *, generation_only: bool = False,
+    memory_result: bool = False,
 ) -> dict[str, Any]:
     branches = []
     for item in tools:
@@ -46,10 +55,14 @@ def _action_schema(
             "required": ["name", "arguments"],
             "additionalProperties": False,
         })
+    final: dict[str, Any] = {"type": "object", "properties": {"answer": {"type": "string"}},
+             "required": ["answer"], "additionalProperties": False}
+    if memory_result:
+        final["properties"]["memory_result"] = result_schema()
+        final["required"].append("memory_result")
     return {
         "oneOf": [
-            {"type": "object", "properties": {"answer": {"type": "string"}},
-             "required": ["answer"], "additionalProperties": False},
+            final,
             {"type": "object", "properties": {"calls": {
                 "type": "array", "items": {"oneOf": branches}, "minItems": 1,
             }}, "required": ["calls"], "additionalProperties": False},
@@ -57,9 +70,9 @@ def _action_schema(
     }
 
 
-def _action_prompt(tools: list[dict[str, Any]]) -> str:
+def _action_prompt(tools: list[dict[str, Any]], *, memory_result: bool = False) -> str:
     catalog = [item["function"] for item in tools]
-    return (
+    prompt = (
         "Reply as exactly one JSON object. For a final reply use {\"answer\":\"...\"}. "
         "To call tools use {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. "
         "You may include several calls; they execute in listed order. "
@@ -67,6 +80,11 @@ def _action_prompt(tools: list[dict[str, Any]]) -> str:
         "A tool result will be returned before your next reply.\n"
         + json.dumps(catalog, ensure_ascii=False, separators=(",", ":"))
     )
+    if memory_result:
+        prompt = prompt.replace('For a final reply use {"answer":"..."}. ',
+                                "For a final reply include answer and memory_result. ")
+        prompt += "\n" + RESULT_PROTOCOL
+    return prompt
 
 
 def _json_action_history(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -107,6 +125,8 @@ class VLLMChatModel(BaseChatModel):
     odr: Any = None
     projection: Any = None
     request_view: Any = None
+    memory_protocol: str | None = None
+    memory_turn: dict[str, str] | None = None
 
     @property
     def _llm_type(self) -> str:
@@ -148,16 +168,35 @@ class VLLMChatModel(BaseChatModel):
         if not isinstance(wire_messages, list):
             raise TypeError("Expected a message sequence")
         tools = kwargs.get("tools") or []
+        original_messages = ([row.model_dump(mode="json") for row in messages]
+                             if self.memory_protocol is not None else [])
+        memory_receipts = (turn_receipts(original_messages, self.memory_turn)
+                           if self.memory_protocol is not None and self.memory_turn else [])
+        correcting = (correction_marker(original_messages, self.active_message_key or "")
+                      if self.memory_protocol == "C" else None)
+        if correcting is not None:
+            tools = [row for row in tools if row["function"]["name"] in CORRECTION_TOOLS]
         delivered_snapshot: tuple[list[dict[str, Any]], int] | None = None
         if self.client.config.tool_mode == "json_action":
             wire_messages = _json_action_history(wire_messages)
+            if self.memory_protocol is not None:
+                refs = {row["ref"]: row for row in memory_receipts}
+                wire_messages = [dict(row, content=(
+                    "[Actual current-turn tool receipt: " + json.dumps({
+                        "receipt_ref": row["tool_call_id"],
+                        "tool_name": refs[row["tool_call_id"]]["name"],
+                        "transport_status": refs[row["tool_call_id"]]["transport_status"]
+                    }, ensure_ascii=False) + "]\n" + str(row["content"])))
+                    if row["role"] == "tool" and row.get("tool_call_id") in refs else row
+                    for row in wire_messages]
             lineage_messages = messages
             if self.request_view is not None:
                 wire_messages, lineage_messages = self.request_view.project(
                     wire_messages, messages, self.active_message_key,
                     self.calls_in_message + 1)
-            generation_schema = _action_schema(tools, generation_only=True)
-            protocol = _action_prompt(tools)
+            generation_schema = _action_schema(tools, generation_only=True,
+                                               memory_result=self.memory_protocol == "C")
+            protocol = _action_prompt(tools, memory_result=self.memory_protocol == "C")
             m1_context = None
             odr_freshness = ""
             projected = None
@@ -240,6 +279,7 @@ class VLLMChatModel(BaseChatModel):
             raise IncompleteChatResponse("VLLM_CHAT_INVALID_MESSAGE")
         message_id = receipt.get("id") or uuid.uuid4().hex
         calls = []
+        completion_metadata: dict[str, Any] = {}
         if self.client.config.tool_mode == "json_action":
             if wire_message.get("tool_calls"):
                 raise IncompleteChatResponse("JSON_ACTION_UNEXPECTED_NATIVE_TOOL_CALL")
@@ -250,6 +290,11 @@ class VLLMChatModel(BaseChatModel):
             try:
                 validate(action, generation_schema)
             except ValidationError as exc:
+                recognizable_final = (self.memory_protocol == "C" and isinstance(action, dict)
+                                      and isinstance(action.get("answer"), str)
+                                      and "calls" not in action)
+                if recognizable_final:
+                    completion_metadata["memory_result_envelope_invalid"] = True
                 if self.m1 is not None:
                     self.m1.record_error(
                         self.calls_in_message, message_id,
@@ -260,7 +305,8 @@ class VLLMChatModel(BaseChatModel):
                     raw = action.get("reconstruction") if isinstance(action, dict) else action
                     self.odr.reject(self.calls_in_message, message_id,
                                     "ODR_ENVELOPE_SCHEMA_INVALID", raw)
-                raise IncompleteChatResponse("JSON_ACTION_SCHEMA_INVALID") from exc
+                if not recognizable_final:
+                    raise IncompleteChatResponse("JSON_ACTION_SCHEMA_INVALID") from exc
             if self.m1 is not None:
                 self.m1.commit(self.calls_in_message, message_id,
                                action["decision_delta"], action.get("calls"))
@@ -281,6 +327,16 @@ class VLLMChatModel(BaseChatModel):
                 content = ""
             else:
                 content = action["answer"]
+                if self.memory_protocol == "C":
+                    verification = verify_result(action.get("memory_result"), memory_receipts,
+                                                 self.memory_turn or {})
+                    if completion_metadata.get("memory_result_envelope_invalid"):
+                        verification["reasons"].append("MEMORY_RESULT_ENVELOPE_INVALID")
+                        verification["declaration_supported"] = False
+                        verification["needs_correction"] = True
+                    completion_metadata.update({"memory_result": action.get("memory_result"),
+                                                "memory_result_action": action,
+                                                "memory_result_verification": verification})
         else:
             for call in wire_message.get("tool_calls") or []:
                 function = call.get("function")
@@ -313,6 +369,9 @@ class VLLMChatModel(BaseChatModel):
             response_metadata={
                 "finish_reason": choice["finish_reason"],
                 "model": receipt.get("model"),
+                **({"memory_turn": dict(self.memory_turn)}
+                   if self.memory_protocol is not None and self.memory_turn is not None else {}),
+                **completion_metadata,
             },
         )
         if (self.projection is not None and delivered_snapshot is not None

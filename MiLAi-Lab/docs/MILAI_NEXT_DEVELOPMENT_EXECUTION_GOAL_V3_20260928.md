@@ -16,9 +16,9 @@ v2执行已经关闭，原结论、报告、失败、费用与N4/N6未触发不�
 
 | 项 | 要求／需要的权威证据 | 当前状态 |
 | --- | --- | --- |
-| P0/E0 | 独立树、实际Git/PR、最终提示和工具组合、strict/ack/提取现状；旧形成与过期链实际证据；方法差异协议 | 已完成只读现场/两链及P0/P1差异协议；真实执行freeze须发布源码后绑定 |
-| P1 | B0/B1/C同底层ReAct、strict CRUD；终答字段、真实owner/turn回执、至多一次仅记忆纠正；八项新边界窄测和必要构建 | Sol实施中，未验收 |
-| P2/E1 | 六类2–3回合新构造脚本、至少两类应用；空库自然形成、负例、独立session后使用；B0/B1/C各一次 | NOT_RUN；Root准备新输入与rubric |
+| P0/E0 | 独立树、实际Git/PR、最终提示和工具组合、strict/ack/提取现状；旧形成与过期链实际证据；方法差异协议 | 已发布2536d1a9（PR66）；只读现场/两链及P0/P1协议完成；真实freeze须发布源码后绑定 |
+| P1 | B0/B1/C同底层ReAct、strict CRUD；终答字段、真实owner/turn回执、至多一次仅记忆纠正；八项新边界窄测和必要构建 | [实现和必要检查完成](MILAI_NEXT_DEVELOPMENT_V3_P1_READINESS_20260928.md)；待发布后绑定P2 freeze |
+| P2/E1 | 六类2–3回合新构造脚本、至少两类应用；空库自然形成、负例、独立session后使用；B0/B1/C各一次 | NOT_RUN；六输入/rubric/顺序已发布；[执行协议](MILAI_NEXT_DEVELOPMENT_V3_P2_FORMATION_20260928.md)已准备 |
 | P3/E2–E5 | 有P2信号后，保留暴露回归与新连续脚本分表；Archive先于Retained；真实形成/变更/owner/暂态/业务/恢复/退出 | CONDITIONAL_PENDING |
 | P4/E6 | P2/P3有效信号后少量独立任务族、强简单与合法raw方法；同计算反解释；新身份冻结 | CONDITIONAL_PENDING |
 | P5 | 非空记录、实际普通query/all瓶颈、具体新操作差异、固定共同信息/预算，不同时改多机制 | NOT_TRIGGERED；不自动恢复A/U或State反馈 |
@@ -63,3 +63,11 @@ Product保持NO-GO；服务parser/容量/温度等不改；runtime不读rubric/g
 当前终答metadata仅附实际结构结果/一次续接标记，反馈并入首system请求副本；不追加伪用户消息，不重置公开消息容量。
 P2六脚本共15公开回合/臂、18独立namespace运行，共同Retained；输入与评分目录为`data/diagnostics/next-development-v3-p2-formation-r1`。
 全部是新构造开发诊断，不是native或独立确认；P2源码与最终请求freeze未完成，真实调用仍0。
+
+P0发布提交`2536d1a99caf22b86fb07f36bb1baa16a2733215`已核对远端，
+[PR66](https://github.com/minguselandy/MiLAi/pull/66)为draft、基于PR65；Fast workflow 36369905003已成功。
+该检查属于P0提交，不能替代尚未发布P1源码的检查。
+
+P1由Root核对最终接线和检查证据：新增15个独立工程情境（含core纯合同5项），相邻39项；0 skip。
+157个runtime源码/入口身份，三臂代表性零模型prepare、六输入结构、实际Qwen模板、Ruff/Mypy、矩阵/边界及一次offline build均通过。
+[检查清单](../data/manifests/next-development-v3-p1-checks-20260928.json)保留中间开发检查失败及最终通过，不增加实验样本或费用。

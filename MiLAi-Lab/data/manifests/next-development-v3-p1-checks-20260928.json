@@ -1,0 +1,369 @@
+{
+  "kind": "MILAI_V3_P1_PUBLISHED_CHECKS",
+  "status": "LOCAL_CHECKS_PASS_P2_NOT_RUN",
+  "base_commit": "2536d1a99caf22b86fb07f36bb1baa16a2733215",
+  "source_owner": "existing Sol xhigh",
+  "source_check_receipt_sha256": "aba44dd8fc2a3baff571edfcd697a43055b44f5310bf1f2f2d816040ccde8fda",
+  "engineering_files": {
+    "src/milai_lab/methods/memory_result.py": {
+      "sha256": "8fa7ac561f6b23d8cc4afb084099b7eb92e4ddf423c28e8e85d6bff913fb7e6e",
+      "bytes": 8942
+    },
+    "src/milai_lab/runners/persistent_memory.py": {
+      "sha256": "5f41bda00542bd0d47749138d88128cc3f90037fd222ffc71d89ca7c557f11c0",
+      "bytes": 18535
+    },
+    "src/milai_lab/baselines/langmem_agent.py": {
+      "sha256": "6bbb793286bd5af5e9ad5fcfaaa85d09477cdbb5a72c1129effc25859e3d4e6d",
+      "bytes": 24703
+    },
+    "src/milai_lab/providers/langmem_chat.py": {
+      "sha256": "3ea38ce6fc37baf5149884e236e805fb44c7368ff398ffed7ef5cbac97bfaa9e",
+      "bytes": 19144
+    },
+    "src/milai_lab/methods/local_state_attention/integration.py": {
+      "sha256": "9b15000e3492d7e3a6c470facb7380d8a05a457f9aa672baebbb382a97fdfbed",
+      "bytes": 21785
+    },
+    "tools/run_persistent_memory.py": {
+      "sha256": "c7476d446fdf23bcc9285956c2cae5bdd7b20bf9077800beaa9b2b8dc00b9e2c",
+      "bytes": 1376
+    },
+    "tests/unit/test_memory_result.py": {
+      "sha256": "524a86173de76a984c982fe66c59e0e2a3478cbd23adee02c64ebc82e95b7e37",
+      "bytes": 3108
+    },
+    "tests/unit/test_persistent_memory.py": {
+      "sha256": "cbe00cd986f234c430c7a84f0ba56f3425cae534eabed1518e59bf8d91a2264d",
+      "bytes": 21462
+    },
+    "configs/lab-verification-matrix.json": {
+      "sha256": "0c859592e288f18bb1b09751072c1441390eb5bf53440951214a6b73a8d3307b",
+      "bytes": 4344
+    },
+    "../.github/workflows/fast.yml": {
+      "sha256": "6c163d036d72d326e8fd816e9c32e561578fa2b00b231a71023c72c766a73544",
+      "bytes": 17346
+    },
+    "../.github/workflows/ci.yml": {
+      "sha256": "4ee164946945230735bc168c8f930038e175c9d02b79886ab741175a7d2cb62e",
+      "bytes": 20716
+    }
+  },
+  "distinct_new_cases": 15,
+  "distinct_neighbor_cases": 39,
+  "core_pure_cases": 5,
+  "count_note": "core5 is included in new15, not an additional sample count; final passes span targeted commands, not a fabricated single rerun",
+  "checks": [
+    {
+      "name": "initial_p1_suite",
+      "command": "env PYTHONPATH=src MILAI_P1_WIRE_CAPTURE=/cra/memory/mx_memory/MiLAi-worktrees/next-development-v3/MiLAi-Lab/artifacts/next-development-v3/p1-mock-wire.json /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_memory_result.py tests/unit/test_persistent_memory.py",
+      "log": "artifacts/next-development-v3/p1-tests-2.log",
+      "exit_code": 0,
+      "passed": 14,
+      "skipped": 0,
+      "elapsed_seconds": 2.47,
+      "scope": "before the additional actual prepare/run phase case and strengthened partial assertion; same runtime model/provider semantics",
+      "log_sha256": "a5862f2b4a9f66d2ebe22c6447f9fcbc4e86f87c31f0642170f8d78bbe8adfa0"
+    },
+    {
+      "name": "core_pure_contract",
+      "command": "env PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_memory_result.py",
+      "log": "artifacts/next-development-v3/p1-core-memory-result.log",
+      "exit_code": 0,
+      "passed": 5,
+      "skipped": 0,
+      "elapsed_seconds": 0.06,
+      "log_sha256": "d8723ee001feaaf2086b9ce1b811b05cd7fcaa5a6810308b70293e0529ba97f7"
+    },
+    {
+      "name": "new_actual_phase_entry",
+      "command": "env PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_business_partial_effect_is_never_replayed_by_memory_correction tests/unit/test_persistent_memory.py::test_prepared_phase_entry_reopens_retained_records_records_costs_and_refuses_rerun",
+      "log": "artifacts/next-development-v3/p1-entry-partial-tests.log",
+      "exit_code": 1,
+      "passed": 1,
+      "failed": 1,
+      "elapsed_seconds": 2.19,
+      "failure": "partial test compared original JSON against escaped whole-request serialization; actual tool effects and strict rejection assertions passed; narrowed to each real wire ToolMessage content",
+      "log_sha256": "9fe68d12f89719c7373992e1b5f02d84ea0e8d83afeaba5de9972f722b9059d6"
+    },
+    {
+      "name": "strengthened_partial_final",
+      "command": "env PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_business_partial_effect_is_never_replayed_by_memory_correction",
+      "log": "artifacts/next-development-v3/p1-partial-final.log",
+      "exit_code": 0,
+      "passed": 1,
+      "skipped": 0,
+      "elapsed_seconds": 1.76,
+      "log_sha256": "e67ebd1eb6c23a4b053b1f88c087af8667f1f269ce36b17f699b5b37948874aa"
+    },
+    {
+      "name": "old_default_neighbors",
+      "command": "env PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_langmem_foundation.py tests/unit/test_langmem_application.py tests/unit/test_shared_record_use.py",
+      "log": "artifacts/next-development-v3/p1-neighbor-regression.log",
+      "exit_code": 0,
+      "passed": 39,
+      "skipped": 0,
+      "elapsed_seconds": 6.74,
+      "log_sha256": "b4d38165f7a6c884168ce082cc1c0b4b0f43b5092be1abeadd8ba7484fa34e76"
+    },
+    {
+      "name": "target_ruff",
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/ruff check src/milai_lab/methods/memory_result.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/langmem_chat.py src/milai_lab/methods/local_state_attention/integration.py src/milai_lab/runners/persistent_memory.py tools/run_persistent_memory.py tests/unit/test_memory_result.py tests/unit/test_persistent_memory.py --output-format concise --output-file artifacts/next-development-v3/p1-ruff-final.log",
+      "log": "artifacts/next-development-v3/p1-ruff-final.log",
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "target_mypy",
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/mypy src/milai_lab/methods/memory_result.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/providers/langmem_chat.py src/milai_lab/methods/local_state_attention/integration.py src/milai_lab/runners/persistent_memory.py tools/run_persistent_memory.py",
+      "log": "artifacts/next-development-v3/p1-mypy-2.log",
+      "exit_code": 0,
+      "checked_source_files": 6,
+      "log_sha256": "ab35ee42183d4d6d3ba483825ab037d18a5a15622d03be01d82220b1564851ff"
+    },
+    {
+      "name": "actual_workflow_matrix",
+      "command": "env PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python tools/check_verification_matrix.py",
+      "log": "artifacts/next-development-v3/p1-matrix.log",
+      "exit_code": 0,
+      "active_sources": 155,
+      "core_direct": 23,
+      "foundation_explicit": 46,
+      "optional_tests_owned": 16,
+      "log_sha256": "2e79dabd52211e2534b317b7834b2029ebfad1187a9e3416c826a37a8eb28213"
+    },
+    {
+      "name": "package_boundary",
+      "command": "env PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.boundary",
+      "log": "artifacts/next-development-v3/p1-boundary.log",
+      "exit_code": 0,
+      "log_sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3"
+    },
+    {
+      "name": "tool_boundary",
+      "command": "env PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.tools_boundary",
+      "log": "artifacts/next-development-v3/p1-tools-boundary.log",
+      "exit_code": 0,
+      "log_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
+    },
+    {
+      "name": "tracked_diff",
+      "command": "git diff --check",
+      "exit_code": 0
+    },
+    {
+      "name": "new_file_whitespace_and_single_final_newline",
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python - (inline 5-file bytes check)",
+      "log": "artifacts/next-development-v3/p1-whitespace.log",
+      "exit_code": 0,
+      "log_sha256": "d8ad5c10f6c62f9a30b640bfed6610b1c102514b3b025b1ce20df020fb0c6d92"
+    },
+    {
+      "name": "actual_frozen_tokenizer_template",
+      "command": "env PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python - (inline pinned HostCapacity.tokenizer.apply_chat_template of p1-mock-wire.json)",
+      "log": "artifacts/next-development-v3/p1-template-proof.log",
+      "exit_code": 0,
+      "log_sha256": "5aa0bb9775a0478b4976ea29cc12b32f3e8cd96e2ed64fccea1d1ac67ae7d04b",
+      "receipt_sha256": "0ffccaceff84de05609ebd7eb6d233127c7c9be8f7247b501578601d202251fb"
+    },
+    {
+      "name": "representative_actual_cli_prepare_and_all_inputs_structure",
+      "command": "env PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python - (inline 3 subprocess CLI prepares and 6 _script validations; exact CLI argv retained in checks.json)",
+      "log": "artifacts/next-development-v3/p1-prepare.log",
+      "exit_code": 0,
+      "cli_prepares": 3,
+      "input_scripts_validated": 6,
+      "public_messages_per_arm": 15,
+      "log_sha256": "6d8e3ea80337ff9f9211f381803653294bce92ae539cd4f47f38141c002ecd28",
+      "receipt_sha256": "539414cf036e39ead074657d5ce13f9f27ad128c7a85e6d5ec649488a1b9fbe1"
+    }
+  ],
+  "initial_failures_preserved": [
+    {
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v3/MiLAi-Lab/artifacts/next-development-v3/p1-initial-tests.log",
+      "exit_code": 2,
+      "kind": "collection",
+      "reason": "test BUSINESS_NAMES imported from wrong runner; fixed test import only"
+    },
+    {
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v3/MiLAi-Lab/artifacts/next-development-v3/p1-ruff-initial.log",
+      "exit_code": 1,
+      "errors": 25,
+      "reason": "new-code formatting/imports, bound test-loop variable, full fixed git executable"
+    },
+    {
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v3/MiLAi-Lab/artifacts/next-development-v3/p1-mypy-initial.log",
+      "exit_code": 1,
+      "errors": 1,
+      "reason": "new _script Any return; explicit validated dict cast"
+    },
+    {
+      "exit_code": 127,
+      "kind": "capture-setup command",
+      "reason": "unqualified python unavailable before pre-format prompt capture; no file/runtime mutation; final frozen-doc equality checked using locked python"
+    },
+    {
+      "exit_code": 1,
+      "kind": "template-proof harness",
+      "reason": "standalone StrictUndefined Jinja differed from actual tokenizer semantics; dict tool_calls absent. Replaced with actual locked local tokenizer apply_chat_template; final proof passed"
+    }
+  ],
+  "plan_eight_boundaries": [
+    "unsupported committed",
+    "foreign-owner reference",
+    "existing correct record without forced create",
+    "real business partial effect and failed maintenance without replay",
+    "partial mutations and actual errors separated",
+    "no_change causes no automatic write or semantic certification",
+    "unknown business outcome retains uncertainty without replay",
+    "only one correction and original capacity; invalid terminal retained"
+  ],
+  "additional_boundaries": [
+    "Archive versus Retained actual wire and owner isolation",
+    "actual prepare/phase/session reopen and rerun refusal",
+    "legacy default neighbors"
+  ],
+  "build": {
+    "attempts": 1,
+    "command": "uv build --offline --python /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python --out-dir artifacts/next-development-v3/p1-dist",
+    "packages": [
+      {
+        "bytes": 563479,
+        "sha256": "b290628576e2e7d34e5ca6ad1ac763420a7348aa974bbd83eefb75fc8f044253",
+        "name": "milai_lab-0.1.0-py3-none-any.whl"
+      },
+      {
+        "bytes": 5342398,
+        "sha256": "3af0a390657a455c0dbfb44a62815b4dd1dad29a496ef7cea95472ba21b991ee",
+        "name": "milai_lab-0.1.0.tar.gz"
+      }
+    ],
+    "receipt_sha256": "f1e20fd56449d2c80de7044c5045cf8bffd7538b94c54603614b1c133133613a",
+    "source_bytes_equal": true,
+    "private_assets_excluded": true,
+    "note": "Build completed before final Root documentation/manifest updates. Runtime source is unchanged; docs-only publication does not repeat build."
+  },
+  "prepare": {
+    "cli_prepares": 3,
+    "input_scripts": 6,
+    "public_messages_per_arm": 15,
+    "identity_source_paths": 157,
+    "ledger_sha256_unchanged": "e3f5bf8ad50f7825ad010692164238c9dc14e10c113a39d2f0de383b7e3dce83",
+    "receipt_sha256": "539414cf036e39ead074657d5ce13f9f27ad128c7a85e6d5ec649488a1b9fbe1"
+  },
+  "template_proof": {
+    "template_sha256": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+    "capture_sha256": "cf661b09661f7e4bc877c0734d431121f45171a0f43aa03e112d3d90833ee8cc",
+    "responsibility_bytes_equal_to_frozen_text": true,
+    "responsibility_sha256": "340742aac98540d035ca657f453ca95e7fd9861cb42b8faf422b3417476f4034",
+    "actual_request_template_rendered": 3,
+    "current_ref_visible_in_rendered_tool_content": true,
+    "original_tool_content_preserved": true,
+    "same_current_human_once": true,
+    "rendered_sha256": [
+      "86e2e069238b3c84053ff9547ddf069331d80ac1856226afe8465de0f7187ca9",
+      "c628043fd23d4ea7f854955ca640e4007c669bba62c5ce5e4d7327285fb738b6",
+      "5b14cc109e492da17733fb6b237a1c013fae7530fdccc5692a0235b586ee8517"
+    ],
+    "capacity": [
+      {
+        "prompt_tokens": 903,
+        "output_reserve_tokens": 4096,
+        "safety_tokens": 512,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "context_tokens": 65536,
+        "total_reserved_tokens": 5511,
+        "remaining_tokens": 60025,
+        "identity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "enable_thinking": false,
+          "tokenizer_path": "/cra/qwen36-35B",
+          "tokenizer_files_sha256": {
+            "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+          },
+          "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+        }
+      },
+      {
+        "prompt_tokens": 1070,
+        "output_reserve_tokens": 4096,
+        "safety_tokens": 512,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "context_tokens": 65536,
+        "total_reserved_tokens": 5678,
+        "remaining_tokens": 59858,
+        "identity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "enable_thinking": false,
+          "tokenizer_path": "/cra/qwen36-35B",
+          "tokenizer_files_sha256": {
+            "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+          },
+          "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+        }
+      },
+      {
+        "prompt_tokens": 1246,
+        "output_reserve_tokens": 4096,
+        "safety_tokens": 512,
+        "related_reserve_tokens": 0,
+        "schema_reserve_tokens": 0,
+        "context_tokens": 65536,
+        "total_reserved_tokens": 5854,
+        "remaining_tokens": 59682,
+        "identity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "enable_thinking": false,
+          "tokenizer_path": "/cra/qwen36-35B",
+          "tokenizer_files_sha256": {
+            "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+            "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+          },
+          "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+        }
+      }
+    ],
+    "model_calls": 0
+  },
+  "environment": {
+    "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+    "locked_foundation_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+    "locked_core_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+    "dependencies": {
+      "pytest": "8.4.2",
+      "ruff": "0.16.5",
+      "mypy": "1.20.2",
+      "langchain-core": "1.6.5",
+      "langgraph": "1.1.10",
+      "langgraph-prebuilt": "1.0.13",
+      "langmem": "0.0.30",
+      "langgraph-checkpoint-sqlite": "2.0.11",
+      "langgraph-checkpoint-postgres": "2.0.25",
+      "jsonschema": "4.26.0",
+      "transformers": "4.57.6"
+    },
+    "uv_lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1"
+  },
+  "limitations": [
+    "Mechanical operation support is not content correctness, semantic saved, or all-requirements completion; a semantically wrong no_change is not auto corrected.",
+    "Only recognizable invalid final answer envelopes can enter C correction. Malformed/truncated/unsafe ambiguous action responses remain explicit failures.",
+    "At most one correction entry in the original public-turn capacity; its memory/read loop may consume remaining calls. Both protocol and actual tool wrapper prohibit business replay.",
+    "No arbitrary write-crash exactly-once guarantee, CAS, cross-record transaction, or semantic deduplication. Closed-turn process reopen is covered.",
+    "Small-bank ordinary-body prefill reads all actual current-owner records and charges measured reads; scalability/retrieval selection is not established.",
+    "Only the explicitly measured checkpoint/Store observation boundaries are aggregated. Physical I/O and ordinary write CPU remain unknown.",
+    "Archive historical access remains lawful owner-scoped; Retained has no archive/source-bank/history-tool projection. Audit persistence is not Host permission.",
+    "B0/B1/C are new v3 recipes; common explicit receipt-label request projection and ordinary exact READ change this common recipe, not legacy default behavior."
+  ],
+  "real_generation_calls": 0,
+  "real_embedding_calls": 0,
+  "shared_postgres_calls": 0,
+  "root_review": "Read actual final source/provider/graph/runtime/callback/CI diffs; verify frozen prompt equality, source hashes and test evidence without repeating passed tests. No rubric in runtime."
+}
