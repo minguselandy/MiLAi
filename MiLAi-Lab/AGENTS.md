@@ -2,6 +2,20 @@
 
 ## Current scope and authority
 
+The latest user Goal explicitly authorizes the full [NEXT_DEVELOPMENT v4 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v4.0.md).
+Follow the [v4 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V4_20260928.md).
+This is new work on the published v3 baseline 44f9291, not a reopening or rewriting of v3 results.
+Preserve the original v4 DRAFT/NOT_STARTED plan bytes; the actual user Goal supplies authorization.
+Implement F0–F7 in separately inspectable steps, then F8 A mechanical checks, B the six exposed
+v3 scripts, and only after A/B pass create and freeze C's 8–12 new scripts. F8 D requires an actual
+selection bottleneck. F9 evaluates the resulting claims; engineering completion is not method stability.
+Root owns docs/data/freezes/real calls/scoring/costs; the existing Sol xhigh owns source and checks;
+Luna high owns Git publication. No new model family, deployment, standing reviewer or Product work.
+Use B0 as the simple baseline, preserve historical C as opt-in, and add no D/E candidate names.
+Do not auto-fill semantic memory, classify facts by sample keywords, or equate provenance with support.
+
+The following v3 closure remains historical evidence:
+
 The user explicitly authorized the [NEXT_DEVELOPMENT v3 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v3.0.md).
 Its mandatory P0/P1/P2 execution and P6 reporting are now closed with Pivot/Stop; P3/P4/E6/P5
 were not triggered by their evidence gates. Follow the [v3 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V3_20260928.md)
@@ -17,7 +31,7 @@ C only checks actual owner/turn operations, does not certify semantic saved, and
 for reproduction. The one correction consumes the original Host capacity and cannot replay business.
 Archive and Retained contracts remain distinct; audit history is not Host permission.
 
-Current closeout changes are Root documentation/results and Luna Git publication only. No automatic
+The v3 closeout changes were Root documentation/results and Luna Git publication only. No automatic
 merge, main rewrite or old-tree cleanup. Future authorized development stays in MiLAi-Lab plus
 necessary root CI, with Root owning docs/data/real HTTP/scoring, one matched Sol xhigh source owner,
 and Luna high Git/required downloads. Astra is only for a concrete difficult conflict.
