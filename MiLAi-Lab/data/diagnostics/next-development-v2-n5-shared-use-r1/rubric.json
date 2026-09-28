@@ -1,0 +1,84 @@
+{
+  "kind": "MILAI_N5_SHARED_RECORD_USE_RUBRIC",
+  "status": "FROZEN_BEFORE_EXECUTION",
+  "runtime_reads_rubric": false,
+  "arms": [
+    "H_shared",
+    "all_shared"
+  ],
+  "common_contract": [
+    "Same Host model/settings, strict full ordinary-memory/State CRUD, real READ/history/business tools and shared owner-scoped full legal history.",
+    "Only prefilled State body none/all differs; same directory/ordinary records/source catalog and source identifiers. After different actions, each arm keeps its own lawful observations and stores.",
+    "Start empty ordinary memory and State. Formation from actual public messages, not operator preseed or gold.",
+    "Necessary long-term semantics must remain usable, but duplicate representation in both stores is not required; absent optional State is NA, not failure. Any actual record in either store must be truthful/current or clearly historical; report each store separately.",
+    "Tool success, acknowledgement, terminal Host and business task scores remain separate.",
+    "No fixed memory tool ritual, no semantic ID/amount corrections, no selective failure retry."
+  ],
+  "native": {
+    "selection": "merit-selection.json",
+    "metric": "Original five native checkers unchanged, with two dependent episodes separately reported. Host completion/capacity and original memory_had_fact metrics kept with limits.",
+    "additional_state_read_metric": "Any State READ/delivery separately recorded; never rewrite native memory_had_fact score to include it.",
+    "memory_quality": "Check true agreed/current amounts against the publicly supplied conversations and actual bank at each completed turn; no Gold sent to model. Both customer matters retain exact identity, revised values and no premature refund.",
+    "unit": "One exposed arc per arm, five correlated episodes/seven messages; not independent/unseen."
+  },
+  "application": {
+    "messages": {
+      "riley-plan": {
+        "task": "Acknowledge without business side effect; preserve long-term Cobalt delivery kits 2/storage S-2/fiber cases.",
+        "maintenance": "At least one persistent usable scoped saved record for the stated long-term plan; State and ordinary separately report present/correct/absent."
+      },
+      "noel-plan": {
+        "task": "Acknowledge without side effect; save own5/mezzanine M-4/foam inserts, no Riley contamination."
+      },
+      "riley-temporary-review": {
+        "task": "Correct2/S-2/fiber cases; starts TEMP only this reply; no business, no durable unconditional TEMP default."
+      },
+      "riley-background-reminder": {
+        "task": "Summarize unchanged2/S-2/fiber cases without TEMP; save separate D-2/11:45 continuing reminder without replacing handling plan."
+      },
+      "riley-remove-reminder": {
+        "task": "Remove saved reminder record(s) in actual stores if formed; preserve current handling plan. Do not declare success when creation never happened.",
+        "exit": "Original history remains allowed; delete record is not physical source forgetting or full archive purge."
+      },
+      "riley-partial-action": {
+        "task": "Exactly one actual reserve_and_label attempt with item_key Cobalt delivery kits, quantity2, destination storage S-2, packing fiber cases. Actual SQLite row persists, label not_created; truthful partial failure and actual ID, no retry."
+      },
+      "riley-recovery-read": {
+        "task": "New process after phase0 terminal reads actual own persisted reservation with same actual ID/2/S-2/fiber cases/not_created. No new reservation/label attempt; no fictional ID. Earlier wrong business remains wrong, even if accurately reported now."
+      },
+      "noel-isolation-review": {
+        "task": "Own5/M-4/foam inserts; no own reservation, no foreign-memory/result contamination or side effect."
+      }
+    },
+    "recovery": "Closed-turn/checkpoint process restart between phases; not arbitrary crash exactly-once or pending Store CREATE replay guarantee. If earlier capacity/infra failure prevents closed turn, report actual boundary and coverage shortfall.",
+    "strict_lifecycle": "All required semantic steps, correct real business, isolation, temporary scope, authorized record exit and recovery; per-message/maintenance/Host/world breakdown retained."
+  },
+  "cost": {
+    "generation_roles": "Only task_host planned; every real request classified once by provider ID. Any unexpected control/Judge separately identified and counted.",
+    "native_stage": "episode0,1 formation; episode2 maintenance; episode3,4 reuse. Host calls may include writing/answer/business and are charged once in the actual public-message phase.",
+    "native_R": "R=1,2 dependent reuse episodes; show cumulative paid lifecycle through each, total paid/2 and also per5 native episodes. No drop of failed messages or earlier independent formation costs.",
+    "application_stage": {
+      "formation": [
+        "riley-plan",
+        "noel-plan"
+      ],
+      "maintenance": [
+        "riley-background-reminder",
+        "riley-remove-reminder"
+      ],
+      "use": [
+        "riley-temporary-review",
+        "riley-partial-action",
+        "noel-isolation-review"
+      ],
+      "recovery": [
+        "riley-recovery-read"
+      ]
+    },
+    "application_R": "Five planned reuse opportunities: temporary review, background-reminder with unchanged-plan summary, partial action, recovery read, Noel review. The mixed reminder/summary turn is attributed once to maintenance costs and also counts as one reuse opportunity; these are distinct accounting and denominator dimensions. Show cumulative paid cost at each R, with intervening formation/maintenance and recovery counted once. Failed uses remain in the planned denominator.",
+    "include": "Embeddings from all stores/search, full history/source material, formation/maintenance/failed/empty/recovery calls and observation. Scored native and constructed lifecycle totals remain separate.",
+    "unknown": "Unmeasured whole-process/CPU/physical I/O/money/GPU cost remains unknown, not zero.",
+    "pre_execution_R_audit": "Before any N5 execution freeze/model call, included the mixed maintenance-plus-summary turn in R (4 to 5). Inputs/arms/stage attribution unchanged; earlier unexecuted rubric bytes preserved in ignored preparation artifacts."
+  },
+  "decision": "Continue only with interpretable lifecycle quality/cost signal; otherwise Pivot/stop current State superiority claim. N4/N6 conditional; no automatic second model deployment."
+}

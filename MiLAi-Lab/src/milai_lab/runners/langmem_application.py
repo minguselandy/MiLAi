@@ -452,6 +452,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               history_summary_controller: HistorySummaryController | None = None,
               local_state_update_epoch: str = "pre_model",
               memory_contract: Literal["native", "strict"] = "native",
+              agent_factory: Callable[..., Any] | None = None,
+              public_turn_callback: Callable[..., None] | None = None,
               ) -> dict[str, Any]:
     """Run one frozen phase; the next invocation reopens every process-owned resource."""
     phase = script["phases"][phase_id]
@@ -473,6 +475,9 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
         raise ValueError("LANGMEM_MEMORY_CONTRACT_UNKNOWN")
     if (history_mode == "window") != (history_summary_controller is not None):
         raise ValueError("APPLICATION_HISTORY_SUMMARY_MISMATCH")
+    if agent_factory is not None and (history_mode is not None
+                                     or local_state_controller is not None):
+        raise ValueError("APPLICATION_AGENT_FACTORY_METHOD_CONFLICT")
     if local_state_update_epoch not in {"pre_model", "turn_end"}:
         raise ValueError("LSA_UPDATE_EPOCH_UNKNOWN")
     if local_state_update_epoch == "turn_end" and (
@@ -514,6 +519,12 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                 raise ValueError("APPLICATION_PENDING_MESSAGE_CHANGED")
             scope = FoundationScope(run_id, arm_id, user_id, "application:" + session)
             agent = agents.get(user_id)
+            if agent is None and agent_factory is not None:
+                agent = agent_factory(
+                    runtime.model, runtime.store, runtime.checkpointer,
+                    _business_tools(world, user_id), user_id=user_id,
+                    business_call_wrapper=journal, observer=runtime.observer)
+                agents[user_id] = agent
             if agent is None:
                 history = None
                 if history_mode is not None:
@@ -589,7 +600,11 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                 }
                 if close_result is not None:
                     progress["messages"][message_id]["state_close"] = close_result
-                if history_mode is not None:
+                if public_turn_callback is not None:
+                    public_turn_callback(agent, scope, public_index,
+                                         "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+                                         progress["messages"][message_id]["business_calls"])
+                if history_mode is not None or agent_factory is not None:
                     progress["messages"][message_id]["visited_ordinal"] = len(
                         progress["messages"]) - 1
                 progress["blocked_sessions"].append(session_key)
@@ -619,7 +634,10 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
             }
             if close_result is not None:
                 progress["messages"][message_id]["state_close"] = close_result
-            if history_mode is not None:
+            if public_turn_callback is not None:
+                public_turn_callback(agent, scope, public_index, "COMPLETED",
+                                     progress["messages"][message_id]["business_calls"])
+            if history_mode is not None or agent_factory is not None:
                 progress["messages"][message_id]["visited_ordinal"] = len(
                     progress["messages"]) - 1
             progress["next_indices"][session_key] = public_index + 1

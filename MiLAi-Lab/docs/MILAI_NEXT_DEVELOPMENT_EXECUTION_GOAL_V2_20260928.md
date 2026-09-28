@@ -160,3 +160,14 @@ N3工程准入见[冻结协议](MILAI_NEXT_DEVELOPMENT_V2_N3_FIXED_UPDATE_202609
 Root选择关闭独立A/U/N4，N5保留共同Host双库CRUD与Archive-access的H_shared/all_shared；
 唯一读取差异为State正文预交付，不称原生B1或selector胜利。原生arc与构造owner/临时/退出/恢复补充另列。
 N5尚未实现验收/WP7未完成，N6不自动触发，Goal继续active。
+
+N5输入与评分已定义于[共享使用协议](MILAI_NEXT_DEVELOPMENT_V2_N5_SHARED_USE_20260928.md)：
+原生exposed arc3完整5episode/7消息，两臂共同Host双库工具与Archive-access，仅State正文none/all；
+构造补充8消息、两phase，删除saved record并保留历史，恢复限闭合回合后重开。
+实现由Sol进行，原生12源码与arc/world哈希只读相符；工程与正式执行freeze尚未完成，真实N5调用为0。
+方法CI读回：N2源码Fast36361932961、结果Fast36362595299、N3源码Fast36363414636已success。
+这些是相应提交的工程证据，不替代N5结果。
+
+N5工程准入已通过：38项受影响窄测、Ruff/Mypy/matrix/boundaries、四份零模型prepare及一次入口构建。
+[检查回执](../data/manifests/next-development-v2-n5-checks-20260928.json)绑定10个工程文件；Luna新分支发布后Root冻结并按既定六条命令串行执行。
+N3结果Fast36363961493也已success，Full36363961510为skipped；未重复旧检查。

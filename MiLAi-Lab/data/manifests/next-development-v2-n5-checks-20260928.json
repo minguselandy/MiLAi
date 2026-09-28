@@ -1,0 +1,453 @@
+{
+  "kind": "MILAI_V2_N5_PRE_EXECUTION_CHECKS",
+  "source_owner_receipt_sha256": "53b8d18df2617d74fc8003334856d2db9ed0e22db744709b441111ab16f44856",
+  "source_owner_receipt": {
+    "kind": "MILAI_N5_SOURCE_CHECKS",
+    "status": "FREEZE_READY",
+    "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab",
+    "git_sha_at_check": "4ca0ce1e155715612cebc8ec7486545f7af1a7a6",
+    "source_paths": {
+      "src/milai_lab/baselines/langmem_agent.py": {
+        "sha256": "0b6c378ea62933bcb8f01795ed36e4e1a02cad9a59dd4de3d2ade9ea51e79862",
+        "bytes": 17660
+      },
+      "src/milai_lab/methods/local_state_attention/integration.py": {
+        "sha256": "5a0d1a642709f47a26178c11b6d49e670f79197c6192b25141861f6d63e45fd3",
+        "bytes": 19684
+      },
+      "src/milai_lab/runners/langmem_merit.py": {
+        "sha256": "72037ce98c35e2485cab4e9a46ef3b01eab421ad78524d7bfc82c68d29ea9464",
+        "bytes": 13572
+      },
+      "src/milai_lab/runners/langmem_application.py": {
+        "sha256": "b2296c768a48774c2e8c09a1e1a3f45eb34b39df939389f2d94613e34c91b087",
+        "bytes": 37427
+      },
+      "src/milai_lab/runners/shared_record_use.py": {
+        "sha256": "aee4d706955f03e373538d496e993bb369f998cbec670a21e426a45b0747ceda",
+        "bytes": 23511
+      },
+      "tools/run_shared_record_use.py": {
+        "sha256": "6fc71a34a6adcfd7c0e822bc8552084c5c9e42455a427b40156cbdcaab62dc73",
+        "bytes": 1440
+      },
+      "tests/unit/test_shared_record_use.py": {
+        "sha256": "eec95e9fc02769aefcd0f905dc2cb15b1d5345f0dc208b09887101076849e9df",
+        "bytes": 23300
+      },
+      "configs/lab-verification-matrix.json": {
+        "sha256": "3b03cf3ebb104ce894fd4d07e6918da559dc1c69f32428037d8bacea702dbe52",
+        "bytes": 4160
+      },
+      "../.github/workflows/fast.yml": {
+        "sha256": "e08967f7693e7a6ce4939921b357d06dd5fe529b9b0554dab94ee77ae539b2dc",
+        "bytes": 16803
+      },
+      "../.github/workflows/ci.yml": {
+        "sha256": "bd33bccb94b3fe2a80d0a17fe0fc1ec136e058a5e74fe607da0297379c3f9596",
+        "bytes": 20476
+      }
+    },
+    "implementation": {
+      "arms": {
+        "H_shared": "State bodies not prefilled; directory, explicit State READ and common history remain",
+        "all_shared": "State bodies all prefilled; same directory, tools, ordinary bodies, source catalog and history"
+      },
+      "writer_policy": "shared strict Host full CRUD; no automatic semantic maintenance or selectors",
+      "original_native_merit": "five episodes/seven original public messages, actual source/arc/tool/world/checker retained",
+      "application": "eight messages, two phases; reopen only after closed turn",
+      "host_capacity": 12,
+      "control_capacity": 13,
+      "control_calls_in_method": 0,
+      "turn_snapshot": "actual ordinary/State/pending/source/tool receipts after each observed completed turn; mechanical ack not semantic correctness",
+      "only_treatment": "state_body_prefill none/all"
+    },
+    "environment": {
+      "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+      "interpreter": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+      "dependencies": {
+        "langchain-core": "1.6.5",
+        "langgraph": "1.1.10",
+        "langgraph-checkpoint-postgres": "2.0.25",
+        "langgraph-checkpoint-sqlite": "2.0.11",
+        "langmem": "0.0.30",
+        "psycopg": "3.3.6",
+        "jsonschema": "4.26.0"
+      },
+      "dependency_lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1",
+      "no_sync_or_dependency_install": true
+    },
+    "checks": [
+      {
+        "name": "new_tests_initial",
+        "command": [
+          "PYTHONPATH=src",
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_shared_record_use.py"
+        ],
+        "result": "7 passed, 0 skipped, 15 upstream warnings, 4.21s",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/new-tests-initial.log",
+        "before_final_typing_and_format_corrections": true
+      },
+      {
+        "name": "affected_final",
+        "command": [
+          "PYTHONPATH=src",
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/test_shared_record_use.py",
+          "tests/unit/test_writer_policy.py",
+          "tests/unit/test_langmem_application.py",
+          "tests/unit/test_langmem_foundation.py::test_json_action_executes_every_upstream_call_in_order",
+          "tests/unit/test_langmem_foundation.py::test_read_history_tool_is_opt_in_and_uses_same_host_action_envelope",
+          "tests/unit/test_langmem_foundation.py::test_business_journal_replays_result_but_never_unknown_action",
+          "tests/unit/test_freshness_projection.py::test_merit_local_capacity_keeps_native_result_and_continues_only_that_error"
+        ],
+        "collected": 38,
+        "passed": 38,
+        "skipped": 0,
+        "deselected": 0,
+        "warnings": 41,
+        "seconds": 8.02,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/affected.log",
+        "breakdown": {
+          "new_shared_record": 7,
+          "writer_policy": 16,
+          "application": 9,
+          "foundation": 3,
+          "native_capacity_parameter_cases": 3
+        }
+      },
+      {
+        "name": "ruff_final",
+        "command": [
+          "PYTHONPATH=src",
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+          "-m",
+          "ruff",
+          "check",
+          "src/milai_lab/baselines/langmem_agent.py",
+          "src/milai_lab/methods/local_state_attention/integration.py",
+          "src/milai_lab/runners/langmem_merit.py",
+          "src/milai_lab/runners/langmem_application.py",
+          "src/milai_lab/runners/shared_record_use.py",
+          "tools/run_shared_record_use.py",
+          "tests/unit/test_shared_record_use.py"
+        ],
+        "result": "PASS",
+        "targets": 7,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/ruff-final.log"
+      },
+      {
+        "name": "mypy_final",
+        "command": [
+          "PYTHONPATH=src",
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+          "-m",
+          "mypy",
+          "--follow-imports=silent",
+          "src/milai_lab/baselines/langmem_agent.py",
+          "src/milai_lab/methods/local_state_attention/integration.py",
+          "src/milai_lab/runners/langmem_merit.py",
+          "src/milai_lab/runners/langmem_application.py",
+          "src/milai_lab/runners/shared_record_use.py",
+          "tools/run_shared_record_use.py"
+        ],
+        "result": "Success: no issues found in 6 source files",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/mypy-final.log"
+      },
+      {
+        "name": "matrix",
+        "command": [
+          "PYTHONPATH=src",
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+          "tools/check_verification_matrix.py"
+        ],
+        "result": {
+          "active_sources": 153,
+          "core_direct": 22,
+          "excluded_recovered": 35,
+          "external_direct": 2,
+          "foundation_discovery": 118,
+          "foundation_explicit": 45,
+          "integration_tests": 0,
+          "optional_tests_owned": 15,
+          "private_asset_tests": 11,
+          "protocol_contract_present": true
+        },
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/matrix.log",
+        "actual_workflow_pytest_target_and_exact_ignore_sets_checked": true
+      },
+      {
+        "name": "package_boundary",
+        "command": [
+          "PYTHONPATH=src",
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+          "-m",
+          "milai_lab.boundary"
+        ],
+        "result": "PASS",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/boundary.log"
+      },
+      {
+        "name": "tools_boundary",
+        "command": [
+          "PYTHONPATH=src",
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+          "-m",
+          "milai_lab.tools_boundary"
+        ],
+        "result": "PASS",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/tools-boundary.log"
+      },
+      {
+        "name": "tracked_whitespace",
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "result": "PASS",
+        "evidence": "tool receipt; not rerun for final report"
+      },
+      {
+        "name": "untracked_whitespace",
+        "result": "PASS: 3 new files; one final newline, no diagnostics",
+        "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/untracked-whitespace.json"
+      }
+    ],
+    "zero_model_prepare": {
+      "commands": [
+        {
+          "command": [
+            "env",
+            "-u",
+            "MILAI_LANGMEM_POSTGRES_DSN",
+            "PYTHONPATH=src",
+            "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+            "tools/run_shared_record_use.py",
+            "prepare",
+            "--config",
+            "data/diagnostics/next-development-v2-n5-shared-use-r1/config.json",
+            "--inputs",
+            "data/diagnostics/next-development-v2-n5-shared-use-r1/merit-inputs.json",
+            "--run",
+            "n5-prepare-merit-H_shared",
+            "--arm",
+            "H_shared",
+            "--runtime-root",
+            "/tmp/milai-n5-prepare-OCR7cG/merit-H_shared",
+            "--output",
+            "/tmp/milai-n5-prepare-OCR7cG/merit-H_shared/prepared.json"
+          ],
+          "status": "PREPARED_ZERO_MODEL",
+          "identity_sha256": "889e8802904e47b0dcbdf93dbd707c9a079dc9fcb60f6829d16ba0e096a30770",
+          "manifest": "/tmp/milai-n5-prepare-OCR7cG/merit-H_shared/run_manifest.json",
+          "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/prepare-merit-H_shared.log"
+        },
+        {
+          "command": [
+            "env",
+            "-u",
+            "MILAI_LANGMEM_POSTGRES_DSN",
+            "PYTHONPATH=src",
+            "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+            "tools/run_shared_record_use.py",
+            "prepare",
+            "--config",
+            "data/diagnostics/next-development-v2-n5-shared-use-r1/config.json",
+            "--inputs",
+            "data/diagnostics/next-development-v2-n5-shared-use-r1/merit-inputs.json",
+            "--run",
+            "n5-prepare-merit-all_shared",
+            "--arm",
+            "all_shared",
+            "--runtime-root",
+            "/tmp/milai-n5-prepare-OCR7cG/merit-all_shared",
+            "--output",
+            "/tmp/milai-n5-prepare-OCR7cG/merit-all_shared/prepared.json"
+          ],
+          "status": "PREPARED_ZERO_MODEL",
+          "identity_sha256": "313e1a218e8a996699b4594cebd81edf889fbd83a359422f1a1bba3727a08833",
+          "manifest": "/tmp/milai-n5-prepare-OCR7cG/merit-all_shared/run_manifest.json",
+          "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/prepare-merit-all_shared.log"
+        },
+        {
+          "command": [
+            "env",
+            "-u",
+            "MILAI_LANGMEM_POSTGRES_DSN",
+            "PYTHONPATH=src",
+            "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+            "tools/run_shared_record_use.py",
+            "prepare",
+            "--config",
+            "data/diagnostics/next-development-v2-n5-shared-use-r1/config.json",
+            "--inputs",
+            "data/diagnostics/next-development-v2-n5-shared-use-r1/application-inputs.json",
+            "--run",
+            "n5-prepare-application-H_shared",
+            "--arm",
+            "H_shared",
+            "--runtime-root",
+            "/tmp/milai-n5-prepare-OCR7cG/application-H_shared",
+            "--output",
+            "/tmp/milai-n5-prepare-OCR7cG/application-H_shared/prepared.json"
+          ],
+          "status": "PREPARED_ZERO_MODEL",
+          "identity_sha256": "c347cc4a53c1c5887dc41cbde189adbf6a54053b578f2c8c3d73169a6868623d",
+          "manifest": "/tmp/milai-n5-prepare-OCR7cG/application-H_shared/run_manifest.json",
+          "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/prepare-application-H_shared.log"
+        },
+        {
+          "command": [
+            "env",
+            "-u",
+            "MILAI_LANGMEM_POSTGRES_DSN",
+            "PYTHONPATH=src",
+            "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+            "tools/run_shared_record_use.py",
+            "prepare",
+            "--config",
+            "data/diagnostics/next-development-v2-n5-shared-use-r1/config.json",
+            "--inputs",
+            "data/diagnostics/next-development-v2-n5-shared-use-r1/application-inputs.json",
+            "--run",
+            "n5-prepare-application-all_shared",
+            "--arm",
+            "all_shared",
+            "--runtime-root",
+            "/tmp/milai-n5-prepare-OCR7cG/application-all_shared",
+            "--output",
+            "/tmp/milai-n5-prepare-OCR7cG/application-all_shared/prepared.json"
+          ],
+          "status": "PREPARED_ZERO_MODEL",
+          "identity_sha256": "525b578bfe6fe25e6007e859f922a98e6a941584c7c13a499bd8bb778553131e",
+          "manifest": "/tmp/milai-n5-prepare-OCR7cG/application-all_shared/run_manifest.json",
+          "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/prepare-application-all_shared.log"
+        }
+      ],
+      "identity_check": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/prepare-identity-check.json",
+      "source_paths_per_identity": 155,
+      "shared_budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "input_hashes": {
+        "merit-inputs.json": "0fe814f8ba9ae81937d48ccf1993c6bed29e466f49ad4898f37b3e8497ee4944",
+        "application-inputs.json": "4e2736127d12e667ca39e6baae7e26c57225f735e537b1cba62185b5bb4539ea",
+        "config.json": "954332a44d0ebf2f02551a253448b80b53ded60fe78fe01f88aa56dde4bf018b",
+        "merit-selection.json": "a8ec24d804e5b37ab15ef1442025ae8e41198b397efb55090a0b71755a13a425"
+      }
+    },
+    "build": {
+      "receipt": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-build-receipt.json",
+      "count": 1,
+      "artifacts": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-dist/milai_lab-0.1.0-py3-none-any.whl",
+          "sha256": "a2dd5a7595e10a79e0328d0847476248567c4078ab09b54af8a3e7c7aa83a429",
+          "bytes": 552126
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-dist/milai_lab-0.1.0.tar.gz",
+          "sha256": "2d3e407df8d2609c5ed8d09d688b0210b5b6f08dc54a1c54c7909f8e35a294b1",
+          "bytes": 5264341
+        }
+      ],
+      "command": [
+        "uv",
+        "build",
+        "--offline",
+        "--out-dir",
+        "artifacts/next-development-v2/n5-dist"
+      ],
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/build.log",
+      "wall_seconds": 4.874431568197906,
+      "content_checks": 24,
+      "private_ignored_assets_excluded": true,
+      "document_snapshot": {
+        "path": "docs/MILAI_NEXT_DEVELOPMENT_V2_N5_SHARED_USE_20260928.md",
+        "sha256": "76ea7aad09ecffc4ec670393fdadc855a52e34af157dc8df6506f74dfcb5ef9e",
+        "timing": "before single final build; includes Root WP7 reuse denominator correction"
+      },
+      "rubric_sha256_in_sdist": "400324751ce37dad786007edde20f3c69d02eb8d2b6c84eb4b7ef975c5a3b5e2"
+    },
+    "retained_initial_failures": [
+      {
+        "kind": "ruff",
+        "errors": 10,
+        "detail": "2 import-format plus 8 line-length diagnostics; formatting corrected",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/ruff-initial.log"
+      },
+      {
+        "kind": "mypy",
+        "errors": 10,
+        "detail": "2 optional-owner tuple typing plus 8 ambiguous build_agent keyword duplicates; strict owner validation and explicit factory signature corrected without ignores",
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-resume/MiLAi-Lab/artifacts/next-development-v2/n5-checks/mypy-initial.log"
+      },
+      {
+        "kind": "inspection_harness",
+        "detail": "untracked whitespace checker initially asserted exit code 0; git no-index normal content differences exit 1 with no whitespace diagnostics. Fixed checker only; no source change. Earlier shell python alias unavailable (127); used locked foundation interpreter. Final prepared metadata reader uses manifest_path, not an assumed nested identity/manifest.json.",
+        "evidence": "tool receipts; no test or runtime failure"
+      },
+      {
+        "kind": "pre_check_contract_review",
+        "detail": "schema-only application helper initially supplied empty callable mapping; changed to existing deferred _business_tools schema assembly. Run manifest now records RUNNING/PHASE_COMPLETED/TERMINAL/FAILED instead of retaining PREPARED_ZERO_MODEL after execution. Corrected before initial new tests."
+      }
+    ],
+    "two_competing_explanations": [
+      {
+        "boundary": "ordinary writer-view plus archive-access",
+        "H1": "different model information permissions require separate methods",
+        "H2": "existing hook composition constraint prevented same legal history with only State-body treatment",
+        "judgment": "explicit opt-in composition shares actual legal history/ordinary/source/directory; actual mock HTTP difference limited to State-body row"
+      },
+      {
+        "boundary": "schema-only application prepare",
+        "H1": "prepare needs a live business world",
+        "H2": "existing native helper eagerly dereferences supplied function mapping",
+        "judgment": "H2; existing deferred business-tools factory provides real schema without constructing or executing another world"
+      }
+    ],
+    "execution_scope": {
+      "actual_external_host_http_calls": 0,
+      "actual_embedding_calls": 0,
+      "shared_postgres_calls": 0,
+      "tests": "MockTransport/InMemoryStore plus actual local SQLite checkpoint, native/synthetic business world; native zero-model loader uses local native-world verification. Not a claim of all database calls being zero.",
+      "no_background_process_remaining": true,
+      "no_git_commit_push_download": true
+    },
+    "not_run": [
+      "real native or constructed model paths",
+      "shared PostgreSQL service",
+      "real embeddings",
+      "whole core/foundation/full CI",
+      "N4 or additional selectors/maintenance",
+      "new semantic score"
+    ],
+    "limitations": [
+      "H_shared still has State read tools and original historical State receipts; not native B1 or no-State tool ablation",
+      "No general semantic exactly-once for Host CREATE, no cross-store transaction/CAS or arbitrary mid-ToolNode crash resume",
+      "Constructed restart is after closed turn; business pending/unknown action is not automatically replayed",
+      "DELETE removes only exact saved record and retains original archive/source; not physical forgetting",
+      "State evidence references remain model-selected; no automatic evidence correction",
+      "Observed logical bytes/CPU/wall retained, physical DB I/O and ordinary-write CPU/wall unknown where not measured",
+      "All real benchmark and task scoring remains Root-only after source publication"
+    ],
+    "source_frozen_after_receipt": true
+  },
+  "root_review": {
+    "source_hashes_match": true,
+    "formal_input_hashes_match": true,
+    "actual_tool_and_history_composition_reviewed": true,
+    "rubric_sha256": "400324751ce37dad786007edde20f3c69d02eb8d2b6c84eb4b7ef975c5a3b5e2",
+    "application_reuse_opportunities": 5,
+    "runtime_reads_rubric": false,
+    "source_publication_and_formal_execution_freeze": "PENDING",
+    "real_generation_or_embedding_calls": 0,
+    "ledger_sha256": "b41871849789b7961c088c6c2750f28f98fc94fb268f73c51004b120d543adc7"
+  }
+}

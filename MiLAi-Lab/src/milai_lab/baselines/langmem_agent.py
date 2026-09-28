@@ -111,6 +111,24 @@ def open_persistent_state(
             yield store, saver
 
 
+def create_history_read_tool(history: HistoryAccess | None) -> BaseTool:
+    """One shared history tool; None permits schema inspection without reading history."""
+    @tool("read_history", description=HISTORY_TOOL_DESCRIPTION)
+    def read_history(cursor: int = 0, max_bytes: int | None = None) -> str:
+        if history is None:
+            raise ValueError("HISTORY_ACCESS_MISSING")
+        try:
+            result = history.page(cursor, max_bytes)
+        except ValueError as error:
+            if str(error) not in {"HISTORY_CURSOR_INVALID", "HISTORY_CURSOR_OUT_OF_RANGE",
+                                  "HISTORY_PAGE_BUDGET_INVALID"}:
+                raise
+            result = {"status": str(error), "records": []}
+        return json.dumps(result, ensure_ascii=False)
+
+    return read_history
+
+
 def build_agent(
     model: VLLMChatModel,
     store: BaseStore | None,
@@ -135,6 +153,8 @@ def build_agent(
     writer_view_bank: Any = None,
     writer_known_prefix_messages: int = 0,
     writer_initial_boundary: dict[str, Any] | None = None,
+    writer_history_projection: bool = False,
+    writer_state_body_prefill: Literal["all", "none"] = "all",
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
@@ -158,6 +178,13 @@ def build_agent(
         or history_summary_controller is not None
     ):
         raise ValueError("LANGMEM_WRITER_VIEW_CONFLICT")
+    if (type(writer_state_body_prefill) is not str
+            or writer_state_body_prefill not in {"all", "none"}
+            or (writer_state_body_prefill != "all" and writer_view_bank is None)
+            or type(writer_history_projection) is not bool
+            or (writer_history_projection and (
+                writer_view_bank is None or history_access is None))):
+        raise ValueError("LANGMEM_WRITER_HISTORY_VIEW_INVALID")
     selected_memory_tools: Sequence[BaseTool]
     if writer_tools is not None:
         owned_manage = writer_tools.manage_memory
@@ -175,18 +202,7 @@ def build_agent(
         selected_memory_tools = memory_tools
     history_tools: list[BaseTool] = []
     if history_access is not None:
-        @tool("read_history", description=HISTORY_TOOL_DESCRIPTION)
-        def read_history(cursor: int = 0, max_bytes: int | None = None) -> str:
-            try:
-                result = history_access.page(cursor, max_bytes)
-            except ValueError as error:
-                if str(error) not in {"HISTORY_CURSOR_INVALID", "HISTORY_CURSOR_OUT_OF_RANGE",
-                                      "HISTORY_PAGE_BUDGET_INVALID"}:
-                    raise
-                result = {"status": str(error), "records": []}
-            return json.dumps(result, ensure_ascii=False)
-
-        history_tools.append(read_history)
+        history_tools.append(create_history_read_tool(history_access))
     if full_history and history_access is None:
         raise ValueError("HISTORY_ACCESS_MISSING")
     if history_summary_controller is not None and history_access is None:
@@ -258,6 +274,8 @@ def build_agent(
                             source_view_max_bytes=source_view_max_bytes,
                             known_prefix_messages=writer_known_prefix_messages,
                             initial_boundary=writer_initial_boundary,
+                            history=(history_access if writer_history_projection else None),
+                            state_body_prefill=writer_state_body_prefill,
                             emit=model.client.emit)
                         if writer_view_bank is not None else None),
         store=store,

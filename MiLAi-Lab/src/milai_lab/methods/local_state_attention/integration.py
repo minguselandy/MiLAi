@@ -144,12 +144,16 @@ def make_writer_view_hook(toolset: WriterTools, system_prompt: str, *,
                           source_view_max_bytes: int | None = None,
                           known_prefix_messages: int = 0,
                           initial_boundary: dict[str, Any] | None = None,
+                          history: HistoryAccess | None = None,
+                          state_body_prefill: str = "all",
                           emit: Any = None) -> Any:
     """Expose actual State without invoking automatic semantic maintenance."""
     if (type(known_prefix_messages) is not int or known_prefix_messages < 0
             or (source_view_max_bytes is not None and
                 (type(source_view_max_bytes) is not int or source_view_max_bytes <= 0))):
-        raise ValueError("LSA_WRITER_VIEW_CONFIG_INVALID")
+            raise ValueError("LSA_WRITER_VIEW_CONFIG_INVALID")
+    if type(state_body_prefill) is not str or state_body_prefill not in {"all", "none"}:
+        raise ValueError("LSA_WRITER_BODY_PREFILL_INVALID")
 
     def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
         cfg = config["configurable"]
@@ -168,7 +172,8 @@ def make_writer_view_hook(toolset: WriterTools, system_prompt: str, *,
         if source_view_max_bytes is not None:
             source_lines, source_trace = _source_view(
                 bank, scope, states, source_view_max_bytes)
-        view = _render_view(states, pending, source_lines)
+        selected_states = states if state_body_prefill == "all" else []
+        view = _render_view(selected_states, pending, source_lines)
         directory = [{key: row[key] for key in ("id", "title", "revision")}
                      for row in states]
         if directory:
@@ -192,9 +197,21 @@ def make_writer_view_hook(toolset: WriterTools, system_prompt: str, *,
                 "NO_CHANGE is not a user answer and a degraded result is not saved:]",
                 json.dumps(actual_boundary, ensure_ascii=False)])
         view = "\n".join([*common, view] if view else common)
+        if history is not None:
+            if (scope.run_id, scope.arm_id, scope.user_id) != (
+                    history.scope.run_id, history.scope.arm_id, history.scope.user_id):
+                raise ValueError("HISTORY_OWNER_SCOPE_MISMATCH")
+            delivered, incomplete, suppressed = history.project(cfg["thread_id"], delivered)
+            view += _incomplete_appendix(incomplete)
+            if emit is not None:
+                emit({"event": "lsa_history_view", "suppressed": suppressed,
+                      "native_messages": len(delivered),
+                      "incomplete_turns": len(incomplete)})
         if emit is not None:
             emit({"event": "lsa_writer_view", "user_id": scope.user_id,
                   "state_ids": [row["id"] for row in states],
+                  "state_body_prefill": state_body_prefill,
+                  "delivered_state_ids": [row["id"] for row in selected_states],
                   "state_directory": directory,
                   "memory_ids": [row["id"] for row in memories],
                   "source_catalog_ids": [row["id"] for row in catalog],
