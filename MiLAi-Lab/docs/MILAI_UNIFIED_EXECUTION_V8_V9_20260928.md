@@ -60,7 +60,8 @@ Root核对5个实现／测试文件及27个检查制品的SHA一致，未重复�
 底层Store异常按RPC失败暴露，不自动重试；UUID参数拒绝使用MCP invalid_arguments格式，合法回执内容保持原样。
 HTTP和SDK超时共同取现有Host／embedding超时最大值；没有独立账本。
 初期参数拒绝接线问题及测试断言／静态检查失败均已留存。检查使用MockHost/embedding、内存Store及本地SQLite，
-没有真实Host、embedding、Judge或共享Postgres调用，不代表语义效果。源码停笔待发布和Root真实接线验收。
+没有真实Host、embedding、Judge或共享Postgres调用，不代表语义效果。
+源码已由 Luna 发布为 `196fa0136effc442b33a346df4bd17631807542d`，Root 核对远端 SHA 一致。
 
 ## 原生资源、曝光和事前选样
 
@@ -144,12 +145,40 @@ Sol 的真实loopback HTTP检查使用MockHost，不计为真实Host语义成功
 起点 **3301 generation calls / 4,205,203 generation tokens / 23,570 embedding tokens**；unknown usage=0。
 所有新调用继续追加，真实模型 HTTP 并发1；开发代理成本分开。私密 DSN 仅按需注入，不输出。
 
+## 首轮实际 MCP 接线失败与最小修复
+
+[R1 失败记录](../data/manifests/unified-v8-v9-mcp-r1-failure-20260928.json)保留冻结身份、实际调用与持久化证据。
+Root 在上述源码提交下先冻结完整两脚本，再开始运行。首个 save_plan 消息的 native HTTP200 返回合法
+`manage_memory` CREATE；实际 Host-origin MCP HTTP200、embedding 和 strict Store 写入成功，程序经 MCP
+重新读取到了同一个真实 record ID。没有业务动作。但是第二次生成前，本地容量模板对
+OpenAI `function.arguments` JSON 字符串调用 `items`，抛出 TypeError；续接 HTTP 尚未发出。
+该 turn 为 INTERRUPTED_UNKNOWN，phase FAILED，没有最终回答，第二个 session 和 read_only 均未运行。
+实际 CREATE 保留，不能以它替代完整任务成功，也不将 R1 与后续成功片段拼接。
+
+两个竞争解释是：合法 OpenAI 字符串参数缺少本地 HF 模板所需的对象适配；或请求 renderer 重复编码参数。
+Sol 已用实际失败 checkpoint 零模型复现第一种不匹配，并排除重复编码：一次 JSON 解码与原参数完全相等。
+首请求的已记录请求对象一致，且本地1391 tokens等于实际服务usage；JSON邻接路径正常。部署中vLLM源码也明确执行这项转换。
+最小通用候选只修改 tokenizer 计数副本，保留原 checkpoint、实际工具 JSON、模型参数、输入和评分。
+窄测与源码发布后，按[事前 R2 协议](../data/diagnostics/unified-v8-v9-mcp-smoke/protocol-r2.json)
+在全新身份／namespace 重跑同一完整两脚本；不是修改失败样本或自动重试。决策为 Continue 最小工程修复。
+已曝光合成输入、单模型及工程中断均限制结论；此诊断不替代 U1/U2 原生比较。
+
+[修复窄测回执](../data/manifests/unified-v8-v9-capacity-repair-checks-20260928.json)已确认6个独立目标通过、0 skip，
+Ruff／目标Mypy／矩阵／diff检查通过。实际checkpoint离线重放的native计数为1391／1788，JSON仍为1092／1476；
+原checkpoint、请求对象和audit保持不变。空串／缺省／JSON null同服务规则转换，非法JSON仍报错。
+Root只核对3个源码／测试文件及全部检查制品哈希，没有重跑测试；第二请求的实际服务计数仍待R2验证。
+
+R1 新增 **1 generation / 1,455 generation tokens / 1 embedding / 31 embedding tokens**，unknown usage=0。
+连续账本为 **3302 generation / 4,206,658 generation tokens / 23,601 embedding tokens**，SHA
+`f4ff524f60fd237a1624e2048dcc968c17871d836d9c3f4a7e8ee040d5086571`。
+失败消耗与实际持久化全部保留；没有清零或撤销费用。
+
 ## 全范围需求与当前状态
 
 | 要求 | 证明完成所需证据 | 当前 |
 | --- | --- | --- |
 | U0 身份/资源/许可/曝光 | 源码、模型、数据、scorer 哈希；历史曝光和无模型账本 | IN_PROGRESS |
-| Host Agent 真实 MCP | 实际模型提案、MCP 请求/回执、同一 Store 和后续回答 | ENGINEERING_CHECKED; REAL_MODEL_NOT_RUN |
+| Host Agent 真实 MCP | 实际模型提案、MCP 请求/回执、同一 Store 和后续回答 | R1 ACTUAL_CREATE; CONTINUATION_CAPACITY_FAILURE |
 | U1 MemSyco | 三类各2原题、原生参考及MiLAi、完整历史、原生评分和成本 | NOT_RUN |
 | U1 MERIT | 三域easy/hard各1完整arc、原生tools/world/checker、两路径、leak check | NOT_RUN |
 | U2 独立比较 | 60题/18arcs建议规模，正式ID另冻；强原文RAG、真实摘要、完整历史、ordinary/候选和Mem0 | NOT_RUN |
@@ -164,4 +193,4 @@ Sol 的真实loopback HTTP检查使用MockHost，不计为真实Host语义成功
 
 数量先按计划建议组织；若实际数据/资源要求调整，必须在模型运行前说明理由、保持完整实例并冻结。
 研究优势不预设；最终必须说明形成、取材、呈现、动作或额外计算的证据边界。
-当前 Goal 保持 active，尚未完成适配或真实模型实验。
+当前 Goal 保持 active；首轮实际接线因容量适配失败中断，完整原生适配与后续实验尚未完成。

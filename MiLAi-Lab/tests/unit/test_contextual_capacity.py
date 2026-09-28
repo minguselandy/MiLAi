@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from copy import deepcopy
 from itertools import pairwise
 from pathlib import Path
 from typing import Any
@@ -137,6 +138,54 @@ def test_no_capacity_sends_only_explicit_thinking_mode() -> None:
     assert "chat_template_kwargs" not in wires[0]
     assert wires[1]["chat_template_kwargs"] == {"enable_thinking": False}
     assert wires[2]["chat_template_kwargs"] == {"enable_thinking": True}
+
+
+def test_native_arguments_are_decoded_only_in_template_copy() -> None:
+    arguments = {"content": 'Nested "text" with unicode 茶', "metadata": {"items": [1, 2]}}
+    messages = [{"role": "assistant", "content": "", "tool_calls": [
+        {"id": "actual-call", "type": "function", "function": {
+            "name": "write", "arguments": json.dumps(arguments, ensure_ascii=False)}},
+        {"id": "mapping-call", "type": "function", "function": {
+            "name": "write", "arguments": arguments}},
+        *[{"id": f"empty-{index}", "type": "function", "function": {
+            "name": "no_args", "arguments": value}}
+          for index, value in enumerate((None, "", "null"))],
+        {"id": "missing-arguments", "type": "function", "function": {"name": "no_args"}},
+    ]}, {"role": "tool", "tool_call_id": "actual-call", "content": '{"ok":true}'}]
+    original = deepcopy(messages)
+    seen = []
+
+    class Tokenizer:
+        def apply_chat_template(self, rendered_messages: Any, **_kwargs: Any) -> list[int]:
+            seen.append(deepcopy(rendered_messages))
+            assert rendered_messages[0]["tool_calls"][0]["function"]["arguments"] == arguments
+            assert all(call["function"]["arguments"] == {}
+                       for call in rendered_messages[0]["tool_calls"][2:])
+            rendered_messages[0]["tool_calls"][1]["function"]["arguments"]["metadata"][
+                "items"].append(3)
+            return [1, 2]
+
+    capacity = HostCapacity.__new__(HostCapacity)
+    capacity.tokenizer = Tokenizer()
+    capacity.enable_thinking = False
+    assert capacity.count_messages(messages) == 2
+    assert messages == original
+    assert seen[0][1] == messages[1]
+    json_action = [{"role": "assistant", "content": json.dumps({"calls": [
+        {"name": "write", "arguments": arguments}]})}]
+    untouched = deepcopy(json_action)
+    capacity.tokenizer = type("JsonTokenizer", (), {
+        "apply_chat_template": lambda _self, rows, **_kwargs: seen.append(rows) or [1],
+    })()
+    assert capacity.count_messages(json_action) == 1
+    assert seen[-1] == untouched and json_action == untouched
+    malformed = [{"role": "assistant", "content": "", "tool_calls": [
+        {"id": "malformed", "type": "function", "function": {
+            "name": "write", "arguments": "{"}}]}]
+    before = deepcopy(malformed)
+    with pytest.raises(json.JSONDecodeError):
+        capacity.count_messages(malformed)
+    assert malformed == before
 
 
 def test_reasoning_alias_is_counted_once_without_mutating_transcript(

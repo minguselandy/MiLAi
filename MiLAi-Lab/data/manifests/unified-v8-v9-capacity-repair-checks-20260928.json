@@ -1,0 +1,210 @@
+{
+  "kind": "UNIFIED_MCP_NATIVE_CAPACITY_REPAIR_CHECKS",
+  "status": "FREEZE_READY",
+  "base_commit": "196fa0136effc442b33a346df4bd17631807542d",
+  "source_and_tests": {
+    "src/milai_lab/providers/contextual_capacity.py": {
+      "sha256": "691daf0e1e52633f9c5f9c5db35b47db285718df8f5e1fbf984ac9b404c0cccc",
+      "bytes": 12232
+    },
+    "tests/unit/test_contextual_capacity.py": {
+      "sha256": "e95b18632ba9c72c30cd476cdbe455816da8e7aebb3d37c9a484e493f2ddbb97",
+      "bytes": 13250
+    },
+    "tests/unit/test_persistent_memory.py": {
+      "sha256": "bb376c970eb36aa932254906b9c360098d8d93e24d6431f5b1eb59d18bbbe643",
+      "bytes": 65205
+    }
+  },
+  "first_breakpoint": "Local HF template receives OpenAI function.arguments JSON string; template items requires mapping.",
+  "explanations": {
+    "H1": "CONFIRMED: local counting copy lacked deployed vLLM normalization.",
+    "H2": "REJECTED for exposed failure: one json.loads equals checkpoint args and original native receipt arguments; no repeated encoding."
+  },
+  "repair_scope": "Counting deep-copy only, matching vLLM _postprocess_messages argument normalization. Original wire/checkpoint/tool JSON, prompts/schema/Store/MCP and service unchanged.",
+  "environment": {
+    "foundation_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+    "core_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+    "python": "3.11.13",
+    "dependencies": {
+      "transformers": "4.57.6",
+      "tokenizers": "0.22.2",
+      "httpx": "0.28.1",
+      "pytest": "8.4.2",
+      "langchain-core": "1.6.5",
+      "langgraph": "1.1.10",
+      "mcp": "2.1.1"
+    },
+    "PYTHONPATH": "src",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "checks": [
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python artifacts/unified-v8-v9/capacity-repair-checks/replay_failure.py --expect-failure --output artifacts/unified-v8-v9/capacity-repair-checks/before-observations.json",
+      "exit_code": 0,
+      "log": "before-replay.log",
+      "result": "4 requests; native continuation reproduces TypeError before mock HTTP; first1391 tokens equals actual usage; JSON1092/1476"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_contextual_capacity.py::test_native_arguments_are_decoded_only_in_template_copy tests/unit/test_contextual_capacity.py::test_local_chat_template_capacity_and_identity tests/unit/test_contextual_capacity.py::test_reasoning_alias_is_counted_once_without_mutating_transcript tests/unit/test_contextual_capacity.py::test_explicit_thinking_mode_matches_tokenizer_and_wire tests/unit/test_contextual_capacity.py::test_no_capacity_sends_only_explicit_thinking_mode tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery",
+      "exit_code": 1,
+      "log": "pytest-targets.log",
+      "result": {
+        "passed": 5,
+        "failed": 1,
+        "skipped": 0
+      },
+      "failure": "New READ assertion incorrectly expected receipt.content; actual public receipt.value.content. Test-only corrected."
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery",
+      "exit_code": 0,
+      "log": "pytest-native-final.log",
+      "result": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      "coverage": "actual ToolNode READ -> second native MockHTTP -> final; local SQLite; paired IDs; tool-aware capacity and pre-HTTP rejection"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_contextual_capacity.py::test_native_arguments_are_decoded_only_in_template_copy",
+      "exit_code": 0,
+      "log": "pytest-core-null-final.log",
+      "result": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      "coverage": "no-asset counting copy: object/string/nested Unicode, missing/None/empty-string/JSON-null -> {}; malformed JSON remains an exception; original objects and JSON-action content unchanged"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python artifacts/unified-v8-v9/capacity-repair-checks/replay_failure.py --output artifacts/unified-v8-v9/capacity-repair-checks/final-observations.json",
+      "exit_code": 0,
+      "log": "replay-final.log",
+      "result": "4 requests replayed with MockTransport; native1391/1788; JSON1092/1476; graph/audit/evidence unchanged"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m ruff check src/milai_lab/providers/contextual_capacity.py tests/unit/test_contextual_capacity.py tests/unit/test_persistent_memory.py",
+      "exit_code": 0,
+      "log": "ruff-null-final.log",
+      "result": "All checks passed"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/providers/contextual_capacity.py",
+      "exit_code": 0,
+      "log": "mypy-null-final.log",
+      "result": "1 source file; no issues"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python tools/check_verification_matrix.py",
+      "exit_code": 0,
+      "log": "matrix.log",
+      "result": "existing ownership unchanged; no matrix edits"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log": null,
+      "result": "tool output; no whitespace errors"
+    }
+  ],
+  "final_unique_pytest_results": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  "comparison": [
+    {
+      "mode": "native",
+      "request_index": 1,
+      "previous_wire_preserved": true,
+      "prompt_tokens": 1391,
+      "graph_and_original_llm_input_equal": true
+    },
+    {
+      "mode": "native",
+      "request_index": 2,
+      "previous_wire_preserved": null,
+      "prompt_tokens": 1788,
+      "graph_and_original_llm_input_equal": true
+    },
+    {
+      "mode": "json_action",
+      "request_index": 1,
+      "previous_wire_preserved": true,
+      "prompt_tokens": 1092,
+      "graph_and_original_llm_input_equal": true
+    },
+    {
+      "mode": "json_action",
+      "request_index": 2,
+      "previous_wire_preserved": true,
+      "prompt_tokens": 1476,
+      "graph_and_original_llm_input_equal": true
+    }
+  ],
+  "actual_prompt_usage_comparison": {
+    "first_request": {
+      "local_tokens": 1391,
+      "actual_vllm_prompt_tokens": 1391,
+      "delta": 0
+    },
+    "continuation": {
+      "local_tokens": 1788,
+      "actual_vllm_prompt_tokens": null,
+      "reason": "R1 failed before second HTTP; future real comparison belongs to Root R2."
+    }
+  },
+  "retained_failures": [
+    {
+      "log": "before-replay.log",
+      "kind": "expected original runtime reproduction"
+    },
+    {
+      "log": "pytest-targets.log",
+      "kind": "new harness receipt shape assertion"
+    },
+    {
+      "log": "ruff.log",
+      "kind": "two101-character E501 formatting errors; repaired"
+    },
+    {
+      "log": null,
+      "kind": "read-only shell python unavailable; used explicit locked foundation interpreter"
+    },
+    {
+      "log": null,
+      "kind": "read-only diagnostic accidentally selected instrumentation.sqlite; no checkpoints table; then explicitly used readonly checkpoints.sqlite"
+    }
+  ],
+  "execution": {
+    "real_host_calls": 0,
+    "real_embedding_calls": 0,
+    "real_judge_calls": 0,
+    "shared_postgres_calls": 0,
+    "tests": "MockTransport, InMemoryStore, actual local SQLite checkpoint; replay SQLite readonly; tokenizers offline",
+    "continuous_budget_modified": false,
+    "build_run": false,
+    "git_mutations": false,
+    "background_sessions": []
+  },
+  "limitations": [
+    "No native model efficacy claim or completed R1 task; original partial CREATE remains.",
+    "Actual continued server token count unverified until Root runs R2 in fresh namespace.",
+    "Trace request dictionaries re-encoded with Httpx; not an original socket-byte capture.",
+    "Only exposed2checkpoint native/JSON failure replay and focused mechanical checks; no full suite."
+  ],
+  "private_receipt": {
+    "path": "artifacts/unified-v8-v9/capacity-repair-checks/checks-receipt.json",
+    "sha256": "d2b6c9e41de20fc2a382e777003d0e623248ce613b13f34faa22b595d52ff12f"
+  },
+  "root_verification": {
+    "source_files": 3,
+    "check_artifacts": 20,
+    "r1_evidence_files": 3,
+    "all_hashes_match": true,
+    "tests_repeated_by_root": false
+  }
+}

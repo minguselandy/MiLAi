@@ -343,13 +343,20 @@ def test_v7_native_actual_template_counts_tools_and_rejects_before_delivery(tmp_
     key = str(uuid.uuid4())
     store.put(("langmem", "run", "B0", "alice"), key, {"content": "OWN_CURRENT_BODY"})
     store.put(("langmem", "run", "B0", "bob"), key, {"content": "PRIVATE_OTHER_BODY"})
+    def respond(_wire: Any, index: int) -> dict[str, Any]:
+        if index == 1:
+            return _protocol_reply({"calls": [{"name": "read_memory", "arguments": {"id": key}}]},
+                                   "native", index)
+        return {"role": "assistant", "content": "A legal final."}
+
     with _runtime(tmp_path, store, wires,
-                  lambda *_: {"role": "assistant", "content": "A legal final."},
+                  respond,
                   tool_mode="native", capacity=capacity) as runtime:
         agent = _agent(runtime, tmp_path, "B0", boundaries=True,
             boundary_options={"memory_placement": "current_request", "model_view": "compact_v6"},
             research_profile="protocol_calibration_v7")
-        invoke_public_message(agent, runtime.model, _scope("B0"), "Read my current plan.")
+        messages = invoke_public_message(
+            agent, runtime.model, _scope("B0"), "Read my current plan.")
         wire = wires[0]
         with_tools = capacity.check(wire["messages"], wire["max_tokens"], wire["tools"])
         without_tools = capacity.check(wire["messages"], wire["max_tokens"])
@@ -364,17 +371,30 @@ def test_v7_native_actual_template_counts_tools_and_rejects_before_delivery(tmp_
         delivery = next(row for row in events if row["event"] == "memory_boundary_delivery")
         assert route["final_capacity"] == with_tools
         assert delivery["final_capacity"] == with_tools and delivery["generation_id"]
-        assert runtime.model.calls_in_message == 1
+        assert runtime.model.calls_in_message == len(wires) == 2
+        proposal = next(row for row in messages if isinstance(row, AIMessage) and row.tool_calls)
+        result = next(row for row in messages if isinstance(row, ToolMessage))
+        assert result.tool_call_id == proposal.tool_calls[0]["id"]
+        assert json.loads(result.content)["value"] == {"content": "OWN_CURRENT_BODY"}
+        assert messages[-1].content == "A legal final."
+        continuation = wires[1]
+        call = next(row for row in continuation["messages"] if row["role"] == "assistant")[
+            "tool_calls"][0]
+        assert isinstance(call["function"]["arguments"], str)
+        assert json.loads(call["function"]["arguments"]) == {"id": key}
+        assert proposal.tool_calls[0]["args"] == {"id": key}
+        assert capacity.check(continuation["messages"], continuation["max_tokens"],
+                              continuation["tools"])["prompt_tokens"] > with_tools["prompt_tokens"]
 
         # A catalog-aware capacity failure is pre-HTTP, so no delivery or generation is claimed.
         capacity.context_tokens = 1
         with pytest.raises(CapacityExceeded):
             invoke_public_message(agent, runtime.model, _scope("B0", "too-small"),
                                   "Read my current plan.")
-        assert len(wires) == 1 and runtime.model.calls_in_message == 0
+        assert len(wires) == 2 and runtime.model.calls_in_message == 0
         final_events = [json.loads(line) for line in
                         (tmp_path / "trace.jsonl").read_text().splitlines()]
-        assert sum(row["event"] == "memory_boundary_delivery" for row in final_events) == 1
+        assert sum(row["event"] == "memory_boundary_delivery" for row in final_events) == 2
 
 
 @pytest.mark.parametrize("memory_placement", ["system", "current_request"])

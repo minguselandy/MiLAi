@@ -1,0 +1,121 @@
+{
+  "kind": "UNIFIED_MCP_REAL_FUNCTIONAL_R1_FAILURE",
+  "status": "ENGINEERING_FAILURE_AFTER_ACTUAL_CREATE",
+  "method_commit": "196fa0136effc442b33a346df4bd17631807542d",
+  "execution_freeze_sha256": "25d08c402365ce89b9c00376400279adb10e373e56598b61bde6bbbcd6721c92",
+  "invocation": {
+    "script": "save_plan",
+    "started_utc": "2026-09-28T15:37:38.812518+00:00",
+    "finished_utc": "2026-09-28T15:37:47.757858+00:00",
+    "exit_code": 1,
+    "log_sha256": "854cd156ae6935756a029fc03920e867369cb12319c6cb871c065127c9ad03ba"
+  },
+  "observed": "Host returned native manage_memory CREATE; real MCP HTTP succeeded and same Store returned persisted record; local capacity failed before continuation HTTP. No final answer and no later session.",
+  "expected": "Count valid OpenAI native continuation without mutating request/checkpoint, submit continuation, then complete all three frozen messages.",
+  "first_breakpoint": {
+    "file": "src/milai_lab/providers/contextual_capacity.py",
+    "function": "HostCapacity.count_messages",
+    "operation": "tokenizer.apply_chat_template",
+    "error": "TypeError: Can only get item pairs from a mapping.",
+    "second_generation_http_sent": false
+  },
+  "explanations": [
+    {
+      "id": "H1",
+      "claim": "Valid OpenAI function.arguments JSON string is passed to local HF template expecting mapping.",
+      "status": "CONFIRMED_OFFLINE_ACTUAL_CHECKPOINT_REPLAY"
+    },
+    {
+      "id": "H2",
+      "claim": "Upstream request rendering double-encodes tool arguments and causes the template failure.",
+      "status": "REJECTED_FOR_THIS_FAILURE: single json.loads equals checkpoint args and actual response"
+    }
+  ],
+  "causal_chain": [
+    "native HTTP 200 returns actual tool call",
+    "Host-origin MCP tools/call over loopback HTTP",
+    "strict CREATE and embedding HTTP200",
+    "MCP success receipt with real record ID",
+    "MCP program-origin records read contains actual created record",
+    "request index2 local tokenizer template fails",
+    "turn recorded INTERRUPTED_UNKNOWN; phase FAILED"
+  ],
+  "evidence": {
+    "artifacts/unified-v8-v9/mcp-smoke/save_plan/trace.jsonl": "4ad500125de385f7568f90e66b76cc5a697d42458289f4bd82460a3ec80fcac2",
+    "artifacts/unified-v8-v9/mcp-smoke/save_plan/run_manifest.json": "c2bda17c4bd2ecb204b59ba10139b1048239a68cf79400c0c96458728fb54ef8",
+    "artifacts/unified-v8-v9/mcp-smoke/save_plan-run.log": "854cd156ae6935756a029fc03920e867369cb12319c6cb871c065127c9ad03ba",
+    "artifacts/unified-v8-v9/mcp-smoke/save_plan/turns/34d53ea28bdda13b2af361df9dfdb67951365031dff5041f7e99b528fe5d1539-0.json": "6dfeb10190efe6b457ceb9103cf2873fc3fd9a8f9c0f3d07f0709f249f2387c4",
+    "artifacts/unified-v8-v9/capacity-repair/root-vllm-normalization-source.json": "1bd7ca5d3a32aae8990b29d7d9ed9c471f0aed3f6e13e73c2433796cd5a79fbe",
+    "artifacts/unified-v8-v9/capacity-repair-checks/before-observations.json": "0ff1f555c5718a692b6ab80f0c33e86182e9ca689dea63351764bfd76803d006"
+  },
+  "actual_calls": [
+    {
+      "path": "chat/completions",
+      "status": 200,
+      "id": "chatcmpl-b6442db131d31132",
+      "usage": {
+        "prompt_tokens": 1391,
+        "total_tokens": 1455,
+        "completion_tokens": 64,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 3.2622288898564875
+    },
+    {
+      "path": "embeddings",
+      "status": 200,
+      "id": "embd-9af71b2bf28f4325bbc9545d9cb4ddb6",
+      "usage": {
+        "prompt_tokens": 31,
+        "total_tokens": 31,
+        "completion_tokens": 0,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.4039664859883487
+    }
+  ],
+  "persisted_effect": {
+    "tool_call_id": "chatcmpl-tool-93d159a12231cf87",
+    "record_id": "ee47d547-fd57-447a-b66f-58d9c3b5f4ad",
+    "operation": "create",
+    "actual_receipt": "created",
+    "records_observed": 1,
+    "business_calls": 0,
+    "preserved": true
+  },
+  "unrun": {
+    "save_plan_second_session": "NOT_REACHED",
+    "read_only": "NOT_RUN_AFTER_ENGINEERING_FAILURE"
+  },
+  "cost": {
+    "generation_calls": 1,
+    "generation_tokens": 1455,
+    "embedding_calls": 1,
+    "embedding_tokens": 31,
+    "unknown_usage": 0,
+    "ledger_after_sha256": "f4ff524f60fd237a1624e2048dcc968c17871d836d9c3f4a7e8ee040d5086571",
+    "continuous_generation_calls": 3302,
+    "continuous_generation_tokens": 4206658,
+    "continuous_embedding_tokens": 23601
+  },
+  "generic_repair_candidate": "Normalize JSON-object arguments only in the local tokenizer rendering copy; retain original HTTP and checkpoint values.",
+  "confounders": [
+    "Engineering failure prevents end-to-end semantic acceptance.",
+    "Inputs are exposed v7 synthetic fixtures, not unseen benchmark cases.",
+    "Actual CREATE remains in R1 namespace; R2 must not reuse/splice it."
+  ],
+  "minimal_next_experiment": "After narrow offline repair checks and Luna source publication, freeze R2 and run the same complete two scripts in fresh namespaces with same config, inputs, scorer, service and order.",
+  "decision": "CONTINUE_MINIMAL_ENGINEERING_REPAIR",
+  "root_owned_scoring": "No final answer to score; successful write alone is not script success.",
+  "offline_reproduction": {
+    "real_model_calls": 0,
+    "first_native_request": "complete payload equals actual HTTP; local prompt count1391 equals actual service usage",
+    "second_native_request": "same TypeError before HTTP",
+    "json_adjacent_path_prompt_tokens": [
+      1092,
+      1476
+    ],
+    "wire_checkpoint_unchanged": true,
+    "deployed_service_source": "vLLM0.27.1 chat_utils._postprocess_messages explicitly decodes OpenAI string arguments before local chat template"
+  }
+}

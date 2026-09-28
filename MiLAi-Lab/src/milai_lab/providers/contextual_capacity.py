@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Mapping, Sequence
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -131,13 +132,25 @@ class HostCapacity:
     ) -> int:
         rendered_messages = []
         for message in messages:
-            normalized = dict(message)
+            normalized = deepcopy(dict(message))
             if normalized.get("role") == "assistant":
                 reasoning = normalized.get("reasoning")
                 if reasoning is not None:
                     normalized["reasoning_content"] = reasoning
                 elif normalized.get("reasoning_content") is not None:
                     normalized["reasoning"] = normalized["reasoning_content"]
+                # OpenAI wire arguments are JSON strings; vLLM decodes them
+                # before applying the HF template. Do the same only in this copy.
+                for call in normalized.get("tool_calls") or ():
+                    if isinstance(call, Mapping):
+                        function = call.get("function")
+                        if isinstance(function, dict):
+                            if arguments := function.get("arguments"):
+                                if not isinstance(arguments, (dict, list)):
+                                    parsed = json.loads(arguments)
+                                    function["arguments"] = parsed if parsed is not None else {}
+                            else:
+                                function["arguments"] = {}
             rendered_messages.append(normalized)
         rendered = self.tokenizer.apply_chat_template(
             rendered_messages,
