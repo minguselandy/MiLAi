@@ -1,6 +1,6 @@
 # v2 N5 / X5：共同记录接口下的连续使用
 
-状态：**实现及必要工程检查通过；待源码发布与正式执行冻结，真实运行 NOT_RUN。**
+状态：**冻结六条命令已完成；存在语义失败，G3未通过。** 详见[N5/WP7结果](MILAI_NEXT_DEVELOPMENT_V2_N5_RESULTS_20260928.md)。原执行前协议按方法提交1d7460b复现。
 依据[v2计划§11–15](MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md)，接续[N2](MILAI_NEXT_DEVELOPMENT_V2_N2_RESULTS_20260928.md)与[N3](MILAI_NEXT_DEVELOPMENT_V2_N3_RESULTS_20260928.md)，覆盖连续原生任务、明确构造的缺项与WP7费用。
 不将短只读/单提案分数改名为生命周期验收。
 
@@ -125,3 +125,5 @@ N4不是前置，第二模型/新部署/训练/大规模扫描不自动触发。
 [公开检查回执](../data/manifests/next-development-v2-n5-checks-20260928.json)记录最终38项受影响窄测、Ruff、六源码Mypy、实际CI归属矩阵及两项边界通过；四份零模型prepare绑定各155个源码身份。
 一次入口构建与24项包内容核对通过，早期格式/类型/检查脚本问题保留。源码不再修改；此处状态文字在包测量后更新，不为文档重复build。
 这些是Mock/本地SQLite工程证据，真实Host/embedding/shared Postgres调用为0；不提前授予语义通过。
+
+本批实际结果：两原生单元各5/5；构造生命周期各0/1；所有State为空，不能归因正文预交付效果。新增51生成/138109tokens/63embeddingtokens，N4/N6未触发。此处事后状态更新不改变原冻结输入、rubric或顺序。

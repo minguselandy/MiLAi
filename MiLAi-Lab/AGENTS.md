@@ -10,16 +10,17 @@ The objective's NEXT_IMPROVEMENT filename remains absent. The user explicitly co
 Its original planning-only bytes stay unchanged. Follow the
 [v2 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md).
 
-Continue the full N0–N6 objective and its conditional gates. N0 is published at ddd5ab71
-and N1 audited one existing failure trace. N2 completed all ten fixed-bank paths at 5753602: all arms answered correctly, with
-full history cheapest; independent A/query enhancement was not useful in this slice.
-N3 completed eight fixed-prestate paths at dfbc59d: all and actual U=A satisfy both
-content and source binding; U/oracle miss one explicit binding. All costs least, so
-independent U is also Pivot in this slice. Continue N5 continuous native tasks plus
-explicit constructed coverage and WP7 lifecycle costs; use shared Host CRUD/history
-with H/all State-body prefill, not an independent selector or native-B1 claim.
-N4 and N6 need their documented evidence/resource conditions, not automatic expansion.
-Green engineering checks do not finish the research objective. Product remains NO-GO.
+The user-confirmed v2 execution has reached its evidence-based closeout. N0/N1/N2/N3
+and the N5/WP7 frozen batch are complete; see the
+[overall report](docs/MILAI_NEXT_DEVELOPMENT_V2_OVERALL_EXPERIMENT_REPORT_20260928.md).
+N2/N3 did not justify independent A/U. N5 native tasks scored 5/5 per arm, but both
+State banks stayed empty. Constructed lifecycle strict is 0/1 per arm because explicit
+formation/maintenance/exit failed despite correct business and closed-turn recovery.
+Do not call the unexercised body-prefill contrast a State benefit or compression result.
+N4 and N6 conditions did not trigger. Stop the current State-superiority claim and do
+not automatically launch new experiments, model assets or deployments from old ACTIVE
+text. The execution closeout is not research success; Product remains NO-GO.
+Actual thread Goal status is authoritative; historical pause/activation records stay.
 
 Work only in `next-development-v2-resume`, based on pause-report commit 105bdaee.
 Eleven N2 WIP files were copied byte-identically and checked against the pause manifest.
