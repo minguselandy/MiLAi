@@ -1,0 +1,331 @@
+{
+  "kind": "MILAI_V5_CONTINUOUS_COST_RECONCILIATION",
+  "completed_jobs": 28,
+  "public_messages": 86,
+  "unique_generation_provider_ids": 131,
+  "all_actual_prompt_counts_match_local_template": true,
+  "cost": {
+    "generation_calls": 131,
+    "generation_prompt_tokens": 180667,
+    "generation_completion_tokens": 5196,
+    "generation_tokens": 185863,
+    "embedding_calls": 53,
+    "embedding_tokens": 984,
+    "http_wall_seconds": 62.935225477442145,
+    "http_errors": 0,
+    "unknown_usage": 0,
+    "local_rejections": 0
+  },
+  "by_lifecycle": {
+    "formation": {
+      "generation_calls": 48,
+      "generation_prompt_tokens": 69047,
+      "generation_completion_tokens": 2370,
+      "generation_tokens": 71417,
+      "embedding_calls": 38,
+      "embedding_tokens": 786,
+      "http_wall_seconds": 28.53181052301079,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "use": {
+      "generation_calls": 54,
+      "generation_prompt_tokens": 71363,
+      "generation_completion_tokens": 1538,
+      "generation_tokens": 72901,
+      "embedding_calls": 2,
+      "embedding_tokens": 16,
+      "http_wall_seconds": 20.283364666160196,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "maintenance": {
+      "generation_calls": 29,
+      "generation_prompt_tokens": 40257,
+      "generation_completion_tokens": 1288,
+      "generation_tokens": 41545,
+      "embedding_calls": 13,
+      "embedding_tokens": 182,
+      "http_wall_seconds": 14.120050288271159,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    }
+  },
+  "observations": {
+    "lsa_writer_memory_read": {
+      "calls": 245,
+      "logical_bytes": 35987,
+      "cpu_ns": 257510815,
+      "wall_ns": 445249665
+    },
+    "shared_namespace_guard": {
+      "calls": 84,
+      "logical_bytes": 336,
+      "cpu_ns": 31358835,
+      "wall_ns": 101443947
+    },
+    "route_inclusive": {
+      "cpu_ns": 3996908947,
+      "wall_ns": 3822183641
+    },
+    "persistent_memory_checkpoint_read": {
+      "calls": 86,
+      "logical_bytes": 183715,
+      "cpu_ns": 62407882,
+      "wall_ns": 62380781
+    },
+    "operation_audit": {
+      "cpu_ns": 10664776,
+      "wall_ns": 11000342,
+      "logical_bytes": 134563,
+      "additional_checkpoint_reads": 0,
+      "calls": 86
+    }
+  },
+  "actual_memory_tools": {
+    "create": 38,
+    "update": 12,
+    "search_memory": 3,
+    "delete": 2
+  },
+  "memory_tool_argument_logical_bytes": 5640,
+  "business_tools": {
+    "reserve_and_label": 2,
+    "get_reservation": 2
+  },
+  "routes": {
+    "all": 131
+  },
+  "max_records": 6,
+  "max_candidate_tokens": 351,
+  "max_generation_calls_per_public_message": 3,
+  "successful_process": {
+    "wall_seconds": 182.37832410819829,
+    "child_user_cpu_seconds": 160.87998199999998,
+    "child_system_cpu_seconds": 12.91706
+  },
+  "preflight_failure_process": {
+    "wall_seconds": 2.3018370689824224,
+    "child_user_cpu_seconds": 4.66,
+    "child_system_cpu_seconds": 0.41430399999999995
+  },
+  "all_attempt_process": {
+    "wall_seconds": 184.6801611771807,
+    "child_user_cpu_seconds": 165.53998199999998,
+    "child_system_cpu_seconds": 13.331363999999999
+  },
+  "controller_selector_correction_calls": 0,
+  "semantic_retries": 0,
+  "known_zero_model_reprepare_reason": "R1 git_sha-only identity mismatch before runtime; original preparations/failure retained; new published roots required",
+  "unknown": [
+    "physical Store I/O",
+    "ordinary memory write CPU",
+    "GPU time",
+    "currency cost",
+    "prepare and Root offline analysis time not instrumented"
+  ],
+  "budget": {
+    "before_sha256": "e47de5a370b7c6dad581d836a440411055c01c137ec4c589f95389109a4ca668",
+    "after_sha256": "98b02945ab195ad94e37061f97c5ba5eb8068ecd87ff47caef9f76f9e51fdd15",
+    "history_and_limits_unchanged": true,
+    "before": {
+      "generation_requests": 2994,
+      "generation": {
+        "charged_tokens": 3785491,
+        "known_tokens": 3785491,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 21237,
+        "known_tokens": 21237,
+        "unknown_usage": 0
+      }
+    },
+    "after": {
+      "generation_requests": 3125,
+      "generation": {
+        "charged_tokens": 3971354,
+        "known_tokens": 3971354,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 22221,
+        "known_tokens": 22221,
+        "unknown_usage": 0
+      }
+    }
+  },
+  "sources": [
+    {
+      "phase": "prospective-r1-published",
+      "job": "complete_plan/B0",
+      "trace_sha256": "6c4986280f61d90b75c03867e501d258823ccc7d34f48ae3290e85e41172d669",
+      "result_sha256": "a39d721db51ffbd2d36c302c029b8def6c3d7ed087919235160ecfd27b80b1e4"
+    },
+    {
+      "phase": "prospective-r1-published",
+      "job": "partial_plan/B0",
+      "trace_sha256": "433d4a4a17c4c33868ecf3d55acd77d1a1007180401ee777f0592c060144f763",
+      "result_sha256": "a0267b8a9dbb66125814380bd9685f52dc9de48abf58b812f5ef43b982d73838"
+    },
+    {
+      "phase": "prospective-r1-published",
+      "job": "one_reply_format/B0",
+      "trace_sha256": "cb5841d78730287851e3b1bb95d280c589b2ffed8da1cd7a3a0cd24ef469dbe2",
+      "result_sha256": "27a370e0e035d973cafe909b21aa03ef0b44208757982ae9ea3d933573c77cbd"
+    },
+    {
+      "phase": "prospective-r1-published",
+      "job": "independent_update/B0",
+      "trace_sha256": "ebdf067e7f5f2c5cc1e7992a9d9a91bcbbea8ebd9d4d06e5daa4162d1a14a6c4",
+      "result_sha256": "868a0c3b3311d3ac6f8b21633b2fa6b5cbd72f73ceb2990493bec8f0b18759b8"
+    },
+    {
+      "phase": "prospective-r1-published",
+      "job": "quoted_rule/B0",
+      "trace_sha256": "1175c5a0c7b9e50345dae436a4688d245b5a230784a01f4a22b777e6ed49be2c",
+      "result_sha256": "7d8b8e49436648f105cb4a92517d22725ea6f93857ddfe6031a42772453d08c5"
+    },
+    {
+      "phase": "prospective-r1-published",
+      "job": "read_only_note/B0",
+      "trace_sha256": "8c8cc6cefb57a0c1484b169c1fbafe5f426b18259057b7d24e3773f5d73f2609",
+      "result_sha256": "6855c1d291f78f84647679f7e296ec1857bad4bd4fa02d2630320baf26b93f3f"
+    },
+    {
+      "phase": "prospective-r1-published",
+      "job": "explicit_delete/B0",
+      "trace_sha256": "bb3d039e5daafa2f4532b71e687c0b142b4f5de89600472a24a559b6d6161461",
+      "result_sha256": "4df77853d01a977e536476e458a388c890323da3282ccead792b66d0e795e558"
+    },
+    {
+      "phase": "prospective-r1-published",
+      "job": "assistant_conflict/B0",
+      "trace_sha256": "9e5913dc27c77ef758136e9a9441f0c03207ced746ac62e350f5363f27822bb3",
+      "result_sha256": "4f71dbda49698e73d76c112525159406b13827f943ab88d40f09f5b10de3fb6d"
+    },
+    {
+      "phase": "prospective-r1-published",
+      "job": "dynamic_world/B0",
+      "trace_sha256": "c85261338fba56bd499a6b976160ef50470eff5d1b8e147e21e70cf69a9bb5af",
+      "result_sha256": "9adfcff48bcc87c99d18fa44b8acae70795b7b66752eed7ec68e48ce3e7de254"
+    },
+    {
+      "phase": "prospective-r1-published",
+      "job": "moderate_bank/B0",
+      "trace_sha256": "aa2fb4ef9779b04d87ca44c108b0dfd00a2e08ee5787a2662b2028ed529ffa8d",
+      "result_sha256": "4ac315b5663a6ddaf4c4ff0e5c5938eef65ebeaf92498a42b0782abf5a8653d3"
+    },
+    {
+      "phase": "authority-r2-diagnostic",
+      "job": "system-rep1/B0",
+      "trace_sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+      "result_sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448"
+    },
+    {
+      "phase": "authority-r2-diagnostic",
+      "job": "current_request-rep1/B0",
+      "trace_sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+      "result_sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad"
+    },
+    {
+      "phase": "authority-r2-diagnostic",
+      "job": "current_request-rep2/B0",
+      "trace_sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+      "result_sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611"
+    },
+    {
+      "phase": "authority-r2-diagnostic",
+      "job": "system-rep2/B0",
+      "trace_sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+      "result_sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-complete_plan/B0",
+      "trace_sha256": "b8180ae2ec090ab5a19c62615703d35a4d4399cec1f8a1c427e89e4eefb60d57",
+      "result_sha256": "a39d721db51ffbd2d36c302c029b8def6c3d7ed087919235160ecfd27b80b1e4"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-partial_plan/B0",
+      "trace_sha256": "8939dde2178c93347b588b2337d83167e4fabc14f700b1b05aada0f0bac89ba5",
+      "result_sha256": "4280ed8672548215ac2e18e7bc2c10aa394572e3cb23193a732040167e84a8c5"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-one_reply_format/B0",
+      "trace_sha256": "139a27dd424535cfef70572b34ea8b8c11a5201c62cd4ec64fe891cabd9df6bd",
+      "result_sha256": "53b93a3d89499ded9728f79fbcb2a561d33c93fe98265b579928ed0c8e5795a1"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-independent_update/B0",
+      "trace_sha256": "76495bf712a01edd8a5826221b0c9ee7db1464a060f48985e5142c44a498058a",
+      "result_sha256": "868a0c3b3311d3ac6f8b21633b2fa6b5cbd72f73ceb2990493bec8f0b18759b8"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-quoted_rule/B0",
+      "trace_sha256": "cc93e4d436287bbaa8f0f0da3f0cd30efb794e37346bcbe82724ee62f93eef11",
+      "result_sha256": "dccdc847b29d07914e49315cf7e0fa2a5dd5ae9a58c648c9279235ebd98243a7"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-read_only_note/B0",
+      "trace_sha256": "dd310118f178130f58bc6ce7fc4e63c850cfdd9997c94271a86c2d1d7c01caa4",
+      "result_sha256": "0fa4fa0ff134b8b57c7673b04b5c2d0ac995cad986243399ef9386b31d377d7e"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-explicit_delete/B0",
+      "trace_sha256": "6de178ed12aa3cd10052905397178b8d055e98383ffa9b4d4390e48c5e841869",
+      "result_sha256": "881df5e528150887c518f7d47e6e275ebbaa7a3493460f5fc64af2438ad8fe1a"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-assistant_conflict/B0",
+      "trace_sha256": "d7185b94ac488702da50535ec5af12fba13942c0b41b9952c85cf264f7aaac24",
+      "result_sha256": "ed0676b055d9f45bb024e51d9f5e2c24c6cfae05a7eec85703b967bf66a78b5a"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-dynamic_world/B0",
+      "trace_sha256": "29a57552e23e517fdceff1f0dabd1e3b3415b32a853230c9d43041989e4f1715",
+      "result_sha256": "07fd0621619b59315df53c38fa337e6a36a5f38a643063d7a7a8013385b682bc"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "candidate-moderate_bank/B0",
+      "trace_sha256": "af7b6c37d2f251c37a40d1d401810d365244faf716b8a844c907bb74e728de12",
+      "result_sha256": "2218283a1ea629288acf2f66208ee9ea6b371cd6c90484fb5e0702a301b3864a"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "system-reversed_count/B0",
+      "trace_sha256": "24c500cbe81cefa811d29735bf078432bbdcbc039e96d785de19baac277be502",
+      "result_sha256": "b5c3fc4ffc617b3c35c608af3899c247f66ecd81217124373eef7f5dd9fb3ebb"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "current_request-reversed_count/B0",
+      "trace_sha256": "1c2e3dfffc4622d785323ff62cfceb624cfa37961d46ffd26d2b29c0826a9d7d",
+      "result_sha256": "403b46b4656a14bb7196937b98908c9c93bd8ce59cdfa82fa39cbc926287ebe0"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "current_request-revised_location/B0",
+      "trace_sha256": "2817336ac99deffae7f6a3546beda16731b00b382584fb34d86c2a1ecdaeaf79",
+      "result_sha256": "2d463a5dc7e051af31e0f576c9a8a64b1f7e484023fd19bc262b81746a075746"
+    },
+    {
+      "phase": "authority-r2-confirmation",
+      "job": "system-revised_location/B0",
+      "trace_sha256": "1385bd288128619e93b4478943d3265be8e1e5f96ff62e8c0858bec3cdb0293c",
+      "result_sha256": "684534bd7a76c2e54a5dca676a19abd5b4bda17d8a1da47d1e16d4271486aeac"
+    }
+  ]
+}

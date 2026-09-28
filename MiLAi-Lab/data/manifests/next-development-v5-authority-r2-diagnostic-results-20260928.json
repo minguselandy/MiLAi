@@ -1,0 +1,4404 @@
+{
+  "kind": "MILAI_V5_AUTHORITY_R2_DIAGNOSTIC_RESULTS",
+  "method_commit": "ec682a3a8b1ac58b41733b882ed0bad367347fed",
+  "freeze_sha256": "9b9eb1d24d1d2345de11d5a3a3dbacc8b3923bd218514226f9dbf2998993bbe9",
+  "input_sha256": {
+    "../next-development-v5-prospective-r1/config.json": "dfcf5b2b48c47af6803375b59e2aada7802ea4af752562826db5e46e0c3fd2f0",
+    "config.json": "91105f1ca25cc5cdd21077141eb86bd8913ad2ed061a7693f3e46eb89db23ecd",
+    "diagnostic-obligations.json": "77b6ab3ad107ecbc1bce0942f94bb274a41fafa0912140a83e5dd99277565752",
+    "diagnostic-order.json": "0f271ed8706d6993bd611bd132de06b62c10129f9df0a8e2ea8c213b4243518a",
+    "diagnostic-rubric-guide.json": "0de9018c0fec5bc61315ecf417f13abc0080cc21fe828ad400c58246b86447d3",
+    "retained-history-diagnostic-inputs.json": "846720a7ec121282fa311a0e7a6fe67bbf13eb769e064272c8613ae2c9a4cc55"
+  },
+  "protocol_sha256": "0addf1e0d6e3320e674d01397644733ab8f36732fa895bc439e48f6826b8d9e0",
+  "root_helpers_sha256": {
+    "root_orchestrate_authority_r2.py": "3790ef0d3459dee2d46cb24d6067184cb393529721a0ccd2265f2ad14f356587",
+    "root_cost_audit_authority_r2.py": "0e1502ffb19c0d743bacf7e6e4229f225005ee61e47d60277c7805ba5aff5613",
+    "root_chain_audit_authority_r2.py": "f861a5d0f77dff522a84550807d147568b8fad9f0dadeeba6c650293143f0605"
+  },
+  "scoring": "Root manual48 observations; zero Judge; repeated exposed input not independent examples",
+  "groups": {
+    "system": {
+      "current": {
+        "pass": 0,
+        "total": 2
+      },
+      "historical": {
+        "pass": 0,
+        "total": 2
+      },
+      "full_scripts": {
+        "pass": 0,
+        "total": 2
+      },
+      "task_obligations": {
+        "pass": 20,
+        "total": 24
+      },
+      "cost": {
+        "generation_calls": 12,
+        "generation_prompt_tokens": 16586,
+        "generation_completion_tokens": 349,
+        "generation_tokens": 16935,
+        "embedding_calls": 4,
+        "embedding_tokens": 52,
+        "http_wall_seconds": 4.884650504682213,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      }
+    },
+    "current_request": {
+      "current": {
+        "pass": 2,
+        "total": 2
+      },
+      "historical": {
+        "pass": 2,
+        "total": 2
+      },
+      "full_scripts": {
+        "pass": 2,
+        "total": 2
+      },
+      "task_obligations": {
+        "pass": 24,
+        "total": 24
+      },
+      "cost": {
+        "generation_calls": 12,
+        "generation_prompt_tokens": 16668,
+        "generation_completion_tokens": 356,
+        "generation_tokens": 17024,
+        "embedding_calls": 4,
+        "embedding_tokens": 52,
+        "http_wall_seconds": 4.888264736160636,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      }
+    }
+  },
+  "jobs": {
+    "system-rep1/B0": {
+      "placement": "system",
+      "repeat": 1,
+      "manual_current_pass": false,
+      "manual_historical_pass": false,
+      "persistent_changes_correct": true,
+      "negative_scope_correct": true,
+      "activation": "actual CREATE6/update9 same ID; old6 retained; current9 delivered",
+      "observations": [
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "save_1_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "yes",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-9bd5885b67607eae,chatcmpl-829482c273fd9f9d"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "old_confirm",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-9bd5885b67607eae,chatcmpl-829482c273fd9f9d"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "new_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "yes",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "yes",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-b4f4de3a5b4b57ee,chatcmpl-b9d8efcc884adda9"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "new_confirm",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-b4f4de3a5b4b57ee,chatcmpl-b9d8efcc884adda9"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "use_3_current_count",
+          "result": "fail",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "no",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "yes",
+          "earliest_breakpoint": "CURRENT_TASK_CONSUMPTION",
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-ad21b08ef43f872f"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_write_3",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-ad21b08ef43f872f"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_1",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-9bd5885b67607eae,chatcmpl-829482c273fd9f9d"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_2",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-b4f4de3a5b4b57ee,chatcmpl-b9d8efcc884adda9"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_3",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-ad21b08ef43f872f"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "historical_count",
+          "result": "fail",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "no",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": "CURRENT_TASK_CONSUMPTION",
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-80eab823e2d4cece"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_write_history",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-80eab823e2d4cece"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_history",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/trace.jsonl",
+              "sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+              "location": "actual provider IDs chatcmpl-80eab823e2d4cece"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep1/B0/phase-0-result.json",
+              "sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        }
+      ],
+      "composed_counts": {
+        "layer_counts": {
+          "current_explicit_obligations": {
+            "total": 6,
+            "pass": 6,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "persistent_obligations": {
+            "total": 4,
+            "pass": 4,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "later_use_obligations": {
+            "total": 2,
+            "pass": 0,
+            "fail": 2,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "diagnostic_completeness": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          }
+        },
+        "explicit_current_including_later_use_counts": {
+          "total": 8,
+          "pass": 6,
+          "fail": 2,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "task_failing_counts": {
+          "total": 12,
+          "pass": 10,
+          "fail": 2,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "evidence": {
+        "mechanical_checks": "PASS",
+        "turns": [
+          {
+            "message_id": "assistant_conflict-1",
+            "session_id": "session-1",
+            "answer": "The default sample count for the optics table is 6.",
+            "ordinary_records": [
+              {
+                "id": "b77ea188-b8b2-4541-a327-63ff191272ad",
+                "value": {
+                  "content": "The default sample count for the optics table is 6."
+                }
+              }
+            ],
+            "actual_tool_receipts": [
+              {
+                "run_id": "next-development-v5-authority-r2-system-rep1",
+                "arm_id": "B0",
+                "user_id": "rowan",
+                "message_key": "6d3cb58c90a1bb5e1f0f796daaff17539b06733d92ddb23534a329e2984fc05b:0",
+                "ref": "chatcmpl-9bd5885b67607eae:tool:0",
+                "name": "manage_memory",
+                "arguments": {
+                  "action": "create",
+                  "content": "The default sample count for the optics table is 6."
+                },
+                "transport_status": "success",
+                "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"b77ea188-b8b2-4541-a327-63ff191272ad\"}",
+                "parsed": {
+                  "ok": true,
+                  "status": "created",
+                  "id": "b77ea188-b8b2-4541-a327-63ff191272ad"
+                }
+              }
+            ],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-9bd5885b67607eae",
+              "chatcmpl-829482c273fd9f9d"
+            ],
+            "routes": [
+              "all",
+              "all"
+            ],
+            "delivered_record_ids": [
+              [],
+              [
+                "b77ea188-b8b2-4541-a327-63ff191272ad"
+              ]
+            ],
+            "actual_first_request_sha256": "15179166b4202ef309dd755258e3c8c3e6c23bc61787770e7c866c45b6d59f61",
+            "actual_final_request_sha256": "8383537a74e4d3eaec0a8d90ec7c593e10f6bcc818196dedfd60029bf8a4ca9e",
+            "historical_assistant_contents_in_first_request": []
+          },
+          {
+            "message_id": "assistant_conflict-2",
+            "session_id": "session-2",
+            "answer": "The default sample count for the optics table has been updated to 9.",
+            "ordinary_records": [
+              {
+                "id": "b77ea188-b8b2-4541-a327-63ff191272ad",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [
+              {
+                "run_id": "next-development-v5-authority-r2-system-rep1",
+                "arm_id": "B0",
+                "user_id": "rowan",
+                "message_key": "2a78574ef768394f9bb86facf87341392e352e714188d53d72390fb89bf31270:0",
+                "ref": "chatcmpl-b4f4de3a5b4b57ee:tool:0",
+                "name": "manage_memory",
+                "arguments": {
+                  "action": "update",
+                  "id": "b77ea188-b8b2-4541-a327-63ff191272ad",
+                  "content": "The default sample count for the optics table is 9."
+                },
+                "transport_status": "success",
+                "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"b77ea188-b8b2-4541-a327-63ff191272ad\"}",
+                "parsed": {
+                  "ok": true,
+                  "status": "updated",
+                  "id": "b77ea188-b8b2-4541-a327-63ff191272ad"
+                }
+              }
+            ],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-b4f4de3a5b4b57ee",
+              "chatcmpl-b9d8efcc884adda9"
+            ],
+            "routes": [
+              "all",
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "b77ea188-b8b2-4541-a327-63ff191272ad"
+              ],
+              [
+                "b77ea188-b8b2-4541-a327-63ff191272ad"
+              ]
+            ],
+            "actual_first_request_sha256": "be85be7620c02d49d7bfaf50dbae8a8c8abef1252cf9c50b6365a20664da5ab1",
+            "actual_final_request_sha256": "c6fce1deeb98accb762c11493f7c46055bcf7ac83f4a03803944464f3a1e074a",
+            "historical_assistant_contents_in_first_request": []
+          },
+          {
+            "message_id": "assistant_conflict-3",
+            "session_id": "session-1",
+            "answer": "The current saved default sample count for the optics table is 6.",
+            "ordinary_records": [
+              {
+                "id": "b77ea188-b8b2-4541-a327-63ff191272ad",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-ad21b08ef43f872f"
+            ],
+            "routes": [
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "b77ea188-b8b2-4541-a327-63ff191272ad"
+              ]
+            ],
+            "actual_first_request_sha256": "08c95eae9fcd7a9facee891f0223160f42e6228ce73a3474cfe94458148b58e4",
+            "actual_final_request_sha256": "08c95eae9fcd7a9facee891f0223160f42e6228ce73a3474cfe94458148b58e4",
+            "historical_assistant_contents_in_first_request": [
+              "[ASSISTANT HISTORY - prior model output]\nThe default sample count for the optics table is 6."
+            ]
+          },
+          {
+            "message_id": "assistant_conflict-history",
+            "session_id": "session-1",
+            "answer": "The earlier default sample count for the optics table that I originally confirmed was 9.",
+            "ordinary_records": [
+              {
+                "id": "b77ea188-b8b2-4541-a327-63ff191272ad",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-80eab823e2d4cece"
+            ],
+            "routes": [
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "b77ea188-b8b2-4541-a327-63ff191272ad"
+              ]
+            ],
+            "actual_first_request_sha256": "621e6633b1ef3d2e605863ba8a97aa156915833856ef490d9e9e4e6bc8381353",
+            "actual_final_request_sha256": "621e6633b1ef3d2e605863ba8a97aa156915833856ef490d9e9e4e6bc8381353",
+            "historical_assistant_contents_in_first_request": [
+              "[ASSISTANT HISTORY - prior model output]\nThe default sample count for the optics table is 6.",
+              "[ASSISTANT HISTORY - prior model output]\nThe current saved default sample count for the optics table is 6."
+            ]
+          }
+        ],
+        "world": {
+          "label_available": false,
+          "reservations": [],
+          "attempts": []
+        },
+        "uncompleted_messages": 0,
+        "trace_sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6",
+        "result_sha256": "86f0317ce89d08eb57010f68e76a272d9a968420bb96babba645ceee789d5448",
+        "manifest_sha256": "3c022af3ab1aef0019bf4aa9eaa360a660c5784c1c5048a773b421e37c3d3812"
+      },
+      "cost": {
+        "total": {
+          "generation_calls": 6,
+          "generation_prompt_tokens": 8302,
+          "generation_completion_tokens": 174,
+          "generation_tokens": 8476,
+          "embedding_calls": 2,
+          "embedding_tokens": 26,
+          "http_wall_seconds": 2.5023939558304846,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "turns": [
+          {
+            "message_key": "6d3cb58c90a1bb5e1f0f796daaff17539b06733d92ddb23534a329e2984fc05b:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "formation",
+            "lifecycle_cost_stage": "formation",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2605,
+            "generation_completion_tokens": 48,
+            "generation_tokens": 2653,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.8612475409172475,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "2a78574ef768394f9bb86facf87341392e352e714188d53d72390fb89bf31270:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "maintenance",
+            "lifecycle_cost_stage": "maintenance",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2691,
+            "generation_completion_tokens": 85,
+            "generation_tokens": 2776,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.962271491996944,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "6d3cb58c90a1bb5e1f0f796daaff17539b06733d92ddb23534a329e2984fc05b:1",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1459,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1478,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3250983068719506,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "6d3cb58c90a1bb5e1f0f796daaff17539b06733d92ddb23534a329e2984fc05b:2",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1547,
+            "generation_completion_tokens": 22,
+            "generation_tokens": 1569,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3537766160443425,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          }
+        ],
+        "trailing": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "correction_total": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "provider_requests": [
+          {
+            "provider_id": "chatcmpl-9bd5885b67607eae",
+            "trace_offset": 4036,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "15179166b4202ef309dd755258e3c8c3e6c23bc61787770e7c866c45b6d59f61",
+            "usage": {
+              "prompt_tokens": 1092,
+              "total_tokens": 1123,
+              "completion_tokens": 31,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-829482c273fd9f9d",
+            "trace_offset": 66054,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "8383537a74e4d3eaec0a8d90ec7c593e10f6bcc818196dedfd60029bf8a4ca9e",
+            "usage": {
+              "prompt_tokens": 1513,
+              "total_tokens": 1530,
+              "completion_tokens": 17,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b4f4de3a5b4b57ee",
+            "trace_offset": 87373,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "be85be7620c02d49d7bfaf50dbae8a8c8abef1252cf9c50b6365a20664da5ab1",
+            "usage": {
+              "prompt_tokens": 1148,
+              "total_tokens": 1213,
+              "completion_tokens": 65,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b9d8efcc884adda9",
+            "trace_offset": 149589,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "c6fce1deeb98accb762c11493f7c46055bcf7ac83f4a03803944464f3a1e074a",
+            "usage": {
+              "prompt_tokens": 1543,
+              "total_tokens": 1563,
+              "completion_tokens": 20,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-ad21b08ef43f872f",
+            "trace_offset": 171171,
+            "correction": false,
+            "public_message_index": 2,
+            "request_sha256": "08c95eae9fcd7a9facee891f0223160f42e6228ce73a3474cfe94458148b58e4",
+            "usage": {
+              "prompt_tokens": 1459,
+              "total_tokens": 1478,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-80eab823e2d4cece",
+            "trace_offset": 190849,
+            "correction": false,
+            "public_message_index": 3,
+            "request_sha256": "621e6633b1ef3d2e605863ba8a97aa156915833856ef490d9e9e4e6bc8381353",
+            "usage": {
+              "prompt_tokens": 1547,
+              "total_tokens": 1569,
+              "completion_tokens": 22,
+              "prompt_tokens_details": null
+            }
+          }
+        ],
+        "manifest_status": "TERMINAL",
+        "events": {
+          "lsa_writer_memory_read": 11,
+          "shared_namespace_guard": 1,
+          "foundation_context": 4,
+          "persistent_memory_view": 6,
+          "memory_boundary_view": 6,
+          "memory_boundary_route": 6,
+          "vllm_response": 8,
+          "memory_boundary_delivery": 6,
+          "memory_boundary_tool_observation": 2,
+          "persistent_memory_checkpoint_read": 4,
+          "persistent_memory_turn": 4,
+          "lsa_store_stats": 1
+        },
+        "trace_sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6"
+      }
+    },
+    "current_request-rep1/B0": {
+      "placement": "current_request",
+      "repeat": 1,
+      "manual_current_pass": true,
+      "manual_historical_pass": true,
+      "persistent_changes_correct": true,
+      "negative_scope_correct": true,
+      "activation": "actual CREATE6/update9 same ID; old6 retained; current9 delivered",
+      "observations": [
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "save_1_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "yes",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-8233aac08662c503,chatcmpl-8e0f0278fa47ee58"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "old_confirm",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-8233aac08662c503,chatcmpl-8e0f0278fa47ee58"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "new_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "yes",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "yes",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-967e9d49999a5b53,chatcmpl-914bf94e8c793e26"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "new_confirm",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-967e9d49999a5b53,chatcmpl-914bf94e8c793e26"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "use_3_current_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "yes",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-ad3d21e8f716316b"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_write_3",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-ad3d21e8f716316b"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_1",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-8233aac08662c503,chatcmpl-8e0f0278fa47ee58"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_2",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-967e9d49999a5b53,chatcmpl-914bf94e8c793e26"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_3",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-ad3d21e8f716316b"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "historical_count",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-a83b1e34284c173e"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_write_history",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-a83b1e34284c173e"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_history",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/trace.jsonl",
+              "sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+              "location": "actual provider IDs chatcmpl-a83b1e34284c173e"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep1/B0/phase-0-result.json",
+              "sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        }
+      ],
+      "composed_counts": {
+        "layer_counts": {
+          "current_explicit_obligations": {
+            "total": 6,
+            "pass": 6,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "persistent_obligations": {
+            "total": 4,
+            "pass": 4,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "later_use_obligations": {
+            "total": 2,
+            "pass": 2,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "diagnostic_completeness": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          }
+        },
+        "explicit_current_including_later_use_counts": {
+          "total": 8,
+          "pass": 8,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "task_failing_counts": {
+          "total": 12,
+          "pass": 12,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "evidence": {
+        "mechanical_checks": "PASS",
+        "turns": [
+          {
+            "message_id": "assistant_conflict-1",
+            "session_id": "session-1",
+            "answer": "The default sample count for the optics table is 6 has been saved.",
+            "ordinary_records": [
+              {
+                "id": "2413e2d7-7381-4c06-ae4e-b1207899b841",
+                "value": {
+                  "content": "The default sample count for the optics table is 6."
+                }
+              }
+            ],
+            "actual_tool_receipts": [
+              {
+                "run_id": "next-development-v5-authority-r2-current_request-rep1",
+                "arm_id": "B0",
+                "user_id": "rowan",
+                "message_key": "7f75d3b54810afcdada9b072e585a10302d26303068f577a8a645bf68de27a0a:0",
+                "ref": "chatcmpl-8233aac08662c503:tool:0",
+                "name": "manage_memory",
+                "arguments": {
+                  "action": "create",
+                  "content": "The default sample count for the optics table is 6."
+                },
+                "transport_status": "success",
+                "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"2413e2d7-7381-4c06-ae4e-b1207899b841\"}",
+                "parsed": {
+                  "ok": true,
+                  "status": "created",
+                  "id": "2413e2d7-7381-4c06-ae4e-b1207899b841"
+                }
+              }
+            ],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-8233aac08662c503",
+              "chatcmpl-8e0f0278fa47ee58"
+            ],
+            "routes": [
+              "all",
+              "all"
+            ],
+            "delivered_record_ids": [
+              [],
+              [
+                "2413e2d7-7381-4c06-ae4e-b1207899b841"
+              ]
+            ],
+            "actual_first_request_sha256": "9b648c271febcf4b3a66b32728bb22580d8c7101c5d4c724a6ef20baab50017c",
+            "actual_final_request_sha256": "a20e5606e1dbbab8883d731215e2f80010c97ec1427544299f300876ce405eaa",
+            "historical_assistant_contents_in_first_request": []
+          },
+          {
+            "message_id": "assistant_conflict-2",
+            "session_id": "session-2",
+            "answer": "The default sample count for the optics table has been updated and saved as 9.",
+            "ordinary_records": [
+              {
+                "id": "2413e2d7-7381-4c06-ae4e-b1207899b841",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [
+              {
+                "run_id": "next-development-v5-authority-r2-current_request-rep1",
+                "arm_id": "B0",
+                "user_id": "rowan",
+                "message_key": "eedf72d3a0d8b87a2a6db6ecec8057e69e634c672a0abe37a2a571f56ed39d3b:0",
+                "ref": "chatcmpl-967e9d49999a5b53:tool:0",
+                "name": "manage_memory",
+                "arguments": {
+                  "action": "update",
+                  "id": "2413e2d7-7381-4c06-ae4e-b1207899b841",
+                  "content": "The default sample count for the optics table is 9."
+                },
+                "transport_status": "success",
+                "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"2413e2d7-7381-4c06-ae4e-b1207899b841\"}",
+                "parsed": {
+                  "ok": true,
+                  "status": "updated",
+                  "id": "2413e2d7-7381-4c06-ae4e-b1207899b841"
+                }
+              }
+            ],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-967e9d49999a5b53",
+              "chatcmpl-914bf94e8c793e26"
+            ],
+            "routes": [
+              "all",
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "2413e2d7-7381-4c06-ae4e-b1207899b841"
+              ],
+              [
+                "2413e2d7-7381-4c06-ae4e-b1207899b841"
+              ]
+            ],
+            "actual_first_request_sha256": "4a289791f238a636986f166a7c7d55379a0562779cde2a5dcb3e6b2e5b83e11e",
+            "actual_final_request_sha256": "2713dd7ed6afaafc04b33eb181d8404982e8a01fd85a29e832134500c375948e",
+            "historical_assistant_contents_in_first_request": []
+          },
+          {
+            "message_id": "assistant_conflict-3",
+            "session_id": "session-1",
+            "answer": "The current saved default sample count for the optics table is 9.",
+            "ordinary_records": [
+              {
+                "id": "2413e2d7-7381-4c06-ae4e-b1207899b841",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-ad3d21e8f716316b"
+            ],
+            "routes": [
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "2413e2d7-7381-4c06-ae4e-b1207899b841"
+              ]
+            ],
+            "actual_first_request_sha256": "0b06752db7ec58237aa96e33e8af16096987aca6139fdc1e9a886b804c58ea0b",
+            "actual_final_request_sha256": "0b06752db7ec58237aa96e33e8af16096987aca6139fdc1e9a886b804c58ea0b",
+            "historical_assistant_contents_in_first_request": [
+              "[ASSISTANT HISTORY - prior model output]\nThe default sample count for the optics table is 6 has been saved."
+            ]
+          },
+          {
+            "message_id": "assistant_conflict-history",
+            "session_id": "session-1",
+            "answer": "The earlier confirmed default sample count for the optics table was 6.",
+            "ordinary_records": [
+              {
+                "id": "2413e2d7-7381-4c06-ae4e-b1207899b841",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-a83b1e34284c173e"
+            ],
+            "routes": [
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "2413e2d7-7381-4c06-ae4e-b1207899b841"
+              ]
+            ],
+            "actual_first_request_sha256": "05c1932cc6b8dbe9fdebea6e4633501c4b7cb73b3b9dc13c5bad9e3099f60115",
+            "actual_final_request_sha256": "05c1932cc6b8dbe9fdebea6e4633501c4b7cb73b3b9dc13c5bad9e3099f60115",
+            "historical_assistant_contents_in_first_request": [
+              "[ASSISTANT HISTORY - prior model output]\nThe default sample count for the optics table is 6 has been saved.",
+              "[ASSISTANT HISTORY - prior model output]\nThe current saved default sample count for the optics table is 9."
+            ]
+          }
+        ],
+        "world": {
+          "label_available": false,
+          "reservations": [],
+          "attempts": []
+        },
+        "uncompleted_messages": 0,
+        "trace_sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938",
+        "result_sha256": "cf0a3c3b0b5b6a2e5000636f58c21fe540207822296cd97b969838e03ea062ad",
+        "manifest_sha256": "78e50e5991386fa25f323fd63585757064eedbffe595bf4ad9120fab87444266"
+      },
+      "cost": {
+        "total": {
+          "generation_calls": 6,
+          "generation_prompt_tokens": 8326,
+          "generation_completion_tokens": 179,
+          "generation_tokens": 8505,
+          "embedding_calls": 2,
+          "embedding_tokens": 26,
+          "http_wall_seconds": 2.438523576129228,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "turns": [
+          {
+            "message_key": "7f75d3b54810afcdada9b072e585a10302d26303068f577a8a645bf68de27a0a:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "formation",
+            "lifecycle_cost_stage": "formation",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2602,
+            "generation_completion_tokens": 51,
+            "generation_tokens": 2653,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.7971800123341382,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "eedf72d3a0d8b87a2a6db6ecec8057e69e634c672a0abe37a2a571f56ed39d3b:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "maintenance",
+            "lifecycle_cost_stage": "maintenance",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2710,
+            "generation_completion_tokens": 90,
+            "generation_tokens": 2800,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.98301483085379,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "7f75d3b54810afcdada9b072e585a10302d26303068f577a8a645bf68de27a0a:1",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1461,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1480,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.323473600205034,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "7f75d3b54810afcdada9b072e585a10302d26303068f577a8a645bf68de27a0a:2",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1553,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1572,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.33485513273626566,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          }
+        ],
+        "trailing": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "correction_total": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "provider_requests": [
+          {
+            "provider_id": "chatcmpl-8233aac08662c503",
+            "trace_offset": 4125,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "9b648c271febcf4b3a66b32728bb22580d8c7101c5d4c724a6ef20baab50017c",
+            "usage": {
+              "prompt_tokens": 1088,
+              "total_tokens": 1119,
+              "completion_tokens": 31,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-8e0f0278fa47ee58",
+            "trace_offset": 66254,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "a20e5606e1dbbab8883d731215e2f80010c97ec1427544299f300876ce405eaa",
+            "usage": {
+              "prompt_tokens": 1514,
+              "total_tokens": 1534,
+              "completion_tokens": 20,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-967e9d49999a5b53",
+            "trace_offset": 87771,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "4a289791f238a636986f166a7c7d55379a0562779cde2a5dcb3e6b2e5b83e11e",
+            "usage": {
+              "prompt_tokens": 1149,
+              "total_tokens": 1217,
+              "completion_tokens": 68,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-914bf94e8c793e26",
+            "trace_offset": 150097,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "2713dd7ed6afaafc04b33eb181d8404982e8a01fd85a29e832134500c375948e",
+            "usage": {
+              "prompt_tokens": 1561,
+              "total_tokens": 1583,
+              "completion_tokens": 22,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-ad3d21e8f716316b",
+            "trace_offset": 171866,
+            "correction": false,
+            "public_message_index": 2,
+            "request_sha256": "0b06752db7ec58237aa96e33e8af16096987aca6139fdc1e9a886b804c58ea0b",
+            "usage": {
+              "prompt_tokens": 1461,
+              "total_tokens": 1480,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-a83b1e34284c173e",
+            "trace_offset": 191695,
+            "correction": false,
+            "public_message_index": 3,
+            "request_sha256": "05c1932cc6b8dbe9fdebea6e4633501c4b7cb73b3b9dc13c5bad9e3099f60115",
+            "usage": {
+              "prompt_tokens": 1553,
+              "total_tokens": 1572,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          }
+        ],
+        "manifest_status": "TERMINAL",
+        "events": {
+          "lsa_writer_memory_read": 11,
+          "shared_namespace_guard": 1,
+          "foundation_context": 4,
+          "persistent_memory_view": 6,
+          "memory_boundary_view": 6,
+          "memory_boundary_route": 6,
+          "vllm_response": 8,
+          "memory_boundary_delivery": 6,
+          "memory_boundary_tool_observation": 2,
+          "persistent_memory_checkpoint_read": 4,
+          "persistent_memory_turn": 4,
+          "lsa_store_stats": 1
+        },
+        "trace_sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938"
+      }
+    },
+    "current_request-rep2/B0": {
+      "placement": "current_request",
+      "repeat": 2,
+      "manual_current_pass": true,
+      "manual_historical_pass": true,
+      "persistent_changes_correct": true,
+      "negative_scope_correct": true,
+      "activation": "actual CREATE6/update9 same ID; old6 retained; current9 delivered",
+      "observations": [
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "save_1_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "yes",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b61b287f406a6881,chatcmpl-af2d5c8559b81d72"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "old_confirm",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b61b287f406a6881,chatcmpl-af2d5c8559b81d72"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "new_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "yes",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "yes",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b8bb79af9c4f5e1c,chatcmpl-b2a7bd2367f78cd7"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "new_confirm",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b8bb79af9c4f5e1c,chatcmpl-b2a7bd2367f78cd7"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "use_3_current_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "yes",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b36bc9e43122771a"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_write_3",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b36bc9e43122771a"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_1",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b61b287f406a6881,chatcmpl-af2d5c8559b81d72"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_2",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b8bb79af9c4f5e1c,chatcmpl-b2a7bd2367f78cd7"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_3",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b36bc9e43122771a"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "historical_count",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b1c8bdb96b2a5f8d"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_write_history",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b1c8bdb96b2a5f8d"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_history",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/trace.jsonl",
+              "sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+              "location": "actual provider IDs chatcmpl-b1c8bdb96b2a5f8d"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/current_request-rep2/B0/phase-0-result.json",
+              "sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        }
+      ],
+      "composed_counts": {
+        "layer_counts": {
+          "current_explicit_obligations": {
+            "total": 6,
+            "pass": 6,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "persistent_obligations": {
+            "total": 4,
+            "pass": 4,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "later_use_obligations": {
+            "total": 2,
+            "pass": 2,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "diagnostic_completeness": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          }
+        },
+        "explicit_current_including_later_use_counts": {
+          "total": 8,
+          "pass": 8,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "task_failing_counts": {
+          "total": 12,
+          "pass": 12,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "evidence": {
+        "mechanical_checks": "PASS",
+        "turns": [
+          {
+            "message_id": "assistant_conflict-1",
+            "session_id": "session-1",
+            "answer": "The default sample count for the optics table is 6 has been saved.",
+            "ordinary_records": [
+              {
+                "id": "e04a8428-3031-4729-8f1f-2ce9f445ab54",
+                "value": {
+                  "content": "The default sample count for the optics table is 6."
+                }
+              }
+            ],
+            "actual_tool_receipts": [
+              {
+                "run_id": "next-development-v5-authority-r2-current_request-rep2",
+                "arm_id": "B0",
+                "user_id": "rowan",
+                "message_key": "b379ac1b8773fff8056db91dd07f0289f72059d6d02c757e100a5a70bb79f472:0",
+                "ref": "chatcmpl-b61b287f406a6881:tool:0",
+                "name": "manage_memory",
+                "arguments": {
+                  "action": "create",
+                  "content": "The default sample count for the optics table is 6."
+                },
+                "transport_status": "success",
+                "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"e04a8428-3031-4729-8f1f-2ce9f445ab54\"}",
+                "parsed": {
+                  "ok": true,
+                  "status": "created",
+                  "id": "e04a8428-3031-4729-8f1f-2ce9f445ab54"
+                }
+              }
+            ],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-b61b287f406a6881",
+              "chatcmpl-af2d5c8559b81d72"
+            ],
+            "routes": [
+              "all",
+              "all"
+            ],
+            "delivered_record_ids": [
+              [],
+              [
+                "e04a8428-3031-4729-8f1f-2ce9f445ab54"
+              ]
+            ],
+            "actual_first_request_sha256": "f217b15cfe6ee1ed40a454d40a4cd4fb87366ba0d9c8bc10590ba45a06f792f9",
+            "actual_final_request_sha256": "98bbbecab6f0d9b28e057c87a70624adb7ee8a0c428992b1f5d058a831a29c5b",
+            "historical_assistant_contents_in_first_request": []
+          },
+          {
+            "message_id": "assistant_conflict-2",
+            "session_id": "session-2",
+            "answer": "The default sample count for the optics table has been updated to 9.",
+            "ordinary_records": [
+              {
+                "id": "e04a8428-3031-4729-8f1f-2ce9f445ab54",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [
+              {
+                "run_id": "next-development-v5-authority-r2-current_request-rep2",
+                "arm_id": "B0",
+                "user_id": "rowan",
+                "message_key": "0f5854e6d21fc5a9c11b71de81f652f0aa5050a7ac6187f455d827df12f8682c:0",
+                "ref": "chatcmpl-b8bb79af9c4f5e1c:tool:0",
+                "name": "manage_memory",
+                "arguments": {
+                  "action": "update",
+                  "id": "e04a8428-3031-4729-8f1f-2ce9f445ab54",
+                  "content": "The default sample count for the optics table is 9."
+                },
+                "transport_status": "success",
+                "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"e04a8428-3031-4729-8f1f-2ce9f445ab54\"}",
+                "parsed": {
+                  "ok": true,
+                  "status": "updated",
+                  "id": "e04a8428-3031-4729-8f1f-2ce9f445ab54"
+                }
+              }
+            ],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-b8bb79af9c4f5e1c",
+              "chatcmpl-b2a7bd2367f78cd7"
+            ],
+            "routes": [
+              "all",
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "e04a8428-3031-4729-8f1f-2ce9f445ab54"
+              ],
+              [
+                "e04a8428-3031-4729-8f1f-2ce9f445ab54"
+              ]
+            ],
+            "actual_first_request_sha256": "d78abdc35a113861762c73e74a436db0470bbdebd84e3b290d4e2eae3108d96c",
+            "actual_final_request_sha256": "36fbbdb70acb9e6dcc134476d7dabba20af08ba5c54cfcc7a07f85b92c6ac6e1",
+            "historical_assistant_contents_in_first_request": []
+          },
+          {
+            "message_id": "assistant_conflict-3",
+            "session_id": "session-1",
+            "answer": "The current saved default sample count for the optics table is 9.",
+            "ordinary_records": [
+              {
+                "id": "e04a8428-3031-4729-8f1f-2ce9f445ab54",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-b36bc9e43122771a"
+            ],
+            "routes": [
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "e04a8428-3031-4729-8f1f-2ce9f445ab54"
+              ]
+            ],
+            "actual_first_request_sha256": "91f73a43da88fe48fb3f30b39f30a0b34726a012d5d322d0fe73abaa7b112623",
+            "actual_final_request_sha256": "91f73a43da88fe48fb3f30b39f30a0b34726a012d5d322d0fe73abaa7b112623",
+            "historical_assistant_contents_in_first_request": [
+              "[ASSISTANT HISTORY - prior model output]\nThe default sample count for the optics table is 6 has been saved."
+            ]
+          },
+          {
+            "message_id": "assistant_conflict-history",
+            "session_id": "session-1",
+            "answer": "The earlier confirmed default sample count for the optics table was 6.",
+            "ordinary_records": [
+              {
+                "id": "e04a8428-3031-4729-8f1f-2ce9f445ab54",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-b1c8bdb96b2a5f8d"
+            ],
+            "routes": [
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "e04a8428-3031-4729-8f1f-2ce9f445ab54"
+              ]
+            ],
+            "actual_first_request_sha256": "7100028361dcb26baa187a78278bb622d29d6295c3421e703422fbd79ff754c9",
+            "actual_final_request_sha256": "7100028361dcb26baa187a78278bb622d29d6295c3421e703422fbd79ff754c9",
+            "historical_assistant_contents_in_first_request": [
+              "[ASSISTANT HISTORY - prior model output]\nThe default sample count for the optics table is 6 has been saved.",
+              "[ASSISTANT HISTORY - prior model output]\nThe current saved default sample count for the optics table is 9."
+            ]
+          }
+        ],
+        "world": {
+          "label_available": false,
+          "reservations": [],
+          "attempts": []
+        },
+        "uncompleted_messages": 0,
+        "trace_sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9",
+        "result_sha256": "21a5d1ef788b53eb755c78de331257d57c10820a1da4dbe1b4b0d165c1087611",
+        "manifest_sha256": "085f3190364e09532f2e5781179bf0bdd759091910594f4bd68109f9fe75b679"
+      },
+      "cost": {
+        "total": {
+          "generation_calls": 6,
+          "generation_prompt_tokens": 8342,
+          "generation_completion_tokens": 177,
+          "generation_tokens": 8519,
+          "embedding_calls": 2,
+          "embedding_tokens": 26,
+          "http_wall_seconds": 2.449741160031408,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "turns": [
+          {
+            "message_key": "b379ac1b8773fff8056db91dd07f0289f72059d6d02c757e100a5a70bb79f472:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "formation",
+            "lifecycle_cost_stage": "formation",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2621,
+            "generation_completion_tokens": 51,
+            "generation_tokens": 2672,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.815895710606128,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "0f5854e6d21fc5a9c11b71de81f652f0aa5050a7ac6187f455d827df12f8682c:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "maintenance",
+            "lifecycle_cost_stage": "maintenance",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2695,
+            "generation_completion_tokens": 88,
+            "generation_tokens": 2783,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.9713881323114038,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "b379ac1b8773fff8056db91dd07f0289f72059d6d02c757e100a5a70bb79f472:1",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1467,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1486,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.32702180184423923,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "b379ac1b8773fff8056db91dd07f0289f72059d6d02c757e100a5a70bb79f472:2",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1559,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1578,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3354355152696371,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          }
+        ],
+        "trailing": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "correction_total": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "provider_requests": [
+          {
+            "provider_id": "chatcmpl-b61b287f406a6881",
+            "trace_offset": 4127,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "f217b15cfe6ee1ed40a454d40a4cd4fb87366ba0d9c8bc10590ba45a06f792f9",
+            "usage": {
+              "prompt_tokens": 1098,
+              "total_tokens": 1129,
+              "completion_tokens": 31,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-af2d5c8559b81d72",
+            "trace_offset": 66256,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "98bbbecab6f0d9b28e057c87a70624adb7ee8a0c428992b1f5d058a831a29c5b",
+            "usage": {
+              "prompt_tokens": 1523,
+              "total_tokens": 1543,
+              "completion_tokens": 20,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b8bb79af9c4f5e1c",
+            "trace_offset": 87778,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "d78abdc35a113861762c73e74a436db0470bbdebd84e3b290d4e2eae3108d96c",
+            "usage": {
+              "prompt_tokens": 1145,
+              "total_tokens": 1213,
+              "completion_tokens": 68,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b2a7bd2367f78cd7",
+            "trace_offset": 150104,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "36fbbdb70acb9e6dcc134476d7dabba20af08ba5c54cfcc7a07f85b92c6ac6e1",
+            "usage": {
+              "prompt_tokens": 1550,
+              "total_tokens": 1570,
+              "completion_tokens": 20,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b36bc9e43122771a",
+            "trace_offset": 171845,
+            "correction": false,
+            "public_message_index": 2,
+            "request_sha256": "91f73a43da88fe48fb3f30b39f30a0b34726a012d5d322d0fe73abaa7b112623",
+            "usage": {
+              "prompt_tokens": 1467,
+              "total_tokens": 1486,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b1c8bdb96b2a5f8d",
+            "trace_offset": 191684,
+            "correction": false,
+            "public_message_index": 3,
+            "request_sha256": "7100028361dcb26baa187a78278bb622d29d6295c3421e703422fbd79ff754c9",
+            "usage": {
+              "prompt_tokens": 1559,
+              "total_tokens": 1578,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          }
+        ],
+        "manifest_status": "TERMINAL",
+        "events": {
+          "lsa_writer_memory_read": 11,
+          "shared_namespace_guard": 1,
+          "foundation_context": 4,
+          "persistent_memory_view": 6,
+          "memory_boundary_view": 6,
+          "memory_boundary_route": 6,
+          "vllm_response": 8,
+          "memory_boundary_delivery": 6,
+          "memory_boundary_tool_observation": 2,
+          "persistent_memory_checkpoint_read": 4,
+          "persistent_memory_turn": 4,
+          "lsa_store_stats": 1
+        },
+        "trace_sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9"
+      }
+    },
+    "system-rep2/B0": {
+      "placement": "system",
+      "repeat": 2,
+      "manual_current_pass": false,
+      "manual_historical_pass": false,
+      "persistent_changes_correct": true,
+      "negative_scope_correct": true,
+      "activation": "actual CREATE6/update9 same ID; old6 retained; current9 delivered",
+      "observations": [
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "save_1_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "yes",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-b8a0bfe1dc0261c9,chatcmpl-82403d65cbf723ba"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "old_confirm",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-b8a0bfe1dc0261c9,chatcmpl-82403d65cbf723ba"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "new_count",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "yes",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "yes",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-a40b823667200763,chatcmpl-80f6a0febb4fdf74"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "new_confirm",
+          "result": "pass",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "yes",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-a40b823667200763,chatcmpl-80f6a0febb4fdf74"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "use_3_current_count",
+          "result": "fail",
+          "memory_formed": "yes",
+          "memory_delivered": "yes",
+          "answer_contains": "no",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "yes",
+          "earliest_breakpoint": "CURRENT_TASK_CONSUMPTION",
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-933c59de3ec40692"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_write_3",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-933c59de3ec40692"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_1",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-b8a0bfe1dc0261c9,chatcmpl-82403d65cbf723ba"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-1"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_2",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-a40b823667200763,chatcmpl-80f6a0febb4fdf74"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-2"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_3",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-933c59de3ec40692"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-3"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "historical_count",
+          "result": "fail",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "no",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": "CURRENT_TASK_CONSUMPTION",
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-a48039e466a9189f"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_write_history",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-a48039e466a9189f"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        },
+        {
+          "case_id": "assistant_conflict",
+          "obligation_id": "no_business_history",
+          "result": "pass",
+          "memory_formed": "not_applicable",
+          "memory_delivered": "not_applicable",
+          "answer_contains": "not_applicable",
+          "tool_argument_contains": "not_applicable",
+          "world_effect_correct": "not_applicable",
+          "present_in_user_request": "yes",
+          "requires_memory": "no",
+          "earliest_breakpoint": null,
+          "note": "Root manually reviewed real Store6→9, same ID update, preserved actual old6 and current9 material, actual final answers. Historical question requires preserved transcript, not current durable facts. Baseline current6/history9 are wrong; candidate current9/history6 are right. No shape or process-only semantic inference.",
+          "evidence": [
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/trace.jsonl",
+              "sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+              "location": "actual provider IDs chatcmpl-a48039e466a9189f"
+            },
+            {
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5/MiLAi-Lab/artifacts/next-development-v5/authority-r2-diagnostic/system-rep2/B0/phase-0-result.json",
+              "sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+              "location": "assistant_conflict-history"
+            }
+          ]
+        }
+      ],
+      "composed_counts": {
+        "layer_counts": {
+          "current_explicit_obligations": {
+            "total": 6,
+            "pass": 6,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "persistent_obligations": {
+            "total": 4,
+            "pass": 4,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "later_use_obligations": {
+            "total": 2,
+            "pass": 0,
+            "fail": 2,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "diagnostic_completeness": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          }
+        },
+        "explicit_current_including_later_use_counts": {
+          "total": 8,
+          "pass": 6,
+          "fail": 2,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "task_failing_counts": {
+          "total": 12,
+          "pass": 10,
+          "fail": 2,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "evidence": {
+        "mechanical_checks": "PASS",
+        "turns": [
+          {
+            "message_id": "assistant_conflict-1",
+            "session_id": "session-1",
+            "answer": "The default sample count for the optics table is 6.",
+            "ordinary_records": [
+              {
+                "id": "77cd18df-ea2b-4a18-abc4-30511a78c0af",
+                "value": {
+                  "content": "The default sample count for the optics table is 6."
+                }
+              }
+            ],
+            "actual_tool_receipts": [
+              {
+                "run_id": "next-development-v5-authority-r2-system-rep2",
+                "arm_id": "B0",
+                "user_id": "rowan",
+                "message_key": "128e854ecce899138d8367c32320f5745b3045b951a8a48c689e40a2780895de:0",
+                "ref": "chatcmpl-b8a0bfe1dc0261c9:tool:0",
+                "name": "manage_memory",
+                "arguments": {
+                  "action": "create",
+                  "content": "The default sample count for the optics table is 6."
+                },
+                "transport_status": "success",
+                "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"77cd18df-ea2b-4a18-abc4-30511a78c0af\"}",
+                "parsed": {
+                  "ok": true,
+                  "status": "created",
+                  "id": "77cd18df-ea2b-4a18-abc4-30511a78c0af"
+                }
+              }
+            ],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-b8a0bfe1dc0261c9",
+              "chatcmpl-82403d65cbf723ba"
+            ],
+            "routes": [
+              "all",
+              "all"
+            ],
+            "delivered_record_ids": [
+              [],
+              [
+                "77cd18df-ea2b-4a18-abc4-30511a78c0af"
+              ]
+            ],
+            "actual_first_request_sha256": "c3258d8da98df53c6f78b4d8c0e30d47d6791d9f5329c1d3c622d6ebf91c8386",
+            "actual_final_request_sha256": "cd27fd170c837b2b0f4898847e1397050287524ea6793d05846290d43fd82285",
+            "historical_assistant_contents_in_first_request": []
+          },
+          {
+            "message_id": "assistant_conflict-2",
+            "session_id": "session-2",
+            "answer": "The default sample count for the optics table has been updated and confirmed as 9.",
+            "ordinary_records": [
+              {
+                "id": "77cd18df-ea2b-4a18-abc4-30511a78c0af",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [
+              {
+                "run_id": "next-development-v5-authority-r2-system-rep2",
+                "arm_id": "B0",
+                "user_id": "rowan",
+                "message_key": "b90e89e444ffe853683d82082acde26734a9942ecd045a9fe0c1cf5af12267ea:0",
+                "ref": "chatcmpl-a40b823667200763:tool:0",
+                "name": "manage_memory",
+                "arguments": {
+                  "action": "update",
+                  "id": "77cd18df-ea2b-4a18-abc4-30511a78c0af",
+                  "content": "The default sample count for the optics table is 9."
+                },
+                "transport_status": "success",
+                "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"77cd18df-ea2b-4a18-abc4-30511a78c0af\"}",
+                "parsed": {
+                  "ok": true,
+                  "status": "updated",
+                  "id": "77cd18df-ea2b-4a18-abc4-30511a78c0af"
+                }
+              }
+            ],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-a40b823667200763",
+              "chatcmpl-80f6a0febb4fdf74"
+            ],
+            "routes": [
+              "all",
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "77cd18df-ea2b-4a18-abc4-30511a78c0af"
+              ],
+              [
+                "77cd18df-ea2b-4a18-abc4-30511a78c0af"
+              ]
+            ],
+            "actual_first_request_sha256": "7467185ba48da2a120ba7031b789c38e065f31d3c10f09115c170f124dd7351a",
+            "actual_final_request_sha256": "10cfb6d0c54e242aca044de5f9edebb883289c0d9a337bfa73baebdff29a7348",
+            "historical_assistant_contents_in_first_request": []
+          },
+          {
+            "message_id": "assistant_conflict-3",
+            "session_id": "session-1",
+            "answer": "The current saved default sample count for the optics table is 6.",
+            "ordinary_records": [
+              {
+                "id": "77cd18df-ea2b-4a18-abc4-30511a78c0af",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-933c59de3ec40692"
+            ],
+            "routes": [
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "77cd18df-ea2b-4a18-abc4-30511a78c0af"
+              ]
+            ],
+            "actual_first_request_sha256": "83b7d8eee97a96e521bc7a79dc8af75e56e3b76197ddd2d262ddea3bddedabf1",
+            "actual_final_request_sha256": "83b7d8eee97a96e521bc7a79dc8af75e56e3b76197ddd2d262ddea3bddedabf1",
+            "historical_assistant_contents_in_first_request": [
+              "[ASSISTANT HISTORY - prior model output]\nThe default sample count for the optics table is 6."
+            ]
+          },
+          {
+            "message_id": "assistant_conflict-history",
+            "session_id": "session-1",
+            "answer": "The earlier default sample count for the optics table that was originally confirmed was 9.",
+            "ordinary_records": [
+              {
+                "id": "77cd18df-ea2b-4a18-abc4-30511a78c0af",
+                "value": {
+                  "content": "The default sample count for the optics table is 9."
+                }
+              }
+            ],
+            "actual_tool_receipts": [],
+            "business_calls": [],
+            "provider_ids": [
+              "chatcmpl-a48039e466a9189f"
+            ],
+            "routes": [
+              "all"
+            ],
+            "delivered_record_ids": [
+              [
+                "77cd18df-ea2b-4a18-abc4-30511a78c0af"
+              ]
+            ],
+            "actual_first_request_sha256": "c47a18333463107d5c8682033f626ab5448740310b476bbb3413bcc0ca38eaa8",
+            "actual_final_request_sha256": "c47a18333463107d5c8682033f626ab5448740310b476bbb3413bcc0ca38eaa8",
+            "historical_assistant_contents_in_first_request": [
+              "[ASSISTANT HISTORY - prior model output]\nThe default sample count for the optics table is 6.",
+              "[ASSISTANT HISTORY - prior model output]\nThe current saved default sample count for the optics table is 6."
+            ]
+          }
+        ],
+        "world": {
+          "label_available": false,
+          "reservations": [],
+          "attempts": []
+        },
+        "uncompleted_messages": 0,
+        "trace_sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d",
+        "result_sha256": "537df028da3fc69928df252405eec0a181b88b3a2a8114cb433d3c18968c436e",
+        "manifest_sha256": "8d0fc389589f19ac79707a0d4a81b514875f8009549798fbf239c38c125dea9d"
+      },
+      "cost": {
+        "total": {
+          "generation_calls": 6,
+          "generation_prompt_tokens": 8284,
+          "generation_completion_tokens": 175,
+          "generation_tokens": 8459,
+          "embedding_calls": 2,
+          "embedding_tokens": 26,
+          "http_wall_seconds": 2.3822565488517284,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "turns": [
+          {
+            "message_key": "128e854ecce899138d8367c32320f5745b3045b951a8a48c689e40a2780895de:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "formation",
+            "lifecycle_cost_stage": "formation",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2598,
+            "generation_completion_tokens": 48,
+            "generation_tokens": 2646,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.7562965438701212,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "b90e89e444ffe853683d82082acde26734a9942ecd045a9fe0c1cf5af12267ea:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "maintenance",
+            "lifecycle_cost_stage": "maintenance",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2688,
+            "generation_completion_tokens": 86,
+            "generation_tokens": 2774,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.9510639677755535,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "128e854ecce899138d8367c32320f5745b3045b951a8a48c689e40a2780895de:1",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1450,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1469,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3224325920455158,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "128e854ecce899138d8367c32320f5745b3045b951a8a48c689e40a2780895de:2",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1548,
+            "generation_completion_tokens": 22,
+            "generation_tokens": 1570,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.35246344516053796,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          }
+        ],
+        "trailing": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "correction_total": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "provider_requests": [
+          {
+            "provider_id": "chatcmpl-b8a0bfe1dc0261c9",
+            "trace_offset": 4037,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "c3258d8da98df53c6f78b4d8c0e30d47d6791d9f5329c1d3c622d6ebf91c8386",
+            "usage": {
+              "prompt_tokens": 1092,
+              "total_tokens": 1123,
+              "completion_tokens": 31,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-82403d65cbf723ba",
+            "trace_offset": 66056,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "cd27fd170c837b2b0f4898847e1397050287524ea6793d05846290d43fd82285",
+            "usage": {
+              "prompt_tokens": 1506,
+              "total_tokens": 1523,
+              "completion_tokens": 17,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-a40b823667200763",
+            "trace_offset": 87373,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "7467185ba48da2a120ba7031b789c38e065f31d3c10f09115c170f124dd7351a",
+            "usage": {
+              "prompt_tokens": 1145,
+              "total_tokens": 1209,
+              "completion_tokens": 64,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-80f6a0febb4fdf74",
+            "trace_offset": 149588,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "10cfb6d0c54e242aca044de5f9edebb883289c0d9a337bfa73baebdff29a7348",
+            "usage": {
+              "prompt_tokens": 1543,
+              "total_tokens": 1565,
+              "completion_tokens": 22,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-933c59de3ec40692",
+            "trace_offset": 171213,
+            "correction": false,
+            "public_message_index": 2,
+            "request_sha256": "83b7d8eee97a96e521bc7a79dc8af75e56e3b76197ddd2d262ddea3bddedabf1",
+            "usage": {
+              "prompt_tokens": 1450,
+              "total_tokens": 1469,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-a48039e466a9189f",
+            "trace_offset": 190893,
+            "correction": false,
+            "public_message_index": 3,
+            "request_sha256": "c47a18333463107d5c8682033f626ab5448740310b476bbb3413bcc0ca38eaa8",
+            "usage": {
+              "prompt_tokens": 1548,
+              "total_tokens": 1570,
+              "completion_tokens": 22,
+              "prompt_tokens_details": null
+            }
+          }
+        ],
+        "manifest_status": "TERMINAL",
+        "events": {
+          "lsa_writer_memory_read": 11,
+          "shared_namespace_guard": 1,
+          "foundation_context": 4,
+          "persistent_memory_view": 6,
+          "memory_boundary_view": 6,
+          "memory_boundary_route": 6,
+          "vllm_response": 8,
+          "memory_boundary_delivery": 6,
+          "memory_boundary_tool_observation": 2,
+          "persistent_memory_checkpoint_read": 4,
+          "persistent_memory_turn": 4,
+          "lsa_store_stats": 1
+        },
+        "trace_sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d"
+      }
+    }
+  },
+  "cost": {
+    "jobs": {
+      "system-rep1/B0": {
+        "total": {
+          "generation_calls": 6,
+          "generation_prompt_tokens": 8302,
+          "generation_completion_tokens": 174,
+          "generation_tokens": 8476,
+          "embedding_calls": 2,
+          "embedding_tokens": 26,
+          "http_wall_seconds": 2.5023939558304846,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "turns": [
+          {
+            "message_key": "6d3cb58c90a1bb5e1f0f796daaff17539b06733d92ddb23534a329e2984fc05b:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "formation",
+            "lifecycle_cost_stage": "formation",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2605,
+            "generation_completion_tokens": 48,
+            "generation_tokens": 2653,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.8612475409172475,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "2a78574ef768394f9bb86facf87341392e352e714188d53d72390fb89bf31270:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "maintenance",
+            "lifecycle_cost_stage": "maintenance",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2691,
+            "generation_completion_tokens": 85,
+            "generation_tokens": 2776,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.962271491996944,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "6d3cb58c90a1bb5e1f0f796daaff17539b06733d92ddb23534a329e2984fc05b:1",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1459,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1478,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3250983068719506,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "6d3cb58c90a1bb5e1f0f796daaff17539b06733d92ddb23534a329e2984fc05b:2",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1547,
+            "generation_completion_tokens": 22,
+            "generation_tokens": 1569,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3537766160443425,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          }
+        ],
+        "trailing": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "correction_total": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "provider_requests": [
+          {
+            "provider_id": "chatcmpl-9bd5885b67607eae",
+            "trace_offset": 4036,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "15179166b4202ef309dd755258e3c8c3e6c23bc61787770e7c866c45b6d59f61",
+            "usage": {
+              "prompt_tokens": 1092,
+              "total_tokens": 1123,
+              "completion_tokens": 31,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-829482c273fd9f9d",
+            "trace_offset": 66054,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "8383537a74e4d3eaec0a8d90ec7c593e10f6bcc818196dedfd60029bf8a4ca9e",
+            "usage": {
+              "prompt_tokens": 1513,
+              "total_tokens": 1530,
+              "completion_tokens": 17,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b4f4de3a5b4b57ee",
+            "trace_offset": 87373,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "be85be7620c02d49d7bfaf50dbae8a8c8abef1252cf9c50b6365a20664da5ab1",
+            "usage": {
+              "prompt_tokens": 1148,
+              "total_tokens": 1213,
+              "completion_tokens": 65,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b9d8efcc884adda9",
+            "trace_offset": 149589,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "c6fce1deeb98accb762c11493f7c46055bcf7ac83f4a03803944464f3a1e074a",
+            "usage": {
+              "prompt_tokens": 1543,
+              "total_tokens": 1563,
+              "completion_tokens": 20,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-ad21b08ef43f872f",
+            "trace_offset": 171171,
+            "correction": false,
+            "public_message_index": 2,
+            "request_sha256": "08c95eae9fcd7a9facee891f0223160f42e6228ce73a3474cfe94458148b58e4",
+            "usage": {
+              "prompt_tokens": 1459,
+              "total_tokens": 1478,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-80eab823e2d4cece",
+            "trace_offset": 190849,
+            "correction": false,
+            "public_message_index": 3,
+            "request_sha256": "621e6633b1ef3d2e605863ba8a97aa156915833856ef490d9e9e4e6bc8381353",
+            "usage": {
+              "prompt_tokens": 1547,
+              "total_tokens": 1569,
+              "completion_tokens": 22,
+              "prompt_tokens_details": null
+            }
+          }
+        ],
+        "manifest_status": "TERMINAL",
+        "events": {
+          "lsa_writer_memory_read": 11,
+          "shared_namespace_guard": 1,
+          "foundation_context": 4,
+          "persistent_memory_view": 6,
+          "memory_boundary_view": 6,
+          "memory_boundary_route": 6,
+          "vllm_response": 8,
+          "memory_boundary_delivery": 6,
+          "memory_boundary_tool_observation": 2,
+          "persistent_memory_checkpoint_read": 4,
+          "persistent_memory_turn": 4,
+          "lsa_store_stats": 1
+        },
+        "trace_sha256": "3fdead708fd9d9398d9fb9ded588f3ad620dd11da7222d4846aa7433509585b6"
+      },
+      "current_request-rep1/B0": {
+        "total": {
+          "generation_calls": 6,
+          "generation_prompt_tokens": 8326,
+          "generation_completion_tokens": 179,
+          "generation_tokens": 8505,
+          "embedding_calls": 2,
+          "embedding_tokens": 26,
+          "http_wall_seconds": 2.438523576129228,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "turns": [
+          {
+            "message_key": "7f75d3b54810afcdada9b072e585a10302d26303068f577a8a645bf68de27a0a:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "formation",
+            "lifecycle_cost_stage": "formation",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2602,
+            "generation_completion_tokens": 51,
+            "generation_tokens": 2653,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.7971800123341382,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "eedf72d3a0d8b87a2a6db6ecec8057e69e634c672a0abe37a2a571f56ed39d3b:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "maintenance",
+            "lifecycle_cost_stage": "maintenance",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2710,
+            "generation_completion_tokens": 90,
+            "generation_tokens": 2800,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.98301483085379,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "7f75d3b54810afcdada9b072e585a10302d26303068f577a8a645bf68de27a0a:1",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1461,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1480,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.323473600205034,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "7f75d3b54810afcdada9b072e585a10302d26303068f577a8a645bf68de27a0a:2",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1553,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1572,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.33485513273626566,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          }
+        ],
+        "trailing": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "correction_total": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "provider_requests": [
+          {
+            "provider_id": "chatcmpl-8233aac08662c503",
+            "trace_offset": 4125,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "9b648c271febcf4b3a66b32728bb22580d8c7101c5d4c724a6ef20baab50017c",
+            "usage": {
+              "prompt_tokens": 1088,
+              "total_tokens": 1119,
+              "completion_tokens": 31,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-8e0f0278fa47ee58",
+            "trace_offset": 66254,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "a20e5606e1dbbab8883d731215e2f80010c97ec1427544299f300876ce405eaa",
+            "usage": {
+              "prompt_tokens": 1514,
+              "total_tokens": 1534,
+              "completion_tokens": 20,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-967e9d49999a5b53",
+            "trace_offset": 87771,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "4a289791f238a636986f166a7c7d55379a0562779cde2a5dcb3e6b2e5b83e11e",
+            "usage": {
+              "prompt_tokens": 1149,
+              "total_tokens": 1217,
+              "completion_tokens": 68,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-914bf94e8c793e26",
+            "trace_offset": 150097,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "2713dd7ed6afaafc04b33eb181d8404982e8a01fd85a29e832134500c375948e",
+            "usage": {
+              "prompt_tokens": 1561,
+              "total_tokens": 1583,
+              "completion_tokens": 22,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-ad3d21e8f716316b",
+            "trace_offset": 171866,
+            "correction": false,
+            "public_message_index": 2,
+            "request_sha256": "0b06752db7ec58237aa96e33e8af16096987aca6139fdc1e9a886b804c58ea0b",
+            "usage": {
+              "prompt_tokens": 1461,
+              "total_tokens": 1480,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-a83b1e34284c173e",
+            "trace_offset": 191695,
+            "correction": false,
+            "public_message_index": 3,
+            "request_sha256": "05c1932cc6b8dbe9fdebea6e4633501c4b7cb73b3b9dc13c5bad9e3099f60115",
+            "usage": {
+              "prompt_tokens": 1553,
+              "total_tokens": 1572,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          }
+        ],
+        "manifest_status": "TERMINAL",
+        "events": {
+          "lsa_writer_memory_read": 11,
+          "shared_namespace_guard": 1,
+          "foundation_context": 4,
+          "persistent_memory_view": 6,
+          "memory_boundary_view": 6,
+          "memory_boundary_route": 6,
+          "vllm_response": 8,
+          "memory_boundary_delivery": 6,
+          "memory_boundary_tool_observation": 2,
+          "persistent_memory_checkpoint_read": 4,
+          "persistent_memory_turn": 4,
+          "lsa_store_stats": 1
+        },
+        "trace_sha256": "1de7aef01e52b09a77acddcd4c0379ff3c2a7a56ebc0b45b1c03bc1f17a72938"
+      },
+      "current_request-rep2/B0": {
+        "total": {
+          "generation_calls": 6,
+          "generation_prompt_tokens": 8342,
+          "generation_completion_tokens": 177,
+          "generation_tokens": 8519,
+          "embedding_calls": 2,
+          "embedding_tokens": 26,
+          "http_wall_seconds": 2.449741160031408,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "turns": [
+          {
+            "message_key": "b379ac1b8773fff8056db91dd07f0289f72059d6d02c757e100a5a70bb79f472:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "formation",
+            "lifecycle_cost_stage": "formation",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2621,
+            "generation_completion_tokens": 51,
+            "generation_tokens": 2672,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.815895710606128,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "0f5854e6d21fc5a9c11b71de81f652f0aa5050a7ac6187f455d827df12f8682c:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "maintenance",
+            "lifecycle_cost_stage": "maintenance",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2695,
+            "generation_completion_tokens": 88,
+            "generation_tokens": 2783,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.9713881323114038,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "b379ac1b8773fff8056db91dd07f0289f72059d6d02c757e100a5a70bb79f472:1",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1467,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1486,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.32702180184423923,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "b379ac1b8773fff8056db91dd07f0289f72059d6d02c757e100a5a70bb79f472:2",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1559,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1578,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3354355152696371,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          }
+        ],
+        "trailing": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "correction_total": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "provider_requests": [
+          {
+            "provider_id": "chatcmpl-b61b287f406a6881",
+            "trace_offset": 4127,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "f217b15cfe6ee1ed40a454d40a4cd4fb87366ba0d9c8bc10590ba45a06f792f9",
+            "usage": {
+              "prompt_tokens": 1098,
+              "total_tokens": 1129,
+              "completion_tokens": 31,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-af2d5c8559b81d72",
+            "trace_offset": 66256,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "98bbbecab6f0d9b28e057c87a70624adb7ee8a0c428992b1f5d058a831a29c5b",
+            "usage": {
+              "prompt_tokens": 1523,
+              "total_tokens": 1543,
+              "completion_tokens": 20,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b8bb79af9c4f5e1c",
+            "trace_offset": 87778,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "d78abdc35a113861762c73e74a436db0470bbdebd84e3b290d4e2eae3108d96c",
+            "usage": {
+              "prompt_tokens": 1145,
+              "total_tokens": 1213,
+              "completion_tokens": 68,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b2a7bd2367f78cd7",
+            "trace_offset": 150104,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "36fbbdb70acb9e6dcc134476d7dabba20af08ba5c54cfcc7a07f85b92c6ac6e1",
+            "usage": {
+              "prompt_tokens": 1550,
+              "total_tokens": 1570,
+              "completion_tokens": 20,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b36bc9e43122771a",
+            "trace_offset": 171845,
+            "correction": false,
+            "public_message_index": 2,
+            "request_sha256": "91f73a43da88fe48fb3f30b39f30a0b34726a012d5d322d0fe73abaa7b112623",
+            "usage": {
+              "prompt_tokens": 1467,
+              "total_tokens": 1486,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-b1c8bdb96b2a5f8d",
+            "trace_offset": 191684,
+            "correction": false,
+            "public_message_index": 3,
+            "request_sha256": "7100028361dcb26baa187a78278bb622d29d6295c3421e703422fbd79ff754c9",
+            "usage": {
+              "prompt_tokens": 1559,
+              "total_tokens": 1578,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          }
+        ],
+        "manifest_status": "TERMINAL",
+        "events": {
+          "lsa_writer_memory_read": 11,
+          "shared_namespace_guard": 1,
+          "foundation_context": 4,
+          "persistent_memory_view": 6,
+          "memory_boundary_view": 6,
+          "memory_boundary_route": 6,
+          "vllm_response": 8,
+          "memory_boundary_delivery": 6,
+          "memory_boundary_tool_observation": 2,
+          "persistent_memory_checkpoint_read": 4,
+          "persistent_memory_turn": 4,
+          "lsa_store_stats": 1
+        },
+        "trace_sha256": "fbb67eb09b070f2850850942948bd3e6fa4940f3b06cb9b87d63aa942dcae3c9"
+      },
+      "system-rep2/B0": {
+        "total": {
+          "generation_calls": 6,
+          "generation_prompt_tokens": 8284,
+          "generation_completion_tokens": 175,
+          "generation_tokens": 8459,
+          "embedding_calls": 2,
+          "embedding_tokens": 26,
+          "http_wall_seconds": 2.3822565488517284,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "turns": [
+          {
+            "message_key": "128e854ecce899138d8367c32320f5745b3045b951a8a48c689e40a2780895de:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "formation",
+            "lifecycle_cost_stage": "formation",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2598,
+            "generation_completion_tokens": 48,
+            "generation_tokens": 2646,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.7562965438701212,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "b90e89e444ffe853683d82082acde26734a9942ecd045a9fe0c1cf5af12267ea:0",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "maintenance",
+            "lifecycle_cost_stage": "maintenance",
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2688,
+            "generation_completion_tokens": 86,
+            "generation_tokens": 2774,
+            "embedding_calls": 1,
+            "embedding_tokens": 13,
+            "http_wall_seconds": 0.9510639677755535,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "128e854ecce899138d8367c32320f5745b3045b951a8a48c689e40a2780895de:1",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1450,
+            "generation_completion_tokens": 19,
+            "generation_tokens": 1469,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3224325920455158,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          },
+          {
+            "message_key": "128e854ecce899138d8367c32320f5745b3045b951a8a48c689e40a2780895de:2",
+            "user_id": "rowan",
+            "status": "COMPLETED",
+            "script_stage": "use",
+            "lifecycle_cost_stage": "use",
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1548,
+            "generation_completion_tokens": 22,
+            "generation_tokens": 1570,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.35246344516053796,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0,
+            "correction": {
+              "generation_calls": 0,
+              "generation_prompt_tokens": 0,
+              "generation_completion_tokens": 0,
+              "generation_tokens": 0,
+              "embedding_calls": 0,
+              "embedding_tokens": 0,
+              "http_wall_seconds": 0,
+              "http_errors": 0,
+              "unknown_usage": 0,
+              "local_rejections": 0
+            }
+          }
+        ],
+        "trailing": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "correction_total": {
+          "generation_calls": 0,
+          "generation_prompt_tokens": 0,
+          "generation_completion_tokens": 0,
+          "generation_tokens": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "http_wall_seconds": 0,
+          "http_errors": 0,
+          "unknown_usage": 0,
+          "local_rejections": 0
+        },
+        "provider_requests": [
+          {
+            "provider_id": "chatcmpl-b8a0bfe1dc0261c9",
+            "trace_offset": 4037,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "c3258d8da98df53c6f78b4d8c0e30d47d6791d9f5329c1d3c622d6ebf91c8386",
+            "usage": {
+              "prompt_tokens": 1092,
+              "total_tokens": 1123,
+              "completion_tokens": 31,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-82403d65cbf723ba",
+            "trace_offset": 66056,
+            "correction": false,
+            "public_message_index": 0,
+            "request_sha256": "cd27fd170c837b2b0f4898847e1397050287524ea6793d05846290d43fd82285",
+            "usage": {
+              "prompt_tokens": 1506,
+              "total_tokens": 1523,
+              "completion_tokens": 17,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-a40b823667200763",
+            "trace_offset": 87373,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "7467185ba48da2a120ba7031b789c38e065f31d3c10f09115c170f124dd7351a",
+            "usage": {
+              "prompt_tokens": 1145,
+              "total_tokens": 1209,
+              "completion_tokens": 64,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-80f6a0febb4fdf74",
+            "trace_offset": 149588,
+            "correction": false,
+            "public_message_index": 1,
+            "request_sha256": "10cfb6d0c54e242aca044de5f9edebb883289c0d9a337bfa73baebdff29a7348",
+            "usage": {
+              "prompt_tokens": 1543,
+              "total_tokens": 1565,
+              "completion_tokens": 22,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-933c59de3ec40692",
+            "trace_offset": 171213,
+            "correction": false,
+            "public_message_index": 2,
+            "request_sha256": "83b7d8eee97a96e521bc7a79dc8af75e56e3b76197ddd2d262ddea3bddedabf1",
+            "usage": {
+              "prompt_tokens": 1450,
+              "total_tokens": 1469,
+              "completion_tokens": 19,
+              "prompt_tokens_details": null
+            }
+          },
+          {
+            "provider_id": "chatcmpl-a48039e466a9189f",
+            "trace_offset": 190893,
+            "correction": false,
+            "public_message_index": 3,
+            "request_sha256": "c47a18333463107d5c8682033f626ab5448740310b476bbb3413bcc0ca38eaa8",
+            "usage": {
+              "prompt_tokens": 1548,
+              "total_tokens": 1570,
+              "completion_tokens": 22,
+              "prompt_tokens_details": null
+            }
+          }
+        ],
+        "manifest_status": "TERMINAL",
+        "events": {
+          "lsa_writer_memory_read": 11,
+          "shared_namespace_guard": 1,
+          "foundation_context": 4,
+          "persistent_memory_view": 6,
+          "memory_boundary_view": 6,
+          "memory_boundary_route": 6,
+          "vllm_response": 8,
+          "memory_boundary_delivery": 6,
+          "memory_boundary_tool_observation": 2,
+          "persistent_memory_checkpoint_read": 4,
+          "persistent_memory_turn": 4,
+          "lsa_store_stats": 1
+        },
+        "trace_sha256": "48b0fe795e88af97cfbec9b604199bae1364e642207299b074a6126af237cf4d"
+      }
+    },
+    "by_arm": {
+      "B0": {
+        "generation_calls": 24,
+        "generation_prompt_tokens": 33254,
+        "generation_completion_tokens": 705,
+        "generation_tokens": 33959,
+        "embedding_calls": 8,
+        "embedding_tokens": 104,
+        "http_wall_seconds": 9.772915240842849,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      }
+    },
+    "total": {
+      "generation_calls": 24,
+      "generation_prompt_tokens": 33254,
+      "generation_completion_tokens": 705,
+      "generation_tokens": 33959,
+      "embedding_calls": 8,
+      "embedding_tokens": 104,
+      "http_wall_seconds": 9.772915240842849,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "unique_generation_provider_ids": 24
+  },
+  "budget": {
+    "before_sha256": "e7954c9d19b2c35db6cf102abad9f251851c1ba599f23f2c3a985754a36e0339",
+    "after_sha256": "9ed44de1a810aa2c3449866cac7c3ee841142928a57533ae68abdb70408bce75",
+    "before": {
+      "generation_requests": 3036,
+      "generation": {
+        "charged_tokens": 3845530,
+        "known_tokens": 3845530,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 21617,
+        "known_tokens": 21617,
+        "unknown_usage": 0
+      }
+    },
+    "after": {
+      "generation_requests": 3060,
+      "generation": {
+        "charged_tokens": 3879489,
+        "known_tokens": 3879489,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 21721,
+        "known_tokens": 21721,
+        "unknown_usage": 0
+      }
+    }
+  },
+  "limitations": [
+    "role and position changed together",
+    "independently formed histories and UUIDs differ; not identical HTTP prefixes",
+    "two repeats are not independent examples",
+    "small exposed diagnostic cannot replace full regression/new content"
+  ],
+  "decision": "diagnostic gate passes; execute only frozen conditional confirmation next"
+}

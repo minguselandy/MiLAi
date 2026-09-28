@@ -1,74 +1,76 @@
 ---
-status: ACTIVE
+status: EXECUTION_COMPLETE_PUBLICATION_VERIFY_REQUIRED
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 plan_sha256: ff79dcd0e24458175c520913bac29b842a69b5ebbc15681545748b14b2eb52a2
 baseline_report_commit: 676fe4d32005cefbfb01daa4fe24425edf5a5e21
 baseline_method_commit: 24ef49945cd12eccbd85792fee3c256bf3fe6d2a
+accepted_method_commit: ec682a3a8b1ac58b41733b882ed0bad367347fed
+bounded_small_sample_gate: PASS
 research_goal: NOT_ACHIEVED
+second_model_family: NOT_RUN
 product: NO_GO
 ---
 
 # NEXT_DEVELOPMENT v5 执行记录
 
-用户实际 Goal 明确要求完整阅读并执行[v5计划](MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v5.0.md)，已核实为active。
-Root完整读取1,204行；原文DRAFT/PAUSED/NOT_STARTED原样保留，授权来自新Goal。
-此次恢复撤销旧v4暂停对新任务的限制，不预设任务结束自动暂停；若无新的暂停要求，以实际完成审计决定状态。
-不把评价协议完成或局部工程通过等同完整基础Memory稳定。
+**v5 规定的开发、冻结评估及 V9 完成审查已完成；最终发布需独立核对远端 SHA 后，由实际线程 Goal 标记完成。**
+全部结果、费用、失败、局限与复现见[总体报告](MILAI_NEXT_DEVELOPMENT_V5_OVERALL_EXPERIMENT_REPORT_20260928.md)。
+本记录随报告发布，提交自身不预先声明已核对自己的远端 SHA；发布完成以 PR/本地忽略回执和线程工具状态为准。
+
+用户实际 Goal 明确要求完整阅读并执行[v5 计划](MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v5.0.md)。
+Root 完整读取 1,204 行，原 DRAFT/PAUSED/NOT_STARTED 字节保持，授权来自后来恢复的 Goal。
+此次恢复撤销旧 v4 暂停对新任务的限制，不预设任务结束自动暂停。
+当前小范围验收通过不等于长期研究总目标完成；Product 仍 NO_GO。
 
 当前树 `/cra/memory/mx_memory/MiLAi-worktrees/next-development-v5`，分支
-`feat/lab-obligation-contract-v5-20260928`，从已发布v4报告提交建立。
-原main、旧树/草稿/失败/分数/锁/账本保留。v4 [PR67](https://github.com/minguselandy/MiLAi/pull/67)
-最终[Fast CI](https://github.com/minguselandy/MiLAi/actions/runs/36383042021)已读回success，Full skipped。
+`feat/lab-obligation-contract-v5-20260928`，基于已发布 v4 报告。
+原 main、旧树/草稿/失败/分数/锁/账本保留，不合并 main、不恢复 v27。
 
-## 完整要求与验收表
+## 完整要求与验收
 
-| 项 | 必须证明的内容 | 当前状态 |
-| --- | --- | --- |
-| V0 / §6 | 冻结v4身份；六脚本legacy/explicit/memory/optional分解，不改旧分 | COMPLETE；50项来源身份、6脚本、12轨迹/30答/44请求核平 |
-| V1 / §7 | 四层rubric；每个task-failing要求有用户可见依据，持久要求有意图依据；diagnostic不改任务分 | COMPLETE；20项窄检查与实际两轮CLI通过；原文依据人工复核 |
-| V2 / §8 | 冻结HTTP的obligation→user→formation→delivery→answer链；工具任务另看args/world；无LLM评分 | COMPLETE；6×55人工链已组合，legacy与diagnostic分列 |
-| V3 / §9 | 九类请求组件成本；重复/仅审计/只写所需信息；确定性候选old/new tokens和保留证明 | 离线测量完成；R2仅JSON空白候选节省331输入tokens（1.19%），未部署 |
-| V4 / §10 | 8–10脚本、每脚本2–4session；完整/部分/临时/独立/引用/只读/删除/助手冲突/动态world/moderate bank | COMPLETE；10脚本/27消息/133义务发布冻结，发布SHA身份前置故障已保留并解决 |
-| V5 / §11 | 当前v4 R2一方法一次前瞻验证；explicit≥95%、所有requested持久变化正确、无假保存/误持久化/重复业务/隐藏要求失败 | R1_COMPLETE；9/10脚本、explicit70/71、persistent59/59；H冲突失败，未满足完整稳定性 |
-| V6 / §12 | 仅真实失败首断点触发单层通用修复；约束修复须旧回归＋至少两个新约束验证 | CONDITIONAL_NOT_TRIGGERED |
-| V7 / §13 | 真实world与助手历史冲突覆盖；实际旧transcript保留、current工具/有效来源和无重复副作用 | 覆盖已完成；dynamic world通过，assistant conflict失败，单层诊断进行中 |
-| V8 / §14 | 真正检索瓶颈后同bank/history/model/tools/world的all/query/working-query/lazy-A比较，全成本 | CONDITIONAL_NOT_TRIGGERED |
-| V9 / §17–20 | 四层证据、失败首断点/两解释/反思、成本、复现、Go/Pivot/Stop、逐项完成审计和Luna发布 | PENDING |
+| 项 | 交付与状态 |
+| --- | --- |
+| V0 / §6 | COMPLETE；50 项来源身份，6 脚本、12 轨迹/30 答/44 请求；v4 两轮旧分各 5/6 不改 |
+| V1 / §7、20.1 | COMPLETE；四层义务、人工用户可见依据、20 个去重窄检查、两次实际离线 CLI；rubric 不入 runtime |
+| V2 / §8 | COMPLETE；每版本六脚本合计 55 项，两版本共 110 项人工链；legacy/diagnostic 分列 |
+| V3 / §9、16 | COMPLETE；66 个冻结 HTTP 的九类组件分析；JSON 空白候选只离线测量，未部署 |
+| V4 / §10 | COMPLETE；10 脚本/27 消息/133 义务，覆盖所有必需类别，输入先冻结 |
+| V5 / §11 | COMPLETE_WITH_FAILURE；原 v4 R2 runtime 首轮 9/10、显式70/71、持久59/59；H 首断点为 CURRENT_TASK_CONSUMPTION |
+| V6 / §12 | 无独立分支；V7 单候选的完整十脚本回归及两条新当前约束覆盖接口修复要求 |
+| V7 / §13、20.2 | COMPLETE；候选四次诊断门槛通过后执行预冻14 jobs；候选12/12、显式89/89、持久67/67、任务156/156，world/历史反向分别通过 |
+| V8 / §14、20.3 | NOT_TRIGGERED；全部131次生成走all，最多6记录/351candidate tokens，无实际检索瓶颈 |
+| V9 / §17–20 | REPORT_COMPLETE；完整成本、失败/两解释/反思/局限/复现均已整理；Luna发布后Root核对远端再完成线程Goal |
 
-§5将V7标条件项，§10与§20同时要求新样本覆盖两个边界：V4/V5因此包含H/I真实验证，
-V7的进一步修复只在真实失败后触发。不能以“条件未触发”跳过基本world/assistant验证。
-V3允许离线确定性精简候选，但§11/15要求V5首先运行现有方法；候选不进入首轮runtime。
-这既提供成本证据，也不把未经验证的成本改动偷偷并入首轮方法。
+§5 的条件 V7 不免除 §10/20 的基本 world/assistant 覆盖；R1 已真实测试两者，H 失败才触发修复。
+V3 离线成本候选没有进入首轮；V0–V5 的 161 个现有 runtime/runner/package/lock 字节保持。
+旧 R2 field_plan 三个点名字段正确但额外完整性有歧义，作为 diagnostic 保留，不改旧 fail，不据此继续措辞微调。
 
-## 首个断点与竞争解释
+## 唯一修复与实际结果
 
-v4 R1临时格式是明确当前义务失败，非持久污染。v4 R2 field_plan三个点名字段和不预约均满足，
-旧rubric额外要求完整计划，未复述物品被判fail。两种解释分别为“current plan自然要求完整复述”与
-“rubric加入未显式点名的额外完整性要求”。v5保留旧5/6，另列explicit pass / full-record incomplete，
-不能继续以该例独自证明runtime消费bug或把旧分改成6/6。
+[R1 结果](MILAI_NEXT_DEVELOPMENT_V5_PROSPECTIVE_R1_RESULTS_20260928.md)保留实际更新 Store9、完整交付9、旧历史6仍在却答6的失败。
+竞争解释为呈现线索竞争与模型当前/历史消费不稳定；不能只归因 assistant，旧值也在 user/tool proposal。
+Astra 仅处理这一具体冲突；Sol 实现一处通用 opt-in 请求副本移位，Root 冻结[两阶段协议](MILAI_NEXT_DEVELOPMENT_V5_AUTHORITY_R2_PROTOCOL_20260928.md)。
 
-## 职责与执行边界
+候选将单份相同 Durable Memory 材料从首 system 移到实际 current user 标签之前，原 checkpoint/历史/工具 JSON 不变。
+这是位置＋承载 role 的组合变化；默认仍 system，不增加 controller/持久状态/强制read/长提示。
+17 项窄测、默认三路径字节对照和静态检查通过；源码 Fast CI 36391234190 success，Full skipped。
 
-Root拥有文档、输入/rubric、冻结、所有真实调用、评分/分析与账本。复用Sol xhigh作为唯一源码负责人，
-当前只允许离线analysis与必要局部检查；Luna high拥有授权Git提交推送；Astra仅具体困难冲突。
-V0–V5 runtime不变，真实HTTP并发1，不启动Judge/controller/selector/第二模型或新服务。
-保持Host参数、公开工具、strict CRUD、Retained合同和Product NO-GO。
+诊断 system 当前0/2、历史0/2，候选各2/2；全部形成/更新/范围正确，按预冻门槛进入完整确认。
+候选十个已暴露脚本10/10、两个新内容2/2；新内容 system 0/2，当前/历史值均错但持久状态正确。
+所有初始失败保留，无语义重试。COUNT 省略式一句的格式解释及精确答案已在总体报告披露，两臂一致评分。
 
-初始只读核对无实验runner。连续账本为原树 `artifacts/ser-v20/budget.json`，
-**2994 generation calls / 3,785,491 generation tokens / 21,237 embedding tokens**，
-SHA `e47de5a370b7c6dad581d836a440411055c01c137ec4c589f95389109a4ca668`。
-V1/V2离线工具和V3请求分析已完成；V4完整输入已固定，正式prepare为159项源码。R1新增42 generation /60,039 tokens、19 embedding /380 tokens；账本3036/3,845,530/21,617。开发代理和离线tokenizer不混入实验费用。
-runtime永不读取rubric/gold；只读实际证据与人工判定严格分开，未知值不自动变pass。
+## 成本、职责与收口
 
-## V5 首轮更新
+Root 负责所有真实 HTTP/评分/成本，HTTP 并发1；Sol xhigh 唯一源码负责人；Luna high 授权 Git 发布。
+没有新模型、服务、Judge 或 controller；Host/vLLM 参数与公开工具不改，Product NO_GO。
+同42个固定R1请求离线移位的输入差均0；真实回归成本降低不能解释为压缩，DELETE少一次搜索等轨迹差异保留。
 
-见[R1结果](MILAI_NEXT_DEVELOPMENT_V5_PROSPECTIVE_R1_RESULTS_20260928.md)。
-持久形成/同ID更新/DELETE/范围与动态world通过；保留旧历史时当前Store9被回答为6。
-首断点CURRENT_TASK_CONSUMPTION，Astra仅对此具体冲突提供局部建议，后续候选须由Root冻结、Sol实现。
-实际Goal仍active；V9和§20方法稳定尚未完成。
+连续账本为原树 `artifacts/ser-v20/budget.json`。
+起点2994 generation calls /3,785,491 generation tokens /21,237 embedding tokens；
+本轮131 generation /185,863 tokens，53 embedding /984 tokens；
+终点**3125 /3,971,354 /22,221**，SHA
+`98b02945ab195ad94e37061f97c5ba5eb8068ecd87ff47caef9f76f9e51fdd15`，历史字段未重置。
+28 jobs/86公开消息全部完成；前置Git身份失败及零模型reprepare保留，全部费用见[总账核对](../data/manifests/next-development-v5-total-costs-20260928.json)。
 
-## V7 唯一候选已固定
-
-Root采纳Astra局部建议，Sol实现默认关闭的单份memory移位；见[R2协议](MILAI_NEXT_DEVELOPMENT_V5_AUTHORITY_R2_PROTOCOL_20260928.md)。
-先四次完整链路诊断，满足共同门槛后才14job完整回归/新内容验证。所有条件性新输入均先于R2模型调用固定。
-42个冻结HTTP的离线移位每条input token差均0；语义效果尚未评价。
+GO 仅接受此冻结小规模研究 recipe；本轮停止增加实验。长期目标 NOT_ACHIEVED，第二模型 NOT_RUN，Attention NOT_TRIGGERED。
+下一项研究需新的明确任务；旧 ACTIVE、原计划或协议的 NOT_RUN 不构成继续授权。

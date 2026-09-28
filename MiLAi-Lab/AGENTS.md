@@ -17,15 +17,19 @@ Root owns docs/data/freezes/real HTTP/scoring/costs and analysis. Reuse Sol xhig
 and necessary checks; Luna high for authorized Git publication; Astra only for a concrete conflict.
 Keep vLLM settings, continuous ledger, serial real calls, Lab-only scope and Product NO-GO unchanged.
 
-V5 R1 is published at `18851d3934e05621ddffecebbfebf69c04c831d5`: 9/10 scripts,
-explicit70/71 and persistent59/59. Actual current Store9 was delivered with retained history6,
-but H answered6. The separate assistant-conflict gate failed despite the pooled95% gate.
-Follow the [single V7 candidate protocol](docs/MILAI_NEXT_DEVELOPMENT_V5_AUTHORITY_R2_PROTOCOL_20260928.md).
-Sol owns one opt-in request-copy placement change; default system behavior remains the baseline.
-Root froze four diagnostic jobs and conditional complete regression/new content before candidate calls.
-Do not execute the conditional second stage unless all first-stage gates pass. No prompt variants,
-extra controller, history deletion, retrieval expansion or claim of pure-position causality.
-The actual Goal remains active; full stability and V9 completion still require actual evidence.
+V5 execution and semantic acceptance are now closed; see the
+[overall V9 report](docs/MILAI_NEXT_DEVELOPMENT_V5_OVERALL_EXPERIMENT_REPORT_20260928.md).
+R1 remains 9/10, explicit70/71 and persistent59/59; its current-consumption failure is preserved.
+The sole V7 candidate at `ec682a3a8b1ac58b41733b882ed0bad367347fed` passed its frozen
+four-job diagnostic gate, then all ten exposed regression scripts and two new related scripts:
+12/12, explicit89/89, persistent67/67, task156/156. Dynamic world and historical reverse controls
+passed separately. Accept the explicit `current_request` research recipe only within this small,
+single-family synthetic scope; source default remains `system`. No pure-position causal claim.
+V8 was not triggered. Broader research is NOT_ACHIEVED, second family NOT_RUN, Product NO_GO.
+Root owns final report/data verification and Luna owns publication on PR68; the actual Goal is
+marked complete only after final remote verification. No further experiments, downloads,
+deployments, prompt variants or optional branches follow from historical ACTIVE/NOT_RUN text.
+Original frozen protocols and plans retain their pre-run bytes; the final report supplies outcomes.
 
 The following v4 closure remains historical evidence:
 
