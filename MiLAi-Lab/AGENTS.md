@@ -2,6 +2,41 @@
 
 ## Current scope and authority
 
+The actual user Goal now authorizes the full [unified V8/V9 plan](docs/MILAI_UNIFIED_DEVELOPMENT_EXPERIMENT_PLAN_V8_V9_20260928.md).
+Follow [its execution record](docs/MILAI_UNIFIED_EXECUTION_V8_V9_20260928.md). This replaces the v7
+stop only for the new scope. Root has read the full 1266-line unified plan; original design-only
+metadata is preserved and is not execution authority. U0/U1 smoke alone cannot complete this Goal:
+U2 requires an independent comparison slice, three strong simple controls and a real external system.
+U3/U4/U5 remain evidence-gated; every gate and unrun branch needs an explicit disposition at U6.
+
+The user's latest explicit instruction permits vLLM model configuration changes and requires the
+Host to remain an Agent that calls MiLAi through MCP tools. This overrides historical no-vLLM-change
+rules for this task. vLLM is the inference backend, not itself the Agent or MCP executor. Acceptance
+must trace real Agent choice -> MCP transport -> strict memory/Store operation -> MCP receipt ->
+Host continuation. Direct in-process calls, mocked MCP or logged tool names do not establish this.
+Keep the Lab research boundary: a thin MCP exposure of the same existing memory service is allowed;
+no Product migration or private Product imports. Reuse the same logical memory entry and real IDs.
+Benchmark-native ingestion cadence is distinct from autonomous Host writing; do not replay archived
+user utterances as newly authorized live commands. Keep native tools/world/scorers unchanged.
+
+Record old/new service commands, assets, parser, budget and rollback before any permitted service
+change; give new runs/configs explicit identities and never mix them with old v7 results. Actual
+Host/embedding/Judge calls remain Root-only, serial 1 and continuously charged. No model-weight
+download or independent second-family deployment is inferred from permission to configure vLLM.
+Public benchmark data/source/dependency acquisition needed by the plan belongs to Luna high.
+Root owns docs, fixtures, selection/rubrics, freeze, real calls, scoring and cost; one reused Sol
+xhigh owns all source/config/CI changes and narrow checks. Luna high owns Git worktree/commit/push.
+Do not repeat passed tests for publication or use model quality as an engineering gate.
+
+Base is report 77dfc2f in the separate unified-v8-v9 worktree. Actual remote main07cc364f, local
+original main9515017, and draft PR70/71 are preserved; do not pull/reset/merge them. Original main
+has twelve untracked plans/reviews including v27; preserve all originals and historical ledgers.
+The full objective remains active until requirement-by-requirement evidence, costs, reports and
+remote publication are verified. Product remains NO_GO; no automatic claim of unseen benefit.
+
+The following v7 closure is historical:
+
+
 The v7 first slice is now executed and closed as **INCONCLUSIVE** with native **BLOCKED_ENVIRONMENT**.
 Follow the [v7 overall report](docs/MILAI_DEVELOPMENT_EXPERIMENT_V7_OVERALL_REPORT_20260928.md),
 [execution record](docs/MILAI_DEVELOPMENT_EXPERIMENT_EXECUTION_V7_20260928.md), and

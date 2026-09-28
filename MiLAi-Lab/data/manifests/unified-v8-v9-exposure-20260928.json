@@ -1,0 +1,475 @@
+{
+  "kind": "UNIFIED_V8_V9_HISTORICAL_EXPOSURE_REGISTRY",
+  "status": "PRE_RUN_EXCLUSIONS_FIXED",
+  "memsyco": {
+    "source_commit": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+    "historically_used_or_result_observed_ids": 13,
+    "previously_declared_ids": 24,
+    "old_source_groups_excluded": 20,
+    "all_group_derived_rows_excluded": 327,
+    "records": [
+      {
+        "native_id": "mso_hard_000026",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "mso_hard_000041",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 9,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v4-offline-audit/hostcapacity-natural-batch-supplement.json",
+          "sha256": "9153d3ff7db1fcaa5f8758c6ed4a0574e3d518e4fcbe7b7050462c063383d338"
+        }
+      },
+      {
+        "native_id": "mso_hard_000068",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 16,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v3-d1-wiring-1/manifest.json",
+          "sha256": "8425f1f3b1166505a92c64c72836fd227b17ccb1091cb4d6d464fd8f320245bf"
+        }
+      },
+      {
+        "native_id": "mso_hard_000138",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 9,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v4-offline-audit/hostcapacity-natural-batch-supplement.json",
+          "sha256": "9153d3ff7db1fcaa5f8758c6ed4a0574e3d518e4fcbe7b7050462c063383d338"
+        }
+      },
+      {
+        "native_id": "mso_hard_000144",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "mso_hard_000188",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 9,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v4-offline-audit/hostcapacity-natural-batch-supplement.json",
+          "sha256": "9153d3ff7db1fcaa5f8758c6ed4a0574e3d518e4fcbe7b7050462c063383d338"
+        }
+      },
+      {
+        "native_id": "mso_hard_000204",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "mso_hard_000279",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "rec_gen_0024",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "rec_gen_0025",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "rec_gen_0057",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "rec_gen_0063",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "v11_000404",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 11,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v3-h5-confirmation-1/manifest.json",
+          "sha256": "25826c57bfdb8259d88fbadd49e40a56e75b809be6c14696a82211914dae9a9b"
+        }
+      },
+      {
+        "native_id": "v11_000462",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 11,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v3-h5-confirmation-1/manifest.json",
+          "sha256": "25826c57bfdb8259d88fbadd49e40a56e75b809be6c14696a82211914dae9a9b"
+        }
+      },
+      {
+        "native_id": "v11_000569",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v6.0_20260924.md",
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/CONTEXTUAL_USER_MEMORY_V5_RESULTS_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_EXPERIMENT_REPORT_20260924.md",
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_V6_EXPERIMENT_REPORT_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 45,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v6-final-cost-and-identity.json",
+          "sha256": "e4075bf9f6d0d9757c2458319ce71695c7469c4d11388f48f30960bb4698a3cd"
+        }
+      },
+      {
+        "native_id": "v11_000664",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/MILA_LAB_DEVELOPMENT_REPORT_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 11,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v3-h5-confirmation-1/manifest.json",
+          "sha256": "25826c57bfdb8259d88fbadd49e40a56e75b809be6c14696a82211914dae9a9b"
+        }
+      },
+      {
+        "native_id": "v11_000977",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v6.0_20260924.md",
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/CONTEXTUAL_USER_MEMORY_V5_RESULTS_20260924.md",
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v5.0_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_V6_EXPERIMENT_REPORT_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 140,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v6-cost-and-identity.json",
+          "sha256": "de585f0ba6c1e57db511e235375de13bbe79d497e9832e2aa00bde6c7cb0301c"
+        }
+      },
+      {
+        "native_id": "v11_000986",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 11,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v3-h5-confirmation-1/manifest.json",
+          "sha256": "25826c57bfdb8259d88fbadd49e40a56e75b809be6c14696a82211914dae9a9b"
+        }
+      },
+      {
+        "native_id": "v11_001002",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/CONTEXTUAL_USER_MEMORY_V5_RESULTS_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_EXPERIMENT_REPORT_20260924.md",
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 34,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v5-online-v1002/manifest.json",
+          "sha256": "625d8720f48b6f0919552ec91672f383fce0825cfd95f13dc40ba22881fefb00"
+        }
+      },
+      {
+        "native_id": "v11_001003",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v6.0_20260924.md",
+          "docs/CONTEXTUAL_USER_MEMORY_V5_RESULTS_20260924.md",
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_V6_EXPERIMENT_REPORT_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 94,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v6-cost-and-identity.json",
+          "sha256": "de585f0ba6c1e57db511e235375de13bbe79d497e9832e2aa00bde6c7cb0301c"
+        }
+      },
+      {
+        "native_id": "v11_001113",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "v11_001210",
+        "status": "HISTORICAL_MODEL_OR_RESULT_EVIDENCE",
+        "public_evidence": [
+          "docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 7,
+        "local_example": {
+          "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/contextual-user-memory/v3-d1-wiring-1/manifest.json",
+          "sha256": "8425f1f3b1166505a92c64c72836fd227b17ccb1091cb4d6d464fd8f320245bf"
+        }
+      },
+      {
+        "native_id": "v11_001256",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      },
+      {
+        "native_id": "v11_001324",
+        "status": "PREVIOUSLY_DECLARED_RESERVED_CONSERVATIVELY_EXCLUDED",
+        "public_evidence": [
+          "docs/MILA_CONTEXTUAL_USER_MEMORY_DEVELOPMENT_GOAL_v4.0_20260924.md",
+          "data/manifests/contextual-memory-v3-memsyco-small.json"
+        ],
+        "local_metadata_evidence_count": 0,
+        "local_example": null
+      }
+    ],
+    "group_rule": "Connected components of exact metadata.source_id OR SHA256(canonical complete dialogue); exclude all components touching24 previously declared IDs, then stages smoke/development/confirmation in order, each track in listed order takes lowest SHA256(revision || source_group_id || seed), tie by native case_id, one row per group per track within each stage; shared groups across tracks stay in the same stage and remain correlated statistical units. No answer, gold evidence, outcome or length-based filtering.",
+    "selected_group_counts": {
+      "smoke": 6,
+      "development": 54,
+      "confirmation": 74
+    },
+    "independence_limit": "Native IDs and questions are not independent when source/history overlaps; do not relabel reserved or used old rows unseen."
+  },
+  "merit": {
+    "upstream_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+    "known_exposed_base_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "known_arcs": [
+      {
+        "base_seed": 0,
+        "arc_id": "arc0-000",
+        "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 0,
+          "difficulty": "hard"
+        },
+        "selection_path": "data/manifests/contextual-memory-v7-e0-selection-final.json",
+        "selection_sha256": "cd0f4fb2d7ae294b8d74ed937e29ffe28475c97a457ee76e3c279b7ef72d5982",
+        "private_artifact_hashes": {
+          "arc_sha256": "32e50fc25c1ce473eccb5c0653e3867072d792c9aed80148236f9b0baff5d12f",
+          "initial_world_sha256": "221f4be1976ff8bc44ddc97b121dea6e15c22d79eff15dfe551a914342569b29"
+        }
+      },
+      {
+        "base_seed": 1,
+        "arc_id": "arc1-000",
+        "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 1,
+          "difficulty": "hard"
+        },
+        "selection_path": "data/manifests/contextual-memory-v11-f-arc1-selection.json",
+        "selection_sha256": "0f2e216f2f361a73a937401e307b1baba56d5db23779291d8c31c2751817dccd",
+        "private_artifact_hashes": {
+          "arc_sha256": "2143cad12fa40d554019ff13008c240ebd78bb2b3083473ed7102d41505f0a0f",
+          "initial_world_sha256": "a88689a69adb70a390936412d536a6c73c7e7180728b702dfd7a4f968e47d0d8"
+        }
+      },
+      {
+        "base_seed": 2,
+        "arc_id": "arc2-000",
+        "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 2,
+          "difficulty": "hard"
+        },
+        "selection_path": "data/manifests/contextual-memory-v11-f-arc2-selection.json",
+        "selection_sha256": "2f74bda5f6140a2ba39d6cdad1ed8de98331713317927bd5843e3344a986eef8",
+        "private_artifact_hashes": {
+          "arc_sha256": "5e51175a71dd61ff94674178d023169fb4c7ab6d7d65c047a327002bd60bbc9a",
+          "initial_world_sha256": "21130ceaa1bc7cee64fe2ab037ec35203ebb42f71cb245829e7fe72d433b454a"
+        }
+      },
+      {
+        "base_seed": 3,
+        "arc_id": "arc3-000",
+        "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 3,
+          "difficulty": "hard"
+        },
+        "selection_path": "data/manifests/milai-ser-v23-arc3-selection.json",
+        "selection_sha256": "a69f95a8b13fe46a1984ddb64de2fb79d1b1fd05cf5f7eb04ddc5653d159cf7c",
+        "private_artifact_hashes": {
+          "arc_sha256": "2589ab3113e8617beb6960410d936da71b30e39ba4871adf66f72a488373bfba",
+          "initial_world_sha256": "0a574e9ccb44fb4d3ae4fc1c4cb4692a3837c3dbf739f71c14070f008e3dba43"
+        }
+      },
+      {
+        "base_seed": 4,
+        "arc_id": "arc4-000",
+        "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 4,
+          "difficulty": "hard"
+        },
+        "selection_path": "data/manifests/milai-ser-v23-arc4-selection.json",
+        "selection_sha256": "7e530ec5567abc8fadac61fd6ff7f38f1845e5498830c1e39e13496aab36264e",
+        "private_artifact_hashes": {
+          "arc_sha256": "5e286130a9c3c7fd1c2787bd4f63a9682ea322f2d7691ca352616fd7108aad44",
+          "initial_world_sha256": "249280f5a675e135a628f69b30c84a2fe14fd1be3ae1f7db2b3f6c9fbbc1f1bb"
+        }
+      }
+    ],
+    "existing_inventory_sha256": "b2acb978c68cbc4d58d94b51e73b79d3f66cf7310cfb3b9bf667bb9402899418",
+    "status": "UPSTREAM_THREE_DOMAIN_GENERATORS_AND_LOCAL_METADATA_RECHECKED",
+    "selection_policy": "See unified-v8-v9-merit-selection-policy-20260928.json. Reserve globally distinct seeds5..64; full native arc/world generated after adapter freeze. Exclude known0..4; same generator templates remain shared."
+  },
+  "scan": {
+    "public_sources": 10,
+    "local_json_files": 6263,
+    "local_bytes": 189063849,
+    "scope": "Current report worktree docs/manifests plus original checkout artifact JSON metadata at most2MB excluding environments/private/assets/source snapshots. A match is conservative evidence, not proof every file is a model run.",
+    "local_scan_sha256": "abeccae50ae5db41c2d736fdf615b461661c616256ceaf52b86050e81c0fe6e4",
+    "public_scan_sha256": "ad3ce82e300a5b982c4dda8dfa3b547eca3d658dd883ac07534a18f72759dc75"
+  },
+  "new_generation_calls": 0,
+  "new_embedding_calls": 0,
+  "limitations": [
+    "Unrecorded manual exposure cannot be disproved by repository scan.",
+    "Source grouping can be correlated beyond identical source IDs/history; report template families separately.",
+    "MERIT prospective source identities fixed, but new arc/world bytes are not yet generated; not a method/execution freeze."
+  ],
+  "merit_recheck": {
+    "status": "KNOWN_EXPOSURE_RECHECKED_ZERO_MODEL",
+    "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+    "known_exposed_base_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "public_authority": "data/manifests/local-state-attention-merit-exposure.json",
+    "metadata_scan": {
+      "scanned_files": 7172,
+      "scanned_bytes": 252695701,
+      "arc_id_file_counts": {
+        "arc0-000": 320,
+        "arc2-000": 51,
+        "arc1-000": 52,
+        "arc3-000": 28,
+        "arc4-000": 30
+      },
+      "receipt_sha256": "a40f9e4a38185cff23bd39633385f17f8fc4275bcd37a44a0015fd3fcfd96cc5"
+    },
+    "prospective_rule": "data/manifests/unified-v8-v9-merit-selection-policy-20260928.json",
+    "prospective_rule_sha256": "aa829ce2265800ad7fdb3e59ea6c41f215e04959d888e7bf77c8a6126c7856e9",
+    "limits": [
+      "Lexical metadata scan <=2MB JSON/Markdown excluding private/environments/caches; not proof against unrecorded manual exposure.",
+      "Regex boundaries avoid task-ID prefixes; existing explicit selection registry is authoritative known exposure.",
+      "No task answers displayed, no model calls."
+    ]
+  }
+}

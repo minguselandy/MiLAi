@@ -6,7 +6,7 @@ import hashlib
 import json
 import os
 import uuid
-from contextlib import contextmanager
+from contextlib import ExitStack, contextmanager
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -151,9 +151,13 @@ def _agent(
     boundary_options: dict[str, Any] | None = None,
     selector_client: VLLMClient | None = None,
     research_profile: str | None = None,
+    memory_transport: str = "direct",
+    mcp_stack: ExitStack | None = None,
+    observer: Any = None,
 ) -> Any:
     write_json(root / "run_manifest.json", {"identity": {"run_id": "run", "arm_id": arm}})
     config = _config(root, history)
+    config["memory_transport"] = memory_transport
     config["host"]["tool_mode"] = runtime.model.client.config.tool_mode
     if research_profile is not None:
         config["research_profile"] = research_profile
@@ -162,7 +166,7 @@ def _agent(
         config["memory_result"] = {"correction_entries": 0}
     factory, _ = runner._adapters(
         runtime, LocalStateBank(runtime.store), root, "run", arm, config,
-        selector_client=selector_client)
+        selector_client=selector_client, mcp_stack=mcp_stack)
     return factory(
         runtime.model,
         runtime.store,
@@ -170,6 +174,7 @@ def _agent(
         business,
         user_id="alice",
         business_call_wrapper=wrapper,
+        observer=observer,
     )
 
 
@@ -197,8 +202,9 @@ def _protocol_reply(action: dict, mode: str, index: int) -> dict:
 
 
 @pytest.mark.parametrize("mode", ["json_action", "native"])
+@pytest.mark.parametrize("memory_transport", ["direct", "mcp_http"])
 def test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool(
-    tmp_path: Path, mode: str,
+    tmp_path: Path, mode: str, memory_transport: str,
 ) -> None:
     from langchain_core.tools import tool
 
@@ -221,6 +227,7 @@ def test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool(
             {"name": "manage_memory", "arguments": {"action": "create", "content": "PLAN_B"}},
             {"name": "manage_memory", "arguments": {"action": "create", "content": None}},
             {"name": "read_memory", "arguments": {"id": "not-a-uuid"}},
+            {"name": "search_memory", "arguments": {"query": "PLAN_A", "limit": 10}},
             {"name": "partial_action", "arguments": {}}]},
         lambda: {"answer": "Actual partial result retained."},
         lambda: {"calls": [
@@ -239,18 +246,21 @@ def test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool(
     wires = []
     def respond(_wire, index):
         return _protocol_reply(actions[index - 1](), mode, index)
-    with _runtime(tmp_path, store, wires, respond, tool_mode=mode) as runtime:
+    with (_runtime(tmp_path, store, wires, respond, tool_mode=mode) as runtime,
+          ExitStack() as mcp_stack):
         agent = _agent(runtime, tmp_path, "B0", business=[partial_action], boundaries=True,
             boundary_options={"memory_placement": "current_request", "model_view": "compact_v6"},
-            research_profile="protocol_calibration_v7")
+            research_profile="protocol_calibration_v7", memory_transport=memory_transport,
+            mcp_stack=mcp_stack)
         first = invoke_public_message(
             agent, runtime.model, owner_scope, "Keep two independent plans.")
         receipts = [row for row in first if isinstance(row, ToolMessage)]
         assert [row.name for row in receipts] == ["manage_memory"] * 3 + [
-            "read_memory", "partial_action"]
+            "read_memory", "search_memory", "partial_action"]
         assert [row.status for row in receipts] == [
-            "success", "success", "error", "error", "success"]
+            "success", "success", "error", "error", "success", "success"]
         ids.extend(json.loads(row.content)["id"] for row in receipts[:2])
+        assert {row["key"] for row in json.loads(receipts[4].content)} == set(ids)
         assert len(set(ids)) == 2 and [store.get(namespace, key).value for key in ids] == [
             {"content": "PLAN_A"}, {"content": "PLAN_B"}]
         assert side_effects == ["reserved"]
@@ -294,7 +304,7 @@ def test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool(
             assert [row.tool_call_id for row in receipts] == [
                 call["id"] for call in proposed.tool_calls]
             history_call = next(row for row in wires[1]["messages"] if row["role"] == "assistant")
-            assert len(history_call["tool_calls"]) == 5
+            assert len(history_call["tool_calls"]) == 6
         else:
             assert all("tools" not in wire and wire["response_format"]["type"] == "json_schema"
                        for wire in wires)
@@ -478,6 +488,9 @@ def test_boundary_config_defaults_zero_correction_and_preserves_legacy_c(tmp_pat
     with pytest.raises(ValueError, match="PERSISTENT_MEMORY_CONFIG_INVALID"):
         runner._validate(config, "C")
     runner._validate(_config(tmp_path), "C")
+    for invalid in ("stdio", None, []):
+        with pytest.raises(ValueError, match="PERSISTENT_MEMORY_TRANSPORT_INVALID"):
+            runner._validate({**_config(tmp_path), "memory_transport": invalid}, "C")
 
 
 @pytest.mark.parametrize("memory_placement", ["system", "current_request"])
@@ -534,6 +547,91 @@ def test_boundary_query_uses_complete_query_actual_index_and_continuous_embeddin
         assert own_ids[0] in route["retrieved_record_ids"]
         delivered = next(row for row in events if row["event"] == "memory_boundary_delivery")
         assert delivered["delivered_record_ids"] == route["selected_record_ids"]
+
+
+def test_mcp_material_and_host_share_observed_store_and_one_continuous_budget(
+    tmp_path: Path,
+) -> None:
+    from langgraph.store.base import PutOp
+
+    from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
+    from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
+
+    embedding_wires = []
+    def embeddings(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.read())
+        embedding_wires.append(wire)
+        return httpx.Response(200, json={"data": [
+            {"index": i, "embedding": [1.0, 0.0] if "needle" in text else [0.0, 1.0]}
+            for i, text in enumerate(wire["input"])],
+            "usage": {"prompt_tokens": 3, "total_tokens": 3}})
+    budget = RunBudget(RunLimits(1, 3, None, None, None), tmp_path / "budget.json")
+    namespace = ("langmem", "run", "B0", "alice")
+    query = "Complete needle query\nKeep exact entity X-7 and conditions."
+    keys = [str(uuid.uuid4()) for _ in range(33)]
+    sidecar = RevisionSidecar(tmp_path / "instrumentation.sqlite")
+    observer = ProvenanceObserver(sidecar, "run", "B0")
+    try:
+        with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock-embedding"),
+                budget=budget, emit=Trace(tmp_path / "trace.jsonl", "embedding"),
+                transport=httpx.MockTransport(embeddings)) as embed:
+            inner = InMemoryStore(index={"dims": 2, "embed": VLLMEmbeddings(embed, "mock"),
+                                         "fields": ["content"]})
+            inner.batch([PutOp(namespace, key, {"content": "needle" if i == 0 else f"other-{i}"})
+                         for i, key in enumerate(keys)])
+            store = ObservedStore(inner, observer)
+            wires = []
+            def respond(_wire, index):
+                return ({"calls": [
+                    {"name": "manage_memory", "arguments": {"action": "update",
+                        "id": keys[0], "content": "needle current"}},
+                    {"name": "search_memory", "arguments": {"query": query, "limit": 10}}]}
+                    if index == 1 else {"answer": "Actual records read."})
+            with (_runtime(tmp_path, store, wires, respond, budget=budget) as runtime,
+                  ExitStack() as stack):
+                runtime.observer = observer
+                runtime.model.observer = observer
+                original_emit = runtime.model.client.emit
+                def emit(event):
+                    original_emit(event)
+                    observer.capture_provider_event(event)
+                runtime.model.client.emit = emit
+                agent = _agent(runtime, tmp_path, "B0", boundaries=True,
+                    boundary_options={"memory_placement": "current_request",
+                                      "model_view": "compact_v6"},
+                    research_profile="protocol_calibration_v7", memory_transport="mcp_http",
+                    mcp_stack=stack, observer=observer)
+                messages = invoke_public_message(agent, runtime.model, _scope("B0"), query)
+                assert runtime.model.client.budget is embed.budget is budget
+            assert len(wires) == 2 and len(embedding_wires) == 5
+            assert [wire["input"] for wire in embedding_wires[1:]] == [
+                [query], ["needle current"], [query], [query]]
+            assert "needle current" in json.dumps(wires[-1])
+            assert inner.get(namespace, keys[0]).value == {"content": "needle current"}
+            assert [row.name for row in messages if isinstance(row, ToolMessage)] == [
+                "manage_memory", "search_memory"]
+            observer.assert_healthy()
+            assert len(sidecar.rows("operations")) == len(sidecar.rows("searches")) == 1
+            assert [row["status"] for row in sidecar.rows("requests")] == ["completed"] * 2
+            actual = read_json(tmp_path / "budget.json")
+            assert actual["generation_requests"] == 2
+            assert actual["generation"]["charged_tokens"] == 26
+            assert actual["embedding"]["charged_tokens"] == 15
+            events = [json.loads(line) for line in
+                      (tmp_path / "trace.jsonl").read_text().splitlines()]
+            results = [row for row in events if row["event"] == "langmem_mcp" and
+                       row.get("kind") == "tool_result"]
+            assert [(row["origin"], row["name"]) for row in results] == [
+                ("material", "search_memory"), ("host", "manage_memory"),
+                ("host", "search_memory"), ("material", "search_memory")]
+            accounting = runner._accounting(tmp_path, tmp_path / "budget.json")
+            measured = accounting["mcp_observation_costs"]["measurements"]
+            assert measured["http"]["calls"] == sum(
+                row["event"] == "langmem_mcp" and row.get("kind") == "http" for row in events)
+            assert measured["resource_result"]["logical_bytes"] > 0
+            assert accounting["mcp_observation_costs"]["physical_io"] is None
+    finally:
+        sidecar.close()
 
 
 class _OneRecordCapacity(_MockCapacity):
@@ -996,13 +1094,19 @@ def test_unknown_business_side_effect_propagates_without_correction_or_replay(
 
 @pytest.mark.parametrize(("history", "boundaries"), [
     ("archive", False), ("retained", False), ("archive", True), ("retained", True)])
+@pytest.mark.parametrize("memory_transport", ["direct", "mcp_http"])
 def test_actual_history_permission_and_owner_isolation(
-    tmp_path: Path, history: str, boundaries: bool,
+    tmp_path: Path, history: str, boundaries: bool, memory_transport: str,
 ) -> None:
     store, wires = InMemoryStore(), []
     arm = "B0" if boundaries else "B1"
-    with _runtime(tmp_path, store, wires, lambda _wire, _call: {"answer": "saved"}) as runtime:
-        agent = _agent(runtime, tmp_path, arm, history=history, boundaries=boundaries)
+    def respond(_wire, call):
+        return ({"calls": [{"name": "read_history", "arguments": {"cursor": 0}}]}
+                if memory_transport == "mcp_http" and history == "archive" and call == 1
+                else {"answer": "saved"})
+    with _runtime(tmp_path, store, wires, respond) as runtime, ExitStack() as stack:
+        agent = _agent(runtime, tmp_path, arm, history=history, boundaries=boundaries,
+                       memory_transport=memory_transport, mcp_stack=stack)
         agent.update_state(
             _scope(arm, "old").config(),
             {
@@ -1040,7 +1144,7 @@ def test_actual_history_permission_and_owner_isolation(
         )
         store.put(("langmem", "run", arm, "alice"), str(uuid.uuid4()), {"content": "KEPT_BODY"})
         store.put(("langmem", "run", arm, "bob"), str(uuid.uuid4()), {"content": "OTHER_OWNER"})
-        invoke_public_message(agent, runtime.model, _scope(arm, "new"), "CURRENT")
+        messages = invoke_public_message(agent, runtime.model, _scope(arm, "new"), "CURRENT")
         text = json.dumps(wires)
         assert ("PAST_ARCHIVE_ONLY" in text) == (history == "archive")
         assert ("read_history" in text) == (history == "archive")
@@ -1048,12 +1152,16 @@ def test_actual_history_permission_and_owner_isolation(
             "KEPT_BODY" in text and "SOURCE_ARCHIVE_ONLY" not in text and "OTHER_OWNER" not in text
         )
         assert (RESPONSIBILITY_PROMPT in wires[0]["messages"][0]["content"]) == (not boundaries)
+        if memory_transport == "mcp_http" and history == "archive":
+            assert "PAST_ARCHIVE_ONLY" in next(row.content for row in messages
+                if isinstance(row, ToolMessage) and row.name == "read_history")
         if boundaries:
             checkpoint = agent.get_state(_scope(arm, "new").config()).values["messages"]
             audit = operation_audit([row.model_dump(mode="json") for row in checkpoint],
                 runtime.model.memory_turn, str(_scope(arm, "new").config()[
                     "configurable"]["thread_id"]))
-            assert audit["operations"] == [] and not audit["observed_write"]
+            assert not audit["observed_write"]
+            assert all(row["tool_name"] == "read_history" for row in audit["operations"])
             assert audit["user_intent_satisfied"] is None
 
 

@@ -1,0 +1,366 @@
+{
+  "kind": "MILAI_MCP_TRANSPORT_ENGINEERING_CHECKS_V1",
+  "status": "FREEZE_READY_ENGINEERING_ONLY",
+  "git_head": "77dfc2f43f2307bb649cdbee9d62a97e5863fac0",
+  "environment": {
+    "foundation_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+    "core_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+    "python_version": "3.11.13",
+    "PYTHONPATH": "src",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "versions": {
+      "mcp": "2.1.1",
+      "mcp-types": "2.1.1",
+      "httpx2": "2.12.0",
+      "uvicorn": "0.52.4",
+      "anyio": "4.14.2",
+      "langgraph": "1.1.10",
+      "langchain-core": "1.6.5",
+      "langmem": "0.0.30",
+      "pytest": "8.4.2",
+      "ruff": "0.16.5",
+      "mypy": "1.20.2"
+    }
+  },
+  "changed_files": [
+    {
+      "path": "src/milai_lab/baselines/langmem_mcp.py",
+      "bytes": 17288,
+      "sha256": "a425f37c7dec908a5d8071f73f8059784bc401812b71989f974c5f4665acd5db"
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_agent.py",
+      "bytes": 26212,
+      "sha256": "916867dc11abbd3df3173d5ef48fa3eb1c3a7bc3d7fa12ea7447c29c91e35dec"
+    },
+    {
+      "path": "src/milai_lab/runners/persistent_memory.py",
+      "bytes": 32356,
+      "sha256": "e1b78fc72b5c632aac83af86f6ec41d8778c85f11b2c98d182f4e6c2a76d969e"
+    },
+    {
+      "path": "tests/unit/test_langmem_foundation.py",
+      "bytes": 46144,
+      "sha256": "379789642c3e4d458def6f2786f883730adbf9a0612ff827e3f0d3178114823b"
+    },
+    {
+      "path": "tests/unit/test_persistent_memory.py",
+      "bytes": 64003,
+      "sha256": "3adc3fea809ce5c960c03608d42ad7d889615d3fd24e1177bb5d4c6b0a68130e"
+    }
+  ],
+  "checks": [
+    {
+      "command": "pytest -q tests/unit/test_langmem_foundation.py -k mcp tests/unit/test_persistent_memory.py -k \"mcp or test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool\"",
+      "log": "mcp-graph-final.log",
+      "exit_code": 1,
+      "passed": 12,
+      "failed": 2,
+      "deselected": 75,
+      "retained_failure": "native count assertion still expected 5 after adding real search call; final targeted repair below"
+    },
+    {
+      "command": "pytest -q tests/unit/test_persistent_memory.py -k \"test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool and native\"",
+      "log": "native-graph-final.log",
+      "exit_code": 0,
+      "passed": 2,
+      "deselected": 42
+    },
+    {
+      "command": "pytest -q tests/unit/test_langmem_foundation.py::test_agent_native_unknown_update_still_upserts tests/unit/test_langmem_foundation.py::test_agent_strict_rejects_unknown_update_then_accepts_create tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity tests/unit/test_persistent_memory.py::test_prepared_phase_entry_reopens_retained_records_records_costs_and_refuses_rerun",
+      "log": "adjacent-final.log",
+      "exit_code": 0,
+      "passed": 4
+    },
+    {
+      "command": "pytest -q tests/unit/test_persistent_memory.py::test_boundary_config_defaults_zero_correction_and_preserves_legacy_c tests/unit/test_langmem_foundation.py::test_strict_conflicts_with_external_memory_tools",
+      "log": "validation-final.log",
+      "exit_code": 0,
+      "passed": 2
+    },
+    {
+      "command": "ruff check src/milai_lab/baselines/langmem_mcp.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/persistent_memory.py tests/unit/test_langmem_foundation.py tests/unit/test_persistent_memory.py",
+      "log": "ruff-final.log",
+      "exit_code": 0
+    },
+    {
+      "command": "mypy src/milai_lab/baselines/langmem_mcp.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/persistent_memory.py",
+      "log": "mypy-final.log",
+      "exit_code": 0,
+      "source_files": 3
+    },
+    {
+      "command": "python tools/check_verification_matrix.py",
+      "log": "matrix-final.log",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m milai_lab.boundary",
+      "log": "boundary-final.log",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m milai_lab.tools_boundary",
+      "log": "tools-boundary-final.log",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "log": "diff-check.log",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --no-index --check /dev/null src/milai_lab/baselines/langmem_mcp.py",
+      "log": "new-file-whitespace.log",
+      "exit_code": 1,
+      "result": "empty diagnostic; --no-index returns 1 for new-file diff; independent trailing-newline and no double-EOF assertions passed"
+    }
+  ],
+  "unique_passed_targets": 20,
+  "skipped_targets": 0,
+  "invocation_note": "pytest/mypy/ruff commands run with Foundation python -m; matrix/boundary/tools_boundary with Core python; environment above; exact prepare subprocess commands in prepare-receipt.json",
+  "transport": {
+    "protocol": "2026-07-28",
+    "implementation": "actual authenticated loopback Streamable HTTP via locked MCP SDK",
+    "config": "memory_transport: direct|mcp_http; absent retains direct",
+    "agent_tools": [
+      "manage_memory",
+      "search_memory",
+      "read_memory"
+    ],
+    "archive_tool": "read_history forwarded over MCP when archive enabled",
+    "program_material": "paged records resource plus program-origin search/exact reads; current active refs resolve current resource records",
+    "timeout": "max(existing Host timeout, existing embedding timeout/default180), both HTTP and SDK; no application retry",
+    "budget": "same runtime ObservedStore -> embedding client -> same RunBudget; no transport ledger",
+    "measured_mock_budget": {
+      "generation_requests": 2,
+      "generation_tokens": 26,
+      "embedding_requests": 5,
+      "embedding_tokens": 15
+    },
+    "observed_cost": "MCP http/resource CPU and wall inclusive; request/response and logical bytes recorded; overlaps existing Store/material timing, not added as model fees; physical I/O unknown"
+  },
+  "previous_failures": [
+    {
+      "log": null,
+      "error": "initial standalone harness omitted PYTHONPATH=src, ModuleNotFoundError; corrected before loopback smoke"
+    },
+    {
+      "log": "persistent-mcp-initial.log",
+      "failed": 2,
+      "error": "canonical exact-READ invalid UUID surfaced as SDK RPC error; typed argument prevalidation before Store now returns error receipt"
+    },
+    {
+      "log": "continuous-budget-initial.log",
+      "failed": 1,
+      "error": "test assumed update document embedding was query; assertion corrected to actual order"
+    },
+    {
+      "log": "continuous-budget-final.log",
+      "failed": 1,
+      "error": "test helper omitted observer factory argument; no CallContext existed; explicit real observer now passed"
+    },
+    {
+      "log": "ruff-initial.log",
+      "error": "8 line length issues and unbound loop cursor; formatting/cursor binding corrected"
+    },
+    {
+      "log": "mypy-initial.log",
+      "error": "opaque Pydantic peer typed Any return; explicit typed cast corrected"
+    },
+    {
+      "log": "mcp-graph-final.log",
+      "error": "2 native assertion count mismatches after adding actual Host search; native-graph-final.log passes"
+    },
+    {
+      "log": "ruff-validation-wrap-failure.log",
+      "error": "one new guard assertion line length; wrapped without semantic change"
+    }
+  ],
+  "not_run": [
+    "full suite",
+    "package build (no entrypoint/packaging/dependency change)",
+    "real Host/embedding/Judge",
+    "shared PostgreSQL",
+    "benchmark algorithms/adapters or effect experiments"
+  ],
+  "real_model_calls": 0,
+  "real_embedding_calls": 0,
+  "judge_calls": 0,
+  "shared_postgres_calls": 0,
+  "local_execution": "real ephemeral loopback HTTP; MockTransport Host and embedding; InMemoryStore; actual local SQLite checkpoints/provenance and synthetic application world in adjacent targets",
+  "limitations": [
+    "MCP errors are real RPC failures, not false ToolMessage success; transport does not add exactly-once/CAS/transaction guarantee",
+    "resource pagination has no new concurrent snapshot transaction",
+    "automatic public-checkpoint archive projection remains existing legal history assembly; explicit read_history is MCP; postturn audit/dirty-namespace guard are hidden runner checks, not Host record access",
+    "strict transport/schema retained; typed UUID rejection formatting is MCP invalid_arguments while valid canonical receipts remain exact",
+    "retrieval score list in legacy route event is None for MCP; full actual search scores are retained in MCP tool-result/wire trace",
+    "native deployed model/tool-parser behavior and semantic benefit require Root frozen actual run"
+  ],
+  "artifacts": [
+    {
+      "path": "adjacent-final.log",
+      "bytes": 1778,
+      "sha256": "6029f48b7d8c958fb63ea95b9a8ff1d83dc0f100f3702d46292b847ae9f9bab2"
+    },
+    {
+      "path": "boundary-final.log",
+      "bytes": 61,
+      "sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3"
+    },
+    {
+      "path": "continuous-budget-final.log",
+      "bytes": 6545,
+      "sha256": "9ae4ab2938e1cdca3b092f83f2db55170547f29369f3a7458736ca144f70f3ae"
+    },
+    {
+      "path": "continuous-budget-initial.log",
+      "bytes": 5986,
+      "sha256": "181ce5afbca8377be01e3a8455511755fa7af401bf4efa8dbd7c5f2ac9cfea8e"
+    },
+    {
+      "path": "continuous-budget-observed-final.log",
+      "bytes": 1868,
+      "sha256": "0f125ba71bba617281d92ceca369cf8c4e8b3020408ad8a3e076df9ab12ba54f"
+    },
+    {
+      "path": "diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "foundation-mcp-initial.log",
+      "bytes": 894,
+      "sha256": "b6eb3d581493b74fc55c1332823cc0853f1b2d7f8a54820da47c5ec1ab0fabbc"
+    },
+    {
+      "path": "matrix-final.log",
+      "bytes": 261,
+      "sha256": "f6b051468facfaf7967b69f62ce66e5b52b6eaf7f81f20c283940582c123fa9c"
+    },
+    {
+      "path": "mcp-graph-final.log",
+      "bytes": 17678,
+      "sha256": "7cddcfa22aba48e67f75c83cb545359d4ca5c13fc37fce34e3557409c3464256"
+    },
+    {
+      "path": "mypy-final.log",
+      "bytes": 43,
+      "sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    },
+    {
+      "path": "mypy-initial.log",
+      "bytes": 177,
+      "sha256": "37bfe595d1fbf1a3b05f8f4bf1cb61692559cb4bd309741e25b73c030bc02f58"
+    },
+    {
+      "path": "native-graph-final.log",
+      "bytes": 2007,
+      "sha256": "7c8356de8579acdf33caa28ad9d25d5977bc120a84495c1aafd2933482e687ed"
+    },
+    {
+      "path": "new-file-whitespace.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "observations/native-mcp-graph/budget.json",
+      "bytes": 367,
+      "sha256": "e22c41f3a6521134eb1a30ef5df0e396d30868320c2575b38a1dec25eac84e18"
+    },
+    {
+      "path": "observations/native-mcp-graph/checkpoints.sqlite",
+      "bytes": 434176,
+      "sha256": "92c5a5be3b2da0e9e7ecf6bd90bd571d5900df0393ac4e6ec5a62f9020318c0c"
+    },
+    {
+      "path": "observations/native-mcp-graph/trace.jsonl",
+      "bytes": 129723,
+      "sha256": "7d795a15a32d8998ba3f57134c35c4b9ed058c0ea744724acd841f72b89d99fb"
+    },
+    {
+      "path": "persistent-mcp-final.log",
+      "bytes": 2014,
+      "sha256": "17ffbf12fc28f2912a202b640e3d99502de17d46e055706877a1105925e37a7e"
+    },
+    {
+      "path": "persistent-mcp-initial.log",
+      "bytes": 40045,
+      "sha256": "a53e2f0a04394be9ebd5759b8fbd14a11491d92695c0b650765004f9226108e6"
+    },
+    {
+      "path": "prepare-identity-check.json",
+      "bytes": 2306,
+      "sha256": "6a3b9b6b92948cab5af672ee5df93cd1d9b367c6d85a5f676268620af983284b"
+    },
+    {
+      "path": "prepare-read_only.log",
+      "bytes": 848,
+      "sha256": "6d3611f640e048595a07718a7b326698026fa07296657e46f104c9eb6f27e610"
+    },
+    {
+      "path": "prepare-receipt.json",
+      "bytes": 1696,
+      "sha256": "236a4deeb965fe62f0a8c074322b7aedd42dd2a651a0c2b22f7c872e7dc12d5c"
+    },
+    {
+      "path": "prepare-save_plan.log",
+      "bytes": 848,
+      "sha256": "20cd23b70ddea72f0ae15642ce471e5c206eb01fa8b76cd37b15588bcc3de1e4"
+    },
+    {
+      "path": "ruff-final.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "ruff-initial.log",
+      "bytes": 5655,
+      "sha256": "7073c2b1e10bfe57f3e5f39c8447e37ad0b2673058d3fa94257c416572bb8c52"
+    },
+    {
+      "path": "ruff-validation-wrap-failure.log",
+      "bytes": 508,
+      "sha256": "022edc845e1bf96c2cbfbdb0f6da921262e52fc358e5ab0b6ae80e18c27ae432"
+    },
+    {
+      "path": "tools-boundary-final.log",
+      "bytes": 100,
+      "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
+    },
+    {
+      "path": "validation-final.log",
+      "bytes": 1402,
+      "sha256": "48891086f734dc4c14c7a82d5aee449e4467ae8400d136b97bf0eea29b29435b"
+    }
+  ],
+  "unique_passed_nodeids": [
+    "tests/unit/test_langmem_foundation.py::test_mcp_actual_http_strict_crud_scope_and_restart",
+    "tests/unit/test_langmem_foundation.py::test_mcp_store_exception_is_protocol_failure_not_success_or_retry[create]",
+    "tests/unit/test_langmem_foundation.py::test_mcp_store_exception_is_protocol_failure_not_success_or_retry[update]",
+    "tests/unit/test_langmem_foundation.py::test_mcp_store_exception_is_protocol_failure_not_success_or_retry[delete]",
+    "tests/unit/test_langmem_foundation.py::test_mcp_material_full_pagination_and_async_read_are_owner_bound",
+    "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool[direct-json_action]",
+    "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool[direct-native]",
+    "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool[mcp_http-json_action]",
+    "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool[mcp_http-native]",
+    "tests/unit/test_persistent_memory.py::test_mcp_material_and_host_share_observed_store_and_one_continuous_budget",
+    "tests/unit/test_persistent_memory.py::test_actual_history_permission_and_owner_isolation[mcp_http-archive-False]",
+    "tests/unit/test_persistent_memory.py::test_actual_history_permission_and_owner_isolation[mcp_http-retained-False]",
+    "tests/unit/test_persistent_memory.py::test_actual_history_permission_and_owner_isolation[mcp_http-archive-True]",
+    "tests/unit/test_persistent_memory.py::test_actual_history_permission_and_owner_isolation[mcp_http-retained-True]",
+    "tests/unit/test_langmem_foundation.py::test_agent_native_unknown_update_still_upserts",
+    "tests/unit/test_langmem_foundation.py::test_agent_strict_rejects_unknown_update_then_accepts_create",
+    "tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity",
+    "tests/unit/test_persistent_memory.py::test_prepared_phase_entry_reopens_retained_records_records_costs_and_refuses_rerun",
+    "tests/unit/test_persistent_memory.py::test_boundary_config_defaults_zero_correction_and_preserves_legacy_c",
+    "tests/unit/test_langmem_foundation.py::test_strict_conflicts_with_external_memory_tools"
+  ],
+  "root_receipt_validation": {
+    "all_source_and_artifact_hashes_match": true,
+    "raw_check_receipt_sha256": "13aa988a0f0a942b9bd3e299c1ce1ca790badfd7660e810f9d8c953b119d56ea",
+    "actual_real_run_prepare_pending_source_commit": true,
+    "zero_model_prepare_jobs": 2
+  }
+}

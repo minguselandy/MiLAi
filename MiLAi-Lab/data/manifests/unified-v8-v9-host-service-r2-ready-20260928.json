@@ -1,0 +1,216 @@
+{
+  "kind": "UNIFIED_V8_V9_NATIVE_HOST_R2_READINESS",
+  "status": "HTTP_READY_REAL_NATIVE_TOOL_CALL_NOT_YET_RUN",
+  "checked_utc": "2026-09-28T15:18:04.804350+00:00",
+  "container_id": "b144371a277fb382ec5ffd1ea1b440c145bf094fc6ee04011fcc0699850f687c",
+  "name": "milai-unified-v8-v9-native-host-r2",
+  "image": "sha256:e0cfcfcb9b86e2c2d0d52a93689773f20f380cb8e050a24ce550c44f6f55c5eb",
+  "command": [
+    "/models",
+    "--port",
+    "7862",
+    "--tensor-parallel-size",
+    "2",
+    "--max-model-len",
+    "65536",
+    "--served-model-name",
+    "Qwen3.6-35B-A3B-FP8",
+    "--gpu-memory-utilization",
+    "0.88",
+    "--reasoning-parser",
+    "qwen3",
+    "--default-chat-template-kwargs",
+    "{\"enable_thinking\": false}",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser",
+    "qwen3_coder"
+  ],
+  "devices": [
+    {
+      "Driver": "",
+      "Count": 0,
+      "DeviceIDs": [
+        "2",
+        "3"
+      ],
+      "Capabilities": [
+        [
+          "gpu"
+        ]
+      ],
+      "Options": {}
+    }
+  ],
+  "bound_ports": {
+    "7862/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "7862"
+      }
+    ]
+  },
+  "prepare_sha256": "f6c537dfd81ab71aa017c68d4391e7e1a6ac6e53a97e819d41465a7fea8a39ae",
+  "launch_receipt_sha256": "b21d13a881d7a8df916b592645dfa0bd98baf8ca50502269c1efb4b2fdc1665d",
+  "startup_log_sha256": "2903d8e74f95cc8558e3a12d14c7602b66f61f5a4d21d1b13d3755c3e5c92de3",
+  "read_only_gets": {
+    "7860": {
+      "v1/models": {
+        "object": "list",
+        "data": [
+          {
+            "id": "Qwen3.6-35B-A3B-FP8",
+            "object": "model",
+            "created": 1790608684,
+            "owned_by": "vllm",
+            "root": "/models",
+            "parent": null,
+            "max_model_len": 65536,
+            "permission": [
+              {
+                "id": "modelperm-af08dec8057ee7e6",
+                "object": "model_permission",
+                "created": 1790608684,
+                "allow_create_engine": false,
+                "allow_sampling": true,
+                "allow_logprobs": true,
+                "allow_search_indices": false,
+                "allow_view": true,
+                "allow_fine_tuning": false,
+                "organization": "*",
+                "group": null,
+                "is_blocking": false
+              }
+            ]
+          }
+        ]
+      },
+      "version": {
+        "version": "0.27.1"
+      }
+    },
+    "7861": {
+      "v1/models": {
+        "object": "list",
+        "data": [
+          {
+            "id": "bge-m3",
+            "object": "model",
+            "created": 1790608684,
+            "owned_by": "vllm",
+            "root": "/data/models/embed",
+            "parent": null,
+            "max_model_len": 8192,
+            "permission": [
+              {
+                "id": "modelperm-da6490ed87d246aa8b1351541f9307ff",
+                "object": "model_permission",
+                "created": 1790608684,
+                "allow_create_engine": false,
+                "allow_sampling": true,
+                "allow_logprobs": true,
+                "allow_search_indices": false,
+                "allow_view": true,
+                "allow_fine_tuning": false,
+                "organization": "*",
+                "group": null,
+                "is_blocking": false
+              }
+            ]
+          }
+        ]
+      },
+      "version": {
+        "version": "0.9.1"
+      }
+    },
+    "7862": {
+      "v1/models": {
+        "object": "list",
+        "data": [
+          {
+            "id": "Qwen3.6-35B-A3B-FP8",
+            "object": "model",
+            "created": 1790608684,
+            "owned_by": "vllm",
+            "root": "/models",
+            "parent": null,
+            "max_model_len": 65536,
+            "permission": [
+              {
+                "id": "modelperm-a472233f6af0d9ce",
+                "object": "model_permission",
+                "created": 1790608684,
+                "allow_create_engine": false,
+                "allow_sampling": true,
+                "allow_logprobs": true,
+                "allow_search_indices": false,
+                "allow_view": true,
+                "allow_fine_tuning": false,
+                "organization": "*",
+                "group": null,
+                "is_blocking": false
+              }
+            ]
+          }
+        ]
+      },
+      "version": {
+        "version": "0.27.1"
+      }
+    },
+    "7961": {
+      "v1/models": {
+        "object": "list",
+        "data": [
+          {
+            "id": "bge-reranker",
+            "object": "model",
+            "created": 1790608684,
+            "owned_by": "vllm",
+            "root": "/data/models/bge-reranker-v2-m3",
+            "parent": null,
+            "max_model_len": 8192,
+            "permission": [
+              {
+                "id": "modelperm-8cad1825101d49e8a23706f4ca9659a7",
+                "object": "model_permission",
+                "created": 1790608684,
+                "allow_create_engine": false,
+                "allow_sampling": true,
+                "allow_logprobs": true,
+                "allow_search_indices": false,
+                "allow_view": true,
+                "allow_fine_tuning": false,
+                "organization": "*",
+                "group": null,
+                "is_blocking": false
+              }
+            ]
+          }
+        ]
+      },
+      "version": {
+        "version": "0.9.1"
+      }
+    }
+  },
+  "model_counter_lines": [
+    "vllm:prompt_tokens_total{engine=\"0\",model_name=\"Qwen3.6-35B-A3B-FP8\"} 0.0",
+    "vllm:generation_tokens_total{engine=\"0\",model_name=\"Qwen3.6-35B-A3B-FP8\"} 0.0",
+    "vllm:request_success_total{engine=\"0\",finished_reason=\"stop\",model_name=\"Qwen3.6-35B-A3B-FP8\"} 0.0",
+    "vllm:request_success_total{engine=\"0\",finished_reason=\"length\",model_name=\"Qwen3.6-35B-A3B-FP8\"} 0.0",
+    "vllm:request_success_total{engine=\"0\",finished_reason=\"abort\",model_name=\"Qwen3.6-35B-A3B-FP8\"} 0.0",
+    "vllm:request_success_total{engine=\"0\",finished_reason=\"error\",model_name=\"Qwen3.6-35B-A3B-FP8\"} 0.0",
+    "vllm:request_success_total{engine=\"0\",finished_reason=\"repetition\",model_name=\"Qwen3.6-35B-A3B-FP8\"} 0.0"
+  ],
+  "metrics_sha256": "20caf051bf6af83a711d87153104ccddb9bcbbe6443574fe5a91fe41de3fc842",
+  "ledger_sha256_unchanged": "f9efa35e1a83f4c4300f03f28394a584868f8955b320e960dc3f8bb7a4ce1592",
+  "new_experimental_generation_calls": 0,
+  "new_experimental_embedding_calls": 0,
+  "limits": [
+    "GET readiness/flags do not prove native tool semantics; actual frozen Agent/MCP call still pending.",
+    "Model initialization/compilation consumed GPU resources; startup is not zero operational cost even though experimental generation/embedding calls are zero. GPU-hour/money not independently metered.",
+    "Existing7860/7861/7961 are reachable and unchanged by this action.",
+    "Failed first startup and its stopped container/logs retained; same model assets reused, no weight download."
+  ]
+}

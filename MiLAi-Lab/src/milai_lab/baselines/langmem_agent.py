@@ -52,6 +52,7 @@ from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel
 
 if TYPE_CHECKING:
+    from milai_lab.baselines.langmem_mcp import MemoryMCP
     from milai_lab.methods.local_state_attention.writers import WriterTools
 
 RECIPE_ID = "langmem-hotpath-react-json-action-v1"
@@ -195,12 +196,18 @@ def build_agent(
     persistent_memory_arm: Literal["B0", "B1", "C"] | None = None,
     persistent_memory_records: Callable[[RunnableConfig], list[dict[str, Any]]] | None = None,
     memory_boundaries: MemoryBoundaryView | None = None,
+    memory_mcp: MemoryMCP | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
         raise ValueError("LANGMEM_MEMORY_CONTRACT_UNKNOWN")
     if memory_contract == "strict" and memory_tools is not None:
         raise ValueError("LANGMEM_STRICT_CUSTOM_MEMORY_TOOLS_CONFLICT")
+    if memory_mcp is not None and (memory_contract != "strict" or memory_tools is not None
+            or memory_mcp.store is not store or writer_tools is not None
+            or local_state_controller is not None or history_summary_controller is not None
+            or (history_access is not None) != ("read_history" in memory_mcp.local_tools)):
+        raise ValueError("LANGMEM_MCP_TOOLSET_CONFLICT")
     if writer_tools is not None and (
         memory_contract != "strict" or memory_tools is not None
         or writer_tools.memory_namespace != MEMORY_NAMESPACE
@@ -242,7 +249,10 @@ def build_agent(
     if persistent_memory_arm is not None:
         model.memory_protocol = persistent_memory_arm
     selected_memory_tools: Sequence[BaseTool]
-    if writer_tools is not None:
+    if memory_mcp is not None:
+        owned_manage = None
+        selected_memory_tools = memory_mcp.tools
+    elif writer_tools is not None:
         owned_manage = writer_tools.manage_memory
         selected_memory_tools = ((writer_tools.search_memory,) if writer_tool_mode ==
                                  "read_only" else
@@ -257,7 +267,7 @@ def build_agent(
         owned_manage = None
         selected_memory_tools = memory_tools
     history_tools: list[BaseTool] = []
-    if history_access is not None:
+    if history_access is not None and memory_mcp is None:
         history_tools.append(create_history_read_tool(history_access))
     if full_history and history_access is None:
         raise ValueError("HISTORY_ACCESS_MISSING")
@@ -270,7 +280,7 @@ def build_agent(
                                     if writer_maintenance_trigger is not None else [])]
         if writer_tools is not None else [])
     ordinary_read = ([create_memory_read_tool(MEMORY_NAMESPACE, store)]
-                     if persistent_memory_arm is not None else [])
+                     if persistent_memory_arm is not None and memory_mcp is None else [])
     tools = [*selected_memory_tools, *ordinary_read, *history_tools, *writer_extra, *business_tools]
     parameter_schemas = {
         tool.name: convert_to_openai_tool(tool)["function"]["parameters"]
