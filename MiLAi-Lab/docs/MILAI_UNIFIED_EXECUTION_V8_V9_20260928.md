@@ -173,12 +173,23 @@ R1 新增 **1 generation / 1,455 generation tokens / 1 embedding / 31 embedding 
 `f4ff524f60fd237a1624e2048dcc968c17871d836d9c3f4a7e8ee040d5086571`。
 失败消耗与实际持久化全部保留；没有清零或撤销费用。
 
+## 修复后的真实接线验收
+
+容量修复已由 Luna 发布为 `3f1715aaf8de961fc9aadc8e9abe8e8338157831`，Root 独立核对远端一致。
+同一提交下冻结 R2，完整两脚本／三消息通过9项任务义务，另有3项非失败诊断。
+实际 CREATE、MCP回执、Host续接及新session材料交付已关联；只读题没有写入或业务动作。
+四次实际请求的本地计数与服务usage完全相等。详见[接线结果报告](MILAI_UNIFIED_MCP_FUNCTIONAL_RESULTS_20260928.md)
+及[R2逐项证据](../data/manifests/unified-v8-v9-mcp-r2-results-20260928.json)。
+R1费用／副作用／未运行项保留，R2全新namespace，不拼接轨迹。MCP程序取材不冒充Host自主检索。
+截至R2，本Goal含失败新增5 generation／7613 tokens、2 embedding／62 tokens；连续账本3306／4212816／23632。
+仅工程接线目标通过；完整原生U1、独立U2及适用U3—U6仍未完成，当前继续原生adapter开发。
+
 ## 全范围需求与当前状态
 
 | 要求 | 证明完成所需证据 | 当前 |
 | --- | --- | --- |
 | U0 身份/资源/许可/曝光 | 源码、模型、数据、scorer 哈希；历史曝光和无模型账本 | IN_PROGRESS |
-| Host Agent 真实 MCP | 实际模型提案、MCP 请求/回执、同一 Store 和后续回答 | R1 ACTUAL_CREATE; CONTINUATION_CAPACITY_FAILURE |
+| Host Agent 真实 MCP | 实际模型提案、MCP 请求/回执、同一 Store 和后续回答 | R2 PASSED 2脚本/3消息/9任务义务；R1失败保留 |
 | U1 MemSyco | 三类各2原题、原生参考及MiLAi、完整历史、原生评分和成本 | NOT_RUN |
 | U1 MERIT | 三域easy/hard各1完整arc、原生tools/world/checker、两路径、leak check | NOT_RUN |
 | U2 独立比较 | 60题/18arcs建议规模，正式ID另冻；强原文RAG、真实摘要、完整历史、ordinary/候选和Mem0 | NOT_RUN |
@@ -193,4 +204,4 @@ R1 新增 **1 generation / 1,455 generation tokens / 1 embedding / 31 embedding 
 
 数量先按计划建议组织；若实际数据/资源要求调整，必须在模型运行前说明理由、保持完整实例并冻结。
 研究优势不预设；最终必须说明形成、取材、呈现、动作或额外计算的证据边界。
-当前 Goal 保持 active；首轮实际接线因容量适配失败中断，完整原生适配与后续实验尚未完成。
+当前 Goal 保持 active；R2实际接线验收通过，完整原生适配与后续实验尚未完成。

@@ -1,0 +1,433 @@
+{
+  "kind": "UNIFIED_MCP_REAL_FUNCTIONAL_R2_RESULTS",
+  "status": "PASSED_FUNCTIONAL_CHAIN_ONLY",
+  "method_commit": "3f1715aaf8de961fc9aadc8e9abe8e8338157831",
+  "frozen_utc": "2026-09-28T16:16:37.735049+00:00",
+  "execution_freeze_sha256": "a365bd30481d005593c700aed7bf340532beed4ea94d0a5fa7745b2ec6ed9445",
+  "protocol_path": "data/diagnostics/unified-v8-v9-mcp-smoke/protocol-r2.json",
+  "protocol_sha256": "dbe6d2e443dc1161238db4c4b155d6dd938a541d92766d8280d806fa3c89082f",
+  "source_config_unchanged_from_r1": true,
+  "inputs_exposure": "Previously exposed v7 synthetic fixtures; no benchmark/unseen claim",
+  "tasks": {
+    "scripts_passed": 2,
+    "scripts_planned": 2,
+    "messages_completed": 3,
+    "messages_planned": 3,
+    "task_obligations_passed": 9,
+    "task_obligations_total": 9,
+    "non_failing_diagnostics": 3
+  },
+  "scored_obligations": [
+    {
+      "case_id": "save_plan",
+      "obligation_id": "persist_plan",
+      "target_message_id": "save_plan-1",
+      "layer": "persistent_obligations",
+      "task_failing": true,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "save_plan",
+      "obligation_id": "truthful_save",
+      "target_message_id": "save_plan-1",
+      "layer": "current_explicit_obligations",
+      "task_failing": true,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "save_plan",
+      "obligation_id": "later_plan",
+      "target_message_id": "save_plan-2",
+      "layer": "later_use_obligations",
+      "task_failing": true,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "save_plan",
+      "obligation_id": "no_memory_write_2",
+      "target_message_id": "save_plan-2",
+      "layer": "persistent_obligations",
+      "task_failing": true,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "save_plan",
+      "obligation_id": "no_business_1",
+      "target_message_id": "save_plan-1",
+      "layer": "current_explicit_obligations",
+      "task_failing": true,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "save_plan",
+      "obligation_id": "no_business_2",
+      "target_message_id": "save_plan-2",
+      "layer": "current_explicit_obligations",
+      "task_failing": true,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "save_plan",
+      "obligation_id": "optional_no_unneeded_read_1",
+      "target_message_id": "save_plan-1",
+      "layer": "diagnostic_obligations",
+      "task_failing": false,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "save_plan",
+      "obligation_id": "optional_no_unneeded_read_2",
+      "target_message_id": "save_plan-2",
+      "layer": "diagnostic_obligations",
+      "task_failing": false,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "number",
+      "target_message_id": "read_only-1",
+      "layer": "current_explicit_obligations",
+      "task_failing": true,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "no_memory_write_1",
+      "target_message_id": "read_only-1",
+      "layer": "persistent_obligations",
+      "task_failing": true,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "no_business_1",
+      "target_message_id": "read_only-1",
+      "layer": "current_explicit_obligations",
+      "task_failing": true,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    },
+    {
+      "case_id": "read_only",
+      "obligation_id": "optional_no_unneeded_read_1",
+      "target_message_id": "read_only-1",
+      "layer": "diagnostic_obligations",
+      "task_failing": false,
+      "verdict": "PASS",
+      "scorer": "Root offline review against frozen user-visible obligation; actual turns, MCP/HTTP receipts, persistence and world inspected"
+    }
+  ],
+  "jobs": [
+    {
+      "script": "save_plan",
+      "run_id": "unified-mcp-native-save-r2",
+      "status": "COMPLETED",
+      "messages": [
+        {
+          "message_id": "save_plan-1",
+          "user_id": "morgan",
+          "session_id": "session-1",
+          "public_index": 0,
+          "status": "COMPLETED",
+          "answer": "Your transfer plan has been saved successfully. The plan to transfer 5 Teal reference prisms to cabinet K-7, each packed in a cork-lined pouch, will be available for future sessions.",
+          "business_calls": [],
+          "visited_ordinal": 0
+        },
+        {
+          "message_id": "save_plan-2",
+          "user_id": "morgan",
+          "session_id": "session-2",
+          "public_index": 0,
+          "status": "COMPLETED",
+          "answer": "Based on your saved ongoing transfer plan:\n\n- **Item:** Teal reference prisms\n- **Total quantity:** 5\n- **Destination:** Cabinet K-7\n- **Packing:** Cork-lined pouch",
+          "business_calls": [],
+          "visited_ordinal": 1
+        }
+      ],
+      "world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "host_mcp_tool_results": [
+        {
+          "origin": "host",
+          "name": "manage_memory",
+          "tool_call_id": "chatcmpl-tool-a1b0c6b9e80003c9",
+          "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"9378376c-5632-43df-83e3-d81a1fd30e20\"}",
+          "status": "success"
+        }
+      ],
+      "generation_calls": 3,
+      "generation_tokens": 4781,
+      "input_identity_sha256": "9aa6f75e64c7c6c6c8ce261575fe47354a8d684578a9bb9ea8c9af9e40cabfe1"
+    },
+    {
+      "script": "read_only",
+      "run_id": "unified-mcp-native-readonly-r2",
+      "status": "COMPLETED",
+      "messages": [
+        {
+          "message_id": "read_only-1",
+          "user_id": "morgan",
+          "session_id": "session-1",
+          "public_index": 0,
+          "status": "COMPLETED",
+          "answer": "45",
+          "business_calls": [],
+          "visited_ordinal": 0
+        }
+      ],
+      "world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "host_mcp_tool_results": [],
+      "generation_calls": 1,
+      "generation_tokens": 1377,
+      "input_identity_sha256": "456e4d89f68e91ece48063f20b2e2efed7d5a50cdc06c5ab9da0dbadff87cdcb"
+    }
+  ],
+  "actual_calls": [
+    {
+      "script": "save_plan",
+      "path": "chat/completions",
+      "provider_id": "chatcmpl-a492c1c3ff652753",
+      "usage": {
+        "prompt_tokens": 1395,
+        "total_tokens": 1459,
+        "completion_tokens": 64,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 1.0017361352220178
+    },
+    {
+      "script": "save_plan",
+      "path": "embeddings",
+      "provider_id": "embd-4e12740a17914e1bac3ba45eeb296d51",
+      "usage": {
+        "prompt_tokens": 31,
+        "total_tokens": 31,
+        "completion_tokens": 0,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.1598794274032116
+    },
+    {
+      "script": "save_plan",
+      "path": "chat/completions",
+      "provider_id": "chatcmpl-96cb5b769211d6bf",
+      "usage": {
+        "prompt_tokens": 1795,
+        "total_tokens": 1836,
+        "completion_tokens": 41,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.520912776235491
+    },
+    {
+      "script": "save_plan",
+      "path": "chat/completions",
+      "provider_id": "chatcmpl-908b1cebd80928b7",
+      "usage": {
+        "prompt_tokens": 1441,
+        "total_tokens": 1486,
+        "completion_tokens": 45,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.48395842779427767
+    },
+    {
+      "script": "read_only",
+      "path": "chat/completions",
+      "provider_id": "chatcmpl-818a09ca6f3b965d",
+      "usage": {
+        "prompt_tokens": 1374,
+        "total_tokens": 1377,
+        "completion_tokens": 3,
+        "prompt_tokens_details": null
+      },
+      "wall_seconds": 0.32574934838339686
+    }
+  ],
+  "capacity_vs_actual": [
+    {
+      "script": "save_plan",
+      "generation_id": "chatcmpl-a492c1c3ff652753",
+      "local_prompt_tokens": 1395,
+      "server_prompt_tokens": 1395,
+      "equal": true
+    },
+    {
+      "script": "save_plan",
+      "generation_id": "chatcmpl-96cb5b769211d6bf",
+      "local_prompt_tokens": 1795,
+      "server_prompt_tokens": 1795,
+      "equal": true
+    },
+    {
+      "script": "save_plan",
+      "generation_id": "chatcmpl-908b1cebd80928b7",
+      "local_prompt_tokens": 1441,
+      "server_prompt_tokens": 1441,
+      "equal": true
+    },
+    {
+      "script": "read_only",
+      "generation_id": "chatcmpl-818a09ca6f3b965d",
+      "local_prompt_tokens": 1374,
+      "server_prompt_tokens": 1374,
+      "equal": true
+    }
+  ],
+  "mcp_http": [
+    {
+      "script": "save_plan",
+      "rpc_method": "tools/list",
+      "request_sha256": "3a6e7c47a8c779c35cf791c07acf53db53bf12eacd5ae14d7e02502529fa7c61",
+      "response_sha256": "0f84c58df9f38e85e2cf29bdc556d80537107a94fdec20aafa31696d55a2c0d1",
+      "http_status": 200,
+      "logical_request_bytes": 240,
+      "logical_response_bytes": 1788,
+      "wall_ns": 4047556,
+      "cpu_ns": 4038424
+    },
+    {
+      "script": "save_plan",
+      "rpc_method": "resources/read",
+      "request_sha256": "da76647de69fde909d787949344b46fe51a4b8b1565f9fab0aefd865c8d12019",
+      "response_sha256": "4b616472c7ecd61a94df7884a56e74f416deae8e674d8a58ce268001b0f2c8b9",
+      "http_status": 200,
+      "logical_request_bytes": 433,
+      "logical_response_bytes": 324,
+      "wall_ns": 3898751,
+      "cpu_ns": 3183191
+    },
+    {
+      "script": "save_plan",
+      "rpc_method": "tools/call",
+      "request_sha256": "0d432cfa9c223c965af56498bf094241ec479eeacc97bd979169ee6936effbeb",
+      "response_sha256": "ebf78b78db2a9277c700f6a99a7fc498201184e7f6683facf88e172e1fd08bec",
+      "http_status": 200,
+      "logical_request_bytes": 555,
+      "logical_response_bytes": 299,
+      "wall_ns": 267722829,
+      "cpu_ns": 22494547
+    },
+    {
+      "script": "save_plan",
+      "rpc_method": "resources/read",
+      "request_sha256": "e29da884b5050d953cb1d3e56b195566ee76c58454da8734a2e6e11d8eaff19f",
+      "response_sha256": "bf199084c67617b43df8d8e9d260877015bd3bf4cf3d55785069005eef8e56b4",
+      "http_status": 200,
+      "logical_request_bytes": 433,
+      "logical_response_bytes": 504,
+      "wall_ns": 4709052,
+      "cpu_ns": 2996876
+    },
+    {
+      "script": "save_plan",
+      "rpc_method": "resources/read",
+      "request_sha256": "19b3f25ec20616daa1497aa91fd85d0ebfd1285cea7251197b2a07faa09efe23",
+      "response_sha256": "059aabda68528995a64c331a5d5f278472e3fa5648bf3152506b63bb31b481cc",
+      "http_status": 200,
+      "logical_request_bytes": 433,
+      "logical_response_bytes": 504,
+      "wall_ns": 4060911,
+      "cpu_ns": 2932454
+    },
+    {
+      "script": "read_only",
+      "rpc_method": "tools/list",
+      "request_sha256": "3a6e7c47a8c779c35cf791c07acf53db53bf12eacd5ae14d7e02502529fa7c61",
+      "response_sha256": "0f84c58df9f38e85e2cf29bdc556d80537107a94fdec20aafa31696d55a2c0d1",
+      "http_status": 200,
+      "logical_request_bytes": 240,
+      "logical_response_bytes": 1788,
+      "wall_ns": 1200328,
+      "cpu_ns": 1190821
+    },
+    {
+      "script": "read_only",
+      "rpc_method": "resources/read",
+      "request_sha256": "4e237bcae304d6b0f62addccc4b01773bbe0e32b53bb2972e92144e0441f89b5",
+      "response_sha256": "4b616472c7ecd61a94df7884a56e74f416deae8e674d8a58ce268001b0f2c8b9",
+      "http_status": 200,
+      "logical_request_bytes": 437,
+      "logical_response_bytes": 324,
+      "wall_ns": 4367505,
+      "cpu_ns": 3723154
+    }
+  ],
+  "mcp_timing_note": "Inclusive MCP wall/CPU overlap Store/embed/material timing; do not add overlapping costs. Physical I/O and independent GPU-money unmetered.",
+  "ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "before_sha256": "f4ff524f60fd237a1624e2048dcc968c17871d836d9c3f4a7e8ee040d5086571",
+    "after_sha256": "92a7fd0e8994fbfafbb147ed03be4f0d0f96c4ab48f5a822b64b6f9b98dbedc0",
+    "r2_delta": {
+      "generation_calls": 4,
+      "generation_tokens": 6158,
+      "embedding_tokens": 31,
+      "embedding_calls": 1
+    },
+    "whole_unified_goal_delta_including_failed_r1": {
+      "generation_calls": 5,
+      "generation_tokens": 7613,
+      "embedding_calls": 2,
+      "embedding_tokens": 62
+    },
+    "continuous_totals": {
+      "generation_calls": 3306,
+      "generation_tokens": 4212816,
+      "embedding_tokens": 23632,
+      "generation_unknown_usage": 0,
+      "embedding_unknown_usage": 0
+    }
+  },
+  "evidence_sha256": {
+    "artifacts/unified-v8-v9/mcp-smoke-r2/save_plan/turns/ebb5bba069a24acc8e5e9a6052d7171bba9b03ca54600bd366d34daeb25acf75-0.json": "84d1efbe71ebbf2e8b3d64cd164dc30dc4b7b59862fa8402933c435c473f910a",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/save_plan/turns/b6033ab7d230fe33eda5b7a7d0a1fa5daefc3b55ecca5d51a00178b40ea4c89d-0.json": "548a20578af239209ea3c279ae81d61085bfffbdee7ac922fde390bba7053176",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/save_plan/trace.jsonl": "83bde9d560bd6a25a3d5a110e269e7948261461cf6a9176746544677be579969",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/save_plan/run_manifest.json": "dffe59f1fce0c74f31031c216e5b0d2dfc485fdbb41770c5557ea16143864573",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/save_plan/phase-0-result.json": "4202b5563cb651802d340887792a58b82dd837fa0528e129ea92d258455bfe37",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/save_plan-invocation.json": "c7e19446ba64551a8cfd57adb5ccd5829240feed8aafdf5057ff543313dc0071",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/read_only/turns/010b70480edb97c74645697ba0e33734ace59cbef7d64895ce3d6587ddb3b401-0.json": "9e907cbe84cdd136ef518e25c7f613e4aec7100e85ef80e15f710f161340d404",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/read_only/trace.jsonl": "7f2b507ba896c328bf91cf6ebbb821002a6ab1f760d374850e6c44d3cb0cb1cd",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/read_only/run_manifest.json": "2578844e595d1c7b7c104c8747ef05ec78566a9abca4c61c72b74abf90bc257f",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/read_only/phase-0-result.json": "c92583f01725c1e5b604d5d8182c58c928715c014f33574e9ebf038ade535fd5",
+    "artifacts/unified-v8-v9/mcp-smoke-r2/read_only-invocation.json": "ce51d8f8c025475e7829562403836e57c214fe1fdf2ccf00ff467006908d10c2"
+  },
+  "prior_r1": "Retained ENGINEERING_FAILURE_AFTER_ACTUAL_CREATE; separate source/run and namespace; no rollback or result splice.",
+  "actual_boundary": "Host selected CREATE and received real MCP receipt before final. Later retrieval was program-origin MCP material, not Host autonomous search.",
+  "limitations": [
+    "Two exposed synthetic scripts only; no independent task-family or second-model evidence.",
+    "Fresh graph session uses retained Store; no process-restart/recovery claim from this diagnostic.",
+    "MCP transport and continuation acceptance do not establish semantic truth of all stored content or benchmark benefit.",
+    "Native JSON protocol effect comparison not run; U1/U2 and applicable U3-U6 remain required."
+  ],
+  "decision": "CONTINUE_U1_REUSABLE_NATIVE_ADAPTERS",
+  "causal_join": {
+    "host_tool_call_id": "chatcmpl-tool-a1b0c6b9e80003c9",
+    "actual_record_id": "9378376c-5632-43df-83e3-d81a1fd30e20",
+    "native_proposal_matches_host_mcp_tool_result": true,
+    "continuation_contains_same_assistant_tool_call_and_actual_receipt": true,
+    "program_mcp_resource_read_contains_actual_record": true,
+    "later_session_message_roles": [
+      "system",
+      "user"
+    ],
+    "later_session_contains_record_id_and_complete_stored_plan": true,
+    "later_session_contains_prior_assistant_or_tool_history": false
+  }
+}
