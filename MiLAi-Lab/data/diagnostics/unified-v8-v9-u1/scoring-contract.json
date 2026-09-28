@@ -1,0 +1,66 @@
+{
+  "kind": "UNIFIED_U1_SCORING_CONTRACT",
+  "status": "PROSPECTIVE_NO_ANSWERS_SCORED",
+  "benchmark": "memsyco",
+  "source_commit": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+  "judge": {
+    "base_url": "http://127.0.0.1:7862/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 1024,
+    "timeout": 180,
+    "tool_mode": "native",
+    "max_calls": 12,
+    "enable_thinking": false
+  },
+  "judge_attempts": 1,
+  "automatic_retry": false,
+  "concurrency": 1,
+  "answer_freeze": "Freeze all attempted U1 answers and incomplete statuses with SHA256 before the first Judge request; score_case verifies exact answer-batch membership.",
+  "score_function": "milai_lab.runners.contextual_scoring.score_case",
+  "messages_function": "milai_lab.scorers.memsyco.judge_messages",
+  "response_format_function": "milai_lab.scorers.memsyco.judge_response_format",
+  "parse_function": "milai_lab.scorers.memsyco.parse_judge",
+  "aggregate_function": "milai_lab.scorers.memsyco.aggregate_track",
+  "source_sha256": {
+    "src/milai_lab/scorers/memsyco.py": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+    "src/milai_lab/runners/contextual_scoring.py": "4ac57a9f77f7ca5ccae7e3e5a04122500b3b41c9a39e8df246848fd08f7b4a12"
+  },
+  "score_order": {
+    "arms": [
+      "raw_dialogue",
+      "milai",
+      "milai_agent"
+    ],
+    "cases": "Exact smoke manifest order within each arm"
+  },
+  "failure_policy": {
+    "host_incomplete": "HOST_INCOMPLETE; success unknown; keep planned denominator; no fabricated answer or Judge call",
+    "judge_incomplete": "JUDGE_UNRESOLVED; success unknown; keep planned denominator; no repeat or prompt repair",
+    "normal_wrong_answer": "Retain original answer and native labels without changing inputs, rubric, method or order"
+  },
+  "runtime_gold_boundary": "EvaluationCase/gold/rubric exist only in the offline Root scoring process, after all method answers are frozen.",
+  "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "capacity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "context_tokens": 65536,
+    "output_tokens": 1024,
+    "batch_source_tokens": 6000,
+    "safety_tokens": 512,
+    "source_message_overhead_tokens": 32,
+    "related_reserve_tokens": 0,
+    "schema_reserve_tokens": 0,
+    "enable_thinking": false
+  },
+  "limits": [
+    "Local same-family Qwen Judge; model-specific self-evaluation bias remains.",
+    "Judge JSON-schema transport is the existing pinned Lab adaptation; native rubric and parser are preserved.",
+    "Six smoke cases are functional evidence, not independent U2 confirmation."
+  ]
+}

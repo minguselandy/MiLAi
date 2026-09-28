@@ -57,6 +57,7 @@ def _run_merit_arc(
     frozen_identity: dict[str, Any] | None = None,
     agent_factory: Callable[..., Any] | None = None,
     public_turn_callback: Callable[..., None] | None = None,
+    native_system_prompt: str | None = None,
 ) -> dict[str, Any]:
     selection, arc, native_tools, metrics, native_runner = arc_loader(selection_path)
     output.mkdir(parents=True, exist_ok=True)
@@ -85,7 +86,8 @@ def _run_merit_arc(
                                            native_tools.TOOL_FUNCS)
     journal = BusinessActionJournal(output / "business-journal.json",
                                     [item.name for item in business_tools])
-    environment_rules = native_runner.SYSTEM_PROMPT.split("{memory_block}", 1)[0].strip()
+    environment_rules = (native_system_prompt or native_runner.SYSTEM_PROMPT).split(
+        "{memory_block}", 1)[0].strip()
     agent_kwargs: dict[str, Any] = {
         "business_call_wrapper": journal, "environment_rules": environment_rules,
         "observer": observer}

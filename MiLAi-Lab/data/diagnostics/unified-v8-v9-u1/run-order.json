@@ -1,0 +1,262 @@
+{
+  "kind": "UNIFIED_U1_PROSPECTIVE_ORDER",
+  "status": "ORDER_FIXED_INPUT_AND_SOURCE_FREEZE_PENDING",
+  "phase": "U1_FUNCTIONAL_NATIVE_SMOKE",
+  "runs": [
+    {
+      "key": "memsyco-raw_dialogue",
+      "benchmark": "memsyco",
+      "arm": "raw_dialogue",
+      "group": "smoke",
+      "run_id": "unified-u1-memsyco-raw_dialogue-r1",
+      "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/memsyco-raw_dialogue",
+      "prepared_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/memsyco-raw_dialogue-prepared.json",
+      "python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python"
+    },
+    {
+      "key": "memsyco-milai",
+      "benchmark": "memsyco",
+      "arm": "milai",
+      "group": "smoke",
+      "run_id": "unified-u1-memsyco-milai-r1",
+      "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/memsyco-milai",
+      "prepared_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/memsyco-milai-prepared.json",
+      "python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python"
+    },
+    {
+      "key": "memsyco-milai_agent",
+      "benchmark": "memsyco",
+      "arm": "milai_agent",
+      "group": "smoke",
+      "run_id": "unified-u1-memsyco-milai_agent-r1",
+      "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/memsyco-milai_agent",
+      "prepared_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/memsyco-milai_agent-prepared.json",
+      "python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+      "formation_root": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/memsyco-milai"
+    },
+    {
+      "key": "merit-no_memory",
+      "benchmark": "merit",
+      "arm": "no_memory",
+      "group": "smoke",
+      "run_id": "unified-u1-merit-no_memory-r1",
+      "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/merit-no_memory",
+      "prepared_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/merit-no_memory-prepared.json",
+      "python": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/native-transport/venv/bin/python"
+    },
+    {
+      "key": "merit-native_full_replay_tail60000",
+      "benchmark": "merit",
+      "arm": "native_full_replay_tail60000",
+      "group": "smoke",
+      "run_id": "unified-u1-merit-native_full_replay_tail60000-r1",
+      "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/merit-native_full_replay_tail60000",
+      "prepared_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/merit-native_full_replay_tail60000-prepared.json",
+      "python": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/native-transport/venv/bin/python"
+    },
+    {
+      "key": "merit-milai",
+      "benchmark": "merit",
+      "arm": "milai",
+      "group": "smoke",
+      "run_id": "unified-u1-merit-milai-r1",
+      "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/merit-milai",
+      "prepared_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u1-native-r1/merit-milai-prepared.json",
+      "python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python"
+    }
+  ],
+  "jobs": [
+    {
+      "ordinal": 1,
+      "run_key": "memsyco-raw_dialogue",
+      "job_id": "mso_hard_000072"
+    },
+    {
+      "ordinal": 2,
+      "run_key": "memsyco-raw_dialogue",
+      "job_id": "mso_hard_000024"
+    },
+    {
+      "ordinal": 3,
+      "run_key": "memsyco-raw_dialogue",
+      "job_id": "v11_000865"
+    },
+    {
+      "ordinal": 4,
+      "run_key": "memsyco-raw_dialogue",
+      "job_id": "v11_000504"
+    },
+    {
+      "ordinal": 5,
+      "run_key": "memsyco-raw_dialogue",
+      "job_id": "rec_gen_0021"
+    },
+    {
+      "ordinal": 6,
+      "run_key": "memsyco-raw_dialogue",
+      "job_id": "rec_gen_0017"
+    },
+    {
+      "ordinal": 7,
+      "run_key": "memsyco-milai",
+      "job_id": "mso_hard_000072"
+    },
+    {
+      "ordinal": 8,
+      "run_key": "memsyco-milai",
+      "job_id": "mso_hard_000024"
+    },
+    {
+      "ordinal": 9,
+      "run_key": "memsyco-milai",
+      "job_id": "v11_000865"
+    },
+    {
+      "ordinal": 10,
+      "run_key": "memsyco-milai",
+      "job_id": "v11_000504"
+    },
+    {
+      "ordinal": 11,
+      "run_key": "memsyco-milai",
+      "job_id": "rec_gen_0021"
+    },
+    {
+      "ordinal": 12,
+      "run_key": "memsyco-milai",
+      "job_id": "rec_gen_0017"
+    },
+    {
+      "ordinal": 13,
+      "run_key": "memsyco-milai_agent",
+      "job_id": "mso_hard_000072"
+    },
+    {
+      "ordinal": 14,
+      "run_key": "memsyco-milai_agent",
+      "job_id": "mso_hard_000024"
+    },
+    {
+      "ordinal": 15,
+      "run_key": "memsyco-milai_agent",
+      "job_id": "v11_000865"
+    },
+    {
+      "ordinal": 16,
+      "run_key": "memsyco-milai_agent",
+      "job_id": "v11_000504"
+    },
+    {
+      "ordinal": 17,
+      "run_key": "memsyco-milai_agent",
+      "job_id": "rec_gen_0021"
+    },
+    {
+      "ordinal": 18,
+      "run_key": "memsyco-milai_agent",
+      "job_id": "rec_gen_0017"
+    },
+    {
+      "ordinal": 19,
+      "run_key": "merit-no_memory",
+      "job_id": "arc5-000"
+    },
+    {
+      "ordinal": 20,
+      "run_key": "merit-no_memory",
+      "job_id": "arc6-000"
+    },
+    {
+      "ordinal": 21,
+      "run_key": "merit-no_memory",
+      "job_id": "d2-arc7-000"
+    },
+    {
+      "ordinal": 22,
+      "run_key": "merit-no_memory",
+      "job_id": "d2-arc8-000"
+    },
+    {
+      "ordinal": 23,
+      "run_key": "merit-no_memory",
+      "job_id": "d3-arc9-000"
+    },
+    {
+      "ordinal": 24,
+      "run_key": "merit-no_memory",
+      "job_id": "d3-arc10-000"
+    },
+    {
+      "ordinal": 25,
+      "run_key": "merit-native_full_replay_tail60000",
+      "job_id": "arc5-000"
+    },
+    {
+      "ordinal": 26,
+      "run_key": "merit-native_full_replay_tail60000",
+      "job_id": "arc6-000"
+    },
+    {
+      "ordinal": 27,
+      "run_key": "merit-native_full_replay_tail60000",
+      "job_id": "d2-arc7-000"
+    },
+    {
+      "ordinal": 28,
+      "run_key": "merit-native_full_replay_tail60000",
+      "job_id": "d2-arc8-000"
+    },
+    {
+      "ordinal": 29,
+      "run_key": "merit-native_full_replay_tail60000",
+      "job_id": "d3-arc9-000"
+    },
+    {
+      "ordinal": 30,
+      "run_key": "merit-native_full_replay_tail60000",
+      "job_id": "d3-arc10-000"
+    },
+    {
+      "ordinal": 31,
+      "run_key": "merit-milai",
+      "job_id": "arc5-000"
+    },
+    {
+      "ordinal": 32,
+      "run_key": "merit-milai",
+      "job_id": "arc6-000"
+    },
+    {
+      "ordinal": 33,
+      "run_key": "merit-milai",
+      "job_id": "d2-arc7-000"
+    },
+    {
+      "ordinal": 34,
+      "run_key": "merit-milai",
+      "job_id": "d2-arc8-000"
+    },
+    {
+      "ordinal": 35,
+      "run_key": "merit-milai",
+      "job_id": "d3-arc9-000"
+    },
+    {
+      "ordinal": 36,
+      "run_key": "merit-milai",
+      "job_id": "d3-arc10-000"
+    }
+  ],
+  "actual_http_concurrency": 1,
+  "required_before_execution": [
+    "Publish adapter source and complete necessary engineering checks",
+    "Generate complete six official MERIT arcs according to existing prospective policy and pin exact byte hashes",
+    "Publish input manifests and prospective protocol",
+    "Prepare all six runs at one published HEAD; freeze environment, source, config, input, scorer, tools, state isolation and ledger",
+    "Verify actual Host/embedding readiness without generation; Root alone executes"
+  ],
+  "judge_order": "After all 36 Host jobs have completed or explicit failure status, freeze MemSyco answers then use scoring-contract.json in arm/manifest order.",
+  "normal_model_failure": "Retain and continue safe remaining cases in fixed order. No replacement, prompt change or best-of retry.",
+  "engineering_failure": "Retain whole attempt, effects and costs. Pause affected dependent path; fix only with new published source and explicit rerun identity/scope.",
+  "isolation": "Fresh runtime roots, run/arm/user-scoped namespaces/checkpoints, independent world per arm+arc; world continuous within each full arc. Agent-query extension explicitly reuses only its corresponding read-only formed snapshot."
+}

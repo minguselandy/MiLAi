@@ -183,6 +183,13 @@ R1 新增 **1 generation / 1,455 generation tokens / 1 embedding / 31 embedding 
 R1费用／副作用／未运行项保留，R2全新namespace，不拼接轨迹。MCP程序取材不冒充Host自主检索。
 截至R2，本Goal含失败新增5 generation／7613 tokens、2 embedding／62 tokens；连续账本3306／4212816／23632。
 仅工程接线目标通过；完整原生U1、独立U2及适用U3—U6仍未完成，当前继续原生adapter开发。
+[U1协议草稿](MILAI_UNIFIED_U1_PROTOCOL_20260928.md)已记录原题范围、原生参考、归档形成权限、共同reader与单臂Agent扩展、
+模型／scorer／成本合同。Sol已完成两个薄runner及共享MCP backend；Luna已在[独立环境](../data/manifests/unified-v8-v9-native-reference-env-20260928.json)
+安装72个带哈希锁定包并通过依赖／真实模块导入检查，保留历史foundation和主锁。
+原生reference使用Python3.12.11／LiteLLM1.100.1／OpenAI2.54.0，MiLAi保持原环境；差异明确进入identity。
+现已完成[U1工程窄检查](../data/manifests/unified-v8-v9-u1-engineering-checks-20260928.json)：29个唯一目标、0skip；
+实际SDK六路径dry-run、六CLI零模型prepare、必要单次离线构建通过。源码已停笔等待发布；Root核对15工程文件及46项制品哈希。
+完整MERIT输入或具体运行身份仍待冻结，当前没有开始原生benchmark模型调用。
 
 ## 全范围需求与当前状态
 

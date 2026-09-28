@@ -77,7 +77,8 @@ class MemoryMCP:
 
     def __init__(self, store: BaseStore, run_id: str, arm_id: str, user_id: str, *,
                  emit: Callable[[dict[str, Any]], None] | None = None,
-                 history_tool: BaseTool | None = None, timeout: float = 180) -> None:
+                 history_tool: BaseTool | None = None, timeout: float = 180,
+                 read_only: bool = False) -> None:
         # Local import avoids a module cycle with build_agent's optional peer parameter.
         from milai_lab.baselines.langmem_agent import create_memory_read_tool
 
@@ -86,7 +87,11 @@ class MemoryMCP:
         self.namespace = ("langmem", run_id, arm_id, user_id)
         self.emit = emit
         self.timeout = timeout
-        local = [create_strict_manage_memory_tool(self.namespace, store),
+        if type(read_only) is not bool:
+            raise ValueError("MCP_MEMORY_READ_ONLY_INVALID")
+        self.read_only = read_only
+        local = [*([] if read_only else [
+                     create_strict_manage_memory_tool(self.namespace, store)]),
                  create_search_memory_tool(namespace=self.namespace, store=store),
                  create_memory_read_tool(self.namespace, store)]
         if history_tool is not None:

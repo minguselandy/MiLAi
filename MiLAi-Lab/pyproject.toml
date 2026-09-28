@@ -73,6 +73,7 @@ include = [
   "/data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json",
   "/data/locks/milai-application-v25.lock.json",
   "/data/locks/milai-external-memory-v26.lock.json",
+  "/data/locks/unified-v8-v9-native-transport-20260928.requirements.txt",
   "/data/manifests",
   "/docs",
   "/product.lock.json",

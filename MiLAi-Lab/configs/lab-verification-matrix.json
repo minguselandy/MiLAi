@@ -28,7 +28,10 @@
     "src/milai_lab/runners/fixed_state_update.py",
     "src/milai_lab/runners/shared_record_use.py",
     "src/milai_lab/runners/persistent_memory.py",
-    "src/milai_lab/datasets/merit.py"
+    "src/milai_lab/datasets/merit.py",
+    "src/milai_lab/providers/merit_metered.py",
+    "src/milai_lab/runners/memsyco_native.py",
+    "src/milai_lab/runners/merit_native.py"
   ],
   "foundation_tests": [
     "tests/unit/test_langmem_foundation.py",
@@ -45,7 +48,9 @@
     "tests/unit/test_fixed_state_update.py",
     "tests/unit/test_shared_record_use.py",
     "tests/unit/test_persistent_memory.py",
-    "tests/unit/test_langmem_application.py"
+    "tests/unit/test_langmem_application.py",
+    "tests/unit/test_unified_benchmarks.py",
+    "tests/unit/test_merit_native.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -63,13 +68,17 @@
     "tests/unit/test_shared_record_use.py",
     "tests/unit/test_persistent_memory.py",
     "tests/unit/test_langmem_application.py",
-    "tests/unit/test_external_memory_v26.py"
+    "tests/unit/test_external_memory_v26.py",
+    "tests/unit/test_unified_benchmarks.py",
+    "tests/unit/test_merit_native.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",
     "src/milai_lab/runners/mem0_identity.py"
   ],
-  "external_tests": ["tests/unit/test_external_memory_v26.py"],
+  "external_tests": [
+    "tests/unit/test_external_memory_v26.py"
+  ],
   "local_artifact_tests": [
     "tests/unit/test_contextual_merit_adapter.py::test_v8_selection_requires_declared_config_and_matching_freeze",
     "tests/unit/test_contextual_merit_adapter.py::test_pinned_prepare_preserves_native_tools_and_visible_memory_gate",
