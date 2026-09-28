@@ -2,27 +2,26 @@
 
 ## Current scope and authority
 
-The user created a new ACTIVE v3 Goal and explicitly confirmed
-[the actual NEXT_DEVELOPMENT v3 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v3.0.md).
-The objective's NEXT_IMPROVEMENT filename is absent; do not create an alias or rewrite it.
-Preserve the plan's original proposed-only bytes; execution authority is the new user Goal
-and confirmation. Follow the [v3 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V3_20260928.md).
+The user explicitly authorized the [NEXT_DEVELOPMENT v3 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v3.0.md).
+Its mandatory P0/P1/P2 execution and P6 reporting are now closed with Pivot/Stop; P3/P4/E6/P5
+were not triggered by their evidence gates. Follow the [v3 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V3_20260928.md)
+and [overall report](docs/MILAI_NEXT_DEVELOPMENT_V3_OVERALL_EXPERIMENT_REPORT_20260928.md).
+Do not start another run, wording variant, download or deployment from historical ACTIVE text.
+The actual thread Goal controls its completion marker; a later explicit user task can authorize new work.
+The research goal is not achieved and Product remains NO-GO.
 
-v2 is closed with Pivot at b848367; do not reopen it, rewrite failures/costs, or carry its
-untriggered N4/N6 as automatic obligations. v3 must execute P0/P1/P2, conditional P3/P4/P5
-according to the actual gates, and P6 reporting. Green source checks are not completion.
-Compare ordinary B0, one frozen responsibility B1, and optional mechanical result closure C.
-C cannot infer semantic saved, auto-write user text, invent receipts, or hide extra calls.
-Only one correction entry in the same Host/public-message capacity, with no business replay.
-Archive-access and Retained-memory are distinct common-arm contracts; audit history must
-not leak into retained Host inputs through source catalogs, tools or hidden caches.
+Preserve the original v3 plan's proposed-only bytes and absent NEXT_IMPROVEMENT filename; do not
+create an alias. v2 is closed at b848367. All old failures, costs, trees, C5 WIP and v27 draft remain.
+The v3 method is 2a7284bc; B0/B1/C are ordinary-memory recipes with common access, not old native B1.
+C only checks actual owner/turn operations, does not certify semantic saved, and remains opt-in
+for reproduction. The one correction consumes the original Host capacity and cannot replay business.
+Archive and Retained contracts remain distinct; audit history is not Host permission.
 
-Work only in the new `next-development-v3` worktree based on b848367 plus necessary root CI.
-Preserve all old trees, original C5 WIP and v27 draft. Root owns docs/data/rubrics/freezes/
-real HTTP/scoring; existing Sol xhigh owns source/config/CI/necessary checks; Luna high owns
-Git publication and authorized resource downloads. No new downloads are currently required.
-Astra is for a concrete difficult conflict only. No automatic merges or main rewrites.
-A new explicit stop overrides ongoing work. The research goal is not yet achieved; Product NO-GO.
+Current closeout changes are Root documentation/results and Luna Git publication only. No automatic
+merge, main rewrite or old-tree cleanup. Future authorized development stays in MiLAi-Lab plus
+necessary root CI, with Root owning docs/data/real HTTP/scoring, one matched Sol xhigh source owner,
+and Luna high Git/required downloads. Astra is only for a concrete difficult conflict.
+A new explicit stop overrides ongoing work.
 
 ## Stable boundaries
 
