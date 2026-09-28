@@ -36,6 +36,24 @@ canonical memory state.
 
 ## Required checks
 
+Latest scope: the user explicitly activated execution of the
+[next improvement plan v1.0](docs/MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md).
+The actual Goal is ACTIVE. Its planning-time “not authorization” text and the historical
+pause below do not override this new instruction. Follow the
+[current execution record](docs/MILAI_NEXT_IMPROVEMENT_EXECUTION_GOAL.md).
+Start WP0: isolate main/PR51 validation, give every optional module a real checking owner,
+then fix CI without hiding errors. Keep C0/C1 engineering separate from CRUD/behavior work.
+One existing Sol xhigh owns source/config/CI; Root owns docs, fixtures/rubrics, freezes,
+all real model calls and accounting; Luna high owns dependency downloads and Git publication.
+Retain original plan bytes, historical evidence, ledger and v27 draft. Product remains NO-GO.
+No automatic PR merge, shared deployment change, model download or broad benchmark from this
+activation alone. Complete reviewable code/checks first; do not use old pauses as blockers.
+Latest user closeout instruction: after this authorized task ends, PAUSE the actual Goal,
+produce an overall experiment report, and publish it to GitHub through Luna high. This
+does not mean pause now or declare the broader research complete after WP0.
+
+Historical closeout follows (superseded only for the new authorized plan):
+
 Latest user instruction has been fulfilled for the current E2 online slice: all four frozen
 trajectories /22 messages on 0c5f027 are terminal, and the actual Goal is now PAUSED.
 Only final evidence reporting and authorized Luna high Git publication remain. Do not start

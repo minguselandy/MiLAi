@@ -811,9 +811,8 @@ def test_merit_local_capacity_keeps_native_result_and_continues_only_that_error(
                                  "selection_sha256", "config_sha256", "arc_sha256"}
 
 
-def test_frozen_merit_loader_and_three_arm_construction(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
-) -> None:
+@pytest.mark.local_artifacts
+def test_frozen_merit_loader_and_three_arm_construction(tmp_path: Path) -> None:
     selection_path = LAB / "data/manifests/contextual-memory-v7-e0-selection-final.json"
     selection, arc, _, _, _ = load_frozen_arc(selection_path)
     assert arc.arc_id == selection["arc_id"] and len(arc.episodes) == 5
@@ -831,6 +830,82 @@ def test_frozen_merit_loader_and_three_arm_construction(
     with pytest.raises(ValueError, match="MERIT_ARC_IDENTITY_MISMATCH"):
         load_frozen_arc(changed_path)
 
+
+def test_frozen_merit_loader_checks_public_synthetic_source_and_arc(tmp_path: Path) -> None:
+    root = tmp_path / "synthetic-merit"
+    package = root / "merit"
+    package.mkdir(parents=True)
+    (package / "__init__.py").write_text("", encoding="utf-8")
+    (package / "arcs.py").write_text('''
+from dataclasses import dataclass
+from types import SimpleNamespace
+
+@dataclass
+class Task:
+    dependent: bool
+    user_messages: list[str]
+
+@dataclass
+class Episode:
+    task: Task
+
+@dataclass
+class Arc:
+    arc_id: str
+    seed: int
+    episodes: list[Episode]
+
+    def make_world(self):
+        return SimpleNamespace(dump_json=lambda: '{"fixture":"world"}',
+                               conn=SimpleNamespace(close=lambda: None))
+
+def generate_suite(**_arguments):
+    return [Arc("public-fixture-arc", 0, [Episode(Task(False, ["hello"]))])]
+''', encoding="utf-8")
+    for name in ("tools.py", "metrics.py", "runner.py"):
+        (package / name).write_text("", encoding="utf-8")
+    arc_bytes = json.dumps({
+        "arc_id": "public-fixture-arc", "seed": 0,
+        "episodes": [{"task": {"dependent": False, "user_messages": ["hello"]}}],
+    }, sort_keys=True, separators=(",", ":")).encode()
+    world_bytes = b'{"fixture":"world"}'
+    arc_path = tmp_path / "arc.json"
+    world_path = tmp_path / "world.json"
+    arc_path.write_bytes(arc_bytes)
+    world_path.write_bytes(world_bytes)
+    selection = {
+        "dataset": "MERIT", "source_commit":
+            "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+        "generator": "merit.arcs.generate_suite",
+        "generator_arguments": {"n_arcs": 1, "episodes_per_arc": 5,
+                                "dep_ratio": 0.5, "base_seed": 0,
+                                "difficulty": "hard"},
+        "external_root": str(root),
+        "source_sha256": {
+            str(path.relative_to(root)): sha256_file(path)
+            for path in sorted(package.glob("*.py"))
+        },
+        "private_artifacts": {
+            "arc": str(arc_path), "arc_sha256": hashlib.sha256(arc_bytes).hexdigest(),
+            "initial_world": str(world_path),
+            "initial_world_sha256": hashlib.sha256(world_bytes).hexdigest(),
+        },
+        "arc_id": "public-fixture-arc", "episode_count": 1,
+        "dependent_episode_count": 0, "user_message_count": 1,
+    }
+    selection_path = tmp_path / "selection.json"
+    selection_path.write_text(json.dumps(selection), encoding="utf-8")
+    loaded, arc, _, _, _ = load_frozen_arc(selection_path)
+    assert loaded == selection and arc.arc_id == "public-fixture-arc"
+    assert load_exposed_arc(selection_path)[1].arc_id == arc.arc_id
+    (package / "arcs.py").write_text((package / "arcs.py").read_text() + "\n# changed\n")
+    with pytest.raises(ValueError, match=r"MERIT_SOURCE_CHANGED:merit/arcs\.py"):
+        load_frozen_arc(selection_path)
+
+
+def test_three_arm_projection_construction_without_private_arc(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
     monkeypatch.syspath_prepend(str(LAB / "tools"))
     from run_milai_ser_v23 import projection_for_arm
 

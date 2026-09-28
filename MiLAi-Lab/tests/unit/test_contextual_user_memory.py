@@ -547,7 +547,7 @@ def test_ordinary_write_branches_require_bound_subject_and_full_relations() -> N
     ]
     assert set(delta["properties"]) == {
         "op", "basis_mode", "target_ref", "content_patch", "source_delta",
-        "dependency_delta",
+        "dependency_delta", "literal_uses",
     }
     assert list(create["properties"])[:5] == [
         "op",

@@ -43,6 +43,7 @@ def pinned_inputs(tmp_path: Path) -> tuple[Any, ...]:
     )
 
 
+@pytest.mark.local_artifacts
 def test_v8_selection_requires_declared_config_and_matching_freeze(tmp_path: Path) -> None:
     config_path = merit_adapter.LAB / "configs/contextual-memory-v8-off.json"
     selection = read_json(merit_adapter.DEFAULT_SELECTION)
@@ -84,6 +85,7 @@ def test_v8_selection_requires_declared_config_and_matching_freeze(tmp_path: Pat
         merit_adapter.prepared_inputs(selected_path, config_path, freeze_path)
 
 
+@pytest.mark.local_artifacts
 def test_pinned_prepare_preserves_native_tools_and_visible_memory_gate(tmp_path: Path) -> None:
     selection, _, identity, arc, native_tools, _, _, diagnostic, _ = pinned_inputs(tmp_path)
     assert (
@@ -157,6 +159,7 @@ def test_prefetched_current_memory_counts_only_delivered_projected_bodies() -> N
     ]
 
 
+@pytest.mark.local_artifacts
 def test_arc_interrupts_on_incomplete_public_turn_without_closing_or_scoring(
     tmp_path: Path,
     monkeypatch: Any,
@@ -204,6 +207,7 @@ def test_arc_interrupts_on_incomplete_public_turn_without_closing_or_scoring(
     assert interrupted["host_results"][0]["status"] == "incomplete"
 
 
+@pytest.mark.local_artifacts
 def test_interruption_preserves_live_world_session_and_unscored_status(
     tmp_path: Path,
     monkeypatch: Any,

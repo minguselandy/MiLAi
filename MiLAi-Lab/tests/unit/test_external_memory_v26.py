@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib
 import json
 import os
 from pathlib import Path
@@ -128,11 +129,10 @@ def test_official_mem0_add_search_sparse_entities_and_restart(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("MEM0_TELEMETRY", "False")
-    pytest.importorskip("mem0")
-    pytest.importorskip("spacy")
+    importlib.import_module("mem0")
+    importlib.import_module("spacy")
     cache = Path("artifacts/external-memory-v26/cache/fastembed").resolve()
-    if not cache.exists():
-        pytest.skip("The isolated Mem0 sparse-model cache is not installed")
+    assert cache.is_dir(), "The isolated Mem0 sparse-model cache is not installed"
     monkeypatch.setenv("FASTEMBED_CACHE_PATH", str(cache))
     monkeypatch.setenv("HF_HUB_OFFLINE", "1")
     requests: list[dict[str, Any]] = []

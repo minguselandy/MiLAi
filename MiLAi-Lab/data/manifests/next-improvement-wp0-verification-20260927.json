@@ -1,0 +1,269 @@
+{
+  "kind": "MILAI_NEXT_IMPROVEMENT_WP0_VERIFICATION_V1",
+  "status": "IN_PROGRESS_INITIAL_REMOTE_CORE_AND_FOUNDATION_FAILED_EXTERNAL_PASSED",
+  "base_main": "9515017a5dfaba6b6e306fa778fd20f4383b6e35",
+  "baseline_pr51_head": "055a0769c1ce75d128d6459ee25773587d9003ae",
+  "original_plan_sha256": "e407a8ac577b2fb184b6e4386efb79536bcf75007252c8006e96eb296fa3cbbb",
+  "verification_matrix": "configs/lab-verification-matrix.json",
+  "environment": {
+    "python": "3.11.13",
+    "pytest": "8.4.2",
+    "uv": "0.8.3",
+    "uv_lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1"
+  },
+  "baseline_diagnosis": {
+    "main_mypy": {
+      "errors": 14,
+      "files_with_errors": 7,
+      "direct_checked_files": 110
+    },
+    "pr51_mypy": {
+      "errors": 14,
+      "files_with_errors": 7,
+      "direct_checked_files": 110
+    },
+    "local_evidence": "tool receipts; no separate log file was saved",
+    "old_remote_fast_run": 36318522281,
+    "old_remote_full_run": 36318522284,
+    "old_remote_full_conclusion": "skipped"
+  },
+  "source_coverage": {
+    "active_sources": 143,
+    "core_direct": 22,
+    "foundation_discovery": 110,
+    "foundation_explicit": 36,
+    "excluded_recovered": 33,
+    "discovery_explicit_overlap": 3,
+    "external_direct": 2,
+    "pr51_protocol_absent_on_main": true
+  },
+  "checks": {
+    "pr51_locked_core_protocol": {
+      "status": "PASS",
+      "passed": 71,
+      "golden_differential_cases_included": 35,
+      "evidence": "tool receipt, not a new model sample"
+    },
+    "core_public": {
+      "status": "PASS_WITH_DECLARED_SKIPS",
+      "collected": 5198,
+      "passed": 5171,
+      "skipped": 19,
+      "deselected": 8,
+      "seconds": 756.94,
+      "log_sha256": "db24041f64b5e183fdb54713297e962e40f5b7d50cd89650b16b10320044b6f1",
+      "skip_reasons": {
+        "historical_pinned_host_sdk_wheel": 1,
+        "external_tokenizer_and_model_evidence": 18
+      },
+      "deselection_reasons": {
+        "local_private_artifacts": 4,
+        "historical_regression": 4
+      }
+    },
+    "foundation": {
+      "status": "PASS",
+      "passed": 144,
+      "skipped": 0,
+      "log_sha256": "619a5fc0168cd953059949ee05281f334442aa18a097fc14e9511fc3c2f6a338"
+    },
+    "external": {
+      "status": "PASS",
+      "passed": 4,
+      "skipped": 0,
+      "log_sha256": "5dbd1642816649afeaccbe5acce45b85725ed9dac11507d1d66313815e27fca8"
+    },
+    "historical_private_assets_local": {
+      "status": "PASS",
+      "passed": 4,
+      "deselected": 1,
+      "public_ci": "NOT_RUN_PRIVATE_ASSETS_EXPLICITLY_DESELECTED",
+      "log_sha256": "25b570071a850f74ceb0dd446e5eea3ce07ab8adaafdf5b5af820f449341b43b"
+    },
+    "build": {
+      "status": "FINAL_BUILD_AFTER_REPORT_BYTE_FREEZE",
+      "result_location": "GitHub publication receipt and ignored build receipt; do not embed a hash of an sdist into its own included manifest"
+    },
+    "new_remote_fast": {
+      "status": "INITIAL_CORE_AND_FOUNDATION_FAILED_EXTERNAL_PASSED",
+      "run_id": 36324207954,
+      "commit": "64741a6475fbc30ccabeffd3ba782de9763d0d98",
+      "failure_jobs": [
+        108633760931,
+        108633760963
+      ],
+      "failure_log_sha256": {
+        "108633760931": "882c6c07276006879ed61a9219b6415178023cf87f49f8bbb3aa35102d18a50c",
+        "108633760963": "5e2413c1b3e7cb300fa0feaa1e0f0d58549189e8e3f257a12b902fde1b5e951f"
+      }
+    },
+    "new_remote_full": {
+      "status": "INITIAL_CORE_AND_FOUNDATION_FAILED_EXTERNAL_PASSED",
+      "run_id": 36324207975,
+      "commit": "64741a6475fbc30ccabeffd3ba782de9763d0d98",
+      "failure_jobs": [
+        108633733529,
+        108633733537
+      ],
+      "failure_log_sha256": {
+        "108633733529": "f797fad3a5dedd1ea5f73d6b4f3da757871bc90bb9a1cc2e0ab0732f0c5480ea",
+        "108633733537": "854ae9b9040883a0cfc8d8cb89aaac97e5f1568b7ec68e8b7ebaef16e092fb7f"
+      }
+    },
+    "historical_sdk_local": {
+      "status": "PASS",
+      "nodeid": "tests/unit/test_v0214_sdk_host.py::test_installed_sdk_repeated_contention_and_transport_receipts",
+      "wheel_sha256": "58e5d82a1e82ccff1111bea28184ac2958ea62028cf2698e8ef1fb273cab38d4",
+      "public_ci": "NOT_RUN_HISTORICAL_WHEEL_OUTSIDE_GIT",
+      "current_checkout_wheel_is_not_the_historical_pin": true,
+      "passed": 1,
+      "seconds": 2.4,
+      "log_sha256": "c9a4802b1e58c1e28ee37828e22ea5a5bce4aadd9dff73452d51ac965fd37f94"
+    },
+    "core_mypy": {
+      "status": "PASS",
+      "log_sha256": "5ca59a2361304496c36048048a43aa6f41eb23e74111d16719b962637888fc08"
+    },
+    "foundation_discovery_mypy": {
+      "status": "PASS",
+      "log_sha256": "c68f50a89794521a4d43d1354657bb2b465570f85b8cf4a226fc9f9fa7200852"
+    },
+    "foundation_explicit_mypy": {
+      "status": "PASS",
+      "log_sha256": "60f28b94716a9681d0ca533e2fe42680ae0961635c17d3110675fc53df4ea115"
+    },
+    "external_mypy": {
+      "status": "PASS",
+      "log_sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8"
+    },
+    "all_ruff": {
+      "status": "PASS",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "boundary": {
+      "status": "PASS",
+      "log_sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3"
+    },
+    "tools_boundary": {
+      "status": "PASS",
+      "log_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
+    },
+    "archive": {
+      "status": "PASS",
+      "log_sha256": "4cd69276b3d4bfd5f55de5826b0f4ec596acaa14810e16ddfeacc3e930e8367a"
+    },
+    "matrix": {
+      "status": "PASS",
+      "log_sha256": "aa991243ddc2ff19ae37a7df12b849d3d7e20564a322f295ed1941e44a3d7cd2"
+    },
+    "matrix_tool_mypy": {
+      "status": "PASS",
+      "files": 1,
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    "asset_tool_mypy": {
+      "status": "PASS",
+      "files": 1,
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    }
+  },
+  "assets": {
+    "preparation_receipt_sha256": "b3df4fe675f35d4d0873759143af95c1cc55de49e917445624c885d41a9aac44",
+    "spacy_model": "en_core_web_sm 3.8.0",
+    "spacy_verified_files": 26,
+    "bm25_revision": "22b8d2af71a76161e18dd432d2cee0eefa66e412",
+    "bm25_verified_files": 20,
+    "bm25_source": "copied existing local cache",
+    "new_llm_deployment": false
+  },
+  "retained_failures": [
+    "core optional-import collection failure",
+    "core historical private-freeze FileNotFoundError",
+    "stale exact-schema assertion missing pre-existing literal_uses",
+    "remote core test_contextual_v9_prepare requires absent absolute-path MERIT checkout",
+    "remote foundation test_freshness_projection requires absent absolute-path MERIT checkout"
+  ],
+  "experiment_delta": {
+    "generation_calls": 0,
+    "generation_tokens": 0,
+    "embedding_tokens": 0
+  },
+  "continuous_ledger": {
+    "generation_calls": 2768,
+    "generation_tokens": 3420333,
+    "embedding_tokens": 18746,
+    "sha256": "a9d4c681e2bee395c170a4672b4895a442522df47951c9a043e9f6b3a32e3580"
+  },
+  "research_goal_complete": false,
+  "task_end_instruction": "pause the actual Goal; produce and publish an overall experiment report via Luna high",
+  "core_skipped_artifact_owners": [
+    {
+      "path": "tests/unit/test_v0214_sdk_host.py",
+      "line": 37,
+      "count": 1,
+      "owner": "preserved public SDK wheel; local pinned test"
+    },
+    {
+      "path": "tests/unit/test_workspace_continuation.py",
+      "line": 26,
+      "count": 6,
+      "owner": "external V0213 tokenizer evidence"
+    },
+    {
+      "path": "tests/unit/test_workspace_continuation.py",
+      "line": 220,
+      "count": 1,
+      "owner": "external tokenizer/model materials"
+    },
+    {
+      "path": "tests/unit/test_workspace_handoff_ablation.py",
+      "line": 70,
+      "count": 5,
+      "owner": "external V0213 tokenizer evidence"
+    },
+    {
+      "path": "tests/unit/test_workspace_task_a.py",
+      "line": 68,
+      "count": 6,
+      "owner": "external V0213 tokenizer evidence"
+    }
+  ],
+  "followup_asset_dependency_repair": {
+    "status": "TARGETED_CHECKS_PASSED_ISOLATED_CORE_AND_NEW_REMOTE_CI_PENDING",
+    "runtime_changed": false,
+    "historical_manifests_changed": false,
+    "local_artifact_collected_nodes": 11,
+    "public_v9_prepare": {
+      "passed": 1,
+      "deselected": 6
+    },
+    "public_freshness": {
+      "passed": 23,
+      "deselected": 1
+    },
+    "additional_historical_assets_local": {
+      "passed": 7,
+      "deselected": 24
+    },
+    "synthetic_source_is_official_merit": false,
+    "target_static_and_matrix": "PASS",
+    "isolated_core": {
+      "status": "IN_PROGRESS",
+      "isolation": "child user/mount namespace binds local MERIT directory to empty temporary directory; parent unchanged"
+    },
+    "remote_repair_ci": "PENDING",
+    "local_rebuild": "NOT_REQUIRED_TESTS_AND_CI_ONLY; earlier distribution hashes belong to 64741a6",
+    "isolated_public_freshness": {
+      "passed": 23,
+      "deselected": 1,
+      "seconds": 7.32,
+      "log_sha256": "f99b23552aea2c525783a100db978f17c73c918e7436815eb78a86b7f3b564ca"
+    },
+    "local_artifact_collection": {
+      "selected_nodes": 11,
+      "total_nodes": 36,
+      "deselected": 25
+    },
+    "targeted_evidence": "tool receipts; no separate disk logs; no repetition to manufacture logs"
+  }
+}

@@ -179,12 +179,26 @@ jobs:
       - name: Run Lab static checks
         working-directory: MiLAi-Lab
         run: |
-          uv run ruff check src tests tools
-          uv run mypy src/milai_lab
+          uv run --no-sync python tools/check_verification_matrix.py
+          uv run --no-sync ruff check src tests tools
+          uv run --no-sync mypy src/milai_lab/contracts src/milai_lab/analysis src/milai_lab/harness src/milai_lab/scorers src/milai_lab/boundary.py src/milai_lab/tools_boundary.py
+          if test -f tests/unit/test_lsa_controller_contract.py; then
+            uv run --no-sync mypy src/milai_lab/methods/local_state_attention/protocol.py
+            uv run --no-sync pytest -q tests/unit/test_lsa_controller_contract.py
+          fi
       - name: Run Lab pytest diagnostic
         working-directory: MiLAi-Lab
-        run: >-
-          uv run pytest -q --maxfail=1 --tb=long --durations=50 -m 'not regression'
+        run: |
+          uv run --no-sync pytest -q --maxfail=1 --tb=long --durations=50 -m 'not regression and not local_artifacts' \
+          --ignore=tests/unit/test_langmem_foundation.py \
+          --ignore=tests/unit/test_langmem_provenance.py \
+          --ignore=tests/unit/test_freshness_projection.py \
+          --ignore=tests/unit/test_milai_m1_v18.py \
+          --ignore=tests/unit/test_milai_odr.py \
+          --ignore=tests/unit/test_local_state_attention.py \
+          --ignore=tests/unit/test_local_state_attention_read_probe.py \
+          --ignore=tests/unit/test_langmem_application.py \
+          --ignore=tests/unit/test_external_memory_v26.py \
           --junitxml="${{ github.workspace }}/lab-test-results/junit.xml"
       - name: Upload Lab pytest evidence
         if: always()
@@ -197,7 +211,7 @@ jobs:
       - name: Replay filtered legacy snapshot
         if: success()
         working-directory: MiLAi-Lab
-        run: uv run python tools/check_legacy_archive.py
+        run: uv run --no-sync python tools/check_legacy_archive.py
       - name: Build clean Lab distributions
         if: success()
         working-directory: MiLAi-Lab
@@ -220,10 +234,35 @@ jobs:
       - name: Check LangMem foundation boundary and adapter
         working-directory: MiLAi-Lab
         run: |
+          uv run --no-sync python -c 'import langchain_core, langgraph, langmem, openai'
           uv run --no-sync milai-lab-check-boundary
           uv run --no-sync ruff check src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py tools/run_langmem_foundation.py tools/prepare_langmem_foundation.py tools/summarize_langmem_foundation.py tests/unit/test_langmem_foundation.py
           uv run --no-sync mypy src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py
           uv run --no-sync pytest -q tests/unit/test_langmem_foundation.py
+          uv run --no-sync mypy src/milai_lab
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/datasets/merit.py
+          uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py tests/unit/test_local_state_attention_read_probe.py tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
+
+  lab-external:
+    name: Lab locked external adapter
+    needs: boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.3"
+          enable-cache: true
+      - name: Verify Mem0 adapter with locked optional dependencies
+        working-directory: MiLAi-Lab
+        run: |
+          uv sync --frozen --dev --group baseline-langmem --group external-mem0 --python 3.11
+          uv pip install --python .venv/bin/python --no-deps https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+          HF_HUB_DISABLE_TELEMETRY=1 uv run --no-sync python tools/prepare_external_memory_v26_assets.py --prepare
+          uv run --no-sync python -c 'import langmem, mem0, spacy'
+          uv run --no-sync mypy src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py
+          uv run --no-sync pytest -q tests/unit/test_external_memory_v26.py
 
   lab-langmem-provenance:
     name: Lab LangMem provenance B1
@@ -352,6 +391,7 @@ jobs:
         product-integrations,
         lab,
         lab-langmem-foundation,
+        lab-external,
         lab-milai-m1,
         lab-regression,
         archive,
