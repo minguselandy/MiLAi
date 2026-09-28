@@ -28,11 +28,11 @@ v5 head 两次 Fast `36393968381`、`36397917433` 均 success，Full `3639396833
 | 要求 | 必须取得的证据 | 当前状态 |
 | --- | --- | --- |
 | S0 / §7 | 旧 system/candidate、当前/历史、world/DELETE/临时/只读/多事项及费用原样保留，旧分归旧提交 | COMPLETE；159 源文件、14 公开证据、28 个 terminal jobs、131 个生成 ID、86 消息核平 |
-| S1 / §8、18、19、23.1–2 | 显式结构化请求对象/renderer/router；无序列化块搬运；old/new wire bytes、capacity/token、audit、原 graph 完全等价；独立源码发布 | IN_PROGRESS_DESIGN；只读定位实际集成点，尚未修改 runtime |
+| S1 / §8、18、19、23.1–2 | 显式结构化请求对象/renderer/router；无序列化块搬运；old/new wire bytes、capacity/token、audit、原 graph 完全等价；独立源码发布 | MECHANICAL_GATE_PASS；131实际请求、86审计、22条件/26阶段及27窄测通过；源码与本记录一同独立发布 |
 | S2 / §9、21、23.3 | 明确 Model/Audit 边界、冻结请求组件计量、每项删除依据与 trace 可恢复性，保留语义/ID/scope/业务正文 | NOT_STARTED；先完成 S1 门槛，再离线选择；10%–20% 为目标而非强行删数据的门槛 |
 | S3a / §10 | S1 机械等价后 2–4 个真实 smoke，所有成本计入 | NOT_RUN；不得在 S1 完成前调用模型 |
 | S3b / §10 | 若 S2 改 Model View，完整 12-script/156-obligation 暴露回归；任何退化先定位被删信息，不加 prompt 修分 | CONDITIONAL_NOT_RUN |
-| S4 / §11–12、17、23.4–5 | 12–16 个独立结构脚本、约 35–50 公开消息；十二任务族、quoted imperative/carrier 边界；显式≥98%、所需持久100%、无跨owner/重复业务/假保存/隐藏rubric失败 | NOT_RUN；这是主要效果验证，不能用旧 current/history 变体或 S3 回归替代 |
+| S4 / §11–12、17、23.4–5 | 12–16 个独立结构脚本、约 35–50 公开消息；十二任务族、quoted imperative/carrier 边界；显式≥98%、所需持久100%、无跨owner/重复业务/假保存/隐藏rubric失败 | DRAFT_INPUTS_NOT_FROZEN_NOT_RUN；Root草拟12 scripts/40消息与可见义务合同，待S1/S2/S3完成后冻结；不能用旧回归替代 |
 | S5 / §13 | 仅 S4 通过后，不改方法/prompt，另一模型家族 6–8 脚本覆盖六类边界 | CONDITIONAL_NOT_RUN；不同量化不算另一家族，开发 subagent 不算实验 Host |
 | S6 / §14 | S4 稳定后、最好已有 S5 确认，20–30 sessions 自然积累10–20独立事项，先正常 all，无人为压预算 | CONDITIONAL_NOT_RUN |
 | S7 / §15 | 实际阈值/容量触发后 all（可行时）对 ordinary query，命中、质量、全成本核对 | CONDITIONAL_NOT_TRIGGERED |
@@ -82,8 +82,14 @@ router 从该结构渲染每个候选并检查最终完整请求，原消息/che
 `BOUNDARY_PROTOCOL` 可拆职责但 S1 字节必须原样；system 库默认不变，v6 recipe 显式 current_request。
 
 等价证据覆盖 empty/all/query/attention-prepared、工具续接、UPDATE、DELETE、scope 和 C 历史兼容边界。
-Root 持有所有 131 条冻结 HTTP、实际 usage 和操作审计；Sol 的窄测须补真实 adapter/graph 接线，
-不以几个 mock 字符串断言替代整个组装路径。S1 通过并独立发布前不做 S2 精简或真实 smoke。
+详见 [S1工程结果](MILAI_NEXT_DEVELOPMENT_V6_S1_ASSEMBLY_RESULTS_20260928.md)：
+Root核平131条实际payload重放、86次操作审计、原checkpoint不变；Sol另补22组/26阶段路由差分及27窄测。
+原trace只有有序payload，所称HTTP字节等价是同一锁定HTTPX编码结果，不是未保存的原socket捕获。
+BOUNDARY_PROTOCOL四职责常量拼接值保持1232 bytes。S1独立发布前不做S2精简或真实smoke。
+
+用户另行要求GitHub合并后，Luna已将S0 PR69合入main，merge=`07cc364f96d484ad9ff8497adcf2a6f1b486bdb2`，
+tree等于S0 `c6dcd1d7`，Fast36400064797 success；Root核对远端SHA、parents/tree、原七份草稿与连续账本。
+这次合并只有S0，正在验收的S1另行发布，不把源码工作树混入S0。旧PR51仍未验收、不合入。
 
 ## 职责、冻结和验收纪律
 

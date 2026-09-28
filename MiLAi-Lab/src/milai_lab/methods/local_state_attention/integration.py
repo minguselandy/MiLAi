@@ -19,9 +19,7 @@ from milai_lab.methods.local_state_attention.writers import (
     scoped_memory_records,
 )
 from milai_lab.methods.memory_boundaries import (
-    BOUNDARY_PROTOCOL,
     MemoryBoundaryView,
-    record_material,
 )
 from milai_lab.methods.memory_result import CORRECTION_PROTOCOL, correction_marker
 
@@ -41,26 +39,27 @@ def make_persistent_memory_hook(
         public_index = sum(isinstance(row, HumanMessage) for row in messages) - 1
         message_key = f"{cfg['thread_id']}:{public_index}"
         actual_records = records(config)
-        if boundary_view is not None:
-            boundary_view.prepare({"run_id": cfg["foundation_run_id"],
-                                   "arm_id": cfg["arm_id"], "user_id": cfg["user_id"],
-                                   "message_key": message_key}, cfg["thread_id"], actual_records)
-            model.request_view = boundary_view
         delivered, incomplete, suppressed = (history.project(cfg["thread_id"], messages)
                                              if history is not None else
                                              (messages, [], False))
-        material = (record_material(actual_records) if boundary_view is not None else
-                    "[Actual scoped ordinary memory records (id and value):]\n"
-                    + json.dumps(actual_records, ensure_ascii=False))
-        prompt = (system_prompt + ("\n" + BOUNDARY_PROTOCOL if boundary_view is not None else "")
-                  + "\n" + material
-                  + _incomplete_appendix(incomplete))
+        tail = _incomplete_appendix(incomplete)
         marker = correction_marker([row.model_dump(mode="json") for row in messages],
                                    message_key)
         if marker is not None:
-            prompt += "\n" + CORRECTION_PROTOCOL + "\n" + json.dumps({
+            tail += "\n" + CORRECTION_PROTOCOL + "\n" + json.dumps({
                 "previous_memory_result": marker["memory_result"],
                 "mechanical_verification": marker["verification"]}, ensure_ascii=False)
+        if boundary_view is not None:
+            boundary_view.prepare({"run_id": cfg["foundation_run_id"],
+                                   "arm_id": cfg["arm_id"], "user_id": cfg["user_id"],
+                                   "message_key": message_key}, cfg["thread_id"], actual_records,
+                                  base_system=system_prompt, system_tail=tail)
+            model.request_view = boundary_view
+            prompt = boundary_view.prepared_system()
+        else:
+            prompt = (system_prompt + "\n"
+                      + "[Actual scoped ordinary memory records (id and value):]\n"
+                      + json.dumps(actual_records, ensure_ascii=False) + tail)
         if emit is not None:
             emit({"event": "persistent_memory_view", "message_key": message_key,
                   "user_id": cfg["user_id"], "history_mode": (

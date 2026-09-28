@@ -4,6 +4,13 @@
 
 The current actual user Goal explicitly authorizes the complete [NEXT_DEVELOPMENT v6 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v6.0.md).
 Follow the [v6 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V6_20260928.md).
+S0 PR69 is now merged at07cc364f by separate explicit user instruction. S1's explicit RequestContext,
+renderer, structural route and unchanged protocol components passed131 actual-payload replays,
+86 operation audits,22 prepared route conditions/26 stages and27 narrow tests; see the
+[S1 engineering report](docs/MILAI_NEXT_DEVELOPMENT_V6_S1_ASSEMBLY_RESULTS_20260928.md).
+These are mechanical results only. S1 source publication precedes S2; real S3 smoke and all later
+gates remain pending. Root's draft S4 inputs are not frozen or executed. Do not merge future PRs
+automatically from the completed S0-only merge action.
 Root read all 1,497 original plan lines; keep original DRAFT/NOT_STARTED bytes and correct stale
 PR68 metadata only in new records. Main05601148 now contains PR52–68; its tree equals v5 report1abf5c4.
 S0 preserves v5 evidence and costs. S1 must replace string movement with explicit structured
