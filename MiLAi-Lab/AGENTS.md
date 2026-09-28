@@ -60,6 +60,18 @@ and actual MCP read_history only; ordinary retains strict CRUD/search/exact and 
 Archive formation and query are separate, with exact owner/source/history cache keys and no gold.
 No new model download, service change or main/old-PR merge is part of this publication.
 
+U2 pilot has completed at source795725a2 with no engineering interruption or tuning; see
+[the pilot report](docs/MILAI_UNIFIED_U2_PILOT_RESULTS_20260929.md). All15 invocation units completed.
+Five methods repeated one exposed MERIT arc: each5/5 episodes,2/2 dependent; ordinary0records.
+MemSyco five build/query paths completed, no Judge planned in this engineering pilot.
+Pilot added86 generation/235143tokens/13007embeddingtokens; ledger3713/5060988/37969.
+Source Fast36471409915 success; Full skipped. Eighteen prospective development arcs are now
+created at unchanged method source, seeds11–28,90episodes/36dependent/111public messages,
+with official leak checks and no historical/batch hash collision. Publish docs/input metadata,
+then formal prepare and freeze the690-unit independent matrix at that published HEAD.
+No first-table quality results exist yet. Preserve frozen protocol/config/pilot bytes and costs.
+The full Goal remains active through the independent comparison and applicable U3–U6 work.
+
 The following v7 closure is historical:
 
 

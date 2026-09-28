@@ -1,0 +1,55 @@
+{
+  "kind": "UNIFIED_U2_DEVELOPMENT_EXECUTION_CONTRACT",
+  "status": "PENDING_PUBLICATION_PREPARE_AND_EXECUTION_FREEZE",
+  "method_source_commit": "795725a297fb1ef5f9d7bb712b3500d5b72546c0",
+  "protocol": "docs/MILAI_UNIFIED_U2_PROTOCOL_20260929.md",
+  "protocol_sha256": "c6bb5433052ad1712b348f62b485c2b66aa4a358a74422b650b6ce21500b6000",
+  "pilot_results": "data/manifests/unified-v8-v9-u2-pilot-results-20260929.json",
+  "pilot_results_sha256": "11836f036d11733ed8fcc89de9d11a6669bd5cf2d139e3c349616d60948a71ea",
+  "order": [
+    {
+      "benchmark": "memsyco",
+      "group": "development",
+      "selection": "data/manifests/unified-v8-v9-memsyco-subsets-20260928.json",
+      "arms": [
+        "raw_dialogue",
+        "strong_raw_rag",
+        "rolling_summary",
+        "ordinary_milai",
+        "mem0_native"
+      ],
+      "per_arm_order": "All prepared history units in source order, then all60 queries in source order. No cache reuse across different exact history/owner/source.",
+      "selection_sha256": "a15ea0c6d4088844687c1bc0ce451150311585d743e2ab7acec3784547e7aabe"
+    },
+    {
+      "benchmark": "merit",
+      "group": "development",
+      "selection": "data/manifests/unified-v8-v9-merit-development-inputs-20260929.json",
+      "arms": [
+        "full_history",
+        "strong_raw_rag",
+        "rolling_summary",
+        "ordinary_milai",
+        "mem0_native"
+      ],
+      "per_arm_order": "All18 complete arcs in predeclared source order.",
+      "selection_sha256": "e1f0540a9101517044f169ee14fb517ea91acf21907a24687ffdd7a8193edac3"
+    }
+  ],
+  "planned_host_jobs": 390,
+  "planned_archive_builds": 300,
+  "planned_invocations": 690,
+  "planned_judge_opportunities": 300,
+  "judge_order": "After all planned Host work and answer/status freeze; method order then source case order. Existing official local Judge, one attempt/no retry. Missing answers retain unknown and denominator, no fabricated score.",
+  "scoring_contract": "data/diagnostics/unified-v8-v9-u2/scoring-contract.json",
+  "scoring_contract_sha256": "ad23ee091ecfdb866b78fda1f9cb07b87e16f646640cfbcc5c0005860e5a899e",
+  "config": "data/diagnostics/unified-v8-v9-u2/native-common-config.json",
+  "config_sha256": "34ea3a1411c7ad94ade7bf1994cb3edd5beda9a194fa4240cae2b3f6ad5b7e22",
+  "statistical_analysis_script_sha256": "059e293044b3f213a0aceedc5b19d529bdc50da1a0c886fd3a334de8f3555bca",
+  "real_http_concurrency": 1,
+  "no_automatic_retry": true,
+  "failure_rule": "Preserve failures, costs, partial effects and all planned opportunities; no sample replacement. A poll/process success is not semantic success. Real engineering contamination requires a scoped new identity/review.",
+  "isolation": "Each method, archive owner and MERIT arc uses distinct namespace/store/checkpoint/business world; no pilot-state reuse.",
+  "main_results_status": "NOT_RUN",
+  "model_changes": false
+}

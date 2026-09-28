@@ -1,5 +1,5 @@
 ---
-status: ACTIVE_U2_ENGINEERING_READY
+status: ACTIVE_U2_PILOT_COMPLETE_MAIN_PREPARATION
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 plan_sha256: b496818cc94dc5a3eee83f7795f8afb7f145cc16aa628f31c52d7e33251a948c
 base_commit: 77dfc2f43f2307bb649cdbee9d62a97e5863fac0
@@ -250,3 +250,17 @@ Root先用已曝光U1首题与首arc做10-job小pilot；具体冻结前不运行
 数量先按计划建议组织；若实际数据/资源要求调整，必须在模型运行前说明理由、保持完整实例并冻结。
 研究优势不预设；最终必须说明形成、取材、呈现、动作或额外计算的证据边界。
 当前Goal保持active；R2接线与完整U1功能切片已完成，独立U2及适用U3—U6仍待完成。
+
+## U2 小规模工程试跑完成与开发输入
+
+源码795725a297fb1ef5f9d7bb712b3500d5b72546c0已发布且远端一致；Fast36471409915 success、Full skipped。
+Root在同一源码冻结后完成15个单元、10个任务；详见[试跑结果](MILAI_UNIFIED_U2_PILOT_RESULTS_20260929.md)
+与[机器证据](../data/manifests/unified-v8-v9-u2-pilot-results-20260929.json)。
+MemSyco五方法形成/共同reader接通，依合同不做pilot Judge；MERIT五方法在同一已曝光arc均5/5、dependent2/2，ordinary零记录。
+本次新增86 generation/235143 tokens/13007 embedding tokens，无重试；连续账本3713/5060988/37969，旧历史保留。
+全86请求本地prompt计数等于实际usage；共享12次容量及真实维护/持久化/后续交付核对通过。
+没有根据pilot调参或修改方法；该小样本不能证明质量收益。
+Root随后按既定规则生成[18条开发arcs](../data/manifests/unified-v8-v9-merit-development-inputs-20260929.json)，
+90episodes/36dependent/111公开消息，官方leak check通过且哈希无碰撞，无新增模型调用。
+[开发合同](../data/diagnostics/unified-v8-v9-u2/development-contract.json)先随报告/输入发布，再正式prepare并冻结全部身份。
+独立U2主表尚NOT_RUN；整个Goal保持ACTIVE，U3—U6仍按完整计划推进。
