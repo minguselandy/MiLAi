@@ -6,9 +6,10 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 
 # 长程总计划执行 Goal
 
-> 最新状态（2026-09-28）：用户确认 NEXT_DEVELOPMENT v2.0，实际 Goal 已恢复 active。
-> 当前执行见 [v2 执行记录](MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md)，完整目标尚未完成。
-> [上一暂停报告](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)保留停止时点证据；下表为历史 P0–P12，不能覆盖新阶段状态。
+> 最新状态（2026-09-28）：v2与用户确认的v3执行均已按证据收口；[v3总体报告](MILAI_NEXT_DEVELOPMENT_V3_OVERALL_EXPERIMENT_REPORT_20260928.md)为最新结果。
+> [v3执行记录](MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V3_20260928.md)列明P3/P4/P5未触发和本轮结束；无自动下一实验。
+> 本文件ACTIVE只表示长程研究目标未达成，不能覆盖实际thread Goal或作为恢复授权。下表/后文的“当前”均保留历史时点。
+> [上一暂停报告](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)保留停止证据，Product仍NO-GO。
 
 2026-09-27 新授权：用户要求完整执行
 [局部多 State–Attention 规划](MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md)。

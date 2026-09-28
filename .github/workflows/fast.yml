@@ -177,7 +177,7 @@ jobs:
           uv run --no-sync milai-lab-check-boundary
           uv run --no-sync milai-lab-check-tools-boundary
           uv run --no-sync ruff check src tests tools
-          uv run --no-sync mypy src/milai_lab/contracts src/milai_lab/analysis src/milai_lab/harness src/milai_lab/scorers src/milai_lab/boundary.py src/milai_lab/tools_boundary.py
+          uv run --no-sync mypy src/milai_lab/contracts src/milai_lab/analysis src/milai_lab/harness src/milai_lab/scorers src/milai_lab/boundary.py src/milai_lab/tools_boundary.py src/milai_lab/methods/memory_result.py
           if test -f tests/unit/test_lsa_controller_contract.py; then
             uv run --no-sync mypy src/milai_lab/methods/local_state_attention/protocol.py
             uv run --no-sync pytest -q tests/unit/test_lsa_controller_contract.py
@@ -196,6 +196,7 @@ jobs:
             --ignore=tests/unit/test_fixed_state_read.py \
             --ignore=tests/unit/test_fixed_state_update.py \
             --ignore=tests/unit/test_shared_record_use.py \
+            --ignore=tests/unit/test_persistent_memory.py \
             --ignore=tests/unit/test_langmem_application.py \
             --ignore=tests/unit/test_external_memory_v26.py
           uv run --no-sync python tools/check_legacy_archive.py
@@ -246,8 +247,11 @@ jobs:
           uv run --no-sync ruff check src/milai_lab/runners/shared_record_use.py tools/run_shared_record_use.py tests/unit/test_shared_record_use.py
           uv run --no-sync mypy src/milai_lab/runners/shared_record_use.py tools/run_shared_record_use.py
           uv run --no-sync pytest -q tests/unit/test_shared_record_use.py
+          uv run --no-sync ruff check src/milai_lab/methods/memory_result.py src/milai_lab/runners/persistent_memory.py tools/run_persistent_memory.py tests/unit/test_memory_result.py tests/unit/test_persistent_memory.py
+          uv run --no-sync mypy src/milai_lab/runners/persistent_memory.py tools/run_persistent_memory.py
+          uv run --no-sync pytest -q tests/unit/test_persistent_memory.py
           uv run --no-sync mypy src/milai_lab
-          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/runners/state_update_probe.py src/milai_lab/runners/fixed_state_read.py src/milai_lab/runners/fixed_state_update.py src/milai_lab/runners/shared_record_use.py src/milai_lab/datasets/merit.py
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/runners/state_update_probe.py src/milai_lab/runners/fixed_state_read.py src/milai_lab/runners/fixed_state_update.py src/milai_lab/runners/shared_record_use.py src/milai_lab/runners/persistent_memory.py src/milai_lab/datasets/merit.py
           uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
 
   lab-external-fast:

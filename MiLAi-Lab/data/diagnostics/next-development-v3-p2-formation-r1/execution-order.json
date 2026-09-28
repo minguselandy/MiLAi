@@ -1,0 +1,114 @@
+{
+  "kind": "MILAI_V3_P2_EXECUTION_ORDER",
+  "jobs": [
+    {
+      "case_id": "field_plan",
+      "arm": "B0",
+      "inputs": "field_plan-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "field_plan",
+      "arm": "B1",
+      "inputs": "field_plan-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "field_plan",
+      "arm": "C",
+      "inputs": "field_plan-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "editorial_revision",
+      "arm": "B1",
+      "inputs": "editorial_revision-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "editorial_revision",
+      "arm": "C",
+      "inputs": "editorial_revision-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "editorial_revision",
+      "arm": "B0",
+      "inputs": "editorial_revision-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "independent_note",
+      "arm": "C",
+      "inputs": "independent_note-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "independent_note",
+      "arm": "B0",
+      "inputs": "independent_note-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "independent_note",
+      "arm": "B1",
+      "inputs": "independent_note-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "quotation",
+      "arm": "B0",
+      "inputs": "quotation-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "quotation",
+      "arm": "B1",
+      "inputs": "quotation-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "quotation",
+      "arm": "C",
+      "inputs": "quotation-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "temporary",
+      "arm": "B1",
+      "inputs": "temporary-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "temporary",
+      "arm": "C",
+      "inputs": "temporary-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "temporary",
+      "arm": "B0",
+      "inputs": "temporary-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "read_only",
+      "arm": "C",
+      "inputs": "read_only-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "read_only",
+      "arm": "B0",
+      "inputs": "read_only-inputs.json",
+      "phase": 0
+    },
+    {
+      "case_id": "read_only",
+      "arm": "B1",
+      "inputs": "read_only-inputs.json",
+      "phase": 0
+    }
+  ],
+  "rule": "Root serial; one fresh process and empty isolated namespace/world/checkpoint per script/arm; never replace a failed script or preseed a missing record. All arms use the same retained-memory access rule; each public message has a new session."
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "sasha"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "editorial_revision-1",
+            "user_id": "sasha",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "For my continuing bulletin-editing work, retain these preferences: headings use sentence case, dates use day-month-year order, and source links go at the end of each item."
+          },
+          {
+            "message_id": "editorial_revision-2",
+            "user_id": "sasha",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Change my ongoing bulletin preference so source links go immediately after the heading. Keep the other established preferences unchanged."
+          },
+          {
+            "message_id": "editorial_revision-3",
+            "user_id": "sasha",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "List the standing heading, date and source-link conventions for my bulletins."
+          }
+        ]
+      }
+    ]
+  }
+}

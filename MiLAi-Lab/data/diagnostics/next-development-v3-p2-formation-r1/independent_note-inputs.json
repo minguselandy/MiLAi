@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "imani"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "independent_note-1",
+            "user_id": "imani",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember my weekly equipment handoff arrangement: the receiving desk is west reception, the regular day is Thursday, and the handoff time is 09:20. This is an ongoing arrangement."
+          },
+          {
+            "message_id": "independent_note-2",
+            "user_id": "imani",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Keep a separate ongoing access note: the backup key for the imaging room is in locker L-9. This does not change the weekly equipment handoff arrangement. Save it as a note; do not schedule an alert or take a business action."
+          },
+          {
+            "message_id": "independent_note-3",
+            "user_id": "imani",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "What are my regular equipment handoff arrangement and the backup-key location? Include all details you have retained."
+          }
+        ]
+      }
+    ]
+  }
+}

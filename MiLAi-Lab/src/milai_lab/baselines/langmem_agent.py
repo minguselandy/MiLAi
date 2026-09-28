@@ -4,19 +4,23 @@ from __future__ import annotations
 
 import hashlib
 import json
-from collections.abc import Iterator, Sequence
+import time
+import uuid
+from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Literal, cast
+from typing import TYPE_CHECKING, Annotated, Any, Literal, cast
 
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 from langchain_core.embeddings import Embeddings
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
-from langchain_core.tools import BaseTool, tool
+from langchain_core.runnables import RunnableConfig
+from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool, tool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.config import get_store
 from langgraph.prebuilt import create_react_agent
 from langgraph.prebuilt.tool_node import ToolCallWrapper, ToolNode
 from langgraph.store.base import BaseStore
@@ -25,6 +29,7 @@ from langmem import (  # type: ignore[import-untyped]
     create_manage_memory_tool,
     create_search_memory_tool,
 )
+from langmem.utils import NamespaceTemplate  # type: ignore[import-untyped]
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
@@ -35,11 +40,13 @@ from milai_lab.methods.local_state_attention.history import (
 )
 from milai_lab.methods.local_state_attention.integration import (
     make_full_history_hook,
+    make_persistent_memory_hook,
     make_pre_model_hook,
     make_window_summary_hook,
     make_writer_view_hook,
 )
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController
+from milai_lab.methods.memory_result import CORRECTION_TOOLS, correction_marker
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel
 
@@ -129,6 +136,35 @@ def create_history_read_tool(history: HistoryAccess | None) -> BaseTool:
     return read_history
 
 
+def create_memory_read_tool(namespace: tuple[str, ...], store: BaseStore | None = None,
+                            ) -> BaseTool:
+    """Exact ordinary-memory READ with the same public namespace contract as CRUD."""
+    namespacer = NamespaceTemplate(namespace)
+
+    def receipt(row: Any, memory_id: uuid.UUID, call_id: str) -> ToolMessage:
+        return ToolMessage(name="read_memory", tool_call_id=call_id,
+            status="success" if row is not None else "error",
+            content=json.dumps({"ok": row is not None,
+                                "status": "found" if row is not None else "not_found",
+                                "id": str(memory_id),
+                                **({"value": row.value} if row is not None else {})},
+                               ensure_ascii=False))
+
+    def read_memory(id: uuid.UUID, *,
+                    tool_call_id: Annotated[str, InjectedToolCallId]) -> ToolMessage:
+        current = store if store is not None else get_store()
+        return receipt(current.get(namespacer(), str(id)), id, tool_call_id)
+
+    async def aread_memory(id: uuid.UUID, *,
+                          tool_call_id: Annotated[str, InjectedToolCallId]) -> ToolMessage:
+        current = store if store is not None else get_store()
+        return receipt(await current.aget(namespacer(), str(id)), id, tool_call_id)
+
+    return StructuredTool.from_function(read_memory, coroutine=aread_memory,
+        name="read_memory", description="Read one ordinary memory by its exact id in this "
+                                        "user's namespace. This makes no write.")
+
+
 def build_agent(
     model: VLLMChatModel,
     store: BaseStore | None,
@@ -155,6 +191,8 @@ def build_agent(
     writer_initial_boundary: dict[str, Any] | None = None,
     writer_history_projection: bool = False,
     writer_state_body_prefill: Literal["all", "none"] = "all",
+    persistent_memory_arm: Literal["B0", "B1", "C"] | None = None,
+    persistent_memory_records: Callable[[RunnableConfig], list[dict[str, Any]]] | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
@@ -185,6 +223,17 @@ def build_agent(
             or (writer_history_projection and (
                 writer_view_bank is None or history_access is None))):
         raise ValueError("LANGMEM_WRITER_HISTORY_VIEW_INVALID")
+    if persistent_memory_arm is not None and (
+        persistent_memory_arm not in {"B0", "B1", "C"} or memory_contract != "strict"
+        or store is None or persistent_memory_records is None or writer_tools is not None
+        or local_state_controller is not None or history_summary_controller is not None
+        or model.m1 is not None or model.odr is not None or model.projection is not None
+    ):
+        raise ValueError("PERSISTENT_MEMORY_RECIPE_CONFLICT")
+    if persistent_memory_arm is None and persistent_memory_records is not None:
+        raise ValueError("PERSISTENT_MEMORY_RECIPE_CONFLICT")
+    if persistent_memory_arm is not None:
+        model.memory_protocol = persistent_memory_arm
     selected_memory_tools: Sequence[BaseTool]
     if writer_tools is not None:
         owned_manage = writer_tools.manage_memory
@@ -213,7 +262,9 @@ def build_agent(
         [writer_tools.read_record, *([writer_maintenance_trigger]
                                     if writer_maintenance_trigger is not None else [])]
         if writer_tools is not None else [])
-    tools = [*selected_memory_tools, *history_tools, *writer_extra, *business_tools]
+    ordinary_read = ([create_memory_read_tool(MEMORY_NAMESPACE, store)]
+                     if persistent_memory_arm is not None else [])
+    tools = [*selected_memory_tools, *ordinary_read, *history_tools, *writer_extra, *business_tools]
     parameter_schemas = {
         tool.name: convert_to_openai_tool(tool)["function"]["parameters"]
         for tool in tools
@@ -224,6 +275,11 @@ def build_agent(
     ) -> Any:
         def original(current: Any) -> Any:
             call = current.tool_call
+            if persistent_memory_arm == "C" and correction_marker([
+                row.model_dump(mode="json") for row in current.state["messages"]
+            ], model.active_message_key or "") is not None and call["name"] not in CORRECTION_TOOLS:
+                return ToolMessage(content="Tool unavailable during memory-only correction",
+                    name=call["name"], tool_call_id=call["id"], status="error")
             if schema := parameter_schemas.get(call["name"]):
                 try:
                     validate(call["args"], schema)
@@ -255,10 +311,17 @@ def build_agent(
     return create_react_agent(
         model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
-        prompt=(prompt if local_state_controller is None and not full_history
+        prompt=(prompt if persistent_memory_arm is None
+                and local_state_controller is None and not full_history
                 and history_summary_controller is None and writer_view_bank is None
                 else None),
-                        pre_model_hook=(make_pre_model_hook(local_state_controller, prompt,
+                        pre_model_hook=(make_persistent_memory_hook(
+                            prompt, persistent_memory_records,
+                            history=history_access if full_history else None,
+                            emit=model.client.emit)
+                        if persistent_memory_arm is not None
+                        and persistent_memory_records is not None else
+                        make_pre_model_hook(local_state_controller, prompt,
                                             read_policy=local_state_read_policy,
                                             source_view_max_bytes=source_view_max_bytes,
                                             update_epoch=local_state_update_epoch)
@@ -296,6 +359,7 @@ def invoke_public_message(
     snapshot = agent.get_state(config)
     public_index = sum(isinstance(item, HumanMessage)
                        for item in snapshot.values.get("messages", [])) if snapshot.values else 0
+    _set_memory_turn(model, scope, public_index)
     _emit_public_context(model, scope, public_index)
     if model.observer is not None:
         model.observer.begin_public_message(scope, public_index, content)
@@ -312,7 +376,8 @@ def invoke_public_message(
     )
     if model.observer is not None:
         model.observer.assert_healthy()
-    return cast(list[BaseMessage], result["messages"])
+    return _finalize_memory_result(agent, model, scope,
+                                   cast(list[BaseMessage], result["messages"]))
 
 
 def resume_public_message(
@@ -336,6 +401,7 @@ def resume_public_message(
         after_user.append(message)
     public_index = sum(isinstance(item, HumanMessage)
                        for item in snapshot.values["messages"]) - 1
+    _set_memory_turn(model, scope, public_index)
     _emit_public_context(model, scope, public_index)
     if model.observer is not None:
         prior_user = next(message for message in reversed(snapshot.values["messages"])
@@ -355,10 +421,62 @@ def resume_public_message(
         result = agent.invoke(None, config=config)
         if model.observer is not None:
             model.observer.assert_healthy()
-        return cast(list[BaseMessage], result["messages"])
+        return _finalize_memory_result(agent, model, scope,
+                                       cast(list[BaseMessage], result["messages"]))
     if model.observer is not None:
         model.observer.assert_healthy()
-    return cast(list[BaseMessage], snapshot.values["messages"])
+    return _finalize_memory_result(agent, model, scope,
+                                   cast(list[BaseMessage], snapshot.values["messages"]))
+
+
+def _set_memory_turn(model: VLLMChatModel, scope: FoundationScope, public_index: int) -> None:
+    if model.memory_protocol is not None:
+        model.memory_turn = {"run_id": scope.run_id, "arm_id": scope.arm_id,
+                             "user_id": scope.user_id, "message_key":
+                             f"{scope.config()['configurable']['thread_id']}:{public_index}"}
+
+
+def _finalize_memory_result(agent: Any, model: VLLMChatModel, scope: FoundationScope,
+                            messages: list[BaseMessage]) -> list[BaseMessage]:
+    if model.memory_protocol != "C" or not messages or not isinstance(messages[-1], AIMessage):
+        return messages
+    final = messages[-1]
+    verification = final.response_metadata.get("memory_result_verification")
+    if not isinstance(verification, dict):
+        return messages
+    key = model.active_message_key or ""
+    marker = correction_marker([row.model_dump(mode="json") for row in messages], key)
+    emit = model.client.emit
+    entered = marker is not None
+    capacity = model.calls_in_message < model.max_calls_per_message
+    if emit is not None:
+        emit({"event": "memory_result_verification", "message_key": key,
+              "generation_id": final.id, "memory_result": final.response_metadata.get(
+                  "memory_result"), "verification": verification,
+              "correction_already_entered": entered, "remaining_host_calls":
+              model.max_calls_per_message - model.calls_in_message})
+    if not verification["needs_correction"] or entered or not capacity:
+        if verification["needs_correction"] and emit is not None:
+            emit({"event": "memory_result_correction", "message_key": key,
+                  "status": "EXHAUSTED" if entered else "NO_REMAINING_CAPACITY"})
+        return messages
+    metadata = {**final.response_metadata, "memory_correction": {
+        "message_key": key, "memory_result": final.response_metadata.get("memory_result"),
+        "verification": verification}}
+    marked = final.model_copy(update={"response_metadata": metadata})
+    start_wall, start_cpu = time.perf_counter_ns(), time.process_time_ns()
+    agent.update_state(scope.config(), {"messages": [marked]}, as_node="tools")
+    if emit is not None:
+        emit({"event": "memory_result_correction", "message_key": key, "status": "ENTERED",
+              "checkpoint_writes": 1,
+              "logical_bytes": len(marked.model_dump_json().encode("utf-8")),
+              "wall_ns": time.perf_counter_ns() - start_wall,
+              "cpu_ns": time.process_time_ns() - start_cpu})
+    result = agent.invoke(None, config=scope.config())
+    if model.observer is not None:
+        model.observer.assert_healthy()
+    return _finalize_memory_result(agent, model, scope,
+                                   cast(list[BaseMessage], result["messages"]))
 
 
 def _emit_public_context(

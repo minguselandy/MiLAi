@@ -1,7 +1,9 @@
 # 长程计划证据与剩余要求
 
-最新状态（2026-09-28）：用户确认 v2 计划且实际 Goal 恢复 ACTIVE，总研究目标未完成。执行以 [v2 记录](MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md) 为准。上一暂停时点汇总见
-[总体实验总结与 v2 暂停交接](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)。
+最新状态（2026-09-28）：v2及用户确认的v3均已收口，总研究目标未完成。最新结论见
+[v3总体实验报告](MILAI_NEXT_DEVELOPMENT_V3_OVERALL_EXPERIMENT_REPORT_20260928.md)与[v3执行记录](MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V3_20260928.md)。
+P3/P4/P5条件未触发，不自动开始下一批；实际Goal状态优先于历史ACTIVE文字。
+上一暂停时点汇总仍见[总体实验总结与 v2 暂停交接](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)。
 下表保留 v26 时点证据与当时账本，区分实现、开发效果和未见效果；局部测试通过不代替正式收益。
 v25 应用和 v26 外部形成对照已完成，第二模型族仍未完成；历史下一步或条件判定不能恢复执行。
 
@@ -37,3 +39,17 @@ Jev是后期效率后端；当前主要方法使用机械版本解析和有界�
 旧已执行source lock和结果原字节保留，使用各自Git checkpoint复现；当前工作树不应被误称同时符合全部历史锁。P9旧锁描述字段erratum已在[P9报告](MILAI_SER_V23_RESULTS_20260927.md)保存，实际配置/请求仍决定运行身份。公开仓库保存合成输入、rubric、锁和精简结果；原始Provider轨迹、DSN、数据库和构建产物保持本地ignored。
 
 用户要求的参考源码已记录在[来源manifest](../data/manifests/contextual-memory-v3-sources.json)：Mem0批量记忆/embedding、Memobase紧凑上下文、Graphiti混合召回、LangMem普通记忆工具。Mem0在v26中另行作为明确声明合同差异的实际原生系统对照；其余源码借鉴本身不等于运行依赖或公平实验基线。
+
+## v2 / v3 后续证据（不改上表历史分母）
+
+| 范围 | 结果 | 当前边界 |
+| --- | --- | --- |
+| v2 N2/N3 | 固定bank与前态下，强历史/all足够，独立A/U无额外净收益 | 两暴露前缀不支持selector优越 |
+| v2 N5 | 原生各5/5但State全空；构造生命周期均0/1，业务/恢复正确 | 正文预交付未激活，普通记录过期与最终答复正确须分开 |
+| v3 P1 | 15新增独立工程case、39相邻case；同graph有限纠正，普通memory/权限/成本接线 | Mock和CI不认证模型语义保存 |
+| v3 P2 | B0/B1新形成5/5、修订1/1、后续7/7；C3/5、0/1、5/7；六完整脚本5/6、5/6、4/6 | B0/B1漏当次格式，C有该正例却丢两个持久链；未达两个独立改善门槛 |
+| v3成本 | 69生成/78,985tokens/573embeddingtokens；累计2950/3,729,307/20,729 | 旧sealed费用不清零；C纠正费用已包含，少写不称压缩 |
+| 后续条件 | P3/P4/E6/P5未触发，第二模型仍NOT_RUN，Product NO-GO | 不将NOT_TRIGGERED写成验证无效，也不自动重启v27 |
+
+v3[详细结果与反思](MILAI_NEXT_DEVELOPMENT_V3_P2_RESULTS_20260928.md)和[机器清单](../data/manifests/next-development-v3-p2-results-20260928.json)
+绑定实际方法2a7284bc、原输入及freeze。旧阶段和v3并非单因素跨版本消融；不能将短输入/普通单库/历史合同等共同变化归于一项修复。
