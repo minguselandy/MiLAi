@@ -17,6 +17,7 @@ from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.protocol import (
     READ_SELECTOR_PROMPT,
+    UPDATE_SELECTOR_PROMPT,
     control_prompt,
     event_view,
     parse_control_response,
@@ -389,10 +390,7 @@ class LocalStateController:
             try:
                 route = self._stage_call(
                     "update_selector", message_key,
-                    "From source-identified new observations and the short State directory, "
-                    "select every existing State that may need an update. Selection is about "
-                    "event impact, not the current reading task. Return update_ids only; "
-                    "creation is decided by the shared maintainer.", base, update_schema)
+                    UPDATE_SELECTOR_PROMPT, base, update_schema)
             except (ControlResponseError, httpx.TimeoutException) as error:
                 return degraded("update_selector", self._control_reason(error))
         else:

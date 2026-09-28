@@ -94,6 +94,13 @@ LOCAL_TAIL = (
     'a shared topic alone does not make them one matter.'
 )
 
+UPDATE_SELECTOR_PROMPT = (
+    "From source-identified new observations and the short State directory, "
+    "select every existing State that may need an update. Selection is about "
+    "event impact, not the current reading task. Return update_ids only; "
+    "creation is decided by the shared maintainer."
+)
+
 
 def control_prompt(
     representation: str, local_granularity: bool = False, *,

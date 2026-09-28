@@ -13,7 +13,7 @@ plan_sha256: 84d5ddd45224d83c4206c95d8b46ca41f2a5dabd9990266aadccae0df1c0df22
 > 工作转到隔离的 next-development-v2-resume，原 11 个 N2 WIP 按暂停清单哈希完整复制。
 > 原暂停时点的[总体报告](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)不改写，新结果独立追加。
 
-此前用户启动新的实际 active Goal，要求详细阅读并执行 v2.0，覆盖上一任务的暂停；该授权现被最新停止指令覆盖。
+此前执行曾被停止指令暂停；其后用户确认实际 NEXT_DEVELOPMENT 文件，Goal 再次恢复 active，当前以顶部恢复记录为准。
 Goal给定文件名为`MILAI_NEXT_IMPROVEMENT_PLAN_20260928_v2.0.md`，现场不存在；唯一同日期/版本文件为
 [MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md](MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md)。
 Root已完整读取527行、向用户说明文件名差异并提出可选澄清，按该唯一v2.0继续；不修改实际Goal的原目标。
@@ -24,10 +24,10 @@ Root已完整读取527行、向用户说明文件名差异并提出可选澄清�
 
 | 包/要求 | 证明完成需要什么 | 当前状态 |
 | --- | --- | --- |
-| N0 / G1现场与基线 | 8个WIP实物身份、真实PR拓扑；等价提取与行为分开；同输入请求差分、相关窄检；新协议prepare覆盖源码/schema/模型/输入/评分 | 8/8哈希一致；35场景/45控制请求等价、相关检查通过；N2/N3实现及新prepare未完成，未关闭整个G1 |
+| N0 / G1现场与基线 | 8个WIP实物身份、真实PR拓扑；等价提取与行为分开；同输入请求差分、相关窄检；新协议prepare覆盖源码/schema/模型/输入/评分 | 8/8哈希一致；35场景/45控制请求等价；N2源码/prepare/真实路径已完成。N3实现及相关检查收敛中，其新执行freeze尚未完成 |
 | N1消费与维护 | 既有真实HTTP、来源和部分成功回执核对；确认已有strict护栏；仅有明确竞争因素才调用新模型 | 窄机械检查与一个历史boundary失败的实际HTTP核对完成；实际回执已交付，保留语义消费瓶颈，不加提示变体 |
 | N2 / X3固定bank读取 | 两前缀全读/query/同State增强/实际A/完整历史共10条路径；共同读取能力、维护冻结、实际交付与最终回答/续接、全部费用 | 已完成5753602冻结的10条完整路径；五条件各2/2，H1836/query3189/all3447/enh3889/A5540 tokens；本切片Pivot独立A，保留一次错误READ |
-| N3 / X4固定前态更新 | 两前缀all/U/U=A/oracle共8条诊断；同前态/整体维护/权限；空U可CREATE；实际提交/保持/误改/pending/费用 | 原6文件保留；新ignored输入/config/rubric草案存在，未实现runner或运行，0/8 |
+| N3 / X4固定前态更新 | 两前缀all/U/U=A/oracle共8条诊断；同前态/整体维护/权限；空U可CREATE；实际提交/保持/误改/pending/费用 | 原草案保留；正式三JSON与rubric字节已固定，新runner与受影响窄检/prepare/必要build通过；等待源码发布及正式执行freeze，真实0/8 |
 | N4有限交付版本反馈 | 仅有相关问题才触发；UPDATE/DELETE/CREATE/NO_CHANGE/拒绝/恢复/超限机械检查；独立开关和真实续接 | NOT_TRIGGERED；不是N2/N3前置 |
 | N5 / X5 / G3连续任务 | 一个强简单基线与至多一个获筛选候选，同版本从形成到复用、变化、owner/临时约束、真实副作用/恢复/授权退出；原生单元与构造补充明确分列 | NOT_RUN；11消息旧草案不是已冻结协议 |
 | WP7全生命周期 | 形成/维护/使用/恢复互斥归属、request ID不重复记账、摊销R、质量并列；Store/CPU/wall/逻辑字节/观测边界 | NOT_DONE |
@@ -79,7 +79,7 @@ Astra仅处理明确困难问题，不设常驻审计者。每个文件一个写
 本v2起点：2799 generation calls、3486504 generation tokens、19273 embedding tokens，unknown usage均0；
 原账本SHA256为`bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6`。
 权威路径仍是原checkout的`MiLAi-Lab/artifacts/ser-v20/budget.json`，sealed历史不变，不建立清零账本。
-开发/CI费用与模型实验分开；失败、修复、seed embedding、空维护和观测保留。当前新模型调用0。
+开发/CI费用与模型实验分开；失败、修复、seed embedding、空维护和观测保留。上述为恢复起点；后续新增见各阶段记录，不能将历史0调用当作当前累计。
 
 ## 发布和后续证据
 
@@ -150,3 +150,5 @@ H无工具、成本最低，A/增强无额外质量收益。combined query未预
 A背景Host误用target_kind=memory，真实not_found已送达；与query首Host请求对象相同，不把短失败回执的56tokens差称压缩。
 新增19生成/17901tokens/820embeddingtokens，连续2818/3504405/20093。
 N2方法固定5753602，N3新源码/输入独立冻结；不修改本轮结果或实验bank，不把N2成功升级为N5/G3/全生命周期验收。
+
+N3工程准入见[冻结协议](MILAI_NEXT_DEVELOPMENT_V2_N3_FIXED_UPDATE_20260928.md)与[检查回执](../data/manifests/next-development-v2-n3-checks-20260928.json)。不将Mock检查计作真实模型样本。
