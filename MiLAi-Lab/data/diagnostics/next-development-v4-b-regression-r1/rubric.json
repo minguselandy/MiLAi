@@ -1,0 +1,60 @@
+{
+  "kind": "MILAI_V4_B_ROOT_ONLY_REGRESSION_RUBRIC",
+  "runtime_must_not_read": true,
+  "exposure": "All six scripts previously exposed in v3. Regression only. No F8 C scripts created.",
+  "semantic_rubric_path": "../next-development-v3-p2-formation-r1/rubric.json",
+  "semantic_rubric_sha256": "b5b04248c71ccd3f4233e4461e8371c17dc2888fa4f0d52b8aca5177ac1f9a6b",
+  "historical_gate": "The v3 B1/C promotion gate is historical. Original task/content/preservation/current-format scores are unchanged.",
+  "v4_gate": {
+    "public_turns": 15,
+    "new_formation": {
+      "pass": 5,
+      "total": 5
+    },
+    "revision_and_preservation": {
+      "pass": 1,
+      "total": 1
+    },
+    "later_use": {
+      "pass": 7,
+      "total": 7
+    },
+    "positive_persistent_scripts": {
+      "pass": 4,
+      "total": 4
+    },
+    "negative_scope_cases": {
+      "pass": 3,
+      "total": 3
+    },
+    "current_BRIEF_format": {
+      "pass": 1,
+      "total": 1
+    },
+    "full_scripts": {
+      "pass": 6,
+      "total": 6
+    },
+    "correction_calls": 0,
+    "selector_calls": 0,
+    "runtime_reads_rubric": false
+  },
+  "mechanical_checks": [
+    "Actual final HTTP authority roles and current Human bytes delivered on every continuation",
+    "Original checkpoint IDs, tool calls and receipt content preserved",
+    "Working State contains only task/source references and open questions, no copied durable/world facts",
+    "Program execution audit comes from actual paired calls/receipts; no final text proof",
+    "Current owner/turn provenance is before the operation; semantic_support not inferred",
+    "No persistent State Bank writes or hidden history access under retained mode"
+  ],
+  "accounting": "All actual generation/embedding/queries/control/failure/observation costs in continuous ledger; unchanged v3 mutual lifecycle stage mapping. No saving claim from missing formation.",
+  "input_sha256": {
+    "field_plan-inputs.json": "789a8f6612adc56a2e0029ee4cfa58a7bd58aaedfa2d813cbbc01ab94f9ac1ba",
+    "editorial_revision-inputs.json": "848e5d91533e06e6829c73079e2caa42af87f87274a67e8cc7fb5b94037d284d",
+    "independent_note-inputs.json": "3cc069e6f3feacb668ae87cb3cfbe810f854a8c6f27652a4999bf848307483f0",
+    "quotation-inputs.json": "bbf90e44cd04da4a7915eaad9ef50bfaf261beba7a2ef0e81312072c3ed0a61e",
+    "temporary-inputs.json": "682a4c12430dbf2ed09e31e7eec65894c12e6da5aa751b4abc756c7ae70a94e6",
+    "read_only-inputs.json": "a8108ecd8fc1b22479732fdd9e70c085df3254097380219891f85fc7fddbf636"
+  },
+  "post_failure": "Retain this attempt and all charges; locate first break and general repair before a separately frozen exposed regression. Never rename it unseen or skip the A/B gate."
+}

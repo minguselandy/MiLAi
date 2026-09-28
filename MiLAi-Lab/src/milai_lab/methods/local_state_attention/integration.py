@@ -18,6 +18,11 @@ from milai_lab.methods.local_state_attention.writers import (
     WriterTools,
     scoped_memory_records,
 )
+from milai_lab.methods.memory_boundaries import (
+    BOUNDARY_PROTOCOL,
+    MemoryBoundaryView,
+    record_material,
+)
 from milai_lab.methods.memory_result import CORRECTION_PROTOCOL, correction_marker
 
 SOURCE_VIEW_HEADER = "Referenced source events from delivered States:"
@@ -27,6 +32,7 @@ def make_persistent_memory_hook(
     system_prompt: str,
     records: Callable[[RunnableConfig], list[dict[str, Any]]], *,
     history: HistoryAccess | None = None, emit: Any = None,
+    boundary_view: MemoryBoundaryView | None = None, model: Any = None,
 ) -> Any:
     """A v3-only ordinary view; retained mode never reads a source/history bank."""
     def hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
@@ -35,11 +41,19 @@ def make_persistent_memory_hook(
         public_index = sum(isinstance(row, HumanMessage) for row in messages) - 1
         message_key = f"{cfg['thread_id']}:{public_index}"
         actual_records = records(config)
+        if boundary_view is not None:
+            boundary_view.prepare({"run_id": cfg["foundation_run_id"],
+                                   "arm_id": cfg["arm_id"], "user_id": cfg["user_id"],
+                                   "message_key": message_key}, cfg["thread_id"], actual_records)
+            model.request_view = boundary_view
         delivered, incomplete, suppressed = (history.project(cfg["thread_id"], messages)
                                              if history is not None else
                                              (messages, [], False))
-        prompt = (system_prompt + "\n[Actual scoped ordinary memory records (id and value):]\n"
-                  + json.dumps(actual_records, ensure_ascii=False)
+        material = (record_material(actual_records) if boundary_view is not None else
+                    "[Actual scoped ordinary memory records (id and value):]\n"
+                    + json.dumps(actual_records, ensure_ascii=False))
+        prompt = (system_prompt + ("\n" + BOUNDARY_PROTOCOL if boundary_view is not None else "")
+                  + "\n" + material
                   + _incomplete_appendix(incomplete))
         marker = correction_marker([row.model_dump(mode="json") for row in messages],
                                    message_key)

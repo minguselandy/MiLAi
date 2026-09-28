@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import uuid
@@ -16,7 +17,7 @@ from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.store.memory import InMemoryStore
 
-from milai_lab.baselines.langmem_agent import FoundationScope, invoke_public_message
+from milai_lab.baselines.langmem_agent import FoundationScope, VLLMEmbeddings, invoke_public_message
 from milai_lab.harness.contextual_artifacts import (
     RunBudget,
     RunLimits,
@@ -25,7 +26,10 @@ from milai_lab.harness.contextual_artifacts import (
     write_json,
 )
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
+from milai_lab.methods.local_state_attention.controller import ControlResponseError
+from milai_lab.methods.memory_boundaries import event_reference, operation_audit
 from milai_lab.methods.memory_result import RESPONSIBILITY_PROMPT
+from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import IncompleteChatResponse, VLLMChatModel
 from milai_lab.runners import persistent_memory as runner
@@ -34,6 +38,25 @@ from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
 
 LAB = Path(__file__).resolve().parents[2]
+
+
+class _MockCapacity:
+    enable_thinking = False
+
+    def __init__(self, max_characters: int = 65536) -> None:
+        self.max_characters = max_characters
+
+    def text_tokens(self, text: str) -> int:
+        return len(text)
+
+    def check(self, messages: Any, output_tokens: int, _tools: Any = None) -> dict[str, Any]:
+        prompt = sum(len(row["content"]) for row in messages)
+        receipt = {"prompt_tokens": prompt, "total_reserved_tokens": prompt + output_tokens + 512,
+                   "output_reserve_tokens": output_tokens, "safety_tokens": 512,
+                   "context_tokens": self.max_characters, "identity": "mechanical-character-count"}
+        if receipt["total_reserved_tokens"] > self.max_characters:
+            raise CapacityExceeded(receipt)
+        return receipt
 
 
 def _config(root: Path, history: str = "retained") -> dict[str, Any]:
@@ -66,6 +89,8 @@ def _runtime(
     respond: Any,
     *,
     max_calls: int = 12,
+    capacity: Any = None,
+    budget: RunBudget | None = None,
 ) -> Any:
     def transport(request: httpx.Request) -> httpx.Response:
         wire = json.loads(request.read())
@@ -87,12 +112,14 @@ def _runtime(
             },
         )
 
-    budget = RunBudget(RunLimits(1, 3, None, None, None), root / "budget.json")
+    if budget is None:
+        budget = RunBudget(RunLimits(1, 3, None, None, None), root / "budget.json")
     with VLLMClient(
         VLLMConfig(**_config(root)["host"]),
         transport=httpx.MockTransport(transport),
         emit=Trace(root / "trace.jsonl", "mock"),
         budget=budget,
+        capacity=capacity if capacity is not None else _MockCapacity(),
     ) as client:
         with SqliteSaver.from_conn_string(str(root / "checkpoints.sqlite")) as saver:
             observer = SimpleNamespace(
@@ -119,11 +146,18 @@ def _agent(
     history: str = "retained",
     business: Any = (),
     wrapper: Any = None,
+    boundaries: bool = False,
+    boundary_options: dict[str, Any] | None = None,
+    selector_client: VLLMClient | None = None,
 ) -> Any:
     write_json(root / "run_manifest.json", {"identity": {"run_id": "run", "arm_id": arm}})
+    config = _config(root, history)
+    if boundaries:
+        config["memory_boundaries"] = {"enabled": True, **(boundary_options or {})}
+        config["memory_result"] = {"correction_entries": 0}
     factory, _ = runner._adapters(
-        runtime, LocalStateBank(runtime.store), root, "run", arm, _config(root, history)
-    )
+        runtime, LocalStateBank(runtime.store), root, "run", arm, config,
+        selector_client=selector_client)
     return factory(
         runtime.model,
         runtime.store,
@@ -143,6 +177,329 @@ def _final(status: str, refs: list[str] | None = None) -> dict[str, Any]:
 
 def _scope(arm: str = "C", session: str = "one") -> FoundationScope:
     return FoundationScope("run", arm, "alice", "application:" + session)
+
+
+def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
+    tmp_path: Path,
+) -> None:
+    store, wires = InMemoryStore(), []
+    memory_id = str(uuid.uuid4())
+    namespace = ("langmem", "run", "B0", "alice")
+    store.put(namespace, memory_id, {"content": "actual durable 4"})
+    def respond(_wire: Any, call: int) -> Any:
+        if call == 1:
+            return {"calls": [{"name": "read_memory", "arguments": {"id": memory_id}}]}
+        if call == 2:
+            return {"calls": [{"name": "manage_memory", "arguments": {
+                "action": "update", "id": memory_id, "content": "updated durable 4"}}]}
+        if call == 3:
+            return {"calls": [{"name": "manage_memory", "arguments": {
+                "action": "delete", "id": memory_id}}]}
+        return {"answer": "saved in final prose without proving a write"}
+    with _runtime(tmp_path, store, wires, respond) as runtime:
+        agent = _agent(runtime, tmp_path, "B0", boundaries=True)
+        scope = _scope("B0")
+        agent.update_state(scope.config(), {"messages": [
+            HumanMessage(id="old-user", content="earlier request"),
+            AIMessage(id="old-answer", content="prior assistant 3"),
+        ]}, as_node="agent")
+        result = invoke_public_message(agent, runtime.model, scope, "TEMP current task bytes")
+        originals = agent.get_state(scope.config()).values["messages"]
+        assert len(wires) == 4 and runtime.model.calls_in_message == 4
+        assert result[-1].content.startswith("saved")
+        assert "memory_result" not in json.dumps(
+            wires[0]["response_format"]["json_schema"]["schema"])
+        for wire in wires:
+            users = [row for row in wire["messages"] if row["role"] == "user"]
+            assert users[-1]["content"] == (
+                "[CURRENT USER REQUEST]\n[CURRENT TASK]\nTEMP current task bytes")
+            assert users[0]["content"] == "[USER HISTORY]\nearlier request"
+            assert "[DURABLE MEMORY]" in wire["messages"][0]["content"]
+            assert any(row["content"] == (
+                           "[ASSISTANT HISTORY - prior model output]\nprior assistant 3")
+                       for row in wire["messages"])
+        proposals = [row for row in wires[-1]["messages"] if row["role"] == "assistant"
+                     and row["content"].startswith("[WORKING HYPOTHESIS]")]
+        assert len(proposals) == 3
+        assert json.loads(proposals[0]["content"].split("\n", 1)[1])["calls"][0]["arguments"][
+            "id"] == memory_id
+        assert "updated durable 4" in wires[2]["messages"][0]["content"]
+        assert '"active_refs": []' in wires[-1]["messages"][0]["content"]
+        for original in originals:
+            assert "[CURRENT TASK]" not in original.content
+            assert "[TOOL OBSERVATION]" not in original.content
+            if isinstance(original, ToolMessage):
+                projected = next(row for row in wires[-1]["messages"]
+                                 if row.get("tool_call_id") == original.tool_call_id)
+                assert projected["content"].startswith("[TOOL OBSERVATION]")
+                assert projected["content"].endswith(original.content)
+                received = runtime.model.request_view.receipt_metadata[event_reference(
+                    str(scope.config()["configurable"]["thread_id"]), 0,
+                    original.model_dump(mode="json"))]
+                label = json.loads(projected["content"].split("\n", 1)[0].split(" ", 2)[2])
+                assert label["observation_received_at"] == received["observation_received_at"]
+                assert label["content_sha256"] == received["content_sha256"]
+                assert received["user_id"] == "alice"
+                assert received["message_key"] == runtime.model.active_message_key
+                assert received["tool_call_id"] == original.tool_call_id
+                assert received["content_sha256"] == hashlib.sha256(json.dumps(
+                    original.content, ensure_ascii=False).encode()).hexdigest()
+        if capture := os.environ.get("MILAI_V4_WIRE_CAPTURE"):
+            write_json(Path(capture), {"requests": wires,
+                "original_checkpoint_messages": [row.model_dump(mode="json") for row in originals],
+                "receipt_metadata": runtime.model.request_view.receipt_metadata})
+        assert store.search(namespace) == []
+        invoke_public_message(agent, runtime.model, _scope("B0", "new"), "NEXT TASK")
+        assert "TEMP current task bytes" not in json.dumps(wires[-1])
+        assert '"active_refs": []' in wires[-1]["messages"][0]["content"]
+
+
+def test_boundary_config_defaults_zero_correction_and_preserves_legacy_c(tmp_path: Path) -> None:
+    config = _config(tmp_path)
+    config["memory_boundaries"] = {"enabled": True}
+    config.pop("memory_result")
+    runner._validate(config, "B0")
+    with pytest.raises(ValueError, match="PERSISTENT_MEMORY_CONFIG_INVALID"):
+        runner._validate(config, "C")
+    runner._validate(_config(tmp_path), "C")
+
+
+def test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost(
+    tmp_path: Path,
+) -> None:
+    from langgraph.store.base import PutOp
+
+    embedding_wires = []
+    def embeddings(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.read())
+        embedding_wires.append(wire)
+        return httpx.Response(200, json={"data": [
+            {"index": i, "embedding": [1.0, 0.0] if "needle" in text else [0.0, 1.0]}
+            for i, text in enumerate(wire["input"])],
+            "usage": {"prompt_tokens": 3, "total_tokens": 3}})
+    budget = RunBudget(RunLimits(1, 3, None, None, None), tmp_path / "budget.json")
+    namespace = ("langmem", "run", "B0", "alice")
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock-embedding"),
+                    budget=budget, emit=Trace(tmp_path / "trace.jsonl", "embedding"),
+                    transport=httpx.MockTransport(embeddings)) as embed_client:
+        store = InMemoryStore(index={"dims": 2, "embed": VLLMEmbeddings(embed_client, "mock"),
+                                     "fields": ["content"]})
+        own_ids = [str(uuid.uuid4()) for _ in range(33)]
+        store.batch([PutOp(namespace, key, {"content": "needle" if i == 0 else f"other-{i}"})
+                     for i, key in enumerate(own_ids)])
+        before = {row.key: row.value for row in store.search(namespace, limit=64)}
+        query = "Original complete needle query\nKeep exact entity X-7 and conditions."
+        wires = []
+        with _runtime(tmp_path, store, wires, lambda *_: {"answer": "read-only"},
+                      budget=budget) as runtime:
+            invoke_public_message(_agent(runtime, tmp_path, "B0", boundaries=True), runtime.model,
+                                  _scope("B0"), query)
+        assert len(embedding_wires) == 2 and embedding_wires[-1]["input"] == [query]
+        assert len(wires) == 1
+        assert read_json(tmp_path / "budget.json")["embedding"]["charged_tokens"] == 6
+        after = {row.key: row.value for row in store.search(namespace, limit=64)}
+        assert before == after
+        events = [json.loads(line) for line in (tmp_path / "trace.jsonl").read_text().splitlines()]
+        route = next(row for row in events if row["event"] == "memory_boundary_route")
+        assert route["route"] == "query" and route["query"] == query
+        assert len(route["retrieved_record_ids"]) == 10
+        assert own_ids[0] in route["retrieved_record_ids"]
+        delivered = next(row for row in events if row["event"] == "memory_boundary_delivery")
+        assert delivered["delivered_record_ids"] == route["selected_record_ids"]
+
+
+class _OneRecordCapacity(_MockCapacity):
+    def check(self, messages: Any, output_tokens: int, tools: Any = None) -> dict[str, Any]:
+        receipt = super().check(messages, output_tokens, tools)
+        first = messages[0]["content"]
+        if "[DURABLE MEMORY]\n" in first:
+            rows = json.loads(first.split("[DURABLE MEMORY]\n", 1)[1].split(
+                "\n[/DURABLE MEMORY]", 1)[0])
+            if len(rows) > 1:
+                raise CapacityExceeded(receipt)
+        return receipt
+
+
+def test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body(
+    tmp_path: Path,
+) -> None:
+    store, wires, control_wires = InMemoryStore(), [], []
+    namespace = ("langmem", "run", "B0", "alice")
+    chosen = str(uuid.uuid4())
+    for key in [chosen, str(uuid.uuid4())]:
+        store.put(namespace, key, {"content": "old body"})
+    def control(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.read())
+        control_wires.append(wire)
+        return httpx.Response(200, json={"id": "selector-generation", "choices": [{
+            "finish_reason": "stop", "message": {"role": "assistant", "content":
+                json.dumps({"record_ids": [chosen]})}}],
+            "usage": {"prompt_tokens": 7, "completion_tokens": 2, "total_tokens": 9}})
+    def respond(_wire: Any, call: int) -> Any:
+        return ({"calls": [{"name": "manage_memory", "arguments": {
+            "action": "update", "id": chosen, "content": "current updated body"}}]}
+            if call == 1 else {"answer": "done"})
+    with _runtime(tmp_path, store, wires, respond, capacity=_OneRecordCapacity()) as runtime:
+        with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock", max_tokens=2048),
+            emit=lambda row: Trace(tmp_path / "trace.jsonl", "selector")({
+                **row, "role": "state_control", "control_stage": "memory_read_selection"}),
+            budget=runtime.model.client.budget, capacity=runtime.model.client.capacity,
+            transport=httpx.MockTransport(control)) as selector:
+            agent = _agent(runtime, tmp_path, "B0", boundaries=True,
+                           boundary_options={"attention_enabled": True}, selector_client=selector)
+            invoke_public_message(agent, runtime.model, _scope("B0"), "original task")
+            checkpoint = agent.get_state(_scope("B0").config()).values["messages"]
+        assert len(control_wires) == 1 and len(wires) == 2 and runtime.model.calls_in_message == 2
+        assert "current updated body" in wires[-1]["messages"][0]["content"]
+        assert "old body" not in wires[-1]["messages"][0]["content"]
+        assert read_json(tmp_path / "control-capacity.json")[
+            f"{_scope('B0').config()['configurable']['thread_id']}:0"] == 1
+        assert read_json(tmp_path / "budget.json")["generation_requests"] == 3
+        assert all("[WORKING HYPOTHESIS]" not in row.content for row in checkpoint)
+        events = [json.loads(line) for line in (tmp_path / "trace.jsonl").read_text().splitlines()]
+        routes = [row for row in events if row["event"] == "memory_boundary_route"]
+        assert routes[-1]["selection_reused"] and routes[-1]["route"] == "attention"
+        accounting = runner._accounting(tmp_path, tmp_path / "budget.json")
+        assert accounting["by_role"]["state_control"]["requests"] == 1
+        assert accounting["by_role"]["task_host"]["requests"] == 2
+        assert len(accounting["boundary_deliveries"]) == 2
+        assert accounting["boundary_observation_costs"]["retrieval"]["calls"] == 2
+        assert accounting["boundary_route_timing"]["cpu_ns"] > 0
+
+
+@pytest.mark.parametrize("used", [1, 13])
+def test_boundary_persisted_selector_capacity_refuses_without_another_http(
+    tmp_path: Path, used: int,
+) -> None:
+    store, wires, control_wires = InMemoryStore(), [], []
+    namespace = ("langmem", "run", "B0", "alice")
+    for _ in range(2):
+        store.put(namespace, str(uuid.uuid4()), {"content": "actual body"})
+    with _runtime(tmp_path, store, wires, lambda *_: {"answer": "unused"},
+                  capacity=_OneRecordCapacity()) as runtime:
+        with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mock", max_tokens=2048),
+            transport=httpx.MockTransport(lambda request: control_wires.append(request))
+        ) as selector:
+            agent = _agent(runtime, tmp_path, "B0", boundaries=True,
+                boundary_options={"attention_enabled": True}, selector_client=selector)
+            message_key = f"{_scope('B0').config()['configurable']['thread_id']}:0"
+            write_json(tmp_path / "control-capacity.json", {message_key: used})
+            expected = "LSA_CONTROL_CAPACITY" if used == 13 else "ALREADY_ATTEMPTED"
+            with pytest.raises((ValueError, ControlResponseError), match=expected):
+                invoke_public_message(agent, runtime.model, _scope("B0"), "actual query")
+            assert wires == control_wires == []
+            assert runtime.model.calls_in_message == 0
+            assert read_json(tmp_path / "control-capacity.json")[message_key] == used
+
+
+def test_boundary_host_twelve_call_capacity_does_not_replay_or_add_control(tmp_path: Path) -> None:
+    store, wires = InMemoryStore(), []
+    record_id = str(uuid.uuid4())
+    store.put(("langmem", "run", "B0", "alice"), record_id, {"content": "actual content"})
+    with _runtime(tmp_path, store, wires, lambda *_: {"calls": [{"name": "read_memory",
+        "arguments": {"id": record_id}}]}) as runtime:
+        agent = _agent(runtime, tmp_path, "B0", boundaries=True)
+        with pytest.raises(ValueError, match="PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"):
+            invoke_public_message(agent, runtime.model, _scope("B0"), "read actual content")
+        assert len(wires) == runtime.model.calls_in_message == 12
+        checkpoint = agent.get_state(_scope("B0").config()).values["messages"]
+        assert sum(isinstance(row, ToolMessage) for row in checkpoint) == 12
+        assert not (tmp_path / "control-capacity.json").exists()
+
+
+@pytest.mark.parametrize(("unknown", "audit_failure", "invalid_next"), [
+    (False, False, False), (True, False, False), (True, True, False), (False, False, True)])
+def test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, unknown: bool, audit_failure: bool,
+    invalid_next: bool,
+) -> None:
+    from milai_lab.runners import langmem_application as application
+
+    args = SimpleNamespace(config=tmp_path / "config.json", inputs=tmp_path / "inputs.json",
+                           runtime_root=tmp_path / "runtime", output=tmp_path / "prepared.json",
+                           prepared=tmp_path / "prepared.json", run="run", arm="B0", phase=0,
+                           stage="synthetic-boundaries")
+    config = _config(args.runtime_root)
+    config["memory_boundaries"] = {"enabled": True}
+    config["memory_result"] = {"correction_entries": 0}
+    write_json(args.config, config)
+    write_json(args.inputs, {"kind": "MILAI_PERSISTENT_MEMORY_INPUTS", "workload": "application",
+        "script": {"users": ["alice"], "initial_label_available": False, "phases": [{
+            "id": 0, "operator_memory": [], "world_events": [], "messages": [{
+                "message_id": "one", "session_id": "one", "user_id": "alice",
+                "public_index": 0, "text": "perform an action and maintain memory"}]}]}})
+    original_tools = application._business_tools
+    def business_tools(world: Any, user: str) -> Any:
+        tools = original_tools(world, user)
+        if unknown:
+            actual = tools[0].func
+            def uncertain(**kwargs: Any) -> Any:
+                actual(**kwargs)
+                raise httpx.ReadTimeout("synthetic unknown after actual side effect")
+            tools[0].func = uncertain
+        return tools
+    monkeypatch.setattr(application, "_business_tools", business_tools)
+    store, wires = InMemoryStore(), []
+    def respond(_wire: Any, call: int) -> Any:
+        if invalid_next and call == 2:
+            return []
+        return ({"calls": [
+            {"name": "manage_memory", "arguments": {"action": "update",
+                "id": str(uuid.UUID(int=2)), "content": "proposed body"}},
+            {"name": "reserve_and_label", "arguments": {"item_key": "parcel", "quantity": 2,
+                "destination": "bay", "packing": "box"}},
+        ]} if call == 1 else {"answer": "actual results only"})
+    @contextmanager
+    def open_runtime(_config: Any, _run: str, _arm: str, root: Path, _stage: str,
+                     **_kwargs: Any) -> Any:
+        with _runtime(root, store, wires, respond) as runtime:
+            yield runtime
+    monkeypatch.setattr(runner, "open_application_runtime", open_runtime)
+    if audit_failure:
+        original_adapters = runner._adapters
+        def adapters(*positional: Any, **kwargs: Any) -> Any:
+            factory, completed = original_adapters(*positional, **kwargs)
+            def fail_after_audit(*call_args: Any) -> None:
+                completed(*call_args)
+                raise ValueError("synthetic audit failure")
+            return factory, fail_after_audit
+        monkeypatch.setattr(runner, "_adapters", adapters)
+    runner.prepare(args, lab_root=LAB)
+    if unknown:
+        with pytest.raises(httpx.ReadTimeout) as failure:
+            runner.run(args, lab_root=LAB)
+        if audit_failure:
+            assert any("audit failed: ValueError" in note for note in failure.value.__notes__)
+        with pytest.raises(ValueError, match="PERSISTENT_MEMORY_ATTEMPT_ALREADY_STARTED"):
+            runner.run(args, lab_root=LAB)
+    elif invalid_next:
+        with pytest.raises(IncompleteChatResponse):
+            runner.run(args, lab_root=LAB)
+    else:
+        runner.run(args, lab_root=LAB)
+    world = ApplicationWorld(args.runtime_root / "business-world.sqlite", False)
+    try:
+        assert len(world.snapshot()["attempts"]) == len(world.snapshot()["reservations"]) == 1
+    finally:
+        world.close()
+    turns = list((args.runtime_root / "turns").glob("*.json"))
+    assert len(turns) == 1
+    audit = read_json(turns[0])["operation_audit"]
+    operations = audit["operations"]
+    assert len(operations) == 2 and audit["semantic_completion"] is None
+    if unknown:
+        assert len(wires) == 1 and all(row["status"] == "unknown" for row in operations)
+        assert all(row["receipt"] is None for row in operations)
+    else:
+        assert len(wires) == 2 and operations[0]["status"] == "failed"
+        assert operations[1]["status"] == "reserved_label_failed"
+        assert operations[1]["receipt"]["parsed"]["ok"] is False
+        assert operations[1]["side_effects"] == "not_inferred"
+        assert operations[1]["receipt"]["observation_received_at"] is not None
+    assert not audit["observed_write"]
+    accounting = read_json(args.runtime_root / "run_manifest.json")["accounting"]
+    assert accounting["boundary_observation_costs"]["operation_audit"]["calls"] == 1
+    assert accounting["boundary_observation_costs"]["operation_audit"]["logical_bytes"] > 0
 
 
 def test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity(
@@ -393,13 +750,17 @@ def test_unknown_business_side_effect_propagates_without_correction_or_replay(
         world.close()
 
 
-@pytest.mark.parametrize("history", ["archive", "retained"])
-def test_actual_history_permission_and_owner_isolation(tmp_path: Path, history: str) -> None:
+@pytest.mark.parametrize(("history", "boundaries"), [
+    ("archive", False), ("retained", False), ("archive", True), ("retained", True)])
+def test_actual_history_permission_and_owner_isolation(
+    tmp_path: Path, history: str, boundaries: bool,
+) -> None:
     store, wires = InMemoryStore(), []
-    with _runtime(tmp_path, store, wires, lambda _wire, _call: {"answer": "done"}) as runtime:
-        agent = _agent(runtime, tmp_path, "B1", history=history)
+    arm = "B0" if boundaries else "B1"
+    with _runtime(tmp_path, store, wires, lambda _wire, _call: {"answer": "saved"}) as runtime:
+        agent = _agent(runtime, tmp_path, arm, history=history, boundaries=boundaries)
         agent.update_state(
-            _scope("B1", "old").config(),
+            _scope(arm, "old").config(),
             {
                 "messages": [
                     HumanMessage(id="past-user", content="PAST_ARCHIVE_ONLY"),
@@ -425,7 +786,7 @@ def test_actual_history_permission_and_owner_isolation(tmp_path: Path, history: 
         )
         bank = LocalStateBank(store)
         bank.record_event(
-            StateScope("run", "B1", "alice"),
+            StateScope("run", arm, "alice"),
             {
                 "id": "audit-source",
                 "kind": "user",
@@ -433,16 +794,23 @@ def test_actual_history_permission_and_owner_isolation(tmp_path: Path, history: 
                 "content": "SOURCE_ARCHIVE_ONLY",
             },
         )
-        store.put(("langmem", "run", "B1", "alice"), str(uuid.uuid4()), {"content": "KEPT_BODY"})
-        store.put(("langmem", "run", "B1", "bob"), str(uuid.uuid4()), {"content": "OTHER_OWNER"})
-        invoke_public_message(agent, runtime.model, _scope("B1", "new"), "CURRENT")
+        store.put(("langmem", "run", arm, "alice"), str(uuid.uuid4()), {"content": "KEPT_BODY"})
+        store.put(("langmem", "run", arm, "bob"), str(uuid.uuid4()), {"content": "OTHER_OWNER"})
+        invoke_public_message(agent, runtime.model, _scope(arm, "new"), "CURRENT")
         text = json.dumps(wires)
         assert ("PAST_ARCHIVE_ONLY" in text) == (history == "archive")
         assert ("read_history" in text) == (history == "archive")
         assert (
             "KEPT_BODY" in text and "SOURCE_ARCHIVE_ONLY" not in text and "OTHER_OWNER" not in text
         )
-        assert RESPONSIBILITY_PROMPT in wires[0]["messages"][0]["content"]
+        assert (RESPONSIBILITY_PROMPT in wires[0]["messages"][0]["content"]) == (not boundaries)
+        if boundaries:
+            checkpoint = agent.get_state(_scope(arm, "new").config()).values["messages"]
+            audit = operation_audit([row.model_dump(mode="json") for row in checkpoint],
+                runtime.model.memory_turn, str(_scope(arm, "new").config()[
+                    "configurable"]["thread_id"]))
+            assert audit["operations"] == [] and not audit["observed_write"]
+            assert audit["user_intent_satisfied"] is None
 
 
 def test_prepared_phase_entry_reopens_retained_records_records_costs_and_refuses_rerun(

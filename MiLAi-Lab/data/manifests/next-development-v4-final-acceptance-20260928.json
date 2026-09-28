@@ -1,0 +1,299 @@
+{
+  "kind": "MILAI_NEXT_DEVELOPMENT_V4_FINAL_ACCEPTANCE",
+  "status": "EXPERIMENT_STOPPED_F9_REPORTED",
+  "goal_status_authority": "Actual thread Goal tool; user requested pause after task/report publication; no assertion of complete method success",
+  "baseline_commit": "44f9291bb0c7f3b6d5c9c71dadf76d1924a81eb2",
+  "method_commits": {
+    "R1": "e070456b57ce0b941813948464b2c1bf870c99f6",
+    "R2": "24ef49945cd12eccbd85792fee3c256bf3fe6d2a"
+  },
+  "requirements": {
+    "F1": {
+      "engineering": "ACCEPTED",
+      "semantic_scope": "exposed B only; see report for untested world/conflict boundaries"
+    },
+    "F2": {
+      "engineering": "ACCEPTED",
+      "semantic_scope": "exposed B only; see report for untested world/conflict boundaries"
+    },
+    "F3": {
+      "engineering": "ACCEPTED",
+      "semantic_scope": "exposed B only; see report for untested world/conflict boundaries"
+    },
+    "F4": {
+      "engineering": "ACCEPTED",
+      "semantic_scope": "exposed B only; see report for untested world/conflict boundaries"
+    },
+    "F5": {
+      "engineering": "ACCEPTED",
+      "semantic_scope": "exposed B only; see report for untested world/conflict boundaries"
+    },
+    "F6": {
+      "engineering": "ACCEPTED",
+      "semantic_scope": "exposed B only; see report for untested world/conflict boundaries"
+    },
+    "F7": {
+      "engineering": "ACCEPTED",
+      "semantic_scope": "exposed B only; see report for untested world/conflict boundaries"
+    },
+    "F0": {
+      "status": "COMPLETE",
+      "baseline_sources_verified": 32
+    },
+    "F8_A": {
+      "status": "ACCEPTED",
+      "unique_passed_nodeids": 44,
+      "real_model_calls": 0
+    },
+    "F8_B": {
+      "status": "GATE_FAILED",
+      "r1_full_scripts": {
+        "pass": 5,
+        "total": 6
+      },
+      "r2_full_scripts": {
+        "pass": 5,
+        "total": 6
+      },
+      "gate_requires": {
+        "pass": 6,
+        "total": 6
+      }
+    },
+    "F8_C": {
+      "status": "NOT_CREATED_NOT_RUN",
+      "reason": "A/B joint gate failed",
+      "required_coverage_not_run": [
+        "save",
+        "update",
+        "independent_matters",
+        "temporary",
+        "quotation",
+        "dynamic_world",
+        "read_only",
+        "delete",
+        "assistant_history_conflict",
+        "multiple_records"
+      ]
+    },
+    "F8_D": {
+      "status": "NOT_TRIGGERED",
+      "reason": "all 44 actual generations used all; no actual retrieval bottleneck"
+    },
+    "F9": {
+      "status": "REPORTED",
+      "decision": "STOP_CURRENT_SINGLE_CANDIDATE_REPAIR_LOOP",
+      "method_stability": "NOT_ACHIEVED",
+      "research_goal": "NOT_ACHIEVED",
+      "product": "NO_GO",
+      "rule": "Published R2 full regression rejection; no splicing, gate relaxation or further wording/anchor variants"
+    }
+  },
+  "versions": {
+    "R1": {
+      "status": "GATE_FAILED_CURRENT_TURN_FORMAT",
+      "metrics": {
+        "public_turns": 15,
+        "task_turn_success": {
+          "pass": 14,
+          "total": 15
+        },
+        "new_formation": {
+          "pass": 5,
+          "total": 5
+        },
+        "revision_and_preservation": {
+          "pass": 1,
+          "total": 1
+        },
+        "later_use": {
+          "pass": 7,
+          "total": 7
+        },
+        "positive_persistent_scripts": {
+          "pass": 4,
+          "total": 4
+        },
+        "negative_scope_cases": {
+          "pass": 3,
+          "total": 3
+        },
+        "current_BRIEF_format": {
+          "pass": 0,
+          "total": 1
+        },
+        "next_session_no_format_leak": {
+          "pass": 1,
+          "total": 1
+        },
+        "full_scripts": {
+          "pass": 5,
+          "total": 6
+        },
+        "false_save_claims": 0,
+        "unnecessary_memory_mutations": 0,
+        "duplicate_matters": 0,
+        "business_actions": 0,
+        "dynamic_world_correctness": "NOT_TESTED",
+        "assistant_conflict_consumption": "NOT_TESTED",
+        "control_calls": 0,
+        "correction_calls": 0,
+        "retries": 0
+      },
+      "cost": {
+        "generation_calls": 22,
+        "generation_prompt_tokens": 26742,
+        "generation_completion_tokens": 871,
+        "generation_tokens": 27613,
+        "embedding_calls": 7,
+        "embedding_tokens": 262,
+        "http_wall_seconds": 10.944264514371753,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      }
+    },
+    "R2": {
+      "status": "GATE_FAILED_COMPLETE_PLAN_RECALL",
+      "metrics": {
+        "public_turns": 15,
+        "task_turn_success_strict": {
+          "pass": 14,
+          "total": 15
+        },
+        "new_formation": {
+          "pass": 5,
+          "total": 5
+        },
+        "revision_and_preservation": {
+          "pass": 1,
+          "total": 1
+        },
+        "later_use_complete": {
+          "pass": 6,
+          "total": 7
+        },
+        "positive_persistent_scripts": {
+          "pass": 3,
+          "total": 4
+        },
+        "negative_scope_cases": {
+          "pass": 3,
+          "total": 3
+        },
+        "current_BRIEF_format": {
+          "pass": 1,
+          "total": 1
+        },
+        "next_session_no_format_leak": {
+          "pass": 1,
+          "total": 1
+        },
+        "full_scripts": {
+          "pass": 5,
+          "total": 6
+        },
+        "field_plan_explicitly_named_quantity_destination_packing": {
+          "pass": 3,
+          "total": 3
+        },
+        "field_plan_complete_item_identity_in_recall_answer": false,
+        "false_save_claims": 0,
+        "unnecessary_memory_mutations": 0,
+        "duplicate_matters": 0,
+        "business_actions": 0,
+        "dynamic_world_correctness": "NOT_TESTED",
+        "assistant_conflict_consumption": "NOT_TESTED",
+        "control_calls": 0,
+        "correction_calls": 0,
+        "retries": 0
+      },
+      "cost": {
+        "generation_calls": 22,
+        "generation_prompt_tokens": 27707,
+        "generation_completion_tokens": 864,
+        "generation_tokens": 28571,
+        "embedding_calls": 7,
+        "embedding_tokens": 246,
+        "http_wall_seconds": 10.088506181258708,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      }
+    }
+  },
+  "total_v4_cost": {
+    "generation_calls": 44,
+    "generation_prompt_tokens": 54449,
+    "generation_completion_tokens": 1735,
+    "generation_tokens": 56184,
+    "embedding_calls": 14,
+    "embedding_tokens": 508,
+    "http_wall_seconds": 21.03277069563046,
+    "http_errors": 0,
+    "unknown_usage": 0,
+    "local_rejections": 0
+  },
+  "ledger_before": {
+    "generation_requests": 2950,
+    "generation_tokens": 3729307,
+    "embedding_tokens": 20729,
+    "sha256": "28cbcfe8c0be9208aaa9e6898daa36dcaa1d9202ee27fa73a613d5f45f7a4e38"
+  },
+  "ledger_after": {
+    "generation_requests": 2994,
+    "generation_tokens": 3785491,
+    "embedding_tokens": 21237,
+    "sha256": "e47de5a370b7c6dad581d836a440411055c01c137ec4c589f95389109a4ca668"
+  },
+  "real_http_concurrency": 1,
+  "exposure": "same six exposed original v3 scripts twice, 12 jobs and 30 public messages; no new C samples",
+  "control_calls": 0,
+  "correction_calls": 0,
+  "retries": 0,
+  "actual_routes": {
+    "all": 44
+  },
+  "memory_operations": {
+    "created": 10,
+    "updated": 2,
+    "ordinary_search": 2
+  },
+  "evidence_sha256": {
+    "docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v4.0.md": "c9a149cf5a7ad1ff6fc833702391813afd4c1494187bdb350c8e545e8b42625e",
+    "docs/MILAI_NEXT_DEVELOPMENT_V4_OVERALL_EXPERIMENT_REPORT_20260928.md": "5dc7606f1987f1c93d5e93f6ad54603880f7829294c80926e9a0ed5399914261",
+    "docs/MILAI_NEXT_DEVELOPMENT_V4_B_R1_RESULTS_20260928.md": "37eb4169c6800b64b8f98674ea9d3b268d4048d2cbe2be23a036ba141f3160c5",
+    "docs/MILAI_NEXT_DEVELOPMENT_V4_B_R2_RESULTS_20260928.md": "12bdfb17ecaa4fd94770c3f7e2bfdf14bd45a5c08a0947a2d663adbf4dd6c7f7",
+    "docs/MILAI_NEXT_DEVELOPMENT_V4_B_R2_PROTOCOL_20260928.md": "9d91edd73e236a50116f055064b2a01dc85c0c87487f7bd2f2edfac186ae884d",
+    "data/manifests/next-development-v4-f8a-checks-20260928.json": "0a68e6b2e4a2fb88d3d4ff020ffddb211d7b4bd0dfb493babf936c5412416028",
+    "data/manifests/next-development-v4-b-r2-source-checks-20260928.json": "b47479d969a62cb8f05ade4dfbd8975efb3330fcb94c617daf4ce5c2d618a649",
+    "data/manifests/next-development-v4-b-r1-results-20260928.json": "0a259226b010491600f1ff958c162bd984c4294b1e33f526c69779e4b06bcda0",
+    "data/manifests/next-development-v4-b-r2-results-20260928.json": "45844c67ebffbaedb3a3a2e4b917dd761c6864fd131cf897e80bed28e7667a84"
+  },
+  "ci": {
+    "r1_fast": {
+      "run": 36380454177,
+      "conclusion": "success"
+    },
+    "r2_fast": {
+      "run": 36381555861,
+      "conclusion": "success"
+    },
+    "full": "skipped, not counted as passed"
+  },
+  "limitations": [
+    "No new-scenario method stability evidence",
+    "No real dynamic-world or assistant-history conflict validation",
+    "No causal component ablation",
+    "Second independent model family NOT_RUN",
+    "No real retrieval bottleneck or Attention effect comparison",
+    "Physical IO, ordinary write CPU, GPU and monetary costs unknown"
+  ],
+  "publication": {
+    "pr_url": "https://github.com/minguselandy/MiLAi/pull/67",
+    "draft": true,
+    "base": "feat/lab-memory-result-v3-20260928",
+    "no_auto_merge": true,
+    "raw_private_evidence": "ignored"
+  }
+}

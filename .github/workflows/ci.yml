@@ -181,7 +181,7 @@ jobs:
         run: |
           uv run --no-sync python tools/check_verification_matrix.py
           uv run --no-sync ruff check src tests tools
-          uv run --no-sync mypy src/milai_lab/contracts src/milai_lab/analysis src/milai_lab/harness src/milai_lab/scorers src/milai_lab/boundary.py src/milai_lab/tools_boundary.py src/milai_lab/methods/memory_result.py
+          uv run --no-sync mypy src/milai_lab/contracts src/milai_lab/analysis src/milai_lab/harness src/milai_lab/scorers src/milai_lab/boundary.py src/milai_lab/tools_boundary.py src/milai_lab/methods/memory_result.py src/milai_lab/methods/memory_boundaries.py
           if test -f tests/unit/test_lsa_controller_contract.py; then
             uv run --no-sync mypy src/milai_lab/methods/local_state_attention/protocol.py
             uv run --no-sync pytest -q tests/unit/test_lsa_controller_contract.py

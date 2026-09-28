@@ -46,6 +46,7 @@ from milai_lab.methods.local_state_attention.integration import (
     make_writer_view_hook,
 )
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController
+from milai_lab.methods.memory_boundaries import MemoryBoundaryView
 from milai_lab.methods.memory_result import CORRECTION_TOOLS, correction_marker
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel
@@ -193,6 +194,7 @@ def build_agent(
     writer_state_body_prefill: Literal["all", "none"] = "all",
     persistent_memory_arm: Literal["B0", "B1", "C"] | None = None,
     persistent_memory_records: Callable[[RunnableConfig], list[dict[str, Any]]] | None = None,
+    memory_boundaries: MemoryBoundaryView | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
@@ -232,6 +234,11 @@ def build_agent(
         raise ValueError("PERSISTENT_MEMORY_RECIPE_CONFLICT")
     if persistent_memory_arm is None and persistent_memory_records is not None:
         raise ValueError("PERSISTENT_MEMORY_RECIPE_CONFLICT")
+    if memory_boundaries is not None and (
+        persistent_memory_arm != "B0" or (model.request_view is not None
+                                         and not isinstance(model.request_view, MemoryBoundaryView))
+    ):
+        raise ValueError("MEMORY_BOUNDARY_RECIPE_CONFLICT")
     if persistent_memory_arm is not None:
         model.memory_protocol = persistent_memory_arm
     selected_memory_tools: Sequence[BaseTool]
@@ -304,8 +311,11 @@ def build_agent(
             if business_call_wrapper is not None:
                 return business_call_wrapper(current, execute)
             return execute(current)
-        return (observer.run_tool(request, original, business_call_wrapper)
-                if observer is not None else original(request))
+        result = (observer.run_tool(request, original, business_call_wrapper)
+                  if observer is not None else original(request))
+        if memory_boundaries is not None and isinstance(result, ToolMessage):
+            memory_boundaries.observe_receipt(result, model.memory_turn)
+        return result
 
     prompt = system_prompt + ("\n" + environment_rules if environment_rules else "")
     return create_react_agent(
@@ -318,7 +328,7 @@ def build_agent(
                         pre_model_hook=(make_persistent_memory_hook(
                             prompt, persistent_memory_records,
                             history=history_access if full_history else None,
-                            emit=model.client.emit)
+                            emit=model.client.emit, boundary_view=memory_boundaries, model=model)
                         if persistent_memory_arm is not None
                         and persistent_memory_records is not None else
                         make_pre_model_hook(local_state_controller, prompt,

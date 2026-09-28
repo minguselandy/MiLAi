@@ -2,6 +2,24 @@
 
 ## Current scope and authority
 
+The user authorized the full [NEXT_DEVELOPMENT v4 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v4.0.md).
+F0–F7 and F8 A are engineered and checked; both exposed B regressions finished at 5/6.
+The sole R2 answer-contract candidate is rejected by its pre-frozen complete regression gate.
+Stop this wording/anchor repair loop. F8 C was not created because A/B did not jointly pass;
+F8 D was not triggered because no actual retrieval bottleneck appeared.
+Follow the [v4 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V4_20260928.md)
+and [F9 overall report](docs/MILAI_NEXT_DEVELOPMENT_V4_OVERALL_EXPERIMENT_REPORT_20260928.md).
+Engineering completion is not method stability: the complete method/research goal is NOT_ACHIEVED,
+and Product remains NO-GO. Preserve the original v4 DRAFT/NOT_STARTED bytes and historical results.
+The user requested report publication and Goal pause after this task; the actual thread Goal tool
+controls that status. No historical ACTIVE text or retained opt-in source authorizes another run.
+Further experiments, downloads, deployments or C creation require a new explicit user instruction.
+Root owns closeout docs/results; Luna high owns Git publication. No automatic merge/main rewrite.
+Use ordinary B0 as the simple reference and preserve historical C for reproduction only.
+Do not add D/E names, auto-fill semantic memory, or equate provenance with semantic support.
+
+The following v3 closure remains historical evidence:
+
 The user explicitly authorized the [NEXT_DEVELOPMENT v3 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v3.0.md).
 Its mandatory P0/P1/P2 execution and P6 reporting are now closed with Pivot/Stop; P3/P4/E6/P5
 were not triggered by their evidence gates. Follow the [v3 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V3_20260928.md)
@@ -17,7 +35,7 @@ C only checks actual owner/turn operations, does not certify semantic saved, and
 for reproduction. The one correction consumes the original Host capacity and cannot replay business.
 Archive and Retained contracts remain distinct; audit history is not Host permission.
 
-Current closeout changes are Root documentation/results and Luna Git publication only. No automatic
+The v3 closeout changes were Root documentation/results and Luna Git publication only. No automatic
 merge, main rewrite or old-tree cleanup. Future authorized development stays in MiLAi-Lab plus
 necessary root CI, with Root owning docs/data/real HTTP/scoring, one matched Sol xhigh source owner,
 and Luna high Git/required downloads. Astra is only for a concrete difficult conflict.

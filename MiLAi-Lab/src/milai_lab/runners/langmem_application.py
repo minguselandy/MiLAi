@@ -454,6 +454,7 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               memory_contract: Literal["native", "strict"] = "native",
               agent_factory: Callable[..., Any] | None = None,
               public_turn_callback: Callable[..., None] | None = None,
+              capture_interrupted_turn: bool = False,
               ) -> dict[str, Any]:
     """Run one frozen phase; the next invocation reopens every process-owned resource."""
     phase = script["phases"][phase_id]
@@ -497,6 +498,28 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                 raise ValueError("APPLICATION_WORLD_ACTION_UNKNOWN")
             world.set_label_available(event["event_id"], event["available"])
         journal = BusinessActionJournal(root / "business-journal.json", BUSINESS_NAMES)
+        def capture_interruption(error: BaseException, agent: Any, scope: FoundationScope,
+                                 public_index: int) -> None:
+            if not capture_interrupted_turn or public_turn_callback is None:
+                return
+            emit = runtime.model.client.emit
+            try:
+                if emit is not None:
+                    emit({"event": "public_turn_interrupted", "error_type": type(error).__name__,
+                          "thread_id": scope.config()["configurable"]["thread_id"],
+                          "public_index": public_index})
+                public_turn_callback(agent, scope, public_index, "INTERRUPTED_UNKNOWN",
+                                     journal.calls_for_thread(
+                                         scope.config()["configurable"]["thread_id"]))
+            except Exception as audit_error:
+                error.add_note("Interrupted-turn audit failed: " + type(audit_error).__name__)
+                if emit is not None:
+                    try:
+                        emit({"event": "public_turn_audit_failed",
+                              "primary_error_type": type(error).__name__,
+                              "audit_error_type": type(audit_error).__name__})
+                    except Exception as trace_error:
+                        error.add_note("Audit-error trace failed: " + type(trace_error).__name__)
         agents: dict[str, Any] = {}
         for message in phase["messages"]:
             message_id, user_id = message["message_id"], message["user_id"]
@@ -586,6 +609,7 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                         assert local_state_controller is not None
                         _collect_turn_tail(agent, scope, local_state_controller,
                                            public_index, close=False)
+                    capture_interruption(error, agent, scope, public_index)
                     raise
                 close_result = (_collect_turn_tail(agent, scope, local_state_controller,
                                                    public_index, close=True)
@@ -612,11 +636,12 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                 progress["pending_message"] = None
                 write_json(progress_path, progress)
                 continue
-            except BaseException:
+            except BaseException as original_error:
                 if local_state_update_epoch == "turn_end":
                     assert local_state_controller is not None
                     _collect_turn_tail(agent, scope, local_state_controller,
                                        public_index, close=False)
+                capture_interruption(original_error, agent, scope, public_index)
                 raise
             close_result = (_collect_turn_tail(agent, scope, local_state_controller,
                                                public_index, close=True)
