@@ -6,9 +6,10 @@ reference_commit: 024fa698b97925dba295c3bd674f820f39559f42
 
 # 长程总计划执行 Goal
 
-> 最新状态（2026-09-27）：LSA复盘当前E2切片完成后，用户要求暂停，实际thread Goal已paused。
-> 总目标仍未完成；旧激活及下一步段落保留历史证据，不能恢复执行。
-> [最新总体报告](MILAI_LSA_REVIEW_OVERALL_EXPERIMENT_REPORT_20260927.md)记录完整结果与未完成项。
+> 最新状态（2026-09-28）：用户再次明确暂停，实际 v2 Goal 于 2026-09-27 18:46:35 UTC 设为 paused。
+> 总目标未完成；旧激活及下一步段落是历史证据，不能恢复执行。
+> [最新总体报告](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)涵盖历史实验、N0/N1 与未完成 N2。
+> 本页下表保留早期 SER/P0–P12 时点证据，连续账本以最新总体报告核对值为准。
 
 2026-09-27 新授权：用户要求完整执行
 [局部多 State–Attention 规划](MILAI_LOCAL_STATE_ATTENTION_DEVELOPMENT_EXPERIMENT_PLAN_20260927.md)。

@@ -1,0 +1,335 @@
+{
+  "kind": "MILAI_OVERALL_V2_PAUSE_RESULTS",
+  "observed_at_utc": "2026-09-27T18:48:15.040577+00:00",
+  "actual_goal_status": "paused",
+  "paused_at_utc": "2026-09-27T18:46:35Z",
+  "development_tree": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2",
+  "branch": "feat/lab-fixed-state-read-v2-20260928",
+  "head": "ddd5ab71bcc213eb97c52b22698ff9ed4ac1f8ae",
+  "n2_preserved_pre_closeout_files": [
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-development-v2-n2-fixed-read-r1/config.json",
+      "bytes": 1667,
+      "sha256": "c5fb7130f801d738a37189bc71474a34216e062f4017116b633a3e25eff7e41f"
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-development-v2-n2-fixed-read-r1/inputs.json",
+      "bytes": 11830,
+      "sha256": "50b334aee2e234952940bcce286cdbb677ef9cdc403c28442b9c42b58120f8fb"
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-development-v2-n2-fixed-read-r1/rubric.json",
+      "bytes": 3753,
+      "sha256": "33e016291601d2cc4d62f6fe30b30d80777b714af72924f7734fa09b6f8eb37e"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V2_N2_FIXED_READ_20260928.md",
+      "bytes": 6857,
+      "sha256": "6380567a1ae57e1fe30d20d9c25ff33c05f8eee9c980e9646248413712649582"
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/runners/fixed_state_read.py",
+      "bytes": 17934,
+      "sha256": "273cfd55d00a4f2bbefee0f19ffdaf2703c5da403b8d48b49a03cf7ff6e3d330"
+    },
+    {
+      "path": "MiLAi-Lab/tests/unit/test_fixed_state_read.py",
+      "bytes": 13097,
+      "sha256": "746a5cbf8df0ad558f44fc3d8da4f929ab3cf47f285fb872103568a67dd37a55"
+    },
+    {
+      "path": "MiLAi-Lab/tools/run_fixed_state_read.py",
+      "bytes": 1296,
+      "sha256": "8550939210af3e3c4219d0b754bf48366f0eb4178bbea1f989d072f55358e518"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 20197,
+      "sha256": "ceaded73291aa97d4d131e2bff6464f8e02ff38eb3a28bffe629157928767bd2"
+    },
+    {
+      "path": ".github/workflows/fast.yml",
+      "bytes": 15931,
+      "sha256": "15a27e849c10eabc1e90223c70d55ebc4598b0ebef66c9f11ce336828dd0f613"
+    },
+    {
+      "path": "MiLAi-Lab/configs/lab-verification-matrix.json",
+      "bytes": 3881,
+      "sha256": "6ea871fb7ac8b2c1bbb57f433b2d88674992d633e382ac9b9e9c5d18feff9a8c"
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/read_probe.py",
+      "bytes": 8227,
+      "sha256": "f241eac255d8c4a039dc2924f884fa63c8aec65baae9cf4d500cd3dbade1db39"
+    }
+  ],
+  "original_c5_wip": [
+    {
+      "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/controller.py",
+      "git_status": " M",
+      "sha256": "45211ea522331d4f79a033f1562210fead6b658016eef084372ea32fb919530a",
+      "verified_unchanged": true
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/protocol.py",
+      "git_status": " M",
+      "sha256": "756ad59966e8a91483103c9987b6190217208ae4cadf234cb99fe8d68d0e3442",
+      "verified_unchanged": true
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-read-selection-r1/config.json",
+      "git_status": "??",
+      "sha256": "01ab442d8ae082c0ff02d48af37fb90d77adb3c0a12a8c95b1f35d77927c7070",
+      "verified_unchanged": true
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-read-selection-r1/inputs.json",
+      "git_status": "??",
+      "sha256": "0fe3c753207c303a77f5bc17be1863730a7015f7a64cd102d4945f5e07afa060",
+      "verified_unchanged": true
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-read-selection-r1/rubric.json",
+      "git_status": "??",
+      "sha256": "800b41ecec2f162a8a0940da83ebfedf545207351b03eab7646b5993b6823070",
+      "verified_unchanged": true
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-update-selection-r1/config.json",
+      "git_status": "??",
+      "sha256": "618bb4e574df74841e3793dbcff7bdbdccbca56562eb8f031297e30c9c1851fa",
+      "verified_unchanged": true
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-update-selection-r1/inputs.json",
+      "git_status": "??",
+      "sha256": "79a0def7065e355a850b7551718e3e036333de86ff78b3fa3489007cbf226827",
+      "verified_unchanged": true
+    },
+    {
+      "path": "MiLAi-Lab/data/diagnostics/next-improvement-wp4-update-selection-r1/rubric.json",
+      "git_status": "??",
+      "sha256": "f968eac22bbb6c4d50b1c775001ff6c90ad51c7043cdbd518613833482cce3b0",
+      "verified_unchanged": true
+    }
+  ],
+  "ignored_draft_identities": [
+    {
+      "path": "MiLAi-Lab/artifacts/next-development-v2/n2-config-draft.json",
+      "bytes": 1667,
+      "sha256": "c5fb7130f801d738a37189bc71474a34216e062f4017116b633a3e25eff7e41f"
+    },
+    {
+      "path": "MiLAi-Lab/artifacts/next-development-v2/n2-inputs-draft.json",
+      "bytes": 11826,
+      "sha256": "03d05504a3ddf01e423e0640f324e894dd6f9f65974423d327499266ce2d84cc"
+    },
+    {
+      "path": "MiLAi-Lab/artifacts/next-development-v2/n3-config-draft.json",
+      "bytes": 1669,
+      "sha256": "d339c9b260e221b58591cebc0fde5f02c034e46376529b9d9a30c341129d97bc"
+    },
+    {
+      "path": "MiLAi-Lab/artifacts/next-development-v2/n3-inputs-draft.json",
+      "bytes": 9679,
+      "sha256": "e1f84522238958d107f0d86e7d6f082e94721e1d27c0fb7a94b8e7d0914b43ff"
+    },
+    {
+      "path": "MiLAi-Lab/artifacts/next-development-v2/n3-rubric-draft.json",
+      "bytes": 2231,
+      "sha256": "194b05b8899ad793aa92e9b5a0d8c6273226a133a5cf19ae3f81b75d709b9802"
+    }
+  ],
+  "ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "bfc2768c4cd6d92ce650bc65e2018b8d23a404de0c9a61e07e88ccbd1c43d0c6",
+    "generation_calls": 2799,
+    "generation_tokens": 3486504,
+    "embedding_tokens": 19273,
+    "generation_unknown_usage": 0,
+    "embedding_unknown_usage": 0
+  },
+  "new_v2_real_calls": {
+    "generation": 0,
+    "embedding": 0
+  },
+  "process_observation": {
+    "matching_task_processes": 0,
+    "source_agent_interrupted": true,
+    "source_owner_handoff_confirms_no_background_session": true,
+    "shared_services_not_stopped_or_reconfigured": true
+  },
+  "report_date": "2026-09-28",
+  "scope": "MiLAi-Lab / RESEARCH_PROTOTYPE",
+  "research_objective_complete": false,
+  "product_status": "NO_GO",
+  "publication": {
+    "kind": "docs_and_manifest_only",
+    "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v2-closeout",
+    "branch": "docs/lab-next-development-v2-pause-20260928",
+    "base_commit": "ddd5ab71bcc213eb97c52b22698ff9ed4ac1f8ae",
+    "base_pr": 61,
+    "main_commit": "9515017a5dfaba6b6e306fa778fd20f4383b6e35",
+    "no_merge_or_closure": true,
+    "n2_wip_included": false
+  },
+  "n0": {
+    "published_commit": "ddd5ab71bcc213eb97c52b22698ff9ed4ac1f8ae",
+    "pr_url": "https://github.com/minguselandy/MiLAi/pull/61",
+    "scenario_count": 35,
+    "control_request_count": 45,
+    "ordered_json_sha256": "1b3069b6a44ef41de18a8ca999eb39dff2d52ac251bfe8dd2dd9a29b7e6edbfb",
+    "normalization": [],
+    "local_protocol_passed": 71,
+    "local_related_foundation_passed": 11,
+    "equivalence_scope": "scripted model / fake Bank ordered contract only; not raw HTTP or real Store equivalence",
+    "fast_run_id": 36341193969,
+    "fast_gate_job_id": 108683211915,
+    "fast_conclusion": "success",
+    "skipped_jobs_not_passes": [
+      "Product Runtime",
+      "Product integration",
+      "Archive",
+      "Tested PR tree identity"
+    ]
+  },
+  "n1": {
+    "new_experiments": 0,
+    "scope": "One existing C3b increment-boundary actual wire trajectory",
+    "receipt_delivery_confirmed": true,
+    "semantic_adoption_unproven": true
+  },
+  "n2": {
+    "status": "PAUSED_WIP_NOT_FREEZE_READY",
+    "actual_paths_run": 0,
+    "planned_paths": 10,
+    "independent_exposed_arcs": 1,
+    "prefix_count": 2,
+    "input_bytes_fixed": true,
+    "execution_freeze_complete": false,
+    "source_owner_handoff": {
+      "owner": "Sol xhigh / lsa_source",
+      "not_rerun_for_closeout": true,
+      "related_tests_passed": 12,
+      "ruff": "passed",
+      "mypy": "passed, 3 source files",
+      "matrix": "passed, active_sources=151, optional_tests_owned=13",
+      "retained_intermediate_failures": [
+        "Initial new tests: 1 failed, 3 passed; JSON-action top-level tools assumption in test; assertion corrected then 4 passed before final related 12 passed",
+        "Initial Ruff I001/F401; corrected before final pass"
+      ],
+      "unfinished": [
+        "zero-model prepare against fixed inputs",
+        "required packaging build and package-content check",
+        "final checks receipt and method freeze",
+        "real Host / embedding / shared Store execution",
+        "end-to-end semantic scoring"
+      ]
+    },
+    "limitations": [
+      "One exposed arc, two dependent prefixes",
+      "combined current task manually changed to read-only",
+      "two pre-business model-generated failure cards preserved, not real receipts",
+      "ordinary memory controlled empty, not original historical snapshot",
+      "full_history retains directory and State READ rights"
+    ]
+  },
+  "remaining": {
+    "n3": "DRAFT_ONLY_0_OF_8_RUN",
+    "n4": "NOT_TRIGGERED",
+    "n5": "NOT_RUN",
+    "wp7": "NOT_DONE",
+    "n6": "NOT_TRIGGERED",
+    "second_model": "NOT_RUN",
+    "stable_unseen_benefit": "UNPROVEN"
+  },
+  "cost_delta_v2": {
+    "generation_calls": 0,
+    "generation_tokens": 0,
+    "embedding_tokens": 0
+  },
+  "cost_prior_v1_delta": {
+    "generation_calls": 31,
+    "generation_tokens": 66171,
+    "embedding_tokens": 527
+  },
+  "cost_measurement_limits": [
+    "Development-agent and CI costs excluded from experimental token ledger",
+    "Current ledger layer unknown usage is zero; sealed earlier unknown reservations remain unchanged",
+    "Unmeasured CPU, physical I/O and monetary cost remain unknown"
+  ],
+  "status_documents_synchronized_to_development_tree": [
+    "MiLAi-Lab/AGENTS.md",
+    "MiLAi-Lab/docs/MILAI_LONG_HORIZON_EVIDENCE_MAP_20260927.md",
+    "MiLAi-Lab/docs/MILAI_LONG_HORIZON_EXECUTION_GOAL.md",
+    "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V2_20260928.md",
+    "MiLAi-Lab/docs/MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md",
+    "MiLAi-Lab/data/manifests/milai-overall-v2-pause-20260928.json"
+  ],
+  "evidence_files": [
+    {
+      "path": "docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md",
+      "sha256": "84d5ddd45224d83c4206c95d8b46ca41f2a5dabd9990266aadccae0df1c0df22"
+    },
+    {
+      "path": "data/manifests/next-development-v2-n0-n1-checks-20260928.json",
+      "sha256": "2f8cd01896097a1a762e26633d5a339cd6742ac9dcc87b042a9d7f502348add1"
+    },
+    {
+      "path": "docs/MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md",
+      "sha256": "9696c63625bda61b48d5ef665a3c2d4381fe2f897da565466bcd6f6f5e2eb209"
+    },
+    {
+      "path": "data/manifests/next-improvement-overall-results-20260928.json",
+      "sha256": "c183df5719efe4faab07ffa03c2536c323abf19717f551c3884d2d7da0700c8d"
+    },
+    {
+      "path": "docs/MILAI_LSA_REVIEW_OVERALL_EXPERIMENT_REPORT_20260927.md",
+      "sha256": "2a2b52edc9086997caa1ce37bba7c1b6869bd0d3cf4f35ea3f4914ee7c059433"
+    },
+    {
+      "path": "docs/MILAI_LOCAL_STATE_ATTENTION_OVERALL_EXPERIMENT_REPORT_20260927.md",
+      "sha256": "77e3a7680f9c93587875bf6b63b8e03c04fbe0cb2f8e05742322faa2ecf25086"
+    },
+    {
+      "path": "docs/MILAI_SER_V21_FINAL_RESULTS_20260927.md",
+      "sha256": "b08390befb85f3a302676c07dc61d961c3fdf408643469552d15f877629b635f"
+    },
+    {
+      "path": "docs/MILAI_SER_V23_RESULTS_20260927.md",
+      "sha256": "db7744d48cafcaa3acdb149a3305ae3075114c81435837f063f1ea92ecdd6a09"
+    },
+    {
+      "path": "docs/MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS_20260927.md",
+      "sha256": "fc2422e4ba81ae0d677080f7ba5ff6f734380e6538d073428bc97a0477cd046f"
+    },
+    {
+      "path": "docs/MILAI_APPLICATION_V25_RESULTS_20260927.md",
+      "sha256": "69952a1fdb30c49f10e0e91cbd40bdd6e789b9d5d2e4c70b932b0b5bce3c7682"
+    },
+    {
+      "path": "docs/MILAI_EXTERNAL_MEMORY_V26_RESULTS_20260927.md",
+      "sha256": "942e0784abacf4923dafdd5f1f252ac653c5111dcf9c8b72022662c50fe03730"
+    },
+    {
+      "path": "docs/MILAI_EXTERNAL_MEMORY_V26_REPRODUCTION_20260927.md",
+      "sha256": "1ea37f9247ba010b41ab55a8a7d3d04a93df430e11a5fb76f20b48295d4e612a"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1"
+    }
+  ],
+  "closeout_validation": {
+    "scope": "documents and manifest only; no model/test/build execution",
+    "local_links_checked": 62,
+    "broken_links": 0,
+    "json": "valid",
+    "historical_evidence_hashes": 13,
+    "preserved_wip_hashes": 19,
+    "ignored_draft_hashes": 5,
+    "ledger_unchanged": true,
+    "tracked_diff_check": "passed",
+    "report_sha256": "3e1e9d7658a45ab5e8979ca5b764aa791f87d95eced7aabeee150a371fd3f001"
+  }
+}
