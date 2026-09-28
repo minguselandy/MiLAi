@@ -1,0 +1,97 @@
+{
+  "kind": "MILAI_V5_ROOT_ONLY_AUTHORITY_DIAGNOSTIC",
+  "runtime_must_not_read": true,
+  "obligations": {
+    "assistant_conflict/save_1_count": {
+      "kind": "positive_memory",
+      "expected": 6,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/old_confirm": {
+      "kind": "answer",
+      "expected": 6,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/new_count": {
+      "kind": "same_record_update",
+      "expected": 9,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/new_confirm": {
+      "kind": "answer",
+      "expected": 9,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/use_3_current_count": {
+      "kind": "answer",
+      "expected": 9,
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/no_write_3": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/no_business_3": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      },
+      "note": "Offline Root semantic review plus actual tool/Store/HTTP/world evidence; no model self-certification."
+    },
+    "assistant_conflict/historical_count": {
+      "kind": "historical_answer",
+      "expected": 6,
+      "note": "Must match actual original confirmation in preserved history; current Store remains9."
+    },
+    "assistant_conflict/no_write_history": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      }
+    },
+    "assistant_conflict/no_business_history": {
+      "kind": "no_business_mutation",
+      "expected": {
+        "reserve_and_label": 0,
+        "complete_label": 0
+      }
+    }
+  },
+  "candidate_gate": {
+    "current_answer": {
+      "pass": 2,
+      "total": 2
+    },
+    "historical_answer": {
+      "pass": 2,
+      "total": 2
+    },
+    "requested_persistence": "all correct",
+    "false_persistence": 0,
+    "duplicate_business": 0,
+    "baseline_current_answers": "fewer than2/2 for evidence of improvement; baseline2/2 means comparative evidence insufficient"
+  },
+  "claim": "paired end-to-end scripts with independently generated prefixes; not identical frozen HTTP prefixes, not independent unseen examples"
+}

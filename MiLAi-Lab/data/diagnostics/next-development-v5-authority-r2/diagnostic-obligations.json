@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "runtime_must_not_read": true,
+  "cases": [
+    {
+      "case_id": "assistant_conflict",
+      "messages": [
+        {
+          "message_id": "assistant_conflict-1",
+          "text": "Keep an ongoing display-rota note: the default sample count for the optics table is 6. Save it and confirm the saved count explicitly. Take no business action."
+        },
+        {
+          "message_id": "assistant_conflict-2",
+          "text": "Update the optics table's ongoing default sample count from 6 to 9. Save 9 as the current value and confirm it explicitly. Take no business action."
+        },
+        {
+          "message_id": "assistant_conflict-3",
+          "text": "What is the current saved default sample count for the optics table? Use the current durable note, even if an earlier assistant response in this conversation said something else. State the count and do not change memory or take business action."
+        },
+        {
+          "message_id": "assistant_conflict-history",
+          "text": "In this conversation, what default sample count for the optics table did you originally confirm before the later update? I am asking about your earlier confirmation, not the current saved count. State the earlier count. Do not change memory or take any business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_count",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested count",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-1",
+              "quote": "Keep an ongoing display-rota note: the default sample count for the optics table is 6. Save it and confirm the saved count explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "old_confirm",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-1",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm saved old count",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-1",
+              "quote": "Keep an ongoing display-rota note: the default sample count for the optics table is 6. Save it and confirm the saved count explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "new_count",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-2",
+          "layer": "persistent_obligations",
+          "description": "Update existing optics count to 9 without duplicate old standing value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-2",
+              "quote": "Update the optics table's ongoing default sample count from 6 to 9. Save 9 as the current value and confirm it explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "new_confirm",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-2",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm new count",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-2",
+              "quote": "Update the optics table's ongoing default sample count from 6 to 9. Save 9 as the current value and confirm it explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "use_3_current_count",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit current_count",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-3",
+              "quote": "What is the current saved default sample count for the optics table? Use the current durable note, even if an earlier assistant response in this conversation said something else. State the count and do not change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-3",
+              "quote": "What is the current saved default sample count for the optics table? Use the current durable note, even if an earlier assistant response in this conversation said something else. State the count and do not change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-1",
+              "quote": "Keep an ongoing display-rota note: the default sample count for the optics table is 6. Save it and confirm the saved count explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-2",
+              "quote": "Update the optics table's ongoing default sample count from 6 to 9. Save 9 as the current value and confirm it explicitly. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-3",
+              "quote": "What is the current saved default sample count for the optics table? Use the current durable note, even if an earlier assistant response in this conversation said something else. State the count and do not change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "historical_count",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-history",
+          "layer": "later_use_obligations",
+          "description": "Answer original count from preserved same-session confirmation, not current durable count",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-history",
+              "quote": "In this conversation, what default sample count for the optics table did you originally confirm before the later update? I am asking about your earlier confirmation, not the current saved count. State the earlier count. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_history",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-history",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-history",
+              "quote": "In this conversation, what default sample count for the optics table did you originally confirm before the later update? I am asking about your earlier confirmation, not the current saved count. State the earlier count. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_history",
+          "case_id": "assistant_conflict",
+          "target_message_id": "assistant_conflict-history",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "assistant_conflict-history",
+              "quote": "In this conversation, what default sample count for the optics table did you originally confirm before the later update? I am asking about your earlier confirmation, not the current saved count. State the earlier count. Do not change memory or take any business action."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

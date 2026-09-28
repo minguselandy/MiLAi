@@ -1,0 +1,47 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "reversed_count-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Keep an ongoing demonstration note: the standard tray count for the acoustics stand is 12. Save this and explicitly confirm the count. Take no business action."
+          },
+          {
+            "message_id": "reversed_count-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Update the acoustics stand ongoing standard tray count from 12 to 4. Save 4 as the current count and explicitly confirm it. Take no business action."
+          },
+          {
+            "message_id": "reversed_count-3",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 1,
+            "text": "What is the current saved standard tray count for the acoustics stand? Use the current durable note even if an earlier reply differs. Reply in one sentence beginning COUNT: and state the current count. Do not change memory or take any business action."
+          },
+          {
+            "message_id": "reversed_count-4",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 2,
+            "text": "In this conversation, what tray count for the acoustics stand did you originally confirm before the update? I am asking about the earlier confirmation, not the current saved count. State the earlier count; no special reply prefix is required. Do not change memory or take any business action."
+          }
+        ]
+      }
+    ]
+  }
+}

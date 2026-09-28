@@ -1,0 +1,126 @@
+{
+  "kind": "MILAI_V5_ROOT_ONLY_AUTHORITY_CONFIRMATION",
+  "runtime_must_not_read": true,
+  "obligations": {
+    "reversed_count/save_old": {
+      "kind": "positive_memory",
+      "expected": 12
+    },
+    "reversed_count/confirm_old": {
+      "kind": "supported_save_claim",
+      "expected": 12
+    },
+    "reversed_count/update_current": {
+      "kind": "same_record_update",
+      "expected": 4
+    },
+    "reversed_count/confirm_current": {
+      "kind": "supported_update_claim",
+      "expected": 4
+    },
+    "reversed_count/use_current": {
+      "kind": "answer",
+      "expected": 4
+    },
+    "reversed_count/current_format": {
+      "kind": "reply_format",
+      "expected": "prefix COUNT: and one sentence"
+    },
+    "reversed_count/use_history": {
+      "kind": "historical_answer",
+      "expected": 12
+    },
+    "reversed_count/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": 0
+    },
+    "reversed_count/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": 0
+    },
+    "reversed_count/no_business_3": {
+      "kind": "no_business_mutation",
+      "expected": 0
+    },
+    "reversed_count/no_business_4": {
+      "kind": "no_business_mutation",
+      "expected": 0
+    },
+    "reversed_count/no_write_3": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      }
+    },
+    "reversed_count/no_write_4": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      }
+    },
+    "revised_location/save_old": {
+      "kind": "positive_memory",
+      "expected": "locker L-2"
+    },
+    "revised_location/confirm_old": {
+      "kind": "supported_save_claim",
+      "expected": "locker L-2"
+    },
+    "revised_location/update_current": {
+      "kind": "same_record_update",
+      "expected": "cupboard D-9"
+    },
+    "revised_location/confirm_current": {
+      "kind": "supported_update_claim",
+      "expected": "cupboard D-9"
+    },
+    "revised_location/use_current": {
+      "kind": "answer",
+      "expected": "cupboard D-9"
+    },
+    "revised_location/current_format": {
+      "kind": "reply_format",
+      "expected": [
+        "LOCATION",
+        "cupboard D-9"
+      ]
+    },
+    "revised_location/use_history": {
+      "kind": "historical_answer",
+      "expected": "locker L-2"
+    },
+    "revised_location/no_business_1": {
+      "kind": "no_business_mutation",
+      "expected": 0
+    },
+    "revised_location/no_business_2": {
+      "kind": "no_business_mutation",
+      "expected": 0
+    },
+    "revised_location/no_business_3": {
+      "kind": "no_business_mutation",
+      "expected": 0
+    },
+    "revised_location/no_business_4": {
+      "kind": "no_business_mutation",
+      "expected": 0
+    },
+    "revised_location/no_write_3": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      }
+    },
+    "revised_location/no_write_4": {
+      "kind": "no_memory_write",
+      "expected": {
+        "mutating_tool_attempts": 0,
+        "records_unchanged": true
+      }
+    }
+  },
+  "activation": "Actual old confirmation preserved in revisited request; same-ID current update and current Store material actually delivered. Reverse history must still select actual old confirmation."
+}

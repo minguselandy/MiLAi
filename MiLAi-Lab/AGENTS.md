@@ -17,6 +17,16 @@ Root owns docs/data/freezes/real HTTP/scoring/costs and analysis. Reuse Sol xhig
 and necessary checks; Luna high for authorized Git publication; Astra only for a concrete conflict.
 Keep vLLM settings, continuous ledger, serial real calls, Lab-only scope and Product NO-GO unchanged.
 
+V5 R1 is published at `18851d3934e05621ddffecebbfebf69c04c831d5`: 9/10 scripts,
+explicit70/71 and persistent59/59. Actual current Store9 was delivered with retained history6,
+but H answered6. The separate assistant-conflict gate failed despite the pooled95% gate.
+Follow the [single V7 candidate protocol](docs/MILAI_NEXT_DEVELOPMENT_V5_AUTHORITY_R2_PROTOCOL_20260928.md).
+Sol owns one opt-in request-copy placement change; default system behavior remains the baseline.
+Root froze four diagnostic jobs and conditional complete regression/new content before candidate calls.
+Do not execute the conditional second stage unless all first-stage gates pass. No prompt variants,
+extra controller, history deletion, retrieval expansion or claim of pure-position causality.
+The actual Goal remains active; full stability and V9 completion still require actual evidence.
+
 The following v4 closure remains historical evidence:
 
 The user authorized the full [NEXT_DEVELOPMENT v4 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v4.0.md).

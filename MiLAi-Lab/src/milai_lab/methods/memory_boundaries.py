@@ -40,11 +40,14 @@ class MemoryBoundaryCapacityError(ValueError):
 def boundary_policy(value: Any) -> dict[str, Any] | None:
     if not isinstance(value, dict) or type(value.get("enabled", False)) is not bool:
         raise ValueError("MEMORY_BOUNDARY_CONFIG_INVALID")
+    placement = value.get("memory_placement", "system")
+    if not isinstance(placement, str) or placement not in {"system", "current_request"}:
+        raise ValueError("MEMORY_BOUNDARY_CONFIG_INVALID")
     if not value.get("enabled", False):
         return None
     policy = {"enabled": True, "candidate_count_threshold": 32,
               "candidate_token_threshold": 6000, "query_limit": 10,
-              "attention_enabled": False, **value}
+              "attention_enabled": False, "memory_placement": "system", **value}
     if any(type(policy[key]) is not int or policy[key] <= 0 for key in (
         "candidate_count_threshold", "candidate_token_threshold", "query_limit"
     )) or type(policy["attention_enabled"]) is not bool:
@@ -284,6 +287,12 @@ class MemoryBoundaryView:
         projected[0]["content"] += (
             "\n[WORKING HYPOTHESIS - current task references]\n"
             + json.dumps(state, ensure_ascii=False))
+        if (self.policy or {}).get("memory_placement", "system") == "current_request":
+            material = record_material(self.records)
+            if projected[0]["content"].count(material) != 1:
+                raise ValueError("MEMORY_BOUNDARY_MATERIAL_BINDING_CHANGED")
+            projected[0]["content"] = projected[0]["content"].replace(material, "", 1)
+            projected[last_user]["content"] = material + "\n" + projected[last_user]["content"]
         if self.emit is not None:
             self.emit({"event": "memory_boundary_view", **self.scope,
                        "request_index": request_index, "working_state": state,
@@ -297,6 +306,14 @@ class MemoryBoundaryView:
             raise ValueError("MEMORY_BOUNDARY_CAPACITY_OR_RETRIEVAL_MISSING")
         start_cpu, start_wall = time.process_time_ns(), time.perf_counter_ns()
         all_material = record_material(self.records)
+        material_index = 0
+        if self.policy.get("memory_placement", "system") == "current_request":
+            material_index = next((i for i in range(len(messages) - 1, -1, -1)
+                                   if messages[i]["role"] == "user"), -1)
+            if material_index < 0 or not messages[material_index]["content"].startswith(
+                all_material + "\n[CURRENT USER REQUEST]\n"
+            ):
+                raise ValueError("MEMORY_BOUNDARY_MATERIAL_BINDING_CHANGED")
         candidate_tokens = self.capacity.text_tokens(all_material)
         details: dict[str, Any] = {**self.scope, "event": "memory_boundary_route",
             "request_index": self.request_index,
@@ -304,11 +321,12 @@ class MemoryBoundaryView:
             "candidate_bytes": len(all_material.encode("utf-8")),
             "query": self.query, "route": "all", "trigger_reason": [], "prepared_only": True}
         def replace(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-            if messages[0]["content"].count(all_material) != 1:
+            if messages[material_index]["content"].count(all_material) != 1:
                 raise ValueError("MEMORY_BOUNDARY_MATERIAL_BINDING_CHANGED")
-            first = {**messages[0], "content": messages[0]["content"].replace(
+            replacement = {**messages[material_index], "content": messages[material_index][
+                "content"].replace(
                 all_material, record_material(rows), 1)}
-            return [first, *messages[1:]]
+            return [*messages[:material_index], replacement, *messages[material_index + 1:]]
         def checked(rows: list[dict[str, Any]], request: list[dict[str, Any]],
                     route: str, receipt: Any = None) -> list[dict[str, Any]]:
             material = record_material(rows)

@@ -1,0 +1,72 @@
+{
+  "kind": "MILAI_V5_AUTHORITY_DIAGNOSTIC_ORDER",
+  "status": "INPUTS_FIXED_NOT_RUN",
+  "steps": [
+    {
+      "case_id": "system-rep1",
+      "semantic_case": "assistant_conflict",
+      "arm": "B0",
+      "inputs": "retained-history-diagnostic-inputs.json",
+      "config": "../next-development-v5-prospective-r1/config.json",
+      "placement": "system",
+      "repeat": 1,
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "current_request-rep1",
+      "semantic_case": "assistant_conflict",
+      "arm": "B0",
+      "inputs": "retained-history-diagnostic-inputs.json",
+      "config": "config.json",
+      "placement": "current_request",
+      "repeat": 1,
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "current_request-rep2",
+      "semantic_case": "assistant_conflict",
+      "arm": "B0",
+      "inputs": "retained-history-diagnostic-inputs.json",
+      "config": "config.json",
+      "placement": "current_request",
+      "repeat": 2,
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "system-rep2",
+      "semantic_case": "assistant_conflict",
+      "arm": "B0",
+      "inputs": "retained-history-diagnostic-inputs.json",
+      "config": "../next-development-v5-prospective-r1/config.json",
+      "placement": "system",
+      "repeat": 2,
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ]
+    }
+  ],
+  "repeats_are_independent_samples": false,
+  "runtime_must_not_read_rubric": true
+}

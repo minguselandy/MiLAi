@@ -66,3 +66,9 @@ runtime永不读取rubric/gold；只读实际证据与人工判定严格分开�
 持久形成/同ID更新/DELETE/范围与动态world通过；保留旧历史时当前Store9被回答为6。
 首断点CURRENT_TASK_CONSUMPTION，Astra仅对此具体冲突提供局部建议，后续候选须由Root冻结、Sol实现。
 实际Goal仍active；V9和§20方法稳定尚未完成。
+
+## V7 唯一候选已固定
+
+Root采纳Astra局部建议，Sol实现默认关闭的单份memory移位；见[R2协议](MILAI_NEXT_DEVELOPMENT_V5_AUTHORITY_R2_PROTOCOL_20260928.md)。
+先四次完整链路诊断，满足共同门槛后才14job完整回归/新内容验证。所有条件性新输入均先于R2模型调用固定。
+42个冻结HTTP的离线移位每条input token差均0；语义效果尚未评价。
