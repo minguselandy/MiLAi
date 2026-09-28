@@ -21,7 +21,10 @@ BOUNDARY_PROTOCOL = (
     "Update the same ongoing matter while preserving unaffected details; temporary instructions "
     "and current irrelevance do not require durable updates or deletion. A record deletion "
     "does not erase historical events. Report actual tool results without treating a final "
-    "acknowledgement as a persistent write."
+    "acknowledgement as a persistent write. "
+    "The user-facing final reply is the decoded text in `answer`; the surrounding JSON is "
+    "the transport envelope. Apply the user's applicable requirements for the reply's format, "
+    "language, and length to that text while preserving the required JSON structure."
 )
 READ_SELECTION_PROMPT = (
     "Select actual ordinary-memory record IDs useful for the complete current user query. "

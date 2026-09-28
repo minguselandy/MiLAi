@@ -23,7 +23,11 @@ F0 已发布 `8d4ddc4a315bd97f4a7a62a84ec51f23fbaf53eb`，[PR67](https://github.
 [F0 Fast CI](https://github.com/minguselandy/MiLAi/actions/runs/36376429409) 已读回 completed/success。
 [F1–F7 工程合同](MILAI_NEXT_DEVELOPMENT_V4_IMPLEMENTATION_CONTRACT_20260928.md)已实现，
 [F8 A 工程验收](MILAI_NEXT_DEVELOPMENT_V4_ENGINEERING_20260928.md)通过；44 个去重相关检查、实际模板和零模型 prepare 均通过。
-[F8 B 协议](MILAI_NEXT_DEVELOPMENT_V4_B_REGRESSION_20260928.md)只引用六个已暴露原输入，尚未运行。
+工程发布提交为 `e070456b57ce0b941813948464b2c1bf870c99f6`，Root 已读回 PR67 远端一致；
+[Fast 36380454177](https://github.com/minguselandy/MiLAi/actions/runs/36380454177) completed/success，Full skipped。
+[F8 B R1](MILAI_NEXT_DEVELOPMENT_V4_B_R1_RESULTS_20260928.md)已完成：持久正例4/4、后续使用7/7，
+当前临时格式仍失败，完整脚本5/6，门槛未过；C仍未创建。
+[一次通用回答接口候选与 R2 条件回归](MILAI_NEXT_DEVELOPMENT_V4_B_R2_PROTOCOL_20260928.md)已冻结单一候选，最小修改与2项相关Graph核查已通过，尚未运行。
 
 ## 完整要求与验收证据
 
@@ -32,15 +36,15 @@ F0 已发布 `8d4ddc4a315bd97f4a7a62a84ec51f23fbaf53eb`，[PR67](https://github.
 | 项 | 必须交付／验收 | 当前状态 |
 | --- | --- | --- |
 | F0 / §6 | [九类失败和基线](MILAI_NEXT_DEVELOPMENT_V4_F0_BASELINE_20260928.md)；32 项来源身份、原冻结哈希核查，无历史重跑/改分 | COMPLETE |
-| F1 / §7 | B0 默认 answer/无 correction；真实 CREATE/UPDATE/DELETE/no_change/failed 审计，不用模型文本认证 saved；历史 C 保留 | ENGINEERING_ACCEPTED；真实链待 B/C |
-| F2 / §8 | 六类信息角色的实际请求投影；checkpoint 内容、ID、工具链不变；只标来源，不替 Host 判断真值 | ENGINEERING_ACCEPTED；真实链待 B/C |
-| F3 / §9 | Working State 限 goal/turn_constraints/active_refs/open_questions（可选动作引用）；当前消息逐续接可见；新 session 约束清除，引用解析当前记录 | ENGINEERING_ACCEPTED；真实链待 B/C |
+| F1 / §7 | B0 默认 answer/无 correction；真实 CREATE/UPDATE/DELETE/no_change/failed 审计，不用模型文本认证 saved；历史 C 保留 | ENGINEERING_ACCEPTED；B R1 基本链通过，C 待门槛 |
+| F2 / §8 | 六类信息角色的实际请求投影；checkpoint 内容、ID、工具链不变；只标来源，不替 Host 判断真值 | ENGINEERING_ACCEPTED；B R1 基本链通过，C 待门槛 |
+| F3 / §9 | Working State 限 goal/turn_constraints/active_refs/open_questions（可选动作引用）；当前消息逐续接可见；新 session 约束清除，引用解析当前记录 | 工程通过；B R1 当前格式失败、无泄漏；R2 候选未运行 |
 | F4 / §10 | 长期理解与实时世界分工；动态事实按观察时间/来源理解，必要业务查询不被旧记忆替代，漏维护不重复副作用 | ENGINEERING_ACCEPTED；语义待验证 |
 | F5 / §11 | 独立事项与局部更新保持、temporary/read-only 无写、精确删除；strict CRUD/exact READ 保留，不新增 ontology | ENGINEERING_ACCEPTED；语义待验证 |
-| F6 / §12 | 程序自动记录操作所处 user/tool event provenance，模型 CRUD schema 不变；provenance 不当 semantic proof | ENGINEERING_ACCEPTED；真实链待 B/C |
-| F7 / §13 | 小 bank all、超预算 ordinary retrieval、只有真实瓶颈才启用 Attention；阈值事前冻结；无默认 U/控制调用 | ENGINEERING_ACCEPTED；真实链待 B/C |
+| F6 / §12 | 程序自动记录操作所处 user/tool event provenance，模型 CRUD schema 不变；provenance 不当 semantic proof | ENGINEERING_ACCEPTED；B R1 基本链通过，C 待门槛 |
+| F7 / §13 | 小 bank all、超预算 ordinary retrieval、只有真实瓶颈才启用 Attention；阈值事前冻结；无默认 U/控制调用 | ENGINEERING_ACCEPTED；B R1 基本链通过，C 待门槛 |
 | F8 A / §14.1 | 八项机械边界＋真实模板/窄入口链；必要静态/相关回归，按文件变化决定一次构建 | COMPLETE；仅工程证据 |
-| F8 B / §14.2 | 复用 v3 六脚本原输入/rubric，B0 四条持久正例不退化；当次格式、无 receipt 自报/无机械证明调用分列 | NOT_RUN；待已发布源码正式冻结 |
+| F8 B / §14.2 | 复用 v3 六脚本原输入/rubric，B0 四条持久正例不退化；当次格式、无 receipt 自报/无机械证明调用分列 | R1 GATE_FAILED 5/6；R2 单一候选待运行 |
 | F8 C / §14.3 | A/B 通过后才创建并冻结 8–12 新脚本；覆盖保存/更新/独立事项/临时/引用/动态世界/只读/删除/助手历史冲突/多记录 | NOT_CREATED；门槛待验 |
 | F8 D / §14.4 | 有真实选择瓶颈后同 bank/模型/历史/工具比较 ordinary all/query、working-state query、lazy Attention，全成本 | CONDITIONAL_NOT_TRIGGERED |
 | F9 / §16,19,20 | 依据任务、记忆、消费、成本四层指标判断 Go/Pivot/Stop；七项工程解释、方法稳定和研究重新准入逐项审计 | PENDING |
@@ -61,7 +65,9 @@ F6 不增加模型手填 evidence_refs；F7 不因候选功能存在便启动真
 
 唯一连续账本仍为原树 `artifacts/ser-v20/budget.json`，起点 **2950 generation calls / 3,729,307 generation tokens / 20,729 embedding tokens**，
 SHA `28cbcfe8c0be9208aaa9e6898daa36dcaa1d9202ee27fa73a613d5f45f7a4e38`。
-当前 v4 真实 generation / embedding 调用均为 0。不清零；开发代理和 Mock 使用不混入实验费用。
+F0/F8 A 新增真实调用为0。B R1 新增22次 generation／27,613 tokens，7次 embedding／262 tokens；
+当前累计 **2972／3,756,920／20,991**，SHA `207f2e6909724e687400d45d194674d33ef2d852f95290647e78b71fed8db2da`。
+不清零；开发代理和 Mock 使用不混入实验费用。
 
 ## 执行纪律与后续门槛
 

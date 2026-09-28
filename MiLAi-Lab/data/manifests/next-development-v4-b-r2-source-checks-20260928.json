@@ -1,0 +1,100 @@
+{
+  "kind": "MILAI_V4_B_R2_SOURCE_ACCEPTANCE",
+  "status": "ENGINEERING_ACCEPTED_SEMANTICS_NOT_RUN",
+  "parent_method_commit": "e070456b57ce0b941813948464b2c1bf870c99f6",
+  "parent_checks": "next-development-v4-f8a-checks-20260928.json",
+  "source_receipt": {
+    "kind": "MILAI_V4_B_R2_SINGLE_PROMPT_SOURCE_CHECKS",
+    "status": "FREEZE_READY",
+    "git_head": "e070456b57ce0b941813948464b2c1bf870c99f6",
+    "source_path": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/src/milai_lab/methods/memory_boundaries.py",
+    "before_sha256": "51f500a5b2c3aff46ed6526f8a34736f6dc25f02ceeb171de9d2f93c9b7d51d8",
+    "after_sha256": "1cfb089b9a836a64cb25a6713f0f57f1ae79667083fc251dd409fbfa610f0ab9",
+    "exact_append": "The user-facing final reply is the decoded text in `answer`; the surrounding JSON is the transport envelope. Apply the user's applicable requirements for the reply's format, language, and length to that text while preserving the required JSON structure.",
+    "difference": "BOUNDARY_PROTOCOL only; all other AST exactly equal; parser/schema/parameters/C/test bytes unchanged",
+    "actual_wire": {
+      "v4_requests": 4,
+      "paragraph_count_per_first_system": 1,
+      "legacy_c_requests": 3,
+      "paragraph_in_legacy_c": false,
+      "paragraph_in_original_checkpoint": false,
+      "capture_v4": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/r2-source-checks/v4-wire.json",
+      "capture_c": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/r2-source-checks/legacy-c-wire.json"
+    },
+    "unchanged_file_hashes": {
+      "src/milai_lab/providers/langmem_chat.py": "3373be66349a9b67e0d22b96c9244d8116af6bd35c78a064762cb3725cf31232",
+      "src/milai_lab/baselines/langmem_agent.py": "b7bb10c4dbbf93bb1f6dcc861d4510f636c575bb0a11f8d2af65b570effdf65b",
+      "src/milai_lab/methods/memory_result.py": "8fa7ac561f6b23d8cc4afb084099b7eb92e4ddf423c28e8e85d6bff913fb7e6e",
+      "src/milai_lab/methods/local_state_attention/integration.py": "fb1b15a8a0f91139c96e382fb17f7a6fc5dcd37ee6ba1a5a04ec33169fb9bda8",
+      "tests/unit/test_persistent_memory.py": "8b4cef0d708bffc124c92796525b56d06d2aa025b9e6502a5df1073044fba24d"
+    },
+    "checks": [
+      {
+        "command": "MILAI_V4_WIRE_CAPTURE=artifacts/next-development-v4/r2-source-checks/v4-wire.json MILAI_P1_WIRE_CAPTURE=artifacts/next-development-v4/r2-source-checks/legacy-c-wire.json PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity",
+        "exit_code": 0,
+        "passed": 2,
+        "skipped": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/r2-source-checks/graph-checks.log"
+      },
+      {
+        "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/methods/memory_boundaries.py",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/next-development-v4/MiLAi-Lab/artifacts/next-development-v4/r2-source-checks/ruff.log"
+      },
+      {
+        "command": "git diff --check -- MiLAi-Lab/src/milai_lab/methods/memory_boundaries.py",
+        "exit_code": 0
+      },
+      {
+        "check": "AST/literal/actual wire assertions above",
+        "exit_code": 0
+      }
+    ],
+    "build_or_prepare_rerun": false,
+    "external_http_requests": 0,
+    "real_embedding_calls": 0,
+    "shared_postgres_calls": 0,
+    "test_backend": "MockTransport/InMemoryStore/actual local SQLite checkpoint; no shared service",
+    "intermediate_failures": [],
+    "running_sessions": [],
+    "interpretation": "mechanical request mapping evidence only; H1 not uniquely established and BRIEF behavior not inferred from mock"
+  },
+  "source_receipt_sha256": "1c0c11cc7979615fbf76862cd64720ae7a8b3b048256950a420cbfcf3ebf2a0f",
+  "root_review": {
+    "only_approved_generic_paragraph_changed": true,
+    "source_and_unchanged_hashes_verified": true,
+    "tests_not_repeated_by_root": true,
+    "H1_not_uniquely_proven": true,
+    "frozen_once_no_wording_variants": true
+  },
+  "evidence": [
+    {
+      "path": "artifacts/next-development-v4/r2-source-checks/diff.patch",
+      "sha256": "7fb40d0f3e4b549e8241c2a9bacb7f214791c5996765a9387a99bd46a37d62ef"
+    },
+    {
+      "path": "artifacts/next-development-v4/r2-source-checks/graph-checks.log",
+      "sha256": "9d33d65192588d85ab081596b56883cc134df443a0328ae1b1c943ba95de7d7b"
+    },
+    {
+      "path": "artifacts/next-development-v4/r2-source-checks/legacy-c-wire.json",
+      "sha256": "43033bdf61b1b53a1adde4a55835880c058013e492a16d6248f0133bee86bc15"
+    },
+    {
+      "path": "artifacts/next-development-v4/r2-source-checks/memory_boundaries-before.py.txt",
+      "sha256": "51f500a5b2c3aff46ed6526f8a34736f6dc25f02ceeb171de9d2f93c9b7d51d8"
+    },
+    {
+      "path": "artifacts/next-development-v4/r2-source-checks/receipt.json",
+      "sha256": "1c0c11cc7979615fbf76862cd64720ae7a8b3b048256950a420cbfcf3ebf2a0f"
+    },
+    {
+      "path": "artifacts/next-development-v4/r2-source-checks/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "artifacts/next-development-v4/r2-source-checks/v4-wire.json",
+      "sha256": "be378685128c41bed47373f2072b130e39d89c6d704d9dad63340ef4b1dc5dbf"
+    }
+  ]
+}

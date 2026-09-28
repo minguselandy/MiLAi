@@ -1,0 +1,686 @@
+{
+  "kind": "MILAI_NEXT_DEVELOPMENT_V4_B_R1_RESULTS",
+  "status": "GATE_FAILED_CURRENT_TURN_FORMAT",
+  "method_commit": "e070456b57ce0b941813948464b2c1bf870c99f6",
+  "exposure": "six original exposed v3 scripts; regression only",
+  "scorer": "Root offline frozen rubric review; no Judge/model scoring",
+  "execution_freeze_sha256": "1f887cbded2ebbeaae07a5c1cd8deaeab10fbe20a803a09b0e376dc2907c9c17",
+  "input_sha256": {
+    "config.json": "0a22aa5a7d70336d66cb667a125725182fdb0fefa30ee2c6dabd9d8632d31341",
+    "execution-order.json": "2afa4d47398d9ba83f321be7a0da6c105ab7cad5a4ef8591fc308df130eca39d",
+    "rubric.json": "799300384cef6ee3471a922e25265724a5cfec32984c0900efefee09f03a9e6c",
+    "../next-development-v3-p2-formation-r1/field_plan-inputs.json": "789a8f6612adc56a2e0029ee4cfa58a7bd58aaedfa2d813cbbc01ab94f9ac1ba",
+    "../next-development-v3-p2-formation-r1/editorial_revision-inputs.json": "848e5d91533e06e6829c73079e2caa42af87f87274a67e8cc7fb5b94037d284d",
+    "../next-development-v3-p2-formation-r1/independent_note-inputs.json": "3cc069e6f3feacb668ae87cb3cfbe810f854a8c6f27652a4999bf848307483f0",
+    "../next-development-v3-p2-formation-r1/quotation-inputs.json": "bbf90e44cd04da4a7915eaad9ef50bfaf261beba7a2ef0e81312072c3ed0a61e",
+    "../next-development-v3-p2-formation-r1/temporary-inputs.json": "682a4c12430dbf2ed09e31e7eec65894c12e6da5aa751b4abc756c7ae70a94e6",
+    "../next-development-v3-p2-formation-r1/read_only-inputs.json": "a8108ecd8fc1b22479732fdd9e70c085df3254097380219891f85fc7fddbf636",
+    "../next-development-v3-p2-formation-r1/rubric.json": "b5b04248c71ccd3f4233e4461e8371c17dc2888fa4f0d52b8aca5177ac1f9a6b"
+  },
+  "metrics": {
+    "public_turns": 15,
+    "task_turn_success": {
+      "pass": 14,
+      "total": 15
+    },
+    "new_formation": {
+      "pass": 5,
+      "total": 5
+    },
+    "revision_and_preservation": {
+      "pass": 1,
+      "total": 1
+    },
+    "later_use": {
+      "pass": 7,
+      "total": 7
+    },
+    "positive_persistent_scripts": {
+      "pass": 4,
+      "total": 4
+    },
+    "negative_scope_cases": {
+      "pass": 3,
+      "total": 3
+    },
+    "current_BRIEF_format": {
+      "pass": 0,
+      "total": 1
+    },
+    "next_session_no_format_leak": {
+      "pass": 1,
+      "total": 1
+    },
+    "full_scripts": {
+      "pass": 5,
+      "total": 6
+    },
+    "false_save_claims": 0,
+    "unnecessary_memory_mutations": 0,
+    "duplicate_matters": 0,
+    "business_actions": 0,
+    "dynamic_world_correctness": "NOT_TESTED",
+    "assistant_conflict_consumption": "NOT_TESTED",
+    "control_calls": 0,
+    "correction_calls": 0,
+    "retries": 0
+  },
+  "cost": {
+    "generation_calls": 22,
+    "generation_prompt_tokens": 26742,
+    "generation_completion_tokens": 871,
+    "generation_tokens": 27613,
+    "embedding_calls": 7,
+    "embedding_tokens": 262,
+    "http_wall_seconds": 10.944264514371753,
+    "http_errors": 0,
+    "unknown_usage": 0,
+    "local_rejections": 0
+  },
+  "aggregate": {
+    "lifecycle": {
+      "formation": {
+        "generation_calls": 8,
+        "generation_prompt_tokens": 10306,
+        "generation_completion_tokens": 351,
+        "generation_tokens": 10657,
+        "embedding_calls": 4,
+        "embedding_tokens": 179
+      },
+      "use": {
+        "generation_calls": 10,
+        "generation_prompt_tokens": 11050,
+        "generation_completion_tokens": 318,
+        "generation_tokens": 11368,
+        "embedding_calls": 1,
+        "embedding_tokens": 7
+      },
+      "maintenance": {
+        "generation_calls": 4,
+        "generation_prompt_tokens": 5386,
+        "generation_completion_tokens": 202,
+        "generation_tokens": 5588,
+        "embedding_calls": 2,
+        "embedding_tokens": 76
+      }
+    },
+    "observation": {
+      "shared_turn_checkpoint_read": {
+        "calls": 0,
+        "logical_bytes": 0,
+        "cpu_ns": 0,
+        "wall_ns": 0
+      },
+      "lsa_writer_memory_read": {
+        "calls": 43,
+        "logical_bytes": 6640,
+        "cpu_ns": 46714822,
+        "wall_ns": 79307325
+      },
+      "shared_namespace_guard": {
+        "calls": 18,
+        "logical_bytes": 72,
+        "cpu_ns": 6789083,
+        "wall_ns": 22994581
+      },
+      "persistent_memory_checkpoint_read": {
+        "calls": 15,
+        "logical_bytes": 21717,
+        "cpu_ns": 9532316,
+        "wall_ns": 9525371
+      },
+      "correction_checkpoint_write": {
+        "calls": 0,
+        "logical_bytes": 0,
+        "cpu_ns": 0,
+        "wall_ns": 0
+      },
+      "operation_audit": {
+        "calls": 15,
+        "logical_bytes": 18173,
+        "unknown_logical_bytes": 0,
+        "cpu_ns": 1429056,
+        "wall_ns": 1482268
+      },
+      "inclusive_boundary_route": {
+        "cpu_ns": 811994747,
+        "wall_ns": 780361995
+      }
+    },
+    "routes": {
+      "all": 22
+    },
+    "memory_operations": {
+      "created": 5,
+      "updated": 1
+    },
+    "public_turns": 15,
+    "process_totals": {
+      "wall_seconds": 35.24802033510059,
+      "child_user_cpu_seconds": 34.394604,
+      "child_system_cpu_seconds": 2.483617
+    },
+    "generation_ratio_to_v3_B0": 1.3979850141757797,
+    "continued_ledger": {
+      "generation_requests": 2972,
+      "generation_tokens": 3756920,
+      "embedding_tokens": 20991
+    }
+  },
+  "jobs": {
+    "field_plan/B0": {
+      "full_script_pass": true,
+      "cost": {
+        "generation_calls": 3,
+        "generation_prompt_tokens": 3721,
+        "generation_completion_tokens": 136,
+        "generation_tokens": 3857,
+        "embedding_calls": 1,
+        "embedding_tokens": 59,
+        "http_wall_seconds": 2.372084132861346,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "31d0112a58093588ded743372bb22505a0b666131fc6bdc98c0a84a4faec9691",
+      "manifest_sha256": "659dc15f2268fffc8c7ebf357345bee8904d6c4ba8ce81ebc299624f69824ea2",
+      "result_sha256": "f36fad8003406222fe7abea23344459c7ee60396364af030dd80b5d82f0c7850",
+      "turns": [
+        {
+          "message_id": "field_plan-1",
+          "answer": "Your ongoing sample-delivery plan has been saved: Harbor sampler trays, 4 units to rack R-7 in sealed sleeves. Nothing has been booked.",
+          "ordinary_records_after": [
+            {
+              "id": "9c8fd6c3-a727-4403-8419-1db19aa4a85b",
+              "value": {
+                "content": "Ongoing sample-delivery plan: Harbor sampler trays, 4 units to rack R-7 in sealed sleeves. Nothing has been booked. When asked for the plan, include packing details (sealed sleeves)."
+              }
+            }
+          ],
+          "actual_generation_requests": 2,
+          "provider_ids": [
+            "chatcmpl-866dd11d874e09f0",
+            "chatcmpl-bc32174cfbc27cf3"
+          ],
+          "memory_operation_statuses": {
+            "created": 1
+          },
+          "observed_write": true,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "field_plan-2",
+          "answer": "Your current sample-delivery plan is for 4 units of Harbor sampler trays to be delivered to rack R-7, packed in sealed sleeves. No bookings have been made.",
+          "ordinary_records_after": [
+            {
+              "id": "9c8fd6c3-a727-4403-8419-1db19aa4a85b",
+              "value": {
+                "content": "Ongoing sample-delivery plan: Harbor sampler trays, 4 units to rack R-7 in sealed sleeves. Nothing has been booked. When asked for the plan, include packing details (sealed sleeves)."
+              }
+            }
+          ],
+          "actual_generation_requests": 1,
+          "provider_ids": [
+            "chatcmpl-bd42e8dfe9c2bc96"
+          ],
+          "memory_operation_statuses": {},
+          "observed_write": false,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all"
+          ]
+        }
+      ]
+    },
+    "editorial_revision/B0": {
+      "full_script_pass": true,
+      "cost": {
+        "generation_calls": 5,
+        "generation_prompt_tokens": 6285,
+        "generation_completion_tokens": 237,
+        "generation_tokens": 6522,
+        "embedding_calls": 2,
+        "embedding_tokens": 73,
+        "http_wall_seconds": 2.5738104372285306,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "90955d853ce39392a79ad0ffbd320febfe8fa043f3c97714e424a4e22f2b817e",
+      "manifest_sha256": "085e9a549359cbdda11e98ede4f371715933428612db8de71cb289901385d413",
+      "result_sha256": "aa6c0138f25831d50a297abeff41cd5262d240d3c3b620cbb14dfa9bfe5ab2dc",
+      "turns": [
+        {
+          "message_id": "editorial_revision-1",
+          "answer": "Preferences for bulletin editing have been retained: headings in sentence case, dates in day-month-year order, and source links at the end of each item.",
+          "ordinary_records_after": [
+            {
+              "id": "a7cbc058-6a36-4153-9c88-98a1c448e495",
+              "value": {
+                "content": "For bulletin-editing work: headings use sentence case, dates use day-month-year order, and source links go at the end of each item."
+              }
+            }
+          ],
+          "actual_generation_requests": 2,
+          "provider_ids": [
+            "chatcmpl-a2c3cfe973c3662d",
+            "chatcmpl-81b7700d8634a948"
+          ],
+          "memory_operation_statuses": {
+            "created": 1
+          },
+          "observed_write": true,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "editorial_revision-2",
+          "answer": "I have updated your bulletin-editing preference to place source links immediately after the heading, while keeping your other preferences (sentence case headings and day-month-year dates) unchanged.",
+          "ordinary_records_after": [
+            {
+              "id": "a7cbc058-6a36-4153-9c88-98a1c448e495",
+              "value": {
+                "content": "For bulletin-editing work: headings use sentence case, dates use day-month-year order, and source links go immediately after the heading."
+              }
+            }
+          ],
+          "actual_generation_requests": 2,
+          "provider_ids": [
+            "chatcmpl-938be5f2191cb3f8",
+            "chatcmpl-8f03ba4822272e9a"
+          ],
+          "memory_operation_statuses": {
+            "updated": 1
+          },
+          "observed_write": true,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "editorial_revision-3",
+          "answer": "For bulletin-editing work: headings use sentence case, dates use day-month-year order, and source links go immediately after the heading.",
+          "ordinary_records_after": [
+            {
+              "id": "a7cbc058-6a36-4153-9c88-98a1c448e495",
+              "value": {
+                "content": "For bulletin-editing work: headings use sentence case, dates use day-month-year order, and source links go immediately after the heading."
+              }
+            }
+          ],
+          "actual_generation_requests": 1,
+          "provider_ids": [
+            "chatcmpl-a0563e3c9d883190"
+          ],
+          "memory_operation_statuses": {},
+          "observed_write": false,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all"
+          ]
+        }
+      ]
+    },
+    "independent_note/B0": {
+      "full_script_pass": true,
+      "cost": {
+        "generation_calls": 5,
+        "generation_prompt_tokens": 6519,
+        "generation_completion_tokens": 236,
+        "generation_tokens": 6755,
+        "embedding_calls": 2,
+        "embedding_tokens": 76,
+        "http_wall_seconds": 2.571770287118852,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "91960b4b3cfcb3f982eb7bb43703928082025f475de8e8c0de5a10aca960982f",
+      "manifest_sha256": "0402a060ffb1db0d9354d770a646a4129be85ed28a8e93e4d5ea28a5b4cd1dd1",
+      "result_sha256": "4fa453c9af9a23963526ad359a77eba1dbcec2d09f241c4a93bc17cbb4e2b251",
+      "turns": [
+        {
+          "message_id": "independent_note-1",
+          "answer": "I have remembered your weekly equipment handoff arrangement: the receiving desk is West Reception, the regular day is Thursday, and the handoff time is 09:20.",
+          "ordinary_records_after": [
+            {
+              "id": "0794730e-8e55-4aaf-b9cf-f330527492ed",
+              "value": {
+                "content": "Weekly equipment handoff arrangement: Receiving desk is West Reception, regular day is Thursday, handoff time is 09:20. This is an ongoing arrangement."
+              }
+            }
+          ],
+          "actual_generation_requests": 2,
+          "provider_ids": [
+            "chatcmpl-ad34c5b59f1740a7",
+            "chatcmpl-a662119dd25ed7df"
+          ],
+          "memory_operation_statuses": {
+            "created": 1
+          },
+          "observed_write": true,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "independent_note-2",
+          "answer": "The ongoing access note regarding the backup key for the imaging room in locker L-9 has been saved.",
+          "ordinary_records_after": [
+            {
+              "id": "0794730e-8e55-4aaf-b9cf-f330527492ed",
+              "value": {
+                "content": "Weekly equipment handoff arrangement: Receiving desk is West Reception, regular day is Thursday, handoff time is 09:20. This is an ongoing arrangement."
+              }
+            },
+            {
+              "id": "a855152e-8d4c-434e-9753-63ca97ce0f51",
+              "value": {
+                "content": "Ongoing access note: The backup key for the imaging room is in locker L-9. This is a separate note and does not change the weekly equipment handoff arrangement."
+              }
+            }
+          ],
+          "actual_generation_requests": 2,
+          "provider_ids": [
+            "chatcmpl-8a63d6e2b744f822",
+            "chatcmpl-a4b1e6e5f43699c5"
+          ],
+          "memory_operation_statuses": {
+            "created": 1
+          },
+          "observed_write": true,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "independent_note-3",
+          "answer": "Your regular equipment handoff arrangement is as follows: the receiving desk is West Reception, the regular day is Thursday, and the handoff time is 09:20. The backup key for the imaging room is located in locker L-9.",
+          "ordinary_records_after": [
+            {
+              "id": "0794730e-8e55-4aaf-b9cf-f330527492ed",
+              "value": {
+                "content": "Weekly equipment handoff arrangement: Receiving desk is West Reception, regular day is Thursday, handoff time is 09:20. This is an ongoing arrangement."
+              }
+            },
+            {
+              "id": "a855152e-8d4c-434e-9753-63ca97ce0f51",
+              "value": {
+                "content": "Ongoing access note: The backup key for the imaging room is in locker L-9. This is a separate note and does not change the weekly equipment handoff arrangement."
+              }
+            }
+          ],
+          "actual_generation_requests": 1,
+          "provider_ids": [
+            "chatcmpl-bb3a0b1e349544f3"
+          ],
+          "memory_operation_statuses": {},
+          "observed_write": false,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all"
+          ]
+        }
+      ]
+    },
+    "quotation/B0": {
+      "full_script_pass": true,
+      "cost": {
+        "generation_calls": 3,
+        "generation_prompt_tokens": 3331,
+        "generation_completion_tokens": 58,
+        "generation_tokens": 3389,
+        "embedding_calls": 1,
+        "embedding_tokens": 7,
+        "http_wall_seconds": 0.9773199232295156,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "0e39af174d998b0847528357f9c52e6fb9330587b98c63c25cd8567c3d354164",
+      "manifest_sha256": "ac042ffbcd00c7fb7b0e234f0fdc637731ce0d8a3601cb0373f223cf26075b69",
+      "result_sha256": "d8c18c13379c6e9a6cf1300ba9ebe121223599d60fa1140781c00407b3429749",
+      "turns": [
+        {
+          "message_id": "quotation-1",
+          "answer": "The character is instructing that all future headings in the dialogue or document must be written entirely in capital letters.",
+          "ordinary_records_after": [],
+          "actual_generation_requests": 1,
+          "provider_ids": [
+            "chatcmpl-bdf01b73b71a2b6a"
+          ],
+          "memory_operation_statuses": {},
+          "observed_write": false,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "quotation-2",
+          "answer": "No heading-format preference is known.",
+          "ordinary_records_after": [],
+          "actual_generation_requests": 2,
+          "provider_ids": [
+            "chatcmpl-9d68fd4a9feb05ac",
+            "chatcmpl-ab2269a2cb006dfa"
+          ],
+          "memory_operation_statuses": {},
+          "observed_write": false,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all",
+            "all"
+          ]
+        }
+      ]
+    },
+    "temporary/B0": {
+      "full_script_pass": false,
+      "cost": {
+        "generation_calls": 2,
+        "generation_prompt_tokens": 2069,
+        "generation_completion_tokens": 58,
+        "generation_tokens": 2127,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 0.7345827026292682,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "8ac570d7de5a78ba1c08ec1c9f6fa1b64f77ea80c50a3c805318145415ade452",
+      "manifest_sha256": "61b64696198bcdf3b2d9e47a73f9fe539dbd08191dbbde72759bbcf31d319400",
+      "result_sha256": "73040fd53c3ffe658602c2fab0f2db9b5e30db9f5a170f76233ee120e3816c26",
+      "turns": [
+        {
+          "message_id": "temporary-1",
+          "answer": "A title is a unique label for an entire document or section, whereas a heading is a label used to organize and structure content within a document.",
+          "ordinary_records_after": [],
+          "actual_generation_requests": 1,
+          "provider_ids": [
+            "chatcmpl-bbd0b7ddb383c4cc"
+          ],
+          "memory_operation_statuses": {},
+          "observed_write": false,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "temporary-2",
+          "answer": "An image caption provides a brief textual description that explains or contextualizes the content of an image.",
+          "ordinary_records_after": [],
+          "actual_generation_requests": 1,
+          "provider_ids": [
+            "chatcmpl-aab03313815cef26"
+          ],
+          "memory_operation_statuses": {},
+          "observed_write": false,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all"
+          ]
+        }
+      ]
+    },
+    "read_only/B0": {
+      "full_script_pass": true,
+      "cost": {
+        "generation_calls": 4,
+        "generation_prompt_tokens": 4817,
+        "generation_completion_tokens": 146,
+        "generation_tokens": 4963,
+        "embedding_calls": 1,
+        "embedding_tokens": 47,
+        "http_wall_seconds": 1.7146970313042402,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "6779d2aac84194a12e65826fd82d2ea391b1846ffb577cfc20d72eec59fb027e",
+      "manifest_sha256": "fedae1484df988f048e089aadfd89a449092f3d74c0b1985564e593ecb03f8a5",
+      "result_sha256": "e6a441ffae54442ed0af39d967c0dcfa982f7ba80807444f46977a712486c363",
+      "turns": [
+        {
+          "message_id": "read_only-1",
+          "answer": "I have saved your regular workshop handoff note for later use.",
+          "ordinary_records_after": [
+            {
+              "id": "d10790ac-ec68-419b-bcfd-70604d9c65c1",
+              "value": {
+                "content": "Regular workshop handoff note: Use bay D-5, place items in padded dividers, and include a printed inventory sheet. This describes the handoff arrangement, not an instruction to reserve anything."
+              }
+            }
+          ],
+          "actual_generation_requests": 2,
+          "provider_ids": [
+            "chatcmpl-84b41402f33b5667",
+            "chatcmpl-ac8bcf1f08a33bb3"
+          ],
+          "memory_operation_statuses": {
+            "created": 1
+          },
+          "observed_write": true,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "read_only-2",
+          "answer": "Your regular workshop handoff calls for using bay D-5, placing items in padded dividers, and including a printed inventory sheet.",
+          "ordinary_records_after": [
+            {
+              "id": "d10790ac-ec68-419b-bcfd-70604d9c65c1",
+              "value": {
+                "content": "Regular workshop handoff note: Use bay D-5, place items in padded dividers, and include a printed inventory sheet. This describes the handoff arrangement, not an instruction to reserve anything."
+              }
+            }
+          ],
+          "actual_generation_requests": 1,
+          "provider_ids": [
+            "chatcmpl-9313e8c7ef10186b"
+          ],
+          "memory_operation_statuses": {},
+          "observed_write": false,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "read_only-3",
+          "answer": "The regular workshop handoff arrangement is to use bay D-5, place items in padded dividers, and include a printed inventory sheet.",
+          "ordinary_records_after": [
+            {
+              "id": "d10790ac-ec68-419b-bcfd-70604d9c65c1",
+              "value": {
+                "content": "Regular workshop handoff note: Use bay D-5, place items in padded dividers, and include a printed inventory sheet. This describes the handoff arrangement, not an instruction to reserve anything."
+              }
+            }
+          ],
+          "actual_generation_requests": 1,
+          "provider_ids": [
+            "chatcmpl-92c44519174240f1"
+          ],
+          "memory_operation_statuses": {},
+          "observed_write": false,
+          "user_intent_satisfied_by_program": null,
+          "delivered_routes": [
+            "all"
+          ]
+        }
+      ]
+    }
+  },
+  "actual_chain_audit": {
+    "checks": "PASS",
+    "jobs": 6,
+    "actual_requests": 22,
+    "unique_provider_ids": 22,
+    "sha256": "35e31f495b796f1421280b8baf65466dc9c79cc935c2de8e7af482fbf48ec10b"
+  },
+  "ledger_before": {
+    "generation_requests": 2950,
+    "generation_tokens": 3729307,
+    "embedding_tokens": 20729,
+    "sha256": "28cbcfe8c0be9208aaa9e6898daa36dcaa1d9202ee27fa73a613d5f45f7a4e38"
+  },
+  "ledger_after": {
+    "generation_requests": 2972,
+    "generation_tokens": 3756920,
+    "embedding_tokens": 20991,
+    "sha256": "207f2e6909724e687400d45d194674d33ef2d852f95290647e78b71fed8db2da"
+  },
+  "limitations": [
+    "No real source conflict or changing business world in B; unqualified Nothing has been booked remains in the field-plan record, so F4 stability is not established.",
+    "All 22 requests used all; no observed retrieval bottleneck and no F8 D trigger.",
+    "Combined v4 system change, no single-component causal ablation; same 5/6 scripts as old B0 with 39.8% more generation tokens.",
+    "C is not created because the pre-frozen A/B gate failed.",
+    "A later fix/retry cannot replace this failed result or its charges."
+  ],
+  "failure": {
+    "observed": "temporary first answer omits requested BRIEF; zero writes and no later leak",
+    "expected": "first user-facing answer begins BRIEF and explains title/heading; later independent session does not inherit it",
+    "causal_chain": "exact frozen user -> final actual HTTP with complete CURRENT TASK and empty memory -> one valid JSON answer missing the requested prefix -> no tool or Store mutation",
+    "first_broken_link": "Host generation consumption of a visible current-turn answer constraint",
+    "provider_id": "chatcmpl-bbd0b7ddb383c4cc",
+    "generation_usage": {
+      "prompt_tokens": 1046,
+      "total_tokens": 1080,
+      "completion_tokens": 34,
+      "prompt_tokens_details": null
+    },
+    "request_sha256": "4ef167c1cdf61ee031f0b465d1768119e99698e425ce6b60179af1db51b5dabc",
+    "competing_explanations": [
+      "JSON transport envelope and user-facing answer field responsibilities are not explicitly mapped, so compatible answer-format requirements may be dropped.",
+      "Host constraint-following is unreliable under this tool contract; another wording may merely overfit this exposed case."
+    ],
+    "general_candidates": [
+      "Clarify only the generic JSON answer-field/current-user response contract, without sample terms, schema changes or extra calls.",
+      "Duplicate current user text at the tail; presently weak justification because this failing first request has only system+user and no intervening tool/history."
+    ],
+    "confounds": [
+      "Single deterministic exposed format case; no controlled transport ablation.",
+      "All F1-F7 shipped together; UUID/timestamp and reply wording contribute cost variation."
+    ],
+    "minimal_next_experiment": "One generic v4 answer-envelope mapping, then separately freeze all six original scripts with temporary first. Reject on either temporary message failing; otherwise run remaining five unchanged. No further wording variants or C before 6/6. See R2 protocol; R1 results and costs unchanged.",
+    "decision": "PIVOT to current-task answer-boundary diagnosis only; C/D not triggered; no Store or business repair"
+  }
+}
