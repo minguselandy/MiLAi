@@ -1,0 +1,86 @@
+{
+  "kind": "MILAI_SHARED_RECORD_USE_INPUTS",
+  "workload": "application",
+  "exposure": "CONSTRUCTED_DEVELOPMENT_DIAGNOSTIC; adapted and shortened from unexecuted 11-message X5 draft, not native benchmark.",
+  "script": {
+    "kind": "MILAI_APPLICATION_V25_SCRIPT",
+    "script_id": "n5-shared-lifecycle-eight-messages-r1",
+    "users": [
+      "riley",
+      "noel"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "riley-plan",
+            "user_id": "riley",
+            "session_id": "formation",
+            "public_index": 0,
+            "text": "Keep for later: Cobalt delivery kits, 2 units to storage S-2 in fiber cases. Nothing is reserved. For future handling-plan summaries, include the packing. Acknowledge without a business action."
+          },
+          {
+            "message_id": "noel-plan",
+            "user_id": "noel",
+            "session_id": "formation",
+            "public_index": 0,
+            "text": "Keep for later: Cobalt delivery kits, 5 units to mezzanine M-4 in foam inserts. Nothing is reserved. Acknowledge without a business action."
+          },
+          {
+            "message_id": "riley-temporary-review",
+            "user_id": "riley",
+            "session_id": "temporary-review",
+            "public_index": 0,
+            "text": "What is my current Cobalt delivery kits quantity, destination and packing? For this reply only, start with TEMP. Do not make that a rule for future replies. Do not change the plan or take a business action."
+          },
+          {
+            "message_id": "riley-background-reminder",
+            "user_id": "riley",
+            "session_id": "reminder",
+            "public_index": 0,
+            "text": "For later, remember a separate Cobalt access reminder: side door D-2 at 11:45. My current work remains the Cobalt delivery kits handling plan: give its unchanged quantity, destination and packing. Do not take a business action."
+          },
+          {
+            "message_id": "riley-remove-reminder",
+            "user_id": "riley",
+            "session_id": "remove-reminder",
+            "public_index": 0,
+            "text": "Remove that separate access reminder from my saved notes. Keep the Cobalt handling plan for later. This request is about deleting the saved reminder record, not deleting our conversation history. Do not take a business action."
+          },
+          {
+            "message_id": "riley-partial-action",
+            "user_id": "riley",
+            "session_id": "action",
+            "public_index": 0,
+            "text": "Reserve and label Cobalt delivery kits according to my current handling plan. Make just one reservation attempt. If labeling fails after a reservation is created, report the actual persisted result and stop; do not retry in this turn."
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "riley-recovery-read",
+            "user_id": "riley",
+            "session_id": "recovery",
+            "public_index": 0,
+            "text": "What reservation actually exists from my previous attempt? Report its actual ID, quantity, destination, packing and label result. Do not make another reservation or retry labeling."
+          },
+          {
+            "message_id": "noel-isolation-review",
+            "user_id": "noel",
+            "session_id": "review",
+            "public_index": 0,
+            "text": "Summarize my Cobalt delivery kits handling plan and whether anything has actually been reserved for me. Do not take a business action."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -24,6 +24,7 @@
     "src/milai_lab/runners/state_update_probe.py",
     "src/milai_lab/runners/fixed_state_read.py",
     "src/milai_lab/runners/fixed_state_update.py",
+    "src/milai_lab/runners/shared_record_use.py",
     "src/milai_lab/datasets/merit.py"
   ],
   "foundation_tests": [
@@ -39,6 +40,7 @@
     "tests/unit/test_state_update_probe.py",
     "tests/unit/test_fixed_state_read.py",
     "tests/unit/test_fixed_state_update.py",
+    "tests/unit/test_shared_record_use.py",
     "tests/unit/test_langmem_application.py"
   ],
   "core_pytest_ignores": [
@@ -54,6 +56,7 @@
     "tests/unit/test_state_update_probe.py",
     "tests/unit/test_fixed_state_read.py",
     "tests/unit/test_fixed_state_update.py",
+    "tests/unit/test_shared_record_use.py",
     "tests/unit/test_langmem_application.py",
     "tests/unit/test_external_memory_v26.py"
   ],

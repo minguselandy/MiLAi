@@ -1,5 +1,5 @@
 ---
-status: ACTIVE
+status: EXECUTION_CLOSED_WITH_PIVOT
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 method_reference: cf1588ab3f1d1fe8105f3f239cb56f1151e8f5bc
 report_reference: ae2d29285ce263e32b0729444e1dc6a4f57ed5b1
@@ -8,7 +8,9 @@ plan_sha256: 84d5ddd45224d83c4206c95d8b46ca41f2a5dabd9990266aadccae0df1c0df22
 
 # 后续开发 v2.0 执行记录
 
-> 最新状态：用户已确认 NEXT_DEVELOPMENT v2.0；实际 Goal 恢复为 active（updatedAt 1790554126）。
+> 最新结论：v2必需执行与条件门槛已完成并收口；研究总目标未达成、Product NO-GO。
+> [总体报告](MILAI_NEXT_DEVELOPMENT_V2_OVERALL_EXPERIMENT_REPORT_20260928.md)与[N5/WP7结果](MILAI_NEXT_DEVELOPMENT_V2_N5_RESULTS_20260928.md)是最新证据。实际Goal状态以会话控制为准。
+> 历史恢复：用户确认NEXT_DEVELOPMENT v2.0，实际Goal曾恢复active（updatedAt 1790554126）。
 > 本次恢复覆盖执行暂停，完整 N0–N6 目标及条件门槛不变；停止报告 105bdaee/PR62 保留历史身份。
 > 工作转到隔离的 next-development-v2-resume，原 11 个 N2 WIP 按暂停清单哈希完整复制。
 > 原暂停时点的[总体报告](MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md)不改写，新结果独立追加。
@@ -29,10 +31,10 @@ Root已完整读取527行、向用户说明文件名差异并提出可选澄清�
 | N2 / X3固定bank读取 | 两前缀全读/query/同State增强/实际A/完整历史共10条路径；共同读取能力、维护冻结、实际交付与最终回答/续接、全部费用 | 已完成5753602冻结的10条完整路径；五条件各2/2，H1836/query3189/all3447/enh3889/A5540 tokens；本切片Pivot独立A，保留一次错误READ |
 | N3 / X4固定前态更新 | 两前缀all/U/U=A/oracle共8条诊断；同前态/整体维护/权限；空U可CREATE；实际提交/保持/误改/pending/费用 | dfbc59d冻结八条完成；正文/保持四臂2/2，来源严格all与U=A各2/2、U与oracle各1/2；all1846tokens最省，本切片Pivot独立U |
 | N4有限交付版本反馈 | 仅有相关问题才触发；UPDATE/DELETE/CREATE/NO_CHANGE/拒绝/恢复/超限机械检查；独立开关和真实续接 | NOT_TRIGGERED；不是N2/N3前置 |
-| N5 / X5 / G3连续任务 | 一个强简单基线与至多一个获筛选候选，同版本从形成到复用、变化、owner/临时约束、真实副作用/恢复/授权退出；原生单元与构造补充明确分列 | NOT_RUN；11消息旧草案不是已冻结协议 |
-| WP7全生命周期 | 形成/维护/使用/恢复互斥归属、request ID不重复记账、摊销R、质量并列；Store/CPU/wall/逻辑字节/观测边界 | NOT_DONE |
+| N5 / X5 / G3连续任务 | 一个强简单基线与至多一个获筛选候选，同版本从形成到复用、变化、owner/临时约束、真实副作用/恢复/授权退出；原生单元与构造补充明确分列 | 1d7460b六条冻结命令完成；native各5/5，constructed严格各0/1；形成/维护/退出失败，G3未通过，State空使处理变量未激活 |
+| WP7全生命周期 | 形成/维护/使用/恢复互斥归属、request ID不重复记账、摊销R、质量并列；Store/CPU/wall/逻辑字节/观测边界 | 已完成实际互斥归属、逐请求及R=2/5摊销、完整失败/观测费用；无等质节省结论 |
 | N6 / G4独立确认 | 有可解释信号后新任务族、强简单对照及有明确资源安排的第二模型；未见/已暴露严格分开 | NOT_TRIGGERED，不自动部署或训练selector |
-| 论文/总验收 | 完整CRUD与实际任务、受控A/U额外价值或明确收缩结论、任务/维护/业务分别评分、贡献与局限及复现完整 | 尚未完成，不能用N0或绿色CI替代 |
+| 论文/总验收 | 完整CRUD与实际任务、受控A/U额外价值或明确收缩结论、任务/维护/业务分别评分、贡献与局限及复现完整 | 本轮实验/门槛/报告收口完成；研究成功未达成，停止当前State优越性主张，N4/N6无条件晋级证据 |
 
 保留全计划§12—18的使用、统计、公平性和Go/Pivot/Stop义务：当前版本不等于真相，选择不等于交付，
 交付不等于语义采用，工具成功不等于用户任务成功。普通query/all足够时收缩selector，不人为扩充干扰以制造收益。
@@ -160,3 +162,22 @@ N3工程准入见[冻结协议](MILAI_NEXT_DEVELOPMENT_V2_N3_FIXED_UPDATE_202609
 Root选择关闭独立A/U/N4，N5保留共同Host双库CRUD与Archive-access的H_shared/all_shared；
 唯一读取差异为State正文预交付，不称原生B1或selector胜利。原生arc与构造owner/临时/退出/恢复补充另列。
 N5尚未实现验收/WP7未完成，N6不自动触发，Goal继续active。
+
+N5输入与评分已定义于[共享使用协议](MILAI_NEXT_DEVELOPMENT_V2_N5_SHARED_USE_20260928.md)：
+原生exposed arc3完整5episode/7消息，两臂共同Host双库工具与Archive-access，仅State正文none/all；
+构造补充8消息、两phase，删除saved record并保留历史，恢复限闭合回合后重开。
+实现由Sol进行，原生12源码与arc/world哈希只读相符；工程与正式执行freeze尚未完成，真实N5调用为0。
+方法CI读回：N2源码Fast36361932961、结果Fast36362595299、N3源码Fast36363414636已success。
+这些是相应提交的工程证据，不替代N5结果。
+
+N5工程准入已通过：38项受影响窄测、Ruff/Mypy/matrix/boundaries、四份零模型prepare及一次入口构建。
+[检查回执](../data/manifests/next-development-v2-n5-checks-20260928.json)绑定10个工程文件；Luna新分支发布后Root冻结并按既定六条命令串行执行。
+N3结果Fast36363961493也已success，Full36363961510为skipped；未重复旧检查。
+
+## v2最终执行收口
+
+N5源码1d7460b、执行freeze dac0d277、51个真实provider generation请求及3个embedding请求已核对。
+原生各5/5；构造形成与维护/退出失败，G3严格各0/1；真实业务部分失败/闭合回合后恢复/本例owner隔离正确。
+所有State为空，不能将天然轨迹差归因于State预交付。N4无相关State版本问题，N6无可解释投入信号，均NOT_TRIGGERED。
+本v2总新增82生成/163818tokens/883embeddingtokens；连续2881/3650322/20156，保留全部历史。
+执行与报告按计划Stop/Pivot条件收口，不再添加同题提示变体或扩大参数/模型；研究总目标未实现，Product仍NO-GO。

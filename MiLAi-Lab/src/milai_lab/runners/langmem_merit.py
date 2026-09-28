@@ -55,6 +55,8 @@ def _run_merit_arc(
     continue_on_local_capacity: bool = False,
     arc_loader: Callable[[Path], tuple[dict[str, Any], Any, Any, Any, Any]] = load_exposed_arc,
     frozen_identity: dict[str, Any] | None = None,
+    agent_factory: Callable[..., Any] | None = None,
+    public_turn_callback: Callable[..., None] | None = None,
 ) -> dict[str, Any]:
     selection, arc, native_tools, metrics, native_runner = arc_loader(selection_path)
     output.mkdir(parents=True, exist_ok=True)
@@ -84,9 +86,13 @@ def _run_merit_arc(
     journal = BusinessActionJournal(output / "business-journal.json",
                                     [item.name for item in business_tools])
     environment_rules = native_runner.SYSTEM_PROMPT.split("{memory_block}", 1)[0].strip()
-    agent = build_agent(model, store, checkpointer, business_tools,
-                        business_call_wrapper=journal, environment_rules=environment_rules,
-                        observer=observer)
+    agent_kwargs: dict[str, Any] = {
+        "business_call_wrapper": journal, "environment_rules": environment_rules,
+        "observer": observer}
+    agent = (build_agent(model, store, checkpointer, business_tools, **agent_kwargs)
+             if agent_factory is None else
+             agent_factory(model, store, checkpointer, business_tools,
+                           user_id=f"merit:{arc.arc_id}", **agent_kwargs))
     rows: list[dict[str, Any]] = []
     try:
         for episode in arc.episodes:
@@ -129,7 +135,16 @@ def _run_merit_arc(
                         raise
                     capacity_failed_index = index
                     messages = agent.get_state(scope.config()).values["messages"]
+                    if public_turn_callback is not None:
+                        public_turn_callback(agent, scope, index,
+                                             "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+                                             journal.calls_for_thread(
+                                                 scope.config()["configurable"]["thread_id"]))
                     break
+                if public_turn_callback is not None:
+                    public_turn_callback(agent, scope, index, "COMPLETED",
+                                         journal.calls_for_thread(
+                                             scope.config()["configurable"]["thread_id"]))
                 progress["next_message"] = index + 1
                 progress["pending_message"] = None
                 write_json(progress_path, progress)

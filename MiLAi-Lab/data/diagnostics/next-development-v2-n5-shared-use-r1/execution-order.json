@@ -1,0 +1,36 @@
+{
+  "kind": "MILAI_N5_FROZEN_EXECUTION_ORDER",
+  "native": [
+    {
+      "arm": "H_shared",
+      "command": "run-merit"
+    },
+    {
+      "arm": "all_shared",
+      "command": "run-merit"
+    }
+  ],
+  "constructed": [
+    {
+      "arm": "H_shared",
+      "command": "run-phase",
+      "phase": 0
+    },
+    {
+      "arm": "all_shared",
+      "command": "run-phase",
+      "phase": 0
+    },
+    {
+      "arm": "H_shared",
+      "command": "run-phase",
+      "phase": 1
+    },
+    {
+      "arm": "all_shared",
+      "command": "run-phase",
+      "phase": 1
+    }
+  ],
+  "rule": "Root serial one fresh process per listed execution; respective arm keeps its own isolated world/namespace/checkpoint; native complete unit first, constructed supplemental second; no outcome-based sample replacement."
+}

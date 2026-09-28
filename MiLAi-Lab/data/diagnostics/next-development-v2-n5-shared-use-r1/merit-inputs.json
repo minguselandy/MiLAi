@@ -1,0 +1,7 @@
+{
+  "kind": "MILAI_SHARED_RECORD_USE_INPUTS",
+  "workload": "merit",
+  "selection_path": "data/diagnostics/next-development-v2-n5-shared-use-r1/merit-selection.json",
+  "selection_mode": "frozen",
+  "exposure": "EXPOSED; complete original arc3, five episodes/seven public messages; original source tools/world/checkers and task.user_messages unchanged."
+}
